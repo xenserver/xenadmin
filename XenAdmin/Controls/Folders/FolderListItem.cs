@@ -175,8 +175,8 @@ namespace XenAdmin.Controls
         {
             get
             {
-                int t1, t2;
-                return CalcSizeAndTrunc(int.MaxValue, out t1, out t2);
+                using (var g = Parent.CreateGraphics())
+                    return CalcSizeAndTrunc(g, int.MaxValue, out _, out _);
             }
         }
 
@@ -262,14 +262,6 @@ namespace XenAdmin.Controls
             }
 
             return theSize;
-        }
-
-        private Size CalcSizeAndTrunc(int width, out int trunc1, out int trunc2)
-        {
-            Graphics g = this.Parent.CreateGraphics();
-            Size sz = CalcSizeAndTrunc(g, width, out trunc1, out trunc2);
-            g.Dispose();
-            return sz;
         }
 
         private FLIControl OnControl(Point point)

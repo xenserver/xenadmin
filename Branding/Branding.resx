@@ -122,6 +122,9 @@
   <data name="BRAND_CONSOLE" xml:space="preserve">
     <value>[XenCenter]</value>
   </data>
+  <data name="BRAND_CONSOLE_NO_SPACE" xml:space="preserve">
+    <value>[XenCenter_No_Space]</value>
+  </data>
   <data name="CIS" xml:space="preserve">
     <value>Citrix Insight Services</value>
   </data>

@@ -37,6 +37,7 @@ using System.Configuration;
 using System.Drawing;
 using System.Reflection;
 using NUnit.Framework;
+using XenAdmin.Core;
 
 
 namespace XenAdminTests.CodeTests
@@ -44,6 +45,38 @@ namespace XenAdminTests.CodeTests
     [TestFixture, Category(TestCategories.Unit)]
     public class AssemblyTests
     {
+        private static readonly string MainAssemblyName = $"{BrandManager.BrandConsoleNoSpace}Main";
+
+        public class TestDataClass
+        {
+            public string AssemblyName { get; set; }
+            public string Locale { get; set; }
+        }
+
+        private static IEnumerable<TestDataClass> TestCasesForI18NFiles
+        {
+            get
+            {
+                yield return new TestDataClass {AssemblyName = MainAssemblyName, Locale = "ja"};
+                yield return new TestDataClass {AssemblyName = MainAssemblyName, Locale = "zh-CN"};
+                yield return new TestDataClass {AssemblyName = "XenModel", Locale = "ja"};
+                yield return new TestDataClass {AssemblyName = "XenModel", Locale = "zh-CN"};
+                yield return new TestDataClass {AssemblyName = "XenOvf", Locale = "ja"};
+                yield return new TestDataClass {AssemblyName = "XenOvf", Locale = "zh-CN"};
+            }
+        }
+
+        private static IEnumerable<TestDataClass> TestCasesForRoaming
+        {
+            get
+            {
+                yield return new TestDataClass {AssemblyName = MainAssemblyName};
+                yield return new TestDataClass {AssemblyName = "XenOvf"};
+                yield return new TestDataClass {AssemblyName = "XenServerHealthCheck"};
+            }
+        }
+
+
         [Test]
         [Description("Checks that there are no Bitmaps in XenAdmin.Resources" +
                      "without a counterpart in XenAdmin.Images.StaticImages")]
@@ -72,14 +105,12 @@ namespace XenAdminTests.CodeTests
                 $"Resources without a static counterpart: {string.Join(", ", extraImages)}");
         }
 
-        [Test, Combinatorial]
+        [Test, TestCaseSource(typeof(AssemblyTests), nameof(TestCasesForI18NFiles))]
         [Description("Checks all resx files in the project have their i18n counterparts in place")]
-        public void TestEnsureI18NFilesInPlace(
-            [Values("ja", "zh-CN")] string locale,
-            [Values("XenCenterMain", "XenModel", "XenOvf")] string assemblyName)
+        public void TestEnsureI18NFilesInPlace(TestDataClass tc)
         {
-            var assembly = FindAssemblyByNameRecursively(assemblyName);
-            Assert.NotNull($"Assembly {assemblyName} was not found.");
+            var assembly = FindAssemblyByNameRecursively(tc.AssemblyName);
+            Assert.NotNull($"Assembly {tc.AssemblyName} was not found.");
 
             var excludeFromCheck = new[] {"XenAdmin.Help.HelpManager", "XenAdmin.Branding", "DotNetVnc.KeyMap"};
             var missing = new List<string>();
@@ -87,7 +118,7 @@ namespace XenAdminTests.CodeTests
 
             List<string> defaultResx = new List<string>(assembly.GetManifestResourceNames().Where(resource => resource.EndsWith("resources")));
 
-            CultureInfo cultureInfo = new CultureInfo(locale);
+            CultureInfo cultureInfo = new CultureInfo(tc.Locale);
             Assembly localeDll = assembly.GetSatelliteAssembly(cultureInfo);
             List<string> localeResx = new List<string>(localeDll.GetManifestResourceNames());
 
@@ -96,7 +127,7 @@ namespace XenAdminTests.CodeTests
                 var name = def.Substring(0, def.Length - ".resources".Length);
                 var exclude = excludeFromCheck.Contains(name);
 
-                string localName = $"{name}.{locale}.resources";
+                string localName = $"{name}.{tc.Locale}.resources";
                 var localized = localeResx.Contains(localName);
 
                 if (localized && exclude)
@@ -109,13 +140,12 @@ namespace XenAdminTests.CodeTests
             Assert.IsEmpty(extra, "Unnecessary resources detected.");
         }
 
-        [Test]
+        [Test, TestCaseSource(typeof(AssemblyTests), nameof(TestCasesForRoaming))]
         [Description("Checks that if there are user-scoped settings in an assembly, these have roaming=true")]
-        public void TestUserSettingsAreRoaming(
-            [Values("XenCenterMain", "XenOvf", "XenServerHealthCheck")] string assemblyName)
+        public void TestUserSettingsAreRoaming(TestDataClass tc)
         {
-            var assembly = FindAssemblyByNameRecursively(assemblyName);
-            Assert.NotNull($"Assembly {assemblyName} was not found.");
+            var assembly = FindAssemblyByNameRecursively(tc.AssemblyName);
+            Assert.NotNull($"Assembly {tc.AssemblyName} was not found.");
 
             var nonRoaming = new List<string>();
 
