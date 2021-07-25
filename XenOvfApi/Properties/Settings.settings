@@ -8,12 +8,6 @@
     <Setting Name="winFileFormatURI" Type="System.String" Scope="Application">
       <Value Profile="(Default)">http://www.microsoft.com/technet/virtualserver/downloads/vhdspec.mspx</Value>
     </Setting>
-    <Setting Name="p2vTemplate" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">XenServer P2V (Orela) Server</Value>
-    </Setting>
-    <Setting Name="p2vGuestName" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Orela</Value>
-    </Setting>
     <Setting Name="ovfversion" Type="System.String" Scope="Application">
       <Value Profile="(Default)">1.0.0</Value>
     </Setting>
@@ -23,23 +17,11 @@
     <Setting Name="vhsSettings" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Virtual Hardware Requirements: {0} MB RAM; {1} CPU(s), {2} Disk(s), {3} Network(s)</Value>
     </Setting>
-    <Setting Name="OvfMimimalManifest" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">CPU;MEMORY;DISK</Value>
-    </Setting>
     <Setting Name="Versions" Type="System.String" Scope="Application">
       <Value Profile="(Default)">0.9;1.0;1.0.0;1.0.0a;1.0.0.b;1.0.0c;1.0.0d;1.0.1;1.0.0e</Value>
     </Setting>
     <Setting Name="KnownNamespaces" Type="System.String" Scope="Application">
       <Value Profile="(Default)">ovf=http://schemas.dmtf.org/ovf/envelope/1, xs=http://www.w3.org/2001/XMLSchema,cim=http://schemas.dmtf.org/wbem/wscim/1/common,rasd=http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData,vssd=http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_VirtualSystemSettingData,xsi=http://www.w3.org/2001/XMLSchema-instance,xenovf=http://schemas.citrix.com/ovf/envelope/1,wsse=http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd,ds=http://www.w3.org/2000/09/xmldsig#,wsu=http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd,xenc=http://www.w3.org/2001/04/xmlenc#</Value>
-    </Setting>
-    <Setting Name="VerifySignatureOnly" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">true</Value>
-    </Setting>
-    <Setting Name="xenPVBootloader" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">pygrub</Value>
-    </Setting>
-    <Setting Name="xenKernelOptions" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">graphical utf8</Value>
     </Setting>
     <Setting Name="xenBootOptions" Type="System.String" Scope="Application">
       <Value Profile="(Default)">BIOS order</Value>
@@ -47,20 +29,8 @@
     <Setting Name="xenBootParams" Type="System.String" Scope="Application">
       <Value Profile="(Default)">order=dc;</Value>
     </Setting>
-    <Setting Name="xenPVPlatformSetting" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">nx=true;acpi=true;apic=true;pae=true;viridian=true;</Value>
-    </Setting>
     <Setting Name="xenPlatformSetting" Type="System.String" Scope="Application">
       <Value Profile="(Default)">nx=true;acpi=true;apic=true;pae=true;stdvga=0;</Value>
-    </Setting>
-    <Setting Name="xenDefaultVirtualSystemType" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">hvm-3.0-unknown</Value>
-    </Setting>
-    <Setting Name="xenDefaultNetwork" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">xenbr0</Value>
-    </Setting>
-    <Setting Name="xenP2VDiskName" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">P2V Automatically created.</Value>
     </Setting>
     <Setting Name="vmwNameSpace" Type="System.String" Scope="Application">
       <Value Profile="(Default)">vmwovf:http://www.vmware/schema/ovf</Value>
@@ -104,9 +74,6 @@
     <Setting Name="wsseSchemaLocation" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Schemas\secext-1.0.xsd</Value>
     </Setting>
-    <Setting Name="wsseOnlineSchema" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd</Value>
-    </Setting>
     <Setting Name="xencSchemaLocation" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Schemas\xenc-schema.xsd</Value>
     </Setting>
@@ -122,12 +89,6 @@
     <Setting Name="encryptAlgorithmURI" Type="System.String" Scope="Application">
       <Value Profile="(Default)">http://www.w3.org/2001/04/xmlenc#aes192-cbc</Value>
     </Setting>
-    <Setting Name="encryptKeyName" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">CitrixEncryptedKey</Value>
-    </Setting>
-    <Setting Name="xenDefaultPVVirtualSystemType" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">xen-3.0-unknown</Value>
-    </Setting>
     <Setting Name="isoFileFormatURI" Type="System.String" Scope="Application">
       <Value Profile="(Default)">http://www.osta.org/specs/pdf/udf260.pdf</Value>
     </Setting>
@@ -137,17 +98,11 @@
     <Setting Name="xenLinuxFixUpDisk" Type="System.String" Scope="Application">
       <Value Profile="(Default)">External Tools\xenserver-linuxfixup-disk.iso</Value>
     </Setting>
-    <Setting Name="minPasswordStrength" Type="System.Double" Scope="Application">
-      <Value Profile="(Default)">128</Value>
-    </Setting>
     <Setting Name="xenSRKey" Type="System.String" Scope="Application">
       <Value Profile="(Default)">sr=</Value>
     </Setting>
     <Setting Name="xenDeviceKey" Type="System.String" Scope="Application">
       <Value Profile="(Default)">device=</Value>
-    </Setting>
-    <Setting Name="useGZip" Type="System.Boolean" Scope="Application">
-      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="hostresource" Type="System.String" Scope="Application">
       <Value Profile="(Default)">ovf:/disk/{0}</Value>
@@ -184,9 +139,6 @@
     </Setting>
     <Setting Name="securityVersion" Type="System.String" Scope="Application">
       <Value Profile="(Default)">1.3.1</Value>
-    </Setting>
-    <Setting Name="CompressBufferSize" Type="System.Int32" Scope="Application">
-      <Value Profile="(Default)">4096</Value>
     </Setting>
     <Setting Name="ovfFileExtension" Type="System.String" Scope="Application">
       <Value Profile="(Default)">.ovf</Value>

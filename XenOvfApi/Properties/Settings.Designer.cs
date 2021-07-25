@@ -43,24 +43,6 @@ namespace XenOvf.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("XenServer P2V (Orela) Server")]
-        public string p2vTemplate {
-            get {
-                return ((string)(this["p2vTemplate"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Orela")]
-        public string p2vGuestName {
-            get {
-                return ((string)(this["p2vGuestName"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1.0.0")]
         public string ovfversion {
             get {
@@ -89,15 +71,6 @@ namespace XenOvf.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("CPU;MEMORY;DISK")]
-        public string OvfMimimalManifest {
-            get {
-                return ((string)(this["OvfMimimalManifest"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0.9;1.0;1.0.0;1.0.0a;1.0.0.b;1.0.0c;1.0.0d;1.0.1;1.0.0e")]
         public string Versions {
             get {
@@ -111,33 +84,6 @@ namespace XenOvf.Properties {
         public string KnownNamespaces {
             get {
                 return ((string)(this["KnownNamespaces"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("true")]
-        public string VerifySignatureOnly {
-            get {
-                return ((string)(this["VerifySignatureOnly"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("pygrub")]
-        public string xenPVBootloader {
-            get {
-                return ((string)(this["xenPVBootloader"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("graphical utf8")]
-        public string xenKernelOptions {
-            get {
-                return ((string)(this["xenKernelOptions"]));
             }
         }
         
@@ -161,46 +107,10 @@ namespace XenOvf.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("nx=true;acpi=true;apic=true;pae=true;viridian=true;")]
-        public string xenPVPlatformSetting {
-            get {
-                return ((string)(this["xenPVPlatformSetting"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("nx=true;acpi=true;apic=true;pae=true;stdvga=0;")]
         public string xenPlatformSetting {
             get {
                 return ((string)(this["xenPlatformSetting"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("hvm-3.0-unknown")]
-        public string xenDefaultVirtualSystemType {
-            get {
-                return ((string)(this["xenDefaultVirtualSystemType"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("xenbr0")]
-        public string xenDefaultNetwork {
-            get {
-                return ((string)(this["xenDefaultNetwork"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("P2V Automatically created.")]
-        public string xenP2VDiskName {
-            get {
-                return ((string)(this["xenP2VDiskName"]));
             }
         }
         
@@ -332,16 +242,6 @@ namespace XenOvf.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" +
-            "")]
-        public string wsseOnlineSchema {
-            get {
-                return ((string)(this["wsseOnlineSchema"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Schemas\\xenc-schema.xsd")]
         public string xencSchemaLocation {
             get {
@@ -387,24 +287,6 @@ namespace XenOvf.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("CitrixEncryptedKey")]
-        public string encryptKeyName {
-            get {
-                return ((string)(this["encryptKeyName"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("xen-3.0-unknown")]
-        public string xenDefaultPVVirtualSystemType {
-            get {
-                return ((string)(this["xenDefaultPVVirtualSystemType"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("http://www.osta.org/specs/pdf/udf260.pdf")]
         public string isoFileFormatURI {
             get {
@@ -432,15 +314,6 @@ namespace XenOvf.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("128")]
-        public double minPasswordStrength {
-            get {
-                return ((double)(this["minPasswordStrength"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("sr=")]
         public string xenSRKey {
             get {
@@ -454,15 +327,6 @@ namespace XenOvf.Properties {
         public string xenDeviceKey {
             get {
                 return ((string)(this["xenDeviceKey"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool useGZip {
-            get {
-                return ((bool)(this["useGZip"]));
             }
         }
         
@@ -530,15 +394,6 @@ namespace XenOvf.Properties {
         public string securityVersion {
             get {
                 return ((string)(this["securityVersion"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("4096")]
-        public int CompressBufferSize {
-            get {
-                return ((int)(this["CompressBufferSize"]));
             }
         }
         
