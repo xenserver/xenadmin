@@ -861,6 +861,8 @@ namespace XenAdmin
             public static Bitmap pool_up_16 = Properties.Resources.pool_up_16;
             public static Bitmap redhat_16x = Properties.Resources.redhat_16x;
             public static Bitmap Refresh16 = Properties.Resources.Refresh16;
+            public static Bitmap RightArrow = Properties.Resources.RightArrow;
+            public static Bitmap LeftArrow = Properties.Resources.LeftArrow;
             public static Bitmap RunningDC_16 = Properties.Resources.RunningDC_16;
             public static Bitmap saved_searches_16 = Properties.Resources.saved_searches_16;
             public static Bitmap saved_searches_24 = Properties.Resources.saved_searches_24;

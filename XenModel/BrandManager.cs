@@ -42,6 +42,8 @@ namespace XenAdmin.Core
 
         public static readonly string BrandConsole = Get("BRAND_CONSOLE");
 
+        public static readonly string BrandConsoleNoSpace = Get("BRAND_CONSOLE_NO_SPACE");
+
         public static readonly string Cis = Get("CIS");
 
         public static readonly string CompanyNameLegal = Get("COMPANY_NAME_LEGAL");
