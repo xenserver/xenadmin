@@ -99,9 +99,8 @@ namespace XenAdmin.Actions
         protected override void Run()
         {
             SafeToExit = false;
-        	bool isTemplate;
 
-            string vmRef = applyFile();
+            string vmRef = ApplyFile(out string importTaskRef);
             if (string.IsNullOrEmpty(vmRef))
                 return;
 
@@ -113,14 +112,13 @@ namespace XenAdmin.Actions
             if (Cancelling)
                 throw new CancelledException();
 
-            isTemplate = VM.get_is_a_template(Session, vmRef);
-            if (isTemplate && Helpers.FalconOrGreater(Connection) && VM.get_is_default_template(Session, vmRef))
+            var vmRec = VM.get_record(Session, vmRef);
+            var isTemplate = vmRec.is_a_template;
+
+            if (isTemplate && vmRec.is_default_template && Helpers.FalconOrGreater(Connection))
             {
-                var otherConfig = VM.get_other_config(Session, vmRef);
-                if (!otherConfig.ContainsKey(IMPORT_TASK) || otherConfig[IMPORT_TASK] != RelatedTask.opaque_ref)
-                {
+                if (!vmRec.other_config.ContainsKey(IMPORT_TASK) || vmRec.other_config[IMPORT_TASK] != importTaskRef)
                     throw new Exception(string.Format(Messages.IMPORT_TEMPLATE_ALREADY_EXISTS, BrandManager.ProductBrand));
-                }
             }
 
             Description = isTemplate ? Messages.IMPORT_TEMPLATE_UPDATING_TEMPLATE : Messages.IMPORTVM_UPDATING_VM;
@@ -150,8 +148,6 @@ namespace XenAdmin.Actions
                 List<XenRef<VIF>> vifs = VM.get_VIFs(Session, vmRef);
                 List<XenAPI.Network> networks = new List<XenAPI.Network>();
 
-                bool canMoveVifs = Helpers.ElyOrGreater(Connection);
-
                 foreach (XenRef<VIF> vif in vifs)
                 {
                     // Save the network as we may have to delete it later
@@ -159,19 +155,21 @@ namespace XenAdmin.Actions
                     if (network != null)
                         networks.Add(network);
 
-                    if (canMoveVifs)
+                    if (Helpers.ElyOrGreater(Connection))
                     {
                         var vifObj = Connection.Resolve(vif);
                         if (vifObj == null)
                             continue;
-                        // try to find a matching VIF in the m_proxyVIFs list, based on the device field
-                        var matchingProxyVif = m_VIFs.FirstOrDefault(proxyVIF => proxyVIF.device == vifObj.device);
-                        if (matchingProxyVif != null)
+
+                        // try to find a VIF in the m_VIFs list which matches the device field,
+                        // then move it to the desired network and remove it from the m_VIFs list
+                        // so we don't create it again later
+
+                        var matchingVif = m_VIFs.FirstOrDefault(v => v.device == vifObj.device);
+                        if (matchingVif != null)
                         {
-                            // move the VIF to the desired network
-                            VIF.move(Session, vif, matchingProxyVif.network);
-                            // remove matchingProxyVif from the list, so we don't create the VIF again later
-                            m_VIFs.Remove(matchingProxyVif);
+                            VIF.move(Session, vif, matchingVif.network);
+                            m_VIFs.Remove(matchingVif);
                             continue;
                         }
                     }
@@ -180,7 +178,7 @@ namespace XenAdmin.Actions
                     VIF.destroy(Session, vif);
                 }
 
-                // recreate VIFs if needed (m_proxyVIFs can be empty, if we moved all the VIFs in the previous step)
+                // recreate VIFs if needed (m_VIFs can be empty, if we moved all the VIFs in the previous step)
                 foreach (VIF vif in m_VIFs)
                 {
                     vif.VM = new XenRef<VM>(vmRef);
@@ -191,18 +189,13 @@ namespace XenAdmin.Actions
 
                 foreach (XenAPI.Network network in networks)
                 {
-                    if (!network.other_config.ContainsKey(IMPORT_TASK))
-                        continue;
-
-                    if (network.other_config[IMPORT_TASK] != RelatedTask.opaque_ref)
+                    if (!network.other_config.ContainsKey(IMPORT_TASK) || network.other_config[IMPORT_TASK] != importTaskRef)
                         continue;
 
                     try
                     {
-                        if (XenAPI.Network.get_VIFs(Session, network.opaque_ref).Count > 0)
-                            continue;
-
-                        if (XenAPI.Network.get_PIFs(Session, network.opaque_ref).Count > 0)
+                        var record = XenAPI.Network.get_record(Session, network.opaque_ref);
+                        if (record.VIFs.Count > 0 || record.PIFs.Count > 0)
                             continue;
 
                         XenAPI.Network.destroy(Session, network.opaque_ref);
@@ -247,7 +240,7 @@ namespace XenAdmin.Actions
             return name;
         }
 
-        private string applyFile()
+        private string ApplyFile(out string importTaskRef)
         {
             log.DebugFormat("Importing XVA from {0} to SR {1}", m_filename, SR.Name());
 
@@ -270,6 +263,9 @@ namespace XenAdmin.Actions
             try
             {
                 RelatedTask = Task.create(Session, "put_import_task", hostURL);
+                //at the end of polling, the RelatedTask is destroyed; make a note of it for later use
+                importTaskRef = RelatedTask.opaque_ref;
+
                 log.DebugFormat("HTTP PUTTING file from {0} to {1}", m_filename, hostURL);
 
                 HTTP_actions.put_import(percent => PercentComplete = percent,
@@ -277,7 +273,7 @@ namespace XenAdmin.Actions
                     HTTP_PUT_TIMEOUT, hostURL,
                     XenAdminConfigManager.Provider.GetProxyFromSettings(Connection),
                     m_filename, RelatedTask.opaque_ref, Session.opaque_ref, false, false, SR.opaque_ref);
-                
+
                 PollToCompletion();
                 return Result;
             }

@@ -63,7 +63,7 @@ namespace XenAdmin.Actions
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private readonly List<Host> hosts;
-        private bool includeClientLogs;
+        private readonly bool includeClientLogs;
 
         public StatusReportClientSideAction(List<Host> hosts, bool includeClientLogs, string filePath, string timeString)
             : base(null,

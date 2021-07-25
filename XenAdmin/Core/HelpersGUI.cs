@@ -196,15 +196,13 @@ namespace XenAdmin.Core
             Program.AssertOnEventThread();
             foreach (ActionBase action in ConnectionsManager.History)
             {
-                if (action.IsCompleted)
+                if (action.IsCompleted || action.Connection != connection)
                     continue;
 
-                WlbOptimizePoolAction optAction = action as WlbOptimizePoolAction;
-                if (optAction != null && optAction.Connection == connection)
+                if (action is WlbOptimizePoolAction optAction)
                     return optAction;
 
-                WlbRetrieveRecommendationAction optRecAction = action as WlbRetrieveRecommendationAction;
-                if (optRecAction != null && optRecAction.Connection == connection)
+                if (action is WlbRetrieveRecommendationsAction optRecAction)
                     return optRecAction;
             }
             return null;
