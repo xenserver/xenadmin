@@ -130,7 +130,7 @@ namespace XenAdmin.Controls.CustomDataGraph
         public Color Color;
         public bool ColorChanged;
         public string Uuid;
-        public DataType DataType;
+        public DataType Category;
 
         public DataSourceItem(Data_source ds, string friendlyname, Color color, string uuid)
         {
@@ -145,7 +145,7 @@ namespace XenAdmin.Controls.CustomDataGraph
             : this(ds, friendlyname, color, uuid)
         {
             DataSet dataSet = DataSet.Create(uuid, xo);
-            DataType = dataSet.Type;
+            Category = dataSet.Category;
         }
 
         public string GetDataSource()

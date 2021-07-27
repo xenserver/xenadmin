@@ -57,10 +57,7 @@ namespace XenAdmin.Controls.CustomDataGraph
         private bool _hide;
         private bool _deselected;
 
-        /// <summary>
-        /// A guess at the data type
-        /// </summary>
-        public DataType Type;
+        public DataType Category;
         /// <summary>
         /// What it really is
         /// </summary>
@@ -143,7 +140,7 @@ namespace XenAdmin.Controls.CustomDataGraph
                 }
 
                 dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.NanoSeconds, RangeScaleMode.Auto);
-                dataSet.Type = DataType.Latency;
+                dataSet.Category = DataType.Latency;
             }
             else if (settype.StartsWith("vif") || settype.StartsWith("pif"))
             {
@@ -151,7 +148,7 @@ namespace XenAdmin.Controls.CustomDataGraph
                 Unit unit = settype.EndsWith("errors") ? Unit.CountsPerSecond : Unit.BytesPerSecond;
 
                 dataSet.CustomYRange = new DataRange(1, 0, 1, unit, RangeScaleMode.Auto);
-                dataSet.Type = DataType.Network;
+                dataSet.Category = DataType.Network;
             }
             else if (settype.StartsWith("vbd"))
             {
@@ -172,11 +169,11 @@ namespace XenAdmin.Controls.CustomDataGraph
                 else
                     dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.BytesPerSecond, RangeScaleMode.Auto);
 
-                dataSet.Type = DataType.Disk;
+                dataSet.Category = DataType.Disk;
             }
             else if ((settype.Contains("memory") || settype.Contains("allocation")) && !settype.Contains("utilisation"))
             {
-                dataSet.Type = settype.Contains("gpu") ? DataType.Gpu : DataType.Memory;
+                dataSet.Category = settype.Contains("gpu") ? DataType.Gpu : DataType.Memory;
 
                 dataSet.MultiplyingFactor = settype.Contains("kib") || settype == "memory_internal_free"
                                                 ? (int)Util.BINARY_KILO
@@ -219,28 +216,28 @@ namespace XenAdmin.Controls.CustomDataGraph
             {
                 dataSet.CustomYRange = new DataRange(100, 0, 10, Unit.Percentage, RangeScaleMode.Auto);
                 dataSet.MultiplyingFactor = 100;
-                dataSet.Type = DataType.LoadAverage;
+                dataSet.Category = DataType.LoadAverage;
             }
             else if (settype.EndsWith("-avg-freq"))
             { 
                 dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.MegaHertz, RangeScaleMode.Auto);
-                dataSet.Type = DataType.Cpu;
+                dataSet.Category = DataType.Cpu;
             }
             else if (settype.StartsWith("cpu") || settype == "avg_cpu" || settype.StartsWith("runstate"))
             {
                 dataSet.CustomYRange = new DataRange(100, 0, 10, Unit.Percentage, RangeScaleMode.Fixed);
                 dataSet.MultiplyingFactor = 100;
-                dataSet.Type = DataType.Cpu;
+                dataSet.Category = DataType.Cpu;
             }
             else if (settype.StartsWith("io_throughput"))
             {
                 dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.BytesPerSecond, RangeScaleMode.Auto);
                 dataSet.MultiplyingFactor = (int)Util.BINARY_MEGA; //xapi units are in mebibytes/sec
-                dataSet.Type = DataType.Storage;
+                dataSet.Category = DataType.Storage;
             }
             else if (settype.StartsWith("sr"))
             {
-                dataSet.Type = DataType.Storage;
+                dataSet.Category = DataType.Storage;
 
                 if (settype.EndsWith("cache_size"))
                     dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.Bytes, RangeScaleMode.Auto);
@@ -251,19 +248,19 @@ namespace XenAdmin.Controls.CustomDataGraph
             {
                 //xapi units are in requests/sec
                 dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.CountsPerSecond, RangeScaleMode.Auto);
-                dataSet.Type = DataType.Storage;
+                dataSet.Category = DataType.Storage;
             }
             else if (settype.StartsWith("iowait"))
             {
                 dataSet.CustomYRange = new DataRange(100, 0, 10, Unit.Percentage, RangeScaleMode.Auto);
                 dataSet.MultiplyingFactor = 100;
-                dataSet.Type = DataType.Storage;
+                dataSet.Category = DataType.Storage;
             }
             else if (settype.StartsWith("inflight") || settype.StartsWith("avgqu_sz"))
             {
                 //xapi units are in requests
                 dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.None, RangeScaleMode.Auto);
-                dataSet.Type = DataType.Storage;
+                dataSet.Category = DataType.Storage;
             }
             else if (settype.StartsWith("gpu"))
             {
@@ -282,7 +279,7 @@ namespace XenAdmin.Controls.CustomDataGraph
                     dataSet.CustomYRange = new DataRange(100, 0, 10, Unit.Percentage, RangeScaleMode.Fixed);
                     dataSet.MultiplyingFactor = 100;
                 }
-                dataSet.Type = DataType.Gpu;
+                dataSet.Category = DataType.Gpu;
             }
             else if (settype.StartsWith("pvsaccelerator"))
             {
@@ -294,25 +291,25 @@ namespace XenAdmin.Controls.CustomDataGraph
                     dataSet.CustomYRange = new DataRange(100, 0, 10, Unit.Percentage, RangeScaleMode.Fixed); // values range from 0 to 100
                 else
                     dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.None, RangeScaleMode.Auto);
-                dataSet.Type = DataType.Pvs;
+                dataSet.Category = DataType.Pvs;
             }
             else if (settype.StartsWith("read_latency") || settype.StartsWith("write_latency"))
             {
                 // Units are microseconds
                 dataSet.MultiplyingFactor = 1000;
                 dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.NanoSeconds, RangeScaleMode.Auto);
-                dataSet.Type = DataType.Latency;
+                dataSet.Category = DataType.Latency;
             }
             else if (settype.StartsWith("read") || settype.StartsWith("write"))
             {
                 // Units are Bytes/second
                 dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.BytesPerSecond, RangeScaleMode.Auto);
-                dataSet.Type = DataType.Storage;
+                dataSet.Category = DataType.Storage;
             }
             else
             {
                 dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.None, RangeScaleMode.Auto);
-                dataSet.Type = DataType.Custom;
+                dataSet.Category = DataType.Custom;
             }
 
             return dataSet;
