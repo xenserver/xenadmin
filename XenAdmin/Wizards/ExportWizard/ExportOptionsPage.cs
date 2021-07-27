@@ -170,7 +170,7 @@ namespace XenAdmin.Wizards.ExportWizard
 				m_checkBoxSign.Checked = true;
 
 		    m_ctrlErrorCert.HideError();
-			m_buttonValidate.Enabled = !string.IsNullOrEmpty(m_textBoxCertificate.Text) && !string.IsNullOrEmpty(m_textBoxPrivateKeyPwd.Text);
+			m_buttonValidate.Enabled = !string.IsNullOrEmpty(m_textBoxCertificate.Text) && m_textBoxPrivateKeyPwd.Text != null;
 			m_pictureBoxTickValidate.Visible = false;
 			m_isSignatureOk = false;
 			SetButtonNextEnabled(m_isEncryptionOk && m_isSignatureOk);
@@ -266,7 +266,7 @@ namespace XenAdmin.Wizards.ExportWizard
 		{
 			if (m_checkBoxManifest.Checked && m_checkBoxSign.Checked)
 			{
-				if (string.IsNullOrEmpty(m_textBoxCertificate.Text) || string.IsNullOrEmpty(m_textBoxPrivateKeyPwd.Text)
+				if (string.IsNullOrEmpty(m_textBoxCertificate.Text) || m_textBoxPrivateKeyPwd.Text == null
 					|| !m_ctrlErrorCert.PerformCheck(CheckCertificatePathValid, CheckCertificatePathExists, CheckSignPasswordValid, CheckCertificateValid))
 				{
 					m_pictureBoxTickValidate.Visible = false;
