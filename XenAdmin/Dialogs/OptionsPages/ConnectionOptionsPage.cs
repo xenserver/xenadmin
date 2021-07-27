@@ -167,6 +167,14 @@ namespace XenAdmin.Dialogs.OptionsPages
             UseProxyRadioButton.Checked = true;
         }
 
+        public void HideValidationToolTips()
+        {
+            if (this.invalidControl != null)
+            {
+                this.validationToolTip.Hide(this.invalidControl);
+            }
+        }
+
         #region IOptionsPage Members
 
         public bool IsValidToSave()
@@ -252,7 +260,7 @@ namespace XenAdmin.Dialogs.OptionsPages
             Program.ReconfigureConnectionSettings();
 
             Core.HealthCheck.SendProxySettingsToHealthCheck();
-        }
+        }              
 
         #endregion
 
