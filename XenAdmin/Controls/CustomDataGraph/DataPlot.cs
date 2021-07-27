@@ -263,7 +263,7 @@ namespace XenAdmin.Controls.CustomDataGraph
             bool require_tools = true;
             foreach (DataSetCollectionWrapper set in DataKey.CurrentKeys)
             {
-                if (set.Sets[ArchiveInterval.FiveSecond].TypeString != "memory")
+                if (set.Sets[ArchiveInterval.FiveSecond].DataSourceName != "memory")
                 {
                     require_tools = false;
                     break;

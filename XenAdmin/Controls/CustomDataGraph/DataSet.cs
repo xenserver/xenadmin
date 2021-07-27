@@ -58,10 +58,7 @@ namespace XenAdmin.Controls.CustomDataGraph
         private bool _deselected;
 
         public DataType Category;
-        /// <summary>
-        /// What it really is
-        /// </summary>
-        public string TypeString;
+        public string DataSourceName;
 
         private const int NegativeValue = -1;
         private int MultiplyingFactor = 1;
@@ -112,7 +109,7 @@ namespace XenAdmin.Controls.CustomDataGraph
             XenObject = xo;
             _hide = !show;
             Id = id;
-            TypeString = settype;
+            DataSourceName = settype;
             Name = Helpers.GetFriendlyDataSourceName(settype, XenObject);
         }
 
@@ -548,9 +545,9 @@ namespace XenAdmin.Controls.CustomDataGraph
             var matchDelegate = new Func<string, bool>(s => Helpers.CpuRegex.IsMatch(s) &&
                                                             !Helpers.CpuStateRegex.IsMatch(s));
 
-            if (matchDelegate(TypeString))
+            if (matchDelegate(DataSourceName))
             {
-                DataSet other = setsAdded.FirstOrDefault(s => s.TypeString == "avg_cpu");
+                DataSet other = setsAdded.FirstOrDefault(s => s.DataSourceName == "avg_cpu");
                 if (other == null)
                 {
                     other = Create(Palette.GetUuid("avg_cpu", XenObject), XenObject, true, "avg_cpu");
@@ -572,7 +569,7 @@ namespace XenAdmin.Controls.CustomDataGraph
 
                     foreach (DataSet s in setsAdded)
                     {
-                        if (matchDelegate(s.TypeString) && s.GetPointAt(currentTime) != null && s != this)
+                        if (matchDelegate(s.DataSourceName) && s.GetPointAt(currentTime) != null && s != this)
                             cpu_vals_added++;
                     }
 
@@ -584,9 +581,9 @@ namespace XenAdmin.Controls.CustomDataGraph
 
             #region memory
 
-            if (TypeString == "memory_total_kib")
+            if (DataSourceName == "memory_total_kib")
             {
-                DataSet other = setsAdded.FirstOrDefault(s => s.TypeString == "memory_free_kib");
+                DataSet other = setsAdded.FirstOrDefault(s => s.DataSourceName == "memory_free_kib");
                 if (other != null && other.Points.Count - 1 == Points.Count)
                 {
                     yValue = isNanOrInfinity || other.Points[other.Points.Count - 1].Y < 0
@@ -595,9 +592,9 @@ namespace XenAdmin.Controls.CustomDataGraph
                     other.Points[other.Points.Count - 1].Y = yValue;
                 }
             }
-            else if (TypeString == "memory_free_kib")
+            else if (DataSourceName == "memory_free_kib")
             {
-                DataSet other = setsAdded.FirstOrDefault(s => s.TypeString == "memory_total_kib");
+                DataSet other = setsAdded.FirstOrDefault(s => s.DataSourceName == "memory_total_kib");
                 if (other != null && other.Points.Count - 1 == Points.Count)
                 {
                     yValue = isNanOrInfinity || other.Points[other.Points.Count - 1].Y < 0
@@ -605,9 +602,9 @@ namespace XenAdmin.Controls.CustomDataGraph
                                  : other.Points[other.Points.Count - 1].Y - (value * MultiplyingFactor);
                 }
             }
-            else if (TypeString == "memory")
+            else if (DataSourceName == "memory")
             {
-                DataSet other = setsAdded.FirstOrDefault(s => s.TypeString == "memory_internal_free");
+                DataSet other = setsAdded.FirstOrDefault(s => s.DataSourceName == "memory_internal_free");
                 if (other != null && other.Points.Count - 1 == Points.Count)
                 {
                     yValue = isNanOrInfinity || other.Points[other.Points.Count - 1].Y < 0
@@ -616,9 +613,9 @@ namespace XenAdmin.Controls.CustomDataGraph
                     other.Points[other.Points.Count - 1].Y = yValue;
                 }
             }
-            else if (TypeString == "memory_internal_free")
+            else if (DataSourceName == "memory_internal_free")
             {
-                DataSet other = setsAdded.FirstOrDefault(s => s.TypeString == "memory");
+                DataSet other = setsAdded.FirstOrDefault(s => s.DataSourceName == "memory");
                 if (other != null && other.Points.Count - 1 == Points.Count)
                 {
                     yValue = isNanOrInfinity || other.Points[other.Points.Count - 1].Y < 0

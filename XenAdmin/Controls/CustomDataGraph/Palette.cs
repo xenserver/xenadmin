@@ -140,7 +140,7 @@ namespace XenAdmin.Controls.CustomDataGraph
             if(pool == null)
                 return;
 
-            string key = GetColorKey(set.TypeString, set.XenObject);
+            string key = GetColorKey(set.DataSourceName, set.XenObject);
 
             Dictionary<string, string> gui_config = Helpers.GetGuiConfig(pool);
 
