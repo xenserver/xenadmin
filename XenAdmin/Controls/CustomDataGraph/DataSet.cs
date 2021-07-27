@@ -48,8 +48,6 @@ namespace XenAdmin.Controls.CustomDataGraph
         /// be sorted by X co-ordinate (which will be larger at the beginning of the list)
         /// </summary>
         public List<DataPoint> Points = new List<DataPoint>();
-        public string Name;
-
         public bool Selected;
         public List<DataPoint> CurrentlyDisplayed = new List<DataPoint>();
         public IXenObject XenObject;
@@ -59,6 +57,7 @@ namespace XenAdmin.Controls.CustomDataGraph
 
         public DataType Category;
         public string DataSourceName;
+        public string FriendlyName;
 
         private const int NegativeValue = -1;
         private int MultiplyingFactor = 1;
@@ -110,7 +109,7 @@ namespace XenAdmin.Controls.CustomDataGraph
             _hide = !show;
             Id = id;
             DataSourceName = settype;
-            Name = Helpers.GetFriendlyDataSourceName(settype, XenObject);
+            FriendlyName = Helpers.GetFriendlyDataSourceName(settype, XenObject);
         }
 
         #region Static methods
@@ -182,7 +181,7 @@ namespace XenAdmin.Controls.CustomDataGraph
                 }
                 else if (settype == "memory_free_kib" && xo is Host)
                 {
-                    dataSet.Name = Helpers.GetFriendlyDataSourceName("memory_used_kib", dataSet.XenObject);
+                    dataSet.FriendlyName = Helpers.GetFriendlyDataSourceName("memory_used_kib", dataSet.XenObject);
                     Host host = (Host)xo;
                     Host_metrics metrics = host.Connection.Resolve(host.metrics);
                     long max = metrics != null ? metrics.memory_total : 100;
@@ -194,7 +193,7 @@ namespace XenAdmin.Controls.CustomDataGraph
                 }
                 else if (settype == "memory_internal_free" && xo is VM)
                 {
-                    dataSet.Name = Helpers.GetFriendlyDataSourceName("memory_internal_used", dataSet.XenObject);
+                    dataSet.FriendlyName = Helpers.GetFriendlyDataSourceName("memory_internal_used", dataSet.XenObject);
                     VM vm = (VM)xo;
                     VM_metrics metrics = vm.Connection.Resolve(vm.metrics);
                     long max = metrics != null ? metrics.memory_actual : (long)vm.memory_dynamic_max;
@@ -488,7 +487,7 @@ namespace XenAdmin.Controls.CustomDataGraph
 
         public override string ToString()
         {
-            return Name;
+            return FriendlyName;
         }
 
         public DataPoint OnMouseMove(MouseActionArgs args)
@@ -790,7 +789,7 @@ namespace XenAdmin.Controls.CustomDataGraph
 
             int comp = DisplayArea.CompareTo(other.DisplayArea);
             if (comp == 0)
-                return StringUtility.NaturalCompare(Name, other.Name);
+                return StringUtility.NaturalCompare(FriendlyName, other.FriendlyName);
             return comp;
         }
 
