@@ -1,3 +1,5 @@
+using System;
+
 namespace XenAdmin.Dialogs
 {
     partial class OptionsDialog
@@ -59,8 +61,23 @@ namespace XenAdmin.Dialogs
             // 
             // verticalTabs
             // 
-            resources.ApplyResources(this.verticalTabs, "verticalTabs");
             this.verticalTabs.Items.AddRange(new object[] {
+            this.confirmationOptionsPage1,
+            this.pluginOptionsPage1,
+            this.saveAndRestoreOptionsPage1,
+            this.securityOptionsPage1,
+            this.updatesOptionsPage1,
+            this.graphsOptionsPage1,
+            this.consolesOptionsPage1,
+            this.connectionOptionsPage1,
+            this.confirmationOptionsPage1,
+            this.pluginOptionsPage1,
+            this.saveAndRestoreOptionsPage1,
+            this.securityOptionsPage1,
+            this.updatesOptionsPage1,
+            this.graphsOptionsPage1,
+            this.consolesOptionsPage1,
+            this.connectionOptionsPage1,
             this.securityOptionsPage1,
             this.updatesOptionsPage1,
             this.graphsOptionsPage1,
@@ -69,6 +86,9 @@ namespace XenAdmin.Dialogs
             this.saveAndRestoreOptionsPage1,
             this.pluginOptionsPage1,
             this.confirmationOptionsPage1});
+            resources.ApplyResources(this.verticalTabs, "verticalTabs");
+            this.verticalTabs.SelectedIndexChanged += new System.EventHandler(this.verticalTabs_SelectedIndexChanged);
+            this.Move += new System.EventHandler(this.OptionsDialog_Move);
             // 
             // cancelButton
             // 

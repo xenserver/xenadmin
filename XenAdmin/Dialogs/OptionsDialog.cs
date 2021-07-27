@@ -93,6 +93,23 @@ namespace XenAdmin.Dialogs
         {
             SelectPage(connectionOptionsPage1);
         }
+
+        private void verticalTabs_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            HideValidationToolTips();
+        }
+
+        private void OptionsDialog_Move(object sender, EventArgs e)
+        {
+            HideValidationToolTips();
+        }
+
+        private void HideValidationToolTips()
+        {
+            // If the page selected isnt connection options page means user could have gone from connection options to another so just incase hide validation tooltips 
+            connectionOptionsPage1.HideValidationToolTips();
+        }
+
     }
 }
 
