@@ -280,6 +280,18 @@ namespace XenAdmin.SettingsPanels
             }
         }
 
+        public void HideLocalValidationMessages()
+        {
+            if (txtName != null)
+            {
+                InvalidParamToolTip.Hide(txtName);
+            }
+            if (txtIQN != null)
+            {
+                InvalidParamToolTip.Hide(txtIQN);
+            }
+        }
+
         public void Cleanup()
         {
             if (InvalidParamToolTip != null)

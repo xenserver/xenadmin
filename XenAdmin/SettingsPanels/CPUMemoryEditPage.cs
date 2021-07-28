@@ -440,6 +440,8 @@ namespace XenAdmin.SettingsPanels
         /** Show local validation balloon tooltips */
         public void ShowLocalValidationMessages() { }
 
+        public void HideLocalValidationMessages() { }
+
         /** Unregister listeners, dispose balloon tooltips, etc. */
         public void Cleanup() { }
 

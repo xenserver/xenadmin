@@ -179,6 +179,9 @@ namespace XenAdmin.SettingsPanels
 
         }
 
+        public void HideLocalValidationMessages()
+        { }
+
         public void Cleanup()
         {
             _vm.PropertyChanged -= Vm_PropertyChanged;

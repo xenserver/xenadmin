@@ -46,6 +46,7 @@ namespace XenAdmin.Dialogs
             this.splitContainer.SuspendLayout();
             this.blueBorder.SuspendLayout();
             this.SuspendLayout();
+
             // 
             // ContentPanel
             // 
@@ -78,6 +79,14 @@ namespace XenAdmin.Dialogs
             this.graphsOptionsPage1,
             this.consolesOptionsPage1,
             this.connectionOptionsPage1,
+            this.confirmationOptionsPage1,
+            this.pluginOptionsPage1,
+            this.saveAndRestoreOptionsPage1,
+            this.securityOptionsPage1,
+            this.updatesOptionsPage1,
+            this.graphsOptionsPage1,
+            this.consolesOptionsPage1,
+            this.connectionOptionsPage1,
             this.securityOptionsPage1,
             this.updatesOptionsPage1,
             this.graphsOptionsPage1,
@@ -88,7 +97,6 @@ namespace XenAdmin.Dialogs
             this.confirmationOptionsPage1});
             resources.ApplyResources(this.verticalTabs, "verticalTabs");
             this.verticalTabs.SelectedIndexChanged += new System.EventHandler(this.verticalTabs_SelectedIndexChanged);
-            this.Move += new System.EventHandler(this.OptionsDialog_Move);
             // 
             // cancelButton
             // 
@@ -152,6 +160,7 @@ namespace XenAdmin.Dialogs
             // 
             resources.ApplyResources(this, "$this");
             this.Name = "OptionsDialog";
+            this.Move += new System.EventHandler(this.OptionsDialog_Move);
             this.ContentPanel.ResumeLayout(false);
             this.ContentPanel.PerformLayout();
             this.splitContainer.Panel1.ResumeLayout(false);

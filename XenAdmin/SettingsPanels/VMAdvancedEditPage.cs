@@ -147,6 +147,14 @@ namespace XenAdmin.SettingsPanels
             }
         }
 
+        public void HideLocalValidationMessages()
+        {
+            if (ShadowMultiplierTextBox != null)
+            {
+                m_invalidParamToolTip.Hide(ShadowMultiplierTextBox);
+            }        
+        }
+
         public void Cleanup()
         {
             if (m_invalidParamToolTip != null)

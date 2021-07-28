@@ -304,6 +304,9 @@ namespace XenAdmin.Wizards.NewVMApplianceWizard
         {
         }
 
+        public void HideLocalValidationMessages()
+        { }
+
         public void Cleanup()
         {
             dataGridView1.Rows.Clear();

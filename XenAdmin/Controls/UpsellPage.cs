@@ -95,6 +95,10 @@ namespace XenAdmin.Controls
         {
         }
 
+        public void HideLocalValidationMessages()
+        {
+        }
+
         public void Cleanup()
         {
         }
