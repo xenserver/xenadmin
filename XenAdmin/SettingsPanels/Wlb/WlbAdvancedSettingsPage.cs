@@ -320,6 +320,14 @@ namespace XenAdmin.SettingsPanels
             */
         }
 
+        public void HideLocalValidationMessages()
+        {
+            if (textBoxSMTPServer != null)
+            {
+                InvalidParamToolTip.Hide(textBoxSMTPServer);
+            }
+        }
+
         public void Cleanup()
         {
             throw new NotImplementedException();

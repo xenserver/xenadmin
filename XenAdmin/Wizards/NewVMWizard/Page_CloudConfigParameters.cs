@@ -237,6 +237,9 @@ namespace XenAdmin.Wizards.NewVMWizard
         {
         }
 
+        public void HideLocalValidationMessages()
+        { }
+
         public void Cleanup()
         {
         }

@@ -144,6 +144,14 @@ namespace XenAdmin.SettingsPanels
                 HelpersGUI.ShowBalloonMessage(ServerTextBox, InvalidParamToolTip, Messages.GENERAL_EDIT_INVALID_REMOTE);
         }
 
+        public void HideLocalValidationMessages()
+        {
+            if (ServerTextBox != null)
+            {
+                InvalidParamToolTip.Hide(ServerTextBox);
+            }
+        }
+
         public void Cleanup()
         {
             InvalidParamToolTip.Dispose();

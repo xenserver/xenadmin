@@ -167,14 +167,6 @@ namespace XenAdmin.Dialogs.OptionsPages
             UseProxyRadioButton.Checked = true;
         }
 
-        public void HideValidationToolTips()
-        {
-            if (this.invalidControl != null)
-            {
-                this.validationToolTip.Hide(this.invalidControl);
-            }
-        }
-
         #region IOptionsPage Members
 
         public bool IsValidToSave()
@@ -212,6 +204,14 @@ namespace XenAdmin.Dialogs.OptionsPages
         {
             if (invalidControl != null)
                 HelpersGUI.ShowBalloonMessage(invalidControl, validationToolTip);
+        }
+
+        public void HideValidationMessages()
+        {
+            if (this.invalidControl != null)
+            {
+                this.validationToolTip.Hide(this.invalidControl);
+            }
         }
 
         public void Save()
