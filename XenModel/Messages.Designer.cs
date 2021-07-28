@@ -22515,15 +22515,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Maintenance Mode.
-        /// </summary>
-        public static string MAINTENANCE_MODE {
-            get {
-                return ResourceManager.GetString("MAINTENANCE_MODE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to &amp;Add....
         /// </summary>
         public static string MAINWINDOW_ADD_HOST {
@@ -41632,6 +41623,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Retrieving WLB recommendations on VMs to migrate from server {0}.
+        /// </summary>
+        public static string WLB_RETRIEVING_EVACUATE_RECOMMENDATIONS {
+            get {
+                return ResourceManager.GetString("WLB_RETRIEVING_EVACUATE_RECOMMENDATIONS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Retrieving WLB recommendations for pool {0}.
         /// </summary>
         public static string WLB_RETRIEVING_RECOMMENDATIONS {
@@ -41641,7 +41641,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Retrieving WLB recommendations .
+        ///   Looks up a localized string similar to Retrieving WLB recommendations.
         /// </summary>
         public static string WLB_RETRIEVING_VM_RECOMMENDATIONS {
             get {
