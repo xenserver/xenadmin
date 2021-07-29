@@ -1297,7 +1297,7 @@
     <value>Are you sure you want to detach the selected USB device?</value>
   </data>
   <data name="ACTION_WAIT_FOR_SLAVES_TO_RECOVER" xml:space="preserve">
-    <value>Waiting for slaves to recover...</value>
+    <value>Waiting for other pool members to recover...</value>
   </data>
   <data name="ACTION_WLB_DECONFIGURE_FAILED" xml:space="preserve">
     <value>Disconnecting  Workload Balancing failed on pool {0}: {1}  Workload Balancing has been paused.</value>
@@ -2194,7 +2194,7 @@ To continue, disable HA, delete the bond, and then enable HA again.</value>
   <data name="BOND_DELETE_WILL_DISTURB_BOTH" xml:space="preserve">
     <value>{0}
 
-Deleting this bond will automatically transfer the management and secondary interfaces on the bond to the first slave member of the bond: 
+Deleting this bond will automatically transfer the management and secondary interfaces on the bond to the first other pool member of the bond: 
 
 - [XenCenter] connections to the pool will temporarily be disturbed
 
@@ -2205,7 +2205,7 @@ Deleting this bond will automatically transfer the management and secondary inte
   <data name="BOND_DELETE_WILL_DISTURB_PRIMARY" xml:space="preserve">
     <value>{0}
 
-Deleting this bond will automatically transfer the management interface on the bond to the first slave member of the bond: 
+Deleting this bond will automatically transfer the management interface on the bond to the first other pool member of the bond: 
 
 - [XenCenter] connections to the pool will temporarily be disturbed
 
@@ -2214,7 +2214,7 @@ Deleting this bond will automatically transfer the management interface on the b
   <data name="BOND_DELETE_WILL_DISTURB_SECONDARY" xml:space="preserve">
     <value>{0}
 
-Deleting this bond will disrupt traffic through the secondary interface on the bond while the interface is moved to the first slave of the bond.</value>
+Deleting this bond will disrupt traffic through the secondary interface on the bond while the interface is moved to the first other pool member of the bond.</value>
   </data>
   <data name="BOND_GONE" xml:space="preserve">
     <value>Could not find the bond in [XenCenter]'s cache.</value>
@@ -8460,7 +8460,7 @@ Do you want to continue?</value>
 Do you want to continue?</value>
   </data>
   <data name="MESSAGEBOX_SLAVES_EJECT" xml:space="preserve">
-    <value>You must eject all slaves from the pool before you can delete the pool.</value>
+    <value>You must eject all other pool members from the pool before you can delete the pool.</value>
   </data>
   <data name="MESSAGEBOX_VIF_DELETE" xml:space="preserve">
     <value>This will delete the selected network interface permanently. Continue?</value>
@@ -8840,7 +8840,7 @@ You should only proceed if you have verified that these settings are correct.</v
     <value>Pooling is restricted with this server's license</value>
   </data>
   <data name="NEWPOOL_SLAVE_ROLE" xml:space="preserve">
-    <value>Your current role on the slave is not authorized to add the slave to a pool</value>
+    <value>Your current role on the other pool member is not authorized to add it to a pool</value>
   </data>
   <data name="NEWPOOL_UNLICENSED_HOST_LICENSED_MASTER" xml:space="preserve">
     <value>You cannot add an unlicensed server to a licensed pool</value>
@@ -9621,7 +9621,7 @@ It is strongly recommended that you Cancel and apply the latest version of the p
     <value>{0} (Hidden)</value>
   </data>
   <data name="NIC_SLAVE" xml:space="preserve">
-    <value>{0} (Slave)</value>
+    <value>{0} (Other pool member)</value>
   </data>
   <data name="NIC_TAB_TITLE" xml:space="preserve">
     <value>Network Interface Cards</value>

@@ -3598,7 +3598,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Waiting for slaves to recover....
+        ///   Looks up a localized string similar to Waiting for other pool members to recover....
         /// </summary>
         public static string ACTION_WAIT_FOR_SLAVES_TO_RECOVER {
             get {
@@ -6013,7 +6013,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to {0}
         ///
-        ///Deleting this bond will automatically transfer the management and secondary interfaces on the bond to the first slave member of the bond: 
+        ///Deleting this bond will automatically transfer the management and secondary interfaces on the bond to the first other pool member of the bond: 
         ///
         ///- [XenCenter] connections to the pool will temporarily be disturbed
         ///
@@ -6030,7 +6030,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to {0}
         ///
-        ///Deleting this bond will automatically transfer the management interface on the bond to the first slave member of the bond: 
+        ///Deleting this bond will automatically transfer the management interface on the bond to the first other pool member of the bond: 
         ///
         ///- [XenCenter] connections to the pool will temporarily be disturbed
         ///
@@ -6045,7 +6045,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to {0}
         ///
-        ///Deleting this bond will disrupt traffic through the secondary interface on the bond while the interface is moved to the first slave of the bond..
+        ///Deleting this bond will disrupt traffic through the secondary interface on the bond while the interface is moved to the first other pool member of the bond..
         /// </summary>
         public static string BOND_DELETE_WILL_DISTURB_SECONDARY {
             get {
@@ -24352,7 +24352,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You must eject all slaves from the pool before you can delete the pool..
+        ///   Looks up a localized string similar to You must eject all other pool members from the pool before you can delete the pool..
         /// </summary>
         public static string MESSAGEBOX_SLAVES_EJECT {
             get {
@@ -25904,7 +25904,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your current role on the slave is not authorized to add the slave to a pool.
+        ///   Looks up a localized string similar to Your current role on the other pool member is not authorized to add it to a pool.
         /// </summary>
         public static string NEWPOOL_SLAVE_ROLE {
             get {
@@ -27634,7 +27634,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} (Slave).
+        ///   Looks up a localized string similar to {0} (Other pool member).
         /// </summary>
         public static string NIC_SLAVE {
             get {
