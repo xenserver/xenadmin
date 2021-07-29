@@ -168,7 +168,7 @@ namespace XenAdmin.Controls.CustomDataGraph
             DataKey newkey =
                 CreateKey(new Point(left - HorizontalScroll.Value, CONTROL_PADDING + y + GRAPH_PADDING));
             foreach (DataSourceItem item in designedGraph.DataSources)
-                newkey.DataSourceUUIDsToShow.Add(item.Uuid);
+                newkey.DataSourceUUIDsToShow.Add(item.Id);
             newplot.DataKey = newkey;
             newkey.Enter += new EventHandler(dataKey_Enter);
             newkey.MouseDown += new MouseEventHandler(dataKey_MouseDown);
@@ -489,10 +489,10 @@ namespace XenAdmin.Controls.CustomDataGraph
                     found = graph.DataSources.Contains(dsi);
                     if (found)
                     {
-                        if (!Palette.HasCustomColour(dsi.Uuid))
+                        if (!Palette.HasCustomColour(dsi.Id))
                         {
                             dsi.ColorChanged = true;
-                            Palette.SetCustomColor(dsi.Uuid, dsi.Color);
+                            Palette.SetCustomColor(dsi.Id, dsi.Color);
                         }
                         break;
                     }
@@ -514,11 +514,11 @@ namespace XenAdmin.Controls.CustomDataGraph
                     if (datasourceName == "memory_total_kib" || datasourceName == "memory")
                         continue;
 
-                    if (!Palette.HasCustomColour(dsi.Uuid))
+                    if (!Palette.HasCustomColour(dsi.Id))
                     {
                         dsi.DataSource.name_label = datasourceName;
                         dsi.ColorChanged = true;
-                        Palette.SetCustomColor(dsi.Uuid, dsi.Color);
+                        Palette.SetCustomColor(dsi.Id, dsi.Color);
                         dataSources.Add(dsi);
                     }
                 }
@@ -686,7 +686,7 @@ namespace XenAdmin.Controls.CustomDataGraph
                 Plots[index].DisplayName = newGraph.DisplayName;
                 Keys[index].DataSourceUUIDsToShow.Clear();
                 foreach (DataSourceItem item in newGraph.DataSources)
-                    Keys[index].DataSourceUUIDsToShow.Add(item.Uuid);
+                    Keys[index].DataSourceUUIDsToShow.Add(item.Id);
                 Keys[index].UpdateItems();
 
                 if (isSelected)

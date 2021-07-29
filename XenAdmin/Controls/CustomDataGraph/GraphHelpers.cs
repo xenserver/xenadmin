@@ -59,7 +59,7 @@ namespace XenAdmin.Controls.CustomDataGraph
             DisplayName = sourceGraph.DisplayName;
             foreach (DataSourceItem dsi in sourceGraph.DataSources)
             {
-                DataSources.Add(new DataSourceItem(dsi.DataSource, dsi.ToString(), dsi.Color, dsi.Uuid));
+                DataSources.Add(new DataSourceItem(dsi.DataSource, dsi.ToString(), dsi.Color, dsi.Id));
             }
         }
 
@@ -91,7 +91,7 @@ namespace XenAdmin.Controls.CustomDataGraph
 
             for (int i = 0; i < this.DataSources.Count; i++)
             {
-                if (this.DataSources[i].Uuid != other.DataSources[i].Uuid)
+                if (this.DataSources[i].Id != other.DataSources[i].Id)
                     return false;
             }
 
@@ -129,28 +129,24 @@ namespace XenAdmin.Controls.CustomDataGraph
         private string friendlyName;
         public Color Color;
         public bool ColorChanged;
-        public string Uuid;
+        public string Id;
         public DataType Category;
 
-        public DataSourceItem(Data_source ds, string friendlyname, Color color, string uuid)
+        public DataSourceItem(Data_source ds, string friendlyname, Color color, string id, IXenObject xo = null)
         {
             DataSource = ds;
             Enabled = DataSource.enabled;
             friendlyName = friendlyname;
             Color = color;
-            Uuid = uuid;
-        }
+            Id = id;
 
-        public DataSourceItem(Data_source ds, string friendlyname, Color color, string uuid, IXenObject xo)
-            : this(ds, friendlyname, color, uuid)
-        {
-            DataSet dataSet = DataSet.Create(uuid, xo);
-            Category = dataSet.Category;
+            if (xo != null)
+                Category = DataSet.Create(id, xo).Category;
         }
 
         public string GetDataSource()
         {
-            string[] lst = Uuid.Split(':');
+            string[] lst = Id.Split(':');
             return lst.Length == 0 ? "" : lst[lst.Length - 1];
         }
 
@@ -166,7 +162,7 @@ namespace XenAdmin.Controls.CustomDataGraph
 
         public bool Equals(DataSourceItem other)
         {
-            return Uuid.Equals(other.Uuid);
+            return Id.Equals(other?.Id);
         }
     }
 
