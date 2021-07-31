@@ -130,7 +130,7 @@ namespace XenAdmin.Controls.CustomDataGraph
         public Color Color;
         public bool ColorChanged;
         public string Id;
-        public DataType Category;
+        public Helpers.DataSourceCategory Category;
 
         public DataSourceItem(Data_source ds, string friendlyname, Color color, string id, IXenObject xo = null)
         {
@@ -140,8 +140,8 @@ namespace XenAdmin.Controls.CustomDataGraph
             Color = color;
             Id = id;
 
-            if (xo != null)
-                Category = DataSet.Create(id, xo).Category;
+            if (DataSet.ParseId(id, out _, out _, out string dataSourceName))
+                Category = Helpers.GetDataSourceCategory(dataSourceName);
         }
 
         public string GetDataSource()
