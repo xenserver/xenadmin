@@ -479,7 +479,7 @@ namespace XenAdmin.Controls.CustomDataGraph
 
             foreach (DataSet set in ScrollWideArchive.Sets.ToArray())
             {
-                if (!set.Draw || !DisplayedUuids.Contains(set.Id))
+                if (set.Hide || !DisplayedUuids.Contains(set.Id))
                     continue;
 
                 List<DataPoint> todraw;
@@ -520,7 +520,7 @@ namespace XenAdmin.Controls.CustomDataGraph
 
             foreach (DataSet set in ScrollWideArchive.Sets.ToArray())
             {
-                if (!set.Draw || !DisplayedUuids.Contains(set.Id))
+                if (set.Hide || !DisplayedUuids.Contains(set.Id))
                     continue;
 
                 lock (Palette.PaletteLock)

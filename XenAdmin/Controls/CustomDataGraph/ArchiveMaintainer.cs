@@ -444,7 +444,7 @@ namespace XenAdmin.Controls.CustomDataGraph
             {
                 string str = reader.ReadContentAsString();
                 string id = string.Format("{0}:{1}:{2}", xmo is Host ? "host" : "vm", Helpers.GetUuid(xmo), str);
-                SetsAdded.Add(DataSet.Create(id, xmo, true, str));
+                SetsAdded.Add(DataSet.Create(id, xmo, false, str));
             }
             else if (LastNode == "step")
             {

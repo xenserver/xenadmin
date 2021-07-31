@@ -43,6 +43,8 @@ namespace XenAdmin.Controls.CustomDataGraph
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
+        private const int NegativeValue = -1;
+
         /// <summary>
         /// Things can only be added to the beginning or end of this list; it should
         /// be sorted by X co-ordinate (which will be larger at the beginning of the list)
@@ -52,61 +54,18 @@ namespace XenAdmin.Controls.CustomDataGraph
         public List<DataPoint> CurrentlyDisplayed = new List<DataPoint>();
         public IXenObject XenObject;
         public readonly string Id;
-        private bool _hide;
-        private bool _deselected;
-
         public DataType Category;
         public string DataSourceName;
         public string FriendlyName;
-
-        private const int NegativeValue = -1;
         private int MultiplyingFactor = 1;
-
-        /// <summary>
-        /// Can show in the lisbox
-        /// </summary>
-        public bool Show
-        {
-            get { return !_hide && !NeverShow; }
-        }
-
-        /// <summary>
-        /// This dataset is of the wrong xenobject
-        /// </summary>
-        public bool Hide
-        {
-            get { return _hide; }
-            set { _hide = value; }
-        }
-        
-        /// <summary>
-        /// The user has chosen not to show this graph
-        /// </summary>
-        public bool Deselected
-        {
-            get { return _deselected; }
-            set { _deselected = value; }
-        }
-
-        /// <summary>
-        /// Never ever draw on graph or put in listbox
-        /// </summary>
-        private bool NeverShow { get; set; }
-
-        /// <summary>
-        /// Can draw on graph
-        /// </summary>
-        public bool Draw
-        {
-            get { return !_hide && !NeverShow && !_deselected; }
-        }
-        
         public DataRange CustomYRange;
+        public bool Hide { get; }
 
-        private DataSet(string id, IXenObject xo, bool show, string settype)
+
+        private DataSet(string id, IXenObject xo, bool hide, string settype)
         {
             XenObject = xo;
-            _hide = !show;
+            Hide = hide;
             Id = id;
             DataSourceName = settype;
             FriendlyName = Helpers.GetFriendlyDataSourceName(settype, XenObject);
@@ -114,13 +73,20 @@ namespace XenAdmin.Controls.CustomDataGraph
 
         #region Static methods
 
-        public static DataSet Create(string id, IXenObject xo, bool show, string settype)
+        public static DataSet Create(string id, IXenObject xo, bool hide, string settype)
         {
-            var dataSet = new DataSet(id, xo, show, settype);
-            if(settype == "xapi_open_fds" || settype == "pool_task_count" || settype == "pool_session_count")
+            if(settype == "xapi_open_fds" ||
+               settype == "pool_task_count" ||
+               settype == "pool_session_count" ||
+               settype == "memory" ||
+               settype == "memory_total_kib")
             {
-                dataSet.NeverShow = true;
+                hide = true; //overrides passed in value
             }
+
+            var dataSet = new DataSet(id, xo, hide, settype);
+
+
             if (settype.StartsWith("latency") || settype.EndsWith("latency"))
             {
                 if (settype.StartsWith("latency_") || settype.StartsWith("read_latency_") ||
@@ -175,11 +141,7 @@ namespace XenAdmin.Controls.CustomDataGraph
                                                 ? (int)Util.BINARY_KILO
                                                 : 1;
 
-                if (settype == "memory" || settype == "memory_total_kib")
-                {
-                    dataSet.NeverShow = true;
-                }
-                else if (settype == "memory_free_kib" && xo is Host)
+                if (settype == "memory_free_kib" && xo is Host)
                 {
                     dataSet.FriendlyName = Helpers.GetFriendlyDataSourceName("memory_used_kib", dataSet.XenObject);
                     Host host = (Host)xo;
@@ -315,7 +277,7 @@ namespace XenAdmin.Controls.CustomDataGraph
         {
             string[] bits = id.Split(':');
             if (bits.Length < 3)
-                return Create(id, null, false, id);
+                return Create(id, null, true, id);
 
             string theId;
             string theObjType;
@@ -344,17 +306,17 @@ namespace XenAdmin.Controls.CustomDataGraph
             {
                 Host host = xenObject.Connection.Cache.Find_By_Uuid<Host>(theUuid);
                 if (host != null)
-                    return Create(theId, host, (xenObject is Host && ((Host)xenObject).uuid == theUuid), theDataName);
+                    return Create(theId, host, (xenObject as Host)?.uuid != theUuid, theDataName);
             }
 
             if (theObjType == "vm")
             {
                 VM vm = xenObject.Connection.Cache.Find_By_Uuid<VM>(theUuid);
                 if (vm != null)
-                    return Create(theId, vm, (xenObject is VM && ((VM)xenObject).uuid == theUuid), theDataName);
+                    return Create(theId, vm, (xenObject as VM)?.uuid != theUuid, theDataName);
             }
 
-            return Create(id, null, false, id);
+            return Create(id, null, true, id);
         }
 
         #endregion
@@ -492,8 +454,6 @@ namespace XenAdmin.Controls.CustomDataGraph
 
         public DataPoint OnMouseMove(MouseActionArgs args)
         {
-            if (Deselected)
-                return null;
             LongPoint p = LongPoint.DeTranslateFromScreen(new LongPoint(args.Point), args.XRange, args.YRange, new LongRectangle(args.Rectangle));
             return ClosestPointTo(p);
         }
@@ -549,7 +509,7 @@ namespace XenAdmin.Controls.CustomDataGraph
                 DataSet other = setsAdded.FirstOrDefault(s => s.DataSourceName == "avg_cpu");
                 if (other == null)
                 {
-                    other = Create(Palette.GetUuid("avg_cpu", XenObject), XenObject, true, "avg_cpu");
+                    other = Create(Palette.GetUuid("avg_cpu", XenObject), XenObject, false, "avg_cpu");
                     setsAdded.Add(other);
                 }
 

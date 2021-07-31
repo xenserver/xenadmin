@@ -110,7 +110,7 @@ namespace XenAdmin.Controls.CustomDataGraph
             foreach (DataSet set in SetsAdded)
             {
                 Palette.LoadSetColor(set);
-                DataSet copy = DataSet.Create(set.Id, set.XenObject, set.Show, set.DataSourceName);
+                DataSet copy = DataSet.Create(set.Id, set.XenObject, set.Hide, set.DataSourceName);
                 foreach (DataPoint p in set.Points)
                     copy.AddPoint(new DataPoint(p.X,p.Y));
 

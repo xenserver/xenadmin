@@ -280,7 +280,7 @@ namespace XenAdmin.Controls.CustomDataGraph
             // Refresh all sets
             foreach (DataSet set in DataPlotNav.CurrentArchive.Sets.ToArray())
             {
-                if (!set.Draw || !DataKey.DataSourceUUIDsToShow.Contains(set.Id))
+                if (set.Hide || !DataKey.DataSourceUUIDsToShow.Contains(set.Id))
                     continue;
 
                 List<DataPoint> todraw;
@@ -363,7 +363,7 @@ namespace XenAdmin.Controls.CustomDataGraph
             Array.Reverse(sets_to_show);
             foreach (DataSet set in sets_to_show)
             {
-                if (!set.Draw || DataKey == null || !DataKey.DataSourceUUIDsToShow.Contains(set.Id))
+                if (set.Hide || DataKey == null || !DataKey.DataSourceUUIDsToShow.Contains(set.Id))
                     continue;
 
                 lock (Palette.PaletteLock)
@@ -535,7 +535,7 @@ namespace XenAdmin.Controls.CustomDataGraph
             {
                 foreach (DataSet set in DataPlotNav.CurrentArchive.Sets.ToArray())
                 {
-                    if (!set.Draw || DataKey == null || !DataKey.DataSourceUUIDsToShow.Contains(set.Id))
+                    if (set.Hide || DataKey == null || !DataKey.DataSourceUUIDsToShow.Contains(set.Id))
                         continue;
                     if (set.OnMouseClick(new MouseActionArgs(e.Location, GraphRectangle(), DataPlotNav.XRange, SelectedYRange)))
                     {

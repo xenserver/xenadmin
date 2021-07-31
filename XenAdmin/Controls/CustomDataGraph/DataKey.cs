@@ -282,7 +282,6 @@ namespace XenAdmin.Controls.CustomDataGraph
         public Dictionary<ArchiveInterval, DataSet> Sets = new Dictionary<ArchiveInterval, DataSet>();
 
         private bool _selected;
-        private bool _hide;
 
         public bool Selected
         {
@@ -293,19 +292,6 @@ namespace XenAdmin.Controls.CustomDataGraph
                 foreach (DataSet set in Sets.Values)
                 {
                     set.Selected = value;
-                }
-            }
-        }
-
-        public bool Hide
-        {
-            get { return _hide; }
-            set
-            {
-                _hide = value;
-                foreach (DataSet set in Sets.Values)
-                {
-                    set.Deselected = value;
                 }
             }
         }
@@ -329,7 +315,7 @@ namespace XenAdmin.Controls.CustomDataGraph
                 if (!Sets.ContainsKey(ArchiveInterval.FiveSecond))
                     return false;
 
-                return Sets[ArchiveInterval.FiveSecond].Show;
+                return !Sets[ArchiveInterval.FiveSecond].Hide;
             }
         }
 
