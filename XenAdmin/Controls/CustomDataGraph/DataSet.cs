@@ -56,19 +56,25 @@ namespace XenAdmin.Controls.CustomDataGraph
         public readonly string Id;
         public DataType Category;
         public string DataSourceName;
-        public string FriendlyName;
+        public string FriendlyName { get; }
         private int MultiplyingFactor = 1;
         public DataRange CustomYRange;
         public bool Hide { get; }
 
 
-        private DataSet(string id, IXenObject xo, bool hide, string settype)
+        private DataSet(string id, IXenObject xo, bool hide, string datasourceName)
         {
             XenObject = xo;
             Hide = hide;
             Id = id;
-            DataSourceName = settype;
-            FriendlyName = Helpers.GetFriendlyDataSourceName(settype, XenObject);
+            DataSourceName = datasourceName;
+
+            if (datasourceName == "memory_free_kib")
+                FriendlyName = Helpers.GetFriendlyDataSourceName("memory_used_kib", xo);
+            else if (datasourceName == "memory_internal_free")
+                FriendlyName = Helpers.GetFriendlyDataSourceName("memory_internal_used", xo);
+            else
+                FriendlyName = Helpers.GetFriendlyDataSourceName(datasourceName, xo);
         }
 
         #region Static methods
@@ -85,7 +91,6 @@ namespace XenAdmin.Controls.CustomDataGraph
             }
 
             var dataSet = new DataSet(id, xo, hide, settype);
-
 
             if (settype.StartsWith("latency") || settype.EndsWith("latency"))
             {
@@ -141,28 +146,15 @@ namespace XenAdmin.Controls.CustomDataGraph
                                                 ? (int)Util.BINARY_KILO
                                                 : 1;
 
-                if (settype == "memory_free_kib" && xo is Host)
+                if (settype == "memory_free_kib" || settype == "memory_internal_free")
                 {
-                    dataSet.FriendlyName = Helpers.GetFriendlyDataSourceName("memory_used_kib", dataSet.XenObject);
-                    Host host = (Host)xo;
-                    Host_metrics metrics = host.Connection.Resolve(host.metrics);
-                    long max = metrics != null ? metrics.memory_total : 100;
-                    dataSet.CustomYRange = new DataRange(max, 0, max / 10d, Unit.Bytes, RangeScaleMode.Delegate)
+                    var max = GetMemoryMax(xo);
+                    var resolution = GetMemoryResolution(max);
+                    
+                    dataSet.CustomYRange = new DataRange(max, 0, resolution, Unit.Bytes, RangeScaleMode.Delegate)
                     {
-                        UpdateMax = dataSet.GetMemoryMax,
-                        UpdateResolution = dataSet.GetMemoryResolution
-                    };
-                }
-                else if (settype == "memory_internal_free" && xo is VM)
-                {
-                    dataSet.FriendlyName = Helpers.GetFriendlyDataSourceName("memory_internal_used", dataSet.XenObject);
-                    VM vm = (VM)xo;
-                    VM_metrics metrics = vm.Connection.Resolve(vm.metrics);
-                    long max = metrics != null ? metrics.memory_actual : (long)vm.memory_dynamic_max;
-                    dataSet.CustomYRange = new DataRange(max, 0, max / 10d, Unit.Bytes, RangeScaleMode.Delegate)
-                    {
-                        UpdateMax = dataSet.GetMemoryMax,
-                        UpdateResolution = dataSet.GetMemoryResolution
+                        UpdateMax = GetMemoryMax,
+                        UpdateResolution = GetMemoryResolution
                     };
                 }
                 else
@@ -351,38 +343,25 @@ namespace XenAdmin.Controls.CustomDataGraph
             return listout;
         }
 
-        private double GetMemoryMax(IXenObject xo)
+        private static double GetMemoryMax(IXenObject xo)
         {
-            if (xo is Host)
-            {
-                Host host = (Host)xo;
-                Host_metrics metrics = host.Connection.Resolve(host.metrics);
-                return metrics != null ? metrics.memory_total : 100;
-            }
-            else if (xo is VM)
-            {
-                VM vm = (VM)xo;
-                VM_metrics metrics = vm.Connection.Resolve(vm.metrics);
-                return metrics != null ? metrics.memory_actual : vm.memory_dynamic_max;
-            }
+            if (xo is Host host)
+                return host.Connection.Resolve(host.metrics)?.memory_total ?? 100;
+
+            if (xo is VM vm)
+                return (vm.Connection.Resolve(vm.metrics))?.memory_actual ?? vm.memory_dynamic_max;
+
             return 100;
         }
 
-        private double GetMemoryResolution(IXenObject xmo)
+        private static double GetMemoryResolution(IXenObject xmo)
         {
-            if (xmo is Host)
-            {
-                Host host = (Host)xmo;
-                Host_metrics metrics = host.Connection.Resolve(host.metrics);
-                return metrics != null ? metrics.memory_total / 10 : 10;
-            }
-            else if (xmo is VM)
-            {
-                VM vm = (VM)xmo;
-                VM_metrics metrics = vm.Connection.Resolve(vm.metrics);
-                return ((metrics != null ? metrics.memory_actual : (long)vm.memory_dynamic_max) / 10d);
-            }
-            return 10;
+            return GetMemoryMax(xmo) / 10d;
+        }
+
+        private static double GetMemoryResolution(double max)
+        {
+            return max / 10d;
         }
 
         public static double GetMaxY(List<DataPoint> dataPoints)
