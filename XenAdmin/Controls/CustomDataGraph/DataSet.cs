@@ -53,7 +53,7 @@ namespace XenAdmin.Controls.CustomDataGraph
         public bool Selected;
         public List<DataPoint> CurrentlyDisplayed = new List<DataPoint>();
         public IXenObject XenObject;
-        public readonly string Id;
+        public readonly string Id = "";
         public string DataSourceName;
         public string FriendlyName { get; }
         private int MultiplyingFactor = 1;
@@ -61,12 +61,16 @@ namespace XenAdmin.Controls.CustomDataGraph
         public bool Hide { get; }
 
 
-        private DataSet(string id, IXenObject xo, bool hide, string datasourceName)
+        private DataSet(IXenObject xo, bool hide, string datasourceName)
         {
             XenObject = xo;
             Hide = hide;
-            Id = id;
             DataSourceName = datasourceName;
+
+            if (xo is Host host)
+                Id = $"host:{host.uuid}:{datasourceName}";
+            else if (xo is VM vm)
+                Id = $"vm:{vm.uuid}:{datasourceName}";
 
             if (datasourceName == "memory_free_kib")
                 FriendlyName = Helpers.GetFriendlyDataSourceName("memory_used_kib", xo);
@@ -76,9 +80,8 @@ namespace XenAdmin.Controls.CustomDataGraph
                 FriendlyName = Helpers.GetFriendlyDataSourceName(datasourceName, xo);
         }
 
-        #region Static methods
 
-        public static DataSet Create(string id, IXenObject xo, bool hide, string settype)
+        public static DataSet Create(IXenObject xo, bool hide, string settype)
         {
             if(settype == "xapi_open_fds" ||
                settype == "pool_task_count" ||
@@ -89,7 +92,7 @@ namespace XenAdmin.Controls.CustomDataGraph
                 hide = true; //overrides passed in value
             }
 
-            var dataSet = new DataSet(id, xo, hide, settype);
+            var dataSet = new DataSet(xo, hide, settype);
 
             if (settype.StartsWith("latency") || settype.EndsWith("latency"))
             {
@@ -244,30 +247,6 @@ namespace XenAdmin.Controls.CustomDataGraph
             return dataSet;
         }
 
-        public static DataSet Create(string id, IXenObject xenObject)
-        {
-            if (ParseId(id, out string objType, out string objUuid, out string dataSourceName))
-            {
-                string theId = $"{objType}:{objUuid}:{dataSourceName}";
-
-                if (objType == "host")
-                {
-                    Host host = xenObject.Connection.Cache.Find_By_Uuid<Host>(objUuid);
-                    if (host != null)
-                        return Create(theId, host, (xenObject as Host)?.uuid != objUuid, dataSourceName);
-                }
-
-                if (objType == "vm")
-                {
-                    VM vm = xenObject.Connection.Cache.Find_By_Uuid<VM>(objUuid);
-                    if (vm != null)
-                        return Create(theId, vm, (xenObject as VM)?.uuid != objUuid, dataSourceName);
-                }
-            }
-
-            return Create(id, null, true, id);
-        }
-
         public static bool ParseId(string id, out string objType, out string objUuid, out string dataSourceName)
         {
             var bits = id.Split(':').ToList();
@@ -288,8 +267,6 @@ namespace XenAdmin.Controls.CustomDataGraph
             dataSourceName = null;
             return false;
         }
-
-        #endregion
 
         public List<DataPoint> GetRange(DataTimeRange xrange, long intervalneed, long intervalat)
         {
@@ -466,7 +443,7 @@ namespace XenAdmin.Controls.CustomDataGraph
                 DataSet other = setsAdded.FirstOrDefault(s => s.DataSourceName == "avg_cpu");
                 if (other == null)
                 {
-                    other = Create(Palette.GetUuid("avg_cpu", XenObject), XenObject, false, "avg_cpu");
+                    other = Create(XenObject, false, "avg_cpu");
                     setsAdded.Add(other);
                 }
 

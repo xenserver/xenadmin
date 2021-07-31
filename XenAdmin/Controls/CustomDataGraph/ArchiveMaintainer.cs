@@ -33,6 +33,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Xml;
@@ -443,8 +444,7 @@ namespace XenAdmin.Controls.CustomDataGraph
             if (LastNode == "name")
             {
                 string str = reader.ReadContentAsString();
-                string id = string.Format("{0}:{1}:{2}", xmo is Host ? "host" : "vm", Helpers.GetUuid(xmo), str);
-                SetsAdded.Add(DataSet.Create(id, xmo, false, str));
+                SetsAdded.Add(DataSet.Create(xmo, false, str));
             }
             else if (LastNode == "step")
             {
@@ -509,7 +509,29 @@ namespace XenAdmin.Controls.CustomDataGraph
             if (LastNode == "entry")
             {
                 string str = reader.ReadContentAsString();
-                SetsAdded.Add(DataSet.Create(str, xo));
+                DataSet set = null;
+
+                if (DataSet.ParseId(str, out string objType, out string objUuid, out string dataSourceName))
+                {
+                    if (objType == "host")
+                    {
+                        Host host = xo.Connection.Cache.Hosts.FirstOrDefault(h => h.uuid == objUuid);
+                        if (host != null)
+                            set = DataSet.Create(host, (xo as Host)?.uuid != objUuid, dataSourceName);
+                    }
+
+                    if (objType == "vm")
+                    {
+                        VM vm = xo.Connection.Cache.VMs.FirstOrDefault(v => v.uuid == objUuid);
+                        if (vm != null)
+                            set = DataSet.Create(vm, (xo as VM)?.uuid != objUuid, dataSourceName);
+                    }
+                }
+
+                if (set == null)
+                    set = DataSet.Create(null, true, str);
+
+                SetsAdded.Add(set);
             }
             else if (LastNode == "t")
             {
