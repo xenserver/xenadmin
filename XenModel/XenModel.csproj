@@ -168,6 +168,11 @@
     <Compile Include="Actions\ZipStatusReportAction.cs" />
     <Compile Include="Alerts\Types\Alert.cs" />
     <Compile Include="BrandManager.cs" />
+    <Compile Include="UnitStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UnitStrings.resx</DependentUpon>
+    </Compile>
     <Compile Include="Utils\StringExtensions.cs" />
     <Compile Include="Utils\TimeSpanExtensions.cs" />
     <Compile Include="XCM\ConversionClient.cs" />
@@ -603,6 +608,13 @@
     <EmbeddedResource Include="Messages.zh-CN.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="UnitStrings.ja.resx" />
+    <EmbeddedResource Include="UnitStrings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UnitStrings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UnitStrings.zh-CN.resx" />
     <EmbeddedResource Include="XenAPI\FriendlyErrorNames.ja.resx" />
     <EmbeddedResource Include="XenAPI\FriendlyErrorNames.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
