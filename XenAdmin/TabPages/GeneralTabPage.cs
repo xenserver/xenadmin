@@ -1943,6 +1943,11 @@ namespace XenAdmin.TabPages
             StartPutty( "env docker logs --tail=50 --follow --timestamps");
         }
 
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+            panel2.AutoScroll = sections.Sum(s => s.Height) > panel2.Height;
+        }
+
         #endregion
 
         private void StartPutty(string dockerCmd)
