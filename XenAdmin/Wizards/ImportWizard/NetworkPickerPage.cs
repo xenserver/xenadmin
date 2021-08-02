@@ -49,8 +49,8 @@ namespace XenAdmin.Wizards.ImportWizard
 		#region Private fields
 		private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 		
-		private IXenConnection m_selectedConnection;
-        private Host m_selectedAffinity;
+		internal IXenConnection MSelectedConnection { get; set; }
+        internal Host MSelectedAffinity { get; set; }
         private VM m_vm;
         private bool m_buttonNextEnabled;
 		#endregion
@@ -136,24 +136,12 @@ namespace XenAdmin.Wizards.ImportWizard
 
 		#endregion
 
-		public void SetAffinity(Host host)
-		{
-			m_selectedAffinity = host;
-		}
 
 		public void SetVm(VM vm)
 		{
 			m_vm = vm;
 		}
-		
-		/// <summary>
-		/// Should be called before the Affinity is set.
-		/// </summary>
-		public void SetConnection(IXenConnection con)
-		{
-			m_selectedConnection = con;
-		}
-
+        
 		#region Private methods
 
         private void UpdateControlsEnabledState(bool enabled)
@@ -167,7 +155,7 @@ namespace XenAdmin.Wizards.ImportWizard
         {
             NetworkNetworkColumn.Items.Clear();
 
-        	var networks = m_selectedConnection.Cache.Networks.Where(ShowNetwork);
+        	var networks = MSelectedConnection.Cache.Networks.Where(ShowNetwork);
 
 			foreach (XenAPI.Network network in networks)
             {
@@ -190,14 +178,14 @@ namespace XenAdmin.Wizards.ImportWizard
 				{
 					// We need to automatically generate VIFs for Networks marked AutoPlug=true
 
-					var networks = m_selectedConnection.Cache.Networks;
+					var networks = MSelectedConnection.Cache.Networks;
 					foreach (XenAPI.Network network in networks)
 					{
 						if (m_networkGridView.Rows.Count < m_vm.MaxVIFsAllowed() && ShowNetwork(network) && network.GetAutoPlug())
 						{
 							AddVIFRow(new VIF
 							          	{
-							          		Connection = m_selectedConnection,
+							          		Connection = MSelectedConnection,
 							          		device = m_networkGridView.Rows.Count.ToString(),
 							          		network = new XenRef<XenAPI.Network>(network.opaque_ref),
 							          		MAC = Messages.MAC_AUTOGENERATE
@@ -209,12 +197,12 @@ namespace XenAdmin.Wizards.ImportWizard
 				{
 					// We need to create off the _vmTemplate
 
-					var vifs = m_selectedConnection.ResolveAll(m_vm.VIFs);
+					var vifs = MSelectedConnection.ResolveAll(m_vm.VIFs);
 					foreach (VIF vif in vifs)
 					{
 						AddVIFRow(new VIF
 						          	{
-						          		Connection = m_selectedConnection,
+						          		Connection = MSelectedConnection,
 						          		device = vif.device,
 						          		network = vif.network,
 						          		MAC = Messages.MAC_AUTOGENERATE
@@ -224,7 +212,7 @@ namespace XenAdmin.Wizards.ImportWizard
 				else
 				{
 				    //We need to recreate off vm
-					var vifs = m_selectedConnection.ResolveAll(m_vm.VIFs);
+					var vifs = MSelectedConnection.ResolveAll(m_vm.VIFs);
 				    foreach (VIF vif in vifs)
 				        AddVIFRow(vif);
 				}
@@ -240,7 +228,7 @@ namespace XenAdmin.Wizards.ImportWizard
 
 		private XenAPI.Network GetDefaultNetwork()
 		{
-			foreach (XenAPI.Network network in m_selectedConnection.Cache.Networks)
+			foreach (XenAPI.Network network in MSelectedConnection.Cache.Networks)
 				if (ShowNetwork(network))
 					return network;
 
@@ -261,10 +249,10 @@ namespace XenAdmin.Wizards.ImportWizard
 			if (network.IsMember())
 				return false;
 
-			if (m_selectedAffinity != null && !m_selectedAffinity.CanSeeNetwork(network))
+			if (MSelectedAffinity != null && !MSelectedAffinity.CanSeeNetwork(network))
 				return false;
 
-			if (m_selectedAffinity == null && !network.AllHostsCanSeeNetwork())
+			if (MSelectedAffinity == null && !network.AllHostsCanSeeNetwork())
 				return false;
 
             if (network.IsSriov() && !m_vm.HasSriovRecommendation())
@@ -276,7 +264,7 @@ namespace XenAdmin.Wizards.ImportWizard
 		private void AddVIFRow(VIF vif)
 		{
             var row = new VifRow(vif);
-            XenAPI.Network network = m_selectedConnection.Resolve(vif.network);
+            XenAPI.Network network = MSelectedConnection.Resolve(vif.network);
             bool isGuestInstallerNetwork = network != null && network.IsGuestInstallerNetwork();
 
             ToStringWrapper<XenAPI.Network> comboBoxEntry = FindComboBoxEntryForNetwork(network);
@@ -354,7 +342,7 @@ namespace XenAdmin.Wizards.ImportWizard
 				return;
 			}
 
-			VIF vif = new VIF {Connection = m_selectedConnection};
+			VIF vif = new VIF {Connection = MSelectedConnection};
 
 			int i = 0;
 			while (true)

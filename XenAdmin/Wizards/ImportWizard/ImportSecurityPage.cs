@@ -137,7 +137,7 @@ namespace XenAdmin.Wizards.ImportWizard
         /// <summary>
 		/// Package containing the selected OVF appliance.
 		/// </summary>
-        public Package SelectedOvfPackage { private get; set; }
+        public Package SelectedOvfPackage { internal get; set; }
 
 		#endregion
 

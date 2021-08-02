@@ -97,7 +97,7 @@ namespace XenAdmin.Wizards.ImportWizard
 
 		#region Accessors
 
-		public bool IsWim { private get; set; }
+		public bool IsWim { internal get; set; }
 
 		public string VmName { get { return m_textBoxVMName.Text; } }
 

@@ -80,7 +80,7 @@ namespace XenAdmin.Wizards.ImportWizard
 
         public EnvelopeType SelectedOvfEnvelope
         {
-            private get
+            internal get
             {
                 return _selectedOvfEnvelope;
             }

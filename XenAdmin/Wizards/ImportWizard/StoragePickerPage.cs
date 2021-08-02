@@ -45,8 +45,9 @@ namespace XenAdmin.Wizards.ImportWizard
 	public partial class StoragePickerPage : XenTabPage
 	{
 		#region Private fields
-		private Host m_targetHost;
-		private IXenConnection m_targetConnection;
+
+        internal Host MTargetHost { set; get; }
+		internal IXenConnection MTargetConnection { get; set; }
 		private volatile Task m_importTask;
 		private bool m_alreadyFoundVM;
 		private ActionProgressDialog m_actionDialog;
@@ -98,8 +99,8 @@ namespace XenAdmin.Wizards.ImportWizard
 				SetButtonNextEnabled(false);
                 m_buttonPreviousEnabled = false;
                 OnPageUpdated();
-                ImportXvaAction = new ImportVmAction(m_targetHost == null ? m_targetConnection : m_targetHost.Connection,
-                    m_targetHost, FilePath, SR,
+                ImportXvaAction = new ImportVmAction(MTargetHost == null ? MTargetConnection : MTargetHost.Connection,
+                    MTargetHost, FilePath, SR,
                     VMOperationCommand.WarningDialogHAInvalidConfig, VMOperationCommand.StartDiagnosisForm);
 				ImportXvaAction.Completed += m_importXvaAction_Completed;
 
@@ -119,7 +120,7 @@ namespace XenAdmin.Wizards.ImportWizard
         public override void PopulatePage()
         {
             SetButtonNextEnabled(false);
-            m_srPicker.PopulateAsync(SrPicker.SRPickerType.VM, m_targetConnection, m_targetHost, null, null);
+            m_srPicker.PopulateAsync(SrPicker.SRPickerType.VM, MTargetConnection, MTargetHost, null, null);
             IsDirty = true;
         }
 
@@ -146,19 +147,6 @@ namespace XenAdmin.Wizards.ImportWizard
 		public VM ImportedVm { get; private set; }
 
 		#endregion
-
-		/// <summary>
-		/// Should be called before the Affinity is set.
-		/// </summary>
-		public void SetConnection(IXenConnection con)
-		{
-			m_targetConnection = con;
-		}
-
-		public void SetTargetHost(Host host)
-		{
-			m_targetHost = host;
-		}
 
 		#region Private methods
 
@@ -196,12 +184,12 @@ namespace XenAdmin.Wizards.ImportWizard
 			while (ImportXvaAction.RelatedTask == null)
 				Thread.Sleep(100);
 
-			while ((m_importTask = m_targetConnection.Resolve(ImportXvaAction.RelatedTask)) == null)
+			while ((m_importTask = MTargetConnection.Resolve(ImportXvaAction.RelatedTask)) == null)
 				Thread.Sleep(100);
 
             // We register a XenObjectsUpdated event handler where we check that the import task has the object creation phase marked as "complete"; 
             // Once the object creation is complete, we look for the vm; When we found the vm we unregister this event handler;
-            m_targetConnection.XenObjectsUpdated += targetConnection_XenObjectsUpdated;
+            MTargetConnection.XenObjectsUpdated += targetConnection_XenObjectsUpdated;
 
 			Program.Invoke(this, CheckTask);
 		}
@@ -233,11 +221,11 @@ namespace XenAdmin.Wizards.ImportWizard
             {
                 // Should never get here (as we unregister XenObjectsUpdated event handler after we find the vm) but just in case,
                 // unregister XenObjectsUpdated event handler
-                m_targetConnection.XenObjectsUpdated -= targetConnection_XenObjectsUpdated;
+                MTargetConnection.XenObjectsUpdated -= targetConnection_XenObjectsUpdated;
                 return;
             }
 
-            foreach (VM vm in m_targetConnection.Cache.VMs)
+            foreach (VM vm in MTargetConnection.Cache.VMs)
             {
                 if (!vm.other_config.ContainsKey(ImportVmAction.IMPORT_TASK))
                     continue;
@@ -250,7 +238,7 @@ namespace XenAdmin.Wizards.ImportWizard
                     ImportedVm = vm;
 
                     // We found the VM, unregister XenObjectsUpdated event handler
-                    m_targetConnection.XenObjectsUpdated -= targetConnection_XenObjectsUpdated;
+                    MTargetConnection.XenObjectsUpdated -= targetConnection_XenObjectsUpdated;
 
                     // And close the dialog, flick to next page.
                     m_actionDialog.Close();
@@ -279,7 +267,7 @@ namespace XenAdmin.Wizards.ImportWizard
 				if (!(ImportXvaAction.Succeeded) || ImportXvaAction.Cancelled)
 				{
                     // task failed or has been cancelled, unregister XenObjectsUpdated event handler
-                    m_targetConnection.XenObjectsUpdated -= targetConnection_XenObjectsUpdated;
+                    MTargetConnection.XenObjectsUpdated -= targetConnection_XenObjectsUpdated;
 
 					// Give the user a chance to correct any errors
 					m_actionDialog = null;
