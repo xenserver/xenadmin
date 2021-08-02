@@ -6013,7 +6013,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to {0}
         ///
-        ///Deleting this bond will automatically transfer the management and secondary interfaces on the bond to the first other pool member of the bond: 
+        ///Deleting this bond will automatically transfer the management and secondary interfaces on the bond to the first of the bonded members: 
         ///
         ///- [XenCenter] connections to the pool will temporarily be disturbed
         ///
@@ -6030,7 +6030,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to {0}
         ///
-        ///Deleting this bond will automatically transfer the management interface on the bond to the first other pool member of the bond: 
+        ///Deleting this bond will automatically transfer the management interface on the bond to the first of the bonded members: 
         ///
         ///- [XenCenter] connections to the pool will temporarily be disturbed
         ///
@@ -24352,7 +24352,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You must eject all other pool members from the pool before you can delete the pool..
+        ///   Looks up a localized string similar to You must eject all other pool members from the pool before you can delete it..
         /// </summary>
         public static string MESSAGEBOX_SLAVES_EJECT {
             get {
@@ -25904,7 +25904,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your current role on the other pool member is not authorized to add it to a pool.
+        ///   Looks up a localized string similar to Your current role on this server is not authorized to add it to a pool.
         /// </summary>
         public static string NEWPOOL_SLAVE_ROLE {
             get {
@@ -27634,7 +27634,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} (Other pool member).
+        ///   Looks up a localized string similar to {0} (Bonded member).
         /// </summary>
         public static string NIC_SLAVE {
             get {
