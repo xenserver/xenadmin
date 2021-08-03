@@ -122,7 +122,13 @@ namespace XenAdmin.Wizards
 
         protected override void UpdateWizardContent(XenTabPage senderPage)
         {
-            if (senderPage.GetType() == typeof(AssignPriorities))
+            Type type = senderPage.GetType();
+
+            if(type == typeof(Intro))
+            {
+                NotifyNextPagesOfChange(xenTabPageChooseSR, xenTabPageAssignPriorities, xenTabPageHaFinish);
+            }
+            else if (type == typeof(AssignPriorities))
             {
                 xenTabPageHaFinish.HeartbeatSrName = xenTabPageChooseSR.SelectedHeartbeatSR.Name();
                 xenTabPageHaFinish.Ntol = xenTabPageAssignPriorities.Ntol;

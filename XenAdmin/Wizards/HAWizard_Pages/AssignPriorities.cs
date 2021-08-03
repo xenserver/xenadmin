@@ -53,6 +53,11 @@ namespace XenAdmin.Wizards.HAWizard_Pages
         private readonly CollectionChangeEventHandler VM_CollectionChangedWithInvoke;
         private readonly List<VM> _vmsQueuedForUpdate = new List<VM>();
 
+        protected override bool ImplementsIsDirty()
+        {
+            return true;
+        }
+
         /// <summary>
         /// May not be set to null.
         /// </summary>
@@ -76,11 +81,15 @@ namespace XenAdmin.Wizards.HAWizard_Pages
         {
             Debug.Assert(connection != null, "Connection is null; set it to non-null before calling this method.");
 
-            UpdateMenuItems();
-            PopulateVMs();
-            haNtolIndicator.Connection = Connection;
-            haNtolIndicator.Settings = getCurrentSettings();
-            StartNtolUpdate();
+            if (IsDirty)
+            {
+                UpdateMenuItems();
+                PopulateVMs();
+                haNtolIndicator.Connection = Connection;
+                haNtolIndicator.Settings = getCurrentSettings();
+                StartNtolUpdate();
+                IsDirty = false;
+            }
         }
 
         private void UpdateMenuItems()
