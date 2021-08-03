@@ -50,7 +50,7 @@ namespace XenAdmin.SettingsPanels
         public VM vm;
         private List<VGPU> currentGpus = new List<VGPU>();
         private GPU_group[] gpu_groups;
-        private bool gpusAvailable;
+        public bool GpusAvailable { get; private set; }
 
         public GpuEditPage()
         {
@@ -115,7 +115,7 @@ namespace XenAdmin.SettingsPanels
             {
                 string txt = Messages.UNAVAILABLE;
 
-                if (gpusAvailable)
+                if (GpusAvailable)
                 {
                     var vGpus = VGpus;
                     txt = vGpus.Count > 0 ? string.Join(",", vGpus.Select(v => v.VGpuTypeDescription())) : Messages.GPU_NONE;
@@ -159,9 +159,9 @@ namespace XenAdmin.SettingsPanels
             gpu_groups = Connection.Cache.GPU_groups.Where(g => g.PGPUs.Count > 0 && g.supported_VGPU_types.Count != 0).ToArray();
             //not showing empty groups
 
-            gpusAvailable = gpu_groups.Length > 0;
+            GpusAvailable = gpu_groups.Length > 0;
 
-            if (gpusAvailable)
+            if (GpusAvailable)
             {
                 PopulateGrid();
                 ShowHideWarnings();
@@ -213,7 +213,7 @@ namespace XenAdmin.SettingsPanels
 
         public void ShowHideWarnings()
         {
-            if (!gpusAvailable)
+            if (!GpusAvailable)
                 return;
 
             var vGpus = VGpus;

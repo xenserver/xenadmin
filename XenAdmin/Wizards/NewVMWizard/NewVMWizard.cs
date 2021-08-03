@@ -221,7 +221,7 @@ namespace XenAdmin.Wizards.NewVMWizard
 
                 RemovePage(pageVgpu);
                 gpuCapability = Helpers.GpuCapability(xenConnection) && selectedTemplate.CanHaveGpu();
-                if (gpuCapability)
+                if (gpuCapability && pageVgpu.GpusAvailable)
                     AddAfterPage(page_5_CpuMem, pageVgpu);
 
                 RemovePage(page_1b_BiosLocking);
