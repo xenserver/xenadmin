@@ -13,9 +13,10 @@ namespace XenAdmin.Dialogs
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing)
             {
-                components.Dispose();
+                titleFont?.Dispose();
+                components?.Dispose();
             }
             base.Dispose(disposing);
         }
@@ -31,7 +32,7 @@ namespace XenAdmin.Dialogs
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VerticallyTabbedDialog));
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.verticalTabs = new XenAdmin.Controls.VerticalTabs();
-            this.blueBorder = new XenAdmin.Controls.BlueBorderPanel();
+            this.blueBorder = new System.Windows.Forms.Panel();
             this.TopPanel = new XenAdmin.Controls.GradientPanel.HorizontalGradientPanel();
             this.TabImage = new System.Windows.Forms.PictureBox();
             this.TabTitle = new System.Windows.Forms.Label();
@@ -73,7 +74,6 @@ namespace XenAdmin.Dialogs
             // blueBorder
             // 
             this.blueBorder.BackColor = System.Drawing.SystemColors.Window;
-            this.blueBorder.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(158)))), ((int)(((byte)(189)))));
             this.blueBorder.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.blueBorder.Controls.Add(this.TopPanel);
             this.blueBorder.Controls.Add(this.ContentPanel);
@@ -151,12 +151,12 @@ namespace XenAdmin.Dialogs
 
         private System.Windows.Forms.PictureBox TabImage;
         private System.Windows.Forms.Label TabTitle;
-        private XenAdmin.Controls.GradientPanel.GradientPanel TopPanel;
+        private Controls.GradientPanel.HorizontalGradientPanel TopPanel;
         protected System.Windows.Forms.Panel ContentPanel;
         protected XenAdmin.Controls.VerticalTabs verticalTabs;
         protected System.Windows.Forms.Button cancelButton;
         protected System.Windows.Forms.Button okButton;
         protected System.Windows.Forms.SplitContainer splitContainer;
-        protected XenAdmin.Controls.BlueBorderPanel blueBorder;
+        protected System.Windows.Forms.Panel blueBorder;
     }
 }

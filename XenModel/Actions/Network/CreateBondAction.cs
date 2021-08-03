@@ -83,11 +83,11 @@ namespace XenAdmin.Actions
 
             Pool = Helpers.GetPoolOfOne(Connection);
             if (Pool == null)
-                throw new Failure(Failure.INTERNAL_ERROR, Messages.POOL_GONE);
+                throw new Failure(Failure.INTERNAL_ERROR, string.Format(Messages.POOL_GONE, BrandManager.BrandConsole));
 
             Master = Connection.Resolve(Pool.master);
             if (Master == null)
-                throw new Failure(Failure.INTERNAL_ERROR, Messages.POOL_MASTER_GONE);
+                throw new Failure(Failure.INTERNAL_ERROR, string.Format(Messages.POOL_MASTER_GONE, BrandManager.BrandConsole));
 
             foreach (Host host in Connection.Cache.Hosts)
                 AppliesTo.Add(host.opaque_ref);
@@ -159,11 +159,11 @@ namespace XenAdmin.Actions
 
                     Bond new_bond = Connection.WaitForCache(new XenRef<Bond>(Result));
                     if (new_bond == null)
-                        throw new Failure(Failure.INTERNAL_ERROR, Messages.BOND_GONE);
+                        throw new Failure(Failure.INTERNAL_ERROR, string.Format(Messages.BOND_GONE, BrandManager.BrandConsole));
 
                     PIF new_master = Connection.Resolve(new_bond.master);
                     if (new_master == null)
-                        throw new Failure(Failure.INTERNAL_ERROR, Messages.BOND_MASTER_GONE);
+                        throw new Failure(Failure.INTERNAL_ERROR, string.Format(Messages.BOND_MASTER_GONE, BrandManager.BrandConsole));
 
                     new_bonds.Add(new NewBond(new_bond, new_master, pifs));
 

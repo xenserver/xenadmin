@@ -13,9 +13,10 @@ namespace XenAdmin.TabPages
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing)
             {
-                components.Dispose();
+                titleLabelFont?.Dispose();
+                components?.Dispose();
             }
             base.Dispose(disposing);
         }
@@ -46,7 +47,7 @@ namespace XenAdmin.TabPages
             // tableLayoutPanelBanner
             // 
             resources.ApplyResources(this.tableLayoutPanelBanner, "tableLayoutPanelBanner");
-            this.tableLayoutPanelBanner.Controls.Add(this.deprecationBanner1, 1, 0);
+            this.tableLayoutPanelBanner.Controls.Add(this.deprecationBanner1, 0, 0);
             this.tableLayoutPanelBanner.Name = "tableLayoutPanelBanner";
             // 
             // deprecationBanner1
@@ -54,6 +55,7 @@ namespace XenAdmin.TabPages
             resources.ApplyResources(this.deprecationBanner1, "deprecationBanner1");
             this.deprecationBanner1.BackColor = System.Drawing.Color.LightCoral;
             this.deprecationBanner1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tableLayoutPanelBanner.SetColumnSpan(this.deprecationBanner1, 3);
             this.deprecationBanner1.Name = "deprecationBanner1";
             // 
             // gradientPanel1
@@ -88,12 +90,10 @@ namespace XenAdmin.TabPages
         }
 
         #endregion
-
-        private XenAdmin.Controls.GradientPanel.GradientPanel gradientPanel1;
         private System.Windows.Forms.Label titleLabel;
         protected System.Windows.Forms.Panel pageContainerPanel;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelBanner;
         private XenAdmin.Controls.DeprecationBanner deprecationBanner1;
-
+        private Controls.GradientPanel.HorizontalGradientPanel gradientPanel1;
     }
 }

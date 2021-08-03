@@ -156,9 +156,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             {
                 var poolHostsToUpgrade = pool.HostsToUpgrade();
                 hostsToUpgrade.AddRange(poolHostsToUpgrade);
-                hostsToUpgradeOrUpdate.AddRange(ApplyUpdatesToNewVersion
-                    ? HostsToUpgradeOrUpdate(pool)
-                    : poolHostsToUpgrade);
+                hostsToUpgradeOrUpdate.AddRange(poolHostsToUpgrade);
             }
 
             //XenCenter version check (if any of the selected server version is not the latest)
@@ -166,7 +164,8 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             if (latestCrVersion != null &&
                 hostsToUpgradeOrUpdate.Any(host => new Version(Helpers.HostProductVersion(host)) < latestCrVersion.Version))
             {
-                groups.Add(new CheckGroup(Messages.CHECKING_XENCENTER_VERSION, new List<Check> {new XenCenterVersionCheck(null)}));
+                groups.Add(new CheckGroup(string.Format(Messages.CHECKING_XENCENTER_VERSION, BrandManager.BrandConsole),
+                    new List<Check> {new ClientVersionCheck(null)}));
             }
 
             //HostMaintenanceModeCheck checks - for hosts that will be upgraded or updated
@@ -211,6 +210,15 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
             if (vSwitchChecks.Count > 0)
                 groups.Add(new CheckGroup(Messages.CHECKING_VSWITCH_CONTROLLER_GROUP, vSwitchChecks));
+
+            //Health Check check - for each pool
+            var hcChecks = (from Pool pool in SelectedPools
+                let check = new HealthCheckServiceCheck(pool, InstallMethodConfig)
+                where check.CanRun()
+                select check as Check).ToList();
+
+            if (hcChecks.Count > 0)
+                groups.Add(new CheckGroup(Messages.CHECKING_HEALTH_CHECK_SERVICE, hcChecks));
 
             //protocol check - for each pool
             var sslChecks = (from Host server in SelectedMasters
@@ -275,18 +283,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
             if (gfs2Checks.Count > 0) 
                 groups.Add(new CheckGroup(Messages.CHECKING_CLUSTERING_STATUS, gfs2Checks));
-
-            //Checking automated updates are possible if apply updates checkbox is ticked
-            if (ApplyUpdatesToNewVersion)
-            {
-                var automatedUpdateChecks = (from Host server in SelectedMasters
-                    select new AutomatedUpdatesLicenseCheck(server) as Check).ToList();
-
-                automatedUpdateChecks.Add(new CfuAvailabilityCheck());
-
-                groups.Add(new CheckGroup(Messages.CHECKING_AUTOMATED_UPDATES_POSSIBLE,
-                    automatedUpdateChecks));
-            }
 
             return groups;
         }

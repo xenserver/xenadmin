@@ -32,6 +32,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Commands;
 using XenAdmin.Network;
@@ -140,13 +141,24 @@ namespace XenAdmin.Dialogs
                     log.Error("Disconnected during create pool");
                     return;
                 }
+
                 List<Host> slaves = getSlaves();
                 // Check supp packs and warn
                 List<string> badSuppPacks = PoolJoinRules.HomogeneousSuppPacksDiffering(slaves, master);
-                if (!HelpersGUI.GetPermissionFor(badSuppPacks,
-                    Messages.NEW_POOL_SUPP_PACK, Messages.NEW_POOL_SUPP_PACKS, false, "PoolJoinSuppPacks"))
+
+                if (!Program.RunInAutomatedTestMode && badSuppPacks.Count > 0)
                 {
-                    return;
+                    string msg = string.Format(badSuppPacks.Count == 1 ? Messages.NEW_POOL_SUPP_PACK : Messages.NEW_POOL_SUPP_PACKS,
+                        string.Join("\n", badSuppPacks));
+
+                    using (var dlg = new WarningDialog(msg,
+                            new ThreeButtonDialog.TBDButton(Messages.PROCEED, DialogResult.OK, selected: false),
+                            new ThreeButtonDialog.TBDButton(Messages.CANCEL, DialogResult.Cancel, selected: true))
+                        {HelpNameSetter = "PoolJoinSuppPacks"})
+                    {
+                        if (dlg.ShowDialog(Program.MainWindow) == DialogResult.Cancel)
+                            return;
+                    }
                 }
 
                 // Are there any hosts which are forbidden from masking their CPUs for licensing reasons?
@@ -156,25 +168,63 @@ namespace XenAdmin.Dialogs
                     Helpers.FeatureForbidden(host, Host.RestrictCpuMasking) &&
                     !PoolJoinRules.FreeHostPaidMaster(host, master, false)))  // in this case we can upgrade the license and then mask the CPU
                 {
-                    using (var dlg = new UpsellDialog(HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_CPUMASKING : Messages.UPSELL_BLURB_CPUMASKING + Messages.UPSELL_BLURB_TRIAL,
-                                                        InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL))
-                        dlg.ShowDialog(this);
+                    UpsellDialog.ShowUpsellDialog(Messages.UPSELL_BLURB_CPUMASKING, this);
                     return;
                 }
 
-                if (!HelpersGUI.GetPermissionFor(slaves.FindAll(host => PoolJoinRules.FreeHostPaidMaster(host, master, false)),
-                    Messages.NEW_POOL_LICENSE_MESSAGE, Messages.NEW_POOL_LICENSE_MESSAGE_MULTIPLE, true, "PoolJoinRelicensing")
-                    ||
-                    !HelpersGUI.GetPermissionFor(slaves.FindAll(host => !PoolJoinRules.CompatibleCPUs(host, master, false)),
-                    Messages.NEW_POOL_CPU_MASKING_MESSAGE, Messages.NEW_POOL_CPU_MASKING_MESSAGE_MULTIPLE, true, "PoolJoinCpuMasking")
-                    ||
-                    !HelpersGUI.GetPermissionFor(slaves.FindAll(host => !PoolJoinRules.CompatibleAdConfig(host, master, false)),
-                    Messages.NEW_POOL_AD_MESSAGE, Messages.NEW_POOL_AD_MESSAGE_MULTIPLE, true, "PoolJoinAdConfiguring")
-                    ||
-                    !HelpersGUI.GetPermissionForCpuFeatureLevelling(slaves, Helpers.GetPoolOfOne(master.Connection)))
+                if (!Program.RunInAutomatedTestMode)
                 {
-                    return;
+                    var hosts1 = slaves.FindAll(host => PoolJoinRules.FreeHostPaidMaster(host, master, false));
+                    if (hosts1.Count > 0)
+                    {
+                        string msg = string.Format(hosts1.Count == 1
+                                ? Messages.NEW_POOL_LICENSE_MESSAGE
+                                : Messages.NEW_POOL_LICENSE_MESSAGE_MULTIPLE,
+                            string.Join("\n", hosts1.Select(h => h.Name())));
+
+                        using (var dlg = new WarningDialog(msg, ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
+                            {HelpNameSetter = "PoolJoinRelicensing"})
+                        {
+                            if (dlg.ShowDialog(Program.MainWindow) == DialogResult.No)
+                                return;
+                        }
+                    }
+
+                    var hosts2 = slaves.FindAll(host => !PoolJoinRules.CompatibleCPUs(host, master, false));
+                    if (hosts2.Count > 0)
+                    {
+                        string msg = string.Format(hosts2.Count == 1
+                                ? Messages.NEW_POOL_CPU_MASKING_MESSAGE
+                                : Messages.NEW_POOL_CPU_MASKING_MESSAGE_MULTIPLE,
+                            string.Join("\n", hosts2.Select(h => h.Name())), BrandManager.ProductBrand);
+
+                        using (var dlg = new WarningDialog(msg, ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
+                            {HelpNameSetter = "PoolJoinCpuMasking"})
+                        {
+                            if (dlg.ShowDialog(Program.MainWindow) == DialogResult.No)
+                                return;
+                        }
+                    }
+
+                    var hosts3 = slaves.FindAll(host => !PoolJoinRules.CompatibleAdConfig(host, master, false));
+                    if (hosts3.Count > 0)
+                    {
+                        string msg = string.Format(hosts3.Count == 1
+                                ? Messages.NEW_POOL_AD_MESSAGE
+                                : Messages.NEW_POOL_AD_MESSAGE_MULTIPLE,
+                            string.Join("\n", hosts3.Select(h => h.Name())));
+
+                        using (var dlg = new WarningDialog(msg, ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
+                            {HelpNameSetter = "PoolJoinAdConfiguring"})
+                        {
+                            if (dlg.ShowDialog(Program.MainWindow) == DialogResult.No)
+                                return;
+                        }
+                    }
                 }
+
+                if (!HelpersGUI.GetPermissionForCpuFeatureLevelling(slaves, Helpers.GetPoolOfOne(master.Connection)))
+                    return;
 
                 log.DebugFormat("Creating new pool {0} ({1}) with master {2}", poolName, poolDescription, Helpers.GetName(master));
                 foreach (Host slave in slaves)

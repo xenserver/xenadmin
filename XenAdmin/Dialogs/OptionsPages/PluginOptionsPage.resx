@@ -220,13 +220,13 @@
     <value>3, 3, 3, 12</value>
   </data>
   <data name="labelIntro.Size" type="System.Drawing.Size, System.Drawing">
-    <value>303, 15</value>
+    <value>268, 15</value>
   </data>
   <data name="labelIntro.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="labelIntro.Text" xml:space="preserve">
-    <value>Plug-ins can be used to extend [XenCenter]'s functionality.</value>
+    <value>Plug-ins can be used to extend {0}'s functionality.</value>
   </data>
   <data name="&gt;&gt;labelIntro.Name" xml:space="preserve">
     <value>labelIntro</value>
@@ -256,13 +256,13 @@
     <value>3, 12, 3, 3</value>
   </data>
   <data name="linkLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 15</value>
+    <value>130, 15</value>
   </data>
   <data name="linkLabel1.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
   <data name="linkLabel1.Text" xml:space="preserve">
-    <value>Find [XenCenter] plug-ins online</value>
+    <value>Find {0} plug-ins online</value>
   </data>
   <data name="&gt;&gt;linkLabel1.Name" xml:space="preserve">
     <value>linkLabel1</value>

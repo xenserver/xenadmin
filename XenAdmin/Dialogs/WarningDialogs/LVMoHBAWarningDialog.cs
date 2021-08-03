@@ -57,6 +57,7 @@ namespace XenAdmin.Dialogs.WarningDialogs
             bool foundExistingSR, SR.SRTypes existingSrType, SR.SRTypes requestedSrType)
         {
             InitializeComponent();
+            labelWarning.Text = string.Format(labelWarning.Text, BrandManager.ProductBrand, BrandManager.BrandConsole);
             _connection = connection;
             this.deviceDetails = deviceDetails;
             this.remainingDevicesCount = remainingDevicesCount;

@@ -29,40 +29,49 @@
  * SUCH DAMAGE.
  */
 
-using XenAdmin.Diagnostics.Problems;
+using System.Collections.Generic;
 using XenAdmin.Core;
+using XenAdmin.Diagnostics.Problems;
+using XenAdmin.Diagnostics.Problems.PoolProblem;
+using XenAdmin.Model;
 using XenAPI;
 
 namespace XenAdmin.Diagnostics.Checks
 {
-    public class XenCenterVersionCheck : Check
+    class HealthCheckServiceCheck : PoolCheck
     {
-        private XenServerVersion _newServerVersion;
+        private readonly Dictionary<string, string> _installMethodConfig;
 
-        public XenCenterVersionCheck(XenServerVersion newServerVersion)
+        public HealthCheckServiceCheck(Pool pool, Dictionary<string, string> installMethodConfig)
+            : base(pool)
         {
-            _newServerVersion = newServerVersion;
+            _installMethodConfig = installMethodConfig;
         }
-        
+
+        public override string Description => Messages.CHECKING_HEALTH_CHECK_SERVICE;
+
+        public override bool CanRun()
+        {
+            if (Helpers.PostStockholm(Pool.Connection))
+                return false;
+
+            return Pool.HealthCheckStatus() == HealthCheckStatus.Enabled;
+        }
+
         protected override Problem RunCheck()
         {
-            var requiredXenCenterVersion = Updates.GetRequiredXenCenterVersion(_newServerVersion);
-            if (requiredXenCenterVersion == null) 
-                return null;
-            if (_newServerVersion != null) 
-                return new XenCenterVersionProblem(this, requiredXenCenterVersion);
-            else
-                return new XenCenterVersionWarning(this, requiredXenCenterVersion);
-        }
+            string upgradePlatformVersion = null;
 
-        public override string Description
-        {
-            get { return Messages.XENCENTER_VERSION_CHECK_DESCRIPTION; }
-        }
+            if (_installMethodConfig != null)
+                Host.TryGetUpgradeVersion(Helpers.GetMaster(Pool.Connection), _installMethodConfig, out upgradePlatformVersion, out _);
 
-        public override IXenObject XenObject
-        {
-            get { return null; }
+            if (Helpers.PostStockholm(upgradePlatformVersion))
+                return new HealthCheckServiceProblem(this, Pool);
+
+            if (string.IsNullOrEmpty(upgradePlatformVersion))
+                return new HealthCheckServiceWarning(this, Pool);
+
+            return null;
         }
     }
 }

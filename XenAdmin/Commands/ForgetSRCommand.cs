@@ -85,21 +85,9 @@ namespace XenAdmin.Commands
                 && !HelpersGUI.GetActionInProgress(sr);
         }
 
-        public override string MenuText
-        {
-            get
-            {
-                return Messages.MAINWINDOW_FORGET_SR;
-            }
-        }
+        public override string MenuText => Messages.MAINWINDOW_FORGET_SR;
 
-        protected override bool ConfirmationRequired
-        {
-            get
-            {
-                return true;
-            }
-        }
+        protected override bool ConfirmationRequired => true;
 
         protected override string ConfirmationDialogText
         {
@@ -144,7 +132,7 @@ namespace XenAdmin.Commands
             }
             else if (!sr.CanCreateWithXenCenter())
             {
-                return Messages.SR_CANNOT_BE_FORGOTTEN_WITH_XC;
+                return string.Format(Messages.SR_CANNOT_BE_FORGOTTEN_WITH_XC, BrandManager.BrandConsole);
             }
             else if (HelpersGUI.GetActionInProgress(sr))
             {
@@ -153,20 +141,8 @@ namespace XenAdmin.Commands
             return base.GetCantExecuteReasonCore(item);
         }
 
-        protected override string ConfirmationDialogYesButtonLabel
-        {
-            get
-            {
-                return Messages.MESSAGEBOX_FORGET_SR_CONTINUE_YES_BUTTON_LABEL;
-            }
-        }
+        protected override string ConfirmationDialogYesButtonLabel => Messages.MESSAGEBOX_FORGET_SR_CONTINUE_YES_BUTTON_LABEL;
 
-        protected override bool ConfirmationDialogNoButtonSelected
-        {
-            get
-            {
-                return true;
-            }
-        }
+        protected override bool ConfirmationDialogNoButtonSelected => true;
     }
 }

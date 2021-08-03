@@ -176,12 +176,14 @@ namespace XenAPI
 
         public override string Description()
         {
-            if (name_description == "Default install of XenServer" || name_description == "Default install") // i18n: CA-30372, CA-207273
-                return string.Format(Messages.DEFAULT_INSTALL_OF_XENSERVER, software_version.ContainsKey("product_brand") ? software_version["product_brand"] : Messages.XENSERVER);
-            else if (name_description == null)
-                return "";
-            else
-                return name_description;
+            // i18n: CA-30372, CA-207273
+            if (name_description == "Default install of XenServer" || name_description == "Default install")
+                return string.Format(Messages.DEFAULT_INSTALL_OF_XENSERVER,
+                    software_version.ContainsKey("product_brand")
+                        ? software_version["product_brand"]
+                        : BrandManager.ProductBrand);
+            
+            return name_description ?? "";
         }
 
         /// <summary>

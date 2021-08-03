@@ -34,55 +34,34 @@ using CFUValidator.CommandLineOptions;
 
 namespace CFUValidator
 {
-    class Program
+    static class Program
     {
         static void Main(string[] args)
         {
-            CFUValidator cfuValidator = null;
             try
             {
-                CommandLineParser parser = new CommandLineParser(args, CFUCommandLineOptionManager.EmptyArguments);
+                CommandLineParser parser = new CommandLineParser(args);
                 parser.Parse();
 
                 CFUCommandLineOptionManager manager = new CFUCommandLineOptionManager(parser.ParsedArguments);
 
-                if(manager.IsHelpRequired || args.Length == 0)
-                {
-                    Console.WriteLine(manager.Help);
-                    Environment.Exit(1);
-                }
-                    
-                cfuValidator = new CFUValidator(manager.FileSource, manager.XmlLocation,
-                                                manager.ServerVersion, manager.InstalledHotfixes, 
-                                                manager.CheckHotfixContents);
-                cfuValidator.StatusChanged += cfuValidator_StatusChanged;
-                cfuValidator.Run();
-                Console.WriteLine(cfuValidator.Output);
+                var cfuValidator = new CFUValidator(manager.XmlLocationType, manager.XmlLocation,
+                    manager.ServerVersion, manager.InstalledHotfixes,
+                    manager.CheckHotfixContents);
 
+                cfuValidator.Validate(Console.WriteLine);
             }
-            catch (CFUValidationException ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+
+                if (!(ex is CFUValidationException))
+                    Console.WriteLine(ex.StackTrace);
+
                 Environment.Exit(1);
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine("\n **** Unexpected exception occured ****: " + ex.Message);
-                Console.WriteLine(ex.StackTrace);
-                Environment.Exit(1);
-            }
-            finally
-            {
-                if (cfuValidator != null)
-                    cfuValidator.StatusChanged -= cfuValidator_StatusChanged;
             }
 
             Environment.Exit(0);
-        }
-
-        static void cfuValidator_StatusChanged(object sender, EventArgs e)
-        {
-            Console.WriteLine(sender as string);
         }
     }
 }

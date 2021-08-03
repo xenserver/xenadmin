@@ -95,7 +95,7 @@ namespace XenAdmin.Commands
                     return;
                 }
 
-                string message = string.Format(will_disturb_secondary ? Messages.BOND_DELETE_WILL_DISTURB_BOTH : Messages.BOND_DELETE_WILL_DISTURB_PRIMARY, msg);
+                string message = string.Format(will_disturb_secondary ? Messages.BOND_DELETE_WILL_DISTURB_BOTH : Messages.BOND_DELETE_WILL_DISTURB_PRIMARY, msg, BrandManager.BrandConsole);
 
                 DialogResult result;
                 using (var dlg = new WarningDialog(message,

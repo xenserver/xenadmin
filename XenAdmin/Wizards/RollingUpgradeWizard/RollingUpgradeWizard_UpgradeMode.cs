@@ -42,6 +42,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         public RollingUpgradeWizardUpgradeModePage()
         {
             InitializeComponent();
+            label3.Text = string.Format(label3.Text, BrandManager.ProductBrand);
             comboBoxUpgradeMethod.Items.AddRange(new object[] {new HttpItem(), new NfsItem(), new FtpItem()});
             comboBoxUpgradeMethod.SelectedIndex = 0;
         }

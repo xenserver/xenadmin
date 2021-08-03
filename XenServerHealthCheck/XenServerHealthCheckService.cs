@@ -47,7 +47,7 @@ namespace XenServerHealthCheck
         public XenServerHealthCheckService()
         {
             InitializeComponent();
-            ServiceName = XenAdmin.Core.BrandManager.PRODUCT_BRAND + " Health Check";
+            ServiceName = XenAdmin.Core.BrandManager.ProductBrand + " Health Check";
             AutoLog = false;
 
             XenAPI.Session.UserAgent = string.Format("XenServerHealthCheck/API-{0}", API_Version.LATEST);

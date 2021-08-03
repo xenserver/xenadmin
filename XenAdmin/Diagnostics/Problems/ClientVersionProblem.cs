@@ -35,75 +35,46 @@ using XenAdmin.Diagnostics.Checks;
 
 namespace XenAdmin.Diagnostics.Problems
 {
-    public class XenCenterVersionProblem : ProblemWithInformationUrl
+    public class ClientVersionProblem : ProblemWithInformationUrl
     {
-        private XenCenterVersion _requiredXenCenterVersion;
+        private ClientVersion _requiredXenCenterVersion;
 
-        public XenCenterVersionProblem(Check check, XenCenterVersion requiredXenCenterVersion)
+        public ClientVersionProblem(Check check, ClientVersion requiredXenCenterVersion)
             : base(check)
         {
             _requiredXenCenterVersion = requiredXenCenterVersion;
         }
 
-        public override string Title
-        {
-            get { return Messages.PROBLEM_XENCENTER_VERSION_TITLE; }
-        }
+        public override string Title => string.Format(Messages.PROBLEM_XENCENTER_VERSION_TITLE, BrandManager.BrandConsole);
 
-        public override string Description
-        {
-            get { return string.Format(Messages.UPDATES_WIZARD_NEWER_XENCENTER_REQUIRED, _requiredXenCenterVersion.Version); }
-        }
+        public override string Description => string.Format(Messages.UPDATES_WIZARD_NEWER_XENCENTER_REQUIRED, BrandManager.BrandConsole, _requiredXenCenterVersion.Version);
 
-        public override string HelpMessage
-        {
-            get { return LinkText; }
-        }
+        public override string HelpMessage => LinkText;
 
-        public override string LinkText
-        {
-            get { return Messages.PATCHING_WIZARD_WEBPAGE_CELL; }
-        }
+        public override string LinkText => Messages.PATCHING_WIZARD_WEBPAGE_CELL;
 
-        public override Uri UriToLaunch
-        {
-            get { return new Uri(_requiredXenCenterVersion.Url); }
-        }
+        public override Uri UriToLaunch => new Uri(_requiredXenCenterVersion.Url);
     }
 
-    public class XenCenterVersionWarning : WarningWithInformationUrl
+    public class ClientVersionWarning : WarningWithInformationUrl
     {
-        private XenCenterVersion _requiredXenCenterVersion;
+        private ClientVersion _requiredXenCenterVersion;
 
-        public XenCenterVersionWarning(Check check, XenCenterVersion requiredXenCenterVersion)
+        public ClientVersionWarning(Check check, ClientVersion requiredXenCenterVersion)
             : base(check)
         {
             _requiredXenCenterVersion = requiredXenCenterVersion;
         }
 
-        public override string Title
-        {
-            get { return Messages.PROBLEM_XENCENTER_VERSION_TITLE; }
-        }
+        public override string Title => string.Format(Messages.PROBLEM_XENCENTER_VERSION_TITLE, BrandManager.BrandConsole);
 
-        public override string Description
-        {
-            get { return string.Format(Messages.UPDATES_WIZARD_NEWER_XENCENTER_WARNING, _requiredXenCenterVersion.Version); }
-        }
+        public override string Description => string.Format(Messages.UPDATES_WIZARD_NEWER_XENCENTER_WARNING,
+            BrandManager.BrandConsole, _requiredXenCenterVersion.Version, BrandManager.ProductBrand);
 
-        public override string HelpMessage
-        {
-            get { return LinkText; }
-        }
+        public override string HelpMessage => LinkText;
 
-        public override string LinkText
-        {
-            get { return Messages.PATCHING_WIZARD_WEBPAGE_CELL; }
-        }
+        public override string LinkText => Messages.PATCHING_WIZARD_WEBPAGE_CELL;
 
-        public override Uri UriToLaunch
-        {
-            get { return new Uri(_requiredXenCenterVersion.Url); }
-        }
+        public override Uri UriToLaunch => new Uri(_requiredXenCenterVersion.Url);
     }
 }

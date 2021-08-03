@@ -37,6 +37,7 @@ using XenAPI;
 using XenAdmin.Controls;
 using XenCenterLib;
 using System.Collections;
+using XenAdmin.Core;
 
 
 namespace XenAdmin.Wizards.NewVMWizard
@@ -329,7 +330,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                 case VM.VmTemplateType.Turbo:
                     return Messages.NEW_VM_WIZARD_TEMPLATEPAGE_TURBO;        
                 case VM.VmTemplateType.Citrix:
-                    return Messages.NEWVMWIZARD_TEMPLATEPAGE_CITRIX;
+                    return BrandManager.CompanyNameShort;
                 case VM.VmTemplateType.Solaris:
                 case VM.VmTemplateType.Misc:
                     return Messages.NEWVMWIZARD_TEMPLATEPAGE_MISC;

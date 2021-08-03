@@ -198,40 +198,42 @@ namespace XenAdmin.Network
             }
             else if (error is WebException w)
             {
-                if (((XenConnection)connection).SuppressErrors)
+                if (connection.SuppressErrors)
                     return;
 
-                var solutionCheckXenServer = 
-                    Properties.Settings.Default.ProxySetting != (int)HTTPHelper.ProxyStyle.DirectConnection ? Messages.SOLUTION_CHECK_XENSERVER_WITH_PROXY : Messages.SOLUTION_CHECK_XENSERVER;
+                var format = Properties.Settings.Default.ProxySetting != (int)HTTPHelper.ProxyStyle.DirectConnection
+                    ? Messages.SOLUTION_CHECK_XENSERVER_WITH_PROXY
+                    : Messages.SOLUTION_CHECK_XENSERVER;
+                var solutionCheckXenServer = string.Format(format, BrandManager.ProductBrand, connection.Hostname);
 
                 switch (w.Status)
                 {
                     case WebExceptionStatus.ConnectionClosed:
-                        AddError(owner, connection, Messages.CONNECTION_CLOSED_BY_SERVER, string.Format(solutionCheckXenServer, ((XenConnection)connection).Hostname));
+                        AddError(owner, connection, Messages.CONNECTION_CLOSED_BY_SERVER, solutionCheckXenServer);
                         break;
                     case WebExceptionStatus.ConnectFailure:
-                        AddError(owner, connection, Messages.CONNECTION_REFUSED, string.Format(solutionCheckXenServer, ((XenConnection)connection).Hostname));
+                        AddError(owner, connection, Messages.CONNECTION_REFUSED, solutionCheckXenServer);
                         break;
                     case WebExceptionStatus.ProtocolError:
                         if (w.Message != null && w.Message.Contains("(404)"))
-                            AddError(owner, connection, string.Format(Messages.ERROR_NO_XENSERVER, ((XenConnection)connection).Hostname), string.Format(solutionCheckXenServer, ((XenConnection)connection).Hostname));
+                            AddError(owner, connection, string.Format(Messages.ERROR_NO_XENSERVER, connection.Hostname), solutionCheckXenServer);
                         else if (w.Message != null && w.Message.Contains("(407)"))
                         {
                             string proxyAddress = Properties.Settings.Default.ProxyAddress;
-                            AddError(owner, connection, string.Format(Messages.ERROR_PROXY_AUTHENTICATION, proxyAddress), string.Format(Messages.SOLUTION_CHECK_PROXY, proxyAddress));
+                            AddError(owner, connection, string.Format(Messages.ERROR_PROXY_AUTHENTICATION, proxyAddress), string.Format(Messages.SOLUTION_CHECK_PROXY, proxyAddress, BrandManager.BrandConsole));
                         }
                         else
                             AddError(owner, connection, Messages.ERROR_UNKNOWN, Messages.SOLUTION_UNKNOWN);
                         break;
                     case WebExceptionStatus.NameResolutionFailure:
-                        AddError(owner, connection, string.Format(Messages.ERROR_NOT_FOUND, ((XenConnection)connection).Hostname), Messages.SOLUTION_NOT_FOUND);
+                        AddError(owner, connection, string.Format(Messages.ERROR_NOT_FOUND, connection.Hostname), Messages.SOLUTION_NOT_FOUND);
                         break;
                     case WebExceptionStatus.ReceiveFailure:
                     case WebExceptionStatus.SendFailure:
-                        AddError(owner, connection, string.Format(Messages.ERROR_NO_XENSERVER, ((XenConnection)connection).Hostname), string.Format(solutionCheckXenServer, ((XenConnection)connection).Hostname));
+                        AddError(owner, connection, string.Format(Messages.ERROR_NO_XENSERVER, connection.Hostname), solutionCheckXenServer);
                         break;
                     case WebExceptionStatus.SecureChannelFailure:
-                        AddError(owner, connection, string.Format(Messages.ERROR_SECURE_CHANNEL_FAILURE, ((XenConnection)connection).Hostname), Messages.SOLUTION_UNKNOWN);
+                        AddError(owner, connection, string.Format(Messages.ERROR_SECURE_CHANNEL_FAILURE, connection.Hostname), Messages.SOLUTION_UNKNOWN);
                         break;
                     default:
                         AddError(owner, connection, Messages.ERROR_UNKNOWN, Messages.SOLUTION_UNKNOWN);
@@ -262,13 +264,14 @@ namespace XenAdmin.Network
                 // This happens if the server API is incompatible with our bindings.  This should
                 // never happen in production, but will happen during development if a field
                 // changes type, for example.
-                AddError(owner, connection, Messages.SERVER_API_INCOMPATIBLE, Messages.SOLUTION_UNKNOWN);
+                AddError(owner, connection, string.Format(Messages.SERVER_API_INCOMPATIBLE, BrandManager.BrandConsole), Messages.SOLUTION_UNKNOWN);
             }
             else if (error is ServerNotSupported)
             {
                 // Server version is too old for this version of XenCenter
-                AddError(owner, connection, string.Format(Messages.SERVER_TOO_OLD, BrandManager.ProductVersion70),
-                    Messages.SERVER_TOO_OLD_SOLUTION);
+                AddError(owner, connection, string.Format(Messages.SERVER_TOO_OLD,
+                        BrandManager.BrandConsole, BrandManager.ProductBrand, BrandManager.ProductVersion70),
+                    string.Format(Messages.SERVER_TOO_OLD_SOLUTION, BrandManager.BrandConsole));
             }
             else
             {

@@ -372,7 +372,7 @@ namespace XenAdmin.Commands
                 return FriendlyErrorNames.VDI_IS_A_PHYSICAL_DEVICE;
 
             if (sr.IsToolsSR())
-                return Messages.CANNOT_DELETE_TOOLS_SR;
+                return string.Format(Messages.CANNOT_DELETE_TOOLS_SR, BrandManager.VmTools);
 
             if (vdi.IsUsedByHA())
                 return Messages.CANNOT_DELETE_HA_VD;

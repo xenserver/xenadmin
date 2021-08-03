@@ -154,10 +154,10 @@ namespace XenAdmin.Wizards
             {
                 imgExperimental.Visible = labelExperimental.Visible = radioButtonUEFIBoot.Enabled || radioButtonUEFISecureBoot.Enabled;
                 labelExperimental.Text = uefiExperimental && uefiSecureExperimental
-                    ? Messages.GUEFI_BOOT_MODES_EXPERIMENTAL_WARNING
+                    ? string.Format(Messages.GUEFI_BOOT_MODES_EXPERIMENTAL_WARNING, BrandManager.ProductBrand)
                     : uefiExperimental
-                        ? Messages.GUEFI_BOOT_MODE_EXPERIMENTAL_WARNING
-                        : Messages.GUEFI_SECUREBOOT_MODE_EXPERIMENTAL_WARNING;
+                        ? string.Format(Messages.GUEFI_BOOT_MODE_EXPERIMENTAL_WARNING, BrandManager.ProductBrand)
+                        : string.Format(Messages.GUEFI_SECUREBOOT_MODE_EXPERIMENTAL_WARNING, BrandManager.ProductBrand);
             }
             else
             {

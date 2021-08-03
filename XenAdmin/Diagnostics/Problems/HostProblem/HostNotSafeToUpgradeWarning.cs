@@ -46,7 +46,8 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
             : base(check)
         {
             _host = host;
-            var newPartitionInfo = string.Format(Messages.NOT_SAFE_TO_UPGRADE_NEW_PARTITION_INFO, BrandManager.ProductVersionPost82);
+            var version = $"{BrandManager.ProductBrand} {BrandManager.ProductVersionPost82}";
+            var newPartitionInfo = string.Format(Messages.NOT_SAFE_TO_UPGRADE_NEW_PARTITION_INFO, version);
 
             string detail;
 
@@ -54,23 +55,23 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
             {
                 case HostNotSafeToUpgradeReason.NotEnoughSpace:
                     _shortMessage = Messages.NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE;
-                    detail = string.Format(Messages.NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_WARNING, BrandManager.ProductVersionPost82);
+                    detail = string.Format(Messages.NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_WARNING, version);
                     break;
                 case HostNotSafeToUpgradeReason.VdiPresent:
                     _shortMessage = Messages.NOT_SAFE_TO_UPGRADE_VDI_PRESENT;
-                    detail = string.Format(Messages.NOT_SAFE_TO_UPGRADE_VDI_PRESENT_WARNING, BrandManager.ProductVersionPost82);
+                    detail = string.Format(Messages.NOT_SAFE_TO_UPGRADE_VDI_PRESENT_WARNING, version);
                     break;
                 case HostNotSafeToUpgradeReason.UtilityPartitionPresent:
                     _shortMessage = Messages.NOT_SAFE_TO_UPGRADE_UTILITY_PARTITION;
-                    detail = string.Format(Messages.NOT_SAFE_TO_UPGRADE_UTILITY_PARTITION_WARNING, BrandManager.ProductVersionPost82);
+                    detail = string.Format(Messages.NOT_SAFE_TO_UPGRADE_UTILITY_PARTITION_WARNING, version);
                     break;
                 case HostNotSafeToUpgradeReason.LegacyPartitionTable:
                     _shortMessage = Messages.NOT_SAFE_TO_UPGRADE_LEGACY_PARTITION_TABLE;
-                    detail = string.Format(Messages.NOT_SAFE_TO_UPGRADE_LEGACY_PARTITION_TABLE_WARNING, BrandManager.ProductVersionPost82);
+                    detail = string.Format(Messages.NOT_SAFE_TO_UPGRADE_LEGACY_PARTITION_TABLE_WARNING, version);
                     break;
                 default:
                     _shortMessage = Messages.NOT_SAFE_TO_UPGRADE_DEFAULT;
-                    detail = string.Format(Messages.NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING, BrandManager.ProductVersionPost82);
+                    detail = string.Format(Messages.NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING, version);
                     break;
             }
             Message = $"{_shortMessage}\n\n{newPartitionInfo}\n\n{detail}";
@@ -92,30 +93,31 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
             : base(check)
         {
             _host = host;
-            var newPartitionInfo = string.Format(Messages.NOT_SAFE_TO_UPGRADE_NEW_PARTITION_INFO, BrandManager.ProductVersionPost82);
+            var version = $"{BrandManager.ProductBrand} {BrandManager.ProductVersionPost82}";
+            var newPartitionInfo = string.Format(Messages.NOT_SAFE_TO_UPGRADE_NEW_PARTITION_INFO, version);
             string detail;
 
             switch (reason)
             {
                 case HostNotSafeToUpgradeReason.NotEnoughSpace:
                     _shortMessage = Messages.NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE;
-                    detail = string.Format(Messages.NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_PROBLEM, BrandManager.ProductVersionPost82);
+                    detail = string.Format(Messages.NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_PROBLEM, version);
                     break;
                 case HostNotSafeToUpgradeReason.VdiPresent:
                     _shortMessage = Messages.NOT_SAFE_TO_UPGRADE_VDI_PRESENT;
-                    detail = string.Format(Messages.NOT_SAFE_TO_UPGRADE_VDI_PRESENT_PROBLEM, BrandManager.ProductVersionPost82);
+                    detail = string.Format(Messages.NOT_SAFE_TO_UPGRADE_VDI_PRESENT_PROBLEM, version);
                     break;
                 case HostNotSafeToUpgradeReason.UtilityPartitionPresent:
                     _shortMessage = Messages.NOT_SAFE_TO_UPGRADE_UTILITY_PARTITION;
-                    detail = string.Format(Messages.NOT_SAFE_TO_UPGRADE_UTILITY_PARTITION_PROBLEM, BrandManager.ProductVersionPost82);
+                    detail = string.Format(Messages.NOT_SAFE_TO_UPGRADE_UTILITY_PARTITION_PROBLEM, version);
                     break;
                 case HostNotSafeToUpgradeReason.LegacyPartitionTable:
                     _shortMessage = Messages.NOT_SAFE_TO_UPGRADE_LEGACY_PARTITION_TABLE;
-                    detail = string.Format(Messages.NOT_SAFE_TO_UPGRADE_LEGACY_PARTITION_TABLE_PROBLEM, BrandManager.ProductVersionPost82);
+                    detail = string.Format(Messages.NOT_SAFE_TO_UPGRADE_LEGACY_PARTITION_TABLE_PROBLEM, version);
                     break;
                 default:
                     _shortMessage = Messages.NOT_SAFE_TO_UPGRADE_DEFAULT;
-                    detail = string.Format(Messages.NOT_SAFE_TO_UPGRADE_DEFAULT_PROBLEM, BrandManager.ProductVersionPost82);
+                    detail = string.Format(Messages.NOT_SAFE_TO_UPGRADE_DEFAULT_PROBLEM, version);
                     break;
             }
             Message = $"{_shortMessage}\n\n{newPartitionInfo}\n\n{detail}";

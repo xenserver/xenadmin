@@ -141,9 +141,9 @@ namespace XenAdmin.Commands
                 return Messages.TOOLTIP_DEACTIVATE_SYSVDI;
 
             if (AreIODriversNeededAndMissing(vm))
-                return string.Format(
-                    vm.HasNewVirtualisationStates() ? Messages.CANNOT_DEACTIVATE_VDI_NEEDS_IO_DRIVERS : Messages.CANNOT_DEACTIVATE_VDI_NEEDS_TOOLS,
-                    Helpers.GetName(vm).Ellipsise(50));
+                return vm.HasNewVirtualisationStates()
+                    ? string.Format(Messages.CANNOT_DEACTIVATE_VDI_NEEDS_IO_DRIVERS, Helpers.GetName(vm).Ellipsise(50))
+                    : string.Format(Messages.CANNOT_DEACTIVATE_VDI_NEEDS_TOOLS, BrandManager.VmTools, Helpers.GetName(vm).Ellipsise(50));
 
             if (!vbd.currently_attached)
                 return string.Format(Messages.CANNOT_DEACTIVATE_NOT_ACTIVE, Helpers.GetName(vm).Ellipsise(50));

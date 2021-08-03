@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>XenCenterLib</RootNamespace>
-    <AssemblyName>XenCenterLib</AssemblyName>
+    <AssemblyName>CoreUtilsLib</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -87,7 +87,6 @@
     <Compile Include="StringUtility.cs" />
     <Compile Include="ToStringWrapper.cs" />
     <Compile Include="Win32.cs" />
-    <Compile Include="XSVersionAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

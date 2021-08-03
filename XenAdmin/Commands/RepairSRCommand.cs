@@ -73,7 +73,8 @@ namespace XenAdmin.Commands
 
             if (srList.Find(s => !s.MultipathAOK()) != null)
             {
-                using (var dlg = new WarningDialog(Messages.MULTIPATH_FAILED) {WindowTitle = Messages.MULTIPATHING})
+                using (var dlg = new WarningDialog(string.Format(Messages.MULTIPATH_FAILED, BrandManager.ProductBrand))
+                    {WindowTitle = Messages.MULTIPATHING})
                     dlg.ShowDialog(Parent);
             }
 

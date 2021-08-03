@@ -29,23 +29,45 @@
  * SUCH DAMAGE.
  */
 
-using System.Drawing;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using CFUValidator.OutputDecorators;
 
-namespace XenAdmin.Controls.Ballooning
+
+namespace CFUValidator.Validators
 {
-    public static class BallooningColors
+    public abstract class Validator : ISummaryGenerator
     {
-        public static Color VMShinyBar_Used = Color.ForestGreen;
-        public static Color VMShinyBar_Unused = Color.Black;
-        public static Color VMShinyBar_Text = Color.White;
+        protected List<string> Errors { get; } = new List<string>();
 
-        public static Color HostShinyBar_Xen = Color.DarkGray;
-        public static Color HostShinyBar_ControlDomain = Color.DimGray; 
-        public static Color[] HostShinyBar_VMs = { Color.MidnightBlue, Color.SteelBlue };
-        public static Color HostShinyBar_Unused = Color.Black;
-        public static Color HostShinyBar_Text = Color.White;
+        public void Validate(Action<string> statusReporter)
+        {
+            statusReporter(Header);
+            ValidateCore(statusReporter);
+            statusReporter(Footer);
+            statusReporter(string.Empty);
+        }
 
-        public static Color Grid = Color.DarkGray;
-        public static Color SliderLimits = Color.LightGray;
+        public string GenerateSummary()
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine(SummaryTitle);
+
+            if (Errors.Count > 0)
+                Errors.ForEach(v => sb.AppendLine(v));
+            else
+                sb.AppendLine("All OK");
+
+            return sb.ToString();
+        }
+
+        protected abstract void ValidateCore(Action<string> statusReporter);
+
+        protected abstract string Header { get; }
+
+        protected abstract string Footer { get; }
+
+        protected abstract string SummaryTitle { get; }
     }
 }

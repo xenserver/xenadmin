@@ -32,6 +32,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using XenAdmin.Actions;
+using XenAdmin.Core;
 using XenAdmin.Dialogs;
 using XenAPI;
 using XenAdmin.Actions.VMActions;
@@ -142,7 +143,7 @@ namespace XenAdmin.Commands
             }
             else if (vm.is_a_template && vm.DefaultTemplate())
             {
-                return Messages.CANNOT_DELETE_DEFAULT_TEMPLATE;
+                return string.Format(Messages.CANNOT_DELETE_DEFAULT_TEMPLATE, BrandManager.ProductBrand);
             }
             return base.GetCantExecuteReasonCore(item);
         }

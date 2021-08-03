@@ -29,8 +29,8 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using XenAdmin.Actions;
+using XenAdmin.Core;
 using XenAdmin.Diagnostics.Checks;
 using XenAPI;
 
@@ -43,18 +43,11 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
             : base(check, vm)
         { }
 
-        public override string Description
-        {
-            get { return String.Format(Messages.UPDATES_WIZARD_NO_TOOLS, ServerName, VM.Name()); }
-        }
+        public override string Description => string.Format(Messages.UPDATES_WIZARD_NO_TOOLS,
+            ServerName, VM.Name(), BrandManager.VmTools);
 
-        public override string HelpMessage
-        {
-            get
-            {
-                return Messages.INSTALL_XENSERVER_TOOLS;
-            }
-        }
+        public override string HelpMessage => string.Format(Messages.INSTALL_XENSERVER_TOOLS, BrandManager.VmTools);
+
         protected override AsyncAction CreateAction(out bool cancelled)
         {
             cancelled = false;

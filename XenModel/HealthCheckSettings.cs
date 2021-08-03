@@ -102,9 +102,7 @@ namespace XenAdmin.Model
 
         public HealthCheckSettings(Dictionary<string, string> config)
         {
-            Status = config == null || !config.ContainsKey(STATUS)
-                           ? HealthCheckStatus.Undefined
-                           : (BoolKey(config, STATUS) ? HealthCheckStatus.Enabled : HealthCheckStatus.Disabled);
+            Status = GetHealthCheckStatus(config);
             IntervalInDays = IntKey(config, INTERVAL_IN_DAYS, DEFAULT_INTERVAL_IN_DAYS);
             if (!Enum.TryParse(Get(config, DAY_OF_WEEK), out DayOfWeek))
                 DayOfWeek = (DayOfWeek) GetDefaultDay();
@@ -274,6 +272,13 @@ namespace XenAdmin.Model
         public static int GetDefaultTime()
         {
             return new Random().Next(1, 5);
+        }
+
+        public static HealthCheckStatus GetHealthCheckStatus(Dictionary<string, string> config)
+        {
+            return config == null || !config.ContainsKey(STATUS)
+                ? HealthCheckStatus.Undefined
+                : BoolKey(config, STATUS) ? HealthCheckStatus.Enabled : HealthCheckStatus.Disabled;
         }
 
         public static string DateTimeToString(DateTime dateTime)

@@ -92,7 +92,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             {
                 var selectedMasters = RollingUpgradeWizardSelectPool.SelectedMasters;
                 RollingUpgradeWizardPrecheckPage.SelectedMasters = selectedMasters;
-                RollingUpgradeExtrasPage.SelectedMasters = selectedMasters;
 
                 var selectedPools = new List<Pool>();
                 foreach (var master in selectedMasters)
@@ -117,10 +116,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 RollingUpgradeUpgradePage.PrecheckProblemsActuallyResolved = RollingUpgradeWizardPrecheckPage.PrecheckProblemsActuallyResolved;
             else if (prevPageType == typeof(RollingUpgradeExtrasPage))
             {
-                var applyUpdatesToNewVersion = RollingUpgradeExtrasPage.ApplyUpdatesToNewVersion;
-                RollingUpgradeWizardPrecheckPage.ApplyUpdatesToNewVersion = applyUpdatesToNewVersion;
-                RollingUpgradeUpgradePage.ApplyUpdatesToNewVersion = applyUpdatesToNewVersion;
-
                 RollingUpgradeUpgradePage.ApplySuppPackAfterUpgrade = RollingUpgradeExtrasPage.ApplySuppPackAfterUpgrade;
                 RollingUpgradeUpgradePage.SelectedSuppPackPath = RollingUpgradeExtrasPage.SelectedSuppPack;
             }

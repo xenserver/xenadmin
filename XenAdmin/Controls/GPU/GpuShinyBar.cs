@@ -103,14 +103,14 @@ namespace XenAdmin.Controls.GPU
                     var vGpuType = PGPU.Connection.Resolve(vgpu.type);
 
                     DrawSegment(g, segmentLength, vm.Name(), vGpuType != null ? vGpuType.model_name : "",
-                        GpuShinyBarColors.GpuShinyBar_VMs[i++ % GpuShinyBarColors.GpuShinyBar_VMs.Length],
+                        GpuShinyBar_VMs[i++ % GpuShinyBar_VMs.Length],
                         ref left);
                 }
             }
 
             // One final bar for free space
             Rectangle rectFree = new Rectangle((int)left, barArea.Top, barArea.Right - (int)left, barArea.Height);
-            DrawToTarget(g, barArea, rectFree, GpuShinyBarColors.GpuShinyBar_Unused);
+            DrawToTarget(g, barArea, rectFree, ShinyBar_Unused);
         }
 
         private void DrawGrid(Graphics g, Rectangle barArea, long max)
@@ -123,7 +123,7 @@ namespace XenAdmin.Controls.GPU
             long incr = max / (capacity > 0 ? capacity : maxCapacity);
 
             // Draw the grid
-            using (Pen pen = new Pen(GpuShinyBarColors.Grid))
+            using (Pen pen = new Pen(Grid))
             {
                 for (long x = 0; x <= max; x += incr)
                 {
@@ -143,33 +143,12 @@ namespace XenAdmin.Controls.GPU
                 (int)(left + width) - (int)left,  // this is not necessarily the same as (int)width, which can leave a 1 pixel gap
                 barRect.Height);
             var caption = name + "\n" + description;
-            DrawToTarget(g, barRect, rect, color, caption, GpuShinyBarColors.GpuShinyBar_Text, HorizontalAlignment.Center, caption);
+            DrawToTarget(g, barRect, rect, color, caption, ShinyBar_Text, HorizontalAlignment.Center, caption);
             left += width;
         }
 
-        protected override int barHeight
-        {
-            get
-            {
-                return 40;
-            }
-        }
+        protected override int barHeight => 40;
 
-        protected override Rectangle barRect
-        {
-            get
-            {
-                return new Rectangle(10, 20, this.Width - 25, barHeight);
-            }
-        }
-    }
-
-    public static class GpuShinyBarColors
-    {
-        public static Color[] GpuShinyBar_VMs = { Color.FromArgb(83, 39, 139), Color.FromArgb(157, 115, 215) };
-        public static Color GpuShinyBar_Unused = Color.Black;
-        public static Color GpuShinyBar_Text = Color.White;
-
-        public static Color Grid = Color.DarkGray;
+        protected override Rectangle barRect => new Rectangle(10, 20, this.Width - 25, barHeight);
     }
 }

@@ -150,9 +150,6 @@
   <data name="Description-VM.ha_restart_priority.Restart" xml:space="preserve">
     <value>Always try to restart VM</value>
   </data>
-  <data name="Description-host.system_status-CVSM" xml:space="preserve">
-    <value>The configuration settings of [Citrix] Storagelink</value>
-  </data>
   <data name="Description-host.system_status-X11" xml:space="preserve">
     <value>Log files from the X server</value>
   </data>
@@ -211,13 +208,13 @@
     <value>Current status of the network interfaces, routing tables and firewall</value>
   </data>
   <data name="Description-host.system_status-NVIDIA-logs" xml:space="preserve">
-    <value>Contains logs and details useful for diagnosing problems with NVIDIA's graphics drivers.</value>
+    <value>Contains logs and details useful for diagnosing problems with NVIDIA's graphics drivers</value>
   </data>
   <data name="Description-host.system_status-oem" xml:space="preserve">
-    <value>Collects data specific to your OEM provider.</value>
+    <value>Collects data specific to your OEM provider</value>
   </data>
   <data name="Description-host.system_status-pam" xml:space="preserve">
-    <value>Configuration files used by the Pluggable Authentication Modules (PAM) in [XenServer].</value>
+    <value>Configuration files used by the Pluggable Authentication Modules (PAM).</value>
   </data>
   <data name="Description-host.system_status-persistent-stats" xml:space="preserve">
     <value>Persistent performance statistics</value>
@@ -244,13 +241,13 @@
     <value>Logs and status information from the WLB server monitoring this pool.</value>
   </data>
   <data name="Description-host.system_status-xapi" xml:space="preserve">
-    <value>[XenServer] daemon internal logs</value>
+    <value>Server daemon internal logs</value>
   </data>
   <data name="Description-host.system_status-xapi-debug" xml:space="preserve">
-    <value>[XenServer] daemon crash dumps</value>
+    <value>Server daemon crash dumps</value>
   </data>
   <data name="Description-host.system_status-xapi-subprocess" xml:space="preserve">
-    <value>[XenServer] daemon process details</value>
+    <value>Server daemon process details</value>
   </data>
   <data name="Description-host.system_status-xen-info" xml:space="preserve">
     <value>Details of the hypervisor version and its current state</value>
@@ -259,7 +256,7 @@
     <value>VM internal diagnostics</value>
   </data>
   <data name="Description-host.system_status-xenserver-config" xml:space="preserve">
-    <value>Details of the [XenServer] such as version and build information, primary hard disk location and pool configuration</value>
+    <value>Details of the hypervisor such as version and build information, primary hard disk location and pool configuration</value>
   </data>
   <data name="Description-host.system_status-xenserver-databases" xml:space="preserve">
     <value>The database which stores the state of the server</value>
@@ -301,7 +298,7 @@
     <value>You must have the PowerShell installed to use PowerShell Plug-ins. This can be downloaded from the Microsoft website.</value>
   </data>
   <data name="Exception-PowerShellSnapInNotPresent" xml:space="preserve">
-    <value>You must have the XenServerPSModule installed to use [XenServer] PowerShell Commands. This can be found in the SDK.</value>
+    <value>You must have the XenServerPSModule installed to run PowerShell Commands on the server. This can be found in the SDK.</value>
   </data>
   <data name="Exception-SearchParseFailed" xml:space="preserve">
     <value>Could not parse search '{0}' for plug-in '{1}'.</value>
@@ -543,9 +540,6 @@
   <data name="Label-host.VMMemory" xml:space="preserve">
     <value>VMs</value>
   </data>
-  <data name="Label-host.XenMemory" xml:space="preserve">
-    <value>[XenServer]</value>
-  </data>
   <data name="Label-host.address" xml:space="preserve">
     <value>Address</value>
   </data>
@@ -554,9 +548,6 @@
   </data>
   <data name="Label-host.edition" xml:space="preserve">
     <value>License</value>
-  </data>
-  <data name="Label-host.edition-express" xml:space="preserve">
-    <value>[XenServer product] Express</value>
   </data>
   <data name="Label-host.enabled" xml:space="preserve">
     <value>Enabled</value>
@@ -606,9 +597,6 @@
   <data name="Label-host.software_version-product_version" xml:space="preserve">
     <value>Version</value>
   </data>
-  <data name="Label-host.system_status-CVSM" xml:space="preserve">
-    <value>[Citrix] StorageLink configuration</value>
-  </data>
   <data name="Label-host.system_status-X11" xml:space="preserve">
     <value>X server logs</value>
   </data>
@@ -622,7 +610,7 @@
     <value>Boot loader configuration</value>
   </data>
   <data name="Label-host.system_status-client-logs" xml:space="preserve">
-    <value>[XenCenter] logs</value>
+    <value>{0} logs</value>
   </data>
   <data name="Label-host.system_status-device-model" xml:space="preserve">
     <value>Device model</value>
@@ -700,13 +688,13 @@
     <value>Workload Balancing status</value>
   </data>
   <data name="Label-host.system_status-xapi" xml:space="preserve">
-    <value>[XenServer] daemon internal logs</value>
+    <value>Server daemon internal logs</value>
   </data>
   <data name="Label-host.system_status-xapi-debug" xml:space="preserve">
-    <value>[XenServer] daemon crash dumps</value>
+    <value>Server daemon crash dumps</value>
   </data>
   <data name="Label-host.system_status-xapi-subprocess" xml:space="preserve">
-    <value>[XenServer] daemon subprocesses</value>
+    <value>Server daemon subprocesses</value>
   </data>
   <data name="Label-host.system_status-xen-info" xml:space="preserve">
     <value>Hypervisor configuration</value>
@@ -715,19 +703,19 @@
     <value>VM internal diagnostics</value>
   </data>
   <data name="Label-host.system_status-xenserver-config" xml:space="preserve">
-    <value>[XenServer] configuration</value>
+    <value>Server configuration</value>
   </data>
   <data name="Label-host.system_status-xenserver-databases" xml:space="preserve">
-    <value>[XenServer] database</value>
+    <value>Server database</value>
   </data>
   <data name="Label-host.system_status-xenserver-domains" xml:space="preserve">
-    <value>[XenServer] domains list</value>
+    <value>Server domains list</value>
   </data>
   <data name="Label-host.system_status-xenserver-install" xml:space="preserve">
-    <value>[XenServer] installation log files</value>
+    <value>Server installation log files</value>
   </data>
   <data name="Label-host.system_status-xenserver-logs" xml:space="preserve">
-    <value>[XenServer] logs</value>
+    <value>Server logs</value>
   </data>
   <data name="Label-host.system_status-xha-liveset" xml:space="preserve">
     <value>High availability liveset</value>
@@ -904,7 +892,7 @@
     <value>Agent Memory Free</value>
   </data>
   <data name="Label-performance.xapi_latency" xml:space="preserve">
-    <value>[XenServer] Healthcheck Latency</value>
+    <value>Server Healthcheck Latency</value>
   </data>
   <data name="Label-performance.xapi_live_memory_kib" xml:space="preserve">
     <value>Agent Memory Live</value>
@@ -970,10 +958,10 @@
     <value>HA Settings</value>
   </data>
   <data name="Message.action-license_does_not_support_pooling" xml:space="preserve">
-    <value>Buy [XenServer] Online</value>
+    <value>Buy Licenses Online</value>
   </data>
   <data name="Message.action-license_expires_soon" xml:space="preserve">
-    <value>Buy [XenServer] Online</value>
+    <value>Buy Licenses Online</value>
   </data>
   <data name="Message.action-multipath_periodic_alert" xml:space="preserve">
     <value>View Log Files</value>
@@ -1083,16 +1071,16 @@
     <value>Pool '{0}' successfully accessed the HA metadata disk after a previous failure and can perform a successful recovery in the event of an HA failover.</value>
   </data>
   <data name="Message.body-multipath_periodic_alert" xml:space="preserve">
-    <value>Server '{0}' has experienced a change in multipath status. Currently {1} out of {2} paths are active. See the [XenCenter] logs for the full details.</value>
+    <value>Server '{0}' has experienced a change in multipath status. Currently {1} out of {2} paths are active. See the application logs for the full details.</value>
   </data>
   <data name="Message.body-multipath_periodic_alert_healthy" xml:space="preserve">
-    <value>Servers in pool '{0}' have experienced a change in multipath status. Currently all paths are active. See the [XenCenter] logs for the full details.</value>
+    <value>Servers in pool '{0}' have experienced a change in multipath status. Currently all paths are active. See the application logs for the full details.</value>
   </data>
   <data name="Message.body-multipath_periodic_alert_healthy_standalone" xml:space="preserve">
-    <value>Server '{0}' has experienced a change in multipath status. Currently all paths are active. See the [XenCenter] logs for the full details.</value>
+    <value>Server '{0}' has experienced a change in multipath status. Currently all paths are active. See the application logs for the full details.</value>
   </data>
   <data name="Message.body-multipath_periodic_alert_summary" xml:space="preserve">
-    <value>Servers in pool '{0}' have experienced a change in multipath status. Currently the following servers have inactive paths: {1}. See the [XenCenter] logs for the full details.</value>
+    <value>Servers in pool '{0}' have experienced a change in multipath status. Currently the following servers have inactive paths: {1}. See the application logs for the full details.</value>
   </data>
   <data name="Message.body-pbd_plug_failed_on_server_start" xml:space="preserve">
     <value>A storage repository could not be attached when server '{0}' started.</value>
@@ -1478,9 +1466,6 @@
   <data name="SR.name_description-local-storage-host" xml:space="preserve">
     <value>Local storage on {0}</value>
   </data>
-  <data name="SR.name_description-xenserver-tools" xml:space="preserve">
-    <value>[Citrix VM Tools] ISOs</value>
-  </data>
   <data name="SR.name_label-ebs" xml:space="preserve">
     <value>EBS</value>
   </data>
@@ -1505,17 +1490,11 @@
   <data name="SR.name_label-local-storage-host" xml:space="preserve">
     <value>Local storage on {0}</value>
   </data>
-  <data name="SR.name_label-xenserver-tools" xml:space="preserve">
-    <value>[Citrix VM Tools]</value>
-  </data>
   <data name="VM.TemplateDescription-Demo Linux VM" xml:space="preserve">
     <value>This template can be used to create a Linux VM with a built-in Linux distribution for testing and demonstration purposes. It is not recommended for production use.</value>
   </data>
   <data name="VM.TemplateDescription-Other install media" xml:space="preserve">
     <value>If the operating system you plan to use is not listed, you may be able to install it by selecting this template.  We recommend that only advanced users attempt to use this template, and you should note that our products have been tested running only the supported distributions and specific versions covered by the standard supplied templates.</value>
-  </data>
-  <data name="VM.TemplateDescription-Xen API SDK" xml:space="preserve">
-    <value>This template may be used to install the [XenServer] Software Development Kit (SDK) API VM. </value>
   </data>
   <data name="SR.name_description-local-hotplug-disk" xml:space="preserve">
     <value>Physical removable storage</value>
@@ -1570,12 +1549,6 @@
   </data>
   <data name="Label-performance.memory_reclaimed_max" xml:space="preserve">
     <value>Potential Reclaimed Memory</value>
-  </data>
-  <data name="Label-host.edition-per-socket" xml:space="preserve">
-    <value>[XenServer product] Per-Socket</value>
-  </data>
-  <data name="Label-host.edition-xendesktop" xml:space="preserve">
-    <value>[XenServer product] for [Citrix] Virtual Desktops</value>
   </data>
   <data name="Message.help-extauth_init_in_host_failed" xml:space="preserve">
     <value>Help on AD</value>
@@ -1646,15 +1619,6 @@
   <data name="Message.name-license_server_version_obsolete" xml:space="preserve">
     <value>The license server is an out-of-date version.</value>
   </data>
-  <data name="Label-host.edition-premium-per-socket" xml:space="preserve">
-    <value>[XenServer product] Premium Per-Socket</value>
-  </data>
-  <data name="Label-host.edition-premium-per-user" xml:space="preserve">
-    <value>[XenServer product] Premium Per-User</value>
-  </data>
-  <data name="Label-host.edition-standard-per-socket" xml:space="preserve">
-    <value>[XenServer product] Standard Per-Socket</value>
-  </data>
   <data name="Message.help-license_expired" xml:space="preserve">
     <value>Help on Licensing</value>
   </data>
@@ -1672,12 +1636,6 @@
   </data>
   <data name="Message.help-license_server_version_obsolete" xml:space="preserve">
     <value>Help on Licensing</value>
-  </data>
-  <data name="Label-host.edition-desktop" xml:space="preserve">
-    <value>[Citrix] Virtual Apps and Desktops</value>
-  </data>
-  <data name="Label-host.edition-desktop-plus" xml:space="preserve">
-    <value>[Citrix] Virtual Apps and Desktops Premium</value>
   </data>
   <data name="Label-Supplemental_packs.installed" xml:space="preserve">
     <value>Installed supplemental packs</value>
@@ -1775,12 +1733,6 @@
   <data name="Label-host.system_status-xenvm" xml:space="preserve">
     <value>Volume manager logs</value>
   </data>
-  <data name="Label-host.edition-premium" xml:space="preserve">
-    <value>[Citrix XenServer] Ultimate Edition</value>
-  </data>
-  <data name="Label-host.edition-basic" xml:space="preserve">
-    <value>[Citrix XenServer] Basic Edition</value>
-  </data>
   <data name="Label-host.system_status-xscontainer" xml:space="preserve">
     <value>Container management logs</value>
   </data>
@@ -1798,9 +1750,6 @@
   </data>
   <data name="Label-host.system_status-conntest" xml:space="preserve">
     <value>Connection test</value>
-  </data>
-  <data name="Label-host.edition-standard" xml:space="preserve">
-    <value>[Citrix XenServer] Standard Edition</value>
   </data>
   <data name="Label-Pool_patch.required-updates" xml:space="preserve">
     <value>Required Updates</value>
@@ -1886,38 +1835,17 @@
   <data name="Label-SR.SRTypes-gfs2" xml:space="preserve">
     <value>GFS2</value>
   </data>
-  <data name="Label-host.edition-desktop-cloud" xml:space="preserve">
-    <value>[Citrix] Virtual Apps and Desktops [Citrix] Cloud</value>
-  </data>
-  <data name="Label-host.edition-legacy-basic" xml:space="preserve">
-    <value>[Citrix XenServer] Basic Edition</value>
-  </data>
-  <data name="Label-host.edition-legacy-desktop" xml:space="preserve">
-    <value>XenApp/XenDesktop</value>
-  </data>
-  <data name="Label-host.edition-legacy-desktop-cloud" xml:space="preserve">
-    <value>XenApp/XenDesktop [Citrix] Cloud</value>
-  </data>
-  <data name="Label-host.edition-legacy-desktop-plus" xml:space="preserve">
-    <value>XenApp/XenDesktop Platinum</value>
-  </data>
-  <data name="Label-host.edition-legacy-premium" xml:space="preserve">
-    <value>[Citrix XenServer] Ultimate Edition</value>
-  </data>
-  <data name="Label-host.edition-legacy-standard" xml:space="preserve">
-    <value>[Citrix XenServer] Standard Edition</value>
-  </data>
   <data name="Description-host.system_status-v6d" xml:space="preserve">
-    <value>[XenServer] licensing daemon logs</value>
+    <value>Server licensing daemon logs</value>
   </data>
   <data name="Description-host.system_status-xapi-clusterd" xml:space="preserve">
-    <value>Logs generated by the cluster management daemon for the [XenServer] Toolstack.</value>
+    <value>Logs generated by the cluster management daemon for the Toolstack.</value>
   </data>
   <data name="Label-host.system_status-v6d" xml:space="preserve">
-    <value>[XenServer] licensing daemon</value>
+    <value>Server licensing daemon</value>
   </data>
   <data name="Label-host.system_status-xapi-clusterd" xml:space="preserve">
-    <value>[XenServer] cluster management daemon</value>
+    <value>Server cluster management daemon</value>
   </data>
   <data name="Message.body-vm_secure_boot_failed" xml:space="preserve">
     <value>Virtual machine '{0}' failed to pass Secure Boot verification.</value>

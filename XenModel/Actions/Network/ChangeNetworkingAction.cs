@@ -237,7 +237,7 @@ namespace XenAdmin.Actions
         {
             int i = Array.FindIndex(Hosts, h => h.opaque_ref == existing_pif.host);
             if (i == -1)
-                throw new Failure(Failure.INTERNAL_ERROR, Messages.HOST_GONE);
+                throw new Failure(Failure.INTERNAL_ERROR, string.Format(Messages.HOST_GONE, BrandManager.BrandConsole));
 
             string[] bits = range_start.Split('.');
             return string.Format("{0}.{1}.{2}.{3}", bits[0], bits[1], bits[2], int.Parse(bits[3]) + i);

@@ -376,7 +376,8 @@ namespace XenAdmin
                 Application.Exit();
             }
 
-            HealthCheck.SendMetadataToHealthCheck();
+            if (Registry.GetBrandOverride() == "XenCenter" || BrandManager.BrandConsole == "XenCenter")
+                HealthCheck.SendMetadataToHealthCheck();
         }
 
         private static void EncryptServerList()
@@ -609,7 +610,6 @@ namespace XenAdmin
             if (!Helpers.CommonCriteriaCertificationRelease)
             {
                 log.Info($"=== AllowXenCenterUpdates: {Properties.Settings.Default.AllowXenCenterUpdates}");
-                log.Info($"=== AllowPatchesUpdates: {Properties.Settings.Default.AllowPatchesUpdates}");
                 log.Info($"=== AllowXenServerUpdates: {Properties.Settings.Default.AllowXenServerUpdates}");
             }
             

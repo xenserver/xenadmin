@@ -31,6 +31,7 @@
 
 using System.Drawing;
 using System.Windows.Forms;
+using XenAdmin.Core;
 
 
 namespace XenAdmin.Dialogs.OptionsPages
@@ -40,6 +41,8 @@ namespace XenAdmin.Dialogs.OptionsPages
         public ConfirmationOptionsPage()
         {
             InitializeComponent();
+            label1.Text = string.Format(label1.Text, BrandManager.BrandConsole);
+            labelBlurb.Text = string.Format(labelBlurb.Text, BrandManager.BrandConsole);
         }
 
         #region IOptionsPage Members

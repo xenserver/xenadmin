@@ -438,7 +438,9 @@ namespace XenAdmin.Controls.NetworkingTab
                 if (vm.power_state == vm_power_state.Suspended)
                 {
                     RemoveButtonContainer.SetToolTip(Messages.TOOLTIP_REMOVE_NETWORK_SUSPENDED);
-                    EditButtonContainer.SetToolTip(vm.HasNewVirtualisationStates() ? Messages.TOOLTIP_EDIT_NETWORK_IO_DRIVERS : Messages.TOOLTIP_EDIT_NETWORK_TOOLS);
+                    EditButtonContainer.SetToolTip(vm.HasNewVirtualisationStates()
+                        ? Messages.TOOLTIP_EDIT_NETWORK_IO_DRIVERS
+                        : string.Format(Messages.TOOLTIP_EDIT_NETWORK_TOOLS, BrandManager.VmTools));
                     toolTipContainerActivateToggle.SetToolTip(vif.currently_attached 
                         ? Messages.TOOLTIP_DEACTIVATE_VIF_SUSPENDED : Messages.TOOLTIP_ACTIVATE_VIF_SUSPENDED);
                 }
@@ -446,8 +448,12 @@ namespace XenAdmin.Controls.NetworkingTab
                 {
                     if (vm.power_state == vm_power_state.Running && !vm.GetVirtualisationStatus(out _).HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
                     {
-                        RemoveButtonContainer.SetToolTip(vm.HasNewVirtualisationStates() ? Messages.TOOLTIP_REMOVE_NETWORK_IO_DRIVERS : Messages.TOOLTIP_REMOVE_NETWORK_TOOLS);
-                        EditButtonContainer.SetToolTip(vm.HasNewVirtualisationStates() ? Messages.TOOLTIP_EDIT_NETWORK_IO_DRIVERS : Messages.TOOLTIP_EDIT_NETWORK_TOOLS);
+                        RemoveButtonContainer.SetToolTip(vm.HasNewVirtualisationStates()
+                            ? Messages.TOOLTIP_REMOVE_NETWORK_IO_DRIVERS
+                            : string.Format(Messages.TOOLTIP_REMOVE_NETWORK_TOOLS, BrandManager.VmTools));
+                        EditButtonContainer.SetToolTip(vm.HasNewVirtualisationStates()
+                            ? Messages.TOOLTIP_EDIT_NETWORK_IO_DRIVERS
+                            : string.Format(Messages.TOOLTIP_EDIT_NETWORK_TOOLS, BrandManager.VmTools));
                         toolTipContainerActivateToggle.SetToolTip(vif.currently_attached
                             ? Messages.TOOLTIP_DEACTIVATE_VIF_TOOLS : Messages.TOOLTIP_ACTIVATE_VIF_TOOLS);
                     }

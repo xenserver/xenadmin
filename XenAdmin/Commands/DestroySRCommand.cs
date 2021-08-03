@@ -143,7 +143,7 @@ namespace XenAdmin.Commands
             }
             else if (!sr.CanCreateWithXenCenter())
             {
-                return Messages.SR_CANNOT_BE_DESTROYED_WITH_XC;
+                return string.Format(Messages.SR_CANNOT_BE_DESTROYED_WITH_XC, BrandManager.BrandConsole);
             }
             else if (HelpersGUI.GetActionInProgress(sr))
             {

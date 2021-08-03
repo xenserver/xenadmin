@@ -94,7 +94,8 @@ namespace XenAdmin.Commands
                     OpenFileDialog dialog = new OpenFileDialog();
                     dialog.AddExtension = true;
                     dialog.Filter = string.Format("{0} (*.{1})|*.{1}|{2} (*.*)|*.*",
-                        Messages.XS_BACKUP_FILES, BrandManager.ExtensionBackup, Messages.ALL_FILES);
+                        string.Format(Messages.XS_BACKUP_FILES, BrandManager.ProductBrand),
+                        BrandManager.ExtensionBackup, Messages.ALL_FILES);
                     dialog.FilterIndex = 0;
                     dialog.RestoreDirectory = true;
                     dialog.DefaultExt = BrandManager.ExtensionBackup;
@@ -152,7 +153,8 @@ namespace XenAdmin.Commands
 
             MainWindowCommandInterface.Invoke(delegate
             {
-                using (var dlg = new InformationDialog(string.Format(Messages.RESTORE_FROM_BACKUP_FINALIZE, Helpers.GetName(action.Host))))
+                using (var dlg = new InformationDialog(string.Format(Messages.RESTORE_FROM_BACKUP_FINALIZE,
+                    Helpers.GetName(action.Host), BrandManager.ProductBrand)))
                 {
                     dlg.ShowDialog(Parent);
                 }

@@ -54,6 +54,8 @@
   <?define CompanyNameLegal="@COMPANY_NAME_LEGAL@"?>
   <?define CompanyNameShort="@COMPANY_NAME_SHORT@"?>
   <?define BrandConsole="@BRAND_CONSOLE@"?>
+  <?define BrandConsoleNoSpace="@BRAND_CONSOLE_NO_SPACE@"?>
+  <?define BrandConsoleShort="@BRAND_CONSOLE_SHORT@"?>
   <?define BrandProduct="@PRODUCT_BRAND@"?>
   <?define FileExtBackup="xbk"?>
   <?define FileExtUpdate="xsupdate"?>

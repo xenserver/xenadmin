@@ -125,7 +125,7 @@ namespace XenAdmin.Actions.HostActions
                 }
                 else
                 {
-                    throw new Failure(Failure.INTERNAL_ERROR, Messages.POOL_GONE);
+                    throw new Failure(Failure.INTERNAL_ERROR, string.Format(Messages.POOL_GONE, BrandManager.BrandConsole));
                 }
             }
             catch (Exception ex)

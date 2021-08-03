@@ -40,6 +40,7 @@ using XenAdmin.Dialogs;
 using XenAPI;
 using XenAdmin.Actions;
 using XenAdmin.Controls.DataGridViewEx;
+using XenAdmin.Core;
 using XenAdmin.Network;
 
 
@@ -52,6 +53,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
         public BugToolPageRetrieveData()
         {
             InitializeComponent();
+            labelBlurb.Text = string.Format(labelBlurb.Text, BrandManager.BrandConsole);
         }
 
         #region XenTabPage overrides
@@ -409,7 +411,9 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                 this.hosts = hosts;
                 this.includeClientLogs = includeClientLogs;
                 cellHostImg.Value = Images.StaticImages._000_GetServerReport_h32bit_16;
-                cellHost.Value = includeClientLogs ? Messages.BUGTOOL_CLIENT_LOGS_META : Messages.BUGTOOL_CLIENT_META;
+                cellHost.Value = includeClientLogs
+                    ? string.Format(Messages.BUGTOOL_CLIENT_LOGS_META, BrandManager.BrandConsole)
+                    : string.Format(Messages.BUGTOOL_CLIENT_META, BrandManager.BrandConsole);
             }
 
             public override StatusReportAction Action => _action;

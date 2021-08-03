@@ -53,15 +53,13 @@ namespace XenAdmin.Controls.Ballooning
             // panelLabel
             // 
             resources.ApplyResources(this.panelLabel, "panelLabel");
-            this.panelLabel.BackColor = System.Drawing.Color.Transparent;
+            this.panelLabel.BackColor = System.Drawing.Color.Silver;
             this.panelLabel.Controls.Add(this.memoryRowLabel);
             this.panelLabel.Name = "panelLabel";
             // 
             // memoryRowLabel
             // 
             resources.ApplyResources(this.memoryRowLabel, "memoryRowLabel");
-            this.memoryRowLabel.BackColor = System.Drawing.Color.Gainsboro;
-            this.memoryRowLabel.MinimumSize = new System.Drawing.Size(0, 26);
             this.memoryRowLabel.Name = "memoryRowLabel";
             this.memoryRowLabel.SizeChanged += new System.EventHandler(this.memoryRowLabel_SizeChanged);
             // 
@@ -73,7 +71,6 @@ namespace XenAdmin.Controls.Ballooning
             this.Controls.Add(this.panelControls);
             this.Controls.Add(this.panelLabel);
             this.DoubleBuffered = true;
-            this.MinimumSize = new System.Drawing.Size(700, 0);
             this.Name = "VMMemoryRow";
             this.panelControls.ResumeLayout(false);
             this.panelLabel.ResumeLayout(false);

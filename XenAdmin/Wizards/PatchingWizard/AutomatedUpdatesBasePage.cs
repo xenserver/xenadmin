@@ -56,13 +56,9 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public List<Problem> PrecheckProblemsActuallyResolved { private get; set; }
         public List<Pool> SelectedPools { private get; set; }
-        public bool ApplyUpdatesToNewVersion { get; set; }
         public Status Status { get; private set; }
 
-        protected bool IsSuccess
-        {
-            get { return _thisPageIsCompleted && !failedWorkers.Any(); }
-        }
+        protected bool IsSuccess => _thisPageIsCompleted && !failedWorkers.Any();
 
         private List<UpdateProgressBackgroundWorker> backgroundWorkers = new List<UpdateProgressBackgroundWorker>();
         private List<UpdateProgressBackgroundWorker> failedWorkers = new List<UpdateProgressBackgroundWorker>();
@@ -543,7 +539,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             using (var dlg = new WarningDialog(string.Format(skippableWorkers.Count > 1 ? Messages.MESSAGEBOX_SKIP_RPU_STEPS : Messages.MESSAGEBOX_SKIP_RPU_STEP, msg),
                     ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
-                {WindowTitle = ParentForm != null ? ParentForm.Text : Messages.XENCENTER})
+                {WindowTitle = ParentForm != null ? ParentForm.Text : BrandManager.BrandConsole})
             {
                 if (dlg.ShowDialog(this) != DialogResult.Yes)
                     return;

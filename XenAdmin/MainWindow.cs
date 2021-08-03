@@ -60,6 +60,7 @@ using XenAdmin.Wizards.PatchingWizard;
 using XenAdmin.Plugins;
 using XenCenterLib;
 using System.Linq;
+using XenAdmin.Controls.GradientPanel;
 using XenAdmin.Help;
 using XenAdmin.Wizards;
 
@@ -231,8 +232,8 @@ namespace XenAdmin
             DockerContainers.InitDockerContainers();
 
             // Fix colour of text on gradient panels
-            TitleLabel.ForeColor = Program.TitleBarForeColor;
-            loggedInLabel1.SetTextColor(Program.TitleBarForeColor);
+            TitleLabel.ForeColor = VerticalGradientPanel.TextColor;
+            loggedInLabel1.SetTextColor(VerticalGradientPanel.TextColor);
 
             statusProgressBar.Visible = false;
 
@@ -242,8 +243,15 @@ namespace XenAdmin
             licenseTimer = new LicenseTimer(licenseManagerLauncher);
             GeneralPage.LicenseLauncher = licenseManagerLauncher;
 
+            xenSourceOnTheWebToolStripMenuItem.Text = string.Format(xenSourceOnTheWebToolStripMenuItem.Text,
+                BrandManager.ProductBrand);
+            viewApplicationLogToolStripMenuItem.Text = string.Format(viewApplicationLogToolStripMenuItem.Text, BrandManager.BrandConsole);
+            xenCenterPluginsOnlineToolStripMenuItem.Text = string.Format(xenCenterPluginsOnlineToolStripMenuItem.Text, BrandManager.BrandConsole);
+            aboutXenSourceAdminToolStripMenuItem.Text = string.Format(aboutXenSourceAdminToolStripMenuItem.Text, BrandManager.BrandConsole);
+            templatesToolStripMenuItem1.Text = string.Format(templatesToolStripMenuItem1.Text, BrandManager.ProductBrand);
+
             toolStripSeparator7.Visible = xenSourceOnTheWebToolStripMenuItem.Visible = xenCenterPluginsOnlineToolStripMenuItem.Visible = !HiddenFeatures.ToolStripMenuItemHidden;
-            healthCheckToolStripMenuItem1.Visible = !HiddenFeatures.HealthCheckHidden;
+            healthCheckToolStripMenuItem1.Visible = !HiddenFeatures.HealthCheckHidden && (Registry.GetBrandOverride() == "XenCenter" || BrandManager.BrandConsole == "XenCenter");
 
             statusLabelAlerts.Visible = statusLabelUpdates.Visible = statusLabelErrors.Visible = false;
         }
@@ -330,6 +338,7 @@ namespace XenAdmin
 
             History.EnableHistoryButtons();
             History.NewHistoryItem(new XenModelObjectHistoryItem(null, TabPageHome));
+            Text = BrandManager.BrandConsole;
 
             /*
              * Resume window size and location
@@ -561,7 +570,8 @@ namespace XenAdmin
             try
             {
                 Settings.RestoreSession();
-                HealthCheck.SendProxySettingsToHealthCheck();
+                if (Registry.GetBrandOverride() == "XenCenter" || BrandManager.BrandConsole == "XenCenter")
+                    HealthCheck.SendProxySettingsToHealthCheck();
             }
             catch (ConfigurationErrorsException ex)
             {
@@ -605,7 +615,33 @@ namespace XenAdmin
             if (!Program.RunInAutomatedTestMode && !Helpers.CommonCriteriaCertificationRelease)
             {
                 if (!Properties.Settings.Default.SeenAllowUpdatesDialog)
-                    new AllowUpdatesDialog(pluginManager).ShowDialog(this);
+                    using (var dlg = new NoIconDialog(string.Format(Messages.ALLOWED_UPDATES_DIALOG_MESSAGE,
+                            BrandManager.BrandConsole, BrandManager.ProductBrand),
+                        ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
+                    {
+                        HelpButton = true,
+                        HelpNameSetter = "AllowUpdatesDialog",
+                        ShowCheckbox = true,
+                        CheckboxCaption = Messages.ALLOWED_UPDATES_DIALOG_CHECKBOX
+                    })
+                    {
+                        var result = dlg.ShowDialog(this) == DialogResult.Yes;
+
+                        Properties.Settings.Default.AllowXenCenterUpdates = result;
+                        Properties.Settings.Default.AllowXenServerUpdates = result;
+                        Properties.Settings.Default.SeenAllowUpdatesDialog = true;
+
+                        if (result && dlg.IsCheckBoxChecked)
+                        {
+                            using (var dialog = new OptionsDialog(pluginManager))
+                            {
+                                dialog.SelectConnectionOptionsPage();
+                                dialog.ShowDialog(this);
+                            }
+                        }
+
+                        Settings.TrySaveSettings();
+                    }
 
                 // start checkforupdates thread
                 CheckForUpdatesTimer.Interval = 1000 * 60 * 60 * 24; // 24 hours
@@ -614,7 +650,7 @@ namespace XenAdmin
                 Updates.CheckForUpdates(false);
             }
 
-            if (!Program.RunInAutomatedTestMode)
+            if (!Program.RunInAutomatedTestMode && (Registry.GetBrandOverride() == "XenCenter" || BrandManager.BrandConsole == "XenCenter"))
             {
                 // start healthCheckResult thread
                 healthCheckResultTimer.Interval = 1000 * 60 * 60; // 1 hour
@@ -700,10 +736,6 @@ namespace XenAdmin
                 case ArgType.Restore:
                     log.DebugFormat("Restoring host backup from {0}", args[0]);
                     new RestoreHostFromBackupCommand(this, null, args[0]).Execute();
-                    break;
-                case ArgType.Update:
-                    log.DebugFormat("Installing server update from {0}", args[0]);
-                    InstallUpdate(args[0]);
                     break;
                 case ArgType.XenSearch:
                     log.DebugFormat("Importing saved XenSearch from '{0}'", args[0]);
@@ -875,10 +907,9 @@ namespace XenAdmin
             if (master == null)
                 return;
 
-            log.InfoFormat("Connected to {0} (version {1}, build {2}.{3}) with {4} {5} (build {6}.{7})",
+            log.InfoFormat("Connected to {0} (version {1}, build {2}.{3}) with {4} {5}",
                 Helpers.GetName(master), Helpers.HostProductVersionText(master), Helpers.HostProductVersion(master),
-                master.BuildNumberRaw(), Messages.XENCENTER, BrandManager.PRODUCT_VERSION_TEXT,
-                BrandManager.XENCENTER_VERSION, Program.Version.Revision);
+                master.BuildNumberRaw(), BrandManager.BrandConsole, Program.Version);
 
             // Check the PRODUCT_BRAND
             if (!Program.RunInAutomatedTestMode && !SameProductBrand(master))
@@ -888,9 +919,10 @@ namespace XenAdmin
                 Program.Invoke(Program.MainWindow, delegate
                 {
                     var title = string.Format(Messages.CONNECTION_REFUSED_TITLE, Helpers.GetName(master).Ellipsise(80));
-                    new ActionBase(title, "", false, true, Messages.INCOMPATIBLE_PRODUCTS);
+                    new ActionBase(title, "", false, true, string.Format(Messages.INCOMPATIBLE_PRODUCTS, BrandManager.BrandConsole));
 
-                    using (var dlog = new ErrorDialog(Messages.INCOMPATIBLE_PRODUCTS) {WindowTitle = title})
+                    using (var dlog = new ErrorDialog(string.Format(Messages.INCOMPATIBLE_PRODUCTS, BrandManager.BrandConsole))
+                        {WindowTitle = title})
                         dlog.ShowDialog(this);
                 });
                 return;
@@ -911,10 +943,12 @@ namespace XenAdmin
                 Program.Invoke(Program.MainWindow, () =>
                 {
                     var title = string.Format(Messages.CONNECTION_REFUSED_TITLE, Helpers.GetName(master).Ellipsise(80));
-                    new ActionBase(title, "", false, true, string.Format(Messages.SLAVE_TOO_OLD, BrandManager.ProductVersion70));
+                    var msg = string.Format(Messages.SLAVE_TOO_OLD, BrandManager.ProductBrand, BrandManager.ProductVersion70, BrandManager.BrandConsole);
+                    
+                    new ActionBase(title, "", false, true, msg);
 
-                    using (var dlg = new ErrorDialog(string.Format(Messages.SLAVE_TOO_OLD, BrandManager.ProductVersion70),
-                        ThreeButtonDialog.ButtonOK){WindowTitle = Messages.CONNECT_TO_SERVER})
+                    using (var dlg = new ErrorDialog(msg, ThreeButtonDialog.ButtonOK)
+                        {WindowTitle = Messages.CONNECT_TO_SERVER})
                     {
                         dlg.ShowDialog(this);
                     }
@@ -945,7 +979,34 @@ namespace XenAdmin
 
                     Program.Invoke(Program.MainWindow, delegate
                     {
-                        var msg = string.Format(Messages.GUI_OUT_OF_DATE, Helpers.GetName(master));
+                        var msg = string.Format(Messages.GUI_OUT_OF_DATE, BrandManager.BrandConsole, Helpers.GetName(master));
+                        var url = InvisibleMessages.OUT_OF_DATE_WEBSITE;
+                        var title = string.Format(Messages.CONNECTION_REFUSED_TITLE, Helpers.GetName(master).Ellipsise(80));
+                        var error = $"{msg}\n{url}";
+
+                        new ActionBase(title, "", false, true, error);
+
+                        using (var dlog = new ErrorDialog(msg)
+                        {
+                            WindowTitle = title,
+                            ShowLinkLabel = !HiddenFeatures.LinkLabelHidden,
+                            LinkText = url,
+                            LinkData = url
+                        })
+                            dlog.ShowDialog(this);
+                    });
+                    return;
+                }
+
+                // Allow Citrix Hypervisor Center connect to Stockholm and cloud released versions only
+                //
+                if (!Helpers.StockholmOrGreater(master))
+                {
+                    connection.EndConnect();
+
+                    Program.Invoke(Program.MainWindow, delegate
+                    {
+                        var msg = string.Format(Messages.GUI_NOT_COMPATIBLE, BrandManager.BrandConsole, BrandManager.ProductBrand, BrandManager.ProductVersion82, Helpers.GetName(master), BrandManager.LegacyConsole);
                         var url = InvisibleMessages.OUT_OF_DATE_WEBSITE;
                         var title = string.Format(Messages.CONNECTION_REFUSED_TITLE, Helpers.GetName(master).Ellipsise(80));
                         var error = $"{msg}\n{url}";
@@ -982,15 +1043,18 @@ namespace XenAdmin
             if(licenseTimer != null)
                 licenseTimer.CheckActiveServerLicense(connection, false);
 
-            if (Properties.Settings.Default.ShowHealthCheckEnrollmentReminder)
-                ThreadPool.QueueUserWorkItem(CheckHealthCheckEnrollment, connection);
-            ThreadPool.QueueUserWorkItem(HealthCheck.CheckForAnalysisResults, connection);
-            ThreadPool.QueueUserWorkItem(InformHealthCheckEnrollment, connection);
+            if (Registry.GetBrandOverride() == "XenCenter" || BrandManager.BrandConsole == "XenCenter")
+            {
+                if (Properties.Settings.Default.ShowHealthCheckEnrollmentReminder)
+                    ThreadPool.QueueUserWorkItem(CheckHealthCheckEnrollment, connection);
+                ThreadPool.QueueUserWorkItem(HealthCheck.CheckForAnalysisResults, connection);
+                ThreadPool.QueueUserWorkItem(InformHealthCheckEnrollment, connection);
+            }
 
             Updates.RefreshUpdateAlerts(Updates.UpdateType.ServerPatches | Updates.UpdateType.ServerVersion);
             Updates.CheckHotfixEligibility(connection);
-
-            HealthCheck.SendMetadataToHealthCheck();
+            if (Registry.GetBrandOverride() == "XenCenter" || BrandManager.BrandConsole == "XenCenter")
+                HealthCheck.SendMetadataToHealthCheck();
             RequestRefreshTreeView();
         }
 
@@ -1014,8 +1078,8 @@ namespace XenAdmin
         private static bool SameProductBrand(Host host)
         {
             var brand = host.ProductBrand();
-            return brand == BrandManager.PRODUCT_BRAND || brand == BrandManager.LegacyProduct ||
-                   BrandManager.PRODUCT_BRAND == "[XenServer product]";
+            return brand == BrandManager.ProductBrand || brand == BrandManager.LegacyProduct ||
+                   BrandManager.ProductBrand == "[XenServer product]";
         }
 
         /// <summary>
@@ -1715,7 +1779,8 @@ namespace XenAdmin
                     dialog.Title = Messages.SELECT_LICENSE_KEY;
                     dialog.CheckFileExists = true;
                     dialog.CheckPathExists = true;
-                    dialog.Filter = string.Format("{0} (*.xslic)|*.xslic|{1} (*.*)|*.*", Messages.XS_LICENSE_FILES, Messages.ALL_FILES);
+                    dialog.Filter = string.Format("{0} (*.xslic)|*.xslic|{1} (*.*)|*.*",
+                        string.Format(Messages.XS_LICENSE_FILES, BrandManager.ProductBrand), Messages.ALL_FILES);
                     dialog.ShowHelp = true;
                     dialog.HelpRequest += dialog_HelpRequest;
                     result = dialog.ShowDialog(this);
@@ -2608,20 +2673,6 @@ namespace XenAdmin
             new ImportWizard(SelectionManager.Selection.GetConnectionOfFirstItem(), hostAncestor, param, false).Show();
         }
 
-        private void InstallUpdate(string path)
-        {
-            if (WizardHelpers.IsValidFile(path, out var failureReason))
-            {
-                var wizard = (PatchingWizard)Program.MainWindow.ShowForm(typeof(PatchingWizard));
-                wizard.PrepareToInstallUpdate(path);
-            }
-            else
-            {
-                using (var popup = new ErrorDialog(failureReason) {WindowTitle = Messages.UPDATES})
-                    popup.ShowDialog();
-            }
-        }
-
         #region XenSearch
 
         private bool searchMode;
@@ -2699,7 +2750,7 @@ namespace XenAdmin
             if (navigationPane.currentMode == NavigationPane.NavigationMode.Notifications)
                 return;
 
-            var licenseColor = Program.TitleBarForeColor;
+            var licenseColor = VerticalGradientPanel.TextColor;
             var licenseText = string.Empty;
 
             if (SearchMode && SearchPage.Search != null)
@@ -2724,7 +2775,7 @@ namespace XenAdmin
             }
             else
             {
-                TitleLabel.Text = Messages.XENCENTER;
+                TitleLabel.Text = BrandManager.BrandConsole;
                 TitleIcon.Image = Images.StaticImages.Logo;
                 loggedInLabel1.Connection = null;
             }
@@ -2736,7 +2787,7 @@ namespace XenAdmin
 
         private string GetLicenseStatusText(IXenObject xenObject, out Color foreColor)
         {
-            foreColor = Program.TitleBarForeColor;
+            foreColor = VerticalGradientPanel.TextColor;
 
             var pool = xenObject as Pool;
             if (pool != null && pool.Connection != null && pool.Connection.IsConnected && pool.Connection.CacheIsPopulated)
@@ -3053,7 +3104,7 @@ namespace XenAdmin
         {
             using (OpenFileDialog dialog = new OpenFileDialog())
             {
-                dialog.Filter = Messages.XENCENTER_CONFIG_FILTER;
+                dialog.Filter = string.Format(Messages.XENCENTER_CONFIG_FILTER, BrandManager.BrandConsole);
                 if (dialog.ShowDialog(this) != DialogResult.Cancel)
                 {
                     try
@@ -3105,7 +3156,7 @@ namespace XenAdmin
         {
             using (SaveFileDialog dialog = new SaveFileDialog())
             {
-                dialog.Filter = Messages.XENCENTER_CONFIG_FILTER;
+                dialog.Filter = string.Format(Messages.XENCENTER_CONFIG_FILTER, BrandManager.BrandConsole);
                 dialog.Title = Messages.ACTION_SAVE_CHANGES_IN_PROGRESS;
                 dialog.CheckPathExists = true;
                 if (dialog.ShowDialog(this) != DialogResult.Cancel)

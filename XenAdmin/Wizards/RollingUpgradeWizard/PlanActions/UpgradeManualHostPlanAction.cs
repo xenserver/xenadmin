@@ -62,8 +62,8 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
                 return;
 
             ReplaceProgressStep(_upgradeVersion == null
-                ? string.Format(Messages.ROLLING_UPGRADE_TIMEOUT, CurrentHost.Name())
-                : string.Format(Messages.ROLLING_UPGRADE_TIMEOUT_VERSION, _upgradeVersion, CurrentHost.Name()));
+                ? string.Format(Messages.ROLLING_UPGRADE_TIMEOUT, BrandManager.ProductBrand, CurrentHost.Name())
+                : string.Format(Messages.ROLLING_UPGRADE_TIMEOUT_VERSION, BrandManager.ProductBrand, _upgradeVersion, CurrentHost.Name()));
         }
 
         protected void Upgrade(ref Session session, string upgradeVersion = null)
@@ -86,8 +86,8 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
 
                 log.DebugFormat("Upgrading host {0}", hostObj.Name());
                 AddProgressStep(_upgradeVersion == null
-                    ? string.Format(Messages.PLAN_ACTION_STATUS_INSTALLING_XENSERVER, hostObj.Name())
-                    : string.Format(Messages.PLAN_ACTION_STATUS_INSTALLING_XENSERVER_VERSION, _upgradeVersion, hostObj.Name()));
+                    ? string.Format(Messages.PLAN_ACTION_STATUS_INSTALLING_XENSERVER, BrandManager.ProductBrand, hostObj.Name())
+                    : string.Format(Messages.PLAN_ACTION_STATUS_INSTALLING_XENSERVER_VERSION, BrandManager.ProductBrand, _upgradeVersion, hostObj.Name()));
 
                 log.DebugFormat("Waiting for host {0} to reboot", hostObj.Name());
                 WaitForReboot(ref session, Host.BootTime, s => Host.async_reboot(s, HostXenRef.opaque_ref));
@@ -120,7 +120,8 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
 
             Program.Invoke(invokingControl, () =>
             {
-                using (var dialog = new InformationDialog(string.Format(Messages.ROLLING_UPGRADE_REBOOT_MESSAGE, GetResolvedHost().Name()),
+                using (var dialog = new InformationDialog(string.Format(Messages.ROLLING_UPGRADE_REBOOT_MESSAGE,
+                            BrandManager.ProductBrand, GetResolvedHost().Name()),
                     new ThreeButtonDialog.TBDButton(Messages.REBOOT, DialogResult.OK),
                     new ThreeButtonDialog.TBDButton(Messages.SKIP_SERVER, DialogResult.Cancel))
                     {WindowTitle = Messages.ROLLING_POOL_UPGRADE})

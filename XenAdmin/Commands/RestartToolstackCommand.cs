@@ -31,8 +31,8 @@
 
 using System.Collections.Generic;
 using System.Linq;
-
 using XenAdmin.Actions;
+using XenAdmin.Core;
 using XenAPI;
 
 
@@ -88,20 +88,11 @@ namespace XenAdmin.Commands
             return base.GetCantExecuteReasonCore(item);
         }
 
-        public override string MenuText
-        {
-            get { return Messages.MAINWINDOW_RESTART_TOOLSTACK; }
-        }
+        public override string MenuText => Messages.MAINWINDOW_RESTART_TOOLSTACK;
 
-        public override string ContextMenuText
-        {
-            get { return Messages.MAINWINDOW_RESTART_TOOLSTACK; }
-        }
+        public override string ContextMenuText => Messages.MAINWINDOW_RESTART_TOOLSTACK;
 
-        protected override bool ConfirmationRequired
-        {
-            get { return true; }
-        }
+        protected override bool ConfirmationRequired => true;
 
         protected override string ConfirmationDialogText
         {
@@ -110,14 +101,11 @@ namespace XenAdmin.Commands
                 List<Host> hosts = GetSelection().AsXenObjects<Host>();
 
                 return hosts.Count == 1
-                           ? string.Format(Messages.CONFIRM_RESTART_TOOLSTACK_ONE_SERVER, hosts[0].Name().Ellipsise(30))
-                           : Messages.CONFIRM_RESTART_TOOLSTACK_MANY_SERVERS;
+                           ? string.Format(Messages.CONFIRM_RESTART_TOOLSTACK_ONE_SERVER, hosts[0].Name().Ellipsise(30), BrandManager.BrandConsole)
+                           : string.Format(Messages.CONFIRM_RESTART_TOOLSTACK_MANY_SERVERS, BrandManager.BrandConsole);
             }
         }
 
-        protected override string ConfirmationDialogTitle
-        {
-            get { return Messages.CONFIRM_RESTART_TOOLSTACK_TITLE; }
-        }
+        protected override string ConfirmationDialogTitle => Messages.CONFIRM_RESTART_TOOLSTACK_TITLE;
     }
 }

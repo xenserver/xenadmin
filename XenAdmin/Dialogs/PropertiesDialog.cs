@@ -165,10 +165,7 @@ namespace XenAdmin.Dialogs
                         {
                             Image = Images.StaticImages._000_Alert2_h32bit_16,
                             Text = Messages.ALERTS,
-                            BlurbText = HiddenFeatures.LinkLabelHidden
-                                ? Messages.UPSELL_BLURB_ALERTS
-                                : Messages.UPSELL_BLURB_ALERTS + Messages.UPSELL_BLURB_TRIAL,
-                            LearnMoreUrl = InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL
+                            BlurbText = Messages.UPSELL_BLURB_ALERTS
                         };
 
                         ShowTab(PerfmonAlertUpsellEditPage);
@@ -187,10 +184,7 @@ namespace XenAdmin.Dialogs
                         {
                             Image = Images.StaticImages._000_Email_h32bit_16,
                             Text = Messages.EMAIL_OPTIONS,
-                            BlurbText = HiddenFeatures.LinkLabelHidden
-                                ? Messages.UPSELL_BLURB_ALERTS
-                                : Messages.UPSELL_BLURB_ALERTS + Messages.UPSELL_BLURB_TRIAL,
-                            LearnMoreUrl = InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL
+                            BlurbText = Messages.UPSELL_BLURB_ALERTS
                         };
                         ShowTab(PerfmonAlertOptionsUpsellEditPage);
                     }
@@ -241,10 +235,7 @@ namespace XenAdmin.Dialogs
                         {
                             Image = Images.StaticImages._000_GetMemoryInfo_h32bit_16,
                             Text = Messages.GPU,
-                            BlurbText = HiddenFeatures.LinkLabelHidden
-                                ? Messages.UPSELL_BLURB_GPU
-                                : Messages.UPSELL_BLURB_GPU + Messages.UPSELL_BLURB_TRIAL,
-                            LearnMoreUrl = InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL
+                            BlurbText = Messages.UPSELL_BLURB_GPU
                         };
                         ShowTab(GpuUpsellEditPage);
                     }

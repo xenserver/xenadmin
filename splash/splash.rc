@@ -102,8 +102,8 @@ BEGIN
             VALUE "FileVersion", "1, 0, 0, 1"
             VALUE "InternalName", "[XenCenter]"
             VALUE "LegalCopyright", "Copyright \\251 [BRANDING_COMPANY_NAME_LEGAL]"
-            VALUE "OriginalFilename", "[XenCenter].exe"
-            VALUE "ProductName", "[Citrix] [XenCenter]"
+            VALUE "OriginalFilename", "[XenCenter_No_Space].exe"
+            VALUE "ProductName", "[XenCenter]"
             VALUE "ProductVersion", "1, 0, 0, 1"
         END
     END

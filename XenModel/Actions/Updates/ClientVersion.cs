@@ -30,17 +30,58 @@
  */
 
 using System;
+using System.Collections.Generic;
 
-namespace XenCenterLib
+namespace XenAdmin.Core
 {
-    [AttributeUsage(AttributeTargets.Assembly, Inherited = false)]
-    public sealed class XSVersionAttribute : Attribute
+    public class ClientVersion
     {
-        public readonly string Version;
+        public Version Version;
+        public string Name;
+        public bool Latest;
+        public bool LatestCr;
+        public string Url;
+        public string Lang;
+        public DateTime TimeStamp;
 
-        public XSVersionAttribute(string version)
+        public ClientVersion(string version_lang, string name, bool latest, bool latest_cr, string url, string timestamp)
         {
-            Version = version;
+            ParseVersion(version_lang);
+            Name = name;
+            Latest = latest;
+            LatestCr = latest_cr;
+            Url = url;
+            DateTime.TryParse(timestamp, out TimeStamp);
+        }
+
+        private void ParseVersion(string version_lang)
+        {
+            string[] bits = version_lang.Split('.');
+            List<string> ver = new List<string>();
+            foreach (string bit in bits)
+            {
+                int num;
+                if (Int32.TryParse(bit, out num))
+                    ver.Add(bit);
+                else
+                    Lang = bit;
+            }
+            Version = new Version(string.Join(".", ver.ToArray()));
+        }
+
+        public override string ToString()
+        {
+            return Name;
+        }
+
+        public string VersionAndLang
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(Lang))
+                    return Version.ToString();
+                return string.Format("{0}.{1}", Version.ToString(), Lang);
+            }
         }
     }
 }

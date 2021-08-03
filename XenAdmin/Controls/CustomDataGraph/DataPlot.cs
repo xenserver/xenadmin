@@ -272,8 +272,8 @@ namespace XenAdmin.Controls.CustomDataGraph
             if (require_tools && DataKey.CurrentKeys.Count > 0)
             {
                 Rectangle messageRect = Rectangle.Inflate(SlightlySmaller, -10, -10);
-                paintEventArgs.Graphics.DrawString(Messages.GRAPH_NEEDS_TOOLS, Palette.LabelFont, Palette.LabelBrush,
-                                                   messageRect);
+                paintEventArgs.Graphics.DrawString(string.Format(Messages.GRAPH_NEEDS_TOOLS, BrandManager.VmTools),
+                    Palette.LabelFont, Palette.LabelBrush, messageRect);
                 return;
             }
 

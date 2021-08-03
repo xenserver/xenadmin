@@ -489,8 +489,10 @@ namespace XenAdmin.Dialogs
             {
                 if (displayWarning)
                 {
-                    string title = Pool == null ? Messages.NETWORKING_PROPERTIES_WARNING_CHANGING_MANAGEMENT_HOST 
-                        : Messages.NETWORKING_PROPERTIES_WARNING_CHANGING_MANAGEMENT_POOL;
+                    string title = string.Format(Pool == null
+                            ? Messages.NETWORKING_PROPERTIES_WARNING_CHANGING_MANAGEMENT_HOST
+                            : Messages.NETWORKING_PROPERTIES_WARNING_CHANGING_MANAGEMENT_POOL,
+                        BrandManager.BrandConsole);
 
                     DialogResult dialogResult;
                     using (var dlg = new WarningDialog(title,

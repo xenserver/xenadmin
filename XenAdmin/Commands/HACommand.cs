@@ -90,10 +90,7 @@ namespace XenAdmin.Commands
 
             if (Helpers.FeatureForbidden(pool, Host.RestrictHA))
             {
-                // Show upsell dialog
-                using (var dlg = new UpsellDialog(HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_HA : Messages.UPSELL_BLURB_HA + Messages.UPSELL_BLURB_TRIAL,
-                    InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL))
-                    dlg.ShowDialog(Parent);
+                UpsellDialog.ShowUpsellDialog(Messages.UPSELL_BLURB_HA, Parent);
             }
             else if (pool.ha_enabled)
             {
@@ -268,14 +265,14 @@ namespace XenAdmin.Commands
             Pool pool = item == null ? null : Helpers.GetPoolOfOne(item.Connection);
 
             if (pool == null)
-                return Messages.POOL_GONE;
+                return string.Format(Messages.POOL_GONE, BrandManager.BrandConsole);
 
             if (!pool.IsVisible())
                 return Messages.HA_STANDALONE_SERVER;
  
             Host master = Helpers.GetMaster(pool.Connection);
             if (master == null)
-                return Messages.POOL_MASTER_GONE;
+                return string.Format(Messages.POOL_MASTER_GONE, BrandManager.BrandConsole);
 
             if (pool.Locked)
                 return Messages.POOL_EDIT_IN_PROGRESS;

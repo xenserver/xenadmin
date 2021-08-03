@@ -351,7 +351,7 @@ namespace XenAdmin.TabPages
             flowLayoutPanel1.Enabled = false;
             SetSubjectListEnable(false);
             buttonJoinLeave.Enabled = false;
-            labelBlurb.Text = Messages.AD_MASTER_UNAVAILABLE_BLURB;
+            labelBlurb.Text = string.Format(Messages.AD_MASTER_UNAVAILABLE_BLURB, BrandManager.BrandConsole);
         }
 
         private void RepopulateListBox()
@@ -1044,10 +1044,7 @@ namespace XenAdmin.TabPages
             Program.AssertOnEventThread();
             if (Helpers.FeatureForbidden(_connection, Host.RestrictRBAC))
             {
-                // Show upsell dialog
-                using (var dlg = new UpsellDialog(HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_RBAC : Messages.UPSELL_BLURB_RBAC + Messages.UPSELL_BLURB_TRIAL,
-                    InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL))
-                    dlg.ShowDialog(this);
+                UpsellDialog.ShowUpsellDialog(string.Format(Messages.UPSELL_BLURB_RBAC, BrandManager.ProductBrand), this);
                 return;
             }
 

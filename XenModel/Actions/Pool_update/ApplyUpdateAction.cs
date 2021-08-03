@@ -33,6 +33,7 @@ using System;
 using System.Collections.Generic;
 using XenAPI;
 using System.Linq;
+using XenAdmin.Core;
 
 
 namespace XenAdmin.Actions
@@ -65,7 +66,7 @@ namespace XenAdmin.Actions
             var poolUpdate = poolUpdates.FirstOrDefault(u => u != null && string.Equals(u.uuid, update.uuid, StringComparison.OrdinalIgnoreCase));
 
             if (poolUpdate == null)
-                throw new Failure(Failure.INTERNAL_ERROR, Messages.POOL_UPDATE_GONE);
+                throw new Failure(Failure.INTERNAL_ERROR, string.Format(Messages.POOL_UPDATE_GONE, BrandManager.BrandConsole));
 
             if (poolUpdate.AppliedOn(host))
             {

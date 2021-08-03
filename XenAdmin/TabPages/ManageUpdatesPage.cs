@@ -74,12 +74,18 @@ namespace XenAdmin.TabPages
             toolStripSplitButtonDismiss.DefaultItem = dismissAllToolStripMenuItem;
             toolStripSplitButtonDismiss.Text = dismissAllToolStripMenuItem.Text;
 
+            toolStripDropDownButtonView.Visible = false;
+            toolStripSeparator2.Visible = false;
+            toolStripButtonUpdate.Visible = false;
+            labelLegacyUpdates.Text = string.Format(labelLegacyUpdates.Text, BrandManager.BrandConsole,
+                BrandManager.ProductBrand, BrandManager.ProductVersion82, BrandManager.LegacyConsole);
+
             try
             {
                 //ensure we won't try to rebuild the list while setting the initial view
                 checksQueue++;
-                byHostToolStripMenuItem.Checked = Properties.Settings.Default.ShowUpdatesByServer;
-                byUpdateToolStripMenuItem.Checked = !Properties.Settings.Default.ShowUpdatesByServer;
+                byHostToolStripMenuItem.Checked = false;
+                byUpdateToolStripMenuItem.Checked = true;
                 ToggleView();
             }
             finally
@@ -631,13 +637,14 @@ namespace XenAdmin.TabPages
         /// </summary>
         private void ToggleTopWarningVisibility()
         {
-            bool visible = !Properties.Settings.Default.AllowPatchesUpdates ||
-                           !Properties.Settings.Default.AllowXenCenterUpdates ||
+            bool visible = !Properties.Settings.Default.AllowXenCenterUpdates ||
                            !Properties.Settings.Default.AllowXenServerUpdates;
 
             pictureBox1.Visible = visible;
             AutoCheckForUpdatesDisabledLabel.Visible = visible;
             checkForUpdatesNowLink.Visible = visible;
+            labelLegacyUpdates.Visible = ConnectionsManager.XenConnectionsCopy.Any(c =>
+                c.IsConnected && !Helpers.PostStockholm(c));
         }
 
         /// <summary>
@@ -721,7 +728,7 @@ namespace XenAdmin.TabPages
             else
             {
                 var connectionList = ConnectionsManager.XenConnectionsCopy;
-                toolStripButtonUpdate.Enabled = toolStripButtonExportAll.Enabled = connectionList.Any(xenConnection => xenConnection.IsConnected);
+                toolStripButtonExportAll.Enabled = connectionList.Any(c => c.IsConnected);
             }
         }
 
@@ -802,16 +809,16 @@ namespace XenAdmin.TabPages
             }
 
             if (alert is XenServerPatchAlert patchAlert && patchAlert.CanApply &&
-                !string.IsNullOrEmpty(patchAlert.Patch.PatchUrl) && patchAlert.RequiredXenCenterVersion == null)
+                !string.IsNullOrEmpty(patchAlert.Patch.PatchUrl) && patchAlert.RequiredClientVersion == null)
             {
                 var download = new ToolStripMenuItem(Messages.UPDATES_DOWNLOAD_AND_INSTALL);
                 download.Click += ToolStripMenuItemDownload_Click;
                 items.Add(download);
             }
 
-            if (alert is XenServerUpdateAlert updateAlert && updateAlert.RequiredXenCenterVersion != null)
+            if (alert is XenServerUpdateAlert updateAlert && updateAlert.RequiredClientVersion != null)
             {
-                var downloadNewXenCenter = new ToolStripMenuItem(Messages.UPDATES_DOWNLOAD_REQUIRED_XENCENTER);
+                var downloadNewXenCenter = new ToolStripMenuItem(string.Format(Messages.UPDATES_DOWNLOAD_REQUIRED_XENCENTER, BrandManager.BrandConsole));
                 downloadNewXenCenter.Click += ToolStripMenuItemDownloadNewXenCenter_Click;
                 items.Add(downloadNewXenCenter);
             }
@@ -1028,8 +1035,6 @@ namespace XenAdmin.TabPages
 
             if (hosts.Count > 0)
             {
-                var wizard = (PatchingWizard)Program.MainWindow.ShowForm(typeof(PatchingWizard));
-                wizard.PrepareToInstallUpdate(patchAlert, hosts);
             }
             else
             {
@@ -1051,10 +1056,10 @@ namespace XenAdmin.TabPages
 
             XenServerUpdateAlert updateAlert = (XenServerUpdateAlert)clickedRow.Tag;
 
-            if (updateAlert == null || updateAlert.RequiredXenCenterVersion == null)
+            if (updateAlert == null || updateAlert.RequiredClientVersion == null)
                 return;
 
-            string xenCenterUrl = updateAlert.RequiredXenCenterVersion.Url;
+            string xenCenterUrl = updateAlert.RequiredClientVersion.Url;
             if (string.IsNullOrEmpty(xenCenterUrl))
                 return;
 
@@ -1315,17 +1320,13 @@ namespace XenAdmin.TabPages
 
         private string GetHostUpdateDetailsCsvQuotes(IXenConnection xenConnection, Host host, bool hasPool)
         {
-            string pool = String.Empty;
-            string patchingStatus = String.Empty;
-            string requiredUpdates = String.Empty;
-            string installedUpdates = String.Empty;
             var versionIsFound = VersionFoundInUpdatesXml(host);
 
-            pool = hasPool ? Helpers.GetPool(xenConnection).Name() : String.Empty;
-            requiredUpdates = versionIsFound ? RequiredUpdatesForHost(host) : String.Empty;
-            installedUpdates = InstalledUpdatesForHost(host);
-            patchingStatus = versionIsFound
-                ? (requiredUpdates.Length > 0 ? Messages.NOT_UPDATED : Messages.UPDATED)
+            string pool = hasPool ? Helpers.GetPool(xenConnection).Name() : String.Empty;
+            string requiredUpdates = versionIsFound ? RequiredUpdatesForHost(host) : String.Empty;
+            string installedUpdates = InstalledUpdatesForHost(host);
+            string patchingStatus = versionIsFound
+                ? requiredUpdates.Length > 0 ? Messages.NOT_UPDATED : Messages.UPDATED
                 : String.Empty;
 
             return String.Format("\"{0}\",\"{1}\",\"{2}\",\"{3}\",\"{4}\",\"{5}\"",
@@ -1424,7 +1425,6 @@ namespace XenAdmin.TabPages
             toolStripDropDownButtonDateFilter.Visible = byUpdateToolStripMenuItem.Checked;
             toolStripSplitButtonDismiss.Visible = byUpdateToolStripMenuItem.Checked;
             toolStripButtonRestoreDismissed.Visible = byUpdateToolStripMenuItem.Checked;
-            toolStripButtonUpdate.Visible = byHostToolStripMenuItem.Checked;
 
             // Switch the grid view
             dataGridViewUpdates.Visible = byUpdateToolStripMenuItem.Checked;

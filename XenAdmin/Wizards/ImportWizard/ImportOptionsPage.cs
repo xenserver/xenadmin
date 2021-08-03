@@ -36,6 +36,7 @@ using System.IO;
 using System.Linq;
 using XenAdmin.Controls;
 using XenAdmin.Controls.Common;
+using XenAdmin.Core;
 using XenCenterLib;
 using XenAdmin.Mappings;
 using XenAPI;
@@ -57,6 +58,9 @@ namespace XenAdmin.Wizards.ImportWizard
 		public ImportOptionsPage()
 		{
 			InitializeComponent();
+            m_labelIntro.Text = string.Format(m_labelIntro.Text, BrandManager.ProductBrand);
+            m_labelDontRunOSFixups.Text = string.Format(m_labelDontRunOSFixups.Text, BrandManager.ProductBrand);
+            m_labelRunOSFixups.Text = string.Format(m_labelRunOSFixups.Text, BrandManager.ProductBrand);
             m_radioButtonDontRunOSFixups.Checked = true;
             PBD_CollectionChangedWithInvoke = Program.ProgramInvokeHandler(PBD_CollectionChanged);
             m_ctrlError.HideError();

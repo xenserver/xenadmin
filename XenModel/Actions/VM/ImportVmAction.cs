@@ -118,7 +118,7 @@ namespace XenAdmin.Actions
             if (isTemplate && vmRec.is_default_template && Helpers.FalconOrGreater(Connection))
             {
                 if (!vmRec.other_config.ContainsKey(IMPORT_TASK) || vmRec.other_config[IMPORT_TASK] != importTaskRef)
-                    throw new Exception(Messages.IMPORT_TEMPLATE_ALREADY_EXISTS);
+                    throw new Exception(string.Format(Messages.IMPORT_TEMPLATE_ALREADY_EXISTS, BrandManager.ProductBrand));
             }
 
             Description = isTemplate ? Messages.IMPORT_TEMPLATE_UPDATING_TEMPLATE : Messages.IMPORTVM_UPDATING_VM;

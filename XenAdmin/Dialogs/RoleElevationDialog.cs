@@ -83,6 +83,12 @@ namespace XenAdmin.Dialogs
             this.authorizedRoles = authorizedRoles;
         }
 
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            Text = BrandManager.BrandConsole;
+        }
+
         private void buttonAuthorize_Click(object sender, EventArgs e)
         {
             try
@@ -129,7 +135,7 @@ namespace XenAdmin.Dialogs
             catch (Exception ex)
             {
                 log.DebugFormat("Exception when attempting to sudo action: {0} ", ex);
-                using (var dlg = new ErrorDialog(string.Format(Messages.USER_AUTHORIZATION_FAILED, TextBoxUsername.Text)))
+                using (var dlg = new ErrorDialog(string.Format(Messages.USER_AUTHORIZATION_FAILED, BrandManager.BrandConsole, TextBoxUsername.Text)))
                     dlg.ShowDialog(Parent);
 
                 TextBoxPassword.Focus();

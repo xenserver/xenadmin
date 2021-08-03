@@ -130,7 +130,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="pageContainerPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 118</value>
+    <value>0, 114</value>
   </data>
   <data name="pageContainerPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -139,7 +139,7 @@
     <value>12, 12, 12, 12</value>
   </data>
   <data name="pageContainerPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>602, 456</value>
+    <value>602, 460</value>
   </data>
   <data name="pageContainerPanel.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -178,16 +178,16 @@
     <value>Fill</value>
   </data>
   <data name="deprecationBanner1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>66, 6</value>
+    <value>6, 6</value>
   </data>
   <data name="deprecationBanner1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 6, 6, 6</value>
   </data>
   <data name="deprecationBanner1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>20, 4, 20, 4</value>
   </data>
   <data name="deprecationBanner1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>469, 60</value>
+    <value>590, 56</value>
   </data>
   <data name="deprecationBanner1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -199,7 +199,7 @@
     <value>deprecationBanner1</value>
   </data>
   <data name="&gt;&gt;deprecationBanner1.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.DeprecationBanner, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.DeprecationBanner, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;deprecationBanner1.Parent" xml:space="preserve">
     <value>tableLayoutPanelBanner</value>
@@ -220,7 +220,7 @@
     <value>1</value>
   </data>
   <data name="tableLayoutPanelBanner.Size" type="System.Drawing.Size, System.Drawing">
-    <value>602, 72</value>
+    <value>602, 68</value>
   </data>
   <data name="tableLayoutPanelBanner.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -238,7 +238,7 @@
     <value>1</value>
   </data>
   <data name="tableLayoutPanelBanner.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="deprecationBanner1" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,10,Percent,80,Percent,10" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="deprecationBanner1" Row="0" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,10,Percent,80,Percent,10" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="titleLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Bottom</value>
@@ -298,7 +298,7 @@
     <value>gradientPanel1</value>
   </data>
   <data name="&gt;&gt;gradientPanel1.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.GradientPanel.GradientPanel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.GradientPanel.HorizontalGradientPanel, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;gradientPanel1.Parent" xml:space="preserve">
     <value>$this</value>

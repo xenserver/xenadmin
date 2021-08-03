@@ -29,25 +29,34 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Text;
+using XenAdmin.Diagnostics.Problems;
+using XenAdmin.Core;
+using XenAPI;
 
-namespace CFUValidator.OutputDecorators
+namespace XenAdmin.Diagnostics.Checks
 {
-    abstract class Decorator : OuputComponent
+    public class ClientVersionCheck : Check
     {
-        private OuputComponent ouputComponent;
-        public void SetComponent(OuputComponent ouputComponentToSet)
+        private XenServerVersion _newServerVersion;
+
+        public ClientVersionCheck(XenServerVersion newServerVersion)
         {
-            ouputComponent = ouputComponentToSet;
+            _newServerVersion = newServerVersion;
+        }
+        
+        protected override Problem RunCheck()
+        {
+            var requiredClientVersion = Updates.GetRequiredClientVersion(_newServerVersion);
+            if (requiredClientVersion == null) 
+                return null;
+            if (_newServerVersion != null) 
+                return new ClientVersionProblem(this, requiredClientVersion);
+            else
+                return new ClientVersionWarning(this, requiredClientVersion);
         }
 
-        public override StringBuilder Generate()
-        {
-            if(ouputComponent != null)
-                return ouputComponent.Generate();
+        public override string Description => string.Format(Messages.XENCENTER_VERSION_CHECK_DESCRIPTION, BrandManager.BrandConsole);
 
-            throw new NullReferenceException();
-        }
+        public override IXenObject XenObject => null;
     }
 }

@@ -45,12 +45,12 @@ namespace XenAdminTests.UnitTests.AlertTests
             ClassVerifiers.VerifyGetters(new GuiOldAlert(),
                 new AlertClassUnitTestData
                 {
-                    AppliesTo = BrandManager.BRAND_CONSOLE,
-                    Description = "There is a newer version of " + BrandManager.BRAND_CONSOLE + " available. Please contact your support representative.",
+                    AppliesTo = BrandManager.BrandConsole,
+                    Description = "There is a newer version of " + BrandManager.BrandConsole + " available. Please contact your support representative.",
                     FixLinkText = "Go to Web Page",
                     HelpID = "GuiOldAlert",
                     HelpLinkText = "Help",
-                    Title = "Newer " + BrandManager.BRAND_CONSOLE + " Available",
+                    Title = "Newer " + BrandManager.BrandConsole + " Available",
                     Priority = "Priority5"
                 });
         }

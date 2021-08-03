@@ -53,6 +53,7 @@ namespace XenAdmin.SettingsPanels
         public LogDestinationEditPage()
         {
             InitializeComponent();
+            label3.Text = string.Format(label3.Text, BrandManager.ProductBrand);
 
             Text = Messages.LOG_DESTINATION;
 

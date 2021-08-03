@@ -81,7 +81,7 @@ namespace XenAdmin.Commands
             {
                 if (Helpers.FeatureForbidden(pool.Connection, Host.RestrictDR)) 
                 {
-                    ShowUpsellDialog(Parent);
+                    UpsellDialog.ShowUpsellDialog(Messages.UPSELL_BLURB_DR, Parent);
                 }
                 else
                 {
@@ -89,14 +89,6 @@ namespace XenAdmin.Commands
                     this.MainWindowCommandInterface.ShowPerConnectionWizard(pool.Connection, _wizard);
                 }
             }
-        }
-
-        public static void ShowUpsellDialog(IWin32Window parent)
-        {
-            // Show upsell dialog
-            using (var dlg = new UpsellDialog(HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_DR : Messages.UPSELL_BLURB_DR + Messages.UPSELL_BLURB_TRIAL,
-                                                InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL))
-                dlg.ShowDialog(parent);
         }
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)

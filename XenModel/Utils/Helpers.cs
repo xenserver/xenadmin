@@ -494,6 +494,7 @@ namespace XenAdmin.Core
         {
             return platformVersion != null && productVersionCompare(platformVersion, "3.1.50") >= 0;
         }
+
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool PostStockholm(IXenConnection conn)
         {

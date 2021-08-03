@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>XenAdmin</RootNamespace>
-    <AssemblyName>XenCenterMain</AssemblyName>
+    <AssemblyName>[XenCenter_No_Space]Main</AssemblyName>
     <ApplicationIcon>..\Branding\Images\AppIcon.ico</ApplicationIcon>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <PublishUrl>publish\</PublishUrl>
@@ -141,7 +141,6 @@
     <Compile Include="Controls\AffinityPicker.Designer.cs">
       <DependentUpon>AffinityPicker.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Ballooning\BallooningColors.cs" />
     <Compile Include="Controls\Ballooning\MemorySpinner.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -235,6 +234,7 @@
     <Compile Include="Diagnostics\Checks\CfuAvailabilityCheck.cs" />
     <Compile Include="Diagnostics\Checks\AutomatedUpdatesLicenseCheck.cs" />
     <Compile Include="Diagnostics\Checks\DiskSpaceForBatchUpdatesCheck.cs" />
+    <Compile Include="Diagnostics\Checks\HealthCheckServiceCheck.cs" />
     <Compile Include="Diagnostics\Checks\PowerOniLoCheck.cs" />
     <Compile Include="Diagnostics\Checks\PoolLegacySslCheck.cs" />
     <Compile Include="Diagnostics\Checks\PrepareToUpgradeCheck.cs" />
@@ -244,10 +244,11 @@
     <Compile Include="Diagnostics\Checks\SafeToUpgradeCheck.cs" />
     <Compile Include="Diagnostics\Checks\ServerSelectionCheck.cs" />
     <Compile Include="Diagnostics\Checks\VSwitchControllerCheck.cs" />
-    <Compile Include="Diagnostics\Checks\XenCenterVersionCheck.cs" />
+    <Compile Include="Diagnostics\Checks\ClientVersionCheck.cs" />
     <Compile Include="Diagnostics\Checks\HostMemoryPostUpgradeCheck.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\BrokenSR.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\PowerOniLoProblem.cs" />
+    <Compile Include="Diagnostics\Problems\PoolProblem\HealthCheckServiceProblem.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\LegacySslProblem.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\PoolHasPVGuestWarningUrl.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\HostMemoryPostUpgradeWarning.cs" />
@@ -277,7 +278,7 @@
     <Compile Include="Dialogs\AttachUsbDialog.Designer.cs">
       <DependentUpon>AttachUsbDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Diagnostics\Problems\XenCenterVersionProblem.cs" />
+    <Compile Include="Diagnostics\Problems\ClientVersionProblem.cs" />
     <Compile Include="Dialogs\ConversionDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -594,9 +595,6 @@
     <Compile Include="SettingsPanels\PerfmonAlertOptionsPage.Designer.cs">
       <DependentUpon>PerfmonAlertOptionsPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\BlueBorderPanel.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Controls\CustomDataGraph\ArchiveMaintainer.cs">
     </Compile>
     <Compile Include="Controls\CustomDataGraph\DataArchive.cs" />
@@ -640,12 +638,6 @@
     <Compile Include="Diagnostics\Checks\HAOffCheck.cs" />
     <Compile Include="Diagnostics\Problems\VMProblem\CannotMigrateVM.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\HAEnabledProblem.cs" />
-    <Compile Include="Dialogs\AllowUpdatesDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\AllowUpdatesDialog.Designer.cs">
-      <DependentUpon>AllowUpdatesDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\BondProperties.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1056,7 +1048,7 @@
     <Compile Include="TabPages\HAPage.Designer.cs">
       <DependentUpon>HAPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Alerts\Types\XenCenterUpdateAlert.cs" />
+    <Compile Include="Alerts\Types\ClientUpdateAlert.cs" />
     <Compile Include="Wizards\PatchingWizard\AutomatedUpdatesBasePage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -2007,10 +1999,6 @@
     <EmbeddedResource Include="Controls\CustomDataGraph\GraphList.resx">
       <SubType>Designer</SubType>
       <DependentUpon>GraphList.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\AllowUpdatesDialog.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>AllowUpdatesDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\BondProperties.resx">
       <DependentUpon>BondProperties.cs</DependentUpon>
@@ -4403,12 +4391,11 @@
     <None Include="Images\000_Tick_h32bit_16.png" />
     <None Include="Images\001_CreateVM_h32bit_16.png" />
     <None Include="Images\000_Tick_h32bit_24.png" />
-    <None Include="..\Branding\Images\000_XenCenterAlerts_h32bit_24.png">
-      <Link>Images\000_XenCenterAlerts_h32bit_24.png</Link>
-    </None>
     <None Include="Images\000_WarningAlert_h32bit_32.png" />
     <None Include="Images\112_LeftArrowLong_Blue_24x24_72.png" />
-    <None Include="Images\WLB.png" />
+    <None Include="..\Branding\Images\WLB.png">
+      <Link>Images\WLB.png</Link>
+    </None>
     <None Include="..\Branding\Images\XS.png">
       <Link>Images\XS.png</Link>
     </None>
@@ -4427,9 +4414,6 @@
     <None Include="Images\alert4_16.png" />
     <None Include="Images\alert5_16.png" />
     <None Include="Images\alert6_16.png" />
-    <Content Include="..\Branding\Images\alerts_32.png">
-      <Link>Images\alerts_32.png</Link>
-    </Content>
     <Content Include="Images\000_Sites_h32bit_16.png" />
     <None Include="Images\000_TCP-IPGroup_h32bit_16.png" />
     <None Include="Images\015_Download_h32bit_16.png" />
@@ -4490,12 +4474,18 @@
     <None Include="Images\linx_16x.png" />
     <None Include="Images\yinhekylin_16x.png" />
     <None Include="Images\pool_32.png" />
+    <None Include="..\Branding\Images\LeftArrow.png">
+      <Link>Images\LeftArrow.png</Link>
+    </None>
     <Content Include="Images\queued.png" />
     <Content Include="Images\Refresh16.png" />
     <None Include="Images\saved_searches_16.png" />
     <None Include="Images\server_up_16.png" />
     <None Include="Images\saved_searches_24.png" />
     <None Include="Images\RunningDC_16.png" />
+    <None Include="..\Branding\Images\RightArrow.png">
+      <Link>Images\RightArrow.png</Link>
+    </None>
     <Content Include="Images\scilinux_16x.png" />
     <None Include="Images\server_32.png" />
     <None Include="Images\server_up_32.png" />
@@ -4583,9 +4573,6 @@
     <Content Include="Images\tshadowright.png" />
     <Content Include="Images\tshadowtopright.png" />
     <Content Include="Images\ubuntu_16x.png" />
-    <Content Include="..\Branding\Images\upsell_16.png">
-      <Link>Images\upsell_16.png</Link>
-    </Content>
     <Content Include="Images\usagebar_0.png" />
     <Content Include="Images\usagebar_1.png" />
     <Content Include="Images\usagebar_10.png" />
@@ -5136,12 +5123,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\AlertSummaryPage.zh-CN.resx">
       <DependentUpon>AlertSummaryPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\AllowUpdatesDialog.ja.resx">
-      <DependentUpon>AllowUpdatesDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\AllowUpdatesDialog.zh-CN.resx">
-      <DependentUpon>AllowUpdatesDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\AssignLicenseDialog.ja.resx">
       <DependentUpon>AssignLicenseDialog.cs</DependentUpon>
