@@ -1944,8 +1944,9 @@ namespace XenAdmin.TabPages
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-            panel2.AutoScroll = sections.Sum(s => s.Height) > panel2.Height;
+        {   
+            //Force scrollbar to be repainted to avoid occasional pixel glitch.
+            panel2.AutoScroll = sections.Sum(s => s?.Parent.Height ?? s.Height) > panel2.ClientRectangle.Height;
         }
 
         #endregion
