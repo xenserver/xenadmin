@@ -1844,5 +1844,10 @@ namespace XenAdmin.Core
                     orderby network.Key
                     select network.Value.Split(new[] { "\n", "%n" }, StringSplitOptions.RemoveEmptyEntries)).SelectMany(x => x).Distinct().ToList();
         }
+
+        public static bool GpusAvailable(IXenConnection connection)
+        {
+            return connection?.Cache?.GPU_groups?.Any(g => g.PGPUs?.Count > 0 && g.supported_VGPU_types?.Count != 0) ?? false;
+        }
     }
 }

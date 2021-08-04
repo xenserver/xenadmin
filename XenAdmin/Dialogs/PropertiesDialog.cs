@@ -241,9 +241,8 @@ namespace XenAdmin.Dialogs
                     }
                     else
                     {
-                        GpuEditPage = new GpuEditPage();
-                        if(GpuEditPage.GpusAvailable)
-                            ShowTab(GpuEditPage);
+                        if(Helpers.GpusAvailable(connection))
+                            ShowTab(GpuEditPage = new GpuEditPage());
                     }
                 }
 
