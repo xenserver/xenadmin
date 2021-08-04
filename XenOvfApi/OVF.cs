@@ -49,6 +49,12 @@ namespace XenOvf
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
+        private const string OVF_VERSION = "1.0.0";
+        //TODO: does this need to be configurable by XenAdmin?
+        private const string LANGUAGE = "en-US";
+        private const string FIXUP_ISO = "External Tools\\xenserver-linuxfixup-disk.iso";
+        private const string WIN_FILE_FORMAT_URI = "http://www.microsoft.com/technet/virtualserver/downloads/vhdspec.mspx";
+
         /// <summary>
         /// Event Registration of changes in Ovf state.
         /// </summary>
@@ -189,7 +195,7 @@ namespace XenOvf
 
 		public string AddAnnotation(EnvelopeType ovfObj, string vsId, string info, string annotation)
         {
-            return AddAnnotation(ovfObj, vsId, Properties.Settings.Default.Language, info, annotation);
+            return AddAnnotation(ovfObj, vsId, LANGUAGE, info, annotation);
         }
 
         public string AddAnnotation(EnvelopeType ovfObj, string vsId, string lang, string info, string annotation)
@@ -212,7 +218,7 @@ namespace XenOvf
 
 		public static string AddCDROM(EnvelopeType ovfObj, string vsId, string cdId, string caption, string description)
         {
-            return AddCDROM(ovfObj, vsId, Properties.Settings.Default.Language, cdId, caption, description);
+            return AddCDROM(ovfObj, vsId, LANGUAGE, cdId, caption, description);
         }
         /// <summary>
         /// Add a CD/DVD Drive
@@ -254,7 +260,7 @@ namespace XenOvf
 
 		public void AddController(EnvelopeType ovfObj, string vsId, DeviceType type, string deviceId, int iteration)
         {
-            AddController(ovfObj, vsId, Properties.Settings.Default.Language, type, deviceId, iteration);
+            AddController(ovfObj, vsId, LANGUAGE, type, deviceId, iteration);
         }
 
         /// <summary>
@@ -339,7 +345,7 @@ namespace XenOvf
 
 		public string AddDeploymentOption(EnvelopeType ovfObj, string label, string description, bool isdefault)
         {
-            return AddDeploymentOption(ovfObj, Properties.Settings.Default.Language, label, description, isdefault);
+            return AddDeploymentOption(ovfObj, LANGUAGE, label, description, isdefault);
         }
 
 		public string AddDeploymentOption(EnvelopeType env, string lang, string label, string description, bool isdefault)
@@ -392,7 +398,7 @@ namespace XenOvf
 
 		public void AddDeviceToController(EnvelopeType ovfObj, string vsId, string deviceInstanceId, string controllerInstanceId, string AddressOnController)
         {
-            AddDeviceToController(ovfObj, vsId, Properties.Settings.Default.Language, deviceInstanceId, controllerInstanceId, AddressOnController);
+            AddDeviceToController(ovfObj, vsId, LANGUAGE, deviceInstanceId, controllerInstanceId, AddressOnController);
         }
         /// <summary>
         /// Connect a Disk (VHD) to a Controller ie: IDE or SCSI and where on controller it should exist.
@@ -427,7 +433,7 @@ namespace XenOvf
 
         public static void AddDisk(EnvelopeType ovfObj, string vsId, string diskId, string vhdFileName, bool bootable, string name, string description, ulong filesize, ulong capacity)
         {
-            AddDisk(ovfObj, vsId, diskId, Properties.Settings.Default.Language, vhdFileName, bootable, name, description, filesize, capacity);
+            AddDisk(ovfObj, vsId, diskId, LANGUAGE, vhdFileName, bootable, name, description, filesize, capacity);
         }
         /// <summary>
         /// Add a VHD to the VM
@@ -493,7 +499,7 @@ namespace XenOvf
 
             vdisk.capacity = Convert.ToString(capacity);
             vdisk.isBootable = bootable;
-            vdisk.format = Properties.Settings.Default.winFileFormatURI;
+            vdisk.format = WIN_FILE_FORMAT_URI;
             vdisk.fileRef = diskId;
             vdisk.diskId = vdisk.fileRef;
             disks.Add(vdisk);
@@ -504,7 +510,7 @@ namespace XenOvf
                 filet.size = filesize;
                 filet.sizeSpecified = true;
             }
-            filet.href = string.Format(Properties.Settings.Default.FileURI, vhdFileName);
+            filet.href = vhdFileName;
             files.Add(filet);
             rasd.AllocationUnits = new cimString(_ovfrm.GetString("RASD_19_ALLOCATIONUNITS"));
             rasd.AutomaticAllocation = new cimBoolean();
@@ -515,7 +521,7 @@ namespace XenOvf
             rasd.ConsumerVisibility.Value = 3; //From MS.
 
             rasd.Connection = new cimString[] { new cimString(diskId) };
-            rasd.HostResource = new cimString[] { new cimString(string.Format(Properties.Settings.Default.hostresource, diskId)) };
+            rasd.HostResource = new cimString[] { new cimString($"ovf:/disk/{diskId}") };
 
             rasd.Description = new cimString(description);
             rasd.ElementName = new cimString(name);
@@ -544,7 +550,7 @@ namespace XenOvf
 
 		public static string AddEula(EnvelopeType ovfObj, string eulafilename)
         {
-            return AddEula(ovfObj, Properties.Settings.Default.Language, eulafilename);
+            return AddEula(ovfObj, LANGUAGE, eulafilename);
         }
         /// <summary>
         /// Add a EULA to the OVF
@@ -621,7 +627,7 @@ namespace XenOvf
 
 		public void AddFileReference(EnvelopeType ovfObj, string filename, string id, ulong capacity, string format)
         {
-            AddFileReference(ovfObj, Properties.Settings.Default.Language, filename, id, capacity, format);
+            AddFileReference(ovfObj, LANGUAGE, filename, id, capacity, format);
         }
         /// <summary>
         /// Add an Disk Reference file
@@ -713,7 +719,7 @@ namespace XenOvf
 
 		public static void AddNetwork(EnvelopeType ovfObj, string vsId, string netId, string netName, string networkDescription, string macAddress)
         {
-            AddNetwork(ovfObj, vsId, Properties.Settings.Default.Language, netId, netName, networkDescription, macAddress);
+            AddNetwork(ovfObj, vsId, LANGUAGE, netId, netName, networkDescription, macAddress);
         }
         /// <summary>
         /// Add a Network to the VM
@@ -813,7 +819,7 @@ namespace XenOvf
 
 		public void AddOperatingSystemSection(EnvelopeType ovfObj, string vsId, string description, string osInfo)
         {
-            AddOperatingSystemSection(ovfObj, vsId, Properties.Settings.Default.Language, description, osInfo, 0);
+            AddOperatingSystemSection(ovfObj, vsId, LANGUAGE, description, osInfo, 0);
         }
 
 		public static void AddOperatingSystemSection(EnvelopeType ovfObj, string vsId, string lang, string description, string osInfo)
@@ -831,7 +837,7 @@ namespace XenOvf
         /// <param name="osid">ushort identifying the OS from CIM_OperatingSystem ValueMap</param>
 		public void AddOperatingSystemSection(EnvelopeType ovfObj, string vsId, string description, string osInfo, ushort osid)
         {
-            AddOperatingSystemSection(ovfObj, vsId, Properties.Settings.Default.Language, description, osInfo, osid);
+            AddOperatingSystemSection(ovfObj, vsId, LANGUAGE, description, osInfo, osid);
         }
         /// <summary>
         /// Add the Operating System Section
@@ -876,7 +882,7 @@ namespace XenOvf
 
 		public static string AddOtherSystemSettingData(EnvelopeType ovfObj, string vsId, string name, string value, string description, bool permitMultiple=false)
         {
-            return AddOtherSystemSettingData(ovfObj, vsId, Properties.Settings.Default.Language, name, value, description, permitMultiple);
+            return AddOtherSystemSettingData(ovfObj, vsId, LANGUAGE, name, value, description, permitMultiple);
         }
         /// <summary>
         /// Add XEN Specific configuration Items.
@@ -951,7 +957,7 @@ namespace XenOvf
             }
 
             if (installSection == null)
-                installSection = AddInstallSection(ovfObj, vsId, 600, Properties.Settings.Default.Language, "ConfigureForXenServer");
+                installSection = AddInstallSection(ovfObj, vsId, 600, LANGUAGE, "ConfigureForXenServer");
 
 
             Xen_PostInstallOperation_Type XenPostInstall = new Xen_PostInstallOperation_Type();
@@ -966,7 +972,7 @@ namespace XenOvf
 
 		public string AddProductSection(EnvelopeType ovfObj, string nameSpace, string info, string product, string vendor, string version, string producturl, string vendorurl)
         {
-            return AddProductSection(ovfObj, Properties.Settings.Default.Language, nameSpace, info, product, vendor, version, producturl, vendorurl);
+            return AddProductSection(ovfObj, LANGUAGE, nameSpace, info, product, vendor, version, producturl, vendorurl);
         }
 
 		public string AddProductSection(EnvelopeType env, string lang, string nameSpace, string info, string product, string vendor, string version, string producturl, string vendorurl)
@@ -1021,7 +1027,7 @@ namespace XenOvf
 
 		public string AddProductSectionProperty(EnvelopeType ovfObj, string psId, string category, string key, string type, bool userConfig, string label, string description)
         {
-            return AddProductSectionProperty(ovfObj, psId, Properties.Settings.Default.Language, category, key, type, userConfig, label, description);
+            return AddProductSectionProperty(ovfObj, psId, LANGUAGE, category, key, type, userConfig, label, description);
         }
 
 		public string AddProductSectionProperty(EnvelopeType env, string psId, string lang, string category, string key, string type, bool userConfig, string label, string description)
@@ -1081,7 +1087,7 @@ namespace XenOvf
 
 		public static string AddRasd(EnvelopeType ovfObj, string vsId, object rasd)
         {
-            return AddRasd(ovfObj, vsId, Properties.Settings.Default.Language, rasd);
+            return AddRasd(ovfObj, vsId, LANGUAGE, rasd);
         }
         /// <summary>
         /// Add a RASD to to the Virtual System
@@ -1103,7 +1109,7 @@ namespace XenOvf
 
 		public string AddResourceAllocationSection(EnvelopeType ovfObj, string info, bool required, RASD_Type rasd)
         {
-            return AddResourceAllocationSection(ovfObj, Properties.Settings.Default.Language, info, required, rasd);
+            return AddResourceAllocationSection(ovfObj, LANGUAGE, info, required, rasd);
         }
 
 		public string AddResourceAllocationSection(EnvelopeType ovfObj, string lang, string info, bool required, RASD_Type rasd)
@@ -1147,7 +1153,7 @@ namespace XenOvf
 
 		public static string AddStartupSection(EnvelopeType env, bool required, string vsId, long order, long startdelay, long stopdelay)
         {
-            return AddStartupSection(env, required, Properties.Settings.Default.Language, vsId, order, startdelay, stopdelay);
+            return AddStartupSection(env, required, LANGUAGE, vsId, order, startdelay, stopdelay);
         }
 
 		public static string AddStartupSection(EnvelopeType env, bool required, string lang, string vsId, long order, long startdelay, long stopdelay)
@@ -1202,7 +1208,7 @@ namespace XenOvf
 
 		public static string AddToStringSection(EnvelopeType ovfObj, string message)
         {
-            return AddToStringSection(ovfObj, Properties.Settings.Default.Language, message);
+            return AddToStringSection(ovfObj, LANGUAGE, message);
         }
         /// <summary>
         /// Add a string to the string section.
@@ -1217,7 +1223,7 @@ namespace XenOvf
                 return null;
 
             // Only create the section if the language is different than the default.
-            if (lang.ToLower() == Properties.Settings.Default.Language.ToLower())
+            if (lang.ToLower() == LANGUAGE.ToLower())
             {
                 return null;
             }
@@ -1263,7 +1269,7 @@ namespace XenOvf
 
         public static string AddVirtualHardwareSection(EnvelopeType ovfEnv, string vsId)
         {
-            return AddVirtualHardwareSection(ovfEnv, vsId, Properties.Settings.Default.Language);
+            return AddVirtualHardwareSection(ovfEnv, vsId, LANGUAGE);
         }
 
         public static string AddVirtualHardwareSection(EnvelopeType ovfEnv, string vsId, string lang)
@@ -1271,7 +1277,8 @@ namespace XenOvf
 
             VirtualHardwareSection_Type vhs = new VirtualHardwareSection_Type();
             vhs.Id = Guid.NewGuid().ToString();
-            vhs.Info = new Msg_Type(AddToStringSection(ovfEnv, lang, Properties.Settings.Default.vhsSettings), Properties.Settings.Default.vhsSettings);
+            var vhsSettings = "Virtual Hardware Requirements: {0} MB RAM; {1} CPU(s), {2} Disk(s), {3} Network(s)";
+            vhs.Info = new Msg_Type(AddToStringSection(ovfEnv, lang, vhsSettings), vhsSettings);
 
             if (ovfEnv.Item == null || ((VirtualSystemCollection_Type)ovfEnv.Item).Content == null)
             {
@@ -1284,7 +1291,7 @@ namespace XenOvf
 
         public VirtualHardwareSection_Type AddVHSforVMWare(EnvelopeType ovfEnv, string vsId, VirtualHardwareSection_Type vhsTemplate)
         {
-            return AddVHSforVMWare(ovfEnv, vsId, vhsTemplate, Properties.Settings.Default.Language);
+            return AddVHSforVMWare(ovfEnv, vsId, vhsTemplate, LANGUAGE);
         }
 
         public VirtualHardwareSection_Type AddVHSforVMWare(EnvelopeType ovfEnv, string vsId, VirtualHardwareSection_Type vhsTemplate, string lang)
@@ -1297,7 +1304,7 @@ namespace XenOvf
                                         (vhsTemplate.System.Caption != null) ? vhsTemplate.System.Caption.Value : vhsTemplate.System.ElementName.Value,
                                         (vhsTemplate.System.Description != null) ? vhsTemplate.System.Description.Value : vhsTemplate.System.ElementName.Value,
                                         Guid.NewGuid().ToString(),
-                                        Properties.Settings.Default.vmwHardwareType);
+                                        "vmx-07");
             VirtualHardwareSection_Type vhs = FindVirtualHardwareSection(ovfEnv, vsId, vhsId);
             vhs.Item = vhsTemplate.Item;
             return vhs;
@@ -1305,7 +1312,7 @@ namespace XenOvf
 
 		public static string AddVirtualSystem(EnvelopeType ovfObj, string ovfname)
         {
-            return AddVirtualSystem(ovfObj, Properties.Settings.Default.Language, ovfname);
+            return AddVirtualSystem(ovfObj, LANGUAGE, ovfname);
         }
         /// <summary>
         /// Add a Virtual System Section to OVF
@@ -1349,7 +1356,7 @@ namespace XenOvf
 
 		public static void AddVirtualSystemSettingData(EnvelopeType ovfObj, string vsId, string vhsId, string name, string caption, string description, string identifier, string systemtype)
         {
-            AddVirtualSystemSettingData(ovfObj, vsId, vhsId, Properties.Settings.Default.Language, name, caption, description, identifier, systemtype);
+            AddVirtualSystemSettingData(ovfObj, vsId, vhsId, LANGUAGE, name, caption, description, identifier, systemtype);
         }
         /// <summary>
         /// Set the Virtual System Setting Data
@@ -1400,13 +1407,14 @@ namespace XenOvf
             string guid = Guid.NewGuid().ToString();
             AddVirtualSystemSettingData(env, systemID, hdwareSectionId, env.Name, Messages.VIRTUAL_MACHINE, Messages.OVF_CREATED, guid, "hvm-3.0-unknown");
 
-            AddOtherSystemSettingData(env, systemID, "HVM_boot_policy", Properties.Settings.Default.xenBootOptions, GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_2"));
+            AddOtherSystemSettingData(env, systemID, "HVM_boot_policy", "BIOS order", GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_2"));
 
-            bootParams = Properties.Settings.Default.xenBootParams + bootParams;
-            AddOtherSystemSettingData(env, systemID, "HVM_boot_params", bootParams, GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_6"));
+            AddOtherSystemSettingData(env, systemID, "HVM_boot_params",
+                "order=dc;" + bootParams,
+                GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_6"));
 
-            var platformSetting = Properties.Settings.Default.xenPlatformSetting + platformSettings;
-            AddOtherSystemSettingData(env, systemID, "platform", platformSetting,
+            AddOtherSystemSettingData(env, systemID, "platform",
+                "nx=true;acpi=true;apic=true;pae=true;stdvga=0;" + platformSettings,
                 string.Format(GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_3"), productBrand));
 
             SetCPUs(env, systemID, cpuCount);
@@ -1429,7 +1437,7 @@ namespace XenOvf
 
         public EnvelopeType Create(DiskInfo[] vhdExports, string pathToOvf, string ovfName)
         {
-            return Create(vhdExports, pathToOvf, ovfName, Properties.Settings.Default.Language);
+            return Create(vhdExports, pathToOvf, ovfName, LANGUAGE);
         }
         /// <summary>
         /// Create an OVF (xml string) from local system.
@@ -1449,7 +1457,7 @@ namespace XenOvf
 
 		public static EnvelopeType CreateEnvelope(string ovfName)
         {
-            return CreateEnvelope(ovfName, Properties.Settings.Default.Language);
+            return CreateEnvelope(ovfName, LANGUAGE);
         }
         /// <summary>
         /// Create an Empty OVF Structure.
@@ -1462,8 +1470,8 @@ namespace XenOvf
             EnvelopeType ovfEnv = new EnvelopeType();
             ovfEnv.Name = ovfName;
             ovfEnv.id = Guid.NewGuid().ToString();
-            ovfEnv.lang = Properties.Settings.Default.Language;
-            ovfEnv.version = Properties.Settings.Default.ovfversion;
+            ovfEnv.lang = LANGUAGE;
+            ovfEnv.version = OVF_VERSION;
             ovfEnv.References = new References_Type();
             ovfEnv.Sections = null;
 
@@ -1893,7 +1901,7 @@ namespace XenOvf
         /// <param name="annotation">Annotation</param>
 		public void UpdateAnnotation(EnvelopeType ovfObj, string vsId, string annotationId, string info, string annotation)
         {
-            UpdateAnnotation(ovfObj, vsId, annotationId, Properties.Settings.Default.Language, info, annotation);
+            UpdateAnnotation(ovfObj, vsId, annotationId, LANGUAGE, info, annotation);
         }
         /// <summary>
         /// Update a current annotation
@@ -1946,7 +1954,7 @@ namespace XenOvf
         /// <param name="description">string longer description</param>
 		public void UpdateCDROM(EnvelopeType ovfObj, string vsId, string cdId, string caption, string description)
         {
-            UpdateCDROM(ovfObj, vsId, Properties.Settings.Default.Language, cdId, caption, description);
+            UpdateCDROM(ovfObj, vsId, LANGUAGE, cdId, caption, description);
         }
         /// <summary>
         /// Add a CD/DVD Drive
@@ -1996,7 +2004,7 @@ namespace XenOvf
         /// <returns>InstanceID of Controller</returns>
 		public void UpdateController(EnvelopeType ovfObj, string vsId, DeviceType type, string deviceId, int iteration)
         {
-            UpdateController(ovfObj, vsId, Properties.Settings.Default.Language, deviceId, type, iteration);
+            UpdateController(ovfObj, vsId, LANGUAGE, deviceId, type, iteration);
         }
         /// <summary>
         /// Add a controller to the mix.
@@ -2042,7 +2050,7 @@ namespace XenOvf
         /// <param name="isdefault">Is default deployment options</param>
 		public void UpdateDeploymentOption(EnvelopeType ovfObj, string id, string label, string description, bool isdefault)
         {
-            UpdateDeploymentOption(ovfObj, id, Properties.Settings.Default.Language, label, description, isdefault);
+            UpdateDeploymentOption(ovfObj, id, LANGUAGE, label, description, isdefault);
         }
         /// <summary>
         /// Update a defined Deployment Option
@@ -2105,7 +2113,7 @@ namespace XenOvf
         /// <param name="freespace">amount of free space</param>
 		public void UpdateDisk(EnvelopeType ovfObj, string vsId, string instanceID, string description, string vhdFileName, ulong filesize, ulong capacity, ulong freespace)
         {
-            UpdateDisk(ovfObj, vsId, Properties.Settings.Default.Language, instanceID, description, vhdFileName, filesize, capacity, freespace);
+            UpdateDisk(ovfObj, vsId, LANGUAGE, instanceID, description, vhdFileName, filesize, capacity, freespace);
         }
         /// <summary>
         /// Update DISK information by RASD InstanceID
@@ -2210,7 +2218,7 @@ namespace XenOvf
                 disk.populatedSize = popsize;
                 disk.populatedSizeSpecified = true;
             }
-            file.href = string.Format(Properties.Settings.Default.FileURI, vhdFileName);
+            file.href = vhdFileName;
             log.Debug("OVF.UpdateDisk.1 completed");
         }
         /// <summary>
@@ -2221,7 +2229,7 @@ namespace XenOvf
         /// <param name="eulafilename">Filename</param>
 		public void UpdateEula(EnvelopeType ovfObj, string eulaId, string eulafilename)
         {
-            UpdateEula(ovfObj, eulaId, Properties.Settings.Default.Language, eulafilename);
+            UpdateEula(ovfObj, eulaId, LANGUAGE, eulafilename);
         }
         /// <summary>
         /// Update a EULA to the OVF
@@ -2402,7 +2410,7 @@ namespace XenOvf
         /// <param name="info">Description</param>
 		public void UpdateInstallSection(EnvelopeType ovfObj, string vsId, string insId, ushort bootStopDelay, string info)
         {
-            UpdateInstallSection(ovfObj, vsId, insId, bootStopDelay, Properties.Settings.Default.Language, info);
+            UpdateInstallSection(ovfObj, vsId, insId, bootStopDelay, LANGUAGE, info);
         }
         /// <summary>
         /// The InstallSection indicates that the virtual machine needs to be booted once in order to install and or configure the guest software.
@@ -2432,7 +2440,7 @@ namespace XenOvf
         /// <param name="macAddress">MAC address or null (to clear)</param>
         public void UpdateNetwork(EnvelopeType ovfObj, string vsId, string instanceID, string macAddress)
         {
-            UpdateNetwork(ovfObj, vsId, Properties.Settings.Default.Language, instanceID, macAddress);
+            UpdateNetwork(ovfObj, vsId, LANGUAGE, instanceID, macAddress);
         }
         /// <summary>
         /// Change a Network to add/remove MacAddress
@@ -2534,7 +2542,7 @@ namespace XenOvf
         /// <param name="description">Description of parameter</param>
 		public void UpdateOtherSystemSettingData(EnvelopeType ovfObj, string vsId, string ossdId, string name, string value, string description)
         {
-            UpdateOtherSystemSettingData(ovfObj, vsId, ossdId, Properties.Settings.Default.Language, name, value, description);
+            UpdateOtherSystemSettingData(ovfObj, vsId, ossdId, LANGUAGE, name, value, description);
         }
         /// <summary>
         /// Add XEN Specific configuration Items.
@@ -2583,7 +2591,7 @@ namespace XenOvf
         /// <param name="message">Free form message about post install</param>
 		public void UpdatePostInstallOperation(EnvelopeType ovfObj, string vsId, string postId, string message)
         {
-            UpdatePostInstallOperation(ovfObj, vsId, postId, Properties.Settings.Default.Language, message);
+            UpdatePostInstallOperation(ovfObj, vsId, postId, LANGUAGE, message);
         }
         /// <summary>
         /// Citrix Extension: Define a Post Installation Operation
@@ -2629,7 +2637,7 @@ namespace XenOvf
         /// <param name="value">Values for operation</param>
 		public void UpdatePostInstallOperationCommand(EnvelopeType ovfObj, string vsId, string postId, string operId, uint order, string operation, string value)
         {
-            UpdatePostInstallOperationCommand(ovfObj, vsId, Properties.Settings.Default.Language, postId, operId, order, operation, value);
+            UpdatePostInstallOperationCommand(ovfObj, vsId, LANGUAGE, postId, operId, order, operation, value);
         }
         /// <summary>
         /// Update a Post Install Operation Command
@@ -2700,7 +2708,7 @@ namespace XenOvf
         /// <param name="vendorurl">URL for Vendor</param>
 		public void UpdateProductSection(EnvelopeType ovfObj, string prodId, string nameSpace, string info, string product, string vendor, string version, string producturl, string vendorurl)
         {
-            UpdateProductSection(ovfObj, prodId, Properties.Settings.Default.Language, nameSpace, info, product, vendor, version, producturl, vendorurl);
+            UpdateProductSection(ovfObj, prodId, LANGUAGE, nameSpace, info, product, vendor, version, producturl, vendorurl);
         }
         /// <summary>
         /// Add a product section definition
@@ -2740,7 +2748,7 @@ namespace XenOvf
         /// <param name="description">description of configuration item</param>
 		public void UpdateProductSectionProperty(EnvelopeType ovfObj, string psId, string propId, string category, string key, string type, bool userConfig, string label, string description)
         {
-            UpdateProductSectionProperty(ovfObj, psId, propId, Properties.Settings.Default.Language, category, key, type, userConfig, label, description);
+            UpdateProductSectionProperty(ovfObj, psId, propId, LANGUAGE, category, key, type, userConfig, label, description);
         }
         /// <summary>
         /// Add property to Product Section
@@ -2796,7 +2804,7 @@ namespace XenOvf
         /// <param name="rasd">RASD_Type rasd to add.</param>
 		public void UpdateResourceAllocationSection(EnvelopeType ovfObj, string id, string info, bool required, RASD_Type rasd)
         {
-            UpdateResourceAllocationSection(ovfObj, id, Properties.Settings.Default.Language, info, required, rasd);
+            UpdateResourceAllocationSection(ovfObj, id, LANGUAGE, info, required, rasd);
         }
         /// <summary>
         /// Add a specific RASD to the ResourceAllocationSection.
@@ -2840,7 +2848,7 @@ namespace XenOvf
         /// <param name="value">value to set field to.</param>
 		public void UpdateResourceAllocationSettingData(EnvelopeType ovfObj, string vsId, string rasdId, string fieldname, object value)
         {
-            UpdateResourceAllocationSettingData(ovfObj, vsId, Properties.Settings.Default.Language, rasdId, fieldname, value);
+            UpdateResourceAllocationSettingData(ovfObj, vsId, LANGUAGE, rasdId, fieldname, value);
         }
         /// <summary>
         /// Update any field in a RASD
@@ -2880,7 +2888,7 @@ namespace XenOvf
         /// <param name="message">Free form message describing the startup section</param>
 		public void UpdateStartupSection(EnvelopeType ovfObj, string vsId, string ssId, bool required, string message)
         {
-            UpdateStartupSection(ovfObj, vsId, ssId, required, Properties.Settings.Default.Language, message);
+            UpdateStartupSection(ovfObj, vsId, ssId, required, LANGUAGE, message);
         }
         /// <summary>
         /// Startup Section wrapper.
@@ -2916,7 +2924,7 @@ namespace XenOvf
         /// <param name="waitforguest">Enables the platform to resume the startup sequence after the guest software has reported it is ready.  The interpretation of this is deployment platform specific. The default value is FALSE.</param>
 		public void UpdateStartupSectionItem(EnvelopeType ovfObj, string vsId, string ssId, ushort order, ushort startdelay, ushort stopdelay, string startaction, string stopaction, bool waitforguest)
         {
-            UpdateStartupSectionItem(ovfObj, vsId, ssId, Properties.Settings.Default.Language, order, startdelay, stopdelay, startaction, stopaction, waitforguest);
+            UpdateStartupSectionItem(ovfObj, vsId, ssId, LANGUAGE, order, startdelay, stopdelay, startaction, stopaction, waitforguest);
         }
         /// <summary>
         /// Set the startup section options.
@@ -2973,7 +2981,7 @@ namespace XenOvf
         /// <returns>Identifier to section.</returns>
 		public string UpdateStringSection(EnvelopeType ovfObj, string ssId, string message)
         {
-            return UpdateStringSection(ovfObj, ssId, Properties.Settings.Default.Language, message);
+            return UpdateStringSection(ovfObj, ssId, LANGUAGE, message);
         }
         /// <summary>
         /// Update a string to the string section.
@@ -3045,7 +3053,7 @@ namespace XenOvf
         /// <returns>InstanceId of Virtual System</returns>
 		public void UpdateVirtualSystem(EnvelopeType ovfObj, string vsId, string name, string info)
         {
-            UpdateVirtualSystem(ovfObj, vsId, Properties.Settings.Default.Language, name, info);
+            UpdateVirtualSystem(ovfObj, vsId, LANGUAGE, name, info);
         }
         /// <summary>
         /// Add a Virtual System Section to OVF
@@ -3080,7 +3088,7 @@ namespace XenOvf
         /// <param name="name">name to give virtual system</param>
 		public void UpdateVirtualSystemName(EnvelopeType ovfObj, string vsId, string name)
         {
-            UpdateVirtualSystemName(ovfObj, vsId, Properties.Settings.Default.Language, name);
+            UpdateVirtualSystemName(ovfObj, vsId, LANGUAGE, name);
         }
         /// <summary>
         /// Update the name field, over write[0] if present add if not.
@@ -3112,7 +3120,7 @@ namespace XenOvf
         /// <param name="value">value to set field</param>
 		public void UpdateVirtualSystemSettingData(EnvelopeType ovfObj, string vsId, string fieldname, object value)
         {
-            UpdateVirtualSystemSettingData(ovfObj, vsId, Properties.Settings.Default.Language, fieldname, value);
+            UpdateVirtualSystemSettingData(ovfObj, vsId, LANGUAGE, fieldname, value);
         }
         /// <summary>
         /// Helper Method: Update a field in the VirtualSystemSettingData (VSSD)
@@ -3491,7 +3499,7 @@ namespace XenOvf
         /// <returns>Localized String</returns>
 		public static string FindStringsMessage(EnvelopeType ovfObj, Msg_Type msg)
         {
-            return FindStringsMessage(ovfObj, Properties.Settings.Default.Language, msg);
+            return FindStringsMessage(ovfObj, LANGUAGE, msg);
         }
         /// <summary>
         /// Find the localize string.
@@ -3507,7 +3515,7 @@ namespace XenOvf
             {
                 if (lang == null)
                 {
-                    lang = Properties.Settings.Default.Language;
+                    lang = LANGUAGE;
                 }
                 message = FindStringsMessage(ovfObj, lang, msg.msgid);
             }
@@ -3525,7 +3533,7 @@ namespace XenOvf
         /// <returns>Localized String</returns>
         public string FindStringsMessage(EnvelopeType ovfObj, string msgId)
         {
-            return FindStringsMessage(ovfObj, Properties.Settings.Default.Language, msgId);
+            return FindStringsMessage(ovfObj, LANGUAGE, msgId);
         }
         /// <summary>
         /// Find the localize string.
@@ -4407,7 +4415,7 @@ namespace XenOvf
                 throw new ArgumentOutOfRangeException(message);
             }
 
-            RASD_Type rasd = SetConnectionInRASD(ovfObj, vsId, rasdId, Properties.Settings.Default.xenDeviceKey, device);
+            RASD_Type rasd = SetConnectionInRASD(ovfObj, vsId, rasdId, "device=", device);
             if (rasd.AddressOnParent == null || rasd.AddressOnParent.Value == null)
             {
                 rasd.AddressOnParent = new cimString();
@@ -4425,7 +4433,7 @@ namespace XenOvf
         /// <param name="sruuid">target SR name or uuid</param>
 		public static void SetTargetISOSRInRASD(EnvelopeType ovfObj, string vsId, string rasdId, string sruuid)
         {
-            SetConnectionInRASD(ovfObj, vsId, rasdId, Properties.Settings.Default.xenSRKey, sruuid);
+            SetConnectionInRASD(ovfObj, vsId, rasdId, "sr=", sruuid);
             log.DebugFormat("OVF.SetTargetISOSRInRASD completed {0}", vsId);
         }
         /// <summary>
@@ -4437,7 +4445,7 @@ namespace XenOvf
         /// <param name="sruuid">SR name or uuid</param>
 		public static void SetTargetSRInRASD(EnvelopeType ovfObj, string vsId, string rasdId, string sruuid)
         {
-            SetConnectionInRASD(ovfObj, vsId, rasdId, Properties.Settings.Default.xenSRKey, sruuid);
+            SetConnectionInRASD(ovfObj, vsId, rasdId, "sr=", sruuid);
             log.DebugFormat("OVF.SetTargetSRInRASD completed {0}", vsId);
         }
 
@@ -4450,7 +4458,7 @@ namespace XenOvf
         /// <param name="vdiuuid">VDI uuid</param>
         public static void SetTargetVDIInRASD(EnvelopeType ovfObj, string vsId, string rasdId, string vdiuuid)
         {
-            SetConnectionInRASD(ovfObj, vsId, rasdId, Properties.Settings.Default.xenVDIKey, vdiuuid);
+            SetConnectionInRASD(ovfObj, vsId, rasdId, "vdi=", vdiuuid);
             log.DebugFormat("OVF.SetTargetVDIInRASD completed {0}", vsId);
         }
 
@@ -4463,7 +4471,7 @@ namespace XenOvf
         /// <param name="netuuid">network identifier: uuid, name, bridgename</param>
 		public static void SetTargetNetworkInRASD(EnvelopeType ovfObj, string vsId, string rasdId, string netuuid)
         {
-            SetConnectionInRASD(ovfObj, vsId, rasdId, Properties.Settings.Default.xenNetworkKey, netuuid);
+            SetConnectionInRASD(ovfObj, vsId, rasdId, "network=", netuuid);
             log.DebugFormat("OVF.SetTargetNetworkInRASD completed {0}", vsId);
         }
         /// <summary>
@@ -4517,7 +4525,7 @@ namespace XenOvf
         /// <returns>string of the InstanceID of the CDROM RASD</returns>
         public static string SetRunOnceBootCDROMOSFixup(EnvelopeType ovfObj, string vsId, string ovfPath, string productBrand)
         {
-            return SetRunOnceBootCDROM(ovfObj, vsId, ovfPath, Properties.Settings.Default.xenLinuxFixUpDisk, productBrand);
+            return SetRunOnceBootCDROM(ovfObj, vsId, ovfPath, FIXUP_ISO, productBrand);
         }
         /// <summary>
         /// Add an ISO as a run-once device
@@ -4529,7 +4537,7 @@ namespace XenOvf
         /// <returns>string of the InstanceID of the CDROM RASD</returns>
 		public static string SetRunOnceBootCDROM(EnvelopeType ovfObj, string vsId, string ovfPath, string isofilename, string productBrand)
         {
-            return SetRunOnceBootCDROM(ovfObj, vsId, Properties.Settings.Default.Language, ovfPath, isofilename, productBrand);
+            return SetRunOnceBootCDROM(ovfObj, vsId, LANGUAGE, ovfPath, isofilename, productBrand);
         }
         /// <summary>
         /// Add an ISO as a run-once device
@@ -4593,9 +4601,9 @@ namespace XenOvf
                 }
                 if (vhs.VirtualSystemOtherConfigurationData == null)
                 {
-                    AddOtherSystemSettingData(ovfObj, vsId, "HVM_boot_policy", Properties.Settings.Default.xenBootOptions, _ovfrm.GetString("OTHER_SYSTEM_SETTING_DESCRIPTION_2"));
+                    AddOtherSystemSettingData(ovfObj, vsId, "HVM_boot_policy", "BIOS order", _ovfrm.GetString("OTHER_SYSTEM_SETTING_DESCRIPTION_2"));
                     AddOtherSystemSettingData(ovfObj, vsId, "HVM_boot_params", "dnc", _ovfrm.GetString("OTHER_SYSTEM_SETTING_DESCRIPTION_6"));
-                    AddOtherSystemSettingData(ovfObj, vsId, "platform", Properties.Settings.Default.xenPlatformSetting,
+                    AddOtherSystemSettingData(ovfObj, vsId, "platform", "nx=true;acpi=true;apic=true;pae=true;stdvga=0;",
                         string.Format(GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_3"), productBrand));
                 }
                 else
@@ -4609,8 +4617,8 @@ namespace XenOvf
                     }
                 }
                 // Add the fixup ISO file.
-                UpdateField(cdroms[0], "HostResource", string.Format("ovf:/disk/{0}", cdId));
-                AddFileReference(ovfObj, lang, isofilename, cdId, 0, Properties.Settings.Default.isoFileFormatURI);
+                UpdateField(cdroms[0], "HostResource", $"ovf:/disk/{cdId}");
+                AddFileReference(ovfObj, lang, isofilename, cdId, 0, "http://www.osta.org/specs/pdf/udf260.pdf");
                 string destFile = Path.Combine(ovfPath, Path.GetFileName(isofilename));
                 string srcFile = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), isofilename);
 
@@ -4784,7 +4792,7 @@ namespace XenOvf
         public static EnvelopeType Merge(List<EnvelopeType> ovfcollection, string ovfname)
         {
             EnvelopeType finalEnv = CreateEnvelope(ovfname);
-			finalEnv.version = Properties.Settings.Default.ovfversion;
+            finalEnv.version = OVF_VERSION;
 			finalEnv.Item = new VirtualSystemCollection_Type();
 			finalEnv.Item.id = Guid.NewGuid().ToString();
 
@@ -5037,13 +5045,13 @@ namespace XenOvf
 
         public static string GetISOFixupFileName()
         {
-            return Path.GetFileName(Properties.Settings.Default.xenLinuxFixUpDisk);
+            return Path.GetFileName(FIXUP_ISO);
         }
 
         public static string GetISOFixupPath()
         {
             var assemblyDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            return Path.Combine(assemblyDir, Properties.Settings.Default.xenLinuxFixUpDisk);
+            return Path.Combine(assemblyDir, FIXUP_ISO);
         }
         /// <summary>
         /// convert to a UInt64 a allocation unit
@@ -5186,7 +5194,7 @@ namespace XenOvf
         }
         private static void AddContent(VirtualSystemCollection_Type systemColl, string vsId, object item)
         {
-            AddContent(systemColl, vsId, Properties.Settings.Default.Language, item);
+            AddContent(systemColl, vsId, LANGUAGE, item);
         }
 
         private static void AddContent(VirtualSystemCollection_Type systemColl, string vsId, string lang, object item)

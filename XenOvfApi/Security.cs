@@ -44,6 +44,11 @@ namespace XenOvf
 {
     public partial class OVF
     {
+        //TODO: do these need to be configurabe by XenAdmin?
+        private const int ENCRYPT_KEY_LENGTH = 192;
+        private const string ENCRYPTION_ALGORITHM = "http://www.w3.org/2001/04/xmlenc#aes192-cbc";
+        private const string SECURITY_VERSION = "1.3.1";
+
         // LATIN: No fortification is such that it cannot be subdued with money.
         private const string KnownEncrypt = "Nihil tam munitum quod non expugnari pecunia possit.                                              ";
 
@@ -162,7 +167,7 @@ namespace XenOvf
         /// <param name="tempfile">file to write to.</param>
         public static void DecryptToTempFile(string classname, string filename, string version, string password, string tempfile)
         {
-            if (version != null && (CheckSecurityVersion(version, Properties.Settings.Default.securityVersion) >= 0))
+            if (version != null && CheckSecurityVersion(version, SECURITY_VERSION) >= 0)
             {
                 using (CryptoStream decryptStream = (CryptoStream)DecryptFile(filename, version, password))
                 {
@@ -346,8 +351,7 @@ namespace XenOvf
 
                     if (edt != null)
                     {
-                        if (sec.version != null &&
-                            CheckSecurityVersion(sec.version, Properties.Settings.Default.securityVersion) >= 0)
+                        if (sec.version != null && CheckSecurityVersion(sec.version, SECURITY_VERSION) >= 0)
                         {
                             isValid = InternalCheckPassword((byte[])edt.CipherData.Item, password, sec.version);
                         }
@@ -411,8 +415,8 @@ namespace XenOvf
             try
             {
                 List<DataReference> dataReference = new List<DataReference>();
-                string cryptoclassname = (string)AlgorithmMap((Properties.Settings.Default.encryptAlgorithmURI.Split(new char[] { '#' }))[1].ToLower().Replace('-', '_'));
-                int keysize = Convert.ToInt32(Properties.Settings.Default.encryptKeyLength);
+                string cryptoclassname = (string)AlgorithmMap(ENCRYPTION_ALGORITHM.Split('#')[1].ToLower().Replace('-', '_'));
+                int keysize = ENCRYPT_KEY_LENGTH;
                 string fileuuids = null;
                 string version = null;
                 //
@@ -463,7 +467,7 @@ namespace XenOvf
                 {
                     if (encrypt)
                     {
-                        version = Properties.Settings.Default.securityVersion;
+                        version = SECURITY_VERSION;
                         if (file.Id == null)
                         {
                             file.Id = "xen_" + Guid.NewGuid().ToString();
@@ -545,7 +549,7 @@ namespace XenOvf
                     }
 
                     Security_Type securityType = new Security_Type();
-                    securityType.version = Properties.Settings.Default.securityVersion;
+                    securityType.version = SECURITY_VERSION;
                     securityType.Id = "xen_" + Guid.NewGuid().ToString();
                     ReferenceList referenceList = new ReferenceList();
                     referenceList.Items = dataReference.ToArray();
@@ -557,7 +561,7 @@ namespace XenOvf
                     referenceList.ItemsElementName = ictList.ToArray();
                     EncryptionMethodType encryptMethod = new EncryptionMethodType();
                     encryptMethod.KeySize = Convert.ToString(_KeySize);
-                    encryptMethod.Algorithm = Properties.Settings.Default.encryptAlgorithmURI;
+                    encryptMethod.Algorithm = ENCRYPTION_ALGORITHM;
 
                     EncryptedDataType EncryptedData = new EncryptedDataType();
                     EncryptedData.CipherData = new CipherDataType();
@@ -586,7 +590,7 @@ namespace XenOvf
         {
             try
             {
-                string cryptoclassname = (string)AlgorithmMap((Properties.Settings.Default.encryptAlgorithmURI.Split(new char[] { '#' }))[1].ToLower().Replace('-', '_'));
+                string cryptoclassname = (string)AlgorithmMap(ENCRYPTION_ALGORITHM.Split('#')[1].ToLower().Replace('-', '_'));
                 ICryptoTransform trans = CryptoSetup(cryptoclassname, password, encrypt, version);
                 return CryptoStream1(trans, inputStream, encrypt);
 
@@ -605,7 +609,7 @@ namespace XenOvf
             {
                 Type EncType = Type.GetType(cryptoclassname, true);
                 cryptObject = (SymmetricAlgorithm)Activator.CreateInstance(EncType);
-                if (!string.IsNullOrEmpty(version) && (CheckSecurityVersion(version, Properties.Settings.Default.securityVersion) >= 0))
+                if (!string.IsNullOrEmpty(version) && CheckSecurityVersion(version, SECURITY_VERSION) >= 0)
                 {
                     cryptObject.Padding = PaddingMode.PKCS7;
                 }
