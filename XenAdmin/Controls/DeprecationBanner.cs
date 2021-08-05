@@ -42,27 +42,23 @@ namespace XenAdmin.Controls
         public enum Type
         {
             Deprecation,
-            Removal,
-            Warning
+            Removal
         }
 
         public Type BannerType { private get; set; }
         public string FeatureName { private get; set; }
         public string AppliesToVersion { private get; set; }
         public string WarningMessage { private get; set; }
-        public string LinkText { set { helperLink.Text = value; } }
+        public string LinkText { set => helperLink.Text = value; }
         public Uri LinkUri { set; private get; }
-        public bool HelperLinkVisible { set { helperLink.Visible = value; } }
-        public Color BackgroundColour { set; private get; }
-        private readonly Color defaultBackgroundColour = Color.LemonChiffon;
+        public bool HelperLinkVisible { set => helperLink.Visible = value; }
 
         public DeprecationBanner()
         {
             InitializeComponent();
-            HelperLinkVisible = !XenAdmin.Core.HiddenFeatures.LinkLabelHidden;
+            HelperLinkVisible = !Core.HiddenFeatures.LinkLabelHidden;
             Visible = false;
             helperLink.Click += helperLink_Click;
-            BackgroundColour = defaultBackgroundColour;
         }
 
         private void helperLink_Click(object sender, EventArgs e)
@@ -85,34 +81,33 @@ namespace XenAdmin.Controls
         {
             set
             {
-                BackColor = BackgroundColour;
-                SetMessageText();
+                if (value)
+                {
+                    SetMessageText();
+                    BackColor = BannerType == Type.Removal ? Color.LightCoral : Color.LemonChiffon;
+                }
+
                 base.Visible = value;
             }
         }
 
         private void SetMessageText()
         {
-            if (BannerType == Type.Deprecation)
-            {
-                message.Text = String.Format(Messages.X_IS_DEPRECATED_IN_X, FeatureName, AppliesToVersion);
-                return;
-            }
-            
-            if (BannerType == Type.Removal)
-            {
-                message.Text = String.Format(Messages.X_IS_REMOVED_IN_X, FeatureName, AppliesToVersion);
-                return;
-            } 
-            
-            if (BannerType == Type.Warning)
-            {
+            if (!string.IsNullOrEmpty(WarningMessage))
                 message.Text = WarningMessage;
-                return;
-            }
-
-            message.Text = String.Empty;
+            else
+                switch (BannerType)
+                {
+                    case Type.Deprecation:
+                        message.Text = string.Format(Messages.X_IS_DEPRECATED_IN_X, FeatureName, AppliesToVersion);
+                        break;
+                    case Type.Removal:
+                        message.Text = string.Format(Messages.X_IS_REMOVED_IN_X, FeatureName, AppliesToVersion);
+                        break;
+                    default:
+                        message.Text = string.Empty;
+                        break;
+                }
         }
-
     }
 }

@@ -53,7 +53,6 @@ namespace XenAdmin.TabPages
             // deprecationBanner1
             // 
             resources.ApplyResources(this.deprecationBanner1, "deprecationBanner1");
-            this.deprecationBanner1.BackColor = System.Drawing.Color.LightCoral;
             this.deprecationBanner1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tableLayoutPanelBanner.SetColumnSpan(this.deprecationBanner1, 3);
             this.deprecationBanner1.Name = "deprecationBanner1";
