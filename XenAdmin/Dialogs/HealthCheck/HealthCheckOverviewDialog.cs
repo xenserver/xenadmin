@@ -279,15 +279,26 @@ namespace XenAdmin.Dialogs.HealthCheck
                 previousUploadPanel.Visible = false;
             }
         }
-
+        
         public void UpdateButtonsVisibility(Pool pool)
         {
+            bool canAlterHealthCheck = Core.HealthCheck.PassedRbacChecks(pool.Connection);
+
             refreshLinkLabel.Visible =
                 editLinkLabel.Visible =
                 disableLinkLabel.Visible =
                 uploadRequestLinkLabel.Visible =
-                enrollNowLinkLabel.Visible = Core.HealthCheck.PassedRbacChecks(pool.Connection);
+                enrollNowLinkLabel.Visible = canAlterHealthCheck;
 
+            if (!canAlterHealthCheck)
+            {
+                List<Role> roleList = pool.Connection.Session.Roles;
+                roleList.Sort();
+                string rbacUser = roleList[0].FriendlyName();
+
+                cannotAlterHealthCheckLabel.Text = string.Format(Messages.HEALTHCHECK_CANNOT_ALTER_SETTINGS, rbacUser);
+                cannotAlterHealthCheckLabel.Visible = true;
+            }  
         }
 
         private void HealthCheckOverviewDialog_Load(object sender, EventArgs e)

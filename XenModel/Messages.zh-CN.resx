@@ -14608,4 +14608,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>您在此处</value>
   </data>
+  <data name="HEALTHCHECK_CANNOT_ALTER_SETTINGS" xml:space="preserve">
+    <value>A {0} user cannot alter the Health Check settings</value>
+  </data>
 </root>

@@ -18796,6 +18796,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A {0} user cannot alter the Health Check settings.
+        /// </summary>
+        public static string HEALTHCHECK_CANNOT_ALTER_SETTINGS {
+            get {
+                return ResourceManager.GetString("HEALTHCHECK_CANNOT_ALTER_SETTINGS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to OK, Enable Health Check.
         /// </summary>
         public static string HEALTHCHECK_ENROLLMENT_CONFIRMATION_BUTTON_LABEL {

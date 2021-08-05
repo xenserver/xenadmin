@@ -14612,4 +14612,7 @@ Any disk in your VM's DVD drive will be ejected when installing [Citrix VM Tools
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>You are here</value>
   </data>
+  <data name="HEALTHCHECK_CANNOT_ALTER_SETTINGS" xml:space="preserve">
+    <value>A {0} user cannot alter the Health Check settings</value>
+  </data>
 </root>

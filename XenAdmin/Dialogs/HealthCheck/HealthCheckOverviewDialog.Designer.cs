@@ -65,6 +65,7 @@ namespace XenAdmin.Dialogs.HealthCheck
             this.PolicyStatementLinkLabel = new System.Windows.Forms.LinkLabel();
             this.rubricLabel = new System.Windows.Forms.Label();
             this.showAgainCheckBox = new System.Windows.Forms.CheckBox();
+            this.cannotAlterHealthCheckLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -100,6 +101,7 @@ namespace XenAdmin.Dialogs.HealthCheck
             this.poolsDataGridView.BackgroundColor = System.Drawing.SystemColors.Window;
             this.poolsDataGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.poolsDataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.poolsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.poolsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.PoolNameColumn,
             this.StatusColumn});
@@ -284,6 +286,7 @@ namespace XenAdmin.Dialogs.HealthCheck
             // 
             resources.ApplyResources(this.notEnrolledPanel, "notEnrolledPanel");
             this.poolDetailsPanel.SetColumnSpan(this.notEnrolledPanel, 2);
+            this.notEnrolledPanel.Controls.Add(this.cannotAlterHealthCheckLabel, 0, 2);
             this.notEnrolledPanel.Controls.Add(this.enrollNowLinkLabel, 0, 1);
             this.notEnrolledPanel.Controls.Add(this.label6, 0, 0);
             this.notEnrolledPanel.Name = "notEnrolledPanel";
@@ -334,6 +337,11 @@ namespace XenAdmin.Dialogs.HealthCheck
             this.showAgainCheckBox.Name = "showAgainCheckBox";
             this.showAgainCheckBox.UseVisualStyleBackColor = true;
             this.showAgainCheckBox.CheckedChanged += new System.EventHandler(this.showAgainCheckBox_CheckedChanged);
+            // 
+            // cannotAlterHealthCheckLabel
+            // 
+            resources.ApplyResources(this.cannotAlterHealthCheckLabel, "cannotAlterHealthCheckLabel");
+            this.cannotAlterHealthCheckLabel.Name = "cannotAlterHealthCheckLabel";
             // 
             // HealthCheckOverviewDialog
             // 
@@ -407,6 +415,7 @@ namespace XenAdmin.Dialogs.HealthCheck
         private System.Windows.Forms.Label lastUploadDateLabel;
         private System.Windows.Forms.Label failedUploadDateLabel;
         private System.Windows.Forms.Label failedUploadLabel;
+        private System.Windows.Forms.Label cannotAlterHealthCheckLabel;
     }
 }
 
