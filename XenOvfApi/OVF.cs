@@ -85,15 +85,6 @@ namespace XenOvf
             UnLoad();
         }
 
-        #region PROPERTIES
-
-        public static object AlgorithmMap(string key)
-        {
-            return Properties.Settings.Default[key];
-        }
-
-        #endregion
-
         #region SAVE OVF
 
         public static void SaveAs(EnvelopeType ovfEnv, string filename)

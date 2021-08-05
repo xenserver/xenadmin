@@ -165,7 +165,7 @@ namespace XenOvf
         /// <param name="filename">Encrypted file name</param>
         /// <param name="password">Password to perform decryption</param>
         /// <param name="tempfile">file to write to.</param>
-        public static void DecryptToTempFile(string classname, string filename, string version, string password, string tempfile)
+        public static void DecryptToTempFile(Type cryptoclassType, string filename, string version, string password, string tempfile)
         {
             if (version != null && CheckSecurityVersion(version, SECURITY_VERSION) >= 0)
             {
@@ -180,7 +180,7 @@ namespace XenOvf
             else
             {
                 // Encryption with issues... original code base.
-                ICryptoTransform transform = CryptoSetup(classname, password, false, version);
+                ICryptoTransform transform = CryptoSetup(cryptoclassType, password, false, version);
                 DeprecatedCryptoFile(transform, filename, tempfile, false);
                 if (_cancelEncrypt) File.Delete(tempfile);
             }
@@ -200,9 +200,9 @@ namespace XenOvf
             return security != null && security.Length > 0;
         }
         
-        public static void ParseEncryption(EnvelopeType ovfObj, out string encryptionClass, out string encryptionVersion)
+        public static void ParseEncryption(EnvelopeType ovfObj, out Type cryptoclassType, out string encryptionVersion)
         {
-            encryptionClass = null;
+            cryptoclassType = null;
             encryptionVersion = null;
 
             if (!HasEncryption(ovfObj, out SecuritySection_Type[] securitysection))
@@ -221,16 +221,7 @@ namespace XenOvf
                     }
                 }
 
-                if (securitytype.EncryptionMethod?.Algorithm != null)
-                {
-                    string[] parts = securitytype.EncryptionMethod.Algorithm.Split('#');
-
-                    if (parts.Length > 1)
-                    {
-                        string algoname = parts[1].ToLower().Replace('-', '_');
-                        encryptionClass = OVF.AlgorithmMap(algoname) as string;
-                    }
-                }
+                cryptoclassType = GetAlgorithmClass(securitytype.EncryptionMethod?.Algorithm);
 
                 if (!string.IsNullOrEmpty(securitytype.version))
                     encryptionVersion = securitytype.version;
@@ -401,6 +392,52 @@ namespace XenOvf
         #endregion
 
         #region PRIVATE
+
+        private static Type GetAlgorithmClass(string key)
+        {
+            string algorithm = "";
+
+            if (!string.IsNullOrEmpty(key))
+            {
+                string[] parts = key.Split('#');
+
+                if (parts.Length > 1)
+                    algorithm = parts[1].ToLower().Replace('-', '_');
+            }
+
+            switch (algorithm)
+            {
+                case "base64":
+                    return typeof(FromBase64Transform);
+                case "rsa_1_5":
+                case "rsa_oaep_mgf1p":
+                    return typeof(RSACryptoServiceProvider);
+                case "tripledes_cbc":
+                case "kw_tripledes":
+                    return typeof(TripleDESCryptoServiceProvider);
+                case "sha1":
+                    return typeof(SHA1CryptoServiceProvider);
+                case "sha256":
+                    return typeof(SHA256CryptoServiceProvider);
+                case "sha384":
+                    return typeof(SHA384CryptoServiceProvider);
+                case "sha512":
+                    return typeof(SHA512CryptoServiceProvider);
+                case "des":
+                    return typeof(DESCryptoServiceProvider);
+                case "rc2":
+                    return typeof(RC2CryptoServiceProvider);
+                case "kw_aes128":
+                case "kw_aes256":
+                case "kw_aes192":
+                case "aes128_cbc":
+                case "aes256_cbc":
+                case "aes192_cbc":
+                default:
+                    return typeof(RijndaelManaged);
+            }
+        }
+
         private static void CryptoFileWrapper(EnvelopeType env, string ovffilename, string password, bool encrypt)
         {
             bool process = true;
@@ -415,7 +452,7 @@ namespace XenOvf
             try
             {
                 List<DataReference> dataReference = new List<DataReference>();
-                string cryptoclassname = (string)AlgorithmMap(ENCRYPTION_ALGORITHM.Split('#')[1].ToLower().Replace('-', '_'));
+                Type cryptoclassType = GetAlgorithmClass(ENCRYPTION_ALGORITHM);
                 int keysize = ENCRYPT_KEY_LENGTH;
                 string fileuuids = null;
                 string version = null;
@@ -446,13 +483,8 @@ namespace XenOvf
                         if (securitytype.EncryptionMethod != null &&
                             securitytype.EncryptionMethod.Algorithm != null)
                         {
-                            string algoname = (securitytype.EncryptionMethod.Algorithm.Split(new char[] { '#' }))[1].ToLower().Replace('-', '_');
-                            object x = Properties.Settings.Default[algoname];
-                            if (x != null)
-                            {
-                                cryptoclassname = (string)x;
-                                keysize = Convert.ToInt32(securitytype.EncryptionMethod.KeySize);
-                            }
+                            cryptoclassType = GetAlgorithmClass(securitytype.EncryptionMethod.Algorithm);
+                            keysize = Convert.ToInt32(securitytype.EncryptionMethod.KeySize);
                         }
                         if (!string.IsNullOrEmpty(securitytype.version))
                         {
@@ -502,7 +534,7 @@ namespace XenOvf
                     {
                         string fullname = string.Format(@"{0}\{1}", Path.GetDirectoryName(ovffilename), file.href);
                         log.DebugFormat(encrypt ? "Encrypt: {0}" : "Decrypt: {0}", fullname);
-                        ICryptoTransform trans = CryptoSetup(cryptoclassname, password, encrypt, version);                        
+                        ICryptoTransform trans = CryptoSetup(cryptoclassType, password, encrypt, version);                        
                         CryptoFile(trans, fullname, fullname + ".tmp", encrypt);
                         if (_cancelEncrypt)
                         {
@@ -566,7 +598,7 @@ namespace XenOvf
                     EncryptedDataType EncryptedData = new EncryptedDataType();
                     EncryptedData.CipherData = new CipherDataType();
 
-                    CryptoElement(EncryptedData, KnownEncrypt, cryptoclassname, version, password);
+                    CryptoElement(EncryptedData, KnownEncrypt, cryptoclassType, version, password);
 
                     securityType.ReferenceList = referenceList;
                     securityType.EncryptionMethod = encryptMethod;
@@ -590,8 +622,8 @@ namespace XenOvf
         {
             try
             {
-                string cryptoclassname = (string)AlgorithmMap(ENCRYPTION_ALGORITHM.Split('#')[1].ToLower().Replace('-', '_'));
-                ICryptoTransform trans = CryptoSetup(cryptoclassname, password, encrypt, version);
+                Type cryptoclassType = GetAlgorithmClass(ENCRYPTION_ALGORITHM);
+                ICryptoTransform trans = CryptoSetup(cryptoclassType, password, encrypt, version);
                 return CryptoStream1(trans, inputStream, encrypt);
 
             }
@@ -600,15 +632,14 @@ namespace XenOvf
                 throw ex;
             }
         }
-        private static ICryptoTransform CryptoSetup(string cryptoclassname, string password, bool encrypt, string version)
+        private static ICryptoTransform CryptoSetup(Type cryptoclassType, string password, bool encrypt, string version)
         {
 
-            log.DebugFormat("CryptoSetup: using {0}", cryptoclassname);
+            log.DebugFormat("CryptoSetup: using {0}", cryptoclassType);
             SymmetricAlgorithm cryptObject = null;
             try
             {
-                Type EncType = Type.GetType(cryptoclassname, true);
-                cryptObject = (SymmetricAlgorithm)Activator.CreateInstance(EncType);
+                cryptObject = (SymmetricAlgorithm)Activator.CreateInstance(cryptoclassType);
                 if (!string.IsNullOrEmpty(version) && CheckSecurityVersion(version, SECURITY_VERSION) >= 0)
                 {
                     cryptObject.Padding = PaddingMode.PKCS7;
@@ -806,11 +837,11 @@ namespace XenOvf
             return rtnvalue;
         }
 
-        private static void CryptoElement(XenOvf.Definitions.XENC.EncryptedDataType element, string original, string cryptoclassname, string version, string password)
+        private static void CryptoElement(EncryptedDataType element, string original, Type cryptoclassType, string version, string password)
         {
             Encoding encoding = new UnicodeEncoding();
             MemoryStream ms = new MemoryStream();
-            CryptoStream crypted = CryptoStream1(CryptoSetup(cryptoclassname, password, true, version), ms, true);
+            CryptoStream crypted = CryptoStream1(CryptoSetup(cryptoclassType, password, true, version), ms, true);
             byte[] bytes = encoding.GetBytes(original);
             crypted.Write(bytes, 0, bytes.Length);
             crypted.FlushFinalBlock();

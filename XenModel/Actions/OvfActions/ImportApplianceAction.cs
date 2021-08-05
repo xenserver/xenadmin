@@ -51,7 +51,7 @@ namespace XenAdmin.Actions.OvfActions
 		private readonly bool m_verifyManifest;
 		private readonly bool m_verifySignature;
 		private readonly string m_password;
-        private string m_encryptionClass;
+        private Type m_encryptionClass;
         private string m_encryptionVersion;
         protected readonly bool m_runfixups;
 		protected readonly SR m_selectedIsoSr;
