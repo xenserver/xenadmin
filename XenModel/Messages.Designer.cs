@@ -9344,6 +9344,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Support for container management has been removed as of {0}. Please uninstall the Container Management supplemental pack because you will no longer be able to use it for managing Docker containers..
+        /// </summary>
+        public static string CONTAINER_MANAGEMENT_REMOVAL_WARNING {
+            get {
+                return ResourceManager.GetString("CONTAINER_MANAGEMENT_REMOVAL_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} on &apos;{1}&apos; {2}.
         /// </summary>
         public static string CONTAINER_ON_VM_TITLE {

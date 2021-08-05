@@ -1825,8 +1825,9 @@ namespace XenAdmin.Core
        public static bool ContainerCapability(IXenConnection connection)
        {
            var coordinator = GetCoordinator(connection);
-           if (coordinator == null)
+           if (coordinator == null || StockholmOrGreater(connection))
                return false;
+
            if (ElyOrGreater(connection))
                return coordinator.AppliedUpdates().Any(update => update.Name().ToLower().StartsWith("xscontainer")); 
            return coordinator.SuppPacks().Any(suppPack => suppPack.Name.ToLower().StartsWith("xscontainer")); 
