@@ -347,27 +347,25 @@ namespace XenAdmin.TabPages
         {
             if (xenObject is DockerContainer container)
             {
-                buttonProperties.Enabled = false;
-                buttonViewConsole.Visible = true;
-                buttonViewLog.Visible = true;
+                buttonProperties.Visible = false;
 
-                // Grey out the buttons if the Container management VM is Windows.
-                // For Linux VM, enable the buttons only when the docker is running.
-                if (container.Parent.IsWindows())
+                buttonViewConsole.Visible = buttonViewLog.Visible = linkLabelCollapse.Visible =
+                    linkLabelExpand.Visible = !Helpers.StockholmOrGreater(xenObject.Connection);
+
+                if (!Helpers.StockholmOrGreater(xenObject.Connection))
                 {
-                    buttonViewConsole.Enabled = false;
-                    buttonViewLog.Enabled = false;
-                }
-                else
-                {
-                    buttonViewConsole.Enabled = buttonViewLog.Enabled = container.power_state == vm_power_state.Running;
+                    // Grey out the buttons if the Container management VM is Windows.
+                    // For Linux VM, enable the buttons only when the docker is running.
+                    buttonViewConsole.Enabled = buttonViewLog.Enabled =
+                        !container.Parent.IsWindows() && container.power_state == vm_power_state.Running;
                 }
             }
             else
             {
+                buttonProperties.Visible = true;
                 buttonProperties.Enabled = xenObject != null && !xenObject.Locked && xenObject.Connection != null && xenObject.Connection.IsConnected;
-                buttonViewConsole.Visible = false;
-                buttonViewLog.Visible = false;
+                buttonViewConsole.Visible = buttonViewLog.Visible = false;
+                linkLabelCollapse.Visible = linkLabelExpand.Visible = true;
             }
         }
 
@@ -416,9 +414,10 @@ namespace XenAdmin.TabPages
             {
                 generateDisconnectedHostBox();
             }
-            else if (xenObject is DockerContainer)
+            else if (xenObject is DockerContainer dockerContainer)
             {
-                generateDockerContainerGeneralBox();
+                if (!Helpers.StockholmOrGreater(xenObject.Connection))
+                    generateDockerContainerGeneralBox(dockerContainer);
             }
             else
             {
@@ -458,6 +457,7 @@ namespace XenAdmin.TabPages
                 s.StartLayout();
             }
             panel2.ResumeLayout();
+            SetupDeprecationBanner();
             UpdateButtons();
         }
 
@@ -1498,33 +1498,29 @@ namespace XenAdmin.TabPages
             }
         }
 
-        private void generateDockerContainerGeneralBox()
+        private void generateDockerContainerGeneralBox(DockerContainer dockerContainer)
         {
-            var dockerContainer = xenObject as DockerContainer;
-            if (dockerContainer != null)
+            PDSection s = pdSectionGeneral;
+            s.AddEntry(Messages.NAME, dockerContainer.Name().Length != 0 ? dockerContainer.Name() : Messages.NONE);
+            s.AddEntry(Messages.STATUS, dockerContainer.status.Length != 0 ? dockerContainer.status : Messages.NONE);
+            try
             {
-                PDSection s = pdSectionGeneral;
-                s.AddEntry(Messages.NAME, dockerContainer.Name().Length != 0 ? dockerContainer.Name() : Messages.NONE);
-                s.AddEntry(Messages.STATUS, dockerContainer.status.Length != 0 ? dockerContainer.status : Messages.NONE);
-                try
-                {
-                    DateTime created = Util.FromUnixTime(double.Parse(dockerContainer.created)).ToLocalTime();
-                    s.AddEntry(Messages.CONTAINER_CREATED, HelpersGUI.DateTimeToString(created, Messages.DATEFORMAT_DMY_HMS, true));
-                }
-                catch
-                {
-                    s.AddEntry(Messages.CONTAINER_CREATED, dockerContainer.created.Length != 0 ? dockerContainer.created : Messages.NONE);
-                }
-                s.AddEntry(Messages.CONTAINER_IMAGE, dockerContainer.image.Length != 0 ? dockerContainer.image : Messages.NONE);
-                s.AddEntry(Messages.CONTAINER, dockerContainer.container.Length != 0 ? dockerContainer.container : Messages.NONE);
-                s.AddEntry(Messages.CONTAINER_COMMAND, dockerContainer.command.Length != 0 ? dockerContainer.command : Messages.NONE);
-                var ports = dockerContainer.PortList.Select(p => p.Description);
-                if (ports.Count() > 0)
-                {
-                    s.AddEntry(Messages.CONTAINER_PORTS, string.Join(Environment.NewLine, ports));
-                }
-                s.AddEntry(Messages.UUID, dockerContainer.uuid.Length != 0 ? dockerContainer.uuid : Messages.NONE);
+                DateTime created = Util.FromUnixTime(double.Parse(dockerContainer.created)).ToLocalTime();
+                s.AddEntry(Messages.CONTAINER_CREATED, HelpersGUI.DateTimeToString(created, Messages.DATEFORMAT_DMY_HMS, true));
             }
+            catch
+            {
+                s.AddEntry(Messages.CONTAINER_CREATED, dockerContainer.created.Length != 0 ? dockerContainer.created : Messages.NONE);
+            }
+            s.AddEntry(Messages.CONTAINER_IMAGE, dockerContainer.image.Length != 0 ? dockerContainer.image : Messages.NONE);
+            s.AddEntry(Messages.CONTAINER, dockerContainer.container.Length != 0 ? dockerContainer.container : Messages.NONE);
+            s.AddEntry(Messages.CONTAINER_COMMAND, dockerContainer.command.Length != 0 ? dockerContainer.command : Messages.NONE);
+            var ports = dockerContainer.PortList.Select(p => p.Description);
+            if (ports.Count() > 0)
+            {
+                s.AddEntry(Messages.CONTAINER_PORTS, string.Join(Environment.NewLine, ports));
+            }
+            s.AddEntry(Messages.UUID, dockerContainer.uuid.Length != 0 ? dockerContainer.uuid : Messages.NONE);
         }
 
         private void generateReadCachingBox()
@@ -1636,8 +1632,7 @@ namespace XenAdmin.TabPages
 
         private void generateDockerInfoBox()
         {
-            VM vm = xenObject as VM;
-            if (vm == null)
+            if (!(xenObject is VM vm) || Helpers.StockholmOrGreater(xenObject.Connection))
                 return;
 
             VM_Docker_Info info = vm.DockerInfo();
@@ -1694,6 +1689,20 @@ namespace XenAdmin.TabPages
             var result = host.SuppPacks().Select(suppPack => suppPack.LongDescription).ToList();
             result.Sort(StringUtility.NaturalCompare);
             return string.Join("\n", result.ToArray());
+        }
+
+        private void SetupDeprecationBanner()
+        {
+            if (!(xenObject is DockerContainer) || Helpers.ContainerCapability(xenObject.Connection))
+            {
+                Banner.Visible = false;
+            }
+            else
+            {
+                Banner.BannerType = DeprecationBanner.Type.Removal;
+                Banner.WarningMessage = string.Format(Messages.CONTAINER_MANAGEMENT_REMOVAL_WARNING, string.Format(Messages.XENSERVER_8_2, BrandManager.ProductVersion82));
+                Banner.Visible = true;
+            }
         }
 
         #region VM delegates
@@ -1947,7 +1956,7 @@ namespace XenAdmin.TabPages
 
         private void StartPutty(string dockerCmd)
         {
-            if (!(xenObject is DockerContainer dockerContainer))
+            if (!(xenObject is DockerContainer dockerContainer) || Helpers.StockholmOrGreater(xenObject.Connection))
                 return;
 
             string ipAddr = dockerContainer.Parent.IPAddressForSSH();

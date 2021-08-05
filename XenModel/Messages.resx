@@ -3279,6 +3279,9 @@ Would you like to carry out the operation at this time?</value>
   <data name="CONTAINER_IMAGE" xml:space="preserve">
     <value>Image</value>
   </data>
+  <data name="CONTAINER_MANAGEMENT_REMOVAL_WARNING" xml:space="preserve">
+    <value>Support for container management has been removed as of {0}. Please uninstall the Container Management supplemental pack because you will no longer be able to use it for managing Docker containers.</value>
+  </data>
   <data name="CONTAINER_ON_VM_TITLE" xml:space="preserve">
     <value>{0} on '{1}' {2}</value>
   </data>

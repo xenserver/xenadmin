@@ -1757,8 +1757,9 @@ namespace XenAdmin.Core
        public static bool ContainerCapability(IXenConnection connection)
        {
            var master = GetMaster(connection);
-           if (master == null)
+           if (master == null || StockholmOrGreater(connection))
                return false;
+
            if (ElyOrGreater(connection))
                return master.AppliedUpdates().Any(update => update.Name().ToLower().StartsWith("xscontainer")); 
            return master.SuppPacks().Any(suppPack => suppPack.Name.ToLower().StartsWith("xscontainer")); 

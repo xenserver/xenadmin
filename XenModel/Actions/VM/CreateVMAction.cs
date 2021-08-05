@@ -233,7 +233,8 @@ namespace XenAdmin.Actions.VMActions
             VM.IsBeingCreated = false;
             PointOfNoReturn = true;
 
-            CloudCreateConfigDrive();
+            if (Helpers.ContainerCapability(Connection))
+                CloudCreateConfigDrive();
            
             AssignVgpu();
 

@@ -112,6 +112,7 @@
     <Compile Include="Alerts\Types\XenServerVersionAlert.cs" />
     <Compile Include="Commands\CallHomeCommand.cs" />
     <Compile Include="Commands\ChangeControlDomainMemoryCommand.cs" />
+    <Compile Include="Commands\DockerContainerCommand.cs" />
     <Compile Include="Commands\Controls\PoolRemoveServerToolStripMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -124,11 +125,6 @@
     <Compile Include="Commands\DragDropCrossPoolMoveHaltedVMCommand.cs" />
     <Compile Include="Commands\DisablePvsReadCachingCommand.cs" />
     <Compile Include="Commands\EnablePvsReadCachingCommand.cs" />
-    <Compile Include="Commands\RestartDockerContainerCommand.cs" />
-    <Compile Include="Commands\ResumeDockerContainerCommand.cs" />
-    <Compile Include="Commands\PauseDockerContainerCommand.cs" />
-    <Compile Include="Commands\StopDockerContainerCommand.cs" />
-    <Compile Include="Commands\StartDockerContainerCommand.cs" />
     <Compile Include="Commands\Controls\EditPropertiesToolStripMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>
