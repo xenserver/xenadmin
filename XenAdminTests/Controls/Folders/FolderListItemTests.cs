@@ -54,11 +54,11 @@ namespace XenAdminTests.Controls.Folders
             parent.Dispose();
         }
 
-        [Ignore("Needs revisiting")]
+        /*TODO: needs revisiting
         [Test]
         [TestCase("", ExpectedResult = 43)]
         [TestCase("mypath", ExpectedResult = 44)]
-        [TestCase("mypathmypathmypathmypathmypathmypathmypathmypathmypathmypathmypath", ExpectedResult = 454)]
+        [TestCase("mypathmypathmypathmypathmypathmypathmypathmypathmypathmypathmypath", ExpectedResult = 454)]*/
         public int CalculatePreferedSizes(string path)
         {
             var item = new FolderListItem(path, FolderListItem.AllowSearch.None, false)
