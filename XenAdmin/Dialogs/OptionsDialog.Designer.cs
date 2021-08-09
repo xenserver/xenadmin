@@ -63,7 +63,7 @@ namespace XenAdmin.Dialogs
             // verticalTabs
             // 
             this.verticalTabs.Items.AddRange(new object[] {
-            this.confirmationOptionsPage1,
+            this.confirmationOptionsPage1, 
             this.pluginOptionsPage1,
             this.saveAndRestoreOptionsPage1,
             this.securityOptionsPage1,
@@ -71,30 +71,7 @@ namespace XenAdmin.Dialogs
             this.graphsOptionsPage1,
             this.consolesOptionsPage1,
             this.connectionOptionsPage1,
-            this.confirmationOptionsPage1,
-            this.pluginOptionsPage1,
-            this.saveAndRestoreOptionsPage1,
-            this.securityOptionsPage1,
-            this.updatesOptionsPage1,
-            this.graphsOptionsPage1,
-            this.consolesOptionsPage1,
-            this.connectionOptionsPage1,
-            this.confirmationOptionsPage1,
-            this.pluginOptionsPage1,
-            this.saveAndRestoreOptionsPage1,
-            this.securityOptionsPage1,
-            this.updatesOptionsPage1,
-            this.graphsOptionsPage1,
-            this.consolesOptionsPage1,
-            this.connectionOptionsPage1,
-            this.securityOptionsPage1,
-            this.updatesOptionsPage1,
-            this.graphsOptionsPage1,
-            this.consolesOptionsPage1,
-            this.connectionOptionsPage1,
-            this.saveAndRestoreOptionsPage1,
-            this.pluginOptionsPage1,
-            this.confirmationOptionsPage1});
+            });
             resources.ApplyResources(this.verticalTabs, "verticalTabs");
             this.verticalTabs.SelectedIndexChanged += new System.EventHandler(this.verticalTabs_SelectedIndexChanged);
             // 
