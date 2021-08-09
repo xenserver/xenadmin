@@ -53,11 +53,6 @@ namespace XenAdmin.Wizards.HAWizard_Pages
         private readonly CollectionChangeEventHandler VM_CollectionChangedWithInvoke;
         private readonly List<VM> _vmsQueuedForUpdate = new List<VM>();
 
-        protected override bool ImplementsIsDirty()
-        {
-            return true;
-        }
-
         /// <summary>
         /// May not be set to null.
         /// </summary>
@@ -77,19 +72,16 @@ namespace XenAdmin.Wizards.HAWizard_Pages
             }
         }
 
-        internal void PopulatePageControls()
+        public override void PopulatePage()
         {
             Debug.Assert(connection != null, "Connection is null; set it to non-null before calling this method.");
+            UpdateMenuItems();
+            PopulateVMs();
+            haNtolIndicator.Connection = Connection;
+            haNtolIndicator.Settings = getCurrentSettings();
+            StartNtolUpdate();
+            IsDirty = false;
 
-            if (IsDirty)
-            {
-                UpdateMenuItems();
-                PopulateVMs();
-                haNtolIndicator.Connection = Connection;
-                haNtolIndicator.Settings = getCurrentSettings();
-                StartNtolUpdate();
-                IsDirty = false;
-            }
         }
 
         private void UpdateMenuItems()
@@ -719,11 +711,6 @@ namespace XenAdmin.Wizards.HAWizard_Pages
         public override void PageCancelled(ref bool cancel)
         {
             StopNtolUpdate();
-        }
-
-        protected override void PageLoadedCore(PageLoadedDirection direction)
-        {
-            PopulatePageControls();
         }
 
         public override void SelectDefaultControl()

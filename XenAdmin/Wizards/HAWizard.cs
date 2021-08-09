@@ -122,13 +122,7 @@ namespace XenAdmin.Wizards
 
         protected override void UpdateWizardContent(XenTabPage senderPage)
         {
-            Type type = senderPage.GetType();
-
-            if(type == typeof(Intro))
-            {
-                NotifyNextPagesOfChange(xenTabPageChooseSR, xenTabPageAssignPriorities, xenTabPageHaFinish);
-            }
-            else if (type == typeof(AssignPriorities))
+            if (senderPage.GetType() == typeof(AssignPriorities))
             {
                 xenTabPageHaFinish.HeartbeatSrName = xenTabPageChooseSR.SelectedHeartbeatSR.Name();
                 xenTabPageHaFinish.Ntol = xenTabPageAssignPriorities.Ntol;
@@ -165,7 +159,8 @@ namespace XenAdmin.Wizards
         {
             var pageType = senderPage.GetType();
 
-            if (pageType == typeof(Intro) && !_rbacNeeded || pageType == typeof(RBACWarningPage))
+            if ((pageType == typeof(Intro) && !_rbacNeeded || pageType == typeof(RBACWarningPage)) &&
+                xenTabPageChooseSR.IsFirstLoad)
             {
                 // Start HB SR scan
                 // If scan finds no suitable SRs ChooseSR will show sensible text and disallow progress.
