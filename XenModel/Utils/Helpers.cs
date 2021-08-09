@@ -1847,7 +1847,7 @@ namespace XenAdmin.Core
 
         public static bool GpusAvailable(IXenConnection connection)
         {
-            return connection?.Cache?.GPU_groups?.Any(g => g.PGPUs?.Count > 0 && g.supported_VGPU_types?.Count != 0) ?? false;
+            return connection?.Cache.GPU_groups.Any(g => g.PGPUs.Count > 0 && g.supported_VGPU_types.Count != 0) ?? false;
         }
     }
 }
