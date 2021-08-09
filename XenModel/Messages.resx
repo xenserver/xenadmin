@@ -615,11 +615,8 @@
   <data name="ACTION_MIGRATING_X_VDIS_STARTED" xml:space="preserve">
     <value>Started migrating virtual disks</value>
   </data>
-  <data name="ACTION_MOVING_VDI" xml:space="preserve">
-    <value>Moving virtual disk '{0}'...</value>
-  </data>
   <data name="ACTION_MOVING_VDI_TO_SR" xml:space="preserve">
-    <value>Moving Virtual Disk '{0}' to SR '{1}'</value>
+    <value>Moving Virtual Disk '{0}' from SR '{1}' to SR '{2}'</value>
   </data>
   <data name="ACTION_MOVING_X_VDIS" xml:space="preserve">
     <value>Moving {0} virtual disks to {1}</value>

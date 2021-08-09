@@ -126,7 +126,7 @@ namespace XenAdmin.Actions.VMActions
                     continue;
 
                 Description = string.Format(Messages.ACTION_MOVING_VDI_TO_SR,
-                    Helpers.GetName(curVdi), Helpers.GetName(sr));
+                    Helpers.GetName(curVdi), Helpers.GetName(Connection.Resolve(curVdi.SR)), Helpers.GetName(sr));
 
                 RelatedTask = VDI.async_copy(Session, oldVBD.VDI.opaque_ref, sr.opaque_ref);
                 PollToCompletion(PercentComplete, PercentComplete + halfstep);

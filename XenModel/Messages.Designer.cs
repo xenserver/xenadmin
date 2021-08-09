@@ -1555,16 +1555,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Moving virtual disk &apos;{0}&apos;....
-        /// </summary>
-        public static string ACTION_MOVING_VDI {
-            get {
-                return ResourceManager.GetString("ACTION_MOVING_VDI", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Moving Virtual Disk &apos;{0}&apos; to SR &apos;{1}&apos;.
+        ///   Looks up a localized string similar to Moving Virtual Disk &apos;{0}&apos; from SR &apos;{1}&apos; to SR &apos;{2}&apos;.
         /// </summary>
         public static string ACTION_MOVING_VDI_TO_SR {
             get {
