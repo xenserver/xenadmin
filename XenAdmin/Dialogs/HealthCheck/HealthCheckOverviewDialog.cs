@@ -282,23 +282,23 @@ namespace XenAdmin.Dialogs.HealthCheck
         
         public void UpdateButtonsVisibility(Pool pool)
         {
-            bool canAlterHealthCheck = Core.HealthCheck.PassedRbacChecks(pool.Connection);
+            bool cannotAlterHealthCheck = !Core.HealthCheck.PassedRbacChecks(pool.Connection, out var necessaryRoles);
 
             refreshLinkLabel.Visible =
                 editLinkLabel.Visible =
                 disableLinkLabel.Visible =
                 uploadRequestLinkLabel.Visible =
-                enrollNowLinkLabel.Visible = canAlterHealthCheck;
+                enrollNowLinkLabel.Visible = !cannotAlterHealthCheck;
 
-            if (!canAlterHealthCheck)
+            if (cannotAlterHealthCheck)
             {
-                List<Role> roleList = pool.Connection.Session.Roles;
-                roleList.Sort();
-                string rbacUser = roleList[0].FriendlyName();
-
-                cannotAlterHealthCheckLabel.Text = string.Format(Messages.HEALTHCHECK_CANNOT_ALTER_SETTINGS, rbacUser);
+                cannotAlterHealthCheckLabel.Text = string.Format(Messages.HEALTHCHECK_CANNOT_ALTER_SETTINGS, Role.FriendlyCSVRoleList(necessaryRoles));
                 cannotAlterHealthCheckLabel.Visible = true;
-            }  
+            }
+            else
+            {
+                cannotAlterHealthCheckLabel.Visible = false;
+            }
         }
 
         private void HealthCheckOverviewDialog_Load(object sender, EventArgs e)

@@ -18796,7 +18796,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A {0} user cannot alter the Health Check settings.
+        ///   Looks up a localized string similar to Only {0} users can enroll into, configure, or disable Health Check, or upload a report and request a report analysis.
         /// </summary>
         public static string HEALTHCHECK_CANNOT_ALTER_SETTINGS {
             get {

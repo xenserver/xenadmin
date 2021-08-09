@@ -58,6 +58,7 @@ namespace XenAdmin.Dialogs.HealthCheck
             this.previousUploadDateLabel = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.notEnrolledPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.cannotAlterHealthCheckLabel = new System.Windows.Forms.Label();
             this.enrollNowLinkLabel = new System.Windows.Forms.LinkLabel();
             this.label6 = new System.Windows.Forms.Label();
             this.buttonCancel = new System.Windows.Forms.Button();
@@ -65,7 +66,6 @@ namespace XenAdmin.Dialogs.HealthCheck
             this.PolicyStatementLinkLabel = new System.Windows.Forms.LinkLabel();
             this.rubricLabel = new System.Windows.Forms.Label();
             this.showAgainCheckBox = new System.Windows.Forms.CheckBox();
-            this.cannotAlterHealthCheckLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -143,8 +143,9 @@ namespace XenAdmin.Dialogs.HealthCheck
             // 
             resources.ApplyResources(this.poolDetailsPanel, "poolDetailsPanel");
             this.tableLayoutPanel2.SetColumnSpan(this.poolDetailsPanel, 2);
-            this.poolDetailsPanel.Controls.Add(this.healthCheckStatusPanel, 0, 0);
-            this.poolDetailsPanel.Controls.Add(this.notEnrolledPanel, 0, 1);
+            this.poolDetailsPanel.Controls.Add(this.cannotAlterHealthCheckLabel, 0, 0);
+            this.poolDetailsPanel.Controls.Add(this.healthCheckStatusPanel, 0, 1);
+            this.poolDetailsPanel.Controls.Add(this.notEnrolledPanel, 0, 2);
             this.poolDetailsPanel.Name = "poolDetailsPanel";
             // 
             // healthCheckStatusPanel
@@ -286,10 +287,14 @@ namespace XenAdmin.Dialogs.HealthCheck
             // 
             resources.ApplyResources(this.notEnrolledPanel, "notEnrolledPanel");
             this.poolDetailsPanel.SetColumnSpan(this.notEnrolledPanel, 2);
-            this.notEnrolledPanel.Controls.Add(this.cannotAlterHealthCheckLabel, 0, 2);
             this.notEnrolledPanel.Controls.Add(this.enrollNowLinkLabel, 0, 1);
             this.notEnrolledPanel.Controls.Add(this.label6, 0, 0);
             this.notEnrolledPanel.Name = "notEnrolledPanel";
+            // 
+            // cannotAlterHealthCheckLabel
+            // 
+            resources.ApplyResources(this.cannotAlterHealthCheckLabel, "cannotAlterHealthCheckLabel");
+            this.cannotAlterHealthCheckLabel.Name = "cannotAlterHealthCheckLabel";
             // 
             // enrollNowLinkLabel
             // 
@@ -337,11 +342,6 @@ namespace XenAdmin.Dialogs.HealthCheck
             this.showAgainCheckBox.Name = "showAgainCheckBox";
             this.showAgainCheckBox.UseVisualStyleBackColor = true;
             this.showAgainCheckBox.CheckedChanged += new System.EventHandler(this.showAgainCheckBox_CheckedChanged);
-            // 
-            // cannotAlterHealthCheckLabel
-            // 
-            resources.ApplyResources(this.cannotAlterHealthCheckLabel, "cannotAlterHealthCheckLabel");
-            this.cannotAlterHealthCheckLabel.Name = "cannotAlterHealthCheckLabel";
             // 
             // HealthCheckOverviewDialog
             // 
