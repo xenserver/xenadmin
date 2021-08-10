@@ -13838,9 +13838,6 @@ Schedule:
   <data name="WLBREPORT_OPTIMIZATION_PERFORMANCE_HISTORY" xml:space="preserve">
     <value>Optimization Performance History</value>
   </data>
-  <data name="WLBREPORT_POOL_AUDIT_HISTORY" xml:space="preserve">
-    <value>Pool Audit Log History</value>
-  </data>
   <data name="WLBREPORT_POOL_CONNECTION_LOST_CAPTION" xml:space="preserve">
     <value>Pool Connection Lost</value>
   </data>
@@ -13849,12 +13846,6 @@ Schedule:
   </data>
   <data name="WLBREPORT_POOL_HEALTH_HISTORY" xml:space="preserve">
     <value>Pool Health History</value>
-  </data>
-  <data name="WLBREPORT_POOL_OPTIMIZATION_HISTORY" xml:space="preserve">
-    <value>Pool Optimization History</value>
-  </data>
-  <data name="WLBREPORT_REPORT_CONFIG_ERROR" xml:space="preserve">
-    <value>An error occurred when attempting to open the Workload Balancing report window.  Please check the report configuration file.</value>
   </data>
   <data name="WLBREPORT_VM_MOTION_HISTORY" xml:space="preserve">
     <value>Virtual Machine Motion History</value>

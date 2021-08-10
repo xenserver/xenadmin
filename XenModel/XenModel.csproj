@@ -170,6 +170,10 @@
     <Compile Include="BrandManager.cs" />
     <Compile Include="Utils\StringExtensions.cs" />
     <Compile Include="Utils\TimeSpanExtensions.cs" />
+    <Compile Include="WLB\WlbPoolConfiguration.cs" />
+    <Compile Include="WLB\WlbReportInfo.cs" />
+    <Compile Include="WLB\WlbReportSubscription.cs" />
+    <Compile Include="WLB\WlbScheduledTask.cs" />
     <Compile Include="XCM\ConversionClient.cs" />
     <Compile Include="XCM\ConversionDescriptors.cs" />
     <Compile Include="XCM\IConversion.cs" />

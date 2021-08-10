@@ -59,8 +59,7 @@ namespace XenAdmin.Actions.Wlb
                                 string reportName, 
                                 bool hideException, 
                                 Dictionary<string, string> parms)
-            : base(connection, string.Format(Messages.ACTION_WLB_REPORT, report, host.Name(), Helpers.GetName(connection)),
-                   Messages.ACTION_EXPORT_DESCRIPTION_PREPARING, true)
+            : base(connection, string.Format(Messages.ACTION_WLB_REPORT, report, host.Name(), Helpers.GetName(connection)), "", true)
         {
             this.report = report;
             this.reportName = reportName;

@@ -42003,15 +42003,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pool Audit Log History.
-        /// </summary>
-        public static string WLBREPORT_POOL_AUDIT_HISTORY {
-            get {
-                return ResourceManager.GetString("WLBREPORT_POOL_AUDIT_HISTORY", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Pool Connection Lost.
         /// </summary>
         public static string WLBREPORT_POOL_CONNECTION_LOST_CAPTION {
@@ -42035,24 +42026,6 @@ namespace XenAdmin {
         public static string WLBREPORT_POOL_HEALTH_HISTORY {
             get {
                 return ResourceManager.GetString("WLBREPORT_POOL_HEALTH_HISTORY", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Pool Optimization History.
-        /// </summary>
-        public static string WLBREPORT_POOL_OPTIMIZATION_HISTORY {
-            get {
-                return ResourceManager.GetString("WLBREPORT_POOL_OPTIMIZATION_HISTORY", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to An error occurred when attempting to open the Workload Balancing report window.  Please check the report configuration file..
-        /// </summary>
-        public static string WLBREPORT_REPORT_CONFIG_ERROR {
-            get {
-                return ResourceManager.GetString("WLBREPORT_REPORT_CONFIG_ERROR", resourceCulture);
             }
         }
         

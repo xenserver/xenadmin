@@ -4103,7 +4103,6 @@
       <DependentUpon>WlbPage.cs</DependentUpon>
     </Compile>
     <Compile Include="TestResources\TestResource.cs" />
-    <Compile Include="TestResources\XenSearchQueryTest.cs" />
     <Compile Include="UpdateManager.cs" />
     <Compile Include="UpdateManager.DelayCalculator.cs">
       <SubType>Code</SubType>
@@ -4197,16 +4196,12 @@
     <Compile Include="Wizards\PatchingWizard\PlanActions\RestartAgentPlanAction.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\UnwindProblemsAction.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\VMsPlanAction.cs" />
-    <Compile Include="Wlb\WlbPoolConfiguration.cs" />
-    <Compile Include="Wlb\WlbReportInfo.cs" />
-    <Compile Include="Wlb\WlbReportSubscription.cs" />
-    <Compile Include="Wlb\WlbReports\WorkloadReports.cs">
+    <Compile Include="Dialogs\Wlb\WorkloadReports.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Wlb\WlbReports\WorkloadReports.Designer.cs">
+    <Compile Include="Dialogs\Wlb\WorkloadReports.Designer.cs">
       <DependentUpon>WorkloadReports.cs</DependentUpon>
     </Compile>
-    <Compile Include="Wlb\WlbScheduledTask.cs" />
     <Compile Include="XenSearch\Columns.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -5925,9 +5920,6 @@
     <EmbeddedResource Include="TabPages\WlbPage.zh-CN.resx">
       <DependentUpon>WlbPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TestResources\api-version.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
     <EmbeddedResource Include="Wizards\BallooningWizard.ja.resx">
       <DependentUpon>BallooningWizard.cs</DependentUpon>
     </EmbeddedResource>
@@ -6698,13 +6690,14 @@
     <EmbeddedResource Include="Wizards\XenWizardBase.zh-CN.resx">
       <DependentUpon>XenWizardBase.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wlb\WlbReports\WorkloadReports.ja.resx">
+    <EmbeddedResource Include="Dialogs\Wlb\WorkloadReports.ja.resx">
       <DependentUpon>WorkloadReports.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wlb\WlbReports\WorkloadReports.resx">
+    <EmbeddedResource Include="Dialogs\Wlb\WorkloadReports.resx">
       <DependentUpon>WorkloadReports.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wlb\WlbReports\WorkloadReports.zh-CN.resx">
+    <EmbeddedResource Include="Dialogs\Wlb\WorkloadReports.zh-CN.resx">
       <DependentUpon>WorkloadReports.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Images\VMTemplate_h32bit_32.png" />

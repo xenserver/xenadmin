@@ -147,7 +147,6 @@ namespace XenAdmin.Dialogs.Wlb
 
         private XenAdmin.SettingsPanels.WlbOptimizationModePage wlbOptimizationModePage;
         private XenAdmin.SettingsPanels.WlbAutomationPage wlbAutomationPage;
-        //private XenAdmin.SettingsPanels.WlbPowerManagementPage wlbPowerManagementPage;
         private XenAdmin.SettingsPanels.WlbThresholdsPage wlbThresholdsPage;
         private XenAdmin.SettingsPanels.WlbMetricWeightingPage wlbMetricWeightingPage;
         private XenAdmin.SettingsPanels.WlbHostExclusionPage wlbHostExclusionPage;
