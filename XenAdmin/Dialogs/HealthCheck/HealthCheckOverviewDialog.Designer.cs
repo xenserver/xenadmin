@@ -38,6 +38,7 @@ namespace XenAdmin.Dialogs.HealthCheck
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.poolNameLabel = new System.Windows.Forms.Label();
             this.poolDetailsPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.cannotAlterHealthCheckLabel = new System.Windows.Forms.Label();
             this.healthCheckStatusPanel = new System.Windows.Forms.TableLayoutPanel();
             this.failedUploadDateLabel = new System.Windows.Forms.Label();
             this.failedUploadLabel = new System.Windows.Forms.Label();
@@ -58,7 +59,6 @@ namespace XenAdmin.Dialogs.HealthCheck
             this.previousUploadDateLabel = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.notEnrolledPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.cannotAlterHealthCheckLabel = new System.Windows.Forms.Label();
             this.enrollNowLinkLabel = new System.Windows.Forms.LinkLabel();
             this.label6 = new System.Windows.Forms.Label();
             this.buttonCancel = new System.Windows.Forms.Button();
@@ -147,6 +147,11 @@ namespace XenAdmin.Dialogs.HealthCheck
             this.poolDetailsPanel.Controls.Add(this.healthCheckStatusPanel, 0, 1);
             this.poolDetailsPanel.Controls.Add(this.notEnrolledPanel, 0, 2);
             this.poolDetailsPanel.Name = "poolDetailsPanel";
+            // 
+            // cannotAlterHealthCheckLabel
+            // 
+            resources.ApplyResources(this.cannotAlterHealthCheckLabel, "cannotAlterHealthCheckLabel");
+            this.cannotAlterHealthCheckLabel.Name = "cannotAlterHealthCheckLabel";
             // 
             // healthCheckStatusPanel
             // 
@@ -290,11 +295,6 @@ namespace XenAdmin.Dialogs.HealthCheck
             this.notEnrolledPanel.Controls.Add(this.enrollNowLinkLabel, 0, 1);
             this.notEnrolledPanel.Controls.Add(this.label6, 0, 0);
             this.notEnrolledPanel.Name = "notEnrolledPanel";
-            // 
-            // cannotAlterHealthCheckLabel
-            // 
-            resources.ApplyResources(this.cannotAlterHealthCheckLabel, "cannotAlterHealthCheckLabel");
-            this.cannotAlterHealthCheckLabel.Name = "cannotAlterHealthCheckLabel";
             // 
             // enrollNowLinkLabel
             // 

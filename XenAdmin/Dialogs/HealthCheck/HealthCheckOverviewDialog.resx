@@ -240,6 +240,48 @@
   <data name="poolDetailsPanel.ColumnCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
+  <data name="cannotAlterHealthCheckLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cannotAlterHealthCheckLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="cannotAlterHealthCheckLabel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="cannotAlterHealthCheckLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cannotAlterHealthCheckLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="cannotAlterHealthCheckLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 10</value>
+  </data>
+  <data name="cannotAlterHealthCheckLabel.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 0, 3, 0</value>
+  </data>
+  <data name="cannotAlterHealthCheckLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>274, 15</value>
+  </data>
+  <data name="cannotAlterHealthCheckLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="cannotAlterHealthCheckLabel.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;cannotAlterHealthCheckLabel.Name" xml:space="preserve">
+    <value>cannotAlterHealthCheckLabel</value>
+  </data>
+  <data name="&gt;&gt;cannotAlterHealthCheckLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cannotAlterHealthCheckLabel.Parent" xml:space="preserve">
+    <value>poolDetailsPanel</value>
+  </data>
+  <data name="&gt;&gt;cannotAlterHealthCheckLabel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="healthCheckStatusPanel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -916,7 +958,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="healthCheckStatusPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
+    <value>3, 31</value>
   </data>
   <data name="healthCheckStatusPanel.RowCount" type="System.Int32, mscorlib">
     <value>12</value>
@@ -937,7 +979,7 @@
     <value>poolDetailsPanel</value>
   </data>
   <data name="&gt;&gt;healthCheckStatusPanel.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="healthCheckStatusPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="failedUploadDateLabel" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="failedUploadLabel" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lastUploadDateLabel" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="flowLayoutPanel1" Row="3" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="disableLinkLabel" Row="10" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="uploadRequestLinkLabel" Row="11" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="scheduleLabel" Row="8" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="editLinkLabel" Row="9" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="label4" Row="7" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="lastUploadLabel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="ReportAnalysisLinkLabel" Row="4" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="previousUploadPanel" Row="6" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,20,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
@@ -950,45 +992,6 @@
   </data>
   <data name="notEnrolledPanel.ColumnCount" type="System.Int32, mscorlib">
     <value>1</value>
-  </data>
-  <data name="cannotAlterHealthCheckLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="cannotAlterHealthCheckLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="cannotAlterHealthCheckLabel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="cannotAlterHealthCheckLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="cannotAlterHealthCheckLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 45</value>
-  </data>
-  <data name="cannotAlterHealthCheckLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="cannotAlterHealthCheckLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>268, 14</value>
-  </data>
-  <data name="cannotAlterHealthCheckLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="cannotAlterHealthCheckLabel.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;cannotAlterHealthCheckLabel.Name" xml:space="preserve">
-    <value>cannotAlterHealthCheckLabel</value>
-  </data>
-  <data name="&gt;&gt;cannotAlterHealthCheckLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cannotAlterHealthCheckLabel.Parent" xml:space="preserve">
-    <value>notEnrolledPanel</value>
-  </data>
-  <data name="&gt;&gt;cannotAlterHealthCheckLabel.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="enrollNowLinkLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1024,7 +1027,7 @@
     <value>notEnrolledPanel</value>
   </data>
   <data name="&gt;&gt;enrollNowLinkLabel.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="label6.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1063,7 +1066,7 @@
     <value>notEnrolledPanel</value>
   </data>
   <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="notEnrolledPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -1072,13 +1075,13 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="notEnrolledPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 316</value>
+    <value>3, 344</value>
   </data>
   <data name="notEnrolledPanel.RowCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="notEnrolledPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>274, 62</value>
+    <value>274, 14</value>
   </data>
   <data name="notEnrolledPanel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1093,10 +1096,10 @@
     <value>poolDetailsPanel</value>
   </data>
   <data name="&gt;&gt;notEnrolledPanel.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="notEnrolledPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="cannotAlterHealthCheckLabel" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="enrollNowLinkLabel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label6" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="enrollNowLinkLabel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label6" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="poolDetailsPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -1129,7 +1132,7 @@
     <value>1</value>
   </data>
   <data name="poolDetailsPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="healthCheckStatusPanel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="notEnrolledPanel" Row="2" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="cannotAlterHealthCheckLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="healthCheckStatusPanel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="notEnrolledPanel" Row="2" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="tableLayoutPanel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
