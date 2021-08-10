@@ -3175,20 +3175,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Moving VM &apos;{0}&apos; to new storage.
+        ///   Looks up a localized string similar to Moving VM &apos;{0}&apos; from Host &apos;{1}&apos; to Host &apos;{2}&apos;.
         /// </summary>
         public static string ACTION_VM_MOVING {
             get {
                 return ResourceManager.GetString("ACTION_VM_MOVING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Moving VM &apos;{0}&apos; to &apos;{1}&apos; on SR &apos;{2}&apos;.
-        /// </summary>
-        public static string ACTION_VM_MOVING_TITLE {
-            get {
-                return ResourceManager.GetString("ACTION_VM_MOVING_TITLE", resourceCulture);
             }
         }
         

@@ -45,13 +45,13 @@ namespace XenAdmin.Actions.VMActions
         private Dictionary<string, SR> _storageMapping;
 
         public VMMoveAction(VM vm, Dictionary<string, SR> storageMapping, Host host)
-            : base(vm.Connection, string.Format(Messages.ACTION_VM_MOVING, vm.Name()))
+             : base(vm.Connection, string.Format(Messages.ACTION_VM_MOVING, vm.Name(), vm.Connection.Name, host.Name()))
         {
-            this.VM = vm;
-            this.Host = host;
-            this.Pool = Helpers.GetPool(vm.Connection);
+            VM = vm;
+            Host = host;
+            Pool = Helpers.GetPool(vm.Connection);
             if (vm.is_a_template)
-                this.Template = vm;
+                Template = vm;
 
             _storageMapping = storageMapping;
             SR = _storageMapping.Values.FirstOrDefault();
@@ -59,26 +59,22 @@ namespace XenAdmin.Actions.VMActions
             PopulateApiMethodsToRoleCheck();
         }
 
-        public VMMoveAction(VM vm, SR sr, Host host, string namelabel)
-            : base(vm.Connection, string.Format(Messages.ACTION_VM_MOVING_TITLE, vm.Name(), namelabel, sr.NameWithoutHost()))
+        public VMMoveAction(VM vm, SR sr, Host host)
+            : this(vm, GetStorageMapping(vm, sr), host)
         {
-            this.VM = vm;
-            this.Host = host;
-            this.Pool = Helpers.GetPool(vm.Connection);
-            this.SR = sr;
-            if (vm.is_a_template)
-                this.Template = vm;
+        }
 
-            // create a storage map where all VDIs are mapped to the same SR
-            _storageMapping = new Dictionary<string, SR>();
+        private static Dictionary<string, SR> GetStorageMapping(VM vm, SR sr)
+        {
+            var storageMapping = new Dictionary<string, SR>();
             foreach (var vbdRef in vm.VBDs)
             {
                 var vbd = vm.Connection.Resolve(vbdRef);
                 if (vbd != null)
-                    _storageMapping.Add(vbd.VDI.opaque_ref, sr);
+                    storageMapping.Add(vbd.VDI.opaque_ref, sr);
             }
+            return storageMapping;
 
-            PopulateApiMethodsToRoleCheck();
         }
 
         #region RBAC Dependencies
@@ -96,7 +92,7 @@ namespace XenAdmin.Actions.VMActions
 
         protected override void Run()
         {
-            Description = Messages.ACTION_PREPARING;
+            Description = Messages.MOVING;
 
             // move the progress bar above 0, it's more reassuring to see than a blank bar as we copy the first disk
             PercentComplete += 10;
@@ -160,11 +156,13 @@ namespace XenAdmin.Actions.VMActions
                 PercentComplete += halfstep;
             }
 
+            Description = Messages.MOVING;
+
             if (SR != null)
                 VM.set_suspend_SR(Session, VM.opaque_ref, SR.opaque_ref);
 
             if (exceptions.Count > 0)
-                throw new Exception(Messages.ACTION_VM_MOVING_VDI_DESTROY_FAILURE);
+                throw new Exception(string.Format(Messages.ACTION_VM_MOVING_VDI_DESTROY_FAILURE, VM.NameWithLocation()));
 
             Description = Messages.MOVED;
         }

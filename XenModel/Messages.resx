@@ -1177,10 +1177,7 @@
     <value>Migrating VM '{0}'</value>
   </data>
   <data name="ACTION_VM_MOVING" xml:space="preserve">
-    <value>Moving VM '{0}' to new storage</value>
-  </data>
-  <data name="ACTION_VM_MOVING_TITLE" xml:space="preserve">
-    <value>Moving VM '{0}' to '{1}' on SR '{2}'</value>
+    <value>Moving VM '{0}' from Host '{1}' to Host '{2}'</value>
   </data>
   <data name="ACTION_VM_MOVING_VDI_DESTROY_FAILURE" xml:space="preserve">
     <value>Failed to finalize moving VM '{0}' to new storage. Please see logs for details.</value>
