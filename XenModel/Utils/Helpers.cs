@@ -959,30 +959,113 @@ namespace XenAdmin.Core
 
         #endregion
 
+        public enum DataSourceCategory
+        {
+            Cpu,
+            Memory,
+            Disk,
+            Storage,
+            Network,
+            Latency,
+            LoadAverage,
+            Gpu,
+            Pvs,
+            Custom
+        }
+
+        public static string ToStringI18N(this DataSourceCategory category)
+        {
+            switch (category)
+            {
+                case DataSourceCategory.Cpu:
+                    return Messages.DATATYPE_CPU;
+                case DataSourceCategory.Memory:
+                    return Messages.DATATYPE_MEMORY;
+                case DataSourceCategory.Disk:
+                    return Messages.DATATYPE_DISK;
+                case DataSourceCategory.Storage:
+                    return Messages.DATATYPE_STORAGE;
+                case DataSourceCategory.Network:
+                    return Messages.DATATYPE_NETWORK;
+                case DataSourceCategory.Latency:
+                    return Messages.DATATYPE_LATENCY;
+                case DataSourceCategory.LoadAverage:
+                    return Messages.DATATYPE_LOADAVERAGE;
+                case DataSourceCategory.Gpu:
+                    return Messages.DATATYPE_GPU;
+                case DataSourceCategory.Pvs:
+                    return Messages.DATATYPE_PVS;
+                default:
+                    return Messages.DATATYPE_CUSTOM;
+            }
+        }
+
         public static Regex CpuRegex = new Regex("^cpu([0-9]+)$");
-        public static Regex CpuAvgFreqRegex = new Regex("^CPU([0-9]+)-avg-freq$");
+        static Regex CpuAvgFreqRegex = new Regex("^CPU([0-9]+)-avg-freq$");
         public static Regex CpuStateRegex = new Regex("^cpu([0-9]+)-(C|P)([0-9]+)$");
+        static Regex CpuOtherRegex = new Regex("^cpu_avg|avg_cpu$");
+        private static Regex VcpuRegex = new Regex("^runstate_(blocked|concurrency_hazard|full_contention|fullrun|partial_contention|partial_run)$");
         static Regex VifRegex = new Regex("^vif_([0-9]+)_(tx|rx)((_errors)?)$");
         static Regex PifEthRegex = new Regex("^pif_eth([0-9]+)_(tx|rx)((_errors)?)$");
-		static Regex PifVlanRegex = new Regex("^pif_eth([0-9]+).([0-9]+)_(tx|rx)((_errors)?)$");
+        static Regex PifVlanRegex = new Regex("^pif_eth([0-9]+).([0-9]+)_(tx|rx)((_errors)?)$");
         static Regex PifBrRegex = new Regex("^pif_xenbr([0-9]+)_(tx|rx)((_errors)?)$");
-		static Regex PifXapiRegex = new Regex("^pif_xapi([0-9]+)_(tx|rx)((_errors)?)$");
+        static Regex PifXapiRegex = new Regex("^pif_xapi([0-9]+)_(tx|rx)((_errors)?)$");
         static Regex PifTapRegex = new Regex("^pif_tap([0-9]+)_(tx|rx)((_errors)?)$");
         static Regex PifLoRegex = new Regex("^pif_lo_(tx|rx)((_errors)?)$");
         static Regex PifBondRegex = new Regex("^pif_(bond[0-9]+)_(tx|rx)((_errors)?)$");
+        static Regex PifOtherRegex = new Regex("^pif_aggr_(tx|rx)$");
         static Regex DiskRegex = new Regex("^vbd_((xvd|hd)[a-z]+)(_(read|write))?(_latency)?$");
         static Regex DiskIopsRegex = new Regex("^vbd_((xvd|hd)[a-z]+)_iops_(read|write|total)$");
         static Regex DiskThroughputRegex = new Regex("^vbd_((xvd|hd)[a-z]+)_io_throughput_(read|write|total)$");
         static Regex DiskOtherRegex = new Regex("^vbd_((xvd|hd)[a-z]+)_(avgqu_sz|inflight|iowait)$");
         static Regex NetworkLatencyRegex = new Regex("^network/latency$");
         static Regex XapiLatencyRegex = new Regex("^xapi_healthcheck/latency$");
+        static Regex XapiMemoryRegex = new Regex("^xapi_(allocation|free_memory|live_memory|memory_usage)_kib$");
         static Regex StatefileLatencyRegex = new Regex("^statefile/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/latency$");
         static Regex LoadAvgRegex = new Regex("loadavg");
-    	static Regex SrRegex = new Regex("^sr_[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}_cache_(size|hits|misses)");
+        static Regex SrRegex = new Regex("^sr_[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}_cache_(size|hits|misses)");
         static Regex SrIORegex = new Regex("^(io_throughput|iops)_(read|write|total)_([a-f0-9]{8})$");
         static Regex SrOtherRegex = new Regex("^(latency|avgqu_sz|inflight|iowait)_([a-f0-9]{8})$");
         static Regex SrReadWriteRegex = new Regex("^((read|write)(_latency)?)_([a-f0-9]{8})$");
         static Regex GpuRegex = new Regex(@"^gpu_((memory_(free|used))|power_usage|temperature|(utilisation_(compute|memory_io)))_((([a-fA-F0-9]{4}\/)|([a-fA-F0-9]{8}\/))?[a-fA-F0-9]{2}\/[0-1][a-fA-F0-9].[0-7])$");
+
+        public static DataSourceCategory GetDataSourceCategory(string name)
+        {
+            if (CpuRegex.IsMatch(name) || CpuAvgFreqRegex.IsMatch(name) ||
+                CpuStateRegex.IsMatch(name) || CpuOtherRegex.IsMatch(name) || VcpuRegex.IsMatch(name))
+                return DataSourceCategory.Cpu;
+
+            if (VifRegex.IsMatch(name) || PifEthRegex.IsMatch(name) || PifVlanRegex.IsMatch(name) ||
+                PifBrRegex.IsMatch(name) || PifXapiRegex.IsMatch(name) || PifBondRegex.IsMatch(name) ||
+                PifLoRegex.IsMatch(name) || PifTapRegex.IsMatch(name) || PifOtherRegex.IsMatch(name))
+                return DataSourceCategory.Network;
+
+            if (DiskRegex.IsMatch(name) || DiskIopsRegex.IsMatch(name) ||
+                DiskThroughputRegex.IsMatch(name) || DiskOtherRegex.IsMatch(name))
+                return DataSourceCategory.Disk;
+
+            if (SrRegex.IsMatch(name) || SrIORegex.IsMatch(name) ||
+                SrOtherRegex.IsMatch(name) || SrReadWriteRegex.IsMatch(name))
+                return DataSourceCategory.Storage;
+
+            if (GpuRegex.IsMatch(name))
+                return DataSourceCategory.Gpu;
+
+            if (NetworkLatencyRegex.IsMatch(name) || XapiLatencyRegex.IsMatch(name) ||
+                StatefileLatencyRegex.IsMatch(name))
+                return DataSourceCategory.Latency;
+
+            if (LoadAvgRegex.IsMatch(name))
+                return DataSourceCategory.LoadAverage;
+
+            if (name.StartsWith("pvsaccelerator"))
+                return DataSourceCategory.Pvs;
+
+            if (XapiMemoryRegex.IsMatch(name) || name.StartsWith("memory"))
+                return DataSourceCategory.Memory;
+
+            return DataSourceCategory.Custom;
+        }
 
         public static string GetFriendlyDataSourceName(string name, IXenObject iXenObject)
         {
