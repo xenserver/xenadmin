@@ -29,6 +29,7 @@
  * SUCH DAMAGE.
  */
 
+using XenAdmin.Core;
 using XenAPI;
 
 
@@ -40,14 +41,13 @@ namespace XenAdmin.Actions.VMActions
         protected string _cloneName;
         protected string _cloneDescription;
         public VMCloneAction(VM vm, string name, string description)
-            : base(vm.Connection, string.Format(Messages.CREATEVM_CLONE, name, vm.Name()))
+            : base(vm.Connection, string.Format(Messages.CREATEVM_CLONE, name, vm.NameWithLocation()))
         {
-            this.Description = Messages.ACTION_PREPARING;
-            this.VM = vm;
-            this.Host = vm.Home();
-            this.Pool = Core.Helpers.GetPool(vm.Connection);
+            VM = vm;
+            Host = vm.Home();
+            Pool = Helpers.GetPool(vm.Connection);
             if (vm.is_a_template)
-                this.Template = vm;
+                Template = vm;
             _cloneName = name;
             _cloneDescription = description;
             ApiMethodsToRoleCheck.AddRange(Role.CommonSessionApiList);
@@ -58,15 +58,15 @@ namespace XenAdmin.Actions.VMActions
 
         protected override void Run()
         {
-            this.Description = Messages.ACTION_TEMPLATE_CLONING;
-            RelatedTask = XenAPI.VM.async_clone(Session, VM.opaque_ref, _cloneName);
+            Description = Messages.ACTION_TEMPLATE_CLONING;
+            RelatedTask = VM.async_clone(Session, VM.opaque_ref, _cloneName);
             PollToCompletion();
             {
                 VM created = Connection.WaitForCache(new XenRef<VM>(Result));
-                XenAPI.VM.set_name_description(Session, created.opaque_ref, _cloneDescription);
+                VM.set_name_description(Session, created.opaque_ref, _cloneDescription);
                 Result = created.opaque_ref;
             }
-            this.Description = Messages.ACTION_TEMPLATE_CLONED;
+            Description = Messages.ACTION_TEMPLATE_CLONED;
         }
     }
 
