@@ -43,22 +43,25 @@ namespace XenAdmin.Controls
 {
     public class ISODropDownBox : NonSelectableComboBox
     {
-        public VM vm;
-        protected VBD cdrom;
-        protected bool refreshOnClose;
+        public event Action SrsRefreshed;
+
+        protected VM vm;
+        private bool refreshOnClose;
         protected bool changing = false;
         private IXenConnection _connection;
-
+        private readonly CollectionChangeEventHandler SR_CollectionChangedWithInvoke;
         private VDI selectedCD;
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public VDI SelectedCD
         {
-            get
+            get => (SelectedItem as ToStringWrapper<VDI>)?.item;
+            set
             {
-                var selectedVdi = SelectedItem as ToStringWrapper<VDI>;
-                return selectedVdi == null ? null : selectedVdi.item;
+                selectedCD = value;
+                SelectCD();
             }
-            set { selectedCD = value; }
         }
 
         public ISODropDownBox()
@@ -75,26 +78,12 @@ namespace XenAdmin.Controls
             base.Dispose(disposing);
         }
 
-        private void RefreshSRs_()
-        {
-            BeginUpdate();
-            try
-            {
-                Items.Clear();
-                RefreshSRs();
-            }
-            finally
-            {
-                EndUpdate();
-            }
-        }
-
-        protected virtual void RefreshSRs()
+        private void RefreshSRs()
         {
             Program.AssertOnEventThread();
 
-            if (Empty)
-                Items.Add(new ToStringWrapper<VDI>(null, Messages.EMPTY)); //Create a special VDIWrapper for the empty dropdown item
+            //Create a special VDIWrapper for the empty dropdown item
+            Items.Add(new ToStringWrapper<VDI>(null, Messages.EMPTY));
 
             if (connection == null)
                 return;
@@ -148,38 +137,51 @@ namespace XenAdmin.Controls
             }
         }
 
-        public virtual void SelectCD()
+        protected void SelectCD()
         {
-            if (selectedCD == null)
+            if (selectedCD != null)
             {
-                if (Items.Count > 0)
-                    SelectedIndex = 0;
-                else
-                    SelectedIndex = -1;
-
-                return;
-            }
-
-            foreach (object o in Items)
-            {
-                ToStringWrapper<VDI> vdiNameWrapper = o as ToStringWrapper<VDI>;
-
-                if (vdiNameWrapper == null)
-                    continue;
-
-                VDI iso = vdiNameWrapper.item;
-                if (iso == null || !iso.Show(Properties.Settings.Default.ShowHiddenVMs))
-                    continue;
-
-                if (iso == selectedCD)
+                foreach (object o in Items)
                 {
-                    SelectedItem = o;
-                    break;
+                    VDI iso = (o as ToStringWrapper<VDI>)?.item;
+
+                    if (iso == null || !iso.Show(Properties.Settings.Default.ShowHiddenVMs))
+                        continue;
+
+                    if (iso == selectedCD)
+                    {
+                        SelectedItem = o;
+                        return;
+                    }
                 }
             }
+
+            if (Items.Count > 0)
+                SelectedIndex = 0;
+            else
+                SelectedIndex = -1;
         }
 
-        public bool Empty { get; set; }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public VM VM
+        {
+            set
+            {
+                if (vm != null)
+                    vm.PropertyChanged -= vm_PropertyChanged;
+
+                vm = value;
+
+                if (vm != null)
+                    vm.PropertyChanged += vm_PropertyChanged;
+
+                connection = vm?.Connection;
+
+                //do not call RefreshAll() here as it is called within the connection setter
+            }
+            get => vm;
+        }
 
         private void AddSR(ToStringWrapper<SR> srWrapper)
         {
@@ -249,7 +251,7 @@ namespace XenAdmin.Controls
                 if (connection != null)
                 {
                     RegisterEvents();
-                    refreshAll();
+                    RefreshAll();
                 }
             }
             get
@@ -267,12 +269,14 @@ namespace XenAdmin.Controls
 
         internal virtual void DeregisterEvents()
         {
+            if (vm != null)
+                vm.PropertyChanged -= vm_PropertyChanged;
+
             if (connection == null)
                 return;
 
-            // deregister collection listener
             connection.Cache.DeregisterCollectionChanged<SR>(SR_CollectionChangedWithInvoke);
-            // Remove SR listeners
+
             foreach (SR sr in connection.Cache.SRs)
             {
                 sr.PropertyChanged -= sr_PropertyChanged;
@@ -283,7 +287,7 @@ namespace XenAdmin.Controls
             }
         }
 
-        protected void RegisterEvents()
+        private void RegisterEvents()
         {
             if (connection == null)
                 return;
@@ -304,8 +308,7 @@ namespace XenAdmin.Controls
             }
         }
 
-        private readonly CollectionChangeEventHandler SR_CollectionChangedWithInvoke = null;
-        protected void SR_CollectionChanged(object sender, CollectionChangeEventArgs e)
+        private void SR_CollectionChanged(object sender, CollectionChangeEventArgs e)
         {
             Program.AssertOnEventThread();
 
@@ -318,16 +321,28 @@ namespace XenAdmin.Controls
                 sr.PropertyChanged += sr_PropertyChanged;
             }
 
-            Program.Invoke(this, refreshAll);
+            RefreshAll();
         }
 
-        public virtual void refreshAll()
+        private void RefreshAll()
         {
             if (!DroppedDown)
             {
-                RefreshSRs_();
+                BeginUpdate();
+
+                try
+                {
+                    Items.Clear();
+                    RefreshSRs();
+                }
+                finally
+                {
+                    EndUpdate();
+                }
+
                 SelectCD();
                 refreshOnClose = false;
+                SrsRefreshed?.Invoke();
             }
             else
             {
@@ -339,7 +354,7 @@ namespace XenAdmin.Controls
         {
             if (e.PropertyName == "VDIs" || e.PropertyName == "PBDs")
             {
-                refreshAll();
+                RefreshAll();
             }
         }
 
@@ -347,23 +362,15 @@ namespace XenAdmin.Controls
         {
             if (e.PropertyName == "currently_attached")
             {
-                refreshAll();
+                RefreshAll();
             }
         }
 
-        protected void cdrom_PropertyChanged(object sender1, PropertyChangedEventArgs e)
-        {
-            if ((e.PropertyName == "empty" || e.PropertyName == "vdi") && !changing)
-            {
-                SelectCD();
-            }
-        }
-
-        protected void vm_PropertyChanged(object sender1, PropertyChangedEventArgs e)
+        private void vm_PropertyChanged(object sender1, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "VBDs" || e.PropertyName == "resident_on" || e.PropertyName == "affinity")
             {
-                refreshAll();
+                RefreshAll();
             }
         }
         
@@ -371,8 +378,7 @@ namespace XenAdmin.Controls
         {
             base.OnSelectionChangeCommitted(e);
 
-            var selectedVdi = SelectedItem as ToStringWrapper<VDI>;
-            if (selectedVdi != null)
+            if (SelectedItem is ToStringWrapper<VDI> selectedVdi)
                 selectedCD = selectedVdi.item;
         }
 
@@ -409,7 +415,7 @@ namespace XenAdmin.Controls
             base.OnDropDownClosed(e);
 
             if (refreshOnClose)
-                refreshAll();
+                RefreshAll();
         }
 
         protected override bool IsItemNonSelectable(object o)
