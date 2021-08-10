@@ -1141,7 +1141,7 @@
     <value>Copying {0} canceled</value>
   </data>
   <data name="ACTION_VM_CROSS_POOL_COPY_TITLE" xml:space="preserve">
-    <value>Copying VM '{0}' to '{1}'</value>
+    <value>Copying VM '{0}' from '{1}' to '{2}'</value>
   </data>
   <data name="ACTION_VM_DELETE_SNAPSHOTS_TITLE" xml:space="preserve">
     <value>Deleting snapshots</value>

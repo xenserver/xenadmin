@@ -3067,7 +3067,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Copying VM &apos;{0}&apos; to &apos;{1}&apos;.
+        ///   Looks up a localized string similar to Copying VM &apos;{0}&apos; from &apos;{1}&apos; to &apos;{2}&apos;.
         /// </summary>
         public static string ACTION_VM_CROSS_POOL_COPY_TITLE {
             get {
