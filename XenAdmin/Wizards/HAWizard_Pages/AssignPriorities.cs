@@ -80,8 +80,6 @@ namespace XenAdmin.Wizards.HAWizard_Pages
             haNtolIndicator.Connection = Connection;
             haNtolIndicator.Settings = getCurrentSettings();
             StartNtolUpdate();
-            IsDirty = false;
-
         }
 
         private void UpdateMenuItems()
