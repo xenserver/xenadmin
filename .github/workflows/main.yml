@@ -1,0 +1,27 @@
+name: Run checks
+on: [push, pull_request]
+
+jobs:
+  job-checks:
+    name: Run checks
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Run copyright check
+        shell: powershell
+        run: ./scripts/check_copyright.ps1 -NOISY
+
+      - name: Run I18n check
+        shell: powershell
+        run: ./scripts/check_i18n.ps1 -NOISY
+
+      - name: Run spell check
+        shell: powershell
+        run: |
+          # package support for windows is not great; this is ugly, but will do for now
+          choco install cyg-get --no-progress
+          cyg-get.bat aspell aspell-en
+          $env:Path += ";C:\tools\cygwin\bin;"
+          ./scripts/check_spelling.ps1 -NOISY
