@@ -159,8 +159,7 @@ namespace XenAdmin.Wizards
         {
             var pageType = senderPage.GetType();
 
-            if ((pageType == typeof(Intro) && !_rbacNeeded || pageType == typeof(RBACWarningPage)) &&
-                xenTabPageChooseSR.IsFirstLoad)
+            if (pageType == typeof(Intro) && !_rbacNeeded || pageType == typeof(RBACWarningPage))
             {
                 // Start HB SR scan
                 // If scan finds no suitable SRs ChooseSR will show sensible text and disallow progress.
