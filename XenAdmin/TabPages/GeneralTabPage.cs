@@ -1945,6 +1945,12 @@ namespace XenAdmin.TabPages
             StartPutty( "env docker logs --tail=50 --follow --timestamps");
         }
 
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {   
+            //Force scrollbar to be repainted to avoid occasional pixel glitch.
+            panel2.AutoScroll = sections.Sum(s => s.Parent?.Height ?? s.Height) > panel2.ClientRectangle.Height;
+        }
+
         #endregion
 
         private void StartPutty(string dockerCmd)
