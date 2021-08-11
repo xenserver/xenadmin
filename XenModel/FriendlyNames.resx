@@ -1086,7 +1086,7 @@
     <value>A storage repository could not be attached when server '{0}' started.</value>
   </data>
   <data name="Message.body-pool_master_transition" xml:space="preserve">
-    <value>Server '{0}' is now the master of pool '{1}'.</value>
+    <value>Server '{0}' is now the coordinator of pool '{1}'.</value>
   </data>
   <data name="Message.body-vbd_qos_failed" xml:space="preserve">
     <value>Quality of Service settings for disk '{0}' on virtual machine '{1}' could not be obeyed.</value>
@@ -1305,7 +1305,7 @@
     <value>Failed to attach storage on server start</value>
   </data>
   <data name="Message.name-pool_master_transition" xml:space="preserve">
-    <value>Pool master changed</value>
+    <value>Pool cooordinator changed</value>
   </data>
   <data name="Message.name-vbd_qos_failed" xml:space="preserve">
     <value>VM Disk QoS Failed</value>

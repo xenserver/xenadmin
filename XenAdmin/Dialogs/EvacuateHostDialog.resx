@@ -322,7 +322,7 @@
     <value>0</value>
   </data>
   <data name="labelMasterBlurb.Text" xml:space="preserve">
-    <value>This server is the pool master. Entering maintenance mode will nominate a new master for the pool. {0} will temporarily lose its connection to the pool.</value>
+    <value>This server is the pool coordinator. Entering maintenance mode will nominate a new master for the pool. {0} will temporarily lose its connection to the pool.</value>
   </data>
   <data name="&gt;&gt;labelMasterBlurb.Name" xml:space="preserve">
     <value>labelMasterBlurb</value>
@@ -358,7 +358,7 @@
     <value>1</value>
   </data>
   <data name="NewMasterLabel.Text" xml:space="preserve">
-    <value>&amp;New master:</value>
+    <value>&amp;New coordinator:</value>
   </data>
   <data name="&gt;&gt;NewMasterLabel.Name" xml:space="preserve">
     <value>NewMasterLabel</value>
