@@ -547,7 +547,7 @@
     <value>3</value>
   </data>
   <data name="labelNoVmsProtected.Text" xml:space="preserve">
-    <value>No virtual machines are protected. This configuration will protect the pool master, but none of your services.</value>
+    <value>No virtual machines are protected. This configuration will protect the pool coordinator, but none of your services.</value>
   </data>
   <data name="labelNoVmsProtected.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
