@@ -149,8 +149,8 @@ namespace XenAdmin.Commands
         {
             if (Confirm())
             {
-                var cantExecuteReasons = GetCantRunReasons();
-                var errorDialog = cantExecuteReasons.Count > 0 ? GetErrorDialogCore(cantExecuteReasons) : null;
+                var cantRunReasons = GetCantRunReasons();
+                var errorDialog = cantRunReasons.Count > 0 ? GetErrorDialogCore(cantRunReasons) : null;
 
                 RunCore(GetSelection());
 
@@ -311,7 +311,7 @@ namespace XenAdmin.Commands
         /// <returns>A dictionary of reasons keyed by the item name.</returns>
         public Dictionary<IXenObject, string> GetCantRunReasons()
         {
-            var cantExecuteReasons = new Dictionary<IXenObject, string>();
+            var cantRunReasons = new Dictionary<IXenObject, string>();
 
             foreach (SelectedItem item in GetSelection())
             {
@@ -322,10 +322,10 @@ namespace XenAdmin.Commands
 
                 string reason = GetCantRunReasonCore(item.XenObject);
                 if (reason != null)
-                    cantExecuteReasons.Add(item.XenObject, reason);
+                    cantRunReasons.Add(item.XenObject, reason);
             }
 
-            return cantExecuteReasons;
+            return cantRunReasons;
         }
 
 
@@ -342,8 +342,8 @@ namespace XenAdmin.Commands
         /// Gets the error dialog to be displayed if one or more items in the selection couldn't be run. Returns null by
         /// default i.e. An error dialog isn't displayed by default.
         /// </summary>
-        /// <param name="cantExecuteReasons">The reasons for why the items couldn't run.</param>
-        protected virtual CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantExecuteReasons)
+        /// <param name="cantRunReasons">The reasons for why the items couldn't run.</param>
+        protected virtual CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantRunReasons)
         {
             return null;
         }
@@ -368,7 +368,7 @@ namespace XenAdmin.Commands
         /// Runs the specified <see cref="AsyncAction"/>s such that they are synchronous per connection but asynchronous across connections.
         /// </summary>
         /// <param name="endDescription"></param>
-        /// <param name="runActionsInParallel">Whether the actions should be executed simultaneously</param>
+        /// <param name="runActionsInParallel">Whether the actions should be run simultaneously</param>
         /// <param name="actions"></param>
         /// <param name="title"></param>
         /// <param name="startDescription"></param>

@@ -145,7 +145,7 @@ namespace XenAdmin.Commands
 
         public override string ContextMenuText => Messages.MAINWINDOW_START_CONTEXT_MENU;
 
-        protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantExecuteReasons)
+        protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantRunReasons)
         {
             // a start-vm-diagnostic-dialog is shown by VmAction if VMs cant be started.
 

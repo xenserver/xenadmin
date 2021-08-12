@@ -428,9 +428,9 @@ namespace XenAdmin.Commands
             return base.GetCantRunReasonCore(item);
         }
 
-        protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantExecuteReasons)
+        protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantRunReasons)
         {
-            return new CommandErrorDialog(Messages.ERROR_DESTROYING_STORAGE_ITEMS_TITLE, Messages.ERROR_DESTROYING_STORAGE_ITEMS_MESSAGE, cantExecuteReasons);
+            return new CommandErrorDialog(Messages.ERROR_DESTROYING_STORAGE_ITEMS_TITLE, Messages.ERROR_DESTROYING_STORAGE_ITEMS_MESSAGE, cantRunReasons);
         }
 
         protected override void RunCore(SelectedItemCollection selection)

@@ -110,9 +110,9 @@ namespace XenAdmin.Commands
 
         protected override string ConfirmationDialogHelpId => "WarningVmLifeCycleReboot";
 
-        protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantExecuteReasons)
+        protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantRunReasons)
         {
-            return new CommandErrorDialog(Messages.ERROR_DIALOG_REBOOT_VM_TITLE, Messages.ERROR_DIALOG_REBOOT_VM_TEXT, cantExecuteReasons);
+            return new CommandErrorDialog(Messages.ERROR_DIALOG_REBOOT_VM_TITLE, Messages.ERROR_DIALOG_REBOOT_VM_TEXT, cantRunReasons);
         }
 
         public override Keys ShortcutKeys => Keys.Control | Keys.R;

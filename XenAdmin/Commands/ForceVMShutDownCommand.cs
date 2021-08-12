@@ -218,13 +218,13 @@ namespace XenAdmin.Commands
             get { return "WarningVmLifeCycleForceShutDown"; }
         }
 
-        protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantExecuteReasons)
+        protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantRunReasons)
         {
             foreach (VM vm in GetSelection().AsXenObjects<VM>())
             {
                 if (!CanExecute(vm) && vm.power_state != vm_power_state.Halted)
                 {
-                    return new CommandErrorDialog(Messages.ERROR_DIALOG_FORCE_SHUTDOWN_VM_TITLE, Messages.ERROR_DIALOG_FORCE_SHUTDOWN_VM_TEXT, cantExecuteReasons);
+                    return new CommandErrorDialog(Messages.ERROR_DIALOG_FORCE_SHUTDOWN_VM_TITLE, Messages.ERROR_DIALOG_FORCE_SHUTDOWN_VM_TEXT, cantRunReasons);
                 }
             }
             return null;

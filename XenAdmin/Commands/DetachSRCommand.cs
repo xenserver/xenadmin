@@ -95,9 +95,9 @@ namespace XenAdmin.Commands
                 ? Messages.MESSAGEBOX_DETACH_SR_CONTINUE_TITLE
                 : Messages.MESSAGEBOX_DETACH_SRS_CONTINUE_TITLE;
 
-        protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantExecuteReasons)
+        protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantRunReasons)
         {
-            return new CommandErrorDialog(Messages.ERROR_DIALOG_DETACH_SR_TITLE, Messages.ERROR_DIALOG_DETACH_SR_TEXT, cantExecuteReasons);
+            return new CommandErrorDialog(Messages.ERROR_DIALOG_DETACH_SR_TITLE, Messages.ERROR_DIALOG_DETACH_SR_TEXT, cantRunReasons);
         }
 
         protected override string GetCantRunReasonCore(IXenObject item)

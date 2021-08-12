@@ -154,9 +154,9 @@ namespace XenAdmin.Commands
             return null;
         }
 
-        protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantExecuteReasons)
+        protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantRunReasons)
         {
-            return new CommandErrorDialog(ErrorDialogTitle, ErrorDialogText, cantExecuteReasons);
+            return new CommandErrorDialog(ErrorDialogTitle, ErrorDialogText, cantRunReasons);
         }
 
         protected override string GetCantRunReasonCore(IXenObject item)

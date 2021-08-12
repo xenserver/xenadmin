@@ -150,9 +150,9 @@ namespace XenAdmin.Commands
             return base.GetCantRunReasonCore(item);
         }
 
-        protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantExecuteReasons)
+        protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantRunReasons)
         {
-            return new CommandErrorDialog(Messages.ERROR_ACTIVATING_VDIS_TITLE, Messages.ERROR_ACTIVATING_VDIS_MESSAGE, cantExecuteReasons);
+            return new CommandErrorDialog(Messages.ERROR_ACTIVATING_VDIS_TITLE, Messages.ERROR_ACTIVATING_VDIS_MESSAGE, cantRunReasons);
         }
 
         protected override void RunCore(SelectedItemCollection selection)

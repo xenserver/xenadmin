@@ -114,13 +114,13 @@ namespace XenAdmin.Commands
             return selection.AllItemsAre<Host>() && selection.AtLeastOneXenObjectCan<Host>(CanExecute);
         }
 
-        protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantExecuteReasons)
+        protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantRunReasons)
         {
             foreach (Host host in GetSelection().AsXenObjects<Host>())
             {
                 if (!CanExecute(host) && !host.IsLive())
                 {
-                    return new CommandErrorDialog(Messages.ERROR_DIALOG_POWER_ON_HOST_TITLE, Messages.ERROR_DIALOG_POWER_ON_HOST_TEXT, cantExecuteReasons);
+                    return new CommandErrorDialog(Messages.ERROR_DIALOG_POWER_ON_HOST_TITLE, Messages.ERROR_DIALOG_POWER_ON_HOST_TEXT, cantRunReasons);
                 }
             }
             return null;

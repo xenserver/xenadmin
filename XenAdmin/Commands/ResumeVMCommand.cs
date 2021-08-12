@@ -102,13 +102,13 @@ namespace XenAdmin.Commands
 
         public override string ToolBarText => Messages.MAINWINDOW_TOOLBAR_RESUME;
 
-        protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantExecuteReasons)
+        protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantRunReasons)
         {
             foreach (VM vm in GetSelection().AsXenObjects<VM>())
             {
                 if (!CanExecute(vm) && vm.power_state == vm_power_state.Suspended)
                 {
-                    return new CommandErrorDialog(Messages.ERROR_DIALOG_RESUME_VM_TITLE, Messages.ERROR_DIALOG_RESUME_VM_TEXT, cantExecuteReasons);
+                    return new CommandErrorDialog(Messages.ERROR_DIALOG_RESUME_VM_TITLE, Messages.ERROR_DIALOG_RESUME_VM_TEXT, cantRunReasons);
                 }
             }
             return null;
