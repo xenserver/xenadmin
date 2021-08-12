@@ -74,17 +74,17 @@ namespace XenAdmin.Commands
         /// Runs this instance.
         /// </summary>
         /// <returns>false if the user cancels the disconnect.</returns>
-        public new bool Execute()
+        public new bool Run()
         {
-            return CanExecute() && Execute(_connection, _prompt);
+            return CanExecute() && Run(_connection, _prompt);
         }
 
         protected override void ExecuteCore(SelectedItemCollection selection)
         {
-            Execute(_connection, _prompt);
+            Run(_connection, _prompt);
         }
 
-        private bool Execute(IXenConnection connection, bool prompt)
+        private bool Run(IXenConnection connection, bool prompt)
         {
             if (prompt)
             {

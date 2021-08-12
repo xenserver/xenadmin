@@ -63,7 +63,7 @@ namespace XenAdmin.Commands
         {
             VM snapshot = (VM)selection[0].XenObject;
             
-            new NewVMCommand(MainWindowCommandInterface, snapshot.Connection, null, snapshot).Execute();
+            new NewVMCommand(MainWindowCommandInterface, snapshot.Connection, null, snapshot).Run();
         }
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)

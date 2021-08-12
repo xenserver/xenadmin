@@ -64,7 +64,7 @@ namespace XenAdmin.Commands
             VM template = (VM)selection[0].XenObject;
 
             if (CrossPoolCopyTemplateCommand.CanExecute(template, null))
-                new CrossPoolCopyTemplateCommand(MainWindowCommandInterface, selection).Execute();
+                new CrossPoolCopyTemplateCommand(MainWindowCommandInterface, selection).Run();
             else
                 new CopyVMDialog(template).ShowPerXenObject(template, Program.MainWindow);
         }

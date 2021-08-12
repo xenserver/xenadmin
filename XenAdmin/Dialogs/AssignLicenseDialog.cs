@@ -209,7 +209,7 @@ namespace XenAdmin.Dialogs
                                                 Close();
                                             });
                                      };
-            command.Execute();
+            command.Run();
         }
 
         private void licenseServerPortTextBox_TextChanged(object sender, EventArgs e)

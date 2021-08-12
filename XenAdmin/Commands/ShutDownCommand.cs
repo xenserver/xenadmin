@@ -61,7 +61,7 @@ namespace XenAdmin.Commands
 
             if (cmd.CanExecute())
             {
-                cmd.Execute();
+                cmd.Run();
             }
             else
             {
@@ -69,7 +69,7 @@ namespace XenAdmin.Commands
 
                 if (cmd.CanExecute())
                 {
-                    cmd.Execute();
+                    cmd.Run();
                 }
             }
         }

@@ -634,7 +634,7 @@ namespace XenAdmin.Controls.MainWindowControls
 
             if (command != null && command.CanExecute())
             {
-                command.Execute();
+                command.Run();
             }
             else
             {
@@ -786,7 +786,7 @@ namespace XenAdmin.Controls.MainWindowControls
                 case Keys.F2:
                     var cmd = new PropertiesCommand(Program.MainWindow, Program.MainWindow.SelectionManager.Selection);
                     if (cmd.CanExecute())
-                        cmd.Execute();
+                        cmd.Run();
                     break;
             }
         }
@@ -827,7 +827,7 @@ namespace XenAdmin.Controls.MainWindowControls
             }
             if (conn != null && !conn.IsConnected)
             {
-                new ReconnectHostCommand(Program.MainWindow, conn).Execute();
+                new ReconnectHostCommand(Program.MainWindow, conn).Run();
                 return;
             }
 
@@ -852,7 +852,7 @@ namespace XenAdmin.Controls.MainWindowControls
                 if (cmd != null && cmd.CanExecute())
                 {
                     treeView.SelectedNode = e.Node;
-                    cmd.Execute();
+                    cmd.Run();
                 }
                 return;
             }
@@ -864,7 +864,7 @@ namespace XenAdmin.Controls.MainWindowControls
                 if (cmd.CanExecute())
                 {
                     treeView.SelectedNode = e.Node;
-                    cmd.Execute();
+                    cmd.Run();
                 }
             }
         }

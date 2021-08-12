@@ -87,7 +87,7 @@ namespace XenAdmin.Commands
             {
                 if (CanExecute(item))
                 {
-                    new DisconnectCommand(MainWindowCommandInterface, item.Connection, true).Execute();
+                    new DisconnectCommand(MainWindowCommandInterface, item.Connection, true).Run();
                 }
             }
         }

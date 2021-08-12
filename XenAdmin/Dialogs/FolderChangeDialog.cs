@@ -201,7 +201,7 @@ namespace XenAdmin.Dialogs
         {
             var cmd = new NewFolderCommand(Program.MainWindow, folder, this);
             cmd.FoldersCreated += cmd_FoldersCreated;
-            cmd.Execute();
+            cmd.Run();
         }
 
         private void cmd_FoldersCreated(string[] obj)
@@ -228,7 +228,7 @@ namespace XenAdmin.Dialogs
                     if (dialog.ShowDialog(this) != DialogResult.OK)
                         return;
                     selectedFolderRef = Folders.AppendPath(folder.Path, dialog.InputText);
-                    new RenameFolderCommand(Program.MainWindow, folder, dialog.InputText).Execute();
+                    new RenameFolderCommand(Program.MainWindow, folder, dialog.InputText).Run();
                 }
             }
         }
@@ -239,7 +239,7 @@ namespace XenAdmin.Dialogs
             {
                 var folder = treeView.SelectedNode.Tag as Folder;
                 selectedFolderRef = folder == null || folder.Parent == null ? null : folder.Parent.opaque_ref;
-                new DeleteFolderCommand(Program.MainWindow, folder).Execute();
+                new DeleteFolderCommand(Program.MainWindow, folder).Run();
             }
         }
 

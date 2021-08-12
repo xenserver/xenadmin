@@ -1137,7 +1137,7 @@ namespace XenAdmin.TabPages
                     item.Click += delegate
                         {
                             new HostMaintenanceModeCommand(Program.MainWindow, host,
-                                                           HostMaintenanceModeCommandParameter.Exit).Execute();
+                                                           HostMaintenanceModeCommandParameter.Exit).Run();
                         };
                     s.AddEntry(FriendlyName("host.enabled"),
                                host.MaintenanceMode() ? Messages.HOST_IN_MAINTENANCE_MODE : Messages.DISABLED,
@@ -1150,7 +1150,7 @@ namespace XenAdmin.TabPages
                     item.Click += delegate
                         {
                             new HostMaintenanceModeCommand(Program.MainWindow, host,
-                                HostMaintenanceModeCommandParameter.Enter).Execute();
+                                HostMaintenanceModeCommandParameter.Enter).Run();
                         };
                     s.AddEntry(FriendlyName("host.enabled"), Messages.YES, item);
                 }
@@ -1295,7 +1295,7 @@ namespace XenAdmin.TabPages
                         var cmd = new RollingUpgradeCommand(Program.MainWindow);
                         var runRpuWizard = new ToolStripMenuItem(Messages.ROLLING_POOL_UPGRADE_ELLIPSIS,
                             null,
-                            (sender, args) => cmd.Execute());
+                            (sender, args) => cmd.Run());
 
                         s.AddEntryLink(Messages.SOFTWARE_VERSION_PRODUCT_VERSION,
                             string.Format(Messages.POOL_VERSIONS_LINK_TEXT, BrandManager.ProductBrand, master.ProductVersionText()),
@@ -1449,7 +1449,7 @@ namespace XenAdmin.TabPages
                             else
                             {
                                 var cmd = new InstallToolsCommand(Program.MainWindow, vm);
-                                var toolsItem = new ToolStripMenuItem(installMessage, null, (sender, args) => cmd.Execute());
+                                var toolsItem = new ToolStripMenuItem(installMessage, null, (sender, args) => cmd.Run());
                                 s.AddEntryLink(string.Empty, installMessage, new[] {toolsItem}, cmd);
                             }
                         }
@@ -1481,7 +1481,7 @@ namespace XenAdmin.TabPages
                             {
                                 var cmd = new InstallToolsCommand(Program.MainWindow, vm);
                                 var toolsItem = new ToolStripMenuItem(string.Format(Messages.INSTALL_XENSERVER_TOOLS, BrandManager.VmTools), null,
-                                    (sender, args) => cmd.Execute());
+                                    (sender, args) => cmd.Run());
 
                                 s.AddEntryLink(FriendlyName("VM.VirtualizationState"), statusString,
                                     new[] {toolsItem}, cmd);
@@ -1930,7 +1930,7 @@ namespace XenAdmin.TabPages
 
         private void buttonProperties_Click(object sender, EventArgs e)
         {
-            new PropertiesCommand(Program.MainWindow, xenObject).Execute();
+            new PropertiesCommand(Program.MainWindow, xenObject).Run();
         }
 
         private void buttonViewConsole_Click(object sender, EventArgs e)

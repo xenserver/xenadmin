@@ -97,7 +97,7 @@ namespace XenAdmin.Commands
         protected override void ExecuteCore()
         {
             Pool targetPool = GetTargetNodeAncestorAsXenObjectOrGroupingTag<Pool>();
-            new AddHostToPoolCommand(MainWindowCommandInterface, GetDraggedItemsAsXenObjects<Host>(), targetPool, true).Execute();
+            new AddHostToPoolCommand(MainWindowCommandInterface, GetDraggedItemsAsXenObjects<Host>(), targetPool, true).Run();
         }
     }
 }

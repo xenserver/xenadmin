@@ -145,7 +145,7 @@ namespace XenAdmin.Commands
         /// <summary>
         /// Runs this Command on the current selection.
         /// </summary>
-        public void Execute()
+        public void Run()
         {
             if (Confirm())
             {

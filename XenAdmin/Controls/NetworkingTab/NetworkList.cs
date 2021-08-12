@@ -603,7 +603,7 @@ namespace XenAdmin.Controls.NetworkingTab
             if (network != null && network.IsBond())
             {
                 var destroyBondCommand = new DestroyBondCommand(Program.MainWindow, network);
-                destroyBondCommand.Execute();
+                destroyBondCommand.Run();
             }
             else
             {

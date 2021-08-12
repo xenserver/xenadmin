@@ -62,7 +62,7 @@ namespace XenAdmin.Commands
 
         protected override void ExecuteCore(SelectedItemCollection selection)
         {
-            new NewVMCommand(MainWindowCommandInterface, selection).Execute();
+            new NewVMCommand(MainWindowCommandInterface, selection).Run();
         }
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)

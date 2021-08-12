@@ -70,7 +70,7 @@ namespace XenAdmin.Commands
                 host = pool.Connection.Resolve(pool.master);
             }
 
-            new ExportVMCommand(MainWindowCommandInterface, new SelectedItem(vm, selection[0].Connection, host, null)).Execute();
+            new ExportVMCommand(MainWindowCommandInterface, new SelectedItem(vm, selection[0].Connection, host, null)).Run();
         }
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)

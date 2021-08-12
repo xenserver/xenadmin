@@ -95,7 +95,7 @@ namespace XenAdmin.Commands
         {
             if (_command != null && _command.CanExecute())
             {
-                _command.Execute();
+                _command.Run();
             }
 
             base.OnClick(e);

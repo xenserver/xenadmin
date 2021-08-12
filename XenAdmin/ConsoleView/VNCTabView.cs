@@ -763,7 +763,7 @@ namespace XenAdmin.ConsoleView
                     {
                         DisablePowerStateLabel(powerStateLabel.Text);
 
-                        new StartVMCommand(Program.MainWindow, source).Execute();
+                        new StartVMCommand(Program.MainWindow, source).Run();
                     }
                     break;
                 case vm_power_state.Paused:
@@ -776,7 +776,7 @@ namespace XenAdmin.ConsoleView
                     if (source.allowed_operations.Contains(vm_operations.resume))
                     {
                         DisablePowerStateLabel(powerStateLabel.Text);
-                        new ResumeVMCommand(Program.MainWindow, source).Execute();
+                        new ResumeVMCommand(Program.MainWindow, source).Run();
                     }
                     break;
             }

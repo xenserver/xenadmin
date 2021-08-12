@@ -251,7 +251,7 @@ namespace XenAdmin.Controls.Ballooning
 
             var cmd = new InstallToolsCommand(Program.MainWindow, vms);
             cmd.InstallTools += _ => InstallTools?.Invoke();
-            cmd.Execute();
+            cmd.Run();
         }
     }
 }

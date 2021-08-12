@@ -64,7 +64,7 @@ namespace XenAdmin.Commands
             VM vm = (VM)selection[0].XenObject;
 
             if (CrossPoolCopyVMCommand.CanExecute(vm, null))
-                new CrossPoolCopyVMCommand(MainWindowCommandInterface, selection).Execute();
+                new CrossPoolCopyVMCommand(MainWindowCommandInterface, selection).Run();
             else
                 new CopyVMDialog(vm).ShowPerXenObject(vm, Program.MainWindow);
         }

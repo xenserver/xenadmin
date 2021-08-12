@@ -172,7 +172,7 @@ namespace XenAdmin.Commands
                 draggedVMs.ForEach(vm => selectedItems.Add(new SelectedItem(vm)));
                     
                 new CrossPoolMoveVMCommand(MainWindowCommandInterface, selectedItems, targetHost)
-                    .Execute();
+                    .Run();
             }
         }
 

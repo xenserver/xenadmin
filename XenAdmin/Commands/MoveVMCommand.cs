@@ -63,7 +63,7 @@ namespace XenAdmin.Commands
 
             if (cmd.CanExecute() && !Helpers.FeatureForbidden(con, Host.RestrictCrossPoolMigrate))
             {
-                cmd.Execute();
+                cmd.Run();
             }
             else
             {

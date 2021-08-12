@@ -57,7 +57,7 @@ namespace XenAdmin.Commands
 
         protected override void ExecuteCore()
         {
-            new RemoveHostFromPoolCommand(MainWindowCommandInterface, GetDraggedItemsAsXenObjects<Host>()).Execute();
+            new RemoveHostFromPoolCommand(MainWindowCommandInterface, GetDraggedItemsAsXenObjects<Host>()).Run();
         }
     }
 }

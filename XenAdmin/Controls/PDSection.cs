@@ -278,7 +278,7 @@ namespace XenAdmin.Controls
 
             var command = cell.Tag as Command;
             if (command != null)
-                command.Execute();
+                command.Run();
 
             var action = cell.Tag as Action;
             if (action != null)

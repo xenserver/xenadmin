@@ -577,7 +577,7 @@ namespace XenAdmin.SettingsPanels
 			
             var cmd = new HAConfigureCommand(Program.MainWindow, pool);
             if (cmd.CanExecute())
-                cmd.Execute();
+                cmd.Run();
 		}
 
 		#endregion

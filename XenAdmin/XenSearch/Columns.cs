@@ -145,7 +145,7 @@ namespace XenAdmin.XenSearch
                                 if (Helpers.StockholmOrGreater(vm.Connection))
                                     Help.HelpManager.Launch("InstallToolsWarningDialog");
                                 else
-                                    new InstallToolsCommand(Program.MainWindow, vm).Execute();
+                                    new InstallToolsCommand(Program.MainWindow, vm).Run();
                             }, null);
                     }
                     else
@@ -183,7 +183,7 @@ namespace XenAdmin.XenSearch
                                 if (Helpers.StockholmOrGreater(vm.Connection))
                                     Help.HelpManager.Launch("InstallToolsWarningDialog");
                                 else
-                                    new InstallToolsCommand(Program.MainWindow, vm).Execute();
+                                    new InstallToolsCommand(Program.MainWindow, vm).Run();
                             }, null);
                     }
                     else
@@ -212,7 +212,7 @@ namespace XenAdmin.XenSearch
                                   HorizontalAlignment.Center, VerticalAlignment.Middle, false, false,
                                   QueryPanel.LinkBrush, Program.DefaultFontUnderline, QueryPanel.LinkBrush,
                                   Program.DefaultFontUnderline, 3,
-                                  (sender, args) => new RollingUpgradeCommand(Program.MainWindow).Execute(),
+                                  (sender, args) => new RollingUpgradeCommand(Program.MainWindow).Run(),
                                   null);
                 }
 

@@ -107,7 +107,7 @@ namespace XenAdmin.Commands
                 }
                 else
                 {
-                    new AddHostToPoolCommand(MainWindowCommandInterface, new Host[] { hostToAdd }, _pool, false).Execute();
+                    new AddHostToPoolCommand(MainWindowCommandInterface, new Host[] { hostToAdd }, _pool, false).Run();
                 }
             });
         }

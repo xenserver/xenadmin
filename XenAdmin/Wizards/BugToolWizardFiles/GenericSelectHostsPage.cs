@@ -381,7 +381,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
 
         private void connectbutton_Click(object sender, EventArgs e)
         {
-            new AddHostCommand(Program.MainWindow, ParentForm).Execute();
+            new AddHostCommand(Program.MainWindow, ParentForm).Run();
         }
 
         private void HostListTreeView_ItemCheckChanged(object sender, EventArgs e)

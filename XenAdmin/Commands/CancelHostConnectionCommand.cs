@@ -74,7 +74,7 @@ namespace XenAdmin.Commands
             {
                 if (item.Connection != null && !item.Connection.IsConnected && item.Connection.InProgress)
                 {
-                    new DisconnectCommand(MainWindowCommandInterface, item.Connection, false).Execute();
+                    new DisconnectCommand(MainWindowCommandInterface, item.Connection, false).Run();
                 }
             }
         }

@@ -309,14 +309,14 @@ namespace XenAdmin.TabPages
             System.Diagnostics.Trace.Assert(pif.IsBondNIC());
             XenAPI.Network network = pif.Connection.Resolve(pif.network);
             var destroyBondCommand = new DestroyBondCommand(Program.MainWindow, network);
-            destroyBondCommand.Execute();
+            destroyBondCommand.Run();
         }
 
         private void buttonRescan_Click(object sender, EventArgs e)
         {
             RescanPIFsCommand cmd = new RescanPIFsCommand(Program.MainWindow, host);
             if (cmd.CanExecute())
-                cmd.Execute();
+                cmd.Run();
         }
 
         private void CopyItemClick(object sender, EventArgs e)

@@ -350,7 +350,7 @@ namespace XenAdmin.Alerts
 					case Message.MessageType.HA_STATEFILE_APPROACHING_TIMEOUT:
 					case Message.MessageType.HA_STATEFILE_LOST:
 					case Message.MessageType.HA_XAPI_HEALTHCHECK_APPROACHING_TIMEOUT:
-						return () => new HAConfigureCommand(Program.MainWindow, XenObject.Connection).Execute();
+						return () => new HAConfigureCommand(Program.MainWindow, XenObject.Connection).Run();
 
 					case Message.MessageType.LICENSE_EXPIRES_SOON:
 					case Message.MessageType.LICENSE_DOES_NOT_SUPPORT_POOLING:
@@ -366,7 +366,7 @@ namespace XenAdmin.Alerts
 					case Message.MessageType.PBD_PLUG_FAILED_ON_SERVER_START:
 						var repairSrCommand = new RepairSRCommand(Program.MainWindow, XenObject.Connection.Cache.SRs);
 						if (repairSrCommand.CanExecute())
-							return () => repairSrCommand.Execute();
+							return () => repairSrCommand.Run();
 						return null;
 					default:
 						return null;

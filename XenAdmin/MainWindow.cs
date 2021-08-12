@@ -735,11 +735,11 @@ namespace XenAdmin
                     break;
                 case ArgType.Restore:
                     log.DebugFormat("Restoring host backup from {0}", args[0]);
-                    new RestoreHostFromBackupCommand(this, null, args[0]).Execute();
+                    new RestoreHostFromBackupCommand(this, null, args[0]).Run();
                     break;
                 case ArgType.XenSearch:
                     log.DebugFormat("Importing saved XenSearch from '{0}'", args[0]);
-                    new ImportSearchCommand(this, args[0]).Execute();
+                    new ImportSearchCommand(this, args[0]).Run();
                     break;
                 case ArgType.Connect:
                     log.DebugFormat("Connecting to server '{0}'", args[0]);

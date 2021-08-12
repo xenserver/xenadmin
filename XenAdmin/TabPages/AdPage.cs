@@ -1143,7 +1143,7 @@ namespace XenAdmin.TabPages
 
             if (suicide)
             {
-                new DisconnectCommand(Program.MainWindow, _connection, true).Execute();
+                new DisconnectCommand(Program.MainWindow, _connection, true).Run();
             }
             else
             {

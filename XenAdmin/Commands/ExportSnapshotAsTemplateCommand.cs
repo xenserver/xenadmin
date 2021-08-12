@@ -63,7 +63,7 @@ namespace XenAdmin.Commands
         {
             if (snapshot != null)
             {
-                new ExportVMCommand(MainWindowCommandInterface, new SelectedItem(snapshot, snapshot.Connection, null, null)).Execute();
+                new ExportVMCommand(MainWindowCommandInterface, new SelectedItem(snapshot, snapshot.Connection, null, null)).Run();
             }
         }
 

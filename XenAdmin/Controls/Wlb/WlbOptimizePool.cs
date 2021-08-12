@@ -437,7 +437,7 @@ namespace XenAdmin.Controls.Wlb
 
         private void linkLabelReportHistory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            new ViewWorkloadReportsCommand(Program.MainWindow, _pool, ReportFile, true).Execute();
+            new ViewWorkloadReportsCommand(Program.MainWindow, _pool, ReportFile, true).Run();
         }
 
         private static void UpdateRow(ListViewItem row)

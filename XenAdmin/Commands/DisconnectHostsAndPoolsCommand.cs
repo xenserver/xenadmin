@@ -84,7 +84,7 @@ namespace XenAdmin.Commands
         {
             foreach (SelectedItem item in selection)
             {
-                new DisconnectCommand(MainWindowCommandInterface, item.Connection, false).Execute();
+                new DisconnectCommand(MainWindowCommandInterface, item.Connection, false).Run();
             }
         }
 

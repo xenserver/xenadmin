@@ -93,7 +93,7 @@ namespace XenAdmin.Commands
         {
             if (Enabled)
             {
-                _command.Execute();
+                _command.Run();
             }
             base.OnClick(e);
         }

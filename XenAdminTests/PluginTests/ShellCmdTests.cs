@@ -114,7 +114,7 @@ namespace XenAdminTests.PluginTests
             Assert.AreEqual(menuItemFeature.ShellCmd.Filename, _batchFile, "Batch file name wasn't read from plugin XML");
 
             // now run the command and see if the test file is written by the batch file.
-            menuItemFeature.GetCommand(new MockMainWindow(), new[] {new SelectedItem(null)}).Execute();
+            menuItemFeature.GetCommand(new MockMainWindow(), new[] {new SelectedItem(null)}).Run();
 
             int i = 0;
             bool completed = false;

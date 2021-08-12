@@ -156,7 +156,7 @@ namespace XenAdmin.Dialogs
 
         private void maintenanceModeLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            new HostMaintenanceModeCommand(Program.MainWindow, host, HostMaintenanceModeCommandParameter.Enter).Execute();
+            new HostMaintenanceModeCommand(Program.MainWindow, host, HostMaintenanceModeCommandParameter.Enter).Run();
         }
 
         private void ControlDomainMemoryDialog_FormClosing(object sender, FormClosingEventArgs e)
