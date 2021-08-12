@@ -67,7 +67,7 @@ namespace XenAdmin.Commands
         protected override void RunCore(SelectedItemCollection selection)
         {
             List<AsyncAction> actions = new List<AsyncAction>();
-            foreach (Host host in selection.AsXenObjects<Host>(CanExecute))
+            foreach (Host host in selection.AsXenObjects<Host>(CanRun))
             {
                 MainWindowCommandInterface.CloseActiveWizards(host.Connection);
                 RebootHostAction action = new RebootHostAction( host,AddHostToPoolCommand.NtolDialog);
@@ -77,7 +77,7 @@ namespace XenAdmin.Commands
             RunMultipleActions(actions, null, Messages.ACTION_HOSTS_REBOOTING, Messages.ACTION_HOSTS_REBOOTED, true);
         }
 
-        private static bool CanExecute(Host host)
+        private static bool CanRun(Host host)
         {
             return host != null && host.IsLive();
         }
@@ -91,7 +91,7 @@ namespace XenAdmin.Commands
 
             foreach (SelectedItem item in selection)
             {
-                if (CanExecute((Host)item.XenObject))
+                if (CanRun((Host)item.XenObject))
                 {
                     return true;
                 }
@@ -156,7 +156,7 @@ namespace XenAdmin.Commands
         {
             foreach (Host host in GetSelection().AsXenObjects<Host>())
             {
-                if (!CanExecute(host) && host.IsLive())
+                if (!CanRun(host) && host.IsLive())
                 {
                     return new CommandErrorDialog(Messages.ERROR_DIALOG_FORCE_REBOOT_VM_TITLE, Messages.ERROR_DIALOG_FORCE_REBOOT_VM_TEXT, cantRunReasons);
                 }

@@ -128,7 +128,7 @@ namespace XenAdmin.XenSearch
                         colSpan = 3;
                     }
 
-                    if (InstallToolsCommand.CanExecute(vm))
+                    if (InstallToolsCommand.CanRun(vm))
                     {
                         item = new GridStringItem(warningMessage,
                             HorizontalAlignment.Center,
@@ -166,7 +166,7 @@ namespace XenAdmin.XenSearch
                     warningMessage = Messages.VIRTUALIZATION_STATE_VM_IO_NOT_OPTIMIZED;
                     colSpan = 2;
 
-                    if (InstallToolsCommand.CanExecute(vm))
+                    if (InstallToolsCommand.CanRun(vm))
                     {
                         item = new GridStringItem(warningMessage,
                             HorizontalAlignment.Center,

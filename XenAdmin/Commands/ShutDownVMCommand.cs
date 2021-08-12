@@ -68,7 +68,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override bool CanExecute(VM vm)
+        protected override bool CanRun(VM vm)
         {
             return vm != null && vm.allowed_operations != null && vm.allowed_operations.Contains(vm_operations.clean_shutdown);
         }
@@ -175,7 +175,7 @@ namespace XenAdmin.Commands
         {
             foreach (VM vm in GetSelection().AsXenObjects<VM>())
             {
-                if (!CanExecute(vm) && vm.power_state != vm_power_state.Halted)
+                if (!CanRun(vm) && vm.power_state != vm_power_state.Halted)
                 {
                     return new CommandErrorDialog(Messages.ERROR_DIALOG_SHUTDOWN_VM_TITLE, Messages.ERROR_DIALOG_SHUTDOWN_VMS_TITLE, cantRunReasons);
                 }

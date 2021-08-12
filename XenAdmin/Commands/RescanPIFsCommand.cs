@@ -48,10 +48,10 @@ namespace XenAdmin.Commands
 
         protected override bool CanRunCore(SelectedItemCollection selection)
         {
-            return selection.Count == 1 && CanExecute(selection[0].XenObject as Host);
+            return selection.Count == 1 && CanRun(selection[0].XenObject as Host);
         }
 
-        private bool CanExecute(Host host)
+        private bool CanRun(Host host)
         {
             if (host == null)
                 return false;

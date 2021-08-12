@@ -70,17 +70,17 @@ namespace XenAdmin.Commands
 
         }
 
-        protected override bool CanExecute(VM vm)
+        protected override bool CanRun(VM vm)
         {
-            return CanExecute(vm, preSelectedHost);
+            return CanRun(vm, preSelectedHost);
         }
 
-        public static bool CanExecute(VM vm, Host preSelectedHost)
+        public static bool CanRun(VM vm, Host preSelectedHost)
         {
             if (vm == null || vm.is_a_template || vm.Locked || vm.power_state == vm_power_state.Running)
                 return false;
 
-            return CrossPoolMigrateCommand.CanExecute(vm, preSelectedHost);
+            return CrossPoolMigrateCommand.CanRun(vm, preSelectedHost);
         }
 
         public static WizardMode GetWizardMode(SelectedItemCollection selection)

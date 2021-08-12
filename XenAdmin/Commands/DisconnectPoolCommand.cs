@@ -61,7 +61,7 @@ namespace XenAdmin.Commands
         {
             foreach (SelectedItem item in selection)
             {
-                if (CanExecute(item))
+                if (CanRun(item))
                 {
                     new DisconnectCommand(MainWindowCommandInterface, item.Connection, true).Run();
                 }
@@ -72,7 +72,7 @@ namespace XenAdmin.Commands
         {
             foreach (SelectedItem item in selection)
             {
-                if (CanExecute(item))
+                if (CanRun(item))
                 {
                     return true;
                 }
@@ -81,7 +81,7 @@ namespace XenAdmin.Commands
             return false;
         }
 
-        private static bool CanExecute(SelectedItem selection)
+        private static bool CanRun(SelectedItem selection)
         {
             return selection.Connection != null && selection.Connection.IsConnected && selection.PoolAncestor != null;
         }

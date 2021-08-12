@@ -70,7 +70,7 @@ namespace XenAdmin.Commands
             {
             }
 
-            private bool CanExecute(SelectedItem selection)
+            private bool CanRun(SelectedItem selection)
             {
                 VM vm = selection.XenObject as VM;
                 
@@ -99,7 +99,7 @@ namespace XenAdmin.Commands
 
                 IXenConnection connection = null;
 
-                bool atLeaseOneCanExecute = false;
+                bool atLeastOneCanRun = false;
                 foreach (SelectedItem item in selection)
                 {
                     VM vm = (VM)item.XenObject;
@@ -110,12 +110,12 @@ namespace XenAdmin.Commands
                         return false;
                     }
 
-                    if (CanExecute(item))
+                    if (CanRun(item))
                     {
-                        atLeaseOneCanExecute = true;
+                        atLeastOneCanRun = true;
                     }
                 }
-                return atLeaseOneCanExecute;
+                return atLeastOneCanRun;
             }
 
             private static bool EnabledTargetExists(Host host, IXenConnection connection)

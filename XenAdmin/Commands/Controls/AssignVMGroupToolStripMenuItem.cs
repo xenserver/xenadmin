@@ -274,14 +274,14 @@ namespace XenAdmin.Commands
             {
             }
 
-            public bool CanExecute(VM vm)
+            public bool CanRun(VM vm)
             {
                 return vm != null && vm.is_a_real_vm() && !vm.Locked && VMGroup<T>.FeaturePossible(vm.Connection) &&
                        !Helpers.FeatureForbidden(vm.Connection, VMGroup<T>.FeatureRestricted);
             }
             protected override bool CanRunCore(SelectedItemCollection selection)
             {
-                return selection.AllItemsAre<VM>() && selection.AtLeastOneXenObjectCan<VM>(CanExecute)
+                return selection.AllItemsAre<VM>() && selection.AtLeastOneXenObjectCan<VM>(CanRun)
                     && (selection.PoolAncestor != null || selection.HostAncestor != null); //CA-61207: this check ensures there's no cross-pool selection 
             }
 

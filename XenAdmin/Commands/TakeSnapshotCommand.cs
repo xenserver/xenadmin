@@ -78,7 +78,7 @@ namespace XenAdmin.Commands
             {
                 VM vm = (VM)GetSelection()[0].XenObject;
 
-                if (CanExecute(vm))
+                if (CanRun(vm))
                 {
                     using (VmSnapshotDialog dialog = new VmSnapshotDialog(vm))
                     {
@@ -120,7 +120,7 @@ namespace XenAdmin.Commands
             }
         }
 
-        private static bool CanExecute(VM vm)
+        private static bool CanRun(VM vm)
         {
             return vm != null && !vm.is_a_template && !vm.Locked && (vm.allowed_operations.Contains(vm_operations.snapshot) || vm.allowed_operations.Contains(vm_operations.checkpoint)); 
         }
@@ -129,7 +129,7 @@ namespace XenAdmin.Commands
         {
             if (selection.Count == 1)
             {
-                return CanExecute(selection[0].XenObject as VM);
+                return CanRun(selection[0].XenObject as VM);
             }
             return false;
         }

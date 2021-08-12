@@ -88,7 +88,7 @@ namespace XenAdmin.Commands
                 }
 
                 List<AsyncAction> actions = new List<AsyncAction>();
-                foreach (VM vm in selection.AsXenObjects<VM>(CanExecute))
+                foreach (VM vm in selection.AsXenObjects<VM>(CanRun))
                 {
                     var snapshotsToDelete = dialog.DeleteSnapshots.FindAll(x => x.Connection.Resolve(x.snapshot_of) == vm);
                     actions.Add(GetAction(vm, dialog.DeleteDisks, snapshotsToDelete));
@@ -102,14 +102,14 @@ namespace XenAdmin.Commands
             }
         }
 
-        protected virtual bool CanExecute(VM vm)
+        protected virtual bool CanRun(VM vm)
         {
             return vm != null && !vm.is_a_template && !vm.Locked && vm.allowed_operations != null && vm.allowed_operations.Contains(vm_operations.destroy);
         }
 
         protected sealed override bool CanRunCore(SelectedItemCollection selection)
         {
-            return selection.AllItemsAre<VM>() && selection.AtLeastOneXenObjectCan<VM>(CanExecute);
+            return selection.AllItemsAre<VM>() && selection.AtLeastOneXenObjectCan<VM>(CanRun);
         }
 
         public override string MenuText => Messages.MAINWINDOW_DELETE_OBJECTS;

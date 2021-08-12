@@ -101,13 +101,13 @@ namespace XenAdmin.Commands
 
         private readonly Dictionary<VM, string> cantExecuteReasons = new Dictionary<VM, string>();
 
-        protected override bool CanExecute(VM vm)
+        protected override bool CanRun(VM vm)
         {
             if (preSelectedHost == null)
-                return CanExecute(vm, preSelectedHost);
+                return CanRun(vm, preSelectedHost);
 
             var filter = new CrossPoolMigrateCanMigrateFilter(preSelectedHost, new List<VM> {vm}, WizardMode.Migrate);
-            var canExecute = CanExecute(vm, preSelectedHost, filter);
+            var canExecute = CanRun(vm, preSelectedHost, filter);
             if (string.IsNullOrEmpty(filter.Reason))
                 cantExecuteReasons.Remove(vm);
             else
@@ -115,7 +115,7 @@ namespace XenAdmin.Commands
             return canExecute;
         }
 
-        public static bool CanExecute(VM vm, Host preselectedHost, CrossPoolMigrateCanMigrateFilter filter = null)
+        public static bool CanRun(VM vm, Host preselectedHost, CrossPoolMigrateCanMigrateFilter filter = null)
         {
             bool failureFound = false;
 

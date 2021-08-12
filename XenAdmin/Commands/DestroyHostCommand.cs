@@ -69,7 +69,7 @@ namespace XenAdmin.Commands
                                Messages.DESTROYING_HOSTS_END_DESC, true);
         }
 
-        private static bool CanExecute(Host host)
+        private static bool CanRun(Host host)
         {
             if (host?.Connection == null)
                 return false;
@@ -83,7 +83,7 @@ namespace XenAdmin.Commands
             if (!selection.AllItemsAre<Host>() || selection.Count > 1)
                 return false;
             
-            return CanExecute(selection.AsXenObjects<Host>().FirstOrDefault());
+            return CanRun(selection.AsXenObjects<Host>().FirstOrDefault());
         }
 
         public override string ContextMenuText => Messages.DESTROY_HOST_CONTEXT_MENU_ITEM_TEXT;

@@ -56,11 +56,11 @@ namespace XenAdmin.Commands
         protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (selection.AllItemsAre<DockerContainer>())
-                return selection.AtLeastOneXenObjectCan<DockerContainer>(CanExecute);
+                return selection.AtLeastOneXenObjectCan<DockerContainer>(CanRun);
             return false;
         }
 
-        private static bool CanExecute(DockerContainer dockerContainer)
+        private static bool CanRun(DockerContainer dockerContainer)
         {
             return dockerContainer.power_state == vm_power_state.Running;
         }
@@ -73,7 +73,7 @@ namespace XenAdmin.Commands
             {
                 dockerContainers = (from IXenObject obj in selection.AsXenObjects()
                                     let container = (DockerContainer)obj
-                                    where CanExecute(container)
+                                    where CanRun(container)
                                     select container).ToList();
             }
 

@@ -65,7 +65,7 @@ namespace XenAdmin.Commands
 
             foreach (var host in hosts)
             {
-                if (!RemoveHostFromPoolCommand.CanExecute(host))
+                if (!RemoveHostFromPoolCommand.CanRun(host))
                     continue;
 
                 var cmd = new RemoveHostFromPoolCommand(Command.MainWindowCommandInterface, host);
@@ -93,7 +93,7 @@ namespace XenAdmin.Commands
                 if (pool == null)
                     return false;
 
-                return connection.Cache.Hosts.Any(RemoveHostFromPoolCommand.CanExecute);
+                return connection.Cache.Hosts.Any(RemoveHostFromPoolCommand.CanRun);
             }
         }
     }

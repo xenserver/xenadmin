@@ -103,7 +103,7 @@ namespace XenAdmin.Commands
             }
         }
 
-        protected override bool CanExecute(VM vm)
+        protected override bool CanRun(VM vm)
         {
             return vm != null && !_cantBootReasons.ContainsKey(vm);
         }

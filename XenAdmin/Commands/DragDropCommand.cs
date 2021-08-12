@@ -74,7 +74,7 @@ namespace XenAdmin.Commands
         /// <summary>
         /// Determines whether this drop-drop operation can run with the specified target-node and drag-data.
         /// </summary>
-        public bool CanExecute()
+        public bool CanRun()
         {
             if ((DraggedNodes == null || DraggedNodes.Count == 0) && DraggedGridRows == null)
             {

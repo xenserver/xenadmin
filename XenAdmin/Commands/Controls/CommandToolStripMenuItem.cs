@@ -80,7 +80,7 @@ namespace XenAdmin.Commands
 
         private void CommandToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
         {
-            // CA-42123 check command can execute again before opening dropdown.
+            // CA-42123 check command can run again before opening dropdown.
             if (Command.CanRun())
             {
                 OnDropDownOpening(EventArgs.Empty);

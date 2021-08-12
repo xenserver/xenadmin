@@ -51,7 +51,7 @@ namespace XenAdmin.Commands
         {
             get
             {
-                if (!CanExecute())
+                if (!CanRun())
                 {
                     Host targetHost = GetTargetNodeAncestorAsXenObjectOrGroupingTag<Host>();
                     
@@ -180,7 +180,7 @@ namespace XenAdmin.Commands
         {
             get
             {
-                return CanExecute() ? GetTargetNodeAncestor<Host>() : null;
+                return CanRun() ? GetTargetNodeAncestor<Host>() : null;
             }
         }
     }

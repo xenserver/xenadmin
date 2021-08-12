@@ -63,7 +63,7 @@ namespace XenAdmin.Commands
         {
             VM template = (VM)selection[0].XenObject;
 
-            if (CrossPoolCopyTemplateCommand.CanExecute(template, null))
+            if (CrossPoolCopyTemplateCommand.CanRun(template, null))
                 new CrossPoolCopyTemplateCommand(MainWindowCommandInterface, selection).Run();
             else
                 new CopyVMDialog(template).ShowPerXenObject(template, Program.MainWindow);
@@ -71,14 +71,14 @@ namespace XenAdmin.Commands
 
         protected override bool CanRunCore(SelectedItemCollection selection)
         {
-            return selection.ContainsOneItemOfType<VM>() && selection.AtLeastOneXenObjectCan<VM>(CanExecute);
+            return selection.ContainsOneItemOfType<VM>() && selection.AtLeastOneXenObjectCan<VM>(CanRun);
         }
 
-        private static bool CanExecute(VM vm)
+        private static bool CanRun(VM vm)
         {
             if (vm != null && vm.is_a_template && !vm.is_a_snapshot && !vm.Locked && vm.allowed_operations != null && !vm.InternalTemplate())
             {
-                if (CrossPoolCopyTemplateCommand.CanExecute(vm, null))
+                if (CrossPoolCopyTemplateCommand.CanRun(vm, null))
                     return true;
                 if (vm.allowed_operations.Contains(vm_operations.clone) || vm.allowed_operations.Contains(vm_operations.copy))
                     return true;

@@ -88,7 +88,7 @@ namespace XenAdmin.Commands
             {
             }
 
-            private static bool CanExecute(VM vm)
+            private static bool CanRun(VM vm)
             {
                 if (vm == null || vm.Connection == null || !vm.Connection.IsConnected)
                     return false;
@@ -106,7 +106,7 @@ namespace XenAdmin.Commands
             {
                 IXenConnection connection = selection.GetConnectionOfFirstItem();
 
-                bool atLeastOneCanExecute = false;
+                bool atLeastOneCanRun = false;
                 foreach (SelectedItem item in selection)
                 {
                     //all items should be VMs
@@ -119,11 +119,11 @@ namespace XenAdmin.Commands
                         return false;
 
                     //at least one VM should be able to run
-                    if (CanExecute(vm))
-                        atLeastOneCanExecute = true;
+                    if (CanRun(vm))
+                        atLeastOneCanRun = true;
 
                 }
-                return atLeastOneCanExecute;
+                return atLeastOneCanRun;
             }
 
             public override string MenuText

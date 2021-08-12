@@ -60,7 +60,7 @@ namespace XenAdmin.Commands
         {
             get
             {
-                if (CanExecute())
+                if (CanRun())
                 {
                     Pool targetPool = GetTargetNodeAncestorAsXenObjectOrGroupingTag<Pool>();
                     List<Host> draggedHosts = GetDraggedItemsAsXenObjects<Host>();
@@ -90,7 +90,7 @@ namespace XenAdmin.Commands
         {
             get
             {
-                return CanExecute() ? GetTargetNodeAncestor<Pool>() : null;
+                return CanRun() ? GetTargetNodeAncestor<Pool>() : null;
             }
         }
 

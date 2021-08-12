@@ -60,7 +60,7 @@ namespace XenAdmin.Commands
         {
             foreach (SelectedItem item in selection)
             {
-                if (CanExecute(item))
+                if (CanRun(item))
                 {
                     return true;
                 }
@@ -69,7 +69,7 @@ namespace XenAdmin.Commands
             return false;
         }
 
-        private static bool CanExecute(SelectedItem selection)
+        private static bool CanRun(SelectedItem selection)
         {
             IXenConnection connection = selection.Connection;
             Host host = selection.XenObject as Host;
@@ -85,7 +85,7 @@ namespace XenAdmin.Commands
         {
             foreach (SelectedItem item in selection)
             {
-                if (CanExecute(item))
+                if (CanRun(item))
                 {
                     new DisconnectCommand(MainWindowCommandInterface, item.Connection, true).Run();
                 }

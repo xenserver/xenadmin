@@ -115,7 +115,7 @@ namespace XenAdmin.Commands
             RunAction(vms, Messages.ACTION_VMS_STARTING_ON_TITLE, Messages.ACTION_VMS_STARTING_ON_TITLE, Messages.ACTION_VM_STARTED, brokenCDs);
         }
 
-        protected override bool CanExecute(VM vm)
+        protected override bool CanRun(VM vm)
         {
             ReadOnlyCollection<SelectedItem> selection = GetSelection();
 

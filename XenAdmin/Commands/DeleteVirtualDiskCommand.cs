@@ -76,7 +76,7 @@ namespace XenAdmin.Commands
 
         protected override bool CanRunCore(SelectedItemCollection selection)
         {
-            return selection.AllItemsAre<VDI>(CanExecute);
+            return selection.AllItemsAre<VDI>(CanRun);
         }
 
         protected override bool ConfirmationRequired
@@ -291,7 +291,7 @@ namespace XenAdmin.Commands
             }
         }
 
-        protected bool CanExecute(VDI vdi)
+        protected bool CanRun(VDI vdi)
         {
             if (vdi == null)
                 return false;

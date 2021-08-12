@@ -74,7 +74,7 @@ namespace XenAdmin.Commands
 
         
 
-        protected override bool CanExecute(VM vm)
+        protected override bool CanRun(VM vm)
         {
             if (vm != null && !vm.is_a_template && !vm.Locked)
             {
@@ -185,7 +185,7 @@ namespace XenAdmin.Commands
         {
             foreach (VM vm in GetSelection().AsXenObjects<VM>())
             {
-                if (!CanExecute(vm) && vm.power_state != vm_power_state.Halted)
+                if (!CanRun(vm) && vm.power_state != vm_power_state.Halted)
                 {
                     return new CommandErrorDialog(Messages.ERROR_DIALOG_FORCE_REBOOT_VM_TITLE, Messages.ERROR_DIALOG_FORCE_REBOOT_VM_TEXT, cantRunReasons);
                 }

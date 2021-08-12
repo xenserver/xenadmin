@@ -76,7 +76,7 @@ namespace XenAdmin.Commands
         {
             return selection.AllItemsAre<VM>(CBTDisabled) &&
                    (new CrossPoolMoveVMCommand(MainWindowCommandInterface, selection).CanRun() ||
-                   selection.ContainsOneItemOfType<VM>(CanExecute));
+                   selection.ContainsOneItemOfType<VM>(CanRun));
         }
 
         private bool CBTDisabled(VM vm)
@@ -92,9 +92,9 @@ namespace XenAdmin.Commands
             return true;
         }
 
-        private static bool CanExecute(VM vm)
+        private static bool CanRun(VM vm)
         {
-            return vm != null && (CrossPoolMoveVMCommand.CanExecute(vm, null) || vm.CanBeMoved());
+            return vm != null && (CrossPoolMoveVMCommand.CanRun(vm, null) || vm.CanBeMoved());
         }
 
         public override string MenuText

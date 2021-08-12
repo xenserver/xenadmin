@@ -152,7 +152,7 @@ namespace XenAdmin.Commands
             return Messages.UNKNOWN;
         }
 
-        protected override bool CanExecute(Pool pool)
+        protected override bool CanRun(Pool pool)
         {
             return pool.Connection.Cache.Hosts.Any(Host.RestrictPoolSecretRotation) || !pool.is_psr_pending;
         }
@@ -224,7 +224,7 @@ namespace XenAdmin.Commands
             return CanExecuteHACommand(selection);
         }
 
-        protected override bool CanExecute(Pool pool)
+        protected override bool CanRun(Pool pool)
         {
             return pool.ha_enabled;
         }
@@ -298,10 +298,10 @@ namespace XenAdmin.Commands
                 HelpersGUI.FindActiveHaAction(pool.Connection) != null)
                 return false;
 
-            return CanExecute(pool);
+            return CanRun(pool);
         }
 
-        protected virtual bool CanExecute(Pool pool)
+        protected virtual bool CanRun(Pool pool)
         {
             return true;
         }

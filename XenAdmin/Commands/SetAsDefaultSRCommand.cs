@@ -68,10 +68,10 @@ namespace XenAdmin.Commands
 
         protected override bool CanRunCore(SelectedItemCollection selection)
         {
-            return selection.ContainsOneItemOfType<SR>() && selection.AtLeastOneXenObjectCan<SR>(CanExecute);
+            return selection.ContainsOneItemOfType<SR>() && selection.AtLeastOneXenObjectCan<SR>(CanRun);
         }
 
-        private static bool CanExecute(SR sr)
+        private static bool CanRun(SR sr)
         {
             return sr != null
                     && sr.HasPBDs()

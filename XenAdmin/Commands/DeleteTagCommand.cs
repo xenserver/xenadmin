@@ -56,14 +56,14 @@ namespace XenAdmin.Commands
         {
         }
 
-        private static bool CanExecute(GroupingTag groupingTag)
+        private static bool CanRun(GroupingTag groupingTag)
         {
             return groupingTag.Grouping.GroupingName == Messages.TAGS;
         }
 
         protected override bool CanRunCore(SelectedItemCollection selection)
         {
-            return selection.AllItemsAre<GroupingTag>(CanExecute);
+            return selection.AllItemsAre<GroupingTag>(CanRun);
         }
 
         protected override void RunCore(SelectedItemCollection selection)

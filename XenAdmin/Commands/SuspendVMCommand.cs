@@ -68,7 +68,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override bool CanExecute(VM vm)
+        protected override bool CanRun(VM vm)
         {
             if (!vm.is_a_template && vm.power_state == vm_power_state.Running && vm.allowed_operations != null && vm.allowed_operations.Contains(vm_operations.suspend))
             {
@@ -126,7 +126,7 @@ namespace XenAdmin.Commands
         {
             foreach (VM vm in GetSelection().AsXenObjects<VM>())
             {
-                if (!CanExecute(vm) && vm.power_state == vm_power_state.Running)
+                if (!CanRun(vm) && vm.power_state == vm_power_state.Running)
                 {
                     return new CommandErrorDialog(Messages.ERROR_DIALOG_SUSPEND_VM_TITLE, Messages.ERROR_DIALOG_SUSPEND_VM_TEXT, cantRunReasons);
                 }

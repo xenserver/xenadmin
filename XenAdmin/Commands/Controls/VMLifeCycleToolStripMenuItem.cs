@@ -97,14 +97,14 @@ namespace XenAdmin.Commands
 
         private class CmdInt : Command
         {
-            private static bool CanExecute(VM vm)
+            private static bool CanRun(VM vm)
             {
                 return !vm.Locked && !vm.is_a_template;
             }
 
             protected override bool CanRunCore(SelectedItemCollection selection)
             {
-                return selection.AllItemsAre<VM>(CanExecute);
+                return selection.AllItemsAre<VM>(CanRun);
             }
         }
     }

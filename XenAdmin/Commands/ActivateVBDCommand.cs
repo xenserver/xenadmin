@@ -68,7 +68,7 @@ namespace XenAdmin.Commands
 
         protected override bool CanRunCore(SelectedItemCollection selection)
         {
-            return selection.AllItemsAre<VBD>() && selection.AtLeastOneXenObjectCan<VBD>(CanExecute);
+            return selection.AllItemsAre<VBD>() && selection.AtLeastOneXenObjectCan<VBD>(CanRun);
         }
 
         // We only need to check for IO Drivers for hosts before Ely
@@ -82,7 +82,7 @@ namespace XenAdmin.Commands
             return !vm.GetVirtualisationStatus(out _).HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED);
         }
 
-        private bool CanExecute(VBD vbd)
+        private bool CanRun(VBD vbd)
         {
             VM vm = vbd.Connection.Resolve<VM>(vbd.VM);
             VDI vdi = vbd.Connection.Resolve<VDI>(vbd.VDI);

@@ -470,7 +470,7 @@ namespace XenAdmin.Dialogs
                 case Failure.VM_MISSING_PV_DRIVERS:
                     vmRef = errorDescription[1];
                     VM vm = connection.Resolve(new XenRef<VM>(vmRef));
-                    solution = InstallToolsCommand.CanExecute(vm) && !Helpers.StockholmOrGreater(connection)
+                    solution = InstallToolsCommand.CanRun(vm) && !Helpers.StockholmOrGreater(connection)
                         ? Solution.InstallPVDrivers
                         : Solution.InstallPVDriversNoSolution;
                     break;

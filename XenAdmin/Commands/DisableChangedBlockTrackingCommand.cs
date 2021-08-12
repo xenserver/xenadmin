@@ -105,7 +105,7 @@ namespace XenAdmin.Commands
             return !Helpers.FeatureForbidden(vm.Connection, Host.RestrictChangedBlockTracking);
         }
 
-        private bool CanExecute(VM vm)
+        private bool CanRun(VM vm)
         {
             return vm != null &&
                 !vm.is_a_template &&
@@ -117,7 +117,7 @@ namespace XenAdmin.Commands
             // Can run criteria: A selection of VMs in the same pool which has CBT feature licensed, where at least one VM having CBT enabled
             return selection.AllItemsAre<VM>(CbtLicensed) &&
                 selection.GetConnectionOfAllItems() != null &&
-                selection.AtLeastOneXenObjectCan<VM>(CanExecute);
+                selection.AtLeastOneXenObjectCan<VM>(CanRun);
         }
 
         public override string MenuText => Messages.MAINWINDOW_DISABLE_CHANGED_BLOCK_TRACKING;

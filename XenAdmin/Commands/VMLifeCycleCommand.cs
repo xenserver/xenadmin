@@ -63,7 +63,7 @@ namespace XenAdmin.Commands
             Parent = parent;
         }
 
-        protected abstract bool CanExecute(VM vm);
+        protected abstract bool CanRun(VM vm);
 
         protected abstract void Execute(List<VM> vms);
 
@@ -129,7 +129,7 @@ namespace XenAdmin.Commands
 
         protected sealed override void RunCore(SelectedItemCollection selection)
         {
-            List<VM> vms = selection.AsXenObjects<VM>(CanExecute);
+            List<VM> vms = selection.AsXenObjects<VM>(CanRun);
 
             // sort so actions run in correct order.
             vms.Sort();
@@ -148,7 +148,7 @@ namespace XenAdmin.Commands
                 {
                     return false;
                 }
-                else if (CanExecute(vm))
+                else if (CanRun(vm))
                 {
                     atLeastOneCanExecute = true;
                 }

@@ -53,7 +53,7 @@ namespace XenAdmin.Commands
         {
             get
             {
-                if (!CanExecute())
+                if (!CanRun())
                 {
                     Host targetHost = GetTargetNodeAncestorAsXenObjectOrGroupingTag<Host>();
                     
@@ -260,6 +260,6 @@ namespace XenAdmin.Commands
             }
         }
 
-        public override VirtualTreeNode HighlightNode => CanExecute() ? GetTargetNodeAncestor<Host>() : null;
+        public override VirtualTreeNode HighlightNode => CanRun() ? GetTargetNodeAncestor<Host>() : null;
     }
 }

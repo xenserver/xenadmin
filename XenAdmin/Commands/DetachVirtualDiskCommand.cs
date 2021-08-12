@@ -100,10 +100,10 @@ namespace XenAdmin.Commands
 
         protected override bool CanRunCore(SelectedItemCollection selection)
         {
-            return selection.AllItemsAre<VDI>() && selection.AtLeastOneXenObjectCan<VDI>(CanExecute);
+            return selection.AllItemsAre<VDI>() && selection.AtLeastOneXenObjectCan<VDI>(CanRun);
         }
 
-        protected bool CanExecute(VDI vdi)
+        protected bool CanRun(VDI vdi)
         {  
             if (vdi == null)
                 return false;

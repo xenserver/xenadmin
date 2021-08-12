@@ -688,7 +688,7 @@ namespace XenAdmin.Controls.MainWindowControls
 
             foreach (DragDropCommand cmd in GetDragDropCommands(targetNode, e.Data))
             {
-                if (cmd.CanExecute())
+                if (cmd.CanRun())
                 {
                     cmd.Execute();
                     return;
@@ -702,7 +702,7 @@ namespace XenAdmin.Controls.MainWindowControls
             VirtualTreeNode targetNode = treeView.GetNodeAt(treeView.PointToClient(new Point(e.X, e.Y)));
             foreach (DragDropCommand cmd in GetDragDropCommands(targetNode, e.Data))
             {
-                if (cmd.CanExecute())
+                if (cmd.CanRun())
                 {
                     e.Effect = DragDropEffects.Move;
                     return;
@@ -739,7 +739,7 @@ namespace XenAdmin.Controls.MainWindowControls
             string statusBarText = null;
             foreach (DragDropCommand cmd in GetDragDropCommands(targetNode, e.Data))
             {
-                if (cmd.CanExecute())
+                if (cmd.CanRun())
                     targetToHighlight = cmd.HighlightNode;
 
                 if (cmd.StatusBarText != null)

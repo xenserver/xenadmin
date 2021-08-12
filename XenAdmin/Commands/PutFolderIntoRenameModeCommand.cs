@@ -66,10 +66,10 @@ namespace XenAdmin.Commands
 
         protected override bool CanRunCore(SelectedItemCollection selection)
         {
-            return selection.ContainsOneItemOfType<Folder>(CanExecute);
+            return selection.ContainsOneItemOfType<Folder>(CanRun);
         }
 
-        private static bool CanExecute(Folder folder)
+        private static bool CanRun(Folder folder)
         {
             return !folder.IsRootFolder;
         }

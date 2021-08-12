@@ -69,7 +69,7 @@ namespace XenAdmin.Commands
         protected override void RunCore(SelectedItemCollection selection)
         {
             List<AsyncAction> actions = new List<AsyncAction>();
-            foreach (Host host in selection.AsXenObjects<Host>(CanExecute))
+            foreach (Host host in selection.AsXenObjects<Host>(CanRun))
             {
                 this.MainWindowCommandInterface.CloseActiveWizards(host.Connection);
                 ShutdownHostAction action = new ShutdownHostAction(host,AddHostToPoolCommand.NtolDialog);
@@ -81,10 +81,10 @@ namespace XenAdmin.Commands
 
         protected override bool CanRunCore(SelectedItemCollection selection)
         {
-            return selection.AllItemsAre<Host>() && selection.AtLeastOneXenObjectCan<Host>(CanExecute);
+            return selection.AllItemsAre<Host>() && selection.AtLeastOneXenObjectCan<Host>(CanRun);
         }
 
-        private static bool CanExecute(Host host)
+        private static bool CanRun(Host host)
         {
             return host != null && host.IsLive() && !HelpersGUI.HasActiveHostAction(host) ;
         }
@@ -171,7 +171,7 @@ namespace XenAdmin.Commands
         {
             foreach (Host host in GetSelection().AsXenObjects<Host>())
             {
-                if (!CanExecute(host) && host.IsLive())
+                if (!CanRun(host) && host.IsLive())
                 {
                     return new CommandErrorDialog(Messages.ERROR_DIALOG_SHUTDOWN_HOST_TITLE, Messages.ERROR_DIALOG_SHUTDOWN_HOST_TEXT, cantRunReasons);
                 }

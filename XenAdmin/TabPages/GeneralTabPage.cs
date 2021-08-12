@@ -1421,7 +1421,7 @@ namespace XenAdmin.TabPages
                     {
                         //Row 4: Install Tools
                         string installMessage = string.Empty;
-                        var canInstall = InstallToolsCommand.CanExecute(vm);
+                        var canInstall = InstallToolsCommand.CanRun(vm);
 
                         if (canInstall && !status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
                         {
@@ -1463,7 +1463,7 @@ namespace XenAdmin.TabPages
 
                     if (status == VM.VirtualisationStatus.NOT_INSTALLED || status.HasFlag(VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
                     {
-                        if (InstallToolsCommand.CanExecute(vm))
+                        if (InstallToolsCommand.CanRun(vm))
                         {
                             if (Helpers.StockholmOrGreater(vm.Connection))
                             {

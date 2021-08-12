@@ -137,7 +137,7 @@ namespace XenAdmin.Commands
             return base.GetCantRunReasonCore(item);
         }
 
-        public static bool CanExecute(Host host)
+        public static bool CanRun(Host host)
         {
             if (host != null && host.Connection != null)
             {
@@ -153,7 +153,7 @@ namespace XenAdmin.Commands
             // all selected items must be hosts and in the same pool
 
             return selection.Select(s => s.Connection).Count() == 1 &&
-                   selection.All(s => s.XenObject is Host h && CanExecute(h));
+                   selection.All(s => s.XenObject is Host h && CanRun(h));
         }
 
         private void WaitForReboot(object o)
