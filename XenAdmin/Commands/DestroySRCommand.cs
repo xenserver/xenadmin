@@ -77,7 +77,7 @@ namespace XenAdmin.Commands
             RunMultipleActions(actions, Messages.ACTION_SRS_DESTROYING, string.Empty, string.Empty, true);
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             return selection.AllItemsAre<SR>() && selection.AtLeastOneXenObjectCan<SR>(CanExecute);
         }

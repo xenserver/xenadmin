@@ -70,7 +70,7 @@ namespace XenAdmin.Commands
             _VM = vm;
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (selection.Count == 1)
             {

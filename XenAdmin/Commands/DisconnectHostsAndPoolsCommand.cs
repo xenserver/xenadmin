@@ -50,7 +50,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             bool oneIsConnected = false;
             bool foundHost = false;

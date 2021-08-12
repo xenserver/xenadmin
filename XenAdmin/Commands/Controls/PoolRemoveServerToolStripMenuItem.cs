@@ -86,7 +86,7 @@ namespace XenAdmin.Commands
 
             public override string MenuText => Messages.REMOVE_SERVER_MENU_ITEM;
 
-            protected override bool CanExecuteCore(SelectedItemCollection selection)
+            protected override bool CanRunCore(SelectedItemCollection selection)
             {
                 var connection = selection.GetConnectionOfAllItems();
                 var pool = Helpers.GetPool(connection);

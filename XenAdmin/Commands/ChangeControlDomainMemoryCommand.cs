@@ -73,7 +73,7 @@ namespace XenAdmin.Commands
             return host != null && host.IsLive() && Helpers.ElyOrGreater(host);
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             return selection.ContainsOneItemOfType<Host>() && selection.AtLeastOneXenObjectCan<Host>(CanExecute);
         }

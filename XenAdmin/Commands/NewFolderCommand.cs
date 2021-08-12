@@ -156,7 +156,7 @@ namespace XenAdmin.Commands
             Execute((Folder)selection[0].XenObject, Parent);
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             return (selection.ContainsOneItemOfType<Folder>()
                     || selection.ContainsOneItemOfType<GroupingTag>(t => t.Grouping is OrganizationViewFolders))

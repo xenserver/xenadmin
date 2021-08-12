@@ -76,7 +76,7 @@ namespace XenAdmin.Commands
             Execute(selection[0].XenObject);
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (selection.ContainsOneItemOfType<IXenObject>())
             {
@@ -142,7 +142,7 @@ namespace XenAdmin.Commands
     /// </summary>
     internal class VMPropertiesCommand : PropertiesCommand
     {
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (selection.Count == 1)
             {
@@ -158,7 +158,7 @@ namespace XenAdmin.Commands
     /// </summary>
     internal class SRPropertiesCommand : PropertiesCommand
     {
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (selection.Count == 1)
             {
@@ -192,7 +192,7 @@ namespace XenAdmin.Commands
             Execute(selection[0].PoolAncestor);
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (selection.Count == 1)
             {
@@ -228,7 +228,7 @@ namespace XenAdmin.Commands
             Execute(selection[0].HostAncestor);
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (selection.Count == 1)
             {
@@ -247,7 +247,7 @@ namespace XenAdmin.Commands
     /// </summary>
     internal class TemplatePropertiesCommand : PropertiesCommand
     {
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (selection.Count == 1)
             {

@@ -71,7 +71,7 @@ namespace XenAdmin.Commands
             {
             }
 
-            protected override bool CanExecuteCore(SelectedItemCollection selection)
+            protected override bool CanRunCore(SelectedItemCollection selection)
             {
                 return selection.Count > 0 && selection.AllItemsAre<VM>()
                        && selection.GetConnectionOfAllItems() != null && selection.Any(CanExecute);

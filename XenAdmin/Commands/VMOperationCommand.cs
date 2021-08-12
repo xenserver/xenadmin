@@ -102,7 +102,7 @@ namespace XenAdmin.Commands
         /// </summary>
         protected abstract Host GetHost(VM vm);
 
-        protected sealed override bool CanExecuteCore(SelectedItemCollection selection)
+        protected sealed override bool CanRunCore(SelectedItemCollection selection)
         {
             return selection.AllItemsAre<VM>() && selection.AtLeastOneXenObjectCan<VM>(CanExecute);
         }

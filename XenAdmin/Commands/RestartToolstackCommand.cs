@@ -70,7 +70,7 @@ namespace XenAdmin.Commands
             RunMultipleActions(actions, null, Messages.ACTION_TOOLSTACK_RESTARTING, Messages.ACTION_TOOLSTACK_RESTARTED, true);
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             return selection.AllItemsAre<Host>() && selection.Any(item => ((Host)item.XenObject).IsLive());
         }

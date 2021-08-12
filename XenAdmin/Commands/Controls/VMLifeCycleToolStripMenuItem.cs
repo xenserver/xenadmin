@@ -102,7 +102,7 @@ namespace XenAdmin.Commands
                 return !vm.Locked && !vm.is_a_template;
             }
 
-            protected override bool CanExecuteCore(SelectedItemCollection selection)
+            protected override bool CanRunCore(SelectedItemCollection selection)
             {
                 return selection.AllItemsAre<VM>(CanExecute);
             }

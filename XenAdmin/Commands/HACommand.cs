@@ -133,7 +133,7 @@ namespace XenAdmin.Commands
             Execute(selection[0].Connection);
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             return CanExecuteHACommand(selection);
         }
@@ -219,7 +219,7 @@ namespace XenAdmin.Commands
             action.RunAsync();
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             return CanExecuteHACommand(selection);
         }
@@ -254,7 +254,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             return new HAConfigureCommand(MainWindowCommandInterface, selection).CanRun() ||
                    new HADisableCommand(MainWindowCommandInterface, selection).CanRun();

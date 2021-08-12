@@ -65,7 +65,7 @@ namespace XenAdmin.Commands
             new ReconnectAsDialog(selection[0].Connection).ShowDialog(Parent);
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (selection.Count == 1)
             {

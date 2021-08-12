@@ -158,7 +158,7 @@ namespace XenAdmin.Commands
                 get { return _group.Name(); }
             }
 
-            protected override bool CanExecuteCore(SelectedItemCollection selection)
+            protected override bool CanRunCore(SelectedItemCollection selection)
             {
                 return true;
             }
@@ -252,7 +252,7 @@ namespace XenAdmin.Commands
                 get { return VMGroup<T>.NewGroupString; }
             }
 
-            protected override bool CanExecuteCore(SelectedItemCollection selection)
+            protected override bool CanRunCore(SelectedItemCollection selection)
             {
                 return !Helpers.FeatureForbidden(selection.FirstAsXenObject.Connection, VMGroup<T>.FeatureRestricted)
                     && (selection.PoolAncestor != null || selection.HostAncestor != null); //CA-61207: this check ensures there's no cross-pool selection 
@@ -279,7 +279,7 @@ namespace XenAdmin.Commands
                 return vm != null && vm.is_a_real_vm() && !vm.Locked && VMGroup<T>.FeaturePossible(vm.Connection) &&
                        !Helpers.FeatureForbidden(vm.Connection, VMGroup<T>.FeatureRestricted);
             }
-            protected override bool CanExecuteCore(SelectedItemCollection selection)
+            protected override bool CanRunCore(SelectedItemCollection selection)
             {
                 return selection.AllItemsAre<VM>() && selection.AtLeastOneXenObjectCan<VM>(CanExecute)
                     && (selection.PoolAncestor != null || selection.HostAncestor != null); //CA-61207: this check ensures there's no cross-pool selection 

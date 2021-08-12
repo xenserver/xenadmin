@@ -50,7 +50,7 @@ namespace XenAdmin.Commands
             _nodes = nodes;
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (_nodes.Count > 0)
             {

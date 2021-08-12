@@ -127,7 +127,7 @@ namespace XenAdmin.Commands
         /// </returns>
         public bool CanRun()
         {
-            return MainWindowCommandInterface != null && CanExecuteCore(GetSelection());
+            return MainWindowCommandInterface != null && CanRunCore(GetSelection());
         }
 
         /// <summary>
@@ -137,7 +137,7 @@ namespace XenAdmin.Commands
         /// <returns>
         /// 	<c>true</c> if this instance can run with the specified selection; otherwise, <c>false</c>.
         /// </returns>
-        protected virtual bool CanExecuteCore(SelectedItemCollection selection)
+        protected virtual bool CanRunCore(SelectedItemCollection selection)
         {
             return true;
         }
@@ -317,7 +317,7 @@ namespace XenAdmin.Commands
             {
                 if (item == null || item.XenObject == null)
                     continue;
-                if (MainWindowCommandInterface != null && CanExecuteCore(new SelectedItemCollection(item)))
+                if (MainWindowCommandInterface != null && CanRunCore(new SelectedItemCollection(item)))
                     continue;
 
                 string reason = GetCantExecuteReasonCore(item.XenObject);

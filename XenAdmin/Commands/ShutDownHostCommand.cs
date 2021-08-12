@@ -79,7 +79,7 @@ namespace XenAdmin.Commands
             RunMultipleActions(actions, null, Messages.ACTION_HOSTS_SHUTTING_DOWN, Messages.ACTION_HOSTS_SHUTDOWN, true);
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             return selection.AllItemsAre<Host>() && selection.AtLeastOneXenObjectCan<Host>(CanExecute);
         }

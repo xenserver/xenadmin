@@ -65,7 +65,7 @@ namespace XenAdmin.Commands
             _connection = connection;
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             return _connection != null && (_connection.IsConnected || _connection.InProgress);
         }

@@ -66,7 +66,7 @@ namespace XenAdmin.Commands
             new NewVMCommand(MainWindowCommandInterface, snapshot.Connection, null, snapshot).Run();
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (selection.Count == 1)
             {

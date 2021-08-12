@@ -112,7 +112,7 @@ namespace XenAdmin.Commands
                 vm.Connection.ResolveAll(vm.VBDs).Any(vbd => vm.Connection.Resolve(vbd.VDI) != null && vm.Connection.Resolve(vbd.VDI).cbt_enabled);
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             // Can run criteria: A selection of VMs in the same pool which has CBT feature licensed, where at least one VM having CBT enabled
             return selection.AllItemsAre<VM>(CbtLicensed) &&

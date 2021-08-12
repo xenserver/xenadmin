@@ -82,7 +82,7 @@ namespace XenAdmin.Commands
             }
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             return new RebootVMCommand(MainWindowCommandInterface, selection).CanRun() || new RebootHostCommand(MainWindowCommandInterface, selection).CanRun();
         }

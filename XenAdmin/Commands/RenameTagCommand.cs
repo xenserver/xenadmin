@@ -70,7 +70,7 @@ namespace XenAdmin.Commands
             _newName = newName;
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             return _oldName != _newName && _newName.Trim().Length > 0;
         }

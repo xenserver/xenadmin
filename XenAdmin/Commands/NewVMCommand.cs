@@ -99,7 +99,7 @@ namespace XenAdmin.Commands
             MainWindowCommandInterface.ShowPerConnectionWizard(connection, new NewVMWizard(connection, DefaultTemplate, DefaultAffinity));
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             Host hostAncestor = selection.HostAncestor;
             Pool poolAncestor = selection.PoolAncestor;

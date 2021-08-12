@@ -71,7 +71,7 @@ namespace XenAdmin.Commands
             Execute((SR)selection[0].XenObject);
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             return selection.Count == 1 && CanReattachSR(selection[0].XenObject as SR);
         }

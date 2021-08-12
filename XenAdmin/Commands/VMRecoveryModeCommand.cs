@@ -69,7 +69,7 @@ namespace XenAdmin.Commands
             new HVMBootAction((VM)selection[0].XenObject).RunAsync();
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             return selection.ContainsOneItemOfType<VM>() && selection.AtLeastOneXenObjectCan<VM>(CanExecute);
         }

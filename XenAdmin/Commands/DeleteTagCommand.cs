@@ -61,7 +61,7 @@ namespace XenAdmin.Commands
             return groupingTag.Grouping.GroupingName == Messages.TAGS;
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             return selection.AllItemsAre<GroupingTag>(CanExecute);
         }

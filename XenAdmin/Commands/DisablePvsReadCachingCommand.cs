@@ -93,7 +93,7 @@ namespace XenAdmin.Commands
             Execute(selection.AsXenObjects<VM>());
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             // Can run criteria: A selection of VMs in the same pool, where at least one doesn't have PVS read caching enabled
             if (selection.Any() &&  selection.AllItemsAre<VM>() && selection.GetConnectionOfAllItems() != null)

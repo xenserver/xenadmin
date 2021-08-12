@@ -69,7 +69,7 @@ namespace XenAdmin.Commands
                 new CopyVMDialog(template).ShowPerXenObject(template, Program.MainWindow);
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             return selection.ContainsOneItemOfType<VM>() && selection.AtLeastOneXenObjectCan<VM>(CanExecute);
         }

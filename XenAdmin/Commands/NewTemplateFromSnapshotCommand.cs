@@ -100,7 +100,7 @@ namespace XenAdmin.Commands
 
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             return selection.ContainsOneItemOfType<VM>() && selection.AtLeastOneXenObjectCan<VM>(v => v.is_a_snapshot);
         }

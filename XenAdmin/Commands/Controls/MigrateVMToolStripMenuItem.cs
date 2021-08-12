@@ -102,7 +102,7 @@ namespace XenAdmin.Commands
                 return vm.allowed_operations != null && vm.allowed_operations.Contains(vm_operations.pool_migrate);
             }
 
-            protected override bool CanExecuteCore(SelectedItemCollection selection)
+            protected override bool CanRunCore(SelectedItemCollection selection)
             {
                 IXenConnection connection = selection.GetConnectionOfFirstItem();
 

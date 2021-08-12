@@ -53,7 +53,7 @@ namespace XenAdmin.Commands
 
         public override Image ToolBarImage { get { return Images.StaticImages._000_Paused_h32bit_24; } }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (selection.AllItemsAre<DockerContainer>())
                 return selection.AtLeastOneXenObjectCan<DockerContainer>(CanExecute);

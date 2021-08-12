@@ -62,7 +62,7 @@ namespace XenAdmin.Commands
                 MainWindowCommandInterface.ShowPerConnectionWizard(pool.Connection, new ChangeServerPasswordDialog(pool));
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             // Only allow password change if the user is logged in as local root
             // (i.e. disallow password change if the user is logged in via AD)

@@ -66,7 +66,7 @@ namespace XenAdmin.Commands
             Execute(selection[0].XenObject as Host, _filePath);
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (selection.Count == 1)
             {

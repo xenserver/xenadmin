@@ -63,7 +63,7 @@ namespace XenAdmin.Commands
             return !(xenObject is Folder) && xenObject.Connection != null;
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             return selection.AllItemsAre<IXenObject>(CanExecute);
         }

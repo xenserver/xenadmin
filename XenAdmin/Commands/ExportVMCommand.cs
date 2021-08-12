@@ -209,7 +209,7 @@ namespace XenAdmin.Commands
             Execute(selection[0].Connection, vm, host);
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (selection.Count == 1)
             {

@@ -79,7 +79,7 @@ namespace XenAdmin.Commands
             }
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (typeof(T) == typeof(VMSS) && selection.Any(s => !Helpers.FalconOrGreater(s.Connection)))
             {

@@ -125,7 +125,7 @@ namespace XenAdmin.Commands
             return vm != null && !vm.is_a_template && !vm.Locked && (vm.allowed_operations.Contains(vm_operations.snapshot) || vm.allowed_operations.Contains(vm_operations.checkpoint)); 
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (selection.Count == 1)
             {

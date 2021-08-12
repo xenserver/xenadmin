@@ -77,7 +77,7 @@ namespace XenAdmin.Commands
             }
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             return selection.Count == 1 && selection[0].XenObject is VM vm &&
                    !vm.is_a_snapshot && !vm.Locked;

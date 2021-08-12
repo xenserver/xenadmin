@@ -64,7 +64,7 @@ namespace XenAdmin.Commands
             MainWindowCommandInterface.PutSelectedNodeIntoEditMode();
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             return selection.ContainsOneItemOfType<Folder>(CanExecute);
         }

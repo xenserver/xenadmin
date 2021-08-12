@@ -41,7 +41,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             return new AttachVirtualDiskCommand(MainWindowCommandInterface, selection).CanRun() || new AddVirtualDiskCommand(MainWindowCommandInterface, selection).CanRun();
         }

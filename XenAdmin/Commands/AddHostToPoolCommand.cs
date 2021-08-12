@@ -222,7 +222,7 @@ namespace XenAdmin.Commands
             RunMultipleActions(actions, string.Format(Messages.ADDING_SERVERS_TO_POOL, _pool.Name()), Messages.POOLCREATE_ADDING, Messages.POOLCREATE_ADDED, true);
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (_hosts.Count > 0)
             {

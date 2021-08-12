@@ -74,7 +74,7 @@ namespace XenAdmin.Commands
             }
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             return new ShutDownVMCommand(MainWindowCommandInterface, selection).CanRun() || new ShutDownHostCommand(MainWindowCommandInterface, selection).CanRun();
         }

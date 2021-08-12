@@ -136,7 +136,7 @@ namespace XenAdmin.Commands
             Execute(vms);
         }
 
-        protected sealed override bool CanExecuteCore(SelectedItemCollection selection)
+        protected sealed override bool CanRunCore(SelectedItemCollection selection)
         {
             bool atLeastOneCanExecute = false;
 

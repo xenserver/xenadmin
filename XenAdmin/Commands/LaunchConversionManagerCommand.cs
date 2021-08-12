@@ -51,7 +51,7 @@ namespace XenAdmin.Commands
 
         public override string MenuText => Messages.MAINWINDOW_CONVERSION_MANAGER_MENU_ITEM;
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             var con = selection.GetConnectionOfFirstItem();
             return con != null && con.Cache.VMs.Any(v => v.IsConversionVM());

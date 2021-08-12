@@ -73,7 +73,7 @@ namespace XenAdmin.Commands
                 Pool.rotate_secret, "pool.rotate_secret").RunAsync();
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (selection.Any(i => !(i.XenObject is Host) && !(i.XenObject is Pool)))
                 return false;

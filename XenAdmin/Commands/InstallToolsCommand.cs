@@ -291,7 +291,7 @@ namespace XenAdmin.Commands
                    Role.CanPerform(new RbacMethodList("http/connect_console"), vm.Connection, out _, false);
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             return selection.Count > 0 &&
                    selection.All(v => v.XenObject is VM vm &&

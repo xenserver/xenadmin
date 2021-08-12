@@ -73,7 +73,7 @@ namespace XenAdmin.Commands
             new ExportVMCommand(MainWindowCommandInterface, new SelectedItem(vm, selection[0].Connection, host, null)).Run();
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (selection.Count == 1)
             {

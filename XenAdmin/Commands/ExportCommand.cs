@@ -49,7 +49,7 @@ namespace XenAdmin.Commands
 
         public override string MenuText { get { return Messages.MENU_EXPORT; } }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             Host hostAncestor = selection.HostAncestorFromConnection;
             Pool poolAncestor = selection.PooAncestorFromConnection;

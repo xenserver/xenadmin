@@ -74,7 +74,7 @@ namespace XenAdmin.Commands
             Execute(selection.AsXenObjects<VM>());
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             // Must have a selection, of all VMs
             if (selection.Any() &&  selection.AllItemsAre<VM>())

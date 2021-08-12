@@ -81,7 +81,7 @@ namespace XenAdmin.Commands
             new RepairSRDialog(srList).Show(Parent);
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             return selection.AllItemsAre<SR>() && selection.AtLeastOneXenObjectCan<SR>(CanExecute);
         }

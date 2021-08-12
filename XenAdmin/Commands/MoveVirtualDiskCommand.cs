@@ -66,7 +66,7 @@ namespace XenAdmin.Commands
             new MoveVirtualDiskDialog(selection.GetConnectionOfFirstItem(), vdis).Show(Program.MainWindow);
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             return selection.Count > 0 && selection.All(v => CanBeMoved(v.XenObject as VDI));
         }

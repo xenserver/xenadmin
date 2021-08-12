@@ -61,7 +61,7 @@ namespace XenAdmin.Commands
             MainWindowCommandInterface.ShowForm(typeof(PatchingWizard));
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             return ConnectionsManager.XenConnectionsCopy.Any(c => c.IsConnected && Helpers.PostStockholm(c));
         }

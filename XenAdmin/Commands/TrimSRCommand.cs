@@ -67,7 +67,7 @@ namespace XenAdmin.Commands
             RunMultipleActions(actions, null, Messages.ACTION_SR_TRIM_DESCRIPTION, Messages.ACTION_SR_TRIM_DONE, true);
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             return selection.AllItemsAre<SR>() && selection.AtLeastOneXenObjectCan<SR>(CanExecute);
         }

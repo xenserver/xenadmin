@@ -52,7 +52,7 @@ namespace XenAdmin.Commands
 
         public override Image MenuImage { get { return Images.StaticImages._001_PowerOn_h32bit_16; } }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (selection.AllItemsAre<VM_appliance>())
                 return selection.AtLeastOneXenObjectCan<VM_appliance>(CanStartAppliance);

@@ -78,7 +78,7 @@ namespace XenAdmin.Commands
             MainWindowCommandInterface.TrySelectNewObjectInTree(c, false, true, false);
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             foreach (IXenConnection c in MainWindowCommandInterface.GetXenConnectionsCopy())
             {

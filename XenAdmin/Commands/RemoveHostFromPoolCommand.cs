@@ -148,7 +148,7 @@ namespace XenAdmin.Commands
             return false;
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             // all selected items must be hosts and in the same pool
 

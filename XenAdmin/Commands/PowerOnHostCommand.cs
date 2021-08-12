@@ -109,7 +109,7 @@ namespace XenAdmin.Commands
                 && host.power_on_mode != "";
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             return selection.AllItemsAre<Host>() && selection.AtLeastOneXenObjectCan<Host>(CanExecute);
         }

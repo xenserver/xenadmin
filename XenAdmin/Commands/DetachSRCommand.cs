@@ -71,7 +71,7 @@ namespace XenAdmin.Commands
             RunMultipleActions(actions, Messages.ACTION_SRS_DETACHING, Messages.ACTION_SRS_DETACHING, Messages.ACTION_SRS_DETACH_SUCCESSFUL, true);
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             return selection.AllItemsAre<SR>() && selection.AtLeastOneXenObjectCan<SR>(CanExecute);
         }

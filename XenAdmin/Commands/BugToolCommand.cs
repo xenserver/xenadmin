@@ -58,7 +58,7 @@ namespace XenAdmin.Commands
                 MainWindowCommandInterface.ShowForm(typeof(BugToolWizard));
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             foreach (IXenConnection xenConnection in ConnectionsManager.XenConnectionsCopy)
             {

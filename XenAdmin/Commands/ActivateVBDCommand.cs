@@ -66,7 +66,7 @@ namespace XenAdmin.Commands
 
         public override string ButtonText => Messages.ACTIVATE;
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             return selection.AllItemsAre<VBD>() && selection.AtLeastOneXenObjectCan<VBD>(CanExecute);
         }

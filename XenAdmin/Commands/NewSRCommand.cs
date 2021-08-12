@@ -77,7 +77,7 @@ namespace XenAdmin.Commands
             return pool != null && pool.Connection.IsConnected;
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (selection.HostAncestor != null)
             {

@@ -76,7 +76,7 @@ namespace XenAdmin.Commands
             MainWindowCommandInterface.ShowForm(typeof(InstallCertificateDialog), new object[] {host});
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (!selection.AllItemsAre<Host>() || selection.Count > 1)
                 return false;

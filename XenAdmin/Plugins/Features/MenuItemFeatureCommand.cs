@@ -59,7 +59,7 @@ namespace XenAdmin.Plugins
             _serialization = serialization;
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (!_menuItemFeature.Enabled)
             {

@@ -83,7 +83,7 @@ namespace XenAdmin.Commands
             new DeleteFolderAction(folders).RunAsync();
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             return selection.AllItemsAre<Folder>(CanExecute);
         }

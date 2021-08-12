@@ -107,7 +107,7 @@ namespace XenAdmin.Commands
             return vm != null && !vm.is_a_template && !vm.Locked && vm.allowed_operations != null && vm.allowed_operations.Contains(vm_operations.destroy);
         }
 
-        protected sealed override bool CanExecuteCore(SelectedItemCollection selection)
+        protected sealed override bool CanRunCore(SelectedItemCollection selection)
         {
             return selection.AllItemsAre<VM>() && selection.AtLeastOneXenObjectCan<VM>(CanExecute);
         }

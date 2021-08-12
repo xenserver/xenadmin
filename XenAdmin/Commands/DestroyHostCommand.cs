@@ -78,7 +78,7 @@ namespace XenAdmin.Commands
             return pool != null && !Helpers.HostIsMaster(host) && !host.IsLive();
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (!selection.AllItemsAre<Host>() || selection.Count > 1)
                 return false;

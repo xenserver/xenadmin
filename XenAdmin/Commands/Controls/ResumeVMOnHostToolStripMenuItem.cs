@@ -90,7 +90,7 @@ namespace XenAdmin.Commands
                 return false;
             }
 
-            protected override bool CanExecuteCore(SelectedItemCollection selection)
+            protected override bool CanRunCore(SelectedItemCollection selection)
             {
                 if (!selection.AllItemsAre<VM>())
                 {
