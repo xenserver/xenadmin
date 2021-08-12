@@ -44,7 +44,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override bool CanExecuteCore()
+        protected override bool CanRunCore()
         {
             Pool targetPool = GetTargetNodeAncestorAsXenObjectOrGroupingTag<Pool>();
             
@@ -94,7 +94,7 @@ namespace XenAdmin.Commands
             }
         }
 
-        protected override void ExecuteCore()
+        protected override void RunCore()
         {
             Pool targetPool = GetTargetNodeAncestorAsXenObjectOrGroupingTag<Pool>();
             new AddHostToPoolCommand(MainWindowCommandInterface, GetDraggedItemsAsXenObjects<Host>(), targetPool, true).Run();

@@ -43,7 +43,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override bool CanExecuteCore()
+        protected override bool CanRunCore()
         {
             List<Host> draggedHosts = GetDraggedItemsAsXenObjects<Host>();
 
@@ -55,7 +55,7 @@ namespace XenAdmin.Commands
             return false;
         }
 
-        protected override void ExecuteCore()
+        protected override void RunCore()
         {
             new RemoveHostFromPoolCommand(MainWindowCommandInterface, GetDraggedItemsAsXenObjects<Host>()).Run();
         }

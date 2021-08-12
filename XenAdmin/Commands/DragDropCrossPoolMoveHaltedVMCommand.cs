@@ -99,7 +99,7 @@ namespace XenAdmin.Commands
             return targetHost != null && (targetPool == null || draggedVMPool == null || targetPool.opaque_ref != draggedVMPool.opaque_ref);
         }
 
-        protected override bool CanExecuteCore()
+        protected override bool CanRunCore()
         {
             Host targetHost = GetTargetNodeAncestorAsXenObjectOrGroupingTag<Host>();
 
@@ -138,7 +138,7 @@ namespace XenAdmin.Commands
             return false;
         }
 
-        protected override void ExecuteCore()
+        protected override void RunCore()
         {
             Host targetHost = GetTargetNodeAncestorAsXenObjectOrGroupingTag<Host>();
             List<VM> draggedVMs = GetDraggedItemsAsXenObjects<VM>();
