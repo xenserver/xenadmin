@@ -358,12 +358,12 @@ namespace XenAdmin.Actions
         
 
         /// <summary>
-        /// If there has been an exception this code will always execute after the action has finished, use for tidyup
+        /// If there has been an exception this code will always run after the action has finished, use for tidyup
         /// </summary>
         protected virtual void CleanOnError() { }
 
         /// <summary>
-        /// This code will always execute after the action has finished, use for tidyup
+        /// This code will always run after the action has finished, use for tidyup
         /// </summary>
         protected virtual void Clean() { }
 

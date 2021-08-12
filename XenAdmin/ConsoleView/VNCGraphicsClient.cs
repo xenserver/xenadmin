@@ -988,7 +988,7 @@ namespace XenAdmin.ConsoleView
                     // Divert focus to a parent control
                     if (this.Parent.Parent != null)
                     {
-                        // Always executed, fingers crossed
+                        // Always ran, fingers crossed
                         this.Parent.Parent.Focus();
                     }
                 }

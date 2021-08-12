@@ -61,7 +61,7 @@ namespace XenAdmin.Wizards.GenericPages
         #region Nested classes
 
         /// <summary>
-        /// Combobox item that can execute a command but also be an IEnableableComboBoxItem
+        /// Combobox item that can run a command but also be an IEnableableComboBoxItem
         /// </summary>
         private class AddHostExecutingComboBoxItem : IEnableableComboBoxItem
         {

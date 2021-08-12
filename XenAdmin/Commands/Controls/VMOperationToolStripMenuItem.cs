@@ -118,7 +118,7 @@ namespace XenAdmin.Commands
 
         /// <summary>
         /// Hook to add additional members to the menu item
-        /// Note: Called on main window thread by executing code
+        /// Note: Called on main window thread by running code
         /// </summary>
         protected virtual void AddAdditionalMenuItems(SelectedItemCollection selection) { return; }
 

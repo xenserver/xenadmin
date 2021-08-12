@@ -108,7 +108,7 @@ namespace XenAdmin.Commands
         }
 
         /// <summary>
-        /// Determines whether the specified VM can be executed (i.e. resumed-on, started-on or migrated.)
+        /// Determines whether the specified VM can be run (i.e. resumed-on, started-on or migrated.)
         /// </summary>
         protected abstract bool CanExecute(VM vm);
 

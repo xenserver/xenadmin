@@ -394,7 +394,7 @@ namespace XenAdmin.Dialogs.Wlb
 
         /// <summary>
         /// Attempts to get the latest set of reports from the WLB server version 2.0
-        /// and beyond (it invokes and executes a call to the Kirkwood database via Xapi 
+        /// and beyond (it invokes and runs a call to the Kirkwood database via Xapi 
         /// to obtain report configuration data including the actual
         /// rdlc report definitions).
         /// If there are no report definitions on WLB server, it obtains them
@@ -619,7 +619,7 @@ namespace XenAdmin.Dialogs.Wlb
 
         /// <summary>
         /// Returns a list of parameters names whose values will be required for reports' SQL query
-        /// to execute.  These names are specified in the Report XML configuration file.
+        /// to run. These names are specified in the Report XML configuration file.
         /// </summary>
         /// <param name="currentNode">Current report XML node from config file</param>
         /// <param name="queryParametersXmlElement">Current report XML node from config file</param>

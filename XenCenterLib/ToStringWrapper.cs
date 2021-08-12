@@ -77,7 +77,7 @@ namespace XenCenterLib
         /// </summary>
         private readonly string toString;
         /// <summary>
-        /// The delegate executed to provide ToString() on this ToStringWrapper instance.
+        /// The delegate ran to provide ToString() on this ToStringWrapper instance.
         /// </summary>
         private readonly ToStringDelegate<T> toStringDelegate;
 
@@ -92,7 +92,7 @@ namespace XenCenterLib
         }
 
         /// <summary>
-        /// Takes a ToStringDelegate, executed each time ToString() is called.
+        /// Takes a ToStringDelegate, run each time ToString() is called.
         /// </summary>
         /// <param name="item">The item to wrap.</param>
         /// <param name="toStringDelegate">A method that should return the desired ToString()

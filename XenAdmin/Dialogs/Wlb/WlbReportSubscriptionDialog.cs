@@ -166,7 +166,7 @@ namespace XenAdmin.Dialogs.Wlb
             this.emailCommentRichTextBox.Text = this._subscription.EmailComment;
             this.rpRenderComboBox.SelectedIndex = (int)this._subscription.ReportRenderFormat;
 
-            // convert utc days of week and utc execute time to local days of week and local execute time
+            // convert utc days of week and utc run time to local days of week and local execute time
             DateTime localExecuteTime;
             WlbScheduledTask.WlbTaskDaysOfWeek localDaysOfWeek;
             WlbScheduledTask.GetLocalTaskTimes(this._subscription.DaysOfWeek, this._subscription.ExecuteTimeOfDay, out localDaysOfWeek, out localExecuteTime);

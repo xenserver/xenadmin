@@ -118,7 +118,7 @@ namespace XenAdmin.Commands
                     if (connection != null && vm.Connection != connection)
                         return false;
 
-                    //at least one VM should be able to execute
+                    //at least one VM should be able to run
                     if (CanExecute(vm))
                         atLeastOneCanExecute = true;
 

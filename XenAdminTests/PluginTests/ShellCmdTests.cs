@@ -113,7 +113,7 @@ namespace XenAdminTests.PluginTests
             Assert.IsNotNull(menuItemFeature.ShellCmd, "ShellCmd wasn't loaded");
             Assert.AreEqual(menuItemFeature.ShellCmd.Filename, _batchFile, "Batch file name wasn't read from plugin XML");
 
-            // now execute the command and see if the test file is written by the batch file.
+            // now run the command and see if the test file is written by the batch file.
             menuItemFeature.GetCommand(new MockMainWindow(), new[] {new SelectedItem(null)}).Execute();
 
             int i = 0;

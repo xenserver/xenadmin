@@ -71,7 +71,7 @@ namespace XenAdmin.Commands
         }
 
         /// <summary>
-        /// Executes this instance.
+        /// Runs this instance.
         /// </summary>
         /// <returns>false if the user cancels the disconnect.</returns>
         public new bool Execute()

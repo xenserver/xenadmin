@@ -131,7 +131,7 @@ namespace XenAdmin.Commands
         {
             List<VM> vms = selection.AsXenObjects<VM>(CanExecute);
 
-            // sort so actions execute in correct order.
+            // sort so actions run in correct order.
             vms.Sort();
             Execute(vms);
         }

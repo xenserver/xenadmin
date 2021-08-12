@@ -195,7 +195,7 @@ namespace XenAdminTests
 
 
         /// <summary>
-        /// Executes the private method with the specified name from the wrapped class.
+        /// Runs the private method with the specified name from the wrapped class.
         /// </summary>
         /// <param name="name">The name of the private method.</param>
         /// <param name="parameters">The parameters of the private method.</param>
@@ -205,7 +205,7 @@ namespace XenAdminTests
         }
 
         /// <summary>
-        /// Executes the private method with the specified name from the wrapped class.
+        /// Runs the private method with the specified name from the wrapped class.
         /// </summary>
         /// <param name="name">The name of the private method.</param>
         /// <param name="types">The types of the parameters of the private method.</param>

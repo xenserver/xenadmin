@@ -38,7 +38,7 @@ namespace XenAdmin.Commands
     class RescanPIFsCommand : Command
     {
         /// <summary>
-        /// Executes a PIF scan on a host
+        /// Runs a PIF scan on a host
         /// </summary>
         public RescanPIFsCommand(IMainWindow mainWindow, Host host)
             : base(mainWindow, host)

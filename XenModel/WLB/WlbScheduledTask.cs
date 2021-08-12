@@ -88,7 +88,7 @@ namespace XenAdmin.Wlb
         }
 
         /// <summary>
-        /// Public enumeration of the days on which a weekly WlbTaskTrigger will execute
+        /// Public enumeration of the days on which a weekly WlbTaskTrigger will run
         /// </summary>
         [FlagsAttribute]
         public enum WlbTaskDaysOfWeek
@@ -197,13 +197,13 @@ namespace XenAdmin.Wlb
         }
 
         /// <summary>
-        /// Accepts a client's local time DayOfWeek and ExecuteTime of a scheduled task 
-        /// and returns the DaysOfWeek and ExecuteTime adjusted to UTC time
+        /// Accepts a client's local time DayOfWeek and RunTime of a scheduled task 
+        /// and returns the DaysOfWeek and RunTime adjusted to UTC time
         /// </summary>
         /// <param name="LocalDaysOfWeek">Task's DaysOfWeek value in local time</param>
-        /// <param name="LocalExecuteTime">Task's ExecuteTime in local time</param>
+        /// <param name="LocalExecuteTime">Task's RunTime in local time</param>
         /// <param name="UtcDaysOfWeek">(Output) Task's DaysOfWeek value adjusted to UTC</param>
-        /// <param name="UtcExecuteTime">(Output) Task's ExecuteTime value adjusted to UTC</param>
+        /// <param name="UtcExecuteTime">(Output) Task's RunTime value adjusted to UTC</param>
         public static void GetUTCTaskTimes(WlbScheduledTask.WlbTaskDaysOfWeek LocalDaysOfWeek, DateTime LocalExecuteTime, 
             out WlbScheduledTask.WlbTaskDaysOfWeek UtcDaysOfWeek, out DateTime UtcExecuteTime)
         {
@@ -220,13 +220,13 @@ namespace XenAdmin.Wlb
         }
 
         /// <summary>
-        /// Accepts UTC DayOfWeek and ExecuteTime of a scheduled task 
-        /// and returns the DaysOfWeek and ExecuteTime adjusted to client's local time
+        /// Accepts UTC DayOfWeek and RunTime of a scheduled task 
+        /// and returns the DaysOfWeek and RunTime adjusted to client's local time
         /// </summary>
         /// <param name="UtcDaysOfWeek">Task's DaysOfWeek value in UTC</param>
-        /// <param name="UtcExecuteTime">Task's ExecuteTime in UTC</param>
+        /// <param name="UtcExecuteTime">Task's RunTime in UTC</param>
         /// <param name="LocalDaysOfWeek">(Output) Task's DaysOfWeek value adjusted to local time</param>
-        /// <param name="LocalExecuteTime">(Output) Task's ExecuteTime value adjusted to local time</param>
+        /// <param name="LocalExecuteTime">(Output) Task's RunTime value adjusted to local time</param>
         public static void GetLocalTaskTimes(WlbScheduledTask.WlbTaskDaysOfWeek UtcDaysOfWeek, DateTime UtcExecuteTime, 
             out WlbScheduledTask.WlbTaskDaysOfWeek LocalDaysOfWeek, out DateTime LocalExecuteTime)
         {
@@ -653,7 +653,7 @@ namespace XenAdmin.Wlb
                     }
             }
 
-            //Add the execute time of day as a secondary sort item
+            //Add the run time of day as a secondary sort item
             //Multiply it by 100 to allow room for disabled tasks
             sortKey += (int)localExecuteTime.TimeOfDay.TotalMinutes * 100;
 

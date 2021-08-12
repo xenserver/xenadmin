@@ -114,7 +114,7 @@ namespace XenAdmin.Commands
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
-            // Can execute criteria: A selection of VMs in the same pool which has CBT feature licensed, where at least one VM having CBT enabled
+            // Can run criteria: A selection of VMs in the same pool which has CBT feature licensed, where at least one VM having CBT enabled
             return selection.AllItemsAre<VM>(CbtLicensed) &&
                 selection.GetConnectionOfAllItems() != null &&
                 selection.AtLeastOneXenObjectCan<VM>(CanExecute);

@@ -123,7 +123,7 @@ namespace XenAdmin.Dialogs.Wlb
             comboDayOfWeek.SelectedValue = (int)FindSelectedDay(localDaysOfWeek);
             comboBoxHour.SelectedValue = localExecuteTime.Hour;
             //comboBoxMinute.SelectedValue = (((int)(localExecuteTime.Minute * 4 / 60)) * 15);
-            //dtExecuteTime.Value = localExecuteTime;
+            //dtRunTime.Value = localRunTime;
             comboOptMode.SelectedValue = (int)GetTaskOptMode(_task);
             checkBoxEnable.Checked = _task.Enabled;
         }

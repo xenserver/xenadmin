@@ -1967,7 +1967,7 @@ namespace XenAdmin.TabPages
                 string cmdFile = Path.Combine(Path.GetTempPath(), "ContainerManagementCommand.txt");
                 File.WriteAllText(cmdFile, command);
 
-                //Invoke Putty, SSH to VM and execute docker command.
+                //Invoke Putty, SSH to VM and run docker command.
                 var puttyPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "putty.exe");
                 string args = "-m " + cmdFile + " -t " + ipAddr;
 

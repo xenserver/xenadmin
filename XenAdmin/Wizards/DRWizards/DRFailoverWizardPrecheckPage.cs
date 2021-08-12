@@ -261,7 +261,7 @@ namespace XenAdmin.Wizards.DRWizards
 
                     Session metadataSession = null;
 
-                    // execute checks
+                    // run checks
                     for (int j = 0; j < checkGroup.Count; j++)
                     {
                         if (_worker.CancellationPending)

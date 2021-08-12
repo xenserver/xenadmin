@@ -477,7 +477,7 @@ namespace XenAdmin.Commands
                 SR sr = vdi.Connection.Resolve(vdi.SR);
                 if (sr == null)
                 {
-                    // Nothing we can do here, but this should have been caught in the getcantexecutereason method and prompted
+                    // Nothing we can do here, but this should have been caught in the getcantrunreason method and prompted
                     return actions;
                 }
                 DestroyDiskAction a = new DestroyDiskAction(vdi);

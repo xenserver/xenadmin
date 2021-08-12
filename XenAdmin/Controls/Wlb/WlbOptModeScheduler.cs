@@ -192,7 +192,7 @@ namespace XenAdmin.Controls.Wlb
 
                 if (task.Enabled)
                 {
-                    //DateTime localExecuteTime;
+                    //DateTime localRunTime;
                     //WlbScheduledTask.WlbTaskDaysOfWeek localDaysOfWeek;
                     WlbScheduledTask.GetLocalTaskTimes((task.DaysOfWeek), task.ExecuteTime, out localDaysOfWeek, out localExecuteTime);
                     string toolTipText = string.Format("Change to {0} mode at {1} on {2}", WlbScheduledTask.GetTaskOptMode(task), GetTaskExecuteTime(localExecuteTime), WlbScheduledTask.DaysOfWeekL10N(localDaysOfWeek));

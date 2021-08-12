@@ -120,10 +120,10 @@ namespace XenAdmin.Commands
         }
 
         /// <summary>
-        /// Determines whether this instance can execute with the current selection context.
+        /// Determines whether this instance can run with the current selection context.
         /// </summary>
         /// <returns>
-        /// 	<c>true</c> if this instance can execute; otherwise, <c>false</c>.
+        /// 	<c>true</c> if this instance can run; otherwise, <c>false</c>.
         /// </returns>
         public bool CanExecute()
         {
@@ -131,11 +131,11 @@ namespace XenAdmin.Commands
         }
 
         /// <summary>
-        /// Determines whether this instance can execute with the current selection context.
+        /// Determines whether this instance can run with the current selection context.
         /// </summary>
         /// <param name="selection">The selection context.</param>
         /// <returns>
-        /// 	<c>true</c> if this instance can execute with the specified selection; otherwise, <c>false</c>.
+        /// 	<c>true</c> if this instance can run with the specified selection; otherwise, <c>false</c>.
         /// </returns>
         protected virtual bool CanExecuteCore(SelectedItemCollection selection)
         {
@@ -143,7 +143,7 @@ namespace XenAdmin.Commands
         }
 
         /// <summary>
-        /// Executes this Command on the current selection.
+        /// Runs this Command on the current selection.
         /// </summary>
         public void Execute()
         {
@@ -162,7 +162,7 @@ namespace XenAdmin.Commands
         }
 
         /// <summary>
-        /// Executes this Command.
+        /// Runs this Command.
         /// </summary>
         /// <param name="selection">The selection the Command should operate on.</param>
         protected virtual void ExecuteCore(SelectedItemCollection selection)
@@ -205,8 +205,8 @@ namespace XenAdmin.Commands
         public virtual string ButtonText => null;
 
         /// <summary>
-        /// Gets the tool tip text when execution is not possible. This is the
-        /// can't execute reason for single selection, and null otherwise.
+        /// Gets the tool tip text when running is not possible. This is the
+        /// can't run reason for single selection, and null otherwise.
         /// </summary>
         public virtual string DisabledToolTipText
         {
@@ -306,7 +306,7 @@ namespace XenAdmin.Commands
         }
 
         /// <summary>
-        /// Gets all of the reasons that items in the selection can't execute.
+        /// Gets all of the reasons that items in the selection can't run.
         /// </summary>
         /// <returns>A dictionary of reasons keyed by the item name.</returns>
         public Dictionary<IXenObject, string> GetCantExecuteReasons()
@@ -330,7 +330,7 @@ namespace XenAdmin.Commands
 
 
         /// <summary>
-        /// Gets the reason that the specified item from the selection cant execute. This is displayed in the error dialog.
+        /// Gets the reason that the specified item from the selection can't run. This is displayed in the error dialog.
         /// The default is "Unknown".
         /// </summary>
         protected virtual string GetCantExecuteReasonCore(IXenObject item)
@@ -339,10 +339,10 @@ namespace XenAdmin.Commands
         }
 
         /// <summary>
-        /// Gets the error dialog to be displayed if one or more items in the selection couldn't be executed. Returns null by
+        /// Gets the error dialog to be displayed if one or more items in the selection couldn't be run. Returns null by
         /// default i.e. An error dialog isn't displayed by default.
         /// </summary>
-        /// <param name="cantExecuteReasons">The reasons for why the items couldn't execute.</param>
+        /// <param name="cantExecuteReasons">The reasons for why the items couldn't run.</param>
         protected virtual CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantExecuteReasons)
         {
             return null;
@@ -356,7 +356,7 @@ namespace XenAdmin.Commands
 
         /// <summary>
         /// Gets or sets the parent control for any dialogs launched during the
-        /// execution of the command. Defaults to the MainWindow Form.
+        /// running of the command. Defaults to the MainWindow Form.
         /// </summary>
         public Control Parent
         {
