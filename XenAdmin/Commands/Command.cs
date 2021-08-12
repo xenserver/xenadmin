@@ -125,7 +125,7 @@ namespace XenAdmin.Commands
         /// <returns>
         /// 	<c>true</c> if this instance can run; otherwise, <c>false</c>.
         /// </returns>
-        public bool CanExecute()
+        public bool CanRun()
         {
             return MainWindowCommandInterface != null && CanExecuteCore(GetSelection());
         }

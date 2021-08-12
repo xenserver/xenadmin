@@ -64,7 +64,7 @@ namespace XenAdmin.Commands
                 base.DropDownItems.Clear();
 
                 Command cmd = new ShutDownVMCommand(mainWindow, selection);
-                if (cmd.CanExecute())
+                if (cmd.CanRun())
                 {
                     base.DropDownItems.Add(new CommandToolStripMenuItem(cmd));
                 }
@@ -74,7 +74,7 @@ namespace XenAdmin.Commands
                 }
 
                 cmd = new ResumeVMCommand(mainWindow, selection);
-                if (cmd.CanExecute())
+                if (cmd.CanRun())
                 {
                     base.DropDownItems.Add(new CommandToolStripMenuItem(cmd));
                 }

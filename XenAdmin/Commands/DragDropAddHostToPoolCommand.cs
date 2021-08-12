@@ -51,7 +51,7 @@ namespace XenAdmin.Commands
             if (targetPool != null)
             {
                 AddHostToPoolCommand cmd = new AddHostToPoolCommand(MainWindowCommandInterface, GetDraggedItemsAsXenObjects<Host>(), targetPool, true);
-                return cmd.CanExecute();
+                return cmd.CanRun();
             }
             return false;
         }

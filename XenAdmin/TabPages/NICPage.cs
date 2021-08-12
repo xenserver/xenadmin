@@ -315,7 +315,7 @@ namespace XenAdmin.TabPages
         private void buttonRescan_Click(object sender, EventArgs e)
         {
             RescanPIFsCommand cmd = new RescanPIFsCommand(Program.MainWindow, host);
-            if (cmd.CanExecute())
+            if (cmd.CanRun())
                 cmd.Run();
         }
 

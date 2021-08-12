@@ -58,11 +58,11 @@ namespace XenAdmin.Commands
 
             foreach (SelectedItem item in selection)
             {
-                if (new DisconnectHostCommand(MainWindowCommandInterface, item).CanExecute())
+                if (new DisconnectHostCommand(MainWindowCommandInterface, item).CanRun())
                 {
                     oneIsConnected = true;
                 }
-                else if (new DisconnectPoolCommand(MainWindowCommandInterface, item).CanExecute())
+                else if (new DisconnectPoolCommand(MainWindowCommandInterface, item).CanRun())
                 {
                     oneIsConnected = true;
                 }

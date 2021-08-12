@@ -43,7 +43,7 @@ namespace XenAdmin.Commands
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
-            return new NewVMFromTemplateCommand(MainWindowCommandInterface, selection).CanExecute() || new InstantVMFromTemplateCommand(MainWindowCommandInterface, selection).CanExecute();
+            return new NewVMFromTemplateCommand(MainWindowCommandInterface, selection).CanRun() || new InstantVMFromTemplateCommand(MainWindowCommandInterface, selection).CanRun();
         }
     }
 }

@@ -76,7 +76,7 @@ namespace XenAdmin.Commands
 
         private new void Update()
         {
-            Enabled = _command != null && _command.CanExecute();
+            Enabled = _command != null && _command.CanRun();
             base.Enabled = DesignMode || Enabled;
 
             if (_command != null)

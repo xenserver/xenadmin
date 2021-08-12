@@ -127,7 +127,7 @@ namespace XenAdmin.Alerts
             get
             {
                 var cmd = new InstallCertificateCommand(Program.MainWindow, XenObject as Host);
-                if (cmd.CanExecute())
+                if (cmd.CanRun())
                     return () => cmd.Run();
                 return null;
             }

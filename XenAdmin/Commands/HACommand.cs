@@ -256,8 +256,8 @@ namespace XenAdmin.Commands
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
-            return new HAConfigureCommand(MainWindowCommandInterface, selection).CanExecute() ||
-                   new HADisableCommand(MainWindowCommandInterface, selection).CanExecute();
+            return new HAConfigureCommand(MainWindowCommandInterface, selection).CanRun() ||
+                   new HADisableCommand(MainWindowCommandInterface, selection).CanRun();
         }
 
         protected override string GetCantExecuteReasonCore(IXenObject item)

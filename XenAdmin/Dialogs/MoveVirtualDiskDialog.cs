@@ -130,7 +130,7 @@ namespace XenAdmin.Dialogs
             var cmd = new MigrateVirtualDiskCommand(mainWindow, selection);
             var con = selection.GetConnectionOfFirstItem();
 
-            if (cmd.CanExecute() && !Helpers.FeatureForbidden(con, Host.RestrictCrossPoolMigrate))
+            if (cmd.CanRun() && !Helpers.FeatureForbidden(con, Host.RestrictCrossPoolMigrate))
                 return cmd;
 
             return new MoveVirtualDiskCommand(mainWindow, selection);

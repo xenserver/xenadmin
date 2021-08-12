@@ -365,7 +365,7 @@ namespace XenAdmin.Alerts
 
 					case Message.MessageType.PBD_PLUG_FAILED_ON_SERVER_START:
 						var repairSrCommand = new RepairSRCommand(Program.MainWindow, XenObject.Connection.Cache.SRs);
-						if (repairSrCommand.CanExecute())
+						if (repairSrCommand.CanRun())
 							return () => repairSrCommand.Run();
 						return null;
 					default:

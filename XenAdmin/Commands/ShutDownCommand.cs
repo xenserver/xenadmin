@@ -59,7 +59,7 @@ namespace XenAdmin.Commands
         {
             Command cmd = new ShutDownHostCommand(MainWindowCommandInterface, selection);
 
-            if (cmd.CanExecute())
+            if (cmd.CanRun())
             {
                 cmd.Run();
             }
@@ -67,7 +67,7 @@ namespace XenAdmin.Commands
             {
                 cmd = new ShutDownVMCommand(MainWindowCommandInterface, selection);
 
-                if (cmd.CanExecute())
+                if (cmd.CanRun())
                 {
                     cmd.Run();
                 }
@@ -76,7 +76,7 @@ namespace XenAdmin.Commands
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
-            return new ShutDownVMCommand(MainWindowCommandInterface, selection).CanExecute() || new ShutDownHostCommand(MainWindowCommandInterface, selection).CanExecute();
+            return new ShutDownVMCommand(MainWindowCommandInterface, selection).CanRun() || new ShutDownHostCommand(MainWindowCommandInterface, selection).CanRun();
         }
 
         public override Image ToolBarImage => Images.StaticImages._001_ShutDown_h32bit_24;

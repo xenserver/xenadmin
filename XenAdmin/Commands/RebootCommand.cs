@@ -53,7 +53,7 @@ namespace XenAdmin.Commands
         {
             Command cmd = new RebootHostCommand(MainWindowCommandInterface, selection);
 
-            if (cmd.CanExecute())
+            if (cmd.CanRun())
             {
                 cmd.Run();
             }
@@ -61,7 +61,7 @@ namespace XenAdmin.Commands
             {
                 cmd = new RebootVMCommand(MainWindowCommandInterface, selection);
 
-                if (cmd.CanExecute())
+                if (cmd.CanRun())
                 {
                     cmd.Run();
                 }
@@ -84,7 +84,7 @@ namespace XenAdmin.Commands
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
-            return new RebootVMCommand(MainWindowCommandInterface, selection).CanExecute() || new RebootHostCommand(MainWindowCommandInterface, selection).CanExecute();
+            return new RebootVMCommand(MainWindowCommandInterface, selection).CanRun() || new RebootHostCommand(MainWindowCommandInterface, selection).CanRun();
         }
 
         public override Image ToolBarImage => Images.StaticImages._001_Reboot_h32bit_24;

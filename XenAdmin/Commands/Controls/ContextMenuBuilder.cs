@@ -548,7 +548,7 @@ namespace XenAdmin.Commands
                 items.AddIfEnabled(new RemoveHostCrashDumpsCommand(mainWindow, selection));
 
                 var cmd = new RemoveHostFromPoolCommand(mainWindow, selection);
-                if (cmd.CanExecute())
+                if (cmd.CanRun())
                 {
                     items.AddSeparator();
                     items.Add(cmd);
@@ -707,7 +707,7 @@ namespace XenAdmin.Commands
                 items.AddSeparator();
                 
                 var haItem = new CommandToolStripMenuItem(new HACommand(mainWindow, selection), true);
-                if (haItem.Command.CanExecute())
+                if (haItem.Command.CanRun())
                 {
                     haItem.DropDownItems.Add(new CommandToolStripMenuItem(new HAConfigureCommand(mainWindow, selection), true));
                     haItem.DropDownItems.Add(new CommandToolStripMenuItem(new HADisableCommand(mainWindow, selection), true));
@@ -718,7 +718,7 @@ namespace XenAdmin.Commands
                 items.AddIfEnabled(new VMGroupCommand<VM_appliance>(mainWindow, selection));
 
                 var drItem = new CommandToolStripMenuItem(new DRCommand(mainWindow, selection), true);
-                if (drItem.Command.CanExecute())
+                if (drItem.Command.CanRun())
                 {
                     drItem.DropDownItems.Add(new CommandToolStripMenuItem(
                                                  new DRConfigureCommand(mainWindow, selection), true));

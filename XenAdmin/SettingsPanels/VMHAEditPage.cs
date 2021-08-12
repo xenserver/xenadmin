@@ -576,7 +576,7 @@ namespace XenAdmin.SettingsPanels
 				return;
 			
             var cmd = new HAConfigureCommand(Program.MainWindow, pool);
-            if (cmd.CanExecute())
+            if (cmd.CanRun())
                 cmd.Run();
 		}
 

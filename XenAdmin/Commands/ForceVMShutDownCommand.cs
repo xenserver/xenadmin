@@ -239,7 +239,7 @@ namespace XenAdmin.Commands
         {
             get
             {
-                return CanExecute() && GetSelection().AllItemsAre<VM>(ShowOnMainToolBarInternal);
+                return CanRun() && GetSelection().AllItemsAre<VM>(ShowOnMainToolBarInternal);
             }
         }
 

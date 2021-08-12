@@ -119,8 +119,8 @@ namespace XenAdmin.Commands
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
-            return new DRConfigureCommand(MainWindowCommandInterface, selection).CanExecute()
-                   || new DisasterRecoveryCommand(MainWindowCommandInterface, selection).CanExecute();
+            return new DRConfigureCommand(MainWindowCommandInterface, selection).CanRun()
+                   || new DisasterRecoveryCommand(MainWindowCommandInterface, selection).CanRun();
         }
 
         public override string ContextMenuText

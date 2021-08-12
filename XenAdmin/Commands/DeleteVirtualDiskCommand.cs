@@ -327,7 +327,7 @@ namespace XenAdmin.Commands
                 {
                     //Check if we can unplug
                     DeactivateVBDCommand cmd = new DeactivateVBDCommand(Program.MainWindow, vbd);
-                    if (!AllowRunningVMDelete || !cmd.CanExecute())
+                    if (!AllowRunningVMDelete || !cmd.CanRun())
                         return false;
                 }
             }
@@ -405,7 +405,7 @@ namespace XenAdmin.Commands
                         return string.Format(Messages.CANNOT_DELETE_VDI_ACTIVE_ON, vm.Name());
 
                     DeactivateVBDCommand cmd = new DeactivateVBDCommand(Program.MainWindow, vbd);
-                    if (!cmd.CanExecute())
+                    if (!cmd.CanRun())
                     {
                         var reason = cmd.GetCantExecuteReasons().Values.FirstOrDefault();
 

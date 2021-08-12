@@ -61,7 +61,7 @@ namespace XenAdmin.Commands
             var cmd = new CrossPoolMoveVMCommand(MainWindowCommandInterface, selection);
             var con = selection.GetConnectionOfFirstItem();
 
-            if (cmd.CanExecute() && !Helpers.FeatureForbidden(con, Host.RestrictCrossPoolMigrate))
+            if (cmd.CanRun() && !Helpers.FeatureForbidden(con, Host.RestrictCrossPoolMigrate))
             {
                 cmd.Run();
             }
@@ -75,7 +75,7 @@ namespace XenAdmin.Commands
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
             return selection.AllItemsAre<VM>(CBTDisabled) &&
-                   (new CrossPoolMoveVMCommand(MainWindowCommandInterface, selection).CanExecute() ||
+                   (new CrossPoolMoveVMCommand(MainWindowCommandInterface, selection).CanRun() ||
                    selection.ContainsOneItemOfType<VM>(CanExecute));
         }
 

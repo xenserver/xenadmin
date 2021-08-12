@@ -116,7 +116,7 @@ namespace XenAdmin.Commands
                         continue;
 
                     DeactivateVBDCommand cmd = new DeactivateVBDCommand(Program.MainWindow, vbd);
-                    if (!cmd.CanExecute())
+                    if (!cmd.CanRun())
                         return false;
                 }
             }
@@ -139,7 +139,7 @@ namespace XenAdmin.Commands
                         continue;
 
                     DeactivateVBDCommand cmd = new DeactivateVBDCommand(Program.MainWindow, vbd);
-                    if (!cmd.CanExecute())
+                    if (!cmd.CanRun())
                     {
                         var reasons = cmd.GetCantExecuteReasons();
                         return reasons.Count > 0 ? reasons.ElementAt(0).Value : Messages.UNKNOWN;

@@ -60,7 +60,7 @@ namespace XenAdmin.Commands
             _menuImage = Images.StaticImages._000_ServerDisconnected_h32bit_16;
             _recommendation = recommendation;
 
-            if (CanExecute())
+            if (CanRun())
             {
                 _starRating = _recommendation.StarRating;
                 _menuImage = Images.StaticImages._000_TreeConnected_h32bit_16;

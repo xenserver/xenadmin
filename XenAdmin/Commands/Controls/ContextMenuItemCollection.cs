@@ -175,7 +175,7 @@ namespace XenAdmin.Commands
 
         public void AddIfEnabled(Command command, bool bold = false)
         {
-            if (command.CanExecute())
+            if (command.CanRun())
             {
                 Add(command, bold);
             }

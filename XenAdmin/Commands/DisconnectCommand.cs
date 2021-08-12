@@ -76,7 +76,7 @@ namespace XenAdmin.Commands
         /// <returns>false if the user cancels the disconnect.</returns>
         public new bool Run()
         {
-            return CanExecute() && Run(_connection, _prompt);
+            return CanRun() && Run(_connection, _prompt);
         }
 
         protected override void ExecuteCore(SelectedItemCollection selection)

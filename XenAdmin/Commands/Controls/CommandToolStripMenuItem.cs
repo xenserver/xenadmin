@@ -81,7 +81,7 @@ namespace XenAdmin.Commands
         private void CommandToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
         {
             // CA-42123 check command can execute again before opening dropdown.
-            if (Command.CanExecute())
+            if (Command.CanRun())
             {
                 OnDropDownOpening(EventArgs.Empty);
             }
@@ -156,7 +156,7 @@ namespace XenAdmin.Commands
 
         protected virtual void Update()
         {
-            Enabled = _command != null && _command.CanExecute();
+            Enabled = _command != null && _command.CanRun();
             base.Enabled = DesignMode || Enabled;
 
             if (_command != null)

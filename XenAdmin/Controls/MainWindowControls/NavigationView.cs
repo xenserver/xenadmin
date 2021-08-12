@@ -552,11 +552,11 @@ namespace XenAdmin.Controls.MainWindowControls
                 return;
 
             Command cmd = new CollapseChildTreeNodesCommand(Program.MainWindow, nodes);
-            if (cmd.CanExecute())
+            if (cmd.CanRun())
                 TreeContextMenu.Items.Insert(insertIndex, new CommandToolStripMenuItem(cmd, true));
 
             cmd = new ExpandTreeNodesCommand(Program.MainWindow, nodes);
-            if (cmd.CanExecute())
+            if (cmd.CanRun())
                 TreeContextMenu.Items.Insert(insertIndex, new CommandToolStripMenuItem(cmd, true));
         }
 
@@ -572,12 +572,12 @@ namespace XenAdmin.Controls.MainWindowControls
 
             Command cmd = new RemoveFromFolderCommand(Program.MainWindow, nodes);
 
-            if (cmd.CanExecute())
+            if (cmd.CanRun())
                 TreeContextMenu.Items.Insert(insertIndex, new CommandToolStripMenuItem(cmd, true));
 
             cmd = new UntagCommand(Program.MainWindow, nodes);
 
-            if (cmd.CanExecute())
+            if (cmd.CanRun())
                 TreeContextMenu.Items.Insert(insertIndex, new CommandToolStripMenuItem(cmd, true));
         }
 
@@ -632,7 +632,7 @@ namespace XenAdmin.Controls.MainWindowControls
                 }
             }
 
-            if (command != null && command.CanExecute())
+            if (command != null && command.CanRun())
             {
                 command.Run();
             }
@@ -785,7 +785,7 @@ namespace XenAdmin.Controls.MainWindowControls
 
                 case Keys.F2:
                     var cmd = new PropertiesCommand(Program.MainWindow, Program.MainWindow.SelectionManager.Selection);
-                    if (cmd.CanExecute())
+                    if (cmd.CanRun())
                         cmd.Run();
                     break;
             }
@@ -849,7 +849,7 @@ namespace XenAdmin.Controls.MainWindowControls
                     cmd = new ResumeVMCommand(Program.MainWindow, Program.MainWindow.SelectionManager.Selection);
                 }
 
-                if (cmd != null && cmd.CanExecute())
+                if (cmd != null && cmd.CanRun())
                 {
                     treeView.SelectedNode = e.Node;
                     cmd.Run();
@@ -861,7 +861,7 @@ namespace XenAdmin.Controls.MainWindowControls
             if (host != null)
             {
                 Command cmd = new PowerOnHostCommand(Program.MainWindow, host);
-                if (cmd.CanExecute())
+                if (cmd.CanRun())
                 {
                     treeView.SelectedNode = e.Node;
                     cmd.Run();

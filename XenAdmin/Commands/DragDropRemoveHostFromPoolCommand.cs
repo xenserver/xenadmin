@@ -50,7 +50,7 @@ namespace XenAdmin.Commands
             // user must drag to XenCenter Node
             if (draggedHosts.Count > 0 && TargetNode != null && TargetNode.Tag == null)
             {
-                return new RemoveHostFromPoolCommand(MainWindowCommandInterface, draggedHosts).CanExecute();
+                return new RemoveHostFromPoolCommand(MainWindowCommandInterface, draggedHosts).CanRun();
             }
             return false;
         }
