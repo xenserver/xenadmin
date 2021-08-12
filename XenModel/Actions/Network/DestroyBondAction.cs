@@ -54,14 +54,14 @@ namespace XenAdmin.Actions
         private readonly List<PIF> Masters = new List<PIF>();
 
         /// <summary>
-        /// All slaves under each bond in Bonds.  These will be plugged at the end, in order to
+        /// All members under each bond in Bonds.  These will be plugged at the end, in order to
         /// get metrics like the carrier flag, if they haven't already been brought up as a
         /// management interface.
         /// </summary>
         private readonly List<PIF> Slaves = new List<PIF>();
 
         /// <summary>
-        /// The first slave (ordered by name) under each master.
+        /// The first member (ordered by name) under each master.
         /// </summary>
         private readonly Dictionary<PIF, PIF> FirstSlaves = new Dictionary<PIF, PIF>();
 

@@ -285,8 +285,8 @@ namespace XenAdmin
                     connection.SaveDisconnected = entryComps.Length > 4 && entryComps[4] == DISCONNECTED;
                     connection.FriendlyName = entryComps.Length > 5 ? entryComps[5] : entryComps[1];
 
-                    // We save a comma-separated list of hostnames of each of the slaves.
-                    // This enables us to connect to a former slave in the event of master failover while the GUI isn't running.
+                    // We save a comma-separated list of hostnames of each of the supporters.
+                    // This enables us to connect to a former supporter in the event of master failover while the GUI isn't running.
                     if (entryComps.Length == 7 && entryComps[6] != "")
                     {
                         connection.PoolMembers = new List<string>(entryComps[6].Split(new char[] { ',' }));

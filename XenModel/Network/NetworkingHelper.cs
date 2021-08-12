@@ -202,7 +202,7 @@ namespace XenAdmin.Network
             }
 
             // We can still have elements left in s2.  This is OK though -- bonds are considered to
-            // match if one has a subset of the slaves of the other.  This is why we force
+            // match if one has a subset of the bond members of the other.  This is why we force
             // s1.Count <= s2.Count above.
 
             return true;

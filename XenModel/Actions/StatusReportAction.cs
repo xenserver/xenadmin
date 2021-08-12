@@ -133,7 +133,7 @@ namespace XenAdmin.Actions
                 else if (host.IsMaster())
                     info = string.Format("Server '{0}' is a master of pool '{1}'", host.Name(), pool.Name());
                 else
-                    info = string.Format("Server '{0}' is a slave of pool '{1}'", host.Name(), pool.Name());
+                    info = string.Format("Server '{0}' is a supporter of pool '{1}'", host.Name(), pool.Name());
 
                 mastersInfo.Add(info);
             }

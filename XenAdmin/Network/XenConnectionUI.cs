@@ -53,7 +53,7 @@ namespace XenAdmin.Network
         /// <param name="owner">The form that connecting dialogs will be displayed in front of.
         /// May be null, in which case Program.MainWindow is used.</param>
         /// <param name="initiateMasterSearch">If true, when connection to the master fails we will start trying to connect to
-        /// each remembered slave in turn.</param>
+        /// each remembered supporter in turn.</param>
         public static void BeginConnect(IXenConnection connection, bool interactive, Form owner, bool initiateMasterSearch)
         {
             Program.AssertOnEventThread();

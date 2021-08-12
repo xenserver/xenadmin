@@ -228,7 +228,7 @@ namespace XenAdmin.Dialogs
 
                 log.DebugFormat("Creating new pool {0} ({1}) with master {2}", poolName, poolDescription, Helpers.GetName(master));
                 foreach (Host slave in slaves)
-                    log.DebugFormat("  Slave {0}", Helpers.GetName(slave));
+                    log.DebugFormat("Supporter {0}", Helpers.GetName(slave));
 
                 new CreatePoolAction(master, slaves, poolName, poolDescription, AddHostToPoolCommand.GetAdPrompt, 
                     AddHostToPoolCommand.NtolDialog, ApplyLicenseEditionCommand.ShowLicensingFailureDialog).RunAsync();
@@ -360,7 +360,7 @@ namespace XenAdmin.Dialogs
             foreach (ConnectionWrapperWithMoreStuff c in connections)
             {
                 if (c.AllowedAsSlave &&
-                    slaves.Find(slave => (c.Connection == slave.Connection)) != null)  // one of the slaves is the connection we're looking at
+                    slaves.Find(slave => (c.Connection == slave.Connection)) != null)  // one of the supporters is the connection we're looking at
                 {
                     c.State = CheckState.Checked;
                 }

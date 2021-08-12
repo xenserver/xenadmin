@@ -72,7 +72,7 @@ namespace XenAdmin.Actions
         }
 
         /// <summary>
-        /// Mask the CPUs of any slaves that need masking to join the pool
+        /// Mask the CPUs of any supporters that need masking to join the pool
         /// </summary>
         /// <returns>Whether any CPUs were masked</returns>
         protected static bool FixCpus(Pool pool, List<Host> hostsToCpuMask, Func<HostAbstractAction, Pool, long, long, bool> acceptNTolChanges)

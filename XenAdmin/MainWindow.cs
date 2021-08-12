@@ -928,7 +928,7 @@ namespace XenAdmin
                 return;
             }
 
-            //check the pool has no slaves earlier than the lowest supported version 
+            //check the pool has no supporters earlier than the lowest supported version 
             //(could happen if trying to connect to a partially upgraded pool where
             //the newest hosts have been upgraded using a earlier XenCenter)
 

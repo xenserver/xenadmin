@@ -460,7 +460,7 @@ namespace XenAdmin.Network
                                 }
                                 break;
                             case Failure.HOST_IS_SLAVE:
-                                // we know it is a slave so there there is no need to try and connect again, we need to connect to the master
+                                // we know it is a supporter so there there is no need to try and connect again, we need to connect to the master
                             case Failure.RBAC_PERMISSION_DENIED:
                                 // No point retrying this, the user needs the read only role at least to log in
                             case Failure.HOST_UNKNOWN_TO_MASTER:
@@ -585,7 +585,7 @@ namespace XenAdmin.Network
         /// 
         /// </summary>
         /// <param name="initiateMasterSearch">If true, if connection to the master fails we will start trying to connect to
-        /// each remembered slave in turn.</param>
+        /// each remembered supporter in turn.</param>
         /// <param name="promptForNewPassword">A function that prompts the user for the changed password for a server.</param>
         public void BeginConnect(bool initiateMasterSearch, Func<IXenConnection, string, bool> promptForNewPassword)
         {
@@ -1457,7 +1457,7 @@ namespace XenAdmin.Network
                         {
                             if (f.ErrorDescription[0] == XenAPI.Failure.HOST_IS_SLAVE)
                             {
-                                log.DebugFormat("Found a slave of {0} at {1}; redirecting to the master at {2}",
+                                log.DebugFormat("Found a member of {0} at {1}; redirecting to the master at {2}",
                                                 LastMasterHostname, Hostname, f.ErrorDescription[1]);
                                 Hostname = f.ErrorDescription[1];
                                 OnConnectionMessageChanged(string.Format(Messages.CONNECTION_REDIRECTING, LastMasterHostname, Hostname));
@@ -1465,13 +1465,13 @@ namespace XenAdmin.Network
                             }
                             else if (f.ErrorDescription[0] == XenAPI.Failure.HOST_STILL_BOOTING)
                             {
-                                log.DebugFormat("Found a slave of {0} at {1}, but it's still booting; trying the next pool member",
+                                log.DebugFormat("Found a member of {0} at {1}, but it's still booting; trying the next pool member",
                                                 LastMasterHostname, Hostname);
                                 MaybeStartNextSlaveTimer(reason, error);
                             }
                             else
                             {
-                                log.DebugFormat("Found a slave of {0} at {1}, but got a failure; trying the next pool member",
+                                log.DebugFormat("Found a member of {0} at {1}, but got a failure; trying the next pool member",
                                                 LastMasterHostname, Hostname);
                                 MaybeStartNextSlaveTimer(reason, error);
                             }
@@ -1573,7 +1573,7 @@ namespace XenAdmin.Network
                     PoolMembers.Clear();
                     PoolMembers.AddRange(members);
                     PoolMemberIndex = 0;
-                    // Don't reconnect to the master straight away, try a slave first
+                    // Don't reconnect to the master straight away, try a supporter first
                     if (master != null && PoolMembers[0] == master.address && PoolMembers.Count > 1)
                     {
                         PoolMemberIndex = 1;
@@ -1640,8 +1640,8 @@ namespace XenAdmin.Network
         /// </summary>
         private const int SEARCH_NEW_MASTER_TIMEOUT_MS = 60 * 1000;
         /// <summary>
-        /// When HA is enabled, and going through each of the slaves to try and find the new master, the time between failing
-        /// to connect to one slave and trying to connect to the next in the list.
+        /// When HA is enabled, and going through each of the supporters to try and find the new master, the time between failing
+        /// to connect to one supporter and trying to connect to the next in the list.
         /// </summary>
         private const int SEARCH_NEXT_SLAVE_TIMEOUT_MS = 15 * 1000;
         /// <summary>

@@ -116,12 +116,12 @@ namespace XenAdmin.Actions
             {
                 int inc = (Pool == null ? 100 : 50) / (newPIFs.Count + downPIFs.Count + (downManagement != null ? 1 : 0));
                 int progress = PercentComplete;
-                
-                // We bring up / reconfigure the interfaces on the slaves.
+
+                // We bring up / reconfigure the interfaces on the supporters.
                 // Then the master.
-                // Then we reconfigure the management interface on the slaves.
+                // Then we reconfigure the management interface on the supporters.
                 // Then the master.
-                // Then we bring down the other interfaces on the slaves.
+                // Then we bring down the other interfaces on the supporters.
                 // And then the master.
                 // If Pool isn't set, then we're just doing this for the one host.
 

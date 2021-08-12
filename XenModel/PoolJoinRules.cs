@@ -38,7 +38,7 @@ using System.Linq;
 namespace XenAdmin.Core
 {
     /// <summary>
-    /// Encapsulates whether a slave can join a given pool
+    /// Encapsulates whether a supporter can join a given pool
     /// </summary>
     public static class PoolJoinRules
     {
@@ -290,8 +290,8 @@ namespace XenAdmin.Core
             return Host.RestrictPooling(host);
         }
 
-        // If CompatibleCPUs(slave, master, false) is true, the CPUs can be pooled without masking first.
-        // If CompatibleCPUs(slave, master, true) is true but CompatibleCPUs(slave, master, false) is false,
+        // If CompatibleCPUs(supporter, master, false) is true, the CPUs can be pooled without masking first.
+        // If CompatibleCPUs(supporter, master, true) is true but CompatibleCPUs(slave, master, false) is false,
         // the CPUs can be pooled but only if they are masked first.
         public static bool CompatibleCPUs(Host slave, Host master, bool allowCpuLevelling)
         {
@@ -304,7 +304,7 @@ namespace XenAdmin.Core
             {
                 // Host.cpu_info is supported
                 // From this point on, it is only necessary to have matching vendor and features
-                // (after masking the slave, if allowed).
+                // (after masking the supporter, if allowed).
                 if (slave_cpu_info["vendor"] != master_cpu_info["vendor"])
                     return false;
 
@@ -425,7 +425,7 @@ namespace XenAdmin.Core
 
         /// <summary>
         /// Check whether all updates that request homogeneity are in fact homogeneous
-        /// between master and slave. This is used in CanJoinPool and prevents the pool from being created
+        /// between master and supporter. This is used in CanJoinPool and prevents the pool from being created
         /// </summary>
         private static bool DifferentHomogeneousUpdates(Host slave, Host master)
         {
@@ -455,7 +455,7 @@ namespace XenAdmin.Core
             if (slave.external_auth_type != master.external_auth_type ||
                 slave.external_auth_service_name != master.external_auth_service_name)
             {
-                // if the slave is AD free and we are allowing the configure then we can solve this
+                // if the supporter is AD free and we are allowing the configure then we can solve this
                 if (slave.external_auth_type == Auth.AUTH_TYPE_NONE && allowSlaveConfig)
                     return true;
 
@@ -598,7 +598,7 @@ namespace XenAdmin.Core
             Dictionary<string, string> pool_cpu_info = pool.cpu_info;
             if (!Helper.AreEqual2(slave_cpu_info, null) && !Helper.AreEqual2(pool_cpu_info, null))
             {
-                // if pool has less features than slave, then slave will be down-levelled
+                // if pool has less features than supporter, then supporter will be down-levelled
                 return FewerFeatures(pool_cpu_info, slave_cpu_info);
             }
             return false;
@@ -617,7 +617,7 @@ namespace XenAdmin.Core
             Dictionary<string, string> pool_cpu_info = pool.cpu_info;
             if (!Helper.AreEqual2(slave_cpu_info, null) && !Helper.AreEqual2(pool_cpu_info, null))
             {
-                // if slave has less features than pool, then pool will be down-levelled
+                // if supporter has less features than pool, then pool will be down-levelled
                 return FewerFeatures(slave_cpu_info, pool_cpu_info);
             }
             return false;
@@ -673,7 +673,7 @@ namespace XenAdmin.Core
 
         public static bool HasCompatibleManagementInterface(IXenConnection slaveConnection)
         {
-            /* if there are non physical pifs present then the slave should have 
+            /* if there are non physical pifs present then the supporter should have 
              * only one VLAN and it has to be the management interface. 
              * Bonds and cross server private networks are not allowed */
 
