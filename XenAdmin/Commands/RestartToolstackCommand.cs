@@ -75,17 +75,17 @@ namespace XenAdmin.Commands
             return selection.AllItemsAre<Host>() && selection.Any(item => ((Host)item.XenObject).IsLive());
         }
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
             Host host = item as Host;
             
             if (host == null)
-                return base.GetCantExecuteReasonCore(item);
+                return base.GetCantRunReasonCore(item);
 
             if (!host.IsLive())
                 return Messages.HOST_NOT_LIVE;
 
-            return base.GetCantExecuteReasonCore(item);
+            return base.GetCantRunReasonCore(item);
         }
 
         public override string MenuText => Messages.MAINWINDOW_RESTART_TOOLSTACK;

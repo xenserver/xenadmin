@@ -177,9 +177,9 @@ namespace XenAdmin.Commands
 
         public override Image MenuImage => Images.StaticImages._000_Folder_open_h32bit_16;
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
-            return ConnectionAvailable() ? base.GetCantExecuteReasonCore(item) : Messages.FOLDER_NO_CONNECTION;
+            return ConnectionAvailable() ? base.GetCantRunReasonCore(item) : Messages.FOLDER_NO_CONNECTION;
         }
     }
 }

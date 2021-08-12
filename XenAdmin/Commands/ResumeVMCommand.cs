@@ -118,19 +118,19 @@ namespace XenAdmin.Commands
 
         public override Keys ShortcutKeys => Keys.Control | Keys.Y;
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
             VM vm = item as VM;
             if (vm == null)
             {
-                return base.GetCantExecuteReasonCore(item);
+                return base.GetCantRunReasonCore(item);
             }
             if (vm.power_state != vm_power_state.Suspended)
             {
                 return Messages.VM_NOT_SUSPENDED;
             }
 
-            return GetCantExecuteNoToolsOrDriversReasonCore(item) ?? base.GetCantExecuteReasonCore(item);
+            return GetCantExecuteNoToolsOrDriversReasonCore(item) ?? base.GetCantRunReasonCore(item);
         }
 
         protected override AsyncAction BuildAction(VM vm)

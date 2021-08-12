@@ -119,12 +119,12 @@ namespace XenAdmin.Commands
             return new CommandErrorDialog(Messages.ERROR_DIALOG_FORGET_SR_TITLE, Messages.ERROR_DIALOG_FORGET_SR_TEXT, cantExecuteReasons);
         }
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
             SR sr = item as SR;
             if (sr == null)
             {
-                return base.GetCantExecuteReasonCore(item);
+                return base.GetCantRunReasonCore(item);
             }
             if (sr.HasRunningVMs())
             {
@@ -138,7 +138,7 @@ namespace XenAdmin.Commands
             {
                 return Messages.SR_ACTION_IN_PROGRESS;
             }
-            return base.GetCantExecuteReasonCore(item);
+            return base.GetCantRunReasonCore(item);
         }
 
         protected override string ConfirmationDialogYesButtonLabel => Messages.MESSAGEBOX_FORGET_SR_CONTINUE_YES_BUTTON_LABEL;

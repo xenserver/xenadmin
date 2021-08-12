@@ -138,12 +138,12 @@ namespace XenAdmin.Commands
 
         public override string ShortcutKeyDisplayString => Messages.MAINWINDOW_CTRL_Y;
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
             VM vm = item as VM;
             if (vm == null)
             {
-                return base.GetCantExecuteReasonCore(item);
+                return base.GetCantRunReasonCore(item);
             }
             if (vm.power_state == vm_power_state.Halted)
             {
@@ -165,7 +165,7 @@ namespace XenAdmin.Commands
                 return Messages.VM_HAS_GPU_PASSTHROUGH;
             }
 
-            return base.GetCantExecuteReasonCore(item);
+            return base.GetCantRunReasonCore(item);
         }
 
         protected override AsyncAction BuildAction(VM vm)

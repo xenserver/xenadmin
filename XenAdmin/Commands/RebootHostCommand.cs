@@ -164,18 +164,18 @@ namespace XenAdmin.Commands
             return null;
         }
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
             Host host = item as Host;
             if (host == null)
             {
-                return base.GetCantExecuteReasonCore(item);
+                return base.GetCantRunReasonCore(item);
             }
             if (!host.IsLive())
             {
                 return Messages.HOST_NOT_LIVE;
             }
-            return base.GetCantExecuteReasonCore(item);
+            return base.GetCantRunReasonCore(item);
         }
 
         public override string ContextMenuText => Messages.MAINWINDOW_REBOOT_HOST_CONTEXT_MENU;

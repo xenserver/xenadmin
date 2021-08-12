@@ -351,11 +351,11 @@ namespace XenAdmin.Commands
             return true;
         }
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
             VDI vdi = item as VDI;
             if (vdi == null)
-                return base.GetCantExecuteReasonCore(item);
+                return base.GetCantRunReasonCore(item);
 
             SR sr = vdi.Connection.Resolve<SR>(vdi.SR);
             if (sr == null)
@@ -425,7 +425,7 @@ namespace XenAdmin.Commands
                     : vdiType == VDI.FriendlyType.ISO ? Messages.CANNOT_DELETE_ISO_GENERIC
                     : Messages.CANNOT_DELETE_VD_GENERIC;
 
-            return base.GetCantExecuteReasonCore(item);
+            return base.GetCantRunReasonCore(item);
         }
 
         protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantExecuteReasons)

@@ -96,11 +96,11 @@ namespace XenAdmin.Commands
             return true;
         }
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
             VDI vdi = item as VDI;
             if (vdi == null)
-                return base.GetCantExecuteReasonCore(item);
+                return base.GetCantRunReasonCore(item);
 
             if (vdi.is_a_snapshot)
                 return Messages.CANNOT_MOVE_VDI_IS_SNAPSHOT;
@@ -117,13 +117,13 @@ namespace XenAdmin.Commands
 
             SR sr = vdi.Connection.Resolve(vdi.SR);
             if (sr == null)
-                return base.GetCantExecuteReasonCore(item);
+                return base.GetCantRunReasonCore(item);
             if (sr.HBALunPerVDI())
                 return Messages.UNSUPPORTED_SR_TYPE;
             if (!sr.SupportsStorageMigration())
                 return Messages.UNSUPPORTED_SR_TYPE;
 
-            return base.GetCantExecuteReasonCore(item);
+            return base.GetCantRunReasonCore(item);
         }
     }
 }

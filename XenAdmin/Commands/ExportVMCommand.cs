@@ -232,11 +232,11 @@ namespace XenAdmin.Commands
             }
         }
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
             VM vm = item as VM;
             if (vm == null)
-                return base.GetCantExecuteReasonCore(item);
+                return base.GetCantRunReasonCore(item);
             if (vm.power_state == vm_power_state.Running)
                 return Messages.MAINWINDOW_EXPORT_VM_AS_BACKUP_TOOLTIP;
 

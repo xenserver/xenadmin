@@ -179,12 +179,12 @@ namespace XenAdmin.Commands
             return null;
         }
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
             Host host = item as Host;
             if (host == null)
             {
-                return base.GetCantExecuteReasonCore(item);
+                return base.GetCantRunReasonCore(item);
             }
             if (!host.IsLive())
             {
@@ -194,7 +194,7 @@ namespace XenAdmin.Commands
             {
                 return Messages.HOST_ACTION_IN_PROGRESS;
             }
-            return base.GetCantExecuteReasonCore(item);
+            return base.GetCantRunReasonCore(item);
         }
 
         protected override string ConfirmationDialogYesButtonLabel => Messages.CONFIRM_SHUTDOWN_SERVER_YES_BUTTON_LABEL;

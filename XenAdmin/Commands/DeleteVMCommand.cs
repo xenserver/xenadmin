@@ -130,12 +130,12 @@ namespace XenAdmin.Commands
             }
         }
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
             VM vm = item as VM;
             if (vm == null)
             {
-                return base.GetCantExecuteReasonCore(item);
+                return base.GetCantRunReasonCore(item);
             }
             if (!vm.is_a_template && vm.power_state != vm_power_state.Halted)
             {
@@ -145,7 +145,7 @@ namespace XenAdmin.Commands
             {
                 return string.Format(Messages.CANNOT_DELETE_DEFAULT_TEMPLATE, BrandManager.ProductBrand);
             }
-            return base.GetCantExecuteReasonCore(item);
+            return base.GetCantRunReasonCore(item);
         }
     }
 }

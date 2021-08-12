@@ -166,18 +166,18 @@ namespace XenAdmin.Commands
             return new CommandErrorDialog(ErrorDialogTitle, ErrorDialogText, cantExecuteReasons);
         }
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
             VM vm = item as VM;
             if (vm == null)
-                return base.GetCantExecuteReasonCore(item);
+                return base.GetCantRunReasonCore(item);
 
             if (_recommendation.CantExecuteReasons.ContainsKey(vm))
             {
                 return _recommendation.CantExecuteReasons[vm];
             }
 
-            return base.GetCantExecuteReasonCore(item);
+            return base.GetCantRunReasonCore(item);
         }
     }
 }

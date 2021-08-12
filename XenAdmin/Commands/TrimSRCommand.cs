@@ -79,13 +79,13 @@ namespace XenAdmin.Commands
 
         public override string MenuText => Messages.MAINWINDOW_TRIM_SR;
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
             if (item is SR sr && !sr.SupportsTrim())
             {
                 return Messages.TOOLTIP_SR_TRIM_UNSUPPORTED;
             }
-            return base.GetCantExecuteReasonCore(item);
+            return base.GetCantRunReasonCore(item);
         }
 
         public override string DisabledToolTipText

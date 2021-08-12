@@ -120,7 +120,7 @@ namespace XenAdmin.Commands
             RunMultipleActions(actions, Messages.REMOVING_SERVERS_FROM_POOL, Messages.POOLCREATE_REMOVING, Messages.POOLCREATE_REMOVED, true);
         }
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
             if (item is Host host)
             {
@@ -134,7 +134,7 @@ namespace XenAdmin.Commands
                     return Messages.NEWPOOL_HAS_RUNNING_VMS;
             }
 
-            return base.GetCantExecuteReasonCore(item);
+            return base.GetCantRunReasonCore(item);
         }
 
         public static bool CanExecute(Host host)

@@ -86,7 +86,7 @@ namespace XenAdmin.Commands
             return false;
         }
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
             VM vm = item as VM;
             if (vm != null && vm.power_state != vm_power_state.Halted)

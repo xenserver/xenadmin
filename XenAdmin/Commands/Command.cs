@@ -219,7 +219,7 @@ namespace XenAdmin.Commands
                     if (item?.XenObject == null)
                         return null;
 
-                    string reason = GetCantExecuteReasonCore(item.XenObject);
+                    string reason = GetCantRunReasonCore(item.XenObject);
                     return reason == Messages.UNKNOWN ? null : reason;
                 }
 
@@ -320,7 +320,7 @@ namespace XenAdmin.Commands
                 if (MainWindowCommandInterface != null && CanRunCore(new SelectedItemCollection(item)))
                     continue;
 
-                string reason = GetCantExecuteReasonCore(item.XenObject);
+                string reason = GetCantRunReasonCore(item.XenObject);
                 if (reason != null)
                     cantExecuteReasons.Add(item.XenObject, reason);
             }
@@ -333,7 +333,7 @@ namespace XenAdmin.Commands
         /// Gets the reason that the specified item from the selection can't run. This is displayed in the error dialog.
         /// The default is "Unknown".
         /// </summary>
-        protected virtual string GetCantExecuteReasonCore(IXenObject item)
+        protected virtual string GetCantRunReasonCore(IXenObject item)
         {
             return Messages.UNKNOWN;
         }

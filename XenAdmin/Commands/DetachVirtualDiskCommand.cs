@@ -124,11 +124,11 @@ namespace XenAdmin.Commands
             return true;
         }
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
             VDI vdi = item as VDI;
             if (vdi == null)
-                return base.GetCantExecuteReasonCore(item);
+                return base.GetCantRunReasonCore(item);
 
             
             foreach (VBD vbd in vdi.Connection.ResolveAll<VBD>(vdi.VBDs))
@@ -146,7 +146,7 @@ namespace XenAdmin.Commands
                     }
                 }
             }
-            return base.GetCantExecuteReasonCore(item);
+            return base.GetCantRunReasonCore(item);
         }
 
         protected override void RunCore(SelectedItemCollection selection)

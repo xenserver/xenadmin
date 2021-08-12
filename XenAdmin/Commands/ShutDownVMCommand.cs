@@ -150,11 +150,11 @@ namespace XenAdmin.Commands
             get { return "WarningVmLifeCycleShutdown"; }
         }
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
             VM vm = item as VM;
             if (vm == null)
-                return base.GetCantExecuteReasonCore(item);
+                return base.GetCantRunReasonCore(item);
 
             switch (vm.power_state)
             {
@@ -165,10 +165,10 @@ namespace XenAdmin.Commands
                 case vm_power_state.Suspended:
                     return Messages.VM_SUSPENDED;
                 case vm_power_state.unknown:
-                    return base.GetCantExecuteReasonCore(item);
+                    return base.GetCantRunReasonCore(item);
             }
 
-            return GetCantExecuteNoToolsOrDriversReasonCore(item) ?? base.GetCantExecuteReasonCore(item);
+            return GetCantExecuteNoToolsOrDriversReasonCore(item) ?? base.GetCantRunReasonCore(item);
         }
 
         protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantExecuteReasons)

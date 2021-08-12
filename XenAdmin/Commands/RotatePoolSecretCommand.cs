@@ -86,7 +86,7 @@ namespace XenAdmin.Commands
             return pool != null && !pool.ha_enabled && !pool.RollingUpgrade();
         }
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
             var pool = item == null ? null : Helpers.GetPoolOfOne(item.Connection);
             
@@ -99,7 +99,7 @@ namespace XenAdmin.Commands
                     return Messages.ROTATE_POOL_SECRET_RPU;
             }
 
-            return base.GetCantExecuteReasonCore(item);
+            return base.GetCantRunReasonCore(item);
         }
 
         public override string MenuText => Messages.ROTATE_POOL_SECRET_MENU;

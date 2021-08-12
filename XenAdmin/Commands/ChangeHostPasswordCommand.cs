@@ -78,14 +78,14 @@ namespace XenAdmin.Commands
             return false;
         }
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
             var session = item.Connection?.Session;
 
             if (session != null && !session.IsLocalSuperuser && (item is Host host && host.IsLive() || item is Pool))
                 return Messages.AD_CANNOT_CHANGE_PASSWORD;
             
-            return base.GetCantExecuteReasonCore(item);
+            return base.GetCantRunReasonCore(item);
         }
     }
 }

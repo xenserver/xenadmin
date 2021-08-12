@@ -92,7 +92,7 @@ namespace XenAdmin.Commands
             return pool != null && !pool.ha_enabled;
         }
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
             if (item is Host host)
             {
@@ -101,7 +101,7 @@ namespace XenAdmin.Commands
                     return Messages.INSTALL_SERVER_CERTIFICATE_HA;
             }
             
-            return base.GetCantExecuteReasonCore(item);
+            return base.GetCantRunReasonCore(item);
         }
 
         public override string ContextMenuText => Messages.INSTALL_SERVER_CERTIFICATE_CONTEXT_MENU;

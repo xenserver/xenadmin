@@ -100,22 +100,22 @@ namespace XenAdmin.Commands
             return vbd.allowed_operations.Contains(vbd_operations.plug);
         }
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
             VBD vbd = item as VBD;
             if (vbd == null)
-                return base.GetCantExecuteReasonCore(item);
+                return base.GetCantRunReasonCore(item);
 
             VM vm = vbd.Connection.Resolve<VM>(vbd.VM);
             VDI vdi = vbd.Connection.Resolve<VDI>(vbd.VDI);
             if (vm == null || vdi == null)
-                return base.GetCantExecuteReasonCore(item);
+                return base.GetCantRunReasonCore(item);
 
             if (vm.is_a_template)
                 return Messages.CANNOT_ACTIVATE_TEMPLATE_DISK;
             
             if (!vm.is_a_real_vm())
-                return base.GetCantExecuteReasonCore(item);
+                return base.GetCantRunReasonCore(item);
 
             SR sr = vdi.Connection.Resolve<SR>(vdi.SR);
             if (sr == null)
@@ -147,7 +147,7 @@ namespace XenAdmin.Commands
             if (vbd.currently_attached)
                 return string.Format(Messages.CANNOT_ACTIVATE_VD_ALREADY_ACTIVE, Helpers.GetName(vm).Ellipsise(50));
 
-            return base.GetCantExecuteReasonCore(item);
+            return base.GetCantRunReasonCore(item);
         }
 
         protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantExecuteReasons)

@@ -138,9 +138,9 @@ namespace XenAdmin.Commands
             return CanExecuteHACommand(selection);
         }
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
-            var reason = base.GetCantExecuteReasonCore(item);
+            var reason = base.GetCantRunReasonCore(item);
             if (!string.IsNullOrEmpty(reason) && reason != Messages.UNKNOWN)
                 return reason;
 
@@ -260,7 +260,7 @@ namespace XenAdmin.Commands
                    new HADisableCommand(MainWindowCommandInterface, selection).CanRun();
         }
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
             Pool pool = item == null ? null : Helpers.GetPoolOfOne(item.Connection);
 
