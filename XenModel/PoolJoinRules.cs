@@ -235,7 +235,7 @@ namespace XenAdmin.Core
                 case Reason.WrongRoleOnMaster:
                     return Messages.NEWPOOL_MASTER_ROLE;
                 case Reason.WrongRoleOnSlave:
-                    return Messages.NEWPOOL_SLAVE_ROLE;
+                    return Messages.NEWPOOL_SUPPORTER_ROLE;
                 case Reason.HasClusteringEnabled:
                     return Messages.NEW_POOL_CLUSTERING_ENABLED;
                 case Reason.WrongNumberOfIpsCluster:

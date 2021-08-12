@@ -3600,9 +3600,9 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to Waiting for slaves to recover....
         /// </summary>
-        public static string ACTION_WAIT_FOR_SLAVES_TO_RECOVER {
+        public static string ACTION_WAIT_FOR_POOL_MEMBERS_TO_RECOVER {
             get {
-                return ResourceManager.GetString("ACTION_WAIT_FOR_SLAVES_TO_RECOVER", resourceCulture);
+                return ResourceManager.GetString("ACTION_WAIT_FOR_POOL_MEMBERS_TO_RECOVER", resourceCulture);
             }
         }
         
@@ -8905,9 +8905,9 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to Connection to {0}: trying to find pool at {1}.
         /// </summary>
-        public static string CONNECTION_RETRYING_SLAVE {
+        public static string CONNECTION_RETRYING_SUPPORTER {
             get {
-                return ResourceManager.GetString("CONNECTION_RETRYING_SLAVE", resourceCulture);
+                return ResourceManager.GetString("CONNECTION_RETRYING_SUPPORTER", resourceCulture);
             }
         }
         
@@ -8923,9 +8923,9 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to Connection to {0}: will try to connect to another pool member in {1} seconds.
         /// </summary>
-        public static string CONNECTION_WILL_RETRY_SLAVE {
+        public static string CONNECTION_WILL_RETRY_SUPPORTER {
             get {
-                return ResourceManager.GetString("CONNECTION_WILL_RETRY_SLAVE", resourceCulture);
+                return ResourceManager.GetString("CONNECTION_WILL_RETRY_SUPPORTER", resourceCulture);
             }
         }
         
@@ -24175,6 +24175,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You must eject all other pool members from the pool before you can delete it..
+        /// </summary>
+        public static string MESSAGEBOX_POOL_MEMBERS_EJECT {
+            get {
+                return ResourceManager.GetString("MESSAGEBOX_POOL_MEMBERS_EJECT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to [{0}] There has been an unexpected error. Technical details about this error have been saved to the following file. Please send this to your support representative.
         ///
         ///{1}.
@@ -24277,11 +24286,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You must eject all slaves from the pool before you can delete the pool..
+        ///   Looks up a localized string similar to You must eject all supporters from the pool before you can delete the pool..
         /// </summary>
-        public static string MESSAGEBOX_SLAVES_EJECT {
+        public static string MESSAGEBOX_SUPPORTERS_EJECT {
             get {
-                return ResourceManager.GetString("MESSAGEBOX_SLAVES_EJECT", resourceCulture);
+                return ResourceManager.GetString("MESSAGEBOX_SUPPORTERS_EJECT", resourceCulture);
             }
         }
         
@@ -25822,9 +25831,9 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to Your current role on the slave is not authorized to add the slave to a pool.
         /// </summary>
-        public static string NEWPOOL_SLAVE_ROLE {
+        public static string NEWPOOL_SUPPORTER_ROLE {
             get {
-                return ResourceManager.GetString("NEWPOOL_SLAVE_ROLE", resourceCulture);
+                return ResourceManager.GetString("NEWPOOL_SUPPORTER_ROLE", resourceCulture);
             }
         }
         
@@ -27532,20 +27541,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} (Bonded member).
+        /// </summary>
+        public static string NIC_BONDED_MEMBER {
+            get {
+                return ResourceManager.GetString("NIC_BONDED_MEMBER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} (Hidden).
         /// </summary>
         public static string NIC_HIDDEN {
             get {
                 return ResourceManager.GetString("NIC_HIDDEN", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} (Slave).
-        /// </summary>
-        public static string NIC_SLAVE {
-            get {
-                return ResourceManager.GetString("NIC_SLAVE", resourceCulture);
             }
         }
         
@@ -29442,9 +29451,9 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to One or more servers in the pool have to be upgraded before {0} can apply the selected new version..
         /// </summary>
-        public static string PATCHINGWIZARD_SELECTSERVERPAGE_NEW_VERSION_UPGRADE_SLAVES_FIRST {
+        public static string PATCHINGWIZARD_SELECTSERVERPAGE_NEW_VERSION_UPGRADE_SUPPORTERS_FIRST {
             get {
-                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_NEW_VERSION_UPGRADE_SLAVES_FIRST", resourceCulture);
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_NEW_VERSION_UPGRADE_SUPPORTERS_FIRST", resourceCulture);
             }
         }
         
@@ -34061,7 +34070,7 @@ namespace XenAdmin {
                 return ResourceManager.GetString("SLAVE_TOO_OLD", resourceCulture);
             }
         }
-        
+        	
         /// <summary>
         ///   Looks up a localized string similar to smaller than.
         /// </summary>
@@ -35472,6 +35481,34 @@ namespace XenAdmin {
         public static string SUPP_PACK_VERSIONS_DIFFER {
             get {
                 return ResourceManager.GetString("SUPP_PACK_VERSIONS_DIFFER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server &apos;{0}&apos; is a member of pool &apos;{1}&apos; and is already connected..
+        /// </summary>
+        public static string SUPPORTER_ALREADY_CONNECTED {
+            get {
+                return ResourceManager.GetString("SUPPORTER_ALREADY_CONNECTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server &apos;{0}&apos; is in a pool.  To connect to a pool, you must connect to the pool coordinator.
+        ///Do you want to connect to the pool coordinator &apos;{1}&apos;?.
+        /// </summary>
+        public static string SUPPORTER_CONNECTION_ERROR {
+            get {
+                return ResourceManager.GetString("SUPPORTER_CONNECTION_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This pool contains servers earlier than [XenServer] {0}. Please use an earlier version of [XenCenter] to manage this pool..
+        /// </summary>
+        public static string SUPPORTER_TOO_OLD {
+            get {
+                return ResourceManager.GetString("SUPPORTER_TOO_OLD", resourceCulture);
             }
         }
         
@@ -37509,9 +37546,9 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to Upgrade &apos;{0}&apos;.
         /// </summary>
-        public static string UPGRADE_SLAVE {
+        public static string UPGRADE_SUPPORTER {
             get {
-                return ResourceManager.GetString("UPGRADE_SLAVE", resourceCulture);
+                return ResourceManager.GetString("UPGRADE_SUPPORTER", resourceCulture);
             }
         }
         

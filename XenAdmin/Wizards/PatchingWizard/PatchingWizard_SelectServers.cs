@@ -328,7 +328,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                     if (0 < nonApplicables && nonApplicables < host.Connection.Cache.Hosts.Length)
                     {
-                        tooltipText = string.Format(Messages.PATCHINGWIZARD_SELECTSERVERPAGE_NEW_VERSION_UPGRADE_SLAVES_FIRST, BrandManager.BrandConsole);
+                        tooltipText = string.Format(Messages.PATCHINGWIZARD_SELECTSERVERPAGE_NEW_VERSION_UPGRADE_SUPPORTERS_FIRST, BrandManager.BrandConsole);
                         return false;
                     }
                 }

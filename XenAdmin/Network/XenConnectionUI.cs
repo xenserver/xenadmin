@@ -155,7 +155,7 @@ namespace XenAdmin.Network
                             else
                             {
 
-                                using (var dlg = new InformationDialog(string.Format(Messages.SLAVE_ALREADY_CONNECTED, oldHost, pool_name))
+                                using (var dlg = new InformationDialog(string.Format(Messages.SUPPORTER_ALREADY_CONNECTED, oldHost, pool_name))
                                     {WindowTitle = Messages.ADD_NEW_CONNECT_TO})
                                 {
                                     dlg.ShowDialog(owner);
@@ -166,7 +166,7 @@ namespace XenAdmin.Network
                     else
                     {
                         DialogResult dialogResult;
-                        using (var dlg = new WarningDialog(string.Format(Messages.SLAVE_CONNECTION_ERROR, oldHost, poolMasterName),
+                        using (var dlg = new WarningDialog(string.Format(Messages.SUPPORTER_CONNECTION_ERROR, oldHost, poolMasterName),
                                 ThreeButtonDialog.ButtonYes,
                                 ThreeButtonDialog.ButtonNo){WindowTitle = Messages.CONNECT_TO_SERVER})
                         {

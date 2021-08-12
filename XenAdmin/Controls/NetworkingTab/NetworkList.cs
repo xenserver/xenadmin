@@ -1014,7 +1014,7 @@ namespace XenAdmin.Controls.NetworkingTab
                 if (Network.Show(XenAdmin.Properties.Settings.Default.ShowHiddenVMs) && !isSlave)
                     return Helpers.GetName(Network);
                 else if (isSlave && Properties.Settings.Default.ShowHiddenVMs)
-                    return string.Format(Messages.NIC_SLAVE, Helpers.GetName(Network));
+                    return string.Format(Messages.NIC_BONDED_MEMBER, Helpers.GetName(Network));
                 else if (Properties.Settings.Default.ShowHiddenVMs)
                     return string.Format(Messages.NIC_HIDDEN, Helpers.GetName(Network));
                 else

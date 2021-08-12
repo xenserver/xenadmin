@@ -1296,8 +1296,8 @@
   <data name="ACTION_VUSB_DETACH_CONFIRM" xml:space="preserve">
     <value>Are you sure you want to detach the selected USB device?</value>
   </data>
-  <data name="ACTION_WAIT_FOR_SLAVES_TO_RECOVER" xml:space="preserve">
-    <value>Waiting for slaves to recover...</value>
+  <data name="ACTION_WAIT_FOR_POOL_MEMBERS_TO_RECOVER" xml:space="preserve">
+    <value>Waiting for other pool members to recover...</value>
   </data>
   <data name="ACTION_WLB_DECONFIGURE_FAILED" xml:space="preserve">
     <value>Disconnecting  Workload Balancing failed on pool {0}: {1}  Workload Balancing has been paused.</value>
@@ -3208,13 +3208,13 @@ Would you like to carry out the operation at this time?</value>
   <data name="CONNECTION_REFUSED_TITLE" xml:space="preserve">
     <value>Refused connection to {0}</value>
   </data>
-  <data name="CONNECTION_RETRYING_SLAVE" xml:space="preserve">
+  <data name="CONNECTION_RETRYING_SUPPORTER" xml:space="preserve">
     <value>Connection to {0}: trying to find pool at {1}</value>
   </data>
   <data name="CONNECTION_WAS_LOST" xml:space="preserve">
     <value>The connection to the server was lost</value>
   </data>
-  <data name="CONNECTION_WILL_RETRY_SLAVE" xml:space="preserve">
+  <data name="CONNECTION_WILL_RETRY_SUPPORTER" xml:space="preserve">
     <value>Connection to {0}: will try to connect to another pool member in {1} seconds</value>
   </data>
   <data name="CONNECT_RESOLUTION_FAILURE" xml:space="preserve">
@@ -8431,8 +8431,8 @@ Do you want to continue?</value>
 
 Do you want to continue?</value>
   </data>
-  <data name="MESSAGEBOX_SLAVES_EJECT" xml:space="preserve">
-    <value>You must eject all slaves from the pool before you can delete the pool.</value>
+  <data name="MESSAGEBOX_POOL_MEMBERS_EJECT" xml:space="preserve">
+    <value>You must eject all other pool members from the pool before you can delete the pool.</value>
   </data>
   <data name="MESSAGEBOX_VIF_DELETE" xml:space="preserve">
     <value>This will delete the selected network interface permanently. Continue?</value>
@@ -8811,8 +8811,8 @@ You should only proceed if you have verified that these settings are correct.</v
   <data name="NEWPOOL_POOLINGRESTRICTED" xml:space="preserve">
     <value>Pooling is restricted with this server's license</value>
   </data>
-  <data name="NEWPOOL_SLAVE_ROLE" xml:space="preserve">
-    <value>Your current role on the slave is not authorized to add the slave to a pool</value>
+  <data name="NEWPOOL_SUPPORTER_ROLE" xml:space="preserve">
+    <value>Your current role on this server is not authorized to add it to a pool</value>
   </data>
   <data name="NEWPOOL_UNLICENSED_HOST_LICENSED_MASTER" xml:space="preserve">
     <value>You cannot add an unlicensed server to a licensed pool</value>
@@ -9586,8 +9586,8 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="NIC_HIDDEN" xml:space="preserve">
     <value>{0} (Hidden)</value>
   </data>
-  <data name="NIC_SLAVE" xml:space="preserve">
-    <value>{0} (Slave)</value>
+  <data name="NIC_BOENDED_MEMBER" xml:space="preserve">
+    <value>{0} (Bonded member)</value>
   </data>
   <data name="NIC_TAB_TITLE" xml:space="preserve">
     <value>Network Interface Cards</value>
@@ -10143,7 +10143,7 @@ This will cancel the update process and may leave your system in an unstable sta
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_AUTOMATED_UPDATES" xml:space="preserve">
     <value>One or more servers in the pool are not licensed for automated updates</value>
   </data>
-  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_NEW_VERSION_UPGRADE_SLAVES_FIRST" xml:space="preserve">
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_NEW_VERSION_UPGRADE_SUPPORTERS_FIRST" xml:space="preserve">
     <value>One or more servers in the pool have to be upgraded before {0} can apply the selected new version.</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_ALREADY_APPLIED" xml:space="preserve">
@@ -11780,14 +11780,14 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
   <data name="SLACK_LABEL" xml:space="preserve">
     <value>Slack:</value>
   </data>
-  <data name="SLAVE_ALREADY_CONNECTED" xml:space="preserve">
+  <data name="SUPPORTER_ALREADY_CONNECTED" xml:space="preserve">
     <value>Server '{0}' is a member of pool '{1}' and is already connected.</value>
   </data>
-  <data name="SLAVE_CONNECTION_ERROR" xml:space="preserve">
-    <value>Server '{0}' is in a pool.  To connect to a pool, you must connect to the pool master.
-Do you want to connect to the pool master '{1}'?</value>
+  <data name="SUPPORTER_CONNECTION_ERROR" xml:space="preserve">
+    <value>Server '{0}' is in a pool.  To connect to a pool, you must connect to the pool coordinator.
+Do you want to connect to the pool coordinator '{1}'?</value>
   </data>
-  <data name="SLAVE_TOO_OLD" xml:space="preserve">
+  <data name="SUPPORTER_TOO_OLD" xml:space="preserve">
     <value>This pool contains servers earlier than {0} {1}. Please use an earlier version of {2} to manage this pool.</value>
   </data>
   <data name="SMALLER_THAN" xml:space="preserve">
@@ -12987,7 +12987,7 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
   <data name="UPGRADE_SERVER" xml:space="preserve">
     <value>Upgrade server '{0}</value>
   </data>
-  <data name="UPGRADE_SLAVE" xml:space="preserve">
+  <data name="UPGRADE_SUPPORTER" xml:space="preserve">
     <value>Upgrade '{0}'</value>
   </data>
   <data name="UPLOADING_PATCH" xml:space="preserve">

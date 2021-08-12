@@ -305,7 +305,7 @@ namespace XenAdmin.Actions
             * Hence, we check Host.IsLive metric of all supporters for a transition from true -> false -> true
             */
 
-           action.Description = string.Format(Messages.ACTION_WAIT_FOR_SLAVES_TO_RECOVER);
+           action.Description = string.Format(Messages.ACTION_WAIT_FOR_POOL_MEMBERS_TO_RECOVER);
            WaitForslavesToRecover(pool);
            
             /* Reconfigure IP for supporters and then master */

@@ -1672,7 +1672,7 @@ namespace XenAdmin.Network
 
         private void StartReconnectMasterTimer(int timeout)
         {
-            OnConnectionMessageChanged(string.Format(Messages.CONNECTION_WILL_RETRY_SLAVE, LastConnectionFullName.Ellipsise(25) , timeout / 1000));
+            OnConnectionMessageChanged(string.Format(Messages.CONNECTION_WILL_RETRY_SUPPORTER, LastConnectionFullName.Ellipsise(25) , timeout / 1000));
             ReconnectionTimer =
                 new System.Threading.Timer((TimerCallback)ReconnectMasterTimer, null,
                                            timeout, Timeout.Infinite);
@@ -1730,7 +1730,7 @@ namespace XenAdmin.Network
                 }
             }
 
-            OnConnectionMessageChanged(string.Format(Messages.CONNECTION_RETRYING_SLAVE, LastConnectionFullName.Ellipsise(25), Hostname));
+            OnConnectionMessageChanged(string.Format(Messages.CONNECTION_RETRYING_SUPPORTER, LastConnectionFullName.Ellipsise(25), Hostname));
             ReconnectMaster();
         }
 
@@ -2036,7 +2036,7 @@ namespace XenAdmin.Network
             if (p == null)
                 return String.Format(Messages.ALREADY_CONNECTED, _this.Hostname);
 
-            return String.Format(Messages.SLAVE_ALREADY_CONNECTED, _this.Hostname, p.Name());
+            return String.Format(Messages.SUPPORTER_ALREADY_CONNECTED, _this.Hostname, p.Name());
         }
     }
 

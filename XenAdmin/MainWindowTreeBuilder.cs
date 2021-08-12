@@ -430,7 +430,7 @@ namespace XenAdmin
                 bool slave = network.IsSlave();
                 string rawName = network.Name();
                 String name = slave
-                                  ? String.Format(Messages.NIC_SLAVE, rawName)
+                                  ? String.Format(Messages.NIC_BONDED_MEMBER, rawName)
                                   : hidden
                                         ? String.Format(Messages.X_HIDDEN, rawName)
                                         : rawName;
