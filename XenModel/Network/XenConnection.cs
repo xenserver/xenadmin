@@ -783,7 +783,7 @@ namespace XenAdmin.Network
 
         /// <summary>
         /// Try to logout the given session. This will cause any threads blocking on Event.next() to get
-        /// a XenAPI.Failure (which is better than them hanging around forever).
+        /// a XenAPI.Failure (which is better than them freezing around forever).
         /// Do on a background thread - otherwise, if the master has died, then this will block
         /// until the timeout is reached (default 20s).
         /// However, in the case of exiting, the thread need to be set as foreground. 
