@@ -109,7 +109,7 @@ namespace XenAdmin.Actions.Wlb
                 {
                     // If task is pending and has zero progress, it probably hasn't been started,
                     // which probably means there was an exception in the GUI code before the
-                    // action got going. Kill the task so that we don't block forever on
+                    // action got going. Stop the task so that we don't block forever on
                     // taskThread.Join(). Brought to light by CA-11100.
                     DestroyTask();
                 }

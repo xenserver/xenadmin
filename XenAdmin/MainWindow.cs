@@ -2489,7 +2489,7 @@ namespace XenAdmin
 
         public void MainWindow_HelpRequested(object sender, HelpEventArgs hlpevent)
         {
-            // CA-28064. MessageBox hack to kill the hlpevent it passes to MainWindows.
+            // CA-28064. MessageBox hack to stop the hlpevent it passes to MainWindows.
             if (Program.MainWindow.ContainsFocus && MenuShortcutsEnabled)
                 LaunchHelp();
         }

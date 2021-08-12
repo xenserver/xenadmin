@@ -92,9 +92,9 @@ namespace XenAdmin.XenSearch
                 Monitor.PulseAll(_sleepMonitor);
         }
 
-        public void Kill()
+        public void Stop()
         {
-            log.Info("Killing MetricUpdater thread");
+            log.Info("Stopping MetricUpdater thread");
             _run = false;
             _pause = false;
             lock (_pauseMonitor)

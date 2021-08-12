@@ -1636,7 +1636,7 @@ namespace XenAdmin.Network
         /// When HA is enabled, the timeout after losing connection to the master before we start searching for a new master.
         /// i.e. This should be the time it takes master failover to be sorted out on the server, plus a margin.
         /// NB we already have an additional built-in delay - it takes time for us to decide that the host is not responding,
-        /// and kill the connection to the dead host, before starting the search.
+        /// and stop the connection to the dead host, before starting the search.
         /// </summary>
         private const int SEARCH_NEW_MASTER_TIMEOUT_MS = 60 * 1000;
         /// <summary>

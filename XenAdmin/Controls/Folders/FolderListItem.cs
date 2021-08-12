@@ -246,7 +246,7 @@ namespace XenAdmin.Controls
 
                 // It may still be that the text is too long, if the last component is very long.
                 // In that case we need to ellipsise the final component.
-                // (We just remove one character at a time: binary chop is overkill for normal folder lengths).
+                // (We just remove one character at a time: binary chop is excessive for normal folder lengths).
                 if (theSize.Width > w)
                 {
                     String s = pathParts[trunc1];

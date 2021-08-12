@@ -526,7 +526,7 @@ namespace XenAdmin.ConsoleView
             //console size with some offset to accomodate focus rectangle
             Size currentConsoleSize = new Size(this.Size.Width - CONSOLE_SIZE_OFFSET, this.Size.Height - CONSOLE_SIZE_OFFSET);
                 
-            // Kill the old client.
+            // Stop the old client.
             if (RemoteConsole != null)
             {
                 wasFocused = RemoteConsole.ConsoleControl != null && RemoteConsole.ConsoleControl.Focused;
