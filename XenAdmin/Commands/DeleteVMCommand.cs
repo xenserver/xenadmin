@@ -80,7 +80,7 @@ namespace XenAdmin.Commands
             if (MainWindowCommandInterface.RunInAutomatedTestMode || dialog.ShowDialog(Parent) == DialogResult.Yes)
             {
                 CommandErrorDialog errorDialog = null;
-                var cantExecuteReasons = GetCantExecuteReasons();
+                var cantExecuteReasons = GetCantRunReasons();
 
                 if (cantExecuteReasons.Count > 0)
                 {

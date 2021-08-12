@@ -407,7 +407,7 @@ namespace XenAdmin.Commands
                     DeactivateVBDCommand cmd = new DeactivateVBDCommand(Program.MainWindow, vbd);
                     if (!cmd.CanRun())
                     {
-                        var reason = cmd.GetCantExecuteReasons().Values.FirstOrDefault();
+                        var reason = cmd.GetCantRunReasons().Values.FirstOrDefault();
 
                         return vm != null && reason != null && reason != Messages.UNKNOWN
                             ? string.Format(Messages.CANNOT_DELETE_CANNOT_DEACTIVATE_REASON, vm.Name(), reason)

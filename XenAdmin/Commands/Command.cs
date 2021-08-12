@@ -149,7 +149,7 @@ namespace XenAdmin.Commands
         {
             if (Confirm())
             {
-                var cantExecuteReasons = GetCantExecuteReasons();
+                var cantExecuteReasons = GetCantRunReasons();
                 var errorDialog = cantExecuteReasons.Count > 0 ? GetErrorDialogCore(cantExecuteReasons) : null;
 
                 RunCore(GetSelection());
@@ -309,7 +309,7 @@ namespace XenAdmin.Commands
         /// Gets all of the reasons that items in the selection can't run.
         /// </summary>
         /// <returns>A dictionary of reasons keyed by the item name.</returns>
-        public Dictionary<IXenObject, string> GetCantExecuteReasons()
+        public Dictionary<IXenObject, string> GetCantRunReasons()
         {
             var cantExecuteReasons = new Dictionary<IXenObject, string>();
 
