@@ -68,7 +68,7 @@ namespace XenAdmin.Dialogs
         public NewPoolDialog(List<Host> hosts)
             : this(hosts.Count >= 1 ? hosts[0] : null)
         {
-            selectSlaves(hosts);
+            selectSupporters(hosts);
         }
 
         private enum InvalidReasons { NONE, EMPTY_POOL_NAME, NO_MASTER, MAX_POOL_SIZE_EXCEEDED };
@@ -88,8 +88,8 @@ namespace XenAdmin.Dialogs
                 Host master = getMaster();
                 if (master != null)
                 {
-                    List<Host> slaves = getSlaves();
-                    if (PoolJoinRules.WillExceedPoolMaxSize(master.Connection, slaves.Count))
+                    List<Host> supporters = getSupporters();
+                    if (PoolJoinRules.WillExceedPoolMaxSize(master.Connection, supporters.Count))
                         return InvalidReasons.MAX_POOL_SIZE_EXCEEDED;
                 }
 
@@ -142,9 +142,9 @@ namespace XenAdmin.Dialogs
                     return;
                 }
 
-                List<Host> slaves = getSlaves();
+                List<Host> supporters = getSupporters();
                 // Check supp packs and warn
-                List<string> badSuppPacks = PoolJoinRules.HomogeneousSuppPacksDiffering(slaves, master);
+                List<string> badSuppPacks = PoolJoinRules.HomogeneousSuppPacksDiffering(supporters, master);
 
                 if (!Program.RunInAutomatedTestMode && badSuppPacks.Count > 0)
                 {
@@ -163,7 +163,7 @@ namespace XenAdmin.Dialogs
 
                 // Are there any hosts which are forbidden from masking their CPUs for licensing reasons?
                 // If so, we need to show upsell.
-                if (null != slaves.Find(host =>
+                if (null != supporters.Find(host =>
                     !PoolJoinRules.CompatibleCPUs(host, master, false) &&
                     Helpers.FeatureForbidden(host, Host.RestrictCpuMasking) &&
                     !PoolJoinRules.FreeHostPaidMaster(host, master, false)))  // in this case we can upgrade the license and then mask the CPU
@@ -174,7 +174,7 @@ namespace XenAdmin.Dialogs
 
                 if (!Program.RunInAutomatedTestMode)
                 {
-                    var hosts1 = slaves.FindAll(host => PoolJoinRules.FreeHostPaidMaster(host, master, false));
+                    var hosts1 = supporters.FindAll(host => PoolJoinRules.FreeHostPaidMaster(host, master, false));
                     if (hosts1.Count > 0)
                     {
                         string msg = string.Format(hosts1.Count == 1
@@ -190,7 +190,7 @@ namespace XenAdmin.Dialogs
                         }
                     }
 
-                    var hosts2 = slaves.FindAll(host => !PoolJoinRules.CompatibleCPUs(host, master, false));
+                    var hosts2 = supporters.FindAll(host => !PoolJoinRules.CompatibleCPUs(host, master, false));
                     if (hosts2.Count > 0)
                     {
                         string msg = string.Format(hosts2.Count == 1
@@ -206,7 +206,7 @@ namespace XenAdmin.Dialogs
                         }
                     }
 
-                    var hosts3 = slaves.FindAll(host => !PoolJoinRules.CompatibleAdConfig(host, master, false));
+                    var hosts3 = supporters.FindAll(host => !PoolJoinRules.CompatibleAdConfig(host, master, false));
                     if (hosts3.Count > 0)
                     {
                         string msg = string.Format(hosts3.Count == 1
@@ -223,14 +223,14 @@ namespace XenAdmin.Dialogs
                     }
                 }
 
-                if (!HelpersGUI.GetPermissionForCpuFeatureLevelling(slaves, Helpers.GetPoolOfOne(master.Connection)))
+                if (!HelpersGUI.GetPermissionForCpuFeatureLevelling(supporters, Helpers.GetPoolOfOne(master.Connection)))
                     return;
 
                 log.DebugFormat("Creating new pool {0} ({1}) with master {2}", poolName, poolDescription, Helpers.GetName(master));
-                foreach (Host slave in slaves)
-                    log.DebugFormat("Supporter {0}", Helpers.GetName(slave));
+                foreach (Host supporter in supporters)
+                    log.DebugFormat("Supporter {0}", Helpers.GetName(supporter));
 
-                new CreatePoolAction(master, slaves, poolName, poolDescription, AddHostToPoolCommand.GetAdPrompt, 
+                new CreatePoolAction(master, supporters, poolName, poolDescription, AddHostToPoolCommand.GetAdPrompt, 
                     AddHostToPoolCommand.NtolDialog, ApplyLicenseEditionCommand.ShowLicensingFailureDialog).RunAsync();
             }
             catch (System.Net.WebException exn)
@@ -355,12 +355,12 @@ namespace XenAdmin.Dialogs
             }
         }
 
-        private void selectSlaves(List<Host> slaves)
+        private void selectSupporters(List<Host> supporters)
         {
             foreach (ConnectionWrapperWithMoreStuff c in connections)
             {
-                if (c.AllowedAsSlave &&
-                    slaves.Find(slave => (c.Connection == slave.Connection)) != null)  // one of the supporters is the connection we're looking at
+                if (c.AllowedAsSupporter &&
+                    supporters.Find(supporter => (c.Connection == supporter.Connection)) != null)  // one of the supporters is the connection we're looking at
                 {
                     c.State = CheckState.Checked;
                 }
@@ -390,17 +390,17 @@ namespace XenAdmin.Dialogs
             return connectionToMaster != null ? Helpers.GetMaster(connectionToMaster.Connection) : null;
         }
 
-        private List<Host> getSlaves()
+        private List<Host> getSupporters()
         {
-            List<Host> slaveConnections = new List<Host>();
+            List<Host> supporterConnections = new List<Host>();
             foreach (ConnectionWrapperWithMoreStuff connection in connections)
             {
-                if (connection.State == CheckState.Checked && !connection.WillBeMaster && connection.AllowedAsSlave)
+                if (connection.State == CheckState.Checked && !connection.WillBeMaster && connection.AllowedAsSupporter)
                 {
-                    slaveConnections.Add(Helpers.GetMaster(connection.Connection));
+                    supporterConnections.Add(Helpers.GetMaster(connection.Connection));
                 }
             }
-            return slaveConnections;
+            return supporterConnections;
         }
 
         private void comboBoxServers_SelectionChangeCommitted(object sender, EventArgs e)

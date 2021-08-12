@@ -105,9 +105,9 @@ namespace XenAdminTests.UnitTests
         [TestCase("no", cpu3, cpu1, mask, ExpectedResult = false)]
         [TestCase("no", cpu3, cpu2, null, ExpectedResult = false)]
         [TestCase("no", cpu3, cpu2, mask, ExpectedResult = false)]
-        public bool Run(string maskType, string slaveCpu, string masterCpu, string maskBits)
+        public bool Run(string maskType, string supporterCpu, string masterCpu, string maskBits)
         {
-            return PoolJoinRules.MaskableTo(maskType, slaveCpu, masterCpu, maskBits);
+            return PoolJoinRules.MaskableTo(maskType, supporterCpu, masterCpu, maskBits);
         }
     }
 }

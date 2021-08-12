@@ -75,7 +75,7 @@ namespace XenAdmin.Controls
             }
         }
 
-        public bool AllowedAsSlave
+        public bool AllowedAsSupporter
         {
             get
             {

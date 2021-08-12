@@ -932,10 +932,10 @@ namespace XenAdmin
             //(could happen if trying to connect to a partially upgraded pool where
             //the newest hosts have been upgraded using a earlier XenCenter)
 
-            var slaves = connection.Cache.Hosts.Where(h => h.opaque_ref != master.opaque_ref);
-            foreach (var slave in slaves)
+            var supporters = connection.Cache.Hosts.Where(h => h.opaque_ref != master.opaque_ref);
+            foreach (var supporter in supporters)
             {
-                if (Helpers.DundeeOrGreater(slave))
+                if (Helpers.DundeeOrGreater(supporter))
                     continue;
 
                 connection.EndConnect();

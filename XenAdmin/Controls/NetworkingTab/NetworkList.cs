@@ -1010,10 +1010,10 @@ namespace XenAdmin.Controls.NetworkingTab
 
             private object NetworkName()
             {
-                bool isSlave = Network.IsSlave();
-                if (Network.Show(XenAdmin.Properties.Settings.Default.ShowHiddenVMs) && !isSlave)
+                bool isSupporter = Network.IsSlave();
+                if (Network.Show(XenAdmin.Properties.Settings.Default.ShowHiddenVMs) && !isSupporter)
                     return Helpers.GetName(Network);
-                else if (isSlave && Properties.Settings.Default.ShowHiddenVMs)
+                else if (isSupporter && Properties.Settings.Default.ShowHiddenVMs)
                     return string.Format(Messages.NIC_BONDED_MEMBER, Helpers.GetName(Network));
                 else if (Properties.Settings.Default.ShowHiddenVMs)
                     return string.Format(Messages.NIC_HIDDEN, Helpers.GetName(Network));
