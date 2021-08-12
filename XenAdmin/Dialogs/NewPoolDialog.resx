@@ -474,43 +474,43 @@
   <data name="&gt;&gt;labelMaster.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="labelSlaveListBlurb.AutoSize" type="System.Boolean, mscorlib">
+  <data name="labelSupporterListBlurb.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="labelSlaveListBlurb.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="labelSupporterListBlurb.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="labelSlaveListBlurb.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="labelSupporterListBlurb.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="labelSlaveListBlurb.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="labelSupporterListBlurb.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="labelSlaveListBlurb.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="labelSupporterListBlurb.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 38</value>
   </data>
-  <data name="labelSlaveListBlurb.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="labelSupporterListBlurb.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 3</value>
   </data>
-  <data name="labelSlaveListBlurb.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="labelSupporterListBlurb.Size" type="System.Drawing.Size, System.Drawing">
     <value>383, 15</value>
   </data>
-  <data name="labelSlaveListBlurb.TabIndex" type="System.Int32, mscorlib">
+  <data name="labelSupporterListBlurb.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="labelSlaveListBlurb.Text" xml:space="preserve">
+  <data name="labelSupporterListBlurb.Text" xml:space="preserve">
     <value>&amp;Additional members:</value>
   </data>
-  <data name="&gt;&gt;labelSlaveListBlurb.Name" xml:space="preserve">
-    <value>labelSlaveListBlurb</value>
+  <data name="&gt;&gt;labelSupporterListBlurb.Name" xml:space="preserve">
+    <value>labelSupporterListBlurb</value>
   </data>
-  <data name="&gt;&gt;labelSlaveListBlurb.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelSupporterListBlurb.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelSlaveListBlurb.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelSupporterListBlurb.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelSlaveListBlurb.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelSupporterListBlurb.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="customTreeViewServers.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -655,7 +655,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="comboBoxServers" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelMaster" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelSlaveListBlurb" Row="2" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="customTreeViewServers" Row="3" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="flowLayoutPanelServerListButtons" Row="5" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,Absolute,15,AutoSize,0,Percent,100,Absolute,3,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="comboBoxServers" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelMaster" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelSupporterListBlurb" Row="2" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="customTreeViewServers" Row="3" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="flowLayoutPanelServerListButtons" Row="5" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,Absolute,15,AutoSize,0,Percent,100,Absolute,3,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="groupBox1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
