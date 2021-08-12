@@ -77,7 +77,7 @@ namespace XenAdmin.Commands
             return false;
         }
 
-        protected override void Execute(List<VM> vms)
+        protected override void Run(List<VM> vms)
         {
             RunAction(vms, Messages.ACTION_VMS_SUSPENDING_TITLE, Messages.ACTION_VMS_SUSPENDING_TITLE, Messages.ACTION_VM_SUSPENDED, null);
         }

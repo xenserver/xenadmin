@@ -62,7 +62,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        private void Execute(IList<VM> vms)
+        private void Run(IList<VM> vms)
         {
             var actions = new List<AsyncAction>();
 
@@ -97,7 +97,7 @@ namespace XenAdmin.Commands
 
         protected override void RunCore(SelectedItemCollection selection)
         {
-            Execute(selection.AsXenObjects<VM>());
+            Run(selection.AsXenObjects<VM>());
         }
 
         private bool CbtLicensed(VM vm)

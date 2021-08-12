@@ -65,7 +65,7 @@ namespace XenAdmin.Commands
 
         protected abstract bool CanRun(VM vm);
 
-        protected abstract void Execute(List<VM> vms);
+        protected abstract void Run(List<VM> vms);
 
         protected void CancelAllTasks(IEnumerable<VM> vms)
         {
@@ -133,7 +133,7 @@ namespace XenAdmin.Commands
 
             // sort so actions run in correct order.
             vms.Sort();
-            Execute(vms);
+            Run(vms);
         }
 
         protected sealed override bool CanRunCore(SelectedItemCollection selection)

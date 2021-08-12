@@ -138,7 +138,7 @@ namespace XenAdmin.Commands
         {
             get
             {
-                if (cantRunReasons.Count == GetSelection().Count) // none can execute
+                if (cantRunReasons.Count == GetSelection().Count) // none can run
                 {
                     var uniqueReasons = cantRunReasons.Values.Distinct().ToList();
 

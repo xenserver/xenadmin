@@ -80,11 +80,11 @@ namespace XenAdmin.Commands
             if (MainWindowCommandInterface.RunInAutomatedTestMode || dialog.ShowDialog(Parent) == DialogResult.Yes)
             {
                 CommandErrorDialog errorDialog = null;
-                var cantExecuteReasons = GetCantRunReasons();
+                var cantRunReasons = GetCantRunReasons();
 
-                if (cantExecuteReasons.Count > 0)
+                if (cantRunReasons.Count > 0)
                 {
-                    errorDialog = new CommandErrorDialog(ErrorDialogTitle, ErrorDialogText, cantExecuteReasons);
+                    errorDialog = new CommandErrorDialog(ErrorDialogTitle, ErrorDialogText, cantRunReasons);
                 }
 
                 List<AsyncAction> actions = new List<AsyncAction>();

@@ -99,7 +99,7 @@ namespace XenAdmin.Commands
         /// <summary>
         /// Runs this drag-drop operation with the specified target-node and drag data.
         /// </summary>
-        public void Execute()
+        public void Run()
         {
             ExecuteCore();
         }

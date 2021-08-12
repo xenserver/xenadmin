@@ -76,10 +76,10 @@ namespace XenAdmin.Commands
 
         protected override bool CanRunCore(SelectedItemCollection selection)
         {
-            return selection.ContainsOneItemOfType<VM>() && selection.AtLeastOneXenObjectCan<VM>(CanExecute);
+            return selection.ContainsOneItemOfType<VM>() && selection.AtLeastOneXenObjectCan<VM>(CanRun);
         }
 
-        private static bool CanExecute(VM vm)
+        private static bool CanRun(VM vm)
         {
             return vm != null && vm.is_a_template && !vm.Locked && !vm.is_a_snapshot && vm.InstantTemplate();
         }

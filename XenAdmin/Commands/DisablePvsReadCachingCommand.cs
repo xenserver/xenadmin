@@ -60,7 +60,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected virtual void Execute(IList<VM> vms)
+        protected virtual void Run(IList<VM> vms)
         {
             var actions = new List<AsyncAction>();
 
@@ -90,7 +90,7 @@ namespace XenAdmin.Commands
 
         protected override void RunCore(SelectedItemCollection selection)
         {
-            Execute(selection.AsXenObjects<VM>());
+            Run(selection.AsXenObjects<VM>());
         }
 
         protected override bool CanRunCore(SelectedItemCollection selection)

@@ -71,7 +71,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void Execute(List<VM> vms)
+        protected override void Run(List<VM> vms)
         {
             Dictionary<VM, List<VBD>> brokenCDs = new Dictionary<VM, List<VBD>>();
             foreach (VM vm in vms)

@@ -60,7 +60,7 @@ namespace XenAdmin.Commands
         {
             if (selection.FirstAsXenObject != null)
             {
-                Execute(selection.FirstAsXenObject.Connection);
+                Run(selection.FirstAsXenObject.Connection);
             }
         }
 
@@ -88,7 +88,7 @@ namespace XenAdmin.Commands
             }
         }
 
-        private bool Execute(IXenConnection connection)
+        private bool Run(IXenConnection connection)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "xls files(*.xls)|*.xls|csv files(*.csv)|*.csv";

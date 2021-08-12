@@ -73,7 +73,7 @@ namespace XenAdmin.Commands
             Parent = parent;
         }
 
-        private void Execute(Folder folder, IWin32Window ownerWindow)
+        private void Run(Folder folder, IWin32Window ownerWindow)
         {
             IXenConnection connection;
             String name;
@@ -153,7 +153,7 @@ namespace XenAdmin.Commands
 
         protected override void RunCore(SelectedItemCollection selection)
         {
-            Execute((Folder)selection[0].XenObject, Parent);
+            Run((Folder)selection[0].XenObject, Parent);
         }
 
         protected override bool CanRunCore(SelectedItemCollection selection)

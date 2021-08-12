@@ -60,7 +60,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        private void Execute(SR sr)
+        private void Run(SR sr)
         {
             if (CanReattachSR(sr))
                 MainWindowCommandInterface.ShowPerConnectionWizard(sr.Connection, new NewSRWizard(sr.Connection, sr));
@@ -68,7 +68,7 @@ namespace XenAdmin.Commands
 
         protected override void RunCore(SelectedItemCollection selection)
         {
-            Execute((SR)selection[0].XenObject);
+            Run((SR)selection[0].XenObject);
         }
 
         protected override bool CanRunCore(SelectedItemCollection selection)
