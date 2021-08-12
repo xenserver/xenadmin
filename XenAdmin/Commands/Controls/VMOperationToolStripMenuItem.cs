@@ -307,7 +307,7 @@ namespace XenAdmin.Commands
 
                     Program.Invoke(Program.MainWindow, delegate
                     {
-                        if (crossPoolMigrateCmdCanRun || !string.IsNullOrEmpty(cpmCmd.CantExecuteReason))
+                        if (crossPoolMigrateCmdCanRun || !string.IsNullOrEmpty(cpmCmd.CantRunReason))
                         {
                             hostMenuItem.Command = cpmCmd;
                             hostMenuItem.Enabled = crossPoolMigrateCmdCanRun;
