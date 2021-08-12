@@ -70,7 +70,7 @@ namespace XenAdmin.Core
             NotPhysicalPif,
             NonCompatibleManagementInterface,
             WrongRoleOnMaster,
-            WrongRoleOnSlave,
+            WrongRoleOnSupporter,
             HasClusteringEnabled,
             WrongNumberOfIpsCluster,
             WrongNumberOfIpsBond,
@@ -85,24 +85,24 @@ namespace XenAdmin.Core
         /// <summary>
         /// Whether a server can join a pool (or form a pool with a standalone server)
         /// </summary>
-        /// <param name="slaveConnection">The connection of the server that wants to join the pool</param>
+        /// <param name="supporterConnection">The connection of the server that wants to join the pool</param>
         /// <param name="masterConnection">The connection of the existing pool or of the proposed master of a new pool</param>
         /// <param name="allowLicenseUpgrade">Whether we can upgrade a free host to a v6 license of the pool it's joining</param>
-        /// <param name="allowCpuLevelling">Whether we can apply CPU levelling to the slave before it joins the pool</param>
+        /// <param name="allowCpuLevelling">Whether we can apply CPU levelling to the supporter before it joins the pool</param>
         /// <returns>The reason why the server can't join the pool, or Reason.Allowed if it's OK</returns>
-        public static Reason CanJoinPool(IXenConnection slaveConnection, IXenConnection masterConnection, bool allowLicenseUpgrade, bool allowCpuLevelling, bool allowSlaveAdConfig, int poolSizeIncrement = 1)
+        public static Reason CanJoinPool(IXenConnection supporterConnection, IXenConnection masterConnection, bool allowLicenseUpgrade, bool allowCpuLevelling, bool allowSupporterAdConfig, int poolSizeIncrement = 1)
         {
-            if (!Helpers.IsConnected(slaveConnection))  // also implies slaveConnection != null
+            if (!Helpers.IsConnected(supporterConnection))  // also implies supporterConnection != null
                 return Reason.NotConnected;
 
-            Host slaveHost = Helpers.GetMaster(slaveConnection);
-            if (Connecting(slaveHost))  // also implies slaveHost != null
+            Host supporterHost = Helpers.GetMaster(supporterConnection);
+            if (Connecting(supporterHost))  // also implies supporterHost != null
                 return Reason.Connecting;
 
-            if (LicenseRestriction(slaveHost))
+            if (LicenseRestriction(supporterHost))
                 return Reason.LicenseRestriction;
 
-            if (IsAPool(slaveConnection))
+            if (IsAPool(supporterConnection))
                 return Reason.IsAPool;
 
             if (!Helpers.IsConnected(masterConnection))  // also implies masterConnection != null
@@ -112,28 +112,28 @@ namespace XenAdmin.Core
             if (Connecting(masterHost))  // also implies masterHost != null
                 return Reason.MasterConnecting;
 
-            if (WillBeMaster(slaveConnection, masterConnection))
+            if (WillBeMaster(supporterConnection, masterConnection))
                 return Reason.WillBeMaster;
 
             if (!RoleOK(masterConnection))
                 return Reason.WrongRoleOnMaster;
 
-            if (!CompatibleCPUs(slaveHost, masterHost, allowCpuLevelling))
+            if (!CompatibleCPUs(supporterHost, masterHost, allowCpuLevelling))
                 return Reason.DifferentCPUs;
 
-            if (DifferentServerVersion(slaveHost, masterHost))
+            if (DifferentServerVersion(supporterHost, masterHost))
                 return Reason.DifferentServerVersion;
 
-            if (DifferentHomogeneousUpdates(slaveHost, masterHost))
+            if (DifferentHomogeneousUpdates(supporterHost, masterHost))
                 return masterHost.Connection.Cache.Hosts.Length > 1 ? Reason.DifferentHomogeneousUpdatesFromPool : Reason.DifferentHomogeneousUpdatesFromMaster;
 
-            if (FreeHostPaidMaster(slaveHost, masterHost, allowLicenseUpgrade))
+            if (FreeHostPaidMaster(supporterHost, masterHost, allowLicenseUpgrade))
                 return Reason.UnlicensedHostLicensedMaster;
 
-            if (PaidHostFreeMaster(slaveHost, masterHost))
+            if (PaidHostFreeMaster(supporterHost, masterHost))
                 return Reason.LicensedHostUnlicensedMaster;
 
-            if (LicenseMismatch(slaveHost, masterHost))
+            if (LicenseMismatch(supporterHost, masterHost))
                 return Reason.LicenseMismatch;
 
             if (MasterPoolMaxNumberHostReached(masterConnection))
@@ -142,37 +142,37 @@ namespace XenAdmin.Core
             if (WillExceedPoolMaxSize(masterConnection, poolSizeIncrement))
                 return Reason.WillExceedPoolMaxSize;
             
-            if (!SameLinuxPack(slaveHost, masterHost))
+            if (!SameLinuxPack(supporterHost, masterHost))
                 return Reason.NotSameLinuxPack;
 
-            if (!RoleOK(slaveConnection))
-                return Reason.WrongRoleOnSlave;
+            if (!RoleOK(supporterConnection))
+                return Reason.WrongRoleOnSupporter;
 
-            if (HasSharedStorage(slaveConnection))
+            if (HasSharedStorage(supporterConnection))
                 return Reason.HasSharedStorage;
 
-            if (HasRunningVMs(slaveConnection))
+            if (HasRunningVMs(supporterConnection))
                 return Reason.HasRunningVMs;
 
-            if (DifferentNetworkBackends(slaveHost, masterHost))
+            if (DifferentNetworkBackends(supporterHost, masterHost))
                 return Reason.DifferentNetworkBackends;
 
-            if (!CompatibleAdConfig(slaveHost, masterHost, allowSlaveAdConfig))
+            if (!CompatibleAdConfig(supporterHost, masterHost, allowSupporterAdConfig))
                 return Reason.DifferentAdConfig;
 
             if (HaEnabled(masterConnection))
                 return Reason.MasterHasHA;
 
-            if (Helpers.FeatureForbidden(slaveConnection, Host.RestrictManagementOnVLAN) && HasSlaveAnyNonPhysicalPif(slaveConnection))
+            if (Helpers.FeatureForbidden(supporterConnection, Host.RestrictManagementOnVLAN) && HasSupporterAnyNonPhysicalPif(supporterConnection))
                 return Reason.NotPhysicalPif;
 
-            if (!Helpers.FeatureForbidden(slaveConnection, Host.RestrictManagementOnVLAN) && !HasCompatibleManagementInterface(slaveConnection))
+            if (!Helpers.FeatureForbidden(supporterConnection, Host.RestrictManagementOnVLAN) && !HasCompatibleManagementInterface(supporterConnection))
                 return Reason.NonCompatibleManagementInterface;
 
-            if (slaveHost?.Connection?.Cache.Clusters.FirstOrDefault() != null)
+            if (supporterHost?.Connection?.Cache.Clusters.FirstOrDefault() != null)
                 return Reason.HasClusteringEnabled;
 
-            if (!HasIpForClusterNetwork(masterConnection, slaveHost, out var clusterHostInBond))
+            if (!HasIpForClusterNetwork(masterConnection, supporterHost, out var clusterHostInBond))
                 return clusterHostInBond ? Reason.WrongNumberOfIpsBond : Reason.WrongNumberOfIpsCluster;    
 
             return Reason.Allowed;
@@ -234,7 +234,7 @@ namespace XenAdmin.Core
                     return Messages.POOL_JOIN_NON_COMPATIBLE_MANAGEMENT_INTERFACE;
                 case Reason.WrongRoleOnMaster:
                     return Messages.NEWPOOL_MASTER_ROLE;
-                case Reason.WrongRoleOnSlave:
+                case Reason.WrongRoleOnSupporter:
                     return Messages.NEWPOOL_SUPPORTER_ROLE;
                 case Reason.HasClusteringEnabled:
                     return Messages.NEW_POOL_CLUSTERING_ENABLED;
@@ -248,11 +248,11 @@ namespace XenAdmin.Core
             }
         }
 
-        private static bool WillBeMaster(IXenConnection slave, IXenConnection master)
+        private static bool WillBeMaster(IXenConnection supporter, IXenConnection master)
         {
             // Assume we have already tested that the connection has no other reason why it can't be a master
             // (e.g., connected, licensing restrictions, ...)
-            return slave == master;
+            return supporter == master;
         }
 
         private static bool HasSharedStorage(IXenConnection connection)
@@ -291,28 +291,28 @@ namespace XenAdmin.Core
         }
 
         // If CompatibleCPUs(supporter, master, false) is true, the CPUs can be pooled without masking first.
-        // If CompatibleCPUs(supporter, master, true) is true but CompatibleCPUs(slave, master, false) is false,
+        // If CompatibleCPUs(supporter, master, true) is true but CompatibleCPUs(supporter, master, false) is false,
         // the CPUs can be pooled but only if they are masked first.
-        public static bool CompatibleCPUs(Host slave, Host master, bool allowCpuLevelling)
+        public static bool CompatibleCPUs(Host supporter, Host master, bool allowCpuLevelling)
         {
-            if (slave == null || master == null)
+            if (supporter == null || master == null)
                 return true;
 
-            Dictionary<string, string> slave_cpu_info = slave.cpu_info;
+            Dictionary<string, string> supporter_cpu_info = supporter.cpu_info;
             Dictionary<string, string> master_cpu_info = master.cpu_info;
-            if (!Helper.AreEqual2(slave_cpu_info, null) && !Helper.AreEqual2(master_cpu_info, null))
+            if (!Helper.AreEqual2(supporter_cpu_info, null) && !Helper.AreEqual2(master_cpu_info, null))
             {
                 // Host.cpu_info is supported
                 // From this point on, it is only necessary to have matching vendor and features
                 // (after masking the supporter, if allowed).
-                if (slave_cpu_info["vendor"] != master_cpu_info["vendor"])
+                if (supporter_cpu_info["vendor"] != master_cpu_info["vendor"])
                     return false;
 
                 // As of Dundee, feature levelling makes all CPUs from the same vendor compatible
-                if (Helpers.DundeeOrGreater(master) || Helpers.DundeeOrGreater(slave))
+                if (Helpers.DundeeOrGreater(master) || Helpers.DundeeOrGreater(supporter))
                     return true;
 
-                if (slave_cpu_info["features"] == master_cpu_info["features"])
+                if (supporter_cpu_info["features"] == master_cpu_info["features"])
                     return true;
 
                 if (allowCpuLevelling)
@@ -322,14 +322,14 @@ namespace XenAdmin.Core
                     if (pool != null && pool.other_config.ContainsKey("cpuid_feature_mask"))
                         cpuid_feature_mask = pool.other_config["cpuid_feature_mask"];
 
-                    return MaskableTo(slave_cpu_info["maskable"], slave_cpu_info["physical_features"], master_cpu_info["features"], cpuid_feature_mask);
+                    return MaskableTo(supporter_cpu_info["maskable"], supporter_cpu_info["physical_features"], master_cpu_info["features"], cpuid_feature_mask);
                 }
 
                 return false;    
             }
 
             // Host.cpu_info not supported: use the old method which compares vendor, family, model and flags
-            foreach (Host_cpu cpu1 in slave.Connection.Cache.Host_cpus)
+            foreach (Host_cpu cpu1 in supporter.Connection.Cache.Host_cpus)
             {
                 foreach (Host_cpu cpu2 in master.Connection.Cache.Host_cpus)
                 {
@@ -403,60 +403,60 @@ namespace XenAdmin.Core
             return true;
         }
 
-        private static bool DifferentServerVersion(Host slave, Host master)
+        private static bool DifferentServerVersion(Host supporter, Host master)
         {
-            if (slave.API_version_major != master.API_version_major ||
-                slave.API_version_minor != master.API_version_minor)
+            if (supporter.API_version_major != master.API_version_major ||
+                supporter.API_version_minor != master.API_version_minor)
                 return true;
 
-            if (Helpers.FalconOrGreater(slave) && string.IsNullOrEmpty(slave.GetDatabaseSchema()))
+            if (Helpers.FalconOrGreater(supporter) && string.IsNullOrEmpty(supporter.GetDatabaseSchema()))
                 return true;
             if (Helpers.FalconOrGreater(master) && string.IsNullOrEmpty(master.GetDatabaseSchema()))
                 return true;
 
-            if (slave.GetDatabaseSchema() != master.GetDatabaseSchema())
+            if (supporter.GetDatabaseSchema() != master.GetDatabaseSchema())
                 return true;
 
             return
-                !Helpers.ElyOrGreater(master) && !Helpers.ElyOrGreater(slave) && slave.BuildNumber() != master.BuildNumber() ||
-                slave.PlatformVersion() != master.PlatformVersion() ||
-                slave.ProductBrand() != master.ProductBrand();
+                !Helpers.ElyOrGreater(master) && !Helpers.ElyOrGreater(supporter) && supporter.BuildNumber() != master.BuildNumber() ||
+                supporter.PlatformVersion() != master.PlatformVersion() ||
+                supporter.ProductBrand() != master.ProductBrand();
         }
 
         /// <summary>
         /// Check whether all updates that request homogeneity are in fact homogeneous
         /// between master and supporter. This is used in CanJoinPool and prevents the pool from being created
         /// </summary>
-        private static bool DifferentHomogeneousUpdates(Host slave, Host master)
+        private static bool DifferentHomogeneousUpdates(Host supporter, Host master)
         {
-            if (slave == null || master == null)
+            if (supporter == null || master == null)
                 return false;
 
-            if (!Helpers.ElyOrGreater(slave) || !Helpers.ElyOrGreater(master))
+            if (!Helpers.ElyOrGreater(supporter) || !Helpers.ElyOrGreater(master))
                 return false;
 
             var masterUpdates = master.AppliedUpdates().Where(update => update.EnforceHomogeneity()).Select(update => update.uuid).ToList();
-            var slaveUpdates = slave.AppliedUpdates().Where(update => update.EnforceHomogeneity()).Select(update => update.uuid).ToList();
+            var supporterUpdates = supporter.AppliedUpdates().Where(update => update.EnforceHomogeneity()).Select(update => update.uuid).ToList();
 
-            return masterUpdates.Count != slaveUpdates.Count || !masterUpdates.All(slaveUpdates.Contains);
+            return masterUpdates.Count != supporterUpdates.Count || !masterUpdates.All(supporterUpdates.Contains);
         }
 
-        private static bool SameLinuxPack(Host slave, Host master)
+        private static bool SameLinuxPack(Host supporter, Host master)
         {
-            return slave.LinuxPackPresent() == master.LinuxPackPresent();
+            return supporter.LinuxPackPresent() == master.LinuxPackPresent();
         }
 
-        public static bool CompatibleAdConfig(Host slave, Host master, bool allowSlaveConfig)
+        public static bool CompatibleAdConfig(Host supporter, Host master, bool allowSupporterConfig)
         {
-            if (slave == null || master == null)
+            if (supporter == null || master == null)
                 return false;
 
             // CA-30223: There is no need to check the config of the auth services are the same, as xapi only relies on these two values being equal
-            if (slave.external_auth_type != master.external_auth_type ||
-                slave.external_auth_service_name != master.external_auth_service_name)
+            if (supporter.external_auth_type != master.external_auth_type ||
+                supporter.external_auth_service_name != master.external_auth_service_name)
             {
                 // if the supporter is AD free and we are allowing the configure then we can solve this
-                if (slave.external_auth_type == Auth.AUTH_TYPE_NONE && allowSlaveConfig)
+                if (supporter.external_auth_type == Auth.AUTH_TYPE_NONE && allowSupporterConfig)
                     return true;
 
                 return false;
@@ -464,28 +464,28 @@ namespace XenAdmin.Core
             return true;
         }
 
-        public static bool FreeHostPaidMaster(Host slave, Host master, bool allowLicenseUpgrade)
+        public static bool FreeHostPaidMaster(Host supporter, Host master, bool allowLicenseUpgrade)
         {
-            if (slave == null || master == null)
+            if (supporter == null || master == null)
                 return false;
             
-            return slave.IsFreeLicense() && !master.IsFreeLicense() && !allowLicenseUpgrade;
+            return supporter.IsFreeLicense() && !master.IsFreeLicense() && !allowLicenseUpgrade;
         }
 
-        private static bool PaidHostFreeMaster(Host slave, Host master)
+        private static bool PaidHostFreeMaster(Host supporter, Host master)
         {
-            if (slave == null || master == null)
+            if (supporter == null || master == null)
                 return false;
 
-            return !slave.IsFreeLicense() && master.IsFreeLicense();
+            return !supporter.IsFreeLicense() && master.IsFreeLicense();
         }
 
-        private static bool LicenseMismatch(Host slave, Host master)
+        private static bool LicenseMismatch(Host supporter, Host master)
         {
-            Host.Edition slaveEdition = Host.GetEdition(slave.edition);
+            Host.Edition supporterEdition = Host.GetEdition(supporter.edition);
             Host.Edition masterEdition = Host.GetEdition(master.edition);
 
-            return slaveEdition != Host.Edition.Free && masterEdition != Host.Edition.Free && slaveEdition != masterEdition;
+            return supporterEdition != Host.Edition.Free && masterEdition != Host.Edition.Free && supporterEdition != masterEdition;
         }
 
         private static bool MasterPoolMaxNumberHostReached(IXenConnection connection)
@@ -509,19 +509,19 @@ namespace XenAdmin.Core
             return Role.CanPerform(new RbacMethodList("pool.join"), connection);
         }
 
-        private static bool DifferentNetworkBackends(Host slave, Host master)
+        private static bool DifferentNetworkBackends(Host supporter, Host master)
         {
-            if (slave.software_version.ContainsKey("network_backend") &&
+            if (supporter.software_version.ContainsKey("network_backend") &&
                 master.software_version.ContainsKey("network_backend") &&
-                slave.software_version["network_backend"] != master.software_version["network_backend"])
+                supporter.software_version["network_backend"] != master.software_version["network_backend"])
                 return true;
 
             var masterPool = Helpers.GetPoolOfOne(master.Connection);
-            var slavePool = Helpers.GetPoolOfOne(slave.Connection);
+            var supporterPool = Helpers.GetPoolOfOne(supporter.Connection);
 
-            return masterPool != null && slavePool != null &&
-                   masterPool.vSwitchController() && slavePool.vSwitchController() &&
-                   masterPool.vswitch_controller != slavePool.vswitch_controller;
+            return masterPool != null && supporterPool != null &&
+                   masterPool.vSwitchController() && supporterPool.vSwitchController() &&
+                   masterPool.vswitch_controller != supporterPool.vswitch_controller;
         }
 
         /// <summary>
@@ -530,9 +530,9 @@ namespace XenAdmin.Core
         /// so it is not used by CanJoinPool.
         /// </summary>
         /// <returns>A list of strings: each string is the name of a bad supp pack with a reason in brackets</returns>
-        public static List<string> HomogeneousSuppPacksDiffering(List<Host> slaves, IXenObject poolOrMaster)
+        public static List<string> HomogeneousSuppPacksDiffering(List<Host> supporters, IXenObject poolOrMaster)
         {
-            List<Host> allHosts = new List<Host>(slaves);
+            List<Host> allHosts = new List<Host>(supporters);
             allHosts.AddRange(poolOrMaster.Connection.Cache.Hosts);
 
             // Make a dictionary of all supp packs that should be homogeneous
@@ -589,17 +589,17 @@ namespace XenAdmin.Core
         /// Check whether the host that joins the pool has a more extensive feature set than the pool (as long as the CPU vendor is common)
         /// In this case the host will transparently be down-levelled to the pool level (without needing reboots)
         /// </summary>
-        public static bool HostHasMoreFeatures(Host slave, Pool pool)
+        public static bool HostHasMoreFeatures(Host supporter, Pool pool)
         {
-            if (slave == null || pool == null)
+            if (supporter == null || pool == null)
                 return false;
 
-            Dictionary<string, string> slave_cpu_info = slave.cpu_info;
+            Dictionary<string, string> supporter_cpu_info = supporter.cpu_info;
             Dictionary<string, string> pool_cpu_info = pool.cpu_info;
-            if (!Helper.AreEqual2(slave_cpu_info, null) && !Helper.AreEqual2(pool_cpu_info, null))
+            if (!Helper.AreEqual2(supporter_cpu_info, null) && !Helper.AreEqual2(pool_cpu_info, null))
             {
                 // if pool has less features than supporter, then supporter will be down-levelled
-                return FewerFeatures(pool_cpu_info, slave_cpu_info);
+                return FewerFeatures(pool_cpu_info, supporter_cpu_info);
             }
             return false;
         }
@@ -608,17 +608,17 @@ namespace XenAdmin.Core
         /// Check whether the host that joins the pool has a less extensive feature set than the pool (as long as the CPU vendor is common)
         /// In this case the pool is transparently down-levelled to the new host's level (without needing reboots)
         /// </summary>
-        public static bool HostHasFewerFeatures(Host slave, Pool pool)
+        public static bool HostHasFewerFeatures(Host supporter, Pool pool)
         {
-            if (slave == null || pool == null)
+            if (supporter == null || pool == null)
                 return false;
 
-            Dictionary<string, string> slave_cpu_info = slave.cpu_info;
+            Dictionary<string, string> supporer_cpu_info = supporter.cpu_info;
             Dictionary<string, string> pool_cpu_info = pool.cpu_info;
-            if (!Helper.AreEqual2(slave_cpu_info, null) && !Helper.AreEqual2(pool_cpu_info, null))
+            if (!Helper.AreEqual2(supporer_cpu_info, null) && !Helper.AreEqual2(pool_cpu_info, null))
             {
                 // if supporter has less features than pool, then pool will be down-levelled
-                return FewerFeatures(slave_cpu_info, pool_cpu_info);
+                return FewerFeatures(supporer_cpu_info, pool_cpu_info);
             }
             return false;
         }
@@ -665,19 +665,19 @@ namespace XenAdmin.Core
             return false;
         }
 
-        public static bool HasSlaveAnyNonPhysicalPif(IXenConnection slaveConnection)
+        public static bool HasSupporterAnyNonPhysicalPif(IXenConnection supporterConnection)
         {
             return
-                slaveConnection.Cache.PIFs.Any(p => !p.physical);
+                supporterConnection.Cache.PIFs.Any(p => !p.physical);
         }
 
-        public static bool HasCompatibleManagementInterface(IXenConnection slaveConnection)
+        public static bool HasCompatibleManagementInterface(IXenConnection supporterConnection)
         {
             /* if there are non physical pifs present then the supporter should have 
              * only one VLAN and it has to be the management interface. 
              * Bonds and cross server private networks are not allowed */
 
-            int numberOfNonPhysicalPifs = slaveConnection.Cache.PIFs.Count(p => !p.physical);
+            int numberOfNonPhysicalPifs = supporterConnection.Cache.PIFs.Count(p => !p.physical);
             
             /* allow the case where there are only physical pifs */
             if (numberOfNonPhysicalPifs == 0)
@@ -686,10 +686,10 @@ namespace XenAdmin.Core
             if(numberOfNonPhysicalPifs != 1)
                 return false;
             else
-                return slaveConnection.Cache.PIFs.Any(p => !p.physical && p.management && p.VLAN != -1);
+                return supporterConnection.Cache.PIFs.Any(p => !p.physical && p.management && p.VLAN != -1);
         }
 
-        public static bool HasIpForClusterNetwork(IXenConnection masterConnection, Host slaveHost, out bool clusterHostInBond)
+        public static bool HasIpForClusterNetwork(IXenConnection masterConnection, Host supporterHost, out bool clusterHostInBond)
         {
             clusterHostInBond = false;
             var clusterHost = masterConnection.Cache.Cluster_hosts.FirstOrDefault();
@@ -724,23 +724,23 @@ namespace XenAdmin.Core
             if (clusterHostInBond)
             {
 
-                List<PIF> slaves = new List<PIF>();
+                List<PIF> members = new List<PIF>();
 
                 var bonds = masterConnection.ResolveAll(clusterHostPif.bond_master_of);
 
                 foreach (var bond in bonds)
                 {
-                    slaves.AddRange(masterConnection.ResolveAll(bond.slaves));
+                    members.AddRange(masterConnection.ResolveAll(bond.slaves));
                 }
 
-                ids.AddRange(slaves.Select(slave => slave.device));
+                ids.AddRange(members.Select(member => member.device));
             }
             else
             {
                 ids.Add(clusterHostPif.device);
             }
 
-            var pifs = slaveHost.Connection.ResolveAll(slaveHost.PIFs);
+            var pifs = supporterHost.Connection.ResolveAll(supporterHost.PIFs);
 
             foreach (var pif in pifs)
             {

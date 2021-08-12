@@ -58,12 +58,12 @@ namespace XenAdmin.Actions
         /// get metrics like the carrier flag, if they haven't already been brought up as a
         /// management interface.
         /// </summary>
-        private readonly List<PIF> Slaves = new List<PIF>();
+        private readonly List<PIF> Members = new List<PIF>();
 
         /// <summary>
         /// The first member (ordered by name) under each master.
         /// </summary>
-        private readonly Dictionary<PIF, PIF> FirstSlaves = new Dictionary<PIF, PIF>();
+        private readonly Dictionary<PIF, PIF> FirstMembers = new Dictionary<PIF, PIF>();
 
         /// <summary>
         /// The network that we're either going to destroy or rename.
@@ -110,18 +110,18 @@ namespace XenAdmin.Actions
                         Masters.Add(master);
                         master.Locked = true;
 
-                        List<PIF> slaves = Connection.ResolveAll(b.slaves);
-                        NetworkingHelper.Sort(slaves);
-                        foreach (PIF pif in slaves)
+                        List<PIF> members = Connection.ResolveAll(b.slaves);
+                        NetworkingHelper.Sort(members);
+                        foreach (PIF pif in members)
                         {
-                            Slaves.Add(pif);
+                            Members.Add(pif);
                             pif.Locked = true;
                         }
 
-                        FirstSlaves[master] = Connection.Resolve(b.primary_slave);
+                        FirstMembers[master] = Connection.Resolve(b.primary_slave);
 
-                        if (!FirstSlaves.ContainsKey(master) && slaves.Count != 0)
-                            FirstSlaves[master] = slaves[0];
+                        if (!FirstMembers.ContainsKey(master) && members.Count != 0)
+                            FirstMembers[master] = members[0];
                     }
 
                     AppliesTo.Add(host.opaque_ref);
@@ -147,7 +147,7 @@ namespace XenAdmin.Actions
             {
                 foreach (PIF master in Masters)
                 {
-                    NetworkingActionHelpers.MoveManagementInterfaceName(this, master, FirstSlaves[master]);
+                    NetworkingActionHelpers.MoveManagementInterfaceName(this, master, FirstMembers[master]);
                     PercentComplete += incr;
                 }
             }
@@ -229,7 +229,7 @@ namespace XenAdmin.Actions
             foreach (PIF master in Masters)
                 master.Locked = false;
 
-            foreach (PIF pif in Slaves)
+            foreach (PIF pif in Members)
                 pif.Locked = false;
 
             if (Network != null)

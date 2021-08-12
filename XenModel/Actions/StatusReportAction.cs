@@ -82,7 +82,7 @@ namespace XenAdmin.Actions
             {
                 Status = ReportStatus.compiling;
                 CopyClientLogs();
-                CompileMasterSlaveInfo();
+                CompileMasterSupporterInfo();
                 CompileClientMetadata();
                 Tick(100, Messages.COMPLETED);
                 Status = ReportStatus.succeeded;
@@ -120,7 +120,7 @@ namespace XenAdmin.Actions
             }
         }
 
-        private void CompileMasterSlaveInfo()
+        private void CompileMasterSupporterInfo()
         {
             var mastersInfo = new List<string>();
             foreach (var host in hosts)

@@ -245,7 +245,7 @@ namespace XenAdmin.Actions
             action.Description = string.Format(Messages.ACTION_CHANGE_NETWORKING_MANAGEMENT_RECONFIGURED, pif.Name());
         }
 
-        internal static void WaitForslavesToRecover(Pool pool)
+        internal static void WaitForMembersToRecover(Pool pool)
         {
             
             int RetryLimit = 60, RetryAttempt = 0;
@@ -306,7 +306,7 @@ namespace XenAdmin.Actions
             */
 
            action.Description = string.Format(Messages.ACTION_WAIT_FOR_POOL_MEMBERS_TO_RECOVER);
-           WaitForslavesToRecover(pool);
+           WaitForMembersToRecover(pool);
            
             /* Reconfigure IP for supporters and then master */
            

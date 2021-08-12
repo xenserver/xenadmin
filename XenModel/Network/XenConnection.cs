@@ -1467,19 +1467,19 @@ namespace XenAdmin.Network
                             {
                                 log.DebugFormat("Found a member of {0} at {1}, but it's still booting; trying the next pool member",
                                                 LastMasterHostname, Hostname);
-                                MaybeStartNextSlaveTimer(reason, error);
+                                MaybeStartNextPoolMemberTimer(reason, error);
                             }
                             else
                             {
                                 log.DebugFormat("Found a member of {0} at {1}, but got a failure; trying the next pool member",
                                                 LastMasterHostname, Hostname);
-                                MaybeStartNextSlaveTimer(reason, error);
+                                MaybeStartNextPoolMemberTimer(reason, error);
                             }
                         }
                         else if (PoolMemberRemaining())
                         {
                             log.DebugFormat("Connection to {0} failed; trying the next pool member", Hostname);
-                            MaybeStartNextSlaveTimer(reason, error);
+                            MaybeStartNextPoolMemberTimer(reason, error);
                         }
                         else
                         {
@@ -1491,7 +1491,7 @@ namespace XenAdmin.Network
                                 {
                                     PoolMemberIndex = 0;
                                 }
-                                MaybeStartNextSlaveTimer(reason, error);
+                                MaybeStartNextPoolMemberTimer(reason, error);
                             }
                             else if (LastMasterHostname != "")
                             {
@@ -1643,7 +1643,7 @@ namespace XenAdmin.Network
         /// When HA is enabled, and going through each of the supporters to try and find the new master, the time between failing
         /// to connect to one supporter and trying to connect to the next in the list.
         /// </summary>
-        private const int SEARCH_NEXT_SLAVE_TIMEOUT_MS = 15 * 1000;
+        private const int SEARCH_NEXT_SUPPORTER_TIMEOUT_MS = 15 * 1000;
         /// <summary>
         /// When going through each of the remembered members of the pool looking for the new master, don't start another pass
         /// through connecting to each of the hosts if we've already been looking for this long.
@@ -1662,10 +1662,10 @@ namespace XenAdmin.Network
             StartReconnectMasterTimer(SEARCH_NEW_MASTER_TIMEOUT_MS);
         }
 
-        private void MaybeStartNextSlaveTimer(string reason, Exception error)
+        private void MaybeStartNextPoolMemberTimer(string reason, Exception error)
         {
             if (PoolMemberRemaining())
-                StartReconnectMasterTimer(SEARCH_NEXT_SLAVE_TIMEOUT_MS);
+                StartReconnectMasterTimer(SEARCH_NEXT_SUPPORTER_TIMEOUT_MS);
            else
                 OnConnectionResult(false, reason, error); 
         }
@@ -1933,7 +1933,7 @@ namespace XenAdmin.Network
 
                     if (master.address == hostname)
                     {
-                        // we have tried to connect to a slave that is a member of a pool we are already connected to.
+                        // we have tried to connect to a supporter that is a member of a pool we are already connected to.
                         return pool.Name();
                     }
                 }

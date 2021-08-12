@@ -41,7 +41,7 @@ namespace XenAdmin.Actions
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private readonly List<Host> _slaves, _hostsToRelicense, _hostsToCpuMask, _hostsToAdConfigure;
+        private readonly List<Host> _supporters, _hostsToRelicense, _hostsToCpuMask, _hostsToAdConfigure;
         private readonly string _name;
         private readonly string _description;
 
@@ -49,13 +49,13 @@ namespace XenAdmin.Actions
         /// For Create only.
         /// </summary>
         /// <param name="master"></param>
-        /// <param name="slaves"></param>
+        /// <param name="supporters"></param>
         /// <param name="name"></param>
         /// <param name="description"></param>
         /// <param name="acceptNTolChanges"></param>
         /// <param name="doOnLicensingFailure"></param>
         /// <param name="getAdCredentials"></param>
-        public CreatePoolAction(Host master, List<Host> slaves, string name, string description, Func<Host, AdUserAndPassword> getAdCredentials,
+        public CreatePoolAction(Host master, List<Host> supporters, string name, string description, Func<Host, AdUserAndPassword> getAdCredentials,
             Func<HostAbstractAction, Pool, long, long, bool> acceptNTolChanges, Action<List<LicenseFailure>, string> doOnLicensingFailure)
             : base(master.Connection, string.Format(Messages.CREATING_NAMED_POOL_WITH_MASTER, name, master.Name()),
             getAdCredentials, acceptNTolChanges, doOnLicensingFailure)
@@ -63,10 +63,10 @@ namespace XenAdmin.Actions
             System.Diagnostics.Trace.Assert(master != null);
 
             this.Host = master;
-            this._slaves = slaves;
-            _hostsToRelicense = slaves.FindAll(h => PoolJoinRules.FreeHostPaidMaster(h, master, false));
-            _hostsToCpuMask = slaves.FindAll(h => !PoolJoinRules.CompatibleCPUs(h, master, false));
-            _hostsToAdConfigure = slaves.FindAll(h => !PoolJoinRules.CompatibleAdConfig(h, master, false));
+            this._supporters = supporters;
+            _hostsToRelicense = supporters.FindAll(h => PoolJoinRules.FreeHostPaidMaster(h, master, false));
+            _hostsToCpuMask = supporters.FindAll(h => !PoolJoinRules.CompatibleCPUs(h, master, false));
+            _hostsToAdConfigure = supporters.FindAll(h => !PoolJoinRules.CompatibleAdConfig(h, master, false));
             this._name = name;
             this._description = description;
             this.Description = Messages.WAITING;
@@ -101,7 +101,7 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            double p2 = 100.0 / _slaves.Count;
+            double p2 = 100.0 / _supporters.Count;
             int i2 = 0;
 
             this.Description = Messages.POOLCREATE_CREATING;
@@ -121,23 +121,23 @@ namespace XenAdmin.Actions
 
             Description = Messages.ACTION_POOL_WIZARD_CREATE_DESCRIPTION_ADDING_MEMBERS;
 
-            foreach (Host slave in _slaves)
+            foreach (Host supporter in _supporters)
             {
-                log.InfoFormat("Adding member {0}", slave.Name());
+                log.InfoFormat("Adding member {0}", supporter.Name());
                 int lo = (int)(i2 * p2);
                 int hi = (int)((i2 + 1) * p2);
                 // RBAC: We have forced identical AD configs, but this will fail unless both supporter-to-be and master sessions have the correct role.
-                Session = NewSession(slave.Connection);
+                Session = NewSession(supporter.Connection);
                 RelatedTask = XenAPI.Pool.async_join(Session, master_pool.Connection.Hostname, master_pool.Connection.Username, master_pool.Connection.Password);
                 PollToCompletion(lo, hi);
                 i2++;
 
-                log.InfoFormat("Dropping connection to {0}", slave.Name());
-                slave.Connection.EndConnect();
+                log.InfoFormat("Dropping connection to {0}", supporter.Name());
+                supporter.Connection.EndConnect();
                 // EndConnect will clear the cache itself, but on a background thread. To prevent a race between the event handlers 
                 // being removed with the connection, and the final cache clear events we explicitly call cache clear once more before
                 // removing the connection.
-                ConnectionsManager.ClearCacheAndRemoveConnection(slave.Connection);
+                ConnectionsManager.ClearCacheAndRemoveConnection(supporter.Connection);
             }
 
             Description = Messages.ACTION_POOL_WIZARD_CREATE_DESCRIPTION_DONE;

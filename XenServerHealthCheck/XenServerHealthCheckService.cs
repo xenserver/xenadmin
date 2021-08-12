@@ -159,7 +159,7 @@ namespace XenServerHealthCheck
                         }
                         else
                         {
-                            log.InfoFormat("Remove credential since it is the slave of master {0}", masterName);
+                            log.InfoFormat("Remove credential since it is the supporter of master {0}", masterName);
                             if (session != null)
                                 session.logout();
                             log.Error(exn, exn);

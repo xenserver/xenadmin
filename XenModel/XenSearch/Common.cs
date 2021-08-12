@@ -115,7 +115,7 @@ namespace XenAdmin.XenSearch
         uptime,
         /// <summary>true if HA is enabled, false otherwise</summary>
         ha_enabled,
-        /// <summary>true if at least one of the slaves has different XenServer version from the master, false otherwise</summary>
+        /// <summary>true if at least one of the supporters has different XenServer version from the master, false otherwise</summary>
         isNotFullyUpgraded,
 		/// <summary>A logical set of VMs</summary>
 		appliance,

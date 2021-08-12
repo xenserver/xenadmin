@@ -45,16 +45,16 @@ namespace XenAdmin.Actions
 
         private class NewBond
         {
-            internal NewBond(Bond bond, PIF master, List<PIF> slaves)
+            internal NewBond(Bond bond, PIF master, List<PIF> members)
             {
                 this.bond = bond;
                 this.master = master;
-                this.slaves = slaves;
+                this.members = members;
             }
 
             internal Bond bond;
             internal PIF master;
-            internal List<PIF> slaves;
+            internal List<PIF> members;
         }
 
         private readonly string name_label;
@@ -174,7 +174,7 @@ namespace XenAdmin.Actions
                 foreach (NewBond new_bond in new_bonds)
                 {
                     lo += inc;
-                    ReconfigureManagementInterfaces(new_bond.slaves, new_bond.master, lo);
+                    ReconfigureManagementInterfaces(new_bond.members, new_bond.master, lo);
                 }
             }
             catch (Exception)
@@ -225,11 +225,11 @@ namespace XenAdmin.Actions
             }
         }
 
-        private void ReconfigureManagementInterfaces(List<PIF> slaves, PIF new_master, int hi)
+        private void ReconfigureManagementInterfaces(List<PIF> members, PIF new_master, int hi)
         {
             int lo = PercentComplete;
-            int inc = (hi - lo) / slaves.Count;
-            foreach (PIF pif in slaves)
+            int inc = (hi - lo) / members.Count;
+            foreach (PIF pif in members)
             {
                 lo += inc;
                 NetworkingActionHelpers.MoveManagementInterfaceName(this, pif, new_master);
@@ -239,26 +239,24 @@ namespace XenAdmin.Actions
         /// <summary>
         /// Nothrow guarantee.
         /// </summary>
-        /// <param name="slaves"></param>
-        /// <param name="master"></param>
         private void RevertManagementInterfaces(NewBond new_bond)
         {
-            List<PIF> slaves = new_bond.slaves;
+            List<PIF> members = new_bond.members;
             PIF master = new_bond.master;
             Bond bond = new_bond.bond;
 
-            PIF slave = Connection.Resolve(bond.primary_slave);
+            PIF member = Connection.Resolve(bond.primary_slave);
 
-            if (slave == null)
+            if (member == null)
             {
-                if (slaves.Count == 0)
+                if (members.Count == 0)
                     return;
-                slave = slaves[0];
+                member = members[0];
             }
 
             try
             {
-                NetworkingActionHelpers.MoveManagementInterfaceName(this, master, slave);
+                NetworkingActionHelpers.MoveManagementInterfaceName(this, master, member);
             }
             catch (Exception exn)
             {
