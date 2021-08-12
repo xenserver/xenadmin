@@ -114,7 +114,7 @@ namespace XenAdmin.Commands
 
         protected override void RunCore(SelectedItemCollection selection)
         {
-            AssertOperationAllowsExecution();
+            AssertOperationAllowsRunning();
 
             string title = Messages.ACTION_VMS_RESUMING_ON_TITLE;
             string startDescription = Messages.ACTION_VMS_RESUMING_ON_TITLE;
@@ -160,7 +160,7 @@ namespace XenAdmin.Commands
             RunMultipleActions(actions, title, startDescription, endDescription, true);
         }
 
-        private void AssertOperationAllowsExecution()
+        private void AssertOperationAllowsRunning()
         {
             if(_operation == vm_operations.unknown)
                 throw new NotSupportedException("VM operation unknown is not supported");

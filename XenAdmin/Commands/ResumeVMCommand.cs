@@ -130,7 +130,7 @@ namespace XenAdmin.Commands
                 return Messages.VM_NOT_SUSPENDED;
             }
 
-            return GetCantExecuteNoToolsOrDriversReasonCore(item) ?? base.GetCantRunReasonCore(item);
+            return GetCantRunNoToolsOrDriversReasonCore(item) ?? base.GetCantRunReasonCore(item);
         }
 
         protected override AsyncAction BuildAction(VM vm)

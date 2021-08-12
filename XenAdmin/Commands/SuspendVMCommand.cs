@@ -154,7 +154,7 @@ namespace XenAdmin.Commands
                 return Messages.VM_ALREADY_SUSPENDED;
             }
 
-            var noToolsOrDriversReason = GetCantExecuteNoToolsOrDriversReasonCore(item);
+            var noToolsOrDriversReason = GetCantRunNoToolsOrDriversReasonCore(item);
             if (noToolsOrDriversReason != null)
             {
                 return noToolsOrDriversReason;

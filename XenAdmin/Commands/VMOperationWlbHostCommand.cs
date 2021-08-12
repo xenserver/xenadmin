@@ -72,7 +72,7 @@ namespace XenAdmin.Commands
                 // otherwise don't display a reason - leave this to the error dialog.
 
                 string reason = null;
-                foreach (string r in _recommendation.CantExecuteReasons.Values)
+                foreach (string r in _recommendation.CantRunReasons.Values)
                 {
                     if (reason != null && r != reason)
                     {
@@ -127,7 +127,7 @@ namespace XenAdmin.Commands
 
         protected override bool CanRun(VM vm)
         {
-            return vm != null && _recommendation.CanExecuteByVM.ContainsKey(vm) && _recommendation.CanExecuteByVM[vm];
+            return vm != null && _recommendation.CanRunByVM.ContainsKey(vm) && _recommendation.CanRunByVM[vm];
         }
 
         /// <summary>
@@ -172,9 +172,9 @@ namespace XenAdmin.Commands
             if (vm == null)
                 return base.GetCantRunReasonCore(item);
 
-            if (_recommendation.CantExecuteReasons.ContainsKey(vm))
+            if (_recommendation.CantRunReasons.ContainsKey(vm))
             {
-                return _recommendation.CantExecuteReasons[vm];
+                return _recommendation.CantRunReasons[vm];
             }
 
             return base.GetCantRunReasonCore(item);

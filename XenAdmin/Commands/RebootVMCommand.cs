@@ -139,7 +139,7 @@ namespace XenAdmin.Commands
                     return base.GetCantRunReasonCore(item);
             }
 
-            return GetCantExecuteNoToolsOrDriversReasonCore(item) ?? base.GetCantRunReasonCore(item);
+            return GetCantRunNoToolsOrDriversReasonCore(item) ?? base.GetCantRunReasonCore(item);
         }
 
         protected override AsyncAction BuildAction(VM vm)

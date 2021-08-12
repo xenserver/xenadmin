@@ -110,19 +110,19 @@ namespace XenAdmin.Commands
                         action.Completed += delegate
                         {
                             if (action.Succeeded)
-                                ExecuteRevertAction();
+                                RunRevertAction();
                         };
                         action.RunAsync();
                     }
                 }
                 else
                 {
-                    ExecuteRevertAction();
+                    RunRevertAction();
                 }
             }
         }
 
-        private void ExecuteRevertAction()
+        private void RunRevertAction()
         {
             var action = new VMSnapshotRevertAction(_snapshot);
             action.RunAsync();

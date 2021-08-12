@@ -138,7 +138,7 @@ namespace XenAdmin.Commands
 
         protected sealed override bool CanRunCore(SelectedItemCollection selection)
         {
-            bool atLeastOneCanExecute = false;
+            bool atLeastOneCanRun = false;
 
             foreach (SelectedItem item in selection)
             {
@@ -150,14 +150,14 @@ namespace XenAdmin.Commands
                 }
                 else if (CanRun(vm))
                 {
-                    atLeastOneCanExecute = true;
+                    atLeastOneCanRun = true;
                 }
             }
 
-            return atLeastOneCanExecute;
+            return atLeastOneCanRun;
         }
 
-        protected string GetCantExecuteNoToolsOrDriversReasonCore(IXenObject item)
+        protected string GetCantRunNoToolsOrDriversReasonCore(IXenObject item)
         {
             VM vm = item as VM;
             if (vm == null)

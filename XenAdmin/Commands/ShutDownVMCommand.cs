@@ -168,7 +168,7 @@ namespace XenAdmin.Commands
                     return base.GetCantRunReasonCore(item);
             }
 
-            return GetCantExecuteNoToolsOrDriversReasonCore(item) ?? base.GetCantRunReasonCore(item);
+            return GetCantRunNoToolsOrDriversReasonCore(item) ?? base.GetCantRunReasonCore(item);
         }
 
         protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantRunReasons)
