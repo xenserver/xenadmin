@@ -63,7 +63,7 @@ namespace XenAdmin.Commands
             : base(mainWindow, vm, parent)
         {
         }
-        protected override void Execute(List<VM> vms)
+        protected override void Run(List<VM> vms)
         {
             CancelAllTasks(vms);
             RunAction(vms, Messages.ACTION_VMS_SHUTTING_DOWN_TITLE, Messages.ACTION_VMS_SHUTTING_DOWN_TITLE, Messages.ACTION_VM_SHUT_DOWN, null);

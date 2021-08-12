@@ -117,7 +117,7 @@ namespace XenAdmin.Dialogs.Wlb
         {
             DateTime localExecuteTime;
             WlbScheduledTask.WlbTaskDaysOfWeek localDaysOfWeek;
-            WlbScheduledTask.GetLocalTaskTimes(_task.DaysOfWeek, _task.ExecuteTime, out localDaysOfWeek, out localExecuteTime);
+            WlbScheduledTask.GetLocalTaskTimes(_task.DaysOfWeek, _task.RunTime, out localDaysOfWeek, out localExecuteTime);
 
             //comboDayOfWeek.SelectedValue = (int)localDaysOfWeek;
             comboDayOfWeek.SelectedValue = (int)FindSelectedDay(localDaysOfWeek);
@@ -231,7 +231,7 @@ namespace XenAdmin.Dialogs.Wlb
 
             WlbScheduledTask.GetUTCTaskTimes((WlbScheduledTask.WlbTaskDaysOfWeek)comboDayOfWeek.SelectedValue, executeTime, out utcDaysOfWeek, out utcExecuteTime);
 
-            _task.ExecuteTime = utcExecuteTime;
+            _task.RunTime = utcExecuteTime;
             _task.DaysOfWeek = utcDaysOfWeek;
         }
         #endregion

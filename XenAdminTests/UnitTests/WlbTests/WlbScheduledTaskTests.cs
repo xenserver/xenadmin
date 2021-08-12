@@ -135,7 +135,7 @@ namespace XenAdminTests.UnitTests.WlbTests
         public void TaskExecutionTime()
         {
             const string expectedTime = "11:34 AM";
-            string executionTime = WlbOptModeScheduler.GetTaskExecuteTime(new DateTime(2011, 11, 20, 11, 34, 01));
+            string executionTime = WlbOptModeScheduler.GetTaskRunTime(new DateTime(2011, 11, 20, 11, 34, 01));
             Assert.AreEqual(expectedTime, executionTime);
         }
 

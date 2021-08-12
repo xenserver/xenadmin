@@ -763,7 +763,7 @@ namespace XenAdmin.Dialogs.Wlb
 
                 if (_runReport)
                 {
-                    wlbReportView1.ExecuteReport();
+                    wlbReportView1.RunReport();
                     _runReport = false;
                 }
             }

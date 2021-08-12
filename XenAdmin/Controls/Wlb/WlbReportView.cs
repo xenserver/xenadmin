@@ -446,7 +446,7 @@ namespace XenAdmin.Controls.Wlb
         /// <summary>
         /// Run report
         /// </summary>
-        public void ExecuteReport()
+        public void RunReport()
         {
             try
             {
@@ -476,7 +476,7 @@ namespace XenAdmin.Controls.Wlb
                     _localReport = this.reportViewer1.LocalReport;
                     _localReport.DisplayName = _reportInfo.ReportName;
 
-                    RunReport();
+                    StartRunReport();
 
                     if (!_bDisplayedError)
                         this.reportViewer1.RefreshReport();
@@ -1118,7 +1118,7 @@ namespace XenAdmin.Controls.Wlb
         /// <summary>
         /// Performs common report running steps such as populating datasets, labels and defaults
         /// </summary>
-        private void RunReport()
+        private void StartRunReport()
         {
             try
             {
@@ -1265,7 +1265,7 @@ namespace XenAdmin.Controls.Wlb
                 }
             }
             this.reportViewer1.Reset();
-            this.ExecuteReport();
+            this.RunReport();
         }
 
 
@@ -1285,7 +1285,7 @@ namespace XenAdmin.Controls.Wlb
                 _endLine -= _lineLimit;
             }
             this.reportViewer1.Reset();
-            this.ExecuteReport();
+            this.RunReport();
         }
 
 
@@ -1344,7 +1344,7 @@ namespace XenAdmin.Controls.Wlb
             System.IO.MemoryStream stream = new System.IO.MemoryStream(rdlBytes);
             _localReport.LoadReportDefinition(stream);
 
-            RunReport();
+            StartRunReport();
 
             if (!_bDisplayedError)
                 _localReport.Refresh(); 
@@ -1392,7 +1392,7 @@ namespace XenAdmin.Controls.Wlb
                         _selectedCustomFilters = customFilterDialog.GetSelectedFilters();
                         this.btnSubscribe.Enabled = false;
                         this.reportViewer1.Reset();
-                        this.ExecuteReport();
+                        this.RunReport();
                     }
                     else
                     {

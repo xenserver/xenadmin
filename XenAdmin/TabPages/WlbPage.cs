@@ -616,7 +616,7 @@ namespace XenAdmin.TabPages
             WlbScheduledTask.WlbTaskDaysOfWeek dayOfWeek;
             DateTime executeTime;
 
-            WlbScheduledTask.GetLocalTaskTimes(nextTask.DaysOfWeek, nextTask.ExecuteTime, out dayOfWeek, out executeTime);
+            WlbScheduledTask.GetLocalTaskTimes(nextTask.DaysOfWeek, nextTask.RunTime, out dayOfWeek, out executeTime);
 
             string localDayOfWeek = WlbScheduledTask.DaysOfWeekL10N(dayOfWeek);
 

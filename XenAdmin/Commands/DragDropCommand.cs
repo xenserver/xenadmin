@@ -85,13 +85,13 @@ namespace XenAdmin.Commands
                 return false;
             }
 
-            return CanExecuteCore();
+            return CanRunCore();
         }
 
         /// <summary>
         /// Determines whether this drop-drop operation can run with the specified target-node and drag-data.
         /// </summary>
-        protected virtual bool CanExecuteCore()
+        protected virtual bool CanRunCore()
         {
             return false;
         }
@@ -101,13 +101,13 @@ namespace XenAdmin.Commands
         /// </summary>
         public void Run()
         {
-            ExecuteCore();
+            RunCore();
         }
 
         /// <summary>
         /// Runs this drag-drop operation with the specified target-node and drag data.
         /// </summary>
-        protected virtual void ExecuteCore()
+        protected virtual void RunCore()
         {
         }
 

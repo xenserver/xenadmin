@@ -429,7 +429,7 @@ namespace XenAdmin.Wlb
             set { SetConfigValueInt(BuildComplexKey(KEY_TRIGGER_DAYS_OF_WEEK), (int)value, true); }
         }
 
-        public DateTime ExecuteTime
+        public DateTime RunTime
         {
             get { return GetConfigValueUTCDateTime(BuildComplexKey(KEY_TRIGGER_EXECUTE_TIME)); }
             set { SetConfigValueUTCDateTime(BuildComplexKey(KEY_TRIGGER_EXECUTE_TIME), value, true); }
@@ -490,7 +490,7 @@ namespace XenAdmin.Wlb
             newTask.DisableTime = this.DisableTime;
             newTask.Enabled = this.Enabled;
             newTask.EnableDate = this.EnableDate;
-            newTask.ExecuteTime = this.ExecuteTime;
+            newTask.RunTime = this.RunTime;
             newTask.LastRunDate = this.LastRunDate;
             newTask.LastRunResult = this.LastRunResult;
             newTask.LastTouched = this.LastTouched;
@@ -534,7 +534,7 @@ namespace XenAdmin.Wlb
                     {
                         WlbScheduledTask.WlbTaskDaysOfWeek localDaysOfWeek;
                         DateTime localExecuteTime;
-                        WlbScheduledTask.GetLocalTaskTimes((task.DaysOfWeek), task.ExecuteTime, out localDaysOfWeek, out localExecuteTime);
+                        WlbScheduledTask.GetLocalTaskTimes((task.DaysOfWeek), task.RunTime, out localDaysOfWeek, out localExecuteTime);
 
                         int sortKey = GetSortKey(localDaysOfWeek, localExecuteTime);
 
@@ -585,7 +585,7 @@ namespace XenAdmin.Wlb
                             {
                                 DateTime localExecuteTime;
                                 WlbScheduledTask.WlbTaskDaysOfWeek localDaysOfWeek;
-                                WlbScheduledTask.GetLocalTaskTimes((task.DaysOfWeek & dayValue), task.ExecuteTime, out localDaysOfWeek, out localExecuteTime);
+                                WlbScheduledTask.GetLocalTaskTimes((task.DaysOfWeek & dayValue), task.RunTime, out localDaysOfWeek, out localExecuteTime);
 
                                 int sortKey = GetSortKey(localDaysOfWeek, localExecuteTime);
                                 //if the task is disabled, bump the sort key to prevent conficts

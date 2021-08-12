@@ -169,7 +169,7 @@ namespace XenAdmin.Dialogs.Wlb
             // convert utc days of week and utc run time to local days of week and local execute time
             DateTime localExecuteTime;
             WlbScheduledTask.WlbTaskDaysOfWeek localDaysOfWeek;
-            WlbScheduledTask.GetLocalTaskTimes(this._subscription.DaysOfWeek, this._subscription.ExecuteTimeOfDay, out localDaysOfWeek, out localExecuteTime);
+            WlbScheduledTask.GetLocalTaskTimes(this._subscription.DaysOfWeek, this._subscription.RunTimeOfDay, out localDaysOfWeek, out localExecuteTime);
 
             // subscription run time
             this.dateTimePickerSubscriptionRunTime.Value = localExecuteTime;
@@ -348,7 +348,7 @@ namespace XenAdmin.Dialogs.Wlb
             DateTime utcExecuteTime;
             WlbScheduledTask.WlbTaskDaysOfWeek utcDaysOfWeek;
             WlbScheduledTask.GetUTCTaskTimes((WlbScheduledTask.WlbTaskDaysOfWeek)this.schedDeliverComboBox.SelectedValue, this.dateTimePickerSubscriptionRunTime.Value, out utcDaysOfWeek, out utcExecuteTime);
-            _subscription.ExecuteTimeOfDay = utcExecuteTime;
+            _subscription.RunTimeOfDay = utcExecuteTime;
             _subscription.DaysOfWeek = utcDaysOfWeek;
             if (_subscription.DaysOfWeek != WlbScheduledTask.WlbTaskDaysOfWeek.All)
             {

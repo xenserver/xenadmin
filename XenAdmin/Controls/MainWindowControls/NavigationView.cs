@@ -690,7 +690,7 @@ namespace XenAdmin.Controls.MainWindowControls
             {
                 if (cmd.CanRun())
                 {
-                    cmd.Execute();
+                    cmd.Run();
                     return;
                 }
             }

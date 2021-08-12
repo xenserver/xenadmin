@@ -66,7 +66,7 @@ namespace XenAdmin.Commands
             return ConnectionsManager.XenConnectionsCopy.Any(c => c.IsConnected && Helpers.PostStockholm(c));
         }
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
             var connected = ConnectionsManager.XenConnectionsCopy.Where(c => c.IsConnected).ToList();
 
@@ -75,7 +75,7 @@ namespace XenAdmin.Commands
                     BrandManager.BrandConsole, BrandManager.ProductBrand,
                     BrandManager.ProductVersion82, BrandManager.LegacyConsole);
 
-            return base.GetCantExecuteReasonCore(item);
+            return base.GetCantRunReasonCore(item);
         }
 
         public override Image ContextMenuImage => Images.StaticImages._000_HostUnpatched_h32bit_16;
