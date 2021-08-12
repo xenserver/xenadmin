@@ -53,7 +53,7 @@ namespace XenAdmin.Commands
 		
 		public override string ContextMenuText{get{return Messages.HOST_MENU_IMPORT_VM_TEXT;}}
 
-		protected override void ExecuteCore(SelectedItemCollection selection)
+		protected override void RunCore(SelectedItemCollection selection)
 		{
 			var con = selection.GetConnectionOfFirstItem();
 			MainWindowCommandInterface.ShowPerConnectionWizard(con, new ImportWizard(con, selection.FirstAsXenObject, null, false));

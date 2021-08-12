@@ -54,7 +54,7 @@ namespace XenAdmin.Commands
             get { return Messages.MAINWINDOW_MOVEVM; }
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             var con = selection.GetConnectionOfFirstItem();
 

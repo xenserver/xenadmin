@@ -73,7 +73,7 @@ namespace XenAdmin.Commands
             return false;
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             var objectsToBeRemoved = (from VirtualTreeNode node in _nodes
                                     let xenObject = node.Tag as IXenObject

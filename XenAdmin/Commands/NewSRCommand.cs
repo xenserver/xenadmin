@@ -62,7 +62,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             MainWindowCommandInterface.ShowPerConnectionWizard(selection[0].Connection, new NewSRWizard(selection[0].Connection));
         }

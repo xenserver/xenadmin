@@ -433,7 +433,7 @@ namespace XenAdmin.Commands
             return new CommandErrorDialog(Messages.ERROR_DESTROYING_STORAGE_ITEMS_TITLE, Messages.ERROR_DESTROYING_STORAGE_ITEMS_MESSAGE, cantExecuteReasons);
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             List<AsyncAction> actionsToComplete = new List<AsyncAction>();
             List<VM> deletedVMSnapshots = new List<VM>();

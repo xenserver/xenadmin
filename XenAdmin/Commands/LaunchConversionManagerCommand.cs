@@ -57,7 +57,7 @@ namespace XenAdmin.Commands
             return con != null && con.Cache.VMs.Any(v => v.IsConversionVM());
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             var con = selection.GetConnectionOfFirstItem();
 

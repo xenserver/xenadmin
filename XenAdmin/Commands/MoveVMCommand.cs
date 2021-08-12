@@ -56,7 +56,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             var cmd = new CrossPoolMoveVMCommand(MainWindowCommandInterface, selection);
             var con = selection.GetConnectionOfFirstItem();

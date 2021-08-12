@@ -59,7 +59,7 @@ namespace XenAdmin.Commands
             return true;
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             Host h = selection[0].XenObject as Host;
             RescanPIFsAction action = new RescanPIFsAction(h);

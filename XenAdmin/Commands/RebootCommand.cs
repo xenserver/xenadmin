@@ -49,7 +49,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             Command cmd = new RebootHostCommand(MainWindowCommandInterface, selection);
 

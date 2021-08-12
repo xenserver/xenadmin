@@ -60,7 +60,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
            var createAction= new CreateVMFastAction(selection[0].Connection, selection[0].XenObject as VM);
            createAction.Completed += createAction_Completed;

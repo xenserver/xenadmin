@@ -50,7 +50,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             if (Program.MainWindow.HealthCheckOverviewLauncher != null && !HiddenFeatures.HealthCheckHidden)
                 Program.MainWindow.HealthCheckOverviewLauncher.LaunchIfRequired(false, selection);

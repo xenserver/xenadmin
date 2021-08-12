@@ -54,7 +54,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             if (selection[0].XenObject is Host host)
                 MainWindowCommandInterface.ShowPerConnectionWizard(host.Connection, new ChangeServerPasswordDialog(host));

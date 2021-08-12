@@ -64,7 +64,7 @@ namespace XenAdmin.Commands
             return selection.ContainsOneItemOfType<GroupingTag>(CanExecute);
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             MainWindowCommandInterface.PutSelectedNodeIntoEditMode();
         }

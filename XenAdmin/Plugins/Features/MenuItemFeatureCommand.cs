@@ -106,7 +106,7 @@ namespace XenAdmin.Plugins
             return selection.Count > 0;
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             if (_serialization == PluginSerializationLevel.global && !GlobalPlugins.Contains(_menuItemFeature))
             {

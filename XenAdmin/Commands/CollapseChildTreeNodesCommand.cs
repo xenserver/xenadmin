@@ -49,7 +49,7 @@ namespace XenAdmin.Commands
             _nodes = nodes;
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             foreach (VirtualTreeNode node in _nodes)
             {

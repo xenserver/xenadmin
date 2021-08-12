@@ -107,7 +107,7 @@ namespace XenAdmin.Commands
             OnCompleted(new TakeSnapshotCommandCompletedEventArgs(sender.Succeeded));
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             AsyncAction snapshotAction = GetCreateSnapshotAction();
 

@@ -79,7 +79,7 @@ namespace XenAdmin.Commands
             return CanRun() && Run(_connection, _prompt);
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             Run(_connection, _prompt);
         }

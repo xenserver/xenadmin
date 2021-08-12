@@ -60,7 +60,7 @@ namespace XenAdmin.Commands
             get { return GetSelection().Count > 1 ? Messages.MAINWINDOW_MOVE_OBJECTS : Messages.MOVE_VDI_CONTEXT_MENU; }
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             var vdis = selection.AsXenObjects<VDI>();
             new MoveVirtualDiskDialog(selection.GetConnectionOfFirstItem(), vdis).Show(Program.MainWindow);

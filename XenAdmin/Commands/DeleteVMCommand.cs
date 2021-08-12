@@ -73,7 +73,7 @@ namespace XenAdmin.Commands
             return new VMDestroyAction(vm, deleteDisks, deleteSnapshots);
         }
 
-        protected sealed override void ExecuteCore(SelectedItemCollection selection)
+        protected sealed override void RunCore(SelectedItemCollection selection)
         {
             ConfirmVMDeleteDialog dialog = new ConfirmVMDeleteDialog(selection.AsXenObjects<VM>());
 

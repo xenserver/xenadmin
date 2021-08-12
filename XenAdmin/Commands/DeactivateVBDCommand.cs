@@ -156,7 +156,7 @@ namespace XenAdmin.Commands
             return new CommandErrorDialog(Messages.ERROR_DEACTIVATING_MULTIPLE_VDIS_TITLE, Messages.ERROR_DEACTIVATING_MULTIPLE_VDIS_MESSAGE, cantExecuteReasons);
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             List<AsyncAction> actionsToComplete = new List<AsyncAction>();
             foreach (VBD vbd in selection.AsXenObjects<VBD>())

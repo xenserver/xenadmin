@@ -127,7 +127,7 @@ namespace XenAdmin.Commands
 
         protected abstract AsyncAction BuildAction(VM vm);
 
-        protected sealed override void ExecuteCore(SelectedItemCollection selection)
+        protected sealed override void RunCore(SelectedItemCollection selection)
         {
             List<VM> vms = selection.AsXenObjects<VM>(CanExecute);
 

@@ -65,7 +65,7 @@ namespace XenAdmin.Commands
             return dockerContainer.power_state == vm_power_state.Paused;
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             var dockerContainers = new List<DockerContainer>();
 

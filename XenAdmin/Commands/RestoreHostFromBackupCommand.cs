@@ -61,7 +61,7 @@ namespace XenAdmin.Commands
             _filePath = filePath;
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             Execute(selection[0].XenObject as Host, _filePath);
         }

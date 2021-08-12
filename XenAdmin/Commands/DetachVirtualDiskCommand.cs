@@ -149,7 +149,7 @@ namespace XenAdmin.Commands
             return base.GetCantExecuteReasonCore(item);
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             List<AsyncAction> actionsToComplete = new List<AsyncAction>();
             foreach (VDI vdi in selection.AsXenObjects<VDI>())

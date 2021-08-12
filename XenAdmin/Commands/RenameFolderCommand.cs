@@ -63,7 +63,7 @@ namespace XenAdmin.Commands
             _folder = folder;
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             string newName = _newName;
             Folders.FixupRelativePath(ref newName);

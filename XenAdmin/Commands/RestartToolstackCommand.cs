@@ -56,7 +56,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             var actions = new List<AsyncAction>();
             var liveHosts = selection.AsXenObjects<Host>().Where(h => h.IsLive());

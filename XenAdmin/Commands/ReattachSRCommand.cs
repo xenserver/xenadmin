@@ -66,7 +66,7 @@ namespace XenAdmin.Commands
                 MainWindowCommandInterface.ShowPerConnectionWizard(sr.Connection, new NewSRWizard(sr.Connection, sr));
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             Execute((SR)selection[0].XenObject);
         }

@@ -112,7 +112,7 @@ namespace XenAdmin.Commands
         /// </summary>
         protected abstract bool CanExecute(VM vm);
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             AssertOperationAllowsExecution();
 

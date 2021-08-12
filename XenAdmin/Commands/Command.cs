@@ -152,7 +152,7 @@ namespace XenAdmin.Commands
                 var cantExecuteReasons = GetCantExecuteReasons();
                 var errorDialog = cantExecuteReasons.Count > 0 ? GetErrorDialogCore(cantExecuteReasons) : null;
 
-                ExecuteCore(GetSelection());
+                RunCore(GetSelection());
 
                 if (errorDialog != null)
                 {
@@ -165,7 +165,7 @@ namespace XenAdmin.Commands
         /// Runs this Command.
         /// </summary>
         /// <param name="selection">The selection the Command should operate on.</param>
-        protected virtual void ExecuteCore(SelectedItemCollection selection)
+        protected virtual void RunCore(SelectedItemCollection selection)
         {
         }
 

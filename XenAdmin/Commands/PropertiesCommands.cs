@@ -71,7 +71,7 @@ namespace XenAdmin.Commands
             }
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             Execute(selection[0].XenObject);
         }
@@ -187,7 +187,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             Execute(selection[0].PoolAncestor);
         }
@@ -223,7 +223,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             Execute(selection[0].HostAncestor);
         }

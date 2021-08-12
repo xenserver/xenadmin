@@ -67,7 +67,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             List<SR> srList = selection.AsXenObjects<SR>(CanExecute);
 

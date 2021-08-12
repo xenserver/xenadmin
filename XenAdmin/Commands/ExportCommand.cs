@@ -104,7 +104,7 @@ namespace XenAdmin.Commands
             return string.Empty;
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             var con = selection.GetConnectionOfFirstItem();
             MainWindowCommandInterface.ShowPerConnectionWizard(con, new ExportApplianceWizard(con, selection));

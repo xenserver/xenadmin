@@ -56,7 +56,7 @@ namespace XenAdmin.Commands
             _pool = pool;
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             AddServerDialog dialog = new AddServerDialog(null, false);
             dialog.CachePopulated += dialog_CachePopulated;

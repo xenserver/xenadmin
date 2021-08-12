@@ -67,7 +67,7 @@ namespace XenAdmin.Commands
             _pool = pool;
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             var reasons = new Dictionary<IXenObject, string>();
             foreach (Host host in _hosts)

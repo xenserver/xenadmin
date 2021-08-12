@@ -203,7 +203,7 @@ namespace XenAdmin.Commands
                 return dialogResult == DialogResult.Yes;
             }
 
-            protected override void ExecuteCore(SelectedItemCollection selection)
+            protected override void RunCore(SelectedItemCollection selection)
             {
                 // remove single VM from group
                 if (selection.Count == 1)
@@ -241,7 +241,7 @@ namespace XenAdmin.Commands
             {
             }
 
-            protected override void ExecuteCore(SelectedItemCollection selection)
+            protected override void RunCore(SelectedItemCollection selection)
             {
                 MainWindowCommandInterface.ShowPerConnectionWizard(selection[0].Connection,
                     VMGroup<T>.NewGroupWizard(Helpers.GetPoolOfOne(selection[0].Connection), selection.AsXenObjects<VM>()));

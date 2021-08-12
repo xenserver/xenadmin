@@ -66,7 +66,7 @@ namespace XenAdmin.Commands
             Parent = parent;
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             List<AsyncAction> actions = new List<AsyncAction>();
             foreach (Host host in selection.AsXenObjects<Host>(CanExecute))

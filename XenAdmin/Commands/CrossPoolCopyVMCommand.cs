@@ -52,7 +52,7 @@ namespace XenAdmin.Commands
             get { return Messages.MAINWINDOW_COPY_VM; }
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             var con = selection.GetConnectionOfFirstItem();
 

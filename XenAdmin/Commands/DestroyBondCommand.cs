@@ -59,7 +59,7 @@ namespace XenAdmin.Commands
             return result;
         }
 
-        protected sealed override void ExecuteCore(SelectedItemCollection selection)
+        protected sealed override void RunCore(SelectedItemCollection selection)
         {
             //It only supports one item selected for now
             Trace.Assert(selection.Count==1);

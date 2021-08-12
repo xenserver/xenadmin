@@ -68,7 +68,7 @@ namespace XenAdmin.Commands
             _filenameSpecified = true;
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             if (_filenameSpecified)
             {

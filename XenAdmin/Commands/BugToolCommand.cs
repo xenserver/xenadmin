@@ -50,7 +50,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             if (selection != null && selection.AllItemsAre<IXenObject>(x => x is Host || x is Pool))
                 MainWindowCommandInterface.ShowForm(typeof(BugToolWizard), selection.AsXenObjects<IXenObject>().ToArray());

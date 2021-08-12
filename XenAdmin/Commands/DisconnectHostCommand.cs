@@ -81,7 +81,7 @@ namespace XenAdmin.Commands
             return (connected && is_master) || (connection != null && connection.InProgress && !connection.IsConnected);
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             foreach (SelectedItem item in selection)
             {

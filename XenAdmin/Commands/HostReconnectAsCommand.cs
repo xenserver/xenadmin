@@ -60,7 +60,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             new ReconnectAsDialog(selection[0].Connection).ShowDialog(Parent);
         }

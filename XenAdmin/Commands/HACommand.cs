@@ -128,7 +128,7 @@ namespace XenAdmin.Commands
             }
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             Execute(selection[0].Connection);
         }
@@ -180,7 +180,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             Pool pool = selection.Count == 1 ? selection[0].PoolAncestor : null;
             if (pool == null || !pool.ha_enabled)

@@ -66,7 +66,7 @@ namespace XenAdmin.Commands
             return selection.AllItemsAre<GroupingTag>(CanExecute);
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             List<AsyncAction> actions = new List<AsyncAction>();
             foreach (GroupingTag groupingTag in selection.AsGroupingTags())

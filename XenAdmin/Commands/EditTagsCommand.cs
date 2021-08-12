@@ -68,7 +68,7 @@ namespace XenAdmin.Commands
             return selection.AllItemsAre<IXenObject>(CanExecute);
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             List<string> tags = new List<string>();
             List<string> indeterminateTags = new List<string>();
