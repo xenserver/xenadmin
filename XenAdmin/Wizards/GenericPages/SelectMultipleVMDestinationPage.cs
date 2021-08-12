@@ -63,14 +63,14 @@ namespace XenAdmin.Wizards.GenericPages
         /// <summary>
         /// Combobox item that can run a command but also be an IEnableableComboBoxItem
         /// </summary>
-        private class AddHostExecutingComboBoxItem : IEnableableComboBoxItem
+        private class AddHostRunningComboBoxItem : IEnableableComboBoxItem
         {
             public override string ToString()
             {
                 return Messages.ADD_POOL_OR_SERVER;
             }
 
-            public void ExecuteCommand(Control parent)
+            public void RunCommand(Control parent)
             {
                 new AddHostCommand(Program.MainWindow, parent).Run();
             }
@@ -351,7 +351,7 @@ namespace XenAdmin.Wizards.GenericPages
 				xenConnection.Cache.RegisterCollectionChanged<Host>(Host_CollectionChangedWithInvoke);
 			}
 
-			m_comboBoxConnection.Items.Add(new AddHostExecutingComboBoxItem());
+			m_comboBoxConnection.Items.Add(new AddHostRunningComboBoxItem());
 			updatingDestinationCombobox = false;
 		}
 
@@ -620,9 +620,9 @@ namespace XenAdmin.Wizards.GenericPages
                 return;
             }
 
-		    AddHostExecutingComboBoxItem exeItem = m_comboBoxConnection.SelectedItem as AddHostExecutingComboBoxItem;
+		    AddHostRunningComboBoxItem exeItem = m_comboBoxConnection.SelectedItem as AddHostRunningComboBoxItem;
             if (exeItem != null && !updatingDestinationCombobox)
-                exeItem.ExecuteCommand(this);
+                exeItem.RunCommand(this);
 				
 			else if(!updatingDestinationCombobox)
 			{

@@ -284,7 +284,7 @@ namespace XenAdmin.Actions.VMActions
                 parameters.Add("sruuid", firstSR.uuid);
                 parameters.Add("configuration", cloudConfigDriveTemplateText.Replace("\r\n", "\n"));
 
-                var action = new ExecutePluginAction(Connection, HomeServer ?? Helpers.GetMaster(Connection),
+                var action = new RunPluginAction(Connection, HomeServer ?? Helpers.GetMaster(Connection),
                             "xscontainer",//plugin
                             "create_config_drive",//function
                             parameters,

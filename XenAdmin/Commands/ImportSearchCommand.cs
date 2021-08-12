@@ -72,7 +72,7 @@ namespace XenAdmin.Commands
         {
             if (_filenameSpecified)
             {
-                Execute(_filename);
+                Run(_filename);
             }
             else
             {
@@ -93,7 +93,7 @@ namespace XenAdmin.Commands
                     dialog.CheckPathExists = false;
 
                     if (dialog.ShowDialog(Parent) == DialogResult.OK)
-                        Execute(dialog.FileName);
+                        Run(dialog.FileName);
                 }
                 finally
                 {
@@ -102,7 +102,7 @@ namespace XenAdmin.Commands
             }
         }
 
-        private void Execute(string filename)
+        private void Run(string filename)
         {
             log.InfoFormat("Importing search from '{0}'", filename);
 

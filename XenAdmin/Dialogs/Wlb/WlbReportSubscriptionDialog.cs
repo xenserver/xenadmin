@@ -166,13 +166,13 @@ namespace XenAdmin.Dialogs.Wlb
             this.emailCommentRichTextBox.Text = this._subscription.EmailComment;
             this.rpRenderComboBox.SelectedIndex = (int)this._subscription.ReportRenderFormat;
 
-            // convert utc days of week and utc run time to local days of week and local execute time
-            DateTime localExecuteTime;
+            // convert utc days of week and utc run time to local days of week and local run time
+            DateTime localRunTime;
             WlbScheduledTask.WlbTaskDaysOfWeek localDaysOfWeek;
-            WlbScheduledTask.GetLocalTaskTimes(this._subscription.DaysOfWeek, this._subscription.RunTimeOfDay, out localDaysOfWeek, out localExecuteTime);
+            WlbScheduledTask.GetLocalTaskTimes(this._subscription.DaysOfWeek, this._subscription.RunTimeOfDay, out localDaysOfWeek, out localRunTime);
 
             // subscription run time
-            this.dateTimePickerSubscriptionRunTime.Value = localExecuteTime;
+            this.dateTimePickerSubscriptionRunTime.Value = localRunTime;
 
             // subscription delivery day
             this.schedDeliverComboBox.SelectedValue = (int)localDaysOfWeek;
@@ -345,10 +345,10 @@ namespace XenAdmin.Dialogs.Wlb
             _subscription.Name = this.subNameTextBox.Text;
             _subscription.Description = this.subNameTextBox.Text;
 
-            DateTime utcExecuteTime;
+            DateTime utcRunTime;
             WlbScheduledTask.WlbTaskDaysOfWeek utcDaysOfWeek;
-            WlbScheduledTask.GetUTCTaskTimes((WlbScheduledTask.WlbTaskDaysOfWeek)this.schedDeliverComboBox.SelectedValue, this.dateTimePickerSubscriptionRunTime.Value, out utcDaysOfWeek, out utcExecuteTime);
-            _subscription.RunTimeOfDay = utcExecuteTime;
+            WlbScheduledTask.GetUTCTaskTimes((WlbScheduledTask.WlbTaskDaysOfWeek)this.schedDeliverComboBox.SelectedValue, this.dateTimePickerSubscriptionRunTime.Value, out utcDaysOfWeek, out utcRunTime);
+            _subscription.RunTimeOfDay = utcRunTime;
             _subscription.DaysOfWeek = utcDaysOfWeek;
             if (_subscription.DaysOfWeek != WlbScheduledTask.WlbTaskDaysOfWeek.All)
             {

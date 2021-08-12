@@ -201,19 +201,19 @@ namespace XenAdmin.Wlb
         /// and returns the DaysOfWeek and RunTime adjusted to UTC time
         /// </summary>
         /// <param name="LocalDaysOfWeek">Task's DaysOfWeek value in local time</param>
-        /// <param name="LocalExecuteTime">Task's RunTime in local time</param>
+        /// <param name="LocalRunTime">Task's RunTime in local time</param>
         /// <param name="UtcDaysOfWeek">(Output) Task's DaysOfWeek value adjusted to UTC</param>
-        /// <param name="UtcExecuteTime">(Output) Task's RunTime value adjusted to UTC</param>
-        public static void GetUTCTaskTimes(WlbScheduledTask.WlbTaskDaysOfWeek LocalDaysOfWeek, DateTime LocalExecuteTime, 
-            out WlbScheduledTask.WlbTaskDaysOfWeek UtcDaysOfWeek, out DateTime UtcExecuteTime)
+        /// <param name="UtcRunTime">(Output) Task's RunTime value adjusted to UTC</param>
+        public static void GetUTCTaskTimes(WlbScheduledTask.WlbTaskDaysOfWeek LocalDaysOfWeek, DateTime LocalRunTime, 
+            out WlbScheduledTask.WlbTaskDaysOfWeek UtcDaysOfWeek, out DateTime UtcRunTime)
         {
             UtcDaysOfWeek = LocalDaysOfWeek;
-            UtcExecuteTime = LocalExecuteTime.AddMinutes(LocalOffsetMinutes());
-            if (DateTime.Compare(LocalExecuteTime.Date, UtcExecuteTime.Date) < 0)
+            UtcRunTime = LocalRunTime.AddMinutes(LocalOffsetMinutes());
+            if (DateTime.Compare(LocalRunTime.Date, UtcRunTime.Date) < 0)
             {
                 UtcDaysOfWeek = WlbScheduledTask.NextDay(LocalDaysOfWeek);
             }
-            else if (DateTime.Compare(LocalExecuteTime.Date, UtcExecuteTime.Date) > 0)
+            else if (DateTime.Compare(LocalRunTime.Date, UtcRunTime.Date) > 0)
             {
                 UtcDaysOfWeek = WlbScheduledTask.PreviousDay(LocalDaysOfWeek);
             }
@@ -224,25 +224,25 @@ namespace XenAdmin.Wlb
         /// and returns the DaysOfWeek and RunTime adjusted to client's local time
         /// </summary>
         /// <param name="UtcDaysOfWeek">Task's DaysOfWeek value in UTC</param>
-        /// <param name="UtcExecuteTime">Task's RunTime in UTC</param>
+        /// <param name="UtcRunTime">Task's RunTime in UTC</param>
         /// <param name="LocalDaysOfWeek">(Output) Task's DaysOfWeek value adjusted to local time</param>
-        /// <param name="LocalExecuteTime">(Output) Task's RunTime value adjusted to local time</param>
-        public static void GetLocalTaskTimes(WlbScheduledTask.WlbTaskDaysOfWeek UtcDaysOfWeek, DateTime UtcExecuteTime, 
-            out WlbScheduledTask.WlbTaskDaysOfWeek LocalDaysOfWeek, out DateTime LocalExecuteTime)
+        /// <param name="LocalRunTime">(Output) Task's RunTime value adjusted to local time</param>
+        public static void GetLocalTaskTimes(WlbScheduledTask.WlbTaskDaysOfWeek UtcDaysOfWeek, DateTime UtcRunTime, 
+            out WlbScheduledTask.WlbTaskDaysOfWeek LocalDaysOfWeek, out DateTime LocalRunTime)
         {
             LocalDaysOfWeek = UtcDaysOfWeek;
-            LocalExecuteTime = UtcExecuteTime.AddMinutes(LocalOffsetMinutes() * -1);
+            LocalRunTime = UtcRunTime.AddMinutes(LocalOffsetMinutes() * -1);
             
             if (UtcDaysOfWeek != WlbTaskDaysOfWeek.None &&
                 UtcDaysOfWeek != WlbTaskDaysOfWeek.All &&
                 UtcDaysOfWeek != WlbTaskDaysOfWeek.Weekdays &&
                 UtcDaysOfWeek != WlbTaskDaysOfWeek.Weekends)
             {
-                if (DateTime.Compare(UtcExecuteTime.Date, LocalExecuteTime.Date) < 0)
+                if (DateTime.Compare(UtcRunTime.Date, LocalRunTime.Date) < 0)
                 {
                     LocalDaysOfWeek = WlbScheduledTask.NextDay(UtcDaysOfWeek);
                 }
-                else if (DateTime.Compare(UtcExecuteTime.Date, LocalExecuteTime.Date) > 0)
+                else if (DateTime.Compare(UtcRunTime.Date, LocalRunTime.Date) > 0)
                 {
                     LocalDaysOfWeek = WlbScheduledTask.PreviousDay(UtcDaysOfWeek);
                 }
@@ -533,10 +533,10 @@ namespace XenAdmin.Wlb
                     if (!task.DeleteTask)
                     {
                         WlbScheduledTask.WlbTaskDaysOfWeek localDaysOfWeek;
-                        DateTime localExecuteTime;
-                        WlbScheduledTask.GetLocalTaskTimes((task.DaysOfWeek), task.RunTime, out localDaysOfWeek, out localExecuteTime);
+                        DateTime localRunTime;
+                        WlbScheduledTask.GetLocalTaskTimes((task.DaysOfWeek), task.RunTime, out localDaysOfWeek, out localRunTime);
 
-                        int sortKey = GetSortKey(localDaysOfWeek, localExecuteTime);
+                        int sortKey = GetSortKey(localDaysOfWeek, localRunTime);
 
                         //if the task is disabled, bump the sort key to prevent conficts
                         // with any new tasks.  This could start to get wierd after 100 duplicate
@@ -583,11 +583,11 @@ namespace XenAdmin.Wlb
                                 dayValue != WlbScheduledTask.WlbTaskDaysOfWeek.Weekends &&
                                 ((task.DaysOfWeek & dayValue) == dayValue))
                             {
-                                DateTime localExecuteTime;
+                                DateTime localRunTime;
                                 WlbScheduledTask.WlbTaskDaysOfWeek localDaysOfWeek;
-                                WlbScheduledTask.GetLocalTaskTimes((task.DaysOfWeek & dayValue), task.RunTime, out localDaysOfWeek, out localExecuteTime);
+                                WlbScheduledTask.GetLocalTaskTimes((task.DaysOfWeek & dayValue), task.RunTime, out localDaysOfWeek, out localRunTime);
 
-                                int sortKey = GetSortKey(localDaysOfWeek, localExecuteTime);
+                                int sortKey = GetSortKey(localDaysOfWeek, localRunTime);
                                 //if the task is disabled, bump the sort key to prevent conficts
                                 // with any new tasks.  This could start to get wierd after 100 duplicate
                                 // disabled tasks, but then it will be the user's problem.
@@ -617,10 +617,10 @@ namespace XenAdmin.Wlb
         /// <summary>
         /// Creates an artificial sort key that is used to sort the presentation of scheduled tasks.
         /// </summary>
-        /// <param name="localDaysOfWeek">WlbScheduledTask.DaysOfWeek enumeration of the task denoting on which days it will execute</param>
-        /// <param name="localExecuteTime">DateTime execute time of the task denoting on when the task </param>
+        /// <param name="localDaysOfWeek">WlbScheduledTask.DaysOfWeek enumeration of the task denoting on which days it will run</param>
+        /// <param name="localRunTime">DateTime run time of the task denoting on when the task </param>
         /// <returns></returns>
-        private static int GetSortKey(WlbScheduledTask.WlbTaskDaysOfWeek localDaysOfWeek, DateTime localExecuteTime)
+        private static int GetSortKey(WlbScheduledTask.WlbTaskDaysOfWeek localDaysOfWeek, DateTime localRunTime)
         {
             int sortKey;
             
@@ -655,7 +655,7 @@ namespace XenAdmin.Wlb
 
             //Add the run time of day as a secondary sort item
             //Multiply it by 100 to allow room for disabled tasks
-            sortKey += (int)localExecuteTime.TimeOfDay.TotalMinutes * 100;
+            sortKey += (int)localRunTime.TimeOfDay.TotalMinutes * 100;
 
             return  sortKey;
         }
@@ -712,7 +712,7 @@ namespace XenAdmin.Wlb
             return collectionDictionary;
         }
 
-        public WlbScheduledTask GetNextExecutingTask()
+        public WlbScheduledTask GetNextRunningTask()
         {
             WlbScheduledTask firstTask = null;
 
@@ -740,7 +740,7 @@ namespace XenAdmin.Wlb
             return firstTask;
         }
 
-        public WlbScheduledTask GetLastExecutingTask()
+        public WlbScheduledTask GetLastRunningTask()
         {
             int[] taskKeys = new int[this.VirtualTaskList.Keys.Count];
             this.VirtualTaskList.Keys.CopyTo(taskKeys,0);
@@ -767,7 +767,7 @@ namespace XenAdmin.Wlb
 
         public WlbPoolPerformanceMode GetCurrentScheduledPerformanceMode()
         {
-            WlbScheduledTask lastTask = GetLastExecutingTask();
+            WlbScheduledTask lastTask = GetLastRunningTask();
 
             return (WlbPoolPerformanceMode)int.Parse(lastTask.TaskParameters["OptMode"]);
         }

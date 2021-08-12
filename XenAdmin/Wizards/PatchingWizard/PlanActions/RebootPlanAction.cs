@@ -113,7 +113,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
                 PercentComplete = 20;
 
-                log.DebugFormat("{0}._WaitForReboot executed delegate...", GetType().Name);
+                log.DebugFormat("{0}._WaitForReboot ran delegate...", GetType().Name);
 
                 session = WaitForHostToStart(master, session, metricDelegate, metric);
             }

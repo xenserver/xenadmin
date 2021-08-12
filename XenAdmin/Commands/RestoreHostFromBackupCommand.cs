@@ -63,7 +63,7 @@ namespace XenAdmin.Commands
 
         protected override void RunCore(SelectedItemCollection selection)
         {
-            Execute(selection[0].XenObject as Host, _filePath);
+            Run(selection[0].XenObject as Host, _filePath);
         }
 
         protected override bool CanRunCore(SelectedItemCollection selection)
@@ -77,7 +77,7 @@ namespace XenAdmin.Commands
             return false;
         }
 
-        private void Execute(Host host, string filepath)
+        private void Run(Host host, string filepath)
         {
             HelpersGUI.BringFormToFront(MainWindowCommandInterface.Form);
 

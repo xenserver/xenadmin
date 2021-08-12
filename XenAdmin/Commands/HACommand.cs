@@ -79,7 +79,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        private void Execute(IXenConnection connection)
+        private void Run(IXenConnection connection)
         {
             if (connection == null)
                 return;
@@ -130,12 +130,12 @@ namespace XenAdmin.Commands
 
         protected override void RunCore(SelectedItemCollection selection)
         {
-            Execute(selection[0].Connection);
+            Run(selection[0].Connection);
         }
 
         protected override bool CanRunCore(SelectedItemCollection selection)
         {
-            return CanExecuteHACommand(selection);
+            return CanRunHACommand(selection);
         }
 
         protected override string GetCantRunReasonCore(IXenObject item)
@@ -221,7 +221,7 @@ namespace XenAdmin.Commands
 
         protected override bool CanRunCore(SelectedItemCollection selection)
         {
-            return CanExecuteHACommand(selection);
+            return CanRunHACommand(selection);
         }
 
         protected override bool CanRun(Pool pool)
@@ -285,7 +285,7 @@ namespace XenAdmin.Commands
             return Messages.UNKNOWN;
         }
 
-        protected bool CanExecuteHACommand(SelectedItemCollection selection)
+        protected bool CanRunHACommand(SelectedItemCollection selection)
         {
             if (selection.Count != 1)
                 return false;

@@ -205,7 +205,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             get { return resolvePrechecksAction != null && !resolvePrechecksAction.IsCompleted; }
         }
 
-        private List<PreCheckHostRow> ExecuteCheck(Check check)
+        private List<PreCheckHostRow> RunCheck(Check check)
         {
             var rows = new List<PreCheckHostRow>();
 
@@ -294,7 +294,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                             return;
                         }
 
-                        var rows = ExecuteCheck(check);
+                        var rows = RunCheck(check);
                         doneCheckIndex++;
 
                         foreach (PreCheckHostRow row in rows)
@@ -742,7 +742,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             PreCheckHostRow preCheckHostRow = dataGridView1.Rows[e.RowIndex] as PreCheckHostRow;
             if (preCheckHostRow != null && preCheckHostRow.Enabled && e.ColumnIndex == 2)
             {
-                ExecuteSolution(preCheckHostRow);
+                RunSolution(preCheckHostRow);
             }
         }
 
@@ -754,11 +754,11 @@ namespace XenAdmin.Wizards.PatchingWizard
                 int columnIndex = dataGridView1.CurrentCell.ColumnIndex;
 
                 if (preCheckHostRow != null && preCheckHostRow.Enabled && columnIndex == 2)
-                    ExecuteSolution(preCheckHostRow);
+                    RunSolution(preCheckHostRow);
             }
         }
 
-        private void ExecuteSolution(PreCheckHostRow preCheckHostRow)
+        private void RunSolution(PreCheckHostRow preCheckHostRow)
         {
             bool cancelled;
             resolvePrechecksAction = preCheckHostRow.Problem.GetSolutionAction(out cancelled);

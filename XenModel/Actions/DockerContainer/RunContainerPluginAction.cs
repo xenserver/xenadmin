@@ -36,11 +36,11 @@ using XenAPI;
 
 namespace XenAdmin.Actions
 {
-    public class ExecuteContainerPluginAction : ExecutePluginAction
+    public class RunContainerPluginAction : RunPluginAction
     {
         public DockerContainer Container;
 
-        public ExecuteContainerPluginAction(DockerContainer container, Host host, string plugin, string function, Dictionary<string, string> args, bool suppressHistory)
+        public RunContainerPluginAction(DockerContainer container, Host host, string plugin, string function, Dictionary<string, string> args, bool suppressHistory)
             : base(container.Connection, host, plugin, function, args, suppressHistory)
         {
             Container = container;

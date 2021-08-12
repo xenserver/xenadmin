@@ -170,10 +170,10 @@ namespace XenAdmin.Wizards.DRWizards
             IntroducedSrs.AddRange(drTask.introduced_SRs);
         }
 
-        private bool cleanupExecuted = false;
+        private bool cleanupRan = false;
         private void DoFinalCleanup()
         {
-            if (cleanupExecuted)
+            if (cleanupRan)
                 return;
 
             SummaryReport.AddLine("");
@@ -196,7 +196,7 @@ namespace XenAdmin.Wizards.DRWizards
                 foreach (var subAction in DRFailoverWizardPrecheckPage1.RevertActions)
                     SummaryReport.AddActionResult(subAction);
             }
-            cleanupExecuted = true;
+            cleanupRan = true;
         }
 
         private void DestroyDrTasks()

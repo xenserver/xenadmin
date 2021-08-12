@@ -79,7 +79,7 @@ namespace XenAdmin.Commands
         /// <param name="connection"></param>
         /// <param name="vm">The VM to export.</param>
         /// <param name="host">Used for filtering purposes. May be null.</param>
-        private void Execute(IXenConnection connection, VM vm, Host host)
+        private void Run(IXenConnection connection, VM vm, Host host)
         {
             /*
              * These properties have not been copied over to the new save file dialog.
@@ -206,7 +206,7 @@ namespace XenAdmin.Commands
                 host = pool.Connection.Resolve(pool.master);
             }
 
-            Execute(selection[0].Connection, vm, host);
+            Run(selection[0].Connection, vm, host);
         }
 
         protected override bool CanRunCore(SelectedItemCollection selection)

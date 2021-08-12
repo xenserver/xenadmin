@@ -224,7 +224,7 @@ namespace XenAdmin.Wizards.DRWizards
             catch (Exception) { }
         }
 
-        private DataGridViewRow ExecuteCheck(Check check)
+        private DataGridViewRow RunCheck(Check check)
         {
             var problems = check.RunAllChecks();
             if (problems.Count != 0)
@@ -298,7 +298,7 @@ namespace XenAdmin.Wizards.DRWizards
                             if (metadataSession != null)
                             {
                                 thisCheck.MetadataSession = metadataSession;
-                                row = ExecuteCheck(thisCheck);
+                                row = RunCheck(thisCheck);
                                 _worker.ReportProgress(PercentageSelectedObjects(j + 1), row);
 
                                 // close metadata session if this is the last check
@@ -308,7 +308,7 @@ namespace XenAdmin.Wizards.DRWizards
                         }
                         else
                         {
-                            row = ExecuteCheck(check);
+                            row = RunCheck(check);
                             _worker.ReportProgress(PercentageSelectedObjects(j + 1), row);
                         }
                     }
@@ -474,7 +474,7 @@ namespace XenAdmin.Wizards.DRWizards
         }
 
 
-        private void ExecuteSolution(PreCheckItemRow preCheckRow)
+        private void RunSolution(PreCheckItemRow preCheckRow)
         {
             bool cancelled;
             AsyncAction action = preCheckRow.Problem.GetSolutionAction(out cancelled);
@@ -564,7 +564,7 @@ namespace XenAdmin.Wizards.DRWizards
             PreCheckItemRow preChecRow = dataGridView1.Rows[e.RowIndex] as PreCheckItemRow;
             if (preChecRow != null && e.ColumnIndex == 2)
             {
-                ExecuteSolution(preChecRow);
+                RunSolution(preChecRow);
                 return;
             }
         } 

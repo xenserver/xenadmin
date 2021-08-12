@@ -177,11 +177,11 @@ namespace XenAdmin.Commands
             public readonly double StarRating;
             public readonly Dictionary<VM, string> CantRunReasons;
 
-            public WlbRecommendation(Dictionary<VM, bool> canRunByVm, double starRating, Dictionary<VM, string> cantExecuteReasons)
+            public WlbRecommendation(Dictionary<VM, bool> canRunByVm, double starRating, Dictionary<VM, string> cantRunReasons)
             {
                 CanRunByVM = canRunByVm;
                 StarRating = starRating;
-                CantRunReasons = cantExecuteReasons;
+                CantRunReasons = cantRunReasons;
             }
         }
     }

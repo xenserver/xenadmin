@@ -301,7 +301,7 @@ namespace XenAdmin.Actions
 
            /* pool_management_reconfigure triggers a pool_recover_slaves, which in turn spawns two tasks
             * dbsync (update_env) and server_init on each slaves. 
-            * Only after their completion master will be able to execute reconfigure_IPs. 
+            * Only after their completion master will be able to run reconfigure_IPs. 
             * Hence, we check Host.IsLive metric of all slaves for a transition from true -> false -> true
             */
 

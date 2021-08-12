@@ -59,7 +59,7 @@ namespace XenAdmin.Commands
 
         }
 
-        private void Execute(VM snapshot)
+        private void Run(VM snapshot)
         {
             if (snapshot != null)
             {
@@ -70,7 +70,7 @@ namespace XenAdmin.Commands
         protected override void RunCore(SelectedItemCollection selection)
         {
             VM vm = (VM)selection[0].XenObject;
-            Execute(vm);
+            Run(vm);
         }
 
         protected override bool CanRunCore(SelectedItemCollection selection)

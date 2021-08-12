@@ -37,7 +37,7 @@ using XenAPI;
 
 namespace XenAdmin.Actions
 {
-    public class ExecutePluginAction : PureAsyncAction
+    public class RunPluginAction : PureAsyncAction
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -54,7 +54,7 @@ namespace XenAdmin.Actions
         private string Function;
         private Dictionary<string, string> Args;
 
-        public ExecutePluginAction(IXenConnection connection, Host host, string plugin, string function, Dictionary<string, string> args, bool hide_from_logs)
+        public RunPluginAction(IXenConnection connection, Host host, string plugin, string function, Dictionary<string, string> args, bool hide_from_logs)
             : base(connection, string.Format(Messages.PLUGIN_TITLE, plugin),hide_from_logs)
         {
             Host = host;

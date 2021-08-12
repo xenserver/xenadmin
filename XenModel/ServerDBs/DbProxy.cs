@@ -133,7 +133,7 @@ namespace XenAdmin.ServerDBs
             db = new Db(connection, url);
         }
 
-        public object ExecuteMethod(ProxyMethodInfo pmi, object[] args)
+        public object RunMethod(ProxyMethodInfo pmi, object[] args)
         {
             object obj;
             
@@ -197,7 +197,7 @@ namespace XenAdmin.ServerDBs
 
             if (pmi.FakeType != null)
             {
-                return ExecuteMethod(pmi, args);
+                return RunMethod(pmi, args);
             }
 
             if (pmi.MethodName.StartsWith("set_"))

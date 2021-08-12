@@ -89,7 +89,7 @@ namespace XenAdmin.Actions
                 }
                 catch (Exception ex)
                 {
-                    log.Debug("Tried to disable AD before enabling it, but it has failed. Ignoring it, because in this case we are executing disable on best effort basis only.", ex);
+                    log.Debug("Tried to disable AD before enabling it, but it has failed. Ignoring it, because in this case we are running disable on best effort basis only.", ex);
                 }
 
                 Pool.enable_external_auth(Session, pool.opaque_ref, config, domain, Auth.AUTH_TYPE_AD);

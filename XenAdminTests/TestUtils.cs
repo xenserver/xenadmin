@@ -199,7 +199,7 @@ namespace XenAdminTests
         /// </summary>
         /// <param name="name">The name of the private method.</param>
         /// <param name="parameters">The parameters of the private method.</param>
-        public static object ExecuteMethod(object item, string name, object[] parameters)
+        public static object RunMethod(object item, string name, object[] parameters)
         {
             return item.GetType().GetMethod(name, BindingFlags.Instance | BindingFlags.NonPublic).Invoke(item, parameters);
         }
@@ -210,7 +210,7 @@ namespace XenAdminTests
         /// <param name="name">The name of the private method.</param>
         /// <param name="types">The types of the parameters of the private method.</param>
         /// <param name="parameters">The parameters of the private method.</param>
-        public static object ExecuteMethod(object item, string name, Type[] types, object[] parameters)
+        public static object RunMethod(object item, string name, Type[] types, object[] parameters)
         {
             return item.GetType().GetMethod(name, BindingFlags.Instance | BindingFlags.NonPublic, null, types, null).Invoke(item, parameters);
         }
