@@ -206,9 +206,9 @@ namespace XenAdmin.XenSearch
             {
                 if (property == PropertyNames.memoryValue)
                 {
-                    var master = pool.Connection.Resolve(pool.master);
+                    var coordinator = pool.Connection.Resolve(pool.master);
 
-                    item = new GridStringItem(string.Format(Messages.POOL_VERSIONS_LINK_TEXT, BrandManager.ProductBrand, master.ProductVersionText()),
+                    item = new GridStringItem(string.Format(Messages.POOL_VERSIONS_LINK_TEXT, BrandManager.ProductBrand, coordinator.ProductVersionText()),
                                   HorizontalAlignment.Center, VerticalAlignment.Middle, false, false,
                                   QueryPanel.LinkBrush, Program.DefaultFontUnderline, QueryPanel.LinkBrush,
                                   Program.DefaultFontUnderline, 3,

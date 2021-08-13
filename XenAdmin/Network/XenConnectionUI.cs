@@ -52,9 +52,9 @@ namespace XenAdmin.Network
         /// <param name="interactive">Whether the user has initiated/is watching this connection attempt.</param>
         /// <param name="owner">The form that connecting dialogs will be displayed in front of.
         /// May be null, in which case Program.MainWindow is used.</param>
-        /// <param name="initiateMasterSearch">If true, when connection to the coordinator fails we will start trying to connect to
+        /// <param name="initiateCoordinatorSearch">If true, when connection to the coordinator fails we will start trying to connect to
         /// each remembered supporter in turn.</param>
-        public static void BeginConnect(IXenConnection connection, bool interactive, Form owner, bool initiateMasterSearch)
+        public static void BeginConnect(IXenConnection connection, bool interactive, Form owner, bool initiateCoordinatorSearch)
         {
             Program.AssertOnEventThread();
             
@@ -73,13 +73,13 @@ namespace XenAdmin.Network
                 dlg = new ConnectingToServerDialog(connection);
                 connectionDialogs.Add(connection, dlg);
 
-                if (!dlg.BeginConnect(owner, initiateMasterSearch) && connection != null)
+                if (!dlg.BeginConnect(owner, initiateCoordinatorSearch) && connection != null)
                     connectionDialogs.Remove(connection);
             }
             else
             {
                 RegisterEventHandlers(connection);
-                ((XenConnection)connection).BeginConnect(initiateMasterSearch, PromptForNewPassword);
+                ((XenConnection)connection).BeginConnect(initiateCoordinatorSearch, PromptForNewPassword);
             }
         }
 
@@ -137,9 +137,9 @@ namespace XenAdmin.Network
                 if (f.ErrorDescription[0] == Failure.HOST_IS_SLAVE)
                 {
                     string oldHost = connection.Name;
-                    string poolMasterName = f.ErrorDescription[1];
+                    string poolCoordinatorName = f.ErrorDescription[1];
 
-                    string pool_name = XenConnection.ConnectedElsewhere(poolMasterName);
+                    string pool_name = XenConnection.ConnectedElsewhere(poolCoordinatorName);
                     if (pool_name != null)
                     {
                         if (!Program.RunInAutomatedTestMode)
@@ -166,7 +166,7 @@ namespace XenAdmin.Network
                     else
                     {
                         DialogResult dialogResult;
-                        using (var dlg = new WarningDialog(string.Format(Messages.SUPPORTER_CONNECTION_ERROR, oldHost, poolMasterName),
+                        using (var dlg = new WarningDialog(string.Format(Messages.SUPPORTER_CONNECTION_ERROR, oldHost, poolCoordinatorName),
                                 ThreeButtonDialog.ButtonYes,
                                 ThreeButtonDialog.ButtonNo){WindowTitle = Messages.CONNECT_TO_SERVER})
                         {
@@ -174,7 +174,7 @@ namespace XenAdmin.Network
                         }
                         if (DialogResult.Yes == dialogResult)
                         {
-                            ((XenConnection) connection).Hostname = poolMasterName;
+                            ((XenConnection) connection).Hostname = poolCoordinatorName;
                             BeginConnect(connection, true, owner, false);
                         }
                     }

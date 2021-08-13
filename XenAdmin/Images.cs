@@ -480,7 +480,7 @@ namespace XenAdmin
                 }
                 else if (Helpers.IsOlderThanCoordinator(host))
                 {
-                    return Icons.HostOlderThanMaster;
+                    return Icons.HostOlderThanCoordinator;
                 }
                 else
                 {

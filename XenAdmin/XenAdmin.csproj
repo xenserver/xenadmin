@@ -1073,7 +1073,7 @@
     <Compile Include="Wizards\PatchingWizard\PlanActions\PatchPrecheckOnHostPlanAction.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\DownloadPatchPlanAction.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\RestartHostPlanAction.cs" />
-    <Compile Include="Wizards\PatchingWizard\PlanActions\UploadPatchToMasterPlanAction.cs" />
+    <Compile Include="Wizards\PatchingWizard\PlanActions\UploadPatchToCoordinatorPlanAction.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\XenServerPatchMapping.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\RemoveUpdateFilesFromMaster.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\RemoveUpdateFile.cs" />

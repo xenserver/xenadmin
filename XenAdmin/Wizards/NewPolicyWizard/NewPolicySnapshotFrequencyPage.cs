@@ -121,11 +121,11 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 
         public void GetServerTime()
         {
-            var master = Helpers.GetCoordinator(Connection);
-            if (master == null)
+            var coordinator = Helpers.GetCoordinator(Connection);
+            if (coordinator == null)
                 return;
 
-            var action = new GetServerLocalTimeAction(master);
+            var action = new GetServerLocalTimeAction(coordinator);
             action.Completed += action_CompletedTimeServer;
             MainTableLayoutPanel.Visible = false;
             LoadingBox.Visible = true;

@@ -208,7 +208,7 @@ namespace XenAdmin.Controls.DataGridViewEx
             }
         }
 
-        protected virtual void UpdateAdditionalDetailsForPool(Pool pool, Host master) { }
+        protected virtual void UpdateAdditionalDetailsForPool(Pool pool, Host coordinator) { }
 
         protected virtual void UpdateAdditionalDetailsForHost(Host host) { }
     }

@@ -574,8 +574,8 @@ namespace XenAdmin.TabPages
                     s.AddEntry(kvp.Key, kvp.Value);
                 }
             }
-            Host master = Helpers.GetCoordinator(xenObject.Connection);
-            if (master == null)
+            Host coordinator = Helpers.GetCoordinator(xenObject.Connection);
+            if (coordinator == null)
                 return;
 
             var poolAppPatches = poolAppliedPatches();
@@ -1277,17 +1277,17 @@ namespace XenAdmin.TabPages
                         : Helpers.GetFriendlyLicenseName(p));
                 s.AddEntry(Messages.NUMBER_OF_SOCKETS, p.CpuSockets().ToString());
 
-                var master = p.Connection.Resolve(p.master);
-                if (master != null)
+                var coordinator = p.Connection.Resolve(p.master);
+                if (coordinator != null)
                 {
                     if (p.IsPoolFullyUpgraded())
                     {
-                        var hotfixEligibilityString = AdditionalVersionString(master);
+                        var hotfixEligibilityString = AdditionalVersionString(coordinator);
                         if (string.IsNullOrEmpty(hotfixEligibilityString))
-                            s.AddEntry(Messages.SOFTWARE_VERSION_PRODUCT_VERSION, master.ProductVersionText());
+                            s.AddEntry(Messages.SOFTWARE_VERSION_PRODUCT_VERSION, coordinator.ProductVersionText());
                         else
                             s.AddEntry(Messages.SOFTWARE_VERSION_PRODUCT_VERSION, 
-                                string.Format(Messages.MAINWINDOW_CONTEXT_REASON, master.ProductVersionText(), hotfixEligibilityString),
+                                string.Format(Messages.MAINWINDOW_CONTEXT_REASON, coordinator.ProductVersionText(), hotfixEligibilityString),
                                 Color.Red);
                     }
                     else
@@ -1298,7 +1298,7 @@ namespace XenAdmin.TabPages
                             (sender, args) => cmd.Run());
 
                         s.AddEntryLink(Messages.SOFTWARE_VERSION_PRODUCT_VERSION,
-                            string.Format(Messages.POOL_VERSIONS_LINK_TEXT, BrandManager.ProductBrand, master.ProductVersionText()),
+                            string.Format(Messages.POOL_VERSIONS_LINK_TEXT, BrandManager.ProductBrand, coordinator.ProductVersionText()),
                             new[] {runRpuWizard},
                             cmd);
                     }

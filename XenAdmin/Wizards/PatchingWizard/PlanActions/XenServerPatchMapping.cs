@@ -39,27 +39,27 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 {
     public abstract class HostUpdateMapping
     {
-        protected readonly Host MasterHost;
+        protected readonly Host CoordinatorHost;
         public List<string> HostsThatNeedEvacuated = new List<string>();
 
-        protected HostUpdateMapping(Host masterHost)
+        protected HostUpdateMapping(Host coordinatorHost)
         {
-            MasterHost = masterHost ?? throw new ArgumentNullException("masterHost");
+            CoordinatorHost = coordinatorHost ?? throw new ArgumentNullException("coordinatorHost");
         }
 
-        protected bool Matches(Host masterHost)
+        protected bool Matches(Host coordinatorHost)
         {
-            return MasterHost != null && masterHost != null && MasterHost.uuid == masterHost.uuid;
+            return CoordinatorHost != null && coordinatorHost != null && CoordinatorHost.uuid == coordinatorHost.uuid;
         }
 
         public override bool Equals(object obj)
         {
-            return obj is HostUpdateMapping other && Matches(other.MasterHost);
+            return obj is HostUpdateMapping other && Matches(other.CoordinatorHost);
         }
 
         public override int GetHashCode()
         {
-            return MasterHost.GetHashCode();
+            return CoordinatorHost.GetHashCode();
         }
 
         public abstract bool IsValid { get; }
@@ -72,20 +72,20 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
     {
         public readonly XenServerPatch XenServerPatch;
 
-        protected XenServerPatchMapping(XenServerPatch xenServerPatch, Host masterHost)
-            : base(masterHost)
+        protected XenServerPatchMapping(XenServerPatch xenServerPatch, Host coordinatorHost)
+            : base(coordinatorHost)
         {
             XenServerPatch = xenServerPatch ?? throw new ArgumentNullException("xenServerPatch");
         }
 
-        public bool Matches(Host masterHost, XenServerPatch xenServerPatch)
+        public bool Matches(Host coordinatorHost, XenServerPatch xenServerPatch)
         {
-            return Matches(masterHost) && XenServerPatch.Equals(xenServerPatch);
+            return Matches(coordinatorHost) && XenServerPatch.Equals(xenServerPatch);
         }
 
         public override bool Equals(object obj)
         {
-            return obj is XenServerPatchMapping other && Matches(other.MasterHost, other.XenServerPatch);
+            return obj is XenServerPatchMapping other && Matches(other.CoordinatorHost, other.XenServerPatch);
         }
 
         public override int GetHashCode()
@@ -99,21 +99,21 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
     {
         public Pool_patch Pool_patch;
 
-        public PoolPatchMapping(XenServerPatch xenServerPatch, Pool_patch pool_patch, Host masterHost)
-            : base(xenServerPatch, masterHost)
+        public PoolPatchMapping(XenServerPatch xenServerPatch, Pool_patch pool_patch, Host coordinatorHost)
+            : base(xenServerPatch, coordinatorHost)
         {
             Pool_patch = pool_patch ?? throw new ArgumentNullException("pool_patch");
         }
 
-        public bool Matches(Host masterHost, XenServerPatch xenServerPatch, Pool_patch patch )
+        public bool Matches(Host coordinatorHost, XenServerPatch xenServerPatch, Pool_patch patch )
         {
-            return Matches(masterHost, xenServerPatch) && patch != null &&
+            return Matches(coordinatorHost, xenServerPatch) && patch != null &&
                    string.Equals(patch.uuid, Pool_patch.uuid, StringComparison.OrdinalIgnoreCase);
         }
 
         public override bool Equals(object obj)
         {
-            return obj is PoolPatchMapping other && Matches(other.MasterHost, other.XenServerPatch, other.Pool_patch);
+            return obj is PoolPatchMapping other && Matches(other.CoordinatorHost, other.XenServerPatch, other.Pool_patch);
         }
 
         public override int GetHashCode()
@@ -130,7 +130,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         {
             if (Pool_patch != null)
             {
-                var patch = MasterHost.Connection?.Cache.Pool_patches.FirstOrDefault(u => string.Equals(u.uuid, Pool_patch.uuid, StringComparison.OrdinalIgnoreCase));
+                var patch = CoordinatorHost.Connection?.Cache.Pool_patches.FirstOrDefault(u => string.Equals(u.uuid, Pool_patch.uuid, StringComparison.OrdinalIgnoreCase));
                 if (patch != null && patch.opaque_ref != Pool_patch.opaque_ref)
                     Pool_patch = patch;
             }
@@ -143,21 +143,21 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         public Pool_update Pool_update;
         public Dictionary<Host, SR> SrsWithUploadedUpdatesPerHost = new Dictionary<Host, SR>();
 
-        public PoolUpdateMapping(XenServerPatch xenServerPatch, Pool_update pool_update, Host masterHost)
-            : base(xenServerPatch, masterHost)
+        public PoolUpdateMapping(XenServerPatch xenServerPatch, Pool_update pool_update, Host coordinatorHost)
+            : base(xenServerPatch, coordinatorHost)
         {
             Pool_update = pool_update ?? throw new ArgumentNullException("pool_update");
         }
 
-        public bool Matches(Host masterHost, XenServerPatch xenServerPatch, Pool_update update)
+        public bool Matches(Host coordinatorHost, XenServerPatch xenServerPatch, Pool_update update)
         {
-            return Matches(masterHost, xenServerPatch) && update != null &&
+            return Matches(coordinatorHost, xenServerPatch) && update != null &&
                    string.Equals(update.uuid, Pool_update.uuid, StringComparison.OrdinalIgnoreCase);
         }
 
         public override bool Equals(object obj)
         {
-            return obj is PoolUpdateMapping other && Matches(other.MasterHost, other.XenServerPatch, other.Pool_update);
+            return obj is PoolUpdateMapping other && Matches(other.CoordinatorHost, other.XenServerPatch, other.Pool_update);
         }
 
         public override int GetHashCode()
@@ -190,25 +190,25 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         public readonly string Path;
         public Pool_patch Pool_patch;
 
-        public OtherLegacyMapping(string path, Pool_patch pool_patch, Host masterHost)
-            : base(masterHost)
+        public OtherLegacyMapping(string path, Pool_patch pool_patch, Host coordinatorHost)
+            : base(coordinatorHost)
         {
             Path = !string.IsNullOrEmpty(path) ? path : throw new ArgumentNullException("path");
             Pool_patch = pool_patch;
         }
 
-        public bool Matches(Host masterHost, string path, Pool_patch patch = null)
+        public bool Matches(Host coordinatorHost, string path, Pool_patch patch = null)
         {
             if (patch == null)
-                return Matches(masterHost) && Path == path;
+                return Matches(coordinatorHost) && Path == path;
 
-            return Matches(masterHost) && Path == path && Pool_patch != null &&
+            return Matches(coordinatorHost) && Path == path && Pool_patch != null &&
                    string.Equals(patch.uuid, Pool_patch.uuid, StringComparison.OrdinalIgnoreCase);
         }
 
         public override bool Equals(object obj)
         {
-            return obj is OtherLegacyMapping other && Matches(other.MasterHost, other.Path, other.Pool_patch);
+            return obj is OtherLegacyMapping other && Matches(other.CoordinatorHost, other.Path, other.Pool_patch);
         }
 
         public override int GetHashCode()
@@ -234,7 +234,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         {
             if (Pool_patch != null)
             {
-                var patch = MasterHost.Connection?.Cache.Pool_patches.FirstOrDefault(u => string.Equals(u.uuid, Pool_patch.uuid, StringComparison.OrdinalIgnoreCase));
+                var patch = CoordinatorHost.Connection?.Cache.Pool_patches.FirstOrDefault(u => string.Equals(u.uuid, Pool_patch.uuid, StringComparison.OrdinalIgnoreCase));
                 if (patch != null && patch.opaque_ref != Pool_patch.opaque_ref)
                     Pool_patch = patch;
             }
@@ -249,25 +249,25 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         public Dictionary<Host, SR> SrsWithUploadedUpdatesPerHost = new Dictionary<Host, SR>();
         public Dictionary<Host, VDI> SuppPackVdis = new Dictionary<Host, VDI>();
 
-        public SuppPackMapping(string path, Pool_update pool_update, Host masterHost)
-            : base(masterHost)
+        public SuppPackMapping(string path, Pool_update pool_update, Host coordinatorHost)
+            : base(coordinatorHost)
         {
             Path = !string.IsNullOrEmpty(path) ? path : throw new ArgumentNullException("path");
             Pool_update = pool_update;
         }
 
-        public bool Matches(Host masterHost, string path, Pool_update update = null)
+        public bool Matches(Host coordinatorHost, string path, Pool_update update = null)
         {
             if (update == null)
-                return Matches(masterHost) && Path == path;
+                return Matches(coordinatorHost) && Path == path;
 
-            return Matches(masterHost) && Path == path && Pool_update != null &&
+            return Matches(coordinatorHost) && Path == path && Pool_update != null &&
                    string.Equals(update.uuid, Pool_update.uuid, StringComparison.OrdinalIgnoreCase);
         }
 
         public override bool Equals(object obj)
         {
-            return obj is SuppPackMapping other && Matches(other.MasterHost, other.Path, other.Pool_update);
+            return obj is SuppPackMapping other && Matches(other.CoordinatorHost, other.Path, other.Pool_update);
         }
 
         public override int GetHashCode()
@@ -293,7 +293,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         {
             if (Pool_update != null)
             {
-                var update = MasterHost.Connection?.Cache.Pool_updates.FirstOrDefault(u => string.Equals(u.uuid, Pool_update.uuid, StringComparison.OrdinalIgnoreCase));
+                var update = CoordinatorHost.Connection?.Cache.Pool_updates.FirstOrDefault(u => string.Equals(u.uuid, Pool_update.uuid, StringComparison.OrdinalIgnoreCase));
                 if (update != null && update.opaque_ref != Pool_update.opaque_ref)
                     Pool_update = update;
             }

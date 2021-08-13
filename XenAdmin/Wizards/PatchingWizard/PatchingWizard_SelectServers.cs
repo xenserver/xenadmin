@@ -130,7 +130,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 Host[] hosts = xenConnection.Cache.Hosts;
                 Array.Sort(hosts);
 
-                PatchingHostsDataGridViewRow masterRow = null;
+                PatchingHostsDataGridViewRow coordinatorRow = null;
 
                 foreach (Host host in hosts)
                 {
@@ -144,12 +144,12 @@ namespace XenAdmin.Wizards.PatchingWizard
                     if (poolRow != null && hostRow.Enabled)
                         poolRow.Enabled = true;
 
-                    if (masterRow == null) //this will be true for the first iteration
-                        masterRow = hostRow;
+                    if (coordinatorRow == null) //this will be true for the first iteration
+                        coordinatorRow = hostRow;
                 }
 
-                if (poolRow != null && !poolRow.Enabled && masterRow != null)
-                    poolRow.Cells[3].ToolTipText = masterRow.Cells[3].ToolTipText;
+                if (poolRow != null && !poolRow.Enabled && coordinatorRow != null)
+                    poolRow.Cells[3].ToolTipText = coordinatorRow.Cells[3].ToolTipText;
             }
 
             // restore server selection
@@ -386,19 +386,19 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
 
                 //Upload the patches to the coordinators if it is necessary
-                List<Host> masters = SelectedMasters;
+                List<Host> coordinators = SelectedCoordinators;
 
                 //Do RBAC check
-                foreach (Host master in masters)
+                foreach (Host coordinator in coordinators)
                 {
-                    if (!(Role.CanPerform(new RbacMethodList("pool_patch.apply"), master.Connection)))
+                    if (!(Role.CanPerform(new RbacMethodList("pool_patch.apply"), coordinator.Connection)))
                     {
-                        string nameLabel = master.Name();
-                        Pool pool = Helpers.GetPoolOfOne(master.Connection);
+                        string nameLabel = coordinator.Name();
+                        Pool pool = Helpers.GetPoolOfOne(coordinator.Connection);
                         if (pool != null)
                             nameLabel = pool.Name();
 
-                        using (var dlg = new WarningDialog(string.Format(Messages.RBAC_UPDATES_WIZARD, master.Connection.Username, nameLabel))
+                        using (var dlg = new WarningDialog(string.Format(Messages.RBAC_UPDATES_WIZARD, coordinator.Connection.Username, nameLabel))
                             {WindowTitle = Messages.UPDATES_WIZARD})
                         {
                             dlg.ShowDialog(this);
@@ -465,16 +465,16 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         #region Accessors
 
-        public List<Host> SelectedMasters
+        public List<Host> SelectedCoordinators
         {
             get
             {
                 List<Host> result = new List<Host>();
                 foreach (Host selectedServer in SelectedServers)
                 {
-                    Host master = Helpers.GetCoordinator(selectedServer.Connection);
-                    if (!result.Contains(master))
-                        result.Add(master);
+                    Host coordinator = Helpers.GetCoordinator(selectedServer.Connection);
+                    if (!result.Contains(coordinator))
+                        result.Add(coordinator);
                 }
                 return result;
             }
@@ -932,13 +932,13 @@ namespace XenAdmin.Wizards.PatchingWizard
                 var pool = Tag as Pool;
                 if (pool != null)
                 {
-                    Host master = pool.Connection.Resolve(pool.master);
+                    Host coordinator = pool.Connection.Resolve(pool.master);
                     if (_poolCheckBoxCell.Value == null)
                         _poolCheckBoxCell.Value = CheckState.Unchecked;
                     _expansionCell.Value = Images.StaticImages.tree_minus;
                     _poolIconHostCheckCell.Value = Images.GetImage16For(pool);
                     _nameCell.Value = pool;
-                    _versionCell.Value = master.ProductVersionTextShort();
+                    _versionCell.Value = coordinator.ProductVersionTextShort();
                     return;
                 }
 

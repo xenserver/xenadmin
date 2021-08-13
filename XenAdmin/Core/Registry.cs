@@ -106,12 +106,12 @@ namespace XenAdmin.Core
 
             try
             {
-                using (var masterKey = baseKey.OpenSubKey(subKey))
+                using (var mainKey = baseKey.OpenSubKey(subKey))
                 {
-                    if (masterKey == null)
+                    if (mainKey == null)
                         return null;
 
-                    var v = masterKey.GetValue(k);
+                    var v = mainKey.GetValue(k);
                     if (v != null)
                         return v.ToString();
                 }

@@ -147,12 +147,12 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                     dconf["password"] = passwordTextBox.Text;
                 }
 
-                Host master = Helpers.GetCoordinator(Connection);
-                if (master == null)
+                Host coordinator = Helpers.GetCoordinator(Connection);
+                if (coordinator == null)
                     return;
 
                 // Start probe
-                SrProbeAction action = new SrProbeAction(Connection, master, SR.SRTypes.smb, dconf);
+                SrProbeAction action = new SrProbeAction(Connection, coordinator, SR.SRTypes.smb, dconf);
                 using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
                 {
                     dialog.ShowCancel = true;

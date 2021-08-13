@@ -131,14 +131,14 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 var pool = Helpers.GetPoolOfOne(host.Connection);
                 if (pool != null && pool.IsMasterUpgraded())
                 {
-                    log.Debug(string.Format("Skipping master '{0}' because it is upgraded", host.Name()));
+                    log.Debug(string.Format("Skipping coordinator '{0}' because it is upgraded", host.Name()));
                     return true;
                 }
             }
             else
             {
-                var master = Helpers.GetCoordinator(host.Connection);
-                if (master != null && host.LongProductVersion() == master.LongProductVersion())
+                var coordinator = Helpers.GetCoordinator(host.Connection);
+                if (coordinator != null && host.LongProductVersion() == coordinator.LongProductVersion())
                 {
                     log.Debug(string.Format("Skipping host '{0}' because it is upgraded", host.Name()));
                     return true;

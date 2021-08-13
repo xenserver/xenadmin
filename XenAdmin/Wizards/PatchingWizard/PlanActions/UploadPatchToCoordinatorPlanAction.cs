@@ -43,7 +43,7 @@ using XenAdmin.Network;
 
 namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 {
-    class UploadPatchToMasterPlanAction : PlanActionWithSession
+    class UploadPatchToCoordinatorPlanAction : PlanActionWithSession
     {
         private readonly XenServerPatch xenServerPatch;
         private readonly List<HostUpdateMapping> mappings;
@@ -56,7 +56,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         private readonly Control invokingControl;
         private readonly List<Host> selectedServers;
 
-        public UploadPatchToMasterPlanAction(Control invokingControl, IXenConnection connection, XenServerPatch xenServerPatch,
+        public UploadPatchToCoordinatorPlanAction(Control invokingControl, IXenConnection connection, XenServerPatch xenServerPatch,
             List<HostUpdateMapping> mappings, Dictionary<XenServerPatch, string> allDownloadedPatches,
             KeyValuePair<XenServerPatch, string> patchFromDisk, bool skipDiskSpaceCheck = false)
             : base(connection)
@@ -69,7 +69,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             this.skipDiskSpaceCheck = skipDiskSpaceCheck;
         }
 
-        public UploadPatchToMasterPlanAction(Control invokingControl, IXenConnection connection, List<Host> selectedServers,
+        public UploadPatchToCoordinatorPlanAction(Control invokingControl, IXenConnection connection, List<Host> selectedServers,
             string updateFilePath, UpdateType updateType, List<HostUpdateMapping> mappings, bool skipDiskSpaceCheck = false)
             : base(connection)
         {
@@ -82,11 +82,11 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         }
 
         protected override void RunWithSession(ref Session session)
-        {
+        {   
             var conn = session.Connection;
-            var master = Helpers.GetCoordinator(conn);
+            var coordinator = Helpers.GetCoordinator(conn);
 
-            var existingMapping = FindExistingMapping(conn, master);
+            var existingMapping = FindExistingMapping(conn, coordinator);
             if (existingMapping != null && existingMapping.IsValid)
                 return;
 
@@ -111,8 +111,8 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
             if (xenServerPatch != null)
             {
-                if (Helpers.ElyOrGreater(master))
-                    UploadUpdate(conn, session, master, path);
+                if (Helpers.ElyOrGreater(coordinator))
+                    UploadUpdate(conn, session, coordinator, path);
                 else
                     UploadLegacyPatch(conn, session, path);
             }
@@ -125,17 +125,17 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             }
         }
 
-        private HostUpdateMapping FindExistingMapping(IXenConnection conn, Host master)
+        private HostUpdateMapping FindExistingMapping(IXenConnection conn, Host coordinator)
         {
             if (xenServerPatch != null)
             {
-                if (Helpers.ElyOrGreater(master))
+                if (Helpers.ElyOrGreater(coordinator))
                 {
                     var poolUpdates = new List<Pool_update>(conn.Cache.Pool_updates);
 
                     return (from HostUpdateMapping hum in mappings
                         let pum = hum as PoolUpdateMapping
-                        where pum != null && poolUpdates.Any(p => pum.Matches(master, xenServerPatch, p))
+                        where pum != null && poolUpdates.Any(p => pum.Matches(coordinator, xenServerPatch, p))
                         select pum).FirstOrDefault();
                 }
                 else
@@ -144,26 +144,26 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
                     return (from HostUpdateMapping hum in mappings
                         let ppm = hum as PoolPatchMapping
-                        where ppm != null && poolPatches.Any(p => ppm.Matches(master, xenServerPatch, p))
+                        where ppm != null && poolPatches.Any(p => ppm.Matches(coordinator, xenServerPatch, p))
                         select ppm).FirstOrDefault();
                 }
             }
             else if (updateFilePath != null)
             {
-                if (Helpers.ElyOrGreater(master))
+                if (Helpers.ElyOrGreater(coordinator))
                 {
                     var poolUpdates = new List<Pool_update>(conn.Cache.Pool_updates);
 
                     return (from HostUpdateMapping hum in mappings
                         let spm = hum as SuppPackMapping
-                        where spm != null && poolUpdates.Any(p => spm.Matches(master, updateFilePath, p))
+                        where spm != null && poolUpdates.Any(p => spm.Matches(coordinator, updateFilePath, p))
                         select spm).FirstOrDefault();
                 }
                 else
                 {
                     return (from HostUpdateMapping hum in mappings
                         let spm = hum as SuppPackMapping
-                        where spm != null && spm.Matches(master, updateFilePath)
+                        where spm != null && spm.Matches(coordinator, updateFilePath)
                         select spm).FirstOrDefault();
                 }
             }
@@ -171,9 +171,9 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             return null;
         }
 
-        private void UploadUpdate(IXenConnection conn, Session session, Host master, string path)
+        private void UploadUpdate(IXenConnection conn, Session session, Host coordinator, string path)
         {
-            var uploadIsoAction = new UploadSupplementalPackAction(conn, new List<Host> { master }, path, true);
+            var uploadIsoAction = new UploadSupplementalPackAction(conn, new List<Host> { coordinator }, path, true);
             uploadIsoAction.Changed += uploadAction_Changed;
             uploadIsoAction.Completed += uploadAction_Completed;
             inProgressAction = uploadIsoAction;

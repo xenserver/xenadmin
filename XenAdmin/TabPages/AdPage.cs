@@ -55,7 +55,7 @@ namespace XenAdmin.TabPages
         /// ever set once.
         /// </summary>
         private Pool pool;
-        private Host master;
+        private Host coordinator;
         private IXenConnection _connection;
 
         private Thread _loggedInStatusUpdater;
@@ -129,14 +129,14 @@ namespace XenAdmin.TabPages
             Program.Invoke(this, checkAdType);
         }
 
-        private void RefreshMaster()
+        private void RefreshCoordinator()
         {
-            if (master != null)
-                master.PropertyChanged -= master_PropertyChanged;
+            if (coordinator != null)
+                coordinator.PropertyChanged -= coordinator_PropertyChanged;
 
-            master = Helpers.GetCoordinator(_connection);
-            if (master != null)
-                master.PropertyChanged += master_PropertyChanged;
+            coordinator = Helpers.GetCoordinator(_connection);
+            if (coordinator != null)
+                coordinator.PropertyChanged += coordinator_PropertyChanged;
         }
 
         /// <summary>
@@ -147,8 +147,8 @@ namespace XenAdmin.TabPages
             if (pool != null)
                 pool.PropertyChanged -= pool_PropertyChanged;
 
-            if (master != null)
-                master.PropertyChanged -= master_PropertyChanged;
+            if (coordinator != null)
+                coordinator.PropertyChanged -= coordinator_PropertyChanged;
 
             if (_connection != null)
             {
@@ -199,7 +199,7 @@ namespace XenAdmin.TabPages
         /// </summary>
         /// <param name="sender1"></param>
         /// <param name="e"></param>
-        void master_PropertyChanged(object sender1, PropertyChangedEventArgs e)
+        void coordinator_PropertyChanged(object sender1, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "external_auth_type" || e.PropertyName == "name_label")
                 Program.Invoke(this, checkAdType);
@@ -250,13 +250,13 @@ namespace XenAdmin.TabPages
         private void checkAdType()
         {
             Program.AssertOnEventThread();
-            //refresh the master in case the cache is slow
-            RefreshMaster();
+            //refresh the coordinator in case the cache is slow
+            RefreshCoordinator();
 
-            if (master == null)
+            if (coordinator == null)
             {
-                log.WarnFormat("Could not resolve pool master for connection '{0}'; disabling.", Helpers.GetName(_connection));
-                OnMasterUnavailable();
+                log.WarnFormat("Could not resolve pool coordinator for connection '{0}'; disabling.", Helpers.GetName(_connection));
+                OnCoordinatorUnavailable();
                 return;
             }
 
@@ -270,16 +270,16 @@ namespace XenAdmin.TabPages
             {
                 OnAdConfiguring();
             }
-            else if (master.external_auth_type == Auth.AUTH_TYPE_NONE) // AD is not yet configured
+            else if (coordinator.external_auth_type == Auth.AUTH_TYPE_NONE) // AD is not yet configured
             {
                 OnAdDisabled();
             }
             else // AD is already configured
             {
-                if (master.external_auth_type != Auth.AUTH_TYPE_AD)
+                if (coordinator.external_auth_type != Auth.AUTH_TYPE_AD)
                 {
                     log.WarnFormat("Unrecognised value '{0}' for external_auth_type on pool coordinator '{1}' for pool '{2}'; assuming AD enabled on pool.",
-                        master.external_auth_type, Helpers.GetName(master), Helpers.GetName(_connection));
+                        coordinator.external_auth_type, Helpers.GetName(coordinator), Helpers.GetName(_connection));
                 }
 
                 OnAdEnabled();
@@ -297,14 +297,14 @@ namespace XenAdmin.TabPages
             {
                 Program.AssertOnEventThread();
 
-                Host master = Helpers.GetCoordinator(_connection);
-                if (master == null)
+                Host coordinator = Helpers.GetCoordinator(_connection);
+                if (coordinator == null)
                 {
                     log.WarnFormat("Could not resolve pool coordinator for connection '{0}'; disabling.", Helpers.GetName(_connection));
                     return Messages.UNKNOWN;
                 }
 
-                return master.external_auth_service_name;
+                return coordinator.external_auth_service_name;
             }
         }
 
@@ -344,7 +344,7 @@ namespace XenAdmin.TabPages
                 Helpers.GetName(_connection).Ellipsise(70));
         }
 
-        private void OnMasterUnavailable()
+        private void OnCoordinatorUnavailable()
         {
             Program.AssertOnEventThread();
 
@@ -757,15 +757,15 @@ namespace XenAdmin.TabPages
                         return;
                 }
 
-                Host master = Helpers.GetCoordinator(_connection);
-                if (master == null)
+                Host coordinator = Helpers.GetCoordinator(_connection);
+                if (coordinator == null)
                 {
                     // Really shouldn't happen unless we have been very slow with the cache
                     log.Error("Could not retrieve coordinator when trying to look up domain..");
                     throw new Exception(Messages.CONNECTION_IO_EXCEPTION);
                 }
 
-                using (var passPrompt = new AdPasswordPrompt(false, master.external_auth_service_name))
+                using (var passPrompt = new AdPasswordPrompt(false, coordinator.external_auth_service_name))
                 {
                     var result = passPrompt.ShowDialog(this);
                     if (result == DialogResult.Cancel)

@@ -87,8 +87,8 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             if (direction == PageLoadedDirection.Back)
                 return;
 
-            Host master = Helpers.GetCoordinator(Connection);
-            if (master == null)
+            Host coordinator = Helpers.GetCoordinator(Connection);
+            if (coordinator == null)
             {
                 cancel = true;
                 return;
@@ -106,7 +106,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                 var formatDiskDescriptor = CreateSrDescriptor(device);
                 var currentSrDescriptor = formatDiskDescriptor;
 
-                if (!RunProbe(master, currentSrDescriptor, out List<SR.SRInfo> srs))
+                if (!RunProbe(coordinator, currentSrDescriptor, out List<SR.SRInfo> srs))
                 {
                     cancel = true;
                     return;
@@ -117,7 +117,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                     // Start second probe
                     currentSrDescriptor = SrType == SR.SRTypes.gfs2 ? CreateLvmSrDescriptor(device) : CreateGfs2Descriptor(device);
 
-                    if (!RunProbe(master, currentSrDescriptor, out srs))
+                    if (!RunProbe(coordinator, currentSrDescriptor, out srs))
                     {
                         cancel = true;
                         return;
@@ -202,9 +202,9 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             }
         }
 
-        private bool RunProbe(Host master, FibreChannelDescriptor srDescriptor, out List<SR.SRInfo> srs)
+        private bool RunProbe(Host coordinator, FibreChannelDescriptor srDescriptor, out List<SR.SRInfo> srs)
         {
-            var action = new SrProbeAction(Connection, master, srDescriptor.SrType, srDescriptor.DeviceConfig);
+            var action = new SrProbeAction(Connection, coordinator, srDescriptor.SrType, srDescriptor.DeviceConfig);
 
             using (var dlg = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
                 dlg.ShowDialog(this);
@@ -363,11 +363,11 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         {
             devices = new List<FibreChannelDevice>();
 
-            Host master = Helpers.GetCoordinator(connection);
-            if (master == null)
+            Host coordinator = Helpers.GetCoordinator(connection);
+            if (coordinator == null)
                 return false;
 
-            var action = new FibreChannelProbeAction(master, SrType);
+            var action = new FibreChannelProbeAction(coordinator, SrType);
             using (var  dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
                 dialog.ShowDialog(owner); //Will block until dialog closes, action completed
 

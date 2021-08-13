@@ -903,22 +903,22 @@ namespace XenAdmin
 
         void connection_CachePopulated(IXenConnection connection)
         {
-            Host master = Helpers.GetCoordinator(connection);
-            if (master == null)
+            Host coordinator = Helpers.GetCoordinator(connection);
+            if (coordinator == null)
                 return;
 
             log.InfoFormat("Connected to {0} (version {1}, build {2}.{3}) with {4} {5}",
-                Helpers.GetName(master), Helpers.HostProductVersionText(master), Helpers.HostProductVersion(master),
-                master.BuildNumberRaw(), BrandManager.BrandConsole, Program.Version);
+                Helpers.GetName(coordinator), Helpers.HostProductVersionText(coordinator), Helpers.HostProductVersion(coordinator),
+                coordinator.BuildNumberRaw(), BrandManager.BrandConsole, Program.Version);
 
             // Check the PRODUCT_BRAND
-            if (!Program.RunInAutomatedTestMode && !SameProductBrand(master))
+            if (!Program.RunInAutomatedTestMode && !SameProductBrand(coordinator))
             {
                 connection.EndConnect();
 
                 Program.Invoke(Program.MainWindow, delegate
                 {
-                    var title = string.Format(Messages.CONNECTION_REFUSED_TITLE, Helpers.GetName(master).Ellipsise(80));
+                    var title = string.Format(Messages.CONNECTION_REFUSED_TITLE, Helpers.GetName(coordinator).Ellipsise(80));
                     new ActionBase(title, "", false, true, string.Format(Messages.INCOMPATIBLE_PRODUCTS, BrandManager.BrandConsole));
 
                     using (var dlog = new ErrorDialog(string.Format(Messages.INCOMPATIBLE_PRODUCTS, BrandManager.BrandConsole))
@@ -932,7 +932,7 @@ namespace XenAdmin
             //(could happen if trying to connect to a partially upgraded pool where
             //the newest hosts have been upgraded using a earlier XenCenter)
 
-            var supporters = connection.Cache.Hosts.Where(h => h.opaque_ref != master.opaque_ref);
+            var supporters = connection.Cache.Hosts.Where(h => h.opaque_ref != coordinator.opaque_ref);
             foreach (var supporter in supporters)
             {
                 if (Helpers.DundeeOrGreater(supporter))
@@ -942,7 +942,7 @@ namespace XenAdmin
 
                 Program.Invoke(Program.MainWindow, () =>
                 {
-                    var title = string.Format(Messages.CONNECTION_REFUSED_TITLE, Helpers.GetName(master).Ellipsise(80));
+                    var title = string.Format(Messages.CONNECTION_REFUSED_TITLE, Helpers.GetName(coordinator).Ellipsise(80));
                     var msg = string.Format(Messages.SUPPORTER_TOO_OLD, BrandManager.ProductBrand, BrandManager.ProductVersion70, BrandManager.BrandConsole);
                     
                     new ActionBase(title, "", false, true, msg);
@@ -966,8 +966,8 @@ namespace XenAdmin
             // xencenter_max should always equal the current version of XenCenter. This ensures that even if they are
             // not required to upgrade, we at least warn them.  // else if (server_max > current_version)
 
-            int server_min = master.XenCenterMin();
-            int server_max = master.XenCenterMax();
+            int server_min = coordinator.XenCenterMin();
+            int server_max = coordinator.XenCenterMax();
 
             if (server_min > 0 && server_max > 0)
             {
@@ -979,36 +979,9 @@ namespace XenAdmin
 
                     Program.Invoke(Program.MainWindow, delegate
                     {
-                        var msg = string.Format(Messages.GUI_OUT_OF_DATE, BrandManager.BrandConsole, Helpers.GetName(master));
+                        var msg = string.Format(Messages.GUI_OUT_OF_DATE, BrandManager.BrandConsole, Helpers.GetName(coordinator));
                         var url = InvisibleMessages.OUT_OF_DATE_WEBSITE;
-                        var title = string.Format(Messages.CONNECTION_REFUSED_TITLE, Helpers.GetName(master).Ellipsise(80));
-                        var error = $"{msg}\n{url}";
-
-                        new ActionBase(title, "", false, true, error);
-
-                        using (var dlog = new ErrorDialog(msg)
-                        {
-                            WindowTitle = title,
-                            ShowLinkLabel = !HiddenFeatures.LinkLabelHidden,
-                            LinkText = url,
-                            LinkData = url
-                        })
-                            dlog.ShowDialog(this);
-                    });
-                    return;
-                }
-
-                // Allow Citrix Hypervisor Center connect to Stockholm and cloud released versions only
-                //
-                if (!Helpers.StockholmOrGreater(master))
-                {
-                    connection.EndConnect();
-
-                    Program.Invoke(Program.MainWindow, delegate
-                    {
-                        var msg = string.Format(Messages.GUI_NOT_COMPATIBLE, BrandManager.BrandConsole, BrandManager.ProductBrand, BrandManager.ProductVersion82, Helpers.GetName(master), BrandManager.LegacyConsole);
-                        var url = InvisibleMessages.OUT_OF_DATE_WEBSITE;
-                        var title = string.Format(Messages.CONNECTION_REFUSED_TITLE, Helpers.GetName(master).Ellipsise(80));
+                        var title = string.Format(Messages.CONNECTION_REFUSED_TITLE, Helpers.GetName(coordinator).Ellipsise(80));
                         var error = $"{msg}\n{url}";
 
                         new ActionBase(title, "", false, true, error);

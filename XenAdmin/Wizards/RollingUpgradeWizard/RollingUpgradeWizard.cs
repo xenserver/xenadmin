@@ -74,8 +74,8 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
         protected override void FinishWizard()
         {
-            var brokenSRs = RollingUpgradeWizardSelectPool.SelectedMasters
-                .Any(master => master != null && master.Connection.Cache.SRs.Any(sr => sr.IsBroken(true)));
+            var brokenSRs = RollingUpgradeWizardSelectPool.SelectedCoordinators
+                .Any(coordinator => coordinator != null && coordinator.Connection.Cache.SRs.Any(sr => sr.IsBroken(true)));
             if(brokenSRs)
             {
                 using (var dlg = new WarningDialog(Messages.BROKEN_SRS_AFTER_UPGRADE))
@@ -90,13 +90,13 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
             if (prevPageType == typeof(RollingUpgradeWizardSelectPool))
             {
-                var selectedMasters = RollingUpgradeWizardSelectPool.SelectedMasters;
-                RollingUpgradeWizardPrecheckPage.SelectedMasters = selectedMasters;
+                var selectedCoordinators = RollingUpgradeWizardSelectPool.SelectedCoordinators;
+                RollingUpgradeWizardPrecheckPage.SelectedCoordinators = selectedCoordinators;
 
                 var selectedPools = new List<Pool>();
-                foreach (var master in selectedMasters)
+                foreach (var coordinator in selectedCoordinators)
                 {
-                    var pool = Helpers.GetPoolOfOne(master.Connection);
+                    var pool = Helpers.GetPoolOfOne(coordinator.Connection);
                     if (pool != null && !selectedPools.Contains(pool))
                         selectedPools.Add(pool);
                 }

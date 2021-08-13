@@ -101,8 +101,8 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                     var pool = Helpers.GetPool(con);
                     if (pool == null)
                     {
-                        Host master = Helpers.GetCoordinator(con);
-                        if (master != null && selectedObjects.Contains(master))
+                        Host coordinator = Helpers.GetCoordinator(con);
+                        if (coordinator != null && selectedObjects.Contains(coordinator))
                             node.State = CheckState.Checked;
                     }
                     else
@@ -143,9 +143,9 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                     {
                         if (Helpers.GetPool(c) == null)
                         {
-                            Host master = Helpers.GetCoordinator(c);
-                            if (master != null)
-                                hosts.Add(master);
+                            Host coordinator = Helpers.GetCoordinator(c);
+                            if (coordinator != null)
+                                hosts.Add(coordinator);
                         }
                         continue;
                     }
@@ -243,15 +243,15 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                     }
                     else
                     {
-                        Host master = Helpers.GetCoordinator(connection);
-                        if (master != null)
+                        Host coordinator = Helpers.GetCoordinator(connection);
+                        if (coordinator != null)
                         {
-                            bool isMasterLive = master.IsLive();
-                            node.Enabled = isMasterLive;
-                            node.Description = isMasterLive ? "" : Messages.HOST_NOT_LIVE;
-                            node.Image = Images.GetImage16For(master);
+                            bool isCoordinatorLive = coordinator.IsLive();
+                            node.Enabled = isCoordinatorLive;
+                            node.Description = isCoordinatorLive ? "" : Messages.HOST_NOT_LIVE;
+                            node.Image = Images.GetImage16For(coordinator);
 
-                            RegisterHostEvents(master);
+                            RegisterHostEvents(coordinator);
                         }
                     }
                 }
@@ -285,9 +285,9 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                 }
                 else
                 {
-                    Host master = Helpers.GetCoordinator(connection);
-                    if (master != null)
-                        DeregisterHostEvents(master);
+                    Host coordinator = Helpers.GetCoordinator(connection);
+                    if (coordinator != null)
+                        DeregisterHostEvents(coordinator);
                 }
             }
         }

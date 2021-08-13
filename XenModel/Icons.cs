@@ -40,7 +40,7 @@ namespace XenAdmin
         HostDisconnected,
         HostEvacuate,
         HostUnpatched,
-        HostOlderThanMaster,
+        HostOlderThanCoordinator,
         HostHasCrashDumps,
 
         VmRunning,

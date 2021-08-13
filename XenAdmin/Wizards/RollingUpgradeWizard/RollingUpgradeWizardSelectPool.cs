@@ -85,12 +85,12 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                     return;
                 }
 
-                foreach (var selectedMaster in SelectedMasters)
+                foreach (var selectedCoordinator in SelectedCoordinators)
                 {
-                    if (!(selectedMaster.Connection.Session.IsLocalSuperuser || selectedMaster.Connection.Session.Roles.Any(role => role.name_label == Role.MR_ROLE_POOL_ADMIN)))
+                    if (!(selectedCoordinator.Connection.Session.IsLocalSuperuser || selectedCoordinator.Connection.Session.Roles.Any(role => role.name_label == Role.MR_ROLE_POOL_ADMIN)))
                     {
                         using (var dlg = new WarningDialog(string.Format(Messages.RBAC_UPGRADE_WIZARD_MESSAGE,
-                                selectedMaster.Connection.Username, selectedMaster.Name()))
+                                selectedCoordinator.Connection.Username, selectedCoordinator.Name()))
                             {WindowTitle = Messages.ROLLING_POOL_UPGRADE})
                         {
                             dlg.ShowDialog(this);
@@ -130,7 +130,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             return true;
         }
 
-        public IList<Host> SelectedMasters
+        public IList<Host> SelectedCoordinators
         {
             get
             {
@@ -165,7 +165,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
         private void BuildServerList()
         {
-            IList<Host> masters = SelectedMasters;
+            IList<Host> coordinators = SelectedCoordinators;
             dataGridView1.Rows.Clear();
             List<IXenConnection> xenConnections = ConnectionsManager.XenConnectionsCopy;
             xenConnections.Sort();
@@ -187,7 +187,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                         if (restricted)
                             dataGridView1.Rows[index].Cells[NameColumn.Name].ToolTipText = Messages.ROLLING_UPGRADE_UNLICENSED_POOL;
                     }
-                    else if (masters.Contains(pool.Connection.Resolve(pool.master)))
+                    else if (coordinators.Contains(pool.Connection.Resolve(pool.master)))
                         dataGridView1.CheckBoxChange(index, 1);
                 }
                 else
@@ -206,7 +206,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                         if (restricted)
                             dataGridView1.Rows[index].Cells[NameColumn.Name].ToolTipText = Messages.ROLLING_UPGRADE_UNLICENSED_HOST;
                     }
-                    else if (!hasPool && masters.Contains(host))
+                    else if (!hasPool && coordinators.Contains(host))
                         dataGridView1.CheckBoxChange(index, 1);
                 }
             }

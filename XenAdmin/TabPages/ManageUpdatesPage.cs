@@ -360,7 +360,7 @@ namespace XenAdmin.TabPages
             {
                 if (Tag is Pool pool)
                 {
-                    Host master = pool.Connection.Resolve(pool.master);
+                    Host coordinator = pool.Connection.Resolve(pool.master);
                     SetCollapseIcon();
                     _poolIconCell.Value = Images.GetImage16For(pool);
 
@@ -368,7 +368,7 @@ namespace XenAdmin.TabPages
                         nc.Image = null;
 
                     _nameCell.Value = pool.Name();
-                    _versionCell.Value = master.ProductVersionTextShort();
+                    _versionCell.Value = coordinator.ProductVersionTextShort();
                     _requiredUpdateCell.Value = String.Empty;
                     _installedUpdateCell.Value = String.Empty;
 

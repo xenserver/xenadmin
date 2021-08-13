@@ -292,8 +292,8 @@ namespace XenAdmin.TabPages
                 return;
             }
 
-            var bondMasterOf = pif.BondMasterOf();
-            DeleteBondButton.Enabled = bondMasterOf != null && !bondMasterOf.Locked;
+            var bondInterfaceOf = pif.BondMasterOf();
+            DeleteBondButton.Enabled = bondInterfaceOf != null && !bondInterfaceOf.Locked;
         }
 
         private void CreateBondButton_Click(object sender, EventArgs e)
