@@ -391,7 +391,7 @@ namespace XenAdmin.Dialogs
                 if (!enable)
                 {
                     if (_pool.is_psr_pending)
-                        labelWarning.Text = Messages.ROTATE_POOL_SECRET_PENDING_NEW_MASTER;
+                        labelWarning.Text = Messages.ROTATE_POOL_SECRET_PENDING_NEW_COORDINATOR;
                     else if (_pool.current_operations.Values.Contains(pool_allowed_operations.ha_enable))
                         labelWarning.Text = Messages.EVACUATE_HOST_HA_ENABLING;
                     else if (_pool.current_operations.Values.Contains(pool_allowed_operations.ha_disable))

@@ -180,7 +180,7 @@ namespace XenAdmin.Actions
                     Connection.MasterMayChange = true;
 
                     //Transition to new coordinator
-                    this.Description = String.Format(Messages.HOSTACTION_TRANSITIONING_NEW_MASTER, Helpers.GetName(_newMaster));
+                    this.Description = String.Format(Messages.HOSTACTION_TRANSITIONING_NEW_COORDINATOR, Helpers.GetName(_newMaster));
 
                     try
                     {
@@ -194,7 +194,7 @@ namespace XenAdmin.Actions
                         throw;
                     }
 
-                    this.Description = String.Format(Messages.HOSTACTION_TRANSITIONED_NEW_MASTER, Helpers.GetName(_newMaster));
+                    this.Description = String.Format(Messages.HOSTACTION_TRANSITIONED_NEW_COORDINATOR, Helpers.GetName(_newMaster));
                 }
 
                 this.PercentComplete = 100;

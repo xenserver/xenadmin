@@ -155,13 +155,13 @@ namespace XenAdmin.Commands
                 {
                     sb.AppendLine();
                     sb.AppendLine();
-                    sb.AppendFormat(Messages.SHUT_DOWN_POOL_MASTER_SINGLE, poolMasters[0].Name());
+                    sb.AppendFormat(Messages.SHUT_DOWN_POOL_COORDINATOR_SINGLE, poolMasters[0].Name());
                 }
                 else if (poolMasters.Count > 1)
                 {
                     sb.AppendLine();
                     sb.AppendLine();
-                    sb.AppendFormat(Messages.SHUT_DOWN_POOL_MASTER_MULTIPLE, string.Join(", ", poolMasters.Select(h => h.Name())));
+                    sb.AppendFormat(Messages.SHUT_DOWN_POOL_COORDINATOR_MULTIPLE, string.Join(", ", poolMasters.Select(h => h.Name())));
                 }
                 return sb.ToString();
             }

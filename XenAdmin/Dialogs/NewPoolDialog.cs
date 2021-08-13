@@ -118,7 +118,7 @@ namespace XenAdmin.Dialogs
                     break;
                 case InvalidReasons.NO_MASTER:
                     buttonCreate.Enabled = false;
-                    toolTipContainerCreate.SetToolTip(Messages.NO_ELIGIBLE_MASTER);
+                    toolTipContainerCreate.SetToolTip(Messages.NO_ELIGIBLE_COORDINATOR);
                     break;
                 case InvalidReasons.EMPTY_POOL_NAME:
                     buttonCreate.Enabled = false;

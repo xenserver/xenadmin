@@ -78,7 +78,7 @@ namespace XenAdmin.Commands
 
             if (pool != null && pool.ha_enabled && host.IsMaster())
             {
-                using (var dlg = new ErrorDialog(string.Format(Messages.HA_CANNOT_EVACUATE_MASTER,
+                using (var dlg = new ErrorDialog(string.Format(Messages.HA_CANNOT_EVACUATE_COORDINATOR,
                         Helpers.GetName(host).Ellipsise(Helpers.DEFAULT_NAME_TRIM_LENGTH))))
                 {
                     dlg.ShowDialog(Parent);

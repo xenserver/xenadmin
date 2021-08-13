@@ -186,7 +186,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 log.ErrorFormat("Upload finished successfully, but Pool_update object has not been found for update {0} on host (uuid={1}).",
                     xenServerPatch != null ? $"(uuid={xenServerPatch.Uuid})" : GetUpdateName(), conn);
 
-                throw new Exception(Messages.ACTION_UPLOADPATCHTOMASTERPLANACTION_FAILED);
+                throw new Exception(Messages.ACTION_UPLOADPATCHTOCOORDINATORPLANACTION_FAILED);
             }
 
             var newMapping = new PoolUpdateMapping(xenServerPatch, poolUpdate, Helpers.GetCoordinator(conn))
@@ -221,7 +221,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 {
                     log.ErrorFormat("Upload finished successfully, but Pool_patch object has not been found for patch (uuid={0}) on host (uuid={1}).",
                         xenServerPatch.Uuid, conn);
-                    throw new Exception(Messages.ACTION_UPLOADPATCHTOMASTERPLANACTION_FAILED);
+                    throw new Exception(Messages.ACTION_UPLOADPATCHTOCOORDINATORPLANACTION_FAILED);
                 }
 
                 var newMapping = new PoolPatchMapping(xenServerPatch, poolPatch, Helpers.GetCoordinator(conn));
@@ -235,7 +235,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 {
                     log.ErrorFormat("Upload finished successfully, but Pool_patch object has not been found for patch {0} on host (uuid={1}).",
                         updateFilePath, conn);
-                    throw new Exception(Messages.ACTION_UPLOADPATCHTOMASTERPLANACTION_FAILED);
+                    throw new Exception(Messages.ACTION_UPLOADPATCHTOCOORDINATORPLANACTION_FAILED);
                 }
 
                 var newMapping = new OtherLegacyMapping(updateFilePath, poolPatch, Helpers.GetCoordinator(conn));

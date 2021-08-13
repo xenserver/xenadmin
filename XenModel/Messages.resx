@@ -996,7 +996,7 @@
   <data name="ACTION_UPDATE_INTEGRATED_GPU_PASSTHROUGH_TITLE" xml:space="preserve">
     <value>Updating integrated GPU pass-through on '{0}'</value>
   </data>
-  <data name="ACTION_UPLOADPATCHTOMASTERPLANACTION_FAILED" xml:space="preserve">
+  <data name="ACTION_UPLOADPATCHTOCOORDINATORPLANACTION_FAILED" xml:space="preserve">
     <value>Upload error. The patch was uploaded, but it cannot be found on the host.</value>
   </data>
   <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT" xml:space="preserve">
@@ -1649,7 +1649,7 @@ Do you want to continue?</value>
 
 Do you want to continue?</value>
   </data>
-  <data name="AD_MASTER_UNAVAILABLE_BLURB" xml:space="preserve">
+  <data name="AD_COORDINATOR_UNAVAILABLE_BLURB" xml:space="preserve">
     <value>Please wait while {0} establishes your current external authentication configuration.</value>
   </data>
   <data name="AD_NOT_CONFIGURED_BLURB" xml:space="preserve">
@@ -2217,8 +2217,8 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
   <data name="BOND_GONE" xml:space="preserve">
     <value>Could not find the bond in {0}'s cache.</value>
   </data>
-  <data name="BOND_MASTER_GONE" xml:space="preserve">
-    <value>Could not find the bond master in {0}'s cache.</value>
+  <data name="BOND_INTERFACE_GONE" xml:space="preserve">
+    <value>Could not find the bond interface in {0}'s cache.</value>
   </data>
   <data name="BOOTORDER" xml:space="preserve">
     <value>Boot order: {0}</value>
@@ -3172,11 +3172,11 @@ Would you like to carry out the operation at this time?</value>
   <data name="CONNECTION_FAILED_TITLE" xml:space="preserve">
     <value>Failed to connect to {0}</value>
   </data>
-  <data name="CONNECTION_FINDING_MASTER_DESCRIPTION" xml:space="preserve">
-    <value>Looking for master for {0} on {1}...</value>
+  <data name="CONNECTION_FINDING_COORDINATOR_DESCRIPTION" xml:space="preserve">
+    <value>Looking for coordinator for {0} on {1}...</value>
   </data>
-  <data name="CONNECTION_FINDING_MASTER_TITLE" xml:space="preserve">
-    <value>Looking for master for {0}</value>
+  <data name="CONNECTION_FINDING_COORDINATOR_TITLE" xml:space="preserve">
+    <value>Looking for coordinator for {0}</value>
   </data>
   <data name="CONNECTION_GENERAL_TAB_TITLE" xml:space="preserve">
     <value>Connection General Properties</value>
@@ -3184,8 +3184,8 @@ Would you like to carry out the operation at this time?</value>
   <data name="CONNECTION_IO_EXCEPTION" xml:space="preserve">
     <value>Could not contact server</value>
   </data>
-  <data name="CONNECTION_LOST_NOTICE_MASTER_IN_X_SECONDS" xml:space="preserve">
-    <value>Lost connection to {0}. Will search for a new pool master in {1} seconds.</value>
+  <data name="CONNECTION_LOST_NOTICE_COORDINATOR_IN_X_SECONDS" xml:space="preserve">
+    <value>Lost connection to {0}. Will search for a new pool coordinator in {1} seconds.</value>
   </data>
   <data name="CONNECTION_LOST_NOTICE_TITLE" xml:space="preserve">
     <value>Lost connection to {0}</value>
@@ -3955,8 +3955,8 @@ For optimal performance and reliability during VM migration, ensure that the net
   <data name="CREATING_MANIFEST_CHECKSUM" xml:space="preserve">
     <value>Calculating checksum for file '{0}'...</value>
   </data>
-  <data name="CREATING_NAMED_POOL_WITH_MASTER" xml:space="preserve">
-    <value>Creating new pool '{0}' with master '{1}'</value>
+  <data name="CREATING_NAMED_POOL_WITH_COORDINATOR" xml:space="preserve">
+    <value>Creating new pool '{0}' with coordinator '{1}'</value>
   </data>
   <data name="CREATING_NEW_FOLDER" xml:space="preserve">
     <value>Creating new folder...</value>
@@ -5570,8 +5570,8 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="EXCEPTION_USER_CANCELLED" xml:space="preserve">
     <value>Canceled</value>
   </data>
-  <data name="EXCEPTION_USER_CANCELLED_MASTER" xml:space="preserve">
-    <value>User canceled. Master needs to be upgraded first.</value>
+  <data name="EXCEPTION_USER_CANCELLED_COORDINATOR" xml:space="preserve">
+    <value>User canceled. Coordinator needs to be upgraded first.</value>
   </data>
   <data name="EXIT_MAINTENANCE_MODE" xml:space="preserve">
     <value>Exit &amp;Maintenance Mode</value>
@@ -6293,8 +6293,8 @@ not currently live:
 
 {0}</value>
   </data>
-  <data name="HA_CANNOT_EVACUATE_MASTER" xml:space="preserve">
-    <value>Server '{0}' cannot be placed in Maintenance Mode because it is the master of an HA-enabled pool.</value>
+  <data name="HA_CANNOT_EVACUATE_COORDINATOR" xml:space="preserve">
+    <value>Server '{0}' cannot be placed in Maintenance Mode because it is the coordinator of an HA-enabled pool.</value>
   </data>
   <data name="HA_CHECK_DESCRIPTION" xml:space="preserve">
     <value>HA and WLB check</value>
@@ -6676,11 +6676,11 @@ Click Configure HA to alter the settings displayed below.</value>
   <data name="HOSTACTION_SHUTDOWN_VM_SHUTDOWN" xml:space="preserve">
     <value>Preparing to shut down server: shutting down {0} ({1} of {2})</value>
   </data>
-  <data name="HOSTACTION_TRANSITIONED_NEW_MASTER" xml:space="preserve">
-    <value>Nominated server {0} as new master</value>
+  <data name="HOSTACTION_TRANSITIONED_NEW_COORDINATOR" xml:space="preserve">
+    <value>Nominated server {0} as new coordinator</value>
   </data>
-  <data name="HOSTACTION_TRANSITIONING_NEW_MASTER" xml:space="preserve">
-    <value>Nominating server {0} as new master...</value>
+  <data name="HOSTACTION_TRANSITIONING_NEW_COORDINATOR" xml:space="preserve">
+    <value>Nominating server {0} as new coordinator...</value>
   </data>
   <data name="HOST_ACTION_IN_PROGRESS" xml:space="preserve">
     <value>This server has an operation in progress.</value>
@@ -8173,8 +8173,8 @@ This will permanently delete and reinitialize all local storage on the servers. 
   <data name="MANUAL_CHECK_FOR_UPDATES_UNLICENSED_INFO" xml:space="preserve">
     <value>Subscription Advantage required</value>
   </data>
-  <data name="MASTER" xml:space="preserve">
-    <value>Master</value>
+  <data name="COORDINATOR" xml:space="preserve">
+    <value>Coordinator</value>
   </data>
   <data name="MAX" xml:space="preserve">
     <value>Max</value>
@@ -8386,8 +8386,8 @@ This action is final and unrecoverable.</value>
   <data name="MESSAGEBOX_POOL_DELETE" xml:space="preserve">
     <value>The pool Master will become a standalone server, are you sure you want to continue?</value>
   </data>
-  <data name="MESSAGEBOX_POOL_MASTER_REMOVE" xml:space="preserve">
-    <value>You cannot remove the master from the pool.</value>
+  <data name="MESSAGEBOX_POOL_COORDINATOR_REMOVE" xml:space="preserve">
+    <value>You cannot remove the coordinator from the pool.</value>
   </data>
   <data name="MESSAGEBOX_PROGRAM_UNEXPECTED" xml:space="preserve">
     <value>[{0}] There has been an unexpected error. Technical details about this error have been saved to the following file. Please send this to your support representative.
@@ -8754,8 +8754,8 @@ You should only proceed if you have verified that these settings are correct.</v
   <data name="NEW_POOL_CLUSTERING_ENABLED" xml:space="preserve">
     <value>Clustering is enabled on this server.</value>
   </data>
-  <data name="NEWPOOL_DIFFERENT_HOMOGENEOUS_UPDATES_FROM_MASTER" xml:space="preserve">
-    <value>This server has different updates from the master</value>
+  <data name="NEWPOOL_DIFFERENT_HOMOGENEOUS_UPDATES_FROM_COORDINATOR" xml:space="preserve">
+    <value>This server has different updates from the coordinator</value>
   </data>
   <data name="NEWPOOL_DIFFERENT_HOMOGENEOUS_UPDATES_FROM_POOL" xml:space="preserve">
     <value>This server has different updates from servers already in the pool</value>
@@ -8787,7 +8787,7 @@ You should only proceed if you have verified that these settings are correct.</v
   <data name="NEWPOOL_IS_A_POOL" xml:space="preserve">
     <value>This server is master of an existing pool</value>
   </data>
-  <data name="NEWPOOL_LICENSED_HOST_UNLICENSED_MASTER" xml:space="preserve">
+  <data name="NEWPOOL_LICENSED_HOST_UNLICENSED_COORDINATOR" xml:space="preserve">
     <value>You cannot add a licensed server to an unlicensed pool</value>
   </data>
   <data name="NEWPOOL_LICENSEMISMATCH" xml:space="preserve">
@@ -8796,14 +8796,14 @@ You should only proceed if you have verified that these settings are correct.</v
   <data name="NEWPOOL_LINUXPACK" xml:space="preserve">
     <value>This server's Linux pack installation state differs from that of the master</value>
   </data>
-  <data name="NEWPOOL_MASTER_CONNECTING" xml:space="preserve">
-    <value>The master is still connecting</value>
+  <data name="NEWPOOL_COORDINATOR_CONNECTING" xml:space="preserve">
+    <value>The coordinator is still connecting</value>
   </data>
-  <data name="NEWPOOL_MASTER_DISCONNECTED" xml:space="preserve">
-    <value>The master is disconnected</value>
+  <data name="NEWPOOL_COORDINATOR_DISCONNECTED" xml:space="preserve">
+    <value>The coordinator is disconnected</value>
   </data>
-  <data name="NEWPOOL_MASTER_ROLE" xml:space="preserve">
-    <value>Your current role on the master is not authorized to add hosts to the master's pool</value>
+  <data name="NEWPOOL_COORDINATOR_ROLE" xml:space="preserve">
+    <value>Your current role on the coordinator is not authorized to add hosts to the coordinator's pool</value>
   </data>
   <data name="NEWPOOL_MAX_NUMBER_HOST_REACHED" xml:space="preserve">
     <value>The pool has already reached the maximum number of servers allowed by your license</value>
@@ -8814,7 +8814,7 @@ You should only proceed if you have verified that these settings are correct.</v
   <data name="NEWPOOL_SUPPORTER_ROLE" xml:space="preserve">
     <value>Your current role on this server is not authorized to add it to a pool</value>
   </data>
-  <data name="NEWPOOL_UNLICENSED_HOST_LICENSED_MASTER" xml:space="preserve">
+  <data name="NEWPOOL_UNLICENSED_HOST_LICENSED_COORDINATOR" xml:space="preserve">
     <value>You cannot add an unlicensed server to a licensed pool</value>
   </data>
   <data name="NEWPOOL_WILL_EXCEED_POOL_MAX_SIZE" xml:space="preserve">
@@ -9586,7 +9586,7 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="NIC_HIDDEN" xml:space="preserve">
     <value>{0} (Hidden)</value>
   </data>
-  <data name="NIC_BOENDED_MEMBER" xml:space="preserve">
+  <data name="NIC_BONDED_MEMBER" xml:space="preserve">
     <value>{0} (Bonded member)</value>
   </data>
   <data name="NIC_TAB_TITLE" xml:space="preserve">
@@ -9796,8 +9796,8 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="NO_DISKS" xml:space="preserve">
     <value>This VM does not have any disks.</value>
   </data>
-  <data name="NO_ELIGIBLE_MASTER" xml:space="preserve">
-    <value>There is no server eligible to become the master of your new pool</value>
+  <data name="NO_ELIGIBLE_COORDINATOR" xml:space="preserve">
+    <value>There is no server eligible to become the coordinator of your new pool</value>
   </data>
   <data name="NO_GPU_IN_POOL" xml:space="preserve">
     <value>GPU configuration and monitoring is disabled, because there are no GPUs available in this pool.</value>
@@ -10134,8 +10134,8 @@ This will cancel the update process and may leave your system in an unstable sta
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_PARTIALLY_UPGRADED" xml:space="preserve">
     <value>Automated updates are not supported on partially upgraded {0} pools</value>
   </data>
-  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_UPDATE_MASTER_POST_7_0" xml:space="preserve">
-    <value>Cannot install updates on this host because the master is running a version higher than {0}</value>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_UPDATE_COORDINATOR_POST_7_0" xml:space="preserve">
+    <value>Cannot install updates on this host because the coordinator is running a version higher than {0}</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED" xml:space="preserve">
     <value>Subscription Advantage required</value>
@@ -10595,11 +10595,11 @@ Please reconnect the host and try again</value>
   <data name="POOL_LICENSE" xml:space="preserve">
     <value>Pool License</value>
   </data>
-  <data name="POOL_MASTER" xml:space="preserve">
-    <value>Pool master</value>
+  <data name="POOL_COORDINATOR" xml:space="preserve">
+    <value>Pool coordinator</value>
   </data>
-  <data name="POOL_MASTER_GONE" xml:space="preserve">
-    <value>Could not find the pool master in {0}'s cache.</value>
+  <data name="POOL_COORDINATOR_GONE" xml:space="preserve">
+    <value>Could not find the pool coordinator in {0}'s cache.</value>
   </data>
   <data name="POOL_NAME_EMPTY" xml:space="preserve">
     <value>Pool name cannot be empty</value>
@@ -10693,17 +10693,17 @@ Are you sure you want to continue?</value>
   <data name="PROBLEM_MAC_ADDRESS_IS_DUPLICATE_TITLE" xml:space="preserve">
     <value>Duplicate MAC address</value>
   </data>
-  <data name="PROBLEM_MASTER_PENDING_RESTART_HOST" xml:space="preserve">
-    <value>{0}: The master needs to be rebooted first</value>
+  <data name="PROBLEM_COORDINATOR_PENDING_RESTART_HOST" xml:space="preserve">
+    <value>{0}: The coordinator needs to be rebooted first</value>
   </data>
-  <data name="PROBLEM_MASTER_PENDING_RESTART_HOST_THIS_UPDATE" xml:space="preserve">
-    <value>{0}: This update requires the master to be rebooted first</value>
+  <data name="PROBLEM_COORDINATOR_PENDING_RESTART_HOST_THIS_UPDATE" xml:space="preserve">
+    <value>{0}: This update requires the coordinator to be rebooted first</value>
   </data>
-  <data name="PROBLEM_MASTER_PENDING_RESTART_TOOLSTACK" xml:space="preserve">
-    <value>{0}: Toolstack on master needs to be restarted first</value>
+  <data name="PROBLEM_COORDINATOR_PENDING_RESTART_TOOLSTACK" xml:space="preserve">
+    <value>{0}: Toolstack on coordinator needs to be restarted first</value>
   </data>
-  <data name="PROBLEM_MASTER_PENDING_RESTART_TOOLSTACK_THIS_UPDATE" xml:space="preserve">
-    <value>{0}: This update requires the toolstack on master to be restarted first</value>
+  <data name="PROBLEM_COORDINATOR_PENDING_RESTART_TOOLSTACK_THIS_UPDATE" xml:space="preserve">
+    <value>{0}: This update requires the toolstack on coordinator to be restarted first</value>
   </data>
   <data name="PROBLEM_POOLPROBLEM_TITLE" xml:space="preserve">
     <value>Pool '{0}'</value>
@@ -11379,8 +11379,8 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
   <data name="ROTATE_POOL_SECRET_PENDING_HA" xml:space="preserve">
     <value>You cannot configure HA while a pool secret rotation is in progress.</value>
   </data>
-  <data name="ROTATE_POOL_SECRET_PENDING_NEW_MASTER" xml:space="preserve">
-    <value>You cannot nominate a new master while a pool secret rotation is in progress.</value>
+  <data name="ROTATE_POOL_SECRET_PENDING_NEW_COORDINATOR" xml:space="preserve">
+    <value>You cannot nominate a new coordinator while a pool secret rotation is in progress.</value>
   </data>
   <data name="ROTATE_POOL_SECRET_MENU" xml:space="preserve">
     <value>Rotate &amp;Pool Secret</value>
@@ -11750,11 +11750,11 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
   <data name="SHUTTING_DOWN_VM_OUT_OF" xml:space="preserve">
     <value>Shutting down VM {0} out of {1}</value>
   </data>
-  <data name="SHUT_DOWN_POOL_MASTER_MULTIPLE" xml:space="preserve">
-    <value>{0} are pool masters. It is strongly recommended to nominate a new master for each affected pool before proceeding.</value>
+  <data name="SHUT_DOWN_POOL_COORDINATOR_MULTIPLE" xml:space="preserve">
+    <value>{0} are pool coordinators. It is strongly recommended to nominate a new coordinator for each affected pool before proceeding.</value>
   </data>
-  <data name="SHUT_DOWN_POOL_MASTER_SINGLE" xml:space="preserve">
-    <value>{0} is the pool master. It is strongly recommended to nominate a new master for the pool before proceeding.</value>
+  <data name="SHUT_DOWN_POOL_COORDINATOR_SINGLE" xml:space="preserve">
+    <value>{0} is the pool coordinator. It is strongly recommended to nominate a new coordinator for the pool before proceeding.</value>
   </data>
   <data name="SIGNING_APPLIANCE" xml:space="preserve">
     <value>Applying digital signature to appliance...</value>
@@ -12975,8 +12975,8 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
   <data name="UPGRADE_POOL" xml:space="preserve">
     <value>Upgrade pool {0}</value>
   </data>
-  <data name="UPGRADE_POOL_MASTER" xml:space="preserve">
-    <value>Upgrade pool master '{0}'</value>
+  <data name="UPGRADE_POOL_COORDINATOR" xml:space="preserve">
+    <value>Upgrade pool coordinator '{0}'</value>
   </data>
   <data name="UPGRADE_PRECHECKS_TEXT" xml:space="preserve">
     <value>Pre-checks</value>

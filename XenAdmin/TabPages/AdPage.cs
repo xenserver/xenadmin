@@ -351,7 +351,7 @@ namespace XenAdmin.TabPages
             flowLayoutPanel1.Enabled = false;
             SetSubjectListEnable(false);
             buttonJoinLeave.Enabled = false;
-            labelBlurb.Text = string.Format(Messages.AD_MASTER_UNAVAILABLE_BLURB, BrandManager.BrandConsole);
+            labelBlurb.Text = Messages.AD_COORDINATOR_UNAVAILABLE_BLURB;
         }
 
         private void RepopulateListBox()

@@ -47,8 +47,8 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
             {
                 return string.Format(
                     ((RestartHostOrToolstackPendingOnMasterCheck)Check).UpdateUuid != null
-                    ? Messages.PROBLEM_MASTER_PENDING_RESTART_HOST_THIS_UPDATE
-                    : Messages.PROBLEM_MASTER_PENDING_RESTART_HOST,
+                    ? Messages.PROBLEM_COORDINATOR_PENDING_RESTART_HOST_THIS_UPDATE
+                    : Messages.PROBLEM_COORDINATOR_PENDING_RESTART_HOST,
                     Helpers.GetName(Pool).Ellipsise(30));
             }
         }
@@ -71,8 +71,8 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
             {
                 return string.Format(
                     ((RestartHostOrToolstackPendingOnMasterCheck)Check).UpdateUuid != null
-                    ? Messages.PROBLEM_MASTER_PENDING_RESTART_TOOLSTACK_THIS_UPDATE
-                    : Messages.PROBLEM_MASTER_PENDING_RESTART_TOOLSTACK,
+                    ? Messages.PROBLEM_COORDINATOR_PENDING_RESTART_TOOLSTACK_THIS_UPDATE
+                    : Messages.PROBLEM_COORDINATOR_PENDING_RESTART_TOOLSTACK,
                     Helpers.GetName(Pool).Ellipsise(30));
             }
         }

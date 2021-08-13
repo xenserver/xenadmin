@@ -342,7 +342,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                         continue;
 
                     var msg = server.IsMaster()
-                        ? string.Format("{0} ({1})", server.Name(), Messages.MASTER)
+                        ? string.Format("{0} ({1})", server.Name(), Messages.COORDINATOR)
                         : server.Name();
                     sb.AppendIndented(msg).AppendLine();
                 }
@@ -367,7 +367,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 foreach (var server in kvp.Value)
                 {
                     var msg = server.IsMaster()
-                        ? string.Format("{0} ({1})", server.Name(), Messages.MASTER)
+                        ? string.Format("{0} ({1})", server.Name(), Messages.COORDINATOR)
                         : server.Name();
                     sb.AppendIndented(msg).AppendLine();
                 }

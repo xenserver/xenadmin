@@ -130,7 +130,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
                     {
                         if (GetResolvedHost().IsMaster())
                         {
-                            Error = new ApplicationException(Messages.EXCEPTION_USER_CANCELLED_MASTER);
+                            Error = new ApplicationException(Messages.EXCEPTION_USER_CANCELLED_COORDINATOR);
                             throw Error;
                         }
 

@@ -183,15 +183,15 @@ namespace XenAdmin.Core
             switch (reason)
             {
                 case Reason.WillBeMaster:
-                    return Messages.MASTER;
+                    return Messages.COORDINATOR;
                 case Reason.Allowed:
                     return "";
                 case Reason.Connecting:
                     return Messages.CONNECTING;
                 case Reason.MasterNotConnected:
-                    return Messages.NEWPOOL_MASTER_DISCONNECTED;
+                    return Messages.NEWPOOL_COORDINATOR_DISCONNECTED;
                 case Reason.MasterConnecting:
-                    return Messages.NEWPOOL_MASTER_CONNECTING;
+                    return Messages.NEWPOOL_COORDINATOR_CONNECTING;
                 case Reason.DifferentAdConfig:
                     return Messages.NEWPOOL_DIFFERING_AD_CONFIG;
                 case Reason.HasRunningVMs:
@@ -205,9 +205,9 @@ namespace XenAdmin.Core
                 case Reason.NotSameLinuxPack:
                     return Messages.NEWPOOL_LINUXPACK;
                 case Reason.LicensedHostUnlicensedMaster:
-                    return Messages.NEWPOOL_LICENSED_HOST_UNLICENSED_MASTER;
+                    return Messages.NEWPOOL_LICENSED_HOST_UNLICENSED_COORDINATOR;
                 case Reason.UnlicensedHostLicensedMaster:
-                    return Messages.NEWPOOL_UNLICENSED_HOST_LICENSED_MASTER;
+                    return Messages.NEWPOOL_UNLICENSED_HOST_LICENSED_COORDINATOR;
                 case Reason.LicenseMismatch:
                     return Messages.NEWPOOL_LICENSEMISMATCH;
                 case Reason.MasterPoolMaxNumberHostReached:
@@ -217,7 +217,7 @@ namespace XenAdmin.Core
                 case Reason.DifferentServerVersion:
                     return Messages.NEWPOOL_DIFF_SERVER;
                 case Reason.DifferentHomogeneousUpdatesFromMaster:
-                    return Messages.NEWPOOL_DIFFERENT_HOMOGENEOUS_UPDATES_FROM_MASTER;
+                    return Messages.NEWPOOL_DIFFERENT_HOMOGENEOUS_UPDATES_FROM_COORDINATOR;
                 case Reason.DifferentHomogeneousUpdatesFromPool:
                     return Messages.NEWPOOL_DIFFERENT_HOMOGENEOUS_UPDATES_FROM_POOL;
                 case Reason.DifferentCPUs:
@@ -233,7 +233,7 @@ namespace XenAdmin.Core
                 case Reason.NonCompatibleManagementInterface :
                     return Messages.POOL_JOIN_NON_COMPATIBLE_MANAGEMENT_INTERFACE;
                 case Reason.WrongRoleOnMaster:
-                    return Messages.NEWPOOL_MASTER_ROLE;
+                    return Messages.NEWPOOL_COORDINATOR_ROLE;
                 case Reason.WrongRoleOnSupporter:
                     return Messages.NEWPOOL_SUPPORTER_ROLE;
                 case Reason.HasClusteringEnabled:

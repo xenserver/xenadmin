@@ -116,7 +116,7 @@ namespace XenAdmin.SettingsPanels
                 thisItem.Checked = participatesInPowerManagement;
                 if (host.IsMaster())
                 {
-                    thisItem.SubItems.Add(string.Format("{0} ({1})", host.Name(), Messages.POOL_MASTER));
+                    thisItem.SubItems.Add(string.Format("{0} ({1})", host.Name(), Messages.POOL_COORDINATOR));
                 }
                 else
                 {

@@ -148,7 +148,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
                     log.ErrorFormat(
                         "Upload finished successfully, but Pool_update object has not been found for update {0} on connection {1}.",
                         suppPack, connection);
-                    throw new Exception(Messages.ACTION_UPLOADPATCHTOMASTERPLANACTION_FAILED);
+                    throw new Exception(Messages.ACTION_UPLOADPATCHTOCOORDINATORPLANACTION_FAILED);
                 }
 
                 uploadedSuppPacks.Add(master, poolupdate);

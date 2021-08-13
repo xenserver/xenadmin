@@ -87,7 +87,7 @@ namespace XenAdmin.Actions
 
             Master = Connection.Resolve(Pool.master);
             if (Master == null)
-                throw new Failure(Failure.INTERNAL_ERROR, string.Format(Messages.POOL_MASTER_GONE, BrandManager.BrandConsole));
+                throw new Failure(Failure.INTERNAL_ERROR, string.Format(Messages.POOL_COORDINATOR_GONE, BrandManager.BrandConsole));
 
             foreach (Host host in Connection.Cache.Hosts)
                 AppliesTo.Add(host.opaque_ref);
@@ -163,7 +163,7 @@ namespace XenAdmin.Actions
 
                     PIF new_master = Connection.Resolve(new_bond.master);
                     if (new_master == null)
-                        throw new Failure(Failure.INTERNAL_ERROR, string.Format(Messages.BOND_MASTER_GONE, BrandManager.BrandConsole));
+                        throw new Failure(Failure.INTERNAL_ERROR, string.Format(Messages.BOND_INTERFACE_GONE, BrandManager.BrandConsole));
 
                     new_bonds.Add(new NewBond(new_bond, new_master, pifs));
 

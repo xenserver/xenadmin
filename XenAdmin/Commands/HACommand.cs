@@ -272,7 +272,7 @@ namespace XenAdmin.Commands
  
             Host master = Helpers.GetCoordinator(pool.Connection);
             if (master == null)
-                return string.Format(Messages.POOL_MASTER_GONE, BrandManager.BrandConsole);
+                return string.Format(Messages.POOL_COORDINATOR_GONE, BrandManager.BrandConsole);
 
             if (pool.Locked)
                 return Messages.POOL_EDIT_IN_PROGRESS;

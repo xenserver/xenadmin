@@ -57,7 +57,7 @@ namespace XenAdmin.Actions
         /// <param name="getAdCredentials"></param>
         public CreatePoolAction(Host master, List<Host> supporters, string name, string description, Func<Host, AdUserAndPassword> getAdCredentials,
             Func<HostAbstractAction, Pool, long, long, bool> acceptNTolChanges, Action<List<LicenseFailure>, string> doOnLicensingFailure)
-            : base(master.Connection, string.Format(Messages.CREATING_NAMED_POOL_WITH_MASTER, name, master.Name()),
+            : base(master.Connection, string.Format(Messages.CREATING_NAMED_POOL_WITH_COORDINATOR, name, master.Name()),
             getAdCredentials, acceptNTolChanges, doOnLicensingFailure)
         {
             System.Diagnostics.Trace.Assert(master != null);

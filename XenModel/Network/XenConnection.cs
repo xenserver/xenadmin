@@ -1583,7 +1583,7 @@ namespace XenAdmin.Network
                 // Record the time at which we started the new coordinator search.
                 FindingNewMasterStartedAt = DateTime.Now;
                 StartReconnectMasterTimer();
-                description = string.Format(Messages.CONNECTION_LOST_NOTICE_MASTER_IN_X_SECONDS, LastConnectionFullName, XenConnection.SEARCH_NEW_MASTER_TIMEOUT_MS / 1000);
+                description = string.Format(Messages.CONNECTION_LOST_NOTICE_COORDINATOR_IN_X_SECONDS, LastConnectionFullName, XenConnection.SEARCH_NEW_MASTER_TIMEOUT_MS / 1000);
                 log.DebugFormat("Beginning search for new coordinator; will give up after {0} seconds", SEARCH_NEW_MASTER_STOP_AFTER.TotalSeconds);
             }
             else
@@ -1737,8 +1737,8 @@ namespace XenAdmin.Network
         private void ReconnectMaster()
         {
             // Add an informational entry to the log
-            string title = string.Format(Messages.CONNECTION_FINDING_MASTER_TITLE, LastConnectionFullName);
-            string descr = string.Format(Messages.CONNECTION_FINDING_MASTER_DESCRIPTION, LastConnectionFullName, Hostname);
+            string title = string.Format(Messages.CONNECTION_FINDING_COORDINATOR_TITLE, LastConnectionFullName);
+            string descr = string.Format(Messages.CONNECTION_FINDING_COORDINATOR_DESCRIPTION, LastConnectionFullName, Hostname);
             ActionBase action = new ActionBase(title, descr, false, true);
             SetPoolAndHostInAction(action, null, PoolOpaqueRef);
             log.DebugFormat("Looking for coordinator for {0} on {1}...", LastConnectionFullName, Hostname);

@@ -268,7 +268,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                     if (!Helpers.ElyOrGreater(host) && Helpers.ElyOrGreater(host.Connection)) // host is pre-Ely, but the coordinator is Ely or greater
                     {
-                        tooltipText = string.Format(Messages.PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_UPDATE_MASTER_POST_7_0, BrandManager.ProductVersion70);
+                        tooltipText = string.Format(Messages.PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_UPDATE_COORDINATOR_POST_7_0, BrandManager.ProductVersion70);
                         return false;
                     }
 

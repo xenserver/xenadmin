@@ -81,7 +81,7 @@ namespace XenAdmin.Commands
                 if (selection.Count == 1 && pool.master == host.opaque_ref)
                 {
                     // Trying to remove the coordinator from a pool.
-                    using (var dlg = new ErrorDialog(Messages.MESSAGEBOX_POOL_MASTER_REMOVE))
+                    using (var dlg = new ErrorDialog(Messages.MESSAGEBOX_POOL_COORDINATOR_REMOVE))
                         dlg.ShowDialog(MainWindowCommandInterface.Form);
                     return;
                 }
@@ -125,7 +125,7 @@ namespace XenAdmin.Commands
             if (item is Host host)
             {
                 if (host.IsMaster())
-                    return Messages.MESSAGEBOX_POOL_MASTER_REMOVE;
+                    return Messages.MESSAGEBOX_POOL_COORDINATOR_REMOVE;
 
                 if (!host.IsLive())
                     return Messages.HOST_UNREACHABLE;
