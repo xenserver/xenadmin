@@ -49,7 +49,7 @@ namespace XenAdmin.Actions
         private readonly List<Bond> Bonds = new List<Bond>();
 
         /// <summary>
-        /// The masters of all the bonds in Bonds.
+        /// The interfaces of all the bonds in Bonds.
         /// </summary>
         private readonly List<PIF> Masters = new List<PIF>();
 
@@ -61,7 +61,7 @@ namespace XenAdmin.Actions
         private readonly List<PIF> Members = new List<PIF>();
 
         /// <summary>
-        /// The first member (ordered by name) under each master.
+        /// The first member (ordered by name) under each interface.
         /// </summary>
         private readonly Dictionary<PIF, PIF> FirstMembers = new Dictionary<PIF, PIF>();
 

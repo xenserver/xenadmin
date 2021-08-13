@@ -65,7 +65,7 @@ namespace XenAdmin.Core
 
 
         /// <summary>
-        /// Return the given host's product version, or the pool master's product version if
+        /// Return the given host's product version, or the pool coordinator's product version if
         /// the host does not have one, or null if none can be found.
         /// </summary>
         /// <param name="Host">May be null.</param>
@@ -222,7 +222,7 @@ namespace XenAdmin.Core
         }
 
         /// <summary>
-        /// Return the host object representing the master of the given connection, or null if the
+        /// Return the host object representing the coordinator of the given connection, or null if the
         /// cache is being populated.
         /// </summary>
         /// <param name="connection">May not be null.</param>
@@ -234,7 +234,7 @@ namespace XenAdmin.Core
         }
 
         /// <summary>
-        /// Return the host object representing the master of the given pool.
+        /// Return the host object representing the coordinator of the given pool.
         /// (If pool is null, returns null).
         /// </summary>
         public static Host GetMaster(Pool pool)

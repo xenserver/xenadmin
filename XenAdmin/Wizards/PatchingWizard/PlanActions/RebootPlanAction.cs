@@ -102,7 +102,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             _cancelled = false;
             double metric = metricDelegate(session, HostXenRef.opaque_ref);
 
-            log.DebugFormat("{0}._WaitForReboot(master='{1}', metric='{2}')", GetType().Name, master, metric);
+            log.DebugFormat("{0}._WaitForReboot(coordinator='{1}', metric='{2}')", GetType().Name, master, metric);
 
             PercentComplete = 10;
 

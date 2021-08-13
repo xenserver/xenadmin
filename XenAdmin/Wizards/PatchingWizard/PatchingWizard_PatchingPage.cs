@@ -197,7 +197,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         private List<HostPlan> CompileManualHostPlan(Pool pool, out List<Host> applicableHosts)
         {
             var poolHosts = pool.Connection.Cache.Hosts.ToList();
-            SelectedServers.Sort(); //master first and then the supporters
+            SelectedServers.Sort(); //coordinator first and then the supporters
             var hostplans = new List<HostPlan>();
 
             if (SelectedUpdateType == UpdateType.ISO)
@@ -249,7 +249,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         private List<HostPlan> CompileAutomaticHostPlan(Pool pool, out List<Host> applicableHosts)
         {
             var poolHosts = pool.Connection.Cache.Hosts.ToList();
-            SelectedServers.Sort(); //master first and then the supporters
+            SelectedServers.Sort(); //coordinator first and then the supporters
             var hostplans = new List<HostPlan>();
 
             if (SelectedUpdateType == UpdateType.ISO)

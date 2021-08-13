@@ -56,7 +56,7 @@ namespace XenAdmin.Actions
         /// </summary>
         /// <param name="connection"></param>
         /// <param name="pool">May be null, in which case we're acting on a single host basis.</param>
-        /// <param name="host">If pool is set, then host should be the pool master.</param>
+        /// <param name="host">If pool is set, then host should be the pool coordinator.</param>
         /// <param name="newPIFs">New PIF instances that are to be created on the server.</param>
         /// <param name="downPIFs"></param>
         /// <param name="newManagement">May be null, in which case the management network will not be disturbed.
@@ -118,11 +118,11 @@ namespace XenAdmin.Actions
                 int progress = PercentComplete;
 
                 // We bring up / reconfigure the interfaces on the supporters.
-                // Then the master.
+                // Then the coordinator.
                 // Then we reconfigure the management interface on the supporters.
-                // Then the master.
+                // Then the coordinator.
                 // Then we bring down the other interfaces on the supporters.
-                // And then the master.
+                // And then the coordinator.
                 // If Pool isn't set, then we're just doing this for the one host.
 
                 if (Pool != null)

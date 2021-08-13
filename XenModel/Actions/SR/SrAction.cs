@@ -160,7 +160,7 @@ namespace XenAdmin.Actions
             if (SR.PBDs.Count < 1)
                 return;
 
-            //CA-176935, CA-173497 - we need to run Unplug for the master last - creating a new list of hosts where the master is always the last
+            //CA-176935, CA-173497 - we need to run Unplug for the coordinator last - creating a new list of hosts where the master is always the last
             var allPBDRefsToNonMaster = new List<XenRef<PBD>>();
             var allPBDRefsToMaster = new List<XenRef<PBD>>();
 

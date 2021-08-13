@@ -266,7 +266,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                         return false;
                     }
 
-                    if (!Helpers.ElyOrGreater(host) && Helpers.ElyOrGreater(host.Connection)) // host is pre-Ely, but the master is Ely or greater
+                    if (!Helpers.ElyOrGreater(host) && Helpers.ElyOrGreater(host.Connection)) // host is pre-Ely, but the coordinator is Ely or greater
                     {
                         tooltipText = string.Format(Messages.PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_UPDATE_MASTER_POST_7_0, BrandManager.ProductVersion70);
                         return false;
@@ -385,7 +385,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     return;
                 }
 
-                //Upload the patches to the masters if it is necessary
+                //Upload the patches to the coordinators if it is necessary
                 List<Host> masters = SelectedMasters;
 
                 //Do RBAC check

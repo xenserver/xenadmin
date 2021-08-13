@@ -382,7 +382,7 @@ namespace XenAdmin.Wizards.DRWizards
             Host master = Connection.Resolve(pool.master);
             if (master == null)
             {
-                log.Error("New SR Wizard: Master has disappeared");
+                log.Error("New SR Wizard: Coordinator has disappeared");
                 return;
             }
 

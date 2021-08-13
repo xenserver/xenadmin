@@ -40,7 +40,7 @@ using XenAdmin.Dialogs.RestoreSession;
 namespace XenAdmin.Dialogs.OptionsPages
 {
     /// <summary>
-    /// The page is used to set whether or not to save server usernames and passwords and whether a master password should be set to protect these passwords
+    /// The page is used to set whether or not to save server usernames and passwords and whether a coordinator password should be set to protect these passwords
     /// </summary>
     public partial class SaveAndRestoreOptionsPage : UserControl, IOptionsPage
     {
@@ -113,7 +113,7 @@ namespace XenAdmin.Dialogs.OptionsPages
 
         private void requireMasterPasswordCheckBox_Click(object sender, EventArgs e)
         {
-            // requireMasterPasswordCheckBox.Checked was the state before the click
+            // requireCoordinatorPasswordCheckBox.Checked was the state before the click
             // if previously checked, the user is trying to clear it => request authorization
             // if previously unchecked, the user is trying to set a password
 
@@ -159,11 +159,11 @@ namespace XenAdmin.Dialogs.OptionsPages
         private void saveStateCheckBox_Click(object sender, EventArgs e)
         {
             // need to prevent the user from going to an open terminal and clearing
-            // the save state, then setting the master password to anything they like
+            // the save state, then setting the coordinator password to anything they like
 
             // saveStateCheckBox.Checked was the state before the click
             // if previously checked, the user is trying to clear it => authorization maybe required
-            // (depending on the state of the requireMasterPasswordCheckBox; this should be cleared too if checked)
+            // (depending on the state of the requireCoordinatorPasswordCheckBox; this should be cleared too if checked)
 
             if (saveStateCheckBox.Checked && requireMasterPasswordCheckBox.Checked)
             {

@@ -116,7 +116,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
                     // after apply guidance
                     AfterApplySuppPack(update);
 
-                    // remove from master
+                    // remove from coordinator
                     RemoveSuppPackFromMaster(session, master, suppPackName, update);
                 }
             }

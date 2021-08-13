@@ -316,7 +316,7 @@ namespace XenAdmin.SettingsPanels
 
         private void UpdateEnablement()
         {
-            // Disable editing if pool master doesn't have HA license flag
+            // Disable editing if pool coordinator doesn't have HA license flag
             Host host = Helpers.GetMaster(vm.Connection);
             if (host == null || Host.RestrictHA(host))
             {

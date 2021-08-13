@@ -62,8 +62,8 @@ namespace XenAdmin.Diagnostics.Checks
             var requiredDiskSpace = elyOrGreater
                 ? updateSequence[Host].Sum(p => p.InstallationSize) // all updates on this host (for installation)
                 : Host.IsMaster()
-                    ? updateSequence[Host].Sum(p => p.InstallationSize) + updateSequence.Values.SelectMany(p => p).Distinct().Sum(p => p.InstallationSize) // master: all updates on master (for installation) + all updates in pool (for upload)
-                    : updateSequence[Host].Sum(p => p.InstallationSize) * 2; // non-master: all updates on this host x 2 (for installation + upload)
+                    ? updateSequence[Host].Sum(p => p.InstallationSize) + updateSequence.Values.SelectMany(p => p).Distinct().Sum(p => p.InstallationSize) // coordinator: all updates on coordinator (for installation) + all updates in pool (for upload)
+                    : updateSequence[Host].Sum(p => p.InstallationSize) * 2; // non-coordinator: all updates on this host x 2 (for installation + upload)
 
             var action = new GetDiskSpaceRequirementsAction(Host, requiredDiskSpace, true, DiskSpaceRequirements.OperationTypes.automatedUpdates);
 

@@ -126,7 +126,7 @@ namespace XenAdmin.Actions
                 log.InfoFormat("Adding member {0}", supporter.Name());
                 int lo = (int)(i2 * p2);
                 int hi = (int)((i2 + 1) * p2);
-                // RBAC: We have forced identical AD configs, but this will fail unless both supporter-to-be and master sessions have the correct role.
+                // RBAC: We have forced identical AD configs, but this will fail unless both supporter-to-be and coordinator sessions have the correct role.
                 Session = NewSession(supporter.Connection);
                 RelatedTask = XenAPI.Pool.async_join(Session, master_pool.Connection.Hostname, master_pool.Connection.Username, master_pool.Connection.Password);
                 PollToCompletion(lo, hi);

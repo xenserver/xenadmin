@@ -156,14 +156,14 @@ namespace XenServerHealthCheck
 
             string timestring = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
 
-            // Collect all master/supporter information to output as a separate text file with the report
+            // Collect all coordinator/supporter information to output as a separate text file with the report
             List<string> mastersInfo = new List<string>();
 
             int i = 0;
             Pool p = Helpers.GetPool(connection);
             foreach (Host host in connection.Cache.Hosts)
             {
-                // master/supporter information
+                // coordinator/supporter information
                 if (p == null)
                 {
                     mastersInfo.Add(string.Format("Server '{0}' is a stand alone server",
@@ -181,7 +181,7 @@ namespace XenServerHealthCheck
                 statAction.RunExternal(session);
             }
 
-            // output the supporter/master info
+            // output the supporter/coordinator info
             string mastersDestination = string.Format("{0}\\{1}-Masters.txt", filepath, timestring);
             WriteExtraInfoToFile(mastersInfo, mastersDestination);
             

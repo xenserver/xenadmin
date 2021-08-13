@@ -80,7 +80,7 @@ namespace XenAdmin.Commands
 
                 if (selection.Count == 1 && pool.master == host.opaque_ref)
                 {
-                    // Trying to remove the master from a pool.
+                    // Trying to remove the coordinator from a pool.
                     using (var dlg = new ErrorDialog(Messages.MESSAGEBOX_POOL_MASTER_REMOVE))
                         dlg.ShowDialog(MainWindowCommandInterface.Form);
                     return;

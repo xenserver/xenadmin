@@ -417,7 +417,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 groups.Add(new CheckGroup(Messages.CHECKING_CANEVACUATE_STATUS, evacuateChecks));
             }
 
-            //Checking if a reboot is pending on master
+            //Checking if a reboot is pending on the coordinator
             var restartChecks = new List<Check>();
             foreach (var pool in SelectedPools)
                 restartChecks.Add(new RestartHostOrToolstackPendingOnMasterCheck(pool, patch == null ? null : patch.uuid));
@@ -482,7 +482,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 groups.Add(new CheckGroup(Messages.CHECKING_CANEVACUATE_STATUS, evacuateChecks));
             }
 
-            //Checking if a reboot is pending on master
+            //Checking if a reboot is pending on the coordinator
              var restartChecks = new List<Check>();
             foreach (var pool in SelectedPools)
                 restartChecks.Add(new RestartHostOrToolstackPendingOnMasterCheck(pool, update == null ? null : update.uuid));

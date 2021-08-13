@@ -176,10 +176,10 @@ namespace XenAdmin.Actions
 
                 if (isMaster && _newMaster != null)
                 {
-                    // Signal to the connection that the master is going to change underneath us.
+                    // Signal to the connection that the coordinator is going to change underneath us.
                     Connection.MasterMayChange = true;
 
-                    //Transition to new master
+                    //Transition to new coordinator
                     this.Description = String.Format(Messages.HOSTACTION_TRANSITIONING_NEW_MASTER, Helpers.GetName(_newMaster));
 
                     try

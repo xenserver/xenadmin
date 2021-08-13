@@ -509,7 +509,7 @@ namespace XenAdmin.Wizards
             Host master = xenConnection.Resolve(pool.master);
             if (master == null)
             {
-                log.Error("New SR Wizard: Master has disappeared");
+                log.Error("New SR Wizard: Coordinator has disappeared");
                 using (var dlg = new WarningDialog(string.Format(Messages.NEW_SR_CONNECTION_LOST, Helpers.GetName(xenConnection))))
                 {
                     dlg.ShowDialog(this);

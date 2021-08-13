@@ -346,7 +346,7 @@ namespace XenAdmin.Dialogs
                     }
                 }
 
-                //Update NewMasterComboBox for host power on recommendation
+                //Update NewCoordinatorComboBox for host power on recommendation
                 foreach (KeyValuePair<XenRef<VM>, string[]> kvp in reasons)
                 {
                     var vm = connection.Resolve(kvp.Key);

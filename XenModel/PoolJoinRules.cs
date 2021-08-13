@@ -78,7 +78,7 @@ namespace XenAdmin.Core
         }
 
         // The order of if's in CanJoinPool() determines which reason we display if there is more than one.
-        // At least as far as WillBeMaster, some callers may rely on the order.
+        // At least as far as WillBeCoordinator, some callers may rely on the order.
         // Also, some of the private functions in this file rely on previous tests (especially for
         // null-ness and connectedness) having been done first.
 
@@ -86,7 +86,7 @@ namespace XenAdmin.Core
         /// Whether a server can join a pool (or form a pool with a standalone server)
         /// </summary>
         /// <param name="supporterConnection">The connection of the server that wants to join the pool</param>
-        /// <param name="masterConnection">The connection of the existing pool or of the proposed master of a new pool</param>
+        /// <param name="masterConnection">The connection of the existing pool or of the proposed coordinator of a new pool</param>
         /// <param name="allowLicenseUpgrade">Whether we can upgrade a free host to a v6 license of the pool it's joining</param>
         /// <param name="allowCpuLevelling">Whether we can apply CPU levelling to the supporter before it joins the pool</param>
         /// <returns>The reason why the server can't join the pool, or Reason.Allowed if it's OK</returns>
@@ -105,7 +105,7 @@ namespace XenAdmin.Core
             if (IsAPool(supporterConnection))
                 return Reason.IsAPool;
 
-            if (!Helpers.IsConnected(masterConnection))  // also implies masterConnection != null
+            if (!Helpers.IsConnected(masterConnection))  // also implies coordinatorConnection != null
                 return Reason.MasterNotConnected;
 
             Host masterHost = Helpers.GetMaster(masterConnection);
@@ -250,7 +250,7 @@ namespace XenAdmin.Core
 
         private static bool WillBeMaster(IXenConnection supporter, IXenConnection master)
         {
-            // Assume we have already tested that the connection has no other reason why it can't be a master
+            // Assume we have already tested that the connection has no other reason why it can't be a coordinator
             // (e.g., connected, licensing restrictions, ...)
             return supporter == master;
         }
@@ -290,8 +290,8 @@ namespace XenAdmin.Core
             return Host.RestrictPooling(host);
         }
 
-        // If CompatibleCPUs(supporter, master, false) is true, the CPUs can be pooled without masking first.
-        // If CompatibleCPUs(supporter, master, true) is true but CompatibleCPUs(supporter, master, false) is false,
+        // If CompatibleCPUs(supporter, coordinator, false) is true, the CPUs can be pooled without masking first.
+        // If CompatibleCPUs(supporter, coordinator, true) is true but CompatibleCPUs(supporter, master, false) is false,
         // the CPUs can be pooled but only if they are masked first.
         public static bool CompatibleCPUs(Host supporter, Host master, bool allowCpuLevelling)
         {
@@ -425,7 +425,7 @@ namespace XenAdmin.Core
 
         /// <summary>
         /// Check whether all updates that request homogeneity are in fact homogeneous
-        /// between master and supporter. This is used in CanJoinPool and prevents the pool from being created
+        /// between coordinator and supporter. This is used in CanJoinPool and prevents the pool from being created
         /// </summary>
         private static bool DifferentHomogeneousUpdates(Host supporter, Host master)
         {

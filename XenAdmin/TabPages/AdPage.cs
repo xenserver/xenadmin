@@ -112,7 +112,7 @@ namespace XenAdmin.TabPages
 
         /// <summary>
         /// This method is used when the cache was not populated by the time we set the XenObject. It sets the appropriate event handlers,
-        /// references to the master and the pool, and populates the tab with the correct configuration. It de-registers
+        /// references to the coordinator and the pool, and populates the tab with the correct configuration. It de-registers
         /// itself when successful.
         /// </summary>
         /// <param name="sender"></param>
@@ -195,7 +195,7 @@ namespace XenAdmin.TabPages
 
         /// <summary>
         /// We need to update the configuration if the authentication method changes, and also various labels display the name of the
-        /// master and should also be updated if that changes.
+        /// coordinator and should also be updated if that changes.
         /// </summary>
         /// <param name="sender1"></param>
         /// <param name="e"></param>
@@ -207,7 +207,7 @@ namespace XenAdmin.TabPages
 
         /// <summary>
         /// Various labels display the name of the pool and should also be updated if that changes.
-        /// Additionally if the pool master changes we need to update our event handles.
+        /// Additionally if the pool coordinator changes we need to update our event handles.
         /// There is a sanity check in the checkAdType() method in case this event is stuck in a queue.
         /// </summary>
         void pool_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -278,7 +278,7 @@ namespace XenAdmin.TabPages
             {
                 if (master.external_auth_type != Auth.AUTH_TYPE_AD)
                 {
-                    log.WarnFormat("Unrecognised value '{0}' for external_auth_type on pool master '{1}' for pool '{2}'; assuming AD enabled on pool.",
+                    log.WarnFormat("Unrecognised value '{0}' for external_auth_type on pool coordinator '{1}' for pool '{2}'; assuming AD enabled on pool.",
                         master.external_auth_type, Helpers.GetName(master), Helpers.GetName(_connection));
                 }
 
@@ -300,7 +300,7 @@ namespace XenAdmin.TabPages
                 Host master = Helpers.GetMaster(_connection);
                 if (master == null)
                 {
-                    log.WarnFormat("Could not resolve pool master for connection '{0}'; disabling.", Helpers.GetName(_connection));
+                    log.WarnFormat("Could not resolve pool coordinator for connection '{0}'; disabling.", Helpers.GetName(_connection));
                     return Messages.UNKNOWN;
                 }
 
@@ -761,7 +761,7 @@ namespace XenAdmin.TabPages
                 if (master == null)
                 {
                     // Really shouldn't happen unless we have been very slow with the cache
-                    log.Error("Could not retrieve master when trying to look up domain..");
+                    log.Error("Could not retrieve coordinator when trying to look up domain..");
                     throw new Exception(Messages.CONNECTION_IO_EXCEPTION);
                 }
 

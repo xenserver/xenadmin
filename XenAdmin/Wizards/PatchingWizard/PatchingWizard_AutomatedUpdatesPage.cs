@@ -138,7 +138,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             var uploadedPatches = new List<XenServerPatch>();
             var hosts = pool.Connection.Cache.Hosts.ToList();
-            hosts.Sort();//master first
+            hosts.Sort(); //coordinator first
 
             applicableHosts = new List<Host>(hosts);
             return hosts.Select(h => GetUpdatePlanActionsForHost(h, hosts, minimalPatches, uploadedPatches, PatchFromDisk)).ToList();

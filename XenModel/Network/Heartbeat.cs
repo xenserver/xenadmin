@@ -210,7 +210,7 @@ namespace XenAdmin.Network
         {
             Session s = session;
             session = null;
-            // Do this on a new thread: if the master has died, then the session logout may block
+            // Do this on a new thread: if the coordinator has died, then the session logout may block
             // up to the timeout. Doing this on the calling thread would mean doubling the actual time elapsed
             // before we decide the server is dead.
             connection.Logout(s);

@@ -52,7 +52,7 @@ namespace XenAdmin.Network
         /// <param name="interactive">Whether the user has initiated/is watching this connection attempt.</param>
         /// <param name="owner">The form that connecting dialogs will be displayed in front of.
         /// May be null, in which case Program.MainWindow is used.</param>
-        /// <param name="initiateMasterSearch">If true, when connection to the master fails we will start trying to connect to
+        /// <param name="initiateMasterSearch">If true, when connection to the coordinator fails we will start trying to connect to
         /// each remembered supporter in turn.</param>
         public static void BeginConnect(IXenConnection connection, bool interactive, Form owner, bool initiateMasterSearch)
         {

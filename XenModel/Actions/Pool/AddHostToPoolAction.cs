@@ -117,7 +117,7 @@ namespace XenAdmin.Actions
                 throw;
             }
 
-            // We need a master session for ClearNonSharedSrs.
+            // We need a coordinator session for ClearNonSharedSrs.
             // No need to log out the supporter session, because the server is going to reset its database anyway.
 
             Session = NewSession(Pool.Connection);

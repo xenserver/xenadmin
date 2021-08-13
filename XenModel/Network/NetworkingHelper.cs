@@ -40,7 +40,7 @@ namespace XenAdmin.Network
     public class NetworkingHelper
     {
         /// <summary>
-        /// Returns the bond that the master is using as its management interface, or null if
+        /// Returns the bond that the coordinator is using as its management interface, or null if
         /// such a thing cannot be found.
         /// </summary>
         /// <param name="conn"></param>
@@ -94,7 +94,7 @@ namespace XenAdmin.Network
         /// The PIFs will be sorted by name, and deduplicated by name -- i.e. there will be only
         /// one per device name, even if there are multiple hosts in the pool.
         /// 
-        /// Note that this is not the same as GetAllPhysicalPIFs(pool.master) because the master
+        /// Note that this is not the same as GetAllPhysicalPIFs(pool.master) because the coordinator
         /// may have fewer NICs than other members in the pool.
         /// </summary>
         /// <param name="pool"></param>
@@ -120,8 +120,8 @@ namespace XenAdmin.Network
         }
             
         /// <summary>
-        /// Given a list of PIFs on the pool master, return a Dictionary mapping each host in the pool to a corresponding list of PIFs on that
-        /// host.  The PIFs lists will be sorted by name too.
+        /// Given a list of PIFs on the pool coordinator, return a Dictionary mapping each host in the pool to a corresponding list of PIFs on that
+        /// host. The PIFs lists will be sorted by name too.
         /// </summary>
         /// <param name="PIFs_on_master"></param>
         /// <returns></returns>

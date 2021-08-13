@@ -90,7 +90,7 @@ namespace XenAdmin.Dialogs
 
             Host =connection.Resolve(pool.master);
             if (Host == null)
-                throw new Failure(Failure.INTERNAL_ERROR, "Could not resolve master");
+                throw new Failure(Failure.INTERNAL_ERROR, "Could not resolve coordinator");
 
             BlurbLabel.Text = string.Format(Messages.NETWORKING_PROPERTIES_BLURB_POOL, ObjectName);
 

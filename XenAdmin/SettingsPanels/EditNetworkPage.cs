@@ -76,7 +76,7 @@ namespace XenAdmin.SettingsPanels
             if (network == null)
                 return;
 
-            // use the pif of the master to populate the controls. We use it later in the create_VLAN_from_PIF call in Network Action
+            // use the pif of the coordinator to populate the controls. We use it later in the create_VLAN_from_PIF call in Network Action
             host = Helpers.GetMaster(network.Connection);
             
             Repopulate();

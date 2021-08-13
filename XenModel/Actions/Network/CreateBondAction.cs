@@ -66,7 +66,7 @@ namespace XenAdmin.Actions
         private readonly Bond.hashing_algoritm hashingAlgoritm;
 
         /// <param name="name_label">The name for the new network.</param>
-        /// <param name="PIFs_on_master">The PIFs on the master representing the physical NICs that are to be bonded together.</param>
+        /// <param name="PIFs_on_master">The PIFs on the coordinator representing the physical NICs that are to be bonded together.</param>
         /// <param name="autoplug">Whether the new network is marked AutoPlug.</param>
         /// <param name="mtu">The MTU for the Bond, ignored for pre cowley</param>
         /// <param name="bondMode">The bond mode, ignored for pre-Boston</param>

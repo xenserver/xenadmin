@@ -74,7 +74,7 @@ namespace XenAdmin.Actions
             }
             Connection.ExpectDisruption = true;
 
-            //Enable SR-IOV network on Pool requires enabling master first.
+            //Enable SR-IOV network on Pool requires enabling coordinator first.
             if (pifOnMaster != null)
             {
                 selectedPifs.Remove(pifOnMaster);

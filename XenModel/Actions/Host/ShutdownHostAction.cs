@@ -106,7 +106,7 @@ namespace XenAdmin.Actions
                 throw;
             }
 
-            // Close the IXenConnection if it is not to a pool, or is to the master of a pool
+            // Close the IXenConnection if it is not to a pool, or is to the coordinator of a pool
             if (Helpers.HostIsMaster(Host))
             {
                 Host.Connection.EndConnect();

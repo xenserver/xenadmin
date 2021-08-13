@@ -66,7 +66,7 @@ namespace XenAdmin.Alerts
             XenObject = Helpers.XenObjectFromMessage(m);
 
             // TODO: This would be better if there was some way of getting the actual host that the XenObject belongs to
-            // Currently if the applies to object is not a host or pool and belongs to a supporter it is filtered under the master. 
+            // Currently if the applies to object is not a host or pool and belongs to a supporter it is filtered under the coordinator. 
 
             Host h = XenObject as Host;
             if (h == null)

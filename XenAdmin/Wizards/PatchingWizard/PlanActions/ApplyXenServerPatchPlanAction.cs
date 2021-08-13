@@ -61,7 +61,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             if (mapping == null || !mapping.IsValid)
             {
                 if (xenServerPatch != null)
-                    log.ErrorFormat("Mapping not found for patch {0} on master {1}", xenServerPatch.Uuid, master.uuid);
+                    log.ErrorFormat("Mapping not found for patch {0} on coordinator {1}", xenServerPatch.Uuid, master.uuid);
 
                 throw new Exception("Pool_patch or Pool_update not found.");
             }

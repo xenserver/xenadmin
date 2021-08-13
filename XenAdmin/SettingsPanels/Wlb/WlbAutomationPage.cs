@@ -252,7 +252,7 @@ namespace XenAdmin.SettingsPanels
         private void listViewExPowerManagementHosts_DrawItem(object sender, DrawListViewItemEventArgs e)
         {
             Host host = (Host)e.Item.Tag;
-            // disallow checking when the host is pool master or PowerOn is disabled (empty string)
+            // disallow checking when the host is pool coordinator or PowerOn is disabled (empty string)
             // we have to allow checking when PowerOn is null (unknown) to support PM on older versions of XS
             if (HostCannotParticipateInPowerManagement(host))
             {

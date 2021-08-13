@@ -159,7 +159,7 @@ namespace XenServerHealthCheck
                         }
                         else
                         {
-                            log.InfoFormat("Remove credential since it is the supporter of master {0}", masterName);
+                            log.InfoFormat("Remove credential since it is the supporter of coordiantor {0}", masterName);
                             if (session != null)
                                 session.logout();
                             log.Error(exn, exn);
@@ -181,7 +181,7 @@ namespace XenServerHealthCheck
                     {
                         if (session != null)
                             session.logout();
-                        log.InfoFormat("Reconnect to master {0}", server.HostName);
+                        log.InfoFormat("Reconnect to coordinator {0}", server.HostName);
                         session = new Session(server.HostName, 80);
                         session.APIVersion = API_Version.LATEST;
                         session.login_with_password(server.UserName, server.Password, Helper.APIVersionString(API_Version.LATEST), Session.UserAgent);

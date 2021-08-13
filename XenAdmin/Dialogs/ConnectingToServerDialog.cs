@@ -89,7 +89,7 @@ namespace XenAdmin.Dialogs
         /// </summary>
         /// <param name="owner">The form that connecting dialogs will be displayed in front of.
         /// May be null, in which case Program.MainWindow is used.</param>
-        /// <param name="initiateMasterSearch">If true, if connection to the master fails we will start trying to connect to
+        /// <param name="initiateMasterSearch">If true, if connection to the coordinator fails we will start trying to connect to
         /// each remembered supporter in turn.</param>
         internal bool BeginConnect(Form owner, bool initiateMasterSearch)
         {

@@ -263,8 +263,8 @@ namespace XenAdmin.Actions
 
         private List<SR> SelectTargetSr()
         {
-            /* For ely or greater (update ISOs) we need an SR that can be seen from master;
-             * that would be a shared SR or the master's local SR.
+            /* For ely or greater (update ISOs) we need an SR that can be seen from coordinator;
+             * that would be a shared SR or the coordinator's local SR.
              * 
              * For earlier (supplemental packs) we need an SR that can be seen from all hosts;
              * that would be a shared SR, otherwise we have to upload to each hosts's local SR

@@ -252,7 +252,7 @@ namespace XenAdmin.Actions
 
             List<string> deadHost = new List<string>();
 
-            /* host count -1 is for excluding master */
+            /* host count -1 is for excluding coordinator */
             while (deadHost.Count < (pool.Connection.Cache.HostCount -1) && (RetryAttempt <= RetryLimit))
             {
                 foreach (Host host in pool.Connection.Cache.Hosts)
@@ -301,14 +301,14 @@ namespace XenAdmin.Actions
 
            /* pool_management_reconfigure triggers a pool_recover_slaves, which in turn spawns two tasks
             * dbsync (update_env) and server_init on each supporters. 
-            * Only after their completion master will be able to run reconfigure_IPs. 
+            * Only after their completion coordinator will be able to run reconfigure_IPs. 
             * Hence, we check Host.IsLive metric of all supporters for a transition from true -> false -> true
             */
 
            action.Description = string.Format(Messages.ACTION_WAIT_FOR_POOL_MEMBERS_TO_RECOVER);
            WaitForMembersToRecover(pool);
            
-            /* Reconfigure IP for supporters and then master */
+            /* Reconfigure IP for supporters and then coordinator */
            
            lo += inc;
            ForSomeHosts(action, down_pif, false, true, lo, ClearIP);
