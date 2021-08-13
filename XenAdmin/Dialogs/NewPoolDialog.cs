@@ -174,7 +174,7 @@ namespace XenAdmin.Dialogs
 
                 if (!Program.RunInAutomatedTestMode)
                 {
-                    var hosts1 = supporters.FindAll(host => PoolJoinRules.FreeHostPaidMaster(host, master, false));
+                    var hosts1 = supporters.FindAll(host => PoolJoinRules.FreeHostPaidCoordinator(host, master, false));
                     if (hosts1.Count > 0)
                     {
                         string msg = string.Format(hosts1.Count == 1
@@ -244,7 +244,7 @@ namespace XenAdmin.Dialogs
             ConnectionWrapperWithMoreStuff master = (comboBoxServers.Items.Count > 0 ? (ConnectionWrapperWithMoreStuff)comboBoxServers.SelectedItem : null);
             foreach (ConnectionWrapperWithMoreStuff c in connections)
             {
-                c.TheMaster = master;
+                c.TheCoordinator = master;
                 c.Refresh();
             }
             customTreeViewServers.BeginUpdate();
@@ -314,10 +314,10 @@ namespace XenAdmin.Dialogs
             foreach (ConnectionWrapperWithMoreStuff wrappedConnection in connections)
             {
                 wrappedConnection.Refresh();
-                if (wrappedConnection.CanBeMaster)
+                if (wrappedConnection.CanBeCoordinator)
                 {
                     comboBoxServers.Items.Add(wrappedConnection);
-                    if (wrappedConnection.WillBeMaster)
+                    if (wrappedConnection.WillBeCoordinator)
                         master = wrappedConnection;
                 }
             }
@@ -341,14 +341,14 @@ namespace XenAdmin.Dialogs
                 return;
             foreach (ConnectionWrapperWithMoreStuff c in connections)
             {
-                if (c.WillBeMaster)
+                if (c.WillBeCoordinator)
                     c.State = CheckState.Unchecked;
             }
             foreach (ConnectionWrapperWithMoreStuff c in connections)
             {
                 if (c.Connection == master.Connection)
                 {
-                    if (c.CanBeMaster)
+                    if (c.CanBeCoordinator)
                         setAsMaster(c);
                     return;
                 }
@@ -370,7 +370,7 @@ namespace XenAdmin.Dialogs
         private void setAsMaster(ConnectionWrapperWithMoreStuff defaultMaster)
         {
             foreach (ConnectionWrapperWithMoreStuff connectionWrapper in connections)
-                connectionWrapper.TheMaster = defaultMaster;
+                connectionWrapper.TheCoordinator = defaultMaster;
 
             comboBoxServers.SelectedItem = defaultMaster;
             addConnectionsToListBox();
@@ -381,7 +381,7 @@ namespace XenAdmin.Dialogs
             ConnectionWrapperWithMoreStuff connectionToMaster = null;
             foreach (ConnectionWrapperWithMoreStuff connection in connections)
             {
-                if (connection.WillBeMaster)
+                if (connection.WillBeCoordinator)
                 {
                     connectionToMaster = connection;
                     break;
@@ -395,7 +395,7 @@ namespace XenAdmin.Dialogs
             List<Host> supporterConnections = new List<Host>();
             foreach (ConnectionWrapperWithMoreStuff connection in connections)
             {
-                if (connection.State == CheckState.Checked && !connection.WillBeMaster && connection.AllowedAsSupporter)
+                if (connection.State == CheckState.Checked && !connection.WillBeCoordinator && connection.AllowedAsSupporter)
                 {
                     supporterConnections.Add(Helpers.GetCoordinator(connection.Connection));
                 }

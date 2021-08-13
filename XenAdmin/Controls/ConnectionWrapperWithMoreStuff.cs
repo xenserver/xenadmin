@@ -39,7 +39,7 @@ namespace XenAdmin.Controls
 {
     public class ConnectionWrapperWithMoreStuff : CustomTreeNode, IComparable<ConnectionWrapperWithMoreStuff>
     {
-        public IXenConnection Connection, masterConnection;
+        public IXenConnection Connection, coordinatorConnection;
         PoolJoinRules.Reason reason;
 
         public ConnectionWrapperWithMoreStuff(IXenConnection connection)
@@ -48,15 +48,15 @@ namespace XenAdmin.Controls
             Refresh();
         }
 
-        public ConnectionWrapperWithMoreStuff TheMaster
+        public ConnectionWrapperWithMoreStuff TheCoordinator
         {
             set
             {
-                masterConnection = (value == null ? null : value.Connection);
+                coordinatorConnection = (value == null ? null : value.Connection);
             }
         }
 
-        public bool WillBeMaster
+        public bool WillBeCoordinator
         {
             get
             {
@@ -64,7 +64,7 @@ namespace XenAdmin.Controls
             }
         }
 
-        public bool CanBeMaster
+        public bool CanBeCoordinator
         {
             get
             {
@@ -113,7 +113,7 @@ namespace XenAdmin.Controls
 
         internal void Refresh()
         {
-            reason = PoolJoinRules.CanJoinPool(Connection, masterConnection, true, true, true);
+            reason = PoolJoinRules.CanJoinPool(Connection, coordinatorConnection, true, true, true);
             this.Description = PoolJoinRules.ReasonMessage(reason);
             this.Enabled = (reason == PoolJoinRules.Reason.Allowed);
             this.CheckedIfdisabled = (reason == PoolJoinRules.Reason.WillBeCoordinator);

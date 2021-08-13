@@ -138,7 +138,7 @@ namespace XenAdmin.Commands
             if (null != _hosts.Find(host =>
                 !PoolJoinRules.CompatibleCPUs(host, coordinator, false) &&
                 Helpers.FeatureForbidden(host, Host.RestrictCpuMasking) &&
-                !PoolJoinRules.FreeHostPaidMaster(host, coordinator, false)))  // in this case we can upgrade the license and then mask the CPU
+                !PoolJoinRules.FreeHostPaidCoordinator(host, coordinator, false)))  // in this case we can upgrade the license and then mask the CPU
             {
                 UpsellDialog.ShowUpsellDialog(Messages.UPSELL_BLURB_CPUMASKING, Parent);
                 return;
@@ -153,7 +153,7 @@ namespace XenAdmin.Commands
             
             if (!Program.RunInAutomatedTestMode)
             {
-                var hosts1 = _hosts.FindAll(host => PoolJoinRules.FreeHostPaidMaster(host, coordinator, false));
+                var hosts1 = _hosts.FindAll(host => PoolJoinRules.FreeHostPaidCoordinator(host, coordinator, false));
                 if (hosts1.Count > 0)
                 {
                     string msg = string.Format(hosts1.Count == 1
