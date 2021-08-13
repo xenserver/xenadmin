@@ -118,7 +118,7 @@ namespace XenAdmin.Dialogs
             this.NewCoordinatorComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.NewCoordinatorComboBox.FormattingEnabled = true;
             this.NewCoordinatorComboBox.Name = "NewCoordinatorComboBox";
-            this.NewCoordinatorComboBox.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.NewMasterComboBox_DrawItem);
+            this.NewCoordinatorComboBox.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.NewCoordinatorComboBox_DrawItem);
             // 
             // NewCoordinatorLabel
             // 

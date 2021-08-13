@@ -432,46 +432,46 @@
   <data name="&gt;&gt;comboBoxServers.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="labelMaster.AutoSize" type="System.Boolean, mscorlib">
+  <data name="labelCoordinator.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="labelMaster.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="labelCoordinator.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="labelMaster.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="labelCoordinator.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="labelMaster.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="labelCoordinator.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="labelMaster.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="labelCoordinator.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="labelMaster.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="labelCoordinator.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="labelMaster.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="labelCoordinator.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 23</value>
   </data>
-  <data name="labelMaster.TabIndex" type="System.Int32, mscorlib">
+  <data name="labelCoordinator.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="labelMaster.Text" xml:space="preserve">
-    <value>&amp;Master:</value>
+  <data name="labelCoordinator.Text" xml:space="preserve">
+    <value>&amp;Coordinator:</value>
   </data>
-  <data name="labelMaster.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="labelCoordinator.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;labelMaster.Name" xml:space="preserve">
-    <value>labelMaster</value>
+  <data name="&gt;&gt;labelCoordinator.Name" xml:space="preserve">
+    <value>labelCoordinator</value>
   </data>
-  <data name="&gt;&gt;labelMaster.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelCoordinator.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelMaster.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelCoordinator.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelMaster.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelCoordinator.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="labelSupporterListBlurb.AutoSize" type="System.Boolean, mscorlib">

@@ -42,7 +42,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.comboBoxServers = new System.Windows.Forms.ComboBox();
-            this.labelMaster = new System.Windows.Forms.Label();
+            this.labelCoordinator = new System.Windows.Forms.Label();
             this.labelSupporterListBlurb = new System.Windows.Forms.Label();
             this.customTreeViewServers = new XenAdmin.Controls.CustomTreeView();
             this.flowLayoutPanelServerListButtons = new System.Windows.Forms.FlowLayoutPanel();
@@ -113,7 +113,7 @@
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
             this.tableLayoutPanel1.Controls.Add(this.comboBoxServers, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.labelMaster, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.labelCoordinator, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.labelSupporterListBlurb, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.customTreeViewServers, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanelServerListButtons, 0, 5);
@@ -136,10 +136,10 @@
             this.comboBoxServers.SelectionChangeCommitted += new System.EventHandler(this.comboBoxServers_SelectionChangeCommitted);
             this.comboBoxServers.SelectedIndexChanged += new System.EventHandler(this.comboBoxServers_SelectedIndexChanged);
             // 
-            // labelMaster
+            // labelCoordinator
             // 
-            resources.ApplyResources(this.labelMaster, "labelMaster");
-            this.labelMaster.Name = "labelMaster";
+            resources.ApplyResources(this.labelCoordinator, "labelCoordinator");
+            this.labelCoordinator.Name = "labelCoordinator";
             // 
             // labelSupporterListBlurb
             // 
@@ -243,7 +243,7 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelServerListButtons;
         private System.Windows.Forms.Button buttonAddNewServer;
         private System.Windows.Forms.ComboBox comboBoxServers;
-        private System.Windows.Forms.Label labelMaster;
+        private System.Windows.Forms.Label labelCoordinator;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelDialogButtons;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button buttonCreate;
