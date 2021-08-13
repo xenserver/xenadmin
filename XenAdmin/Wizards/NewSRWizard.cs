@@ -141,7 +141,7 @@ namespace XenAdmin.Wizards
 
             // RBAC warning page 
             _rbac = (xenConnection != null && !xenConnection.Session.IsLocalSuperuser) &&
-                   Helpers.GetMaster(xenConnection).external_auth_type != Auth.AUTH_TYPE_NONE;            
+                   Helpers.GetCoordinator(xenConnection).external_auth_type != Auth.AUTH_TYPE_NONE;            
             if (_rbac)
             {
                 // if reattaching, add "Permission checks" page after "Name" page, otherwise as first page (Ref. CA-61525)

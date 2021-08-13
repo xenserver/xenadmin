@@ -68,7 +68,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             xenTabPageSnapshotFrequency.Connection = pool.Connection;
             
             #region RBAC Warning Page Checks
-            if (Pool.Connection.Session.IsLocalSuperuser || Helpers.GetMaster(Pool.Connection).external_auth_type == Auth.AUTH_TYPE_NONE)
+            if (Pool.Connection.Session.IsLocalSuperuser || Helpers.GetCoordinator(Pool.Connection).external_auth_type == Auth.AUTH_TYPE_NONE)
             {
                 //do nothing
             }

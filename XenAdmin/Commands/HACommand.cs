@@ -270,7 +270,7 @@ namespace XenAdmin.Commands
             if (!pool.IsVisible())
                 return Messages.HA_STANDALONE_SERVER;
  
-            Host master = Helpers.GetMaster(pool.Connection);
+            Host master = Helpers.GetCoordinator(pool.Connection);
             if (master == null)
                 return string.Format(Messages.POOL_MASTER_GONE, BrandManager.BrandConsole);
 
@@ -294,7 +294,7 @@ namespace XenAdmin.Commands
 
             if (pool == null || pool.Locked ||
                 pool.Connection == null || !pool.Connection.IsConnected ||
-                Helpers.GetMaster(pool.Connection) == null ||
+                Helpers.GetCoordinator(pool.Connection) == null ||
                 HelpersGUI.FindActiveHaAction(pool.Connection) != null)
                 return false;
 

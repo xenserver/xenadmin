@@ -300,7 +300,7 @@ namespace XenAdmin.Wizards.DRWizards
 
         private List<FibreChannelDevice> FiberChannelScan()
         {
-            Host master = Helpers.GetMaster(Connection);
+            Host master = Helpers.GetCoordinator(Connection);
             if (master == null)
                 return null;
 
@@ -313,7 +313,7 @@ namespace XenAdmin.Wizards.DRWizards
 
         private List<SR.SRInfo> ScanDeviceForSRs(SR.SRTypes type, string deviceId, Dictionary<string, string> dconf)
         {
-            Host master = Helpers.GetMaster(Connection);
+            Host master = Helpers.GetCoordinator(Connection);
             if (master == null || dconf == null)
                 return null;
 

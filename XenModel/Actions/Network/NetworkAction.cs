@@ -272,7 +272,7 @@ namespace XenAdmin.Actions
 
         private void CreateVLAN(string network_ref)
         {
-            Host host = Helpers.GetMaster(Connection);
+            Host host = Helpers.GetCoordinator(Connection);
             if (host == null)
                 throw new Failure(Failure.INTERNAL_ERROR, string.Format(Messages.POOL_MASTER_GONE, BrandManager.BrandConsole));
             Pool.create_VLAN_from_PIF(Session, pif.opaque_ref, network_ref, vlan);

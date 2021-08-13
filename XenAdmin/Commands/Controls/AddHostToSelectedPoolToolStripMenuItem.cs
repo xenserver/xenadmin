@@ -76,7 +76,7 @@ namespace XenAdmin.Commands
             {
                 if (Helpers.GetPool(c) == null)
                 {
-                    Host host = Helpers.GetMaster(c);
+                    Host host = Helpers.GetCoordinator(c);
 
                     if (host != null)
                     {

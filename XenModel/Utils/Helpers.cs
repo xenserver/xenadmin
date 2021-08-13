@@ -102,7 +102,7 @@ namespace XenAdmin.Core
 
             if (output == null)
             {
-                Host master = GetMaster(host.Connection);
+                Host master = GetCoordinator(host.Connection);
                 return master == null ? null : fn(master);
             }
 
@@ -227,7 +227,7 @@ namespace XenAdmin.Core
         /// </summary>
         /// <param name="connection">May not be null.</param>
         /// <returns></returns>
-        public static Host GetMaster(IXenConnection connection)
+        public static Host GetCoordinator(IXenConnection connection)
         {
             Pool pool = GetPoolOfOne(connection);
             return pool == null ? null : connection.Resolve(pool.master);
@@ -237,7 +237,7 @@ namespace XenAdmin.Core
         /// Return the host object representing the coordinator of the given pool.
         /// (If pool is null, returns null).
         /// </summary>
-        public static Host GetMaster(Pool pool)
+        public static Host GetCoordinator(Pool pool)
         {
             return pool == null ? null : pool.Connection.Resolve(pool.master);
         }
@@ -301,7 +301,7 @@ namespace XenAdmin.Core
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool DundeeOrGreater(IXenConnection conn)
         {
-            return conn == null || DundeeOrGreater(Helpers.GetMaster(conn));
+            return conn == null || DundeeOrGreater(Helpers.GetCoordinator(conn));
         }
 
         /// Dundee is ver. 2.0.0
@@ -323,7 +323,7 @@ namespace XenAdmin.Core
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool ElyOrGreater(IXenConnection conn)
         {
-            return conn == null || ElyOrGreater(Helpers.GetMaster(conn));
+            return conn == null || ElyOrGreater(Helpers.GetCoordinator(conn));
         }
 
         /// Ely is ver. 2.1.1
@@ -339,7 +339,7 @@ namespace XenAdmin.Core
 
         public static bool HavanaOrGreater(IXenConnection conn)
         {
-            return conn == null || HavanaOrGreater(Helpers.GetMaster(conn));
+            return conn == null || HavanaOrGreater(Helpers.GetCoordinator(conn));
         }
 
         /// As Havana platform version is same with Ely and Honolulu, so use product version here
@@ -359,7 +359,7 @@ namespace XenAdmin.Core
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool FalconOrGreater(IXenConnection conn)
         {
-            return conn == null || FalconOrGreater(Helpers.GetMaster(conn));
+            return conn == null || FalconOrGreater(Helpers.GetCoordinator(conn));
         }
 
         /// Falcon is ver. 2.3.0
@@ -376,7 +376,7 @@ namespace XenAdmin.Core
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool InvernessOrGreater(IXenConnection conn)
         {
-            return conn == null || InvernessOrGreater(Helpers.GetMaster(conn));
+            return conn == null || InvernessOrGreater(Helpers.GetCoordinator(conn));
         }
 
         /// Inverness is ver. 2.4.0
@@ -393,7 +393,7 @@ namespace XenAdmin.Core
         /// <param name="conn">May be null, in which case true is returned.</param>
          public static bool JuraOrGreater(IXenConnection conn)
         {
-            return conn == null || JuraOrGreater(Helpers.GetMaster(conn));
+            return conn == null || JuraOrGreater(Helpers.GetCoordinator(conn));
         }
 
         /// Jura is ver. 2.5.0
@@ -410,7 +410,7 @@ namespace XenAdmin.Core
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool KolkataOrGreater(IXenConnection conn)
         {
-            return conn == null || KolkataOrGreater(Helpers.GetMaster(conn));
+            return conn == null || KolkataOrGreater(Helpers.GetCoordinator(conn));
         }
 
         /// Kolkata platform version is 2.6.0
@@ -427,7 +427,7 @@ namespace XenAdmin.Core
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool LimaOrGreater(IXenConnection conn)
         {
-            return conn == null || LimaOrGreater(Helpers.GetMaster(conn));
+            return conn == null || LimaOrGreater(Helpers.GetCoordinator(conn));
         }
 
         /// Lima platform version is 2.7.0
@@ -444,7 +444,7 @@ namespace XenAdmin.Core
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool NaplesOrGreater(IXenConnection conn)
         {
-            return conn == null || NaplesOrGreater(GetMaster(conn));
+            return conn == null || NaplesOrGreater(GetCoordinator(conn));
         }
 
         /// Naples is ver. 3.0.0
@@ -462,7 +462,7 @@ namespace XenAdmin.Core
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool QuebecOrGreater(IXenConnection conn)
         {
-            return conn == null || QuebecOrGreater(GetMaster(conn));
+            return conn == null || QuebecOrGreater(GetCoordinator(conn));
         }
 
         /// Quebec platform version is 3.1.0
@@ -480,7 +480,7 @@ namespace XenAdmin.Core
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool StockholmOrGreater(IXenConnection conn)
         {
-            return conn == null || StockholmOrGreater(Helpers.GetMaster(conn));
+            return conn == null || StockholmOrGreater(Helpers.GetCoordinator(conn));
         }
 
         /// <param name="host">May be null, in which case true is returned.</param>
@@ -498,7 +498,7 @@ namespace XenAdmin.Core
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool PostStockholm(IXenConnection conn)
         {
-            return conn == null || PostStockholm(Helpers.GetMaster(conn));
+            return conn == null || PostStockholm(Helpers.GetCoordinator(conn));
         }
 
         /// <param name="host">May be null, in which case true is returned.</param>
@@ -748,7 +748,7 @@ namespace XenAdmin.Core
 
         public static bool IsOlderThanMaster(Host host)
         {
-            Host master = Helpers.GetMaster(host.Connection);
+            Host master = Helpers.GetCoordinator(host.Connection);
             if (master == null || master.opaque_ref == host.opaque_ref)
                 return false;
             else if (Helpers.productVersionCompare(Helpers.HostProductVersion(host), Helpers.HostProductVersion(master)) >= 0)
@@ -1764,7 +1764,7 @@ namespace XenAdmin.Core
        /// </summary>
        public static bool SupportsLinkAggregationBond(IXenConnection connection)
        {
-           Host master = GetMaster(connection);
+           Host master = GetCoordinator(connection);
            return master != null && master.vSwitchNetworkBackend();
        }
 
@@ -1773,7 +1773,7 @@ namespace XenAdmin.Core
        /// </summary>
        public static int BondSizeLimit(IXenConnection connection)
        {
-           Host master = GetMaster(connection);
+           Host master = GetCoordinator(connection);
            // For hosts on the vSwitch backend, we allow 4 NICs per bond; otherwise, 2
            return master != null && master.vSwitchNetworkBackend() ? 4 : 2;
        }
@@ -1832,14 +1832,14 @@ namespace XenAdmin.Core
        /// </summary>
        public static bool VLAN0Allowed(IXenConnection connection)
        {
-           Host master = GetMaster(connection);
+           Host master = GetCoordinator(connection);
            // For Creedence or later on the vSwitch backend, we allow creation of VLAN 0
            return master != null && master.vSwitchNetworkBackend();
        }
 
        public static bool ContainerCapability(IXenConnection connection)
        {
-           var master = GetMaster(connection);
+           var master = GetCoordinator(connection);
            if (master == null)
                return false;
            if (ElyOrGreater(connection))
@@ -1849,7 +1849,7 @@ namespace XenAdmin.Core
 
        public static bool PvsCacheCapability(IXenConnection connection)
        {
-           var master = GetMaster(connection);
+           var master = GetCoordinator(connection);
            return master != null && master.AppliedUpdates().Any(update => update.Name().ToLower().StartsWith("pvsaccelerator"));
        }
 

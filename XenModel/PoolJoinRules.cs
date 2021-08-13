@@ -95,7 +95,7 @@ namespace XenAdmin.Core
             if (!Helpers.IsConnected(supporterConnection))  // also implies supporterConnection != null
                 return Reason.NotConnected;
 
-            Host supporterHost = Helpers.GetMaster(supporterConnection);
+            Host supporterHost = Helpers.GetCoordinator(supporterConnection);
             if (Connecting(supporterHost))  // also implies supporterHost != null
                 return Reason.Connecting;
 
@@ -108,7 +108,7 @@ namespace XenAdmin.Core
             if (!Helpers.IsConnected(masterConnection))  // also implies coordinatorConnection != null
                 return Reason.MasterNotConnected;
 
-            Host masterHost = Helpers.GetMaster(masterConnection);
+            Host masterHost = Helpers.GetCoordinator(masterConnection);
             if (Connecting(masterHost))  // also implies masterHost != null
                 return Reason.MasterConnecting;
 

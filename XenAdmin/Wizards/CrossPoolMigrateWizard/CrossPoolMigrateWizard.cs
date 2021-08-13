@@ -102,7 +102,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                     return true;
             }
 
-            Host host = xenConnection.Resolve(vm.resident_on) ?? Helpers.GetMaster(xenConnection);
+            Host host = xenConnection.Resolve(vm.resident_on) ?? Helpers.GetCoordinator(xenConnection);
             if (mapping.Value.XenRef is XenRef<Host>)
             {
                 Host targetHost = TargetConnection.Resolve(mapping.Value.XenRef as XenRef<Host>);
@@ -426,7 +426,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             if (connection.Session.IsLocalSuperuser)
                 return true;
 
-            if (Helpers.GetMaster(connection).external_auth_type == Auth.AUTH_TYPE_NONE)
+            if (Helpers.GetCoordinator(connection).external_auth_type == Auth.AUTH_TYPE_NONE)
                 return true;
 
             return false;

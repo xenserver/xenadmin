@@ -212,7 +212,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         protected override List<HostPlan> GenerateHostPlans(Pool pool, out List<Host> applicableHosts)
         {
-            var master = Helpers.GetMaster(pool);
+            var master = Helpers.GetCoordinator(pool);
             var planActions = new List<PlanAction>();
 
             var alertPatch = SelectedUpdateAlert == null ? null : SelectedUpdateAlert.Patch;

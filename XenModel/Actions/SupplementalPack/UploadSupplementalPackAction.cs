@@ -67,7 +67,7 @@ namespace XenAdmin.Actions
         public UploadSupplementalPackAction(IXenConnection connection, List<Host> selectedServers, string path, bool suppressHistory)
             : base(connection, null, Messages.SUPP_PACK_UPLOADING, suppressHistory)
         {
-            Host = Helpers.GetMaster(connection) ?? throw new NullReferenceException();
+            Host = Helpers.GetCoordinator(connection) ?? throw new NullReferenceException();
 
             ApiMethodsToRoleCheck.Add("VDI.create");
             ApiMethodsToRoleCheck.Add("VDI.destroy");
@@ -275,7 +275,7 @@ namespace XenAdmin.Actions
             SR defaultSr = Pool != null ? Pool.Connection.Resolve(Pool.default_SR) : null;
             
             var serversToConsider = Helpers.ElyOrGreater(Connection)
-                ? new List<Host> {Helpers.GetMaster(Connection)}
+                ? new List<Host> {Helpers.GetCoordinator(Connection)}
                 : new List<Host>(servers);
 
             var srList = new List<SR>();

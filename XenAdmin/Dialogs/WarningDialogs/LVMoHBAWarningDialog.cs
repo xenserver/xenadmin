@@ -214,7 +214,7 @@ namespace XenAdmin.Dialogs.WarningDialogs
             if (pool != null)
                 return string.Format(Messages.NEWSR_LUN_IN_USE_ON_POOL, sr.Name(), pool.Name());
             
-            Host master = Helpers.GetMaster(sr.Connection);
+            Host master = Helpers.GetCoordinator(sr.Connection);
             
             if (master != null)
                 return string.Format(Messages.NEWSR_LUN_IN_USE_ON_SERVER, sr.Name(), master.Name());

@@ -85,7 +85,7 @@ namespace XenAdmin.Controls
 
         public override string ToString()
         {
-            string name = Helpers.GetName(Helpers.GetMaster(Connection));
+            string name = Helpers.GetName(Helpers.GetCoordinator(Connection));
             if (name == "")
                 return Connection.Hostname;
             else

@@ -271,7 +271,7 @@ namespace XenAdmin.Core
 
             foreach (IXenConnection xenConnection in ConnectionsManager.XenConnectionsCopy)
             {
-                Host master = Helpers.GetMaster(xenConnection);
+                Host master = Helpers.GetCoordinator(xenConnection);
                 Pool pool = Helpers.GetPoolOfOne(xenConnection);
                 List<Host> hosts = xenConnection.Cache.Hosts.ToList();
                 if (master == null || pool == null)
@@ -674,7 +674,7 @@ namespace XenAdmin.Core
                 if (!xc.IsConnected)
                     continue;
 
-                Host master = Helpers.GetMaster(xc);
+                Host master = Helpers.GetCoordinator(xc);
                 Pool pool = Helpers.GetPoolOfOne(xc);
                 List<Host> hosts = xc.Cache.Hosts.ToList();
                 if (master == null || pool == null)
@@ -829,7 +829,7 @@ namespace XenAdmin.Core
 
         public static void CheckHotfixEligibility(IXenConnection connection)
         {
-            var master = Helpers.GetMaster(connection);
+            var master = Helpers.GetCoordinator(connection);
             if (master == null)
                 return;
 
@@ -860,7 +860,7 @@ namespace XenAdmin.Core
                 if (!connection.IsConnected)
                     continue;
 
-                var master = Helpers.GetMaster(connection);
+                var master = Helpers.GetCoordinator(connection);
                 if (master == null)
                     continue;
                 

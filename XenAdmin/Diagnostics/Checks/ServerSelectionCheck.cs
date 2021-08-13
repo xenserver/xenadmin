@@ -45,7 +45,7 @@ namespace XenAdmin.Diagnostics.Checks
         private readonly List<Host> selectedServers;
 
         public ServerSelectionCheck(Pool pool, Pool_update update, List<Host> selectedServers)
-            : base(Helpers.GetMaster(pool.Connection))
+            : base(Helpers.GetCoordinator(pool.Connection))
         {
             this.pool = pool;
             this.update = update;

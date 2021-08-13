@@ -506,7 +506,7 @@ namespace XenAdmin.Controls.NetworkingTab
                     return;
                 }
 
-                Host master = Helpers.GetMaster(vm.Connection);
+                Host master = Helpers.GetCoordinator(vm.Connection);
                 if (master == null)
                 {
                     // Cache populating?

@@ -53,7 +53,7 @@ namespace XenAdmin.Network
 
         private static PIF GetMasterManagementPIF(IXenConnection conn)
         {
-            Host host = Helpers.GetMaster(conn);
+            Host host = Helpers.GetCoordinator(conn);
             return host == null ? null : GetManagementPIF(host);
         }
 

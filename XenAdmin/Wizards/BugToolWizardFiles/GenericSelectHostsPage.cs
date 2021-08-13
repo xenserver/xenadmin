@@ -101,7 +101,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                     var pool = Helpers.GetPool(con);
                     if (pool == null)
                     {
-                        Host master = Helpers.GetMaster(con);
+                        Host master = Helpers.GetCoordinator(con);
                         if (master != null && selectedObjects.Contains(master))
                             node.State = CheckState.Checked;
                     }
@@ -143,7 +143,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                     {
                         if (Helpers.GetPool(c) == null)
                         {
-                            Host master = Helpers.GetMaster(c);
+                            Host master = Helpers.GetCoordinator(c);
                             if (master != null)
                                 hosts.Add(master);
                         }
@@ -243,7 +243,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                     }
                     else
                     {
-                        Host master = Helpers.GetMaster(connection);
+                        Host master = Helpers.GetCoordinator(connection);
                         if (master != null)
                         {
                             bool isMasterLive = master.IsLive();
@@ -285,7 +285,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                 }
                 else
                 {
-                    Host master = Helpers.GetMaster(connection);
+                    Host master = Helpers.GetCoordinator(connection);
                     if (master != null)
                         DeregisterHostEvents(master);
                 }

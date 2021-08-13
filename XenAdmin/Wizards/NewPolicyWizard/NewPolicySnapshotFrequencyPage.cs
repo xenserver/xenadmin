@@ -121,7 +121,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 
         public void GetServerTime()
         {
-            var master = Helpers.GetMaster(Connection);
+            var master = Helpers.GetCoordinator(Connection);
             if (master == null)
                 return;
 

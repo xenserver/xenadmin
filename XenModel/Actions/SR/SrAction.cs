@@ -164,7 +164,7 @@ namespace XenAdmin.Actions
             var allPBDRefsToNonMaster = new List<XenRef<PBD>>();
             var allPBDRefsToMaster = new List<XenRef<PBD>>();
 
-            var master = Helpers.GetMaster(Connection);
+            var master = Helpers.GetCoordinator(Connection);
 
             foreach (var pbdRef in SR.PBDs)
             {

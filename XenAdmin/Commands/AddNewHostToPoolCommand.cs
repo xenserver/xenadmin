@@ -86,7 +86,7 @@ namespace XenAdmin.Commands
         private void dialog_CachePopulated(IXenConnection conn)
         {
             // A new connection was successfully made: add the new server to its destination pool.
-            Host hostToAdd = Helpers.GetMaster(conn);
+            Host hostToAdd = Helpers.GetCoordinator(conn);
             if (hostToAdd == null)
             {
                 log.Debug("hostToAdd is null while joining host to pool in AddNewHostToPoolCommand: this should never happen!");

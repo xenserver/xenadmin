@@ -574,7 +574,7 @@ namespace XenAdmin.TabPages
                     s.AddEntry(kvp.Key, kvp.Value);
                 }
             }
-            Host master = Helpers.GetMaster(xenObject.Connection);
+            Host master = Helpers.GetCoordinator(xenObject.Connection);
             if (master == null)
                 return;
 
@@ -1257,7 +1257,7 @@ namespace XenAdmin.TabPages
                     }
                     else
                     {
-                        belongsTo = Helpers.GetMaster(sr.Connection);
+                        belongsTo = Helpers.GetCoordinator(sr.Connection);
 
                         if (belongsTo != null)
                         {

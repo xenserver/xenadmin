@@ -50,7 +50,7 @@ namespace XenAdmin.Actions
             if (connection != null)
             {
                 Pool = Helpers.GetPoolOfOne(connection);
-                Host = Helpers.GetMaster(connection);
+                Host = Helpers.GetCoordinator(connection);
             }
         }
 

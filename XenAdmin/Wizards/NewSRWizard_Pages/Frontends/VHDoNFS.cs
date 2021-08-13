@@ -147,7 +147,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             }
             dconf[OPTIONS] = serverOptionsTextBox.Text;
 
-            Host master = Helpers.GetMaster(Connection);
+            Host master = Helpers.GetCoordinator(Connection);
             if (master == null)
                 return;
 

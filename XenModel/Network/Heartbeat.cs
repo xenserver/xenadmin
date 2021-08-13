@@ -177,7 +177,7 @@ namespace XenAdmin.Network
 
         private void GetServerTime()
         {
-            Host master = Helpers.GetMaster(connection);
+            Host master = Helpers.GetCoordinator(connection);
             if (master == null)
                 return;
             DateTime t = Host.get_servertime(session, master.opaque_ref);

@@ -134,7 +134,7 @@ namespace XenAdmin.TabPages
             if (master != null)
                 master.PropertyChanged -= master_PropertyChanged;
 
-            master = Helpers.GetMaster(_connection);
+            master = Helpers.GetCoordinator(_connection);
             if (master != null)
                 master.PropertyChanged += master_PropertyChanged;
         }
@@ -297,7 +297,7 @@ namespace XenAdmin.TabPages
             {
                 Program.AssertOnEventThread();
 
-                Host master = Helpers.GetMaster(_connection);
+                Host master = Helpers.GetCoordinator(_connection);
                 if (master == null)
                 {
                     log.WarnFormat("Could not resolve pool coordinator for connection '{0}'; disabling.", Helpers.GetName(_connection));
@@ -757,7 +757,7 @@ namespace XenAdmin.TabPages
                         return;
                 }
 
-                Host master = Helpers.GetMaster(_connection);
+                Host master = Helpers.GetCoordinator(_connection);
                 if (master == null)
                 {
                     // Really shouldn't happen unless we have been very slow with the cache

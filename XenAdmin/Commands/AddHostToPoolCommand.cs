@@ -134,7 +134,7 @@ namespace XenAdmin.Commands
 
             // Are there any hosts which are forbidden from masking their CPUs for licensing reasons?
             // If so, we need to show upsell.
-            Host master = Helpers.GetMaster(_pool);
+            Host master = Helpers.GetCoordinator(_pool);
             if (null != _hosts.Find(host =>
                 !PoolJoinRules.CompatibleCPUs(host, master, false) &&
                 Helpers.FeatureForbidden(host, Host.RestrictCpuMasking) &&

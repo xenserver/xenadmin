@@ -362,7 +362,7 @@ namespace XenAdmin.XenSearch
                 host = obj.Connection.Resolve<Host>(((VM)obj).resident_on);
                 if (host == null)
                 {
-                    host = Helpers.GetMaster(obj.Connection);
+                    host = Helpers.GetCoordinator(obj.Connection);
                 }
             }
             return host;

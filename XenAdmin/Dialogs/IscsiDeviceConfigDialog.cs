@@ -241,7 +241,7 @@ namespace XenAdmin.Dialogs
                     return;
                 }
 
-                Host master = Helpers.GetMaster(sr.Connection);
+                Host master = Helpers.GetCoordinator(sr.Connection);
                 if (master != null)
                 {
                     lunInUseLabel.Text = String.Format(Messages.NEWSR_LUN_IN_USE_ON_SERVER,

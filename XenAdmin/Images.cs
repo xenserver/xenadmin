@@ -350,7 +350,7 @@ namespace XenAdmin
             if (pool != null)
                 return GetIconFor(pool);
 
-            Host host = Helpers.GetMaster(connection);
+            Host host = Helpers.GetCoordinator(connection);
             if (host != null)
                 return GetIconFor(host);
 

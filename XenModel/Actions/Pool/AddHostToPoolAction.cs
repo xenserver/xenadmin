@@ -51,7 +51,7 @@ namespace XenAdmin.Actions
         {
             this.Pool = poolToJoin;
             this.Host = joiningHost;
-            Host master = Helpers.GetMaster(poolToJoin);
+            Host master = Helpers.GetCoordinator(poolToJoin);
             _hostsToRelicense = new List<Host>();
             _hostsToCpuMask = new List<Host>();
             _hostsToAdConfigure = new List<Host>();

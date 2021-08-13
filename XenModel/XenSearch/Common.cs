@@ -591,7 +591,7 @@ namespace XenAdmin.XenSearch
             Pool pool = Helpers.GetPool(o.Connection);
             if (pool == null)
                 return null;
-            Host master = Helpers.GetMaster(pool.Connection);
+            Host master = Helpers.GetCoordinator(pool.Connection);
             if (master == null)
                 return null;
 

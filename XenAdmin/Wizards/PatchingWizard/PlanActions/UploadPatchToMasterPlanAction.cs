@@ -84,7 +84,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         protected override void RunWithSession(ref Session session)
         {
             var conn = session.Connection;
-            var master = Helpers.GetMaster(conn);
+            var master = Helpers.GetCoordinator(conn);
 
             var existingMapping = FindExistingMapping(conn, master);
             if (existingMapping != null && existingMapping.IsValid)
@@ -189,7 +189,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 throw new Exception(Messages.ACTION_UPLOADPATCHTOMASTERPLANACTION_FAILED);
             }
 
-            var newMapping = new PoolUpdateMapping(xenServerPatch, poolUpdate, Helpers.GetMaster(conn))
+            var newMapping = new PoolUpdateMapping(xenServerPatch, poolUpdate, Helpers.GetCoordinator(conn))
             {
                 SrsWithUploadedUpdatesPerHost = new Dictionary<Host, SR>(uploadIsoAction.SrsWithUploadedUpdatesPerHost)
             };
@@ -224,7 +224,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                     throw new Exception(Messages.ACTION_UPLOADPATCHTOMASTERPLANACTION_FAILED);
                 }
 
-                var newMapping = new PoolPatchMapping(xenServerPatch, poolPatch, Helpers.GetMaster(conn));
+                var newMapping = new PoolPatchMapping(xenServerPatch, poolPatch, Helpers.GetCoordinator(conn));
                 if (!mappings.Contains(newMapping))
                     mappings.Add(newMapping);
             }
@@ -238,7 +238,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                     throw new Exception(Messages.ACTION_UPLOADPATCHTOMASTERPLANACTION_FAILED);
                 }
 
-                var newMapping = new OtherLegacyMapping(updateFilePath, poolPatch, Helpers.GetMaster(conn));
+                var newMapping = new OtherLegacyMapping(updateFilePath, poolPatch, Helpers.GetCoordinator(conn));
                 if (!mappings.Contains(newMapping))
                     mappings.Add(newMapping);
             }
@@ -263,7 +263,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                     suppPackVdis.Add(kvp.Key, vdi);
             }
 
-            var newMapping = new SuppPackMapping(updateFilePath, poolUpdate, Helpers.GetMaster(conn))
+            var newMapping = new SuppPackMapping(updateFilePath, poolUpdate, Helpers.GetCoordinator(conn))
             {
                 SrsWithUploadedUpdatesPerHost = new Dictionary<Host, SR>(uploadIsoAction.SrsWithUploadedUpdatesPerHost),
                 SuppPackVdis = suppPackVdis
@@ -277,7 +277,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         {
             try
             {
-                var checkSpaceForUpload = new CheckDiskSpaceForPatchUploadAction(Helpers.GetMaster(conn), path, true);
+                var checkSpaceForUpload = new CheckDiskSpaceForPatchUploadAction(Helpers.GetCoordinator(conn), path, true);
                 inProgressAction = checkSpaceForUpload;
                 checkSpaceForUpload.RunExternal(session);
             }

@@ -65,7 +65,7 @@ namespace XenAdmin.Actions
             if (hostsToRelicense.Count == 0)
                 return;
 
-            Host poolMaster = Helpers.GetMaster(pool);
+            Host poolMaster = Helpers.GetCoordinator(pool);
             AsyncAction action = new ApplyLicenseEditionAction(hostsToRelicense.ConvertAll(h=>h as IXenObject), Host.GetEdition(poolMaster.edition), poolMaster.license_server["address"], poolMaster.license_server["port"], 
                 doOnLicensingFailure);
             action.RunExternal(null);
@@ -80,7 +80,7 @@ namespace XenAdmin.Actions
             if (hostsToCpuMask.Count == 0)
                 return false;
 
-            Host poolMaster = Helpers.GetMaster(pool);
+            Host poolMaster = Helpers.GetCoordinator(pool);
             List<RebootHostAction> rebootActions = new List<RebootHostAction>();
 
             // Mask the CPUs, and reboot the hosts (simultaneously, as they must all be on separate connections)
@@ -151,7 +151,7 @@ namespace XenAdmin.Actions
             if (hostsToAdConfigure.Count == 0)
                 return;
 
-            Host poolMaster = Helpers.GetMaster(pool);
+            Host poolMaster = Helpers.GetCoordinator(pool);
             AsyncAction action;
 
             bool success = true;

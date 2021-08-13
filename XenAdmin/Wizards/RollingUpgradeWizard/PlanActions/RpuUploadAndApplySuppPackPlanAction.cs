@@ -86,7 +86,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
         protected override void RunWithSession(ref Session session)
         {
             var conn = session.Connection;
-            var master = Helpers.GetMaster(conn);
+            var master = Helpers.GetCoordinator(conn);
             var suppPackName = Path.GetFileName(suppPackPath);
 
             host = GetResolvedHost();

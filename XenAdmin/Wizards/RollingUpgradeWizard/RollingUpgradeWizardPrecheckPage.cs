@@ -300,7 +300,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             if (pool == null)
                 return result;
 
-            var master = Helpers.GetMaster(pool);
+            var master = Helpers.GetCoordinator(pool);
             if (master == null)
                 return result;
 

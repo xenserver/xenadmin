@@ -1546,7 +1546,7 @@ namespace XenAdmin.Network
             }
 
             // Save coordinator's address so we don't try to reconnect to it first
-            Host master = Helpers.GetMaster(this);
+            Host master = Helpers.GetCoordinator(this);
             // Save ha_enabled status before we clear the cache
             bool ha_enabled = IsHAEnabled();
 

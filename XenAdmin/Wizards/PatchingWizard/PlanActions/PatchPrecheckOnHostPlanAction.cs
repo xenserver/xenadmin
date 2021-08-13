@@ -61,7 +61,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
         protected override void RunWithSession(ref Session session)
         {
-            var master = Helpers.GetMaster(Connection);
+            var master = Helpers.GetCoordinator(Connection);
 
             var mapping = (from HostUpdateMapping hum in mappings
                 let xpm = hum as XenServerPatchMapping

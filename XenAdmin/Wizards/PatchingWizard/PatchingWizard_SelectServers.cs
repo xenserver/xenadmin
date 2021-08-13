@@ -472,7 +472,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 List<Host> result = new List<Host>();
                 foreach (Host selectedServer in SelectedServers)
                 {
-                    Host master = Helpers.GetMaster(selectedServer.Connection);
+                    Host master = Helpers.GetCoordinator(selectedServer.Connection);
                     if (!result.Contains(master))
                         result.Add(master);
                 }

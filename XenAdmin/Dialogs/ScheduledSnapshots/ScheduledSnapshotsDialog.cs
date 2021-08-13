@@ -199,7 +199,7 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
 
         private void LoadPolicies()
         {
-            var master = Helpers.GetMaster(Pool);
+            var master = Helpers.GetCoordinator(Pool);
             var action = new GetServerLocalTimeAction(master);
             action.Completed += action_Completed;
             action.RunAsync();

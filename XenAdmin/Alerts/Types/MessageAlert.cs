@@ -70,7 +70,7 @@ namespace XenAdmin.Alerts
 
             Host h = XenObject as Host;
             if (h == null)
-                h = Helpers.GetMaster(m.Connection);
+                h = Helpers.GetCoordinator(m.Connection);
 
             if (h != null)
                 HostUuid = h.uuid;
@@ -174,7 +174,7 @@ namespace XenAdmin.Alerts
                     case Message.MessageType.LICENSE_EXPIRES_SOON:
                         if (XenObject != null)
                         {
-                            Host host = XenObject as Host ?? Helpers.GetMaster(Connection);
+                            Host host = XenObject as Host ?? Helpers.GetCoordinator(Connection);
                             return string.Format(FriendlyFormat(), Helpers.GetName(XenObject));
                         }
                         break;

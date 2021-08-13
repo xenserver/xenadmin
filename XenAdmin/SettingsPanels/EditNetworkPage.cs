@@ -77,7 +77,7 @@ namespace XenAdmin.SettingsPanels
                 return;
 
             // use the pif of the coordinator to populate the controls. We use it later in the create_VLAN_from_PIF call in Network Action
-            host = Helpers.GetMaster(network.Connection);
+            host = Helpers.GetCoordinator(network.Connection);
             
             Repopulate();
             EnableDisable();

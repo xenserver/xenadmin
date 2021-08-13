@@ -387,7 +387,7 @@ namespace XenAdmin.Dialogs
                     break;
                 }
             }
-            return connectionToMaster != null ? Helpers.GetMaster(connectionToMaster.Connection) : null;
+            return connectionToMaster != null ? Helpers.GetCoordinator(connectionToMaster.Connection) : null;
         }
 
         private List<Host> getSupporters()
@@ -397,7 +397,7 @@ namespace XenAdmin.Dialogs
             {
                 if (connection.State == CheckState.Checked && !connection.WillBeMaster && connection.AllowedAsSupporter)
                 {
-                    supporterConnections.Add(Helpers.GetMaster(connection.Connection));
+                    supporterConnections.Add(Helpers.GetCoordinator(connection.Connection));
                 }
             }
             return supporterConnections;

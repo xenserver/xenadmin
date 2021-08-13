@@ -137,7 +137,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             }
             else
             {
-                var master = Helpers.GetMaster(host.Connection);
+                var master = Helpers.GetCoordinator(host.Connection);
                 if (master != null && host.LongProductVersion() == master.LongProductVersion())
                 {
                     log.Debug(string.Format("Skipping host '{0}' because it is upgraded", host.Name()));

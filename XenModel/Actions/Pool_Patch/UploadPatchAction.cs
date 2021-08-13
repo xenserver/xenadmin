@@ -54,7 +54,7 @@ namespace XenAdmin.Actions
         public UploadPatchAction(IXenConnection connection, string path, bool suppressHistory, bool deleteFileOnCancel)
             : base(connection, null, Messages.UPLOADING_PATCH, suppressHistory)
         {
-            Host master = Helpers.GetMaster(connection);
+            Host master = Helpers.GetCoordinator(connection);
             this.deleteFileOnCancel = deleteFileOnCancel;
             if (master == null)
                 throw new NullReferenceException();
@@ -111,7 +111,7 @@ namespace XenAdmin.Actions
         {
             Session session = NewSession();
 
-            Host master = Helpers.GetMaster(Connection);
+            Host master = Helpers.GetCoordinator(Connection);
 
             log.InfoFormat("Uploading file '{0}' to server '{1}'", _patchName, master.Name());
             this.Description = string.Format(Messages.UPLOAD_PATCH_UPLOADING_DESCRIPTION, _patchName);

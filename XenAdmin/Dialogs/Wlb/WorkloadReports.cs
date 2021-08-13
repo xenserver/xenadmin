@@ -413,7 +413,7 @@ namespace XenAdmin.Dialogs.Wlb
             }
 
             AsyncAction action = new WlbReportAction(_pool.Connection,
-                                                Helpers.GetMaster(_pool.Connection),
+                                                Helpers.GetCoordinator(_pool.Connection),
                                                 reportName,
                                                 Messages.WLB_REPORT_DEFINITIONS,
                                                 true,

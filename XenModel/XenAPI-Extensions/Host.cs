@@ -565,8 +565,8 @@ namespace XenAPI
             // * Then disconnected servers
             // Within each group, in NaturalCompare order
 
-            bool thisConnected = (Connection.IsConnected && Helpers.GetMaster(Connection) != null);
-            bool otherConnected = (other.Connection.IsConnected && Helpers.GetMaster(other.Connection) != null);
+            bool thisConnected = (Connection.IsConnected && Helpers.GetCoordinator(Connection) != null);
+            bool otherConnected = (other.Connection.IsConnected && Helpers.GetCoordinator(other.Connection) != null);
 
             if (thisConnected && !otherConnected)
                 return -1;

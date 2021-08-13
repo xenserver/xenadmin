@@ -76,7 +76,7 @@ namespace XenAdmin.Actions
             //CA-176935, CA-173497 - we need to run Plug for the coordinator first - creating a new list of hosts where the master is always first
             var allHosts = new List<Host>();
             
-            var master = Helpers.GetMaster(Connection);
+            var master = Helpers.GetCoordinator(Connection);
             if (master != null)
                 allHosts.Add(master);
             

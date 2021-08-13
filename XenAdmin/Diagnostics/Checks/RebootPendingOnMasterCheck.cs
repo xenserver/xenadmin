@@ -43,7 +43,7 @@ namespace XenAdmin.Diagnostics.Checks
         private readonly Pool pool;
 
         public RestartHostOrToolstackPendingOnMasterCheck(Pool pool, string updateUuid)
-            : base(Helpers.GetMaster(pool.Connection))
+            : base(Helpers.GetCoordinator(pool.Connection))
         {
             this.pool = pool;
             this.UpdateUuid = updateUuid;

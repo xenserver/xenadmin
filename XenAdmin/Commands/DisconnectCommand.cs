@@ -145,7 +145,7 @@ namespace XenAdmin.Commands
             string msg = string.Format(Messages.CONNECTION_CLOSED_NOTICE_TEXT, connection.Hostname);
             ActionBase notice = new ActionBase(msg, msg, false, true);
             notice.Pool = Helpers.GetPoolOfOne(connection);
-            notice.Host = Helpers.GetMaster(connection);
+            notice.Host = Helpers.GetCoordinator(connection);
             log.Warn($"Connection to {connection.Hostname} closed.");
 
             MainWindowCommandInterface.CloseActiveWizards(connection);

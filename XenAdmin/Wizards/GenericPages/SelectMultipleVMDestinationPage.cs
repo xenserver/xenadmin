@@ -319,7 +319,7 @@ namespace XenAdmin.Wizards.GenericPages
 
 				if (pool == null)
 				{
-					Host host = Helpers.GetMaster(xenConnection);
+					Host host = Helpers.GetCoordinator(xenConnection);
 
 					if (host != null)
 					{
@@ -682,7 +682,7 @@ namespace XenAdmin.Wizards.GenericPages
                 var pool = Helpers.GetPool(xenConnection);
                 if (pool == null)
                 {
-                    var host = Helpers.GetMaster(xenConnection);
+                    var host = Helpers.GetCoordinator(xenConnection);
                     if (host != null)
                         host.PropertyChanged -= PropertyChanged;
                 }

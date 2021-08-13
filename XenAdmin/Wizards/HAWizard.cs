@@ -66,7 +66,7 @@ namespace XenAdmin.Wizards
 
             this.pool = pool;
             _rbacNeeded = !pool.Connection.Session.IsLocalSuperuser &&
-                          Helpers.GetMaster(pool.Connection).external_auth_type != Auth.AUTH_TYPE_NONE;
+                          Helpers.GetCoordinator(pool.Connection).external_auth_type != Auth.AUTH_TYPE_NONE;
 
             AddPage(xenTabPageIntro);
 

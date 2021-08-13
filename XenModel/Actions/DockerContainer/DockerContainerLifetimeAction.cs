@@ -57,7 +57,7 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            var host = Helpers.GetMaster(Connection);
+            var host = Helpers.GetCoordinator(Connection);
             var result = false;
             try
             {

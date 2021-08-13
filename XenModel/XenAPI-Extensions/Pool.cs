@@ -86,7 +86,7 @@ namespace XenAPI
 
         public bool IsMasterUpgraded()
         {
-            Host master = Helpers.GetMaster(this);
+            Host master = Helpers.GetCoordinator(this);
             foreach (var host in this.Connection.Cache.Hosts)
             {
                 if (host.LongProductVersion() != master.LongProductVersion())
@@ -195,7 +195,7 @@ namespace XenAPI
         public List<XenAPI.Host> HostsToUpgrade()
         {
             //First one to upgrade has to be the master
-            var master = Helpers.GetMaster(Connection);
+            var master = Helpers.GetCoordinator(Connection);
 
             List<XenAPI.Host> result = IsMasterUpgraded()
                 ? Connection.Cache.Hosts.Where(host => host.LongProductVersion() != master.LongProductVersion()).ToList()
@@ -207,7 +207,7 @@ namespace XenAPI
 
         public bool IsPoolFullyUpgraded()
         {
-            Host master = Helpers.GetMaster(this);
+            Host master = Helpers.GetCoordinator(this);
 
             foreach (var host in this.Connection.Cache.Hosts)
             {

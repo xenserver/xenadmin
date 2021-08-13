@@ -87,7 +87,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             if (direction == PageLoadedDirection.Back)
                 return;
 
-            Host master = Helpers.GetMaster(Connection);
+            Host master = Helpers.GetCoordinator(Connection);
             if (master == null)
             {
                 cancel = true;
@@ -363,7 +363,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         {
             devices = new List<FibreChannelDevice>();
 
-            Host master = Helpers.GetMaster(connection);
+            Host master = Helpers.GetCoordinator(connection);
             if (master == null)
                 return false;
 

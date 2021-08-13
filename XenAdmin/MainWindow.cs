@@ -903,7 +903,7 @@ namespace XenAdmin
 
         void connection_CachePopulated(IXenConnection connection)
         {
-            Host master = Helpers.GetMaster(connection);
+            Host master = Helpers.GetCoordinator(connection);
             if (master == null)
                 return;
 
@@ -2016,7 +2016,7 @@ namespace XenAdmin
                         else
                         {
                             var pool = Helpers.GetPool(connection);
-                            SearchPage.XenObject = pool ?? (IXenObject)Helpers.GetMaster(connection);
+                            SearchPage.XenObject = pool ?? (IXenObject)Helpers.GetCoordinator(connection);
                         }
                     }
                 }

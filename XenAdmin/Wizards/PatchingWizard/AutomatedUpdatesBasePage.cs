@@ -629,7 +629,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 if (isLastHostInPool)
                 {
                     // add cleanup action for current patch at the end of the update seuence for the last host in the pool
-                    var master = Helpers.GetMaster(host.Connection);
+                    var master = Helpers.GetCoordinator(host.Connection);
                     planActionsPerHost.Add(new RemoveUpdateFileFromMasterPlanAction(master, patchMappings, patch));
                 }
             }

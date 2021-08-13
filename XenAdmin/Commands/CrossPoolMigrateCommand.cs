@@ -96,7 +96,7 @@ namespace XenAdmin.Commands
 
         protected override Host GetHost(VM vm)
         {
-            return Helpers.GetMaster(vm.Connection);
+            return Helpers.GetCoordinator(vm.Connection);
         }
 
         private readonly Dictionary<VM, string> cantRunReasons = new Dictionary<VM, string>();

@@ -199,7 +199,7 @@ namespace XenAdmin.Commands
             {
                 IXenConnection connection = selection[0].Connection;
                 Host hostAncestor = selection[0].HostAncestor;
-                return hostAncestor != null &&  Helpers.GetMaster(connection) != null;
+                return hostAncestor != null &&  Helpers.GetCoordinator(connection) != null;
             }
             return false;
         }

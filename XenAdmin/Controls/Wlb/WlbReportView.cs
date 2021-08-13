@@ -961,7 +961,7 @@ namespace XenAdmin.Controls.Wlb
             }
 
             AsyncAction a = new WlbReportAction(Pool.Connection, 
-                                                Helpers.GetMaster(Pool.Connection),
+                                                Helpers.GetCoordinator(Pool.Connection),
                                                 reportKey, 
                                                 _reportInfo.ReportName, 
                                                 false,
