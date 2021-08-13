@@ -134,11 +134,11 @@ namespace XenAdmin.Commands
 
             // Are there any hosts which are forbidden from masking their CPUs for licensing reasons?
             // If so, we need to show upsell.
-            Host master = Helpers.GetCoordinator(_pool);
+            Host coordinator = Helpers.GetCoordinator(_pool);
             if (null != _hosts.Find(host =>
-                !PoolJoinRules.CompatibleCPUs(host, master, false) &&
+                !PoolJoinRules.CompatibleCPUs(host, coordinator, false) &&
                 Helpers.FeatureForbidden(host, Host.RestrictCpuMasking) &&
-                !PoolJoinRules.FreeHostPaidMaster(host, master, false)))  // in this case we can upgrade the license and then mask the CPU
+                !PoolJoinRules.FreeHostPaidMaster(host, coordinator, false)))  // in this case we can upgrade the license and then mask the CPU
             {
                 UpsellDialog.ShowUpsellDialog(Messages.UPSELL_BLURB_CPUMASKING, Parent);
                 return;
@@ -153,7 +153,7 @@ namespace XenAdmin.Commands
             
             if (!Program.RunInAutomatedTestMode)
             {
-                var hosts1 = _hosts.FindAll(host => PoolJoinRules.FreeHostPaidMaster(host, master, false));
+                var hosts1 = _hosts.FindAll(host => PoolJoinRules.FreeHostPaidMaster(host, coordinator, false));
                 if (hosts1.Count > 0)
                 {
                     string msg = string.Format(hosts1.Count == 1
@@ -169,7 +169,7 @@ namespace XenAdmin.Commands
                     }
                 }
 
-                var hosts2 = _hosts.FindAll(host => !PoolJoinRules.CompatibleCPUs(host, master, false));
+                var hosts2 = _hosts.FindAll(host => !PoolJoinRules.CompatibleCPUs(host, coordinator, false));
                 if (hosts2.Count > 0)
                 {
                     string msg = string.Format(hosts2.Count == 1
@@ -185,7 +185,7 @@ namespace XenAdmin.Commands
                     }
                 }
 
-                var hosts3 = _hosts.FindAll(host => !PoolJoinRules.CompatibleAdConfig(host, master, false));
+                var hosts3 = _hosts.FindAll(host => !PoolJoinRules.CompatibleAdConfig(host, coordinator, false));
                 if (hosts3.Count > 0)
                 {
                     string msg = string.Format(hosts3.Count == 1
@@ -239,9 +239,9 @@ namespace XenAdmin.Commands
             return false;
         }
 
-        public static PoolAbstractAction.AdUserAndPassword GetAdPrompt(Host poolMaster)
+        public static PoolAbstractAction.AdUserAndPassword GetAdPrompt(Host poolCoordinator)
         {
-            AdPasswordPrompt adPrompt = new AdPasswordPrompt(true, poolMaster.external_auth_service_name);
+            AdPasswordPrompt adPrompt = new AdPasswordPrompt(true, poolCoordinator.external_auth_service_name);
 
             Program.Invoke(Program.MainWindow, delegate
                                                    {

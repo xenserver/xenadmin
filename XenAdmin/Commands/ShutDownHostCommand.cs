@@ -117,7 +117,7 @@ namespace XenAdmin.Commands
                 List<Host> hosts = GetSelection().AsXenObjects<Host>();
                 bool hasRunningVMs = false;
                 var hciHosts = new List<Host>();
-                var poolMasters = new List<Host>();
+                var poolCoordinators = new List<Host>();
 
                 foreach (Host h in hosts)
                 {
@@ -128,7 +128,7 @@ namespace XenAdmin.Commands
                         hciHosts.Add(h);
 
                     if (Helpers.HostIsMaster(h) && h.Connection.Cache.HostCount > 1)
-                        poolMasters.Add(h);
+                        poolCoordinators.Add(h);
                 }
 
                 StringBuilder sb = new StringBuilder();
@@ -151,17 +151,17 @@ namespace XenAdmin.Commands
 
                 sb.Append(firstWarning);
 
-                if (poolMasters.Count == 1)
+                if (poolCoordinators.Count == 1)
                 {
                     sb.AppendLine();
                     sb.AppendLine();
-                    sb.AppendFormat(Messages.SHUT_DOWN_POOL_COORDINATOR_SINGLE, poolMasters[0].Name());
+                    sb.AppendFormat(Messages.SHUT_DOWN_POOL_COORDINATOR_SINGLE, poolCoordinators[0].Name());
                 }
-                else if (poolMasters.Count > 1)
+                else if (poolCoordinators.Count > 1)
                 {
                     sb.AppendLine();
                     sb.AppendLine();
-                    sb.AppendFormat(Messages.SHUT_DOWN_POOL_COORDINATOR_MULTIPLE, string.Join(", ", poolMasters.Select(h => h.Name())));
+                    sb.AppendFormat(Messages.SHUT_DOWN_POOL_COORDINATOR_MULTIPLE, string.Join(", ", poolCoordinators.Select(h => h.Name())));
                 }
                 return sb.ToString();
             }

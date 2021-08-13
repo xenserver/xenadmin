@@ -249,7 +249,7 @@ namespace XenAdmin.Actions
         private List<string> RetrieveParams(IXenObject obj)
         {
             IXenConnection connection = obj.Connection;
-            Host coordinator = connection != null ? Helpers.GetCoordinator(connection) : null; // get master asserts connection is not null
+            Host coordinator = connection != null ? Helpers.GetCoordinator(connection) : null; // get coordinator asserts connection is not null
             string coordinatorAddress = EmptyParameter;
 
             if (coordinator != null)
@@ -267,7 +267,7 @@ namespace XenAdmin.Actions
         // Returns a set of params which relate to the connection in general, with no obj information
         private List<string> RetrieveParams(IXenConnection connection)
         {
-            Host coordinator = connection != null ? Helpers.GetCoordinator(connection) : null; // get master asserts connection is not null
+            Host coordinator = connection != null ? Helpers.GetCoordinator(connection) : null; // get coordinator asserts connection is not null
             string coordinatorAddress = EmptyParameter;
 
             if (coordinator != null)

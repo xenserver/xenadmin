@@ -270,8 +270,8 @@ namespace XenAdmin.Commands
             if (!pool.IsVisible())
                 return Messages.HA_STANDALONE_SERVER;
  
-            Host master = Helpers.GetCoordinator(pool.Connection);
-            if (master == null)
+            Host coordinator = Helpers.GetCoordinator(pool.Connection);
+            if (coordinator == null)
                 return string.Format(Messages.POOL_COORDINATOR_GONE, BrandManager.BrandConsole);
 
             if (pool.Locked)
