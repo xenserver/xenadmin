@@ -337,7 +337,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             var haChecks = new List<Check>();
             foreach (Host host in SelectedServers)
             {
-                if (Helpers.HostIsMaster(host))
+                if (Helpers.HostIsCoordinator(host))
                     haChecks.Add(new HAOffCheck(host));
             }
             groups.Add(new CheckGroup(Messages.CHECKING_HA_STATUS, haChecks));

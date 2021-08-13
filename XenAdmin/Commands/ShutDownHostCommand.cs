@@ -127,7 +127,7 @@ namespace XenAdmin.Commands
                     if (h.Connection.ResolveAll(h.resident_VMs).Exists(v => v.HciWarnBeforeShutdown()))
                         hciHosts.Add(h);
 
-                    if (Helpers.HostIsMaster(h) && h.Connection.Cache.HostCount > 1)
+                    if (Helpers.HostIsCoordinator(h) && h.Connection.Cache.HostCount > 1)
                         poolCoordinators.Add(h);
                 }
 

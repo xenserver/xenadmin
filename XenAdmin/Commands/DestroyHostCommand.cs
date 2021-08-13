@@ -75,7 +75,7 @@ namespace XenAdmin.Commands
                 return false;
 
             Pool pool = Helpers.GetPool(host.Connection);
-            return pool != null && !Helpers.HostIsMaster(host) && !host.IsLive();
+            return pool != null && !Helpers.HostIsCoordinator(host) && !host.IsLive();
         }
 
         protected override bool CanRunCore(SelectedItemCollection selection)

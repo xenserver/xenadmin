@@ -283,7 +283,7 @@ namespace XenAdmin.Commands
                 return false;
 
             var vmHome = vm.Home();
-            if (vmHome != null && Helpers.IsOlderThanMaster(vmHome))
+            if (vmHome != null && Helpers.IsOlderThanCoordinator(vmHome))
                 return false;
 
             //whether RBAC allows connection to the VM's console

@@ -71,17 +71,17 @@ namespace XenAdmin.Core
         /// <param name="Host">May be null.</param>
         public static string HostProductVersion(Host host)
         {
-            return FromHostOrMaster(host, h => h.ProductVersion());
+            return FromHostOrCoordinator(host, h => h.ProductVersion());
         }
 
         public static string HostProductVersionText(Host host)
         {
-            return FromHostOrMaster(host, h => h.ProductVersionText());
+            return FromHostOrCoordinator(host, h => h.ProductVersionText());
         }
 
         public static string HostProductVersionTextShort(Host host)
         {
-            return FromHostOrMaster(host, h => h.ProductVersionTextShort());
+            return FromHostOrCoordinator(host, h => h.ProductVersionTextShort());
         }
 
         public static string HostPlatformVersion(Host host)
@@ -93,7 +93,7 @@ namespace XenAdmin.Core
         }
 
         private delegate string HostToStr(Host host);
-        private static string FromHostOrMaster(Host host, HostToStr fn)
+        private static string FromHostOrCoordinator(Host host, HostToStr fn)
         {
             if (host == null)
                 return null;
@@ -102,8 +102,8 @@ namespace XenAdmin.Core
 
             if (output == null)
             {
-                Host master = GetCoordinator(host.Connection);
-                return master == null ? null : fn(master);
+                Host coordinator = GetCoordinator(host.Connection);
+                return coordinator == null ? null : fn(coordinator);
             }
 
             return output;
@@ -242,7 +242,7 @@ namespace XenAdmin.Core
             return pool == null ? null : pool.Connection.Resolve(pool.master);
         }
 
-        public static bool HostIsMaster(Host host)
+        public static bool HostIsCoordinator(Host host)
         {
             Pool pool = Helpers.GetPoolOfOne(host.Connection);
             if (pool == null) //Cache is being populated...  what do we do?
@@ -746,12 +746,12 @@ namespace XenAdmin.Core
             return IqnRegex.IsMatch(iqn);
         }
 
-        public static bool IsOlderThanMaster(Host host)
+        public static bool IsOlderThanCoordinator(Host host)
         {
-            Host master = Helpers.GetCoordinator(host.Connection);
-            if (master == null || master.opaque_ref == host.opaque_ref)
+            Host coordinator = Helpers.GetCoordinator(host.Connection);
+            if (coordinator == null || coordinator.opaque_ref == host.opaque_ref)
                 return false;
-            else if (Helpers.productVersionCompare(Helpers.HostProductVersion(host), Helpers.HostProductVersion(master)) >= 0)
+            else if (Helpers.productVersionCompare(Helpers.HostProductVersion(host), Helpers.HostProductVersion(coordinator)) >= 0)
                 return false;
             else
                 return true;
@@ -1764,8 +1764,8 @@ namespace XenAdmin.Core
        /// </summary>
        public static bool SupportsLinkAggregationBond(IXenConnection connection)
        {
-           Host master = GetCoordinator(connection);
-           return master != null && master.vSwitchNetworkBackend();
+           Host coordinator = GetCoordinator(connection);
+           return coordinator != null && coordinator.vSwitchNetworkBackend();
        }
 
        /// <summary>
@@ -1773,9 +1773,9 @@ namespace XenAdmin.Core
        /// </summary>
        public static int BondSizeLimit(IXenConnection connection)
        {
-           Host master = GetCoordinator(connection);
+           Host coordinator = GetCoordinator(connection);
            // For hosts on the vSwitch backend, we allow 4 NICs per bond; otherwise, 2
-           return master != null && master.vSwitchNetworkBackend() ? 4 : 2;
+           return coordinator != null && coordinator.vSwitchNetworkBackend() ? 4 : 2;
        }
 
        public static Host GetHostAncestor(IXenObject xenObject)
@@ -1832,25 +1832,25 @@ namespace XenAdmin.Core
        /// </summary>
        public static bool VLAN0Allowed(IXenConnection connection)
        {
-           Host master = GetCoordinator(connection);
+           Host coordinator = GetCoordinator(connection);
            // For Creedence or later on the vSwitch backend, we allow creation of VLAN 0
-           return master != null && master.vSwitchNetworkBackend();
+           return coordinator != null && coordinator.vSwitchNetworkBackend();
        }
 
        public static bool ContainerCapability(IXenConnection connection)
        {
-           var master = GetCoordinator(connection);
-           if (master == null)
+           var coordinator = GetCoordinator(connection);
+           if (coordinator == null)
                return false;
            if (ElyOrGreater(connection))
-               return master.AppliedUpdates().Any(update => update.Name().ToLower().StartsWith("xscontainer")); 
-           return master.SuppPacks().Any(suppPack => suppPack.Name.ToLower().StartsWith("xscontainer")); 
+               return coordinator.AppliedUpdates().Any(update => update.Name().ToLower().StartsWith("xscontainer")); 
+           return coordinator.SuppPacks().Any(suppPack => suppPack.Name.ToLower().StartsWith("xscontainer")); 
        }
 
        public static bool PvsCacheCapability(IXenConnection connection)
        {
-           var master = GetCoordinator(connection);
-           return master != null && master.AppliedUpdates().Any(update => update.Name().ToLower().StartsWith("pvsaccelerator"));
+           var coordinator = GetCoordinator(connection);
+           return coordinator != null && coordinator.AppliedUpdates().Any(update => update.Name().ToLower().StartsWith("pvsaccelerator"));
        }
 
         public static string UrlEncode(this string str)

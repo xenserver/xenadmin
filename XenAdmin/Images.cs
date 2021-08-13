@@ -478,7 +478,7 @@ namespace XenAdmin
                 {
                     return Icons.HostEvacuate;
                 }
-                else if (Helpers.IsOlderThanMaster(host))
+                else if (Helpers.IsOlderThanCoordinator(host))
                 {
                     return Icons.HostOlderThanMaster;
                 }
