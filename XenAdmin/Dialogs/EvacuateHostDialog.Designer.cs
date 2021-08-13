@@ -38,9 +38,9 @@ namespace XenAdmin.Dialogs
             this.EvacuateButton = new System.Windows.Forms.Button();
             this.labelBlurb = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.NewMasterComboBox = new System.Windows.Forms.ComboBox();
-            this.NewMasterLabel = new System.Windows.Forms.Label();
-            this.labelMasterBlurb = new System.Windows.Forms.Label();
+            this.NewCoordinatorComboBox = new System.Windows.Forms.ComboBox();
+            this.NewCoordinatorLabel = new System.Windows.Forms.Label();
+            this.labelCoordinatorBlurb = new System.Windows.Forms.Label();
             this.dataGridViewVms = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
             this.columnImage = new System.Windows.Forms.DataGridViewImageColumn();
             this.columnVm = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,7 +49,7 @@ namespace XenAdmin.Dialogs
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanelWlb = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.tableLayoutPanelNewMaster = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanelNewCoordinator = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanelPSr = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.labelWarning = new System.Windows.Forms.Label();
@@ -67,7 +67,7 @@ namespace XenAdmin.Dialogs
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanelWlb.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            this.tableLayoutPanelNewMaster.SuspendLayout();
+            this.tableLayoutPanelNewCoordinator.SuspendLayout();
             this.tableLayoutPanelPSr.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.panel1.SuspendLayout();
@@ -111,25 +111,25 @@ namespace XenAdmin.Dialogs
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.TabStop = false;
             // 
-            // NewMasterComboBox
+            // NewCoordinatorComboBox
             // 
-            resources.ApplyResources(this.NewMasterComboBox, "NewMasterComboBox");
-            this.NewMasterComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.NewMasterComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.NewMasterComboBox.FormattingEnabled = true;
-            this.NewMasterComboBox.Name = "NewMasterComboBox";
-            this.NewMasterComboBox.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.NewMasterComboBox_DrawItem);
+            resources.ApplyResources(this.NewCoordinatorComboBox, "NewCoordinatorComboBox");
+            this.NewCoordinatorComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.NewCoordinatorComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.NewCoordinatorComboBox.FormattingEnabled = true;
+            this.NewCoordinatorComboBox.Name = "NewCoordinatorComboBox";
+            this.NewCoordinatorComboBox.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.NewMasterComboBox_DrawItem);
             // 
-            // NewMasterLabel
+            // NewCoordinatorLabel
             // 
-            resources.ApplyResources(this.NewMasterLabel, "NewMasterLabel");
-            this.NewMasterLabel.Name = "NewMasterLabel";
+            resources.ApplyResources(this.NewCoordinatorLabel, "NewCoordinatorLabel");
+            this.NewCoordinatorLabel.Name = "NewCoordinatorLabel";
             // 
-            // labelMasterBlurb
+            // labelCoordinatorBlurb
             // 
-            this.tableLayoutPanelNewMaster.SetColumnSpan(this.labelMasterBlurb, 2);
-            resources.ApplyResources(this.labelMasterBlurb, "labelMasterBlurb");
-            this.labelMasterBlurb.Name = "labelMasterBlurb";
+            this.tableLayoutPanelNewCoordinator.SetColumnSpan(this.labelCoordinatorBlurb, 2);
+            resources.ApplyResources(this.labelCoordinatorBlurb, "labelCoordinatorBlurb");
+            this.labelCoordinatorBlurb.Name = "labelCoordinatorBlurb";
             // 
             // dataGridViewVms
             // 
@@ -203,7 +203,7 @@ namespace XenAdmin.Dialogs
             this.tableLayoutPanel1.Controls.Add(this.pictureBox1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.labelBlurb, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanelWlb, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanelNewMaster, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanelNewCoordinator, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.vmListLabel, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.EvacuateButton, 2, 5);
@@ -228,20 +228,20 @@ namespace XenAdmin.Dialogs
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.TabStop = false;
             // 
-            // tableLayoutPanelNewMaster
+            // tableLayoutPanelNewCoordinator
             // 
-            resources.ApplyResources(this.tableLayoutPanelNewMaster, "tableLayoutPanelNewMaster");
-            this.tableLayoutPanel1.SetColumnSpan(this.tableLayoutPanelNewMaster, 4);
-            this.tableLayoutPanelNewMaster.Controls.Add(this.labelMasterBlurb, 0, 0);
-            this.tableLayoutPanelNewMaster.Controls.Add(this.NewMasterLabel, 0, 1);
-            this.tableLayoutPanelNewMaster.Controls.Add(this.NewMasterComboBox, 1, 1);
-            this.tableLayoutPanelNewMaster.Controls.Add(this.tableLayoutPanelPSr, 0, 2);
-            this.tableLayoutPanelNewMaster.Name = "tableLayoutPanelNewMaster";
+            resources.ApplyResources(this.tableLayoutPanelNewCoordinator, "tableLayoutPanelNewCoordinator");
+            this.tableLayoutPanel1.SetColumnSpan(this.tableLayoutPanelNewCoordinator, 4);
+            this.tableLayoutPanelNewCoordinator.Controls.Add(this.labelCoordinatorBlurb, 0, 0);
+            this.tableLayoutPanelNewCoordinator.Controls.Add(this.NewCoordinatorLabel, 0, 1);
+            this.tableLayoutPanelNewCoordinator.Controls.Add(this.NewCoordinatorComboBox, 1, 1);
+            this.tableLayoutPanelNewCoordinator.Controls.Add(this.tableLayoutPanelPSr, 0, 2);
+            this.tableLayoutPanelNewCoordinator.Name = "tableLayoutPanelNewCoordinator";
             // 
             // tableLayoutPanelPSr
             // 
             resources.ApplyResources(this.tableLayoutPanelPSr, "tableLayoutPanelPSr");
-            this.tableLayoutPanelNewMaster.SetColumnSpan(this.tableLayoutPanelPSr, 2);
+            this.tableLayoutPanelNewCoordinator.SetColumnSpan(this.tableLayoutPanelPSr, 2);
             this.tableLayoutPanelPSr.Controls.Add(this.pictureBox3, 0, 0);
             this.tableLayoutPanelPSr.Controls.Add(this.labelWarning, 1, 0);
             this.tableLayoutPanelPSr.Name = "tableLayoutPanelPSr";
@@ -335,8 +335,8 @@ namespace XenAdmin.Dialogs
             this.tableLayoutPanelWlb.ResumeLayout(false);
             this.tableLayoutPanelWlb.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            this.tableLayoutPanelNewMaster.ResumeLayout(false);
-            this.tableLayoutPanelNewMaster.PerformLayout();
+            this.tableLayoutPanelNewCoordinator.ResumeLayout(false);
+            this.tableLayoutPanelNewCoordinator.PerformLayout();
             this.tableLayoutPanelPSr.ResumeLayout(false);
             this.tableLayoutPanelPSr.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -360,13 +360,13 @@ namespace XenAdmin.Dialogs
         private System.Windows.Forms.Label vmListLabel;
         private System.Windows.Forms.Label labelBlurb;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.ComboBox NewMasterComboBox;
-        private System.Windows.Forms.Label NewMasterLabel;
-        private System.Windows.Forms.Label labelMasterBlurb;
+        private System.Windows.Forms.ComboBox NewCoordinatorComboBox;
+        private System.Windows.Forms.Label NewCoordinatorLabel;
+        private System.Windows.Forms.Label labelCoordinatorBlurb;
         private System.Windows.Forms.Label lableWLBEnabled;
         private XenAdmin.Controls.DataGridViewEx.DataGridViewEx dataGridViewVms;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelNewMaster;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelNewCoordinator;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelWlb;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Button buttonCheckAgain;
