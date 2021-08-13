@@ -55,7 +55,7 @@ namespace XenAdmin.Actions
             _hostsToRelicense = new List<Host>();
             _hostsToCpuMask = new List<Host>();
             _hostsToAdConfigure = new List<Host>();
-            if (PoolJoinRules.FreeHostPaidMaster(joiningHost, master, false))
+            if (PoolJoinRules.FreeHostPaidCoordinator(joiningHost, master, false))
                 _hostsToRelicense.Add(joiningHost);
             if (!PoolJoinRules.CompatibleCPUs(joiningHost, master, false))
                 _hostsToCpuMask.Add(joiningHost);

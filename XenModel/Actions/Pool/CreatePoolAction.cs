@@ -64,7 +64,7 @@ namespace XenAdmin.Actions
 
             this.Host = master;
             this._supporters = supporters;
-            _hostsToRelicense = supporters.FindAll(h => PoolJoinRules.FreeHostPaidMaster(h, master, false));
+            _hostsToRelicense = supporters.FindAll(h => PoolJoinRules.FreeHostPaidCoordinator(h, master, false));
             _hostsToCpuMask = supporters.FindAll(h => !PoolJoinRules.CompatibleCPUs(h, master, false));
             _hostsToAdConfigure = supporters.FindAll(h => !PoolJoinRules.CompatibleAdConfig(h, master, false));
             this._name = name;

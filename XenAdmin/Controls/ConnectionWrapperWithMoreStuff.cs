@@ -60,7 +60,7 @@ namespace XenAdmin.Controls
         {
             get
             {
-                return reason == PoolJoinRules.Reason.WillBeMaster;
+                return reason == PoolJoinRules.Reason.WillBeCoordinator;
             }
         }
 
@@ -116,8 +116,8 @@ namespace XenAdmin.Controls
             reason = PoolJoinRules.CanJoinPool(Connection, masterConnection, true, true, true);
             this.Description = PoolJoinRules.ReasonMessage(reason);
             this.Enabled = (reason == PoolJoinRules.Reason.Allowed);
-            this.CheckedIfdisabled = (reason == PoolJoinRules.Reason.WillBeMaster);
-            if (reason == PoolJoinRules.Reason.WillBeMaster)
+            this.CheckedIfdisabled = (reason == PoolJoinRules.Reason.WillBeCoordinator);
+            if (reason == PoolJoinRules.Reason.WillBeCoordinator)
                 this.State = CheckState.Checked;
         }
     }

@@ -166,7 +166,7 @@ namespace XenAdmin.Dialogs
                 if (null != supporters.Find(host =>
                     !PoolJoinRules.CompatibleCPUs(host, master, false) &&
                     Helpers.FeatureForbidden(host, Host.RestrictCpuMasking) &&
-                    !PoolJoinRules.FreeHostPaidMaster(host, master, false)))  // in this case we can upgrade the license and then mask the CPU
+                    !PoolJoinRules.FreeHostPaidCoordinator(host, master, false)))  // in this case we can upgrade the license and then mask the CPU
                 {
                     UpsellDialog.ShowUpsellDialog(Messages.UPSELL_BLURB_CPUMASKING, this);
                     return;
