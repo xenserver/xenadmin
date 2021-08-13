@@ -79,7 +79,7 @@ namespace XenAdmin.Diagnostics.Checks
             if (action.Succeeded && action.DiskSpaceRequirements.AvailableDiskSpace < requiredDiskSpace)
                 return new HostOutOfSpaceProblem(this, Host, action.DiskSpaceRequirements);
 
-            // check the disk space for uploading the update files to the pool's SRs (only needs to be done once, so only run this on master)
+            // check the disk space for uploading the update files to the pool's SRs (only needs to be done once, so only run this on the coordinator)
             if (elyOrGreater && Host.IsMaster())
             {
                 var allPatches = updateSequence.Values.SelectMany(p => p).Distinct().ToList();

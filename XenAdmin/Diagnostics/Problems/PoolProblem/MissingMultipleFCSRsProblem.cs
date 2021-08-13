@@ -90,8 +90,8 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
             if (EmptySRDeviceConfigList)
                 return null;
 
-            Host master = pool.Connection.Resolve(pool.master);
-            if (master == null)
+            Host coordinator = pool.Connection.Resolve(pool.master);
+            if (coordinator == null)
                 return null;
 
             List<AsyncAction> subActions = new List<AsyncAction>();

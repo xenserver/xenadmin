@@ -420,7 +420,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             //Checking if a reboot is pending on the coordinator
             var restartChecks = new List<Check>();
             foreach (var pool in SelectedPools)
-                restartChecks.Add(new RestartHostOrToolstackPendingOnMasterCheck(pool, patch == null ? null : patch.uuid));
+                restartChecks.Add(new RestartHostOrToolstackPendingOnCoordinatorCheck(pool, patch == null ? null : patch.uuid));
 
             groups.Add(new CheckGroup(Messages.CHECKING_FOR_PENDING_RESTART, restartChecks));
 
@@ -485,7 +485,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             //Checking if a reboot is pending on the coordinator
              var restartChecks = new List<Check>();
             foreach (var pool in SelectedPools)
-                restartChecks.Add(new RestartHostOrToolstackPendingOnMasterCheck(pool, update == null ? null : update.uuid));
+                restartChecks.Add(new RestartHostOrToolstackPendingOnCoordinatorCheck(pool, update == null ? null : update.uuid));
             groups.Add(new CheckGroup(Messages.CHECKING_FOR_PENDING_RESTART, restartChecks));
 
             return groups;

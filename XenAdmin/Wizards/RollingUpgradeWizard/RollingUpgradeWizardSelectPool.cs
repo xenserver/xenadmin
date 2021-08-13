@@ -315,7 +315,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 Cells.Add(_version);
             }
 
-            protected override void UpdateAdditionalDetailsForPool(Pool pool, Host master)
+            protected override void UpdateAdditionalDetailsForPool(Pool pool, Host coordinator)
             {
                 _description.Value = pool.Description();
                 _version.Value = pool.SmallerVersionHost().ProductVersionTextShort();
