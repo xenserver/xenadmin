@@ -249,37 +249,37 @@ namespace XenAdmin.Actions
         private List<string> RetrieveParams(IXenObject obj)
         {
             IXenConnection connection = obj.Connection;
-            Host master = connection != null ? Helpers.GetCoordinator(connection) : null; // get master asserts connection is not null
-            string masterAddress = EmptyParameter;
+            Host coordinator = connection != null ? Helpers.GetCoordinator(connection) : null; // get master asserts connection is not null
+            string coordinatorAddress = EmptyParameter;
 
-            if (master != null)
+            if (coordinator != null)
             {
-                masterAddress = Helpers.GetUrl(master.Connection);
-                WriteTrustedCertificates(master.Connection);
+                coordinatorAddress = Helpers.GetUrl(coordinator.Connection);
+                WriteTrustedCertificates(coordinator.Connection);
             }
 
             string sessionRef = connection.Session != null ? connection.Session.opaque_ref : EmptyParameter;
             string objCls = obj != null ? obj.GetType().Name : EmptyParameter;
             string objUuid = obj != null && connection.Session != null ? Helpers.GetUuid(obj) : EmptyParameter;
-            return new List<string>(new string[] { masterAddress, sessionRef, objCls, objUuid });
+            return new List<string>(new string[] { coordinatorAddress, sessionRef, objCls, objUuid });
         }
 
         // Returns a set of params which relate to the connection in general, with no obj information
         private List<string> RetrieveParams(IXenConnection connection)
         {
-            Host master = connection != null ? Helpers.GetCoordinator(connection) : null; // get master asserts connection is not null
-            string masterAddress = EmptyParameter;
+            Host coordinator = connection != null ? Helpers.GetCoordinator(connection) : null; // get master asserts connection is not null
+            string coordinatorAddress = EmptyParameter;
 
-            if (master != null)
+            if (coordinator != null)
             {
-                masterAddress = Helpers.GetUrl(master.Connection);
-                WriteTrustedCertificates(master.Connection);
+                coordinatorAddress = Helpers.GetUrl(coordinator.Connection);
+                WriteTrustedCertificates(coordinator.Connection);
             }
 
             string sessionRef = connection.Session != null ? connection.Session.opaque_ref : EmptyParameter;
             string objCls = BlankParamter;
             string objUuid = BlankParamter;
-            return new List<string>(new string[] { masterAddress, sessionRef, objCls, objUuid });
+            return new List<string>(new string[] { coordinatorAddress, sessionRef, objCls, objUuid });
         }
 
         private void WriteTrustedCertificates(IXenConnection connection)
