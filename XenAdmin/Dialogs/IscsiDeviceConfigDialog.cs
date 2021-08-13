@@ -241,11 +241,11 @@ namespace XenAdmin.Dialogs
                     return;
                 }
 
-                Host master = Helpers.GetCoordinator(sr.Connection);
-                if (master != null)
+                Host coordinator = Helpers.GetCoordinator(sr.Connection);
+                if (coordinator != null)
                 {
                     lunInUseLabel.Text = String.Format(Messages.NEWSR_LUN_IN_USE_ON_SERVER,
-                         sr.Name(), master.Name());
+                         sr.Name(), coordinator.Name());
                     return;
                 }
 

@@ -62,10 +62,10 @@ namespace XenAdmin.Dialogs
                     continue;
                 }
 
-                Host master = Helpers.GetCoordinator(connection);
-                if (master != null)
+                Host coordinator = Helpers.GetCoordinator(connection);
+                if (coordinator != null)
                 {
-                    comboBox.Items.Add(master);
+                    comboBox.Items.Add(coordinator);
                     continue;
                 }
             }

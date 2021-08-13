@@ -61,7 +61,7 @@ namespace XenAdmin.Dialogs
             getAllCurrentConnections();
             ConnectionsManager.XenConnections.CollectionChanged += XenConnections_CollectionChanged;
             poolName = string.Empty; //forcing user to enter something before the Next button is enabled
-            selectMaster(host);
+            selectCoordinator(host);
             updateButtons();
         }
 
@@ -71,7 +71,7 @@ namespace XenAdmin.Dialogs
             selectSupporters(hosts);
         }
 
-        private enum InvalidReasons { NONE, EMPTY_POOL_NAME, NO_MASTER, MAX_POOL_SIZE_EXCEEDED };
+        private enum InvalidReasons { NONE, EMPTY_POOL_NAME, NO_COORDINATOR, MAX_POOL_SIZE_EXCEEDED };
         private InvalidReasons validToClose
         {
             get
@@ -80,16 +80,16 @@ namespace XenAdmin.Dialogs
                     return InvalidReasons.EMPTY_POOL_NAME;
 
                 if (comboBoxServers.SelectedIndex < 0)
-                    return InvalidReasons.NO_MASTER;
+                    return InvalidReasons.NO_COORDINATOR;
 
                 if (comboBoxServers.Items.Count <= 0)
-                    return InvalidReasons.NO_MASTER;
+                    return InvalidReasons.NO_COORDINATOR;
 
-                Host master = getMaster();
-                if (master != null)
+                Host coordinator = getCoordinator();
+                if (coordinator != null)
                 {
                     List<Host> supporters = getSupporters();
-                    if (PoolJoinRules.WillExceedPoolMaxSize(master.Connection, supporters.Count))
+                    if (PoolJoinRules.WillExceedPoolMaxSize(coordinator.Connection, supporters.Count))
                         return InvalidReasons.MAX_POOL_SIZE_EXCEEDED;
                 }
 
@@ -116,7 +116,7 @@ namespace XenAdmin.Dialogs
                     buttonCreate.Enabled = true;
                     toolTipContainerCreate.RemoveAll();
                     break;
-                case InvalidReasons.NO_MASTER:
+                case InvalidReasons.NO_COORDINATOR:
                     buttonCreate.Enabled = false;
                     toolTipContainerCreate.SetToolTip(Messages.NO_ELIGIBLE_COORDINATOR);
                     break;
@@ -135,8 +135,8 @@ namespace XenAdmin.Dialogs
         {
             try
             {
-                Host master = getMaster();
-                if (master == null)
+                Host coordinator = getCoordinator();
+                if (coordinator == null)
                 {
                     log.Error("Disconnected during create pool");
                     return;
@@ -144,7 +144,7 @@ namespace XenAdmin.Dialogs
 
                 List<Host> supporters = getSupporters();
                 // Check supp packs and warn
-                List<string> badSuppPacks = PoolJoinRules.HomogeneousSuppPacksDiffering(supporters, master);
+                List<string> badSuppPacks = PoolJoinRules.HomogeneousSuppPacksDiffering(supporters, coordinator);
 
                 if (!Program.RunInAutomatedTestMode && badSuppPacks.Count > 0)
                 {
@@ -164,9 +164,9 @@ namespace XenAdmin.Dialogs
                 // Are there any hosts which are forbidden from masking their CPUs for licensing reasons?
                 // If so, we need to show upsell.
                 if (null != supporters.Find(host =>
-                    !PoolJoinRules.CompatibleCPUs(host, master, false) &&
+                    !PoolJoinRules.CompatibleCPUs(host, coordinator, false) &&
                     Helpers.FeatureForbidden(host, Host.RestrictCpuMasking) &&
-                    !PoolJoinRules.FreeHostPaidCoordinator(host, master, false)))  // in this case we can upgrade the license and then mask the CPU
+                    !PoolJoinRules.FreeHostPaidCoordinator(host, coordinator, false)))  // in this case we can upgrade the license and then mask the CPU
                 {
                     UpsellDialog.ShowUpsellDialog(Messages.UPSELL_BLURB_CPUMASKING, this);
                     return;
@@ -174,7 +174,7 @@ namespace XenAdmin.Dialogs
 
                 if (!Program.RunInAutomatedTestMode)
                 {
-                    var hosts1 = supporters.FindAll(host => PoolJoinRules.FreeHostPaidCoordinator(host, master, false));
+                    var hosts1 = supporters.FindAll(host => PoolJoinRules.FreeHostPaidCoordinator(host, coordinator, false));
                     if (hosts1.Count > 0)
                     {
                         string msg = string.Format(hosts1.Count == 1
@@ -190,7 +190,7 @@ namespace XenAdmin.Dialogs
                         }
                     }
 
-                    var hosts2 = supporters.FindAll(host => !PoolJoinRules.CompatibleCPUs(host, master, false));
+                    var hosts2 = supporters.FindAll(host => !PoolJoinRules.CompatibleCPUs(host, coordinator, false));
                     if (hosts2.Count > 0)
                     {
                         string msg = string.Format(hosts2.Count == 1
@@ -206,7 +206,7 @@ namespace XenAdmin.Dialogs
                         }
                     }
 
-                    var hosts3 = supporters.FindAll(host => !PoolJoinRules.CompatibleAdConfig(host, master, false));
+                    var hosts3 = supporters.FindAll(host => !PoolJoinRules.CompatibleAdConfig(host, coordinator, false));
                     if (hosts3.Count > 0)
                     {
                         string msg = string.Format(hosts3.Count == 1
@@ -223,14 +223,14 @@ namespace XenAdmin.Dialogs
                     }
                 }
 
-                if (!HelpersGUI.GetPermissionForCpuFeatureLevelling(supporters, Helpers.GetPoolOfOne(master.Connection)))
+                if (!HelpersGUI.GetPermissionForCpuFeatureLevelling(supporters, Helpers.GetPoolOfOne(coordinator.Connection)))
                     return;
 
-                log.DebugFormat("Creating new pool {0} ({1}) with master {2}", poolName, poolDescription, Helpers.GetName(master));
+                log.DebugFormat("Creating new pool {0} ({1}) with coordinator {2}", poolName, poolDescription, Helpers.GetName(coordinator));
                 foreach (Host supporter in supporters)
                     log.DebugFormat("Supporter {0}", Helpers.GetName(supporter));
 
-                new CreatePoolAction(master, supporters, poolName, poolDescription, AddHostToPoolCommand.GetAdPrompt, 
+                new CreatePoolAction(coordinator, supporters, poolName, poolDescription, AddHostToPoolCommand.GetAdPrompt, 
                     AddHostToPoolCommand.NtolDialog, ApplyLicenseEditionCommand.ShowLicensingFailureDialog).RunAsync();
             }
             catch (System.Net.WebException exn)
@@ -241,10 +241,10 @@ namespace XenAdmin.Dialogs
 
         private void addConnectionsToListBox()
         {
-            ConnectionWrapperWithMoreStuff master = (comboBoxServers.Items.Count > 0 ? (ConnectionWrapperWithMoreStuff)comboBoxServers.SelectedItem : null);
+            ConnectionWrapperWithMoreStuff coordinator = (comboBoxServers.Items.Count > 0 ? (ConnectionWrapperWithMoreStuff)comboBoxServers.SelectedItem : null);
             foreach (ConnectionWrapperWithMoreStuff c in connections)
             {
-                c.TheCoordinator = master;
+                c.TheCoordinator = coordinator;
                 c.Refresh();
             }
             customTreeViewServers.BeginUpdate();
@@ -310,7 +310,7 @@ namespace XenAdmin.Dialogs
         private void addConnectionsToComboBox()
         {
             comboBoxServers.Items.Clear();
-            ConnectionWrapperWithMoreStuff master = null;
+            ConnectionWrapperWithMoreStuff coordinator = null;
             foreach (ConnectionWrapperWithMoreStuff wrappedConnection in connections)
             {
                 wrappedConnection.Refresh();
@@ -318,26 +318,26 @@ namespace XenAdmin.Dialogs
                 {
                     comboBoxServers.Items.Add(wrappedConnection);
                     if (wrappedConnection.WillBeCoordinator)
-                        master = wrappedConnection;
+                        coordinator = wrappedConnection;
                 }
             }
-            if (master != null)
+            if (coordinator != null)
             {
-                comboBoxServers.SelectedItem = master;
+                comboBoxServers.SelectedItem = coordinator;
             }
             else if (comboBoxServers.Items.Count > 0)
             {
-                ConnectionWrapperWithMoreStuff defaultMaster = comboBoxServers.Items[0] as ConnectionWrapperWithMoreStuff;
-                setAsMaster(defaultMaster);
-                comboBoxServers.SelectedItem = defaultMaster;
+                ConnectionWrapperWithMoreStuff defaultCoordinator = comboBoxServers.Items[0] as ConnectionWrapperWithMoreStuff;
+                setAsCoordinator(defaultCoordinator);
+                comboBoxServers.SelectedItem = defaultCoordinator;
             }
             addConnectionsToListBox();
             updateButtons();
         }
 
-        private void selectMaster(Host master)
+        private void selectCoordinator(Host coordinator)
         {
-            if (master == null || Helpers.GetPool(master.Connection) != null)
+            if (coordinator == null || Helpers.GetPool(coordinator.Connection) != null)
                 return;
             foreach (ConnectionWrapperWithMoreStuff c in connections)
             {
@@ -346,10 +346,10 @@ namespace XenAdmin.Dialogs
             }
             foreach (ConnectionWrapperWithMoreStuff c in connections)
             {
-                if (c.Connection == master.Connection)
+                if (c.Connection == coordinator.Connection)
                 {
                     if (c.CanBeCoordinator)
-                        setAsMaster(c);
+                        setAsCoordinator(c);
                     return;
                 }
             }
@@ -367,27 +367,27 @@ namespace XenAdmin.Dialogs
             }
         }
 
-        private void setAsMaster(ConnectionWrapperWithMoreStuff defaultMaster)
+        private void setAsCoordinator(ConnectionWrapperWithMoreStuff defaultCoordinator)
         {
             foreach (ConnectionWrapperWithMoreStuff connectionWrapper in connections)
-                connectionWrapper.TheCoordinator = defaultMaster;
+                connectionWrapper.TheCoordinator = defaultCoordinator;
 
-            comboBoxServers.SelectedItem = defaultMaster;
+            comboBoxServers.SelectedItem = defaultCoordinator;
             addConnectionsToListBox();
         }
 
-        private Host getMaster()
+        private Host getCoordinator()
         {
-            ConnectionWrapperWithMoreStuff connectionToMaster = null;
+            ConnectionWrapperWithMoreStuff connectionToCoordinator = null;
             foreach (ConnectionWrapperWithMoreStuff connection in connections)
             {
                 if (connection.WillBeCoordinator)
                 {
-                    connectionToMaster = connection;
+                    connectionToCoordinator = connection;
                     break;
                 }
             }
-            return connectionToMaster != null ? Helpers.GetCoordinator(connectionToMaster.Connection) : null;
+            return connectionToCoordinator != null ? Helpers.GetCoordinator(connectionToCoordinator.Connection) : null;
         }
 
         private List<Host> getSupporters()
@@ -405,7 +405,7 @@ namespace XenAdmin.Dialogs
 
         private void comboBoxServers_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            setAsMaster(comboBoxServers.SelectedItem as ConnectionWrapperWithMoreStuff);
+            setAsCoordinator(comboBoxServers.SelectedItem as ConnectionWrapperWithMoreStuff);
         }
 
         private void buttonAddNewServer_Click(object sender, EventArgs e)

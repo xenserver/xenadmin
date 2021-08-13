@@ -512,7 +512,7 @@ namespace XenAdmin.Dialogs
         private void NewCoordinatorComboBox_DrawItem(object sender, DrawItemEventArgs e)
         {
             var backColor = NewCoordinatorComboBox.Enabled ? NewCoordinatorComboBox.BackColor : SystemColors.Control;
-
+            
             using (SolidBrush backBrush = new SolidBrush(backColor))
                 e.Graphics.FillRectangle(backBrush, e.Bounds);
 
@@ -606,11 +606,11 @@ namespace XenAdmin.Dialogs
 
         private void EvacuateButton_Click(object sender, EventArgs e)
         {
-            var newMaster = tableLayoutPanelNewCoordinator.Visible
+            var newCoordinator = tableLayoutPanelNewCoordinator.Visible
                 ? NewCoordinatorComboBox.SelectedItem as ToStringWrapper<Host>
                 : null;
 
-            hostAction = new EvacuateHostAction(_host, newMaster?.item,
+            hostAction = new EvacuateHostAction(_host, newCoordinator?.item,
                 reasons ?? new Dictionary<XenRef<VM>, string[]>(),
                 AddHostToPoolCommand.NtolDialog, AddHostToPoolCommand.EnableNtolDialog);
 
