@@ -1250,7 +1250,7 @@ namespace XenAdmin.Network
                         lock (ConnectionsManager.ConnectionsLock)
                         {
                             pool = ObjectChange.GetPool(eventQueue, out PoolOpaqueRef);
-                            Host master = ObjectChange.GetMaster(eventQueue);
+                            Host master = ObjectChange.GetCoordinator(eventQueue);
 
                             MasterIPAddress = master.address;
 
