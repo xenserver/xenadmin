@@ -326,7 +326,7 @@ namespace XenAdmin.Alerts
 
         private string GetManagementBondName()
         {
-            Bond bond = NetworkingHelper.GetMasterManagementBond(Connection);
+            Bond bond = NetworkingHelper.GetCoordinatorManagementBond(Connection);
             return bond == null ? Messages.UNKNOWN : bond.Name();
         }
 

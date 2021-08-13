@@ -45,13 +45,13 @@ namespace XenAdmin.Network
         /// </summary>
         /// <param name="conn"></param>
         /// <returns></returns>
-        public static Bond GetMasterManagementBond(IXenConnection conn)
+        public static Bond GetCoordinatorManagementBond(IXenConnection conn)
         {
-            PIF pif = GetMasterManagementPIF(conn);
+            PIF pif = GetCoordinatorManagementPIF(conn);
             return pif == null ? null : pif.BondMasterOf();
         }
 
-        private static PIF GetMasterManagementPIF(IXenConnection conn)
+        private static PIF GetCoordinatorManagementPIF(IXenConnection conn)
         {
             Host host = Helpers.GetCoordinator(conn);
             return host == null ? null : GetManagementPIF(host);
@@ -123,18 +123,18 @@ namespace XenAdmin.Network
         /// Given a list of PIFs on the pool coordinator, return a Dictionary mapping each host in the pool to a corresponding list of PIFs on that
         /// host. The PIFs lists will be sorted by name too.
         /// </summary>
-        /// <param name="PIFs_on_master"></param>
+        /// <param name="PIFs_on_coordinator"></param>
         /// <returns></returns>
-        public static Dictionary<Host, List<PIF>> PIFsOnAllHosts(List<PIF> PIFs_on_master)
+        public static Dictionary<Host, List<PIF>> PIFsOnAllHosts(List<PIF> PIFs_on_coordinator)
         {
             Dictionary<Host, List<PIF>> result = new Dictionary<Host, List<PIF>>();
 
-            if (PIFs_on_master.Count == 0)
+            if (PIFs_on_coordinator.Count == 0)
                 return result;
 
-            IXenConnection conn = PIFs_on_master[0].Connection;
+            IXenConnection conn = PIFs_on_coordinator[0].Connection;
 
-            List<string> devices = GetDevices(PIFs_on_master);
+            List<string> devices = GetDevices(PIFs_on_coordinator);
 
             foreach (Host host in conn.Cache.Hosts)
             {
@@ -176,8 +176,8 @@ namespace XenAdmin.Network
         {
             foreach (Bond b in host.Connection.Cache.Bonds)
             {
-                PIF master = host.Connection.Resolve(b.master);
-                if (master != null && master.host.opaque_ref == host.opaque_ref && BondMatches(b, bond))
+                PIF bondInterface = host.Connection.Resolve(b.master);
+                if (bondInterface != null && bondInterface.host.opaque_ref == host.opaque_ref && BondMatches(b, bond))
                     return b;
             }
             return null;
