@@ -39,34 +39,34 @@ namespace XenAdmin.Dialogs.RestoreSession
 {
     public partial class EnterMainPasswordDialog : XenDialogBase
     {
-        private readonly byte[] _temporaryMasterPassword;
+        private readonly byte[] _temporaryMainPassword;
 
-        public EnterMainPasswordDialog(byte[] temporaryMasterPassword)
+        public EnterMainPasswordDialog(byte[] temporaryMainPassword)
         {
             InitializeComponent();
-            _temporaryMasterPassword = temporaryMasterPassword;
+            _temporaryMainPassword = temporaryMainPassword;
             passwordError.Visible = false;
         }
 
         private void okButton_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(masterTextBox.Text) &&
-                Helpers.ArrayElementsEqual(EncryptionUtils.ComputeHash(masterTextBox.Text), _temporaryMasterPassword))
+            if (!string.IsNullOrEmpty(mainTextBox.Text) &&
+                Helpers.ArrayElementsEqual(EncryptionUtils.ComputeHash(mainTextBox.Text), _temporaryMainPassword))
             {
                 DialogResult = DialogResult.OK;
             }
             else
             {
                 passwordError.Visible = true;
-                masterTextBox.Focus();
-                masterTextBox.SelectAll();
+                mainTextBox.Focus();
+                mainTextBox.SelectAll();
             }
         }
 
-        private void masterTextBox_TextChanged(object sender, EventArgs e)
+        private void mainTextBox_TextChanged(object sender, EventArgs e)
         {
             passwordError.Visible = false;
-            okButton.Enabled = !string.IsNullOrEmpty(masterTextBox.Text);
+            okButton.Enabled = !string.IsNullOrEmpty(mainTextBox.Text);
         }
     }
 }

@@ -31,8 +31,8 @@ namespace XenAdmin.Dialogs.RestoreSession
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EnterMainPasswordDialog));
             this.okButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
-            this.masterTextBox = new System.Windows.Forms.TextBox();
-            this.masterBlurbLabel = new System.Windows.Forms.Label();
+            this.mainTextBox = new System.Windows.Forms.TextBox();
+            this.mainBlurbLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.passwordError = new XenAdmin.Controls.Common.PasswordFailure();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -53,20 +53,20 @@ namespace XenAdmin.Dialogs.RestoreSession
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.UseVisualStyleBackColor = true;
             // 
-            // masterTextBox
+            // mainTextBox
             // 
-            resources.ApplyResources(this.masterTextBox, "masterTextBox");
-            this.tableLayoutPanel1.SetColumnSpan(this.masterTextBox, 3);
-            this.masterTextBox.Name = "masterTextBox";
-            this.masterTextBox.UseSystemPasswordChar = true;
-            this.masterTextBox.TextChanged += new System.EventHandler(this.masterTextBox_TextChanged);
+            resources.ApplyResources(this.mainTextBox, "mainTextBox");
+            this.tableLayoutPanel1.SetColumnSpan(this.mainTextBox, 3);
+            this.mainTextBox.Name = "mainTextBox";
+            this.mainTextBox.UseSystemPasswordChar = true;
+            this.mainTextBox.TextChanged += new System.EventHandler(this.masterTextBox_TextChanged);
             // 
-            // masterBlurbLabel
+            // mainBlurbLabel
             // 
-            resources.ApplyResources(this.masterBlurbLabel, "masterBlurbLabel");
-            this.tableLayoutPanel1.SetColumnSpan(this.masterBlurbLabel, 3);
-            this.masterBlurbLabel.Name = "masterBlurbLabel";
-            this.masterBlurbLabel.UseMnemonic = false;
+            resources.ApplyResources(this.mainBlurbLabel, "mainBlurbLabel");
+            this.tableLayoutPanel1.SetColumnSpan(this.mainBlurbLabel, 3);
+            this.mainBlurbLabel.Name = "mainBlurbLabel";
+            this.mainBlurbLabel.UseMnemonic = false;
             // 
             // label1
             // 
@@ -83,9 +83,9 @@ namespace XenAdmin.Dialogs.RestoreSession
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.masterBlurbLabel, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.mainBlurbLabel, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.masterTextBox, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.mainTextBox, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.passwordError, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.okButton, 2, 3);
             this.tableLayoutPanel1.Controls.Add(this.cancelButton, 3, 3);
@@ -110,8 +110,8 @@ namespace XenAdmin.Dialogs.RestoreSession
 
         private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.Button cancelButton;
-        private System.Windows.Forms.TextBox masterTextBox;
-        private System.Windows.Forms.Label masterBlurbLabel;
+        private System.Windows.Forms.TextBox mainTextBox;
+        private System.Windows.Forms.Label mainBlurbLabel;
         private System.Windows.Forms.Label label1;
         private XenAdmin.Controls.Common.PasswordFailure passwordError;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
