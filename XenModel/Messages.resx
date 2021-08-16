@@ -3200,7 +3200,7 @@ Would you like to carry out the operation at this time?</value>
     <value>Connected to {0}</value>
   </data>
   <data name="CONNECTION_REDIRECTING" xml:space="preserve">
-    <value>Connection to {0}: redirecting to the pool master at {1}</value>
+    <value>Connection to {0}: redirecting to the pool coordinator at {1}</value>
   </data>
   <data name="CONNECTION_REFUSED" xml:space="preserve">
     <value>The connection was refused.</value>
@@ -5526,13 +5526,13 @@ Would you like to eject these ISOs before continuing?</value>
     <value>{0} Eject the CD</value>
   </data>
   <data name="EVACUATE_HOST_CLUSER_CREATING" xml:space="preserve">
-    <value>You cannot nominate a new master while the pool is in the process of creating a cluster.</value>
+    <value>You cannot nominate a new coordinator while the pool is in the process of creating a cluster.</value>
   </data>
   <data name="EVACUATE_HOST_HA_DISABLING" xml:space="preserve">
-    <value>You cannot nominate a new master while HA is being disabled on the pool.</value>
+    <value>You cannot nominate a new coordinator while HA is being disabled on the pool.</value>
   </data>
   <data name="EVACUATE_HOST_HA_ENABLING" xml:space="preserve">
-    <value>You cannot nominate a new master while HA is being enabled on the pool.</value>
+    <value>You cannot nominate a new coordinator while HA is being enabled on the pool.</value>
   </data>
   <data name="EVACUATE_HOST_INSTALL_MGMNT_PROMPT" xml:space="preserve">
     <value>{0} Install Management Agent</value>
@@ -8384,7 +8384,7 @@ This action is final and unrecoverable.</value>
     <value>Writing password information failed: {0}</value>
   </data>
   <data name="MESSAGEBOX_POOL_DELETE" xml:space="preserve">
-    <value>The pool Master will become a standalone server, are you sure you want to continue?</value>
+    <value>The pool Coordinator will become a standalone server, are you sure you want to continue?</value>
   </data>
   <data name="MESSAGEBOX_POOL_COORDINATOR_REMOVE" xml:space="preserve">
     <value>You cannot remove the coordinator from the pool.</value>
@@ -8761,16 +8761,16 @@ You should only proceed if you have verified that these settings are correct.</v
     <value>This server has different updates from servers already in the pool</value>
   </data>
   <data name="NEWPOOL_DIFFERENT_NETWORK_BACKENDS" xml:space="preserve">
-    <value>This server's network backend is different from the master's</value>
+    <value>This server's network backend is different from the coordinator's</value>
   </data>
   <data name="NEWPOOL_DIFFERING_AD_CONFIG" xml:space="preserve">
-    <value>This server has a different Active Directory configuration to the master</value>
+    <value>This server has a different Active Directory configuration to the coordinator</value>
   </data>
   <data name="NEWPOOL_DIFF_HARDWARE" xml:space="preserve">
-    <value>This server's hardware is incompatible with the master's</value>
+    <value>This server's hardware is incompatible with the coordinator's</value>
   </data>
   <data name="NEWPOOL_DIFF_SERVER" xml:space="preserve">
-    <value>This server is a different version to the master</value>
+    <value>This server is a different version to the coordinator</value>
   </data>
   <data name="NEWPOOL_HAS_RUNNING_VMS" xml:space="preserve">
     <value>This server has running VMs</value>
@@ -8785,16 +8785,16 @@ You should only proceed if you have verified that these settings are correct.</v
     <value>This server needs to have one (and only one) IP address on the network that will be used for clustering.</value>
   </data>
   <data name="NEWPOOL_IS_A_POOL" xml:space="preserve">
-    <value>This server is master of an existing pool</value>
+    <value>This server is coordinator of an existing pool</value>
   </data>
   <data name="NEWPOOL_LICENSED_HOST_UNLICENSED_COORDINATOR" xml:space="preserve">
     <value>You cannot add a licensed server to an unlicensed pool</value>
   </data>
   <data name="NEWPOOL_LICENSEMISMATCH" xml:space="preserve">
-    <value>This server does not have the same license as the pool master</value>
+    <value>This server does not have the same license as the pool coordinator</value>
   </data>
   <data name="NEWPOOL_LINUXPACK" xml:space="preserve">
-    <value>This server's Linux pack installation state differs from that of the master</value>
+    <value>This server's Linux pack installation state differs from that of the coordinator</value>
   </data>
   <data name="NEWPOOL_COORDINATOR_CONNECTING" xml:space="preserve">
     <value>The coordinator is still connecting</value>
@@ -9436,44 +9436,44 @@ Once the VM has restarted click the Install {0} menu item once again.</value>
     <value>&amp;New Policy...</value>
   </data>
   <data name="NEW_POOL_AD_MESSAGE" xml:space="preserve">
-    <value>You are attempting to add the server '{0}' to a pool with a master that is configured to use AD authentication. All pool members must use the same authentication method.
+    <value>You are attempting to add the server '{0}' to a pool with a coordinator that is configured to use AD authentication. All pool members must use the same authentication method.
 
 Do you want to enable AD authentication on your server and join it to the same domain as the pool?</value>
   </data>
   <data name="NEW_POOL_AD_MESSAGE_MULTIPLE" xml:space="preserve">
-    <value>You are attempting to add the following servers to a pool with a master that is configured to use AD authentication:
+    <value>You are attempting to add the following servers to a pool with a coordinator that is configured to use AD authentication:
 
 {0}
 
 All pool members must use the same authentication method. Do you want to enable AD authentication on these servers and join them to the same domain as the pool?</value>
   </data>
   <data name="NEW_POOL_CPU_MASKING_MESSAGE" xml:space="preserve">
-    <value>You are attempting to add the server '{0}' to a pool with a master that is using an older CPU.
+    <value>You are attempting to add the server '{0}' to a pool with a coordinator that is using an older CPU.
 
-{1} can continue by rebooting the server and reducing its CPU to the level of the master. This will shut down any VMs running on the server. This feature is supported for CPU combinations listed in the {1} Hardware Compatibility List.
+{1} can continue by rebooting the server and reducing its CPU to the level of the coordinator. This will shut down any VMs running on the server. This feature is supported for CPU combinations listed in the {1} Hardware Compatibility List.
 
 Do you want to do this?</value>
   </data>
   <data name="NEW_POOL_CPU_MASKING_MESSAGE_MULTIPLE" xml:space="preserve">
-    <value>You are attempting to add the following servers to a pool with a master that is using an older CPU:
+    <value>You are attempting to add the following servers to a pool with a coordinator that is using an older CPU:
 
 {0}
 
-{1} can continue by rebooting the servers and reducing their CPUs to the level of the master. This will shut down any VMs running on the servers. This feature is supported for CPU combinations listed in the {1} Hardware Compatibility List.
+{1} can continue by rebooting the servers and reducing their CPUs to the level of the coordinator. This will shut down any VMs running on the servers. This feature is supported for CPU combinations listed in the {1} Hardware Compatibility List.
 
 Do you want to do this?</value>
   </data>
   <data name="NEW_POOL_LICENSE_MESSAGE" xml:space="preserve">
     <value>You are attempting to add the server '{0}' to a licensed pool.
 
-Do you want to apply the licensing from the master to this server?</value>
+Do you want to apply the licensing from the coordinator to this server?</value>
   </data>
   <data name="NEW_POOL_LICENSE_MESSAGE_MULTIPLE" xml:space="preserve">
     <value>You are attempting to add the following servers to a licensed pool.
 
 {0}
 
-Do you want to apply the licensing from the master to these servers?</value>
+Do you want to apply the licensing from the coordinator to these servers?</value>
   </data>
   <data name="NEW_POOL_SUPP_PACK" xml:space="preserve">
     <value>The following supplemental pack should be installed on all servers in a pool, but currently is not:
@@ -10009,13 +10009,13 @@ This will cancel the update process and may leave your system in an unstable sta
     <value>No action required</value>
   </data>
   <data name="PATCHINGWIZARD_MODEPAGE_RESTARTSERVERS" xml:space="preserve">
-    <value>Restart these servers in this order (master always first):</value>
+    <value>Restart these servers in this order (coordinator always first):</value>
   </data>
   <data name="PATCHINGWIZARD_MODEPAGE_RESTARTVMS" xml:space="preserve">
     <value>Restart these VMs:</value>
   </data>
   <data name="PATCHINGWIZARD_MODEPAGE_RESTARTXAPI" xml:space="preserve">
-    <value>Restart toolstack on these servers in this order (master always first):</value>
+    <value>Restart toolstack on these servers in this order (coordinator always first):</value>
   </data>
   <data name="PATCHINGWIZARD_MODEPAGE_TEXT" xml:space="preserve">
     <value>Update Mode</value>
@@ -11331,7 +11331,7 @@ Check the boot order in the server and reboot again.</value>
 
 To skip this server and continue to the next server in the pool, click Skip This Server. Note that running a pool with servers on different versions of {0} is not supported, and so any servers that are not upgraded during this rolling pool upgrade should be upgraded as soon as possible afterwards.
 
-The master must be upgraded first, so if you skip the master, the rolling pool upgrade will be canceled for this pool.
+The coordinator must be upgraded first, so if you skip the coordinator, the rolling pool upgrade will be canceled for this pool.
 </value>
   </data>
   <data name="ROLLING_UPGRADE_SUCCESS_MANY" xml:space="preserve">
@@ -11610,7 +11610,7 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
     <value>Querying server capabilities...</value>
   </data>
   <data name="SERVER_TIME" xml:space="preserve">
-    <value>The current time on the pool master is: {0}</value>
+    <value>The current time on the pool coordinator is: {0}</value>
   </data>
   <data name="SERVER_TOO_OLD" xml:space="preserve">
     <value>This version of {0} supports {1} {2} onwards.</value>
@@ -13397,7 +13397,7 @@ To optimize VM performance, you should reduce the number of VCPUs to less than o
     <value>Create the new schedule</value>
   </data>
   <data name="VMSS_HOST_NOT_LIVE" xml:space="preserve">
-    <value>Pool master unreachable</value>
+    <value>Pool coordinator unreachable</value>
   </data>
   <data name="VMSS_INVALID_SCHEDULE" xml:space="preserve">
     <value>Invalid or incomplete schedule</value>

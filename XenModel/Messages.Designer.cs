@@ -8876,7 +8876,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Connection to {0}: redirecting to the pool master at {1}.
+        ///   Looks up a localized string similar to Connection to {0}: redirecting to the pool coordinator at {1}.
         /// </summary>
         public static string CONNECTION_REDIRECTING {
             get {
@@ -15750,7 +15750,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You cannot nominate a new master while the pool is in the process of creating a cluster..
+        ///   Looks up a localized string similar to You cannot nominate a new coordinator while the pool is in the process of creating a cluster..
         /// </summary>
         public static string EVACUATE_HOST_CLUSER_CREATING {
             get {
@@ -15777,7 +15777,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You cannot nominate a new master while HA is being disabled on the pool..
+        ///   Looks up a localized string similar to You cannot nominate a new coordinator while HA is being disabled on the pool..
         /// </summary>
         public static string EVACUATE_HOST_HA_DISABLING {
             get {
@@ -15786,7 +15786,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You cannot nominate a new master while HA is being enabled on the pool..
+        ///   Looks up a localized string similar to You cannot nominate a new coordinator while HA is being enabled on the pool..
         /// </summary>
         public static string EVACUATE_HOST_HA_ENABLING {
             get {
@@ -24166,7 +24166,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The pool Master will become a standalone server, are you sure you want to continue?.
+        ///   Looks up a localized string similar to The pool Coordinator will become a standalone server, are you sure you want to continue?.
         /// </summary>
         public static string MESSAGEBOX_POOL_DELETE {
             get {
@@ -25276,7 +25276,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You are attempting to add the server &apos;{0}&apos; to a pool with a master that is configured to use AD authentication. All pool members must use the same authentication method.
+        ///   Looks up a localized string similar to You are attempting to add the server &apos;{0}&apos; to a pool with a coordinator that is configured to use AD authentication. All pool members must use the same authentication method.
         ///
         ///Do you want to enable AD authentication on your server and join it to the same domain as the pool?.
         /// </summary>
@@ -25287,7 +25287,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You are attempting to add the following servers to a pool with a master that is configured to use AD authentication:
+        ///   Looks up a localized string similar to You are attempting to add the following servers to a pool with a coordinator that is configured to use AD authentication:
         ///
         ///{0}
         ///
@@ -25309,9 +25309,9 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You are attempting to add the server &apos;{0}&apos; to a pool with a master that is using an older CPU.
+        ///   Looks up a localized string similar to You are attempting to add the server &apos;{0}&apos; to a pool with a coordinator that is using an older CPU.
         ///
-        ///{1} can continue by rebooting the server and reducing its CPU to the level of the master. This will shut down any VMs running on the server. This feature is supported for CPU combinations listed in the {1} Hardware Compatibility List.
+        ///{1} can continue by rebooting the server and reducing its CPU to the level of the coordinator. This will shut down any VMs running on the server. This feature is supported for CPU combinations listed in the {1} Hardware Compatibility List.
         ///
         ///Do you want to do this?.
         /// </summary>
@@ -25322,11 +25322,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You are attempting to add the following servers to a pool with a master that is using an older CPU:
+        ///   Looks up a localized string similar to You are attempting to add the following servers to a pool with a coordinator that is using an older CPU:
         ///
         ///{0}
         ///
-        ///{1} can continue by rebooting the servers and reducing their CPUs to the level of the master. This will shut down any VMs running on the servers. This feature is supported for CPU combinations listed in the {1} Hardware Compatibility List.
+        ///{1} can continue by rebooting the servers and reducing their CPUs to the level of the coordinator. This will shut down any VMs running on the servers. This feature is supported for CPU combinations listed in the {1} Hardware Compatibility List.
         ///
         ///Do you want to do this?.
         /// </summary>
@@ -25339,7 +25339,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to You are attempting to add the server &apos;{0}&apos; to a licensed pool.
         ///
-        ///Do you want to apply the licensing from the master to this server?.
+        ///Do you want to apply the licensing from the coordinator to this server?.
         /// </summary>
         public static string NEW_POOL_LICENSE_MESSAGE {
             get {
@@ -25352,7 +25352,7 @@ namespace XenAdmin {
         ///
         ///{0}
         ///
-        ///Do you want to apply the licensing from the master to these servers?.
+        ///Do you want to apply the licensing from the coordinator to these servers?.
         /// </summary>
         public static string NEW_POOL_LICENSE_MESSAGE_MULTIPLE {
             get {
@@ -25676,7 +25676,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This server&apos;s hardware is incompatible with the master&apos;s.
+        ///   Looks up a localized string similar to This server&apos;s hardware is incompatible with the coordinator&apos;s.
         /// </summary>
         public static string NEWPOOL_DIFF_HARDWARE {
             get {
@@ -25685,7 +25685,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This server is a different version to the master.
+        ///   Looks up a localized string similar to This server is a different version to the coordinator.
         /// </summary>
         public static string NEWPOOL_DIFF_SERVER {
             get {
@@ -25712,7 +25712,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This server&apos;s network backend is different from the master&apos;s.
+        ///   Looks up a localized string similar to This server&apos;s network backend is different from the coordinator&apos;s.
         /// </summary>
         public static string NEWPOOL_DIFFERENT_NETWORK_BACKENDS {
             get {
@@ -25721,7 +25721,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This server has a different Active Directory configuration to the master.
+        ///   Looks up a localized string similar to This server has a different Active Directory configuration to the coordinator.
         /// </summary>
         public static string NEWPOOL_DIFFERING_AD_CONFIG {
             get {
@@ -25766,7 +25766,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This server is master of an existing pool.
+        ///   Looks up a localized string similar to This server is coordinator of an existing pool.
         /// </summary>
         public static string NEWPOOL_IS_A_POOL {
             get {
@@ -25784,7 +25784,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This server does not have the same license as the pool master.
+        ///   Looks up a localized string similar to This server does not have the same license as the pool coordinator.
         /// </summary>
         public static string NEWPOOL_LICENSEMISMATCH {
             get {
@@ -25793,7 +25793,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This server&apos;s Linux pack installation state differs from that of the master.
+        ///   Looks up a localized string similar to This server&apos;s Linux pack installation state differs from that of the coordinator.
         /// </summary>
         public static string NEWPOOL_LINUXPACK {
             get {
@@ -29034,7 +29034,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Restart these servers in this order (master always first):.
+        ///   Looks up a localized string similar to Restart these servers in this order (coordinator always first):.
         /// </summary>
         public static string PATCHINGWIZARD_MODEPAGE_RESTARTSERVERS {
             get {
@@ -29052,7 +29052,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Restart toolstack on these servers in this order (master always first):.
+        ///   Looks up a localized string similar to Restart toolstack on these servers in this order (coordinator always first):.
         /// </summary>
         public static string PATCHINGWIZARD_MODEPAGE_RESTARTXAPI {
             get {
@@ -33486,7 +33486,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The current time on the pool master is: {0}.
+        ///   Looks up a localized string similar to The current time on the pool coordinator is: {0}.
         /// </summary>
         public static string SERVER_TIME {
             get {
@@ -39509,7 +39509,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pool master unreachable.
+        ///   Looks up a localized string similar to Pool coordinator unreachable.
         /// </summary>
         public static string VMSS_HOST_NOT_LIVE {
             get {
