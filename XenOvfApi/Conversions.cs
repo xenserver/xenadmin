@@ -156,7 +156,7 @@ namespace XenOvf
 
         public EnvelopeType ConvertPhysicaltoOVF(DiskInfo[] vhdExports, string pathToOvf, string ovfName)
         {
-            return ConvertPhysicaltoOVF(vhdExports, pathToOvf, ovfName, Properties.Settings.Default.Language);
+            return ConvertPhysicaltoOVF(vhdExports, pathToOvf, ovfName, LANGUAGE);
         }
 
         public EnvelopeType ConvertPhysicaltoOVF(DiskInfo[] vhdExports, string pathToOvf, string ovfName, string lang)
@@ -417,7 +417,7 @@ namespace XenOvf
                                     rasd.Caption.Value.ToLower().StartsWith(_ovfrm.GetString("RASD_19_CAPTION").ToLower()))
                                 {
                                     string filename = Path.GetFileName(rasd.Connection[0].Value);
-                                    AddFileReference(env, lang, filename, rasd.InstanceID.Value, 0, Properties.Settings.Default.winFileFormatURI);
+                                    AddFileReference(env, lang, filename, rasd.InstanceID.Value, 0, WIN_FILE_FORMAT_URI);
                                     AddRasd(env, systemId, rasd);
                                 }
                                 else if (rasd.ResourceType.Value == 10)
@@ -703,7 +703,7 @@ namespace XenOvf
 
         private void AddVssd(EnvelopeType ovfEnv, string vsId, string vhsId)
         {
-            AddVssd(ovfEnv, vsId, vhsId, Properties.Settings.Default.Language);
+            AddVssd(ovfEnv, vsId, vhsId, LANGUAGE);
         }
 
         private void AddVssd(EnvelopeType ovfEnv, string vsId, string vhsId, string lang)
@@ -768,7 +768,7 @@ namespace XenOvf
 
         private void AddNetworks(EnvelopeType ovfEnv, string vsId)
         {
-            AddNetworks(ovfEnv, vsId, Properties.Settings.Default.Language);
+            AddNetworks(ovfEnv, vsId, LANGUAGE);
         }
 
         private void AddNetworks(EnvelopeType ovfEnv, string vsId, string lang)
@@ -866,7 +866,7 @@ namespace XenOvf
 
         private void AddCPUs(EnvelopeType ovfEnv, string vsId)
         {
-            AddCPUs(ovfEnv, vsId, Properties.Settings.Default.Language);
+            AddCPUs(ovfEnv, vsId, LANGUAGE);
         }
 
         private void AddCPUs(EnvelopeType ovfEnv, string vsId, string lang)
@@ -905,7 +905,7 @@ namespace XenOvf
 
         private void AddMemory(EnvelopeType ovfEnv, string vsId)
         {
-            AddMemory(ovfEnv, vsId, Properties.Settings.Default.Language);
+            AddMemory(ovfEnv, vsId, LANGUAGE);
         }
 
         private void AddMemory(EnvelopeType ovfEnv, string vsId, string lang)
@@ -942,7 +942,7 @@ namespace XenOvf
 
         private void CreateConnectedDevices(EnvelopeType ovfEnv, string vsId, DiskInfo[] vhdExports)
         {
-            CreateConnectedDevices(ovfEnv, vsId, Properties.Settings.Default.Language, vhdExports);
+            CreateConnectedDevices(ovfEnv, vsId, LANGUAGE, vhdExports);
         }
 
         private void CreateConnectedDevices(EnvelopeType ovfEnv, string vsId, string lang, DiskInfo[] vhdExports)

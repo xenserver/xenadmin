@@ -132,7 +132,6 @@
     <Compile Include="XenOvf\FileDigestTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="TestResources\emptyfile.bz2">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

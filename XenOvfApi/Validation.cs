@@ -41,6 +41,9 @@ namespace XenOvf
 {
     public partial class OVF
     {
+        //TODO: does it need to be configurabe by XenAdmin?
+        private const int DEFAULT_VALIDATION_FLAGS = 63;
+
         /// <summary>
         /// Binary flags describing things to validate
         /// </summary>
@@ -86,6 +89,34 @@ namespace XenOvf
             ".vhd", ".pvp", ".vmdk", ".mf", ".cert", ".xva", ".ovf", ".wim", ".vdi", ".sdi", ".iso", ".gz"
         };
 
+        private static readonly string[] KnownVirtualSystemTypes =
+        {
+            "xen-3.0-unknown",
+            "xen-3.0-x32",
+            "xen-3.0-x86",
+            "xen-3.0-x64",
+            "hvm-3.0-unknown",
+            "hvm-3.0-x32",
+            "hvm-3.0-x86",
+            "hvm-3.0-x64",
+            "hvm-3.0-hvm",
+            "301",
+            "vmx-4",
+            "vmx-04",
+            "vmx-6",
+            "vmx-06",
+            "vmx-7",
+            "vmx-07",
+            "DMTF:xen:pv",
+            "DMTF:xen:hvm",
+            "virtualbox-2.2"
+        };
+
+        private static readonly string[] KnownVersions =
+        {
+            "0.9", "1.0", "1.0.0", "1.0.0a", "1.0.0.b", "1.0.0c", "1.0.0d", "1.0.1", "1.0.0e"
+        };
+
 
         public static bool Validate(Package package, out List<string> warnings)
         {
@@ -100,7 +131,7 @@ namespace XenOvf
 
             log.InfoFormat("Started validation of package {0}", package.Name);
 
-            var validationFlags = (ValidationFlags)Properties.Settings.Default.RequiredValidations;
+            var validationFlags = (ValidationFlags)DEFAULT_VALIDATION_FLAGS;
 
             if (validationFlags.HasFlag(ValidationFlags.Version))
                 ValidateVersion(ovfEnv, ref warnings);
@@ -165,7 +196,7 @@ namespace XenOvf
                         continue;
 
                     var hardwareType = vhs.System?.VirtualSystemType?.Value;
-                    if (hardwareType != null && !Properties.Settings.Default.knownVirtualSystemTypes.Contains(hardwareType))
+                    if (hardwareType != null && !KnownVirtualSystemTypes.Contains(hardwareType))
                     {
                         log.Warn($"Found unexpected virtual hardware type {hardwareType}.");
                         warnings.Add(string.Format(Messages.VALIDATION_UNKNOWN_HARDWARE_TYPE, hardwareType));
@@ -231,7 +262,7 @@ namespace XenOvf
                 warnings.Add(string.Format(Messages.VALIDATION_VERSION_UNSET, ovfEnv.version));
                 ovfEnv.version = "1.0.0";
             }
-            else if (!Properties.Settings.Default.Versions.Contains(ovfEnv.version))
+            else if (!KnownVersions.Contains(ovfEnv.version))
             {
                 warnings.Add(string.Format(Messages.VALIDATION_VERSION_INVALID, ovfEnv.version));
                 log.WarnFormat($"OVF version {ovfEnv.version} is not supported.");
