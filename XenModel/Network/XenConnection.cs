@@ -98,11 +98,11 @@ namespace XenAdmin.Network
         }
 
         /// <summary>
-        /// Indicates whether we are expecting the pool coordinator to change soon (e.g. when explicitly designating a new master).
+        /// Indicates whether we are expecting the pool coordinator to change soon (e.g. when explicitly designating a new coordinator).
         /// </summary>
-        private volatile bool _masterMayChange = false;
+        private volatile bool _coordinatorMayChange = false;
 
-        public bool MasterMayChange { get { return _masterMayChange; } set { _masterMayChange = value; } }
+        public bool CoordinatorMayChange { get { return _coordinatorMayChange; } set { _coordinatorMayChange = value; } }
 
         /// <summary>
         /// Set when we detect that Event.next() has become blocked and we need to reset the connection. See CA-33145.
@@ -117,7 +117,7 @@ namespace XenAdmin.Network
         /// <summary>
         /// Set after a successful connection attempt, before the cache is populated.
         /// </summary>
-        private string MasterIPAddress = "";
+        private string CoordinatorIPAddress = "";
 
         /// <summary>
         /// The lock that must be taken around connectTask and monitor.
@@ -131,19 +131,19 @@ namespace XenAdmin.Network
         /// Note: I think we are not using this correctly -- see CA-37864 for details -- but I'm not going
         /// to fix it unless it gives rise to a reported bug, because I can't test the fix.
         /// </summary>
-        private volatile bool FindingNewMaster = false;
+        private volatile bool FindingNewCoordinator = false;
 
         /// <summary>
         /// The time at which we started looking for the new coordinator.
         /// </summary>
-        private DateTime FindingNewMasterStartedAt = DateTime.MinValue;
+        private DateTime FindingNewCoordinatorStartedAt = DateTime.MinValue;
 
         /// <summary>
         /// Timeout before we consider that Event.next() has got blocked: see CA-33145
         /// </summary>
         private const int EVENT_NEXT_TIMEOUT = 120 * 1000;  // 2 minutes
 
-        private string LastMasterHostname = "";
+        private string LastCoordinatorHostname = "";
         public readonly object PoolMembersLock = new object();
         private List<string> _poolMembers = new List<string>();
         public List<string> PoolMembers { get { return _poolMembers; } set { _poolMembers = value; } }
@@ -460,7 +460,7 @@ namespace XenAdmin.Network
                                 }
                                 break;
                             case Failure.HOST_IS_SLAVE:
-                                // we know it is a supporter so there there is no need to try and connect again, we need to connect to the master
+                                // we know it is a supporter so there there is no need to try and connect again, we need to connect to the coordinator
                             case Failure.RBAC_PERMISSION_DENIED:
                                 // No point retrying this, the user needs the read only role at least to log in
                             case Failure.HOST_UNKNOWN_TO_MASTER:
@@ -584,10 +584,10 @@ namespace XenAdmin.Network
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="initiateMasterSearch">If true, if connection to the coordinator fails we will start trying to connect to
+        /// <param name="initiateCoordinatorSearch">If true, if connection to the coordinator fails we will start trying to connect to
         /// each remembered supporter in turn.</param>
         /// <param name="promptForNewPassword">A function that prompts the user for the changed password for a server.</param>
-        public void BeginConnect(bool initiateMasterSearch, Func<IXenConnection, string, bool> promptForNewPassword)
+        public void BeginConnect(bool initiateCoordinatorSearch, Func<IXenConnection, string, bool> promptForNewPassword)
         {
             _promptForNewPassword = promptForNewPassword;
 
@@ -596,12 +596,12 @@ namespace XenAdmin.Network
             
             InvokeHelper.AssertOnEventThread();
 
-            if (initiateMasterSearch)
+            if (initiateCoordinatorSearch)
             {
-                FindingNewMaster = true;
-                FindingNewMasterStartedAt = DateTime.Now;
+                FindingNewCoordinator = true;
+                FindingNewCoordinatorStartedAt = DateTime.Now;
             }
-            MasterMayChange = false;
+            CoordinatorMayChange = false;
 
             if (!HandlePromptForNewPassword())
                 return;
@@ -1250,9 +1250,9 @@ namespace XenAdmin.Network
                         lock (ConnectionsManager.ConnectionsLock)
                         {
                             pool = ObjectChange.GetPool(eventQueue, out PoolOpaqueRef);
-                            Host master = ObjectChange.GetCoordinator(eventQueue);
+                            Host coordinator = ObjectChange.GetCoordinator(eventQueue);
 
-                            MasterIPAddress = master.address;
+                            CoordinatorIPAddress = coordinator.address;
 
                             foreach (IXenConnection iconn in ConnectionsManager.XenConnections)
                             {
@@ -1266,9 +1266,9 @@ namespace XenAdmin.Network
                                 if (!sameRef)
                                     continue;
 
-                                bool sameMaster = MasterIPAddress == connection.MasterIPAddress;
+                                bool sameCoordinator = CoordinatorIPAddress == connection.CoordinatorIPAddress;
 
-                                if (sameRef && sameMaster)
+                                if (sameRef && sameCoordinator)
                                 {
                                     throw new ConnectionExists(connection);
                                 }
@@ -1287,8 +1287,8 @@ namespace XenAdmin.Network
                             
                             FriendlyName = !string.IsNullOrEmpty(poolName)
                                 ? poolName
-                                : !string.IsNullOrEmpty(master.Name())
-                                    ? master.Name()
+                                : !string.IsNullOrEmpty(coordinator.Name())
+                                    ? coordinator.Name()
                                     : task.Hostname;
                         } // ConnectionsLock
 
@@ -1451,28 +1451,28 @@ namespace XenAdmin.Network
                     }
 
                     // We only want to continue the coordinator search in certain circumstances
-                    if (FindingNewMaster && (error is WebException || (f != null && f.ErrorDescription[0] != Failure.RBAC_PERMISSION_DENIED)))
+                    if (FindingNewCoordinator && (error is WebException || (f != null && f.ErrorDescription[0] != Failure.RBAC_PERMISSION_DENIED)))
                     {
                         if (f != null)
                         {
                             if (f.ErrorDescription[0] == XenAPI.Failure.HOST_IS_SLAVE)
                             {
-                                log.DebugFormat("Found a member of {0} at {1}; redirecting to the master at {2}",
-                                                LastMasterHostname, Hostname, f.ErrorDescription[1]);
+                                log.DebugFormat("Found a member of {0} at {1}; redirecting to the coordinator at {2}",
+                                                LastCoordinatorHostname, Hostname, f.ErrorDescription[1]);
                                 Hostname = f.ErrorDescription[1];
-                                OnConnectionMessageChanged(string.Format(Messages.CONNECTION_REDIRECTING, LastMasterHostname, Hostname));
-                                ReconnectMaster();
+                                OnConnectionMessageChanged(string.Format(Messages.CONNECTION_REDIRECTING, LastCoordinatorHostname, Hostname));
+                                ReconnectCoordinator();
                             }
                             else if (f.ErrorDescription[0] == XenAPI.Failure.HOST_STILL_BOOTING)
                             {
                                 log.DebugFormat("Found a member of {0} at {1}, but it's still booting; trying the next pool member",
-                                                LastMasterHostname, Hostname);
+                                                LastCoordinatorHostname, Hostname);
                                 MaybeStartNextPoolMemberTimer(reason, error);
                             }
                             else
                             {
                                 log.DebugFormat("Found a member of {0} at {1}, but got a failure; trying the next pool member",
-                                                LastMasterHostname, Hostname);
+                                                LastCoordinatorHostname, Hostname);
                                 MaybeStartNextPoolMemberTimer(reason, error);
                             }
                         }
@@ -1483,7 +1483,7 @@ namespace XenAdmin.Network
                         }
                         else
                         {
-                            if (ExpectDisruption || DateTime.Now - FindingNewMasterStartedAt < SEARCH_NEW_MASTER_STOP_AFTER)
+                            if (ExpectDisruption || DateTime.Now - FindingNewCoordinatorStartedAt < SEARCH_NEW_COORDINATOR_STOP_AFTER)
                             {
                                 log.DebugFormat("While trying to find a connection for {0}, tried to connect to every remembered host. Will now loop back through pool members again.",
                                     this.HostnameWithPort);
@@ -1493,13 +1493,13 @@ namespace XenAdmin.Network
                                 }
                                 MaybeStartNextPoolMemberTimer(reason, error);
                             }
-                            else if (LastMasterHostname != "")
+                            else if (LastCoordinatorHostname != "")
                             {
-                                log.DebugFormat("Stopping search for new master for {0}: timeout reached without success. Trying the old master one last time",
+                                log.DebugFormat("Stopping search for new coordinator for {0}: timeout reached without success. Trying the old master one last time",
                                                 LastConnectionFullName);
-                                FindingNewMaster = false;
-                                Hostname = LastMasterHostname;
-                                ReconnectMaster();
+                                FindingNewCoordinator = false;
+                                Hostname = LastCoordinatorHostname;
+                                ReconnectCoordinator();
                             }
                             else
                             {
@@ -1515,9 +1515,9 @@ namespace XenAdmin.Network
             }
         }
 
-        private void SetServerTimeOffset(Session session, string master_opaqueref)
+        private void SetServerTimeOffset(Session session, string coordinator_opaqueref)
         {
-            DateTime t = Host.get_servertime(session, master_opaqueref);
+            DateTime t = Host.get_servertime(session, coordinator_opaqueref);
             ServerTimeOffset = DateTime.UtcNow - t;
         }
 
@@ -1546,7 +1546,7 @@ namespace XenAdmin.Network
             }
 
             // Save coordinator's address so we don't try to reconnect to it first
-            Host master = Helpers.GetCoordinator(this);
+            Host coordinator = Helpers.GetCoordinator(this);
             // Save ha_enabled status before we clear the cache
             bool ha_enabled = IsHAEnabled();
 
@@ -1554,7 +1554,7 @@ namespace XenAdmin.Network
             EndConnect(true, task, false);
 
             string description;
-            LastMasterHostname = Hostname;
+            LastCoordinatorHostname = Hostname;
             string poolName = pool.Name();
             if (string.IsNullOrEmpty(poolName))
             {
@@ -1564,7 +1564,7 @@ namespace XenAdmin.Network
             {
                 LastConnectionFullName = string.Format("'{0}' ({1})", poolName, HostnameWithPort);
             }
-            if (!EventNextBlocked && (MasterMayChange || ha_enabled) && members.Count > 1)
+            if (!EventNextBlocked && (CoordinatorMayChange || ha_enabled) && members.Count > 1)
             {
                 log.DebugFormat("Will now try to connect to another pool member");
 
@@ -1574,17 +1574,17 @@ namespace XenAdmin.Network
                     PoolMembers.AddRange(members);
                     PoolMemberIndex = 0;
                     // Don't reconnect to the coordinator straight away, try a supporter first
-                    if (master != null && PoolMembers[0] == master.address && PoolMembers.Count > 1)
+                    if (coordinator != null && PoolMembers[0] == coordinator.address && PoolMembers.Count > 1)
                     {
                         PoolMemberIndex = 1;
                     }
                 }
-                FindingNewMaster = true;
+                FindingNewCoordinator = true;
                 // Record the time at which we started the new coordinator search.
-                FindingNewMasterStartedAt = DateTime.Now;
-                StartReconnectMasterTimer();
-                description = string.Format(Messages.CONNECTION_LOST_NOTICE_COORDINATOR_IN_X_SECONDS, LastConnectionFullName, XenConnection.SEARCH_NEW_MASTER_TIMEOUT_MS / 1000);
-                log.DebugFormat("Beginning search for new coordinator; will give up after {0} seconds", SEARCH_NEW_MASTER_STOP_AFTER.TotalSeconds);
+                FindingNewCoordinatorStartedAt = DateTime.Now;
+                StartReconnectCoordinatorTimer();
+                description = string.Format(Messages.CONNECTION_LOST_NOTICE_COORDINATOR_IN_X_SECONDS, LastConnectionFullName, XenConnection.SEARCH_NEW_COORDINATOR_TIMEOUT_MS / 1000);
+                log.DebugFormat("Beginning search for new coordinator; will give up after {0} seconds", SEARCH_NEW_COORDINATOR_STOP_AFTER.TotalSeconds);
             }
             else
             {
@@ -1633,12 +1633,12 @@ namespace XenAdmin.Network
         }
 
         /// <summary>
-        /// When HA is enabled, the timeout after losing connection to the coordinator before we start searching for a new master.
+        /// When HA is enabled, the timeout after losing connection to the coordinator before we start searching for a new coordinator.
         /// i.e. This should be the time it takes coordinator failover to be sorted out on the server, plus a margin.
         /// NB we already have an additional built-in delay - it takes time for us to decide that the host is not responding,
         /// and stop the connection to the dead host, before starting the search.
         /// </summary>
-        private const int SEARCH_NEW_MASTER_TIMEOUT_MS = 60 * 1000;
+        private const int SEARCH_NEW_COORDINATOR_TIMEOUT_MS = 60 * 1000;
         /// <summary>
         /// When HA is enabled, and going through each of the supporters to try and find the new coordinator, the time between failing
         /// to connect to one supporter and trying to connect to the next in the list.
@@ -1648,7 +1648,7 @@ namespace XenAdmin.Network
         /// When going through each of the remembered members of the pool looking for the new coordinator, don't start another pass
         /// through connecting to each of the hosts if we've already been looking for this long.
         /// </summary>
-        private static readonly TimeSpan SEARCH_NEW_MASTER_STOP_AFTER = TimeSpan.FromMinutes(6);
+        private static readonly TimeSpan SEARCH_NEW_COORDINATOR_STOP_AFTER = TimeSpan.FromMinutes(6);
 
         private void StartReconnectSingleHostTimer()
         {
@@ -1657,24 +1657,24 @@ namespace XenAdmin.Network
                 ReconnectHostTimeoutMs, ReconnectHostTimeoutMs);
         }
 
-        private void StartReconnectMasterTimer()
+        private void StartReconnectCoordinatorTimer()
         {
-            StartReconnectMasterTimer(SEARCH_NEW_MASTER_TIMEOUT_MS);
+            StartReconnectCoordinatorTimer(SEARCH_NEW_COORDINATOR_TIMEOUT_MS);
         }
 
         private void MaybeStartNextPoolMemberTimer(string reason, Exception error)
         {
             if (PoolMemberRemaining())
-                StartReconnectMasterTimer(SEARCH_NEXT_SUPPORTER_TIMEOUT_MS);
+                StartReconnectCoordinatorTimer(SEARCH_NEXT_SUPPORTER_TIMEOUT_MS);
            else
                 OnConnectionResult(false, reason, error); 
         }
 
-        private void StartReconnectMasterTimer(int timeout)
+        private void StartReconnectCoordinatorTimer(int timeout)
         {
             OnConnectionMessageChanged(string.Format(Messages.CONNECTION_WILL_RETRY_SUPPORTER, LastConnectionFullName.Ellipsise(25) , timeout / 1000));
             ReconnectionTimer =
-                new System.Threading.Timer((TimerCallback)ReconnectMasterTimer, null,
+                new System.Threading.Timer((TimerCallback)ReconnectCoordinatorTimer, null,
                                            timeout, Timeout.Infinite);
         }
 
@@ -1713,11 +1713,11 @@ namespace XenAdmin.Network
             }
         }
 
-        private void ReconnectMasterTimer(object state)
+        private void ReconnectCoordinatorTimer(object state)
         {
             if (IsConnected || !ConnectionsManager.XenConnectionsContains(this))
             {
-                log.DebugFormat("Coordinator has been found for {0} at {1}", LastMasterHostname, Hostname);
+                log.DebugFormat("Coordinator has been found for {0} at {1}", LastCoordinatorHostname, Hostname);
                 return;
             }
 
@@ -1731,10 +1731,10 @@ namespace XenAdmin.Network
             }
 
             OnConnectionMessageChanged(string.Format(Messages.CONNECTION_RETRYING_SUPPORTER, LastConnectionFullName.Ellipsise(25), Hostname));
-            ReconnectMaster();
+            ReconnectCoordinator();
         }
 
-        private void ReconnectMaster()
+        private void ReconnectCoordinator()
         {
             // Add an informational entry to the log
             string title = string.Format(Messages.CONNECTION_FINDING_COORDINATOR_TITLE, LastConnectionFullName);
@@ -1927,11 +1927,11 @@ namespace XenAdmin.Network
                     if (pool == null)
                         continue;
 
-                    Host master = connection.Resolve(pool.master);
-                    if (master == null)
+                    Host coordinator = connection.Resolve(pool.master);
+                    if (coordinator == null)
                         continue;
 
-                    if (master.address == hostname)
+                    if (coordinator.address == hostname)
                     {
                         // we have tried to connect to a supporter that is a member of a pool we are already connected to.
                         return pool.Name();

@@ -157,7 +157,7 @@ namespace XenServerHealthCheck
             string timestring = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
 
             // Collect all coordinator/supporter information to output as a separate text file with the report
-            List<string> mastersInfo = new List<string>();
+            List<string> coordinatorInfo = new List<string>();
 
             int i = 0;
             Pool p = Helpers.GetPool(connection);
@@ -166,12 +166,12 @@ namespace XenServerHealthCheck
                 // coordinator/supporter information
                 if (p == null)
                 {
-                    mastersInfo.Add(string.Format("Server '{0}' is a stand alone server",
+                    coordinatorInfo.Add(string.Format("Server '{0}' is a stand alone server",
                         host.Name()));
                 }
                 else
                 {
-                    mastersInfo.Add(string.Format("Server '{0}' is a {1} of pool '{2}'",
+                    coordinatorInfo.Add(string.Format("Server '{0}' is a {1} of pool '{2}'",
                         host.Name(),
                         p.master.opaque_ref == host.opaque_ref ? "master" : "supporter",
                         p.Name()));
@@ -182,8 +182,8 @@ namespace XenServerHealthCheck
             }
 
             // output the supporter/coordinator info
-            string mastersDestination = string.Format("{0}\\{1}-Masters.txt", filepath, timestring);
-            WriteExtraInfoToFile(mastersInfo, mastersDestination);
+            string coordinatorsDestination = string.Format("{0}\\{1}-Coordinators.txt", filepath, timestring);
+            WriteExtraInfoToFile(coordinatorInfo, coordinatorsDestination);
             
             // output the XenCenter metadata
             var metadata = XenAdminConfigManager.Provider.GetXenCenterMetadata(false);

@@ -115,7 +115,7 @@ namespace XenAdmin.XenSearch
         uptime,
         /// <summary>true if HA is enabled, false otherwise</summary>
         ha_enabled,
-        /// <summary>true if at least one of the supporters has different XenServer version from the master, false otherwise</summary>
+        /// <summary>true if at least one of the supporters has different XenServer version from the coordinator, false otherwise</summary>
         isNotFullyUpgraded,
 		/// <summary>A logical set of VMs</summary>
 		appliance,
@@ -591,11 +591,11 @@ namespace XenAdmin.XenSearch
             Pool pool = Helpers.GetPool(o.Connection);
             if (pool == null)
                 return null;
-            Host master = Helpers.GetCoordinator(pool.Connection);
-            if (master == null)
+            Host coordinator = Helpers.GetCoordinator(pool.Connection);
+            if (coordinator == null)
                 return null;
 
-            return Helpers.GetFriendlyLicenseName(master);
+            return Helpers.GetFriendlyLicenseName(coordinator);
         }
 
         private static IComparable SharedProperty(IXenObject o)

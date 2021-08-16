@@ -150,16 +150,16 @@ namespace XenServerHealthCheck
                 {
                     if (exn is Failure && ((Failure)exn).ErrorDescription[0] == Failure.HOST_IS_SLAVE)
                     {
-                        string masterName = ((Failure)exn).ErrorDescription[1];
-                        if (ServerListHelper.instance.UpdateServerCredential(server, masterName))
+                        string coordinatorName = ((Failure)exn).ErrorDescription[1];
+                        if (ServerListHelper.instance.UpdateServerCredential(server, coordinatorName))
                         {
-                            log.InfoFormat("Refresh credential to master {0} need refresh connection", masterName);
-                            server.HostName = masterName;
+                            log.InfoFormat("Refresh credential to master {0} need refresh connection", coordinatorName);
+                            server.HostName = coordinatorName;
                             needReconnect = true;
                         }
                         else
                         {
-                            log.InfoFormat("Remove credential since it is the supporter of coordiantor {0}", masterName);
+                            log.InfoFormat("Remove credential since it is the supporter of coordiantor {0}", coordinatorName);
                             if (session != null)
                                 session.logout();
                             log.Error(exn, exn);

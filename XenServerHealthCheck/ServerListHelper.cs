@@ -126,14 +126,14 @@ namespace XenServerHealthCheck
             }
         }
 
-        public bool UpdateServerCredential(ServerInfo server, string masterName)
+        public bool UpdateServerCredential(ServerInfo server, string coordinatorName)
         {
             lock (serverListLock)
             {
                 bool needRefresh = true;
                 foreach (ServerInfo con in serverList)
                 {
-                    if (masterName == con.HostName)
+                    if (coordinatorName == con.HostName)
                     {
                         needRefresh = false;
                         break;
@@ -143,7 +143,7 @@ namespace XenServerHealthCheck
                 serverList.Remove(server);
                 if (needRefresh)
                 {
-                    server.HostName = masterName;
+                    server.HostName = coordinatorName;
                     serverList.Add(server);
                 }
                 

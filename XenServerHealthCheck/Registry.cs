@@ -46,18 +46,18 @@ namespace XenServerHealthCheck
         {
             try
             {
-                RegistryKey masterKey = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(HEALTH_CHECK_LOCAL_KEYS);
-                if (masterKey == null)
+                RegistryKey mainKey = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(HEALTH_CHECK_LOCAL_KEYS);
+                if (mainKey == null)
                     return null;
 
                 try
                 {
-                    var v = masterKey.GetValue(k);
+                    var v = mainKey.GetValue(k);
                     return (v != null) ? v.ToString() : null;
                 }
                 finally
                 {
-                    masterKey.Close();
+                    mainKey.Close();
                 }
             }
             catch (Exception e)
@@ -76,13 +76,13 @@ namespace XenServerHealthCheck
         {
             try
             {
-                RegistryKey masterKey = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(HEALTH_CHECK_LOCAL_KEYS);
-                if (masterKey == null)
+                RegistryKey mainKey = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(HEALTH_CHECK_LOCAL_KEYS);
+                if (mainKey == null)
                     return 0;
 
                 try
                 {
-                    object v = masterKey.GetValue(k);
+                    object v = mainKey.GetValue(k);
                     if (v == null)
                         return 0;
                     else
@@ -90,7 +90,7 @@ namespace XenServerHealthCheck
                 }
                 finally
                 {
-                    masterKey.Close();
+                    mainKey.Close();
                 }
             }
             catch (Exception e)

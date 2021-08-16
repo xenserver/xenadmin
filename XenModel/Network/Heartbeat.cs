@@ -177,10 +177,10 @@ namespace XenAdmin.Network
 
         private void GetServerTime()
         {
-            Host master = Helpers.GetCoordinator(connection);
-            if (master == null)
+            Host coordinator = Helpers.GetCoordinator(connection);
+            if (coordinator == null)
                 return;
-            DateTime t = Host.get_servertime(session, master.opaque_ref);
+            DateTime t = Host.get_servertime(session, coordinator.opaque_ref);
             connection.ServerTimeOffset = DateTime.UtcNow - t;
         }
 
