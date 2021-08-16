@@ -59,7 +59,7 @@ namespace XenAdmin.Dialogs.RestoreSession
             this.tableLayoutPanel1.SetColumnSpan(this.mainTextBox, 3);
             this.mainTextBox.Name = "mainTextBox";
             this.mainTextBox.UseSystemPasswordChar = true;
-            this.mainTextBox.TextChanged += new System.EventHandler(this.masterTextBox_TextChanged);
+            this.mainTextBox.TextChanged += new System.EventHandler(this.mainTextBox_TextChanged);
             // 
             // mainBlurbLabel
             // 

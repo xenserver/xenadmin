@@ -108,7 +108,7 @@ namespace XenAdmin
                 return;
             }
 
-            Program.MasterPassword = null;
+            Program.MainPassword = null;
 
             if (Properties.Settings.Default.SaveSession || Properties.Settings.Default.RequirePass)
             {
@@ -143,7 +143,7 @@ namespace XenAdmin
                     if (password == null)
                         RestoreSessionWithPassword(null, false); //if the user has cancelled start a new session
                     else
-                        Program.MasterPassword = EncryptionUtils.ComputeHash(password);
+                        Program.MainPassword = EncryptionUtils.ComputeHash(password);
                 }
                 else
                 {
@@ -453,7 +453,7 @@ namespace XenAdmin
                 entryStr += SEPARATOR.ToString();
                 entryStr += members;
             }
-            return Properties.Settings.Default.RequirePass && Program.MasterPassword != null ? EncryptionUtils.EncryptString(entryStr, Program.MasterPassword) : EncryptionUtils.Protect(entryStr);
+            return Properties.Settings.Default.RequirePass && Program.MainPassword != null ? EncryptionUtils.EncryptString(entryStr, Program.MainPassword) : EncryptionUtils.Protect(entryStr);
         }
 
         public static AutoCompleteStringCollection GetServerHistory()
