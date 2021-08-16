@@ -7221,18 +7221,18 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to Changed {0} main password.
         /// </summary>
-        public static string CHANGED_MASTER_PASSWORD {
+        public static string CHANGED_MAIN_PASSWORD {
             get {
-                return ResourceManager.GetString("CHANGED_MASTER_PASSWORD", resourceCulture);
+                return ResourceManager.GetString("CHANGED_MAIN_PASSWORD", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Changed {0} main password for session restore.
         /// </summary>
-        public static string CHANGED_MASTER_PASSWORD_LONG {
+        public static string CHANGED_MAIN_PASSWORD_LONG {
             get {
-                return ResourceManager.GetString("CHANGED_MASTER_PASSWORD_LONG", resourceCulture);
+                return ResourceManager.GetString("CHANGED_MAIN_PASSWORD_LONG", resourceCulture);
             }
         }
         
@@ -37435,20 +37435,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Upgrade coordinator {0}.
+        /// </summary>
+        public static string UPGRADE_COORDINATOR {
+            get {
+                return ResourceManager.GetString("UPGRADE_COORDINATOR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Upgrade host {0}.
         /// </summary>
         public static string UPGRADE_HOST {
             get {
                 return ResourceManager.GetString("UPGRADE_HOST", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Upgrade main {0}.
-        /// </summary>
-        public static string UPGRADE_MASTER {
-            get {
-                return ResourceManager.GetString("UPGRADE_MASTER", resourceCulture);
             }
         }
         

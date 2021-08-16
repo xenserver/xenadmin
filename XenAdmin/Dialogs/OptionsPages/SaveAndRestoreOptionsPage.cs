@@ -87,8 +87,8 @@ namespace XenAdmin.Dialogs.OptionsPages
                 if (Program.MasterPassword != TemporaryMasterPassword) 
                 {
                     Program.MasterPassword = TemporaryMasterPassword;
-                    new ActionBase(string.Format(Messages.CHANGED_MASTER_PASSWORD, BrandManager.BrandConsole),
-                        string.Format(Messages.CHANGED_MASTER_PASSWORD_LONG, BrandManager.BrandConsole),
+                    new ActionBase(string.Format(Messages.CHANGED_MAIN_PASSWORD, BrandManager.BrandConsole),
+                        string.Format(Messages.CHANGED_MAIN_PASSWORD_LONG, BrandManager.BrandConsole),
                         false, true);
                 }
             }

@@ -2581,10 +2581,10 @@ This will cancel compilation of the status report.</value>
   <data name="CHANGE" xml:space="preserve">
     <value>Change...</value>
   </data>
-  <data name="CHANGED_MASTER_PASSWORD" xml:space="preserve">
+  <data name="CHANGED_MAIN_PASSWORD" xml:space="preserve">
     <value>Changed {0} main password</value>
   </data>
-  <data name="CHANGED_MASTER_PASSWORD_LONG" xml:space="preserve">
+  <data name="CHANGED_MAIN_PASSWORD_LONG" xml:space="preserve">
     <value>Changed {0} main password for session restore</value>
   </data>
   <data name="CHANGED_SERVER_CD" xml:space="preserve">
@@ -12966,8 +12966,8 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
   <data name="UPGRADE_HOST" xml:space="preserve">
     <value>Upgrade host {0}</value>
   </data>
-  <data name="UPGRADE_MASTER" xml:space="preserve">
-    <value>Upgrade main {0}</value>
+  <data name="UPGRADE_COORDINATOR" xml:space="preserve">
+    <value>Upgrade coordinator {0}</value>
   </data>
   <data name="UPGRADE_PLAN" xml:space="preserve">
     <value>Apply Upgrade</value>
