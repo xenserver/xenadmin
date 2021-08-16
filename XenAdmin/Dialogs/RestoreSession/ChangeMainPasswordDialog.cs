@@ -56,12 +56,12 @@ namespace XenAdmin.Dialogs.RestoreSession
             currentPasswordError.Visible = false;
         }
 
-        private void masterTextBox_TextChanged(object sender, EventArgs e)
+        private void mainTextBox_TextChanged(object sender, EventArgs e)
         {
             newPasswordError.Visible = false;
         }
 
-        private void reEnterMasterTextBox_TextChanged(object sender, EventArgs e)
+        private void reEnterMainTextBox_TextChanged(object sender, EventArgs e)
         {
             newPasswordError.Visible = false;
         }
@@ -71,17 +71,17 @@ namespace XenAdmin.Dialogs.RestoreSession
             var currentPasswordCorrect = !string.IsNullOrEmpty(currentTextBox.Text) &&
                                      Helpers.ArrayElementsEqual(EncryptionUtils.ComputeHash(currentTextBox.Text), _currentPasswordHash);
 
-            if (currentPasswordCorrect && !string.IsNullOrEmpty(masterTextBox.Text) &&
-                masterTextBox.Text == reEnterMasterTextBox.Text)
+            if (currentPasswordCorrect && !string.IsNullOrEmpty(mainTextBox.Text) &&
+                mainTextBox.Text == reEnterMainTextBox.Text)
             {
-                NewPassword = EncryptionUtils.ComputeHash(masterTextBox.Text);
+                NewPassword = EncryptionUtils.ComputeHash(mainTextBox.Text);
                 DialogResult = DialogResult.OK;
                 return;
             }
 
             if (!currentPasswordCorrect)
                 currentPasswordError.ShowError(Messages.PASSWORD_INCORRECT);
-            else if (masterTextBox.Text != reEnterMasterTextBox.Text)
+            else if (mainTextBox.Text != reEnterMainTextBox.Text)
                 newPasswordError.ShowError(Messages.PASSWORDS_DONT_MATCH);
             else
                 newPasswordError.ShowError(Messages.PASSWORDS_EMPTY);
