@@ -37,11 +37,11 @@ using XenCenterLib;
 
 namespace XenAdmin.Dialogs.RestoreSession
 {
-    public partial class ChangeMasterPasswordDialog : XenDialogBase
+    public partial class ChangeMainPasswordDialog : XenDialogBase
     {
         private readonly byte[] _currentPasswordHash;
 
-        public ChangeMasterPasswordDialog(byte[] currentPasswordHash)
+        public ChangeMainPasswordDialog(byte[] currentPasswordHash)
         {
             InitializeComponent();
             _currentPasswordHash = currentPasswordHash;

@@ -31,47 +31,42 @@
 
 using System;
 using System.Windows.Forms;
+using XenAdmin.Core;
 using XenCenterLib;
 
 
 namespace XenAdmin.Dialogs.RestoreSession
 {
-    public partial class SetMasterPasswordDialog : XenDialogBase
+    public partial class EnterMainPasswordDialog : XenDialogBase
     {
-        public SetMasterPasswordDialog()
+        private readonly byte[] _temporaryMasterPassword;
+
+        public EnterMainPasswordDialog(byte[] temporaryMasterPassword)
         {
             InitializeComponent();
-            newPasswordError.Visible = false;
-        }
-
-        public byte[] NewPassword { get; private set; }
-
-        private void masterTextBox_TextChanged(object sender, EventArgs e)
-        {
-            newPasswordError.Visible = false;
-        }
-
-        private void reEnterMasterTextBox_TextChanged(object sender, EventArgs e)
-        {
-            newPasswordError.Visible = false;
+            _temporaryMasterPassword = temporaryMasterPassword;
+            passwordError.Visible = false;
         }
 
         private void okButton_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(masterTextBox.Text) && masterTextBox.Text == reEnterMasterTextBox.Text)
+            if (!string.IsNullOrEmpty(masterTextBox.Text) &&
+                Helpers.ArrayElementsEqual(EncryptionUtils.ComputeHash(masterTextBox.Text), _temporaryMasterPassword))
             {
-                NewPassword = EncryptionUtils.ComputeHash(masterTextBox.Text);
                 DialogResult = DialogResult.OK;
-                return;
             }
-
-            if (masterTextBox.Text != reEnterMasterTextBox.Text)
-                newPasswordError.ShowError(Messages.PASSWORDS_DONT_MATCH);
             else
-                newPasswordError.ShowError(Messages.PASSWORDS_EMPTY);
+            {
+                passwordError.Visible = true;
+                masterTextBox.Focus();
+                masterTextBox.SelectAll();
+            }
+        }
 
-            masterTextBox.Focus();
-            masterTextBox.SelectAll();
+        private void masterTextBox_TextChanged(object sender, EventArgs e)
+        {
+            passwordError.Visible = false;
+            okButton.Enabled = !string.IsNullOrEmpty(masterTextBox.Text);
         }
     }
 }

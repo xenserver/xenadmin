@@ -101,7 +101,7 @@ namespace XenAdmin.Dialogs.OptionsPages
         private void changeMasterPasswordButton_Click(object sender, EventArgs e)
         {
             // tell the dialog what to use as the "current" password
-            using (var changePassword = new ChangeMasterPasswordDialog(TemporaryMasterPassword))
+            using (var changePassword = new ChangeMainPasswordDialog(TemporaryMasterPassword))
             {
                 if (changePassword.ShowDialog(this) == DialogResult.OK)
                 {
@@ -119,7 +119,7 @@ namespace XenAdmin.Dialogs.OptionsPages
 
             if (requireMasterPasswordCheckBox.Checked)
             {
-                using (var enterPassword = new EnterMasterPasswordDialog(TemporaryMasterPassword))
+                using (var enterPassword = new EnterMainPasswordDialog(TemporaryMasterPassword))
                 {
                     if (enterPassword.ShowDialog(this) == DialogResult.OK)
                     {
@@ -136,7 +136,7 @@ namespace XenAdmin.Dialogs.OptionsPages
                 if (TemporaryMasterPassword == null)
                 {
                     // no previous password existed => set a new one
-                    using (var setPassword = new SetMasterPasswordDialog())
+                    using (var setPassword = new SetMainPasswordDialog())
                     {
                         if (setPassword.ShowDialog(this) == DialogResult.OK)
                         {
@@ -167,7 +167,7 @@ namespace XenAdmin.Dialogs.OptionsPages
 
             if (saveStateCheckBox.Checked && requireMasterPasswordCheckBox.Checked)
             {
-                using (var enterPassword = new EnterMasterPasswordDialog(TemporaryMasterPassword))
+                using (var enterPassword = new EnterMainPasswordDialog(TemporaryMasterPassword))
                 {
                     if (enterPassword.ShowDialog(this) == DialogResult.OK)
                     {

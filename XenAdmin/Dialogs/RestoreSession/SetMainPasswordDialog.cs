@@ -31,42 +31,47 @@
 
 using System;
 using System.Windows.Forms;
-using XenAdmin.Core;
 using XenCenterLib;
 
 
 namespace XenAdmin.Dialogs.RestoreSession
 {
-    public partial class EnterMasterPasswordDialog : XenDialogBase
+    public partial class SetMainPasswordDialog : XenDialogBase
     {
-        private readonly byte[] _temporaryMasterPassword;
-
-        public EnterMasterPasswordDialog(byte[] temporaryMasterPassword)
+        public SetMainPasswordDialog()
         {
             InitializeComponent();
-            _temporaryMasterPassword = temporaryMasterPassword;
-            passwordError.Visible = false;
+            newPasswordError.Visible = false;
+        }
+
+        public byte[] NewPassword { get; private set; }
+
+        private void masterTextBox_TextChanged(object sender, EventArgs e)
+        {
+            newPasswordError.Visible = false;
+        }
+
+        private void reEnterMasterTextBox_TextChanged(object sender, EventArgs e)
+        {
+            newPasswordError.Visible = false;
         }
 
         private void okButton_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(masterTextBox.Text) &&
-                Helpers.ArrayElementsEqual(EncryptionUtils.ComputeHash(masterTextBox.Text), _temporaryMasterPassword))
+            if (!string.IsNullOrEmpty(masterTextBox.Text) && masterTextBox.Text == reEnterMasterTextBox.Text)
             {
+                NewPassword = EncryptionUtils.ComputeHash(masterTextBox.Text);
                 DialogResult = DialogResult.OK;
+                return;
             }
-            else
-            {
-                passwordError.Visible = true;
-                masterTextBox.Focus();
-                masterTextBox.SelectAll();
-            }
-        }
 
-        private void masterTextBox_TextChanged(object sender, EventArgs e)
-        {
-            passwordError.Visible = false;
-            okButton.Enabled = !string.IsNullOrEmpty(masterTextBox.Text);
+            if (masterTextBox.Text != reEnterMasterTextBox.Text)
+                newPasswordError.ShowError(Messages.PASSWORDS_DONT_MATCH);
+            else
+                newPasswordError.ShowError(Messages.PASSWORDS_EMPTY);
+
+            masterTextBox.Focus();
+            masterTextBox.SelectAll();
         }
     }
 }

@@ -1,6 +1,6 @@
 namespace XenAdmin.Dialogs.RestoreSession
 {
-    partial class EnterMasterPasswordDialog
+    partial class EnterMainPasswordDialog
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@ namespace XenAdmin.Dialogs.RestoreSession
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EnterMasterPasswordDialog));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EnterMainPasswordDialog));
             this.okButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.masterTextBox = new System.Windows.Forms.TextBox();
@@ -92,14 +92,14 @@ namespace XenAdmin.Dialogs.RestoreSession
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.TabStop = true;
             // 
-            // EnterMasterPasswordDialog
+            // EnterMainPasswordDialog
             // 
             this.AcceptButton = this.okButton;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.CancelButton = this.cancelButton;
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Name = "EnterMasterPasswordDialog";
+            this.Name = "EnterMainPasswordDialog";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
