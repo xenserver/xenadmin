@@ -111,11 +111,11 @@ namespace XenAdmin
 
 
         /// <summary>
-        /// The secure hash of the master password used to load the client session.
+        /// The secure hash of the main password used to load the client session.
         /// If this is null then no prior session existed and the user should be prompted
         /// to save his session when the UI is quit.
         /// </summary>
-        public static byte[] MasterPassword = null;
+        public static byte[] MainPassword = null;
 
         /// <summary>
         /// A true value here indicates the user does not want to save session information for this
