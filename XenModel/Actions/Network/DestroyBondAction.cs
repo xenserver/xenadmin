@@ -128,10 +128,10 @@ namespace XenAdmin.Actions
                 }
             }
 
-            PIF master_bond_interface = Connection.Resolve(bond.master);
-            if (master_bond_interface != null)
+            PIF coordinator_bond_interface = Connection.Resolve(bond.master);
+            if (coordinator_bond_interface != null)
             {
-                Network = Connection.Resolve(master_bond_interface.network);
+                Network = Connection.Resolve(coordinator_bond_interface.network);
                 Network.Locked = true;
             }
         }

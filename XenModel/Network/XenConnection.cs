@@ -1495,7 +1495,7 @@ namespace XenAdmin.Network
                             }
                             else if (LastCoordinatorHostname != "")
                             {
-                                log.DebugFormat("Stopping search for new coordinator for {0}: timeout reached without success. Trying the old master one last time",
+                                log.DebugFormat("Stopping search for new coordinator for {0}: timeout reached without success. Trying the old coordinator one last time",
                                                 LastConnectionFullName);
                                 FindingNewCoordinator = false;
                                 Hostname = LastCoordinatorHostname;
