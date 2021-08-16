@@ -69,9 +69,14 @@ namespace XenAdmin.Commands
 
         static void createAction_Completed(ActionBase sender)
         {
-            CreateVMFastAction action = (CreateVMFastAction) sender;
-            var startAction = new VMStartAction(action.Connection.Resolve(new XenRef<VM>(action.Result)), VMOperationCommand.WarningDialogHAInvalidConfig, VMOperationCommand.StartDiagnosisForm);
-            startAction.RunAsync();
+            if (sender is CreateVMFastAction action && action.Succeeded)
+            {
+                var vm = action.Connection.Resolve(new XenRef<VM>(action.Result));
+                
+                if (vm != null)
+                    new VMStartAction(vm, VMOperationCommand.WarningDialogHAInvalidConfig,
+                        VMOperationCommand.StartDiagnosisForm).RunAsync();
+            }
         }
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
