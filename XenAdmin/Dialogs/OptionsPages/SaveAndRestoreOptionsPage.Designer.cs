@@ -89,7 +89,7 @@
             resources.ApplyResources(this.changeMainPasswordButton, "changeMainPasswordButton");
             this.changeMainPasswordButton.Name = "changeMainPasswordButton";
             this.changeMainPasswordButton.UseVisualStyleBackColor = true;
-            this.changeMainPasswordButton.Click += new System.EventHandler(this.changeMasterPasswordButton_Click);
+            this.changeMainPasswordButton.Click += new System.EventHandler(this.changeMainPasswordButton_Click);
             // 
             // requireMainPasswordCheckBox
             // 
@@ -97,7 +97,7 @@
             resources.ApplyResources(this.requireMainPasswordCheckBox, "requireMainPasswordCheckBox");
             this.requireMainPasswordCheckBox.Name = "requireMainPasswordCheckBox";
             this.requireMainPasswordCheckBox.UseVisualStyleBackColor = true;
-            this.requireMainPasswordCheckBox.Click += new System.EventHandler(this.requireMasterPasswordCheckBox_Click);
+            this.requireMainPasswordCheckBox.Click += new System.EventHandler(this.requireMainPasswordCheckBox_Click);
             // 
             // SaveAndRestoreOptionsPage
             // 
