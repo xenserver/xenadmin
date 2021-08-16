@@ -7219,7 +7219,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Changed {0} master password.
+        ///   Looks up a localized string similar to Changed {0} main password.
         /// </summary>
         public static string CHANGED_MASTER_PASSWORD {
             get {
@@ -7228,7 +7228,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Changed {0} master password for session restore.
+        ///   Looks up a localized string similar to Changed {0} main password for session restore.
         /// </summary>
         public static string CHANGED_MASTER_PASSWORD_LONG {
             get {
@@ -37444,7 +37444,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade master {0}.
+        ///   Looks up a localized string similar to Upgrade main {0}.
         /// </summary>
         public static string UPGRADE_MASTER {
             get {
