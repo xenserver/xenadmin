@@ -145,7 +145,7 @@
     <value>0</value>
   </data>
   <data name="passLabel.Text" xml:space="preserve">
-    <value>&amp;Master password:</value>
+    <value>&amp;Main password:</value>
   </data>
   <data name="&gt;&gt;passLabel.Name" xml:space="preserve">
     <value>passLabel</value>
@@ -310,7 +310,7 @@
     <value>6</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>If you have forgotten the master password, click Cancel, and use the Options dialog to set a new one.</value>
+    <value>If you have forgotten the main password, click Cancel, and use the Options dialog to set a new one.</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
@@ -376,7 +376,7 @@
     <value>0</value>
   </data>
   <data name="EnterPassLabel.Text" xml:space="preserve">
-    <value>Enter the master password to reconnect your servers.</value>
+    <value>Enter the main password to reconnect your servers.</value>
   </data>
   <data name="&gt;&gt;EnterPassLabel.Name" xml:space="preserve">
     <value>EnterPassLabel</value>
@@ -409,7 +409,7 @@
     <value>CenterParent</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Enter Master Password</value>
+    <value>Enter Main Password</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>LoadSessionDialog</value>

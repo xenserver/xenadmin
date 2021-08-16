@@ -46,32 +46,32 @@ namespace XenAdmin.Dialogs.RestoreSession
 
         public byte[] NewPassword { get; private set; }
 
-        private void masterTextBox_TextChanged(object sender, EventArgs e)
+        private void mainTextBox_TextChanged(object sender, EventArgs e)
         {
             newPasswordError.Visible = false;
         }
 
-        private void reEnterMasterTextBox_TextChanged(object sender, EventArgs e)
+        private void reEnterMainTextBox_TextChanged(object sender, EventArgs e)
         {
             newPasswordError.Visible = false;
         }
 
         private void okButton_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(masterTextBox.Text) && masterTextBox.Text == reEnterMasterTextBox.Text)
+            if (!string.IsNullOrEmpty(mainTextBox.Text) && mainTextBox.Text == reEnterMainTextBox.Text)
             {
-                NewPassword = EncryptionUtils.ComputeHash(masterTextBox.Text);
+                NewPassword = EncryptionUtils.ComputeHash(mainTextBox.Text);
                 DialogResult = DialogResult.OK;
                 return;
             }
 
-            if (masterTextBox.Text != reEnterMasterTextBox.Text)
+            if (mainTextBox.Text != reEnterMainTextBox.Text)
                 newPasswordError.ShowError(Messages.PASSWORDS_DONT_MATCH);
             else
                 newPasswordError.ShowError(Messages.PASSWORDS_EMPTY);
 
-            masterTextBox.Focus();
-            masterTextBox.SelectAll();
+            mainTextBox.Focus();
+            mainTextBox.SelectAll();
         }
     }
 }

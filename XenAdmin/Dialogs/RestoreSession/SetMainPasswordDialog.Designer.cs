@@ -30,11 +30,11 @@ namespace XenAdmin.Dialogs.RestoreSession
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SetMainPasswordDialog));
             this.noteLabel = new System.Windows.Forms.Label();
-            this.reEnterMasterLabel = new System.Windows.Forms.Label();
-            this.masterLabel = new System.Windows.Forms.Label();
-            this.reEnterMasterTextBox = new System.Windows.Forms.TextBox();
-            this.masterTextBox = new System.Windows.Forms.TextBox();
-            this.masterBlurbLabel = new System.Windows.Forms.Label();
+            this.reEnterMainLabel = new System.Windows.Forms.Label();
+            this.mainLabel = new System.Windows.Forms.Label();
+            this.reEnterMainTextBox = new System.Windows.Forms.TextBox();
+            this.mainTextBox = new System.Windows.Forms.TextBox();
+            this.mainBlurbLabel = new System.Windows.Forms.Label();
             this.okButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.newPasswordError = new XenAdmin.Controls.Common.PasswordFailure();
@@ -50,35 +50,35 @@ namespace XenAdmin.Dialogs.RestoreSession
             this.tableLayoutPanel1.SetColumnSpan(this.noteLabel, 2);
             this.noteLabel.Name = "noteLabel";
             // 
-            // reEnterMasterLabel
+            // reEnterMainLabel
             // 
-            resources.ApplyResources(this.reEnterMasterLabel, "reEnterMasterLabel");
-            this.reEnterMasterLabel.Name = "reEnterMasterLabel";
+            resources.ApplyResources(this.reEnterMainLabel, "reEnterMainLabel");
+            this.reEnterMainLabel.Name = "reEnterMainLabel";
             // 
-            // masterLabel
+            // mainLabel
             // 
-            resources.ApplyResources(this.masterLabel, "masterLabel");
-            this.masterLabel.Name = "masterLabel";
+            resources.ApplyResources(this.mainLabel, "mainLabel");
+            this.mainLabel.Name = "mainLabel";
             // 
-            // reEnterMasterTextBox
+            // reEnterMainTextBox
             // 
-            resources.ApplyResources(this.reEnterMasterTextBox, "reEnterMasterTextBox");
-            this.reEnterMasterTextBox.Name = "reEnterMasterTextBox";
-            this.reEnterMasterTextBox.UseSystemPasswordChar = true;
-            this.reEnterMasterTextBox.TextChanged += new System.EventHandler(this.reEnterMasterTextBox_TextChanged);
+            resources.ApplyResources(this.reEnterMainTextBox, "reEnterMainTextBox");
+            this.reEnterMainTextBox.Name = "reEnterMainTextBox";
+            this.reEnterMainTextBox.UseSystemPasswordChar = true;
+            this.reEnterMainTextBox.TextChanged += new System.EventHandler(this.reEnterMainTextBox_TextChanged);
             // 
-            // masterTextBox
+            // mainTextBox
             // 
-            resources.ApplyResources(this.masterTextBox, "masterTextBox");
-            this.masterTextBox.Name = "masterTextBox";
-            this.masterTextBox.UseSystemPasswordChar = true;
-            this.masterTextBox.TextChanged += new System.EventHandler(this.masterTextBox_TextChanged);
+            resources.ApplyResources(this.mainTextBox, "mainTextBox");
+            this.mainTextBox.Name = "mainTextBox";
+            this.mainTextBox.UseSystemPasswordChar = true;
+            this.mainTextBox.TextChanged += new System.EventHandler(this.mainTextBox_TextChanged);
             // 
-            // masterBlurbLabel
+            // mainBlurbLabel
             // 
-            resources.ApplyResources(this.masterBlurbLabel, "masterBlurbLabel");
-            this.tableLayoutPanel1.SetColumnSpan(this.masterBlurbLabel, 2);
-            this.masterBlurbLabel.Name = "masterBlurbLabel";
+            resources.ApplyResources(this.mainBlurbLabel, "mainBlurbLabel");
+            this.tableLayoutPanel1.SetColumnSpan(this.mainBlurbLabel, 2);
+            this.mainBlurbLabel.Name = "mainBlurbLabel";
             // 
             // okButton
             // 
@@ -102,13 +102,13 @@ namespace XenAdmin.Dialogs.RestoreSession
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.masterLabel, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.mainLabel, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.newPasswordError, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.masterTextBox, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.mainTextBox, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.noteLabel, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.reEnterMasterTextBox, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.reEnterMasterLabel, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.masterBlurbLabel, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.reEnterMainTextBox, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.reEnterMainLabel, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.mainBlurbLabel, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 1, 5);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
@@ -138,11 +138,11 @@ namespace XenAdmin.Dialogs.RestoreSession
         #endregion
 
         private System.Windows.Forms.Label noteLabel;
-        private System.Windows.Forms.Label reEnterMasterLabel;
-        private System.Windows.Forms.Label masterLabel;
-        private System.Windows.Forms.TextBox reEnterMasterTextBox;
-        private System.Windows.Forms.TextBox masterTextBox;
-        private System.Windows.Forms.Label masterBlurbLabel;
+        private System.Windows.Forms.Label reEnterMainLabel;
+        private System.Windows.Forms.Label mainLabel;
+        private System.Windows.Forms.TextBox reEnterMainTextBox;
+        private System.Windows.Forms.TextBox mainTextBox;
+        private System.Windows.Forms.Label mainBlurbLabel;
         private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.Button cancelButton;
         private XenAdmin.Controls.Common.PasswordFailure newPasswordError;
