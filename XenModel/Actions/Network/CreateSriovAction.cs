@@ -55,7 +55,7 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {  
-            PIF pifOnMaster =null;
+            PIF pifOnCoordinator =null;
 
             if (selectedPifs.Count == 0)
                 return;
@@ -68,17 +68,17 @@ namespace XenAdmin.Actions
 
                 if (host.IsMaster())
                 {
-                    pifOnMaster = thePif;
+                    pifOnCoordinator = thePif;
                     break;
                 }
             }
             Connection.ExpectDisruption = true;
 
             //Enable SR-IOV network on Pool requires enabling coordinator first.
-            if (pifOnMaster != null)
+            if (pifOnCoordinator != null)
             {
-                selectedPifs.Remove(pifOnMaster);
-                selectedPifs.Insert(0, pifOnMaster);
+                selectedPifs.Remove(pifOnCoordinator);
+                selectedPifs.Insert(0, pifOnCoordinator);
             }
 
             int inc = 100 / selectedPifs.Count;

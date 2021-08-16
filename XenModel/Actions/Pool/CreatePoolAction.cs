@@ -48,25 +48,25 @@ namespace XenAdmin.Actions
         /// <summary>
         /// For Create only.
         /// </summary>
-        /// <param name="master"></param>
+        /// <param name="coordinator"></param>
         /// <param name="supporters"></param>
         /// <param name="name"></param>
         /// <param name="description"></param>
         /// <param name="acceptNTolChanges"></param>
         /// <param name="doOnLicensingFailure"></param>
         /// <param name="getAdCredentials"></param>
-        public CreatePoolAction(Host master, List<Host> supporters, string name, string description, Func<Host, AdUserAndPassword> getAdCredentials,
+        public CreatePoolAction(Host coordinator, List<Host> supporters, string name, string description, Func<Host, AdUserAndPassword> getAdCredentials,
             Func<HostAbstractAction, Pool, long, long, bool> acceptNTolChanges, Action<List<LicenseFailure>, string> doOnLicensingFailure)
-            : base(master.Connection, string.Format(Messages.CREATING_NAMED_POOL_WITH_COORDINATOR, name, master.Name()),
+            : base(coordinator.Connection, string.Format(Messages.CREATING_NAMED_POOL_WITH_COORDINATOR, name, coordinator.Name()),
             getAdCredentials, acceptNTolChanges, doOnLicensingFailure)
         {
-            System.Diagnostics.Trace.Assert(master != null);
+            System.Diagnostics.Trace.Assert(coordinator != null);
 
-            this.Host = master;
+            this.Host = coordinator;
             this._supporters = supporters;
-            _hostsToRelicense = supporters.FindAll(h => PoolJoinRules.FreeHostPaidCoordinator(h, master, false));
-            _hostsToCpuMask = supporters.FindAll(h => !PoolJoinRules.CompatibleCPUs(h, master, false));
-            _hostsToAdConfigure = supporters.FindAll(h => !PoolJoinRules.CompatibleAdConfig(h, master, false));
+            _hostsToRelicense = supporters.FindAll(h => PoolJoinRules.FreeHostPaidCoordinator(h, coordinator, false));
+            _hostsToCpuMask = supporters.FindAll(h => !PoolJoinRules.CompatibleCPUs(h, coordinator, false));
+            _hostsToAdConfigure = supporters.FindAll(h => !PoolJoinRules.CompatibleAdConfig(h, coordinator, false));
             this._name = name;
             this._description = description;
             this.Description = Messages.WAITING;
@@ -106,18 +106,18 @@ namespace XenAdmin.Actions
 
             this.Description = Messages.POOLCREATE_CREATING;
 
-            Pool master_pool = Helpers.GetPoolOfOne(Connection);
-            if (master_pool == null)
+            Pool coordinator_pool = Helpers.GetPoolOfOne(Connection);
+            if (coordinator_pool == null)
                 throw new XenAPI.Failure(XenAPI.Failure.INTERNAL_ERROR, Messages.CACHE_NOT_YET_POPULATED);
 
-            FixLicensing(master_pool, _hostsToRelicense, DoOnLicensingFailure);
-            FixAd(master_pool, _hostsToAdConfigure, GetAdCredentials);
-            FixCpus(master_pool, _hostsToCpuMask, AcceptNTolChanges);
+            FixLicensing(coordinator_pool, _hostsToRelicense, DoOnLicensingFailure);
+            FixAd(coordinator_pool, _hostsToAdConfigure, GetAdCredentials);
+            FixCpus(coordinator_pool, _hostsToCpuMask, AcceptNTolChanges);
 
-            XenAPI.Pool.set_name_label(Session, master_pool.opaque_ref, _name);
-            XenAPI.Pool.set_name_description(Session, master_pool.opaque_ref, _description);
+            XenAPI.Pool.set_name_label(Session, coordinator_pool.opaque_ref, _name);
+            XenAPI.Pool.set_name_description(Session, coordinator_pool.opaque_ref, _description);
 
-            ClearNonSharedSrs(master_pool);
+            ClearNonSharedSrs(coordinator_pool);
 
             Description = Messages.ACTION_POOL_WIZARD_CREATE_DESCRIPTION_ADDING_MEMBERS;
 
@@ -128,7 +128,7 @@ namespace XenAdmin.Actions
                 int hi = (int)((i2 + 1) * p2);
                 // RBAC: We have forced identical AD configs, but this will fail unless both supporter-to-be and coordinator sessions have the correct role.
                 Session = NewSession(supporter.Connection);
-                RelatedTask = XenAPI.Pool.async_join(Session, master_pool.Connection.Hostname, master_pool.Connection.Username, master_pool.Connection.Password);
+                RelatedTask = XenAPI.Pool.async_join(Session, coordinator_pool.Connection.Hostname, coordinator_pool.Connection.Username, coordinator_pool.Connection.Password);
                 PollToCompletion(lo, hi);
                 i2++;
 

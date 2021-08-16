@@ -49,7 +49,7 @@ namespace XenAdmin.Actions
         private readonly List<string> _chainFiles;
         private readonly Func<string, string> _dateConverter;
         private readonly string _hostRef;
-        private readonly bool _isMaster;
+        private readonly bool _isCoordinator;
         private readonly string _oldCertificateUuid;
         private volatile Session _session;
 
@@ -62,7 +62,7 @@ namespace XenAdmin.Actions
         {
             Host = host;
             _hostRef = host.opaque_ref;
-            _isMaster = host.IsMaster();
+            _isCoordinator = host.IsMaster();
 
             if (host.certificates != null && host.certificates.Count > 0)
             {
@@ -270,7 +270,7 @@ namespace XenAdmin.Actions
 
         private void ConnectionStateChanged(IXenConnection conn)
         {
-            if (_isMaster)
+            if (_isCoordinator)
             {
                 if (Cancelling)
                     throw new CancelledException();

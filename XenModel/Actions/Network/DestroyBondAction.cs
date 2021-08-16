@@ -51,7 +51,7 @@ namespace XenAdmin.Actions
         /// <summary>
         /// The interfaces of all the bonds in Bonds.
         /// </summary>
-        private readonly List<PIF> Masters = new List<PIF>();
+        private readonly List<PIF> Interfaces = new List<PIF>();
 
         /// <summary>
         /// All members under each bond in Bonds.  These will be plugged at the end, in order to
@@ -104,11 +104,11 @@ namespace XenAdmin.Actions
 
                     b.Locked = true;
 
-                    PIF master = Connection.Resolve(b.master);
-                    if (master != null)
+                    PIF bondInterface = Connection.Resolve(b.master);
+                    if (bondInterface != null)
                     {
-                        Masters.Add(master);
-                        master.Locked = true;
+                        Interfaces.Add(bondInterface);
+                        bondInterface.Locked = true;
 
                         List<PIF> members = Connection.ResolveAll(b.slaves);
                         NetworkingHelper.Sort(members);
@@ -118,20 +118,20 @@ namespace XenAdmin.Actions
                             pif.Locked = true;
                         }
 
-                        FirstMembers[master] = Connection.Resolve(b.primary_slave);
+                        FirstMembers[bondInterface] = Connection.Resolve(b.primary_slave);
 
-                        if (!FirstMembers.ContainsKey(master) && members.Count != 0)
-                            FirstMembers[master] = members[0];
+                        if (!FirstMembers.ContainsKey(bondInterface) && members.Count != 0)
+                            FirstMembers[bondInterface] = members[0];
                     }
 
                     AppliesTo.Add(host.opaque_ref);
                 }
             }
 
-            PIF master_master = Connection.Resolve(bond.master);
-            if (master_master != null)
+            PIF master_bond_interface = Connection.Resolve(bond.master);
+            if (master_bond_interface != null)
             {
-                Network = Connection.Resolve(master_master.network);
+                Network = Connection.Resolve(master_bond_interface.network);
                 Network.Locked = true;
             }
         }
@@ -141,13 +141,13 @@ namespace XenAdmin.Actions
             PercentComplete = 0;
             Connection.ExpectDisruption = true;
 
-            int incr = Masters.Count > 0 ? 50 / Masters.Count : 0;
+            int incr = Interfaces.Count > 0 ? 50 / Interfaces.Count : 0;
 
             try
             {
-                foreach (PIF master in Masters)
+                foreach (PIF bondInterface in Interfaces)
                 {
-                    NetworkingActionHelpers.MoveManagementInterfaceName(this, master, FirstMembers[master]);
+                    NetworkingActionHelpers.MoveManagementInterfaceName(this, bondInterface, FirstMembers[bondInterface]);
                     PercentComplete += incr;
                 }
             }
@@ -226,8 +226,8 @@ namespace XenAdmin.Actions
             foreach (Bond bond in Bonds)
                 bond.Locked = false;
 
-            foreach (PIF master in Masters)
-                master.Locked = false;
+            foreach (PIF bondInterface in Interfaces)
+                bondInterface.Locked = false;
 
             foreach (PIF pif in Members)
                 pif.Locked = false;

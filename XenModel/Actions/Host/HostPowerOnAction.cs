@@ -56,8 +56,8 @@ namespace XenAdmin.Actions.HostActions
         {
             bool succeeded = false;
             string name = Helpers.GetName(Host);
-            XenAPI.Host master = Helpers.GetCoordinator(Connection);
-            AppliesTo.Add(master.opaque_ref);
+            XenAPI.Host coordinator = Helpers.GetCoordinator(Connection);
+            AppliesTo.Add(coordinator.opaque_ref);
             Title = string.Format(Messages.ACTION_HOST_START_TITLE, name);
             Description = Messages.ACTION_HOST_STARTING;
             try

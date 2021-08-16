@@ -82,7 +82,7 @@ namespace XenAdmin.Actions
             {
                 Status = ReportStatus.compiling;
                 CopyClientLogs();
-                CompileMasterSupporterInfo();
+                CompileCoordinatorSupporterInfo();
                 CompileClientMetadata();
                 Tick(100, Messages.COMPLETED);
                 Status = ReportStatus.succeeded;
@@ -120,9 +120,9 @@ namespace XenAdmin.Actions
             }
         }
 
-        private void CompileMasterSupporterInfo()
+        private void CompileCoordinatorSupporterInfo()
         {
-            var mastersInfo = new List<string>();
+            var coordinatorsInfo = new List<string>();
             foreach (var host in hosts)
             {
                 var pool = Helpers.GetPool(host.Connection);
@@ -131,15 +131,15 @@ namespace XenAdmin.Actions
                 if (pool == null)
                     info = string.Format("Server '{0}' is a stand alone server", host.Name());
                 else if (host.IsMaster())
-                    info = string.Format("Server '{0}' is a master of pool '{1}'", host.Name(), pool.Name());
+                    info = string.Format("Server '{0}' is a coordinator of pool '{1}'", host.Name(), pool.Name());
                 else
                     info = string.Format("Server '{0}' is a supporter of pool '{1}'", host.Name(), pool.Name());
 
-                mastersInfo.Add(info);
+                coordinatorsInfo.Add(info);
             }
 
-            string mastersDestination = string.Format("{0}\\{1}-Masters.txt", filePath, timeString);
-            WriteExtraInfoToFile(mastersInfo, mastersDestination);
+            string coordinatorsDestination = string.Format("{0}\\{1}-Coordinators.txt", filePath, timeString);
+            WriteExtraInfoToFile(coordinatorsInfo, coordinatorsDestination);
         }
 
         private void CompileClientMetadata()

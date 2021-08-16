@@ -51,15 +51,15 @@ namespace XenAdmin.Actions
         {
             this.Pool = poolToJoin;
             this.Host = joiningHost;
-            Host master = Helpers.GetCoordinator(poolToJoin);
+            Host coordinator = Helpers.GetCoordinator(poolToJoin);
             _hostsToRelicense = new List<Host>();
             _hostsToCpuMask = new List<Host>();
             _hostsToAdConfigure = new List<Host>();
-            if (PoolJoinRules.FreeHostPaidCoordinator(joiningHost, master, false))
+            if (PoolJoinRules.FreeHostPaidCoordinator(joiningHost, coordinator, false))
                 _hostsToRelicense.Add(joiningHost);
-            if (!PoolJoinRules.CompatibleCPUs(joiningHost, master, false))
+            if (!PoolJoinRules.CompatibleCPUs(joiningHost, coordinator, false))
                 _hostsToCpuMask.Add(joiningHost);
-            if (!PoolJoinRules.CompatibleAdConfig(joiningHost, master, false))
+            if (!PoolJoinRules.CompatibleAdConfig(joiningHost, coordinator, false))
                 _hostsToAdConfigure.Add(joiningHost);
             this.Description = Messages.WAITING;
             AddCommonAPIMethodsToRoleCheck();
@@ -93,8 +93,8 @@ namespace XenAdmin.Actions
                 if (fixedCpus)
                     Session = NewSession();  // We've rebooted the server, so we need to grab the new session
 
-                var master = Pool.Connection.TryResolveWithTimeout(Pool.master);
-                var address = master != null ? master.address : Pool.Connection.Hostname;
+                var coordinator = Pool.Connection.TryResolveWithTimeout(Pool.master);
+                var address = coordinator != null ? coordinator.address : Pool.Connection.Hostname;
 
                 RelatedTask = Pool.async_join(Session, address, Pool.Connection.Username, Pool.Connection.Password);
                 PollToCompletion(0, 90);
