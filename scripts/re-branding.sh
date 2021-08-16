@@ -82,9 +82,6 @@ rebranding_global ${REPO}/XenAdmin/XenAdmin.csproj
 #XenModel
 rebranding_global ${REPO}/Branding/Branding.resx
 
-#XenOvfApi rebranding
-rebranding_global ${REPO}/XenOvfApi/app.config
-
 PRODUCT_GUID=$(uuidgen | tr [a-z] [A-Z] | tr -d [:space:])
 
 sed -b -i -e "s/@AUTOGEN_PRODUCT_GUID@/${PRODUCT_GUID}/g" \
@@ -99,7 +96,6 @@ sed -b -i -e "s/@AUTOGEN_PRODUCT_GUID@/${PRODUCT_GUID}/g" \
 
 #XenAdminTests
 rebranding_global ${REPO}/XenAdminTests/TestResources/ContextMenuBuilderTestResults.xml
-rebranding_global ${REPO}/XenAdminTests/app.config
 rebranding_global ${REPO}/XenAdminTests/XenAdminTests.csproj
 
 #XenServerHealthCheck
