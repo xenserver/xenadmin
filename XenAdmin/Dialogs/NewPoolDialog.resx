@@ -457,7 +457,7 @@
     <value>0</value>
   </data>
   <data name="labelMaster.Text" xml:space="preserve">
-    <value>&amp;Coordinator:</value>
+    <value>C&amp;oordinator:</value>
   </data>
   <data name="labelMaster.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
