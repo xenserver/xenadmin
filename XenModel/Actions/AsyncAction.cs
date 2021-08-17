@@ -254,7 +254,9 @@ namespace XenAdmin.Actions
 
         protected void DestroyTask()
         {
-            if (Session == null || string.IsNullOrEmpty(Session.opaque_ref) || RelatedTask == null)
+            //Null or empty RelatedTask.opaque_ref can happen during an RBAC dry-run
+            if (Session == null || string.IsNullOrEmpty(Session.opaque_ref) ||
+                RelatedTask == null || string.IsNullOrEmpty(RelatedTask.opaque_ref))
                 return;
 
             try
@@ -269,7 +271,8 @@ namespace XenAdmin.Actions
 
         public void PollToCompletion(double start = 0, double finish = 100, bool suppressFailures = false)
         {
-            if (RelatedTask == null)
+            //Null or empty RelatedTask.opaque_ref can happen during an RBAC dry-run
+            if (RelatedTask == null || string.IsNullOrEmpty(RelatedTask.opaque_ref))
                 return;
 
             try
