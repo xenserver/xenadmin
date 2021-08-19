@@ -226,9 +226,12 @@ namespace XenAdmin.Dialogs
                 if (!HelpersGUI.GetPermissionForCpuFeatureLevelling(supporters, Helpers.GetPoolOfOne(coordinator.Connection)))
                     return;
 
-                log.DebugFormat("Creating new pool {0} ({1}) with coordinator {2}", poolName, poolDescription, Helpers.GetName(coordinator));
-                foreach (Host supporter in supporters)
-                    log.DebugFormat("Supporter {0}", Helpers.GetName(supporter));
+                log.DebugFormat("Creating new pool {0} ({1}) with coordinator {2} and supporters {3}",
+                    poolName, 
+                    poolDescription, 
+                    Helpers.GetName(coordinator),
+                    string.Join(", ", supporters.Select(Helpers.GetName).ToList())
+                );
 
                 new CreatePoolAction(coordinator, supporters, poolName, poolDescription, AddHostToPoolCommand.GetAdPrompt, 
                     AddHostToPoolCommand.NtolDialog, ApplyLicenseEditionCommand.ShowLicensingFailureDialog).RunAsync();
