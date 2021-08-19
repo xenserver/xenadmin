@@ -167,7 +167,7 @@ namespace XenCenterLib
         public const UInt32 ERROR_DISK_FULL = 112;
 
         public const int CBN_CLOSEUP = 8;
-        public const int EN_STOPFOCUS = 512;
+        public const int EN_KILLFOCUS = 512;
 
         public const int WM_DESTROY = 2;
         public const int WM_ACTIVATE = 6;
