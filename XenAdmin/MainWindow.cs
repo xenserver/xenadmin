@@ -997,6 +997,33 @@ namespace XenAdmin
                     });
                     return;
                 }
+
+                // Allow Citrix Hypervisor Center connect to Stockholm and cloud released versions only
+                //
+                if (!Helpers.StockholmOrGreater(coordinator))
+                {
+                    connection.EndConnect();
+
+                    Program.Invoke(Program.MainWindow, delegate
+                    {
+                        var msg = string.Format(Messages.GUI_NOT_COMPATIBLE, BrandManager.BrandConsole, BrandManager.ProductBrand, BrandManager.ProductVersion82, Helpers.GetName(coordinator), BrandManager.LegacyConsole);
+                        var url = InvisibleMessages.OUT_OF_DATE_WEBSITE;
+                        var title = string.Format(Messages.CONNECTION_REFUSED_TITLE, Helpers.GetName(coordinator).Ellipsise(80));
+                        var error = $"{msg}\n{url}";
+
+                        new ActionBase(title, "", false, true, error);
+
+                        using (var dlog = new ErrorDialog(msg)
+                        {
+                            WindowTitle = title,
+                            ShowLinkLabel = !HiddenFeatures.LinkLabelHidden,
+                            LinkText = url,
+                            LinkData = url
+                        })
+                            dlog.ShowDialog(this);
+                    });
+                    return;
+                }
                 
                 if (server_max > current_version)
                     Alert.AddAlert(new GuiOldAlert());
