@@ -968,33 +968,6 @@ namespace XenAdmin.ConsoleView
             Update();*/
         }
 
-        /* We don't want this functionality anymore (see CA-39469 Console window loses focus when alt-tab-ing)
-        protected override void WndProc(ref Message m)
-        {
-            base.WndProc(ref m);
- 
-            // If the user alt-tabs to a different window, make sure when they come back that
-            // focus is NOT given to the VNC control, since this is confusing.
-            // Low-level intervention required: listen for the 'gain focus event'.
-            // See http://msdn2.microsoft.com/en-us/library/ms646282.aspx and
-            // http://www.pinvoke.net/default.aspx/Enums/WindowsMessages.html
-            if (m.Msg == XenAdmin.Core.Win32.WM_SETFOCUS)
-            {
-                // m.WParam gives us the handle of the window that had focus immediately before
-                // this control was granted focus. If it was from a window outside the app,
-                // then it is set to zero (or so it seems
-                if (m.WParam.ToInt64() == 0L)
-                {
-                    // Divert focus to a parent control
-                    if (this.Parent.Parent != null)
-                    {
-                        // Always ran, fingers crossed
-                        this.Parent.Parent.Focus();
-                    }
-                }
-            }
-        }*/
-
         protected override void OnMouseMove(MouseEventArgs e)
         {
             // Only hide the mouse when over the actual screen,
