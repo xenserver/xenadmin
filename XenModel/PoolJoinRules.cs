@@ -613,12 +613,12 @@ namespace XenAdmin.Core
             if (supporter == null || pool == null)
                 return false;
 
-            Dictionary<string, string> supporer_cpu_info = supporter.cpu_info;
+            Dictionary<string, string> supporter_cpu_info = supporter.cpu_info;
             Dictionary<string, string> pool_cpu_info = pool.cpu_info;
-            if (!Helper.AreEqual2(supporer_cpu_info, null) && !Helper.AreEqual2(pool_cpu_info, null))
+            if (!Helper.AreEqual2(supporter_cpu_info, null) && !Helper.AreEqual2(pool_cpu_info, null))
             {
                 // if supporter has less features than pool, then pool will be down-levelled
-                return FewerFeatures(supporer_cpu_info, pool_cpu_info);
+                return FewerFeatures(supporter_cpu_info, pool_cpu_info);
             }
             return false;
         }
