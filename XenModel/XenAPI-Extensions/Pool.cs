@@ -57,8 +57,8 @@ namespace XenAPI
             if (Connection == null)
                 return string.Empty;
 
-            Host master = Connection.Resolve(this.master);
-            return master == null ? "" : master.Name();
+            Host coordinator = Connection.Resolve(this.master);
+            return coordinator == null ? "" : coordinator.Name();
         }
 
         internal override string LocationString()
@@ -84,12 +84,12 @@ namespace XenAPI
             return result;
         }
 
-        public bool IsMasterUpgraded()
+        public bool IsCoordinatorUpgraded()
         {
-            Host master = Helpers.GetCoordinator(this);
+            Host coordinator = Helpers.GetCoordinator(this);
             foreach (var host in this.Connection.Cache.Hosts)
             {
-                if (host.LongProductVersion() != master.LongProductVersion())
+                if (host.LongProductVersion() != coordinator.LongProductVersion())
                     return true;
             }
             return false;
@@ -194,11 +194,11 @@ namespace XenAPI
 
         public List<XenAPI.Host> HostsToUpgrade()
         {
-            //First one to upgrade has to be the master
-            var master = Helpers.GetCoordinator(Connection);
+            //First one to upgrade has to be the coordinator
+            var coordinator = Helpers.GetCoordinator(Connection);
 
-            List<XenAPI.Host> result = IsMasterUpgraded()
-                ? Connection.Cache.Hosts.Where(host => host.LongProductVersion() != master.LongProductVersion()).ToList()
+            List<XenAPI.Host> result = IsCoordinatorUpgraded()
+                ? Connection.Cache.Hosts.Where(host => host.LongProductVersion() != coordinator.LongProductVersion()).ToList()
                 : Connection.Cache.Hosts.ToList();
             result.Sort();
 
@@ -207,11 +207,11 @@ namespace XenAPI
 
         public bool IsPoolFullyUpgraded()
         {
-            Host master = Helpers.GetCoordinator(this);
+            Host coordinator = Helpers.GetCoordinator(this);
 
             foreach (var host in this.Connection.Cache.Hosts)
             {
-                if (host.LongProductVersion() != master.LongProductVersion())
+                if (host.LongProductVersion() != coordinator.LongProductVersion())
                     return false;
             }
             return true;

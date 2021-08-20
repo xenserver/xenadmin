@@ -129,7 +129,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             if (host.IsMaster())
             {
                 var pool = Helpers.GetPoolOfOne(host.Connection);
-                if (pool != null && pool.IsMasterUpgraded())
+                if (pool != null && pool.IsCoordinatorUpgraded())
                 {
                     log.Debug(string.Format("Skipping coordinator '{0}' because it is upgraded", host.Name()));
                     return true;

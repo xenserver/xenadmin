@@ -304,7 +304,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             if (coordinator == null)
                 return result;
 
-            if (pool.IsMasterUpgraded())
+            if (pool.IsCoordinatorUpgraded())
             {
                 foreach (var h in pool.Connection.Cache.Hosts)
                 {
