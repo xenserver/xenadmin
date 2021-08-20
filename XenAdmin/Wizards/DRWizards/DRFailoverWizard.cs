@@ -83,10 +83,8 @@ namespace XenAdmin.Wizards.DRWizards
             WizardType = wizardType; 
 
             #region RBAC Warning Page Checks
-            if (Pool.Connection.Session.IsLocalSuperuser || Helpers.GetCoordinator(Pool.Connection).external_auth_type == Auth.AUTH_TYPE_NONE)
-            {
-            }
-            else
+            if (!Pool.Connection.Session.IsLocalSuperuser &&
+                Helpers.GetCoordinator(Pool.Connection).external_auth_type != Auth.AUTH_TYPE_NONE)
             {
                 RBACWarningPage.WizardPermissionCheck check = new RBACWarningPage.WizardPermissionCheck(Messages.RBAC_DR_WIZARD_MESSAGE);
                 check.AddApiCheck("DR_task.async_create");
