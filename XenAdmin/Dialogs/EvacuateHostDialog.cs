@@ -512,7 +512,7 @@ namespace XenAdmin.Dialogs
         private void NewCoordinatorComboBox_DrawItem(object sender, DrawItemEventArgs e)
         {
             var backColor = NewCoordinatorComboBox.Enabled ? NewCoordinatorComboBox.BackColor : SystemColors.Control;
-            
+
             using (SolidBrush backBrush = new SolidBrush(backColor))
                 e.Graphics.FillRectangle(backBrush, e.Bounds);
 
