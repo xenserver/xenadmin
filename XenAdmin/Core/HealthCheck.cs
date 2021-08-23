@@ -102,15 +102,15 @@ namespace XenAdmin.Core
 
             if (healthCheckSettings.Status == HealthCheckStatus.Enabled && !healthCheckSettings.HasAnalysisResult)
             {
-                if (PassedRbacChecks(pool.Connection))
+                if (PassedRbacChecks(pool.Connection, out _))
                     return new GetHealthCheckAnalysisResultAction(pool, Registry.HealthCheckDiagnosticDomainName, suppressHistory);
             }
             return null;
         }
 
-        public static bool PassedRbacChecks(IXenConnection connection)
+        public static bool PassedRbacChecks(IXenConnection connection, out List<Role> validRoleList)
         {
-            return Role.CanPerform(new RbacMethodList("pool.set_health_check_config"), connection);
+            return Role.CanPerform(new RbacMethodList("pool.set_health_check_config"), connection, out validRoleList);
         }
 
         private static void actionCompleted(ActionBase sender)

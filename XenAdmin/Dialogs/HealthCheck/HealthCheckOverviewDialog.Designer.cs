@@ -38,6 +38,7 @@ namespace XenAdmin.Dialogs.HealthCheck
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.poolNameLabel = new System.Windows.Forms.Label();
             this.poolDetailsPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.cannotAlterHealthCheckLabel = new System.Windows.Forms.Label();
             this.healthCheckStatusPanel = new System.Windows.Forms.TableLayoutPanel();
             this.failedUploadDateLabel = new System.Windows.Forms.Label();
             this.failedUploadLabel = new System.Windows.Forms.Label();
@@ -100,6 +101,7 @@ namespace XenAdmin.Dialogs.HealthCheck
             this.poolsDataGridView.BackgroundColor = System.Drawing.SystemColors.Window;
             this.poolsDataGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.poolsDataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.poolsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.poolsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.PoolNameColumn,
             this.StatusColumn});
@@ -141,9 +143,15 @@ namespace XenAdmin.Dialogs.HealthCheck
             // 
             resources.ApplyResources(this.poolDetailsPanel, "poolDetailsPanel");
             this.tableLayoutPanel2.SetColumnSpan(this.poolDetailsPanel, 2);
-            this.poolDetailsPanel.Controls.Add(this.healthCheckStatusPanel, 0, 0);
-            this.poolDetailsPanel.Controls.Add(this.notEnrolledPanel, 0, 1);
+            this.poolDetailsPanel.Controls.Add(this.cannotAlterHealthCheckLabel, 0, 0);
+            this.poolDetailsPanel.Controls.Add(this.healthCheckStatusPanel, 0, 1);
+            this.poolDetailsPanel.Controls.Add(this.notEnrolledPanel, 0, 2);
             this.poolDetailsPanel.Name = "poolDetailsPanel";
+            // 
+            // cannotAlterHealthCheckLabel
+            // 
+            resources.ApplyResources(this.cannotAlterHealthCheckLabel, "cannotAlterHealthCheckLabel");
+            this.cannotAlterHealthCheckLabel.Name = "cannotAlterHealthCheckLabel";
             // 
             // healthCheckStatusPanel
             // 
@@ -407,6 +415,7 @@ namespace XenAdmin.Dialogs.HealthCheck
         private System.Windows.Forms.Label lastUploadDateLabel;
         private System.Windows.Forms.Label failedUploadDateLabel;
         private System.Windows.Forms.Label failedUploadLabel;
+        private System.Windows.Forms.Label cannotAlterHealthCheckLabel;
     }
 }
 
