@@ -129,6 +129,7 @@ namespace XenAdmin
             ImageList16.Images.Add("centos_16x.png", Properties.Resources.centos_16x);
             ImageList16.Images.Add("debian_16x.png", Properties.Resources.debian_16x);
             ImageList16.Images.Add("gooroom_16x.png", Properties.Resources.gooroom_16x);
+            ImageList16.Images.Add("rocky_16x.png", Properties.Resources.rocky_16x);
             ImageList16.Images.Add("linx_16x.png", Properties.Resources.linx_16x);
             ImageList16.Images.Add("oracle_16x.png", Properties.Resources.oracle_16x);
             ImageList16.Images.Add("redhat_16x.png", Properties.Resources.redhat_16x);
@@ -929,6 +930,7 @@ namespace XenAdmin
             public static Bitmap _000_User_h32bit_32 = Properties.Resources._000_User_h32bit_32;
             public static Bitmap asianux_16x = Properties.Resources.asianux_16x;
             public static Bitmap gooroom_16x = Properties.Resources.gooroom_16x;
+            public static Bitmap rocky_16x = Properties.Resources.rocky_16x;
             public static Bitmap linx_16x = Properties.Resources.linx_16x;
             public static Bitmap turbo_16x = Properties.Resources.turbo_16x;
             public static Bitmap usb_16 = Properties.Resources.usb_16;

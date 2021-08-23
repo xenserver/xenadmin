@@ -308,6 +308,8 @@ namespace XenAdmin.Wizards.NewVMWizard
                     return Messages.NEWVMWIZARD_TEMPLATEPAGE_DEBIAN;
                 case VM.VmTemplateType.Gooroom:
                     return Messages.NEWVMWIZARD_TEMPLATEPAGE_GOOROOM;
+                case VM.VmTemplateType.Rocky:
+                    return Messages.NEWVMWIZARD_TEMPLATEPAGE_ROCKY;
                 case VM.VmTemplateType.Linx:
                     return Messages.NEWVMWIZARD_TEMPLATEPAGE_LINX; 
                 case VM.VmTemplateType.Oracle:
@@ -357,6 +359,8 @@ namespace XenAdmin.Wizards.NewVMWizard
                     return Images.StaticImages.debian_16x;
                 case VM.VmTemplateType.Gooroom:
                     return Images.StaticImages.gooroom_16x;
+                case VM.VmTemplateType.Rocky:
+                    return Images.StaticImages.rocky_16x;
                 case VM.VmTemplateType.Linx:
                     return Images.StaticImages.linx_16x;     
                 case VM.VmTemplateType.Oracle:

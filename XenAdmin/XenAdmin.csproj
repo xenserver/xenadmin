@@ -4456,6 +4456,7 @@
     <None Include="Images\DC_16.png" />
     <Content Include="Images\export_32.png" />
     <None Include="Images\gooroom_16x.png" />
+    <None Include="Images\rocky_16x.png" />
     <Content Include="Images\help_16_hover.png" />
     <Content Include="Images\help_24.png" />
     <Content Include="Images\help_24_hover.png" />
