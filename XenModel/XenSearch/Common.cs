@@ -975,6 +975,8 @@ namespace XenAdmin.XenSearch
                             return Icons.Debian;
                         if (os.Contains("gooroom"))
                             return Icons.Gooroom;
+                        if (os.Contains("rocky"))
+                            return Icons.Rocky;
                         if (os.Contains("linx"))
                             return Icons.Linx;
                         if (os.Contains("red"))

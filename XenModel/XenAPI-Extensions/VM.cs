@@ -816,7 +816,7 @@ namespace XenAPI
         private static string[] linuxDistros =
         {
             "debian", "rhel", "fedora", "centos", "scientific", "oracle", "sles",
-            "lsb", "boot2docker", "freebsd", "ubuntu", "neokylin", "gooroom"
+            "lsb", "boot2docker", "freebsd", "ubuntu", "neokylin", "gooroom", "rocky"
         };
 
         /// <summary>
@@ -841,21 +841,22 @@ namespace XenAPI
             CoreOS = 6,
             Debian = 7,
             Gooroom = 8,
-            Linx = 9,
-            NeoKylin = 10,
-            Oracle = 11,
-            RedHat = 12,
-            SciLinux = 13,
-            Suse = 14,
-            Turbo = 15,
-            Ubuntu = 16,
-            YinheKylin = 17,
-            Citrix = 18,
-            Solaris = 19,
-            Misc = 20,
-            Snapshot = 21,
-            SnapshotFromVmpp = 22,
-            Count = 23  //bump this if values are added
+            Rocky = 9,
+            Linx = 10,
+            NeoKylin = 11,
+            Oracle = 12,
+            RedHat = 13,
+            SciLinux = 14,
+            Suse = 15,
+            Turbo = 16,
+            Ubuntu = 17,
+            YinheKylin = 18,
+            Citrix = 19,
+            Solaris = 20,
+            Misc = 21,
+            Snapshot = 22,
+            SnapshotFromVmpp = 23,
+            Count = 24  //bump this if values are added
         }
 
         public VmTemplateType TemplateType()
@@ -882,6 +883,9 @@ namespace XenAPI
 
             if (os.Contains("gooroom"))
                 return VmTemplateType.Gooroom;
+
+            if (os.Contains("rocky"))
+                return VmTemplateType.Rocky;
 
             if (os.Contains("centos"))
                 return VmTemplateType.Centos;
