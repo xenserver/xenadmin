@@ -9355,6 +9355,9 @@ NFS ストレージ リポジトリを構成する場合は、NFS サーバー�
   <data name="NEWVMWIZARD_TEMPLATEPAGE_GOOROOM" xml:space="preserve">
     <value>Gooroom</value>
   </data>
+  <data name="NEWVMWIZARD_TEMPLATEPAGE_ROCKY" xml:space="preserve">
+    <value>Rocky</value>
+  </data>
   <data name="NEWVMWIZARD_TEMPLATEPAGE_LINX" xml:space="preserve">
     <value>Linx</value>
   </data>
