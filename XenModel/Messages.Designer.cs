@@ -27332,6 +27332,15 @@ namespace XenAdmin {
                 return ResourceManager.GetString("NEWVMWIZARD_TEMPLATEPAGE_GOOROOM", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Rocky.
+        /// </summary>
+        public static string NEWVMWIZARD_TEMPLATEPAGE_ROCKY {
+            get {
+                return ResourceManager.GetString("NEWVMWIZARD_TEMPLATEPAGE_ROCKY", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to Linx.
