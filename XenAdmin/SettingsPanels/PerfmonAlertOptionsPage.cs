@@ -187,6 +187,22 @@ namespace XenAdmin.SettingsPanels
             }
         }
 
+        public void HideLocalValidationMessages()
+        {
+            if (EmailAddressTextBox != null)
+            {
+                InvalidParamToolTip.Hide(EmailAddressTextBox);
+            }
+            if (SmtpServerAddrTextBox != null)
+            {
+                InvalidParamToolTip.Hide(SmtpServerAddrTextBox);
+            }
+            if (SmtpServerPortTextBox != null)
+            {
+                InvalidParamToolTip.Hide(SmtpServerPortTextBox);
+            }
+        }
+
         public bool ValidToSave
         {
             get

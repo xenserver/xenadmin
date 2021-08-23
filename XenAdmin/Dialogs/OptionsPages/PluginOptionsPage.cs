@@ -251,6 +251,10 @@ namespace XenAdmin.Dialogs.OptionsPages
         {
         }
 
+        public void HideValidationMessages()
+        {
+        }
+
         public void Save()
         {
             var disabled = new List<string>();

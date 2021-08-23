@@ -206,6 +206,14 @@ namespace XenAdmin.Dialogs.OptionsPages
                 HelpersGUI.ShowBalloonMessage(invalidControl, validationToolTip);
         }
 
+        public void HideValidationMessages()
+        {
+            if (this.invalidControl != null)
+            {
+                this.validationToolTip.Hide(this.invalidControl);
+            }
+        }
+
         public void Save()
         {
             // Proxy server settings
@@ -252,7 +260,7 @@ namespace XenAdmin.Dialogs.OptionsPages
             Program.ReconfigureConnectionSettings();
 
             Core.HealthCheck.SendProxySettingsToHealthCheck();
-        }
+        }              
 
         #endregion
 

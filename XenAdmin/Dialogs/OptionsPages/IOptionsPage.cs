@@ -38,6 +38,7 @@ namespace XenAdmin.Dialogs.OptionsPages
         void Build();
         bool IsValidToSave();
         void ShowValidationMessages();
+        void HideValidationMessages();
         void Save();
     }
 }

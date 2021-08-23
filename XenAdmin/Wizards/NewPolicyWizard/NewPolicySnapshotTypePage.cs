@@ -87,6 +87,9 @@ namespace XenAdmin.Wizards.NewPolicyWizard
         public void ShowLocalValidationMessages()
         { }
 
+        public void HideLocalValidationMessages()
+        { }
+
         public void Cleanup()
         {
             radioButtonDiskOnly.Checked = true;

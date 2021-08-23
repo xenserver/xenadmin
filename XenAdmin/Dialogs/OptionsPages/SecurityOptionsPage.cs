@@ -69,6 +69,9 @@ namespace XenAdmin.Dialogs.OptionsPages
         {
         }
 
+        public void HideValidationMessages()
+        {
+        }
         public void Save()
         {
             // SSL Certificates

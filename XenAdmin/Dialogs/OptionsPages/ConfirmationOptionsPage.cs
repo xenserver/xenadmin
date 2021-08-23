@@ -67,6 +67,10 @@ namespace XenAdmin.Dialogs.OptionsPages
         {
         }
 
+        public void HideValidationMessages()
+        {
+        }
+
         public void Save()
         {
             if (Properties.Settings.Default.DoNotConfirmDismissAlerts != checkBoxDontConfirmDismissAlerts.Checked)

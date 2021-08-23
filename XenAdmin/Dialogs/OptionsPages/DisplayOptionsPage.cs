@@ -61,6 +61,10 @@ namespace XenAdmin.Dialogs.OptionsPages
         {
         }
 
+        public void HideValidationMessages()
+        {
+        }
+
         public void Save()
         {
             if (GraphAreasRadioButton.Checked != Properties.Settings.Default.FillAreaUnderGraphs)

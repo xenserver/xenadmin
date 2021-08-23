@@ -334,6 +334,10 @@ namespace XenAdmin.Wizards.GenericPages
         {
         }
 
+        public override void HideLocalValidationMessages()
+        { 
+        }
+
         public override void Cleanup()
         {
             dataGridView1.Rows.Clear();
