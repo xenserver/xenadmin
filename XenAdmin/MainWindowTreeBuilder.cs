@@ -427,7 +427,7 @@ namespace XenAdmin
             private VirtualTreeNode AddNetworkNode(XenAPI.Network network)
             {
                 bool hidden = network.IsHidden();
-                bool supporter = network.IsSlave();
+                bool supporter = network.IsMember();
                 string rawName = network.Name();
                 String name = supporter
                                   ? String.Format(Messages.NIC_BONDED_MEMBER, rawName)

@@ -402,7 +402,7 @@ namespace XenAdmin.Controls.NetworkingTab
 
                 AddNetworkButton.Enabled = !locked;
 
-                EditNetworkButton.Enabled = !locked && !TheNetwork.Locked && !TheNetwork.IsSlave() && !TheNetwork.CreateInProgress()
+                EditNetworkButton.Enabled = !locked && !TheNetwork.Locked && !TheNetwork.IsMember() && !TheNetwork.CreateInProgress()
                     && !TheNetwork.IsGuestInstallerNetwork();
                 // CA-218956 - Expose HIMN when showing hidden objects
                 // HIMN should not be editable
@@ -966,7 +966,7 @@ namespace XenAdmin.Controls.NetworkingTab
 
             public void UpdateDetails()
             {
-                Enabled = !Network.IsSlave();
+                Enabled = !Network.IsMember();
 
                 DeregisterPifEvents();
 
@@ -1010,7 +1010,7 @@ namespace XenAdmin.Controls.NetworkingTab
 
             private object NetworkName()
             {
-                bool isSupporter = Network.IsSlave();
+                bool isSupporter = Network.IsMember();
                 if (Network.Show(XenAdmin.Properties.Settings.Default.ShowHiddenVMs) && !isSupporter)
                     return Helpers.GetName(Network);
                 else if (isSupporter && Properties.Settings.Default.ShowHiddenVMs)

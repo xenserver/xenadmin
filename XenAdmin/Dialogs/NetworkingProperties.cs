@@ -251,7 +251,7 @@ namespace XenAdmin.Dialogs
                     if (connection.ResolveAll(network.PIFs).Find(p => !p.IsTunnelAccessPIF()) == null)  // no PIFs, or all the PIFs are tunnel access PIFs so the network is a CHIN
                         continue;
                     PIF pif = FindPIFForThisHost(network.PIFs);
-                    if (pif != null && pif.IsInUseBondSlave())
+                    if (pif != null && pif.IsInUseBondMember())
                         continue;
                     if (!inusemap.ContainsKey(network))
                         inusemap[network] = null;

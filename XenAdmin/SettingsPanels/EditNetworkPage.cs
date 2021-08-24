@@ -433,7 +433,7 @@ namespace XenAdmin.SettingsPanels
                         !pif.Show(Properties.Settings.Default.ShowHiddenVMs))
                         continue;
 
-                    if (!pif.IsPhysical() || pif.IsBondSlave())
+                    if (!pif.IsPhysical() || pif.IsBondMember())
                         continue;
 
                     if (pif.host.opaque_ref != host.opaque_ref)

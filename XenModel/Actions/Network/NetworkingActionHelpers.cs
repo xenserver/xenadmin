@@ -257,7 +257,7 @@ namespace XenAdmin.Actions
             {
                 foreach (Host host in pool.Connection.Cache.Hosts)
                 {
-                    if (host.IsMaster())
+                    if (host.IsCoordinator())
                         continue;
 
                     if (!host.IsLive() && !deadHost.Contains(host.uuid))
@@ -276,7 +276,7 @@ namespace XenAdmin.Actions
             {
                 foreach (Host host in pool.Connection.Cache.Hosts)
                 {
-                    if (host.IsMaster())
+                    if (host.IsCoordinator())
                         continue;
 
                     if (host.IsLive() && deadHost.Contains(host.uuid))

@@ -218,7 +218,7 @@ namespace XenAdmin.Controls
 
         private string PIFDescription(PIF pif)
         {
-            Bond bond = pif.BondSlaveOf();
+            Bond bond = pif.BondMemberOf();
             return bond == null ? "" : string.Format(Messages.ALREADY_IN_BOND, bond.Name());
         }
 

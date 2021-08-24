@@ -74,10 +74,10 @@ namespace XenAPI
                 VLAN vlan = Connection.Resolve(VLAN_master_of);
                 if (vlan == null)
                     return "";
-                PIF slave = Connection.Resolve(vlan.tagged_PIF);
-                if (slave == null)
+                PIF member = Connection.Resolve(vlan.tagged_PIF);
+                if (member == null)
                     return "";
-                return slave.Name();
+                return member.Name();
             }
         }
 
@@ -113,21 +113,21 @@ namespace XenAPI
                 if (Connection == null)
                     return device;
 
-                List<PIF> slaves = new List<PIF>();
+                List<PIF> members = new List<PIF>();
                 foreach (Bond bond in Connection.ResolveAll(bond_master_of))
                 {
-                    slaves.AddRange(Connection.ResolveAll(bond.slaves));
+                    members.AddRange(Connection.ResolveAll(bond.slaves));
                 }
-                return BondSuffix(slaves);
+                return BondSuffix(members);
             }
         }
 
-        public static string BondSuffix(List<PIF> slaves)
+        public static string BondSuffix(List<PIF> members)
         {
             List<string> ids = new List<string>();
-            foreach (PIF slave in slaves)
+            foreach (PIF member in members)
             {
-                ids.Add(slave.device.Replace("eth", ""));
+                ids.Add(member.device.Replace("eth", ""));
             }
             ids.Sort();
             return string.Join("+", ids.ToArray());
@@ -212,17 +212,17 @@ namespace XenAPI
             return string.IsNullOrEmpty(managementPurpose) ? Messages.NETWORKING_PROPERTIES_PURPOSE_UNKNOWN : managementPurpose;
         }
 
-        public bool IsBondSlave()
+        public bool IsBondMember()
         {
-            return BondSlaveOf() != null;
+            return BondMemberOf() != null;
         }
 
         /// <summary>
         /// Whether this is a bond member, and the bond interface is plugged.
         /// </summary>
-        public bool IsInUseBondSlave()
+        public bool IsInUseBondMember()
         {
-            Bond bond = BondSlaveOf();
+            Bond bond = BondMemberOf();
             if (bond == null)
                 return false;
             PIF bondInterface = bond.Connection.Resolve(bond.master);
@@ -237,9 +237,9 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Returns the Bond of which this PIF is a slave, or null if it is not so.
+        /// Returns the Bond of which this PIF is a member, or null if it is not so.
         /// </summary>
-        public Bond BondSlaveOf()
+        public Bond BondMemberOf()
         {
             return Connection == null ? null : Connection.Resolve(bond_slave_of);
         }

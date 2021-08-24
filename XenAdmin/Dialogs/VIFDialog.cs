@@ -189,7 +189,7 @@ namespace XenAdmin.Dialogs
             networks.Sort();
             foreach (XenAPI.Network network in networks)
             {
-                if (!network.Show(Properties.Settings.Default.ShowHiddenVMs) || network.IsSlave() || (network.IsSriov() && !allowSriov))
+                if (!network.Show(Properties.Settings.Default.ShowHiddenVMs) || network.IsMember() || (network.IsSriov() && !allowSriov))
                     continue;
 
                 comboBoxNetwork.Items.Add(new NetworkComboBoxItem(network));

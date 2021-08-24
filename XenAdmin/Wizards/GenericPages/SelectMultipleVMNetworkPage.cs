@@ -301,7 +301,7 @@ namespace XenAdmin.Wizards.GenericPages
             if (!network.Show(Properties.Settings.Default.ShowHiddenVMs))
                 return false;
 
-            if (network.IsSlave())
+            if (network.IsMember())
                 return false;
 
             var targetHostRef = targetRef as XenRef<Host>;

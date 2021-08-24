@@ -143,7 +143,7 @@ namespace XenAPI
                 if (showHiddenVMs)
                     return true;
 
-                if (IsSlave())
+                if (IsMember())
                     return false;
 
                 return !IsHidden();
@@ -188,25 +188,25 @@ namespace XenAPI
             return ans;
         }
 
-        public bool IsSlave()
+        public bool IsMember()
         {
             if (Connection == null)
                 return false;
             foreach (PIF pif in Connection.ResolveAll(PIFs))
             {
-                if (pif.IsBondSlave())
+                if (pif.IsBondMember())
                     return true;
             }
             return false;
         }
 
-        public bool IsInUseBondSlave()
+        public bool IsInUseBondMember()
         {
             if (Connection == null)
                 return false;
             foreach (PIF pif in Connection.ResolveAll(PIFs))
             {
-                if (pif.IsInUseBondSlave())
+                if (pif.IsInUseBondMember())
                     return true;
             }
             return false;
