@@ -130,7 +130,7 @@ namespace XenAdmin.Actions
 
                 if (pool == null)
                     info = string.Format("Server '{0}' is a stand alone server", host.Name());
-                else if (host.IsMaster())
+                else if (host.IsCoordinator())
                     info = string.Format("Server '{0}' is a coordinator of pool '{1}'", host.Name(), pool.Name());
                 else
                     info = string.Format("Server '{0}' is a supporter of pool '{1}'", host.Name(), pool.Name());

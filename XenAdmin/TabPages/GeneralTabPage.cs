@@ -1125,7 +1125,7 @@ namespace XenAdmin.TabPages
             if (xenObject is Host host)
             {
                 if (Helpers.GetPool(xenObject.Connection) != null)
-                    s.AddEntry(Messages.POOL_COORDINATOR, host.IsMaster() ? Messages.YES : Messages.NO);
+                    s.AddEntry(Messages.POOL_COORDINATOR, host.IsCoordinator() ? Messages.YES : Messages.NO);
 
                 if (!host.IsLive())
                 {

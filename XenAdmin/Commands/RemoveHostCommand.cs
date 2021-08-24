@@ -82,7 +82,7 @@ namespace XenAdmin.Commands
         private static bool CanRun(Host host)
         {
             bool disconnected = host.Connection != null && !host.Connection.IsConnected;
-            return disconnected || host.IsMaster();
+            return disconnected || host.IsCoordinator();
         }
 
         protected override bool CanRunCore(SelectedItemCollection selection)

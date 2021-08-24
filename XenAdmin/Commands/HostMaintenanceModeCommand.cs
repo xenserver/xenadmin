@@ -76,7 +76,7 @@ namespace XenAdmin.Commands
         {
             Pool pool = Helpers.GetPool(host.Connection);
 
-            if (pool != null && pool.ha_enabled && host.IsMaster())
+            if (pool != null && pool.ha_enabled && host.IsCoordinator())
             {
                 using (var dlg = new ErrorDialog(string.Format(Messages.HA_CANNOT_EVACUATE_COORDINATOR,
                         Helpers.GetName(host).Ellipsise(Helpers.DEFAULT_NAME_TRIM_LENGTH))))
@@ -88,7 +88,7 @@ namespace XenAdmin.Commands
             }
 
             if (!host.GetRunningVMs().Any() &&
-                (pool == null || pool.Connection.Cache.Hosts.Length == 1 || !host.IsMaster()))
+                (pool == null || pool.Connection.Cache.Hosts.Length == 1 || !host.IsCoordinator()))
             {
                 Program.MainWindow.CloseActiveWizards(host.Connection);
                 var action = new EvacuateHostAction(host, null, new Dictionary<XenRef<VM>, string[]>(), AddHostToPoolCommand.NtolDialog, AddHostToPoolCommand.EnableNtolDialog);

@@ -96,7 +96,7 @@ namespace XenAdmin.Dialogs
             _host = host;
             _pool = Helpers.GetPoolOfOne(_host.Connection);
 
-            if (!_host.IsMaster() || connection.Cache.HostCount <= 1)
+            if (!_host.IsCoordinator() || connection.Cache.HostCount <= 1)
                 tableLayoutPanelNewCoordinator.Visible = false;
             else
                 tableLayoutPanelPSr.Visible = false;

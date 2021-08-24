@@ -66,7 +66,7 @@ namespace XenAdmin.Actions
                 if (host == null)
                     continue;
 
-                if (host.IsMaster())
+                if (host.IsCoordinator())
                 {
                     pifOnCoordinator = thePif;
                     break;

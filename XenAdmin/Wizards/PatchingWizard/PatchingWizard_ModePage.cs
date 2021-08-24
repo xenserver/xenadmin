@@ -341,7 +341,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                         && livePatchCodesByHost[server.uuid] == livepatch_status.ok_livepatch_complete)
                         continue;
 
-                    var msg = server.IsMaster()
+                    var msg = server.IsCoordinator()
                         ? string.Format("{0} ({1})", server.Name(), Messages.COORDINATOR)
                         : server.Name();
                     sb.AppendIndented(msg).AppendLine();
@@ -366,7 +366,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 var sb = new StringBuilder();
                 foreach (var server in kvp.Value)
                 {
-                    var msg = server.IsMaster()
+                    var msg = server.IsCoordinator()
                         ? string.Format("{0} ({1})", server.Name(), Messages.COORDINATOR)
                         : server.Name();
                     sb.AppendIndented(msg).AppendLine();

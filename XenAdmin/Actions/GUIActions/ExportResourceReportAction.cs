@@ -640,7 +640,7 @@ namespace XenAdmin.Actions
 
                 
                 HostInfo buf = new HostInfo(host.name_label, host.address, host.uuid, cpu_usage,
-                    host.IsMaster() ? Messages.YES : Messages.NO, network_usage, usage,
+                    host.IsCoordinator() ? Messages.YES : Messages.NO, network_usage, usage,
                     Convert.ToString(host.Uptime()), srSizeString, host.Description());
                 m_Hosts.Add(buf);
                 PercentComplete = Convert.ToInt32((++itemIndex) * baseIndex / itemCount);

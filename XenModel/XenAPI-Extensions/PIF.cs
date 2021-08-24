@@ -218,17 +218,17 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Whether this is a bond slave, and the bond master is plugged.
+        /// Whether this is a bond member, and the bond interface is plugged.
         /// </summary>
         public bool IsInUseBondSlave()
         {
             Bond bond = BondSlaveOf();
             if (bond == null)
                 return false;
-            PIF master = bond.Connection.Resolve(bond.master);
-            if (master == null)
+            PIF bondInterface = bond.Connection.Resolve(bond.master);
+            if (bondInterface == null)
                 return false;
-            return master.currently_attached;
+            return bondInterface.currently_attached;
         }
 
         public bool IsUsedByClustering()
@@ -245,9 +245,9 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Returns the Bond of which this PIF is a master, or null if it is not so.
+        /// Returns the Bond of which this PIF is an interface, or null if it is not so.
         /// </summary>
-        public Bond BondMasterOf()
+        public Bond BondInterfaceOf()
         {
             return Connection == null || bond_master_of.Count == 0 ? null : Connection.Resolve(bond_master_of[0]);
         }

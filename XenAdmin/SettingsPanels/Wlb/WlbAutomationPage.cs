@@ -114,7 +114,7 @@ namespace XenAdmin.SettingsPanels
                 ListViewItem thisItem = new ListViewItem();
                 thisItem.Tag = host;
                 thisItem.Checked = participatesInPowerManagement;
-                if (host.IsMaster())
+                if (host.IsCoordinator())
                 {
                     thisItem.SubItems.Add(string.Format("{0} ({1})", host.Name(), Messages.POOL_COORDINATOR));
                 }
@@ -269,7 +269,7 @@ namespace XenAdmin.SettingsPanels
 
         private bool HostCannotParticipateInPowerManagement(Host host)
         {
-            return host.IsMaster() || string.IsNullOrEmpty(host.power_on_mode);
+            return host.IsCoordinator() || string.IsNullOrEmpty(host.power_on_mode);
         }
 
         private void listViewExPowerManagementHosts_DrawSubItem(object sender, DrawListViewSubItemEventArgs e)
@@ -309,7 +309,7 @@ namespace XenAdmin.SettingsPanels
                     _poolConfiguration.HostConfigurations.Add(hostConfiguration.Uuid, hostConfiguration);
                 }
 
-                if ((listItem.Checked == true) && (!host.IsMaster()))
+                if ((listItem.Checked == true) && (!host.IsCoordinator()))
                 {
                     hostConfiguration.ParticipatesInPowerManagement = true;
                 }

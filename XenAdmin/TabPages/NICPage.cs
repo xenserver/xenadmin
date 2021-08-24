@@ -292,7 +292,7 @@ namespace XenAdmin.TabPages
                 return;
             }
 
-            var bondInterfaceOf = pif.BondMasterOf();
+            var bondInterfaceOf = pif.BondInterfaceOf();
             DeleteBondButton.Enabled = bondInterfaceOf != null && !bondInterfaceOf.Locked;
         }
 

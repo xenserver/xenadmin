@@ -96,7 +96,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
         protected void WaitForReboot(ref Session session, Func<Session, string, double> metricDelegate, Action<Session> methodInvoker)
         {
-            bool isCoordinator = GetResolvedHost().IsMaster();
+            bool isCoordinator = GetResolvedHost().IsCoordinator();
 
             lostConnection = false;
             _cancelled = false;

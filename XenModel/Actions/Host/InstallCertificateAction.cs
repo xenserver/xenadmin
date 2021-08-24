@@ -62,7 +62,7 @@ namespace XenAdmin.Actions
         {
             Host = host;
             _hostRef = host.opaque_ref;
-            _isCoordinator = host.IsMaster();
+            _isCoordinator = host.IsCoordinator();
 
             if (host.certificates != null && host.certificates.Count > 0)
             {

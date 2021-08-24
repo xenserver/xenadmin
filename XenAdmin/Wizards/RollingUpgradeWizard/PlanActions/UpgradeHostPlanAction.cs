@@ -86,7 +86,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
                     var error = new Exception(Messages.REBOOT_WITH_SAME_VERSION);
                     //when the supporter reboots with the same version do not interrupt the process,
                     //so set the error without throwing it
-                    if (hostAfterReboot.IsMaster())
+                    if (hostAfterReboot.IsCoordinator())
                         throw error;
                     Error = error;
                 }

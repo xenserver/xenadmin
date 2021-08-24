@@ -126,7 +126,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         protected override bool SkipInitialPlanActions(Host host)
         {
             //Skip hosts already upgraded
-            if (host.IsMaster())
+            if (host.IsCoordinator())
             {
                 var pool = Helpers.GetPoolOfOne(host.Connection);
                 if (pool != null && pool.IsCoordinatorUpgraded())

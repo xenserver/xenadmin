@@ -48,7 +48,7 @@ namespace XenAdmin.Network
         public static Bond GetCoordinatorManagementBond(IXenConnection conn)
         {
             PIF pif = GetCoordinatorManagementPIF(conn);
-            return pif == null ? null : pif.BondMasterOf();
+            return pif == null ? null : pif.BondInterfaceOf();
         }
 
         private static PIF GetCoordinatorManagementPIF(IXenConnection conn)

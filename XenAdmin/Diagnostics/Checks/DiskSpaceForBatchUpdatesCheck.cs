@@ -61,7 +61,7 @@ namespace XenAdmin.Diagnostics.Checks
             // check the disk space on host
             var requiredDiskSpace = elyOrGreater
                 ? updateSequence[Host].Sum(p => p.InstallationSize) // all updates on this host (for installation)
-                : Host.IsMaster()
+                : Host.IsCoordinator()
                     ? updateSequence[Host].Sum(p => p.InstallationSize) + updateSequence.Values.SelectMany(p => p).Distinct().Sum(p => p.InstallationSize) // coordinator: all updates on coordinator (for installation) + all updates in pool (for upload)
                     : updateSequence[Host].Sum(p => p.InstallationSize) * 2; // non-coordinator: all updates on this host x 2 (for installation + upload)
 
@@ -80,7 +80,7 @@ namespace XenAdmin.Diagnostics.Checks
                 return new HostOutOfSpaceProblem(this, Host, action.DiskSpaceRequirements);
 
             // check the disk space for uploading the update files to the pool's SRs (only needs to be done once, so only run this on the coordinator)
-            if (elyOrGreater && Host.IsMaster())
+            if (elyOrGreater && Host.IsCoordinator())
             {
                 var allPatches = updateSequence.Values.SelectMany(p => p).Distinct().ToList();
                 var maxFileSize = allPatches.Max(p => p.DownloadSize);

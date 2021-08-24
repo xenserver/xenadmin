@@ -69,7 +69,7 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            bool isCoordinator = Host.IsMaster();
+            bool isCoordinator = Host.IsCoordinator();
 
             try
             {

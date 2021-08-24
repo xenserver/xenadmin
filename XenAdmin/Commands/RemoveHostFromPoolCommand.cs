@@ -124,7 +124,7 @@ namespace XenAdmin.Commands
         {
             if (item is Host host)
             {
-                if (host.IsMaster())
+                if (host.IsCoordinator())
                     return Messages.MESSAGEBOX_POOL_COORDINATOR_REMOVE;
 
                 if (!host.IsLive())

@@ -75,7 +75,7 @@ namespace XenAdmin.Commands
             Host host = selection.XenObject as Host;
             bool is_host = (host != null 
                 );
-            bool is_coordinator = is_host && host.IsMaster();
+            bool is_coordinator = is_host && host.IsCoordinator();
             bool connected = connection != null && connection.IsConnected;
 
             return (connected && is_coordinator) || (connection != null && connection.InProgress && !connection.IsConnected);
