@@ -472,9 +472,12 @@ namespace XenAdmin.SettingsPanels
         {
         }
 
-		/// <summary>
-		/// a.k.a. OnClosing()
-		/// </summary>
+        public void HideLocalValidationMessages()
+        { }
+
+        /// <summary>
+        /// a.k.a. OnClosing()
+        /// </summary>
         public void Cleanup()
         {
             haNtolIndicator.StopNtolUpdate();

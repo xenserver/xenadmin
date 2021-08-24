@@ -74,6 +74,11 @@ namespace XenAdmin.SettingsPanels
         void ShowLocalValidationMessages();
 
         /// <summary>
+        /// Hide local validation balloon tooltips
+        /// </summary>
+        void HideLocalValidationMessages();
+
+        /// <summary>
         /// Unregister listeners, dispose balloon tooltips, etc.
         /// </summary>
         void Cleanup();

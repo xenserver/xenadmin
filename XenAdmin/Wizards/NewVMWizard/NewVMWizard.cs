@@ -220,7 +220,7 @@ namespace XenAdmin.Wizards.NewVMWizard
 
 
                 RemovePage(pageVgpu);
-                gpuCapability = Helpers.GpuCapability(xenConnection) && selectedTemplate.CanHaveGpu();
+                gpuCapability = Helpers.GpuCapability(xenConnection) && selectedTemplate.CanHaveGpu() && Helpers.GpusAvailable(xenConnection);
                 if (gpuCapability)
                     AddAfterPage(page_5_CpuMem, pageVgpu);
 

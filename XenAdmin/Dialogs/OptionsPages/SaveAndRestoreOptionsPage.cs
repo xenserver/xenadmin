@@ -219,7 +219,11 @@ namespace XenAdmin.Dialogs.OptionsPages
         public void ShowValidationMessages()
         {
         }
-        
+
+        public void HideValidationMessages()
+        {
+        }
+
         public void Save()
         {
             SaveEverything();

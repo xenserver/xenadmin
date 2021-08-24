@@ -40,6 +40,7 @@ using XenAdmin.Controls;
 using XenAdmin.Controls.DataGridViewEx;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
+using XenAdmin.Network;
 using XenAPI;
 
 
@@ -49,8 +50,6 @@ namespace XenAdmin.SettingsPanels
     {
         public VM vm;
         private List<VGPU> currentGpus = new List<VGPU>();
-        private GPU_group[] gpu_groups;
-        private bool gpusAvailable;
 
         public GpuEditPage()
         {
@@ -101,6 +100,10 @@ namespace XenAdmin.SettingsPanels
         {
         }
 
+        public void HideLocalValidationMessages()
+        {
+        }
+
         public void Cleanup()
         {
         }
@@ -115,7 +118,7 @@ namespace XenAdmin.SettingsPanels
             {
                 string txt = Messages.UNAVAILABLE;
 
-                if (gpusAvailable)
+                if (Helpers.GpusAvailable(Connection))
                 {
                     var vGpus = VGpus;
                     txt = vGpus.Count > 0 ? string.Join(",", vGpus.Select(v => v.VGpuTypeDescription())) : Messages.GPU_NONE;
@@ -155,26 +158,8 @@ namespace XenAdmin.SettingsPanels
         public override void PopulatePage()
         {
             currentGpus.Clear();
-
-            gpu_groups = Connection.Cache.GPU_groups.Where(g => g.PGPUs.Count > 0 && g.supported_VGPU_types.Count != 0).ToArray();
-            //not showing empty groups
-
-            gpusAvailable = gpu_groups.Length > 0;
-
-            if (gpusAvailable)
-            {
-                PopulateGrid();
-                ShowHideWarnings();
-            }
-            else
-            {
-                labelRubric.Text = Helpers.GetPool(Connection) == null
-                                       ? Messages.GPU_RUBRIC_NO_GPUS_SERVER
-                                       : Messages.GPU_RUBRIC_NO_GPUS_POOL;
-
-                gpuGrid.Visible = addButton.Visible = deleteButton.Visible = false;
-                warningsTable.Visible = false;
-            }
+            PopulateGrid();
+            ShowHideWarnings();
         }
 
         public override void SelectDefaultControl()
@@ -213,9 +198,6 @@ namespace XenAdmin.SettingsPanels
 
         public void ShowHideWarnings()
         {
-            if (!gpusAvailable)
-                return;
-
             var vGpus = VGpus;
 
             imgExperimental.Visible = labelExperimental.Visible =
@@ -251,7 +233,7 @@ namespace XenAdmin.SettingsPanels
             }
 
             var multipleVgpuSupport = vGpus.All(v => { var x = Connection.Resolve(v.type); return x != null && x.compatible_types_in_vm.Count > 0; });
-            addButton.Enabled = multipleVgpuSupport;
+            addButton.Enabled = Helpers.GpusAvailable(Connection) && multipleVgpuSupport;
             deleteButton.Enabled = gpuGrid.SelectedRows.Count > 0;
 
             imgMulti.Visible = labelMulti.Visible = vGpus.Count > 0;

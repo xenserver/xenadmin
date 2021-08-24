@@ -315,6 +315,15 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             HelpersGUI.ShowBalloonMessage(flowLayoutPanel1, InvalidParamToolTip, Messages.VMSS_INVALID_SCHEDULE);
         }
 
+
+        public void HideLocalValidationMessages()
+        {
+            if (flowLayoutPanel1 != null)
+            {
+                InvalidParamToolTip.Hide(flowLayoutPanel1);
+            }
+        }
+
         public void Cleanup()
         {
             InvalidParamToolTip.Dispose();

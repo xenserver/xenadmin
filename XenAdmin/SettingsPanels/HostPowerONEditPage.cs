@@ -159,6 +159,17 @@ namespace XenAdmin.SettingsPanels
             if (_invalidParamToolTip.Tag is Control ctrl)
                 HelpersGUI.ShowBalloonMessage(ctrl, _invalidParamToolTip);
         }
+        public void HideLocalValidationMessages()
+        {
+            if (_invalidParamToolTip.Tag is Control ctrl)
+            {
+                if (ctrl != null)
+                {
+                    _invalidParamToolTip.Hide(ctrl);
+                }
+            }
+        }
+
 
         public void Cleanup()
         {

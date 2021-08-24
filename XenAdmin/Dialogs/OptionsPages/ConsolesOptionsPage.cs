@@ -120,6 +120,10 @@ namespace XenAdmin.Dialogs.OptionsPages
         {
         }
 
+        public void HideValidationMessages()
+        {
+        }
+
         public void Save()
         {
             // Fullscreen shortcut keys

@@ -17614,24 +17614,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You can improve graphics performance by assigning a dedicated graphics processing unit (GPU) to a VM. However, no GPUs have been detected in this pool, so this option is not currently available..
-        /// </summary>
-        public static string GPU_RUBRIC_NO_GPUS_POOL {
-            get {
-                return ResourceManager.GetString("GPU_RUBRIC_NO_GPUS_POOL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You can improve graphics performance by assigning a dedicated graphics processing unit (GPU) to a VM. However, no GPUs have been detected in this server, so this option is not currently available..
-        /// </summary>
-        public static string GPU_RUBRIC_NO_GPUS_SERVER {
-            get {
-                return ResourceManager.GetString("GPU_RUBRIC_NO_GPUS_SERVER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Select which virtual GPU types are allowed on these GPUs..
         /// </summary>
         public static string GPU_RUBRIC_PLEASE_SELECT_WHICH_GPU_MULTIPLE {

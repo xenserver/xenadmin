@@ -241,7 +241,8 @@ namespace XenAdmin.Dialogs
                     }
                     else
                     {
-                        ShowTab(GpuEditPage = new GpuEditPage());
+                        if(Helpers.GpusAvailable(connection))
+                            ShowTab(GpuEditPage = new GpuEditPage());
                     }
                 }
 
@@ -557,6 +558,21 @@ namespace XenAdmin.Dialogs
                 HostPowerONEditPage.LoadPowerOnMode();
                 return;
             }
+
+            HideToolTips();
+        }
+
+        private void HideToolTips()
+        {
+            foreach (IEditPage page in verticalTabs.Items)
+            {
+                page.HideLocalValidationMessages();
+            }
+        }
+
+        private void PropertiesDialog_Moved(object sender, EventArgs e)
+        {
+            HideToolTips();
         }
 
         private void PropertiesDialog_FormClosed(object sender, FormClosedEventArgs e)

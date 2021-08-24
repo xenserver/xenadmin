@@ -6141,12 +6141,6 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="GPU_PLACEMENT_POLICY_MIXED_DESCRIPTION" xml:space="preserve">
     <value>Mixed: different settings for different GPU groups</value>
   </data>
-  <data name="GPU_RUBRIC_NO_GPUS_POOL" xml:space="preserve">
-    <value>You can improve graphics performance by assigning a dedicated graphics processing unit (GPU) to a VM. However, no GPUs have been detected in this pool, so this option is not currently available.</value>
-  </data>
-  <data name="GPU_RUBRIC_NO_GPUS_SERVER" xml:space="preserve">
-    <value>You can improve graphics performance by assigning a dedicated graphics processing unit (GPU) to a VM. However, no GPUs have been detected in this server, so this option is not currently available.</value>
-  </data>
   <data name="GPU_RUBRIC_PLEASE_SELECT_WHICH_GPU_MULTIPLE" xml:space="preserve">
     <value>Select which virtual GPU types are allowed on these GPUs.</value>
   </data>
