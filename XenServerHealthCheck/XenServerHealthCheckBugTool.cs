@@ -173,7 +173,7 @@ namespace XenServerHealthCheck
                 {
                     coordinatorInfo.Add(string.Format("Server '{0}' is a {1} of pool '{2}'",
                         host.Name(),
-                        p.master.opaque_ref == host.opaque_ref ? "master" : "supporter",
+                        p.master.opaque_ref == host.opaque_ref ? "coordinator" : "supporter",
                         p.Name()));
                 }
 
