@@ -159,7 +159,7 @@ namespace XenServerHealthCheck
                         }
                         else
                         {
-                            log.InfoFormat("Remove credential since it is the supporter of coordiantor {0}", coordinatorName);
+                            log.InfoFormat("Remove credential since it is the supporter of coordinator {0}", coordinatorName);
                             if (session != null)
                                 session.logout();
                             log.Error(exn, exn);
