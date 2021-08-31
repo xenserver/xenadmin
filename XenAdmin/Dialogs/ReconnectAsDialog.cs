@@ -63,7 +63,7 @@ namespace XenAdmin.Dialogs
             // start logout then wait for connection to become disconnected
             xc.ConnectionStateChanged += xc_ConnectionStateChanged;
 
-            if (!new DisconnectCommand(Program.MainWindow, xc, true).Execute())
+            if (!new DisconnectCommand(Program.MainWindow, xc, true).Run())
             {
                 // User wimped out
                 xc.ConnectionStateChanged -= xc_ConnectionStateChanged;

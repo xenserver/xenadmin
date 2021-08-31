@@ -93,8 +93,8 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
                 return wizard.FinalAction;
             }
 
-            Host master = pool.Connection.Resolve(pool.master);
-            if (master == null)
+            Host coordinator = pool.Connection.Resolve(pool.master);
+            if (coordinator == null)
             {
                 return null;
             }

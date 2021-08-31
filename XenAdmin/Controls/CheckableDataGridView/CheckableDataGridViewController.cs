@@ -73,7 +73,7 @@ namespace XenAdmin.Controls.CheckableDataGridView
 
         private IXenObject GetXenObject(CheckableDataGridViewRow row)
         {
-            return row.XenObject is Pool ? Helpers.GetMaster(row.XenObject.Connection) : row.XenObject;
+            return row.XenObject is Pool ? Helpers.GetCoordinator(row.XenObject.Connection) : row.XenObject;
         }
 
         public void AddRows(List<CheckableDataGridViewRow> rows)

@@ -427,14 +427,14 @@ namespace XenAdmin
             private VirtualTreeNode AddNetworkNode(XenAPI.Network network)
             {
                 bool hidden = network.IsHidden();
-                bool slave = network.IsSlave();
+                bool supporter = network.IsMember();
                 string rawName = network.Name();
-                String name = slave
-                                  ? String.Format(Messages.NIC_SLAVE, rawName)
+                String name = supporter
+                                  ? String.Format(Messages.NIC_BONDED_MEMBER, rawName)
                                   : hidden
                                         ? String.Format(Messages.X_HIDDEN, rawName)
                                         : rawName;
-                return AddNode(name, Images.GetIconFor(network), slave || hidden, network);
+                return AddNode(name, Images.GetIconFor(network), supporter || hidden, network);
             }
 
             private VirtualTreeNode AddVDINode(VDI vdi)

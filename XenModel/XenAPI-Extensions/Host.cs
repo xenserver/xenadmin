@@ -560,13 +560,13 @@ namespace XenAPI
         public override int CompareTo(Host other)
         {
             // CA-20865 Sort in the following order:
-            // * Masters first
-            // * Then connected slaves
+            // * Coordinators first
+            // * Then connected supporters
             // * Then disconnected servers
             // Within each group, in NaturalCompare order
 
-            bool thisConnected = (Connection.IsConnected && Helpers.GetMaster(Connection) != null);
-            bool otherConnected = (other.Connection.IsConnected && Helpers.GetMaster(other.Connection) != null);
+            bool thisConnected = (Connection.IsConnected && Helpers.GetCoordinator(Connection) != null);
+            bool otherConnected = (other.Connection.IsConnected && Helpers.GetCoordinator(other.Connection) != null);
 
             if (thisConnected && !otherConnected)
                 return -1;
@@ -574,26 +574,26 @@ namespace XenAPI
                 return 1;
             else if (thisConnected)
             {
-                bool thisIsMaster = IsMaster();
-                bool otherIsMaster = other.IsMaster();
+                bool thisIsCoordinator = IsCoordinator();
+                bool otherIsCoordinator = other.IsCoordinator();
 
-                if (thisIsMaster && !otherIsMaster)
+                if (thisIsCoordinator && !otherIsCoordinator)
                     return -1;
-                else if (!thisIsMaster && otherIsMaster)
+                else if (!thisIsCoordinator && otherIsCoordinator)
                     return 1;
             }
 
             return base.CompareTo(other);
         }
 
-        public virtual bool IsMaster()
+        public virtual bool IsCoordinator()
         {
             Pool pool = Helpers.GetPoolOfOne(Connection);
             if (pool == null)
                 return false;
 
-            Host master = Connection.Resolve<Host>(pool.master);
-            return master != null && master.uuid == this.uuid;
+            Host coordinator = Connection.Resolve<Host>(pool.master);
+            return coordinator != null && coordinator.uuid == this.uuid;
         }
 
         /// <summary>

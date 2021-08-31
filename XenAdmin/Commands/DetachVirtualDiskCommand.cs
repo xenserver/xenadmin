@@ -98,12 +98,12 @@ namespace XenAdmin.Commands
             }
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
-            return selection.AllItemsAre<VDI>() && selection.AtLeastOneXenObjectCan<VDI>(CanExecute);
+            return selection.AllItemsAre<VDI>() && selection.AtLeastOneXenObjectCan<VDI>(CanRun);
         }
 
-        protected bool CanExecute(VDI vdi)
+        protected bool CanRun(VDI vdi)
         {  
             if (vdi == null)
                 return false;
@@ -116,7 +116,7 @@ namespace XenAdmin.Commands
                         continue;
 
                     DeactivateVBDCommand cmd = new DeactivateVBDCommand(Program.MainWindow, vbd);
-                    if (!cmd.CanExecute())
+                    if (!cmd.CanRun())
                         return false;
                 }
             }
@@ -124,11 +124,11 @@ namespace XenAdmin.Commands
             return true;
         }
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
             VDI vdi = item as VDI;
             if (vdi == null)
-                return base.GetCantExecuteReasonCore(item);
+                return base.GetCantRunReasonCore(item);
 
             
             foreach (VBD vbd in vdi.Connection.ResolveAll<VBD>(vdi.VBDs))
@@ -139,17 +139,17 @@ namespace XenAdmin.Commands
                         continue;
 
                     DeactivateVBDCommand cmd = new DeactivateVBDCommand(Program.MainWindow, vbd);
-                    if (!cmd.CanExecute())
+                    if (!cmd.CanRun())
                     {
-                        var reasons = cmd.GetCantExecuteReasons();
+                        var reasons = cmd.GetCantRunReasons();
                         return reasons.Count > 0 ? reasons.ElementAt(0).Value : Messages.UNKNOWN;
                     }
                 }
             }
-            return base.GetCantExecuteReasonCore(item);
+            return base.GetCantRunReasonCore(item);
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             List<AsyncAction> actionsToComplete = new List<AsyncAction>();
             foreach (VDI vdi in selection.AsXenObjects<VDI>())
@@ -260,9 +260,9 @@ namespace XenAdmin.Commands
             }
         }
 
-        protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantExecuteReasons)
+        protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantRunReasons)
         {
-            return new CommandErrorDialog(Messages.ERROR_ACTIVATING_VDIS_TITLE, Messages.ERROR_ACTIVATING_VDIS_MESSAGE, cantExecuteReasons);
+            return new CommandErrorDialog(Messages.ERROR_ACTIVATING_VDIS_TITLE, Messages.ERROR_ACTIVATING_VDIS_MESSAGE, cantRunReasons);
         }
 
     }

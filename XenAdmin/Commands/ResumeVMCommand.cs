@@ -71,12 +71,12 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void Execute(List<VM> vms)
+        protected override void Run(List<VM> vms)
         {
             RunAction(vms, Messages.ACTION_VMS_RESUMING_ON_TITLE, Messages.ACTION_VMS_RESUMING_ON_TITLE, Messages.ACTION_VM_RESUMED, null);
         }
 
-        protected override bool CanExecute(VM vm)
+        protected override bool CanRun(VM vm)
         {
             ReadOnlyCollection<SelectedItem> selection = GetSelection();
 
@@ -102,13 +102,13 @@ namespace XenAdmin.Commands
 
         public override string ToolBarText => Messages.MAINWINDOW_TOOLBAR_RESUME;
 
-        protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantExecuteReasons)
+        protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantRunReasons)
         {
             foreach (VM vm in GetSelection().AsXenObjects<VM>())
             {
-                if (!CanExecute(vm) && vm.power_state == vm_power_state.Suspended)
+                if (!CanRun(vm) && vm.power_state == vm_power_state.Suspended)
                 {
-                    return new CommandErrorDialog(Messages.ERROR_DIALOG_RESUME_VM_TITLE, Messages.ERROR_DIALOG_RESUME_VM_TEXT, cantExecuteReasons);
+                    return new CommandErrorDialog(Messages.ERROR_DIALOG_RESUME_VM_TITLE, Messages.ERROR_DIALOG_RESUME_VM_TEXT, cantRunReasons);
                 }
             }
             return null;
@@ -118,19 +118,19 @@ namespace XenAdmin.Commands
 
         public override Keys ShortcutKeys => Keys.Control | Keys.Y;
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
             VM vm = item as VM;
             if (vm == null)
             {
-                return base.GetCantExecuteReasonCore(item);
+                return base.GetCantRunReasonCore(item);
             }
             if (vm.power_state != vm_power_state.Suspended)
             {
                 return Messages.VM_NOT_SUSPENDED;
             }
 
-            return GetCantExecuteNoToolsOrDriversReasonCore(item) ?? base.GetCantExecuteReasonCore(item);
+            return GetCantRunNoToolsOrDriversReasonCore(item) ?? base.GetCantRunReasonCore(item);
         }
 
         protected override AsyncAction BuildAction(VM vm)

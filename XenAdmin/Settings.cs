@@ -108,7 +108,7 @@ namespace XenAdmin
                 return;
             }
 
-            Program.MasterPassword = null;
+            Program.MainPassword = null;
 
             if (Properties.Settings.Default.SaveSession || Properties.Settings.Default.RequirePass)
             {
@@ -143,7 +143,7 @@ namespace XenAdmin
                     if (password == null)
                         RestoreSessionWithPassword(null, false); //if the user has cancelled start a new session
                     else
-                        Program.MasterPassword = EncryptionUtils.ComputeHash(password);
+                        Program.MainPassword = EncryptionUtils.ComputeHash(password);
                 }
                 else
                 {
@@ -285,8 +285,8 @@ namespace XenAdmin
                     connection.SaveDisconnected = entryComps.Length > 4 && entryComps[4] == DISCONNECTED;
                     connection.FriendlyName = entryComps.Length > 5 ? entryComps[5] : entryComps[1];
 
-                    // We save a comma-separated list of hostnames of each of the slaves.
-                    // This enables us to connect to a former slave in the event of master failover while the GUI isn't running.
+                    // We save a comma-separated list of hostnames of each of the supporters.
+                    // This enables us to connect to a former supporter in the event of coordinator failover while the GUI isn't running.
                     if (entryComps.Length == 7 && entryComps[6] != "")
                     {
                         connection.PoolMembers = new List<string>(entryComps[6].Split(new char[] { ',' }));
@@ -453,7 +453,7 @@ namespace XenAdmin
                 entryStr += SEPARATOR.ToString();
                 entryStr += members;
             }
-            return Properties.Settings.Default.RequirePass && Program.MasterPassword != null ? EncryptionUtils.EncryptString(entryStr, Program.MasterPassword) : EncryptionUtils.Protect(entryStr);
+            return Properties.Settings.Default.RequirePass && Program.MainPassword != null ? EncryptionUtils.EncryptString(entryStr, Program.MainPassword) : EncryptionUtils.Protect(entryStr);
         }
 
         public static AutoCompleteStringCollection GetServerHistory()

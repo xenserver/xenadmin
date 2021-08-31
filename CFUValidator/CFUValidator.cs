@@ -170,21 +170,21 @@ namespace CFUValidator
 
         private void SetupMocks(string versionToCheck, List<XenServerPatch> xenServerPatches, List<XenServerVersion> xenServerVersions)
         {
-            Mock<Host> master = mom.NewXenObject<Host>(id);
+            Mock<Host> coordinator = mom.NewXenObject<Host>(id);
             Mock<Pool> pool = mom.NewXenObject<Pool>(id);
-            XenRef<Host> masterRef = new XenRef<Host>("ref");
-            pool.Setup(p => p.master).Returns(masterRef);
+            XenRef<Host> coordinatorRef = new XenRef<Host>("ref");
+            pool.Setup(p => p.master).Returns(coordinatorRef);
             pool.Setup(p => p.other_config).Returns(new Dictionary<string, string>());
             mom.MockCacheFor(id).Setup(c => c.Resolve(It.IsAny<XenRef<Pool>>())).Returns(pool.Object);
-            mom.MockConnectionFor(id).Setup(c => c.Resolve(masterRef)).Returns(master.Object);
+            mom.MockConnectionFor(id).Setup(c => c.Resolve(coordinatorRef)).Returns(coordinator.Object);
             mom.MockConnectionFor(id).Setup(c => c.IsConnected).Returns(true);
-            master.Setup(h => h.software_version).Returns(new Dictionary<string, string>());
-            master.Setup(h => h.ProductVersion()).Returns(versionToCheck);
-            master.Setup(h => h.AppliedPatches()).Returns(GenerateMockPoolPatches(xenServerPatches));
+            coordinator.Setup(h => h.software_version).Returns(new Dictionary<string, string>());
+            coordinator.Setup(h => h.ProductVersion()).Returns(versionToCheck);
+            coordinator.Setup(h => h.AppliedPatches()).Returns(GenerateMockPoolPatches(xenServerPatches));
             
             //Currently build number will be referenced first so if it's present hook it up
             string buildNumber = xenServerVersions.First(v => v.Version.ToString() == versionToCheck).BuildNumber;
-            master.Setup(h=>h.BuildNumberRaw()).Returns(buildNumber);
+            coordinator.Setup(h=>h.BuildNumberRaw()).Returns(buildNumber);
         }
 
         private List<Pool_patch> GenerateMockPoolPatches(List<XenServerPatch> xenServerPatches)

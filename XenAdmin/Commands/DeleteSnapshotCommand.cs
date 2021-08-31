@@ -65,7 +65,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             List<AsyncAction> actions = new List<AsyncAction>();
             foreach (VM vm in selection.AsXenObjects<VM>())
@@ -75,7 +75,7 @@ namespace XenAdmin.Commands
             RunMultipleActions(actions, Messages.ACTION_VM_DELETE_SNAPSHOTS_TITLE, Messages.SNAPSHOT_DELETING, Messages.SNAPSHOTS_DELETED, true);
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             return selection.AllItemsAre<VM>(v => v != null && v.is_a_snapshot);
         }

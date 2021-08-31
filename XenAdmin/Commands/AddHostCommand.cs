@@ -73,7 +73,7 @@ namespace XenAdmin.Commands
             Parent = parent;
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             _dialog = new AddServerDialog(null, false);
             _dialog.CachePopulated += dialog_CachePopulated;

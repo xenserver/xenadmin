@@ -88,7 +88,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             page_CloudConfigParameters = new Page_CloudConfigParameters();
 
             #region RBAC Warning Page Checks
-            if (connection.Session.IsLocalSuperuser || Helpers.GetMaster(connection).external_auth_type == Auth.AUTH_TYPE_NONE)
+            if (connection.Session.IsLocalSuperuser || Helpers.GetCoordinator(connection).external_auth_type == Auth.AUTH_TYPE_NONE)
             {
                 //page_RbacWarning.DisableStep = true;
             }

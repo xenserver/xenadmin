@@ -218,7 +218,7 @@ namespace XenAdmin.Wlb
         /// <summary>
         /// Time of the day sends subscriptions
         /// </summary>
-        public DateTime ExecuteTimeOfDay
+        public DateTime RunTimeOfDay
         {
             get { return GetConfigValueUTCDateTime(base.BuildComplexKey(EXECUTE_TIMEOFDAY)); }
             set { SetConfigValueUTCDateTime(base.BuildComplexKey(EXECUTE_TIMEOFDAY), value, true); }

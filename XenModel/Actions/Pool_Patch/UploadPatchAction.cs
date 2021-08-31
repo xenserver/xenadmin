@@ -54,9 +54,9 @@ namespace XenAdmin.Actions
         public UploadPatchAction(IXenConnection connection, string path, bool suppressHistory, bool deleteFileOnCancel)
             : base(connection, null, Messages.UPLOADING_PATCH, suppressHistory)
         {
-            Host master = Helpers.GetMaster(connection);
+            Host coordinator = Helpers.GetCoordinator(connection);
             this.deleteFileOnCancel = deleteFileOnCancel;
-            if (master == null)
+            if (coordinator == null)
                 throw new NullReferenceException();
 
             ApiMethodsToRoleCheck.Add("pool.sync_database");
@@ -65,7 +65,7 @@ namespace XenAdmin.Actions
             retailPatchPath = path;
             _patchName = Path.GetFileNameWithoutExtension(retailPatchPath);
             _totalPatchSize = (new FileInfo(path)).Length;
-            Host = master;
+            Host = coordinator;
         }
 
         public string ByteProgressDescription { get; set; }
@@ -111,20 +111,20 @@ namespace XenAdmin.Actions
         {
             Session session = NewSession();
 
-            Host master = Helpers.GetMaster(Connection);
+            Host coordinator = Helpers.GetCoordinator(Connection);
 
-            log.InfoFormat("Uploading file '{0}' to server '{1}'", _patchName, master.Name());
+            log.InfoFormat("Uploading file '{0}' to server '{1}'", _patchName, coordinator.Name());
             this.Description = string.Format(Messages.UPLOAD_PATCH_UPLOADING_DESCRIPTION, _patchName);
 
             try
             {
-                RelatedTask = Task.create(session, "put_pool_patch_upload_task", master.address);
-                log.DebugFormat("HTTP PUTTING file from {0} to {1}", retailPatchPath, master.address);
+                RelatedTask = Task.create(session, "put_pool_patch_upload_task", coordinator.address);
+                log.DebugFormat("HTTP PUTTING file from {0} to {1}", retailPatchPath, coordinator.address);
 
                 HTTP_actions.put_pool_patch_upload(UpdateProgress,
                     () => XenAdminConfigManager.Provider.ForcedExiting || GetCancelling(),
                     XenAdminConfigManager.Provider.GetProxyTimeout(true),
-                    master.address,
+                    coordinator.address,
                     XenAdminConfigManager.Provider.GetProxyFromSettings(Connection),
                     retailPatchPath, RelatedTask.opaque_ref, session.opaque_ref);
 

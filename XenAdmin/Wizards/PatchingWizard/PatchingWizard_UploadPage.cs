@@ -212,7 +212,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         protected override List<HostPlan> GenerateHostPlans(Pool pool, out List<Host> applicableHosts)
         {
-            var master = Helpers.GetMaster(pool);
+            var coordinator = Helpers.GetCoordinator(pool);
             var planActions = new List<PlanAction>();
 
             var alertPatch = SelectedUpdateAlert == null ? null : SelectedUpdateAlert.Patch;
@@ -221,26 +221,26 @@ namespace XenAdmin.Wizards.PatchingWizard
                             (!AllDownloadedPatches.ContainsKey(alertPatch) || !File.Exists(AllDownloadedPatches[alertPatch]));
 
             if (download)
-                planActions.Add(new DownloadPatchPlanAction(master.Connection, alertPatch, AllDownloadedPatches, PatchFromDisk));
+                planActions.Add(new DownloadPatchPlanAction(coordinator.Connection, alertPatch, AllDownloadedPatches, PatchFromDisk));
 
             var skipDiskSpaceCheck = SelectedUpdateType != UpdateType.Legacy ||
-                                     Helpers.ElyOrGreater(master.Connection); //this is superfluous; just added for completeness
+                                     Helpers.ElyOrGreater(coordinator.Connection); //this is superfluous; just added for completeness
 
             if (alertPatch != null)
             {
-                planActions.Add(new UploadPatchToMasterPlanAction(this, master.Connection, alertPatch,
+                planActions.Add(new UploadPatchToCoordinatorPlanAction(this, coordinator.Connection, alertPatch,
                     PatchMappings, AllDownloadedPatches, PatchFromDisk, skipDiskSpaceCheck));
 
             }
             else if (!string.IsNullOrEmpty(SelectedPatchFilePath))
             {
-                var servers = SelectedServers.Where(s => s.Connection == master.Connection).ToList();
-                planActions.Add(new UploadPatchToMasterPlanAction(this, master.Connection, servers, SelectedPatchFilePath,
+                var servers = SelectedServers.Where(s => s.Connection == coordinator.Connection).ToList();
+                planActions.Add(new UploadPatchToCoordinatorPlanAction(this, coordinator.Connection, servers, SelectedPatchFilePath,
                     SelectedUpdateType, PatchMappings, skipDiskSpaceCheck));
             }
 
-            var hostPlan = new HostPlan(master, null, planActions, null);
-            applicableHosts = new List<Host> {master};
+            var hostPlan = new HostPlan(coordinator, null, planActions, null);
+            applicableHosts = new List<Host> {coordinator};
             return new List<HostPlan> {hostPlan};
         }
 

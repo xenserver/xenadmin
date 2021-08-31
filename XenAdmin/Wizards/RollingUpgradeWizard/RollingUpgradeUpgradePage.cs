@@ -117,7 +117,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
         protected override List<HostPlan> GenerateHostPlans(Pool pool, out List<Host> applicableHosts)
         {
-            //Add masters first, then the slaves (add all hosts for now, they will be skipped from upgrade if already upgraded)
+            //Add coordinators first, then the supporters (add all hosts for now, they will be skipped from upgrade if already upgraded)
             applicableHosts = pool.Connection.Cache.Hosts.ToList();
             applicableHosts.Sort();
             return applicableHosts.Select(GetSubTasksFor).ToList();
@@ -126,19 +126,19 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         protected override bool SkipInitialPlanActions(Host host)
         {
             //Skip hosts already upgraded
-            if (host.IsMaster())
+            if (host.IsCoordinator())
             {
                 var pool = Helpers.GetPoolOfOne(host.Connection);
-                if (pool != null && pool.IsMasterUpgraded())
+                if (pool != null && pool.IsCoordinatorUpgraded())
                 {
-                    log.Debug(string.Format("Skipping master '{0}' because it is upgraded", host.Name()));
+                    log.Debug(string.Format("Skipping coordinator '{0}' because it is upgraded", host.Name()));
                     return true;
                 }
             }
             else
             {
-                var master = Helpers.GetMaster(host.Connection);
-                if (master != null && host.LongProductVersion() == master.LongProductVersion())
+                var coordinator = Helpers.GetCoordinator(host.Connection);
+                if (coordinator != null && host.LongProductVersion() == coordinator.LongProductVersion())
                 {
                     log.Debug(string.Format("Skipping host '{0}' because it is upgraded", host.Name()));
                     return true;

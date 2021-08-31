@@ -80,7 +80,7 @@ namespace XenAdmin.TabPages
                 }
                 else if (url.Contains("AddServer"))
                 {
-                    new AddHostCommand(Program.MainWindow, this).Execute();
+                    new AddHostCommand(Program.MainWindow, this).Run();
                 }
             }
             else

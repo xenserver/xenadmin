@@ -39,7 +39,7 @@ namespace XenAdmin.Controls
 {
     public class ConnectionWrapperWithMoreStuff : CustomTreeNode, IComparable<ConnectionWrapperWithMoreStuff>
     {
-        public IXenConnection Connection, masterConnection;
+        public IXenConnection Connection, coordinatorConnection;
         PoolJoinRules.Reason reason;
 
         public ConnectionWrapperWithMoreStuff(IXenConnection connection)
@@ -48,23 +48,23 @@ namespace XenAdmin.Controls
             Refresh();
         }
 
-        public ConnectionWrapperWithMoreStuff TheMaster
+        public ConnectionWrapperWithMoreStuff TheCoordinator
         {
             set
             {
-                masterConnection = (value == null ? null : value.Connection);
+                coordinatorConnection = (value == null ? null : value.Connection);
             }
         }
 
-        public bool WillBeMaster
+        public bool WillBeCoordinator
         {
             get
             {
-                return reason == PoolJoinRules.Reason.WillBeMaster;
+                return reason == PoolJoinRules.Reason.WillBeCoordinator;
             }
         }
 
-        public bool CanBeMaster
+        public bool CanBeCoordinator
         {
             get
             {
@@ -75,7 +75,7 @@ namespace XenAdmin.Controls
             }
         }
 
-        public bool AllowedAsSlave
+        public bool AllowedAsSupporter
         {
             get
             {
@@ -85,7 +85,7 @@ namespace XenAdmin.Controls
 
         public override string ToString()
         {
-            string name = Helpers.GetName(Helpers.GetMaster(Connection));
+            string name = Helpers.GetName(Helpers.GetCoordinator(Connection));
             if (name == "")
                 return Connection.Hostname;
             else
@@ -113,11 +113,11 @@ namespace XenAdmin.Controls
 
         internal void Refresh()
         {
-            reason = PoolJoinRules.CanJoinPool(Connection, masterConnection, true, true, true);
+            reason = PoolJoinRules.CanJoinPool(Connection, coordinatorConnection, true, true, true);
             this.Description = PoolJoinRules.ReasonMessage(reason);
             this.Enabled = (reason == PoolJoinRules.Reason.Allowed);
-            this.CheckedIfdisabled = (reason == PoolJoinRules.Reason.WillBeMaster);
-            if (reason == PoolJoinRules.Reason.WillBeMaster)
+            this.CheckedIfdisabled = (reason == PoolJoinRules.Reason.WillBeCoordinator);
+            if (reason == PoolJoinRules.Reason.WillBeCoordinator)
                 this.State = CheckState.Checked;
         }
     }

@@ -53,7 +53,7 @@ namespace XenAdmin.Commands
             return _recommendations.GetOptimalServer(vm);
         }
 
-        protected override bool CanExecute(VM vm)
+        protected override bool CanRun(VM vm)
         {
             return GetHost(vm) != null;
         }
@@ -74,9 +74,9 @@ namespace XenAdmin.Commands
             }
         }
         
-        protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantExecuteReasons)
+        protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantRunReasons)
         {
-            return new CommandErrorDialog(ErrorDialogTitle, ErrorDialogText, cantExecuteReasons);
+            return new CommandErrorDialog(ErrorDialogTitle, ErrorDialogText, cantRunReasons);
         }
     }
 }

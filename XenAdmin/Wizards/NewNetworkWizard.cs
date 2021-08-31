@@ -70,7 +70,7 @@ namespace XenAdmin.Wizards
         /// </summary>
         /// <param name="connection"></param>
         /// <param name="pool">May be null.</param>
-        /// <param name="host">Never null. In the case of a pool, "host" is set to the master.</param>
+        /// <param name="host">Never null. In the case of a pool, "host" is set to the coordinator.</param>
         public NewNetworkWizard(Network.IXenConnection connection, Pool pool, Host host)
             : base(connection)
         {

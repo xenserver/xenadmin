@@ -69,7 +69,7 @@ namespace XenAdmin.Core
             return null;
         }
 
-        public static Host GetMaster(IEnumerable<ObjectChange> changes)
+        public static Host GetCoordinator(IEnumerable<ObjectChange> changes)
         {
             String _;
             Pool pool = GetPool(changes, out _);

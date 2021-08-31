@@ -67,22 +67,22 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             List<AsyncAction> actions = new List<AsyncAction>();
-            foreach (SR sr in selection.AsXenObjects<SR>(CanExecute))
+            foreach (SR sr in selection.AsXenObjects<SR>(CanRun))
             {
                 actions.Add(new SrAction(SrActionKind.Destroy, sr));
             }
             RunMultipleActions(actions, Messages.ACTION_SRS_DESTROYING, string.Empty, string.Empty, true);
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
-            return selection.AllItemsAre<SR>() && selection.AtLeastOneXenObjectCan<SR>(CanExecute);
+            return selection.AllItemsAre<SR>() && selection.AtLeastOneXenObjectCan<SR>(CanRun);
         }
 
-        private static bool CanExecute(SR sr)
+        private static bool CanRun(SR sr)
         {
             return sr != null && !sr.HasRunningVMs() && sr.CanCreateWithXenCenter()
                 && sr.allowed_operations.Contains(storage_operations.destroy) && !HelpersGUI.GetActionInProgress(sr);
@@ -121,17 +121,17 @@ namespace XenAdmin.Commands
             }
         }
 
-        protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantExecuteReasons)
+        protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantRunReasons)
         {
-            return new CommandErrorDialog(Messages.ERROR_DIALOG_DESTROY_SR_TITLE, Messages.ERROR_DIALOG_DESTROY_SR_TEXT, cantExecuteReasons);
+            return new CommandErrorDialog(Messages.ERROR_DIALOG_DESTROY_SR_TITLE, Messages.ERROR_DIALOG_DESTROY_SR_TEXT, cantRunReasons);
         }
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
             SR sr = item as SR;
             if (sr == null)
             {
-                return base.GetCantExecuteReasonCore(item);
+                return base.GetCantRunReasonCore(item);
             }
             if (!sr.HasPBDs())
             {
@@ -149,7 +149,7 @@ namespace XenAdmin.Commands
             {
                 return Messages.SR_ACTION_IN_PROGRESS;
             }
-            return base.GetCantExecuteReasonCore(item);
+            return base.GetCantRunReasonCore(item);
         }
 
         protected override string ConfirmationDialogYesButtonLabel => Messages.MESSAGEBOX_DESTROY_SR_YES_BUTTON_LABEL;

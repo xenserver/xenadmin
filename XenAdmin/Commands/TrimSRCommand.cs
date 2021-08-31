@@ -57,35 +57,35 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             var actions = new List<AsyncAction>();
-            foreach (SR sr in selection.AsXenObjects<SR>(CanExecute))
+            foreach (SR sr in selection.AsXenObjects<SR>(CanRun))
             {
                 actions.Add(new SrTrimAction(sr.Connection, sr));
             }
             RunMultipleActions(actions, null, Messages.ACTION_SR_TRIM_DESCRIPTION, Messages.ACTION_SR_TRIM_DONE, true);
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
-            return selection.AllItemsAre<SR>() && selection.AtLeastOneXenObjectCan<SR>(CanExecute);
+            return selection.AllItemsAre<SR>() && selection.AtLeastOneXenObjectCan<SR>(CanRun);
         }
 
-        private static bool CanExecute(SR sr)
+        private static bool CanRun(SR sr)
         {
             return sr != null && sr.SupportsTrim() && sr.GetFirstAttachedStorageHost() != null;
         }
 
         public override string MenuText => Messages.MAINWINDOW_TRIM_SR;
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
             if (item is SR sr && !sr.SupportsTrim())
             {
                 return Messages.TOOLTIP_SR_TRIM_UNSUPPORTED;
             }
-            return base.GetCantExecuteReasonCore(item);
+            return base.GetCantRunReasonCore(item);
         }
 
         public override string DisabledToolTipText

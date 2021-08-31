@@ -67,9 +67,9 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
-            List<SR> srList = selection.AsXenObjects<SR>(CanExecute);
+            List<SR> srList = selection.AsXenObjects<SR>(CanRun);
 
             if (srList.Find(s => !s.MultipathAOK()) != null)
             {
@@ -81,12 +81,12 @@ namespace XenAdmin.Commands
             new RepairSRDialog(srList).Show(Parent);
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
-            return selection.AllItemsAre<SR>() && selection.AtLeastOneXenObjectCan<SR>(CanExecute);
+            return selection.AllItemsAre<SR>() && selection.AtLeastOneXenObjectCan<SR>(CanRun);
         }
 
-        private bool CanExecute(SR sr)
+        private bool CanRun(SR sr)
         {
             return sr != null && sr.HasPBDs() && (sr.IsBroken() || !sr.MultipathAOK()) && !HelpersGUI.GetActionInProgress(sr) && sr.CanRepairAfterUpgradeFromLegacySL();
         }

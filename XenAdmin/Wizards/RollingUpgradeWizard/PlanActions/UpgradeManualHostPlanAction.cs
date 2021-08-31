@@ -128,9 +128,9 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
                 {
                     if (dialog.ShowDialog(invokingControl) != DialogResult.OK) // Cancel or Unknown
                     {
-                        if (GetResolvedHost().IsMaster())
+                        if (GetResolvedHost().IsCoordinator())
                         {
-                            Error = new ApplicationException(Messages.EXCEPTION_USER_CANCELLED_MASTER);
+                            Error = new ApplicationException(Messages.EXCEPTION_USER_CANCELLED_COORDINATOR);
                             throw Error;
                         }
 
@@ -167,7 +167,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
                             if (dialog.ShowDialog(invokingControl) == DialogResult.OK)
                                 return;
                             
-                            if (obj.IsMaster())
+                            if (obj.IsCoordinator())
                             {
                                 Error = new Exception(Messages.HOST_REBOOTED_SAME_VERSION);
                                 throw Error;

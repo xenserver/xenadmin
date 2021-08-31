@@ -258,7 +258,7 @@ namespace XenAdmin.Wizards.ImportWizard
 			if (!network.Show(Properties.Settings.Default.ShowHiddenVMs))
 				return false;
 
-			if (network.IsSlave())
+			if (network.IsMember())
 				return false;
 
 			if (m_selectedAffinity != null && !m_selectedAffinity.CanSeeNetwork(network))

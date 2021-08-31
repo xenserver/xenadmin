@@ -41,7 +41,7 @@ namespace XenAdmin.Commands
 {
     class RotatePoolSecretCommand : Command
     {
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             var connection = selection.GetConnectionOfFirstItem();
 
@@ -73,7 +73,7 @@ namespace XenAdmin.Commands
                 Pool.rotate_secret, "pool.rotate_secret").RunAsync();
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (selection.Any(i => !(i.XenObject is Host) && !(i.XenObject is Pool)))
                 return false;
@@ -86,7 +86,7 @@ namespace XenAdmin.Commands
             return pool != null && !pool.ha_enabled && !pool.RollingUpgrade();
         }
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
             var pool = item == null ? null : Helpers.GetPoolOfOne(item.Connection);
             
@@ -99,7 +99,7 @@ namespace XenAdmin.Commands
                     return Messages.ROTATE_POOL_SECRET_RPU;
             }
 
-            return base.GetCantExecuteReasonCore(item);
+            return base.GetCantRunReasonCore(item);
         }
 
         public override string MenuText => Messages.ROTATE_POOL_SECRET_MENU;

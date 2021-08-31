@@ -101,7 +101,7 @@ namespace XenAdmin.ConsoleView
         private readonly Object activeSessionLock = new Object();
 
         /// <summary>
-        /// Xvnc will blacklist us if we're too quick with the disconnect and reconnect that we do
+        /// Xvnc will block us if we're too quick with the disconnect and reconnect that we do
         /// when polling for the VNC port.  To get around this, we keep the connection open between poll
         /// and proper connection.  pendingVNCConnection must be accessed only under the
         /// pendingVNCConnectionLock.  Work under this lock must be non-blocking, because it's used on
@@ -526,7 +526,7 @@ namespace XenAdmin.ConsoleView
             //console size with some offset to accomodate focus rectangle
             Size currentConsoleSize = new Size(this.Size.Width - CONSOLE_SIZE_OFFSET, this.Size.Height - CONSOLE_SIZE_OFFSET);
                 
-            // Kill the old client.
+            // Stop the old client.
             if (RemoteConsole != null)
             {
                 wasFocused = RemoteConsole.ConsoleControl != null && RemoteConsole.ConsoleControl.Focused;

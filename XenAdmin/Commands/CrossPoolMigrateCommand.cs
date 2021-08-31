@@ -65,10 +65,10 @@ namespace XenAdmin.Commands
                 if (preSelectedHost == null)
                     return Messages.HOST_MENU_CPM_TEXT;
 
-                var cantExecuteReason = CantExecuteReason;
-                return string.IsNullOrEmpty(cantExecuteReason)
+                var cantRunReason = CantRunReason;
+                return string.IsNullOrEmpty(cantRunReason)
                     ? preSelectedHost.Name().EscapeAmpersands()
-                    : string.Format(Messages.MAINWINDOW_CONTEXT_REASON, preSelectedHost.Name().EscapeAmpersands(), cantExecuteReason);
+                    : string.Format(Messages.MAINWINDOW_CONTEXT_REASON, preSelectedHost.Name().EscapeAmpersands(), cantRunReason);
             }
         }
 
@@ -79,7 +79,7 @@ namespace XenAdmin.Commands
             get { return preSelectedHost == null ? Images.StaticImages._000_MigrateVM_h32bit_16 : Images.StaticImages._000_TreeConnected_h32bit_16; }
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             var con = selection.GetConnectionOfFirstItem();
 
@@ -96,26 +96,26 @@ namespace XenAdmin.Commands
 
         protected override Host GetHost(VM vm)
         {
-            return Helpers.GetMaster(vm.Connection);
+            return Helpers.GetCoordinator(vm.Connection);
         }
 
-        private readonly Dictionary<VM, string> cantExecuteReasons = new Dictionary<VM, string>();
+        private readonly Dictionary<VM, string> cantRunReasons = new Dictionary<VM, string>();
 
-        protected override bool CanExecute(VM vm)
+        protected override bool CanRun(VM vm)
         {
             if (preSelectedHost == null)
-                return CanExecute(vm, preSelectedHost);
+                return CanRun(vm, preSelectedHost);
 
             var filter = new CrossPoolMigrateCanMigrateFilter(preSelectedHost, new List<VM> {vm}, WizardMode.Migrate);
-            var canExecute = CanExecute(vm, preSelectedHost, filter);
+            var canRun = CanRun(vm, preSelectedHost, filter);
             if (string.IsNullOrEmpty(filter.Reason))
-                cantExecuteReasons.Remove(vm);
+                cantRunReasons.Remove(vm);
             else
-                cantExecuteReasons[vm] = filter.Reason;
-            return canExecute;
+                cantRunReasons[vm] = filter.Reason;
+            return canRun;
         }
 
-        public static bool CanExecute(VM vm, Host preselectedHost, CrossPoolMigrateCanMigrateFilter filter = null)
+        public static bool CanRun(VM vm, Host preselectedHost, CrossPoolMigrateCanMigrateFilter filter = null)
         {
             bool failureFound = false;
 
@@ -134,13 +134,13 @@ namespace XenAdmin.Commands
                    (preselectedHost == null || vm.Connection.Resolve(vm.resident_on) != preselectedHost); //Not the same as the pre-selected host
         }
 
-        public string CantExecuteReason
+        public string CantRunReason
         {
             get
             {
-                if (cantExecuteReasons.Count == GetSelection().Count) // none can execute
+                if (cantRunReasons.Count == GetSelection().Count) // none can run
                 {
-                    var uniqueReasons = cantExecuteReasons.Values.Distinct().ToList();
+                    var uniqueReasons = cantRunReasons.Values.Distinct().ToList();
 
                     if (uniqueReasons.Count == 1)
                         return uniqueReasons[0];

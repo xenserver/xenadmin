@@ -56,7 +56,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             var actions = new List<AsyncAction>();
             var liveHosts = selection.AsXenObjects<Host>().Where(h => h.IsLive());
@@ -70,22 +70,22 @@ namespace XenAdmin.Commands
             RunMultipleActions(actions, null, Messages.ACTION_TOOLSTACK_RESTARTING, Messages.ACTION_TOOLSTACK_RESTARTED, true);
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             return selection.AllItemsAre<Host>() && selection.Any(item => ((Host)item.XenObject).IsLive());
         }
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
             Host host = item as Host;
             
             if (host == null)
-                return base.GetCantExecuteReasonCore(item);
+                return base.GetCantRunReasonCore(item);
 
             if (!host.IsLive())
                 return Messages.HOST_NOT_LIVE;
 
-            return base.GetCantExecuteReasonCore(item);
+            return base.GetCantRunReasonCore(item);
         }
 
         public override string MenuText => Messages.MAINWINDOW_RESTART_TOOLSTACK;

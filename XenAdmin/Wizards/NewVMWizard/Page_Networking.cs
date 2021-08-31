@@ -145,7 +145,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                     // CA-218956 - Expose HIMN when showing hidden objects
                     // HIMN shouldn't be autoplugged
                     if (network.IsGuestInstallerNetwork() ||
-                        !network.GetAutoPlug() || !network.Show(Properties.Settings.Default.ShowHiddenVMs) || network.IsSlave() || (network.IsSriov() && !Template.HasSriovRecommendation()))
+                        !network.GetAutoPlug() || !network.Show(Properties.Settings.Default.ShowHiddenVMs) || network.IsMember() || (network.IsSriov() && !Template.HasSriovRecommendation()))
                         continue;
 
                     if (NetworksGridView.Rows.Count < MAX_NETWORKS_FOR_DEFAULT_TEMPLATES)

@@ -47,7 +47,7 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            RelatedTask = XenAPI.SR.async_probe(Session, Helpers.GetMaster(Connection).opaque_ref,
+            RelatedTask = XenAPI.SR.async_probe(Session, Helpers.GetCoordinator(Connection).opaque_ref,
                                                 new Dictionary<string, string>(), "cslg",
                                                 new Dictionary<string, string>());
             PollToCompletion();

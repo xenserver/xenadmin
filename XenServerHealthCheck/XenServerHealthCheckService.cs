@@ -150,16 +150,16 @@ namespace XenServerHealthCheck
                 {
                     if (exn is Failure && ((Failure)exn).ErrorDescription[0] == Failure.HOST_IS_SLAVE)
                     {
-                        string masterName = ((Failure)exn).ErrorDescription[1];
-                        if (ServerListHelper.instance.UpdateServerCredential(server, masterName))
+                        string coordinatorName = ((Failure)exn).ErrorDescription[1];
+                        if (ServerListHelper.instance.UpdateServerCredential(server, coordinatorName))
                         {
-                            log.InfoFormat("Refresh credential to master {0} need refresh connection", masterName);
-                            server.HostName = masterName;
+                            log.InfoFormat("Refresh credential to master {0} need refresh connection", coordinatorName);
+                            server.HostName = coordinatorName;
                             needReconnect = true;
                         }
                         else
                         {
-                            log.InfoFormat("Remove credential since it is the slave of master {0}", masterName);
+                            log.InfoFormat("Remove credential since it is the supporter of coordinator {0}", coordinatorName);
                             if (session != null)
                                 session.logout();
                             log.Error(exn, exn);
@@ -181,7 +181,7 @@ namespace XenServerHealthCheck
                     {
                         if (session != null)
                             session.logout();
-                        log.InfoFormat("Reconnect to master {0}", server.HostName);
+                        log.InfoFormat("Reconnect to coordinator {0}", server.HostName);
                         session = new Session(server.HostName, 80);
                         session.APIVersion = API_Version.LATEST;
                         session.login_with_password(server.UserName, server.Password, Helper.APIVersionString(API_Version.LATEST), Session.UserAgent);

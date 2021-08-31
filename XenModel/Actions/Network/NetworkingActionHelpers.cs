@@ -57,10 +57,10 @@ namespace XenAdmin.Actions
         {
             PIF new_dest = NetworkingHelper.CopyIPConfig(src, dest);
 
-            // We bring up the slave interfaces on the slave hosts, without plugging them.
-            // Then the slave interface on the master host.
-            // Then we reconfigure the management interface on the slaves.
-            // Then the master.
+            // We bring up the bond members on the supporter hosts, without plugging them.
+            // Then the bond members on the coordinator host.
+            // Then we reconfigure the bond interface on the supporters.
+            // Then the coordinator.
 
             int lo = action.PercentComplete;
             int inc = (hi - lo) / 4;
@@ -245,19 +245,19 @@ namespace XenAdmin.Actions
             action.Description = string.Format(Messages.ACTION_CHANGE_NETWORKING_MANAGEMENT_RECONFIGURED, pif.Name());
         }
 
-        internal static void WaitForslavesToRecover(Pool pool)
+        internal static void WaitForMembersToRecover(Pool pool)
         {
             
             int RetryLimit = 60, RetryAttempt = 0;
 
             List<string> deadHost = new List<string>();
 
-            /* host count -1 is for excluding master */
+            /* host count -1 is for excluding coordinator */
             while (deadHost.Count < (pool.Connection.Cache.HostCount -1) && (RetryAttempt <= RetryLimit))
             {
                 foreach (Host host in pool.Connection.Cache.Hosts)
                 {
-                    if (host.IsMaster())
+                    if (host.IsCoordinator())
                         continue;
 
                     if (!host.IsLive() && !deadHost.Contains(host.uuid))
@@ -276,7 +276,7 @@ namespace XenAdmin.Actions
             {
                 foreach (Host host in pool.Connection.Cache.Hosts)
                 {
-                    if (host.IsMaster())
+                    if (host.IsCoordinator())
                         continue;
 
                     if (host.IsLive() && deadHost.Contains(host.uuid))
@@ -300,15 +300,15 @@ namespace XenAdmin.Actions
            PoolManagementReconfigure_( action, up_pif, lo);
 
            /* pool_management_reconfigure triggers a pool_recover_slaves, which in turn spawns two tasks
-            * dbsync (update_env) and server_init on each slaves. 
-            * Only after their completion master will be able to execute reconfigure_IPs. 
-            * Hence, we check Host.IsLive metric of all slaves for a transition from true -> false -> true
+            * dbsync (update_env) and server_init on each supporters. 
+            * Only after their completion coordinator will be able to run reconfigure_IPs. 
+            * Hence, we check Host.IsLive metric of all supporters for a transition from true -> false -> true
             */
 
-           action.Description = string.Format(Messages.ACTION_WAIT_FOR_SLAVES_TO_RECOVER);
-           WaitForslavesToRecover(pool);
+           action.Description = string.Format(Messages.ACTION_WAIT_FOR_POOL_MEMBERS_TO_RECOVER);
+           WaitForMembersToRecover(pool);
            
-            /* Reconfigure IP for slaves and then master */
+            /* Reconfigure IP for supporters and then coordinator */
            
            lo += inc;
            ForSomeHosts(action, down_pif, false, true, lo, ClearIP);

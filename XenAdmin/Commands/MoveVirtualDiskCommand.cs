@@ -60,13 +60,13 @@ namespace XenAdmin.Commands
             get { return GetSelection().Count > 1 ? Messages.MAINWINDOW_MOVE_OBJECTS : Messages.MOVE_VDI_CONTEXT_MENU; }
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             var vdis = selection.AsXenObjects<VDI>();
             new MoveVirtualDiskDialog(selection.GetConnectionOfFirstItem(), vdis).Show(Program.MainWindow);
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             return selection.Count > 0 && selection.All(v => CanBeMoved(v.XenObject as VDI));
         }
@@ -86,11 +86,11 @@ namespace XenAdmin.Commands
             return true;
         }
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
             VDI vdi = item as VDI;
             if (vdi == null)
-                return base.GetCantExecuteReasonCore(item);
+                return base.GetCantRunReasonCore(item);
 
             if (vdi.is_a_snapshot)
                 return Messages.CANNOT_MOVE_VDI_IS_SNAPSHOT;
@@ -105,12 +105,12 @@ namespace XenAdmin.Commands
 
             SR sr = vdi.Connection.Resolve(vdi.SR);
             if (sr == null)
-                return base.GetCantExecuteReasonCore(item);
+                return base.GetCantRunReasonCore(item);
             
             if (sr.HBALunPerVDI())
                 return Messages.UNSUPPORTED_SR_TYPE;
 
-            return base.GetCantExecuteReasonCore(item);
+            return base.GetCantRunReasonCore(item);
         }
     }
 }

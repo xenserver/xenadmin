@@ -57,7 +57,7 @@ namespace XenAdminTests.UnitTests.WlbTests
             LastTouched = new DateTime(2011, 12, 25),
             TriggerInterval = WlbScheduledTask.WlbTaskTriggerType.Daily,
             DaysOfWeek = WlbScheduledTask.WlbTaskDaysOfWeek.Weekdays,
-            ExecuteTime = new DateTime(2011, 12, 26),
+            RunTime = new DateTime(2011, 12, 26),
             LastRunDate = new DateTime(2011, 12, 27),
             EnableDate = new DateTime(2011, 12, 28),
             DisableTime = new DateTime(2011, 12, 29),
@@ -132,11 +132,11 @@ namespace XenAdminTests.UnitTests.WlbTests
         }
 
         [Test]
-        public void TaskExecutionTime()
+        public void TaskRunningTime()
         {
             const string expectedTime = "11:34 AM";
-            string executionTime = WlbOptModeScheduler.GetTaskExecuteTime(new DateTime(2011, 11, 20, 11, 34, 01));
-            Assert.AreEqual(expectedTime, executionTime);
+            string runTime = WlbOptModeScheduler.GetTaskRunTime(new DateTime(2011, 11, 20, 11, 34, 01));
+            Assert.AreEqual(expectedTime, runTime);
         }
 
         [Test]
@@ -222,7 +222,7 @@ namespace XenAdminTests.UnitTests.WlbTests
             public DateTime LastTouched;
             public WlbScheduledTask.WlbTaskTriggerType TriggerInterval;
             public WlbScheduledTask.WlbTaskDaysOfWeek DaysOfWeek;
-            public DateTime ExecuteTime;
+            public DateTime RunTime;
             public DateTime LastRunDate;
             public DateTime EnableDate;
             public DateTime DisableTime;

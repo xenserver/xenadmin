@@ -50,7 +50,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             bool oneIsConnected = false;
             bool foundHost = false;
@@ -58,11 +58,11 @@ namespace XenAdmin.Commands
 
             foreach (SelectedItem item in selection)
             {
-                if (new DisconnectHostCommand(MainWindowCommandInterface, item).CanExecute())
+                if (new DisconnectHostCommand(MainWindowCommandInterface, item).CanRun())
                 {
                     oneIsConnected = true;
                 }
-                else if (new DisconnectPoolCommand(MainWindowCommandInterface, item).CanExecute())
+                else if (new DisconnectPoolCommand(MainWindowCommandInterface, item).CanRun())
                 {
                     oneIsConnected = true;
                 }
@@ -80,11 +80,11 @@ namespace XenAdmin.Commands
             return oneIsConnected && foundHost && foundPool;
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             foreach (SelectedItem item in selection)
             {
-                new DisconnectCommand(MainWindowCommandInterface, item.Connection, false).Execute();
+                new DisconnectCommand(MainWindowCommandInterface, item.Connection, false).Run();
             }
         }
 

@@ -54,7 +54,7 @@ namespace XenAPI
         public override string Name()
         {
             // Return the name_label, if its been changed by the user, or Network n where n is the
-            // device number otherwise.  Take the device from the pool master by default, or from
+            // device number otherwise.  Take the device from the pool coordinator by default, or from
             // the first one we find otherwise.  If it's not attached anywhere, then give up and
             // return the name_label, which will be in the default form.
 
@@ -71,11 +71,11 @@ namespace XenAPI
             if (pool == null)
                 return name_label;
 
-            string master_ref = pool.master.opaque_ref;
+            string coordinator_ref = pool.master.opaque_ref;
 
             foreach (PIF pif in Connection.ResolveAll(PIFs))
             {
-                if (pif.host.opaque_ref == master_ref)
+                if (pif.host.opaque_ref == coordinator_ref)
                 {
                     return PIFName(pif);
                 }
@@ -143,7 +143,7 @@ namespace XenAPI
                 if (showHiddenVMs)
                     return true;
 
-                if (IsSlave())
+                if (IsMember())
                     return false;
 
                 return !IsHidden();
@@ -188,25 +188,25 @@ namespace XenAPI
             return ans;
         }
 
-        public bool IsSlave()
+        public bool IsMember()
         {
             if (Connection == null)
                 return false;
             foreach (PIF pif in Connection.ResolveAll(PIFs))
             {
-                if (pif.IsBondSlave())
+                if (pif.IsBondMember())
                     return true;
             }
             return false;
         }
 
-        public bool IsInUseBondSlave()
+        public bool IsInUseBondMember()
         {
             if (Connection == null)
                 return false;
             foreach (PIF pif in Connection.ResolveAll(PIFs))
             {
-                if (pif.IsInUseBondSlave())
+                if (pif.IsInUseBondMember())
                     return true;
             }
             return false;

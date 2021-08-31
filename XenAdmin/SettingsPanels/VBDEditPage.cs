@@ -195,9 +195,9 @@ namespace XenAdmin.SettingsPanels
 
             diskAccessPriorityTrackBar.Value = vbd.GetIoNice();
 
-            Host master = Helpers.GetMaster(vbd.Connection);
+            Host coordinator = Helpers.GetCoordinator(vbd.Connection);
 
-            if (sr == null || master == null || !sr.other_config.ContainsKey("scheduler") || sr.other_config["scheduler"] != "cfq")
+            if (sr == null || coordinator == null || !sr.other_config.ContainsKey("scheduler") || sr.other_config["scheduler"] != "cfq")
             {
                 DiskPriorityPanel.Visible = false;
                 label1.Visible = false;

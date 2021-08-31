@@ -64,7 +64,7 @@ namespace XenAdmin.Commands
 
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             VM template = null;
 
@@ -91,15 +91,15 @@ namespace XenAdmin.Commands
                 host = selection[0].HostAncestor;
             }
 
-            Execute(connection, host, template);
+            Run(connection, host, template);
         }
 
-        private void Execute(IXenConnection connection, Host DefaultAffinity, VM DefaultTemplate)
+        private void Run(IXenConnection connection, Host DefaultAffinity, VM DefaultTemplate)
         {
             MainWindowCommandInterface.ShowPerConnectionWizard(connection, new NewVMWizard(connection, DefaultTemplate, DefaultAffinity));
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             Host hostAncestor = selection.HostAncestor;
             Pool poolAncestor = selection.PoolAncestor;

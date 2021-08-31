@@ -73,7 +73,7 @@ namespace XenAdmin.Commands
             Parent = parent;
         }
 
-        private void Execute(Folder folder, IWin32Window ownerWindow)
+        private void Run(Folder folder, IWin32Window ownerWindow)
         {
             IXenConnection connection;
             String name;
@@ -151,12 +151,12 @@ namespace XenAdmin.Commands
             }
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
-            Execute((Folder)selection[0].XenObject, Parent);
+            Run((Folder)selection[0].XenObject, Parent);
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             return (selection.ContainsOneItemOfType<Folder>()
                     || selection.ContainsOneItemOfType<GroupingTag>(t => t.Grouping is OrganizationViewFolders))
@@ -177,9 +177,9 @@ namespace XenAdmin.Commands
 
         public override Image MenuImage => Images.StaticImages._000_Folder_open_h32bit_16;
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
-            return ConnectionAvailable() ? base.GetCantExecuteReasonCore(item) : Messages.FOLDER_NO_CONNECTION;
+            return ConnectionAvailable() ? base.GetCantRunReasonCore(item) : Messages.FOLDER_NO_CONNECTION;
         }
     }
 }

@@ -301,7 +301,7 @@ namespace XenAdmin.Controls.CustomDataGraph
 
             if (xo is VM vm)
             {
-                var vmHost = vm.Connection.Resolve(vm.resident_on) ?? Helpers.GetMaster(vm.Connection);
+                var vmHost = vm.Connection.Resolve(vm.resident_on) ?? Helpers.GetCoordinator(vm.Connection);
                 BuildUri(vmHost, "rrd_updates",
                     $"session_id={escapedRef}&start={startTime}&cf=AVERAGE&interval={duration}&vm_uuid={vm.uuid}");
             }
@@ -322,7 +322,7 @@ namespace XenAdmin.Controls.CustomDataGraph
 
             if (xo is VM vm)
             {
-                var vmHost = vm.Connection.Resolve(vm.resident_on) ?? Helpers.GetMaster(vm.Connection);
+                var vmHost = vm.Connection.Resolve(vm.resident_on) ?? Helpers.GetCoordinator(vm.Connection);
                 return BuildUri(vmHost, "vm_rrds", $"session_id={escapedRef}&uuid={vm.uuid}");
             }
 

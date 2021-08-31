@@ -53,7 +53,7 @@ namespace XenAdmin.Actions
             if (pool != null)
                 Pool = Helpers.GetPool(Connection);
             else
-                Host = Helpers.GetMaster(Connection);
+                Host = Helpers.GetCoordinator(Connection);
         }
 
         protected override void Run()

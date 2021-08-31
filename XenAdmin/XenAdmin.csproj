@@ -1073,7 +1073,7 @@
     <Compile Include="Wizards\PatchingWizard\PlanActions\PatchPrecheckOnHostPlanAction.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\DownloadPatchPlanAction.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\RestartHostPlanAction.cs" />
-    <Compile Include="Wizards\PatchingWizard\PlanActions\UploadPatchToMasterPlanAction.cs" />
+    <Compile Include="Wizards\PatchingWizard\PlanActions\UploadPatchToCoordinatorPlanAction.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\XenServerPatchMapping.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\RemoveUpdateFilesFromMaster.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\RemoveUpdateFile.cs" />
@@ -1150,17 +1150,17 @@
     <Compile Include="Controls\Common\PasswordFailure.Designer.cs">
       <DependentUpon>PasswordFailure.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\RestoreSession\SetMasterPasswordDialog.cs">
+    <Compile Include="Dialogs\RestoreSession\SetMainPasswordDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\RestoreSession\SetMasterPasswordDialog.Designer.cs">
-      <DependentUpon>SetMasterPasswordDialog.cs</DependentUpon>
+    <Compile Include="Dialogs\RestoreSession\SetMainPasswordDialog.Designer.cs">
+      <DependentUpon>SetMainPasswordDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\RestoreSession\EnterMasterPasswordDialog.cs">
+    <Compile Include="Dialogs\RestoreSession\EnterMainPasswordDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\RestoreSession\EnterMasterPasswordDialog.Designer.cs">
-      <DependentUpon>EnterMasterPasswordDialog.cs</DependentUpon>
+    <Compile Include="Dialogs\RestoreSession\EnterMainPasswordDialog.Designer.cs">
+      <DependentUpon>EnterMainPasswordDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\RestoreSession\SaveAndRestoreDialog.cs">
       <SubType>Form</SubType>
@@ -1168,11 +1168,11 @@
     <Compile Include="Dialogs\RestoreSession\SaveAndRestoreDialog.Designer.cs">
       <DependentUpon>SaveAndRestoreDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\RestoreSession\ChangeMasterPasswordDialog.cs">
+    <Compile Include="Dialogs\RestoreSession\ChangeMainPasswordDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\RestoreSession\ChangeMasterPasswordDialog.Designer.cs">
-      <DependentUpon>ChangeMasterPasswordDialog.cs</DependentUpon>
+    <Compile Include="Dialogs\RestoreSession\ChangeMainPasswordDialog.Designer.cs">
+      <DependentUpon>ChangeMainPasswordDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\ThreeButtonDialog.cs">
       <SubType>Form</SubType>
@@ -2552,9 +2552,9 @@
       <DependentUpon>NewCustomFieldDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\RestoreSession\EnterMasterPasswordDialog.resx">
+    <EmbeddedResource Include="Dialogs\RestoreSession\EnterMainPasswordDialog.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>EnterMasterPasswordDialog.cs</DependentUpon>
+      <DependentUpon>EnterMainPasswordDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Common\PasswordFailure.resx">
       <SubType>Designer</SubType>
@@ -2564,13 +2564,13 @@
       <SubType>Designer</SubType>
       <DependentUpon>SaveAndRestoreDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\RestoreSession\ChangeMasterPasswordDialog.resx">
+    <EmbeddedResource Include="Dialogs\RestoreSession\ChangeMainPasswordDialog.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>ChangeMasterPasswordDialog.cs</DependentUpon>
+      <DependentUpon>ChangeMainPasswordDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\RestoreSession\SetMasterPasswordDialog.resx">
+    <EmbeddedResource Include="Dialogs\RestoreSession\SetMainPasswordDialog.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>SetMasterPasswordDialog.cs</DependentUpon>
+      <DependentUpon>SetMainPasswordDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\ThreeButtonDialog.resx">
       <DependentUpon>ThreeButtonDialog.cs</DependentUpon>
@@ -5419,18 +5419,18 @@
     <EmbeddedResource Include="Dialogs\ResolvingSubjectsDialog.zh-CN.resx">
       <DependentUpon>ResolvingSubjectsDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\RestoreSession\ChangeMasterPasswordDialog.ja.resx">
-      <DependentUpon>ChangeMasterPasswordDialog.cs</DependentUpon>
+    <EmbeddedResource Include="Dialogs\RestoreSession\ChangeMainPasswordDialog.ja.resx">
+      <DependentUpon>ChangeMainPasswordDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\RestoreSession\ChangeMasterPasswordDialog.zh-CN.resx">
-      <DependentUpon>ChangeMasterPasswordDialog.cs</DependentUpon>
+    <EmbeddedResource Include="Dialogs\RestoreSession\ChangeMainPasswordDialog.zh-CN.resx">
+      <DependentUpon>ChangeMainPasswordDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\RestoreSession\EnterMasterPasswordDialog.ja.resx">
-      <DependentUpon>EnterMasterPasswordDialog.cs</DependentUpon>
+    <EmbeddedResource Include="Dialogs\RestoreSession\EnterMainPasswordDialog.ja.resx">
+      <DependentUpon>EnterMainPasswordDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\RestoreSession\EnterMasterPasswordDialog.zh-CN.resx">
-      <DependentUpon>EnterMasterPasswordDialog.cs</DependentUpon>
+    <EmbeddedResource Include="Dialogs\RestoreSession\EnterMainPasswordDialog.zh-CN.resx">
+      <DependentUpon>EnterMainPasswordDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Common\PasswordFailure.ja.resx">
       <DependentUpon>PasswordFailure.cs</DependentUpon>
@@ -5444,11 +5444,11 @@
     <EmbeddedResource Include="Dialogs\RestoreSession\SaveAndRestoreDialog.zh-CN.resx">
       <DependentUpon>SaveAndRestoreDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\RestoreSession\SetMasterPasswordDialog.ja.resx">
-      <DependentUpon>SetMasterPasswordDialog.cs</DependentUpon>
+    <EmbeddedResource Include="Dialogs\RestoreSession\SetMainPasswordDialog.ja.resx">
+      <DependentUpon>SetMainPasswordDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\RestoreSession\SetMasterPasswordDialog.zh-CN.resx">
-      <DependentUpon>SetMasterPasswordDialog.cs</DependentUpon>
+    <EmbeddedResource Include="Dialogs\RestoreSession\SetMainPasswordDialog.zh-CN.resx">
+      <DependentUpon>SetMainPasswordDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\RoleElevationDialog.ja.resx">
       <DependentUpon>RoleElevationDialog.cs</DependentUpon>

@@ -69,7 +69,7 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
             Program.Invoke(Program.MainWindow, delegate
                {
                    var powerOnCommand = new PowerOnHostCommand(Program.MainWindow, Server);
-                   canStartHost = powerOnCommand.CanExecute();
+                   canStartHost = powerOnCommand.CanRun();
                });
             return canStartHost;
         }

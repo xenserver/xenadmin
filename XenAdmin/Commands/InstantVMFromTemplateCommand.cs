@@ -60,7 +60,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
            var createAction= new CreateVMFastAction(selection[0].Connection, selection[0].XenObject as VM);
            createAction.Completed += createAction_Completed;
@@ -79,12 +79,12 @@ namespace XenAdmin.Commands
             }
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
-            return selection.ContainsOneItemOfType<VM>() && selection.AtLeastOneXenObjectCan<VM>(CanExecute);
+            return selection.ContainsOneItemOfType<VM>() && selection.AtLeastOneXenObjectCan<VM>(CanRun);
         }
 
-        private static bool CanExecute(VM vm)
+        private static bool CanRun(VM vm)
         {
             return vm != null && vm.is_a_template && !vm.Locked && !vm.is_a_snapshot && vm.InstantTemplate();
         }

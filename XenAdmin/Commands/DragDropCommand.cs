@@ -72,9 +72,9 @@ namespace XenAdmin.Commands
         }
 
         /// <summary>
-        /// Determines whether this drop-drop operation can execute with the specified target-node and drag-data.
+        /// Determines whether this drop-drop operation can run with the specified target-node and drag-data.
         /// </summary>
-        public bool CanExecute()
+        public bool CanRun()
         {
             if ((DraggedNodes == null || DraggedNodes.Count == 0) && DraggedGridRows == null)
             {
@@ -85,29 +85,29 @@ namespace XenAdmin.Commands
                 return false;
             }
 
-            return CanExecuteCore();
+            return CanRunCore();
         }
 
         /// <summary>
-        /// Determines whether this drop-drop operation can execute with the specified target-node and drag-data.
+        /// Determines whether this drop-drop operation can run with the specified target-node and drag-data.
         /// </summary>
-        protected virtual bool CanExecuteCore()
+        protected virtual bool CanRunCore()
         {
             return false;
         }
 
         /// <summary>
-        /// Executes this drag-drop operation with the specified target-node and drag data.
+        /// Runs this drag-drop operation with the specified target-node and drag data.
         /// </summary>
-        public void Execute()
+        public void Run()
         {
-            ExecuteCore();
+            RunCore();
         }
 
         /// <summary>
-        /// Executes this drag-drop operation with the specified target-node and drag data.
+        /// Runs this drag-drop operation with the specified target-node and drag data.
         /// </summary>
-        protected virtual void ExecuteCore()
+        protected virtual void RunCore()
         {
         }
 

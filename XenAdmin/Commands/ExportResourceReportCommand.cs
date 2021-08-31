@@ -56,15 +56,15 @@ namespace XenAdmin.Commands
         {
         }
         
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             if (selection.FirstAsXenObject != null)
             {
-                Execute(selection.FirstAsXenObject.Connection);
+                Run(selection.FirstAsXenObject.Connection);
             }
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (selection.FirstAsXenObject != null && selection.FirstAsXenObject.Connection != null && selection.FirstAsXenObject.Connection.IsConnected &&
                 (selection.PoolAncestor != null || selection.HostAncestor != null)) // this check ensures there's no cross-pool 
@@ -88,7 +88,7 @@ namespace XenAdmin.Commands
             }
         }
 
-        private bool Execute(IXenConnection connection)
+        private bool Run(IXenConnection connection)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "xls files(*.xls)|*.xls|csv files(*.csv)|*.csv";

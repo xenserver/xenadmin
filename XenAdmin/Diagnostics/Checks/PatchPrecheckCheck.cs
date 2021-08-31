@@ -121,7 +121,7 @@ namespace XenAdmin.Diagnostics.Checks
                     return null;
                 }
                 //trying to apply update to partially upgraded pool
-                if (Helpers.ElyOrGreater(Helpers.GetMaster(Host.Connection)) && !Helpers.ElyOrGreater(Host))
+                if (Helpers.ElyOrGreater(Helpers.GetCoordinator(Host.Connection)) && !Helpers.ElyOrGreater(Host))
                 {
                     return new WrongServerVersion(this, Host);
                 }

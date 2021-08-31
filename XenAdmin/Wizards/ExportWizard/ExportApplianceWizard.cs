@@ -177,7 +177,7 @@ namespace XenAdmin.Wizards.ExportWizard
 
 	    private void ConfigureRbacPage()
 		{
-			if (xenConnection == null || xenConnection.Session.IsLocalSuperuser || Helpers.GetMaster(xenConnection).external_auth_type == Auth.AUTH_TYPE_NONE)
+			if (xenConnection == null || xenConnection.Session.IsLocalSuperuser || Helpers.GetCoordinator(xenConnection).external_auth_type == Auth.AUTH_TYPE_NONE)
 				return;
 
 			bool exportAsXva = (bool)m_exportAsXva;

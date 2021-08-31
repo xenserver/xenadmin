@@ -591,7 +591,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 if (!uploadedPatches.Contains(patch))
                 {
                     planActionsPerHost.Add(new DownloadPatchPlanAction(host.Connection, patch, AllDownloadedPatches, patchFromDisk));
-                    planActionsPerHost.Add(new UploadPatchToMasterPlanAction(this, host.Connection, patch, patchMappings, AllDownloadedPatches, patchFromDisk, true));
+                    planActionsPerHost.Add(new UploadPatchToCoordinatorPlanAction(this, host.Connection, patch, patchMappings, AllDownloadedPatches, patchFromDisk, true));
                     uploadedPatches.Add(patch);
                 }
 
@@ -628,9 +628,9 @@ namespace XenAdmin.Wizards.PatchingWizard
                 var isLastHostInPool = hosts.IndexOf(host) == hosts.Count - 1;
                 if (isLastHostInPool)
                 {
-                    // add cleanup action for current patch at the end of the update seuence for the last host in the pool
-                    var master = Helpers.GetMaster(host.Connection);
-                    planActionsPerHost.Add(new RemoveUpdateFileFromMasterPlanAction(master, patchMappings, patch));
+                    // add cleanup action for current patch at the end of the update sequence for the last host in the pool
+                    var coordinator = Helpers.GetCoordinator(host.Connection);
+                    planActionsPerHost.Add(new RemoveUpdateFileFromCoordinatorPlanAction(coordinator, patchMappings, patch));
                 }
             }
 

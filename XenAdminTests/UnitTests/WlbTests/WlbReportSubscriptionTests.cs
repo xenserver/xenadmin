@@ -60,7 +60,7 @@ namespace XenAdminTests.UnitTests.WlbTests
                 SubscriberName = "subscriber name",
                 ScheduleId = "2",
                 DaysOfWeek = WlbScheduledTask.WlbTaskDaysOfWeek.Monday,
-                ExecuteTimeOfDay = new DateTime(2011, 12, 26),
+                RunTimeOfDay = new DateTime(2011, 12, 26),
                 TriggerType = 3,
                 Enabled = true,
                 EnableDate = new DateTime(2011, 12, 27),
@@ -97,7 +97,7 @@ namespace XenAdminTests.UnitTests.WlbTests
             public string SubscriberName;
             public string ScheduleId;
             public WlbScheduledTask.WlbTaskDaysOfWeek DaysOfWeek;
-            public DateTime ExecuteTimeOfDay;
+            public DateTime RunTimeOfDay;
             public int TriggerType;
             public bool Enabled;
             public DateTime EnableDate;

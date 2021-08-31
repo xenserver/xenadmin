@@ -45,16 +45,16 @@ namespace XenAdmin.Actions
 
         private class NewBond
         {
-            internal NewBond(Bond bond, PIF master, List<PIF> slaves)
+            internal NewBond(Bond bond, PIF bondInterface, List<PIF> members)
             {
                 this.bond = bond;
-                this.master = master;
-                this.slaves = slaves;
+                this.bondInterface = bondInterface;
+                this.members = members;
             }
 
             internal Bond bond;
-            internal PIF master;
-            internal List<PIF> slaves;
+            internal PIF bondInterface;
+            internal List<PIF> members;
         }
 
         private readonly string name_label;
@@ -62,15 +62,15 @@ namespace XenAdmin.Actions
         private readonly long mtu;
         private readonly bond_mode bondMode;
         private readonly Dictionary<Host, List<PIF>> PIFs = new Dictionary<Host, List<PIF>>();
-        private readonly Host Master;
+        private readonly Host Coordinator;
         private readonly Bond.hashing_algoritm hashingAlgoritm;
 
         /// <param name="name_label">The name for the new network.</param>
-        /// <param name="PIFs_on_master">The PIFs on the master representing the physical NICs that are to be bonded together.</param>
+        /// <param name="PIFs_on_coordinator">The PIFs on the coordinator representing the physical NICs that are to be bonded together.</param>
         /// <param name="autoplug">Whether the new network is marked AutoPlug.</param>
         /// <param name="mtu">The MTU for the Bond, ignored for pre cowley</param>
         /// <param name="bondMode">The bond mode, ignored for pre-Boston</param>
-        public CreateBondAction(IXenConnection connection, string name_label, List<PIF> PIFs_on_master, bool autoplug, long mtu, bond_mode bondMode,
+        public CreateBondAction(IXenConnection connection, string name_label, List<PIF> PIFs_on_coordinator, bool autoplug, long mtu, bond_mode bondMode,
             Bond.hashing_algoritm hashingAlgoritm)
             : base(connection, string.Format(Messages.ACTION_CREATE_BOND_TITLE, name_label),
                    string.Format(Messages.ACTION_CREATE_BOND_DESCRIPTION, name_label))
@@ -85,9 +85,9 @@ namespace XenAdmin.Actions
             if (Pool == null)
                 throw new Failure(Failure.INTERNAL_ERROR, string.Format(Messages.POOL_GONE, BrandManager.BrandConsole));
 
-            Master = Connection.Resolve(Pool.master);
-            if (Master == null)
-                throw new Failure(Failure.INTERNAL_ERROR, string.Format(Messages.POOL_MASTER_GONE, BrandManager.BrandConsole));
+            Coordinator = Connection.Resolve(Pool.master);
+            if (Coordinator == null)
+                throw new Failure(Failure.INTERNAL_ERROR, string.Format(Messages.POOL_COORDINATOR_GONE, BrandManager.BrandConsole));
 
             foreach (Host host in Connection.Cache.Hosts)
                 AppliesTo.Add(host.opaque_ref);
@@ -105,7 +105,7 @@ namespace XenAdmin.Actions
             ApiMethodsToRoleCheck.AddRange(XenAPI.Role.CommonTaskApiList);
             #endregion
 
-            PIFs = NetworkingHelper.PIFsOnAllHosts(PIFs_on_master);
+            PIFs = NetworkingHelper.PIFsOnAllHosts(PIFs_on_coordinator);
             // these locks will be cleared in clean()
             foreach (List<PIF> pifs in PIFs.Values)
             {
@@ -135,7 +135,7 @@ namespace XenAdmin.Actions
                 XenAPI.Network.remove_from_other_config(Session, network_ref, XenAPI.Network.CREATE_IN_PROGRESS);
 
                 int lo = inc;
-                foreach (Host host in GetHostsMasterLast())
+                foreach (Host host in GetHostsCoordinatorLast())
                 {
                     List<PIF> pifs = PIFs[host].FindAll(x => x.physical).ToList();
 
@@ -161,20 +161,20 @@ namespace XenAdmin.Actions
                     if (new_bond == null)
                         throw new Failure(Failure.INTERNAL_ERROR, string.Format(Messages.BOND_GONE, BrandManager.BrandConsole));
 
-                    PIF new_master = Connection.Resolve(new_bond.master);
-                    if (new_master == null)
-                        throw new Failure(Failure.INTERNAL_ERROR, string.Format(Messages.BOND_MASTER_GONE, BrandManager.BrandConsole));
+                    PIF new_bond_interface = Connection.Resolve(new_bond.master);
+                    if (new_bond_interface == null)
+                        throw new Failure(Failure.INTERNAL_ERROR, string.Format(Messages.BOND_INTERFACE_GONE, BrandManager.BrandConsole));
 
-                    new_bonds.Add(new NewBond(new_bond, new_master, pifs));
+                    new_bonds.Add(new NewBond(new_bond, new_bond_interface, pifs));
 
                     new_bond.Locked = true;
-                    new_master.Locked = true;
+                    new_bond_interface.Locked = true;
                 }
 
                 foreach (NewBond new_bond in new_bonds)
                 {
                     lo += inc;
-                    ReconfigureManagementInterfaces(new_bond.slaves, new_bond.master, lo);
+                    ReconfigureManagementInterfaces(new_bond.members, new_bond.bondInterface, lo);
                 }
             }
             catch (Exception)
@@ -192,11 +192,11 @@ namespace XenAdmin.Actions
             Description = string.Format(Messages.ACTION_CREATE_BOND_DONE, name_label);
         }
 
-        private List<Host> GetHostsMasterLast()
+        private List<Host> GetHostsCoordinatorLast()
         {
             List<Host> result = new List<Host>(Connection.Cache.Hosts);
-            result.Remove(Master);
-            result.Add(Master);
+            result.Remove(Coordinator);
+            result.Add(Coordinator);
             return result;
         }
 
@@ -212,7 +212,7 @@ namespace XenAdmin.Actions
                 network.Locked = false;
                 foreach (NewBond newbond in new_bonds)
                 {
-                    newbond.master.Locked = false;
+                    newbond.bondInterface.Locked = false;
                     newbond.bond.Locked = false;
                 }
             }
@@ -225,40 +225,38 @@ namespace XenAdmin.Actions
             }
         }
 
-        private void ReconfigureManagementInterfaces(List<PIF> slaves, PIF new_master, int hi)
+        private void ReconfigureManagementInterfaces(List<PIF> members, PIF new_bond_interface, int hi)
         {
             int lo = PercentComplete;
-            int inc = (hi - lo) / slaves.Count;
-            foreach (PIF pif in slaves)
+            int inc = (hi - lo) / members.Count;
+            foreach (PIF pif in members)
             {
                 lo += inc;
-                NetworkingActionHelpers.MoveManagementInterfaceName(this, pif, new_master);
+                NetworkingActionHelpers.MoveManagementInterfaceName(this, pif, new_bond_interface);
             }
         }
 
         /// <summary>
         /// Nothrow guarantee.
         /// </summary>
-        /// <param name="slaves"></param>
-        /// <param name="master"></param>
         private void RevertManagementInterfaces(NewBond new_bond)
         {
-            List<PIF> slaves = new_bond.slaves;
-            PIF master = new_bond.master;
+            List<PIF> members = new_bond.members;
+            PIF bondInterface = new_bond.bondInterface;
             Bond bond = new_bond.bond;
 
-            PIF slave = Connection.Resolve(bond.primary_slave);
+            PIF member = Connection.Resolve(bond.primary_slave);
 
-            if (slave == null)
+            if (member == null)
             {
-                if (slaves.Count == 0)
+                if (members.Count == 0)
                     return;
-                slave = slaves[0];
+                member = members[0];
             }
 
             try
             {
-                NetworkingActionHelpers.MoveManagementInterfaceName(this, master, slave);
+                NetworkingActionHelpers.MoveManagementInterfaceName(this, bondInterface, member);
             }
             catch (Exception exn)
             {

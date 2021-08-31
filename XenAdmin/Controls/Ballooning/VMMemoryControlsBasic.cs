@@ -115,7 +115,7 @@ namespace XenAdmin.Controls.Ballooning
                     else
                         labelDMCUnavailable.Text = Messages.DMC_UNAVAILABLE_VMS;
 
-                    linkInstallTools.Visible = vms.All(InstallToolsCommand.CanExecute);
+                    linkInstallTools.Visible = vms.All(InstallToolsCommand.CanRun);
                 }
                 else if (vm0.is_a_template)
                 {
@@ -137,7 +137,7 @@ namespace XenAdmin.Controls.Ballooning
                     else
                         labelDMCUnavailable.Text = Messages.DMC_UNAVAILABLE_VM;
                     
-                    linkInstallTools.Visible = InstallToolsCommand.CanExecute(vm0);
+                    linkInstallTools.Visible = InstallToolsCommand.CanRun(vm0);
                 }
             }
 
@@ -251,7 +251,7 @@ namespace XenAdmin.Controls.Ballooning
 
             var cmd = new InstallToolsCommand(Program.MainWindow, vms);
             cmd.InstallTools += _ => InstallTools?.Invoke();
-            cmd.Execute();
+            cmd.Run();
         }
     }
 }

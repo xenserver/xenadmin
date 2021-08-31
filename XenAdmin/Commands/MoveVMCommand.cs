@@ -56,14 +56,14 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             var cmd = new CrossPoolMoveVMCommand(MainWindowCommandInterface, selection);
             var con = selection.GetConnectionOfFirstItem();
 
-            if (cmd.CanExecute() && !Helpers.FeatureForbidden(con, Host.RestrictCrossPoolMigrate))
+            if (cmd.CanRun() && !Helpers.FeatureForbidden(con, Host.RestrictCrossPoolMigrate))
             {
-                cmd.Execute();
+                cmd.Run();
             }
             else
             {
@@ -72,11 +72,11 @@ namespace XenAdmin.Commands
             }
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             return selection.AllItemsAre<VM>(CBTDisabled) &&
-                   (new CrossPoolMoveVMCommand(MainWindowCommandInterface, selection).CanExecute() ||
-                   selection.ContainsOneItemOfType<VM>(CanExecute));
+                   (new CrossPoolMoveVMCommand(MainWindowCommandInterface, selection).CanRun() ||
+                   selection.ContainsOneItemOfType<VM>(CanRun));
         }
 
         private bool CBTDisabled(VM vm)
@@ -92,9 +92,9 @@ namespace XenAdmin.Commands
             return true;
         }
 
-        private static bool CanExecute(VM vm)
+        private static bool CanRun(VM vm)
         {
-            return vm != null && (CrossPoolMoveVMCommand.CanExecute(vm, null) || vm.CanBeMoved());
+            return vm != null && (CrossPoolMoveVMCommand.CanRun(vm, null) || vm.CanBeMoved());
         }
 
         public override string MenuText

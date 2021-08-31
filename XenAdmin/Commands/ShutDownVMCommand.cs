@@ -68,12 +68,12 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override bool CanExecute(VM vm)
+        protected override bool CanRun(VM vm)
         {
             return vm != null && vm.allowed_operations != null && vm.allowed_operations.Contains(vm_operations.clean_shutdown);
         }
 
-        protected override void Execute(List<VM> vms)
+        protected override void Run(List<VM> vms)
         {
             RunAction(vms, Messages.ACTION_VMS_SHUTTING_DOWN_TITLE, Messages.ACTION_VMS_SHUTTING_DOWN_TITLE, Messages.ACTION_VM_SHUT_DOWN, null);
         }
@@ -150,11 +150,11 @@ namespace XenAdmin.Commands
             get { return "WarningVmLifeCycleShutdown"; }
         }
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
             VM vm = item as VM;
             if (vm == null)
-                return base.GetCantExecuteReasonCore(item);
+                return base.GetCantRunReasonCore(item);
 
             switch (vm.power_state)
             {
@@ -165,19 +165,19 @@ namespace XenAdmin.Commands
                 case vm_power_state.Suspended:
                     return Messages.VM_SUSPENDED;
                 case vm_power_state.unknown:
-                    return base.GetCantExecuteReasonCore(item);
+                    return base.GetCantRunReasonCore(item);
             }
 
-            return GetCantExecuteNoToolsOrDriversReasonCore(item) ?? base.GetCantExecuteReasonCore(item);
+            return GetCantRunNoToolsOrDriversReasonCore(item) ?? base.GetCantRunReasonCore(item);
         }
 
-        protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantExecuteReasons)
+        protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantRunReasons)
         {
             foreach (VM vm in GetSelection().AsXenObjects<VM>())
             {
-                if (!CanExecute(vm) && vm.power_state != vm_power_state.Halted)
+                if (!CanRun(vm) && vm.power_state != vm_power_state.Halted)
                 {
-                    return new CommandErrorDialog(Messages.ERROR_DIALOG_SHUTDOWN_VM_TITLE, Messages.ERROR_DIALOG_SHUTDOWN_VMS_TITLE, cantExecuteReasons);
+                    return new CommandErrorDialog(Messages.ERROR_DIALOG_SHUTDOWN_VM_TITLE, Messages.ERROR_DIALOG_SHUTDOWN_VMS_TITLE, cantRunReasons);
                 }
             }
             return null;

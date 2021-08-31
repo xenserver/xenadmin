@@ -153,7 +153,7 @@ namespace XenAdmin.TabPages
                     return;
 
                 List<PIF> pifList = new List<PIF>(_xenObject.Connection.Cache.PIFs);
-                hostList.Sort();  // usual order, i.e. master first
+                hostList.Sort();  // usual order, i.e. coordinator first
                 pifList.Sort();  // This sort ensures that the primary PIF comes before other management PIFs
 
                 List<PIFRow> rows = new List<PIFRow>();

@@ -61,11 +61,11 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
         protected override void RunWithSession(ref Session session)
         {
-            var master = Helpers.GetMaster(Connection);
+            var coordinator = Helpers.GetCoordinator(Connection);
 
             var mapping = (from HostUpdateMapping hum in mappings
                 let xpm = hum as XenServerPatchMapping
-                where xpm != null && xpm.Matches(master, xenServerPatch)
+                where xpm != null && xpm.Matches(coordinator, xenServerPatch)
                 select xpm).FirstOrDefault();
 
             if (mapping == null || !mapping.IsValid)

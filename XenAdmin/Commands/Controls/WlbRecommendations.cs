@@ -109,8 +109,8 @@ namespace XenAdmin.Commands
             Verify();
 
             List<double> starRatings = new List<double>();
-            Dictionary<VM, bool> canExecutes = new Dictionary<VM, bool>();
-            Dictionary<VM, string> cantExecuteReasons = new Dictionary<VM, string>();
+            Dictionary<VM, bool> canRuns = new Dictionary<VM, bool>();
+            Dictionary<VM, string> canRunReasons = new Dictionary<VM, string>();
 
             foreach (VM vm in _vms)
             {
@@ -119,8 +119,8 @@ namespace XenAdmin.Commands
 
                 if (residentHost != null && residentHost.opaque_ref == host.opaque_ref)
                 {
-                    cantExecuteReasons[vm] = Messages.HOST_MENU_CURRENT_SERVER;
-                    canExecutes[vm] = false;
+                    canRunReasons[vm] = Messages.HOST_MENU_CURRENT_SERVER;
+                    canRuns[vm] = false;
                 }
                 else if (_recommendations[vm].TryGetValue(new XenRef<Host>(host.opaque_ref), out rec))
                 {
@@ -128,19 +128,19 @@ namespace XenAdmin.Commands
                     {
                         double stars = 0;
                         ParseStarRating(rec, out stars);
-                        canExecutes[vm] = true;
+                        canRuns[vm] = true;
                         starRatings.Add(stars);
                     }
                     else
                     {
-                        cantExecuteReasons[vm] = new Failure(rec).ShortMessage;
-                        canExecutes[vm] = false;
+                        canRunReasons[vm] = new Failure(rec).ShortMessage;
+                        canRuns[vm] = false;
                     }
                 }
                 else
                 {
-                    cantExecuteReasons[vm] = FriendlyErrorNames.HOST_NOT_LIVE_SHORT;
-                    canExecutes[vm] = false;
+                    canRunReasons[vm] = FriendlyErrorNames.HOST_NOT_LIVE_SHORT;
+                    canRuns[vm] = false;
                 }
             }
 
@@ -152,7 +152,7 @@ namespace XenAdmin.Commands
             }
             averageStarRating /= starRatings.Count;
 
-            return new WlbRecommendation(canExecutes, averageStarRating, cantExecuteReasons);
+            return new WlbRecommendation(canRuns, averageStarRating, canRunReasons);
         }
 
         private static bool ParseStarRating(string[] rec, out double starRating)
@@ -173,15 +173,15 @@ namespace XenAdmin.Commands
 
         internal class WlbRecommendation
         {
-            public readonly Dictionary<VM, bool> CanExecuteByVM;
+            public readonly Dictionary<VM, bool> CanRunByVM;
             public readonly double StarRating;
-            public readonly Dictionary<VM, string> CantExecuteReasons;
+            public readonly Dictionary<VM, string> CantRunReasons;
 
-            public WlbRecommendation(Dictionary<VM, bool> canExecuteByVM, double starRating, Dictionary<VM, string> cantExecuteReasons)
+            public WlbRecommendation(Dictionary<VM, bool> canRunByVm, double starRating, Dictionary<VM, string> cantRunReasons)
             {
-                CanExecuteByVM = canExecuteByVM;
+                CanRunByVM = canRunByVm;
                 StarRating = starRating;
-                CantExecuteReasons = cantExecuteReasons;
+                CantRunReasons = cantRunReasons;
             }
         }
     }

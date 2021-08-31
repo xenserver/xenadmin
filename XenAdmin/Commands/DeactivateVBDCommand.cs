@@ -67,9 +67,9 @@ namespace XenAdmin.Commands
 
         public override string ButtonText => Messages.DEACTIVATE;
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
-            return selection.AllItemsAre<VBD>() && selection.AtLeastOneXenObjectCan<VBD>(CanExecute);
+            return selection.AllItemsAre<VBD>() && selection.AtLeastOneXenObjectCan<VBD>(CanRun);
         }
 
         // We only need to check for IO Drivers for hosts before Ely
@@ -83,7 +83,7 @@ namespace XenAdmin.Commands
             return !vm.GetVirtualisationStatus(out _).HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED);
         }
 
-        private bool CanExecute(VBD vbd)
+        private bool CanRun(VBD vbd)
         {
             VDI vdi = vbd.Connection.Resolve<VDI>(vbd.VDI);
             VM vm = vbd.Connection.Resolve<VM>(vbd.VM);
@@ -101,22 +101,22 @@ namespace XenAdmin.Commands
             return vbd.allowed_operations.Contains(vbd_operations.unplug);
         }
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
             VBD vbd = item as VBD;
             if (vbd == null)
-                return base.GetCantExecuteReasonCore(item);
+                return base.GetCantRunReasonCore(item);
 
             VDI vdi = vbd.Connection.Resolve<VDI>(vbd.VDI);
             VM vm = vbd.Connection.Resolve<VM>(vbd.VM);
             if (vm == null || vdi == null)
-                return base.GetCantExecuteReasonCore(item);
+                return base.GetCantRunReasonCore(item);
 
             if (vm.is_a_template)
                 return Messages.CANNOT_ACTIVATE_TEMPLATE_DISK;
             
             if (!vm.is_a_real_vm())
-                return base.GetCantExecuteReasonCore(item);
+                return base.GetCantRunReasonCore(item);
 
             SR sr = vdi.Connection.Resolve<SR>(vdi.SR);
             if (sr == null)
@@ -148,15 +148,15 @@ namespace XenAdmin.Commands
             if (!vbd.currently_attached)
                 return string.Format(Messages.CANNOT_DEACTIVATE_NOT_ACTIVE, Helpers.GetName(vm).Ellipsise(50));
 
-            return base.GetCantExecuteReasonCore(item);
+            return base.GetCantRunReasonCore(item);
         }
 
-        protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantExecuteReasons)
+        protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantRunReasons)
         {
-            return new CommandErrorDialog(Messages.ERROR_DEACTIVATING_MULTIPLE_VDIS_TITLE, Messages.ERROR_DEACTIVATING_MULTIPLE_VDIS_MESSAGE, cantExecuteReasons);
+            return new CommandErrorDialog(Messages.ERROR_DEACTIVATING_MULTIPLE_VDIS_TITLE, Messages.ERROR_DEACTIVATING_MULTIPLE_VDIS_MESSAGE, cantRunReasons);
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             List<AsyncAction> actionsToComplete = new List<AsyncAction>();
             foreach (VBD vbd in selection.AsXenObjects<VBD>())

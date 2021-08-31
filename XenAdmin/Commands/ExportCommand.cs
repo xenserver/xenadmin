@@ -49,7 +49,7 @@ namespace XenAdmin.Commands
 
         public override string MenuText { get { return Messages.MENU_EXPORT; } }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             Host hostAncestor = selection.HostAncestorFromConnection;
             Pool poolAncestor = selection.PooAncestorFromConnection;
@@ -86,7 +86,7 @@ namespace XenAdmin.Commands
             return false;
         }
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
             VM vm = item as VM;
             if (vm != null && vm.power_state != vm_power_state.Halted)
@@ -104,7 +104,7 @@ namespace XenAdmin.Commands
             return string.Empty;
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             var con = selection.GetConnectionOfFirstItem();
             MainWindowCommandInterface.ShowPerConnectionWizard(con, new ExportApplianceWizard(con, selection));

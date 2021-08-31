@@ -66,11 +66,11 @@ namespace XenAdmin.Alerts
             XenObject = Helpers.XenObjectFromMessage(m);
 
             // TODO: This would be better if there was some way of getting the actual host that the XenObject belongs to
-            // Currently if the applies to object is not a host or pool and belongs to a slave it is filtered under the master. 
+            // Currently if the applies to object is not a host or pool and belongs to a supporter it is filtered under the coordinator. 
 
             Host h = XenObject as Host;
             if (h == null)
-                h = Helpers.GetMaster(m.Connection);
+                h = Helpers.GetCoordinator(m.Connection);
 
             if (h != null)
                 HostUuid = h.uuid;
@@ -174,7 +174,7 @@ namespace XenAdmin.Alerts
                     case Message.MessageType.LICENSE_EXPIRES_SOON:
                         if (XenObject != null)
                         {
-                            Host host = XenObject as Host ?? Helpers.GetMaster(Connection);
+                            Host host = XenObject as Host ?? Helpers.GetCoordinator(Connection);
                             return string.Format(FriendlyFormat(), Helpers.GetName(XenObject));
                         }
                         break;
@@ -326,7 +326,7 @@ namespace XenAdmin.Alerts
 
         private string GetManagementBondName()
         {
-            Bond bond = NetworkingHelper.GetMasterManagementBond(Connection);
+            Bond bond = NetworkingHelper.GetCoordinatorManagementBond(Connection);
             return bond == null ? Messages.UNKNOWN : bond.Name();
         }
 
@@ -350,7 +350,7 @@ namespace XenAdmin.Alerts
 					case Message.MessageType.HA_STATEFILE_APPROACHING_TIMEOUT:
 					case Message.MessageType.HA_STATEFILE_LOST:
 					case Message.MessageType.HA_XAPI_HEALTHCHECK_APPROACHING_TIMEOUT:
-						return () => new HAConfigureCommand(Program.MainWindow, XenObject.Connection).Execute();
+						return () => new HAConfigureCommand(Program.MainWindow, XenObject.Connection).Run();
 
 					case Message.MessageType.LICENSE_EXPIRES_SOON:
 					case Message.MessageType.LICENSE_DOES_NOT_SUPPORT_POOLING:
@@ -365,8 +365,8 @@ namespace XenAdmin.Alerts
 
 					case Message.MessageType.PBD_PLUG_FAILED_ON_SERVER_START:
 						var repairSrCommand = new RepairSRCommand(Program.MainWindow, XenObject.Connection.Cache.SRs);
-						if (repairSrCommand.CanExecute())
-							return () => repairSrCommand.Execute();
+						if (repairSrCommand.CanRun())
+							return () => repairSrCommand.Run();
 						return null;
 					default:
 						return null;

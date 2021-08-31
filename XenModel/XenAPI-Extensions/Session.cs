@@ -245,7 +245,7 @@ namespace XenAPI
         /// </summary>
         public string FriendlyRoleDescription()
         {
-            if (IsLocalSuperuser || XenAdmin.Core.Helpers.GetMaster(Connection).external_auth_type != Auth.AUTH_TYPE_AD)
+            if (IsLocalSuperuser || XenAdmin.Core.Helpers.GetCoordinator(Connection).external_auth_type != Auth.AUTH_TYPE_AD)
                 return Messages.AD_LOCAL_ROOT_ACCOUNT;
 
             return Role.FriendlyCSVRoleList(Roles);
@@ -257,7 +257,7 @@ namespace XenAPI
         /// </summary>
         public string FriendlySingleRoleDescription()
         {
-            if (IsLocalSuperuser || XenAdmin.Core.Helpers.GetMaster(Connection).external_auth_type != Auth.AUTH_TYPE_AD)
+            if (IsLocalSuperuser || XenAdmin.Core.Helpers.GetCoordinator(Connection).external_auth_type != Auth.AUTH_TYPE_AD)
                 return Messages.AD_LOCAL_ROOT_ACCOUNT;
 
             //Sort roles from highest to lowest

@@ -107,7 +107,7 @@ namespace XenAdmin.Wizards.ImportWizard
 
 		private void m_buttonAddNewServer_Click(object sender, EventArgs e)
         {
-            new AddHostCommand(Program.MainWindow, this).Execute();
+            new AddHostCommand(Program.MainWindow, this).Run();
 		}
 
 		#endregion

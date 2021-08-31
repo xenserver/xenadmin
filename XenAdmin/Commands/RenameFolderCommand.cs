@@ -63,7 +63,7 @@ namespace XenAdmin.Commands
             _folder = folder;
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             string newName = _newName;
             Folders.FixupRelativePath(ref newName);
@@ -88,7 +88,7 @@ namespace XenAdmin.Commands
             }
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (!_folder.IsRootFolder)
             {

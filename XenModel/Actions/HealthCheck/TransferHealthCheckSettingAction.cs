@@ -121,7 +121,7 @@ namespace XenAdmin.Actions
 
         protected override string GetMessageToBeSent()
         {
-            var host = Helpers.GetMaster(pool.Connection);
+            var host = Helpers.GetCoordinator(pool.Connection);
             if (host == null)
                 return null;
 

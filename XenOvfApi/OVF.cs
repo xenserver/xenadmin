@@ -2614,16 +2614,16 @@ namespace XenOvf
         /// <summary>
         /// Update a Post Install Operation Command
         /// This is a Citrix Extension to the InstallSection.
-        /// Provides the ability to execute a series of command after the Initial Startup.
+        /// Provides the ability to run a series of command after the Initial Startup.
         /// In a specific case, the VM is imported then is booted from the ISO file to perform fixups upon the attached hard disk image.
-        /// The vm will auto shutdown where these commands will then be executed which in this case is to disconnect the iso image and 
+        /// The vm will auto shutdown where these commands will then be run which in this case is to disconnect the iso image and 
         /// reset the BIOS boot order to boot from the disk first.
         /// </summary>
         /// <param name="ovfObj">EnvelopeType</param>
         /// <param name="vsId">Virtual System Id</param>
         /// <param name="postId">PostInstallOperation Identifier</param>
         /// <param name="operId">Operation Identifier</param>
-        /// <param name="order">Specifies the startup order using non-negative integer values.  The order of execution of the post action is the numerical ascending order of the values. Items with the same order identifier may be started up concurrently.</param>
+        /// <param name="order">Specifies the startup order using non-negative integer values.  The order of running of the post action is the numerical ascending order of the values. Items with the same order identifier may be started up concurrently.</param>
         /// <param name="operation">Operation Name</param>
         /// <param name="value">Values for operation</param>
 		public void UpdatePostInstallOperationCommand(EnvelopeType ovfObj, string vsId, string postId, string operId, uint order, string operation, string value)
@@ -2633,9 +2633,9 @@ namespace XenOvf
         /// <summary>
         /// Update a Post Install Operation Command
         /// This is a Citrix Extension to the InstallSection.
-        /// Provides the ability to execute a series of command after the Initial Startup.
+        /// Provides the ability to run a series of command after the Initial Startup.
         /// In a specific case, the VM is imported then is booted from the ISO file to perform fixups upon the attached hard disk image.
-        /// The vm will auto shutdown where these commands will then be executed which in this case is to disconnect the iso image and 
+        /// The vm will auto shutdown where these commands will then be run which in this case is to disconnect the iso image and 
         /// reset the BIOS boot order to boot from the disk first.
         /// </summary>
         /// <param name="ovfObj">EnvelopeType</param>
@@ -2643,7 +2643,7 @@ namespace XenOvf
         /// <param name="lang">Language</param>
         /// <param name="postId">PostInstallOperation Identifier</param>
         /// <param name="operId">Operation Identifier</param>
-        /// <param name="order">Specifies the startup order using non-negative integer values.  The order of execution of the post action is the numerical ascending order of the values. Items with the same order identifier may be started up concurrently.</param>
+        /// <param name="order">Specifies the startup order using non-negative integer values. The order of running of the post action is the numerical ascending order of the values. Items with the same order identifier may be started up concurrently.</param>
         /// <param name="operation">Operation Name</param>
         /// <param name="value">Values for operation</param>
 		public void UpdatePostInstallOperationCommand(EnvelopeType ovfObj, string vsId, string lang, string postId, string operId, uint order, string operation, string value)
@@ -2907,7 +2907,7 @@ namespace XenOvf
         /// <param name="ovfObj">EnvelopeType</param>
         /// <param name="vsId">Virtual System Id</param>
         /// <param name="ssId">Startup Section Id</param>
-        /// <param name="order">Specifies the startup order using non-negative integer values.  The order of execution of the start action is the numerical ascending order of the values. Items with the same order identifier may be started up concurrently.  The order of execution of the stop action is the numerical descending order of the values.</param>
+        /// <param name="order">Specifies the startup order using non-negative integer values. The order of running of the start action is the numerical ascending order of the values. Items with the same order identifier may be started up concurrently.  The order of execution of the stop action is the numerical descending order of the values.</param>
         /// <param name="startdelay">Specifies a delay in seconds to wait until proceeding to the next order in the start sequence.  The default value is 0.</param>
         /// <param name="stopdelay">Specifies a delay in seconds to wait until proceeding to the previous order in the stop sequence. The default value is 0.</param>
         /// <param name="startaction">Specifies the start action to use.  Valid values are: PowerOn, None. The default value is PowerOn</param>
@@ -2924,7 +2924,7 @@ namespace XenOvf
         /// <param name="vsId">Virtual System Id</param>
         /// <param name="ssId">Startup Section Id</param>
         /// <param name="lang">Language</param>
-        /// <param name="order">Specifies the startup order using non-negative integer values.  The order of execution of the start action is the numerical ascending order of the values. Items with the same order identifier may be started up concurrently.  The order of execution of the stop action is the numerical descending order of the values.</param>
+        /// <param name="order">Specifies the startup order using non-negative integer values. The order of running of the start action is the numerical ascending order of the values. Items with the same order identifier may be started up concurrently.  The order of execution of the stop action is the numerical descending order of the values.</param>
         /// <param name="startdelay">Specifies a delay in seconds to wait until proceeding to the next order in the start sequence.  The default value is 0.</param>
         /// <param name="stopdelay">Specifies a delay in seconds to wait until proceeding to the previous order in the stop sequence. The default value is 0.</param>
         /// <param name="startaction">Specifies the start action to use.  Valid values are: PowerOn, None. The default value is PowerOn</param>

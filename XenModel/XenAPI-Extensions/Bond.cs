@@ -35,11 +35,11 @@ namespace XenAPI
     {
         public override string Name()
         {
-            PIF pif = FindMaster();
+            PIF pif = FindInterface();
             return pif == null ? "" : pif.Name();
         }
 
-        private PIF FindMaster()
+        private PIF FindInterface()
         {
             return Connection == null ? null : Connection.Resolve(master);
         }

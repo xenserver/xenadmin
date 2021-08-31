@@ -62,7 +62,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             MainWindowCommandInterface.SelectObjectInTree(null);
 
@@ -79,15 +79,15 @@ namespace XenAdmin.Commands
             MainWindowCommandInterface.SaveServerList();
         }
 
-        private static bool CanExecute(Host host)
+        private static bool CanRun(Host host)
         {
             bool disconnected = host.Connection != null && !host.Connection.IsConnected;
-            return disconnected || host.IsMaster();
+            return disconnected || host.IsCoordinator();
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
-            return selection.AllItemsAre<Host>(CanExecute);
+            return selection.AllItemsAre<Host>(CanRun);
         }
 
         public override string MenuText => string.Format(Messages.MAINWINDOW_REMOVE_HOST, BrandManager.BrandConsole);

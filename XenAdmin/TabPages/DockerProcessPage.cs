@@ -102,7 +102,7 @@ namespace XenAdmin.TabPages
             args["vmuuid"] = parentVM.uuid;
             args["object"] = container.Name();
 
-            var action = new ExecuteContainerPluginAction(container, host,
+            var action = new RunContainerPluginAction(container, host,
                         "xscontainer", "get_top", args, true); 
 
             action.Completed += action_Completed;
@@ -111,7 +111,7 @@ namespace XenAdmin.TabPages
 
         private void action_Completed(ActionBase sender)
         {
-            var action = sender as ExecuteContainerPluginAction;
+            var action = sender as RunContainerPluginAction;
             if (action == null || action.Container != container)
                 return;
             Program.Invoke(Program.MainWindow, () =>

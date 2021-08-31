@@ -306,13 +306,13 @@ namespace XenAdmin
             }
         }
 
-        private static XmlElement ServerNode(XmlDocument doc, string address, int port, bool is_master)
+        private static XmlElement ServerNode(XmlDocument doc, string address, int port, bool is_coordinator)
         {
             XmlElement server_node = doc.CreateElement("server", NamespaceURI);
 
             server_node.SetAttribute("address", address);
             server_node.SetAttribute("port", port.ToString());
-            server_node.SetAttribute("is_master", is_master ? "true" : "false");
+            server_node.SetAttribute("is_master", is_coordinator ? "true" : "false");
 
             return server_node;
         }

@@ -59,7 +59,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             VM vm = (VM)selection[0].XenObject;
             Host host = vm.Home();
@@ -70,10 +70,10 @@ namespace XenAdmin.Commands
                 host = pool.Connection.Resolve(pool.master);
             }
 
-            new ExportVMCommand(MainWindowCommandInterface, new SelectedItem(vm, selection[0].Connection, host, null)).Execute();
+            new ExportVMCommand(MainWindowCommandInterface, new SelectedItem(vm, selection[0].Connection, host, null)).Run();
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (selection.Count == 1)
             {

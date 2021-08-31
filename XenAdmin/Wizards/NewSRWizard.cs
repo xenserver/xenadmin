@@ -141,7 +141,7 @@ namespace XenAdmin.Wizards
 
             // RBAC warning page 
             _rbac = (xenConnection != null && !xenConnection.Session.IsLocalSuperuser) &&
-                   Helpers.GetMaster(xenConnection).external_auth_type != Auth.AUTH_TYPE_NONE;            
+                   Helpers.GetCoordinator(xenConnection).external_auth_type != Auth.AUTH_TYPE_NONE;            
             if (_rbac)
             {
                 // if reattaching, add "Permission checks" page after "Name" page, otherwise as first page (Ref. CA-61525)
@@ -506,10 +506,10 @@ namespace XenAdmin.Wizards
                 return;
             }
 
-            Host master = xenConnection.Resolve(pool.master);
-            if (master == null)
+            Host coordinator = xenConnection.Resolve(pool.master);
+            if (coordinator == null)
             {
-                log.Error("New SR Wizard: Master has disappeared");
+                log.Error("New SR Wizard: Coordinator has disappeared");
                 using (var dlg = new WarningDialog(string.Format(Messages.NEW_SR_CONNECTION_LOST, Helpers.GetName(xenConnection))))
                 {
                     dlg.ShowDialog(this);
@@ -537,7 +537,7 @@ namespace XenAdmin.Wizards
                 return;
             }
 
-            List<AsyncAction> actionList = GetActions(master, m_srWizardType.DisasterRecoveryTask);
+            List<AsyncAction> actionList = GetActions(coordinator, m_srWizardType.DisasterRecoveryTask);
 
             if (actionList.Count == 1)
                 FinalAction = actionList[0];
@@ -628,7 +628,7 @@ namespace XenAdmin.Wizards
                 xenTabPageLvmoHbaSummary.FailedToCreateSRs.Add(srDescriptor);
         }
 
-        private List<AsyncAction> GetActions(Host master, bool disasterRecoveryTask)
+        private List<AsyncAction> GetActions(Host coordinator, bool disasterRecoveryTask)
         {
             // Now we need to decide what to do.
             // This will be one off create, introduce, reattach
@@ -643,7 +643,7 @@ namespace XenAdmin.Wizards
                 {
                     // Don't need to show any warning, as the only destructive creates
                     // are in iSCSI and HBA, where they show their own warning
-                    finalActions.Add(new SrCreateAction(xenConnection, master,
+                    finalActions.Add(new SrCreateAction(xenConnection, coordinator,
                                                         srDescriptor.Name,
                                                         srDescriptor.Description,
                                                         srType,

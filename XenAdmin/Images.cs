@@ -351,7 +351,7 @@ namespace XenAdmin
             if (pool != null)
                 return GetIconFor(pool);
 
-            Host host = Helpers.GetMaster(connection);
+            Host host = Helpers.GetCoordinator(connection);
             if (host != null)
                 return GetIconFor(host);
 
@@ -479,9 +479,9 @@ namespace XenAdmin
                 {
                     return Icons.HostEvacuate;
                 }
-                else if (Helpers.IsOlderThanMaster(host))
+                else if (Helpers.IsOlderThanCoordinator(host))
                 {
-                    return Icons.HostOlderThanMaster;
+                    return Icons.HostOlderThanCoordinator;
                 }
                 else
                 {

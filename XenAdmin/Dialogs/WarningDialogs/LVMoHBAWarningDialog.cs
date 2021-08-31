@@ -214,10 +214,10 @@ namespace XenAdmin.Dialogs.WarningDialogs
             if (pool != null)
                 return string.Format(Messages.NEWSR_LUN_IN_USE_ON_POOL, sr.Name(), pool.Name());
             
-            Host master = Helpers.GetMaster(sr.Connection);
+            Host coordinator = Helpers.GetCoordinator(sr.Connection);
             
-            if (master != null)
-                return string.Format(Messages.NEWSR_LUN_IN_USE_ON_SERVER, sr.Name(), master.Name());
+            if (coordinator != null)
+                return string.Format(Messages.NEWSR_LUN_IN_USE_ON_SERVER, sr.Name(), coordinator.Name());
 
             return Messages.NEWSR_LUN_IN_USE;
         }

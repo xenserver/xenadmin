@@ -59,17 +59,17 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             MainWindowCommandInterface.PutSelectedNodeIntoEditMode();
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
-            return selection.ContainsOneItemOfType<Folder>(CanExecute);
+            return selection.ContainsOneItemOfType<Folder>(CanRun);
         }
 
-        private static bool CanExecute(Folder folder)
+        private static bool CanRun(Folder folder)
         {
             return !folder.IsRootFolder;
         }

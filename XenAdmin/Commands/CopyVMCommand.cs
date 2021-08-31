@@ -59,24 +59,24 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             VM vm = (VM)selection[0].XenObject;
 
-            if (CrossPoolCopyVMCommand.CanExecute(vm, null))
-                new CrossPoolCopyVMCommand(MainWindowCommandInterface, selection).Execute();
+            if (CrossPoolCopyVMCommand.CanRun(vm, null))
+                new CrossPoolCopyVMCommand(MainWindowCommandInterface, selection).Run();
             else
                 new CopyVMDialog(vm).ShowPerXenObject(vm, Program.MainWindow);
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
-            return selection.ContainsOneItemOfType<VM>() && selection.AtLeastOneXenObjectCan<VM>(CanExecute);
+            return selection.ContainsOneItemOfType<VM>() && selection.AtLeastOneXenObjectCan<VM>(CanRun);
         }
 
-        private static bool CanExecute(VM vm)
+        private static bool CanRun(VM vm)
         {
-            return vm != null && (CrossPoolCopyVMCommand.CanExecute(vm, null) || vm.CanBeCopied());
+            return vm != null && (CrossPoolCopyVMCommand.CanRun(vm, null) || vm.CanBeCopied());
         }
 
         public override string MenuText

@@ -67,7 +67,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             var pool = Helpers.GetPoolOfOne(selection.FirstAsXenObject.Connection);
             if (pool != null)
@@ -79,7 +79,7 @@ namespace XenAdmin.Commands
             }
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (typeof(T) == typeof(VMSS) && selection.Any(s => !Helpers.FalconOrGreater(s.Connection)))
             {

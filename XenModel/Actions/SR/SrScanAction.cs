@@ -111,7 +111,7 @@ namespace XenAdmin.Actions
 
             log.DebugFormat("Attempting to find SRs on {0} filer {1}.", type, hostname);
 
-            RelatedTask = XenAPI.SR.async_probe(Session, Helpers.GetMaster(Connection).opaque_ref,
+            RelatedTask = XenAPI.SR.async_probe(Session, Helpers.GetCoordinator(Connection).opaque_ref,
                 dconf, type.ToString(), new Dictionary<String, String>());
             this.PollToCompletion();
             srs = XenAPI.SR.ParseSRListXML(this.Result);

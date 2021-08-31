@@ -205,7 +205,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             get { return resolvePrechecksAction != null && !resolvePrechecksAction.IsCompleted; }
         }
 
-        private List<PreCheckHostRow> ExecuteCheck(Check check)
+        private List<PreCheckHostRow> RunCheck(Check check)
         {
             var rows = new List<PreCheckHostRow>();
 
@@ -294,7 +294,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                             return;
                         }
 
-                        var rows = ExecuteCheck(check);
+                        var rows = RunCheck(check);
                         doneCheckIndex++;
 
                         foreach (PreCheckHostRow row in rows)
@@ -337,7 +337,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             var haChecks = new List<Check>();
             foreach (Host host in SelectedServers)
             {
-                if (Helpers.HostIsMaster(host))
+                if (Helpers.HostIsCoordinator(host))
                     haChecks.Add(new HAOffCheck(host));
             }
             groups.Add(new CheckGroup(Messages.CHECKING_HA_STATUS, haChecks));
@@ -417,10 +417,10 @@ namespace XenAdmin.Wizards.PatchingWizard
                 groups.Add(new CheckGroup(Messages.CHECKING_CANEVACUATE_STATUS, evacuateChecks));
             }
 
-            //Checking if a reboot is pending on master
+            //Checking if a reboot is pending on the coordinator
             var restartChecks = new List<Check>();
             foreach (var pool in SelectedPools)
-                restartChecks.Add(new RestartHostOrToolstackPendingOnMasterCheck(pool, patch == null ? null : patch.uuid));
+                restartChecks.Add(new RestartHostOrToolstackPendingOnCoordinatorCheck(pool, patch == null ? null : patch.uuid));
 
             groups.Add(new CheckGroup(Messages.CHECKING_FOR_PENDING_RESTART, restartChecks));
 
@@ -482,10 +482,10 @@ namespace XenAdmin.Wizards.PatchingWizard
                 groups.Add(new CheckGroup(Messages.CHECKING_CANEVACUATE_STATUS, evacuateChecks));
             }
 
-            //Checking if a reboot is pending on master
+            //Checking if a reboot is pending on the coordinator
              var restartChecks = new List<Check>();
             foreach (var pool in SelectedPools)
-                restartChecks.Add(new RestartHostOrToolstackPendingOnMasterCheck(pool, update == null ? null : update.uuid));
+                restartChecks.Add(new RestartHostOrToolstackPendingOnCoordinatorCheck(pool, update == null ? null : update.uuid));
             groups.Add(new CheckGroup(Messages.CHECKING_FOR_PENDING_RESTART, restartChecks));
 
             return groups;
@@ -742,7 +742,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             PreCheckHostRow preCheckHostRow = dataGridView1.Rows[e.RowIndex] as PreCheckHostRow;
             if (preCheckHostRow != null && preCheckHostRow.Enabled && e.ColumnIndex == 2)
             {
-                ExecuteSolution(preCheckHostRow);
+                RunSolution(preCheckHostRow);
             }
         }
 
@@ -754,11 +754,11 @@ namespace XenAdmin.Wizards.PatchingWizard
                 int columnIndex = dataGridView1.CurrentCell.ColumnIndex;
 
                 if (preCheckHostRow != null && preCheckHostRow.Enabled && columnIndex == 2)
-                    ExecuteSolution(preCheckHostRow);
+                    RunSolution(preCheckHostRow);
             }
         }
 
-        private void ExecuteSolution(PreCheckHostRow preCheckHostRow)
+        private void RunSolution(PreCheckHostRow preCheckHostRow)
         {
             bool cancelled;
             resolvePrechecksAction = preCheckHostRow.Problem.GetSolutionAction(out cancelled);

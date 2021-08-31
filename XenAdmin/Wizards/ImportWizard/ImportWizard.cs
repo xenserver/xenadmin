@@ -402,7 +402,7 @@ namespace XenAdmin.Wizards.ImportWizard
         private void ConfigureRbacPage(IXenConnection selectedConnection)
         {
             if (selectedConnection == null || selectedConnection.Session == null || selectedConnection.Session.IsLocalSuperuser ||
-                Helpers.GetMaster(selectedConnection).external_auth_type == Auth.AUTH_TYPE_NONE)
+                Helpers.GetCoordinator(selectedConnection).external_auth_type == Auth.AUTH_TYPE_NONE)
                 return;
 
 			m_pageRbac.ClearPermissionChecks();

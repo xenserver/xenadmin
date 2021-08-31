@@ -135,7 +135,7 @@ namespace XenAdmin.Commands
             bool newDvdDrivesRequired = false;
             foreach (VM vm in vms)
             {
-                if (CanExecute(vm) && vm.FindVMCDROM() == null)
+                if (CanRun(vm) && vm.FindVMCDROM() == null)
                 {
                     newDvdDrivesRequired = true;
                     break;
@@ -154,7 +154,7 @@ namespace XenAdmin.Commands
                 {
                     foreach (VM vm in vms)
                     {
-                        if (CanExecute(vm) && vm.FindVMCDROM() == null)
+                        if (CanRun(vm) && vm.FindVMCDROM() == null)
                         {
                             //do not register the event ShowUserInstruction; we show explicitly a message afterwards
                             var createDriveAction = new CreateCdDriveAction(vm);
@@ -261,9 +261,9 @@ namespace XenAdmin.Commands
             }
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
-            List<VM> vms = selection.AsXenObjects<VM>(CanExecute);
+            List<VM> vms = selection.AsXenObjects<VM>(CanRun);
 
             if (vms.Count == 1)
                 InstallToolsOnOneVm(vms[0]);
@@ -271,7 +271,7 @@ namespace XenAdmin.Commands
                 InstallToolsOnManyVms(vms);
         }
 
-        public static bool CanExecute(VM vm)
+        public static bool CanRun(VM vm)
         {
             if (vm == null || vm.is_a_template || vm.Locked || vm.power_state != vm_power_state.Running)
                 return false;
@@ -283,7 +283,7 @@ namespace XenAdmin.Commands
                 return false;
 
             var vmHome = vm.Home();
-            if (vmHome != null && Helpers.IsOlderThanMaster(vmHome))
+            if (vmHome != null && Helpers.IsOlderThanCoordinator(vmHome))
                 return false;
 
             //whether RBAC allows connection to the VM's console
@@ -291,12 +291,12 @@ namespace XenAdmin.Commands
                    Role.CanPerform(new RbacMethodList("http/connect_console"), vm.Connection, out _, false);
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             return selection.Count > 0 &&
                    selection.All(v => v.XenObject is VM vm &&
                                       !Helpers.StockholmOrGreater(vm.Connection) &&
-                                      CanExecute(vm));
+                                      CanRun(vm));
         }
 
         public override string MenuText => string.Format(Messages.MAINWINDOW_INSTALL_TOOLS, BrandManager.VmTools);

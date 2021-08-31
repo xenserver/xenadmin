@@ -271,10 +271,10 @@ namespace XenAdmin.Core
 
             foreach (IXenConnection xenConnection in ConnectionsManager.XenConnectionsCopy)
             {
-                Host master = Helpers.GetMaster(xenConnection);
+                Host coordinator = Helpers.GetCoordinator(xenConnection);
                 Pool pool = Helpers.GetPoolOfOne(xenConnection);
                 List<Host> hosts = xenConnection.Cache.Hosts.ToList();
-                if (master == null || pool == null)
+                if (coordinator == null || pool == null)
                     continue;
 
                 var serverVersions = new List<XenServerVersion>();
@@ -674,10 +674,10 @@ namespace XenAdmin.Core
                 if (!xc.IsConnected)
                     continue;
 
-                Host master = Helpers.GetMaster(xc);
+                Host coordinator = Helpers.GetCoordinator(xc);
                 Pool pool = Helpers.GetPoolOfOne(xc);
                 List<Host> hosts = xc.Cache.Hosts.ToList();
-                if (master == null || pool == null)
+                if (coordinator == null || pool == null)
                     continue;
 
                 // Show the Upgrade alert for a host if:
@@ -829,13 +829,13 @@ namespace XenAdmin.Core
 
         public static void CheckHotfixEligibility(IXenConnection connection)
         {
-            var master = Helpers.GetMaster(connection);
-            if (master == null)
+            var coordinator = Helpers.GetCoordinator(connection);
+            if (coordinator == null)
                 return;
 
-            var hotfixEligibility = HotfixEligibility(master, out var xenServerVersion);
+            var hotfixEligibility = HotfixEligibility(coordinator, out var xenServerVersion);
 
-            if (!HotfixEligibilityAlert.IsAlertNeeded(hotfixEligibility, xenServerVersion, !master.IsFreeLicenseOrExpired()))
+            if (!HotfixEligibilityAlert.IsAlertNeeded(hotfixEligibility, xenServerVersion, !coordinator.IsFreeLicenseOrExpired()))
             {
                 Alert.RemoveAlert(a => a is HotfixEligibilityAlert && connection.Equals(a.Connection));
                 return;
@@ -860,12 +860,12 @@ namespace XenAdmin.Core
                 if (!connection.IsConnected)
                     continue;
 
-                var master = Helpers.GetMaster(connection);
-                if (master == null)
+                var coordinator = Helpers.GetCoordinator(connection);
+                if (coordinator == null)
                     continue;
                 
-                var hotfixEligibility = HotfixEligibility(master, out var xenServerVersion);
-                if (!HotfixEligibilityAlert.IsAlertNeeded(hotfixEligibility, xenServerVersion, !master.IsFreeLicenseOrExpired()))
+                var hotfixEligibility = HotfixEligibility(coordinator, out var xenServerVersion);
+                if (!HotfixEligibilityAlert.IsAlertNeeded(hotfixEligibility, xenServerVersion, !coordinator.IsFreeLicenseOrExpired()))
                     continue;
 
                 alerts.Add(new HotfixEligibilityAlert(connection, xenServerVersion));

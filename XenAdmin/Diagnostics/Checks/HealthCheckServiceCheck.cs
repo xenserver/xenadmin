@@ -63,7 +63,7 @@ namespace XenAdmin.Diagnostics.Checks
             string upgradePlatformVersion = null;
 
             if (_installMethodConfig != null)
-                Host.TryGetUpgradeVersion(Helpers.GetMaster(Pool.Connection), _installMethodConfig, out upgradePlatformVersion, out _);
+                Host.TryGetUpgradeVersion(Helpers.GetCoordinator(Pool.Connection), _installMethodConfig, out upgradePlatformVersion, out _);
 
             if (Helpers.PostStockholm(upgradePlatformVersion))
                 return new HealthCheckServiceProblem(this, Pool);

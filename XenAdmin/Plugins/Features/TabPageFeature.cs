@@ -943,7 +943,7 @@ namespace XenAdmin.Plugins
                     }
                     else if (browser.ObjectForScripting != this)
                     {
-                        // If you don't do this, you can get old data re-entering the javascript execution after you have switched to a new object
+                        // If you don't do this, you can get old data re-entering the javascript running after you have switched to a new object
                         log.Debug("Scripting object has been changed, discarding message to plugin.");
                     }
                     else if (browser.Document != null)

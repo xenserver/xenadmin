@@ -70,7 +70,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             List<AsyncAction> actions = new List<AsyncAction>();
             foreach (Host host in selection.AsXenObjects<Host>())
@@ -80,8 +80,8 @@ namespace XenAdmin.Commands
 
                 if (selection.Count == 1 && pool.master == host.opaque_ref)
                 {
-                    // Trying to remove the master from a pool.
-                    using (var dlg = new ErrorDialog(Messages.MESSAGEBOX_POOL_MASTER_REMOVE))
+                    // Trying to remove the coordinator from a pool.
+                    using (var dlg = new ErrorDialog(Messages.MESSAGEBOX_POOL_COORDINATOR_REMOVE))
                         dlg.ShowDialog(MainWindowCommandInterface.Form);
                     return;
                 }
@@ -120,12 +120,12 @@ namespace XenAdmin.Commands
             RunMultipleActions(actions, Messages.REMOVING_SERVERS_FROM_POOL, Messages.POOLCREATE_REMOVING, Messages.POOLCREATE_REMOVED, true);
         }
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
             if (item is Host host)
             {
-                if (host.IsMaster())
-                    return Messages.MESSAGEBOX_POOL_MASTER_REMOVE;
+                if (host.IsCoordinator())
+                    return Messages.MESSAGEBOX_POOL_COORDINATOR_REMOVE;
 
                 if (!host.IsLive())
                     return Messages.HOST_UNREACHABLE;
@@ -134,10 +134,10 @@ namespace XenAdmin.Commands
                     return Messages.NEWPOOL_HAS_RUNNING_VMS;
             }
 
-            return base.GetCantExecuteReasonCore(item);
+            return base.GetCantRunReasonCore(item);
         }
 
-        public static bool CanExecute(Host host)
+        public static bool CanRun(Host host)
         {
             if (host != null && host.Connection != null)
             {
@@ -148,12 +148,12 @@ namespace XenAdmin.Commands
             return false;
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             // all selected items must be hosts and in the same pool
 
             return selection.Select(s => s.Connection).Count() == 1 &&
-                   selection.All(s => s.XenObject is Host h && CanExecute(h));
+                   selection.All(s => s.XenObject is Host h && CanRun(h));
         }
 
         private void WaitForReboot(object o)

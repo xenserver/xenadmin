@@ -3834,7 +3834,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Server &apos;{0}&apos; is now the master of pool &apos;{1}&apos;..
+        ///   Looks up a localized string similar to Server &apos;{0}&apos; is now the coordinator of pool &apos;{1}&apos;..
         /// </summary>
         public static string Message_body_pool_master_transition {
             get {
@@ -4626,7 +4626,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pool master changed.
+        ///   Looks up a localized string similar to Pool coordinator changed.
         /// </summary>
         public static string Message_name_pool_master_transition {
             get {

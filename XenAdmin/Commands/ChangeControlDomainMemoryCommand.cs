@@ -56,7 +56,7 @@ namespace XenAdmin.Commands
         }
 
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             Host host = selection[0].HostAncestor;
             using (var dlg = new ControlDomainMemoryDialog(host))
@@ -68,14 +68,14 @@ namespace XenAdmin.Commands
             get { return false; }
         }
         
-        private bool CanExecute(Host host)
+        private bool CanRun(Host host)
         {
             return host != null && host.IsLive() && Helpers.ElyOrGreater(host);
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
-            return selection.ContainsOneItemOfType<Host>() && selection.AtLeastOneXenObjectCan<Host>(CanExecute);
+            return selection.ContainsOneItemOfType<Host>() && selection.AtLeastOneXenObjectCan<Host>(CanRun);
         }
 
         public override string MenuText

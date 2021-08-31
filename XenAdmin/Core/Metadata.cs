@@ -90,7 +90,7 @@ namespace XenAdmin.Core
         internal struct SaveAndRestore
         {
             public bool SaveSessionCredentials;
-            public bool RequireMasterPassword;
+            public bool RequireMainPassword;
         }
 
         internal struct XenCenterSettings
@@ -146,7 +146,7 @@ namespace XenAdmin.Core
                     SaveAndRestore = new SaveAndRestore
                     {
                         SaveSessionCredentials = Properties.Settings.Default.SaveSession,
-                        RequireMasterPassword = Properties.Settings.Default.RequirePass
+                        RequireMainPassword = Properties.Settings.Default.RequirePass
                     },
                     HelpLastUsed = Properties.Settings.Default.HelpLastUsed
                 },

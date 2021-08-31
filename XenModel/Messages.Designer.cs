@@ -2736,9 +2736,9 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to Upload error. The patch was uploaded, but it cannot be found on the host..
         /// </summary>
-        public static string ACTION_UPLOADPATCHTOMASTERPLANACTION_FAILED {
+        public static string ACTION_UPLOADPATCHTOCOORDINATORPLANACTION_FAILED {
             get {
-                return ResourceManager.GetString("ACTION_UPLOADPATCHTOMASTERPLANACTION_FAILED", resourceCulture);
+                return ResourceManager.GetString("ACTION_UPLOADPATCHTOCOORDINATORPLANACTION_FAILED", resourceCulture);
             }
         }
         
@@ -3598,11 +3598,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Waiting for slaves to recover....
+        ///   Looks up a localized string similar to Waiting for other pool members to recover....
         /// </summary>
-        public static string ACTION_WAIT_FOR_SLAVES_TO_RECOVER {
+        public static string ACTION_WAIT_FOR_POOL_MEMBERS_TO_RECOVER {
             get {
-                return ResourceManager.GetString("ACTION_WAIT_FOR_SLAVES_TO_RECOVER", resourceCulture);
+                return ResourceManager.GetString("ACTION_WAIT_FOR_POOL_MEMBERS_TO_RECOVER", resourceCulture);
             }
         }
         
@@ -3872,6 +3872,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please wait while {0} establishes your current external authentication configuration..
+        /// </summary>
+        public static string AD_COORDINATOR_UNAVAILABLE_BLURB {
+            get {
+                return ResourceManager.GetString("AD_COORDINATOR_UNAVAILABLE_BLURB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Subject could not be resolved in your AD.
         /// </summary>
         public static string AD_COULD_NOT_RESOLVE_SUFFIX {
@@ -4031,15 +4040,6 @@ namespace XenAdmin {
         public static string AD_LOGOUT_SUICIDE_ONE {
             get {
                 return ResourceManager.GetString("AD_LOGOUT_SUICIDE_ONE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Please wait while {0} establishes your current external authentication configuration..
-        /// </summary>
-        public static string AD_MASTER_UNAVAILABLE_BLURB {
-            get {
-                return ResourceManager.GetString("AD_MASTER_UNAVAILABLE_BLURB", resourceCulture);
             }
         }
         
@@ -6017,7 +6017,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to {0}
         ///
-        ///Deleting this bond will automatically transfer the management and secondary interfaces on the bond to the first slave member of the bond: 
+        ///Deleting this bond will automatically transfer the management and secondary interfaces on the bond to the first other member of the bond: 
         ///
         ///- {1} connections to the pool will temporarily be disturbed
         ///
@@ -6034,7 +6034,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to {0}
         ///
-        ///Deleting this bond will automatically transfer the management interface on the bond to the first slave member of the bond: 
+        ///Deleting this bond will automatically transfer the management interface on the bond to the first other member of the bond: 
         ///
         ///- {1} connections to the pool will temporarily be disturbed
         ///
@@ -6049,7 +6049,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to {0}
         ///
-        ///Deleting this bond will disrupt traffic through the secondary interface on the bond while the interface is moved to the first slave of the bond..
+        ///Deleting this bond will disrupt traffic through the secondary interface on the bond while the interface is moved to the first other member of the bond..
         /// </summary>
         public static string BOND_DELETE_WILL_DISTURB_SECONDARY {
             get {
@@ -6067,11 +6067,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Could not find the bond master in {0}&apos;s cache..
+        ///   Looks up a localized string similar to Could not find the bond interface in {0}&apos;s cache..
         /// </summary>
-        public static string BOND_MASTER_GONE {
+        public static string BOND_INTERFACE_GONE {
             get {
-                return ResourceManager.GetString("BOND_MASTER_GONE", resourceCulture);
+                return ResourceManager.GetString("BOND_INTERFACE_GONE", resourceCulture);
             }
         }
         
@@ -7219,20 +7219,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Changed {0} master password.
+        ///   Looks up a localized string similar to Changed {0} main password.
         /// </summary>
-        public static string CHANGED_MASTER_PASSWORD {
+        public static string CHANGED_MAIN_PASSWORD {
             get {
-                return ResourceManager.GetString("CHANGED_MASTER_PASSWORD", resourceCulture);
+                return ResourceManager.GetString("CHANGED_MAIN_PASSWORD", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Changed {0} master password for session restore.
+        ///   Looks up a localized string similar to Changed {0} main password for session restore.
         /// </summary>
-        public static string CHANGED_MASTER_PASSWORD_LONG {
+        public static string CHANGED_MAIN_PASSWORD_LONG {
             get {
-                return ResourceManager.GetString("CHANGED_MASTER_PASSWORD_LONG", resourceCulture);
+                return ResourceManager.GetString("CHANGED_MAIN_PASSWORD_LONG", resourceCulture);
             }
         }
         
@@ -8795,20 +8795,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Looking for master for {0} on {1}....
+        ///   Looks up a localized string similar to Looking for coordinator for {0} on {1}....
         /// </summary>
-        public static string CONNECTION_FINDING_MASTER_DESCRIPTION {
+        public static string CONNECTION_FINDING_COORDINATOR_DESCRIPTION {
             get {
-                return ResourceManager.GetString("CONNECTION_FINDING_MASTER_DESCRIPTION", resourceCulture);
+                return ResourceManager.GetString("CONNECTION_FINDING_COORDINATOR_DESCRIPTION", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Looking for master for {0}.
+        ///   Looks up a localized string similar to Looking for coordinator for {0}.
         /// </summary>
-        public static string CONNECTION_FINDING_MASTER_TITLE {
+        public static string CONNECTION_FINDING_COORDINATOR_TITLE {
             get {
-                return ResourceManager.GetString("CONNECTION_FINDING_MASTER_TITLE", resourceCulture);
+                return ResourceManager.GetString("CONNECTION_FINDING_COORDINATOR_TITLE", resourceCulture);
             }
         }
         
@@ -8831,11 +8831,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Lost connection to {0}. Will search for a new pool master in {1} seconds..
+        ///   Looks up a localized string similar to Lost connection to {0}. Will search for a new pool coordinator in {1} seconds..
         /// </summary>
-        public static string CONNECTION_LOST_NOTICE_MASTER_IN_X_SECONDS {
+        public static string CONNECTION_LOST_NOTICE_COORDINATOR_IN_X_SECONDS {
             get {
-                return ResourceManager.GetString("CONNECTION_LOST_NOTICE_MASTER_IN_X_SECONDS", resourceCulture);
+                return ResourceManager.GetString("CONNECTION_LOST_NOTICE_COORDINATOR_IN_X_SECONDS", resourceCulture);
             }
         }
         
@@ -8876,7 +8876,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Connection to {0}: redirecting to the pool master at {1}.
+        ///   Looks up a localized string similar to Connection to {0}: redirecting to the pool coordinator at {1}.
         /// </summary>
         public static string CONNECTION_REDIRECTING {
             get {
@@ -8905,9 +8905,9 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to Connection to {0}: trying to find pool at {1}.
         /// </summary>
-        public static string CONNECTION_RETRYING_SLAVE {
+        public static string CONNECTION_RETRYING_SUPPORTER {
             get {
-                return ResourceManager.GetString("CONNECTION_RETRYING_SLAVE", resourceCulture);
+                return ResourceManager.GetString("CONNECTION_RETRYING_SUPPORTER", resourceCulture);
             }
         }
         
@@ -8923,9 +8923,9 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to Connection to {0}: will try to connect to another pool member in {1} seconds.
         /// </summary>
-        public static string CONNECTION_WILL_RETRY_SLAVE {
+        public static string CONNECTION_WILL_RETRY_SUPPORTER {
             get {
-                return ResourceManager.GetString("CONNECTION_WILL_RETRY_SLAVE", resourceCulture);
+                return ResourceManager.GetString("CONNECTION_WILL_RETRY_SUPPORTER", resourceCulture);
             }
         }
         
@@ -9947,6 +9947,15 @@ namespace XenAdmin {
         public static string CONVERT_TO_TEMPLATE {
             get {
                 return ResourceManager.GetString("CONVERT_TO_TEMPLATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Coordinator.
+        /// </summary>
+        public static string COORDINATOR {
+            get {
+                return ResourceManager.GetString("COORDINATOR", resourceCulture);
             }
         }
         
@@ -11093,11 +11102,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Creating new pool &apos;{0}&apos; with master &apos;{1}&apos;.
+        ///   Looks up a localized string similar to Creating new pool &apos;{0}&apos; with coordinator &apos;{1}&apos;.
         /// </summary>
-        public static string CREATING_NAMED_POOL_WITH_MASTER {
+        public static string CREATING_NAMED_POOL_WITH_COORDINATOR {
             get {
-                return ResourceManager.GetString("CREATING_NAMED_POOL_WITH_MASTER", resourceCulture);
+                return ResourceManager.GetString("CREATING_NAMED_POOL_WITH_COORDINATOR", resourceCulture);
             }
         }
         
@@ -15741,7 +15750,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You cannot nominate a new master while the pool is in the process of creating a cluster..
+        ///   Looks up a localized string similar to You cannot nominate a new coordinator while the pool is in the process of creating a cluster..
         /// </summary>
         public static string EVACUATE_HOST_CLUSER_CREATING {
             get {
@@ -15768,7 +15777,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You cannot nominate a new master while HA is being disabled on the pool..
+        ///   Looks up a localized string similar to You cannot nominate a new coordinator while HA is being disabled on the pool..
         /// </summary>
         public static string EVACUATE_HOST_HA_DISABLING {
             get {
@@ -15777,7 +15786,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You cannot nominate a new master while HA is being enabled on the pool..
+        ///   Looks up a localized string similar to You cannot nominate a new coordinator while HA is being enabled on the pool..
         /// </summary>
         public static string EVACUATE_HOST_HA_ENABLING {
             get {
@@ -15894,11 +15903,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User canceled. Master needs to be upgraded first..
+        ///   Looks up a localized string similar to User canceled. Coordinator needs to be upgraded first..
         /// </summary>
-        public static string EXCEPTION_USER_CANCELLED_MASTER {
+        public static string EXCEPTION_USER_CANCELLED_COORDINATOR {
             get {
-                return ResourceManager.GetString("EXCEPTION_USER_CANCELLED_MASTER", resourceCulture);
+                return ResourceManager.GetString("EXCEPTION_USER_CANCELLED_COORDINATOR", resourceCulture);
             }
         }
         
@@ -17977,11 +17986,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Server &apos;{0}&apos; cannot be placed in Maintenance Mode because it is the master of an HA-enabled pool..
+        ///   Looks up a localized string similar to Server &apos;{0}&apos; cannot be placed in Maintenance Mode because it is the coordinator of an HA-enabled pool..
         /// </summary>
-        public static string HA_CANNOT_EVACUATE_MASTER {
+        public static string HA_CANNOT_EVACUATE_COORDINATOR {
             get {
-                return ResourceManager.GetString("HA_CANNOT_EVACUATE_MASTER", resourceCulture);
+                return ResourceManager.GetString("HA_CANNOT_EVACUATE_COORDINATOR", resourceCulture);
             }
         }
         
@@ -19609,20 +19618,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nominated server {0} as new master.
+        ///   Looks up a localized string similar to Nominated server {0} as new coordinator.
         /// </summary>
-        public static string HOSTACTION_TRANSITIONED_NEW_MASTER {
+        public static string HOSTACTION_TRANSITIONED_NEW_COORDINATOR {
             get {
-                return ResourceManager.GetString("HOSTACTION_TRANSITIONED_NEW_MASTER", resourceCulture);
+                return ResourceManager.GetString("HOSTACTION_TRANSITIONED_NEW_COORDINATOR", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nominating server {0} as new master....
+        ///   Looks up a localized string similar to Nominating server {0} as new coordinator....
         /// </summary>
-        public static string HOSTACTION_TRANSITIONING_NEW_MASTER {
+        public static string HOSTACTION_TRANSITIONING_NEW_COORDINATOR {
             get {
-                return ResourceManager.GetString("HOSTACTION_TRANSITIONING_NEW_MASTER", resourceCulture);
+                return ResourceManager.GetString("HOSTACTION_TRANSITIONING_NEW_COORDINATOR", resourceCulture);
             }
         }
         
@@ -23554,15 +23563,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Master.
-        /// </summary>
-        public static string MASTER {
-            get {
-                return ResourceManager.GetString("MASTER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Max.
         /// </summary>
         public static string MAX {
@@ -24139,7 +24139,16 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The pool Master will become a standalone server, are you sure you want to continue?.
+        ///   Looks up a localized string similar to You cannot remove the coordinator from the pool..
+        /// </summary>
+        public static string MESSAGEBOX_POOL_COORDINATOR_REMOVE {
+            get {
+                return ResourceManager.GetString("MESSAGEBOX_POOL_COORDINATOR_REMOVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The pool Coordinator will become a standalone server, are you sure you want to continue?.
         /// </summary>
         public static string MESSAGEBOX_POOL_DELETE {
             get {
@@ -24148,11 +24157,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You cannot remove the master from the pool..
+        ///   Looks up a localized string similar to You must eject all other pool members from the pool before you can delete the pool..
         /// </summary>
-        public static string MESSAGEBOX_POOL_MASTER_REMOVE {
+        public static string MESSAGEBOX_POOL_MEMBERS_EJECT {
             get {
-                return ResourceManager.GetString("MESSAGEBOX_POOL_MASTER_REMOVE", resourceCulture);
+                return ResourceManager.GetString("MESSAGEBOX_POOL_MEMBERS_EJECT", resourceCulture);
             }
         }
         
@@ -24255,15 +24264,6 @@ namespace XenAdmin {
         public static string MESSAGEBOX_SKIP_RPU_STEPS {
             get {
                 return ResourceManager.GetString("MESSAGEBOX_SKIP_RPU_STEPS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You must eject all slaves from the pool before you can delete the pool..
-        /// </summary>
-        public static string MESSAGEBOX_SLAVES_EJECT {
-            get {
-                return ResourceManager.GetString("MESSAGEBOX_SLAVES_EJECT", resourceCulture);
             }
         }
         
@@ -25258,7 +25258,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You are attempting to add the server &apos;{0}&apos; to a pool with a master that is configured to use AD authentication. All pool members must use the same authentication method.
+        ///   Looks up a localized string similar to You are attempting to add the server &apos;{0}&apos; to a pool with a coordinator that is configured to use AD authentication. All pool members must use the same authentication method.
         ///
         ///Do you want to enable AD authentication on your server and join it to the same domain as the pool?.
         /// </summary>
@@ -25269,7 +25269,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You are attempting to add the following servers to a pool with a master that is configured to use AD authentication:
+        ///   Looks up a localized string similar to You are attempting to add the following servers to a pool with a coordinator that is configured to use AD authentication:
         ///
         ///{0}
         ///
@@ -25291,9 +25291,9 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You are attempting to add the server &apos;{0}&apos; to a pool with a master that is using an older CPU.
+        ///   Looks up a localized string similar to You are attempting to add the server &apos;{0}&apos; to a pool with a coordinator that is using an older CPU.
         ///
-        ///{1} can continue by rebooting the server and reducing its CPU to the level of the master. This will shut down any VMs running on the server. This feature is supported for CPU combinations listed in the {1} Hardware Compatibility List.
+        ///{1} can continue by rebooting the server and reducing its CPU to the level of the coordinator. This will shut down any VMs running on the server. This feature is supported for CPU combinations listed in the {1} Hardware Compatibility List.
         ///
         ///Do you want to do this?.
         /// </summary>
@@ -25304,11 +25304,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You are attempting to add the following servers to a pool with a master that is using an older CPU:
+        ///   Looks up a localized string similar to You are attempting to add the following servers to a pool with a coordinator that is using an older CPU:
         ///
         ///{0}
         ///
-        ///{1} can continue by rebooting the servers and reducing their CPUs to the level of the master. This will shut down any VMs running on the servers. This feature is supported for CPU combinations listed in the {1} Hardware Compatibility List.
+        ///{1} can continue by rebooting the servers and reducing their CPUs to the level of the coordinator. This will shut down any VMs running on the servers. This feature is supported for CPU combinations listed in the {1} Hardware Compatibility List.
         ///
         ///Do you want to do this?.
         /// </summary>
@@ -25321,7 +25321,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to You are attempting to add the server &apos;{0}&apos; to a licensed pool.
         ///
-        ///Do you want to apply the licensing from the master to this server?.
+        ///Do you want to apply the licensing from the coordinator to this server?.
         /// </summary>
         public static string NEW_POOL_LICENSE_MESSAGE {
             get {
@@ -25334,7 +25334,7 @@ namespace XenAdmin {
         ///
         ///{0}
         ///
-        ///Do you want to apply the licensing from the master to these servers?.
+        ///Do you want to apply the licensing from the coordinator to these servers?.
         /// </summary>
         public static string NEW_POOL_LICENSE_MESSAGE_MULTIPLE {
             get {
@@ -25631,7 +25631,34 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This server&apos;s hardware is incompatible with the master&apos;s.
+        ///   Looks up a localized string similar to The coordinator is still connecting.
+        /// </summary>
+        public static string NEWPOOL_COORDINATOR_CONNECTING {
+            get {
+                return ResourceManager.GetString("NEWPOOL_COORDINATOR_CONNECTING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The coordinator is disconnected.
+        /// </summary>
+        public static string NEWPOOL_COORDINATOR_DISCONNECTED {
+            get {
+                return ResourceManager.GetString("NEWPOOL_COORDINATOR_DISCONNECTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your current role on the coordinator is not authorized to add hosts to the coordinator&apos;s pool.
+        /// </summary>
+        public static string NEWPOOL_COORDINATOR_ROLE {
+            get {
+                return ResourceManager.GetString("NEWPOOL_COORDINATOR_ROLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This server&apos;s hardware is incompatible with the coordinator&apos;s.
         /// </summary>
         public static string NEWPOOL_DIFF_HARDWARE {
             get {
@@ -25640,7 +25667,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This server is a different version to the master.
+        ///   Looks up a localized string similar to This server is a different version to the coordinator.
         /// </summary>
         public static string NEWPOOL_DIFF_SERVER {
             get {
@@ -25649,11 +25676,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This server has different updates from the master.
+        ///   Looks up a localized string similar to This server has different updates from the coordinator.
         /// </summary>
-        public static string NEWPOOL_DIFFERENT_HOMOGENEOUS_UPDATES_FROM_MASTER {
+        public static string NEWPOOL_DIFFERENT_HOMOGENEOUS_UPDATES_FROM_COORDINATOR {
             get {
-                return ResourceManager.GetString("NEWPOOL_DIFFERENT_HOMOGENEOUS_UPDATES_FROM_MASTER", resourceCulture);
+                return ResourceManager.GetString("NEWPOOL_DIFFERENT_HOMOGENEOUS_UPDATES_FROM_COORDINATOR", resourceCulture);
             }
         }
         
@@ -25667,7 +25694,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This server&apos;s network backend is different from the master&apos;s.
+        ///   Looks up a localized string similar to This server&apos;s network backend is different from the coordinator&apos;s.
         /// </summary>
         public static string NEWPOOL_DIFFERENT_NETWORK_BACKENDS {
             get {
@@ -25676,7 +25703,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This server has a different Active Directory configuration to the master.
+        ///   Looks up a localized string similar to This server has a different Active Directory configuration to the coordinator.
         /// </summary>
         public static string NEWPOOL_DIFFERING_AD_CONFIG {
             get {
@@ -25721,7 +25748,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This server is master of an existing pool.
+        ///   Looks up a localized string similar to This server is coordinator of an existing pool.
         /// </summary>
         public static string NEWPOOL_IS_A_POOL {
             get {
@@ -25732,14 +25759,14 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to You cannot add a licensed server to an unlicensed pool.
         /// </summary>
-        public static string NEWPOOL_LICENSED_HOST_UNLICENSED_MASTER {
+        public static string NEWPOOL_LICENSED_HOST_UNLICENSED_COORDINATOR {
             get {
-                return ResourceManager.GetString("NEWPOOL_LICENSED_HOST_UNLICENSED_MASTER", resourceCulture);
+                return ResourceManager.GetString("NEWPOOL_LICENSED_HOST_UNLICENSED_COORDINATOR", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This server does not have the same license as the pool master.
+        ///   Looks up a localized string similar to This server does not have the same license as the pool coordinator.
         /// </summary>
         public static string NEWPOOL_LICENSEMISMATCH {
             get {
@@ -25748,38 +25775,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This server&apos;s Linux pack installation state differs from that of the master.
+        ///   Looks up a localized string similar to This server&apos;s Linux pack installation state differs from that of the coordinator.
         /// </summary>
         public static string NEWPOOL_LINUXPACK {
             get {
                 return ResourceManager.GetString("NEWPOOL_LINUXPACK", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The master is still connecting.
-        /// </summary>
-        public static string NEWPOOL_MASTER_CONNECTING {
-            get {
-                return ResourceManager.GetString("NEWPOOL_MASTER_CONNECTING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The master is disconnected.
-        /// </summary>
-        public static string NEWPOOL_MASTER_DISCONNECTED {
-            get {
-                return ResourceManager.GetString("NEWPOOL_MASTER_DISCONNECTED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Your current role on the master is not authorized to add hosts to the master&apos;s pool.
-        /// </summary>
-        public static string NEWPOOL_MASTER_ROLE {
-            get {
-                return ResourceManager.GetString("NEWPOOL_MASTER_ROLE", resourceCulture);
             }
         }
         
@@ -25802,20 +25802,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your current role on the slave is not authorized to add the slave to a pool.
+        ///   Looks up a localized string similar to Your current role on this server is not authorized to add it to a pool.
         /// </summary>
-        public static string NEWPOOL_SLAVE_ROLE {
+        public static string NEWPOOL_SUPPORTER_ROLE {
             get {
-                return ResourceManager.GetString("NEWPOOL_SLAVE_ROLE", resourceCulture);
+                return ResourceManager.GetString("NEWPOOL_SUPPORTER_ROLE", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to You cannot add an unlicensed server to a licensed pool.
         /// </summary>
-        public static string NEWPOOL_UNLICENSED_HOST_LICENSED_MASTER {
+        public static string NEWPOOL_UNLICENSED_HOST_LICENSED_COORDINATOR {
             get {
-                return ResourceManager.GetString("NEWPOOL_UNLICENSED_HOST_LICENSED_MASTER", resourceCulture);
+                return ResourceManager.GetString("NEWPOOL_UNLICENSED_HOST_LICENSED_COORDINATOR", resourceCulture);
             }
         }
         
@@ -27523,20 +27523,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} (Bonded member).
+        /// </summary>
+        public static string NIC_BONDED_MEMBER {
+            get {
+                return ResourceManager.GetString("NIC_BONDED_MEMBER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} (Hidden).
         /// </summary>
         public static string NIC_HIDDEN {
             get {
                 return ResourceManager.GetString("NIC_HIDDEN", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} (Slave).
-        /// </summary>
-        public static string NIC_SLAVE {
-            get {
-                return ResourceManager.GetString("NIC_SLAVE", resourceCulture);
             }
         }
         
@@ -27622,11 +27622,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There is no server eligible to become the master of your new pool.
+        ///   Looks up a localized string similar to There is no server eligible to become the coordinator of your new pool.
         /// </summary>
-        public static string NO_ELIGIBLE_MASTER {
+        public static string NO_ELIGIBLE_COORDINATOR {
             get {
-                return ResourceManager.GetString("NO_ELIGIBLE_MASTER", resourceCulture);
+                return ResourceManager.GetString("NO_ELIGIBLE_COORDINATOR", resourceCulture);
             }
         }
         
@@ -29025,7 +29025,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Restart these servers in this order (master always first):.
+        ///   Looks up a localized string similar to Restart these servers in this order (coordinator always first):.
         /// </summary>
         public static string PATCHINGWIZARD_MODEPAGE_RESTARTSERVERS {
             get {
@@ -29043,7 +29043,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Restart toolstack on these servers in this order (master always first):.
+        ///   Looks up a localized string similar to Restart toolstack on these servers in this order (coordinator always first):.
         /// </summary>
         public static string PATCHINGWIZARD_MODEPAGE_RESTARTXAPI {
             get {
@@ -29404,11 +29404,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot install updates on this host because the master is running a version higher than {0}.
+        ///   Looks up a localized string similar to Cannot install updates on this host because the coordinator is running a version higher than {0}.
         /// </summary>
-        public static string PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_UPDATE_MASTER_POST_7_0 {
+        public static string PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_UPDATE_COORDINATOR_POST_7_0 {
             get {
-                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_UPDATE_MASTER_POST_7_0", resourceCulture);
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_UPDATE_COORDINATOR_POST_7_0", resourceCulture);
             }
         }
         
@@ -29433,9 +29433,9 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to One or more servers in the pool have to be upgraded before {0} can apply the selected new version..
         /// </summary>
-        public static string PATCHINGWIZARD_SELECTSERVERPAGE_NEW_VERSION_UPGRADE_SLAVES_FIRST {
+        public static string PATCHINGWIZARD_SELECTSERVERPAGE_NEW_VERSION_UPGRADE_SUPPORTERS_FIRST {
             get {
-                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_NEW_VERSION_UPGRADE_SLAVES_FIRST", resourceCulture);
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_NEW_VERSION_UPGRADE_SUPPORTERS_FIRST", resourceCulture);
             }
         }
         
@@ -30321,6 +30321,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pool coordinator.
+        /// </summary>
+        public static string POOL_COORDINATOR {
+            get {
+                return ResourceManager.GetString("POOL_COORDINATOR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not find the pool coordinator in {0}&apos;s cache..
+        /// </summary>
+        public static string POOL_COORDINATOR_GONE {
+            get {
+                return ResourceManager.GetString("POOL_COORDINATOR_GONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pool &apos;{0}&apos; has HA enabled. You must disable HA before making the pool into a standalone server..
         /// </summary>
         public static string POOL_DELETE_HA_ENABLED {
@@ -30479,24 +30497,6 @@ namespace XenAdmin {
         public static string POOL_LICENSE {
             get {
                 return ResourceManager.GetString("POOL_LICENSE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Pool master.
-        /// </summary>
-        public static string POOL_MASTER {
-            get {
-                return ResourceManager.GetString("POOL_MASTER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Could not find the pool master in {0}&apos;s cache..
-        /// </summary>
-        public static string POOL_MASTER_GONE {
-            get {
-                return ResourceManager.GetString("POOL_MASTER_GONE", resourceCulture);
             }
         }
         
@@ -30737,6 +30737,42 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0}: The coordinator needs to be rebooted first.
+        /// </summary>
+        public static string PROBLEM_COORDINATOR_PENDING_RESTART_HOST {
+            get {
+                return ResourceManager.GetString("PROBLEM_COORDINATOR_PENDING_RESTART_HOST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: This update requires the coordinator to be rebooted first.
+        /// </summary>
+        public static string PROBLEM_COORDINATOR_PENDING_RESTART_HOST_THIS_UPDATE {
+            get {
+                return ResourceManager.GetString("PROBLEM_COORDINATOR_PENDING_RESTART_HOST_THIS_UPDATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: Toolstack on coordinator needs to be restarted first.
+        /// </summary>
+        public static string PROBLEM_COORDINATOR_PENDING_RESTART_TOOLSTACK {
+            get {
+                return ResourceManager.GetString("PROBLEM_COORDINATOR_PENDING_RESTART_TOOLSTACK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: This update requires the toolstack on coordinator to be restarted first.
+        /// </summary>
+        public static string PROBLEM_COORDINATOR_PENDING_RESTART_TOOLSTACK_THIS_UPDATE {
+            get {
+                return ResourceManager.GetString("PROBLEM_COORDINATOR_PENDING_RESTART_TOOLSTACK_THIS_UPDATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disable Health Check.
         /// </summary>
         public static string PROBLEM_HEALTH_CHECK_HELP {
@@ -30817,42 +30853,6 @@ namespace XenAdmin {
         public static string PROBLEM_MAC_ADDRESS_IS_DUPLICATE_TITLE {
             get {
                 return ResourceManager.GetString("PROBLEM_MAC_ADDRESS_IS_DUPLICATE_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0}: The master needs to be rebooted first.
-        /// </summary>
-        public static string PROBLEM_MASTER_PENDING_RESTART_HOST {
-            get {
-                return ResourceManager.GetString("PROBLEM_MASTER_PENDING_RESTART_HOST", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0}: This update requires the master to be rebooted first.
-        /// </summary>
-        public static string PROBLEM_MASTER_PENDING_RESTART_HOST_THIS_UPDATE {
-            get {
-                return ResourceManager.GetString("PROBLEM_MASTER_PENDING_RESTART_HOST_THIS_UPDATE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0}: Toolstack on master needs to be restarted first.
-        /// </summary>
-        public static string PROBLEM_MASTER_PENDING_RESTART_TOOLSTACK {
-            get {
-                return ResourceManager.GetString("PROBLEM_MASTER_PENDING_RESTART_TOOLSTACK", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0}: This update requires the toolstack on master to be restarted first.
-        /// </summary>
-        public static string PROBLEM_MASTER_PENDING_RESTART_TOOLSTACK_THIS_UPDATE {
-            get {
-                return ResourceManager.GetString("PROBLEM_MASTER_PENDING_RESTART_TOOLSTACK_THIS_UPDATE", resourceCulture);
             }
         }
         
@@ -32836,11 +32836,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You cannot nominate a new master while a pool secret rotation is in progress..
+        ///   Looks up a localized string similar to You cannot nominate a new coordinator while a pool secret rotation is in progress..
         /// </summary>
-        public static string ROTATE_POOL_SECRET_PENDING_NEW_MASTER {
+        public static string ROTATE_POOL_SECRET_PENDING_NEW_COORDINATOR {
             get {
-                return ResourceManager.GetString("ROTATE_POOL_SECRET_PENDING_NEW_MASTER", resourceCulture);
+                return ResourceManager.GetString("ROTATE_POOL_SECRET_PENDING_NEW_COORDINATOR", resourceCulture);
             }
         }
         
@@ -33477,7 +33477,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The current time on the pool master is: {0}.
+        ///   Looks up a localized string similar to The current time on the pool coordinator is: {0}.
         /// </summary>
         public static string SERVER_TIME {
             get {
@@ -33891,20 +33891,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} are pool masters. It is strongly recommended to nominate a new master for each affected pool before proceeding..
+        ///   Looks up a localized string similar to {0} are pool coordinators. It is strongly recommended to nominate a new coordinator for each affected pool before proceeding..
         /// </summary>
-        public static string SHUT_DOWN_POOL_MASTER_MULTIPLE {
+        public static string SHUT_DOWN_POOL_COORDINATOR_MULTIPLE {
             get {
-                return ResourceManager.GetString("SHUT_DOWN_POOL_MASTER_MULTIPLE", resourceCulture);
+                return ResourceManager.GetString("SHUT_DOWN_POOL_COORDINATOR_MULTIPLE", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} is the pool master. It is strongly recommended to nominate a new master for the pool before proceeding..
+        ///   Looks up a localized string similar to {0} is the pool coordinator. It is strongly recommended to nominate a new coordinator for the pool before proceeding..
         /// </summary>
-        public static string SHUT_DOWN_POOL_MASTER_SINGLE {
+        public static string SHUT_DOWN_POOL_COORDINATOR_SINGLE {
             get {
-                return ResourceManager.GetString("SHUT_DOWN_POOL_MASTER_SINGLE", resourceCulture);
+                return ResourceManager.GetString("SHUT_DOWN_POOL_COORDINATOR_SINGLE", resourceCulture);
             }
         }
         
@@ -34022,34 +34022,6 @@ namespace XenAdmin {
         public static string SLACK_LABEL {
             get {
                 return ResourceManager.GetString("SLACK_LABEL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Server &apos;{0}&apos; is a member of pool &apos;{1}&apos; and is already connected..
-        /// </summary>
-        public static string SLAVE_ALREADY_CONNECTED {
-            get {
-                return ResourceManager.GetString("SLAVE_ALREADY_CONNECTED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Server &apos;{0}&apos; is in a pool.  To connect to a pool, you must connect to the pool master.
-        ///Do you want to connect to the pool master &apos;{1}&apos;?.
-        /// </summary>
-        public static string SLAVE_CONNECTION_ERROR {
-            get {
-                return ResourceManager.GetString("SLAVE_CONNECTION_ERROR", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to This pool contains servers earlier than {0} {1}. Please use an earlier version of {2} to manage this pool..
-        /// </summary>
-        public static string SLAVE_TOO_OLD {
-            get {
-                return ResourceManager.GetString("SLAVE_TOO_OLD", resourceCulture);
             }
         }
         
@@ -35463,6 +35435,34 @@ namespace XenAdmin {
         public static string SUPP_PACK_VERSIONS_DIFFER {
             get {
                 return ResourceManager.GetString("SUPP_PACK_VERSIONS_DIFFER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server &apos;{0}&apos; is a member of pool &apos;{1}&apos; and is already connected..
+        /// </summary>
+        public static string SUPPORTER_ALREADY_CONNECTED {
+            get {
+                return ResourceManager.GetString("SUPPORTER_ALREADY_CONNECTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server &apos;{0}&apos; is in a pool.  To connect to a pool, you must connect to the pool coordinator.
+        ///Do you want to connect to the pool coordinator &apos;{1}&apos;?.
+        /// </summary>
+        public static string SUPPORTER_CONNECTION_ERROR {
+            get {
+                return ResourceManager.GetString("SUPPORTER_CONNECTION_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This pool contains servers earlier than {0} {1}. Please use an earlier version of {2} to manage this pool..
+        /// </summary>
+        public static string SUPPORTER_TOO_OLD {
+            get {
+                return ResourceManager.GetString("SUPPORTER_TOO_OLD", resourceCulture);
             }
         }
         
@@ -37426,20 +37426,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Upgrade coordinator {0}.
+        /// </summary>
+        public static string UPGRADE_COORDINATOR {
+            get {
+                return ResourceManager.GetString("UPGRADE_COORDINATOR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Upgrade host {0}.
         /// </summary>
         public static string UPGRADE_HOST {
             get {
                 return ResourceManager.GetString("UPGRADE_HOST", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Upgrade master {0}.
-        /// </summary>
-        public static string UPGRADE_MASTER {
-            get {
-                return ResourceManager.GetString("UPGRADE_MASTER", resourceCulture);
             }
         }
         
@@ -37462,11 +37462,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade pool master &apos;{0}&apos;.
+        ///   Looks up a localized string similar to Upgrade pool coordinator &apos;{0}&apos;.
         /// </summary>
-        public static string UPGRADE_POOL_MASTER {
+        public static string UPGRADE_POOL_COORDINATOR {
             get {
-                return ResourceManager.GetString("UPGRADE_POOL_MASTER", resourceCulture);
+                return ResourceManager.GetString("UPGRADE_POOL_COORDINATOR", resourceCulture);
             }
         }
         
@@ -37500,9 +37500,9 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to Upgrade &apos;{0}&apos;.
         /// </summary>
-        public static string UPGRADE_SLAVE {
+        public static string UPGRADE_SUPPORTER {
             get {
-                return ResourceManager.GetString("UPGRADE_SLAVE", resourceCulture);
+                return ResourceManager.GetString("UPGRADE_SUPPORTER", resourceCulture);
             }
         }
         
@@ -39500,7 +39500,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pool master unreachable.
+        ///   Looks up a localized string similar to Pool coordinator unreachable.
         /// </summary>
         public static string VMSS_HOST_NOT_LIVE {
             get {
