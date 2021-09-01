@@ -120,39 +120,39 @@ namespace XenAdmin.Commands
         }
 
         /// <summary>
-        /// Determines whether this instance can execute with the current selection context.
+        /// Determines whether this instance can run with the current selection context.
         /// </summary>
         /// <returns>
-        /// 	<c>true</c> if this instance can execute; otherwise, <c>false</c>.
+        /// 	<c>true</c> if this instance can run; otherwise, <c>false</c>.
         /// </returns>
-        public bool CanExecute()
+        public bool CanRun()
         {
-            return MainWindowCommandInterface != null && CanExecuteCore(GetSelection());
+            return MainWindowCommandInterface != null && CanRunCore(GetSelection());
         }
 
         /// <summary>
-        /// Determines whether this instance can execute with the current selection context.
+        /// Determines whether this instance can run with the current selection context.
         /// </summary>
         /// <param name="selection">The selection context.</param>
         /// <returns>
-        /// 	<c>true</c> if this instance can execute with the specified selection; otherwise, <c>false</c>.
+        /// 	<c>true</c> if this instance can run with the specified selection; otherwise, <c>false</c>.
         /// </returns>
-        protected virtual bool CanExecuteCore(SelectedItemCollection selection)
+        protected virtual bool CanRunCore(SelectedItemCollection selection)
         {
             return true;
         }
 
         /// <summary>
-        /// Executes this Command on the current selection.
+        /// Runs this Command on the current selection.
         /// </summary>
-        public void Execute()
+        public void Run()
         {
             if (Confirm())
             {
-                var cantExecuteReasons = GetCantExecuteReasons();
-                var errorDialog = cantExecuteReasons.Count > 0 ? GetErrorDialogCore(cantExecuteReasons) : null;
+                var cantRunReasons = GetCantRunReasons();
+                var errorDialog = cantRunReasons.Count > 0 ? GetErrorDialogCore(cantRunReasons) : null;
 
-                ExecuteCore(GetSelection());
+                RunCore(GetSelection());
 
                 if (errorDialog != null)
                 {
@@ -162,10 +162,10 @@ namespace XenAdmin.Commands
         }
 
         /// <summary>
-        /// Executes this Command.
+        /// Runs this Command.
         /// </summary>
         /// <param name="selection">The selection the Command should operate on.</param>
-        protected virtual void ExecuteCore(SelectedItemCollection selection)
+        protected virtual void RunCore(SelectedItemCollection selection)
         {
         }
 
@@ -205,8 +205,8 @@ namespace XenAdmin.Commands
         public virtual string ButtonText => null;
 
         /// <summary>
-        /// Gets the tool tip text when execution is not possible. This is the
-        /// can't execute reason for single selection, and null otherwise.
+        /// Gets the tool tip text when running is not possible. This is the
+        /// can't run reason for single selection, and null otherwise.
         /// </summary>
         public virtual string DisabledToolTipText
         {
@@ -219,7 +219,7 @@ namespace XenAdmin.Commands
                     if (item?.XenObject == null)
                         return null;
 
-                    string reason = GetCantExecuteReasonCore(item.XenObject);
+                    string reason = GetCantRunReasonCore(item.XenObject);
                     return reason == Messages.UNKNOWN ? null : reason;
                 }
 
@@ -306,44 +306,44 @@ namespace XenAdmin.Commands
         }
 
         /// <summary>
-        /// Gets all of the reasons that items in the selection can't execute.
+        /// Gets all of the reasons that items in the selection can't run.
         /// </summary>
         /// <returns>A dictionary of reasons keyed by the item name.</returns>
-        public Dictionary<IXenObject, string> GetCantExecuteReasons()
+        public Dictionary<IXenObject, string> GetCantRunReasons()
         {
-            var cantExecuteReasons = new Dictionary<IXenObject, string>();
+            var cantRunReasons = new Dictionary<IXenObject, string>();
 
             foreach (SelectedItem item in GetSelection())
             {
                 if (item == null || item.XenObject == null)
                     continue;
-                if (MainWindowCommandInterface != null && CanExecuteCore(new SelectedItemCollection(item)))
+                if (MainWindowCommandInterface != null && CanRunCore(new SelectedItemCollection(item)))
                     continue;
 
-                string reason = GetCantExecuteReasonCore(item.XenObject);
+                string reason = GetCantRunReasonCore(item.XenObject);
                 if (reason != null)
-                    cantExecuteReasons.Add(item.XenObject, reason);
+                    cantRunReasons.Add(item.XenObject, reason);
             }
 
-            return cantExecuteReasons;
+            return cantRunReasons;
         }
 
 
         /// <summary>
-        /// Gets the reason that the specified item from the selection cant execute. This is displayed in the error dialog.
+        /// Gets the reason that the specified item from the selection can't run. This is displayed in the error dialog.
         /// The default is "Unknown".
         /// </summary>
-        protected virtual string GetCantExecuteReasonCore(IXenObject item)
+        protected virtual string GetCantRunReasonCore(IXenObject item)
         {
             return Messages.UNKNOWN;
         }
 
         /// <summary>
-        /// Gets the error dialog to be displayed if one or more items in the selection couldn't be executed. Returns null by
+        /// Gets the error dialog to be displayed if one or more items in the selection couldn't be run. Returns null by
         /// default i.e. An error dialog isn't displayed by default.
         /// </summary>
-        /// <param name="cantExecuteReasons">The reasons for why the items couldn't execute.</param>
-        protected virtual CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantExecuteReasons)
+        /// <param name="cantRunReasons">The reasons for why the items couldn't run.</param>
+        protected virtual CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantRunReasons)
         {
             return null;
         }
@@ -356,7 +356,7 @@ namespace XenAdmin.Commands
 
         /// <summary>
         /// Gets or sets the parent control for any dialogs launched during the
-        /// execution of the command. Defaults to the MainWindow Form.
+        /// running of the command. Defaults to the MainWindow Form.
         /// </summary>
         public Control Parent
         {
@@ -368,7 +368,7 @@ namespace XenAdmin.Commands
         /// Runs the specified <see cref="AsyncAction"/>s such that they are synchronous per connection but asynchronous across connections.
         /// </summary>
         /// <param name="endDescription"></param>
-        /// <param name="runActionsInParallel">Whether the actions should be executed simultaneously</param>
+        /// <param name="runActionsInParallel">Whether the actions should be run simultaneously</param>
         /// <param name="actions"></param>
         /// <param name="title"></param>
         /// <param name="startDescription"></param>

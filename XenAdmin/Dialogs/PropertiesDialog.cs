@@ -165,10 +165,7 @@ namespace XenAdmin.Dialogs
                         {
                             Image = Images.StaticImages._000_Alert2_h32bit_16,
                             Text = Messages.ALERTS,
-                            BlurbText = HiddenFeatures.LinkLabelHidden
-                                ? Messages.UPSELL_BLURB_ALERTS
-                                : Messages.UPSELL_BLURB_ALERTS + Messages.UPSELL_BLURB_TRIAL,
-                            LearnMoreUrl = InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL
+                            BlurbText = Messages.UPSELL_BLURB_ALERTS
                         };
 
                         ShowTab(PerfmonAlertUpsellEditPage);
@@ -187,10 +184,7 @@ namespace XenAdmin.Dialogs
                         {
                             Image = Images.StaticImages._000_Email_h32bit_16,
                             Text = Messages.EMAIL_OPTIONS,
-                            BlurbText = HiddenFeatures.LinkLabelHidden
-                                ? Messages.UPSELL_BLURB_ALERTS
-                                : Messages.UPSELL_BLURB_ALERTS + Messages.UPSELL_BLURB_TRIAL,
-                            LearnMoreUrl = InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL
+                            BlurbText = Messages.UPSELL_BLURB_ALERTS
                         };
                         ShowTab(PerfmonAlertOptionsUpsellEditPage);
                     }
@@ -221,7 +215,7 @@ namespace XenAdmin.Dialogs
                 if (is_pool_or_standalone && !Helpers.FeatureForbidden(xenObject.Connection, Host.RestrictLivePatching))
                     ShowTab(LivePatchingEditPage = new LivePatchingEditPage());
 
-                if (is_pool_or_standalone && !Helpers.FeatureForbidden(xenObject.Connection, Host.RestrictIGMPSnooping) && Helpers.GetMaster(pool).vSwitchNetworkBackend())
+                if (is_pool_or_standalone && !Helpers.FeatureForbidden(xenObject.Connection, Host.RestrictIGMPSnooping) && Helpers.GetCoordinator(pool).vSwitchNetworkBackend())
                     ShowTab(NetworkOptionsEditPage = new NetworkOptionsEditPage());
 
                 if (is_pool_or_standalone && !Helpers.FeatureForbidden(xenObject.Connection, Host.RestrictCorosync))
@@ -241,16 +235,14 @@ namespace XenAdmin.Dialogs
                         {
                             Image = Images.StaticImages._000_GetMemoryInfo_h32bit_16,
                             Text = Messages.GPU,
-                            BlurbText = HiddenFeatures.LinkLabelHidden
-                                ? Messages.UPSELL_BLURB_GPU
-                                : Messages.UPSELL_BLURB_GPU + Messages.UPSELL_BLURB_TRIAL,
-                            LearnMoreUrl = InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL
+                            BlurbText = Messages.UPSELL_BLURB_GPU
                         };
                         ShowTab(GpuUpsellEditPage);
                     }
                     else
                     {
-                        ShowTab(GpuEditPage = new GpuEditPage());
+                        if(Helpers.GpusAvailable(connection))
+                            ShowTab(GpuEditPage = new GpuEditPage());
                     }
                 }
 
@@ -566,6 +558,21 @@ namespace XenAdmin.Dialogs
                 HostPowerONEditPage.LoadPowerOnMode();
                 return;
             }
+
+            HideToolTips();
+        }
+
+        private void HideToolTips()
+        {
+            foreach (IEditPage page in verticalTabs.Items)
+            {
+                page.HideLocalValidationMessages();
+            }
+        }
+
+        private void PropertiesDialog_Moved(object sender, EventArgs e)
+        {
+            HideToolTips();
         }
 
         private void PropertiesDialog_FormClosed(object sender, FormClosedEventArgs e)

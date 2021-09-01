@@ -249,7 +249,7 @@ namespace XenAdmin.Wizards.ImportWizard
                     m_pageVMconfig.CpuCount, m_pageVMconfig.Memory,
                     m_pageBootOptions.BootParams, m_pageBootOptions.PlatformSettings,
                     m_pageImportSource.DiskCapacity, m_pageImportSource.IsWIM, m_pageVMconfig.AdditionalSpace,
-                    m_pageImportSource.FilePath, m_pageImportSource.ImageLength);
+                    m_pageImportSource.FilePath, m_pageImportSource.ImageLength, BrandManager.ProductBrand);
 
 				m_pageStorage.SelectedOvfEnvelope = m_envelopeFromVhd;
 			    lunPerVdiMappingPage.SelectedOvfEnvelope = m_envelopeFromVhd;
@@ -402,7 +402,7 @@ namespace XenAdmin.Wizards.ImportWizard
         private void ConfigureRbacPage(IXenConnection selectedConnection)
         {
             if (selectedConnection == null || selectedConnection.Session == null || selectedConnection.Session.IsLocalSuperuser ||
-                Helpers.GetMaster(selectedConnection).external_auth_type == Auth.AUTH_TYPE_NONE)
+                Helpers.GetCoordinator(selectedConnection).external_auth_type == Auth.AUTH_TYPE_NONE)
                 return;
 
 			m_pageRbac.ClearPermissionChecks();
@@ -675,7 +675,12 @@ namespace XenAdmin.Wizards.ImportWizard
         private void ShowXenAppXenDesktopWarning(IXenConnection connection)
         {
             if (connection != null && connection.Cache.Hosts.Any(h => h.DesktopFeaturesEnabled() || h.DesktopPlusFeaturesEnabled() || h.DesktopCloudFeaturesEnabled()))
-                ShowInformationMessage(Helpers.GetPool(connection) != null ? Messages.NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_POOL : Messages.NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_SERVER);
+            {
+                var format = Helpers.GetPool(connection) != null
+                    ? Messages.NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_POOL
+                    : Messages.NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_SERVER;
+                ShowInformationMessage(string.Format(format, BrandManager.CompanyNameShort));
+            }
             else
                 HideInformationMessage();
         }

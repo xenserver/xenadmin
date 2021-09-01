@@ -49,7 +49,6 @@ namespace XenAdmin.TabPages
             // upsellPage1
             // 
             resources.ApplyResources(this.upsellPage1, "upsellPage1");
-            this.upsellPage1.Image = ((System.Drawing.Image)(resources.GetObject("upsellPage1.Image")));
             this.upsellPage1.Name = "upsellPage1";
             // 
             // UpsellTabPage
@@ -62,6 +61,7 @@ namespace XenAdmin.TabPages
             this.pageContainerPanel.ResumeLayout(false);
             this.pageContainerPanel.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

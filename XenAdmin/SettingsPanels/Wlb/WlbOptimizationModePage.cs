@@ -179,6 +179,9 @@ namespace XenAdmin.SettingsPanels
             throw new NotImplementedException();
         }
 
+        public void HideLocalValidationMessages()
+        { }
+
         public void Cleanup()
         {
             throw new NotImplementedException();

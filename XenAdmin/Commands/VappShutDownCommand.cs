@@ -81,7 +81,7 @@ namespace XenAdmin.Commands
             }
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (selection.AllItemsAre<VM_appliance>())
                 return selection.AtLeastOneXenObjectCan<VM_appliance>(CanShutDownAppliance);
@@ -100,7 +100,7 @@ namespace XenAdmin.Commands
             return false;
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             var appsToShutDown = new List<VM_appliance>();
 

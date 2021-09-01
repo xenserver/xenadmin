@@ -55,6 +55,14 @@ namespace XenAdmin.Dialogs
         private void PopulateComboBox()
         {
             GPU_group[] gpu_groups = _vm.Connection.Cache.GPU_groups.Where(g => g.PGPUs.Count > 0 && g.supported_VGPU_types.Count != 0).ToArray();
+
+            //comboBoxTypes should not be available for selection
+            if (gpu_groups.Length == 0)
+            {
+                comboBoxTypes.Enabled = false;
+                return;
+            }
+
             Array.Sort(gpu_groups);
             foreach (GPU_group gpu_group in gpu_groups)
             {

@@ -167,7 +167,7 @@ namespace XenAdmin.Actions
                     //immediately. But even if the refresh fails, the change will be
                     //noticed, just a bit later.
 
-                    new ExecutePluginAction(host.Connection, host,
+                    new RunPluginAction(host.Connection, host,
                         XenServerPlugins.PLUGIN_PERFMON_PLUGIN,
                         XenServerPlugins.PLUGIN_PERFMON_FUNCTION_REFRESH,
                         new Dictionary<string, string>(), true).RunExternal(Session);
@@ -180,12 +180,12 @@ namespace XenAdmin.Actions
                         // start perfmon and try again
                         try
                         {
-                            new ExecutePluginAction(host.Connection, host,
+                            new RunPluginAction(host.Connection, host,
                                 XenServerPlugins.PLUGIN_PERFMON_PLUGIN,
                                 XenServerPlugins.PLUGIN_PERFMON_FUNCTION_START,
                                 new Dictionary<string, string>(), true).RunExternal(Session);
 
-                            new ExecutePluginAction(host.Connection, host,
+                            new RunPluginAction(host.Connection, host,
                                 XenServerPlugins.PLUGIN_PERFMON_PLUGIN,
                                 XenServerPlugins.PLUGIN_PERFMON_FUNCTION_REFRESH,
                                 new Dictionary<string, string>(), true).RunExternal(Session);

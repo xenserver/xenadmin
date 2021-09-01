@@ -52,7 +52,7 @@ namespace XenAdmin.Commands
             get { return Messages.MAINWINDOW_COPY_VM; }
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             var con = selection.GetConnectionOfFirstItem();
 
@@ -60,17 +60,17 @@ namespace XenAdmin.Commands
                 new CrossPoolMigrateWizard(con, selection, preSelectedHost, WizardMode.Copy));
         }
 
-        protected override bool CanExecute(VM vm)
+        protected override bool CanRun(VM vm)
         {
-            return CanExecute(vm, preSelectedHost);
+            return CanRun(vm, preSelectedHost);
         }
 
-        public static bool CanExecute(VM vm, Host preSelectedHost)
+        public static bool CanRun(VM vm, Host preSelectedHost)
         {
             if (vm == null || vm.is_a_template || vm.Locked || vm.power_state != vm_power_state.Halted)
                 return false;
 
-            return CrossPoolMigrateCommand.CanExecute(vm, preSelectedHost);
+            return CrossPoolMigrateCommand.CanRun(vm, preSelectedHost);
         }
     }
 
@@ -90,12 +90,12 @@ namespace XenAdmin.Commands
             get { return Messages.MAINWINDOW_COPY_TEMPLATE; }
         }
 
-        public new static bool CanExecute(VM vm, Host preSelectedHost)
+        public new static bool CanRun(VM vm, Host preSelectedHost)
         {
             if (vm == null || !vm.is_a_template || vm.DefaultTemplate() || vm.Locked)
                 return false;
 
-            return CrossPoolMigrateCommand.CanExecute(vm, preSelectedHost);
+            return CrossPoolMigrateCommand.CanRun(vm, preSelectedHost);
         }
     }
 }

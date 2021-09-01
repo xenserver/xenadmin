@@ -300,11 +300,11 @@ namespace XenAdmin.Wizards.DRWizards
 
         private List<FibreChannelDevice> FiberChannelScan()
         {
-            Host master = Helpers.GetMaster(Connection);
-            if (master == null)
+            Host coordinator = Helpers.GetCoordinator(Connection);
+            if (coordinator == null)
                 return null;
 
-            var action = new FibreChannelProbeAction(master);
+            var action = new FibreChannelProbeAction(coordinator);
             using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
                 dialog.ShowDialog(this); //Will block until dialog closes, action completed
 
@@ -313,12 +313,12 @@ namespace XenAdmin.Wizards.DRWizards
 
         private List<SR.SRInfo> ScanDeviceForSRs(SR.SRTypes type, string deviceId, Dictionary<string, string> dconf)
         {
-            Host master = Helpers.GetMaster(Connection);
-            if (master == null || dconf == null)
+            Host coordinator = Helpers.GetCoordinator(Connection);
+            if (coordinator == null || dconf == null)
                 return null;
 
             // Start probe
-            SrProbeAction srProbeAction = new SrProbeAction(Connection, master, type, dconf,
+            SrProbeAction srProbeAction = new SrProbeAction(Connection, coordinator, type, dconf,
                 new Dictionary<string, string> {{METADATA, "true"}});
             using (var dlg = new ActionProgressDialog(srProbeAction, ProgressBarStyle.Marquee))
                 dlg.ShowDialog(this);
@@ -379,10 +379,10 @@ namespace XenAdmin.Wizards.DRWizards
                 return;
             }
 
-            Host master = Connection.Resolve(pool.master);
-            if (master == null)
+            Host coordinator = Connection.Resolve(pool.master);
+            if (coordinator == null)
             {
-                log.Error("New SR Wizard: Master has disappeared");
+                log.Error("New SR Wizard: Coordinator has disappeared");
                 return;
             }
 

@@ -65,7 +65,7 @@ namespace XenAdmin.Commands
 
             foreach (var host in hosts)
             {
-                if (!RemoveHostFromPoolCommand.CanExecute(host))
+                if (!RemoveHostFromPoolCommand.CanRun(host))
                     continue;
 
                 var cmd = new RemoveHostFromPoolCommand(Command.MainWindowCommandInterface, host);
@@ -86,14 +86,14 @@ namespace XenAdmin.Commands
 
             public override string MenuText => Messages.REMOVE_SERVER_MENU_ITEM;
 
-            protected override bool CanExecuteCore(SelectedItemCollection selection)
+            protected override bool CanRunCore(SelectedItemCollection selection)
             {
                 var connection = selection.GetConnectionOfAllItems();
                 var pool = Helpers.GetPool(connection);
                 if (pool == null)
                     return false;
 
-                return connection.Cache.Hosts.Any(RemoveHostFromPoolCommand.CanExecute);
+                return connection.Cache.Hosts.Any(RemoveHostFromPoolCommand.CanRun);
             }
         }
     }

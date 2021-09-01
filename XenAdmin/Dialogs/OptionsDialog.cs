@@ -93,6 +93,24 @@ namespace XenAdmin.Dialogs
         {
             SelectPage(connectionOptionsPage1);
         }
+
+        private void OptionsDialog_Move(object sender, EventArgs e)
+        {
+            HideValidationToolTips();
+        }
+
+        private void verticalTabs_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            HideValidationToolTips();
+        }
+
+        private void HideValidationToolTips()
+        {
+            foreach (IOptionsPage page in verticalTabs.Items)
+            {
+                page.HideValidationMessages();
+            }
+        }
     }
 }
 

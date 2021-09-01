@@ -54,7 +54,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             if (selection[0].XenObject is Host host)
                 MainWindowCommandInterface.ShowPerConnectionWizard(host.Connection, new ChangeServerPasswordDialog(host));
@@ -62,7 +62,7 @@ namespace XenAdmin.Commands
                 MainWindowCommandInterface.ShowPerConnectionWizard(pool.Connection, new ChangeServerPasswordDialog(pool));
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             // Only allow password change if the user is logged in as local root
             // (i.e. disallow password change if the user is logged in via AD)
@@ -78,14 +78,14 @@ namespace XenAdmin.Commands
             return false;
         }
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
             var session = item.Connection?.Session;
 
             if (session != null && !session.IsLocalSuperuser && (item is Host host && host.IsLive() || item is Pool))
                 return Messages.AD_CANNOT_CHANGE_PASSWORD;
             
-            return base.GetCantExecuteReasonCore(item);
+            return base.GetCantRunReasonCore(item);
         }
     }
 }

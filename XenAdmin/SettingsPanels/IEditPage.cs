@@ -45,7 +45,7 @@ namespace XenAdmin.SettingsPanels
         ///   2) Return an AsyncAction for later or more complicated actions.
         /// When the user clicks OK on the PropertiesDialog, we run SaveSettings
         /// for each page. We then save all changes to the XenModelObject from step (1).
-        /// Finally we execute each of the actions we have collected from step (2).
+        /// Finally we run each of the actions we have collected from step (2).
         /// Because we are expecting things to happen in that order, the SaveSettings()
         /// should not make any API calls itself: it should put them in its returned action.
         /// </summary>
@@ -72,6 +72,11 @@ namespace XenAdmin.SettingsPanels
         /// Show local validation balloon tooltips
         /// </summary>
         void ShowLocalValidationMessages();
+
+        /// <summary>
+        /// Hide local validation balloon tooltips
+        /// </summary>
+        void HideLocalValidationMessages();
 
         /// <summary>
         /// Unregister listeners, dispose balloon tooltips, etc.

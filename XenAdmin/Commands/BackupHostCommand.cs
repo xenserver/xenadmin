@@ -69,7 +69,7 @@ namespace XenAdmin.Commands
             _filename = filename;
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             Host host = (Host)selection[0].XenObject;
 
@@ -77,7 +77,9 @@ namespace XenAdmin.Commands
             {
                 SaveFileDialog dialog = new SaveFileDialog();
                 dialog.AddExtension = true;
-                dialog.Filter = string.Format("{0} (*.{1})|*.{1}|{2} (*.*)|*.*", Messages.XS_BACKUP_FILES, BrandManager.ExtensionBackup, Messages.ALL_FILES);
+                dialog.Filter = string.Format("{0} (*.{1})|*.{1}|{2} (*.*)|*.*",
+                    string.Format(Messages.XS_BACKUP_FILES, BrandManager.ProductBrand),
+                    BrandManager.ExtensionBackup, Messages.ALL_FILES);
                 dialog.FilterIndex = 0;
                 dialog.RestoreDirectory = true;
                 dialog.DefaultExt = BrandManager.ExtensionBackup;
@@ -91,14 +93,14 @@ namespace XenAdmin.Commands
             }
         }
 
-        private bool CanExecute(Host host)
+        private bool CanRun(Host host)
         {
             return host != null && host.IsLive();
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
-            return selection.ContainsOneItemOfType<Host>() && selection.AtLeastOneXenObjectCan<Host>(CanExecute);
+            return selection.ContainsOneItemOfType<Host>() && selection.AtLeastOneXenObjectCan<Host>(CanRun);
         }
     }
 }

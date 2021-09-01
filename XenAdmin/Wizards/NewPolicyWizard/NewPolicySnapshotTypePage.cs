@@ -51,7 +51,8 @@ namespace XenAdmin.Wizards.NewPolicyWizard
         public NewPolicySnapshotTypePage()
         {
             InitializeComponent();
-            label6.Text = string.Format(label6.Text, BrandManager.ProductVersion81);
+            label6.Text = string.Format(label6.Text, BrandManager.ProductBrand, BrandManager.ProductVersion81);
+            labelWarning.Text = string.Format(labelWarning.Text, BrandManager.VmTools);
         }
 
         public string SubText
@@ -84,6 +85,9 @@ namespace XenAdmin.Wizards.NewPolicyWizard
         public bool ValidToSave => true;
 
         public void ShowLocalValidationMessages()
+        { }
+
+        public void HideLocalValidationMessages()
         { }
 
         public void Cleanup()

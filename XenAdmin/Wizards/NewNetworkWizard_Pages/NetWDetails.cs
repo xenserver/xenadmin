@@ -92,7 +92,7 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
                     {
                         if (ThePIF.host.opaque_ref == Host.opaque_ref && ThePIF.IsPhysical() &&
                             (Properties.Settings.Default.ShowHiddenVMs || ThePIF.Show(Properties.Settings.Default.ShowHiddenVMs)) &&
-                            !ThePIF.IsBondSlave())
+                            !ThePIF.IsBondMember())
                         {
                             comboBoxNICList.Items.Add(ThePIF);
                         }

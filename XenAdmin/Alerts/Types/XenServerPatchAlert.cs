@@ -96,7 +96,7 @@ namespace XenAdmin.Alerts
             Patch = patch;
             NewServerVersion = newServerVersion;
             if (NewServerVersion != null)
-                RequiredXenCenterVersion = Updates.GetRequiredXenCenterVersion(NewServerVersion);
+                RequiredClientVersion = Updates.GetRequiredClientVersion(NewServerVersion);
             _priority = patch.Priority;
             _timestamp = Patch.TimeStamp;
         }
@@ -125,10 +125,10 @@ namespace XenAdmin.Alerts
                     sb.AppendLine();
                     sb.AppendFormat(Messages.PATCH_INSTALLATION_SIZE, Util.DiskSizeString(Patch.InstallationSize));
                 }
-                if (RequiredXenCenterVersion != null)
+                if (RequiredClientVersion != null)
                 {
                     sb.AppendLine();
-                    sb.AppendFormat(Messages.PATCH_NEEDS_NEW_XENCENTER, RequiredXenCenterVersion.Version);
+                    sb.AppendFormat(Messages.PATCH_NEEDS_NEW_XENCENTER, BrandManager.BrandConsole, RequiredClientVersion.Version);
                 }
                 return sb.ToString();
             }

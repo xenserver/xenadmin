@@ -100,12 +100,12 @@ namespace XenAdmin.Commands
             {
             }
 
-            protected override bool CanExecuteCore(SelectedItemCollection selection)
+            protected override bool CanRunCore(SelectedItemCollection selection)
             {
-                return selection.AllItemsAre<Host>(CanExecute);
+                return selection.AllItemsAre<Host>(CanRun);
             }
 
-            private bool CanExecute(Host host)
+            private bool CanRun(Host host)
             {
                 return host != null && host.Connection != null && host.Connection.IsConnected && Helpers.GetPool(host.Connection) == null && !Host.RestrictPooling(host);
             }

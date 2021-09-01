@@ -52,7 +52,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             foreach (IXenConnection connection in MainWindowCommandInterface.GetXenConnectionsCopy())
             {
@@ -60,13 +60,13 @@ namespace XenAdmin.Commands
                 {
                     MainWindowCommandInterface.Invoke(delegate
                     {
-                        new DisconnectCommand(MainWindowCommandInterface, connection, true).Execute();
+                        new DisconnectCommand(MainWindowCommandInterface, connection, true).Run();
                     });
                 }
             }
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             foreach (IXenConnection xc in MainWindowCommandInterface.GetXenConnectionsCopy())
             {

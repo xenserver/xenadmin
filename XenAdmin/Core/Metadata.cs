@@ -75,7 +75,6 @@ namespace XenAdmin.Core
         internal struct CFU
         {
             public bool AllowXenCenterUpdates;
-            public bool AllowPatchesUpdates;
             public bool AllowXenServerUpdates;
         }
 
@@ -91,7 +90,7 @@ namespace XenAdmin.Core
         internal struct SaveAndRestore
         {
             public bool SaveSessionCredentials;
-            public bool RequireMasterPassword;
+            public bool RequireMainPassword;
         }
 
         internal struct XenCenterSettings
@@ -134,7 +133,6 @@ namespace XenAdmin.Core
                     CFU = new CFU
                     {
                         AllowXenCenterUpdates = Properties.Settings.Default.AllowXenCenterUpdates,
-                        AllowPatchesUpdates = Properties.Settings.Default.AllowPatchesUpdates,
                         AllowXenServerUpdates = Properties.Settings.Default.AllowXenServerUpdates
                     },
                     Proxy = new Proxy
@@ -148,7 +146,7 @@ namespace XenAdmin.Core
                     SaveAndRestore = new SaveAndRestore
                     {
                         SaveSessionCredentials = Properties.Settings.Default.SaveSession,
-                        RequireMasterPassword = Properties.Settings.Default.RequirePass
+                        RequireMainPassword = Properties.Settings.Default.RequirePass
                     },
                     HelpLastUsed = Properties.Settings.Default.HelpLastUsed
                 },
@@ -158,7 +156,7 @@ namespace XenAdmin.Core
                     Connected = ConnectionsManager.XenConnectionsCopy.Count(c => c.IsConnected)
                 },
                 Plugins = new List<Plugin>(),
-                SourceOfData = isForXenCenter ? Messages.XENCENTER : Messages.HEALTH_CHECK,
+                SourceOfData = isForXenCenter ? BrandManager.BrandConsole : Messages.HEALTH_CHECK,
                 Created = DateTime.UtcNow.ToString("u"),
                 Reported = isForXenCenter ? DateTime.UtcNow.ToString("u") : HealthCheckSettings.REPORT_TIME_PLACEHOLDER
             };
@@ -176,7 +174,7 @@ namespace XenAdmin.Core
                 }
             }
 
-            var obj = new Dictionary<string, object> {{Messages.XENCENTER, metadata}};
+            var obj = new Dictionary<string, object> {{BrandManager.BrandConsole, metadata}};
             return new JavaScriptSerializer().Serialize(obj);
         }
 

@@ -79,7 +79,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        private void Execute(IXenConnection connection)
+        private void Run(IXenConnection connection)
         {
             if (connection == null)
                 return;
@@ -90,10 +90,7 @@ namespace XenAdmin.Commands
 
             if (Helpers.FeatureForbidden(pool, Host.RestrictHA))
             {
-                // Show upsell dialog
-                using (var dlg = new UpsellDialog(HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_HA : Messages.UPSELL_BLURB_HA + Messages.UPSELL_BLURB_TRIAL,
-                    InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL))
-                    dlg.ShowDialog(Parent);
+                UpsellDialog.ShowUpsellDialog(Messages.UPSELL_BLURB_HA, Parent);
             }
             else if (pool.ha_enabled)
             {
@@ -131,19 +128,19 @@ namespace XenAdmin.Commands
             }
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
-            Execute(selection[0].Connection);
+            Run(selection[0].Connection);
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
-            return CanExecuteHACommand(selection);
+            return CanRunHACommand(selection);
         }
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
-            var reason = base.GetCantExecuteReasonCore(item);
+            var reason = base.GetCantRunReasonCore(item);
             if (!string.IsNullOrEmpty(reason) && reason != Messages.UNKNOWN)
                 return reason;
 
@@ -155,7 +152,7 @@ namespace XenAdmin.Commands
             return Messages.UNKNOWN;
         }
 
-        protected override bool CanExecute(Pool pool)
+        protected override bool CanRun(Pool pool)
         {
             return pool.Connection.Cache.Hosts.Any(Host.RestrictPoolSecretRotation) || !pool.is_psr_pending;
         }
@@ -183,7 +180,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             Pool pool = selection.Count == 1 ? selection[0].PoolAncestor : null;
             if (pool == null || !pool.ha_enabled)
@@ -222,12 +219,12 @@ namespace XenAdmin.Commands
             action.RunAsync();
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
-            return CanExecuteHACommand(selection);
+            return CanRunHACommand(selection);
         }
 
-        protected override bool CanExecute(Pool pool)
+        protected override bool CanRun(Pool pool)
         {
             return pool.ha_enabled;
         }
@@ -257,25 +254,25 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
-            return new HAConfigureCommand(MainWindowCommandInterface, selection).CanExecute() ||
-                   new HADisableCommand(MainWindowCommandInterface, selection).CanExecute();
+            return new HAConfigureCommand(MainWindowCommandInterface, selection).CanRun() ||
+                   new HADisableCommand(MainWindowCommandInterface, selection).CanRun();
         }
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
             Pool pool = item == null ? null : Helpers.GetPoolOfOne(item.Connection);
 
             if (pool == null)
-                return Messages.POOL_GONE;
+                return string.Format(Messages.POOL_GONE, BrandManager.BrandConsole);
 
             if (!pool.IsVisible())
                 return Messages.HA_STANDALONE_SERVER;
  
-            Host master = Helpers.GetMaster(pool.Connection);
-            if (master == null)
-                return Messages.POOL_MASTER_GONE;
+            Host coordinator = Helpers.GetCoordinator(pool.Connection);
+            if (coordinator == null)
+                return string.Format(Messages.POOL_COORDINATOR_GONE, BrandManager.BrandConsole);
 
             if (pool.Locked)
                 return Messages.POOL_EDIT_IN_PROGRESS;
@@ -288,7 +285,7 @@ namespace XenAdmin.Commands
             return Messages.UNKNOWN;
         }
 
-        protected bool CanExecuteHACommand(SelectedItemCollection selection)
+        protected bool CanRunHACommand(SelectedItemCollection selection)
         {
             if (selection.Count != 1)
                 return false;
@@ -297,14 +294,14 @@ namespace XenAdmin.Commands
 
             if (pool == null || pool.Locked ||
                 pool.Connection == null || !pool.Connection.IsConnected ||
-                Helpers.GetMaster(pool.Connection) == null ||
+                Helpers.GetCoordinator(pool.Connection) == null ||
                 HelpersGUI.FindActiveHaAction(pool.Connection) != null)
                 return false;
 
-            return CanExecute(pool);
+            return CanRun(pool);
         }
 
-        protected virtual bool CanExecute(Pool pool)
+        protected virtual bool CanRun(Pool pool)
         {
             return true;
         }

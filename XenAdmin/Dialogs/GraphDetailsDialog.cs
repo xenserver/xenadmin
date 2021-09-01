@@ -323,7 +323,7 @@ namespace XenAdmin.Dialogs
                 this.dsi = dataSourceItem;
                 var displayOnGraphCell = new DataGridViewCheckBoxCell { Value = displayOnGraph };
                 var datasourceCell = new DataGridViewTextBoxCell { Value = dsi.ToString() };
-                var typeCell = new DataGridViewTextBoxCell { Value = dsi.DataType.ToStringI18N() };
+                var typeCell = new DataGridViewTextBoxCell { Value = dsi.Category.ToStringI18N() };
                 var colourCell = new DataGridViewTextBoxCell { Value = dsi.Color };
                 Cells.AddRange(displayOnGraphCell, datasourceCell, typeCell, colourCell);
             }

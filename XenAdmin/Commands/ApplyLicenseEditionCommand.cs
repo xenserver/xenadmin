@@ -68,7 +68,7 @@ namespace XenAdmin.Commands
             Parent = parent;
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             ApplyLicenseEditionAction action = new ApplyLicenseEditionAction(xos, _edition, _licenseServerAddress, _licenseServerPort, null);
             using (var actionProgress = new ActionProgressDialog(action, ProgressBarStyle.Marquee))

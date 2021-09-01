@@ -62,7 +62,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        private void Execute(IList<VM> vms)
+        private void Run(IList<VM> vms)
         {
             var actions = new List<AsyncAction>();
 
@@ -95,9 +95,9 @@ namespace XenAdmin.Commands
             }
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
-            Execute(selection.AsXenObjects<VM>());
+            Run(selection.AsXenObjects<VM>());
         }
 
         private bool CbtLicensed(VM vm)
@@ -105,51 +105,33 @@ namespace XenAdmin.Commands
             return !Helpers.FeatureForbidden(vm.Connection, Host.RestrictChangedBlockTracking);
         }
 
-        private bool CanExecute(VM vm)
+        private bool CanRun(VM vm)
         {
             return vm != null &&
                 !vm.is_a_template &&
                 vm.Connection.ResolveAll(vm.VBDs).Any(vbd => vm.Connection.Resolve(vbd.VDI) != null && vm.Connection.Resolve(vbd.VDI).cbt_enabled);
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
-            // Can execute criteria: A selection of VMs in the same pool which has CBT feature licensed, where at least one VM having CBT enabled
+            // Can run criteria: A selection of VMs in the same pool which has CBT feature licensed, where at least one VM having CBT enabled
             return selection.AllItemsAre<VM>(CbtLicensed) &&
                 selection.GetConnectionOfAllItems() != null &&
-                selection.AtLeastOneXenObjectCan<VM>(CanExecute);
+                selection.AtLeastOneXenObjectCan<VM>(CanRun);
         }
 
-        public override string MenuText
-        {
-            get { return Messages.MAINWINDOW_DISABLE_CHANGED_BLOCK_TRACKING; }
-        }
+        public override string MenuText => Messages.MAINWINDOW_DISABLE_CHANGED_BLOCK_TRACKING;
 
-        protected override bool ConfirmationRequired
-        {
-            get { return true; }
-        }
+        protected override bool ConfirmationRequired => true;
 
-        protected override string ConfirmationDialogText
-        {
-            get
-            {
-                return GetSelection().Count == 1 ? Messages.CONFIRM_DISABLE_CBT_VM : Messages.CONFIRM_DISABLE_CBT_VMS;
-            }
-        }
+        protected override string ConfirmationDialogText => GetSelection().Count == 1
+            ? string.Format(Messages.CONFIRM_DISABLE_CBT_VM, BrandManager.BrandConsole)
+            : string.Format(Messages.CONFIRM_DISABLE_CBT_VMS, BrandManager.BrandConsole);
 
-        protected override string ConfirmationDialogTitle
-        {
-            get
-            {
-                return GetSelection().Count == 1 ? String.Format(Messages.CONFIRM_DISABLE_CBT_VM_TITLE, GetSelection().AsXenObjects<VM>()[0].Name()) :
-                                                   Messages.CONFIRM_DISABLE_CBT_VMS_TITLE;
-            }
-        }
+        protected override string ConfirmationDialogTitle => GetSelection().Count == 1
+                ? String.Format(Messages.CONFIRM_DISABLE_CBT_VM_TITLE, GetSelection().AsXenObjects<VM>()[0].Name())
+                : Messages.CONFIRM_DISABLE_CBT_VMS_TITLE;
 
-        protected override string ConfirmationDialogHelpId
-        {
-            get { return "WarningVmDisableChangedBlockTracking"; }
-        }
+        protected override string ConfirmationDialogHelpId => "WarningVmDisableChangedBlockTracking";
     }
 }

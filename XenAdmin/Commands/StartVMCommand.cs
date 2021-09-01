@@ -71,7 +71,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void Execute(List<VM> vms)
+        protected override void Run(List<VM> vms)
         {
             Dictionary<VM, List<VBD>> brokenCDs = new Dictionary<VM, List<VBD>>();
             foreach (VM vm in vms)
@@ -115,7 +115,7 @@ namespace XenAdmin.Commands
             RunAction(vms, Messages.ACTION_VMS_STARTING_ON_TITLE, Messages.ACTION_VMS_STARTING_ON_TITLE, Messages.ACTION_VM_STARTED, brokenCDs);
         }
 
-        protected override bool CanExecute(VM vm)
+        protected override bool CanRun(VM vm)
         {
             ReadOnlyCollection<SelectedItem> selection = GetSelection();
 
@@ -145,7 +145,7 @@ namespace XenAdmin.Commands
 
         public override string ContextMenuText => Messages.MAINWINDOW_START_CONTEXT_MENU;
 
-        protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantExecuteReasons)
+        protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantRunReasons)
         {
             // a start-vm-diagnostic-dialog is shown by VmAction if VMs cant be started.
 

@@ -52,21 +52,21 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             ManualUpgrade = true;
         }
 
-        private void AddEventHandlersToMasters()
+        private void AddEventHandlersToCoordinators()
         {
-            foreach (Host master in SelectedMasters)
+            foreach (Host coordinator in SelectedCoordinators)
             {
-                master.Connection.ConnectionStateChanged += connection_ConnectionChanged;
-                master.Connection.CachePopulated += connection_CachePopulated;
+                coordinator.Connection.ConnectionStateChanged += connection_ConnectionChanged;
+                coordinator.Connection.CachePopulated += connection_CachePopulated;
             }
         }
 
-        private void RemoveEventHandlersToMasters()
+        private void RemoveEventHandlersToCoordinators()
         {
-            foreach (Host master in SelectedMasters)
+            foreach (Host coordinator in SelectedCoordinators)
             {
-                master.Connection.ConnectionStateChanged -= connection_ConnectionChanged;
-                master.Connection.CachePopulated -= connection_CachePopulated;
+                coordinator.Connection.ConnectionStateChanged -= connection_ConnectionChanged;
+                coordinator.Connection.CachePopulated -= connection_CachePopulated;
             }
         }
 
@@ -87,29 +87,29 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 RefreshRechecks();
                 return;
             }
-            var selectedMasters = new List<Host>(SelectedMasters);
-            RemoveEventHandlersToMasters();
+            var selectedCoordinators = new List<Host>(SelectedCoordinators);
+            RemoveEventHandlersToCoordinators();
             SelectedServers.Clear();
-            foreach (Host selectedMaster in selectedMasters)
+            foreach (Host selectedCoordinator in selectedCoordinators)
             {
-                Host master = selectedMaster;
-                if (master != null)
+                Host coordinator = selectedCoordinator;
+                if (coordinator != null)
                 {
-                    Pool pool = Helpers.GetPoolOfOne(master.Connection);
+                    Pool pool = Helpers.GetPoolOfOne(coordinator.Connection);
                     if (pool != null)
                         SelectedServers.AddRange(pool.HostsToUpgrade());
                     else
-                        SelectedServers.Add(master);
+                        SelectedServers.Add(coordinator);
                 }
             }
-            AddEventHandlersToMasters();
+            AddEventHandlersToCoordinators();
             labelPrechecksFirstLine.Text = Messages.ROLLINGUPGRADE_PRECHECKS;
             RefreshRechecks();
         }
 
         protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
-            RemoveEventHandlersToMasters();
+            RemoveEventHandlersToCoordinators();
         }
 
         public override void PageCancelled(ref bool cancel)
@@ -117,7 +117,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             base.PageCancelled(ref cancel);
             if (cancel)
                 return;
-            RemoveEventHandlersToMasters();
+            RemoveEventHandlersToCoordinators();
         }
 
         public override string PageTitle
@@ -156,9 +156,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             {
                 var poolHostsToUpgrade = pool.HostsToUpgrade();
                 hostsToUpgrade.AddRange(poolHostsToUpgrade);
-                hostsToUpgradeOrUpdate.AddRange(ApplyUpdatesToNewVersion
-                    ? HostsToUpgradeOrUpdate(pool)
-                    : poolHostsToUpgrade);
+                hostsToUpgradeOrUpdate.AddRange(poolHostsToUpgrade);
             }
 
             //XenCenter version check (if any of the selected server version is not the latest)
@@ -166,7 +164,8 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             if (latestCrVersion != null &&
                 hostsToUpgradeOrUpdate.Any(host => new Version(Helpers.HostProductVersion(host)) < latestCrVersion.Version))
             {
-                groups.Add(new CheckGroup(Messages.CHECKING_XENCENTER_VERSION, new List<Check> {new XenCenterVersionCheck(null)}));
+                groups.Add(new CheckGroup(string.Format(Messages.CHECKING_XENCENTER_VERSION, BrandManager.BrandConsole),
+                    new List<Check> {new ClientVersionCheck(null)}));
             }
 
             //HostMaintenanceModeCheck checks - for hosts that will be upgraded or updated
@@ -204,7 +203,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             }
 
             //vSwitch controller check - for each pool
-            var vSwitchChecks = (from Host server in SelectedMasters
+            var vSwitchChecks = (from Host server in SelectedCoordinators
                 let check = new VSwitchControllerCheck(server, InstallMethodConfig, ManualUpgrade)
                 where check.CanRun()
                 select check as Check).ToList();
@@ -212,8 +211,17 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             if (vSwitchChecks.Count > 0)
                 groups.Add(new CheckGroup(Messages.CHECKING_VSWITCH_CONTROLLER_GROUP, vSwitchChecks));
 
+            //Health Check check - for each pool
+            var hcChecks = (from Pool pool in SelectedPools
+                let check = new HealthCheckServiceCheck(pool, InstallMethodConfig)
+                where check.CanRun()
+                select check as Check).ToList();
+
+            if (hcChecks.Count > 0)
+                groups.Add(new CheckGroup(Messages.CHECKING_HEALTH_CHECK_SERVICE, hcChecks));
+
             //protocol check - for each pool
-            var sslChecks = (from Host server in SelectedMasters
+            var sslChecks = (from Host server in SelectedCoordinators
                 let check = new PoolLegacySslCheck(server, InstallMethodConfig, ManualUpgrade)
                 where check.CanRun()
                 select check as Check).ToList();
@@ -231,7 +239,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 groups.Add(new CheckGroup(Messages.CHECKING_POWER_ON_MODE_GROUP, iloChecks));
 
             //Checking PV guests - for hosts that have any PV guests and warn the user before the upgrade.
-            var pvChecks = (from Host server in SelectedMasters
+            var pvChecks = (from Host server in SelectedCoordinators
                 let check = new PVGuestsCheck(server, true, ManualUpgrade, InstallMethodConfig)
                 where check.CanRun()
                 select check as Check).ToList();
@@ -240,7 +248,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 groups.Add(new CheckGroup(Messages.CHECKING_PV_GUESTS, pvChecks));
 
             //HA checks - for each pool
-            var haChecks = (from Host server in SelectedMasters
+            var haChecks = (from Host server in SelectedCoordinators
                 select new HAOffCheck(server) as Check).ToList();
 
             if (haChecks.Count > 0) 
@@ -268,7 +276,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 groups.Add(new CheckGroup(Messages.CHECKING_HOST_MEMORY_POST_UPGRADE, mostMemoryPostUpgradeChecks));
 
             //PoolHasGFS2SR checks 
-            var gfs2Checks = (from Host host in SelectedMasters
+            var gfs2Checks = (from Host host in SelectedCoordinators
                 let check = new PoolHasGFS2SR(host)
                 where check.CanRun()
                 select check as Check).ToList();
@@ -276,22 +284,10 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             if (gfs2Checks.Count > 0) 
                 groups.Add(new CheckGroup(Messages.CHECKING_CLUSTERING_STATUS, gfs2Checks));
 
-            //Checking automated updates are possible if apply updates checkbox is ticked
-            if (ApplyUpdatesToNewVersion)
-            {
-                var automatedUpdateChecks = (from Host server in SelectedMasters
-                    select new AutomatedUpdatesLicenseCheck(server) as Check).ToList();
-
-                automatedUpdateChecks.Add(new CfuAvailabilityCheck());
-
-                groups.Add(new CheckGroup(Messages.CHECKING_AUTOMATED_UPDATES_POSSIBLE,
-                    automatedUpdateChecks));
-            }
-
             return groups;
         }
 
-        public IEnumerable<Host> SelectedMasters { private get; set; }
+        public IEnumerable<Host> SelectedCoordinators { private get; set; }
         public bool ManualUpgrade { set; private get; }
 
         public Dictionary<string, string> InstallMethodConfig { private get; set; }
@@ -304,20 +300,20 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             if (pool == null)
                 return result;
 
-            var master = Helpers.GetMaster(pool);
-            if (master == null)
+            var coordinator = Helpers.GetCoordinator(pool);
+            if (coordinator == null)
                 return result;
 
-            if (pool.IsMasterUpgraded())
+            if (pool.IsCoordinatorUpgraded())
             {
                 foreach (var h in pool.Connection.Cache.Hosts)
                 {
-                    if (h.LongProductVersion() != master.LongProductVersion()) // host needs to be upgraded
+                    if (h.LongProductVersion() != coordinator.LongProductVersion()) // host needs to be upgraded
                         result.Add(h); // host 
                     else
                     {
                         //check update sequence for already-upgraded hosts
-                        var us = Updates.GetPatchSequenceForHost(h, Updates.GetMinimalPatches(master));
+                        var us = Updates.GetPatchSequenceForHost(h, Updates.GetMinimalPatches(coordinator));
                         if (us != null && us.Count > 0)
                         {
                             result.Add(h);

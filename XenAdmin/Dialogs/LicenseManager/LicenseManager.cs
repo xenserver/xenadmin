@@ -36,6 +36,7 @@ using System.Windows.Forms;
 using XenAdmin.Controls;
 using XenAdmin.Controls.CheckableDataGridView;
 using XenAdmin.Controls.SummaryPanel;
+using XenAdmin.Core;
 using XenAPI;
 
 namespace XenAdmin.Dialogs
@@ -45,6 +46,7 @@ namespace XenAdmin.Dialogs
         public LicenseManager(LicenseManagerController lmcontroller)
         {
             InitializeComponent();
+            downloadLicenseServerLink.Text = string.Format(downloadLicenseServerLink.Text, BrandManager.CompanyNameShort);
             checkableDataGridView.StatusImageColumn = statusImageColumn;
             SetupControllers(lmcontroller);
         }

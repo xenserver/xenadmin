@@ -66,7 +66,7 @@ namespace XenAdmin.Actions.OvfActions
 			if (pool != null)
 				Pool = pool;
 			else
-				Host = Helpers.GetMaster(connection);
+				Host = Helpers.GetCoordinator(connection);
 		}
 
         public bool MetaDataOnly { protected get; set; }

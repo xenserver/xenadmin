@@ -110,14 +110,14 @@ namespace XenAdmin.ServerDBs.FakeAPI
             string metrics_ref = (string)proxy.db.GetValue("host", opaque_ref, "metrics");
             proxy.EditObject_(DbProxy.EditTypes.Replace, "host_metrics", metrics_ref, "live", false);
 
-            string master_ref = "";
+            string coordinator_ref = "";
             foreach (string pool in proxy.db.Tables["pool"].Rows.Keys)
             {
-                master_ref = (string)proxy.db.GetValue("pool", pool, "master");
+                coordinator_ref = (string)proxy.db.GetValue("pool", pool, "master");
                 break;
             }
 
-            if (opaque_ref == master_ref)
+            if (opaque_ref == coordinator_ref)
             {
                 proxy.MarkToDisconnect = true;
             }
@@ -235,7 +235,7 @@ namespace XenAdmin.ServerDBs.FakeAPI
 
         }
 
-        public Response<string> call_plugin(string session, string master_opaque_ref, string arg1, string arg2, Hashtable arg3)
+        public Response<string> call_plugin(string session, string coordinator_opaque_ref, string arg1, string arg2, Hashtable arg3)
         {
             if (arg1 == "power-on-host")
             {

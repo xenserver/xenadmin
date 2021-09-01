@@ -88,7 +88,7 @@ namespace XenAdmin.Commands
             {
             }
 
-            private static bool CanExecute(VM vm)
+            private static bool CanRun(VM vm)
             {
                 if (vm == null || vm.Connection == null || !vm.Connection.IsConnected)
                     return false;
@@ -102,11 +102,11 @@ namespace XenAdmin.Commands
                 return vm.allowed_operations != null && vm.allowed_operations.Contains(vm_operations.pool_migrate);
             }
 
-            protected override bool CanExecuteCore(SelectedItemCollection selection)
+            protected override bool CanRunCore(SelectedItemCollection selection)
             {
                 IXenConnection connection = selection.GetConnectionOfFirstItem();
 
-                bool atLeastOneCanExecute = false;
+                bool atLeastOneCanRun = false;
                 foreach (SelectedItem item in selection)
                 {
                     //all items should be VMs
@@ -118,12 +118,12 @@ namespace XenAdmin.Commands
                     if (connection != null && vm.Connection != connection)
                         return false;
 
-                    //at least one VM should be able to execute
-                    if (CanExecute(vm))
-                        atLeastOneCanExecute = true;
+                    //at least one VM should be able to run
+                    if (CanRun(vm))
+                        atLeastOneCanRun = true;
 
                 }
-                return atLeastOneCanExecute;
+                return atLeastOneCanRun;
             }
 
             public override string MenuText

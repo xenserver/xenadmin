@@ -76,7 +76,6 @@ namespace XenAdmin.Dialogs
             // 
             // blueBorder
             // 
-            this.blueBorder.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.blueBorder, "blueBorder");
             // 
             // BlurbLabel

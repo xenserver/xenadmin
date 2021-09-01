@@ -38,18 +38,18 @@ using System;
 
 namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 {
-    class RemoveUpdateFileFromMasterPlanAction : PlanActionWithSession
+    class RemoveUpdateFileFromCoordinatorPlanAction : PlanActionWithSession
     {
         private readonly List<HostUpdateMapping> patchMappings = new List<HostUpdateMapping>();
         private readonly XenServerPatch xenServerPatch;
-        private readonly Host master;
+        private readonly Host coordinator;
 
-        public RemoveUpdateFileFromMasterPlanAction(Host master, List<HostUpdateMapping> patchMappings, XenServerPatch xenServerPatch)
-            : base(master.Connection)
+        public RemoveUpdateFileFromCoordinatorPlanAction(Host coordinator, List<HostUpdateMapping> patchMappings, XenServerPatch xenServerPatch)
+            : base(coordinator.Connection)
         {
             this.patchMappings = patchMappings;
             this.xenServerPatch = xenServerPatch;
-            this.master = master;
+            this.coordinator = coordinator;
         }
 
         protected override void RunWithSession(ref Session session)
@@ -58,7 +58,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             {
                 var existing = (from HostUpdateMapping hum in patchMappings
                     let xpm = hum as XenServerPatchMapping
-                    where xpm != null && xpm.Matches(master, xenServerPatch)
+                    where xpm != null && xpm.Matches(coordinator, xenServerPatch)
                     select xpm).FirstOrDefault();
 
                 if (!Helpers.ElyOrGreater(session.Connection))

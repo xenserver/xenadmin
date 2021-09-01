@@ -87,6 +87,7 @@
             this.ColumnLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnWebPage = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.labelLegacyUpdates = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.informationLabelIcon)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
@@ -336,10 +337,11 @@
             // tableLayouPanel5
             // 
             resources.ApplyResources(this.tableLayouPanel5, "tableLayouPanel5");
-            this.tableLayouPanel5.Controls.Add(this.pictureBox1, 0, 0);
-            this.tableLayouPanel5.Controls.Add(this.checkForUpdatesNowLink, 2, 0);
-            this.tableLayouPanel5.Controls.Add(this.AutoCheckForUpdatesDisabledLabel, 1, 0);
-            this.tableLayouPanel5.Controls.Add(this.panel1, 3, 0);
+            this.tableLayouPanel5.Controls.Add(this.pictureBox1, 0, 1);
+            this.tableLayouPanel5.Controls.Add(this.checkForUpdatesNowLink, 2, 1);
+            this.tableLayouPanel5.Controls.Add(this.AutoCheckForUpdatesDisabledLabel, 1, 1);
+            this.tableLayouPanel5.Controls.Add(this.panel1, 0, 2);
+            this.tableLayouPanel5.Controls.Add(this.labelLegacyUpdates, 0, 0);
             this.tableLayouPanel5.Name = "tableLayouPanel5";
             // 
             // panel1
@@ -349,7 +351,6 @@
             this.panel1.Controls.Add(this.dataGridViewUpdates);
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
-            this.tableLayouPanel5.SetRowSpan(this.panel1, 4);
             // 
             // dataGridViewHosts
             // 
@@ -513,6 +514,14 @@
             this.ColumnWebPage.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.ColumnWebPage.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
+            // labelLegacyUpdates
+            // 
+            resources.ApplyResources(this.labelLegacyUpdates, "labelLegacyUpdates");
+            this.labelLegacyUpdates.BackColor = System.Drawing.Color.LemonChiffon;
+            this.labelLegacyUpdates.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tableLayouPanel5.SetColumnSpan(this.labelLegacyUpdates, 3);
+            this.labelLegacyUpdates.Name = "labelLegacyUpdates";
+            // 
             // ManageUpdatesPage
             // 
             resources.ApplyResources(this, "$this");
@@ -595,5 +604,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnInstalledUpdate;
         private System.Windows.Forms.ToolStripButton toolStripButtonUpdate;
         private Controls.SpinnerIcon spinner;
+        private System.Windows.Forms.Label labelLegacyUpdates;
     }
 }

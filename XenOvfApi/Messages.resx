@@ -144,9 +144,6 @@
   <data name="EULA_RB_REJECT" xml:space="preserve">
     <value>Reject</value>
   </data>
-  <data name="EULA_TITLE" xml:space="preserve">
-    <value>[Citrix] OVF EULA</value>
-  </data>
   <data name="FAILED_TO_ADD_OS_SECTION" xml:space="preserve">
     <value>Failed to add operating system section because the virtual system collection is invalid.</value>
   </data>
@@ -184,7 +181,7 @@
     <value>Failed to open {0}.</value>
   </data>
   <data name="OVF_CREATED" xml:space="preserve">
-    <value>Created by [XenCenter] Disk Image Import</value>
+    <value>Created by Disk Image Import</value>
   </data>
   <data name="OVF_DEPLOYMENT_CFG_SECTION_MISSING" xml:space="preserve">
     <value>Failed to find deployment configuration section.</value>

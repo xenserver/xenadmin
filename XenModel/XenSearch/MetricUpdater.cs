@@ -92,9 +92,9 @@ namespace XenAdmin.XenSearch
                 Monitor.PulseAll(_sleepMonitor);
         }
 
-        public void Kill()
+        public void Stop()
         {
-            log.Info("Killing MetricUpdater thread");
+            log.Info("Stopping MetricUpdater thread");
             _run = false;
             _pause = false;
             lock (_pauseMonitor)
@@ -362,7 +362,7 @@ namespace XenAdmin.XenSearch
                 host = obj.Connection.Resolve<Host>(((VM)obj).resident_on);
                 if (host == null)
                 {
-                    host = Helpers.GetMaster(obj.Connection);
+                    host = Helpers.GetCoordinator(obj.Connection);
                 }
             }
             return host;

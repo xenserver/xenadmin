@@ -30,6 +30,7 @@
  */
 
 using System;
+using XenAdmin.Core;
 using XenAdmin.Dialogs;
 
 
@@ -53,42 +54,27 @@ namespace XenAdmin.Alerts
 
         #region Overrides of Alert
 
-        public override string Title
-        {
-            get { return Messages.NOTICE_LICENCE_TITLE; }
-        }
+        public override string Title => Messages.NOTICE_LICENCE_TITLE;
 
         public override string Description
         {
             get
             {
                 if (expiryDate < nowDate)
-                    return string.Format(Messages.MAINWINDOW_EXPIRE_MESSAGE_TOO_LATE, hostName.Ellipsise(25));
+                    return string.Format(Messages.MAINWINDOW_EXPIRE_MESSAGE_TOO_LATE, BrandManager.ProductBrand, hostName.Ellipsise(25));
 
                 string timeleft = GetLicenseTimeLeftString(expiryDate.Subtract(nowDate), false);
-                return string.Format(Messages.MAINWINDOW_EXPIRE_MESSAGE, hostName.Ellipsise(25), timeleft);
+                return string.Format(Messages.MAINWINDOW_EXPIRE_MESSAGE, BrandManager.ProductBrand, hostName.Ellipsise(25), timeleft);
             }
         }
 
-        public override AlertPriority Priority
-        {
-            get
-            {
-                return expiryDate < nowDate
-                           ? AlertPriority.Priority2
-                           : AlertPriority.Priority3;
-            }
-        }
+        public override AlertPriority Priority => expiryDate < nowDate
+                ? AlertPriority.Priority2
+                : AlertPriority.Priority3;
 
-        public override string AppliesTo
-        {
-            get { return hostName; }
-        }
+        public override string AppliesTo => hostName;
 
-        public override string FixLinkText
-        {
-            get { return Messages.LAUNCH_LICENSE_MANAGER; }
-        }
+        public override string FixLinkText => Messages.LAUNCH_LICENSE_MANAGER;
 
         public override Action FixLinkAction
         {
@@ -105,10 +91,7 @@ namespace XenAdmin.Alerts
             }
         }
 
-        public override string HelpID
-        {
-            get { return "LicenseManager"; }
-        }
+        public override string HelpID => "LicenseManager";
 
         #endregion
 

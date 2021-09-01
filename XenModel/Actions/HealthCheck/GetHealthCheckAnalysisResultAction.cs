@@ -37,6 +37,7 @@ using System.Web.Script.Serialization;
 using XenAdmin.Model;
 using XenAPI;
 using System.Linq;
+using XenAdmin.Core;
 
 namespace XenAdmin.Actions
 {
@@ -49,8 +50,10 @@ namespace XenAdmin.Actions
         private readonly string diagnosticDomainName = "https://cis.citrix.com";
        
         public GetHealthCheckAnalysisResultAction(Pool pool, bool suppressHistory)
-            : base(pool.Connection, Messages.ACTION_GET_HEALTH_CHECK_RESULT, Messages.ACTION_GET_HEALTH_CHECK_RESULT_PROGRESS, suppressHistory)
+            : base(pool.Connection, "", Messages.ACTION_GET_HEALTH_CHECK_RESULT_PROGRESS, suppressHistory)
         {
+            Title = string.Format(Messages.ACTION_GET_HEALTH_CHECK_RESULT, BrandManager.Cis);
+
             #region RBAC Dependencies
             ApiMethodsToRoleCheck.Add("secret.get_by_uuid");
             ApiMethodsToRoleCheck.Add("secret.get_value");

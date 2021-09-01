@@ -63,13 +63,13 @@ namespace XenAdmin.Commands
             : base(mainWindow, vm, parent)
         {
         }
-        protected override void Execute(List<VM> vms)
+        protected override void Run(List<VM> vms)
         {
             CancelAllTasks(vms);
             RunAction(vms, Messages.ACTION_VMS_SHUTTING_DOWN_TITLE, Messages.ACTION_VMS_SHUTTING_DOWN_TITLE, Messages.ACTION_VM_SHUT_DOWN, null);
         }
 
-        protected override bool CanExecute(VM vm)
+        protected override bool CanRun(VM vm)
         {
             if (vm != null && !vm.Locked && !vm.is_a_template)
             {
@@ -218,13 +218,13 @@ namespace XenAdmin.Commands
             get { return "WarningVmLifeCycleForceShutDown"; }
         }
 
-        protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantExecuteReasons)
+        protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantRunReasons)
         {
             foreach (VM vm in GetSelection().AsXenObjects<VM>())
             {
-                if (!CanExecute(vm) && vm.power_state != vm_power_state.Halted)
+                if (!CanRun(vm) && vm.power_state != vm_power_state.Halted)
                 {
-                    return new CommandErrorDialog(Messages.ERROR_DIALOG_FORCE_SHUTDOWN_VM_TITLE, Messages.ERROR_DIALOG_FORCE_SHUTDOWN_VM_TEXT, cantExecuteReasons);
+                    return new CommandErrorDialog(Messages.ERROR_DIALOG_FORCE_SHUTDOWN_VM_TITLE, Messages.ERROR_DIALOG_FORCE_SHUTDOWN_VM_TEXT, cantRunReasons);
                 }
             }
             return null;
@@ -239,7 +239,7 @@ namespace XenAdmin.Commands
         {
             get
             {
-                return CanExecute() && GetSelection().AllItemsAre<VM>(ShowOnMainToolBarInternal);
+                return CanRun() && GetSelection().AllItemsAre<VM>(ShowOnMainToolBarInternal);
             }
         }
 

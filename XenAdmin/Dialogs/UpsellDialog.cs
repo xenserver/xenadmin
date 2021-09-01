@@ -30,18 +30,35 @@
  */
 
 
+using System;
+using System.Windows.Forms;
+using XenAdmin.Core;
+
 namespace XenAdmin.Dialogs
 {
     public partial class UpsellDialog : XenDialogBase
     {
-        public UpsellDialog(string blurb, string learnMoreUrl)
+        public UpsellDialog(string blurb)
         {
             InitializeComponent();
             upsellPage1.BlurbText = blurb;
-            upsellPage1.LearnMoreUrl = learnMoreUrl;
             upsellPage1.enableOkButton();
-            this.CancelButton = upsellPage1.OKButton;
+            CancelButton = upsellPage1.OKButton;
             Height = upsellPage1.Height;
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            Text = BrandManager.BrandConsole;
+        }
+
+        public static void ShowUpsellDialog(string message, IWin32Window parent)
+        {
+            using (var upsellDialog = new UpsellDialog(HiddenFeatures.LinkLabelHidden
+                    ? message
+                    : message + string.Format(Messages.UPSELL_BLURB_TRIAL, BrandManager.ProductBrand)))
+                upsellDialog.ShowDialog(parent);
         }
     }  
 }

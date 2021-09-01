@@ -43,8 +43,6 @@ namespace XenAdmin.Controls
 {
     public partial class UpsellPage : UserControl, IEditPage
     {
-        private string learnMoreUrl;
-
         public UpsellPage()
         {
             InitializeComponent();
@@ -58,17 +56,16 @@ namespace XenAdmin.Controls
 
         public string BlurbText
         {
-            set => Blurb.Text = value;
+            set => Blurb.Text = HiddenFeatures.LinkLabelHidden
+                ? value
+                : value + string.Format(Messages.UPSELL_BLURB_TRIAL, BrandManager.ProductBrand);
         }
 
-        public string LearnMoreUrl
-        {
-            set => learnMoreUrl = value;
-        }
+        public string LearnMoreUrl { private get; set; } = InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL;
 
         private void LearnMoreButton_Clicked(object sender, EventArgs e)
         {
-            NavigateTo(learnMoreUrl);
+            NavigateTo(LearnMoreUrl);
         }
 
         private void NavigateTo(string url)
@@ -95,6 +92,10 @@ namespace XenAdmin.Controls
         {
         }
 
+        public void HideLocalValidationMessages()
+        {
+        }
+
         public void Cleanup()
         {
         }
@@ -108,7 +109,7 @@ namespace XenAdmin.Controls
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public Image Image { get; set; } = Images.StaticImages.upsell_16;
+        public Image Image { get; set; } = Images.StaticImages.Logo; //serving as default value; never really shown
 
         #endregion
 

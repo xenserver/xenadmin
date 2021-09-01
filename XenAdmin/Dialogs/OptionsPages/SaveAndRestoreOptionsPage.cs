@@ -40,17 +40,18 @@ using XenAdmin.Dialogs.RestoreSession;
 namespace XenAdmin.Dialogs.OptionsPages
 {
     /// <summary>
-    /// The page is used to set whether or not to save server usernames and passwords and whether a master password should be set to protect these passwords
+    /// The page is used to set whether or not to save server usernames and passwords and whether a coordinator password should be set to protect these passwords
     /// </summary>
     public partial class SaveAndRestoreOptionsPage : UserControl, IOptionsPage
     {
-        private byte[] TemporaryMasterPassword;
+        private byte[] TemporaryMainPassword;
         // call save serverlist on OK
         protected internal bool SaveAllAfter { get; set; }
 
         public SaveAndRestoreOptionsPage() 
         {
             InitializeComponent();
+            saveStateLabel.Text = string.Format(saveStateLabel.Text, BrandManager.BrandConsole);
         }
 
         // all prompts for old password should have been made
@@ -66,15 +67,15 @@ namespace XenAdmin.Dialogs.OptionsPages
                 Properties.Settings.Default.SaveSession = false;
                 Properties.Settings.Default.RequirePass = false;
 
-                Program.MasterPassword = null;
+                Program.MainPassword = null;
             }
-            else if (!requireMasterPasswordCheckBox.Checked)
+            else if (!requireMainPasswordCheckBox.Checked)
             {
                 // we need to save stuff but without a password
                 Properties.Settings.Default.SaveSession = true;
                 Properties.Settings.Default.RequirePass = false;
 
-                Program.MasterPassword = null;
+                Program.MainPassword = null;
             }
             else
             {
@@ -83,11 +84,12 @@ namespace XenAdmin.Dialogs.OptionsPages
                 Properties.Settings.Default.RequirePass = true;
 
                 // set password
-                if (Program.MasterPassword != TemporaryMasterPassword) 
+                if (Program.MainPassword != TemporaryMainPassword) 
                 {
-                    Program.MasterPassword = TemporaryMasterPassword;
-                    new ActionBase(Messages.CHANGED_MASTER_PASSWORD,
-                        Messages.CHANGED_MASTER_PASSWORD_LONG, false, true);
+                    Program.MainPassword = TemporaryMainPassword;
+                    new ActionBase(string.Format(Messages.CHANGED_MAIN_PASSWORD, BrandManager.BrandConsole),
+                        string.Format(Messages.CHANGED_MAIN_PASSWORD_LONG, BrandManager.BrandConsole),
+                        false, true);
                 }
             }
             if (SaveAllAfter)
@@ -96,51 +98,51 @@ namespace XenAdmin.Dialogs.OptionsPages
         
         #region Control event handlers
 
-        private void changeMasterPasswordButton_Click(object sender, EventArgs e)
+        private void changeMainPasswordButton_Click(object sender, EventArgs e)
         {
             // tell the dialog what to use as the "current" password
-            using (var changePassword = new ChangeMasterPasswordDialog(TemporaryMasterPassword))
+            using (var changePassword = new ChangeMainPasswordDialog(TemporaryMainPassword))
             {
                 if (changePassword.ShowDialog(this) == DialogResult.OK)
                 {
                     // password has been successfully changed
-                    TemporaryMasterPassword = changePassword.NewPassword;
+                    TemporaryMainPassword = changePassword.NewPassword;
                 }
             }
         }
 
-        private void requireMasterPasswordCheckBox_Click(object sender, EventArgs e)
+        private void requireMainPasswordCheckBox_Click(object sender, EventArgs e)
         {
-            // requireMasterPasswordCheckBox.Checked was the state before the click
+            // requireCoordinatorPasswordCheckBox.Checked was the state before the click
             // if previously checked, the user is trying to clear it => request authorization
             // if previously unchecked, the user is trying to set a password
 
-            if (requireMasterPasswordCheckBox.Checked)
+            if (requireMainPasswordCheckBox.Checked)
             {
-                using (var enterPassword = new EnterMasterPasswordDialog(TemporaryMasterPassword))
+                using (var enterPassword = new EnterMainPasswordDialog(TemporaryMainPassword))
                 {
                     if (enterPassword.ShowDialog(this) == DialogResult.OK)
                     {
-                        TemporaryMasterPassword = null;
-                        requireMasterPasswordCheckBox.Checked = false;
-                        changeMasterPasswordButton.Enabled = false;
+                        TemporaryMainPassword = null;
+                        requireMainPasswordCheckBox.Checked = false;
+                        changeMainPasswordButton.Enabled = false;
                     }
                 }
             }
             else
             {
-                System.Diagnostics.Debug.Assert(TemporaryMasterPassword == null, "Master password is set, but not reflected on GUI");
+                System.Diagnostics.Debug.Assert(TemporaryMainPassword == null, "Main password is set, but not reflected on GUI");
 
-                if (TemporaryMasterPassword == null)
+                if (TemporaryMainPassword == null)
                 {
                     // no previous password existed => set a new one
-                    using (var setPassword = new SetMasterPasswordDialog())
+                    using (var setPassword = new SetMainPasswordDialog())
                     {
                         if (setPassword.ShowDialog(this) == DialogResult.OK)
                         {
-                            TemporaryMasterPassword = setPassword.NewPassword;
-                            requireMasterPasswordCheckBox.Checked = true;
-                            changeMasterPasswordButton.Enabled = true;
+                            TemporaryMainPassword = setPassword.NewPassword;
+                            requireMainPasswordCheckBox.Checked = true;
+                            changeMainPasswordButton.Enabled = true;
                         }
                     }
                 }
@@ -148,8 +150,8 @@ namespace XenAdmin.Dialogs.OptionsPages
                 {
                     // a previous password existed (should never get here but just in case)
                     // enable button to facilitate password change
-                    requireMasterPasswordCheckBox.Checked = true;
-                    changeMasterPasswordButton.Enabled = true;
+                    requireMainPasswordCheckBox.Checked = true;
+                    changeMainPasswordButton.Enabled = true;
                 }
             }
         }
@@ -157,30 +159,30 @@ namespace XenAdmin.Dialogs.OptionsPages
         private void saveStateCheckBox_Click(object sender, EventArgs e)
         {
             // need to prevent the user from going to an open terminal and clearing
-            // the save state, then setting the master password to anything they like
+            // the save state, then setting the coordinator password to anything they like
 
             // saveStateCheckBox.Checked was the state before the click
             // if previously checked, the user is trying to clear it => authorization maybe required
-            // (depending on the state of the requireMasterPasswordCheckBox; this should be cleared too if checked)
+            // (depending on the state of the requireCoordinatorPasswordCheckBox; this should be cleared too if checked)
 
-            if (saveStateCheckBox.Checked && requireMasterPasswordCheckBox.Checked)
+            if (saveStateCheckBox.Checked && requireMainPasswordCheckBox.Checked)
             {
-                using (var enterPassword = new EnterMasterPasswordDialog(TemporaryMasterPassword))
+                using (var enterPassword = new EnterMainPasswordDialog(TemporaryMainPassword))
                 {
                     if (enterPassword.ShowDialog(this) == DialogResult.OK)
                     {
-                        TemporaryMasterPassword = null;
+                        TemporaryMainPassword = null;
                         saveStateCheckBox.Checked = false;
-                        requireMasterPasswordCheckBox.Checked = false;
-                        masterPasswordGroupBox.Enabled = false;
+                        requireMainPasswordCheckBox.Checked = false;
+                        mainPasswordGroupBox.Enabled = false;
                     }
                 }
             }
             else
             {
                 saveStateCheckBox.Checked = !saveStateCheckBox.Checked;
-                masterPasswordGroupBox.Enabled = saveStateCheckBox.Checked;
-                changeMasterPasswordButton.Enabled = requireMasterPasswordCheckBox.Checked;
+                mainPasswordGroupBox.Enabled = saveStateCheckBox.Checked;
+                changeMainPasswordButton.Enabled = requireMainPasswordCheckBox.Checked;
             }
         }
 
@@ -199,14 +201,14 @@ namespace XenAdmin.Dialogs.OptionsPages
             
             // use the SaveSession variable to denote whether to save passwords or not
             saveStateCheckBox.Checked = saveSession && allowCredSave;
-            masterPasswordGroupBox.Enabled = saveSession && allowCredSave;
+            mainPasswordGroupBox.Enabled = saveSession && allowCredSave;
             
-            // use the RequirePass variable to say if a master password has been set
-            requireMasterPasswordCheckBox.Checked = reqPass && Program.MasterPassword != null && allowCredSave;
-            changeMasterPasswordButton.Enabled = reqPass && Program.MasterPassword != null && allowCredSave;
+            // use the RequirePass variable to say if a main password has been set
+            requireMainPasswordCheckBox.Checked = reqPass && Program.MainPassword != null && allowCredSave;
+            changeMainPasswordButton.Enabled = reqPass && Program.MainPassword != null && allowCredSave;
             
-            // the temporary password starts as the MasterPassword
-            TemporaryMasterPassword = Program.MasterPassword;
+            // the temporary password starts as the MainPassword
+            TemporaryMainPassword = Program.MainPassword;
         }
 
         public bool IsValidToSave()
@@ -217,7 +219,11 @@ namespace XenAdmin.Dialogs.OptionsPages
         public void ShowValidationMessages()
         {
         }
-        
+
+        public void HideValidationMessages()
+        {
+        }
+
         public void Save()
         {
             SaveEverything();

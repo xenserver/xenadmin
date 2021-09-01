@@ -56,13 +56,9 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public List<Problem> PrecheckProblemsActuallyResolved { private get; set; }
         public List<Pool> SelectedPools { private get; set; }
-        public bool ApplyUpdatesToNewVersion { get; set; }
         public Status Status { get; private set; }
 
-        protected bool IsSuccess
-        {
-            get { return _thisPageIsCompleted && !failedWorkers.Any(); }
-        }
+        protected bool IsSuccess => _thisPageIsCompleted && !failedWorkers.Any();
 
         private List<UpdateProgressBackgroundWorker> backgroundWorkers = new List<UpdateProgressBackgroundWorker>();
         private List<UpdateProgressBackgroundWorker> failedWorkers = new List<UpdateProgressBackgroundWorker>();
@@ -543,7 +539,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             using (var dlg = new WarningDialog(string.Format(skippableWorkers.Count > 1 ? Messages.MESSAGEBOX_SKIP_RPU_STEPS : Messages.MESSAGEBOX_SKIP_RPU_STEP, msg),
                     ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
-                {WindowTitle = ParentForm != null ? ParentForm.Text : Messages.XENCENTER})
+                {WindowTitle = ParentForm != null ? ParentForm.Text : BrandManager.BrandConsole})
             {
                 if (dlg.ShowDialog(this) != DialogResult.Yes)
                     return;
@@ -595,7 +591,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 if (!uploadedPatches.Contains(patch))
                 {
                     planActionsPerHost.Add(new DownloadPatchPlanAction(host.Connection, patch, AllDownloadedPatches, patchFromDisk));
-                    planActionsPerHost.Add(new UploadPatchToMasterPlanAction(this, host.Connection, patch, patchMappings, AllDownloadedPatches, patchFromDisk, true));
+                    planActionsPerHost.Add(new UploadPatchToCoordinatorPlanAction(this, host.Connection, patch, patchMappings, AllDownloadedPatches, patchFromDisk, true));
                     uploadedPatches.Add(patch);
                 }
 
@@ -632,9 +628,9 @@ namespace XenAdmin.Wizards.PatchingWizard
                 var isLastHostInPool = hosts.IndexOf(host) == hosts.Count - 1;
                 if (isLastHostInPool)
                 {
-                    // add cleanup action for current patch at the end of the update seuence for the last host in the pool
-                    var master = Helpers.GetMaster(host.Connection);
-                    planActionsPerHost.Add(new RemoveUpdateFileFromMasterPlanAction(master, patchMappings, patch));
+                    // add cleanup action for current patch at the end of the update sequence for the last host in the pool
+                    var coordinator = Helpers.GetCoordinator(host.Connection);
+                    planActionsPerHost.Add(new RemoveUpdateFileFromCoordinatorPlanAction(coordinator, patchMappings, patch));
                 }
             }
 

@@ -1,7 +1,7 @@
 XenCenter
 =========
 
-[![Build Status](https://travis-ci.org/xenserver/xenadmin.svg?branch=master)](https://travis-ci.org/xenserver/xenadmin)
+![Checks](https://github.com/xenserver/xenadmin/actions/workflows/main.yml/badge.svg)
 [![Lines of Code](https://tokei.rs/b1/github/xenserver/xenadmin)](https://github.com/xenserver/xenadmin)
 
 This repository contains the source code for XenCenter.

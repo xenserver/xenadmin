@@ -33,6 +33,7 @@ using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading;
+using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;
 
@@ -336,11 +337,11 @@ namespace XenAdmin.Dialogs
                     if (XenObject.Connection.Cache.Hosts.All(h => h.EnterpriseFeaturesEnabled()))
                         return Messages.LICENSE_SUPPORT_AND_ENTERPRISE_FEATURES_ENABLED;
                     if (XenObject.Connection.Cache.Hosts.All(h => h.DesktopPlusFeaturesEnabled()))
-                        return Messages.LICENSE_SUPPORT_AND_DESKTOP_PLUS_FEATURES_ENABLED;
+                        return string.Format(Messages.LICENSE_SUPPORT_AND_DESKTOP_PLUS_FEATURES_ENABLED, BrandManager.CompanyNameShort);
                     if (XenObject.Connection.Cache.Hosts.All(h => h.DesktopFeaturesEnabled()))
-                        return Messages.LICENSE_SUPPORT_AND_DESKTOP_FEATURES_ENABLED;
+                        return string.Format(Messages.LICENSE_SUPPORT_AND_DESKTOP_FEATURES_ENABLED, BrandManager.CompanyNameShort);
                     if (XenObject.Connection.Cache.Hosts.All(h => h.DesktopCloudFeaturesEnabled()))
-                        return Messages.LICENSE_SUPPORT_AND_DESKTOP_CLOUD_FEATURES_ENABLED;
+                        return string.Format(Messages.LICENSE_SUPPORT_AND_DESKTOP_CLOUD_FEATURES_ENABLED, BrandManager.CompanyNameShort);
                     if (XenObject.Connection.Cache.Hosts.All(h => h.PremiumFeaturesEnabled()))
                         return Messages.LICENSE_SUPPORT_AND_PREMIUM_FEATURES_ENABLED;
                     if (XenObject.Connection.Cache.Hosts.All(h => h.StandardFeaturesEnabled()))

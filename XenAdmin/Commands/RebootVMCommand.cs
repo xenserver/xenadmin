@@ -70,7 +70,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override bool CanExecute(VM vm)
+        protected override bool CanRun(VM vm)
         {
             ReadOnlyCollection<SelectedItem> selection = GetSelection();
 
@@ -91,7 +91,7 @@ namespace XenAdmin.Commands
             return false;
         }
 
-        protected override void Execute(List<VM> vms)
+        protected override void Run(List<VM> vms)
         {
             RunAction(vms, Messages.ACTION_VMS_REBOOTING_TITLE, Messages.ACTION_VMS_REBOOTING_TITLE, Messages.ACTION_VM_REBOOTED, null);
         }
@@ -110,21 +110,21 @@ namespace XenAdmin.Commands
 
         protected override string ConfirmationDialogHelpId => "WarningVmLifeCycleReboot";
 
-        protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantExecuteReasons)
+        protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantRunReasons)
         {
-            return new CommandErrorDialog(Messages.ERROR_DIALOG_REBOOT_VM_TITLE, Messages.ERROR_DIALOG_REBOOT_VM_TEXT, cantExecuteReasons);
+            return new CommandErrorDialog(Messages.ERROR_DIALOG_REBOOT_VM_TITLE, Messages.ERROR_DIALOG_REBOOT_VM_TEXT, cantRunReasons);
         }
 
         public override Keys ShortcutKeys => Keys.Control | Keys.R;
 
         public override string ShortcutKeyDisplayString => Messages.MAINWINDOW_CTRL_R;
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
             VM vm = item as VM;
             if (vm == null)
             {
-                return base.GetCantExecuteReasonCore(item);
+                return base.GetCantRunReasonCore(item);
             }
 
             switch (vm.power_state)
@@ -136,10 +136,10 @@ namespace XenAdmin.Commands
                 case vm_power_state.Suspended:
                     return Messages.VM_SUSPENDED;
                 case vm_power_state.unknown:
-                    return base.GetCantExecuteReasonCore(item);
+                    return base.GetCantRunReasonCore(item);
             }
 
-            return GetCantExecuteNoToolsOrDriversReasonCore(item) ?? base.GetCantExecuteReasonCore(item);
+            return GetCantRunNoToolsOrDriversReasonCore(item) ?? base.GetCantRunReasonCore(item);
         }
 
         protected override AsyncAction BuildAction(VM vm)

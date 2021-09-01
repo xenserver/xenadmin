@@ -34,6 +34,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using XenAdmin.Core;
 using XenAdmin.Wizards.PatchingWizard.PlanActions;
 using XenAPI;
 
@@ -101,7 +102,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         protected override string BlurbText()
         {
-            return string.Format(Messages.PATCHINGWIZARD_SINGLEUPDATE_TITLE, GetUpdateName());
+            return string.Format(Messages.PATCHINGWIZARD_SINGLEUPDATE_TITLE, BrandManager.BrandConsole, GetUpdateName());
         }
 
         protected override string SuccessMessageOnCompletion(bool multiplePools)
@@ -196,7 +197,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         private List<HostPlan> CompileManualHostPlan(Pool pool, out List<Host> applicableHosts)
         {
             var poolHosts = pool.Connection.Cache.Hosts.ToList();
-            SelectedServers.Sort(); //master first and then the slaves
+            SelectedServers.Sort(); //coordinator first and then the supporters
             var hostplans = new List<HostPlan>();
 
             if (SelectedUpdateType == UpdateType.ISO)
@@ -248,7 +249,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         private List<HostPlan> CompileAutomaticHostPlan(Pool pool, out List<Host> applicableHosts)
         {
             var poolHosts = pool.Connection.Cache.Hosts.ToList();
-            SelectedServers.Sort(); //master first and then the slaves
+            SelectedServers.Sort(); //coordinator first and then the supporters
             var hostplans = new List<HostPlan>();
 
             if (SelectedUpdateType == UpdateType.ISO)

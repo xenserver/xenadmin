@@ -53,7 +53,7 @@ namespace XenAdmin.Commands
             _nodes = nodes;
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             foreach (VirtualTreeNode node in _nodes)
             {
@@ -61,7 +61,7 @@ namespace XenAdmin.Commands
             }
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             return SomeCollapsedNodes(_nodes);
         }

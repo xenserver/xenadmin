@@ -187,13 +187,13 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="saveStateLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>458, 30</value>
+    <value>443, 30</value>
   </data>
   <data name="saveStateLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="saveStateLabel.Text" xml:space="preserve">
-    <value>[XenCenter] can remember login credentials for your managed servers and use them to automatically restore the connection state of your servers when you start a session.</value>
+    <value>{0} can remember login credentials for your managed servers and use them to automatically restore the connection state of your servers when you start a session.</value>
   </data>
   <data name="&gt;&gt;saveStateLabel.Name" xml:space="preserve">
     <value>saveStateLabel</value>
@@ -207,128 +207,128 @@
   <data name="&gt;&gt;saveStateLabel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="masterPasswordGroupBox.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+  <data name="mainPasswordGroupBox.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
   <data name="tableLayoutPanel2.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="masterPasswordLabel.AutoSize" type="System.Boolean, mscorlib">
+  <data name="mainPasswordLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="masterPasswordLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="mainPasswordLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="masterPasswordLabel.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="mainPasswordLabel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="masterPasswordLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="mainPasswordLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="masterPasswordLabel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="mainPasswordLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="masterPasswordLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="mainPasswordLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="masterPasswordLabel.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="mainPasswordLabel.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 5</value>
   </data>
-  <data name="masterPasswordLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mainPasswordLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>446, 35</value>
   </data>
-  <data name="masterPasswordLabel.TabIndex" type="System.Int32, mscorlib">
+  <data name="mainPasswordLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="masterPasswordLabel.Text" xml:space="preserve">
-    <value>When set, the master password protects all your server login credentials. You will need to enter this password at the beginning of each session.
+  <data name="mainPasswordLabel.Text" xml:space="preserve">
+    <value>When set, the main password protects all your server login credentials. You will need to enter this password at the beginning of each session.
 </value>
   </data>
-  <data name="&gt;&gt;masterPasswordLabel.Name" xml:space="preserve">
-    <value>masterPasswordLabel</value>
+  <data name="&gt;&gt;mainPasswordLabel.Name" xml:space="preserve">
+    <value>mainPasswordLabel</value>
   </data>
-  <data name="&gt;&gt;masterPasswordLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;mainPasswordLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;masterPasswordLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;mainPasswordLabel.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;masterPasswordLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;mainPasswordLabel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="changeMasterPasswordButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="changeMainPasswordButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
-  <data name="changeMasterPasswordButton.AutoSize" type="System.Boolean, mscorlib">
+  <data name="changeMainPasswordButton.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="changeMasterPasswordButton.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+  <data name="changeMainPasswordButton.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
-  <data name="changeMasterPasswordButton.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="changeMainPasswordButton.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="changeMasterPasswordButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="changeMainPasswordButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="changeMasterPasswordButton.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="changeMainPasswordButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>284, 47</value>
   </data>
-  <data name="changeMasterPasswordButton.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="changeMainPasswordButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>159, 25</value>
   </data>
-  <data name="changeMasterPasswordButton.TabIndex" type="System.Int32, mscorlib">
+  <data name="changeMainPasswordButton.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="changeMasterPasswordButton.Text" xml:space="preserve">
-    <value>&amp;Change Master Password...</value>
+  <data name="changeMainPasswordButton.Text" xml:space="preserve">
+    <value>&amp;Change Main Password...</value>
   </data>
-  <data name="&gt;&gt;changeMasterPasswordButton.Name" xml:space="preserve">
-    <value>changeMasterPasswordButton</value>
+  <data name="&gt;&gt;changeMainPasswordButton.Name" xml:space="preserve">
+    <value>changeMainPasswordButton</value>
   </data>
-  <data name="&gt;&gt;changeMasterPasswordButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;changeMainPasswordButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;changeMasterPasswordButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;changeMainPasswordButton.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;changeMasterPasswordButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;changeMainPasswordButton.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="requireMasterPasswordCheckBox.AutoSize" type="System.Boolean, mscorlib">
+  <data name="requireMainPasswordCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="requireMasterPasswordCheckBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="requireMainPasswordCheckBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Bottom</value>
   </data>
-  <data name="requireMasterPasswordCheckBox.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="requireMainPasswordCheckBox.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="requireMasterPasswordCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="requireMainPasswordCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="requireMasterPasswordCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="requireMainPasswordCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 53</value>
   </data>
-  <data name="requireMasterPasswordCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="requireMainPasswordCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>275, 19</value>
   </data>
-  <data name="requireMasterPasswordCheckBox.TabIndex" type="System.Int32, mscorlib">
+  <data name="requireMainPasswordCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="requireMasterPasswordCheckBox.Text" xml:space="preserve">
-    <value>&amp;Require a master password</value>
+  <data name="requireMainPasswordCheckBox.Text" xml:space="preserve">
+    <value>&amp;Require a main password</value>
   </data>
-  <data name="&gt;&gt;requireMasterPasswordCheckBox.Name" xml:space="preserve">
-    <value>requireMasterPasswordCheckBox</value>
+  <data name="&gt;&gt;requireMainPasswordCheckBox.Name" xml:space="preserve">
+    <value>requireMainPasswordCheckBox</value>
   </data>
-  <data name="&gt;&gt;requireMasterPasswordCheckBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;requireMainPasswordCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;requireMasterPasswordCheckBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;requireMainPasswordCheckBox.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;requireMasterPasswordCheckBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;requireMainPasswordCheckBox.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="tableLayoutPanel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -356,48 +356,48 @@
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel2.Parent" xml:space="preserve">
-    <value>masterPasswordGroupBox</value>
+    <value>mainPasswordGroupBox</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="masterPasswordLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="changeMasterPasswordButton" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="requireMasterPasswordCheckBox" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="mainPasswordLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="changeMainPasswordButton" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="requireMainPasswordCheckBox" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
-  <data name="masterPasswordGroupBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="mainPasswordGroupBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="masterPasswordGroupBox.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="mainPasswordGroupBox.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="masterPasswordGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="mainPasswordGroupBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 73</value>
   </data>
-  <data name="masterPasswordGroupBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="mainPasswordGroupBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 5, 3, 10</value>
   </data>
-  <data name="masterPasswordGroupBox.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="mainPasswordGroupBox.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>7, 7, 7, 7</value>
   </data>
-  <data name="masterPasswordGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mainPasswordGroupBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>460, 105</value>
   </data>
-  <data name="masterPasswordGroupBox.TabIndex" type="System.Int32, mscorlib">
+  <data name="mainPasswordGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="masterPasswordGroupBox.Text" xml:space="preserve">
-    <value>Master password</value>
+  <data name="mainPasswordGroupBox.Text" xml:space="preserve">
+    <value>Main password</value>
   </data>
-  <data name="&gt;&gt;masterPasswordGroupBox.Name" xml:space="preserve">
-    <value>masterPasswordGroupBox</value>
+  <data name="&gt;&gt;mainPasswordGroupBox.Name" xml:space="preserve">
+    <value>mainPasswordGroupBox</value>
   </data>
-  <data name="&gt;&gt;masterPasswordGroupBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;mainPasswordGroupBox.Type" xml:space="preserve">
     <value>XenAdmin.Controls.DecentGroupBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;masterPasswordGroupBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;mainPasswordGroupBox.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;masterPasswordGroupBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;mainPasswordGroupBox.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -431,7 +431,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="saveStateCheckBox" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="saveStateLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="masterPasswordGroupBox" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="saveStateCheckBox" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="saveStateLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="mainPasswordGroupBox" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

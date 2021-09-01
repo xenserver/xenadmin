@@ -47,7 +47,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override bool CanExecuteCore()
+        protected override bool CanRunCore()
         {
             Folder targetFolder = GetTargetNodeAncestorAsXenObjectOrGroupingTag<Folder>();
 
@@ -157,7 +157,7 @@ namespace XenAdmin.Commands
             return output;
         }
 
-        protected override void ExecuteCore()
+        protected override void RunCore()
         {
             Folder targetFolder = GetTargetNodeAncestorAsXenObjectOrGroupingTag<Folder>();
 

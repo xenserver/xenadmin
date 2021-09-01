@@ -73,12 +73,12 @@ namespace XenAdmin.Actions
         {
             log.DebugFormat("Repairing SR='{0}'", SR.Name());
 
-            //CA-176935, CA-173497 - we need to run Plug for the master first - creating a new list of hosts where the master is always first
+            //CA-176935, CA-173497 - we need to run Plug for the coordinator first - creating a new list of hosts where the coordinator is always first
             var allHosts = new List<Host>();
             
-            var master = Helpers.GetMaster(Connection);
-            if (master != null)
-                allHosts.Add(master);
+            var coordinator = Helpers.GetCoordinator(Connection);
+            if (coordinator != null)
+                allHosts.Add(coordinator);
             
             foreach (var host in Connection.Cache.Hosts)
                 if (!allHosts.Contains(host))

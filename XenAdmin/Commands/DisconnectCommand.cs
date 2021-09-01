@@ -65,26 +65,26 @@ namespace XenAdmin.Commands
             _connection = connection;
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             return _connection != null && (_connection.IsConnected || _connection.InProgress);
         }
 
         /// <summary>
-        /// Executes this instance.
+        /// Runs this instance.
         /// </summary>
         /// <returns>false if the user cancels the disconnect.</returns>
-        public new bool Execute()
+        public new bool Run()
         {
-            return CanExecute() && Execute(_connection, _prompt);
+            return CanRun() && Run(_connection, _prompt);
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
-            Execute(_connection, _prompt);
+            Run(_connection, _prompt);
         }
 
-        private bool Execute(IXenConnection connection, bool prompt)
+        private bool Run(IXenConnection connection, bool prompt)
         {
             if (prompt)
             {
@@ -145,7 +145,7 @@ namespace XenAdmin.Commands
             string msg = string.Format(Messages.CONNECTION_CLOSED_NOTICE_TEXT, connection.Hostname);
             ActionBase notice = new ActionBase(msg, msg, false, true);
             notice.Pool = Helpers.GetPoolOfOne(connection);
-            notice.Host = Helpers.GetMaster(connection);
+            notice.Host = Helpers.GetCoordinator(connection);
             log.Warn($"Connection to {connection.Hostname} closed.");
 
             MainWindowCommandInterface.CloseActiveWizards(connection);

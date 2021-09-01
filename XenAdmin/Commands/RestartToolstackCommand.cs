@@ -31,8 +31,8 @@
 
 using System.Collections.Generic;
 using System.Linq;
-
 using XenAdmin.Actions;
+using XenAdmin.Core;
 using XenAPI;
 
 
@@ -56,7 +56,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             var actions = new List<AsyncAction>();
             var liveHosts = selection.AsXenObjects<Host>().Where(h => h.IsLive());
@@ -70,38 +70,29 @@ namespace XenAdmin.Commands
             RunMultipleActions(actions, null, Messages.ACTION_TOOLSTACK_RESTARTING, Messages.ACTION_TOOLSTACK_RESTARTED, true);
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             return selection.AllItemsAre<Host>() && selection.Any(item => ((Host)item.XenObject).IsLive());
         }
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
             Host host = item as Host;
             
             if (host == null)
-                return base.GetCantExecuteReasonCore(item);
+                return base.GetCantRunReasonCore(item);
 
             if (!host.IsLive())
                 return Messages.HOST_NOT_LIVE;
 
-            return base.GetCantExecuteReasonCore(item);
+            return base.GetCantRunReasonCore(item);
         }
 
-        public override string MenuText
-        {
-            get { return Messages.MAINWINDOW_RESTART_TOOLSTACK; }
-        }
+        public override string MenuText => Messages.MAINWINDOW_RESTART_TOOLSTACK;
 
-        public override string ContextMenuText
-        {
-            get { return Messages.MAINWINDOW_RESTART_TOOLSTACK; }
-        }
+        public override string ContextMenuText => Messages.MAINWINDOW_RESTART_TOOLSTACK;
 
-        protected override bool ConfirmationRequired
-        {
-            get { return true; }
-        }
+        protected override bool ConfirmationRequired => true;
 
         protected override string ConfirmationDialogText
         {
@@ -110,14 +101,11 @@ namespace XenAdmin.Commands
                 List<Host> hosts = GetSelection().AsXenObjects<Host>();
 
                 return hosts.Count == 1
-                           ? string.Format(Messages.CONFIRM_RESTART_TOOLSTACK_ONE_SERVER, hosts[0].Name().Ellipsise(30))
-                           : Messages.CONFIRM_RESTART_TOOLSTACK_MANY_SERVERS;
+                           ? string.Format(Messages.CONFIRM_RESTART_TOOLSTACK_ONE_SERVER, hosts[0].Name().Ellipsise(30), BrandManager.BrandConsole)
+                           : string.Format(Messages.CONFIRM_RESTART_TOOLSTACK_MANY_SERVERS, BrandManager.BrandConsole);
             }
         }
 
-        protected override string ConfirmationDialogTitle
-        {
-            get { return Messages.CONFIRM_RESTART_TOOLSTACK_TITLE; }
-        }
+        protected override string ConfirmationDialogTitle => Messages.CONFIRM_RESTART_TOOLSTACK_TITLE;
     }
 }

@@ -57,6 +57,7 @@ namespace XenAdmin.Dialogs.WarningDialogs
             bool foundExistingSR, SR.SRTypes existingSrType, SR.SRTypes requestedSrType)
         {
             InitializeComponent();
+            labelWarning.Text = string.Format(labelWarning.Text, BrandManager.ProductBrand, BrandManager.BrandConsole);
             _connection = connection;
             this.deviceDetails = deviceDetails;
             this.remainingDevicesCount = remainingDevicesCount;
@@ -213,10 +214,10 @@ namespace XenAdmin.Dialogs.WarningDialogs
             if (pool != null)
                 return string.Format(Messages.NEWSR_LUN_IN_USE_ON_POOL, sr.Name(), pool.Name());
             
-            Host master = Helpers.GetMaster(sr.Connection);
+            Host coordinator = Helpers.GetCoordinator(sr.Connection);
             
-            if (master != null)
-                return string.Format(Messages.NEWSR_LUN_IN_USE_ON_SERVER, sr.Name(), master.Name());
+            if (coordinator != null)
+                return string.Format(Messages.NEWSR_LUN_IN_USE_ON_SERVER, sr.Name(), coordinator.Name());
 
             return Messages.NEWSR_LUN_IN_USE;
         }

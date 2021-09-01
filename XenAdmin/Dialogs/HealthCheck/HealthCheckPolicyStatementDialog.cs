@@ -31,6 +31,7 @@
 
 using System;
 using System.Windows.Forms;
+using XenAdmin.Core;
 
 namespace XenAdmin.Dialogs
 {
@@ -41,7 +42,8 @@ namespace XenAdmin.Dialogs
             InitializeComponent();
             string cis_policy = Messages.HEALTH_CHECK_CIS_POLICY_URL;
             string citrix_policy = Messages.HEALTH_CHECK_CITRIX_POLICY_URL;
-            policyStatementTextBox.Text = String.Format(Messages.HEALTH_CHECK_PRIVACY_POLICY, cis_policy, citrix_policy);
+            policyStatementTextBox.Text = string.Format(Messages.HEALTH_CHECK_PRIVACY_POLICY,
+                BrandManager.Cis, cis_policy, BrandManager.CompanyNameShort, citrix_policy);
             policyStatementTextBox.Links.Add(policyStatementTextBox.Text.IndexOf(cis_policy), cis_policy.Length, cis_policy);
             policyStatementTextBox.Links.Add(policyStatementTextBox.Text.IndexOf(citrix_policy), citrix_policy.Length, citrix_policy);
         }

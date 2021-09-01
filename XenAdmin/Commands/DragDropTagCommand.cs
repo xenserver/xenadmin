@@ -54,7 +54,7 @@ namespace XenAdmin.Commands
             }
         }
 
-        protected override bool CanExecuteCore()
+        protected override bool CanRunCore()
         {
             List<IXenObject> draggedObjects = GetDraggedItemsAsXenObjects<IXenObject>();
             GroupingTag gt = GetTargetNodeAncestorAsXenObjectOrGroupingTag<GroupingTag>();
@@ -73,7 +73,7 @@ namespace XenAdmin.Commands
             return false;
         }
 
-        protected override void ExecuteCore()
+        protected override void RunCore()
         {
             string tag = (string)(GetTargetNodeAncestorAsXenObjectOrGroupingTag<GroupingTag>().Group);
             List<IXenObject> objs = GetDraggedItemsAsXenObjects<IXenObject>();

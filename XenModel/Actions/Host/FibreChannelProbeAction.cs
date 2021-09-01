@@ -43,10 +43,10 @@ namespace XenAdmin.Actions
 
         public List<FibreChannelDevice> FibreChannelDevices;
 
-        public FibreChannelProbeAction(Host master, SR.SRTypes srType = SR.SRTypes.lvmohba)
-            : base(master.Connection, string.Format(Messages.PROBING_HBA_TITLE, master.Name()), null, true)
+        public FibreChannelProbeAction(Host coordinator, SR.SRTypes srType = SR.SRTypes.lvmohba)
+            : base(coordinator.Connection, string.Format(Messages.PROBING_HBA_TITLE, coordinator.Name()), null, true)
         {
-            Host = master;
+            Host = coordinator;
             this.srType = srType;
             #region RBAC Dependencies
             ApiMethodsToRoleCheck.Add(srType != SR.SRTypes.gfs2 ? "SR.probe" : "SR.probe_ext");

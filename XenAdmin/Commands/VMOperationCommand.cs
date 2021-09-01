@@ -102,19 +102,19 @@ namespace XenAdmin.Commands
         /// </summary>
         protected abstract Host GetHost(VM vm);
 
-        protected sealed override bool CanExecuteCore(SelectedItemCollection selection)
+        protected sealed override bool CanRunCore(SelectedItemCollection selection)
         {
-            return selection.AllItemsAre<VM>() && selection.AtLeastOneXenObjectCan<VM>(CanExecute);
+            return selection.AllItemsAre<VM>() && selection.AtLeastOneXenObjectCan<VM>(CanRun);
         }
 
         /// <summary>
-        /// Determines whether the specified VM can be executed (i.e. resumed-on, started-on or migrated.)
+        /// Determines whether the specified VM can be run (i.e. resumed-on, started-on or migrated.)
         /// </summary>
-        protected abstract bool CanExecute(VM vm);
+        protected abstract bool CanRun(VM vm);
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
-            AssertOperationAllowsExecution();
+            AssertOperationAllowsRunning();
 
             string title = Messages.ACTION_VMS_RESUMING_ON_TITLE;
             string startDescription = Messages.ACTION_VMS_RESUMING_ON_TITLE;
@@ -127,7 +127,7 @@ namespace XenAdmin.Commands
                 title = Messages.ACTION_VMS_MIGRATING_TITLE;
                 startDescription = Messages.ACTION_VMS_MIGRATING_TITLE;
                 endDescription = Messages.ACTION_VM_MIGRATED;
-                foreach (VM vm in selection.AsXenObjects<VM>(CanExecute))
+                foreach (VM vm in selection.AsXenObjects<VM>(CanRun))
                 {
                     XenDialogBase.CloseAll(vm);
                     Host host = GetHost(vm);
@@ -139,7 +139,7 @@ namespace XenAdmin.Commands
                 title = Messages.ACTION_VMS_STARTING_ON_TITLE;
                 startDescription = Messages.ACTION_VMS_STARTING_ON_TITLE;
                 endDescription = Messages.ACTION_VM_STARTED;
-                foreach (VM vm in selection.AsXenObjects<VM>(CanExecute))
+                foreach (VM vm in selection.AsXenObjects<VM>(CanRun))
                 {
                     Host host = GetHost(vm);
                     actions.Add(new VMStartOnAction(vm, host,WarningDialogHAInvalidConfig, StartDiagnosisForm));
@@ -150,7 +150,7 @@ namespace XenAdmin.Commands
                 title = Messages.ACTION_VMS_RESUMING_ON_TITLE;
                 startDescription = Messages.ACTION_VMS_RESUMING_ON_TITLE;
                 endDescription = Messages.ACTION_VM_RESUMED;
-                foreach (VM vm in selection.AsXenObjects<VM>(CanExecute))
+                foreach (VM vm in selection.AsXenObjects<VM>(CanRun))
                 {
                     Host host = GetHost(vm);
                     actions.Add(new VMResumeOnAction(vm, host, WarningDialogHAInvalidConfig, StartDiagnosisForm));
@@ -160,7 +160,7 @@ namespace XenAdmin.Commands
             RunMultipleActions(actions, title, startDescription, endDescription, true);
         }
 
-        private void AssertOperationAllowsExecution()
+        private void AssertOperationAllowsRunning()
         {
             if(_operation == vm_operations.unknown)
                 throw new NotSupportedException("VM operation unknown is not supported");

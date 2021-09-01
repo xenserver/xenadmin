@@ -59,7 +59,7 @@ namespace XenAdmin.Commands
             return result;
         }
 
-        protected sealed override void ExecuteCore(SelectedItemCollection selection)
+        protected sealed override void RunCore(SelectedItemCollection selection)
         {
             //It only supports one item selected for now
             Trace.Assert(selection.Count==1);
@@ -95,7 +95,7 @@ namespace XenAdmin.Commands
                     return;
                 }
 
-                string message = string.Format(will_disturb_secondary ? Messages.BOND_DELETE_WILL_DISTURB_BOTH : Messages.BOND_DELETE_WILL_DISTURB_PRIMARY, msg);
+                string message = string.Format(will_disturb_secondary ? Messages.BOND_DELETE_WILL_DISTURB_BOTH : Messages.BOND_DELETE_WILL_DISTURB_PRIMARY, msg, BrandManager.BrandConsole);
 
                 DialogResult result;
                 using (var dlg = new WarningDialog(message,
@@ -138,7 +138,7 @@ namespace XenAdmin.Commands
 
             // The UI shouldn't offer deleting a bond in this case, but let's make sure we've
             // done the right thing and that the bond hasn't been deleted in the meantime. (CA-27436).
-            Bond bond = pif.BondMasterOf();
+            Bond bond = pif.BondInterfaceOf();
             if (bond != null)
                 new Actions.DestroyBondAction(bond).RunAsync();
         }

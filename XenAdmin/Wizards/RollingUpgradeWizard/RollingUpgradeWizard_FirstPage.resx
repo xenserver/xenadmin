@@ -259,7 +259,7 @@
     <value>6</value>
   </data>
   <data name="label7.Text" xml:space="preserve">
-    <value>Before you begin a rolling pool upgrade, [Citrix] strongly recommends that you take a backup of the state of your existing pool using the pool-dump-database CLI command (see the [XenServer product] Administrator's Guide). This will ensure that that you can revert a partially complete rolling upgrade back to its original state without losing any VM data.</value>
+    <value>Before you begin a rolling pool upgrade, {0} strongly recommends that you take a backup of the state of your existing pool using the pool-dump-database CLI command (see the {1} Administrator's Guide). This will ensure that that you can revert a partially complete rolling upgrade back to its original state without losing any VM data.</value>
   </data>
   <data name="&gt;&gt;label7.Name" xml:space="preserve">
     <value>label7</value>
@@ -304,7 +304,7 @@
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
   <data name="labelRunningOnBattery.Location" type="System.Drawing.Point, System.Drawing">
-    <value>42, 210</value>
+    <value>42, 215</value>
   </data>
   <data name="labelRunningOnBattery.Size" type="System.Drawing.Size, System.Drawing">
     <value>533, 34</value>

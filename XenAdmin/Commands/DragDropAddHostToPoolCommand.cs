@@ -44,14 +44,14 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override bool CanExecuteCore()
+        protected override bool CanRunCore()
         {
             Pool targetPool = GetTargetNodeAncestorAsXenObjectOrGroupingTag<Pool>();
             
             if (targetPool != null)
             {
                 AddHostToPoolCommand cmd = new AddHostToPoolCommand(MainWindowCommandInterface, GetDraggedItemsAsXenObjects<Host>(), targetPool, true);
-                return cmd.CanExecute();
+                return cmd.CanRun();
             }
             return false;
         }
@@ -60,7 +60,7 @@ namespace XenAdmin.Commands
         {
             get
             {
-                if (CanExecute())
+                if (CanRun())
                 {
                     Pool targetPool = GetTargetNodeAncestorAsXenObjectOrGroupingTag<Pool>();
                     List<Host> draggedHosts = GetDraggedItemsAsXenObjects<Host>();
@@ -90,14 +90,14 @@ namespace XenAdmin.Commands
         {
             get
             {
-                return CanExecute() ? GetTargetNodeAncestor<Pool>() : null;
+                return CanRun() ? GetTargetNodeAncestor<Pool>() : null;
             }
         }
 
-        protected override void ExecuteCore()
+        protected override void RunCore()
         {
             Pool targetPool = GetTargetNodeAncestorAsXenObjectOrGroupingTag<Pool>();
-            new AddHostToPoolCommand(MainWindowCommandInterface, GetDraggedItemsAsXenObjects<Host>(), targetPool, true).Execute();
+            new AddHostToPoolCommand(MainWindowCommandInterface, GetDraggedItemsAsXenObjects<Host>(), targetPool, true).Run();
         }
     }
 }

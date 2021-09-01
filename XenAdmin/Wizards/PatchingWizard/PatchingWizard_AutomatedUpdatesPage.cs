@@ -77,9 +77,10 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         protected override string BlurbText()
         {
-            return WizardMode == WizardMode.AutomatedUpdates
-                ? Messages.PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_AUTOMATED_MODE
-                : Messages.PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_NEW_VERSION_AUTOMATED_MODE;
+            return string.Format(WizardMode == WizardMode.AutomatedUpdates
+                    ? Messages.PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_AUTOMATED_MODE
+                    : Messages.PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_NEW_VERSION_AUTOMATED_MODE,
+                BrandManager.BrandConsole);
         }
 
         protected override string SuccessMessageOnCompletion(bool multiplePools)
@@ -125,10 +126,8 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         protected override List<HostPlan> GenerateHostPlans(Pool pool, out List<Host> applicableHosts)
         {
-            bool automatedUpdatesRestricted = pool.Connection.Cache.Hosts.Any(Host.RestrictBatchHotfixApply);
-
             var minimalPatches = WizardMode == WizardMode.NewVersion
-                ? Updates.GetMinimalPatches(UpdateAlert, ApplyUpdatesToNewVersion && !automatedUpdatesRestricted)
+                ? Updates.GetMinimalPatches(UpdateAlert, false)
                 : Updates.GetMinimalPatches(pool.Connection);
 
             if (minimalPatches == null)
@@ -139,7 +138,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             var uploadedPatches = new List<XenServerPatch>();
             var hosts = pool.Connection.Cache.Hosts.ToList();
-            hosts.Sort();//master first
+            hosts.Sort(); //coordinator first
 
             applicableHosts = new List<Host>(hosts);
             return hosts.Select(h => GetUpdatePlanActionsForHost(h, hosts, minimalPatches, uploadedPatches, PatchFromDisk)).ToList();

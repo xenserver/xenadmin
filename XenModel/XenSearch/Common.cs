@@ -115,7 +115,7 @@ namespace XenAdmin.XenSearch
         uptime,
         /// <summary>true if HA is enabled, false otherwise</summary>
         ha_enabled,
-        /// <summary>true if at least one of the slaves has different XenServer version from the master, false otherwise</summary>
+        /// <summary>true if at least one of the supporters has different XenServer version from the coordinator, false otherwise</summary>
         isNotFullyUpgraded,
 		/// <summary>A logical set of VMs</summary>
 		appliance,
@@ -207,7 +207,7 @@ namespace XenAdmin.XenSearch
             VirtualisationStatus_i18n[Messages.VIRTUALIZATION_STATE_VM_OPTIMIZED] = VM.VirtualisationStatus.IO_DRIVERS_INSTALLED | VM.VirtualisationStatus.MANAGEMENT_INSTALLED;
 
             ObjectTypes_i18n[Messages.VMS] = ObjectTypes.VM;
-            ObjectTypes_i18n[Messages.XENSERVER_TEMPLATES] = ObjectTypes.DefaultTemplate;
+            ObjectTypes_i18n[string.Format(Messages.XENSERVER_TEMPLATES, BrandManager.ProductBrand)] = ObjectTypes.DefaultTemplate;
             ObjectTypes_i18n[Messages.CUSTOM_TEMPLATES] = ObjectTypes.UserTemplate;
             ObjectTypes_i18n[Messages.POOLS] = ObjectTypes.Pool;
             ObjectTypes_i18n[Messages.SERVERS] = ObjectTypes.Server;
@@ -591,11 +591,11 @@ namespace XenAdmin.XenSearch
             Pool pool = Helpers.GetPool(o.Connection);
             if (pool == null)
                 return null;
-            Host master = Helpers.GetMaster(pool.Connection);
-            if (master == null)
+            Host coordinator = Helpers.GetCoordinator(pool.Connection);
+            if (coordinator == null)
                 return null;
 
-            return Helpers.GetFriendlyLicenseName(master);
+            return Helpers.GetFriendlyLicenseName(coordinator);
         }
 
         private static IComparable SharedProperty(IXenObject o)
@@ -975,6 +975,8 @@ namespace XenAdmin.XenSearch
                             return Icons.Debian;
                         if (os.Contains("gooroom"))
                             return Icons.Gooroom;
+                        if (os.Contains("rocky"))
+                            return Icons.Rocky;
                         if (os.Contains("linx"))
                             return Icons.Linx;
                         if (os.Contains("red"))

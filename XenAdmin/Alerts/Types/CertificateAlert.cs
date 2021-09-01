@@ -201,8 +201,8 @@ namespace XenAdmin.Alerts
                     case Message.MessageType.HOST_SERVER_CERTIFICATE_EXPIRING_14:
                     case Message.MessageType.HOST_SERVER_CERTIFICATE_EXPIRING_30:
                         var cmd = new InstallCertificateCommand(Program.MainWindow, host);
-                        if (cmd.CanExecute())
-                            return () => cmd.Execute();
+                        if (cmd.CanRun())
+                            return () => cmd.Run();
                         return null;
                     default:
                         return null;

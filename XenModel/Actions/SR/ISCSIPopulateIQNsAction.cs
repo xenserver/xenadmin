@@ -114,7 +114,7 @@ namespace XenAdmin.Actions
         {
             Pool pool = Helpers.GetPoolOfOne(Connection);
             if (pool == null)
-                throw new Failure(Failure.INTERNAL_ERROR, Messages.POOL_GONE);
+                throw new Failure(Failure.INTERNAL_ERROR, string.Format(Messages.POOL_GONE, BrandManager.BrandConsole));
 
             Dictionary<string, string> settings = new Dictionary<string, string>();
             settings["target"] = targetHost;
@@ -214,7 +214,7 @@ namespace XenAdmin.Actions
         {
             Pool pool = Helpers.GetPoolOfOne(Connection);
             if (pool == null)
-                throw new Failure(Failure.INTERNAL_ERROR, Messages.POOL_GONE);
+                throw new Failure(Failure.INTERNAL_ERROR, string.Format(Messages.POOL_GONE, BrandManager.BrandConsole));
             var deviceConfig = new Dictionary<string, string>();
             deviceConfig["provider"] = "iscsi";
             deviceConfig["target"] = targetHost;

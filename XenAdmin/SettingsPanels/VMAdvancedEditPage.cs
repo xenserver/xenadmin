@@ -52,6 +52,7 @@ namespace XenAdmin.SettingsPanels
         {
             InitializeComponent();
 
+            CPSOptimizationRadioButton.Text = string.Format(CPSOptimizationRadioButton.Text, BrandManager.CompanyNameShort);
             Text = Messages.ADVANCED_OPTIONS;
 
             m_invalidParamToolTip = new ToolTip
@@ -145,6 +146,14 @@ namespace XenAdmin.SettingsPanels
                 HelpersGUI.ShowBalloonMessage(ShadowMultiplierTextBox,
                    m_invalidParamToolTip, Messages.SHADOW_MEMORY_MULTIPLIER_VALUE);
             }
+        }
+
+        public void HideLocalValidationMessages()
+        {
+            if (ShadowMultiplierTextBox != null)
+            {
+                m_invalidParamToolTip.Hide(ShadowMultiplierTextBox);
+            }        
         }
 
         public void Cleanup()

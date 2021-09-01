@@ -625,15 +625,16 @@ namespace XenAPI
                         && guestMetrics.PV_drivers_version.ContainsKey("major")
                         && guestMetrics.PV_drivers_version.ContainsKey("minor"))
                     {
-                        return String.Format(Messages.PV_DRIVERS_OUT_OF_DATE, String.Format("{0}.{1}",
-                            guestMetrics.PV_drivers_version["major"],
-                            guestMetrics.PV_drivers_version["minor"]));
+                        return string.Format(Messages.PV_DRIVERS_OUT_OF_DATE, BrandManager.VmTools,
+                            guestMetrics.PV_drivers_version["major"], guestMetrics.PV_drivers_version["minor"]);
                     }
-                    else
-                        return Messages.PV_DRIVERS_OUT_OF_DATE_UNKNOWN_VERSION;
+                    
+                    return string.Format(Messages.PV_DRIVERS_OUT_OF_DATE_UNKNOWN_VERSION, BrandManager.VmTools);
             }
 
-            return HasNewVirtualisationStates() ? Messages.VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_NOT_INSTALLED : Messages.PV_DRIVERS_NOT_INSTALLED;
+            return HasNewVirtualisationStates()
+                ? Messages.VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_NOT_INSTALLED
+                : string.Format(Messages.PV_DRIVERS_NOT_INSTALLED, BrandManager.VmTools);
         }
 
         /// <summary>
@@ -682,7 +683,7 @@ namespace XenAPI
                 else if (lessThanTwoMin)
                     flags = VirtualisationStatus.UNKNOWN;
                 else
-                    friendlyStatus = Messages.PV_DRIVERS_NOT_INSTALLED;
+                    friendlyStatus = string.Format(Messages.PV_DRIVERS_NOT_INSTALLED, BrandManager.VmTools);
 
                 return flags;
             }
@@ -692,7 +693,7 @@ namespace XenAPI
                     return VirtualisationStatus.UNKNOWN;
                 else
                 {
-                    friendlyStatus = Messages.PV_DRIVERS_NOT_INSTALLED;
+                    friendlyStatus = string.Format(Messages.PV_DRIVERS_NOT_INSTALLED, BrandManager.VmTools);
                     return VirtualisationStatus.NOT_INSTALLED;
                 }
 
@@ -815,7 +816,7 @@ namespace XenAPI
         private static string[] linuxDistros =
         {
             "debian", "rhel", "fedora", "centos", "scientific", "oracle", "sles",
-            "lsb", "boot2docker", "freebsd", "ubuntu", "neokylin", "gooroom"
+            "lsb", "boot2docker", "freebsd", "ubuntu", "neokylin", "gooroom", "rocky"
         };
 
         /// <summary>
@@ -844,17 +845,18 @@ namespace XenAPI
             NeoKylin = 10,
             Oracle = 11,
             RedHat = 12,
-            SciLinux = 13,
-            Suse = 14,
-            Turbo = 15,
-            Ubuntu = 16,
-            YinheKylin = 17,
-            Citrix = 18,
-            Solaris = 19,
-            Misc = 20,
-            Snapshot = 21,
-            SnapshotFromVmpp = 22,
-            Count = 23  //bump this if values are added
+            Rocky = 13,
+            SciLinux = 14,
+            Suse = 15,
+            Turbo = 16,
+            Ubuntu = 17,
+            YinheKylin = 18,
+            Citrix = 19,
+            Solaris = 20,
+            Misc = 21,
+            Snapshot = 22,
+            SnapshotFromVmpp = 23,
+            Count = 24  //bump this if values are added
         }
 
         public VmTemplateType TemplateType()
@@ -881,6 +883,9 @@ namespace XenAPI
 
             if (os.Contains("gooroom"))
                 return VmTemplateType.Gooroom;
+
+            if (os.Contains("rocky"))
+                return VmTemplateType.Rocky;
 
             if (os.Contains("centos"))
                 return VmTemplateType.Centos;

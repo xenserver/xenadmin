@@ -217,7 +217,7 @@ namespace XenAdmin.SettingsPanels
                 this.nudMemory.Text = (this.nudMemory.Value = value).ToString();
             }
 
-            Host currentHost = Helpers.GetMaster(this.vm.Connection);
+            Host currentHost = Helpers.GetCoordinator(this.vm.Connection);
             if (currentHost != null)
             {
                 // Show the performance warning about vCPUs > pCPUs.
@@ -439,6 +439,8 @@ namespace XenAdmin.SettingsPanels
 
         /** Show local validation balloon tooltips */
         public void ShowLocalValidationMessages() { }
+
+        public void HideLocalValidationMessages() { }
 
         /** Unregister listeners, dispose balloon tooltips, etc. */
         public void Cleanup() { }

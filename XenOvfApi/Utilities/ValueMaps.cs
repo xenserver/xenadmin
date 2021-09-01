@@ -42,6 +42,13 @@ namespace XenOvf.Utilities
     /// </summary>
     public static class ValueMaps
     {
+        private static readonly string[] MofFiles =
+        {
+            "CIM_OperatingSystem.xml",
+            "CIM_ResourceAllocationSettingData.xml",
+            "CIM_VirtualSystemSettingData.xml"
+        };
+
         private static bool isLoaded = false;
         private static Dictionary<string, string> MapResourceType = new Dictionary<string, string>();
         private static Dictionary<string, string> MapConsumerVisibility = new Dictionary<string, string>();
@@ -121,19 +128,17 @@ namespace XenOvf.Utilities
         {
             return ResolveMapping(MapOperatingSystem, key);
         }
-        
-        
+
         private static void Load()
         {
             if (!isLoaded)
             {
                 string assemblypath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-                string[] files = Properties.Settings.Default.mofFiles.Split(new char[] { ',' });
 
                 string path1 = assemblypath;
                 string path2 = Path.Combine(assemblypath, "Schemas"); 
 
-                foreach (string file in files)
+                foreach (string file in MofFiles)
                 {
                     string fileinuse = string.Empty;
                     if (File.Exists(Path.Combine(path1, file.Trim())))

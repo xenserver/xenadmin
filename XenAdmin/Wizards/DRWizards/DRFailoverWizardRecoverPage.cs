@@ -39,6 +39,7 @@ using XenAdmin.Actions;
 using XenAdmin.Actions.DR;
 using XenAdmin.Commands;
 using XenAdmin.Controls;
+using XenAdmin.Core;
 using XenAdmin.Properties;
 using XenAPI;
 
@@ -69,15 +70,12 @@ namespace XenAdmin.Wizards.DRWizards
                     case DRWizardType.Dryrun:
                         return String.Format(Messages.DR_WIZARD_RECOVERPAGE_TITLE_DRYRUN, Connection.Name);
                     default:
-                        return Messages.DR_WIZARD_RECOVERPAGE_TITLE_FAILOVER;
+                        return string.Format(Messages.DR_WIZARD_RECOVERPAGE_TITLE_FAILOVER, BrandManager.ProductBrand);
                 } 
             }
         }
 
-        public override string Text
-        {
-            get { return Messages.DR_WIZARD_RECOVERPAGE_TEXT; }
-        }
+        public override string Text => Messages.DR_WIZARD_RECOVERPAGE_TEXT;
 
         public override string HelpID
         {
@@ -147,8 +145,8 @@ namespace XenAdmin.Wizards.DRWizards
                     break;
                 default:
                     labelTitle.Text = progressBar1.Value == 100 
-                        ? Messages.DR_WIZARD_RECOVERPAGE_COMPLETE_FAILOVER 
-                        : Messages.DR_WIZARD_RECOVERPAGE_IN_PROGRESS_FAILOVER;
+                        ? string.Format(Messages.DR_WIZARD_RECOVERPAGE_COMPLETE_FAILOVER, BrandManager.ProductBrand) 
+                        : string.Format(Messages.DR_WIZARD_RECOVERPAGE_IN_PROGRESS_FAILOVER, BrandManager.ProductBrand);
                     labelContinue.Text = Messages.DR_WIZARD_RECOVERPAGE_CONTINUE_FAILOVER;
                     break;
             }

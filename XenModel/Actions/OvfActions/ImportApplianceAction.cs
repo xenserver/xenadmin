@@ -51,7 +51,7 @@ namespace XenAdmin.Actions.OvfActions
 		private readonly bool m_verifyManifest;
 		private readonly bool m_verifySignature;
 		private readonly string m_password;
-        private string m_encryptionClass;
+        private Type m_encryptionClass;
         private string m_encryptionVersion;
         protected readonly bool m_runfixups;
 		protected readonly SR m_selectedIsoSr;
@@ -143,7 +143,8 @@ namespace XenAdmin.Actions.OvfActions
 
 				if (m_runfixups)
 				{
-					string cdId = OVF.SetRunOnceBootCDROMOSFixup(envs[0], systemid, Path.GetDirectoryName(m_package.PackageSourceFile));
+					string cdId = OVF.SetRunOnceBootCDROMOSFixup(envs[0], systemid,
+                        Path.GetDirectoryName(m_package.PackageSourceFile), BrandManager.ProductBrand);
 					OVF.SetTargetISOSRInRASD(envs[0], systemid, cdId, m_selectedIsoSr.uuid);
 				}
 

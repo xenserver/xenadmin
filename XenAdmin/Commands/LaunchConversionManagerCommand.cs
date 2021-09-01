@@ -51,24 +51,19 @@ namespace XenAdmin.Commands
 
         public override string MenuText => Messages.MAINWINDOW_CONVERSION_MANAGER_MENU_ITEM;
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             var con = selection.GetConnectionOfFirstItem();
             return con != null && con.Cache.VMs.Any(v => v.IsConversionVM());
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             var con = selection.GetConnectionOfFirstItem();
 
             if (Helpers.FeatureForbidden(con, Host.RestrictConversion))
             {
-                var msg = HiddenFeatures.LinkLabelHidden
-                    ? Messages.UPSELL_BLURB_CONVERSION
-                    : Messages.UPSELL_BLURB_CONVERSION + Messages.UPSELL_BLURB_TRIAL;
-
-                using (var dlg = new UpsellDialog(msg, InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL))
-                    dlg.ShowDialog(Parent);
+                UpsellDialog.ShowUpsellDialog(Messages.UPSELL_BLURB_CONVERSION, Parent);
             }
             else if (!con.Session.IsLocalSuperuser && !Registry.DontSudo && con.Session.Roles.All(r => r.name_label != Role.MR_ROLE_POOL_ADMIN))
             {

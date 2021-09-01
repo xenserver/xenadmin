@@ -60,7 +60,7 @@ namespace XenAdmin.Commands
             _menuImage = Images.StaticImages._000_ServerDisconnected_h32bit_16;
             _recommendation = recommendation;
 
-            if (CanExecute())
+            if (CanRun())
             {
                 _starRating = _recommendation.StarRating;
                 _menuImage = Images.StaticImages._000_TreeConnected_h32bit_16;
@@ -72,7 +72,7 @@ namespace XenAdmin.Commands
                 // otherwise don't display a reason - leave this to the error dialog.
 
                 string reason = null;
-                foreach (string r in _recommendation.CantExecuteReasons.Values)
+                foreach (string r in _recommendation.CantRunReasons.Values)
                 {
                     if (reason != null && r != reason)
                     {
@@ -125,9 +125,9 @@ namespace XenAdmin.Commands
             }
         }
 
-        protected override bool CanExecute(VM vm)
+        protected override bool CanRun(VM vm)
         {
-            return vm != null && _recommendation.CanExecuteByVM.ContainsKey(vm) && _recommendation.CanExecuteByVM[vm];
+            return vm != null && _recommendation.CanRunByVM.ContainsKey(vm) && _recommendation.CanRunByVM[vm];
         }
 
         /// <summary>
@@ -161,23 +161,23 @@ namespace XenAdmin.Commands
             return img;
         }
 
-        protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantExecuteReasons)
+        protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantRunReasons)
         {
-            return new CommandErrorDialog(ErrorDialogTitle, ErrorDialogText, cantExecuteReasons);
+            return new CommandErrorDialog(ErrorDialogTitle, ErrorDialogText, cantRunReasons);
         }
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
             VM vm = item as VM;
             if (vm == null)
-                return base.GetCantExecuteReasonCore(item);
+                return base.GetCantRunReasonCore(item);
 
-            if (_recommendation.CantExecuteReasons.ContainsKey(vm))
+            if (_recommendation.CantRunReasons.ContainsKey(vm))
             {
-                return _recommendation.CantExecuteReasons[vm];
+                return _recommendation.CantRunReasons[vm];
             }
 
-            return base.GetCantExecuteReasonCore(item);
+            return base.GetCantRunReasonCore(item);
         }
     }
 }

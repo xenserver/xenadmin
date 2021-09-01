@@ -316,8 +316,8 @@ namespace XenAdmin.SettingsPanels
 
         private void UpdateEnablement()
         {
-            // Disable editing if pool master doesn't have HA license flag
-            Host host = Helpers.GetMaster(vm.Connection);
+            // Disable editing if pool coordinator doesn't have HA license flag
+            Host host = Helpers.GetCoordinator(vm.Connection);
             if (host == null || Host.RestrictHA(host))
             {
             	m_labelHaStatus.Text = Messages.HA_LICENSE_DISABLED;
@@ -472,9 +472,12 @@ namespace XenAdmin.SettingsPanels
         {
         }
 
-		/// <summary>
-		/// a.k.a. OnClosing()
-		/// </summary>
+        public void HideLocalValidationMessages()
+        { }
+
+        /// <summary>
+        /// a.k.a. OnClosing()
+        /// </summary>
         public void Cleanup()
         {
             haNtolIndicator.StopNtolUpdate();
@@ -576,8 +579,8 @@ namespace XenAdmin.SettingsPanels
 				return;
 			
             var cmd = new HAConfigureCommand(Program.MainWindow, pool);
-            if (cmd.CanExecute())
-                cmd.Execute();
+            if (cmd.CanRun())
+                cmd.Run();
 		}
 
 		#endregion

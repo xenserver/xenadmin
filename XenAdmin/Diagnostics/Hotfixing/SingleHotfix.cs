@@ -72,9 +72,9 @@ namespace XenAdmin.Diagnostics.Hotfixing
             var patch = host.Connection.Cache.Find_By_Uuid<Pool_patch>(UUID);
             if (patch == null)
             {
-                var master = Helpers.GetMaster(host.Connection);
+                var coordinator = Helpers.GetCoordinator(host.Connection);
                 var filePath = Path.Combine(Program.AssemblyDir, String.Format("{0}.{1}", Filename, BrandManager.ExtensionUpdate));
-                var action = new UploadPatchAction(master.Connection, filePath, false, false);
+                var action = new UploadPatchAction(coordinator.Connection, filePath, false, false);
                 action.RunExternal(session);
                 patch = action.Patch;
             }
@@ -86,9 +86,9 @@ namespace XenAdmin.Diagnostics.Hotfixing
             var update = host.Connection.Cache.Find_By_Uuid<Pool_update>(UUID);
             if (update == null)
             {
-                var master = Helpers.GetMaster(host.Connection);
+                var coordinator = Helpers.GetCoordinator(host.Connection);
                 var filePath = Path.Combine(Program.AssemblyDir, string.Format("{0}.{1}", Filename, InvisibleMessages.ISO_UPDATE));
-                var action = new UploadSupplementalPackAction(master.Connection, new List<Host> { master }, filePath, false);
+                var action = new UploadSupplementalPackAction(coordinator.Connection, new List<Host> { coordinator }, filePath, false);
                 action.RunExternal(session);
                 update = action.PoolUpdate;
             }

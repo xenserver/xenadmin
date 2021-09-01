@@ -71,13 +71,13 @@ namespace XenAdmin.Commands
             {
             }
 
-            protected override bool CanExecuteCore(SelectedItemCollection selection)
+            protected override bool CanRunCore(SelectedItemCollection selection)
             {
                 return selection.Count > 0 && selection.AllItemsAre<VM>()
-                       && selection.GetConnectionOfAllItems() != null && selection.Any(CanExecute);
+                       && selection.GetConnectionOfAllItems() != null && selection.Any(CanRun);
             }
 
-            private bool CanExecute(SelectedItem selection)
+            private bool CanRun(SelectedItem selection)
             {
                 VM vm = selection.XenObject as VM;
 

@@ -55,7 +55,7 @@ namespace XenAdmin.Commands
             _confirm = confirm;
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             var connection = selection.GetConnectionOfFirstItem();
 
@@ -94,7 +94,7 @@ namespace XenAdmin.Commands
                 Pool.enable_tls_verification, "pool.enable_tls_verification").RunAsync();
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (selection == null || selection.Count != 1 ||
                 selection.Any(i => !(i.XenObject is Host) && !(i.XenObject is Pool)))
@@ -114,7 +114,7 @@ namespace XenAdmin.Commands
                    !pool.current_operations.Values.Contains(pool_allowed_operations.designate_new_master);
         }
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
             var pool = item == null ? null : Helpers.GetPoolOfOne(item.Connection);
             
@@ -133,10 +133,10 @@ namespace XenAdmin.Commands
                     return Messages.ENABLE_TLS_VERIFICATION_CLUSTERING;
             
                 if (pool.current_operations.Values.Contains(pool_allowed_operations.designate_new_master))
-                    return Messages.ENABLE_TLS_VERIFICATION_NEW_MASTER;
+                    return Messages.ENABLE_TLS_VERIFICATION_NEW_COORDINATOR;
             }
 
-            return base.GetCantExecuteReasonCore(item);
+            return base.GetCantRunReasonCore(item);
         }
 
         public override string MenuText => Messages.ENABLE_TLS_VERIFICATION_MENU;

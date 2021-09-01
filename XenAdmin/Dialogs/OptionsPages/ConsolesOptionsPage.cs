@@ -31,6 +31,7 @@
 
 using System.Drawing;
 using System.Windows.Forms;
+using XenAdmin.Core;
 
 
 namespace XenAdmin.Dialogs.OptionsPages
@@ -40,6 +41,7 @@ namespace XenAdmin.Dialogs.OptionsPages
         public ConsolesOptionsPage()
         {
             InitializeComponent();
+            label1.Text = string.Format(label1.Text, BrandManager.BrandConsole);
         }
 
         public void Build()
@@ -115,6 +117,10 @@ namespace XenAdmin.Dialogs.OptionsPages
         }
 
         public void ShowValidationMessages()
+        {
+        }
+
+        public void HideValidationMessages()
         {
         }
 

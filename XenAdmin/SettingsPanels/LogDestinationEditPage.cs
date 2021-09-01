@@ -53,6 +53,7 @@ namespace XenAdmin.SettingsPanels
         public LogDestinationEditPage()
         {
             InitializeComponent();
+            label3.Text = string.Format(label3.Text, BrandManager.ProductBrand);
 
             Text = Messages.LOG_DESTINATION;
 
@@ -142,6 +143,14 @@ namespace XenAdmin.SettingsPanels
         {
             if (!_validToSave)
                 HelpersGUI.ShowBalloonMessage(ServerTextBox, InvalidParamToolTip, Messages.GENERAL_EDIT_INVALID_REMOTE);
+        }
+
+        public void HideLocalValidationMessages()
+        {
+            if (ServerTextBox != null)
+            {
+                InvalidParamToolTip.Hide(ServerTextBox);
+            }
         }
 
         public void Cleanup()

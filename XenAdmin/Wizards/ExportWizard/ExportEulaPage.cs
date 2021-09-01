@@ -36,6 +36,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using XenAdmin.Controls;
+using XenAdmin.Core;
 
 
 namespace XenAdmin.Wizards.ExportWizard
@@ -254,7 +255,7 @@ namespace XenAdmin.Wizards.ExportWizard
 				e.Cancel = true;
 				MessageBox.Show(this,
 				                String.Format(Messages.EXPORT_EULA_PAGE_INVALID_FILE, invalidFile),
-				                Messages.XENCENTER,
+                                BrandManager.BrandConsole,
 				                MessageBoxButtons.OK,
 				                MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
 			}

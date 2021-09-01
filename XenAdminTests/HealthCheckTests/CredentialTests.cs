@@ -166,7 +166,7 @@ namespace XenAdminTests.HealthCheckTests
                            "\"OsVersion\":\"Microsoft Windows NT 6.1.7601 Service Pack 1\",\"OsCulture\":\"English (United States)\",\"IpAddress\":\"\"}," +
                            "\"Settings\":{\"CFU\":{\"AllowXenCenterUpdates\":true,\"AllowPatchesUpdates\":true,\"AllowXenServerUpdates\":true}," +
                            "\"Proxy\":{\"UseProxy\":true,\"UseIEProxy\":false,\"BypassProxyForServers\":false,\"ProxyAuthentication\":true,\"ProxyAuthenticationMethod\":\"Digest\"}," +
-                           "\"SaveAndRestore\":{\"SaveSessionCredentials\":true,\"RequireMasterPassword\":false},\"HelpLastUsed\":\"2017-06-09T11:57:49.4046357Z\"}," +
+                           "\"SaveAndRestore\":{\"SaveSessionCredentials\":true,\"RequireMainPassword\":false},\"HelpLastUsed\":\"2017-06-09T11:57:49.4046357Z\"}," +
                            "\"Infrastructure\":{\"TotalConnections\":22,\"Connected\":8},\"Plugins\":[],\"SourceOfData\":\"HealthCheck\",\"Created\":\"2017-07-03 14:24:14Z\"," + 
                            "\"Reported\":\"@HealthCheckReportTime@\"}}";
 

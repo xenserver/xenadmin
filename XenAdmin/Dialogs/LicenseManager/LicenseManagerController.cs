@@ -189,7 +189,7 @@ namespace XenAdmin.Dialogs
                                                                                     rowsUsingLicenseServer.ConvertAll(r=>r.XenObject),
                                                                                     Host.Edition.Free, null, null,
                                                                                     View.Parent);
-                command.Execute();
+                command.Run();
             }
             else
             {

@@ -30,11 +30,13 @@
  */
 
 using System.Collections.Generic;
+using System.Linq;
+using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAdmin.Wizards.CrossPoolMigrateWizard.Filters;
 using XenAdmin.Wizards.GenericPages;
 using XenAPI;
-using System.Linq;
+
 
 namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 {
@@ -171,7 +173,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             if (selectedVMs == null || selectedVMs.Count == 0 || Connection == null
                 || selectedVMs.Any(vm => Connection.Resolve(new XenRef<VM>(vm)) == null))
             {
-                CrossPoolMigrateWizard.ShowWarningMessageBox(Messages.CPM_WIZARD_VM_MISSING_ERROR);
+                CrossPoolMigrateWizard.ShowWarningMessageBox(string.Format(Messages.CPM_WIZARD_VM_MISSING_ERROR, BrandManager.BrandConsole));
                 return false;
             }
 

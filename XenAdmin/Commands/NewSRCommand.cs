@@ -62,30 +62,30 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             MainWindowCommandInterface.ShowPerConnectionWizard(selection[0].Connection, new NewSRWizard(selection[0].Connection));
         }
 
-        private static bool CanExecuteOnHost(Host host)
+        private static bool CanRunOnHost(Host host)
         {
             return host != null && host.Connection.IsConnected && !HelpersGUI.HasActiveHostAction(host);
         }
 
-        private static bool CanExecuteOnPool(Pool pool)
+        private static bool CanRunOnPool(Pool pool)
         {
             return pool != null && pool.Connection.IsConnected;
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (selection.HostAncestor != null)
             {
-                return CanExecuteOnHost(selection.HostAncestor);
+                return CanRunOnHost(selection.HostAncestor);
             }
             else if (selection.PoolAncestor != null)
             {
-                return CanExecuteOnPool(selection.PoolAncestor);
+                return CanRunOnPool(selection.PoolAncestor);
             }
             return false;
         }

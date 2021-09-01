@@ -40,7 +40,7 @@ using System.Xml;
 namespace XenAdmin.CustomFields
 {
     /// <summary>
-    /// Provide custom fields management support for VMs.  The master list of custom fields will be
+    /// Provide custom fields management support for VMs.  The coordinator list of custom fields will be
     /// maintained in the pool class using the same conventions as the tags implementation (see
     /// XenAdmin.XenSearch.Tags).  When persisting the label-value pairs in the VMs, the
     /// following key/value convention will be used:

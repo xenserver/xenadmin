@@ -117,7 +117,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
         protected override List<HostPlan> GenerateHostPlans(Pool pool, out List<Host> applicableHosts)
         {
-            //Add masters first, then the slaves (add all hosts for now, they will be skipped from upgrade if already upgraded)
+            //Add coordinators first, then the supporters (add all hosts for now, they will be skipped from upgrade if already upgraded)
             applicableHosts = pool.Connection.Cache.Hosts.ToList();
             applicableHosts.Sort();
             return applicableHosts.Select(GetSubTasksFor).ToList();
@@ -126,19 +126,19 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         protected override bool SkipInitialPlanActions(Host host)
         {
             //Skip hosts already upgraded
-            if (host.IsMaster())
+            if (host.IsCoordinator())
             {
                 var pool = Helpers.GetPoolOfOne(host.Connection);
-                if (pool != null && pool.IsMasterUpgraded())
+                if (pool != null && pool.IsCoordinatorUpgraded())
                 {
-                    log.Debug(string.Format("Skipping master '{0}' because it is upgraded", host.Name()));
+                    log.Debug(string.Format("Skipping coordinator '{0}' because it is upgraded", host.Name()));
                     return true;
                 }
             }
             else
             {
-                var master = Helpers.GetMaster(host.Connection);
-                if (master != null && host.LongProductVersion() == master.LongProductVersion())
+                var coordinator = Helpers.GetCoordinator(host.Connection);
+                if (coordinator != null && host.LongProductVersion() == coordinator.LongProductVersion())
                 {
                     log.Debug(string.Format("Skipping host '{0}' because it is upgraded", host.Name()));
                     return true;
@@ -149,7 +149,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
         protected override void DoAfterInitialPlanActions(UpdateProgressBackgroundWorker bgw, Host host, List<Host> hosts)
         {
-            if (!ApplyUpdatesToNewVersion && !ApplySuppPackAfterUpgrade)
+            if (!ApplySuppPackAfterUpgrade)
                 return;
 
             var theHostPlan = bgw.HostPlans.FirstOrDefault(ha => ha.Host.Equals(host));
@@ -160,46 +160,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 return;
 
             host = host.Connection.TryResolveWithTimeout(new XenRef<Host>(host.opaque_ref));
-
-            if (ApplyUpdatesToNewVersion)
-            {
-                var automatedUpdatesRestricted = host.Connection.Cache.Hosts.Any(h => Helpers.DundeeOrGreater(h) && Host.RestrictBatchHotfixApply(h)); //if any host is not licensed for automated updates (only considering DundeeOrGreater hosts)
-
-                if (!automatedUpdatesRestricted)
-                {
-                    if (!MinimalPatches.ContainsKey(bgw))
-                    {
-                        log.InfoFormat("Calculating minimal patches for {0}", host.Name());
-                        Updates.CheckForUpdatesSync(null);
-                        var mp = Updates.GetMinimalPatches(host);
-                        log.InfoFormat("Minimal patches for {0}: {1}", host.Name(),
-                            mp == null ? "None" : string.Join(",", mp.Select(p => p.Name)));
-
-                        MinimalPatches.Add(bgw, mp);
-                    }
-
-                    var minimalPatches = MinimalPatches[bgw];
-
-                    if (minimalPatches != null)
-                    {
-                        if (!AllUploadedPatches.ContainsKey(bgw))
-                            AllUploadedPatches.Add(bgw, new List<XenServerPatch>());
-                        var uploadedPatches = AllUploadedPatches[bgw];
-
-                        var hp = GetUpdatePlanActionsForHost(host, hosts, minimalPatches, uploadedPatches,
-                            new KeyValuePair<XenServerPatch, string>(), false);
-                        if (hp.UpdatesPlanActions != null && hp.UpdatesPlanActions.Count > 0)
-                        {
-                            theHostPlan.UpdatesPlanActions.AddRange(hp.UpdatesPlanActions);
-                            theHostPlan.DelayedPlanActions.InsertRange(0, hp.DelayedPlanActions);
-                        }
-                    }
-                }
-                else
-                {
-                    log.InfoFormat("Skipping updates installation on {0} because the batch hotfix application is restricted in the pool", host.Name());
-                }
-            }
 
             if (ApplySuppPackAfterUpgrade && Helpers.ElyOrGreater(host))
             {

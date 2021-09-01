@@ -45,6 +45,7 @@ using XenCenterLib;
 using XenCenterLib.Compression;
 using XenAdmin.Dialogs;
 using XenAdmin.Controls.Common;
+using XenAdmin.Core;
 using XenCenterLib.Archive;
 using XenOvf;
 using XenOvf.Definitions.VMC;
@@ -81,6 +82,7 @@ namespace XenAdmin.Wizards.ImportWizard
 		public ImportSourcePage()
 		{
 			InitializeComponent();
+            autoHeightLabel1.Text = string.Format(autoHeightLabel1.Text, BrandManager.BrandConsole);
             m_ctrlError.HideError();
 			m_tlpEncryption.Visible = false;
             m_tlpError.Visible = false;
@@ -547,7 +549,7 @@ namespace XenAdmin.Wizards.ImportWizard
 
             _unzipFileOut = Path.Combine(Path.GetDirectoryName(_unzipFileIn), Path.GetFileNameWithoutExtension(_unzipFileIn));
 
-            var msg = string.Format(Messages.UNCOMPRESS_APPLIANCE_DESCRIPTION,
+            var msg = string.Format(Messages.UNCOMPRESS_APPLIANCE_DESCRIPTION, BrandManager.BrandConsole,
                 Path.GetFileName(_unzipFileOut), Path.GetFileName(_unzipFileIn));
 
             using (var dlog = new WarningDialog(msg, ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo))

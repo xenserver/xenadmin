@@ -553,13 +553,13 @@
     <value>25, 22</value>
   </data>
   <data name="linkInstallTools.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 13</value>
+    <value>74, 13</value>
   </data>
   <data name="linkInstallTools.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
   <data name="linkInstallTools.Text" xml:space="preserve">
-    <value>Install [Citrix VM Tools] now</value>
+    <value>Install {0} now</value>
   </data>
   <data name="&gt;&gt;linkInstallTools.Name" xml:space="preserve">
     <value>linkInstallTools</value>

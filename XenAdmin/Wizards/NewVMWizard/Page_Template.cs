@@ -37,6 +37,7 @@ using XenAPI;
 using XenAdmin.Controls;
 using XenCenterLib;
 using System.Collections;
+using XenAdmin.Core;
 
 
 namespace XenAdmin.Wizards.NewVMWizard
@@ -308,6 +309,8 @@ namespace XenAdmin.Wizards.NewVMWizard
                     return Messages.NEWVMWIZARD_TEMPLATEPAGE_DEBIAN;
                 case VM.VmTemplateType.Gooroom:
                     return Messages.NEWVMWIZARD_TEMPLATEPAGE_GOOROOM;
+                case VM.VmTemplateType.Rocky:
+                    return Messages.NEWVMWIZARD_TEMPLATEPAGE_ROCKY;
                 case VM.VmTemplateType.Linx:
                     return Messages.NEWVMWIZARD_TEMPLATEPAGE_LINX; 
                 case VM.VmTemplateType.Oracle:
@@ -329,7 +332,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                 case VM.VmTemplateType.Turbo:
                     return Messages.NEW_VM_WIZARD_TEMPLATEPAGE_TURBO;        
                 case VM.VmTemplateType.Citrix:
-                    return Messages.NEWVMWIZARD_TEMPLATEPAGE_CITRIX;
+                    return BrandManager.CompanyNameShort;
                 case VM.VmTemplateType.Solaris:
                 case VM.VmTemplateType.Misc:
                     return Messages.NEWVMWIZARD_TEMPLATEPAGE_MISC;
@@ -357,6 +360,8 @@ namespace XenAdmin.Wizards.NewVMWizard
                     return Images.StaticImages.debian_16x;
                 case VM.VmTemplateType.Gooroom:
                     return Images.StaticImages.gooroom_16x;
+                case VM.VmTemplateType.Rocky:
+                    return Images.StaticImages.rocky_16x;
                 case VM.VmTemplateType.Linx:
                     return Images.StaticImages.linx_16x;     
                 case VM.VmTemplateType.Oracle:

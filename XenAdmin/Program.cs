@@ -91,20 +91,6 @@ namespace XenAdmin
         public static Font DefaultFontItalic;
         public static Font DefaultFontHeader;
 
-        // Set in Main() AFTER we call EnableVisualStyles().
-        // We set them here only so something decent shows up in the Designer.
-        // We must not request ProfessionalColors before we have called Application.EnableVisualStyles
-        // as it may prevent the program from displayed as expected.
-        public static Color TitleBarStartColor;
-        public static Color TitleBarEndColor;
-        public static Color TitleBarBorderColor;
-        public static Color TitleBarForeColor;
-        public static Color HeaderGradientForeColor;
-        public static Font HeaderGradientFont;
-        public static Font TabbedDialogHeaderFont;
-        public static Color TabPageRowBorder;
-        public static Color TabPageRowHeader;
-
         public static MainWindow MainWindow = null;
 
 
@@ -125,11 +111,11 @@ namespace XenAdmin
 
 
         /// <summary>
-        /// The secure hash of the master password used to load the client session.
+        /// The secure hash of the main password used to load the client session.
         /// If this is null then no prior session existed and the user should be prompted
         /// to save his session when the UI is quit.
         /// </summary>
-        public static byte[] MasterPassword = null;
+        public static byte[] MainPassword = null;
 
         /// <summary>
         /// A true value here indicates the user does not want to save session information for this
@@ -169,14 +155,12 @@ namespace XenAdmin
         static public void Main(string[] Args)
         {
             //Upgrade settings
-            Assembly a = Assembly.GetExecutingAssembly();
-            Version appVersion = a.GetName().Version;
-            string appVersionString = appVersion.ToString();
+            string appVersionString = Version.ToString();
             log.DebugFormat("Application version of new settings {0}", appVersionString);
 
             try
             {
-                if (Properties.Settings.Default.ApplicationVersion != appVersion.ToString())
+                if (Properties.Settings.Default.ApplicationVersion != appVersionString)
                 {
                     log.Debug("Upgrading settings...");
                     Properties.Settings.Default.Upgrade();
@@ -227,7 +211,11 @@ namespace XenAdmin
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             Application.ThreadException -= Application_ThreadException;
             Application.ThreadException += Application_ThreadException;
+
+            // We must NEVER request ProfessionalColors before we have called Application.EnableVisualStyles
+            // as it may prevent the program from displayed as expected.
             Application.EnableVisualStyles();
+
             Application.SetCompatibleTextRenderingDefault(false);
 
             try
@@ -241,50 +229,6 @@ namespace XenAdmin
                 // without FontSmoothingType support.
             }
 
-            switch (Environment.OSVersion.Version.Major)
-            {
-                case 6: // Vista, 2K8, Win7.
-                    if (Application.RenderWithVisualStyles)
-                    {
-                        // Vista, Win7 with styles.
-                        TitleBarStartColor = Color.FromArgb(242, 242, 242);
-                        TitleBarEndColor = Color.FromArgb(207, 207, 207);
-                        TitleBarBorderColor = Color.FromArgb(160, 160, 160);
-                        TitleBarForeColor = Color.FromArgb(60, 60, 60);
-                        HeaderGradientForeColor = Color.White;
-                        HeaderGradientFont = new Font(DefaultFont.FontFamily, 11.25f);
-                        TabbedDialogHeaderFont = HeaderGradientFont;
-                        TabPageRowBorder = Color.Gainsboro;
-                        TabPageRowHeader = Color.WhiteSmoke;
-                    }
-                    else
-                    {
-                        // 2K8 and Vista, Win7 without styles.
-                        TitleBarStartColor = ProfessionalColors.OverflowButtonGradientBegin;
-                        TitleBarEndColor = ProfessionalColors.OverflowButtonGradientEnd;
-                        TitleBarBorderColor = TitleBarEndColor;
-                        TitleBarForeColor = SystemColors.ControlText;
-                        HeaderGradientForeColor = SystemColors.ControlText;
-                        HeaderGradientFont = new Font(DefaultFont.FontFamily, DefaultFont.Size + 1f, FontStyle.Bold);
-                        TabbedDialogHeaderFont = HeaderGradientFont;
-                        TabPageRowBorder = Color.DarkGray;
-                        TabPageRowHeader = Color.Silver;
-                    }
-                    break;
-
-                default:
-                    TitleBarStartColor = ProfessionalColors.OverflowButtonGradientBegin;
-                    TitleBarEndColor = ProfessionalColors.OverflowButtonGradientEnd;
-                    TitleBarBorderColor = TitleBarEndColor;
-                    TitleBarForeColor = SystemColors.ControlText;
-                    HeaderGradientForeColor = Application.RenderWithVisualStyles ? Color.White : SystemColors.ControlText;
-                    HeaderGradientFont = new Font(DefaultFont.FontFamily, DefaultFont.Size + 1f, FontStyle.Bold);
-                    TabbedDialogHeaderFont = new Font(DefaultFont.FontFamily, DefaultFont.Size + 1.75f, FontStyle.Bold);
-                    TabPageRowBorder = Color.DarkGray;
-                    TabPageRowHeader = Color.Silver;
-                    break;
-            }
-
             // Force the current culture, to make the layout the same whatever the culture of the underlying OS (CA-46983).
             Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture = new CultureInfo(InvisibleMessages.LOCALE, false);
 
@@ -294,7 +238,7 @@ namespace XenAdmin
             ServicePointManager.DefaultConnectionLimit = 20;
             ServicePointManager.ServerCertificateValidationCallback = SSL.ValidateServerCertificate;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
-            Session.UserAgent = string.Format("XenCenter/{0}", ClientVersion());
+            Session.UserAgent = $"{BrandManager.BrandConsole} {Version}";
             RememberProxyAuthenticationModules();
             ReconfigureConnectionSettings();
 
@@ -334,12 +278,6 @@ namespace XenAdmin
             Application.ApplicationExit -= Application_ApplicationExit;
             Application.ApplicationExit += Application_ApplicationExit;
 
-            //set the help version before launching the main window;
-            //the call starts a different thread so it won't delay the main window launch;
-            //in most cases it is expected to have returned by the time the users request help;
-            //if they do before it has returned, the thread requesting help will wait for it
-            HelpManager.SetHelpVersion();
-
             MainWindow mainWindow = new MainWindow(firstArgType, tailArgs);
             Application.Run(mainWindow);
 
@@ -368,9 +306,6 @@ namespace XenAdmin
                     break;
                 case "restore":
                     firstArgType = ArgType.Restore;
-                    break;
-                case "update":
-                    firstArgType = ArgType.Update;
                     break;
                 case "search":
                     firstArgType = ArgType.XenSearch;
@@ -427,18 +362,18 @@ namespace XenAdmin
 
                 var firstArgType = ParseFileArgs(bits, out string[] tailArgs);
 
-                if (firstArgType == ArgType.Passwords)
-                {
-                    log.Error("Refusing to accept passwords request down pipe. Use XenCenterMain.exe directly");
-                    return;
-                }
-                if (firstArgType == ArgType.Connect)
-                {
-                    log.Error("Connect not supported down pipe. Use XenCenterMain.exe directly");
-                    return;
-                }
-                if (firstArgType == ArgType.None)
-                    return;
+                    if (firstArgType == ArgType.Passwords)
+                    {
+                        log.ErrorFormat("Refusing to accept passwords request down pipe.  Use {0}Main.exe directly", BrandManager.BrandConsole.Replace(" ",""));
+                        return;
+                    }
+                    if (firstArgType == ArgType.Connect)
+                    {
+                        log.ErrorFormat("Connect not supported down pipe. Use {0}Main.exe directly", BrandManager.BrandConsole.Replace(" ",""));
+                        return;
+                    }
+                    if (firstArgType == ArgType.None)
+                        return;
 
                 // The C++ splash screen passes its command line as a literal string.
                 // This means we will get an e.Message like
@@ -479,7 +414,7 @@ namespace XenAdmin
 
         private static void logSystemDetails()
         {
-            log.InfoFormat("Version: {0}", Assembly.GetExecutingAssembly().GetName().Version);
+            log.InfoFormat("Version: {0}", Version);
             log.InfoFormat(".NET runtime version: {0}", Environment.Version.ToString(4));
             log.InfoFormat("OS version: {0}", Environment.OSVersion);
             log.InfoFormat("UI Culture: {0}", Thread.CurrentThread.CurrentUICulture.EnglishName);
@@ -578,7 +513,7 @@ namespace XenAdmin
                     string filepath = GetLogFile() ?? Messages.MESSAGEBOX_LOGFILE_MISSING;
 
                     using (var d = new ErrorDialog(String.Format(Messages.MESSAGEBOX_PROGRAM_UNEXPECTED, HelpersGUI.DateTimeToString(DateTime.Now, "yyyy-MM-dd HH:mm:ss", false), filepath))
-                        {WindowTitle = Messages.MESSAGEBOX_PROGRAM_UNEXPECTED_TITLE})
+                        {WindowTitle = string.Format(Messages.MESSAGEBOX_PROGRAM_UNEXPECTED_TITLE, BrandManager.BrandConsole)})
                     {
                         // CA-44733
                         if (IsInvokable(MainWindow) && !MainWindow.InvokeRequired)
@@ -734,7 +669,8 @@ namespace XenAdmin
             }
             else
             {
-                using (var dlg = new ErrorDialog(msg) {WindowTitle = Messages.MESSAGEBOX_PROGRAM_UNEXPECTED_TITLE})
+                using (var dlg = new ErrorDialog(msg)
+                    {WindowTitle = string.Format(Messages.MESSAGEBOX_PROGRAM_UNEXPECTED_TITLE, BrandManager.BrandConsole)})
                     dlg.ShowDialog();
             }
         }
@@ -974,20 +910,6 @@ namespace XenAdmin
         }
         #endregion
 
-        private static string ClientVersion()
-        {
-            foreach (object o in Assembly.GetExecutingAssembly().GetCustomAttributes(true))
-            {
-                var attr = o as XSVersionAttribute;
-                if (attr != null)
-                {
-                    string result = attr.Version;
-                    return result == "[BRANDING_PRODUCT_VERSION]" ? "PRIVATE" : result;
-                }
-            }
-            return "MISSING";
-        }
-
         public static void ReconfigureConnectionSettings()
         {
             ReconfigureProxyAuthenticationSettings();
@@ -1074,38 +996,14 @@ namespace XenAdmin
         /// </summary>
         public static bool ForcedExiting = false;
 
-        public static Version Version
-        {
-            get
-            {
-                return Assembly.GetExecutingAssembly().GetName().Version;
-            }
-        }
+        public static Version Version => Assembly.GetExecutingAssembly().GetName().Version;
 
-		public static string CurrentLanguage
-        {
-            get
-            {
-                return Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
-            }
-        }
+        public static string CurrentLanguage => Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
 
-        public static string VersionAndLanguage
-        {
-            get
-            {
-                return string.Format("{0}.{1}", Version, CurrentLanguage);
-            }
-        }
+        public static string VersionAndLanguage => $"{Version}.{CurrentLanguage}";
 
-        public static CultureInfo CurrentCulture
-        {
-            get
-            {
-                return Thread.CurrentThread.CurrentCulture;
-            }
-        }
+        public static CultureInfo CurrentCulture => Thread.CurrentThread.CurrentCulture;
     }
 
-    public enum ArgType { Import, License, Restore, Update, None, XenSearch, Passwords, Connect }
+    public enum ArgType { Import, License, Restore, None, XenSearch, Passwords, Connect }
 }

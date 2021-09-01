@@ -40,8 +40,9 @@ namespace XenAdmin.Dialogs
         public LegalNoticesDialog()
         {
             InitializeComponent();
-            label1.Text = string.Format(label1.Text, BrandManager.LegacyProduct);
-            label2.Text = string.Format(Messages.COPYRIGHT, BrandManager.COMPANY_NAME_LEGAL);
+            label1.Text = string.Format(label1.Text, BrandManager.CompanyNameShort, BrandManager.ProductBrand,
+                BrandManager.BrandConsole, BrandManager.LegacyProduct, BrandManager.LegacyConsole, BrandManager.CompanyNameLegal);
+            label2.Text = string.Format(Messages.COPYRIGHT, BrandManager.CompanyNameLegal);
             label1.Visible = label2.Visible = !HiddenFeatures.CopyrightHidden;
         }
 

@@ -52,7 +52,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             bool expand = MainWindowCommandInterface.GetXenConnectionsCopy().Count < 30;
             foreach (IXenConnection c in MainWindowCommandInterface.GetXenConnectionsCopy())
@@ -78,7 +78,7 @@ namespace XenAdmin.Commands
             MainWindowCommandInterface.TrySelectNewObjectInTree(c, false, true, false);
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             foreach (IXenConnection c in MainWindowCommandInterface.GetXenConnectionsCopy())
             {

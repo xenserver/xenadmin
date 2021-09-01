@@ -154,7 +154,7 @@
     <value>1</value>
   </data>
   <data name="m_labelIntro.Text" xml:space="preserve">
-    <value>Operating System Fixup creates a basic level of interoperability for OVF packages and disk images that originated on non-[XenServer] platforms, for example, an OVF Package created from a VMware environment. It attempts to repair problems with imported VMs that might prevent the operating system of the VM from booting.
+    <value>Operating System Fixup creates a basic level of interoperability for OVF packages and disk images that originated on non-{0} platforms, for example, an OVF Package created from a VMware environment. It attempts to repair problems with imported VMs that might prevent the operating system of the VM from booting.
 
 Operating System Fixup is supplied as a bootable ISO image which is attached to the DVD drive of the imported VM and which performs necessary repairs to the VM when it is first started.</value>
   </data>
@@ -222,7 +222,7 @@ Operating System Fixup is supplied as a bootable ISO image which is attached to 
     <value>3</value>
   </data>
   <data name="m_labelDontRunOSFixups.Text" xml:space="preserve">
-    <value>Select this option if the VMs being imported were created on [XenServer].</value>
+    <value>Select this option if the VMs being imported were created on {0}.</value>
   </data>
   <data name="&gt;&gt;m_labelDontRunOSFixups.Name" xml:space="preserve">
     <value>m_labelDontRunOSFixups</value>
@@ -288,7 +288,7 @@ Operating System Fixup is supplied as a bootable ISO image which is attached to 
     <value>5</value>
   </data>
   <data name="m_labelRunOSFixups.Text" xml:space="preserve">
-    <value>Select this option if the VMs being imported were created on a hypervisor other than [XenServer].</value>
+    <value>Select this option if the VMs being imported were created on a hypervisor other than {0}.</value>
   </data>
   <data name="&gt;&gt;m_labelRunOSFixups.Name" xml:space="preserve">
     <value>m_labelRunOSFixups</value>

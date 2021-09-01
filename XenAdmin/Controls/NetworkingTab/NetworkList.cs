@@ -402,7 +402,7 @@ namespace XenAdmin.Controls.NetworkingTab
 
                 AddNetworkButton.Enabled = !locked;
 
-                EditNetworkButton.Enabled = !locked && !TheNetwork.Locked && !TheNetwork.IsSlave() && !TheNetwork.CreateInProgress()
+                EditNetworkButton.Enabled = !locked && !TheNetwork.Locked && !TheNetwork.IsMember() && !TheNetwork.CreateInProgress()
                     && !TheNetwork.IsGuestInstallerNetwork();
                 // CA-218956 - Expose HIMN when showing hidden objects
                 // HIMN should not be editable
@@ -438,7 +438,9 @@ namespace XenAdmin.Controls.NetworkingTab
                 if (vm.power_state == vm_power_state.Suspended)
                 {
                     RemoveButtonContainer.SetToolTip(Messages.TOOLTIP_REMOVE_NETWORK_SUSPENDED);
-                    EditButtonContainer.SetToolTip(vm.HasNewVirtualisationStates() ? Messages.TOOLTIP_EDIT_NETWORK_IO_DRIVERS : Messages.TOOLTIP_EDIT_NETWORK_TOOLS);
+                    EditButtonContainer.SetToolTip(vm.HasNewVirtualisationStates()
+                        ? Messages.TOOLTIP_EDIT_NETWORK_IO_DRIVERS
+                        : string.Format(Messages.TOOLTIP_EDIT_NETWORK_TOOLS, BrandManager.VmTools));
                     toolTipContainerActivateToggle.SetToolTip(vif.currently_attached 
                         ? Messages.TOOLTIP_DEACTIVATE_VIF_SUSPENDED : Messages.TOOLTIP_ACTIVATE_VIF_SUSPENDED);
                 }
@@ -446,8 +448,12 @@ namespace XenAdmin.Controls.NetworkingTab
                 {
                     if (vm.power_state == vm_power_state.Running && !vm.GetVirtualisationStatus(out _).HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
                     {
-                        RemoveButtonContainer.SetToolTip(vm.HasNewVirtualisationStates() ? Messages.TOOLTIP_REMOVE_NETWORK_IO_DRIVERS : Messages.TOOLTIP_REMOVE_NETWORK_TOOLS);
-                        EditButtonContainer.SetToolTip(vm.HasNewVirtualisationStates() ? Messages.TOOLTIP_EDIT_NETWORK_IO_DRIVERS : Messages.TOOLTIP_EDIT_NETWORK_TOOLS);
+                        RemoveButtonContainer.SetToolTip(vm.HasNewVirtualisationStates()
+                            ? Messages.TOOLTIP_REMOVE_NETWORK_IO_DRIVERS
+                            : string.Format(Messages.TOOLTIP_REMOVE_NETWORK_TOOLS, BrandManager.VmTools));
+                        EditButtonContainer.SetToolTip(vm.HasNewVirtualisationStates()
+                            ? Messages.TOOLTIP_EDIT_NETWORK_IO_DRIVERS
+                            : string.Format(Messages.TOOLTIP_EDIT_NETWORK_TOOLS, BrandManager.VmTools));
                         toolTipContainerActivateToggle.SetToolTip(vif.currently_attached
                             ? Messages.TOOLTIP_DEACTIVATE_VIF_TOOLS : Messages.TOOLTIP_ACTIVATE_VIF_TOOLS);
                     }
@@ -500,8 +506,8 @@ namespace XenAdmin.Controls.NetworkingTab
                     return;
                 }
 
-                Host master = Helpers.GetMaster(vm.Connection);
-                if (master == null)
+                Host coordinator = Helpers.GetCoordinator(vm.Connection);
+                if (coordinator == null)
                 {
                     // Cache populating?
                     return;
@@ -597,7 +603,7 @@ namespace XenAdmin.Controls.NetworkingTab
             if (network != null && network.IsBond())
             {
                 var destroyBondCommand = new DestroyBondCommand(Program.MainWindow, network);
-                destroyBondCommand.Execute();
+                destroyBondCommand.Run();
             }
             else
             {
@@ -960,7 +966,7 @@ namespace XenAdmin.Controls.NetworkingTab
 
             public void UpdateDetails()
             {
-                Enabled = !Network.IsSlave();
+                Enabled = !Network.IsMember();
 
                 DeregisterPifEvents();
 
@@ -1004,11 +1010,11 @@ namespace XenAdmin.Controls.NetworkingTab
 
             private object NetworkName()
             {
-                bool isSlave = Network.IsSlave();
-                if (Network.Show(XenAdmin.Properties.Settings.Default.ShowHiddenVMs) && !isSlave)
+                bool isSupporter = Network.IsMember();
+                if (Network.Show(XenAdmin.Properties.Settings.Default.ShowHiddenVMs) && !isSupporter)
                     return Helpers.GetName(Network);
-                else if (isSlave && Properties.Settings.Default.ShowHiddenVMs)
-                    return string.Format(Messages.NIC_SLAVE, Helpers.GetName(Network));
+                else if (isSupporter && Properties.Settings.Default.ShowHiddenVMs)
+                    return string.Format(Messages.NIC_BONDED_MEMBER, Helpers.GetName(Network));
                 else if (Properties.Settings.Default.ShowHiddenVMs)
                     return string.Format(Messages.NIC_HIDDEN, Helpers.GetName(Network));
                 else

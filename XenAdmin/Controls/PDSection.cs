@@ -164,13 +164,13 @@ namespace XenAdmin.Controls
         private void dataGridViewEx1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
-                ExecuteCellCommandOrAction(dataGridViewEx1.Rows[e.RowIndex].Cells[e.ColumnIndex]);
+                RunCellCommandOrAction(dataGridViewEx1.Rows[e.RowIndex].Cells[e.ColumnIndex]);
         }
 
         private void dataGridViewEx1_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
-                ExecuteCellCommandOrAction(dataGridViewEx1.CurrentCell);
+                RunCellCommandOrAction(dataGridViewEx1.CurrentCell);
         }
 
         private void dataGridViewEx1_LostFocus(object sender, EventArgs e)
@@ -270,14 +270,14 @@ namespace XenAdmin.Controls
             IsExpanded = true;
         }
 
-        private void ExecuteCellCommandOrAction(DataGridViewCell cell)
+        private void RunCellCommandOrAction(DataGridViewCell cell)
         {
             if (cell == null)
                 return;
 
             var command = cell.Tag as Command;
             if (command != null)
-                command.Execute();
+                command.Run();
 
             var action = cell.Tag as Action;
             if (action != null)

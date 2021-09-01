@@ -32,6 +32,7 @@
 using System;
 using System.Collections.Generic;
 using XenAdmin.Actions;
+using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;
 
@@ -285,13 +286,13 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
 
     public class SrWizardType_Hba : SrWizardType
     {
-        public override bool IsEnhancedSR { get { return false; } }
-        public override string FrontendBlurb { get { return Messages.NEWSR_LVMOHBA_BLURB; } }
-        public override string FrontendTypeName { get { return Messages.NEWSR_LVMOHBA_TYPE_NAME; } }
-        public override SR.SRTypes Type { get { return IsGfs2 ? SR.SRTypes.gfs2 : SR.SRTypes.lvmohba; } }
-        public override string ContentType { get { return ""; } }
-        public override bool ShowIntroducePrompt { get { return false; } }
-        public override bool ShowReattachWarning { get { return true; } }
+        public override bool IsEnhancedSR => false;
+        public override string FrontendBlurb => string.Format(Messages.NEWSR_LVMOHBA_BLURB, BrandManager.ProductBrand);
+        public override string FrontendTypeName => Messages.NEWSR_LVMOHBA_TYPE_NAME;
+        public override SR.SRTypes Type => IsGfs2 ? SR.SRTypes.gfs2 : SR.SRTypes.lvmohba;
+        public override string ContentType => "";
+        public override bool ShowIntroducePrompt => false;
+        public override bool ShowReattachWarning => true;
         public override bool AllowToCreateNewSr { get; set; }
         public override bool IsGfs2 { get; set; }
 
@@ -427,25 +428,25 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
 
     public class SrWizardType_EqualLogic : SrWizardType
     {
-        public override bool IsEnhancedSR { get { return true; } }
-        public override string FrontendBlurb { get { return Messages.NEWSR_EQUAL_LOGIC_BLURB; } }
-        public override string FrontendTypeName { get { return SR.GetFriendlyTypeName(Type); } }
-        public override SR.SRTypes Type { get { return SR.SRTypes.equal; } }
-        public override string ContentType { get { return ""; } }
-        public override bool ShowIntroducePrompt { get { return true; } }
-        public override bool ShowReattachWarning { get { return true; } }
+        public override bool IsEnhancedSR => true;
+        public override string FrontendBlurb => string.Format(Messages.NEWSR_EQUAL_LOGIC_BLURB, BrandManager.ProductBrand);
+        public override string FrontendTypeName => SR.GetFriendlyTypeName(Type);
+        public override SR.SRTypes Type => SR.SRTypes.equal;
+        public override string ContentType => "";
+        public override bool ShowIntroducePrompt => true;
+        public override bool ShowReattachWarning => true;
         public override bool AllowToCreateNewSr { get; set; }
     }
 
     public class SrWizardType_Fcoe : SrWizardType
     {
-        public override bool IsEnhancedSR { get { return false; } }
-        public override string FrontendBlurb { get { return Messages.NEWSR_LVMOFCOE_BLURB; } }
-        public override string FrontendTypeName { get { return Messages.NEWSR_LVMOFCOE_TYPE_NAME; } }
-        public override SR.SRTypes Type { get { return IsGfs2 ? SR.SRTypes.gfs2 : SR.SRTypes.lvmofcoe; } }
-        public override string ContentType { get { return ""; } }
-        public override bool ShowIntroducePrompt { get { return false; } }
-        public override bool ShowReattachWarning { get { return true; } }
+        public override bool IsEnhancedSR => false;
+        public override string FrontendBlurb => string.Format(Messages.NEWSR_LVMOFCOE_BLURB, BrandManager.ProductBrand);
+        public override string FrontendTypeName => Messages.NEWSR_LVMOFCOE_TYPE_NAME;
+        public override SR.SRTypes Type => IsGfs2 ? SR.SRTypes.gfs2 : SR.SRTypes.lvmofcoe;
+        public override string ContentType => "";
+        public override bool ShowIntroducePrompt => false;
+        public override bool ShowReattachWarning => true;
         public override bool AllowToCreateNewSr { get; set; }
         public override bool IsGfs2 { get; set; }
 

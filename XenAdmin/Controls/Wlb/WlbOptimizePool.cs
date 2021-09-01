@@ -85,8 +85,6 @@ namespace XenAdmin.Controls.Wlb
             optimizePoolListView.SmallImageList = Images.ImageList16;
             optimizePoolListView.ListViewItemSorter = columnSorter;
 
-            //linkLabelReportHistory.Visible = false;
-
             recommendationUpdateTimer = new System.Threading.Timer(TimerCallback, null, 0, 0);
             StartTimer();
         }
@@ -161,8 +159,6 @@ namespace XenAdmin.Controls.Wlb
             this.SuspendLayout();
             if (WlbServerState.GetState(_pool) == WlbServerState.ServerState.Enabled)
             {
-                //linkLabelReportHistory.Visible = true;
-
                 // Update listView VM/Host header text
                 this.optimizePoolListView.BeginUpdate();
                 this.columnHeader1.Text = Messages.WLB_OPT_HEADER_VMHOST;
@@ -170,8 +166,6 @@ namespace XenAdmin.Controls.Wlb
             }
             else
             {
-                //linkLabelReportHistory.Visible = false;
-
                 // Update listView VM/Host header text
                 this.optimizePoolListView.BeginUpdate();
                 this.columnHeader1.Text = Messages.WLB_OPT_HEADER_VM;
@@ -220,20 +214,7 @@ namespace XenAdmin.Controls.Wlb
         }
         #endregion
         
-        // TODO: remove unused event handler
         #region Event Handlers
-
-        // draw the gradient line, override OnPaint in System.Drawing.Drawing2D
-        /*
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            base.OnPaint(e);
-            using (Brush brush = new LinearGradientBrush(Point.Empty, new Point(this.Width / 2, 0), XenAdmin.TabPages.BaseTabPage.HeaderBorderColor, BackColor))
-            {
-                e.Graphics.FillRectangle(brush, 0, 20, this.Width / 2, 1);
-            }
-        }
-        */
 
         /// <summary>
         /// Triggered when pool wlb enabled/disabled and optimize pool
@@ -456,7 +437,7 @@ namespace XenAdmin.Controls.Wlb
 
         private void linkLabelReportHistory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            new ViewWorkloadReportsCommand(Program.MainWindow, _pool, ReportFile, true).Execute();
+            new ViewWorkloadReportsCommand(Program.MainWindow, _pool, ReportFile, true).Run();
         }
 
         private static void UpdateRow(ListViewItem row)
@@ -469,11 +450,6 @@ namespace XenAdmin.Controls.Wlb
 
                 WlbOptimizationRecommendation optVMmSetting = (WlbOptimizationRecommendation)row.Tag;
 
-                // update icon and vm/host name
-                //row.ImageIndex = (int)Images.GetIconFor(optVMmSetting.vm);
-                //row.SubItems[0].Text = optVMmSetting.vm.name_label;
-                //row.SubItems[1].Text = optVMmSetting.fromHost.name_label;
-                //row.SubItems[2].Text = optVMmSetting.toHost.name_label;
                 if (String.IsNullOrEmpty(optVMmSetting.toHost.name_label) || String.IsNullOrEmpty(optVMmSetting.fromHost.name_label))
                 {
                     row.ImageIndex = (int)Images.GetIconFor(optVMmSetting.toHost ?? optVMmSetting.fromHost);
@@ -580,11 +556,11 @@ namespace XenAdmin.Controls.Wlb
                             this.applyButton.Text = Messages.WLB_OPT_OPTIMIZING;
                             EnableControls(false, false);
                         }
-                        else if (action == null || (action != null && action.GetType() != typeof(WlbRetrieveRecommendationAction)))
+                        else if (action as WlbRetrieveRecommendationsAction == null)
                         {
                             this.applyButton.Text = Messages.WLB_OPT_APPLY_RECOMMENDATIONS;
                             // retrieve recommendations, and load optimize pool listview properly
-                            WlbRetrieveRecommendationAction optAction = new WlbRetrieveRecommendationAction(_pool);
+                            var optAction = new WlbRetrieveRecommendationsAction(_pool);
                             optAction.Completed += this.OptRecRetrieveAction_Completed;
                             optAction.RunAsync();
                         }
@@ -623,10 +599,10 @@ namespace XenAdmin.Controls.Wlb
             {
                 action.Completed -= OptRecRetrieveAction_Completed;
 
-                if (action is WlbRetrieveRecommendationAction)
+                if (action is WlbRetrieveRecommendationsAction thisAction)
                 {
-                    WlbRetrieveRecommendationAction thisAction = (WlbRetrieveRecommendationAction)action;
-                    _recommendations = thisAction.WLBOptPoolRecommendations;
+                    _recommendations = thisAction.Recommendations;
+                    
                     if (_recommendations != null && IsGoodRecommendation(_recommendations) && _xenObject.Connection == action.Connection)
                     {
                         Program.Invoke(this, delegate()
@@ -797,7 +773,6 @@ namespace XenAdmin.Controls.Wlb
             statusLabel.Visible = enableLabel;
             
             applyButton.Visible = true;
-            //if ((_autoOptEnabled && _powerManagementEnabled) || !PassedRbacChecks())
             if (PassedRbacChecks() &&
                 (!_autoOptEnabled || 
                  (_autoOptEnabled && !_powerManagementEnabled && IsPowerOnlyRecommendation(_recommendations))))

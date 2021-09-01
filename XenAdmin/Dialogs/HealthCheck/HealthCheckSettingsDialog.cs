@@ -68,6 +68,13 @@ namespace XenAdmin.Dialogs.HealthCheck
             xsUserName = healthCheckSettings.GetSecretInfo(pool.Connection, HealthCheckSettings.UPLOAD_CREDENTIAL_USER_SECRET);
             xsPassword = healthCheckSettings.GetSecretInfo(pool.Connection, HealthCheckSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET);
             InitializeComponent();
+
+            rubricLabel.Text = string.Format(rubricLabel.Text, BrandManager.Cis, BrandManager.ProductBrand);
+            label3.Text = string.Format(label3.Text, BrandManager.ProductBrand);
+            decentGroupBox1.Text = string.Format(decentGroupBox1.Text, BrandManager.Cis);
+            decentGroupBoxXSCredentials.Text = string.Format(decentGroupBoxXSCredentials.Text, BrandManager.ProductBrand);
+            currentXsCredentialsRadioButton.Text = string.Format(currentXsCredentialsRadioButton.Text, BrandManager.BrandConsole);
+            
             PopulateControls();
             InitializeControls();
             UpdateButtons();
@@ -117,7 +124,7 @@ namespace XenAdmin.Dialogs.HealthCheck
             if (authenticationRequired)
             {
                 string noAuthTokenMessage = string.Format(Messages.HEALTHCHECK_AUTHENTICATION_RUBRIC_NO_TOKEN,
-                    Messages.MY_CITRIX_CREDENTIALS_URL);
+                    BrandManager.Cis, Messages.MY_CITRIX_CREDENTIALS_URL);
 
                 authRubricLinkLabel.Text = noAuthTokenMessage;
                 authRubricLinkLabel.LinkArea = new LinkArea(noAuthTokenMessage.IndexOf(Messages.MY_CITRIX_CREDENTIALS_URL),
@@ -125,7 +132,8 @@ namespace XenAdmin.Dialogs.HealthCheck
             }
             else
             {
-                authRubricLinkLabel.Text = Messages.HEALTHCHECK_AUTHENTICATION_RUBRIC_EXISTING_TOKEN;
+                authRubricLinkLabel.Text = string.Format(Messages.HEALTHCHECK_AUTHENTICATION_RUBRIC_EXISTING_TOKEN,
+                    BrandManager.Cis, BrandManager.BrandConsole);
                 authRubricLinkLabel.LinkArea = new LinkArea(0, 0);
             }
 

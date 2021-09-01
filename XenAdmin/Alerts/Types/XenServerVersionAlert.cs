@@ -47,7 +47,7 @@ namespace XenAdmin.Alerts
         public XenServerVersionAlert(XenServerVersion version)
         {
             Version = version;
-            RequiredXenCenterVersion = Updates.GetRequiredXenCenterVersion(Version);
+            RequiredClientVersion = Updates.GetRequiredClientVersion(Version);
             _timestamp = version.TimeStamp;
         }
 
@@ -57,7 +57,8 @@ namespace XenAdmin.Alerts
 
         public override string Title => string.Format(Messages.DOWLOAD_LATEST_XS_TITLE, Version.Name);
 
-        public override string Description => string.Format(Messages.DOWNLOAD_LATEST_XS_BODY, Version.Name);
+        public override string Description => string.Format(Messages.DOWNLOAD_LATEST_XS_BODY,
+            Version.Name, BrandManager.CompanyNameShort);
 
         public override string FixLinkText => Messages.ALERT_NEW_VERSION_DOWNLOAD;
 

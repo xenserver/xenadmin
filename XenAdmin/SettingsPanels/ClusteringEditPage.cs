@@ -105,6 +105,13 @@ namespace XenAdmin.SettingsPanels
                 HelpersGUI.ShowBalloonMessage(comboBoxNetwork, SelectNetworkToolTip);
             }
         }
+        public void HideLocalValidationMessages()
+        {
+            if (comboBoxNetwork != null)
+            {
+                SelectNetworkToolTip.Hide(comboBoxNetwork);
+            }
+        }
 
         public void Cleanup()
         {

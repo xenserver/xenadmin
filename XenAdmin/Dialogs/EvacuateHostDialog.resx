@@ -297,106 +297,106 @@
   <data name="tableLayoutPanelWlb.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="pictureBox2" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lableWLBEnabled" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
-  <data name="tableLayoutPanelNewMaster.AutoSize" type="System.Boolean, mscorlib">
+  <data name="tableLayoutPanelNewCoordinator.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="tableLayoutPanelNewMaster.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+  <data name="tableLayoutPanelNewCoordinator.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
-  <data name="tableLayoutPanelNewMaster.ColumnCount" type="System.Int32, mscorlib">
+  <data name="tableLayoutPanelNewCoordinator.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="labelMasterBlurb.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="labelCoordinatorBlurb.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="labelMasterBlurb.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="labelCoordinatorBlurb.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 0</value>
   </data>
-  <data name="labelMasterBlurb.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="labelCoordinatorBlurb.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 0, 3, 10</value>
   </data>
-  <data name="labelMasterBlurb.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="labelCoordinatorBlurb.Size" type="System.Drawing.Size, System.Drawing">
     <value>538, 30</value>
   </data>
-  <data name="labelMasterBlurb.TabIndex" type="System.Int32, mscorlib">
+  <data name="labelCoordinatorBlurb.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="labelMasterBlurb.Text" xml:space="preserve">
-    <value>This server is the pool master. Entering maintenance mode will nominate a new master for the pool. [XenCenter] will temporarily lose its connection to the pool.</value>
+  <data name="labelCoordinatorBlurb.Text" xml:space="preserve">
+    <value>This server is the pool coordinator. Entering maintenance mode will nominate a new coordinator for the pool. {0} will temporarily lose its connection to the pool.</value>
   </data>
-  <data name="&gt;&gt;labelMasterBlurb.Name" xml:space="preserve">
-    <value>labelMasterBlurb</value>
+  <data name="&gt;&gt;labelCoordinatorBlurb.Name" xml:space="preserve">
+    <value>labelCoordinatorBlurb</value>
   </data>
-  <data name="&gt;&gt;labelMasterBlurb.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelCoordinatorBlurb.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelMasterBlurb.Parent" xml:space="preserve">
-    <value>tableLayoutPanelNewMaster</value>
+  <data name="&gt;&gt;labelCoordinatorBlurb.Parent" xml:space="preserve">
+    <value>tableLayoutPanelNewCoordinator</value>
   </data>
-  <data name="&gt;&gt;labelMasterBlurb.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelCoordinatorBlurb.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="NewMasterLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="NewCoordinatorLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Left</value>
   </data>
-  <data name="NewMasterLabel.AutoSize" type="System.Boolean, mscorlib">
+  <data name="NewCoordinatorLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="NewMasterLabel.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="NewCoordinatorLabel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="NewMasterLabel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="NewCoordinatorLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 47</value>
   </data>
-  <data name="NewMasterLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="NewCoordinatorLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 0, 20, 0</value>
   </data>
-  <data name="NewMasterLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="NewCoordinatorLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>73, 15</value>
   </data>
-  <data name="NewMasterLabel.TabIndex" type="System.Int32, mscorlib">
+  <data name="NewCoordinatorLabel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="NewMasterLabel.Text" xml:space="preserve">
-    <value>&amp;New master:</value>
+  <data name="NewCoordinatorLael.Text" xml:space="preserve">
+    <value>&amp;New coordinator:</value>
   </data>
-  <data name="&gt;&gt;NewMasterLabel.Name" xml:space="preserve">
-    <value>NewMasterLabel</value>
+  <data name="&gt;&gt;NewCoordinatorLabel.Name" xml:space="preserve">
+    <value>NewCoordinatorLabel</value>
   </data>
-  <data name="&gt;&gt;NewMasterLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;NewCoordinatorLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;NewMasterLabel.Parent" xml:space="preserve">
-    <value>tableLayoutPanelNewMaster</value>
+  <data name="&gt;&gt;NewCoordinatorLabel.Parent" xml:space="preserve">
+    <value>tableLayoutPanelNewCoordinator</value>
   </data>
-  <data name="&gt;&gt;NewMasterLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;NewCoordinatorLabel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="NewMasterComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="NewCoordinatorComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="NewMasterComboBox.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="NewCoordinatorComboBox.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="NewMasterComboBox.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="NewCoordinatorComboBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>99, 43</value>
   </data>
-  <data name="NewMasterComboBox.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="NewCoordinatorComboBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>442, 24</value>
   </data>
-  <data name="NewMasterComboBox.TabIndex" type="System.Int32, mscorlib">
+  <data name="NewCoordinatorComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;NewMasterComboBox.Name" xml:space="preserve">
-    <value>NewMasterComboBox</value>
+  <data name="&gt;&gt;NewCoordinatorComboBox.Name" xml:space="preserve">
+    <value>NewCoordinatorComboBox</value>
   </data>
-  <data name="&gt;&gt;NewMasterComboBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;NewCoordinatorComboBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;NewMasterComboBox.Parent" xml:space="preserve">
-    <value>tableLayoutPanelNewMaster</value>
+  <data name="&gt;&gt;NewCoordinatorComboBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanelNewCoordinator</value>
   </data>
-  <data name="&gt;&gt;NewMasterComboBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;NewCoordinatorComboBox.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="tableLayoutPanelPSr.AutoSize" type="System.Boolean, mscorlib">
@@ -493,7 +493,7 @@
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanelPSr.Parent" xml:space="preserve">
-    <value>tableLayoutPanelNewMaster</value>
+    <value>tableLayoutPanelNewCoordinator</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanelPSr.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -501,41 +501,41 @@
   <data name="tableLayoutPanelPSr.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="pictureBox3" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelWarning" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
-  <data name="tableLayoutPanelNewMaster.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="tableLayoutPanelNewCoordinator.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
-  <data name="tableLayoutPanelNewMaster.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="tableLayoutPanelNewCoordinator.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="tableLayoutPanelNewMaster.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="tableLayoutPanelNewCoordinator.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 80</value>
   </data>
-  <data name="tableLayoutPanelNewMaster.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="tableLayoutPanelNewCoordinator.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 10, 0, 0</value>
   </data>
-  <data name="tableLayoutPanelNewMaster.RowCount" type="System.Int32, mscorlib">
+  <data name="tableLayoutPanelNewCoordinator.RowCount" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="tableLayoutPanelNewMaster.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tableLayoutPanelNewCoordinator.Size" type="System.Drawing.Size, System.Drawing">
     <value>544, 98</value>
   </data>
-  <data name="tableLayoutPanelNewMaster.TabIndex" type="System.Int32, mscorlib">
+  <data name="tableLayoutPanelNewCoordinator.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanelNewMaster.Name" xml:space="preserve">
-    <value>tableLayoutPanelNewMaster</value>
+  <data name="&gt;&gt;tableLayoutPanelNewCoordinator.Name" xml:space="preserve">
+    <value>tableLayoutPanelNewCoordinator</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanelNewMaster.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelNewCoordinator.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanelNewMaster.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelNewCoordinator.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanelNewMaster.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanelNewCoordinator.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="tableLayoutPanelNewMaster.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelMasterBlurb" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="NewMasterLabel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="NewMasterComboBox" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutPanelPSr" Row="2" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  <data name="tableLayoutPanelNewCoordinator.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelCoordinatorBlurb" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="NewCoordinatorLabel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="NewCoordinatorComboBox" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutPanelPSr" Row="2" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="tableLayoutPanelSpinner.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>None</value>
@@ -979,7 +979,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="pictureBox1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelBlurb" Row="0" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="tableLayoutPanelWlb" Row="1" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="tableLayoutPanelNewMaster" Row="2" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="vmListLabel" Row="3" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="panel1" Row="4" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="EvacuateButton" Row="5" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="CloseButton" Row="5" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="progressBar1" Row="6" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="tableLayoutPanelStatus" Row="7" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="buttonCheckAgain" Row="5" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100,AutoSize,0,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,200,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="pictureBox1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelBlurb" Row="0" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="tableLayoutPanelWlb" Row="1" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="tableLayoutPanelNewCoordinator" Row="2" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="vmListLabel" Row="3" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="panel1" Row="4" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="EvacuateButton" Row="5" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="CloseButton" Row="5" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="progressBar1" Row="6" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="tableLayoutPanelStatus" Row="7" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="buttonCheckAgain" Row="5" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100,AutoSize,0,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,200,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="vmListLabel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>

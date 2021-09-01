@@ -459,6 +459,8 @@ namespace XenAdmin.TabPages
             }
             panel2.ResumeLayout();
             UpdateButtons();
+
+            SetupDeprecationBanner();
         }
 
         private void GenerateInterfaceBox()
@@ -571,8 +573,8 @@ namespace XenAdmin.TabPages
                     s.AddEntry(kvp.Key, kvp.Value);
                 }
             }
-            Host master = Helpers.GetMaster(xenObject.Connection);
-            if (master == null)
+            Host coordinator = Helpers.GetCoordinator(xenObject.Connection);
+            if (coordinator == null)
                 return;
 
             var poolAppPatches = poolAppliedPatches();
@@ -1158,7 +1160,7 @@ namespace XenAdmin.TabPages
                 var isStandAloneHost = Helpers.GetPool(xenObject.Connection) == null;
 
                 if (!isStandAloneHost)
-                    s.AddEntry(Messages.POOL_MASTER, host.IsMaster() ? Messages.YES : Messages.NO);
+                    s.AddEntry(Messages.POOL_COORDINATOR, host.IsCoordinator() ? Messages.YES : Messages.NO);
 
                 if (!host.IsLive())
                 {
@@ -1294,7 +1296,7 @@ namespace XenAdmin.TabPages
                     }
                     else
                     {
-                        belongsTo = Helpers.GetMaster(sr.Connection);
+                        belongsTo = Helpers.GetCoordinator(sr.Connection);
 
                         if (belongsTo != null)
                         {
@@ -1324,17 +1326,17 @@ namespace XenAdmin.TabPages
                             new CommandToolStripMenuItem(new EnableTlsVerificationCommand(Program.MainWindow, p)));
                 }
 
-                var master = p.Connection.Resolve(p.master);
-                if (master != null)
+                var coordinator = p.Connection.Resolve(p.master);
+                if (coordinator != null)
                 {
                     if (p.IsPoolFullyUpgraded())
                     {
-                        var hotfixEligibilityString = AdditionalVersionString(master);
+                        var hotfixEligibilityString = AdditionalVersionString(coordinator);
                         if (string.IsNullOrEmpty(hotfixEligibilityString))
-                            s.AddEntry(Messages.SOFTWARE_VERSION_PRODUCT_VERSION, master.ProductVersionText());
+                            s.AddEntry(Messages.SOFTWARE_VERSION_PRODUCT_VERSION, coordinator.ProductVersionText());
                         else
                             s.AddEntry(Messages.SOFTWARE_VERSION_PRODUCT_VERSION, 
-                                string.Format(Messages.MAINWINDOW_CONTEXT_REASON, master.ProductVersionText(), hotfixEligibilityString),
+                                string.Format(Messages.MAINWINDOW_CONTEXT_REASON, coordinator.ProductVersionText(), hotfixEligibilityString),
                                 Color.Red);
                     }
                     else
@@ -1342,10 +1344,10 @@ namespace XenAdmin.TabPages
                         var cmd = new RollingUpgradeCommand(Program.MainWindow);
                         var runRpuWizard = new ToolStripMenuItem(Messages.ROLLING_POOL_UPGRADE_ELLIPSIS,
                             null,
-                            (sender, args) => cmd.Execute());
+                            (sender, args) => cmd.Run());
 
                         s.AddEntryLink(Messages.SOFTWARE_VERSION_PRODUCT_VERSION,
-                            string.Format(Messages.POOL_VERSIONS_LINK_TEXT, master.ProductVersionText()),
+                            string.Format(Messages.POOL_VERSIONS_LINK_TEXT, BrandManager.ProductBrand, coordinator.ProductVersionText()),
                             cmd, runRpuWizard);
                     }
                 }
@@ -1466,7 +1468,7 @@ namespace XenAdmin.TabPages
                     {
                         //Row 4: Install Tools
                         string installMessage = string.Empty;
-                        var canInstall = InstallToolsCommand.CanExecute(vm);
+                        var canInstall = InstallToolsCommand.CanRun(vm);
 
                         if (canInstall && !status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
                         {
@@ -1487,14 +1489,14 @@ namespace XenAdmin.TabPages
                                     Help.HelpManager.Launch("InstallToolsWarningDialog");
                                 }
 
-                                var toolsItem = new ToolStripMenuItem(Messages.INSTALLTOOLS_READ_MORE, null,
+                                var toolsItem = new ToolStripMenuItem(string.Format(Messages.INSTALLTOOLS_READ_MORE, BrandManager.VmTools), null,
                                     (sender, args) => GoToHelp());
-                                s.AddEntryLink(string.Empty, Messages.INSTALLTOOLS_READ_MORE, GoToHelp, toolsItem);
+                                s.AddEntryLink(string.Empty, string.Format(Messages.INSTALLTOOLS_READ_MORE, BrandManager.VmTools), GoToHelp, toolsItem);
                             }
                             else
                             {
                                 var cmd = new InstallToolsCommand(Program.MainWindow, vm);
-                                var toolsItem = new ToolStripMenuItem(installMessage, null, (sender, args) => cmd.Execute());
+                                var toolsItem = new ToolStripMenuItem(installMessage, null, (sender, args) => cmd.Run());
                                 s.AddEntryLink(string.Empty, installMessage, cmd, toolsItem);
                             }
                         }
@@ -1508,7 +1510,7 @@ namespace XenAdmin.TabPages
 
                     if (status == VM.VirtualisationStatus.NOT_INSTALLED || status.HasFlag(VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
                     {
-                        if (InstallToolsCommand.CanExecute(vm))
+                        if (InstallToolsCommand.CanRun(vm))
                         {
                             if (Helpers.StockholmOrGreater(vm.Connection))
                             {
@@ -1517,16 +1519,16 @@ namespace XenAdmin.TabPages
                                     Help.HelpManager.Launch("InstallToolsWarningDialog");
                                 }
 
-                                var toolsItem = new ToolStripMenuItem(Messages.INSTALLTOOLS_READ_MORE, null, (sender, args) => GoToHelp());
+                                var toolsItem = new ToolStripMenuItem(string.Format(Messages.INSTALLTOOLS_READ_MORE, BrandManager.VmTools), null, (sender, args) => GoToHelp());
 
                                 s.AddEntry(FriendlyName("VM.VirtualizationState"), statusString);
-                                s.AddEntryLink("", Messages.INSTALLTOOLS_READ_MORE, GoToHelp, toolsItem);
+                                s.AddEntryLink("", string.Format(Messages.INSTALLTOOLS_READ_MORE, BrandManager.VmTools), GoToHelp, toolsItem);
                             }
                             else
                             {
                                 var cmd = new InstallToolsCommand(Program.MainWindow, vm);
-                                var toolsItem = new ToolStripMenuItem(Messages.INSTALL_XENSERVER_TOOLS, null,
-                                    (sender, args) => cmd.Execute());
+                                var toolsItem = new ToolStripMenuItem(string.Format(Messages.INSTALL_XENSERVER_TOOLS, BrandManager.VmTools), null,
+                                    (sender, args) => cmd.Run());
 
                                 s.AddEntryLink(FriendlyName("VM.VirtualizationState"), statusString,
                                     cmd, toolsItem);
@@ -1975,7 +1977,7 @@ namespace XenAdmin.TabPages
 
         private void buttonProperties_Click(object sender, EventArgs e)
         {
-            new PropertiesCommand(Program.MainWindow, xenObject).Execute();
+            new PropertiesCommand(Program.MainWindow, xenObject).Run();
         }
 
         private void buttonViewConsole_Click(object sender, EventArgs e)
@@ -1988,6 +1990,12 @@ namespace XenAdmin.TabPages
         {
             //Set command 'docker logs' to retrieve the logs of the container.
             StartPutty( "env docker logs --tail=50 --follow --timestamps");
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {   
+            //Force scrollbar to be repainted to avoid occasional pixel glitch.
+            panel2.AutoScroll = sections.Sum(s => s.Parent?.Height ?? s.Height) > panel2.ClientRectangle.Height;
         }
 
         #endregion
@@ -2006,7 +2014,7 @@ namespace XenAdmin.TabPages
                 string cmdFile = Path.Combine(Path.GetTempPath(), "ContainerManagementCommand.txt");
                 File.WriteAllText(cmdFile, command);
 
-                //Invoke Putty, SSH to VM and execute docker command.
+                //Invoke Putty, SSH to VM and run docker command.
                 var puttyPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "putty.exe");
                 string args = "-m " + cmdFile + " -t " + ipAddr;
 
@@ -2057,6 +2065,22 @@ namespace XenAdmin.TabPages
             finally
             {
                 panel2.ResumeLayout();
+            }
+        }
+
+        private void SetupDeprecationBanner()
+        {
+            if (Helpers.PostStockholm(xenObject.Connection))
+            {
+                Banner.Visible = false;
+            }
+            else
+            {
+                Banner.BannerType = DeprecationBanner.Type.Warning;
+                Banner.WarningMessage = string.Format(Messages.WARNING_PRE_CLOUD_VERSION_CONNECTION, BrandManager.BrandConsole, BrandManager.ProductBrand, BrandManager.ProductVersion82, BrandManager.LegacyConsole);
+                Banner.LinkText = Messages.PATCHING_WIZARD_WEBPAGE_CELL;
+                Banner.LinkUri = new Uri(InvisibleMessages.OUT_OF_DATE_WEBSITE);
+                Banner.Visible = true;
             }
         }
     }

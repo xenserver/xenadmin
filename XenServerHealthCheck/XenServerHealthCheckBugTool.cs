@@ -156,24 +156,24 @@ namespace XenServerHealthCheck
 
             string timestring = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
 
-            // Collect all master/slave information to output as a separate text file with the report
-            List<string> mastersInfo = new List<string>();
+            // Collect all coordinator/supporter information to output as a separate text file with the report
+            List<string> coordinatorsInfo = new List<string>();
 
             int i = 0;
             Pool p = Helpers.GetPool(connection);
             foreach (Host host in connection.Cache.Hosts)
             {
-                // master/slave information
+                // coordinator/supporter information
                 if (p == null)
                 {
-                    mastersInfo.Add(string.Format("Server '{0}' is a stand alone server",
+                    coordinatorsInfo.Add(string.Format("Server '{0}' is a stand alone server",
                         host.Name()));
                 }
                 else
                 {
-                    mastersInfo.Add(string.Format("Server '{0}' is a {1} of pool '{2}'",
+                    coordinatorsInfo.Add(string.Format("Server '{0}' is a {1} of pool '{2}'",
                         host.Name(),
-                        p.master.opaque_ref == host.opaque_ref ? "master" : "slave",
+                        p.master.opaque_ref == host.opaque_ref ? "coordinator" : "supporter",
                         p.Name()));
                 }
 
@@ -181,9 +181,9 @@ namespace XenServerHealthCheck
                 statAction.RunExternal(session);
             }
 
-            // output the slave/master info
-            string mastersDestination = string.Format("{0}\\{1}-Masters.txt", filepath, timestring);
-            WriteExtraInfoToFile(mastersInfo, mastersDestination);
+            // output the supporter/coordinator info
+            string coordinatorsDestination = string.Format("{0}\\{1}-Coordinators.txt", filepath, timestring);
+            WriteExtraInfoToFile(coordinatorsInfo, coordinatorsDestination);
             
             // output the XenCenter metadata
             var metadata = XenAdminConfigManager.Provider.GetXenCenterMetadata(false);

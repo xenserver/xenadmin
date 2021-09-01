@@ -139,13 +139,13 @@
     <value>COM,FLOPPY,ISO,DISPLAY</value>
   </data>
   <data name="OTHER_SYSTEM_SETTING_DESCRIPTION_1" xml:space="preserve">
-    <value>[XenServer] 特有の情報</value>
+    <value>{0} 特有の情報</value>
   </data>
   <data name="OTHER_SYSTEM_SETTING_DESCRIPTION_2" xml:space="preserve">
     <value>起動順序:CD/DVD - ネットワーク - ディスク</value>
   </data>
   <data name="OTHER_SYSTEM_SETTING_DESCRIPTION_3" xml:space="preserve">
-    <value>[XenServer] プラットフォーム情報</value>
+    <value>{0} プラットフォーム情報</value>
   </data>
   <data name="OTHER_SYSTEM_SETTING_DESCRIPTION_4" xml:space="preserve">
     <value>仮想 GPU の情報</value>
@@ -158,9 +158,6 @@
   </data>
   <data name="OTHER_SYSTEM_SETTING_DESCRIPTION_7" xml:space="preserve">
     <value>不揮発性 RAM</value>
-  </data>
-  <data name="POST_INSTALL_SECTION_INFO_1" xml:space="preserve">
-    <value>[XenServer] インストール後処理のみ (Linux ディストリビューションの修復を試行)</value>
   </data>
   <data name="RASD_10_ALLOCATIONUNITS" xml:space="preserve">
     <value>ポート</value>
@@ -293,11 +290,5 @@
   </data>
   <data name="VSSD_CAPTION" xml:space="preserve">
     <value>Xen 仮想マシン</value>
-  </data>
-  <data name="XENSERVER_PLATFORM_DESCRIPTION" xml:space="preserve">
-    <value>[XenServer] プラットフォーム構成項目</value>
-  </data>
-  <data name="XENSERVER_SPECIFIC_DESCRIPTION" xml:space="preserve">
-    <value>[XenServer] 特有の構成項目</value>
   </data>
 </root>

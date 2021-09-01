@@ -57,22 +57,22 @@ namespace XenAdmin.Commands
         {
         }
         
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             foreach (SelectedItem item in selection)
             {
-                if (CanExecute(item))
+                if (CanRun(item))
                 {
-                    new DisconnectCommand(MainWindowCommandInterface, item.Connection, true).Execute();
+                    new DisconnectCommand(MainWindowCommandInterface, item.Connection, true).Run();
                 }
             }
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             foreach (SelectedItem item in selection)
             {
-                if (CanExecute(item))
+                if (CanRun(item))
                 {
                     return true;
                 }
@@ -81,7 +81,7 @@ namespace XenAdmin.Commands
             return false;
         }
 
-        private static bool CanExecute(SelectedItem selection)
+        private static bool CanRun(SelectedItem selection)
         {
             return selection.Connection != null && selection.Connection.IsConnected && selection.PoolAncestor != null;
         }

@@ -36,22 +36,34 @@ namespace XenAdmin.TabPages
 {
     public partial class UpsellTabPage : BaseTabPage
     {
-        protected UpsellTabPage(string title, string blurb, string learnMoreUrl)
+        protected UpsellTabPage(string title, string blurb)
         {
             InitializeComponent();
             base.Text = title;
 
-            upsellPage1.BlurbText = blurb;
-            upsellPage1.LearnMoreUrl = learnMoreUrl;
+            BlurbText = blurb;
+            LearnMoreUrl = InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL;
+        }
+
+        public string BlurbText
+        {
+            set => upsellPage1.BlurbText = HiddenFeatures.LinkLabelHidden
+                ? value
+                : value + string.Format(Messages.UPSELL_BLURB_TRIAL, BrandManager.ProductBrand);
+        }
+
+        public string LearnMoreUrl
+        {
+            set => upsellPage1.LearnMoreUrl = value;
         }
     }
 
     public class ADUpsellPage : UpsellTabPage
     {
         public ADUpsellPage()
-            : base(Messages.ACTIVE_DIRECTORY_TAB_TITLE, HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_AD :
-            Messages.UPSELL_BLURB_AD + Messages.UPSELL_BLURB_TRIAL, InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL)
-        { }
+            : base(Messages.ACTIVE_DIRECTORY_TAB_TITLE, string.Format(Messages.UPSELL_BLURB_AD, BrandManager.ProductBrand))
+        {
+        }
 
         public override string HelpID => "TabPageADUpsell";
     }
@@ -59,8 +71,7 @@ namespace XenAdmin.TabPages
     public class HAUpsellPage : UpsellTabPage
     {
         public HAUpsellPage()
-            : base(Messages.HIGH_AVAILABILITY, HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_HA :
-            Messages.UPSELL_BLURB_HA + Messages.UPSELL_BLURB_TRIAL, InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL)
+            : base(Messages.HIGH_AVAILABILITY, Messages.UPSELL_BLURB_HA)
         { }
 
         public override string HelpID => "TabPageHAUpsell";
@@ -69,8 +80,7 @@ namespace XenAdmin.TabPages
     public class WLBUpsellPage : UpsellTabPage
     {
         public WLBUpsellPage()
-            : base(Messages.WORKLOAD_BALANCING, HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_WLB :
-            Messages.UPSELL_BLURB_WLB + Messages.UPSELL_BLURB_TRIAL, InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL)
+            : base(Messages.WORKLOAD_BALANCING, Messages.UPSELL_BLURB_WLB)
         { }
 
         public override string HelpID => "TabPageWLBUpsell";

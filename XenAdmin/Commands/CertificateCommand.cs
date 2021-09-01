@@ -56,7 +56,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             var host = selection.AsXenObjects<Host>().FirstOrDefault();
 
@@ -66,7 +66,7 @@ namespace XenAdmin.Commands
             MainWindowCommandInterface.ShowForm(typeof(InstallCertificateDialog), new object[] {host});
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (selection.Count != 1 || !(selection[0].XenObject is Host host) || !Helpers.StockholmOrGreater(host))
                 return false;
@@ -75,7 +75,7 @@ namespace XenAdmin.Commands
             return pool != null && !pool.ha_enabled;
         }
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
             if (item is Host host)
             {
@@ -84,7 +84,7 @@ namespace XenAdmin.Commands
                     return Messages.INSTALL_SERVER_CERTIFICATE_HA;
             }
             
-            return base.GetCantExecuteReasonCore(item);
+            return base.GetCantRunReasonCore(item);
         }
 
         public override string ContextMenuText => MenuText;
@@ -109,7 +109,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             var host = selection.AsXenObjects<Host>().FirstOrDefault();
 
@@ -128,7 +128,7 @@ namespace XenAdmin.Commands
                 "host.host_reset_server_certificate").RunAsync();
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             return selection.Count == 1 && selection[0].XenObject is Host host && Helpers.PostStockholm(host);
         }
@@ -175,10 +175,10 @@ namespace XenAdmin.Commands
             return true;
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
-            return new InstallCertificateCommand().CanExecuteCore(selection) ||
-                   new ResetCertificateCommand().CanExecuteCore(selection);
+            return new InstallCertificateCommand().CanRunCore(selection) ||
+                   new ResetCertificateCommand().CanRunCore(selection);
         }
 
         public override string MenuText => Messages.MAINWINDOW_CERTIFICATE_MENU_TEXT;

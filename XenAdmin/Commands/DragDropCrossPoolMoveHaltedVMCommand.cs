@@ -51,7 +51,7 @@ namespace XenAdmin.Commands
         {
             get
             {
-                if (!CanExecute())
+                if (!CanRun())
                 {
                     Host targetHost = GetTargetNodeAncestorAsXenObjectOrGroupingTag<Host>();
                     
@@ -74,7 +74,7 @@ namespace XenAdmin.Commands
                                 }
                             }
                             
-                            if (Helpers.productVersionCompare(Helpers.HostProductVersion(targetHost), Helpers.HostProductVersion(draggedVMHome ?? Helpers.GetMaster(draggedVM.Connection))) < 0)
+                            if (Helpers.productVersionCompare(Helpers.HostProductVersion(targetHost), Helpers.HostProductVersion(draggedVMHome ?? Helpers.GetCoordinator(draggedVM.Connection))) < 0)
                                 return Messages.OLDER_THAN_CURRENT_SERVER;
 
                             if (targetHost != draggedVMHome && VMOperationHostCommand.VmCpuIncompatibleWithHost(targetHost, draggedVM))
@@ -99,7 +99,7 @@ namespace XenAdmin.Commands
             return targetHost != null && (targetPool == null || draggedVMPool == null || targetPool.opaque_ref != draggedVMPool.opaque_ref);
         }
 
-        protected override bool CanExecuteCore()
+        protected override bool CanRunCore()
         {
             Host targetHost = GetTargetNodeAncestorAsXenObjectOrGroupingTag<Host>();
 
@@ -124,7 +124,7 @@ namespace XenAdmin.Commands
                         if (draggedVM.allowed_operations == null || !draggedVM.allowed_operations.Contains(vm_operations.migrate_send))
                             return false;
 
-                        if (Helpers.productVersionCompare(Helpers.HostProductVersion(targetHost), Helpers.HostProductVersion(draggedVMHome ?? Helpers.GetMaster(draggedVM.Connection))) < 0)
+                        if (Helpers.productVersionCompare(Helpers.HostProductVersion(targetHost), Helpers.HostProductVersion(draggedVMHome ?? Helpers.GetCoordinator(draggedVM.Connection))) < 0)
                             return false;
 
                         if (VMOperationHostCommand.VmCpuIncompatibleWithHost(targetHost, draggedVM))
@@ -138,7 +138,7 @@ namespace XenAdmin.Commands
             return false;
         }
 
-        protected override void ExecuteCore()
+        protected override void RunCore()
         {
             Host targetHost = GetTargetNodeAncestorAsXenObjectOrGroupingTag<Host>();
             List<VM> draggedVMs = GetDraggedItemsAsXenObjects<VM>();
@@ -172,7 +172,7 @@ namespace XenAdmin.Commands
                 draggedVMs.ForEach(vm => selectedItems.Add(new SelectedItem(vm)));
                     
                 new CrossPoolMoveVMCommand(MainWindowCommandInterface, selectedItems, targetHost)
-                    .Execute();
+                    .Run();
             }
         }
 
@@ -180,7 +180,7 @@ namespace XenAdmin.Commands
         {
             get
             {
-                return CanExecute() ? GetTargetNodeAncestor<Host>() : null;
+                return CanRun() ? GetTargetNodeAncestor<Host>() : null;
             }
         }
     }

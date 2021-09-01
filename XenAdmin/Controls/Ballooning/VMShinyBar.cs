@@ -61,20 +61,11 @@ namespace XenAdmin.Controls.Ballooning
         [Browsable(false)]
         public double Increment { get; set; }
 
-        public double Dynamic_min
-        {
-            get { return dynamic_min; }
-        }
+        public double Dynamic_min => dynamic_min;
 
-        public double Dynamic_max
-        {
-            get { return dynamic_max; }
-        }
+        public double Dynamic_max => dynamic_max;
 
-        private bool Equal
-        {
-            get { return Dynamic_min == Dynamic_max;  }
-        }
+        private bool Equal => Dynamic_min == Dynamic_max;
 
         public void SetRanges(double dynamic_min_lowlimit, double dynamic_min_highlimit, double dynamic_max_lowlimit, double dynamic_max_highlimit, string units)
         {
@@ -225,10 +216,10 @@ namespace XenAdmin.Controls.Ballooning
             Rectangle rect = new Rectangle(barArea.Left, barArea.Top, left_width, barArea.Height);
             string bytesString = Util.MemorySizeStringSuitableUnits(memoryUsed, false);
             string toolTip = string.Format(multiple ? Messages.CURRENT_MEMORY_USAGE_MULTIPLE : Messages.CURRENT_MEMORY_USAGE, bytesString);
-            DrawToTarget(g, barArea, rect, BallooningColors.VMShinyBar_Used, bytesString, BallooningColors.VMShinyBar_Text, HorizontalAlignment.Right, toolTip);
+            DrawToTarget(g, barArea, rect, VMShinyBar_Used, bytesString, ShinyBar_Text, HorizontalAlignment.Right, toolTip);
 
             rect = new Rectangle(barArea.Left + left_width, barArea.Top, barArea.Width - left_width, barArea.Height);
-            DrawToTarget(g, barArea, rect, BallooningColors.VMShinyBar_Unused);
+            DrawToTarget(g, barArea, rect, ShinyBar_Unused);
 
             // Sliders
 
@@ -339,7 +330,7 @@ namespace XenAdmin.Controls.Ballooning
             int min = barArea.Left + (int)(SliderMinLimit / BytesPerPixel);
             int max = barArea.Left + (int)(SliderMaxLimit / BytesPerPixel);
 
-            using (Brush brush = new SolidBrush(BallooningColors.SliderLimits))
+            using (Brush brush = new SolidBrush(SliderLimits))
             {
                 g.FillRectangle(brush, min, barRect.Bottom, max - min, Height);
             }
@@ -388,12 +379,6 @@ namespace XenAdmin.Controls.Ballooning
             g.DrawImageUnscaled(max_image, max_pt);
         }
 
-        protected override int barHeight
-        {
-            get
-            {
-                return 20;
-            }
-        }
+        protected override int barHeight => 20;
     }
 }

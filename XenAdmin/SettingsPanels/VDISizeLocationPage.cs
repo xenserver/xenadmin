@@ -87,6 +87,9 @@ namespace XenAdmin.SettingsPanels
         {
         }
 
+        public void HideLocalValidationMessages()
+        { }
+
         public void Cleanup()
         {
         }

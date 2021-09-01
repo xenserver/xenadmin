@@ -88,7 +88,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             page_CloudConfigParameters = new Page_CloudConfigParameters();
 
             #region RBAC Warning Page Checks
-            if (connection.Session.IsLocalSuperuser || Helpers.GetMaster(connection).external_auth_type == Auth.AUTH_TYPE_NONE)
+            if (connection.Session.IsLocalSuperuser || Helpers.GetCoordinator(connection).external_auth_type == Auth.AUTH_TYPE_NONE)
             {
                 //page_RbacWarning.DisableStep = true;
             }
@@ -220,7 +220,7 @@ namespace XenAdmin.Wizards.NewVMWizard
 
 
                 RemovePage(pageVgpu);
-                gpuCapability = Helpers.GpuCapability(xenConnection) && selectedTemplate.CanHaveGpu();
+                gpuCapability = Helpers.GpuCapability(xenConnection) && selectedTemplate.CanHaveGpu() && Helpers.GpusAvailable(xenConnection);
                 if (gpuCapability)
                     AddAfterPage(page_5_CpuMem, pageVgpu);
 
@@ -238,14 +238,6 @@ namespace XenAdmin.Wizards.NewVMWizard
                     if (!BlockAffinitySelection)
                         page_4_HomeServer.DisableStep = false;
                 }
-
-                // if custom template has no cd drive (must have been removed via cli) don't add one
-                var noInstallMedia = Helpers.CustomWithNoDVD(selectedTemplate);
-
-                if (selectedTemplate != null && selectedTemplate.DefaultTemplate() && string.IsNullOrEmpty(selectedTemplate.InstallMethods()))
-                    noInstallMedia = true;
-
-                page_3_InstallationMedia.ShowInstallationMedia = !noInstallMedia;
 
                 // The user cannot set their own affinity, use the one off the template
                 if (BlockAffinitySelection)
@@ -308,7 +300,12 @@ namespace XenAdmin.Wizards.NewVMWizard
         private void ShowXenAppXenDesktopWarning(IXenConnection connection)
         {
             if (connection != null && connection.Cache.Hosts.Any(h => h.DesktopFeaturesEnabled() || h.DesktopPlusFeaturesEnabled() || h.DesktopCloudFeaturesEnabled()))
-                ShowInformationMessage(Helpers.GetPool(connection) != null ? Messages.NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_POOL : Messages.NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_SERVER);
+            {
+                var format = Helpers.GetPool(connection) != null
+                    ? Messages.NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_POOL
+                    : Messages.NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_SERVER;
+                ShowInformationMessage(string.Format(format, BrandManager.CompanyNameShort));
+            }
             else
                 HideInformationMessage();
         }

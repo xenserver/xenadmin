@@ -129,6 +129,7 @@ namespace XenAdmin
             ImageList16.Images.Add("centos_16x.png", Properties.Resources.centos_16x);
             ImageList16.Images.Add("debian_16x.png", Properties.Resources.debian_16x);
             ImageList16.Images.Add("gooroom_16x.png", Properties.Resources.gooroom_16x);
+            ImageList16.Images.Add("rocky_16x.png", Properties.Resources.rocky_16x);
             ImageList16.Images.Add("linx_16x.png", Properties.Resources.linx_16x);
             ImageList16.Images.Add("oracle_16x.png", Properties.Resources.oracle_16x);
             ImageList16.Images.Add("redhat_16x.png", Properties.Resources.redhat_16x);
@@ -350,7 +351,7 @@ namespace XenAdmin
             if (pool != null)
                 return GetIconFor(pool);
 
-            Host host = Helpers.GetMaster(connection);
+            Host host = Helpers.GetCoordinator(connection);
             if (host != null)
                 return GetIconFor(host);
 
@@ -478,9 +479,9 @@ namespace XenAdmin
                 {
                     return Icons.HostEvacuate;
                 }
-                else if (Helpers.IsOlderThanMaster(host))
+                else if (Helpers.IsOlderThanCoordinator(host))
                 {
-                    return Icons.HostOlderThanMaster;
+                    return Icons.HostOlderThanCoordinator;
                 }
                 else
                 {
@@ -742,7 +743,6 @@ namespace XenAdmin
             public static Bitmap _000_VMTemplate_h32bit_16 = Properties.Resources._000_VMTemplate_h32bit_16;
             public static Bitmap _000_WarningAlert_h32bit_32 = Properties.Resources._000_WarningAlert_h32bit_32;
             public static Bitmap _000_weighting_h32bit_16 = Properties.Resources._000_weighting_h32bit_16;
-            public static Bitmap _000_XenCenterAlerts_h32bit_24 = Properties.Resources._000_XenCenterAlerts_h32bit_24;
             public static Bitmap _001_Back_h32bit_24 = Properties.Resources._001_Back_h32bit_24;
             public static Bitmap _001_CreateVM_h32bit_16 = Properties.Resources._001_CreateVM_h32bit_16;
             public static Bitmap _001_ForceReboot_h32bit_16 = Properties.Resources._001_ForceReboot_h32bit_16;
@@ -775,7 +775,6 @@ namespace XenAdmin
             public static Bitmap alert4_16 = Properties.Resources.alert4_16;
             public static Bitmap alert5_16 = Properties.Resources.alert5_16;
             public static Bitmap alert6_16 = Properties.Resources.alert6_16;
-            public static Bitmap alerts_32 = Properties.Resources.alerts_32;
             public static Bitmap ascending_triangle = Properties.Resources.ascending_triangle;
             public static Bitmap asterisk = Properties.Resources.asterisk;
             public static Bitmap attach_24 = Properties.Resources.attach_24;
@@ -863,6 +862,8 @@ namespace XenAdmin
             public static Bitmap pool_up_16 = Properties.Resources.pool_up_16;
             public static Bitmap redhat_16x = Properties.Resources.redhat_16x;
             public static Bitmap Refresh16 = Properties.Resources.Refresh16;
+            public static Bitmap RightArrow = Properties.Resources.RightArrow;
+            public static Bitmap LeftArrow = Properties.Resources.LeftArrow;
             public static Bitmap RunningDC_16 = Properties.Resources.RunningDC_16;
             public static Bitmap saved_searches_16 = Properties.Resources.saved_searches_16;
             public static Bitmap saved_searches_24 = Properties.Resources.saved_searches_24;
@@ -902,7 +903,6 @@ namespace XenAdmin
             public static Bitmap tshadowright = Properties.Resources.tshadowright;
             public static Bitmap tshadowtopright = Properties.Resources.tshadowtopright;
             public static Bitmap ubuntu_16x = Properties.Resources.ubuntu_16x;
-            public static Bitmap upsell_16 = Properties.Resources.upsell_16;
             public static Bitmap usagebar_0 = Properties.Resources.usagebar_0;
             public static Bitmap usagebar_1 = Properties.Resources.usagebar_1;
             public static Bitmap usagebar_10 = Properties.Resources.usagebar_10;
@@ -929,6 +929,7 @@ namespace XenAdmin
             public static Bitmap _000_User_h32bit_32 = Properties.Resources._000_User_h32bit_32;
             public static Bitmap asianux_16x = Properties.Resources.asianux_16x;
             public static Bitmap gooroom_16x = Properties.Resources.gooroom_16x;
+            public static Bitmap rocky_16x = Properties.Resources.rocky_16x;
             public static Bitmap linx_16x = Properties.Resources.linx_16x;
             public static Bitmap turbo_16x = Properties.Resources.turbo_16x;
             public static Bitmap usb_16 = Properties.Resources.usb_16;

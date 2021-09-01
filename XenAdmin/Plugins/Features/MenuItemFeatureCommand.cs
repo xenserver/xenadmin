@@ -59,7 +59,7 @@ namespace XenAdmin.Plugins
             _serialization = serialization;
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (!_menuItemFeature.Enabled)
             {
@@ -106,7 +106,7 @@ namespace XenAdmin.Plugins
             return selection.Count > 0;
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             if (_serialization == PluginSerializationLevel.global && !GlobalPlugins.Contains(_menuItemFeature))
             {

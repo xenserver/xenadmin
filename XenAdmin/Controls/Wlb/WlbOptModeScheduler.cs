@@ -171,39 +171,35 @@ namespace XenAdmin.Controls.Wlb
             weekView1.ClearTriggerPoints();
             lvTaskList.Items.Clear();
 
-            //foreach (int key in _scheduledTasks.SortedTaskList.Keys)
             foreach (int key in _scheduledTasks.VirtualTaskList.Keys)
             {
                 //WlbScheduledTask task = _scheduledTasks.SortedTaskList[key];
                 WlbScheduledTask task = _scheduledTasks.VirtualTaskList[key];
                 WlbScheduledTask parentTask = _scheduledTasks.TaskList[_scheduledTasks.VirtualTaskList[key].TaskId.ToString()];
 
-                DateTime localExecuteTime;
+                DateTime localRunTime;
                 WlbScheduledTask.WlbTaskDaysOfWeek localDaysOfWeek;
-                WlbScheduledTask.GetLocalTaskTimes((task.DaysOfWeek), task.ExecuteTime, out localDaysOfWeek, out localExecuteTime);
+                WlbScheduledTask.GetLocalTaskTimes((task.DaysOfWeek), task.RunTime, out localDaysOfWeek, out localRunTime);
 
                 ListViewItem item = new ListViewItem();
                 item.Text = key.ToString();
                 item.SubItems.Add(GetTaskOptMode(task) == WlbPoolPerformanceMode.MaximizeDensity ? Messages.WLB_OPT_MODE_MAXIMIZEDENSITY : Messages.WLB_OPT_MODE_MAXIMIZEPERFORMANCE);
                 item.SubItems.Add(GetTaskDayOfWeek(localDaysOfWeek, parentTask.DaysOfWeek));
-                item.SubItems.Add(GetTaskExecuteTime(localExecuteTime));
+                item.SubItems.Add(GetTaskRunTime(localRunTime));
                 item.SubItems.Add(task.Enabled ? Messages.YES : Messages.NO);
                 item.Tag = task;
                 lvTaskList.Items.Add(item);
-            //}
 
-            //foreach (WlbScheduledTask task in _scheduledTasks.VirtualTaskList.Values)
-            //{
                 if (task.Enabled)
                 {
-                    //DateTime localExecuteTime;
+                    //DateTime localRunTime;
                     //WlbScheduledTask.WlbTaskDaysOfWeek localDaysOfWeek;
-                    WlbScheduledTask.GetLocalTaskTimes((task.DaysOfWeek), task.ExecuteTime, out localDaysOfWeek, out localExecuteTime);
-                    string toolTipText = string.Format("Change to {0} mode at {1} on {2}", WlbScheduledTask.GetTaskOptMode(task), WlbScheduledTask.GetTaskExecuteTime(localExecuteTime), WlbScheduledTask.DaysOfWeekL10N(localDaysOfWeek));
+                    WlbScheduledTask.GetLocalTaskTimes((task.DaysOfWeek), task.RunTime, out localDaysOfWeek, out localRunTime);
+                    string toolTipText = string.Format("Change to {0} mode at {1} on {2}", WlbScheduledTask.GetTaskOptMode(task), GetTaskRunTime(localRunTime), WlbScheduledTask.DaysOfWeekL10N(localDaysOfWeek));
                     
                     TriggerPoint triggerPoint = new TriggerPoint();
                     triggerPoint.Day = WlbScheduledTask.ConvertFromWlbTaskDayOfWeek(localDaysOfWeek);
-                    triggerPoint.Hour = localExecuteTime.Hour;
+                    triggerPoint.Hour = localRunTime.Hour;
                     triggerPoint.Color = GetTaskOptMode(task) == WlbPoolPerformanceMode.MaximizePerformance ? Color.Blue : Color.Green;
                     triggerPoint.ToolTip = toolTipText;
                     triggerPoint.Tag = task.TaskId;
@@ -215,34 +211,6 @@ namespace XenAdmin.Controls.Wlb
             lvTaskList.Sort();
             EnableButtons();
        }
-
-        //private void AddTaskToList(WlbScheduledTask task)
-        //{
-        //    foreach (WlbScheduledTask.WlbTaskDaysOfWeek dayValue in Enum.GetValues(typeof(WlbScheduledTask.WlbTaskDaysOfWeek)))
-        //    {
-        //        if (dayValue != WlbScheduledTask.WlbTaskDaysOfWeek.None && 
-        //            dayValue != WlbScheduledTask.WlbTaskDaysOfWeek.All &&
-        //            dayValue != WlbScheduledTask.WlbTaskDaysOfWeek.Weekdays &&
-        //            dayValue != WlbScheduledTask.WlbTaskDaysOfWeek.Weekends &&
-        //            ((task.DaysOfWeek & dayValue) == dayValue))
-        //        {
-        //            DateTime localExecuteTime;
-        //            WlbScheduledTask.WlbTaskDaysOfWeek localDaysOfWeek;
-        //            WlbScheduledTask.GetLocalTaskTimes((task.DaysOfWeek & dayValue), task.ExecuteTime, out localDaysOfWeek, out localExecuteTime);
-
-        //            int sortValue = (int)localDaysOfWeek * 10000 + (int)localExecuteTime.TimeOfDay.TotalMinutes;
-
-        //            ListViewItem item = new ListViewItem();
-        //            item.Text = sortValue.ToString();
-        //            item.SubItems.Add(GetTaskOptMode(task) == WlbPoolPerformanceMode.MaximizeDensity ? Messages.WLB_OPT_MODE_MAXIMIZEDENSITY : Messages.WLB_OPT_MODE_MAXIMIZEPERFORMANCE);
-        //            item.SubItems.Add(GetTaskDayOfWeek(localDaysOfWeek));
-        //            item.SubItems.Add(GetTaskExecuteTime(localExecuteTime));
-        //            item.SubItems.Add(task.Enabled ? Messages.YES : Messages.NO);
-        //            item.Tag = task;
-        //            lvTaskList.Items.Add(item);
-        //        }
-        //    }
-        //}
 
         private void FixColumnWidths()
         {
@@ -333,7 +301,7 @@ namespace XenAdmin.Controls.Wlb
                     if ((checkTask.ActionType == newTask.ActionType) &&
                         ((checkTask.DaysOfWeek & newTask.DaysOfWeek) == checkTask.DaysOfWeek ||
                         (checkTask.DaysOfWeek & newTask.DaysOfWeek) == newTask.DaysOfWeek) &&
-                        (string.Compare(HelpersGUI.DateTimeToString(checkTask.ExecuteTime, "t", false), HelpersGUI.DateTimeToString(newTask.ExecuteTime, "t", false)) == 0) &&
+                        (string.Compare(HelpersGUI.DateTimeToString(checkTask.RunTime, "t", false), HelpersGUI.DateTimeToString(newTask.RunTime, "t", false)) == 0) &&
                         (checkTask.TaskId != newTask.TaskId))
                     {
                         return checkTask; // taskExists = true;
@@ -496,11 +464,10 @@ namespace XenAdmin.Controls.Wlb
             return returnStr;
         }
 
-        private static string GetTaskExecuteTime(DateTime TaskExecuteTime)
+        public static string GetTaskRunTime(DateTime time)
         {
-            return HelpersGUI.DateTimeToString(TaskExecuteTime, Messages.DATEFORMAT_HM, true);
+            return HelpersGUI.DateTimeToString(time, Messages.DATEFORMAT_HM, true);
         }
-
 
         #endregion Private Static Methods
 
@@ -783,17 +750,6 @@ namespace XenAdmin.Controls.Wlb
             public int Compare(object x, object y)
             {
                 return CompareDouble(double.Parse(((ListViewItem)x).Text), double.Parse(((ListViewItem)y).Text));
-                //WlbScheduledTask taskX = (WlbScheduledTask)((ListViewItem)x).Tag;
-                //WlbScheduledTask taskY = (WlbScheduledTask)((ListViewItem)y).Tag;
-
-                //int returnVal = -1;
-                //returnVal = CompareInt((int)taskX.DaysOfWeek, (int)taskY.DaysOfWeek);
-
-                //if (returnVal == 0)
-                //{
-                //    returnVal = CompareDouble(taskX.ExecuteTime.TimeOfDay.TotalMinutes, taskY.ExecuteTime.TimeOfDay.TotalMinutes);
-                //}
-                //return returnVal;
             }
             
             private int CompareDouble(double x, double y)
@@ -835,11 +791,5 @@ namespace XenAdmin.Controls.Wlb
         }
 #endregion
 
-        //private void lvTaskList_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
-        //{
-        //    if(e.IsSelected)
-        //        SelectTask(TaskFromItem(e.Item).TaskId);            
-        //}
-        
     }
 }

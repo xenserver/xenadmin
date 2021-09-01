@@ -35,7 +35,7 @@ namespace XenAdmin.Dialogs.RestoreSession
 {
     /// <summary>
     /// The dialog used to set whether or not to save server usernames and passwords
-    /// and whether a master password should be set to protect these passwords
+    /// and whether a main password should be set to protect these passwords
     /// </summary>
     public partial class SaveAndRestoreDialog : XenDialogBase
     {

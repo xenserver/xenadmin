@@ -119,7 +119,7 @@ namespace XenAdmin.Controls
                     }
                     else if (xc.IsConnected)
                     {
-                        Host host = Helpers.GetMaster(xc);
+                        Host host = Helpers.GetCoordinator(xc);
                         if (host != null)
                         {
                             HostItem item = new HostItem(host);
