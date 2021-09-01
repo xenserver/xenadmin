@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>XenAdmin</RootNamespace>
-    <AssemblyName>XenCenterMain</AssemblyName>
+    <AssemblyName>[XenCenter_No_Space]Main</AssemblyName>
     <ApplicationIcon>..\Branding\Images\AppIcon.ico</ApplicationIcon>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <PublishUrl>publish\</PublishUrl>
@@ -143,7 +143,6 @@
     <Compile Include="Controls\AffinityPicker.Designer.cs">
       <DependentUpon>AffinityPicker.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Ballooning\BallooningColors.cs" />
     <Compile Include="Controls\Ballooning\MemorySpinner.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -237,6 +236,7 @@
     <Compile Include="Diagnostics\Checks\CfuAvailabilityCheck.cs" />
     <Compile Include="Diagnostics\Checks\AutomatedUpdatesLicenseCheck.cs" />
     <Compile Include="Diagnostics\Checks\DiskSpaceForBatchUpdatesCheck.cs" />
+    <Compile Include="Diagnostics\Checks\HealthCheckServiceCheck.cs" />
     <Compile Include="Diagnostics\Checks\PowerOniLoCheck.cs" />
     <Compile Include="Diagnostics\Checks\PoolLegacySslCheck.cs" />
     <Compile Include="Diagnostics\Checks\PrepareToUpgradeCheck.cs" />
@@ -246,10 +246,11 @@
     <Compile Include="Diagnostics\Checks\SafeToUpgradeCheck.cs" />
     <Compile Include="Diagnostics\Checks\ServerSelectionCheck.cs" />
     <Compile Include="Diagnostics\Checks\VSwitchControllerCheck.cs" />
-    <Compile Include="Diagnostics\Checks\XenCenterVersionCheck.cs" />
+    <Compile Include="Diagnostics\Checks\ClientVersionCheck.cs" />
     <Compile Include="Diagnostics\Checks\HostMemoryPostUpgradeCheck.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\BrokenSR.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\PowerOniLoProblem.cs" />
+    <Compile Include="Diagnostics\Problems\PoolProblem\HealthCheckServiceProblem.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\LegacySslProblem.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\PoolHasPVGuestWarningUrl.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\HostMemoryPostUpgradeWarning.cs" />
@@ -279,7 +280,7 @@
     <Compile Include="Dialogs\AttachUsbDialog.Designer.cs">
       <DependentUpon>AttachUsbDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Diagnostics\Problems\XenCenterVersionProblem.cs" />
+    <Compile Include="Diagnostics\Problems\ClientVersionProblem.cs" />
     <Compile Include="Dialogs\ConversionDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -596,9 +597,6 @@
     <Compile Include="SettingsPanels\PerfmonAlertOptionsPage.Designer.cs">
       <DependentUpon>PerfmonAlertOptionsPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\BlueBorderPanel.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Controls\CustomDataGraph\ArchiveMaintainer.cs">
     </Compile>
     <Compile Include="Controls\CustomDataGraph\DataArchive.cs" />
@@ -642,12 +640,6 @@
     <Compile Include="Diagnostics\Checks\HAOffCheck.cs" />
     <Compile Include="Diagnostics\Problems\VMProblem\CannotMigrateVM.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\HAEnabledProblem.cs" />
-    <Compile Include="Dialogs\AllowUpdatesDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\AllowUpdatesDialog.Designer.cs">
-      <DependentUpon>AllowUpdatesDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\BondProperties.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1058,7 +1050,7 @@
     <Compile Include="TabPages\HAPage.Designer.cs">
       <DependentUpon>HAPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Alerts\Types\XenCenterUpdateAlert.cs" />
+    <Compile Include="Alerts\Types\ClientUpdateAlert.cs" />
     <Compile Include="Wizards\PatchingWizard\AutomatedUpdatesBasePage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1083,7 +1075,7 @@
     <Compile Include="Wizards\PatchingWizard\PlanActions\PatchPrecheckOnHostPlanAction.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\DownloadPatchPlanAction.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\RestartHostPlanAction.cs" />
-    <Compile Include="Wizards\PatchingWizard\PlanActions\UploadPatchToMasterPlanAction.cs" />
+    <Compile Include="Wizards\PatchingWizard\PlanActions\UploadPatchToCoordinatorPlanAction.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\XenServerPatchMapping.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\RemoveUpdateFilesFromMaster.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\RemoveUpdateFile.cs" />
@@ -1160,17 +1152,17 @@
     <Compile Include="Controls\Common\PasswordFailure.Designer.cs">
       <DependentUpon>PasswordFailure.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\RestoreSession\SetMasterPasswordDialog.cs">
+    <Compile Include="Dialogs\RestoreSession\SetMainPasswordDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\RestoreSession\SetMasterPasswordDialog.Designer.cs">
-      <DependentUpon>SetMasterPasswordDialog.cs</DependentUpon>
+    <Compile Include="Dialogs\RestoreSession\SetMainPasswordDialog.Designer.cs">
+      <DependentUpon>SetMainPasswordDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\RestoreSession\EnterMasterPasswordDialog.cs">
+    <Compile Include="Dialogs\RestoreSession\EnterMainPasswordDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\RestoreSession\EnterMasterPasswordDialog.Designer.cs">
-      <DependentUpon>EnterMasterPasswordDialog.cs</DependentUpon>
+    <Compile Include="Dialogs\RestoreSession\EnterMainPasswordDialog.Designer.cs">
+      <DependentUpon>EnterMainPasswordDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\RestoreSession\SaveAndRestoreDialog.cs">
       <SubType>Form</SubType>
@@ -1178,11 +1170,11 @@
     <Compile Include="Dialogs\RestoreSession\SaveAndRestoreDialog.Designer.cs">
       <DependentUpon>SaveAndRestoreDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\RestoreSession\ChangeMasterPasswordDialog.cs">
+    <Compile Include="Dialogs\RestoreSession\ChangeMainPasswordDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\RestoreSession\ChangeMasterPasswordDialog.Designer.cs">
-      <DependentUpon>ChangeMasterPasswordDialog.cs</DependentUpon>
+    <Compile Include="Dialogs\RestoreSession\ChangeMainPasswordDialog.Designer.cs">
+      <DependentUpon>ChangeMainPasswordDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\ThreeButtonDialog.cs">
       <SubType>Form</SubType>
@@ -2010,10 +2002,6 @@
       <SubType>Designer</SubType>
       <DependentUpon>GraphList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\AllowUpdatesDialog.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>AllowUpdatesDialog.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\BondProperties.resx">
       <DependentUpon>BondProperties.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -2566,9 +2554,9 @@
       <DependentUpon>NewCustomFieldDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\RestoreSession\EnterMasterPasswordDialog.resx">
+    <EmbeddedResource Include="Dialogs\RestoreSession\EnterMainPasswordDialog.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>EnterMasterPasswordDialog.cs</DependentUpon>
+      <DependentUpon>EnterMainPasswordDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Common\PasswordFailure.resx">
       <SubType>Designer</SubType>
@@ -2578,13 +2566,13 @@
       <SubType>Designer</SubType>
       <DependentUpon>SaveAndRestoreDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\RestoreSession\ChangeMasterPasswordDialog.resx">
+    <EmbeddedResource Include="Dialogs\RestoreSession\ChangeMainPasswordDialog.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>ChangeMasterPasswordDialog.cs</DependentUpon>
+      <DependentUpon>ChangeMainPasswordDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\RestoreSession\SetMasterPasswordDialog.resx">
+    <EmbeddedResource Include="Dialogs\RestoreSession\SetMainPasswordDialog.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>SetMasterPasswordDialog.cs</DependentUpon>
+      <DependentUpon>SetMainPasswordDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\ThreeButtonDialog.resx">
       <DependentUpon>ThreeButtonDialog.cs</DependentUpon>
@@ -4116,7 +4104,6 @@
       <DependentUpon>WlbPage.cs</DependentUpon>
     </Compile>
     <Compile Include="TestResources\TestResource.cs" />
-    <Compile Include="TestResources\XenSearchQueryTest.cs" />
     <Compile Include="UpdateManager.cs" />
     <Compile Include="UpdateManager.DelayCalculator.cs">
       <SubType>Code</SubType>
@@ -4210,16 +4197,12 @@
     <Compile Include="Wizards\PatchingWizard\PlanActions\RestartAgentPlanAction.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\UnwindProblemsAction.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\VMsPlanAction.cs" />
-    <Compile Include="Wlb\WlbPoolConfiguration.cs" />
-    <Compile Include="Wlb\WlbReportInfo.cs" />
-    <Compile Include="Wlb\WlbReportSubscription.cs" />
-    <Compile Include="Wlb\WlbReports\WorkloadReports.cs">
+    <Compile Include="Dialogs\Wlb\WorkloadReports.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Wlb\WlbReports\WorkloadReports.Designer.cs">
+    <Compile Include="Dialogs\Wlb\WorkloadReports.Designer.cs">
       <DependentUpon>WorkloadReports.cs</DependentUpon>
     </Compile>
-    <Compile Include="Wlb\WlbScheduledTask.cs" />
     <Compile Include="XenSearch\Columns.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -4404,12 +4387,11 @@
     <None Include="Images\000_Tick_h32bit_16.png" />
     <None Include="Images\001_CreateVM_h32bit_16.png" />
     <None Include="Images\000_Tick_h32bit_24.png" />
-    <None Include="..\Branding\Images\000_XenCenterAlerts_h32bit_24.png">
-      <Link>Images\000_XenCenterAlerts_h32bit_24.png</Link>
-    </None>
     <None Include="Images\000_WarningAlert_h32bit_32.png" />
     <None Include="Images\112_LeftArrowLong_Blue_24x24_72.png" />
-    <None Include="Images\WLB.png" />
+    <None Include="..\Branding\Images\WLB.png">
+      <Link>Images\WLB.png</Link>
+    </None>
     <None Include="..\Branding\Images\XS.png">
       <Link>Images\XS.png</Link>
     </None>
@@ -4428,9 +4410,6 @@
     <None Include="Images\alert4_16.png" />
     <None Include="Images\alert5_16.png" />
     <None Include="Images\alert6_16.png" />
-    <Content Include="..\Branding\Images\alerts_32.png">
-      <Link>Images\alerts_32.png</Link>
-    </Content>
     <Content Include="Images\000_Sites_h32bit_16.png" />
     <None Include="Images\000_TCP-IPGroup_h32bit_16.png" />
     <None Include="Images\015_Download_h32bit_16.png" />
@@ -4457,6 +4436,7 @@
     <None Include="Images\DC_16.png" />
     <Content Include="Images\export_32.png" />
     <None Include="Images\gooroom_16x.png" />
+    <None Include="Images\rocky_16x.png" />
     <Content Include="Images\help_16_hover.png" />
     <Content Include="Images\help_24.png" />
     <Content Include="Images\help_24_hover.png" />
@@ -4491,12 +4471,18 @@
     <None Include="Images\linx_16x.png" />
     <None Include="Images\yinhekylin_16x.png" />
     <None Include="Images\pool_32.png" />
+    <None Include="..\Branding\Images\LeftArrow.png">
+      <Link>Images\LeftArrow.png</Link>
+    </None>
     <Content Include="Images\queued.png" />
     <Content Include="Images\Refresh16.png" />
     <None Include="Images\saved_searches_16.png" />
     <None Include="Images\server_up_16.png" />
     <None Include="Images\saved_searches_24.png" />
     <None Include="Images\RunningDC_16.png" />
+    <None Include="..\Branding\Images\RightArrow.png">
+      <Link>Images\RightArrow.png</Link>
+    </None>
     <Content Include="Images\scilinux_16x.png" />
     <None Include="Images\server_32.png" />
     <None Include="Images\server_up_32.png" />
@@ -4584,9 +4570,6 @@
     <Content Include="Images\tshadowright.png" />
     <Content Include="Images\tshadowtopright.png" />
     <Content Include="Images\ubuntu_16x.png" />
-    <Content Include="..\Branding\Images\upsell_16.png">
-      <Link>Images\upsell_16.png</Link>
-    </Content>
     <Content Include="Images\usagebar_0.png" />
     <Content Include="Images\usagebar_1.png" />
     <Content Include="Images\usagebar_10.png" />
@@ -5138,12 +5121,6 @@
     <EmbeddedResource Include="TabPages\AlertSummaryPage.zh-CN.resx">
       <DependentUpon>AlertSummaryPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\AllowUpdatesDialog.ja.resx">
-      <DependentUpon>AllowUpdatesDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\AllowUpdatesDialog.zh-CN.resx">
-      <DependentUpon>AllowUpdatesDialog.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\AssignLicenseDialog.ja.resx">
       <DependentUpon>AssignLicenseDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -5443,18 +5420,18 @@
     <EmbeddedResource Include="Dialogs\ResolvingSubjectsDialog.zh-CN.resx">
       <DependentUpon>ResolvingSubjectsDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\RestoreSession\ChangeMasterPasswordDialog.ja.resx">
-      <DependentUpon>ChangeMasterPasswordDialog.cs</DependentUpon>
+    <EmbeddedResource Include="Dialogs\RestoreSession\ChangeMainPasswordDialog.ja.resx">
+      <DependentUpon>ChangeMainPasswordDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\RestoreSession\ChangeMasterPasswordDialog.zh-CN.resx">
-      <DependentUpon>ChangeMasterPasswordDialog.cs</DependentUpon>
+    <EmbeddedResource Include="Dialogs\RestoreSession\ChangeMainPasswordDialog.zh-CN.resx">
+      <DependentUpon>ChangeMainPasswordDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\RestoreSession\EnterMasterPasswordDialog.ja.resx">
-      <DependentUpon>EnterMasterPasswordDialog.cs</DependentUpon>
+    <EmbeddedResource Include="Dialogs\RestoreSession\EnterMainPasswordDialog.ja.resx">
+      <DependentUpon>EnterMainPasswordDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\RestoreSession\EnterMasterPasswordDialog.zh-CN.resx">
-      <DependentUpon>EnterMasterPasswordDialog.cs</DependentUpon>
+    <EmbeddedResource Include="Dialogs\RestoreSession\EnterMainPasswordDialog.zh-CN.resx">
+      <DependentUpon>EnterMainPasswordDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Common\PasswordFailure.ja.resx">
       <DependentUpon>PasswordFailure.cs</DependentUpon>
@@ -5468,11 +5445,11 @@
     <EmbeddedResource Include="Dialogs\RestoreSession\SaveAndRestoreDialog.zh-CN.resx">
       <DependentUpon>SaveAndRestoreDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\RestoreSession\SetMasterPasswordDialog.ja.resx">
-      <DependentUpon>SetMasterPasswordDialog.cs</DependentUpon>
+    <EmbeddedResource Include="Dialogs\RestoreSession\SetMainPasswordDialog.ja.resx">
+      <DependentUpon>SetMainPasswordDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\RestoreSession\SetMasterPasswordDialog.zh-CN.resx">
-      <DependentUpon>SetMasterPasswordDialog.cs</DependentUpon>
+    <EmbeddedResource Include="Dialogs\RestoreSession\SetMainPasswordDialog.zh-CN.resx">
+      <DependentUpon>SetMainPasswordDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\RoleElevationDialog.ja.resx">
       <DependentUpon>RoleElevationDialog.cs</DependentUpon>
@@ -5944,9 +5921,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\WlbPage.zh-CN.resx">
       <DependentUpon>WlbPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TestResources\api-version.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\BallooningWizard.ja.resx">
       <DependentUpon>BallooningWizard.cs</DependentUpon>
@@ -6718,13 +6692,14 @@
     <EmbeddedResource Include="Wizards\XenWizardBase.zh-CN.resx">
       <DependentUpon>XenWizardBase.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wlb\WlbReports\WorkloadReports.ja.resx">
+    <EmbeddedResource Include="Dialogs\Wlb\WorkloadReports.ja.resx">
       <DependentUpon>WorkloadReports.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wlb\WlbReports\WorkloadReports.resx">
+    <EmbeddedResource Include="Dialogs\Wlb\WorkloadReports.resx">
       <DependentUpon>WorkloadReports.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wlb\WlbReports\WorkloadReports.zh-CN.resx">
+    <EmbeddedResource Include="Dialogs\Wlb\WorkloadReports.zh-CN.resx">
       <DependentUpon>WorkloadReports.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Images\VMTemplate_h32bit_32.png" />

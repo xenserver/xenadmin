@@ -70,7 +70,7 @@ namespace XenAdmin.Commands
             _VM = vm;
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (selection.Count == 1)
             {
@@ -80,7 +80,7 @@ namespace XenAdmin.Commands
             return false;
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             Program.AssertOnEventThread();
 
@@ -110,19 +110,19 @@ namespace XenAdmin.Commands
                         action.Completed += delegate
                         {
                             if (action.Succeeded)
-                                ExecuteRevertAction();
+                                RunRevertAction();
                         };
                         action.RunAsync();
                     }
                 }
                 else
                 {
-                    ExecuteRevertAction();
+                    RunRevertAction();
                 }
             }
         }
 
-        private void ExecuteRevertAction()
+        private void RunRevertAction()
         {
             var action = new VMSnapshotRevertAction(_snapshot);
             action.RunAsync();

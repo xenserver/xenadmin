@@ -62,14 +62,15 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
         public BugToolPageSelectCapabilities()
         {
             InitializeComponent();
-            this.linkLabel1.Visible = !XenAdmin.Core.HiddenFeatures.LinkLabelHidden;
+            linkLabel1.Text = string.Format(linkLabel1.Text, BrandManager.CompanyNameShort);
+            linkLabel1.Visible = !HiddenFeatures.LinkLabelHidden;
         }
 
-        public override string Text{get { return Messages.BUGTOOL_PAGE_CAPABILITIES_TEXT; }}
+        public override string Text => Messages.BUGTOOL_PAGE_CAPABILITIES_TEXT;
 
-        public override string PageTitle { get { return Messages.BUGTOOL_PAGE_CAPABILITIES_PAGETITLE; } }
+        public override string PageTitle => Messages.BUGTOOL_PAGE_CAPABILITIES_PAGETITLE;
 
-        public override string HelpID { get { return "SelectReportContents"; } }
+        public override string HelpID => "SelectReportContents";
 
         public override bool EnableNext()
         {
@@ -540,10 +541,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
 
         public string Key
         {
-            get
-            {
-                return _key;
-            }
+            get => _key;
             set
             {
                 _key = value;
@@ -552,28 +550,18 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
 
                 if (string.IsNullOrEmpty(_name))
                     _name = _key;
+                else if (_key == "client-logs")
+                    _name = string.Format(_name, BrandManager.BrandConsole);
 
                 _description = FriendlyNameManager.GetFriendlyName(string.Format("Description-host.system_status-{0}", _key));
             }
         }
 
-        public string Name
-        {
-            get { return _name; }
-        }
-            
-        public string Description
-        {
-            get { return _description; }
-        }
+        public string Name => _name;
 
-        public string EstimatedSize
-        {
-            get
-            {
-                return Helpers.StringFromMaxMinSize(MinSize, MaxSize);
-            }
-        }
+        public string Description => _description;
+
+        public string EstimatedSize => Helpers.StringFromMaxMinSize(MinSize, MaxSize);
 
         public override string ToString()
         {

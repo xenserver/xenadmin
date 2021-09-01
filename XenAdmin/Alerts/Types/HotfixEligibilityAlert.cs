@@ -59,8 +59,8 @@ namespace XenAdmin.Alerts.Types
                     return string.Empty;
 
                 var productVersionText = string.Format(Messages.STRING_SPACE_STRING,
-                    Helpers.NaplesOrGreater(Connection) ? Messages.XENSERVER : BrandManager.LegacyProduct,
-                    Helpers.GetMaster(Connection)?.ProductVersionText());
+                    Helpers.NaplesOrGreater(Connection) ? BrandManager.ProductBrand : BrandManager.LegacyProduct,
+                    Helpers.GetCoordinator(Connection)?.ProductVersionText());
                 var unlicensed = pool.IsFreeLicenseOrExpired();
 
                 switch (Version.HotfixEligibility)
@@ -103,9 +103,9 @@ namespace XenAdmin.Alerts.Types
                 if (pool == null)
                     return string.Empty;
 
-                var versionText = Helpers.GetMaster(Connection)?.ProductVersionText();
+                var versionText = Helpers.GetCoordinator(Connection)?.ProductVersionText();
                 var productVersionText = string.Format(Messages.STRING_SPACE_STRING, 
-                    Helpers.NaplesOrGreater(Connection) ? Messages.XENSERVER : BrandManager.LegacyProduct,
+                    Helpers.NaplesOrGreater(Connection) ? BrandManager.ProductBrand : BrandManager.LegacyProduct,
                     versionText);
                 var unlicensed = pool.IsFreeLicenseOrExpired();
 

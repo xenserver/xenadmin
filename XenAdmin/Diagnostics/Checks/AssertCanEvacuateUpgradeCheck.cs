@@ -51,7 +51,7 @@ namespace XenAdmin.Diagnostics.Checks
             Pool pool = Helpers.GetPoolOfOne(Host.Connection);
             if (pool != null && PoolHasCpuIncompatibilityProblem(pool))
             {
-                if (Host.IsMaster())
+                if (Host.IsCoordinator())
                     return new CPUIncompatibilityProblem(this, pool);
                 return new CPUCIncompatibilityWarning(this, pool, Host);
             }

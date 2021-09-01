@@ -96,13 +96,13 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
         protected void WaitForReboot(ref Session session, Func<Session, string, double> metricDelegate, Action<Session> methodInvoker)
         {
-            bool master = GetResolvedHost().IsMaster();
+            bool isCoordinator = GetResolvedHost().IsCoordinator();
 
             lostConnection = false;
             _cancelled = false;
             double metric = metricDelegate(session, HostXenRef.opaque_ref);
 
-            log.DebugFormat("{0}._WaitForReboot(master='{1}', metric='{2}')", GetType().Name, master, metric);
+            log.DebugFormat("{0}._WaitForReboot(coordinator='{1}', metric='{2}')", GetType().Name, isCoordinator, metric);
 
             PercentComplete = 10;
 
@@ -113,9 +113,9 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
                 PercentComplete = 20;
 
-                log.DebugFormat("{0}._WaitForReboot executed delegate...", GetType().Name);
+                log.DebugFormat("{0}._WaitForReboot ran delegate...", GetType().Name);
 
-                session = WaitForHostToStart(master, session, metricDelegate, metric);
+                session = WaitForHostToStart(isCoordinator, session, metricDelegate, metric);
             }
             finally
             {
@@ -123,13 +123,13 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             }
         }
 
-        private Session WaitForHostToStart(bool master, Session session, Func<Session, string, double> metricDelegate, double metric)
+        private Session WaitForHostToStart(bool coordinator, Session session, Func<Session, string, double> metricDelegate, double metric)
         {
             Connection.ExpectDisruption = true;
 
             try
             {
-                if (master)
+                if (coordinator)
                 {
                     Connection.SuppressErrors = true;
 
@@ -142,7 +142,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                     //
                     // Now, we need to wait for a reconnection
                     //
-                    session = WaitReconnectToMaster(session);
+                    session = WaitReconnectToCoordinator(session);
                 }
 
                 PercentComplete = 60;
@@ -150,7 +150,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 // 
                 // Now wait for boot time to be greater than it was before
                 //
-                WaitForBootTimeToBeGreaterThanBefore(master, session, metricDelegate, metric);
+                WaitForBootTimeToBeGreaterThanBefore(coordinator, session, metricDelegate, metric);
 
                 log.DebugFormat("{0}._WaitForReboot done!", GetType().Name);
             }
@@ -183,7 +183,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             Thread.Sleep(1000);
         }
 
-        private void WaitForBootTimeToBeGreaterThanBefore(bool master, Session session, Func<Session, string, double> metricDelegate, double metric)
+        private void WaitForBootTimeToBeGreaterThanBefore(bool coordinator, Session session, Func<Session, string, double> metricDelegate, double metric)
         {
 
             DateTime waitForMetric = DateTime.Now;
@@ -219,7 +219,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             log.DebugFormat("{0}._WaitForReboot metric now up to date... (old metric='{1}', current metric='{2}')",
                             GetType().Name, metric, currentMetric);
 
-            if (master)
+            if (coordinator)
             {
                 //
                 // Force a reconnect to prime the cache for the next actions
@@ -231,7 +231,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             }
         }
 
-        private Session WaitReconnectToMaster(Session session)
+        private Session WaitReconnectToCoordinator(Session session)
         {
 
             log.DebugFormat("{0}._WaitForReboot waiting for reconnect...", GetType().Name);

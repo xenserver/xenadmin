@@ -32,6 +32,7 @@
 using System;
 using System.IO;
 using System.Threading;
+using XenAdmin.Core;
 using XenServerHealthCheck;
 
 namespace XenAdmin.Actions
@@ -50,11 +51,12 @@ namespace XenAdmin.Actions
         private CancellationTokenSource cts;
 
         public UploadServerStatusReportAction(string bundleToUpload, string uploadToken, string caseNumber, bool suppressHistory)
-            : base(null, Messages.ACTION_UPLOAD_SERVER_STATUS_REPORT, Messages.ACTION_UPLOAD_SERVER_STATUS_REPORT_PROGRESS, suppressHistory)
+            : base(null, "", "", suppressHistory)
         {
             this.bundleToUpload = bundleToUpload;
             this.uploadToken = uploadToken;
             this.caseNumber = caseNumber;
+            Title = string.Format(Messages.ACTION_UPLOAD_SERVER_STATUS_REPORT, BrandManager.Cis);
         }
 
         public UploadServerStatusReportAction(string bundleToUpload, string uploadToken, string caseNumber, string uploadDomainName, bool suppressHistory)
@@ -66,6 +68,8 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
+            Description = string.Format(Messages.ACTION_UPLOAD_SERVER_STATUS_REPORT_PROGRESS, BrandManager.Cis);
+
             string uploadUuid;
             try
             {
@@ -124,7 +128,7 @@ namespace XenAdmin.Actions
         {
             var percentageUploaded = (int)(100.0 * bytesUploaded / totalBytes);
             var msg = string.Format(Messages.ACTION_UPLOAD_SERVER_STATUS_REPORT_PERCENTAGE,
-                Util.DiskSizeString(bytesUploaded), Util.DiskSizeString(totalBytes));
+                BrandManager.Cis, Util.DiskSizeString(bytesUploaded), Util.DiskSizeString(totalBytes));
             Tick(percentageUploaded, msg);
         }
 

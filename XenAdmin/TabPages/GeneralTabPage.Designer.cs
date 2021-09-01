@@ -169,6 +169,7 @@ namespace XenAdmin.TabPages
             this.panel2.Controls.Add(this.panelCertificate);
             this.panel2.Controls.Add(this.panelGeneral);
             this.panel2.Name = "panel2";
+            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // panelReadCaching
             // 

@@ -56,12 +56,12 @@ namespace XenAdmin.Dialogs
         /// </summary>
         /// <param name="title">The title for the confirmation dialog.</param>
         /// <param name="text">The text for the confirmation dialog.</param>
-        /// <param name="cantExecuteReasons">A dictionary of names of the objects which will be ignored with associated reasons.</param>
+        /// <param name="cantRunReasons">A dictionary of names of the objects which will be ignored with associated reasons.</param>
         /// <param name="mode">Whether the dialog should show a Close button, or OK and Cancel buttons.</param>
         public CommandErrorDialog(string title, string text,
-            IDictionary<IXenObject, string> cantExecuteReasons, DialogMode mode = DialogMode.Close)
+            IDictionary<IXenObject, string> cantRunReasons, DialogMode mode = DialogMode.Close)
         {
-            Util.ThrowIfParameterNull(cantExecuteReasons, "cantExecuteReasons");
+            Util.ThrowIfParameterNull(cantRunReasons, "cantRunReasons");
             Util.ThrowIfParameterNull(title, "title");
             Util.ThrowIfParameterNull(text, "text");
 
@@ -75,13 +75,13 @@ namespace XenAdmin.Dialogs
             btnOK.Visible = mode == DialogMode.OKCancel;
             btnClose.Visible = mode == DialogMode.Close;
 
-            foreach (var xenObject in cantExecuteReasons.Keys)
+            foreach (var xenObject in cantRunReasons.Keys)
             {
                 DataGridViewRow row = new DataGridViewRow {Tag = xenObject };
                 row.Cells.AddRange(
                     new DataGridViewImageCell {Value = Images.GetImage16For(xenObject) },
                     new DataGridViewTextBoxCell {Value = xenObject.ToString()},
-                    new DataGridViewTextBoxCell {Value = cantExecuteReasons[xenObject] });
+                    new DataGridViewTextBoxCell {Value = cantRunReasons[xenObject] });
                 m_dataGridView.Rows.Add(row);
             }
 

@@ -86,17 +86,17 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
         protected override void RunWithSession(ref Session session)
         {
             var conn = session.Connection;
-            var master = Helpers.GetMaster(conn);
+            var coordinator = Helpers.GetCoordinator(conn);
             var suppPackName = Path.GetFileName(suppPackPath);
 
             host = GetResolvedHost();
 
             // upload
-            UploadSuppPack(master, conn, session, suppPackName);
+            UploadSuppPack(coordinator, conn, session, suppPackName);
 
-            if (uploadedSuppPacks.ContainsKey(master))
+            if (uploadedSuppPacks.ContainsKey(coordinator))
             {
-                var update = uploadedSuppPacks[master];
+                var update = uploadedSuppPacks[coordinator];
                 if (update != null)
                 {
                     // precheck
@@ -106,7 +106,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
                         // do after-apply-supppack step in case that this is a retry after
                         // the update already applied but after-apply-supppack hasn't done yet
                         AfterApplySuppPack(update);
-                        RemoveSuppPackFromMaster(session, master, suppPackName, update);
+                        RemoveSuppPackFromCoordinator(session, coordinator, suppPackName, update);
                         return;
                     }
 
@@ -116,22 +116,22 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
                     // after apply guidance
                     AfterApplySuppPack(update);
 
-                    // remove from master
-                    RemoveSuppPackFromMaster(session, master, suppPackName, update);
+                    // remove from coordinator
+                    RemoveSuppPackFromCoordinator(session, coordinator, suppPackName, update);
                 }
             }
         }
 
-        private void UploadSuppPack(Host master, IXenConnection connection, Session session, string suppPack)
+        private void UploadSuppPack(Host coordinator, IXenConnection connection, Session session, string suppPack)
         {
-            if (!uploadedSuppPacks.ContainsKey(master))
+            if (!uploadedSuppPacks.ContainsKey(coordinator))
             {
                 UploadSupplementalPackAction uploadIsoAction;
                 try
                 {
                     AddProgressStep(string.Format(Messages.UPDATES_WIZARD_UPLOADING_UPDATE, suppPack, connection.Name));
 
-                    uploadIsoAction = new UploadSupplementalPackAction(connection, new List<Host> { master }, suppPackPath, true);
+                    uploadIsoAction = new UploadSupplementalPackAction(connection, new List<Host> { coordinator }, suppPackPath, true);
                     uploadIsoAction.Changed += uploadAction_Changed;
                     uploadIsoAction.Completed += uploadAction_Completed;
                     uploadIsoAction.RunExternal(session);
@@ -148,12 +148,12 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
                     log.ErrorFormat(
                         "Upload finished successfully, but Pool_update object has not been found for update {0} on connection {1}.",
                         suppPack, connection);
-                    throw new Exception(Messages.ACTION_UPLOADPATCHTOMASTERPLANACTION_FAILED);
+                    throw new Exception(Messages.ACTION_UPLOADPATCHTOCOORDINATORPLANACTION_FAILED);
                 }
 
-                uploadedSuppPacks.Add(master, poolupdate);
+                uploadedSuppPacks.Add(coordinator, poolupdate);
             }
-            else if (host.uuid == master.uuid)
+            else if (host.uuid == coordinator.uuid)
             {
                 AddProgressStep(string.Format(Messages.UPDATES_WIZARD_SKIPPING_UPLOAD, suppPack, connection.Name));
             }
@@ -237,7 +237,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
             }
         }
 
-        private void RemoveSuppPackFromMaster(Session session, Host master, string suppPack, Pool_update update)
+        private void RemoveSuppPackFromCoordinator(Session session, Host coordinator, string suppPack, Pool_update update)
         {
             var isLastHostInPool = hosts.IndexOf(host) == hosts.Count - 1;
             if (isLastHostInPool)
@@ -250,11 +250,11 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
                     if (!update.AppliedOnHosts().Any())
                         Pool_update.destroy(session, update.opaque_ref);
 
-                    uploadedSuppPacks.Remove(master);
+                    uploadedSuppPacks.Remove(coordinator);
                 }
                 catch (Exception ex)
                 {
-                    log.Error(string.Format("Remove update file from master failed on host {0}", master.Name()), ex);
+                    log.Error(string.Format("Remove update file from coordinator failed on host {0}", coordinator.Name()), ex);
                 }
             }
         }

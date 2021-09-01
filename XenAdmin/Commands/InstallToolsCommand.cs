@@ -88,7 +88,7 @@ namespace XenAdmin.Commands
             if (vm.FindVMCDROM() == null)
             {
                 DialogResult dialogResult;
-                using (var dlg = new NoIconDialog(Messages.NEW_DVD_DRIVE_REQUIRED,
+                using (var dlg = new NoIconDialog(string.Format(Messages.NEW_DVD_DRIVE_REQUIRED, BrandManager.VmTools),
                         ThreeButtonDialog.ButtonYes,
                         ThreeButtonDialog.ButtonNo))
                 {
@@ -110,13 +110,14 @@ namespace XenAdmin.Commands
                 return;
             }
 
-            using (var dlg = new WarningDialog(Messages.XS_TOOLS_MESSAGE_ONE_VM,
-                new ThreeButtonDialog.TBDButton(Messages.INSTALL_XENSERVER_TOOLS_BUTTON,
+            using (var dlg = new WarningDialog(string.Format(Messages.XS_TOOLS_MESSAGE_ONE_VM,
+                    BrandManager.BrandConsole, BrandManager.VmTools),
+                new ThreeButtonDialog.TBDButton(string.Format(Messages.INSTALL_XENSERVER_TOOLS_BUTTON, BrandManager.VmTools),
                     DialogResult.OK, ThreeButtonDialog.ButtonType.ACCEPT, true),
                 ThreeButtonDialog.ButtonCancel)
             {
                 ShowLinkLabel = true,
-                LinkText = Messages.INSTALLTOOLS_READ_MORE,
+                LinkText = string.Format(Messages.INSTALLTOOLS_READ_MORE, BrandManager.VmTools),
                 LinkAction = () => Help.HelpManager.Launch("InstallToolsWarningDialog")
             })
                 if (dlg.ShowDialog(Parent) == DialogResult.OK && CheckToolSrs(vm))
@@ -134,7 +135,7 @@ namespace XenAdmin.Commands
             bool newDvdDrivesRequired = false;
             foreach (VM vm in vms)
             {
-                if (CanExecute(vm) && vm.FindVMCDROM() == null)
+                if (CanRun(vm) && vm.FindVMCDROM() == null)
                 {
                     newDvdDrivesRequired = true;
                     break;
@@ -144,7 +145,7 @@ namespace XenAdmin.Commands
             if (newDvdDrivesRequired)
             {
                 DialogResult dialogResult;
-                using (var dlg = new WarningDialog(Messages.NEW_DVD_DRIVES_REQUIRED,
+                using (var dlg = new WarningDialog(string.Format(Messages.NEW_DVD_DRIVES_REQUIRED, BrandManager.VmTools),
                     ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo))
                 {
                     dialogResult = dlg.ShowDialog(Parent);
@@ -153,7 +154,7 @@ namespace XenAdmin.Commands
                 {
                     foreach (VM vm in vms)
                     {
-                        if (CanExecute(vm) && vm.FindVMCDROM() == null)
+                        if (CanRun(vm) && vm.FindVMCDROM() == null)
                         {
                             //do not register the event ShowUserInstruction; we show explicitly a message afterwards
                             var createDriveAction = new CreateCdDriveAction(vm);
@@ -170,13 +171,13 @@ namespace XenAdmin.Commands
             }
             else
             {
-                using (var dlg = new WarningDialog(Messages.XS_TOOLS_MESSAGE_MORE_THAN_ONE_VM,
-                    new ThreeButtonDialog.TBDButton(Messages.INSTALL_XENSERVER_TOOLS_BUTTON,
+                using (var dlg = new WarningDialog(string.Format(Messages.XS_TOOLS_MESSAGE_MORE_THAN_ONE_VM, BrandManager.VmTools),
+                    new ThreeButtonDialog.TBDButton(string.Format(Messages.INSTALL_XENSERVER_TOOLS_BUTTON, BrandManager.VmTools),
                         DialogResult.OK, ThreeButtonDialog.ButtonType.ACCEPT, true),
                     ThreeButtonDialog.ButtonCancel)
                 {
                     ShowLinkLabel = true,
-                    LinkText = Messages.INSTALLTOOLS_READ_MORE,
+                    LinkText = string.Format(Messages.INSTALLTOOLS_READ_MORE, BrandManager.VmTools),
                     LinkAction = () => Help.HelpManager.Launch("InstallToolsWarningDialog")
                 })
                     if (dlg.ShowDialog(Parent) == DialogResult.OK && CheckToolSrs(vms.ToArray()))
@@ -212,9 +213,9 @@ namespace XenAdmin.Commands
                 {
                     if (sr.IsToolsSR() && sr.IsBroken())
                     {
-                        using (var dlg = new WarningDialog(Messages.BROKEN_TOOLS_PROMPT,
+                        using (var dlg = new WarningDialog(string.Format(Messages.BROKEN_TOOLS_PROMPT, BrandManager.BrandConsole),
                                 ThreeButtonDialog.ButtonOK, ThreeButtonDialog.ButtonCancel)
-                            {WindowTitle = Messages.INSTALL_XENSERVER_TOOLS})
+                            {WindowTitle = string.Format(Messages.INSTALL_XENSERVER_TOOLS, BrandManager.VmTools)})
                         {
                             var dialogResult = dlg.ShowDialog(Parent);
                             return dialogResult == DialogResult.OK;
@@ -255,14 +256,14 @@ namespace XenAdmin.Commands
         {
             if (!MainWindowCommandInterface.RunInAutomatedTestMode)
             {
-                using (var dlg = new InformationDialog(Messages.NEW_DVD_DRIVE_REBOOT_TOOLS))
+                using (var dlg = new InformationDialog(string.Format(Messages.NEW_DVD_DRIVE_REBOOT_TOOLS, BrandManager.VmTools)))
                     dlg.ShowDialog(Parent);
             }
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
-            List<VM> vms = selection.AsXenObjects<VM>(CanExecute);
+            List<VM> vms = selection.AsXenObjects<VM>(CanRun);
 
             if (vms.Count == 1)
                 InstallToolsOnOneVm(vms[0]);
@@ -270,7 +271,7 @@ namespace XenAdmin.Commands
                 InstallToolsOnManyVms(vms);
         }
 
-        public static bool CanExecute(VM vm)
+        public static bool CanRun(VM vm)
         {
             if (vm == null || vm.is_a_template || vm.Locked || vm.power_state != vm_power_state.Running)
                 return false;
@@ -282,7 +283,7 @@ namespace XenAdmin.Commands
                 return false;
 
             var vmHome = vm.Home();
-            if (vmHome != null && Helpers.IsOlderThanMaster(vmHome))
+            if (vmHome != null && Helpers.IsOlderThanCoordinator(vmHome))
                 return false;
 
             //whether RBAC allows connection to the VM's console
@@ -290,14 +291,14 @@ namespace XenAdmin.Commands
                    Role.CanPerform(new RbacMethodList("http/connect_console"), vm.Connection, out _, false);
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             return selection.Count > 0 &&
                    selection.All(v => v.XenObject is VM vm &&
                                       !Helpers.StockholmOrGreater(vm.Connection) &&
-                                      CanExecute(vm));
+                                      CanRun(vm));
         }
 
-        public override string MenuText => Messages.MAINWINDOW_INSTALL_TOOLS;
+        public override string MenuText => string.Format(Messages.MAINWINDOW_INSTALL_TOOLS, BrandManager.VmTools);
     }
 }

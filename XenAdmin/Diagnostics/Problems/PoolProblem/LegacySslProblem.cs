@@ -52,7 +52,7 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
 
         public override string Description =>
             string.Format(Messages.PROBLEM_LEGACY_PROTOCOL_DESCRIPTION, Pool,
-                string.Format(Messages.XENSERVER_8_2, BrandManager.ProductVersion82));
+                string.Format(Messages.STRING_SPACE_STRING, BrandManager.ProductBrand, BrandManager.ProductVersion82));
 
         public override string HelpMessage => Messages.PROBLEM_LEGACY_PROTOCOL_HELP;
     }
@@ -71,12 +71,12 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
 
         public override string Description =>
             string.Format(Messages.PROBLEM_LEGACY_PROTOCOL_DESCRIPTION, pool,
-                string.Format(Messages.XENSERVER_8_2, BrandManager.ProductVersion82));
+                string.Format(Messages.STRING_SPACE_STRING, BrandManager.ProductBrand, BrandManager.ProductVersion82));
 
         public override string Message =>
             string.Format(pool.IsVisible()
                     ? Messages.PROBLEM_LEGACY_PROTOCOL_INFO_POOL
                     : Messages.PROBLEM_LEGACY_PROTOCOL_INFO_SERVER,
-                string.Format(Messages.XENSERVER_8_2, BrandManager.ProductVersion82));
+                string.Format(Messages.STRING_SPACE_STRING, BrandManager.ProductBrand, BrandManager.ProductVersion82));
     }
 }

@@ -66,38 +66,6 @@ namespace XenAdmin.Core
             return false;
         }
 
-        /// <summary>
-        /// Find which items from a list need some action, and get permission to perform the action.
-        /// </summary>
-        /// <typeparam name="T">Type of the items</typeparam>
-        /// <param name="itemsToFixup">List of items</param>
-        /// <param name="msgSingle">Dialog message when one item needs action. {0} will be substituted for the name of the item.</param>
-        /// <param name="msgMultiple">Dialog message when more than one item needs action. {0} will be substituted for a list of the items.</param>
-        /// <param name="defaultYes">Whether the default button should be Proceed (as opposed to Cancel)</param>
-        /// <param name="helpName">Help ID for the dialog</param>
-        /// <returns>Whether permission was obtained (also true if no items needed action)</returns>
-        public static bool GetPermissionFor<T>(List<T> itemsToFixup, string msgSingle, string msgMultiple, bool defaultYes, string helpName)
-        {
-            if (Program.RunInAutomatedTestMode)
-                return true;
-
-            if (itemsToFixup.Count > 0)
-            {
-                string msg = itemsToFixup.Count == 1
-                    ? string.Format(msgSingle, itemsToFixup[0])
-                    : string.Format(msgMultiple, string.Join("\n", itemsToFixup.ConvertAll(item => item.ToString()).ToArray()));
-
-                using (var dlg = new WarningDialog(msg,
-                    new ThreeButtonDialog.TBDButton(Messages.PROCEED, DialogResult.Yes, selected: defaultYes),
-                    new ThreeButtonDialog.TBDButton(Messages.CANCEL, DialogResult.No, selected: !defaultYes))
-                    {HelpNameSetter = helpName})
-                {
-                    return dlg.ShowDialog(Program.MainWindow) == DialogResult.Yes;
-                }
-            }
-            return true;
-        }
-
         public static int BALLOON_DURATION = 5000;
         public static void ShowBalloonMessage(Control control, ToolTip toolTip, string caption = " ")
         {
@@ -110,7 +78,7 @@ namespace XenAdmin.Core
         }
 
         /// <summary>
-        /// Brings the sepcified form to the front.
+        /// Brings the specified form to the front.
         /// </summary>
         /// <param name="f">The form to be brought to the front.</param>
         public static void BringFormToFront(Form f)
@@ -228,15 +196,13 @@ namespace XenAdmin.Core
             Program.AssertOnEventThread();
             foreach (ActionBase action in ConnectionsManager.History)
             {
-                if (action.IsCompleted)
+                if (action.IsCompleted || action.Connection != connection)
                     continue;
 
-                WlbOptimizePoolAction optAction = action as WlbOptimizePoolAction;
-                if (optAction != null && optAction.Connection == connection)
+                if (action is WlbOptimizePoolAction optAction)
                     return optAction;
 
-                WlbRetrieveRecommendationAction optRecAction = action as WlbRetrieveRecommendationAction;
-                if (optRecAction != null && optRecAction.Connection == connection)
+                if (action is WlbRetrieveRecommendationsAction optRecAction)
                     return optRecAction;
             }
             return null;
@@ -524,16 +490,49 @@ namespace XenAdmin.Core
 
             if (hostsWithFewerFeatures.Count > 0 && hostsWithMoreFeatures.Count > 0)
             {
-                return GetPermissionFor(hostsWithFewerFeatures.Union(hostsWithMoreFeatures).ToList(),
-                     Messages.ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_POOL_AND_HOST_MESSAGE, Messages.ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_POOL_AND_HOST_MESSAGE_MULTIPLE, true, "PoolJoinCpuMasking");
+                var hosts1 = hostsWithFewerFeatures.Union(hostsWithMoreFeatures).ToList();
+
+                string msg1 = string.Format(hosts1.Count == 1
+                        ? Messages.ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_POOL_AND_HOST_MESSAGE
+                        : Messages.ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_POOL_AND_HOST_MESSAGE_MULTIPLE,
+                    string.Join("\n", hosts1.Select(h => h.Name())));
+
+                using (var dlg = new WarningDialog(msg1, ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
+                    {HelpNameSetter = "PoolJoinCpuMasking"})
+                {
+                    return dlg.ShowDialog(Program.MainWindow) == DialogResult.Yes;
+                }
             }
 
             if (hostsWithFewerFeatures.Count > 0)
-                return GetPermissionFor(hostsWithFewerFeatures,
-                    Messages.ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_POOL_MESSAGE, Messages.ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_POOL_MESSAGE_MULTIPLE, true, "PoolJoinCpuMasking");
-            
-            return GetPermissionFor(hostsWithMoreFeatures,
-                Messages.ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_HOST_MESSAGE, Messages.ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_HOST_MESSAGE_MULTIPLE, true, "PoolJoinCpuMasking");
+            {
+                string msg2 = string.Format(hostsWithFewerFeatures.Count == 1
+                        ? Messages.ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_POOL_MESSAGE
+                        : Messages.ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_POOL_MESSAGE_MULTIPLE,
+                    string.Join("\n", hostsWithFewerFeatures.Select(h => h.Name())));
+
+                using (var dlg = new WarningDialog(msg2, ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
+                    {HelpNameSetter = "PoolJoinCpuMasking"})
+                {
+                    return dlg.ShowDialog(Program.MainWindow) == DialogResult.Yes;
+                }
+            }
+
+            if (hostsWithMoreFeatures.Count > 0)
+            {
+                string msg3 = string.Format(hostsWithMoreFeatures.Count == 1
+                        ? Messages.ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_HOST_MESSAGE
+                        : Messages.ADD_HOST_TO_POOL_CPU_DOWN_LEVEL_HOST_MESSAGE_MULTIPLE,
+                    string.Join("\n", hostsWithMoreFeatures.Select(h => h.Name())));
+
+                using (var dlg = new WarningDialog(msg3, ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
+                    {HelpNameSetter = "PoolJoinCpuMasking"})
+                {
+                    return dlg.ShowDialog(Program.MainWindow) == DialogResult.Yes;
+                }
+            }
+
+            return true;
         }
     }
 }

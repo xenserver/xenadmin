@@ -91,7 +91,7 @@ namespace XenAdmin.Actions.OvfActions
 
 			if (m_runfixups)
 			{
-				string cdId = OVF.SetRunOnceBootCDROMOSFixup(curEnv, systemid, m_directory);
+				string cdId = OVF.SetRunOnceBootCDROMOSFixup(curEnv, systemid, m_directory, BrandManager.ProductBrand);
 				OVF.SetTargetISOSRInRASD(curEnv, systemid, cdId, m_selectedIsoSr.uuid);
 			}
 

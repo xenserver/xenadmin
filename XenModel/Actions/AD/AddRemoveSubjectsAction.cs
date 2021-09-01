@@ -96,7 +96,7 @@ namespace XenAdmin.Actions
             if (pool != null)
                 Pool = pool;
             else
-                Host = Helpers.GetMaster(connection);
+                Host = Helpers.GetCoordinator(connection);
             this.subjectNamesToAdd = subjectNamesToAdd;
             this.subjectsToRemove = subjectsToRemove;
 

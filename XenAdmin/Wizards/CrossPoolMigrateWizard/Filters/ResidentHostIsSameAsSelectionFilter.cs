@@ -67,8 +67,8 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
                     return false;
 
                 //Pool with one host (or less)
-                Host master = tempPool.Connection.Resolve(tempPool.master);
-                return residentHosts.Any(h => h == master);
+                Host coordinator = tempPool.Connection.Resolve(tempPool.master);
+                return residentHosts.Any(h => h == coordinator);
             }
 
             return false;

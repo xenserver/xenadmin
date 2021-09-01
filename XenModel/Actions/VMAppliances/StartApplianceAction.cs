@@ -48,7 +48,7 @@ namespace XenAdmin.Actions
 		{
 			Pool = Helpers.GetPool(appliance.Connection);
 			if (Pool == null)
-				Host = Helpers.GetMaster(appliance.Connection);
+				Host = Helpers.GetCoordinator(appliance.Connection);
 
 			ApiMethodsToRoleCheck.Add("VM_appliance.start");
 

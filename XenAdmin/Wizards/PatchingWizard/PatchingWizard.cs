@@ -87,53 +87,19 @@ namespace XenAdmin.Wizards.PatchingWizard
             AddPage(PatchingWizard_PatchingPage);
         }
 
-        public void PrepareToInstallUpdate(string path)
-        {
-            if (!IsFirstPage())
-                return;
-
-            //set the page before landing on it so it is populated correctly
-            PatchingWizard_SelectPatchPage.FilePath = path;
-            NextStep(); //FirstPage -> SelectPatchPage
-            NextStep(); //SelectPatchPage -> SelectServers
-        }
-
-        public void PrepareToInstallUpdate(XenServerPatchAlert alert, List<Host> hosts)
-        {
-            if (!IsFirstPage())
-                return;
-
-            //set the pages before landing on them so they are populated correctly
-            PatchingWizard_SelectPatchPage.UpdateAlertFromWeb = alert;
-            PatchingWizard_SelectPatchPage.UpdateAlertFromWebSelected +=page_UpdateAlertFromWebSelected;
-            PatchingWizard_SelectServers.SelectedServers = hosts;
-            NextStep(); //FirstPage -> SelectPatchPage
-        }
-
-        private void page_UpdateAlertFromWebSelected()
-        {
-            PatchingWizard_SelectPatchPage.UpdateAlertFromWebSelected -= page_UpdateAlertFromWebSelected;
-            NextStep(); //SelectPatchPage -> SelectServers
-        }
-
         protected override void UpdateWizardContent(XenTabPage senderPage)
         {
             var prevPageType = senderPage.GetType();
 
             if (prevPageType == typeof(PatchingWizard_SelectPatchPage))
             {
-                var wizardMode = PatchingWizard_SelectPatchPage.WizardMode;
-                var wizardIsInAutomatedUpdatesMode = wizardMode == WizardMode.AutomatedUpdates;
+                var updateType = PatchingWizard_SelectPatchPage.SelectedUpdateType;
+                var selectedPatchFilePath = PatchingWizard_SelectPatchPage.SelectedPatchFilePath;
+                var alertFromFileOnDisk = PatchingWizard_SelectPatchPage.AlertFromFileOnDisk;
+                var fileFromDiskHasUpdateXml = PatchingWizard_SelectPatchPage.FileFromDiskHasUpdateXml;
 
-                var updateType = wizardIsInAutomatedUpdatesMode ? UpdateType.Legacy : PatchingWizard_SelectPatchPage.SelectedUpdateType;
-                var selectedPatchFilePath = wizardIsInAutomatedUpdatesMode ? null : PatchingWizard_SelectPatchPage.SelectedPatchFilePath;
-                var alertFromWeb = wizardIsInAutomatedUpdatesMode ? null : PatchingWizard_SelectPatchPage.UpdateAlertFromWeb;
-                var alertFromFileOnDisk = wizardIsInAutomatedUpdatesMode ? null : PatchingWizard_SelectPatchPage.AlertFromFileOnDisk;
-                var fileFromDiskHasUpdateXml = !wizardIsInAutomatedUpdatesMode && PatchingWizard_SelectPatchPage.FileFromDiskHasUpdateXml;
-
-                PatchingWizard_SelectServers.WizardMode = wizardMode;
+                PatchingWizard_SelectServers.WizardMode = WizardMode.SingleUpdate;
                 PatchingWizard_SelectServers.SelectedUpdateType = updateType;
-                PatchingWizard_SelectServers.UpdateAlertFromWeb = alertFromWeb;
                 PatchingWizard_SelectServers.AlertFromFileOnDisk = alertFromFileOnDisk;
                 PatchingWizard_SelectServers.FileFromDiskHasUpdateXml = fileFromDiskHasUpdateXml;
 
@@ -141,30 +107,23 @@ namespace XenAdmin.Wizards.PatchingWizard
                 RemovePage(PatchingWizard_ModePage);
                 RemovePage(PatchingWizard_PatchingPage);
                 RemovePage(PatchingWizard_AutomatedUpdatesPage);
-                if (wizardMode == WizardMode.SingleUpdate)
-                {
-                    AddAfterPage(PatchingWizard_SelectServers, PatchingWizard_UploadPage);
-                    AddAfterPage(PatchingWizard_PrecheckPage, PatchingWizard_ModePage);
-                    AddAfterPage(PatchingWizard_ModePage, PatchingWizard_PatchingPage);
-                }
-                else // AutomatedUpdates or NewVersion
-                {
-                    AddAfterPage(PatchingWizard_PrecheckPage, PatchingWizard_AutomatedUpdatesPage);
-                }
+
+                AddAfterPage(PatchingWizard_SelectServers, PatchingWizard_UploadPage);
+                AddAfterPage(PatchingWizard_PrecheckPage, PatchingWizard_ModePage);
+                AddAfterPage(PatchingWizard_ModePage, PatchingWizard_PatchingPage);
 
                 PatchingWizard_UploadPage.SelectedUpdateType = updateType;
                 PatchingWizard_UploadPage.SelectedPatchFilePath = selectedPatchFilePath;
-                PatchingWizard_UploadPage.SelectedUpdateAlert = alertFromWeb ?? alertFromFileOnDisk;
+                PatchingWizard_UploadPage.SelectedUpdateAlert = alertFromFileOnDisk;
                 PatchingWizard_UploadPage.PatchFromDisk = PatchingWizard_SelectPatchPage.PatchFromDisk;
 
                 PatchingWizard_ModePage.SelectedUpdateType = updateType;
 
-                PatchingWizard_PrecheckPage.WizardMode = wizardMode;
                 PatchingWizard_PrecheckPage.PoolUpdate = null; //reset the PoolUpdate property; it will be updated on leaving the Upload page, if this page is visible
-                PatchingWizard_PrecheckPage.UpdateAlert = alertFromWeb ?? alertFromFileOnDisk;
+                PatchingWizard_PrecheckPage.UpdateAlert = alertFromFileOnDisk;
 
-                PatchingWizard_AutomatedUpdatesPage.WizardMode = wizardMode;
-                PatchingWizard_AutomatedUpdatesPage.UpdateAlert = alertFromWeb ?? alertFromFileOnDisk;
+                PatchingWizard_AutomatedUpdatesPage.WizardMode = WizardMode.SingleUpdate;
+                PatchingWizard_AutomatedUpdatesPage.UpdateAlert = alertFromFileOnDisk;
                 PatchingWizard_AutomatedUpdatesPage.PatchFromDisk = PatchingWizard_SelectPatchPage.PatchFromDisk;
 
                 PatchingWizard_PatchingPage.SelectedUpdateType = updateType;
@@ -174,10 +133,8 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 var selectedServers = PatchingWizard_SelectServers.SelectedServers;
                 var selectedPools = PatchingWizard_SelectServers.SelectedPools;
-                var applyUpdatesToNewVersion = PatchingWizard_SelectServers.ApplyUpdatesToNewVersion;
 
                 PatchingWizard_PrecheckPage.SelectedServers = selectedServers;
-                PatchingWizard_PrecheckPage.ApplyUpdatesToNewVersion = applyUpdatesToNewVersion;
 
                 PatchingWizard_ModePage.SelectedPools = selectedPools;
                 PatchingWizard_ModePage.SelectedServers = selectedServers;
@@ -189,7 +146,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                 PatchingWizard_UploadPage.SelectedPools = selectedPools;
 
                 PatchingWizard_AutomatedUpdatesPage.SelectedPools = selectedPools;
-                PatchingWizard_AutomatedUpdatesPage.ApplyUpdatesToNewVersion = applyUpdatesToNewVersion;
             }
             else if (prevPageType == typeof(PatchingWizard_UploadPage))
             {

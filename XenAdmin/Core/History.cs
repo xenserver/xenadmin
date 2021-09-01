@@ -207,14 +207,8 @@ namespace XenAdmin.Core
             return o.opaque_ref.GetHashCode();
         }
 
-        public String Name
-        {
-            get
-            {
-                return String.Format("{0}, ({1})", 
-                    o == null ? Messages.XENCENTER : Helpers.GetName(o), tab.Text);
-            }
-        }
+        public String Name => string.Format("{0}, ({1})",
+            o == null ? BrandManager.BrandConsole : Helpers.GetName(o), tab.Text);
 
         public Image Image
         {
@@ -317,14 +311,8 @@ namespace XenAdmin.Core
             return o.opaque_ref.GetHashCode();
         }
 
-        public String Name
-        {
-            get
-            {
-                return String.Format("{0}, ({1})",
-                    o == null ? Messages.XENCENTER : Helpers.GetName(o), Program.MainWindow.TabPageSearch.Text);
-            }
-        }
+        public string Name => string.Format("{0}, ({1})",
+            o == null ? BrandManager.BrandConsole : Helpers.GetName(o), Program.MainWindow.TabPageSearch.Text);
 
         public Image Image
         {

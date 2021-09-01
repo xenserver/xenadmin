@@ -157,7 +157,7 @@
     <value>0</value>
   </data>
   <data name="label6.Text" xml:space="preserve">
-    <value>As of [XenServer] {0} quiesced snapshots are no longer available. Please deselect this option to ensure your scheduled snapshots are taken successfully.</value>
+    <value>As of {0} {1} quiesced snapshots are no longer available. Please deselect this option to ensure your scheduled snapshots are taken successfully.</value>
   </data>
   <data name="&gt;&gt;label6.Name" xml:space="preserve">
     <value>label6</value>
@@ -325,7 +325,7 @@
     <value>Note that scheduled disk and memory snapshots will only be taken of VMs in this schedule that meet all of the following conditions:
 
 1. The VM is running or suspended at the time the snapshot is scheduled.
-2. The VM has [Citrix VM Tools] installed.
+2. The VM has {0} installed.
 3. If the VM has a dedicated GPU assigned to it, this GPU supports disk and memory snapshots.</value>
   </data>
   <data name="&gt;&gt;labelWarning.Name" xml:space="preserve">

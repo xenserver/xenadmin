@@ -83,10 +83,8 @@ namespace XenAdmin.Wizards.DRWizards
             WizardType = wizardType; 
 
             #region RBAC Warning Page Checks
-            if (Pool.Connection.Session.IsLocalSuperuser || Helpers.GetMaster(Pool.Connection).external_auth_type == Auth.AUTH_TYPE_NONE)
-            {
-            }
-            else
+            if (!Pool.Connection.Session.IsLocalSuperuser &&
+                Helpers.GetCoordinator(Pool.Connection).external_auth_type != Auth.AUTH_TYPE_NONE)
             {
                 RBACWarningPage.WizardPermissionCheck check = new RBACWarningPage.WizardPermissionCheck(Messages.RBAC_DR_WIZARD_MESSAGE);
                 check.AddApiCheck("DR_task.async_create");
@@ -170,10 +168,10 @@ namespace XenAdmin.Wizards.DRWizards
             IntroducedSrs.AddRange(drTask.introduced_SRs);
         }
 
-        private bool cleanupExecuted = false;
+        private bool cleanupRan = false;
         private void DoFinalCleanup()
         {
-            if (cleanupExecuted)
+            if (cleanupRan)
                 return;
 
             SummaryReport.AddLine("");
@@ -196,7 +194,7 @@ namespace XenAdmin.Wizards.DRWizards
                 foreach (var subAction in DRFailoverWizardPrecheckPage1.RevertActions)
                     SummaryReport.AddActionResult(subAction);
             }
-            cleanupExecuted = true;
+            cleanupRan = true;
         }
 
         private void DestroyDrTasks()

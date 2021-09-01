@@ -65,23 +65,23 @@ namespace XenAdmin.Core
 
 
         /// <summary>
-        /// Return the given host's product version, or the pool master's product version if
+        /// Return the given host's product version, or the pool coordinator's product version if
         /// the host does not have one, or null if none can be found.
         /// </summary>
         /// <param name="Host">May be null.</param>
         public static string HostProductVersion(Host host)
         {
-            return FromHostOrMaster(host, h => h.ProductVersion());
+            return FromHostOrCoordinator(host, h => h.ProductVersion());
         }
 
         public static string HostProductVersionText(Host host)
         {
-            return FromHostOrMaster(host, h => h.ProductVersionText());
+            return FromHostOrCoordinator(host, h => h.ProductVersionText());
         }
 
         public static string HostProductVersionTextShort(Host host)
         {
-            return FromHostOrMaster(host, h => h.ProductVersionTextShort());
+            return FromHostOrCoordinator(host, h => h.ProductVersionTextShort());
         }
 
         public static string HostPlatformVersion(Host host)
@@ -93,7 +93,7 @@ namespace XenAdmin.Core
         }
 
         private delegate string HostToStr(Host host);
-        private static string FromHostOrMaster(Host host, HostToStr fn)
+        private static string FromHostOrCoordinator(Host host, HostToStr fn)
         {
             if (host == null)
                 return null;
@@ -102,8 +102,8 @@ namespace XenAdmin.Core
 
             if (output == null)
             {
-                Host master = GetMaster(host.Connection);
-                return master == null ? null : fn(master);
+                Host coordinator = GetCoordinator(host.Connection);
+                return coordinator == null ? null : fn(coordinator);
             }
 
             return output;
@@ -222,27 +222,27 @@ namespace XenAdmin.Core
         }
 
         /// <summary>
-        /// Return the host object representing the master of the given connection, or null if the
+        /// Return the host object representing the coordinator of the given connection, or null if the
         /// cache is being populated.
         /// </summary>
         /// <param name="connection">May not be null.</param>
         /// <returns></returns>
-        public static Host GetMaster(IXenConnection connection)
+        public static Host GetCoordinator(IXenConnection connection)
         {
             Pool pool = GetPoolOfOne(connection);
             return pool == null ? null : connection.Resolve(pool.master);
         }
 
         /// <summary>
-        /// Return the host object representing the master of the given pool.
+        /// Return the host object representing the coordinator of the given pool.
         /// (If pool is null, returns null).
         /// </summary>
-        public static Host GetMaster(Pool pool)
+        public static Host GetCoordinator(Pool pool)
         {
             return pool == null ? null : pool.Connection.Resolve(pool.master);
         }
 
-        public static bool HostIsMaster(Host host)
+        public static bool HostIsCoordinator(Host host)
         {
             Pool pool = Helpers.GetPoolOfOne(host.Connection);
             if (pool == null) //Cache is being populated...  what do we do?
@@ -286,7 +286,7 @@ namespace XenAdmin.Core
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool DundeeOrGreater(IXenConnection conn)
         {
-            return conn == null || DundeeOrGreater(Helpers.GetMaster(conn));
+            return conn == null || DundeeOrGreater(Helpers.GetCoordinator(conn));
         }
 
         /// Dundee is ver. 2.0.0
@@ -308,7 +308,7 @@ namespace XenAdmin.Core
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool ElyOrGreater(IXenConnection conn)
         {
-            return conn == null || ElyOrGreater(Helpers.GetMaster(conn));
+            return conn == null || ElyOrGreater(Helpers.GetCoordinator(conn));
         }
 
         /// Ely is ver. 2.1.1
@@ -324,7 +324,7 @@ namespace XenAdmin.Core
 
         public static bool HavanaOrGreater(IXenConnection conn)
         {
-            return conn == null || HavanaOrGreater(Helpers.GetMaster(conn));
+            return conn == null || HavanaOrGreater(Helpers.GetCoordinator(conn));
         }
 
         /// As Havana platform version is same with Ely and Honolulu, so use product version here
@@ -344,7 +344,7 @@ namespace XenAdmin.Core
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool FalconOrGreater(IXenConnection conn)
         {
-            return conn == null || FalconOrGreater(Helpers.GetMaster(conn));
+            return conn == null || FalconOrGreater(Helpers.GetCoordinator(conn));
         }
 
         /// Falcon is ver. 2.3.0
@@ -361,7 +361,7 @@ namespace XenAdmin.Core
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool InvernessOrGreater(IXenConnection conn)
         {
-            return conn == null || InvernessOrGreater(Helpers.GetMaster(conn));
+            return conn == null || InvernessOrGreater(Helpers.GetCoordinator(conn));
         }
 
         /// Inverness is ver. 2.4.0
@@ -378,7 +378,7 @@ namespace XenAdmin.Core
         /// <param name="conn">May be null, in which case true is returned.</param>
          public static bool JuraOrGreater(IXenConnection conn)
         {
-            return conn == null || JuraOrGreater(Helpers.GetMaster(conn));
+            return conn == null || JuraOrGreater(Helpers.GetCoordinator(conn));
         }
 
         /// Jura is ver. 2.5.0
@@ -395,7 +395,7 @@ namespace XenAdmin.Core
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool KolkataOrGreater(IXenConnection conn)
         {
-            return conn == null || KolkataOrGreater(Helpers.GetMaster(conn));
+            return conn == null || KolkataOrGreater(Helpers.GetCoordinator(conn));
         }
 
         /// Kolkata platform version is 2.6.0
@@ -412,7 +412,7 @@ namespace XenAdmin.Core
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool LimaOrGreater(IXenConnection conn)
         {
-            return conn == null || LimaOrGreater(Helpers.GetMaster(conn));
+            return conn == null || LimaOrGreater(Helpers.GetCoordinator(conn));
         }
 
         /// Lima platform version is 2.7.0
@@ -429,7 +429,7 @@ namespace XenAdmin.Core
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool NaplesOrGreater(IXenConnection conn)
         {
-            return conn == null || NaplesOrGreater(GetMaster(conn));
+            return conn == null || NaplesOrGreater(GetCoordinator(conn));
         }
 
         /// Naples is ver. 3.0.0
@@ -447,7 +447,7 @@ namespace XenAdmin.Core
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool QuebecOrGreater(IXenConnection conn)
         {
-            return conn == null || QuebecOrGreater(GetMaster(conn));
+            return conn == null || QuebecOrGreater(GetCoordinator(conn));
         }
 
         /// Quebec platform version is 3.1.0
@@ -465,7 +465,7 @@ namespace XenAdmin.Core
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool StockholmOrGreater(IXenConnection conn)
         {
-            return conn == null || StockholmOrGreater(Helpers.GetMaster(conn));
+            return conn == null || StockholmOrGreater(Helpers.GetCoordinator(conn));
         }
 
         /// <param name="host">May be null, in which case true is returned.</param>
@@ -479,10 +479,11 @@ namespace XenAdmin.Core
         {
             return platformVersion != null && productVersionCompare(platformVersion, "3.1.50") >= 0;
         }
+
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool PostStockholm(IXenConnection conn)
         {
-            return conn == null || PostStockholm(Helpers.GetMaster(conn));
+            return conn == null || PostStockholm(Helpers.GetCoordinator(conn));
         }
 
         /// <param name="host">May be null, in which case true is returned.</param>
@@ -730,12 +731,12 @@ namespace XenAdmin.Core
             return IqnRegex.IsMatch(iqn);
         }
 
-        public static bool IsOlderThanMaster(Host host)
+        public static bool IsOlderThanCoordinator(Host host)
         {
-            Host master = Helpers.GetMaster(host.Connection);
-            if (master == null || master.opaque_ref == host.opaque_ref)
+            Host coordinator = Helpers.GetCoordinator(host.Connection);
+            if (coordinator == null || coordinator.opaque_ref == host.opaque_ref)
                 return false;
-            else if (Helpers.productVersionCompare(Helpers.HostProductVersion(host), Helpers.HostProductVersion(master)) >= 0)
+            else if (Helpers.productVersionCompare(Helpers.HostProductVersion(host), Helpers.HostProductVersion(coordinator)) >= 0)
                 return false;
             else
                 return true;
@@ -943,30 +944,113 @@ namespace XenAdmin.Core
 
         #endregion
 
+        public enum DataSourceCategory
+        {
+            Cpu,
+            Memory,
+            Disk,
+            Storage,
+            Network,
+            Latency,
+            LoadAverage,
+            Gpu,
+            Pvs,
+            Custom
+        }
+
+        public static string ToStringI18N(this DataSourceCategory category)
+        {
+            switch (category)
+            {
+                case DataSourceCategory.Cpu:
+                    return Messages.DATATYPE_CPU;
+                case DataSourceCategory.Memory:
+                    return Messages.DATATYPE_MEMORY;
+                case DataSourceCategory.Disk:
+                    return Messages.DATATYPE_DISK;
+                case DataSourceCategory.Storage:
+                    return Messages.DATATYPE_STORAGE;
+                case DataSourceCategory.Network:
+                    return Messages.DATATYPE_NETWORK;
+                case DataSourceCategory.Latency:
+                    return Messages.DATATYPE_LATENCY;
+                case DataSourceCategory.LoadAverage:
+                    return Messages.DATATYPE_LOADAVERAGE;
+                case DataSourceCategory.Gpu:
+                    return Messages.DATATYPE_GPU;
+                case DataSourceCategory.Pvs:
+                    return Messages.DATATYPE_PVS;
+                default:
+                    return Messages.DATATYPE_CUSTOM;
+            }
+        }
+
         public static Regex CpuRegex = new Regex("^cpu([0-9]+)$");
-        public static Regex CpuAvgFreqRegex = new Regex("^CPU([0-9]+)-avg-freq$");
+        static Regex CpuAvgFreqRegex = new Regex("^CPU([0-9]+)-avg-freq$");
         public static Regex CpuStateRegex = new Regex("^cpu([0-9]+)-(C|P)([0-9]+)$");
+        static Regex CpuOtherRegex = new Regex("^cpu_avg|avg_cpu$");
+        private static Regex VcpuRegex = new Regex("^runstate_(blocked|concurrency_hazard|full_contention|fullrun|partial_contention|partial_run)$");
         static Regex VifRegex = new Regex("^vif_([0-9]+)_(tx|rx)((_errors)?)$");
         static Regex PifEthRegex = new Regex("^pif_eth([0-9]+)_(tx|rx)((_errors)?)$");
-		static Regex PifVlanRegex = new Regex("^pif_eth([0-9]+).([0-9]+)_(tx|rx)((_errors)?)$");
+        static Regex PifVlanRegex = new Regex("^pif_eth([0-9]+).([0-9]+)_(tx|rx)((_errors)?)$");
         static Regex PifBrRegex = new Regex("^pif_xenbr([0-9]+)_(tx|rx)((_errors)?)$");
-		static Regex PifXapiRegex = new Regex("^pif_xapi([0-9]+)_(tx|rx)((_errors)?)$");
+        static Regex PifXapiRegex = new Regex("^pif_xapi([0-9]+)_(tx|rx)((_errors)?)$");
         static Regex PifTapRegex = new Regex("^pif_tap([0-9]+)_(tx|rx)((_errors)?)$");
         static Regex PifLoRegex = new Regex("^pif_lo_(tx|rx)((_errors)?)$");
         static Regex PifBondRegex = new Regex("^pif_(bond[0-9]+)_(tx|rx)((_errors)?)$");
+        static Regex PifOtherRegex = new Regex("^pif_aggr_(tx|rx)$");
         static Regex DiskRegex = new Regex("^vbd_((xvd|hd)[a-z]+)(_(read|write))?(_latency)?$");
         static Regex DiskIopsRegex = new Regex("^vbd_((xvd|hd)[a-z]+)_iops_(read|write|total)$");
         static Regex DiskThroughputRegex = new Regex("^vbd_((xvd|hd)[a-z]+)_io_throughput_(read|write|total)$");
         static Regex DiskOtherRegex = new Regex("^vbd_((xvd|hd)[a-z]+)_(avgqu_sz|inflight|iowait)$");
         static Regex NetworkLatencyRegex = new Regex("^network/latency$");
         static Regex XapiLatencyRegex = new Regex("^xapi_healthcheck/latency$");
+        static Regex XapiMemoryRegex = new Regex("^xapi_(allocation|free_memory|live_memory|memory_usage)_kib$");
         static Regex StatefileLatencyRegex = new Regex("^statefile/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/latency$");
         static Regex LoadAvgRegex = new Regex("loadavg");
-    	static Regex SrRegex = new Regex("^sr_[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}_cache_(size|hits|misses)");
+        static Regex SrRegex = new Regex("^sr_[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}_cache_(size|hits|misses)");
         static Regex SrIORegex = new Regex("^(io_throughput|iops)_(read|write|total)_([a-f0-9]{8})$");
         static Regex SrOtherRegex = new Regex("^(latency|avgqu_sz|inflight|iowait)_([a-f0-9]{8})$");
         static Regex SrReadWriteRegex = new Regex("^((read|write)(_latency)?)_([a-f0-9]{8})$");
         static Regex GpuRegex = new Regex(@"^gpu_((memory_(free|used))|power_usage|temperature|(utilisation_(compute|memory_io)))_((([a-fA-F0-9]{4}\/)|([a-fA-F0-9]{8}\/))?[a-fA-F0-9]{2}\/[0-1][a-fA-F0-9].[0-7])$");
+
+        public static DataSourceCategory GetDataSourceCategory(string name)
+        {
+            if (CpuRegex.IsMatch(name) || CpuAvgFreqRegex.IsMatch(name) ||
+                CpuStateRegex.IsMatch(name) || CpuOtherRegex.IsMatch(name) || VcpuRegex.IsMatch(name))
+                return DataSourceCategory.Cpu;
+
+            if (VifRegex.IsMatch(name) || PifEthRegex.IsMatch(name) || PifVlanRegex.IsMatch(name) ||
+                PifBrRegex.IsMatch(name) || PifXapiRegex.IsMatch(name) || PifBondRegex.IsMatch(name) ||
+                PifLoRegex.IsMatch(name) || PifTapRegex.IsMatch(name) || PifOtherRegex.IsMatch(name))
+                return DataSourceCategory.Network;
+
+            if (DiskRegex.IsMatch(name) || DiskIopsRegex.IsMatch(name) ||
+                DiskThroughputRegex.IsMatch(name) || DiskOtherRegex.IsMatch(name))
+                return DataSourceCategory.Disk;
+
+            if (SrRegex.IsMatch(name) || SrIORegex.IsMatch(name) ||
+                SrOtherRegex.IsMatch(name) || SrReadWriteRegex.IsMatch(name))
+                return DataSourceCategory.Storage;
+
+            if (GpuRegex.IsMatch(name))
+                return DataSourceCategory.Gpu;
+
+            if (NetworkLatencyRegex.IsMatch(name) || XapiLatencyRegex.IsMatch(name) ||
+                StatefileLatencyRegex.IsMatch(name))
+                return DataSourceCategory.Latency;
+
+            if (LoadAvgRegex.IsMatch(name))
+                return DataSourceCategory.LoadAverage;
+
+            if (name.StartsWith("pvsaccelerator"))
+                return DataSourceCategory.Pvs;
+
+            if (XapiMemoryRegex.IsMatch(name) || name.StartsWith("memory"))
+                return DataSourceCategory.Memory;
+
+            return DataSourceCategory.Custom;
+        }
 
         public static string GetFriendlyDataSourceName(string name, IXenObject iXenObject)
         {
@@ -1581,23 +1665,6 @@ namespace XenAdmin.Core
             } while (true);
         }
 
-        public static bool CDsExist(IXenConnection connection)
-        {
-            if (connection == null)
-                return false;
-
-            foreach (SR sr in connection.Cache.SRs)
-            {
-                if (sr.content_type != SR.Content_Type_ISO)
-                    continue;
-
-                if (sr.VDIs.Count > 0)
-                    return true;
-            }
-
-            return false;
-        }
-
         public static bool CompareLists<T>(List<T> l1, List<T> l2)
         {
             if (l1 == l2)
@@ -1682,8 +1749,8 @@ namespace XenAdmin.Core
        /// </summary>
        public static bool SupportsLinkAggregationBond(IXenConnection connection)
        {
-           Host master = GetMaster(connection);
-           return master != null && master.vSwitchNetworkBackend();
+           Host coordinator = GetCoordinator(connection);
+           return coordinator != null && coordinator.vSwitchNetworkBackend();
        }
 
        /// <summary>
@@ -1691,9 +1758,9 @@ namespace XenAdmin.Core
        /// </summary>
        public static int BondSizeLimit(IXenConnection connection)
        {
-           Host master = GetMaster(connection);
+           Host coordinator = GetCoordinator(connection);
            // For hosts on the vSwitch backend, we allow 4 NICs per bond; otherwise, 2
-           return master != null && master.vSwitchNetworkBackend() ? 4 : 2;
+           return coordinator != null && coordinator.vSwitchNetworkBackend() ? 4 : 2;
        }
 
        public static Host GetHostAncestor(IXenObject xenObject)
@@ -1750,25 +1817,25 @@ namespace XenAdmin.Core
        /// </summary>
        public static bool VLAN0Allowed(IXenConnection connection)
        {
-           Host master = GetMaster(connection);
+           Host coordinator = GetCoordinator(connection);
            // For Creedence or later on the vSwitch backend, we allow creation of VLAN 0
-           return master != null && master.vSwitchNetworkBackend();
+           return coordinator != null && coordinator.vSwitchNetworkBackend();
        }
 
        public static bool ContainerCapability(IXenConnection connection)
        {
-           var master = GetMaster(connection);
-           if (master == null)
+           var coordinator = GetCoordinator(connection);
+           if (coordinator == null)
                return false;
            if (ElyOrGreater(connection))
-               return master.AppliedUpdates().Any(update => update.Name().ToLower().StartsWith("xscontainer")); 
-           return master.SuppPacks().Any(suppPack => suppPack.Name.ToLower().StartsWith("xscontainer")); 
+               return coordinator.AppliedUpdates().Any(update => update.Name().ToLower().StartsWith("xscontainer")); 
+           return coordinator.SuppPacks().Any(suppPack => suppPack.Name.ToLower().StartsWith("xscontainer")); 
        }
 
        public static bool PvsCacheCapability(IXenConnection connection)
        {
-           var master = GetMaster(connection);
-           return master != null && master.AppliedUpdates().Any(update => update.Name().ToLower().StartsWith("pvsaccelerator"));
+           var coordinator = GetCoordinator(connection);
+           return coordinator != null && coordinator.AppliedUpdates().Any(update => update.Name().ToLower().StartsWith("pvsaccelerator"));
        }
 
         public static string UrlEncode(this string str)
@@ -1827,6 +1894,11 @@ namespace XenAdmin.Core
                     where network.Key.StartsWith(string.Format("{0}/ip", device))
                     orderby network.Key
                     select network.Value.Split(new[] { "\n", "%n" }, StringSplitOptions.RemoveEmptyEntries)).SelectMany(x => x).Distinct().ToList();
+        }
+
+        public static bool GpusAvailable(IXenConnection connection)
+        {
+            return connection?.Cache.GPU_groups.Any(g => g.PGPUs.Count > 0 && g.supported_VGPU_types.Count != 0) ?? false;
         }
     }
 }

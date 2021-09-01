@@ -391,7 +391,7 @@ namespace XenAdmin.Actions.Wlb
         /// <param name="end">progress bar end point</param>
         private static void SetHaProtection(bool protect, AsyncAction action, VM vm, int start, int end)
         {
-        	// Do database sync. Helps to ensure that the change persists over master failover.
+        	// Do database sync. Helps to ensure that the change persists over coordinator failover.
             action.RelatedTask = XenAPI.Pool.async_sync_database(action.Session);
             action.PollToCompletion(start, end);
         }

@@ -612,15 +612,15 @@ namespace XenAdmin.TabPages
         private string getNextOptModeTask(Pool pool)
         {
             //figure out the next task and return a nice string for display
-            WlbScheduledTask nextTask = _wlbPoolConfiguration.ScheduledTasks.GetNextExecutingTask();
+            WlbScheduledTask nextTask = _wlbPoolConfiguration.ScheduledTasks.GetNextRunningTask();
             WlbScheduledTask.WlbTaskDaysOfWeek dayOfWeek;
-            DateTime executeTime;
+            DateTime runTime;
 
-            WlbScheduledTask.GetLocalTaskTimes(nextTask.DaysOfWeek, nextTask.ExecuteTime, out dayOfWeek, out executeTime);
+            WlbScheduledTask.GetLocalTaskTimes(nextTask.DaysOfWeek, nextTask.RunTime, out dayOfWeek, out runTime);
 
             string localDayOfWeek = WlbScheduledTask.DaysOfWeekL10N(dayOfWeek);
 
-            return string.Format(Messages.WLB_NEXT_OPT_MODE_SCHEDULE_FORMAT, localDayOfWeek, HelpersGUI.DateTimeToString(executeTime, Messages.DATEFORMAT_HM, true));
+            return string.Format(Messages.WLB_NEXT_OPT_MODE_SCHEDULE_FORMAT, localDayOfWeek, HelpersGUI.DateTimeToString(runTime, Messages.DATEFORMAT_HM, true));
         }
         
         private string getAutoOptimization(Pool pool)
@@ -667,7 +667,7 @@ namespace XenAdmin.TabPages
         private void buttonReports_Click(object sender, EventArgs e)
         {
             ViewWorkloadReportsCommand viewWorkloadReportsCommand = new ViewWorkloadReportsCommand(Program.MainWindow, _pool);
-            viewWorkloadReportsCommand.Execute();
+            viewWorkloadReportsCommand.Run();
         }
 
         #endregion

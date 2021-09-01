@@ -52,7 +52,7 @@ namespace XenAdmin.Actions
             PollToCompletion();
 
             //call interrupt so we can reconnect afterwards
-            if (Helpers.HostIsMaster(Host))
+            if (Helpers.HostIsCoordinator(Host))
                 Host.Connection.Interrupt();
 
             Description = string.Format(Messages.ACTION_TOOLSTACK_RESTARTED_ON, Host.Name().Ellipsise(30));

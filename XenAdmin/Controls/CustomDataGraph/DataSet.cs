@@ -43,328 +43,142 @@ namespace XenAdmin.Controls.CustomDataGraph
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
+        private const int NegativeValue = -1;
+
         /// <summary>
         /// Things can only be added to the beginning or end of this list; it should
         /// be sorted by X co-ordinate (which will be larger at the beginning of the list)
         /// </summary>
         public List<DataPoint> Points = new List<DataPoint>();
-        public string Name;
-
         public bool Selected;
         public List<DataPoint> CurrentlyDisplayed = new List<DataPoint>();
         public IXenObject XenObject;
-        public string Uuid;
-        private bool _hide;
-        private bool _deselected;
-
-        /// <summary>
-        /// A guess at the data type
-        /// </summary>
-        public DataType Type;
-        /// <summary>
-        /// What it really is
-        /// </summary>
-        public string TypeString;
-
-        private const int NegativeValue = -1;
+        public readonly string Id = "";
+        public string DataSourceName;
+        public string FriendlyName { get; }
         private int MultiplyingFactor = 1;
+        public DataRange CustomYRange = new DataRange(1, 0, 1, Unit.None, RangeScaleMode.Auto);
+        public bool Hide { get; }
 
-        /// <summary>
-        /// Can show in the lisbox
-        /// </summary>
-        public bool Show
-        {
-            get { return !_hide && !NeverShow; }
-        }
-
-        /// <summary>
-        /// This dataset is of the wrong xenobject
-        /// </summary>
-        public bool Hide
-        {
-            get { return _hide; }
-            set { _hide = value; }
-        }
-        
-        /// <summary>
-        /// The user has chosen not to show this graph
-        /// </summary>
-        public bool Deselected
-        {
-            get { return _deselected; }
-            set { _deselected = value; }
-        }
-
-        /// <summary>
-        /// Never ever draw on graph or put in listbox
-        /// </summary>
-        private bool NeverShow { get; set; }
-
-        /// <summary>
-        /// Can draw on graph
-        /// </summary>
-        public bool Draw
-        {
-            get { return !_hide && !NeverShow && !_deselected; }
-        }
-        
-        public DataRange CustomYRange;
-
-        private DataSet(string uuid, IXenObject xo, bool show, string settype)
+        public DataSet(IXenObject xo, bool hide, string datasourceName, List<Data_source> datasources)
         {
             XenObject = xo;
-            _hide = !show;
-            Uuid = uuid;
-            TypeString = settype;
-            Name = Helpers.GetFriendlyDataSourceName(settype, XenObject);
-        }
+            Hide = datasourceName == "xapi_open_fds" ||
+                   datasourceName == "pool_task_count" ||
+                   datasourceName == "pool_session_count" ||
+                   datasourceName == "memory" ||
+                   datasourceName == "memory_total_kib" || hide;
 
-        #region Static methods
+            DataSourceName = datasourceName;
 
-        public static DataSet Create(string uuid, IXenObject xo, bool show, string settype)
-        {
-            var dataSet = new DataSet(uuid, xo, show, settype);
-            if(settype == "xapi_open_fds" || settype == "pool_task_count" || settype == "pool_session_count")
-            {
-                dataSet.NeverShow = true;
-            }
-            if (settype.StartsWith("latency") || settype.EndsWith("latency"))
-            {
-                if (settype.StartsWith("latency_") || settype.StartsWith("read_latency_") ||
-                    settype.StartsWith("write_latency_") || settype.StartsWith("vbd"))
-                {
-                    //if it's storage or vbd latency xapi units are in microseconds
-                    dataSet.MultiplyingFactor = 1000;
-                }
-                else
-                {
-                    //otherwise they are in seconds
-                    dataSet.MultiplyingFactor = 1000000000;
-                }
+            if (xo is Host host)
+                Id = $"host:{host.uuid}:{datasourceName}";
+            else if (xo is VM vm)
+                Id = $"vm:{vm.uuid}:{datasourceName}";
 
-                dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.NanoSeconds, RangeScaleMode.Auto);
-                dataSet.Type = DataType.Latency;
-            }
-            else if (settype.StartsWith("vif") || settype.StartsWith("pif"))
-            {
-                //xapi units are in bytes/sec or errors/sec
-                Unit unit = settype.EndsWith("errors") ? Unit.CountsPerSecond : Unit.BytesPerSecond;
-
-                dataSet.CustomYRange = new DataRange(1, 0, 1, unit, RangeScaleMode.Auto);
-                dataSet.Type = DataType.Network;
-            }
-            else if (settype.StartsWith("vbd"))
-            {
-                if (settype.Contains("iops"))
-                    dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.CountsPerSecond, RangeScaleMode.Auto);
-                else if (settype.Contains("io_throughput"))
-                {
-                    dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.BytesPerSecond, RangeScaleMode.Auto);
-                    dataSet.MultiplyingFactor = (int)Util.BINARY_MEGA; //xapi units are in mebibytes/sec
-                }
-                else if (settype.EndsWith("iowait"))
-                {
-                    dataSet.CustomYRange = new DataRange(100, 0, 10, Unit.Percentage, RangeScaleMode.Auto);
-                    dataSet.MultiplyingFactor = 100;
-                }
-                else if (settype.EndsWith("inflight") || settype.EndsWith("avgqu_sz"))
-                    dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.None, RangeScaleMode.Auto);
-                else
-                    dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.BytesPerSecond, RangeScaleMode.Auto);
-
-                dataSet.Type = DataType.Disk;
-            }
-            else if ((settype.Contains("memory") || settype.Contains("allocation")) && !settype.Contains("utilisation"))
-            {
-                dataSet.Type = settype.Contains("gpu") ? DataType.Gpu : DataType.Memory;
-
-                dataSet.MultiplyingFactor = settype.Contains("kib") || settype == "memory_internal_free"
-                                                ? (int)Util.BINARY_KILO
-                                                : 1;
-
-                if (settype == "memory" || settype == "memory_total_kib")
-                {
-                    dataSet.NeverShow = true;
-                }
-                else if (settype == "memory_free_kib" && xo is Host)
-                {
-                    dataSet.Name = Helpers.GetFriendlyDataSourceName("memory_used_kib", dataSet.XenObject);
-                    Host host = (Host)xo;
-                    Host_metrics metrics = host.Connection.Resolve(host.metrics);
-                    long max = metrics != null ? metrics.memory_total : 100;
-                    dataSet.CustomYRange = new DataRange(max, 0, max / 10d, Unit.Bytes, RangeScaleMode.Delegate)
-                    {
-                        UpdateMax = dataSet.GetMemoryMax,
-                        UpdateResolution = dataSet.GetMemoryResolution
-                    };
-                }
-                else if (settype == "memory_internal_free" && xo is VM)
-                {
-                    dataSet.Name = Helpers.GetFriendlyDataSourceName("memory_internal_used", dataSet.XenObject);
-                    VM vm = (VM)xo;
-                    VM_metrics metrics = vm.Connection.Resolve(vm.metrics);
-                    long max = metrics != null ? metrics.memory_actual : (long)vm.memory_dynamic_max;
-                    dataSet.CustomYRange = new DataRange(max, 0, max / 10d, Unit.Bytes, RangeScaleMode.Delegate)
-                    {
-                        UpdateMax = dataSet.GetMemoryMax,
-                        UpdateResolution = dataSet.GetMemoryResolution
-                    };
-                }
-                else
-                {
-                    dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.Bytes, RangeScaleMode.Auto);
-                }
-            }
-            else if (settype.StartsWith("loadavg"))
-            {
-                dataSet.CustomYRange = new DataRange(100, 0, 10, Unit.Percentage, RangeScaleMode.Auto);
-                dataSet.MultiplyingFactor = 100;
-                dataSet.Type = DataType.LoadAverage;
-            }
-            else if (settype.EndsWith("-avg-freq"))
-            { 
-                dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.MegaHertz, RangeScaleMode.Auto);
-                dataSet.Type = DataType.Cpu;
-            }
-            else if (settype.StartsWith("cpu") || settype == "avg_cpu" || settype.StartsWith("runstate"))
-            {
-                dataSet.CustomYRange = new DataRange(100, 0, 10, Unit.Percentage, RangeScaleMode.Fixed);
-                dataSet.MultiplyingFactor = 100;
-                dataSet.Type = DataType.Cpu;
-            }
-            else if (settype.StartsWith("io_throughput"))
-            {
-                dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.BytesPerSecond, RangeScaleMode.Auto);
-                dataSet.MultiplyingFactor = (int)Util.BINARY_MEGA; //xapi units are in mebibytes/sec
-                dataSet.Type = DataType.Storage;
-            }
-            else if (settype.StartsWith("sr"))
-            {
-                dataSet.Type = DataType.Storage;
-
-                if (settype.EndsWith("cache_size"))
-                    dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.Bytes, RangeScaleMode.Auto);
-                else if (settype.EndsWith("cache_hits") || settype.EndsWith("cache_misses"))
-                    dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.CountsPerSecond, RangeScaleMode.Auto);
-            }
-            else if (settype.StartsWith("iops"))
-            {
-                //xapi units are in requests/sec
-                dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.CountsPerSecond, RangeScaleMode.Auto);
-                dataSet.Type = DataType.Storage;
-            }
-            else if (settype.StartsWith("iowait"))
-            {
-                dataSet.CustomYRange = new DataRange(100, 0, 10, Unit.Percentage, RangeScaleMode.Auto);
-                dataSet.MultiplyingFactor = 100;
-                dataSet.Type = DataType.Storage;
-            }
-            else if (settype.StartsWith("inflight") || settype.StartsWith("avgqu_sz"))
-            {
-                //xapi units are in requests
-                dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.None, RangeScaleMode.Auto);
-                dataSet.Type = DataType.Storage;
-            }
-            else if (settype.StartsWith("gpu"))
-            {
-                if (settype.Contains("power_usage"))
-                {
-                    //xapi units are in mW
-                    dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.MilliWatt, RangeScaleMode.Auto);
-                }
-                else if (settype.Contains("temperature"))
-                {
-                    //xapi units are in Centigrade
-                    dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.Centigrade, RangeScaleMode.Auto);
-                }
-                else if (settype.Contains("utilisation"))
-                {
-                    dataSet.CustomYRange = new DataRange(100, 0, 10, Unit.Percentage, RangeScaleMode.Fixed);
-                    dataSet.MultiplyingFactor = 100;
-                }
-                dataSet.Type = DataType.Gpu;
-            }
-            else if (settype.StartsWith("pvsaccelerator"))
-            {
-                if (settype.Contains("traffic") || settype.EndsWith("evicted"))
-                    dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.BytesPerSecond, RangeScaleMode.Auto);
-                else if (settype.EndsWith("read_total") || settype.EndsWith("read_hits") || settype.EndsWith("read_misses"))
-                    dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.CountsPerSecond, RangeScaleMode.Auto);
-                else if (settype.Contains("utilization")) 
-                    dataSet.CustomYRange = new DataRange(100, 0, 10, Unit.Percentage, RangeScaleMode.Fixed); // values range from 0 to 100
-                else
-                    dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.None, RangeScaleMode.Auto);
-                dataSet.Type = DataType.Pvs;
-            }
-            else if (settype.StartsWith("read_latency") || settype.StartsWith("write_latency"))
-            {
-                // Units are microseconds
-                dataSet.MultiplyingFactor = 1000;
-                dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.NanoSeconds, RangeScaleMode.Auto);
-                dataSet.Type = DataType.Latency;
-            }
-            else if (settype.StartsWith("read") || settype.StartsWith("write"))
-            {
-                // Units are Bytes/second
-                dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.BytesPerSecond, RangeScaleMode.Auto);
-                dataSet.Type = DataType.Storage;
-            }
+            if (datasourceName == "memory_free_kib")
+                FriendlyName = Helpers.GetFriendlyDataSourceName("memory_used_kib", xo);
+            else if (datasourceName == "memory_internal_free")
+                FriendlyName = Helpers.GetFriendlyDataSourceName("memory_internal_used", xo);
             else
+                FriendlyName = Helpers.GetFriendlyDataSourceName(datasourceName, xo);
+
+            var units = datasources.FirstOrDefault(d => datasourceName.StartsWith(d.name_label))?.units;
+
+            switch (units)
             {
-                dataSet.CustomYRange = new DataRange(1, 0, 1, Unit.None, RangeScaleMode.Auto);
-                dataSet.Type = DataType.Custom;
+                case "count":
+                case "requests":
+                case "sessions":
+                case "tasks":
+                case "file descriptors":
+                    break;
+                case "(fraction)":
+                    //CP-34000: use Auto instead of Fixed scale
+                    CustomYRange = new DataRange(100, 0, 10, Unit.Percentage, RangeScaleMode.Auto);
+                    MultiplyingFactor = 100;
+                    break;
+                case "MHz":
+                    CustomYRange = new DataRange(1, 0, 1, Unit.MegaHertz, RangeScaleMode.Auto);
+                    break;
+                case "requests/s":
+                case "err/s":
+                    CustomYRange = new DataRange(1, 0, 1, Unit.CountsPerSecond, RangeScaleMode.Auto);
+                    break;
+                case "s/s":
+                    CustomYRange = new DataRange(1, 0, 1, Unit.SecondsPerSecond, RangeScaleMode.Auto);
+                    break;
+                case "s":
+                    CustomYRange = new DataRange(1, 0, 1, Unit.NanoSeconds, RangeScaleMode.Auto);
+                    MultiplyingFactor = (int)Util.DEC_GIGA;
+                    break;
+                case "ms":
+                    CustomYRange = new DataRange(1, 0, 1, Unit.NanoSeconds, RangeScaleMode.Auto);
+                    MultiplyingFactor = (int)Util.DEC_MEGA;
+                    break;
+                case "μs":
+                    CustomYRange = new DataRange(1, 0, 1, Unit.NanoSeconds, RangeScaleMode.Auto);
+                    MultiplyingFactor = (int)Util.DEC_KILO;
+                    break;
+                case "B":
+                    CustomYRange = new DataRange(1, 0, 1, Unit.Bytes, RangeScaleMode.Auto);
+                    break;
+                case "KiB":
+                    CustomYRange = new DataRange(1, 0, 1, Unit.Bytes, RangeScaleMode.Auto);
+                    MultiplyingFactor = (int)Util.BINARY_KILO;
+                    break;
+                case "B/s":
+                    CustomYRange = new DataRange(1, 0, 1, Unit.BytesPerSecond, RangeScaleMode.Auto);
+                    break;
+                case "MiB/s":
+                    MultiplyingFactor = (int)Util.BINARY_MEGA;
+                    CustomYRange = new DataRange(1, 0, 1, Unit.BytesPerSecond, RangeScaleMode.Auto);
+                    break;
+                case "mW":
+                    CustomYRange = new DataRange(1, 0, 1, Unit.MilliWatt, RangeScaleMode.Auto);
+                    break;
+                case "Centigrade":
+                    CustomYRange = new DataRange(1, 0, 1, Unit.Centigrade, RangeScaleMode.Auto);
+                    break;
+                default:
+                    if (!string.IsNullOrEmpty(units))
+                        System.Diagnostics.Debug.Assert(false, $"Unhandled units {units}!");
+                    break;
             }
 
-            return dataSet;
+            if (datasourceName == "memory_free_kib" || datasourceName == "memory_internal_free")
+            {
+                var max = GetMemoryMax(xo);
+                var resolution = GetMemoryResolution(max);
+                    
+                CustomYRange = new DataRange(max, 0, resolution, Unit.Bytes, RangeScaleMode.Delegate)
+                {
+                    UpdateMax = GetMemoryMax,
+                    UpdateResolution = GetMemoryResolution
+                };
+            }
         }
 
-        public static DataSet Create(string id, IXenObject xenObject)
+        public static bool ParseId(string id, out string objType, out string objUuid, out string dataSourceName)
         {
-            string[] bits = id.Split(':');
-            if (bits.Length < 3)
-                return Create(id, null, false, id);
+            var bits = id.Split(':').ToList();
 
-            string theId;
-            string theObjType;
-            string theUuid;
-            string theDataName;
+            if (bits.Count > 3)
+                bits.RemoveAt(0);
 
-            if (bits.Length == 4)
+            if (bits.Count >= 3)
             {
-                string[] important_bits = new string[3];
-                Array.Copy(bits, 1, important_bits, 0, 3);
-
-                theId = string.Join(":", important_bits);
-                theObjType = bits[1];
-                theUuid = bits[2];
-                theDataName = bits[3];
-            }
-            else
-            {
-                theId = id;
-                theObjType = bits[0];
-                theUuid = bits[1];
-                theDataName = bits[2];
+                objType = bits[0];
+                objUuid = bits[1];
+                dataSourceName = bits[2];
+                return true;
             }
 
-            if (theObjType == "host")
-            {
-                Host host = xenObject.Connection.Cache.Find_By_Uuid<Host>(theUuid);
-                if (host != null)
-                    return Create(theId, host, (xenObject is Host && ((Host)xenObject).uuid == theUuid), theDataName);
-            }
-
-            if (theObjType == "vm")
-            {
-                VM vm = xenObject.Connection.Cache.Find_By_Uuid<VM>(theUuid);
-                if (vm != null)
-                    return Create(theId, vm, (xenObject is VM && ((VM)xenObject).uuid == theUuid), theDataName);
-            }
-
-            return Create(id, null, false, id);
+            objType = null;
+            objUuid = null;
+            dataSourceName = null;
+            return false;
         }
-
-        #endregion
 
         public List<DataPoint> GetRange(DataTimeRange xrange, long intervalneed, long intervalat)
         {
@@ -396,38 +210,25 @@ namespace XenAdmin.Controls.CustomDataGraph
             return listout;
         }
 
-        private double GetMemoryMax(IXenObject xo)
+        private static double GetMemoryMax(IXenObject xo)
         {
-            if (xo is Host)
-            {
-                Host host = (Host)xo;
-                Host_metrics metrics = host.Connection.Resolve(host.metrics);
-                return metrics != null ? metrics.memory_total : 100;
-            }
-            else if (xo is VM)
-            {
-                VM vm = (VM)xo;
-                VM_metrics metrics = vm.Connection.Resolve(vm.metrics);
-                return metrics != null ? metrics.memory_actual : vm.memory_dynamic_max;
-            }
+            if (xo is Host host)
+                return host.Connection.Resolve(host.metrics)?.memory_total ?? 100;
+
+            if (xo is VM vm)
+                return (vm.Connection.Resolve(vm.metrics))?.memory_actual ?? vm.memory_dynamic_max;
+
             return 100;
         }
 
-        private double GetMemoryResolution(IXenObject xmo)
+        private static double GetMemoryResolution(IXenObject xmo)
         {
-            if (xmo is Host)
-            {
-                Host host = (Host)xmo;
-                Host_metrics metrics = host.Connection.Resolve(host.metrics);
-                return metrics != null ? metrics.memory_total / 10 : 10;
-            }
-            else if (xmo is VM)
-            {
-                VM vm = (VM)xmo;
-                VM_metrics metrics = vm.Connection.Resolve(vm.metrics);
-                return ((metrics != null ? metrics.memory_actual : (long)vm.memory_dynamic_max) / 10d);
-            }
-            return 10;
+            return GetMemoryMax(xmo) / 10d;
+        }
+
+        private static double GetMemoryResolution(double max)
+        {
+            return max / 10d;
         }
 
         public static double GetMaxY(List<DataPoint> dataPoints)
@@ -494,13 +295,11 @@ namespace XenAdmin.Controls.CustomDataGraph
 
         public override string ToString()
         {
-            return Name;
+            return FriendlyName;
         }
 
         public DataPoint OnMouseMove(MouseActionArgs args)
         {
-            if (Deselected)
-                return null;
             LongPoint p = LongPoint.DeTranslateFromScreen(new LongPoint(args.Point), args.XRange, args.YRange, new LongRectangle(args.Rectangle));
             return ClosestPointTo(p);
         }
@@ -540,7 +339,7 @@ namespace XenAdmin.Controls.CustomDataGraph
             return poly.Contains(new LongPoint(args.Point));
         }
 
-        public void AddPoint(string str, long currentTime, List<DataSet> setsAdded)
+        public void AddPoint(string str, long currentTime, List<DataSet> setsAdded, List<Data_source> dataSources)
         {
             double value = Helpers.StringToDouble(str);
             bool isNanOrInfinity = double.IsNaN(value) || double.IsInfinity(value);
@@ -551,12 +350,12 @@ namespace XenAdmin.Controls.CustomDataGraph
             var matchDelegate = new Func<string, bool>(s => Helpers.CpuRegex.IsMatch(s) &&
                                                             !Helpers.CpuStateRegex.IsMatch(s));
 
-            if (matchDelegate(TypeString))
+            if (matchDelegate(DataSourceName))
             {
-                DataSet other = setsAdded.FirstOrDefault(s => s.TypeString == "avg_cpu");
+                DataSet other = setsAdded.FirstOrDefault(s => s.DataSourceName == "avg_cpu");
                 if (other == null)
                 {
-                    other = Create(Palette.GetUuid("avg_cpu", XenObject), XenObject, true, "avg_cpu");
+                    other = new DataSet(XenObject, false, "avg_cpu", dataSources);
                     setsAdded.Add(other);
                 }
 
@@ -575,7 +374,7 @@ namespace XenAdmin.Controls.CustomDataGraph
 
                     foreach (DataSet s in setsAdded)
                     {
-                        if (matchDelegate(s.TypeString) && s.GetPointAt(currentTime) != null && s != this)
+                        if (matchDelegate(s.DataSourceName) && s.GetPointAt(currentTime) != null && s != this)
                             cpu_vals_added++;
                     }
 
@@ -587,9 +386,9 @@ namespace XenAdmin.Controls.CustomDataGraph
 
             #region memory
 
-            if (TypeString == "memory_total_kib")
+            if (DataSourceName == "memory_total_kib")
             {
-                DataSet other = setsAdded.FirstOrDefault(s => s.TypeString == "memory_free_kib");
+                DataSet other = setsAdded.FirstOrDefault(s => s.DataSourceName == "memory_free_kib");
                 if (other != null && other.Points.Count - 1 == Points.Count)
                 {
                     yValue = isNanOrInfinity || other.Points[other.Points.Count - 1].Y < 0
@@ -598,9 +397,9 @@ namespace XenAdmin.Controls.CustomDataGraph
                     other.Points[other.Points.Count - 1].Y = yValue;
                 }
             }
-            else if (TypeString == "memory_free_kib")
+            else if (DataSourceName == "memory_free_kib")
             {
-                DataSet other = setsAdded.FirstOrDefault(s => s.TypeString == "memory_total_kib");
+                DataSet other = setsAdded.FirstOrDefault(s => s.DataSourceName == "memory_total_kib");
                 if (other != null && other.Points.Count - 1 == Points.Count)
                 {
                     yValue = isNanOrInfinity || other.Points[other.Points.Count - 1].Y < 0
@@ -608,9 +407,9 @@ namespace XenAdmin.Controls.CustomDataGraph
                                  : other.Points[other.Points.Count - 1].Y - (value * MultiplyingFactor);
                 }
             }
-            else if (TypeString == "memory")
+            else if (DataSourceName == "memory")
             {
-                DataSet other = setsAdded.FirstOrDefault(s => s.TypeString == "memory_internal_free");
+                DataSet other = setsAdded.FirstOrDefault(s => s.DataSourceName == "memory_internal_free");
                 if (other != null && other.Points.Count - 1 == Points.Count)
                 {
                     yValue = isNanOrInfinity || other.Points[other.Points.Count - 1].Y < 0
@@ -619,9 +418,9 @@ namespace XenAdmin.Controls.CustomDataGraph
                     other.Points[other.Points.Count - 1].Y = yValue;
                 }
             }
-            else if (TypeString == "memory_internal_free")
+            else if (DataSourceName == "memory_internal_free")
             {
-                DataSet other = setsAdded.FirstOrDefault(s => s.TypeString == "memory");
+                DataSet other = setsAdded.FirstOrDefault(s => s.DataSourceName == "memory");
                 if (other != null && other.Points.Count - 1 == Points.Count)
                 {
                     yValue = isNanOrInfinity || other.Points[other.Points.Count - 1].Y < 0
@@ -684,14 +483,14 @@ namespace XenAdmin.Controls.CustomDataGraph
 
             DataSet other = (DataSet)obj;
 
-            return Uuid == other.Uuid;
+            return Id == other.Id;
         }
 
         public override int GetHashCode()
         {
-            if (string.IsNullOrEmpty(Uuid))
+            if (string.IsNullOrEmpty(Id))
                 return base.GetHashCode();
-            return Uuid.GetHashCode();
+            return Id.GetHashCode();
         }
 
         internal void InsertPointCollection(List<DataPoint> list)
@@ -791,12 +590,12 @@ namespace XenAdmin.Controls.CustomDataGraph
 
         public int CompareTo(DataSet other)
         {
-            if (Uuid == other.Uuid)
+            if (Id == other.Id)
                 return 0;
 
             int comp = DisplayArea.CompareTo(other.DisplayArea);
             if (comp == 0)
-                return StringUtility.NaturalCompare(Name, other.Name);
+                return StringUtility.NaturalCompare(FriendlyName, other.FriendlyName);
             return comp;
         }
 
@@ -808,38 +607,6 @@ namespace XenAdmin.Controls.CustomDataGraph
                     return p;
 
             return null;
-        }
-    }
-
-    public enum DataType { Cpu, Memory, Disk, Storage, Network, Latency, LoadAverage, Gpu, Pvs, Custom };
-
-    public static class DatatypeExtensions
-    {
-        public static string ToStringI18N(this DataType datatype)
-        {
-            switch (datatype)
-            {
-                case DataType.Cpu:
-                    return Messages.DATATYPE_CPU;
-                case DataType.Memory:
-                    return Messages.DATATYPE_MEMORY;
-                case DataType.Disk:
-                    return Messages.DATATYPE_DISK;
-                case DataType.Storage:
-                    return Messages.DATATYPE_STORAGE;
-                case DataType.Network:
-                    return Messages.DATATYPE_NETWORK;
-                case DataType.Latency:
-                    return Messages.DATATYPE_LATENCY;
-                case DataType.LoadAverage:
-                    return Messages.DATATYPE_LOADAVERAGE;
-                case DataType.Gpu:
-                    return Messages.DATATYPE_GPU;
-                case DataType.Pvs:
-                    return Messages.DATATYPE_PVS;
-                default:
-                    return Messages.DATATYPE_CUSTOM;
-            }
         }
     }
 }

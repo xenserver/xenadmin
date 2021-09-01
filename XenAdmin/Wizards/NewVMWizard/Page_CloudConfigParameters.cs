@@ -143,7 +143,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             else
                 parameters.Add("vdiuuid", configDrive.uuid);
             
-            var action = new ExecutePluginAction(Connection, Affinity ?? Helpers.GetMaster(Connection),
+            var action = new RunPluginAction(Connection, Affinity ?? Helpers.GetCoordinator(Connection),
                         "xscontainer",//plugin
                         defaultConfig ? "get_config_drive_default" : "get_config_drive_configuration",//function
                         parameters,
@@ -210,7 +210,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             parameters.Add("sruuid", sr.uuid);
             parameters.Add("configuration", ConfigDriveTemplateText.Replace("\r\n", "\n"));
 
-            return new ExecutePluginAction(Connection, vmOrTemplate.Home() ?? Helpers.GetMaster(Connection),
+            return new RunPluginAction(Connection, vmOrTemplate.Home() ?? Helpers.GetCoordinator(Connection),
                                            "xscontainer", //plugin
                                            "create_config_drive", //function
                                            parameters,
@@ -236,6 +236,9 @@ namespace XenAdmin.Wizards.NewVMWizard
         public void ShowLocalValidationMessages()
         {
         }
+
+        public void HideLocalValidationMessages()
+        { }
 
         public void Cleanup()
         {

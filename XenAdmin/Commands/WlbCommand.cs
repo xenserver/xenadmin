@@ -33,6 +33,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
+using XenAdmin.Dialogs.Wlb;
 using XenAdmin.Wlb;
 using XenAPI;
 
@@ -55,22 +56,17 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
-            return new DisconnectWlbServerCommand(MainWindowCommandInterface, selection).CanExecute() ||
-                   new ViewWorkloadReportsCommand(MainWindowCommandInterface, selection).CanExecute();
+            return new DisconnectWlbServerCommand(MainWindowCommandInterface, selection).CanRun() ||
+                   new ViewWorkloadReportsCommand(MainWindowCommandInterface, selection).CanRun();
         }
 
         protected bool IsLicensedFeature(SelectedItemCollection selection)
         {
             if (Helpers.FeatureForbidden(selection[0].XenObject, Host.RestrictWLB))
             {
-                using (var dlg = new UpsellDialog(HiddenFeatures.LinkLabelHidden
-                        ? Messages.UPSELL_BLURB_WLB
-                        : Messages.UPSELL_BLURB_WLB + Messages.UPSELL_BLURB_TRIAL,
-                    InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL))
-                    dlg.ShowDialog(Parent);
-                
+                UpsellDialog.ShowUpsellDialog(Messages.UPSELL_BLURB_WLB, Parent);
                 return false;
             }
 
@@ -92,7 +88,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             if (!IsLicensedFeature(selection))
                 return;
@@ -107,7 +103,7 @@ namespace XenAdmin.Commands
                 }
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             return selection.Count == 1 && selection[0].PoolAncestor != null &&
                    !string.IsNullOrEmpty(selection[0].PoolAncestor.wlb_url);
@@ -139,7 +135,7 @@ namespace XenAdmin.Commands
             _run = run;
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             if (!IsLicensedFeature(selection))
                 return;
@@ -153,7 +149,7 @@ namespace XenAdmin.Commands
             MainWindowCommandInterface.ShowPerConnectionWizard(selection[0].Connection, wlbReports);
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (selection.Count != 1 || selection[0].PoolAncestor == null)
                 return false;

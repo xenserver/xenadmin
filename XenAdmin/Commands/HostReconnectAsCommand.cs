@@ -60,12 +60,12 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             new ReconnectAsDialog(selection[0].Connection).ShowDialog(Parent);
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (selection.Count == 1)
             {
@@ -73,8 +73,8 @@ namespace XenAdmin.Commands
                 bool connected = connection != null && connection.IsConnected;
                 Host host = selection[0].XenObject as Host;
                 bool is_host = (host != null);
-                bool is_master = is_host && host.IsMaster();
-                return (connected && is_master) || (connection != null && connection.InProgress && !connection.IsConnected);
+                bool is_coordinator = is_host && host.IsCoordinator();
+                return (connected && is_coordinator) || (connection != null && connection.InProgress && !connection.IsConnected);
             }
             return false;
         }

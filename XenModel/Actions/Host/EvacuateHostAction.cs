@@ -44,7 +44,7 @@ namespace XenAdmin.Actions
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private readonly Dictionary<XenRef<VM>, string[]> _hostRecommendations;
-        private readonly Host _newMaster;
+        private readonly Host _newCoordinator;
 
         /// <summary>
         /// 
@@ -57,19 +57,19 @@ namespace XenAdmin.Actions
         /// <param name="host">Must not be null.</param>
         /// <param name="acceptNTolChanges"></param>
         /// <param name="acceptNTolChangesOnEnable"></param>
-        public EvacuateHostAction(Host host, Host newMaster, Dictionary<XenRef<VM>, String[]> hostRecommendations, Func<HostAbstractAction, Pool, long, long, bool> acceptNTolChanges, Func<Pool, Host, long, long, bool> acceptNTolChangesOnEnable) 
+        public EvacuateHostAction(Host host, Host newCoordinator, Dictionary<XenRef<VM>, String[]> hostRecommendations, Func<HostAbstractAction, Pool, long, long, bool> acceptNTolChanges, Func<Pool, Host, long, long, bool> acceptNTolChangesOnEnable) 
             : base(host.Connection, null, Messages.HOST_EVACUATE, acceptNTolChanges, acceptNTolChangesOnEnable)
         {
             if (host == null)
                 throw new ArgumentNullException("host");
             Host = host;
-            _newMaster = newMaster;
+            _newCoordinator = newCoordinator;
             _hostRecommendations = hostRecommendations;
         }
 
         protected override void Run()
         {
-            bool isMaster = Host.IsMaster();
+            bool isCoordinator = Host.IsCoordinator();
 
             try
             {
@@ -99,7 +99,7 @@ namespace XenAdmin.Actions
                         if (NoRecommendationError(_hostRecommendations, out error))
                         {
                             int start = 20;
-                            int each = (isMaster ? 80 : 90) / _hostRecommendations.Count;
+                            int each = (isCoordinator ? 80 : 90) / _hostRecommendations.Count;
 
                             IEnumerable<WlbHostEvacuationRecommendation> sortedRecommendations = SortedHostRecommendations(_hostRecommendations);
 
@@ -169,32 +169,32 @@ namespace XenAdmin.Actions
                 if (!Helpers.WlbEnabled(Host.Connection) || tryAgain)
                 {
                     RelatedTask = XenAPI.Host.async_evacuate(Session, Host.opaque_ref);
-                    PollToCompletion(20, isMaster ? 80 : 90);
+                    PollToCompletion(20, isCoordinator ? 80 : 90);
                 }
 
                 this.Description = String.Format(Messages.HOSTACTION_EVACUATED, Helpers.GetName(Host));
 
-                if (isMaster && _newMaster != null)
+                if (isCoordinator && _newCoordinator != null)
                 {
-                    // Signal to the connection that the master is going to change underneath us.
-                    Connection.MasterMayChange = true;
+                    // Signal to the connection that the coordinator is going to change underneath us.
+                    Connection.CoordinatorMayChange = true;
 
-                    //Transition to new master
-                    this.Description = String.Format(Messages.HOSTACTION_TRANSITIONING_NEW_MASTER, Helpers.GetName(_newMaster));
+                    //Transition to new coordinator
+                    this.Description = String.Format(Messages.HOSTACTION_TRANSITIONING_NEW_COORDINATOR, Helpers.GetName(_newCoordinator));
 
                     try
                     {
-                        RelatedTask = XenAPI.Pool.async_designate_new_master(Session, _newMaster.opaque_ref);
+                        RelatedTask = XenAPI.Pool.async_designate_new_master(Session, _newCoordinator.opaque_ref);
                         PollToCompletion(80, 90);
                     }
                     catch
                     {
-                        // If theres an error during designate new master, clear flag to prevent leak.
-                        Connection.MasterMayChange = false;
+                        // If theres an error during designate new coordinator, clear flag to prevent leak.
+                        Connection.CoordinatorMayChange = false;
                         throw;
                     }
 
-                    this.Description = String.Format(Messages.HOSTACTION_TRANSITIONED_NEW_MASTER, Helpers.GetName(_newMaster));
+                    this.Description = String.Format(Messages.HOSTACTION_TRANSITIONED_NEW_COORDINATOR, Helpers.GetName(_newCoordinator));
                 }
 
                 this.PercentComplete = 100;
@@ -202,7 +202,7 @@ namespace XenAdmin.Actions
             catch (Exception e)
             {
                 log.Error($"There was an exception putting the host {Host.opaque_ref} into maintenance mode. Removing other_config key.", e);
-                Enable(isMaster ? 80 : 90, 100, false);
+                Enable(isCoordinator ? 80 : 90, 100, false);
                 throw;
             }
         }

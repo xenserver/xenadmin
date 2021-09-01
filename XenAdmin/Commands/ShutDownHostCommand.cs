@@ -66,10 +66,10 @@ namespace XenAdmin.Commands
             Parent = parent;
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             List<AsyncAction> actions = new List<AsyncAction>();
-            foreach (Host host in selection.AsXenObjects<Host>(CanExecute))
+            foreach (Host host in selection.AsXenObjects<Host>(CanRun))
             {
                 this.MainWindowCommandInterface.CloseActiveWizards(host.Connection);
                 ShutdownHostAction action = new ShutdownHostAction(host,AddHostToPoolCommand.NtolDialog);
@@ -79,12 +79,12 @@ namespace XenAdmin.Commands
             RunMultipleActions(actions, null, Messages.ACTION_HOSTS_SHUTTING_DOWN, Messages.ACTION_HOSTS_SHUTDOWN, true);
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
-            return selection.AllItemsAre<Host>() && selection.AtLeastOneXenObjectCan<Host>(CanExecute);
+            return selection.AllItemsAre<Host>() && selection.AtLeastOneXenObjectCan<Host>(CanRun);
         }
 
-        private static bool CanExecute(Host host)
+        private static bool CanRun(Host host)
         {
             return host != null && host.IsLive() && !HelpersGUI.HasActiveHostAction(host) ;
         }
@@ -117,7 +117,7 @@ namespace XenAdmin.Commands
                 List<Host> hosts = GetSelection().AsXenObjects<Host>();
                 bool hasRunningVMs = false;
                 var hciHosts = new List<Host>();
-                var poolMasters = new List<Host>();
+                var poolCoordinators = new List<Host>();
 
                 foreach (Host h in hosts)
                 {
@@ -127,8 +127,8 @@ namespace XenAdmin.Commands
                     if (h.Connection.ResolveAll(h.resident_VMs).Exists(v => v.HciWarnBeforeShutdown()))
                         hciHosts.Add(h);
 
-                    if (Helpers.HostIsMaster(h) && h.Connection.Cache.HostCount > 1)
-                        poolMasters.Add(h);
+                    if (Helpers.HostIsCoordinator(h) && h.Connection.Cache.HostCount > 1)
+                        poolCoordinators.Add(h);
                 }
 
                 StringBuilder sb = new StringBuilder();
@@ -151,40 +151,40 @@ namespace XenAdmin.Commands
 
                 sb.Append(firstWarning);
 
-                if (poolMasters.Count == 1)
+                if (poolCoordinators.Count == 1)
                 {
                     sb.AppendLine();
                     sb.AppendLine();
-                    sb.AppendFormat(Messages.SHUT_DOWN_POOL_MASTER_SINGLE, poolMasters[0].Name());
+                    sb.AppendFormat(Messages.SHUT_DOWN_POOL_COORDINATOR_SINGLE, poolCoordinators[0].Name());
                 }
-                else if (poolMasters.Count > 1)
+                else if (poolCoordinators.Count > 1)
                 {
                     sb.AppendLine();
                     sb.AppendLine();
-                    sb.AppendFormat(Messages.SHUT_DOWN_POOL_MASTER_MULTIPLE, string.Join(", ", poolMasters.Select(h => h.Name())));
+                    sb.AppendFormat(Messages.SHUT_DOWN_POOL_COORDINATOR_MULTIPLE, string.Join(", ", poolCoordinators.Select(h => h.Name())));
                 }
                 return sb.ToString();
             }
         }
 
-        protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantExecuteReasons)
+        protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantRunReasons)
         {
             foreach (Host host in GetSelection().AsXenObjects<Host>())
             {
-                if (!CanExecute(host) && host.IsLive())
+                if (!CanRun(host) && host.IsLive())
                 {
-                    return new CommandErrorDialog(Messages.ERROR_DIALOG_SHUTDOWN_HOST_TITLE, Messages.ERROR_DIALOG_SHUTDOWN_HOST_TEXT, cantExecuteReasons);
+                    return new CommandErrorDialog(Messages.ERROR_DIALOG_SHUTDOWN_HOST_TITLE, Messages.ERROR_DIALOG_SHUTDOWN_HOST_TEXT, cantRunReasons);
                 }
             }
             return null;
         }
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
             Host host = item as Host;
             if (host == null)
             {
-                return base.GetCantExecuteReasonCore(item);
+                return base.GetCantRunReasonCore(item);
             }
             if (!host.IsLive())
             {
@@ -194,7 +194,7 @@ namespace XenAdmin.Commands
             {
                 return Messages.HOST_ACTION_IN_PROGRESS;
             }
-            return base.GetCantExecuteReasonCore(item);
+            return base.GetCantRunReasonCore(item);
         }
 
         protected override string ConfirmationDialogYesButtonLabel => Messages.CONFIRM_SHUTDOWN_SERVER_YES_BUTTON_LABEL;

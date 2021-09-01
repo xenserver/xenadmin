@@ -55,7 +55,7 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
 
         public override string Description =>
             string.Format(Messages.PROBLEM_POWER_ON_ILO_DESCRIPTION, Server,
-                string.Format(Messages.XENSERVER_8_2, BrandManager.ProductVersion82));
+                string.Format(Messages.STRING_SPACE_STRING, BrandManager.ProductBrand, BrandManager.ProductVersion82));
 
         public override string HelpMessage => Messages.PROBLEM_POWER_ON_ILO_HELP;
     }
@@ -74,10 +74,10 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
 
         public override string Description =>
             string.Format(Messages.PROBLEM_POWER_ON_ILO_DESCRIPTION, host,
-                string.Format(Messages.XENSERVER_8_2, BrandManager.ProductVersion82));
+                string.Format(Messages.STRING_SPACE_STRING, BrandManager.ProductBrand, BrandManager.ProductVersion82));
 
         public override string Message =>
             string.Format(Messages.PROBLEM_POWER_ON_ILO_INFO,
-                string.Format(Messages.XENSERVER_8_2, BrandManager.ProductVersion82));
+                string.Format(Messages.STRING_SPACE_STRING, BrandManager.ProductBrand, BrandManager.ProductVersion82));
     }
 }

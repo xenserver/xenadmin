@@ -72,10 +72,9 @@ namespace XenAdmin.Wizards.HAWizard_Pages
             }
         }
 
-        internal void PopulatePageControls()
+        public override void PopulatePage()
         {
             Debug.Assert(connection != null, "Connection is null; set it to non-null before calling this method.");
-
             UpdateMenuItems();
             PopulateVMs();
             haNtolIndicator.Connection = Connection;
@@ -710,11 +709,6 @@ namespace XenAdmin.Wizards.HAWizard_Pages
         public override void PageCancelled(ref bool cancel)
         {
             StopNtolUpdate();
-        }
-
-        protected override void PageLoadedCore(PageLoadedDirection direction)
-        {
-            PopulatePageControls();
         }
 
         public override void SelectDefaultControl()

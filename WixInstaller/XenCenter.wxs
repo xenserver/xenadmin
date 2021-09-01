@@ -35,13 +35,13 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
      xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
     <?include branding.wxi ?>
-    <Product Id="$(var.ProductCode)" Name="$(var.CompanyNameShort) $(var.BrandConsole)" Language="$(env.WixLangId)" Version="$(var.ProductVersion)" Manufacturer="$(var.CompanyNameLegal)" UpgradeCode="$(var.UpgradeCode)">
-        <Package Languages="1033,1041,2052,1028" Description="$(var.CompanyNameShort) $(var.BrandConsole)" Comments="none." InstallerVersion="200" Compressed="yes" />
+    <Product Id="$(var.ProductCode)" Name="$(var.BrandConsole)" Language="$(env.WixLangId)" Version="$(var.ProductVersion)" Manufacturer="$(var.CompanyNameLegal)" UpgradeCode="$(var.UpgradeCode)">
+        <Package Languages="1033,1041,2052,1028" Description="$(var.BrandConsole)" Comments="none." InstallerVersion="200" Compressed="yes" />
         <Media Id="1" Cabinet="XenCenter.cab" EmbedCab="yes" />
         <Directory Id="TARGETDIR" Name="SourceDir">
             <Directory Id="ProgramFilesFolder">
                 <Directory Id="Citrix" Name="$(var.CompanyNameShort)">
-                    <Directory Id="INSTALLDIR" ShortName="XenCente" Name="$(var.BrandConsole)">
+                    <Directory Id="INSTALLDIR" ShortName="$(var.BrandConsoleShort)" Name="$(var.BrandConsoleNoSpace)">
                         <Component Id="ReportViewer" Guid="$(var.ReportViewerGuid)">
                             <File Id="MicRepVwrCmnDLL" Source="$(env.RepoRoot)\XenAdmin\ReportViewer\Microsoft.ReportViewer.Common.dll" />
                             <File Id="MicRepVwrPrcObjDLL" Source="$(env.RepoRoot)\XenAdmin\ReportViewer\Microsoft.ReportViewer.ProcessingObjectModel.dll" />
@@ -57,14 +57,14 @@
                         </Component>
                         <Component Id="MainExecutable" Guid="$(var.MainExeGuid)">
                             <!-- XenCenter EXE -->
-                            <File Id="XenCenterEXE" Source="$(env.RepoRoot)\XenAdmin\bin\Release\$(var.BrandConsole).exe" KeyPath="yes" />
+                            <File Id="XenCenterEXE" Source="$(env.RepoRoot)\XenAdmin\bin\Release\$(var.BrandConsoleNoSpace).exe" KeyPath="yes" />
                             <!-- other EXEs -->
-                            <File Id="XenCenterMainEXE" Source="$(env.RepoRoot)\XenAdmin\bin\Release\XenCenterMain.exe" />
+                            <File Id="XenCenterMainEXE" Source="$(env.RepoRoot)\XenAdmin\bin\Release\$(var.BrandConsoleNoSpace)Main.exe" />
                             <File Id="XeEXE" Source="$(env.RepoRoot)\xe\bin\Release\xe.exe" />
                             <File Id="xva_verifyEXE" Source="$(env.RepoRoot)\xva_verify\bin\Release\xva_verify.exe" />
                             <File Id="PuTTYEXE" Source="$(env.RepoRoot)\XenAdmin\bin\Release\putty.exe" />
                             <!-- config -->
-                            <File Id="XenCenterMainCONFIG" Source="$(env.RepoRoot)\XenAdmin\bin\Release\XenCenterMain.exe.config" />
+                            <File Id="XenCenterMainCONFIG" Source="$(env.RepoRoot)\XenAdmin\bin\Release\$(var.BrandConsoleNoSpace)Main.exe.config" />
                             <!-- DLLs -->
                             <File Id="CommandLibDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\CommandLib.dll" />
                             <File Id="CookComputingDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\CookComputing.XmlRpcV2.dll" />
@@ -73,7 +73,7 @@
                             <File Id="SharpZipLibDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\ICSharpCode.SharpZipLib.dll" />
                             <File Id="IonicZipDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\Ionic.Zip.dll" />
                             <File Id="MSTSCLibDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\MSTSCLib.dll" />
-                            <File Id="XenCenterLibDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\XenCenterLib.dll" />
+                            <File Id="XenCenterLibDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\CoreUtilsLib.dll" />
                             <File Id="XenModelDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\XenModel.dll" />
                             <File Id="DiscUtils" Source="$(env.RepoRoot)\XenAdmin\bin\Release\DiscUtils.dll" />
                             <File Id="XenOvf" Source="$(env.RepoRoot)\XenAdmin\bin\Release\XenOvf.dll" />
@@ -84,9 +84,7 @@
                             <!-- Icons -->
                             <File Id="XenCenterIcon" Source="$(env.RepoRoot)\Branding\Images\AppIcon.ico" />
                             <File Id="XvaIcon" Source="$(env.RepoRoot)\Branding\Images\file_vm.ico" />
-                            <File Id="XslicIcon" Source="$(env.RepoRoot)\Branding\Images\file_license.ico" />
                             <File Id="XkbIcon" Source="$(env.RepoRoot)\Branding\Images\file_backup.ico" />
-                            <File Id="XsupdateIcon" Source="$(env.RepoRoot)\Branding\Images\file_updates.ico" />
                             <!-- Define file extensions -->
                             <ProgId Id="XenCenter.xva" Description="!(loc.XVA_File)" Icon="XvaIcon">
                                 <Extension Id="xva" ContentType="application/xva">
@@ -113,24 +111,9 @@
                                     <Verb Id="open" Command="!(loc.Open)" TargetFile="XenCenterEXE" Argument="import &quot;%1&quot;" />
                                 </Extension>
                             </ProgId>
-                            <ProgId Id="XenCenter.xslic" Description="$(var.BrandProduct) !(loc.XenServer_License_File)" Icon="XslicIcon">
-                                <Extension Id="xslic" ContentType="application/xslic">
-                                    <Verb Id="open" Command="!(loc.Open)" TargetFile="XenCenterEXE" Argument="license &quot;%1&quot;" />
-                                </Extension>
-                            </ProgId>
                             <ProgId Id="XenCenter.$(var.FileExtBackup)" Description="$(var.BrandProduct) !(loc.XenServer_Backup_File)" Icon="XkbIcon">
                                 <Extension Id="$(var.FileExtBackup)" ContentType="application/$(var.FileExtBackup)">
                                     <Verb Id="open" Command="!(loc.Open)" TargetFile="XenCenterEXE" Argument="restore &quot;%1&quot;" />
-                                </Extension>
-                            </ProgId>
-                            <ProgId Id="XenCenter.$(var.FileExtUpdate)" Description="$(var.BrandProduct) !(loc.XenServer_Update_File)" Icon="XsupdateIcon">
-                                <Extension Id="$(var.FileExtUpdate)" ContentType="application/$(var.FileExtUpdate)">
-                                    <Verb Id="open" Command="!(loc.Open)" TargetFile="XenCenterEXE" Argument="update &quot;%1&quot;" />
-                                </Extension>
-                            </ProgId>
-                            <ProgId Id="XenCenter.xsoem" Description="$(var.BrandProduct) !(loc.XenServer_OEM_Update_File)" Icon="XsupdateIcon">
-                                <Extension Id="xsoem" ContentType="application/xsoem">
-                                    <Verb Id="open" Command="!(loc.Open)" TargetFile="XenCenterEXE" Argument="update &quot;%1&quot;" />
                                 </Extension>
                             </ProgId>
                             <ProgId Id="XenCenter.$(var.FileExtSearch)" Description="$(var.BrandConsole) !(loc.XenCenter_Saved_Search)" Icon="XenCenterIcon">
@@ -140,13 +123,11 @@
                             </ProgId>
                         </Component>
                         <Component Id="UpdateFiles" Guid="$(var.UpdateFilesGuid)">
-                            <File Id="hotfixDundee" Source="$(env.RepoRoot)\Branding\Hotfixes\RPU003.$(var.FileExtUpdate)" />
-                            <File Id="hotfixEly" Source="$(env.RepoRoot)\Branding\Hotfixes\RPU004.iso" />
                             <File Id="hotfixStockholm" Source="$(env.RepoRoot)\Branding\Hotfixes\RPU005.iso" />
                         </Component>
                         <Directory Id="ja" Name="ja">
                             <Component Id="JaResources" Guid="$(var.JapaneseResxGuid)">
-                                <File Id="JaResourcesDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\ja\XenCenterMain.resources.dll" />
+                                <File Id="JaResourcesDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\ja\$(var.BrandConsoleNoSpace)Main.resources.dll" />
                                 <File Id="JaXenModResourcesDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\ja\XenModel.resources.dll" />
                                 <File Id="JaMicRepVwrCmnResDLL" Source="$(env.RepoRoot)\XenAdmin\ReportViewer\Microsoft.ReportViewer.Common.resources.dll" />
                                 <File Id="JaMicRepVwrPrcObjResDLL" Source="$(env.RepoRoot)\XenAdmin\ReportViewer\Microsoft.ReportViewer.WinForms.resources.dll" />
@@ -155,7 +136,7 @@
                         </Directory>
                         <Directory Id="sc" Name="zh-CN">
                             <Component Id="ScResources" Guid="$(var.SimplifiedChineseResxGuid)">
-                                <File Id="ScResourcesDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\zh-CN\XenCenterMain.resources.dll" />
+                                <File Id="ScResourcesDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\zh-CN\$(var.BrandConsoleNoSpace)Main.resources.dll" />
                                 <File Id="ScXenModResourcesDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\zh-CN\XenModel.resources.dll" />
                                 <File Id="ScMicRepVwrCmnResDLL" Source="$(env.RepoRoot)\XenAdmin\ReportViewer\Microsoft.ReportViewer.Common.resources.dll" />
                                 <File Id="ScMicRepVwrPrcObjResDLL" Source="$(env.RepoRoot)\XenAdmin\ReportViewer\Microsoft.ReportViewer.WinForms.resources.dll" />
@@ -193,15 +174,15 @@
             <Directory Id="DesktopFolder" Name="Desktop">
                 <Component Id="ProgramFilesShortcut" Guid="63b44222-b5e8-4ab1-8f68-baed79abbf36">
                     <Condition>INSTALLSHORTCUT</Condition>
-                    <Shortcut Id="ApplicationDesktopShortcut" Name="$(var.BrandConsole)" Target="[INSTALLDIR]$(var.BrandConsole).exe" WorkingDirectory="INSTALLDIR"/>
+                    <Shortcut Id="ApplicationDesktopShortcut" Name="$(var.BrandConsole)" Target="[INSTALLDIR]$(var.BrandConsoleNoSpace).exe" WorkingDirectory="INSTALLDIR"/>
                     <RemoveFolder Id="DesktopFolder" On="uninstall"/>
-                    <RegistryValue Root="HKCU" Key="Software\$(var.CompanyNameShort)\$(var.BrandConsole)" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+                    <RegistryValue Root="HKCU" Key="Software\$(var.CompanyNameShort)\$(var.BrandConsoleNoSpace)" Name="installed" Type="integer" Value="1" KeyPath="yes" />
                 </Component>
             </Directory>
         </Directory>
         <DirectoryRef Id="TARGETDIR">
             <Component Id="RegistryEntries" Guid="$(var.RegEntriesGuid)">
-                <RegistryKey Root="HKMU" Key="Software\$(var.CompanyNameShort)\$(var.BrandConsole)">
+                <RegistryKey Root="HKMU" Key="Software\$(var.CompanyNameShort)\$(var.BrandConsoleNoSpace)">
                     <RegistryValue Type="string" Name="InstallDir" Value="[INSTALLDIR]" />
                     <?if "$(var.HiddenFeatures)" != ""?>
                         <RegistryValue Type="string" Name="HiddenFeatures" Value="$(var.HiddenFeatures)" />
@@ -214,13 +195,13 @@
         </DirectoryRef>
         <DirectoryRef Id="ApplicationProgramsFolder">
             <Component Id="ApplicationShortcut" Guid="$(var.AppShortcutGuid)">
-                <Shortcut Id="startmenuXenCenter" ShortName="XenCen50" Name="$(var.CompanyNameShort) $(var.BrandConsole)" Target="[INSTALLDIR]$(var.BrandConsole).exe" WorkingDirectory="INSTALLDIR" Icon="XenCenterICO" />
+                <Shortcut Id="startmenuXenCenter" ShortName="$(var.BrandConsoleShort)" Name="$(var.BrandConsole)" Target="[INSTALLDIR]$(var.BrandConsoleNoSpace).exe" WorkingDirectory="INSTALLDIR" Icon="XenCenterICO" />
                 <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall" />
-                <RegistryValue Root="HKCU" Key="Software\$(var.CompanyNameShort)\$(var.BrandConsole)" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+                <RegistryValue Root="HKCU" Key="Software\$(var.CompanyNameShort)\$(var.BrandConsoleNoSpace)" Name="installed" Type="integer" Value="1" KeyPath="yes" />
             </Component>
         </DirectoryRef>
 
-        <Feature Id="MainProgram" Title="$(var.CompanyNameShort) $(var.BrandConsole)" Description="$(var.CompanyNameShort) $(var.BrandConsole)" Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="disallow" >
+        <Feature Id="MainProgram" Title="$(var.BrandConsole)" Description="$(var.BrandConsole)" Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="disallow" >
             <ComponentRef Id="MainExecutable" />
             <ComponentRef Id="UpdateFiles" />
             <ComponentRef Id="ReportViewer" />
@@ -254,7 +235,7 @@
             <![CDATA[Installed OR (WIXNETFX4RELEASEINSTALLED >= "#528040")]]>
         </Condition>
         <Property Id="PERMACHINEINSTALL">
-            <RegistrySearch Id="InstallRegistry" Type="raw" Root="HKLM" Key="Software\$(var.CompanyNameShort)\$(var.BrandConsole)" Name="InstallDir" />
+            <RegistrySearch Id="InstallRegistry" Type="raw" Root="HKLM" Key="Software\$(var.CompanyNameShort)\$(var.BrandConsoleNoSpace)" Name="InstallDir" />
         </Property>
         <Property Id="REINSTALLMODE" Value="amus" />
         <Property Id="INSTALLSHORTCUT" />

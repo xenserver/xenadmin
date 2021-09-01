@@ -50,7 +50,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             if (selection != null && selection.AllItemsAre<IXenObject>(x => x is Host || x is Pool))
                 MainWindowCommandInterface.ShowForm(typeof(BugToolWizard), selection.AsXenObjects<IXenObject>().ToArray());
@@ -58,7 +58,7 @@ namespace XenAdmin.Commands
                 MainWindowCommandInterface.ShowForm(typeof(BugToolWizard));
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             foreach (IXenConnection xenConnection in ConnectionsManager.XenConnectionsCopy)
             {

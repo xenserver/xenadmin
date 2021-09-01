@@ -70,12 +70,12 @@ namespace XenAdmin.Commands
             _newName = newName;
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             return _oldName != _newName && _newName.Trim().Length > 0;
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
 
             DelegatedAsyncAction action = new DelegatedAsyncAction(null,

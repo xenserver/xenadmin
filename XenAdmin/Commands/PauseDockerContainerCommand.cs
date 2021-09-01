@@ -53,19 +53,19 @@ namespace XenAdmin.Commands
 
         public override Image ToolBarImage { get { return Images.StaticImages._000_Paused_h32bit_24; } }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (selection.AllItemsAre<DockerContainer>())
-                return selection.AtLeastOneXenObjectCan<DockerContainer>(CanExecute);
+                return selection.AtLeastOneXenObjectCan<DockerContainer>(CanRun);
             return false;
         }
 
-        private static bool CanExecute(DockerContainer dockerContainer)
+        private static bool CanRun(DockerContainer dockerContainer)
         {
             return dockerContainer.power_state == vm_power_state.Running && !dockerContainer.Parent.IsWindows();
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             var dockerContainers = new List<DockerContainer>();
 
@@ -73,7 +73,7 @@ namespace XenAdmin.Commands
             {
                 dockerContainers = (from IXenObject obj in selection.AsXenObjects()
                                     let container = (DockerContainer)obj
-                                    where CanExecute(container)
+                                    where CanRun(container)
                                     select container).ToList();
             }
 

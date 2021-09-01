@@ -55,7 +55,7 @@ namespace XenAdmin.TabPages
         /// ever set once.
         /// </summary>
         private Pool pool;
-        private Host master;
+        private Host coordinator;
         private IXenConnection _connection;
 
         private Thread _loggedInStatusUpdater;
@@ -112,7 +112,7 @@ namespace XenAdmin.TabPages
 
         /// <summary>
         /// This method is used when the cache was not populated by the time we set the XenObject. It sets the appropriate event handlers,
-        /// references to the master and the pool, and populates the tab with the correct configuration. It de-registers
+        /// references to the coordinator and the pool, and populates the tab with the correct configuration. It de-registers
         /// itself when successful.
         /// </summary>
         /// <param name="sender"></param>
@@ -129,14 +129,14 @@ namespace XenAdmin.TabPages
             Program.Invoke(this, checkAdType);
         }
 
-        private void RefreshMaster()
+        private void RefreshCoordinator()
         {
-            if (master != null)
-                master.PropertyChanged -= master_PropertyChanged;
+            if (coordinator != null)
+                coordinator.PropertyChanged -= coordinator_PropertyChanged;
 
-            master = Helpers.GetMaster(_connection);
-            if (master != null)
-                master.PropertyChanged += master_PropertyChanged;
+            coordinator = Helpers.GetCoordinator(_connection);
+            if (coordinator != null)
+                coordinator.PropertyChanged += coordinator_PropertyChanged;
         }
 
         /// <summary>
@@ -147,8 +147,8 @@ namespace XenAdmin.TabPages
             if (pool != null)
                 pool.PropertyChanged -= pool_PropertyChanged;
 
-            if (master != null)
-                master.PropertyChanged -= master_PropertyChanged;
+            if (coordinator != null)
+                coordinator.PropertyChanged -= coordinator_PropertyChanged;
 
             if (_connection != null)
             {
@@ -195,11 +195,11 @@ namespace XenAdmin.TabPages
 
         /// <summary>
         /// We need to update the configuration if the authentication method changes, and also various labels display the name of the
-        /// master and should also be updated if that changes.
+        /// coordinator and should also be updated if that changes.
         /// </summary>
         /// <param name="sender1"></param>
         /// <param name="e"></param>
-        void master_PropertyChanged(object sender1, PropertyChangedEventArgs e)
+        void coordinator_PropertyChanged(object sender1, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "external_auth_type" || e.PropertyName == "name_label")
                 Program.Invoke(this, checkAdType);
@@ -207,7 +207,7 @@ namespace XenAdmin.TabPages
 
         /// <summary>
         /// Various labels display the name of the pool and should also be updated if that changes.
-        /// Additionally if the pool master changes we need to update our event handles.
+        /// Additionally if the pool coordinator changes we need to update our event handles.
         /// There is a sanity check in the checkAdType() method in case this event is stuck in a queue.
         /// </summary>
         void pool_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -250,13 +250,13 @@ namespace XenAdmin.TabPages
         private void checkAdType()
         {
             Program.AssertOnEventThread();
-            //refresh the master in case the cache is slow
-            RefreshMaster();
+            //refresh the coordinator in case the cache is slow
+            RefreshCoordinator();
 
-            if (master == null)
+            if (coordinator == null)
             {
-                log.WarnFormat("Could not resolve pool master for connection '{0}'; disabling.", Helpers.GetName(_connection));
-                OnMasterUnavailable();
+                log.WarnFormat("Could not resolve pool coordinator for connection '{0}'; disabling.", Helpers.GetName(_connection));
+                OnCoordinatorUnavailable();
                 return;
             }
 
@@ -270,16 +270,16 @@ namespace XenAdmin.TabPages
             {
                 OnAdConfiguring();
             }
-            else if (master.external_auth_type == Auth.AUTH_TYPE_NONE) // AD is not yet configured
+            else if (coordinator.external_auth_type == Auth.AUTH_TYPE_NONE) // AD is not yet configured
             {
                 OnAdDisabled();
             }
             else // AD is already configured
             {
-                if (master.external_auth_type != Auth.AUTH_TYPE_AD)
+                if (coordinator.external_auth_type != Auth.AUTH_TYPE_AD)
                 {
-                    log.WarnFormat("Unrecognised value '{0}' for external_auth_type on pool master '{1}' for pool '{2}'; assuming AD enabled on pool.",
-                        master.external_auth_type, Helpers.GetName(master), Helpers.GetName(_connection));
+                    log.WarnFormat("Unrecognised value '{0}' for external_auth_type on pool coordinator '{1}' for pool '{2}'; assuming AD enabled on pool.",
+                        coordinator.external_auth_type, Helpers.GetName(coordinator), Helpers.GetName(_connection));
                 }
 
                 OnAdEnabled();
@@ -297,14 +297,14 @@ namespace XenAdmin.TabPages
             {
                 Program.AssertOnEventThread();
 
-                Host master = Helpers.GetMaster(_connection);
-                if (master == null)
+                Host coordinator = Helpers.GetCoordinator(_connection);
+                if (coordinator == null)
                 {
-                    log.WarnFormat("Could not resolve pool master for connection '{0}'; disabling.", Helpers.GetName(_connection));
+                    log.WarnFormat("Could not resolve pool coordinator for connection '{0}'; disabling.", Helpers.GetName(_connection));
                     return Messages.UNKNOWN;
                 }
 
-                return master.external_auth_service_name;
+                return coordinator.external_auth_service_name;
             }
         }
 
@@ -344,14 +344,14 @@ namespace XenAdmin.TabPages
                 Helpers.GetName(_connection).Ellipsise(70));
         }
 
-        private void OnMasterUnavailable()
+        private void OnCoordinatorUnavailable()
         {
             Program.AssertOnEventThread();
 
             flowLayoutPanel1.Enabled = false;
             SetSubjectListEnable(false);
             buttonJoinLeave.Enabled = false;
-            labelBlurb.Text = Messages.AD_MASTER_UNAVAILABLE_BLURB;
+            labelBlurb.Text = Messages.AD_COORDINATOR_UNAVAILABLE_BLURB;
         }
 
         private void RepopulateListBox()
@@ -757,15 +757,15 @@ namespace XenAdmin.TabPages
                         return;
                 }
 
-                Host master = Helpers.GetMaster(_connection);
-                if (master == null)
+                Host coordinator = Helpers.GetCoordinator(_connection);
+                if (coordinator == null)
                 {
                     // Really shouldn't happen unless we have been very slow with the cache
-                    log.Error("Could not retrieve master when trying to look up domain..");
+                    log.Error("Could not retrieve coordinator when trying to look up domain..");
                     throw new Exception(Messages.CONNECTION_IO_EXCEPTION);
                 }
 
-                using (var passPrompt = new AdPasswordPrompt(false, master.external_auth_service_name))
+                using (var passPrompt = new AdPasswordPrompt(false, coordinator.external_auth_service_name))
                 {
                     var result = passPrompt.ShowDialog(this);
                     if (result == DialogResult.Cancel)
@@ -1044,10 +1044,7 @@ namespace XenAdmin.TabPages
             Program.AssertOnEventThread();
             if (Helpers.FeatureForbidden(_connection, Host.RestrictRBAC))
             {
-                // Show upsell dialog
-                using (var dlg = new UpsellDialog(HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_RBAC : Messages.UPSELL_BLURB_RBAC + Messages.UPSELL_BLURB_TRIAL,
-                    InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL))
-                    dlg.ShowDialog(this);
+                UpsellDialog.ShowUpsellDialog(string.Format(Messages.UPSELL_BLURB_RBAC, BrandManager.ProductBrand), this);
                 return;
             }
 
@@ -1146,7 +1143,7 @@ namespace XenAdmin.TabPages
 
             if (suicide)
             {
-                new DisconnectCommand(Program.MainWindow, _connection, true).Execute();
+                new DisconnectCommand(Program.MainWindow, _connection, true).Run();
             }
             else
             {

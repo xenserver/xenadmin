@@ -411,6 +411,11 @@ namespace XenAdmin
             return string.Format(Messages.VAL_FORMAT, p, Messages.COUNTS_PER_SEC_UNIT);
         }
 
+        public static string SecondsPerSecondString(double p)
+        {
+            return string.Format(Messages.VAL_FORMAT, p, UnitStrings.SEC_PER_SEC_UNIT);
+        }
+
         public static string MegaHertzString(double t)
         {
             string unit;

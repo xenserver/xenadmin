@@ -81,7 +81,7 @@ const TCHAR SplashClassName[] = TEXT("XenCenterSplash0001");
 const TCHAR PipeStub[] = TEXT("\\\\.\\pipe\\XenCenter-");
 const TCHAR SplashPipeStub[] = TEXT("\\\\.\\pipe\\XenCenterSplash-");
 // The path to the main C# XenCenter exe, relative to the location of the splash exe.
-const TCHAR XenCenterPath[] = TEXT("XenCenterMain.exe");
+const TCHAR XenCenterPath[] = TEXT("[XenCenter_No_Space]Main.exe");
 const size_t PathLen = 17;
 
 #ifdef _DEBUG

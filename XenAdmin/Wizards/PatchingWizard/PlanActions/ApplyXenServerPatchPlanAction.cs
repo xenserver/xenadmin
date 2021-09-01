@@ -52,16 +52,16 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
         protected override void RunWithSession(ref Session session)
         {
-            var master = Helpers.GetMaster(Connection);
+            var coordinator = Helpers.GetCoordinator(Connection);
             var mapping = (from HostUpdateMapping hum in mappings
                 let xpm = hum as XenServerPatchMapping
-                where xpm != null && xpm.Matches(master, xenServerPatch)
+                where xpm != null && xpm.Matches(coordinator, xenServerPatch)
                 select xpm).FirstOrDefault();
 
             if (mapping == null || !mapping.IsValid)
             {
                 if (xenServerPatch != null)
-                    log.ErrorFormat("Mapping not found for patch {0} on master {1}", xenServerPatch.Uuid, master.uuid);
+                    log.ErrorFormat("Mapping not found for patch {0} on coordinator {1}", xenServerPatch.Uuid, coordinator.uuid);
 
                 throw new Exception("Pool_patch or Pool_update not found.");
             }

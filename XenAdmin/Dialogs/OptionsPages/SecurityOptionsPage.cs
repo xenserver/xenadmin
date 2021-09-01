@@ -41,6 +41,8 @@ namespace XenAdmin.Dialogs.OptionsPages
         public SecurityOptionsPage()
         {
             InitializeComponent();
+            SSLLabel.Text = string.Format(SSLLabel.Text, BrandManager.BrandConsole);
+            labelReminder.Text = string.Format(labelReminder.Text, BrandManager.BrandConsole);
         }
 
         #region IOptionsPage Members
@@ -67,6 +69,9 @@ namespace XenAdmin.Dialogs.OptionsPages
         {
         }
 
+        public void HideValidationMessages()
+        {
+        }
         public void Save()
         {
             // SSL Certificates

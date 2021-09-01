@@ -55,7 +55,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             List<AsyncAction> actions = new List<AsyncAction>();
             foreach (Host host in selection.AsXenObjects<Host>())
@@ -69,21 +69,21 @@ namespace XenAdmin.Commands
                                Messages.DESTROYING_HOSTS_END_DESC, true);
         }
 
-        private static bool CanExecute(Host host)
+        private static bool CanRun(Host host)
         {
             if (host?.Connection == null)
                 return false;
 
             Pool pool = Helpers.GetPool(host.Connection);
-            return pool != null && !Helpers.HostIsMaster(host) && !host.IsLive();
+            return pool != null && !Helpers.HostIsCoordinator(host) && !host.IsLive();
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (!selection.AllItemsAre<Host>() || selection.Count > 1)
                 return false;
             
-            return CanExecute(selection.AsXenObjects<Host>().FirstOrDefault());
+            return CanRun(selection.AsXenObjects<Host>().FirstOrDefault());
         }
 
         public override string ContextMenuText => Messages.DESTROY_HOST_CONTEXT_MENU_ITEM_TEXT;

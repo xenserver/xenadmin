@@ -67,7 +67,7 @@ namespace XenAdmin.Network
         List<string> PoolMembers { get; set; }
         void LoadCache(Session session);
         bool SuppressErrors { get; set; }
-        bool MasterMayChange { get; set; }
+        bool CoordinatorMayChange { get; set; }
         bool SaveDisconnected { get; set; }
         string HostnameWithPort { get; }
         bool InProgress { get; }
@@ -91,8 +91,8 @@ namespace XenAdmin.Network
 
         /// <summary>
         /// Try to logout the given session. This will cause any threads blocking on Event.next() to get
-        /// a XenAPI.Failure (which is better than them hanging around forever).
-        /// Do on a background thread - otherwise, if the master has died, then this will block
+        /// a XenAPI.Failure (which is better than them freezing around forever).
+        /// Do on a background thread - otherwise, if the coordinator has died, then this will block
         /// until the timeout is reached (default 20s).
         /// </summary>
         /// <param name="session">May be null, in which case nothing happens.</param>
@@ -100,8 +100,8 @@ namespace XenAdmin.Network
 
         /// <summary>
         /// Try to logout the given session. This will cause any threads blocking on Event.next() to get
-        /// a XenAPI.Failure (which is better than them hanging around forever).
-        /// Do on a background thread - otherwise, if the master has died, then this will block
+        /// a XenAPI.Failure (which is better than them freezing around forever).
+        /// Do on a background thread - otherwise, if the coordinator has died, then this will block
         /// until the timeout is reached (default 20s).
         /// </summary>
         /// <param name="session">May be null, in which case nothing happens.</param>

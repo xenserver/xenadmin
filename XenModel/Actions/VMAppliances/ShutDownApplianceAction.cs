@@ -44,7 +44,7 @@ namespace XenAdmin.Actions
 		{
 			Pool = Helpers.GetPool(appliance.Connection);
 			if (Pool == null)
-				Host = Helpers.GetMaster(appliance.Connection);
+				Host = Helpers.GetCoordinator(appliance.Connection);
 
 			ApiMethodsToRoleCheck.Add("VM_appliance.shutdown");
 			
@@ -69,7 +69,7 @@ namespace XenAdmin.Actions
         {
             Pool = Helpers.GetPool(appliance.Connection);
             if (Pool == null)
-                Host = Helpers.GetMaster(appliance.Connection);
+                Host = Helpers.GetCoordinator(appliance.Connection);
 
             ApiMethodsToRoleCheck.Add("VM_appliance.hard_shutdown");
 
@@ -94,7 +94,7 @@ namespace XenAdmin.Actions
         {
             Pool = Helpers.GetPool(appliance.Connection);
             if (Pool == null)
-                Host = Helpers.GetMaster(appliance.Connection);
+                Host = Helpers.GetCoordinator(appliance.Connection);
 
             ApiMethodsToRoleCheck.Add("VM_appliance.clean_shutdown");
 

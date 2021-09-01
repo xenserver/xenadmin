@@ -41,6 +41,7 @@ using XenAdmin.Core;
 using XenAdmin.Wlb;
 using XenAdmin.Commands;
 using XenAdmin.Actions.VMActions;
+using XenAdmin.Actions.Wlb;
 using XenCenterLib;
 
 namespace XenAdmin.Dialogs
@@ -52,7 +53,7 @@ namespace XenAdmin.Dialogs
 
         private readonly Host _host;
         private readonly Pool _pool;
-        private DelegatedAsyncAction vmErrorsAction;
+        private WlbEvacuateRecommendationsAction vmErrorsAction;
         private EvacuateHostAction hostAction;
         private ToStringWrapper<Host> hostSelection;
         private Dictionary<string, AsyncAction> solveActionsByVmUuid;
@@ -86,6 +87,7 @@ namespace XenAdmin.Dialogs
             : base(host.Connection)
         {
             InitializeComponent();
+            labelCoordinatorBlurb.Text = string.Format(labelCoordinatorBlurb.Text, BrandManager.BrandConsole);
 
             this.elevatedUsername = elevatedUserName;
             this.elevatedPassword = elevatedPassword;
@@ -94,8 +96,8 @@ namespace XenAdmin.Dialogs
             _host = host;
             _pool = Helpers.GetPoolOfOne(_host.Connection);
 
-            if (!_host.IsMaster() || connection.Cache.HostCount <= 1)
-                tableLayoutPanelNewMaster.Visible = false;
+            if (!_host.IsCoordinator() || connection.Cache.HostCount <= 1)
+                tableLayoutPanelNewCoordinator.Visible = false;
             else
                 tableLayoutPanelPSr.Visible = false;
 
@@ -151,65 +153,14 @@ namespace XenAdmin.Dialogs
             
             saveVMsAction.RunAsync(GetSudoElevationResult());
 
-            vmErrorsAction = new DelegatedAsyncAction(connection, Messages.MAINTENANCE_MODE,
-                Messages.SCANNING_VMS, Messages.COMPLETED, delegate(Session session)
-                {
-                    var cantEvacuateReasons = new Dictionary<XenRef<VM>, string[]>();
-
-                    if (Helpers.WlbEnabled(_host.Connection))
-                    {
-                        try
-                        {
-                            cantEvacuateReasons = Host.retrieve_wlb_evacuate_recommendations(session, _host.opaque_ref);
-                        }
-                        catch (Exception ex)
-                        {
-                            log.Debug(ex.Message, ex);
-                        }
-                    }
-
-                    if (cantEvacuateReasons.Count == 0 || !ValidRecommendation(cantEvacuateReasons))
-                        cantEvacuateReasons = Host.get_vms_which_prevent_evacuation(session, _host.opaque_ref);
-
-                    return cantEvacuateReasons;
-                }, true);
-
+            vmErrorsAction = new WlbEvacuateRecommendationsAction(_host);
             vmErrorsAction.Completed += VmErrorsAction_Completed;
             vmErrorsAction.RunAsync(GetSudoElevationResult());
         }
 
-        private bool ValidRecommendation(Dictionary<XenRef<VM>, String[]> reasons)
-        {
-            bool valid = true;
-            List<Host> controlDomain = new List<Host>();
-
-            foreach (KeyValuePair<XenRef<VM>, String[]> kvp in reasons)
-            {
-                if ((this.connection.Resolve(kvp.Key)).is_control_domain)
-                {
-                    controlDomain.Add(this.connection.Cache.Find_By_Uuid<Host>(kvp.Value[(int)RecProperties.ToHost]));
-                }
-            }
-
-            foreach (KeyValuePair<XenRef<VM>, String[]> kvp in reasons)
-            {
-                if (string.Compare(kvp.Value[0].Trim(), "wlb", true) == 0)
-                {
-                    Host toHost = this.connection.Cache.Find_By_Uuid<Host>(kvp.Value[(int)RecProperties.ToHost]);
-                    if (!(this.connection.Resolve(kvp.Key)).is_control_domain && !toHost.IsLive() && !controlDomain.Contains(toHost))
-                    {
-                        valid = false;
-                        break;
-                    }
-                }
-            }
-
-            return valid;
-        }
-
         private void VmErrorsAction_Completed(ActionBase obj)
         {
-            if (!(obj is DelegatedAsyncAction action))
+            if (!(obj is WlbEvacuateRecommendationsAction action))
                 return;
 
             try
@@ -218,9 +169,7 @@ namespace XenAdmin.Dialogs
                 {
                     if (action.Succeeded)
                     {
-                        if (action.ResultObject is Dictionary<XenRef<VM>, string[]> cantEvacuateReasons)
-                            reasons = cantEvacuateReasons;
-
+                        reasons = action.CantEvacuateReasons;
                         tableLayoutPanelSpinner.Visible = false;
                         spinnerIcon1.StopSpinning();
                         PopulateVMs();
@@ -360,11 +309,11 @@ namespace XenAdmin.Dialogs
 
         private void ClearHosts()
         {
-            if (tableLayoutPanelNewMaster.Visible)
+            if (tableLayoutPanelNewCoordinator.Visible)
             {
-                NewMasterComboBox.Enabled = false;
-                hostSelection = NewMasterComboBox.SelectedItem as ToStringWrapper<Host>;
-                NewMasterComboBox.Items.Clear();
+                NewCoordinatorComboBox.Enabled = false;
+                hostSelection = NewCoordinatorComboBox.SelectedItem as ToStringWrapper<Host>;
+                NewCoordinatorComboBox.Items.Clear();
             }
         }
 
@@ -372,12 +321,12 @@ namespace XenAdmin.Dialogs
         {
             Program.AssertOnEventThread();
 
-            if (!tableLayoutPanelNewMaster.Visible)
+            if (!tableLayoutPanelNewCoordinator.Visible)
                 return;
 
             try
             {
-                NewMasterComboBox.BeginUpdate();
+                NewCoordinatorComboBox.BeginUpdate();
                 var hosts = connection.Cache.Hosts.Where(h => h.opaque_ref != _host.opaque_ref).ToList();
                 hosts.Sort();
 
@@ -390,14 +339,14 @@ namespace XenAdmin.Dialogs
                     if (host.enabled && metrics != null && metrics.live)
                     {
                         var item = new ToStringWrapper<Host>(host, host.Name());
-                        NewMasterComboBox.Items.Add(item);
+                        NewCoordinatorComboBox.Items.Add(item);
 
                         if (hostSelection != null && host.opaque_ref == hostSelection.item.opaque_ref)
-                            NewMasterComboBox.SelectedItem = item;
+                            NewCoordinatorComboBox.SelectedItem = item;
                     }
                 }
 
-                //Update NewMasterComboBox for host power on recommendation
+                //Update NewCoordinatorComboBox for host power on recommendation
                 foreach (KeyValuePair<XenRef<VM>, string[]> kvp in reasons)
                 {
                     var vm = connection.Resolve(kvp.Key);
@@ -410,30 +359,30 @@ namespace XenAdmin.Dialogs
                         {
                             var hostToAdd = new ToStringWrapper<Host>(powerOnHost, powerOnHost.Name());
 
-                            if (NewMasterComboBox.Items.Cast<ToStringWrapper<Host>>().FirstOrDefault(i =>
+                            if (NewCoordinatorComboBox.Items.Cast<ToStringWrapper<Host>>().FirstOrDefault(i =>
                                 i.item.opaque_ref == powerOnHost.opaque_ref) == null)
                             {
                                 powerOnHost.PropertyChanged -= host_PropertyChanged;
                                 powerOnHost.PropertyChanged += host_PropertyChanged;
-                                NewMasterComboBox.Items.Add(hostToAdd);
+                                NewCoordinatorComboBox.Items.Add(hostToAdd);
                             }
                         }
                     }
                 }
 
-                if (NewMasterComboBox.SelectedItem == null && NewMasterComboBox.Items.Count > 0)
-                    NewMasterComboBox.SelectedIndex = 0;
+                if (NewCoordinatorComboBox.SelectedItem == null && NewCoordinatorComboBox.Items.Count > 0)
+                    NewCoordinatorComboBox.SelectedIndex = 0;
             }
             finally
             {
                 EnableComboBox();
-                NewMasterComboBox.EndUpdate();
+                NewCoordinatorComboBox.EndUpdate();
             }
         }
 
         private void EnableComboBox()
         {
-            if (tableLayoutPanelNewMaster.Visible)
+            if (tableLayoutPanelNewCoordinator.Visible)
             {
                 bool enable = connection.Cache.Hosts.Any(Host.RestrictPoolSecretRotation) ||
                               !_pool.is_psr_pending &&
@@ -442,7 +391,7 @@ namespace XenAdmin.Dialogs
                 if (!enable)
                 {
                     if (_pool.is_psr_pending)
-                        labelWarning.Text = Messages.ROTATE_POOL_SECRET_PENDING_NEW_MASTER;
+                        labelWarning.Text = Messages.ROTATE_POOL_SECRET_PENDING_NEW_COORDINATOR;
                     else if (_pool.current_operations.Values.Contains(pool_allowed_operations.ha_enable))
                         labelWarning.Text = Messages.EVACUATE_HOST_HA_ENABLING;
                     else if (_pool.current_operations.Values.Contains(pool_allowed_operations.ha_disable))
@@ -451,7 +400,7 @@ namespace XenAdmin.Dialogs
                         labelWarning.Text = Messages.EVACUATE_HOST_CLUSER_CREATING;
                 }
 
-                NewMasterComboBox.Enabled = enable;
+                NewCoordinatorComboBox.Enabled = enable;
                 tableLayoutPanelPSr.Visible = !enable;
             }
         }
@@ -463,7 +412,7 @@ namespace XenAdmin.Dialogs
             var canMigrate = dataGridViewVms.Rows.Cast<VmPrecheckRow>().All(r => !r.HasSolution() && !r.HasSolutionActionInProgress());
             //empty returns true, which is correct
 
-            EvacuateButton.Enabled = canMigrate && (!tableLayoutPanelNewMaster.Visible || NewMasterComboBox.Enabled);
+            EvacuateButton.Enabled = canMigrate && (!tableLayoutPanelNewCoordinator.Visible || NewCoordinatorComboBox.Enabled);
         }
 
         private void DisableButtons()
@@ -521,7 +470,7 @@ namespace XenAdmin.Dialogs
                 case Failure.VM_MISSING_PV_DRIVERS:
                     vmRef = errorDescription[1];
                     VM vm = connection.Resolve(new XenRef<VM>(vmRef));
-                    solution = InstallToolsCommand.CanExecute(vm) && !Helpers.StockholmOrGreater(connection)
+                    solution = InstallToolsCommand.CanRun(vm) && !Helpers.StockholmOrGreater(connection)
                         ? Solution.InstallPVDrivers
                         : Solution.InstallPVDriversNoSolution;
                     break;
@@ -560,17 +509,17 @@ namespace XenAdmin.Dialogs
 
         #region Control event handlers
 
-        private void NewMasterComboBox_DrawItem(object sender, DrawItemEventArgs e)
+        private void NewCoordinatorComboBox_DrawItem(object sender, DrawItemEventArgs e)
         {
-            var backColor = NewMasterComboBox.Enabled ? NewMasterComboBox.BackColor : SystemColors.Control;
+            var backColor = NewCoordinatorComboBox.Enabled ? NewCoordinatorComboBox.BackColor : SystemColors.Control;
 
             using (SolidBrush backBrush = new SolidBrush(backColor))
                 e.Graphics.FillRectangle(backBrush, e.Bounds);
 
-            if (e.Index < 0 || e.Index > NewMasterComboBox.Items.Count - 1)
+            if (e.Index < 0 || e.Index > NewCoordinatorComboBox.Items.Count - 1)
                 return;
 
-            if (!(NewMasterComboBox.Items[e.Index] is ToStringWrapper<Host> host))
+            if (!(NewCoordinatorComboBox.Items[e.Index] is ToStringWrapper<Host> host))
                 return;
 
             Image icon = Images.GetImage16For(host.item);
@@ -581,7 +530,7 @@ namespace XenAdmin.Dialogs
 
             using (var g = e.Graphics)
             {
-                if (NewMasterComboBox.Enabled)
+                if (NewCoordinatorComboBox.Enabled)
                 {
                     g.DrawImage(icon, imageRectangle);
 
@@ -632,7 +581,7 @@ namespace XenAdmin.Dialogs
                         break;
                     case Solution.InstallPVDrivers:
                         var cmd = new InstallToolsCommand(Program.MainWindow, row.vm, dataGridViewVms);
-                        cmd.Execute();
+                        cmd.Run();
                         // The install pv tools action is marked as complete after they have taken the user to the
                         // console and loaded the disc. Rescanning when the action is 'complete' in this case
                         // doesn't gain us anything then. Keep showing the "Click here to install PV drivers" text.
@@ -657,11 +606,11 @@ namespace XenAdmin.Dialogs
 
         private void EvacuateButton_Click(object sender, EventArgs e)
         {
-            var newMaster = tableLayoutPanelNewMaster.Visible
-                ? NewMasterComboBox.SelectedItem as ToStringWrapper<Host>
+            var newCoordinator = tableLayoutPanelNewCoordinator.Visible
+                ? NewCoordinatorComboBox.SelectedItem as ToStringWrapper<Host>
                 : null;
 
-            hostAction = new EvacuateHostAction(_host, newMaster?.item,
+            hostAction = new EvacuateHostAction(_host, newCoordinator?.item,
                 reasons ?? new Dictionary<XenRef<VM>, string[]>(),
                 AddHostToPoolCommand.NtolDialog, AddHostToPoolCommand.EnableNtolDialog);
 
@@ -880,9 +829,9 @@ namespace XenAdmin.Dialogs
                         break;
 
                     case Solution.InstallPVDrivers:
-                        error = string.Format(vm.HasNewVirtualisationStates()
-                            ? Messages.EVACUATE_HOST_INSTALL_MGMNT_PROMPT
-                            : Messages.EVACUATE_HOST_INSTALL_TOOLS_PROMPT, message);
+                        error = vm.HasNewVirtualisationStates()
+                            ? string.Format(Messages.EVACUATE_HOST_INSTALL_MGMNT_PROMPT, message)
+                            : string.Format(Messages.EVACUATE_HOST_INSTALL_TOOLS_PROMPT, message, BrandManager.VmTools);
                         break;
 
                     case Solution.InstallPVDriversNoSolution:
@@ -890,7 +839,7 @@ namespace XenAdmin.Dialogs
                         // Otherwise go with the server and just say they aren't installed
                         error = !vm.GetVirtualisationStatus(out _).HasFlag(VM.VirtualisationStatus.UNKNOWN)
                             ? vm.GetVirtualisationWarningMessages()
-                            : Messages.PV_DRIVERS_NOT_INSTALLED;
+                            : string.Format(Messages.PV_DRIVERS_NOT_INSTALLED, BrandManager.VmTools);
                         break;
                 }
 

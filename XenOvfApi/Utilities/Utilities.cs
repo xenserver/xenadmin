@@ -54,6 +54,37 @@ namespace XenOvf.Utilities
         private const long MB = (KB * 1024);
         private const long GB = (MB * 1024);
 
+        //TODO: does it need to be configurabe by XenAdmin?
+        private static bool UseOnlineSchema = false;
+
+        private static readonly string[] KnownNamespaces =
+        {
+            "ovf=http://schemas.dmtf.org/ovf/envelope/1",
+            "xs=http://www.w3.org/2001/XMLSchema",
+            "cim=http://schemas.dmtf.org/wbem/wscim/1/common",
+            "rasd=http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData",
+            "vssd=http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_VirtualSystemSettingData",
+            "xsi=http://www.w3.org/2001/XMLSchema-instance",
+            "xenovf=http://schemas.citrix.com/ovf/envelope/1",
+            "wsse=http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd",
+            "ds=http://www.w3.org/2000/09/xmldsig#",
+            "wsu=http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd",
+            "xenc=http://www.w3.org/2001/04/xmlenc#"
+        };
+
+        private static Dictionary<string, string> Schemas = new Dictionary<string, string>
+        {
+            {"http://www.w3.org/XML/1998/namespace", "Schemas\\xml.xsd"},
+            {"http://schemas.dmtf.org/wbem/wscim/1/common", "Schemas\\common.xsd"},
+            {"http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_VirtualSystemSettingData", "Schemas\\CIM_VirtualSystemSettingData.xsd"},
+            {"http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData", "Schemas\\CIM_ResourceAllocationSettingData.xsd"},
+            {"http://schemas.dmtf.org/ovf/envelope/1", "Schemas\\DSP8023.xsd"},
+            {"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd", "Schemas\\secext-1.0.xsd"}, {"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd", "Schemas\\wss-utility-1.0.xsd"}
+            //{"http://www.w3.org/2001/04/xmlenc#", "Schemas\\xenc-schema.xsd"},
+            //{"http://www.w3.org/2000/09/xmldsig#", "Schemas\\xmldsig-core-schema.xsd"},
+            //{"?", "Schemas\\DSP8027.xsd"}
+        };
+
         #region MISC TOOLS
         /// <summary>
         /// Load default namespaces required to define OVF.
@@ -63,13 +94,10 @@ namespace XenOvf.Utilities
         [SecurityPermission(SecurityAction.LinkDemand)]
         public static XmlSerializerNamespaces LoadNamespaces()
         {
-            string[] namespaces = Properties.Settings.Default.KnownNamespaces.Split(new char[] { ',' });
-
-            XmlSerializerNamespaces ns;
-            ns = new XmlSerializerNamespaces();
-            foreach (string name in namespaces)
+            var ns = new XmlSerializerNamespaces();
+            foreach (string name in KnownNamespaces)
             {
-                string[] sep = name.Split(new char[] { '=' });
+                string[] sep = name.Split('=');
                 ns.Add(sep[0].Trim(), sep[1].Trim());
             }
             return ns;
@@ -197,10 +225,10 @@ namespace XenOvf.Utilities
             {
                 foreach (XmlAttribute xa in ovfEnv.AnyAttr)
                 {
-                    if (xa.Prefix.ToLower().Equals(Properties.Settings.Default.vmwNamespacePrefix) ||
-                        xa.NamespaceURI.Equals(Properties.Settings.Default.vmwNameSpace) ||
-                        xa.Prefix.ToLower() == Properties.Settings.Default.VMwareNamespacePrefix ||
-                        xa.NamespaceURI == Properties.Settings.Default.VMwareNamespace)
+                    if (xa.Prefix.ToLower() == "vmwovf" || 
+                        xa.Prefix.ToLower() == "vmw" ||
+                        xa.NamespaceURI == "vmwovf:http://www.vmware/schema/ovf" ||
+                        xa.NamespaceURI == "http://www.vmware/schema/ovf")
                     {
                         isVmware = true;
                         break;
@@ -227,39 +255,22 @@ namespace XenOvf.Utilities
         [SecurityPermission(SecurityAction.LinkDemand)]
         public static void ValidateXmlToSchema(string ovfContent)
         {
-            string currentPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            string xmlNamespaceSchemaFilename = Path.Combine(currentPath, Properties.Settings.Default.xmlNamespaceSchemaLocation);
-            string cimCommonSchemaFilename = Path.Combine(currentPath, Properties.Settings.Default.cimCommonSchemaLocation);
-            string cimRASDSchemaFilename = Path.Combine(currentPath, Properties.Settings.Default.cimRASDSchemaLocation);
-            string cimVSSDSchemaFilename = Path.Combine(currentPath, Properties.Settings.Default.cimVSSDSchemaLocation);
-            string ovfSchemaFilename = Path.Combine(currentPath, Properties.Settings.Default.ovfEnvelopeSchemaLocation);
-            string wsseSchemaFilename = Path.Combine(currentPath, Properties.Settings.Default.wsseSchemaLocation);
-            string xencSchemaFilename = Path.Combine(currentPath, Properties.Settings.Default.xencSchemaLocation);
-            string wsuSchemaFilename = Path.Combine(currentPath, Properties.Settings.Default.wsuSchemaLocation);
-            string xmldsigSchemaFilename = Path.Combine(currentPath, Properties.Settings.Default.xmldsigSchemaLocation);
-
             var settings = new XmlReaderSettings
             {
                 DtdProcessing = DtdProcessing.Parse,
                 ValidationType = ValidationType.Schema
             };
 
-            bool useOnlineSchema = Convert.ToBoolean(Properties.Settings.Default.useOnlineSchema);
-            if (useOnlineSchema)
+            if (UseOnlineSchema)
             {
-                settings.Schemas.Add(null, Properties.Settings.Default.dsp8023OnlineSchema);
+                settings.Schemas.Add(null, "http://schemas.dmtf.org/ovf/envelope/1/dsp8023.xsd");
             }
             else
             {
-                settings.Schemas.Add("http://www.w3.org/XML/1998/namespace", xmlNamespaceSchemaFilename);
-                settings.Schemas.Add("http://schemas.dmtf.org/wbem/wscim/1/common", cimCommonSchemaFilename);
-                settings.Schemas.Add("http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_VirtualSystemSettingData", cimVSSDSchemaFilename);
-                settings.Schemas.Add("http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData", cimRASDSchemaFilename);
-                settings.Schemas.Add("http://schemas.dmtf.org/ovf/envelope/1", ovfSchemaFilename);
-                settings.Schemas.Add("http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd", wsseSchemaFilename);
-                settings.Schemas.Add("http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd", wsuSchemaFilename);
-                //settings.Schemas.Add("http://www.w3.org/2001/04/xmlenc#", xencSchemaFilename);
-                //settings.Schemas.Add("http://www.w3.org/2000/09/xmldsig#", xmldsigSchemaFilename);
+                string currentPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
+                foreach (var kvp in Schemas)
+                    settings.Schemas.Add(kvp.Key, Path.Combine(currentPath, kvp.Value));
             }
 
             using (var xmlStream = new StringReader(ovfContent))
@@ -430,7 +441,7 @@ namespace XenOvf.Utilities
 
             // With what VMWare currently publishes with VC35, we need to update the XML
 
-            ovfxml = ovfxml.Replace(Properties.Settings.Default.vmwEnvelopeNamespace, Properties.Settings.Default.cimEnvelopeURI)
+            ovfxml = ovfxml.Replace("http://www.vmware.com/schema/ovf/1/envelope", "http://schemas.dmtf.org/ovf/envelope/1")
                            .Replace("<References", "<ovf:References").Replace("</References", "</ovf:References")
                            .Replace("<Section", "<ovf:Section").Replace("</Section", "</ovf:Section")
                            .Replace("<Content", "<ovf:Content").Replace("</Content", "</ovf:Content")

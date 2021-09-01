@@ -32,6 +32,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using XenAdmin.Core;
 using XenAPI;
 
 
@@ -80,7 +81,7 @@ namespace XenAdmin.Actions
             {
                 log.ErrorFormat("Plugin call install-supp-pack.install({0}) on {1} failed with {2}", vdi.uuid, host.Name(), failure.Message);
                 log.ErrorFormat("Supplemental pack installation error description: {0}", string.Join(";", failure.ErrorDescription));
-                throw new SupplementalPackInstallFailedException(string.Format(Messages.SUPP_PACK_INSTALL_FAILED, vdi.Name(), host.Name()), failure);
+                throw new SupplementalPackInstallFailedException(string.Format(Messages.SUPP_PACK_INSTALL_FAILED, vdi.Name(), host.Name(), BrandManager.ProductBrand), failure);
             }
             finally
             {

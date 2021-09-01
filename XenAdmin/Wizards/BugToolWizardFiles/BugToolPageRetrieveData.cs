@@ -33,30 +33,36 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Controls;
 using XenAdmin.Dialogs;
 using XenAPI;
 using XenAdmin.Actions;
 using XenAdmin.Controls.DataGridViewEx;
+using XenAdmin.Core;
+using XenAdmin.Network;
 
 
 namespace XenAdmin.Wizards.BugToolWizardFiles
 {
     public partial class BugToolPageRetrieveData : XenTabPage
     {
+        private const int MAX_DOWNLOADS_PER_CONNECTION = 3;
+
         public BugToolPageRetrieveData()
         {
             InitializeComponent();
+            labelBlurb.Text = string.Format(labelBlurb.Text, BrandManager.BrandConsole);
         }
 
         #region XenTabPage overrides
 
-        public override string Text { get { return Messages.BUGTOOL_PAGE_RETRIEVEDATA_TEXT; } }
+        public override string Text => Messages.BUGTOOL_PAGE_RETRIEVEDATA_TEXT;
 
-        public override string PageTitle { get { return Messages.BUGTOOL_PAGE_RETRIEVEDATA_PAGE_TITLE; } }
+        public override string PageTitle => Messages.BUGTOOL_PAGE_RETRIEVEDATA_PAGE_TITLE;
 
-        public override string HelpID { get { return "CompileReport"; } }
+        public override string HelpID => "CompileReport";
 
         public override bool EnableNext()
         {
@@ -89,9 +95,11 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
         public List<Host> SelectedHosts { private get; set; }
         public List<Capability> CapabilityList { private get; set; }
         public string OutputFolder { get; private set; }
+        #endregion
 
         private bool AllActionsCompleted(out bool successExists, out bool failureExists)
         {
+            var allComplete = true;
             successExists = false;
             failureExists = false;
 
@@ -100,17 +108,22 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                 var srRow = (StatusReportRow)row;
 
                 if (!srRow.IsCompleted)
-                    return false;
+                {
+                    allComplete = false;
+
+                    if (CanRunRowAction(srRow))
+                        RunRowAction(srRow);
+
+                    continue;
+                }
 
                 if (srRow.IsSuccessful)
                     successExists = true;
                 else
                     failureExists = true;
             }
-            return true;
+            return allComplete;
         }
-
-        #endregion
 
         private void CancelActions(ref bool cancel)
         {
@@ -176,16 +189,34 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             }
 
             OutputFolder = CreateOutputFolder();
-            string timeString = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
 
             foreach (var r in dataGridViewEx1.Rows)
             {
-                var row = (StatusReportRow)r;
-                RegisterRowEvents(row);
-                row.RunAction(OutputFolder, timeString);
+                var row = r as StatusReportRow;
+
+                if (CanRunRowAction(row))
+                    RunRowAction(row);
             }
 
             OnPageUpdated();
+        }
+
+        private bool CanRunRowAction(StatusReportRow row)
+        {
+            if (row.Action != null)
+                return false;
+
+            return row is ClientSideDataRow ||
+                   row is HostStatusRow hostRow &&
+                   dataGridViewEx1.Rows.Cast<StatusReportRow>().Count(r =>
+                       r is HostStatusRow hsr && hsr.Connection == hostRow.Connection &&
+                       hsr.Action != null && !hsr.IsCompleted) < MAX_DOWNLOADS_PER_CONNECTION;
+        }
+
+        private void RunRowAction(StatusReportRow row)
+        {
+            RegisterRowEvents(row);
+            row.RunAction(OutputFolder, DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss"));
         }
 
         private void Row_RowStatusChanged(StatusReportRow row)
@@ -273,23 +304,15 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             {
                 Cells.AddRange(cellHostImg, cellHost, cellStatus, cellResultImg);
                 cellResultImg.Value = new Bitmap(1, 1);
+                UpdateCells(0);
             }
            
             public abstract StatusReportAction Action { get; }
             public int PercentComplete { get; private set; }
 
-            public bool IsCompleted
-            {
-                get { return Action != null && Action.IsCompleted; }
-            }
+            public bool IsCompleted => Action != null && Action.IsCompleted;
 
-            public bool IsSuccessful
-            {
-                get
-                {
-                    return Action != null && Action.IsCompleted && Action.Status == ReportStatus.succeeded;
-                }
-            }
+            public bool IsSuccessful => Action != null && Action.IsCompleted && Action.Status == ReportStatus.succeeded;
 
             public void CancelAction()
             {
@@ -302,7 +325,6 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                 CreateAction(path, time);
                 Action.Changed += Action_Changed;
                 Action.Completed += Action_Completed;
-                UpdateCells(0);
                 Action.RunAsync();
             }
 
@@ -320,9 +342,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                 Program.Invoke(DataGridView, () =>
                 {
                     UpdateCells(action.PercentComplete);
-
-                    if (RowStatusChanged != null)
-                        RowStatusChanged(this);
+                    RowStatusChanged?.Invoke(this);
                 });
             }
 
@@ -333,18 +353,15 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                 Program.Invoke(DataGridView, () =>
                 {
                     UpdateCells(100);
-
-                    if (RowStatusCompleted != null)
-                        RowStatusCompleted(this);
+                    RowStatusCompleted?.Invoke(this);
                 });
             }
 
             protected abstract void CreateAction(string path, string time);
 
-            protected virtual void UpdateCells(int percentComplete)
+            private void UpdateCells(int percentComplete)
             {
-                var statusString = GetStatus(out Image statusImage);
-                cellStatus.Value = statusString;
+                cellStatus.Value = GetStatus(out Image statusImage);
                 PercentComplete = percentComplete;
 
                 if (statusImage != null)
@@ -355,7 +372,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             {
                 img = null;
                 if (Action == null)
-                    return string.Empty;
+                    return Messages.BUGTOOL_REPORTSTATUS_QUEUED;
 
                 switch (Action.Status)
                 {
@@ -394,13 +411,12 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                 this.hosts = hosts;
                 this.includeClientLogs = includeClientLogs;
                 cellHostImg.Value = Images.StaticImages._000_GetServerReport_h32bit_16;
-                cellHost.Value = includeClientLogs ? Messages.BUGTOOL_CLIENT_LOGS_META : Messages.BUGTOOL_CLIENT_META;
+                cellHost.Value = includeClientLogs
+                    ? string.Format(Messages.BUGTOOL_CLIENT_LOGS_META, BrandManager.BrandConsole)
+                    : string.Format(Messages.BUGTOOL_CLIENT_META, BrandManager.BrandConsole);
             }
 
-            public override StatusReportAction Action
-            {
-                get { return _action; }
-            }
+            public override StatusReportAction Action => _action;
 
             protected override void CreateAction(string path, string time)
             {
@@ -420,19 +436,13 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                 Host = host;
                 this.size = size;
                 this.capabilityKeys = capabilityKeys;
-            }
-
-            protected override void UpdateCells(int percentComplete)
-            {
                 cellHostImg.Value = Images.GetImage16For(Host);
                 cellHost.Value = Host.Name();
-                base.UpdateCells(percentComplete);
             }
 
-            public override StatusReportAction Action
-            {
-                get { return _action; }
-            }
+            public IXenConnection Connection => Host.Connection;
+
+            public override StatusReportAction Action => _action;
 
             protected override void CreateAction(string path, string time)
             {
@@ -443,7 +453,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             {
                 img = null;
                 if (_action == null)
-                    return string.Empty;
+                    return Messages.BUGTOOL_REPORTSTATUS_QUEUED;
 
                 switch (_action.Status)
                 {

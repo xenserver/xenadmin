@@ -37,6 +37,7 @@ using XenAdmin.Controls;
 using XenAPI;
 using XenAdmin.Core;
 using XenAdmin.Actions;
+using XenAdmin.Actions.Wlb;
 using XenAdmin.Network;
 
 
@@ -117,7 +118,7 @@ namespace XenAdmin.Commands
 
         /// <summary>
         /// Hook to add additional members to the menu item
-        /// Note: Called on main window thread by executing code
+        /// Note: Called on main window thread by running code
         /// </summary>
         protected virtual void AddAdditionalMenuItems(SelectedItemCollection selection) { return; }
 
@@ -203,7 +204,7 @@ namespace XenAdmin.Commands
                 selection, _operation, recommendations);
 
             firstItem.Command = firstItemCmd;
-            firstItem.Enabled = firstItemCmd.CanExecute();
+            firstItem.Enabled = firstItemCmd.CanRun();
 
             var hostMenuItems = new List<VMOperationToolStripMenuSubItem>();
             foreach (var item in DropDownItems)
@@ -219,7 +220,7 @@ namespace XenAdmin.Commands
                         _operation, recommendations.GetStarRating(host));
 
                     hostMenuItem.Command = cmd;
-                    hostMenuItem.Enabled = cmd.CanExecute();
+                    hostMenuItem.Enabled = cmd.CanRun();
 
                     hostMenuItems.Add(hostMenuItem);
                 }
@@ -244,7 +245,7 @@ namespace XenAdmin.Commands
             if (firstItem == null)
                 return;
                 
-            // API calls could happen in CanExecute(), which take time to wait. So a Producer-Consumer-Queue with size 25 is used here to :
+            // API calls could happen in CanRun(), which take time to wait. So a Producer-Consumer-Queue with size 25 is used here to :
             //   1. Make API calls for different menu items happen in parallel;
             //   2. Limit the count of concurrent threads (now it's 25).
             workerQueueWithoutWlb = new ProduceConsumerQueue(25);
@@ -282,7 +283,7 @@ namespace XenAdmin.Commands
                     ? new VMOperationHomeServerCommand(menu.Command.MainWindowCommandInterface, selection, menu._operation, session)
                     : new VMOperationHostCommand(menu.Command.MainWindowCommandInterface, selection, delegate { return host; }, host.Name().EscapeAmpersands(), menu._operation, session);
 
-                var oldMigrateCmdCanRun = cmd.CanExecute();
+                var oldMigrateCmdCanRun = cmd.CanRun();
                 if (Stopped)
                     return;
 
@@ -300,13 +301,13 @@ namespace XenAdmin.Commands
                         ? new CrossPoolMigrateToHomeCommand(menu.Command.MainWindowCommandInterface, selection, host)
                         : new CrossPoolMigrateCommand(menu.Command.MainWindowCommandInterface, selection, host, menu._resumeAfter);
 
-                    var crossPoolMigrateCmdCanRun = cpmCmd.CanExecute();
+                    var crossPoolMigrateCmdCanRun = cpmCmd.CanRun();
                     if (Stopped)
                         return;
 
                     Program.Invoke(Program.MainWindow, delegate
                     {
-                        if (crossPoolMigrateCmdCanRun || !string.IsNullOrEmpty(cpmCmd.CantExecuteReason))
+                        if (crossPoolMigrateCmdCanRun || !string.IsNullOrEmpty(cpmCmd.CantRunReason))
                         {
                             hostMenuItem.Command = cpmCmd;
                             hostMenuItem.Enabled = crossPoolMigrateCmdCanRun;

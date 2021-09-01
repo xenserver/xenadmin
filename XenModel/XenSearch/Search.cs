@@ -793,7 +793,8 @@ namespace XenAdmin.XenSearch
                             new EnumPropertyQuery<VM.VirtualisationStatus>(PropertyNames.virtualisation_status, VM.VirtualisationStatus.IO_DRIVERS_INSTALLED | VM.VirtualisationStatus.MANAGEMENT_INSTALLED, false)
                         }, GroupQuery.GroupQueryType.And)),
                 new PropertyGrouping<VM.VirtualisationStatus>(PropertyNames.virtualisation_status, null),
-                Messages.DEFAULT_SEARCH_VMS_WO_XS_TOOLS, "dead-beef-1234-vmswotools", true
+                string.Format(Messages.DEFAULT_SEARCH_VMS_WO_XS_TOOLS, BrandManager.VmTools),
+                "dead-beef-1234-vmswotools", true
             );
 
             searches["dead-beef-1234-vmswotools"] = VMsWithoutTools;

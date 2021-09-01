@@ -31,6 +31,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using XenAdmin.Core;
 
 namespace XenAdmin.Dialogs.LicenseManagerSelectionVerifiers
 {
@@ -44,7 +45,9 @@ namespace XenAdmin.Dialogs.LicenseManagerSelectionVerifiers
 
         public override string VerificationDetails()
         {
-            return Status == VerificationStatus.Error ? Messages.LICENSE_NO_MULTISELECT_ACTIVATE : string.Empty;
+            return Status == VerificationStatus.Error
+                ? string.Format(Messages.LICENSE_NO_MULTISELECT_ACTIVATE, BrandManager.ProductBrand)
+                : string.Empty;
         }
 
 

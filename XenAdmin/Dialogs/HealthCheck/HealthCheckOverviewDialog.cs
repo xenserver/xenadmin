@@ -46,11 +46,12 @@ namespace XenAdmin.Dialogs.HealthCheck
     public partial class HealthCheckOverviewDialog : XenDialogBase
     {
 
-        internal override string HelpName { get { return "HealthCheckOverviewDialog"; } }
+        internal override string HelpName => "HealthCheckOverviewDialog";
 
         public HealthCheckOverviewDialog()
         {
             InitializeComponent();
+            rubricLabel.Text = string.Format(rubricLabel.Text, BrandManager.Cis, BrandManager.ProductBrand);
             Core.HealthCheck.CheckForAnalysisResultsCompleted += HealthCheck_CheckForUpdatesCompleted;
         }
 
@@ -391,8 +392,8 @@ namespace XenAdmin.Dialogs.HealthCheck
             var poolRow = (PoolRow)poolsDataGridView.SelectedRows[0];
             if (poolRow.Pool == null)
                 return;
-            var healthCheckSettings = poolRow.Pool.HealthCheckSettings();
-            if (healthCheckSettings.Status == HealthCheckStatus.Enabled)
+
+            if (poolRow.Pool.HealthCheckStatus() == HealthCheckStatus.Enabled)
             {
                 string msg = Helpers.GetPool(poolRow.Pool.Connection) == null 
                     ? Messages.CONFIRM_DISABLE_HEALTH_CHECK_SERVER 
@@ -402,9 +403,8 @@ namespace XenAdmin.Dialogs.HealthCheck
                     if (dlg.ShowDialog(this) != DialogResult.Yes)
                         return;
                 }
-                healthCheckSettings.Status = HealthCheckStatus.Disabled;
-                new SaveHealthCheckSettingsAction(poolRow.Pool, healthCheckSettings, null, null, null, null, false).RunAsync();
-                
+
+                DisableHealthCheckAction.Create(poolRow.Pool).RunAsync();
             }
         }
 

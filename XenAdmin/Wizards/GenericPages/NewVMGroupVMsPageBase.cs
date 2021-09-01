@@ -70,6 +70,7 @@ namespace XenAdmin.Wizards.GenericPages
         public abstract void SetXenObjects(IXenObject orig, IXenObject clone);
         public abstract bool ValidToSave { get; }
         public abstract void ShowLocalValidationMessages();
+        public abstract void HideLocalValidationMessages();
         public abstract void Cleanup();
         public abstract bool HasChanged { get; }
         #endregion

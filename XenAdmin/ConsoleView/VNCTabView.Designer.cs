@@ -17,9 +17,10 @@ namespace XenAdmin.ConsoleView
 
             UnregisterEventListeners();
 
-            if (disposing && (components != null))
+            if (disposing)
             {
-                components.Dispose();
+                titleLabelFont?.Dispose();
+                components?.Dispose();
             }
 
             if (disposing && vncScreen != null && !vncScreen.IsDisposed)

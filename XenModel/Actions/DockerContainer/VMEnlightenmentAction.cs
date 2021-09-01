@@ -51,7 +51,7 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            var host = Helpers.GetMaster(Connection);
+            var host = Helpers.GetCoordinator(Connection);
 
             var args = new Dictionary<string, string> { { "vmuuid", VM.uuid } };
             Result = Host.call_plugin(Session, host.opaque_ref, "xscontainer", action, args);

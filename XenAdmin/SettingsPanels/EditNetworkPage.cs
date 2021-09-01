@@ -76,8 +76,8 @@ namespace XenAdmin.SettingsPanels
             if (network == null)
                 return;
 
-            // use the pif of the master to populate the controls. We use it later in the create_VLAN_from_PIF call in Network Action
-            host = Helpers.GetMaster(network.Connection);
+            // use the pif of the coordinator to populate the controls. We use it later in the create_VLAN_from_PIF call in Network Action
+            host = Helpers.GetCoordinator(network.Connection);
             
             Repopulate();
             EnableDisable();
@@ -433,7 +433,7 @@ namespace XenAdmin.SettingsPanels
                         !pif.Show(Properties.Settings.Default.ShowHiddenVMs))
                         continue;
 
-                    if (!pif.IsPhysical() || pif.IsBondSlave())
+                    if (!pif.IsPhysical() || pif.IsBondMember())
                         continue;
 
                     if (pif.host.opaque_ref != host.opaque_ref)
@@ -522,6 +522,10 @@ namespace XenAdmin.SettingsPanels
         }
 
         public void ShowLocalValidationMessages()
+        {
+        }
+
+        public void HideLocalValidationMessages()
         {
         }
 

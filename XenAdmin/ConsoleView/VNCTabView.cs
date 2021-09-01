@@ -44,6 +44,7 @@ using XenAdmin.Dialogs;
 using System.Collections.Generic;
 using System.Diagnostics;
 using XenAdmin.Controls.ConsoleTab;
+using XenAdmin.Controls.GradientPanel;
 
 
 namespace XenAdmin.ConsoleView
@@ -70,6 +71,7 @@ namespace XenAdmin.ConsoleView
         private FullScreenHint fullscreenHint;
         private Size LastDesktopSize;
         private bool switchOnTabOpened = false;
+        private Font titleLabelFont = new Font(DefaultFont.FontFamily, DefaultFont.Size + 1f, FontStyle.Bold);
 
         /// <summary>
         /// Whether to ignore VNC resize events.  We turn this on when changing
@@ -98,11 +100,11 @@ namespace XenAdmin.ConsoleView
             var tooltipForGeneralInformationMessage = new ToolTip();
             tooltipForGeneralInformationMessage.SetToolTip(labelGeneralInformationMessage, labelGeneralInformationMessage.Text);
 
-            HostLabel.Font = Program.HeaderGradientFont;
-            HostLabel.ForeColor = Program.HeaderGradientForeColor;
-            multipleDvdIsoList1.LabelSingleDvdForeColor = Program.HeaderGradientForeColor;
-            multipleDvdIsoList1.LabelNewCdForeColor = Program.HeaderGradientForeColor;
-            multipleDvdIsoList1.LinkLabelLinkColor = Color.White;
+            HostLabel.Font = titleLabelFont;
+            HostLabel.ForeColor = HorizontalGradientPanel.TextColor;
+            multipleDvdIsoList1.LabelSingleDvdForeColor = HorizontalGradientPanel.TextColor;
+            multipleDvdIsoList1.LabelNewCdForeColor = HorizontalGradientPanel.TextColor;
+            multipleDvdIsoList1.LinkLabelLinkColor = HorizontalGradientPanel.TextColor;
 
 #pragma warning disable 0219
             // Force the handle to be created, because resize events
@@ -761,7 +763,7 @@ namespace XenAdmin.ConsoleView
                     {
                         DisablePowerStateLabel(powerStateLabel.Text);
 
-                        new StartVMCommand(Program.MainWindow, source).Execute();
+                        new StartVMCommand(Program.MainWindow, source).Run();
                     }
                     break;
                 case vm_power_state.Paused:
@@ -774,7 +776,7 @@ namespace XenAdmin.ConsoleView
                     if (source.allowed_operations.Contains(vm_operations.resume))
                     {
                         DisablePowerStateLabel(powerStateLabel.Text);
-                        new ResumeVMCommand(Program.MainWindow, source).Execute();
+                        new ResumeVMCommand(Program.MainWindow, source).Run();
                     }
                     break;
             }

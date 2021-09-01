@@ -70,7 +70,7 @@
     <Compile Include="Actions\HealthCheck\XenServerHealthCheckUpload.cs" />
     <Compile Include="Actions\CancellingAction.cs" />
     <Compile Include="Actions\DockerContainer\DockerContainerLifetimeAction.cs" />
-    <Compile Include="Actions\DockerContainer\ExecuteContainerPluginAction.cs" />
+    <Compile Include="Actions\DockerContainer\RunContainerPluginAction.cs" />
     <Compile Include="Actions\DockerContainer\VMEnlightenmentAction.cs" />
     <Compile Include="Actions\DR\GetMetadataVDIsAction.cs" />
     <Compile Include="Actions\DR\DrTaskCreateAction.cs" />
@@ -130,7 +130,7 @@
     <Compile Include="Actions\StorageLink\SrCslgAdaptersScanAction.cs" />
     <Compile Include="Actions\Updates\DownloadAndUnzipXenServerPatchAction.cs" />
     <Compile Include="Actions\Updates\DownloadUpdatesXmlAction.cs" />
-    <Compile Include="Actions\Updates\XenCenterVersion.cs" />
+    <Compile Include="Actions\Updates\ClientVersion.cs" />
     <Compile Include="Actions\Updates\XenServerPatch.cs" />
     <Compile Include="Actions\Updates\XenServerVersion.cs" />
     <Compile Include="Actions\USB\CreateVUSBAction.cs" />
@@ -162,13 +162,23 @@
     <Compile Include="Actions\VM\VMCrossPoolMigrateAction.cs" />
     <Compile Include="Actions\VM\VMSnapshotCreateAction.cs" />
     <Compile Include="Actions\VM\VMStartAction.cs" />
+    <Compile Include="Actions\WLB\WlbEvacuateRecommendationsAction.cs" />
     <Compile Include="Actions\WLB\WlbRetrieveVmRecommendationsAction.cs" />
     <Compile Include="Actions\XCM\ActivateConversionVpxAction.cs" />
     <Compile Include="Actions\ZipStatusReportAction.cs" />
     <Compile Include="Alerts\Types\Alert.cs" />
     <Compile Include="BrandManager.cs" />
+    <Compile Include="UnitStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UnitStrings.resx</DependentUpon>
+    </Compile>
     <Compile Include="Utils\StringExtensions.cs" />
     <Compile Include="Utils\TimeSpanExtensions.cs" />
+    <Compile Include="WLB\WlbPoolConfiguration.cs" />
+    <Compile Include="WLB\WlbReportInfo.cs" />
+    <Compile Include="WLB\WlbReportSubscription.cs" />
+    <Compile Include="WLB\WlbScheduledTask.cs" />
     <Compile Include="XCM\ConversionClient.cs" />
     <Compile Include="XCM\ConversionDescriptors.cs" />
     <Compile Include="XCM\IConversion.cs" />
@@ -252,7 +262,7 @@
     <Compile Include="Actions\Host\DestroyHostCrashDumpAction.cs" />
     <Compile Include="Actions\Host\DisableHostAction.cs" />
     <Compile Include="Actions\Host\EditMultipathAction.cs" />
-    <Compile Include="Actions\Host\ExecutePluginAction.cs" />
+    <Compile Include="Actions\Host\RunPluginAction.cs" />
     <Compile Include="Actions\Host\FibreChannelProbeAction.cs" />
     <Compile Include="Actions\Host\GetServerLocalTimeAction.cs" />
     <Compile Include="Actions\Host\GetSystemStatusCapabilities.cs" />
@@ -327,7 +337,7 @@
     <Compile Include="Actions\WLB\EnableWLBAction.cs" />
     <Compile Include="Actions\WLB\InitializeWLBAction.cs" />
     <Compile Include="Actions\WLB\SendWlbConfigurationAction.cs" />
-    <Compile Include="Actions\WLB\WlbRetrieveRecommendationAction.cs" />
+    <Compile Include="Actions\WLB\WlbRetrieveRecommendationsAction.cs" />
     <Compile Include="Alerts\PerfmonDefinition.cs" />
     <Compile Include="Alerts\PerfmonOptionsDefinition.cs" />
     <Compile Include="InvisibleMessages.Designer.cs">
@@ -581,7 +591,9 @@
       <LastGenOutput>FriendlyNames.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FriendlyNames.zh-CN.resx" />
+    <EmbeddedResource Include="FriendlyNames.zh-CN.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="InvisibleMessages.ja.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -604,6 +616,13 @@
     <EmbeddedResource Include="Messages.zh-CN.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="UnitStrings.ja.resx" />
+    <EmbeddedResource Include="UnitStrings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UnitStrings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UnitStrings.zh-CN.resx" />
     <EmbeddedResource Include="XenAPI\FriendlyErrorNames.ja.resx" />
     <EmbeddedResource Include="XenAPI\FriendlyErrorNames.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

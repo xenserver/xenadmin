@@ -140,7 +140,7 @@ namespace XenOvf
 
             var extension = Path.GetExtension(path);
 
-            if (string.Compare(extension, Properties.Settings.Default.ovfFileExtension, true) == 0)
+            if (string.Compare(extension, OVF_EXT, true) == 0)
                 _Folder = Path.GetDirectoryName(path);
 
             if (_Folder == null)
@@ -279,7 +279,7 @@ namespace XenOvf
                 {
                     var extension = Path.GetExtension(_archiveIterator.CurrentFileName());
 
-                    if (_DescriptorFileName == null && string.Compare(extension, Properties.Settings.Default.ovfFileExtension, true) == 0)
+                    if (_DescriptorFileName == null && string.Compare(extension, OVF_EXT, true) == 0)
                     {
                         _DescriptorFileName = _archiveIterator.CurrentFileName();
                     }
@@ -431,6 +431,7 @@ namespace XenOvf
 
         public const string MANIFEST_EXT = ".mf";
         public const string CERTIFICATE_EXT = ".cert";
+        public const string OVF_EXT = ".ovf";
 
         // Cache these properties because they are expensive to get
         private string _descriptorXml;
@@ -447,7 +448,7 @@ namespace XenOvf
         {
             var extension = Path.GetExtension(path);
 
-            if (string.Compare(extension, Properties.Settings.Default.ovfFileExtension, true) == 0)
+            if (string.Compare(extension, OVF_EXT, true) == 0)
                 return new FolderPackage(path);
 
             // Assume it is an archive.

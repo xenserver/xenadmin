@@ -64,7 +64,7 @@ namespace XenAdmin.Commands
                 base.DropDownItems.Clear();
 
                 Command cmd = new ShutDownVMCommand(mainWindow, selection);
-                if (cmd.CanExecute())
+                if (cmd.CanRun())
                 {
                     base.DropDownItems.Add(new CommandToolStripMenuItem(cmd));
                 }
@@ -74,7 +74,7 @@ namespace XenAdmin.Commands
                 }
 
                 cmd = new ResumeVMCommand(mainWindow, selection);
-                if (cmd.CanExecute())
+                if (cmd.CanRun())
                 {
                     base.DropDownItems.Add(new CommandToolStripMenuItem(cmd));
                 }
@@ -97,14 +97,14 @@ namespace XenAdmin.Commands
 
         private class CmdInt : Command
         {
-            private static bool CanExecute(VM vm)
+            private static bool CanRun(VM vm)
             {
                 return !vm.Locked && !vm.is_a_template;
             }
 
-            protected override bool CanExecuteCore(SelectedItemCollection selection)
+            protected override bool CanRunCore(SelectedItemCollection selection)
             {
-                return selection.AllItemsAre<VM>(CanExecute);
+                return selection.AllItemsAre<VM>(CanRun);
             }
         }
     }

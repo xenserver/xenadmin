@@ -523,7 +523,7 @@
     <value>Get space requirements</value>
   </data>
   <data name="ACTION_GET_HEALTH_CHECK_RESULT" xml:space="preserve">
-    <value>Get Health Check analysis result from [Citrix] Insight Services</value>
+    <value>Get Health Check analysis result from {0}</value>
   </data>
   <data name="ACTION_GET_HEALTH_CHECK_RESULT_FAILED" xml:space="preserve">
     <value>Failed to get the analysis result</value>
@@ -556,10 +556,10 @@
     <value>Setting HA restart priority on '{0}' to '{1}'</value>
   </data>
   <data name="ACTION_HEALTHCHECK_AUTHENTICATION" xml:space="preserve">
-    <value>Authentication with [Citrix] Insight Services</value>
+    <value>Authentication with {0}</value>
   </data>
   <data name="ACTION_HEALTHCHECK_AUTHENTICATION_PROGRESS" xml:space="preserve">
-    <value>Authenticating with [Citrix] Insight Services</value>
+    <value>Authenticating with {0}</value>
   </data>
   <data name="ACTION_HOSTS_REBOOTED" xml:space="preserve">
     <value>Servers rebooted</value>
@@ -1002,20 +1002,20 @@
   <data name="ACTION_UPDATE_INTEGRATED_GPU_PASSTHROUGH_TITLE" xml:space="preserve">
     <value>Updating integrated GPU pass-through on '{0}'</value>
   </data>
-  <data name="ACTION_UPLOADPATCHTOMASTERPLANACTION_FAILED" xml:space="preserve">
+  <data name="ACTION_UPLOADPATCHTOCOORDINATORPLANACTION_FAILED" xml:space="preserve">
     <value>Upload error. The patch was uploaded, but it cannot be found on the host.</value>
   </data>
   <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT" xml:space="preserve">
-    <value>Upload server status report to [Citrix] Insight Services</value>
+    <value>Upload server status report to {0}</value>
   </data>
   <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT_FAILED" xml:space="preserve">
     <value>Failed to upload the status report.</value>
   </data>
   <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT_PERCENTAGE" xml:space="preserve">
-    <value>Uploading report to [Citrix] Insight Services ({0} of {1})</value>
+    <value>Uploading report to {0} ({1} of {2})</value>
   </data>
   <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT_PROGRESS" xml:space="preserve">
-    <value>Uploading report to [Citrix] Insight Services</value>
+    <value>Uploading report to {0}</value>
   </data>
   <data name="ACTION_USB_PASSTHROUGH_DISABLED" xml:space="preserve">
     <value>USB pass-through disabled</value>
@@ -1302,8 +1302,8 @@
   <data name="ACTION_VUSB_DETACH_CONFIRM" xml:space="preserve">
     <value>Are you sure you want to detach the selected USB device?</value>
   </data>
-  <data name="ACTION_WAIT_FOR_SLAVES_TO_RECOVER" xml:space="preserve">
-    <value>Waiting for slaves to recover...</value>
+  <data name="ACTION_WAIT_FOR_POOL_MEMBERS_TO_RECOVER" xml:space="preserve">
+    <value>Waiting for other pool members to recover...</value>
   </data>
   <data name="ACTION_WLB_DECONFIGURE_FAILED" xml:space="preserve">
     <value>Disconnecting  Workload Balancing failed on pool {0}: {1}  Workload Balancing has been paused.</value>
@@ -1328,14 +1328,6 @@
   </data>
   <data name="ACTIVATE" xml:space="preserve">
     <value>A&amp;ctivate</value>
-  </data>
-  <data name="ACTIVATION_FAILED_MESSAGE" xml:space="preserve">
-    <value>[XenCenter] is unable to contact the activation server.
-
-If you are not currently connected to the internet, we can save
-the activation request to a file, for you to upload at a later date.
-
-To use this file, visit https://{0}.</value>
   </data>
   <data name="ACTIVATION_REQUEST_SAVED" xml:space="preserve">
     <value>Saved activation request to {0}.</value>
@@ -1392,7 +1384,7 @@ To use this file, visit https://{0}.</value>
     <value>Address</value>
   </data>
   <data name="ADDSERVER_PASS_NEW" xml:space="preserve">
-    <value>[XenCenter] can no longer authenticate with the existing credentials for this server. Enter new credentials to proceed.</value>
+    <value>{0} can no longer authenticate with the existing credentials for this server. Enter new credentials to proceed.</value>
   </data>
   <data name="ADD_CUSTOM_FIELD" xml:space="preserve">
     <value>Add custom field '{0}'</value>
@@ -1460,7 +1452,7 @@ Do you want to do this?</value>
   <data name="ADD_HOST_TO_POOL_CPU_MASKING_MESSAGE" xml:space="preserve">
     <value>You are attempting to add the server '{0}' to a pool that is using older CPUs.
 
-[XenServer] can continue by rebooting the server and reducing its CPU to the level of the existing servers in the pool. This will shut down any VMs running on the server. This feature is supported for CPU combinations listed in the [XenServer] Hardware Compatibility List.
+{1} can continue by rebooting the server and reducing its CPU to the level of the existing servers in the pool. This will shut down any VMs running on the server. This feature is supported for CPU combinations listed in the {1} Hardware Compatibility List.
 
 Do you want to do this?</value>
   </data>
@@ -1469,7 +1461,7 @@ Do you want to do this?</value>
 
 {0}
 
-[XenServer] can continue by rebooting the servers and reducing their CPUs to the level of the existing servers in the pool. This will shut down any VMs running on the servers. This feature is supported for CPU combinations listed in the [XenServer] Hardware Compatibility List.
+{1} can continue by rebooting the servers and reducing their CPUs to the level of the existing servers in the pool. This will shut down any VMs running on the servers. This feature is supported for CPU combinations listed in the {1} Hardware Compatibility List.
 
 Do you want to do this?</value>
   </data>
@@ -1663,8 +1655,8 @@ Do you want to continue?</value>
 
 Do you want to continue?</value>
   </data>
-  <data name="AD_MASTER_UNAVAILABLE_BLURB" xml:space="preserve">
-    <value>Please wait while [XenCenter] establishes your current external authentication configuration.</value>
+  <data name="AD_COORDINATOR_UNAVAILABLE_BLURB" xml:space="preserve">
+    <value>Please wait while {0} establishes your current external authentication configuration.</value>
   </data>
   <data name="AD_NOT_CONFIGURED_BLURB" xml:space="preserve">
     <value>AD is not currently configured for pool '{0}'. To enable AD authentication, click Join Domain.</value>
@@ -1778,7 +1770,7 @@ This alarm is set to be triggered when the memory required by the control domain
     <value>File System on Control Domain Full</value>
   </data>
   <data name="ALERT_ALARM_FILESYSTEM_DESCRIPTION" xml:space="preserve">
-    <value>Disk usage for the Control Domain on {0} has reached {1}. [XenServer]'s performance will be critically affected if this disk becomes full. Log files or other non-essential (user created) files should be removed.</value>
+    <value>Disk usage for the Control Domain on {0} has reached {1}. {2}'s performance will be critically affected if this disk becomes full. Log files or other non-essential (user created) files should be removed.</value>
   </data>
   <data name="ALERT_ALARM_LOG_FILESYSTEM" xml:space="preserve">
     <value>File System on Logs Partition Full</value>
@@ -1899,7 +1891,7 @@ Note that if RBAC is enabled, only alerts which you have privileges to dismiss w
     <value>{0} is now available</value>
   </data>
   <data name="ALERT_NEW_VERSION_DETAILS" xml:space="preserve">
-    <value>{0} is now available. Download the new version from the [Citrix] website.</value>
+    <value>{0} is now available. Download the new version from the {1} website.</value>
   </data>
   <data name="ALERT_NEW_VERSION_DOWNLOAD" xml:space="preserve">
     <value>Go to Web Page</value>
@@ -1915,6 +1907,12 @@ Note that if RBAC is enabled, only alerts which you have privileges to dismiss w
   </data>
   <data name="ALLOWED_MTU_VALUE" xml:space="preserve">
     <value>Allowed MTU value: {0}</value>
+  </data>
+  <data name="ALLOWED_UPDATES_DIALOG_MESSAGE" xml:space="preserve">
+    <value>Would you like {0} to periodically check the internet for new versions of {0} and {1}?</value>
+  </data>
+  <data name="ALLOWED_UPDATES_DIALOG_CHECKBOX" xml:space="preserve">
+    <value>&amp;Show internet proxy settings</value>
   </data>
   <data name="ALLOW_TO_CONTINUE" xml:space="preserve">
     <value>&amp;Allow to continue</value>
@@ -1943,7 +1941,7 @@ Note that if RBAC is enabled, only alerts which you have privileges to dismiss w
   <data name="ALREADY_ATTACHED_ELSEWHERE" xml:space="preserve">
     <value>The SR '{0}' is currently attached elsewhere. Do you want to attach it to '{1}'? 
 
-Warning: you must ensure that the SR is not in use by any server not connected to [XenCenter]. Failure to do so may result in data loss.</value>
+Warning: you must ensure that the SR is not in use by any server not connected to {2}. Failure to do so may result in data loss.</value>
   </data>
   <data name="ALREADY_CONNECTED" xml:space="preserve">
     <value>You are already connected to server '{0}'.</value>
@@ -2078,7 +2076,7 @@ Warning: you must ensure that the SR is not in use by any server not connected t
 
 - Ensure automated updates are not restricted on any hosts in the pool.
 
-- Deselect the updates application checkbox on the previous page. [XenCenter] will upgrade the selected servers to the new version without applying any updates.</value>
+- Deselect the updates application checkbox on the previous page. {0} will upgrade the selected servers to the new version without applying any updates.</value>
   </data>
   <data name="AUTOSTART" xml:space="preserve">
     <value>Auto-start on server boot</value>
@@ -2213,9 +2211,9 @@ Both types of interface cannot be added to the same bond. Choose different bond 
   <data name="BOND_CREATE_WILL_DISTURB_PRIMARY" xml:space="preserve">
     <value>Creating this bond will automatically move the management interface on one of your selected bond members to the bond itself:
 
-- [XenCenter] connections to the pool will temporarily be disturbed
+- {0} connections to the pool will temporarily be disturbed
 
-- If your network configuration is incorrect then [XenCenter] may permanently lose the connection to the pool, or pool members may be unable to contact each other.</value>
+- If your network configuration is incorrect then {0} may permanently lose the connection to the pool, or pool members may be unable to contact each other.</value>
   </data>
   <data name="BOND_CREATE_WILL_DISTURB_SECONDARY" xml:space="preserve">
     <value>Creating this bond will disrupt traffic through the secondary interfaces on the bond members while the interfaces are moved onto the bond itself.</value>
@@ -2233,33 +2231,33 @@ To continue, disable HA, delete the bond, and then enable HA again.</value>
   <data name="BOND_DELETE_WILL_DISTURB_BOTH" xml:space="preserve">
     <value>{0}
 
-Deleting this bond will automatically transfer the management and secondary interfaces on the bond to the first slave member of the bond: 
+Deleting this bond will automatically transfer the management and secondary interfaces on the bond to the first other member of the bond: 
 
-- [XenCenter] connections to the pool will temporarily be disturbed
+- {1} connections to the pool will temporarily be disturbed
 
 - Traffic through the secondary interface will be disrupted
 
-- If your network configuration is incorrect then [XenCenter] may permanently lose the connection to the pool, or pool members may be unable to contact each other.</value>
+- If your network configuration is incorrect then {1} may permanently lose the connection to the pool, or pool members may be unable to contact each other.</value>
   </data>
   <data name="BOND_DELETE_WILL_DISTURB_PRIMARY" xml:space="preserve">
     <value>{0}
 
-Deleting this bond will automatically transfer the management interface on the bond to the first slave member of the bond: 
+Deleting this bond will automatically transfer the management interface on the bond to the first other member of the bond: 
 
-- [XenCenter] connections to the pool will temporarily be disturbed
+- {1} connections to the pool will temporarily be disturbed
 
-- If your network configuration is incorrect then [XenCenter] may permanently lose the connection to the pool, or pool members may be unable to contact each other.</value>
+- If your network configuration is incorrect then {1} may permanently lose the connection to the pool, or pool members may be unable to contact each other.</value>
   </data>
   <data name="BOND_DELETE_WILL_DISTURB_SECONDARY" xml:space="preserve">
     <value>{0}
 
-Deleting this bond will disrupt traffic through the secondary interface on the bond while the interface is moved to the first slave of the bond.</value>
+Deleting this bond will disrupt traffic through the secondary interface on the bond while the interface is moved to the first other member of the bond.</value>
   </data>
   <data name="BOND_GONE" xml:space="preserve">
-    <value>Could not find the bond in [XenCenter]'s cache.</value>
+    <value>Could not find the bond in {0}'s cache.</value>
   </data>
-  <data name="BOND_MASTER_GONE" xml:space="preserve">
-    <value>Could not find the bond master in [XenCenter]'s cache.</value>
+  <data name="BOND_INTERFACE_GONE" xml:space="preserve">
+    <value>Could not find the bond interface in {0}'s cache.</value>
   </data>
   <data name="BOOTORDER" xml:space="preserve">
     <value>Boot order: {0}</value>
@@ -2280,19 +2278,19 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
     <value>There are broken SRs after the upgrade. To solve this problem you should reattach the SRs.</value>
   </data>
   <data name="BROKEN_TOOLS_PROMPT" xml:space="preserve">
-    <value>Your Tools ISO is on a broken SR, [XenCenter] will attempt to fix it before proceeding. Do you want to continue?</value>
+    <value>Your Tools ISO is on a broken SR, {0} will attempt to fix it before proceeding. Do you want to continue?</value>
   </data>
   <data name="BUGTOOL_CLIENT_ACTION_LOGS_META" xml:space="preserve">
-    <value>Compiling [XenCenter] logs and metadata</value>
+    <value>Compiling {0} logs and metadata</value>
   </data>
   <data name="BUGTOOL_CLIENT_ACTION_META" xml:space="preserve">
-    <value>Compiling [XenCenter] metadata</value>
+    <value>Compiling {0} metadata</value>
   </data>
   <data name="BUGTOOL_CLIENT_LOGS_META" xml:space="preserve">
-    <value>[XenCenter] logs and metadata</value>
+    <value>{0} logs and metadata</value>
   </data>
   <data name="BUGTOOL_CLIENT_META" xml:space="preserve">
-    <value>[XenCenter] metadata</value>
+    <value>{0} metadata</value>
   </data>
   <data name="BUGTOOL_FILE_PREFIX" xml:space="preserve">
     <value>status-report-</value>
@@ -2408,7 +2406,7 @@ This will cancel compilation of the status report.</value>
     <value>You must install I/O drivers on VM '{0}' before you can activate this virtual disk for the VM.</value>
   </data>
   <data name="CANNOT_ACTIVATE_VD_VM_NEEDS_TOOLS" xml:space="preserve">
-    <value>You must install [Citrix VM Tools] on VM '{0}' before you can activate this virtual disk for the VM.</value>
+    <value>You must install {0} on VM '{1}' before you can activate this virtual disk for the VM.</value>
   </data>
   <data name="CANNOT_CHANGE_IP_CLUSTERING_ENABLED" xml:space="preserve">
     <value>The interface can only be changed when the host is in maintenance mode, because clustering is enabled on {0}.</value>
@@ -2444,7 +2442,7 @@ This will cancel compilation of the status report.</value>
     <value>You must install I/O drivers on VM '{0}' before you can deactivate this virtual disk for the VM.</value>
   </data>
   <data name="CANNOT_DEACTIVATE_VDI_NEEDS_TOOLS" xml:space="preserve">
-    <value>You must install [Citrix VM Tools] on VM '{0}' before you can deactivate this virtual disk for the VM.</value>
+    <value>You must install {0} on VM '{1}' before you can deactivate this virtual disk for the VM.</value>
   </data>
   <data name="CANNOT_DEACTIVATE_VDI_VM_NOT_RUNNING" xml:space="preserve">
     <value>It is not possible to deactivate this virtual disk on VM '{0}' because the VM is not running.</value>
@@ -2460,7 +2458,7 @@ This will cancel compilation of the status report.</value>
 {1}</value>
   </data>
   <data name="CANNOT_DELETE_DEFAULT_TEMPLATE" xml:space="preserve">
-    <value>[XenServer] templates cannot be deleted.</value>
+    <value>{0} templates cannot be deleted.</value>
   </data>
   <data name="CANNOT_DELETE_DR_VD" xml:space="preserve">
     <value>This virtual disk is used for DR. To delete it, configure DR not to save data to this storage repository.</value>
@@ -2484,7 +2482,7 @@ This will cancel compilation of the status report.</value>
     <value>This snapshot is currently in use and cannot be deleted.</value>
   </data>
   <data name="CANNOT_DELETE_TOOLS_SR" xml:space="preserve">
-    <value>Deleting the [Citrix VM Tools] ISO storage is not supported.</value>
+    <value>Deleting the {0} ISO storage is not supported.</value>
   </data>
   <data name="CANNOT_DELETE_VDI_ACTIVE_ON" xml:space="preserve">
     <value>This virtual disk is active on VM '{0}'. Deactivate the virtual disk before deleting.</value>
@@ -2508,7 +2506,7 @@ This will cancel compilation of the status report.</value>
     <value>Could not find XML node {0}.</value>
   </data>
   <data name="CANNOT_FIND_SR_WIZARD_TYPE" xml:space="preserve">
-    <value>You cannot configure an SR of type '{0}' using [XenCenter].</value>
+    <value>You cannot configure an SR of type '{0}' using {1}.</value>
   </data>
   <data name="CANNOT_MIGRATE_VDI_NON_RUNNING_VM" xml:space="preserve">
     <value>Cannot move this virtual disk because it is attached to a VM that is not running.</value>
@@ -2667,11 +2665,11 @@ This will cancel compilation of the status report.</value>
   <data name="CHANGE" xml:space="preserve">
     <value>Change...</value>
   </data>
-  <data name="CHANGED_MASTER_PASSWORD" xml:space="preserve">
-    <value>Changed [XenCenter] master password</value>
+  <data name="CHANGED_MAIN_PASSWORD" xml:space="preserve">
+    <value>Changed {0} main password</value>
   </data>
-  <data name="CHANGED_MASTER_PASSWORD_LONG" xml:space="preserve">
-    <value>Changed [XenCenter] master password for session restore</value>
+  <data name="CHANGED_MAIN_PASSWORD_LONG" xml:space="preserve">
+    <value>Changed {0} main password for session restore</value>
   </data>
   <data name="CHANGED_SERVER_CD" xml:space="preserve">
     <value>Server CD changed</value>
@@ -2681,9 +2679,6 @@ This will cancel compilation of the status report.</value>
   </data>
   <data name="CHANGE_POLICY_STATUS" xml:space="preserve">
     <value>Change policy '{0}' status</value>
-  </data>
-  <data name="CHANGE_SERVER_CD" xml:space="preserve">
-    <value>Insert [XenServer] CD</value>
   </data>
   <data name="CHANGE_SERVER_PASSWORD" xml:space="preserve">
     <value>Change Server Password...</value>
@@ -2728,6 +2723,9 @@ Do you want to assign it to the schedule '{2}' instead?</value>
   </data>
   <data name="CHECKING_HA_STATUS" xml:space="preserve">
     <value>Checking HA and WLB status</value>
+  </data>
+  <data name="CHECKING_HEALTH_CHECK_SERVICE" xml:space="preserve">
+    <value>Checking pool enrollment to Health Check</value>
   </data>
   <data name="CHECKING_HOST_LIVENESS_STATUS" xml:space="preserve">
     <value>Checking host liveness status</value>
@@ -2796,7 +2794,7 @@ Do you want to assign it to the schedule '{2}' instead?</value>
     <value>Checking upgrade hotfix status</value>
   </data>
   <data name="CHECKING_XENCENTER_VERSION" xml:space="preserve">
-    <value>Checking [XenCenter] version</value>
+    <value>Checking {0} version</value>
   </data>
   <data name="CHECK_WLB_ENABLED" xml:space="preserve">
     <value>Pool '{0}' cannot have WLB enabled</value>
@@ -2853,7 +2851,7 @@ Do you want to assign it to the schedule '{2}' instead?</value>
     <value>&amp;Collapse Children</value>
   </data>
   <data name="COMMON_CRITERIA_TEXT" xml:space="preserve">
-    <value>for use with Common Criteria versions of [XenServer] only</value>
+    <value>{0}: for use with Common Criteria versions of {1} only</value>
   </data>
   <data name="COMPLETED" xml:space="preserve">
     <value>Completed</value>
@@ -3020,10 +3018,10 @@ This action is final and unrecoverable.</value>
     <value>&amp;Yes, Destroy</value>
   </data>
   <data name="CONFIRM_DISABLE_CBT_VM" xml:space="preserve">
-    <value>This will disable Changed Block Tracking on the disks of the selected VM. If you are using any third-party solutions to back up the VM, they might be affected. Note that Changed Block Tracking cannot be enabled again from [XenCenter]. Do you want to continue?</value>
+    <value>This will disable Changed Block Tracking on the disks of the selected VM. If you are using any third-party solutions to back up the VM, they might be affected. Note that Changed Block Tracking cannot be enabled again from {0}. Do you want to continue?</value>
   </data>
   <data name="CONFIRM_DISABLE_CBT_VMS" xml:space="preserve">
-    <value>This will disable Changed Block Tracking on the disks of the selected VMs. If you are using any third-party solutions to back up the VMs, they might be affected. Note that Changed Block Tracking cannot be enabled again from [XenCenter]. Do you want to continue?</value>
+    <value>This will disable Changed Block Tracking on the disks of the selected VMs. If you are using any third-party solutions to back up the VMs, they might be affected. Note that Changed Block Tracking cannot be enabled again from {0}. Do you want to continue?</value>
   </data>
   <data name="CONFIRM_DISABLE_CBT_VMS_TITLE" xml:space="preserve">
     <value>Disable Changed Block Tracking on selected VMs</value>
@@ -3137,10 +3135,10 @@ This will also shut down all the VMs currently running on them.</value>
     <value>Reboot VM</value>
   </data>
   <data name="CONFIRM_RESTART_TOOLSTACK_MANY_SERVERS" xml:space="preserve">
-    <value>Are you sure you want to restart the toolstack on the selected servers? Note that [XenCenter] will temporarily lose connection to them.</value>
+    <value>Are you sure you want to restart the toolstack on the selected servers? Note that {0} will temporarily lose connection to them.</value>
   </data>
   <data name="CONFIRM_RESTART_TOOLSTACK_ONE_SERVER" xml:space="preserve">
-    <value>Are you sure you want to restart the toolstack on '{0}'? Note that [XenCenter] will temporarily lose connection to the server.</value>
+    <value>Are you sure you want to restart the toolstack on '{0}'? Note that {1} will temporarily lose connection to the server.</value>
   </data>
   <data name="CONFIRM_RESTART_TOOLSTACK_TITLE" xml:space="preserve">
     <value>Restart Toolstack</value>
@@ -3261,11 +3259,11 @@ Would you like to carry out the operation at this time?</value>
   <data name="CONNECTION_FAILED_TITLE" xml:space="preserve">
     <value>Failed to connect to {0}</value>
   </data>
-  <data name="CONNECTION_FINDING_MASTER_DESCRIPTION" xml:space="preserve">
-    <value>Looking for master for {0} on {1}...</value>
+  <data name="CONNECTION_FINDING_COORDINATOR_DESCRIPTION" xml:space="preserve">
+    <value>Looking for coordinator for {0} on {1}...</value>
   </data>
-  <data name="CONNECTION_FINDING_MASTER_TITLE" xml:space="preserve">
-    <value>Looking for master for {0}</value>
+  <data name="CONNECTION_FINDING_COORDINATOR_TITLE" xml:space="preserve">
+    <value>Looking for coordinator for {0}</value>
   </data>
   <data name="CONNECTION_GENERAL_TAB_TITLE" xml:space="preserve">
     <value>Connection General Properties</value>
@@ -3273,8 +3271,8 @@ Would you like to carry out the operation at this time?</value>
   <data name="CONNECTION_IO_EXCEPTION" xml:space="preserve">
     <value>Could not contact server</value>
   </data>
-  <data name="CONNECTION_LOST_NOTICE_MASTER_IN_X_SECONDS" xml:space="preserve">
-    <value>Lost connection to {0}. Will search for a new pool master in {1} seconds.</value>
+  <data name="CONNECTION_LOST_NOTICE_COORDINATOR_IN_X_SECONDS" xml:space="preserve">
+    <value>Lost connection to {0}. Will search for a new pool coordinator in {1} seconds.</value>
   </data>
   <data name="CONNECTION_LOST_NOTICE_TITLE" xml:space="preserve">
     <value>Lost connection to {0}</value>
@@ -3289,7 +3287,7 @@ Would you like to carry out the operation at this time?</value>
     <value>Connected to {0}</value>
   </data>
   <data name="CONNECTION_REDIRECTING" xml:space="preserve">
-    <value>Connection to {0}: redirecting to the pool master at {1}</value>
+    <value>Connection to {0}: redirecting to the pool coordinator at {1}</value>
   </data>
   <data name="CONNECTION_REFUSED" xml:space="preserve">
     <value>The connection was refused.</value>
@@ -3297,13 +3295,13 @@ Would you like to carry out the operation at this time?</value>
   <data name="CONNECTION_REFUSED_TITLE" xml:space="preserve">
     <value>Refused connection to {0}</value>
   </data>
-  <data name="CONNECTION_RETRYING_SLAVE" xml:space="preserve">
+  <data name="CONNECTION_RETRYING_SUPPORTER" xml:space="preserve">
     <value>Connection to {0}: trying to find pool at {1}</value>
   </data>
   <data name="CONNECTION_WAS_LOST" xml:space="preserve">
     <value>The connection to the server was lost</value>
   </data>
-  <data name="CONNECTION_WILL_RETRY_SLAVE" xml:space="preserve">
+  <data name="CONNECTION_WILL_RETRY_SUPPORTER" xml:space="preserve">
     <value>Connection to {0}: will try to connect to another pool member in {1} seconds</value>
   </data>
   <data name="CONNECT_RESOLUTION_FAILURE" xml:space="preserve">
@@ -3522,7 +3520,7 @@ This action cannot be undone. Are you sure you want to continue?</value>
     <value>Networking</value>
   </data>
   <data name="CONVERSION_NETWORK_PAGE_TITLE" xml:space="preserve">
-    <value>Optionally, select [XenServer] networks to connect the VMs</value>
+    <value>Optionally, select {0} networks to connect the VMs</value>
   </data>
   <data name="CONVERSION_RBAC_RESTRICTION" xml:space="preserve">
     <value>A {0} user does not have sufficient permissions to run the Conversion Manager. Please login using an account with one of the following roles:
@@ -3620,10 +3618,10 @@ This action cannot be undone. Are you sure you want to continue?</value>
     <value>Cannot retrieve the Conversion Manager virtual appliance version. Please see logs for details.</value>
   </data>
   <data name="CONVERSION_VERSION_INCOMPATIBILITY" xml:space="preserve">
-    <value>[XenCenter] is incompatible with this version of the Conversion Manager virtual appliance.</value>
+    <value>{0} is incompatible with this version of the Conversion Manager virtual appliance.</value>
   </data>
   <data name="CONVERSION_VERSION_INCOMPATIBILITY_INFO" xml:space="preserve">
-    <value>The version of the Conversion Manager virtual appliance you are using is earlier than {0}. You can use the legacy Conversion Manager console to set up and control conversions. However, it is strongly recommended that you import and configure the Conversion Manager virtual appliance matching your [XenServer] version.</value>
+    <value>The version of the Conversion Manager virtual appliance you are using is earlier than {0}. You can use the legacy Conversion Manager console to set up and control conversions. However, it is strongly recommended that you import and configure the Conversion Manager virtual appliance matching your {1} version.</value>
   </data>
   <data name="CONVERSION_VM_PAGE_TEXT" xml:space="preserve">
     <value>Virtual Machines</value>
@@ -3897,7 +3895,7 @@ Please reconnect the host and try again.</value>
     <value>Migrate VM to {0}</value>
   </data>
   <data name="CPM_WIZARD_VM_MISSING_ERROR" xml:space="preserve">
-    <value>The selected VMs are no longer available in [XenCenter]'s cache. Please verify your selection is valid and relaunch the wizard.</value>
+    <value>The selected VMs are no longer available in {0}'s cache. Please verify your selection is valid and relaunch the wizard.</value>
   </data>
   <data name="CPM_WIZARD_VM_SELECTION_INTRODUCTION" xml:space="preserve">
     <value>&amp;Virtual network interfaces:</value>
@@ -4044,8 +4042,8 @@ For optimal performance and reliability during VM migration, ensure that the net
   <data name="CREATING_MANIFEST_CHECKSUM" xml:space="preserve">
     <value>Calculating checksum for file '{0}'...</value>
   </data>
-  <data name="CREATING_NAMED_POOL_WITH_MASTER" xml:space="preserve">
-    <value>Creating new pool '{0}' with master '{1}'</value>
+  <data name="CREATING_NAMED_POOL_WITH_COORDINATOR" xml:space="preserve">
+    <value>Creating new pool '{0}' with coordinator '{1}'</value>
   </data>
   <data name="CREATING_NEW_FOLDER" xml:space="preserve">
     <value>Creating new folder...</value>
@@ -4255,7 +4253,7 @@ For optimal performance and reliability during VM migration, ensure that the net
     <value>VMs by Power State</value>
   </data>
   <data name="DEFAULT_SEARCH_VMS_WO_XS_TOOLS" xml:space="preserve">
-    <value>VMs without [Citrix VM Tools]</value>
+    <value>VMs without {0}</value>
   </data>
   <data name="DEFAULT_VDI_NAME" xml:space="preserve">
     <value>New virtual disk</value>
@@ -4669,10 +4667,10 @@ Plugging in untrustworthy USB devices to your computer may put your computer at 
     <value>The Dynamic Memory Control (DMC) is not available due to license restrictions on the server.</value>
   </data>
   <data name="DMC_UNAVAILABLE_NOTOOLS" xml:space="preserve">
-    <value>A memory range cannot be set because [Citrix VM Tools] are not installed on this VM.</value>
+    <value>A memory range cannot be set because {0} are not installed on this VM.</value>
   </data>
   <data name="DMC_UNAVAILABLE_NOTOOLS_PLURAL" xml:space="preserve">
-    <value>A memory range cannot be set because [Citrix VM Tools] are not installed on these VMs.</value>
+    <value>A memory range cannot be set because {0} are not installed on these VMs.</value>
   </data>
   <data name="DMC_UNAVAILABLE_NOTSUPPORTED" xml:space="preserve">
     <value>A memory range cannot be set because the operating system on this VM does not support it.</value>
@@ -4687,10 +4685,10 @@ Plugging in untrustworthy USB devices to your computer may put your computer at 
     <value>A memory range cannot be set because I/O drivers are not installed on these VMs.</value>
   </data>
   <data name="DMC_UNAVAILABLE_OLDTOOLS" xml:space="preserve">
-    <value>A memory range cannot be set because [Citrix VM Tools] are out of date on this VM.</value>
+    <value>A memory range cannot be set because {0} are out of date on this VM.</value>
   </data>
   <data name="DMC_UNAVAILABLE_OLDTOOLS_PLURAL" xml:space="preserve">
-    <value>A memory range cannot be set because [Citrix VM Tools] are out of date on these VMs.</value>
+    <value>A memory range cannot be set because {0} are out of date on these VMs.</value>
   </data>
   <data name="DMC_UNAVAILABLE_TEMPLATE" xml:space="preserve">
     <value>A memory range cannot be set for this template.</value>
@@ -4810,7 +4808,7 @@ Plugging in untrustworthy USB devices to your computer may put your computer at 
     <value>Download...</value>
   </data>
   <data name="DOWNLOAD_LATEST_XS_BODY" xml:space="preserve">
-    <value>{0} is now available. Download the latest at the [Citrix] website.</value>
+    <value>{0} is now available. Download the latest at the {1} website.</value>
   </data>
   <data name="DO_NOT_SHOW_THIS_MESSAGE" xml:space="preserve">
     <value>&amp;Don't show this message again</value>
@@ -5099,7 +5097,7 @@ Eject the CD and try again.</value>
     <value>Failback to pool '{0}' is complete.</value>
   </data>
   <data name="DR_WIZARD_RECOVERPAGE_COMPLETE_FAILOVER" xml:space="preserve">
-    <value>[XenServer] Disaster Recovery is complete.</value>
+    <value>{0} Disaster Recovery is complete.</value>
   </data>
   <data name="DR_WIZARD_RECOVERPAGE_CONTINUE_DRYRUN" xml:space="preserve">
     <value>Click Next to remove the vApps and VMs that were failed over and to see the summary report.</value>
@@ -5117,7 +5115,7 @@ Eject the CD and try again.</value>
     <value>Failback is in progress. This may take some time.</value>
   </data>
   <data name="DR_WIZARD_RECOVERPAGE_IN_PROGRESS_FAILOVER" xml:space="preserve">
-    <value>[XenServer] Disaster Recovery is in progress. This may take some time.</value>
+    <value>{0} Disaster Recovery is in progress. This may take some time.</value>
   </data>
   <data name="DR_WIZARD_RECOVERPAGE_OVERALL_PROGRESS" xml:space="preserve">
     <value>Overall progress: {0} of {1} tasks completed</value>
@@ -5150,7 +5148,7 @@ Eject the CD and try again.</value>
     <value>Progress of failback to pool '{0}'</value>
   </data>
   <data name="DR_WIZARD_RECOVERPAGE_TITLE_FAILOVER" xml:space="preserve">
-    <value>[XenServer] Disaster Recovery progress</value>
+    <value>{0} Disaster Recovery progress</value>
   </data>
   <data name="DR_WIZARD_REPORTPAGE_TEXT" xml:space="preserve">
     <value>Summary</value>
@@ -5356,8 +5354,8 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="ENABLE_TLS_VERIFICATION_MENU" xml:space="preserve">
     <value>Enable Certificate Veri&amp;fication</value>
   </data>
-  <data name="ENABLE_TLS_VERIFICATION_NEW_MASTER" xml:space="preserve">
-    <value>You cannot enable certificate verification while a new master is being nominated in the pool.</value>
+  <data name="ENABLE_TLS_VERIFICATION_NEW_COORDINATOR" xml:space="preserve">
+    <value>You cannot enable certificate verification while a new coordinator is being nominated in the pool.</value>
   </data>
   <data name="ENABLE_TLS_VERIFICATION_RBAC_RESTRICTION" xml:space="preserve">
     <value>A {0} user does not have sufficient permissions to enable certificate verification. Please login using an account with one of the following roles:
@@ -5425,7 +5423,7 @@ Would you like to eject these ISOs before continuing?</value>
     <value>User name and password mismatch.</value>
   </data>
   <data name="ERROR_CONNECTING_BLURB" xml:space="preserve">
-    <value>[XenCenter] has encountered a problem connecting to this server.</value>
+    <value>{0} has encountered a problem connecting to this server.</value>
   </data>
   <data name="ERROR_COULD_NOT_FIND_SR" xml:space="preserve">
     <value>The storage repository was not found and a default was not assigned.</value>
@@ -5611,7 +5609,7 @@ Would you like to eject these ISOs before continuing?</value>
     <value>Could not authenticate to proxy server on '{0}'.</value>
   </data>
   <data name="ERROR_PUTTY_LAUNCHING" xml:space="preserve">
-    <value>[XenCenter] has encountered a problem launching PuTTY.</value>
+    <value>A problem was encountered while launching PuTTY.</value>
   </data>
   <data name="ERROR_SECURE_CHANNEL_FAILURE" xml:space="preserve">
     <value>Could not create SSL/TLS secure channel.</value>
@@ -5638,19 +5636,19 @@ Would you like to eject these ISOs before continuing?</value>
     <value>{0} Eject the CD</value>
   </data>
   <data name="EVACUATE_HOST_CLUSER_CREATING" xml:space="preserve">
-    <value>You cannot nominate a new master while the pool is in the process of creating a cluster.</value>
+    <value>You cannot nominate a new coordinator while the pool is in the process of creating a cluster.</value>
   </data>
   <data name="EVACUATE_HOST_HA_DISABLING" xml:space="preserve">
-    <value>You cannot nominate a new master while HA is being disabled on the pool.</value>
+    <value>You cannot nominate a new coordinator while HA is being disabled on the pool.</value>
   </data>
   <data name="EVACUATE_HOST_HA_ENABLING" xml:space="preserve">
-    <value>You cannot nominate a new master while HA is being enabled on the pool.</value>
+    <value>You cannot nominate a new coordinator while HA is being enabled on the pool.</value>
   </data>
   <data name="EVACUATE_HOST_INSTALL_MGMNT_PROMPT" xml:space="preserve">
     <value>{0} Install Management Agent</value>
   </data>
   <data name="EVACUATE_HOST_INSTALL_TOOLS_PROMPT" xml:space="preserve">
-    <value>{0} Install [Citrix VM Tools]</value>
+    <value>{0} Install {1}</value>
   </data>
   <data name="EVACUATE_HOST_LOCAL_CD" xml:space="preserve">
     <value>This VM uses a local CD.</value>
@@ -5682,8 +5680,8 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="EXCEPTION_USER_CANCELLED" xml:space="preserve">
     <value>Canceled</value>
   </data>
-  <data name="EXCEPTION_USER_CANCELLED_MASTER" xml:space="preserve">
-    <value>User canceled. Master needs to be upgraded first.</value>
+  <data name="EXCEPTION_USER_CANCELLED_COORDINATOR" xml:space="preserve">
+    <value>User canceled. Coordinator needs to be upgraded first.</value>
   </data>
   <data name="EXIT_MAINTENANCE_MODE" xml:space="preserve">
     <value>Exit &amp;Maintenance Mode</value>
@@ -6253,12 +6251,6 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="GPU_PLACEMENT_POLICY_MIXED_DESCRIPTION" xml:space="preserve">
     <value>Mixed: different settings for different GPU groups</value>
   </data>
-  <data name="GPU_RUBRIC_NO_GPUS_POOL" xml:space="preserve">
-    <value>You can improve graphics performance by assigning a dedicated graphics processing unit (GPU) to a VM. However, no GPUs have been detected in this pool, so this option is not currently available.</value>
-  </data>
-  <data name="GPU_RUBRIC_NO_GPUS_SERVER" xml:space="preserve">
-    <value>You can improve graphics performance by assigning a dedicated graphics processing unit (GPU) to a VM. However, no GPUs have been detected in this server, so this option is not currently available.</value>
-  </data>
   <data name="GPU_RUBRIC_PLEASE_SELECT_WHICH_GPU_MULTIPLE" xml:space="preserve">
     <value>Select which virtual GPU types are allowed on these GPUs.</value>
   </data>
@@ -6310,7 +6302,7 @@ Note: Any custom color selections will remain unchanged</value>
     <value>Performance Graph</value>
   </data>
   <data name="GRAPH_NEEDS_TOOLS" xml:space="preserve">
-    <value>To view memory data for this VM, you need to install [Citrix VM Tools]</value>
+    <value>To view memory data for this VM, you need to install {0}</value>
   </data>
   <data name="GREATER_THAN" xml:space="preserve">
     <value>&gt; {0}</value>
@@ -6322,7 +6314,7 @@ Note: Any custom color selections will remain unchanged</value>
     <value>Group Roles</value>
   </data>
   <data name="GUEFI_BOOT_MODES_EXPERIMENTAL_WARNING" xml:space="preserve">
-    <value>Guest UEFI boot and guest UEFI secure boot are experimental features. You can create UEFI-enabled VMs on hosts that are in a production environment. However, UEFI-enabled VMs must not be used for production purposes. You may have to re-create the VMs when you upgrade the host to a newer version of [XenServer].</value>
+    <value>Guest UEFI boot and guest UEFI secure boot are experimental features. You can create UEFI-enabled VMs on hosts that are in a production environment. However, UEFI-enabled VMs must not be used for production purposes. You may have to re-create the VMs when you upgrade the host to a newer version of {0}.</value>
   </data>
   <data name="GUEFI_BOOT_MODES_UNSUPPORTED_WARNING" xml:space="preserve">
     <value>The UEFI and UEFI secure boot modes are not supported with the selected template.</value>
@@ -6331,7 +6323,7 @@ Note: Any custom color selections will remain unchanged</value>
     <value>&amp;UEFI Boot (experimental)</value>
   </data>
   <data name="GUEFI_BOOT_MODE_EXPERIMENTAL_WARNING" xml:space="preserve">
-    <value>Guest UEFI boot is an experimental feature. You can create UEFI-enabled VMs on hosts that are in a production environment. However, UEFI-enabled VMs must not be used for production purposes. You may have to re-create the VMs when you upgrade the host to a newer version of [XenServer].</value>
+    <value>Guest UEFI boot is an experimental feature. You can create UEFI-enabled VMs on hosts that are in a production environment. However, UEFI-enabled VMs must not be used for production purposes. You may have to re-create the VMs when you upgrade the host to a newer version of {0}.</value>
   </data>
   <data name="GUEFI_BOOT_MODE_LABEL" xml:space="preserve">
     <value>&amp;UEFI Boot</value>
@@ -6340,7 +6332,7 @@ Note: Any custom color selections will remain unchanged</value>
     <value>The UEFI boot mode is not supported with the selected template.</value>
   </data>
   <data name="GUEFI_SECUREBOOT_MODE_EXPERIMENTAL_WARNING" xml:space="preserve">
-    <value>Guest UEFI secure boot is an experimental feature. You can create VMs configured to use the UEFI secure boot mode on hosts that are in a production environment. However, these VMs must not be used for production purposes. You may have to re-create the VMs when you upgrade the host to a newer version of [XenServer].</value>
+    <value>Guest UEFI secure boot is an experimental feature. You can create VMs configured to use the UEFI secure boot mode on hosts that are in a production environment. However, these VMs must not be used for production purposes. You may have to re-create the VMs when you upgrade the host to a newer version of {0}.</value>
   </data>
   <data name="GUEFI_SECUREBOOT_MODE_UNSUPPORTED_WARNING" xml:space="preserve">
     <value>The UEFI secure boot mode is not supported with the selected template.</value>
@@ -6351,10 +6343,15 @@ Note: Any custom color selections will remain unchanged</value>
   <data name="GUEFI_SECURE_BOOT_MODE_LABEL" xml:space="preserve">
     <value>UEFI &amp;Secure Boot</value>
   </data>
-  <data name="GUI_OUT_OF_DATE" xml:space="preserve">
-    <value>This version of [XenCenter] is out of date and cannot connect to {0}.
+  <data name="GUI_NOT_COMPATIBLE" xml:space="preserve">
+    <value>This version of {0} can only connect to {1} {2} and greater versions. It cannot connect to {3}.
 
-You can get a compatible version of [XenCenter] from the following location:</value>
+You can get a compatible version of {4} from the following location:</value>
+  </data>
+  <data name="GUI_OUT_OF_DATE" xml:space="preserve">
+    <value>This version of {0} is out of date and cannot connect to {1}.
+
+You can get a compatible version of {0} from the following location:</value>
   </data>
   <data name="HA" xml:space="preserve">
     <value>HA</value>
@@ -6400,8 +6397,8 @@ not currently live:
 
 {0}</value>
   </data>
-  <data name="HA_CANNOT_EVACUATE_MASTER" xml:space="preserve">
-    <value>Server '{0}' cannot be placed in Maintenance Mode because it is the master of an HA-enabled pool.</value>
+  <data name="HA_CANNOT_EVACUATE_COORDINATOR" xml:space="preserve">
+    <value>Server '{0}' cannot be placed in Maintenance Mode because it is the coordinator of an HA-enabled pool.</value>
   </data>
   <data name="HA_CHECK_DESCRIPTION" xml:space="preserve">
     <value>HA and WLB check</value>
@@ -6453,9 +6450,6 @@ not currently live:
   </data>
   <data name="HA_DISABLE_QUERY" xml:space="preserve">
     <value>Are you sure you want to disable HA for pool '{0}'?</value>
-  </data>
-  <data name="HA_EDIT_DIALOG_BLURB" xml:space="preserve">
-    <value>[XenServer] High Availability (HA) allows virtual machines to automatically be restarted in the event of an underlying hardware failure or loss of an individual server. HA is enabled for '{0}'.</value>
   </data>
   <data name="HA_EDIT_NOW" xml:space="preserve">
     <value>Change these HA settings now...</value>
@@ -6645,10 +6639,10 @@ Click Configure HA to alter the settings displayed below.</value>
     <value>Review configuration and activate HA</value>
   </data>
   <data name="HEALTHCHECK_AUTHENTICATION_RUBRIC_EXISTING_TOKEN" xml:space="preserve">
-    <value>Authentication with [Citrix] Insight Services is required in order to enable this feature. [XenCenter] detected a previous successful authentication for one of other connected pools. You can choose to re-use it or authenticate again.</value>
+    <value>Authentication with {0} is required in order to enable this feature. {1} detected a previous successful authentication for one of other connected pools. You can choose to re-use it or authenticate again.</value>
   </data>
   <data name="HEALTHCHECK_AUTHENTICATION_RUBRIC_NO_TOKEN" xml:space="preserve">
-    <value>Authentication with [Citrix] Insight Services is required in order to enable this feature. Please register by providing MyCitrix credentials (see {0}). These credentials will only be used to obtain an upload token and will not be stored on this machine or on your server.</value>
+    <value>Authentication with {0} is required in order to enable this feature. Please register by providing MyCitrix credentials (see {1}). These credentials will only be used to obtain an upload token and will not be stored on this machine or on your server.</value>
   </data>
   <data name="HEALTHCHECK_ENROLLMENT_CONFIRMATION_BUTTON_LABEL" xml:space="preserve">
     <value>OK, Enable Health Check</value>
@@ -6687,7 +6681,7 @@ Click Configure HA to alter the settings displayed below.</value>
     <value>HealthCheck</value>
   </data>
   <data name="HEALTH_CHECK_AUTHENTICATION_FAILED" xml:space="preserve">
-    <value>Authentication with [Citrix] Insight Services failed. See the application log files for more information.</value>
+    <value>Authentication with {0} failed. See the application log files for more information.</value>
   </data>
   <data name="HEALTH_CHECK_AUTHENTICATION_INVALID_CREDENTIALS" xml:space="preserve">
     <value>Invalid user name or password. Please try again.</value>
@@ -6699,7 +6693,7 @@ Click Configure HA to alter the settings displayed below.</value>
     <value>http://www.citrix.com/about/legal/privacy.html</value>
   </data>
   <data name="HEALTH_CHECK_PRIVACY_POLICY" xml:space="preserve">
-    <value>The information that Health Check uploads to [Citrix] Insight Services will be used for troubleshooting and diagnostics support purposes, as well as to improve the quality, reliability, and performance of our products subject to the [Citrix] Insight Services Policy at {0} and [Citrix] Privacy Policy at {1}.</value>
+    <value>The information that Health Check uploads to {0} will be used for troubleshooting and diagnostics support purposes, as well as to improve the quality, reliability, and performance of our products subject to the {0} Policy at {1} and {2} Privacy Policy at {3}.</value>
   </data>
   <data name="HEALTH_CHECK_USER_HAS_NO_PERMISSION_TO_CONNECT" xml:space="preserve">
     <value>This user is not authorized to access this server.</value>
@@ -6786,11 +6780,11 @@ Click Configure HA to alter the settings displayed below.</value>
   <data name="HOSTACTION_SHUTDOWN_VM_SHUTDOWN" xml:space="preserve">
     <value>Preparing to shut down server: shutting down {0} ({1} of {2})</value>
   </data>
-  <data name="HOSTACTION_TRANSITIONED_NEW_MASTER" xml:space="preserve">
-    <value>Nominated server {0} as new master</value>
+  <data name="HOSTACTION_TRANSITIONED_NEW_COORDINATOR" xml:space="preserve">
+    <value>Nominated server {0} as new coordinator</value>
   </data>
-  <data name="HOSTACTION_TRANSITIONING_NEW_MASTER" xml:space="preserve">
-    <value>Nominating server {0} as new master...</value>
+  <data name="HOSTACTION_TRANSITIONING_NEW_COORDINATOR" xml:space="preserve">
+    <value>Nominating server {0} as new coordinator...</value>
   </data>
   <data name="HOST_ACTION_IN_PROGRESS" xml:space="preserve">
     <value>This server has an operation in progress.</value>
@@ -6820,7 +6814,7 @@ Click Configure HA to alter the settings displayed below.</value>
     <value>Server General Properties</value>
   </data>
   <data name="HOST_GONE" xml:space="preserve">
-    <value>Could not find host in [XenCenter]'s cache.</value>
+    <value>Could not find host in {0}'s cache.</value>
   </data>
   <data name="HOST_INTERNAL_MANAGEMENT_NETWORK" xml:space="preserve">
     <value>Host internal management network</value>
@@ -6838,7 +6832,7 @@ Click Configure HA to alter the settings displayed below.</value>
     <value>Local and Remote ({0})</value>
   </data>
   <data name="HOST_MEMORY_POST_UPGRADE_DEFAULT_WARNING_LONG" xml:space="preserve">
-    <value>If you are upgrading to [XenServer] {1} and above, the Control Domain memory on {0} will be increased. 
+    <value>If you are upgrading to {0} {1} and above, the Control Domain memory on {2} will be increased. 
 
 This might result in failure to migrate VMs to this server during the RPU or to accommodate after the upgrade all the VMs that are currently residing on this server.</value>
   </data>
@@ -6854,7 +6848,7 @@ This might result in failure to migrate VMs to this server during the RPU or to 
     <value>{0}: This server might not be able to accommodate all its VMs after the upgrade, due to an increase in Control Domain memory.</value>
   </data>
   <data name="HOST_MEMORY_POST_UPGRADE_VERSION_WARNING_LONG" xml:space="preserve">
-    <value>The Control Domain memory on {0} will be increased when upgrading to [XenServer] {1}. 
+    <value>The Control Domain memory on {0} will be increased when upgrading to {1} {2}. 
 
 This might result in failure to migrate VMs to this server during the RPU or to accommodate after the upgrade all the VMs that are currently residing on this server.</value>
   </data>
@@ -7234,7 +7228,7 @@ This might result in failure to migrate VMs to this server during the RPU or to 
     <value>Locate the file you want to import</value>
   </data>
   <data name="IMPORT_TEMPLATE_ALREADY_EXISTS" xml:space="preserve">
-    <value>The [XenServer] Template that you are attempting to import already exists in the selected pool.</value>
+    <value>The {0} Template that you are attempting to import already exists in the selected pool.</value>
   </data>
   <data name="IMPORT_TEMPLATE_CONFIGURE_STORAGE" xml:space="preserve">
     <value>Configure storage for the new template</value>
@@ -7357,7 +7351,7 @@ This might result in failure to migrate VMs to this server during the RPU or to 
     <value>Select the storage repository for the imported virtual machine.</value>
   </data>
   <data name="INCOMPATIBLE_PRODUCTS" xml:space="preserve">
-    <value>This server version is incompatible with [XenCenter].</value>
+    <value>This server version is incompatible with {0}.</value>
   </data>
   <data name="INCOMPATIBLE_PROTOCOL_VERSION" xml:space="preserve">
     <value>Incompatible protocol version</value>
@@ -7384,7 +7378,7 @@ This might result in failure to migrate VMs to this server during the RPU or to 
     <value>Disk and memory snapshots need I/O drivers to be installed</value>
   </data>
   <data name="INFO_DISKMEMORY_MODE_NO_TOOLS" xml:space="preserve">
-    <value>Disk and memory snapshots need [Citrix VM Tools] to be installed</value>
+    <value>Disk and memory snapshots need {0} to be installed</value>
   </data>
   <data name="INFO_DISKMEMORY_MODE_POWER_STATE" xml:space="preserve">
     <value>Disk and memory snapshots need the VM to be running</value>
@@ -7399,7 +7393,7 @@ This might result in failure to migrate VMs to this server during the RPU or to 
     <value>Quiesced snapshots need Management Agent to be installed</value>
   </data>
   <data name="INFO_QUIESCE_MODE_NO_TOOLS" xml:space="preserve">
-    <value>Quiesced snapshots need [Citrix VM Tools] to be installed</value>
+    <value>Quiesced snapshots need {0} to be installed</value>
   </data>
   <data name="INFO_QUIESCE_MODE_POWER_STATE" xml:space="preserve">
     <value>Quiesced snapshots need the VM to be running</value>
@@ -7423,22 +7417,22 @@ This might result in failure to migrate VMs to this server during the RPU or to 
     <value>Could not find a CD drive on the selected VM.</value>
   </data>
   <data name="INSTALLTOOLS_COULDNOTFIND_WIN" xml:space="preserve">
-    <value>Could not find the [Citrix VM Tools] install disk.</value>
+    <value>Could not find the {0} install disk.</value>
   </data>
   <data name="INSTALLTOOLS_DONE" xml:space="preserve">
-    <value>[Citrix VM Tools] installation launched.</value>
+    <value>{0} installation launched.</value>
   </data>
   <data name="INSTALLTOOLS_EXIST" xml:space="preserve">
-    <value>[Citrix VM Tools] are already installed on this VM.</value>
+    <value>{0} are already installed on this VM.</value>
   </data>
   <data name="INSTALLTOOLS_READ_MORE" xml:space="preserve">
-    <value>Read more about installing [Citrix VM Tools]</value>
+    <value>Read more about installing {0}</value>
   </data>
   <data name="INSTALLTOOLS_STARTING" xml:space="preserve">
-    <value>Launching [Citrix VM Tools] installation.</value>
+    <value>Launching {0} installation.</value>
   </data>
   <data name="INSTALLTOOLS_TITLE" xml:space="preserve">
-    <value>Installing [Citrix VM Tools] on VM {0}</value>
+    <value>Installing {0} on VM {1}</value>
   </data>
   <data name="INSTALL_FILES_CANNOT_BE_FOUND" xml:space="preserve">
     <value>{0}: Could not find install files at the specified network location</value>
@@ -7448,6 +7442,9 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   </data>
   <data name="INSTALL_PENDING_UPDATES" xml:space="preserve">
     <value>Install pending &amp;updates...</value>
+  </data>
+  <data name="INSTALL_PENDING_UPDATES_DISABLED_REASON" xml:space="preserve">
+    <value>{0} cannot be used for installing updates on servers running {1} {2}. Please use {3} {2} instead.</value>
   </data>
   <data name="INSTALL_SERVER_CERTIFICATE_ACTION_LINK" xml:space="preserve">
     <value>Install certificate...</value>
@@ -7465,10 +7462,10 @@ This might result in failure to migrate VMs to this server during the RPU or to 
     <value>Installing certificate on server {0}...</value>
   </data>
   <data name="INSTALL_XENSERVER_TOOLS" xml:space="preserve">
-    <value>Install [Citrix VM Tools]</value>
+    <value>Install {0}</value>
   </data>
   <data name="INSTALL_XENSERVER_TOOLS_BUTTON" xml:space="preserve">
-    <value>&amp;Install [Citrix VM Tools]</value>
+    <value>&amp;Install {0}</value>
   </data>
   <data name="INSTANT_VM_CREATE_DESC_COMPLETED" xml:space="preserve">
     <value>Created VM '{0}'</value>
@@ -7637,52 +7634,40 @@ SR UUID: {1}</value>
     <value>Activated</value>
   </data>
   <data name="LICENSE_EDITION_DESKTOP" xml:space="preserve">
-    <value>[Citrix] Virtual &amp;Apps and Desktops</value>
+    <value>{0} Virtual &amp;Apps and Desktops</value>
   </data>
   <data name="LICENSE_EDITION_DESKTOP_CLOUD" xml:space="preserve">
-    <value>[Citrix] Virtual Apps and Desktops [Citrix] &amp;Cloud</value>
+    <value>{0} Virtual Apps and Desktops {0} &amp;Cloud</value>
   </data>
   <data name="LICENSE_EDITION_DESKTOP_CLOUD_LEGACY" xml:space="preserve">
-    <value>XenApp/XenDesktop [Citrix] &amp;Cloud</value>
+    <value>XenApp/XenDesktop {0} &amp;Cloud</value>
   </data>
   <data name="LICENSE_EDITION_DESKTOP_LEGACY" xml:space="preserve">
     <value>XenApp/Xen&amp;Desktop</value>
   </data>
   <data name="LICENSE_EDITION_DESKTOP_PLUS" xml:space="preserve">
-    <value>[Citrix] Virtual Apps and Desktops &amp;Premium</value>
+    <value>{0} Virtual Apps and Desktops &amp;Premium</value>
   </data>
   <data name="LICENSE_EDITION_DESKTOP_PLUS_LEGACY" xml:space="preserve">
     <value>XenApp/XenDesktop &amp;Platinum</value>
   </data>
   <data name="LICENSE_EDITION_ENTERPRISE_PERSOCKET" xml:space="preserve">
-    <value>[XenServer product] P&amp;remium Per-Socket ({0} required)</value>
+    <value>{0} P&amp;remium Per-Socket ({1} required)</value>
   </data>
   <data name="LICENSE_EDITION_ENTERPRISE_PERSOCKET_LEGACY" xml:space="preserve">
-    <value>{1} E&amp;nterprise Per-Socket ({0} required)</value>
+    <value>{0} E&amp;nterprise Per-Socket ({1} required)</value>
   </data>
   <data name="LICENSE_EDITION_ENTERPRISE_PERUSER" xml:space="preserve">
-    <value>[XenServer product] Pr&amp;emium Per-User</value>
+    <value>{0} Pr&amp;emium Per-User</value>
   </data>
   <data name="LICENSE_EDITION_ENTERPRISE_PERUSER_LEGACY" xml:space="preserve">
     <value>{0} &amp;Enterprise Per-User</value>
   </data>
-  <data name="LICENSE_EDITION_PERSOCKET" xml:space="preserve">
-    <value>[XenServer product] Per-&amp;Socket ({0} required)</value>
-  </data>
-  <data name="LICENSE_EDITION_PERSOCKET_LEGACY" xml:space="preserve">
-    <value>{1} Per-&amp;Socket ({0} required)</value>
-  </data>
   <data name="LICENSE_EDITION_STANDARD_PERSOCKET" xml:space="preserve">
-    <value>[XenServer product] &amp;Standard Per-Socket ({0} required)</value>
+    <value>{0} &amp;Standard Per-Socket ({1} required)</value>
   </data>
   <data name="LICENSE_EDITION_STANDARD_PERSOCKET_LEGACY" xml:space="preserve">
-    <value>{1} &amp;Standard Per-Socket ({0} required)</value>
-  </data>
-  <data name="LICENSE_EDITION_XENDESKTOP" xml:space="preserve">
-    <value>[XenServer product] for [Citrix] Virtual &amp;Desktops</value>
-  </data>
-  <data name="LICENSE_EDITION_XENDESKTOP_LEGACY" xml:space="preserve">
-    <value>{0} for &amp;XenDesktop</value>
+    <value>{0} &amp;Standard Per-Socket ({1} required)</value>
   </data>
   <data name="LICENSE_ERROR_1" xml:space="preserve">
     <value>The licensing action for {0} failed.</value>
@@ -7713,10 +7698,6 @@ SR UUID: {1}</value>
   </data>
   <data name="LICENSE_EXPIRES_ONE_MIN" xml:space="preserve">
     <value>Expires in 1 minute</value>
-  </data>
-  <data name="LICENSE_EXPIRY_PURCHACE" xml:space="preserve">
-    <value>[XenServer] Online</value>
-    <comment>this text could be improved</comment>
   </data>
   <data name="LICENSE_FIELD_DISABLED" xml:space="preserve">
     <value>This field is disabled due to license restrictions on the server.</value>
@@ -7761,7 +7742,7 @@ SR UUID: {1}</value>
     <value>The license for a host cannot be changed when HA is on</value>
   </data>
   <data name="LICENSE_NO_MULTISELECT_ACTIVATE" xml:space="preserve">
-    <value>Servers must be selected one at a time when activating Express [XenServer].</value>
+    <value>Servers must be selected one at a time when activating Express {0}.</value>
   </data>
   <data name="LICENSE_NO_MULTISELECT_LICENSE" xml:space="preserve">
     <value>When licensing servers earlier than {0}, you must select one server at a time.</value>
@@ -7792,15 +7773,15 @@ SR UUID: {1}</value>
   </data>
   <data name="LICENSE_SUPPORT_AND_DESKTOP_CLOUD_FEATURES_ENABLED" xml:space="preserve">
     <value>Eligible for support 
-[Citrix] Virtual Apps and Desktops [Citrix] Cloud features enabled</value>
+{0} Virtual Apps and Desktops {0} Cloud features enabled</value>
   </data>
   <data name="LICENSE_SUPPORT_AND_DESKTOP_FEATURES_ENABLED" xml:space="preserve">
     <value>Eligible for support 
-[Citrix] Virtual Apps and Desktops features enabled</value>
+{0} Virtual Apps and Desktops features enabled</value>
   </data>
   <data name="LICENSE_SUPPORT_AND_DESKTOP_PLUS_FEATURES_ENABLED" xml:space="preserve">
     <value>Eligible for support 
-[Citrix] Virtual Apps and Desktops Premium features enabled</value>
+{0} Virtual Apps and Desktops Premium features enabled</value>
   </data>
   <data name="LICENSE_SUPPORT_AND_ENTERPRISE_FEATURES_ENABLED" xml:space="preserve">
     <value>Eligible for support 
@@ -7813,9 +7794,6 @@ Premium features enabled</value>
   <data name="LICENSE_SUPPORT_AND_STANDARD_FEATURES_ENABLED" xml:space="preserve">
     <value>Eligible for support 
 Standard features only</value>
-  </data>
-  <data name="LICENSE_TOO_MANY_SERVERS_SELECTED_CAPTION" xml:space="preserve">
-    <value>Activation keys can only be applied to one Express [XenServer] product at a time.</value>
   </data>
   <data name="LICENSE_UNLICENSED" xml:space="preserve">
     <value>Unlicensed</value>
@@ -7840,12 +7818,6 @@ Standard features only</value>
   </data>
   <data name="LICENSE_YOUR_LICENCE_HAS_EXPIRED" xml:space="preserve">
     <value>Your license has expired</value>
-  </data>
-  <data name="LICENSING_DIALOG_EXPIRED_TEXT" xml:space="preserve">
-    <value>One or more managed servers have expired. Either assign [XenServer] licenses, or activate Express [XenServer] products.</value>
-  </data>
-  <data name="LICENSING_DIALOG_EXPIRING_SOON_TEXT" xml:space="preserve">
-    <value>One or more managed servers will expire soon. Either assign [XenServer] licenses, or activate Express [XenServer] products.</value>
   </data>
   <data name="LINK_STATUS" xml:space="preserve">
     <value>Link Status</value>
@@ -7946,9 +7918,6 @@ Size: {3}</value>
   </data>
   <data name="MAIL_LANGUAGE_JAPANESE_NAME" xml:space="preserve">
     <value>Japanese (Japan)</value>
-  </data>
-  <data name="MAINTENANCE_MODE" xml:space="preserve">
-    <value>Maintenance Mode</value>
   </data>
   <data name="MAINWINDOW_ADD_HOST" xml:space="preserve">
     <value>&amp;Add...</value>
@@ -8072,10 +8041,10 @@ This will permanently delete and reinitialize all local storage on the servers. 
     <value>Edit Ta&amp;gs...</value>
   </data>
   <data name="MAINWINDOW_EXPIRE_MESSAGE" xml:space="preserve">
-    <value>The [XenServer] license on '{0}' will expire in {1}.</value>
+    <value>The {0} license on '{1}' will expire in {2}.</value>
   </data>
   <data name="MAINWINDOW_EXPIRE_MESSAGE_TOO_LATE" xml:space="preserve">
-    <value>The [XenServer] license on '{0}' has expired.</value>
+    <value>The {0} license on '{1}' has expired.</value>
   </data>
   <data name="MAINWINDOW_EXPORT_POOL_RESOURCE_DATA" xml:space="preserve">
     <value>E&amp;xport Resource Data...</value>
@@ -8114,7 +8083,7 @@ This will permanently delete and reinitialize all local storage on the servers. 
     <value>&amp;High Availability</value>
   </data>
   <data name="MAINWINDOW_INSTALL_TOOLS" xml:space="preserve">
-    <value>Inst&amp;all [Citrix VM Tools]...</value>
+    <value>Inst&amp;all {0}...</value>
   </data>
   <data name="MAINWINDOW_INSTANT_VM_FROM_TEMPLATE" xml:space="preserve">
     <value>&amp;Quick Create</value>
@@ -8180,7 +8149,7 @@ This will permanently delete and reinitialize all local storage on the servers. 
     <value>Start in Reco&amp;very Mode</value>
   </data>
   <data name="MAINWINDOW_REMOVE_HOST" xml:space="preserve">
-    <value>Remo&amp;ve from [XenCenter]</value>
+    <value>Remo&amp;ve from {0}</value>
   </data>
   <data name="MAINWINDOW_REMOVE_HOST_CRASHDUMPS" xml:space="preserve">
     <value>Remove Crash Dump &amp;Files</value>
@@ -8311,8 +8280,8 @@ This will permanently delete and reinitialize all local storage on the servers. 
   <data name="MANUAL_CHECK_FOR_UPDATES_UNLICENSED_INFO" xml:space="preserve">
     <value>Subscription Advantage required</value>
   </data>
-  <data name="MASTER" xml:space="preserve">
-    <value>Master</value>
+  <data name="COORDINATOR" xml:space="preserve">
+    <value>Coordinator</value>
   </data>
   <data name="MAX" xml:space="preserve">
     <value>Max</value>
@@ -8325,9 +8294,6 @@ This will permanently delete and reinitialize all local storage on the servers. 
   </data>
   <data name="MEMORY_COLON" xml:space="preserve">
     <value>&amp;Memory:</value>
-  </data>
-  <data name="MEMORY_XEN" xml:space="preserve">
-    <value>[XenServer]</value>
   </data>
   <data name="MEM_NOT_WHEN_SUSPENDED" xml:space="preserve">
     <value>The memory cannot be changed when the VM is suspended</value>
@@ -8534,10 +8500,10 @@ This action is final and unrecoverable.</value>
     <value>Writing password information failed: {0}</value>
   </data>
   <data name="MESSAGEBOX_POOL_DELETE" xml:space="preserve">
-    <value>The pool Master will become a standalone server, are you sure you want to continue?</value>
+    <value>The pool Coordinator will become a standalone server, are you sure you want to continue?</value>
   </data>
-  <data name="MESSAGEBOX_POOL_MASTER_REMOVE" xml:space="preserve">
-    <value>You cannot remove the master from the pool.</value>
+  <data name="MESSAGEBOX_POOL_COORDINATOR_REMOVE" xml:space="preserve">
+    <value>You cannot remove the coordinator from the pool.</value>
   </data>
   <data name="MESSAGEBOX_PROGRAM_UNEXPECTED" xml:space="preserve">
     <value>[{0}] There has been an unexpected error. Technical details about this error have been saved to the following file. Please send this to your support representative.
@@ -8545,7 +8511,7 @@ This action is final and unrecoverable.</value>
 {1}</value>
   </data>
   <data name="MESSAGEBOX_PROGRAM_UNEXPECTED_TITLE" xml:space="preserve">
-    <value>[XenCenter] - Error</value>
+    <value>{0} - Error</value>
   </data>
   <data name="MESSAGEBOX_RECONNECT_FAIL" xml:space="preserve">
     <value>Unable to reconnect to {0}. Server is unavailable.</value>
@@ -8581,8 +8547,8 @@ Do you want to continue?</value>
 
 Do you want to continue?</value>
   </data>
-  <data name="MESSAGEBOX_SLAVES_EJECT" xml:space="preserve">
-    <value>You must eject all slaves from the pool before you can delete the pool.</value>
+  <data name="MESSAGEBOX_POOL_MEMBERS_EJECT" xml:space="preserve">
+    <value>You must eject all other pool members from the pool before you can delete the pool.</value>
   </data>
   <data name="MESSAGEBOX_VIF_DELETE" xml:space="preserve">
     <value>This will delete the selected network interface permanently. Continue?</value>
@@ -8666,7 +8632,7 @@ Do you want to continue?</value>
     <value>Multipath capable</value>
   </data>
   <data name="MULTIPATH_FAILED" xml:space="preserve">
-    <value>One or more paths to at least one of your storages has failed. Refer to the "[XenServer product] Administrator's Guide" for information about configuring storage multipathing.</value>
+    <value>One or more paths to at least one of your storages has failed. Refer to the "{0} Administrator's Guide" for information about configuring storage multipathing.</value>
   </data>
   <data name="MULTIPATH_NOT_ACTIVE" xml:space="preserve">
     <value>Not active</value>
@@ -8751,12 +8717,12 @@ You can also assign IP addresses for dedicated storage or other types of network
     <value>Configure IP Addresses - {0}</value>
   </data>
   <data name="NETWORKING_PROPERTIES_WARNING_CHANGING_MANAGEMENT_HOST" xml:space="preserve">
-    <value>You are reconfiguring the primary management interface.  If the new settings are incorrect then [XenCenter] may permanently lose the connection to the server.
+    <value>You are reconfiguring the primary management interface.  If the new settings are incorrect then {0} may permanently lose the connection to the server.
 
 You should only proceed if you have verified that these settings are correct.</value>
   </data>
   <data name="NETWORKING_PROPERTIES_WARNING_CHANGING_MANAGEMENT_POOL" xml:space="preserve">
-    <value>You are reconfiguring the primary management interface.  If the new settings are incorrect then [XenCenter] may permanently lose the connection to the server, or pool members may be unable to contact each other.
+    <value>You are reconfiguring the primary management interface.  If the new settings are incorrect then {0} may permanently lose the connection to the server, or pool members may be unable to contact each other.
 
 You should only proceed if you have verified that these settings are correct.</value>
   </data>
@@ -8890,7 +8856,7 @@ You should only proceed if you have verified that these settings are correct.</v
     <value>You need to shut down and then restart the VM before it can access the new disk.</value>
   </data>
   <data name="NEWER_GUI_AVAILABLE" xml:space="preserve">
-    <value>There is a newer version of [XenCenter] available. Please contact your support representative.</value>
+    <value>There is a newer version of {0} available. Please contact your support representative.</value>
   </data>
   <data name="NEWNETWORKWIZARD_TITLE" xml:space="preserve">
     <value>New Network - {0}</value>
@@ -8904,23 +8870,23 @@ You should only proceed if you have verified that these settings are correct.</v
   <data name="NEW_POOL_CLUSTERING_ENABLED" xml:space="preserve">
     <value>Clustering is enabled on this server.</value>
   </data>
-  <data name="NEWPOOL_DIFFERENT_HOMOGENEOUS_UPDATES_FROM_MASTER" xml:space="preserve">
-    <value>This server has different updates from the master</value>
+  <data name="NEWPOOL_DIFFERENT_HOMOGENEOUS_UPDATES_FROM_COORDINATOR" xml:space="preserve">
+    <value>This server has different updates from the coordinator</value>
   </data>
   <data name="NEWPOOL_DIFFERENT_HOMOGENEOUS_UPDATES_FROM_POOL" xml:space="preserve">
     <value>This server has different updates from servers already in the pool</value>
   </data>
   <data name="NEWPOOL_DIFFERENT_NETWORK_BACKENDS" xml:space="preserve">
-    <value>This server's network backend is different from the master's</value>
+    <value>This server's network backend is different from the coordinator's</value>
   </data>
   <data name="NEWPOOL_DIFFERING_AD_CONFIG" xml:space="preserve">
-    <value>This server has a different Active Directory configuration to the master</value>
+    <value>This server has a different Active Directory configuration to the coordinator</value>
   </data>
   <data name="NEWPOOL_DIFF_HARDWARE" xml:space="preserve">
-    <value>This server's hardware is incompatible with the master's</value>
+    <value>This server's hardware is incompatible with the coordinator's</value>
   </data>
   <data name="NEWPOOL_DIFF_SERVER" xml:space="preserve">
-    <value>This server is a different version to the master</value>
+    <value>This server is a different version to the coordinator</value>
   </data>
   <data name="NEWPOOL_HAS_RUNNING_VMS" xml:space="preserve">
     <value>This server has running VMs</value>
@@ -8935,25 +8901,25 @@ You should only proceed if you have verified that these settings are correct.</v
     <value>This server needs to have one (and only one) IP address on the network that will be used for clustering.</value>
   </data>
   <data name="NEWPOOL_IS_A_POOL" xml:space="preserve">
-    <value>This server is master of an existing pool</value>
+    <value>This server is coordinator of an existing pool</value>
   </data>
-  <data name="NEWPOOL_LICENSED_HOST_UNLICENSED_MASTER" xml:space="preserve">
+  <data name="NEWPOOL_LICENSED_HOST_UNLICENSED_COORDINATOR" xml:space="preserve">
     <value>You cannot add a licensed server to an unlicensed pool</value>
   </data>
   <data name="NEWPOOL_LICENSEMISMATCH" xml:space="preserve">
-    <value>This server does not have the same license as the pool master</value>
+    <value>This server does not have the same license as the pool coordinator</value>
   </data>
   <data name="NEWPOOL_LINUXPACK" xml:space="preserve">
-    <value>This server's Linux pack installation state differs from that of the master</value>
+    <value>This server's Linux pack installation state differs from that of the coordinator</value>
   </data>
-  <data name="NEWPOOL_MASTER_CONNECTING" xml:space="preserve">
-    <value>The master is still connecting</value>
+  <data name="NEWPOOL_COORDINATOR_CONNECTING" xml:space="preserve">
+    <value>The coordinator is still connecting</value>
   </data>
-  <data name="NEWPOOL_MASTER_DISCONNECTED" xml:space="preserve">
-    <value>The master is disconnected</value>
+  <data name="NEWPOOL_COORDINATOR_DISCONNECTED" xml:space="preserve">
+    <value>The coordinator is disconnected</value>
   </data>
-  <data name="NEWPOOL_MASTER_ROLE" xml:space="preserve">
-    <value>Your current role on the master is not authorized to add hosts to the master's pool</value>
+  <data name="NEWPOOL_COORDINATOR_ROLE" xml:space="preserve">
+    <value>Your current role on the coordinator is not authorized to add hosts to the coordinator's pool</value>
   </data>
   <data name="NEWPOOL_MAX_NUMBER_HOST_REACHED" xml:space="preserve">
     <value>The pool has already reached the maximum number of servers allowed by your license</value>
@@ -8961,10 +8927,10 @@ You should only proceed if you have verified that these settings are correct.</v
   <data name="NEWPOOL_POOLINGRESTRICTED" xml:space="preserve">
     <value>Pooling is restricted with this server's license</value>
   </data>
-  <data name="NEWPOOL_SLAVE_ROLE" xml:space="preserve">
-    <value>Your current role on the slave is not authorized to add the slave to a pool</value>
+  <data name="NEWPOOL_SUPPORTER_ROLE" xml:space="preserve">
+    <value>Your current role on this server is not authorized to add it to a pool</value>
   </data>
-  <data name="NEWPOOL_UNLICENSED_HOST_LICENSED_MASTER" xml:space="preserve">
+  <data name="NEWPOOL_UNLICENSED_HOST_LICENSED_COORDINATOR" xml:space="preserve">
     <value>You cannot add an unlicensed server to a licensed pool</value>
   </data>
   <data name="NEWPOOL_WILL_EXCEED_POOL_MAX_SIZE" xml:space="preserve">
@@ -9035,7 +9001,7 @@ When you configure a SMB storage repository, you simply provide the host name or
     <value>StorageLink technology</value>
   </data>
   <data name="NEWSR_EQUAL_LOGIC_BLURB" xml:space="preserve">
-    <value>Dell EqualLogic is a scalable form of high performance network attached storage, which supports the addition of capacity without downtime. You can use Dell EqualLogic shared storage to support [XenServer] features such as Live Migration and High Availability.</value>
+    <value>Dell EqualLogic is a scalable form of high performance network attached storage, which supports the addition of capacity without downtime. You can use Dell EqualLogic shared storage to support {0} features such as Live Migration and High Availability.</value>
   </data>
   <data name="NEWSR_EQUAL_LOGIC_DESCRIPTION" xml:space="preserve">
     <value>Dell EqualLogic SR [{0} ({1})]</value>
@@ -9083,7 +9049,7 @@ When you configure a SMB storage repository, you simply provide the host name or
     <value>This LUN is already in use as SR {0} on server {1}.</value>
   </data>
   <data name="NEWSR_LVMOFCOE_BLURB" xml:space="preserve">
-    <value>[XenServer] hosts support Software based Fibre Channel over Ethernet using supported Converged Network Adapters (CNAs) which support FCoE in this way.
+    <value>{0} hosts support Software based Fibre Channel over Ethernet using supported Converged Network Adapters (CNAs) which support FCoE in this way.
 
 All configuration required to expose a LUN to the host must be completed manually, including configuring your FCoE fabric, and allocating LUN(s) to your CNA’s public world wide name (PWWN). 
 
@@ -9096,9 +9062,9 @@ Once this configuration has been carried out, this wizard will walk you through 
     <value>Software FCoE</value>
   </data>
   <data name="NEWSR_LVMOHBA_BLURB" xml:space="preserve">
-    <value>[XenServer] hosts support Fibre Channel (FC), Fibre Channel over Ethernet (FCoE) and shared Serial Attached SCSI (SAS) storage area networks (SANs) using host bus adapters (HBAs).
+    <value>{0} hosts support Fibre Channel (FC), Fibre Channel over Ethernet (FCoE) and shared Serial Attached SCSI (SAS) storage area networks (SANs) using host bus adapters (HBAs).
 
-All configuration required to expose a LUN to the host must be completed manually, including storage devices, network devices, and the HBA within the [XenServer] host.
+All configuration required to expose a LUN to the host must be completed manually, including storage devices, network devices, and the HBA within the {0} host.
 
 Once all configuration is complete the HBA will expose a SCSI device backed by the LUN to the host. The SCSI device can then be used to access the LUN as if it were a locally attached SCSI device.</value>
   </data>
@@ -9142,9 +9108,9 @@ Once all configuration is complete the HBA will expose a SCSI device backed by t
     <value>iSCSI</value>
   </data>
   <data name="NEWSR_MULTI_POOL_WARNING" xml:space="preserve">
-    <value>Warning: you must ensure that the following SR is not in use by any server not connected to [XenCenter]. Failure to do so may result in data loss.
+    <value>Warning: you must ensure that the following SR is not in use by any server not connected to {0}. Failure to do so may result in data loss.
 
-SR:  {0}
+SR:  {1}
 
 Do you want to reattach the SR?</value>
   </data>
@@ -9459,13 +9425,10 @@ Review these settings, then click Previous if you need to change anything. Other
     <value>Configure storage for the new VM</value>
   </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_XC_SELECTION" xml:space="preserve">
-    <value>[XenCenter] has selected a different SR for you.</value>
+    <value>{0} has selected a different SR for you.</value>
   </data>
   <data name="NEWVMWIZARD_TEMPLATEPAGE_CENTOS" xml:space="preserve">
     <value>CentOS</value>
-  </data>
-  <data name="NEWVMWIZARD_TEMPLATEPAGE_CITRIX" xml:space="preserve">
-    <value>[Citrix]</value>
   </data>
   <data name="NEWVMWIZARD_TEMPLATEPAGE_COREOS" xml:space="preserve">
     <value>CoreOS</value>
@@ -9478,6 +9441,9 @@ Review these settings, then click Previous if you need to change anything. Other
   </data>
   <data name="NEWVMWIZARD_TEMPLATEPAGE_GOOROOM" xml:space="preserve">
     <value>Gooroom</value>
+  </data>
+  <data name="NEWVMWIZARD_TEMPLATEPAGE_ROCKY" xml:space="preserve">
+    <value>Rocky</value>
   </data>
   <data name="NEWVMWIZARD_TEMPLATEPAGE_LINX" xml:space="preserve">
     <value>Linx</value>
@@ -9528,10 +9494,10 @@ Review these settings, then click Previous if you need to change anything. Other
     <value>Assign a virtual GPU</value>
   </data>
   <data name="NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_POOL" xml:space="preserve">
-    <value>This pool is only licensed for [Citrix] Virtual Apps and Desktops workloads</value>
+    <value>This pool is only licensed for {0} Virtual Apps and Desktops workloads</value>
   </data>
   <data name="NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_SERVER" xml:space="preserve">
-    <value>This server is only licensed for [Citrix] Virtual Apps and Desktops workloads</value>
+    <value>This server is only licensed for {0} Virtual Apps and Desktops workloads</value>
   </data>
   <data name="NEWVM_DEFAULTNAME" xml:space="preserve">
     <value>{0} ({1})</value>
@@ -9552,7 +9518,7 @@ Review these settings, then click Previous if you need to change anything. Other
     <value>New Virtual Network Interface - {0}</value>
   </data>
   <data name="NEW_DVD_DRIVES_REQUIRED" xml:space="preserve">
-    <value>At least one of the VMs you want to install [Citrix VM Tools] onto has no DVD drive. Would you like to create a new DVD drive for each of the VMs that requires one?</value>
+    <value>At least one of the VMs you want to install {0} onto has no DVD drive. Would you like to create a new DVD drive for each of the VMs that requires one?</value>
   </data>
   <data name="NEW_DVD_DRIVE_CREATE_TITLE" xml:space="preserve">
     <value>Creating new DVD drive on VM {0}</value>
@@ -9568,10 +9534,10 @@ Review these settings, then click Previous if you need to change anything. Other
   </data>
   <data name="NEW_DVD_DRIVE_REBOOT_TOOLS" xml:space="preserve">
     <value>You must shut down and then restart the VM to finish the installation of the new DVD drive.
-Once the VM has restarted click the Install [Citrix VM Tools] menu item once again.</value>
+Once the VM has restarted click the Install {0} menu item once again.</value>
   </data>
   <data name="NEW_DVD_DRIVE_REQUIRED" xml:space="preserve">
-    <value>The VM you want to install [Citrix VM Tools] onto has no DVD drive, would you like to create one?</value>
+    <value>The VM you want to install {0} onto has no DVD drive, would you like to create one?</value>
   </data>
   <data name="NEW_FOLDER" xml:space="preserve">
     <value>&amp;New Folder...</value>
@@ -9589,44 +9555,44 @@ Once the VM has restarted click the Install [Citrix VM Tools] menu item once aga
     <value>&amp;New Policy...</value>
   </data>
   <data name="NEW_POOL_AD_MESSAGE" xml:space="preserve">
-    <value>You are attempting to add the server '{0}' to a pool with a master that is configured to use AD authentication. All pool members must use the same authentication method.
+    <value>You are attempting to add the server '{0}' to a pool with a coordinator that is configured to use AD authentication. All pool members must use the same authentication method.
 
 Do you want to enable AD authentication on your server and join it to the same domain as the pool?</value>
   </data>
   <data name="NEW_POOL_AD_MESSAGE_MULTIPLE" xml:space="preserve">
-    <value>You are attempting to add the following servers to a pool with a master that is configured to use AD authentication:
+    <value>You are attempting to add the following servers to a pool with a coordinator that is configured to use AD authentication:
 
 {0}
 
 All pool members must use the same authentication method. Do you want to enable AD authentication on these servers and join them to the same domain as the pool?</value>
   </data>
   <data name="NEW_POOL_CPU_MASKING_MESSAGE" xml:space="preserve">
-    <value>You are attempting to add the server '{0}' to a pool with a master that is using an older CPU.
+    <value>You are attempting to add the server '{0}' to a pool with a coordinator that is using an older CPU.
 
-[XenServer] can continue by rebooting the server and reducing its CPU to the level of the master. This will shut down any VMs running on the server. This feature is supported for CPU combinations listed in the [XenServer] Hardware Compatibility List.
+{1} can continue by rebooting the server and reducing its CPU to the level of the coordinator. This will shut down any VMs running on the server. This feature is supported for CPU combinations listed in the {1} Hardware Compatibility List.
 
 Do you want to do this?</value>
   </data>
   <data name="NEW_POOL_CPU_MASKING_MESSAGE_MULTIPLE" xml:space="preserve">
-    <value>You are attempting to add the following servers to a pool with a master that is using an older CPU:
+    <value>You are attempting to add the following servers to a pool with a coordinator that is using an older CPU:
 
 {0}
 
-[XenServer] can continue by rebooting the servers and reducing their CPUs to the level of the master. This will shut down any VMs running on the servers. This feature is supported for CPU combinations listed in the [XenServer] Hardware Compatibility List.
+{1} can continue by rebooting the servers and reducing their CPUs to the level of the coordinator. This will shut down any VMs running on the servers. This feature is supported for CPU combinations listed in the {1} Hardware Compatibility List.
 
 Do you want to do this?</value>
   </data>
   <data name="NEW_POOL_LICENSE_MESSAGE" xml:space="preserve">
     <value>You are attempting to add the server '{0}' to a licensed pool.
 
-Do you want to apply the licensing from the master to this server?</value>
+Do you want to apply the licensing from the coordinator to this server?</value>
   </data>
   <data name="NEW_POOL_LICENSE_MESSAGE_MULTIPLE" xml:space="preserve">
     <value>You are attempting to add the following servers to a licensed pool.
 
 {0}
 
-Do you want to apply the licensing from the master to these servers?</value>
+Do you want to apply the licensing from the coordinator to these servers?</value>
   </data>
   <data name="NEW_POOL_SUPP_PACK" xml:space="preserve">
     <value>The following supplemental pack should be installed on all servers in a pool, but currently is not:
@@ -9715,9 +9681,6 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="NEW_VM_WIZARD_TEMPLATEPAGE_YINHEKYLIN" xml:space="preserve">
     <value>YinheKylin</value>
   </data>
-  <data name="NEW_XENCENTER_REQUIRED_INFO" xml:space="preserve">
-    <value>New [XenCenter] version required</value>
-  </data>
   <data name="NFS_ISO_ALREADY_ATTACHED" xml:space="preserve">
     <value>This NFS ISO storage is already attached to '{0}'</value>
   </data>
@@ -9742,8 +9705,8 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="NIC_HIDDEN" xml:space="preserve">
     <value>{0} (Hidden)</value>
   </data>
-  <data name="NIC_SLAVE" xml:space="preserve">
-    <value>{0} (Slave)</value>
+  <data name="NIC_BONDED_MEMBER" xml:space="preserve">
+    <value>{0} (Bonded member)</value>
   </data>
   <data name="NIC_TAB_TITLE" xml:space="preserve">
     <value>Network Interface Cards</value>
@@ -9863,7 +9826,7 @@ It is strongly recommended that you Cancel and apply the latest version of the p
     <value>Space available: {0}</value>
   </data>
   <data name="NOT_ENOUGH_SPACE_MESSAGE_CLEANUP" xml:space="preserve">
-    <value>[XenCenter] can free up {0} by removing residual update files. Do you want to proceed with the cleanup?</value>
+    <value>{0} can free up {1} by removing residual update files. Do you want to proceed with the cleanup?</value>
   </data>
   <data name="NOT_ENOUGH_SPACE_MESSAGE_INSTALL" xml:space="preserve">
     <value>There is not enough space on '{0}' to install update '{1}'.</value>
@@ -9952,8 +9915,8 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="NO_DISKS" xml:space="preserve">
     <value>This VM does not have any disks.</value>
   </data>
-  <data name="NO_ELIGIBLE_MASTER" xml:space="preserve">
-    <value>There is no server eligible to become the master of your new pool</value>
+  <data name="NO_ELIGIBLE_COORDINATOR" xml:space="preserve">
+    <value>There is no server eligible to become the coordinator of your new pool</value>
   </data>
   <data name="NO_GPU_IN_POOL" xml:space="preserve">
     <value>GPU configuration and monitoring is disabled, because there are no GPUs available in this pool.</value>
@@ -10165,13 +10128,13 @@ This will cancel the update process and may leave your system in an unstable sta
     <value>No action required</value>
   </data>
   <data name="PATCHINGWIZARD_MODEPAGE_RESTARTSERVERS" xml:space="preserve">
-    <value>Restart these servers in this order (master always first):</value>
+    <value>Restart these servers in this order (coordinator always first):</value>
   </data>
   <data name="PATCHINGWIZARD_MODEPAGE_RESTARTVMS" xml:space="preserve">
     <value>Restart these VMs:</value>
   </data>
   <data name="PATCHINGWIZARD_MODEPAGE_RESTARTXAPI" xml:space="preserve">
-    <value>Restart toolstack on these servers in this order (master always first):</value>
+    <value>Restart toolstack on these servers in this order (coordinator always first):</value>
   </data>
   <data name="PATCHINGWIZARD_MODEPAGE_TEXT" xml:space="preserve">
     <value>Update Mode</value>
@@ -10273,10 +10236,10 @@ This will cancel the update process and may leave your system in an unstable sta
     <value>Select Update</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_TITLE" xml:space="preserve">
-    <value>Choose an existing update to install or upload a new one</value>
+    <value>Choose an update to upload and install</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_UPDATESEXT" xml:space="preserve">
-    <value>[XenServer] Updates and Supplemental Packs (*.{0}, *.iso,*.zip)|*.{0};*.iso;*.zip</value>
+    <value>{0} Updates and Supplemental Packs (*.iso,*.zip)|*.iso;*.zip</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_APPLY_UPDATES" xml:space="preserve">
     <value>Also apply all released &amp;updates on the new version</value>
@@ -10285,16 +10248,13 @@ This will cancel the update process and may leave your system in an unstable sta
     <value>Also apply all released &amp;updates on the new version (only on pools licensed for automated updates)</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_HOST_VERSION" xml:space="preserve">
-    <value>Automated updates are not supported on this [XenServer] version</value>
+    <value>Automated updates are not supported on this {0} version</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_PARTIALLY_UPGRADED" xml:space="preserve">
-    <value>Automated updates are not supported on partially upgraded [XenServer] pools</value>
+    <value>Automated updates are not supported on partially upgraded {0} pools</value>
   </data>
-  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_SUPP_PACKS" xml:space="preserve">
-    <value>Cannot install supplemental packs on this [XenServer] version</value>
-  </data>
-  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_UPDATE_MASTER_POST_7_0" xml:space="preserve">
-    <value>Cannot install updates on this host because the master is running a version higher than {0}</value>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_UPDATE_COORDINATOR_POST_7_0" xml:space="preserve">
+    <value>Cannot install updates on this host because the coordinator is running a version higher than {0}</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED" xml:space="preserve">
     <value>Subscription Advantage required</value>
@@ -10302,8 +10262,8 @@ This will cancel the update process and may leave your system in an unstable sta
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_AUTOMATED_UPDATES" xml:space="preserve">
     <value>One or more servers in the pool are not licensed for automated updates</value>
   </data>
-  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_NEW_VERSION_UPGRADE_SLAVES_FIRST" xml:space="preserve">
-    <value>One or more servers in the pool have to be upgraded before [XenCenter] can apply the selected new version.</value>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_NEW_VERSION_UPGRADE_SUPPORTERS_FIRST" xml:space="preserve">
+    <value>One or more servers in the pool have to be upgraded before {0} can apply the selected new version.</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_ALREADY_APPLIED" xml:space="preserve">
     <value>Update already applied</value>
@@ -10342,6 +10302,9 @@ Servers where this update cannot be applied appear disabled in this list.</value
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_TITLE" xml:space="preserve">
     <value>Select the servers you want to update</value>
   </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_VERSION_UNSUPPORTED" xml:space="preserve">
+    <value>{0} cannot install updates or supplemental packs on this server.</value>
+  </data>
   <data name="PATCHINGWIZARD_SINGLEUPDATE_FAILURE_MANY" xml:space="preserve">
     <value>The installation of update {0} was not completed successfully on all selected servers. The update process has been paused. Press Retry to resume it.</value>
   </data>
@@ -10364,7 +10327,7 @@ Servers where this update cannot be applied appear disabled in this list.</value
     <value>The installation of update {0} was completed successfully.</value>
   </data>
   <data name="PATCHINGWIZARD_SINGLEUPDATE_TITLE" xml:space="preserve">
-    <value>[XenCenter] is now installing update {0} on your system.</value>
+    <value>{0} is now installing update {1} on your system.</value>
   </data>
   <data name="PATCHINGWIZARD_SINGLEUPDATE_WARNING_MANY" xml:space="preserve">
     <value>The installation of update {0} was completed with warnings on some of the selected servers.</value>
@@ -10399,7 +10362,7 @@ This will cancel the upload process.</value>
     <value>The upload of update {0} was completed successfully.</value>
   </data>
   <data name="PATCHINGWIZARD_SINGLEUPLOAD_TITLE" xml:space="preserve">
-    <value>[XenCenter] is now performing the operations necessary to upload your update to the servers specified in the previous step. Please wait for these operations to complete, then click Next to continue with the installation.</value>
+    <value>{0} is now performing the operations necessary to upload your update to the servers specified in the previous step. Please wait for these operations to complete, then click Next to continue with the installation.</value>
   </data>
   <data name="PATCHINGWIZARD_SINGLEUPLOAD_WARNING_MANY" xml:space="preserve">
     <value>The upload of update {0} was completed with warnings on some of the selected servers.</value>
@@ -10414,10 +10377,10 @@ This will cancel the upload process.</value>
     <value>Uploading the selected file to your servers</value>
   </data>
   <data name="PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_AUTOMATED_MODE" xml:space="preserve">
-    <value>[XenCenter] is now installing updates on your system.</value>
+    <value>{0} is now installing updates on your system.</value>
   </data>
   <data name="PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_NEW_VERSION_AUTOMATED_MODE" xml:space="preserve">
-    <value>[XenCenter] is now installing the new version on your system.</value>
+    <value>{0} is now installing the new version on your system.</value>
   </data>
   <data name="PATCHING_EJECT_CDS" xml:space="preserve">
     <value>Eject any virtual CDs from your VMs</value>
@@ -10476,7 +10439,7 @@ Size: {3}</value>
     <value>Installation size: {0}</value>
   </data>
   <data name="PATCH_NEEDS_NEW_XENCENTER" xml:space="preserve">
-    <value>This version requires [XenCenter] {0} or newer</value>
+    <value>This version requires {0} {1} or newer</value>
   </data>
   <data name="PATCH_NOT_FOUND" xml:space="preserve">
     <value>Not found</value>
@@ -10585,10 +10548,10 @@ File not found</value>
     <value>Server '{0}' could not be evacuated because there was not enough free memory on the other servers to migrate all the VMs from this server. Please suspend or shut down some VMs and then press Retry to resume the process.</value>
   </data>
   <data name="PLAN_ACTION_STATUS_INSTALLING_XENSERVER" xml:space="preserve">
-    <value>Installing [XenServer] on '{0}'...</value>
+    <value>Installing {0} on '{1}'...</value>
   </data>
   <data name="PLAN_ACTION_STATUS_INSTALLING_XENSERVER_VERSION" xml:space="preserve">
-    <value>Installing [XenServer] {0} on '{1}'...</value>
+    <value>Installing {0} {1} on '{2}'...</value>
   </data>
   <data name="PLAN_ACTION_STATUS_RECONNECTING_STORAGE" xml:space="preserve">
     <value>Reconnecting storage...</value>
@@ -10603,9 +10566,6 @@ Please reconnect the host and try again</value>
   </data>
   <data name="PLUGINS" xml:space="preserve">
     <value>Plug-ins</value>
-  </data>
-  <data name="PLUGINS_DESC" xml:space="preserve">
-    <value>Adjust settings for plug-ins to [XenCenter]</value>
   </data>
   <data name="PLUGINS_MENU_ITEMS_ONLY_ONE_CHILD_ALLOWED" xml:space="preserve">
     <value>Menu item features must only have a single command XML node as a child</value>
@@ -10725,7 +10685,7 @@ Please reconnect the host and try again</value>
     <value>Pool General Properties</value>
   </data>
   <data name="POOL_GONE" xml:space="preserve">
-    <value>Could not find the pool in [XenCenter]'s cache.</value>
+    <value>Could not find the pool in {0}'s cache.</value>
   </data>
   <data name="POOL_HAS_MIXED_LICENSES" xml:space="preserve">
     <value>This pool has hosts with different types of license.</value>
@@ -10739,11 +10699,11 @@ Please reconnect the host and try again</value>
   <data name="POOL_IS_PARTIALLY_LICENSED" xml:space="preserve">
     <value>The pool is partially licensed</value>
   </data>
-  <data name="POOL_JOIN_CERTIFICATE_CHECKING_ONLY_ON_MASTER" xml:space="preserve">
-    <value>Certificate verification is enabled on master, but not on this server. To create the pool, first enable certificate verification on the server.</value>
+  <data name="POOL_JOIN_CERTIFICATE_CHECKING_ONLY_ON_COORDINATOR" xml:space="preserve">
+    <value>Certificate verification is enabled on coordinator, but not on this server. To create the pool, first enable certificate verification on the server.</value>
   </data>
-  <data name="POOL_JOIN_CERTIFICATE_CHECKING_ONLY_ON_MASTER_JOINER" xml:space="preserve">
-    <value>Certificate verification is enabled on this server, but not on master. To create the pool, first enable certificate verification on master.</value>
+  <data name="POOL_JOIN_CERTIFICATE_CHECKING_ONLY_ON_COORDINATOR_JOINER" xml:space="preserve">
+    <value>Certificate verification is enabled on this server, but not on coordinator. To create the pool, first enable certificate verification on coordinator.</value>
   </data>
   <data name="POOL_JOIN_CERTIFICATE_CHECKING_ONLY_ON_POOL" xml:space="preserve">
     <value>Certificate verification is enabled on the pool, but not on this server. To add the server to the pool, first enable certificate verification on the server.</value>
@@ -10766,11 +10726,11 @@ Please reconnect the host and try again</value>
   <data name="POOL_LICENSE" xml:space="preserve">
     <value>Pool License</value>
   </data>
-  <data name="POOL_MASTER" xml:space="preserve">
-    <value>Pool master</value>
+  <data name="POOL_COORDINATOR" xml:space="preserve">
+    <value>Pool coordinator</value>
   </data>
-  <data name="POOL_MASTER_GONE" xml:space="preserve">
-    <value>Could not find the pool master in [XenCenter]'s cache.</value>
+  <data name="POOL_COORDINATOR_GONE" xml:space="preserve">
+    <value>Could not find the pool coordinator in {0}'s cache.</value>
   </data>
   <data name="POOL_NAME_EMPTY" xml:space="preserve">
     <value>Pool name cannot be empty</value>
@@ -10782,13 +10742,15 @@ Please reconnect the host and try again</value>
     <value>Pool or host is not connected</value>
   </data>
   <data name="POOL_PICKER_BLURB_NO_AFFINITY" xml:space="preserve">
-    <value>Select a pool or stand alone server to import this VM to. The home server setting will be taken from the template.\n\nIf this value does not correspond to a server within the selected resource pool then it will be ignored for all resourcing decisions.</value>
+    <value>Select a pool or stand alone server to import this VM to. The home server setting will be taken from the template.
+
+If this value does not correspond to a server within the selected resource pool then it will be ignored for all resourcing decisions.</value>
   </data>
   <data name="POOL_UPDATE_GONE" xml:space="preserve">
-    <value>Could not find the pool update in [XenCenter]'s cache.</value>
+    <value>Could not find the pool update in {0}'s cache.</value>
   </data>
   <data name="POOL_VERSIONS_LINK_TEXT" xml:space="preserve">
-    <value>Pool partially upgraded to [XenServer] {0}</value>
+    <value>Pool partially upgraded to {0} {1}</value>
   </data>
   <data name="POOL_VERSIONS_LINK_TEXT_SHORT" xml:space="preserve">
     <value>Partially upgraded</value>
@@ -10823,6 +10785,12 @@ Please reconnect the host and try again</value>
   <data name="PROBING_HBA_TITLE" xml:space="preserve">
     <value>Probing for LUNs on {0}</value>
   </data>
+  <data name="PROBLEM_HEALTH_CHECK_SERVICE_DESCRIPTION" xml:space="preserve">
+    <value>{0}: Health Check has been removed in {1} {2}.</value>
+  </data>
+  <data name="PROBLEM_HEALTH_CHECK_HELP" xml:space="preserve">
+    <value>Disable Health Check</value>
+  </data>
   <data name="PROBLEM_HOSTPROBLEM_TITLE" xml:space="preserve">
     <value>Server '{0}'</value>
   </data>
@@ -10856,17 +10824,17 @@ Are you sure you want to continue?</value>
   <data name="PROBLEM_MAC_ADDRESS_IS_DUPLICATE_TITLE" xml:space="preserve">
     <value>Duplicate MAC address</value>
   </data>
-  <data name="PROBLEM_MASTER_PENDING_RESTART_HOST" xml:space="preserve">
-    <value>{0}: The master needs to be rebooted first</value>
+  <data name="PROBLEM_COORDINATOR_PENDING_RESTART_HOST" xml:space="preserve">
+    <value>{0}: The coordinator needs to be rebooted first</value>
   </data>
-  <data name="PROBLEM_MASTER_PENDING_RESTART_HOST_THIS_UPDATE" xml:space="preserve">
-    <value>{0}: This update requires the master to be rebooted first</value>
+  <data name="PROBLEM_COORDINATOR_PENDING_RESTART_HOST_THIS_UPDATE" xml:space="preserve">
+    <value>{0}: This update requires the coordinator to be rebooted first</value>
   </data>
-  <data name="PROBLEM_MASTER_PENDING_RESTART_TOOLSTACK" xml:space="preserve">
-    <value>{0}: Toolstack on master needs to be restarted first</value>
+  <data name="PROBLEM_COORDINATOR_PENDING_RESTART_TOOLSTACK" xml:space="preserve">
+    <value>{0}: Toolstack on coordinator needs to be restarted first</value>
   </data>
-  <data name="PROBLEM_MASTER_PENDING_RESTART_TOOLSTACK_THIS_UPDATE" xml:space="preserve">
-    <value>{0}: This update requires the toolstack on master to be restarted first</value>
+  <data name="PROBLEM_COORDINATOR_PENDING_RESTART_TOOLSTACK_THIS_UPDATE" xml:space="preserve">
+    <value>{0}: This update requires the toolstack on coordinator to be restarted first</value>
   </data>
   <data name="PROBLEM_POOLPROBLEM_TITLE" xml:space="preserve">
     <value>Pool '{0}'</value>
@@ -10895,14 +10863,10 @@ Click Previous if you need to go back and specify a different network location o
     <value>VM '{0}'</value>
   </data>
   <data name="PROBLEM_XENCENTER_VERSION_TITLE" xml:space="preserve">
-    <value>[XenCenter] version</value>
+    <value>{0} version</value>
   </data>
   <data name="PROCEED" xml:space="preserve">
     <value>&amp;Proceed</value>
-  </data>
-  <data name="PROMPT_XS_CD" xml:space="preserve">
-    <value>Please insert the [XenServer] CD into the physical drive on server '{0}'.
-Press OK to continue the wizard and return to the server and follow the instructions on screen.</value>
   </data>
   <data name="PROPERTIES_DIALOG_TITLE" xml:space="preserve">
     <value>'{0}' Properties</value>
@@ -10971,13 +10935,13 @@ Press OK to continue the wizard and return to the server and follow the instruct
     <value>PVS-Accelerator</value>
   </data>
   <data name="PV_DRIVERS_NOT_INSTALLED" xml:space="preserve">
-    <value>[Citrix VM Tools] not installed</value>
+    <value>{0} not installed</value>
   </data>
   <data name="PV_DRIVERS_OUT_OF_DATE" xml:space="preserve">
-    <value>[Citrix VM Tools] out of date (version {0} installed)</value>
+    <value>{0} out of date (version {1}.{2} installed)</value>
   </data>
   <data name="PV_DRIVERS_OUT_OF_DATE_UNKNOWN_VERSION" xml:space="preserve">
-    <value>[Citrix VM Tools] out of date</value>
+    <value>{0} out of date</value>
   </data>
   <data name="PV_GUESTS_CHECK_DESCRIPTION" xml:space="preserve">
     <value>Guest compatibility check</value>
@@ -11372,7 +11336,7 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
     <value>Restore dismissed updates</value>
   </data>
   <data name="RESTORE_FROM_BACKUP_FINALIZE" xml:space="preserve">
-    <value>Backup file loaded to server '{0}'.  Refer to the "[XenServer product] Administrator's Guide" for instructions on how to complete the restore procedure.</value>
+    <value>Backup file loaded to server '{0}'. Refer to the "{1} Administrator's Guide" for instructions on how to complete the restore procedure.</value>
   </data>
   <data name="RESTORE_HOST" xml:space="preserve">
     <value>Restore From Backup...</value>
@@ -11455,12 +11419,6 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   <data name="ROLLING_POOL_UPGRADE_ELLIPSIS" xml:space="preserve">
     <value>Rolling Pool &amp;Upgrade...</value>
   </data>
-  <data name="ROLLING_UPGRADE_APPLY_UPDATES" xml:space="preserve">
-    <value>Apply all released &amp;updates on the new version</value>
-  </data>
-  <data name="ROLLING_UPGRADE_APPLY_UPDATES_MIXED" xml:space="preserve">
-    <value>Apply all released &amp;updates on the new version (only on pools licensed for automated updates)</value>
-  </data>
   <data name="ROLLING_UPGRADE_BUTTON_LABEL_STOP" xml:space="preserve">
     <value>S&amp;top</value>
   </data>
@@ -11497,7 +11455,7 @@ This will cancel the rolling pool upgrade process and may leave your system in a
     <value>Upgrade Options</value>
   </data>
   <data name="ROLLING_UPGRADE_EXTRAS_PAGE_TITLE" xml:space="preserve">
-    <value>Optionally, apply updates or supplemental packs</value>
+    <value>Optionally, apply supplemental packs</value>
   </data>
   <data name="ROLLING_UPGRADE_MODE_PAGE" xml:space="preserve">
     <value>Choose the upgrade mode: Automatic or Manual</value>
@@ -11508,15 +11466,15 @@ This will cancel the rolling pool upgrade process and may leave your system in a
 Check the boot order in the server and reboot again.</value>
   </data>
   <data name="ROLLING_UPGRADE_REBOOT_MESSAGE" xml:space="preserve">
-    <value>To install the [XenServer] upgrade on {0}, follow these steps:
+    <value>To install the {0} upgrade on {1}, follow these steps:
     
-1. Insert the [XenServer] installation CD-ROM in the server’s CD/DVD drive or set up a PXE network boot.
+1. Insert the {0} installation CD-ROM in the server's CD/DVD drive or set up a PXE network boot.
 2. Click the Reboot Now button below to reboot the server and begin the installation.
 3. Go to the server’s console and follow the on-screen instructions to install the upgrade.
 
-To skip this server and continue to the next server in the pool, click Skip This Server. Note that running a pool with servers on different versions of [XenServer] is not supported, and so any servers that are not upgraded during this rolling pool upgrade should be upgraded as soon as possible afterwards.
+To skip this server and continue to the next server in the pool, click Skip This Server. Note that running a pool with servers on different versions of {0} is not supported, and so any servers that are not upgraded during this rolling pool upgrade should be upgraded as soon as possible afterwards.
 
-The master must be upgraded first, so if you skip the master, the rolling pool upgrade will be canceled for this pool.
+The coordinator must be upgraded first, so if you skip the coordinator, the rolling pool upgrade will be canceled for this pool.
 </value>
   </data>
   <data name="ROLLING_UPGRADE_SUCCESS_MANY" xml:space="preserve">
@@ -11526,10 +11484,10 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
     <value>The rolling pool upgrade process was completed successfully.</value>
   </data>
   <data name="ROLLING_UPGRADE_TIMEOUT" xml:space="preserve">
-    <value>Still waiting for the installation of [XenServer] on '{0}' to complete. Please check the server console for possible errors. Keep waiting if the installation is still running...</value>
+    <value>Still waiting for the installation of {0} on '{1}' to complete. Please check the server console for possible errors. Keep waiting if the installation is still running...</value>
   </data>
   <data name="ROLLING_UPGRADE_TIMEOUT_VERSION" xml:space="preserve">
-    <value>Still waiting for the installation of [XenServer] {0} on '{1}' to complete. Please check the server console for possible errors. Keep waiting if the installation is still running...</value>
+    <value>Still waiting for the installation of {0} {1} on '{2}' to complete. Please check the server console for possible errors. Keep waiting if the installation is still running...</value>
   </data>
   <data name="ROLLING_UPGRADE_TITLE_MODE" xml:space="preserve">
     <value>Upgrade Mode</value>
@@ -11564,8 +11522,8 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
   <data name="ROTATE_POOL_SECRET_PENDING_HA" xml:space="preserve">
     <value>You cannot configure HA while a pool secret rotation is in progress.</value>
   </data>
-  <data name="ROTATE_POOL_SECRET_PENDING_NEW_MASTER" xml:space="preserve">
-    <value>You cannot nominate a new master while a pool secret rotation is in progress.</value>
+  <data name="ROTATE_POOL_SECRET_PENDING_NEW_COORDINATOR" xml:space="preserve">
+    <value>You cannot nominate a new coordinator while a pool secret rotation is in progress.</value>
   </data>
   <data name="ROTATE_POOL_SECRET_MENU" xml:space="preserve">
     <value>Rotate &amp;Pool Secret</value>
@@ -11759,7 +11717,7 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
     <value>Servers, VMs, Custom Templates and Remote SRs</value>
   </data>
   <data name="SERVER_API_INCOMPATIBLE" xml:space="preserve">
-    <value>This server is using an API that is incompatible with [XenCenter].</value>
+    <value>This server is using an API that is incompatible with {0}.</value>
   </data>
   <data name="SERVER_COLON" xml:space="preserve">
     <value>Server:</value>
@@ -11769,9 +11727,6 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
   </data>
   <data name="SERVER_LABLE" xml:space="preserve">
     <value>&amp;Server:</value>
-  </data>
-  <data name="SERVER_OUT_OF_DATE" xml:space="preserve">
-    <value>[XenServer] Out of Date</value>
   </data>
   <data name="SERVER_OUT_OF_DATE_DETAIL" xml:space="preserve">
     <value>Server '{0}' is out of date and can no longer be connected to.</value>
@@ -11798,13 +11753,13 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
     <value>Querying server capabilities...</value>
   </data>
   <data name="SERVER_TIME" xml:space="preserve">
-    <value>The current time on the pool master is: {0}</value>
+    <value>The current time on the pool coordinator is: {0}</value>
   </data>
   <data name="SERVER_TOO_OLD" xml:space="preserve">
-    <value>This version of [XenCenter] supports [XenServer] {0} onwards.</value>
+    <value>This version of {0} supports {1} {2} onwards.</value>
   </data>
   <data name="SERVER_TOO_OLD_SOLUTION" xml:space="preserve">
-    <value>Use an earlier version of [XenCenter] to manage this server.</value>
+    <value>Use an earlier version of {0} to manage this server.</value>
   </data>
   <data name="SERVER_X" xml:space="preserve">
     <value>server '{0}'</value>
@@ -11938,11 +11893,11 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
   <data name="SHUTTING_DOWN_VM_OUT_OF" xml:space="preserve">
     <value>Shutting down VM {0} out of {1}</value>
   </data>
-  <data name="SHUT_DOWN_POOL_MASTER_MULTIPLE" xml:space="preserve">
-    <value>{0} are pool masters. It is strongly recommended to nominate a new master for each affected pool before proceeding.</value>
+  <data name="SHUT_DOWN_POOL_COORDINATOR_MULTIPLE" xml:space="preserve">
+    <value>{0} are pool coordinators. It is strongly recommended to nominate a new coordinator for each affected pool before proceeding.</value>
   </data>
-  <data name="SHUT_DOWN_POOL_MASTER_SINGLE" xml:space="preserve">
-    <value>{0} is the pool master. It is strongly recommended to nominate a new master for the pool before proceeding.</value>
+  <data name="SHUT_DOWN_POOL_COORDINATOR_SINGLE" xml:space="preserve">
+    <value>{0} is the pool coordinator. It is strongly recommended to nominate a new coordinator for the pool before proceeding.</value>
   </data>
   <data name="SIGNING_APPLIANCE" xml:space="preserve">
     <value>Applying digital signature to appliance...</value>
@@ -11968,15 +11923,15 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
   <data name="SLACK_LABEL" xml:space="preserve">
     <value>Slack:</value>
   </data>
-  <data name="SLAVE_ALREADY_CONNECTED" xml:space="preserve">
+  <data name="SUPPORTER_ALREADY_CONNECTED" xml:space="preserve">
     <value>Server '{0}' is a member of pool '{1}' and is already connected.</value>
   </data>
-  <data name="SLAVE_CONNECTION_ERROR" xml:space="preserve">
-    <value>Server '{0}' is in a pool.  To connect to a pool, you must connect to the pool master.
-Do you want to connect to the pool master '{1}'?</value>
+  <data name="SUPPORTER_CONNECTION_ERROR" xml:space="preserve">
+    <value>Server '{0}' is in a pool.  To connect to a pool, you must connect to the pool coordinator.
+Do you want to connect to the pool coordinator '{1}'?</value>
   </data>
-  <data name="SLAVE_TOO_OLD" xml:space="preserve">
-    <value>This pool contains servers earlier than [XenServer] {0}. Please use an earlier version of [XenCenter] to manage this pool.</value>
+  <data name="SUPPORTER_TOO_OLD" xml:space="preserve">
+    <value>This pool contains servers earlier than {0} {1}. Please use an earlier version of {2} to manage this pool.</value>
   </data>
   <data name="SMALLER_THAN" xml:space="preserve">
     <value>smaller than</value>
@@ -12074,13 +12029,13 @@ Reverting to this snapshot will revert the VM back to the point in time that the
     <value>Try again using a correct user name and password.</value>
   </data>
   <data name="SOLUTION_CHECK_PROXY" xml:space="preserve">
-    <value>Check that the proxy server on '{0}' is configured correctly and [XenCenter]'s connection settings are correct and try again.</value>
+    <value>Check that the proxy server on '{0}' is configured correctly and {1}'s connection settings are correct and try again.</value>
   </data>
   <data name="SOLUTION_CHECK_XENSERVER" xml:space="preserve">
-    <value>Check that [XenServer] is configured correctly on '{0}' and try again.</value>
+    <value>Check that {0} is configured correctly on '{1}' and try again.</value>
   </data>
   <data name="SOLUTION_CHECK_XENSERVER_WITH_PROXY" xml:space="preserve">
-    <value>Check the proxy settings and that the server is configured correctly on '{0}' and try again.</value>
+    <value>Check the proxy settings and that {0} is configured correctly on '{1}' and try again.</value>
   </data>
   <data name="SOLUTION_HOST_STILL_BOOTING" xml:space="preserve">
     <value>Please wait and then try again.</value>
@@ -12095,7 +12050,7 @@ Reverting to this snapshot will revert the VM back to the point in time that the
     <value />
   </data>
   <data name="SOME_ERRORS_ENCOUNTERED" xml:space="preserve">
-    <value>Some errors were encountered. See the [XenCenter] log for more information.</value>
+    <value>Some errors were encountered. See the application log for more information.</value>
   </data>
   <data name="SPACED_HYPHEN" xml:space="preserve">
     <value> - </value>
@@ -12116,7 +12071,7 @@ Reverting to this snapshot will revert the VM back to the point in time that the
     <value>Create &amp;SR-IOV anyway</value>
   </data>
   <data name="SRIOV_NETWORK_CREATE_WARNING" xml:space="preserve">
-    <value>Creating this SR-IOV network will temporarily disturb [XenCenter] connections to the pool.
+    <value>Creating this SR-IOV network will temporarily disturb {0} connections to the pool.
 
 You may need to reboot your server(s) to enable SR-IOV network.</value>
   </data>
@@ -12160,10 +12115,10 @@ You may need to reboot your server(s) to enable SR-IOV network.</value>
     <value>There is currently an action in progress on this SR.</value>
   </data>
   <data name="SR_CANNOT_BE_DESTROYED_WITH_XC" xml:space="preserve">
-    <value>This SR cannot be destroyed with [XenCenter].</value>
+    <value>This SR cannot be destroyed with {0}.</value>
   </data>
   <data name="SR_CANNOT_BE_FORGOTTEN_WITH_XC" xml:space="preserve">
-    <value>This SR cannot be forgotten with [XenCenter].</value>
+    <value>This SR cannot be forgotten with {0}.</value>
   </data>
   <data name="SR_CANNOT_BE_SEEN" xml:space="preserve">
     <value>This storage repository cannot be seen from {0}</value>
@@ -12331,7 +12286,7 @@ The upper limit: SR size / {2}</value>
     <value>Queued</value>
   </data>
   <data name="STATUS_REPORT_ENTER_CREDENTIALS_MESSAGE" xml:space="preserve">
-    <value>Enter your MyCitrix credentials (see {0}). These credentials will only be used to authenticate with [Citrix] Insight Services once and will not be stored on this machine or on your server.</value>
+    <value>Enter your MyCitrix credentials (see {0}). These credentials will only be used to authenticate with {1} once and will not be stored on this machine or on your server.</value>
   </data>
   <data name="STATUS_REPORT_ZIP_FAILED" xml:space="preserve">
     <value>There was an error while packaging the server status report. Only a partial report may be available</value>
@@ -12435,7 +12390,7 @@ The upper limit: SR size / {2}</value>
   <data name="SUPP_PACK_INSTALL_FAILED" xml:space="preserve">
     <value>Failed to install supplemental pack '{0}' on '{1}'.
 
-Refer to the "[XenServer product] Administrator's Guide" for instructions on how to manually install a supplemental pack on a server.</value>
+Refer to the "{2} Administrator's Guide" for instructions on how to manually install a supplemental pack on a server.</value>
   </data>
   <data name="SUPP_PACK_MISSING_ON" xml:space="preserve">
     <value>{0} (not installed on {1})</value>
@@ -12517,15 +12472,6 @@ Refer to the "[XenServer product] Administrator's Guide" for instructions on how
   </data>
   <data name="TEMPLATE_INFO_OS" xml:space="preserve">
     <value>OS: {0}</value>
-  </data>
-  <data name="TEMPLATE_INFO_TOOLSNOTPRESENT" xml:space="preserve">
-    <value>[Citrix VM Tools]: Not present</value>
-  </data>
-  <data name="TEMPLATE_INFO_TOOLSOLD" xml:space="preserve">
-    <value>[Citrix VM Tools]: Out of date (version {0}.{1} installed)</value>
-  </data>
-  <data name="TEMPLATE_INFO_TOOLSUPTODATE" xml:space="preserve">
-    <value>[Citrix VM Tools]: Up to date</value>
   </data>
   <data name="TEMPLATE_INFO_VCPUS" xml:space="preserve">
     <value>vCPUs: {0}</value>
@@ -12623,9 +12569,6 @@ Refer to the "[XenServer product] Administrator's Guide" for instructions on how
   <data name="TOOLTIP_DEACTIVATE_SYSVDI" xml:space="preserve">
     <value>System disks cannot be activated or deactivated while the VM is running</value>
   </data>
-  <data name="TOOLTIP_DEACTIVATE_VDI_NEED_TOOLS" xml:space="preserve">
-    <value>Disks cannot be activated or deactivated from running VMs without [Citrix VM Tools] installed</value>
-  </data>
   <data name="TOOLTIP_DEACTIVATE_VIF_SUSPENDED" xml:space="preserve">
     <value>Networks cannot be deactivated while the VM is suspended</value>
   </data>
@@ -12638,9 +12581,6 @@ Refer to the "[XenServer product] Administrator's Guide" for instructions on how
   <data name="TOOLTIP_DELETE_SYSVDI" xml:space="preserve">
     <value>System disks cannot be deleted while the VM is running</value>
   </data>
-  <data name="TOOLTIP_DELETE_VDI_NEED_TOOLS" xml:space="preserve">
-    <value>Disks cannot be deleted from running VMs without [Citrix VM Tools] installed</value>
-  </data>
   <data name="TOOLTIP_DETACH_SUSPENDED" xml:space="preserve">
     <value>Disks cannot be removed while the VM is suspended</value>
   </data>
@@ -12650,23 +12590,17 @@ Refer to the "[XenServer product] Administrator's Guide" for instructions on how
   <data name="TOOLTIP_DETACH_VDI_MUST_DEACTIVATE" xml:space="preserve">
     <value>Disks must be deactivated before detaching.</value>
   </data>
-  <data name="TOOLTIP_DETACH_VDI_NEED_TOOLS" xml:space="preserve">
-    <value>Disks cannot be removed from running VMs without [Citrix VM Tools] installed</value>
-  </data>
   <data name="TOOLTIP_EDIT_NETWORK_IO_DRIVERS" xml:space="preserve">
     <value>I/O drivers must be installed to edit a network on a running VM</value>
   </data>
   <data name="TOOLTIP_EDIT_NETWORK_TOOLS" xml:space="preserve">
-    <value>[Citrix VM Tools] must be installed to edit a network on a running VM</value>
+    <value>{0} must be installed to edit a network on a running VM</value>
   </data>
   <data name="TOOLTIP_MAX_NETWORKS_FROM_DEFAULT_TEMPLATE" xml:space="preserve">
     <value>Default templates support a maximum of {0} networks at VM creation</value>
   </data>
   <data name="TOOLTIP_MAX_NETWORKS_FROM_TEMPLATE" xml:space="preserve">
     <value>The maximum number of networks for this template has been reached.</value>
-  </data>
-  <data name="TOOLTIP_NICS_PER_BOND_LIMIT" xml:space="preserve">
-    <value>[XenServer] only supports {0} NICs per Bond.</value>
   </data>
   <data name="TOOLTIP_REMOVE_NETWORK_IO_DRIVERS" xml:space="preserve">
     <value>I/O drivers must be installed to remove a network on a running VM</value>
@@ -12675,7 +12609,7 @@ Refer to the "[XenServer product] Administrator's Guide" for instructions on how
     <value>Networks cannot be removed from suspended VMs</value>
   </data>
   <data name="TOOLTIP_REMOVE_NETWORK_TOOLS" xml:space="preserve">
-    <value>[Citrix VM Tools] must be installed to remove a network on a running VM</value>
+    <value>{0} must be installed to remove a network on a running VM</value>
   </data>
   <data name="TOOLTIP_REMOVE_PIF" xml:space="preserve">
     <value>This network cannot be removed because it is a physical device</value>
@@ -12729,15 +12663,15 @@ Refer to the "[XenServer product] Administrator's Guide" for instructions on how
     <value>UEFI Secure Boot</value>
   </data>
   <data name="UNABLE_TO_IMPORT_SEARCH" xml:space="preserve">
-    <value>[XenCenter] was unable to import a saved search from file '{0}'.
+    <value>{0} was unable to import a saved search from file '{1}'.
 
-Verify that the file is a valid {1} export.</value>
+Verify that the file is a valid {2} export.</value>
   </data>
   <data name="UNAVAILABLE" xml:space="preserve">
     <value>Not available</value>
   </data>
   <data name="UNCOMPRESS_APPLIANCE_DESCRIPTION" xml:space="preserve">
-    <value>[XenCenter] will uncompress the file to '{0}'. After uncompression the original file '{1}' will be deleted. Continue?</value>
+    <value>{0} will uncompress the file to '{1}'. After uncompression the original file '{2}' will be deleted. Continue?</value>
   </data>
   <data name="UNDEFINED_NAME_LABEL" xml:space="preserve">
     <value>Imported VM</value>
@@ -12788,7 +12722,7 @@ Verify that the file is a valid {1} export.</value>
     <value>Updates</value>
   </data>
   <data name="UPDATES_DESC" xml:space="preserve">
-    <value>Automatically check for [XenServer] or [XenCenter] updates</value>
+    <value>Automatically check for {0} or {1} updates</value>
   </data>
   <data name="UPDATES_DIALOG_ACTION_REQUIRED" xml:space="preserve">
     <value>For the update to take effect after application, the following action is required:
@@ -12840,7 +12774,7 @@ Verify that the file is a valid {1} export.</value>
     <value>Download and Install</value>
   </data>
   <data name="UPDATES_DOWNLOAD_REQUIRED_XENCENTER" xml:space="preserve">
-    <value>Download [XenCenter]</value>
+    <value>Download {0}</value>
   </data>
   <data name="UPDATES_WIZARD" xml:space="preserve">
     <value>Install Update</value>
@@ -12964,10 +12898,10 @@ Please check your settings and try again.</value>
     <value>{0}: Check skipped because the pool is partially upgraded.</value>
   </data>
   <data name="UPDATES_WIZARD_NEWER_XENCENTER_REQUIRED" xml:space="preserve">
-    <value>[XenCenter] version {0} or newer is required.</value>
+    <value>{0} version {1} or newer is required.</value>
   </data>
   <data name="UPDATES_WIZARD_NEWER_XENCENTER_WARNING" xml:space="preserve">
-    <value>Ensure you have upgraded [XenCenter] before upgrading [XenServer].</value>
+    <value>Ensure you have upgraded to {0} {1} before upgrading {2}.</value>
   </data>
   <data name="UPDATES_WIZARD_NO_ACTION" xml:space="preserve">
     <value>No further action is required for this update.</value>
@@ -12985,10 +12919,10 @@ Please check your settings and try again.</value>
     <value>{0}: This server does not need to be rebooted because live patching is used.</value>
   </data>
   <data name="UPDATES_WIZARD_NO_TOOLS" xml:space="preserve">
-    <value>{0}: The VM {1} does not have [Citrix VM Tools] installed.</value>
+    <value>{0}: The VM {1} does not have {2} installed.</value>
   </data>
   <data name="UPDATES_WIZARD_OUT_OF_DATE_TOOLS" xml:space="preserve">
-    <value>{0}: The VM {1} cannot be suspended until it has up to date [Citrix VM Tools].</value>
+    <value>{0}: The VM {1} cannot be suspended until it has up to date {2}.</value>
   </data>
   <data name="UPDATES_WIZARD_PATCH_ALREADY_APPLIED" xml:space="preserve">
     <value>{0}: The update has already been applied to this server.  This server will be skipped.</value>
@@ -13175,8 +13109,8 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
   <data name="UPGRADE_HOST" xml:space="preserve">
     <value>Upgrade host {0}</value>
   </data>
-  <data name="UPGRADE_MASTER" xml:space="preserve">
-    <value>Upgrade master {0}</value>
+  <data name="UPGRADE_COORDINATOR" xml:space="preserve">
+    <value>Upgrade coordinator {0}</value>
   </data>
   <data name="UPGRADE_PLAN" xml:space="preserve">
     <value>Apply Upgrade</value>
@@ -13184,8 +13118,8 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
   <data name="UPGRADE_POOL" xml:space="preserve">
     <value>Upgrade pool {0}</value>
   </data>
-  <data name="UPGRADE_POOL_MASTER" xml:space="preserve">
-    <value>Upgrade pool master '{0}'</value>
+  <data name="UPGRADE_POOL_COORDINATOR" xml:space="preserve">
+    <value>Upgrade pool coordinator '{0}'</value>
   </data>
   <data name="UPGRADE_PRECHECKS_TEXT" xml:space="preserve">
     <value>Pre-checks</value>
@@ -13196,7 +13130,7 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
   <data name="UPGRADE_SERVER" xml:space="preserve">
     <value>Upgrade server '{0}</value>
   </data>
-  <data name="UPGRADE_SLAVE" xml:space="preserve">
+  <data name="UPGRADE_SUPPORTER" xml:space="preserve">
     <value>Upgrade '{0}'</value>
   </data>
   <data name="UPLOADING_PATCH" xml:space="preserve">
@@ -13221,13 +13155,13 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
     <value>Uploading update '{0}' to '{1}' ({2} of {3})...</value>
   </data>
   <data name="UPSELL_BLURB_AD" xml:space="preserve">
-    <value>Upgrade your server license to enable Active Directory.  Active Directory allows you to configure [XenServer] access control by adding named user accounts.</value>
+    <value>Upgrade your server license to enable Active Directory.  Active Directory allows you to configure {0} access control by adding named user accounts.</value>
   </data>
   <data name="UPSELL_BLURB_ALERTS" xml:space="preserve">
     <value>Upgrade your server license to enable Alerting and Reporting capabilities. Email based performance and error alerting will proactively notify administrators of error conditions or performance problems before they affect critical services.</value>
   </data>
   <data name="UPSELL_BLURB_CONVERSION" xml:space="preserve">
-    <value>Upgrade your server license to enable the Conversion Manager. This feature helps you migrate workloads from VMware to [XenServer] by moving batches of VMware virtual machines to your [XenServer] environment.</value>
+    <value>Upgrade your server license to enable the Conversion Manager. This feature helps you migrate workloads from VMware to {0} by moving batches of VMware virtual machines to your {0} environment.</value>
   </data>
   <data name="UPSELL_BLURB_CPM" xml:space="preserve">
     <value>Upgrade your server license to enable VM live migration. This feature enables you to migrate running VMs on shared or local storage between servers in the same pool or across pools with no VM downtime. </value>
@@ -13251,18 +13185,18 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
     <value>Upgrade your server license to enable High Availability. High Availability allows virtual machines to be automatically restarted in the event of an underlying hardware failure or individual VM failure. If the server fails the VMs will be intelligently restarted on other virtualized servers in the resource pool.</value>
   </data>
   <data name="UPSELL_BLURB_MIGRATE_VDI" xml:space="preserve">
-    <value>Upgrade your [XenServer] license to enable VDI live migration. This feature enables you to migrate multiple running VDIs between SRs in the same pool with no VM downtime. </value>
+    <value>Upgrade your {0} license to enable VDI live migration. This feature enables you to migrate multiple running VDIs between SRs in the same pool with no VM downtime. </value>
   </data>
   <data name="UPSELL_BLURB_PERFORMANCE" xml:space="preserve">
     <value>Upgrade your server license to enable Performance Reporting capabilities. Performance Reporting provides guidance on overall environment performance trends and enables you to accurately plan capacity as business needs change.</value>
   </data>
   <data name="UPSELL_BLURB_RBAC" xml:space="preserve">
-    <value>Upgrade your server license to enable Role Based Access Control. Using the RBAC feature, you will be able to control access to vital components in your [XenServer] resource pools, with full audit logging capabilities and seamless integration with your current Active Directory setup.</value>
+    <value>Upgrade your server license to enable Role Based Access Control. Using the RBAC feature, you will be able to control access to vital components in your {0} resource pools, with full audit logging capabilities and seamless integration with your current Active Directory setup.</value>
   </data>
   <data name="UPSELL_BLURB_TRIAL" xml:space="preserve">
     <value>
 
-To start a [XenServer] trial, click the button below.</value>
+To start a {0} trial, click the button below.</value>
   </data>
   <data name="UPSELL_BLURB_VMSS" xml:space="preserve">
     <value>Upgrade your server license to enable VM Scheduled Snapshots. VM Scheduled Snapshots allows you to create automatic snapshots for your critical VMs.</value>
@@ -13313,7 +13247,7 @@ To start a [XenServer] trial, click the button below.</value>
     <value>USB</value>
   </data>
   <data name="USER_AUTHORIZATION_FAILED" xml:space="preserve">
-    <value>[XenCenter] was unable to authorize the action as {0}. See the application log files for more information.</value>
+    <value>{0} was unable to authorize the action as {1}. See the application log files for more information.</value>
   </data>
   <data name="USER_NOT_AUTHORIZED" xml:space="preserve">
     <value>The user you have entered is not authorized to complete this action</value>
@@ -13480,7 +13414,7 @@ To optimize VM performance, you should reduce the number of VCPUs to less than o
     <value>Version</value>
   </data>
   <data name="VERSION_NUMBER" xml:space="preserve">
-    <value>[XenCenter] version {0} (build {1}.{2}) {3}-bit</value>
+    <value>{0} version {1} (build {2}) {3}-bit</value>
   </data>
   <data name="VGPU_DESCRIPTION" xml:space="preserve">
     <value>{0} virtual GPU ({1} per GPU)</value>
@@ -13606,7 +13540,7 @@ To optimize VM performance, you should reduce the number of VCPUs to less than o
     <value>Create the new schedule</value>
   </data>
   <data name="VMSS_HOST_NOT_LIVE" xml:space="preserve">
-    <value>Pool master unreachable</value>
+    <value>Pool coordinator unreachable</value>
   </data>
   <data name="VMSS_INVALID_SCHEDULE" xml:space="preserve">
     <value>Invalid or incomplete schedule</value>
@@ -13981,6 +13915,12 @@ Schedule:
   <data name="WARNING_DELETE_VD_MULTIPLE" xml:space="preserve">
     <value>This will delete these virtual disks permanently, destroying any data on them.</value>
   </data>
+  <data name="WARNING_HEALTH_CHECK_SERVICE_INFO" xml:space="preserve">
+    <value>Health Check has been removed in {0} {1}. If you are going to upgrade the pool to this version, you must disable Health Check first.</value>
+  </data>
+  <data name="WARNING_PRE_CLOUD_VERSION_CONNECTION" xml:space="preserve">
+    <value>{0} is not recommended for general management of servers running {1} {2}. Please use {3} {2} instead.</value>
+  </data>
   <data name="WEB_BROWSER_FAILED" xml:space="preserve">
     <value>Cannot find '{0}'.</value>
   </data>
@@ -14041,9 +13981,6 @@ Schedule:
   <data name="WLBREPORT_OPTIMIZATION_PERFORMANCE_HISTORY" xml:space="preserve">
     <value>Optimization Performance History</value>
   </data>
-  <data name="WLBREPORT_POOL_AUDIT_HISTORY" xml:space="preserve">
-    <value>Pool Audit Log History</value>
-  </data>
   <data name="WLBREPORT_POOL_CONNECTION_LOST_CAPTION" xml:space="preserve">
     <value>Pool Connection Lost</value>
   </data>
@@ -14052,12 +13989,6 @@ Schedule:
   </data>
   <data name="WLBREPORT_POOL_HEALTH_HISTORY" xml:space="preserve">
     <value>Pool Health History</value>
-  </data>
-  <data name="WLBREPORT_POOL_OPTIMIZATION_HISTORY" xml:space="preserve">
-    <value>Pool Optimization History</value>
-  </data>
-  <data name="WLBREPORT_REPORT_CONFIG_ERROR" xml:space="preserve">
-    <value>An error occurred when attempting to open the Workload Balancing report window.  Please check the report configuration file.</value>
   </data>
   <data name="WLBREPORT_VM_MOTION_HISTORY" xml:space="preserve">
     <value>Virtual Machine Motion History</value>
@@ -14594,11 +14525,14 @@ Would you like to adjust the current Optimization Mode to match the schedule?</v
   <data name="WLB_RETRIEVING_CONFIGURATION" xml:space="preserve">
     <value>Retrieving WLB Configuration</value>
   </data>
+  <data name="WLB_RETRIEVING_EVACUATE_RECOMMENDATIONS" xml:space="preserve">
+    <value>Retrieving WLB recommendations on VMs to migrate from server {0}</value>
+  </data>
   <data name="WLB_RETRIEVING_RECOMMENDATIONS" xml:space="preserve">
     <value>Retrieving WLB recommendations for pool {0}</value>
   </data>
   <data name="WLB_RETRIEVING_VM_RECOMMENDATIONS" xml:space="preserve">
-    <value>Retrieving WLB recommendations </value>
+    <value>Retrieving WLB recommendations</value>
   </data>
   <data name="WLB_SAVING_SETTINGS" xml:space="preserve">
     <value>Saving Workload Balancing settings</value>
@@ -14716,69 +14650,51 @@ Are you sure you want to enable automated power management for this Host?</value
   <data name="WRONG_ROLE_DESC" xml:space="preserve">
     <value>You are attempting an action which requires additional privileges to those granted by your current role.</value>
   </data>
-  <data name="XENCENTER" xml:space="preserve">
-    <value>[XenCenter]</value>
-  </data>
   <data name="XENCENTER_CONFIG_FILTER" xml:space="preserve">
-    <value>[XenCenter] Settings|*.config</value>
+    <value>{0} Settings|*.config</value>
   </data>
   <data name="XENCENTER_NEWER_AVAILABLE" xml:space="preserve">
-    <value>Newer [XenCenter] Available</value>
+    <value>Newer {0} Available</value>
   </data>
   <data name="XENCENTER_VERSION_CHECK_DESCRIPTION" xml:space="preserve">
-    <value>[XenCenter] version check</value>
+    <value>{0} version check</value>
   </data>
   <data name="XENSEARCH_SAVED_SEARCH" xml:space="preserve">
     <value>Saved Searches (*.{0})|*.{0}</value>
   </data>
-  <data name="XENSERVER" xml:space="preserve">
-    <value>[XenServer]</value>
-  </data>
-  <data name="XENSERVER_6_5" xml:space="preserve">
-    <value>[XenServer] {0}</value>
-  </data>
-  <data name="XENSERVER_8_1" xml:space="preserve">
-    <value>[XenServer] {0}</value>
-  </data>
-  <data name="XENSERVER_8_2" xml:space="preserve">
-    <value>[XenServer] {0}</value>
-  </data>
   <data name="XENSERVER_TEMPLATES" xml:space="preserve">
-    <value>[XenServer] Templates</value>
+    <value>{0} Templates</value>
   </data>
   <data name="XENSERVER_UPGRADE_REQUIRED" xml:space="preserve">
     <value>License Upgrade Required</value>
   </data>
-  <data name="XSUPDATE" xml:space="preserve">
-    <value>[XenServer] Update Files ({0})|{0}|All files ({1})|{1}</value>
-  </data>
   <data name="XS_BACKUP_FILES" xml:space="preserve">
-    <value>[XenServer] Backup Files</value>
+    <value>{0} Backup Files</value>
   </data>
   <data name="XS_LICENSE_FILES" xml:space="preserve">
-    <value>[XenServer] License Files</value>
+    <value>{0} License Files</value>
   </data>
   <data name="XS_TOOLS_MESSAGE_MORE_THAN_ONE_VM" xml:space="preserve">
-    <value>[Citrix VM Tools] DVDs will now be inserted into the DVD drive of each of the selected VMs. Any disks currently in the drives will be ejected.
+    <value>{0} DVDs will now be inserted into the DVD drive of each of the selected VMs. Any disks currently in the drives will be ejected.
 
 You will need to navigate to the Console on each of the selected VMs to complete the installation.</value>
   </data>
   <data name="XS_TOOLS_MESSAGE_ONE_VM" xml:space="preserve">
-    <value>Do you want [XenCenter] to insert the [Citrix VM Tools] DVD into your VM's DVD drive and take you to the VM's console?
+    <value>Do you want {0} to insert the {1} DVD into your VM's DVD drive and take you to the VM's console?
 
-Any disk in your VM's DVD drive will be ejected when installing [Citrix VM Tools].</value>
+Any disk in your VM's DVD drive will be ejected when installing {1}.</value>
   </data>
   <data name="XS_TOOLS_SR_NOT_FOUND" xml:space="preserve">
-    <value>The [Citrix VM Tools] SR could not be found.</value>
+    <value>The {0} SR could not be found.</value>
   </data>
   <data name="X_HIDDEN" xml:space="preserve">
     <value>{0} (hidden)</value>
   </data>
   <data name="X_IS_DEPRECATED_IN_X" xml:space="preserve">
-    <value>The {0} feature was deprecated in {1} and may be retired in future versions</value>
+    <value>The {0} feature was deprecated in {1} and may be retired in future versions.</value>
   </data>
   <data name="X_IS_REMOVED_IN_X" xml:space="preserve">
-    <value>The {0} feature is not available in {1} and later versions</value>
+    <value>The {0} feature is not available in {1} and later versions.</value>
   </data>
   <data name="X_WITH_WARNING_X" xml:space="preserve">
     <value>{0} with warning: {1}</value>

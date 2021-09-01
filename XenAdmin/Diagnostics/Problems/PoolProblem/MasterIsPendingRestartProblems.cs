@@ -35,9 +35,9 @@ using XenAPI;
 
 namespace XenAdmin.Diagnostics.Problems.PoolProblem
 {
-    class MasterIsPendingRestartHostProblem : PoolProblem
+    class CoordinatorIsPendingRestartHostProblem : PoolProblem
     {
-        public MasterIsPendingRestartHostProblem(RestartHostOrToolstackPendingOnMasterCheck check, Pool pool)
+        public CoordinatorIsPendingRestartHostProblem(RestartHostOrToolstackPendingOnCoordinatorCheck check, Pool pool)
             : base(check, pool)
         { }
 
@@ -46,9 +46,9 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
             get 
             {
                 return string.Format(
-                    ((RestartHostOrToolstackPendingOnMasterCheck)Check).UpdateUuid != null
-                    ? Messages.PROBLEM_MASTER_PENDING_RESTART_HOST_THIS_UPDATE
-                    : Messages.PROBLEM_MASTER_PENDING_RESTART_HOST,
+                    ((RestartHostOrToolstackPendingOnCoordinatorCheck)Check).UpdateUuid != null
+                    ? Messages.PROBLEM_COORDINATOR_PENDING_RESTART_HOST_THIS_UPDATE
+                    : Messages.PROBLEM_COORDINATOR_PENDING_RESTART_HOST,
                     Helpers.GetName(Pool).Ellipsise(30));
             }
         }
@@ -59,9 +59,9 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
         }
     }
 
-    class MasterIsPendingRestartToolstackProblem : PoolProblem
+    class CoordinatorIsPendingRestartToolstackProblem : PoolProblem
     {
-        public MasterIsPendingRestartToolstackProblem(RestartHostOrToolstackPendingOnMasterCheck check, Pool pool)
+        public CoordinatorIsPendingRestartToolstackProblem(RestartHostOrToolstackPendingOnCoordinatorCheck check, Pool pool)
             : base(check, pool)
         { }
 
@@ -70,9 +70,9 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
             get
             {
                 return string.Format(
-                    ((RestartHostOrToolstackPendingOnMasterCheck)Check).UpdateUuid != null
-                    ? Messages.PROBLEM_MASTER_PENDING_RESTART_TOOLSTACK_THIS_UPDATE
-                    : Messages.PROBLEM_MASTER_PENDING_RESTART_TOOLSTACK,
+                    ((RestartHostOrToolstackPendingOnCoordinatorCheck)Check).UpdateUuid != null
+                    ? Messages.PROBLEM_COORDINATOR_PENDING_RESTART_TOOLSTACK_THIS_UPDATE
+                    : Messages.PROBLEM_COORDINATOR_PENDING_RESTART_TOOLSTACK,
                     Helpers.GetName(Pool).Ellipsise(30));
             }
         }

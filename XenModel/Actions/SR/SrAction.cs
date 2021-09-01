@@ -160,11 +160,11 @@ namespace XenAdmin.Actions
             if (SR.PBDs.Count < 1)
                 return;
 
-            //CA-176935, CA-173497 - we need to run Unplug for the master last - creating a new list of hosts where the master is always the last
-            var allPBDRefsToNonMaster = new List<XenRef<PBD>>();
-            var allPBDRefsToMaster = new List<XenRef<PBD>>();
+            //CA-176935, CA-173497 - we need to run Unplug for the coordinator last - creating a new list of hosts where the coordinator is always the last
+            var allPBDRefsToNonCoordinator = new List<XenRef<PBD>>();
+            var allPBDRefsToCoordinator = new List<XenRef<PBD>>();
 
-            var master = Helpers.GetMaster(Connection);
+            var coordinator = Helpers.GetCoordinator(Connection);
 
             foreach (var pbdRef in SR.PBDs)
             {
@@ -174,21 +174,21 @@ namespace XenAdmin.Actions
                     if (pbd.host != null)
                     {
                         var host = Connection.Resolve(pbd.host);
-                        if (master != null && host != null && host.uuid == master.uuid)
+                        if (coordinator != null && host != null && host.uuid == coordinator.uuid)
                         {
-                            allPBDRefsToMaster.Add(pbdRef);
+                            allPBDRefsToCoordinator.Add(pbdRef);
                         }
                         else
                         {
-                            allPBDRefsToNonMaster.Add(pbdRef);
+                            allPBDRefsToNonCoordinator.Add(pbdRef);
                         }
                     }
                 }
             }
 
             var allPBDRefs = new List<XenRef<PBD>>();
-            allPBDRefs.AddRange(allPBDRefsToNonMaster);
-            allPBDRefs.AddRange(allPBDRefsToMaster);
+            allPBDRefs.AddRange(allPBDRefsToNonCoordinator);
+            allPBDRefs.AddRange(allPBDRefsToCoordinator);
 
             foreach (XenRef<PBD> pbd in allPBDRefs)
             {

@@ -47,8 +47,8 @@ namespace XenAdmin.Diagnostics.Checks
         private readonly bool _manualUpgrade;
         private readonly Dictionary<string, string> _installMethodConfig;
 
-        public PVGuestsCheck(Host master, bool upgrade, bool manualUpgrade = false, Dictionary<string, string> installMethodConfig = null)
-            : base(master)
+        public PVGuestsCheck(Host coordinator, bool upgrade, bool manualUpgrade = false, Dictionary<string, string> installMethodConfig = null)
+            : base(coordinator)
         {
             _pool = Helpers.GetPoolOfOne(Host?.Connection);
             _upgrade = upgrade;

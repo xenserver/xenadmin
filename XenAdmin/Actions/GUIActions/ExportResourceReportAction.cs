@@ -521,7 +521,7 @@ namespace XenAdmin.Actions
             ParamLabelsStr += "LBL_HOSTNAME|";
             ParamValuesStr += Messages.NAME + "|";
             ParamLabelsStr += "LBL_POOLMASTER|";
-            ParamValuesStr += Messages.POOL_MASTER + "|";
+            ParamValuesStr += Messages.POOL_COORDINATOR + "|";
             ParamLabelsStr += "LBL_ADDRESS|";
             ParamValuesStr += Messages.ADDRESS + "|";
             ParamLabelsStr += "LBL_UUID|";
@@ -640,7 +640,7 @@ namespace XenAdmin.Actions
 
                 
                 HostInfo buf = new HostInfo(host.name_label, host.address, host.uuid, cpu_usage,
-                    host.IsMaster() ? Messages.YES : Messages.NO, network_usage, usage,
+                    host.IsCoordinator() ? Messages.YES : Messages.NO, network_usage, usage,
                     Convert.ToString(host.Uptime()), srSizeString, host.Description());
                 m_Hosts.Add(buf);
                 PercentComplete = Convert.ToInt32((++itemIndex) * baseIndex / itemCount);
@@ -959,7 +959,7 @@ namespace XenAdmin.Actions
 
             items.Add(Messages.NAME);
             items.Add(Messages.UUID);
-            items.Add(Messages.POOL_MASTER);
+            items.Add(Messages.POOL_COORDINATOR);
             items.Add(Messages.ADDRESS);
             items.Add(Messages.OVERVIEW_CPU_USAGE);
             items.Add(Messages.OVERVIEW_MEMORY_USAGE);

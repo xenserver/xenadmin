@@ -40,7 +40,7 @@ namespace XenAdmin
         HostDisconnected,
         HostEvacuate,
         HostUnpatched,
-        HostOlderThanMaster,
+        HostOlderThanCoordinator,
         HostHasCrashDumps,
 
         VmRunning,
@@ -106,6 +106,7 @@ namespace XenAdmin
         CentOS,
         Debian,
         Gooroom,
+        Rocky,
         Linx,
         Oracle,
         RHEL,

@@ -32,6 +32,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using XenAdmin.Actions;
+using XenAdmin.Core;
 using XenAdmin.Dialogs;
 using XenAPI;
 using XenAdmin.Actions.VMActions;
@@ -72,22 +73,22 @@ namespace XenAdmin.Commands
             return new VMDestroyAction(vm, deleteDisks, deleteSnapshots);
         }
 
-        protected sealed override void ExecuteCore(SelectedItemCollection selection)
+        protected sealed override void RunCore(SelectedItemCollection selection)
         {
             ConfirmVMDeleteDialog dialog = new ConfirmVMDeleteDialog(selection.AsXenObjects<VM>());
 
             if (MainWindowCommandInterface.RunInAutomatedTestMode || dialog.ShowDialog(Parent) == DialogResult.Yes)
             {
                 CommandErrorDialog errorDialog = null;
-                var cantExecuteReasons = GetCantExecuteReasons();
+                var cantRunReasons = GetCantRunReasons();
 
-                if (cantExecuteReasons.Count > 0)
+                if (cantRunReasons.Count > 0)
                 {
-                    errorDialog = new CommandErrorDialog(ErrorDialogTitle, ErrorDialogText, cantExecuteReasons);
+                    errorDialog = new CommandErrorDialog(ErrorDialogTitle, ErrorDialogText, cantRunReasons);
                 }
 
                 List<AsyncAction> actions = new List<AsyncAction>();
-                foreach (VM vm in selection.AsXenObjects<VM>(CanExecute))
+                foreach (VM vm in selection.AsXenObjects<VM>(CanRun))
                 {
                     var snapshotsToDelete = dialog.DeleteSnapshots.FindAll(x => x.Connection.Resolve(x.snapshot_of) == vm);
                     actions.Add(GetAction(vm, dialog.DeleteDisks, snapshotsToDelete));
@@ -101,14 +102,14 @@ namespace XenAdmin.Commands
             }
         }
 
-        protected virtual bool CanExecute(VM vm)
+        protected virtual bool CanRun(VM vm)
         {
             return vm != null && !vm.is_a_template && !vm.Locked && vm.allowed_operations != null && vm.allowed_operations.Contains(vm_operations.destroy);
         }
 
-        protected sealed override bool CanExecuteCore(SelectedItemCollection selection)
+        protected sealed override bool CanRunCore(SelectedItemCollection selection)
         {
-            return selection.AllItemsAre<VM>() && selection.AtLeastOneXenObjectCan<VM>(CanExecute);
+            return selection.AllItemsAre<VM>() && selection.AtLeastOneXenObjectCan<VM>(CanRun);
         }
 
         public override string MenuText => Messages.MAINWINDOW_DELETE_OBJECTS;
@@ -129,12 +130,12 @@ namespace XenAdmin.Commands
             }
         }
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
             VM vm = item as VM;
             if (vm == null)
             {
-                return base.GetCantExecuteReasonCore(item);
+                return base.GetCantRunReasonCore(item);
             }
             if (!vm.is_a_template && vm.power_state != vm_power_state.Halted)
             {
@@ -142,9 +143,9 @@ namespace XenAdmin.Commands
             }
             else if (vm.is_a_template && vm.DefaultTemplate())
             {
-                return Messages.CANNOT_DELETE_DEFAULT_TEMPLATE;
+                return string.Format(Messages.CANNOT_DELETE_DEFAULT_TEMPLATE, BrandManager.ProductBrand);
             }
-            return base.GetCantExecuteReasonCore(item);
+            return base.GetCantRunReasonCore(item);
         }
     }
 }

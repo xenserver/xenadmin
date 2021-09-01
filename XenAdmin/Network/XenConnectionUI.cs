@@ -52,9 +52,9 @@ namespace XenAdmin.Network
         /// <param name="interactive">Whether the user has initiated/is watching this connection attempt.</param>
         /// <param name="owner">The form that connecting dialogs will be displayed in front of.
         /// May be null, in which case Program.MainWindow is used.</param>
-        /// <param name="initiateMasterSearch">If true, when connection to the master fails we will start trying to connect to
-        /// each remembered slave in turn.</param>
-        public static void BeginConnect(IXenConnection connection, bool interactive, Form owner, bool initiateMasterSearch)
+        /// <param name="initiateCoordinatorSearch">If true, when connection to the coordinator fails we will start trying to connect to
+        /// each remembered supporter in turn.</param>
+        public static void BeginConnect(IXenConnection connection, bool interactive, Form owner, bool initiateCoordinatorSearch)
         {
             Program.AssertOnEventThread();
             
@@ -73,13 +73,13 @@ namespace XenAdmin.Network
                 dlg = new ConnectingToServerDialog(connection);
                 connectionDialogs.Add(connection, dlg);
 
-                if (!dlg.BeginConnect(owner, initiateMasterSearch) && connection != null)
+                if (!dlg.BeginConnect(owner, initiateCoordinatorSearch) && connection != null)
                     connectionDialogs.Remove(connection);
             }
             else
             {
                 RegisterEventHandlers(connection);
-                ((XenConnection)connection).BeginConnect(initiateMasterSearch, PromptForNewPassword);
+                ((XenConnection)connection).BeginConnect(initiateCoordinatorSearch, PromptForNewPassword);
             }
         }
 
@@ -137,9 +137,9 @@ namespace XenAdmin.Network
                 if (f.ErrorDescription[0] == Failure.HOST_IS_SLAVE)
                 {
                     string oldHost = connection.Name;
-                    string poolMasterName = f.ErrorDescription[1];
+                    string poolCoordinatorName = f.ErrorDescription[1];
 
-                    string pool_name = XenConnection.ConnectedElsewhere(poolMasterName);
+                    string pool_name = XenConnection.ConnectedElsewhere(poolCoordinatorName);
                     if (pool_name != null)
                     {
                         if (!Program.RunInAutomatedTestMode)
@@ -155,7 +155,7 @@ namespace XenAdmin.Network
                             else
                             {
 
-                                using (var dlg = new InformationDialog(string.Format(Messages.SLAVE_ALREADY_CONNECTED, oldHost, pool_name))
+                                using (var dlg = new InformationDialog(string.Format(Messages.SUPPORTER_ALREADY_CONNECTED, oldHost, pool_name))
                                     {WindowTitle = Messages.ADD_NEW_CONNECT_TO})
                                 {
                                     dlg.ShowDialog(owner);
@@ -166,7 +166,7 @@ namespace XenAdmin.Network
                     else
                     {
                         DialogResult dialogResult;
-                        using (var dlg = new WarningDialog(string.Format(Messages.SLAVE_CONNECTION_ERROR, oldHost, poolMasterName),
+                        using (var dlg = new WarningDialog(string.Format(Messages.SUPPORTER_CONNECTION_ERROR, oldHost, poolCoordinatorName),
                                 ThreeButtonDialog.ButtonYes,
                                 ThreeButtonDialog.ButtonNo){WindowTitle = Messages.CONNECT_TO_SERVER})
                         {
@@ -174,7 +174,7 @@ namespace XenAdmin.Network
                         }
                         if (DialogResult.Yes == dialogResult)
                         {
-                            ((XenConnection) connection).Hostname = poolMasterName;
+                            ((XenConnection) connection).Hostname = poolCoordinatorName;
                             BeginConnect(connection, true, owner, false);
                         }
                     }
@@ -198,40 +198,42 @@ namespace XenAdmin.Network
             }
             else if (error is WebException w)
             {
-                if (((XenConnection)connection).SuppressErrors)
+                if (connection.SuppressErrors)
                     return;
 
-                var solutionCheckXenServer = 
-                    Properties.Settings.Default.ProxySetting != (int)HTTPHelper.ProxyStyle.DirectConnection ? Messages.SOLUTION_CHECK_XENSERVER_WITH_PROXY : Messages.SOLUTION_CHECK_XENSERVER;
+                var format = Properties.Settings.Default.ProxySetting != (int)HTTPHelper.ProxyStyle.DirectConnection
+                    ? Messages.SOLUTION_CHECK_XENSERVER_WITH_PROXY
+                    : Messages.SOLUTION_CHECK_XENSERVER;
+                var solutionCheckXenServer = string.Format(format, BrandManager.ProductBrand, connection.Hostname);
 
                 switch (w.Status)
                 {
                     case WebExceptionStatus.ConnectionClosed:
-                        AddError(owner, connection, Messages.CONNECTION_CLOSED_BY_SERVER, string.Format(solutionCheckXenServer, ((XenConnection)connection).Hostname));
+                        AddError(owner, connection, Messages.CONNECTION_CLOSED_BY_SERVER, solutionCheckXenServer);
                         break;
                     case WebExceptionStatus.ConnectFailure:
-                        AddError(owner, connection, Messages.CONNECTION_REFUSED, string.Format(solutionCheckXenServer, ((XenConnection)connection).Hostname));
+                        AddError(owner, connection, Messages.CONNECTION_REFUSED, solutionCheckXenServer);
                         break;
                     case WebExceptionStatus.ProtocolError:
                         if (w.Message != null && w.Message.Contains("(404)"))
-                            AddError(owner, connection, string.Format(Messages.ERROR_NO_XENSERVER, ((XenConnection)connection).Hostname), string.Format(solutionCheckXenServer, ((XenConnection)connection).Hostname));
+                            AddError(owner, connection, string.Format(Messages.ERROR_NO_XENSERVER, connection.Hostname), solutionCheckXenServer);
                         else if (w.Message != null && w.Message.Contains("(407)"))
                         {
                             string proxyAddress = Properties.Settings.Default.ProxyAddress;
-                            AddError(owner, connection, string.Format(Messages.ERROR_PROXY_AUTHENTICATION, proxyAddress), string.Format(Messages.SOLUTION_CHECK_PROXY, proxyAddress));
+                            AddError(owner, connection, string.Format(Messages.ERROR_PROXY_AUTHENTICATION, proxyAddress), string.Format(Messages.SOLUTION_CHECK_PROXY, proxyAddress, BrandManager.BrandConsole));
                         }
                         else
                             AddError(owner, connection, Messages.ERROR_UNKNOWN, Messages.SOLUTION_UNKNOWN);
                         break;
                     case WebExceptionStatus.NameResolutionFailure:
-                        AddError(owner, connection, string.Format(Messages.ERROR_NOT_FOUND, ((XenConnection)connection).Hostname), Messages.SOLUTION_NOT_FOUND);
+                        AddError(owner, connection, string.Format(Messages.ERROR_NOT_FOUND, connection.Hostname), Messages.SOLUTION_NOT_FOUND);
                         break;
                     case WebExceptionStatus.ReceiveFailure:
                     case WebExceptionStatus.SendFailure:
-                        AddError(owner, connection, string.Format(Messages.ERROR_NO_XENSERVER, ((XenConnection)connection).Hostname), string.Format(solutionCheckXenServer, ((XenConnection)connection).Hostname));
+                        AddError(owner, connection, string.Format(Messages.ERROR_NO_XENSERVER, connection.Hostname), solutionCheckXenServer);
                         break;
                     case WebExceptionStatus.SecureChannelFailure:
-                        AddError(owner, connection, string.Format(Messages.ERROR_SECURE_CHANNEL_FAILURE, ((XenConnection)connection).Hostname), Messages.SOLUTION_UNKNOWN);
+                        AddError(owner, connection, string.Format(Messages.ERROR_SECURE_CHANNEL_FAILURE, connection.Hostname), Messages.SOLUTION_UNKNOWN);
                         break;
                     default:
                         AddError(owner, connection, Messages.ERROR_UNKNOWN, Messages.SOLUTION_UNKNOWN);
@@ -262,13 +264,14 @@ namespace XenAdmin.Network
                 // This happens if the server API is incompatible with our bindings.  This should
                 // never happen in production, but will happen during development if a field
                 // changes type, for example.
-                AddError(owner, connection, Messages.SERVER_API_INCOMPATIBLE, Messages.SOLUTION_UNKNOWN);
+                AddError(owner, connection, string.Format(Messages.SERVER_API_INCOMPATIBLE, BrandManager.BrandConsole), Messages.SOLUTION_UNKNOWN);
             }
             else if (error is ServerNotSupported)
             {
                 // Server version is too old for this version of XenCenter
-                AddError(owner, connection, string.Format(Messages.SERVER_TOO_OLD, BrandManager.ProductVersion70),
-                    Messages.SERVER_TOO_OLD_SOLUTION);
+                AddError(owner, connection, string.Format(Messages.SERVER_TOO_OLD,
+                        BrandManager.BrandConsole, BrandManager.ProductBrand, BrandManager.ProductVersion70),
+                    string.Format(Messages.SERVER_TOO_OLD_SOLUTION, BrandManager.BrandConsole));
             }
             else
             {

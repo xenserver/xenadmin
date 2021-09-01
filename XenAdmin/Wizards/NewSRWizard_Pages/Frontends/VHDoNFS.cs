@@ -147,15 +147,15 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             }
             dconf[OPTIONS] = serverOptionsTextBox.Text;
 
-            Host master = Helpers.GetMaster(Connection);
-            if (master == null)
+            Host coordinator = Helpers.GetCoordinator(Connection);
+            if (coordinator == null)
                 return;
 
             if (Helpers.DundeeOrGreater(Connection))
                 dconf[PROBEVERSION] = string.Empty; //this needs to be passed to the API in order to get back the NFS versions supported
 
             // Start probe
-            SrProbeAction action = new SrProbeAction(Connection, master, SR.SRTypes.nfs, dconf);
+            SrProbeAction action = new SrProbeAction(Connection, coordinator, SR.SRTypes.nfs, dconf);
             using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
             {
                 dialog.ShowCancel = true;

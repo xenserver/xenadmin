@@ -34,6 +34,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using XenAPI;
 using XenAdmin.Commands;
+using XenAdmin.Core;
 
 namespace XenAdmin.Dialogs
 {
@@ -44,6 +45,7 @@ namespace XenAdmin.Dialogs
         public SelectHostDialog()
         {
             InitializeComponent();
+            label1.Text = string.Format(label1.Text, BrandManager.ProductBrand);
             poolHostPicker1.AllowPoolSelect = false;
             poolHostPicker1.SupressErrors = true;
             poolHostPicker1.SelectedItemChanged += selectionChanged;
@@ -70,7 +72,7 @@ namespace XenAdmin.Dialogs
 
         private void button3_Click(object sender, EventArgs e)
         {
-            new AddHostCommand(Program.MainWindow, this).Execute();
+            new AddHostCommand(Program.MainWindow, this).Run();
         }
 
         public Host TheHost

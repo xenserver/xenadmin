@@ -47,7 +47,7 @@ namespace XenAdminTests.UnitTests.WlbTests
             Assert.AreEqual(0, tasks.SortedTaskList.Count, "SortedTaskList");
             Assert.AreEqual(0, tasks.VirtualTaskList.Count, "VirtualTaskList");
             Assert.IsNull(tasks.ToDictionary(), "Conversion to dictionary");
-            Assert.IsNull(tasks.GetNextExecutingTask(), "GetNextExecutingTask");
+            Assert.IsNull(tasks.GetNextRunningTask(), "GetNextRunningTask");
         }
 
         [Test]
@@ -61,7 +61,7 @@ namespace XenAdminTests.UnitTests.WlbTests
         public void EmptyConstructorCausesLastTaskToThrow()
         {
             var tasks = new WlbScheduledTasks();
-            Assert.Throws(typeof(IndexOutOfRangeException), () => tasks.GetLastExecutingTask());
+            Assert.Throws(typeof(IndexOutOfRangeException), () => tasks.GetLastRunningTask());
         }
 
         [Test]
@@ -96,8 +96,8 @@ namespace XenAdminTests.UnitTests.WlbTests
             Assert.AreEqual(0, tasks.VirtualTaskList.Count, "VirtualTaskList");
             
             //Next task
-            WlbScheduledTask nextTask = tasks.GetNextExecutingTask();
-            Assert.IsNull( nextTask, "GetNextExecutingTask");
+            WlbScheduledTask nextTask = tasks.GetNextRunningTask();
+            Assert.IsNull( nextTask, "GetNextRunningTask");
         }
 
         [Test]
@@ -117,10 +117,10 @@ namespace XenAdminTests.UnitTests.WlbTests
             Assert.AreEqual(3, virtualTasksValues[3].TaskId);
 
             //Next Task
-            Assert.IsNull(tasks.GetNextExecutingTask());
+            Assert.IsNull(tasks.GetNextRunningTask());
 
             //Last Task
-            Assert.IsNotNull(tasks.GetLastExecutingTask());
+            Assert.IsNotNull(tasks.GetLastRunningTask());
 
             //Check performance mode fetch from last task
             Assert.AreEqual(WlbPoolPerformanceMode.MaximizeDensity, tasks.GetCurrentScheduledPerformanceMode());

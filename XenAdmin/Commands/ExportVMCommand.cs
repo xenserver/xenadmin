@@ -79,7 +79,7 @@ namespace XenAdmin.Commands
         /// <param name="connection"></param>
         /// <param name="vm">The VM to export.</param>
         /// <param name="host">Used for filtering purposes. May be null.</param>
-        private void Execute(IXenConnection connection, VM vm, Host host)
+        private void Run(IXenConnection connection, VM vm, Host host)
         {
             /*
              * These properties have not been copied over to the new save file dialog.
@@ -195,7 +195,7 @@ namespace XenAdmin.Commands
             new ExportVmAction(connection, host, vm, filename, verify).RunAsync();
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             VM vm = (VM)selection[0].XenObject;
             Host host = vm.Home();
@@ -206,10 +206,10 @@ namespace XenAdmin.Commands
                 host = pool.Connection.Resolve(pool.master);
             }
 
-            Execute(selection[0].Connection, vm, host);
+            Run(selection[0].Connection, vm, host);
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (selection.Count == 1)
             {
@@ -232,11 +232,11 @@ namespace XenAdmin.Commands
             }
         }
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
             VM vm = item as VM;
             if (vm == null)
-                return base.GetCantExecuteReasonCore(item);
+                return base.GetCantRunReasonCore(item);
             if (vm.power_state == vm_power_state.Running)
                 return Messages.MAINWINDOW_EXPORT_VM_AS_BACKUP_TOOLTIP;
 

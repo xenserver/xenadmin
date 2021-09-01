@@ -29,6 +29,7 @@
  * SUCH DAMAGE.
  */
 
+using XenAdmin.Core;
 using XenAdmin.Diagnostics.Checks;
 using XenAPI;
 
@@ -50,6 +51,6 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
 
         public override string Description => string.Format(Messages.HOST_UNLICENSED_FOR_AUTOMATED_UPDATES_WARNING, pool);
 
-        public override string Message => Messages.AUTOMATED_UPDATES_UNLICENSED_WARNING_MORE_INFO;
+        public override string Message => string.Format(Messages.AUTOMATED_UPDATES_UNLICENSED_WARNING_MORE_INFO, BrandManager.BrandConsole);
     }
 }

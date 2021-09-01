@@ -62,7 +62,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             IXenConnection conn = selection[0].Connection;
 
@@ -83,7 +83,7 @@ namespace XenAdmin.Commands
 
             if (conn.Cache.HostCount > 1)
             {
-                using (var dlg = new WarningDialog(Messages.MESSAGEBOX_SLAVES_EJECT))
+                using (var dlg = new WarningDialog(Messages.MESSAGEBOX_POOL_MEMBERS_EJECT))
                     dlg.ShowDialog(Program.MainWindow);
                 return;
             }
@@ -94,7 +94,7 @@ namespace XenAdmin.Commands
             }
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (selection.Count == 1)
             {

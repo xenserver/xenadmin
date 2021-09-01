@@ -74,7 +74,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             Name = pool.Name();
             HostPlans = planActions ?? new List<HostPlan>();
             FinalActions = finalActions ?? new List<PlanAction>();
-            CleanupActions = FinalActions.Where(a => a is RemoveUpdateFileFromMasterPlanAction).ToList();
+            CleanupActions = FinalActions.Where(a => a is RemoveUpdateFileFromCoordinatorPlanAction).ToList();
             FirstFailedSkippableAction = null;
         }
 

@@ -169,7 +169,7 @@
     <value>3, 10, 3, 3</value>
   </data>
   <data name="checkBoxRepeat.Size" type="System.Drawing.Size, System.Drawing">
-    <value>292, 19</value>
+    <value>293, 19</value>
   </data>
   <data name="checkBoxRepeat.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -550,7 +550,7 @@
     <value>0</value>
   </data>
   <data name="labelWarning.Text" xml:space="preserve">
-    <value>To prevent data loss you must ensure that the LUN is not in use by any other system, including [XenServer] hosts that are not connected to [XenCenter].</value>
+    <value>To prevent data loss you must ensure that the LUN is not in use by any other system, including {0} hosts that are not connected to {1}.</value>
   </data>
   <data name="&gt;&gt;labelWarning.Name" xml:space="preserve">
     <value>labelWarning</value>

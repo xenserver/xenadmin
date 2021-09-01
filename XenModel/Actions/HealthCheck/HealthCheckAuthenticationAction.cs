@@ -34,6 +34,7 @@ using System.IO;
 using System.Net;
 using System.Runtime.Serialization;
 using System.Web.Script.Serialization;
+using XenAdmin.Core;
 
 namespace XenAdmin.Actions
 {
@@ -64,12 +65,13 @@ namespace XenAdmin.Actions
         private readonly bool diagnosticTokenRequired;
 
         public HealthCheckAuthenticationAction(string username, string password, long tokenExpiration, bool suppressHistory)
-            : base(null, Messages.ACTION_HEALTHCHECK_AUTHENTICATION, Messages.ACTION_HEALTHCHECK_AUTHENTICATION_PROGRESS, suppressHistory)
+            : base(null, "", "", suppressHistory)
         {
             this.username = username;
             this.password = password;
             this.tokenExpiration = tokenExpiration;
-            
+
+            Title = string.Format(Messages.ACTION_HEALTHCHECK_AUTHENTICATION, BrandManager.Cis);
         }
 
         public HealthCheckAuthenticationAction(string username, string password,
@@ -92,6 +94,8 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
+            Description = string.Format(Messages.ACTION_HEALTHCHECK_AUTHENTICATION_PROGRESS, BrandManager.Cis);
+
             try
             {
                 string identityToken = GetIdentityToken();
@@ -252,7 +256,8 @@ namespace XenAdmin.Actions
 
             public HealthCheckAuthenticationException(string message, Exception exception) : base(message, exception) { }
 
-            public HealthCheckAuthenticationException(Exception exception) : base(Messages.HEALTH_CHECK_AUTHENTICATION_FAILED, exception) { }
+            public HealthCheckAuthenticationException(Exception exception)
+                : base(string.Format(Messages.HEALTH_CHECK_AUTHENTICATION_FAILED, BrandManager.Cis), exception) { }
 
             public HealthCheckAuthenticationException(SerializationInfo serialinfo, StreamingContext context) : base(serialinfo, context) { }
         }

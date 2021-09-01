@@ -42,21 +42,21 @@ namespace XenAdmin.ServerDBs.FakeAPI
 
         }
 
-        public Response<string> designate_new_master(string session, string host)
+        public Response<string> designate_new_coordinator(string session, string host)
         {
             Pool pool = Helpers.GetPoolOfOne(proxy.connection);
             proxy.EditObject_(DbProxy.EditTypes.Replace, "pool", pool.opaque_ref, "master", host);
             return new Response<string>("");
         }
 
-        public Response<string> join(string session, string master_address, string master_username, string master_password)
+        public Response<string> join(string session, string coordinator_address, string master_username, string master_password)
         {
             DbProxy destination = null;
             string hostRef = "OpaqueRef:179a6549-c043-772a-404e-5f6c874369f2";
             
             foreach (DbProxy proxy in DbProxy.proxys.Values)
             {
-                if (proxy.connection.Hostname == master_address)
+                if (proxy.connection.Hostname == coordinator_address)
                 {
                     destination = proxy;
                     break;

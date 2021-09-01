@@ -57,19 +57,14 @@ namespace XenAdmin.Commands
             get { return GetSelection().Count > 1 ? Messages.MAINWINDOW_MOVE_OBJECTS : Messages.MOVE_VDI_CONTEXT_MENU; }
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             List<VDI> vdis = selection.AsXenObjects<VDI>();
 
             bool featureForbidden = vdis.TrueForAll(vdi => Helpers.FeatureForbidden(vdi.Connection, Host.RestrictCrossPoolMigrate));
             if (featureForbidden)
             {
-                string theText = HiddenFeatures.LinkLabelHidden
-                    ? Messages.UPSELL_BLURB_MIGRATE_VDI
-                    : Messages.UPSELL_BLURB_MIGRATE_VDI + Messages.UPSELL_BLURB_TRIAL;
-
-                using (var dlg = new UpsellDialog(theText, InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL))
-                    dlg.ShowDialog(Parent);
+                UpsellDialog.ShowUpsellDialog(Messages.UPSELL_BLURB_MIGRATE_VDI, Parent);
             }
             else
             {
@@ -77,7 +72,7 @@ namespace XenAdmin.Commands
             }
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             return selection.Count > 0 && selection.All(v => CanBeMigrated(v.XenObject as VDI));
         }
@@ -101,11 +96,11 @@ namespace XenAdmin.Commands
             return true;
         }
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
             VDI vdi = item as VDI;
             if (vdi == null)
-                return base.GetCantExecuteReasonCore(item);
+                return base.GetCantRunReasonCore(item);
 
             if (vdi.is_a_snapshot)
                 return Messages.CANNOT_MOVE_VDI_IS_SNAPSHOT;
@@ -122,13 +117,13 @@ namespace XenAdmin.Commands
 
             SR sr = vdi.Connection.Resolve(vdi.SR);
             if (sr == null)
-                return base.GetCantExecuteReasonCore(item);
+                return base.GetCantRunReasonCore(item);
             if (sr.HBALunPerVDI())
                 return Messages.UNSUPPORTED_SR_TYPE;
             if (!sr.SupportsStorageMigration())
                 return Messages.UNSUPPORTED_SR_TYPE;
 
-            return base.GetCantExecuteReasonCore(item);
+            return base.GetCantRunReasonCore(item);
         }
     }
 }

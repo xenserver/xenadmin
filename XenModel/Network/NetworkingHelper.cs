@@ -40,20 +40,20 @@ namespace XenAdmin.Network
     public class NetworkingHelper
     {
         /// <summary>
-        /// Returns the bond that the master is using as its management interface, or null if
+        /// Returns the bond that the coordinator is using as its management interface, or null if
         /// such a thing cannot be found.
         /// </summary>
         /// <param name="conn"></param>
         /// <returns></returns>
-        public static Bond GetMasterManagementBond(IXenConnection conn)
+        public static Bond GetCoordinatorManagementBond(IXenConnection conn)
         {
-            PIF pif = GetMasterManagementPIF(conn);
-            return pif == null ? null : pif.BondMasterOf();
+            PIF pif = GetCoordinatorManagementPIF(conn);
+            return pif == null ? null : pif.BondInterfaceOf();
         }
 
-        private static PIF GetMasterManagementPIF(IXenConnection conn)
+        private static PIF GetCoordinatorManagementPIF(IXenConnection conn)
         {
-            Host host = Helpers.GetMaster(conn);
+            Host host = Helpers.GetCoordinator(conn);
             return host == null ? null : GetManagementPIF(host);
         }
 
@@ -94,7 +94,7 @@ namespace XenAdmin.Network
         /// The PIFs will be sorted by name, and deduplicated by name -- i.e. there will be only
         /// one per device name, even if there are multiple hosts in the pool.
         /// 
-        /// Note that this is not the same as GetAllPhysicalPIFs(pool.master) because the master
+        /// Note that this is not the same as GetAllPhysicalPIFs(pool.master) because the coordinator
         /// may have fewer NICs than other members in the pool.
         /// </summary>
         /// <param name="pool"></param>
@@ -120,21 +120,21 @@ namespace XenAdmin.Network
         }
             
         /// <summary>
-        /// Given a list of PIFs on the pool master, return a Dictionary mapping each host in the pool to a corresponding list of PIFs on that
-        /// host.  The PIFs lists will be sorted by name too.
+        /// Given a list of PIFs on the pool coordinator, return a Dictionary mapping each host in the pool to a corresponding list of PIFs on that
+        /// host. The PIFs lists will be sorted by name too.
         /// </summary>
-        /// <param name="PIFs_on_master"></param>
+        /// <param name="PIFs_on_coordinator"></param>
         /// <returns></returns>
-        public static Dictionary<Host, List<PIF>> PIFsOnAllHosts(List<PIF> PIFs_on_master)
+        public static Dictionary<Host, List<PIF>> PIFsOnAllHosts(List<PIF> PIFs_on_coordinator)
         {
             Dictionary<Host, List<PIF>> result = new Dictionary<Host, List<PIF>>();
 
-            if (PIFs_on_master.Count == 0)
+            if (PIFs_on_coordinator.Count == 0)
                 return result;
 
-            IXenConnection conn = PIFs_on_master[0].Connection;
+            IXenConnection conn = PIFs_on_coordinator[0].Connection;
 
-            List<string> devices = GetDevices(PIFs_on_master);
+            List<string> devices = GetDevices(PIFs_on_coordinator);
 
             foreach (Host host in conn.Cache.Hosts)
             {
@@ -176,8 +176,8 @@ namespace XenAdmin.Network
         {
             foreach (Bond b in host.Connection.Cache.Bonds)
             {
-                PIF master = host.Connection.Resolve(b.master);
-                if (master != null && master.host.opaque_ref == host.opaque_ref && BondMatches(b, bond))
+                PIF bondInterface = host.Connection.Resolve(b.master);
+                if (bondInterface != null && bondInterface.host.opaque_ref == host.opaque_ref && BondMatches(b, bond))
                     return b;
             }
             return null;
@@ -202,7 +202,7 @@ namespace XenAdmin.Network
             }
 
             // We can still have elements left in s2.  This is OK though -- bonds are considered to
-            // match if one has a subset of the slaves of the other.  This is why we force
+            // match if one has a subset of the bond members of the other.  This is why we force
             // s1.Count <= s2.Count above.
 
             return true;

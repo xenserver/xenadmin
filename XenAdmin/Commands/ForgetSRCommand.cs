@@ -61,22 +61,22 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             List<AsyncAction> actions = new List<AsyncAction>();
-            foreach (SR sr in selection.AsXenObjects<SR>(CanExecute))
+            foreach (SR sr in selection.AsXenObjects<SR>(CanRun))
             {
                 actions.Add(new SrAction(SrActionKind.Forget, sr));
             }
             RunMultipleActions(actions, Messages.ACTION_SRS_FORGETTING, Messages.FORGETTING_SRS, Messages.SRS_FORGOTTEN, true);
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
-            return selection.AllItemsAre<SR>() && selection.AtLeastOneXenObjectCan<SR>(CanExecute);
+            return selection.AllItemsAre<SR>() && selection.AtLeastOneXenObjectCan<SR>(CanRun);
         }
 
-        private static bool CanExecute(SR sr)
+        private static bool CanRun(SR sr)
         {
             return sr != null
                 && !sr.HasRunningVMs()
@@ -85,21 +85,9 @@ namespace XenAdmin.Commands
                 && !HelpersGUI.GetActionInProgress(sr);
         }
 
-        public override string MenuText
-        {
-            get
-            {
-                return Messages.MAINWINDOW_FORGET_SR;
-            }
-        }
+        public override string MenuText => Messages.MAINWINDOW_FORGET_SR;
 
-        protected override bool ConfirmationRequired
-        {
-            get
-            {
-                return true;
-            }
-        }
+        protected override bool ConfirmationRequired => true;
 
         protected override string ConfirmationDialogText
         {
@@ -126,17 +114,17 @@ namespace XenAdmin.Commands
             }
         }
 
-        protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantExecuteReasons)
+        protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantRunReasons)
         {
-            return new CommandErrorDialog(Messages.ERROR_DIALOG_FORGET_SR_TITLE, Messages.ERROR_DIALOG_FORGET_SR_TEXT, cantExecuteReasons);
+            return new CommandErrorDialog(Messages.ERROR_DIALOG_FORGET_SR_TITLE, Messages.ERROR_DIALOG_FORGET_SR_TEXT, cantRunReasons);
         }
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
             SR sr = item as SR;
             if (sr == null)
             {
-                return base.GetCantExecuteReasonCore(item);
+                return base.GetCantRunReasonCore(item);
             }
             if (sr.HasRunningVMs())
             {
@@ -144,29 +132,17 @@ namespace XenAdmin.Commands
             }
             else if (!sr.CanCreateWithXenCenter())
             {
-                return Messages.SR_CANNOT_BE_FORGOTTEN_WITH_XC;
+                return string.Format(Messages.SR_CANNOT_BE_FORGOTTEN_WITH_XC, BrandManager.BrandConsole);
             }
             else if (HelpersGUI.GetActionInProgress(sr))
             {
                 return Messages.SR_ACTION_IN_PROGRESS;
             }
-            return base.GetCantExecuteReasonCore(item);
+            return base.GetCantRunReasonCore(item);
         }
 
-        protected override string ConfirmationDialogYesButtonLabel
-        {
-            get
-            {
-                return Messages.MESSAGEBOX_FORGET_SR_CONTINUE_YES_BUTTON_LABEL;
-            }
-        }
+        protected override string ConfirmationDialogYesButtonLabel => Messages.MESSAGEBOX_FORGET_SR_CONTINUE_YES_BUTTON_LABEL;
 
-        protected override bool ConfirmationDialogNoButtonSelected
-        {
-            get
-            {
-                return true;
-            }
-        }
+        protected override bool ConfirmationDialogNoButtonSelected => true;
     }
 }

@@ -188,12 +188,12 @@ namespace XenAdmin.Controls.DataGridViewEx
             if (Tag is Pool)
             {
                 Pool pool = (Pool)Tag;
-                Host master = pool.Connection.Resolve(pool.master);
+                Host coordinator = pool.Connection.Resolve(pool.master);
                 if( _poolCheckBoxCell.Value == null )
                     Checked = CheckState.Unchecked;
                 SetCollapseIcon();
                 _nameCell.Value = pool;
-                UpdateAdditionalDetailsForPool(pool, master);
+                UpdateAdditionalDetailsForPool(pool, coordinator);
 
             }
             else if (Tag is Host)
@@ -208,7 +208,7 @@ namespace XenAdmin.Controls.DataGridViewEx
             }
         }
 
-        protected virtual void UpdateAdditionalDetailsForPool(Pool pool, Host master) { }
+        protected virtual void UpdateAdditionalDetailsForPool(Pool pool, Host coordinator) { }
 
         protected virtual void UpdateAdditionalDetailsForHost(Host host) { }
     }

@@ -65,14 +65,14 @@ namespace XenAdmin.Actions
             if (hostsToRelicense.Count == 0)
                 return;
 
-            Host poolMaster = Helpers.GetMaster(pool);
-            AsyncAction action = new ApplyLicenseEditionAction(hostsToRelicense.ConvertAll(h=>h as IXenObject), Host.GetEdition(poolMaster.edition), poolMaster.license_server["address"], poolMaster.license_server["port"], 
+            Host poolCoordinator = Helpers.GetCoordinator(pool);
+            AsyncAction action = new ApplyLicenseEditionAction(hostsToRelicense.ConvertAll(h=>h as IXenObject), Host.GetEdition(poolCoordinator.edition), poolCoordinator.license_server["address"], poolCoordinator.license_server["port"], 
                 doOnLicensingFailure);
             action.RunExternal(null);
         }
 
         /// <summary>
-        /// Mask the CPUs of any slaves that need masking to join the pool
+        /// Mask the CPUs of any supporters that need masking to join the pool
         /// </summary>
         /// <returns>Whether any CPUs were masked</returns>
         protected static bool FixCpus(Pool pool, List<Host> hostsToCpuMask, Func<HostAbstractAction, Pool, long, long, bool> acceptNTolChanges)
@@ -80,7 +80,7 @@ namespace XenAdmin.Actions
             if (hostsToCpuMask.Count == 0)
                 return false;
 
-            Host poolMaster = Helpers.GetMaster(pool);
+            Host poolCoordinator = Helpers.GetCoordinator(pool);
             List<RebootHostAction> rebootActions = new List<RebootHostAction>();
 
             // Mask the CPUs, and reboot the hosts (simultaneously, as they must all be on separate connections)
@@ -93,7 +93,7 @@ namespace XenAdmin.Actions
                     continue;
                 }
 
-                Host.set_cpu_features(host.Connection.Session, host.opaque_ref, poolMaster.cpu_info["features"]);
+                Host.set_cpu_features(host.Connection.Session, host.opaque_ref, poolCoordinator.cpu_info["features"]);
                 RebootHostAction action = new RebootHostAction(host, acceptNTolChanges);
                 rebootActions.Add(action);
                 action.RunAsync();
@@ -151,20 +151,20 @@ namespace XenAdmin.Actions
             if (hostsToAdConfigure.Count == 0)
                 return;
 
-            Host poolMaster = Helpers.GetMaster(pool);
+            Host poolCoordinator = Helpers.GetCoordinator(pool);
             AsyncAction action;
 
             bool success = true;
             do
             {
                 success = true;
-                AdUserAndPassword adUserAndPassword = getAdCredentials(poolMaster);
+                AdUserAndPassword adUserAndPassword = getAdCredentials(poolCoordinator);
 
                 try
                 {
                     foreach (Host h in hostsToAdConfigure)
                     {
-                        action = new EnableAdAction(h.Connection, poolMaster.external_auth_service_name,
+                        action = new EnableAdAction(h.Connection, poolCoordinator.external_auth_service_name,
                                 adUserAndPassword.Username, adUserAndPassword.Password)
                             {Host = h};
                         action.RunExternal(null);

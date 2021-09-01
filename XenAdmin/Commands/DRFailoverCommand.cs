@@ -73,7 +73,7 @@ namespace XenAdmin.Commands
         }
 
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             
             var pool = Helpers.GetPoolOfOne(selection.FirstAsXenObject.Connection);
@@ -81,7 +81,7 @@ namespace XenAdmin.Commands
             {
                 if (Helpers.FeatureForbidden(pool.Connection, Host.RestrictDR)) 
                 {
-                    ShowUpsellDialog(Parent);
+                    UpsellDialog.ShowUpsellDialog(Messages.UPSELL_BLURB_DR, Parent);
                 }
                 else
                 {
@@ -91,15 +91,7 @@ namespace XenAdmin.Commands
             }
         }
 
-        public static void ShowUpsellDialog(IWin32Window parent)
-        {
-            // Show upsell dialog
-            using (var dlg = new UpsellDialog(HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_DR : Messages.UPSELL_BLURB_DR + Messages.UPSELL_BLURB_TRIAL,
-                                                InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL))
-                dlg.ShowDialog(parent);
-        }
-
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             return selection.Count==1 && selection.FirstAsXenObject != null && selection.FirstAsXenObject.Connection != null; 
         }

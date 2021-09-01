@@ -45,7 +45,7 @@ namespace XenAdmin.Controls.Wlb
     {
         #region Variables
 
-        public event CustomRefreshEventHandler OnChangeOK;
+        public event EventHandler OnChangeOK;
         public event EventHandler Close;
         public event EventHandler PoolConnectionLost;
 
@@ -76,7 +76,7 @@ namespace XenAdmin.Controls.Wlb
 
         #region Public Methods
 
-        public void BuildPanel()
+        private void BuildPanel()
         {
             // Subscription section
             if (_subscription != null)
@@ -107,9 +107,9 @@ namespace XenAdmin.Controls.Wlb
                 // Schedule Options
                 pdSectionSchedule.ClearData();
 
-                DateTime localExecuteTime;
+                DateTime localRunTime;
                 WlbScheduledTask.WlbTaskDaysOfWeek localDaysOfWeek;
-                WlbScheduledTask.GetLocalTaskTimes(this._subscription.DaysOfWeek, this._subscription.ExecuteTimeOfDay, out localDaysOfWeek, out localExecuteTime);
+                WlbScheduledTask.GetLocalTaskTimes(this._subscription.DaysOfWeek, this._subscription.RunTimeOfDay, out localDaysOfWeek, out localRunTime);
                 if (_subscription.DaysOfWeek == WlbScheduledTask.WlbTaskDaysOfWeek.All)
                 {
                     pdSectionSchedule.AddEntry(Messages.WLB_SUBSCRIPTION_DELIVERON, Messages.WLB_REPORT_EVERYDAY);
@@ -119,7 +119,7 @@ namespace XenAdmin.Controls.Wlb
                     pdSectionSchedule.AddEntry(Messages.WLB_SUBSCRIPTION_DELIVERON, WlbScheduledTask.DaysOfWeekL10N(localDaysOfWeek));
                 }
 
-                pdSectionSchedule.AddEntry(Messages.WLB_SUBSCRIPTION_RUNAT, HelpersGUI.DateTimeToString(localExecuteTime, Messages.DATEFORMAT_HMS, true));
+                pdSectionSchedule.AddEntry(Messages.WLB_SUBSCRIPTION_RUNAT, HelpersGUI.DateTimeToString(localRunTime, Messages.DATEFORMAT_HMS, true));
                 pdSectionSchedule.AddEntry(Messages.WLB_SUBSCRIPTION_STARTING, HelpersGUI.DateTimeToString(_subscription.EnableDate.ToLocalTime(), Messages.DATEFORMAT_DMY_LONG, true));
                 pdSectionSchedule.AddEntry(Messages.WLB_SUBSCRIPTION_ENDING, (_subscription.DisableDate == DateTime.MinValue ? Messages.WLB_REPORT_NEVER : HelpersGUI.DateTimeToString(_subscription.DisableDate.ToLocalTime(), Messages.DATEFORMAT_DMY_LONG, true)));
                 //pdSectionSchedule.Expand();
@@ -158,11 +158,11 @@ namespace XenAdmin.Controls.Wlb
             return range;
         }
 
-        public void ResetSubscriptionView(WlbReportSubscription subscription)
+        public void RefreshSubscriptionView(WlbReportSubscription subscription = null)
         {
-            this.ReportSubscription = subscription;
-            this.BuildPanel();
-            this.Visible = true;
+            if (subscription != null)
+                ReportSubscription = subscription;
+            BuildPanel();
         }
         
         #endregion

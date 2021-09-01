@@ -75,7 +75,7 @@ namespace XenAdmin.Actions
             dconf["password_secret"] = newPasswordSecret;
             try
             {
-                RelatedTask = XenAPI.SR.async_probe(Session, Helpers.GetMaster(Connection).opaque_ref, dconf, XenAPI.SR.SRTypes.cslg.ToString(), new Dictionary<String, String>());
+                RelatedTask = XenAPI.SR.async_probe(Session, Helpers.GetCoordinator(Connection).opaque_ref, dconf, XenAPI.SR.SRTypes.cslg.ToString(), new Dictionary<String, String>());
                 PollToCompletion();
             }
             finally

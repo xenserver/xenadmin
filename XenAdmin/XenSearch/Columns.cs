@@ -128,7 +128,7 @@ namespace XenAdmin.XenSearch
                         colSpan = 3;
                     }
 
-                    if (InstallToolsCommand.CanExecute(vm))
+                    if (InstallToolsCommand.CanRun(vm))
                     {
                         item = new GridStringItem(warningMessage,
                             HorizontalAlignment.Center,
@@ -145,7 +145,7 @@ namespace XenAdmin.XenSearch
                                 if (Helpers.StockholmOrGreater(vm.Connection))
                                     Help.HelpManager.Launch("InstallToolsWarningDialog");
                                 else
-                                    new InstallToolsCommand(Program.MainWindow, vm).Execute();
+                                    new InstallToolsCommand(Program.MainWindow, vm).Run();
                             }, null);
                     }
                     else
@@ -166,7 +166,7 @@ namespace XenAdmin.XenSearch
                     warningMessage = Messages.VIRTUALIZATION_STATE_VM_IO_NOT_OPTIMIZED;
                     colSpan = 2;
 
-                    if (InstallToolsCommand.CanExecute(vm))
+                    if (InstallToolsCommand.CanRun(vm))
                     {
                         item = new GridStringItem(warningMessage,
                             HorizontalAlignment.Center,
@@ -183,7 +183,7 @@ namespace XenAdmin.XenSearch
                                 if (Helpers.StockholmOrGreater(vm.Connection))
                                     Help.HelpManager.Launch("InstallToolsWarningDialog");
                                 else
-                                    new InstallToolsCommand(Program.MainWindow, vm).Execute();
+                                    new InstallToolsCommand(Program.MainWindow, vm).Run();
                             }, null);
                     }
                     else
@@ -206,13 +206,13 @@ namespace XenAdmin.XenSearch
             {
                 if (property == PropertyNames.memoryValue)
                 {
-                    var master = pool.Connection.Resolve(pool.master);
+                    var coordinator = pool.Connection.Resolve(pool.master);
 
-                    item = new GridStringItem(string.Format(Messages.POOL_VERSIONS_LINK_TEXT, master.ProductVersionText()),
+                    item = new GridStringItem(string.Format(Messages.POOL_VERSIONS_LINK_TEXT, BrandManager.ProductBrand, coordinator.ProductVersionText()),
                                   HorizontalAlignment.Center, VerticalAlignment.Middle, false, false,
                                   QueryPanel.LinkBrush, Program.DefaultFontUnderline, QueryPanel.LinkBrush,
                                   Program.DefaultFontUnderline, 3,
-                                  (sender, args) => new RollingUpgradeCommand(Program.MainWindow).Execute(),
+                                  (sender, args) => new RollingUpgradeCommand(Program.MainWindow).Run(),
                                   null);
                 }
 

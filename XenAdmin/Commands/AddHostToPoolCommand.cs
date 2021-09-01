@@ -30,6 +30,7 @@
  */
 
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Core;
@@ -66,7 +67,7 @@ namespace XenAdmin.Commands
             _pool = pool;
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             var reasons = new Dictionary<IXenObject, string>();
             foreach (Host host in _hosts)
@@ -115,41 +116,94 @@ namespace XenAdmin.Commands
 
             // Check supp packs and warn
             List<string> badSuppPacks = PoolJoinRules.HomogeneousSuppPacksDiffering(_hosts, _pool);
-            if (!HelpersGUI.GetPermissionFor(badSuppPacks,
-                Messages.ADD_HOST_TO_POOL_SUPP_PACK, Messages.ADD_HOST_TO_POOL_SUPP_PACKS, false, "PoolJoinSuppPacks"))
+
+            if (!Program.RunInAutomatedTestMode && badSuppPacks.Count > 0)
             {
-                return;
+                string msg = string.Format(badSuppPacks.Count == 1 ? Messages.ADD_HOST_TO_POOL_SUPP_PACK : Messages.ADD_HOST_TO_POOL_SUPP_PACKS,
+                    string.Join("\n", badSuppPacks));
+
+                using (var dlg = new WarningDialog(msg,
+                        new ThreeButtonDialog.TBDButton(Messages.PROCEED, DialogResult.OK, selected: false),
+                        new ThreeButtonDialog.TBDButton(Messages.CANCEL, DialogResult.Cancel, selected: true))
+                    {HelpNameSetter = "PoolJoinSuppPacks"})
+                {
+                    if (dlg.ShowDialog(Program.MainWindow) == DialogResult.Cancel)
+                        return;
+                }
             }
 
             // Are there any hosts which are forbidden from masking their CPUs for licensing reasons?
             // If so, we need to show upsell.
-            Host master = Helpers.GetMaster(_pool);
+            Host coordinator = Helpers.GetCoordinator(_pool);
             if (null != _hosts.Find(host =>
-                !PoolJoinRules.CompatibleCPUs(host, master, false) &&
+                !PoolJoinRules.CompatibleCPUs(host, coordinator, false) &&
                 Helpers.FeatureForbidden(host, Host.RestrictCpuMasking) &&
-                !PoolJoinRules.FreeHostPaidMaster(host, master, false)))  // in this case we can upgrade the license and then mask the CPU
+                !PoolJoinRules.FreeHostPaidCoordinator(host, coordinator, false)))  // in this case we can upgrade the license and then mask the CPU
             {
-                using (var dlg = new UpsellDialog(HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_CPUMASKING : Messages.UPSELL_BLURB_CPUMASKING + Messages.UPSELL_BLURB_TRIAL,
-                                                    InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL))
-                    dlg.ShowDialog(Parent);
+                UpsellDialog.ShowUpsellDialog(Messages.UPSELL_BLURB_CPUMASKING, Parent);
                 return;
             }
 
-            // Get permission for any fix-ups: 1) Licensing free hosts; 2) CPU masking 3) Ad configuration 4) CPU feature levelling (Dundee or higher only)
+            // Get permission for any fix-ups:
+            // 1) Licensing free hosts
+            // 2) CPU masking
+            // 3) Ad configuration
+            // 4) CPU feature levelling (Dundee or higher only)
             // (We already know that these things are fixable because we have been through CanJoinPool() above).
-            if (!HelpersGUI.GetPermissionFor(_hosts.FindAll(host => PoolJoinRules.FreeHostPaidMaster(host, master, false)),
-                Messages.ADD_HOST_TO_POOL_LICENSE_MESSAGE, Messages.ADD_HOST_TO_POOL_LICENSE_MESSAGE_MULTIPLE, true, "PoolJoinRelicensing")
-                ||
-                !HelpersGUI.GetPermissionFor(_hosts.FindAll(host => !PoolJoinRules.CompatibleCPUs(host, master, false)),
-                Messages.ADD_HOST_TO_POOL_CPU_MASKING_MESSAGE, Messages.ADD_HOST_TO_POOL_CPU_MASKING_MESSAGE_MULTIPLE, true, "PoolJoinCpuMasking")
-                ||
-                !HelpersGUI.GetPermissionFor(_hosts.FindAll(host => !PoolJoinRules.CompatibleAdConfig(host, master, false)),
-                Messages.ADD_HOST_TO_POOL_AD_MESSAGE, Messages.ADD_HOST_TO_POOL_AD_MESSAGE_MULTIPLE, true, "PoolJoinAdConfiguring")  
-                ||
-                !HelpersGUI.GetPermissionForCpuFeatureLevelling(_hosts, _pool))
+            
+            if (!Program.RunInAutomatedTestMode)
             {
-                return;
+                var hosts1 = _hosts.FindAll(host => PoolJoinRules.FreeHostPaidCoordinator(host, coordinator, false));
+                if (hosts1.Count > 0)
+                {
+                    string msg = string.Format(hosts1.Count == 1
+                            ? Messages.ADD_HOST_TO_POOL_LICENSE_MESSAGE
+                            : Messages.ADD_HOST_TO_POOL_LICENSE_MESSAGE_MULTIPLE,
+                        string.Join("\n", hosts1.Select(h => h.Name())));
+
+                    using (var dlg = new WarningDialog(msg, ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
+                        {HelpNameSetter = "PoolJoinRelicensing"})
+                    {
+                        if (dlg.ShowDialog(Program.MainWindow) == DialogResult.No)
+                            return;
+                    }
+                }
+
+                var hosts2 = _hosts.FindAll(host => !PoolJoinRules.CompatibleCPUs(host, coordinator, false));
+                if (hosts2.Count > 0)
+                {
+                    string msg = string.Format(hosts2.Count == 1
+                            ? Messages.ADD_HOST_TO_POOL_CPU_MASKING_MESSAGE
+                            : Messages.ADD_HOST_TO_POOL_CPU_MASKING_MESSAGE_MULTIPLE,
+                        string.Join("\n", hosts2.Select(h => h.Name())), BrandManager.ProductBrand);
+
+                    using (var dlg = new WarningDialog(msg, ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
+                        {HelpNameSetter = "PoolJoinCpuMasking"})
+                    {
+                        if (dlg.ShowDialog(Program.MainWindow) == DialogResult.No)
+                            return;
+                    }
+                }
+
+                var hosts3 = _hosts.FindAll(host => !PoolJoinRules.CompatibleAdConfig(host, coordinator, false));
+                if (hosts3.Count > 0)
+                {
+                    string msg = string.Format(hosts3.Count == 1
+                            ? Messages.ADD_HOST_TO_POOL_AD_MESSAGE
+                            : Messages.ADD_HOST_TO_POOL_AD_MESSAGE_MULTIPLE,
+                        string.Join("\n", hosts3.Select(h => h.Name())));
+
+                    using (var dlg = new WarningDialog(msg, ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
+                        {HelpNameSetter = "PoolJoinAdConfiguring"})
+                    {
+                        if (dlg.ShowDialog(Program.MainWindow) == DialogResult.No)
+                            return;
+                    }
+                }
             }
+
+            if (!HelpersGUI.GetPermissionForCpuFeatureLevelling(_hosts, _pool))
+                return;
 
             MainWindowCommandInterface.SelectObjectInTree(_pool);
 
@@ -168,7 +222,7 @@ namespace XenAdmin.Commands
             RunMultipleActions(actions, string.Format(Messages.ADDING_SERVERS_TO_POOL, _pool.Name()), Messages.POOLCREATE_ADDING, Messages.POOLCREATE_ADDED, true);
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (_hosts.Count > 0)
             {
@@ -185,9 +239,9 @@ namespace XenAdmin.Commands
             return false;
         }
 
-        public static PoolAbstractAction.AdUserAndPassword GetAdPrompt(Host poolMaster)
+        public static PoolAbstractAction.AdUserAndPassword GetAdPrompt(Host poolCoordinator)
         {
-            AdPasswordPrompt adPrompt = new AdPasswordPrompt(true, poolMaster.external_auth_service_name);
+            AdPasswordPrompt adPrompt = new AdPasswordPrompt(true, poolCoordinator.external_auth_service_name);
 
             Program.Invoke(Program.MainWindow, delegate
                                                    {

@@ -1900,7 +1900,7 @@
     <value>186, 22</value>
   </data>
   <data name="templatesToolStripMenuItem1.Text" xml:space="preserve">
-    <value>[XenServer] T&amp;emplates</value>
+    <value>{0} T&amp;emplates</value>
   </data>
   <data name="localStorageToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>186, 22</value>
@@ -2317,7 +2317,7 @@
     <value>216, 22</value>
   </data>
   <data name="removeHostToolStripMenuItem.Text" xml:space="preserve">
-    <value>Remo&amp;ve from [XenCenter]</value>
+    <value>Remo&amp;ve from {0}</value>
   </data>
   <data name="toolStripSeparator15.Size" type="System.Drawing.Size, System.Drawing">
     <value>213, 6</value>
@@ -2437,7 +2437,7 @@
     <value>242, 22</value>
   </data>
   <data name="installToolsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Inst&amp;all [Citrix VM Tools]</value>
+    <value>installToolsToolStripMenuItem</value>
   </data>
   <data name="sendCtrlAltDelToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>242, 22</value>
@@ -2734,7 +2734,7 @@
     <value>228, 22</value>
   </data>
   <data name="viewApplicationLogToolStripMenuItem.Text" xml:space="preserve">
-    <value>View [XenCenter] &amp;Log Files</value>
+    <value>View {0} &amp;Log Files</value>
   </data>
   <data name="toolStripMenuItem17.Size" type="System.Drawing.Size, System.Drawing">
     <value>225, 6</value>
@@ -2743,13 +2743,13 @@
     <value>228, 22</value>
   </data>
   <data name="xenSourceOnTheWebToolStripMenuItem.Text" xml:space="preserve">
-    <value>[XenServer product] on the &amp;Web</value>
+    <value>{0} on the &amp;Web</value>
   </data>
   <data name="xenCenterPluginsOnlineToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>228, 22</value>
   </data>
   <data name="xenCenterPluginsOnlineToolStripMenuItem.Text" xml:space="preserve">
-    <value>[XenCenter] &amp;Plugins online</value>
+    <value>{0} &amp;Plugins online</value>
   </data>
   <data name="toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
     <value>225, 6</value>
@@ -2764,7 +2764,7 @@
     <value>228, 22</value>
   </data>
   <data name="aboutXenSourceAdminToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;About [XenCenter]</value>
+    <value>&amp;About {0}</value>
   </data>
   <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>41, 20</value>
@@ -2923,7 +2923,7 @@
     <value>No</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>[XenCenter]</value>
+    <value>text</value>
   </data>
   <data name="&gt;&gt;backButton.Name" xml:space="preserve">
     <value>backButton</value>

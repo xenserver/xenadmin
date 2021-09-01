@@ -115,15 +115,15 @@ namespace XenAdmin.Dialogs.Wlb
 
         private void InitializeControls()
         {
-            DateTime localExecuteTime;
+            DateTime localRunTime;
             WlbScheduledTask.WlbTaskDaysOfWeek localDaysOfWeek;
-            WlbScheduledTask.GetLocalTaskTimes(_task.DaysOfWeek, _task.ExecuteTime, out localDaysOfWeek, out localExecuteTime);
+            WlbScheduledTask.GetLocalTaskTimes(_task.DaysOfWeek, _task.RunTime, out localDaysOfWeek, out localRunTime);
 
             //comboDayOfWeek.SelectedValue = (int)localDaysOfWeek;
             comboDayOfWeek.SelectedValue = (int)FindSelectedDay(localDaysOfWeek);
-            comboBoxHour.SelectedValue = localExecuteTime.Hour;
-            //comboBoxMinute.SelectedValue = (((int)(localExecuteTime.Minute * 4 / 60)) * 15);
-            //dtExecuteTime.Value = localExecuteTime;
+            comboBoxHour.SelectedValue = localRunTime.Hour;
+            //comboBoxMinute.SelectedValue = (((int)(localRunTime.Minute * 4 / 60)) * 15);
+            //dtRunTime.Value = localRunTime;
             comboOptMode.SelectedValue = (int)GetTaskOptMode(_task);
             checkBoxEnable.Checked = _task.Enabled;
         }
@@ -223,15 +223,15 @@ namespace XenAdmin.Dialogs.Wlb
             }
             _task.Enabled = checkBoxEnable.Checked;
 
-            DateTime utcExecuteTime;
+            DateTime utcRunTime;
             WlbScheduledTask.WlbTaskDaysOfWeek utcDaysOfWeek;
 
             // Have to do this to trim off seconds and milliseconds
-            DateTime executeTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, (int)comboBoxHour.SelectedValue, 0, 0);
+            DateTime runTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, (int)comboBoxHour.SelectedValue, 0, 0);
 
-            WlbScheduledTask.GetUTCTaskTimes((WlbScheduledTask.WlbTaskDaysOfWeek)comboDayOfWeek.SelectedValue, executeTime, out utcDaysOfWeek, out utcExecuteTime);
+            WlbScheduledTask.GetUTCTaskTimes((WlbScheduledTask.WlbTaskDaysOfWeek)comboDayOfWeek.SelectedValue, runTime, out utcDaysOfWeek, out utcRunTime);
 
-            _task.ExecuteTime = utcExecuteTime;
+            _task.RunTime = utcRunTime;
             _task.DaysOfWeek = utcDaysOfWeek;
         }
         #endregion

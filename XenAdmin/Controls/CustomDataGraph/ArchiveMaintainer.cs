@@ -33,6 +33,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Xml;
@@ -46,20 +47,6 @@ namespace XenAdmin.Controls.CustomDataGraph
 
     public class ArchiveMaintainer
     {
-        private delegate void ReaderDelegate(XmlReader reader, IXenObject xmo);
-        private delegate Uri URIDelegate(Session session, Host host, ArchiveInterval interval, IXenObject xmo);
-
-        internal const string RrdUpdatesPath = "rrd_updates";
-        private const string RrdHostPath = "host_rrds";
-        private const string RrdVmPath = "vm_rrds";
-        internal const string RrdCFAverage = "AVERAGE";
-
-        private const string RrdHostUpdatesQuery = "session_id={0}&start={1}&cf={2}&interval={3}&host=true&vm_uuid=";
-        internal const string RrdHostAndVmUpdatesQuery = "session_id={0}&start={1}&cf={2}&interval={3}&host=true";
-        private const string RrdVmUpdatesQuery = "session_id={0}&start={1}&cf={2}&interval={3}&vm_uuid={4}";
-        private const string RrdHostQuery = "session_id={0}";
-        private const string RrdVmQuery = "session_id={0}&uuid={1}";
-
         private const long TicksInOneSecond = 10000000;
         private const long TicksInFiveSeconds = 50000000;
         internal const long TicksInTenSeconds = 100000000;
@@ -119,7 +106,17 @@ namespace XenAdmin.Controls.CustomDataGraph
         /// </summary>
         private List<DataSet> SetsAdded;
 
+        private List<Data_source> _enabledDataSources = new List<Data_source>();
+
         private IXenObject _xenObject;
+
+        private long EndTime;
+        private bool BailOut;
+        private long CurrentInterval;
+        private long StepSize;
+        private long CurrentTime;
+        private int ValueCount;
+        private string LastNode = "";
 
         /// <summary>
         /// Gui Thread
@@ -144,17 +141,13 @@ namespace XenAdmin.Controls.CustomDataGraph
         public DateTime LastOneDayCollection = DateTime.MinValue;
 
         public bool FirstTime = true;
+        public bool LoadingInitialData;
 
-        public bool LoadingInitialData = false;
+        private DateTime ServerNow => DateTime.UtcNow.Subtract(ClientServerOffset);
 
-        public TimeSpan ClientServerOffset
-        {
-            get
-            {
-                IXenObject m = XenObject;
-                return m == null ? TimeSpan.Zero : m.Connection.ServerTimeOffset;
-            }
-        }
+        public DateTime GraphNow => DateTime.Now - (ClientServerOffset + TimeSpan.FromSeconds(15));
+
+        public TimeSpan ClientServerOffset => XenObject?.Connection.ServerTimeOffset ?? TimeSpan.Zero;
 
         public ArchiveMaintainer()
         {
@@ -176,9 +169,8 @@ namespace XenAdmin.Controls.CustomDataGraph
             while (RunThread)
             {
                 IXenObject xenObject = XenObject;
-                Host Host = GetHost(xenObject);
 
-                DateTime ServerWas = ServerNow(); // get time before updating so we don't miss any 5 second updates if getting the past data
+                DateTime serverWas = ServerNow; // get time before updating so we don't miss any 5 second updates if getting the past data
 
                 if (FirstTime)
                 {
@@ -194,44 +186,58 @@ namespace XenAdmin.Controls.CustomDataGraph
                         Archives[ArchiveInterval.OneDay].MaxPoints = DaysInOneYear;
                     }
 
+                    _enabledDataSources.Clear();
+
                     foreach (DataArchive a in Archives.Values)
                         a.ClearSets();
 
-                    LoadingInitialData = true;
-                    OnArchivesUpdated();
-                    Get(ArchiveInterval.None, RrdsUri, RRD_Full_InspectCurrentNode, Host, xenObject);
-                    LoadingInitialData = false;
-                    OnArchivesUpdated();
+                    try
+                    {
+                        LoadingInitialData = true;
+                        ArchivesUpdated?.Invoke();
 
-                    LastFiveSecondCollection = ServerWas;
-                    LastOneMinuteCollection = ServerWas;
-                    LastOneHourCollection = ServerWas;
-                    LastOneDayCollection = ServerWas;
+                        if (xenObject is Host h)
+                            _enabledDataSources = Host.get_data_sources(h.Connection.Session, h.opaque_ref).Where(d => d.enabled).ToList();
+                        else if (xenObject is VM vm && vm.power_state == vm_power_state.Running)
+                            _enabledDataSources = VM.get_data_sources(vm.Connection.Session, vm.opaque_ref).Where(d => d.enabled).ToList();
+
+                        Get(ArchiveInterval.None, RrdsUri, RRD_Full_InspectCurrentNode, xenObject);
+                    }
+                    finally
+                    {
+                        LoadingInitialData = false;
+                        ArchivesUpdated?.Invoke();
+                    }
+
+                    LastFiveSecondCollection = serverWas;
+                    LastOneMinuteCollection = serverWas;
+                    LastOneHourCollection = serverWas;
+                    LastOneDayCollection = serverWas;
                     FirstTime = false;
                 }
 
-                if (ServerWas - LastFiveSecondCollection > FiveSeconds)
+                if (serverWas - LastFiveSecondCollection > FiveSeconds)
                 {
-                    GetUpdate(ArchiveInterval.FiveSecond, Host, xenObject);
-                    LastFiveSecondCollection = ServerWas;
+                    Get(ArchiveInterval.FiveSecond, UpdateUri, RRD_Update_InspectCurrentNode, xenObject);
+                    LastFiveSecondCollection = serverWas;
                     Archives[ArchiveInterval.FiveSecond].Load(SetsAdded);
                 }
-                if (ServerWas - LastOneMinuteCollection > OneMinute)
+                if (serverWas - LastOneMinuteCollection > OneMinute)
                 {
-                    GetUpdate(ArchiveInterval.OneMinute, Host, xenObject);
-                    LastOneMinuteCollection = ServerWas;
+                    Get(ArchiveInterval.OneMinute, UpdateUri, RRD_Update_InspectCurrentNode, xenObject);
+                    LastOneMinuteCollection = serverWas;
                     Archives[ArchiveInterval.OneMinute].Load(SetsAdded);
                 }
-                if (ServerWas - LastOneHourCollection > OneHour)
+                if (serverWas - LastOneHourCollection > OneHour)
                 {
-                    GetUpdate(ArchiveInterval.OneHour, Host, xenObject);
-                    LastOneHourCollection = ServerWas;
+                    Get(ArchiveInterval.OneHour, UpdateUri, RRD_Update_InspectCurrentNode, xenObject);
+                    LastOneHourCollection = serverWas;
                     Archives[ArchiveInterval.OneHour].Load(SetsAdded);
                 }
-                if (ServerWas - LastOneDayCollection > OneDay)
+                if (serverWas - LastOneDayCollection > OneDay)
                 {
-                    GetUpdate(ArchiveInterval.OneDay, Host, xenObject);
-                    LastOneDayCollection = ServerWas;
+                    Get(ArchiveInterval.OneDay, UpdateUri, RRD_Update_InspectCurrentNode, xenObject);
+                    LastOneDayCollection = serverWas;
                     Archives[ArchiveInterval.OneDay].Load(SetsAdded);
                 }
 
@@ -247,37 +253,16 @@ namespace XenAdmin.Controls.CustomDataGraph
             }
         }
 
-        /// <summary>
-        /// UpdaterThread Thread
-        /// </summary>
-        public DateTime ServerNow()
+        private void Get(ArchiveInterval interval, Func<ArchiveInterval, IXenObject, Uri> uriBuilder,
+            Action<XmlReader, IXenObject>Reader, IXenObject xenObject)
         {
-            return DateTime.UtcNow.Subtract(ClientServerOffset);
-        }
-
-        /// <summary>
-        /// UpdaterThread Thread
-        /// </summary>
-        private void GetUpdate(ArchiveInterval interval, Host host, IXenObject xo)
-        {
-            Get(interval, UpdateUri, RRD_Update_InspectCurrentNode, host, xo);
-        }
-
-        /// <summary>
-        /// UpdaterThread Thread
-        /// </summary>
-        private void Get(ArchiveInterval interval, URIDelegate URI, ReaderDelegate Reader,
-            Host host, IXenObject xenObject)
-        {
-            if (host == null)
-                return;
-
             try
             {
-                Session session = xenObject.Connection.Session;
-                if (session == null)
+                var uri = uriBuilder(interval, xenObject);
+                if (uri == null)
                     return;
-                using (Stream httpstream = HTTPHelper.GET(URI(session, host, interval, xenObject), xenObject.Connection, true))
+
+                using (Stream httpstream = HTTPHelper.GET(uri, xenObject.Connection, true))
                 {
                     using (XmlReader reader = XmlReader.Create(httpstream))
                     {
@@ -298,39 +283,62 @@ namespace XenAdmin.Controls.CustomDataGraph
             }
         }
 
-        /// <summary>
-        /// UpdaterThread Thread
-        /// </summary>
-        private Uri UpdateUri(Session session, Host host, ArchiveInterval interval, IXenObject xo)
+        private Uri UpdateUri(ArchiveInterval interval, IXenObject xo)
         {
-            string query =
-                xo is Host ?
-                    string.Format(RrdHostUpdatesQuery, Uri.EscapeDataString(session.opaque_ref), TimeFromInterval(interval), RrdCFAverage, ToSeconds(interval)) :
-                xo is VM ?
-                    string.Format(RrdVmUpdatesQuery, Uri.EscapeDataString(session.opaque_ref), TimeFromInterval(interval), RrdCFAverage, ToSeconds(interval), Helpers.GetUuid(xo)) :
-                    "";
-            return BuildUri(host, RrdUpdatesPath, query);
+            var sessionRef = xo?.Connection?.Session?.opaque_ref;
+            if (sessionRef == null)
+                return null;
+
+            var escapedRef = Uri.EscapeDataString(sessionRef);
+            var startTime = TimeFromInterval(interval);
+            var duration = ToSeconds(interval);
+
+            if (xo is Host host)
+            {
+                return BuildUri(host, "rrd_updates",
+                    $"session_id={escapedRef}&start={startTime}&cf=AVERAGE&interval={duration}&host=true");
+            }
+
+            if (xo is VM vm)
+            {
+                var vmHost = vm.Connection.Resolve(vm.resident_on) ?? Helpers.GetCoordinator(vm.Connection);
+                BuildUri(vmHost, "rrd_updates",
+                    $"session_id={escapedRef}&start={startTime}&cf=AVERAGE&interval={duration}&vm_uuid={vm.uuid}");
+            }
+
+            return null;
         }
 
-        private static Uri RrdsUri(Session session, Host host, ArchiveInterval interval, IXenObject xo)
+        private static Uri RrdsUri(ArchiveInterval interval, IXenObject xo)
         {
-            string query =
-                xo is Host ?
-                    string.Format(RrdHostQuery, Uri.EscapeDataString(session.opaque_ref)) :
-                xo is VM ?
-                    string.Format(RrdVmQuery, Uri.EscapeDataString(session.opaque_ref), Helpers.GetUuid(xo)) :
-                    "";
-            return BuildUri(host, xo is Host ? RrdHostPath : RrdVmPath, query);
+            var sessionRef = xo.Connection.Session?.opaque_ref;
+            if (sessionRef == null)
+                return null;
+
+            var escapedRef = Uri.EscapeDataString(sessionRef);
+            
+            if (xo is Host host)
+                return BuildUri(host, "host_rrds", $"session_id={escapedRef}");
+
+            if (xo is VM vm)
+            {
+                var vmHost = vm.Connection.Resolve(vm.resident_on) ?? Helpers.GetCoordinator(vm.Connection);
+                return BuildUri(vmHost, "vm_rrds", $"session_id={escapedRef}&uuid={vm.uuid}");
+            }
+
+            return null;
         }
 
         private static Uri BuildUri(Host host, string path, string query)
         {
-            UriBuilder builder = new UriBuilder();
-            builder.Scheme = host.Connection.UriScheme;
-            builder.Host = host.address;
-            builder.Port = host.Connection.Port;
-            builder.Path = path;
-            builder.Query = query;
+            UriBuilder builder = new UriBuilder
+            {
+                Scheme = host.Connection.UriScheme,
+                Host = host.address,
+                Port = host.Connection.Port,
+                Path = path,
+                Query = query
+            };
             return builder.Uri;
         }
 
@@ -395,15 +403,6 @@ namespace XenAdmin.Controls.CustomDataGraph
             }
         }
 
-
-        private long EndTime = 0;
-        private bool BailOut = false;
-        private long CurrentInterval = 0;
-        private long StepSize = 0;
-
-        /// <summary>
-        /// UpdaterThread Thread
-        /// </summary>
         private void RRD_Full_InspectCurrentNode(XmlReader reader, IXenObject xmo)
         {
             if (reader.NodeType == XmlNodeType.Element)
@@ -429,7 +428,7 @@ namespace XenAdmin.Controls.CustomDataGraph
 
                     ArchiveInterval i = GetArchiveIntervalFromFiveSecs(CurrentInterval);
                     if (i != ArchiveInterval.None)
-                        Archives[i].CopyLoad(SetsAdded);
+                        Archives[i].CopyLoad(SetsAdded, _enabledDataSources);
 
                     foreach (DataSet set in SetsAdded)
                         set.Points.Clear();
@@ -443,8 +442,7 @@ namespace XenAdmin.Controls.CustomDataGraph
             if (LastNode == "name")
             {
                 string str = reader.ReadContentAsString();
-                string id = string.Format("{0}:{1}:{2}", xmo is Host ? "host" : "vm", Helpers.GetUuid(xmo), str);
-                SetsAdded.Add(DataSet.Create(id, xmo, true, str));
+                SetsAdded.Add(new DataSet(xmo, false, str, _enabledDataSources));
             }
             else if (LastNode == "step")
             {
@@ -472,7 +470,7 @@ namespace XenAdmin.Controls.CustomDataGraph
             else if (LastNode == "cf")
             {
                 string str = reader.ReadContentAsString();
-                if (str != RrdCFAverage)
+                if (str != "AVERAGE")
                     BailOut = true;
             }
             else if (LastNode == "v")
@@ -482,19 +480,11 @@ namespace XenAdmin.Controls.CustomDataGraph
 
                 DataSet set = SetsAdded[ValueCount];
                 string str = reader.ReadContentAsString();
-                set.AddPoint(str, CurrentTime, SetsAdded);
+                set.AddPoint(str, CurrentTime, SetsAdded, _enabledDataSources);
                 ValueCount++;
             }
         }
 
-        private long CurrentTime = 0;
-        private int ValueCount;
-
-        private string LastNode = "";
-
-        /// <summary>
-        /// UpdaterThread Thread
-        /// </summary>
         private void RRD_Update_InspectCurrentNode(XmlReader reader, IXenObject xo)
         {
             if (reader.NodeType == XmlNodeType.Element)
@@ -509,7 +499,29 @@ namespace XenAdmin.Controls.CustomDataGraph
             if (LastNode == "entry")
             {
                 string str = reader.ReadContentAsString();
-                SetsAdded.Add(DataSet.Create(str, xo));
+                DataSet set = null;
+
+                if (DataSet.ParseId(str, out string objType, out string objUuid, out string dataSourceName))
+                {
+                    if (objType == "host")
+                    {
+                        Host host = xo.Connection.Cache.Hosts.FirstOrDefault(h => h.uuid == objUuid);
+                        if (host != null)
+                            set = new DataSet(host, (xo as Host)?.uuid != objUuid, dataSourceName, _enabledDataSources);
+                    }
+
+                    if (objType == "vm")
+                    {
+                        VM vm = xo.Connection.Cache.VMs.FirstOrDefault(v => v.uuid == objUuid);
+                        if (vm != null)
+                            set = new DataSet(vm, (xo as VM)?.uuid != objUuid, dataSourceName, _enabledDataSources);
+                    }
+                }
+
+                if (set == null)
+                    set = new DataSet(null, true, str, _enabledDataSources);
+
+                SetsAdded.Add(set);
             }
             else if (LastNode == "t")
             {
@@ -521,7 +533,7 @@ namespace XenAdmin.Controls.CustomDataGraph
                 if (SetsAdded.Count <= ValueCount) return;
                 DataSet set = SetsAdded[ValueCount];
                 string str = reader.ReadContentAsString();
-                set.AddPoint(str, CurrentTime, SetsAdded);
+                set.AddPoint(str, CurrentTime, SetsAdded, _enabledDataSources);
                 ValueCount++;
             }
         }
@@ -585,39 +597,6 @@ namespace XenAdmin.Controls.CustomDataGraph
                 default:
                     return ArchiveInterval.None;
             }
-        }
-
-        public DateTime GraphNow
-        {
-            get
-            {
-                return DateTime.Now - (ClientServerOffset + TimeSpan.FromSeconds(15));
-            }
-        }
-
-        private static Host GetHost(IXenObject xmo)
-        {
-            if (xmo is Host)
-            {
-                return (Host)xmo;
-            }
-            else if (xmo is VM)
-            {
-                VM vm = (VM)xmo;
-                return xmo.Connection.Resolve(vm.resident_on) ?? Helpers.GetMaster(xmo.Connection);
-            }
-            else
-            {
-                System.Diagnostics.Trace.Assert(false);
-                return null;
-            }
-        }
-
-
-        private void OnArchivesUpdated()
-        {
-            if (ArchivesUpdated != null)
-                ArchivesUpdated();
         }
     }
 }

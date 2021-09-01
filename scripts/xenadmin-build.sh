@@ -67,36 +67,35 @@ cd ${REPO}
 gitCommit=`git rev-parse HEAD`
 git archive --format=zip -o "_scratch/SOURCES/xenadmin-sources.zip" ${gitCommit}
 cp ${REPO}/packages/dotnet-packages-sources.zip ${SCRATCH_DIR}/SOURCES
-cd ${SCRATCH_DIR}/SOURCES && zip ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}-source.zip dotnet-packages-sources.zip xenadmin-sources.zip
+cd ${SCRATCH_DIR}/SOURCES && zip ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE_NO_SPACE}-source.zip dotnet-packages-sources.zip xenadmin-sources.zip
 
 ${UNZIP} -d ${SCRATCH_DIR} ${REPO}/packages/XenCenterOVF.zip
 cd ${REPO} && "${MSBUILD}" ${SWITCHES} XenAdmin.sln
 
 #sign files only if all parameters are set and non-empty
 SIGN_BAT="${REPO}/scripts/sign.bat"
-SIGN_DESCR="${BRANDING_COMPANY_NAME_SHORT} ${BRANDING_BRAND_CONSOLE}"
 
 if [ -f "${SIGN_BAT}" ] ; then
-  for file in XenCenterMain.exe CommandLib.dll MSTSCLib.dll XenCenterLib.dll XenModel.dll XenOvf.dll
+  for file in ${BRANDING_BRAND_CONSOLE_NO_SPACE}Main.exe CommandLib.dll MSTSCLib.dll CoreUtilsLib.dll XenModel.dll XenOvf.dll
   do
-    cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} ${file} "${SIGN_DESCR}"
+    cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} ${file} "${BRANDING_BRAND_CONSOLE}"
   done
 
   for locale in ja zh-CN
   do
-    for file in XenCenterMain.resources.dll  XenModel.resources.dll  XenOvf.resources.dll
+    for file in ${BRANDING_BRAND_CONSOLE_NO_SPACE}Main.resources.dll  XenModel.resources.dll  XenOvf.resources.dll
     do
-      cd ${REPO}/XenAdmin/bin/Release/${locale} && ${SIGN_BAT} ${file} "${SIGN_DESCR}"
+      cd ${REPO}/XenAdmin/bin/Release/${locale} && ${SIGN_BAT} ${file} "${BRANDING_BRAND_CONSOLE}"
     done
   done
 
-  cd ${REPO}/XenAdmin/bin/Release   && ${SIGN_BAT} ${BRANDING_BRAND_CONSOLE}.exe "${SIGN_DESCR}"
-  cd ${REPO}/xe/bin/Release         && ${SIGN_BAT} xe.exe "${SIGN_DESCR}"
-  cd ${REPO}/xva_verify/bin/Release && ${SIGN_BAT} xva_verify.exe "${SIGN_DESCR}"
+  cd ${REPO}/XenAdmin/bin/Release   && ${SIGN_BAT} ${BRANDING_BRAND_CONSOLE_NO_SPACE}.exe "${BRANDING_BRAND_CONSOLE}"
+  cd ${REPO}/xe/bin/Release         && ${SIGN_BAT} xe.exe "${BRANDING_BRAND_CONSOLE}"
+  cd ${REPO}/xva_verify/bin/Release && ${SIGN_BAT} xva_verify.exe "${BRANDING_BRAND_CONSOLE}"
 
   for file in Microsoft.ReportViewer.Common.dll Microsoft.ReportViewer.ProcessingObjectModel.dll Microsoft.ReportViewer.WinForms.dll Microsoft.ReportViewer.Common.resources.dll Microsoft.ReportViewer.WinForms.resources.dll
   do
-    cd ${REPO}/XenAdmin/ReportViewer && ${SIGN_BAT} ${file} "${SIGN_DESCR}"
+    cd ${REPO}/XenAdmin/ReportViewer && ${SIGN_BAT} ${file} "${BRANDING_BRAND_CONSOLE}"
   done
 
   cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} CookComputing.XmlRpcV2.dll "XML-RPC.NET"
@@ -107,13 +106,13 @@ if [ -f "${SIGN_BAT}" ] ; then
   cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} Ionic.Zip.dll "OSS"
   cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} putty.exe "PuTTY"
 
-  cd ${REPO}/XenServerHealthCheck/bin/Release && ${SIGN_BAT} XenServerHealthCheck.exe "${SIGN_DESCR}"
+  cd ${REPO}/XenServerHealthCheck/bin/Release && ${SIGN_BAT} XenServerHealthCheck.exe "${BRANDING_BRAND_CONSOLE}"
 else
   echo "Sign script does not exist; skip signing binaries"
 fi
 
 #copy files (signed accordingly) in XenServerHealthService folder
-cp ${REPO}/XenAdmin/bin/Release/{CommandLib.dll,XenCenterLib.dll,XenModel.dll,CookComputing.XmlRpcV2.dll,Newtonsoft.Json.CH.dll,log4net.dll,ICSharpCode.SharpZipLib.dll,Ionic.Zip.dll} \
+cp ${REPO}/XenAdmin/bin/Release/{CommandLib.dll,CoreUtilsLib.dll,XenModel.dll,CookComputing.XmlRpcV2.dll,Newtonsoft.Json.CH.dll,log4net.dll,ICSharpCode.SharpZipLib.dll,Ionic.Zip.dll} \
   ${REPO}/XenServerHealthCheck/bin/Release
 
 #prepare wix
@@ -150,7 +149,7 @@ locale_id() {
 }
 
 if [ "XenCenter" != "${BRANDING_BRAND_CONSOLE}" ] ; then
-  cd ${WIX} && mv XenCenter.wxs ${BRANDING_BRAND_CONSOLE}.wxs
+  cd ${WIX} && mv XenCenter.wxs ${BRANDING_BRAND_CONSOLE_NO_SPACE}.wxs
 fi
 
 #for each locale create an msi containing all resources
@@ -158,67 +157,67 @@ fi
 for locale in en-us ja-jp zh-cn
 do
   if [ "${locale}" = "en-us" ] ; then
-    name=${BRANDING_BRAND_CONSOLE}
+    name=${BRANDING_BRAND_CONSOLE_NO_SPACE}
   else
-    name=${BRANDING_BRAND_CONSOLE}.${locale}
+    name=${BRANDING_BRAND_CONSOLE_NO_SPACE}.${locale}
   fi
 
   cd ${WIX}
   mkdir -p obj${name} out${name}
 
   WixLangId=$(locale_id ${locale} | tr -d [:space:]) RepoRoot=$(cygpath -w ${REPO}) \
-    ${CANDLE} -ext WiXNetFxExtension -out obj${name}/ ${BRANDING_BRAND_CONSOLE}.wxs branding.wxs
+    ${CANDLE} -ext WiXNetFxExtension -out obj${name}/ ${BRANDING_BRAND_CONSOLE_NO_SPACE}.wxs branding.wxs
 
   ${LIGHT} -sval -ext WiXNetFxExtension -out out${name}/${name}.msi \
           -loc wixlib/wixui_${locale}.wxl -loc ${locale}.wxl \
-          obj${name}/${BRANDING_BRAND_CONSOLE}.wixobj obj${name}/branding.wixobj lib/WixUI_InstallDir.wixlib
+          obj${name}/${BRANDING_BRAND_CONSOLE_NO_SPACE}.wixobj obj${name}/branding.wixobj lib/WixUI_InstallDir.wixlib
 
   cp ${WIX}/out${name}/${name}.msi ${WIX}
 done
 
-cd ${WIX} && cp ${BRANDING_BRAND_CONSOLE}.msi ${BRANDING_BRAND_CONSOLE}.zh-tw.msi
-cd ${WIX} && cscript CodePageChange.vbs ZH-TW ${BRANDING_BRAND_CONSOLE}.zh-tw.msi
+cd ${WIX} && cp ${BRANDING_BRAND_CONSOLE_NO_SPACE}.msi ${BRANDING_BRAND_CONSOLE_NO_SPACE}.zh-tw.msi
+cd ${WIX} && cscript CodePageChange.vbs ZH-TW ${BRANDING_BRAND_CONSOLE_NO_SPACE}.zh-tw.msi
 
 #create localised mst files and then embed them into the combined msi
 
 for locale in ja-jp zh-cn zh-tw ; do
   cd ${WIX} && \
-    wscript msidiff.js ${BRANDING_BRAND_CONSOLE}.msi ${BRANDING_BRAND_CONSOLE}.${locale}.msi ${locale}.mst && \
-    wscript WiSubStg.vbs ${BRANDING_BRAND_CONSOLE}.msi ${locale}.mst $(locale_id ${locale} | tr -d [:space:])
+    wscript msidiff.js ${BRANDING_BRAND_CONSOLE_NO_SPACE}.msi ${BRANDING_BRAND_CONSOLE_NO_SPACE}.${locale}.msi ${locale}.mst && \
+    wscript WiSubStg.vbs ${BRANDING_BRAND_CONSOLE_NO_SPACE}.msi ${locale}.mst $(locale_id ${locale} | tr -d [:space:])
 done
 
 #copy and sign the combined installer
 
 if [ -f "${SIGN_BAT}" ] ; then
-  cd ${WIX} && chmod a+rw ${BRANDING_BRAND_CONSOLE}.msi && ${SIGN_BAT} ${BRANDING_BRAND_CONSOLE}.msi "${SIGN_DESCR}"
+  cd ${WIX} && chmod a+rw ${BRANDING_BRAND_CONSOLE_NO_SPACE}.msi && ${SIGN_BAT} ${BRANDING_BRAND_CONSOLE_NO_SPACE}.msi "${BRANDING_BRAND_CONSOLE}"
 else
   echo "Sign script does not exist; skip signing installer"
 fi
 
-cp ${WIX}/${BRANDING_BRAND_CONSOLE}.msi ${OUTPUT_DIR}
+cp ${WIX}/${BRANDING_BRAND_CONSOLE_NO_SPACE}.msi ${OUTPUT_DIR}
 
 #build the tests
 echo "INFO: Build the tests..."
 cd ${REPO}/XenAdminTests && "${MSBUILD}" ${SWITCHES}
 cp ${REPO}/XenAdmin/ReportViewer/* ${REPO}/XenAdminTests/bin/Release/
 cd ${REPO}/XenAdminTests/bin/ && zip -r ${OUTPUT_DIR}/XenAdminTests.zip Release
-cd ${REPO}/XenAdmin/TestResources && zip -r ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}TestResources.zip *
+cd ${REPO}/XenAdmin/TestResources && zip -r ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE_NO_SPACE}TestResources.zip *
 
 #include cfu validator binary in output directory
-cd ${REPO}/CFUValidator/bin/Release && zip ${OUTPUT_DIR}/CFUValidator.zip ./{*.dll,CFUValidator.exe,XenCenterMain.exe}
+cd ${REPO}/CFUValidator/bin/Release && zip ${OUTPUT_DIR}/CFUValidator.zip ./{*.dll,CFUValidator.exe,${BRANDING_BRAND_CONSOLE_NO_SPACE}Main.exe}
 
 #now package the pdbs
 cp ${REPO}/packages/*.pdb ${OUTPUT_DIR}
 
-cp ${REPO}/XenAdmin/bin/Release/{CommandLib.pdb,${BRANDING_BRAND_CONSOLE}.pdb,XenCenterLib.pdb,XenCenterMain.pdb,XenModel.pdb,XenOvf.pdb} \
+cp ${REPO}/XenAdmin/bin/Release/{CommandLib.pdb,${BRANDING_BRAND_CONSOLE_NO_SPACE}.pdb,CoreUtilsLib.pdb,${BRANDING_BRAND_CONSOLE_NO_SPACE}Main.pdb,XenModel.pdb,XenOvf.pdb} \
    ${REPO}/xe/bin/Release/xe.pdb \
    ${REPO}/xva_verify/bin/Release/xva_verify.pdb \
    ${REPO}/XenServerHealthCheck/bin/Release/XenServerHealthCheck.pdb \
    ${OUTPUT_DIR}
 
-cd ${OUTPUT_DIR} && zip -r -m  ${BRANDING_BRAND_CONSOLE}.Symbols.zip *.pdb
+cd ${OUTPUT_DIR} && zip -r -m  ${BRANDING_BRAND_CONSOLE_NO_SPACE}.Symbols.zip *.pdb
 
-sha256sum ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}.msi > ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}.msi.checksum
-sha256sum ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}-source.zip > ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}-source.zip.checksum
+sha256sum ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE_NO_SPACE}.msi > ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE_NO_SPACE}.msi.checksum
+sha256sum ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE_NO_SPACE}-source.zip > ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE_NO_SPACE}-source.zip.checksum
 
 set +u

@@ -49,23 +49,16 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public PatchingWizard_ModePage()
         {
-            InitializeComponent();          
+            InitializeComponent();
+            AutomaticRadioButton.Text = string.Format(AutomaticRadioButton.Text, BrandManager.BrandConsole);
+            removeUpdateFileCheckBox.Text = string.Format(removeUpdateFileCheckBox.Text, BrandManager.BrandConsole);
         }
 
-        public override string Text
-        {
-            get { return Messages.PATCHINGWIZARD_MODEPAGE_TEXT; }
-        }
+        public override string Text => Messages.PATCHINGWIZARD_MODEPAGE_TEXT;
 
-        public override string PageTitle
-        {
-            get { return Messages.PATCHINGWIZARD_MODEPAGE_TITLE; }
-        }
+        public override string PageTitle => Messages.PATCHINGWIZARD_MODEPAGE_TITLE;
 
-        public override string HelpID
-        {
-            get { return "UpdateMode"; }
-        }
+        public override string HelpID => "UpdateMode";
 
         public override bool EnablePrevious()
         {
@@ -176,15 +169,9 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public Dictionary<Pool, StringBuilder> ManualTextInstructions { get; private set; }
 
-        public bool IsAutomaticMode
-        {
-            get { return AutomaticRadioButton.Checked; }
-        }
+        public bool IsAutomaticMode => AutomaticRadioButton.Checked;
 
-        public bool RemoveUpdateFile
-        {
-            get { return removeUpdateFileCheckBox.Checked; }
-        }
+        public bool RemoveUpdateFile => removeUpdateFileCheckBox.Checked;
 
         public List<Pool> SelectedPools { private get; set; }
         public List<Host> SelectedServers { private get; set; }
@@ -354,8 +341,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                         && livePatchCodesByHost[server.uuid] == livepatch_status.ok_livepatch_complete)
                         continue;
 
-                    var msg = server.IsMaster()
-                        ? string.Format("{0} ({1})", server.Name(), Messages.MASTER)
+                    var msg = server.IsCoordinator()
+                        ? string.Format("{0} ({1})", server.Name(), Messages.COORDINATOR)
                         : server.Name();
                     sb.AppendIndented(msg).AppendLine();
                 }
@@ -379,8 +366,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                 var sb = new StringBuilder();
                 foreach (var server in kvp.Value)
                 {
-                    var msg = server.IsMaster()
-                        ? string.Format("{0} ({1})", server.Name(), Messages.MASTER)
+                    var msg = server.IsCoordinator()
+                        ? string.Format("{0} ({1})", server.Name(), Messages.COORDINATOR)
                         : server.Name();
                     sb.AppendIndented(msg).AppendLine();
                 }

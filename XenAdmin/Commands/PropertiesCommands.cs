@@ -62,7 +62,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected virtual void Execute(IXenObject xenObject)
+        protected virtual void Run(IXenObject xenObject)
         {
             using (PropertiesDialog dialog = new PropertiesDialog(xenObject))
             {
@@ -71,12 +71,12 @@ namespace XenAdmin.Commands
             }
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
-            Execute(selection[0].XenObject);
+            Run(selection[0].XenObject);
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (selection.ContainsOneItemOfType<IXenObject>())
             {
@@ -110,7 +110,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void Execute(IXenObject xenObject)
+        protected override void Run(IXenObject xenObject)
         {
             using (PropertiesDialog dialog = new PropertiesDialog(xenObject))
             {
@@ -127,7 +127,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void Execute(IXenObject xenObject)
+        protected override void Run(IXenObject xenObject)
         {
             using (PropertiesDialog dialog = new PropertiesDialog(xenObject))
             {
@@ -142,7 +142,7 @@ namespace XenAdmin.Commands
     /// </summary>
     internal class VMPropertiesCommand : PropertiesCommand
     {
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (selection.Count == 1)
             {
@@ -158,7 +158,7 @@ namespace XenAdmin.Commands
     /// </summary>
     internal class SRPropertiesCommand : PropertiesCommand
     {
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (selection.Count == 1)
             {
@@ -187,12 +187,12 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
-            Execute(selection[0].PoolAncestor);
+            Run(selection[0].PoolAncestor);
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (selection.Count == 1)
             {
@@ -223,12 +223,12 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
-            Execute(selection[0].HostAncestor);
+            Run(selection[0].HostAncestor);
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (selection.Count == 1)
             {
@@ -247,7 +247,7 @@ namespace XenAdmin.Commands
     /// </summary>
     internal class TemplatePropertiesCommand : PropertiesCommand
     {
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (selection.Count == 1)
             {
@@ -266,7 +266,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void Execute(IXenObject xenObject)
+        protected override void Run(IXenObject xenObject)
         {
             using (PropertiesDialog dialog = new PropertiesDialog(xenObject))
             {
@@ -283,7 +283,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void Execute(IXenObject xenObject)
+        protected override void Run(IXenObject xenObject)
         {
             using (PropertiesDialog dialog = new PropertiesDialog(xenObject))
             {
@@ -300,7 +300,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void Execute(IXenObject xenObject)
+        protected override void Run(IXenObject xenObject)
         {
             using (PropertiesDialog dialog = new PropertiesDialog(xenObject))
             {
@@ -317,7 +317,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void Execute(IXenObject xenObject)
+        protected override void Run(IXenObject xenObject)
         {
             using (PropertiesDialog dialog = new PropertiesDialog(xenObject))
             {
@@ -334,7 +334,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override void Execute(IXenObject xenObject)
+        protected override void Run(IXenObject xenObject)
         {
             using (PropertiesDialog dialog = new PropertiesDialog(xenObject))
             {

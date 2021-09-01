@@ -63,9 +63,9 @@ namespace XenAdmin.Commands
             Parent = parent;
         }
 
-        protected abstract bool CanExecute(VM vm);
+        protected abstract bool CanRun(VM vm);
 
-        protected abstract void Execute(List<VM> vms);
+        protected abstract void Run(List<VM> vms);
 
         protected void CancelAllTasks(IEnumerable<VM> vms)
         {
@@ -127,18 +127,18 @@ namespace XenAdmin.Commands
 
         protected abstract AsyncAction BuildAction(VM vm);
 
-        protected sealed override void ExecuteCore(SelectedItemCollection selection)
+        protected sealed override void RunCore(SelectedItemCollection selection)
         {
-            List<VM> vms = selection.AsXenObjects<VM>(CanExecute);
+            List<VM> vms = selection.AsXenObjects<VM>(CanRun);
 
-            // sort so actions execute in correct order.
+            // sort so actions run in correct order.
             vms.Sort();
-            Execute(vms);
+            Run(vms);
         }
 
-        protected sealed override bool CanExecuteCore(SelectedItemCollection selection)
+        protected sealed override bool CanRunCore(SelectedItemCollection selection)
         {
-            bool atLeastOneCanExecute = false;
+            bool atLeastOneCanRun = false;
 
             foreach (SelectedItem item in selection)
             {
@@ -148,16 +148,16 @@ namespace XenAdmin.Commands
                 {
                     return false;
                 }
-                else if (CanExecute(vm))
+                else if (CanRun(vm))
                 {
-                    atLeastOneCanExecute = true;
+                    atLeastOneCanRun = true;
                 }
             }
 
-            return atLeastOneCanExecute;
+            return atLeastOneCanRun;
         }
 
-        protected string GetCantExecuteNoToolsOrDriversReasonCore(IXenObject item)
+        protected string GetCantRunNoToolsOrDriversReasonCore(IXenObject item)
         {
             VM vm = item as VM;
             if (vm == null)

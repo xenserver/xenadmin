@@ -68,7 +68,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override bool CanExecute(VM vm)
+        protected override bool CanRun(VM vm)
         {
             if (!vm.is_a_template && vm.power_state == vm_power_state.Running && vm.allowed_operations != null && vm.allowed_operations.Contains(vm_operations.suspend))
             {
@@ -77,7 +77,7 @@ namespace XenAdmin.Commands
             return false;
         }
 
-        protected override void Execute(List<VM> vms)
+        protected override void Run(List<VM> vms)
         {
             RunAction(vms, Messages.ACTION_VMS_SUSPENDING_TITLE, Messages.ACTION_VMS_SUSPENDING_TITLE, Messages.ACTION_VM_SUSPENDED, null);
         }
@@ -122,13 +122,13 @@ namespace XenAdmin.Commands
 
         protected override string ConfirmationDialogHelpId => "WarningVmLifeCycleSuspend";
 
-        protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantExecuteReasons)
+        protected override CommandErrorDialog GetErrorDialogCore(IDictionary<IXenObject, string> cantRunReasons)
         {
             foreach (VM vm in GetSelection().AsXenObjects<VM>())
             {
-                if (!CanExecute(vm) && vm.power_state == vm_power_state.Running)
+                if (!CanRun(vm) && vm.power_state == vm_power_state.Running)
                 {
-                    return new CommandErrorDialog(Messages.ERROR_DIALOG_SUSPEND_VM_TITLE, Messages.ERROR_DIALOG_SUSPEND_VM_TEXT, cantExecuteReasons);
+                    return new CommandErrorDialog(Messages.ERROR_DIALOG_SUSPEND_VM_TITLE, Messages.ERROR_DIALOG_SUSPEND_VM_TEXT, cantRunReasons);
                 }
             }
             return null;
@@ -138,12 +138,12 @@ namespace XenAdmin.Commands
 
         public override string ShortcutKeyDisplayString => Messages.MAINWINDOW_CTRL_Y;
 
-        protected override string GetCantExecuteReasonCore(IXenObject item)
+        protected override string GetCantRunReasonCore(IXenObject item)
         {
             VM vm = item as VM;
             if (vm == null)
             {
-                return base.GetCantExecuteReasonCore(item);
+                return base.GetCantRunReasonCore(item);
             }
             if (vm.power_state == vm_power_state.Halted)
             {
@@ -154,7 +154,7 @@ namespace XenAdmin.Commands
                 return Messages.VM_ALREADY_SUSPENDED;
             }
 
-            var noToolsOrDriversReason = GetCantExecuteNoToolsOrDriversReasonCore(item);
+            var noToolsOrDriversReason = GetCantRunNoToolsOrDriversReasonCore(item);
             if (noToolsOrDriversReason != null)
             {
                 return noToolsOrDriversReason;
@@ -165,7 +165,7 @@ namespace XenAdmin.Commands
                 return Messages.VM_HAS_GPU_PASSTHROUGH;
             }
 
-            return base.GetCantExecuteReasonCore(item);
+            return base.GetCantRunReasonCore(item);
         }
 
         protected override AsyncAction BuildAction(VM vm)

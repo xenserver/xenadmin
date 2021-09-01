@@ -185,7 +185,7 @@ namespace XenAdmin.Alerts
                     case AlarmType.FileSystem:
                         return string.Format(Messages.ALERT_ALARM_FILESYSTEM_DESCRIPTION,
                                              Helpers.GetNameAndObject(XenObject),
-                                             Util.PercentageString(CurrentValue));
+                                             Util.PercentageString(CurrentValue), BrandManager.ProductBrand);
                     case AlarmType.Memory:
                         return string.Format(Messages.ALERT_ALARM_MEMORY_DESCRIPTION,
                                              Helpers.GetNameAndObject(XenObject),

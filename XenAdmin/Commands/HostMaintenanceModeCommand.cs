@@ -76,9 +76,9 @@ namespace XenAdmin.Commands
         {
             Pool pool = Helpers.GetPool(host.Connection);
 
-            if (pool != null && pool.ha_enabled && host.IsMaster())
+            if (pool != null && pool.ha_enabled && host.IsCoordinator())
             {
-                using (var dlg = new ErrorDialog(string.Format(Messages.HA_CANNOT_EVACUATE_MASTER,
+                using (var dlg = new ErrorDialog(string.Format(Messages.HA_CANNOT_EVACUATE_COORDINATOR,
                         Helpers.GetName(host).Ellipsise(Helpers.DEFAULT_NAME_TRIM_LENGTH))))
                 {
                     dlg.ShowDialog(Parent);
@@ -88,7 +88,7 @@ namespace XenAdmin.Commands
             }
 
             if (!host.GetRunningVMs().Any() &&
-                (pool == null || pool.Connection.Cache.Hosts.Length == 1 || !host.IsMaster()))
+                (pool == null || pool.Connection.Cache.Hosts.Length == 1 || !host.IsCoordinator()))
             {
                 Program.MainWindow.CloseActiveWizards(host.Connection);
                 var action = new EvacuateHostAction(host, null, new Dictionary<XenRef<VM>, string[]>(), AddHostToPoolCommand.NtolDialog, AddHostToPoolCommand.EnableNtolDialog);
@@ -165,7 +165,7 @@ namespace XenAdmin.Commands
             action.RunAsync();
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             Host host = selection[0].HostAncestor;
 
@@ -193,13 +193,13 @@ namespace XenAdmin.Commands
             }
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             if (selection.Count == 1)
             {
                 IXenConnection connection = selection[0].Connection;
                 Host hostAncestor = selection[0].HostAncestor;
-                return hostAncestor != null &&  Helpers.GetMaster(connection) != null;
+                return hostAncestor != null &&  Helpers.GetCoordinator(connection) != null;
             }
             return false;
         }

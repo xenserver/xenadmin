@@ -56,11 +56,11 @@ namespace XenAdmin.Commands
         {
         }
 
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
+        protected override bool CanRunCore(SelectedItemCollection selection)
         {
             foreach (SelectedItem item in selection)
             {
-                if (CanExecute(item))
+                if (CanRun(item))
                 {
                     return true;
                 }
@@ -69,25 +69,25 @@ namespace XenAdmin.Commands
             return false;
         }
 
-        private static bool CanExecute(SelectedItem selection)
+        private static bool CanRun(SelectedItem selection)
         {
             IXenConnection connection = selection.Connection;
             Host host = selection.XenObject as Host;
             bool is_host = (host != null 
                 );
-            bool is_master = is_host && host.IsMaster();
+            bool is_coordinator = is_host && host.IsCoordinator();
             bool connected = connection != null && connection.IsConnected;
 
-            return (connected && is_master) || (connection != null && connection.InProgress && !connection.IsConnected);
+            return (connected && is_coordinator) || (connection != null && connection.InProgress && !connection.IsConnected);
         }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected override void RunCore(SelectedItemCollection selection)
         {
             foreach (SelectedItem item in selection)
             {
-                if (CanExecute(item))
+                if (CanRun(item))
                 {
-                    new DisconnectCommand(MainWindowCommandInterface, item.Connection, true).Execute();
+                    new DisconnectCommand(MainWindowCommandInterface, item.Connection, true).Run();
                 }
             }
         }

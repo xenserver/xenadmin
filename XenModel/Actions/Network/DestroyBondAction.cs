@@ -49,21 +49,21 @@ namespace XenAdmin.Actions
         private readonly List<Bond> Bonds = new List<Bond>();
 
         /// <summary>
-        /// The masters of all the bonds in Bonds.
+        /// The interfaces of all the bonds in Bonds.
         /// </summary>
-        private readonly List<PIF> Masters = new List<PIF>();
+        private readonly List<PIF> Interfaces = new List<PIF>();
 
         /// <summary>
-        /// All slaves under each bond in Bonds.  These will be plugged at the end, in order to
+        /// All members under each bond in Bonds.  These will be plugged at the end, in order to
         /// get metrics like the carrier flag, if they haven't already been brought up as a
         /// management interface.
         /// </summary>
-        private readonly List<PIF> Slaves = new List<PIF>();
+        private readonly List<PIF> Members = new List<PIF>();
 
         /// <summary>
-        /// The first slave (ordered by name) under each master.
+        /// The first member (ordered by name) under each interface.
         /// </summary>
-        private readonly Dictionary<PIF, PIF> FirstSlaves = new Dictionary<PIF, PIF>();
+        private readonly Dictionary<PIF, PIF> FirstMembers = new Dictionary<PIF, PIF>();
 
         /// <summary>
         /// The network that we're either going to destroy or rename.
@@ -104,34 +104,34 @@ namespace XenAdmin.Actions
 
                     b.Locked = true;
 
-                    PIF master = Connection.Resolve(b.master);
-                    if (master != null)
+                    PIF bondInterface = Connection.Resolve(b.master);
+                    if (bondInterface != null)
                     {
-                        Masters.Add(master);
-                        master.Locked = true;
+                        Interfaces.Add(bondInterface);
+                        bondInterface.Locked = true;
 
-                        List<PIF> slaves = Connection.ResolveAll(b.slaves);
-                        NetworkingHelper.Sort(slaves);
-                        foreach (PIF pif in slaves)
+                        List<PIF> members = Connection.ResolveAll(b.slaves);
+                        NetworkingHelper.Sort(members);
+                        foreach (PIF pif in members)
                         {
-                            Slaves.Add(pif);
+                            Members.Add(pif);
                             pif.Locked = true;
                         }
 
-                        FirstSlaves[master] = Connection.Resolve(b.primary_slave);
+                        FirstMembers[bondInterface] = Connection.Resolve(b.primary_slave);
 
-                        if (!FirstSlaves.ContainsKey(master) && slaves.Count != 0)
-                            FirstSlaves[master] = slaves[0];
+                        if (!FirstMembers.ContainsKey(bondInterface) && members.Count != 0)
+                            FirstMembers[bondInterface] = members[0];
                     }
 
                     AppliesTo.Add(host.opaque_ref);
                 }
             }
 
-            PIF master_master = Connection.Resolve(bond.master);
-            if (master_master != null)
+            PIF coordinator_bond_interface = Connection.Resolve(bond.master);
+            if (coordinator_bond_interface != null)
             {
-                Network = Connection.Resolve(master_master.network);
+                Network = Connection.Resolve(coordinator_bond_interface.network);
                 Network.Locked = true;
             }
         }
@@ -141,13 +141,13 @@ namespace XenAdmin.Actions
             PercentComplete = 0;
             Connection.ExpectDisruption = true;
 
-            int incr = Masters.Count > 0 ? 50 / Masters.Count : 0;
+            int incr = Interfaces.Count > 0 ? 50 / Interfaces.Count : 0;
 
             try
             {
-                foreach (PIF master in Masters)
+                foreach (PIF bondInterface in Interfaces)
                 {
-                    NetworkingActionHelpers.MoveManagementInterfaceName(this, master, FirstSlaves[master]);
+                    NetworkingActionHelpers.MoveManagementInterfaceName(this, bondInterface, FirstMembers[bondInterface]);
                     PercentComplete += incr;
                 }
             }
@@ -226,10 +226,10 @@ namespace XenAdmin.Actions
             foreach (Bond bond in Bonds)
                 bond.Locked = false;
 
-            foreach (PIF master in Masters)
-                master.Locked = false;
+            foreach (PIF bondInterface in Interfaces)
+                bondInterface.Locked = false;
 
-            foreach (PIF pif in Slaves)
+            foreach (PIF pif in Members)
                 pif.Locked = false;
 
             if (Network != null)

@@ -118,8 +118,8 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
             HideErrors();
 
-            Host master = Helpers.GetMaster(Connection);
-            if (master == null)
+            Host coordinator = Helpers.GetCoordinator(Connection);
+            if (coordinator == null)
             {
                 cancel = true;
                 return;
@@ -127,7 +127,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
             var currentSrType = SrType;
 
-            if (!RunProbe(master, currentSrType, out var srs)) // start first probe
+            if (!RunProbe(coordinator, currentSrType, out var srs)) // start first probe
             {
                 cancel = true;
                 return;
@@ -139,7 +139,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             {
                 currentSrType = SrType == SR.SRTypes.gfs2 ? SR.SRTypes.lvmoiscsi : SR.SRTypes.gfs2;
 
-                if (!RunProbe(master, currentSrType, out srs)) // start second probe
+                if (!RunProbe(coordinator, currentSrType, out srs)) // start second probe
                 {
                     cancel = true;
                     return;
@@ -177,7 +177,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
         #endregion
 
-        private bool RunProbe(Host master, SR.SRTypes srType, out List<SR.SRInfo> srs)
+        private bool RunProbe(Host coordinator, SR.SRTypes srType, out List<SR.SRInfo> srs)
         {
             srs = new List<SR.SRInfo>();
 
@@ -185,7 +185,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             if (dconf == null)
                 return false;
 
-            var action = new SrProbeAction(Connection, master, srType, dconf);
+            var action = new SrProbeAction(Connection, coordinator, srType, dconf);
             using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee) {ShowCancel = true})
                 dialog.ShowDialog(this);
 

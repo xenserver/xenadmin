@@ -225,7 +225,8 @@ namespace XenAdmin.Actions
             sbMessage.AppendLine();
             sbMessage.AppendLine();
             if (CanCleanup)
-                sbMessage.AppendFormat(Messages.NOT_ENOUGH_SPACE_MESSAGE_CLEANUP, Util.DiskSizeString(ReclaimableDiskSpace));
+                sbMessage.AppendFormat(Messages.NOT_ENOUGH_SPACE_MESSAGE_CLEANUP, BrandManager.BrandConsole,
+                    Util.DiskSizeString(ReclaimableDiskSpace));
             else
                 sbMessage.AppendLine(Messages.NOT_ENOUGH_SPACE_MESSAGE_NOCLEANUP);
             return sbMessage.ToString();

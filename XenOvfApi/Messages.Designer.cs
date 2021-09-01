@@ -142,15 +142,6 @@ namespace XenOvf {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [Citrix] OVF EULA.
-        /// </summary>
-        public static string EULA_TITLE {
-            get {
-                return ResourceManager.GetString("EULA_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Failed to add operating system section because the virtual system collection is invalid..
         /// </summary>
         public static string FAILED_TO_ADD_OS_SECTION {
@@ -259,7 +250,7 @@ namespace XenOvf {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Created by [XenCenter] Disk Image Import.
+        ///   Looks up a localized string similar to Created by Disk Image Import.
         /// </summary>
         public static string OVF_CREATED {
             get {
