@@ -1774,6 +1774,8 @@ namespace XenAdmin.TabPages
                 Banner.BannerType = DeprecationBanner.Type.Removal;
                 Banner.WarningMessage = string.Format(Messages.CONTAINER_MANAGEMENT_REMOVAL_WARNING,
                     string.Format(Messages.STRING_SPACE_STRING, BrandManager.ProductBrand, BrandManager.ProductVersion82));
+                Banner.LinkText = Messages.DETAILS;
+                Banner.LinkUri = new Uri(InvisibleMessages.DEPRECATION_URL);
                 Banner.Visible = true;
             }
             else if (!Helpers.PostStockholm(xenObject.Connection))

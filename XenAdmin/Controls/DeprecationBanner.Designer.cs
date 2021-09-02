@@ -48,6 +48,7 @@
             resources.ApplyResources(this.helperLink, "helperLink");
             this.helperLink.Name = "helperLink";
             this.helperLink.TabStop = true;
+            this.helperLink.Click += new System.EventHandler(this.helperLink_Click);
             // 
             // message
             // 
