@@ -57,13 +57,13 @@ namespace XenAdmin.Controls
         {
             InitializeComponent();
             HelperLinkVisible = !Core.HiddenFeatures.LinkLabelHidden;
+            LinkUri = new Uri(InvisibleMessages.DEPRECATION_URL);
             Visible = false;
-            helperLink.Click += helperLink_Click;
         }
 
         private void helperLink_Click(object sender, EventArgs e)
         {
-            if(LinkUri == null)
+            if (LinkUri == null)
                 return;
 
             try
