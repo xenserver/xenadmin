@@ -3852,7 +3852,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Certificate verification is enabled on the pool, but overriden on server &apos;{0}&apos;..
+        ///   Looks up a localized string similar to Certificate verification is enabled on the pool, but overridden on server &apos;{0}&apos;..
         /// </summary>
         public static string Message_body_tls_verification_emergency_disabled {
             get {

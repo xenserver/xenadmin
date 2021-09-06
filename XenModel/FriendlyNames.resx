@@ -1065,7 +1065,7 @@
     <value>A license for {0} could not be checked-out because the license server could not be reached at the given address and port. Please check the connection details, and verify that the license server is running.</value>
   </data>
   <data name="Message.body-tls_verification_emergency_disabled" xml:space="preserve">
-    <value>Certificate verification is enabled on the pool, but overriden on server '{0}'.</value>
+    <value>Certificate verification is enabled on the pool, but overridden on server '{0}'.</value>
   </data>
   <data name="Message.body-metadata_lun_broken" xml:space="preserve">
     <value>Pool '{0}' is unable to access the HA metadata disk. Until access is restored changes to the pool metadata may be lost in the event of an HA failover.</value>
