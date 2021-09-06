@@ -185,17 +185,17 @@ namespace XenAdmin.Controls
         public event Action<XenTabPage> StatusChanged;
 
         /// <summary>
-        /// Not always overriden in derived classes
+        /// Not always overridden in derived classes
         /// </summary>
         public virtual void PopulatePage() { }
 
         /// <summary>
-        /// Check whether this step needs to be disabled. Not always overriden in derived classes
+        /// Check whether this step needs to be disabled. Not always overridden in derived classes
         /// </summary>
         public virtual void CheckPageDisabled() { }
         
         /// <summary>
-        /// Select a control on the page. Not always overriden in derived classes
+        /// Select a control on the page. Not always overridden in derived classes
         /// </summary>
         public virtual void SelectDefaultControl() { }
 

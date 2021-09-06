@@ -88,7 +88,7 @@ namespace XenOvf.Utilities
         #region MISC TOOLS
         /// <summary>
         /// Load default namespaces required to define OVF.
-        /// Can be overriden in app.config:  KnownNamespaces
+        /// Can be overridden in app.config:  KnownNamespaces
         /// </summary>
         /// <returns>Collection: XmlSerializerNamespces</returns>
         [SecurityPermission(SecurityAction.LinkDemand)]
