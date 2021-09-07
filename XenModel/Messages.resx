@@ -5816,8 +5816,26 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="FILER_PARAM_INVALID_CHAR" xml:space="preserve">
     <value>You entered an invalid character in one of the filer parameters.</value>
   </data>
+  <data name="FILESERVICE_CLIENTID_INVALID_FILE" xml:space="preserve">
+    <value>Invalid or corrupt Client ID file.</value>
+  </data>
+  <data name="FILESERVICE_CLIENTID_FILETYPE" xml:space="preserve">
+    <value>Client ID file (*.json)|*.json</value>
+  </data>
+  <data name="FILESERVICE_CLIENTID_FOUND" xml:space="preserve">
+    <value>A Client ID has been specified.</value>
+  </data>
+  <data name="FILESERVICE_CLIENTID_NOT_FOUND" xml:space="preserve">
+    <value>A Client ID has not been specified.</value>
+  </data>
+  <data name="FILESERVICE_CLIENTID_TITLE" xml:space="preserve">
+    <value>Select Client ID file.</value>
+  </data>
   <data name="FILE_ALL" xml:space="preserve">
     <value>All files</value>
+  </data>
+  <data name="FILE_NOT_FOUND" xml:space="preserve">
+    <value>File not found</value>
   </data>
   <data name="FILE_PDF" xml:space="preserve">
     <value>Acrobat (PDF) file</value>
@@ -10339,13 +10357,6 @@ Size: {3}</value>
   </data>
   <data name="PATCH_NEEDS_NEW_XENCENTER" xml:space="preserve">
     <value>This version requires [XenCenter] {0} or newer</value>
-  </data>
-  <data name="PATCH_NOT_FOUND" xml:space="preserve">
-    <value>Not found</value>
-  </data>
-  <data name="PATCH_NOT_FOUND_EXPANDED_DESCRIPTION" xml:space="preserve">
-    <value>{0}
-File not found</value>
   </data>
   <data name="PATCH_UPLOADED" xml:space="preserve">
     <value>Update uploaded to server '{0}' </value>
