@@ -16620,6 +16620,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to File not found.
+        /// </summary>
+        public static string FILE_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("FILE_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Acrobat (PDF) file.
         /// </summary>
         public static string FILE_PDF {
@@ -16652,6 +16661,51 @@ namespace XenAdmin {
         public static string FILER_PARAM_INVALID_CHAR {
             get {
                 return ResourceManager.GetString("FILER_PARAM_INVALID_CHAR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Client ID file (*.json)|*.json.
+        /// </summary>
+        public static string FILESERVICE_CLIENTID_FILETYPE {
+            get {
+                return ResourceManager.GetString("FILESERVICE_CLIENTID_FILETYPE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A Client ID has been specified..
+        /// </summary>
+        public static string FILESERVICE_CLIENTID_FOUND {
+            get {
+                return ResourceManager.GetString("FILESERVICE_CLIENTID_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid or corrupt Client ID file..
+        /// </summary>
+        public static string FILESERVICE_CLIENTID_INVALID_FILE {
+            get {
+                return ResourceManager.GetString("FILESERVICE_CLIENTID_INVALID_FILE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A Client ID has not been specified..
+        /// </summary>
+        public static string FILESERVICE_CLIENTID_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("FILESERVICE_CLIENTID_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Client ID file..
+        /// </summary>
+        public static string FILESERVICE_CLIENTID_TITLE {
+            get {
+                return ResourceManager.GetString("FILESERVICE_CLIENTID_TITLE", resourceCulture);
             }
         }
         
@@ -27461,15 +27515,6 @@ namespace XenAdmin {
                 return ResourceManager.GetString("NEWVMWIZARD_TEMPLATEPAGE_GOOROOM", resourceCulture);
             }
         }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Rocky.
-        /// </summary>
-        public static string NEWVMWIZARD_TEMPLATEPAGE_ROCKY {
-            get {
-                return ResourceManager.GetString("NEWVMWIZARD_TEMPLATEPAGE_ROCKY", resourceCulture);
-            }
-        }
         
         /// <summary>
         ///   Looks up a localized string similar to Linx.
@@ -27522,6 +27567,15 @@ namespace XenAdmin {
         public static string NEWVMWIZARD_TEMPLATEPAGE_REDHAT {
             get {
                 return ResourceManager.GetString("NEWVMWIZARD_TEMPLATEPAGE_REDHAT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rocky.
+        /// </summary>
+        public static string NEWVMWIZARD_TEMPLATEPAGE_ROCKY {
+            get {
+                return ResourceManager.GetString("NEWVMWIZARD_TEMPLATEPAGE_ROCKY", resourceCulture);
             }
         }
         
@@ -28794,25 +28848,6 @@ namespace XenAdmin {
         public static string PATCH_NEEDS_NEW_XENCENTER {
             get {
                 return ResourceManager.GetString("PATCH_NEEDS_NEW_XENCENTER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Not found.
-        /// </summary>
-        public static string PATCH_NOT_FOUND {
-            get {
-                return ResourceManager.GetString("PATCH_NOT_FOUND", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0}
-        ///File not found.
-        /// </summary>
-        public static string PATCH_NOT_FOUND_EXPANDED_DESCRIPTION {
-            get {
-                return ResourceManager.GetString("PATCH_NOT_FOUND_EXPANDED_DESCRIPTION", resourceCulture);
             }
         }
         

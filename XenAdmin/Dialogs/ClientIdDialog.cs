@@ -29,16 +29,43 @@
  * SUCH DAMAGE.
  */
 
-using System.Windows.Forms;
-using XenAdmin.Controls;
 
-namespace XenAdmin.Dialogs.OptionsPages
+using System;
+using System.Windows.Forms;
+using XenCenterLib;
+
+namespace XenAdmin.Dialogs
 {
-    interface IOptionsPage : VerticalTabs.IVerticalTab
+    public partial class ClientIdDialog : XenDialogBase
     {
-        void Build();
-        bool IsValidToSave(out Control control, out string invalidReason);
-        void ShowValidationMessages(Control control, string message);
-        void Save();
+        public ClientIdDialog()
+        {
+            InitializeComponent();
+        }
+
+        internal override string HelpName => "ClientIdDialog";
+
+        protected override void OnShown(EventArgs e)
+        {
+            base.OnShown(e);
+            clientIdControl1.Build(true);
+        }
+
+        private void buttonOk_Click(object sender, EventArgs e)
+        {
+            if (!clientIdControl1.IsValidToSave(out Control control, out string invalidReason, false))
+            {
+                clientIdControl1.ShowValidationMessages(control, invalidReason);
+                return;
+            }
+
+            if (!string.IsNullOrEmpty(clientIdControl1.FileServiceUsername))
+                Properties.Settings.Default.FileServiceUsername = EncryptionUtils.Protect(clientIdControl1.FileServiceUsername);
+
+            if (!string.IsNullOrEmpty(clientIdControl1.FileServiceClientId))
+                Properties.Settings.Default.FileServiceClientId = EncryptionUtils.Protect(clientIdControl1.FileServiceClientId);
+
+            DialogResult = DialogResult.OK;
+        }
     }
 }

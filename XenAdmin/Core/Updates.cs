@@ -112,6 +112,12 @@ namespace XenAdmin.Core
             }
         }
 
+        public static bool CheckCanDownloadUpdates()
+        {
+            return !string.IsNullOrEmpty(Properties.Settings.Default.FileServiceUsername) &&
+                   !string.IsNullOrEmpty(Properties.Settings.Default.FileServiceClientId);
+        }
+
         public static DownloadUpdatesXmlAction CreateDownloadUpdatesXmlAction(bool checkForXenCenter = false,
             bool checkForServerVersion = false, bool checkForPatches = false)
         {

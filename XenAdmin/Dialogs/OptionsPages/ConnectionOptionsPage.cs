@@ -43,7 +43,6 @@ namespace XenAdmin.Dialogs.OptionsPages
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private readonly ToolTip validationToolTip;
-        private Control invalidControl;
 
         // used for preventing the event handlers from doing anything when changing controls through code
         private bool eventsDisabled;
@@ -54,8 +53,7 @@ namespace XenAdmin.Dialogs.OptionsPages
             validationToolTip = new ToolTip
             {
                 IsBalloon = true,
-                ToolTipIcon = ToolTipIcon.Warning,
-                ToolTipTitle = Messages.INVALID_PARAMETER
+                ToolTipIcon = ToolTipIcon.Warning
             };
         }
 
@@ -169,41 +167,48 @@ namespace XenAdmin.Dialogs.OptionsPages
 
         #region IOptionsPage Members
 
-        public bool IsValidToSave()
+        public bool IsValidToSave(out Control control, out string invalidReason)
         {
             if (!UseProxyRadioButton.Checked)
             {
-                invalidControl = null;
+                invalidReason = null;
+                control = null;
                 return true;
             }
+
+            invalidReason = Messages.INVALID_PARAMETER;
             
             var uriHostNameType = Uri.CheckHostName(ProxyAddressTextBox.Text);
             if (uriHostNameType == UriHostNameType.Unknown || uriHostNameType == UriHostNameType.IPv6)
             {
-                invalidControl = ProxyAddressTextBox;
+                control = ProxyAddressTextBox;
                 return false;
             }
 
             if (!Util.IsValidPort(ProxyPortTextBox.Text))
             {
-                invalidControl = ProxyPortTextBox;
+                control = ProxyPortTextBox;
                 return false;
             }
 
             if (AuthenticationCheckBox.Checked && string.IsNullOrEmpty(ProxyUsernameTextBox.Text))
             {
-                invalidControl = ProxyUsernameTextBox;
+                control = ProxyUsernameTextBox;
                 return false;
             }
 
-            invalidControl = null;
+            invalidReason = null;
+            control = null;
             return true;
         }
 
-        public void ShowValidationMessages()
+        public void ShowValidationMessages(Control control, string message)
         {
-            if (invalidControl != null)
-                HelpersGUI.ShowBalloonMessage(invalidControl, validationToolTip);
+            if (control != null && !string.IsNullOrEmpty(message))
+            {
+                validationToolTip.ToolTipTitle = message;
+                HelpersGUI.ShowBalloonMessage(control, validationToolTip);
+            }
         }
 
         public void Save()

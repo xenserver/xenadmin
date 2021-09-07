@@ -36,9 +36,12 @@ namespace XenAdmin.Dialogs.OptionsPages
             this.AllowXenServerUpdatesCheckBox = new System.Windows.Forms.CheckBox();
             this.AllowXenServerPatchesCheckBox = new System.Windows.Forms.CheckBox();
             this.UpdatesBlurb = new System.Windows.Forms.Label();
+            this.decentGroupBox1 = new XenAdmin.Controls.DecentGroupBox();
+            this.clientIdControl1 = new XenAdmin.Controls.ClientIdControl();
             this.UpdatesTableLayoutPanel.SuspendLayout();
             this.XenCenterGroupBox.SuspendLayout();
             this.XenServerGroupBox.SuspendLayout();
+            this.decentGroupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // UpdatesTableLayoutPanel
@@ -48,6 +51,7 @@ namespace XenAdmin.Dialogs.OptionsPages
             this.UpdatesTableLayoutPanel.Controls.Add(this.XenCenterGroupBox, 0, 2);
             this.UpdatesTableLayoutPanel.Controls.Add(this.XenServerGroupBox, 0, 1);
             this.UpdatesTableLayoutPanel.Controls.Add(this.UpdatesBlurb, 0, 0);
+            this.UpdatesTableLayoutPanel.Controls.Add(this.decentGroupBox1, 0, 3);
             this.UpdatesTableLayoutPanel.Name = "UpdatesTableLayoutPanel";
             // 
             // XenCenterGroupBox
@@ -88,6 +92,18 @@ namespace XenAdmin.Dialogs.OptionsPages
             resources.ApplyResources(this.UpdatesBlurb, "UpdatesBlurb");
             this.UpdatesBlurb.Name = "UpdatesBlurb";
             // 
+            // decentGroupBox1
+            // 
+            this.decentGroupBox1.Controls.Add(this.clientIdControl1);
+            resources.ApplyResources(this.decentGroupBox1, "decentGroupBox1");
+            this.decentGroupBox1.Name = "decentGroupBox1";
+            this.decentGroupBox1.TabStop = false;
+            // 
+            // clientIdControl1
+            // 
+            resources.ApplyResources(this.clientIdControl1, "clientIdControl1");
+            this.clientIdControl1.Name = "clientIdControl1";
+            // 
             // UpdatesOptionsPage
             // 
             resources.ApplyResources(this, "$this");
@@ -100,6 +116,7 @@ namespace XenAdmin.Dialogs.OptionsPages
             this.XenCenterGroupBox.PerformLayout();
             this.XenServerGroupBox.ResumeLayout(false);
             this.XenServerGroupBox.PerformLayout();
+            this.decentGroupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -114,5 +131,7 @@ namespace XenAdmin.Dialogs.OptionsPages
         private System.Windows.Forms.CheckBox AllowXenServerUpdatesCheckBox;
         private System.Windows.Forms.CheckBox AllowXenServerPatchesCheckBox;
         private System.Windows.Forms.Label UpdatesBlurb;
+        private Controls.DecentGroupBox decentGroupBox1;
+        private Controls.ClientIdControl clientIdControl1;
     }
 }

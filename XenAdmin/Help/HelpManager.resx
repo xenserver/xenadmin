@@ -189,6 +189,9 @@
   <data name="ChangeServerPasswordDialog" xml:space="preserve">
     <value>pools-rootpassword</value>
   </data>
+  <data name="ClientIdDialog" xml:space="preserve">
+  <value>updates-applying</value>
+  </data>
   <data name="CloseXenCenterWarningDialog" xml:space="preserve">
     <value>intro-start</value>
   </data>

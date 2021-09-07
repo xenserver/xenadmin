@@ -29,16 +29,25 @@
  * SUCH DAMAGE.
  */
 
-using System.Windows.Forms;
-using XenAdmin.Controls;
+using System;
 
-namespace XenAdmin.Dialogs.OptionsPages
+namespace XenAdmin.Actions.Updates
 {
-    interface IOptionsPage : VerticalTabs.IVerticalTab
+    [Serializable]
+    public class FileServiceClientId
     {
-        void Build();
-        bool IsValidToSave(out Control control, out string invalidReason);
-        void ShowValidationMessages(Control control, string message);
-        void Save();
+        public string username { get; set; }
+        public string apikey { get; set; }
+        public string createdDate { get; set; }
+    }
+
+    [Serializable]
+    public class FileServiceToken
+    {
+        public string token { get; set; }
+        public string token_type { get; set; }
+        public string session_id { get; set; }
+        public string issued_at { get; set; }
+        public string expires_at { get; set; }
     }
 }
