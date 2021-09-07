@@ -462,6 +462,12 @@
   <data name="ACTION_ENABLING_PVS_READ_CACHING" xml:space="preserve">
     <value>Enabling PVS-Accelerator for selected VMs</value>
   </data>
+  <data name="ACTION_ENABLING_TLS_VERIFICATION" xml:space="preserve">
+    <value>Enabling certificate verification...</value>
+  </data>
+  <data name="ACTION_ENABLING_TLS_VERIFICATION_ON" xml:space="preserve">
+    <value>Enabling certificate verification on {0}...</value>
+  </data>
   <data name="ACTION_EXPORT_DESCRIPTION_BLOCK_CHECKSUM_FAILED" xml:space="preserve">
     <value>Export failed due to a block checksum mismatch.  Please retry the export.</value>
   </data>
@@ -1836,6 +1842,39 @@ Note that if RBAC is enabled, only alerts which you have privileges to dismiss w
   <data name="ALERT_EXPORT_ALL_OR_FILTERED" xml:space="preserve">
     <value>You have applied filters to the list of alerts. Do you want to export all alerts from every connected server, or only the alerts you have chosen to view?</value>
   </data>
+   <data name="ALERT_FAILED_LOGIN_ATTEMPT_DESCRIPTION_ALL_UNKNOWN" xml:space="preserve">
+    <value>All {0} attempts originated from unknown sources.</value>
+  </data> 
+  <data name="ALERT_FAILED_LOGIN_ATTEMPT_DESCRIPTION_COMMON" xml:space="preserve">
+    <value>The most common attempts originated from the following sources:</value>
+  </data> 
+  <data name="ALERT_FAILED_LOGIN_ATTEMPT_DESCRIPTION_TOTAL" xml:space="preserve">
+    <value>There has been a total of {0} failed login attempts.</value>
+  </data> 
+  <data name="ALERT_FAILED_LOGIN_ATTEMPT_DESCRIPTION_UNKNOWN" xml:space="preserve">
+    <value>{0} attempts originated from unknown sources.</value>
+  </data> 
+ <data name="ALERT_FAILED_LOGIN_ATTEMPT_OFFENDER_DATE" xml:space="preserve">
+    <value>Last attempt on: {0}</value>
+  </data>
+  <data name="ALERT_FAILED_LOGIN_ATTEMPT_OFFENDER_IP" xml:space="preserve">
+    <value>IP address: {0}</value>
+  </data>
+  <data name="ALERT_FAILED_LOGIN_ATTEMPT_OFFENDER_NUMBER" xml:space="preserve">
+    <value>Number of attempts: {0}</value>
+  </data>
+  <data name="ALERT_FAILED_LOGIN_ATTEMPT_OFFENDER_ORIGINATOR" xml:space="preserve">
+    <value>Originator: {0}</value>
+  </data>
+  <data name="ALERT_FAILED_LOGIN_ATTEMPT_OFFENDER_USERAGENT" xml:space="preserve">
+    <value>User agent: {0}</value>
+  </data>
+  <data name="ALERT_FAILED_LOGIN_ATTEMPT_OFFENDER_USERNAME" xml:space="preserve">
+    <value>Username: {0}</value>
+  </data>
+  <data name="ALERT_FAILED_LOGIN_ATTEMPT_TITLE" xml:space="preserve">
+    <value>There has been a number of failed attempts to login to '{0}' within the past hour.</value>
+  </data>
   <data name="ALERT_GENERIC_HELP" xml:space="preserve">
     <value>Help</value>
   </data>
@@ -2515,26 +2554,62 @@ This will cancel compilation of the status report.</value>
   <data name="CD_DVD_DEVICE_ATTACHED" xml:space="preserve">
     <value>Attached CD/DVD Drive.</value>
   </data>
-  <data name="CERTIFICATE_ALERT_EXPIRED_DESCIRPTION" xml:space="preserve">
-    <value>The TLS certificate of server '{0}' expired on {1}.</value>
+  <data name="CERTIFICATE_CA_ALERT_EXPIRED_DESCIRPTION" xml:space="preserve">
+    <value>The trusted CA certificate of '{0}' expired on {1}.</value>
   </data>
-  <data name="CERTIFICATE_ALERT_EXPIRED_TITLE" xml:space="preserve">
-    <value>Certificate on {0} expired</value>
+  <data name="CERTIFICATE_CA_ALERT_EXPIRED_TITLE" xml:space="preserve">
+    <value>Trusted CA certificate on {0} expired</value>
   </data>
-  <data name="CERTIFICATE_ALERT_EXPIRING_DESCRIPTION" xml:space="preserve">
-    <value>The TLS certificate of server '{0}' will expire on {1}.</value>
+  <data name="CERTIFICATE_CA_ALERT_EXPIRING_DESCRIPTION" xml:space="preserve">
+    <value>The trusted CA certificate of '{0}' will expire on {1}.</value>
   </data>
-  <data name="CERTIFICATE_ALERT_EXPIRING_TITLE_DAYS" xml:space="preserve">
-    <value>Certificate on {0} expiring in {1} day(s)</value>
+  <data name="CERTIFICATE_CA_ALERT_EXPIRING_TITLE_DAYS" xml:space="preserve">
+    <value>Trusted CA certificate on {0} expiring in {1} day(s)</value>
   </data>
-  <data name="CERTIFICATE_ALERT_EXPIRING_TITLE_HOURS" xml:space="preserve">
-    <value>Certificate on {0} expiring in {1} hour(s)</value>
+  <data name="CERTIFICATE_CA_ALERT_EXPIRING_TITLE_HOURS" xml:space="preserve">
+    <value>Trusted CA certificate on {0} expiring in {1} hour(s)</value>
   </data>
-  <data name="CERTIFICATE_ALERT_EXPIRING_TITLE_MINUTES" xml:space="preserve">
-    <value>Certificate on {0} expiring in {1} minute(s)</value>
+  <data name="CERTIFICATE_CA_ALERT_EXPIRING_TITLE_MINUTES" xml:space="preserve">
+    <value>Trusted CA certificate on {0} expiring in {1} minute(s)</value>
   </data>
   <data name="CERTIFICATE_FILETYPES" xml:space="preserve">
     <value>TLS certificate files (*.pem;*.crt;*.cer)|*.pem;*.crt;*.cer</value>
+  </data>
+  <data name="CERTIFICATE_HOST_ALERT_EXPIRED_DESCIRPTION" xml:space="preserve">
+    <value>The identity certificate of server '{0}' expired on {1}.</value>
+  </data>
+  <data name="CERTIFICATE_HOST_ALERT_EXPIRED_TITLE" xml:space="preserve">
+    <value>Server identity certificate on {0} expired</value>
+  </data>
+  <data name="CERTIFICATE_HOST_ALERT_EXPIRING_DESCRIPTION" xml:space="preserve">
+    <value>The identity certificate of server '{0}' will expire on {1}.</value>
+  </data>
+  <data name="CERTIFICATE_HOST_ALERT_EXPIRING_TITLE_DAYS" xml:space="preserve">
+    <value>Server identity certificate on {0} expiring in {1} day(s)</value>
+  </data>
+  <data name="CERTIFICATE_HOST_ALERT_EXPIRING_TITLE_HOURS" xml:space="preserve">
+    <value>Server identity certificate on {0} expiring in {1} hour(s)</value>
+  </data>
+  <data name="CERTIFICATE_HOST_ALERT_EXPIRING_TITLE_MINUTES" xml:space="preserve">
+    <value>Server identity certificate on {0} expiring in {1} minute(s)</value>
+  </data>
+  <data name="CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRED_DESCIRPTION" xml:space="preserve">
+    <value>The internal identity certificate of server '{0}' expired on {1}.</value>
+  </data>
+  <data name="CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRED_TITLE" xml:space="preserve">
+    <value>Server internal identity certificate on {0} expired</value>
+  </data>
+  <data name="CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRING_DESCRIPTION" xml:space="preserve">
+    <value>The internal identity certificate of server '{0}' will expire on {1}.</value>
+  </data>
+  <data name="CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRING_TITLE_DAYS" xml:space="preserve">
+    <value>Server internal identity certificate on {0} expiring in {1} day(s)</value>
+  </data>
+  <data name="CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRING_TITLE_HOURS" xml:space="preserve">
+    <value>Server internal identity certificate on {0} expiring in {1} hour(s)</value>
+  </data>
+  <data name="CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRING_TITLE_MINUTES" xml:space="preserve">
+    <value>Server internal identity certificate on {0} expiring in {1} minute(s)</value>
   </data>
   <data name="CERTIFICATE_INSTALLATION_FAILURE" xml:space="preserve">
     <value>The certificate installation failed.</value>
@@ -2566,14 +2641,23 @@ This will cancel compilation of the status report.</value>
   <data name="CERTIFICATE_SELECT_KEY_TITLE" xml:space="preserve">
     <value>Select TLS Key File</value>
   </data>
-  <data name="CERTIFICATE_THUMBPRINT_KEY" xml:space="preserve">
-    <value>Thumbprint</value>
+  <data name="CERTIFICATE_THUMBPRINT_VALUE" xml:space="preserve">
+    <value>Thumbprint: {0}</value>
   </data>
-  <data name="CERTIFICATE_VALIDITY_PERIOD_KEY" xml:space="preserve">
-    <value>Validity period</value>
+  <data name="CERTIFICATE_TYPE_CA" xml:space="preserve">
+    <value>Trusted CA certificate</value>
+  </data>
+  <data name="CERTIFICATE_TYPE_HOST" xml:space="preserve">
+    <value>Server identity certificate</value>
+  </data>
+  <data name="CERTIFICATE_TYPE_HOST_INTERNAL" xml:space="preserve">
+    <value>Server internal identity certificate</value>
   </data>
   <data name="CERTIFICATE_VALIDITY_PERIOD_VALUE" xml:space="preserve">
     <value>Valid from {0} to {1}</value>
+  </data>
+  <data name="CERTIFICATE_VERIFICATION_KEY" xml:space="preserve">
+    <value>Certificate Verification</value>
   </data>
   <data name="CFU_STATUS_CHECK_DESCRIPTION" xml:space="preserve">
     <value>Ability to download updates</value>
@@ -2830,6 +2914,9 @@ Do you want to continue?</value>
     <value>Changing the static maximum memory of this VM will cause it to be rebooted.
 
 Do you want to continue?</value>
+  </data>
+  <data name="CONFIRM_CONTINUE" xml:space="preserve">
+    <value>Do you want to continue?</value>
   </data>
   <data name="CONFIRM_DELETE" xml:space="preserve">
     <value>Are you sure you want to delete the selected {0}?</value>
@@ -5252,6 +5339,29 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="ENABLE_PVS_READ_CACHING_RUBRIC_SINGLE" xml:space="preserve">
     <value>Choose the PVS site from which the selected VM is streamed.</value>
   </data>
+  <data name="ENABLE_TLS_VERIFICATION_CLUSTERING" xml:space="preserve">
+    <value>You cannot enable certificate verification while the pool is in the process of creating a cluster.</value>
+  </data>
+  <data name="ENABLE_TLS_VERIFICATION_HA_DISABLING" xml:space="preserve">
+    <value>You cannot enable certificate verification while HA is being disabled on the pool.</value>
+  </data>
+  <data name="ENABLE_TLS_VERIFICATION_HA_ENABLED" xml:space="preserve">
+    <value>You cannot enable certificate verification when HA is on.</value>
+  </data>
+  <data name="ENABLE_TLS_VERIFICATION_HA_ENABLING" xml:space="preserve">
+    <value>You cannot enable certificate verification while HA is being enabled on the pool.</value>
+  </data>
+  <data name="ENABLE_TLS_VERIFICATION_MENU" xml:space="preserve">
+    <value>Enable Certificate Veri&amp;fication</value>
+  </data>
+  <data name="ENABLE_TLS_VERIFICATION_NEW_COORDINATOR" xml:space="preserve">
+    <value>You cannot enable certificate verification while a new coordinator is being nominated in the pool.</value>
+  </data>
+  <data name="ENABLE_TLS_VERIFICATION_RBAC_RESTRICTION" xml:space="preserve">
+    <value>A {0} user does not have sufficient permissions to enable certificate verification. Please login using an account with one of the following roles:
+
+{1}</value>
+  </data>
   <data name="ENABLE_WLB_ELLIPSIS" xml:space="preserve">
     <value>Res&amp;ume</value>
   </data>
@@ -7339,9 +7449,6 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   <data name="INSTALL_SERVER_CERTIFICATE_ACTION_LINK" xml:space="preserve">
     <value>Install certificate...</value>
   </data>
-  <data name="INSTALL_SERVER_CERTIFICATE_CONTEXT_MENU" xml:space="preserve">
-    <value>Install certi&amp;ficate...</value>
-  </data>
   <data name="INSTALL_SERVER_CERTIFICATE_DESCRIPTION" xml:space="preserve">
     <value>Installing server certificate...</value>
   </data>
@@ -7814,6 +7921,12 @@ Size: {3}</value>
   </data>
   <data name="MAINWINDOW_ADD_HOST" xml:space="preserve">
     <value>&amp;Add...</value>
+  </data>
+  <data name="MAINWINDOW_CERTIFICATE_CONTEXT_MENU_TEXT" xml:space="preserve">
+    <value>Certi&amp;ficate</value>
+  </data>
+  <data name="MAINWINDOW_CERTIFICATE_MENU_TEXT" xml:space="preserve">
+    <value>Cert&amp;ificate</value>
   </data>
   <data name="MAINWINDOW_CONFIRM_MIGRATE" xml:space="preserve">
     <value>Do you want to migrate the VM {0} to the server {1}?</value>
@@ -8314,6 +8427,15 @@ Are you sure you want to detach this storage repository?</value>
   </data>
   <data name="MESSAGEBOX_DETACH_VD_TITLE_MUTLIPLE" xml:space="preserve">
     <value>Detach Multiple Virtual Disks</value>
+  </data>
+  <data name="MESSAGEBOX_ENABLE_TLS_VERIFICATION_BLURB" xml:space="preserve">
+    <value>Certificate verification is not enabled on '{0}'. Would you like to enable it now?</value>
+  </data>
+  <data name="MESSAGEBOX_ENABLE_TLS_VERIFICATION_WARNING" xml:space="preserve">
+    <value>Before enabling certificate verification ensure that there are no operations running in the pool, otherwise they will be interrupted.</value>
+  </data>
+  <data name="MESSAGEBOX_ENABLE_TLS_VERIFICATION_BUTTON" xml:space="preserve">
+    <value>&amp;Yes, Enable certificate verification</value>
   </data>
   <data name="MESSAGEBOX_ERRORTEXT" xml:space="preserve">
     <value>Unable to connect to server '{0}'.
@@ -10577,6 +10699,18 @@ Please reconnect the host and try again</value>
   <data name="POOL_IS_PARTIALLY_LICENSED" xml:space="preserve">
     <value>The pool is partially licensed</value>
   </data>
+  <data name="POOL_JOIN_CERTIFICATE_CHECKING_ONLY_ON_COORDINATOR" xml:space="preserve">
+    <value>Certificate verification is enabled on coordinator, but not on this server. To create the pool, first enable certificate verification on the server.</value>
+  </data>
+  <data name="POOL_JOIN_CERTIFICATE_CHECKING_ONLY_ON_COORDINATOR_JOINER" xml:space="preserve">
+    <value>Certificate verification is enabled on this server, but not on coordinator. To create the pool, first enable certificate verification on coordinator.</value>
+  </data>
+  <data name="POOL_JOIN_CERTIFICATE_CHECKING_ONLY_ON_POOL" xml:space="preserve">
+    <value>Certificate verification is enabled on the pool, but not on this server. To add the server to the pool, first enable certificate verification on the server.</value>
+  </data>
+  <data name="POOL_JOIN_CERTIFICATE_CHECKING_ONLY_ON_POOL_JOINER" xml:space="preserve">
+    <value>Certificate verification is enabled on this server, but not on the pool. To add the server to the pool, first enable certificate verification on the pool.</value>
+  </data>
   <data name="POOL_JOIN_FORBIDDEN_BY_HA" xml:space="preserve">
     <value>HA is enabled on the pool</value>
   </data>
@@ -11182,6 +11316,18 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   </data>
   <data name="REQUIRED_UPDATES" xml:space="preserve">
     <value>Required Updates</value>
+  </data>
+  <data name="RESET_SERVER_CERTIFICATE_DESCRIPTION" xml:space="preserve">
+    <value>Resetting certificate...</value>
+  </data>
+  <data name="RESET_SERVER_CERTIFICATE_MENU" xml:space="preserve">
+    <value>&amp;Reset certificate...</value>
+  </data>
+  <data name="RESET_SERVER_CERTIFICATE_TITLE" xml:space="preserve">
+    <value>Resetting certificate on server {0}...</value>
+  </data>
+  <data name="RESET_SERVER_CERTIFICATE_WARNING" xml:space="preserve">
+    <value>The server's identity certificate will be replaced by a self-signed certificate. Do you want to continue?</value>
   </data>
   <data name="RESOLVED_AS" xml:space="preserve">
     <value>Resolved as {0}</value>
@@ -13880,6 +14026,9 @@ Schedule:
   <data name="WLB_AUTO_OPT" xml:space="preserve">
     <value>Automated optimizations</value>
   </data>
+  <data name="WLB_COMMAND_MENU_ITEM" xml:space="preserve">
+    <value>Workload &amp;Balancing</value>
+  </data>
   <data name="WLB_CONFIGURATION_DIALOG" xml:space="preserve">
     <value>Workload Balancing Configuration for {0}</value>
   </data>
@@ -13913,6 +14062,9 @@ A {0} user cannot alter the Workload Balancing settings.</value>
   </data>
   <data name="WLB_DISABLE_QUERY" xml:space="preserve">
     <value>Are you sure you want to disable Workload Balancing for pool '{0}'?</value>
+  </data>
+  <data name="WLB_DISCONNECT_MENU_ITEM" xml:space="preserve">
+    <value>&amp;Disconnect WLB server...</value>
   </data>
   <data name="WLB_DISCONNECT_SERVER" xml:space="preserve">
     <value>Are you sure you want to disconnect the Workload Balancing server from this pool?
@@ -14354,6 +14506,9 @@ Would you like to adjust the current Optimization Mode to match the schedule?</v
   </data>
   <data name="WLB_REPORT_VIEW_CUSTOM" xml:space="preserve">
     <value>Custom View</value>
+  </data>
+  <data name="WLB_REPORT_VIEW_MENU_ITEM" xml:space="preserve">
+    <value>View Workload &amp;Reports...</value>
   </data>
   <data name="WLB_REPORT_VIEW_TAG_COLUMN_HEADER" xml:space="preserve">
     <value>Filter Item</value>

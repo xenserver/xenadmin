@@ -536,7 +536,15 @@ namespace XenAdmin.Commands
                 items.AddIfEnabled(new NewSRCommand(mainWindow, selection));
 				items.AddIfEnabled(new ImportCommand(mainWindow, selection));
                 items.AddSeparator();
-                items.AddIfEnabled(new InstallCertificateCommand(mainWindow, selection));
+
+                var certItem = new CommandToolStripMenuItem(new CertificateCommand(mainWindow, selection), true);
+                if (certItem.Command.CanRun())
+                {
+                    certItem.DropDownItems.Add(new CommandToolStripMenuItem(new InstallCertificateCommand(mainWindow, selection), true));
+                    certItem.DropDownItems.Add(new CommandToolStripMenuItem(new ResetCertificateCommand(mainWindow, selection), true));
+                    items.Add(certItem);
+                }
+
                 items.AddIfEnabled(new HostMaintenanceModeCommand(mainWindow, selection));
                 items.AddSeparator();
 
@@ -588,7 +596,15 @@ namespace XenAdmin.Commands
 
                 items.AddIfEnabled(new AddSelectedHostToPoolToolStripMenuItem(mainWindow, selection, true));
                 items.AddSeparator();
-                items.AddIfEnabled(new InstallCertificateCommand(mainWindow, selection));
+                
+                var certItem = new CommandToolStripMenuItem(new CertificateCommand(mainWindow, selection), true);
+                if (certItem.Command.CanRun())
+                {
+                    certItem.DropDownItems.Add(new CommandToolStripMenuItem(new InstallCertificateCommand(mainWindow, selection), true));
+                    certItem.DropDownItems.Add(new CommandToolStripMenuItem(new ResetCertificateCommand(mainWindow, selection), true));
+                    items.Add(certItem);
+                }
+
                 items.AddIfEnabled(new HostMaintenanceModeCommand(mainWindow, selection));
                 items.AddSeparator();
 

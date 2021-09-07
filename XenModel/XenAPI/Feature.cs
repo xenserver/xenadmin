@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -95,15 +96,15 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given Feature.
         /// </summary>
-        public override void UpdateFrom(Feature update)
+        public override void UpdateFrom(Feature record)
         {
-            uuid = update.uuid;
-            name_label = update.name_label;
-            name_description = update.name_description;
-            enabled = update.enabled;
-            experimental = update.experimental;
-            version = update.version;
-            host = update.host;
+            uuid = record.uuid;
+            name_label = record.name_label;
+            name_description = record.name_description;
+            enabled = record.enabled;
+            experimental = record.experimental;
+            version = record.version;
+            host = record.host;
         }
 
         internal void UpdateFrom(Proxy_Feature proxy)
@@ -115,19 +116,6 @@ namespace XenAPI
             experimental = (bool)proxy.experimental;
             version = proxy.version == null ? null : proxy.version;
             host = proxy.host == null ? null : XenRef<Host>.Create(proxy.host);
-        }
-
-        public Proxy_Feature ToProxy()
-        {
-            Proxy_Feature result_ = new Proxy_Feature();
-            result_.uuid = uuid ?? "";
-            result_.name_label = name_label ?? "";
-            result_.name_description = name_description ?? "";
-            result_.enabled = enabled;
-            result_.experimental = experimental;
-            result_.version = version ?? "";
-            result_.host = host ?? "";
-            return result_;
         }
 
         /// <summary>
@@ -154,6 +142,19 @@ namespace XenAPI
                 host = Marshalling.ParseRef<Host>(table, "host");
         }
 
+        public Proxy_Feature ToProxy()
+        {
+            Proxy_Feature result_ = new Proxy_Feature();
+            result_.uuid = uuid ?? "";
+            result_.name_label = name_label ?? "";
+            result_.name_description = name_description ?? "";
+            result_.enabled = enabled;
+            result_.experimental = experimental;
+            result_.version = version ?? "";
+            result_.host = host ?? "";
+            return result_;
+        }
+
         public bool DeepEquals(Feature other)
         {
             if (ReferenceEquals(null, other))
@@ -170,15 +171,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._host, other._host);
         }
 
-        internal static List<Feature> ProxyArrayToObjectList(Proxy_Feature[] input)
-        {
-            var result = new List<Feature>();
-            foreach (var item in input)
-                result.Add(new Feature(item));
-
-            return result;
-        }
-
         public override string SaveChanges(Session session, string opaqueRef, Feature server)
         {
             if (opaqueRef == null)
@@ -191,6 +183,7 @@ namespace XenAPI
               throw new InvalidOperationException("This type has no read/write properties");
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given Feature.
         /// First published in XenServer 7.2.

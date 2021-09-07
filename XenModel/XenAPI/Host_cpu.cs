@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -107,21 +108,21 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given Host_cpu.
         /// </summary>
-        public override void UpdateFrom(Host_cpu update)
+        public override void UpdateFrom(Host_cpu record)
         {
-            uuid = update.uuid;
-            host = update.host;
-            number = update.number;
-            vendor = update.vendor;
-            speed = update.speed;
-            modelname = update.modelname;
-            family = update.family;
-            model = update.model;
-            stepping = update.stepping;
-            flags = update.flags;
-            features = update.features;
-            utilisation = update.utilisation;
-            other_config = update.other_config;
+            uuid = record.uuid;
+            host = record.host;
+            number = record.number;
+            vendor = record.vendor;
+            speed = record.speed;
+            modelname = record.modelname;
+            family = record.family;
+            model = record.model;
+            stepping = record.stepping;
+            flags = record.flags;
+            features = record.features;
+            utilisation = record.utilisation;
+            other_config = record.other_config;
         }
 
         internal void UpdateFrom(Proxy_Host_cpu proxy)
@@ -139,25 +140,6 @@ namespace XenAPI
             features = proxy.features == null ? null : proxy.features;
             utilisation = Convert.ToDouble(proxy.utilisation);
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
-        }
-
-        public Proxy_Host_cpu ToProxy()
-        {
-            Proxy_Host_cpu result_ = new Proxy_Host_cpu();
-            result_.uuid = uuid ?? "";
-            result_.host = host ?? "";
-            result_.number = number.ToString();
-            result_.vendor = vendor ?? "";
-            result_.speed = speed.ToString();
-            result_.modelname = modelname ?? "";
-            result_.family = family.ToString();
-            result_.model = model.ToString();
-            result_.stepping = stepping ?? "";
-            result_.flags = flags ?? "";
-            result_.features = features ?? "";
-            result_.utilisation = utilisation;
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            return result_;
         }
 
         /// <summary>
@@ -196,6 +178,25 @@ namespace XenAPI
                 other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
         }
 
+        public Proxy_Host_cpu ToProxy()
+        {
+            Proxy_Host_cpu result_ = new Proxy_Host_cpu();
+            result_.uuid = uuid ?? "";
+            result_.host = host ?? "";
+            result_.number = number.ToString();
+            result_.vendor = vendor ?? "";
+            result_.speed = speed.ToString();
+            result_.modelname = modelname ?? "";
+            result_.family = family.ToString();
+            result_.model = model.ToString();
+            result_.stepping = stepping ?? "";
+            result_.flags = flags ?? "";
+            result_.features = features ?? "";
+            result_.utilisation = utilisation;
+            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
+            return result_;
+        }
+
         public bool DeepEquals(Host_cpu other)
         {
             if (ReferenceEquals(null, other))
@@ -218,15 +219,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._other_config, other._other_config);
         }
 
-        internal static List<Host_cpu> ProxyArrayToObjectList(Proxy_Host_cpu[] input)
-        {
-            var result = new List<Host_cpu>();
-            foreach (var item in input)
-                result.Add(new Host_cpu(item));
-
-            return result;
-        }
-
         public override string SaveChanges(Session session, string opaqueRef, Host_cpu server)
         {
             if (opaqueRef == null)
@@ -244,6 +236,7 @@ namespace XenAPI
                 return null;
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given host_cpu.
         /// First published in XenServer 4.0.

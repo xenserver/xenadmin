@@ -1096,6 +1096,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enabling certificate verification....
+        /// </summary>
+        public static string ACTION_ENABLING_TLS_VERIFICATION {
+            get {
+                return ResourceManager.GetString("ACTION_ENABLING_TLS_VERIFICATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enabling certificate verification on {0}....
+        /// </summary>
+        public static string ACTION_ENABLING_TLS_VERIFICATION_ON {
+            get {
+                return ResourceManager.GetString("ACTION_ENABLING_TLS_VERIFICATION_ON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Export failed due to a block checksum mismatch.  Please retry the export..
         /// </summary>
         public static string ACTION_EXPORT_DESCRIPTION_BLOCK_CHECKSUM_FAILED {
@@ -4981,6 +4999,105 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All {0} attempts originated from unknown sources..
+        /// </summary>
+        public static string ALERT_FAILED_LOGIN_ATTEMPT_DESCRIPTION_ALL_UNKNOWN {
+            get {
+                return ResourceManager.GetString("ALERT_FAILED_LOGIN_ATTEMPT_DESCRIPTION_ALL_UNKNOWN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The most common attempts originated from the following sources:.
+        /// </summary>
+        public static string ALERT_FAILED_LOGIN_ATTEMPT_DESCRIPTION_COMMON {
+            get {
+                return ResourceManager.GetString("ALERT_FAILED_LOGIN_ATTEMPT_DESCRIPTION_COMMON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There has been a total of {0} failed login attempts..
+        /// </summary>
+        public static string ALERT_FAILED_LOGIN_ATTEMPT_DESCRIPTION_TOTAL {
+            get {
+                return ResourceManager.GetString("ALERT_FAILED_LOGIN_ATTEMPT_DESCRIPTION_TOTAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} attempts originated from unknown sources..
+        /// </summary>
+        public static string ALERT_FAILED_LOGIN_ATTEMPT_DESCRIPTION_UNKNOWN {
+            get {
+                return ResourceManager.GetString("ALERT_FAILED_LOGIN_ATTEMPT_DESCRIPTION_UNKNOWN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last attempt on: {0}.
+        /// </summary>
+        public static string ALERT_FAILED_LOGIN_ATTEMPT_OFFENDER_DATE {
+            get {
+                return ResourceManager.GetString("ALERT_FAILED_LOGIN_ATTEMPT_OFFENDER_DATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IP address: {0}.
+        /// </summary>
+        public static string ALERT_FAILED_LOGIN_ATTEMPT_OFFENDER_IP {
+            get {
+                return ResourceManager.GetString("ALERT_FAILED_LOGIN_ATTEMPT_OFFENDER_IP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of attempts: {0}.
+        /// </summary>
+        public static string ALERT_FAILED_LOGIN_ATTEMPT_OFFENDER_NUMBER {
+            get {
+                return ResourceManager.GetString("ALERT_FAILED_LOGIN_ATTEMPT_OFFENDER_NUMBER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Originator: {0}.
+        /// </summary>
+        public static string ALERT_FAILED_LOGIN_ATTEMPT_OFFENDER_ORIGINATOR {
+            get {
+                return ResourceManager.GetString("ALERT_FAILED_LOGIN_ATTEMPT_OFFENDER_ORIGINATOR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User agent: {0}.
+        /// </summary>
+        public static string ALERT_FAILED_LOGIN_ATTEMPT_OFFENDER_USERAGENT {
+            get {
+                return ResourceManager.GetString("ALERT_FAILED_LOGIN_ATTEMPT_OFFENDER_USERAGENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Username: {0}.
+        /// </summary>
+        public static string ALERT_FAILED_LOGIN_ATTEMPT_OFFENDER_USERNAME {
+            get {
+                return ResourceManager.GetString("ALERT_FAILED_LOGIN_ATTEMPT_OFFENDER_USERNAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There has been a number of failed attempts to login to &apos;{0}&apos; within the past hour..
+        /// </summary>
+        public static string ALERT_FAILED_LOGIN_ATTEMPT_TITLE {
+            get {
+                return ResourceManager.GetString("ALERT_FAILED_LOGIN_ATTEMPT_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Help.
         /// </summary>
         public static string ALERT_GENERIC_HELP {
@@ -6947,56 +7064,56 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The TLS certificate of server &apos;{0}&apos; expired on {1}..
+        ///   Looks up a localized string similar to The trusted CA certificate of &apos;{0}&apos; expired on {1}..
         /// </summary>
-        public static string CERTIFICATE_ALERT_EXPIRED_DESCIRPTION {
+        public static string CERTIFICATE_CA_ALERT_EXPIRED_DESCIRPTION {
             get {
-                return ResourceManager.GetString("CERTIFICATE_ALERT_EXPIRED_DESCIRPTION", resourceCulture);
+                return ResourceManager.GetString("CERTIFICATE_CA_ALERT_EXPIRED_DESCIRPTION", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Certificate on {0} expired.
+        ///   Looks up a localized string similar to Trusted CA certificate on {0} expired.
         /// </summary>
-        public static string CERTIFICATE_ALERT_EXPIRED_TITLE {
+        public static string CERTIFICATE_CA_ALERT_EXPIRED_TITLE {
             get {
-                return ResourceManager.GetString("CERTIFICATE_ALERT_EXPIRED_TITLE", resourceCulture);
+                return ResourceManager.GetString("CERTIFICATE_CA_ALERT_EXPIRED_TITLE", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The TLS certificate of server &apos;{0}&apos; will expire on {1}..
+        ///   Looks up a localized string similar to The trusted CA certificate of &apos;{0}&apos; will expire on {1}..
         /// </summary>
-        public static string CERTIFICATE_ALERT_EXPIRING_DESCRIPTION {
+        public static string CERTIFICATE_CA_ALERT_EXPIRING_DESCRIPTION {
             get {
-                return ResourceManager.GetString("CERTIFICATE_ALERT_EXPIRING_DESCRIPTION", resourceCulture);
+                return ResourceManager.GetString("CERTIFICATE_CA_ALERT_EXPIRING_DESCRIPTION", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Certificate on {0} expiring in {1} day(s).
+        ///   Looks up a localized string similar to Trusted CA certificate on {0} expiring in {1} day(s).
         /// </summary>
-        public static string CERTIFICATE_ALERT_EXPIRING_TITLE_DAYS {
+        public static string CERTIFICATE_CA_ALERT_EXPIRING_TITLE_DAYS {
             get {
-                return ResourceManager.GetString("CERTIFICATE_ALERT_EXPIRING_TITLE_DAYS", resourceCulture);
+                return ResourceManager.GetString("CERTIFICATE_CA_ALERT_EXPIRING_TITLE_DAYS", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Certificate on {0} expiring in {1} hour(s).
+        ///   Looks up a localized string similar to Trusted CA certificate on {0} expiring in {1} hour(s).
         /// </summary>
-        public static string CERTIFICATE_ALERT_EXPIRING_TITLE_HOURS {
+        public static string CERTIFICATE_CA_ALERT_EXPIRING_TITLE_HOURS {
             get {
-                return ResourceManager.GetString("CERTIFICATE_ALERT_EXPIRING_TITLE_HOURS", resourceCulture);
+                return ResourceManager.GetString("CERTIFICATE_CA_ALERT_EXPIRING_TITLE_HOURS", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Certificate on {0} expiring in {1} minute(s).
+        ///   Looks up a localized string similar to Trusted CA certificate on {0} expiring in {1} minute(s).
         /// </summary>
-        public static string CERTIFICATE_ALERT_EXPIRING_TITLE_MINUTES {
+        public static string CERTIFICATE_CA_ALERT_EXPIRING_TITLE_MINUTES {
             get {
-                return ResourceManager.GetString("CERTIFICATE_ALERT_EXPIRING_TITLE_MINUTES", resourceCulture);
+                return ResourceManager.GetString("CERTIFICATE_CA_ALERT_EXPIRING_TITLE_MINUTES", resourceCulture);
             }
         }
         
@@ -7006,6 +7123,114 @@ namespace XenAdmin {
         public static string CERTIFICATE_FILETYPES {
             get {
                 return ResourceManager.GetString("CERTIFICATE_FILETYPES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The identity certificate of server &apos;{0}&apos; expired on {1}..
+        /// </summary>
+        public static string CERTIFICATE_HOST_ALERT_EXPIRED_DESCIRPTION {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_HOST_ALERT_EXPIRED_DESCIRPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server identity certificate on {0} expired.
+        /// </summary>
+        public static string CERTIFICATE_HOST_ALERT_EXPIRED_TITLE {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_HOST_ALERT_EXPIRED_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The identity certificate of server &apos;{0}&apos; will expire on {1}..
+        /// </summary>
+        public static string CERTIFICATE_HOST_ALERT_EXPIRING_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_HOST_ALERT_EXPIRING_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server identity certificate on {0} expiring in {1} day(s).
+        /// </summary>
+        public static string CERTIFICATE_HOST_ALERT_EXPIRING_TITLE_DAYS {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_HOST_ALERT_EXPIRING_TITLE_DAYS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server identity certificate on {0} expiring in {1} hour(s).
+        /// </summary>
+        public static string CERTIFICATE_HOST_ALERT_EXPIRING_TITLE_HOURS {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_HOST_ALERT_EXPIRING_TITLE_HOURS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server identity certificate on {0} expiring in {1} minute(s).
+        /// </summary>
+        public static string CERTIFICATE_HOST_ALERT_EXPIRING_TITLE_MINUTES {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_HOST_ALERT_EXPIRING_TITLE_MINUTES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The internal identity certificate of server &apos;{0}&apos; expired on {1}..
+        /// </summary>
+        public static string CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRED_DESCIRPTION {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRED_DESCIRPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server internal identity certificate on {0} expired.
+        /// </summary>
+        public static string CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRED_TITLE {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRED_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The internal identity certificate of server &apos;{0}&apos; will expire on {1}..
+        /// </summary>
+        public static string CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRING_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRING_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server internal identity certificate on {0} expiring in {1} day(s).
+        /// </summary>
+        public static string CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRING_TITLE_DAYS {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRING_TITLE_DAYS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server internal identity certificate on {0} expiring in {1} hour(s).
+        /// </summary>
+        public static string CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRING_TITLE_HOURS {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRING_TITLE_HOURS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server internal identity certificate on {0} expiring in {1} minute(s).
+        /// </summary>
+        public static string CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRING_TITLE_MINUTES {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRING_TITLE_MINUTES", resourceCulture);
             }
         }
         
@@ -7094,20 +7319,38 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Thumbprint.
+        ///   Looks up a localized string similar to Thumbprint: {0}.
         /// </summary>
-        public static string CERTIFICATE_THUMBPRINT_KEY {
+        public static string CERTIFICATE_THUMBPRINT_VALUE {
             get {
-                return ResourceManager.GetString("CERTIFICATE_THUMBPRINT_KEY", resourceCulture);
+                return ResourceManager.GetString("CERTIFICATE_THUMBPRINT_VALUE", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Validity period.
+        ///   Looks up a localized string similar to Trusted CA certificate.
         /// </summary>
-        public static string CERTIFICATE_VALIDITY_PERIOD_KEY {
+        public static string CERTIFICATE_TYPE_CA {
             get {
-                return ResourceManager.GetString("CERTIFICATE_VALIDITY_PERIOD_KEY", resourceCulture);
+                return ResourceManager.GetString("CERTIFICATE_TYPE_CA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server identity certificate.
+        /// </summary>
+        public static string CERTIFICATE_TYPE_HOST {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_TYPE_HOST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server internal identity certificate.
+        /// </summary>
+        public static string CERTIFICATE_TYPE_HOST_INTERNAL {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_TYPE_HOST_INTERNAL", resourceCulture);
             }
         }
         
@@ -7117,6 +7360,15 @@ namespace XenAdmin {
         public static string CERTIFICATE_VALIDITY_PERIOD_VALUE {
             get {
                 return ResourceManager.GetString("CERTIFICATE_VALIDITY_PERIOD_VALUE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Certificate Verification.
+        /// </summary>
+        public static string CERTIFICATE_VERIFICATION_KEY {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_VERIFICATION_KEY", resourceCulture);
             }
         }
         
@@ -7823,6 +8075,15 @@ namespace XenAdmin {
         public static string CONFIRM_CHANGE_STATIC_MAX_SINGULAR {
             get {
                 return ResourceManager.GetString("CONFIRM_CHANGE_STATIC_MAX_SINGULAR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want to continue?.
+        /// </summary>
+        public static string CONFIRM_CONTINUE {
+            get {
+                return ResourceManager.GetString("CONFIRM_CONTINUE", resourceCulture);
             }
         }
         
@@ -14922,6 +15183,71 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You cannot enable certificate verification while the pool is in the process of creating a cluster..
+        /// </summary>
+        public static string ENABLE_TLS_VERIFICATION_CLUSTERING {
+            get {
+                return ResourceManager.GetString("ENABLE_TLS_VERIFICATION_CLUSTERING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You cannot enable certificate verification while HA is being disabled on the pool..
+        /// </summary>
+        public static string ENABLE_TLS_VERIFICATION_HA_DISABLING {
+            get {
+                return ResourceManager.GetString("ENABLE_TLS_VERIFICATION_HA_DISABLING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You cannot enable certificate verification when HA is on..
+        /// </summary>
+        public static string ENABLE_TLS_VERIFICATION_HA_ENABLED {
+            get {
+                return ResourceManager.GetString("ENABLE_TLS_VERIFICATION_HA_ENABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You cannot enable certificate verification while HA is being enabled on the pool..
+        /// </summary>
+        public static string ENABLE_TLS_VERIFICATION_HA_ENABLING {
+            get {
+                return ResourceManager.GetString("ENABLE_TLS_VERIFICATION_HA_ENABLING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable Certificate Veri&amp;fication.
+        /// </summary>
+        public static string ENABLE_TLS_VERIFICATION_MENU {
+            get {
+                return ResourceManager.GetString("ENABLE_TLS_VERIFICATION_MENU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You cannot enable certificate verification while a new coordinator is being nominated in the pool..
+        /// </summary>
+        public static string ENABLE_TLS_VERIFICATION_NEW_COORDINATOR {
+            get {
+                return ResourceManager.GetString("ENABLE_TLS_VERIFICATION_NEW_COORDINATOR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A {0} user does not have sufficient permissions to enable certificate verification. Please login using an account with one of the following roles:
+        ///
+        ///{1}.
+        /// </summary>
+        public static string ENABLE_TLS_VERIFICATION_RBAC_RESTRICTION {
+            get {
+                return ResourceManager.GetString("ENABLE_TLS_VERIFICATION_RBAC_RESTRICTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Res&amp;ume.
         /// </summary>
         public static string ENABLE_WLB_ELLIPSIS {
@@ -21079,15 +21405,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Install certi&amp;ficate....
-        /// </summary>
-        public static string INSTALL_SERVER_CERTIFICATE_CONTEXT_MENU {
-            get {
-                return ResourceManager.GetString("INSTALL_SERVER_CERTIFICATE_CONTEXT_MENU", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Installing server certificate....
         /// </summary>
         public static string INSTALL_SERVER_CERTIFICATE_DESCRIPTION {
@@ -22511,6 +22828,24 @@ namespace XenAdmin {
         public static string MAINWINDOW_ADD_HOST {
             get {
                 return ResourceManager.GetString("MAINWINDOW_ADD_HOST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Certi&amp;ficate.
+        /// </summary>
+        public static string MAINWINDOW_CERTIFICATE_CONTEXT_MENU_TEXT {
+            get {
+                return ResourceManager.GetString("MAINWINDOW_CERTIFICATE_CONTEXT_MENU_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cert&amp;ificate.
+        /// </summary>
+        public static string MAINWINDOW_CERTIFICATE_MENU_TEXT {
+            get {
+                return ResourceManager.GetString("MAINWINDOW_CERTIFICATE_MENU_TEXT", resourceCulture);
             }
         }
         
@@ -23971,6 +24306,33 @@ namespace XenAdmin {
         public static string MESSAGEBOX_DETACH_VD_TITLE_MUTLIPLE {
             get {
                 return ResourceManager.GetString("MESSAGEBOX_DETACH_VD_TITLE_MUTLIPLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Certificate verification is not enabled on &apos;{0}&apos;. Would you like to enable it now?.
+        /// </summary>
+        public static string MESSAGEBOX_ENABLE_TLS_VERIFICATION_BLURB {
+            get {
+                return ResourceManager.GetString("MESSAGEBOX_ENABLE_TLS_VERIFICATION_BLURB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Yes, Enable certificate verification.
+        /// </summary>
+        public static string MESSAGEBOX_ENABLE_TLS_VERIFICATION_BUTTON {
+            get {
+                return ResourceManager.GetString("MESSAGEBOX_ENABLE_TLS_VERIFICATION_BUTTON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Before enabling certificate verification ensure that there are no operations running in the pool, otherwise they will be interrupted..
+        /// </summary>
+        public static string MESSAGEBOX_ENABLE_TLS_VERIFICATION_WARNING {
+            get {
+                return ResourceManager.GetString("MESSAGEBOX_ENABLE_TLS_VERIFICATION_WARNING", resourceCulture);
             }
         }
         
@@ -27314,15 +27676,6 @@ namespace XenAdmin {
                 return ResourceManager.GetString("NEWVMWIZARD_TEMPLATEPAGE_GOOROOM", resourceCulture);
             }
         }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Rocky.
-        /// </summary>
-        public static string NEWVMWIZARD_TEMPLATEPAGE_ROCKY {
-            get {
-                return ResourceManager.GetString("NEWVMWIZARD_TEMPLATEPAGE_ROCKY", resourceCulture);
-            }
-        }
         
         /// <summary>
         ///   Looks up a localized string similar to Linx.
@@ -27375,6 +27728,15 @@ namespace XenAdmin {
         public static string NEWVMWIZARD_TEMPLATEPAGE_REDHAT {
             get {
                 return ResourceManager.GetString("NEWVMWIZARD_TEMPLATEPAGE_REDHAT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rocky.
+        /// </summary>
+        public static string NEWVMWIZARD_TEMPLATEPAGE_ROCKY {
+            get {
+                return ResourceManager.GetString("NEWVMWIZARD_TEMPLATEPAGE_ROCKY", resourceCulture);
             }
         }
         
@@ -30456,6 +30818,42 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Certificate verification is enabled on coordinator, but not on this server. To create the pool, first enable certificate verification on the server..
+        /// </summary>
+        public static string POOL_JOIN_CERTIFICATE_CHECKING_ONLY_ON_COORDINATOR {
+            get {
+                return ResourceManager.GetString("POOL_JOIN_CERTIFICATE_CHECKING_ONLY_ON_COORDINATOR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Certificate verification is enabled on this server, but not on coordinator. To create the pool, first enable certificate verification on coordinator..
+        /// </summary>
+        public static string POOL_JOIN_CERTIFICATE_CHECKING_ONLY_ON_COORDINATOR_JOINER {
+            get {
+                return ResourceManager.GetString("POOL_JOIN_CERTIFICATE_CHECKING_ONLY_ON_COORDINATOR_JOINER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Certificate verification is enabled on the pool, but not on this server. To add the server to the pool, first enable certificate verification on the server..
+        /// </summary>
+        public static string POOL_JOIN_CERTIFICATE_CHECKING_ONLY_ON_POOL {
+            get {
+                return ResourceManager.GetString("POOL_JOIN_CERTIFICATE_CHECKING_ONLY_ON_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Certificate verification is enabled on this server, but not on the pool. To add the server to the pool, first enable certificate verification on the pool..
+        /// </summary>
+        public static string POOL_JOIN_CERTIFICATE_CHECKING_ONLY_ON_POOL_JOINER {
+            get {
+                return ResourceManager.GetString("POOL_JOIN_CERTIFICATE_CHECKING_ONLY_ON_POOL_JOINER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to HA is enabled on the pool.
         /// </summary>
         public static string POOL_JOIN_FORBIDDEN_BY_HA {
@@ -32273,6 +32671,42 @@ namespace XenAdmin {
         public static string REQUIRED_UPDATES {
             get {
                 return ResourceManager.GetString("REQUIRED_UPDATES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resetting certificate....
+        /// </summary>
+        public static string RESET_SERVER_CERTIFICATE_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("RESET_SERVER_CERTIFICATE_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Reset certificate....
+        /// </summary>
+        public static string RESET_SERVER_CERTIFICATE_MENU {
+            get {
+                return ResourceManager.GetString("RESET_SERVER_CERTIFICATE_MENU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resetting certificate on server {0}....
+        /// </summary>
+        public static string RESET_SERVER_CERTIFICATE_TITLE {
+            get {
+                return ResourceManager.GetString("RESET_SERVER_CERTIFICATE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The server&apos;s identity certificate will be replaced by a self-signed certificate. Do you want to continue?.
+        /// </summary>
+        public static string RESET_SERVER_CERTIFICATE_WARNING {
+            get {
+                return ResourceManager.GetString("RESET_SERVER_CERTIFICATE_WARNING", resourceCulture);
             }
         }
         
@@ -40176,6 +40610,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Workload &amp;Balancing.
+        /// </summary>
+        public static string WLB_COMMAND_MENU_ITEM {
+            get {
+                return ResourceManager.GetString("WLB_COMMAND_MENU_ITEM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Workload Balancing Configuration for {0}.
         /// </summary>
         public static string WLB_CONFIGURATION_DIALOG {
@@ -40266,6 +40709,15 @@ namespace XenAdmin {
         public static string WLB_DISABLED {
             get {
                 return ResourceManager.GetString("WLB_DISABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Disconnect WLB server....
+        /// </summary>
+        public static string WLB_DISCONNECT_MENU_ITEM {
+            get {
+                return ResourceManager.GetString("WLB_DISCONNECT_MENU_ITEM", resourceCulture);
             }
         }
         
@@ -41556,6 +42008,15 @@ namespace XenAdmin {
         public static string WLB_REPORT_VIEW_CUSTOM {
             get {
                 return ResourceManager.GetString("WLB_REPORT_VIEW_CUSTOM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View Workload &amp;Reports....
+        /// </summary>
+        public static string WLB_REPORT_VIEW_MENU_ITEM {
+            get {
+                return ResourceManager.GetString("WLB_REPORT_VIEW_MENU_ITEM", resourceCulture);
             }
         }
         

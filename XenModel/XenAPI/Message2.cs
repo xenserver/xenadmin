@@ -35,10 +35,20 @@ namespace XenAPI
     {
         public enum MessageType
         {
-            HOST_SERVER_CERTIFICATE_EXPIRED,
+            TLS_VERIFICATION_EMERGENCY_DISABLED,
+            FAILED_LOGIN_ATTEMPTS,
+            HOST_INTERNAL_CERTIFICATE_EXPIRING_07,
+            HOST_INTERNAL_CERTIFICATE_EXPIRING_14,
+            HOST_INTERNAL_CERTIFICATE_EXPIRING_30,
+            POOL_CA_CERTIFICATE_EXPIRING_07,
+            POOL_CA_CERTIFICATE_EXPIRING_14,
+            POOL_CA_CERTIFICATE_EXPIRING_30,
             HOST_SERVER_CERTIFICATE_EXPIRING_07,
             HOST_SERVER_CERTIFICATE_EXPIRING_14,
             HOST_SERVER_CERTIFICATE_EXPIRING_30,
+            POOL_CA_CERTIFICATE_EXPIRED,
+            HOST_INTERNAL_CERTIFICATE_EXPIRED,
+            HOST_SERVER_CERTIFICATE_EXPIRED,
             CLUSTER_HOST_FENCING,
             CLUSTER_HOST_ENABLE_FAILED,
             POOL_CPU_FEATURES_UP,
@@ -125,14 +135,34 @@ namespace XenAPI
             {
                 switch (this.name)
                 {
-                    case "HOST_SERVER_CERTIFICATE_EXPIRED":
-                        return MessageType.HOST_SERVER_CERTIFICATE_EXPIRED;
+                    case "TLS_VERIFICATION_EMERGENCY_DISABLED":
+                        return MessageType.TLS_VERIFICATION_EMERGENCY_DISABLED;
+                    case "FAILED_LOGIN_ATTEMPTS":
+                        return MessageType.FAILED_LOGIN_ATTEMPTS;
+                    case "HOST_INTERNAL_CERTIFICATE_EXPIRING_07":
+                        return MessageType.HOST_INTERNAL_CERTIFICATE_EXPIRING_07;
+                    case "HOST_INTERNAL_CERTIFICATE_EXPIRING_14":
+                        return MessageType.HOST_INTERNAL_CERTIFICATE_EXPIRING_14;
+                    case "HOST_INTERNAL_CERTIFICATE_EXPIRING_30":
+                        return MessageType.HOST_INTERNAL_CERTIFICATE_EXPIRING_30;
+                    case "POOL_CA_CERTIFICATE_EXPIRING_07":
+                        return MessageType.POOL_CA_CERTIFICATE_EXPIRING_07;
+                    case "POOL_CA_CERTIFICATE_EXPIRING_14":
+                        return MessageType.POOL_CA_CERTIFICATE_EXPIRING_14;
+                    case "POOL_CA_CERTIFICATE_EXPIRING_30":
+                        return MessageType.POOL_CA_CERTIFICATE_EXPIRING_30;
                     case "HOST_SERVER_CERTIFICATE_EXPIRING_07":
                         return MessageType.HOST_SERVER_CERTIFICATE_EXPIRING_07;
                     case "HOST_SERVER_CERTIFICATE_EXPIRING_14":
                         return MessageType.HOST_SERVER_CERTIFICATE_EXPIRING_14;
                     case "HOST_SERVER_CERTIFICATE_EXPIRING_30":
                         return MessageType.HOST_SERVER_CERTIFICATE_EXPIRING_30;
+                    case "POOL_CA_CERTIFICATE_EXPIRED":
+                        return MessageType.POOL_CA_CERTIFICATE_EXPIRED;
+                    case "HOST_INTERNAL_CERTIFICATE_EXPIRED":
+                        return MessageType.HOST_INTERNAL_CERTIFICATE_EXPIRED;
+                    case "HOST_SERVER_CERTIFICATE_EXPIRED":
+                        return MessageType.HOST_SERVER_CERTIFICATE_EXPIRED;
                     case "CLUSTER_HOST_FENCING":
                         return MessageType.CLUSTER_HOST_FENCING;
                     case "CLUSTER_HOST_ENABLE_FAILED":

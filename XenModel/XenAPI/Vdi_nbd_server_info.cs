@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -91,13 +92,13 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given Vdi_nbd_server_info.
         /// </summary>
-        public override void UpdateFrom(Vdi_nbd_server_info update)
+        public override void UpdateFrom(Vdi_nbd_server_info record)
         {
-            exportname = update.exportname;
-            address = update.address;
-            port = update.port;
-            cert = update.cert;
-            subject = update.subject;
+            exportname = record.exportname;
+            address = record.address;
+            port = record.port;
+            cert = record.cert;
+            subject = record.subject;
         }
 
         internal void UpdateFrom(Proxy_Vdi_nbd_server_info proxy)
@@ -107,17 +108,6 @@ namespace XenAPI
             port = proxy.port == null ? 0 : long.Parse(proxy.port);
             cert = proxy.cert == null ? null : proxy.cert;
             subject = proxy.subject == null ? null : proxy.subject;
-        }
-
-        public Proxy_Vdi_nbd_server_info ToProxy()
-        {
-            Proxy_Vdi_nbd_server_info result_ = new Proxy_Vdi_nbd_server_info();
-            result_.exportname = exportname ?? "";
-            result_.address = address ?? "";
-            result_.port = port.ToString();
-            result_.cert = cert ?? "";
-            result_.subject = subject ?? "";
-            return result_;
         }
 
         /// <summary>
@@ -140,6 +130,17 @@ namespace XenAPI
                 subject = Marshalling.ParseString(table, "subject");
         }
 
+        public Proxy_Vdi_nbd_server_info ToProxy()
+        {
+            Proxy_Vdi_nbd_server_info result_ = new Proxy_Vdi_nbd_server_info();
+            result_.exportname = exportname ?? "";
+            result_.address = address ?? "";
+            result_.port = port.ToString();
+            result_.cert = cert ?? "";
+            result_.subject = subject ?? "";
+            return result_;
+        }
+
         public bool DeepEquals(Vdi_nbd_server_info other)
         {
             if (ReferenceEquals(null, other))
@@ -154,15 +155,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._subject, other._subject);
         }
 
-        internal static List<Vdi_nbd_server_info> ProxyArrayToObjectList(Proxy_Vdi_nbd_server_info[] input)
-        {
-            var result = new List<Vdi_nbd_server_info>();
-            foreach (var item in input)
-                result.Add(new Vdi_nbd_server_info(item));
-
-            return result;
-        }
-
         public override string SaveChanges(Session session, string opaqueRef, Vdi_nbd_server_info server)
         {
             if (opaqueRef == null)
@@ -175,6 +167,7 @@ namespace XenAPI
               throw new InvalidOperationException("This type has no read/write properties");
             }
         }
+
         /// <summary>
         /// The exportname to request over NBD. This holds details including an authentication token, so it must be protected appropriately. Clients should regard the exportname as an opaque string or token.
         /// </summary>

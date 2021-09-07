@@ -99,6 +99,7 @@
     <Compile Include="Actions\GUIActions\SaveDataSourceStateAction.cs" />
     <Compile Include="Actions\GUIActions\SearchAction.cs" />
     <Compile Include="Alerts\NewVersionPriorityAlertComparer.cs" />
+    <Compile Include="Alerts\Types\FailedLoginAttemptAlert.cs" />
     <Compile Include="Alerts\Types\CertificateAlert.cs" />
     <Compile Include="Alerts\Types\AlarmMessageAlert.cs" />
     <Compile Include="Alerts\Types\HotfixEligibilityAlert.cs" />
@@ -116,8 +117,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Commands\CrossPoolCopyVMCommand.cs" />
+    <Compile Include="Commands\EnableTlsVerificationCommand.cs" />
     <Compile Include="Commands\RotatePoolSecretCommand.cs" />
-    <Compile Include="Commands\InstallCertificateCommand.cs" />
+    <Compile Include="Commands\CertificateCommand.cs" />
     <Compile Include="Commands\LaunchConversionManagerCommand.cs" />
     <Compile Include="Commands\CrossPoolMoveVMCommand.cs" />
     <Compile Include="Commands\DisableChangedBlockTrackingCommand.cs" />
@@ -2851,7 +2853,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Commands\DisasterRecoveryCommand.cs" />
-    <Compile Include="Commands\DisconnectWlbServerCommand.cs" />
     <Compile Include="Commands\ExportCommand.cs" />
     <Compile Include="Commands\CreateVMFromTemplateCommand.cs" />
     <Compile Include="Commands\DRConfigureCommand.cs" />
@@ -3460,7 +3461,7 @@
     </Compile>
     <Compile Include="Commands\SuspendVMCommand.cs" />
     <Compile Include="Commands\TakeSnapshotCommand.cs" />
-    <Compile Include="Commands\ViewWorkloadReportsCommand.cs">
+    <Compile Include="Commands\WlbCommand.cs">
     </Compile>
     <Compile Include="Commands\VirtualDiskCommand.cs" />
     <Compile Include="Commands\VMOperationHomeServerCommand.cs" />

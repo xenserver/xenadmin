@@ -1387,7 +1387,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="pdSectionCertificate.SectionTitle" xml:space="preserve">
-    <value>Certificate</value>
+    <value>Certificates</value>
   </data>
   <data name="pdSectionCertificate.Size" type="System.Drawing.Size, System.Drawing">
     <value>715, 34</value>

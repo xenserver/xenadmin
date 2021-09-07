@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -145,40 +146,40 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given VDI.
         /// </summary>
-        public override void UpdateFrom(VDI update)
+        public override void UpdateFrom(VDI record)
         {
-            uuid = update.uuid;
-            name_label = update.name_label;
-            name_description = update.name_description;
-            allowed_operations = update.allowed_operations;
-            current_operations = update.current_operations;
-            SR = update.SR;
-            VBDs = update.VBDs;
-            crash_dumps = update.crash_dumps;
-            virtual_size = update.virtual_size;
-            physical_utilisation = update.physical_utilisation;
-            type = update.type;
-            sharable = update.sharable;
-            read_only = update.read_only;
-            other_config = update.other_config;
-            storage_lock = update.storage_lock;
-            location = update.location;
-            managed = update.managed;
-            missing = update.missing;
-            parent = update.parent;
-            xenstore_data = update.xenstore_data;
-            sm_config = update.sm_config;
-            is_a_snapshot = update.is_a_snapshot;
-            snapshot_of = update.snapshot_of;
-            snapshots = update.snapshots;
-            snapshot_time = update.snapshot_time;
-            tags = update.tags;
-            allow_caching = update.allow_caching;
-            on_boot = update.on_boot;
-            metadata_of_pool = update.metadata_of_pool;
-            metadata_latest = update.metadata_latest;
-            is_tools_iso = update.is_tools_iso;
-            cbt_enabled = update.cbt_enabled;
+            uuid = record.uuid;
+            name_label = record.name_label;
+            name_description = record.name_description;
+            allowed_operations = record.allowed_operations;
+            current_operations = record.current_operations;
+            SR = record.SR;
+            VBDs = record.VBDs;
+            crash_dumps = record.crash_dumps;
+            virtual_size = record.virtual_size;
+            physical_utilisation = record.physical_utilisation;
+            type = record.type;
+            sharable = record.sharable;
+            read_only = record.read_only;
+            other_config = record.other_config;
+            storage_lock = record.storage_lock;
+            location = record.location;
+            managed = record.managed;
+            missing = record.missing;
+            parent = record.parent;
+            xenstore_data = record.xenstore_data;
+            sm_config = record.sm_config;
+            is_a_snapshot = record.is_a_snapshot;
+            snapshot_of = record.snapshot_of;
+            snapshots = record.snapshots;
+            snapshot_time = record.snapshot_time;
+            tags = record.tags;
+            allow_caching = record.allow_caching;
+            on_boot = record.on_boot;
+            metadata_of_pool = record.metadata_of_pool;
+            metadata_latest = record.metadata_latest;
+            is_tools_iso = record.is_tools_iso;
+            cbt_enabled = record.cbt_enabled;
         }
 
         internal void UpdateFrom(Proxy_VDI proxy)
@@ -215,44 +216,6 @@ namespace XenAPI
             metadata_latest = (bool)proxy.metadata_latest;
             is_tools_iso = (bool)proxy.is_tools_iso;
             cbt_enabled = (bool)proxy.cbt_enabled;
-        }
-
-        public Proxy_VDI ToProxy()
-        {
-            Proxy_VDI result_ = new Proxy_VDI();
-            result_.uuid = uuid ?? "";
-            result_.name_label = name_label ?? "";
-            result_.name_description = name_description ?? "";
-            result_.allowed_operations = allowed_operations == null ? new string[] {} : Helper.ObjectListToStringArray(allowed_operations);
-            result_.current_operations = Maps.convert_to_proxy_string_vdi_operations(current_operations);
-            result_.SR = SR ?? "";
-            result_.VBDs = VBDs == null ? new string[] {} : Helper.RefListToStringArray(VBDs);
-            result_.crash_dumps = crash_dumps == null ? new string[] {} : Helper.RefListToStringArray(crash_dumps);
-            result_.virtual_size = virtual_size.ToString();
-            result_.physical_utilisation = physical_utilisation.ToString();
-            result_.type = vdi_type_helper.ToString(type);
-            result_.sharable = sharable;
-            result_.read_only = read_only;
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            result_.storage_lock = storage_lock;
-            result_.location = location ?? "";
-            result_.managed = managed;
-            result_.missing = missing;
-            result_.parent = parent ?? "";
-            result_.xenstore_data = Maps.convert_to_proxy_string_string(xenstore_data);
-            result_.sm_config = Maps.convert_to_proxy_string_string(sm_config);
-            result_.is_a_snapshot = is_a_snapshot;
-            result_.snapshot_of = snapshot_of ?? "";
-            result_.snapshots = snapshots == null ? new string[] {} : Helper.RefListToStringArray(snapshots);
-            result_.snapshot_time = snapshot_time;
-            result_.tags = tags;
-            result_.allow_caching = allow_caching;
-            result_.on_boot = on_boot_helper.ToString(on_boot);
-            result_.metadata_of_pool = metadata_of_pool ?? "";
-            result_.metadata_latest = metadata_latest;
-            result_.is_tools_iso = is_tools_iso;
-            result_.cbt_enabled = cbt_enabled;
-            return result_;
         }
 
         /// <summary>
@@ -329,6 +292,44 @@ namespace XenAPI
                 cbt_enabled = Marshalling.ParseBool(table, "cbt_enabled");
         }
 
+        public Proxy_VDI ToProxy()
+        {
+            Proxy_VDI result_ = new Proxy_VDI();
+            result_.uuid = uuid ?? "";
+            result_.name_label = name_label ?? "";
+            result_.name_description = name_description ?? "";
+            result_.allowed_operations = allowed_operations == null ? new string[] {} : Helper.ObjectListToStringArray(allowed_operations);
+            result_.current_operations = Maps.convert_to_proxy_string_vdi_operations(current_operations);
+            result_.SR = SR ?? "";
+            result_.VBDs = VBDs == null ? new string[] {} : Helper.RefListToStringArray(VBDs);
+            result_.crash_dumps = crash_dumps == null ? new string[] {} : Helper.RefListToStringArray(crash_dumps);
+            result_.virtual_size = virtual_size.ToString();
+            result_.physical_utilisation = physical_utilisation.ToString();
+            result_.type = vdi_type_helper.ToString(type);
+            result_.sharable = sharable;
+            result_.read_only = read_only;
+            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
+            result_.storage_lock = storage_lock;
+            result_.location = location ?? "";
+            result_.managed = managed;
+            result_.missing = missing;
+            result_.parent = parent ?? "";
+            result_.xenstore_data = Maps.convert_to_proxy_string_string(xenstore_data);
+            result_.sm_config = Maps.convert_to_proxy_string_string(sm_config);
+            result_.is_a_snapshot = is_a_snapshot;
+            result_.snapshot_of = snapshot_of ?? "";
+            result_.snapshots = snapshots == null ? new string[] {} : Helper.RefListToStringArray(snapshots);
+            result_.snapshot_time = snapshot_time;
+            result_.tags = tags;
+            result_.allow_caching = allow_caching;
+            result_.on_boot = on_boot_helper.ToString(on_boot);
+            result_.metadata_of_pool = metadata_of_pool ?? "";
+            result_.metadata_latest = metadata_latest;
+            result_.is_tools_iso = is_tools_iso;
+            result_.cbt_enabled = cbt_enabled;
+            return result_;
+        }
+
         public bool DeepEquals(VDI other, bool ignoreCurrentOperations)
         {
             if (ReferenceEquals(null, other))
@@ -370,15 +371,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._metadata_latest, other._metadata_latest) &&
                 Helper.AreEqual2(this._is_tools_iso, other._is_tools_iso) &&
                 Helper.AreEqual2(this._cbt_enabled, other._cbt_enabled);
-        }
-
-        internal static List<VDI> ProxyArrayToObjectList(Proxy_VDI[] input)
-        {
-            var result = new List<VDI>();
-            foreach (var item in input)
-                result.Add(new VDI(item));
-
-            return result;
         }
 
         public override string SaveChanges(Session session, string opaqueRef, VDI server)
@@ -426,6 +418,7 @@ namespace XenAPI
                 return null;
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given VDI.
         /// First published in XenServer 4.0.
@@ -1870,7 +1863,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.vdi_get_nbd_info(session.opaque_ref, _vdi);
             else
-                return Vdi_nbd_server_info.ProxyArrayToObjectList(session.XmlRpcProxy.vdi_get_nbd_info(session.opaque_ref, _vdi ?? "").parse());
+                return session.XmlRpcProxy.vdi_get_nbd_info(session.opaque_ref, _vdi ?? "").parse().Select(p => new Vdi_nbd_server_info(p)).ToList();
         }
 
         /// <summary>

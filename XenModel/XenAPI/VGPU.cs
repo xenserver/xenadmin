@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -105,20 +106,20 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given VGPU.
         /// </summary>
-        public override void UpdateFrom(VGPU update)
+        public override void UpdateFrom(VGPU record)
         {
-            uuid = update.uuid;
-            VM = update.VM;
-            GPU_group = update.GPU_group;
-            device = update.device;
-            currently_attached = update.currently_attached;
-            other_config = update.other_config;
-            type = update.type;
-            resident_on = update.resident_on;
-            scheduled_to_be_resident_on = update.scheduled_to_be_resident_on;
-            compatibility_metadata = update.compatibility_metadata;
-            extra_args = update.extra_args;
-            PCI = update.PCI;
+            uuid = record.uuid;
+            VM = record.VM;
+            GPU_group = record.GPU_group;
+            device = record.device;
+            currently_attached = record.currently_attached;
+            other_config = record.other_config;
+            type = record.type;
+            resident_on = record.resident_on;
+            scheduled_to_be_resident_on = record.scheduled_to_be_resident_on;
+            compatibility_metadata = record.compatibility_metadata;
+            extra_args = record.extra_args;
+            PCI = record.PCI;
         }
 
         internal void UpdateFrom(Proxy_VGPU proxy)
@@ -135,24 +136,6 @@ namespace XenAPI
             compatibility_metadata = proxy.compatibility_metadata == null ? null : Maps.convert_from_proxy_string_string(proxy.compatibility_metadata);
             extra_args = proxy.extra_args == null ? null : proxy.extra_args;
             PCI = proxy.PCI == null ? null : XenRef<PCI>.Create(proxy.PCI);
-        }
-
-        public Proxy_VGPU ToProxy()
-        {
-            Proxy_VGPU result_ = new Proxy_VGPU();
-            result_.uuid = uuid ?? "";
-            result_.VM = VM ?? "";
-            result_.GPU_group = GPU_group ?? "";
-            result_.device = device ?? "";
-            result_.currently_attached = currently_attached;
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            result_.type = type ?? "";
-            result_.resident_on = resident_on ?? "";
-            result_.scheduled_to_be_resident_on = scheduled_to_be_resident_on ?? "";
-            result_.compatibility_metadata = Maps.convert_to_proxy_string_string(compatibility_metadata);
-            result_.extra_args = extra_args ?? "";
-            result_.PCI = PCI ?? "";
-            return result_;
         }
 
         /// <summary>
@@ -189,6 +172,24 @@ namespace XenAPI
                 PCI = Marshalling.ParseRef<PCI>(table, "PCI");
         }
 
+        public Proxy_VGPU ToProxy()
+        {
+            Proxy_VGPU result_ = new Proxy_VGPU();
+            result_.uuid = uuid ?? "";
+            result_.VM = VM ?? "";
+            result_.GPU_group = GPU_group ?? "";
+            result_.device = device ?? "";
+            result_.currently_attached = currently_attached;
+            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
+            result_.type = type ?? "";
+            result_.resident_on = resident_on ?? "";
+            result_.scheduled_to_be_resident_on = scheduled_to_be_resident_on ?? "";
+            result_.compatibility_metadata = Maps.convert_to_proxy_string_string(compatibility_metadata);
+            result_.extra_args = extra_args ?? "";
+            result_.PCI = PCI ?? "";
+            return result_;
+        }
+
         public bool DeepEquals(VGPU other)
         {
             if (ReferenceEquals(null, other))
@@ -208,15 +209,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._compatibility_metadata, other._compatibility_metadata) &&
                 Helper.AreEqual2(this._extra_args, other._extra_args) &&
                 Helper.AreEqual2(this._PCI, other._PCI);
-        }
-
-        internal static List<VGPU> ProxyArrayToObjectList(Proxy_VGPU[] input)
-        {
-            var result = new List<VGPU>();
-            foreach (var item in input)
-                result.Add(new VGPU(item));
-
-            return result;
         }
 
         public override string SaveChanges(Session session, string opaqueRef, VGPU server)
@@ -240,6 +232,7 @@ namespace XenAPI
                 return null;
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given VGPU.
         /// First published in XenServer 6.0.

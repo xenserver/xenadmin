@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -113,24 +114,24 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given Network.
         /// </summary>
-        public override void UpdateFrom(Network update)
+        public override void UpdateFrom(Network record)
         {
-            uuid = update.uuid;
-            name_label = update.name_label;
-            name_description = update.name_description;
-            allowed_operations = update.allowed_operations;
-            current_operations = update.current_operations;
-            VIFs = update.VIFs;
-            PIFs = update.PIFs;
-            MTU = update.MTU;
-            other_config = update.other_config;
-            bridge = update.bridge;
-            managed = update.managed;
-            blobs = update.blobs;
-            tags = update.tags;
-            default_locking_mode = update.default_locking_mode;
-            assigned_ips = update.assigned_ips;
-            purpose = update.purpose;
+            uuid = record.uuid;
+            name_label = record.name_label;
+            name_description = record.name_description;
+            allowed_operations = record.allowed_operations;
+            current_operations = record.current_operations;
+            VIFs = record.VIFs;
+            PIFs = record.PIFs;
+            MTU = record.MTU;
+            other_config = record.other_config;
+            bridge = record.bridge;
+            managed = record.managed;
+            blobs = record.blobs;
+            tags = record.tags;
+            default_locking_mode = record.default_locking_mode;
+            assigned_ips = record.assigned_ips;
+            purpose = record.purpose;
         }
 
         internal void UpdateFrom(Proxy_Network proxy)
@@ -151,28 +152,6 @@ namespace XenAPI
             default_locking_mode = proxy.default_locking_mode == null ? (network_default_locking_mode) 0 : (network_default_locking_mode)Helper.EnumParseDefault(typeof(network_default_locking_mode), (string)proxy.default_locking_mode);
             assigned_ips = proxy.assigned_ips == null ? null : Maps.convert_from_proxy_XenRefVIF_string(proxy.assigned_ips);
             purpose = proxy.purpose == null ? null : Helper.StringArrayToEnumList<network_purpose>(proxy.purpose);
-        }
-
-        public Proxy_Network ToProxy()
-        {
-            Proxy_Network result_ = new Proxy_Network();
-            result_.uuid = uuid ?? "";
-            result_.name_label = name_label ?? "";
-            result_.name_description = name_description ?? "";
-            result_.allowed_operations = allowed_operations == null ? new string[] {} : Helper.ObjectListToStringArray(allowed_operations);
-            result_.current_operations = Maps.convert_to_proxy_string_network_operations(current_operations);
-            result_.VIFs = VIFs == null ? new string[] {} : Helper.RefListToStringArray(VIFs);
-            result_.PIFs = PIFs == null ? new string[] {} : Helper.RefListToStringArray(PIFs);
-            result_.MTU = MTU.ToString();
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            result_.bridge = bridge ?? "";
-            result_.managed = managed;
-            result_.blobs = Maps.convert_to_proxy_string_XenRefBlob(blobs);
-            result_.tags = tags;
-            result_.default_locking_mode = network_default_locking_mode_helper.ToString(default_locking_mode);
-            result_.assigned_ips = Maps.convert_to_proxy_XenRefVIF_string(assigned_ips);
-            result_.purpose = purpose == null ? new string[] {} : Helper.ObjectListToStringArray(purpose);
-            return result_;
         }
 
         /// <summary>
@@ -217,6 +196,28 @@ namespace XenAPI
                 purpose = Helper.StringArrayToEnumList<network_purpose>(Marshalling.ParseStringArray(table, "purpose"));
         }
 
+        public Proxy_Network ToProxy()
+        {
+            Proxy_Network result_ = new Proxy_Network();
+            result_.uuid = uuid ?? "";
+            result_.name_label = name_label ?? "";
+            result_.name_description = name_description ?? "";
+            result_.allowed_operations = allowed_operations == null ? new string[] {} : Helper.ObjectListToStringArray(allowed_operations);
+            result_.current_operations = Maps.convert_to_proxy_string_network_operations(current_operations);
+            result_.VIFs = VIFs == null ? new string[] {} : Helper.RefListToStringArray(VIFs);
+            result_.PIFs = PIFs == null ? new string[] {} : Helper.RefListToStringArray(PIFs);
+            result_.MTU = MTU.ToString();
+            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
+            result_.bridge = bridge ?? "";
+            result_.managed = managed;
+            result_.blobs = Maps.convert_to_proxy_string_XenRefBlob(blobs);
+            result_.tags = tags;
+            result_.default_locking_mode = network_default_locking_mode_helper.ToString(default_locking_mode);
+            result_.assigned_ips = Maps.convert_to_proxy_XenRefVIF_string(assigned_ips);
+            result_.purpose = purpose == null ? new string[] {} : Helper.ObjectListToStringArray(purpose);
+            return result_;
+        }
+
         public bool DeepEquals(Network other, bool ignoreCurrentOperations)
         {
             if (ReferenceEquals(null, other))
@@ -242,15 +243,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._default_locking_mode, other._default_locking_mode) &&
                 Helper.AreEqual2(this._assigned_ips, other._assigned_ips) &&
                 Helper.AreEqual2(this._purpose, other._purpose);
-        }
-
-        internal static List<Network> ProxyArrayToObjectList(Proxy_Network[] input)
-        {
-            var result = new List<Network>();
-            foreach (var item in input)
-                result.Add(new Network(item));
-
-            return result;
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Network server)
@@ -286,6 +278,7 @@ namespace XenAPI
                 return null;
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given network.
         /// First published in XenServer 4.0.

@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -115,25 +116,25 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given Task.
         /// </summary>
-        public override void UpdateFrom(Task update)
+        public override void UpdateFrom(Task record)
         {
-            uuid = update.uuid;
-            name_label = update.name_label;
-            name_description = update.name_description;
-            allowed_operations = update.allowed_operations;
-            current_operations = update.current_operations;
-            created = update.created;
-            finished = update.finished;
-            status = update.status;
-            resident_on = update.resident_on;
-            progress = update.progress;
-            type = update.type;
-            result = update.result;
-            error_info = update.error_info;
-            other_config = update.other_config;
-            subtask_of = update.subtask_of;
-            subtasks = update.subtasks;
-            backtrace = update.backtrace;
+            uuid = record.uuid;
+            name_label = record.name_label;
+            name_description = record.name_description;
+            allowed_operations = record.allowed_operations;
+            current_operations = record.current_operations;
+            created = record.created;
+            finished = record.finished;
+            status = record.status;
+            resident_on = record.resident_on;
+            progress = record.progress;
+            type = record.type;
+            result = record.result;
+            error_info = record.error_info;
+            other_config = record.other_config;
+            subtask_of = record.subtask_of;
+            subtasks = record.subtasks;
+            backtrace = record.backtrace;
         }
 
         internal void UpdateFrom(Proxy_Task proxy)
@@ -155,29 +156,6 @@ namespace XenAPI
             subtask_of = proxy.subtask_of == null ? null : XenRef<Task>.Create(proxy.subtask_of);
             subtasks = proxy.subtasks == null ? null : XenRef<Task>.Create(proxy.subtasks);
             backtrace = proxy.backtrace == null ? null : proxy.backtrace;
-        }
-
-        public Proxy_Task ToProxy()
-        {
-            Proxy_Task result_ = new Proxy_Task();
-            result_.uuid = uuid ?? "";
-            result_.name_label = name_label ?? "";
-            result_.name_description = name_description ?? "";
-            result_.allowed_operations = allowed_operations == null ? new string[] {} : Helper.ObjectListToStringArray(allowed_operations);
-            result_.current_operations = Maps.convert_to_proxy_string_task_allowed_operations(current_operations);
-            result_.created = created;
-            result_.finished = finished;
-            result_.status = task_status_type_helper.ToString(status);
-            result_.resident_on = resident_on ?? "";
-            result_.progress = progress;
-            result_.type = type ?? "";
-            result_.result = result ?? "";
-            result_.error_info = error_info;
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            result_.subtask_of = subtask_of ?? "";
-            result_.subtasks = subtasks == null ? new string[] {} : Helper.RefListToStringArray(subtasks);
-            result_.backtrace = backtrace ?? "";
-            return result_;
         }
 
         /// <summary>
@@ -224,6 +202,29 @@ namespace XenAPI
                 backtrace = Marshalling.ParseString(table, "backtrace");
         }
 
+        public Proxy_Task ToProxy()
+        {
+            Proxy_Task result_ = new Proxy_Task();
+            result_.uuid = uuid ?? "";
+            result_.name_label = name_label ?? "";
+            result_.name_description = name_description ?? "";
+            result_.allowed_operations = allowed_operations == null ? new string[] {} : Helper.ObjectListToStringArray(allowed_operations);
+            result_.current_operations = Maps.convert_to_proxy_string_task_allowed_operations(current_operations);
+            result_.created = created;
+            result_.finished = finished;
+            result_.status = task_status_type_helper.ToString(status);
+            result_.resident_on = resident_on ?? "";
+            result_.progress = progress;
+            result_.type = type ?? "";
+            result_.result = result ?? "";
+            result_.error_info = error_info;
+            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
+            result_.subtask_of = subtask_of ?? "";
+            result_.subtasks = subtasks == null ? new string[] {} : Helper.RefListToStringArray(subtasks);
+            result_.backtrace = backtrace ?? "";
+            return result_;
+        }
+
         public bool DeepEquals(Task other, bool ignoreCurrentOperations)
         {
             if (ReferenceEquals(null, other))
@@ -252,15 +253,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._backtrace, other._backtrace);
         }
 
-        internal static List<Task> ProxyArrayToObjectList(Proxy_Task[] input)
-        {
-            var result = new List<Task>();
-            foreach (var item in input)
-                result.Add(new Task(item));
-
-            return result;
-        }
-
         public override string SaveChanges(Session session, string opaqueRef, Task server)
         {
             if (opaqueRef == null)
@@ -278,6 +270,7 @@ namespace XenAPI
                 return null;
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given task.
         /// First published in XenServer 4.0.

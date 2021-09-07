@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -105,20 +106,20 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given PGPU.
         /// </summary>
-        public override void UpdateFrom(PGPU update)
+        public override void UpdateFrom(PGPU record)
         {
-            uuid = update.uuid;
-            PCI = update.PCI;
-            GPU_group = update.GPU_group;
-            host = update.host;
-            other_config = update.other_config;
-            supported_VGPU_types = update.supported_VGPU_types;
-            enabled_VGPU_types = update.enabled_VGPU_types;
-            resident_VGPUs = update.resident_VGPUs;
-            supported_VGPU_max_capacities = update.supported_VGPU_max_capacities;
-            dom0_access = update.dom0_access;
-            is_system_display_device = update.is_system_display_device;
-            compatibility_metadata = update.compatibility_metadata;
+            uuid = record.uuid;
+            PCI = record.PCI;
+            GPU_group = record.GPU_group;
+            host = record.host;
+            other_config = record.other_config;
+            supported_VGPU_types = record.supported_VGPU_types;
+            enabled_VGPU_types = record.enabled_VGPU_types;
+            resident_VGPUs = record.resident_VGPUs;
+            supported_VGPU_max_capacities = record.supported_VGPU_max_capacities;
+            dom0_access = record.dom0_access;
+            is_system_display_device = record.is_system_display_device;
+            compatibility_metadata = record.compatibility_metadata;
         }
 
         internal void UpdateFrom(Proxy_PGPU proxy)
@@ -135,24 +136,6 @@ namespace XenAPI
             dom0_access = proxy.dom0_access == null ? (pgpu_dom0_access) 0 : (pgpu_dom0_access)Helper.EnumParseDefault(typeof(pgpu_dom0_access), (string)proxy.dom0_access);
             is_system_display_device = (bool)proxy.is_system_display_device;
             compatibility_metadata = proxy.compatibility_metadata == null ? null : Maps.convert_from_proxy_string_string(proxy.compatibility_metadata);
-        }
-
-        public Proxy_PGPU ToProxy()
-        {
-            Proxy_PGPU result_ = new Proxy_PGPU();
-            result_.uuid = uuid ?? "";
-            result_.PCI = PCI ?? "";
-            result_.GPU_group = GPU_group ?? "";
-            result_.host = host ?? "";
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            result_.supported_VGPU_types = supported_VGPU_types == null ? new string[] {} : Helper.RefListToStringArray(supported_VGPU_types);
-            result_.enabled_VGPU_types = enabled_VGPU_types == null ? new string[] {} : Helper.RefListToStringArray(enabled_VGPU_types);
-            result_.resident_VGPUs = resident_VGPUs == null ? new string[] {} : Helper.RefListToStringArray(resident_VGPUs);
-            result_.supported_VGPU_max_capacities = Maps.convert_to_proxy_XenRefVGPU_type_long(supported_VGPU_max_capacities);
-            result_.dom0_access = pgpu_dom0_access_helper.ToString(dom0_access);
-            result_.is_system_display_device = is_system_display_device;
-            result_.compatibility_metadata = Maps.convert_to_proxy_string_string(compatibility_metadata);
-            return result_;
         }
 
         /// <summary>
@@ -189,6 +172,24 @@ namespace XenAPI
                 compatibility_metadata = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "compatibility_metadata"));
         }
 
+        public Proxy_PGPU ToProxy()
+        {
+            Proxy_PGPU result_ = new Proxy_PGPU();
+            result_.uuid = uuid ?? "";
+            result_.PCI = PCI ?? "";
+            result_.GPU_group = GPU_group ?? "";
+            result_.host = host ?? "";
+            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
+            result_.supported_VGPU_types = supported_VGPU_types == null ? new string[] {} : Helper.RefListToStringArray(supported_VGPU_types);
+            result_.enabled_VGPU_types = enabled_VGPU_types == null ? new string[] {} : Helper.RefListToStringArray(enabled_VGPU_types);
+            result_.resident_VGPUs = resident_VGPUs == null ? new string[] {} : Helper.RefListToStringArray(resident_VGPUs);
+            result_.supported_VGPU_max_capacities = Maps.convert_to_proxy_XenRefVGPU_type_long(supported_VGPU_max_capacities);
+            result_.dom0_access = pgpu_dom0_access_helper.ToString(dom0_access);
+            result_.is_system_display_device = is_system_display_device;
+            result_.compatibility_metadata = Maps.convert_to_proxy_string_string(compatibility_metadata);
+            return result_;
+        }
+
         public bool DeepEquals(PGPU other)
         {
             if (ReferenceEquals(null, other))
@@ -208,15 +209,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._dom0_access, other._dom0_access) &&
                 Helper.AreEqual2(this._is_system_display_device, other._is_system_display_device) &&
                 Helper.AreEqual2(this._compatibility_metadata, other._compatibility_metadata);
-        }
-
-        internal static List<PGPU> ProxyArrayToObjectList(Proxy_PGPU[] input)
-        {
-            var result = new List<PGPU>();
-            foreach (var item in input)
-                result.Add(new PGPU(item));
-
-            return result;
         }
 
         public override string SaveChanges(Session session, string opaqueRef, PGPU server)
@@ -240,6 +232,7 @@ namespace XenAPI
                 return null;
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given PGPU.
         /// First published in XenServer 6.0.

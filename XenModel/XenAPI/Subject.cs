@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -89,12 +90,12 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given Subject.
         /// </summary>
-        public override void UpdateFrom(Subject update)
+        public override void UpdateFrom(Subject record)
         {
-            uuid = update.uuid;
-            subject_identifier = update.subject_identifier;
-            other_config = update.other_config;
-            roles = update.roles;
+            uuid = record.uuid;
+            subject_identifier = record.subject_identifier;
+            other_config = record.other_config;
+            roles = record.roles;
         }
 
         internal void UpdateFrom(Proxy_Subject proxy)
@@ -103,16 +104,6 @@ namespace XenAPI
             subject_identifier = proxy.subject_identifier == null ? null : proxy.subject_identifier;
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
             roles = proxy.roles == null ? null : XenRef<Role>.Create(proxy.roles);
-        }
-
-        public Proxy_Subject ToProxy()
-        {
-            Proxy_Subject result_ = new Proxy_Subject();
-            result_.uuid = uuid ?? "";
-            result_.subject_identifier = subject_identifier ?? "";
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            result_.roles = roles == null ? new string[] {} : Helper.RefListToStringArray(roles);
-            return result_;
         }
 
         /// <summary>
@@ -133,6 +124,16 @@ namespace XenAPI
                 roles = Marshalling.ParseSetRef<Role>(table, "roles");
         }
 
+        public Proxy_Subject ToProxy()
+        {
+            Proxy_Subject result_ = new Proxy_Subject();
+            result_.uuid = uuid ?? "";
+            result_.subject_identifier = subject_identifier ?? "";
+            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
+            result_.roles = roles == null ? new string[] {} : Helper.RefListToStringArray(roles);
+            return result_;
+        }
+
         public bool DeepEquals(Subject other)
         {
             if (ReferenceEquals(null, other))
@@ -144,15 +145,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._subject_identifier, other._subject_identifier) &&
                 Helper.AreEqual2(this._other_config, other._other_config) &&
                 Helper.AreEqual2(this._roles, other._roles);
-        }
-
-        internal static List<Subject> ProxyArrayToObjectList(Proxy_Subject[] input)
-        {
-            var result = new List<Subject>();
-            foreach (var item in input)
-                result.Add(new Subject(item));
-
-            return result;
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Subject server)
@@ -167,6 +159,7 @@ namespace XenAPI
               throw new InvalidOperationException("This type has no read/write properties");
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given subject.
         /// First published in XenServer 5.5.

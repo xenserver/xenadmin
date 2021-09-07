@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -89,12 +90,12 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given Crashdump.
         /// </summary>
-        public override void UpdateFrom(Crashdump update)
+        public override void UpdateFrom(Crashdump record)
         {
-            uuid = update.uuid;
-            VM = update.VM;
-            VDI = update.VDI;
-            other_config = update.other_config;
+            uuid = record.uuid;
+            VM = record.VM;
+            VDI = record.VDI;
+            other_config = record.other_config;
         }
 
         internal void UpdateFrom(Proxy_Crashdump proxy)
@@ -103,16 +104,6 @@ namespace XenAPI
             VM = proxy.VM == null ? null : XenRef<VM>.Create(proxy.VM);
             VDI = proxy.VDI == null ? null : XenRef<VDI>.Create(proxy.VDI);
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
-        }
-
-        public Proxy_Crashdump ToProxy()
-        {
-            Proxy_Crashdump result_ = new Proxy_Crashdump();
-            result_.uuid = uuid ?? "";
-            result_.VM = VM ?? "";
-            result_.VDI = VDI ?? "";
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            return result_;
         }
 
         /// <summary>
@@ -133,6 +124,16 @@ namespace XenAPI
                 other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
         }
 
+        public Proxy_Crashdump ToProxy()
+        {
+            Proxy_Crashdump result_ = new Proxy_Crashdump();
+            result_.uuid = uuid ?? "";
+            result_.VM = VM ?? "";
+            result_.VDI = VDI ?? "";
+            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
+            return result_;
+        }
+
         public bool DeepEquals(Crashdump other)
         {
             if (ReferenceEquals(null, other))
@@ -144,15 +145,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._VM, other._VM) &&
                 Helper.AreEqual2(this._VDI, other._VDI) &&
                 Helper.AreEqual2(this._other_config, other._other_config);
-        }
-
-        internal static List<Crashdump> ProxyArrayToObjectList(Proxy_Crashdump[] input)
-        {
-            var result = new List<Crashdump>();
-            foreach (var item in input)
-                result.Add(new Crashdump(item));
-
-            return result;
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Crashdump server)
@@ -172,6 +164,7 @@ namespace XenAPI
                 return null;
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given crashdump.
         /// First published in XenServer 4.0.

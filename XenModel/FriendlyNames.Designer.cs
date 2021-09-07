@@ -3852,6 +3852,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Certificate verification is enabled on the pool, but overridden on server &apos;{0}&apos;..
+        /// </summary>
+        public static string Message_body_tls_verification_emergency_disabled {
+            get {
+                return ResourceManager.GetString("Message.body-tls_verification_emergency_disabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Quality of Service settings for disk &apos;{0}&apos; on virtual machine &apos;{1}&apos; could not be obeyed..
         /// </summary>
         public static string Message_body_vbd_qos_failed {
@@ -4658,6 +4667,15 @@ namespace XenAdmin {
         public static string Message_name_SRUnavailable {
             get {
                 return ResourceManager.GetString("Message.name-SRUnavailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Certificate verification is disabled..
+        /// </summary>
+        public static string Message_name_tls_verification_emergency_disabled {
+            get {
+                return ResourceManager.GetString("Message.name-tls_verification_emergency_disabled", resourceCulture);
             }
         }
         

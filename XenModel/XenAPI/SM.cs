@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -109,22 +110,22 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given SM.
         /// </summary>
-        public override void UpdateFrom(SM update)
+        public override void UpdateFrom(SM record)
         {
-            uuid = update.uuid;
-            name_label = update.name_label;
-            name_description = update.name_description;
-            type = update.type;
-            vendor = update.vendor;
-            copyright = update.copyright;
-            version = update.version;
-            required_api_version = update.required_api_version;
-            configuration = update.configuration;
-            capabilities = update.capabilities;
-            features = update.features;
-            other_config = update.other_config;
-            driver_filename = update.driver_filename;
-            required_cluster_stack = update.required_cluster_stack;
+            uuid = record.uuid;
+            name_label = record.name_label;
+            name_description = record.name_description;
+            type = record.type;
+            vendor = record.vendor;
+            copyright = record.copyright;
+            version = record.version;
+            required_api_version = record.required_api_version;
+            configuration = record.configuration;
+            capabilities = record.capabilities;
+            features = record.features;
+            other_config = record.other_config;
+            driver_filename = record.driver_filename;
+            required_cluster_stack = record.required_cluster_stack;
         }
 
         internal void UpdateFrom(Proxy_SM proxy)
@@ -143,26 +144,6 @@ namespace XenAPI
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
             driver_filename = proxy.driver_filename == null ? null : proxy.driver_filename;
             required_cluster_stack = proxy.required_cluster_stack == null ? new string[] {} : (string [])proxy.required_cluster_stack;
-        }
-
-        public Proxy_SM ToProxy()
-        {
-            Proxy_SM result_ = new Proxy_SM();
-            result_.uuid = uuid ?? "";
-            result_.name_label = name_label ?? "";
-            result_.name_description = name_description ?? "";
-            result_.type = type ?? "";
-            result_.vendor = vendor ?? "";
-            result_.copyright = copyright ?? "";
-            result_.version = version ?? "";
-            result_.required_api_version = required_api_version ?? "";
-            result_.configuration = Maps.convert_to_proxy_string_string(configuration);
-            result_.capabilities = capabilities;
-            result_.features = Maps.convert_to_proxy_string_long(features);
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            result_.driver_filename = driver_filename ?? "";
-            result_.required_cluster_stack = required_cluster_stack;
-            return result_;
         }
 
         /// <summary>
@@ -203,6 +184,26 @@ namespace XenAPI
                 required_cluster_stack = Marshalling.ParseStringArray(table, "required_cluster_stack");
         }
 
+        public Proxy_SM ToProxy()
+        {
+            Proxy_SM result_ = new Proxy_SM();
+            result_.uuid = uuid ?? "";
+            result_.name_label = name_label ?? "";
+            result_.name_description = name_description ?? "";
+            result_.type = type ?? "";
+            result_.vendor = vendor ?? "";
+            result_.copyright = copyright ?? "";
+            result_.version = version ?? "";
+            result_.required_api_version = required_api_version ?? "";
+            result_.configuration = Maps.convert_to_proxy_string_string(configuration);
+            result_.capabilities = capabilities;
+            result_.features = Maps.convert_to_proxy_string_long(features);
+            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
+            result_.driver_filename = driver_filename ?? "";
+            result_.required_cluster_stack = required_cluster_stack;
+            return result_;
+        }
+
         public bool DeepEquals(SM other)
         {
             if (ReferenceEquals(null, other))
@@ -226,15 +227,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._required_cluster_stack, other._required_cluster_stack);
         }
 
-        internal static List<SM> ProxyArrayToObjectList(Proxy_SM[] input)
-        {
-            var result = new List<SM>();
-            foreach (var item in input)
-                result.Add(new SM(item));
-
-            return result;
-        }
-
         public override string SaveChanges(Session session, string opaqueRef, SM server)
         {
             if (opaqueRef == null)
@@ -252,6 +244,7 @@ namespace XenAPI
                 return null;
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given SM.
         /// First published in XenServer 4.0.

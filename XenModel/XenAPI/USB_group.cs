@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -93,14 +94,14 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given USB_group.
         /// </summary>
-        public override void UpdateFrom(USB_group update)
+        public override void UpdateFrom(USB_group record)
         {
-            uuid = update.uuid;
-            name_label = update.name_label;
-            name_description = update.name_description;
-            PUSBs = update.PUSBs;
-            VUSBs = update.VUSBs;
-            other_config = update.other_config;
+            uuid = record.uuid;
+            name_label = record.name_label;
+            name_description = record.name_description;
+            PUSBs = record.PUSBs;
+            VUSBs = record.VUSBs;
+            other_config = record.other_config;
         }
 
         internal void UpdateFrom(Proxy_USB_group proxy)
@@ -111,18 +112,6 @@ namespace XenAPI
             PUSBs = proxy.PUSBs == null ? null : XenRef<PUSB>.Create(proxy.PUSBs);
             VUSBs = proxy.VUSBs == null ? null : XenRef<VUSB>.Create(proxy.VUSBs);
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
-        }
-
-        public Proxy_USB_group ToProxy()
-        {
-            Proxy_USB_group result_ = new Proxy_USB_group();
-            result_.uuid = uuid ?? "";
-            result_.name_label = name_label ?? "";
-            result_.name_description = name_description ?? "";
-            result_.PUSBs = PUSBs == null ? new string[] {} : Helper.RefListToStringArray(PUSBs);
-            result_.VUSBs = VUSBs == null ? new string[] {} : Helper.RefListToStringArray(VUSBs);
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            return result_;
         }
 
         /// <summary>
@@ -147,6 +136,18 @@ namespace XenAPI
                 other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
         }
 
+        public Proxy_USB_group ToProxy()
+        {
+            Proxy_USB_group result_ = new Proxy_USB_group();
+            result_.uuid = uuid ?? "";
+            result_.name_label = name_label ?? "";
+            result_.name_description = name_description ?? "";
+            result_.PUSBs = PUSBs == null ? new string[] {} : Helper.RefListToStringArray(PUSBs);
+            result_.VUSBs = VUSBs == null ? new string[] {} : Helper.RefListToStringArray(VUSBs);
+            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
+            return result_;
+        }
+
         public bool DeepEquals(USB_group other)
         {
             if (ReferenceEquals(null, other))
@@ -160,15 +161,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._PUSBs, other._PUSBs) &&
                 Helper.AreEqual2(this._VUSBs, other._VUSBs) &&
                 Helper.AreEqual2(this._other_config, other._other_config);
-        }
-
-        internal static List<USB_group> ProxyArrayToObjectList(Proxy_USB_group[] input)
-        {
-            var result = new List<USB_group>();
-            foreach (var item in input)
-                result.Add(new USB_group(item));
-
-            return result;
         }
 
         public override string SaveChanges(Session session, string opaqueRef, USB_group server)
@@ -196,6 +188,7 @@ namespace XenAPI
                 return null;
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given USB_group.
         /// First published in XenServer 7.3.

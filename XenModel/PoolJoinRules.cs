@@ -75,6 +75,10 @@ namespace XenAdmin.Core
             WrongNumberOfIpsCluster,
             WrongNumberOfIpsBond,
             NotConnected,
+            TlsVerificationOnlyOnPool,
+            TlsVerificationOnlyOnPoolJoiner,
+            TlsVerificationOnlyOnCoordinator,
+            TlsVerificationOnlyOnCoordinatorJoiner
         }
 
         // The order of if's in CanJoinPool() determines which reason we display if there is more than one.
@@ -92,11 +96,11 @@ namespace XenAdmin.Core
         /// <returns>The reason why the server can't join the pool, or Reason.Allowed if it's OK</returns>
         public static Reason CanJoinPool(IXenConnection supporterConnection, IXenConnection coordinatorConnection, bool allowLicenseUpgrade, bool allowCpuLevelling, bool allowSupporterAdConfig, int poolSizeIncrement = 1)
         {
-            if (!Helpers.IsConnected(supporterConnection))  // also implies supporterConnection != null
+            if (supporterConnection == null || !supporterConnection.IsConnected)
                 return Reason.NotConnected;
 
             Host supporterHost = Helpers.GetCoordinator(supporterConnection);
-            if (Connecting(supporterHost))  // also implies supporterHost != null
+            if (supporterHost == null)
                 return Reason.Connecting;
 
             if (LicenseRestriction(supporterHost))
@@ -105,11 +109,12 @@ namespace XenAdmin.Core
             if (IsAPool(supporterConnection))
                 return Reason.IsAPool;
 
-            if (!Helpers.IsConnected(coordinatorConnection))  // also implies coordinatorConnection != null
+            if (coordinatorConnection == null || !coordinatorConnection.IsConnected)
                 return Reason.CoordinatorNotConnected;
 
             Host coordinatorHost = Helpers.GetCoordinator(coordinatorConnection);
-            if (Connecting(coordinatorHost))  // also implies coordinatorHost != null
+            
+            if (coordinatorHost == null)
                 return Reason.CoordinatorConnecting;
 
             if (WillBeCoordinator(supporterConnection, coordinatorConnection))
@@ -173,7 +178,17 @@ namespace XenAdmin.Core
                 return Reason.HasClusteringEnabled;
 
             if (!HasIpForClusterNetwork(coordinatorConnection, supporterHost, out var clusterHostInBond))
-                return clusterHostInBond ? Reason.WrongNumberOfIpsBond : Reason.WrongNumberOfIpsCluster;    
+                return clusterHostInBond ? Reason.WrongNumberOfIpsBond : Reason.WrongNumberOfIpsCluster;
+
+            var coordinatorPool = Helpers.GetPool(coordinatorConnection);
+            var coordinatorPoolOfOne = Helpers.GetPoolOfOne(coordinatorConnection);
+            var supporterPoolOfOne = Helpers.GetPoolOfOne(supporterConnection);
+
+            if (coordinatorPoolOfOne.tls_verification_enabled && !supporterPoolOfOne.tls_verification_enabled)
+                return coordinatorPool == null ? Reason.TlsVerificationOnlyOnCoordinator : Reason.TlsVerificationOnlyOnPool;
+            
+            if (!coordinatorPoolOfOne.tls_verification_enabled && supporterPoolOfOne.tls_verification_enabled)
+                return coordinatorPool == null ? Reason.TlsVerificationOnlyOnCoordinatorJoiner : Reason.TlsVerificationOnlyOnPoolJoiner;
 
             return Reason.Allowed;
         }
@@ -242,6 +257,14 @@ namespace XenAdmin.Core
                     return Messages.NEWPOOL_IP_COUNT_CLUSTER;
                 case Reason.WrongNumberOfIpsBond:
                     return Messages.NEWPOOL_IP_COUNT_BOND;
+                case Reason.TlsVerificationOnlyOnPool:
+                    return Messages.POOL_JOIN_CERTIFICATE_CHECKING_ONLY_ON_POOL;
+                case Reason.TlsVerificationOnlyOnPoolJoiner:
+                    return Messages.POOL_JOIN_CERTIFICATE_CHECKING_ONLY_ON_POOL_JOINER;
+                case Reason.TlsVerificationOnlyOnCoordinator:
+                    return Messages.POOL_JOIN_CERTIFICATE_CHECKING_ONLY_ON_COORDINATOR;
+                case Reason.TlsVerificationOnlyOnCoordinatorJoiner:
+                    return Messages.POOL_JOIN_CERTIFICATE_CHECKING_ONLY_ON_COORDINATOR_JOINER;
                 default:
                     System.Diagnostics.Trace.Assert(false, "Unknown reason");
                     return "";
@@ -273,11 +296,6 @@ namespace XenAdmin.Core
                     return true;
             }
             return false;
-        }
-
-        private static bool Connecting(Host host)
-        {
-            return host == null;
         }
 
         private static bool IsAPool(IXenConnection connection)

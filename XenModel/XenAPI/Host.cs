@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -111,7 +112,8 @@ namespace XenAPI
             bool multipathing,
             string uefi_certificates,
             List<XenRef<Certificate>> certificates,
-            string[] editions)
+            string[] editions,
+            List<update_guidances> pending_guidances)
         {
             this.uuid = uuid;
             this.name_label = name_label;
@@ -174,6 +176,7 @@ namespace XenAPI
             this.uefi_certificates = uefi_certificates;
             this.certificates = certificates;
             this.editions = editions;
+            this.pending_guidances = pending_guidances;
         }
 
         /// <summary>
@@ -203,69 +206,70 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given Host.
         /// </summary>
-        public override void UpdateFrom(Host update)
+        public override void UpdateFrom(Host record)
         {
-            uuid = update.uuid;
-            name_label = update.name_label;
-            name_description = update.name_description;
-            memory_overhead = update.memory_overhead;
-            allowed_operations = update.allowed_operations;
-            current_operations = update.current_operations;
-            API_version_major = update.API_version_major;
-            API_version_minor = update.API_version_minor;
-            API_version_vendor = update.API_version_vendor;
-            API_version_vendor_implementation = update.API_version_vendor_implementation;
-            enabled = update.enabled;
-            software_version = update.software_version;
-            other_config = update.other_config;
-            capabilities = update.capabilities;
-            cpu_configuration = update.cpu_configuration;
-            sched_policy = update.sched_policy;
-            supported_bootloaders = update.supported_bootloaders;
-            resident_VMs = update.resident_VMs;
-            logging = update.logging;
-            PIFs = update.PIFs;
-            suspend_image_sr = update.suspend_image_sr;
-            crash_dump_sr = update.crash_dump_sr;
-            crashdumps = update.crashdumps;
-            patches = update.patches;
-            updates = update.updates;
-            PBDs = update.PBDs;
-            host_CPUs = update.host_CPUs;
-            cpu_info = update.cpu_info;
-            hostname = update.hostname;
-            address = update.address;
-            metrics = update.metrics;
-            license_params = update.license_params;
-            ha_statefiles = update.ha_statefiles;
-            ha_network_peers = update.ha_network_peers;
-            blobs = update.blobs;
-            tags = update.tags;
-            external_auth_type = update.external_auth_type;
-            external_auth_service_name = update.external_auth_service_name;
-            external_auth_configuration = update.external_auth_configuration;
-            edition = update.edition;
-            license_server = update.license_server;
-            bios_strings = update.bios_strings;
-            power_on_mode = update.power_on_mode;
-            power_on_config = update.power_on_config;
-            local_cache_sr = update.local_cache_sr;
-            chipset_info = update.chipset_info;
-            PCIs = update.PCIs;
-            PGPUs = update.PGPUs;
-            PUSBs = update.PUSBs;
-            ssl_legacy = update.ssl_legacy;
-            guest_VCPUs_params = update.guest_VCPUs_params;
-            display = update.display;
-            virtual_hardware_platform_versions = update.virtual_hardware_platform_versions;
-            control_domain = update.control_domain;
-            updates_requiring_reboot = update.updates_requiring_reboot;
-            features = update.features;
-            iscsi_iqn = update.iscsi_iqn;
-            multipathing = update.multipathing;
-            uefi_certificates = update.uefi_certificates;
-            certificates = update.certificates;
-            editions = update.editions;
+            uuid = record.uuid;
+            name_label = record.name_label;
+            name_description = record.name_description;
+            memory_overhead = record.memory_overhead;
+            allowed_operations = record.allowed_operations;
+            current_operations = record.current_operations;
+            API_version_major = record.API_version_major;
+            API_version_minor = record.API_version_minor;
+            API_version_vendor = record.API_version_vendor;
+            API_version_vendor_implementation = record.API_version_vendor_implementation;
+            enabled = record.enabled;
+            software_version = record.software_version;
+            other_config = record.other_config;
+            capabilities = record.capabilities;
+            cpu_configuration = record.cpu_configuration;
+            sched_policy = record.sched_policy;
+            supported_bootloaders = record.supported_bootloaders;
+            resident_VMs = record.resident_VMs;
+            logging = record.logging;
+            PIFs = record.PIFs;
+            suspend_image_sr = record.suspend_image_sr;
+            crash_dump_sr = record.crash_dump_sr;
+            crashdumps = record.crashdumps;
+            patches = record.patches;
+            updates = record.updates;
+            PBDs = record.PBDs;
+            host_CPUs = record.host_CPUs;
+            cpu_info = record.cpu_info;
+            hostname = record.hostname;
+            address = record.address;
+            metrics = record.metrics;
+            license_params = record.license_params;
+            ha_statefiles = record.ha_statefiles;
+            ha_network_peers = record.ha_network_peers;
+            blobs = record.blobs;
+            tags = record.tags;
+            external_auth_type = record.external_auth_type;
+            external_auth_service_name = record.external_auth_service_name;
+            external_auth_configuration = record.external_auth_configuration;
+            edition = record.edition;
+            license_server = record.license_server;
+            bios_strings = record.bios_strings;
+            power_on_mode = record.power_on_mode;
+            power_on_config = record.power_on_config;
+            local_cache_sr = record.local_cache_sr;
+            chipset_info = record.chipset_info;
+            PCIs = record.PCIs;
+            PGPUs = record.PGPUs;
+            PUSBs = record.PUSBs;
+            ssl_legacy = record.ssl_legacy;
+            guest_VCPUs_params = record.guest_VCPUs_params;
+            display = record.display;
+            virtual_hardware_platform_versions = record.virtual_hardware_platform_versions;
+            control_domain = record.control_domain;
+            updates_requiring_reboot = record.updates_requiring_reboot;
+            features = record.features;
+            iscsi_iqn = record.iscsi_iqn;
+            multipathing = record.multipathing;
+            uefi_certificates = record.uefi_certificates;
+            certificates = record.certificates;
+            editions = record.editions;
+            pending_guidances = record.pending_guidances;
         }
 
         internal void UpdateFrom(Proxy_Host proxy)
@@ -331,73 +335,7 @@ namespace XenAPI
             uefi_certificates = proxy.uefi_certificates == null ? null : proxy.uefi_certificates;
             certificates = proxy.certificates == null ? null : XenRef<Certificate>.Create(proxy.certificates);
             editions = proxy.editions == null ? new string[] {} : (string [])proxy.editions;
-        }
-
-        public Proxy_Host ToProxy()
-        {
-            Proxy_Host result_ = new Proxy_Host();
-            result_.uuid = uuid ?? "";
-            result_.name_label = name_label ?? "";
-            result_.name_description = name_description ?? "";
-            result_.memory_overhead = memory_overhead.ToString();
-            result_.allowed_operations = allowed_operations == null ? new string[] {} : Helper.ObjectListToStringArray(allowed_operations);
-            result_.current_operations = Maps.convert_to_proxy_string_host_allowed_operations(current_operations);
-            result_.API_version_major = API_version_major.ToString();
-            result_.API_version_minor = API_version_minor.ToString();
-            result_.API_version_vendor = API_version_vendor ?? "";
-            result_.API_version_vendor_implementation = Maps.convert_to_proxy_string_string(API_version_vendor_implementation);
-            result_.enabled = enabled;
-            result_.software_version = Maps.convert_to_proxy_string_string(software_version);
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            result_.capabilities = capabilities;
-            result_.cpu_configuration = Maps.convert_to_proxy_string_string(cpu_configuration);
-            result_.sched_policy = sched_policy ?? "";
-            result_.supported_bootloaders = supported_bootloaders;
-            result_.resident_VMs = resident_VMs == null ? new string[] {} : Helper.RefListToStringArray(resident_VMs);
-            result_.logging = Maps.convert_to_proxy_string_string(logging);
-            result_.PIFs = PIFs == null ? new string[] {} : Helper.RefListToStringArray(PIFs);
-            result_.suspend_image_sr = suspend_image_sr ?? "";
-            result_.crash_dump_sr = crash_dump_sr ?? "";
-            result_.crashdumps = crashdumps == null ? new string[] {} : Helper.RefListToStringArray(crashdumps);
-            result_.patches = patches == null ? new string[] {} : Helper.RefListToStringArray(patches);
-            result_.updates = updates == null ? new string[] {} : Helper.RefListToStringArray(updates);
-            result_.PBDs = PBDs == null ? new string[] {} : Helper.RefListToStringArray(PBDs);
-            result_.host_CPUs = host_CPUs == null ? new string[] {} : Helper.RefListToStringArray(host_CPUs);
-            result_.cpu_info = Maps.convert_to_proxy_string_string(cpu_info);
-            result_.hostname = hostname ?? "";
-            result_.address = address ?? "";
-            result_.metrics = metrics ?? "";
-            result_.license_params = Maps.convert_to_proxy_string_string(license_params);
-            result_.ha_statefiles = ha_statefiles;
-            result_.ha_network_peers = ha_network_peers;
-            result_.blobs = Maps.convert_to_proxy_string_XenRefBlob(blobs);
-            result_.tags = tags;
-            result_.external_auth_type = external_auth_type ?? "";
-            result_.external_auth_service_name = external_auth_service_name ?? "";
-            result_.external_auth_configuration = Maps.convert_to_proxy_string_string(external_auth_configuration);
-            result_.edition = edition ?? "";
-            result_.license_server = Maps.convert_to_proxy_string_string(license_server);
-            result_.bios_strings = Maps.convert_to_proxy_string_string(bios_strings);
-            result_.power_on_mode = power_on_mode ?? "";
-            result_.power_on_config = Maps.convert_to_proxy_string_string(power_on_config);
-            result_.local_cache_sr = local_cache_sr ?? "";
-            result_.chipset_info = Maps.convert_to_proxy_string_string(chipset_info);
-            result_.PCIs = PCIs == null ? new string[] {} : Helper.RefListToStringArray(PCIs);
-            result_.PGPUs = PGPUs == null ? new string[] {} : Helper.RefListToStringArray(PGPUs);
-            result_.PUSBs = PUSBs == null ? new string[] {} : Helper.RefListToStringArray(PUSBs);
-            result_.ssl_legacy = ssl_legacy;
-            result_.guest_VCPUs_params = Maps.convert_to_proxy_string_string(guest_VCPUs_params);
-            result_.display = host_display_helper.ToString(display);
-            result_.virtual_hardware_platform_versions = virtual_hardware_platform_versions == null ? new string[] {} : Helper.LongArrayToStringArray(virtual_hardware_platform_versions);
-            result_.control_domain = control_domain ?? "";
-            result_.updates_requiring_reboot = updates_requiring_reboot == null ? new string[] {} : Helper.RefListToStringArray(updates_requiring_reboot);
-            result_.features = features == null ? new string[] {} : Helper.RefListToStringArray(features);
-            result_.iscsi_iqn = iscsi_iqn ?? "";
-            result_.multipathing = multipathing;
-            result_.uefi_certificates = uefi_certificates ?? "";
-            result_.certificates = certificates == null ? new string[] {} : Helper.RefListToStringArray(certificates);
-            result_.editions = editions;
-            return result_;
+            pending_guidances = proxy.pending_guidances == null ? null : Helper.StringArrayToEnumList<update_guidances>(proxy.pending_guidances);
         }
 
         /// <summary>
@@ -530,6 +468,76 @@ namespace XenAPI
                 certificates = Marshalling.ParseSetRef<Certificate>(table, "certificates");
             if (table.ContainsKey("editions"))
                 editions = Marshalling.ParseStringArray(table, "editions");
+            if (table.ContainsKey("pending_guidances"))
+                pending_guidances = Helper.StringArrayToEnumList<update_guidances>(Marshalling.ParseStringArray(table, "pending_guidances"));
+        }
+
+        public Proxy_Host ToProxy()
+        {
+            Proxy_Host result_ = new Proxy_Host();
+            result_.uuid = uuid ?? "";
+            result_.name_label = name_label ?? "";
+            result_.name_description = name_description ?? "";
+            result_.memory_overhead = memory_overhead.ToString();
+            result_.allowed_operations = allowed_operations == null ? new string[] {} : Helper.ObjectListToStringArray(allowed_operations);
+            result_.current_operations = Maps.convert_to_proxy_string_host_allowed_operations(current_operations);
+            result_.API_version_major = API_version_major.ToString();
+            result_.API_version_minor = API_version_minor.ToString();
+            result_.API_version_vendor = API_version_vendor ?? "";
+            result_.API_version_vendor_implementation = Maps.convert_to_proxy_string_string(API_version_vendor_implementation);
+            result_.enabled = enabled;
+            result_.software_version = Maps.convert_to_proxy_string_string(software_version);
+            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
+            result_.capabilities = capabilities;
+            result_.cpu_configuration = Maps.convert_to_proxy_string_string(cpu_configuration);
+            result_.sched_policy = sched_policy ?? "";
+            result_.supported_bootloaders = supported_bootloaders;
+            result_.resident_VMs = resident_VMs == null ? new string[] {} : Helper.RefListToStringArray(resident_VMs);
+            result_.logging = Maps.convert_to_proxy_string_string(logging);
+            result_.PIFs = PIFs == null ? new string[] {} : Helper.RefListToStringArray(PIFs);
+            result_.suspend_image_sr = suspend_image_sr ?? "";
+            result_.crash_dump_sr = crash_dump_sr ?? "";
+            result_.crashdumps = crashdumps == null ? new string[] {} : Helper.RefListToStringArray(crashdumps);
+            result_.patches = patches == null ? new string[] {} : Helper.RefListToStringArray(patches);
+            result_.updates = updates == null ? new string[] {} : Helper.RefListToStringArray(updates);
+            result_.PBDs = PBDs == null ? new string[] {} : Helper.RefListToStringArray(PBDs);
+            result_.host_CPUs = host_CPUs == null ? new string[] {} : Helper.RefListToStringArray(host_CPUs);
+            result_.cpu_info = Maps.convert_to_proxy_string_string(cpu_info);
+            result_.hostname = hostname ?? "";
+            result_.address = address ?? "";
+            result_.metrics = metrics ?? "";
+            result_.license_params = Maps.convert_to_proxy_string_string(license_params);
+            result_.ha_statefiles = ha_statefiles;
+            result_.ha_network_peers = ha_network_peers;
+            result_.blobs = Maps.convert_to_proxy_string_XenRefBlob(blobs);
+            result_.tags = tags;
+            result_.external_auth_type = external_auth_type ?? "";
+            result_.external_auth_service_name = external_auth_service_name ?? "";
+            result_.external_auth_configuration = Maps.convert_to_proxy_string_string(external_auth_configuration);
+            result_.edition = edition ?? "";
+            result_.license_server = Maps.convert_to_proxy_string_string(license_server);
+            result_.bios_strings = Maps.convert_to_proxy_string_string(bios_strings);
+            result_.power_on_mode = power_on_mode ?? "";
+            result_.power_on_config = Maps.convert_to_proxy_string_string(power_on_config);
+            result_.local_cache_sr = local_cache_sr ?? "";
+            result_.chipset_info = Maps.convert_to_proxy_string_string(chipset_info);
+            result_.PCIs = PCIs == null ? new string[] {} : Helper.RefListToStringArray(PCIs);
+            result_.PGPUs = PGPUs == null ? new string[] {} : Helper.RefListToStringArray(PGPUs);
+            result_.PUSBs = PUSBs == null ? new string[] {} : Helper.RefListToStringArray(PUSBs);
+            result_.ssl_legacy = ssl_legacy;
+            result_.guest_VCPUs_params = Maps.convert_to_proxy_string_string(guest_VCPUs_params);
+            result_.display = host_display_helper.ToString(display);
+            result_.virtual_hardware_platform_versions = virtual_hardware_platform_versions == null ? new string[] {} : Helper.LongArrayToStringArray(virtual_hardware_platform_versions);
+            result_.control_domain = control_domain ?? "";
+            result_.updates_requiring_reboot = updates_requiring_reboot == null ? new string[] {} : Helper.RefListToStringArray(updates_requiring_reboot);
+            result_.features = features == null ? new string[] {} : Helper.RefListToStringArray(features);
+            result_.iscsi_iqn = iscsi_iqn ?? "";
+            result_.multipathing = multipathing;
+            result_.uefi_certificates = uefi_certificates ?? "";
+            result_.certificates = certificates == null ? new string[] {} : Helper.RefListToStringArray(certificates);
+            result_.editions = editions;
+            result_.pending_guidances = pending_guidances == null ? new string[] {} : Helper.ObjectListToStringArray(pending_guidances);
+            return result_;
         }
 
         public bool DeepEquals(Host other, bool ignoreCurrentOperations)
@@ -601,16 +609,8 @@ namespace XenAPI
                 Helper.AreEqual2(this._multipathing, other._multipathing) &&
                 Helper.AreEqual2(this._uefi_certificates, other._uefi_certificates) &&
                 Helper.AreEqual2(this._certificates, other._certificates) &&
-                Helper.AreEqual2(this._editions, other._editions);
-        }
-
-        internal static List<Host> ProxyArrayToObjectList(Proxy_Host[] input)
-        {
-            var result = new List<Host>();
-            foreach (var item in input)
-                result.Add(new Host(item));
-
-            return result;
+                Helper.AreEqual2(this._editions, other._editions) &&
+                Helper.AreEqual2(this._pending_guidances, other._pending_guidances);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Host server)
@@ -690,6 +690,7 @@ namespace XenAPI
                 return null;
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given host.
         /// First published in XenServer 4.0.
@@ -1591,6 +1592,20 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Get the pending_guidances field of the given host.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        public static List<update_guidances> get_pending_guidances(Session session, string _host)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.host_get_pending_guidances(session.opaque_ref, _host);
+            else
+                return Helper.StringArrayToEnumList<update_guidances>(session.XmlRpcProxy.host_get_pending_guidances(session.opaque_ref, _host ?? "").parse());
+        }
+
+        /// <summary>
         /// Set the name/label field of the given host.
         /// First published in XenServer 4.0.
         /// </summary>
@@ -2364,7 +2379,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.host_get_data_sources(session.opaque_ref, _host);
             else
-                return Data_source.ProxyArrayToObjectList(session.XmlRpcProxy.host_get_data_sources(session.opaque_ref, _host ?? "").parse());
+                return session.XmlRpcProxy.host_get_data_sources(session.opaque_ref, _host ?? "").parse().Select(p => new Data_source(p)).ToList();
         }
 
         /// <summary>
@@ -2506,12 +2521,13 @@ namespace XenAPI
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
-        public static void evacuate(Session session, string _host)
+        /// <param name="_network">Optional preferred network for migration First published in Unreleased.</param>
+        public static void evacuate(Session session, string _host, string _network = null)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.host_evacuate(session.opaque_ref, _host);
+                session.JsonRpcClient.host_evacuate(session.opaque_ref, _host, _network);
             else
-                session.XmlRpcProxy.host_evacuate(session.opaque_ref, _host ?? "").parse();
+                session.XmlRpcProxy.host_evacuate(session.opaque_ref, _host ?? "", _network ?? "").parse();
         }
 
         /// <summary>
@@ -2520,12 +2536,13 @@ namespace XenAPI
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
-        public static XenRef<Task> async_evacuate(Session session, string _host)
+        /// <param name="_network">Optional preferred network for migration First published in Unreleased.</param>
+        public static XenRef<Task> async_evacuate(Session session, string _host, string _network = null)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_host_evacuate(session.opaque_ref, _host);
+              return session.JsonRpcClient.async_host_evacuate(session.opaque_ref, _host, _network);
           else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_host_evacuate(session.opaque_ref, _host ?? "").parse());
+              return XenRef<Task>.Create(session.XmlRpcProxy.async_host_evacuate(session.opaque_ref, _host ?? "", _network ?? "").parse());
         }
 
         /// <summary>
@@ -3103,6 +3120,34 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Delete the current TLS server certificate and replace by a new, self-signed one. This should only be used with extreme care.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        public static void reset_server_certificate(Session session, string _host)
+        {
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.host_reset_server_certificate(session.opaque_ref, _host);
+            else
+                session.XmlRpcProxy.host_reset_server_certificate(session.opaque_ref, _host ?? "").parse();
+        }
+
+        /// <summary>
+        /// Delete the current TLS server certificate and replace by a new, self-signed one. This should only be used with extreme care.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        public static XenRef<Task> async_reset_server_certificate(Session session, string _host)
+        {
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_host_reset_server_certificate(session.opaque_ref, _host);
+          else
+              return XenRef<Task>.Create(session.XmlRpcProxy.async_host_reset_server_certificate(session.opaque_ref, _host ?? "").parse());
+        }
+
+        /// <summary>
         /// Change to another edition, or reactivate the current edition after a license has expired. This may be subject to the successful checkout of an appropriate license.
         /// First published in XenServer 5.6.
         /// </summary>
@@ -3489,6 +3534,120 @@ namespace XenAPI
               return session.JsonRpcClient.async_host_set_uefi_certificates(session.opaque_ref, _host, _value);
           else
               return XenRef<Task>.Create(session.XmlRpcProxy.async_host_set_uefi_certificates(session.opaque_ref, _host ?? "", _value ?? "").parse());
+        }
+
+        /// <summary>
+        /// Sets xen's sched-gran on a host. See: https://xenbits.xen.org/docs/unstable/misc/xen-command-line.html#sched-gran-x86
+        /// Experimental. First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_value">The sched-gran to apply to a host</param>
+        public static void set_sched_gran(Session session, string _host, host_sched_gran _value)
+        {
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.host_set_sched_gran(session.opaque_ref, _host, _value);
+            else
+                session.XmlRpcProxy.host_set_sched_gran(session.opaque_ref, _host ?? "", host_sched_gran_helper.ToString(_value)).parse();
+        }
+
+        /// <summary>
+        /// Sets xen's sched-gran on a host. See: https://xenbits.xen.org/docs/unstable/misc/xen-command-line.html#sched-gran-x86
+        /// Experimental. First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_value">The sched-gran to apply to a host</param>
+        public static XenRef<Task> async_set_sched_gran(Session session, string _host, host_sched_gran _value)
+        {
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_host_set_sched_gran(session.opaque_ref, _host, _value);
+          else
+              return XenRef<Task>.Create(session.XmlRpcProxy.async_host_set_sched_gran(session.opaque_ref, _host ?? "", host_sched_gran_helper.ToString(_value)).parse());
+        }
+
+        /// <summary>
+        /// Gets xen's sched-gran on a host
+        /// Experimental. First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        public static host_sched_gran get_sched_gran(Session session, string _host)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.host_get_sched_gran(session.opaque_ref, _host);
+            else
+                return (host_sched_gran)Helper.EnumParseDefault(typeof(host_sched_gran), (string)session.XmlRpcProxy.host_get_sched_gran(session.opaque_ref, _host ?? "").parse());
+        }
+
+        /// <summary>
+        /// Gets xen's sched-gran on a host
+        /// Experimental. First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        public static XenRef<Task> async_get_sched_gran(Session session, string _host)
+        {
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_host_get_sched_gran(session.opaque_ref, _host);
+          else
+              return XenRef<Task>.Create(session.XmlRpcProxy.async_host_get_sched_gran(session.opaque_ref, _host ?? "").parse());
+        }
+
+        /// <summary>
+        /// Disable TLS verification for this host only
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        public static void emergency_disable_tls_verification(Session session)
+        {
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.host_emergency_disable_tls_verification(session.opaque_ref);
+            else
+                session.XmlRpcProxy.host_emergency_disable_tls_verification(session.opaque_ref).parse();
+        }
+
+        /// <summary>
+        /// Reenable TLS verification for this host only
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        public static void emergency_reenable_tls_verification(Session session)
+        {
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.host_emergency_reenable_tls_verification(session.opaque_ref);
+            else
+                session.XmlRpcProxy.host_emergency_reenable_tls_verification(session.opaque_ref).parse();
+        }
+
+        /// <summary>
+        /// apply updates from current enabled repository on a host
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_hash">The hash of updateinfo to be applied which is returned by previous pool.sync_udpates</param>
+        public static void apply_updates(Session session, string _host, string _hash)
+        {
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.host_apply_updates(session.opaque_ref, _host, _hash);
+            else
+                session.XmlRpcProxy.host_apply_updates(session.opaque_ref, _host ?? "", _hash ?? "").parse();
+        }
+
+        /// <summary>
+        /// apply updates from current enabled repository on a host
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_hash">The hash of updateinfo to be applied which is returned by previous pool.sync_udpates</param>
+        public static XenRef<Task> async_apply_updates(Session session, string _host, string _hash)
+        {
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_host_apply_updates(session.opaque_ref, _host, _hash);
+          else
+              return XenRef<Task>.Create(session.XmlRpcProxy.async_host_apply_updates(session.opaque_ref, _host ?? "", _hash ?? "").parse());
         }
 
         /// <summary>
@@ -4617,5 +4776,23 @@ namespace XenAPI
             }
         }
         private string[] _editions = {};
+
+        /// <summary>
+        /// The set of pending guidances after applying updates
+        /// First published in Unreleased.
+        /// </summary>
+        public virtual List<update_guidances> pending_guidances
+        {
+            get { return _pending_guidances; }
+            set
+            {
+                if (!Helper.AreEqual(value, _pending_guidances))
+                {
+                    _pending_guidances = value;
+                    NotifyPropertyChanged("pending_guidances");
+                }
+            }
+        }
+        private List<update_guidances> _pending_guidances = new List<update_guidances>() {};
     }
 }

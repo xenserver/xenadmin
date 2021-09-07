@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -103,19 +104,19 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given Pool_update.
         /// </summary>
-        public override void UpdateFrom(Pool_update update)
+        public override void UpdateFrom(Pool_update record)
         {
-            uuid = update.uuid;
-            name_label = update.name_label;
-            name_description = update.name_description;
-            version = update.version;
-            installation_size = update.installation_size;
-            key = update.key;
-            after_apply_guidance = update.after_apply_guidance;
-            vdi = update.vdi;
-            hosts = update.hosts;
-            other_config = update.other_config;
-            enforce_homogeneity = update.enforce_homogeneity;
+            uuid = record.uuid;
+            name_label = record.name_label;
+            name_description = record.name_description;
+            version = record.version;
+            installation_size = record.installation_size;
+            key = record.key;
+            after_apply_guidance = record.after_apply_guidance;
+            vdi = record.vdi;
+            hosts = record.hosts;
+            other_config = record.other_config;
+            enforce_homogeneity = record.enforce_homogeneity;
         }
 
         internal void UpdateFrom(Proxy_Pool_update proxy)
@@ -131,23 +132,6 @@ namespace XenAPI
             hosts = proxy.hosts == null ? null : XenRef<Host>.Create(proxy.hosts);
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
             enforce_homogeneity = (bool)proxy.enforce_homogeneity;
-        }
-
-        public Proxy_Pool_update ToProxy()
-        {
-            Proxy_Pool_update result_ = new Proxy_Pool_update();
-            result_.uuid = uuid ?? "";
-            result_.name_label = name_label ?? "";
-            result_.name_description = name_description ?? "";
-            result_.version = version ?? "";
-            result_.installation_size = installation_size.ToString();
-            result_.key = key ?? "";
-            result_.after_apply_guidance = after_apply_guidance == null ? new string[] {} : Helper.ObjectListToStringArray(after_apply_guidance);
-            result_.vdi = vdi ?? "";
-            result_.hosts = hosts == null ? new string[] {} : Helper.RefListToStringArray(hosts);
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            result_.enforce_homogeneity = enforce_homogeneity;
-            return result_;
         }
 
         /// <summary>
@@ -182,6 +166,23 @@ namespace XenAPI
                 enforce_homogeneity = Marshalling.ParseBool(table, "enforce_homogeneity");
         }
 
+        public Proxy_Pool_update ToProxy()
+        {
+            Proxy_Pool_update result_ = new Proxy_Pool_update();
+            result_.uuid = uuid ?? "";
+            result_.name_label = name_label ?? "";
+            result_.name_description = name_description ?? "";
+            result_.version = version ?? "";
+            result_.installation_size = installation_size.ToString();
+            result_.key = key ?? "";
+            result_.after_apply_guidance = after_apply_guidance == null ? new string[] {} : Helper.ObjectListToStringArray(after_apply_guidance);
+            result_.vdi = vdi ?? "";
+            result_.hosts = hosts == null ? new string[] {} : Helper.RefListToStringArray(hosts);
+            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
+            result_.enforce_homogeneity = enforce_homogeneity;
+            return result_;
+        }
+
         public bool DeepEquals(Pool_update other)
         {
             if (ReferenceEquals(null, other))
@@ -202,15 +203,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._enforce_homogeneity, other._enforce_homogeneity);
         }
 
-        internal static List<Pool_update> ProxyArrayToObjectList(Proxy_Pool_update[] input)
-        {
-            var result = new List<Pool_update>();
-            foreach (var item in input)
-                result.Add(new Pool_update(item));
-
-            return result;
-        }
-
         public override string SaveChanges(Session session, string opaqueRef, Pool_update server)
         {
             if (opaqueRef == null)
@@ -228,6 +220,7 @@ namespace XenAPI
                 return null;
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given pool_update.
         /// First published in XenServer 7.1.

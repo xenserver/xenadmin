@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -93,14 +94,14 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given Tunnel.
         /// </summary>
-        public override void UpdateFrom(Tunnel update)
+        public override void UpdateFrom(Tunnel record)
         {
-            uuid = update.uuid;
-            access_PIF = update.access_PIF;
-            transport_PIF = update.transport_PIF;
-            status = update.status;
-            other_config = update.other_config;
-            protocol = update.protocol;
+            uuid = record.uuid;
+            access_PIF = record.access_PIF;
+            transport_PIF = record.transport_PIF;
+            status = record.status;
+            other_config = record.other_config;
+            protocol = record.protocol;
         }
 
         internal void UpdateFrom(Proxy_Tunnel proxy)
@@ -111,18 +112,6 @@ namespace XenAPI
             status = proxy.status == null ? null : Maps.convert_from_proxy_string_string(proxy.status);
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
             protocol = proxy.protocol == null ? (tunnel_protocol) 0 : (tunnel_protocol)Helper.EnumParseDefault(typeof(tunnel_protocol), (string)proxy.protocol);
-        }
-
-        public Proxy_Tunnel ToProxy()
-        {
-            Proxy_Tunnel result_ = new Proxy_Tunnel();
-            result_.uuid = uuid ?? "";
-            result_.access_PIF = access_PIF ?? "";
-            result_.transport_PIF = transport_PIF ?? "";
-            result_.status = Maps.convert_to_proxy_string_string(status);
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            result_.protocol = tunnel_protocol_helper.ToString(protocol);
-            return result_;
         }
 
         /// <summary>
@@ -147,6 +136,18 @@ namespace XenAPI
                 protocol = (tunnel_protocol)Helper.EnumParseDefault(typeof(tunnel_protocol), Marshalling.ParseString(table, "protocol"));
         }
 
+        public Proxy_Tunnel ToProxy()
+        {
+            Proxy_Tunnel result_ = new Proxy_Tunnel();
+            result_.uuid = uuid ?? "";
+            result_.access_PIF = access_PIF ?? "";
+            result_.transport_PIF = transport_PIF ?? "";
+            result_.status = Maps.convert_to_proxy_string_string(status);
+            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
+            result_.protocol = tunnel_protocol_helper.ToString(protocol);
+            return result_;
+        }
+
         public bool DeepEquals(Tunnel other)
         {
             if (ReferenceEquals(null, other))
@@ -160,15 +161,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._status, other._status) &&
                 Helper.AreEqual2(this._other_config, other._other_config) &&
                 Helper.AreEqual2(this._protocol, other._protocol);
-        }
-
-        internal static List<Tunnel> ProxyArrayToObjectList(Proxy_Tunnel[] input)
-        {
-            var result = new List<Tunnel>();
-            foreach (var item in input)
-                result.Add(new Tunnel(item));
-
-            return result;
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Tunnel server)
@@ -196,6 +188,7 @@ namespace XenAPI
                 return null;
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given tunnel.
         /// First published in XenServer 5.6 FP1.

@@ -901,7 +901,7 @@ namespace XenAdmin
             RequestRefreshTreeView();
         }
 
-        void connection_CachePopulated(IXenConnection connection)
+        private void connection_CachePopulated(IXenConnection connection)
         {
             Host coordinator = Helpers.GetCoordinator(connection);
             if (coordinator == null)
@@ -1056,6 +1056,33 @@ namespace XenAdmin
             if (Registry.GetBrandOverride() == "XenCenter" || BrandManager.BrandConsole == "XenCenter")
                 HealthCheck.SendMetadataToHealthCheck();
             RequestRefreshTreeView();
+
+            CheckTlsVerification(connection);
+        }
+
+        private void CheckTlsVerification(IXenConnection connection)
+        {
+            //Use BeginInvoke so the UI is not blocked in a connection-in-progress state
+
+            Program.BeginInvoke(Program.MainWindow, () =>
+            {
+                var pool = Helpers.GetPoolOfOne(connection);
+                var cmd = new EnableTlsVerificationCommand(Program.MainWindow, pool, false);
+
+                if (cmd.CanRun())
+                {
+                    var msg = string.Format("{0}\n\n{1}",
+                        string.Format(Messages.MESSAGEBOX_ENABLE_TLS_VERIFICATION_BLURB, Helpers.GetName(connection)),
+                        Messages.MESSAGEBOX_ENABLE_TLS_VERIFICATION_WARNING);
+
+                    using (var dlg = new WarningDialog(msg,
+                        new ThreeButtonDialog.TBDButton(Messages.MESSAGEBOX_ENABLE_TLS_VERIFICATION_BUTTON,
+                            DialogResult.Yes, ThreeButtonDialog.ButtonType.ACCEPT, true),
+                        ThreeButtonDialog.ButtonNo))
+                        if (dlg.ShowDialog(this) == DialogResult.Yes)
+                            cmd.Run();
+                }
+            });
         }
 
         private void CheckHealthCheckEnrollment(object connection)
@@ -1745,6 +1772,10 @@ namespace XenAdmin
             toolStripMenuItemRotateSecret.Available = SelectionManager.Selection.Any(s =>
                 s.Connection != null && Helpers.StockholmOrGreater(s.Connection) &&
                 !s.Connection.Cache.Hosts.Any(Host.RestrictPoolSecretRotation));
+            toolStripMenuItemEnableTls.Available = SelectionManager.Selection.Any(s =>
+                s.Connection != null && Helpers.PostStockholm(s.Connection) &&
+                !s.Connection.Cache.Hosts.Any(Host.RestrictCertificateVerification) &&
+                s.Connection.Cache.Pools.Any(p => !p.tls_verification_enabled));
         }
 
         private void xenSourceOnTheWebToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2663,6 +2694,7 @@ namespace XenAdmin
             if (Program.Exiting)
                 return;
 
+            sender.Completed -= action_Completed;
             RequestRefreshTreeView();
         }
 

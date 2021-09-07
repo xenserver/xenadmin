@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -95,15 +96,15 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given VUSB.
         /// </summary>
-        public override void UpdateFrom(VUSB update)
+        public override void UpdateFrom(VUSB record)
         {
-            uuid = update.uuid;
-            allowed_operations = update.allowed_operations;
-            current_operations = update.current_operations;
-            VM = update.VM;
-            USB_group = update.USB_group;
-            other_config = update.other_config;
-            currently_attached = update.currently_attached;
+            uuid = record.uuid;
+            allowed_operations = record.allowed_operations;
+            current_operations = record.current_operations;
+            VM = record.VM;
+            USB_group = record.USB_group;
+            other_config = record.other_config;
+            currently_attached = record.currently_attached;
         }
 
         internal void UpdateFrom(Proxy_VUSB proxy)
@@ -115,19 +116,6 @@ namespace XenAPI
             USB_group = proxy.USB_group == null ? null : XenRef<USB_group>.Create(proxy.USB_group);
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
             currently_attached = (bool)proxy.currently_attached;
-        }
-
-        public Proxy_VUSB ToProxy()
-        {
-            Proxy_VUSB result_ = new Proxy_VUSB();
-            result_.uuid = uuid ?? "";
-            result_.allowed_operations = allowed_operations == null ? new string[] {} : Helper.ObjectListToStringArray(allowed_operations);
-            result_.current_operations = Maps.convert_to_proxy_string_vusb_operations(current_operations);
-            result_.VM = VM ?? "";
-            result_.USB_group = USB_group ?? "";
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            result_.currently_attached = currently_attached;
-            return result_;
         }
 
         /// <summary>
@@ -154,6 +142,19 @@ namespace XenAPI
                 currently_attached = Marshalling.ParseBool(table, "currently_attached");
         }
 
+        public Proxy_VUSB ToProxy()
+        {
+            Proxy_VUSB result_ = new Proxy_VUSB();
+            result_.uuid = uuid ?? "";
+            result_.allowed_operations = allowed_operations == null ? new string[] {} : Helper.ObjectListToStringArray(allowed_operations);
+            result_.current_operations = Maps.convert_to_proxy_string_vusb_operations(current_operations);
+            result_.VM = VM ?? "";
+            result_.USB_group = USB_group ?? "";
+            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
+            result_.currently_attached = currently_attached;
+            return result_;
+        }
+
         public bool DeepEquals(VUSB other, bool ignoreCurrentOperations)
         {
             if (ReferenceEquals(null, other))
@@ -170,15 +171,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._USB_group, other._USB_group) &&
                 Helper.AreEqual2(this._other_config, other._other_config) &&
                 Helper.AreEqual2(this._currently_attached, other._currently_attached);
-        }
-
-        internal static List<VUSB> ProxyArrayToObjectList(Proxy_VUSB[] input)
-        {
-            var result = new List<VUSB>();
-            foreach (var item in input)
-                result.Add(new VUSB(item));
-
-            return result;
         }
 
         public override string SaveChanges(Session session, string opaqueRef, VUSB server)
@@ -198,6 +190,7 @@ namespace XenAPI
                 return null;
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given VUSB.
         /// First published in XenServer 7.3.

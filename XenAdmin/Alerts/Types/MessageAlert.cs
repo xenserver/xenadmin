@@ -151,6 +151,7 @@ namespace XenAdmin.Alerts
                     case Message.MessageType.CLUSTER_HOST_FENCING:
                     case Message.MessageType.CLUSTER_HOST_ENABLE_FAILED:
                     case Message.MessageType.VM_SECURE_BOOT_FAILED:
+                    case Message.MessageType.TLS_VERIFICATION_EMERGENCY_DISABLED:
                         if (XenObject != null)
                             return string.Format(FriendlyFormat(), Helpers.GetName(XenObject));
                         break;
@@ -368,6 +369,7 @@ namespace XenAdmin.Alerts
 						if (repairSrCommand.CanRun())
 							return () => repairSrCommand.Run();
 						return null;
+
 					default:
 						return null;
 				}
@@ -476,11 +478,22 @@ namespace XenAdmin.Alerts
                 case Message.MessageType.VMSS_SNAPSHOT_LOCK_FAILED:
                     return new PolicyAlert(msg);
 
+                case Message.MessageType.POOL_CA_CERTIFICATE_EXPIRED:
+                case Message.MessageType.POOL_CA_CERTIFICATE_EXPIRING_07:
+                case Message.MessageType.POOL_CA_CERTIFICATE_EXPIRING_14:
+                case Message.MessageType.POOL_CA_CERTIFICATE_EXPIRING_30:
                 case Message.MessageType.HOST_SERVER_CERTIFICATE_EXPIRED:
                 case Message.MessageType.HOST_SERVER_CERTIFICATE_EXPIRING_07:
                 case Message.MessageType.HOST_SERVER_CERTIFICATE_EXPIRING_14:
                 case Message.MessageType.HOST_SERVER_CERTIFICATE_EXPIRING_30:
+                case Message.MessageType.HOST_INTERNAL_CERTIFICATE_EXPIRED:
+                case Message.MessageType.HOST_INTERNAL_CERTIFICATE_EXPIRING_07:
+                case Message.MessageType.HOST_INTERNAL_CERTIFICATE_EXPIRING_14:
+                case Message.MessageType.HOST_INTERNAL_CERTIFICATE_EXPIRING_30:
                     return new CertificateAlert(msg);
+
+                case Message.MessageType.FAILED_LOGIN_ATTEMPTS:
+                    return new FailedLoginAttemptAlert(msg);
                 default:
                     // For all other kinds of alert
                     return new MessageAlert(msg);

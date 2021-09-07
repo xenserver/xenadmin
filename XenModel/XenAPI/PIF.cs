@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -151,43 +152,43 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given PIF.
         /// </summary>
-        public override void UpdateFrom(PIF update)
+        public override void UpdateFrom(PIF record)
         {
-            uuid = update.uuid;
-            device = update.device;
-            network = update.network;
-            host = update.host;
-            MAC = update.MAC;
-            MTU = update.MTU;
-            VLAN = update.VLAN;
-            metrics = update.metrics;
-            physical = update.physical;
-            currently_attached = update.currently_attached;
-            ip_configuration_mode = update.ip_configuration_mode;
-            IP = update.IP;
-            netmask = update.netmask;
-            gateway = update.gateway;
-            DNS = update.DNS;
-            bond_slave_of = update.bond_slave_of;
-            bond_master_of = update.bond_master_of;
-            VLAN_master_of = update.VLAN_master_of;
-            VLAN_slave_of = update.VLAN_slave_of;
-            management = update.management;
-            other_config = update.other_config;
-            disallow_unplug = update.disallow_unplug;
-            tunnel_access_PIF_of = update.tunnel_access_PIF_of;
-            tunnel_transport_PIF_of = update.tunnel_transport_PIF_of;
-            ipv6_configuration_mode = update.ipv6_configuration_mode;
-            IPv6 = update.IPv6;
-            ipv6_gateway = update.ipv6_gateway;
-            primary_address_type = update.primary_address_type;
-            managed = update.managed;
-            properties = update.properties;
-            capabilities = update.capabilities;
-            igmp_snooping_status = update.igmp_snooping_status;
-            sriov_physical_PIF_of = update.sriov_physical_PIF_of;
-            sriov_logical_PIF_of = update.sriov_logical_PIF_of;
-            PCI = update.PCI;
+            uuid = record.uuid;
+            device = record.device;
+            network = record.network;
+            host = record.host;
+            MAC = record.MAC;
+            MTU = record.MTU;
+            VLAN = record.VLAN;
+            metrics = record.metrics;
+            physical = record.physical;
+            currently_attached = record.currently_attached;
+            ip_configuration_mode = record.ip_configuration_mode;
+            IP = record.IP;
+            netmask = record.netmask;
+            gateway = record.gateway;
+            DNS = record.DNS;
+            bond_slave_of = record.bond_slave_of;
+            bond_master_of = record.bond_master_of;
+            VLAN_master_of = record.VLAN_master_of;
+            VLAN_slave_of = record.VLAN_slave_of;
+            management = record.management;
+            other_config = record.other_config;
+            disallow_unplug = record.disallow_unplug;
+            tunnel_access_PIF_of = record.tunnel_access_PIF_of;
+            tunnel_transport_PIF_of = record.tunnel_transport_PIF_of;
+            ipv6_configuration_mode = record.ipv6_configuration_mode;
+            IPv6 = record.IPv6;
+            ipv6_gateway = record.ipv6_gateway;
+            primary_address_type = record.primary_address_type;
+            managed = record.managed;
+            properties = record.properties;
+            capabilities = record.capabilities;
+            igmp_snooping_status = record.igmp_snooping_status;
+            sriov_physical_PIF_of = record.sriov_physical_PIF_of;
+            sriov_logical_PIF_of = record.sriov_logical_PIF_of;
+            PCI = record.PCI;
         }
 
         internal void UpdateFrom(Proxy_PIF proxy)
@@ -227,47 +228,6 @@ namespace XenAPI
             sriov_physical_PIF_of = proxy.sriov_physical_PIF_of == null ? null : XenRef<Network_sriov>.Create(proxy.sriov_physical_PIF_of);
             sriov_logical_PIF_of = proxy.sriov_logical_PIF_of == null ? null : XenRef<Network_sriov>.Create(proxy.sriov_logical_PIF_of);
             PCI = proxy.PCI == null ? null : XenRef<PCI>.Create(proxy.PCI);
-        }
-
-        public Proxy_PIF ToProxy()
-        {
-            Proxy_PIF result_ = new Proxy_PIF();
-            result_.uuid = uuid ?? "";
-            result_.device = device ?? "";
-            result_.network = network ?? "";
-            result_.host = host ?? "";
-            result_.MAC = MAC ?? "";
-            result_.MTU = MTU.ToString();
-            result_.VLAN = VLAN.ToString();
-            result_.metrics = metrics ?? "";
-            result_.physical = physical;
-            result_.currently_attached = currently_attached;
-            result_.ip_configuration_mode = ip_configuration_mode_helper.ToString(ip_configuration_mode);
-            result_.IP = IP ?? "";
-            result_.netmask = netmask ?? "";
-            result_.gateway = gateway ?? "";
-            result_.DNS = DNS ?? "";
-            result_.bond_slave_of = bond_slave_of ?? "";
-            result_.bond_master_of = bond_master_of == null ? new string[] {} : Helper.RefListToStringArray(bond_master_of);
-            result_.VLAN_master_of = VLAN_master_of ?? "";
-            result_.VLAN_slave_of = VLAN_slave_of == null ? new string[] {} : Helper.RefListToStringArray(VLAN_slave_of);
-            result_.management = management;
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            result_.disallow_unplug = disallow_unplug;
-            result_.tunnel_access_PIF_of = tunnel_access_PIF_of == null ? new string[] {} : Helper.RefListToStringArray(tunnel_access_PIF_of);
-            result_.tunnel_transport_PIF_of = tunnel_transport_PIF_of == null ? new string[] {} : Helper.RefListToStringArray(tunnel_transport_PIF_of);
-            result_.ipv6_configuration_mode = ipv6_configuration_mode_helper.ToString(ipv6_configuration_mode);
-            result_.IPv6 = IPv6;
-            result_.ipv6_gateway = ipv6_gateway ?? "";
-            result_.primary_address_type = primary_address_type_helper.ToString(primary_address_type);
-            result_.managed = managed;
-            result_.properties = Maps.convert_to_proxy_string_string(properties);
-            result_.capabilities = capabilities;
-            result_.igmp_snooping_status = pif_igmp_status_helper.ToString(igmp_snooping_status);
-            result_.sriov_physical_PIF_of = sriov_physical_PIF_of == null ? new string[] {} : Helper.RefListToStringArray(sriov_physical_PIF_of);
-            result_.sriov_logical_PIF_of = sriov_logical_PIF_of == null ? new string[] {} : Helper.RefListToStringArray(sriov_logical_PIF_of);
-            result_.PCI = PCI ?? "";
-            return result_;
         }
 
         /// <summary>
@@ -350,6 +310,47 @@ namespace XenAPI
                 PCI = Marshalling.ParseRef<PCI>(table, "PCI");
         }
 
+        public Proxy_PIF ToProxy()
+        {
+            Proxy_PIF result_ = new Proxy_PIF();
+            result_.uuid = uuid ?? "";
+            result_.device = device ?? "";
+            result_.network = network ?? "";
+            result_.host = host ?? "";
+            result_.MAC = MAC ?? "";
+            result_.MTU = MTU.ToString();
+            result_.VLAN = VLAN.ToString();
+            result_.metrics = metrics ?? "";
+            result_.physical = physical;
+            result_.currently_attached = currently_attached;
+            result_.ip_configuration_mode = ip_configuration_mode_helper.ToString(ip_configuration_mode);
+            result_.IP = IP ?? "";
+            result_.netmask = netmask ?? "";
+            result_.gateway = gateway ?? "";
+            result_.DNS = DNS ?? "";
+            result_.bond_slave_of = bond_slave_of ?? "";
+            result_.bond_master_of = bond_master_of == null ? new string[] {} : Helper.RefListToStringArray(bond_master_of);
+            result_.VLAN_master_of = VLAN_master_of ?? "";
+            result_.VLAN_slave_of = VLAN_slave_of == null ? new string[] {} : Helper.RefListToStringArray(VLAN_slave_of);
+            result_.management = management;
+            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
+            result_.disallow_unplug = disallow_unplug;
+            result_.tunnel_access_PIF_of = tunnel_access_PIF_of == null ? new string[] {} : Helper.RefListToStringArray(tunnel_access_PIF_of);
+            result_.tunnel_transport_PIF_of = tunnel_transport_PIF_of == null ? new string[] {} : Helper.RefListToStringArray(tunnel_transport_PIF_of);
+            result_.ipv6_configuration_mode = ipv6_configuration_mode_helper.ToString(ipv6_configuration_mode);
+            result_.IPv6 = IPv6;
+            result_.ipv6_gateway = ipv6_gateway ?? "";
+            result_.primary_address_type = primary_address_type_helper.ToString(primary_address_type);
+            result_.managed = managed;
+            result_.properties = Maps.convert_to_proxy_string_string(properties);
+            result_.capabilities = capabilities;
+            result_.igmp_snooping_status = pif_igmp_status_helper.ToString(igmp_snooping_status);
+            result_.sriov_physical_PIF_of = sriov_physical_PIF_of == null ? new string[] {} : Helper.RefListToStringArray(sriov_physical_PIF_of);
+            result_.sriov_logical_PIF_of = sriov_logical_PIF_of == null ? new string[] {} : Helper.RefListToStringArray(sriov_logical_PIF_of);
+            result_.PCI = PCI ?? "";
+            return result_;
+        }
+
         public bool DeepEquals(PIF other)
         {
             if (ReferenceEquals(null, other))
@@ -394,15 +395,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._PCI, other._PCI);
         }
 
-        internal static List<PIF> ProxyArrayToObjectList(Proxy_PIF[] input)
-        {
-            var result = new List<PIF>();
-            foreach (var item in input)
-                result.Add(new PIF(item));
-
-            return result;
-        }
-
         public override string SaveChanges(Session session, string opaqueRef, PIF server)
         {
             if (opaqueRef == null)
@@ -420,6 +412,7 @@ namespace XenAPI
                 return null;
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given PIF.
         /// First published in XenServer 4.0.

@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -97,16 +98,16 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given Data_source.
         /// </summary>
-        public override void UpdateFrom(Data_source update)
+        public override void UpdateFrom(Data_source record)
         {
-            name_label = update.name_label;
-            name_description = update.name_description;
-            enabled = update.enabled;
-            standard = update.standard;
-            units = update.units;
-            min = update.min;
-            max = update.max;
-            value = update.value;
+            name_label = record.name_label;
+            name_description = record.name_description;
+            enabled = record.enabled;
+            standard = record.standard;
+            units = record.units;
+            min = record.min;
+            max = record.max;
+            value = record.value;
         }
 
         internal void UpdateFrom(Proxy_Data_source proxy)
@@ -119,20 +120,6 @@ namespace XenAPI
             min = Convert.ToDouble(proxy.min);
             max = Convert.ToDouble(proxy.max);
             value = Convert.ToDouble(proxy.value);
-        }
-
-        public Proxy_Data_source ToProxy()
-        {
-            Proxy_Data_source result_ = new Proxy_Data_source();
-            result_.name_label = name_label ?? "";
-            result_.name_description = name_description ?? "";
-            result_.enabled = enabled;
-            result_.standard = standard;
-            result_.units = units ?? "";
-            result_.min = min;
-            result_.max = max;
-            result_.value = value;
-            return result_;
         }
 
         /// <summary>
@@ -161,6 +148,20 @@ namespace XenAPI
                 value = Marshalling.ParseDouble(table, "value");
         }
 
+        public Proxy_Data_source ToProxy()
+        {
+            Proxy_Data_source result_ = new Proxy_Data_source();
+            result_.name_label = name_label ?? "";
+            result_.name_description = name_description ?? "";
+            result_.enabled = enabled;
+            result_.standard = standard;
+            result_.units = units ?? "";
+            result_.min = min;
+            result_.max = max;
+            result_.value = value;
+            return result_;
+        }
+
         public bool DeepEquals(Data_source other)
         {
             if (ReferenceEquals(null, other))
@@ -178,15 +179,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._value, other._value);
         }
 
-        internal static List<Data_source> ProxyArrayToObjectList(Proxy_Data_source[] input)
-        {
-            var result = new List<Data_source>();
-            foreach (var item in input)
-                result.Add(new Data_source(item));
-
-            return result;
-        }
-
         public override string SaveChanges(Session session, string opaqueRef, Data_source server)
         {
             if (opaqueRef == null)
@@ -199,6 +191,7 @@ namespace XenAPI
               throw new InvalidOperationException("This type has no read/write properties");
             }
         }
+
         /// <summary>
         /// a human-readable name
         /// </summary>

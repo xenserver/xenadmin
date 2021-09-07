@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -89,12 +90,12 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given Role.
         /// </summary>
-        public override void UpdateFrom(Role update)
+        public override void UpdateFrom(Role record)
         {
-            uuid = update.uuid;
-            name_label = update.name_label;
-            name_description = update.name_description;
-            subroles = update.subroles;
+            uuid = record.uuid;
+            name_label = record.name_label;
+            name_description = record.name_description;
+            subroles = record.subroles;
         }
 
         internal void UpdateFrom(Proxy_Role proxy)
@@ -103,16 +104,6 @@ namespace XenAPI
             name_label = proxy.name_label == null ? null : proxy.name_label;
             name_description = proxy.name_description == null ? null : proxy.name_description;
             subroles = proxy.subroles == null ? null : XenRef<Role>.Create(proxy.subroles);
-        }
-
-        public Proxy_Role ToProxy()
-        {
-            Proxy_Role result_ = new Proxy_Role();
-            result_.uuid = uuid ?? "";
-            result_.name_label = name_label ?? "";
-            result_.name_description = name_description ?? "";
-            result_.subroles = subroles == null ? new string[] {} : Helper.RefListToStringArray(subroles);
-            return result_;
         }
 
         /// <summary>
@@ -133,6 +124,16 @@ namespace XenAPI
                 subroles = Marshalling.ParseSetRef<Role>(table, "subroles");
         }
 
+        public Proxy_Role ToProxy()
+        {
+            Proxy_Role result_ = new Proxy_Role();
+            result_.uuid = uuid ?? "";
+            result_.name_label = name_label ?? "";
+            result_.name_description = name_description ?? "";
+            result_.subroles = subroles == null ? new string[] {} : Helper.RefListToStringArray(subroles);
+            return result_;
+        }
+
         public bool DeepEquals(Role other)
         {
             if (ReferenceEquals(null, other))
@@ -144,15 +145,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._name_label, other._name_label) &&
                 Helper.AreEqual2(this._name_description, other._name_description) &&
                 Helper.AreEqual2(this._subroles, other._subroles);
-        }
-
-        internal static List<Role> ProxyArrayToObjectList(Proxy_Role[] input)
-        {
-            var result = new List<Role>();
-            foreach (var item in input)
-                result.Add(new Role(item));
-
-            return result;
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Role server)
@@ -167,6 +159,7 @@ namespace XenAPI
               throw new InvalidOperationException("This type has no read/write properties");
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given role.
         /// First published in XenServer 5.6.

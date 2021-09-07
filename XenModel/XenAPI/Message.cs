@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -95,15 +96,15 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given Message.
         /// </summary>
-        public override void UpdateFrom(Message update)
+        public override void UpdateFrom(Message record)
         {
-            uuid = update.uuid;
-            name = update.name;
-            priority = update.priority;
-            cls = update.cls;
-            obj_uuid = update.obj_uuid;
-            timestamp = update.timestamp;
-            body = update.body;
+            uuid = record.uuid;
+            name = record.name;
+            priority = record.priority;
+            cls = record.cls;
+            obj_uuid = record.obj_uuid;
+            timestamp = record.timestamp;
+            body = record.body;
         }
 
         internal void UpdateFrom(Proxy_Message proxy)
@@ -115,19 +116,6 @@ namespace XenAPI
             obj_uuid = proxy.obj_uuid == null ? null : proxy.obj_uuid;
             timestamp = proxy.timestamp;
             body = proxy.body == null ? null : proxy.body;
-        }
-
-        public Proxy_Message ToProxy()
-        {
-            Proxy_Message result_ = new Proxy_Message();
-            result_.uuid = uuid ?? "";
-            result_.name = name ?? "";
-            result_.priority = priority.ToString();
-            result_.cls = cls_helper.ToString(cls);
-            result_.obj_uuid = obj_uuid ?? "";
-            result_.timestamp = timestamp;
-            result_.body = body ?? "";
-            return result_;
         }
 
         /// <summary>
@@ -154,6 +142,19 @@ namespace XenAPI
                 body = Marshalling.ParseString(table, "body");
         }
 
+        public Proxy_Message ToProxy()
+        {
+            Proxy_Message result_ = new Proxy_Message();
+            result_.uuid = uuid ?? "";
+            result_.name = name ?? "";
+            result_.priority = priority.ToString();
+            result_.cls = cls_helper.ToString(cls);
+            result_.obj_uuid = obj_uuid ?? "";
+            result_.timestamp = timestamp;
+            result_.body = body ?? "";
+            return result_;
+        }
+
         public bool DeepEquals(Message other)
         {
             if (ReferenceEquals(null, other))
@@ -170,15 +171,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._body, other._body);
         }
 
-        internal static List<Message> ProxyArrayToObjectList(Proxy_Message[] input)
-        {
-            var result = new List<Message>();
-            foreach (var item in input)
-                result.Add(new Message(item));
-
-            return result;
-        }
-
         public override string SaveChanges(Session session, string opaqueRef, Message server)
         {
             if (opaqueRef == null)
@@ -191,6 +183,7 @@ namespace XenAPI
               throw new InvalidOperationException("This type has no read/write properties");
             }
         }
+
         /// <summary>
         /// 
         /// First published in XenServer 5.0.

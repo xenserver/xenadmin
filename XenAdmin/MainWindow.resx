@@ -1936,64 +1936,64 @@
     <value>&amp;View</value>
   </data>
   <data name="AddPoolToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>277, 22</value>
+    <value>247, 22</value>
   </data>
   <data name="AddPoolToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;New Pool...</value>
   </data>
   <data name="toolStripSeparator8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>274, 6</value>
+    <value>244, 6</value>
   </data>
   <data name="addServerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>277, 22</value>
+    <value>247, 22</value>
   </data>
   <data name="addServerToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Add Server</value>
   </data>
   <data name="removeServerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>277, 22</value>
+    <value>247, 22</value>
   </data>
   <data name="removeServerToolStripMenuItem.Text" xml:space="preserve">
     <value>Re&amp;move Server</value>
   </data>
   <data name="poolReconnectAsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>277, 22</value>
+    <value>247, 22</value>
   </data>
   <data name="poolReconnectAsToolStripMenuItem.Text" xml:space="preserve">
     <value>Reconnec&amp;t As...</value>
   </data>
   <data name="disconnectPoolToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>277, 22</value>
+    <value>247, 22</value>
   </data>
   <data name="disconnectPoolToolStripMenuItem.Text" xml:space="preserve">
     <value>Dis&amp;connect</value>
   </data>
   <data name="toolStripSeparator27.Size" type="System.Drawing.Size, System.Drawing">
-    <value>274, 6</value>
+    <value>244, 6</value>
   </data>
   <data name="virtualAppliancesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>277, 22</value>
+    <value>247, 22</value>
   </data>
   <data name="virtualAppliancesToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;vApps...</value>
   </data>
   <data name="toolStripSeparator30.Size" type="System.Drawing.Size, System.Drawing">
-    <value>274, 6</value>
+    <value>244, 6</value>
   </data>
   <data name="toolStripMenuItemHaConfigure.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>156, 22</value>
   </data>
   <data name="toolStripMenuItemHaConfigure.Text" xml:space="preserve">
     <value>&amp;Configure HA...</value>
   </data>
   <data name="toolStripMenuItemHaDisable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>156, 22</value>
   </data>
   <data name="toolStripMenuItemHaDisable.Text" xml:space="preserve">
     <value>&amp;Disable HA</value>
   </data>
   <data name="highAvailabilityToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>277, 22</value>
+    <value>247, 22</value>
   </data>
   <data name="highAvailabilityToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;High Availability</value>
@@ -2011,19 +2011,19 @@
     <value>&amp;Disaster Recovery Wizard...</value>
   </data>
   <data name="disasterRecoveryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>277, 22</value>
+    <value>247, 22</value>
   </data>
   <data name="disasterRecoveryToolStripMenuItem.Text" xml:space="preserve">
     <value>Di&amp;saster Recovery</value>
   </data>
   <data name="VMSnapshotScheduleToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>277, 22</value>
+    <value>247, 22</value>
   </data>
   <data name="VMSnapshotScheduleToolStripMenuItem.Text" xml:space="preserve">
     <value>VM Snapshot Schedule Policies...</value>
   </data>
   <data name="exportResourceReportPoolToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>277, 22</value>
+    <value>247, 22</value>
   </data>
   <data name="wlbReportsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>277, 22</value>
@@ -2037,47 +2037,59 @@
   <data name="wlbDisconnectToolStripMenuItem.Text" xml:space="preserve">
     <value>Disconnect Workload &amp;Balancing Server</value>
   </data>
+  <data name="toolStripMenuItemWlb.Size" type="System.Drawing.Size, System.Drawing">
+    <value>247, 22</value>
+  </data>
+  <data name="toolStripMenuItemWlb.Text" xml:space="preserve">
+    <value>Workload &amp;Balancing</value>
+  </data>
   <data name="conversionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>277, 22</value>
+    <value>247, 22</value>
   </data>
   <data name="conversionToolStripMenuItem.Text" xml:space="preserve">
     <value>Conv&amp;ersion Manager...</value>
   </data>
   <data name="toolStripSeparator9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>274, 6</value>
+    <value>244, 6</value>
   </data>
   <data name="changePoolPasswordToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>277, 22</value>
+    <value>247, 22</value>
   </data>
   <data name="changePoolPasswordToolStripMenuItem.Text" xml:space="preserve">
     <value>Change Server Pass&amp;word...</value>
   </data>
   <data name="toolStripMenuItemRotateSecret.Size" type="System.Drawing.Size, System.Drawing">
-    <value>277, 22</value>
+    <value>247, 22</value>
   </data>
   <data name="toolStripMenuItemRotateSecret.Text" xml:space="preserve">
     <value>Rotate &amp;Pool Secret</value>
   </data>
+  <data name="toolStripMenuItemEnableTls.Size" type="System.Drawing.Size, System.Drawing">
+    <value>247, 22</value>
+  </data>
+  <data name="toolStripMenuItemEnableTls.Text" xml:space="preserve">
+    <value>Enable Certificate Veri&amp;fication</value>
+  </data>
   <data name="toolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>274, 6</value>
+    <value>244, 6</value>
   </data>
   <data name="deleteToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>277, 22</value>
+    <value>247, 22</value>
   </data>
   <data name="deleteToolStripMenuItem.Text" xml:space="preserve">
     <value>Mak&amp;e into standalone server</value>
   </data>
   <data name="toolStripSeparator26.Size" type="System.Drawing.Size, System.Drawing">
-    <value>274, 6</value>
+    <value>244, 6</value>
   </data>
   <data name="pluginItemsPlaceHolderToolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>277, 22</value>
+    <value>247, 22</value>
   </data>
   <data name="pluginItemsPlaceHolderToolStripMenuItem2.Text" xml:space="preserve">
     <value>PluginItemsPlaceHolder</value>
   </data>
   <data name="PoolPropertiesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>277, 22</value>
+    <value>247, 22</value>
   </data>
   <data name="PoolPropertiesToolStripMenuItem.Text" xml:space="preserve">
     <value>P&amp;roperties</value>
@@ -2236,10 +2248,22 @@
     <value>213, 6</value>
   </data>
   <data name="toolStripMenuItemInstallCertificate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="toolStripMenuItemInstallCertificate.Text" xml:space="preserve">
     <value>&amp;Install Certificate...</value>
+  </data>
+  <data name="toolStripMenuItemResetCertificate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="toolStripMenuItemResetCertificate.Text" xml:space="preserve">
+    <value>&amp;Reset Certificate</value>
+  </data>
+  <data name="toolStripMenuItemCertificate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 22</value>
+  </data>
+  <data name="toolStripMenuItemCertificate.Text" xml:space="preserve">
+    <value>Cert&amp;ificate</value>
   </data>
   <data name="maintenanceModeToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>216, 22</value>
@@ -2838,11 +2862,11 @@
   <data name="statusLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="statusLabelAlerts.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="statusLabelErrors.Size" type="System.Drawing.Size, System.Drawing">
     <value>118, 22</value>
   </data>
-  <data name="statusLabelAlerts.Text" xml:space="preserve">
-    <value>toolStripStatusLabel1</value>
+  <data name="statusLabelErrors.Text" xml:space="preserve">
+    <value>toolStripStatusLabel3</value>
   </data>
   <data name="statusLabelUpdates.Size" type="System.Drawing.Size, System.Drawing">
     <value>118, 22</value>
@@ -2850,11 +2874,11 @@
   <data name="statusLabelUpdates.Text" xml:space="preserve">
     <value>toolStripStatusLabel2</value>
   </data>
-  <data name="statusLabelErrors.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="statusLabelAlerts.Size" type="System.Drawing.Size, System.Drawing">
     <value>118, 22</value>
   </data>
-  <data name="statusLabelErrors.Text" xml:space="preserve">
-    <value>toolStripStatusLabel3</value>
+  <data name="statusLabelAlerts.Text" xml:space="preserve">
+    <value>toolStripStatusLabel1</value>
   </data>
   <data name="StatusStrip.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 703</value>
@@ -3213,6 +3237,18 @@
   <data name="&gt;&gt;highAvailabilityToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
+  <data name="&gt;&gt;toolStripMenuItemHaConfigure.Name" xml:space="preserve">
+    <value>toolStripMenuItemHaConfigure</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemHaConfigure.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemHaDisable.Name" xml:space="preserve">
+    <value>toolStripMenuItemHaDisable</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemHaDisable.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
   <data name="&gt;&gt;disasterRecoveryToolStripMenuItem.Name" xml:space="preserve">
     <value>disasterRecoveryToolStripMenuItem</value>
   </data>
@@ -3243,6 +3279,12 @@
   <data name="&gt;&gt;exportResourceReportPoolToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
+  <data name="&gt;&gt;toolStripMenuItemWlb.Name" xml:space="preserve">
+    <value>toolStripMenuItemWlb</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemWlb.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
   <data name="&gt;&gt;wlbReportsToolStripMenuItem.Name" xml:space="preserve">
     <value>wlbReportsToolStripMenuItem</value>
   </data>
@@ -3271,6 +3313,18 @@
     <value>changePoolPasswordToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;changePoolPasswordToolStripMenuItem.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemRotateSecret.Name" xml:space="preserve">
+    <value>toolStripMenuItemRotateSecret</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemRotateSecret.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemEnableTls.Name" xml:space="preserve">
+    <value>toolStripMenuItemEnableTls</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemEnableTls.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem1.Name" xml:space="preserve">
@@ -3428,6 +3482,12 @@
   </data>
   <data name="&gt;&gt;toolStripSeparator23.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemCertificate.Name" xml:space="preserve">
+    <value>toolStripMenuItemCertificate</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemCertificate.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemInstallCertificate.Name" xml:space="preserve">
     <value>toolStripMenuItemInstallCertificate</value>
@@ -4011,10 +4071,10 @@
   <data name="&gt;&gt;statusLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;statusLabelAlerts.Name" xml:space="preserve">
-    <value>statusLabelAlerts</value>
+  <data name="&gt;&gt;statusLabelErrors.Name" xml:space="preserve">
+    <value>statusLabelErrors</value>
   </data>
-  <data name="&gt;&gt;statusLabelAlerts.Type" xml:space="preserve">
+  <data name="&gt;&gt;statusLabelErrors.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;statusLabelUpdates.Name" xml:space="preserve">
@@ -4023,28 +4083,16 @@
   <data name="&gt;&gt;statusLabelUpdates.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;statusLabelErrors.Name" xml:space="preserve">
-    <value>statusLabelErrors</value>
+  <data name="&gt;&gt;statusLabelAlerts.Name" xml:space="preserve">
+    <value>statusLabelAlerts</value>
   </data>
-  <data name="&gt;&gt;statusLabelErrors.Type" xml:space="preserve">
+  <data name="&gt;&gt;statusLabelAlerts.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripMenuItemRotateSecret.Name" xml:space="preserve">
-    <value>toolStripMenuItemRotateSecret</value>
+  <data name="&gt;&gt;toolStripMenuItemResetCertificate.Name" xml:space="preserve">
+    <value>toolStripMenuItemResetCertificate</value>
   </data>
-  <data name="&gt;&gt;toolStripMenuItemRotateSecret.Type" xml:space="preserve">
-    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemHaConfigure.Name" xml:space="preserve">
-    <value>toolStripMenuItemHaConfigure</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemHaConfigure.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemHaDisable.Name" xml:space="preserve">
-    <value>toolStripMenuItemHaDisable</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemHaDisable.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripMenuItemResetCertificate.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

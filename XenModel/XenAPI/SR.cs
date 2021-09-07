@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -123,29 +124,29 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given SR.
         /// </summary>
-        public override void UpdateFrom(SR update)
+        public override void UpdateFrom(SR record)
         {
-            uuid = update.uuid;
-            name_label = update.name_label;
-            name_description = update.name_description;
-            allowed_operations = update.allowed_operations;
-            current_operations = update.current_operations;
-            VDIs = update.VDIs;
-            PBDs = update.PBDs;
-            virtual_allocation = update.virtual_allocation;
-            physical_utilisation = update.physical_utilisation;
-            physical_size = update.physical_size;
-            type = update.type;
-            content_type = update.content_type;
-            shared = update.shared;
-            other_config = update.other_config;
-            tags = update.tags;
-            sm_config = update.sm_config;
-            blobs = update.blobs;
-            local_cache_enabled = update.local_cache_enabled;
-            introduced_by = update.introduced_by;
-            clustered = update.clustered;
-            is_tools_sr = update.is_tools_sr;
+            uuid = record.uuid;
+            name_label = record.name_label;
+            name_description = record.name_description;
+            allowed_operations = record.allowed_operations;
+            current_operations = record.current_operations;
+            VDIs = record.VDIs;
+            PBDs = record.PBDs;
+            virtual_allocation = record.virtual_allocation;
+            physical_utilisation = record.physical_utilisation;
+            physical_size = record.physical_size;
+            type = record.type;
+            content_type = record.content_type;
+            shared = record.shared;
+            other_config = record.other_config;
+            tags = record.tags;
+            sm_config = record.sm_config;
+            blobs = record.blobs;
+            local_cache_enabled = record.local_cache_enabled;
+            introduced_by = record.introduced_by;
+            clustered = record.clustered;
+            is_tools_sr = record.is_tools_sr;
         }
 
         internal void UpdateFrom(Proxy_SR proxy)
@@ -171,33 +172,6 @@ namespace XenAPI
             introduced_by = proxy.introduced_by == null ? null : XenRef<DR_task>.Create(proxy.introduced_by);
             clustered = (bool)proxy.clustered;
             is_tools_sr = (bool)proxy.is_tools_sr;
-        }
-
-        public Proxy_SR ToProxy()
-        {
-            Proxy_SR result_ = new Proxy_SR();
-            result_.uuid = uuid ?? "";
-            result_.name_label = name_label ?? "";
-            result_.name_description = name_description ?? "";
-            result_.allowed_operations = allowed_operations == null ? new string[] {} : Helper.ObjectListToStringArray(allowed_operations);
-            result_.current_operations = Maps.convert_to_proxy_string_storage_operations(current_operations);
-            result_.VDIs = VDIs == null ? new string[] {} : Helper.RefListToStringArray(VDIs);
-            result_.PBDs = PBDs == null ? new string[] {} : Helper.RefListToStringArray(PBDs);
-            result_.virtual_allocation = virtual_allocation.ToString();
-            result_.physical_utilisation = physical_utilisation.ToString();
-            result_.physical_size = physical_size.ToString();
-            result_.type = type ?? "";
-            result_.content_type = content_type ?? "";
-            result_.shared = shared;
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            result_.tags = tags;
-            result_.sm_config = Maps.convert_to_proxy_string_string(sm_config);
-            result_.blobs = Maps.convert_to_proxy_string_XenRefBlob(blobs);
-            result_.local_cache_enabled = local_cache_enabled;
-            result_.introduced_by = introduced_by ?? "";
-            result_.clustered = clustered;
-            result_.is_tools_sr = is_tools_sr;
-            return result_;
         }
 
         /// <summary>
@@ -252,6 +226,33 @@ namespace XenAPI
                 is_tools_sr = Marshalling.ParseBool(table, "is_tools_sr");
         }
 
+        public Proxy_SR ToProxy()
+        {
+            Proxy_SR result_ = new Proxy_SR();
+            result_.uuid = uuid ?? "";
+            result_.name_label = name_label ?? "";
+            result_.name_description = name_description ?? "";
+            result_.allowed_operations = allowed_operations == null ? new string[] {} : Helper.ObjectListToStringArray(allowed_operations);
+            result_.current_operations = Maps.convert_to_proxy_string_storage_operations(current_operations);
+            result_.VDIs = VDIs == null ? new string[] {} : Helper.RefListToStringArray(VDIs);
+            result_.PBDs = PBDs == null ? new string[] {} : Helper.RefListToStringArray(PBDs);
+            result_.virtual_allocation = virtual_allocation.ToString();
+            result_.physical_utilisation = physical_utilisation.ToString();
+            result_.physical_size = physical_size.ToString();
+            result_.type = type ?? "";
+            result_.content_type = content_type ?? "";
+            result_.shared = shared;
+            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
+            result_.tags = tags;
+            result_.sm_config = Maps.convert_to_proxy_string_string(sm_config);
+            result_.blobs = Maps.convert_to_proxy_string_XenRefBlob(blobs);
+            result_.local_cache_enabled = local_cache_enabled;
+            result_.introduced_by = introduced_by ?? "";
+            result_.clustered = clustered;
+            result_.is_tools_sr = is_tools_sr;
+            return result_;
+        }
+
         public bool DeepEquals(SR other, bool ignoreCurrentOperations)
         {
             if (ReferenceEquals(null, other))
@@ -282,15 +283,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._introduced_by, other._introduced_by) &&
                 Helper.AreEqual2(this._clustered, other._clustered) &&
                 Helper.AreEqual2(this._is_tools_sr, other._is_tools_sr);
-        }
-
-        internal static List<SR> ProxyArrayToObjectList(Proxy_SR[] input)
-        {
-            var result = new List<SR>();
-            foreach (var item in input)
-                result.Add(new SR(item));
-
-            return result;
         }
 
         public override string SaveChanges(Session session, string opaqueRef, SR server)
@@ -330,6 +322,7 @@ namespace XenAPI
                 return null;
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given SR.
         /// First published in XenServer 4.0.
@@ -1230,7 +1223,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.sr_probe_ext(session.opaque_ref, _host, _device_config, _type, _sm_config);
             else
-                return Probe_result.ProxyArrayToObjectList(session.XmlRpcProxy.sr_probe_ext(session.opaque_ref, _host ?? "", Maps.convert_to_proxy_string_string(_device_config), _type ?? "", Maps.convert_to_proxy_string_string(_sm_config)).parse());
+                return session.XmlRpcProxy.sr_probe_ext(session.opaque_ref, _host ?? "", Maps.convert_to_proxy_string_string(_device_config), _type ?? "", Maps.convert_to_proxy_string_string(_sm_config)).parse().Select(p => new Probe_result(p)).ToList();
         }
 
         /// <summary>
@@ -1544,7 +1537,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.sr_get_data_sources(session.opaque_ref, _sr);
             else
-                return Data_source.ProxyArrayToObjectList(session.XmlRpcProxy.sr_get_data_sources(session.opaque_ref, _sr ?? "").parse());
+                return session.XmlRpcProxy.sr_get_data_sources(session.opaque_ref, _sr ?? "").parse().Select(p => new Data_source(p)).ToList();
         }
 
         /// <summary>

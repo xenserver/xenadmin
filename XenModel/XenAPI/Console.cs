@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -91,13 +92,13 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given Console.
         /// </summary>
-        public override void UpdateFrom(Console update)
+        public override void UpdateFrom(Console record)
         {
-            uuid = update.uuid;
-            protocol = update.protocol;
-            location = update.location;
-            VM = update.VM;
-            other_config = update.other_config;
+            uuid = record.uuid;
+            protocol = record.protocol;
+            location = record.location;
+            VM = record.VM;
+            other_config = record.other_config;
         }
 
         internal void UpdateFrom(Proxy_Console proxy)
@@ -107,17 +108,6 @@ namespace XenAPI
             location = proxy.location == null ? null : proxy.location;
             VM = proxy.VM == null ? null : XenRef<VM>.Create(proxy.VM);
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
-        }
-
-        public Proxy_Console ToProxy()
-        {
-            Proxy_Console result_ = new Proxy_Console();
-            result_.uuid = uuid ?? "";
-            result_.protocol = console_protocol_helper.ToString(protocol);
-            result_.location = location ?? "";
-            result_.VM = VM ?? "";
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            return result_;
         }
 
         /// <summary>
@@ -140,6 +130,17 @@ namespace XenAPI
                 other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
         }
 
+        public Proxy_Console ToProxy()
+        {
+            Proxy_Console result_ = new Proxy_Console();
+            result_.uuid = uuid ?? "";
+            result_.protocol = console_protocol_helper.ToString(protocol);
+            result_.location = location ?? "";
+            result_.VM = VM ?? "";
+            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
+            return result_;
+        }
+
         public bool DeepEquals(Console other)
         {
             if (ReferenceEquals(null, other))
@@ -152,15 +153,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._location, other._location) &&
                 Helper.AreEqual2(this._VM, other._VM) &&
                 Helper.AreEqual2(this._other_config, other._other_config);
-        }
-
-        internal static List<Console> ProxyArrayToObjectList(Proxy_Console[] input)
-        {
-            var result = new List<Console>();
-            foreach (var item in input)
-                result.Add(new Console(item));
-
-            return result;
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Console server)
@@ -180,6 +172,7 @@ namespace XenAPI
                 return null;
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given console.
         /// First published in XenServer 4.0.

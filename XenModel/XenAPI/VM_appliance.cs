@@ -34,6 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -93,14 +94,14 @@ namespace XenAPI
         /// Updates each field of this instance with the value of
         /// the corresponding field of a given VM_appliance.
         /// </summary>
-        public override void UpdateFrom(VM_appliance update)
+        public override void UpdateFrom(VM_appliance record)
         {
-            uuid = update.uuid;
-            name_label = update.name_label;
-            name_description = update.name_description;
-            allowed_operations = update.allowed_operations;
-            current_operations = update.current_operations;
-            VMs = update.VMs;
+            uuid = record.uuid;
+            name_label = record.name_label;
+            name_description = record.name_description;
+            allowed_operations = record.allowed_operations;
+            current_operations = record.current_operations;
+            VMs = record.VMs;
         }
 
         internal void UpdateFrom(Proxy_VM_appliance proxy)
@@ -111,18 +112,6 @@ namespace XenAPI
             allowed_operations = proxy.allowed_operations == null ? null : Helper.StringArrayToEnumList<vm_appliance_operation>(proxy.allowed_operations);
             current_operations = proxy.current_operations == null ? null : Maps.convert_from_proxy_string_vm_appliance_operation(proxy.current_operations);
             VMs = proxy.VMs == null ? null : XenRef<VM>.Create(proxy.VMs);
-        }
-
-        public Proxy_VM_appliance ToProxy()
-        {
-            Proxy_VM_appliance result_ = new Proxy_VM_appliance();
-            result_.uuid = uuid ?? "";
-            result_.name_label = name_label ?? "";
-            result_.name_description = name_description ?? "";
-            result_.allowed_operations = allowed_operations == null ? new string[] {} : Helper.ObjectListToStringArray(allowed_operations);
-            result_.current_operations = Maps.convert_to_proxy_string_vm_appliance_operation(current_operations);
-            result_.VMs = VMs == null ? new string[] {} : Helper.RefListToStringArray(VMs);
-            return result_;
         }
 
         /// <summary>
@@ -147,6 +136,18 @@ namespace XenAPI
                 VMs = Marshalling.ParseSetRef<VM>(table, "VMs");
         }
 
+        public Proxy_VM_appliance ToProxy()
+        {
+            Proxy_VM_appliance result_ = new Proxy_VM_appliance();
+            result_.uuid = uuid ?? "";
+            result_.name_label = name_label ?? "";
+            result_.name_description = name_description ?? "";
+            result_.allowed_operations = allowed_operations == null ? new string[] {} : Helper.ObjectListToStringArray(allowed_operations);
+            result_.current_operations = Maps.convert_to_proxy_string_vm_appliance_operation(current_operations);
+            result_.VMs = VMs == null ? new string[] {} : Helper.RefListToStringArray(VMs);
+            return result_;
+        }
+
         public bool DeepEquals(VM_appliance other, bool ignoreCurrentOperations)
         {
             if (ReferenceEquals(null, other))
@@ -162,15 +163,6 @@ namespace XenAPI
                 Helper.AreEqual2(this._name_description, other._name_description) &&
                 Helper.AreEqual2(this._allowed_operations, other._allowed_operations) &&
                 Helper.AreEqual2(this._VMs, other._VMs);
-        }
-
-        internal static List<VM_appliance> ProxyArrayToObjectList(Proxy_VM_appliance[] input)
-        {
-            var result = new List<VM_appliance>();
-            foreach (var item in input)
-                result.Add(new VM_appliance(item));
-
-            return result;
         }
 
         public override string SaveChanges(Session session, string opaqueRef, VM_appliance server)
@@ -194,6 +186,7 @@ namespace XenAPI
                 return null;
             }
         }
+
         /// <summary>
         /// Get a record containing the current state of the given VM_appliance.
         /// First published in XenServer 6.0.
