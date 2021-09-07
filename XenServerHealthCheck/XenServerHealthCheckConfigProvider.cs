@@ -88,6 +88,11 @@ namespace XenServerHealthCheck
             return timeout ? Properties.Settings.Default.HttpTimeout : 0;
         }
 
+        public string GetCustomTokenUrl()
+        {
+            return string.Empty;
+        }
+
         public IWebProxy GetProxyFromSettings(IXenConnection connection)
         {
             return GetProxyFromSettings(connection, true);

@@ -61,9 +61,10 @@ namespace CFUValidator
         private readonly OptionUsage UrlOrFile;
         private readonly List<string> _installedHotfixes;
         private readonly bool _checkHotfixContents;
+        private readonly IConfigProvider _configProvider;
 
         public CFUValidator(OptionUsage urlOrFile, string xmlLocation, string serverVersion,
-            List<string> installedHotfixes, bool checkHotfixContents)
+            List<string> installedHotfixes, bool checkHotfixContents, IConfigProvider configProvider)
         {
             if (urlOrFile != OptionUsage.File && urlOrFile != OptionUsage.Url)
                 throw new ArgumentException("urlOrFile option should be either File or Url");
@@ -75,6 +76,7 @@ namespace CFUValidator
             _installedHotfixes = installedHotfixes;
             UrlOrFile = urlOrFile;
             _checkHotfixContents = checkHotfixContents;
+            _configProvider = configProvider;
         }
 
         public void Validate(Action<string> statusReporter)
@@ -125,7 +127,7 @@ namespace CFUValidator
             };
 
             if (_checkHotfixContents)
-                validators.Add(new ZipContentsValidator(patchAlerts));
+                validators.Add(new ZipContentsValidator(patchAlerts, _configProvider));
 
             validators.ForEach(v => v.Validate(statusReporter));
 

@@ -5831,6 +5831,24 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="FILESERVICE_CLIENTID_TITLE" xml:space="preserve">
     <value>Select Client ID file.</value>
   </data>
+  <data name="FILESERVICE_AUTHENTICATE_ERROR" xml:space="preserve">
+    <value>Could not authenticate your [Citrix] account.</value>
+  </data>
+  <data name="FILESERVICE_ERROR_400" xml:space="preserve">
+    <value>Received a bad request.</value>
+  </data>
+  <data name="FILESERVICE_ERROR_401" xml:space="preserve">
+    <value>Ensure the Client ID you have specified is valid and has not been revoked.</value>
+  </data>
+  <data name="FILESERVICE_ERROR_403" xml:space="preserve">
+    <value>Your current subscription is insufficient for downloading this update.</value>
+  </data>
+  <data name="FILESERVICE_ERROR_404" xml:space="preserve">
+    <value>Could not download the update. The file was not found.</value>
+  </data>
+  <data name="FILESERVICE_ERROR_500" xml:space="preserve">
+    <value>The authentication server has encountered a situation it doesn't know how to handle.</value>
+  </data> 
   <data name="FILE_ALL" xml:space="preserve">
     <value>All files</value>
   </data>
