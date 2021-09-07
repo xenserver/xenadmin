@@ -241,6 +241,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to https://fileservice.citrix.com/api/session/token.
+        /// </summary>
+        public static string TOKEN_API_URL {
+            get {
+                return ResourceManager.GetString("TOKEN_API_URL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to https://www.citrix.com/products/citrix-hypervisor/get-started.html.
         /// </summary>
         public static string UPSELL_LEARNMOREURL_TRIAL {

@@ -224,6 +224,11 @@ namespace XenAdmin
             return Registry.GetCustomFileServicePrefix();
         }
 
+        public string GetCustomTokenUrl()
+        {
+            return Registry.GetCustomTokenUrl();
+        }
+
         public string FileServiceUsername => EncryptionUtils.Unprotect(Properties.Settings.Default.FileServiceUsername);
 
         public string FileServiceClientId => EncryptionUtils.Unprotect(Properties.Settings.Default.FileServiceClientId);

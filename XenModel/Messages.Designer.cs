@@ -16665,6 +16665,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not authenticate your [Citrix] account..
+        /// </summary>
+        public static string FILESERVICE_AUTHENTICATE_ERROR {
+            get {
+                return ResourceManager.GetString("FILESERVICE_AUTHENTICATE_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Client ID file (*.json)|*.json.
         /// </summary>
         public static string FILESERVICE_CLIENTID_FILETYPE {
@@ -16706,6 +16715,51 @@ namespace XenAdmin {
         public static string FILESERVICE_CLIENTID_TITLE {
             get {
                 return ResourceManager.GetString("FILESERVICE_CLIENTID_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Received a bad request..
+        /// </summary>
+        public static string FILESERVICE_ERROR_400 {
+            get {
+                return ResourceManager.GetString("FILESERVICE_ERROR_400", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ensure the Client ID you have specified is valid and has not been revoked..
+        /// </summary>
+        public static string FILESERVICE_ERROR_401 {
+            get {
+                return ResourceManager.GetString("FILESERVICE_ERROR_401", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your current subscription is insufficient for downloading this update..
+        /// </summary>
+        public static string FILESERVICE_ERROR_403 {
+            get {
+                return ResourceManager.GetString("FILESERVICE_ERROR_403", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not download the update. The file was not found..
+        /// </summary>
+        public static string FILESERVICE_ERROR_404 {
+            get {
+                return ResourceManager.GetString("FILESERVICE_ERROR_404", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The authentication server has encountered a situation it doesn&apos;t know how to handle..
+        /// </summary>
+        public static string FILESERVICE_ERROR_500 {
+            get {
+                return ResourceManager.GetString("FILESERVICE_ERROR_500", resourceCulture);
             }
         }
         

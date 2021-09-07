@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CLIENT_ID_URL" xml:space="preserve">
-    <value>http://support.citrix.com/xencenterclientiddownload</value>
+    <value>https://support.citrix.com/xencenterclientiddownload</value>
   </data>
   <data name="HEALTH_CHECK_PRIVACY_STATEMENT_URL" xml:space="preserve">
     <value>https://cis.citrix.com/legal/</value>
@@ -191,5 +191,8 @@
   </data>
   <data name="DEPRECATION_URL" xml:space="preserve">
     <value>http://docs.citrix.com/en-us/citrix-hypervisor/whats-new/removed-features.html</value>
+  </data>
+  <data name="TOKEN_API_URL" xml:space="preserve">
+    <value>https://fileservice.citrix.com/api/session/token</value>
   </data>
 </root>

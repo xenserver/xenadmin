@@ -32,9 +32,8 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using System.IO;
 using XenAdmin;
-using XenAdmin.Actions;
+using XenAdmin.Actions.Updates;
 using XenAdmin.Alerts;
 using XenAdmin.Core;
 
@@ -43,10 +42,12 @@ namespace CFUValidator.Validators
     class ZipContentsValidator : Validator
     {
         private readonly List<XenServerPatchAlert> alerts;
+        private IConfigProvider _configProvider;
 
-        public ZipContentsValidator(List<XenServerPatchAlert> alerts)
+        public ZipContentsValidator(List<XenServerPatchAlert> alerts, IConfigProvider configProvider)
         {
             this.alerts = alerts;
+            _configProvider = configProvider;
         }
 
         protected override string Header => "Downloading and checking the contents of the zip files in the patch...";
@@ -57,9 +58,16 @@ namespace CFUValidator.Validators
 
         protected override void ValidateCore(Action<string> statusReporter)
         {
-            foreach (XenServerPatchAlert alert in alerts.OrderBy(a => a.Patch.Name))
+            try
             {
-                DownloadPatchFile(alert, statusReporter);
+                TokenManager.GetToken(_configProvider);
+
+                foreach (XenServerPatchAlert alert in alerts.OrderBy(a => a.Patch.Name))
+                    DownloadPatchFile(alert, statusReporter);
+            }
+            finally
+            {
+                TokenManager.InvalidateToken(_configProvider);
             }
         }
 
@@ -71,10 +79,8 @@ namespace CFUValidator.Validators
                 return;
             }
 
-            string tempFileName = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
-
             var action = new DownloadAndUnzipXenServerPatchAction(patch.Patch.Name, new Uri(patch.Patch.PatchUrl),
-                tempFileName, false, BrandManager.ExtensionUpdate, InvisibleMessages.ISO_UPDATE);
+                BrandManager.ExtensionUpdate, InvisibleMessages.ISO_UPDATE);
 
             try
             {
