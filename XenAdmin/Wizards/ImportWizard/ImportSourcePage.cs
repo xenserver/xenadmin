@@ -754,11 +754,14 @@ namespace XenAdmin.Wizards.ImportWizard
                             int index = _uri.OriginalString.LastIndexOf('/') + 1;
                             var remoteDir = _uri.OriginalString.Substring(0, index);
 
-                            foreach (var file in envType.References.File)
+                            if (envType.References.File != null)
                             {
-                                var remoteUri = new Uri(remoteDir + file.href);
-                                var localPath = Path.Combine(_downloadFolder, file.href);
-                                _filesToDownload.Enqueue(new ApplianceFile(remoteUri, localPath));
+                                foreach (var file in envType.References.File)
+                                {
+                                    var remoteUri = new Uri(remoteDir + file.href);
+                                    var localPath = Path.Combine(_downloadFolder, file.href);
+                                    _filesToDownload.Enqueue(new ApplianceFile(remoteUri, localPath));
+                                }
                             }
                         }
                     }
