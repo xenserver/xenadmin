@@ -150,6 +150,7 @@ namespace XenOvf
                 }
                 catch
                 {
+                    // ignored
                 }
             }
         }

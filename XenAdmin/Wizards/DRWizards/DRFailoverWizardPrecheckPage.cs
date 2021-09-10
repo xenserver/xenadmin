@@ -221,7 +221,10 @@ namespace XenAdmin.Wizards.DRWizards
                 int step = (int)((1.0 / ((float)_numberChecks)) * e.ProgressPercentage);
                 progressBar1.Value += (step + progressBar1.Value) > 100 ? 0 : step;
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+                // ignored
+            }
         }
 
         private DataGridViewRow RunCheck(Check check)

@@ -527,6 +527,7 @@ namespace CommandLib
                 }
                 catch
                 {
+                    // ignored
                 }
             }
 

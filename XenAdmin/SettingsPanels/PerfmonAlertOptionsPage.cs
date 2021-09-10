@@ -156,8 +156,11 @@ namespace XenAdmin.SettingsPanels
                     _OrigMailLanguageCode = null;
                 }
             }
-            catch { }
-        } // Repopulate()
+            catch
+            {
+                // ignored
+            }
+        }
 
         public bool HasChanged
         {

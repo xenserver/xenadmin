@@ -398,6 +398,7 @@ namespace XenAdmin.ConsoleView
                     }
                     catch
                     {
+                        // ignored
                     }
 
                     return;
@@ -467,6 +468,7 @@ namespace XenAdmin.ConsoleView
                 }
                 catch
                 {
+                    // ignored
                 }
                 finally
                 {
@@ -550,6 +552,7 @@ namespace XenAdmin.ConsoleView
                 }
                 catch
                 {
+                    // ignored
                 }
             }
 

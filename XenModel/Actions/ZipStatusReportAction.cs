@@ -116,6 +116,7 @@ namespace XenAdmin.Actions
                         }
                         catch
                         {
+                            // ignored
                         }
                     }
                     else

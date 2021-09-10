@@ -562,8 +562,8 @@ namespace XenAdmin.Controls.Wlb
             }
             catch (Exception)
             {
+                // ignored
             }
-
         }
        
         private void DrawTriggerPoint(Graphics graphics, TriggerPoint triggerPoint)

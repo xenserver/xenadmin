@@ -531,6 +531,7 @@ namespace XenAdmin
                 }
                 catch (Exception)
                 {
+                    // ignored
                 }
 
                 if (!RunInAutomatedTestMode)

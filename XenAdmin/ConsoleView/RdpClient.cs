@@ -355,6 +355,7 @@ namespace XenAdmin.ConsoleView
             }
             catch
             {
+                // ignored
             }
 
             try
@@ -363,6 +364,7 @@ namespace XenAdmin.ConsoleView
             }
             catch
             {
+                // ignored
             }
         }
 

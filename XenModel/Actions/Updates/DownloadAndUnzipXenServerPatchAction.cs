@@ -240,7 +240,10 @@ namespace XenAdmin.Actions
                 if (downloadUpdate)
                 {
                     try { File.Delete(outputFileName); }
-                    catch { }
+                    catch
+                    {
+                        // ignored
+                    }
                 }
             }
 

@@ -104,6 +104,7 @@ namespace XenAdmin.Wizards.DRWizards
             }
             catch (Exception)
             {
+                // ignored
             }
         }
 

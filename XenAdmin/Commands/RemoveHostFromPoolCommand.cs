@@ -186,7 +186,7 @@ namespace XenAdmin.Commands
                     }
                     catch (Exception)
                     {
-
+                        // ignored
                     }
 
                     if (socket.Connected)

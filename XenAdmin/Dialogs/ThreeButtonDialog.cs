@@ -276,7 +276,10 @@ namespace XenAdmin.Dialogs
             {
                 System.Diagnostics.Process.Start(e.Link.LinkData.ToString());
             }
-            catch { }  // Best effort
+            catch
+            {
+                // Best effort
+            } 
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -288,7 +291,10 @@ namespace XenAdmin.Dialogs
                 else if (LinkAction != null)
                     LinkAction.Invoke();
             }
-            catch { }
+            catch
+            {
+                // ignored
+            }
         }
     }
 
