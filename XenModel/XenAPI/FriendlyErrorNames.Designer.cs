@@ -259,7 +259,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This PIF is a bond slave and cannot have a tunnel on it..
+        ///   Looks up a localized string similar to This PIF is a bond member and cannot have a tunnel on it..
         /// </summary>
         public static string CANNOT_ADD_TUNNEL_TO_BOND_SLAVE {
             get {
@@ -286,7 +286,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This PIF is a bond slave and cannot have a VLAN on it..
+        ///   Looks up a localized string similar to This PIF is a bond member and cannot have a VLAN on it..
         /// </summary>
         public static string CANNOT_ADD_VLAN_TO_BOND_SLAVE {
             get {
@@ -412,7 +412,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This PIF is a bond slave and cannot be plugged..
+        ///   Looks up a localized string similar to This PIF is a bond member and cannot be plugged..
         /// </summary>
         public static string CANNOT_PLUG_BOND_SLAVE {
             get {
@@ -1222,7 +1222,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The server that you are talking to is a slave.
+        ///   Looks up a localized string similar to The server that you are talking to is a pool member.
         /// </summary>
         public static string HOST_IS_SLAVE {
             get {
@@ -1231,7 +1231,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The host is its own slave. Please use pool-emergency-transition-to-master or pool-emergency-reset-master..
+        ///   Looks up a localized string similar to The host is its own pool member. Please use pool-emergency-transition-to-master or pool-emergency-reset-master..
         /// </summary>
         public static string HOST_ITS_OWN_SLAVE {
             get {
@@ -1240,7 +1240,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The master reports that it cannot talk back to the slave on the supplied management IP address..
+        ///   Looks up a localized string similar to The master reports that it cannot talk back to the pool member on the supplied management IP address..
         /// </summary>
         public static string HOST_MASTER_CANNOT_TALK_BACK {
             get {
@@ -2118,6 +2118,15 @@ namespace XenAPI {
         public static string NOT_SYSTEM_DOMAIN {
             get {
                 return ResourceManager.GetString("NOT_SYSTEM_DOMAIN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The NVidia GPU is not configured for SR-IOV as expected.
+        /// </summary>
+        public static string NVIDIA_SRIOV_MISCONFIGURED {
+            get {
+                return ResourceManager.GetString("NVIDIA_SRIOV_MISCONFIGURED", resourceCulture);
             }
         }
         
@@ -3099,7 +3108,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The management interface on a slave cannot be disabled because the slave would enter emergency mode..
+        ///   Looks up a localized string similar to The management interface on a pool member cannot be disabled because the pool member would enter emergency mode..
         /// </summary>
         public static string SLAVE_REQUIRES_MANAGEMENT_INTERFACE {
             get {
@@ -5687,6 +5696,15 @@ namespace XenAPI {
         public static string VGPU_GUEST_DRIVER_LIMIT {
             get {
                 return ResourceManager.GetString("VGPU_GUEST_DRIVER_LIMIT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The VGPU configuration does not support suspension..
+        /// </summary>
+        public static string VGPU_SUSPENSION_NOT_SUPPORTED {
+            get {
+                return ResourceManager.GetString("VGPU_SUSPENSION_NOT_SUPPORTED", resourceCulture);
             }
         }
         
