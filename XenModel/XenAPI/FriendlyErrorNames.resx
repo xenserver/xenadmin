@@ -184,7 +184,7 @@
     <value>Could not find bridge required by VM.</value>
   </data>
   <data name="CANNOT_ADD_TUNNEL_TO_BOND_SLAVE" xml:space="preserve">
-    <value>This PIF is a bond slave and cannot have a tunnel on it.</value>
+    <value>This PIF is a bond member and cannot have a tunnel on it.</value>
   </data>
   <data name="CANNOT_ADD_TUNNEL_TO_SRIOV_LOGICAL" xml:space="preserve">
     <value>This is a network SR-IOV logical PIF and cannot have a tunnel on it.</value>
@@ -193,7 +193,7 @@
     <value>This is a vlan PIF on network SR-IOV and cannot have a tunnel on it.</value>
   </data>
   <data name="CANNOT_ADD_VLAN_TO_BOND_SLAVE" xml:space="preserve">
-    <value>This PIF is a bond slave and cannot have a VLAN on it.</value>
+    <value>This PIF is a bond member and cannot have a VLAN on it.</value>
   </data>
   <data name="CANNOT_CHANGE_PIF_PROPERTIES" xml:space="preserve">
     <value>This properties of this PIF cannot be changed. Only the properties of non-bonded physical PIFs, or bond masters can be changed.</value>
@@ -235,7 +235,7 @@
     <value>This is a network SR-IOV logical PIF and cannot do forget on it</value>
   </data>
   <data name="CANNOT_PLUG_BOND_SLAVE" xml:space="preserve">
-    <value>This PIF is a bond slave and cannot be plugged.</value>
+    <value>This PIF is a bond member and cannot be plugged.</value>
   </data>
   <data name="CANNOT_PLUG_VIF" xml:space="preserve">
     <value>This VM cannot be started because its network interfaces could not be connected.  One of the NICs is in use elsewhere.</value>
@@ -511,13 +511,13 @@
     <value>This operation cannot be completed because the server is still live.</value>
   </data>
   <data name="HOST_IS_SLAVE" xml:space="preserve">
-    <value>The server that you are talking to is a slave</value>
+    <value>The server that you are talking to is a pool member</value>
   </data>
   <data name="HOST_ITS_OWN_SLAVE" xml:space="preserve">
-    <value>The host is its own slave. Please use pool-emergency-transition-to-master or pool-emergency-reset-master.</value>
+    <value>The host is its own pool member. Please use pool-emergency-transition-to-master or pool-emergency-reset-master.</value>
   </data>
   <data name="HOST_MASTER_CANNOT_TALK_BACK" xml:space="preserve">
-    <value>The master reports that it cannot talk back to the slave on the supplied management IP address.</value>
+    <value>The master reports that it cannot talk back to the pool member on the supplied management IP address.</value>
   </data>
   <data name="HOST_NAME_INVALID" xml:space="preserve">
     <value>The server name is invalid.</value>
@@ -803,6 +803,9 @@
   </data>
   <data name="NO_MORE_REDO_LOGS_ALLOWED" xml:space="preserve">
     <value>The upper limit of active redo log instances was reached.</value>
+  </data>
+  <data name="NVIDIA_SRIOV_MISCONFIGURED" xml:space="preserve">
+    <value>The NVidia GPU is not configured for SR-IOV as expected</value>
   </data>
   <data name="NVIDIA_TOOLS_ERROR" xml:space="preserve">
     <value>Nvidia tools error. Please ensure that the latest Nvidia tools are installed</value>
@@ -1134,7 +1137,7 @@ Authorized Roles: {1}</value>
     <value>This session {0} is not registered to receive events.  You must call event.register before event.next.  The session handle you are using is echoed.</value>
   </data>
   <data name="SLAVE_REQUIRES_MANAGEMENT_INTERFACE" xml:space="preserve">
-    <value>The management interface on a slave cannot be disabled because the slave would enter emergency mode.</value>
+    <value>The management interface on a pool member cannot be disabled because the pool member would enter emergency mode.</value>
   </data>
   <data name="SM_PLUGIN_COMMUNICATION_FAILURE" xml:space="preserve">
     <value>The SM plug-in did not respond to a query.</value>
@@ -1996,6 +1999,9 @@ Authorized Roles: {1}</value>
   </data>
   <data name="VGPU_GUEST_DRIVER_LIMIT" xml:space="preserve">
     <value>The guest driver does not support VGPU migration.</value>
+  </data>
+  <data name="VGPU_SUSPENSION_NOT_SUPPORTED" xml:space="preserve">
+    <value>The VGPU configuration does not support suspension.</value>
   </data>
   <data name="VGPU_TYPE_NOT_COMPATIBLE" xml:space="preserve">
     <value>Cannot create a virtual GPU that is incompatible with the existing types on the VM.</value>
