@@ -274,9 +274,11 @@ namespace XenAdmin.Wizards.NewVMWizard
             DisksGridView.Enabled = DisksRadioButton.Checked;
             DisklessVMRadioButton.Enabled = Template.IsHVM() && SelectedInstallMethod == InstallMethod.Network;
 
-            CloneCheckBox.Enabled = false;
+            bool isDefaultTemplate = Template.DefaultTemplate();
+            bool isSnapshot = Template.is_a_snapshot;
+            bool createOnSameSr = false;
 
-            if (!Template.DefaultTemplate())
+            if (!isDefaultTemplate)
             {
                 foreach (DiskGridRowItem row in DisksGridView.Rows)
                 {
@@ -286,19 +288,15 @@ namespace XenAdmin.Wizards.NewVMWizard
 
                         if (row.SourceSR.Equals(dest))
                         {
-                            CloneCheckBox.Enabled = true;
-
-                            if (pageLoad)
-                                CloneCheckBox.Checked = true;
-
+                            createOnSameSr = true;
                             break;
                         }
                     }
                 }
             }
 
-            if (!CloneCheckBox.Enabled)
-                CloneCheckBox.Checked = false;
+            CloneCheckBox.Enabled = createOnSameSr && !isSnapshot;
+            CloneCheckBox.Checked = createOnSameSr && (isSnapshot || pageLoad);
 
             OnPageUpdated();
         }
