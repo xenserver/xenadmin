@@ -10408,7 +10408,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Optionally, assign the VMs a &amp;home server in the destination pool:.
+        ///   Looks up a localized string similar to Optionally, assign the VM(s) a &amp;home server in the destination pool:.
         /// </summary>
         public static string CPM_WIZARD_DESTINATION_TABLE_INTRO {
             get {
@@ -10417,11 +10417,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Optionally, assign the VM a &amp;home server in the destination pool:.
+        ///   Looks up a localized string similar to Optionally, assign the template(s) a &amp;home server in the destination pool:.
         /// </summary>
-        public static string CPM_WIZARD_DESTINATION_TABLE_INTRO_SINGLE {
+        public static string CPM_WIZARD_DESTINATION_TABLE_INTRO_TEMPLATES {
             get {
-                return ResourceManager.GetString("CPM_WIZARD_DESTINATION_TABLE_INTRO_SINGLE", resourceCulture);
+                return ResourceManager.GetString("CPM_WIZARD_DESTINATION_TABLE_INTRO_TEMPLATES", resourceCulture);
             }
         }
         
