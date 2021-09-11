@@ -129,8 +129,8 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         protected override string TargetServerText => Messages.CPM_WIZARD_DESTINATION_DESTINATION;
 
         protected override string TargetServerSelectionIntroText =>
-            selectedVMs != null && selectedVMs.Count == 1
-                ? Messages.CPM_WIZARD_DESTINATION_TABLE_INTRO_SINGLE
+            TemplatesOnly
+                ? Messages.CPM_WIZARD_DESTINATION_TABLE_INTRO_TEMPLATES
                 : Messages.CPM_WIZARD_DESTINATION_TABLE_INTRO;
 
         protected override DelayLoadingOptionComboBoxItem CreateDelayLoadingOptionComboBoxItem(IXenObject xenItem)
