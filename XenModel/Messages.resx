@@ -3809,10 +3809,10 @@ This action cannot be undone. Are you sure you want to continue?</value>
     <value>Select the pool or standalone server where you want to move the selected VM to.</value>
   </data>
   <data name="CPM_WIZARD_DESTINATION_TABLE_INTRO" xml:space="preserve">
-    <value>Optionally, assign the VMs a &amp;home server in the destination pool:</value>
+    <value>Optionally, assign the VM(s) a &amp;home server in the destination pool:</value>
   </data>
-  <data name="CPM_WIZARD_DESTINATION_TABLE_INTRO_SINGLE" xml:space="preserve">
-    <value>Optionally, assign the VM a &amp;home server in the destination pool:</value>
+  <data name="CPM_WIZARD_DESTINATION_TABLE_INTRO_TEMPLATES" xml:space="preserve">
+    <value>Optionally, assign the template(s) a &amp;home server in the destination pool:</value>
   </data>
   <data name="CPM_WIZARD_DESTINATION_TAB_TITLE" xml:space="preserve">
     <value>Destination Pool</value>
