@@ -711,18 +711,10 @@ namespace XenAdmin.ConsoleView
                 }
                 else if (source.power_state == vm_power_state.Paused)
                 {
-                    if (source.allowed_operations.Contains(vm_operations.unpause))
-                    {
-                        //EnablePowerStateLabel(Messages.CONSOLE_POWER_STATE_PAUSED_UNPAUSE);
-                        // CA-12637: Pause/UnPause is not supported in the GUI.  Comment out
-                        // the EnablePowerStateLabel because it gives the appearance that we
-                        // support unpause via the GUI.
-                        DisablePowerStateLabel(Messages.CONSOLE_POWER_STATE_PAUSED);
-                    }
-                    else
-                    {
-                        DisablePowerStateLabel(Messages.CONSOLE_POWER_STATE_PAUSED);
-                    }
+                    // CA-12637: Pause/UnPause is not supported in the GUI.  Comment out
+                    // the EnablePowerStateLabel because it gives the appearance that we
+                    // support unpause via the GUI.
+                    DisablePowerStateLabel(Messages.CONSOLE_POWER_STATE_PAUSED);
                 }
                 else if (source.power_state == vm_power_state.Suspended)
                 {
