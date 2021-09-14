@@ -246,11 +246,11 @@ namespace XenAdmin.Actions
         }
 
         // Returns a set of params which relate to the object you have selected in the treeview
-        private List<string> RetrieveParams(IXenObject obj)
+        private IEnumerable<string> RetrieveParams(IXenObject obj)
         {
-            IXenConnection connection = obj.Connection;
-            Host coordinator = connection != null ? Helpers.GetCoordinator(connection) : null; // get coordinator asserts connection is not null
-            string coordinatorAddress = EmptyParameter;
+            var connection = obj.Connection;
+            var coordinator = connection != null ? Helpers.GetCoordinator(connection) : null; // get coordinator asserts connection is not null
+            var coordinatorAddress = EmptyParameter;
 
             if (coordinator != null)
             {
@@ -258,9 +258,9 @@ namespace XenAdmin.Actions
                 WriteTrustedCertificates(coordinator.Connection);
             }
 
-            string sessionRef = connection.Session != null ? connection.Session.opaque_ref : EmptyParameter;
-            string objCls = obj != null ? obj.GetType().Name : EmptyParameter;
-            string objUuid = obj != null && connection.Session != null ? Helpers.GetUuid(obj) : EmptyParameter;
+            var sessionRef = connection?.Session != null ? connection.Session.opaque_ref : EmptyParameter;
+            var objCls = obj.GetType().Name;
+            var objUuid = connection?.Session != null ? Helpers.GetUuid(obj) : EmptyParameter;
             return new List<string>(new string[] { coordinatorAddress, sessionRef, objCls, objUuid });
         }
 
