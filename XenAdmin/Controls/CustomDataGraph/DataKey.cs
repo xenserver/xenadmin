@@ -300,11 +300,7 @@ namespace XenAdmin.Controls.CustomDataGraph
         {
             get
             {
-                foreach (DataSet s in Sets.Values)
-                {
-                    return s.CustomYRange;
-                }
-                return null;
+                return Sets.Values.Select(s => s.CustomYRange).FirstOrDefault();
             }
         }
 
