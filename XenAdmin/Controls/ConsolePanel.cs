@@ -310,10 +310,9 @@ namespace XenAdmin.Controls
 
             // find the <VM, VNCView> pair in vncViews and start timer on the vm
             var views = vncViews.Where(kvp => kvp.Value == vncView).ToList();
-            foreach (var kvp in views)
+            if (views.Count > 0)
             {
-                StartCloseVNCTimer(kvp.Key);
-                break;
+                StartCloseVNCTimer(views.First().Key);
             }
         }
 
