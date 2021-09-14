@@ -99,16 +99,17 @@ namespace XenAdmin.Commands
 
                 IXenConnection connection = null;
 
-                bool atLeastOneCanRun = false;
-                foreach (SelectedItem item in selection)
+                var atLeastOneCanRun = false;
+                foreach (var item in selection)
                 {
-                    VM vm = (VM)item.XenObject;
+                    var vm = (VM)item.XenObject;
 
                     // all VMs must be on the same connection
                     if (connection != null && vm.Connection != connection)
                     {
                         return false;
                     }
+                    connection = vm.Connection;
 
                     if (CanRun(item))
                     {
