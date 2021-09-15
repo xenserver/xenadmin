@@ -476,20 +476,6 @@ namespace XenAdmin
             }
         }
 
-        public static void ThrowIfEnumerableParameterNullOrEmpty(IEnumerable value, string name)
-        {
-            ThrowIfParameterNull(value, name);
-
-#pragma warning disable 0168
-            foreach (object _ in value)
-            {
-                return;
-            }
-#pragma warning restore 0168
-
-            ThrowBecauseZeroLength(name);
-        }
-
         private static void ThrowBecauseZeroLength(string name)
         {
             throw new ArgumentException(string.Format("{0} cannot have 0 length.", name), name);

@@ -167,7 +167,7 @@ namespace XenAdmin.Commands
                 retrieveVmRecommendationsAction.Completed += delegate
                 {
                     if (Stopped || retrieveVmRecommendationsAction.Cancelled ||
-                        !retrieveVmRecommendationsAction.Succeeded)
+                        !retrieveVmRecommendationsAction.Succeeded || vms == null || vms.Count  == 0)
                         return;
 
                     var recommendations = new WlbRecommendations(vms, retrieveVmRecommendationsAction.Recommendations);

@@ -65,9 +65,11 @@ namespace XenAdmin.Actions
             Action<List<LicenseFailure>, string> DoOnLicensingFailure)
             : base(null, Messages.LICENSE_UPDATING_LICENSES)
         {
-            LicenseFailures = new List<LicenseFailure>();
-            Util.ThrowIfEnumerableParameterNullOrEmpty(xos, "xenobjects");
+            if (xos == null || !xos.Any())
+                throw new ArgumentException(@"Parameter cannot be null or empty", nameof(xos));
 
+            LicenseFailures = new List<LicenseFailure>();
+            
             _edition = edition;
             this.xos = xos;
             _licenseServerAddress = licenseServerAddress;
