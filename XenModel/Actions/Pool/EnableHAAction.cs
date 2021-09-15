@@ -49,12 +49,10 @@ namespace XenAdmin.Actions
         public EnableHAAction(Pool pool, Dictionary<VM, VMStartupOptions> startupOptions, List<SR> heartbeatSRs, long failuresToTolerate)
             : base(pool.Connection, string.Format(Messages.ENABLING_HA_ON, Helpers.GetName(pool).Ellipsise(50)), Messages.ENABLING_HA, false)
         {
-            if (pool == null)
-                throw new ArgumentNullException("pool");
             if (heartbeatSRs.Count == 0)
                 throw new ArgumentException("You must specify at least 1 heartbeat SR");
 
-            this.Pool = pool;
+            Pool = pool;
             this.startupOptions = startupOptions;
             this.heartbeatSRs = heartbeatSRs.ToArray();
             this.failuresToTolerate = failuresToTolerate;

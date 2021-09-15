@@ -57,8 +57,6 @@ namespace XenAdmin.Actions
         public CheckDiskSpaceForPatchUploadAction(Host host, string fileName, long size, bool suppressHistory)
             : base(host.Connection, Messages.ACTION_CHECK_DISK_SPACE_TITLE, "", suppressHistory)
         {
-            if (host == null)
-                throw new ArgumentNullException("host");
             Host = host;
             this.fileName = fileName;
             fileSize = size;
