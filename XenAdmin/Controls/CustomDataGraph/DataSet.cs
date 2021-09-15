@@ -478,19 +478,15 @@ namespace XenAdmin.Controls.CustomDataGraph
 
         public override bool Equals(object obj)
         {
-            if(!(obj is DataSet))
-                return base.Equals(obj);
-
-            DataSet other = (DataSet)obj;
+            if (!(obj is DataSet other))
+                return false;
 
             return Id == other.Id;
         }
 
         public override int GetHashCode()
         {
-            if (string.IsNullOrEmpty(Id))
-                return base.GetHashCode();
-            return Id.GetHashCode();
+            return string.IsNullOrEmpty(Id) ? 0 : Id.GetHashCode();
         }
 
         internal void InsertPointCollection(List<DataPoint> list)

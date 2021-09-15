@@ -1121,7 +1121,7 @@ namespace XenAdmin.Controls.XenSearch
 
                 public override int GetHashCode()
                 {
-                    return base.GetHashCode();
+                    return (int) type;
                 }
             }
 
@@ -1327,7 +1327,7 @@ namespace XenAdmin.Controls.XenSearch
 
                 public override int GetHashCode()
                 {
-                    return base.GetHashCode();
+                    return (int) type;
                 }
             }
 

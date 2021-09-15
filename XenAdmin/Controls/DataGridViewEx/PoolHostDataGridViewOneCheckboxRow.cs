@@ -128,7 +128,7 @@ namespace XenAdmin.Controls.DataGridViewEx
 
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return _nameCell.GetHashCode();
         }
 
         public CheckState Checked

@@ -678,14 +678,14 @@ namespace XenAdmin.Controls.CustomGridView
 
         public override bool Equals(object obj)
         {
-            if(!(obj is GridRow))
-                return base.Equals(obj);
-            return OpaqueRef == ((GridRow)obj).OpaqueRef;
+            if (!(obj is GridRow row))
+                return false;
+            return OpaqueRef == row.OpaqueRef;
         }
 
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return (OpaqueRef != null ? OpaqueRef.GetHashCode() : 0);
         }
     }
 
