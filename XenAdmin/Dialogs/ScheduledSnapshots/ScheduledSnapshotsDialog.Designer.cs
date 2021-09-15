@@ -146,7 +146,6 @@
             // deprecationBanner
             // 
             resources.ApplyResources(this.deprecationBanner, "deprecationBanner");
-            this.deprecationBanner.BackColor = System.Drawing.Color.LightCoral;
             this.deprecationBanner.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.deprecationBanner.Name = "deprecationBanner";
             // 

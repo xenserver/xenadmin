@@ -36,33 +36,28 @@ using XenAPI;
 
 namespace XenAdmin.Diagnostics.Problems.PoolProblem
 {
-    class VSwitchControllerProblem : ProblemWithMoreInfo
+    class ContainerManagementProblem : ProblemWithMoreInfo
     {
-        private Pool _pool;
+        private readonly Pool _pool;
 
-        public VSwitchControllerProblem(Check check, Pool pool)
+        public ContainerManagementProblem(Check check, Pool pool)
             : base(check)
         {
             _pool = pool;
         }
 
-        public override string LinkData  => InvisibleMessages.DEPRECATION_URL;
-        public override string LinkText => Messages.LEARN_MORE;
-
         public override string Description =>
-            string.Format(Messages.PROBLEM_VSWITCH_CONTROLLER_DESCRIPTION, _pool,
+            string.Format(Messages.PROBLEM_CONTAINER_MANAGEMENT_DESCRIPTION, _pool,
                 string.Format(Messages.XENSERVER_8_2, BrandManager.ProductVersion82));
 
-        public override string Message =>
-            string.Format(Messages.PROBLEM_VSWITCH_CONTROLLER_INFO_ERROR,
-                string.Format(Messages.XENSERVER_8_2, BrandManager.ProductVersion82));
+        public override string Message => Messages.PROBLEM_CONTAINER_MANAGEMENT_HELP;
     }
 
-    class VSwitchControllerWarning : WarningWithMoreInfo
+    class ContainerManagementWarning : WarningWithMoreInfo
     {
         private readonly Pool pool;
 
-        public VSwitchControllerWarning(Check check, Pool pool)
+        public ContainerManagementWarning(Check check, Pool pool)
             : base(check)
         {
             this.pool = pool;
@@ -70,15 +65,12 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
 
         public override string Title => Check.Description;
 
-        public override string LinkData  => InvisibleMessages.DEPRECATION_URL;
-        public override string LinkText => Messages.LEARN_MORE;
-
         public override string Description =>
-            string.Format(Messages.PROBLEM_VSWITCH_CONTROLLER_DESCRIPTION, pool,
+            string.Format(Messages.PROBLEM_CONTAINER_MANAGEMENT_DESCRIPTION, pool,
                 string.Format(Messages.XENSERVER_8_2, BrandManager.ProductVersion82));
 
         public override string Message =>
-            string.Format(Messages.PROBLEM_VSWITCH_CONTROLLER_INFO_WARNING,
+            string.Format(Messages.PROBLEM_CONTAINER_MANAGEMENT_INFO,
                 string.Format(Messages.XENSERVER_8_2, BrandManager.ProductVersion82));
     }
 }

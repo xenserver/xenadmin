@@ -385,6 +385,15 @@ namespace XenAdmin.Wizards.PatchingWizard
                 if (iloChecks.Count > 0)
                     groups.Add(new CheckGroup(Messages.CHECKING_POWER_ON_MODE_GROUP, iloChecks));
 
+                //container management check - for each pool
+                var dockerChecks = (from Pool pool in SelectedPools
+                    let check = new PoolContainerManagementCheck(pool.Connection.Resolve(pool.master), UpdateAlert?.NewServerVersion)
+                    where check.CanRun()
+                    select check as Check).ToList();
+
+                if (dockerChecks.Count > 0)
+                    groups.Add(new CheckGroup(Messages.CHECKING_CONTAINER_MANAGEMENT_GROUP, dockerChecks));
+
                 //PVGuestsCheck checks
                 var pvChecks = (from Pool pool in SelectedPools
                     let check = new PVGuestsCheck(pool.Connection.Resolve(pool.master), false)

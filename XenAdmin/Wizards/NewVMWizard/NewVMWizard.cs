@@ -252,7 +252,8 @@ namespace XenAdmin.Wizards.NewVMWizard
                     m_affinity = xenConnection.Resolve(selectedTemplate.affinity);
 
                 RemovePage(page_CloudConfigParameters);
-                if (selectedTemplate != null && selectedTemplate.CanHaveCloudConfigDrive() && Helpers.ContainerCapability(xenConnection))
+                if (selectedTemplate != null && Helpers.ContainerCapability(xenConnection) &&
+                    selectedTemplate.CanHaveCloudConfigDrive())
                 {
                     AddAfterPage(page_6_Storage, page_CloudConfigParameters);
                 }

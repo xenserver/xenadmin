@@ -226,6 +226,15 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             if (iloChecks.Count > 0)
                 groups.Add(new CheckGroup(Messages.CHECKING_POWER_ON_MODE_GROUP, iloChecks));
 
+            //container management check - for each pool
+            var dockerChecks = (from Host server in SelectedMasters
+                let check = new PoolContainerManagementCheck(server, InstallMethodConfig, ManualUpgrade)
+                where check.CanRun()
+                select check as Check).ToList();
+
+            if (dockerChecks.Count > 0)
+                groups.Add(new CheckGroup(Messages.CHECKING_CONTAINER_MANAGEMENT_GROUP, dockerChecks));
+
             //Checking PV guests - for hosts that have any PV guests and warn the user before the upgrade.
             var pvChecks = (from Host server in SelectedMasters
                 let check = new PVGuestsCheck(server, true, ManualUpgrade, InstallMethodConfig)

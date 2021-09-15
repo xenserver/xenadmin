@@ -112,6 +112,7 @@
     <Compile Include="Alerts\Types\XenServerVersionAlert.cs" />
     <Compile Include="Commands\CallHomeCommand.cs" />
     <Compile Include="Commands\ChangeControlDomainMemoryCommand.cs" />
+    <Compile Include="Commands\DockerContainerCommand.cs" />
     <Compile Include="Commands\Controls\PoolRemoveServerToolStripMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -124,11 +125,6 @@
     <Compile Include="Commands\DragDropCrossPoolMoveHaltedVMCommand.cs" />
     <Compile Include="Commands\DisablePvsReadCachingCommand.cs" />
     <Compile Include="Commands\EnablePvsReadCachingCommand.cs" />
-    <Compile Include="Commands\RestartDockerContainerCommand.cs" />
-    <Compile Include="Commands\ResumeDockerContainerCommand.cs" />
-    <Compile Include="Commands\PauseDockerContainerCommand.cs" />
-    <Compile Include="Commands\StopDockerContainerCommand.cs" />
-    <Compile Include="Commands\StartDockerContainerCommand.cs" />
     <Compile Include="Commands\Controls\EditPropertiesToolStripMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -235,6 +231,7 @@
     <Compile Include="Diagnostics\Checks\CfuAvailabilityCheck.cs" />
     <Compile Include="Diagnostics\Checks\AutomatedUpdatesLicenseCheck.cs" />
     <Compile Include="Diagnostics\Checks\DiskSpaceForBatchUpdatesCheck.cs" />
+    <Compile Include="Diagnostics\Checks\PoolContainerManagementCheck.cs" />
     <Compile Include="Diagnostics\Checks\PowerOniLoCheck.cs" />
     <Compile Include="Diagnostics\Checks\PoolLegacySslCheck.cs" />
     <Compile Include="Diagnostics\Checks\PrepareToUpgradeCheck.cs" />
@@ -248,6 +245,7 @@
     <Compile Include="Diagnostics\Checks\HostMemoryPostUpgradeCheck.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\BrokenSR.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\PowerOniLoProblem.cs" />
+    <Compile Include="Diagnostics\Problems\PoolProblem\ContainerManagementProblem.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\LegacySslProblem.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\PoolHasPVGuestWarningUrl.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\HostMemoryPostUpgradeWarning.cs" />
@@ -4804,6 +4802,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\DeprecationBanner.resx">
       <DependentUpon>DeprecationBanner.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\DeprecationBanner.zh-CN.resx">
       <DependentUpon>DeprecationBanner.cs</DependentUpon>

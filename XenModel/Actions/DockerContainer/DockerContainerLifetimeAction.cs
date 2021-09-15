@@ -37,7 +37,7 @@ using XenAdmin.Model;
 
 namespace XenAdmin.Actions
 {
-    public class DockerContainerLifetimeAction : PureAsyncAction
+    public abstract class DockerContainerLifetimeAction : PureAsyncAction
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -45,7 +45,7 @@ namespace XenAdmin.Actions
         private readonly string action;
         private readonly string endDescription;
 
-        public DockerContainerLifetimeAction(DockerContainer dockerContainer,  string title, string startDescription, string endDescription, string action)
+        protected DockerContainerLifetimeAction(DockerContainer dockerContainer,  string title, string startDescription, string endDescription, string action)
             : base(dockerContainer.Connection, title, startDescription)
         {
             this.endDescription = endDescription;

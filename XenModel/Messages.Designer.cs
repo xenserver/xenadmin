@@ -7296,6 +7296,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Docker container management check.
+        /// </summary>
+        public static string CHECKING_CONTAINER_MANAGEMENT {
+            get {
+                return ResourceManager.GetString("CHECKING_CONTAINER_MANAGEMENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checking for legacy Container Management supplemental pack.
+        /// </summary>
+        public static string CHECKING_CONTAINER_MANAGEMENT_GROUP {
+            get {
+                return ResourceManager.GetString("CHECKING_CONTAINER_MANAGEMENT_GROUP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Checking for pending restart.
         /// </summary>
         public static string CHECKING_FOR_PENDING_RESTART {
@@ -9075,6 +9093,15 @@ namespace XenAdmin {
         public static string CONTAINER_IMAGE {
             get {
                 return ResourceManager.GetString("CONTAINER_IMAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Support for container management has been removed as of {0}. Please uninstall the Container Management supplemental pack because you will no longer be able to use it for managing Docker containers..
+        /// </summary>
+        public static string CONTAINER_MANAGEMENT_REMOVAL_WARNING {
+            get {
+                return ResourceManager.GetString("CONTAINER_MANAGEMENT_REMOVAL_WARNING", resourceCulture);
             }
         }
         
@@ -30760,6 +30787,33 @@ namespace XenAdmin {
         public static string PROBING_HBA_TITLE {
             get {
                 return ResourceManager.GetString("PROBING_HBA_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: Support for container management has been removed as of {1}..
+        /// </summary>
+        public static string PROBLEM_CONTAINER_MANAGEMENT_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("PROBLEM_CONTAINER_MANAGEMENT_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to First uninstall the Container Management supplemental pack because you will no longer be able to use it for managing Docker containers..
+        /// </summary>
+        public static string PROBLEM_CONTAINER_MANAGEMENT_HELP {
+            get {
+                return ResourceManager.GetString("PROBLEM_CONTAINER_MANAGEMENT_HELP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you are upgrading to {0} and above, first uninstall the Container Management supplemental pack because you will no longer be able to use it for managing Docker containers..
+        /// </summary>
+        public static string PROBLEM_CONTAINER_MANAGEMENT_INFO {
+            get {
+                return ResourceManager.GetString("PROBLEM_CONTAINER_MANAGEMENT_INFO", resourceCulture);
             }
         }
         

@@ -2639,6 +2639,12 @@ Do you want to assign it to the schedule '{2}' instead?</value>
   <data name="CHECKING_CLUSTERING_STATUS" xml:space="preserve">
     <value>Checking clustering status</value>
   </data>
+  <data name="CHECKING_CONTAINER_MANAGEMENT" xml:space="preserve">
+    <value>Docker container management check</value>
+  </data>
+  <data name="CHECKING_CONTAINER_MANAGEMENT_GROUP" xml:space="preserve">
+    <value>Checking for legacy Container Management supplemental pack</value>
+  </data>
   <data name="CHECKING_FOR_PENDING_RESTART" xml:space="preserve">
     <value>Checking for pending restart</value>
   </data>
@@ -3278,6 +3284,9 @@ Would you like to carry out the operation at this time?</value>
   </data>
   <data name="CONTAINER_IMAGE" xml:space="preserve">
     <value>Image</value>
+  </data>
+  <data name="CONTAINER_MANAGEMENT_REMOVAL_WARNING" xml:space="preserve">
+    <value>Support for container management has been removed as of {0}. Please uninstall the Container Management supplemental pack because you will no longer be able to use it for managing Docker containers.</value>
   </data>
   <data name="CONTAINER_ON_VM_TITLE" xml:space="preserve">
     <value>{0} on '{1}' {2}</value>
@@ -10663,6 +10672,15 @@ Please reconnect the host and try again</value>
   </data>
   <data name="PROBING_HBA_TITLE" xml:space="preserve">
     <value>Probing for LUNs on {0}</value>
+  </data>
+  <data name="PROBLEM_CONTAINER_MANAGEMENT_DESCRIPTION" xml:space="preserve">
+    <value>{0}: Support for container management has been removed as of {1}.</value>
+  </data>
+  <data name="PROBLEM_CONTAINER_MANAGEMENT_HELP" xml:space="preserve">
+    <value>First uninstall the Container Management supplemental pack because you will no longer be able to use it for managing Docker containers.</value>
+  </data>
+  <data name="PROBLEM_CONTAINER_MANAGEMENT_INFO" xml:space="preserve">
+    <value>If you are upgrading to {0} and above, first uninstall the Container Management supplemental pack because you will no longer be able to use it for managing Docker containers.</value>
   </data>
   <data name="PROBLEM_HOSTPROBLEM_TITLE" xml:space="preserve">
     <value>Server '{0}'</value>

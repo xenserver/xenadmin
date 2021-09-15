@@ -267,13 +267,16 @@ namespace XenAdmin.Dialogs
                     ShowTab(VMAdvancedEditPage = new VMAdvancedEditPage());
                 }
 
-                if (is_vm && Helpers.ContainerCapability(xenObject.Connection) && ((VM)xenObjectCopy).CanBeEnlightened())
-                    ShowTab(VMEnlightenmentEditPage = new VMEnlightenmentEditPage());
+                if (is_vm && Helpers.ContainerCapability(xenObject.Connection))
+                {
+                    if (((VM)xenObjectCopy).CanBeEnlightened())
+                        ShowTab(VMEnlightenmentEditPage = new VMEnlightenmentEditPage());
 
-                if (is_vm && Helpers.ContainerCapability(xenObject.Connection) && ((VM)xenObjectCopy).CanHaveCloudConfigDrive())
-                    ShowTab(CloudConfigParametersPage = new Page_CloudConfigParameters());
+                    if (((VM)xenObjectCopy).CanHaveCloudConfigDrive())
+                        ShowTab(CloudConfigParametersPage = new Page_CloudConfigParameters());
+                }
 
-                if(is_VMSS)
+                if (is_VMSS)
                 {
                     ShowTab(newVMSSVMsPage1 = new NewVMGroupVMsPage<VMSS> {Pool = pool});
                     ShowTab(newPolicyVMSSTypePage1 = new NewPolicySnapshotTypePage());
