@@ -486,10 +486,16 @@ namespace XenOvf
             try
             {
                 searcher = new ManagementObjectSearcher(@"select * from Win32_ComputerSystem");
-                foreach (ManagementObject mgtobj in searcher.Get())
+                var mgtObjs = searcher.Get();
+
+                // only want one.
+                if (mgtObjs.Count > 0)
                 {
-                    Win32_ComputerSystem = mgtobj; // only want one.
-                    break;
+                    using (var iterator = mgtObjs.GetEnumerator())
+                    {
+                        iterator.MoveNext();
+                        Win32_ComputerSystem = (ManagementObject) iterator.Current;
+                    }
                 }
                 log.Debug("OVF.CollectionInformation Win32_ComputerSystem.1");
             }
@@ -511,11 +517,18 @@ namespace XenOvf
             try
             {
                 searcher = new ManagementObjectSearcher(@"select * from Win32_Processor");
-                foreach (ManagementObject mgtobj in searcher.Get())
+                var mgtObjs = searcher.Get();
+
+                // only want one.
+                if (mgtObjs.Count > 0)
                 {
-                    Win32_Processor.Add(mgtobj); // only want one.
-                    break;
+                    using (var iterator = mgtObjs.GetEnumerator())
+                    {
+                        iterator.MoveNext();
+                        Win32_Processor.Add((ManagementObject) iterator.Current);
+                    }
                 }
+
                 log.DebugFormat("OVF.CollectionInformation Win32_Processor.{0}", Win32_Processor.Count);
             }
             catch (Exception ex)
