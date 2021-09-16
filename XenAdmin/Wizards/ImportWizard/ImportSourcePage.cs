@@ -751,10 +751,10 @@ namespace XenAdmin.Wizards.ImportWizard
 
                         if (envType != null)
                         {
-                            int index = _uri.OriginalString.LastIndexOf('/') + 1;
+                            var index = _uri.OriginalString.LastIndexOf('/') + 1;
                             var remoteDir = _uri.OriginalString.Substring(0, index);
 
-                            if (envType.References.File != null)
+                            if (envType.References?.File != null)
                             {
                                 foreach (var file in envType.References.File)
                                 {
