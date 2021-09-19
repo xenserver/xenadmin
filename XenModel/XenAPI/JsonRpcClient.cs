@@ -1061,6 +1061,20 @@ namespace XenAPI
             return Rpc<List<XenRef<Repository>>>("pool.get_repositories", new JArray(session, _pool ?? ""), serializer);
         }
 
+        public bool pool_get_client_certificate_auth_enabled(string session, string _pool)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            return Rpc<bool>("pool.get_client_certificate_auth_enabled", new JArray(session, _pool ?? ""), serializer);
+        }
+
+        public string pool_get_client_certificate_auth_name(string session, string _pool)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            return Rpc<string>("pool.get_client_certificate_auth_name", new JArray(session, _pool ?? ""), serializer);
+        }
+
         public void pool_set_name_label(string session, string _pool, string _name_label)
         {
             var converters = new List<JsonConverter> {};
@@ -1969,6 +1983,48 @@ namespace XenAPI
             var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
             var serializer = CreateSerializer(converters);
             return Rpc<XenRef<Task>>("Async.pool.sync_updates", new JArray(session, _pool ?? "", _force), serializer);
+        }
+
+        public string[] pool_check_update_readiness(string session, string _pool, bool _requires_reboot)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            return Rpc<string[]>("pool.check_update_readiness", new JArray(session, _pool ?? "", _requires_reboot), serializer);
+        }
+
+        public XenRef<Task> async_pool_check_update_readiness(string session, string _pool, bool _requires_reboot)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<XenRef<Task>>("Async.pool.check_update_readiness", new JArray(session, _pool ?? "", _requires_reboot), serializer);
+        }
+
+        public void pool_enable_client_certificate_auth(string session, string _pool, string _name)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            Rpc("pool.enable_client_certificate_auth", new JArray(session, _pool ?? "", _name ?? ""), serializer);
+        }
+
+        public XenRef<Task> async_pool_enable_client_certificate_auth(string session, string _pool, string _name)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<XenRef<Task>>("Async.pool.enable_client_certificate_auth", new JArray(session, _pool ?? "", _name ?? ""), serializer);
+        }
+
+        public void pool_disable_client_certificate_auth(string session, string _pool)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            Rpc("pool.disable_client_certificate_auth", new JArray(session, _pool ?? ""), serializer);
+        }
+
+        public XenRef<Task> async_pool_disable_client_certificate_auth(string session, string _pool)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<XenRef<Task>>("Async.pool.disable_client_certificate_auth", new JArray(session, _pool ?? ""), serializer);
         }
 
         public List<XenRef<Pool>> pool_get_all(string session)
@@ -6052,6 +6108,13 @@ namespace XenAPI
             return Rpc<List<update_guidances>>("host.get_pending_guidances", new JArray(session, _host ?? ""), serializer);
         }
 
+        public bool host_get_tls_verification_enabled(string session, string _host)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            return Rpc<bool>("host.get_tls_verification_enabled", new JArray(session, _host ?? ""), serializer);
+        }
+
         public void host_set_name_label(string session, string _host, string _label)
         {
             var converters = new List<JsonConverter> {};
@@ -6750,6 +6813,20 @@ namespace XenAPI
             var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
             var serializer = CreateSerializer(converters);
             return Rpc<XenRef<Task>>("Async.host.get_server_certificate", new JArray(session, _host ?? ""), serializer);
+        }
+
+        public void host_refresh_server_certificate(string session, string _host)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            Rpc("host.refresh_server_certificate", new JArray(session, _host ?? ""), serializer);
+        }
+
+        public XenRef<Task> async_host_refresh_server_certificate(string session, string _host)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<XenRef<Task>>("Async.host.refresh_server_certificate", new JArray(session, _host ?? ""), serializer);
         }
 
         public void host_install_server_certificate(string session, string _host, string _certificate, string _private_key, string _certificate_chain)
