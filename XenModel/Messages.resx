@@ -2659,6 +2659,12 @@ This will cancel compilation of the status report.</value>
   <data name="CERTIFICATE_VERIFICATION_KEY" xml:space="preserve">
     <value>Certificate Verification</value>
   </data>
+  <data name="CERTIFICATE_VERIFICATION_HOST_DISABLED_IN_POOL" xml:space="preserve">
+    <value>Enabled on the pool, but disabled on:</value>
+  </data>
+  <data name="CERTIFICATE_VERIFICATION_HOST_DISABLED_STANDALONE" xml:space="preserve">
+    <value>Disabled, but enabled on the pool</value>
+  </data>
   <data name="CFU_STATUS_CHECK_DESCRIPTION" xml:space="preserve">
     <value>Ability to download updates</value>
   </data>

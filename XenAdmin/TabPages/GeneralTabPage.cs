@@ -1182,17 +1182,27 @@ namespace XenAdmin.TabPages
                     s.AddEntry(FriendlyName("host.enabled"), Messages.YES, item);
                 }
 
-                if (isStandAloneHost && Helpers.PostStockholm(host))
+                if (Helpers.PostStockholm(host))
                 {
                     var pool = Helpers.GetPoolOfOne(xenObject.Connection);
 
-                    if (pool != null && pool.tls_verification_enabled)
+                    if (pool.tls_verification_enabled && host.tls_verification_enabled)
+                    {
                         s.AddEntry(Messages.CERTIFICATE_VERIFICATION_KEY, Messages.ENABLED);
+                    }
+                    else if (pool.tls_verification_enabled && isStandAloneHost)
+                    {
+                        s.AddEntry(Messages.CERTIFICATE_VERIFICATION_KEY,
+                            Messages.CERTIFICATE_VERIFICATION_HOST_DISABLED_STANDALONE,
+                            Color.Red,
+                            new CommandToolStripMenuItem(new EnableTlsVerificationCommand(Program.MainWindow, pool)));}
                     else
+                    {
                         s.AddEntry(Messages.CERTIFICATE_VERIFICATION_KEY,
                             Messages.DISABLED,
                             Color.Red,
                             new CommandToolStripMenuItem(new EnableTlsVerificationCommand(Program.MainWindow, pool)));
+                    }
                 }
 
                 s.AddEntry(FriendlyName("host.iscsi_iqn"), host.GetIscsiIqn(),
@@ -1318,12 +1328,31 @@ namespace XenAdmin.TabPages
                 if (Helpers.PostStockholm(p.Connection))
                 {
                     if (p.tls_verification_enabled)
-                        s.AddEntry(Messages.CERTIFICATE_VERIFICATION_KEY, Messages.ENABLED);
+                    {
+                        var disabledHosts = p.Connection.Cache.Hosts.Where(h => !h.tls_verification_enabled).ToList();
+                        if (disabledHosts.Count > 0)
+                        {
+                            var sb = new StringBuilder(Messages.CERTIFICATE_VERIFICATION_HOST_DISABLED_IN_POOL);
+                            foreach (var h in disabledHosts)
+                                sb.AppendLine().AppendFormat(h.Name());
+
+                            s.AddEntry(Messages.CERTIFICATE_VERIFICATION_KEY,
+                                sb.ToString(),
+                                Color.Red,
+                                new CommandToolStripMenuItem(new EnableTlsVerificationCommand(Program.MainWindow, p)));
+                        }
+                        else
+                        {
+                            s.AddEntry(Messages.CERTIFICATE_VERIFICATION_KEY, Messages.ENABLED);
+                        }
+                    }
                     else
+                    {
                         s.AddEntry(Messages.CERTIFICATE_VERIFICATION_KEY,
                             Messages.DISABLED,
                             Color.Red,
                             new CommandToolStripMenuItem(new EnableTlsVerificationCommand(Program.MainWindow, p)));
+                    }
                 }
 
                 var coordinator = p.Connection.Resolve(p.master);
