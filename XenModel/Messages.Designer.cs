@@ -7364,6 +7364,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enabled on the pool, but disabled on:.
+        /// </summary>
+        public static string CERTIFICATE_VERIFICATION_HOST_DISABLED_IN_POOL {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_VERIFICATION_HOST_DISABLED_IN_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disabled, but enabled on the pool.
+        /// </summary>
+        public static string CERTIFICATE_VERIFICATION_HOST_DISABLED_STANDALONE {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_VERIFICATION_HOST_DISABLED_STANDALONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Certificate Verification.
         /// </summary>
         public static string CERTIFICATE_VERIFICATION_KEY {
