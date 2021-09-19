@@ -14216,15 +14216,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}: {1}.
-        /// </summary>
-        public static string DR_WIZARD_PRECHECKPAGE_PROBLEM {
-            get {
-                return ResourceManager.GetString("DR_WIZARD_PRECHECKPAGE_PROBLEM", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Resolve.
         /// </summary>
         public static string DR_WIZARD_PRECHECKPAGE_RESOLVE {
@@ -23957,15 +23948,6 @@ namespace XenAdmin {
         public static string MENU_MIGRATE_TO_HOME_SERVER {
             get {
                 return ResourceManager.GetString("MENU_MIGRATE_TO_HOME_SERVER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0}: {1}.
-        /// </summary>
-        public static string MESSAGE_ALERT_TITLE {
-            get {
-                return ResourceManager.GetString("MESSAGE_ALERT_TITLE", resourceCulture);
             }
         }
         
@@ -35736,6 +35718,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0}: {1}.
+        /// </summary>
+        public static string STRING_COLON_SPACE_STRING {
+            get {
+                return ResourceManager.GetString("STRING_COLON_SPACE_STRING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0}, {1}.
         /// </summary>
         public static string STRING_COMMA_SPACE_STRING {
@@ -37584,15 +37575,6 @@ namespace XenAdmin {
         public static string UPDATES_WIZARD_PRECHECK_ERROR {
             get {
                 return ResourceManager.GetString("UPDATES_WIZARD_PRECHECK_ERROR", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0}: {1}.
-        /// </summary>
-        public static string UPDATES_WIZARD_PRECHECK_FAILED {
-            get {
-                return ResourceManager.GetString("UPDATES_WIZARD_PRECHECK_FAILED", resourceCulture);
             }
         }
         

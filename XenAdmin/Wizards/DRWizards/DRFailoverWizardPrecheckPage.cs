@@ -618,7 +618,7 @@ namespace XenAdmin.Wizards.DRWizards
                     : Problem.Image;
 
                 if (Problem != null)
-                    _descriptionCell.Value = String.Format(Messages.DR_WIZARD_PRECHECKPAGE_PROBLEM, _check.Description, Problem.Description);
+                    _descriptionCell.Value = String.Format(Messages.STRING_COLON_SPACE_STRING, _check.Description, Problem.Description);
                 else if (_check != null)
                 {
                     _descriptionCell.Value = String.Format(Messages.DR_WIZARD_PRECHECKPAGE_OK, _check.Description);

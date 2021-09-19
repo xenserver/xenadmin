@@ -418,7 +418,7 @@ namespace XenAdmin.Alerts
                     {
                         string name = Helpers.GetName(XenObject);
                         if (!string.IsNullOrEmpty(name))
-                            title = string.Format(Messages.MESSAGE_ALERT_TITLE, name, title);
+                            title = string.Format(Messages.STRING_COLON_SPACE_STRING, name, title);
                     }
                 }
 
