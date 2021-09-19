@@ -193,7 +193,7 @@
     <value>Could not find bridge required by VM.</value>
   </data>
   <data name="CANNOT_ADD_TUNNEL_TO_BOND_SLAVE" xml:space="preserve">
-    <value>This PIF is a bond slave and cannot have a tunnel on it.</value>
+    <value>This PIF is a bond member and cannot have a tunnel on it.</value>
   </data>
   <data name="CANNOT_ADD_TUNNEL_TO_SRIOV_LOGICAL" xml:space="preserve">
     <value>This is a network SR-IOV logical PIF and cannot have a tunnel on it.</value>
@@ -202,10 +202,10 @@
     <value>This is a vlan PIF on network SR-IOV and cannot have a tunnel on it.</value>
   </data>
   <data name="CANNOT_ADD_VLAN_TO_BOND_SLAVE" xml:space="preserve">
-    <value>This PIF is a bond slave and cannot have a VLAN on it.</value>
+    <value>This PIF is a bond member and cannot have a VLAN on it.</value>
   </data>
   <data name="CANNOT_CHANGE_PIF_PROPERTIES" xml:space="preserve">
-    <value>This properties of this PIF cannot be changed. Only the properties of non-bonded physical PIFs, or bond masters can be changed.</value>
+    <value>The properties of this PIF cannot be changed. Only the properties of non-bonded physical PIFs, or bond interfaces can be changed.</value>
   </data>
   <data name="CANNOT_CONTACT_HOST" xml:space="preserve">
     <value>Cannot forward messages because the server cannot be contacted.  The server may be switched off or there may be network connectivity problems.</value>
@@ -226,13 +226,13 @@
     <value>This server cannot be evacuated.</value>
   </data>
   <data name="CANNOT_FETCH_PATCH" xml:space="preserve">
-    <value>The requested update could not be obtained from the master.</value>
+    <value>The requested update could not be obtained from the coordinator.</value>
   </data>
   <data name="CANNOT_FIND_OEM_BACKUP_PARTITION" xml:space="preserve">
     <value>The backup partition to stream the update to cannot be found</value>
   </data>
   <data name="CANNOT_FIND_PATCH" xml:space="preserve">
-    <value>The requested update could not be found.  This can occur when you designate a new master.  Please upload it again</value>
+    <value>The requested update could not be found.  This can occur when you designate a new coordinator.  Please upload it again</value>
   </data>
   <data name="CANNOT_FIND_STATE_PARTITION" xml:space="preserve">
     <value>The restore could not be performed because the state partition could not be found</value>
@@ -244,7 +244,7 @@
     <value>This is a network SR-IOV logical PIF and cannot do forget on it</value>
   </data>
   <data name="CANNOT_PLUG_BOND_SLAVE" xml:space="preserve">
-    <value>This PIF is a bond slave and cannot be plugged.</value>
+    <value>This PIF is a bond member and cannot be plugged.</value>
   </data>
   <data name="CANNOT_PLUG_VIF" xml:space="preserve">
     <value>This VM cannot be started because its network interfaces could not be connected.  One of the NICs is in use elsewhere.</value>
@@ -376,7 +376,7 @@
     <value>Cannot restore this VM because it would create a duplicate</value>
   </data>
   <data name="EVACUATE_NO_OTHER_HOSTS_FOR_MASTER" xml:space="preserve">
-    <value>No other server available to nominate as master.  Please add or enable some other servers.</value>
+    <value>No other server available to nominate as coordinator.  Please add or enable some other servers.</value>
   </data>
   <data name="EVENTS_LOST" xml:space="preserve">
     <value>Some events have been lost from the queue and cannot be retrieved.</value>
@@ -421,7 +421,7 @@
     <value>Object has been deleted.{0}:{1}</value>
   </data>
   <data name="HA_ABORT_NEW_MASTER" xml:space="preserve">
-    <value>This server cannot accept the proposed new master setting at this time.</value>
+    <value>This server cannot accept the proposed new coordinator setting at this time.</value>
   </data>
   <data name="HA_CANNOT_CHANGE_BOND_STATUS_OF_MGMT_IFACE" xml:space="preserve">
     <value>This operation cannot be performed because creating or deleting a bond involving the management interface is not allowed while HA is on. In order to do that, disable HA, create or delete the bond then re-enable HA.</value>
@@ -475,7 +475,7 @@
     <value>This server cannot join the pool because the pool has HA enabled but this server has HA disabled.</value>
   </data>
   <data name="HA_SHOULD_BE_FENCED" xml:space="preserve">
-    <value>Server cannot rejoin pool because it should have fenced (it is not in the master&apos;s partition)</value>
+    <value>Server cannot rejoin pool because it should have fenced (it is not in the coordinator&apos;s partition).</value>
   </data>
   <data name="HA_TOO_FEW_HOSTS" xml:space="preserve">
     <value>HA can only be enabled for 2 servers or more. Note that 2 servers requires a pre-configured quorum tiebreak script.</value>
@@ -517,7 +517,7 @@
     <value>This host is being evacuated.</value>
   </data>
   <data name="HOST_HAS_NO_MANAGEMENT_IP" xml:space="preserve">
-    <value>The server failed to acquire an IP address on its management interface and therefore cannot contact the master.</value>
+    <value>The server failed to acquire an IP address on its management interface and therefore cannot contact the coordinator.</value>
   </data>
   <data name="HOST_HAS_RESIDENT_VMS" xml:space="preserve">
     <value>This server cannot be forgotten because there are some user VMs still running</value>
@@ -535,13 +535,13 @@
     <value>This operation cannot be completed because the server is still live.</value>
   </data>
   <data name="HOST_IS_SLAVE" xml:space="preserve">
-    <value>The server that you are talking to is a slave</value>
+    <value>The server that you are talking to is a supporter</value>
   </data>
   <data name="HOST_ITS_OWN_SLAVE" xml:space="preserve">
-    <value>The host is its own slave. Please use pool-emergency-transition-to-master or pool-emergency-reset-master.</value>
+    <value>The host is its own supporter. Please use pool-emergency-transition-to-master or pool-emergency-reset-master.</value>
   </data>
   <data name="HOST_MASTER_CANNOT_TALK_BACK" xml:space="preserve">
-    <value>The master reports that it cannot talk back to the slave on the supplied management IP address.</value>
+    <value>The coordinator reports that it cannot talk back to the supporter on the supplied management IP address.</value>
   </data>
   <data name="HOST_NAME_INVALID" xml:space="preserve">
     <value>The server name is invalid.</value>
@@ -577,7 +577,7 @@
     <value>The server is still booting.</value>
   </data>
   <data name="HOST_UNKNOWN_TO_MASTER" xml:space="preserve">
-    <value>The master says the server is not known to it. Is the server in the master&apos;s database and pointing to the correct master? Are all servers using the same pool secret?</value>
+    <value>The coordinator says the server is not known to it. Is the server in the coordinator&apos;s database and pointing to the correct coordinator? Are all servers using the same pool secret?</value>
   </data>
   <data name="ILLEGAL_VBD_DEVICE" xml:space="preserve">
     <value>The specified VBD device is not recognized: please use a non-negative integer</value>
@@ -664,7 +664,7 @@
     <value>Cannot create a VLAN or tunnel on top of a tunnel access PIF - use the underlying transport PIF instead.</value>
   </data>
   <data name="JOINING_HOST_CANNOT_BE_MASTER_OF_OTHER_HOSTS" xml:space="preserve">
-    <value>The server joining the pool cannot already be a master of another pool.</value>
+    <value>The server joining the pool cannot already be a coordinator of another pool.</value>
   </data>
   <data name="JOINING_HOST_CANNOT_CONTAIN_SHARED_SRS" xml:space="preserve">
     <value>The server joining the pool cannot contain any shared storage.</value>
@@ -1042,7 +1042,7 @@
     <value>The external authentication configuration of the server joining the pool must match the pool&apos;s own external authentication configuration.</value>
   </data>
   <data name="POOL_JOINING_HOST_CA_CERTIFICATES_CONFLICT" xml:space="preserve">
-    <value>The host joining the pool has different ca certificates from the pool master while using the same name, uninstall them and try again.</value>
+    <value>The host joining the pool has different CA certificates from the pool coordinator while using the same name, uninstall them and try again.</value>
   </data>
   <data name="POOL_JOINING_HOST_HAS_BONDS" xml:space="preserve">
     <value>The host joining the pool must not have any bonds.</value>
@@ -1063,13 +1063,13 @@
     <value>The server joining the pool must have a physical management NIC (i.e. the management NIC must not be on a VLAN or bonded PIF).</value>
   </data>
   <data name="POOL_JOINING_HOST_MUST_HAVE_SAME_API_VERSION" xml:space="preserve">
-    <value>The host joining the pool must have the same API version as the pool master.</value>
+    <value>The host joining the pool must have the same API version as the pool coordinator.</value>
   </data>
   <data name="POOL_JOINING_HOST_MUST_HAVE_SAME_DB_SCHEMA" xml:space="preserve">
-    <value>The host joining the pool must have the same database schema as the pool master.</value>
+    <value>The host joining the pool must have the same database schema as the pool coordinator.</value>
   </data>
   <data name="POOL_JOINING_HOST_MUST_HAVE_SAME_PRODUCT_VERSION" xml:space="preserve">
-    <value>The server joining the pool must have the same product version as the pool master.</value>
+    <value>The server joining the pool must have the same product version as the pool coordinator.</value>
   </data>
   <data name="POOL_JOINING_HOST_MUST_ONLY_HAVE_PHYSICAL_PIFS" xml:space="preserve">
     <value>The host joining the pool must not have any bonds, VLANs or tunnels.</value>
@@ -1122,7 +1122,7 @@ Authorized Roles: {1}</value>
     <value>The repository already exists.</value>
   </data>
   <data name="REPOSITORY_CLEANUP_FAILED" xml:space="preserve">
-    <value>Failed to clean up local repository on master.</value>
+    <value>Failed to clean up local repository on coordinator.</value>
   </data>
   <data name="REPOSITORY_IS_IN_USE" xml:space="preserve">
     <value>The repository is in use.</value>
@@ -1197,7 +1197,7 @@ Authorized Roles: {1}</value>
     <value>This session {0} is not registered to receive events.  You must call event.register before event.next.  The session handle you are using is echoed.</value>
   </data>
   <data name="SLAVE_REQUIRES_MANAGEMENT_INTERFACE" xml:space="preserve">
-    <value>The management interface on a slave cannot be disabled because the slave would enter emergency mode.</value>
+    <value>The management interface on a supporter cannot be disabled because the supporter would enter emergency mode.</value>
   </data>
   <data name="SM_PLUGIN_COMMUNICATION_FAILURE" xml:space="preserve">
     <value>The SM plug-in did not respond to a query.</value>
@@ -1677,7 +1677,7 @@ Authorized Roles: {1}</value>
     <value>There was an error while attempting to create the filesystem on the specified logical volume</value>
   </data>
   <data name="SR_BACKEND_FAILURE_58" xml:space="preserve">
-    <value>There was an error while attempting to make a request from the logical volume. The request must come from the master.</value>
+    <value>There was an error while attempting to make a request from the logical volume. The request must come from the coordinator.</value>
   </data>
   <data name="SR_BACKEND_FAILURE_59" xml:space="preserve">
     <value>The attempt to resize the logical volume failed</value>

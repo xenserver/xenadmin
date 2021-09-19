@@ -113,7 +113,8 @@ namespace XenAPI
             string uefi_certificates,
             List<XenRef<Certificate>> certificates,
             string[] editions,
-            List<update_guidances> pending_guidances)
+            List<update_guidances> pending_guidances,
+            bool tls_verification_enabled)
         {
             this.uuid = uuid;
             this.name_label = name_label;
@@ -177,6 +178,7 @@ namespace XenAPI
             this.certificates = certificates;
             this.editions = editions;
             this.pending_guidances = pending_guidances;
+            this.tls_verification_enabled = tls_verification_enabled;
         }
 
         /// <summary>
@@ -270,6 +272,7 @@ namespace XenAPI
             certificates = record.certificates;
             editions = record.editions;
             pending_guidances = record.pending_guidances;
+            tls_verification_enabled = record.tls_verification_enabled;
         }
 
         internal void UpdateFrom(Proxy_Host proxy)
@@ -336,6 +339,7 @@ namespace XenAPI
             certificates = proxy.certificates == null ? null : XenRef<Certificate>.Create(proxy.certificates);
             editions = proxy.editions == null ? new string[] {} : (string [])proxy.editions;
             pending_guidances = proxy.pending_guidances == null ? null : Helper.StringArrayToEnumList<update_guidances>(proxy.pending_guidances);
+            tls_verification_enabled = (bool)proxy.tls_verification_enabled;
         }
 
         /// <summary>
@@ -470,6 +474,8 @@ namespace XenAPI
                 editions = Marshalling.ParseStringArray(table, "editions");
             if (table.ContainsKey("pending_guidances"))
                 pending_guidances = Helper.StringArrayToEnumList<update_guidances>(Marshalling.ParseStringArray(table, "pending_guidances"));
+            if (table.ContainsKey("tls_verification_enabled"))
+                tls_verification_enabled = Marshalling.ParseBool(table, "tls_verification_enabled");
         }
 
         public Proxy_Host ToProxy()
@@ -537,6 +543,7 @@ namespace XenAPI
             result_.certificates = certificates == null ? new string[] {} : Helper.RefListToStringArray(certificates);
             result_.editions = editions;
             result_.pending_guidances = pending_guidances == null ? new string[] {} : Helper.ObjectListToStringArray(pending_guidances);
+            result_.tls_verification_enabled = tls_verification_enabled;
             return result_;
         }
 
@@ -610,7 +617,8 @@ namespace XenAPI
                 Helper.AreEqual2(this._uefi_certificates, other._uefi_certificates) &&
                 Helper.AreEqual2(this._certificates, other._certificates) &&
                 Helper.AreEqual2(this._editions, other._editions) &&
-                Helper.AreEqual2(this._pending_guidances, other._pending_guidances);
+                Helper.AreEqual2(this._pending_guidances, other._pending_guidances) &&
+                Helper.AreEqual2(this._tls_verification_enabled, other._tls_verification_enabled);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Host server)
@@ -1603,6 +1611,20 @@ namespace XenAPI
                 return session.JsonRpcClient.host_get_pending_guidances(session.opaque_ref, _host);
             else
                 return Helper.StringArrayToEnumList<update_guidances>(session.XmlRpcProxy.host_get_pending_guidances(session.opaque_ref, _host ?? "").parse());
+        }
+
+        /// <summary>
+        /// Get the tls_verification_enabled field of the given host.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        public static bool get_tls_verification_enabled(Session session, string _host)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.host_get_tls_verification_enabled(session.opaque_ref, _host);
+            else
+                return (bool)session.XmlRpcProxy.host_get_tls_verification_enabled(session.opaque_ref, _host ?? "").parse();
         }
 
         /// <summary>
@@ -3070,6 +3092,34 @@ namespace XenAPI
               return session.JsonRpcClient.async_host_get_server_certificate(session.opaque_ref, _host);
           else
               return XenRef<Task>.Create(session.XmlRpcProxy.async_host_get_server_certificate(session.opaque_ref, _host ?? "").parse());
+        }
+
+        /// <summary>
+        /// Replace the internal self-signed host certficate with a new one.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        public static void refresh_server_certificate(Session session, string _host)
+        {
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.host_refresh_server_certificate(session.opaque_ref, _host);
+            else
+                session.XmlRpcProxy.host_refresh_server_certificate(session.opaque_ref, _host ?? "").parse();
+        }
+
+        /// <summary>
+        /// Replace the internal self-signed host certficate with a new one.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        public static XenRef<Task> async_refresh_server_certificate(Session session, string _host)
+        {
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_host_refresh_server_certificate(session.opaque_ref, _host);
+          else
+              return XenRef<Task>.Create(session.XmlRpcProxy.async_host_refresh_server_certificate(session.opaque_ref, _host ?? "").parse());
         }
 
         /// <summary>
@@ -4794,5 +4844,23 @@ namespace XenAPI
             }
         }
         private List<update_guidances> _pending_guidances = new List<update_guidances>() {};
+
+        /// <summary>
+        /// True if this host has TLS verifcation enabled
+        /// First published in Unreleased.
+        /// </summary>
+        public virtual bool tls_verification_enabled
+        {
+            get { return _tls_verification_enabled; }
+            set
+            {
+                if (!Helper.AreEqual(value, _tls_verification_enabled))
+                {
+                    _tls_verification_enabled = value;
+                    NotifyPropertyChanged("tls_verification_enabled");
+                }
+            }
+        }
+        private bool _tls_verification_enabled = false;
     }
 }

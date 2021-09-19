@@ -105,8 +105,14 @@ namespace XenAPI
             VM_SECURE_BOOT_FAILED,
             VM_CLONED,
             VM_CRASHED,
+            VM_UNPAUSE,
+            VM_PAUSED,
             VM_RESUMED,
             VM_SUSPENDED,
+            VM_CHECKPOINTED,
+            VM_SNAPSHOT_REVERTED,
+            VM_SNAPSHOTTED,
+            VM_MIGRATED,
             VM_REBOOTED,
             VM_SHUTDOWN,
             VM_STARTED,
@@ -275,10 +281,22 @@ namespace XenAPI
                         return MessageType.VM_CLONED;
                     case "VM_CRASHED":
                         return MessageType.VM_CRASHED;
+                    case "VM_UNPAUSE":
+                        return MessageType.VM_UNPAUSE;
+                    case "VM_PAUSED":
+                        return MessageType.VM_PAUSED;
                     case "VM_RESUMED":
                         return MessageType.VM_RESUMED;
                     case "VM_SUSPENDED":
                         return MessageType.VM_SUSPENDED;
+                    case "VM_CHECKPOINTED":
+                        return MessageType.VM_CHECKPOINTED;
+                    case "VM_SNAPSHOT_REVERTED":
+                        return MessageType.VM_SNAPSHOT_REVERTED;
+                    case "VM_SNAPSHOTTED":
+                        return MessageType.VM_SNAPSHOTTED;
+                    case "VM_MIGRATED":
+                        return MessageType.VM_MIGRATED;
                     case "VM_REBOOTED":
                         return MessageType.VM_REBOOTED;
                     case "VM_SHUTDOWN":
