@@ -115,40 +115,39 @@ namespace CommandLib
             return true;
         }
 
-
-        public static Stream connect(thinCLIProtocol tCLIprotocol, String hostname, int port)
+        /// <summary>
+        /// Create an SSL stream that will close the client's stream.
+        /// </summary>
+        public static Stream Connect(TcpClient client, thinCLIProtocol tCLIprotocol, int port)
         {
-		    if (port != 443){
-			    TcpClient client = new TcpClient(hostname, port);
-			    Stream stream = client.GetStream();
-			    return stream;
-		    } else {
-        	    TcpClient client = new TcpClient(hostname, port);
-        	    // Create an SSL stream that will close the client's stream.
-        	    SslStream sslStream = new SslStream(
-            	    client.GetStream(),
-            	    false,
-            	    new RemoteCertificateValidationCallback(ValidateServerCertificate),
-            	    null
-                );
-        	    try
-        	    {
-                    sslStream.AuthenticateAsClient("", null, SslProtocols.Tls | SslProtocols.Tls11 | SslProtocols.Tls12, true);
-                }
-        	    catch (AuthenticationException e){
-        		    if (tCLIprotocol.conf.debug) throw e;
-        		    tCLIprotocol.dGlobalError("Authentication failed - closing the connection.");
-            	    client.Close();
-            	    return null;
-                } catch (Exception e) {
-            	    if (tCLIprotocol.conf.debug) throw e;
-            	    tCLIprotocol.dGlobalError("Exception during SSL auth - closing the connection.");
-            	    client.Close();
-            	    return null;
-                }
-			    return sslStream;
-		    }
-	    }
+            if (port != 443)
+                return client.GetStream();
+
+            try
+            {
+                var sslStream = new SslStream(client.GetStream(), false, ValidateServerCertificate, null);
+
+                sslStream.AuthenticateAsClient("", null, SslProtocols.Tls | SslProtocols.Tls11 | SslProtocols.Tls12, true);
+
+                return sslStream;
+            }
+            catch (AuthenticationException)
+            {
+                if (tCLIprotocol.conf.debug)
+                    throw;
+                tCLIprotocol.dGlobalError("Authentication failed - closing the connection.");
+                client.Close();
+                return null;
+            }
+            catch
+            {
+                if (tCLIprotocol.conf.debug)
+                    throw;
+                tCLIprotocol.dGlobalError("Exception during SSL auth - closing the connection.");
+                client.Close();
+                return null;
+            }
+        }
     }
 
     public class HTTP{
@@ -183,21 +182,24 @@ namespace CommandLib
 		    return Int32.Parse(bits[1]);
 	    }
 
-        public static Stream doRPC(String method, Uri uri, thinCLIProtocol tCLIprotocol, params string[] headers)
+        public static Stream doRPC(TcpClient client, string method, Uri uri, thinCLIProtocol tCLIprotocol, params string[] headers)
         {
-            Stream http = Transport.connect(tCLIprotocol, uri.Host, uri.Port);
-            String startLine = string.Format("{0} {1} HTTP/1.0", method, uri.PathAndQuery);
+            Stream http = Transport.Connect(client, tCLIprotocol, uri.Port);
+
+            var startLine = string.Format("{0} {1} HTTP/1.0", method, uri.PathAndQuery);
             writeLine(http, startLine);
             foreach (string h in headers)
                 writeLine(http, h);
             writeLine(http, "");
 
-            String response = readLine(http);
+            var response = readLine(http);
             int code = getResultCode(response);
+
             switch (code)
             {
                 case 200:
                     break;
+
                 case 302:
                     string url = "";
                     while (true)
@@ -205,22 +207,28 @@ namespace CommandLib
                         response = readLine(http);
                         if (response.StartsWith("Location: "))
                             url = response.Substring(10);
-                        if (response.Equals("\r\n") || response.Equals("")) break;
+                        if (response.Equals("\r\n") || response.Equals(""))
+                            break;
                     }
+
                     Uri redirect = new Uri(url.Trim());
                     tCLIprotocol.conf.hostname = redirect.Host;
                     http.Close();
-                    return doRPC(method, redirect, tCLIprotocol, headers);
+                    http.Dispose();
+                    return doRPC(client, method, redirect, tCLIprotocol, headers);
+
                 default:
                     tCLIprotocol.dGlobalError(string.Format("Received error code {0} from the server doing an HTTP {1}", code, method));
                     http.Close();
+                    http.Dispose();
                     return null;
             }
 
             while (true)
             {
                 response = readLine(http);
-                if (response.Equals("\r\n") || response.Equals("")) break;
+                if (response.Equals("\r\n") || response.Equals(""))
+                    break;
             }
             // Stream should be positioned after the headers
             return http;
@@ -355,7 +363,8 @@ namespace CommandLib
             {
                 using (FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read))
                 {
-                    using (Stream http = HTTP.doRPC("PUT", uri, tCLIprotocol, 
+                    using (TcpClient client = new TcpClient(uri.Host, uri.Port))
+                    using (Stream http = HTTP.doRPC(client, "PUT", uri, tCLIprotocol, 
                         string.Format("Content-Length: {0}", fs.Length)))
                     {
                         if (http == null)
@@ -395,7 +404,8 @@ namespace CommandLib
 
                 using (FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write))
                 {
-                    using (Stream http = HTTP.doRPC("GET", uri, tCLIprotocol))
+                    using (TcpClient client = new TcpClient(uri.Host, uri.Port))
+                    using (Stream http = HTTP.doRPC(client, "GET", uri, tCLIprotocol))
                     {
                         if (http == null)
                         {
@@ -469,18 +479,25 @@ namespace CommandLib
             string content_length = "content-length: " + Encoding.UTF8.GetBytes(body).Length + "\r\n";
             string tosend = header + content_length + "\r\n" + body;
 
+            TcpClient client = null;
+            Stream stream = null;
+
             try
             {
-                Stream stream = Transport.connect(tCLIprotocol, tCLIprotocol.conf.hostname, tCLIprotocol.conf.port);
+                client = new TcpClient(tCLIprotocol.conf.hostname, tCLIprotocol.conf.port);
+                stream = Transport.Connect(client, tCLIprotocol, tCLIprotocol.conf.port);
+
                 if (stream == null)
                 {
                     // The SSL functions already tell us what happened
                     tCLIprotocol.dExit(1);
+                    return;
                 }
+
                 byte[] message = Encoding.UTF8.GetBytes(tosend);
                 stream.Write(message, 0, message.Length);
                 stream.Flush();
-                Messages.version_handshake(stream, tCLIprotocol);
+                version_handshake(stream, tCLIprotocol);
                 interpreter(stream, tCLIprotocol);
             }
             catch (SocketException)
@@ -490,9 +507,24 @@ namespace CommandLib
             }
             catch (Exception e)
             {
-                if (tCLIprotocol.conf.debug) throw e;
+                if (tCLIprotocol.conf.debug)
+                    throw;
                 tCLIprotocol.dGlobalError("Caught exception: " + e.Message);
                 tCLIprotocol.dExit(1);
+            }
+            finally
+            {
+                if (stream != null)
+                {
+                    stream.Close();
+                    stream.Dispose();
+                }
+
+                if (client != null)
+                {
+                    client.Close();
+                    client.Dispose();
+                }
             }
         }
 
