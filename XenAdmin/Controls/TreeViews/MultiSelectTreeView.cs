@@ -64,8 +64,8 @@ namespace XenAdmin.Controls
         private bool _nodeProcessedOnMouseDown;
         private bool _selectionChanged;
         private bool _wasDoubleClick;
-        private readonly InternalSelectedNodeCollection _selectedNodes = new InternalSelectedNodeCollection();
-        private readonly MultiSelectTreeSelectedNodeCollection _selectedNodesWrapper;
+        private readonly InternalSelectedNodeCollection _internalSelectedNodes = new InternalSelectedNodeCollection();
+        private readonly MultiSelectTreeSelectedNodeCollection _selectedNodes;
         private int intMouseClicks;
         private TreeViewSelectionMode _selectionMode;
         private MultiSelectTreeNode _keysStartNode;
@@ -84,7 +84,7 @@ namespace XenAdmin.Controls
 
         public MultiSelectTreeView()
         {
-            _selectedNodesWrapper = new MultiSelectTreeSelectedNodeCollection(this);
+            _selectedNodes = new MultiSelectTreeSelectedNodeCollection(this);
             _nodes = new MultiSelectTreeNodeCollection(this);
         }
 
@@ -185,7 +185,7 @@ namespace XenAdmin.Controls
 
         private bool IsNodeSelected(MultiSelectTreeNode node)
         {
-            return node != null && _selectedNodes.Contains(node);
+            return node != null && _internalSelectedNodes.Contains(node);
         }
 
         private bool IsPlusMinusClicked(MultiSelectTreeNode node, MouseEventArgs e)
@@ -826,7 +826,7 @@ namespace XenAdmin.Controls
                     {
                         return false;
                     }
-                    _selectedNodes.Add(node);
+                    _internalSelectedNodes.Add(node);
                     selected = true;
                     _selectionChanged = true;
                     OnAfterSelect(new TreeViewEventArgs(node, tva));
@@ -837,7 +837,7 @@ namespace XenAdmin.Controls
             if (IsNodeSelected(node))
             {
                 OnBeforeDeselect(new TreeViewEventArgs(node));
-                _selectedNodes.Remove(node);
+                _internalSelectedNodes.Remove(node);
                 _selectionChanged = true;
 
                 OnAfterDeselect(new TreeViewEventArgs(node));
@@ -898,7 +898,7 @@ namespace XenAdmin.Controls
         {
             List<MultiSelectTreeNode> list = new List<MultiSelectTreeNode>();
 
-            foreach (MultiSelectTreeNode node in _selectedNodes)
+            foreach (MultiSelectTreeNode node in _internalSelectedNodes)
             {
                 if (nodeKeepSelected == null)
                 {
@@ -918,7 +918,7 @@ namespace XenAdmin.Controls
         private void UnselectAllNodesNotBelongingDirectlyToParent(MultiSelectTreeNode parent, TreeViewAction tva)
         {
             ArrayList list = new ArrayList();
-            foreach (MultiSelectTreeNode node in _selectedNodes)
+            foreach (MultiSelectTreeNode node in _internalSelectedNodes)
             {
                 if (node.Parent != parent)
                 {
@@ -934,7 +934,7 @@ namespace XenAdmin.Controls
         private void UnselectAllNodesNotBelongingToLevel(int level, TreeViewAction tva)
         {
             ArrayList list = new ArrayList();
-            foreach (MultiSelectTreeNode node in _selectedNodes)
+            foreach (MultiSelectTreeNode node in _internalSelectedNodes)
             {
                 if (GetNodeLevel(node) != level)
                 {
@@ -950,7 +950,7 @@ namespace XenAdmin.Controls
         private void UnselectAllNodesNotBelongingToParent(MultiSelectTreeNode parent, TreeViewAction tva)
         {
             ArrayList list = new ArrayList();
-            foreach (MultiSelectTreeNode node in _selectedNodes)
+            foreach (MultiSelectTreeNode node in _internalSelectedNodes)
             {
                 if (!IsChildOf(node, parent))
                 {
@@ -1043,13 +1043,7 @@ namespace XenAdmin.Controls
             }
         }
 
-        public MultiSelectTreeSelectedNodeCollection SelectedNodes
-        {
-            get
-            {
-                return _selectedNodesWrapper;
-            }
-        }
+        public MultiSelectTreeSelectedNodeCollection SelectedNodes => _selectedNodes;
 
         [DefaultValue(TreeViewSelectionMode.SingleSelect)]
         public TreeViewSelectionMode SelectionMode
