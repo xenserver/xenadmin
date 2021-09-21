@@ -30,24 +30,44 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Text;
+using CFUValidator.OutputDecorators;
 
-namespace CFUValidator.OutputDecorators
+
+namespace CFUValidator.Validators
 {
-    abstract class Decorator : OuputComponent
+    public abstract class Validator : ISummaryGenerator
     {
-        private OuputComponent ouputComponent;
-        public void SetComponent(OuputComponent ouputComponentToSet)
+        protected List<string> Errors { get; } = new List<string>();
+
+        public void Validate(Action<string> statusReporter)
         {
-            ouputComponent = ouputComponentToSet;
+            statusReporter(Header);
+            ValidateCore(statusReporter);
+            statusReporter(Footer);
+            statusReporter(string.Empty);
         }
 
-        public override StringBuilder Generate()
+        public string GenerateSummary()
         {
-            if(ouputComponent != null)
-                return ouputComponent.Generate();
+            var sb = new StringBuilder();
+            sb.AppendLine(SummaryTitle);
 
-            throw new NullReferenceException();
+            if (Errors.Count > 0)
+                Errors.ForEach(v => sb.AppendLine(v));
+            else
+                sb.AppendLine("All OK");
+
+            return sb.ToString();
         }
+
+        protected abstract void ValidateCore(Action<string> statusReporter);
+
+        protected abstract string Header { get; }
+
+        protected abstract string Footer { get; }
+
+        protected abstract string SummaryTitle { get; }
     }
 }
