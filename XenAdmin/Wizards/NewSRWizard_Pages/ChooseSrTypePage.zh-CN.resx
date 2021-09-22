@@ -610,7 +610,7 @@
     <value>15</value>
   </data>
   <data name="radioButtonCifs.Text" xml:space="preserve">
-    <value>SMB/CIFS(&amp;M)</value>
+    <value>SMB(&amp;M)</value>
   </data>
   <data name="&gt;&gt;radioButtonCifs.Name" xml:space="preserve">
     <value>radioButtonCifs</value>

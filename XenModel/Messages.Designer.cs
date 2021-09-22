@@ -26249,7 +26249,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SMB/CIFS.
+        ///   Looks up a localized string similar to SMB.
         /// </summary>
         public static string NEWSR_CIFS_TYPE_NAME {
             get {

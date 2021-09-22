@@ -2797,7 +2797,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SMB/CIFS.
+        ///   Looks up a localized string similar to SMB.
         /// </summary>
         public static string Label_SR_SRTypes_smb {
             get {
