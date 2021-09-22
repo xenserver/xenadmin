@@ -8864,7 +8864,7 @@ SCSI ID: {2}
     <value>Windows 文件共享(SMB/CIFS)</value>
   </data>
   <data name="NEWSR_CIFS_TYPE_NAME" xml:space="preserve">
-    <value>SMB/CIFS</value>
+    <value>SMB</value>
   </data>
   <data name="NEWSR_CIF_DESCRIPTION" xml:space="preserve">
     <value>SMB ISO 库 [{0}]</value>
