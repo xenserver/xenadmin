@@ -8868,7 +8868,7 @@ You should only proceed if you have verified that these settings are correct.</v
 
 As SMB storage repositories are shared, the virtual disks stored in them allow VMs to be started on any server in a resource pool and to be migrated between them using Live Migration.
 
-When you configure a SMB storage repository, you simply provide the host name or IP address of the SMB server, the user name, the password and the path to a directory that will be used to contain the storage repository. The SMB server must be configured to export the specified path to all servers in the pool.</value>
+When you configure a SMB storage repository, you simply provide the host name or IP address of the SMB server, the user name, the password and the path to a directory that will be used to contain the storage repository. The SMB server must support version 3 and be configured to export the specified path to all servers in the pool.</value>
   </data>
   <data name="NEWSR_CIFS_ISO_BLURB" xml:space="preserve">
     <value>Select this option if you have a library of VM installation ISO images available as a Windows (SMB/CIFS) share that you want to attach to your host or pool.</value>
@@ -8877,7 +8877,7 @@ When you configure a SMB storage repository, you simply provide the host name or
     <value>Windows File Sharing (SMB/CIFS)</value>
   </data>
   <data name="NEWSR_CIFS_TYPE_NAME" xml:space="preserve">
-    <value>SMB/CIFS</value>
+    <value>SMB</value>
   </data>
   <data name="NEWSR_CIF_DESCRIPTION" xml:space="preserve">
     <value>SMB ISO Library [{0}]</value>

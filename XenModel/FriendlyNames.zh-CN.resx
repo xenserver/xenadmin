@@ -340,7 +340,7 @@
     <value>已部分应用</value>
   </data>
   <data name="Label-SR.SRTypes-smb" xml:space="preserve">
-    <value>SMB/CIFS</value>
+    <value>SMB</value>
   </data>
   <data name="Label-SR.SRTypes-cslg" xml:space="preserve">
     <value>StorageLink</value>
