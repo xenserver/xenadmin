@@ -1078,6 +1078,26 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enabling metric &quot;{0}&quot;....
+        /// </summary>
+        public static string ACTION_ENABLING_DATASOURCE {
+            get {
+                return ResourceManager.GetString("ACTION_ENABLING_DATASOURCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not enable metric &quot;{0}&quot;.
+        ///
+        ///This could be because the data source is not generating any data. Ensure the prerequisites for collecting this metric are met before attempting to enable it..
+        /// </summary>
+        public static string ACTION_ENABLING_DATASOURCE_ERROR {
+            get {
+                return ResourceManager.GetString("ACTION_ENABLING_DATASOURCE_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enabling live patching for &apos;{0}&apos;.
         /// </summary>
         public static string ACTION_ENABLING_LIVE_PATCHING {
@@ -18057,20 +18077,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;{0}&apos; Details.
-        /// </summary>
-        public static string GRAPHS_DETAILS_TITLE {
-            get {
-                return ResourceManager.GetString("GRAPHS_DETAILS_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Edit Graph....
         /// </summary>
         public static string GRAPHS_EDIT {
             get {
                 return ResourceManager.GetString("GRAPHS_EDIT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit &apos;{0}&apos;.
+        /// </summary>
+        public static string GRAPHS_EDIT_TITLE {
+            get {
+                return ResourceManager.GetString("GRAPHS_EDIT_TITLE", resourceCulture);
             }
         }
         
@@ -41553,7 +41573,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An error occurred when attempting to bind report datasources: {0}.
+        ///   Looks up a localized string similar to An error occurred when attempting to bind report data sources: {0}.
         /// </summary>
         public static string WLB_REPORT_BIND_DATASOURCE {
             get {

@@ -29,50 +29,94 @@
  * SUCH DAMAGE.
  */
 
+using System;
 using System.Linq;
 using System.Collections.Generic;
-using XenAdmin.Network;
 using XenAPI;
+
 
 namespace XenAdmin.Actions
 {
     public class GetDataSourcesAction : AsyncAction
     {
-        public readonly List<Data_source> DataSources = new List<Data_source>();
-        public readonly IXenObject IXenObject;
+        public List<Data_source> DataSources { get; } = new List<Data_source>();
+        public IXenObject XenObject { get; }
 
-        public GetDataSourcesAction(IXenConnection connection, IXenObject xmo)
-            : base(connection, Messages.ACTION_GET_DATASOURCES, Messages.ACTION_GETTING_DATASOURCES, true)
+        public GetDataSourcesAction(IXenObject xmo)
+            : base(xmo.Connection, Messages.ACTION_GET_DATASOURCES, Messages.ACTION_GETTING_DATASOURCES, true)
         {
-            IXenObject = xmo;
+            XenObject = xmo;
         }
 
         protected override void Run()
         {
             List<Data_source> sources;
 
-            Host host = IXenObject as Host;
-            VM vm = IXenObject as VM;
-            if (vm != null)
-            {
-                sources = XenAPI.VM.get_data_sources(Session, vm.opaque_ref);
-            }
-            else if (host != null)
-            {
-                sources = XenAPI.Host.get_data_sources(Session, host.opaque_ref);
-            }
+            if (XenObject is VM vm)
+                sources = VM.get_data_sources(Session, vm.opaque_ref);
+            else if (XenObject is Host host)
+                sources = Host.get_data_sources(Session, host.opaque_ref);
             else
-            {
                 return;
-            }
-            DataSources.AddRange(sources);
-            // add custom datasources
 
-            //CA-89512: We are provided the Avg CPU for server >= Tampa - otherwise work it out for ourselves
-            if(!DataSources.Any(d=>d.name_label=="cpu_avg"))
+            DataSources.AddRange(sources);
+
+            // add custom datasources
+            // - CA-89512: We are provided the Avg CPU for server >= Tampa - otherwise work it out for ourselves
+
+            if (DataSources.All(d => d.name_label != "cpu_avg"))
+                DataSources.Add(new Data_source("avg_cpu", "", true, false, "percentage", 0d, double.MaxValue, 0d));
+        }
+    }
+
+
+    public class EnableDataSourceAction : AsyncAction
+    {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+        private readonly Data_source _dataSource;
+        private readonly string _dataSourceFriendlyName;
+
+        public EnableDataSourceAction(IXenObject xenObject, Data_source dataSource, string dataSourceFriendlyName)
+            : base(xenObject.Connection, string.Format(Messages.ACTION_ENABLING_DATASOURCE, dataSourceFriendlyName), true)
+        {
+            _dataSource = dataSource;
+            _dataSourceFriendlyName = dataSourceFriendlyName;
+
+            if (xenObject is Host host)
             {
-                Data_source avg_cpu_source = new Data_source("avg_cpu", "", true, false, "percentage", 0d, double.MaxValue, 0d);
-                DataSources.Add(avg_cpu_source);
+                Host = host;
+                ApiMethodsToRoleCheck.Add("host.record_data_source");
+            }
+            else if (xenObject is VM vm)
+            {
+                VM = vm;
+                ApiMethodsToRoleCheck.Add("VM.record_data_source");
+            }
+        }
+
+        public List<Data_source> DataSources { get; private set; }
+
+        protected override void Run()
+        {
+            try
+            {
+                if (Host != null)
+                {
+                    Host.record_data_source(Session, Host.opaque_ref, _dataSource.name_label);
+                    DataSources = Host.get_data_sources(Session, Host.opaque_ref);
+                }
+                else if (VM != null)
+                {
+                    VM.record_data_source(Session, VM.opaque_ref, _dataSource.name_label);
+                    DataSources = VM.get_data_sources(Session, VM.opaque_ref);
+                }
+            }
+            catch (Exception e)
+            {
+                Description = string.Format(Messages.ACTION_ENABLING_DATASOURCE_ERROR, _dataSourceFriendlyName);
+                log.Error($"Failed to enable data source {_dataSource.name_label}", e);
+                throw;
             }
         }
     }

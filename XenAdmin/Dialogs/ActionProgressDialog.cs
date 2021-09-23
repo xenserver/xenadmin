@@ -45,24 +45,16 @@ namespace XenAdmin.Dialogs
     /// </summary>
     internal partial class ActionProgressDialog : XenDialogBase
     {
+        public event EventHandler CancelClicked;
         public readonly AsyncAction action;
-        private bool showTryAgain = true;
-        private bool showCancel;
-        
-        /// <summary>
-        /// Default value is false.
-        /// </summary>
+
+        public bool ShowTryAgainMessage { private get; set; } = true;
+
+        public bool ShowException { private get; set; } = true;
+
         public bool ShowCancel
         {
-            get
-            {
-                return showCancel;
-            }
-            set
-            {
-                showCancel = value;
-                buttonCancel.Visible = showCancel;
-            }
+            set => buttonCancel.Visible = value;
         }
 
         private void HideTitleBarIcons()
@@ -93,12 +85,6 @@ namespace XenAdmin.Dialogs
             buttonCancel.Enabled = action.CanCancel;
             ShowIcon = false;
             HideTitleBarIcons();
-        }
-
-        public ActionProgressDialog(AsyncAction action, ProgressBarStyle progressBarStyle, bool showTryAgain) :
-            this(action, progressBarStyle)
-        {
-            this.showTryAgain = showTryAgain;
         }
 
         private void action_Changed(ActionBase sender)
@@ -146,20 +132,16 @@ namespace XenAdmin.Dialogs
             if (Disposing || IsDisposed || Program.Exiting)
                 return;
 
-            Program.Invoke(this, action_Completed_);
-        }
-
-        private void action_Completed_()
-        {
-            Program.AssertOnEventThread();
-
-            if (action.Succeeded || action.Cancelled)
+            Program.Invoke(this, () =>
             {
-                this.Close();
-                return;
-            }
+                if (action.Succeeded || action.Cancelled)
+                {
+                    Close();
+                    return;
+                }
 
-            SwitchDialogToShowErrorState();
+                SwitchDialogToShowErrorState();
+            });
         }
 
         private void SwitchDialogToShowErrorState()
@@ -172,10 +154,10 @@ namespace XenAdmin.Dialogs
             CancelButton = buttonClose;
             ControlBox = true;
             ShowIcon = true;
-            labelException.Visible = true;
+            labelException.Visible = ShowException;
             icon.Visible = true;
             icon.Image = Images.StaticImages._000_error_h32bit_32;
-            labelBottom.Visible = showTryAgain;
+            labelBottom.Visible = ShowTryAgainMessage;
 
             if (action.Exception == null)
             {
@@ -205,8 +187,6 @@ namespace XenAdmin.Dialogs
         {
             this.Close();
         }
-
-        public event EventHandler CancelClicked;
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
