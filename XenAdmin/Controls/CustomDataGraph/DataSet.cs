@@ -83,7 +83,7 @@ namespace XenAdmin.Controls.CustomDataGraph
             else
                 FriendlyName = Helpers.GetFriendlyDataSourceName(datasourceName, xo);
 
-            var units = datasources.FirstOrDefault(d => datasourceName.StartsWith(d.name_label))?.units;
+            var units = datasources.FirstOrDefault(d => datasourceName == d.name_label)?.units;
 
             switch (units)
             {
