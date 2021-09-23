@@ -38,6 +38,7 @@ using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Controls.CustomDataGraph;
 using XenAdmin.Core;
+using XenAPI;
 using XenCenterLib;
 
 
@@ -45,62 +46,66 @@ namespace XenAdmin.Dialogs
 {
     public partial class GraphDetailsDialog : XenDialogBase
     {
-        private const int DisplayOnGraphColumnIndex = 0;
-        private const int NameColumnIndex = 1;
-        private const int TypeColumnIndex = 2;
-        private const int ColorColumnIndex = 3;
         private const int ColorSquareSize = 12;
 
-        private static readonly int[] SortableColumnIndexes = new int[] {DisplayOnGraphColumnIndex, NameColumnIndex, TypeColumnIndex};
+        private readonly DesignedGraph designedGraph;
+        private readonly GraphList graphList;
+        private readonly bool isNew;
+        private bool _updating;
+        private List<DataSourceItem> _dataSourceItems = new List<DataSourceItem>();
 
-        private DesignedGraph designedGraph;
-        private GraphList graphList;
-        private bool isNew;
-        private List<DataSourceItem> _dataSources = new List<DataSourceItem>();
-
-        public GraphDetailsDialog(): this(null, null)
-        {
-        }
-
-        public GraphDetailsDialog(GraphList graphList, DesignedGraph designedGraph)
+        public GraphDetailsDialog(GraphList graphList, DesignedGraph designedGraph = null)
+            : base(graphList.XenObject?.Connection)
         {
             InitializeComponent();
             tableLayoutPanel1.Visible = false;
 
             this.graphList = graphList;
-            isNew = (designedGraph == null);
-            if (isNew)
+
+            if (designedGraph == null)
             {
+                isNew = true;
                 this.designedGraph = new DesignedGraph();
                 // Generate an unique suggested name for the graph
-                if (graphList != null)
-                    this.designedGraph.DisplayName = Helpers.MakeUniqueName(Messages.GRAPH_NAME, graphList.DisplayNames);
+                this.designedGraph.DisplayName = Helpers.MakeUniqueName(Messages.GRAPH_NAME, graphList.DisplayNames);
                 base.Text = Messages.GRAPHS_NEW_TITLE;
             }
             else
             {
                 this.designedGraph = new DesignedGraph(designedGraph);
-                base.Text = string.Format(Messages.GRAPHS_DETAILS_TITLE, this.designedGraph.DisplayName);
-                SaveButton.Text = Messages.OK;
+                base.Text = string.Format(Messages.GRAPHS_EDIT_TITLE, this.designedGraph.DisplayName);
             }
+
             ActiveControl = GraphNameTextBox;
             GraphNameTextBox.Text = this.designedGraph.DisplayName;
-            EnableControls();
+            EnableControlsAfterCheckChanged();
+            EnableControlsAfterSelectionChanged();
         }
 
-        void getDataSorucesAction_Completed(ActionBase sender)
+        private void LoadDataSources()
         {
-            Program.Invoke(this, delegate
+            if (graphList.XenObject == null)
+                return;
+
+            tableLayoutPanel1.Visible = true;
+            searchTextBox.Enabled = false;
+
+            var action = new GetDataSourcesAction(graphList.XenObject);
+            action.Completed += getDataSourcesAction_Completed;
+            action.RunAsync();
+        }
+
+        private void getDataSourcesAction_Completed(ActionBase sender)
+        {
+            if (!(sender is GetDataSourcesAction action))
+                return;
+
+            Program.Invoke(this, () =>
             {
                 tableLayoutPanel1.Visible = false;
-                GetDataSourcesAction action = sender as GetDataSourcesAction;
-                if (action != null)
-                {
-                    _dataSources = DataSourceItemList.BuildList(action.IXenObject, action.DataSources);
-                    PopulateDataGridView();
-                }
+                _dataSourceItems = DataSourceItemList.BuildList(action.XenObject, action.DataSources);
+                PopulateDataGridView();
                 searchTextBox.Enabled = true;
-                EnableControls();
             });
         }
 
@@ -108,33 +113,115 @@ namespace XenAdmin.Dialogs
         {
             try
             {
+                _updating = true;
                 dataGridView.SuspendLayout();
                 dataGridView.Rows.Clear();
-                
-                foreach (DataSourceItem dataSourceItem in _dataSources)
+
+                var rowList = new List<DataSourceGridViewRow>();
+
+                foreach (DataSourceItem dataSourceItem in _dataSourceItems)
                 {
+                    if (!toolStripMenuItemHidden.Checked && dataSourceItem.Hidden)
+                        continue;
+
+                    if (!toolStripMenuItemDisabled.Checked && !dataSourceItem.Enabled)
+                        continue;
+
                     if (!searchTextBox.Matches(dataSourceItem.ToString()))
                         continue;
 
-                    bool displayOnGraph = designedGraph.DataSources.Contains(dataSourceItem);
-                    dataGridView.Rows.Add(new DataSourceGridViewRow(dataSourceItem, displayOnGraph));
+                    bool displayOnGraph = designedGraph.DataSourceItems.Contains(dataSourceItem);
+                    rowList.Add(new DataSourceGridViewRow(dataSourceItem, displayOnGraph));
                 }
 
-                dataGridView.Sort(dataGridView.Columns[DisplayOnGraphColumnIndex], ListSortDirection.Ascending);
+
+                dataGridView.Rows.AddRange(rowList.Cast<DataGridViewRow>().ToArray());
+                dataGridView.Sort(dataGridView.Columns[ColumnDisplayOnGraph.Index], ListSortDirection.Ascending);
+
                 if (dataGridView.Rows.Count > 0)
-                {
-                    dataGridView.Rows[0].Cells[DisplayOnGraphColumnIndex].Selected = true;
-                }
+                    dataGridView.Rows[0].Cells[ColumnDisplayOnGraph.Index].Selected = true;
             }
             finally
             {
                 dataGridView.ResumeLayout();
+                _updating = false;
+                EnableControlsAfterCheckChanged();
+                EnableControlsAfterSelectionChanged();
             }
         }
 
+        private void EnableControlsAfterCheckChanged()
+        {
+            int checkedRowCount = dataGridView.Rows.Cast<DataSourceGridViewRow>().Count(row => row.IsChecked);
+            buttonClearAll.Enabled = checkedRowCount > 0;
+            SaveButton.Enabled = checkedRowCount > 0;
+        }
+
+        private void EnableControlsAfterSelectionChanged()
+        {
+            if (_updating)
+                return;
+
+            var selectedRows = dataGridView.SelectedRows.Cast<DataSourceGridViewRow>().ToList();
+            buttonEnable.Enabled = selectedRows.Count == 1 && selectedRows.TrueForAll(r => !r.Recording);
+        }
+
+        private void ClearAll()
+        {
+            try
+            {
+                foreach (var row in dataGridView.Rows)
+                {
+                    if (!(row is DataSourceGridViewRow dsRow))
+                        continue;
+
+                    dsRow.ClearCheck();
+                    designedGraph.DataSourceItems.Remove(dsRow.Dsi);
+                }
+            }
+            finally
+            {
+                EnableControlsAfterCheckChanged();
+            }
+        }
+
+        private void EnableDatasource()
+        {
+            if (graphList.XenObject?.Connection == null || dataGridView.SelectedRows.Count != 1)
+                return;
+
+            var row = dataGridView.SelectedRows[0] as DataSourceGridViewRow;
+            var dataSource = row?.Dsi.DataSource;
+            if (dataSource == null)
+                return;
+
+            buttonEnable.Enabled = false;
+            var action = new EnableDataSourceAction(graphList.XenObject, dataSource, row.Dsi.ToString());
+
+            using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee)
+            {
+                ShowTryAgainMessage = false,
+                ShowException = false
+            })
+            {
+                dialog.ShowDialog(this);
+            }
+
+            EnableControlsAfterSelectionChanged();
+
+            if (action.Succeeded && action is EnableDataSourceAction enableAction && enableAction.DataSources != null)
+            {
+                var updated = enableAction.DataSources.FirstOrDefault(d => d.name_label == dataSource.name_label);
+                row.Recording = updated != null && updated.enabled;
+            }
+        }
+
+
+        #region Event handlers
+
         private void datasourcesGridView_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            if ((e.ColumnIndex == ColorColumnIndex) && (e.RowIndex > -1))
+            if (e.ColumnIndex == ColumnColour.Index && 0 <= e.RowIndex && e.RowIndex <= dataGridView.RowCount -1)
             {   
                 Rectangle rect = dataGridView.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true);
                 e.PaintBackground(rect, true);
@@ -157,231 +244,238 @@ namespace XenAdmin.Dialogs
             }
         }
 
-        private void EnableControls()
-        {
-            int selectedRows = dataGridView.Rows.Cast<DataGridViewRow>().Count(row =>
-                {
-                    var boolCell = row.Cells[DisplayOnGraphColumnIndex] as DataGridViewCheckBoxCell;
-                    return boolCell != null && (bool)boolCell.Value;
-                });
-            
-            bool canEnable = selectedRows > 0;
-            SaveButton.Enabled = canEnable;
-            ClearAllButton.Enabled = canEnable;
-            clearAllToolStripMenuItem.Enabled = canEnable;
-        }
-
         private void datasourcesGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex > -1)
-            {
-                switch (e.ColumnIndex)
-                {
-                    case DisplayOnGraphColumnIndex:
-                    case NameColumnIndex:
-                    case TypeColumnIndex:
-                        var boolCell =
-                            dataGridView.Rows[e.RowIndex].Cells[DisplayOnGraphColumnIndex] as DataGridViewCheckBoxCell;
-                        if (boolCell != null)
-                        {
-                            bool value = (bool)boolCell.Value;
-                            boolCell.Value = !value;
-
-                            DataSourceItem dsi = ((DataSourceGridViewRow)dataGridView.Rows[e.RowIndex]).Dsi;
-                            if (dsi != null)
-                            {                             
-                                if (!value)
-                                {
-                                    designedGraph.DataSources.Add(dsi);
-                                }
-                                else
-                                {
-                                    designedGraph.DataSources.Remove(dsi);
-                                }
-                            }
-                        }
-                        EnableControls();
-                        break;
-                    case ColorColumnIndex:
-                        var colorCell = dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex] as DataGridViewTextBoxCell;
-                        if (colorCell != null)
-                        {
-                            ColorDialog cd = new ColorDialog
-                            {
-                                Color = (Color)colorCell.Value,
-                                AllowFullOpen = true,
-                                AnyColor = true,
-                                FullOpen = true,
-                                SolidColorOnly = true
-                            };
-                            if (cd.ShowDialog() != DialogResult.OK)
-                                return;
-                            colorCell.Value = cd.Color;
-
-                            DataSourceItem dsi = ((DataSourceGridViewRow)dataGridView.Rows[e.RowIndex]).Dsi;
-                            if (dsi != null)
-                            {
-                                dsi.Color = cd.Color;
-                                dsi.ColorChanged = true;
-                            }
-                        }
-                        break;
-                }
-            }
-        }
-
-        private void SaveButton_Click(object sender, EventArgs e)
-        {
-            if (graphList == null || graphList.XenObject == null)
+            if (e.RowIndex < 0 || e.RowIndex > dataGridView.RowCount - 1)
                 return;
 
-            designedGraph.DisplayName = GraphNameTextBox.Text;
-            if (isNew)
-            {
-                graphList.AddGraph(designedGraph);
-            }
-            else
-            {
-                graphList.ReplaceGraphAt(graphList.SelectedGraphIndex, designedGraph);
-            }
+            var row = dataGridView.Rows[e.RowIndex] as DataSourceGridViewRow;
+            if (row == null)
+                return;
 
-            List<DataSourceItem> dataSources = new List<DataSourceItem>();
-            foreach (DataGridViewRow row in dataGridView.Rows)
+            if (e.ColumnIndex == ColumnDisplayOnGraph.Index)
             {
-                DataSourceItem dsi = ((DataSourceGridViewRow)row).Dsi;
-                if (dsi.ColorChanged)
-                    Palette.SetCustomColor(Palette.GetUuid(dsi.DataSource.name_label, graphList.XenObject), dsi.Color);
-                dataSources.Add(dsi);
-            }
-            graphList.SaveGraphs(dataSources);
-        }
-
-        private int SortCompare(DataGridViewRow row1, DataGridViewRow row2, int[] orderByColumnIndexes,
-            IEnumerable<int> alwaysAscendingOrderColumnIndexes, SortOrder currentSortOrder)
-        {
-            int result = 0;
-            if (orderByColumnIndexes.Length > 0)
-            {
-                int columnIndex = orderByColumnIndexes[0];
-                if (row1.Cells[columnIndex].ValueType.Equals(typeof(bool)))
+                if (row.IsChecked)
                 {
-                    bool value1 = (bool)row1.Cells[columnIndex].Value;
-                    bool value2 = (bool)row2.Cells[columnIndex].Value;
-                    result = value1 ^ value2 ? value1 ? -1 : 1 : 0;
+                    row.ClearCheck();
+                    designedGraph.DataSourceItems.Remove(row.Dsi);
                 }
                 else
                 {
-                    result = StringUtility.NaturalCompare(row1.Cells[columnIndex].Value.ToString(),
-                                            row2.Cells[columnIndex].Value.ToString());
+                    row.Check();
+                    designedGraph.DataSourceItems.Add(row.Dsi);
                 }
 
-                if (result == 0)
+                EnableControlsAfterCheckChanged();
+            }
+            else if (e.ColumnIndex == ColumnColour.Index)
+            {
+                using (var cd = new ColorDialog
                 {
-                    if (orderByColumnIndexes.Length > 1)
-                    {
-                        result = SortCompare(row1, row2, orderByColumnIndexes.Where((val, idx) => idx != 0).ToArray(),
-                                             alwaysAscendingOrderColumnIndexes, currentSortOrder);
-                    }
-                }
-                else if (currentSortOrder == SortOrder.Descending && alwaysAscendingOrderColumnIndexes.Contains(columnIndex))
+                    Color = row.Colour,
+                    AllowFullOpen = true,
+                    AnyColor = true,
+                    FullOpen = true,
+                    SolidColorOnly = true
+                })
                 {
-                    result = -result;
+                    if (cd.ShowDialog() == DialogResult.OK)
+                        row.Colour = cd.Color;
                 }
             }
-            return result;
+        }
+
+        private void dataGridView_SelectionChanged(object sender, EventArgs e)
+        {
+            EnableControlsAfterSelectionChanged();
         }
 
         private void dataGridView_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
         {
-            if (!SortableColumnIndexes.Contains(e.Column.Index)) return;
+            var row1 = dataGridView.Rows[e.RowIndex1] as DataSourceGridViewRow;
+            var row2 = dataGridView.Rows[e.RowIndex2] as DataSourceGridViewRow;
 
-            int[] orderByColumnIndexes;
+            int result;
 
-            if (e.Column.Index == DisplayOnGraphColumnIndex)
-                orderByColumnIndexes = new int[] { DisplayOnGraphColumnIndex, NameColumnIndex, TypeColumnIndex };
-            else if (e.Column.Index == NameColumnIndex)
-                orderByColumnIndexes = new int[] { NameColumnIndex, DisplayOnGraphColumnIndex, TypeColumnIndex };
-            else if (e.Column.Index == TypeColumnIndex)
-                orderByColumnIndexes = new int[] { TypeColumnIndex, DisplayOnGraphColumnIndex, NameColumnIndex };
+            if (row1 == null && row2 == null)
+                result = 0;
+            else if (row1 == null)
+                result = 1;
+            else if (row2 == null)
+                result = -1;
             else
-                return;
-
-            e.SortResult = SortCompare(dataGridView.Rows[e.RowIndex1], dataGridView.Rows[e.RowIndex2],
-                                       orderByColumnIndexes,
-                                       SortableColumnIndexes.Where((val, idx) => idx != e.Column.Index),
-                                       dataGridView.SortOrder);
-            e.Handled = true;
-        }
-
-        private class DataSourceGridViewRow : DataGridViewRow
-        {
-            private DataSourceItem dsi;
-            internal DataSourceItem Dsi { get { return dsi; } }
-
-            public DataSourceGridViewRow(DataSourceItem dataSourceItem, bool displayOnGraph)
             {
-                this.dsi = dataSourceItem;
-                var displayOnGraphCell = new DataGridViewCheckBoxCell { Value = displayOnGraph };
-                var datasourceCell = new DataGridViewTextBoxCell { Value = dsi.ToString() };
-                var typeCell = new DataGridViewTextBoxCell { Value = dsi.Category.ToStringI18N() };
-                var colourCell = new DataGridViewTextBoxCell { Value = dsi.Color };
-                Cells.AddRange(displayOnGraphCell, datasourceCell, typeCell, colourCell);
-            }
-        }
+                result = row1.CompareByCell(row2, e.Column.Index);
 
-        private void ClearAll()
-        {
-            try
-            {
-                foreach (DataGridViewRow row in dataGridView.Rows)
+                if (result == 0)
                 {
-                    var boolCell = row.Cells[DisplayOnGraphColumnIndex] as DataGridViewCheckBoxCell;
-                    if (boolCell != null)
+                    for (var i = 0; i < dataGridView.ColumnCount; i++)
                     {
-                        boolCell.Value = false;
-                        DataSourceItem dsi = ((DataSourceGridViewRow)row).Dsi;
-                        if (dsi != null)
-                        {
-                            designedGraph.DataSources.Remove(dsi);
-                        }
+                        if (i == e.Column.Index)
+                            continue;
+
+                        result = row1.CompareByCell(row2, i);
+                        if (result == 0)
+                            continue;
+
+                        //the columns other than the clicked one should always be ascending
+                        if (dataGridView.SortOrder == SortOrder.Descending)
+                            result = -result;
+
+                        break;
                     }
                 }
             }
-            finally
-            {
-                EnableControls();
-            }            
+
+            e.SortResult = result;
+            e.Handled = true;
         }
 
-        private void ClearAllButton_Click(object sender, EventArgs e)
-        {
-            ClearAll();
-        }
-
-        private void clearAllToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ClearAll();
-        }
-
-        private void dataGridView_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Right)
-                contextMenuStrip.Show(dataGridView, e.X, e.Y);
-        }
 
         private void GraphDetailsDialog_Load(object sender, EventArgs e)
         {
-            if (graphList != null)
-            {
-                tableLayoutPanel1.Visible = true;
-                searchTextBox.Enabled = false;
-                graphList.LoadDataSources(getDataSorucesAction_Completed);
-            }
+            LoadDataSources();
         }
+
 
         private void searchTextBox_TextChanged(object sender, EventArgs e)
         {
             PopulateDataGridView();
         }
+
+
+        private void toolStripMenuItemDisabled_CheckedChanged(object sender, EventArgs e)
+        {
+            PopulateDataGridView();
+        }
+
+        private void toolStripMenuItemHidden_CheckedChanged(object sender, EventArgs e)
+        {
+            PopulateDataGridView();
+        }
+
+        private void buttonClearAll_Click(object sender, EventArgs e)
+        {
+            ClearAll();
+        }
+        
+        private void buttonEnable_Click(object sender, EventArgs e)
+        {
+            EnableDatasource();
+        }
+
+
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
+            if (graphList.XenObject == null)
+                return;
+
+            designedGraph.DisplayName = GraphNameTextBox.Text;
+            
+            if (isNew)
+                graphList.AddGraph(designedGraph);
+            else
+                graphList.ReplaceGraphAt(graphList.SelectedGraphIndex, designedGraph);
+
+            var dataSourceItems = new List<DataSourceItem>();
+            foreach (DataGridViewRow row in dataGridView.Rows)
+            {
+                if (!(row is DataSourceGridViewRow dsRow))
+                    continue;
+
+                if (dsRow.Dsi.ColorChanged)
+                    Palette.SetCustomColor(Palette.GetUuid(dsRow.Dsi.DataSource.name_label, graphList.XenObject), dsRow.Dsi.Color);
+                dataSourceItems.Add(dsRow.Dsi);
+            }
+            graphList.SaveGraphs(dataSourceItems);
+        }
+
+        #endregion
+
+
+        #region Nested classes
+
+        private class DataSourceGridViewRow : DataGridViewRow
+        {
+            private readonly DataGridViewCheckBoxCell _checkBoxCell = new DataGridViewCheckBoxCell();
+            private readonly DataGridViewTextBoxCell _datasourceCell = new DataGridViewTextBoxCell();
+            private readonly DataGridViewTextBoxCell _typeCell = new DataGridViewTextBoxCell();
+            private readonly DataGridViewTextBoxCell _enabledCell = new DataGridViewTextBoxCell();
+            private readonly DataGridViewTextBoxCell _colourCell = new DataGridViewTextBoxCell();
+
+            public DataSourceGridViewRow(DataSourceItem dataSourceItem, bool displayOnGraph)
+            {
+                Dsi = dataSourceItem;
+
+                _checkBoxCell.Value = displayOnGraph;
+                _datasourceCell.Value = Dsi.ToString();
+                _typeCell.Value = Dsi.Category.ToStringI18N();
+                _enabledCell.Value = Dsi.Enabled.ToYesNoStringI18n();
+                _colourCell.Value = Dsi.Color;
+                Cells.AddRange(_checkBoxCell, _datasourceCell, _typeCell, _enabledCell, _colourCell);
+
+                if (Dsi.Hidden)
+                    base.DefaultCellStyle = new DataGridViewCellStyle
+                    {
+                        ForeColor = SystemColors.GrayText,
+                        SelectionForeColor = SystemColors.GrayText,
+                        SelectionBackColor = SystemColors.ControlLight
+                    };
+            }
+
+            internal DataSourceItem Dsi { get; }
+
+            internal Color Colour
+            {
+                get => (Color)_colourCell.Value;
+                set
+                {
+                    Dsi.ColorChanged = Dsi.Color != value;
+                    Dsi.Color = value;
+                    _colourCell.Value = value;
+                }
+            }
+
+            internal bool IsChecked => (bool)_checkBoxCell.Value;
+
+            internal bool Recording
+            {
+                get =>  Dsi.Enabled;
+                set
+                {
+                    Dsi.Enabled = value;
+                    _enabledCell.Value = value.ToYesNoStringI18n();
+                }
+            }
+
+            internal void Check()
+            {
+                _checkBoxCell.Value = true;
+            }
+            
+            internal void ClearCheck()
+            {
+                _checkBoxCell.Value = false;
+            }
+
+            public int CompareByCell(DataSourceGridViewRow other, int index)
+            {
+                if (other == null)
+                    return -1;
+
+                //In .NET false precedes true, but we want the checked rows to appear first
+                if (index == _checkBoxCell.ColumnIndex)
+                    return -IsChecked.CompareTo(other.IsChecked);
+
+                if (_checkBoxCell.ColumnIndex < index && index < _colourCell.ColumnIndex)
+                    return StringUtility.NaturalCompare(Cells[index].Value.ToString(),
+                        other.Cells[index].Value.ToString());
+
+                return 0;
+            }
+        }
+
+
+        #endregion
     }
 }

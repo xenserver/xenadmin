@@ -46,7 +46,6 @@ namespace XenAdmin.Dialogs
             this.labelBottom = new System.Windows.Forms.Label();
             this.labelException = new System.Windows.Forms.Label();
             this.labelSubActionStatus = new System.Windows.Forms.Label();
-            this.labelTop = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.icon)).BeginInit();
             this.SuspendLayout();
@@ -66,20 +65,19 @@ namespace XenAdmin.Dialogs
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
             this.tableLayoutPanel1.Controls.Add(this.labelStatus, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.icon, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.buttonClose, 1, 6);
-            this.tableLayoutPanel1.Controls.Add(this.buttonCancel, 2, 5);
-            this.tableLayoutPanel1.Controls.Add(this.progressBar1, 1, 5);
-            this.tableLayoutPanel1.Controls.Add(this.labelBottom, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.labelException, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.buttonClose, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.buttonCancel, 2, 4);
+            this.tableLayoutPanel1.Controls.Add(this.progressBar1, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.labelBottom, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.labelException, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.labelSubActionStatus, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.labelTop, 1, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // icon
             // 
             resources.ApplyResources(this.icon, "icon");
             this.icon.Name = "icon";
-            this.tableLayoutPanel1.SetRowSpan(this.icon, 6);
+            this.tableLayoutPanel1.SetRowSpan(this.icon, 5);
             this.icon.TabStop = false;
             // 
             // buttonClose
@@ -110,11 +108,6 @@ namespace XenAdmin.Dialogs
             resources.ApplyResources(this.labelSubActionStatus, "labelSubActionStatus");
             this.labelSubActionStatus.Name = "labelSubActionStatus";
             // 
-            // labelTop
-            // 
-            resources.ApplyResources(this.labelTop, "labelTop");
-            this.labelTop.Name = "labelTop";
-            // 
             // ActionProgressDialog
             // 
             resources.ApplyResources(this, "$this");
@@ -136,7 +129,6 @@ namespace XenAdmin.Dialogs
         private System.Windows.Forms.Label labelStatus;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Label labelTop;
         private System.Windows.Forms.Label labelException;
         private System.Windows.Forms.Label labelBottom;
         private System.Windows.Forms.PictureBox icon;

@@ -106,7 +106,7 @@ namespace XenAdmin.Controls.CustomDataGraph
         /// </summary>
         private List<DataSet> SetsAdded;
 
-        private List<Data_source> _enabledDataSources = new List<Data_source>();
+        private List<Data_source> _dataSources = new List<Data_source>();
 
         private IXenObject _xenObject;
 
@@ -186,7 +186,7 @@ namespace XenAdmin.Controls.CustomDataGraph
                         Archives[ArchiveInterval.OneDay].MaxPoints = DaysInOneYear;
                     }
 
-                    _enabledDataSources.Clear();
+                    _dataSources.Clear();
 
                     foreach (DataArchive a in Archives.Values)
                         a.ClearSets();
@@ -197,9 +197,9 @@ namespace XenAdmin.Controls.CustomDataGraph
                         ArchivesUpdated?.Invoke();
 
                         if (xenObject is Host h)
-                            _enabledDataSources = Host.get_data_sources(h.Connection.Session, h.opaque_ref).Where(d => d.enabled).ToList();
+                            _dataSources = Host.get_data_sources(h.Connection.Session, h.opaque_ref);
                         else if (xenObject is VM vm && vm.power_state == vm_power_state.Running)
-                            _enabledDataSources = VM.get_data_sources(vm.Connection.Session, vm.opaque_ref).Where(d => d.enabled).ToList();
+                            _dataSources = VM.get_data_sources(vm.Connection.Session, vm.opaque_ref);
 
                         Get(ArchiveInterval.None, RrdsUri, RRD_Full_InspectCurrentNode, xenObject);
                     }
@@ -428,7 +428,7 @@ namespace XenAdmin.Controls.CustomDataGraph
 
                     ArchiveInterval i = GetArchiveIntervalFromFiveSecs(CurrentInterval);
                     if (i != ArchiveInterval.None)
-                        Archives[i].CopyLoad(SetsAdded, _enabledDataSources);
+                        Archives[i].CopyLoad(SetsAdded, _dataSources);
 
                     foreach (DataSet set in SetsAdded)
                         set.Points.Clear();
@@ -442,7 +442,7 @@ namespace XenAdmin.Controls.CustomDataGraph
             if (LastNode == "name")
             {
                 string str = reader.ReadContentAsString();
-                SetsAdded.Add(new DataSet(xmo, false, str, _enabledDataSources));
+                SetsAdded.Add(new DataSet(xmo, false, str, _dataSources));
             }
             else if (LastNode == "step")
             {
@@ -480,7 +480,7 @@ namespace XenAdmin.Controls.CustomDataGraph
 
                 DataSet set = SetsAdded[ValueCount];
                 string str = reader.ReadContentAsString();
-                set.AddPoint(str, CurrentTime, SetsAdded, _enabledDataSources);
+                set.AddPoint(str, CurrentTime, SetsAdded, _dataSources);
                 ValueCount++;
             }
         }
@@ -507,19 +507,19 @@ namespace XenAdmin.Controls.CustomDataGraph
                     {
                         Host host = xo.Connection.Cache.Hosts.FirstOrDefault(h => h.uuid == objUuid);
                         if (host != null)
-                            set = new DataSet(host, (xo as Host)?.uuid != objUuid, dataSourceName, _enabledDataSources);
+                            set = new DataSet(host, (xo as Host)?.uuid != objUuid, dataSourceName, _dataSources);
                     }
 
                     if (objType == "vm")
                     {
                         VM vm = xo.Connection.Cache.VMs.FirstOrDefault(v => v.uuid == objUuid);
                         if (vm != null)
-                            set = new DataSet(vm, (xo as VM)?.uuid != objUuid, dataSourceName, _enabledDataSources);
+                            set = new DataSet(vm, (xo as VM)?.uuid != objUuid, dataSourceName, _dataSources);
                     }
                 }
 
                 if (set == null)
-                    set = new DataSet(null, true, str, _enabledDataSources);
+                    set = new DataSet(null, true, str, _dataSources);
 
                 SetsAdded.Add(set);
             }
@@ -533,7 +533,7 @@ namespace XenAdmin.Controls.CustomDataGraph
                 if (SetsAdded.Count <= ValueCount) return;
                 DataSet set = SetsAdded[ValueCount];
                 string str = reader.ReadContentAsString();
-                set.AddPoint(str, CurrentTime, SetsAdded, _enabledDataSources);
+                set.AddPoint(str, CurrentTime, SetsAdded, _dataSources);
                 ValueCount++;
             }
         }

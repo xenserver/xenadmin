@@ -34,7 +34,6 @@ using System.Collections.Generic;
 using System.Linq;
 using XenAPI;
 using XenCenterLib;
-
 using XenAdmin.Core;
 
 namespace XenAdmin.Controls.CustomDataGraph
@@ -83,7 +82,7 @@ namespace XenAdmin.Controls.CustomDataGraph
             else
                 FriendlyName = Helpers.GetFriendlyDataSourceName(datasourceName, xo);
 
-            var units = datasources.FirstOrDefault(d => datasourceName.StartsWith(d.name_label))?.units;
+            var units = datasources.FirstOrDefault(d => datasourceName == d.name_label)?.units;
 
             switch (units)
             {
@@ -140,8 +139,13 @@ namespace XenAdmin.Controls.CustomDataGraph
                 case "Centigrade":
                     CustomYRange = new DataRange(1, 0, 1, Unit.Centigrade, RangeScaleMode.Auto);
                     break;
+                case "unknown":
+                    CustomYRange = new DataRange(1, 0, 1, Unit.Unknown, RangeScaleMode.Auto);
+                    break;
                 default:
-                    if (!string.IsNullOrEmpty(units))
+                    if (string.IsNullOrEmpty(units))
+                        CustomYRange = new DataRange(1, 0, 1, Unit.Unknown, RangeScaleMode.Auto);
+                    else
                         System.Diagnostics.Debug.Assert(false, $"Unhandled units {units}!");
                     break;
             }
