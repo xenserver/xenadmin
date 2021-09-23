@@ -57,10 +57,15 @@
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.searchTextBox = new XenAdmin.Controls.SearchTextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.contextMenuStrip.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProgress)).BeginInit();
+            this.tableLayoutPanel2.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // GraphNameLabel
@@ -87,6 +92,7 @@
             // GraphNameTextBox
             // 
             resources.ApplyResources(this.GraphNameTextBox, "GraphNameTextBox");
+            this.tableLayoutPanel2.SetColumnSpan(this.GraphNameTextBox, 3);
             this.GraphNameTextBox.Name = "GraphNameTextBox";
             // 
             // dataGridView
@@ -95,9 +101,9 @@
             this.dataGridView.AllowUserToDeleteRows = false;
             this.dataGridView.AllowUserToResizeColumns = false;
             this.dataGridView.AllowUserToResizeRows = false;
-            resources.ApplyResources(this.dataGridView, "dataGridView");
             this.dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridView.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dataGridView.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -105,6 +111,7 @@
             this.ColumnName,
             this.ColumnType,
             this.ColumnColour});
+            resources.ApplyResources(this.dataGridView, "dataGridView");
             this.dataGridView.MultiSelect = false;
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.ReadOnly = true;
@@ -168,6 +175,7 @@
             // ClearAllButton
             // 
             resources.ApplyResources(this.ClearAllButton, "ClearAllButton");
+            this.tableLayoutPanel2.SetColumnSpan(this.ClearAllButton, 2);
             this.ClearAllButton.Name = "ClearAllButton";
             this.ClearAllButton.UseVisualStyleBackColor = true;
             this.ClearAllButton.Click += new System.EventHandler(this.ClearAllButton_Click);
@@ -247,8 +255,36 @@
             // searchTextBox
             // 
             resources.ApplyResources(this.searchTextBox, "searchTextBox");
+            this.tableLayoutPanel2.SetColumnSpan(this.searchTextBox, 4);
             this.searchTextBox.Name = "searchTextBox";
             this.searchTextBox.TextChanged += new System.EventHandler(this.searchTextBox_TextChanged);
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.tableLayoutPanel2.SetColumnSpan(this.label1, 4);
+            this.label1.Name = "label1";
+            // 
+            // tableLayoutPanel2
+            // 
+            resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
+            this.tableLayoutPanel2.Controls.Add(this.panel1, 0, 3);
+            this.tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.GraphNameLabel, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.searchTextBox, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.ClearAllButton, 0, 4);
+            this.tableLayoutPanel2.Controls.Add(this.SaveButton, 2, 4);
+            this.tableLayoutPanel2.Controls.Add(this.CloseButton, 3, 4);
+            this.tableLayoutPanel2.Controls.Add(this.GraphNameTextBox, 1, 1);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            // 
+            // panel1
+            // 
+            this.tableLayoutPanel2.SetColumnSpan(this.panel1, 4);
+            this.panel1.Controls.Add(this.tableLayoutPanel1);
+            this.panel1.Controls.Add(this.dataGridView);
+            resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.Name = "panel1";
             // 
             // GraphDetailsDialog
             // 
@@ -256,14 +292,7 @@
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.CancelButton = this.CloseButton;
-            this.Controls.Add(this.searchTextBox);
-            this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.dataGridView);
-            this.Controls.Add(this.ClearAllButton);
-            this.Controls.Add(this.GraphNameTextBox);
-            this.Controls.Add(this.SaveButton);
-            this.Controls.Add(this.CloseButton);
-            this.Controls.Add(this.GraphNameLabel);
+            this.Controls.Add(this.tableLayoutPanel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
             this.Name = "GraphDetailsDialog";
             this.Load += new System.EventHandler(this.GraphDetailsDialog_Load);
@@ -272,8 +301,11 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProgress)).EndInit();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -298,6 +330,8 @@
         private System.Windows.Forms.Label labelProgress;
         private System.Windows.Forms.PictureBox pictureBoxProgress;
         private Controls.SearchTextBox searchTextBox;
-
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label1;
     }
 }

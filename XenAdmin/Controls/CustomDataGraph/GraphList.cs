@@ -364,11 +364,9 @@ namespace XenAdmin.Controls.CustomDataGraph
         private void LoadDefaultGraphs()
         {
             List<string> dsuuids = new List<string>();
-            if (XenObject is Host)
+            if (XenObject is Host host)
             {
                 List<DesignedGraph> dg = new List<DesignedGraph>();
-
-                Host host = (Host)XenObject;
 
                 DesignedGraph cpudg = new DesignedGraph();
                 cpudg.DisplayName = Messages.GRAPHS_DEFAULT_NAME_CPU;
@@ -396,11 +394,9 @@ namespace XenAdmin.Controls.CustomDataGraph
                 SetGraphs(dg);
             }
 
-            if (XenObject is VM)
+            if (XenObject is VM vm)
             {
                 List<DesignedGraph> dg = new List<DesignedGraph>();
-
-                VM vm = (VM)XenObject;
 
                 DesignedGraph cpudg = new DesignedGraph();
                 cpudg.DisplayName = Messages.GRAPHS_DEFAULT_NAME_CPU;
@@ -699,15 +695,6 @@ namespace XenAdmin.Controls.CustomDataGraph
             {
                 ResumeLayout();
             }
-        }
-
-        public void LoadDataSources(Action<ActionBase> completedEventHandler)
-        {
-            if (XenObject == null)
-                return;
-            GetDataSourcesAction action = new GetDataSourcesAction(XenObject.Connection, XenObject);
-            action.Completed += completedEventHandler;
-            action.RunAsync();
         }
 
         public void RestoreDefaultGraphs()

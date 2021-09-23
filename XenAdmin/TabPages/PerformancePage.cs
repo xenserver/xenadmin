@@ -197,6 +197,16 @@ namespace XenAdmin.TabPages
             get { return Helpers.FeatureForbidden(XenObject, Host.RestrictPerformanceGraphs); }
         }
 
+        private void LoadDataSources()
+        {
+            if (XenObject == null)
+                return;
+
+            var action = new GetDataSourcesAction(XenObject);
+            action.Completed += SaveGraphs;
+            action.RunAsync();
+        }
+
         private void LoadEvents()
         {
             foreach(XenAPI.Message m in XenObject.Connection.Cache.Messages)
@@ -386,7 +396,7 @@ namespace XenAdmin.TabPages
                     if (GraphList.AuthorizedRole)
                     {
                         GraphList.DeleteGraph(GraphList.SelectedGraph);
-                        GraphList.LoadDataSources(SaveGraphs);
+                        LoadDataSources();
                     }
             }
         }
@@ -400,21 +410,20 @@ namespace XenAdmin.TabPages
                     if (GraphList.AuthorizedRole)
                     {
                         GraphList.RestoreDefaultGraphs();
-                        GraphList.LoadDataSources(SaveGraphs);
+                        LoadDataSources();
                     }
             }
         }
 
         private void SaveGraphs(ActionBase sender)
         {
-            Program.Invoke(Program.MainWindow, delegate
+            if (!(sender is GetDataSourcesAction action))
+                return;
+
+            Program.Invoke(Program.MainWindow, () =>
             {
-                var action = sender as GetDataSourcesAction;
-                if (action != null)
-                {
-                    var dataSources = DataSourceItemList.BuildList(action.IXenObject, action.DataSources);
-                    GraphList.SaveGraphs(dataSources);
-                }
+                var dataSourceItems = DataSourceItemList.BuildList(action.XenObject, action.DataSources);
+                GraphList.SaveGraphs(dataSourceItems);
             });
         }
 

@@ -56,7 +56,7 @@ namespace XenAdmin.Dialogs
         private DesignedGraph designedGraph;
         private GraphList graphList;
         private bool isNew;
-        private List<DataSourceItem> _dataSources = new List<DataSourceItem>();
+        private List<DataSourceItem> _dataSourceItems = new List<DataSourceItem>();
 
         public GraphDetailsDialog(): this(null, null)
         {
@@ -88,17 +88,26 @@ namespace XenAdmin.Dialogs
             EnableControls();
         }
 
-        void getDataSorucesAction_Completed(ActionBase sender)
+        private void LoadDataSources()
         {
-            Program.Invoke(this, delegate
+            if (graphList?.XenObject == null)
+                return;
+
+            var action = new GetDataSourcesAction(graphList.XenObject);
+            action.Completed += getDataSourcesAction_Completed;
+            action.RunAsync();
+        }
+
+        private void getDataSourcesAction_Completed(ActionBase sender)
+        {
+            if (!(sender is GetDataSourcesAction action))
+                return;
+
+            Program.Invoke(this, () =>
             {
                 tableLayoutPanel1.Visible = false;
-                GetDataSourcesAction action = sender as GetDataSourcesAction;
-                if (action != null)
-                {
-                    _dataSources = DataSourceItemList.BuildList(action.IXenObject, action.DataSources);
-                    PopulateDataGridView();
-                }
+                _dataSourceItems = DataSourceItemList.BuildList(action.XenObject, action.DataSources);
+                PopulateDataGridView();
                 searchTextBox.Enabled = true;
                 EnableControls();
             });
@@ -110,21 +119,24 @@ namespace XenAdmin.Dialogs
             {
                 dataGridView.SuspendLayout();
                 dataGridView.Rows.Clear();
-                
-                foreach (DataSourceItem dataSourceItem in _dataSources)
+
+                var rowList = new List<DataSourceGridViewRow>();
+
+                foreach (DataSourceItem dataSourceItem in _dataSourceItems)
                 {
                     if (!searchTextBox.Matches(dataSourceItem.ToString()))
                         continue;
 
                     bool displayOnGraph = designedGraph.DataSources.Contains(dataSourceItem);
-                    dataGridView.Rows.Add(new DataSourceGridViewRow(dataSourceItem, displayOnGraph));
+                    rowList.Add(new DataSourceGridViewRow(dataSourceItem, displayOnGraph));
                 }
 
+
+                dataGridView.Rows.AddRange(rowList.Cast<DataGridViewRow>().ToArray());
                 dataGridView.Sort(dataGridView.Columns[DisplayOnGraphColumnIndex], ListSortDirection.Ascending);
+
                 if (dataGridView.Rows.Count > 0)
-                {
                     dataGridView.Rows[0].Cells[DisplayOnGraphColumnIndex].Selected = true;
-                }
             }
             finally
             {
@@ -375,7 +387,7 @@ namespace XenAdmin.Dialogs
             {
                 tableLayoutPanel1.Visible = true;
                 searchTextBox.Enabled = false;
-                graphList.LoadDataSources(getDataSorucesAction_Completed);
+                LoadDataSources();
             }
         }
 
