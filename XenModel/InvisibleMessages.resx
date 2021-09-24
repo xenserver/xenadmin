@@ -130,7 +130,7 @@
     <value>http://support.citrix.com/article/CTX141433</value>
   </data>
   <data name="LICENSE_EXPIRY_WEBPAGE" xml:space="preserve">
-    <value>http://store.citrix.com/XSInProduct</value>
+    <value>https://store.citrix.com/dr_product/citrix-hypervisor-subscription</value>
   </data>
   <data name="LICENSE_SERVER_DOWNLOAD_LINK" xml:space="preserve">
     <value>http://www.citrix.com/downloads/licensing/license-server</value>
@@ -166,7 +166,7 @@
     <value>http://support.citrix.com/</value>
   </data>
   <data name="UPSELL_SA" xml:space="preserve">
-    <value>http://store.citrix.com/XSInProduct</value>
+    <value>https://store.citrix.com/dr_product/citrix-hypervisor-subscription</value>
   </data>
   <data name="XENDESKTOP_URL" xml:space="preserve">
     <value>http://www.citrix.com/TryXenDesktop</value>
