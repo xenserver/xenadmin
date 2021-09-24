@@ -2543,8 +2543,22 @@ namespace XenAPI
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
+        public static void evacuate(Session session, string _host)
+        {
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.host_evacuate(session.opaque_ref, _host);
+            else
+                session.XmlRpcProxy.host_evacuate(session.opaque_ref, _host ?? "").parse();
+        }
+        
+        /// <summary>
+        /// Migrate all VMs off of this host, where possible.
+        /// First published in XenServer 4.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         /// <param name="_network">Optional preferred network for migration First published in Unreleased.</param>
-        public static void evacuate(Session session, string _host, string _network = null)
+        public static void evacuate(Session session, string _host, string _network)
         {
             if (session.JsonRpcClient != null)
                 session.JsonRpcClient.host_evacuate(session.opaque_ref, _host, _network);
@@ -2558,8 +2572,22 @@ namespace XenAPI
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
+        public static XenRef<Task> async_evacuate(Session session, string _host)
+        {
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_host_evacuate(session.opaque_ref, _host);
+          else
+              return XenRef<Task>.Create(session.XmlRpcProxy.async_host_evacuate(session.opaque_ref, _host ?? "").parse());
+        }
+        
+        /// <summary>
+        /// Migrate all VMs off of this host, where possible.
+        /// First published in XenServer 4.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
         /// <param name="_network">Optional preferred network for migration First published in Unreleased.</param>
-        public static XenRef<Task> async_evacuate(Session session, string _host, string _network = null)
+        public static XenRef<Task> async_evacuate(Session session, string _host, string _network)
         {
           if (session.JsonRpcClient != null)
               return session.JsonRpcClient.async_host_evacuate(session.opaque_ref, _host, _network);
