@@ -133,7 +133,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://store.citrix.com/XSInProduct.
+        ///   Looks up a localized string similar to https://store.citrix.com/dr_product/citrix-hypervisor-subscription.
         /// </summary>
         public static string LICENSE_EXPIRY_WEBPAGE {
             get {
@@ -241,7 +241,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://store.citrix.com/XSInProduct.
+        ///   Looks up a localized string similar to https://store.citrix.com/dr_product/citrix-hypervisor-subscription.
         /// </summary>
         public static string UPSELL_SA {
             get {
