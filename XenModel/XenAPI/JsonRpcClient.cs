@@ -6549,11 +6549,25 @@ namespace XenAPI
             return Rpc<XenRef<Task>>("Async.host.get_uncooperative_resident_VMs", new JArray(session, _host ?? ""), serializer);
         }
 
+        public void host_evacuate(string session, string _host)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            Rpc("host.evacuate", new JArray(session, _host ?? ""), serializer);
+        }
+
         public void host_evacuate(string session, string _host, string _network)
         {
             var converters = new List<JsonConverter> {new XenRefConverter<Network>()};
             var serializer = CreateSerializer(converters);
             Rpc("host.evacuate", new JArray(session, _host ?? "", _network ?? ""), serializer);
+        }
+
+        public XenRef<Task> async_host_evacuate(string session, string _host)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<XenRef<Task>>("Async.host.evacuate", new JArray(session, _host ?? ""), serializer);
         }
 
         public XenRef<Task> async_host_evacuate(string session, string _host, string _network)

@@ -3764,7 +3764,15 @@ namespace XenAPI
 
         [XmlRpcMethod("host.evacuate")]
         Response<string>
+        host_evacuate(string session, string _host);
+
+        [XmlRpcMethod("host.evacuate")]
+        Response<string>
         host_evacuate(string session, string _host, string _network);
+
+        [XmlRpcMethod("Async.host.evacuate")]
+        Response<string>
+        async_host_evacuate(string session, string _host);
 
         [XmlRpcMethod("Async.host.evacuate")]
         Response<string>
