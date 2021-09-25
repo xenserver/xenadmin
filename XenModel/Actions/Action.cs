@@ -52,7 +52,7 @@ namespace XenAdmin.Actions
     public class ActionBase : IStatus
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        protected static readonly log4net.ILog AuditLog = log4net.LogManager.GetLogger("Audit");
+        private static readonly log4net.ILog AuditLog = log4net.LogManager.GetLogger("Audit");
 
         public string Title;
 
