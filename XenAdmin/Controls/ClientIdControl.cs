@@ -132,7 +132,7 @@ namespace XenAdmin.Controls
 
         private void linkLabelClientIdUrl_Click(object sender, EventArgs e)
         {
-            Program.OpenURL(InvisibleMessages.CLIENT_ID_URL);
+            Program.OpenURL(Registry.GetCustomClientIdUrl() ?? InvisibleMessages.CLIENT_ID_URL);
         }
     }
 }

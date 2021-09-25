@@ -171,6 +171,18 @@ namespace XenAdmin.Core
                    ReadRegistryValue(RegistryHive.LocalMachine, XENCENTER_LOCAL_KEYS, CUSTOM_UPDATES_XML_LOCATION);
         }
 
+        public static string GetCustomFileServicePrefix()
+        {
+            return ReadRegistryValue(RegistryHive.CurrentUser, XENCENTER_LOCAL_KEYS, CUSTOM_FILESERVICE_PREFIX) ??
+                   ReadRegistryValue(RegistryHive.LocalMachine, XENCENTER_LOCAL_KEYS, CUSTOM_FILESERVICE_PREFIX);
+        }
+
+        public static string GetCustomClientIdUrl()
+        {
+            return ReadRegistryValue(RegistryHive.CurrentUser, XENCENTER_LOCAL_KEYS, CUSTOM_CLIENT_ID_URL) ??
+                   ReadRegistryValue(RegistryHive.LocalMachine, XENCENTER_LOCAL_KEYS, CUSTOM_CLIENT_ID_URL);
+        }
+
         public static string CustomHelpUrl => ReadString(HELP_URL_OVERRIDE);
 
         private const string SSL_CERTIFICATES_CHANGED_ONLY = "CHANGED";
@@ -194,6 +206,8 @@ namespace XenAdmin.Core
         private const string HIDDEN_FEATURES = "HiddenFeatures";
         private const string ADDITIONAL_FEATURES = "AdditionalFeatures";
         private const string CUSTOM_UPDATES_XML_LOCATION = "CheckForUpdatesXmlLocationOverride";
+        private const string CUSTOM_FILESERVICE_PREFIX = "PatchUrlPrefixOverride";
+        private const string CUSTOM_CLIENT_ID_URL = "ClientIdUrlOverride";
         private const string HELP_URL_OVERRIDE = "HelpUrlOverride";
     }
 

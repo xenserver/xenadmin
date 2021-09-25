@@ -64,6 +64,7 @@ namespace XenAdmin
         bool ShowHiddenVMs { get; }
         string GetXenCenterMetadata(bool isForXenCenter);
         string GetCustomUpdatesXmlLocation();
+        string GetCustomFileServicePrefix();
         string FileServiceUsername { get; }
         string FileServiceClientId { get; }
     }
