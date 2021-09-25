@@ -127,6 +127,7 @@ namespace XenAdmin
 
         private static readonly System.Windows.Forms.Timer CheckForUpdatesTimer = new System.Windows.Forms.Timer();
 
+        public PluginManager PluginManager => pluginManager;
         private readonly PluginManager pluginManager;
         private readonly ContextMenuBuilder contextMenuBuilder;
 

@@ -29,7 +29,9 @@
  * SUCH DAMAGE.
  */
 
+using System.Windows.Forms;
 using XenAdmin.Controls;
+using XenAdmin.Dialogs;
 
 namespace XenAdmin.Wizards.PatchingWizard
 {
@@ -40,25 +42,19 @@ namespace XenAdmin.Wizards.PatchingWizard
             InitializeComponent();
         }
 
-        public override string Text
-        {
-            get
-            {
-                return Messages.BEFORE_YOU_START;
-            }
-        }
+        public override string Text => Messages.BEFORE_YOU_START;
 
-        public override string  PageTitle
-        {
-            get
-            {
-                return Messages.BEFORE_YOU_START;
-            }
-        }
+        public override string  PageTitle => Messages.BEFORE_YOU_START;
 
-        public override string HelpID
+        public override string HelpID => "Beforeyoustart";
+
+        private void linkLabelClientId_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            get { return "Beforeyoustart"; }
+            using (var dialog = new OptionsDialog(Program.MainWindow.PluginManager))
+            {
+                dialog.SelectUpdateOptionsPage();
+                dialog.ShowDialog(this);
+            }
         }
     }
 }

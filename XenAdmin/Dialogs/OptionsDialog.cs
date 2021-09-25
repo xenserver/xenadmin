@@ -93,6 +93,11 @@ namespace XenAdmin.Dialogs
         {
             SelectPage(connectionOptionsPage1);
         }
+
+        public void SelectUpdateOptionsPage()
+        {
+            SelectPage(updatesOptionsPage1);
+        }
     }
 }
 
