@@ -50,7 +50,7 @@ namespace XenAdmin.Wizards.PatchingWizard
     public enum Status { NotStarted, Started, Cancelled, Completed }
     public abstract partial class AutomatedUpdatesBasePage : XenTabPage
     {
-        protected static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         protected bool _thisPageIsCompleted;
 
