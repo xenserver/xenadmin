@@ -6151,7 +6151,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to {0}
         ///
-        ///Deleting this bond will automatically transfer the management interface on the bond to the first other member of the bond: 
+        ///Deleting this bond will automatically transfer the management interface on the bond to the first of the bonded members: 
         ///
         ///- {1} connections to the pool will temporarily be disturbed
         ///
@@ -6166,7 +6166,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to {0}
         ///
-        ///Deleting this bond will disrupt traffic through the secondary interface on the bond while the interface is moved to the first other member of the bond..
+        ///Deleting this bond will disrupt traffic through the secondary interface on the bond while the interface is moved to the first of the bonded members..
         /// </summary>
         public static string BOND_DELETE_WILL_DISTURB_SECONDARY {
             get {
