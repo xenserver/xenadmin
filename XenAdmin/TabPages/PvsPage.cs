@@ -231,17 +231,17 @@ namespace XenAdmin.TabPages
         {
             vm.PropertyChanged -= VmPropertyChanged;
             vm.PropertyChanged += VmPropertyChanged;
-            if (pvsProxy != null)
-            {
-                pvsProxy.PropertyChanged -= PvsProxyPropertyChanged;
-                pvsProxy.PropertyChanged += PvsProxyPropertyChanged;
-                PVS_site pvsSite = pvsProxy == null ? null : Connection.Resolve(pvsProxy.site);
-                if (pvsSite != null)
-                {
-                    pvsSite.PropertyChanged -= PvsSitePropertyChanged;
-                    pvsSite.PropertyChanged += PvsSitePropertyChanged;
-                }
-            }
+
+            if (pvsProxy == null)
+                return;
+            pvsProxy.PropertyChanged -= PvsProxyPropertyChanged;
+            pvsProxy.PropertyChanged += PvsProxyPropertyChanged;
+
+            var pvsSite = Connection.Resolve(pvsProxy.site);
+            if (pvsSite == null)
+                return;
+            pvsSite.PropertyChanged -= PvsSitePropertyChanged;
+            pvsSite.PropertyChanged += PvsSitePropertyChanged;
         }
 
         private void UnregisterVmEventHandlers()

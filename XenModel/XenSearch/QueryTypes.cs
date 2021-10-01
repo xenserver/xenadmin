@@ -481,27 +481,31 @@ namespace XenAdmin.XenSearch
         // item doesn't use a Server).
         public override bool? MatchProperty(List<T> list)
         {
-            bool seenFalse = false;
-            bool seenNull = false;
-            foreach (T o in list)
+            var seenFalse = false;
+            var seenNull = false;
+            foreach (var o in list)
             {
                 if (o != null)
                 {
-                    bool? b = subQuery.Match(o);
-                    if (b == true)
-                        return true;
-                    else if (b == false)
-                        seenFalse = true;
-                    else
-                        seenNull = true;
+                    var b = subQuery.Match(o);
+                    switch (b)
+                    {
+                        case true:
+                            return true;
+                        case false:
+                            seenFalse = true;
+                            break;
+                        default:
+                            seenNull = true;
+                            break;
+                    }
                 }
             }
             if (seenFalse)
                 return false;
-            else if (seenNull)
+            if (seenNull)
                 return null;
-            else
-                return false;
+            return false;
         }
     }
 
