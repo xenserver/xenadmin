@@ -157,7 +157,7 @@ namespace XenAdmin.Controls
             {
                 VirtualTreeNode.PersistenceInfo info = new VirtualTreeNode.PersistenceInfo(node);
 
-                if (!_persistedSelectionInfo.Contains(info))
+                if (_persistedSelectionInfo != null && !_persistedSelectionInfo.Contains(info))
                 {
                     // selection is different to old one. So fire an event.
 
