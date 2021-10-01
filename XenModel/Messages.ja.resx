@@ -8870,7 +8870,7 @@ SMB ストレージ リポジトリを構成する場合は、SMB サーバー�
     <value>Windows ファイル共有 (SMB/CIFS)</value>
   </data>
   <data name="NEWSR_CIFS_TYPE_NAME" xml:space="preserve">
-    <value>SMB/CIFS</value>
+    <value>SMB</value>
   </data>
   <data name="NEWSR_CIF_DESCRIPTION" xml:space="preserve">
     <value>SMB ISO ライブラリ [{0}]</value>
