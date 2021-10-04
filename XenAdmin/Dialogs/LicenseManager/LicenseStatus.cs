@@ -213,13 +213,12 @@ namespace XenAdmin.Dialogs
                                    into g
                                    select new { ExpiryDate = g.Key, Hosts = g };
 
-                expiryGroups = expiryGroups.OrderBy(g => g.ExpiryDate).ToList();
-
-                if (expiryGroups.Count() <= 1)
-                    return false;
-
-                if ((expiryGroups.ElementAt(1).ExpiryDate - expiryGroups.ElementAt(0).ExpiryDate).TotalDays > 30)
-                    return true;
+                if(expiryGroups.Count() > 1)
+                {
+                    expiryGroups.OrderBy(g => g.ExpiryDate);
+                    if ((expiryGroups.ElementAt(1).ExpiryDate - expiryGroups.ElementAt(0).ExpiryDate).TotalDays > 30)
+                        return true;
+                }
             }
             return false;
         }

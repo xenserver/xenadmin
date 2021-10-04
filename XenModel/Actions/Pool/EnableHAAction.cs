@@ -67,7 +67,7 @@ namespace XenAdmin.Actions
         {
             if (startupOptions != null)
             {
-                double increment = 10 / Math.Max(startupOptions.Count, 1);
+                double increment = 10.0 / Math.Max(startupOptions.Count, 1);
                 int i = 0;
                 // First set any VM restart priorities supplied
                 foreach (VM vm in startupOptions.Keys)

@@ -2498,7 +2498,7 @@ namespace XenAdmin.Controls.XenSearch
                 if (intQuery == null)
                     return;
 
-                queryElement.numericUpDown.Value = intQuery.query / multiplier;
+                queryElement.numericUpDown.Value = (decimal) intQuery.query / multiplier;
             }
         }
 
