@@ -205,74 +205,53 @@ namespace XenAdmin.Alerts
 
         public static string GetMailDestination(IXenConnection connection)
         {
-            Pool pool = Helpers.GetPoolOfOne(connection);
+            var pool = Helpers.GetPoolOfOne(connection);
             if (pool == null)
                 return null;
 
-            Dictionary<String, String> other_config = Helpers.GetOtherConfig(pool);
-            if (other_config == null)
+            var otherConfig = Helpers.GetOtherConfig(pool);
+            if (otherConfig == null)
                 return null;
 
-            if (!other_config.ContainsKey(MAIL_DESTINATION_KEY_NAME))
+            if (!otherConfig.ContainsKey(MAIL_DESTINATION_KEY_NAME))
                 return null;
 
-            String mailAddress = other_config[MAIL_DESTINATION_KEY_NAME];
-            if (mailAddress == null)
-                return null;
-
-            mailAddress.Trim();
-            if (String.IsNullOrEmpty(mailAddress))
-                return null;
-
-            return mailAddress;
+            var mailAddress = otherConfig[MAIL_DESTINATION_KEY_NAME]?.Trim();
+            return string.IsNullOrEmpty(mailAddress) ? null : mailAddress;
         }
 
         public static string GetSmtpMailHub(IXenConnection connection)
         {
-            Pool pool = Helpers.GetPoolOfOne(connection);
+            var pool = Helpers.GetPoolOfOne(connection);
             if (pool == null)
                 return null;
 
-            Dictionary<String, String> other_config = Helpers.GetOtherConfig(pool);
-            if (other_config == null)
+            var otherConfig = Helpers.GetOtherConfig(pool);
+            if (otherConfig == null)
                 return null;
 
-            if (!other_config.ContainsKey(SMTP_MAILHUB_KEY_NAME))
+            if (!otherConfig.ContainsKey(SMTP_MAILHUB_KEY_NAME))
                 return null;
 
-            String mailHub = other_config[SMTP_MAILHUB_KEY_NAME];
-            if (mailHub == null)
-                return null;
-
-            mailHub.Trim();
-            if (String.IsNullOrEmpty(mailHub))
-                return null;
-
-            return mailHub;
+            var mailHub = otherConfig[SMTP_MAILHUB_KEY_NAME]?.Trim();
+            return string.IsNullOrEmpty(mailHub) ? null : mailHub;
         }
 
         public static string GetMailLanguageCode(IXenConnection connection)
         {
-            Pool pool = Helpers.GetPoolOfOne(connection);
+            var pool = Helpers.GetPoolOfOne(connection);
             if (pool == null)
                 return null;
 
-            Dictionary<String, String> other_config = Helpers.GetOtherConfig(pool);
-            if (other_config == null)
+            var otherConfig = Helpers.GetOtherConfig(pool);
+            if (otherConfig == null)
                 return null;
 
-            if (!other_config.ContainsKey(MAIL_LANGUAGE_KEY_NAME))
+            if (!otherConfig.ContainsKey(MAIL_LANGUAGE_KEY_NAME))
                 return null;
 
-            String mailLanguageCode = other_config[MAIL_LANGUAGE_KEY_NAME];
-            if (mailLanguageCode == null)
-                return null;
-
-            mailLanguageCode.Trim();
-            if (String.IsNullOrEmpty(mailLanguageCode))
-                return null;
-
-            return mailLanguageCode;
+            var mailLanguageCode = otherConfig[MAIL_LANGUAGE_KEY_NAME]?.Trim();
+            return string.IsNullOrEmpty(mailLanguageCode) ? null : mailLanguageCode;
         }
 
         public static String MailLanguageNameFromCode(String code)

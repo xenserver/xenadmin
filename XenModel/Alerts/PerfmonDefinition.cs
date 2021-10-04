@@ -287,24 +287,20 @@ namespace XenAdmin.Alerts
         public static PerfmonDefinition[] GetPerfmonDefinitions(IXenObject xo)
         {
             if (!(xo is VM) && !(xo is Host) && !(xo is SR))
-                return new PerfmonDefinition[0];
+                return Array.Empty<PerfmonDefinition>();
 
-            Dictionary<string, string> other_config = Helpers.GetOtherConfig(xo);
+            var other_config = Helpers.GetOtherConfig(xo);
             if (other_config == null)
-                return new PerfmonDefinition[0];
+                return Array.Empty<PerfmonDefinition>();
 
             if (!other_config.ContainsKey(PERFMON_KEY_NAME))
-                return new PerfmonDefinition[0];
+                return Array.Empty<PerfmonDefinition>();
 
-            string perfmonConfigXML = other_config[PERFMON_KEY_NAME];
+            var perfmonConfigXML = other_config[PERFMON_KEY_NAME];
             if (perfmonConfigXML == null)
-                return new PerfmonDefinition[0];
+                return Array.Empty<PerfmonDefinition>();
 
-            perfmonConfigXML.Trim();
-            if (String.IsNullOrEmpty(perfmonConfigXML))
-                return new PerfmonDefinition[0];
-
-            return GetPerfmonDefinitions(perfmonConfigXML);
+            return string.IsNullOrEmpty(perfmonConfigXML) ? Array.Empty<PerfmonDefinition>() : GetPerfmonDefinitions(perfmonConfigXML);
         }
 
         /// <summary>
