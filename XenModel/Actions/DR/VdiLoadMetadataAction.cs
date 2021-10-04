@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;
@@ -91,24 +92,20 @@ namespace XenAdmin.Actions.DR
                     MetadataSession = Session.get_record(Session, MetadataSessionRef);
 
                     #region FIND POOL 
-                    Dictionary<XenRef<XenAPI.Pool>, XenAPI.Pool> pools = XenAPI.Pool.get_all_records(MetadataSession);
-                    foreach (var pool in pools.Values)
+                    var pools = Pool.get_all_records(MetadataSession);
+                    var poolValues = pools.Values;
+                    if (poolValues.Count > 0)
                     {
-                        _poolMetadata.Pool = pool;
-                        string poolName = String.IsNullOrEmpty(pool.name_label) && pool.master != null
-                                              ? XenAPI.Host.get_name_label(MetadataSession, pool.master.opaque_ref)
-                                              : pool.name_label;
+                        var pool = poolValues.First();
+                        var poolName = string.IsNullOrEmpty(pool.name_label) && pool.master != null
+                            ? Host.get_name_label(MetadataSession, pool.master.opaque_ref)
+                            : pool.name_label;
                         _poolMetadata.Pool.name_label = poolName;
                         log.DebugFormat("Found metadata of pool '{0}' (UUID={1})", _poolMetadata.Pool.Name(),
-                                        _poolMetadata.Pool.uuid);
-                        break;
+                            _poolMetadata.Pool.uuid);
                     }
+                  
                     #endregion
-
-                    /*if (_poolMetadata.Pool.uuid == Pool.uuid) // metadata of current pool
-                    {
-                        return;
-                    }*/
 
                     _poolMetadata.VmAppliances = VM_appliance.get_all_records(MetadataSession);
                     foreach (var vmAppRef in _poolMetadata.VmAppliances.Keys)

@@ -621,12 +621,12 @@ namespace XenAdmin.Wizards.DRWizards
         private bool FindRowByUuid(string uuid, out SrRow row)
         {
             row = null;
-            foreach (var srRow in dataGridViewSRs.Rows.Cast<SrRow>().Where(srRow => srRow.SrUuid == uuid))
-            {
-                row = srRow;
-                return true;
-            }
-            return false;
+            var srRows = dataGridViewSRs.Rows.Cast<SrRow>().Where(srRow => srRow.SrUuid == uuid).ToList();
+            if (srRows.Count <= 0)
+                return false;
+
+            row = srRows.First();
+            return true;
         }
 
         private void buttonSelectAll_Click(object sender, EventArgs e)

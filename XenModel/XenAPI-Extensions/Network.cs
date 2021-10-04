@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using XenAdmin;
 using XenAdmin.Core;
 
@@ -67,26 +68,21 @@ namespace XenAPI
                 return name_label;
             }
 
-            Pool pool = Helpers.GetPoolOfOne(Connection);
+            var pool = Helpers.GetPoolOfOne(Connection);
             if (pool == null)
                 return name_label;
 
-            string coordinator_ref = pool.master.opaque_ref;
+            var coordinator_ref = pool.master.opaque_ref;
 
-            foreach (PIF pif in Connection.ResolveAll(PIFs))
+            var pifs = Connection.ResolveAll(PIFs);
+
+            var filteredPifs = pifs.Where(pif => pif.host.opaque_ref == coordinator_ref).ToList();
+            if (filteredPifs.Count > 0)
             {
-                if (pif.host.opaque_ref == coordinator_ref)
-                {
-                    return PIFName(pif);
-                }
+                return PIFName(filteredPifs.First());
             }
 
-            foreach (PIF pif in Connection.ResolveAll(PIFs))
-            {
-                return PIFName(pif);
-            }
-
-            return name_label;
+            return pifs.Count > 0 ? PIFName(pifs.First()) : name_label;
         }
 
         public bool AllHostsCanSeeNetwork()

@@ -32,6 +32,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using XenAPI;
 
 using XenAdmin.Core;
@@ -280,8 +281,8 @@ namespace XenAdmin.XenSearch
             if (uuid == null)
                 uuid = System.Guid.NewGuid().ToString();
 
-            String key = SearchPrefix + uuid;
-            String value = GetXML();
+            var key = SearchPrefix + uuid;
+            var value = GetXML();
 
             if (connection == null)
                 return false;
@@ -289,16 +290,15 @@ namespace XenAdmin.XenSearch
             if (!connection.IsConnected)
                 return false;
 
-            Session session = connection.DuplicateSession();
-            foreach (Pool pool in connection.Cache.Pools)
-            {
-                Pool.remove_from_gui_config(session, pool.opaque_ref, key);
-                Pool.add_to_gui_config(session, pool.opaque_ref, key, value);
+            var session = connection.DuplicateSession();
 
-                return true;
-            }
+            var pools = connection.Cache.Pools;
+            if (pools.Length <= 0) return false;
 
-            return false;
+            var pool = pools.First();
+            Pool.remove_from_gui_config(session, pool.opaque_ref, key);
+            Pool.add_to_gui_config(session, pool.opaque_ref, key, value);
+            return true;
         }
 
         public void Save(String filename)

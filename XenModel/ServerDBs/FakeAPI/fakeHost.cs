@@ -34,6 +34,7 @@ using System.Collections.Generic;
 using XenAPI;
 using System.Collections;
 using System.Globalization;
+using System.Linq;
 using System.Threading;
 
 namespace XenAdmin.ServerDBs.FakeAPI
@@ -107,14 +108,14 @@ namespace XenAdmin.ServerDBs.FakeAPI
 
         public Response<string> reboot(string session, string opaque_ref)
         {
-            string metrics_ref = (string)proxy.db.GetValue("host", opaque_ref, "metrics");
+            var metrics_ref = (string)proxy.db.GetValue("host", opaque_ref, "metrics");
             proxy.EditObject_(DbProxy.EditTypes.Replace, "host_metrics", metrics_ref, "live", false);
 
-            string coordinator_ref = "";
-            foreach (string pool in proxy.db.Tables["pool"].Rows.Keys)
+            var coordinator_ref = "";
+            var pools = proxy.db.Tables["pool"].Rows.Keys;
+            if (pools.Count > 0)
             {
-                coordinator_ref = (string)proxy.db.GetValue("pool", pool, "master");
-                break;
+                coordinator_ref = (string)proxy.db.GetValue("pool", pools.First(), "master");
             }
 
             if (opaque_ref == coordinator_ref)

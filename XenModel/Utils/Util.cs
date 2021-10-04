@@ -33,6 +33,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Xml;
 
 
@@ -560,17 +561,13 @@ namespace XenAdmin
         {
             ThrowIfStringParameterNullOrEmpty(xml, "xml");
 
-            XmlDocument doc = new XmlDocument();
+            var doc = new XmlDocument();
             doc.LoadXml(xml);
 
             // If we've got this from an async task result, then it will be wrapped
             // in a <value> element.
-            foreach (XmlNode node in doc.GetElementsByTagName("value"))
-            {
-                return node.InnerText;
-            }
-
-            return null;
+            var nodes = doc.GetElementsByTagName("value");
+            return nodes.Count > 0 ? nodes[0].InnerText : null;
         }
 
     }

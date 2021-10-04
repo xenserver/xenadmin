@@ -212,13 +212,7 @@ namespace XenAdmin.Core
         /// </summary>
         public static Pool GetPoolOfOne(IXenConnection connection)
         {
-            if (connection == null)
-                return null;
-
-            foreach (Pool pool in connection.Cache.Pools)
-                return pool;
-            
-            return null;
+            return connection?.Cache.Pools.FirstOrDefault();
         }
 
         /// <summary>
@@ -1533,11 +1527,9 @@ namespace XenAdmin.Core
 
         public static string HostnameFromLocation(string p)
         {
-            foreach (Match m in HostnameOrIpRegex.Matches(p))
-            {
-                return m.Value; // we only want the hostname or ip which should be the first match
-            }
-            return "";
+            var matches = HostnameOrIpRegex.Matches(p);
+            // we only want the hostname or ip which should be the first match
+            return matches.Count > 0 ? matches[0].Value : string.Empty;
         }
 
         /// <summary>
