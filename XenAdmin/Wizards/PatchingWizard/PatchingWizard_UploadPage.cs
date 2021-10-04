@@ -49,7 +49,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         }
 
         #region Accessors
-        public readonly List<HostUpdateMapping> PatchMappings = new List<HostUpdateMapping>();
+        public List<HostUpdateMapping> PatchMappings = new List<HostUpdateMapping>();
 
         public UpdateType SelectedUpdateType { private get; set; }
         public string SelectedPatchFilePath { get; set; }

@@ -42,8 +42,8 @@ namespace XenAdmin.Wizards.PatchingWizard
         public List<HostPlan> HostPlans { get; private set; }
         public List<PlanAction> FinalActions { get; private set; }
         public List<PlanAction> CleanupActions { get; private set; }
-        public readonly List<PlanAction> DoneActions = new List<PlanAction>();
-        public readonly List<PlanAction> InProgressActions = new List<PlanAction>();
+        public List<PlanAction> DoneActions = new List<PlanAction>();
+        public List<PlanAction> InProgressActions = new List<PlanAction>();
         public Pool Pool { get; private set; }
         public string Name { get; private set; }
         

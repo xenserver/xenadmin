@@ -38,8 +38,8 @@ namespace XenAdmin.Controls.CustomGridView
 {
     public class GridRow : IComparable<GridRow>
     {
-        public readonly Dictionary<String, GridItemBase> Items = new Dictionary<string, GridItemBase>();
-        public readonly List<GridRow> Rows = new List<GridRow>();
+        public Dictionary<string, GridItemBase> Items = new Dictionary<string, GridItemBase>();
+        public List<GridRow> Rows = new List<GridRow>();
 
         public static Image ExpandedImage = Images.StaticImages.expanded_triangle;
         public static Image ShrunkenImage = Images.StaticImages.contracted_triangle;

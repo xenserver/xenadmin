@@ -38,7 +38,7 @@ namespace XenAdmin.Actions
 {
     public class GetDataSourcesAction : AsyncAction
     {
-        public readonly List<Data_source> DataSources = new List<Data_source>();
+        public List<Data_source> DataSources = new List<Data_source>();
         public readonly IXenObject IXenObject;
 
         public GetDataSourcesAction(IXenConnection connection, IXenObject xmo)
