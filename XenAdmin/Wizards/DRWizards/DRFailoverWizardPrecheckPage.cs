@@ -596,8 +596,8 @@ namespace XenAdmin.Wizards.DRWizards
 
         private class PreCheckItemRow : PreCheckGridRow
         {
-            private Problem _problem = null;
-            private Check _check = null;
+            private readonly Problem _problem;
+            private readonly Check _check;
             public PreCheckItemRow(Problem problem)
             {
                 _problem = problem;

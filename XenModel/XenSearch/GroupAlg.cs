@@ -167,7 +167,7 @@ namespace XenAdmin.XenSearch
                 return -1;
             if (other == null)
                 return 1;
-            return Compare(one.key, other.key);
+            return Compare(one.Key, other.Key);
         }
 
         /// <summary>
@@ -294,29 +294,28 @@ namespace XenAdmin.XenSearch
 
     public class GroupKey : IEquatable<GroupKey>
     {
-        public Grouping grouping;
-        public object key;
+        public readonly Grouping Grouping;
+        public readonly object Key;
 
         public GroupKey(Grouping grouping, object key)
         {
-            this.grouping = grouping;
-            this.key = key;
+            Grouping = grouping;
+            Key = key;
         }
 
         public override int GetHashCode()
         {
-            return key.GetHashCode();
+            return Key.GetHashCode();
         }
 
         public bool Equals(GroupKey other)
         {
-            return other != null && grouping.Equals(other.grouping) && key.Equals(other.key);
+            return other != null && Grouping.Equals(other.Grouping) && Key.Equals(other.Key);
         }
 
         public override bool Equals(object obj)
         {
-            GroupKey other = obj as GroupKey;
-            return other != null && Equals(other);
+            return obj is GroupKey other && Equals(other);
         }
     }
 
@@ -350,7 +349,7 @@ namespace XenAdmin.XenSearch
 
             foreach (GroupKey group in groups)
             {
-                IAcceptGroups subAdapter = adapter.Add(group.grouping, group.key, indent);
+                IAcceptGroups subAdapter = adapter.Add(group.Grouping, group.Key, indent);
 
                 if (subAdapter == null)
                     continue;

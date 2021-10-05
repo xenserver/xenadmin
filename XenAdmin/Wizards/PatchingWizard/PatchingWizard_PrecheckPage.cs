@@ -611,8 +611,8 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private class PreCheckHostRow : PreCheckGridRow
         {
-            private Problem _problem = null;
-            private Check _check = null;
+            private readonly Problem _problem = null;
+            private readonly Check _check = null;
             public PreCheckHostRow(Problem problem)
                 : base(new DataGridViewTextBoxCell())
             {
