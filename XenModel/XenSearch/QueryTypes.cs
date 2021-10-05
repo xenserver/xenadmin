@@ -1193,6 +1193,13 @@ namespace XenAdmin.XenSearch
         {
             return address.GetHashCode();
         }
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is IPAddressQuery other))
+                return false;
+            return address.Equals(other.address);
+        }
     }
 
     public class BooleanQuery : PropertyQuery<bool>
