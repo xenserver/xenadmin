@@ -748,7 +748,6 @@
     <Compile Include="VNC\KeyMap.Designer.cs">
       <DependentUpon>KeyMap.cs</DependentUpon>
     </Compile>
-    <Compile Include="VNC\KeySet.cs" />
     <Compile Include="VNC\MyStream.cs" />
     <Compile Include="VNC\VNCException.cs" />
     <Compile Include="VNC\VNCStream.cs" />
