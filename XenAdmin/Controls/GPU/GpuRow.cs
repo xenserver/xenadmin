@@ -85,7 +85,7 @@ namespace XenAdmin.Controls.GPU
                 var host = xenObject.Connection.Resolve(pgpu.host);
 
                 // add host label if needed
-                if (showingHostLabel && (hostRef == null || pgpu.host.opaque_ref != hostRef.opaque_ref))
+                if (showingHostLabel && host!= null && (hostRef == null || pgpu.host.opaque_ref != hostRef.opaque_ref))
                 {
                     AddHostLabel(new Label { Text = String.Format(Messages.GPU_ON_HOST_LABEL, host.Name())}, ref index);
                     hostRef = pgpu.host;
