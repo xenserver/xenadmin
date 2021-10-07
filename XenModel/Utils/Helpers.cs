@@ -495,6 +495,24 @@ namespace XenAdmin.Core
             return platformVersion != null && productVersionCompare(platformVersion, "3.1.50") >= 0;
         }
 
+        /// <param name="conn">May be null, in which case true is returned.</param>
+        public static bool YangtzeOrGreater(IXenConnection conn)
+        {
+            return conn == null || YangtzeOrGreater(Helpers.GetMaster(conn));
+        }
+
+        /// <param name="host">May be null, in which case true is returned.</param>
+        public static bool YangtzeOrGreater(Host host)
+        {
+            return host == null || YangtzeOrGreater(HostPlatformVersion(host));
+        }
+
+        /// Yangtze is ver. 3.2.1
+        public static bool YangtzeOrGreater(string platformVersion)
+        {
+            return platformVersion != null && productVersionCompare(platformVersion, "3.2.1") >= 0;
+        }
+
         // CP-3435: Disable Check for Updates in Common Criteria Certification project
         public static bool CommonCriteriaCertificationRelease
         {

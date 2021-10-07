@@ -29,6 +29,7 @@
  * SUCH DAMAGE.
  */
 
+using System;
 using System.Linq;
 using XenAdmin.Core;
 using XenAPI;
@@ -43,28 +44,34 @@ namespace XenAdmin.Diagnostics.Checks
     class PVGuestsCheck : HostPostLivenessCheck
     {
         private readonly Pool _pool;
-        private readonly bool _upgrade;
+        private readonly XenServerVersion _newVersion;
         private readonly bool _manualUpgrade;
         private readonly Dictionary<string, string> _installMethodConfig;
 
-        public PVGuestsCheck(Host master, bool upgrade, bool manualUpgrade = false, Dictionary<string, string> installMethodConfig = null)
+        public PVGuestsCheck(Host host, XenServerVersion newVersion)
+            : base(host)
+        {
+            _newVersion = newVersion;
+            _pool = Helpers.GetPoolOfOne(Host?.Connection);
+        }
+
+        public PVGuestsCheck(Host master, bool manualUpgrade = false, Dictionary<string, string> installMethodConfig = null)
             : base(master)
         {
             _pool = Helpers.GetPoolOfOne(Host?.Connection);
-            _upgrade = upgrade;
             _manualUpgrade = manualUpgrade;
             _installMethodConfig = installMethodConfig;
         }
 
         public override bool CanRun()
         {
-            if (Helpers.QuebecOrGreater(Host))
+            if (Helpers.YangtzeOrGreater(Host))
                 return false;
 
             if (_pool == null || !_pool.Connection.Cache.VMs.Any(vm => vm.IsPvVm()))
                 return false;
 
-            if (!_upgrade && !Helpers.NaplesOrGreater(Host))
+            if (_newVersion != null && !Helpers.NaplesOrGreater(Host))
                 return false;
 
             return true;
@@ -73,8 +80,13 @@ namespace XenAdmin.Diagnostics.Checks
         protected override Problem RunHostCheck()
         {
             //update case
-            if (!_upgrade)
+            if (_newVersion != null)
+            {
+                if (_newVersion.Version.CompareTo(new Version(BrandManager.ProductVersion821)) >= 0)
+                    return new PoolHasPVGuestProblem(this, _pool);
+                
                 return new PoolHasPVGuestWarningUrl(this, _pool);
+            }
 
             //upgrade case
 
@@ -94,6 +106,9 @@ namespace XenAdmin.Diagnostics.Checks
             // (this is the case of the manual upgrade or when the rpu plugin doesn't have the function)
             if (string.IsNullOrEmpty(upgradePlatformVersion))
                 return new PoolHasPVGuestWarningUrl(this, _pool);
+
+            if (Helpers.YangtzeOrGreater(upgradePlatformVersion))
+                return new PoolHasPVGuestProblem(this, _pool);
 
             if (Helpers.QuebecOrGreater(upgradePlatformVersion))
                 return new PoolHasPVGuestWarningUrl(this, _pool);

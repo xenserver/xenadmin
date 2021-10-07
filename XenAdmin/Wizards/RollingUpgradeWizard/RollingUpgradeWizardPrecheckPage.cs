@@ -237,7 +237,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
             //Checking PV guests - for hosts that have any PV guests and warn the user before the upgrade.
             var pvChecks = (from Host server in SelectedMasters
-                let check = new PVGuestsCheck(server, true, ManualUpgrade, InstallMethodConfig)
+                let check = new PVGuestsCheck(server, ManualUpgrade, InstallMethodConfig)
                 where check.CanRun()
                 select check as Check).ToList();
 
