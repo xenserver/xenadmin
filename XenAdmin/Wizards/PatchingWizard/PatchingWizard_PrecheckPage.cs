@@ -396,7 +396,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 //PVGuestsCheck checks
                 var pvChecks = (from Pool pool in SelectedPools
-                    let check = new PVGuestsCheck(pool.Connection.Resolve(pool.master), false)
+                    let check = new PVGuestsCheck(pool.Connection.Resolve(pool.master), UpdateAlert?.NewServerVersion)
                     where check.CanRun()
                     select check as Check).ToList();
 
