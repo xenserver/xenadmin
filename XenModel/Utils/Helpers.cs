@@ -497,6 +497,12 @@ namespace XenAdmin.Core
             return platformVersion != null && productVersionCompare(platformVersion, "3.2.50") >= 0;
         }
 
+        /// <param name="conn">May be null, in which case true is returned.</param>
+        public static bool YangtzeOrGreater(IXenConnection conn)
+        {
+            return conn == null || YangtzeOrGreater(Helpers.GetCoordinator(conn));
+        }
+
         /// <param name="host">May be null, in which case true is returned.</param>
         public static bool YangtzeOrGreater(Host host)
         {
