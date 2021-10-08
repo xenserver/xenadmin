@@ -91,6 +91,7 @@ namespace XenAPI
         public const string UPDATE_ALREADY_APPLIED = "UPDATE_ALREADY_APPLIED";
         public const string UPDATE_ALREADY_EXISTS = "UPDATE_ALREADY_EXISTS";
         public const string MEMORY_CONSTRAINT_VIOLATION = "MEMORY_CONSTRAINT_VIOLATION";
+        public const string VIF_NOT_IN_MAP = "VIF_NOT_IN_MAP";
 
         /// <summary>
         /// Changes a techy RBAC Failure into a pretty print one that shows the roles that would be required to complete the failed action.

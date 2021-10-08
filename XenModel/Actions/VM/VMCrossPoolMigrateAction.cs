@@ -149,13 +149,27 @@ namespace XenAdmin.Actions.VMActions
                 if (network == null)
                     continue;
 
-                foreach (var vifRef in network.VIFs)
+                foreach (var vifRef in network.VIFs.Where(vifRef => vm.VIFs.Contains(vifRef)))
                 {
-                    if (vm.VIFs.Contains(vifRef))
-                        map.Add(new XenRef<VIF>(vifRef), new XenRef<XenAPI.Network>(pair.Value.opaque_ref));
+                    map.Add(new XenRef<VIF>(vifRef), new XenRef<XenAPI.Network>(pair.Value.opaque_ref));
                 }
             }
 
+            // Add mapping of snap VIFs
+            var snapVIFs = VM.get_snapshots(Connection.Session, vm.opaque_ref)
+                .Select(Connection.Resolve)
+                .SelectMany(snap => snap.VIFs).ToList();
+            foreach (var snapVIF in snapVIFs)
+            {
+                if (!map.ContainsKey(snapVIF))
+                {
+                    var originNetwork = Connection.Resolve(snapVIF).network;
+                    if (vmMap.Networks.ContainsKey(originNetwork))
+                    {
+                        map.Add(snapVIF, new XenRef<XenAPI.Network>(vmMap.Networks[originNetwork]));
+                    }
+                }
+            }
             return map;
         }
     }

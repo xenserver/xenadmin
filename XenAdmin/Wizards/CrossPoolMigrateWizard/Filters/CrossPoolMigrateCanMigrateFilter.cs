@@ -173,6 +173,12 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
                     }
                     catch (Failure failure)
                     {
+                        // CA-359124 VM is migratable if a snapshot has more VIFs than the VM. As long as the mapping takes this into account. 
+                        if (failure.ErrorDescription.Count > 0 && failure.ErrorDescription[0] == Failure.VIF_NOT_IN_MAP && SnapshotsContainExtraVIFs(vm))
+                        {
+                            vmIsMigratable = true;
+                            break;
+                        }
                         if (failure.ErrorDescription.Count > 0 && failure.ErrorDescription[0] == Failure.RBAC_PERMISSION_DENIED)
                             disableReason = failure.Message.Split('\n')[0].TrimEnd('\r'); // we want the first line only
                         else
@@ -200,6 +206,19 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
                     return true;
             }
             return false;
+        }
+
+        /// <summary>
+        /// Check if a VM's snapshots contain a reference to a VIF not present in the VM.
+        /// </summary>
+        /// <param name="vm">The VM</param>
+        /// <returns>true if at least one snapshot contains a VIF not present in the VM</returns>
+        private static bool SnapshotsContainExtraVIFs(VM vm)
+        {
+            var snapVIFs = VM.get_snapshots(vm.Connection.Session, vm.opaque_ref)
+                .Select(vm.Connection.Resolve)
+                .SelectMany(snap => snap.VIFs);
+            return snapVIFs.Any(snapVIF => !vm.VIFs.Contains(snapVIF));
         }
 
         private List<Host> CollateHosts(IXenObject itemToFilterOn, out Pool thePool)
