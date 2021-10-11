@@ -439,20 +439,23 @@ namespace XenAdmin.Dialogs
                               !_pool.is_psr_pending &&
                               _pool.allowed_operations.Contains(pool_allowed_operations.designate_new_master);
 
+                var msg = string.Empty;
+
                 if (!enable)
                 {
                     if (_pool.is_psr_pending)
-                        labelWarning.Text = Messages.ROTATE_POOL_SECRET_PENDING_NEW_MASTER;
+                        msg = Messages.ROTATE_POOL_SECRET_PENDING_NEW_MASTER;
                     else if (_pool.current_operations.Values.Contains(pool_allowed_operations.ha_enable))
-                        labelWarning.Text = Messages.EVACUATE_HOST_HA_ENABLING;
+                        msg = Messages.EVACUATE_HOST_HA_ENABLING;
                     else if (_pool.current_operations.Values.Contains(pool_allowed_operations.ha_disable))
-                        labelWarning.Text = Messages.EVACUATE_HOST_HA_DISABLING;
+                        msg = Messages.EVACUATE_HOST_HA_DISABLING;
                     else if (_pool.current_operations.Values.Contains(pool_allowed_operations.cluster_create))
-                        labelWarning.Text = Messages.EVACUATE_HOST_CLUSER_CREATING;
+                        msg = Messages.EVACUATE_HOST_CLUSER_CREATING;
                 }
 
                 NewMasterComboBox.Enabled = enable;
-                tableLayoutPanelPSr.Visible = !enable;
+                labelWarning.Text = msg;
+                tableLayoutPanelPSr.Visible = !enable && !string.IsNullOrEmpty(labelWarning.Text);
             }
         }
 
