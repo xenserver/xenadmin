@@ -33,6 +33,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Windows.Forms;
+using XenAdmin.Actions;
 using XenAdmin.Commands;
 using XenAdmin.Controls.CheckableDataGridView;
 using XenAdmin.Controls.SummaryPanel;
@@ -184,12 +186,11 @@ namespace XenAdmin.Dialogs
 
             if (rowsUsingLicenseServer.Count > 0)
             {
-
-                ApplyLicenseEditionCommand command = new ApplyLicenseEditionCommand(CommandInterface,
-                                                                                    rowsUsingLicenseServer.ConvertAll(r=>r.XenObject),
-                                                                                    Host.Edition.Free, null, null,
-                                                                                    View.Parent);
-                command.Run();
+                var action = new ApplyLicenseEditionAction(rowsUsingLicenseServer.ConvertAll(r => r.XenObject),
+                    Host.Edition.Free, null, null);
+            
+                using (var actionProgress = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
+                    actionProgress.ShowDialog(View.Parent);
             }
             else
             {

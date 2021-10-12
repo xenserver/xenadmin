@@ -211,7 +211,21 @@ namespace XenAdmin.Commands
             foreach (Host host in _hosts)
             {
                 string opaque_ref = host.opaque_ref;
-                AddHostToPoolAction action = new AddHostToPoolAction(_pool, host, GetAdPrompt, NtolDialog, ApplyLicenseEditionCommand.ShowLicensingFailureDialog);
+                var action = new AddHostToPoolAction(_pool, host, GetAdPrompt, NtolDialog,
+                    (licenseFailures, exceptionMessage) =>
+                    {
+                        if (licenseFailures.Count > 0)
+                        {
+                            Program.Invoke(Program.MainWindow, () =>
+                            {
+                                using (var dlg = new CommandErrorDialog(Messages.LICENSE_ERROR_TITLE, exceptionMessage,
+                                    licenseFailures.ToDictionary<LicenseFailure, IXenObject, string>(f => f.Host, f => f.AlertText)))
+                                {
+                                    dlg.ShowDialog(Program.MainWindow);
+                                }
+                            });
+                        }
+                    });
                 action.Completed += s => Program.ShowObject(opaque_ref);
                 actions.Add(action);
 

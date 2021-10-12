@@ -2834,7 +2834,6 @@
     <Compile Include="Alerts\AlertExtensions.cs" />
     <Compile Include="Alerts\Types\LicenseAlert.cs" />
     <Compile Include="Alerts\Types\IqnAlert.cs" />
-    <Compile Include="Commands\ApplyLicenseEditionCommand.cs" />
     <Compile Include="Commands\Controls\AssignVMGroupToolStripMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>
