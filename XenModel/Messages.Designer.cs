@@ -13321,6 +13321,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Authenticating your {0} account....
+        /// </summary>
+        public static string DOWNLOAD_AND_EXTRACT_ACTION_AUTHENTICATING_DESC {
+            get {
+                return ResourceManager.GetString("DOWNLOAD_AND_EXTRACT_ACTION_AUTHENTICATING_DESC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Download canceled.
         /// </summary>
         public static string DOWNLOAD_AND_EXTRACT_ACTION_DOWNLOAD_CANCELLED_DESC {
