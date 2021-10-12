@@ -40,6 +40,8 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 {
     class DownloadPatchPlanAction : PlanActionWithSession
     {
+        private static object _lock = new object();
+        private static readonly Dictionary<string, object> _patchLocks = new Dictionary<string, object>();
         private readonly XenServerPatch patch;
         private Dictionary<XenServerPatch, string> AllDownloadedPatches = new Dictionary<XenServerPatch, string>();
         private KeyValuePair<XenServerPatch, string> patchFromDisk;
@@ -57,16 +59,26 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         {
             AddProgressStep(string.Format(Messages.PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_WAITING, patch.Name));
 
+            object patchLock;
+            lock (_lock)
+            {
+                if (!_patchLocks.TryGetValue(patch.Uuid, out patchLock))
+                {
+                    patchLock = new object();
+                    _patchLocks[patch.Uuid] = patchLock;
+                }
+            }
+
             //if we are updating multiple pools at the same time, we only need to download the patch for
             // the first pool, hence we lock it to prevent the plan action of the other pools to run
-            lock (patch)
+            lock (patchLock)
             {
                 if (Cancelling)
                     return;
 
                 //skip the download if the patch has been already downloaded or we are using a patch from disk
-                if ((AllDownloadedPatches.ContainsKey(patch) && File.Exists(AllDownloadedPatches[patch])) 
-                    || (patchFromDisk.Key == patch && File.Exists(patchFromDisk.Value)))
+                if (AllDownloadedPatches.ContainsKey(patch) && File.Exists(AllDownloadedPatches[patch]) 
+                    || patchFromDisk.Key == patch && File.Exists(patchFromDisk.Value))
                 {
                     ReplaceProgressStep(string.Format(Messages.PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_SKIPPING, patch.Name));
                 }
