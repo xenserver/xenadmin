@@ -36,7 +36,7 @@ using System.Threading;
 using System.IO;
 using System.Linq;
 using System.Net.NetworkInformation;
-using System.Text;
+using XenAdmin.Core;
 using XenCenterLib.Archive;
 
 namespace XenAdmin.Actions.Updates
@@ -225,6 +225,21 @@ namespace XenAdmin.Actions.Updates
 
         private void DownloadFile(out string outputFileName)
         {
+            client = new WebClient();
+            client.DownloadProgressChanged += client_DownloadProgressChanged;
+            client.DownloadFileCompleted += client_DownloadFileCompleted;
+            NetworkChange.NetworkAvailabilityChanged += NetworkAvailabilityChanged;
+
+            //useful when the updates use test locations
+            if (DownloadUpdatesXmlAction.IsFileServiceUri(_patchUri))
+            {
+                log.InfoFormat("Authenticating account...");
+                Description = string.Format(Messages.DOWNLOAD_AND_EXTRACT_ACTION_AUTHENTICATING_DESC,
+                    BrandManager.COMPANY_NAME_SHORT);
+                var credential = TokenManager.GetDownloadCredential(XenAdminConfigManager.Provider);
+                client.Headers.Add("Authorization", $"Basic {credential}");
+            }
+
             outputFileName = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
             
             log.InfoFormat("Downloading update '{0}' (from '{1}') to '{2}'", updateName, _patchUri, outputFileName);
@@ -233,14 +248,6 @@ namespace XenAdmin.Actions.Updates
 
             int failedTries = 0;
             bool needToRetry = false;
-
-            client = new WebClient();
-            client.DownloadProgressChanged += client_DownloadProgressChanged;
-            client.DownloadFileCompleted += client_DownloadFileCompleted;
-            NetworkChange.NetworkAvailabilityChanged += NetworkAvailabilityChanged;
-
-            var credential = TokenManager.GetDownloadCredential(XenAdminConfigManager.Provider);
-            client.Headers.Add("Authorization", $"Basic {credential}");
 
             try
             {

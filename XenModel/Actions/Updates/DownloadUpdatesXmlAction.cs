@@ -351,5 +351,24 @@ namespace XenAdmin.Actions
             var tail = url.Substring(OldPatchUrlPrefix.Length);
             return (XenAdminConfigManager.Provider.GetCustomFileServicePrefix() ?? NewPatchUrlPrefix) + tail;
         }
+
+        public static bool IsFileServiceUri(Uri uri)
+        {
+            var newPatchUri = new Uri(NewPatchUrlPrefix);
+
+            if (uri.Host == newPatchUri.Host)
+                return true;
+
+            var customFileServicePrefix = XenAdminConfigManager.Provider.GetCustomFileServicePrefix();
+            if (!string.IsNullOrEmpty(customFileServicePrefix))
+            {
+                var customPatchUri = new Uri(customFileServicePrefix);
+
+                if (uri.Host == customPatchUri.Host)
+                    return true;
+            }
+
+            return false;
+        }
     }
 }
