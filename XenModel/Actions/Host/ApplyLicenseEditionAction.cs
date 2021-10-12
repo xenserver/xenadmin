@@ -49,9 +49,9 @@ namespace XenAdmin.Actions
         private readonly string _licenseServerAddress;
         private readonly string _licenseServerPort;
 
-        public List<LicenseFailure> LicenseFailures { get; private set; }
+        public List<LicenseFailure> LicenseFailures { get; }
 
-        protected readonly Action<List<LicenseFailure>, string> DoOnLicensingFailure;
+        private readonly Action<List<LicenseFailure>, string> _doOnLicensingFailure;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ApplyLicenseEditionAction"/> class. 
@@ -60,9 +60,8 @@ namespace XenAdmin.Actions
         /// <param name="edition">The edition the hosts should be set to.</param>
         /// <param name="licenseServerAddress">The license server address.</param>
         /// <param name="licenseServerPort">The license server port.</param>
-        /// <param name="DoOnLicensingFailure">The method to call when the licensing fails. This method will show failure details in a dialog</param>
-        public ApplyLicenseEditionAction(IEnumerable<IXenObject> xos, Host.Edition edition, string licenseServerAddress, string licenseServerPort,
-            Action<List<LicenseFailure>, string> DoOnLicensingFailure)
+        /// <param name="doOnLicensingFailure">The method to call when the licensing fails. This method will show failure details in a dialog</param>
+        public ApplyLicenseEditionAction(IEnumerable<IXenObject> xos, Host.Edition edition, string licenseServerAddress, string licenseServerPort, Action<List<LicenseFailure>, string> doOnLicensingFailure = null)
             : base(null, Messages.LICENSE_UPDATING_LICENSES)
         {
             LicenseFailures = new List<LicenseFailure>();
@@ -73,7 +72,7 @@ namespace XenAdmin.Actions
             _licenseServerAddress = licenseServerAddress;
             _licenseServerPort = licenseServerPort;
 
-            this.DoOnLicensingFailure = DoOnLicensingFailure;
+            _doOnLicensingFailure = doOnLicensingFailure;
 
             if (xos != null &&  Host == null && Pool == null && xos.Count() == 1)
             {
@@ -218,7 +217,7 @@ namespace XenAdmin.Actions
             {
                 string exceptionText = LicenseFailures.Count == 1 ? string.Format(Messages.LICENSE_ERROR_1, LicenseFailures[0].Host.Name()) : string.Format(Messages.LICENSE_ERROR_MANY, LicenseFailures.Count, new List<IXenObject>(xos).Count);
 
-                DoOnLicensingFailure?.Invoke(LicenseFailures, exceptionText);
+                _doOnLicensingFailure?.Invoke(LicenseFailures, exceptionText);
                 throw new InvalidOperationException(exceptionText);
             }
         }

@@ -233,8 +233,22 @@ namespace XenAdmin.Dialogs
                     string.Join(", ", supporters.Select(Helpers.GetName).ToList())
                 );
 
-                new CreatePoolAction(coordinator, supporters, poolName, poolDescription, AddHostToPoolCommand.GetAdPrompt, 
-                    AddHostToPoolCommand.NtolDialog, ApplyLicenseEditionCommand.ShowLicensingFailureDialog).RunAsync();
+                new CreatePoolAction(coordinator, supporters, poolName, poolDescription, AddHostToPoolCommand.GetAdPrompt,
+                    AddHostToPoolCommand.NtolDialog,
+                    (licenseFailures, exceptionMessage) =>
+                    {
+                        if (licenseFailures.Count > 0)
+                        {
+                            Program.Invoke(this, () =>
+                            {
+                                using (var dlg = new CommandErrorDialog(Messages.LICENSE_ERROR_TITLE, exceptionMessage,
+                                    licenseFailures.ToDictionary<LicenseFailure, IXenObject, string>(f => f.Host, f => f.AlertText)))
+                                {
+                                    dlg.ShowDialog(this);
+                                }
+                            });
+                        }
+                    }).RunAsync();
             }
             catch (System.Net.WebException exn)
             {

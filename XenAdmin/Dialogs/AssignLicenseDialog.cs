@@ -33,6 +33,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using XenAdmin.Actions;
 using XenAdmin.Commands;
 using XenAdmin.Core;
 using XenAPI;
@@ -198,18 +199,16 @@ namespace XenAdmin.Dialogs
 
         private void okButton_Click(object sender, EventArgs e)
         {
+            var action = new ApplyLicenseEditionAction(xos, GetCheckedEdition(), licenseServerNameTextBox.Text, licenseServerPortTextBox.Text);
 
-            ApplyLicenseEditionCommand command = new ApplyLicenseEditionCommand(Program.MainWindow, xos, GetCheckedEdition(), licenseServerNameTextBox.Text, licenseServerPortTextBox.Text, this);
+            using (var actionProgress = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
+                actionProgress.ShowDialog(this);
 
-            command.Succedded += delegate
-                                     {
-                                         Program.Invoke(this, () =>
-                                            {
-                                                DialogResult = DialogResult.OK;
-                                                Close();
-                                            });
-                                     };
-            command.Run();
+            if (action.Succeeded)
+            {
+                DialogResult = DialogResult.OK;
+                Close();
+            }
         }
 
         private void licenseServerPortTextBox_TextChanged(object sender, EventArgs e)
