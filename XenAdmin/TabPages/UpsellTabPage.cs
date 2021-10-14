@@ -47,9 +47,7 @@ namespace XenAdmin.TabPages
 
         public string BlurbText
         {
-            set => upsellPage1.BlurbText = HiddenFeatures.LinkLabelHidden
-                ? value
-                : value + string.Format(Messages.UPSELL_BLURB_TRIAL, BrandManager.ProductBrand);
+            set => upsellPage1.BlurbText = value;
         }
 
         public string LearnMoreUrl
