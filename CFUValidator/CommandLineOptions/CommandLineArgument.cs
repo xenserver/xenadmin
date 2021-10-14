@@ -40,7 +40,9 @@ namespace CFUValidator.CommandLineOptions
         File,
         Hotfix,
         ServerVersion,
-        CheckZipContents
+        CheckZipContents,
+        Username,
+        ClientId
     }
 
     public class CommandLineArgument

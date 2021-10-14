@@ -37,41 +37,42 @@ using XenAdmin.Alerts;
 
 namespace CFUValidator.Validators
 {
-    class PatchURLValidator : AlertFeatureValidator
+    class PatchURLValidator : Validator
     {
-        private readonly BackgroundWorker workerThread;
-        public PatchURLValidator(List<XenServerPatchAlert> alerts) : base(alerts)
+        private readonly List<XenServerPatchAlert> alerts;
+
+        public PatchURLValidator(List<XenServerPatchAlert> alerts)
         {
-            workerThread = new BackgroundWorker();
-            workerThread.DoWork += CheckAllPatchURLs;
-            workerThread.RunWorkerCompleted += RunWorkerCompletedMethod;
+            this.alerts = alerts;
         }
 
-        private bool isComplete;
+        protected override string Header => "Checking the patch URLs return a suitable http response...";
 
-        public override void Validate()
+        protected override string Footer => "Patch URL check completed.";
+
+        protected override string SummaryTitle => "Required patch URL checks:";
+
+        protected override void ValidateCore(Action<string> statusReporter)
         {
-            isComplete = false;
             ConsoleSpinner spinner = new ConsoleSpinner();
-            workerThread.RunWorkerAsync();
-            
-            while(!isComplete)
-                spinner.Turn();
 
-        }
+            using (var workerThread = new BackgroundWorker())
+            {
+                workerThread.DoWork += CheckAllPatchURLs;
+                workerThread.RunWorkerAsync();
 
-        private void RunWorkerCompletedMethod(object sender, RunWorkerCompletedEventArgs e)
-        {
-            isComplete = true;
+                while (workerThread.IsBusy)
+                    spinner.Turn();
+            }
         }
 
         private void CheckAllPatchURLs(object sender, DoWorkEventArgs e)
         {
             foreach (XenServerPatchAlert alert in alerts)
             {
-                if(String.IsNullOrEmpty(alert.Patch.PatchUrl))
+                if (String.IsNullOrEmpty(alert.Patch.PatchUrl))
                 {
-                    Results.Add(String.Format("Patch '{0}' URL is missing", alert.Patch.Name));
+                    Errors.Add($"Patch '{alert.Patch.Name}' URL is missing");
                     continue;
                 }
 
@@ -80,25 +81,19 @@ namespace CFUValidator.Validators
                 {
                     WebRequest request = WebRequest.Create(alert.Patch.PatchUrl);
                     request.Method = "HEAD";
-                    response = (HttpWebResponse)request.GetResponse();
+                    response = request.GetResponse() as HttpWebResponse;
                     if (response == null || response.StatusCode != HttpStatusCode.OK)
-                        Results.Add(String.Format("Patch '{0}' URL '{1}' is invalid", alert.Patch.Name, alert.Patch.PatchUrl)); 
+                        Errors.Add($"Patch '{alert.Patch.Name}' URL '{alert.Patch.PatchUrl}' is invalid");
                 }
-                catch(WebException ex)
+                catch (WebException ex)
                 {
-                    Results.Add(String.Format("Patch '{0}' URL '{1}' failed: {2}", alert.Patch.Name, alert.Patch.PatchUrl, ex.Message)); 
+                    Errors.Add($"Patch '{alert.Patch.Name}' URL '{alert.Patch.PatchUrl}' failed: {ex.Message}");
                 }
                 finally
                 {
-                    if(response != null)
-                        response.Close();
+                    response?.Close();
                 }
             }
-        }
-
-        public override string Description
-        {
-            get { return "Checking the patch URLs return a suitable http response"; }
         }
     }
 }

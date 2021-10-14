@@ -182,6 +182,12 @@
     <Compile Include="Controls\DiskSpinner.Designer.cs">
       <DependentUpon>DiskSpinner.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ClientIdControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ClientIdControl.Designer.cs">
+      <DependentUpon>ClientIdControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TreeViews\FolderChangeDialogTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -276,6 +282,12 @@
       <DependentUpon>AttachUsbDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Diagnostics\Problems\XenCenterVersionProblem.cs" />
+    <Compile Include="Dialogs\ClientIdDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ClientIdDialog.Designer.cs">
+      <DependentUpon>ClientIdDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\ConversionDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1612,6 +1624,15 @@
     <EmbeddedResource Include="Controls\DiskSpinner.zh-CN.resx">
       <DependentUpon>DiskSpinner.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ClientIdControl.ja.resx">
+      <DependentUpon>ClientIdControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ClientIdControl.resx">
+      <DependentUpon>ClientIdControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ClientIdControl.zh-CN.resx">
+      <DependentUpon>ClientIdControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\PvsCacheStorageRow.ja.resx">
       <DependentUpon>PvsCacheStorageRow.cs</DependentUpon>
     </EmbeddedResource>
@@ -1648,6 +1669,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\AttachUsbDialog.zh-CN.resx">
       <DependentUpon>AttachUsbDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ClientIdDialog.ja.resx">
+      <DependentUpon>ClientIdDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ClientIdDialog.resx">
+      <DependentUpon>ClientIdDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ClientIdDialog.zh-CN.resx">
+      <DependentUpon>ClientIdDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\ConversionDialog.ja.resx">
       <DependentUpon>ConversionDialog.cs</DependentUpon>

@@ -67,10 +67,10 @@ namespace XenAdmin.Dialogs
         {
             foreach (IOptionsPage page in verticalTabs.Items)
             {
-                if (!page.IsValidToSave())
+                if (!page.IsValidToSave(out Control control, out string invalidReason))
                 {
                     SelectPage(page);
-                    page.ShowValidationMessages();
+                    page.ShowValidationMessages(control, invalidReason);
                     DialogResult = DialogResult.None;
                     return;
                 }
@@ -92,6 +92,11 @@ namespace XenAdmin.Dialogs
         public void SelectConnectionOptionsPage()
         {
             SelectPage(connectionOptionsPage1);
+        }
+
+        public void SelectUpdateOptionsPage()
+        {
+            SelectPage(updatesOptionsPage1);
         }
     }
 }

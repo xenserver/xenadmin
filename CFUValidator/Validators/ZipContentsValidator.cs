@@ -32,69 +32,74 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using System.IO;
 using XenAdmin;
-using XenAdmin.Actions;
+using XenAdmin.Actions.Updates;
 using XenAdmin.Alerts;
 using XenAdmin.Core;
 
 namespace CFUValidator.Validators
 {
-    class ZipContentsValidator : AlertFeatureValidator
+    class ZipContentsValidator : Validator
     {
-        public ZipContentsValidator(List<XenServerPatchAlert> alerts) : base(alerts){}
+        private readonly List<XenServerPatchAlert> alerts;
+        private IConfigProvider _configProvider;
 
-        public override void Validate()
+        public ZipContentsValidator(List<XenServerPatchAlert> alerts, IConfigProvider configProvider)
         {
-            foreach (XenServerPatchAlert alert in alerts.OrderBy(a=>a.Patch.Name))
+            this.alerts = alerts;
+            _configProvider = configProvider;
+        }
+
+        protected override string Header => "Downloading and checking the contents of the zip files in the patch...";
+
+        protected override string Footer => "Download and content check of patch zip files completed.";
+
+        protected override string SummaryTitle => "Required patch zip content checks:";
+
+        protected override void ValidateCore(Action<string> statusReporter)
+        {
+            try
             {
-                DownloadPatchFile(alert);
+                TokenManager.GetToken(_configProvider);
+
+                foreach (XenServerPatchAlert alert in alerts.OrderBy(a => a.Patch.Name))
+                    DownloadPatchFile(alert, statusReporter);
             }
-            
-        }
-
-        public override string Description
-        {
-            get { return "Downloading and checking the contents of the zip files in the patch"; }
-        }
-
-        private string NewTempPath()
-        {
-            return Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
-        }
-
-        private void DownloadPatchFile(XenServerPatchAlert patch)
-        {
-            if(string.IsNullOrEmpty(patch.Patch.PatchUrl))
+            finally
             {
-                Results.Add("Patch conatined no URL: " + patch.Patch.Name);
+                TokenManager.InvalidateToken(_configProvider);
+            }
+        }
+
+        private void DownloadPatchFile(XenServerPatchAlert patch, Action<string> statusReporter)
+        {
+            if (string.IsNullOrEmpty(patch.Patch.PatchUrl))
+            {
+                Errors.Add("Patch contained no URL: " + patch.Patch.Name);
                 return;
             }
 
-            string tempFileName = NewTempPath();
-            DownloadAndUnzipXenServerPatchAction action = new DownloadAndUnzipXenServerPatchAction(patch.Patch.Name,
-                new Uri(patch.Patch.PatchUrl),
-                tempFileName, false, BrandManager.ExtensionUpdate, InvisibleMessages.ISO_UPDATE);
+            var action = new DownloadAndUnzipXenServerPatchAction(patch.Patch.Name, new Uri(patch.Patch.PatchUrl),
+                BrandManager.ExtensionUpdate, InvisibleMessages.ISO_UPDATE);
 
             try
             {
-                Status = "Download and unzip patch " + patch.Patch.Name;
+                statusReporter("Download and unzip patch " + patch.Patch.Name);
 
                 ConsoleSpinner spinner = new ConsoleSpinner();
                 action.RunAsync();
-                while(!action.IsCompleted)
+                while (!action.IsCompleted)
                 {
                     spinner.Turn(action.PercentComplete);
                 }
-                
-                if(!action.Succeeded)
-                    Results.Add("Patch download and unzip unsuccessful: " + action.Exception.Message);
+
+                if (!action.Succeeded)
+                    Errors.Add("Patch download and unzip unsuccessful: " + action.Exception.Message);
             }
             catch (Exception ex)
             {
-                Results.Add("Patch download error: " + ex.Message);
+                Errors.Add("Patch download error: " + ex.Message);
             }
-
         }
     }
 }

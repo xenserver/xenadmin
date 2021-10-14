@@ -50,7 +50,8 @@ namespace XenAdmin.Actions
         private const string RequiredPatchesNode = "requiredpatches";
         private const string ConflictingPatchNode = "conflictingpatch";
         private const string RequiredPatchNode = "requiredpatch";
-
+        private const string OldPatchUrlPrefix = "https://fileservice.citrix.com/direct/download/";
+        private const string NewPatchUrlPrefix = "https://fileservice.citrix.com/direct/v2/download/";
 
         public List<XenCenterVersion> XenCenterVersions { get; } = new List<XenCenterVersion>();
         public List<XenServerVersion> XenServerVersions { get; } = new List<XenServerVersion>();
@@ -172,7 +173,7 @@ namespace XenAdmin.Actions
                         else if (attrib.Name == "url")
                             url = attrib.Value;
                         else if (attrib.Name == "patch-url")
-                            patchUrl = attrib.Value;
+                            patchUrl = ConvertPatchUrl(attrib.Value);
                         else if (attrib.Name == "timestamp")
                             timestamp = attrib.Value;
                         else if (attrib.Name == "priority")
@@ -342,5 +343,32 @@ namespace XenAdmin.Actions
             return xdoc;
         }
 
+        private string ConvertPatchUrl(string url)
+        {
+            if (url == null || !url.StartsWith(OldPatchUrlPrefix))
+                return url;
+
+            var tail = url.Substring(OldPatchUrlPrefix.Length);
+            return (XenAdminConfigManager.Provider.GetCustomFileServicePrefix() ?? NewPatchUrlPrefix) + tail;
+        }
+
+        public static bool IsFileServiceUri(Uri uri)
+        {
+            var newPatchUri = new Uri(NewPatchUrlPrefix);
+
+            if (uri.Host == newPatchUri.Host)
+                return true;
+
+            var customFileServicePrefix = XenAdminConfigManager.Provider.GetCustomFileServicePrefix();
+            if (!string.IsNullOrEmpty(customFileServicePrefix))
+            {
+                var customPatchUri = new Uri(customFileServicePrefix);
+
+                if (uri.Host == customPatchUri.Host)
+                    return true;
+            }
+
+            return false;
+        }
     }
 }

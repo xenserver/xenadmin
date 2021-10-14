@@ -34,7 +34,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Windows.Forms;
 using DiscUtils.Iso9660;
-using XenAdmin.Actions;
+using XenAdmin.Actions.Updates;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
 using XenAPI;
@@ -123,8 +123,7 @@ namespace XenAdmin.Wizards
             if (string.IsNullOrEmpty(zippedUpdatePath))
                 return null;
 
-            var unzipAction = new DownloadAndUnzipXenServerPatchAction(Path.GetFileNameWithoutExtension(zippedUpdatePath),
-                null, zippedUpdatePath, true, BrandManager.ExtensionUpdate, InvisibleMessages.ISO_UPDATE);
+            var unzipAction = new UnzipXenServerPatchAction(zippedUpdatePath, BrandManager.ExtensionUpdate, InvisibleMessages.ISO_UPDATE);
 
             using (var dlg = new ActionProgressDialog(unzipAction, ProgressBarStyle.Marquee))
             {

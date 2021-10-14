@@ -61,6 +61,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to http://support.citrix.com/xencenterclientiddownload.
+        /// </summary>
+        public static string CLIENT_ID_URL {
+            get {
+                return ResourceManager.GetString("CLIENT_ID_URL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to http://docs.citrix.com/en-us/citrix-hypervisor/whats-new/removed-features.html.
         /// </summary>
         public static string DEPRECATION_URL {
@@ -228,6 +237,15 @@ namespace XenAdmin {
         public static string SUPPORT_URL {
             get {
                 return ResourceManager.GetString("SUPPORT_URL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://fileservice.citrix.com/api/session/token.
+        /// </summary>
+        public static string TOKEN_API_URL {
+            get {
+                return ResourceManager.GetString("TOKEN_API_URL", resourceCulture);
             }
         }
         

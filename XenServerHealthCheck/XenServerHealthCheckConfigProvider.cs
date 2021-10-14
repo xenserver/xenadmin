@@ -61,7 +61,7 @@ namespace XenServerHealthCheck
 
         public bool ForcedExiting => false;
 
-        public string XenCenterUUID => "";
+        public string XenCenterUUID => string.Empty;
 
         public bool DontSudo => false;
 
@@ -78,9 +78,19 @@ namespace XenServerHealthCheck
             return string.Empty;
         }
 
+        public string GetCustomFileServicePrefix()
+        {
+            return string.Empty;
+        }
+
         public int GetProxyTimeout(bool timeout)
         {
             return timeout ? Properties.Settings.Default.HttpTimeout : 0;
+        }
+
+        public string GetCustomTokenUrl()
+        {
+            return string.Empty;
         }
 
         public IWebProxy GetProxyFromSettings(IXenConnection connection)
@@ -107,7 +117,7 @@ namespace XenServerHealthCheck
 
                         if (Properties.Settings.Default.ProvideProxyAuthentication)
                         {
-                            string username = "";
+                            string username = string.Empty;
                             try
                             {
                                 string protectedUsername = Properties.Settings.Default.ProxyUsername;
@@ -119,7 +129,7 @@ namespace XenServerHealthCheck
                                 log.Warn("Could not unprotect internet proxy username.", e);
                             }
 
-                            string password = "";
+                            string password = string.Empty;
                             try
                             {
                                 string protectedPassword = Properties.Settings.Default.ProxyPassword;
@@ -166,7 +176,7 @@ namespace XenServerHealthCheck
 
         public string GetLogFile()
         {
-            return "";
+            return string.Empty;
         }
 
         public void UpdateServerHistory(string hostnameWithPort)
@@ -176,6 +186,10 @@ namespace XenServerHealthCheck
         public void SaveSettingsIfRequired()
         {
         }
+
+        public string FileServiceUsername => string.Empty;
+
+        public string FileServiceClientId => string.Empty;
 
         private static AsyncAction.SudoElevationResult GetElevatedSession(List<Role> roles, IXenConnection connection, string actionTitle)
         {

@@ -29,34 +29,43 @@
  * SUCH DAMAGE.
  */
 
+
 using System;
-using System.Collections.Generic;
-using System.Text;
-using XenAdmin.Alerts;
+using System.Windows.Forms;
+using XenCenterLib;
 
-namespace CFUValidator.OutputDecorators
+namespace XenAdmin.Dialogs
 {
-    class XenServerUpdateDecorator : Decorator
+    public partial class ClientIdDialog : XenDialogBase
     {
-        private readonly List<XenServerVersionAlert> alerts;
-        private const string header = "XenServer updates required:";
-        private const string updateNotFound = "XenServer update could not be found";
-
-        public XenServerUpdateDecorator(OuputComponent ouputComponent, List<XenServerVersionAlert> alerts)
+        public ClientIdDialog()
         {
-            SetComponent(ouputComponent);
-            this.alerts = alerts;
+            InitializeComponent();
         }
 
-        public override StringBuilder Generate()
+        internal override string HelpName => "ClientIdDialog";
+
+        protected override void OnShown(EventArgs e)
         {
-            StringBuilder sb = base.Generate();
-            sb.AppendLine(header);
-            foreach (XenServerVersionAlert alert in alerts)
+            base.OnShown(e);
+            clientIdControl1.Build(true);
+        }
+
+        private void buttonOk_Click(object sender, EventArgs e)
+        {
+            if (!clientIdControl1.IsValidToSave(out Control control, out string invalidReason, false))
             {
-                sb.AppendLine(alert == null ? updateNotFound : alert.Version.Name);
+                clientIdControl1.ShowValidationMessages(control, invalidReason);
+                return;
             }
-            return sb.AppendLine(String.Empty);
+
+            if (!string.IsNullOrEmpty(clientIdControl1.FileServiceUsername))
+                Properties.Settings.Default.FileServiceUsername = EncryptionUtils.Protect(clientIdControl1.FileServiceUsername);
+
+            if (!string.IsNullOrEmpty(clientIdControl1.FileServiceClientId))
+                Properties.Settings.Default.FileServiceClientId = EncryptionUtils.Protect(clientIdControl1.FileServiceClientId);
+
+            DialogResult = DialogResult.OK;
         }
     }
 }

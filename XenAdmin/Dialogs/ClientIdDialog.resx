@@ -117,82 +117,148 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CLIENT_ID_URL" xml:space="preserve">
-    <value>https://support.citrix.com/xencenterclientiddownload</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="clientIdControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
-  <data name="HEALTH_CHECK_PRIVACY_STATEMENT_URL" xml:space="preserve">
-    <value>https://cis.citrix.com/legal/</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="clientIdControl1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
   </data>
-  <data name="HOMEPAGE" xml:space="preserve">
-    <value>https://www.citrix.com/products/citrix-hypervisor</value>
+  <data name="clientIdControl1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 10</value>
   </data>
-  <data name="HOMEPAGE_FILENAME" xml:space="preserve">
-    <value>HomePage.mht</value>
+  <data name="clientIdControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>481, 163</value>
   </data>
-  <data name="ISL_DEPRECATION_URL" xml:space="preserve">
-    <value>http://support.citrix.com/article/CTX141433</value>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="clientIdControl1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="LICENSE_EXPIRY_WEBPAGE" xml:space="preserve">
-    <value>https://store.citrix.com/dr_product/citrix-hypervisor-subscription</value>
+  <data name="&gt;&gt;clientIdControl1.Name" xml:space="preserve">
+    <value>clientIdControl1</value>
   </data>
-  <data name="LICENSE_SERVER_DOWNLOAD_LINK" xml:space="preserve">
-    <value>http://www.citrix.com/downloads/licensing/license-server</value>
+  <data name="&gt;&gt;clientIdControl1.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.ClientIdControl, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="LOCALE" xml:space="preserve">
-    <value>en-US</value>
+  <data name="&gt;&gt;clientIdControl1.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="LOG_FILENAME" xml:space="preserve">
-    <value>[XenCenter].log</value>
+  <data name="&gt;&gt;clientIdControl1.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
-  <data name="MAINWINDOW_HOME_PATH" xml:space="preserve">
-    <value>Home.htm</value>
+  <data name="buttonOk.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
   </data>
-  <data name="OUT_OF_DATE_WEBSITE" xml:space="preserve">
-    <value>https://www.citrix.com/downloads/citrix-hypervisor</value>
+  <data name="buttonOk.Location" type="System.Drawing.Point, System.Drawing">
+    <value>322, 3</value>
   </data>
-  <data name="PARTNEROFFERS_URL" xml:space="preserve">
-    <value>http://www.citrix.com/buy/partnerlocator.html</value>
+  <data name="buttonOk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
   </data>
-  <data name="PLUGINS_URL" xml:space="preserve">
-    <value>https://github.com/xenserver/xencenter-samples</value>
+  <data name="buttonOk.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="PRIVACY" xml:space="preserve">
-    <value>http://citrix.com/English/aboutCitrix/legal/privacyStatement.asp?ntref=hp_nav_US</value>
+  <data name="buttonOk.Text" xml:space="preserve">
+    <value>OK</value>
   </data>
-  <data name="PV_GUESTS_CHECK_URL" xml:space="preserve">
-    <value>https://docs.citrix.com/en-us/citrix-hypervisor/system-requirements/guest-os-support.html</value>
+  <data name="&gt;&gt;buttonOk.Name" xml:space="preserve">
+    <value>buttonOk</value>
   </data>
-  <data name="XEN_SEARCH" xml:space="preserve">
-    <value>xensearch</value>
+  <data name="&gt;&gt;buttonOk.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="SUPPORT_URL" xml:space="preserve">
-    <value>http://support.citrix.com/</value>
+  <data name="&gt;&gt;buttonOk.Parent" xml:space="preserve">
+    <value>flowLayoutPanel1</value>
   </data>
-  <data name="UPSELL_SA" xml:space="preserve">
-    <value>https://store.citrix.com/dr_product/citrix-hypervisor-subscription</value>
+  <data name="&gt;&gt;buttonOk.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
-  <data name="XENDESKTOP_URL" xml:space="preserve">
-    <value>http://www.citrix.com/TryXenDesktop</value>
+  <data name="buttonCancel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
   </data>
-  <data name="XEN_UPDATE" xml:space="preserve">
-    <value>xsupdate</value>
+  <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>403, 3</value>
   </data>
-  <data name="ISO_UPDATE" xml:space="preserve">
-    <value>iso</value>
+  <data name="buttonCancel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
   </data>
-  <data name="UPSELL_LEARNMOREURL_TRIAL" xml:space="preserve">
-    <value>https://www.citrix.com/products/citrix-hypervisor/get-started.html</value>
+  <data name="buttonCancel.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
-  <data name="HELP_URL" xml:space="preserve">
-    <value>http://docs.citrix.com/en-us/xencenter/</value>
+  <data name="buttonCancel.Text" xml:space="preserve">
+    <value>Cancel</value>
   </data>
-  <data name="HELP_URL_QUERY" xml:space="preserve">
-    <value>?utm_campaign={0}&amp;utm_medium=ui_link&amp;utm_source={1}</value>
+  <data name="&gt;&gt;buttonCancel.Name" xml:space="preserve">
+    <value>buttonCancel</value>
   </data>
-  <data name="DEPRECATION_URL" xml:space="preserve">
-    <value>http://docs.citrix.com/en-us/citrix-hypervisor/whats-new/removed-features.html</value>
+  <data name="&gt;&gt;buttonCancel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="TOKEN_API_URL" xml:space="preserve">
-    <value>https://fileservice.citrix.com/api/session/token</value>
+  <data name="&gt;&gt;buttonCancel.Parent" xml:space="preserve">
+    <value>flowLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="flowLayoutPanel1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="flowLayoutPanel1.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="flowLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="flowLayoutPanel1.FlowDirection" type="System.Windows.Forms.FlowDirection, System.Windows.Forms">
+    <value>RightToLeft</value>
+  </data>
+  <data name="flowLayoutPanel1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="flowLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 173</value>
+  </data>
+  <data name="flowLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>481, 29</value>
+  </data>
+  <data name="flowLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel1.Name" xml:space="preserve">
+    <value>flowLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>96, 96</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>501, 212</value>
+  </data>
+  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="$this.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 10, 10, 10</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>[XenCenter]</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>ClientIdDialog</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>XenAdmin.Dialogs.XenDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

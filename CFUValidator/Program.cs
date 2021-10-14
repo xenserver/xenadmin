@@ -30,59 +30,71 @@
  */
 
 using System;
+using System.Net;
 using CFUValidator.CommandLineOptions;
+using XenAdmin;
+using XenAdmin.Core;
+using XenAdmin.Network;
+using Console = System.Console;
+
 
 namespace CFUValidator
 {
-    class Program
+    static class Program
     {
         static void Main(string[] args)
         {
-            CFUValidator cfuValidator = null;
             try
             {
-                CommandLineParser parser = new CommandLineParser(args, CFUCommandLineOptionManager.EmptyArguments);
+                CommandLineParser parser = new CommandLineParser(args);
                 parser.Parse();
 
                 CFUCommandLineOptionManager manager = new CFUCommandLineOptionManager(parser.ParsedArguments);
 
-                if(manager.IsHelpRequired || args.Length == 0)
-                {
-                    Console.WriteLine(manager.Help);
-                    Environment.Exit(1);
-                }
-                    
-                cfuValidator = new CFUValidator(manager.FileSource, manager.XmlLocation,
-                                                manager.ServerVersion, manager.InstalledHotfixes, 
-                                                manager.CheckHotfixContents);
-                cfuValidator.StatusChanged += cfuValidator_StatusChanged;
-                cfuValidator.Run();
-                Console.WriteLine(cfuValidator.Output);
+                var cfuValidator = new CFUValidator(manager.XmlLocationType, manager.XmlLocation,
+                    manager.ServerVersion, manager.InstalledHotfixes,
+                    manager.CheckHotfixContents, new ConfigProvider(manager.Username, manager.ClientId));
 
+                cfuValidator.Validate(Console.WriteLine);
             }
-            catch (CFUValidationException ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+
+                if (!(ex is CFUValidationException))
+                    Console.WriteLine(ex.StackTrace);
+
                 Environment.Exit(1);
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine("\n **** Unexpected exception occured ****: " + ex.Message);
-                Console.WriteLine(ex.StackTrace);
-                Environment.Exit(1);
-            }
-            finally
-            {
-                if (cfuValidator != null)
-                    cfuValidator.StatusChanged -= cfuValidator_StatusChanged;
             }
 
             Environment.Exit(0);
         }
+    }
 
-        static void cfuValidator_StatusChanged(object sender, EventArgs e)
+    public class ConfigProvider : IConfigProvider
+    {
+        public ConfigProvider(string username, string clientId)
         {
-            Console.WriteLine(sender as string);
+            FileServiceUsername = username;
+            FileServiceClientId = clientId;
+        }
+
+        public string FileServiceUsername { get; }
+        public string FileServiceClientId { get; }
+
+        public string GetCustomTokenUrl()
+        {
+            return Registry.GetCustomTokenUrl() ?? InvisibleMessages.TOKEN_API_URL;
+        }
+
+        public IWebProxy GetProxyFromSettings(IXenConnection connection)
+        {
+            return null;
+        }
+
+        public IWebProxy GetProxyFromSettings(IXenConnection connection, bool isForXenServer)
+        {
+            return null;
         }
     }
 }

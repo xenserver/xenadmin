@@ -36,9 +36,10 @@ using System.Threading;
 using System.IO;
 using System.Linq;
 using System.Net.NetworkInformation;
+using XenAdmin.Core;
 using XenCenterLib.Archive;
 
-namespace XenAdmin.Actions
+namespace XenAdmin.Actions.Updates
 {
     internal enum DownloadState
     {
@@ -46,64 +47,215 @@ namespace XenAdmin.Actions
         Cancelled,
         Completed,
         Error
-    };
+    }
 
-    public class DownloadAndUnzipXenServerPatchAction : AsyncAction, IByteProgressAction
+
+    public abstract class DownloadAndUnzipXenServerPatchActionBase : AsyncAction
+    {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+        protected readonly string updateName;
+        protected readonly string[] updateFileSuffixes;
+
+        public string PatchPath { get; protected set; }
+
+        public string ByteProgressDescription { get; set; }
+
+        protected DownloadAndUnzipXenServerPatchActionBase(string patchName, params string[] updateFileExtensions)
+            : base(null, string.Empty, string.Empty, true) 
+        {
+            updateName = patchName;
+            updateFileSuffixes = (from item in updateFileExtensions select '.' + item).ToArray();
+        }
+
+        protected string ExtractFile(string zippedFilePath, bool deleteOriginal)
+        {
+            log.DebugFormat("Extracting XenServer patch '{0}'", updateName);
+            Description = string.Format(Messages.DOWNLOAD_AND_EXTRACT_ACTION_EXTRACTING_DESC, updateName);
+
+            DotNetZipZipIterator iterator = null;
+
+            try
+            {
+                using (Stream stream = new FileStream(zippedFilePath, FileMode.Open, FileAccess.Read))
+                {
+                    iterator = ArchiveFactory.Reader(ArchiveFactory.Type.Zip, stream) as DotNetZipZipIterator;
+                    if (iterator == null)
+                        return null;
+                    
+                    iterator.CurrentFileExtractProgressChanged += archiveIterator_CurrentFileExtractProgressChanged;
+
+                    log.InfoFormat("Looking in the archive for a file with extension {0}...",
+                        string.Join(" or ", updateFileSuffixes));
+                    
+                    while (iterator.HasNext())
+                    {
+                        string currentExtension = Path.GetExtension(iterator.CurrentFileName());
+
+                        if (updateFileSuffixes.Any(item => item == currentExtension))
+                        {
+                            log.InfoFormat("Found file '{0}'. Extracting...", iterator.CurrentFileName());
+
+                            string path = Path.Combine(Path.GetTempPath(), iterator.CurrentFileName());
+
+                            using (Stream outputStream = new FileStream(path, FileMode.Create))
+                            {
+                                iterator.ExtractCurrentFile(outputStream, null);
+                                log.InfoFormat("Update file extracted to '{0}'", path);
+                                return path;
+                            }
+                        }
+                    }
+
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                log.Error("Exception occurred when extracting downloaded archive.", e);
+                throw new Exception(Messages.DOWNLOAD_AND_EXTRACT_ACTION_EXTRACTING_ERROR);
+            }
+            finally
+            {
+                if (iterator != null)
+                {
+                    iterator.CurrentFileExtractProgressChanged -= archiveIterator_CurrentFileExtractProgressChanged;
+                    iterator.Dispose();
+                }
+
+                if (deleteOriginal)
+                {
+                    try
+                    {
+                        File.Delete(zippedFilePath);
+                    }
+                    catch
+                    {
+                        //ignore
+                    }
+                }
+
+                log.DebugFormat("Extracting XenServer patch '{0}' and cleaning up completed", updateName);
+            }
+        }
+
+        private void archiveIterator_CurrentFileExtractProgressChanged(long bytesTransferred, long totalBytesToTransfer)
+        {
+            UpdateExtractionProgress(bytesTransferred, totalBytesToTransfer);
+        }
+
+        protected override void CancelRelatedTask()
+        {
+        }
+
+        protected abstract void UpdateExtractionProgress(long bytesTransferred, long totalBytesToTransfer);
+    }
+
+
+    public class DownloadAndUnzipXenServerPatchAction : DownloadAndUnzipXenServerPatchActionBase, IByteProgressAction
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private const int SLEEP_TIME_TO_CHECK_DOWNLOAD_STATUS_MS = 900;
         private const int SLEEP_TIME_BEFORE_RETRY_MS = 5000;
 
-        //If you consider increasing this for any reason (I think 5 is already more than enough), have a look at the usage of SLEEP_TIME_BEFORE_RETRY_MS in DownloadFile() as well.
+        //If you consider increasing this for any reason (I think 5 is already more than enough),
+        //have a look at the usage of SLEEP_TIME_BEFORE_RETRY_MS in DownloadFile() as well.
         private const int MAX_NUMBER_OF_TRIES = 5;
 
-        private readonly Uri address;
-        private readonly string outputFileName;
-        private readonly string updateName;
-        private readonly string[] updateFileSuffixes;
-        private readonly bool downloadUpdate;
         private readonly bool skipUnzipping;
+        private readonly Uri _patchUri;
         private DownloadState patchDownloadState;
         private Exception patchDownloadError;
-
-        public string PatchPath { get; private set; }
-
-        public string ByteProgressDescription { get; set; }
-
-        public DownloadAndUnzipXenServerPatchAction(string patchName, Uri uri, string outputFileName, bool suppressHist,
-            params string[] updateFileExtensions)
-            : base(null, uri == null
-                ? string.Format(Messages.UPDATES_WIZARD_EXTRACT_ACTION_TITLE, patchName)
-                : string.Format(Messages.DOWNLOAD_AND_EXTRACT_ACTION_TITLE, patchName), string.Empty, suppressHist) 
-        {
-            updateName = patchName;
-            address = uri;
-            downloadUpdate = address != null;
-            updateFileSuffixes = (from item in updateFileExtensions select '.' + item).ToArray();
-            skipUnzipping = downloadUpdate && updateFileSuffixes.Any(item => address.ToString().Contains(item));
-            this.outputFileName = outputFileName;
-        }
-
         private WebClient client;
 
-        private void DownloadFile()
-        {
-            int errorCount = 0;
-            bool needToRetry = false;
 
+        public DownloadAndUnzipXenServerPatchAction(string patchName, Uri uri, params string[] updateFileExtensions)
+            : base(patchName, updateFileExtensions)
+        {
+            Title = string.Format(Messages.DOWNLOAD_AND_EXTRACT_ACTION_TITLE, patchName);
+            _patchUri = uri;
+            skipUnzipping = updateFileSuffixes.Any(item => _patchUri.ToString().EndsWith(item));
+        }
+
+        public override void RecomputeCanCancel()
+        {
+            CanCancel = !Cancelling && !IsCompleted && (patchDownloadState == DownloadState.InProgress);
+        }
+
+        protected override void Run()
+        {
+            DownloadFile(out string localPath);
+
+            if (IsCompleted || Cancelled)
+                return;
+
+            if (Cancelling)
+                throw new CancelledException();
+
+            if (skipUnzipping)
+            {
+                log.Debug("Moving archive to final destination");
+                string newLocalePath = Path.Combine(Path.GetDirectoryName(localPath), updateName);
+                if (File.Exists(newLocalePath))
+                    File.Delete(newLocalePath);
+                File.Move(localPath, newLocalePath);
+                PatchPath = newLocalePath;
+                log.DebugFormat("XenServer patch '{0}' is ready", updateName);
+            }
+            else
+            {
+                PatchPath = ExtractFile(localPath, true);
+            }
+
+            if (string.IsNullOrEmpty(PatchPath))
+            {
+                log.ErrorFormat("The downloaded archive does not contain a file with any of the following extensions: {0}",
+                    string.Join(", ", updateFileSuffixes));
+                throw new Exception(Messages.DOWNLOAD_AND_EXTRACT_ACTION_FILE_NOT_FOUND);
+            }
+
+            Description = Messages.COMPLETED;
+        }
+
+        protected override void UpdateExtractionProgress(long bytesTransferred, long totalBytesToTransfer)
+        {
+            PercentComplete = 95 + (int)(5.0 * bytesTransferred / totalBytesToTransfer);
+        }
+
+        private void DownloadFile(out string outputFileName)
+        {
             client = new WebClient();
-            //register download events
             client.DownloadProgressChanged += client_DownloadProgressChanged;
             client.DownloadFileCompleted += client_DownloadFileCompleted;
-
-            // register event handler to detect changes in network connectivity
             NetworkChange.NetworkAvailabilityChanged += NetworkAvailabilityChanged;
+
+            //useful when the updates use test locations
+            if (DownloadUpdatesXmlAction.IsFileServiceUri(_patchUri))
+            {
+                log.InfoFormat("Authenticating account...");
+                Description = string.Format(Messages.DOWNLOAD_AND_EXTRACT_ACTION_AUTHENTICATING_DESC,
+                    BrandManager.COMPANY_NAME_SHORT);
+                var credential = TokenManager.GetDownloadCredential(XenAdminConfigManager.Provider);
+                client.Headers.Add("Authorization", $"Basic {credential}");
+            }
+
+            outputFileName = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+            
+            log.InfoFormat("Downloading update '{0}' (from '{1}') to '{2}'", updateName, _patchUri, outputFileName);
+            Description = string.Format(Messages.DOWNLOAD_AND_EXTRACT_ACTION_DOWNLOADING_DESC, updateName);
+            LogDescriptionChanges = false;
+
+            int failedTries = 0;
+            bool needToRetry = false;
 
             try
             {
                 do
                 {
+                    if (Cancelling)
+                        throw new CancelledException();
+
                     if (needToRetry)
                         Thread.Sleep(SLEEP_TIME_BEFORE_RETRY_MS);
 
@@ -111,9 +263,8 @@ namespace XenAdmin.Actions
 
                     client.Proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(null, false);
 
-                    //start the download
                     patchDownloadState = DownloadState.InProgress;
-                    client.DownloadFileAsync(address, outputFileName);
+                    client.DownloadFileAsync(_patchUri, outputFileName);
 
                     bool patchDownloadCancelling = false;
 
@@ -136,176 +287,41 @@ namespace XenAdmin.Actions
                     if (patchDownloadState == DownloadState.Error)
                     {
                         needToRetry = true;
+                        failedTries++;
 
-                        // this many errors so far - including this one
-                        errorCount++;
+                        log.ErrorFormat("Failed to download '{0}' (attempt {1} of maximum {2}).",
+                            _patchUri, failedTries, MAX_NUMBER_OF_TRIES);
 
-                        // logging only, it will retry again.
-                        log.ErrorFormat(
-                            "Error while downloading from '{0}'. Number of errors so far (including this): {1}. Trying maximum {2} times.",
-                            address, errorCount, MAX_NUMBER_OF_TRIES);
-
-                        if  (patchDownloadError == null)
-                            log.Error("An unknown error occurred.");
+                        if (failedTries < MAX_NUMBER_OF_TRIES)
+                        {
+                            if (patchDownloadError == null)
+                                log.Error("An unknown error occurred.");
+                            else
+                                log.Error(patchDownloadError);
+                        }
                         else
-                            log.Error(patchDownloadError);
+                        {
+                            if (patchDownloadError == null)
+                                throw new Exception(Messages.ERROR_UNKNOWN);
+                            else
+                                throw patchDownloadError;
+                        }
                     }
-                } while (errorCount < MAX_NUMBER_OF_TRIES && needToRetry);
+                } while (needToRetry);
             }
             finally
             {
-                //deregister download events
+                LogDescriptionChanges = true;
+
                 client.DownloadProgressChanged -= client_DownloadProgressChanged;
                 client.DownloadFileCompleted -= client_DownloadFileCompleted;
-
                 NetworkChange.NetworkAvailabilityChanged -= NetworkAvailabilityChanged;
 
                 client.Dispose();
             }
-
-            //if this is still the case after having retried MAX_NUMBER_OF_TRIES number of times.
-            if (patchDownloadState == DownloadState.Error)
-            {
-                log.ErrorFormat("Giving up - Maximum number of retries ({0}) has been reached.", MAX_NUMBER_OF_TRIES);
-
-                MarkCompleted(patchDownloadError ?? new Exception(Messages.ERROR_UNKNOWN));
-            }
-
         }
 
-        private void NetworkAvailabilityChanged(object sender, NetworkAvailabilityEventArgs e)
-        {
-            if (!e.IsAvailable && client != null && patchDownloadState == DownloadState.InProgress)
-            {
-                patchDownloadError = new WebException(Messages.NETWORK_CONNECTIVITY_ERROR);
-                patchDownloadState = DownloadState.Error;
-                client.CancelAsync();
-            }
-        }
-
-        private void ExtractFile()
-        {
-            ArchiveIterator iterator = null;
-            DotNetZipZipIterator zipIterator =  null;
-
-            try
-            {
-                using (Stream stream = new FileStream(outputFileName, FileMode.Open, FileAccess.Read))
-                {
-                    iterator = ArchiveFactory.Reader(ArchiveFactory.Type.Zip, stream);
-                    zipIterator = iterator as DotNetZipZipIterator;
-
-                    if (zipIterator != null)
-                        zipIterator.CurrentFileExtractProgressChanged += archiveIterator_CurrentFileExtractProgressChanged;
-
-                    while (iterator.HasNext())
-                    {
-                        string currentExtension = Path.GetExtension(iterator.CurrentFileName());
-
-                        if (updateFileSuffixes.Any(item => item == currentExtension))
-                        {
-                            string path = downloadUpdate
-                                ? Path.Combine(Path.GetDirectoryName(outputFileName), iterator.CurrentFileName())
-                                : Path.Combine(Path.GetTempPath(), iterator.CurrentFileName());
-
-                            log.InfoFormat(
-                                "Found '{0}' in the downloaded archive when looking for a '{1}' file. Extracting...",
-                                iterator.CurrentFileName(), currentExtension);
-
-                            using (Stream outputStream = new FileStream(path, FileMode.Create))
-                            {
-                                iterator.ExtractCurrentFile(outputStream, null);
-                                PatchPath = path;
-
-                                log.InfoFormat("Update file extracted to '{0}'", path);
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                log.Error("Exception occurred when extracting downloaded archive.", e);
-                throw new Exception(Messages.DOWNLOAD_AND_EXTRACT_ACTION_EXTRACTING_ERROR);
-            }
-            finally
-            {
-                if (zipIterator != null)
-                    zipIterator.CurrentFileExtractProgressChanged -= archiveIterator_CurrentFileExtractProgressChanged;
-
-                if (iterator != null)
-                    iterator.Dispose();
-
-                if (downloadUpdate)
-                {
-                    try { File.Delete(outputFileName); }
-                    catch { }
-                }
-            }
-
-            if (string.IsNullOrEmpty(PatchPath) && downloadUpdate)
-            {
-                MarkCompleted(new Exception(Messages.DOWNLOAD_AND_EXTRACT_ACTION_FILE_NOT_FOUND));
-                log.InfoFormat(
-                    "The downloaded archive does not contain a file with any of the following extensions: {0}",
-                    string.Join(", ", updateFileSuffixes));
-            }
-        }
-
-        protected override void Run()
-        {
-            if (downloadUpdate)
-            {
-                log.InfoFormat("Downloading update '{0}' (from '{1}') to '{2}'", updateName, address, outputFileName);
-                Description = string.Format(Messages.DOWNLOAD_AND_EXTRACT_ACTION_DOWNLOADING_DESC, updateName);
-                LogDescriptionChanges = false;
-                DownloadFile();
-                LogDescriptionChanges = true;
-
-                if (IsCompleted || Cancelled)
-                    return;
-
-                if (Cancelling)
-                    throw new CancelledException();
-            }
-
-            if (skipUnzipping)
-            {
-                try
-                {
-                    string newFilePath = Path.Combine(Path.GetDirectoryName(outputFileName), updateName);
-                    if (File.Exists(newFilePath))
-                        File.Delete(newFilePath);
-                    File.Move(outputFileName, newFilePath);
-                    PatchPath = newFilePath;
-                    log.DebugFormat("XenServer patch '{0}' is ready", updateName);
-                }
-                catch (Exception e)
-                {
-                    log.Error("Exception occurred when preparing archive.", e);
-                    throw;
-                }
-            }
-            else
-            {
-                log.DebugFormat("Extracting XenServer patch '{0}'", updateName);
-                Description = string.Format(Messages.DOWNLOAD_AND_EXTRACT_ACTION_EXTRACTING_DESC, updateName);
-                ExtractFile();
-                log.DebugFormat("Extracting XenServer patch '{0}' completed", updateName);   
-            }
-            
-            Description = Messages.COMPLETED;
-            MarkCompleted();
-        }
-
-        void archiveIterator_CurrentFileExtractProgressChanged(long bytesTransferred, long totalBytesToTransfer)
-        {
-            int pc = downloadUpdate ? 95 + (int)(5.0 * bytesTransferred / totalBytesToTransfer) : (int)(100.0 * bytesTransferred / totalBytesToTransfer);
-            PercentComplete = pc;
-        }
-
-        void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        private void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
             int pc = (int)(95.0 * e.BytesReceived / e.TotalBytesToReceive);
             var descr = string.Format(Messages.DOWNLOAD_AND_EXTRACT_ACTION_DOWNLOADING_DETAILS_DESC, updateName,
@@ -315,7 +331,7 @@ namespace XenAdmin.Actions
             Tick(pc, descr);
         }
 
-        void client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
+        private void client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
             if (e.Cancelled && patchDownloadState == DownloadState.Error) // cancelled due to network connectivity issue (see NetworkAvailabilityChanged)
                 return;
@@ -329,7 +345,35 @@ namespace XenAdmin.Actions
 
             if (e.Error != null) //failure
             {
-                patchDownloadError = e.Error;
+                if (e.Error is WebException wex && wex.Response is HttpWebResponse response)
+                {
+                    switch (response.StatusCode)
+                    {
+                        case HttpStatusCode.Unauthorized:
+                            log.Error($"Could not download {updateName} (401 Unauthorized). Client ID may be invalid or revoked.");
+                            patchDownloadError = new Exception(Messages.FILESERVICE_ERROR_401);
+                            break;
+
+                        case HttpStatusCode.Forbidden:
+                            log.Error($"Could not download {updateName} (403 Forbidden). The account has insufficient permissions.");
+                            patchDownloadError = new Exception(Messages.FILESERVICE_ERROR_403);
+                            break;
+
+                        case HttpStatusCode.NotFound:
+                            log.Error($"Could not download {updateName} (404 File not found).");
+                            patchDownloadError = new Exception(Messages.FILESERVICE_ERROR_404);
+                            break;
+
+                        default:
+                            patchDownloadError = e.Error;
+                            break;
+                    }
+                }
+                else
+                {
+                    patchDownloadError = e.Error;
+                }
+                
                 log.DebugFormat("XenServer patch '{0}' download failed", updateName);
                 patchDownloadState = DownloadState.Error;
                 return;
@@ -340,14 +384,43 @@ namespace XenAdmin.Actions
             log.DebugFormat("XenServer patch '{0}' download completed successfully", updateName);
         }
 
+        private void NetworkAvailabilityChanged(object sender, NetworkAvailabilityEventArgs e)
+        {
+            if (!e.IsAvailable && client != null && patchDownloadState == DownloadState.InProgress)
+            {
+                patchDownloadError = new WebException(Messages.NETWORK_CONNECTIVITY_ERROR);
+                patchDownloadState = DownloadState.Error;
+                client.CancelAsync();
+            }
+        }
+    }
+
+
+    public class UnzipXenServerPatchAction : DownloadAndUnzipXenServerPatchActionBase
+    {
+        private readonly string _zippedUpdatePath;
+
+        public UnzipXenServerPatchAction(string zippedUpdatePath, params string[] updateFileExtensions)
+            : base(Path.GetFileNameWithoutExtension(zippedUpdatePath), updateFileExtensions)
+        {
+            _zippedUpdatePath = zippedUpdatePath;
+            Title = string.Format(Messages.UPDATES_WIZARD_EXTRACT_ACTION_TITLE, Path.GetFileNameWithoutExtension(zippedUpdatePath));
+        }
+
+        protected override void Run()
+        {
+            PatchPath = ExtractFile(_zippedUpdatePath, false);
+            Description = Messages.COMPLETED;
+        }
+
+        protected override void UpdateExtractionProgress(long bytesTransferred, long totalBytesToTransfer)
+        {
+            PercentComplete = (int)(100.0 * bytesTransferred / totalBytesToTransfer);
+        }
+
         public override void RecomputeCanCancel()
         {
-            CanCancel = !Cancelling && !IsCompleted && (patchDownloadState == DownloadState.InProgress);
+            CanCancel = !Cancelling && !IsCompleted;
         }
-
-        protected override void CancelRelatedTask()
-        {
-        }
-
     }
 }

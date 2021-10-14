@@ -204,10 +204,22 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             if (direction == PageLoadedDirection.Forward)
             {
+                if ((IsInAutomatedUpdatesMode || downloadUpdateRadioButton.Checked) &&
+                    !Updates.CheckCanDownloadUpdates())
+                {
+                    cancel = true;
+                    using (var errDlg = new ClientIdDialog())
+                        errDlg.ShowDialog(ParentForm);
+                    return;
+                }
+
                 if (IsInAutomatedUpdatesMode)
                 {
-                    var succeed = Updates.CheckForUpdatesSync(this.Parent);
-                    cancel = !succeed;
+                    if (!Updates.CheckForUpdatesSync(Parent))
+                    {
+                        cancel = true;
+                        return;
+                    }
                 }
                 else if (downloadUpdateRadioButton.Checked)
                 {

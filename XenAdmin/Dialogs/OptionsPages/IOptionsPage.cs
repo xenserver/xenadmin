@@ -29,6 +29,7 @@
  * SUCH DAMAGE.
  */
 
+using System.Windows.Forms;
 using XenAdmin.Controls;
 
 namespace XenAdmin.Dialogs.OptionsPages
@@ -36,8 +37,8 @@ namespace XenAdmin.Dialogs.OptionsPages
     interface IOptionsPage : VerticalTabs.IVerticalTab
     {
         void Build();
-        bool IsValidToSave();
-        void ShowValidationMessages();
+        bool IsValidToSave(out Control control, out string invalidReason);
+        void ShowValidationMessages(Control control, string message);
         void Save();
     }
 }

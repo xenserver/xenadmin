@@ -40,6 +40,7 @@ using System.Linq;
 using XenAdmin.Core;
 using System.Text;
 using System.Windows.Forms;
+using XenAdmin.Actions.Updates;
 using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Dialogs;
 using XenAdmin.Wizards.RollingUpgradeWizard.PlanActions;
@@ -50,7 +51,7 @@ namespace XenAdmin.Wizards.PatchingWizard
     public enum Status { NotStarted, Started, Cancelled, Completed }
     public abstract partial class AutomatedUpdatesBasePage : XenTabPage
     {
-        protected static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         protected bool _thisPageIsCompleted;
 
@@ -98,7 +99,10 @@ namespace XenAdmin.Wizards.PatchingWizard
         public override void PageCancelled(ref bool cancel)
         {
             if (_thisPageIsCompleted)
+            {
+                TokenManager.InvalidateToken(XenAdminConfigManager.Provider);
                 return;
+            }
 
             using (var dlog = new WarningDialog(ReconsiderCancellationMessage(),
                 ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo){WindowTitle = Text})
@@ -110,6 +114,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
             }
 
+            TokenManager.InvalidateToken(XenAdminConfigManager.Provider);
             Status = Status.Cancelled;
             backgroundWorkers.ForEach(bgw => bgw.CancelAsync());
         }
@@ -135,6 +140,11 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 Status = Status.Started;
             }
+        }
+
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
+        {
+            TokenManager.InvalidateToken(XenAdminConfigManager.Provider);
         }
 
         #endregion

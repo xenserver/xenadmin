@@ -29,44 +29,46 @@
  * SUCH DAMAGE.
  */
 
+using System;
 using System.Collections.Generic;
 using XenAdmin.Alerts;
 
 namespace CFUValidator.Validators
 {
-    class CorePatchDetailsValidator : AlertFeatureValidator
+    class CorePatchDetailsValidator : Validator
     {
-        public CorePatchDetailsValidator(List<XenServerPatchAlert> alerts) : base(alerts){}
+        private readonly List<XenServerPatchAlert> alerts;
 
-        public override void Validate()
+        public CorePatchDetailsValidator(List<XenServerPatchAlert> alerts)
+        {
+            this.alerts = alerts;
+        }
+
+        protected override string SummaryTitle => "Core details in patch checks:";
+
+        protected override string Header => "Verifying core patch details...";
+
+        protected override string Footer => "Verification of core patch details completed.";
+
+        protected override void ValidateCore(Action<string> statusReporter)
         {
             foreach (XenServerPatchAlert alert in alerts)
             {
-                VerifyPatchDetailsMissing(alert);
+                if(string.IsNullOrEmpty(alert.Patch.Uuid))
+                    Errors.Add("Missing patch uuid for patch: " + alert.Patch.Name);
+                if(string.IsNullOrEmpty(alert.Patch.Name))
+                    Errors.Add("Missing patch name for patch with UUID: " + alert.Patch.Uuid);
+                if(string.IsNullOrEmpty(alert.Patch.PatchUrl))
+                    Errors.Add("Missing patch patch-url for patch with UUID: " + alert.Patch.Uuid);
+                if (string.IsNullOrEmpty(alert.Patch.Description))
+                    Errors.Add("Missing patch description for patch with UUID: " + alert.Patch.Uuid);
+                if (string.IsNullOrEmpty(alert.Patch.Url))
+                    Errors.Add("Missing patch webpage url for patch with UUID: " + alert.Patch.Uuid);
+                if (string.IsNullOrEmpty(alert.Patch.Guidance))
+                    Errors.Add("Missing patch guidance for patch with UUID: " + alert.Patch.Uuid);
+                if (string.IsNullOrEmpty(alert.Patch.TimeStamp.ToString()))
+                    Errors.Add("Missing patch timestamp for patch with UUID: " + alert.Patch.Uuid);
             }
-        }
-
-        private void VerifyPatchDetailsMissing(XenServerPatchAlert alert)
-        {
-            if(string.IsNullOrEmpty(alert.Patch.Uuid))
-                Results.Add("Missing patch uuid for patch: " + alert.Patch.Name);
-            if(string.IsNullOrEmpty(alert.Patch.Name))
-                Results.Add("Missing patch name for patch with UUID: " + alert.Patch.Uuid);
-            if(string.IsNullOrEmpty(alert.Patch.PatchUrl))
-                Results.Add("Missing patch patch-url for patch with UUID: " + alert.Patch.Uuid);
-            if (string.IsNullOrEmpty(alert.Patch.Description))
-                Results.Add("Missing patch description for patch with UUID: " + alert.Patch.Uuid);
-            if (string.IsNullOrEmpty(alert.Patch.Url))
-                Results.Add("Missing patch webpage url for patch with UUID: " + alert.Patch.Uuid);
-            if (string.IsNullOrEmpty(alert.Patch.Guidance))
-                Results.Add("Missing patch guidance for patch with UUID: " + alert.Patch.Uuid);
-            if (string.IsNullOrEmpty(alert.Patch.TimeStamp.ToString()))
-                Results.Add("Missing patch timestamp for patch with UUID: " + alert.Patch.Uuid);
-        }
-
-        public override string Description
-        {
-            get { return "Verify core patch details"; }
         }
     }
 }

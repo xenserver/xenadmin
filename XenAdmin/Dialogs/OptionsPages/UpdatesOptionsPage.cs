@@ -32,6 +32,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using XenAdmin.Core;
+using XenCenterLib;
 
 
 namespace XenAdmin.Dialogs.OptionsPages
@@ -39,6 +40,7 @@ namespace XenAdmin.Dialogs.OptionsPages
     public partial class UpdatesOptionsPage : UserControl, IOptionsPage
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
 
         public UpdatesOptionsPage()
         {
@@ -55,19 +57,28 @@ namespace XenAdmin.Dialogs.OptionsPages
             // XenServer updates
             AllowXenServerPatchesCheckBox.Checked = Properties.Settings.Default.AllowPatchesUpdates;
             AllowXenServerUpdatesCheckBox.Checked = Properties.Settings.Default.AllowXenServerUpdates;
+
+            clientIdControl1.Build();
         }
 
-        public bool IsValidToSave()
+        public bool IsValidToSave(out Control control, out string invalidReason)
         {
-            return true;
+            return clientIdControl1.IsValidToSave(out control, out invalidReason);
         }
 
-        public void ShowValidationMessages()
+        public void ShowValidationMessages(Control control, string message)
         {
+            clientIdControl1.ShowValidationMessages(control, message);
         }
 
         public void Save()
         {
+            if (!string.IsNullOrEmpty(clientIdControl1.FileServiceUsername))
+                Properties.Settings.Default.FileServiceUsername = EncryptionUtils.Protect(clientIdControl1.FileServiceUsername);
+
+            if (!string.IsNullOrEmpty(clientIdControl1.FileServiceClientId))
+                Properties.Settings.Default.FileServiceClientId = EncryptionUtils.Protect(clientIdControl1.FileServiceClientId);
+
             bool checkXenCenterUpdates = AllowXenCenterUpdatesCheckBox.Checked != Properties.Settings.Default.AllowXenCenterUpdates;
             bool checkPatchUpdates = AllowXenServerPatchesCheckBox.Checked != Properties.Settings.Default.AllowPatchesUpdates;
             bool checkVersionUpdates = AllowXenServerUpdatesCheckBox.Checked != Properties.Settings.Default.AllowXenServerUpdates;

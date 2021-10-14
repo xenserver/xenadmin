@@ -43,7 +43,7 @@ namespace XenAdmin
         public static IXenAdminConfigProvider Provider { get; set; }
     }
 
-    public interface IXenAdminConfigProvider
+    public interface IXenAdminConfigProvider : IConfigProvider
     {
         Func<List<Role>, IXenConnection, string, AsyncAction.SudoElevationResult> ElevatedSessionDelegate { get; }
         int ConnectionTimeout { get; }
@@ -52,8 +52,6 @@ namespace XenAdmin
         bool ForcedExiting { get; }
         string XenCenterUUID { get; }
         bool DontSudo { get; }
-        IWebProxy GetProxyFromSettings(IXenConnection connection);
-        IWebProxy GetProxyFromSettings(IXenConnection connection, bool isForXenServer);
         int GetProxyTimeout(bool timeout);
         void ShowObject(string newVMRef);
         void HideObject(string newVMRef);
@@ -64,5 +62,15 @@ namespace XenAdmin
         bool ShowHiddenVMs { get; }
         string GetXenCenterMetadata(bool isForXenCenter);
         string GetCustomUpdatesXmlLocation();
+        string GetCustomFileServicePrefix();
+    }
+
+    public interface IConfigProvider
+    {
+        string FileServiceUsername { get; }
+        string FileServiceClientId { get; }
+        string GetCustomTokenUrl();
+        IWebProxy GetProxyFromSettings(IXenConnection connection);
+        IWebProxy GetProxyFromSettings(IXenConnection connection, bool isForXenServer);
     }
 }

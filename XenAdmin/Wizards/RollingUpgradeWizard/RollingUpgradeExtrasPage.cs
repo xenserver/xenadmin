@@ -34,6 +34,7 @@ using System.Collections.Generic;
 using System.Linq;
 using XenAdmin.Controls;
 using XenAdmin.Core;
+using XenAdmin.Dialogs;
 using XenAPI;
 
 
@@ -100,9 +101,18 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
         protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
-            if (direction == PageLoadedDirection.Forward && ApplySuppPackAfterUpgrade && !string.IsNullOrEmpty(FilePath))
+            if (direction == PageLoadedDirection.Forward)
             {
-                SelectedSuppPack = WizardHelpers.ParseSuppPackFile(FilePath, this, ref cancel);
+                if (ApplyUpdatesToNewVersion && !Updates.CheckCanDownloadUpdates())
+                {
+                    cancel = true;
+                    using (var errDlg = new ClientIdDialog())
+                        errDlg.ShowDialog(ParentForm);
+                    return;
+                }
+
+                if (ApplySuppPackAfterUpgrade && !string.IsNullOrEmpty(FilePath))
+                    SelectedSuppPack = WizardHelpers.ParseSuppPackFile(FilePath, this, ref cancel);
             }
         }
         #endregion
