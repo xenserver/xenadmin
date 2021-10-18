@@ -137,12 +137,8 @@ namespace XenAdmin.Controls
 
                     if (_scanCount > 0)
                         return;
-                    
-                    Program.Invoke(this, () =>
-                    {
-                        Invalidate();
-                        Rebuild(items, preselectedSR);
-                    });
+
+                    Program.Invoke(this, () => Rebuild(items, preselectedSR));
                 };
                 action.RunAsync();
             }
@@ -177,6 +173,7 @@ namespace XenAdmin.Controls
         private void Rebuild(List<SrPickerItem> items = null, SR preselectedSr = null)
         {
             Program.AssertOnEventThread();
+            Invalidate();
 
             SR selectedSr = preselectedSr ?? SR;
             var theItems = items ?? GetSrPickerItems();
@@ -213,12 +210,18 @@ namespace XenAdmin.Controls
 
         private void Server_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
+            if (_scanCount > 0)
+                return;
+
             if (e.PropertyName == "name_label" || e.PropertyName == "PBDs" || e.PropertyName == "physical_utilisation" || e.PropertyName == "currently_attached" || e.PropertyName == "default_SR")
                 Program.Invoke(this, () => Rebuild());
         }
 
         private void SR_CollectionChanged(object sender, CollectionChangeEventArgs e)
         {
+            if (_scanCount > 0)
+                return;
+
             Program.Invoke(this, () => Rebuild());
         }
 
