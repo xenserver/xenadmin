@@ -205,6 +205,7 @@ namespace XenAdmin.Actions.VMActions
                 // given the choice of a fast-clone (VM.clone) or a full-copy (VM.copy) on the storage page of the wizard. If the
                 // user chose a VM.clone, then FullCopySR will be null.
 
+                Description = string.Format(Messages.COPYING_TEMPLATE, Helpers.GetName(Template));
                 RelatedTask = VM.async_copy(Session, Template.opaque_ref, Helpers.MakeHiddenName(NameLabel), FullCopySR.opaque_ref);
             }
             else
@@ -212,10 +213,10 @@ namespace XenAdmin.Actions.VMActions
                 // if the target disks are on mixed storage or the user chose to a do a fast-clone on the storage
                 // page then we end up here.
 
+                Description = string.Format(Messages.CLONING_TEMPLATE, Helpers.GetName(Template));
                 RelatedTask = VM.async_clone(Session, Template.opaque_ref, Helpers.MakeHiddenName(NameLabel));
             }
 
-            Description = string.Format(Messages.CLONING_TEMPLATE, Helpers.GetName(Template));
             PollToCompletion(0, 10);
 
             VM = Connection.WaitForCache(new XenRef<VM>(Result));

@@ -10457,6 +10457,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copying template &apos;{0}&apos;.
+        /// </summary>
+        public static string COPYING_TEMPLATE {
+            get {
+                return ResourceManager.GetString("COPYING_TEMPLATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Copyright © {0} All rights reserved..
         /// </summary>
         public static string COPYRIGHT {
