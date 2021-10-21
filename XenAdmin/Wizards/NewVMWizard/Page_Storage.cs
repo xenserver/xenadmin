@@ -275,28 +275,31 @@ namespace XenAdmin.Wizards.NewVMWizard
             DisklessVMRadioButton.Enabled = Template.IsHVM() && SelectedInstallMethod == InstallMethod.Network;
 
             bool isDefaultTemplate = Template.DefaultTemplate();
-            bool isSnapshot = Template.is_a_snapshot;
-            bool createOnSameSr = false;
+            bool canCreateFullCopy = true;
 
             if (!isDefaultTemplate)
             {
-                foreach (DiskGridRowItem row in DisksGridView.Rows)
+                foreach (var vbdRef in Template.VBDs)
                 {
-                    if (!row.CanDelete && row.SourceSR != null && row.Disk != null)
-                    {
-                        SR dest = Connection.Resolve(row.Disk.SR);
+                    var vbd = Connection.Resolve(vbdRef);
+                    if (vbd == null)
+                        continue;
 
-                        if (row.SourceSR.Equals(dest))
-                        {
-                            createOnSameSr = true;
-                            break;
-                        }
-                    }
+                    var vdi = Connection.Resolve(vbd.VDI);
+                    if (vdi == null)
+                        continue;
+
+                    if (vdi.allowed_operations.Contains(vdi_operations.copy))
+                        continue;
+
+                    canCreateFullCopy = false;
+                    break;
                 }
             }
 
-            CloneCheckBox.Enabled = createOnSameSr && !isSnapshot;
-            CloneCheckBox.Checked = createOnSameSr && (isSnapshot || pageLoad);
+            CloneCheckBox.Visible = !isDefaultTemplate;
+            CloneCheckBox.Enabled = canCreateFullCopy;
+            CloneCheckBox.Checked = !canCreateFullCopy || pageLoad;
 
             OnPageUpdated();
         }
@@ -438,7 +441,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         {
             get
             {
-                if (!Template.DefaultTemplate() && !Template.is_a_snapshot && !CloneCheckBox.Checked)
+                if (!Template.DefaultTemplate() && !CloneCheckBox.Checked)
                 {
                     SR sr = null;
                     List<SR> targetSRs = new List<SR>();
@@ -458,6 +461,7 @@ namespace XenAdmin.Wizards.NewVMWizard
 
                     return targetSRs.Count == 1 ? targetSRs[0] : sr;
                 }
+
                 return null;
             }
         }
