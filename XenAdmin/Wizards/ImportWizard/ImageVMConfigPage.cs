@@ -118,9 +118,10 @@ namespace XenAdmin.Wizards.ImportWizard
 			if (String.IsNullOrEmpty(name))
 				return false;
 
-			if (!PathValidator.IsFileNameValid(name))
+
+			if (!PathValidator.IsFileNameValid(name, out string invalidNameMsg))
 			{
-				error = Messages.IMPORT_SELECT_APPLIANCE_PAGE_ERROR_INVALID_PATH;
+				error = string.Join(" ", new[] { Messages.IMPORT_SELECT_APPLIANCE_PAGE_ERROR_INVALID_PATH, invalidNameMsg });
 				return false;
 			}
 			return true;

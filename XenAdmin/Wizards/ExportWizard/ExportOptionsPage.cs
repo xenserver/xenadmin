@@ -285,9 +285,9 @@ namespace XenAdmin.Wizards.ExportWizard
 		{
 			error = string.Empty;
 
-			if (!PathValidator.IsPathValid(m_textBoxCertificate.Text))//includes null check
+			if (!PathValidator.IsPathValid(m_textBoxCertificate.Text, out string invalidPathMsg))//includes null check
 			{
-				error = Messages.EXPORT_SECURITY_PAGE_ERROR_INVALID_CERT;
+				error = string.Join(" ", new[] { Messages.EXPORT_SECURITY_PAGE_ERROR_INVALID_CERT, invalidPathMsg });
 				return false;
 			}
 

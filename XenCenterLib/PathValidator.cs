@@ -31,6 +31,7 @@
 
 using System;
 using System.IO;
+using System.Linq;
 
 namespace XenCenterLib
 {
@@ -43,39 +44,51 @@ namespace XenCenterLib
 		                                                 	"LPT1", "LPT2", "LPT3", "LPT4", "LPT5", "LPT6", "LPT7", "LPT8", "LPT9"
 		                                                 };
 
-		public static bool IsFileNameValid(string filename)
+		public static bool IsFileNameValid(string filename, out string invalidNameMsg)
 		{
+			invalidNameMsg = string.Empty;
 			if (filename.IndexOfAny(m_invalidFileCharList) > -1)
+            {
+				invalidNameMsg = Messages.ILLEGAL_CHARACTER_ERROR_MESSAGE;
 				return false;
+            }
 
 			foreach (var name in m_deviceNames)
 			{
 				if (name == filename.ToUpper())
+                {
+					invalidNameMsg = Messages.FILE_NAME_IS_DEVICE_NAME_ERROR_MESSAGE;
 					return false;
+                }
 			}
 
 			return true;
 		}
 
-		public static bool IsPathValid(string path)
+		public static bool IsPathValid(string path, out string invalidPathMsg)
 		{
+			invalidPathMsg = string.Empty;
 			if (string.IsNullOrEmpty(path))
+            {
+				invalidPathMsg = Messages.PATH_CAN_NOT_BE_NULL_ERROR_MESSAGE;
 				return false;
+            }
 
 			try
 			{
 				if (Path.IsPathRooted(path))
 				{
 					path = path[0] == '\\' && path.Length == 1
-					       	? path.Substring(1)
-					       	: path.Substring(2);
+							? path.Substring(1)
+							: path.Substring(2);
 				}
 			}
-			catch(ArgumentException)
+			catch (ArgumentException)
 			{
 				//path contains a character from Path.GetInvalidPathChars()
+				invalidPathMsg = Messages.ILLEGAL_FILE_PATH_ERROR_MESSAGE;
 				return false;
-			}
+			}			
 
 			string[] parts = path.Split(new[] {'\\'});
 
@@ -84,12 +97,18 @@ namespace XenCenterLib
 				foreach (var part in  parts)
 				{
 					if (part.IndexOfAny(m_invalidFileCharList) > -1)
+                    {
+						invalidPathMsg = Messages.ILLEGAL_CHARACTER_ERROR_MESSAGE;
 						return false;
+                    }
 
 					foreach (var name in m_deviceNames)
 					{
 						if (name == part.ToUpper())
+                        {
+							invalidPathMsg = string.Format(Messages.FILE_PATH_DEVICE_NAME_ERROR_MESSAGE, name);
 							return false;
+                        }
 					}
 				}
 			}

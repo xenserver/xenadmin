@@ -370,21 +370,20 @@ namespace XenAdmin.Wizards.ImportWizard
 		/// </summary>
 		private bool CheckPathValid(out string error)
 		{
-			error = string.Empty;
-
+            error = string.Empty;
             if (String.IsNullOrEmpty(FilePath))
 				return false;
 
             if (IsUri())
                 return CheckDownloadFromUri(out error);
 
-            if (!PathValidator.IsPathValid(FilePath))
+            if (!PathValidator.IsPathValid(FilePath, out string invalidNameMsg))
 			{
-				error = Messages.IMPORT_SELECT_APPLIANCE_PAGE_ERROR_INVALID_PATH;
+			    error = string.Join(" ", new[] { Messages.IMPORT_SELECT_APPLIANCE_PAGE_ERROR_INVALID_PATH, invalidNameMsg });
 				return false;
 			}
-
-			return true;
+            
+            return true;
 		}
 
 		/// <summary>
