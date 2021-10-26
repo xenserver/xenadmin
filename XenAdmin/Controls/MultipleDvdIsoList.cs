@@ -51,23 +51,20 @@ namespace XenAdmin.Controls
         {
             InitializeComponent();
         }
-
-        private VM vm;
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public VM VM
         {
             set
             {
                 DeregisterEvents();
                 cdChanger1.VM = value;
-                vm = value;
-                if (vm != null)
-                    vm.PropertyChanged += vm_PropertyChanged;
+                if (value != null)
+                    cdChanger1.VM.PropertyChanged += vm_PropertyChanged;
                 refreshDrives();
             }
-            get 
-            {
-                return cdChanger1.VM;
-            }
+            get => cdChanger1.VM;
         }
 
         #region Designer browsable properties
@@ -100,17 +97,17 @@ namespace XenAdmin.Controls
 
         internal virtual void DeregisterEvents()
         {
-            if (vm == null)
+            if (VM == null)
                 return;
 
             // remove VM listeners
-            vm.PropertyChanged -= vm_PropertyChanged;
+            VM.PropertyChanged -= vm_PropertyChanged;
 
             // remove cache listener
-            vm.Connection.CachePopulated -= CachePopulatedMethod;
+            VM.Connection.CachePopulated -= CachePopulatedMethod;
 
             // remove VBD listeners
-            var vbds = vm.Connection.ResolveAll(VM.VBDs);
+            var vbds = VM.Connection.ResolveAll(VM.VBDs);
                 
             foreach (var vbd in vbds.Where(vbd => vbd.IsCDROM() || vbd.IsFloppyDrive()))
             {
@@ -178,7 +175,7 @@ namespace XenAdmin.Controls
                 labelSingleDvd.Visible = false;
                 linkLabel1.Visible = false;
                 panel1.Visible = false;
-                newCDLabel.Visible = vm != null && !vm.is_control_domain;
+                newCDLabel.Visible = VM != null && !VM.is_control_domain;
                 
             }
             else if (comboBoxDrive.Items.Count == 1)

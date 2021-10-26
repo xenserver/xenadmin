@@ -119,7 +119,7 @@ namespace XenAdmin.Controls
         {
             if ((e.PropertyName == "empty" || e.PropertyName == "vdi") && !changing)
             {
-                SelectCD();
+                SelectCD(SelectedCD);
             }
         }
     }

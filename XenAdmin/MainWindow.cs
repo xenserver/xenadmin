@@ -364,6 +364,7 @@ namespace XenAdmin
             }
             catch
             {
+                // ignored
             }
 
             // Using the Load event ensures that the handle has been 

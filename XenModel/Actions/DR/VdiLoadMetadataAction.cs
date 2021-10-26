@@ -130,6 +130,7 @@ namespace XenAdmin.Actions.DR
                 }
                 catch (Exception)
                 {
+                    // ignored
                 }
             }
             PercentComplete = 100;

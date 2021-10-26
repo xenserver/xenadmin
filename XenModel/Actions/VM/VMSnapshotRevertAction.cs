@@ -65,7 +65,10 @@ namespace XenAdmin.Actions
                 RevertPowerState(m_Snapshot, VM);
             }
             catch (Exception)
-            { }
+            {
+                // ignored
+            }
+
             PercentComplete = 100;
             Description = String.Format(Messages.VM_REVERTED, m_Snapshot.Name());
         }

@@ -19,6 +19,7 @@
                 {
                     _webClient.DownloadFileCompleted -= webclient_DownloadFileCompleted;
                     _webClient.DownloadProgressChanged -= webclient_DownloadProgressChanged;
+                    _webClient.Dispose();
                 }
 
                 if (components != null)

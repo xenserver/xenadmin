@@ -119,13 +119,13 @@ namespace XenAdmin.Controls.SummaryPanel
         [EditorBrowsable(EditorBrowsableState.Never)]
         public string DrawWarningMessage
         {
-            set { warningText.Text = value; }
+            set { warningLabel.Text = value; }
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
         public Bitmap DrawWarningIcon
         {
-            set { warningIcon.Image = value;  }
+            set { warningImage.Image = value;  }
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -143,13 +143,13 @@ namespace XenAdmin.Controls.SummaryPanel
         [EditorBrowsable(EditorBrowsableState.Never)]
         public bool WarningTextVisiblity
         {
-            set { warningText.Visible = value; }
+            set { warningLabel.Visible = value; }
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
         public bool WarningIconVisiblity
         {
-            set { warningIcon.Visible = value; }
+            set { warningImage.Visible = value; }
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -189,7 +189,7 @@ namespace XenAdmin.Controls.SummaryPanel
         [EditorBrowsable(EditorBrowsableState.Never)]
         public string DrawInformationText
         {
-            set { informationMessage.Text = value; }
+            set { informationLabel.Text = value; }
         }
 
         #endregion

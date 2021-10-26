@@ -131,8 +131,11 @@ namespace XenAdmin.Actions
                     capacity = UInt32.Parse(GetXmlNodeInnerText(storagePoolInfo, "sizeInMB").Trim());
                     usedSpace = capacity - UInt32.Parse(GetXmlNodeInnerText(storagePoolInfo, "freeSpaceInMB").Trim());
                 }
-                catch { }
-                    
+                catch
+                {
+                    // ignored
+                }
+
                 StorageLinkPool storageLinkPool = new StorageLinkPool(storagePoolId, displayName, parentStoragePoolId, _storageSystemId, capacity, usedSpace,
                     (StorageLinkEnums.RaidType)Enum.Parse(typeof(StorageLinkEnums.RaidType), raidTypes[0].ToUpper()),
                     (StorageLinkEnums.ProvisioningType)Enum.Parse(typeof(StorageLinkEnums.ProvisioningType), provisioningTypes[0].Name.ToUpper()));

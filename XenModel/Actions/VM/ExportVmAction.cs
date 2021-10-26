@@ -226,7 +226,9 @@ namespace XenAdmin.Actions
                     }
                 }
                 catch (Exception)
-                {}
+                {
+                    // ignored
+                }
 
                 log.DebugFormat("Deleting {0}", tmpFile);
                 File.Delete(tmpFile);

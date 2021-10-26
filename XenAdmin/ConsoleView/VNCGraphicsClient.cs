@@ -398,6 +398,7 @@ namespace XenAdmin.ConsoleView
                     }
                     catch
                     {
+                        // ignored
                     }
 
                     return;
@@ -467,6 +468,7 @@ namespace XenAdmin.ConsoleView
                 }
                 catch
                 {
+                    // ignored
                 }
                 finally
                 {
@@ -550,6 +552,7 @@ namespace XenAdmin.ConsoleView
                 }
                 catch
                 {
+                    // ignored
                 }
             }
 
@@ -1384,28 +1387,22 @@ namespace XenAdmin.ConsoleView
             set
             {
                 Program.AssertOnEventThread();
-                SetSendScanCodes(value);
+                if (sendScanCodes == value)
+                    return;
+
+                Log.InfoFormat("VNCGraphicsClient.SetSendScanCodes newSendScanCodes={0}", value);
+
+                if (!value)
+                {
+                    InterceptKeys.releaseKeys();
+                }
+                else if (Focused)
+                {
+                    InterceptKeys.grabKeys(this.keyScan, false);
+                }
+
+                sendScanCodes = value;
             }
-        }
-
-        private void SetSendScanCodes(bool newSendScanCodes)
-        {
-            Program.AssertOnEventThread();
-            if (sendScanCodes == newSendScanCodes)
-                return;
-
-            Log.InfoFormat("VNCGraphicsClient.SetSendScanCodes newSendScanCodes={0}", newSendScanCodes);
-
-            if (!newSendScanCodes)
-            {
-                InterceptKeys.releaseKeys();
-            }
-            else if (Focused)
-            {
-                InterceptKeys.grabKeys(this.keyScan, false);
-            }
-
-            sendScanCodes = newSendScanCodes;
         }
 
         public bool Scaling

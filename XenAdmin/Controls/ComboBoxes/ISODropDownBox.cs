@@ -50,18 +50,13 @@ namespace XenAdmin.Controls
         protected bool changing = false;
         private IXenConnection _connection;
         private readonly CollectionChangeEventHandler SR_CollectionChangedWithInvoke;
-        private VDI selectedCD;
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public VDI SelectedCD
         {
             get => (SelectedItem as ToStringWrapper<VDI>)?.item;
-            set
-            {
-                selectedCD = value;
-                SelectCD();
-            }
+            set => SelectCD(value);
         }
 
         public ISODropDownBox()
@@ -137,22 +132,21 @@ namespace XenAdmin.Controls
             }
         }
 
-        protected void SelectCD()
+        protected void SelectCD(VDI selectedCd)
         {
-            if (selectedCD != null)
+            if (selectedCd != null)
             {
-                foreach (object o in Items)
+                foreach (var o in Items)
                 {
-                    VDI iso = (o as ToStringWrapper<VDI>)?.item;
+                    var iso = (o as ToStringWrapper<VDI>)?.item;
 
                     if (iso == null || !iso.Show(Properties.Settings.Default.ShowHiddenVMs))
                         continue;
 
-                    if (iso == selectedCD)
-                    {
-                        SelectedItem = o;
-                        return;
-                    }
+                    if (iso != selectedCd) continue;
+
+                    SelectedItem = o;
+                    return;
                 }
             }
 
@@ -340,7 +334,7 @@ namespace XenAdmin.Controls
                     EndUpdate();
                 }
 
-                SelectCD();
+                SelectCD(SelectedCD);
                 refreshOnClose = false;
                 SrsRefreshed?.Invoke();
             }
@@ -372,14 +366,6 @@ namespace XenAdmin.Controls
             {
                 RefreshAll();
             }
-        }
-        
-        protected override void OnSelectionChangeCommitted(EventArgs e)
-        {
-            base.OnSelectionChangeCommitted(e);
-
-            if (SelectedItem is ToStringWrapper<VDI> selectedVdi)
-                selectedCD = selectedVdi.item;
         }
 
         protected override void OnDrawItem(DrawItemEventArgs e)

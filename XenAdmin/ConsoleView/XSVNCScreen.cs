@@ -476,6 +476,7 @@ namespace XenAdmin.ConsoleView
                 }
                 catch (Exception)
                 {
+                    // ignored
                 }
             }
         }
