@@ -48,7 +48,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
     public enum WizardMode { Migrate, Move, Copy }
 
     internal partial class CrossPoolMigrateWizard : XenWizardBase
-	{
+    {
         private CrossPoolMigrateDestinationPage m_pageDestination;
         private CrossPoolMigrateStoragePage m_pageStorage;
         private CrossPoolMigrateNetworkingPage m_pageNetwork;
@@ -62,24 +62,24 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
         private IXenConnection TargetConnection { get; set; }
 
-		private Dictionary<string, VmMapping> m_vmMappings = new Dictionary<string, VmMapping>();
+        private Dictionary<string, VmMapping> m_vmMappings = new Dictionary<string, VmMapping>();
 
         private Host hostPreSelection = null;
 
         private WizardMode wizardMode;
 
-	    private bool _resumeAfterMigrate;
+        private bool _resumeAfterMigrate;
 
         // Note that resumeAfter is currently only implemented for Migrate mode, used for resume on server functionality
-	    public CrossPoolMigrateWizard(IXenConnection con, SelectedItemCollection selection, Host targetHostPreSelection, WizardMode mode, bool resumeAfterMigrate = false)
-	        : base(con)
-	    {
+        public CrossPoolMigrateWizard(IXenConnection con, SelectedItemCollection selection, Host targetHostPreSelection, WizardMode mode, bool resumeAfterMigrate = false)
+            : base(con)
+        {
             InitializeComponent();
             hostPreSelection = targetHostPreSelection;
-	        wizardMode = mode;
-	        InitialiseWizard(selection);
-	        _resumeAfterMigrate = resumeAfterMigrate;
-	    }
+            wizardMode = mode;
+            InitialiseWizard(selection);
+            _resumeAfterMigrate = resumeAfterMigrate;
+        }
 
         private bool HasTemplatesOnly { get; set; }
 
@@ -98,7 +98,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             if (mapping.Value.XenRef is XenRef<Pool>)
             {
                 Pool targetPool = TargetConnection.Resolve(mapping.Value.XenRef as XenRef<Pool>);
-                if ( pool == targetPool)
+                if (pool == targetPool)
                     return true;
             }
 
@@ -109,35 +109,35 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                 Pool targetPool = Helpers.GetPool(targetHost.Connection);
 
                 // 2 stand alone hosts
-                if(pool == null && targetPool == null)
+                if (pool == null && targetPool == null)
                 {
-                    if(targetHost == host)
+                    if (targetHost == host)
                         return true;
 
                     return false;
                 }
-                    
-                if ( pool == targetPool)
+
+                if (pool == targetPool)
                     return true;
             }
 
             return false;
         }
 
-	    private bool IsStorageMotion(KeyValuePair<string, VmMapping> mapping)
-	    {
-	        if (!IsIntraPoolMigration(mapping))
-	            return true;
+        private bool IsStorageMotion(KeyValuePair<string, VmMapping> mapping)
+        {
+            if (!IsIntraPoolMigration(mapping))
+                return true;
 
-	        if (mapping.Value.Storage == null)
-	            return false;
+            if (mapping.Value.Storage == null)
+                return false;
 
             foreach (var vdiMapping in mapping.Value.Storage)
-	        {
-	            var vdi = xenConnection.Resolve(new XenRef<VDI>(vdiMapping.Key));
-	            if (vdi.SR.opaque_ref != vdiMapping.Value.opaque_ref)
-	                return true;
-	        }
+            {
+                var vdi = xenConnection.Resolve(new XenRef<VDI>(vdiMapping.Key));
+                if (vdi.SR.opaque_ref != vdiMapping.Value.opaque_ref)
+                    return true;
+            }
             return false;
         }
 
@@ -182,7 +182,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
             UpdateWindowTitle();
 
-            m_pageDestination = new CrossPoolMigrateDestinationPage(vmsFromSelection, 
+            m_pageDestination = new CrossPoolMigrateDestinationPage(vmsFromSelection,
                     wizardMode, GetSourceConnectionsForSelection(selection))
             {
                 VmMappings = m_vmMappings,
@@ -227,7 +227,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                 else if (m_pageIntraPoolCopy.SelectedSR != null)
                     new VMCopyAction(m_pageIntraPoolCopy.TheVM, m_pageIntraPoolCopy.TheVM.GetStorageHost(false),
                         m_pageIntraPoolCopy.SelectedSR, m_pageIntraPoolCopy.NewVmName, m_pageIntraPoolCopy.NewVMmDescription).RunAsync();
-                
+
                 base.FinishWizard();
                 return;
             }
@@ -235,11 +235,11 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             foreach (KeyValuePair<string, VmMapping> pair in m_vmMappings)
             {
                 VM vm = xenConnection.Resolve(new XenRef<VM>(pair.Key));
-                
+
                 Host target = TargetConnection.Resolve(m_vmMappings[pair.Key].XenRef as XenRef<Host>);
 
                 //if a pool has been selected but no specific homeserver Key is the pool opaque ref
-                if(target == null)
+                if (target == null)
                 {
                     Pool targetPool = TargetConnection.Resolve(m_vmMappings[pair.Key].XenRef as XenRef<Pool>);
 
@@ -249,11 +249,11 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                         base.FinishWizard();
                         return;
                     }
-                        
+
                     target = TargetConnection.Resolve(targetPool.master);
                 }
 
-                if(target == null)
+                if (target == null)
                     throw new ApplicationException("Cannot resolve the target host");
 
                 if (wizardMode == WizardMode.Move && IsIntraPoolMove(pair))
@@ -284,8 +284,8 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                     if (_resumeAfterMigrate)
                     {
                         var title = VMCrossPoolMigrateAction.GetTitle(vm, target, isCopy);
-                        var startDescription = isCopy ? Messages.ACTION_VM_COPYING: Messages.ACTION_VM_MIGRATING;
-                        var endDescription = isCopy ? Messages.ACTION_VM_COPIED: Messages.ACTION_VM_MIGRATED;
+                        var startDescription = isCopy ? Messages.ACTION_VM_COPYING : Messages.ACTION_VM_MIGRATING;
+                        var endDescription = isCopy ? Messages.ACTION_VM_COPIED : Messages.ACTION_VM_MIGRATED;
 
                         var actions = new List<AsyncAction>()
                         {
@@ -302,7 +302,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                     }
                 }
             }
-            
+
             base.FinishWizard();
         }
 
@@ -312,38 +312,38 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                 dlg.ShowDialog(Program.MainWindow);
         }
 
-	    private List<IXenConnection> GetSourceConnectionsForSelection(IEnumerable<SelectedItem> selection)
+        private List<IXenConnection> GetSourceConnectionsForSelection(IEnumerable<SelectedItem> selection)
         {
-            return 
-                wizardMode == WizardMode.Copy 
-                    ?   selection.Select(item => item.Connection).Where(conn => conn != null).Distinct().ToList()
-                    :   new List<IXenConnection>();
+            return
+                wizardMode == WizardMode.Copy
+                    ? selection.Select(item => item.Connection).Where(conn => conn != null).Distinct().ToList()
+                    : new List<IXenConnection>();
         }
 
         private void UpdateWindowTitle()
         {
-            if(m_vmMappings != null &&  m_vmMappings.Count > 0 && !string.IsNullOrEmpty(m_vmMappings.First().Value.TargetName))
+            if (m_vmMappings != null && m_vmMappings.Count > 0 && !string.IsNullOrEmpty(m_vmMappings.First().Value.TargetName))
             {
                 var messageText = wizardMode == WizardMode.Migrate
                     ? Messages.CPM_WIZARD_TITLE_AND_LOCATION
-                    : wizardMode == WizardMode.Move 
+                    : wizardMode == WizardMode.Move
                         ? Messages.MOVE_VM_WIZARD_TITLE_AND_LOCATION
                         : IsCopyTemplate() ? Messages.COPY_TEMPLATE_WIZARD_TITLE_AND_LOCATION : Messages.COPY_VM_WIZARD_TITLE_AND_LOCATION;
                 Text = String.Format(messageText, m_vmMappings.First().Value.TargetName);
             }
             else
                 Text = wizardMode == WizardMode.Migrate
-                    ? Messages.CPM_WIZARD_TITLE 
-                    : wizardMode == WizardMode.Move 
-                        ? Messages.MOVE_VM_WIZARD_TITLE 
+                    ? Messages.CPM_WIZARD_TITLE
+                    : wizardMode == WizardMode.Move
+                        ? Messages.MOVE_VM_WIZARD_TITLE
                         : IsCopyTemplate() ? Messages.COPY_TEMPLATE_WIZARD_TITLE : Messages.COPY_VM_WIZARD_TITLE;
         }
 
         protected override void UpdateWizardContent(XenTabPage page)
         {
-  
+
             Type type = page.GetType();
- 
+
             if (type == typeof(CrossPoolMigrateDestinationPage))
             {
                 RemovePage(m_pageNetwork);
@@ -353,7 +353,15 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                 TargetConnection = m_pageDestination.ChosenItem == null ? null : m_pageDestination.ChosenItem.Connection;
                 m_pageStorage.TargetConnection = TargetConnection;
                 m_pageNetwork.TargetConnection = TargetConnection;
-                ConfigureRbacPage();
+
+                if (ConnectionRequiresRBAC(xenConnection) || ConnectionRequiresRBAC(TargetConnection))
+                {
+                    ConfigureRbacPage(new List<IXenConnection> { xenConnection, TargetConnection },
+                        VMCrossPoolMigrateAction.StaticRBACDependencies,
+                        Messages.RBAC_CROSS_POOL_MIGRATE_VM_BLOCKED);
+                    AddAfterPage(m_pageDestination, m_pageTargetRbac);
+                }
+
                 UpdateWindowTitle();
 
                 // add Transfer network page for all cases except intra-pool move (which is performed via VMMoveAction) 
@@ -361,7 +369,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                     AddAfterPage(m_pageStorage, m_pageTransferNetwork);
                 m_pageTransferNetwork.Connection = TargetConnection;
 
-                if(!IsIntraPoolMigration())
+                if (!IsIntraPoolMigration())
                 {
                     AddAfterPage(m_pageStorage, m_pageNetwork);
                 }
@@ -393,14 +401,27 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                 {
                     RemovePagesFrom(1);
                     AddAfterPage(m_pageCopyMode, m_pageIntraPoolCopy);
+                    if (ConnectionRequiresRBAC(xenConnection))
+                    {
+                        ConfigureRbacPage(new List<IXenConnection> { xenConnection },
+                            VMCopyAction.StaticRBACDependencies,
+                            Messages.RBAC_INTRA_POOL_COPY_VM_BLOCKED);
+                        AddAfterPage(m_pageCopyMode, m_pageTargetRbac);
+                    }
                 }
                 else
                 {
                     RemovePagesFrom(1);
                     AddAfterPage(m_pageCopyMode, m_pageDestination, m_pageStorage, m_pageFinish);
+                    if (ConnectionRequiresRBAC(xenConnection))
+                    {
+                        ConfigureRbacPage(new List<IXenConnection> { xenConnection },
+                            VMCloneAction.StaticRBACDependencies,
+                            Messages.RBAC_CROSS_POOL_CLONE_VM_BLOCKED);
+                        AddAfterPage(m_pageCopyMode, m_pageTargetRbac);
+                    }
                 }
             }
-
             if (type != typeof(CrossPoolMigrateFinishPage))
                 NotifyNextPagesOfChange(m_pageDestination, m_pageStorage, m_pageNetwork, m_pageTransferNetwork, m_pageFinish);
         }
@@ -418,37 +439,36 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             return FormatHelpId(CurrentStepTabPage.HelpID);
         }
 
-        private bool ConnectionDoesNotRequireRBAC(IXenConnection connection)
+        private bool ConnectionRequiresRBAC(IXenConnection connection)
         {
-            if( connection == null )
+            if (connection == null)
                 throw new NullReferenceException("RBAC check was given a null connection");
 
             if (connection.Session.IsLocalSuperuser)
-                return true;
+                return false;
 
-            if (Helpers.GetCoordinator(connection).external_auth_type == Auth.AUTH_TYPE_NONE)
-                return true;
-
-            return false;
+            return Helpers.GetCoordinator(connection).external_auth_type != Auth.AUTH_TYPE_NONE;
         }
 
 
-        private void ConfigureRbacPage()
+        private void ConfigureRbacPage(IEnumerable<IXenConnection> connectionsToCheck, RbacMethodList apiMethodsToCheck, string pageMessage)
         {
-            if (ConnectionDoesNotRequireRBAC(xenConnection) && ConnectionDoesNotRequireRBAC(TargetConnection))
-                return;
-
             m_pageTargetRbac.ClearPermissionChecks();
-            RBACWarningPage.WizardPermissionCheck migrateCheck =
-                new RBACWarningPage.WizardPermissionCheck(Messages.RBAC_CROSS_POOL_MIGRATE_VM_BLOCKED) { Blocking = true };
-            migrateCheck.AddApiCheckRange(VMCrossPoolMigrateAction.StaticRBACDependencies);
+            var permissionCheck = new RBACWarningPage.WizardPermissionCheck(pageMessage) { Blocking = true };
+            permissionCheck.AddApiCheckRange(apiMethodsToCheck);
 
-            m_pageTargetRbac.AddPermissionChecks(xenConnection, migrateCheck);
-            if (!xenConnection.Equals(TargetConnection))
-                m_pageTargetRbac.AddPermissionChecks(TargetConnection, migrateCheck);
+            var connectionsAdded = new List<IXenConnection>();
 
-            AddAfterPage(m_pageDestination, m_pageTargetRbac);
+            foreach (var connection in connectionsToCheck)
+            {
+                if (!connectionsAdded.Contains(connection))
+                {
+                    m_pageTargetRbac.AddPermissionChecks(connection, permissionCheck);
+                    connectionsAdded.Add(connection);
+                }
+            }
         }
+
 
         private IEnumerable<SummaryDetails> GetVMMappingSummary()
         {
@@ -465,7 +485,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                 summary = new TargetServerSummary(summary, pair.Value, TargetConnection);
                 summary = new TransferNetworkSummary(summary, m_pageTransferNetwork.NetworkUuid.Value);
                 summary = new StorageSummary(summary, pair.Value, xenConnection);
-                summary = new NetworkSummary(summary, pair.Value, xenConnection); 
+                summary = new NetworkSummary(summary, pair.Value, xenConnection);
                 summary = new SummarySplitter(summary);
             }
             return summary.Details;
@@ -519,8 +539,8 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
         internal static void ShowWarningMessageBox(string message)
         {
-            using (var dlg = new WarningDialog(message) {WindowTitle = Messages.CPM_WIZARD_TITLE})
+            using (var dlg = new WarningDialog(message) { WindowTitle = Messages.CPM_WIZARD_TITLE })
                 dlg.ShowDialog(Program.MainWindow);
         }
-	}
+    }
 }

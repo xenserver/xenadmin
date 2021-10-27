@@ -31834,6 +31834,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Current access levels do not allow cloning of VMs across pools. Log in as a different user with sufficient privileges on the host and try again..
+        /// </summary>
+        public static string RBAC_CROSS_POOL_CLONE_VM_BLOCKED {
+            get {
+                return ResourceManager.GetString("RBAC_CROSS_POOL_CLONE_VM_BLOCKED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Current access levels do not allow migration of VMs across pools. Log in as a different user with sufficient privileges on both source and target hosts and try again..
         /// </summary>
         public static string RBAC_CROSS_POOL_MIGRATE_VM_BLOCKED {
@@ -31879,6 +31888,15 @@ namespace XenAdmin {
         public static string RBAC_HTTP_FAILURE {
             get {
                 return ResourceManager.GetString("RBAC_HTTP_FAILURE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current access levels do not allow copying of VMs. Log in as a different user with sufficient privileges on the host and try again..
+        /// </summary>
+        public static string RBAC_INTRA_POOL_COPY_VM_BLOCKED {
+            get {
+                return ResourceManager.GetString("RBAC_INTRA_POOL_COPY_VM_BLOCKED", resourceCulture);
             }
         }
         

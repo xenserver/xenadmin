@@ -29,6 +29,7 @@
  * SUCH DAMAGE.
  */
 
+using XenAdmin.Core;
 using XenAPI;
 
 
@@ -52,8 +53,19 @@ namespace XenAdmin.Actions.VMActions
             _cloneDescription = description;
             ApiMethodsToRoleCheck.AddRange(Role.CommonSessionApiList);
             ApiMethodsToRoleCheck.AddRange(Role.CommonTaskApiList);
-            ApiMethodsToRoleCheck.Add("vm.clone");
-            ApiMethodsToRoleCheck.Add("vm.set_name_description");
+            ApiMethodsToRoleCheck.Add("VM.clone");
+            ApiMethodsToRoleCheck.Add("VM.set_name_description");
+        }
+
+        public static RbacMethodList StaticRBACDependencies
+        {
+            get
+            {
+                var list = new RbacMethodList("VM.clone", "VM.set_name_description");
+                list.AddRange(Role.CommonSessionApiList);
+                list.AddRange(Role.CommonTaskApiList);
+                return list;
+            }
         }
 
         protected override void Run()

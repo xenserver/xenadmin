@@ -1850,19 +1850,19 @@ Note that if RBAC is enabled, only alerts which you have privileges to dismiss w
   <data name="ALERT_EXPORT_ALL_OR_FILTERED" xml:space="preserve">
     <value>You have applied filters to the list of alerts. Do you want to export all alerts from every connected server, or only the alerts you have chosen to view?</value>
   </data>
-   <data name="ALERT_FAILED_LOGIN_ATTEMPT_DESCRIPTION_ALL_UNKNOWN" xml:space="preserve">
+  <data name="ALERT_FAILED_LOGIN_ATTEMPT_DESCRIPTION_ALL_UNKNOWN" xml:space="preserve">
     <value>All {0} attempts originated from unknown sources.</value>
-  </data> 
+  </data>
   <data name="ALERT_FAILED_LOGIN_ATTEMPT_DESCRIPTION_COMMON" xml:space="preserve">
     <value>The most common attempts originated from the following sources:</value>
-  </data> 
+  </data>
   <data name="ALERT_FAILED_LOGIN_ATTEMPT_DESCRIPTION_TOTAL" xml:space="preserve">
     <value>There has been a total of {0} failed login attempts.</value>
-  </data> 
+  </data>
   <data name="ALERT_FAILED_LOGIN_ATTEMPT_DESCRIPTION_UNKNOWN" xml:space="preserve">
     <value>{0} attempts originated from unknown sources.</value>
-  </data> 
- <data name="ALERT_FAILED_LOGIN_ATTEMPT_OFFENDER_DATE" xml:space="preserve">
+  </data>
+  <data name="ALERT_FAILED_LOGIN_ATTEMPT_OFFENDER_DATE" xml:space="preserve">
     <value>Last attempt on: {0}</value>
   </data>
   <data name="ALERT_FAILED_LOGIN_ATTEMPT_OFFENDER_IP" xml:space="preserve">
@@ -14724,5 +14724,11 @@ Any disk in your VM's DVD drive will be ejected when installing {1}.</value>
   </data>
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>You are here</value>
+  </data>
+  <data name="RBAC_CROSS_POOL_CLONE_VM_BLOCKED" xml:space="preserve">
+    <value>Current access levels do not allow cloning of VMs across pools. Log in as a different user with sufficient privileges on the host and try again.</value>
+  </data>
+  <data name="RBAC_INTRA_POOL_COPY_VM_BLOCKED" xml:space="preserve">
+    <value>Current access levels do not allow copying of VMs. Log in as a different user with sufficient privileges on the host and try again.</value>
   </data>
 </root>
