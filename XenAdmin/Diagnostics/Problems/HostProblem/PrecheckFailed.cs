@@ -45,17 +45,9 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
             Failure = failure;
         }
 
-        public override string Description
-        {
-            get { return string.Format(Messages.UPDATES_WIZARD_PRECHECK_FAILED, ServerName, Failure.Message); }
-        }
+        public override string Description => string.Format(Messages.STRING_COLON_SPACE_STRING,
+            ServerName, Failure.Message);
 
-        public override string HelpMessage
-        {
-            get
-            {
-                return string.Empty;
-            }
-        }
+        public override string HelpMessage => string.Empty;
     }
 }

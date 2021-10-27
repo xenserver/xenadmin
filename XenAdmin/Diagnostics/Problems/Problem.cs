@@ -163,6 +163,7 @@ namespace XenAdmin.Diagnostics.Problems
 
         public override bool IsFixable => false;
 
+        public override string Title => Check.Description;
         public override string HelpMessage => Messages.MORE_INFO;
 
         public abstract string Message { get; }

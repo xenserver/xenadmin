@@ -81,7 +81,7 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
 
         public override string Title => Description;
 
-        public override string Description => string.Format(Messages.UPDATES_WIZARD_PRECHECK_FAILED, _host.name_label, _shortMessage);
+        public override string Description => string.Format(Messages.STRING_COLON_SPACE_STRING, _host.name_label, _shortMessage);
     }
 
     public class HostNotSafeToUpgradeProblem : ProblemWithMoreInfo
@@ -127,6 +127,6 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
 
         public override string Title => Description;
 
-        public override string Description => string.Format(Messages.UPDATES_WIZARD_PRECHECK_FAILED, _host.name_label, _shortMessage);
+        public override string Description => string.Format(Messages.STRING_COLON_SPACE_STRING, _host.name_label, _shortMessage);
     }
 }

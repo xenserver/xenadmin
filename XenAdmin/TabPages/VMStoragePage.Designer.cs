@@ -348,7 +348,6 @@ namespace XenAdmin.TabPages
             this.multipleDvdIsoList1.LabelSingleDvdForeColor = System.Drawing.SystemColors.ControlText;
             this.multipleDvdIsoList1.LinkLabelLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.multipleDvdIsoList1.Name = "multipleDvdIsoList1";
-            this.multipleDvdIsoList1.VM = null;
             // 
             // dataGridViewTextBoxColumn1
             // 

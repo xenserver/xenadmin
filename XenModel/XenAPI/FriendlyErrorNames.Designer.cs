@@ -79,6 +79,33 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to apply guidance on a host after updating..
+        /// </summary>
+        public static string APPLY_GUIDANCE_FAILED {
+            get {
+                return ResourceManager.GetString("APPLY_GUIDANCE_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to apply updates on a host..
+        /// </summary>
+        public static string APPLY_UPDATES_FAILED {
+            get {
+                return ResourceManager.GetString("APPLY_UPDATES_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The operation could not be performed because applying updates is in progress..
+        /// </summary>
+        public static string APPLY_UPDATES_IN_PROGRESS {
+            get {
+                return ResourceManager.GetString("APPLY_UPDATES_IN_PROGRESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to External authentication for this server is already enabled..
         /// </summary>
         public static string AUTH_ALREADY_ENABLED {
@@ -259,7 +286,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This PIF is a bond slave and cannot have a tunnel on it..
+        ///   Looks up a localized string similar to This PIF is a bond member and cannot have a tunnel on it..
         /// </summary>
         public static string CANNOT_ADD_TUNNEL_TO_BOND_SLAVE {
             get {
@@ -286,7 +313,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This PIF is a bond slave and cannot have a VLAN on it..
+        ///   Looks up a localized string similar to This PIF is a bond member and cannot have a VLAN on it..
         /// </summary>
         public static string CANNOT_ADD_VLAN_TO_BOND_SLAVE {
             get {
@@ -295,7 +322,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This properties of this PIF cannot be changed. Only the properties of non-bonded physical PIFs, or bond masters can be changed..
+        ///   Looks up a localized string similar to The properties of this PIF cannot be changed. Only the properties of non-bonded physical PIFs, or bond interfaces can be changed..
         /// </summary>
         public static string CANNOT_CHANGE_PIF_PROPERTIES {
             get {
@@ -358,7 +385,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The requested update could not be obtained from the master..
+        ///   Looks up a localized string similar to The requested update could not be obtained from the coordinator..
         /// </summary>
         public static string CANNOT_FETCH_PATCH {
             get {
@@ -376,7 +403,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The requested update could not be found.  This can occur when you designate a new master.  Please upload it again.
+        ///   Looks up a localized string similar to The requested update could not be found.  This can occur when you designate a new coordinator.  Please upload it again.
         /// </summary>
         public static string CANNOT_FIND_PATCH {
             get {
@@ -412,7 +439,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This PIF is a bond slave and cannot be plugged..
+        ///   Looks up a localized string similar to This PIF is a bond member and cannot be plugged..
         /// </summary>
         public static string CANNOT_PLUG_BOND_SLAVE {
             get {
@@ -435,6 +462,15 @@ namespace XenAPI {
         public static string CANNOT_RESET_CONTROL_DOMAIN {
             get {
                 return ResourceManager.GetString("CANNOT_RESET_CONTROL_DOMAIN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot restart device models of paused VMs residing on the host..
+        /// </summary>
+        public static string CANNOT_RESTART_DEVICE_MODEL {
+            get {
+                return ResourceManager.GetString("CANNOT_RESTART_DEVICE_MODEL", resourceCulture);
             }
         }
         
@@ -579,6 +615,15 @@ namespace XenAPI {
         public static string CLUSTERING_ENABLED {
             get {
                 return ResourceManager.GetString("CLUSTERING_ENABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The operation could not be performed because other repository(ies) is(are) already being configured..
+        /// </summary>
+        public static string CONFIGURE_REPOSITORIES_IN_PROGRESS {
+            get {
+                return ResourceManager.GetString("CONFIGURE_REPOSITORIES_IN_PROGRESS", resourceCulture);
             }
         }
         
@@ -790,7 +835,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No other server available to nominate as master.  Please add or enable some other servers..
+        ///   Looks up a localized string similar to No other server available to nominate as coordinator.  Please add or enable some other servers..
         /// </summary>
         public static string EVACUATE_NO_OTHER_HOSTS_FOR_MASTER {
             get {
@@ -862,6 +907,33 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to get available updates from a host..
+        /// </summary>
+        public static string GET_HOST_UPDATES_FAILED {
+            get {
+                return ResourceManager.GetString("GET_HOST_UPDATES_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to get available updates from the pool..
+        /// </summary>
+        public static string GET_UPDATES_FAILED {
+            get {
+                return ResourceManager.GetString("GET_UPDATES_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The operation could not be performed because getting updates is in progress..
+        /// </summary>
+        public static string GET_UPDATES_IN_PROGRESS {
+            get {
+                return ResourceManager.GetString("GET_UPDATES_IN_PROGRESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The GPU group does not contain any GPUs..
         /// </summary>
         public static string GPU_GROUP_CONTAINS_NO_PGPUS {
@@ -889,7 +961,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This server cannot accept the proposed new master setting at this time..
+        ///   Looks up a localized string similar to This server cannot accept the proposed new coordinator setting at this time..
         /// </summary>
         public static string HA_ABORT_NEW_MASTER {
             get {
@@ -1051,7 +1123,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Server cannot rejoin pool because it should have fenced (it is not in the master&apos;s partition).
+        ///   Looks up a localized string similar to Server cannot rejoin pool because it should have fenced (it is not in the coordinator&apos;s partition)..
         /// </summary>
         public static string HA_SHOULD_BE_FENCED {
             get {
@@ -1168,7 +1240,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The server failed to acquire an IP address on its management interface and therefore cannot contact the master..
+        ///   Looks up a localized string similar to The server failed to acquire an IP address on its management interface and therefore cannot contact the coordinator..
         /// </summary>
         public static string HOST_HAS_NO_MANAGEMENT_IP {
             get {
@@ -1222,7 +1294,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The server that you are talking to is a slave.
+        ///   Looks up a localized string similar to The server that you are talking to is a supporter.
         /// </summary>
         public static string HOST_IS_SLAVE {
             get {
@@ -1231,7 +1303,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The host is its own slave. Please use pool-emergency-transition-to-master or pool-emergency-reset-master..
+        ///   Looks up a localized string similar to The host is its own supporter. Please use pool-emergency-transition-to-master or pool-emergency-reset-master..
         /// </summary>
         public static string HOST_ITS_OWN_SLAVE {
             get {
@@ -1240,7 +1312,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The master reports that it cannot talk back to the slave on the supplied management IP address..
+        ///   Looks up a localized string similar to The coordinator reports that it cannot talk back to the supporter on the supplied management IP address..
         /// </summary>
         public static string HOST_MASTER_CANNOT_TALK_BACK {
             get {
@@ -1348,7 +1420,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The master says the server is not known to it. Is the server in the master&apos;s database and pointing to the correct master? Are all servers using the same pool secret?.
+        ///   Looks up a localized string similar to The coordinator says the server is not known to it. Is the server in the coordinator&apos;s database and pointing to the correct coordinator? Are all servers using the same pool secret?.
         /// </summary>
         public static string HOST_UNKNOWN_TO_MASTER {
             get {
@@ -1501,6 +1573,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The base url in the repository is invalid..
+        /// </summary>
+        public static string INVALID_BASE_URL {
+            get {
+                return ResourceManager.GetString("INVALID_BASE_URL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A required parameter contained an invalid CIDR address (&lt;addr&gt;/&lt;prefix length&gt;).
         /// </summary>
         public static string INVALID_CIDR_ADDRESS_SPECIFIED {
@@ -1573,11 +1654,29 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The repomd.xml is invalid..
+        /// </summary>
+        public static string INVALID_REPOMD_XML {
+            get {
+                return ResourceManager.GetString("INVALID_REPOMD_XML", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The uploaded update package is invalid..
         /// </summary>
         public static string INVALID_UPDATE {
             get {
                 return ResourceManager.GetString("INVALID_UPDATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The updateinfo.xml is invalid..
+        /// </summary>
+        public static string INVALID_UPDATEINFO_XML {
+            get {
+                return ResourceManager.GetString("INVALID_UPDATEINFO_XML", resourceCulture);
             }
         }
         
@@ -1600,7 +1699,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The server joining the pool cannot already be a master of another pool..
+        ///   Looks up a localized string similar to The server joining the pool cannot already be a coordinator of another pool..
         /// </summary>
         public static string JOINING_HOST_CANNOT_BE_MASTER_OF_OTHER_HOSTS {
             get {
@@ -1897,6 +1996,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There is more than one update repository being enabled..
+        /// </summary>
+        public static string MULTIPLE_UPDATE_REPOSITORIES_ENABLED {
+            get {
+                return ResourceManager.GetString("MULTIPLE_UPDATE_REPOSITORIES_ENABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You tried to create a PIF, but the network {0} you tried to attach it to is already attached to some other PIF {1}, and so the creation failed..
         /// </summary>
         public static string NETWORK_ALREADY_CONNECTED {
@@ -2077,6 +2185,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There is no repository being enabled..
+        /// </summary>
+        public static string NO_REPOSITORY_ENABLED {
+            get {
+                return ResourceManager.GetString("NO_REPOSITORY_ENABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This command is not allowed on the OEM edition..
         /// </summary>
         public static string NOT_ALLOWED_ON_OEM_EDITION {
@@ -2118,6 +2235,15 @@ namespace XenAPI {
         public static string NOT_SYSTEM_DOMAIN {
             get {
                 return ResourceManager.GetString("NOT_SYSTEM_DOMAIN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The NVidia GPU is not configured for SR-IOV as expected.
+        /// </summary>
+        public static string NVIDIA_SRIOV_MISCONFIGURED {
+            get {
+                return ResourceManager.GetString("NVIDIA_SRIOV_MISCONFIGURED", resourceCulture);
             }
         }
         
@@ -2707,6 +2833,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The host joining the pool has different CA certificates from the pool coordinator while using the same name, uninstall them and try again..
+        /// </summary>
+        public static string POOL_JOINING_HOST_CA_CERTIFICATES_CONFLICT {
+            get {
+                return ResourceManager.GetString("POOL_JOINING_HOST_CA_CERTIFICATES_CONFLICT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The host joining the pool must not have any bonds..
         /// </summary>
         public static string POOL_JOINING_HOST_HAS_BONDS {
@@ -2761,7 +2896,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The host joining the pool must have the same API version as the pool master..
+        ///   Looks up a localized string similar to The host joining the pool must have the same API version as the pool coordinator..
         /// </summary>
         public static string POOL_JOINING_HOST_MUST_HAVE_SAME_API_VERSION {
             get {
@@ -2770,7 +2905,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The host joining the pool must have the same database schema as the pool master..
+        ///   Looks up a localized string similar to The host joining the pool must have the same database schema as the pool coordinator..
         /// </summary>
         public static string POOL_JOINING_HOST_MUST_HAVE_SAME_DB_SCHEMA {
             get {
@@ -2779,7 +2914,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The server joining the pool must have the same product version as the pool master..
+        ///   Looks up a localized string similar to The server joining the pool must have the same product version as the pool coordinator..
         /// </summary>
         public static string POOL_JOINING_HOST_MUST_HAVE_SAME_PRODUCT_VERSION {
             get {
@@ -2915,6 +3050,51 @@ namespace XenAPI {
         public static string REDO_LOG_IS_ENABLED {
             get {
                 return ResourceManager.GetString("REDO_LOG_IS_ENABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The repository already exists..
+        /// </summary>
+        public static string REPOSITORY_ALREADY_EXISTS {
+            get {
+                return ResourceManager.GetString("REPOSITORY_ALREADY_EXISTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to clean up local repository on coordinator..
+        /// </summary>
+        public static string REPOSITORY_CLEANUP_FAILED {
+            get {
+                return ResourceManager.GetString("REPOSITORY_CLEANUP_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The repository is in use..
+        /// </summary>
+        public static string REPOSITORY_IS_IN_USE {
+            get {
+                return ResourceManager.GetString("REPOSITORY_IS_IN_USE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Syning with remote YUM repository failed..
+        /// </summary>
+        public static string REPOSYNC_FAILED {
+            get {
+                return ResourceManager.GetString("REPOSYNC_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The pool is syncing with the enabled remote YUM repository..
+        /// </summary>
+        public static string REPOSYNC_IN_PROGRESS {
+            get {
+                return ResourceManager.GetString("REPOSYNC_IN_PROGRESS", resourceCulture);
             }
         }
         
@@ -3108,7 +3288,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The management interface on a slave cannot be disabled because the slave would enter emergency mode..
+        ///   Looks up a localized string similar to The management interface on a supporter cannot be disabled because the supporter would enter emergency mode..
         /// </summary>
         public static string SLAVE_REQUIRES_MANAGEMENT_INTERFACE {
             get {
@@ -4548,7 +4728,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There was an error while attempting to make a request from the logical volume. The request must come from the master..
+        ///   Looks up a localized string similar to There was an error while attempting to make a request from the logical volume. The request must come from the coordinator..
         /// </summary>
         public static string SR_BACKEND_FAILURE_58 {
             get {
@@ -5115,6 +5295,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The operation could not be performed because syncing updates is in progress..
+        /// </summary>
+        public static string SYNC_UPDATES_IN_PROGRESS {
+            get {
+                return ResourceManager.GetString("SYNC_UPDATES_IN_PROGRESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You must use tar output to retrieve system status from an OEM server..
         /// </summary>
         public static string SYSTEM_STATUS_MUST_USE_TAR_ON_OEM {
@@ -5318,6 +5507,24 @@ namespace XenAPI {
         public static string UPDATE_PRECHECK_FAILED_WRONG_SERVER_VERSION {
             get {
                 return ResourceManager.GetString("UPDATE_PRECHECK_FAILED_WRONG_SERVER_VERSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The hash of updateinfo doesn&apos;t match with current one. There may be newer available updates..
+        /// </summary>
+        public static string UPDATEINFO_HASH_MISMATCH {
+            get {
+                return ResourceManager.GetString("UPDATEINFO_HASH_MISMATCH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A call to pool.sync_updates is required before this operation..
+        /// </summary>
+        public static string UPDATES_REQUIRE_SYNC {
+            get {
+                return ResourceManager.GetString("UPDATES_REQUIRE_SYNC", resourceCulture);
             }
         }
         

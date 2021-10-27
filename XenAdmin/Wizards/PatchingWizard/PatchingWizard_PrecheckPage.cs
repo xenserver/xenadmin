@@ -192,7 +192,10 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 progressBar1.Value = e.ProgressPercentage;
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+                // ignored
+            }
         }
 
         private bool IsCheckInProgress

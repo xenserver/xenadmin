@@ -159,7 +159,10 @@ namespace XenAdmin.Actions
                         Secret.destroy(Session, opaqref);
                     }
                 }
-                catch { }
+                catch
+                {
+                    // ignored
+                }
             }
 
             log.Debug("Checking that SR.create() actually succeeded");

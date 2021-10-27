@@ -36,13 +36,13 @@ using XenAPI;
 
 namespace XenAdmin.Actions
 {
-    public class VMEnlightenmentAction : PureAsyncAction
+    public abstract class VMEnlightenmentAction : PureAsyncAction
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private readonly string action;
 
-        public VMEnlightenmentAction(VM vm, string action, string title, string description, bool suppressHistory)
+        protected VMEnlightenmentAction(VM vm, string action, string title, string description, bool suppressHistory)
             : base(vm.Connection, title, description, suppressHistory)
         {
             VM = vm;

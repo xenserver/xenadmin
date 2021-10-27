@@ -91,7 +91,9 @@ namespace XenAPI
             string uefi_certificates,
             bool is_psr_pending,
             bool tls_verification_enabled,
-            List<XenRef<Repository>> repositories)
+            List<XenRef<Repository>> repositories,
+            bool client_certificate_auth_enabled,
+            string client_certificate_auth_name)
         {
             this.uuid = uuid;
             this.name_label = name_label;
@@ -133,6 +135,8 @@ namespace XenAPI
             this.is_psr_pending = is_psr_pending;
             this.tls_verification_enabled = tls_verification_enabled;
             this.repositories = repositories;
+            this.client_certificate_auth_enabled = client_certificate_auth_enabled;
+            this.client_certificate_auth_name = client_certificate_auth_name;
         }
 
         /// <summary>
@@ -204,6 +208,8 @@ namespace XenAPI
             is_psr_pending = record.is_psr_pending;
             tls_verification_enabled = record.tls_verification_enabled;
             repositories = record.repositories;
+            client_certificate_auth_enabled = record.client_certificate_auth_enabled;
+            client_certificate_auth_name = record.client_certificate_auth_name;
         }
 
         internal void UpdateFrom(Proxy_Pool proxy)
@@ -248,6 +254,8 @@ namespace XenAPI
             is_psr_pending = (bool)proxy.is_psr_pending;
             tls_verification_enabled = (bool)proxy.tls_verification_enabled;
             repositories = proxy.repositories == null ? null : XenRef<Repository>.Create(proxy.repositories);
+            client_certificate_auth_enabled = (bool)proxy.client_certificate_auth_enabled;
+            client_certificate_auth_name = proxy.client_certificate_auth_name == null ? null : proxy.client_certificate_auth_name;
         }
 
         /// <summary>
@@ -338,6 +346,10 @@ namespace XenAPI
                 tls_verification_enabled = Marshalling.ParseBool(table, "tls_verification_enabled");
             if (table.ContainsKey("repositories"))
                 repositories = Marshalling.ParseSetRef<Repository>(table, "repositories");
+            if (table.ContainsKey("client_certificate_auth_enabled"))
+                client_certificate_auth_enabled = Marshalling.ParseBool(table, "client_certificate_auth_enabled");
+            if (table.ContainsKey("client_certificate_auth_name"))
+                client_certificate_auth_name = Marshalling.ParseString(table, "client_certificate_auth_name");
         }
 
         public Proxy_Pool ToProxy()
@@ -383,6 +395,8 @@ namespace XenAPI
             result_.is_psr_pending = is_psr_pending;
             result_.tls_verification_enabled = tls_verification_enabled;
             result_.repositories = repositories == null ? new string[] {} : Helper.RefListToStringArray(repositories);
+            result_.client_certificate_auth_enabled = client_certificate_auth_enabled;
+            result_.client_certificate_auth_name = client_certificate_auth_name ?? "";
             return result_;
         }
 
@@ -434,7 +448,9 @@ namespace XenAPI
                 Helper.AreEqual2(this._uefi_certificates, other._uefi_certificates) &&
                 Helper.AreEqual2(this._is_psr_pending, other._is_psr_pending) &&
                 Helper.AreEqual2(this._tls_verification_enabled, other._tls_verification_enabled) &&
-                Helper.AreEqual2(this._repositories, other._repositories);
+                Helper.AreEqual2(this._repositories, other._repositories) &&
+                Helper.AreEqual2(this._client_certificate_auth_enabled, other._client_certificate_auth_enabled) &&
+                Helper.AreEqual2(this._client_certificate_auth_name, other._client_certificate_auth_name);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Pool server)
@@ -1105,6 +1121,34 @@ namespace XenAPI
                 return session.JsonRpcClient.pool_get_repositories(session.opaque_ref, _pool);
             else
                 return XenRef<Repository>.Create(session.XmlRpcProxy.pool_get_repositories(session.opaque_ref, _pool ?? "").parse());
+        }
+
+        /// <summary>
+        /// Get the client_certificate_auth_enabled field of the given pool.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        public static bool get_client_certificate_auth_enabled(Session session, string _pool)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pool_get_client_certificate_auth_enabled(session.opaque_ref, _pool);
+            else
+                return (bool)session.XmlRpcProxy.pool_get_client_certificate_auth_enabled(session.opaque_ref, _pool ?? "").parse();
+        }
+
+        /// <summary>
+        /// Get the client_certificate_auth_name field of the given pool.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        public static string get_client_certificate_auth_name(Session session, string _pool)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pool_get_client_certificate_auth_name(session.opaque_ref, _pool);
+            else
+                return session.XmlRpcProxy.pool_get_client_certificate_auth_name(session.opaque_ref, _pool ?? "").parse();
         }
 
         /// <summary>
@@ -3026,6 +3070,94 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Check if the pool is ready to be updated. If not, report the reasons.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        /// <param name="_requires_reboot">Assume that the update will require host reboots</param>
+        public static string[] check_update_readiness(Session session, string _pool, bool _requires_reboot)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pool_check_update_readiness(session.opaque_ref, _pool, _requires_reboot);
+            else
+                return (string [])session.XmlRpcProxy.pool_check_update_readiness(session.opaque_ref, _pool ?? "", _requires_reboot).parse();
+        }
+
+        /// <summary>
+        /// Check if the pool is ready to be updated. If not, report the reasons.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        /// <param name="_requires_reboot">Assume that the update will require host reboots</param>
+        public static XenRef<Task> async_check_update_readiness(Session session, string _pool, bool _requires_reboot)
+        {
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_pool_check_update_readiness(session.opaque_ref, _pool, _requires_reboot);
+          else
+              return XenRef<Task>.Create(session.XmlRpcProxy.async_pool_check_update_readiness(session.opaque_ref, _pool ?? "", _requires_reboot).parse());
+        }
+
+        /// <summary>
+        /// Enable client certificate authentication on the pool
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        /// <param name="_name">The name (CN/SAN) that an incoming client certificate must have to allow authentication</param>
+        public static void enable_client_certificate_auth(Session session, string _pool, string _name)
+        {
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.pool_enable_client_certificate_auth(session.opaque_ref, _pool, _name);
+            else
+                session.XmlRpcProxy.pool_enable_client_certificate_auth(session.opaque_ref, _pool ?? "", _name ?? "").parse();
+        }
+
+        /// <summary>
+        /// Enable client certificate authentication on the pool
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        /// <param name="_name">The name (CN/SAN) that an incoming client certificate must have to allow authentication</param>
+        public static XenRef<Task> async_enable_client_certificate_auth(Session session, string _pool, string _name)
+        {
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_pool_enable_client_certificate_auth(session.opaque_ref, _pool, _name);
+          else
+              return XenRef<Task>.Create(session.XmlRpcProxy.async_pool_enable_client_certificate_auth(session.opaque_ref, _pool ?? "", _name ?? "").parse());
+        }
+
+        /// <summary>
+        /// Disable client certificate authentication on the pool
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        public static void disable_client_certificate_auth(Session session, string _pool)
+        {
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.pool_disable_client_certificate_auth(session.opaque_ref, _pool);
+            else
+                session.XmlRpcProxy.pool_disable_client_certificate_auth(session.opaque_ref, _pool ?? "").parse();
+        }
+
+        /// <summary>
+        /// Disable client certificate authentication on the pool
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        public static XenRef<Task> async_disable_client_certificate_auth(Session session, string _pool)
+        {
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_pool_disable_client_certificate_auth(session.opaque_ref, _pool);
+          else
+              return XenRef<Task>.Create(session.XmlRpcProxy.async_pool_disable_client_certificate_auth(session.opaque_ref, _pool ?? "").parse());
+        }
+
+        /// <summary>
         /// Return a list of all the pools known to the system.
         /// First published in XenServer 4.0.
         /// </summary>
@@ -3775,5 +3907,41 @@ namespace XenAPI
             }
         }
         private List<XenRef<Repository>> _repositories = new List<XenRef<Repository>>() {};
+
+        /// <summary>
+        /// True if authentication by TLS client certificates is enabled
+        /// First published in Unreleased.
+        /// </summary>
+        public virtual bool client_certificate_auth_enabled
+        {
+            get { return _client_certificate_auth_enabled; }
+            set
+            {
+                if (!Helper.AreEqual(value, _client_certificate_auth_enabled))
+                {
+                    _client_certificate_auth_enabled = value;
+                    NotifyPropertyChanged("client_certificate_auth_enabled");
+                }
+            }
+        }
+        private bool _client_certificate_auth_enabled = false;
+
+        /// <summary>
+        /// The name (CN/SAN) that an incoming client certificate must have to allow authentication
+        /// First published in Unreleased.
+        /// </summary>
+        public virtual string client_certificate_auth_name
+        {
+            get { return _client_certificate_auth_name; }
+            set
+            {
+                if (!Helper.AreEqual(value, _client_certificate_auth_name))
+                {
+                    _client_certificate_auth_name = value;
+                    NotifyPropertyChanged("client_certificate_auth_name");
+                }
+            }
+        }
+        private string _client_certificate_auth_name = "";
     }
 }

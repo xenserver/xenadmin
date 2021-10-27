@@ -328,7 +328,11 @@ namespace XenAdmin.Model
                         portList.Add(item);
                     }
                 }
-                catch { }
+                catch
+                {
+                    // ignored
+                }
+
                 return portList;
             }
         }

@@ -364,6 +364,7 @@ namespace XenAdmin
             }
             catch
             {
+                // ignored
             }
 
             // Using the Load event ensures that the handle has been 
@@ -1509,11 +1510,14 @@ namespace XenAdmin
             if (!multi && !SearchMode && isHostSelected && isHostLive)
                 newTabs.Add(TabPageNICs);
 
-            if (!multi && !SearchMode && isDockerContainerSelected && !(SelectionManager.Selection.First as DockerContainer).Parent.IsWindows())
-                newTabs.Add(TabPageDockerProcess);
+            if (!multi && !SearchMode && isDockerContainerSelected &&
+                !Helpers.StockholmOrGreater(SelectionManager.Selection.GetConnectionOfFirstItem()))
+            {
+                if (!(SelectionManager.Selection.First as DockerContainer).Parent.IsWindows())
+                    newTabs.Add(TabPageDockerProcess);
 
-            if (!multi && !SearchMode && isDockerContainerSelected)
                 newTabs.Add(TabPageDockerDetails);
+            }
 
             bool isPoolOrLiveStandaloneHost = isPoolSelected || (isHostSelected && isHostLive && selectionPool == null);
 

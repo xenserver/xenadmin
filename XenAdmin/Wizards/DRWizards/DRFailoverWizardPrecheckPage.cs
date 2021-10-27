@@ -221,7 +221,10 @@ namespace XenAdmin.Wizards.DRWizards
                 int step = (int)((1.0 / ((float)_numberChecks)) * e.ProgressPercentage);
                 progressBar1.Value += (step + progressBar1.Value) > 100 ? 0 : step;
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+                // ignored
+            }
         }
 
         private DataGridViewRow RunCheck(Check check)
@@ -618,7 +621,7 @@ namespace XenAdmin.Wizards.DRWizards
                     : Problem.Image;
 
                 if (Problem != null)
-                    _descriptionCell.Value = String.Format(Messages.DR_WIZARD_PRECHECKPAGE_PROBLEM, _check.Description, Problem.Description);
+                    _descriptionCell.Value = String.Format(Messages.STRING_COLON_SPACE_STRING, _check.Description, Problem.Description);
                 else if (_check != null)
                 {
                     _descriptionCell.Value = String.Format(Messages.DR_WIZARD_PRECHECKPAGE_OK, _check.Description);

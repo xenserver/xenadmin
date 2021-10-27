@@ -108,6 +108,7 @@ namespace XenAPI
                 }
                 catch
                 {
+                    // ignored
                 }
 
                 retries--;

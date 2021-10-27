@@ -456,6 +456,14 @@
   <data name="ACTION_ENABLING_AUTOSTART_ON_VM" xml:space="preserve">
     <value>Enabling autostart for '{0}'</value>
   </data>
+  <data name="ACTION_ENABLING_DATASOURCE" xml:space="preserve">
+    <value>Enabling metric "{0}"...</value>
+  </data>
+  <data name="ACTION_ENABLING_DATASOURCE_ERROR" xml:space="preserve">
+    <value>Could not enable metric "{0}".
+
+This could be because the data source is not generating any data. Ensure the prerequisites for collecting this metric are met before attempting to enable it.</value>
+  </data>
   <data name="ACTION_ENABLING_LIVE_PATCHING" xml:space="preserve">
     <value>Enabling live patching for '{0}'</value>
   </data>
@@ -2242,7 +2250,7 @@ Deleting this bond will automatically transfer the management and secondary inte
   <data name="BOND_DELETE_WILL_DISTURB_PRIMARY" xml:space="preserve">
     <value>{0}
 
-Deleting this bond will automatically transfer the management interface on the bond to the first other member of the bond: 
+Deleting this bond will automatically transfer the management interface on the bond to the first of the bonded members: 
 
 - {1} connections to the pool will temporarily be disturbed
 
@@ -2251,7 +2259,7 @@ Deleting this bond will automatically transfer the management interface on the b
   <data name="BOND_DELETE_WILL_DISTURB_SECONDARY" xml:space="preserve">
     <value>{0}
 
-Deleting this bond will disrupt traffic through the secondary interface on the bond while the interface is moved to the first other member of the bond.</value>
+Deleting this bond will disrupt traffic through the secondary interface on the bond while the interface is moved to the first of the bonded members.</value>
   </data>
   <data name="BOND_GONE" xml:space="preserve">
     <value>Could not find the bond in {0}'s cache.</value>
@@ -2658,6 +2666,12 @@ This will cancel compilation of the status report.</value>
   </data>
   <data name="CERTIFICATE_VERIFICATION_KEY" xml:space="preserve">
     <value>Certificate Verification</value>
+  </data>
+  <data name="CERTIFICATE_VERIFICATION_HOST_DISABLED_IN_POOL" xml:space="preserve">
+    <value>Enabled on the pool, but disabled on:</value>
+  </data>
+  <data name="CERTIFICATE_VERIFICATION_HOST_DISABLED_STANDALONE" xml:space="preserve">
+    <value>Disabled, but enabled on the pool</value>
   </data>
   <data name="CFU_STATUS_CHECK_DESCRIPTION" xml:space="preserve">
     <value>Ability to download updates</value>
@@ -3364,6 +3378,9 @@ Would you like to carry out the operation at this time?</value>
   <data name="CONTAINER_IMAGE" xml:space="preserve">
     <value>Image</value>
   </data>
+  <data name="CONTAINER_MANAGEMENT_REMOVAL_WARNING" xml:space="preserve">
+    <value>Support for container management has been removed as of {0}. Please uninstall the Container Management supplemental pack because you will no longer be able to use it for managing Docker containers.</value>
+  </data>
   <data name="CONTAINER_ON_VM_TITLE" xml:space="preserve">
     <value>{0} on '{1}' {2}</value>
   </data>
@@ -3659,6 +3676,9 @@ This action cannot be undone. Are you sure you want to continue?</value>
   <data name="COPY" xml:space="preserve">
     <value>Copy</value>
   </data>
+  <data name="COPYING_TEMPLATE" xml:space="preserve">
+    <value>Copying template '{0}'</value>
+  </data>
   <data name="COPYRIGHT" xml:space="preserve">
     <value>Copyright © {0} All rights reserved.</value>
   </data>
@@ -3809,10 +3829,10 @@ This action cannot be undone. Are you sure you want to continue?</value>
     <value>Select the pool or standalone server where you want to move the selected VM to.</value>
   </data>
   <data name="CPM_WIZARD_DESTINATION_TABLE_INTRO" xml:space="preserve">
-    <value>Optionally, assign the VMs a &amp;home server in the destination pool:</value>
+    <value>Optionally, assign the VM(s) a &amp;home server in the destination pool:</value>
   </data>
-  <data name="CPM_WIZARD_DESTINATION_TABLE_INTRO_SINGLE" xml:space="preserve">
-    <value>Optionally, assign the VM a &amp;home server in the destination pool:</value>
+  <data name="CPM_WIZARD_DESTINATION_TABLE_INTRO_TEMPLATES" xml:space="preserve">
+    <value>Optionally, assign the template(s) a &amp;home server in the destination pool:</value>
   </data>
   <data name="CPM_WIZARD_DESTINATION_TAB_TITLE" xml:space="preserve">
     <value>Destination Pool</value>
@@ -5017,9 +5037,6 @@ Eject the CD and try again.</value>
   </data>
   <data name="DR_WIZARD_PRECHECKPAGE_OK" xml:space="preserve">
     <value>{0}: OK</value>
-  </data>
-  <data name="DR_WIZARD_PRECHECKPAGE_PROBLEM" xml:space="preserve">
-    <value>{0}: {1}</value>
   </data>
   <data name="DR_WIZARD_PRECHECKPAGE_RESOLVE" xml:space="preserve">
     <value>Resolve</value>
@@ -6275,11 +6292,11 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="GRAPHS_DEFAULT_NAME_NETWORK" xml:space="preserve">
     <value>Network Performance</value>
   </data>
-  <data name="GRAPHS_DETAILS_TITLE" xml:space="preserve">
-    <value>'{0}' Details</value>
-  </data>
   <data name="GRAPHS_EDIT" xml:space="preserve">
     <value>Edit Graph...</value>
+  </data>
+  <data name="GRAPHS_EDIT_TITLE" xml:space="preserve">
+    <value>Edit '{0}'</value>
   </data>
   <data name="GRAPHS_NEW" xml:space="preserve">
     <value>New Graph...</value>
@@ -8556,9 +8573,6 @@ Do you want to continue?</value>
   <data name="MESSAGEBOX_VIF_DELETE_TITLE" xml:space="preserve">
     <value>Delete Network Interface</value>
   </data>
-  <data name="MESSAGE_ALERT_TITLE" xml:space="preserve">
-    <value>{0}: {1}</value>
-  </data>
   <data name="MIGRATE" xml:space="preserve">
     <value>Migrate</value>
   </data>
@@ -8947,7 +8961,7 @@ You should only proceed if you have verified that these settings are correct.</v
 
 As SMB storage repositories are shared, the virtual disks stored in them allow VMs to be started on any server in a resource pool and to be migrated between them using Live Migration.
 
-When you configure a SMB storage repository, you simply provide the host name or IP address of the SMB server, the user name, the password and the path to a directory that will be used to contain the storage repository. The SMB server must be configured to export the specified path to all servers in the pool.</value>
+When you configure a SMB storage repository, you simply provide the host name or IP address of the SMB server, the user name, the password and the path to a directory that will be used to contain the storage repository. The SMB server must support version 3 and be configured to export the specified path to all servers in the pool.</value>
   </data>
   <data name="NEWSR_CIFS_ISO_BLURB" xml:space="preserve">
     <value>Select this option if you have a library of VM installation ISO images available as a Windows (SMB/CIFS) share that you want to attach to your host or pool.</value>
@@ -8956,7 +8970,7 @@ When you configure a SMB storage repository, you simply provide the host name or
     <value>Windows File Sharing (SMB/CIFS)</value>
   </data>
   <data name="NEWSR_CIFS_TYPE_NAME" xml:space="preserve">
-    <value>SMB/CIFS</value>
+    <value>SMB</value>
   </data>
   <data name="NEWSR_CIF_DESCRIPTION" xml:space="preserve">
     <value>SMB ISO Library [{0}]</value>
@@ -12369,6 +12383,9 @@ The upper limit: SR size / {2}</value>
   <data name="STRINGIFY_LIST_LASTSEP" xml:space="preserve">
     <value> and </value>
   </data>
+  <data name="STRING_COLON_SPACE_STRING" xml:space="preserve">
+    <value>{0}: {1}</value>
+  </data>
   <data name="STRING_COMMA_SPACE_STRING" xml:space="preserve">
     <value>{0}, {1}</value>
   </data>
@@ -12935,9 +12952,6 @@ Please check your settings and try again.</value>
   </data>
   <data name="UPDATES_WIZARD_PRECHECK_ERROR" xml:space="preserve">
     <value>An error occurred during pre-update checks.  The results may not be reliable.</value>
-  </data>
-  <data name="UPDATES_WIZARD_PRECHECK_FAILED" xml:space="preserve">
-    <value>{0}: {1}</value>
   </data>
   <data name="UPDATES_WIZARD_PRECHECK_FAILED_CONFLICTING_UPDATE" xml:space="preserve">
     <value>{0}: Conflicting update(s) are present: {1}</value>
@@ -14349,7 +14363,7 @@ Would you like to adjust the current Optimization Mode to match the schedule?</v
     <value>Back to Parent Report</value>
   </data>
   <data name="WLB_REPORT_BIND_DATASOURCE" xml:space="preserve">
-    <value>An error occurred when attempting to bind report datasources: {0}</value>
+    <value>An error occurred when attempting to bind report data sources: {0}</value>
   </data>
   <data name="WLB_REPORT_CHANGECREDENTIALSTEXT" xml:space="preserve">
     <value>Change Credentials</value>

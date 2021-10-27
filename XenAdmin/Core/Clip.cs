@@ -232,7 +232,9 @@ namespace XenAdmin.Core
             }
             catch
             {
+                // ignored
             }
+
             GettingClipboard = false;
         }
 

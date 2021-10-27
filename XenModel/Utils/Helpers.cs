@@ -491,6 +491,18 @@ namespace XenAdmin.Core
             return platformVersion != null && productVersionCompare(platformVersion, "3.2.50") >= 0;
         }
 
+        /// <param name="host">May be null, in which case true is returned.</param>
+        public static bool YangtzeOrGreater(Host host)
+        {
+            return host == null || YangtzeOrGreater(HostPlatformVersion(host));
+        }
+
+        /// Yangtze is ver. 3.2.1
+        public static bool YangtzeOrGreater(string platformVersion)
+        {
+            return platformVersion != null && productVersionCompare(platformVersion, "3.2.1") >= 0;
+        }
+
         // CP-3435: Disable Check for Updates in Common Criteria Certification project
         public static bool CommonCriteriaCertificationRelease
         {
@@ -1817,8 +1829,9 @@ namespace XenAdmin.Core
        public static bool ContainerCapability(IXenConnection connection)
        {
            var coordinator = GetCoordinator(connection);
-           if (coordinator == null)
+           if (coordinator == null || StockholmOrGreater(connection))
                return false;
+
            if (ElyOrGreater(connection))
                return coordinator.AppliedUpdates().Any(update => update.Name().ToLower().StartsWith("xscontainer")); 
            return coordinator.SuppPacks().Any(suppPack => suppPack.Name.ToLower().StartsWith("xscontainer")); 

@@ -347,27 +347,25 @@ namespace XenAdmin.TabPages
         {
             if (xenObject is DockerContainer container)
             {
-                buttonProperties.Enabled = false;
-                buttonViewConsole.Visible = true;
-                buttonViewLog.Visible = true;
+                buttonProperties.Visible = false;
 
-                // Grey out the buttons if the Container management VM is Windows.
-                // For Linux VM, enable the buttons only when the docker is running.
-                if (container.Parent.IsWindows())
+                buttonViewConsole.Visible = buttonViewLog.Visible = linkLabelCollapse.Visible =
+                    linkLabelExpand.Visible = !Helpers.StockholmOrGreater(xenObject.Connection);
+
+                if (!Helpers.StockholmOrGreater(xenObject.Connection))
                 {
-                    buttonViewConsole.Enabled = false;
-                    buttonViewLog.Enabled = false;
-                }
-                else
-                {
-                    buttonViewConsole.Enabled = buttonViewLog.Enabled = container.power_state == vm_power_state.Running;
+                    // Grey out the buttons if the Container management VM is Windows.
+                    // For Linux VM, enable the buttons only when the docker is running.
+                    buttonViewConsole.Enabled = buttonViewLog.Enabled =
+                        !container.Parent.IsWindows() && container.power_state == vm_power_state.Running;
                 }
             }
             else
             {
+                buttonProperties.Visible = true;
                 buttonProperties.Enabled = xenObject != null && !xenObject.Locked && xenObject.Connection != null && xenObject.Connection.IsConnected;
-                buttonViewConsole.Visible = false;
-                buttonViewLog.Visible = false;
+                buttonViewConsole.Visible = buttonViewLog.Visible = false;
+                linkLabelCollapse.Visible = linkLabelExpand.Visible = true;
             }
         }
 
@@ -416,9 +414,10 @@ namespace XenAdmin.TabPages
             {
                 GenerateDisconnectedHostBox();
             }
-            else if (xenObject is DockerContainer)
+            else if (xenObject is DockerContainer dockerContainer)
             {
-                GenerateDockerContainerGeneralBox();
+                if (!Helpers.StockholmOrGreater(xenObject.Connection))
+                    GenerateDockerContainerGeneralBox(dockerContainer);
             }
             else
             {
@@ -458,9 +457,8 @@ namespace XenAdmin.TabPages
                 s.StartLayout();
             }
             panel2.ResumeLayout();
-            UpdateButtons();
-
             SetupDeprecationBanner();
+            UpdateButtons();
         }
 
         private void GenerateInterfaceBox()
@@ -1182,17 +1180,27 @@ namespace XenAdmin.TabPages
                     s.AddEntry(FriendlyName("host.enabled"), Messages.YES, item);
                 }
 
-                if (isStandAloneHost && Helpers.PostStockholm(host))
+                if (Helpers.PostStockholm(host))
                 {
                     var pool = Helpers.GetPoolOfOne(xenObject.Connection);
 
-                    if (pool != null && pool.tls_verification_enabled)
+                    if (pool.tls_verification_enabled && host.tls_verification_enabled)
+                    {
                         s.AddEntry(Messages.CERTIFICATE_VERIFICATION_KEY, Messages.ENABLED);
+                    }
+                    else if (pool.tls_verification_enabled && isStandAloneHost)
+                    {
+                        s.AddEntry(Messages.CERTIFICATE_VERIFICATION_KEY,
+                            Messages.CERTIFICATE_VERIFICATION_HOST_DISABLED_STANDALONE,
+                            Color.Red,
+                            new CommandToolStripMenuItem(new EnableTlsVerificationCommand(Program.MainWindow, pool)));}
                     else
+                    {
                         s.AddEntry(Messages.CERTIFICATE_VERIFICATION_KEY,
                             Messages.DISABLED,
                             Color.Red,
                             new CommandToolStripMenuItem(new EnableTlsVerificationCommand(Program.MainWindow, pool)));
+                    }
                 }
 
                 s.AddEntry(FriendlyName("host.iscsi_iqn"), host.GetIscsiIqn(),
@@ -1318,12 +1326,31 @@ namespace XenAdmin.TabPages
                 if (Helpers.PostStockholm(p.Connection))
                 {
                     if (p.tls_verification_enabled)
-                        s.AddEntry(Messages.CERTIFICATE_VERIFICATION_KEY, Messages.ENABLED);
+                    {
+                        var disabledHosts = p.Connection.Cache.Hosts.Where(h => !h.tls_verification_enabled).ToList();
+                        if (disabledHosts.Count > 0)
+                        {
+                            var sb = new StringBuilder(Messages.CERTIFICATE_VERIFICATION_HOST_DISABLED_IN_POOL);
+                            foreach (var h in disabledHosts)
+                                sb.AppendLine().AppendFormat(h.Name());
+
+                            s.AddEntry(Messages.CERTIFICATE_VERIFICATION_KEY,
+                                sb.ToString(),
+                                Color.Red,
+                                new CommandToolStripMenuItem(new EnableTlsVerificationCommand(Program.MainWindow, p)));
+                        }
+                        else
+                        {
+                            s.AddEntry(Messages.CERTIFICATE_VERIFICATION_KEY, Messages.ENABLED);
+                        }
+                    }
                     else
+                    {
                         s.AddEntry(Messages.CERTIFICATE_VERIFICATION_KEY,
                             Messages.DISABLED,
                             Color.Red,
                             new CommandToolStripMenuItem(new EnableTlsVerificationCommand(Program.MainWindow, p)));
+                    }
                 }
 
                 var coordinator = p.Connection.Resolve(p.master);
@@ -1547,33 +1574,29 @@ namespace XenAdmin.TabPages
             }
         }
 
-        private void GenerateDockerContainerGeneralBox()
+        private void GenerateDockerContainerGeneralBox(DockerContainer dockerContainer)
         {
-            var dockerContainer = xenObject as DockerContainer;
-            if (dockerContainer != null)
+            PDSection s = pdSectionGeneral;
+            s.AddEntry(Messages.NAME, dockerContainer.Name().Length != 0 ? dockerContainer.Name() : Messages.NONE);
+            s.AddEntry(Messages.STATUS, dockerContainer.status.Length != 0 ? dockerContainer.status : Messages.NONE);
+            try
             {
-                PDSection s = pdSectionGeneral;
-                s.AddEntry(Messages.NAME, dockerContainer.Name().Length != 0 ? dockerContainer.Name() : Messages.NONE);
-                s.AddEntry(Messages.STATUS, dockerContainer.status.Length != 0 ? dockerContainer.status : Messages.NONE);
-                try
-                {
-                    DateTime created = Util.FromUnixTime(double.Parse(dockerContainer.created)).ToLocalTime();
-                    s.AddEntry(Messages.CONTAINER_CREATED, HelpersGUI.DateTimeToString(created, Messages.DATEFORMAT_DMY_HMS, true));
-                }
-                catch
-                {
-                    s.AddEntry(Messages.CONTAINER_CREATED, dockerContainer.created.Length != 0 ? dockerContainer.created : Messages.NONE);
-                }
-                s.AddEntry(Messages.CONTAINER_IMAGE, dockerContainer.image.Length != 0 ? dockerContainer.image : Messages.NONE);
-                s.AddEntry(Messages.CONTAINER, dockerContainer.container.Length != 0 ? dockerContainer.container : Messages.NONE);
-                s.AddEntry(Messages.CONTAINER_COMMAND, dockerContainer.command.Length != 0 ? dockerContainer.command : Messages.NONE);
-                var ports = dockerContainer.PortList.Select(p => p.Description);
-                if (ports.Count() > 0)
-                {
-                    s.AddEntry(Messages.CONTAINER_PORTS, string.Join(Environment.NewLine, ports));
-                }
-                s.AddEntry(Messages.UUID, dockerContainer.uuid.Length != 0 ? dockerContainer.uuid : Messages.NONE);
+                DateTime created = Util.FromUnixTime(double.Parse(dockerContainer.created)).ToLocalTime();
+                s.AddEntry(Messages.CONTAINER_CREATED, HelpersGUI.DateTimeToString(created, Messages.DATEFORMAT_DMY_HMS, true));
             }
+            catch
+            {
+                s.AddEntry(Messages.CONTAINER_CREATED, dockerContainer.created.Length != 0 ? dockerContainer.created : Messages.NONE);
+            }
+            s.AddEntry(Messages.CONTAINER_IMAGE, dockerContainer.image.Length != 0 ? dockerContainer.image : Messages.NONE);
+            s.AddEntry(Messages.CONTAINER, dockerContainer.container.Length != 0 ? dockerContainer.container : Messages.NONE);
+            s.AddEntry(Messages.CONTAINER_COMMAND, dockerContainer.command.Length != 0 ? dockerContainer.command : Messages.NONE);
+            var ports = dockerContainer.PortList.Select(p => p.Description);
+            if (ports.Count() > 0)
+            {
+                s.AddEntry(Messages.CONTAINER_PORTS, string.Join(Environment.NewLine, ports));
+            }
+            s.AddEntry(Messages.UUID, dockerContainer.uuid.Length != 0 ? dockerContainer.uuid : Messages.NONE);
         }
 
         private void GenerateReadCachingBox()
@@ -1685,8 +1708,7 @@ namespace XenAdmin.TabPages
 
         private void GenerateDockerInfoBox()
         {
-            VM vm = xenObject as VM;
-            if (vm == null)
+            if (!(xenObject is VM vm) || Helpers.StockholmOrGreater(xenObject.Connection))
                 return;
 
             VM_Docker_Info info = vm.DockerInfo();
@@ -1743,6 +1765,31 @@ namespace XenAdmin.TabPages
             var result = host.SuppPacks().Select(suppPack => suppPack.LongDescription).ToList();
             result.Sort(StringUtility.NaturalCompare);
             return string.Join("\n", result.ToArray());
+        }
+
+        private void SetupDeprecationBanner()
+        {
+            if (xenObject is DockerContainer && !Helpers.ContainerCapability(xenObject.Connection))
+            {
+                Banner.BannerType = DeprecationBanner.Type.Removal;
+                Banner.WarningMessage = string.Format(Messages.CONTAINER_MANAGEMENT_REMOVAL_WARNING,
+                    string.Format(Messages.STRING_SPACE_STRING, BrandManager.ProductBrand, BrandManager.ProductVersion82));
+                Banner.LinkText = Messages.DETAILS;
+                Banner.LinkUri = new Uri(InvisibleMessages.DEPRECATION_URL);
+                Banner.Visible = true;
+            }
+            else if (!Helpers.PostStockholm(xenObject.Connection))
+            {
+                Banner.BannerType = DeprecationBanner.Type.Deprecation;
+                Banner.WarningMessage = string.Format(Messages.WARNING_PRE_CLOUD_VERSION_CONNECTION, BrandManager.BrandConsole, BrandManager.ProductBrand, BrandManager.ProductVersion82, BrandManager.LegacyConsole);
+                Banner.LinkText = Messages.PATCHING_WIZARD_WEBPAGE_CELL;
+                Banner.LinkUri = new Uri(InvisibleMessages.OUT_OF_DATE_WEBSITE);
+                Banner.Visible = true;
+            }
+            else
+            {
+                Banner.Visible = false;
+            }
         }
 
         #region VM delegates
@@ -2002,7 +2049,7 @@ namespace XenAdmin.TabPages
 
         private void StartPutty(string dockerCmd)
         {
-            if (!(xenObject is DockerContainer dockerContainer))
+            if (!(xenObject is DockerContainer dockerContainer) || Helpers.StockholmOrGreater(xenObject.Connection))
                 return;
 
             string ipAddr = dockerContainer.Parent.IPAddressForSSH();
@@ -2065,22 +2112,6 @@ namespace XenAdmin.TabPages
             finally
             {
                 panel2.ResumeLayout();
-            }
-        }
-
-        private void SetupDeprecationBanner()
-        {
-            if (Helpers.PostStockholm(xenObject.Connection))
-            {
-                Banner.Visible = false;
-            }
-            else
-            {
-                Banner.BannerType = DeprecationBanner.Type.Warning;
-                Banner.WarningMessage = string.Format(Messages.WARNING_PRE_CLOUD_VERSION_CONNECTION, BrandManager.BrandConsole, BrandManager.ProductBrand, BrandManager.ProductVersion82, BrandManager.LegacyConsole);
-                Banner.LinkText = Messages.PATCHING_WIZARD_WEBPAGE_CELL;
-                Banner.LinkUri = new Uri(InvisibleMessages.OUT_OF_DATE_WEBSITE);
-                Banner.Visible = true;
             }
         }
     }

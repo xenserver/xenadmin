@@ -113,6 +113,7 @@
     <Compile Include="Alerts\Types\XenServerVersionAlert.cs" />
     <Compile Include="Commands\CallHomeCommand.cs" />
     <Compile Include="Commands\ChangeControlDomainMemoryCommand.cs" />
+    <Compile Include="Commands\DockerContainerCommand.cs" />
     <Compile Include="Commands\Controls\PoolRemoveServerToolStripMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -126,11 +127,6 @@
     <Compile Include="Commands\DragDropCrossPoolMoveHaltedVMCommand.cs" />
     <Compile Include="Commands\DisablePvsReadCachingCommand.cs" />
     <Compile Include="Commands\EnablePvsReadCachingCommand.cs" />
-    <Compile Include="Commands\RestartDockerContainerCommand.cs" />
-    <Compile Include="Commands\ResumeDockerContainerCommand.cs" />
-    <Compile Include="Commands\PauseDockerContainerCommand.cs" />
-    <Compile Include="Commands\StopDockerContainerCommand.cs" />
-    <Compile Include="Commands\StartDockerContainerCommand.cs" />
     <Compile Include="Commands\Controls\EditPropertiesToolStripMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -2837,7 +2833,6 @@
     <Compile Include="Alerts\AlertExtensions.cs" />
     <Compile Include="Alerts\Types\LicenseAlert.cs" />
     <Compile Include="Alerts\Types\IqnAlert.cs" />
-    <Compile Include="Commands\ApplyLicenseEditionCommand.cs" />
     <Compile Include="Commands\Controls\AssignVMGroupToolStripMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -4786,6 +4781,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\DeprecationBanner.resx">
       <DependentUpon>DeprecationBanner.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\DeprecationBanner.zh-CN.resx">
       <DependentUpon>DeprecationBanner.cs</DependentUpon>
@@ -4932,6 +4928,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\GraphDetailsDialog.resx">
       <DependentUpon>GraphDetailsDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\CustomDataGraph\GraphList.ja.resx">
       <DependentUpon>GraphList.cs</DependentUpon>

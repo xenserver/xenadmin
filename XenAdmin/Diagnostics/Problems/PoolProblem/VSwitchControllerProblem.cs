@@ -46,8 +46,6 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
             _pool = pool;
         }
 
-        public override string Title => Check.Description;
-
         public override string LinkData  => InvisibleMessages.DEPRECATION_URL;
         public override string LinkText => Messages.LEARN_MORE;
 

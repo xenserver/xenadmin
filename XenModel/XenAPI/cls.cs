@@ -68,6 +68,10 @@ namespace XenAPI
         /// VDI
         /// </summary>
         VDI,
+        /// <summary>
+        /// Certificate
+        /// </summary>
+        Certificate,
         unknown
     }
 
@@ -101,6 +105,8 @@ namespace XenAPI
                     return "PVS_proxy";
                 case cls.VDI:
                     return "VDI";
+                case cls.Certificate:
+                    return "Certificate";
                 default:
                     return "unknown";
             }

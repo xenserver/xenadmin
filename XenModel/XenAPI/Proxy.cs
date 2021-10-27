@@ -626,6 +626,14 @@ namespace XenAPI
         Response<string []>
         pool_get_repositories(string session, string _pool);
 
+        [XmlRpcMethod("pool.get_client_certificate_auth_enabled")]
+        Response<bool>
+        pool_get_client_certificate_auth_enabled(string session, string _pool);
+
+        [XmlRpcMethod("pool.get_client_certificate_auth_name")]
+        Response<string>
+        pool_get_client_certificate_auth_name(string session, string _pool);
+
         [XmlRpcMethod("pool.set_name_label")]
         Response<string>
         pool_set_name_label(string session, string _pool, string _name_label);
@@ -1145,6 +1153,30 @@ namespace XenAPI
         [XmlRpcMethod("Async.pool.sync_updates")]
         Response<string>
         async_pool_sync_updates(string session, string _pool, bool _force);
+
+        [XmlRpcMethod("pool.check_update_readiness")]
+        Response<string []>
+        pool_check_update_readiness(string session, string _pool, bool _requires_reboot);
+
+        [XmlRpcMethod("Async.pool.check_update_readiness")]
+        Response<string>
+        async_pool_check_update_readiness(string session, string _pool, bool _requires_reboot);
+
+        [XmlRpcMethod("pool.enable_client_certificate_auth")]
+        Response<string>
+        pool_enable_client_certificate_auth(string session, string _pool, string _name);
+
+        [XmlRpcMethod("Async.pool.enable_client_certificate_auth")]
+        Response<string>
+        async_pool_enable_client_certificate_auth(string session, string _pool, string _name);
+
+        [XmlRpcMethod("pool.disable_client_certificate_auth")]
+        Response<string>
+        pool_disable_client_certificate_auth(string session, string _pool);
+
+        [XmlRpcMethod("Async.pool.disable_client_certificate_auth")]
+        Response<string>
+        async_pool_disable_client_certificate_auth(string session, string _pool);
 
         [XmlRpcMethod("pool.get_all")]
         Response<string []>
@@ -3478,6 +3510,10 @@ namespace XenAPI
         Response<string []>
         host_get_pending_guidances(string session, string _host);
 
+        [XmlRpcMethod("host.get_tls_verification_enabled")]
+        Response<bool>
+        host_get_tls_verification_enabled(string session, string _host);
+
         [XmlRpcMethod("host.set_name_label")]
         Response<string>
         host_set_name_label(string session, string _host, string _label);
@@ -3728,7 +3764,15 @@ namespace XenAPI
 
         [XmlRpcMethod("host.evacuate")]
         Response<string>
+        host_evacuate(string session, string _host);
+
+        [XmlRpcMethod("host.evacuate")]
+        Response<string>
         host_evacuate(string session, string _host, string _network);
+
+        [XmlRpcMethod("Async.host.evacuate")]
+        Response<string>
+        async_host_evacuate(string session, string _host);
 
         [XmlRpcMethod("Async.host.evacuate")]
         Response<string>
@@ -3877,6 +3921,14 @@ namespace XenAPI
         [XmlRpcMethod("Async.host.get_server_certificate")]
         Response<string>
         async_host_get_server_certificate(string session, string _host);
+
+        [XmlRpcMethod("host.refresh_server_certificate")]
+        Response<string>
+        host_refresh_server_certificate(string session, string _host);
+
+        [XmlRpcMethod("Async.host.refresh_server_certificate")]
+        Response<string>
+        async_host_refresh_server_certificate(string session, string _host);
 
         [XmlRpcMethod("host.install_server_certificate")]
         Response<string>
@@ -8698,6 +8750,8 @@ namespace XenAPI
         public bool is_psr_pending;
         public bool tls_verification_enabled;
         public string [] repositories;
+        public bool client_certificate_auth_enabled;
+        public string client_certificate_auth_name;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -8986,6 +9040,7 @@ namespace XenAPI
         public string [] certificates;
         public string [] editions;
         public string [] pending_guidances;
+        public bool tls_verification_enabled;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]

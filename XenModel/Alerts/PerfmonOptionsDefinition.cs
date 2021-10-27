@@ -161,7 +161,11 @@ namespace XenAdmin.Alerts
                     return words[0];
                 }
             }
-            catch { }
+            catch
+            {
+                // ignored
+            }
+
             return "";
         }
 
@@ -175,7 +179,11 @@ namespace XenAdmin.Alerts
                     return words[1];
                 }
             }
-            catch { }
+            catch
+            {
+                // ignored
+            }
+
             return "25";
         }
 

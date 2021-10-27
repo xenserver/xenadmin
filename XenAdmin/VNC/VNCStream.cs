@@ -1436,6 +1436,7 @@ namespace DotNetVnc
             }
             catch
             {
+                // ignored
             }
         }
 

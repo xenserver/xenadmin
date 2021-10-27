@@ -1078,6 +1078,26 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enabling metric &quot;{0}&quot;....
+        /// </summary>
+        public static string ACTION_ENABLING_DATASOURCE {
+            get {
+                return ResourceManager.GetString("ACTION_ENABLING_DATASOURCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not enable metric &quot;{0}&quot;.
+        ///
+        ///This could be because the data source is not generating any data. Ensure the prerequisites for collecting this metric are met before attempting to enable it..
+        /// </summary>
+        public static string ACTION_ENABLING_DATASOURCE_ERROR {
+            get {
+                return ResourceManager.GetString("ACTION_ENABLING_DATASOURCE_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enabling live patching for &apos;{0}&apos;.
         /// </summary>
         public static string ACTION_ENABLING_LIVE_PATCHING {
@@ -6151,7 +6171,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to {0}
         ///
-        ///Deleting this bond will automatically transfer the management interface on the bond to the first other member of the bond: 
+        ///Deleting this bond will automatically transfer the management interface on the bond to the first of the bonded members: 
         ///
         ///- {1} connections to the pool will temporarily be disturbed
         ///
@@ -6166,7 +6186,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to {0}
         ///
-        ///Deleting this bond will disrupt traffic through the secondary interface on the bond while the interface is moved to the first other member of the bond..
+        ///Deleting this bond will disrupt traffic through the secondary interface on the bond while the interface is moved to the first of the bonded members..
         /// </summary>
         public static string BOND_DELETE_WILL_DISTURB_SECONDARY {
             get {
@@ -7360,6 +7380,24 @@ namespace XenAdmin {
         public static string CERTIFICATE_VALIDITY_PERIOD_VALUE {
             get {
                 return ResourceManager.GetString("CERTIFICATE_VALIDITY_PERIOD_VALUE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enabled on the pool, but disabled on:.
+        /// </summary>
+        public static string CERTIFICATE_VERIFICATION_HOST_DISABLED_IN_POOL {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_VERIFICATION_HOST_DISABLED_IN_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disabled, but enabled on the pool.
+        /// </summary>
+        public static string CERTIFICATE_VERIFICATION_HOST_DISABLED_STANDALONE {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_VERIFICATION_HOST_DISABLED_STANDALONE", resourceCulture);
             }
         }
         
@@ -9344,6 +9382,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Support for container management has been removed as of {0}. Please uninstall the Container Management supplemental pack because you will no longer be able to use it for managing Docker containers..
+        /// </summary>
+        public static string CONTAINER_MANAGEMENT_REMOVAL_WARNING {
+            get {
+                return ResourceManager.GetString("CONTAINER_MANAGEMENT_REMOVAL_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} on &apos;{1}&apos; {2}.
         /// </summary>
         public static string CONTAINER_ON_VM_TITLE {
@@ -10410,6 +10457,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copying template &apos;{0}&apos;.
+        /// </summary>
+        public static string COPYING_TEMPLATE {
+            get {
+                return ResourceManager.GetString("COPYING_TEMPLATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Copyright © {0} All rights reserved..
         /// </summary>
         public static string COPYRIGHT {
@@ -10682,7 +10738,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Optionally, assign the VMs a &amp;home server in the destination pool:.
+        ///   Looks up a localized string similar to Optionally, assign the VM(s) a &amp;home server in the destination pool:.
         /// </summary>
         public static string CPM_WIZARD_DESTINATION_TABLE_INTRO {
             get {
@@ -10691,11 +10747,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Optionally, assign the VM a &amp;home server in the destination pool:.
+        ///   Looks up a localized string similar to Optionally, assign the template(s) a &amp;home server in the destination pool:.
         /// </summary>
-        public static string CPM_WIZARD_DESTINATION_TABLE_INTRO_SINGLE {
+        public static string CPM_WIZARD_DESTINATION_TABLE_INTRO_TEMPLATES {
             get {
-                return ResourceManager.GetString("CPM_WIZARD_DESTINATION_TABLE_INTRO_SINGLE", resourceCulture);
+                return ResourceManager.GetString("CPM_WIZARD_DESTINATION_TABLE_INTRO_TEMPLATES", resourceCulture);
             }
         }
         
@@ -14212,15 +14268,6 @@ namespace XenAdmin {
         public static string DR_WIZARD_PRECHECKPAGE_OK {
             get {
                 return ResourceManager.GetString("DR_WIZARD_PRECHECKPAGE_OK", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0}: {1}.
-        /// </summary>
-        public static string DR_WIZARD_PRECHECKPAGE_PROBLEM {
-            get {
-                return ResourceManager.GetString("DR_WIZARD_PRECHECKPAGE_PROBLEM", resourceCulture);
             }
         }
         
@@ -18039,20 +18086,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;{0}&apos; Details.
-        /// </summary>
-        public static string GRAPHS_DETAILS_TITLE {
-            get {
-                return ResourceManager.GetString("GRAPHS_DETAILS_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Edit Graph....
         /// </summary>
         public static string GRAPHS_EDIT {
             get {
                 return ResourceManager.GetString("GRAPHS_EDIT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit &apos;{0}&apos;.
+        /// </summary>
+        public static string GRAPHS_EDIT_TITLE {
+            get {
+                return ResourceManager.GetString("GRAPHS_EDIT_TITLE", resourceCulture);
             }
         }
         
@@ -23961,15 +24008,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}: {1}.
-        /// </summary>
-        public static string MESSAGE_ALERT_TITLE {
-            get {
-                return ResourceManager.GetString("MESSAGE_ALERT_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Activate Virtual Disk.
         /// </summary>
         public static string MESSAGEBOX_ACTIVATE_VD_TITLE {
@@ -26249,7 +26287,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SMB/CIFS.
+        ///   Looks up a localized string similar to SMB.
         /// </summary>
         public static string NEWSR_CIFS_TYPE_NAME {
             get {
@@ -35736,6 +35774,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0}: {1}.
+        /// </summary>
+        public static string STRING_COLON_SPACE_STRING {
+            get {
+                return ResourceManager.GetString("STRING_COLON_SPACE_STRING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0}, {1}.
         /// </summary>
         public static string STRING_COMMA_SPACE_STRING {
@@ -37584,15 +37631,6 @@ namespace XenAdmin {
         public static string UPDATES_WIZARD_PRECHECK_ERROR {
             get {
                 return ResourceManager.GetString("UPDATES_WIZARD_PRECHECK_ERROR", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0}: {1}.
-        /// </summary>
-        public static string UPDATES_WIZARD_PRECHECK_FAILED {
-            get {
-                return ResourceManager.GetString("UPDATES_WIZARD_PRECHECK_FAILED", resourceCulture);
             }
         }
         
@@ -41544,7 +41582,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An error occurred when attempting to bind report datasources: {0}.
+        ///   Looks up a localized string similar to An error occurred when attempting to bind report data sources: {0}.
         /// </summary>
         public static string WLB_REPORT_BIND_DATASOURCE {
             get {
