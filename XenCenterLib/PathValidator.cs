@@ -88,9 +88,9 @@ namespace XenCenterLib
 				//path contains a character from Path.GetInvalidPathChars()
 				invalidPathMsg = Messages.ILLEGAL_FILE_PATH_ERROR_MESSAGE;
 				return false;
-			}			
+			}
 
-			string[] parts = path.Split(new[] {'\\'});
+			var parts = path.Split('\\');
 
 			if (parts.Length > 0)
 			{

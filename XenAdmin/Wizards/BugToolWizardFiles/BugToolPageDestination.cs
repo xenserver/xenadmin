@@ -208,7 +208,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
 
             if (!PathValidator.IsFileNameValid(name, out string invalidNameMsg))
             {
-                error = string.Join(" ", new[] { Messages.BUGTOOL_PAGE_DESTINATION_INVALID_NAME, invalidNameMsg });
+                error = $"{Messages.BUGTOOL_PAGE_DESTINATION_INVALID_NAME} {invalidNameMsg}";
                 return false;
             }
 
@@ -219,7 +219,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
 
             if (!PathValidator.IsPathValid(path, out string invalidPathMsg))
             {
-                error = string.Join(" ", new[] { Messages.BUGTOOL_PAGE_DESTINATION_INVALID_FOLDER, invalidPathMsg });
+                error = $"{Messages.BUGTOOL_PAGE_DESTINATION_INVALID_FOLDER} {invalidNameMsg}";
                 return false;
             }
 
