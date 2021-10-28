@@ -30,6 +30,7 @@
  */
 
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
@@ -39,6 +40,8 @@ using XenAPI;
 using XenAdmin.Wizards.BugToolWizardFiles;
 using XenAdmin.Dialogs;
 using XenAdmin.Actions;
+using XenAdmin.Network;
+using XenAdmin.Wizards.GenericPages;
 
 namespace XenAdmin.Wizards
 {
@@ -48,6 +51,7 @@ namespace XenAdmin.Wizards
 
         private readonly GenericSelectHostsPage bugToolPageSelectHosts1;
         private readonly BugToolPageSelectCapabilities bugToolPageSelectCapabilities1;
+        private readonly RBACWarningPage rbacWarningPage;
         private readonly BugToolPageRetrieveData bugToolPageRetrieveData;
         private readonly BugToolPageDestination bugToolPageDestination1;
 
@@ -63,6 +67,7 @@ namespace XenAdmin.Wizards
 
             bugToolPageSelectHosts1 = new GenericSelectHostsPage();
             bugToolPageSelectCapabilities1 = new BugToolPageSelectCapabilities();
+            rbacWarningPage = new RBACWarningPage();
             bugToolPageRetrieveData = new BugToolPageRetrieveData();
             bugToolPageDestination1 = new BugToolPageDestination();
 
@@ -133,14 +138,51 @@ namespace XenAdmin.Wizards
         protected override void UpdateWizardContent(XenTabPage senderPage)
         {
             var prevPageType = senderPage.GetType();
-
             if (prevPageType == typeof(GenericSelectHostsPage))
             {
                 bugToolPageRetrieveData.SelectedHosts = bugToolPageSelectHosts1.SelectedHosts;
+
+                var selectedHostsConnections = bugToolPageSelectHosts1.SelectedHosts.Select(host => host.Connection).ToList();
+
+                if (selectedHostsConnections.Any(ConnectionRequiresRBAC))
+                {
+                    ConfigureRbacPage(selectedHostsConnections, SingleHostStatusAction.StaticRBACDependencies, Messages.RBAC_CROSS_POOL_MIGRATE_VM_BLOCKED);
+                    AddAfterPage(bugToolPageSelectHosts1, rbacWarningPage);
+                }
             }
             else if (prevPageType == typeof(BugToolPageSelectCapabilities))
             {
                 bugToolPageRetrieveData.CapabilityList = bugToolPageSelectCapabilities1.Capabilities;
+                
+            }
+        }
+
+        private static bool ConnectionRequiresRBAC(IXenConnection connection)
+        {
+            if (connection == null)
+                throw new NullReferenceException("RBAC check was given a null connection");
+
+            if (connection.Session.IsLocalSuperuser)
+                return false;
+
+            return Helpers.GetCoordinator(connection).external_auth_type != Auth.AUTH_TYPE_NONE;
+        }
+
+        private void ConfigureRbacPage(IEnumerable<IXenConnection> connectionsToCheck, RbacMethodList apiMethodsToCheck, string pageMessage)
+        {
+            rbacWarningPage.ClearPermissionChecks();
+            var permissionCheck = new RBACWarningPage.WizardPermissionCheck(pageMessage) { Blocking = true };
+            permissionCheck.AddApiCheckRange(apiMethodsToCheck);
+
+            var connectionsAdded = new List<IXenConnection>();
+
+            foreach (var connection in connectionsToCheck)
+            {
+                if (!connectionsAdded.Contains(connection))
+                {
+                    rbacWarningPage.AddPermissionChecks(connection, permissionCheck);
+                    connectionsAdded.Add(connection);
+                }
             }
         }
 
