@@ -30,8 +30,11 @@
  */
 
 using System.Collections.Generic;
-using XenAPI;
+using System.Linq;
+using XenAdmin.Actions.VMActions;
+using XenAdmin.Core;
 using XenAdmin.Dialogs;
+using XenAPI;
 
 
 namespace XenAdmin.Commands
@@ -54,19 +57,45 @@ namespace XenAdmin.Commands
         {
         }
 
-        public CopyTemplateCommand(IMainWindow mainWindow, VM vm)
-            : base(mainWindow, vm)
-        {
-        }
-
         protected override void RunCore(SelectedItemCollection selection)
         {
-            VM template = (VM)selection[0].XenObject;
+            var template = (VM)selection[0].XenObject;
 
             if (CrossPoolCopyTemplateCommand.CanRun(template, null))
+            {
+                if (!CheckRbacPermissions(template, VMCrossPoolMigrateAction.StaticRBACDependencies, Messages.RBAC_CROSS_POOL_MIGRATE_VM_BLOCKED))
+                {
+                    return;
+                }
                 new CrossPoolCopyTemplateCommand(MainWindowCommandInterface, selection).Run();
+            }
             else
+            {
+                if (!CheckRbacPermissions(template, VMCopyAction.StaticRBACDependencies, Messages.RBAC_INTRA_POOL_COPY_VM_BLOCKED))
+                {
+                    return;
+                }
                 new CopyVMDialog(template).ShowPerXenObject(template, Program.MainWindow);
+            }
+        }
+
+        protected bool CheckRbacPermissions(VM vm, RbacMethodList staticRbacDependencies, string message)
+        {
+            if (vm.Connection.Session.IsLocalSuperuser)
+                return true;
+
+            var currentRoles = vm.Connection.Session.Roles;
+            var validRoles = Role.ValidRoleList(staticRbacDependencies, vm.Connection);
+
+            if (currentRoles.Any(currentRole => validRoles.Contains(currentRole)))
+            {
+                return true;
+            }
+
+            using (var dlg = new ErrorDialog(message))
+                dlg.ShowDialog(Parent);
+
+            return false;
         }
 
         protected override bool CanRunCore(SelectedItemCollection selection)
@@ -86,12 +115,6 @@ namespace XenAdmin.Commands
             return false;
         }
 
-        public override string MenuText
-        {
-            get
-            {
-                return Messages.MAINWINDOW_COPY_TEMPLATE;
-            }
-        }
+        public override string MenuText => Messages.MAINWINDOW_COPY_TEMPLATE;
     }
 }

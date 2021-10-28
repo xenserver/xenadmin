@@ -30,8 +30,11 @@
  */
 
 using System.Collections.Generic;
-using XenAPI;
+using System.Linq;
+using XenAdmin.Actions.VMActions;
+using XenAdmin.Core;
 using XenAdmin.Dialogs;
+using XenAPI;
 
 
 namespace XenAdmin.Commands
@@ -54,19 +57,44 @@ namespace XenAdmin.Commands
         {
         }
 
-        public CopyVMCommand(IMainWindow mainWindow, VM vm)
-            : base(mainWindow, vm)
-        {
-        }
-
         protected override void RunCore(SelectedItemCollection selection)
         {
-            VM vm = (VM)selection[0].XenObject;
+            var vm = (VM)selection[0].XenObject;
 
             if (CrossPoolCopyVMCommand.CanRun(vm, null))
+            {
+                if (!CheckRbacPermissions(vm, VMCrossPoolMigrateAction.StaticRBACDependencies, Messages.RBAC_CROSS_POOL_MIGRATE_VM_BLOCKED))
+                {
+                    return;
+                }
                 new CrossPoolCopyVMCommand(MainWindowCommandInterface, selection).Run();
+            }
             else
+            {
+                if (!CheckRbacPermissions(vm, VMCopyAction.StaticRBACDependencies, Messages.RBAC_INTRA_POOL_COPY_VM_BLOCKED))
+                {
+                    return;
+                }
                 new CopyVMDialog(vm).ShowPerXenObject(vm, Program.MainWindow);
+            }
+        }
+        private bool CheckRbacPermissions(VM vm, RbacMethodList staticRbacDependencies, string message)
+        {
+            if (vm.Connection.Session.IsLocalSuperuser)
+                return true;
+
+            var currentRoles = vm.Connection.Session.Roles;
+            var validRoles = Role.ValidRoleList(staticRbacDependencies, vm.Connection);
+
+            if (currentRoles.Any(currentRole => validRoles.Contains(currentRole)))
+            {
+                return true;
+            }
+
+            using (var dlg = new ErrorDialog(message))
+                dlg.ShowDialog(Parent);
+
+            return false;
         }
 
         protected override bool CanRunCore(SelectedItemCollection selection)
@@ -79,12 +107,6 @@ namespace XenAdmin.Commands
             return vm != null && (CrossPoolCopyVMCommand.CanRun(vm, null) || vm.CanBeCopied());
         }
 
-        public override string MenuText
-        {
-            get
-            {
-                return Messages.MAINWINDOW_COPY_VM;
-            }
-        }
+        public override string MenuText => Messages.MAINWINDOW_COPY_VM;
     }
 }
