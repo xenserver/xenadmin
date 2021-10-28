@@ -144,9 +144,9 @@ namespace XenAdmin.Wizards
 
                 var selectedHostsConnections = bugToolPageSelectHosts1.SelectedHosts.Select(host => host.Connection).ToList();
 
-                if (selectedHostsConnections.Any(ConnectionRequiresRBAC))
+                if (selectedHostsConnections.Any(Helpers.ConnectionRequiresRbac))
                 {
-                    ConfigureRbacPage(selectedHostsConnections, SingleHostStatusAction.StaticRBACDependencies, Messages.RBAC_CROSS_POOL_MIGRATE_VM_BLOCKED);
+                    rbacWarningPage.AddApiMethodsCheck(selectedHostsConnections, SingleHostStatusAction.StaticRBACDependencies, Messages.RBAC_CROSS_POOL_MIGRATE_VM_BLOCKED);
                     AddAfterPage(bugToolPageSelectHosts1, rbacWarningPage);
                 }
             }
@@ -154,35 +154,6 @@ namespace XenAdmin.Wizards
             {
                 bugToolPageRetrieveData.CapabilityList = bugToolPageSelectCapabilities1.Capabilities;
                 
-            }
-        }
-
-        private static bool ConnectionRequiresRBAC(IXenConnection connection)
-        {
-            if (connection == null)
-                throw new NullReferenceException("RBAC check was given a null connection");
-
-            if (connection.Session.IsLocalSuperuser)
-                return false;
-
-            return Helpers.GetCoordinator(connection).external_auth_type != Auth.AUTH_TYPE_NONE;
-        }
-
-        private void ConfigureRbacPage(IEnumerable<IXenConnection> connectionsToCheck, RbacMethodList apiMethodsToCheck, string pageMessage)
-        {
-            rbacWarningPage.ClearPermissionChecks();
-            var permissionCheck = new RBACWarningPage.WizardPermissionCheck(pageMessage) { Blocking = true };
-            permissionCheck.AddApiCheckRange(apiMethodsToCheck);
-
-            var connectionsAdded = new List<IXenConnection>();
-
-            foreach (var connection in connectionsToCheck)
-            {
-                if (!connectionsAdded.Contains(connection))
-                {
-                    rbacWarningPage.AddPermissionChecks(connection, permissionCheck);
-                    connectionsAdded.Add(connection);
-                }
             }
         }
 

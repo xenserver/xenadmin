@@ -1913,5 +1913,16 @@ namespace XenAdmin.Core
         {
             return connection?.Cache.GPU_groups.Any(g => g.PGPUs.Count > 0 && g.supported_VGPU_types.Count != 0) ?? false;
         }
+
+        public static bool ConnectionRequiresRbac(IXenConnection connection)
+        {
+            if (connection?.Session == null)
+                throw new NullReferenceException("RBAC check was given a null connection");
+
+            if (connection.Session.IsLocalSuperuser)
+                return false;
+
+            return GetCoordinator(connection).external_auth_type != Auth.AUTH_TYPE_NONE;
+        }
     }
 }

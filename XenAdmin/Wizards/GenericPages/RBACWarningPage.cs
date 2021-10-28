@@ -38,6 +38,7 @@ using XenAdmin.Network;
 using XenAPI;
 using System.Threading;
 using XenAdmin.Core;
+using IXenConnection = XenAdmin.Network.IXenConnection;
 
 
 namespace XenAdmin.Wizards.GenericPages
@@ -70,6 +71,46 @@ namespace XenAdmin.Wizards.GenericPages
         
         public override string PageTitle { get { return Messages.RBAC_WARNING_PAGE_TEXT_TITLE; } }
 
+        #region AddApiMethodsCheck and overloads
+        /// <summary>
+        /// Add one check of all xapi methods for each of the given connections. Defaults to blocking checks.
+        /// </summary>
+        public void AddApiMethodsCheck(IEnumerable<IXenConnection> connectionsToCheck, RbacMethodList apiMethodsToCheck, string warningMessage, bool blocking = true)
+        {
+            ClearPermissionChecks();
+            var permissionCheck = new WizardPermissionCheck(warningMessage) { Blocking = blocking };
+            permissionCheck.AddApiCheckRange(apiMethodsToCheck);
+
+            var connectionsAdded = new List<IXenConnection>();
+
+            // only add connections once
+            foreach (var connection in connectionsToCheck)
+            {
+                if (!connectionsAdded.Contains(connection))
+                {
+                    AddPermissionChecks(connection, permissionCheck);
+                    connectionsAdded.Add(connection);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Add one check of all xapi methods for the given connection. Defaults to blocking checks.
+        /// </summary>
+        public void AddApiMethodsCheck(IXenConnection connectionToCheck, RbacMethodList apiMethodsToCheck, string warningMessage, bool blocking = true)
+        {
+            AddApiMethodsCheck(new List<IXenConnection> { connectionToCheck }, apiMethodsToCheck, warningMessage, blocking);
+        }
+
+        /// <summary>
+        /// Add one check of the xapi method for the given connection. Defaults to blocking checks.
+        /// </summary>
+        public void AddApiMethodsCheck(IXenConnection connectionToCheck, string apiMethodToCheck, string warningMessage, bool blocking = true)
+        {
+            AddApiMethodsCheck(new List<IXenConnection> { connectionToCheck }, new RbacMethodList(apiMethodToCheck), warningMessage, blocking);
+        }
+        #endregion
+
         public void AddPermissionChecks(IXenConnection connection, params WizardPermissionCheck[] permissionChecks)
         {
             if (!checksPerConnectionDict.ContainsKey(connection))
@@ -80,7 +121,7 @@ namespace XenAdmin.Wizards.GenericPages
             checksPerConnectionDict[connection].AddRange(permissionChecks);
         }
 
-		public void ClearPermissionChecks()
+        public void ClearPermissionChecks()
 		{
             DeregisterConnectionEvents();
             checksPerConnectionDict.Clear();
@@ -229,8 +270,8 @@ namespace XenAdmin.Wizards.GenericPages
 
             foreach (WizardPermissionCheck wizardPermissionCheck in errors)
             {
-                // the string is a format string that needs to take the current role (we use the subject they were authorised under which could be a group or user)
-                string description = String.Format(wizardPermissionCheck.WarningMessage, roleList[0].FriendlyName());
+                // the string is a format string that needs to take the current role (we use the subject they were authorized under which could be a group or user)
+                var description = string.Format(wizardPermissionCheck.WarningMessage, roleList[0].FriendlyName());
                 AddDetailsRow(description, PermissionCheckResult.Failed);
             }
 

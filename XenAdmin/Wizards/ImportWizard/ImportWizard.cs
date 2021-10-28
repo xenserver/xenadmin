@@ -401,9 +401,9 @@ namespace XenAdmin.Wizards.ImportWizard
 
         private void ConfigureRbacPage(IXenConnection selectedConnection)
         {
-            if (selectedConnection == null || selectedConnection.Session == null || selectedConnection.Session.IsLocalSuperuser ||
-                Helpers.GetCoordinator(selectedConnection).external_auth_type == Auth.AUTH_TYPE_NONE)
+            if(!Helpers.ConnectionRequiresRbac(selectedConnection)){
                 return;
+            }
 
 			m_pageRbac.ClearPermissionChecks();
 			m_ignoreAffinitySet = false;

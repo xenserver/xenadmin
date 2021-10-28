@@ -354,9 +354,9 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                 m_pageStorage.TargetConnection = TargetConnection;
                 m_pageNetwork.TargetConnection = TargetConnection;
 
-                if (ConnectionRequiresRBAC(xenConnection) || ConnectionRequiresRBAC(TargetConnection))
+                if (Helpers.ConnectionRequiresRbac(xenConnection) || Helpers.ConnectionRequiresRbac(TargetConnection))
                 {
-                    ConfigureRbacPage(new List<IXenConnection> { xenConnection, TargetConnection },
+                    m_pageTargetRbac.AddApiMethodsCheck(new List<IXenConnection> { xenConnection, TargetConnection },
                         VMCrossPoolMigrateAction.StaticRBACDependencies,
                         Messages.RBAC_CROSS_POOL_MIGRATE_VM_BLOCKED);
                     AddAfterPage(m_pageDestination, m_pageTargetRbac);
@@ -401,9 +401,9 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                 {
                     RemovePagesFrom(1);
                     AddAfterPage(m_pageCopyMode, m_pageIntraPoolCopy);
-                    if (ConnectionRequiresRBAC(xenConnection))
+                    if (Helpers.ConnectionRequiresRbac(xenConnection))
                     {
-                        ConfigureRbacPage(new List<IXenConnection> { xenConnection },
+                        m_pageTargetRbac.AddApiMethodsCheck(xenConnection,
                             VMCopyAction.StaticRBACDependencies,
                             Messages.RBAC_INTRA_POOL_COPY_VM_BLOCKED);
                         AddAfterPage(m_pageCopyMode, m_pageTargetRbac);
@@ -413,9 +413,9 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                 {
                     RemovePagesFrom(1);
                     AddAfterPage(m_pageCopyMode, m_pageDestination, m_pageStorage, m_pageFinish);
-                    if (ConnectionRequiresRBAC(xenConnection))
+                    if (Helpers.ConnectionRequiresRbac(xenConnection))
                     {
-                        ConfigureRbacPage(new List<IXenConnection> { xenConnection },
+                        m_pageTargetRbac.AddApiMethodsCheck(xenConnection,
                             VMCloneAction.StaticRBACDependencies,
                             Messages.RBAC_CROSS_POOL_CLONE_VM_BLOCKED);
                         AddAfterPage(m_pageCopyMode, m_pageTargetRbac);
@@ -438,37 +438,6 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         {
             return FormatHelpId(CurrentStepTabPage.HelpID);
         }
-
-        private bool ConnectionRequiresRBAC(IXenConnection connection)
-        {
-            if (connection == null)
-                throw new NullReferenceException("RBAC check was given a null connection");
-
-            if (connection.Session.IsLocalSuperuser)
-                return false;
-
-            return Helpers.GetCoordinator(connection).external_auth_type != Auth.AUTH_TYPE_NONE;
-        }
-
-
-        private void ConfigureRbacPage(IEnumerable<IXenConnection> connectionsToCheck, RbacMethodList apiMethodsToCheck, string pageMessage)
-        {
-            m_pageTargetRbac.ClearPermissionChecks();
-            var permissionCheck = new RBACWarningPage.WizardPermissionCheck(pageMessage) { Blocking = true };
-            permissionCheck.AddApiCheckRange(apiMethodsToCheck);
-
-            var connectionsAdded = new List<IXenConnection>();
-
-            foreach (var connection in connectionsToCheck)
-            {
-                if (!connectionsAdded.Contains(connection))
-                {
-                    m_pageTargetRbac.AddPermissionChecks(connection, permissionCheck);
-                    connectionsAdded.Add(connection);
-                }
-            }
-        }
-
 
         private IEnumerable<SummaryDetails> GetVMMappingSummary()
         {

@@ -65,15 +65,13 @@ namespace XenAdmin.Wizards
             xenTabPageHaFinish = new HAFinishPage();
 
             this.pool = pool;
-            _rbacNeeded = !pool.Connection.Session.IsLocalSuperuser &&
-                          Helpers.GetCoordinator(pool.Connection).external_auth_type != Auth.AUTH_TYPE_NONE;
+            _rbacNeeded = Helpers.ConnectionRequiresRbac(pool.Connection);
 
             AddPage(xenTabPageIntro);
 
             if (_rbacNeeded)
             {
-                var check = new RBACWarningPage.WizardPermissionCheck(Messages.RBAC_HA_ENABLE_WARNING) {Blocking = true};
-                check.AddApiCheckRange(
+                var methodsToCheck = new RbacMethodList(
                     "vm.set_ha_restart_priority",
                     "vm.set_order",
                     "vm.set_start_delay",
@@ -81,10 +79,8 @@ namespace XenAdmin.Wizards
                     "pool.ha_compute_hypothetical_max_host_failures_to_tolerate",
                     "pool.set_ha_host_failures_to_tolerate",
                     "pool.enable_ha",
-                    "sr.assert_can_host_ha_statefile"
-                );
-                
-                m_pageRbac.AddPermissionChecks(xenConnection, check);
+                    "sr.assert_can_host_ha_statefile");
+                m_pageRbac.AddApiMethodsCheck(xenConnection, methodsToCheck, Messages.RBAC_HA_ENABLE_WARNING);
                 AddPage(m_pageRbac);
             }
 

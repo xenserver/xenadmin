@@ -88,13 +88,8 @@ namespace XenAdmin.Wizards.NewVMWizard
             page_CloudConfigParameters = new Page_CloudConfigParameters();
 
             #region RBAC Warning Page Checks
-            if (connection.Session.IsLocalSuperuser || Helpers.GetCoordinator(connection).external_auth_type == Auth.AUTH_TYPE_NONE)
+            if (Helpers.ConnectionRequiresRbac(connection))
             {
-                //page_RbacWarning.DisableStep = true;
-            }
-            else
-            {
-                // Check to see if they can even create a VM
                 var createCheck = new RBACWarningPage.WizardPermissionCheck(Messages.RBAC_WARNING_VM_WIZARD_BLOCK);
                 foreach (RbacMethod method in CreateVMAction.StaticRBACDependencies)
                     createCheck.AddApiCheck(method);
@@ -103,7 +98,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                 // Check to see if they can set memory values
                 var memCheck = new RBACWarningPage.WizardPermissionCheck(Messages.RBAC_WARNING_VM_WIZARD_MEM);
                 memCheck.AddApiCheck("vm.set_memory_limits");
-                memCheck.WarningAction = new RBACWarningPage.PermissionCheckActionDelegate(delegate()
+                memCheck.WarningAction = new RBACWarningPage.PermissionCheckActionDelegate(delegate ()
                 {
                     // no point letting them continue
                     page_5_CpuMem.DisableMemoryControls();
@@ -113,7 +108,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                 // Check to see if they can set the VM's affinity
                 var affinityCheck = new RBACWarningPage.WizardPermissionCheck(Messages.RBAC_WARNING_VM_WIZARD_AFFINITY);
                 affinityCheck.ApiCallsToCheck.Add("vm.set_affinity");
-                affinityCheck.WarningAction = new RBACWarningPage.PermissionCheckActionDelegate(delegate()
+                affinityCheck.WarningAction = new RBACWarningPage.PermissionCheckActionDelegate(delegate ()
                 {
                     page_4_HomeServer.DisableStep = true;
                     BlockAffinitySelection = true;
