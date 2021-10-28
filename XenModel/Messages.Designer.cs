@@ -31861,6 +31861,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Current access levels do not allow download of system status report. Log in as a different user with sufficient privileges on the source host and try again..
+        /// </summary>
+        public static string RBAC_GET_SYSTEM_STATUS_BLOCKED {
+            get {
+                return ResourceManager.GetString("RBAC_GET_SYSTEM_STATUS_BLOCKED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Your current role is &apos;{1}&apos;.
         ///
         ///To configure HA settings, switch to an account with one of the following roles: 

@@ -14731,4 +14731,7 @@ Any disk in your VM's DVD drive will be ejected when installing {1}.</value>
   <data name="RBAC_INTRA_POOL_COPY_VM_BLOCKED" xml:space="preserve">
     <value>Current access levels do not allow copying of VMs. Log in as a different user with sufficient privileges on the host and try again.</value>
   </data>
+  <data name="RBAC_GET_SYSTEM_STATUS_BLOCKED" xml:space="preserve">
+    <value>Current access levels do not allow download of system status report. Log in as a different user with sufficient privileges on the source host and try again.</value>
+  </data>
 </root>

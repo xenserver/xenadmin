@@ -146,7 +146,7 @@ namespace XenAdmin.Wizards
 
                 if (selectedHostsConnections.Any(Helpers.ConnectionRequiresRbac))
                 {
-                    rbacWarningPage.AddApiMethodsCheck(selectedHostsConnections, SingleHostStatusAction.StaticRBACDependencies, Messages.RBAC_CROSS_POOL_MIGRATE_VM_BLOCKED);
+                    rbacWarningPage.AddApiMethodsCheck(selectedHostsConnections, SingleHostStatusAction.StaticRBACDependencies, Messages.RBAC_GET_SYSTEM_STATUS_BLOCKED);
                     AddAfterPage(bugToolPageSelectHosts1, rbacWarningPage);
                 }
             }
