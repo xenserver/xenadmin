@@ -121,10 +121,12 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                 if (host != null && selectedObjects.Contains(host))
                     node.State = CheckState.Checked;
             }
+
+            var checkedItems = HostListTreeView.CheckedItems();
             //focus on first checked item so the user can find it in a long list
-            if (HostListTreeView.CheckedItems().Count > 0)
+            if (checkedItems.Count > 0)
             {
-                HostListTreeView.SelectedItems.Add(HostListTreeView.CheckedItems().First());
+                HostListTreeView.SelectedItems.Add(checkedItems.First());
             }
 
             HostListTreeView.EndUpdate();

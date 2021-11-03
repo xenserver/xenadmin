@@ -622,7 +622,7 @@ namespace XenAdmin.Wizards.DRWizards
         {
             row = null;
             var srRows = dataGridViewSRs.Rows.Cast<SrRow>().Where(srRow => srRow.SrUuid == uuid).ToList();
-            if (srRows.Count <= 0)
+            if (srRows.Count == 0)
                 return false;
 
             row = srRows.First();

@@ -111,7 +111,7 @@ namespace XenAdmin.ServerDBs.FakeAPI
             var metrics_ref = (string)proxy.db.GetValue("host", opaque_ref, "metrics");
             proxy.EditObject_(DbProxy.EditTypes.Replace, "host_metrics", metrics_ref, "live", false);
 
-            var coordinator_ref = "";
+            var coordinator_ref = string.Empty;
             var pools = proxy.db.Tables["pool"].Rows.Keys;
             if (pools.Count > 0)
             {
