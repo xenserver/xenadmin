@@ -57,6 +57,7 @@ namespace XenAdmin.Wizards.GenericPages
 		{
 			public string SysId { get; set; }
 			public string NetworkId { get; set; }
+            public string MACAddress { get; set; }
 		}
 
         protected SelectMultipleVMNetworkPage()
@@ -172,7 +173,7 @@ namespace XenAdmin.Wizards.GenericPages
 
                 var cellSourceNetwork = new DataGridViewTextBoxCell
                 {
-                    Tag = new NetworkDetail {SysId = sysId, NetworkId = networkResource.NetworkID},
+                    Tag = new NetworkDetail {SysId = sysId, NetworkId = networkResource.NetworkID, MACAddress = networkResource.MACAddress},
                     Value = val
                 };
 
@@ -229,10 +230,13 @@ namespace XenAdmin.Wizards.GenericPages
 					if (m_vmMappings.ContainsKey(networkDetail.SysId))
 					{
 						var mapping = m_vmMappings[networkDetail.SysId];
-						var selectedItem = row.Cells[1].Value as ToStringWrapper<XenAPI.Network>;
 
-					    if (selectedItem != null)
-							mapping.Networks[networkDetail.NetworkId] = selectedItem.item;
+                        if (row.Cells[1].Value is ToStringWrapper<XenAPI.Network> selectedItem)
+                        {
+                            mapping.Networks[networkDetail.NetworkId] = selectedItem.item;
+                            mapping.VIFs[networkDetail.MACAddress] = selectedItem.item;
+                        }
+							
 					}
 				}
 

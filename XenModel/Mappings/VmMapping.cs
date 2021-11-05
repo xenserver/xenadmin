@@ -41,7 +41,8 @@ namespace XenAdmin.Mappings
 			Storage = new Dictionary<string, SR>();
             StorageToAttach = new Dictionary<string, VDI>();
 			Networks = new Dictionary<string, XenAPI.Network>();
-		}
+            VIFs = new Dictionary<string, XenAPI.Network>();
+        }
 
 		public string VmNameLabel { get; set; }
         public ulong Capacity { get; set; }
@@ -71,6 +72,7 @@ namespace XenAdmin.Mappings
 		/// Keyed on the id in the ovf file
 		/// </summary>
 		public Dictionary<string, XenAPI.Network> Networks { get; set; }
+        public Dictionary<string, XenAPI.Network> VIFs { get; set; }
 
         public override bool Equals(object obj)
         {
