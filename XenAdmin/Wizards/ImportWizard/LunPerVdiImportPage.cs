@@ -99,7 +99,7 @@ namespace XenAdmin.Wizards.ImportWizard
             }
         }
 
-        public EnvelopeType SelectedOvfEnvelope { get; set; }
+        public EnvelopeType SelectedOvfEnvelope { private get; set; }
 
         private StorageResourceContainer ResourceData(string sysId)
         {

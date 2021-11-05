@@ -32,18 +32,18 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using XenAdmin.Actions;
 using XenAdmin.Actions.OvfActions;
+using XenAdmin.Actions.VMActions;
+using XenAdmin.Commands;
 using XenAdmin.Controls;
 using XenAdmin.Core;
 using XenAdmin.Mappings;
 using XenAdmin.Network;
 using XenAdmin.Wizards.GenericPages;
 using XenAPI;
-using System.Linq;
-using XenAdmin.Actions.VMActions;
-using XenAdmin.Commands;
 using XenOvf;
 using XenOvf.Definitions;
 using XenOvf.Utilities;
@@ -78,7 +78,10 @@ namespace XenAdmin.Wizards.ImportWizard
         private ImportType? m_typeOfImport;
         private bool m_ignoreAffinitySet;
         private EnvelopeType m_envelopeFromVhd;
-        private IXenConnection TargetConnection { get; set; }
+        private Package _selectedOvfPackage;
+        private string _selectedImagePath;
+        private Host _selectedAffinity;
+        private IXenConnection _targetConnection;
         #endregion
 
         public ImportWizard(IXenConnection con, IXenObject xenObject, string filename, bool ovfModeOnly = false)
@@ -128,7 +131,7 @@ namespace XenAdmin.Wizards.ImportWizard
                         m_pageXvaStorage.ImportXvaAction.EndWizard(m_pageFinish.StartVmsAutomatically, m_pageXvaNetwork.VIFs);
                     break;
                 case ImportType.Ovf:
-                    new ImportApplianceAction(TargetConnection,
+                    new ImportApplianceAction(_targetConnection,
                         m_pageImportSource.SelectedOvfPackage,
                         m_vmMappings,
                         m_pageSecurity.VerifyManifest,
@@ -139,7 +142,7 @@ namespace XenAdmin.Wizards.ImportWizard
                         m_pageFinish.StartVmsAutomatically).RunAsync();
                     break;
                 case ImportType.Vhd:
-                    new ImportImageAction(TargetConnection,
+                    new ImportImageAction(_targetConnection,
                         m_envelopeFromVhd,
                         Path.GetDirectoryName(m_pageImportSource.FilePath),
                         m_vmMappings,
@@ -171,17 +174,15 @@ namespace XenAdmin.Wizards.ImportWizard
         protected override void UpdateWizardContent(XenTabPage page)
         {
             var type = page.GetType();
-            var oldTypeOfImport = m_typeOfImport; //store previous type
 
             if (type == typeof(ImportSourcePage))
             {
-                #region ImportSourcePage
-
+                var oldTypeOfImport = m_typeOfImport; //store previous type
                 m_typeOfImport = m_pageImportSource.TypeOfImport;
+
                 var appliancePages = new XenTabPage[] { m_pageEula, m_pageHost, m_pageStorage, m_pageNetwork, m_pageSecurity, m_pageOptions };
                 var imagePages = new XenTabPage[] { m_pageVMconfig, m_pageHost, m_pageStorage, m_pageNetwork, m_pageOptions };
                 var xvaPages = new XenTabPage[] { m_pageXvaHost, m_pageXvaStorage, m_pageXvaNetwork };
-                var newVmMappings = m_vmMappings;
 
                 switch (m_typeOfImport)
                 {
@@ -195,29 +196,27 @@ namespace XenAdmin.Wizards.ImportWizard
                             RemovePages(xvaPages);
                             AddAfterPage(m_pageImportSource, appliancePages);
                         }
-                        var newSelectedOvfPackage = m_pageImportSource.SelectedOvfPackage;
-                        var newSelectedOvfEnvelope = newSelectedOvfPackage.OvfEnvelope;
 
-                        if (oldTypeOfImport != ImportType.Ovf
-                            || m_pageSecurity.SelectedOvfPackage != newSelectedOvfPackage
-                            || m_pageEula.SelectedOvfEnvelope != newSelectedOvfEnvelope
-                            || m_pageHost.SelectedOvfEnvelope != newSelectedOvfEnvelope
-                            || m_pageHost.VmMappings != newVmMappings
-                            || m_pageStorage.SelectedOvfEnvelope != newSelectedOvfEnvelope
-                            || lunPerVdiMappingPage.SelectedOvfEnvelope != newSelectedOvfEnvelope
-                            || m_pageHost.SelectedOvfEnvelope != newSelectedOvfEnvelope)
+                        var oldSelectedOvfPackage = _selectedOvfPackage;
+                        _selectedOvfPackage = m_pageImportSource.SelectedOvfPackage;
+
+                        if (oldTypeOfImport != ImportType.Ovf || oldSelectedOvfPackage != _selectedOvfPackage)
                         {
-                            m_pageEula.SelectedOvfEnvelope = newSelectedOvfEnvelope;
-                            m_pageSecurity.SelectedOvfPackage = newSelectedOvfPackage;
-
+                            m_pageEula.SelectedOvfEnvelope = _selectedOvfPackage.OvfEnvelope;
+                            m_pageSecurity.SelectedOvfPackage = _selectedOvfPackage;
                             CheckDisabledPages(m_pageEula, m_pageSecurity); //decide whether to disable these progress steps
-                            ResetVmMappings(newSelectedOvfEnvelope);
-                            m_pageHost.SelectedOvfEnvelope = newSelectedOvfEnvelope;
+                            
+                            m_vmMappings.Clear();
+                            string[] sysIds = OVF.FindSystemIds(_selectedOvfPackage.OvfEnvelope);
+                            foreach (string sysId in sysIds)
+                                m_vmMappings.Add(sysId, new VmMapping {VmNameLabel = FindVMName(_selectedOvfPackage.OvfEnvelope, sysId)});
+
+                            m_pageHost.SelectedOvfEnvelope = _selectedOvfPackage.OvfEnvelope;
                             m_pageHost.SetDefaultTarget(m_pageHost.ChosenItem ?? m_selectedObject);
-                            m_pageHost.VmMappings = newVmMappings;
-                            m_pageStorage.SelectedOvfEnvelope = newSelectedOvfEnvelope;
-                            lunPerVdiMappingPage.SelectedOvfEnvelope = newSelectedOvfEnvelope;
-                            m_pageNetwork.SelectedOvfEnvelope = newSelectedOvfEnvelope;
+                            m_pageHost.VmMappings = m_vmMappings;
+                            m_pageStorage.SelectedOvfEnvelope = _selectedOvfPackage.OvfEnvelope;
+                            lunPerVdiMappingPage.SelectedOvfEnvelope = _selectedOvfPackage.OvfEnvelope;
+                            m_pageNetwork.SelectedOvfEnvelope = _selectedOvfPackage.OvfEnvelope;
 
                             NotifyNextPagesOfChange(m_pageEula, m_pageHost, m_pageStorage, m_pageNetwork, m_pageSecurity, m_pageOptions);
                         }
@@ -230,19 +229,19 @@ namespace XenAdmin.Wizards.ImportWizard
                             RemovePages(appliancePages);
                             RemovePages(xvaPages);
                             AddAfterPage(m_pageImportSource, imagePages);
+
+                            //if _targetConnection=null, i.e. we haven't selected a connection yet, do not add the page
+                            if (_targetConnection != null && BootModesControl.ShowBootModeOptions(_targetConnection))
+                                AddAfterPage(m_pageNetwork, m_pageBootOptions);
                         }
 
-                        var newIsWim = m_pageImportSource.IsWIM;
+                        var oldSelectedImagePath = _selectedImagePath;
+                        _selectedImagePath = m_pageImportSource.FilePath;
 
-                        if (oldTypeOfImport != ImportType.Vhd
-                            || m_pageVMconfig.IsWim != newIsWim
-                            || m_pageHost.VmMappings != newVmMappings
-                            || m_pageHost.SelectedOvfEnvelope != null)
+                        if (oldTypeOfImport != ImportType.Vhd || oldSelectedImagePath != _selectedImagePath)
                         {
-                            m_pageVMconfig.IsWim = newIsWim;
-                            m_pageHost.SetDefaultTarget(m_pageHost.ChosenItem ?? m_selectedObject);
-                            m_pageHost.SelectedOvfEnvelope = null;
-                            m_pageHost.VmMappings = newVmMappings;
+                            m_vmMappings.Clear();
+                            m_pageVMconfig.IsWim = m_pageImportSource.IsWIM;
                             NotifyNextPagesOfChange(m_pageVMconfig, m_pageHost, m_pageStorage, m_pageNetwork, m_pageOptions);
                         }
                         break;
@@ -260,60 +259,107 @@ namespace XenAdmin.Wizards.ImportWizard
                         m_pageXvaStorage.FilePath = m_pageImportSource.FilePath;
                         break;
                 }
-
-                #endregion
             }
             else if (type == typeof(ImageVMConfigPage))
             {
-                //then use it to create an ovf for the import
-
-                 var newEnvelope = OVF.CreateOvfEnvelope(m_pageVMconfig.VmName,
-                    m_pageVMconfig.CpuCount, m_pageVMconfig.Memory,
-                    m_pageBootOptions.BootParams, m_pageBootOptions.PlatformSettings,
-                    m_pageImportSource.DiskCapacity, m_pageImportSource.IsWIM, m_pageVMconfig.AdditionalSpace,
-                    m_pageImportSource.FilePath, m_pageImportSource.ImageLength, BrandManager.ProductBrand);
-
-                if (newEnvelope != m_envelopeFromVhd)
+                var newMapping = new VmMapping
                 {
-                    ResetVmMappings(m_envelopeFromVhd);
-                    NotifyNextPagesOfChange(m_pageHost, m_pageStorage, m_pageNetwork);
+                    VmNameLabel = m_pageVMconfig.VmName,
+                    CpuCount = m_pageVMconfig.CpuCount,
+                    Capacity = m_pageImportSource.DiskCapacity + m_pageVMconfig.AdditionalSpace,
+                    Memory = m_pageVMconfig.Memory,
+                    BootParams = m_pageBootOptions.BootParams,
+                    PlatformSettings = m_pageBootOptions.PlatformSettings
+                };
+
+                var oldMapping = m_vmMappings.Values.FirstOrDefault();
+                if (oldMapping != null)
+                {
+                    newMapping.XenRef = oldMapping.XenRef;
+                    newMapping.TargetName = oldMapping.TargetName;
+                    newMapping.Storage = oldMapping.Storage;
+                    newMapping.StorageToAttach = oldMapping.StorageToAttach;
+                    newMapping.Networks = oldMapping.Networks;
                 }
 
-                m_envelopeFromVhd = newEnvelope;
-                m_pageStorage.SelectedOvfEnvelope = m_envelopeFromVhd;
-                lunPerVdiMappingPage.SelectedOvfEnvelope = m_envelopeFromVhd;
-                m_pageNetwork.SelectedOvfEnvelope = m_envelopeFromVhd;
+                if (!newMapping.Equals(oldMapping))
+                {
+                    m_envelopeFromVhd = OVF.CreateOvfEnvelope(newMapping.VmNameLabel,
+                        newMapping.CpuCount, newMapping.Memory,
+                        newMapping.BootParams, newMapping.PlatformSettings,
+                        newMapping.Capacity,
+                        m_pageImportSource.FilePath, m_pageImportSource.ImageLength, BrandManager.ProductBrand);
+
+                    m_vmMappings.Clear();
+                    var sysId = OVF.FindSystemIds(m_envelopeFromVhd).First();
+                    m_vmMappings.Add(sysId, newMapping);
+
+                    m_pageHost.VmMappings = m_vmMappings;
+                    m_pageHost.SetDefaultTarget(m_pageHost.ChosenItem ?? m_selectedObject);
+
+                    m_pageHost.SelectedOvfEnvelope = m_envelopeFromVhd;
+                    m_pageStorage.SelectedOvfEnvelope = m_envelopeFromVhd;
+                    lunPerVdiMappingPage.SelectedOvfEnvelope = m_envelopeFromVhd;
+                    m_pageNetwork.SelectedOvfEnvelope = m_envelopeFromVhd;
+
+                    NotifyNextPagesOfChange(m_pageHost, lunPerVdiMappingPage, m_pageStorage, m_pageNetwork);
+                }
             }
             else if (type == typeof(ImportSelectHostPage))
             {
-			    var newConnection = m_pageHost.ChosenItem?.Connection;
-                var newMappings = m_pageHost.VmMappings;
+                var oldTargetConnection = _targetConnection;
+                _targetConnection = m_pageHost.ChosenItem?.Connection;
+                var oldVmMappings = m_vmMappings;
+                m_vmMappings = m_pageHost.VmMappings;
 
-                RemovePage(m_pageRbac);
-                ConfigureRbacPage(TargetConnection);
+                if (oldTargetConnection != _targetConnection)
+                {
+                    RemovePage(m_pageRbac);
+                    ConfigureRbacPage(_targetConnection);
 
-				if (m_pageStorage.VmMappings != newMappings
-					|| m_pageNetwork.Connection != newConnection
-					|| m_pageOptions.Connection != newConnection)
+                    RemovePage(m_pageBootOptions);
+                    if (m_typeOfImport == ImportType.Vhd && BootModesControl.ShowBootModeOptions(_targetConnection))
+                        AddAfterPage(m_pageNetwork, m_pageBootOptions);
+                }
+
+                m_pageStorage.VmMappings = m_vmMappings;
+                m_pageStorage.Connection = _targetConnection;
+                m_pageNetwork.Connection = _targetConnection;
+                m_pageOptions.Connection = _targetConnection;
+                m_pageBootOptions.Connection = _targetConnection;
+
+                if (oldTargetConnection != _targetConnection || oldVmMappings != m_vmMappings)
                     NotifyNextPagesOfChange(m_pageStorage, m_pageNetwork, m_pageOptions);
+            }
+            else if (type == typeof(ImportBootOptionPage))
+            {
+                var oldMapping = m_vmMappings.Values.First();
 
-                if (m_pageBootOptions.Connection != newConnection && m_typeOfImport != oldTypeOfImport)
+                if (oldMapping.BootParams != m_pageBootOptions.BootParams ||
+                    oldMapping.PlatformSettings != m_pageBootOptions.PlatformSettings)
                 {
-                RemovePage(m_pageBootOptions);
-                if (m_typeOfImport == ImportType.Vhd && BootModesControl.ShowBootModeOptions(TargetConnection))
-                {
-                    AddAfterPage(m_pageNetwork, m_pageBootOptions);
-                }
+                    string systemId = null;
+                    if (m_envelopeFromVhd.Item is VirtualSystem_Type vs)
+                        systemId = vs.id;
+                    else if (m_envelopeFromVhd.Item is VirtualSystemCollection_Type vsc)
+                        systemId = vsc.Content.FirstOrDefault()?.id;
+
+                    if (oldMapping.BootParams != m_pageBootOptions.BootParams)
+                    {
+                        m_envelopeFromVhd = OVF.UpdateBootParams(m_envelopeFromVhd, systemId, m_pageBootOptions.BootParams);
+                        m_vmMappings.Values.First().BootParams = m_pageBootOptions.BootParams;
+                    }
+
+                    if (oldMapping.PlatformSettings != m_pageBootOptions.PlatformSettings)
+                    {
+                        m_envelopeFromVhd = OVF.UpdatePlatform(m_envelopeFromVhd, systemId, m_pageBootOptions.PlatformSettings);
+                        m_vmMappings.Values.First().PlatformSettings = m_pageBootOptions.PlatformSettings;
+                    }
                 }
 
-				m_vmMappings = newMappings;
-                TargetConnection = newConnection;
-
-				m_pageStorage.VmMappings = m_vmMappings;
-                m_pageStorage.Connection = TargetConnection;
-                m_pageNetwork.Connection = TargetConnection;
-                m_pageOptions.Connection = TargetConnection;
-                m_pageBootOptions.Connection = TargetConnection;
+                m_pageStorage.SelectedOvfEnvelope = m_envelopeFromVhd;
+                lunPerVdiMappingPage.SelectedOvfEnvelope = m_envelopeFromVhd;
+                m_pageNetwork.SelectedOvfEnvelope = m_envelopeFromVhd;
             }
             else if (type == typeof(ImportSelectStoragePage))
             {
@@ -339,31 +385,31 @@ namespace XenAdmin.Wizards.ImportWizard
             }
             else if (type == typeof(GlobalSelectHost))
             {
-                var newConnection = m_pageXvaHost.SelectedHost == null ? m_pageXvaHost.SelectedConnection : m_pageXvaHost.SelectedHost.Connection;
-                var newStorageTargetHost = m_ignoreAffinitySet ? null : m_pageXvaHost.SelectedHost;
-                var newNetworkSelectedHost = m_pageXvaHost.SelectedHost;
+                var oldSelectedAffinity = _selectedAffinity;
+                _selectedAffinity = m_pageXvaHost.SelectedHost;
+                var oldTargetConnection = _targetConnection;
+                _targetConnection = _selectedAffinity == null ? m_pageXvaHost.SelectedConnection : _selectedAffinity.Connection;
 
-                RemovePage(m_pageRbac);
-                ConfigureRbacPage(newConnection);
+                if (oldTargetConnection != _targetConnection)
+                {
+                    RemovePage(m_pageRbac);
+                    ConfigureRbacPage(_targetConnection);
+                }
 
-                if (m_pageXvaStorage.MTargetConnection != newConnection
-                || m_pageXvaNetwork.MSelectedConnection != newConnection
-                || !m_pageXvaNetwork.MSelectedAffinity.Equals(newNetworkSelectedHost)
-                || !m_pageXvaStorage.MTargetHost.Equals(newStorageTargetHost)
-                )
+                m_pageXvaStorage.TargetConnection = _targetConnection;
+                m_pageXvaStorage.TargetHost = m_ignoreAffinitySet ? null : _selectedAffinity;
+
+                m_pageXvaNetwork.SelectedConnection = _targetConnection;
+                m_pageXvaNetwork.SelectedAffinity = _selectedAffinity;
+
+                if (oldTargetConnection != _targetConnection ||
+                    oldSelectedAffinity != null && _selectedAffinity != null && oldSelectedAffinity.opaque_ref != _selectedAffinity.opaque_ref)
                     NotifyNextPagesOfChange(m_pageXvaStorage, m_pageXvaNetwork);
-
-                m_pageXvaStorage.MTargetConnection = newConnection;
-                m_pageXvaStorage.MTargetHost = newStorageTargetHost;
-
-                m_pageXvaNetwork.MSelectedConnection = newConnection;
-                m_pageXvaNetwork.MSelectedAffinity = m_pageXvaHost.SelectedHost;
-
             }
             else if (type == typeof(StoragePickerPage))
             {
                 m_pageFinish.ShowStartVmsGroupBox = m_pageXvaStorage.ImportedVm != null && !m_pageXvaStorage.ImportedVm.is_a_template;
-                m_pageXvaNetwork.SetVm(m_pageXvaStorage.ImportedVm);
+                m_pageXvaNetwork.VM = m_pageXvaStorage.ImportedVm;
                 NotifyNextPagesOfChange(m_pageXvaNetwork);
             }
 
@@ -567,7 +613,7 @@ namespace XenAdmin.Wizards.ImportWizard
             temp.Add(new Tuple(Messages.FINISH_PAGE_VMNAME, m_pageVMconfig.VmName));
             temp.Add(new Tuple(Messages.FINISH_PAGE_CPUCOUNT, m_pageVMconfig.CpuCount.ToString()));
             temp.Add(new Tuple(Messages.FINISH_PAGE_MEMORY, string.Format(Messages.VAL_MB, m_pageVMconfig.Memory)));
-            if (Helpers.NaplesOrGreater(TargetConnection))
+            if (Helpers.NaplesOrGreater(_targetConnection))
                 temp.Add(new Tuple(Messages.BOOT_MODE, m_pageBootOptions.SelectedBootMode.StringOf()));
 
             if (m_pageImportSource.IsWIM)
@@ -607,23 +653,6 @@ namespace XenAdmin.Wizards.ImportWizard
                 }
             }
             return temp;
-        }
-
-        private void ResetVmMappings(EnvelopeType ovfEnvelope)
-        {
-            string[] sysIds = OVF.FindSystemIds(ovfEnvelope);
-            m_vmMappings.Clear();
-
-            foreach (string sysId in sysIds)
-            {
-                var vmMap = new VmMapping
-                {
-                    VmNameLabel = (m_typeOfImport == ImportType.Ovf)
-                                                    ? FindVMName(ovfEnvelope, sysId)
-                                                      : m_pageVMconfig.VmName //it should only iterate once
-                };
-                m_vmMappings.Add(sysId, vmMap);
-            }
         }
 
         private bool IsGUID(string expression)
@@ -709,15 +738,15 @@ namespace XenAdmin.Wizards.ImportWizard
         private void m_pageXvaStorage_ImportVmCompleted()
         {
             Program.Invoke(this, () =>
-                                     {
-                                         if (CurrentStepTabPage.GetType() == typeof(StoragePickerPage))
-                                         {
-                                             m_pageFinish.ShowStartVmsGroupBox = m_pageXvaStorage.ImportedVm != null && !m_pageXvaStorage.ImportedVm.is_a_template;
-                                             m_pageXvaNetwork.SetVm(m_pageXvaStorage.ImportedVm);
-                                             NotifyNextPagesOfChange(m_pageXvaNetwork);
-                                             NextStep();
-                                         }
-                                     });
+            {
+                if (CurrentStepTabPage.GetType() == typeof(StoragePickerPage))
+                {
+                    m_pageFinish.ShowStartVmsGroupBox = m_pageXvaStorage.ImportedVm != null && !m_pageXvaStorage.ImportedVm.is_a_template;
+                    m_pageXvaNetwork.VM = m_pageXvaStorage.ImportedVm;
+                    NotifyNextPagesOfChange(m_pageXvaNetwork);
+                    NextStep();
+                }
+            });
         }
 
         private void ShowXenAppXenDesktopWarning(IXenConnection connection)

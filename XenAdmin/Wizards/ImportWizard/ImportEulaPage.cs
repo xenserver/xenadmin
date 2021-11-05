@@ -141,7 +141,7 @@ namespace XenAdmin.Wizards.ImportWizard
 
 		#region Accessors
 
-		public EnvelopeType SelectedOvfEnvelope { internal get; set; }
+		public EnvelopeType SelectedOvfEnvelope { private get; set; }
 
 		#endregion
 

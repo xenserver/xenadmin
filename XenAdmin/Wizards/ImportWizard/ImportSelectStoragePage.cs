@@ -56,7 +56,7 @@ namespace XenAdmin.Wizards.ImportWizard
             return true;
         }
 
-        public EnvelopeType SelectedOvfEnvelope { get; set; }
+        public EnvelopeType SelectedOvfEnvelope { private get; set; }
 
         public override StorageResourceContainer ResourceData(string sysId)
         {

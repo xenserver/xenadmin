@@ -85,7 +85,7 @@ namespace XenAdmin.Wizards.ImportWizard
             return false;
         }
 
-        public EnvelopeType SelectedOvfEnvelope { get; set; }
+        public EnvelopeType SelectedOvfEnvelope { private get; set; }
 
         protected override string IntroductionText => Messages.IMPORT_WIZARD_NETWORKING_INTRO;
 
