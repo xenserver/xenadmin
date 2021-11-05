@@ -81,7 +81,7 @@ namespace XenAdmin.Wizards.ImportWizard
         private IXenConnection TargetConnection { get; set; }
         #endregion
 
-        public ImportWizard(IXenConnection con, IXenObject xenObject, string filename, bool ovfModeOnly)
+        public ImportWizard(IXenConnection con, IXenObject xenObject, string filename, bool ovfModeOnly = false)
             : base(con)
         {
             InitializeComponent();
