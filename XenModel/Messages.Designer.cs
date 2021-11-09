@@ -3780,6 +3780,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Assigning new roles to subjects &apos;{0}&apos;.
+        /// </summary>
+        public static string AD_ADDING_REMOVING_ROLES_ON_MULTIPLE {
+            get {
+                return ResourceManager.GetString("AD_ADDING_REMOVING_ROLES_ON_MULTIPLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to (Always granted access).
         /// </summary>
         public static string AD_ALWAYS_GRANTED_ACCESS {
@@ -4051,7 +4060,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You are currently logged in as one of the selected users. If you continue you will be logged out of &apos;{0}&apos;.
+        ///   Looks up a localized string similar to You are currently logged in as one of the selected users. If you continue you will be logged out of &apos;{0}&apos;. All other selected users will also be logged out.
         ///
         ///Do you want to continue?.
         /// </summary>
@@ -36317,6 +36326,15 @@ namespace XenAdmin {
         public static string TERMINATING_USER_SESSION {
             get {
                 return ResourceManager.GetString("TERMINATING_USER_SESSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Terminating session for users &apos;{0}&apos;.
+        /// </summary>
+        public static string TERMINATING_USER_SESSION_MULTIPLE {
+            get {
+                return ResourceManager.GetString("TERMINATING_USER_SESSION_MULTIPLE", resourceCulture);
             }
         }
         
