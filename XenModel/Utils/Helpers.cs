@@ -1912,6 +1912,12 @@ namespace XenAdmin.Core
             return connection?.Cache.GPU_groups.Any(g => g.PGPUs.Count > 0 && g.supported_VGPU_types.Count != 0) ?? false;
         }
 
+        public static List<Subject> LoggedInSubjects(IXenConnection connection)
+        {
+            var loggedInSids = connection.Session.get_all_subject_identifiers();
+            return connection.Cache.Subjects.Where(sub => loggedInSids.Contains(sub.subject_identifier)).ToList();
+        }
+
         public static bool ConnectionRequiresRbac(IXenConnection connection)
         {
             if (connection?.Session == null)
