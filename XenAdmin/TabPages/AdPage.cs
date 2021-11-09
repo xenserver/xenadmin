@@ -33,15 +33,15 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Windows.Forms;
-using XenAPI;
-using XenAdmin.Dialogs;
 using System.Threading;
-using XenAdmin.Controls.DataGridViewEx;
-using XenAdmin.Core;
+using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Commands;
+using XenAdmin.Controls.DataGridViewEx;
+using XenAdmin.Core;
+using XenAdmin.Dialogs;
 using XenAdmin.Network;
+using XenAPI;
 using XenCenterLib;
 
 namespace XenAdmin.TabPages
@@ -60,6 +60,8 @@ namespace XenAdmin.TabPages
 
         private Thread _loggedInStatusUpdater;
         private bool _updateInProgress;
+        private readonly object _logoutLock = new object();
+        private readonly object _statusUpdaterLock = new object();
 
         private string _storedDomain;
         private string _storedUsername;
@@ -261,10 +263,10 @@ namespace XenAdmin.TabPages
             }
 
             var action = (from ActionBase act in ConnectionsManager.History
-                let async = act as AsyncAction
-                where async != null && !async.IsCompleted && !async.Cancelled && async.Connection == _connection
-                      && (async is EnableAdAction || async is DisableAdAction)
-                select async).FirstOrDefault();
+                          let async = act as AsyncAction
+                          where async != null && !async.IsCompleted && !async.Cancelled && async.Connection == _connection
+                                && (async is EnableAdAction || async is DisableAdAction)
+                          select async).FirstOrDefault();
 
             if (action != null)
             {
@@ -403,7 +405,7 @@ namespace XenAdmin.TabPages
 
                 GridViewSubjectList.Rows.Clear();
 
-                var rows = new List<DataGridViewRow> {new AdSubjectRow(null)}; //local root account
+                var rows = new List<DataGridViewRow> { new AdSubjectRow(null) }; //local root account
 
                 foreach (Subject subject in _connection.Cache.Subjects) //all other subjects in the pool
                 {
@@ -454,9 +456,9 @@ namespace XenAdmin.TabPages
                     return;
 
                 var found = (from DataGridViewRow row in GridViewSubjectList.Rows
-                    let adRow = row as AdSubjectRow
-                    where adRow != null && adRow.subject != null && adRow.subject.opaque_ref == subject.opaque_ref
-                    select adRow).FirstOrDefault();
+                             let adRow = row as AdSubjectRow
+                             where adRow != null && adRow.subject != null && adRow.subject.opaque_ref == subject.opaque_ref
+                             select adRow).FirstOrDefault();
 
                 try
                 {
@@ -476,7 +478,6 @@ namespace XenAdmin.TabPages
         }
 
 
-        private object statusUpdaterLock = new object();
         /// <summary>
         /// Background thread called periodically to update subjects logged in status.
         /// </summary>
@@ -516,9 +517,9 @@ namespace XenAdmin.TabPages
                             EnableButtons();
                         });
                     }
-                    lock (statusUpdaterLock)
+                    lock (_statusUpdaterLock)
                     {
-                        Monitor.Wait(statusUpdaterLock, 5000);
+                        Monitor.Wait(_statusUpdaterLock, 5000);
                     }
                 }
                 catch (Exception e)
@@ -695,7 +696,7 @@ namespace XenAdmin.TabPages
                 // so the user won't have to retype it for future join attempts
 
                 using (var joinPrompt = new AdPasswordPrompt(true)
-                    {Domain = _storedDomain, Username = _storedUsername})
+                { Domain = _storedDomain, Username = _storedUsername })
                 {
                     var result = joinPrompt.ShowDialog(this);
                     _storedDomain = joinPrompt.Domain;
@@ -726,7 +727,7 @@ namespace XenAdmin.TabPages
                     using (var dlg = new NoIconDialog(msg,
                         ThreeButtonDialog.ButtonYes,
                         new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, selected: true))
-                        {WindowTitle = Messages.AD_FEATURE_NAME})
+                    { WindowTitle = Messages.AD_FEATURE_NAME })
                     {
                         r = dlg.ShowDialog(this);
                     }
@@ -746,7 +747,7 @@ namespace XenAdmin.TabPages
                     using (var dlg = new WarningDialog(msg,
                         ThreeButtonDialog.ButtonYes,
                         new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, selected: true))
-                        {WindowTitle = Messages.ACTIVE_DIRECTORY_TAB_TITLE})
+                    { WindowTitle = Messages.ACTIVE_DIRECTORY_TAB_TITLE })
                     {
                         r = dlg.ShowDialog(this);
                     }
@@ -796,7 +797,7 @@ namespace XenAdmin.TabPages
         private void ButtonRemove_Click(object sender, EventArgs e)
         {
             Program.AssertOnEventThread();
-            
+
             // Double check, this method is called from a context menu as well and the state could have changed under it
             if (!ButtonRemove.Enabled)
                 return;
@@ -815,9 +816,9 @@ namespace XenAdmin.TabPages
             if (conn != null && Helpers.StockholmOrGreater(conn) && !conn.Cache.Hosts.Any(Host.RestrictPoolSecretRotation))
             {
                 var poolAdminsToRemove = (from Subject s in subjectsToRemove
-                    let roles = s.Connection.ResolveAll(s.roles)
-                    where roles.Any(r => r.name_label == Role.MR_ROLE_POOL_ADMIN)
-                    select s).ToList();
+                                          let roles = s.Connection.ResolveAll(s.roles)
+                                          where roles.Any(r => r.name_label == Role.MR_ROLE_POOL_ADMIN)
+                                          select s).ToList();
 
                 if (subjectsToRemove.Count == poolAdminsToRemove.Count)
                     adminMessage = poolAdminsToRemove.Count == 1
@@ -835,7 +836,7 @@ namespace XenAdmin.TabPages
             using (var dlg = new WarningDialog(removeMessage,
                                 ThreeButtonDialog.ButtonYes,
                                 new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, selected: true))
-                                {WindowTitle = Messages.AD_FEATURE_NAME})
+            { WindowTitle = Messages.AD_FEATURE_NAME })
             {
                 //CA-64818: DialogResult can be No if the No button has been hit
                 //or Cancel if the dialog has been closed from the control box
@@ -868,7 +869,7 @@ namespace XenAdmin.TabPages
                         using (var dlg = new WarningDialog(msg,
                             ThreeButtonDialog.ButtonYes,
                             new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, selected: true))
-                            {WindowTitle = Messages.AD_FEATURE_NAME})
+                        { WindowTitle = Messages.AD_FEATURE_NAME })
                         {
                             r = dlg.ShowDialog(this);
                         }
@@ -1039,6 +1040,14 @@ namespace XenAdmin.TabPages
             }
         }
 
+        private static string GetFormattedSubjectList(List<Subject> selectedSubjects)
+        {
+            var listOfSubjects = string.Join(", ",
+                selectedSubjects.Select(sub => sub.DisplayName ?? sub.SubjectName ?? sub.subject_identifier).ToList()
+            );
+            return listOfSubjects;
+        }
+
         private void ButtonChangeRoles_Click(object sender, EventArgs e)
         {
             Program.AssertOnEventThread();
@@ -1057,10 +1066,60 @@ namespace XenAdmin.TabPages
             using (var dialog = new RoleSelectionDialog(_connection, selectedSubjects))
                 if (dialog.ShowDialog(this) == DialogResult.OK)
                 {
-                    foreach (Subject s in selectedSubjects)
-                        new AddRemoveRolesAction(_connection, s, dialog.SelectedRoles).RunAsync();
+                    var selectedRoles = dialog.SelectedRoles.OrderBy(x => x).ToList();
+
+                    var loggedInUsers = Helpers.LoggedInSubjects(_connection);
+                    var subjectsToLogout = new List<Subject>();
+                    var sessionUser = _connection.Resolve(_connection.Session.SessionSubject);
+
+                    foreach (var loggedInSubject in selectedSubjects.Where(loggedInUsers.Contains))
+                    {
+                        var subjectRoles = loggedInSubject.roles.Select(_connection.Resolve).OrderBy(x => x).ToList();
+                        if (!selectedRoles.SequenceEqual(subjectRoles))
+                        {
+                            subjectsToLogout.Add(loggedInSubject);
+                        }
+                    }
+
+                    var suicide = false;
+                    if (subjectsToLogout.Count > 0)
+                    {
+                        if (!ConfirmLogout(subjectsToLogout.Contains(sessionUser), subjectsToLogout, out suicide))
+                            return;
+                    }
+
+                    var actions = new List<AsyncAction>();
+                    var cancelledSubjects = new List<Subject>();
+                    foreach (var subject in selectedSubjects)
+                    {
+                        var action = new AddRemoveRolesAction(_connection, subject, dialog.SelectedRoles);
+                        action.Completed += (actionBase) =>
+                        {
+                            if (actionBase.IsCancelled || actionBase.Exception != null)
+                            {
+                                cancelledSubjects.Add(subject);
+                            }
+                        };
+                        actions.Add(action);
+                    }
+
+                    var actionTitle = selectedSubjects.Count > 1 ? Messages.AD_ADDING_REMOVING_ROLES_ON_MULTIPLE : Messages.AD_ADDING_REMOVING_ROLES_ON;
+                    actionTitle = string.Format(actionTitle, GetFormattedSubjectList(selectedSubjects));
+                    var updateRolesAction = new MultipleAction(_connection, actionTitle, Messages.IN_PROGRESS, Messages.COMPLETED, actions, true, true);
+                    updateRolesAction.Completed += (actionBase) => Invoke((MethodInvoker)delegate
+                    {
+                        if (actionBase.IsCancelled && cancelledSubjects.Count == 0)
+                        {
+                            return;
+                        }
+                        var nonCancelledSubjects =
+                            subjectsToLogout.Where(subject => !cancelledSubjects.Contains(subject)).ToList();
+                        LogoutSubjects(_connection.Session, nonCancelledSubjects, suicide);
+                    });
+                    updateRolesAction.RunAsync();
                 }
         }
+
 
         private void ButtonLogout_Click(object sender, EventArgs e)
         {
@@ -1069,12 +1128,12 @@ namespace XenAdmin.TabPages
             if (!ButtonLogout.Enabled)
                 return;
 
-            Session session = _connection.Session;
+            var session = _connection.Session;
             if (session == null)
                 return;
 
             var subjectsToLogout = new List<Subject>();
-            bool logSelfOut = false;
+            var logSelfOut = false;
 
             foreach (AdSubjectRow r in GridViewSubjectList.SelectedRows)
             {
@@ -1087,70 +1146,100 @@ namespace XenAdmin.TabPages
                     logSelfOut = true;
             }
 
-            bool suicide = false;
+            if (!ConfirmLogout(logSelfOut, subjectsToLogout, out var suicide))
+                return;
+
+            // Then we go through the list and disconnect each user session, doing our own last if necessary
+            LogoutSubjects(session, subjectsToLogout, suicide);
+        }
+
+        private void LogoutSubjects(Session session, List<Subject> subjectsToLogout, bool suicide)
+        {
+            // remove non-current subject
+            var currentSubject = subjectsToLogout.FirstOrDefault(subject => subject.subject_identifier == session.UserSid);
+            var otherSubjects = subjectsToLogout.Where(subject => subject.subject_identifier != session.UserSid).ToList();
+
+            var actions = new List<AsyncAction>();
+
+            foreach (var subject in otherSubjects)
+            {
+                actions.Add(new DelegatedAsyncAction(_connection,
+                    string.Format(Messages.TERMINATING_USER_SESSION, subject.DisplayName ?? subject.SubjectName),
+                    Messages.IN_PROGRESS, Messages.COMPLETED,
+                    s => Session.logout_subject_identifier(s, subject.subject_identifier),
+                    "session.logout_subject_identifier"));
+            }
+
+            var actionTitle = subjectsToLogout.Count > 1 ? Messages.TERMINATING_USER_SESSION_MULTIPLE : Messages.TERMINATING_USER_SESSION;
+            actionTitle = string.Format(actionTitle, GetFormattedSubjectList(subjectsToLogout));
+
+            var logoutAction = new MultipleAction(_connection, actionTitle, Messages.IN_PROGRESS, Messages.COMPLETED, actions, true, true);
+            logoutAction.Completed += (actionBase) => Invoke((MethodInvoker)delegate
+            {
+                if (actionBase.IsCancelled)
+                {
+                    return;
+                }
+                if (suicide && currentSubject != null)
+                {
+                    new DisconnectCommand(Program.MainWindow, _connection, true).Run();
+                }
+                else
+                {
+                    // signal the background thread to update the logged in status
+                    lock (_statusUpdaterLock)
+                        Monitor.Pulse(_statusUpdaterLock);
+                }
+            });
+            logoutAction.RunAsync();
+        }
+
+        private bool ConfirmLogout(bool logSelfOut, List<Subject> subjectsToLogout, out bool suicide)
+        {
+            suicide = false;
             if (logSelfOut)
             {
-                var warnMsg = string.Format(subjectsToLogout.Count > 1 ? Messages.AD_LOGOUT_SUICIDE_MANY : Messages.AD_LOGOUT_SUICIDE_ONE,
+                var warnMsg = string.Format(
+                    subjectsToLogout.Count > 1 ? Messages.AD_LOGOUT_SUICIDE_MANY : Messages.AD_LOGOUT_SUICIDE_ONE,
                     Helpers.GetName(_connection).Ellipsise(50));
 
                 using (var dlg = new WarningDialog(warnMsg,
-                    ThreeButtonDialog.ButtonYes,
-                    new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, selected: true))
-                    {WindowTitle = Messages.AD_FEATURE_NAME})
+                        ThreeButtonDialog.ButtonYes,
+                        new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, selected: true))
+                { WindowTitle = Messages.AD_FEATURE_NAME })
                 {
                     //CA-64818: DialogResult can be No if the No button has been hit
                     //or Cancel if the dialog has been closed from the control box
                     if (dlg.ShowDialog(this) != DialogResult.Yes)
-                        return;
+                        return false;
 
                     suicide = true;
                 }
             }
 
             var logoutMessage = subjectsToLogout.Count == 1
-                ? string.Format(Messages.QUESTION_LOGOUT_AD_USER_ONE, subjectsToLogout[0].DisplayName ?? subjectsToLogout[0].SubjectName)
+                ? string.Format(Messages.QUESTION_LOGOUT_AD_USER_ONE,
+                    subjectsToLogout[0].DisplayName ?? subjectsToLogout[0].SubjectName)
                 : string.Format(Messages.QUESTION_LOGOUT_AD_USER_MANY, subjectsToLogout.Count);
 
-            if (!suicide)//CA-68645
+            if (!suicide) //CA-68645
             {
                 using (var dlg = new WarningDialog(logoutMessage,
-                    ThreeButtonDialog.ButtonYes,
-                    new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, selected: true))
-                    {WindowTitle = Messages.AD_FEATURE_NAME})
+                        ThreeButtonDialog.ButtonYes,
+                        new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, selected: true))
+                { WindowTitle = Messages.AD_FEATURE_NAME })
                 {
                     //CA-64818: DialogResult can be No if the No button has been hit
                     //or Cancel if the dialog has been closed from the control box
                     if (dlg.ShowDialog(this) != DialogResult.Yes)
-                        return;
+                        return false;
                 }
             }
 
-            // Then we go through the list and disconnect each user session, doing our own last if necessary
-            foreach (AdSubjectRow r in GridViewSubjectList.SelectedRows)
-            {
-                if (r.IsLocalRootRow || !r.LoggedIn)
-                    continue;
-
-                if (session.UserSid == r.subject.subject_identifier)
-                    continue;
-
-                new DelegatedAsyncAction(_connection,
-                    string.Format(Messages.TERMINATING_USER_SESSION, r.subject.DisplayName ?? r.subject.SubjectName),
-                    Messages.IN_PROGRESS, Messages.COMPLETED,
-                    s => Session.logout_subject_identifier(s, r.subject.subject_identifier),
-                    "session.logout_subject_identifier").RunAsync();
-            }
-
-            if (suicide)
-            {
-                new DisconnectCommand(Program.MainWindow, _connection, true).Run();
-            }
-            else
-            {
-                // signal the background thread to update the logged in status
-                lock (statusUpdaterLock)
-                    Monitor.Pulse(statusUpdaterLock);
-            }
+            return true;
         }
+
+      
+
     }
 }
