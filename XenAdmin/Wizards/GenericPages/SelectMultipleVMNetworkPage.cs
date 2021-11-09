@@ -43,27 +43,27 @@ using XenCenterLib;
 
 namespace XenAdmin.Wizards.GenericPages
 {
-	/// <summary>
-	/// Class representing the page of the ImportAppliance wizard where the user specifies
-	/// a network for the VMs in the appliance that require network access. 
-	/// </summary>
-	internal abstract partial class SelectMultipleVMNetworkPage : XenTabPage
-	{
+    /// <summary>
+    /// Class representing the page of the ImportAppliance wizard where the user specifies
+    /// a network for the VMs in the appliance that require network access. 
+    /// </summary>
+    internal abstract partial class SelectMultipleVMNetworkPage : XenTabPage
+    {
         private bool m_buttonNextEnabled;
         private bool m_buttonPreviousEnabled;
         private Dictionary<string, VmMapping> m_vmMappings;
 
         private struct NetworkDetail
-		{
-			public string SysId { get; set; }
-			public string NetworkId { get; set; }
+        {
+            public string SysId { get; set; }
+            public string NetworkId { get; set; }
             public string MACAddress { get; set; }
-		}
+        }
 
         protected SelectMultipleVMNetworkPage()
-		{
-			InitializeComponent();
-		}
+        {
+            InitializeComponent();
+        }
 
         protected override void OnLoad(EventArgs e)
         {
@@ -120,8 +120,8 @@ namespace XenAdmin.Wizards.GenericPages
         protected override void PageLoadedCore(PageLoadedDirection direction)
         {
             SetButtonPreviousEnabled(true);
-			SetButtonNextEnabled(true);
-		}
+            SetButtonNextEnabled(true);
+        }
 
         public override void PageCancelled(ref bool cancel)
         {
@@ -219,34 +219,34 @@ namespace XenAdmin.Wizards.GenericPages
             return m_buttonPreviousEnabled;
         }
 
-		public Dictionary<string, VmMapping> VmMappings
-		{
-			get
-			{
-				foreach (DataGridViewRow row in m_dataGridView.Rows)
-				{
-					var networkDetail = (NetworkDetail)row.Cells[0].Tag;
+        public Dictionary<string, VmMapping> VmMappings
+        {
+            get
+            {
+                foreach (DataGridViewRow row in m_dataGridView.Rows)
+                {
+                    var networkDetail = (NetworkDetail)row.Cells[0].Tag;
 
-					if (m_vmMappings.ContainsKey(networkDetail.SysId))
-					{
-						var mapping = m_vmMappings[networkDetail.SysId];
+                    if (m_vmMappings.ContainsKey(networkDetail.SysId))
+                    {
+                        var mapping = m_vmMappings[networkDetail.SysId];
 
                         if (row.Cells[1].Value is ToStringWrapper<XenAPI.Network> selectedItem)
                         {
                             mapping.Networks[networkDetail.NetworkId] = selectedItem.item;
                             mapping.VIFs[networkDetail.MACAddress] = selectedItem.item;
                         }
-							
-					}
-				}
+                            
+                    }
+                }
 
-				return m_vmMappings;
-			}
-			set
-			{
-			    m_vmMappings = value;
-			}
-		}
+                return m_vmMappings;
+            }
+            set
+            {
+                m_vmMappings = value;
+            }
+        }
 
         public Dictionary<string, string> RawMappings
         {
@@ -277,25 +277,25 @@ namespace XenAdmin.Wizards.GenericPages
             OnPageUpdated();
         }   
 
-		private DataGridViewComboBoxCell FillGridComboBox(object targetRef, string vsId)
-		{
-		    var cb = new DataGridViewComboBoxCell {FlatStyle = FlatStyle.Flat, Sorted = true};
+        private DataGridViewComboBoxCell FillGridComboBox(object targetRef, string vsId)
+        {
+            var cb = new DataGridViewComboBoxCell {FlatStyle = FlatStyle.Flat, Sorted = true};
 
             var availableNetworks = TargetConnection.Cache.Networks.Where(net => ShowNetwork(targetRef, net, vsId));
 
-			foreach (XenAPI.Network netWork in availableNetworks)
-			{
-				if (!Messages.IMPORT_SELECT_NETWORK_PAGE_NETWORK_FILTER.Contains(netWork.Name()))
-				{
-					var wrapperItem = new ToStringWrapper<XenAPI.Network>(netWork, netWork.Name());
+            foreach (XenAPI.Network netWork in availableNetworks)
+            {
+                if (!Messages.IMPORT_SELECT_NETWORK_PAGE_NETWORK_FILTER.Contains(netWork.Name()))
+                {
+                    var wrapperItem = new ToStringWrapper<XenAPI.Network>(netWork, netWork.Name());
 
-					if (!cb.Items.Contains(wrapperItem))
-						cb.Items.Add(wrapperItem);
-				}
-			}
+                    if (!cb.Items.Contains(wrapperItem))
+                        cb.Items.Add(wrapperItem);
+                }
+            }
 
-			return cb;
-		}
+            return cb;
+        }
 
         private bool ShowNetwork(object targetRef, XenAPI.Network network, string vsId)
         {
@@ -321,21 +321,21 @@ namespace XenAdmin.Wizards.GenericPages
         }
 
         private void m_dataGridView_CellEnter(object sender, DataGridViewCellEventArgs e)
-		{
-			if (e.ColumnIndex != m_colTargetNet.Index || e.RowIndex < 0 || e.RowIndex >= m_dataGridView.RowCount)
-				return;
+        {
+            if (e.ColumnIndex != m_colTargetNet.Index || e.RowIndex < 0 || e.RowIndex >= m_dataGridView.RowCount)
+                return;
 
-			m_dataGridView.BeginEdit(false);
+            m_dataGridView.BeginEdit(false);
 
-			if (m_dataGridView.EditingControl != null && m_dataGridView.EditingControl is ComboBox)
-				(m_dataGridView.EditingControl as ComboBox).DroppedDown = true;
-		}
+            if (m_dataGridView.EditingControl != null && m_dataGridView.EditingControl is ComboBox)
+                (m_dataGridView.EditingControl as ComboBox).DroppedDown = true;
+        }
 
-		private void m_dataGridView_CurrentCellDirtyStateChanged(object sender, EventArgs e)
-		{
-			m_dataGridView.CommitEdit(DataGridViewDataErrorContexts.Commit);
-			IsDirty = true;
-		}
+        private void m_dataGridView_CurrentCellDirtyStateChanged(object sender, EventArgs e)
+        {
+            m_dataGridView.CommitEdit(DataGridViewDataErrorContexts.Commit);
+            IsDirty = true;
+        }
 
         private void buttonRefresh_Click(object sender, EventArgs e)
         {
