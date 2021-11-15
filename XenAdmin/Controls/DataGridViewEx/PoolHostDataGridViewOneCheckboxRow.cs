@@ -90,7 +90,9 @@ namespace XenAdmin.Controls.DataGridViewEx
                 }
             }
         }
-        
+
+        private readonly IXenObject _xenObject;
+
         /// <summary>
         /// If the row is either a pool row or else a stanadlone host row
         /// </summary>
@@ -128,7 +130,7 @@ namespace XenAdmin.Controls.DataGridViewEx
 
         public override int GetHashCode()
         {
-            return _nameCell.GetHashCode();
+            return _xenObject?.GetHashCode() ?? 0;
         }
 
         public CheckState Checked
@@ -143,11 +145,10 @@ namespace XenAdmin.Controls.DataGridViewEx
             }
         }
 
-        protected PoolHostDataGridViewOneCheckboxRow(){}
-
         protected PoolHostDataGridViewOneCheckboxRow(Pool pool)
             : base(pool)
         {
+            _xenObject = pool;
             SetupCells();
         }
 
@@ -159,6 +160,7 @@ namespace XenAdmin.Controls.DataGridViewEx
         protected PoolHostDataGridViewOneCheckboxRow(Host host, bool hasPool)
             : base(host, hasPool)
         {
+            _xenObject = host;
             SetupCells();
         }
 
