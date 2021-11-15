@@ -300,7 +300,7 @@ namespace XenAdmin.Alerts
             if (perfmonConfigXML == null)
                 return Array.Empty<PerfmonDefinition>();
 
-            return string.IsNullOrEmpty(perfmonConfigXML) ? Array.Empty<PerfmonDefinition>() : GetPerfmonDefinitions(perfmonConfigXML);
+            return string.IsNullOrWhiteSpace(perfmonConfigXML) ? Array.Empty<PerfmonDefinition>() : GetPerfmonDefinitions(perfmonConfigXML);
         }
 
         /// <summary>
