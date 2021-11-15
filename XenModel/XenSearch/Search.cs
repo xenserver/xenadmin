@@ -293,7 +293,8 @@ namespace XenAdmin.XenSearch
             var session = connection.DuplicateSession();
 
             var pools = connection.Cache.Pools;
-            if (pools.Length <= 0) return false;
+            if (pools.Length <= 0)
+                return false;
 
             var pool = pools.First();
             Pool.remove_from_gui_config(session, pool.opaque_ref, key);
