@@ -42,10 +42,10 @@ namespace XenAdmin.Actions
         private readonly bool _resumeVMs;
 
         public EnableHostAction(Host host, bool resumeVMs,Func<Pool, Host, long, long, bool> acceptNTolChangesOnEnable)
-            : base(host.Connection, Messages.HOST_ENABLE, Messages.WAITING, null, acceptNTolChangesOnEnable)
+            : base(host?.Connection, Messages.HOST_ENABLE, Messages.WAITING, null, acceptNTolChangesOnEnable)
         {
+            Host = host ?? throw new ArgumentNullException("host");
             _resumeVMs = resumeVMs;
-            Host = host;
             AddCommonAPIMethodsToRoleCheck();
             ApiMethodsToRoleCheck.Add("pool.ha_compute_hypothetical_max_host_failures_to_tolerate");
             ApiMethodsToRoleCheck.Add("pool.set_ha_host_failures_to_tolerate");
