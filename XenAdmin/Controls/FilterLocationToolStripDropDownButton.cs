@@ -124,12 +124,15 @@ namespace XenAdmin.Controls
                 {
                     var p = Helpers.GetPool(c);
 
-                    if (p == null && c.Cache.Hosts.Length > 0)// Stand alone host
+                    if (p == null)// Stand alone host
                     {
-                        var host = c.Cache.Hosts.First();
-                        var item = GenerateFilterItem(host, host.uuid);
-                        item.Checked = HostCheckStates.ContainsKey(host.uuid);
-                        DropDownItems.Add(item);
+                        if (c.Cache.Hosts.Length > 0)
+                        {
+                            var host = c.Cache.Hosts.First();
+                            var item = GenerateFilterItem(host, host.uuid);
+                            item.Checked = HostCheckStates.ContainsKey(host.uuid);
+                            DropDownItems.Add(item);
+                        }
                     }
                     else
                         DropDownItems.Add(GeneratePoolFilterItem(p));
