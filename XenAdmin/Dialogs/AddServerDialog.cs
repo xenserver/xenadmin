@@ -137,37 +137,35 @@ namespace XenAdmin.Dialogs
                 ServerNameComboBox.Enabled = true;
                 AddButton.Text = Messages.ADD;
             }
-            else
+            else if (!_changedPass)
+                return;
+            else if (connection.Password == null)
             {
-                if (!_changedPass)
-                    return;
-                if (connection.Password == null)
-                {
-                    Text = Messages.CONNECT_TO_SERVER;
-                    labelInstructions.Text = Messages.CONNECT_TO_SERVER_BLURB;
-                    labelError.Text = "";
-                    ServerNameComboBox.Enabled = false;
-                    AddButton.Text = Messages.CONNECT;
-                }
-                else if (connection.ExpectPasswordIsCorrect)
-                {
-                    // This situation should be rare, it normally comes from logging in a new session after an existing one has been made
-                    // We now use duplicate sessions instead most of the time which don't log in again.
-                    Text = Messages.CONNECT_TO_SERVER;
-                    labelInstructions.Text = string.Format(Messages.ADDSERVER_PASS_NEW, BrandManager.BrandConsole);
-                    labelError.Text = "";
-                    ServerNameComboBox.Enabled = false;
-                    AddButton.Text = Messages.OK;
-                }
-                else  // the password probably hasn't actually changed but we do know the user has typed it in wrong
-                {
-                    Text = Messages.CONNECT_TO_SERVER;
-                    labelInstructions.Text = string.Format(Messages.ERROR_CONNECTING_BLURB, BrandManager.BrandConsole);
-                    labelError.Text = Messages.ADD_NEW_INCORRECT;
-                    ServerNameComboBox.Enabled = false;
-                    AddButton.Text = Messages.CONNECT;
-                }
+                Text = Messages.CONNECT_TO_SERVER;
+                labelInstructions.Text = Messages.CONNECT_TO_SERVER_BLURB;
+                labelError.Text = "";
+                ServerNameComboBox.Enabled = false;
+                AddButton.Text = Messages.CONNECT;
             }
+            else if (connection.ExpectPasswordIsCorrect)
+            {
+                // This situation should be rare, it normally comes from logging in a new session after an existing one has been made
+                // We now use duplicate sessions instead most of the time which don't log in again.
+                Text = Messages.CONNECT_TO_SERVER;
+                labelInstructions.Text = string.Format(Messages.ADDSERVER_PASS_NEW, BrandManager.BrandConsole);
+                labelError.Text = "";
+                ServerNameComboBox.Enabled = false;
+                AddButton.Text = Messages.OK;
+            }
+            else  // the password probably hasn't actually changed but we do know the user has typed it in wrong
+            {
+                Text = Messages.CONNECT_TO_SERVER;
+                labelInstructions.Text = string.Format(Messages.ERROR_CONNECTING_BLURB, BrandManager.BrandConsole);
+                labelError.Text = Messages.ADD_NEW_INCORRECT;
+                ServerNameComboBox.Enabled = false;
+                AddButton.Text = Messages.CONNECT;
+            }
+
         }
 
         private void AddButton_Click(object sender, EventArgs e)
@@ -205,7 +203,7 @@ namespace XenAdmin.Dialogs
         {
             if (conn == null)
             {
-                conn = new XenConnection {fromDialog = true};
+                conn = new XenConnection { fromDialog = true };
                 conn.CachePopulated += conn_CachePopulated;
             }
             else if (!_changedPass)
