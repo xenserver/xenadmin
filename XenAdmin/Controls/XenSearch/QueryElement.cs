@@ -1080,7 +1080,7 @@ namespace XenAdmin.Controls.XenSearch
 
             public class ExtraComboEntry
             {
-                public StringPropertyQuery.PropertyQueryType type;
+                public readonly StringPropertyQuery.PropertyQueryType type;
                 public ExtraComboEntry(StringPropertyQuery.PropertyQueryType type)
                 {
                     this.type = type;
