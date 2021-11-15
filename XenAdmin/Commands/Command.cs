@@ -32,10 +32,12 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Actions;
-using XenAPI;
+using XenAdmin.Core;
 using XenAdmin.Dialogs;
+using XenAPI;
 
 
 namespace XenAdmin.Commands
@@ -97,7 +99,7 @@ namespace XenAdmin.Commands
         /// <param name="mainWindow">The application main window.</param>
         /// <param name="selection">The selection context for the Command.</param>
         protected Command(IMainWindow mainWindow, SelectedItem selection)
-            : this(mainWindow, new [] { selection })
+            : this(mainWindow, new[] { selection })
         {
         }
 
@@ -287,7 +289,7 @@ namespace XenAdmin.Commands
                 selected: ConfirmationDialogNoButtonSelected);
 
             using (var dialog = new WarningDialog(ConfirmationDialogText, buttonYes, buttonNo)
-                {WindowTitle = ConfirmationDialogTitle})
+            { WindowTitle = ConfirmationDialogTitle })
             {
                 if (!string.IsNullOrEmpty(ConfirmationDialogHelpId))
                     dialog.HelpNameSetter = ConfirmationDialogHelpId;
@@ -376,6 +378,23 @@ namespace XenAdmin.Commands
         {
             MultipleActionLauncher launcher = new MultipleActionLauncher(actions, title, startDescription, endDescription, runActionsInParallel);
             launcher.Run();
+        }
+
+        /// <summary>
+        /// Check that the list of RBAC methods can be executed with the session's roles on the given VM
+        /// </summary>
+        /// <param name="vm">The VM to check roles on</param>
+        /// <param name="staticRbacDependencies">List of the methods to check</param>
+        /// <returns>true if the current roles can be used to execute the given methods</returns>
+        protected bool CheckRbacPermissions(VM vm, RbacMethodList staticRbacDependencies)
+        {
+            if (vm.Connection.Session.IsLocalSuperuser)
+                return true;
+
+            var currentRoles = vm.Connection.Session.Roles;
+            var validRoles = Role.ValidRoleList(staticRbacDependencies, vm.Connection);
+
+            return currentRoles.Any(currentRole => validRoles.Contains(currentRole));
         }
 
         #region ICommand Members

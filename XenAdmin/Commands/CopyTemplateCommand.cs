@@ -30,12 +30,9 @@
  */
 
 using System.Collections.Generic;
-using System.Linq;
 using XenAdmin.Actions.VMActions;
-using XenAdmin.Core;
 using XenAdmin.Dialogs;
 using XenAPI;
-
 
 namespace XenAdmin.Commands
 {
@@ -63,39 +60,24 @@ namespace XenAdmin.Commands
 
             if (CrossPoolCopyTemplateCommand.CanRun(template, null))
             {
-                if (!CheckRbacPermissions(template, VMCrossPoolMigrateAction.StaticRBACDependencies, Messages.RBAC_CROSS_POOL_MIGRATE_VM_BLOCKED))
+                if (!CheckRbacPermissions(template, VMCrossPoolMigrateAction.StaticRBACDependencies))
                 {
+                    using (var dlg = new ErrorDialog(Messages.RBAC_CROSS_POOL_MIGRATE_VM_BLOCKED))
+                        dlg.ShowDialog(Parent);
                     return;
                 }
                 new CrossPoolCopyTemplateCommand(MainWindowCommandInterface, selection).Run();
             }
             else
             {
-                if (!CheckRbacPermissions(template, VMCopyAction.StaticRBACDependencies, Messages.RBAC_INTRA_POOL_COPY_VM_BLOCKED))
+                if (!CheckRbacPermissions(template, VMCopyAction.StaticRBACDependencies))
                 {
+                    using (var dlg = new ErrorDialog(Messages.RBAC_INTRA_POOL_COPY_VM_BLOCKED))
+                        dlg.ShowDialog(Parent);
                     return;
                 }
                 new CopyVMDialog(template).ShowPerXenObject(template, Program.MainWindow);
             }
-        }
-
-        protected bool CheckRbacPermissions(VM vm, RbacMethodList staticRbacDependencies, string message)
-        {
-            if (vm.Connection.Session.IsLocalSuperuser)
-                return true;
-
-            var currentRoles = vm.Connection.Session.Roles;
-            var validRoles = Role.ValidRoleList(staticRbacDependencies, vm.Connection);
-
-            if (currentRoles.Any(currentRole => validRoles.Contains(currentRole)))
-            {
-                return true;
-            }
-
-            using (var dlg = new ErrorDialog(message))
-                dlg.ShowDialog(Parent);
-
-            return false;
         }
 
         protected override bool CanRunCore(SelectedItemCollection selection)
