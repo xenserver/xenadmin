@@ -416,6 +416,14 @@ namespace XenAdmin.Wizards.PatchingWizard
                     return;
                 }
 
+                if (ApplyUpdatesToNewVersion && !Updates.CheckCanDownloadUpdates())
+                {
+                    cancel = true;
+                    using (var errDlg = new ClientIdDialog())
+                        errDlg.ShowDialog(ParentForm);
+                    return;
+                }
+
                 //Upload the patches to the masters if it is necessary
                 List<Host> masters = SelectedMasters;
 
