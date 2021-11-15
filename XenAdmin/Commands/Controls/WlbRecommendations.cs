@@ -54,9 +54,6 @@ namespace XenAdmin.Commands
         /// <param name="recommendations"></param>
         public WlbRecommendations(List<VM> vms, Dictionary<VM, Dictionary<XenRef<Host>, string[]>> recommendations)
         {
-            if (vms == null || vms.Count == 0)
-                throw new ArgumentException("Parameter cannot be null or empty", nameof(vms));
-
             _vms = new ReadOnlyCollection<VM>(vms);
             _recommendations = recommendations;
             _isError = recommendations == null;
