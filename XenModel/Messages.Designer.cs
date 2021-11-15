@@ -16970,6 +16970,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A file name can not be a device name..
+        /// </summary>
+        public static string FILE_NAME_IS_DEVICE_NAME_ERROR_MESSAGE {
+            get {
+                return ResourceManager.GetString("FILE_NAME_IS_DEVICE_NAME_ERROR_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Path section {0} matches a device name..
+        /// </summary>
+        public static string FILE_PATH_DEVICE_NAME_ERROR_MESSAGE {
+            get {
+                return ResourceManager.GetString("FILE_PATH_DEVICE_NAME_ERROR_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Acrobat (PDF) file.
         /// </summary>
         public static string FILE_PDF {
@@ -20212,6 +20230,15 @@ namespace XenAdmin {
         public static string IGNORE_BUTTON_LABEL {
             get {
                 return ResourceManager.GetString("IGNORE_BUTTON_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The following characters are invalid: {0}.
+        /// </summary>
+        public static string ILLEGAL_CHARACTER_ERROR_MESSAGE {
+            get {
+                return ResourceManager.GetString("ILLEGAL_CHARACTER_ERROR_MESSAGE", resourceCulture);
             }
         }
         
@@ -30166,6 +30193,15 @@ namespace XenAdmin {
         public static string PATCHINGWIZARD_UPLOADPAGE_TITLE_ONLY_UPLOAD {
             get {
                 return ResourceManager.GetString("PATCHINGWIZARD_UPLOADPAGE_TITLE_ONLY_UPLOAD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Path cannot be null or empty..
+        /// </summary>
+        public static string PATH_CAN_NOT_BE_NULL_ERROR_MESSAGE {
+            get {
+                return ResourceManager.GetString("PATH_CAN_NOT_BE_NULL_ERROR_MESSAGE", resourceCulture);
             }
         }
         

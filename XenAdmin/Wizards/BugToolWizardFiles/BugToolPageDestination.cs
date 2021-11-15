@@ -206,7 +206,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             if (String.IsNullOrEmpty(name))
                 return false;
 
-            if (!PathValidator.IsFileNameValid(name, out string invalidNameMsg))
+            if (!XenModel.PathValidator.IsFileNameValid(name, out string invalidNameMsg))
             {
                 error = $"{Messages.BUGTOOL_PAGE_DESTINATION_INVALID_NAME} {invalidNameMsg}";
                 return false;
@@ -217,9 +217,9 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
 
             string path = String.Format("{0}\\{1}", folder, name);
 
-            if (!PathValidator.IsPathValid(path, out string invalidPathMsg))
+            if (!XenModel.PathValidator.IsPathValid(path, out string invalidPathMsg))
             {
-                error = $"{Messages.BUGTOOL_PAGE_DESTINATION_INVALID_FOLDER} {invalidNameMsg}";
+                error = $"{Messages.BUGTOOL_PAGE_DESTINATION_INVALID_FOLDER} {invalidPathMsg}";
                 return false;
             }
 

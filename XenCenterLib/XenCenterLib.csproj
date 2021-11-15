@@ -77,14 +77,8 @@
     <Compile Include="INotifyCollectionChanged.cs" />
     <Compile Include="LimitedStack.cs" />
     <Compile Include="LockFreeQueue.cs" />
-    <Compile Include="Messages.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Messages.resx</DependentUpon>
-    </Compile>
     <Compile Include="NamedPipes.cs" />
     <Compile Include="PartialIP.cs" />
-    <Compile Include="PathValidator.cs" />
     <Compile Include="Processes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Set.cs" />
@@ -92,12 +86,6 @@
     <Compile Include="StringUtility.cs" />
     <Compile Include="ToStringWrapper.cs" />
     <Compile Include="Win32.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Messages.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

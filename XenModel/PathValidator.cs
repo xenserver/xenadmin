@@ -32,24 +32,40 @@
 using System;
 using System.IO;
 using System.Linq;
+using XenAdmin;
 
-namespace XenCenterLib
+namespace XenModel
 {
 	public class PathValidator
 	{
 		private static readonly char[] m_invalidFileCharList = Path.GetInvalidFileNameChars();
 		private static readonly string[] m_deviceNames = {
-		                                                 	"CON", "PRN", "AUX", "NUL",
-		                                                 	"COM1", "COM2", "COM3", "COM4", "COM5", "COM6", "COM7", "COM8", "COM9",
-		                                                 	"LPT1", "LPT2", "LPT3", "LPT4", "LPT5", "LPT6", "LPT7", "LPT8", "LPT9"
-		                                                 };
+															 "CON", "PRN", "AUX", "NUL",
+															 "COM1", "COM2", "COM3", "COM4", "COM5", "COM6", "COM7", "COM8", "COM9",
+															 "LPT1", "LPT2", "LPT3", "LPT4", "LPT5", "LPT6", "LPT7", "LPT8", "LPT9"
+														 };
+
+		private static string IllegalFileCharMsg {
+			get {
+				return string.Format(Messages.ILLEGAL_CHARACTER_ERROR_MESSAGE, string.Join(" ", m_invalidFileCharList.Where(c => !char.IsControl(c))));
+			}
+		}
+
+		private static string IllegalPathCharMsg
+        {
+            get
+            {
+				return string.Format(Messages.ILLEGAL_CHARACTER_ERROR_MESSAGE, string.Join(" ", m_invalidFileCharList.Where(c => !char.IsControl(c) && c != '\\')));
+
+			}
+        }
 
 		public static bool IsFileNameValid(string filename, out string invalidNameMsg)
 		{
 			invalidNameMsg = string.Empty;
 			if (filename.IndexOfAny(m_invalidFileCharList) > -1)
             {
-				invalidNameMsg = Messages.ILLEGAL_CHARACTER_ERROR_MESSAGE;
+				invalidNameMsg = IllegalFileCharMsg;
 				return false;
             }
 
@@ -85,35 +101,35 @@ namespace XenCenterLib
 			}
 			catch (ArgumentException)
 			{
-				//path contains a character from Path.GetInvalidPathChars()
-				invalidPathMsg = Messages.ILLEGAL_FILE_PATH_ERROR_MESSAGE;
+				//path contains some of the characters from Path.GetInvalidPathChars()
+				invalidPathMsg = IllegalPathCharMsg;
 				return false;
 			}
 
-			var parts = path.Split('\\');
+            var parts = path.Split('\\');
 
-			if (parts.Length > 0)
-			{
-				foreach (var part in  parts)
-				{
-					if (part.IndexOfAny(m_invalidFileCharList) > -1)
+            if (parts.Length > 0)
+            {
+                foreach (var part in parts)
+                {
+                    if (part.IndexOfAny(m_invalidFileCharList) > -1)
                     {
-						invalidPathMsg = Messages.ILLEGAL_CHARACTER_ERROR_MESSAGE;
-						return false;
+                        invalidPathMsg = IllegalPathCharMsg; //string.Format(Messages.ILLEGAL_CHARACTER_ERROR_MESSAGE, string.Join(" ", m_invalidFileCharList.Where(c => !char.IsControl(c) && c != '\\')));//IllegalFileCharMsg; //string.Format(Messages.ILLEGAL_CHARACTER_ERROR_MESSAGE, m_invalidFileCharList.Where(c => char.IsWhiteSpace(c) || char.IsControl(c)).Join(" ")); // Messages.ILLEGAL_CHARACTER_ERROR_MESSAGE;
+                        return false;
                     }
 
-					foreach (var name in m_deviceNames)
-					{
-						if (name == part.ToUpper())
+                    foreach (var name in m_deviceNames)
+                    {
+                        if (name == part.ToUpper())
                         {
-							invalidPathMsg = string.Format(Messages.FILE_PATH_DEVICE_NAME_ERROR_MESSAGE, name);
-							return false;
+                            invalidPathMsg = string.Format(Messages.FILE_PATH_DEVICE_NAME_ERROR_MESSAGE, name);
+                            return false;
                         }
-					}
-				}
-			}
+                    }
+                }
+            }
 
-			return true;
+            return true;
 		}
 	}
 }

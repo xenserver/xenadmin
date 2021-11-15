@@ -166,7 +166,7 @@ namespace XenAdmin.Wizards.ExportWizard
 			if (String.IsNullOrEmpty(ApplianceFileName))
 				return false;
 
-			if (!PathValidator.IsFileNameValid(ApplianceFileName, out string invalidNameMsg))
+			if (!XenModel.PathValidator.IsFileNameValid(ApplianceFileName, out string invalidNameMsg))
 			{
 				error = string.Join(" ", new []{ Messages.EXPORT_APPLIANCE_PAGE_ERROR_INALID_APP , invalidNameMsg});
 				return false;
@@ -177,7 +177,7 @@ namespace XenAdmin.Wizards.ExportWizard
 
 			string path = String.Format("{0}\\{1}", ApplianceDirectory, ApplianceFileName);
 
-			if (!PathValidator.IsPathValid(path, out string invalidPathMsg))
+			if (!XenModel.PathValidator.IsPathValid(path, out string invalidPathMsg))
 			{
 				error = string.Join(" ", new[] { Messages.EXPORT_APPLIANCE_PAGE_ERROR_INVALID_DIR, invalidPathMsg });
 				return false;
