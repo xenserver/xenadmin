@@ -75,9 +75,6 @@ namespace XenAdmin.Dialogs
         /// <param name="runAction"></param>
         public RepairSRDialog(IEnumerable<SR> srs, bool runAction = true)
         {
-            if (srs == null || !srs.Any())
-                throw new ArgumentException("Parameter cannot be null or empty", nameof(srs));
-
             this.runAction = runAction;
             BoldFont = new Font(Font, FontStyle.Bold);
             List<SR> srList = new List<SR>(srs);

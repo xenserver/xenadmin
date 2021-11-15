@@ -78,7 +78,10 @@ namespace XenAdmin.Commands
                     dlg.ShowDialog(Parent);
             }
 
-            new RepairSRDialog(srList).Show(Parent);
+            if (srList.Count != 0)
+            {
+                new RepairSRDialog(srList).Show(Parent);
+            }
         }
 
         protected override bool CanRunCore(SelectedItemCollection selection)
