@@ -74,15 +74,16 @@ namespace XenAPI
 
             var coordinator_ref = pool.master.opaque_ref;
 
-            var pifs = Connection.ResolveAll(PIFs);
+            var pifs = Connection.ResolveAll(PIFs); 
+            var pif = pifs.FirstOrDefault(p => p.host.opaque_ref == coordinator_ref); 
+            if (pif != null)
+                return PIFName(pif); 
 
-            var filteredPifs = pifs.Where(pif => pif.host.opaque_ref == coordinator_ref).ToList();
-            if (filteredPifs.Count > 0)
-            {
-                return PIFName(filteredPifs.First());
-            }
-
-            return pifs.Count > 0 ? PIFName(pifs.First()) : name_label;
+            pif = pifs.FirstOrDefault(); 
+            if (pif != null) 
+                return PIFName(pif); 
+            
+            return name_label;
         }
 
         public bool AllHostsCanSeeNetwork()
