@@ -862,7 +862,7 @@ namespace XenAdmin.TabPages
                         {
                             subjectName = subjectName.Ellipsise(256);
                         }
-                        string msg = string.Format(entry.IsGroup ? Messages.AD_CONFIRM_SUICIDE_GROUP : Messages.AD_CONFIRM_SUICIDE,
+                        string msg = string.Format(entry.IsGroup ? Messages.AD_CONFIRM_LOGOUT_CURRENT_USER_GROUP : Messages.AD_CONFIRM_LOGOUT_CURRENT_USER,
                                     subjectName, Helpers.GetName(_connection).Ellipsise(50));
 
                         DialogResult r;
@@ -1081,10 +1081,10 @@ namespace XenAdmin.TabPages
                         }
                     }
 
-                    var suicide = false;
+                    var logoutCurrentSubject = false;
                     if (subjectsToLogout.Count > 0)
                     {
-                        if (!ConfirmLogout(subjectsToLogout.Contains(sessionUser), subjectsToLogout, out suicide))
+                        if (!ConfirmLogout(subjectsToLogout.Contains(sessionUser), subjectsToLogout, out logoutCurrentSubject))
                             return;
                     }
 
@@ -1114,7 +1114,7 @@ namespace XenAdmin.TabPages
                         }
                         var nonCancelledSubjects =
                             subjectsToLogout.Where(subject => !cancelledSubjects.Contains(subject)).ToList();
-                        LogoutSubjects(_connection.Session, nonCancelledSubjects, suicide);
+                        LogoutSubjects(_connection.Session, nonCancelledSubjects, logoutCurrentSubject);
                     });
                     updateRolesAction.RunAsync();
                 }
@@ -1146,14 +1146,14 @@ namespace XenAdmin.TabPages
                     logSelfOut = true;
             }
 
-            if (!ConfirmLogout(logSelfOut, subjectsToLogout, out var suicide))
+            if (!ConfirmLogout(logSelfOut, subjectsToLogout, out var logoutCurrentSubject))
                 return;
 
             // Then we go through the list and disconnect each user session, doing our own last if necessary
-            LogoutSubjects(session, subjectsToLogout, suicide);
+            LogoutSubjects(session, subjectsToLogout, logoutCurrentSubject);
         }
 
-        private void LogoutSubjects(Session session, List<Subject> subjectsToLogout, bool suicide)
+        private void LogoutSubjects(Session session, List<Subject> subjectsToLogout, bool logoutCurrentSubject)
         {
             // remove non-current subject
             var currentSubject = subjectsToLogout.FirstOrDefault(subject => subject.subject_identifier == session.UserSid);
@@ -1180,7 +1180,7 @@ namespace XenAdmin.TabPages
                 {
                     return;
                 }
-                if (suicide && currentSubject != null)
+                if (logoutCurrentSubject && currentSubject != null)
                 {
                     new DisconnectCommand(Program.MainWindow, _connection, true).Run();
                 }
@@ -1194,13 +1194,13 @@ namespace XenAdmin.TabPages
             logoutAction.RunAsync();
         }
 
-        private bool ConfirmLogout(bool logSelfOut, List<Subject> subjectsToLogout, out bool suicide)
+        private bool ConfirmLogout(bool logSelfOut, List<Subject> subjectsToLogout, out bool logoutCurrentSubject)
         {
-            suicide = false;
+            logoutCurrentSubject = false;
             if (logSelfOut)
             {
                 var warnMsg = string.Format(
-                    subjectsToLogout.Count > 1 ? Messages.AD_LOGOUT_SUICIDE_MANY : Messages.AD_LOGOUT_SUICIDE_ONE,
+                    subjectsToLogout.Count > 1 ? Messages.AD_LOGOUT_CURRENT_USER_MANY : Messages.AD_LOGOUT_CURRENT_USER_ONE,
                     Helpers.GetName(_connection).Ellipsise(50));
 
                 using (var dlg = new WarningDialog(warnMsg,
@@ -1213,7 +1213,7 @@ namespace XenAdmin.TabPages
                     if (dlg.ShowDialog(this) != DialogResult.Yes)
                         return false;
 
-                    suicide = true;
+                    logoutCurrentSubject = true;
                 }
             }
 
@@ -1222,7 +1222,7 @@ namespace XenAdmin.TabPages
                     subjectsToLogout[0].DisplayName ?? subjectsToLogout[0].SubjectName)
                 : string.Format(Messages.QUESTION_LOGOUT_AD_USER_MANY, subjectsToLogout.Count);
 
-            if (!suicide) //CA-68645
+            if (!logoutCurrentSubject) //CA-68645
             {
                 using (var dlg = new WarningDialog(logoutMessage,
                         ThreeButtonDialog.ButtonYes,

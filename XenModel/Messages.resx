@@ -1579,14 +1579,14 @@ This will disconnect you from '{0}'.</value>
   <data name="AD_CONFIRM_SELF_TERMINATE_OK" xml:space="preserve">
     <value>Terminate Session</value>
   </data>
-  <data name="AD_CONFIRM_SUICIDE" xml:space="preserve">
+  <data name="AD_CONFIRM_LOGOUT_CURRENT_USER" xml:space="preserve">
     <value>You are about to revoke the permissions for user '{0}'.
 
 You are currently logged in as '{0}' on '{1}', and doing this will disconnect you from '{1}'. To reconnect, you will need to supply the local root account credentials, or the credentials for another authorized AD user.
 
 Do you want to continue?</value>
   </data>
-  <data name="AD_CONFIRM_SUICIDE_GROUP" xml:space="preserve">
+  <data name="AD_CONFIRM_LOGOUT_CURRENT_USER_GROUP" xml:space="preserve">
     <value>You are about to revoke the permissions for group '{0}'.
 
 The user you are currently logged into '{1}' with is a member of '{0}'. Proceeding will disconnect you and any other members of this group from '{1}'. To reconnect, you will need to supply the local root account credentials, or the credentials for another authorized AD user.
@@ -1653,12 +1653,12 @@ Do you want to continue?</value>
   <data name="AD_LOCAL_ROOT_ACCOUNT" xml:space="preserve">
     <value>Local root account</value>
   </data>
-  <data name="AD_LOGOUT_SUICIDE_MANY" xml:space="preserve">
+  <data name="AD_LOGOUT_CURRENT_USER_MANY" xml:space="preserve">
     <value>You are currently logged in as one of the selected users. If you continue you will be logged out of '{0}'. All other selected users will also be logged out.
 
 Do you want to continue?</value>
   </data>
-  <data name="AD_LOGOUT_SUICIDE_ONE" xml:space="preserve">
+  <data name="AD_LOGOUT_CURRENT_USER_ONE" xml:space="preserve">
     <value>You are currently logged in as the selected user. If you continue you will be logged out of '{0}'.
 
 Do you want to continue?</value>

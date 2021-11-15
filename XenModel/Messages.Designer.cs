@@ -3864,6 +3864,32 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You are about to revoke the permissions for user &apos;{0}&apos;.
+        ///
+        ///You are currently logged in as &apos;{0}&apos; on &apos;{1}&apos;, and doing this will disconnect you from &apos;{1}&apos;. To reconnect, you will need to supply the local root account credentials, or the credentials for another authorized AD user.
+        ///
+        ///Do you want to continue?.
+        /// </summary>
+        public static string AD_CONFIRM_LOGOUT_CURRENT_USER {
+            get {
+                return ResourceManager.GetString("AD_CONFIRM_LOGOUT_CURRENT_USER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are about to revoke the permissions for group &apos;{0}&apos;.
+        ///
+        ///The user you are currently logged into &apos;{1}&apos; with is a member of &apos;{0}&apos;. Proceeding will disconnect you and any other members of this group from &apos;{1}&apos;. To reconnect, you will need to supply the local root account credentials, or the credentials for another authorized AD user.
+        ///
+        ///Do you want to continue?.
+        /// </summary>
+        public static string AD_CONFIRM_LOGOUT_CURRENT_USER_GROUP {
+            get {
+                return ResourceManager.GetString("AD_CONFIRM_LOGOUT_CURRENT_USER_GROUP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to terminate this user session?
         ///
         ///This will disconnect you from &apos;{0}&apos;..
@@ -3880,32 +3906,6 @@ namespace XenAdmin {
         public static string AD_CONFIRM_SELF_TERMINATE_OK {
             get {
                 return ResourceManager.GetString("AD_CONFIRM_SELF_TERMINATE_OK", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You are about to revoke the permissions for user &apos;{0}&apos;.
-        ///
-        ///You are currently logged in as &apos;{0}&apos; on &apos;{1}&apos;, and doing this will disconnect you from &apos;{1}&apos;. To reconnect, you will need to supply the local root account credentials, or the credentials for another authorized AD user.
-        ///
-        ///Do you want to continue?.
-        /// </summary>
-        public static string AD_CONFIRM_SUICIDE {
-            get {
-                return ResourceManager.GetString("AD_CONFIRM_SUICIDE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You are about to revoke the permissions for group &apos;{0}&apos;.
-        ///
-        ///The user you are currently logged into &apos;{1}&apos; with is a member of &apos;{0}&apos;. Proceeding will disconnect you and any other members of this group from &apos;{1}&apos;. To reconnect, you will need to supply the local root account credentials, or the credentials for another authorized AD user.
-        ///
-        ///Do you want to continue?.
-        /// </summary>
-        public static string AD_CONFIRM_SUICIDE_GROUP {
-            get {
-                return ResourceManager.GetString("AD_CONFIRM_SUICIDE_GROUP", resourceCulture);
             }
         }
         
@@ -4064,9 +4064,9 @@ namespace XenAdmin {
         ///
         ///Do you want to continue?.
         /// </summary>
-        public static string AD_LOGOUT_SUICIDE_MANY {
+        public static string AD_LOGOUT_CURRENT_USER_MANY {
             get {
-                return ResourceManager.GetString("AD_LOGOUT_SUICIDE_MANY", resourceCulture);
+                return ResourceManager.GetString("AD_LOGOUT_CURRENT_USER_MANY", resourceCulture);
             }
         }
         
@@ -4075,9 +4075,9 @@ namespace XenAdmin {
         ///
         ///Do you want to continue?.
         /// </summary>
-        public static string AD_LOGOUT_SUICIDE_ONE {
+        public static string AD_LOGOUT_CURRENT_USER_ONE {
             get {
-                return ResourceManager.GetString("AD_LOGOUT_SUICIDE_ONE", resourceCulture);
+                return ResourceManager.GetString("AD_LOGOUT_CURRENT_USER_ONE", resourceCulture);
             }
         }
         
