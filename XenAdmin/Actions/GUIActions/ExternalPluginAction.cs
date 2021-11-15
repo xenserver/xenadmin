@@ -248,7 +248,7 @@ namespace XenAdmin.Actions
         // Returns a set of params which relate to the object you have selected in the treeview
         private IEnumerable<string> RetrieveParams(IXenObject obj)
         {
-            var connection = obj.Connection;
+            var connection = obj?.Connection;
             var coordinator = connection != null ? Helpers.GetCoordinator(connection) : null; // get coordinator asserts connection is not null
             var coordinatorAddress = EmptyParameter;
 
@@ -259,7 +259,7 @@ namespace XenAdmin.Actions
             }
 
             var sessionRef = connection?.Session != null ? connection.Session.opaque_ref : EmptyParameter;
-            var objCls = obj.GetType().Name;
+            var objCls = obj != null ? obj.GetType().Name : EmptyParameter;
             var objUuid = connection?.Session != null ? Helpers.GetUuid(obj) : EmptyParameter;
             return new List<string>(new string[] { coordinatorAddress, sessionRef, objCls, objUuid });
         }
