@@ -1196,9 +1196,7 @@ namespace XenAdmin.XenSearch
 
         public override bool Equals(object obj)
         {
-            if (!(obj is IPAddressQuery other))
-                return false;
-            return address.Equals(other.address);
+            return obj is IPAddressQuery other && address.Equals(other.address);
         }
     }
 
