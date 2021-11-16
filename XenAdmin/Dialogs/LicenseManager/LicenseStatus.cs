@@ -213,9 +213,9 @@ namespace XenAdmin.Dialogs
                                    into g
                                    select new { ExpiryDate = g.Key, Hosts = g };
 
-                if(expiryGroups.Count() > 1)
+                if (expiryGroups.Count() > 1)
                 {
-                    expiryGroups.OrderBy(g => g.ExpiryDate);
+                    expiryGroups = expiryGroups.OrderBy(g => g.ExpiryDate).ToList();
                     if ((expiryGroups.ElementAt(1).ExpiryDate - expiryGroups.ElementAt(0).ExpiryDate).TotalDays > 30)
                         return true;
                 }
