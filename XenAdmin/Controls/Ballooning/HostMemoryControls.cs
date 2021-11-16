@@ -127,11 +127,11 @@ namespace XenAdmin.Controls.Ballooning
 
         private void valueControlDomain_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (host != null)
-            {
-                using (var dlg = new ControlDomainMemoryDialog(host))
-                    dlg.ShowDialog(Program.MainWindow);
-            }
+            if (host == null) 
+                return;
+
+            using (var dlg = new ControlDomainMemoryDialog(host))
+                dlg.ShowDialog(Program.MainWindow);
         }
 
         internal void UnregisterHandlers()
