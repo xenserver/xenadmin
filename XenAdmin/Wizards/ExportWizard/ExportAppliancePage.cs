@@ -36,6 +36,7 @@ using XenAdmin.Controls;
 using XenAdmin.Controls.Common;
 using XenAdmin.Wizards.ExportWizard.ApplianceChecks;
 using XenCenterLib;
+using XenModel;
 
 namespace XenAdmin.Wizards.ExportWizard
 {
@@ -166,7 +167,7 @@ namespace XenAdmin.Wizards.ExportWizard
 			if (String.IsNullOrEmpty(ApplianceFileName))
 				return false;
 
-			if (!XenModel.PathValidator.IsFileNameValid(ApplianceFileName, out string invalidNameMsg))
+			if (!PathValidator.IsFileNameValid(ApplianceFileName, out string invalidNameMsg))
 			{
 				error = string.Join(" ", new []{ Messages.EXPORT_APPLIANCE_PAGE_ERROR_INALID_APP , invalidNameMsg});
 				return false;
@@ -177,7 +178,7 @@ namespace XenAdmin.Wizards.ExportWizard
 
 			string path = String.Format("{0}\\{1}", ApplianceDirectory, ApplianceFileName);
 
-			if (!XenModel.PathValidator.IsPathValid(path, out string invalidPathMsg))
+			if (!PathValidator.IsPathValid(path, out string invalidPathMsg))
 			{
 				error = string.Join(" ", new[] { Messages.EXPORT_APPLIANCE_PAGE_ERROR_INVALID_DIR, invalidPathMsg });
 				return false;

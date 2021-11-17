@@ -114,7 +114,7 @@ namespace XenModel
                 {
                     if (part.IndexOfAny(m_invalidFileCharList) > -1)
                     {
-                        invalidPathMsg = IllegalPathCharMsg; //string.Format(Messages.ILLEGAL_CHARACTER_ERROR_MESSAGE, string.Join(" ", m_invalidFileCharList.Where(c => !char.IsControl(c) && c != '\\')));//IllegalFileCharMsg; //string.Format(Messages.ILLEGAL_CHARACTER_ERROR_MESSAGE, m_invalidFileCharList.Where(c => char.IsWhiteSpace(c) || char.IsControl(c)).Join(" ")); // Messages.ILLEGAL_CHARACTER_ERROR_MESSAGE;
+                        invalidPathMsg = IllegalPathCharMsg;
                         return false;
                     }
 

@@ -38,6 +38,7 @@ using XenAdmin.Controls.Common;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
 using XenCenterLib;
+using XenModel;
 using Registry = XenAdmin.Core.Registry;
 
 
@@ -206,7 +207,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             if (String.IsNullOrEmpty(name))
                 return false;
 
-            if (!XenModel.PathValidator.IsFileNameValid(name, out string invalidNameMsg))
+            if (!PathValidator.IsFileNameValid(name, out string invalidNameMsg))
             {
                 error = $"{Messages.BUGTOOL_PAGE_DESTINATION_INVALID_NAME} {invalidNameMsg}";
                 return false;
@@ -217,7 +218,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
 
             string path = String.Format("{0}\\{1}", folder, name);
 
-            if (!XenModel.PathValidator.IsPathValid(path, out string invalidPathMsg))
+            if (!PathValidator.IsPathValid(path, out string invalidPathMsg))
             {
                 error = $"{Messages.BUGTOOL_PAGE_DESTINATION_INVALID_FOLDER} {invalidPathMsg}";
                 return false;

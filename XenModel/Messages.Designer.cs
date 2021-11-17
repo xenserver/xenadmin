@@ -30197,7 +30197,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Path cannot be null or empty..
+        ///   Looks up a localized string similar to Path can not be null or empty..
         /// </summary>
         public static string PATH_CAN_NOT_BE_NULL_ERROR_MESSAGE {
             get {

@@ -32,7 +32,7 @@
 using System;
 using XenAdmin.Controls;
 using XenCenterLib;
-
+using XenModel;
 
 namespace XenAdmin.Wizards.ImportWizard
 {
@@ -119,7 +119,7 @@ namespace XenAdmin.Wizards.ImportWizard
 				return false;
 
 
-			if (!XenModel.PathValidator.IsFileNameValid(name, out string invalidNameMsg))
+			if (!PathValidator.IsFileNameValid(name, out string invalidNameMsg))
 			{
 				error = invalidNameMsg;
 				return false;
