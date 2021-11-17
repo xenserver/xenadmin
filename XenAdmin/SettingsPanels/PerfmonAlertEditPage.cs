@@ -230,7 +230,7 @@ namespace XenAdmin.SettingsPanels
                 Host host = (Host)_XenObject;
                 Host_metrics metrics = host.Connection.Resolve(host.metrics);
                 if (metrics != null)
-                    nudMemoryUsage.Maximum = metrics.memory_total / (1024 * 1024);
+                    nudMemoryUsage.Maximum = (decimal) metrics.memory_total / (1024 * 1024);
             }
 
             Repopulate();

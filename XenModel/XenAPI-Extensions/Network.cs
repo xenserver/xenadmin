@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using XenAdmin;
 using XenAdmin.Core;
 
@@ -67,25 +68,21 @@ namespace XenAPI
                 return name_label;
             }
 
-            Pool pool = Helpers.GetPoolOfOne(Connection);
+            var pool = Helpers.GetPoolOfOne(Connection);
             if (pool == null)
                 return name_label;
 
-            string coordinator_ref = pool.master.opaque_ref;
+            var coordinator_ref = pool.master.opaque_ref;
 
-            foreach (PIF pif in Connection.ResolveAll(PIFs))
-            {
-                if (pif.host.opaque_ref == coordinator_ref)
-                {
-                    return PIFName(pif);
-                }
-            }
+            var pifs = Connection.ResolveAll(PIFs); 
+            var pif = pifs.FirstOrDefault(p => p.host.opaque_ref == coordinator_ref); 
+            if (pif != null)
+                return PIFName(pif); 
 
-            foreach (PIF pif in Connection.ResolveAll(PIFs))
-            {
-                return PIFName(pif);
-            }
-
+            pif = pifs.FirstOrDefault(); 
+            if (pif != null) 
+                return PIFName(pif); 
+            
             return name_label;
         }
 

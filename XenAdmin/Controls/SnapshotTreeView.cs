@@ -336,17 +336,6 @@ namespace XenAdmin.Controls
         [DllImport("user32.dll")]
         internal static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wParam, ref Win32.POINT pt);
 
-
-
-        public override Size GetPreferredSize(Size proposedSize)
-        {
-            if (root == null && Parent != null)
-            {
-                return DefaultSize;
-            }
-            return new Size(root.SubtreeWidth, root.SubtreeHeight);
-        }
-
         #endregion
 
         #region Drawing

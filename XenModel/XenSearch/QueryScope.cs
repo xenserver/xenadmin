@@ -37,7 +37,7 @@ namespace XenAdmin.XenSearch
 {
     public class QueryScope: IEquatable<QueryScope>
     {
-        private ObjectTypes types;
+        private readonly ObjectTypes types;
 
         public QueryScope(ObjectTypes types)
         {

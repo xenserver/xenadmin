@@ -44,8 +44,6 @@ namespace XenAdmin.Actions
         public ShutdownHostAction(Host host, Func<HostAbstractAction, Pool, long, long, bool> acceptNTolChanges)
             : base(host.Connection, Messages.HOST_SHUTDOWN, Messages.WAITING, acceptNTolChanges, null)
         {
-            if (host == null)
-                throw new ArgumentNullException("host");
             Host = host;
             ApiMethodsToRoleCheck.Add("pool.ha_compute_hypothetical_max_host_failures_to_tolerate");
             ApiMethodsToRoleCheck.Add("pool.set_ha_host_failures_to_tolerate");

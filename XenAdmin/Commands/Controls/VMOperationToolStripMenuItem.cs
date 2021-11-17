@@ -33,12 +33,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using XenAdmin.Controls;
-using XenAPI;
-using XenAdmin.Core;
-using XenAdmin.Actions;
 using XenAdmin.Actions.Wlb;
+using XenAdmin.Controls;
+using XenAdmin.Core;
 using XenAdmin.Network;
+using XenAPI;
 
 
 namespace XenAdmin.Commands
@@ -112,7 +111,7 @@ namespace XenAdmin.Commands
 
             // Adds the migrate wizard button, do this before the enable checks on the other items
             AddAdditionalMenuItems(selection);
-            
+
             UpdateHostList();
         }
 
@@ -163,11 +162,13 @@ namespace XenAdmin.Commands
             if (Helpers.WlbEnabled(connection))
             {
                 var vms = selection.AsXenObjects<VM>();
+                if (vms == null || vms.Count == 0) 
+                    return;
+
                 var retrieveVmRecommendationsAction = new WlbRetrieveVmRecommendationsAction(connection, vms);
                 retrieveVmRecommendationsAction.Completed += delegate
                 {
-                    if (Stopped || retrieveVmRecommendationsAction.Cancelled ||
-                        !retrieveVmRecommendationsAction.Succeeded)
+                    if (Stopped || retrieveVmRecommendationsAction.Cancelled || !retrieveVmRecommendationsAction.Succeeded)
                         return;
 
                     var recommendations = new WlbRecommendations(vms, retrieveVmRecommendationsAction.Recommendations);
@@ -244,7 +245,7 @@ namespace XenAdmin.Commands
             var firstItem = DropDownItems[0] as VMOperationToolStripMenuSubItem;
             if (firstItem == null)
                 return;
-                
+
             // API calls could happen in CanRun(), which take time to wait. So a Producer-Consumer-Queue with size 25 is used here to :
             //   1. Make API calls for different menu items happen in parallel;
             //   2. Limit the count of concurrent threads (now it's 25).
@@ -254,7 +255,7 @@ namespace XenAdmin.Commands
             var connection = selection[0].Connection;
             var session = connection.DuplicateSession();
 
-            var affinityHost = connection.Resolve(((VM) selection[0].XenObject).affinity);
+            var affinityHost = connection.Resolve(((VM)selection[0].XenObject).affinity);
 
             EnqueueHostMenuItem(this, session, affinityHost, firstItem, true);
 
@@ -279,7 +280,7 @@ namespace XenAdmin.Commands
             workerQueueWithoutWlb.EnqueueItem(() =>
             {
                 var selection = menu.Command.GetSelection();
-                var cmd = isHomeServer 
+                var cmd = isHomeServer
                     ? new VMOperationHomeServerCommand(menu.Command.MainWindowCommandInterface, selection, menu._operation, session)
                     : new VMOperationHostCommand(menu.Command.MainWindowCommandInterface, selection, delegate { return host; }, host.Name().EscapeAmpersands(), menu._operation, session);
 
@@ -321,7 +322,7 @@ namespace XenAdmin.Commands
                 }
             });
         }
-        
+
         #endregion
 
         /// <summary>

@@ -413,16 +413,17 @@ namespace XenAdmin.Wizards.GenericPages
                     {
                         if (hasPoolSharedStorage)
                         {
-                            foreach (var pool in target.Item.Connection.Cache.Pools)
+                            //there exists one pool per connection
+                            var pools = target.Item.Connection.Cache.Pools;
+                            if (pools.Length > 0)
                             {
+                                var pool = pools.First();
                                 var item = new NoTargetServerPoolItem(pool);
                                 cb.Items.Add(item);
 
                                 if ((m_selectedObject != null && m_selectedObject.opaque_ref == pool.opaque_ref) ||
                                     (target.Item.opaque_ref == pool.opaque_ref))
                                     cb.Value = item;
-
-                                break; //there exists one pool per connection
                             }
                         }
 

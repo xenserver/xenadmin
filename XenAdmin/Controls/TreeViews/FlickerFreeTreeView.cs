@@ -33,6 +33,7 @@ using System;
 using System.Windows.Forms;
 using XenAdmin.Core;
 using System.Collections.Generic;
+using System.Linq;
 using XenAdmin.Network;
 using XenAdmin.XenSearch;
 using XenCenterLib;
@@ -157,7 +158,7 @@ namespace XenAdmin.Controls
             {
                 VirtualTreeNode.PersistenceInfo info = new VirtualTreeNode.PersistenceInfo(node);
 
-                if (!_persistedSelectionInfo.Contains(info))
+                if (_persistedSelectionInfo != null && !_persistedSelectionInfo.Contains(info))
                 {
                     // selection is different to old one. So fire an event.
 
@@ -203,11 +204,9 @@ namespace XenAdmin.Controls
 
             if (newSelectedNodes.Count == 0)
             {
-                foreach (VirtualTreeNode.PersistenceInfo info in _persistedSelectionInfo)
+                if (_persistedSelectionInfo.Count > 0)
                 {
-                    // Finally, just select one of the parents
-                    TryToSelectNode(newSelectedNodes, ClosestMatch(info.Path));
-                    break;
+                    TryToSelectNode(newSelectedNodes, ClosestMatch(_persistedSelectionInfo.First().Path));
                 }
             }
 

@@ -137,7 +137,9 @@ namespace XenAdmin.Dialogs
                 ServerNameComboBox.Enabled = true;
                 AddButton.Text = Messages.ADD;
             }
-            if (_changedPass && connection.Password == null)
+            else if (!_changedPass)
+                return;
+            else if (connection.Password == null)
             {
                 Text = Messages.CONNECT_TO_SERVER;
                 labelInstructions.Text = Messages.CONNECT_TO_SERVER_BLURB;
@@ -145,7 +147,7 @@ namespace XenAdmin.Dialogs
                 ServerNameComboBox.Enabled = false;
                 AddButton.Text = Messages.CONNECT;
             }
-            else if (_changedPass && connection.ExpectPasswordIsCorrect)
+            else if (connection.ExpectPasswordIsCorrect)
             {
                 // This situation should be rare, it normally comes from logging in a new session after an existing one has been made
                 // We now use duplicate sessions instead most of the time which don't log in again.
@@ -155,7 +157,7 @@ namespace XenAdmin.Dialogs
                 ServerNameComboBox.Enabled = false;
                 AddButton.Text = Messages.OK;
             }
-            else if (_changedPass) // the password probably hasnt actually changed but we do know the user has typed it in wrong
+            else  // the password probably hasn't actually changed but we do know the user has typed it in wrong
             {
                 Text = Messages.CONNECT_TO_SERVER;
                 labelInstructions.Text = string.Format(Messages.ERROR_CONNECTING_BLURB, BrandManager.BrandConsole);
@@ -163,6 +165,7 @@ namespace XenAdmin.Dialogs
                 ServerNameComboBox.Enabled = false;
                 AddButton.Text = Messages.CONNECT;
             }
+
         }
 
         private void AddButton_Click(object sender, EventArgs e)
@@ -200,7 +203,7 @@ namespace XenAdmin.Dialogs
         {
             if (conn == null)
             {
-                conn = new XenConnection {fromDialog = true};
+                conn = new XenConnection { fromDialog = true };
                 conn.CachePopulated += conn_CachePopulated;
             }
             else if (!_changedPass)
