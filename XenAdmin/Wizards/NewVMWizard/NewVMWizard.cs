@@ -90,42 +90,40 @@ namespace XenAdmin.Wizards.NewVMWizard
             #region RBAC Warning Page Checks
             if (Helpers.ConnectionRequiresRbac(connection))
             {
-                var createCheck = new RBACWarningPage.WizardPermissionCheck(Messages.RBAC_WARNING_VM_WIZARD_BLOCK);
-                foreach (RbacMethod method in CreateVMAction.StaticRBACDependencies)
-                    createCheck.AddApiCheck(method);
-                createCheck.Blocking = true;
+                var createCheck = new WizardRbacCheck(Messages.RBAC_WARNING_VM_WIZARD_BLOCK,
+                    CreateVMAction.StaticRBACDependencies) {Blocking = true};
 
                 // Check to see if they can set memory values
-                var memCheck = new RBACWarningPage.WizardPermissionCheck(Messages.RBAC_WARNING_VM_WIZARD_MEM);
-                memCheck.AddApiCheck("vm.set_memory_limits");
-                memCheck.WarningAction = new RBACWarningPage.PermissionCheckActionDelegate(delegate ()
+                var memCheck = new WizardRbacCheck(Messages.RBAC_WARNING_VM_WIZARD_MEM,
+                    "vm.set_memory_limits")
                 {
-                    // no point letting them continue
-                    page_5_CpuMem.DisableMemoryControls();
-                });
+                    WarningAction = () => page_5_CpuMem.DisableMemoryControls()
+                };
 
 
                 // Check to see if they can set the VM's affinity
-                var affinityCheck = new RBACWarningPage.WizardPermissionCheck(Messages.RBAC_WARNING_VM_WIZARD_AFFINITY);
-                affinityCheck.ApiCallsToCheck.Add("vm.set_affinity");
-                affinityCheck.WarningAction = new RBACWarningPage.PermissionCheckActionDelegate(delegate ()
+                var affinityCheck = new WizardRbacCheck(Messages.RBAC_WARNING_VM_WIZARD_AFFINITY, "vm.set_affinity")
                 {
-                    page_4_HomeServer.DisableStep = true;
-                    BlockAffinitySelection = true;
-                    Program.Invoke(this, RefreshProgress);
-                });
+                    WarningAction = () =>
+                    {
+                        page_4_HomeServer.DisableStep = true;
+                        BlockAffinitySelection = true;
+                        Program.Invoke(this, RefreshProgress);
+                    }
+                };
 
                 page_RbacWarning.AddPermissionChecks(xenConnection, createCheck, affinityCheck, memCheck);
 
                 if (Helpers.GpuCapability(xenConnection))
                 {
-                    var vgpuCheck = new RBACWarningPage.WizardPermissionCheck(Messages.RBAC_WARNING_VM_WIZARD_GPU);
-                    vgpuCheck.ApiCallsToCheck.Add("vgpu.create");
-                    vgpuCheck.WarningAction = new RBACWarningPage.PermissionCheckActionDelegate(() =>
+                    var vgpuCheck = new WizardRbacCheck(Messages.RBAC_WARNING_VM_WIZARD_GPU, "vgpu.create")
                     {
-                        pageVgpu.DisableStep = true;
-                        Program.Invoke(this, RefreshProgress);
-                    });
+                        WarningAction = () =>
+                        {
+                            pageVgpu.DisableStep = true;
+                            Program.Invoke(this, RefreshProgress);
+                        }
+                    };
 
                     page_RbacWarning.AddPermissionChecks(xenConnection, vgpuCheck);
                 }

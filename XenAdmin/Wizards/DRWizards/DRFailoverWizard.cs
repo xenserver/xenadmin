@@ -86,7 +86,8 @@ namespace XenAdmin.Wizards.DRWizards
 
             if (Helpers.ConnectionRequiresRbac(Pool.Connection))
             {
-                RBACWarningPage.AddApiMethodsCheck(Pool.Connection, "DR_task.async_create", Messages.RBAC_DR_WIZARD_MESSAGE);
+                RBACWarningPage.SetPermissionChecks(Pool.Connection,
+                    new WizardRbacCheck(Messages.RBAC_DR_WIZARD_MESSAGE, "DR_task.async_create") {Blocking = true});
                 AddPage(RBACWarningPage, 0);
             }
 

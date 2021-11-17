@@ -1596,6 +1596,9 @@ The user you are currently logged into '{1}' with is a member of '{0}'. Proceedi
 
 Do you want to continue?</value>
   </data>
+  <data name="AD_COORDINATOR_UNAVAILABLE_BLURB" xml:space="preserve">
+    <value>Please wait while {0} establishes your current external authentication configuration.</value>
+  </data>
   <data name="AD_COULD_NOT_RESOLVE_SUFFIX" xml:space="preserve">
     <value>Subject could not be resolved in your AD</value>
   </data>
@@ -1662,9 +1665,6 @@ Do you want to continue?</value>
     <value>You are currently logged in as the selected user. If you continue you will be logged out of '{0}'.
 
 Do you want to continue?</value>
-  </data>
-  <data name="AD_COORDINATOR_UNAVAILABLE_BLURB" xml:space="preserve">
-    <value>Please wait while {0} establishes your current external authentication configuration.</value>
   </data>
   <data name="AD_NOT_CONFIGURED_BLURB" xml:space="preserve">
     <value>AD is not currently configured for pool '{0}'. To enable AD authentication, click Join Domain.</value>
@@ -1916,11 +1916,11 @@ Note that if RBAC is enabled, only alerts which you have privileges to dismiss w
   <data name="ALLOWED_MTU_VALUE" xml:space="preserve">
     <value>Allowed MTU value: {0}</value>
   </data>
-  <data name="ALLOWED_UPDATES_DIALOG_MESSAGE" xml:space="preserve">
-    <value>Would you like {0} to periodically check the internet for new versions of {0} and {1}?</value>
-  </data>
   <data name="ALLOWED_UPDATES_DIALOG_CHECKBOX" xml:space="preserve">
     <value>&amp;Show internet proxy settings</value>
+  </data>
+  <data name="ALLOWED_UPDATES_DIALOG_MESSAGE" xml:space="preserve">
+    <value>Would you like {0} to periodically check the internet for new versions of {0} and {1}?</value>
   </data>
   <data name="ALLOW_TO_CONTINUE" xml:space="preserve">
     <value>&amp;Allow to continue</value>
@@ -2664,14 +2664,14 @@ This will cancel compilation of the status report.</value>
   <data name="CERTIFICATE_VALIDITY_PERIOD_VALUE" xml:space="preserve">
     <value>Valid from {0} to {1}</value>
   </data>
-  <data name="CERTIFICATE_VERIFICATION_KEY" xml:space="preserve">
-    <value>Certificate Verification</value>
-  </data>
   <data name="CERTIFICATE_VERIFICATION_HOST_DISABLED_IN_POOL" xml:space="preserve">
     <value>Enabled on the pool, but disabled on:</value>
   </data>
   <data name="CERTIFICATE_VERIFICATION_HOST_DISABLED_STANDALONE" xml:space="preserve">
     <value>Disabled, but enabled on the pool</value>
+  </data>
+  <data name="CERTIFICATE_VERIFICATION_KEY" xml:space="preserve">
+    <value>Certificate Verification</value>
   </data>
   <data name="CFU_STATUS_CHECK_DESCRIPTION" xml:space="preserve">
     <value>Ability to download updates</value>
@@ -2780,12 +2780,6 @@ Do you want to assign it to the schedule '{2}' instead?</value>
   <data name="CHECKING_SECURITY_PROTOCOL_GROUP" xml:space="preserve">
     <value>Checking security protocol</value>
   </data>
-  <data name="CHECKING_VSWITCH_CONTROLLER" xml:space="preserve">
-    <value>vSwitch Controller check</value>
-  </data>
-  <data name="CHECKING_VSWITCH_CONTROLLER_GROUP" xml:space="preserve">
-    <value>Checking vSwitch Controller configuration</value>
-  </data>
   <data name="CHECKING_SERVER_NEEDS_REBOOT" xml:space="preserve">
     <value>Checking reboots required</value>
   </data>
@@ -2806,6 +2800,12 @@ Do you want to assign it to the schedule '{2}' instead?</value>
   </data>
   <data name="CHECKING_UPGRADE_HOTFIX_STATUS" xml:space="preserve">
     <value>Checking upgrade hotfix status</value>
+  </data>
+  <data name="CHECKING_VSWITCH_CONTROLLER" xml:space="preserve">
+    <value>vSwitch Controller check</value>
+  </data>
+  <data name="CHECKING_VSWITCH_CONTROLLER_GROUP" xml:space="preserve">
+    <value>Checking vSwitch Controller configuration</value>
   </data>
   <data name="CHECKING_XENCENTER_VERSION" xml:space="preserve">
     <value>Checking {0} version</value>
@@ -3672,6 +3672,9 @@ This action cannot be undone. Are you sure you want to continue?</value>
   </data>
   <data name="CONVERT_TO_TEMPLATE" xml:space="preserve">
     <value>Convert VM to Template</value>
+  </data>
+  <data name="COORDINATOR" xml:space="preserve">
+    <value>Coordinator</value>
   </data>
   <data name="COPY" xml:space="preserve">
     <value>Copy</value>
@@ -5646,14 +5649,14 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="EULAS" xml:space="preserve">
     <value>EULAs</value>
   </data>
+  <data name="EVACUATE_HOST_CLUSER_CREATING" xml:space="preserve">
+    <value>You cannot nominate a new coordinator while the pool is in the process of creating a cluster.</value>
+  </data>
   <data name="EVACUATE_HOST_DIALOG_TITLE" xml:space="preserve">
     <value>Enter Maintenance Mode - {0}</value>
   </data>
   <data name="EVACUATE_HOST_EJECT_CD_PROMPT" xml:space="preserve">
     <value>{0} Eject the CD</value>
-  </data>
-  <data name="EVACUATE_HOST_CLUSER_CREATING" xml:space="preserve">
-    <value>You cannot nominate a new coordinator while the pool is in the process of creating a cluster.</value>
   </data>
   <data name="EVACUATE_HOST_HA_DISABLING" xml:space="preserve">
     <value>You cannot nominate a new coordinator while HA is being disabled on the pool.</value>
@@ -8297,9 +8300,6 @@ This will permanently delete and reinitialize all local storage on the servers. 
   <data name="MANUAL_CHECK_FOR_UPDATES_UNLICENSED_INFO" xml:space="preserve">
     <value>Subscription Advantage required</value>
   </data>
-  <data name="COORDINATOR" xml:space="preserve">
-    <value>Coordinator</value>
-  </data>
   <data name="MAX" xml:space="preserve">
     <value>Max</value>
   </data>
@@ -8448,11 +8448,11 @@ Are you sure you want to detach this storage repository?</value>
   <data name="MESSAGEBOX_ENABLE_TLS_VERIFICATION_BLURB" xml:space="preserve">
     <value>Certificate verification is not enabled on '{0}'. Would you like to enable it now?</value>
   </data>
-  <data name="MESSAGEBOX_ENABLE_TLS_VERIFICATION_WARNING" xml:space="preserve">
-    <value>Before enabling certificate verification ensure that there are no operations running in the pool, otherwise they will be interrupted.</value>
-  </data>
   <data name="MESSAGEBOX_ENABLE_TLS_VERIFICATION_BUTTON" xml:space="preserve">
     <value>&amp;Yes, Enable certificate verification</value>
+  </data>
+  <data name="MESSAGEBOX_ENABLE_TLS_VERIFICATION_WARNING" xml:space="preserve">
+    <value>Before enabling certificate verification ensure that there are no operations running in the pool, otherwise they will be interrupted.</value>
   </data>
   <data name="MESSAGEBOX_ERRORTEXT" xml:space="preserve">
     <value>Unable to connect to server '{0}'.
@@ -8516,11 +8516,14 @@ This action is final and unrecoverable.</value>
   <data name="MESSAGEBOX_PASSWORD_WRITE_FAILED" xml:space="preserve">
     <value>Writing password information failed: {0}</value>
   </data>
+  <data name="MESSAGEBOX_POOL_COORDINATOR_REMOVE" xml:space="preserve">
+    <value>You cannot remove the coordinator from the pool.</value>
+  </data>
   <data name="MESSAGEBOX_POOL_DELETE" xml:space="preserve">
     <value>The pool Coordinator will become a standalone server, are you sure you want to continue?</value>
   </data>
-  <data name="MESSAGEBOX_POOL_COORDINATOR_REMOVE" xml:space="preserve">
-    <value>You cannot remove the coordinator from the pool.</value>
+  <data name="MESSAGEBOX_POOL_MEMBERS_EJECT" xml:space="preserve">
+    <value>You must eject all other pool members from the pool before you can delete the pool.</value>
   </data>
   <data name="MESSAGEBOX_PROGRAM_UNEXPECTED" xml:space="preserve">
     <value>[{0}] There has been an unexpected error. Technical details about this error have been saved to the following file. Please send this to your support representative.
@@ -8563,9 +8566,6 @@ Do you want to continue?</value>
 {0}
 
 Do you want to continue?</value>
-  </data>
-  <data name="MESSAGEBOX_POOL_MEMBERS_EJECT" xml:space="preserve">
-    <value>You must eject all other pool members from the pool before you can delete the pool.</value>
   </data>
   <data name="MESSAGEBOX_VIF_DELETE" xml:space="preserve">
     <value>This will delete the selected network interface permanently. Continue?</value>
@@ -8881,8 +8881,14 @@ You should only proceed if you have verified that these settings are correct.</v
   <data name="NEWNETWORK_VNAME" xml:space="preserve">
     <value>New Private Network</value>
   </data>
-  <data name="NEW_POOL_CLUSTERING_ENABLED" xml:space="preserve">
-    <value>Clustering is enabled on this server.</value>
+  <data name="NEWPOOL_COORDINATOR_CONNECTING" xml:space="preserve">
+    <value>The coordinator is still connecting</value>
+  </data>
+  <data name="NEWPOOL_COORDINATOR_DISCONNECTED" xml:space="preserve">
+    <value>The coordinator is disconnected</value>
+  </data>
+  <data name="NEWPOOL_COORDINATOR_ROLE" xml:space="preserve">
+    <value>Your current role on the coordinator is not authorized to add hosts to the coordinator's pool</value>
   </data>
   <data name="NEWPOOL_DIFFERENT_HOMOGENEOUS_UPDATES_FROM_COORDINATOR" xml:space="preserve">
     <value>This server has different updates from the coordinator</value>
@@ -8925,15 +8931,6 @@ You should only proceed if you have verified that these settings are correct.</v
   </data>
   <data name="NEWPOOL_LINUXPACK" xml:space="preserve">
     <value>This server's Linux pack installation state differs from that of the coordinator</value>
-  </data>
-  <data name="NEWPOOL_COORDINATOR_CONNECTING" xml:space="preserve">
-    <value>The coordinator is still connecting</value>
-  </data>
-  <data name="NEWPOOL_COORDINATOR_DISCONNECTED" xml:space="preserve">
-    <value>The coordinator is disconnected</value>
-  </data>
-  <data name="NEWPOOL_COORDINATOR_ROLE" xml:space="preserve">
-    <value>Your current role on the coordinator is not authorized to add hosts to the coordinator's pool</value>
   </data>
   <data name="NEWPOOL_MAX_NUMBER_HOST_REACHED" xml:space="preserve">
     <value>The pool has already reached the maximum number of servers allowed by your license</value>
@@ -9402,12 +9399,6 @@ Review these settings, then click Previous if you need to change anything. Other
   <data name="NEWVMWIZARD_NETWORKMEDIAPAGE_TITLE" xml:space="preserve">
     <value>Locate the operating system installation media</value>
   </data>
-  <data name="NEWVMWIZARD_STORAGEPAGE_DISK" xml:space="preserve">
-    <value>Disk '{0}'</value>
-  </data>
-  <data name="NEWVMWIZARD_STORAGEPAGE_DISK_DESCRIPTION" xml:space="preserve">
-    <value>Created by template provisioner</value>
-  </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_DEFAULT_LOCAL" xml:space="preserve">
     <value>The default SR '{0}' cannot be seen from the VM's home server.</value>
   </data>
@@ -9417,8 +9408,20 @@ Review these settings, then click Previous if you need to change anything. Other
   <data name="NEWVMWIZARD_STORAGEPAGE_DEFAULT_NOSPACE" xml:space="preserve">
     <value>The default SR '{0}' does not have enough free space for the new VM's disks.</value>
   </data>
+  <data name="NEWVMWIZARD_STORAGEPAGE_DISK" xml:space="preserve">
+    <value>Disk '{0}'</value>
+  </data>
+  <data name="NEWVMWIZARD_STORAGEPAGE_DISK_DESCRIPTION" xml:space="preserve">
+    <value>Created by template provisioner</value>
+  </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_NAME" xml:space="preserve">
     <value>Storage</value>
+  </data>
+  <data name="NEWVMWIZARD_STORAGEPAGE_NOSTORAGE" xml:space="preserve">
+    <value>&lt;no suitable storage&gt;</value>
+  </data>
+  <data name="NEWVMWIZARD_STORAGEPAGE_SROVERCOMMIT" xml:space="preserve">
+    <value>The SR '{0}' is overcommitted. There is only {1} of free space and the new VM requires {2}.</value>
   </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_SUGGESTED_LOCAL" xml:space="preserve">
     <value>The SR suggested by the template ('{0}') cannot be seen from the VM's home server.</value>
@@ -9428,12 +9431,6 @@ Review these settings, then click Previous if you need to change anything. Other
   </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_SUGGESTED_NOSPACE" xml:space="preserve">
     <value>The SR suggested by the template ('{0}') does not have enough free space for the new VM's disks.</value>
-  </data>
-  <data name="NEWVMWIZARD_STORAGEPAGE_NOSTORAGE" xml:space="preserve">
-    <value>&lt;no suitable storage&gt;</value>
-  </data>
-  <data name="NEWVMWIZARD_STORAGEPAGE_SROVERCOMMIT" xml:space="preserve">
-    <value>The SR '{0}' is overcommitted. There is only {1} of free space and the new VM requires {2}.</value>
   </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_TITLE" xml:space="preserve">
     <value>Configure storage for the new VM</value>
@@ -9456,9 +9453,6 @@ Review these settings, then click Previous if you need to change anything. Other
   <data name="NEWVMWIZARD_TEMPLATEPAGE_GOOROOM" xml:space="preserve">
     <value>Gooroom</value>
   </data>
-  <data name="NEWVMWIZARD_TEMPLATEPAGE_ROCKY" xml:space="preserve">
-    <value>Rocky</value>
-  </data>
   <data name="NEWVMWIZARD_TEMPLATEPAGE_LINX" xml:space="preserve">
     <value>Linx</value>
   </data>
@@ -9476,6 +9470,9 @@ Review these settings, then click Previous if you need to change anything. Other
   </data>
   <data name="NEWVMWIZARD_TEMPLATEPAGE_REDHAT" xml:space="preserve">
     <value>Red Hat</value>
+  </data>
+  <data name="NEWVMWIZARD_TEMPLATEPAGE_ROCKY" xml:space="preserve">
+    <value>Rocky</value>
   </data>
   <data name="NEWVMWIZARD_TEMPLATEPAGE_SCILINUX" xml:space="preserve">
     <value>Scientific Linux</value>
@@ -9579,6 +9576,9 @@ Do you want to enable AD authentication on your server and join it to the same d
 {0}
 
 All pool members must use the same authentication method. Do you want to enable AD authentication on these servers and join them to the same domain as the pool?</value>
+  </data>
+  <data name="NEW_POOL_CLUSTERING_ENABLED" xml:space="preserve">
+    <value>Clustering is enabled on this server.</value>
   </data>
   <data name="NEW_POOL_CPU_MASKING_MESSAGE" xml:space="preserve">
     <value>You are attempting to add the server '{0}' to a pool with a coordinator that is using an older CPU.
@@ -9716,11 +9716,11 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="NICS_ARE_SRIOV_ENABLED" xml:space="preserve">
     <value>SR-IOV is already enabled on all the SR-IOV capable NICs.</value>
   </data>
-  <data name="NIC_HIDDEN" xml:space="preserve">
-    <value>{0} (Hidden)</value>
-  </data>
   <data name="NIC_BONDED_MEMBER" xml:space="preserve">
     <value>{0} (Bonded member)</value>
+  </data>
+  <data name="NIC_HIDDEN" xml:space="preserve">
+    <value>{0} (Hidden)</value>
   </data>
   <data name="NIC_TAB_TITLE" xml:space="preserve">
     <value>Network Interface Cards</value>
@@ -9761,14 +9761,14 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS" xml:space="preserve">
     <value>Events: {0}</value>
   </data>
-  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_IN_PROGRESS" xml:space="preserve">
-    <value>{0} in progress</value>
+  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ERROR" xml:space="preserve">
+    <value>1 error</value>
   </data>
   <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ERRORS" xml:space="preserve">
     <value>{0} errors</value>
   </data>
-  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ERROR" xml:space="preserve">
-    <value>1 error</value>
+  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_IN_PROGRESS" xml:space="preserve">
+    <value>{0} in progress</value>
   </data>
   <data name="NOTIFICATIONS_SUBMODE_EVENTS_UNREAD_MANY" xml:space="preserve">
     <value>Events ({0} errors)</value>
@@ -10555,11 +10555,11 @@ File not found</value>
   <data name="PLAN_ACTION_ERROR" xml:space="preserve">
     <value> error.</value>
   </data>
-  <data name="PLAN_ACTION_FAILURE_NO_HOSTS_AVAILABLE" xml:space="preserve">
-    <value>Server '{0}' could not be evacuated because there were no servers available to accommodate all the VMs being migrated from this server. Please reboot the other servers that are pending a reboot following the update installation, and then press Retry to resume the process.</value>
-  </data>
   <data name="PLAN_ACTION_FAILURE_NOT_ENOUGH_MEMORY" xml:space="preserve">
     <value>Server '{0}' could not be evacuated because there was not enough free memory on the other servers to migrate all the VMs from this server. Please suspend or shut down some VMs and then press Retry to resume the process.</value>
+  </data>
+  <data name="PLAN_ACTION_FAILURE_NO_HOSTS_AVAILABLE" xml:space="preserve">
+    <value>Server '{0}' could not be evacuated because there were no servers available to accommodate all the VMs being migrated from this server. Please reboot the other servers that are pending a reboot following the update installation, and then press Retry to resume the process.</value>
   </data>
   <data name="PLAN_ACTION_STATUS_INSTALLING_XENSERVER" xml:space="preserve">
     <value>Installing {0} on '{1}'...</value>
@@ -10674,6 +10674,12 @@ Please reconnect the host and try again</value>
   <data name="POOL_COLON" xml:space="preserve">
     <value>Pool:</value>
   </data>
+  <data name="POOL_COORDINATOR" xml:space="preserve">
+    <value>Pool coordinator</value>
+  </data>
+  <data name="POOL_COORDINATOR_GONE" xml:space="preserve">
+    <value>Could not find the pool coordinator in {0}'s cache.</value>
+  </data>
   <data name="POOL_DELETE_HA_ENABLED" xml:space="preserve">
     <value>Pool '{0}' has HA enabled. You must disable HA before making the pool into a standalone server.</value>
   </data>
@@ -10740,12 +10746,6 @@ Please reconnect the host and try again</value>
   <data name="POOL_LICENSE" xml:space="preserve">
     <value>Pool License</value>
   </data>
-  <data name="POOL_COORDINATOR" xml:space="preserve">
-    <value>Pool coordinator</value>
-  </data>
-  <data name="POOL_COORDINATOR_GONE" xml:space="preserve">
-    <value>Could not find the pool coordinator in {0}'s cache.</value>
-  </data>
   <data name="POOL_NAME_EMPTY" xml:space="preserve">
     <value>Pool name cannot be empty</value>
   </data>
@@ -10799,11 +10799,23 @@ If this value does not correspond to a server within the selected resource pool 
   <data name="PROBING_HBA_TITLE" xml:space="preserve">
     <value>Probing for LUNs on {0}</value>
   </data>
-  <data name="PROBLEM_HEALTH_CHECK_SERVICE_DESCRIPTION" xml:space="preserve">
-    <value>{0}: Health Check has been removed in {1} {2}.</value>
+  <data name="PROBLEM_COORDINATOR_PENDING_RESTART_HOST" xml:space="preserve">
+    <value>{0}: The coordinator needs to be rebooted first</value>
+  </data>
+  <data name="PROBLEM_COORDINATOR_PENDING_RESTART_HOST_THIS_UPDATE" xml:space="preserve">
+    <value>{0}: This update requires the coordinator to be rebooted first</value>
+  </data>
+  <data name="PROBLEM_COORDINATOR_PENDING_RESTART_TOOLSTACK" xml:space="preserve">
+    <value>{0}: Toolstack on coordinator needs to be restarted first</value>
+  </data>
+  <data name="PROBLEM_COORDINATOR_PENDING_RESTART_TOOLSTACK_THIS_UPDATE" xml:space="preserve">
+    <value>{0}: This update requires the toolstack on coordinator to be restarted first</value>
   </data>
   <data name="PROBLEM_HEALTH_CHECK_HELP" xml:space="preserve">
     <value>Disable Health Check</value>
+  </data>
+  <data name="PROBLEM_HEALTH_CHECK_SERVICE_DESCRIPTION" xml:space="preserve">
+    <value>{0}: Health Check has been removed in {1} {2}.</value>
   </data>
   <data name="PROBLEM_HOSTPROBLEM_TITLE" xml:space="preserve">
     <value>Server '{0}'</value>
@@ -10820,15 +10832,6 @@ If this value does not correspond to a server within the selected resource pool 
   <data name="PROBLEM_LEGACY_PROTOCOL_INFO_SERVER" xml:space="preserve">
     <value>If you are upgrading to {0} and above, you will not be able to use security protocols earlier than TLS 1.2 for communication with the server and you may lose permanently access to it.</value>
   </data>
-  <data name="PROBLEM_VSWITCH_CONTROLLER_DESCRIPTION" xml:space="preserve">
-    <value>{0}: Support for the vSwitch Controller has been removed in {1}.</value>
-  </data>
-  <data name="PROBLEM_VSWITCH_CONTROLLER_INFO_ERROR" xml:space="preserve">
-    <value>Support for the vSwitch Controller has been removed in {0}. You must deconfigure the controller because any features that require it will no longer work. Please click the link below for more information.</value>
-  </data>
-  <data name="PROBLEM_VSWITCH_CONTROLLER_INFO_WARNING" xml:space="preserve">
-    <value>If you are upgrading to {0} and above, you must deconfigure the vSwitch Controller because support for it has been removed in this release and any features that require it will no longer work. Please click the link below for more information.</value>
-  </data>
   <data name="PROBLEM_MAC_ADDRESS_IS_DUPLICATE" xml:space="preserve">
     <value>The MAC address entered has already been assigned to the VM:
 {1}
@@ -10837,18 +10840,6 @@ Are you sure you want to continue?</value>
   </data>
   <data name="PROBLEM_MAC_ADDRESS_IS_DUPLICATE_TITLE" xml:space="preserve">
     <value>Duplicate MAC address</value>
-  </data>
-  <data name="PROBLEM_COORDINATOR_PENDING_RESTART_HOST" xml:space="preserve">
-    <value>{0}: The coordinator needs to be rebooted first</value>
-  </data>
-  <data name="PROBLEM_COORDINATOR_PENDING_RESTART_HOST_THIS_UPDATE" xml:space="preserve">
-    <value>{0}: This update requires the coordinator to be rebooted first</value>
-  </data>
-  <data name="PROBLEM_COORDINATOR_PENDING_RESTART_TOOLSTACK" xml:space="preserve">
-    <value>{0}: Toolstack on coordinator needs to be restarted first</value>
-  </data>
-  <data name="PROBLEM_COORDINATOR_PENDING_RESTART_TOOLSTACK_THIS_UPDATE" xml:space="preserve">
-    <value>{0}: This update requires the toolstack on coordinator to be restarted first</value>
   </data>
   <data name="PROBLEM_POOLPROBLEM_TITLE" xml:space="preserve">
     <value>Pool '{0}'</value>
@@ -10875,6 +10866,15 @@ Click Previous if you need to go back and specify a different network location o
   </data>
   <data name="PROBLEM_VMPROBLEM_TITLE" xml:space="preserve">
     <value>VM '{0}'</value>
+  </data>
+  <data name="PROBLEM_VSWITCH_CONTROLLER_DESCRIPTION" xml:space="preserve">
+    <value>{0}: Support for the vSwitch Controller has been removed in {1}.</value>
+  </data>
+  <data name="PROBLEM_VSWITCH_CONTROLLER_INFO_ERROR" xml:space="preserve">
+    <value>Support for the vSwitch Controller has been removed in {0}. You must deconfigure the controller because any features that require it will no longer work. Please click the link below for more information.</value>
+  </data>
+  <data name="PROBLEM_VSWITCH_CONTROLLER_INFO_WARNING" xml:space="preserve">
+    <value>If you are upgrading to {0} and above, you must deconfigure the vSwitch Controller because support for it has been removed in this release and any features that require it will no longer work. Please click the link below for more information.</value>
   </data>
   <data name="PROBLEM_XENCENTER_VERSION_TITLE" xml:space="preserve">
     <value>{0} version</value>
@@ -11028,11 +11028,23 @@ To access this console switch to an account with the following role:
 
 {1}</value>
   </data>
+  <data name="RBAC_CROSS_POOL_COPY_TEMPLATE_BLOCKED" xml:space="preserve">
+    <value>A {0} user cannot copy templates across pools. Log in as a different user with sufficient privileges on both source and destination servers and try again.</value>
+  </data>
+  <data name="RBAC_CROSS_POOL_COPY_VM_BLOCKED" xml:space="preserve">
+    <value>A {0} user cannot copy VMs across pools. Log in as a different user with sufficient privileges on both source and destination servers and try again.</value>
+  </data>
+  <data name="RBAC_CROSS_POOL_MIGRATE_TEMPLATE_BLOCKED" xml:space="preserve">
+    <value>A {0} user cannot migrate templates across pools. Log in as a different user with sufficient privileges on both source and destination servers and try again.</value>
+  </data>
   <data name="RBAC_CROSS_POOL_MIGRATE_VM_BLOCKED" xml:space="preserve">
-    <value>Current access levels do not allow migration of VMs across pools. Log in as a different user with sufficient privileges on both source and target hosts and try again.</value>
+    <value>A {0} user cannot migrate VMs across pools. Log in as a different user with sufficient privileges on both source and destination servers and try again.</value>
   </data>
   <data name="RBAC_DR_WIZARD_MESSAGE" xml:space="preserve">
-    <value>User {0} does not have sufficient permissions to run a Disaster Recovery wizard. Login as a different user with sufficient privileges and try again.</value>
+    <value>A {0} user does not have sufficient permissions to use Disaster Recovery. Login as a different user with sufficient privileges and try again.</value>
+  </data>
+  <data name="RBAC_GET_SYSTEM_STATUS_BLOCKED" xml:space="preserve">
+    <value>A {0} user cannot download system status reports. Log in as a different user with sufficient privileges and try again.</value>
   </data>
   <data name="RBAC_HA_CONFIGURE_WARNING" xml:space="preserve">
     <value>Your current role is '{1}'.
@@ -11046,6 +11058,12 @@ To configure HA settings, switch to an account with one of the following roles:
   </data>
   <data name="RBAC_HTTP_FAILURE" xml:space="preserve">
     <value>A {0} user cannot perform this action.</value>
+  </data>
+  <data name="RBAC_INTRA_POOL_COPY_TEMPLATE_BLOCKED" xml:space="preserve">
+    <value>A {0} user cannot copy templates. Log in as a different user with sufficient privileges and try again.</value>
+  </data>
+  <data name="RBAC_INTRA_POOL_COPY_VM_BLOCKED" xml:space="preserve">
+    <value>A {0} user cannot copy VMs. Log in as a different user with sufficient privileges and try again.</value>
   </data>
   <data name="RBAC_NO_WIZARD_LIMITS" xml:space="preserve">
     <value>Check complete, you have full access to the features in this wizard.</value>
@@ -11530,6 +11548,9 @@ The coordinator must be upgraded first, so if you skip the coordinator, the roll
   <data name="ROTATE_POOL_SECRET_HA" xml:space="preserve">
     <value>You cannot rotate the pool secret when HA is on.</value>
   </data>
+  <data name="ROTATE_POOL_SECRET_MENU" xml:space="preserve">
+    <value>Rotate &amp;Pool Secret</value>
+  </data>
   <data name="ROTATE_POOL_SECRET_PENDING_CLUSTER" xml:space="preserve">
     <value>You cannot enable clustering while a pool secret rotation is in progress.</value>
   </data>
@@ -11538,9 +11559,6 @@ The coordinator must be upgraded first, so if you skip the coordinator, the roll
   </data>
   <data name="ROTATE_POOL_SECRET_PENDING_NEW_COORDINATOR" xml:space="preserve">
     <value>You cannot nominate a new coordinator while a pool secret rotation is in progress.</value>
-  </data>
-  <data name="ROTATE_POOL_SECRET_MENU" xml:space="preserve">
-    <value>Rotate &amp;Pool Secret</value>
   </data>
   <data name="ROTATE_POOL_SECRET_RBAC_RESTRICTION" xml:space="preserve">
     <value>A {0} user does not have sufficient permissions to rotate the pool secret. Please login using an account with one of the following roles:
@@ -11619,11 +11637,11 @@ The coordinator must be upgraded first, so if you skip the coordinator, the roll
   <data name="SAVING_SEARCH" xml:space="preserve">
     <value>Saving search '{0}'...</value>
   </data>
-  <data name="SAVING_VM_PROPERTIES_ACTION_TITLE" xml:space="preserve">
-    <value>Saving VM properties</value>
-  </data>
   <data name="SAVING_VM_PROPERTIES_ACTION_DESC" xml:space="preserve">
     <value>Saving configuration...</value>
+  </data>
+  <data name="SAVING_VM_PROPERTIES_ACTION_TITLE" xml:space="preserve">
+    <value>Saving VM properties</value>
   </data>
   <data name="SAVING_WLB_CONFIGURATION" xml:space="preserve">
     <value>Saving Workload Balancing configuration.</value>
@@ -11937,16 +11955,6 @@ The coordinator must be upgraded first, so if you skip the coordinator, the roll
   <data name="SLACK_LABEL" xml:space="preserve">
     <value>Slack:</value>
   </data>
-  <data name="SUPPORTER_ALREADY_CONNECTED" xml:space="preserve">
-    <value>Server '{0}' is a member of pool '{1}' and is already connected.</value>
-  </data>
-  <data name="SUPPORTER_CONNECTION_ERROR" xml:space="preserve">
-    <value>Server '{0}' is in a pool.  To connect to a pool, you must connect to the pool coordinator.
-Do you want to connect to the pool coordinator '{1}'?</value>
-  </data>
-  <data name="SUPPORTER_TOO_OLD" xml:space="preserve">
-    <value>This pool contains servers earlier than {0} {1}. Please use an earlier version of {2} to manage this pool.</value>
-  </data>
   <data name="SMALLER_THAN" xml:space="preserve">
     <value>smaller than</value>
   </data>
@@ -12143,12 +12151,12 @@ You may need to reboot your server(s) to enable SR-IOV network.</value>
   <data name="SR_DETACHED" xml:space="preserve">
     <value>The SR is currently detached.</value>
   </data>
+  <data name="SR_DISKSIZE_EXCEEDS_DISK_MAX_SIZE" xml:space="preserve">
+    <value>You cannot create a disk greater than {0} on this SR.</value>
+  </data>
   <data name="SR_DISK_SPACE_ALLOCATION" xml:space="preserve">
     <value>Initial allocation: {0}
 Incremental allocation: {1}</value>
-  </data>
-  <data name="SR_DISKSIZE_EXCEEDS_DISK_MAX_SIZE" xml:space="preserve">
-    <value>You cannot create a disk greater than {0} on this SR.</value>
   </data>
   <data name="SR_DOES_NOT_NEED_UPGRADE" xml:space="preserve">
     <value>This SR does not need to be upgraded.</value>
@@ -12168,11 +12176,11 @@ Incremental allocation: {1}</value>
   <data name="SR_IS_LOCAL" xml:space="preserve">
     <value>VMs without a home server cannot have disks on local storage</value>
   </data>
-  <data name="SR_PICKER_DISK_TOO_BIG" xml:space="preserve">
-    <value>Disk size ({0}) exceeds SR size ({1})</value>
-  </data>
   <data name="SR_NOT_ENOUGH_SPACE" xml:space="preserve">
     <value>SR '{0}' does not have {1} of free space to import virtual disk {2}.</value>
+  </data>
+  <data name="SR_PICKER_DISK_TOO_BIG" xml:space="preserve">
+    <value>Disk size ({0}) exceeds SR size ({1})</value>
   </data>
   <data name="SR_PICKER_INSUFFICIENT_SPACE" xml:space="preserve">
     <value>{0} required when only {1} available</value>
@@ -12400,6 +12408,16 @@ The upper limit: SR size / {2}</value>
   </data>
   <data name="SUNDAY_SHORT" xml:space="preserve">
     <value>Sun</value>
+  </data>
+  <data name="SUPPORTER_ALREADY_CONNECTED" xml:space="preserve">
+    <value>Server '{0}' is a member of pool '{1}' and is already connected.</value>
+  </data>
+  <data name="SUPPORTER_CONNECTION_ERROR" xml:space="preserve">
+    <value>Server '{0}' is in a pool.  To connect to a pool, you must connect to the pool coordinator.
+Do you want to connect to the pool coordinator '{1}'?</value>
+  </data>
+  <data name="SUPPORTER_TOO_OLD" xml:space="preserve">
+    <value>This pool contains servers earlier than {0} {1}. Please use an earlier version of {2} to manage this pool.</value>
   </data>
   <data name="SUPP_PACK_DESCRIPTION" xml:space="preserve">
     <value>{0} (version {1})</value>
@@ -13120,11 +13138,11 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
   <data name="UPGRADEWIZARD_WARNING_INCOMPATIBLE_CPUS" xml:space="preserve">
     <value>{0}: Check skipped because hosts in pool '{1}' have incompatible CPUs</value>
   </data>
-  <data name="UPGRADE_HOST" xml:space="preserve">
-    <value>Upgrade host {0}</value>
-  </data>
   <data name="UPGRADE_COORDINATOR" xml:space="preserve">
     <value>Upgrade coordinator {0}</value>
+  </data>
+  <data name="UPGRADE_HOST" xml:space="preserve">
+    <value>Upgrade host {0}</value>
   </data>
   <data name="UPGRADE_PLAN" xml:space="preserve">
     <value>Apply Upgrade</value>
@@ -13386,13 +13404,13 @@ To start a {0} trial, click the button below.</value>
   <data name="VBD_EDIT_CURRENTLY_IN_USE_BY" xml:space="preserve">
     <value>{0} - currently in use by '{1}'</value>
   </data>
-  <data name="VCPU_ONLY_WHEN_HALTED" xml:space="preserve">
-    <value>The vCPUs can only be changed when the VM is shut down.</value>
-  </data>
   <data name="VCPUS_MORE_THAN_PCPUS" xml:space="preserve">
     <value>The number of VCPUs is greater than the number of physical CPUs on the host server. This will significantly reduce VM performance.
 
 To optimize VM performance, you should reduce the number of VCPUs to less than or equal to the number of physical CPUs.</value>
+  </data>
+  <data name="VCPU_ONLY_WHEN_HALTED" xml:space="preserve">
+    <value>The vCPUs can only be changed when the VM is shut down.</value>
   </data>
   <data name="VDI" xml:space="preserve">
     <value>VDI</value>
@@ -14724,14 +14742,5 @@ Any disk in your VM's DVD drive will be ejected when installing {1}.</value>
   </data>
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>You are here</value>
-  </data>
-  <data name="RBAC_CROSS_POOL_CLONE_VM_BLOCKED" xml:space="preserve">
-    <value>Current access levels do not allow cloning of VMs across pools. Log in as a different user with sufficient privileges on the host and try again.</value>
-  </data>
-  <data name="RBAC_INTRA_POOL_COPY_VM_BLOCKED" xml:space="preserve">
-    <value>Current access levels do not allow copying of VMs. Log in as a different user with sufficient privileges on the host and try again.</value>
-  </data>
-  <data name="RBAC_GET_SYSTEM_STATUS_BLOCKED" xml:space="preserve">
-    <value>Current access levels do not allow download of system status report. Log in as a different user with sufficient privileges on the source host and try again.</value>
   </data>
 </root>

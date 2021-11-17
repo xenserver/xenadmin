@@ -160,38 +160,33 @@ namespace XenAdmin.Wizards
 
             xenTabPageRbacWarning.Connection = xenConnection;
 
-            xenTabPageRbacWarning.ClearPermissionChecks();
-
-            var warningMessage = (_srToReattach == null && !disasterRecoveryTask)
+            var warningMessage = _srToReattach == null && !disasterRecoveryTask
                              ? Messages.RBAC_WARNING_SR_WIZARD_CREATE
                              : Messages.RBAC_WARNING_SR_WIZARD_ATTACH;
 
-            RBACWarningPage.WizardPermissionCheck check =
-                new RBACWarningPage.WizardPermissionCheck(warningMessage) { Blocking = true };
+            var check = new WizardRbacCheck(warningMessage) { Blocking = true };
+            check.AddApiMethods("SR.probe");
 
-            
-
-            check.AddApiCheckRange(new RbacMethodList("SR.probe"));
             if (Helpers.KolkataOrGreater(xenConnection) && !Helpers.FeatureForbidden(xenConnection, Host.CorosyncDisabled))
-                check.AddApiCheckRange(new RbacMethodList("SR.probe_ext"));
+                check.AddApiMethods("SR.probe_ext");
 
             if (_srToReattach == null)
             {
                 // create
-                check.AddApiCheckRange(SrCreateAction.StaticRBACDependencies);
+                check.AddApiMethods(SrCreateAction.StaticRBACDependencies);
             }
             else if (disasterRecoveryTask && SR.SupportsDatabaseReplication(xenConnection, _srToReattach))
             {
                 // "Attach SR needed for DR" case
-                check.AddApiCheckRange(DrTaskCreateAction.StaticRBACDependencies);
+                check.AddApiMethods(DrTaskCreateAction.StaticRBACDependencies);
             } 
             else 
             {
                 // reattach
-                check.AddApiCheckRange(SrReattachAction.StaticRBACDependencies);
+                check.AddApiMethods(SrReattachAction.StaticRBACDependencies);
             }
 
-            xenTabPageRbacWarning.AddPermissionChecks(xenConnection, check);
+            xenTabPageRbacWarning.SetPermissionChecks(xenConnection, check);
         }
 
         private bool SetFCDevicesOnLVMoHBAPage(LVMoHBA page)

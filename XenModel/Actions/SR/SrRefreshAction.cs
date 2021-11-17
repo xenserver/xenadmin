@@ -29,23 +29,27 @@
  * SUCH DAMAGE.
  */
 
+using XenAdmin.Core;
 using XenAPI;
 
 
 namespace XenAdmin.Actions
 {
-    public class SrRefreshAction : PureAsyncAction
+    public class SrRefreshAction : AsyncAction
     {
         public SrRefreshAction(SR Sr, bool suppress_history = false)
             : base(Sr.Connection, string.Format(Messages.SR_REFRESH_ACTION_TITLE, Sr.NameWithoutHost()), suppress_history)
         {
             SR = Sr;
+            ApiMethodsToRoleCheck.AddRange(StaticRBACDependencies);
         }
+
+        public static RbacMethodList StaticRBACDependencies => new RbacMethodList("SR.scan");
 
         protected override void Run()
         {
             Description = string.Format(Messages.SR_REFRESH_ACTION_DESC, SR.NameWithoutHost());
-            XenAPI.SR.scan(Session, SR.opaque_ref);
+            SR.scan(Session, SR.opaque_ref);
             Description = Messages.COMPLETED;
         }
     }

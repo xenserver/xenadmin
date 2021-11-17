@@ -145,10 +145,8 @@ namespace XenAdmin.Wizards.ExportWizard
 			            AddAfterPage(m_pageExportSelectVMs, ovfPages);
 			        }
 
-                    if (!Helpers.ConnectionRequiresRbac(xenConnection))
-                        return;
-
-                    AddRbacPage();
+                    if (Helpers.ConnectionRequiresRbac(xenConnection))
+                        AddRbacPage();
                 }
 
 			    m_pageExportSelectVMs.ExportAsXva = (bool)m_exportAsXva;
@@ -167,14 +165,13 @@ namespace XenAdmin.Wizards.ExportWizard
 
         private void AddRbacPage()
         {
-            var exportAsXva = m_exportAsXva != null && (bool) m_exportAsXva;
+            var exportAsXva = m_exportAsXva.HasValue && m_exportAsXva.Value;
 
-            var rbacDependencies = exportAsXva
-                ? ExportVmAction.StaticRBACDependencies
-                : ApplianceAction.StaticRBACDependencies;
-            var check = exportAsXva ? Messages.RBAC_WARNING_EXPORT_WIZARD_XVA : Messages.RBAC_WARNING_EXPORT_WIZARD_APPLIANCE;
+            var rbacDependencies = exportAsXva ? ExportVmAction.StaticRBACDependencies : ApplianceAction.StaticRBACDependencies;
+            var message = exportAsXva ? Messages.RBAC_WARNING_EXPORT_WIZARD_XVA : Messages.RBAC_WARNING_EXPORT_WIZARD_APPLIANCE;
 
-            m_pageRbac.AddApiMethodsCheck(xenConnection, rbacDependencies, check);
+            m_pageRbac.SetPermissionChecks(xenConnection,
+                new WizardRbacCheck(message, rbacDependencies) {Blocking = true});
 
             AddAfterPage(m_pageExportAppliance, m_pageRbac);
         }

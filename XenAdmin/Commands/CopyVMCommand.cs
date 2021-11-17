@@ -30,7 +30,10 @@
  */
 
 using System.Collections.Generic;
+using System.Linq;
+using XenAdmin.Actions;
 using XenAdmin.Actions.VMActions;
+using XenAdmin.Core;
 using XenAdmin.Dialogs;
 using XenAPI;
 
@@ -54,29 +57,42 @@ namespace XenAdmin.Commands
         {
         }
 
+        private bool CheckRbacPermissions(VM vm, RbacMethodList methodList, string warningMessage)
+        {
+            if (vm.Connection.Session.IsLocalSuperuser)
+                return true;
+
+            var currentRoles = vm.Connection.Session.Roles;
+            var validRoles = Role.ValidRoleList(methodList, vm.Connection);
+
+            if (currentRoles.Any(currentRole => validRoles.Contains(currentRole)))
+                return true;
+
+            currentRoles.Sort();
+
+            using (var dlg = new ErrorDialog(string.Format(warningMessage, currentRoles[0].FriendlyName())))
+                dlg.ShowDialog(Parent);
+
+            return false;
+        }
+
         protected override void RunCore(SelectedItemCollection selection)
         {
             var vm = (VM)selection[0].XenObject;
 
             if (CrossPoolCopyVMCommand.CanRun(vm, null))
             {
-                if (!CheckRbacPermissions(vm, VMCrossPoolMigrateAction.StaticRBACDependencies))
-                {
-                    using (var dlg = new ErrorDialog(Messages.RBAC_CROSS_POOL_MIGRATE_VM_BLOCKED))
-                        dlg.ShowDialog(Parent);
-                    return;
-                }
                 new CrossPoolCopyVMCommand(MainWindowCommandInterface, selection).Run();
             }
             else
             {
-                if (!CheckRbacPermissions(vm, VMCopyAction.StaticRBACDependencies))
-                {
-                    using (var dlg = new ErrorDialog(Messages.RBAC_INTRA_POOL_COPY_VM_BLOCKED))
-                        dlg.ShowDialog(Parent);
-                    return;
-                }
-                new CopyVMDialog(vm).ShowPerXenObject(vm, Program.MainWindow);
+                var rbac = new RbacMethodList();
+                rbac.AddRange(SrRefreshAction.StaticRBACDependencies);
+                rbac.AddRange(VMCopyAction.StaticRBACDependencies);
+                rbac.AddRange(VMCloneAction.StaticRBACDependencies);
+
+                if (CheckRbacPermissions(vm, rbac, Messages.RBAC_INTRA_POOL_COPY_VM_BLOCKED))
+                    new CopyVMDialog(vm).ShowPerXenObject(vm, Program.MainWindow);
             }
         }
 

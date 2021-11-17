@@ -37,6 +37,7 @@ using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
+using XenAdmin.Network;
 using XenAPI;
 
 
@@ -378,23 +379,6 @@ namespace XenAdmin.Commands
         {
             MultipleActionLauncher launcher = new MultipleActionLauncher(actions, title, startDescription, endDescription, runActionsInParallel);
             launcher.Run();
-        }
-
-        /// <summary>
-        /// Check that the list of RBAC methods can be executed with the session's roles on the given VM
-        /// </summary>
-        /// <param name="vm">The VM to check roles on</param>
-        /// <param name="staticRbacDependencies">List of the methods to check</param>
-        /// <returns>true if the current roles can be used to execute the given methods</returns>
-        protected bool CheckRbacPermissions(VM vm, RbacMethodList staticRbacDependencies)
-        {
-            if (vm.Connection.Session.IsLocalSuperuser)
-                return true;
-
-            var currentRoles = vm.Connection.Session.Roles;
-            var validRoles = Role.ValidRoleList(staticRbacDependencies, vm.Connection);
-
-            return currentRoles.Any(currentRole => validRoles.Contains(currentRole));
         }
 
         #region ICommand Members

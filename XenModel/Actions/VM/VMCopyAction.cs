@@ -52,16 +52,8 @@ namespace XenAdmin.Actions.VMActions
             if (vm.is_a_template)
                 this.Template = vm;
             _namedescription = description;
-            SetRBACPermissions();
 
-        }
-
-        private void SetRBACPermissions()
-        {
-            ApiMethodsToRoleCheck.AddRange(Role.CommonSessionApiList);
-            ApiMethodsToRoleCheck.AddRange(Role.CommonTaskApiList);
-            ApiMethodsToRoleCheck.Add("VM.copy");
-            ApiMethodsToRoleCheck.Add("VM.set_name_description");
+            ApiMethodsToRoleCheck.AddRange(StaticRBACDependencies);
         }
 
         public static RbacMethodList StaticRBACDependencies

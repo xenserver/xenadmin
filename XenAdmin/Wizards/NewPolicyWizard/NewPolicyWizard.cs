@@ -71,7 +71,8 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 
             if (Helpers.ConnectionRequiresRbac(Pool.Connection))
             {
-                xenTabPageRBAC.AddApiMethodsCheck(xenConnection, "VMSS.async_create", Messages.RBAC_WARNING_VMSS);
+                xenTabPageRBAC.SetPermissionChecks(xenConnection,
+                    new WizardRbacCheck(Messages.RBAC_WARNING_VMSS, "VMSS.async_create") {Blocking = true});
                 AddPage(xenTabPageRBAC, 0);
             }
 

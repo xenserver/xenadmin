@@ -51,10 +51,8 @@ namespace XenAdmin.Actions.VMActions
                 this.Template = vm;
             _cloneName = name;
             _cloneDescription = description;
-            ApiMethodsToRoleCheck.AddRange(Role.CommonSessionApiList);
-            ApiMethodsToRoleCheck.AddRange(Role.CommonTaskApiList);
-            ApiMethodsToRoleCheck.Add("VM.clone");
-            ApiMethodsToRoleCheck.Add("VM.set_name_description");
+
+            ApiMethodsToRoleCheck.AddRange(StaticRBACDependencies);
         }
 
         public static RbacMethodList StaticRBACDependencies

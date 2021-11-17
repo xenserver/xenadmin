@@ -80,7 +80,8 @@ namespace XenAdmin.Wizards
                     "pool.set_ha_host_failures_to_tolerate",
                     "pool.enable_ha",
                     "sr.assert_can_host_ha_statefile");
-                m_pageRbac.AddApiMethodsCheck(xenConnection, methodsToCheck, Messages.RBAC_HA_ENABLE_WARNING);
+                m_pageRbac.SetPermissionChecks(xenConnection,
+                    new WizardRbacCheck(Messages.RBAC_HA_ENABLE_WARNING, methodsToCheck) {Blocking = true});
                 AddPage(m_pageRbac);
             }
 

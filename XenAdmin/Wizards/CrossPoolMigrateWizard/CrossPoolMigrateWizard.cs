@@ -356,9 +356,16 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
                 if (Helpers.ConnectionRequiresRbac(xenConnection) || Helpers.ConnectionRequiresRbac(TargetConnection))
                 {
-                    m_pageTargetRbac.AddApiMethodsCheck(new List<IXenConnection> { xenConnection, TargetConnection },
-                        VMCrossPoolMigrateAction.StaticRBACDependencies,
-                        Messages.RBAC_CROSS_POOL_MIGRATE_VM_BLOCKED);
+                    var message = wizardMode == WizardMode.Copy
+                        ? m_vmMappings.Any(IsTemplate)
+                            ? Messages.RBAC_CROSS_POOL_COPY_TEMPLATE_BLOCKED
+                            : Messages.RBAC_CROSS_POOL_COPY_VM_BLOCKED
+                        : m_vmMappings.Any(IsTemplate)
+                            ? Messages.RBAC_CROSS_POOL_MIGRATE_TEMPLATE_BLOCKED
+                            : Messages.RBAC_CROSS_POOL_MIGRATE_VM_BLOCKED;
+
+                    m_pageTargetRbac.SetPermissionChecks(new List<IXenConnection> {xenConnection, TargetConnection},
+                        new WizardRbacCheck(message, VMCrossPoolMigrateAction.StaticRBACDependencies) {Blocking = true});
                     AddAfterPage(m_pageDestination, m_pageTargetRbac);
                 }
 
@@ -403,9 +410,17 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                     AddAfterPage(m_pageCopyMode, m_pageIntraPoolCopy);
                     if (Helpers.ConnectionRequiresRbac(xenConnection))
                     {
-                        m_pageTargetRbac.AddApiMethodsCheck(xenConnection,
-                            VMCopyAction.StaticRBACDependencies,
-                            Messages.RBAC_INTRA_POOL_COPY_VM_BLOCKED);
+                        var message = m_vmMappings.Any(IsTemplate)
+                            ? Messages.RBAC_INTRA_POOL_COPY_TEMPLATE_BLOCKED
+                            : Messages.RBAC_INTRA_POOL_COPY_VM_BLOCKED;
+
+                        var rbac = new RbacMethodList();
+                        rbac.AddRange(VMCopyAction.StaticRBACDependencies);
+                        rbac.AddRange(VMCloneAction.StaticRBACDependencies);
+                        rbac.AddRange(SrRefreshAction.StaticRBACDependencies);
+
+                        m_pageTargetRbac.SetPermissionChecks(xenConnection,
+                            new WizardRbacCheck(message, rbac) {Blocking = true});
                         AddAfterPage(m_pageCopyMode, m_pageTargetRbac);
                     }
                 }
@@ -413,13 +428,6 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                 {
                     RemovePagesFrom(1);
                     AddAfterPage(m_pageCopyMode, m_pageDestination, m_pageStorage, m_pageFinish);
-                    if (Helpers.ConnectionRequiresRbac(xenConnection))
-                    {
-                        m_pageTargetRbac.AddApiMethodsCheck(xenConnection,
-                            VMCloneAction.StaticRBACDependencies,
-                            Messages.RBAC_CROSS_POOL_CLONE_VM_BLOCKED);
-                        AddAfterPage(m_pageCopyMode, m_pageTargetRbac);
-                    }
                 }
             }
             if (type != typeof(CrossPoolMigrateFinishPage))

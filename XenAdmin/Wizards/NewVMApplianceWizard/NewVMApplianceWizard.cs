@@ -65,7 +65,8 @@ namespace XenAdmin.Wizards.NewVMApplianceWizard
             #region RBAC Warning Page Checks
             if (Helpers.ConnectionRequiresRbac(Pool.Connection))
             {
-                xenTabPageRBAC.AddApiMethodsCheck(xenConnection, "VM_appliance.async_create", Messages.RBAC_WARNING_VMSS);
+                xenTabPageRBAC.SetPermissionChecks(xenConnection,
+                    new WizardRbacCheck(Messages.RBAC_WARNING_VM_APPLIANCE, "VM_appliance.async_create") {Blocking = true});
                 AddPage(xenTabPageRBAC, 0);
             }
             #endregion
