@@ -3360,7 +3360,6 @@
     <Compile Include="Commands\DisconnectHostsAndPoolsCommand.cs" />
     <Compile Include="Commands\DisconnectPoolCommand.cs">
     </Compile>
-    <Compile Include="Commands\CopyTemplateCommand.cs" />
     <Compile Include="Commands\DragDropCommand.cs" />
     <Compile Include="Commands\DragDropAddHostToPoolCommand.cs" />
     <Compile Include="Commands\DragDropMigrateVMCommand.cs" />
