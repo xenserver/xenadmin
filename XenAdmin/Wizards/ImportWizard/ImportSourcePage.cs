@@ -50,7 +50,7 @@ using XenCenterLib.Archive;
 using XenOvf;
 using XenOvf.Definitions.VMC;
 using XenOvf.Utilities;
-
+using XenModel;
 
 namespace XenAdmin.Wizards.ImportWizard
 {
@@ -370,21 +370,20 @@ namespace XenAdmin.Wizards.ImportWizard
 		/// </summary>
 		private bool CheckPathValid(out string error)
 		{
-			error = string.Empty;
-
+            error = string.Empty;
             if (String.IsNullOrEmpty(FilePath))
 				return false;
 
             if (IsUri())
                 return CheckDownloadFromUri(out error);
 
-            if (!PathValidator.IsPathValid(FilePath))
+            if (!PathValidator.IsPathValid(FilePath, out string invalidNameMsg))
 			{
-				error = Messages.IMPORT_SELECT_APPLIANCE_PAGE_ERROR_INVALID_PATH;
-				return false;
+			    error = invalidNameMsg;
+                return false;
 			}
-
-			return true;
+            
+            return true;
 		}
 
 		/// <summary>
