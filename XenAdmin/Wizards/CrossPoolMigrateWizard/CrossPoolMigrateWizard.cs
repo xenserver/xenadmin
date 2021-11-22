@@ -350,7 +350,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                 RemovePage(m_pageTransferNetwork);
                 RemovePage(m_pageTargetRbac);
                 m_vmMappings = m_pageDestination.VmMappings;
-                TargetConnection = m_pageDestination.ChosenItem == null ? null : m_pageDestination.ChosenItem.Connection;
+                TargetConnection = m_pageDestination.ChosenItem?.Connection;
                 m_pageStorage.TargetConnection = TargetConnection;
                 m_pageNetwork.TargetConnection = TargetConnection;
 
@@ -428,6 +428,17 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                 {
                     RemovePagesFrom(1);
                     AddAfterPage(m_pageCopyMode, m_pageDestination, m_pageStorage, m_pageFinish);
+                    if (Helpers.ConnectionRequiresRbac(xenConnection))
+                    {
+                        var message = m_vmMappings.Any(IsTemplate)
+                            ? Messages.RBAC_CROSS_POOL_COPY_TEMPLATE_BLOCKED
+                            : Messages.RBAC_CROSS_POOL_COPY_VM_BLOCKED;
+
+                        m_pageTargetRbac.SetPermissionChecks(new List<IXenConnection> {xenConnection},
+                            new WizardRbacCheck(message, VMCrossPoolMigrateAction.StaticRBACDependencies) {Blocking = true});
+
+                        AddAfterPage(m_pageCopyMode, m_pageTargetRbac);
+                    }
                 }
             }
             if (type != typeof(CrossPoolMigrateFinishPage))
