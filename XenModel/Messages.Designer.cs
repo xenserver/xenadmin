@@ -16970,7 +16970,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A file name can not be a device name..
+        ///   Looks up a localized string similar to A file name cannot be a device name..
         /// </summary>
         public static string FILE_NAME_IS_DEVICE_NAME_ERROR_MESSAGE {
             get {
@@ -30197,7 +30197,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Path can not be null or empty..
+        ///   Looks up a localized string similar to Path cannot be null or empty..
         /// </summary>
         public static string PATH_CAN_NOT_BE_NULL_ERROR_MESSAGE {
             get {

@@ -5936,7 +5936,7 @@ Would you like to eject these ISOs before continuing?</value>
     <value>All files</value>
   </data>
   <data name="FILE_NAME_IS_DEVICE_NAME_ERROR_MESSAGE" xml:space="preserve">
-    <value>A file name can not be a device name.</value>
+    <value>A file name cannot be a device name.</value>
   </data>
   <data name="FILE_PATH_DEVICE_NAME_ERROR_MESSAGE" xml:space="preserve">
     <value>Path section {0} matches a device name.</value>
@@ -10472,7 +10472,7 @@ File not found</value>
     <value>Update uploaded to server '{0}' </value>
   </data>
   <data name="PATH_CAN_NOT_BE_NULL_ERROR_MESSAGE" xml:space="preserve">
-    <value>Path can not be null or empty.</value>
+    <value>Path cannot be null or empty.</value>
   </data>
   <data name="PATH_DOES_NOT_EXIST" xml:space="preserve">
     <value>Path does not exist.</value>
