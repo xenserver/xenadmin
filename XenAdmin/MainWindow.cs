@@ -1828,7 +1828,15 @@ namespace XenAdmin
 
             if (result == DialogResult.OK || Program.RunInAutomatedTestMode)
             {
-                filepath = Program.RunInAutomatedTestMode ? "" : filepath == "" ? dialog.FileName : filepath;
+                if (Program.RunInAutomatedTestMode)
+                {
+                    filepath = string.Empty;
+                }
+
+                if (filepath == string.Empty && dialog != null)
+                {
+                    filepath = dialog.FileName;
+                }
 
                 Host hostAncestor = SelectionManager.Selection.Count == 1 ? SelectionManager.Selection[0].HostAncestor : null;
 

@@ -69,7 +69,7 @@ namespace XenAdmin.Core
             if (proxyMethodName == "host_call_plugin" && args != null && args.Length > 2 && "trim".Equals(args[2]))
                 return new Response<string>("True");;
 
-            if (pmi.MethodName == "add_to_other_config" || pmi.MethodName == "remove_from_other_config")  // these calls are special because they can have per-key permissions
+            if (args != null && (pmi.MethodName == "add_to_other_config" || pmi.MethodName == "remove_from_other_config"))  // these calls are special because they can have per-key permissions
                 rbacMethods.Add(method, (string)args[2]);
             else
                 rbacMethods.Add(method);

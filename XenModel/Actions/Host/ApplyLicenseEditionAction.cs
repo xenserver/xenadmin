@@ -183,7 +183,7 @@ namespace XenAdmin.Actions
                     if (xo is Pool)
                     {
                         var firstHost = xo.Connection.Cache.Hosts.FirstOrDefault();
-                        if (firstHost != null)
+                        if (firstHost != null && pool != null)
                             Pool.apply_edition(xo.Connection.Session, pool.opaque_ref, firstHost.GetEditionText(_edition));
                     }
 

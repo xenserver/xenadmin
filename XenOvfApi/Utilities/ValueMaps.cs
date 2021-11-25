@@ -181,17 +181,22 @@ namespace XenOvf.Utilities
             XmlNodeList xnl = xd.SelectNodes("CIM/DECLARATION/DECLGROUP/VALUE.OBJECT/CLASS/PROPERTY");
             foreach (XmlNode xn in xnl)
             {
+                if (xn.Attributes == null) 
+                    continue;
                 foreach (XmlAttribute xa in xn.Attributes)
                 {
                     if (xa.Name.ToUpper().Equals("NAME") && xa.Value.ToUpper().Equals(fieldname.ToUpper()))
                     {
                         foreach (XmlNode xn1 in xn.ChildNodes)
                         {
-                            if (xn1.Name.ToUpper().Equals("QUALIFIER") && xn1.Attributes.GetNamedItem("NAME").Value.ToUpper().Equals("VALUEMAP"))
+                            if (xn1.Name.ToUpper().Equals("QUALIFIER") && xn1.Attributes.GetNamedItem("NAME").Value
+                                .ToUpper().Equals("VALUEMAP"))
                             {
                                 xmlOSTypeValuesMap = xn1.ChildNodes;
                             }
-                            if (xn1.Name.ToUpper().Equals("QUALIFIER") && xn1.Attributes.GetNamedItem("NAME").Value.ToUpper().Equals("VALUES"))
+
+                            if (xn1.Name.ToUpper().Equals("QUALIFIER") && xn1.Attributes.GetNamedItem("NAME").Value
+                                .ToUpper().Equals("VALUES"))
                             {
                                 xmlOFTypeStrings = xn1.ChildNodes;
                             }
@@ -200,6 +205,9 @@ namespace XenOvf.Utilities
                 }
             }
 
+            if (xmlOSTypeValuesMap == null || xmlOFTypeStrings == null) 
+                return;
+
             xmlOSTypeValuesMap = xmlOSTypeValuesMap[0].ChildNodes;
             xmlOFTypeStrings = xmlOFTypeStrings[0].ChildNodes;
 
@@ -207,6 +215,7 @@ namespace XenOvf.Utilities
             {
                 mapdictionary.Add(xmlOSTypeValuesMap[i].InnerText, xmlOFTypeStrings[i].InnerText);
             }
+
         }
 
         private static UInt16 ResolveMapping(Dictionary<string, string> dictionary, string key)

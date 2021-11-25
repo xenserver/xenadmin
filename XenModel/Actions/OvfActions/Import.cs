@@ -1104,7 +1104,7 @@ namespace XenAdmin.Actions.OvfActions
 
             if (usethisdevice == null)
             {
-                if (!device.EndsWith("+"))
+                if (device != null && !device.EndsWith("+"))
                     usethisdevice = device + "+";                
             }
             return usethisdevice;

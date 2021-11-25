@@ -421,18 +421,18 @@ namespace XenAdmin.SettingsPanels
 			Repopulate();
 			haNtolIndicator.Connection = vm.Connection;
 			haNtolIndicator.Settings = Helpers.GetVmHaRestartPriorities(vm.Connection, Properties.Settings.Default.ShowHiddenVMs);
-			haNtolIndicator.UpdateInProgressChanged += new EventHandler(haNtolIndicator_UpdateInProgressChanged);
+			haNtolIndicator.UpdateInProgressChanged += haNtolIndicator_UpdateInProgressChanged;
 
 			// Put property changed listener on pool, disable edits if HA becomes disabled
 			pool = Helpers.GetPoolOfOne(vm.Connection);
 			if (pool != null)
 			{
 				pool.PropertyChanged += pool_PropertyChanged;
-			}
-			origNtol = pool.ha_host_failures_to_tolerate;
+                origNtol = pool.ha_host_failures_to_tolerate;
+            }
 
-			// Put property changed listener on all hosts to listen for changes in their Host_metrics
-			foreach (Host host in vm.Connection.Cache.Hosts)
+            // Put property changed listener on all hosts to listen for changes in their Host_metrics
+            foreach (Host host in vm.Connection.Cache.Hosts)
 			{
 				host.PropertyChanged += host_PropertyChanged;
 				// Remember the host so we can deregister the listener later

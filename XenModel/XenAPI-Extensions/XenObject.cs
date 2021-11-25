@@ -141,7 +141,7 @@ namespace XenAPI
             if (server == null && opaque_ref != null)
                 return null;
 
-            if (opaque_ref != null && !server.Locked)
+            if (opaque_ref != null && server != null && !server.Locked)
                 throw new InvalidOperationException("Instance must be locked before calling SaveChanges()");
 
             if (beforeObject == null)

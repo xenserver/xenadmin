@@ -75,7 +75,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                         poolPatch = session.Connection.Cache.Pool_patches.FirstOrDefault(pp => string.Equals(pp.uuid, xenServerPatch.Uuid, StringComparison.InvariantCultureIgnoreCase));
                     }
 
-                    if (poolPatch != null && poolPatch.opaque_ref != null)
+                    if (mapping != null && poolPatch != null && poolPatch.opaque_ref != null)
                     {
                         AddProgressStep(string.Format(Messages.UPDATES_WIZARD_REMOVING_UPDATES_FROM_POOL, poolPatch.Name()));
                         var task = Pool_patch.async_pool_clean(session, mapping.Pool_patch.opaque_ref);
