@@ -15295,6 +15295,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You cannot enable certificate verification while a rolling pool upgrade is in progress..
+        /// </summary>
+        public static string ENABLE_TLS_VERIFICATION_RPU {
+            get {
+                return ResourceManager.GetString("ENABLE_TLS_VERIFICATION_RPU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Res&amp;ume.
         /// </summary>
         public static string ENABLE_WLB_ELLIPSIS {
