@@ -7301,6 +7301,55 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Server certificate compatibility check.
+        /// </summary>
+        public static string CERTIFICATE_KEY_LENGTH_CHECK_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_KEY_LENGTH_CHECK_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checking compatibility of server identity certificate.
+        /// </summary>
+        public static string CERTIFICATE_KEY_LENGTH_CHECK_GROUP {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_KEY_LENGTH_CHECK_GROUP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The key size of the server&apos;s identity certificate is too small..
+        /// </summary>
+        public static string CERTIFICATE_KEY_LENGTH_PROBLEM_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_KEY_LENGTH_PROBLEM_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The key size of the server&apos;s identity certificate is smaller than 2048 bytes.
+        ///
+        ///It is recommended that you first install a new certificate with a key size of at least 2048 bytes, otherwise you will not be able to connect to the server after the upgrade..
+        /// </summary>
+        public static string CERTIFICATE_KEY_LENGTH_PROBLEM_MORE_INFO {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_KEY_LENGTH_PROBLEM_MORE_INFO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The key size of the server&apos;s identity certificate is smaller than 2048 bytes.
+        ///
+        ///If you are upgrading to {0} {1} and above, it is recommended that you first install a new certificate with a key size of at least 2048 bytes, otherwise you will not be able to connect to the server after the upgrade..
+        /// </summary>
+        public static string CERTIFICATE_KEY_LENGTH_WARNING_MORE_INFO {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_KEY_LENGTH_WARNING_MORE_INFO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A {0} user does not have sufficient permissions to install certificates on the server. Please login using an account with one of the following roles:
         ///
         ///{1}.

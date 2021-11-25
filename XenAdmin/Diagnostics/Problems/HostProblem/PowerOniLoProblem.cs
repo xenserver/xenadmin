@@ -70,8 +70,6 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
             this.host = host;
         }
 
-        public override string Title => Check.Description;
-
         public override string Description =>
             string.Format(Messages.PROBLEM_POWER_ON_ILO_DESCRIPTION, host,
                 string.Format(Messages.STRING_SPACE_STRING, BrandManager.ProductBrand, BrandManager.ProductVersion82));
