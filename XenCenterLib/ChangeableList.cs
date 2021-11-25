@@ -65,11 +65,15 @@ namespace XenCenterLib
 
         public new T this[int index]
         {
-            get { return base[index]; }
+            get => base[index];
             set
             {
+                var oldValue = base[index];
                 base[index] = value;
-                OnCollectionChanged(new CollectionChangeEventArgs(CollectionChangeAction.Refresh, value));
+                if (!oldValue.Equals(value))
+                {
+                    OnCollectionChanged(new CollectionChangeEventArgs(CollectionChangeAction.Refresh, value));
+                }
             }
         }
 
@@ -93,7 +97,7 @@ namespace XenCenterLib
 
         public new void RemoveAt(int index)
         {
-            T item = this[index];
+            var item = this[index];
             base.RemoveAt(index);
             OnCollectionChanged(new CollectionChangeEventArgs(CollectionChangeAction.Remove, item));
         }
@@ -103,14 +107,15 @@ namespace XenCenterLib
             RemoveAll(t => true);
         }
 
+        public void RefreshElement(T element)
+        {
+            OnCollectionChanged(new CollectionChangeEventArgs(CollectionChangeAction.Refresh, element));
+        }
+
         protected virtual void OnCollectionChanged(CollectionChangeEventArgs e)
         {
-            CollectionChangeEventHandler handler = CollectionChanged;
-
-            if (handler != null)
-            {
-                handler(this, e);
-            }
+            var handler = CollectionChanged;
+            handler?.Invoke(this, e);
         }
     }
 }
