@@ -419,7 +419,8 @@ namespace XenAdmin.SettingsPanels
             m_upDownTriggerPeriod = triggerThresholdUpDown;
             m_upDownAlertInterval = alertIntervalUpDown;
             m_labels = theLabels;
-            m_checkBox.CheckedChanged += m_theCheckBox_CheckedChanged;
+            if(m_checkBox != null)
+                m_checkBox.CheckedChanged += m_theCheckBox_CheckedChanged;
 
             StoreOriginalSetting();
         }
