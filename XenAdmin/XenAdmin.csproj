@@ -236,6 +236,7 @@
     <Compile Include="Diagnostics\Checks\PowerOniLoCheck.cs" />
     <Compile Include="Diagnostics\Checks\PoolLegacySslCheck.cs" />
     <Compile Include="Diagnostics\Checks\PrepareToUpgradeCheck.cs" />
+    <Compile Include="Diagnostics\Checks\CertificateKeyLengthCheck.cs" />
     <Compile Include="Diagnostics\Checks\PVGuestsCheck.cs" />
     <Compile Include="Diagnostics\Checks\RebootPendingOnMasterCheck.cs" />
     <Compile Include="Diagnostics\Checks\HostNeedsRebootCheck.cs" />
@@ -245,6 +246,7 @@
     <Compile Include="Diagnostics\Checks\ClientVersionCheck.cs" />
     <Compile Include="Diagnostics\Checks\HostMemoryPostUpgradeCheck.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\BrokenSR.cs" />
+    <Compile Include="Diagnostics\Problems\HostProblem\CertificateKeyLengthProblem.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\PowerOniLoProblem.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\HealthCheckServiceProblem.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\LegacySslProblem.cs" />

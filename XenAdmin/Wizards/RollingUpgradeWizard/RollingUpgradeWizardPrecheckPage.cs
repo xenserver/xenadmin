@@ -229,6 +229,15 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             if (sslChecks.Count > 0)
                 groups.Add(new CheckGroup(Messages.CHECKING_SECURITY_PROTOCOL_GROUP, sslChecks));
 
+            //certificate key length - for each host
+            var certKeyLengthChecks = (from Host server in hostsToUpgradeOrUpdate
+                let check = new CertificateKeyLengthCheck(server, ManualUpgrade, InstallMethodConfig)
+                where check.CanRun()
+                select check as Check).ToList();
+
+            if (certKeyLengthChecks.Count > 0)
+                groups.Add(new CheckGroup(Messages.CERTIFICATE_KEY_LENGTH_CHECK_GROUP, certKeyLengthChecks));
+
             //power on mode check - for each host
             var iloChecks = (from Host server in hostsToUpgradeOrUpdate
                 let check = new PowerOniLoCheck(server, InstallMethodConfig, ManualUpgrade)

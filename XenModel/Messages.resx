@@ -2638,6 +2638,25 @@ This will cancel compilation of the status report.</value>
   <data name="CERTIFICATE_KEY_INVALID" xml:space="preserve">
     <value>The selected TLS key file is invalid.</value>
   </data>
+  <data name="CERTIFICATE_KEY_LENGTH_CHECK_DESCRIPTION" xml:space="preserve">
+    <value>Server certificate compatibility check</value>
+  </data>
+  <data name="CERTIFICATE_KEY_LENGTH_CHECK_GROUP" xml:space="preserve">
+    <value>Checking compatibility of server identity certificate</value>
+  </data>
+  <data name="CERTIFICATE_KEY_LENGTH_PROBLEM_DESCRIPTION" xml:space="preserve">
+    <value>The key size of the server's identity certificate is too small.</value>
+  </data>
+  <data name="CERTIFICATE_KEY_LENGTH_PROBLEM_MORE_INFO" xml:space="preserve">
+    <value>The key size of the server's identity certificate is smaller than 2048 bytes.
+
+It is recommended that you first install a new certificate with a key size of at least 2048 bytes, otherwise you will not be able to connect to the server after the upgrade.</value>
+  </data>
+  <data name="CERTIFICATE_KEY_LENGTH_WARNING_MORE_INFO" xml:space="preserve">
+    <value>The key size of the server's identity certificate is smaller than 2048 bytes.
+
+If you are upgrading to {0} {1} and above, it is recommended that you first install a new certificate with a key size of at least 2048 bytes, otherwise you will not be able to connect to the server after the upgrade.</value>
+  </data>
   <data name="CERTIFICATE_RBAC_RESTRICTION" xml:space="preserve">
     <value>A {0} user does not have sufficient permissions to install certificates on the server. Please login using an account with one of the following roles:
 

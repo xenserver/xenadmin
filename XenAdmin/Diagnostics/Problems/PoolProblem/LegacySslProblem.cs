@@ -67,8 +67,6 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
             this.pool = pool;
         }
 
-        public override string Title => Check.Description;
-
         public override string Description =>
             string.Format(Messages.PROBLEM_LEGACY_PROTOCOL_DESCRIPTION, pool,
                 string.Format(Messages.STRING_SPACE_STRING, BrandManager.ProductBrand, BrandManager.ProductVersion82));
