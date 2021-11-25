@@ -111,7 +111,8 @@ namespace XenAdmin.Commands
                    !pool.current_operations.Values.Contains(pool_allowed_operations.ha_enable) &&
                    !pool.current_operations.Values.Contains(pool_allowed_operations.ha_disable) &&
                    !pool.current_operations.Values.Contains(pool_allowed_operations.cluster_create) &&
-                   !pool.current_operations.Values.Contains(pool_allowed_operations.designate_new_master);
+                   !pool.current_operations.Values.Contains(pool_allowed_operations.designate_new_master) &&
+                   !pool.RollingUpgrade();
         }
 
         protected override string GetCantRunReasonCore(IXenObject item)
@@ -134,6 +135,9 @@ namespace XenAdmin.Commands
             
                 if (pool.current_operations.Values.Contains(pool_allowed_operations.designate_new_master))
                     return Messages.ENABLE_TLS_VERIFICATION_NEW_COORDINATOR;
+
+                if (pool.RollingUpgrade())
+                    return Messages.ENABLE_TLS_VERIFICATION_RPU;
             }
 
             return base.GetCantRunReasonCore(item);

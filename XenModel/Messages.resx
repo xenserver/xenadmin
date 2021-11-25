@@ -5382,6 +5382,9 @@ Would you like to eject these ISOs before continuing?</value>
 
 {1}</value>
   </data>
+  <data name="ENABLE_TLS_VERIFICATION_RPU" xml:space="preserve">
+    <value>You cannot enable certificate verification while a rolling pool upgrade is in progress.</value>
+  </data>
   <data name="ENABLE_WLB_ELLIPSIS" xml:space="preserve">
     <value>Res&amp;ume</value>
   </data>
