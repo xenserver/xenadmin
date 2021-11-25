@@ -102,7 +102,7 @@ namespace XenAdmin.Wizards
             action.RunAsync();
 
             log.Debug("Cleaning up crash dump logs on server");
-            var capabilities = bugToolPageSelectCapabilities1.Capabilities;
+            var capabilities = bugToolPageSelectCapabilities1.CheckedCapabilities;
             foreach (Capability c in capabilities)
             {
                 if (c.Key == "host-crashdump-dumps" && c.Checked)
@@ -153,8 +153,7 @@ namespace XenAdmin.Wizards
             }
             else if (prevPageType == typeof(BugToolPageSelectCapabilities))
             {
-                bugToolPageRetrieveData.CapabilityList = bugToolPageSelectCapabilities1.Capabilities;
-                
+                bugToolPageRetrieveData.CapabilityList = bugToolPageSelectCapabilities1.CheckedCapabilities;
             }
         }
 
