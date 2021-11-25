@@ -30,66 +30,69 @@
  */
 
 using System;
-using System.Threading;
 using System.Collections.Generic;
+using System.Threading;
 
-public class ProduceConsumerQueue
+namespace XenAdmin.Actions
 {
-    readonly object _locker = new object();
-    Thread[] _workers;
-    Queue<Action> _itemQ = new Queue<Action>();
-
-    public ProduceConsumerQueue(int workerCount)
+    public class ProduceConsumerQueue
     {
-        _workers = new Thread[workerCount];
-        for (int i = 0; i < workerCount; i++)
-            (_workers[i] = new Thread(Consume) { IsBackground = true }).Start();
-    }
+        readonly object _locker = new object();
+        Thread[] _workers;
+        Queue<Action> _itemQ = new Queue<Action>();
 
-    public void StopWorkers(bool waitForWorkers)
-    {
-        foreach (Thread worker in _workers)
-            EnqueueItem(null);
+        public ProduceConsumerQueue(int workerCount)
+        {
+            _workers = new Thread[workerCount];
+            for (int i = 0; i < workerCount; i++)
+                (_workers[i] = new Thread(Consume) { IsBackground = true }).Start();
+        }
 
-        if (waitForWorkers)
+        public void StopWorkers(bool waitForWorkers)
+        {
             foreach (Thread worker in _workers)
-                worker.Join();
-    }
+                EnqueueItem(null);
 
-    public void CancelWorkers(bool waitForWorkers)
-    {
-        lock (_locker)
-        {
-            _itemQ.Clear();
+            if (waitForWorkers)
+                foreach (Thread worker in _workers)
+                    worker.Join();
         }
-        StopWorkers(waitForWorkers);
-    }
 
-    public void EnqueueItem(Action item)
-    {
-        lock (_locker)
+        public void CancelWorkers(bool waitForWorkers)
         {
-            _itemQ.Enqueue(item);
-            //Check the blocking condition
-            Monitor.Pulse(_locker);
-        }
-    }
-
-    void Consume()
-    {
-        while (true)
-        {
-            Action item;
             lock (_locker)
             {
-                while (_itemQ.Count == 0)
-                    Monitor.Wait(_locker);
-
-                item = _itemQ.Dequeue();
+                _itemQ.Clear();
             }
-            if (item == null)
-                return;
-            item();
+            StopWorkers(waitForWorkers);
+        }
+
+        public void EnqueueItem(Action item)
+        {
+            lock (_locker)
+            {
+                _itemQ.Enqueue(item);
+                //Check the blocking condition
+                Monitor.Pulse(_locker);
+            }
+        }
+
+        void Consume()
+        {
+            while (true)
+            {
+                Action item;
+                lock (_locker)
+                {
+                    while (_itemQ.Count == 0)
+                        Monitor.Wait(_locker);
+
+                    item = _itemQ.Dequeue();
+                }
+                if (item == null)
+                    return;
+                item();
+            }
         }
     }
 }
