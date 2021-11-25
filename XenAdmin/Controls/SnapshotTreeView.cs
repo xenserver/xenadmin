@@ -547,19 +547,9 @@ namespace XenAdmin.Controls
             _spinningMessage = message;
             foreach (var item in Items)
             {
-                SnapshotIcon snapshotIcon = item as SnapshotIcon;
-
-                if (snapshotIcon != null && (snapshotIcon.ImageIndex == SnapshotIcon.VMImageIndex || snapshotIcon.ImageIndex > SnapshotIcon.UnknownImage))
+                if (item is SnapshotIcon snapshotIcon && (snapshotIcon.ImageIndex == SnapshotIcon.VMImageIndex || snapshotIcon.ImageIndex > SnapshotIcon.UnknownImage))
                 {
-                    if (string.IsNullOrEmpty(message))
-                    {
-                        
-                        snapshotIcon.ChangeSpinningIcon(p, _spinningMessage);
-                    }
-                    else
-                    {
-                        snapshotIcon.ChangeSpinningIcon(p, _spinningMessage);
-                    }
+                    snapshotIcon.ChangeSpinningIcon(p, _spinningMessage);
                     return;
                 }
             }
