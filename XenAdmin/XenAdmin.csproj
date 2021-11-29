@@ -304,6 +304,12 @@
     <Compile Include="Dialogs\OptionsPages\ConfirmationOptionsPage.Designer.cs">
       <DependentUpon>ConfirmationOptionsPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\OptionsPages\ExternalToolsOptionsPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dialogs\OptionsPages\ExternalToolsOptionsPage.Designer.cs">
+      <DependentUpon>ExternalToolsOptionsPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\OvfValidationDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1808,6 +1814,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\OptionsPages\ConfirmationOptionsPage.zh-CN.resx">
       <DependentUpon>ConfirmationOptionsPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\OptionsPages\ExternalToolsOptionsPage.ja.resx">
+      <DependentUpon>ExternalToolsOptionsPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\OptionsPages\ExternalToolsOptionsPage.resx">
+      <DependentUpon>ExternalToolsOptionsPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\OptionsPages\ExternalToolsOptionsPage.zh-CN.resx">
+      <DependentUpon>ExternalToolsOptionsPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\OvfValidationDialog.ja.resx">
       <DependentUpon>OvfValidationDialog.cs</DependentUpon>

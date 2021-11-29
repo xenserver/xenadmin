@@ -125,6 +125,40 @@
   <data name="ContentPanel.AutoScrollMinSize" type="System.Drawing.Size, System.Drawing">
     <value>486, 0</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="externalToolsOptionsPage1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="externalToolsOptionsPage1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="externalToolsOptionsPage1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="externalToolsOptionsPage1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 49</value>
+  </data>
+  <data name="externalToolsOptionsPage1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="externalToolsOptionsPage1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>534, 466</value>
+  </data>
+  <data name="externalToolsOptionsPage1.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;externalToolsOptionsPage1.Name" xml:space="preserve">
+    <value>externalToolsOptionsPage1</value>
+  </data>
+  <data name="&gt;&gt;externalToolsOptionsPage1.Type" xml:space="preserve">
+    <value>XenAdmin.Dialogs.OptionsPages.ConnectionOptionsPage, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;externalToolsOptionsPage1.Parent" xml:space="preserve">
+    <value>ContentPanel</value>
+  </data>
+  <data name="&gt;&gt;externalToolsOptionsPage1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="confirmationOptionsPage1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -140,7 +174,6 @@
   <data name="confirmationOptionsPage1.Size" type="System.Drawing.Size, System.Drawing">
     <value>534, 466</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="confirmationOptionsPage1.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
@@ -148,13 +181,13 @@
     <value>confirmationOptionsPage1</value>
   </data>
   <data name="&gt;&gt;confirmationOptionsPage1.Type" xml:space="preserve">
-    <value>XenAdmin.Dialogs.OptionsPages.ConfirmationOptionsPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Dialogs.OptionsPages.ConfirmationOptionsPage, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;confirmationOptionsPage1.Parent" xml:space="preserve">
     <value>ContentPanel</value>
   </data>
   <data name="&gt;&gt;confirmationOptionsPage1.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="pluginOptionsPage1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -178,13 +211,13 @@
     <value>pluginOptionsPage1</value>
   </data>
   <data name="&gt;&gt;pluginOptionsPage1.Type" xml:space="preserve">
-    <value>XenAdmin.Dialogs.OptionsPages.PluginOptionsPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Dialogs.OptionsPages.PluginOptionsPage, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;pluginOptionsPage1.Parent" xml:space="preserve">
     <value>ContentPanel</value>
   </data>
   <data name="&gt;&gt;pluginOptionsPage1.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="saveAndRestoreOptionsPage1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -211,13 +244,13 @@
     <value>saveAndRestoreOptionsPage1</value>
   </data>
   <data name="&gt;&gt;saveAndRestoreOptionsPage1.Type" xml:space="preserve">
-    <value>XenAdmin.Dialogs.OptionsPages.SaveAndRestoreOptionsPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Dialogs.OptionsPages.SaveAndRestoreOptionsPage, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;saveAndRestoreOptionsPage1.Parent" xml:space="preserve">
     <value>ContentPanel</value>
   </data>
   <data name="&gt;&gt;saveAndRestoreOptionsPage1.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="securityOptionsPage1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -241,13 +274,13 @@
     <value>securityOptionsPage1</value>
   </data>
   <data name="&gt;&gt;securityOptionsPage1.Type" xml:space="preserve">
-    <value>XenAdmin.Dialogs.OptionsPages.SecurityOptionsPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Dialogs.OptionsPages.SecurityOptionsPage, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;securityOptionsPage1.Parent" xml:space="preserve">
     <value>ContentPanel</value>
   </data>
   <data name="&gt;&gt;securityOptionsPage1.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="updatesOptionsPage1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -271,13 +304,13 @@
     <value>updatesOptionsPage1</value>
   </data>
   <data name="&gt;&gt;updatesOptionsPage1.Type" xml:space="preserve">
-    <value>XenAdmin.Dialogs.OptionsPages.UpdatesOptionsPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Dialogs.OptionsPages.UpdatesOptionsPage, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;updatesOptionsPage1.Parent" xml:space="preserve">
     <value>ContentPanel</value>
   </data>
   <data name="&gt;&gt;updatesOptionsPage1.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="graphsOptionsPage1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -301,13 +334,13 @@
     <value>graphsOptionsPage1</value>
   </data>
   <data name="&gt;&gt;graphsOptionsPage1.Type" xml:space="preserve">
-    <value>XenAdmin.Dialogs.OptionsPages.DisplayOptionsPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Dialogs.OptionsPages.DisplayOptionsPage, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;graphsOptionsPage1.Parent" xml:space="preserve">
     <value>ContentPanel</value>
   </data>
   <data name="&gt;&gt;graphsOptionsPage1.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="consolesOptionsPage1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -334,13 +367,13 @@
     <value>consolesOptionsPage1</value>
   </data>
   <data name="&gt;&gt;consolesOptionsPage1.Type" xml:space="preserve">
-    <value>XenAdmin.Dialogs.OptionsPages.ConsolesOptionsPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Dialogs.OptionsPages.ConsolesOptionsPage, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;consolesOptionsPage1.Parent" xml:space="preserve">
     <value>ContentPanel</value>
   </data>
   <data name="&gt;&gt;consolesOptionsPage1.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="connectionOptionsPage1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -367,13 +400,13 @@
     <value>connectionOptionsPage1</value>
   </data>
   <data name="&gt;&gt;connectionOptionsPage1.Type" xml:space="preserve">
-    <value>XenAdmin.Dialogs.OptionsPages.ConnectionOptionsPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Dialogs.OptionsPages.ConnectionOptionsPage, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;connectionOptionsPage1.Parent" xml:space="preserve">
     <value>ContentPanel</value>
   </data>
   <data name="&gt;&gt;connectionOptionsPage1.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="ContentPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -406,7 +439,7 @@
     <value>verticalTabs</value>
   </data>
   <data name="&gt;&gt;verticalTabs.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.VerticalTabs, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.VerticalTabs, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;verticalTabs.Parent" xml:space="preserve">
     <value>splitContainer.Panel1</value>
@@ -490,7 +523,7 @@
     <value>blueBorder</value>
   </data>
   <data name="&gt;&gt;blueBorder.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.BlueBorderPanel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;blueBorder.Parent" xml:space="preserve">
     <value>splitContainer.Panel2</value>
@@ -523,6 +556,6 @@
     <value>OptionsDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>XenAdmin.Dialogs.VerticallyTabbedDialog, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Dialogs.VerticallyTabbedDialog, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
