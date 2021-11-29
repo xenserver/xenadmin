@@ -15,7 +15,7 @@ namespace XenAdmin
         {
             Program.Exiting = true;
 
-            pluginManager.PluginsChanged -= pluginManager_PluginsChanged;
+            PluginManager.PluginsChanged -= pluginManager_PluginsChanged;
             UnRegisterEvents();
 
             if (disposing)
@@ -23,7 +23,7 @@ namespace XenAdmin
                 if (components != null)
                     components.Dispose();
 
-                pluginManager.Dispose();
+                PluginManager.Dispose();
 
                 log.Debug("MainWindow disposing of license timer");
                 if (licenseTimer != null)
