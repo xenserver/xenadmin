@@ -128,7 +128,7 @@ namespace XenAdmin
 
         private static readonly System.Windows.Forms.Timer CheckForUpdatesTimer = new System.Windows.Forms.Timer();
 
-        private readonly PluginManager pluginManager;
+        public readonly PluginManager PluginManager;
         private readonly ContextMenuBuilder contextMenuBuilder;
 
         private readonly LicenseManagerLauncher licenseManagerLauncher;
@@ -220,11 +220,11 @@ namespace XenAdmin
             CommandLineArgType = argType;
             CommandLineParam = args;
 
-            pluginManager = new PluginManager();
-            pluginManager.PluginsChanged += pluginManager_PluginsChanged;
-            pluginManager.LoadPlugins();
-            contextMenuBuilder = new ContextMenuBuilder(pluginManager, this);
-            ((WinformsXenAdminConfigProvider) XenAdminConfigManager.Provider).PluginManager = pluginManager;
+            PluginManager = new PluginManager();
+            PluginManager.PluginsChanged += pluginManager_PluginsChanged;
+            PluginManager.LoadPlugins();
+            contextMenuBuilder = new ContextMenuBuilder(PluginManager, this);
+            ((WinformsXenAdminConfigProvider) XenAdminConfigManager.Provider).PluginManager = PluginManager;
 
             FormFontFixer.Fix(this);
 
@@ -634,7 +634,7 @@ namespace XenAdmin
 
                         if (result && dlg.IsCheckBoxChecked)
                         {
-                            using (var dialog = new OptionsDialog(pluginManager))
+                            using (var dialog = new OptionsDialog(PluginManager))
                             {
                                 dialog.SelectConnectionOptionsPage();
                                 dialog.ShowDialog(this);
@@ -1190,7 +1190,7 @@ namespace XenAdmin
                 }
 
                 selectedTabs.Remove(o);
-                pluginManager.DisposeURLs(o);
+                PluginManager.DisposeURLs(o);
             }
         }
 
@@ -1578,7 +1578,7 @@ namespace XenAdmin
             consoleFeatures = new List<TabPageFeature>();
             otherFeatures = new List<TabPageFeature>();
 
-            var plugins = pluginManager.Plugins;
+            var plugins = PluginManager.Plugins;
             foreach (var p in plugins)
             {
                 var features = p.Features;
@@ -1703,7 +1703,7 @@ namespace XenAdmin
                 bool itemAdded = false;
 
                 // add plugin items for this menu at insertIndex
-                foreach (PluginDescriptor plugin in pluginManager.Plugins)
+                foreach (PluginDescriptor plugin in PluginManager.Plugins)
                 {
                     if (!plugin.Enabled)
                         continue;
@@ -2125,7 +2125,7 @@ namespace XenAdmin
 
         private void UpdateTabePageFeatures()
         {
-            var plugins = pluginManager.Plugins;
+            var plugins = PluginManager.Plugins;
             foreach (var p in plugins)
             {
                 var features = p.Features;
@@ -2696,7 +2696,7 @@ namespace XenAdmin
 
         private void preferencesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (var dialog = new OptionsDialog(pluginManager))
+            using (var dialog = new OptionsDialog(PluginManager))
                 dialog.ShowDialog(this);
         }
 
