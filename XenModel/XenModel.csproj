@@ -168,6 +168,7 @@
     <Compile Include="Actions\ZipStatusReportAction.cs" />
     <Compile Include="Alerts\Types\Alert.cs" />
     <Compile Include="BrandManager.cs" />
+    <Compile Include="SshConsole.cs" />
     <Compile Include="PathValidator.cs" />
     <Compile Include="UnitStrings.Designer.cs">
       <AutoGen>True</AutoGen>
