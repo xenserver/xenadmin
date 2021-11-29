@@ -8022,6 +8022,33 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your external SSH console could not be launched. Please check that you have selected a valid file..
+        /// </summary>
+        public static string CONFIGURE_SSH_CONSOLE_ERROR {
+            get {
+                return ResourceManager.GetString("CONFIGURE_SSH_CONSOLE_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your external SSH console could not be found. Please check that you have selected a valid file..
+        /// </summary>
+        public static string CONFIGURE_SSH_CONSOLE_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("CONFIGURE_SSH_CONSOLE_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Configure SSH Console.
+        /// </summary>
+        public static string CONFIGURE_SSH_CONSOLE_TITLE {
+            get {
+                return ResourceManager.GetString("CONFIGURE_SSH_CONSOLE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Configuring Workload Balancing .
         /// </summary>
         public static string CONFIGURING_WLB {
@@ -16826,6 +16853,42 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to External Tools.
+        /// </summary>
+        public static string EXTERNAL_TOOLS {
+            get {
+                return ResourceManager.GetString("EXTERNAL_TOOLS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage external tools.
+        /// </summary>
+        public static string EXTERNAL_TOOLS_DETAILS {
+            get {
+                return ResourceManager.GetString("EXTERNAL_TOOLS_DETAILS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select SSH console.
+        /// </summary>
+        public static string EXTERNAL_TOOLS_OPEN_FILE_TITLE {
+            get {
+                return ResourceManager.GetString("EXTERNAL_TOOLS_OPEN_FILE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Executables (*.exe)|*.exe.
+        /// </summary>
+        public static string EXTERNAL_TOOLS_OPEN_FILE_TYPE {
+            get {
+                return ResourceManager.GetString("EXTERNAL_TOOLS_OPEN_FILE_TYPE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed.
         /// </summary>
         public static string FAILED {
@@ -16995,7 +17058,16 @@ namespace XenAdmin {
                 return ResourceManager.GetString("FILE_PATH_DEVICE_NAME_ERROR_MESSAGE", resourceCulture);
             }
         }
+
+        ///   Looks up a localized string similar to File not found.
+        /// </summary>
+        public static string FILE_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("FILE_NOT_FOUND", resourceCulture);
+            }
+        }
         
+
         /// <summary>
         ///   Looks up a localized string similar to Acrobat (PDF) file.
         /// </summary>
