@@ -39,6 +39,7 @@ namespace XenAdmin.Dialogs
             this.saveAndRestoreOptionsPage1 = new XenAdmin.Dialogs.OptionsPages.SaveAndRestoreOptionsPage();
             this.pluginOptionsPage1 = new XenAdmin.Dialogs.OptionsPages.PluginOptionsPage();
             this.confirmationOptionsPage1 = new XenAdmin.Dialogs.OptionsPages.ConfirmationOptionsPage();
+            this.externalToolsOptionsPage1 = new XenAdmin.Dialogs.OptionsPages.ExternalToolsOptionsPage();
             this.ContentPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -46,11 +47,11 @@ namespace XenAdmin.Dialogs
             this.splitContainer.SuspendLayout();
             this.blueBorder.SuspendLayout();
             this.SuspendLayout();
-
             // 
             // ContentPanel
             // 
             resources.ApplyResources(this.ContentPanel, "ContentPanel");
+            this.ContentPanel.Controls.Add(this.externalToolsOptionsPage1);
             this.ContentPanel.Controls.Add(this.confirmationOptionsPage1);
             this.ContentPanel.Controls.Add(this.pluginOptionsPage1);
             this.ContentPanel.Controls.Add(this.saveAndRestoreOptionsPage1);
@@ -63,7 +64,7 @@ namespace XenAdmin.Dialogs
             // verticalTabs
             // 
             this.verticalTabs.Items.AddRange(new object[] {
-            this.confirmationOptionsPage1, 
+            this.confirmationOptionsPage1,
             this.pluginOptionsPage1,
             this.saveAndRestoreOptionsPage1,
             this.securityOptionsPage1,
@@ -71,7 +72,7 @@ namespace XenAdmin.Dialogs
             this.graphsOptionsPage1,
             this.consolesOptionsPage1,
             this.connectionOptionsPage1,
-            });
+            this.externalToolsOptionsPage1});
             resources.ApplyResources(this.verticalTabs, "verticalTabs");
             this.verticalTabs.SelectedIndexChanged += new System.EventHandler(this.verticalTabs_SelectedIndexChanged);
             // 
@@ -133,6 +134,11 @@ namespace XenAdmin.Dialogs
             resources.ApplyResources(this.confirmationOptionsPage1, "confirmationOptionsPage1");
             this.confirmationOptionsPage1.Name = "confirmationOptionsPage1";
             // 
+            // externalToolsOptionsPage1
+            // 
+            resources.ApplyResources(this.externalToolsOptionsPage1, "externalToolsOptionsPage1");
+            this.externalToolsOptionsPage1.Name = "externalToolsOptionsPage1";
+            // 
             // OptionsDialog
             // 
             resources.ApplyResources(this, "$this");
@@ -159,5 +165,6 @@ namespace XenAdmin.Dialogs
         private XenAdmin.Dialogs.OptionsPages.SaveAndRestoreOptionsPage saveAndRestoreOptionsPage1;
         private XenAdmin.Dialogs.OptionsPages.PluginOptionsPage pluginOptionsPage1;
         private OptionsPages.ConfirmationOptionsPage confirmationOptionsPage1;
+        private OptionsPages.ExternalToolsOptionsPage externalToolsOptionsPage1;
     }
 }
