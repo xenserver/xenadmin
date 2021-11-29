@@ -14737,4 +14737,28 @@ Any disk in your VM's DVD drive will be ejected when installing {1}.</value>
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>You are here</value>
   </data>
+  <data name="EXTERNAL_TOOLS" xml:space="preserve">
+    <value>External Tools</value>
+  </data>
+  <data name="EXTERNAL_TOOLS_DETAILS" xml:space="preserve">
+    <value>Manage external tools</value>
+  </data>
+  <data name="EXTERNAL_TOOLS_OPEN_FILE_TITLE" xml:space="preserve">
+    <value>Select SSH console</value>
+  </data>
+  <data name="EXTERNAL_TOOLS_OPEN_FILE_TYPE" xml:space="preserve">
+    <value>Executables (*.exe)|*.exe</value>
+  </data>
+  <data name="FILE_NOT_FOUND" xml:space="preserve">
+    <value>File not found</value>
+  </data>
+  <data name="CONFIGURE_SSH_CONSOLE_ERROR" xml:space="preserve">
+    <value>Your external SSH console could not be launched. Please check that you have selected a valid file.</value>
+  </data>
+  <data name="CONFIGURE_SSH_CONSOLE_NOT_FOUND" xml:space="preserve">
+    <value>Your external SSH console could not be found. Please check that you have selected a valid file.</value>
+  </data>
+  <data name="CONFIGURE_SSH_CONSOLE_TITLE" xml:space="preserve">
+    <value>Configure SSH Console</value>
+  </data>
 </root>
