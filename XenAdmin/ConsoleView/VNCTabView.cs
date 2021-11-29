@@ -30,21 +30,22 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Windows.Forms;
 using System.Threading;
-using XenAdmin.Core;
-using XenAdmin.Network;
-using XenAPI;
+using System.Windows.Forms;
 using XenAdmin.Commands;
-using XenAdmin.Dialogs;
-using System.Collections.Generic;
-using System.Diagnostics;
 using XenAdmin.Controls.ConsoleTab;
 using XenAdmin.Controls.GradientPanel;
+using XenAdmin.Core;
+using XenAdmin.Dialogs;
+using XenAdmin.Network;
+using XenAPI;
 
 
 namespace XenAdmin.ConsoleView
@@ -151,14 +152,14 @@ namespace XenAdmin.ConsoleView
             {
                 source.Connection.Cache.RegisterCollectionChanged<Host>(Host_CollectionChangedWithInvoke);
                 targetHost = source.GetStorageHost(false);
-                
+
                 foreach (Host cachedHost in source.Connection.Cache.Hosts)
                 {
                     log.DebugFormat("'{0}' console: Register Server_EnabledPropertyChanged event listener on {1}",
                                     source.Name(), cachedHost.Name());
                     cachedHost.PropertyChanged += Server_EnabledPropertyChanged;
                 }
-                
+
                 HostLabel.Visible = false;
             }
 
@@ -217,7 +218,7 @@ namespace XenAdmin.ConsoleView
 
             //If RDP enabled and AutoSwitchToRDP selected, switch RDP connection will be done when VNC already get the correct screen resolution.
             //This change is only for Cream, because RDP port scan was removed in Cream.
-            if (Properties.Settings.Default.AutoSwitchToRDP && RDPEnabled )
+            if (Properties.Settings.Default.AutoSwitchToRDP && RDPEnabled)
                 vncScreen.AutoSwitchRDPLater = true;
         }
 
@@ -236,11 +237,11 @@ namespace XenAdmin.ConsoleView
         private void toggleConsoleButton_EnabledChanged(object sender, EventArgs e)
         {
             ButtonBase button = sender as ButtonBase;
-            if(button == null)
+            if (button == null)
                 return;
 
             string format = "Console tab 'Switch to...' button disabled for VM '{0}'";
-            
+
             if (button.Enabled)
                 format = "Console tab 'Switch to...' button enabled for VM '{0}'";
 
@@ -298,7 +299,7 @@ namespace XenAdmin.ConsoleView
             source.Connection.Cache.DeregisterCollectionChanged<VM>(VM_CollectionChangedWithInvoke);
 
             if (this.guestMetrics != null)
-                this.guestMetrics.PropertyChanged -= guestMetrics_PropertyChanged; 
+                this.guestMetrics.PropertyChanged -= guestMetrics_PropertyChanged;
 
             if (source.IsControlDomainZero(out Host host))
             {
@@ -390,17 +391,18 @@ namespace XenAdmin.ConsoleView
             if (Properties.Settings.Default.DockShortcutKey == 1)
             {
                 // Alt + Shift + U
-                KeyHandler.AddKeyHandler(ConsoleShortcutKey.ALT_SHIFT_U, toggleDockUnDock);}
+                KeyHandler.AddKeyHandler(ConsoleShortcutKey.ALT_SHIFT_U, toggleDockUnDock);
+            }
             else if (Properties.Settings.Default.DockShortcutKey == 2)
             {
                 // F11
-                KeyHandler.AddKeyHandler(ConsoleShortcutKey.F11, toggleDockUnDock); 
+                KeyHandler.AddKeyHandler(ConsoleShortcutKey.F11, toggleDockUnDock);
             }
             else if (Properties.Settings.Default.DockShortcutKey == 0)
             {
                 // <none>
                 KeyHandler.RemoveKeyHandler(ConsoleShortcutKey.ALT_SHIFT_U);
-                KeyHandler.RemoveKeyHandler(ConsoleShortcutKey.F11); 
+                KeyHandler.RemoveKeyHandler(ConsoleShortcutKey.F11);
             }
 
             UpdateDockButton();
@@ -409,12 +411,12 @@ namespace XenAdmin.ConsoleView
             if (Properties.Settings.Default.UncaptureShortcutKey == 0)
             {
                 // Right Ctrl
-                KeyHandler.AddKeyHandler(ConsoleShortcutKey.RIGHT_CTRL, ToggleConsoleFocus); 
+                KeyHandler.AddKeyHandler(ConsoleShortcutKey.RIGHT_CTRL, ToggleConsoleFocus);
             }
             else if (Properties.Settings.Default.UncaptureShortcutKey == 1)
             {
                 // Left Alt
-                KeyHandler.AddKeyHandler(ConsoleShortcutKey.LEFT_ALT, ToggleConsoleFocus); 
+                KeyHandler.AddKeyHandler(ConsoleShortcutKey.LEFT_ALT, ToggleConsoleFocus);
             }
         }
 
@@ -445,31 +447,31 @@ namespace XenAdmin.ConsoleView
             if (Properties.Settings.Default.FullScreenShortcutKey != 3)
             {
                 // Ctrl + Enter
-                KeyHandler.RemoveKeyHandler(ConsoleShortcutKey.CTRL_ENTER); 
+                KeyHandler.RemoveKeyHandler(ConsoleShortcutKey.CTRL_ENTER);
             }
 
             if (Properties.Settings.Default.DockShortcutKey != 1)
             {
                 // Alt + Shift + U
-                KeyHandler.RemoveKeyHandler(ConsoleShortcutKey.ALT_SHIFT_U); 
+                KeyHandler.RemoveKeyHandler(ConsoleShortcutKey.ALT_SHIFT_U);
             }
 
             if (Properties.Settings.Default.DockShortcutKey != 2)
             {
                 // F11
-                KeyHandler.RemoveKeyHandler(ConsoleShortcutKey.F11); 
+                KeyHandler.RemoveKeyHandler(ConsoleShortcutKey.F11);
             }
 
             // Uncapture keyboard and mouse Key
             if (Properties.Settings.Default.UncaptureShortcutKey != 0)
             {
                 // Right Ctrl
-                KeyHandler.RemoveKeyHandler(ConsoleShortcutKey.RIGHT_CTRL); 
+                KeyHandler.RemoveKeyHandler(ConsoleShortcutKey.RIGHT_CTRL);
             }
             if (Properties.Settings.Default.UncaptureShortcutKey != 1)
             {
                 // Left Alt
-                KeyHandler.RemoveKeyHandler(ConsoleShortcutKey.LEFT_ALT); 
+                KeyHandler.RemoveKeyHandler(ConsoleShortcutKey.LEFT_ALT);
             }
         }
 
@@ -523,11 +525,11 @@ namespace XenAdmin.ConsoleView
             else if (e.PropertyName == "guest_metrics")
             {
                 var newGuestMetrics = source.Connection.Resolve(source.guest_metrics);
-                
+
                 //unsubscribing from the previous instance's event
                 if (this.guestMetrics != null)
-                    this.guestMetrics.PropertyChanged -= guestMetrics_PropertyChanged; 
-                
+                    this.guestMetrics.PropertyChanged -= guestMetrics_PropertyChanged;
+
                 this.guestMetrics = newGuestMetrics;
                 if (this.guestMetrics != null)
                     guestMetrics.PropertyChanged += guestMetrics_PropertyChanged;
@@ -595,7 +597,7 @@ namespace XenAdmin.ConsoleView
                 // However, the current guest_metrics indicates that RDP is now supported (HasRDP==true). (eg. XenTools has been installed in the meantime.)
                 // This means that now we should show and enable the toggle RDP button and start polling (if allowed) RDP as well.
 
-                log.DebugFormat( "'{0}' console: Enabling RDP button, because RDP capability has appeared.", source);
+                log.DebugFormat("'{0}' console: Enabling RDP button, because RDP capability has appeared.", source);
 
                 toggleConsoleButton.Visible = true;
                 toggleConsoleButton.Enabled = true;
@@ -975,7 +977,7 @@ namespace XenAdmin.ConsoleView
         {
             Program.AssertOffEventThread();
 
-            Program.Invoke(this, delegate()
+            Program.Invoke(this, delegate ()
             {
                 lock (this.insKeyTimer)
                 {
@@ -1103,7 +1105,7 @@ namespace XenAdmin.ConsoleView
 
                 toggleConsoleButton.Enabled = true;
                 tip.SetToolTip(toggleConsoleButton, null);
-                if (!vncScreen.UserWantsToSwitchProtocol&& Properties.Settings.Default.AutoSwitchToRDP)
+                if (!vncScreen.UserWantsToSwitchProtocol && Properties.Settings.Default.AutoSwitchToRDP)
                 {
                     if (Program.MainWindow.TheTabControl.SelectedTab == Program.MainWindow.TabPageConsole)
                         toggleConsoleButton_Click(null, null);
@@ -1164,7 +1166,7 @@ namespace XenAdmin.ConsoleView
                         DialogResult dialogResult;
                         using (ThreeButtonDialog dlg = new NoIconDialog(Messages.FORCE_ENABLE_RDP,
                             ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
-                            {HelpNameSetter = "EnableRDPonVM"})
+                        { HelpNameSetter = "EnableRDPonVM" })
                         {
                             dialogResult = dlg.ShowDialog(Program.MainWindow);
                         }
@@ -1190,7 +1192,7 @@ namespace XenAdmin.ConsoleView
                 Unpause();
                 UpdateButtons();
             }
-            catch(COMException ex)
+            catch (COMException ex)
             {
                 log.DebugFormat("Disabling toggle-console button as COM related exception thrown: {0}", ex.Message);
                 toggleConsoleButton.Enabled = false;
@@ -1328,7 +1330,7 @@ namespace XenAdmin.ConsoleView
 
             if (!RDPControlEnabled)
                 toggleConsoleButton.Enabled = false;
-            
+
             vncScreen.imediatelyPollForConsole();
         }
 
@@ -1472,27 +1474,93 @@ namespace XenAdmin.ConsoleView
             if (vncScreen != null)
                 vncScreen.UpdateRDPResolution(fullscreen);
         }
-        
+
         #region SSH Console methods
 
         private void buttonSSH_Click(object sender, EventArgs e)
         {
-            if (IsSSHConsoleSupported && CanStartSSHConsole)
+            if (!IsSSHConsoleSupported || !CanStartSSHConsole) 
+                return;
+
+            var customSshConsole = Properties.Settings.Default.CustomSshConsole;
+            var sshConsolePath = GetConsolePath(customSshConsole);
+
+            if (string.IsNullOrEmpty(sshConsolePath) || customSshConsole == SshConsole.None)
             {
-                var puttyPath = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "putty.exe");
+                OpenSshConsoleNotFoundDialog();
+                return;
+            }
 
-                try
+            try
+            {
+                var command = $"{source.IPAddressForSSH()}";
+                if (customSshConsole == SshConsole.OpenSSH)
                 {
-                    var startInfo = new ProcessStartInfo(puttyPath, source.IPAddressForSSH());
-                    Process.Start(startInfo);
+                    // OpenSSH doesn't have an option to prompt the user for the username.
+                    // We use the session's subject.
+                    var currentSubject = source.Connection.Resolve(source.Connection.Session.SessionSubject);
+                    command = $"{currentSubject?.SubjectName ?? "root"}@{source.IPAddressForSSH()}";
                 }
-                catch (Exception ex)
-                {
-                    log.Error("Error starting PuTTY.", ex);
+                Process.Start(new ProcessStartInfo(sshConsolePath, command));
+            }
+            catch (Exception ex)
+            {
+                log.Error("Could not start the selected SSH console.", ex);
+                OpenSshConsoleErrorDialog();
+            }
+        }
 
-                    using (var dlg = new ErrorDialog(Messages.ERROR_PUTTY_LAUNCHING))
-                        dlg.ShowDialog(Parent);
+        private static string GetConsolePath(SshConsole customSshConsole)
+        {
+            switch (customSshConsole)
+            {
+                case SshConsole.Putty:
+                    return Properties.Settings.Default.PuttyLocation;
+                case SshConsole.OpenSSH:
+                    return Properties.Settings.Default.OpenSSHLocation;
+                default:
+                    return null;
+            }
+        }
+
+        private void OpenSshConsoleNotFoundDialog()
+        {
+            var configureSshClientButton = new ThreeButtonDialog.TBDButton(Messages.CONFIGURE_SSH_CONSOLE_TITLE, DialogResult.Yes,
+                ThreeButtonDialog.ButtonType.NONE);
+
+            var buttons = new[] { configureSshClientButton, ThreeButtonDialog.ButtonOK };
+            using (var dlg = new WarningDialog(Messages.CONFIGURE_SSH_CONSOLE_NOT_FOUND, buttons))
+            {
+                var result = dlg.ShowDialog(Parent);
+                if (result == DialogResult.Yes)
+                {
+                    OpenExternalToolsPage();
                 }
+            }
+        }
+
+        private void OpenSshConsoleErrorDialog()
+        {
+            var configureSshClientButton = new ThreeButtonDialog.TBDButton(Messages.CONFIGURE_SSH_CONSOLE_TITLE, DialogResult.Yes,
+                ThreeButtonDialog.ButtonType.NONE);
+
+            var buttons = new[] { configureSshClientButton, ThreeButtonDialog.ButtonOK };
+            using (var dlg = new ErrorDialog(Messages.CONFIGURE_SSH_CONSOLE_ERROR, buttons))
+            {
+                var result = dlg.ShowDialog(Parent);
+                if (result == DialogResult.Yes)
+                {
+                    OpenExternalToolsPage();
+                }
+            }
+        }
+
+        private void OpenExternalToolsPage()
+        {
+            using (var optionsDialog = new OptionsDialog(Program.MainWindow.PluginManager))
+            {
+                optionsDialog.SelectExternalToolsPage();
+                optionsDialog.ShowDialog();
             }
         }
 
@@ -1504,7 +1572,7 @@ namespace XenAdmin.ConsoleView
         }
 
         private bool IsSSHConsoleSupported
-        { 
+        {
             get
             {
                 if (source.IsWindows())
