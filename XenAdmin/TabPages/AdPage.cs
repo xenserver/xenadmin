@@ -60,7 +60,6 @@ namespace XenAdmin.TabPages
 
         private Thread _loggedInStatusUpdater;
         private bool _updateInProgress;
-        private readonly object _logoutLock = new object();
         private readonly object _statusUpdaterLock = new object();
 
         private string _storedDomain;
@@ -688,7 +687,6 @@ namespace XenAdmin.TabPages
 
         private void buttonJoinLeave_Click(object sender, EventArgs e)
         {
-            Program.AssertOnEventThread();
             if (buttonJoinLeave.Text == Messages.AD_JOIN_DOMAIN)
             {
                 // We're enabling AD            
@@ -786,7 +784,6 @@ namespace XenAdmin.TabPages
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            Program.AssertOnEventThread();
             if (!buttonAdd.Enabled)
                 return;
 
@@ -796,8 +793,6 @@ namespace XenAdmin.TabPages
 
         private void ButtonRemove_Click(object sender, EventArgs e)
         {
-            Program.AssertOnEventThread();
-
             // Double check, this method is called from a context menu as well and the state could have changed under it
             if (!ButtonRemove.Enabled)
                 return;
@@ -807,8 +802,8 @@ namespace XenAdmin.TabPages
                 return;
 
             var removeMessage = subjectsToRemove.Count == 1
-                ? string.Format(Messages.QUESTION_REMOVE_AD_USER_ONE, subjectsToRemove[0].DisplayName ?? subjectsToRemove[0].SubjectName)
-                : string.Format(Messages.QUESTION_REMOVE_AD_USER_MANY, subjectsToRemove.Count);
+                ? string.Format(Messages.AD_REMOVE_USER_ONE, subjectsToRemove[0].DisplayName ?? subjectsToRemove[0].SubjectName)
+                : string.Format(Messages.AD_REMOVE_USER_MANY, subjectsToRemove.Count);
 
             string adminMessage = null;
             var conn = subjectsToRemove.FirstOrDefault(s => s.Connection != null)?.Connection;
@@ -1050,7 +1045,6 @@ namespace XenAdmin.TabPages
 
         private void ButtonChangeRoles_Click(object sender, EventArgs e)
         {
-            Program.AssertOnEventThread();
             if (Helpers.FeatureForbidden(_connection, Host.RestrictRBAC))
             {
                 UpsellDialog.ShowUpsellDialog(string.Format(Messages.UPSELL_BLURB_RBAC, BrandManager.ProductBrand), this);
@@ -1061,69 +1055,66 @@ namespace XenAdmin.TabPages
             if (!ButtonChangeRoles.Enabled)
                 return;
 
-            var selectedSubjects = GridViewSubjectList.SelectedRows.Cast<AdSubjectRow>().Where(r => !r.IsLocalRootRow).Select(r => r.subject).ToList();
+            var selectedRows = GridViewSubjectList.SelectedRows.Cast<AdSubjectRow>().ToList();
+            var selectedSubjects = selectedRows.Where(r => !r.IsLocalRootRow).Select(r => r.subject).ToList();
+            var loggedInSelectedSubjects = selectedRows.Where(r => !r.IsLocalRootRow && r.LoggedIn).Select(r => r.subject).ToList();
 
             using (var dialog = new RoleSelectionDialog(_connection, selectedSubjects))
                 if (dialog.ShowDialog(this) == DialogResult.OK)
                 {
                     var selectedRoles = dialog.SelectedRoles.OrderBy(x => x).ToList();
-
-                    var loggedInUsers = Helpers.LoggedInSubjects(_connection);
                     var subjectsToLogout = new List<Subject>();
-                    var sessionUser = _connection.Resolve(_connection.Session.SessionSubject);
+                    var logSelfOut = false;
 
-                    foreach (var loggedInSubject in selectedSubjects.Where(loggedInUsers.Contains))
+                    foreach (var subject in loggedInSelectedSubjects)
                     {
-                        var subjectRoles = loggedInSubject.roles.Select(_connection.Resolve).OrderBy(x => x).ToList();
+                        var subjectRoles = subject.roles.Select(_connection.Resolve).OrderBy(x => x).ToList();
+
                         if (!selectedRoles.SequenceEqual(subjectRoles))
-                        {
-                            subjectsToLogout.Add(loggedInSubject);
-                        }
+                            subjectsToLogout.Add(subject);
+
+                        if (subject.opaque_ref == _connection.Session.SessionSubject)
+                            logSelfOut = true;
                     }
 
-                    var logoutCurrentSubject = false;
-                    if (subjectsToLogout.Count > 0)
-                    {
-                        if (!ConfirmLogout(subjectsToLogout.Contains(sessionUser), subjectsToLogout, out logoutCurrentSubject))
-                            return;
-                    }
+                    if (subjectsToLogout.Count > 0 && !ConfirmLogout(logSelfOut, true, subjectsToLogout))
+                        return;
 
                     var actions = new List<AsyncAction>();
-                    var cancelledSubjects = new List<Subject>();
+                    var successfulSubjects = new List<Subject>();
+
                     foreach (var subject in selectedSubjects)
                     {
                         var action = new AddRemoveRolesAction(_connection, subject, dialog.SelectedRoles);
-                        action.Completed += (actionBase) =>
+                        action.Completed += actionBase =>
                         {
-                            if (actionBase.IsCancelled || actionBase.Exception != null)
-                            {
-                                cancelledSubjects.Add(subject);
-                            }
+                            if (!actionBase.IsCancelled && actionBase.Exception == null)
+                                successfulSubjects.Add(subject);
                         };
                         actions.Add(action);
                     }
 
-                    var actionTitle = selectedSubjects.Count > 1 ? Messages.AD_ADDING_REMOVING_ROLES_ON_MULTIPLE : Messages.AD_ADDING_REMOVING_ROLES_ON;
-                    actionTitle = string.Format(actionTitle, GetFormattedSubjectList(selectedSubjects));
+                    var format = selectedSubjects.Count > 1 ? Messages.AD_ADDING_REMOVING_ROLES_ON_MULTIPLE : Messages.AD_ADDING_REMOVING_ROLES_ON;
+                    var actionTitle = string.Format(format, GetFormattedSubjectList(selectedSubjects));
+
                     var updateRolesAction = new MultipleAction(_connection, actionTitle, Messages.IN_PROGRESS, Messages.COMPLETED, actions, true, true);
-                    updateRolesAction.Completed += (actionBase) => Invoke((MethodInvoker)delegate
+                    updateRolesAction.Completed += actionBase => Program.Invoke(this, () =>
                     {
-                        if (actionBase.IsCancelled && cancelledSubjects.Count == 0)
-                        {
+                        if (actionBase.IsCancelled)
                             return;
-                        }
-                        var nonCancelledSubjects =
-                            subjectsToLogout.Where(subject => !cancelledSubjects.Contains(subject)).ToList();
-                        LogoutSubjects(_connection.Session, nonCancelledSubjects, logoutCurrentSubject);
+
+                        var successfulSubjectsToLogOut = successfulSubjects.Where(subjectsToLogout.Contains).ToList();
+                        if (successfulSubjectsToLogOut.Count <= 0)
+                            return;
+
+                        LogoutSubjects(_connection.Session, successfulSubjectsToLogOut);
                     });
                     updateRolesAction.RunAsync();
                 }
         }
 
-
         private void ButtonLogout_Click(object sender, EventArgs e)
         {
-            Program.AssertOnEventThread();
             // Double check, this method is called from a context menu as well and the state could have changed under it
             if (!ButtonLogout.Enabled)
                 return;
@@ -1146,43 +1137,39 @@ namespace XenAdmin.TabPages
                     logSelfOut = true;
             }
 
-            if (!ConfirmLogout(logSelfOut, subjectsToLogout, out var logoutCurrentSubject))
+            if (subjectsToLogout.Count <= 0 || !ConfirmLogout(logSelfOut, false, subjectsToLogout))
                 return;
 
-            // Then we go through the list and disconnect each user session, doing our own last if necessary
-            LogoutSubjects(session, subjectsToLogout, logoutCurrentSubject);
+            LogoutSubjects(session, subjectsToLogout);
         }
 
-        private void LogoutSubjects(Session session, List<Subject> subjectsToLogout, bool logoutCurrentSubject)
+        private void LogoutSubjects(Session session, List<Subject> subjectsToLogout)
         {
-            // remove non-current subject
+            // We go through the list and disconnect each user session, doing our own last if necessary
+
             var currentSubject = subjectsToLogout.FirstOrDefault(subject => subject.subject_identifier == session.UserSid);
             var otherSubjects = subjectsToLogout.Where(subject => subject.subject_identifier != session.UserSid).ToList();
 
-            var actions = new List<AsyncAction>();
-
-            foreach (var subject in otherSubjects)
+            if (otherSubjects.Count == 0 && currentSubject != null)
             {
-                actions.Add(new DelegatedAsyncAction(_connection,
-                    string.Format(Messages.TERMINATING_USER_SESSION, subject.DisplayName ?? subject.SubjectName),
-                    Messages.IN_PROGRESS, Messages.COMPLETED,
-                    s => Session.logout_subject_identifier(s, subject.subject_identifier),
-                    "session.logout_subject_identifier"));
+               LogOutCurrentSubject(currentSubject);
+                return;
             }
 
-            var actionTitle = subjectsToLogout.Count > 1 ? Messages.TERMINATING_USER_SESSION_MULTIPLE : Messages.TERMINATING_USER_SESSION;
-            actionTitle = string.Format(actionTitle, GetFormattedSubjectList(subjectsToLogout));
+            var actions = otherSubjects.Select(NewLogOutSubjectAction).ToList();
+            var format = otherSubjects.Count > 1 ? Messages.TERMINATING_USER_SESSION_MULTIPLE : Messages.TERMINATING_USER_SESSION;
+            var actionTitle = string.Format(format, GetFormattedSubjectList(otherSubjects));
 
             var logoutAction = new MultipleAction(_connection, actionTitle, Messages.IN_PROGRESS, Messages.COMPLETED, actions, true, true);
-            logoutAction.Completed += (actionBase) => Invoke((MethodInvoker)delegate
+            logoutAction.Completed += actionBase => Program.Invoke(this, () =>
             {
-                if (actionBase.IsCancelled)
-                {
+                if (!(actionBase is MultipleAction ma) || actionBase.IsCancelled)
                     return;
-                }
-                if (logoutCurrentSubject && currentSubject != null)
+
+                if (currentSubject != null)
                 {
-                    new DisconnectCommand(Program.MainWindow, _connection, true).Run();
+                    //passing in elevated credentials avoids multiple prompts
+                    LogOutCurrentSubject(currentSubject, new AsyncAction.SudoElevationResult(ma.sudoUsername, ma.sudoPassword, null));
                 }
                 else
                 {
@@ -1194,14 +1181,44 @@ namespace XenAdmin.TabPages
             logoutAction.RunAsync();
         }
 
-        private bool ConfirmLogout(bool logSelfOut, List<Subject> subjectsToLogout, out bool logoutCurrentSubject)
+        private void LogOutCurrentSubject(Subject currentSubject, AsyncAction.SudoElevationResult sudoElevation = null)
         {
-            logoutCurrentSubject = false;
+            var action = NewLogOutSubjectAction(currentSubject);
+            action.Completed += actionBase => Program.Invoke(this, () =>
+            {
+                //Session.logout_subject_identifier logs out all sessions except the current one,
+                //so if an elevated session was not needed, the current session will not have been
+                //logged out, hence we need to disconnect explicitly.
+                new DisconnectCommand(Program.MainWindow, _connection, false).Run();
+            });
+            action.RunAsync(sudoElevation);
+        }
+
+        private AsyncAction NewLogOutSubjectAction(Subject subject)
+        {
+            return new DelegatedAsyncAction(_connection,
+                string.Format(Messages.TERMINATING_USER_SESSION, subject.DisplayName ?? subject.SubjectName),
+                Messages.IN_PROGRESS, Messages.COMPLETED,
+                s => Session.logout_subject_identifier(s, subject.subject_identifier),
+                "session.logout_subject_identifier");
+        }
+
+        private bool ConfirmLogout(bool logSelfOut, bool isRoleChange, List<Subject> subjectsToLogout)
+        {
+            var logoutCurrentSubject = false;
+
             if (logSelfOut)
             {
-                var warnMsg = string.Format(
-                    subjectsToLogout.Count > 1 ? Messages.AD_LOGOUT_CURRENT_USER_MANY : Messages.AD_LOGOUT_CURRENT_USER_ONE,
-                    Helpers.GetName(_connection).Ellipsise(50));
+                var format =
+                    isRoleChange
+                        ? subjectsToLogout.Count > 1
+                            ? Messages.AD_LOGOUT_CURRENT_USER_MANY_ROLE_CHANGE
+                            : Messages.AD_LOGOUT_CURRENT_USER_ONE_ROLE_CHANGE
+                        : subjectsToLogout.Count > 1
+                            ? Messages.AD_LOGOUT_CURRENT_USER_MANY
+                            : Messages.AD_LOGOUT_CURRENT_USER_ONE;
+
+                var warnMsg = string.Format(format, Helpers.GetName(_connection).Ellipsise(50));
 
                 using (var dlg = new WarningDialog(warnMsg,
                         ThreeButtonDialog.ButtonYes,
@@ -1215,15 +1232,24 @@ namespace XenAdmin.TabPages
 
                     logoutCurrentSubject = true;
                 }
-            }
 
-            var logoutMessage = subjectsToLogout.Count == 1
-                ? string.Format(Messages.QUESTION_LOGOUT_AD_USER_ONE,
-                    subjectsToLogout[0].DisplayName ?? subjectsToLogout[0].SubjectName)
-                : string.Format(Messages.QUESTION_LOGOUT_AD_USER_MANY, subjectsToLogout.Count);
+                if (!DisconnectCommand.ConfirmCancelRunningActions(Program.MainWindow, this, _connection, true))
+                    return false;
+            }
 
             if (!logoutCurrentSubject) //CA-68645
             {
+                var logoutMessage =
+                    isRoleChange
+                        ? subjectsToLogout.Count == 1
+                            ? string.Format(Messages.AD_LOGOUT_USER_ONE_ROLE_CHANGE,
+                                subjectsToLogout[0].DisplayName ?? subjectsToLogout[0].SubjectName)
+                            : string.Format(Messages.AD_LOGOUT_USER_MANY_ROLE_CHANGE, subjectsToLogout.Count)
+                        : subjectsToLogout.Count == 1
+                            ? string.Format(Messages.AD_LOGOUT_USER_ONE,
+                                subjectsToLogout[0].DisplayName ?? subjectsToLogout[0].SubjectName)
+                            : string.Format(Messages.AD_LOGOUT_USER_MANY, subjectsToLogout.Count);
+
                 using (var dlg = new WarningDialog(logoutMessage,
                         ThreeButtonDialog.ButtonYes,
                         new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, selected: true))
@@ -1238,8 +1264,5 @@ namespace XenAdmin.TabPages
 
             return true;
         }
-
-      
-
     }
 }
