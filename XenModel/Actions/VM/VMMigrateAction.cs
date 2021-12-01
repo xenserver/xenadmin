@@ -40,25 +40,21 @@ namespace XenAdmin.Actions.VMActions
     {
 
         public VMMigrateAction(VM vm, Host destinationHost)
-            : base(vm.Connection, GetTitle(vm, destinationHost))
+            : base(vm.Connection, "")
         {
             VM = vm;
             Host = destinationHost;
             Pool = Helpers.GetPool(vm.Connection);
-        }
 
-        private static string GetTitle(VM vm, Host toHost)
-        {
-            Host residentOn = vm.Connection.Resolve(vm.resident_on);
-            
-            return residentOn == null
-                ? string.Format(Messages.ACTION_VM_MIGRATING_NON_RESIDENT, vm.NameWithLocation(), toHost.NameWithLocation())
-                : string.Format(Messages.ACTION_VM_MIGRATING_RESIDENT, vm.Name(), residentOn.NameWithLocation(), toHost.NameWithLocation());
+            var residentOn = vm.Connection.Resolve(vm.resident_on);
+
+            Title = residentOn == null
+                ? string.Format(Messages.ACTION_VM_MIGRATING_NON_RESIDENT, vm.NameWithLocation(), Host.NameWithLocation())
+                : string.Format(Messages.ACTION_VM_MIGRATING_RESIDENT, vm.Name(), residentOn.NameWithLocation(), Host.NameWithLocation());
         }
 
         protected override void Run()
         {
-            Description = Messages.ACTION_VM_MIGRATING;
             RelatedTask = VM.async_live_migrate(Session, VM.opaque_ref, Host.opaque_ref);
             try
             {

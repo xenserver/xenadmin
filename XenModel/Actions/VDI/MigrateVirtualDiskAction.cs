@@ -52,7 +52,6 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            Description = Messages.MOVING;
             RelatedTask = VDI.async_pool_migrate(Session, vdi.opaque_ref, SR.opaque_ref, new Dictionary<string, string>());
             PollToCompletion();
             Description = Messages.MOVED;

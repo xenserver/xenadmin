@@ -65,7 +65,6 @@ namespace XenAdmin.Actions.VMActions
 
         protected override void Run()
         {
-            Description = Messages.ACTION_VM_COPYING;
             RelatedTask = VM.async_copy(Session, VM.opaque_ref, _nameLabel, SR.opaque_ref);
             try
             {

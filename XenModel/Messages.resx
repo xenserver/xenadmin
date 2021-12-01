@@ -969,9 +969,6 @@
   <data name="ACTION_TEMPLATE_CLONE_NEW_NAME" xml:space="preserve">
     <value>Copy of {0}</value>
   </data>
-  <data name="ACTION_TEMPLATE_CLONING" xml:space="preserve">
-    <value>Duplicating</value>
-  </data>
   <data name="ACTION_TOOLSTACK_RESTARTED" xml:space="preserve">
     <value>Toolstack restarted.</value>
   </data>
@@ -1177,7 +1174,13 @@
     <value>Migrating VM '{0}'</value>
   </data>
   <data name="ACTION_VM_MOVING" xml:space="preserve">
-    <value>Moving VM '{0}' from Host '{1}' to Host '{2}'</value>
+    <value>Moving VM '{0}' to new storage</value>
+  </data>
+  <data name="ACTION_VM_MOVING_HOST" xml:space="preserve">
+    <value>Moving VM '{0}' from server '{1}' to server '{2}'</value>
+  </data>
+  <data name="ACTION_VM_MOVING_SR" xml:space="preserve">
+    <value>Moving VM '{0}' to SR '{1}'</value>
   </data>
   <data name="ACTION_VM_MOVING_VDI_DESTROY_FAILURE" xml:space="preserve">
     <value>Failed to finalize moving VM '{0}' to new storage. Please see logs for details.</value>

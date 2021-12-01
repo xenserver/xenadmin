@@ -61,7 +61,6 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            Description = Messages.MOVING;
             PercentComplete = 10;
             log.DebugFormat("Moving VDI '{0}'", Helpers.GetName(vdi));
             RelatedTask = VDI.async_copy(Session, vdi.opaque_ref, SR.opaque_ref);

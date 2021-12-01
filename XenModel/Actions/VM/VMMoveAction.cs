@@ -45,7 +45,7 @@ namespace XenAdmin.Actions.VMActions
         private Dictionary<string, SR> _storageMapping;
 
         public VMMoveAction(VM vm, Dictionary<string, SR> storageMapping, Host host)
-             : base(vm.Connection, string.Format(Messages.ACTION_VM_MOVING, vm.Name(), vm.Connection.Name, host.Name()))
+             : base(vm.Connection, "")
         {
             VM = vm;
             Host = host;
@@ -57,6 +57,14 @@ namespace XenAdmin.Actions.VMActions
             SR = _storageMapping.Values.FirstOrDefault();
 
             PopulateApiMethodsToRoleCheck();
+
+            var sourceHost = vm.Home();
+            if (sourceHost != null && !sourceHost.Equals(host))
+                Title = string.Format(Messages.ACTION_VM_MOVING_HOST, vm.Name(), sourceHost, host.Name());
+            else if (storageMapping.Count == 1)
+                Title = string.Format(Messages.ACTION_VM_MOVING_SR, vm.Name(), storageMapping.Values.ElementAt(0).Name());
+            else
+                Title = string.Format(Messages.ACTION_VM_MOVING, vm.Name());
         }
 
         public VMMoveAction(VM vm, SR sr, Host host)
@@ -92,8 +100,6 @@ namespace XenAdmin.Actions.VMActions
 
         protected override void Run()
         {
-            Description = Messages.MOVING;
-
             // move the progress bar above 0, it's more reassuring to see than a blank bar as we copy the first disk
             PercentComplete += 10;
             int halfstep = 90 / (VM.VBDs.Count * 2);
@@ -156,7 +162,7 @@ namespace XenAdmin.Actions.VMActions
                 PercentComplete += halfstep;
             }
 
-            Description = Messages.MOVING;
+            Description = string.Empty;
 
             if (SR != null)
                 VM.set_suspend_SR(Session, VM.opaque_ref, SR.opaque_ref);

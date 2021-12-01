@@ -37,9 +37,9 @@ namespace XenAdmin.Actions.VMActions
 {
     public class VMCloneAction : AsyncAction
     {
+        private readonly string _cloneName;
+        private readonly string _cloneDescription;
 
-        protected string _cloneName;
-        protected string _cloneDescription;
         public VMCloneAction(VM vm, string name, string description)
             : base(vm.Connection, string.Format(Messages.CREATEVM_CLONE, name, vm.NameWithLocation()))
         {
@@ -58,17 +58,14 @@ namespace XenAdmin.Actions.VMActions
 
         protected override void Run()
         {
-            Description = Messages.ACTION_TEMPLATE_CLONING;
             RelatedTask = VM.async_clone(Session, VM.opaque_ref, _cloneName);
             PollToCompletion();
-            {
-                VM created = Connection.WaitForCache(new XenRef<VM>(Result));
-                VM.set_name_description(Session, created.opaque_ref, _cloneDescription);
-                Result = created.opaque_ref;
-            }
+
+            VM created = Connection.WaitForCache(new XenRef<VM>(Result));
+            VM.set_name_description(Session, created.opaque_ref, _cloneDescription);
+            Result = created.opaque_ref;
+
             Description = Messages.ACTION_TEMPLATE_CLONED;
         }
     }
-
-
 }

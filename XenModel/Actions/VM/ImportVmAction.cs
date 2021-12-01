@@ -72,7 +72,7 @@ namespace XenAdmin.Actions
 
         public ImportVmAction(IXenConnection connection, Host affinity, string filename, SR sr,
             Action<VM, bool> warningDelegate, Action<VMStartAbstractAction, Failure> failureDiagnosisDelegate)
-			: base(connection, GetTitle(filename, connection, affinity))
+			: base(connection, "")
         {
             Description = Messages.IMPORTVM_PREP;
             Pool = Helpers.GetPoolOfOne(connection);
@@ -95,12 +95,8 @@ namespace XenAdmin.Actions
 			ApiMethodsToRoleCheck.AddRange(Role.CommonSessionApiList);
 
 			#endregion
-		}
 
-        private static string GetTitle(string filename, IXenConnection connection, Host affinity)
-        {
-            var toHost = affinity ?? connection.Resolve(Helpers.GetPoolOfOne(connection).master);
-            return string.Format(Messages.IMPORTVM_TITLE, filename, toHost.NameWithLocation());
+            Title = string.Format(Messages.IMPORTVM_TITLE, filename, Host.NameWithLocation());
         }
 
         protected override void Run()

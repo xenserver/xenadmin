@@ -93,7 +93,6 @@ namespace XenAdmin.Actions.VMActions
 
         protected override void Run()
         {
-            Description = copy ? Messages.ACTION_VM_COPYING: Messages.ACTION_VM_MIGRATING;
             try
             {
                 PercentComplete = 0;
