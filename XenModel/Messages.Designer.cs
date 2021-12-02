@@ -1593,16 +1593,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Moving virtual disk &apos;{0}&apos;....
-        /// </summary>
-        public static string ACTION_MOVING_VDI {
-            get {
-                return ResourceManager.GetString("ACTION_MOVING_VDI", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Moving Virtual Disk &apos;{0}&apos; to SR &apos;{1}&apos;.
+        ///   Looks up a localized string similar to Moving Virtual Disk &apos;{0}&apos; from SR &apos;{1}&apos; to SR &apos;{2}&apos;.
         /// </summary>
         public static string ACTION_MOVING_VDI_TO_SR {
             get {
@@ -2664,15 +2655,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Duplicating.
-        /// </summary>
-        public static string ACTION_TEMPLATE_CLONING {
-            get {
-                return ResourceManager.GetString("ACTION_TEMPLATE_CLONING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Restart toolstack on &apos;{0}&apos;.
         /// </summary>
         public static string ACTION_TOOLSTACK_RESTART_ON {
@@ -3114,7 +3096,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Copying VM &apos;{0}&apos; to &apos;{1}&apos;.
+        ///   Looks up a localized string similar to Copying VM &apos;{0}&apos; from &apos;{1}&apos; to &apos;{2}&apos;.
         /// </summary>
         public static string ACTION_VM_CROSS_POOL_COPY_TITLE {
             get {
@@ -3231,11 +3213,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Moving VM &apos;{0}&apos; to &apos;{1}&apos; on SR &apos;{2}&apos;.
+        ///   Looks up a localized string similar to Moving VM &apos;{0}&apos; from server &apos;{1}&apos; to server &apos;{2}&apos;.
         /// </summary>
-        public static string ACTION_VM_MOVING_TITLE {
+        public static string ACTION_VM_MOVING_HOST {
             get {
-                return ResourceManager.GetString("ACTION_VM_MOVING_TITLE", resourceCulture);
+                return ResourceManager.GetString("ACTION_VM_MOVING_HOST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Moving VM &apos;{0}&apos; to SR &apos;{1}&apos;.
+        /// </summary>
+        public static string ACTION_VM_MOVING_SR {
+            get {
+                return ResourceManager.GetString("ACTION_VM_MOVING_SR", resourceCulture);
             }
         }
         
@@ -15295,6 +15286,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You cannot enable certificate verification while a rolling pool upgrade is in progress..
+        /// </summary>
+        public static string ENABLE_TLS_VERIFICATION_RPU {
+            get {
+                return ResourceManager.GetString("ENABLE_TLS_VERIFICATION_RPU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Res&amp;ume.
         /// </summary>
         public static string ENABLE_WLB_ELLIPSIS {
@@ -16975,6 +16975,24 @@ namespace XenAdmin {
         public static string FILE_ALL {
             get {
                 return ResourceManager.GetString("FILE_ALL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A file name cannot be a device name..
+        /// </summary>
+        public static string FILE_NAME_IS_DEVICE_NAME_ERROR_MESSAGE {
+            get {
+                return ResourceManager.GetString("FILE_NAME_IS_DEVICE_NAME_ERROR_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Path section {0} matches a device name..
+        /// </summary>
+        public static string FILE_PATH_DEVICE_NAME_ERROR_MESSAGE {
+            get {
+                return ResourceManager.GetString("FILE_PATH_DEVICE_NAME_ERROR_MESSAGE", resourceCulture);
             }
         }
         
@@ -20221,6 +20239,15 @@ namespace XenAdmin {
         public static string IGNORE_BUTTON_LABEL {
             get {
                 return ResourceManager.GetString("IGNORE_BUTTON_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The following characters are invalid: {0}.
+        /// </summary>
+        public static string ILLEGAL_CHARACTER_ERROR_MESSAGE {
+            get {
+                return ResourceManager.GetString("ILLEGAL_CHARACTER_ERROR_MESSAGE", resourceCulture);
             }
         }
         
@@ -30175,6 +30202,15 @@ namespace XenAdmin {
         public static string PATCHINGWIZARD_UPLOADPAGE_TITLE_ONLY_UPLOAD {
             get {
                 return ResourceManager.GetString("PATCHINGWIZARD_UPLOADPAGE_TITLE_ONLY_UPLOAD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Path cannot be null or empty..
+        /// </summary>
+        public static string PATH_CAN_NOT_BE_NULL_ERROR_MESSAGE {
+            get {
+                return ResourceManager.GetString("PATH_CAN_NOT_BE_NULL_ERROR_MESSAGE", resourceCulture);
             }
         }
         

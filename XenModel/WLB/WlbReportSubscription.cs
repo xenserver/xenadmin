@@ -38,32 +38,32 @@ namespace XenAdmin.Wlb
     {
         #region  Variables
 
-        private static string SUB_ID = "id";
-        private static string CREATED = "created";
-        private static string SUB_NAME = "name";
-        private static string SUB_DESCRIPTION = "description";
-        private static string SUBSCRIBER_ID = "subscriberId";
-        private static string SUBSCRIBER_NAME = "subscriberName";
-        private static string SCHEDULE_ID = "scheduleId";
-        private static string DAYOFWEEK = "daysOfWeek";
-        private static string EXECUTE_TIMEOFDAY = "executeTimeOfDay";
-        private static string TRIGGER_TYPE = "triggerType";
-        private static string ENABLED = "enabled";
-        private static string ENABLE_DATE = "enableDate";
-        private static string DISABLE_DATE = "disableDate";
-        private static string LAST_TOUCHED = "lastTouched";
-        private static string LAST_TOUCHEDBY = "lastTouchedBy";
-        private static string LAST_RUN = "lastRun";
-        private static string LAST_RUNRESULT = "lastRunResult";
-        private static string EMAIL_TO = "emailTo";
-        private static string EMAIL_REPLYTO = "emailReplyTo";
-        private static string REPORT_RENDERFORMAT = "rpRenderFormat";
-        private static string EMAIL_SUBJECT = "emailSubject";
-        private static string EMAIL_COMMENT = "emailComment";
-        private static string EMAIL_CC = "emailCc";
-        private static string EMAIL_BCC = "emailBcc";
-        private static string REPORT_ID = "reportId";
-        public static string REPORT_NAME = "reportName";
+        private const string SUB_ID_KEY = "id";
+        private const string CREATED_KEY = "created";
+        private const string SUB_NAME_KEY = "name";
+        private const string SUB_DESCRIPTION_KEY = "description";
+        private const string SUBSCRIBER_ID_KEY = "subscriberId";
+        private const string SUBSCRIBER_NAME_KEY = "subscriberName";
+        private const string SCHEDULE_ID_KEY = "scheduleId";
+        private const string DAYOFWEEK_KEY = "daysOfWeek";
+        private const string EXECUTE_TIMEOFDAY_KEY = "executeTimeOfDay";
+        private const string TRIGGER_TYPE_KEY = "triggerType";
+        private const string ENABLED_KEY = "enabled";
+        private const string ENABLE_DATE_KEY = "enableDate";
+        private const string DISABLE_DATE_KEY = "disableDate";
+        private const string LAST_TOUCHED_KEY = "lastTouched";
+        private const string LAST_TOUCHEDBY_KEY = "lastTouchedBy";
+        private const string LAST_RUN_KEY = "lastRun";
+        private const string LAST_RUNRESULT_KEY = "lastRunResult";
+        private const string EMAIL_TO_KEY = "emailTo";
+        private const string EMAIL_REPLYTO_KEY = "emailReplyTo";
+        private const string REPORT_RENDERFORMAT_KEY = "rpRenderFormat";
+        private const string EMAIL_SUBJECT_KEY = "emailSubject";
+        private const string EMAIL_COMMENT_KEY = "emailComment";
+        private const string EMAIL_CC_KEY = "emailCc";
+        private const string EMAIL_BCC_KEY = "emailBcc";
+        private const string REPORT_ID_KEY = "reportId";
+        public const string REPORT_NAME_KEY = "reportName";
 
         private string _reportDisplayName;
 
@@ -101,41 +101,41 @@ namespace XenAdmin.Wlb
         /// <param name="id">Subscription id</param>
         public WlbReportSubscription(string id)
         {
-            base.Configuration = new Dictionary<string, string>();
-            base.KeyBase = WlbConfigurationKeyBase.rpSub;
-            base.ItemId = (String.IsNullOrEmpty(id) ? "0" : id);
-            this._reportDisplayName = String.Empty;
+            Configuration = new Dictionary<string, string>();
+            KeyBase = WlbConfigurationKeyBase.rpSub;
+            ItemId = string.IsNullOrEmpty(id) ? "0" : id;
+            _reportDisplayName = string.Empty;
 
             //Define the known keys
-            base.WlbConfigurationKeys = 
-                new List<string>(new string[] 
+            WlbConfigurationKeys = 
+                new List<string>(new[] 
                                     { 
-                                        SUB_ID,
-                                        CREATED,
-                                        SUB_NAME,
-                                        SUB_DESCRIPTION,
-                                        SUBSCRIBER_ID,
-                                        SUBSCRIBER_NAME,
-                                        SCHEDULE_ID,
-                                        DAYOFWEEK,
-                                        EXECUTE_TIMEOFDAY,
-                                        TRIGGER_TYPE,
-                                        ENABLED,
-                                        ENABLE_DATE,
-                                        DISABLE_DATE,
-                                        LAST_TOUCHED,
-                                        LAST_TOUCHEDBY,
-                                        LAST_RUN,
-                                        LAST_RUNRESULT,
-                                        EMAIL_TO,
-                                        EMAIL_REPLYTO,
-                                        REPORT_RENDERFORMAT,
-                                        EMAIL_SUBJECT,
-                                        EMAIL_COMMENT,
-                                        EMAIL_CC,
-                                        EMAIL_BCC,
-                                        REPORT_ID,
-                                        REPORT_NAME
+                                        SUB_ID_KEY,
+                                        CREATED_KEY,
+                                        SUB_NAME_KEY,
+                                        SUB_DESCRIPTION_KEY,
+                                        SUBSCRIBER_ID_KEY,
+                                        SUBSCRIBER_NAME_KEY,
+                                        SCHEDULE_ID_KEY,
+                                        DAYOFWEEK_KEY,
+                                        EXECUTE_TIMEOFDAY_KEY,
+                                        TRIGGER_TYPE_KEY,
+                                        ENABLED_KEY,
+                                        ENABLE_DATE_KEY,
+                                        DISABLE_DATE_KEY,
+                                        LAST_TOUCHED_KEY,
+                                        LAST_TOUCHEDBY_KEY,
+                                        LAST_RUN_KEY,
+                                        LAST_RUNRESULT_KEY,
+                                        EMAIL_TO_KEY,
+                                        EMAIL_REPLYTO_KEY,
+                                        REPORT_RENDERFORMAT_KEY,
+                                        EMAIL_SUBJECT_KEY,
+                                        EMAIL_COMMENT_KEY,
+                                        EMAIL_CC_KEY,
+                                        EMAIL_BCC_KEY,
+                                        REPORT_ID_KEY,
+                                        REPORT_NAME_KEY
                                     });
         }
 
@@ -148,8 +148,8 @@ namespace XenAdmin.Wlb
         /// </summary>
         public string Id
         {
-            get { return GetConfigValueString(base.BuildComplexKey(SUB_ID)); }
-            set { SetConfigValueString(base.BuildComplexKey(SUB_ID), value, true); }
+            get { return GetConfigValueString(base.BuildComplexKey(SUB_ID_KEY)); }
+            set { SetConfigValueString(base.BuildComplexKey(SUB_ID_KEY), value, true); }
         }
 
         /// <summary>
@@ -157,8 +157,8 @@ namespace XenAdmin.Wlb
         /// </summary>
         public DateTime Created
         {
-            get { return GetConfigValueUTCDateTime(base.BuildComplexKey(CREATED)); }
-            set { SetConfigValueUTCDateTime(base.BuildComplexKey(CREATED), value, true); }
+            get { return GetConfigValueUTCDateTime(base.BuildComplexKey(CREATED_KEY)); }
+            set { SetConfigValueUTCDateTime(base.BuildComplexKey(CREATED_KEY), value, true); }
         }
 
         /// <summary>
@@ -166,8 +166,8 @@ namespace XenAdmin.Wlb
         /// </summary>
         public string Name
         {
-            get { return GetConfigValueString(base.BuildComplexKey(SUB_NAME)); }
-            set { SetConfigValueString(base.BuildComplexKey(SUB_NAME), value, true); }
+            get { return GetConfigValueString(base.BuildComplexKey(SUB_NAME_KEY)); }
+            set { SetConfigValueString(base.BuildComplexKey(SUB_NAME_KEY), value, true); }
         }
 
         /// <summary>
@@ -175,8 +175,8 @@ namespace XenAdmin.Wlb
         /// </summary>
         public string Description
         {
-            get { return GetConfigValueString(base.BuildComplexKey(SUB_DESCRIPTION)); }
-            set { SetConfigValueString(base.BuildComplexKey(SUB_DESCRIPTION), value, true); }
+            get { return GetConfigValueString(base.BuildComplexKey(SUB_DESCRIPTION_KEY)); }
+            set { SetConfigValueString(base.BuildComplexKey(SUB_DESCRIPTION_KEY), value, true); }
         }
         
         /// <summary>
@@ -184,8 +184,8 @@ namespace XenAdmin.Wlb
         /// </summary>
         public string SubscriberId
         {
-            get { return GetConfigValueString(base.BuildComplexKey(SUBSCRIBER_ID)); }
-            set { SetConfigValueString(base.BuildComplexKey(SUBSCRIBER_ID), value, true); }
+            get { return GetConfigValueString(base.BuildComplexKey(SUBSCRIBER_ID_KEY)); }
+            set { SetConfigValueString(base.BuildComplexKey(SUBSCRIBER_ID_KEY), value, true); }
         }
 
         /// <summary>
@@ -193,8 +193,8 @@ namespace XenAdmin.Wlb
         /// </summary>
         public string SubscriberName
         {
-            get { return GetConfigValueString(base.BuildComplexKey(SUBSCRIBER_NAME)); }
-            set { SetConfigValueString(base.BuildComplexKey(SUBSCRIBER_NAME), value, true); }
+            get { return GetConfigValueString(base.BuildComplexKey(SUBSCRIBER_NAME_KEY)); }
+            set { SetConfigValueString(base.BuildComplexKey(SUBSCRIBER_NAME_KEY), value, true); }
         }
 
         /// <summary>
@@ -202,8 +202,8 @@ namespace XenAdmin.Wlb
         /// </summary>
         public string ScheduleId
         {
-            get { return GetConfigValueString(base.BuildComplexKey(SCHEDULE_ID)); }
-            set { SetConfigValueString(base.BuildComplexKey(SCHEDULE_ID), value, true); }
+            get { return GetConfigValueString(base.BuildComplexKey(SCHEDULE_ID_KEY)); }
+            set { SetConfigValueString(base.BuildComplexKey(SCHEDULE_ID_KEY), value, true); }
         }
 
         /// <summary>
@@ -211,8 +211,8 @@ namespace XenAdmin.Wlb
         /// </summary>
         public WlbScheduledTask.WlbTaskDaysOfWeek DaysOfWeek
         {
-            get { return (WlbScheduledTask.WlbTaskDaysOfWeek)GetConfigValueInt(base.BuildComplexKey(DAYOFWEEK)); }
-            set { SetConfigValueInt(base.BuildComplexKey(DAYOFWEEK), (int)value, true); }
+            get { return (WlbScheduledTask.WlbTaskDaysOfWeek)GetConfigValueInt(base.BuildComplexKey(DAYOFWEEK_KEY)); }
+            set { SetConfigValueInt(base.BuildComplexKey(DAYOFWEEK_KEY), (int)value, true); }
         }
 
         /// <summary>
@@ -220,8 +220,8 @@ namespace XenAdmin.Wlb
         /// </summary>
         public DateTime RunTimeOfDay
         {
-            get { return GetConfigValueUTCDateTime(base.BuildComplexKey(EXECUTE_TIMEOFDAY)); }
-            set { SetConfigValueUTCDateTime(base.BuildComplexKey(EXECUTE_TIMEOFDAY), value, true); }
+            get { return GetConfigValueUTCDateTime(base.BuildComplexKey(EXECUTE_TIMEOFDAY_KEY)); }
+            set { SetConfigValueUTCDateTime(base.BuildComplexKey(EXECUTE_TIMEOFDAY_KEY), value, true); }
         }
 
         /// <summary>
@@ -229,8 +229,8 @@ namespace XenAdmin.Wlb
         /// </summary>
         public int TriggerType
         {
-            get { return GetConfigValueInt(base.BuildComplexKey(TRIGGER_TYPE)); }
-            set { SetConfigValueInt(base.BuildComplexKey(TRIGGER_TYPE), value, true); }
+            get { return GetConfigValueInt(base.BuildComplexKey(TRIGGER_TYPE_KEY)); }
+            set { SetConfigValueInt(base.BuildComplexKey(TRIGGER_TYPE_KEY), value, true); }
         }
 
         /// <summary>
@@ -238,8 +238,8 @@ namespace XenAdmin.Wlb
         /// </summary>
         public bool Enabled
         {
-            get { return GetConfigValueBool(base.BuildComplexKey(ENABLED)); }
-            set { SetConfigValueBool(base.BuildComplexKey(ENABLED), value, true); }
+            get { return GetConfigValueBool(base.BuildComplexKey(ENABLED_KEY)); }
+            set { SetConfigValueBool(base.BuildComplexKey(ENABLED_KEY), value, true); }
         }
 
         /// <summary>
@@ -247,8 +247,8 @@ namespace XenAdmin.Wlb
         /// </summary>
         public DateTime EnableDate
         {
-            get { return GetConfigValueUTCDateTime(base.BuildComplexKey(ENABLE_DATE)); }
-            set { SetConfigValueUTCDateTime(base.BuildComplexKey(ENABLE_DATE), value, true); }
+            get { return GetConfigValueUTCDateTime(base.BuildComplexKey(ENABLE_DATE_KEY)); }
+            set { SetConfigValueUTCDateTime(base.BuildComplexKey(ENABLE_DATE_KEY), value, true); }
         }
 
         /// <summary>
@@ -256,8 +256,8 @@ namespace XenAdmin.Wlb
         /// </summary>
         public DateTime DisableDate
         {
-            get { return GetConfigValueUTCDateTime(base.BuildComplexKey(DISABLE_DATE)); }
-            set { SetConfigValueUTCDateTime(base.BuildComplexKey(DISABLE_DATE), value, true); }
+            get { return GetConfigValueUTCDateTime(base.BuildComplexKey(DISABLE_DATE_KEY)); }
+            set { SetConfigValueUTCDateTime(base.BuildComplexKey(DISABLE_DATE_KEY), value, true); }
         }
 
         /// <summary>
@@ -265,8 +265,8 @@ namespace XenAdmin.Wlb
         /// </summary>
         public DateTime LastTouched
         {
-            get { return GetConfigValueUTCDateTime(base.BuildComplexKey(LAST_TOUCHED)); }
-            set { SetConfigValueUTCDateTime(base.BuildComplexKey(LAST_TOUCHED), value, true); }
+            get { return GetConfigValueUTCDateTime(base.BuildComplexKey(LAST_TOUCHED_KEY)); }
+            set { SetConfigValueUTCDateTime(base.BuildComplexKey(LAST_TOUCHED_KEY), value, true); }
         }
 
         /// <summary>
@@ -274,8 +274,8 @@ namespace XenAdmin.Wlb
         /// </summary>
         public string LastTouchedBy
         {
-            get { return GetConfigValueString(base.BuildComplexKey(LAST_TOUCHEDBY)); }
-            set { SetConfigValueString(base.BuildComplexKey(LAST_TOUCHEDBY), value, true); }
+            get { return GetConfigValueString(base.BuildComplexKey(LAST_TOUCHEDBY_KEY)); }
+            set { SetConfigValueString(base.BuildComplexKey(LAST_TOUCHEDBY_KEY), value, true); }
         }
 
         /// <summary>
@@ -283,8 +283,8 @@ namespace XenAdmin.Wlb
         /// </summary>
         public DateTime LastRun
         {
-            get { return GetConfigValueUTCDateTime(base.BuildComplexKey(LAST_RUN)); }
-            set { SetConfigValueUTCDateTime(base.BuildComplexKey(LAST_RUN), value, true); }
+            get { return GetConfigValueUTCDateTime(base.BuildComplexKey(LAST_RUN_KEY)); }
+            set { SetConfigValueUTCDateTime(base.BuildComplexKey(LAST_RUN_KEY), value, true); }
         }
 
         /// <summary>
@@ -292,8 +292,8 @@ namespace XenAdmin.Wlb
         /// </summary>
         public string LastRunResult
         {
-            get { return GetConfigValueString(base.BuildComplexKey(LAST_RUNRESULT)); }
-            set { SetConfigValueString(base.BuildComplexKey(LAST_RUNRESULT), value, true); }
+            get { return GetConfigValueString(base.BuildComplexKey(LAST_RUNRESULT_KEY)); }
+            set { SetConfigValueString(base.BuildComplexKey(LAST_RUNRESULT_KEY), value, true); }
         }
 
         /// <summary>
@@ -301,8 +301,8 @@ namespace XenAdmin.Wlb
         /// </summary>
         public string EmailTo
         {
-            get { return GetConfigValueString(base.BuildComplexKey(EMAIL_TO)); }
-            set { SetConfigValueString(base.BuildComplexKey(EMAIL_TO), value, true); }
+            get { return GetConfigValueString(base.BuildComplexKey(EMAIL_TO_KEY)); }
+            set { SetConfigValueString(base.BuildComplexKey(EMAIL_TO_KEY), value, true); }
         }
 
         /// <summary>
@@ -310,8 +310,8 @@ namespace XenAdmin.Wlb
         /// </summary>
         public string EmailReplyTo
         {
-            get { return GetConfigValueString(base.BuildComplexKey(EMAIL_REPLYTO)); }
-            set { SetConfigValueString(base.BuildComplexKey(EMAIL_REPLYTO), value, true); }
+            get { return GetConfigValueString(base.BuildComplexKey(EMAIL_REPLYTO_KEY)); }
+            set { SetConfigValueString(base.BuildComplexKey(EMAIL_REPLYTO_KEY), value, true); }
         }
 
         /// <summary>
@@ -319,8 +319,8 @@ namespace XenAdmin.Wlb
         /// </summary>
         public int ReportRenderFormat
         {
-            get { return GetConfigValueInt(base.BuildComplexKey(REPORT_RENDERFORMAT)); }
-            set { SetConfigValueInt(base.BuildComplexKey(REPORT_RENDERFORMAT), (int)value, true); }
+            get { return GetConfigValueInt(base.BuildComplexKey(REPORT_RENDERFORMAT_KEY)); }
+            set { SetConfigValueInt(base.BuildComplexKey(REPORT_RENDERFORMAT_KEY), (int)value, true); }
         }
 
         /// <summary>
@@ -328,8 +328,8 @@ namespace XenAdmin.Wlb
         /// </summary>
         public string EmailSubject
         {
-            get { return GetConfigValueString(base.BuildComplexKey(EMAIL_SUBJECT)); }
-            set { SetConfigValueString(base.BuildComplexKey(EMAIL_SUBJECT), value, true); }
+            get { return GetConfigValueString(base.BuildComplexKey(EMAIL_SUBJECT_KEY)); }
+            set { SetConfigValueString(base.BuildComplexKey(EMAIL_SUBJECT_KEY), value, true); }
         }
 
         /// <summary>
@@ -337,8 +337,8 @@ namespace XenAdmin.Wlb
         /// </summary>
         public string EmailComment
         {
-            get { return GetConfigValueString(base.BuildComplexKey(EMAIL_COMMENT)); }
-            set { SetConfigValueString(base.BuildComplexKey(EMAIL_COMMENT), value, true); }
+            get { return GetConfigValueString(base.BuildComplexKey(EMAIL_COMMENT_KEY)); }
+            set { SetConfigValueString(base.BuildComplexKey(EMAIL_COMMENT_KEY), value, true); }
         }
 
         /// <summary>
@@ -346,8 +346,8 @@ namespace XenAdmin.Wlb
         /// </summary>
         public string EmailCc
         {
-            get { return GetConfigValueString(base.BuildComplexKey(EMAIL_CC)); }
-            set { SetConfigValueString(base.BuildComplexKey(EMAIL_CC), value, true); }
+            get { return GetConfigValueString(base.BuildComplexKey(EMAIL_CC_KEY)); }
+            set { SetConfigValueString(base.BuildComplexKey(EMAIL_CC_KEY), value, true); }
         }
 
         /// <summary>
@@ -355,8 +355,8 @@ namespace XenAdmin.Wlb
         /// </summary>
         public string EmailBcc
         {
-            get { return GetConfigValueString(base.BuildComplexKey(EMAIL_BCC)); }
-            set { SetConfigValueString(base.BuildComplexKey(EMAIL_BCC), value, true); }
+            get { return GetConfigValueString(base.BuildComplexKey(EMAIL_BCC_KEY)); }
+            set { SetConfigValueString(base.BuildComplexKey(EMAIL_BCC_KEY), value, true); }
         }
 
         /// <summary>
@@ -364,8 +364,8 @@ namespace XenAdmin.Wlb
         /// </summary>
         public int ReportId
         {
-            get { return GetConfigValueInt(base.BuildComplexKey(REPORT_ID)); }
-            set { SetConfigValueInt(base.BuildComplexKey(REPORT_ID), value, true); }
+            get { return GetConfigValueInt(base.BuildComplexKey(REPORT_ID_KEY)); }
+            set { SetConfigValueInt(base.BuildComplexKey(REPORT_ID_KEY), value, true); }
         }
 
         /// <summary>
@@ -373,8 +373,8 @@ namespace XenAdmin.Wlb
         /// </summary>
         public string ReportName
         {
-            get { return GetConfigValueString(base.BuildComplexKey(REPORT_NAME)); }
-            set { SetConfigValueString(base.BuildComplexKey(REPORT_NAME), value, true); }
+            get { return GetConfigValueString(base.BuildComplexKey(REPORT_NAME_KEY)); }
+            set { SetConfigValueString(base.BuildComplexKey(REPORT_NAME_KEY), value, true); }
         }
 
         /// <summary>

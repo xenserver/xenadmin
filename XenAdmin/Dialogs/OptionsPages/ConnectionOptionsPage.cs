@@ -120,7 +120,7 @@ namespace XenAdmin.Dialogs.OptionsPages
                 log.Warn("Could not unprotect internet proxy password.", e);
             }
 
-            ConnectionTimeoutNud.Value = Properties.Settings.Default.ConnectionTimeout / 1000;
+            ConnectionTimeoutNud.Value = (decimal) Properties.Settings.Default.ConnectionTimeout / 1000;
 
             eventsDisabled = false;
         }

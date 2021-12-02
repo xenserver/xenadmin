@@ -49,14 +49,14 @@ namespace XenAdmin.Commands
             : base(mainWindow, pool)
         { }
 
-		public override string MenuText { get { return Messages.HOST_MENU_IMPORT_VM_TEXT; } }
-		
-		public override string ContextMenuText{get{return Messages.HOST_MENU_IMPORT_VM_TEXT;}}
+        public override string MenuText => Messages.HOST_MENU_IMPORT_VM_TEXT;
+
+        public override string ContextMenuText => Messages.HOST_MENU_IMPORT_VM_TEXT;
 
 		protected override void RunCore(SelectedItemCollection selection)
 		{
 			var con = selection.GetConnectionOfFirstItem();
-			MainWindowCommandInterface.ShowPerConnectionWizard(con, new ImportWizard(con, selection.FirstAsXenObject, null, false));
+			MainWindowCommandInterface.ShowPerConnectionWizard(con, new ImportWizard(con, selection.FirstAsXenObject, null));
 		}
 	}
 }

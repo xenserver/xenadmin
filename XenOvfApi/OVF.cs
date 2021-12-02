@@ -1388,7 +1388,7 @@ namespace XenOvf
         #region CREATEs
 
         public static EnvelopeType CreateOvfEnvelope(string vmName, ulong cpuCount, ulong memory,
-            string bootParams, string platformSettings, ulong diskCapacity, bool isWim, ulong additionalSpace,
+            string bootParams, string platformSettings, ulong capacity,
             string diskPath, ulong imageLength, string productBrand)
         {
             EnvelopeType env = CreateEnvelope(vmName);
@@ -1415,14 +1415,49 @@ namespace XenOvf
             AddNetwork(env, systemID, netId, string.Format(Messages.NETWORK_NAME, 0), Messages.OVF_NET_DESCRIPTION, null);
 
             string diskId = Guid.NewGuid().ToString();
-            ulong capacity = diskCapacity;
-
-            if (isWim)
-                capacity += additionalSpace;
 
             AddDisk(env, systemID, diskId, diskPath, true, Messages.OVF_DISK_CAPTION, Messages.OVF_CREATED, imageLength, capacity);
 
             FinalizeEnvelope(env);
+            return env;
+        }
+
+        public static EnvelopeType UpdateBootParams(EnvelopeType env, string systemID, string bootParams)
+        {
+            return UpdateOtherSystemSettingsData(env, systemID, "HVM_boot_params", "order=dc;" + bootParams);
+        }
+
+        public static EnvelopeType UpdatePlatform(EnvelopeType env, string systemID, string platformSettings)
+        {
+            return UpdateOtherSystemSettingsData(env, systemID, "platform", "nx=true;acpi=true;apic=true;pae=true;stdvga=0;" + platformSettings);
+        }
+
+        private static EnvelopeType UpdateOtherSystemSettingsData(EnvelopeType env, string systemID, string setting, string value)
+        {
+            VirtualHardwareSection_Type[] vhsArray = FindVirtualHardwareSection(env, systemID);
+            VirtualHardwareSection_Type foundVhs = null;
+
+            foreach (VirtualHardwareSection_Type vhs in vhsArray)
+            {
+                if (vhs.System?.VirtualSystemType == null)
+                    continue;
+
+                var vst = vhs.System.VirtualSystemType.Value;
+                if (string.IsNullOrEmpty(vst) || !vst.ToLower().StartsWith("xen") && !vst.ToLower().StartsWith("hvm"))
+                    continue;
+
+                foundVhs = vhs;
+                break;
+            }
+
+            if (foundVhs == null)
+                return env;
+
+            var config = foundVhs.VirtualSystemOtherConfigurationData.FirstOrDefault(d => d.Name == setting);
+            if (config == null)
+                return env;
+
+            config.Value = new cimString(value);
             return env;
         }
 

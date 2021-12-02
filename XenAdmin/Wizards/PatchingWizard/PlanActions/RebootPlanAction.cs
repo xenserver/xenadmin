@@ -39,7 +39,8 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
     public abstract class RebootPlanAction : HostPlanAction
     {
         private bool _cancelled;
-        private bool lostConnection;
+        private bool _lostConnection;
+        private readonly object _lockObj = new object();
 
         protected RebootPlanAction(Host host)
             : base(host)
@@ -50,9 +51,9 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         {
             _cancelled = true;
 
-            lock (this)
+            lock (_lockObj)
             {
-                Monitor.PulseAll(this);
+                Monitor.PulseAll(_lockObj);
             }
         }
 
@@ -98,7 +99,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         {
             bool isCoordinator = GetResolvedHost().IsCoordinator();
 
-            lostConnection = false;
+            _lostConnection = false;
             _cancelled = false;
             double metric = metricDelegate(session, HostXenRef.opaque_ref);
 
@@ -134,7 +135,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                     Connection.SuppressErrors = true;
 
                     //
-                    // Wait for a dissconnection
+                    // Wait for a disconnection
                     //
 
                     WaitForDisconnection();
@@ -165,11 +166,11 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         {
             log.DebugFormat("{0}._WaitForReboot waiting for connection to go away...", GetType().Name);
 
-            lock (this)
+            lock (_lockObj)
             {
-                while (!lostConnection && !_cancelled)
+                while (!_lostConnection && !_cancelled)
                 {
-                    Monitor.Wait(this);
+                    Monitor.Wait(_lockObj);
                 }
             }
 
@@ -274,10 +275,10 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
         private void connection_ConnectionLost(IXenConnection conn)
         {
-            lock (this)
+            lock (_lockObj)
             {
-                lostConnection = true;
-                Monitor.PulseAll(this);
+                _lostConnection = true;
+                Monitor.PulseAll(_lockObj);
             }
         }
     }

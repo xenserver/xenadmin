@@ -58,7 +58,10 @@ namespace XenAdmin.Commands
 
         protected override void RunCore(SelectedItemCollection selection)
         {
-            Host host = selection[0].HostAncestor;
+            var host = selection[0].HostAncestor;
+            if (host == null)
+                return;
+
             using (var dlg = new ControlDomainMemoryDialog(host))
                 dlg.ShowDialog(Program.MainWindow);
         }

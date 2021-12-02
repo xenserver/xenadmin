@@ -182,6 +182,9 @@
   <data name="PRODUCT_VERSION_8_2" xml:space="preserve">
     <value>8.2</value>
   </data>
+  <data name="PRODUCT_VERSION_8_2_1" xml:space="preserve">
+    <value>8.2.1</value>
+  </data>
   <data name="PRODUCT_VERSION_POST_8_2" xml:space="preserve">
     <value>[BRANDING_PRODUCT_VERSION_TEXT]</value>
   </data>

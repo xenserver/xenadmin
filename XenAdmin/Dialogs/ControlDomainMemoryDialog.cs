@@ -50,8 +50,6 @@ namespace XenAdmin.Dialogs
         public ControlDomainMemoryDialog(Host host)
             : base(host.Connection)
         {
-            if (host == null) throw new ArgumentNullException("host");
-
             InitializeComponent();
             this.host = host;
             this.host.PropertyChanged += Server_PropertyChanged;

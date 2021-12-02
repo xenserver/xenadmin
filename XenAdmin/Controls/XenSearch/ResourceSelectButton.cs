@@ -139,11 +139,8 @@ namespace XenAdmin.Controls.XenSearch
         public void Populate(Search search)
         {
             ClearItems();
-            if (search != null && search.Query != null)
-                scope = search.Query.QueryScope;
-            else
-                scope = null;
-            search.PopulateAdapters(this);
+            scope = search?.Query?.QueryScope;
+            search?.PopulateAdapters(this);
         }
     }
 }

@@ -212,13 +212,7 @@ namespace XenAdmin.Core
         /// </summary>
         public static Pool GetPoolOfOne(IXenConnection connection)
         {
-            if (connection == null)
-                return null;
-
-            foreach (Pool pool in connection.Cache.Pools)
-                return pool;
-            
-            return null;
+            return connection?.Cache.Pools.FirstOrDefault();
         }
 
         /// <summary>
@@ -495,6 +489,12 @@ namespace XenAdmin.Core
         public static bool PostStockholm(string platformVersion)
         {
             return platformVersion != null && productVersionCompare(platformVersion, "3.2.50") >= 0;
+        }
+
+        /// <param name="conn">May be null, in which case true is returned.</param>
+        public static bool YangtzeOrGreater(IXenConnection conn)
+        {
+            return conn == null || YangtzeOrGreater(Helpers.GetCoordinator(conn));
         }
 
         /// <param name="host">May be null, in which case true is returned.</param>
@@ -1545,11 +1545,9 @@ namespace XenAdmin.Core
 
         public static string HostnameFromLocation(string p)
         {
-            foreach (Match m in HostnameOrIpRegex.Matches(p))
-            {
-                return m.Value; // we only want the hostname or ip which should be the first match
-            }
-            return "";
+            var matches = HostnameOrIpRegex.Matches(p);
+            // we only want the hostname or ip which should be the first match
+            return matches.Count > 0 ? matches[0].Value : string.Empty;
         }
 
         /// <summary>

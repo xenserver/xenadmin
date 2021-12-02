@@ -1080,7 +1080,7 @@ namespace XenAdmin.Controls.XenSearch
 
             public class ExtraComboEntry
             {
-                public StringPropertyQuery.PropertyQueryType type;
+                public readonly StringPropertyQuery.PropertyQueryType type;
                 public ExtraComboEntry(StringPropertyQuery.PropertyQueryType type)
                 {
                     this.type = type;
@@ -1121,7 +1121,7 @@ namespace XenAdmin.Controls.XenSearch
 
                 public override int GetHashCode()
                 {
-                    return base.GetHashCode();
+                    return (int) type;
                 }
             }
 
@@ -1327,7 +1327,7 @@ namespace XenAdmin.Controls.XenSearch
 
                 public override int GetHashCode()
                 {
-                    return base.GetHashCode();
+                    return (int) type;
                 }
             }
 
@@ -2498,7 +2498,7 @@ namespace XenAdmin.Controls.XenSearch
                 if (intQuery == null)
                     return;
 
-                queryElement.numericUpDown.Value = intQuery.query / multiplier;
+                queryElement.numericUpDown.Value = (decimal) intQuery.query / multiplier;
             }
         }
 

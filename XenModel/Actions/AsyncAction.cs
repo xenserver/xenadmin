@@ -378,10 +378,9 @@ namespace XenAdmin.Actions
                             doc.LoadXml(task.result);
                             var nodes = doc.GetElementsByTagName("value");
 
-                            foreach (XmlNode node in nodes)
+                            if (nodes.Count > 0)
                             {
-                                Result = node.InnerText;
-                                break;
+                                Result = nodes[0].InnerText;
                             }
                         }
                         catch //CA-352946

@@ -300,7 +300,7 @@ namespace XenAdmin.Controls
                     }
                 case VerticalAlignment.Middle:
                     {
-                        Y = (this.Height - this.Padding.Vertical) / 2;
+                        Y = ((float) this.Height - this.Padding.Vertical) / 2;
                         break;
                     }
                 case VerticalAlignment.Bottom:

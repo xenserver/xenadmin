@@ -55,10 +55,8 @@ namespace XenAdmin.Actions
         public SrRepairAction(IXenConnection connection, SR sr,bool isSharedAction)
             : base(connection, isSharedAction ? string.Format(Messages.ACTION_SR_SHARING, sr.NameWithoutHost()) : string.Format(Messages.ACTION_SR_REPAIRING, sr.NameWithoutHost()))
         {
-            if (sr == null)
-                throw new ArgumentNullException("sr");
             this.isSharedAction = isSharedAction;
-            this.SR = sr;
+            SR = sr;
 
             #region RBAC Dependencies
             ApiMethodsToRoleCheck.Add("pbd.plug");

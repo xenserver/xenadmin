@@ -32,6 +32,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Controls;
 using XenAdmin.Core;
@@ -121,11 +122,11 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                     node.State = CheckState.Checked;
             }
 
+            var checkedItems = HostListTreeView.CheckedItems();
             //focus on first checked item so the user can find it in a long list
-            foreach (var node in HostListTreeView.CheckedItems())
+            if (checkedItems.Count > 0)
             {
-                HostListTreeView.SelectedItems.Add(node);
-                break;
+                HostListTreeView.SelectedItems.Add(checkedItems.First());
             }
 
             HostListTreeView.EndUpdate();

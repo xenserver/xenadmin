@@ -568,12 +568,12 @@ namespace XenAPI
 
             // If we've got this from an async task result, then it will be wrapped
             // in a <value> element.  Parse the contents instead.
-            foreach (XmlNode node in doc.GetElementsByTagName("value"))
+            var nodes = doc.GetElementsByTagName("value");
+            if (nodes.Count > 0)
             {
-                xml = node.InnerText;
+                xml = nodes[0].InnerText;
                 doc = new XmlDocument();
                 doc.LoadXml(xml);
-                break;
             }
 
 

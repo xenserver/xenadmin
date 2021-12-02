@@ -32,6 +32,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Core;
 using XenAdmin.Network;
@@ -119,18 +120,18 @@ namespace XenAdmin.Controls
                 DeregisterEvents();
                 RegisterEvents();
 
-                foreach (IXenConnection c in ConnectionsManager.XenConnectionsCopy)
+                foreach (var c in ConnectionsManager.XenConnectionsCopy)
                 {
-                    Pool p = Helpers.GetPool(c);
+                    var p = Helpers.GetPool(c);
 
                     if (p == null)// Stand alone host
                     {
-                        foreach (Host h in c.Cache.Hosts)
+                        if (c.Cache.Hosts.Length > 0)
                         {
-                            var item = GenerateFilterItem(h, h.uuid);
-                            item.Checked = HostCheckStates.ContainsKey(h.uuid);
+                            var host = c.Cache.Hosts.First();
+                            var item = GenerateFilterItem(host, host.uuid);
+                            item.Checked = HostCheckStates.ContainsKey(host.uuid);
                             DropDownItems.Add(item);
-                            break;
                         }
                     }
                     else
