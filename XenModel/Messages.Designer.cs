@@ -1593,16 +1593,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Moving virtual disk &apos;{0}&apos;....
-        /// </summary>
-        public static string ACTION_MOVING_VDI {
-            get {
-                return ResourceManager.GetString("ACTION_MOVING_VDI", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Moving Virtual Disk &apos;{0}&apos; to SR &apos;{1}&apos;.
+        ///   Looks up a localized string similar to Moving Virtual Disk &apos;{0}&apos; from SR &apos;{1}&apos; to SR &apos;{2}&apos;.
         /// </summary>
         public static string ACTION_MOVING_VDI_TO_SR {
             get {
@@ -2664,15 +2655,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Duplicating.
-        /// </summary>
-        public static string ACTION_TEMPLATE_CLONING {
-            get {
-                return ResourceManager.GetString("ACTION_TEMPLATE_CLONING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Restart toolstack on &apos;{0}&apos;.
         /// </summary>
         public static string ACTION_TOOLSTACK_RESTART_ON {
@@ -3114,7 +3096,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Copying VM &apos;{0}&apos; to &apos;{1}&apos;.
+        ///   Looks up a localized string similar to Copying VM &apos;{0}&apos; from &apos;{1}&apos; to &apos;{2}&apos;.
         /// </summary>
         public static string ACTION_VM_CROSS_POOL_COPY_TITLE {
             get {
@@ -3231,11 +3213,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Moving VM &apos;{0}&apos; to &apos;{1}&apos; on SR &apos;{2}&apos;.
+        ///   Looks up a localized string similar to Moving VM &apos;{0}&apos; from server &apos;{1}&apos; to server &apos;{2}&apos;.
         /// </summary>
-        public static string ACTION_VM_MOVING_TITLE {
+        public static string ACTION_VM_MOVING_HOST {
             get {
-                return ResourceManager.GetString("ACTION_VM_MOVING_TITLE", resourceCulture);
+                return ResourceManager.GetString("ACTION_VM_MOVING_HOST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Moving VM &apos;{0}&apos; to SR &apos;{1}&apos;.
+        /// </summary>
+        public static string ACTION_VM_MOVING_SR {
+            get {
+                return ResourceManager.GetString("ACTION_VM_MOVING_SR", resourceCulture);
             }
         }
         
