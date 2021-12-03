@@ -495,11 +495,10 @@ namespace XenAdmin.Wizards.ImportWizard
 
         private void ConfigureRbacPage(IXenConnection selectedConnection)
         {
-            if (selectedConnection == null || selectedConnection.Session == null || selectedConnection.Session.IsLocalSuperuser ||
-                Helpers.GetCoordinator(selectedConnection).external_auth_type == Auth.AUTH_TYPE_NONE)
+            if(!Helpers.ConnectionRequiresRbac(selectedConnection)){
                 return;
+            }
 
-            m_pageRbac.ClearPermissionChecks();
             m_ignoreAffinitySet = false;
 
             switch (m_typeOfImport)
@@ -508,10 +507,10 @@ namespace XenAdmin.Wizards.ImportWizard
                 case ImportType.Vhd:
                     {
                         var check = m_typeOfImport == ImportType.Ovf
-                                        ? new RBACWarningPage.WizardPermissionCheck(Messages.RBAC_WARNING_IMPORT_WIZARD_APPLIANCE) { Blocking = true }
-                                        : new RBACWarningPage.WizardPermissionCheck(Messages.RBAC_WARNING_IMPORT_WIZARD_IMAGE) { Blocking = true };
-                        check.AddApiCheckRange(ApplianceAction.StaticRBACDependencies);
-                        m_pageRbac.AddPermissionChecks(selectedConnection, check);
+                                        ? new WizardRbacCheck(Messages.RBAC_WARNING_IMPORT_WIZARD_APPLIANCE) {Blocking = true}
+                                        : new WizardRbacCheck(Messages.RBAC_WARNING_IMPORT_WIZARD_IMAGE) {Blocking = true};
+                        check.AddApiMethods(ApplianceAction.StaticRBACDependencies);
+                        m_pageRbac.SetPermissionChecks(selectedConnection, check);
 
                         AddAfterPage(m_pageHost, m_pageRbac);
                     }
@@ -519,20 +518,20 @@ namespace XenAdmin.Wizards.ImportWizard
                 case ImportType.Xva:
                     {
                         //Check to see if they can import VMs at all
-                        var importCheck = new RBACWarningPage.WizardPermissionCheck(Messages.RBAC_WARNING_IMPORT_WIZARD_XVA) { Blocking = true };
-                        importCheck.ApiCallsToCheck.AddRange(ImportVmAction.ConstantRBACRequirements);
-                        importCheck.ApiCallsToCheck.Add("sr.scan");//CA-337323
+                        var importCheck = new WizardRbacCheck(Messages.RBAC_WARNING_IMPORT_WIZARD_XVA) {Blocking = true};
+                        importCheck.AddApiMethods(ImportVmAction.ConstantRBACRequirements);
+                        importCheck.AddApiMethods("sr.scan");//CA-337323
 
                         //Check to see if they can set the VM's affinity
-                        var affinityCheck = new RBACWarningPage.WizardPermissionCheck(Messages.RBAC_WARNING_IMPORT_WIZARD_AFFINITY);
-                        affinityCheck.ApiCallsToCheck.Add("vm.set_affinity");
-                        affinityCheck.WarningAction = delegate
+                        var affinityCheck = new WizardRbacCheck(Messages.RBAC_WARNING_IMPORT_WIZARD_AFFINITY);
+                        affinityCheck.AddApiMethods("vm.set_affinity");
+                        affinityCheck.WarningAction = () =>
                         {
                             //We cannot allow them to set the affinity, so we are only going
                             //to offer them the choice of connection, not specific host
                             m_ignoreAffinitySet = true;
                         };
-                        m_pageRbac.AddPermissionChecks(selectedConnection, importCheck, affinityCheck);
+                        m_pageRbac.SetPermissionChecks(selectedConnection, importCheck, affinityCheck);
                         AddAfterPage(m_pageXvaHost, m_pageRbac);
                     }
                     break;

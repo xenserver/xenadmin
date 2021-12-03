@@ -145,8 +145,9 @@ namespace XenAdmin.Wizards.ExportWizard
 			            AddAfterPage(m_pageExportSelectVMs, ovfPages);
 			        }
 
-			        ConfigureRbacPage();
-			    }
+                    if (Helpers.ConnectionRequiresRbac(xenConnection))
+                        AddRbacPage();
+                }
 
 			    m_pageExportSelectVMs.ExportAsXva = (bool)m_exportAsXva;
 
@@ -162,6 +163,19 @@ namespace XenAdmin.Wizards.ExportWizard
 				NotifyNextPagesOfChange(m_pageFinish);
 		}
 
+        private void AddRbacPage()
+        {
+            var exportAsXva = m_exportAsXva.HasValue && m_exportAsXva.Value;
+
+            var rbacDependencies = exportAsXva ? ExportVmAction.StaticRBACDependencies : ApplianceAction.StaticRBACDependencies;
+            var message = exportAsXva ? Messages.RBAC_WARNING_EXPORT_WIZARD_XVA : Messages.RBAC_WARNING_EXPORT_WIZARD_APPLIANCE;
+
+            m_pageRbac.SetPermissionChecks(xenConnection,
+                new WizardRbacCheck(message, rbacDependencies) {Blocking = true});
+
+            AddAfterPage(m_pageExportAppliance, m_pageRbac);
+        }
+
         protected override string WizardPaneHelpID()
         {
             var curPageType = CurrentStepTabPage.GetType();
@@ -175,23 +189,7 @@ namespace XenAdmin.Wizards.ExportWizard
             return base.WizardPaneHelpID();
         }
 
-	    private void ConfigureRbacPage()
-		{
-			if (xenConnection == null || xenConnection.Session.IsLocalSuperuser || Helpers.GetCoordinator(xenConnection).external_auth_type == Auth.AUTH_TYPE_NONE)
-				return;
-
-			bool exportAsXva = (bool)m_exportAsXva;
-			m_pageRbac.ClearPermissionChecks();
-			var check = exportAsXva
-			            	? new RBACWarningPage.WizardPermissionCheck(Messages.RBAC_WARNING_EXPORT_WIZARD_XVA) {Blocking = true}
-			            	: new RBACWarningPage.WizardPermissionCheck(Messages.RBAC_WARNING_EXPORT_WIZARD_APPLIANCE) {Blocking = true};
-			check.AddApiCheckRange(exportAsXva ? ExportVmAction.StaticRBACDependencies : ApplianceAction.StaticRBACDependencies);
-            m_pageRbac.AddPermissionChecks(xenConnection, check);
-
-            AddAfterPage(m_pageExportAppliance, m_pageRbac);
-		}
-
-		protected override IEnumerable<Tuple> GetSummary()
+        protected override IEnumerable<Tuple> GetSummary()
 		{
 			return (bool)m_exportAsXva ? GetSummaryXva() : GetSummaryOvf();
 		}

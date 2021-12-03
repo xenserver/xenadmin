@@ -31870,7 +31870,34 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Current access levels do not allow migration of VMs across pools. Log in as a different user with sufficient privileges on both source and target hosts and try again..
+        ///   Looks up a localized string similar to A {0} user cannot copy templates across pools. Log in as a different user with sufficient privileges on both source and destination servers and try again..
+        /// </summary>
+        public static string RBAC_CROSS_POOL_COPY_TEMPLATE_BLOCKED {
+            get {
+                return ResourceManager.GetString("RBAC_CROSS_POOL_COPY_TEMPLATE_BLOCKED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A {0} user cannot copy VMs across pools. Log in as a different user with sufficient privileges on both source and destination servers and try again..
+        /// </summary>
+        public static string RBAC_CROSS_POOL_COPY_VM_BLOCKED {
+            get {
+                return ResourceManager.GetString("RBAC_CROSS_POOL_COPY_VM_BLOCKED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A {0} user cannot migrate templates across pools. Log in as a different user with sufficient privileges on both source and destination servers and try again..
+        /// </summary>
+        public static string RBAC_CROSS_POOL_MIGRATE_TEMPLATE_BLOCKED {
+            get {
+                return ResourceManager.GetString("RBAC_CROSS_POOL_MIGRATE_TEMPLATE_BLOCKED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A {0} user cannot migrate VMs across pools. Log in as a different user with sufficient privileges on both source and destination servers and try again..
         /// </summary>
         public static string RBAC_CROSS_POOL_MIGRATE_VM_BLOCKED {
             get {
@@ -31879,11 +31906,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User {0} does not have sufficient permissions to run a Disaster Recovery wizard. Login as a different user with sufficient privileges and try again..
+        ///   Looks up a localized string similar to A {0} user does not have sufficient permissions to use Disaster Recovery. Login as a different user with sufficient privileges and try again..
         /// </summary>
         public static string RBAC_DR_WIZARD_MESSAGE {
             get {
                 return ResourceManager.GetString("RBAC_DR_WIZARD_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A {0} user cannot download system status reports. Log in as a different user with sufficient privileges and try again..
+        /// </summary>
+        public static string RBAC_GET_SYSTEM_STATUS_BLOCKED {
+            get {
+                return ResourceManager.GetString("RBAC_GET_SYSTEM_STATUS_BLOCKED", resourceCulture);
             }
         }
         
@@ -31915,6 +31951,24 @@ namespace XenAdmin {
         public static string RBAC_HTTP_FAILURE {
             get {
                 return ResourceManager.GetString("RBAC_HTTP_FAILURE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A {0} user cannot copy templates. Log in as a different user with sufficient privileges and try again..
+        /// </summary>
+        public static string RBAC_INTRA_POOL_COPY_TEMPLATE_BLOCKED {
+            get {
+                return ResourceManager.GetString("RBAC_INTRA_POOL_COPY_TEMPLATE_BLOCKED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A {0} user cannot copy VMs. Log in as a different user with sufficient privileges and try again..
+        /// </summary>
+        public static string RBAC_INTRA_POOL_COPY_VM_BLOCKED {
+            get {
+                return ResourceManager.GetString("RBAC_INTRA_POOL_COPY_VM_BLOCKED", resourceCulture);
             }
         }
         

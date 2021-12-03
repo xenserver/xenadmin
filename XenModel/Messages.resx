@@ -11040,11 +11040,23 @@ To access this console switch to an account with the following role:
 
 {1}</value>
   </data>
+  <data name="RBAC_CROSS_POOL_COPY_TEMPLATE_BLOCKED" xml:space="preserve">
+    <value>A {0} user cannot copy templates across pools. Log in as a different user with sufficient privileges on both source and destination servers and try again.</value>
+  </data>
+  <data name="RBAC_CROSS_POOL_COPY_VM_BLOCKED" xml:space="preserve">
+    <value>A {0} user cannot copy VMs across pools. Log in as a different user with sufficient privileges on both source and destination servers and try again.</value>
+  </data>
+  <data name="RBAC_CROSS_POOL_MIGRATE_TEMPLATE_BLOCKED" xml:space="preserve">
+    <value>A {0} user cannot migrate templates across pools. Log in as a different user with sufficient privileges on both source and destination servers and try again.</value>
+  </data>
   <data name="RBAC_CROSS_POOL_MIGRATE_VM_BLOCKED" xml:space="preserve">
-    <value>Current access levels do not allow migration of VMs across pools. Log in as a different user with sufficient privileges on both source and target hosts and try again.</value>
+    <value>A {0} user cannot migrate VMs across pools. Log in as a different user with sufficient privileges on both source and destination servers and try again.</value>
   </data>
   <data name="RBAC_DR_WIZARD_MESSAGE" xml:space="preserve">
-    <value>User {0} does not have sufficient permissions to run a Disaster Recovery wizard. Login as a different user with sufficient privileges and try again.</value>
+    <value>A {0} user does not have sufficient permissions to use Disaster Recovery. Login as a different user with sufficient privileges and try again.</value>
+  </data>
+  <data name="RBAC_GET_SYSTEM_STATUS_BLOCKED" xml:space="preserve">
+    <value>A {0} user cannot download system status reports. Log in as a different user with sufficient privileges and try again.</value>
   </data>
   <data name="RBAC_HA_CONFIGURE_WARNING" xml:space="preserve">
     <value>Your current role is '{1}'.
@@ -11058,6 +11070,12 @@ To configure HA settings, switch to an account with one of the following roles:
   </data>
   <data name="RBAC_HTTP_FAILURE" xml:space="preserve">
     <value>A {0} user cannot perform this action.</value>
+  </data>
+  <data name="RBAC_INTRA_POOL_COPY_TEMPLATE_BLOCKED" xml:space="preserve">
+    <value>A {0} user cannot copy templates. Log in as a different user with sufficient privileges and try again.</value>
+  </data>
+  <data name="RBAC_INTRA_POOL_COPY_VM_BLOCKED" xml:space="preserve">
+    <value>A {0} user cannot copy VMs. Log in as a different user with sufficient privileges and try again.</value>
   </data>
   <data name="RBAC_NO_WIZARD_LIMITS" xml:space="preserve">
     <value>Check complete, you have full access to the features in this wizard.</value>

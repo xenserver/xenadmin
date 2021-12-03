@@ -1640,18 +1640,6 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Whether the VM can be copied inside the pool (vm.copy)
-        /// </summary>
-        public bool CanBeCopied()
-        {
-            if (!is_a_template && !Locked && allowed_operations != null && allowed_operations.Contains(vm_operations.export) && power_state != vm_power_state.Suspended)
-            {
-                return true;
-            }
-            return false;
-        }
-
-        /// <summary>
         /// Returns whether this is a Windows VM by checking the distro value in the
         /// guest_metrics before falling back to the viridian flag. The result may not be
         /// correct at all times (a Linux distro can be detected if the guest agent is
