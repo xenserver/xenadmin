@@ -140,7 +140,7 @@ namespace XenAdmin.Commands
 
                         if(!LiveMigrateAllowedInVersion(targetHost, draggedVM))
                         {
-                            Pool targetPool = targetHost == null ? null : Helpers.GetPool(targetHost.Connection);
+                            Pool targetPool = Helpers.GetPool(targetHost.Connection);
                             
                             if(targetPool == null)
                                 return false;

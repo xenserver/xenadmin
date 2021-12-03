@@ -45,8 +45,6 @@ namespace XenAdmin.Actions
         public CleanupDiskSpaceAction(Host host, Pool_patch excludedPatch, bool suppressHistory)
             : base(host.Connection, Messages.ACTION_CLEANUP_DISK_SPACE_TITLE, "", suppressHistory)
         {
-            if (host == null)
-                throw new ArgumentNullException("host");
             Host = host;
             this.excludedPatch = excludedPatch;
         }

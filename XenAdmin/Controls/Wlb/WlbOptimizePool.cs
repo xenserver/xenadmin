@@ -422,7 +422,7 @@ namespace XenAdmin.Controls.Wlb
         /// <param name="e">EventArgs</param>
         private void ButtonApply_Click(object sender, EventArgs e)
         {
-            if (this._pool == null)
+            if (_pool == null || _vmOptList == null)
                 return;
 
             applyButton.Enabled = false;

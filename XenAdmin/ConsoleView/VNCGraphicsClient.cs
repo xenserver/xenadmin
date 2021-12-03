@@ -1497,7 +1497,7 @@ namespace XenAdmin.ConsoleView
 
                 if (this.Size.Height >= (displayBorder ? this.DesktopSize.Height + BORDER_PADDING + BORDER_PADDING : DesktopSize.Height))
                 {
-                    this.dy = (this.Size.Height - this.DesktopSize.Height) / 2;
+                    this.dy = ((float) this.Size.Height - this.DesktopSize.Height) / 2;
                 }
                 else
                 {
@@ -1515,7 +1515,7 @@ namespace XenAdmin.ConsoleView
 
                 if (this.Size.Width >= (displayBorder ? this.DesktopSize.Width + BORDER_PADDING + BORDER_PADDING : DesktopSize.Width))
                 {
-                    this.dx = (this.Size.Width - this.DesktopSize.Width) / 2;
+                    this.dx = ((float) this.Size.Width - this.DesktopSize.Width) / 2;
                 }
                 else
                 {

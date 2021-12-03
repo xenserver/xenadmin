@@ -305,8 +305,6 @@ namespace XenAdmin.Controls.NetworkingTab
                     }
                     NetworksGridView.Rows.AddRange(vifRowsToAdd.ToArray());
 
-                    bool selected = true;
-
                     if (selectedVIF != null)
                     {
                         foreach (VifRow row in NetworksGridView.Rows)
@@ -318,11 +316,6 @@ namespace XenAdmin.Controls.NetworkingTab
                                 break;
                             }
                         }
-                    }
-
-                    if (!selected && NetworksGridView.Rows.Count > 0)
-                    {
-                        NetworksGridView.Rows[0].Selected = true;
                     }
                 }
                 else if (XenObject is Host || XenObject is Pool)

@@ -41,6 +41,7 @@ using XenAdmin.Core;
 using XenAPI;
 using XenCenterLib;
 using System.Diagnostics;
+using System.Linq;
 using System.Xml.Serialization;
 using XenAdmin.ServerDBs;
 
@@ -1757,12 +1758,14 @@ namespace XenAdmin.Network
 
         private Pool getAPool(ICache objects, out string opaqueref)
         {
-            foreach (Pool pool in objects.Pools)
+            var pools = objects.Pools;
+            if (pools.Length > 0)
             {
+                var pool = pools.First();
                 opaqueref = pool.opaque_ref;
                 return pool;
             }
-            System.Diagnostics.Trace.Assert(false);
+            Trace.Assert(false);
             opaqueref = null;
             return null;
         }

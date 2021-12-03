@@ -92,23 +92,20 @@ namespace XenAdmin.Commands
 
             protected override bool CanRunCore(SelectedItemCollection selection)
             {
-                if (!selection.AllItemsAre<VM>())
-                {
-                    return false;
-                }
-
                 IXenConnection connection = null;
 
-                bool atLeastOneCanRun = false;
-                foreach (SelectedItem item in selection)
+                var atLeastOneCanRun = false;
+                foreach (var item in selection)
                 {
-                    VM vm = (VM)item.XenObject;
-
+                    if (!(item.XenObject is VM vm))
+                        return false;
+                    
                     // all VMs must be on the same connection
                     if (connection != null && vm.Connection != connection)
                     {
                         return false;
                     }
+                    connection = vm.Connection;
 
                     if (CanRun(item))
                     {

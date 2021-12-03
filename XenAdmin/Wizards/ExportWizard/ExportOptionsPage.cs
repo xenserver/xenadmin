@@ -35,18 +35,18 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
-using XenCenterLib;
 using XenOvf;
 using XenAdmin.Controls;
+using XenModel;
 
 namespace XenAdmin.Wizards.ExportWizard
 {
-	/// <summary>
-	/// Class representing the page of the ExportAppliance wizard where the user specifies
-	/// whether to create a manifest, sign the appliance or encrypt files and whether to
-	/// create an OVA package or compress the OVF files
-	/// </summary>
-	internal partial class ExportOptionsPage : XenTabPage
+    /// <summary>
+    /// Class representing the page of the ExportAppliance wizard where the user specifies
+    /// whether to create a manifest, sign the appliance or encrypt files and whether to
+    /// create an OVA package or compress the OVF files
+    /// </summary>
+    internal partial class ExportOptionsPage : XenTabPage
 	{
 		private const int MIN_PASSWORD_STRENGTH = 1;
 		private int m_passwordStrength;
@@ -285,9 +285,9 @@ namespace XenAdmin.Wizards.ExportWizard
 		{
 			error = string.Empty;
 
-			if (!PathValidator.IsPathValid(m_textBoxCertificate.Text))//includes null check
+			if (!PathValidator.IsPathValid(m_textBoxCertificate.Text, out string invalidPathMsg))//includes null check
 			{
-				error = Messages.EXPORT_SECURITY_PAGE_ERROR_INVALID_CERT;
+				error = string.Join(" ", new[] { Messages.EXPORT_SECURITY_PAGE_ERROR_INVALID_CERT, invalidPathMsg });
 				return false;
 			}
 

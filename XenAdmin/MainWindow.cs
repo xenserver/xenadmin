@@ -2706,7 +2706,7 @@ namespace XenAdmin
         {
             HelpersGUI.BringFormToFront(this);
             Host hostAncestor = SelectionManager.Selection.Count == 1 ? SelectionManager.Selection[0].HostAncestor : null;
-            new ImportWizard(SelectionManager.Selection.GetConnectionOfFirstItem(), hostAncestor, param, false).Show();
+            new ImportWizard(SelectionManager.Selection.GetConnectionOfFirstItem(), hostAncestor, param).Show();
         }
 
         #region XenSearch

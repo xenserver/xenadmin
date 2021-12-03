@@ -36,8 +36,8 @@ namespace XenAdmin.XenSearch
 {
     public class Query
     {
-        private QueryScope scope;
-        private QueryFilter filter;
+        private readonly QueryScope scope;
+        private readonly QueryFilter filter;
 
         public Query(QueryScope scope, QueryFilter filter)
         {

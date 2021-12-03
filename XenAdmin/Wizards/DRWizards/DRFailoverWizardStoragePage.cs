@@ -179,8 +179,8 @@ namespace XenAdmin.Wizards.DRWizards
                     var vdis = sr.Connection.ResolveAll(sr.VDIs);
                     bool poolMetadataDetected = vdis.Any(vdi => vdi.type == vdi_type.metadata);
 
-                    SrRow row;
-                    if (!FindRowByUuid(sr.uuid, out row))
+                    var row = dataGridViewSRs.Rows.Cast<SrRow>().FirstOrDefault(r => r.SrUuid == sr.uuid);
+                    if (row != null)
                     {
                         row = new SrRow(sr, poolMetadataDetected, SelectedSRsUuids.Contains(sr.uuid));
                         dataGridViewSRs.Rows.Add(row);
@@ -192,8 +192,8 @@ namespace XenAdmin.Wizards.DRWizards
                 {
                     foreach (var srInfo in scannedDevice.SRList)
                     {
-                        SrRow row;
-                        if (!FindRowByUuid(srInfo.UUID, out row))
+                        var row = dataGridViewSRs.Rows.Cast<SrRow>().FirstOrDefault(r => r.SrUuid == srInfo.UUID);
+                        if (row != null)
                         {
                             row = new SrRow(srInfo, scannedDevice.Type, srInfo.PoolMetadataDetected,
                                             SelectedSRsUuids.Contains(srInfo.UUID));
@@ -356,8 +356,9 @@ namespace XenAdmin.Wizards.DRWizards
 
             foreach (SR.SRInfo srInfo in metadataSrs)
             {
-                SrRow row;
-                if (!FindRowByUuid(srInfo.UUID, out row))
+                var row = dataGridViewSRs.Rows.Cast<SrRow>().FirstOrDefault(r => r.SrUuid == srInfo.UUID);
+
+                if (row != null)
                 {
                     row = new SrRow(srInfo, type, srInfo.PoolMetadataDetected, srInfo.PoolMetadataDetected);
                     dataGridViewSRs.Rows.Add(row);
@@ -616,17 +617,6 @@ namespace XenAdmin.Wizards.DRWizards
                 SelectedSRsUuids.Remove(row.SrUuid);
 
             OnPageUpdated();
-        }
-
-        private bool FindRowByUuid(string uuid, out SrRow row)
-        {
-            row = null;
-            foreach (var srRow in dataGridViewSRs.Rows.Cast<SrRow>().Where(srRow => srRow.SrUuid == uuid))
-            {
-                row = srRow;
-                return true;
-            }
-            return false;
         }
 
         private void buttonSelectAll_Click(object sender, EventArgs e)

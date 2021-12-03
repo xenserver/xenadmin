@@ -55,13 +55,8 @@ namespace XenAdmin.Actions.Wlb
         public WlbOptimizePoolAction(Pool pool, Dictionary<VM, WlbOptimizationRecommendation> vmOptLst, string optId)
             : base(pool.Connection, string.Format(Messages.WLB_OPTIMIZING_POOL, Helpers.GetName(pool).Ellipsise(50)))
         {
-            if (pool == null)
-                throw new ArgumentNullException("pool");
-            if (vmOptLst == null)
-                throw new ArgumentNullException("vmOptLst");
-
-            this.Pool = pool;
-            this.vmOptList = vmOptLst;
+            Pool = pool;
+            vmOptList = vmOptLst ?? throw new ArgumentNullException("vmOptLst");
             this.optId = optId;
 
             #region RBAC Dependencies

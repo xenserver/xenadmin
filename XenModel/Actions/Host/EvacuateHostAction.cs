@@ -60,8 +60,6 @@ namespace XenAdmin.Actions
         public EvacuateHostAction(Host host, Host newCoordinator, Dictionary<XenRef<VM>, String[]> hostRecommendations, Func<HostAbstractAction, Pool, long, long, bool> acceptNTolChanges, Func<Pool, Host, long, long, bool> acceptNTolChangesOnEnable) 
             : base(host.Connection, null, Messages.HOST_EVACUATE, acceptNTolChanges, acceptNTolChangesOnEnable)
         {
-            if (host == null)
-                throw new ArgumentNullException("host");
             Host = host;
             _newCoordinator = newCoordinator;
             _hostRecommendations = hostRecommendations;

@@ -378,8 +378,8 @@ namespace XenAdmin.Dialogs.Wlb
             Dictionary<string, string> rps = new Dictionary<string, string>();
             foreach(string key in this._rpParams.Keys)
             {
-                if (String.Compare(key, WlbReportSubscription.REPORT_NAME, true) == 0)
-                    _subscription.ReportName = this._rpParams[WlbReportSubscription.REPORT_NAME];
+                if (String.Compare(key, WlbReportSubscription.REPORT_NAME_KEY, true) == 0)
+                    _subscription.ReportName = this._rpParams[WlbReportSubscription.REPORT_NAME_KEY];
                 else
                 {
                     //Get start date range

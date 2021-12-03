@@ -75,7 +75,6 @@ namespace XenAdmin.Dialogs
         /// <param name="runAction"></param>
         public RepairSRDialog(IEnumerable<SR> srs, bool runAction = true)
         {
-            Util.ThrowIfEnumerableParameterNullOrEmpty(srs, "srs");
             this.runAction = runAction;
             BoldFont = new Font(Font, FontStyle.Bold);
             List<SR> srList = new List<SR>(srs);

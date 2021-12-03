@@ -81,8 +81,6 @@ namespace XenAdmin.Actions
         public GetDiskSpaceRequirementsAction(Host host, string updateName, long size, bool suppressHistory)
             : base(host.Connection, Messages.ACTION_GET_DISK_SPACE_REQUIREMENTS_TITLE, suppressHistory)
         {
-            if (host == null)
-                throw new ArgumentNullException("host");
             Host = host;
             this.updateName = updateName;
             updateSize = size; 

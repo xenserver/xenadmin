@@ -271,7 +271,6 @@ namespace XenAdmin.Controls
                 cbLUN.Items.Add(new LunComboBoxItem(vdi) { AdditionalConstraints = LunConstraints });
             }
 
-            cbLUN.Items.OfType<LunComboBoxItem>().OrderBy(i=>i.Enabled);
             Cells.AddRange(tbVDI, cbLUN, tbSR);
             Debug.Assert(cbLUN.Items.Count == Sr.VDIs.Count, "Not all combobox items were converted");
         }

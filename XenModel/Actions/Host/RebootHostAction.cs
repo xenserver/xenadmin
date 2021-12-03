@@ -50,9 +50,7 @@ namespace XenAdmin.Actions
         public RebootHostAction(Host host, Func<HostAbstractAction, Pool, long, long, bool> acceptNTolChanges)
             : base(host.Connection, Messages.HOST_REBOOTING, Messages.WAITING, acceptNTolChanges, null)
         {
-            if (host == null)
-                throw new ArgumentNullException("host");
-            this.Host = host;
+            Host = host;
             AddCommonAPIMethodsToRoleCheck();
             ApiMethodsToRoleCheck.Add("pool.ha_compute_hypothetical_max_host_failures_to_tolerate");
             ApiMethodsToRoleCheck.Add("pool.set_ha_host_failures_to_tolerate");

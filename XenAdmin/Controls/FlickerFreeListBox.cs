@@ -33,7 +33,6 @@ using System;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Runtime.InteropServices;
-using XenAdmin.Core;
 using XenCenterLib;
 
 namespace XenAdmin.Controls
@@ -62,8 +61,8 @@ namespace XenAdmin.Controls
         /// The handle of the horizontal scrollbar of this ListBox
         /// </summary>
         private IntPtr _hScrollbarHandle = IntPtr.Zero;
-        public WndProcCancelDelegate CancelWndProc = new WndProcCancelDelegate(delegate(Message msg) { return false; });
 
+        public Func<Message, bool> CancelWndProc = msg => false;
 
         protected override void WndProc(ref Message msg)
         {
@@ -92,7 +91,7 @@ namespace XenAdmin.Controls
                 base.Invalidate();
             }
 
-            if(!CancelWndProc(msg))
+            if (!CancelWndProc(msg))
                 base.WndProc(ref msg);
         }
 
@@ -118,18 +117,12 @@ namespace XenAdmin.Controls
             base.OnMouseWheel(e);
         }
 
-        private ContextMenuStrip _contextMenuStrip = null;
+        private ContextMenuStrip _contextMenuStrip;
 
         public override ContextMenuStrip ContextMenuStrip
         {
-            get
-            {
-                return _contextMenuStrip;
-            }
-            set
-            {
-                _contextMenuStrip = value;
-            }
+            get => _contextMenuStrip;
+            set => _contextMenuStrip = value;
         }
 
         protected override void OnKeyUp(KeyEventArgs e)
@@ -233,115 +226,6 @@ namespace XenAdmin.Controls
             Refresh();
         }
 
-        public const int RIGHT_PADDING = 5;
-
-        public void WilkieSpecial(Image icon, string text, string extraText, Color extraTextColor, Font extraTextFont, DrawItemEventArgs e)
-        {
-            Graphics g = e.Graphics;
-
-            WSPaintBG(e, this);
-
-            // This is the rect where we want to put the text pair
-            Rectangle bounds = new Rectangle(e.Bounds.Height, e.Bounds.Y, e.Bounds.Width - e.Bounds.Height - RIGHT_PADDING, e.Bounds.Height);
-
-            String display;
-            Size s = WSDrawTextPair(this, text, extraText, extraTextColor, extraTextFont, e,  bounds, true, out display);
-
-            WSDrawSelectRect(e, bounds.Height + s.Width);
-
-            WSDrawLeftImage(icon, e);
-
-            // And the text
-            Drawing.DrawText(g, display, e.Font,
-                bounds, e.ForeColor, e.BackColor, TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
-        }
-
-        private static void WSDrawSelectRect(DrawItemEventArgs e, int width)
-        {
-            Graphics g = e.Graphics;
-
-            Rectangle selectionRectangle = new Rectangle(e.Bounds.Location, e.Bounds.Size);
-            selectionRectangle.Width = width;
-
-            using (SolidBrush backBrush = new SolidBrush(e.BackColor))
-            {
-                g.FillRectangle(backBrush, selectionRectangle);
-            }
-        }
-
-        private static Color GetBackColorFor(Control control)
-        {
-            return !control.Enabled ? SystemColors.Control : control.BackColor;
-        }
-
-        private static void WSDrawLeftImage(Image icon, DrawItemEventArgs e)
-        {
-            Graphics g = e.Graphics;
-
-            g.DrawImage(icon, e.Bounds.Left + 1, e.Bounds.Top + 1, e.Bounds.Height - 2, e.Bounds.Height - 2);
-        }
-
-        private static Size WSDrawTextPair(Control control, String text, String extraText, Color extraTextColor, Font extraTextFont, DrawItemEventArgs e, Rectangle bounds, bool ShowSelectOnExtraText, out String display)
-        {
-            Graphics g = e.Graphics;
-            g.TextRenderingHint = Drawing.TextRenderingHint;
-
-            display = text;
-            Size s = Drawing.MeasureText(g, display, e.Font,
-                        bounds.Size, TextFormatFlags.Right | TextFormatFlags.VerticalCenter);
-
-            if (extraText == null)
-                return s;
-
-            // We're going to have the extra text take precedent over the text,
-            // so shrink the text and put ellipses on until it measures up
-
-            Size t = Drawing.MeasureText(g, extraText, extraTextFont,
-                bounds.Size, TextFormatFlags.Right | TextFormatFlags.VerticalCenter);
-
-            int trim = text.Length;
-
-            while (s.Width + t.Width + 10 > bounds.Width && trim > 0)
-            {
-                trim--;
-
-                display = text.Ellipsise(trim);
-
-                s = Drawing.MeasureText(g, display, e.Font,
-                    bounds.Size, TextFormatFlags.Right | TextFormatFlags.VerticalCenter);
-            }
-
-            Color backColor = ShowSelectOnExtraText && control.Focused && e.State == DrawItemState.Selected
-                                  ? Color.LightGray
-                                  : GetBackColorFor(control);
-
-            if (ShowSelectOnExtraText)
-            {
-                Rectangle greySelectionRectangle = new Rectangle(bounds.Width - t.Width + bounds.X, bounds.Y + 2, t.Width, t.Height);
-
-                using (SolidBrush brush = new SolidBrush(backColor))
-                {
-                    g.FillRectangle(brush, greySelectionRectangle);
-                }
-            }
-
-            Drawing.DrawText(g, extraText, extraTextFont,
-                bounds, extraTextColor, backColor, TextFormatFlags.Right | TextFormatFlags.VerticalCenter);
-
-            return s;                
-        }
-
-        private static void WSPaintBG(DrawItemEventArgs e, Control control)
-        {
-            Graphics g = e.Graphics;
-            Color color = GetBackColorFor(control);
-
-            using (SolidBrush backBrush = new SolidBrush(color))
-            {
-                g.FillRectangle(backBrush, e.Bounds);
-            }
-        }
-
         protected override void OnGotFocus(EventArgs e)
         {
             base.OnGotFocus(e);
@@ -354,6 +238,4 @@ namespace XenAdmin.Controls
             this.Refresh();
         }
     }
-
-    public delegate bool WndProcCancelDelegate(Message msg);
 }

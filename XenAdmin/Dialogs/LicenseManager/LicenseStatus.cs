@@ -207,15 +207,15 @@ namespace XenAdmin.Dialogs
                 if (freeCount == 0 || freeCount < xenObject.Connection.Cache.Hosts.Length)
                     return false;
 
-                var expiryGroups = from Host h in xenObject.Connection.Cache.Hosts
+                var expiryGroups = (from Host h in xenObject.Connection.Cache.Hosts
                                    let exp = h.LicenseExpiryUTC()
                                    group h by exp
                                    into g
-                                   select new { ExpiryDate = g.Key, Hosts = g };
+                                   select new { ExpiryDate = g.Key, Hosts = g }).ToList();
 
-                if(expiryGroups.Count() > 1)
+                if (expiryGroups.Count > 1)
                 {
-                    expiryGroups.OrderBy(g => g.ExpiryDate);
+                    expiryGroups = expiryGroups.OrderBy(g => g.ExpiryDate).ToList();
                     if ((expiryGroups.ElementAt(1).ExpiryDate - expiryGroups.ElementAt(0).ExpiryDate).TotalDays > 30)
                         return true;
                 }

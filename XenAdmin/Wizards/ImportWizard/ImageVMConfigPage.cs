@@ -32,7 +32,7 @@
 using System;
 using XenAdmin.Controls;
 using XenCenterLib;
-
+using XenModel;
 
 namespace XenAdmin.Wizards.ImportWizard
 {
@@ -55,17 +55,17 @@ namespace XenAdmin.Wizards.ImportWizard
 		/// <summary>
 		/// Gets the page's title (headline)
 		/// </summary>
-		public override string PageTitle { get { return Messages.IMAGE_DEFINITION_PAGE_TITLE; } }
+        public override string PageTitle => Messages.IMAGE_DEFINITION_PAGE_TITLE;
 
 		/// <summary>
 		/// Gets the page's label in the (left hand side) wizard progress panel
 		/// </summary>
-		public override string Text { get { return Messages.IMAGE_DEFINITION_PAGE_TEXT; } }
+        public override string Text => Messages.IMAGE_DEFINITION_PAGE_TEXT;
 
 		/// <summary>
 		/// Gets the value by which the help files section for this page is identified
 		/// </summary>
-		public override string HelpID { get { return "VMConfig"; } }
+        public override string HelpID => "VMConfig";
 
         protected override bool ImplementsIsDirty()
         {
@@ -97,16 +97,16 @@ namespace XenAdmin.Wizards.ImportWizard
 
 		#region Accessors
 
-		public bool IsWim { private get; set; }
+		public bool IsWim { internal get; set; }
 
-		public string VmName { get { return m_textBoxVMName.Text; } }
+        public string VmName => m_textBoxVMName.Text;
 
-		public ulong CpuCount { get { return (ulong)m_upDownCpuCount.Value; } }
+        public ulong CpuCount => (ulong)m_upDownCpuCount.Value;
 
-		public ulong Memory { get { return (ulong)m_upDownMemory.Value; } }
+        public ulong Memory => (ulong)m_upDownMemory.Value;
 
-		public ulong AdditionalSpace { get { return m_groupBoxAddSpace.Enabled ? (ulong)m_upDownAddSpace.Value * GB : 0; } }
-        
+        public ulong AdditionalSpace => m_groupBoxAddSpace.Visible && m_groupBoxAddSpace.Enabled ? (ulong)m_upDownAddSpace.Value * GB : 0;
+
 		#endregion
 
 		#region Private Methods
@@ -118,9 +118,10 @@ namespace XenAdmin.Wizards.ImportWizard
 			if (String.IsNullOrEmpty(name))
 				return false;
 
-			if (!PathValidator.IsFileNameValid(name))
+
+			if (!PathValidator.IsFileNameValid(name, out string invalidNameMsg))
 			{
-				error = Messages.IMPORT_SELECT_APPLIANCE_PAGE_ERROR_INVALID_PATH;
+				error = invalidNameMsg;
 				return false;
 			}
 			return true;

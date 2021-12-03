@@ -37,7 +37,7 @@ namespace XenAdmin
     {
         internal Grouping Grouping;
         internal object Parent;
-        internal object Group;
+        internal readonly object Group;
 
         /// <summary></summary>
         /// <param name="grouping"></param>
@@ -55,8 +55,7 @@ namespace XenAdmin
 
         public override bool Equals(object obj)
         {
-            GroupingTag other = obj as GroupingTag;
-            return other != null && Grouping.Equals(other.Grouping) && Group.Equals(other.Group);
+            return obj is GroupingTag other && Grouping.Equals(other.Grouping) && Group.Equals(other.Group);
         }
 
         public override int GetHashCode()
