@@ -834,6 +834,7 @@ namespace XenAdmin.TabPages
             {
                 var download = new ToolStripMenuItem(Messages.UPDATES_DOWNLOAD_AND_INSTALL);
                 download.Click += ToolStripMenuItemDownloadInstall_Click;
+                //TODO: Check if path is url or msi to set downloadable
                 download.Enabled = (alert as ClientUpdateAlert).Downloadable; 
                 items.Add(download);
             }
@@ -966,7 +967,25 @@ namespace XenAdmin.TabPages
 
         private void ToolStripMenuItemDownloadInstall_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException("To be implemented via CP-31587");
+            //Get the current clicked row
+            DataGridViewRow clickedRow = FindAlertRow(sender as ToolStripMenuItem);
+            if (clickedRow == null)
+                return;
+
+            ClientUpdateAlert alert = (ClientUpdateAlert)clickedRow.Tag;
+            if (alert != null && string.IsNullOrEmpty(alert.NewVersion.Url))
+            {
+                alert.FixLinkAction.Invoke();
+            }
+
+
+            //do not register the event ShowUserInstruction; we show explicitly a message afterwards
+            var downloadAndInstallClientAction = new DownloadAndUpdateClientAction(alert.Name, new Uri(alert.NewVersion.Url), Path.Combine(Path.GetTempPath(), "CH.msi"), true) ;
+
+            using (var dlg = new ActionProgressDialog(downloadAndInstallClientAction, ProgressBarStyle.Marquee))
+                dlg.ShowDialog(Parent);
+
+            //throw new NotImplementedException("To be implemented via CP-31587");
         }
 
         private void ToolStripMenuItemDismiss_Click(object sender, EventArgs e)
