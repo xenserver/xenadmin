@@ -71,8 +71,8 @@ namespace XenAdmin.Alerts
         public bool Downloadable { 
             get {
                 // TODO: Implement proper check in CP-31587
-                return false; 
-            }
+                return true;
+        }
         }
 
         static int DISMISSED_XC_VERSIONS_LIMIT = 5;
