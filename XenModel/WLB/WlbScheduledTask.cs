@@ -702,14 +702,7 @@ namespace XenAdmin.Wlb
                     foreach (var key in scheduleTask.TaskParameters.Keys)
                     {
                         var complexKey = $"{scheduleTask.KeyBase}_{scheduleTask.TaskId}_{key}";
-                        if (collectionDictionary.ContainsKey(complexKey))
-                        {
-                            collectionDictionary[complexKey] = scheduleTask.TaskParameters[key];
-                        }
-                        else
-                        {
-                            collectionDictionary.Add(complexKey, scheduleTask.TaskParameters[key]);
-                        }
+                        collectionDictionary[complexKey] = scheduleTask.TaskParameters[key];
                     }
                 }
             }
