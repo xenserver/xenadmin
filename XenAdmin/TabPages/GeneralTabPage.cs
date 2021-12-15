@@ -32,9 +32,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -57,7 +55,7 @@ namespace XenAdmin.TabPages
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private readonly List<PDSection> sections= new List<PDSection>();
+        private readonly List<PDSection> sections = new List<PDSection>();
         private readonly Dictionary<Type, List<PDSection>> _expandedSections = new Dictionary<Type, List<PDSection>>();
 
         private IXenObject xenObject;
@@ -82,7 +80,7 @@ namespace XenAdmin.TabPages
 
             VM_guest_metrics_CollectionChangedWithInvoke = Program.ProgramInvokeHandler(VM_guest_metrics_CollectionChanged);
             OtherConfigAndTagsWatcher.TagsChanged += OtherConfigAndTagsWatcher_TagsChanged;
-            
+
             foreach (Control control in panel2.Controls)
             {
                 if (!(control is Panel p))
@@ -97,7 +95,7 @@ namespace XenAdmin.TabPages
                     s.ContentReceivedFocus += s_ContentReceivedFocus;
                     s.ExpandedChanged += s_ExpandedChanged;
                 }
-            }            
+            }
         }
 
         public override string HelpID => "TabPageSettings";
@@ -190,7 +188,7 @@ namespace XenAdmin.TabPages
 
                 if (xenObject != null && !_expandedSections.TryGetValue(xenObject.GetType(), out expandedSections))
                 {
-                    expandedSections = new List<PDSection> {pdSectionGeneral};
+                    expandedSections = new List<PDSection> { pdSectionGeneral };
                     _expandedSections[xenObject.GetType()] = expandedSections;
                 }
 
@@ -349,22 +347,13 @@ namespace XenAdmin.TabPages
             {
                 buttonProperties.Visible = false;
 
-                buttonViewConsole.Visible = buttonViewLog.Visible = linkLabelCollapse.Visible =
+                linkLabelCollapse.Visible =
                     linkLabelExpand.Visible = !Helpers.StockholmOrGreater(xenObject.Connection);
-
-                if (!Helpers.StockholmOrGreater(xenObject.Connection))
-                {
-                    // Grey out the buttons if the Container management VM is Windows.
-                    // For Linux VM, enable the buttons only when the docker is running.
-                    buttonViewConsole.Enabled = buttonViewLog.Enabled =
-                        !container.Parent.IsWindows() && container.power_state == vm_power_state.Running;
-                }
             }
             else
             {
                 buttonProperties.Visible = true;
                 buttonProperties.Enabled = xenObject != null && !xenObject.Locked && xenObject.Connection != null && xenObject.Connection.IsConnected;
-                buttonViewConsole.Visible = buttonViewLog.Visible = false;
                 linkLabelCollapse.Visible = linkLabelExpand.Visible = true;
             }
         }
@@ -409,7 +398,7 @@ namespace XenAdmin.TabPages
                 s.ClearData();
             }
             // Generate the content of each box, each method performs a cast and only populates if XenObject is the relevant type
-           
+
             if (xenObject is Host && (xenObject.Connection == null || !xenObject.Connection.IsConnected))
             {
                 GenerateDisconnectedHostBox();
@@ -539,7 +528,7 @@ namespace XenAdmin.TabPages
 
             foreach (CustomField customField in customFields)
             {
-                var editValue = new ToolStripMenuItem(Messages.EDIT) {Image = Images.StaticImages.edit_16};
+                var editValue = new ToolStripMenuItem(Messages.EDIT) { Image = Images.StaticImages.edit_16 };
                 editValue.Click += delegate
                     {
                         using (PropertiesDialog dialog = new PropertiesDialog(xenObject))
@@ -672,10 +661,10 @@ namespace XenAdmin.TabPages
             bool detached = !sr.HasPBDs();
 
             var repairItem = new ToolStripMenuItem
-                {
-                    Text = Messages.GENERAL_SR_CONTEXT_REPAIR,
-                    Image = Images.StaticImages._000_StorageBroken_h32bit_16
-                };
+            {
+                Text = Messages.GENERAL_SR_CONTEXT_REPAIR,
+                Image = Images.StaticImages._000_StorageBroken_h32bit_16
+            };
             repairItem.Click += delegate
                 {
                     Program.MainWindow.ShowPerConnectionWizard(xenObject.Connection, new RepairSRDialog(sr));
@@ -885,8 +874,8 @@ namespace XenAdmin.TabPages
 
             PDSection s = pdSectionBootOptions;
 
-        	if (vm.IsHVM())
-            {	
+            if (vm.IsHVM())
+            {
                 s.AddEntry(FriendlyName("VM.BootOrder"), HVMBootOrder(vm),
                     new PropertiesToolStripMenuItem(new VmEditStartupOptionsCommand(Program.MainWindow, vm)));
                 if (Helpers.NaplesOrGreater(vm.Connection))
@@ -1055,8 +1044,8 @@ namespace XenAdmin.TabPages
             if (vm == null)
                 return;
 
-            PDSection s = pdSectionVCPUs; 
-            
+            PDSection s = pdSectionVCPUs;
+
             s.AddEntry(FriendlyName("VM.VCPUs"), vm.VCPUs_at_startup.ToString());
             if (vm.VCPUs_at_startup != vm.VCPUs_max || vm.SupportsVcpuHotplug())
                 s.AddEntry(FriendlyName("VM.MaxVCPUs"), vm.VCPUs_max.ToString());
@@ -1193,7 +1182,8 @@ namespace XenAdmin.TabPages
                         s.AddEntry(Messages.CERTIFICATE_VERIFICATION_KEY,
                             Messages.CERTIFICATE_VERIFICATION_HOST_DISABLED_STANDALONE,
                             Color.Red,
-                            new CommandToolStripMenuItem(new EnableTlsVerificationCommand(Program.MainWindow, pool)));}
+                            new CommandToolStripMenuItem(new EnableTlsVerificationCommand(Program.MainWindow, pool)));
+                    }
                     else
                     {
                         s.AddEntry(Messages.CERTIFICATE_VERIFICATION_KEY,
@@ -1234,11 +1224,11 @@ namespace XenAdmin.TabPages
                     s.AddEntry(Messages.BIOS_STRINGS_COPIED, vm.BiosStringsCopied() ? Messages.YES : Messages.NO);
                 }
 
-				if (vm.Connection != null)
-				{
-					var appl = vm.Connection.Resolve(vm.appliance);
-					if (appl != null)
-					{
+                if (vm.Connection != null)
+                {
+                    var appl = vm.Connection.Resolve(vm.appliance);
+                    if (appl != null)
+                    {
                         void LaunchProperties()
                         {
                             using (PropertiesDialog propertiesDialog = new PropertiesDialog(appl))
@@ -1250,9 +1240,9 @@ namespace XenAdmin.TabPages
 
                         s.AddEntryLink(Messages.VM_APPLIANCE, appl.Name(), LaunchProperties, applProperties);
                     }
-				}
+                }
 
-            	if (vm.is_a_snapshot)
+                if (vm.is_a_snapshot)
                 {
                     VM snapshotOf = vm.Connection.Resolve(vm.snapshot_of);
                     s.AddEntry(Messages.SNAPSHOT_OF, snapshotOf == null ? string.Empty : snapshotOf.Name());
@@ -1362,7 +1352,7 @@ namespace XenAdmin.TabPages
                         if (string.IsNullOrEmpty(hotfixEligibilityString))
                             s.AddEntry(Messages.SOFTWARE_VERSION_PRODUCT_VERSION, coordinator.ProductVersionText());
                         else
-                            s.AddEntry(Messages.SOFTWARE_VERSION_PRODUCT_VERSION, 
+                            s.AddEntry(Messages.SOFTWARE_VERSION_PRODUCT_VERSION,
                                 string.Format(Messages.MAINWINDOW_CONTEXT_REASON, coordinator.ProductVersionText(), hotfixEligibilityString),
                                 Color.Red);
                     }
@@ -1446,7 +1436,7 @@ namespace XenAdmin.TabPages
                     return Messages.HOTFIX_ELIGIBILITY_WARNING_EOL_FREE_NO_DATE;
                 case hotfix_eligibility.none:
                     return Messages.HOTFIX_ELIGIBILITY_WARNING_EOL_NO_DATE;
-                
+
                 // default
                 default:
                     return string.Empty;
@@ -1485,7 +1475,7 @@ namespace XenAdmin.TabPages
                     }
 
                     //Row 3 : vendor device - Windows Update
-                    if(!HiddenFeatures.WindowsUpdateHidden)
+                    if (!HiddenFeatures.WindowsUpdateHidden)
                         sb.Append(vm.has_vendor_device ? Messages.VIRTUALIZATION_STATE_VM_RECEIVING_UPDATES : Messages.VIRTUALIZATION_STATE_VM_NOT_RECEIVING_UPDATES);
 
                     // displaying Row1 - Row3
@@ -1641,7 +1631,7 @@ namespace XenAdmin.TabPages
         private void GenTagRow(PDSection s)
         {
             string[] tags = Tags.GetTags(xenObject);
-            
+
             if (tags != null && tags.Length > 0)
             {
                 ToolStripMenuItem goToTag = new ToolStripMenuItem(Messages.VIEW_TAG_MENU_OPTION);
@@ -1694,11 +1684,11 @@ namespace XenAdmin.TabPages
 
             PDSection s = pdSectionMemory;
 
-      
+
             s.AddEntry(FriendlyName("host.ServerMemory"), host.HostMemoryString());
             s.AddEntry(FriendlyName("host.VMMemory"), host.ResidentVMMemoryUsageString());
             s.AddEntry(FriendlyName("host.XenMemory"), host.XenMemoryString());
-            
+
         }
 
         private void addStringEntry(PDSection s, string key, string value)
@@ -1815,7 +1805,7 @@ namespace XenAdmin.TabPages
 
         private string poolAppliedPatches()
         {
-            return 
+            return
                 Helpers.ElyOrGreater(xenObject.Connection)
                 ? poolUpdateString(update => update.AppliedOnHosts().Count == xenObject.Connection.Cache.HostCount)
                 : poolPatchString(patch => patch.host_patches.Count == xenObject.Connection.Cache.HostCount);
@@ -1928,7 +1918,7 @@ namespace XenAdmin.TabPages
         private List<KeyValuePair<String, String>> CheckHostUpdatesRequiringReboot(Host host)
         {
             var warnings = new List<KeyValuePair<String, String>>();
-            
+
             // Updates that require host restart
             var updateRefs = host.updates_requiring_reboot;
             foreach (var updateRef in updateRefs)
@@ -1973,7 +1963,7 @@ namespace XenAdmin.TabPages
             {
                 value = string.Format(Messages.GENERAL_PANEL_UPDATE_RESTART_TOOLSTACK_WARNING, host.Name(), patch.Name());
             }
-            
+
             return new KeyValuePair<string, string>(key, value);
         }
 
@@ -1984,7 +1974,7 @@ namespace XenAdmin.TabPages
 
             return new KeyValuePair<string, string>(key, value);
         }
- 
+
         private static string FriendlyName(string propertyName)
         {
             return FriendlyNameManager.GetFriendlyName(string.Format("Label-{0}", propertyName)) ?? propertyName;
@@ -2027,61 +2017,13 @@ namespace XenAdmin.TabPages
             new PropertiesCommand(Program.MainWindow, xenObject).Run();
         }
 
-        private void buttonViewConsole_Click(object sender, EventArgs e)
-        {
-            //Set command 'docker attach' to attach to the container.
-            StartPutty("env docker attach --sig-proxy=false");
-        }
-
-        private void buttonViewLog_Click(object sender, EventArgs e)
-        {
-            //Set command 'docker logs' to retrieve the logs of the container.
-            StartPutty( "env docker logs --tail=50 --follow --timestamps");
-        }
-
         private void panel2_Paint(object sender, PaintEventArgs e)
-        {   
+        {
             //Force scrollbar to be repainted to avoid occasional pixel glitch.
             panel2.AutoScroll = sections.Sum(s => s.Parent?.Height ?? s.Height) > panel2.ClientRectangle.Height;
         }
 
         #endregion
-
-        private void StartPutty(string dockerCmd)
-        {
-            if (!(xenObject is DockerContainer dockerContainer) || Helpers.StockholmOrGreater(xenObject.Connection))
-                return;
-
-            string ipAddr = dockerContainer.Parent.IPAddressForSSH();
-            string command = $"{dockerCmd} {dockerContainer.uuid}";
-
-            try
-            {
-                //Write docker command to a temp file.
-                string cmdFile = Path.Combine(Path.GetTempPath(), "ContainerManagementCommand.txt");
-                File.WriteAllText(cmdFile, command);
-
-                //Invoke Putty, SSH to VM and run docker command.
-                var puttyPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "putty.exe");
-                string args = "-m " + cmdFile + " -t " + ipAddr;
-
-                //Specify the key for SSH connection.
-                var keyFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "ContainerManagement.ppk");
-                if (File.Exists(keyFile))
-                {
-                    args = args + " -i " + keyFile;
-                }
-                var startInfo = new ProcessStartInfo(puttyPath, args);
-
-                Process.Start(startInfo);
-            }
-            catch (Exception ex)
-            {
-                log.Error("Error starting PuTTY.", ex);
-                using (var dlg = new ErrorDialog(Messages.ERROR_PUTTY_LAUNCHING))
-                    dlg.ShowDialog(Parent);
-            }
-        }
 
         private void ToggleExpandedState(Func<PDSection, bool> expand)
         {
