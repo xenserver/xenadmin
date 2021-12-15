@@ -33,8 +33,6 @@ namespace XenAdmin.TabPages
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GeneralTabPage));
             this.buttonProperties = new System.Windows.Forms.Button();
-            this.buttonViewConsole = new System.Windows.Forms.Button();
-            this.buttonViewLog = new System.Windows.Forms.Button();
             this.linkLabelExpand = new System.Windows.Forms.LinkLabel();
             this.linkLabelCollapse = new System.Windows.Forms.LinkLabel();
             this.panel2 = new XenAdmin.Controls.PanelNoFocusScroll();
@@ -116,20 +114,6 @@ namespace XenAdmin.TabPages
             this.buttonProperties.Name = "buttonProperties";
             this.buttonProperties.UseVisualStyleBackColor = true;
             this.buttonProperties.Click += new System.EventHandler(this.buttonProperties_Click);
-            // 
-            // buttonViewConsole
-            // 
-            resources.ApplyResources(this.buttonViewConsole, "buttonViewConsole");
-            this.buttonViewConsole.Name = "buttonViewConsole";
-            this.buttonViewConsole.UseVisualStyleBackColor = true;
-            this.buttonViewConsole.Click += new System.EventHandler(this.buttonViewConsole_Click);
-            // 
-            // buttonViewLog
-            // 
-            resources.ApplyResources(this.buttonViewLog, "buttonViewLog");
-            this.buttonViewLog.Name = "buttonViewLog";
-            this.buttonViewLog.UseVisualStyleBackColor = true;
-            this.buttonViewLog.Click += new System.EventHandler(this.buttonViewLog_Click);
             // 
             // linkLabelExpand
             // 
@@ -434,8 +418,6 @@ namespace XenAdmin.TabPages
             // tableLayoutPanelButtons
             // 
             resources.ApplyResources(this.tableLayoutPanelButtons, "tableLayoutPanelButtons");
-            this.tableLayoutPanelButtons.Controls.Add(this.buttonViewLog, 2, 0);
-            this.tableLayoutPanelButtons.Controls.Add(this.buttonViewConsole, 1, 0);
             this.tableLayoutPanelButtons.Controls.Add(this.buttonProperties, 0, 0);
             this.tableLayoutPanelButtons.Controls.Add(this.linkLabelCollapse, 5, 0);
             this.tableLayoutPanelButtons.Controls.Add(this.linkLabelExpand, 4, 0);
@@ -522,8 +504,6 @@ namespace XenAdmin.TabPages
         private Controls.PDSection pdSectionDockerInfo;
         private System.Windows.Forms.Panel panelReadCaching;
         private Controls.PDSection pdSectionReadCaching;
-        private System.Windows.Forms.Button buttonViewConsole;
-        private System.Windows.Forms.Button buttonViewLog;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelButtons;
         private System.Windows.Forms.Panel panelCertificate;
         private Controls.PDSection pdSectionCertificate;
