@@ -830,6 +830,14 @@ namespace XenAdmin.TabPages
                 items.Add(fix);
             }
 
+            if (alert is ClientUpdateAlert)
+            {
+                var download = new ToolStripMenuItem(Messages.UPDATES_DOWNLOAD_AND_INSTALL);
+                download.Click += ToolStripMenuItemDownloadInstall_Click;
+                download.Enabled = (alert as ClientUpdateAlert).Downloadable; 
+                items.Add(download);
+            }
+
             if (items.Count > 0)
                 items.Add(new ToolStripSeparator());
 
@@ -954,6 +962,11 @@ namespace XenAdmin.TabPages
                 var selectedAlerts = from DataGridViewRow row in dataGridViewUpdates.SelectedRows select row.Tag as Alert;
                 DismissUpdates(selectedAlerts.ToList());
             }
+        }
+
+        private void ToolStripMenuItemDownloadInstall_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException("To be implemented via CP-31587");
         }
 
         private void ToolStripMenuItemDismiss_Click(object sender, EventArgs e)

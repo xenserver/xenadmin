@@ -68,6 +68,13 @@ namespace XenAdmin.Alerts
 
         public override string HelpID => "XenCenterUpdateAlert";
 
+        public bool Downloadable { 
+            get {
+                // TODO: Implement proper check in CP-31587
+                return false; 
+            }
+        }
+
         static int DISMISSED_XC_VERSIONS_LIMIT = 5;
 
         public override void Dismiss()
