@@ -99,7 +99,7 @@ namespace XenAdmin.Actions.OvfActions
             #endregion
 
             #region ADD CPUS
-            OVF.SetCPUs(ovfEnv, vsId, (ulong)vm.VCPUs_max);
+            OVF.SetCPUs(ovfEnv, vsId, (ulong)vm.VCPUs_at_startup, (ulong)vm.VCPUs_max);
             #endregion
 
             #region ADD MEMORY

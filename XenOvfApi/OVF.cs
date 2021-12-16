@@ -4307,13 +4307,15 @@ namespace XenOvf
         #endregion
 
         #region SETs
+
         /// <summary>
-        /// Set the count for the number of CPUs to assign to the virtual machine.
+        /// Set the count for the number of vCPUs and max vCPUs to assign to the virtual machine.
         /// </summary>
         /// <param name="ovfObj">EnvelopeType</param>
         /// <param name="vsId">Virtual System Id</param>
-        /// <param name="cpucount">Number of CPUs</param>
-		public static void SetCPUs(EnvelopeType ovfEnv, string vsId, UInt64 cpucount)
+        /// <param name="cpucount">Number of vCPUs</param>
+        /// <param name="maxCpuCount">Number of max vCPUs, if available</param>
+        public static void SetCPUs(EnvelopeType ovfEnv, string vsId, UInt64 cpucount, ulong? maxCpuCount = null)
         {
             List<RASD_Type> rasds = new List<RASD_Type>();
 
@@ -4343,8 +4345,10 @@ namespace XenOvf
                 rasd.Description = new cimString(_ovfrm.GetString("RASD_3_DESCRIPTION"));
                 rasd.ElementName = new cimString(_ovfrm.GetString("RASD_3_ELEMENTNAME"));
                 rasd.InstanceID = new cimString(Guid.NewGuid().ToString());
-                rasd.Limit = new cimUnsignedLong();
-                rasd.Limit.Value = 100000; // From MS;
+                rasd.Limit = new cimUnsignedLong
+                {
+                    Value = maxCpuCount ?? 100_000 // From MS;
+                };
                 rasd.MappingBehavior = new MappingBehavior();
                 rasd.MappingBehavior.Value = 0; // From MS.
                 rasd.ResourceType = new ResourceType();
