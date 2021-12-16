@@ -516,6 +516,7 @@ namespace XenAdmin.Actions.OvfActions
             #region CPU COUNT
 
             ulong cpuCount = 0;
+            ulong maxCpusCount = 0;
             rasds = OVF.FindRasdByType(system, 3);
 
             if (rasds != null && rasds.Length > 0)
@@ -524,13 +525,25 @@ namespace XenAdmin.Actions.OvfActions
                 //The VirtualQuantity in each one is Cores
 
                 foreach (RASD_Type rasd in rasds)
+                {
                     cpuCount += rasd.VirtualQuantity.Value;
+                    // CA-361078: Older versions of CHC/XC used to set the limit to 100,000 by default, and use 
+                    // VirtualQuantity for max vCPUs.
+                    // This way, we keep backwards compatibility with older OVFs.
+                    maxCpusCount += rasd.Limit.Value >= 100_000 ? rasd.VirtualQuantity.Value : rasd.Limit.Value;
+                }
+                   
             }
 
             if (cpuCount < 1) //default minimum
                 cpuCount = 1;
             else if (cpuCount > long.MaxValue) //unlikely, but better be safe
                 cpuCount = long.MaxValue;
+
+            if (maxCpusCount < 1)
+                maxCpusCount = 1;
+            else if (maxCpusCount > long.MaxValue)
+                maxCpusCount = long.MaxValue;
 
             #endregion
 
@@ -546,7 +559,7 @@ namespace XenAdmin.Actions.OvfActions
                 memory_dynamic_max = (long)memorySize,
                 memory_dynamic_min = (long)memorySize,
                 memory_static_min = (long)memorySize,
-                VCPUs_max = (long)cpuCount,
+                VCPUs_max = (long)maxCpusCount,
                 VCPUs_at_startup = (long)cpuCount,
                 actions_after_shutdown = on_normal_exit.destroy,
                 actions_after_reboot = on_normal_exit.restart,
