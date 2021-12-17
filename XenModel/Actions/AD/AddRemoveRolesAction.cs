@@ -86,7 +86,6 @@ namespace XenAdmin.Actions
             {
                 log.DebugFormat("Removing role {0} from subject '{1}'.", r.FriendlyName(), subj);
                 Subject.remove_from_roles(Session, subject.opaque_ref, r.opaque_ref);
-                done++;
                 PercentComplete = 100 * ++done / count;
             }
 

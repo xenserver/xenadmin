@@ -1579,14 +1579,14 @@ This will disconnect you from '{0}'.</value>
   <data name="AD_CONFIRM_SELF_TERMINATE_OK" xml:space="preserve">
     <value>Terminate Session</value>
   </data>
-  <data name="AD_CONFIRM_SUICIDE" xml:space="preserve">
+  <data name="AD_CONFIRM_LOGOUT_CURRENT_USER" xml:space="preserve">
     <value>You are about to revoke the permissions for user '{0}'.
 
 You are currently logged in as '{0}' on '{1}', and doing this will disconnect you from '{1}'. To reconnect, you will need to supply the local root account credentials, or the credentials for another authorized AD user.
 
 Do you want to continue?</value>
   </data>
-  <data name="AD_CONFIRM_SUICIDE_GROUP" xml:space="preserve">
+  <data name="AD_CONFIRM_LOGOUT_CURRENT_USER_GROUP" xml:space="preserve">
     <value>You are about to revoke the permissions for group '{0}'.
 
 The user you are currently logged into '{1}' with is a member of '{0}'. Proceeding will disconnect you and any other members of this group from '{1}'. To reconnect, you will need to supply the local root account credentials, or the credentials for another authorized AD user.
@@ -1653,15 +1653,47 @@ Do you want to continue?</value>
   <data name="AD_LOCAL_ROOT_ACCOUNT" xml:space="preserve">
     <value>Local root account</value>
   </data>
-  <data name="AD_LOGOUT_SUICIDE_MANY" xml:space="preserve">
-    <value>You are currently logged in as one of the selected users. If you continue you will be logged out of '{0}'.
+  <data name="AD_LOGOUT_CURRENT_USER_MANY" xml:space="preserve">
+    <value>You are currently logged in as one of the selected users. If you continue, you will be logged out of '{0}'. All other selected users will also be logged out.
 
-Do you want to continue?</value>
+Are you sure you want to continue?</value>
   </data>
-  <data name="AD_LOGOUT_SUICIDE_ONE" xml:space="preserve">
-    <value>You are currently logged in as the selected user. If you continue you will be logged out of '{0}'.
+  <data name="AD_LOGOUT_CURRENT_USER_MANY_ROLE_CHANGE" xml:space="preserve">
+    <value>You are currently logged in as one of the selected users. If you assign a new role, you will be logged out of '{0}'. All other selected users that are logged in will also be logged out.
 
-Do you want to continue?</value>
+Are you sure you want to continue?</value>
+  </data>
+  <data name="AD_LOGOUT_CURRENT_USER_ONE" xml:space="preserve">
+    <value>You are currently logged in as the selected user. If you continue, you will be logged out of '{0}'.
+
+Are you sure you want to continue?</value>
+  </data>
+  <data name="AD_LOGOUT_CURRENT_USER_ONE_ROLE_CHANGE" xml:space="preserve">
+    <value>You are currently logged in as the selected user. If you assign a new role, you will be logged out of '{0}'.
+
+Are you sure you want to continue?</value>
+  </data>
+  <data name="AD_LOGOUT_USER_MANY" xml:space="preserve">
+    <value>Are you sure you want to log out these {0} users?</value>
+  </data>
+  <data name="AD_LOGOUT_USER_MANY_ROLE_CHANGE" xml:space="preserve">
+    <value>If you assign a new role to logged in users, they will be logged out.
+
+Are you sure you want to continue?</value>
+  </data>
+  <data name="AD_LOGOUT_USER_ONE" xml:space="preserve">
+    <value>Are you sure you want to log out the user '{0}'?</value>
+  </data>
+  <data name="AD_LOGOUT_USER_ONE_ROLE_CHANGE" xml:space="preserve">
+    <value>If you assign a new role to user '{0}', the user will be logged out.
+
+Are you sure you want to continue?</value>
+  </data>
+  <data name="AD_REMOVE_USER_MANY" xml:space="preserve">
+    <value>Are you sure you want to remove these {0} users?</value>
+  </data>
+  <data name="AD_REMOVE_USER_ONE" xml:space="preserve">
+    <value>Are you sure you want to remove the user '{0}'?</value>
   </data>
   <data name="AD_NOT_CONFIGURED_BLURB" xml:space="preserve">
     <value>AD is not currently configured for pool '{0}'. To enable AD authentication, click Join Domain.</value>
@@ -11024,18 +11056,6 @@ Click Previous if you need to go back and specify a different network location o
   <data name="QUESTION_ADMIN_EXIT_PROCEDURE_SOME_OF_MANY" xml:space="preserve">
     <value>{0} of the users you are about to remove are Pool Administrators.</value>
   </data>
-  <data name="QUESTION_LOGOUT_AD_USER_MANY" xml:space="preserve">
-    <value>Are you sure you want to log out these {0} users?</value>
-  </data>
-  <data name="QUESTION_LOGOUT_AD_USER_ONE" xml:space="preserve">
-    <value>Are you sure you want to log out the user '{0}'?</value>
-  </data>
-  <data name="QUESTION_REMOVE_AD_USER_MANY" xml:space="preserve">
-    <value>Are you sure you want to remove these {0} users?</value>
-  </data>
-  <data name="QUESTION_REMOVE_AD_USER_ONE" xml:space="preserve">
-    <value>Are you sure you want to remove the user '{0}'?</value>
-  </data>
   <data name="QUIESCED_SNAPSHOTS" xml:space="preserve">
     <value>Quiesced snapshots</value>
   </data>
@@ -14773,5 +14793,11 @@ Any disk in your VM's DVD drive will be ejected when installing {1}.</value>
   </data>
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>You are here</value>
+  </data>
+  <data name="AD_ADDING_REMOVING_ROLES_ON_MULTIPLE" xml:space="preserve">
+    <value>Assigning new roles to subjects '{0}'</value>
+  </data>
+  <data name="TERMINATING_USER_SESSION_MULTIPLE" xml:space="preserve">
+    <value>Terminating session for users '{0}'</value>
   </data>
 </root>

@@ -86,57 +86,53 @@ namespace XenAdmin.Commands
 
         private bool Run(IXenConnection connection, bool prompt)
         {
-            if (prompt)
-            {
-                return PromptAndDisconnectServer(connection);
-            }
-            
-            // no prompt. All tasks are cancelled and the server disconnected
-            ConnectionsManager.CancelAllActions(connection);
+            if (!ConfirmCancelRunningActions(MainWindowCommandInterface, Parent, connection, prompt))
+                return false;
+
             DoDisconnect(connection);
             return true;
         }
 
-        /// <summary>
-        /// First prompts the user if there are any actions running, then cancels and d/c if they give the OK.
-        /// </summary>
-        /// <param name="connection"></param>
-        /// <returns>True if the user agreed to d/c and cancel their tasks, false if we are going to remain connected</returns>
-        private bool PromptAndDisconnectServer(IXenConnection connection)
+        public static bool ConfirmCancelRunningActions(IMainWindow mainWindow, IWin32Window parent, IXenConnection connection, bool prompt)
         {
-            if (!AllActionsFinished(connection, true))
+            if (prompt)
             {
-                if (MainWindowCommandInterface.RunInAutomatedTestMode ||
-                    new CloseXenCenterWarningDialog(connection).ShowDialog(Parent) == DialogResult.OK)
+                if (!AllActionsFinished(connection, true))
                 {
-                    ConnectionsManager.CancelAllActions(connection);
-
-                    DelegatedAsyncAction waitForCancelAction = new DelegatedAsyncAction(connection,
-                        Messages.CANCELING_TASKS, Messages.CANCELING, Messages.COMPLETED,
-                        delegate
-                        {
-                            DateTime startTime = DateTime.Now;
-                            while ((DateTime.Now - startTime).TotalSeconds < 6.0)
-                            {
-                                if (AllActionsFinished(connection, false))
-                                    break;
-
-                                Thread.Sleep(2000);
-                            }
-                        });
-
-                    using (var pd = new ActionProgressDialog(waitForCancelAction, ProgressBarStyle.Marquee))
+                    if (mainWindow.RunInAutomatedTestMode ||
+                        new CloseXenCenterWarningDialog(connection).ShowDialog(parent) == DialogResult.OK)
                     {
-                        pd.ShowDialog(Parent);
+                        ConnectionsManager.CancelAllActions(connection);
+
+                        var waitForCancelAction = new DelegatedAsyncAction(connection,
+                            Messages.CANCELING_TASKS, Messages.CANCELING, Messages.COMPLETED,
+                            delegate
+                            {
+                                DateTime startTime = DateTime.Now;
+                                while ((DateTime.Now - startTime).TotalSeconds < 6.0)
+                                {
+                                    if (AllActionsFinished(connection, false))
+                                        break;
+
+                                    Thread.Sleep(2000);
+                                }
+                            });
+
+                        using (var pd = new ActionProgressDialog(waitForCancelAction, ProgressBarStyle.Marquee))
+                            pd.ShowDialog(parent);
+                    }
+                    else
+                    {
+                        return false;
                     }
                 }
-                else
-                {
-                    return false;
-                }
+            }
+            else
+            {
+                // no prompt. All tasks are cancelled and the server disconnected
+                ConnectionsManager.CancelAllActions(connection);
             }
 
-            DoDisconnect(connection);
             return true;
         }
 
@@ -154,7 +150,7 @@ namespace XenAdmin.Commands
             MainWindowCommandInterface.SaveServerList();
         }
 
-        private bool AllActionsFinished(IXenConnection connection, bool treatCancelingAsFinished)
+        private static bool AllActionsFinished(IXenConnection connection, bool treatCancelingAsFinished)
         {
             foreach (ActionBase action in ConnectionsManager.History)
             {
@@ -163,8 +159,7 @@ namespace XenAdmin.Commands
 
                 if (treatCancelingAsFinished)
                 {
-                    AsyncAction a = action as AsyncAction;
-                    if (a != null && a.Cancelling)
+                    if (action is AsyncAction a && a.Cancelling)
                         continue;
                 }
 

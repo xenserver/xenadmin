@@ -3780,6 +3780,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Assigning new roles to subjects &apos;{0}&apos;.
+        /// </summary>
+        public static string AD_ADDING_REMOVING_ROLES_ON_MULTIPLE {
+            get {
+                return ResourceManager.GetString("AD_ADDING_REMOVING_ROLES_ON_MULTIPLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to (Always granted access).
         /// </summary>
         public static string AD_ALWAYS_GRANTED_ACCESS {
@@ -3855,6 +3864,32 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You are about to revoke the permissions for user &apos;{0}&apos;.
+        ///
+        ///You are currently logged in as &apos;{0}&apos; on &apos;{1}&apos;, and doing this will disconnect you from &apos;{1}&apos;. To reconnect, you will need to supply the local root account credentials, or the credentials for another authorized AD user.
+        ///
+        ///Do you want to continue?.
+        /// </summary>
+        public static string AD_CONFIRM_LOGOUT_CURRENT_USER {
+            get {
+                return ResourceManager.GetString("AD_CONFIRM_LOGOUT_CURRENT_USER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are about to revoke the permissions for group &apos;{0}&apos;.
+        ///
+        ///The user you are currently logged into &apos;{1}&apos; with is a member of &apos;{0}&apos;. Proceeding will disconnect you and any other members of this group from &apos;{1}&apos;. To reconnect, you will need to supply the local root account credentials, or the credentials for another authorized AD user.
+        ///
+        ///Do you want to continue?.
+        /// </summary>
+        public static string AD_CONFIRM_LOGOUT_CURRENT_USER_GROUP {
+            get {
+                return ResourceManager.GetString("AD_CONFIRM_LOGOUT_CURRENT_USER_GROUP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to terminate this user session?
         ///
         ///This will disconnect you from &apos;{0}&apos;..
@@ -3871,32 +3906,6 @@ namespace XenAdmin {
         public static string AD_CONFIRM_SELF_TERMINATE_OK {
             get {
                 return ResourceManager.GetString("AD_CONFIRM_SELF_TERMINATE_OK", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You are about to revoke the permissions for user &apos;{0}&apos;.
-        ///
-        ///You are currently logged in as &apos;{0}&apos; on &apos;{1}&apos;, and doing this will disconnect you from &apos;{1}&apos;. To reconnect, you will need to supply the local root account credentials, or the credentials for another authorized AD user.
-        ///
-        ///Do you want to continue?.
-        /// </summary>
-        public static string AD_CONFIRM_SUICIDE {
-            get {
-                return ResourceManager.GetString("AD_CONFIRM_SUICIDE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You are about to revoke the permissions for group &apos;{0}&apos;.
-        ///
-        ///The user you are currently logged into &apos;{1}&apos; with is a member of &apos;{0}&apos;. Proceeding will disconnect you and any other members of this group from &apos;{1}&apos;. To reconnect, you will need to supply the local root account credentials, or the credentials for another authorized AD user.
-        ///
-        ///Do you want to continue?.
-        /// </summary>
-        public static string AD_CONFIRM_SUICIDE_GROUP {
-            get {
-                return ResourceManager.GetString("AD_CONFIRM_SUICIDE_GROUP", resourceCulture);
             }
         }
         
@@ -4051,24 +4060,86 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You are currently logged in as one of the selected users. If you continue you will be logged out of &apos;{0}&apos;.
+        ///   Looks up a localized string similar to You are currently logged in as one of the selected users. If you continue, you will be logged out of &apos;{0}&apos;. All other selected users will also be logged out.
         ///
-        ///Do you want to continue?.
+        ///Are you sure you want to continue?.
         /// </summary>
-        public static string AD_LOGOUT_SUICIDE_MANY {
+        public static string AD_LOGOUT_CURRENT_USER_MANY {
             get {
-                return ResourceManager.GetString("AD_LOGOUT_SUICIDE_MANY", resourceCulture);
+                return ResourceManager.GetString("AD_LOGOUT_CURRENT_USER_MANY", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You are currently logged in as the selected user. If you continue you will be logged out of &apos;{0}&apos;.
+        ///   Looks up a localized string similar to You are currently logged in as one of the selected users. If you assign a new role, you will be logged out of &apos;{0}&apos;. All other selected users that are logged in will also be logged out.
         ///
-        ///Do you want to continue?.
+        ///Are you sure you want to continue?.
         /// </summary>
-        public static string AD_LOGOUT_SUICIDE_ONE {
+        public static string AD_LOGOUT_CURRENT_USER_MANY_ROLE_CHANGE {
             get {
-                return ResourceManager.GetString("AD_LOGOUT_SUICIDE_ONE", resourceCulture);
+                return ResourceManager.GetString("AD_LOGOUT_CURRENT_USER_MANY_ROLE_CHANGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are currently logged in as the selected user. If you continue, you will be logged out of &apos;{0}&apos;.
+        ///
+        ///Are you sure you want to continue?.
+        /// </summary>
+        public static string AD_LOGOUT_CURRENT_USER_ONE {
+            get {
+                return ResourceManager.GetString("AD_LOGOUT_CURRENT_USER_ONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are currently logged in as the selected user. If you assign a new role, you will be logged out of &apos;{0}&apos;.
+        ///
+        ///Are you sure you want to continue?.
+        /// </summary>
+        public static string AD_LOGOUT_CURRENT_USER_ONE_ROLE_CHANGE {
+            get {
+                return ResourceManager.GetString("AD_LOGOUT_CURRENT_USER_ONE_ROLE_CHANGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to log out these {0} users?.
+        /// </summary>
+        public static string AD_LOGOUT_USER_MANY {
+            get {
+                return ResourceManager.GetString("AD_LOGOUT_USER_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you assign a new role to logged in users, they will be logged out.
+        ///
+        ///Are you sure you want to continue?.
+        /// </summary>
+        public static string AD_LOGOUT_USER_MANY_ROLE_CHANGE {
+            get {
+                return ResourceManager.GetString("AD_LOGOUT_USER_MANY_ROLE_CHANGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to log out the user &apos;{0}&apos;?.
+        /// </summary>
+        public static string AD_LOGOUT_USER_ONE {
+            get {
+                return ResourceManager.GetString("AD_LOGOUT_USER_ONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you assign a new role to user &apos;{0}&apos;, the user will be logged out.
+        ///
+        ///Are you sure you want to continue?.
+        /// </summary>
+        public static string AD_LOGOUT_USER_ONE_ROLE_CHANGE {
+            get {
+                return ResourceManager.GetString("AD_LOGOUT_USER_ONE_ROLE_CHANGE", resourceCulture);
             }
         }
         
@@ -4087,6 +4158,24 @@ namespace XenAdmin {
         public static string AD_NOT_CONFIGURED_BLURB_HOST {
             get {
                 return ResourceManager.GetString("AD_NOT_CONFIGURED_BLURB_HOST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to remove these {0} users?.
+        /// </summary>
+        public static string AD_REMOVE_USER_MANY {
+            get {
+                return ResourceManager.GetString("AD_REMOVE_USER_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to remove the user &apos;{0}&apos;?.
+        /// </summary>
+        public static string AD_REMOVE_USER_ONE {
+            get {
+                return ResourceManager.GetString("AD_REMOVE_USER_ONE", resourceCulture);
             }
         }
         
@@ -31830,42 +31919,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to log out these {0} users?.
-        /// </summary>
-        public static string QUESTION_LOGOUT_AD_USER_MANY {
-            get {
-                return ResourceManager.GetString("QUESTION_LOGOUT_AD_USER_MANY", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to log out the user &apos;{0}&apos;?.
-        /// </summary>
-        public static string QUESTION_LOGOUT_AD_USER_ONE {
-            get {
-                return ResourceManager.GetString("QUESTION_LOGOUT_AD_USER_ONE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to remove these {0} users?.
-        /// </summary>
-        public static string QUESTION_REMOVE_AD_USER_MANY {
-            get {
-                return ResourceManager.GetString("QUESTION_REMOVE_AD_USER_MANY", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to remove the user &apos;{0}&apos;?.
-        /// </summary>
-        public static string QUESTION_REMOVE_AD_USER_ONE {
-            get {
-                return ResourceManager.GetString("QUESTION_REMOVE_AD_USER_ONE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Quiesced snapshots.
         /// </summary>
         public static string QUIESCED_SNAPSHOTS {
@@ -36317,6 +36370,15 @@ namespace XenAdmin {
         public static string TERMINATING_USER_SESSION {
             get {
                 return ResourceManager.GetString("TERMINATING_USER_SESSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Terminating session for users &apos;{0}&apos;.
+        /// </summary>
+        public static string TERMINATING_USER_SESSION_MULTIPLE {
+            get {
+                return ResourceManager.GetString("TERMINATING_USER_SESSION_MULTIPLE", resourceCulture);
             }
         }
         
