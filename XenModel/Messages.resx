@@ -12968,12 +12968,12 @@ Please check your settings and try again.</value>
     <value>{0}: Check skipped because WLB is enabled on pool {1}.</value>
   </data>
   <data name="UPDATE_DISMISS_ALL_CONTINUE" xml:space="preserve">
-    <value>You have applied filters to the list of updates. Do you want to dismiss all updates from every connected server, or only the updates you have chosen to view? In both cases the dismissed updates will be removed from the servers permanently.
+    <value>You have applied filters to the list of update notifications. Do you want to dismiss all update notifications for every connected server, or only the update notifications you have chosen to view?
 
 Note that if RBAC is enabled, only updates which you have privileges to dismiss will be affected.</value>
   </data>
   <data name="UPDATE_DISMISS_ALL_NO_FILTER_CONTINUE" xml:space="preserve">
-    <value>This operation will remove permanently all updates from every connected server. Do you want to continue?
+    <value>This operation will dismiss all update notifications for every connected server. Do you want to continue?
 
 Note that if RBAC is enabled, only updates which you have privileges to dismiss will be affected.</value>
   </data>
@@ -12981,7 +12981,7 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
     <value>Are you sure you want to dismiss this update?</value>
   </data>
   <data name="UPDATE_DISMISS_SELECTED_CONFIRM" xml:space="preserve">
-    <value>This operation will remove the selected updates from the servers permanently. Do you want to continue?
+    <value>This operation will dismiss all the selected update notifications. Do you want to continue?
 
 Note that if RBAC is enabled, only updates which you have privileges to dismiss will be affected.</value>
   </data>
