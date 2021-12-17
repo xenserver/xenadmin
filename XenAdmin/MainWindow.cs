@@ -1832,8 +1832,7 @@ namespace XenAdmin
                 {
                     filepath = string.Empty;
                 }
-
-                if (filepath == string.Empty && dialog != null)
+                else if (filepath == string.Empty && dialog != null)
                 {
                     filepath = dialog.FileName;
                 }

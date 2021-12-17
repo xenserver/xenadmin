@@ -191,9 +191,8 @@ namespace XenAdmin.Dialogs
                 return;
 
             if (!(dataGridView.SelectedRows[0] is DataSourceGridViewRow row))
-            {
                 return;
-            }
+            
             var dataSource = row.Dsi.DataSource;
             if (dataSource == null)
                 return;

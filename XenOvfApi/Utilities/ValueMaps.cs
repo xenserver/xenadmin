@@ -136,7 +136,7 @@ namespace XenOvf.Utilities
                 string assemblypath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
                 string path1 = assemblypath;
-                string path2 = Path.Combine(assemblypath, "Schemas"); 
+                string path2 = Path.Combine(assemblypath, "Schemas");
 
                 foreach (string file in MofFiles)
                 {
@@ -173,7 +173,7 @@ namespace XenOvf.Utilities
                 }
             }
         }
-        private static void LoadMap(XmlDocument xd, string fieldname, Dictionary<string,string> mapdictionary)
+        private static void LoadMap(XmlDocument xd, string fieldname, Dictionary<string, string> mapdictionary)
         {
             mapdictionary.Clear();
             XmlNodeList xmlOSTypeValuesMap = null;
@@ -181,7 +181,7 @@ namespace XenOvf.Utilities
             XmlNodeList xnl = xd.SelectNodes("CIM/DECLARATION/DECLGROUP/VALUE.OBJECT/CLASS/PROPERTY");
             foreach (XmlNode xn in xnl)
             {
-                if (xn.Attributes == null) 
+                if (xn.Attributes == null)
                     continue;
                 foreach (XmlAttribute xa in xn.Attributes)
                 {
@@ -189,14 +189,17 @@ namespace XenOvf.Utilities
                     {
                         foreach (XmlNode xn1 in xn.ChildNodes)
                         {
-                            if (xn1.Name.ToUpper().Equals("QUALIFIER") && xn1.Attributes.GetNamedItem("NAME").Value
-                                .ToUpper().Equals("VALUEMAP"))
+                            if (xn1.Attributes == null)
+                                continue;
+
+                            if (xn1.Name.ToUpper().Equals("QUALIFIER") &&
+                                xn1.Attributes.GetNamedItem("NAME").Value.ToUpper().Equals("VALUEMAP"))
                             {
                                 xmlOSTypeValuesMap = xn1.ChildNodes;
                             }
 
-                            if (xn1.Name.ToUpper().Equals("QUALIFIER") && xn1.Attributes.GetNamedItem("NAME").Value
-                                .ToUpper().Equals("VALUES"))
+                            if (xn1.Name.ToUpper().Equals("QUALIFIER") &&
+                                xn1.Attributes.GetNamedItem("NAME").Value.ToUpper().Equals("VALUES"))
                             {
                                 xmlOFTypeStrings = xn1.ChildNodes;
                             }
@@ -205,7 +208,7 @@ namespace XenOvf.Utilities
                 }
             }
 
-            if (xmlOSTypeValuesMap == null || xmlOFTypeStrings == null) 
+            if (xmlOSTypeValuesMap == null || xmlOFTypeStrings == null)
                 return;
 
             xmlOSTypeValuesMap = xmlOSTypeValuesMap[0].ChildNodes;
