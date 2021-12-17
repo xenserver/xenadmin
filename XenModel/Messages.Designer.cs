@@ -36621,7 +36621,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You have applied filters to the list of updates. Do you want to dismiss all updates from every connected server, or only the updates you have chosen to view? In both cases the dismissed updates will be removed from the servers permanently.
+        ///   Looks up a localized string similar to You have applied filters to the list of update notifications. Do you want to dismiss all update notifications for every connected server, or only the update notifications you have chosen to view?
         ///
         ///Note that if RBAC is enabled, only updates which you have privileges to dismiss will be affected..
         /// </summary>
@@ -36632,7 +36632,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This operation will remove permanently all updates from every connected server. Do you want to continue?
+        ///   Looks up a localized string similar to This operation will dismiss all update notifications for every connected server. Do you want to continue?
         ///
         ///Note that if RBAC is enabled, only updates which you have privileges to dismiss will be affected..
         /// </summary>
@@ -36652,7 +36652,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This operation will remove the selected updates from the servers permanently. Do you want to continue?
+        ///   Looks up a localized string similar to This operation will dismiss all the selected update notifications. Do you want to continue?
         ///
         ///Note that if RBAC is enabled, only updates which you have privileges to dismiss will be affected..
         /// </summary>
