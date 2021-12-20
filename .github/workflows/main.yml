@@ -25,3 +25,7 @@ jobs:
           cyg-get.bat aspell aspell-en
           $env:Path += ";C:\tools\cygwin\bin;"
           ./scripts/check_spelling.ps1 -NOISY
+
+      - name: Run string sort check
+        shell: powershell
+        run: ./scripts/check_strings_sorting.ps1 -PATH ./XenModel/Messages.resx -NOISY
