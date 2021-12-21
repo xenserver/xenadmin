@@ -33,15 +33,42 @@
 Param(
     [Parameter(Mandatory = $true, HelpMessage = "Comma separated paths of the input files")]
     [String[]]$PATHS,
+    [Parameter(HelpMessage = "Whether to also checks for .ja and .zh-CN resx files in the same directory as the input file. Files must be present.")]
+    [switch]$CHECK_LOCALIZED,
     [Parameter(HelpMessage = "Whether to list the names of the strings as they're being manipulated")]
     [switch]$NOISY
 )
 
-foreach ($path in $PATHS){
-    # Resolve relative path
-    $resolvedPath = Resolve-Path $path
-    $path = $resolvedPath.Path
-    
+#region Functions
+function Test-Paths($paths){
+    foreach($path in $paths){
+        $path = Get-Path $path
+
+        if((Test-Path $path) -ceq $false){
+            Write-Output "File $path does not exit"
+            exit 1;
+        }
+
+        if([IO.Path]::GetExtension($path) -cne ".resx"){
+            Write-Output "$path is not a .resx file"
+            exit 1;
+        }
+        
+        if($CHECK_LOCALIZED){
+            $fileName = $path.replace(".resx", "")
+            if((Test-Path "$fileName.ja.resx") -ceq $false){
+                Write-Output "Could not find Japanese localized file for $path. Exiting."
+                exit 1
+            }
+            if((Test-Path "$fileName.zh-CN.resx") -ceq $false ){
+                Write-Output "Could not find Chinese localized file for $path. Exiting."
+                exit 1
+            }
+        }
+    }
+}
+
+function Update-Strings($path){
     Write-Output "Fetching content of $path"
     
     [xml]$xml = Get-Content $path
@@ -72,6 +99,31 @@ foreach ($path in $PATHS){
     
     Write-Output "Added sorted strings"
     
-    Write-Output "Updating content of $path"
+    Write-Output "Updating content of $path`n"
     $xml.Save($path)    
 }
+
+function Get-Path($path){
+    # Resolve relative path
+    $resolvedPath = Resolve-Path $path
+    return $resolvedPath.Path
+}
+
+#endregion
+
+#region Script
+
+Test-Paths $PATHS
+
+foreach ($path in $PATHS){
+    $path = Get-Path $path
+    Update-Strings $path
+    if($CHECK_LOCALIZED){
+        $fileName = $path.replace(".resx", "")
+        Update-Strings  "$fileName.ja.resx"
+        Update-Strings "$fileName.zh-CN.resx"
+    }
+    
+}
+
+#endregion

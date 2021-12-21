@@ -33,12 +33,41 @@
 Param(
     [Parameter(Mandatory = $true, HelpMessage = "Comma separated paths of the files to check")]
     [String[]]$PATHS,
+    [Parameter(HelpMessage = "Whether to also checks for .ja and .zh-CN resx files in the same directory as the input file. Files must be present.")]
+    [switch]$CHECK_LOCALIZED,
     [Parameter(HelpMessage = "Whether to list the names of the examined strings")]
     [switch]$NOISY
 )
 
-foreach ($path in $PATHS){
+#region Functions
+function Test-Paths($paths){
+    foreach($path in $paths){
+        if((Test-Path $path) -ceq $false){
+            Write-Output "File $path does not exit"
+            exit 1;
+        }
 
+        if([IO.Path]::GetExtension($path) -cne ".resx"){
+            Write-Output "$path is not a .resx file"
+            exit 1;
+        }
+        
+        if($CHECK_LOCALIZED){
+            $fileName = $path.replace(".resx", "")
+            if((Test-Path "$fileName.ja.resx") -ceq $false){
+                Write-Output "Could not find Japanese localized file for $path. Exiting."
+                exit 1
+            }
+            if((Test-Path "$fileName.zh-CN.resx") -ceq $false ){
+                Write-Output "Could not find Chinese localized file for $path. Exiting."
+                exit 1
+            }
+        }
+    }
+}
+
+function Test-Strings($path)
+{
     Write-Output "Checking strings in $path"
 
     [xml]$xml = Get-Content $path
@@ -72,5 +101,26 @@ foreach ($path in $PATHS){
 
     Write-Output "Strings in $path are sorted`n"
 }
+
+#endregion
+
+#region Script
+
+Test-Paths $PATHS
+
+foreach ($path in $PATHS){
+    # Resolve relative path
+    $resolvedPath = Resolve-Path $path
+    $path = $resolvedPath.Path
+
+    Test-Strings $path
+    if($CHECK_LOCALIZED){
+        $fileName = $path.replace(".resx", "")
+        Test-Strings  "$fileName.ja.resx"
+        Test-Strings "$fileName.zh-CN.resx"
+    }
+}
+
 exit 0
 
+#endregion
