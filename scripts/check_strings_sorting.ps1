@@ -70,7 +70,7 @@ function Test-Strings($path)
 {
     Write-Output "Checking strings in $path"
 
-    [xml]$xml = Get-Content $path
+    [xml]$xml = Get-Content -Encoding "utf8" -Path $path
 
     $strings = $xml.root.data 
     $sortedStrings = $strings | Sort-Object name

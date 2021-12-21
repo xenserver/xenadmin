@@ -71,7 +71,7 @@ function Test-Paths($paths){
 function Update-Strings($path){
     Write-Output "Fetching content of $path"
     
-    [xml]$xml = Get-Content $path
+    [xml]$xml = Get-Content -Encoding "utf8" -Path $path
     
     $strings = $xml.root.data 
     $sortedStrings = $strings | Sort-Object name
