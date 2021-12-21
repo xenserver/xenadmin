@@ -46,9 +46,9 @@ using XenAPI;
 namespace XenAdmin.SettingsPanels
 {
     public partial class VMHAEditPage : UserControl, IEditPage
-	{
-		#region Private fields
-		private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+    {
+        #region Private fields
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private VM vm;
         private bool vmIsAgile;
@@ -72,14 +72,14 @@ namespace XenAdmin.SettingsPanels
         /// </summary>
         private readonly List<Host_metrics> hostMetrics = new List<Host_metrics>();
 
-		private readonly CollectionChangeEventHandler Host_CollectionChangedWithInvoke;
-		#endregion
+        private readonly CollectionChangeEventHandler Host_CollectionChangedWithInvoke;
+        #endregion
 
-		public VMHAEditPage()
+        public VMHAEditPage()
         {
             InitializeComponent();
             Host_CollectionChangedWithInvoke = Program.ProgramInvokeHandler(Host_CollectionChanged);
-			Text = Messages.START_UP_OPTIONS;
+            Text = Messages.START_UP_OPTIONS;
             nudStartDelay.Maximum = long.MaxValue;
             nudOrder.Maximum = long.MaxValue;
         }
@@ -100,10 +100,10 @@ namespace XenAdmin.SettingsPanels
                 {
                     return Messages.HA_STANDALONE_SERVER;
                 }
-                
+
                 if (!pool.ha_enabled)
                 {
-                	return String.Format(Messages.HA_NOT_CONFIGURED, Helpers.GetName(pool).Ellipsise(30));
+                    return String.Format(Messages.HA_NOT_CONFIGURED, Helpers.GetName(pool).Ellipsise(30));
                 }
 
                 return Helpers.RestartPriorityI18n(SelectedPriority);
@@ -112,11 +112,11 @@ namespace XenAdmin.SettingsPanels
 
         public Image Image => Images.StaticImages._000_RebootVM_h32bit_16;
 
-		#endregion
+        #endregion
 
-		#region Event handlers
+        #region Event handlers
 
-		/// <summary>
+        /// <summary>
         /// Called when the Host collection of the current VM's Connection changes.
         /// </summary>
         /// <param name="sender"></param>
@@ -176,7 +176,7 @@ namespace XenAdmin.SettingsPanels
         /// <param name="e"></param>
         private void host_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-        	Host host = (Host)sender;
+            Host host = (Host)sender;
             if (e.PropertyName == "metrics")
             {
                 // Just register on the new metrics object - assume the old one is deleted and will fire no more events
@@ -197,15 +197,15 @@ namespace XenAdmin.SettingsPanels
                 // Looks like a host has gone down
                 Repopulate();
             }
-		}
+        }
 
-		#endregion
+        #endregion
 
-		private void UpdateVMAgility(object obj)
+        private void UpdateVMAgility(object obj)
         {
             Program.AssertOffEventThread();
 
-        	try
+            try
             {
                 IXenConnection c = vm.Connection;
                 Session session = c.DuplicateSession();
@@ -229,7 +229,7 @@ namespace XenAdmin.SettingsPanels
             }
             finally
             {
-                Program.Invoke(this, delegate()
+                Program.Invoke(this, delegate ()
                 {
                     if (Populated != null)
                         Populated();
@@ -237,22 +237,22 @@ namespace XenAdmin.SettingsPanels
             }
         }
 
-		/// <param name="showScan">
-		/// True to show the scanning label and hide the HA restart priority groupbox.
-		/// </param>
-		private void ToggleScanningVmAgile(bool showScan)
-		{
-			try
-			{
-				m_tlpMain.SuspendLayout();
-				groupBoxHA.Visible = !showScan;
-				m_tlpScanning.Visible = showScan;
-			}
-			finally
-			{
-				m_tlpMain.ResumeLayout();
-			}
-		}
+        /// <param name="showScan">
+        /// True to show the scanning label and hide the HA restart priority groupbox.
+        /// </param>
+        private void ToggleScanningVmAgile(bool showScan)
+        {
+            try
+            {
+                m_tlpMain.SuspendLayout();
+                groupBoxHA.Visible = !showScan;
+                m_tlpScanning.Visible = showScan;
+            }
+            finally
+            {
+                m_tlpMain.ResumeLayout();
+            }
+        }
 
         /// <summary>
         /// Called after we determine if the selected VM is agile or not. Fills the combo box with the correct PriorityWrappers.
@@ -262,7 +262,7 @@ namespace XenAdmin.SettingsPanels
             Program.AssertOnEventThread();
 
             m_comboBoxProtectionLevel.Items.Clear();
-			ToggleScanningVmAgile(false);
+            ToggleScanningVmAgile(false);
 
             List<VM.HA_Restart_Priority> restartPriorities = VM.GetAvailableRestartPriorities(vm.Connection);
             foreach (var restartPriority in restartPriorities)
@@ -300,7 +300,7 @@ namespace XenAdmin.SettingsPanels
         private void Repopulate()
         {
             System.Diagnostics.Trace.Assert(vm != null);
-			UpdateEnablement();
+            UpdateEnablement();
             // Select the current priority from the list
             foreach (PriorityWrapper p in m_comboBoxProtectionLevel.Items)
             {
@@ -320,10 +320,10 @@ namespace XenAdmin.SettingsPanels
             Host host = Helpers.GetCoordinator(vm.Connection);
             if (host == null || Host.RestrictHA(host))
             {
-            	m_labelHaStatus.Text = Messages.HA_LICENSE_DISABLED;
-				m_tlpPriority.Visible = false;
-            	haNtolIndicator.Visible = false;
-            	m_linkLabel.Visible = false;
+                m_labelHaStatus.Text = Messages.HA_LICENSE_DISABLED;
+                m_tlpPriority.Visible = false;
+                haNtolIndicator.Visible = false;
+                m_linkLabel.Visible = false;
                 return;
             }
 
@@ -359,108 +359,108 @@ namespace XenAdmin.SettingsPanels
             }
             if (deadHosts.Count > 0)
             {
-            	m_labelHaStatus.Text = String.Format(Messages.HA_CANNOT_EDIT_WITH_DEAD_HOSTS_WRAPPED, String.Join("\n", deadHosts.ToArray()));
-				m_tlpPriority.Visible = false;
-				haNtolIndicator.Visible = false;
-				m_linkLabel.Visible = false;
-				return;
+                m_labelHaStatus.Text = String.Format(Messages.HA_CANNOT_EDIT_WITH_DEAD_HOSTS_WRAPPED, String.Join("\n", deadHosts.ToArray()));
+                m_tlpPriority.Visible = false;
+                haNtolIndicator.Visible = false;
+                m_linkLabel.Visible = false;
+                return;
             }
 
             // Disable editing if we can't find out the HA number from the server (for less privileged users).
             if (haNtolIndicator.Ntol == -1)
             {
-				m_labelHaStatus.Text = Messages.HA_NTOL_UNKNOWN;
-				m_tlpPriority.Visible = false;
-				haNtolIndicator.Visible = false;
-				m_linkLabel.Visible = false;
+                m_labelHaStatus.Text = Messages.HA_NTOL_UNKNOWN;
+                m_tlpPriority.Visible = false;
+                haNtolIndicator.Visible = false;
+                m_linkLabel.Visible = false;
                 return;
             }
 
-			m_labelHaStatus.Text = String.Format(Messages.HA_CONFIGURED, Helpers.GetName(pool).Ellipsise(30));
-			m_tlpPriority.Visible = true;
-			haNtolIndicator.Visible = true;
-			m_linkLabel.Visible = true;
+            m_labelHaStatus.Text = String.Format(Messages.HA_CONFIGURED, Helpers.GetName(pool).Ellipsise(30));
+            m_tlpPriority.Visible = true;
+            haNtolIndicator.Visible = true;
+            m_linkLabel.Visible = true;
             m_linkLabel.Text = Messages.HA_EDIT_NOW;
         }
 
         private bool ChangesMadeInHA()
         {
-        	return IsHaEditable() && (SelectedPriority != origRestartPriority || haNtolIndicator.Ntol != origNtol);    
+            return IsHaEditable() && (SelectedPriority != origRestartPriority || haNtolIndicator.Ntol != origNtol);
         }
 
         private bool ChangesMadeInStartupOptions()
         {
             return nudOrder.Value != origOrder || nudStartDelay.Value != origStartDelay;
-		}
+        }
 
-		public VM.HA_Restart_Priority SelectedPriority { get; private set; }
+        public VM.HA_Restart_Priority SelectedPriority { get; private set; }
 
-        public List<VGPU> VGpus{ private get; set; }
+        public List<VGPU> VGpus { private get; set; }
 
-		private bool IsHaEditable()
-		{
-			return m_tlpPriority.Visible || m_linkLabel.Visible || haNtolIndicator.Visible;
-		}
+        private bool IsHaEditable()
+        {
+            return m_tlpPriority.Visible || m_linkLabel.Visible || haNtolIndicator.Visible;
+        }
 
-		#region IEditPage implementation
+        #region IEditPage implementation
 
-		/// <summary>
-		/// Must be a VM.
-		/// </summary>
-		public void SetXenObjects(IXenObject orig, IXenObject clone)
-		{
-			// This should only ever be set once
-			System.Diagnostics.Trace.Assert(vm == null);
-			vm = (VM)clone;
+        /// <summary>
+        /// Must be a VM.
+        /// </summary>
+        public void SetXenObjects(IXenObject orig, IXenObject clone)
+        {
+            // This should only ever be set once
+            System.Diagnostics.Trace.Assert(vm == null);
+            vm = (VM)clone;
 
             origRestartPriority = vm.HARestartPriority();
-		    SelectedPriority = origRestartPriority;
-			origOrder = vm.order;
-			origStartDelay = vm.start_delay;
+            SelectedPriority = origRestartPriority;
+            origOrder = vm.order;
+            origStartDelay = vm.start_delay;
 
-			Repopulate();
-			haNtolIndicator.Connection = vm.Connection;
-			haNtolIndicator.Settings = Helpers.GetVmHaRestartPriorities(vm.Connection, Properties.Settings.Default.ShowHiddenVMs);
-			haNtolIndicator.UpdateInProgressChanged += haNtolIndicator_UpdateInProgressChanged;
+            Repopulate();
+            haNtolIndicator.Connection = vm.Connection;
+            haNtolIndicator.Settings = Helpers.GetVmHaRestartPriorities(vm.Connection, Properties.Settings.Default.ShowHiddenVMs);
+            haNtolIndicator.UpdateInProgressChanged += haNtolIndicator_UpdateInProgressChanged;
 
-			// Put property changed listener on pool, disable edits if HA becomes disabled
-			pool = Helpers.GetPoolOfOne(vm.Connection);
-			if (pool != null)
-			{
-				pool.PropertyChanged += pool_PropertyChanged;
+            // Put property changed listener on pool, disable edits if HA becomes disabled
+            pool = Helpers.GetPoolOfOne(vm.Connection);
+            if (pool != null)
+            {
+                pool.PropertyChanged += pool_PropertyChanged;
                 origNtol = pool.ha_host_failures_to_tolerate;
             }
 
             // Put property changed listener on all hosts to listen for changes in their Host_metrics
             foreach (Host host in vm.Connection.Cache.Hosts)
-			{
-				host.PropertyChanged += host_PropertyChanged;
-				// Remember the host so we can deregister the listener later
-				hosts.Add(host);
-				// Also register on the current metrics object - we need to know if a host goes down
-				Host_metrics metrics = vm.Connection.Resolve(host.metrics);
-				if (metrics != null)
-				{
-					metrics.PropertyChanged += metrics_PropertyChanged;
-					// Remember the metrics object so we can deregister the listener later
-					hostMetrics.Add(metrics);
-				}
-			}
+            {
+                host.PropertyChanged += host_PropertyChanged;
+                // Remember the host so we can deregister the listener later
+                hosts.Add(host);
+                // Also register on the current metrics object - we need to know if a host goes down
+                Host_metrics metrics = vm.Connection.Resolve(host.metrics);
+                if (metrics != null)
+                {
+                    metrics.PropertyChanged += metrics_PropertyChanged;
+                    // Remember the metrics object so we can deregister the listener later
+                    hostMetrics.Add(metrics);
+                }
+            }
 
-			// Listen for new hosts so that we can add metrics listeners
-			vm.Connection.Cache.RegisterCollectionChanged<Host>(Host_CollectionChangedWithInvoke);
+            // Listen for new hosts so that we can add metrics listeners
+            vm.Connection.Cache.RegisterCollectionChanged<Host>(Host_CollectionChangedWithInvoke);
 
-			// Start thread to determine if VM is agile
-			ToggleScanningVmAgile(true);
+            // Start thread to determine if VM is agile
+            ToggleScanningVmAgile(true);
 
-			Thread t = new Thread(UpdateVMAgility);
-			t.Name = "Updater for VM agility for " + Helpers.GetName(vm);
-			t.IsBackground = true;
-			t.Priority = ThreadPriority.Highest;
-			t.Start();
-		}
+            Thread t = new Thread(UpdateVMAgility);
+            t.Name = "Updater for VM agility for " + Helpers.GetName(vm);
+            t.IsBackground = true;
+            t.Priority = ThreadPriority.Highest;
+            t.Start();
+        }
 
-		public bool HasChanged
+        public bool HasChanged
         {
             get
             {
@@ -520,7 +520,7 @@ namespace XenAdmin.SettingsPanels
                     return true;
 
                 // If skankPanel is disabled, so is editing
-            	var validToSaveHA = !IsHaEditable() || this.vm != null && !haNtolIndicator.UpdateInProgress && haNtolIndicator.Ntol >= 0;
+                var validToSaveHA = !IsHaEditable() || this.vm != null && !haNtolIndicator.UpdateInProgress && haNtolIndicator.Ntol >= 0;
 
                 var validToSaveStartupOptions = this.vm != null;
 
@@ -537,55 +537,55 @@ namespace XenAdmin.SettingsPanels
             var settings = new Dictionary<VM, VMStartupOptions>();
             if (ChangesMadeInHA() && PoolHasHAEnabled)
             {
-                settings[vm] = new VMStartupOptions((long) nudOrder.Value, (long) nudStartDelay.Value, SelectedPriority);
+                settings[vm] = new VMStartupOptions((long)nudOrder.Value, (long)nudStartDelay.Value, SelectedPriority);
                 return new SetHaPrioritiesAction(vm.Connection, settings, haNtolIndicator.Ntol, true);
             }
 
             settings[vm] = new VMStartupOptions((long)nudOrder.Value, (long)nudStartDelay.Value);
             return new SetVMStartupOptionsAction(vm.Connection, settings, true);
-		}
+        }
 
-		#endregion
+        #endregion
 
-		#region Control Event handlers
+        #region Control Event handlers
 
-		private void haNtolIndicator_UpdateInProgressChanged(object sender, EventArgs e)
-		{
-			UpdateEnablement();
-		}
+        private void haNtolIndicator_UpdateInProgressChanged(object sender, EventArgs e)
+        {
+            UpdateEnablement();
+        }
 
-		private void comboBoxRestartPriority_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			if (vm == null)
-				return;
+        private void comboBoxRestartPriority_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (vm == null)
+                return;
 
-		    var pw = m_comboBoxProtectionLevel.SelectedItem as PriorityWrapper;
+            var pw = m_comboBoxProtectionLevel.SelectedItem as PriorityWrapper;
             if (pw != null)
                 SelectedPriority = pw.Priority;
 
             comboLabel.Text = Helpers.RestartPriorityDescription(SelectedPriority);
 
-			var settings = Helpers.GetVmHaRestartPriorities(vm.Connection, Properties.Settings.Default.ShowHiddenVMs);
-			// Supplement with the changed setting
+            var settings = Helpers.GetVmHaRestartPriorities(vm.Connection, Properties.Settings.Default.ShowHiddenVMs);
+            // Supplement with the changed setting
             settings[vm] = SelectedPriority;
 
-			// This will trigger an update in the ntol indicator.
-			haNtolIndicator.Settings = settings;
-		}
+            // This will trigger an update in the ntol indicator.
+            haNtolIndicator.Settings = settings;
+        }
 
-		private void m_linkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-		{
-			if (pool == null)
-				return;
-			
+        private void m_linkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (pool == null)
+                return;
+
             var cmd = new HAConfigureCommand(Program.MainWindow, pool);
             if (cmd.CanRun())
                 cmd.Run();
-		}
+        }
 
-		#endregion
+        #endregion
 
-		private class PriorityWrapper
+        private class PriorityWrapper
         {
             public readonly VM.HA_Restart_Priority Priority;
 

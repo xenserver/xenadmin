@@ -68,10 +68,9 @@ namespace XenCenterLib
             get => base[index];
             set
             {
-                var oldValue = base[index];
-                base[index] = value;
-                if (!oldValue.Equals(value))
+                if (!base[index].Equals(value))
                 {
+                    base[index] = value;
                     OnCollectionChanged(new CollectionChangeEventArgs(CollectionChangeAction.Refresh, value));
                 }
             }
