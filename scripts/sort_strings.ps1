@@ -31,45 +31,47 @@
 #Requires -Version 3.0
 
 Param(
-    [Parameter(Mandatory = $true, HelpMessage = "Path of the input file")]
-    [String]$PATH,
+    [Parameter(Mandatory = $true, HelpMessage = "Comma separated paths of the input files")]
+    [String[]]$PATHS,
     [Parameter(HelpMessage = "Whether to list the names of the strings as they're being manipulated")]
     [switch]$NOISY
 )
 
-# Resolve relative path
-$resolvedPath = Resolve-Path $PATH
-$PATH = $resolvedPath.Path
-
-Write-Output "Fetching content of $PATH"
-
-[xml]$xml = Get-Content $PATH
-
-$strings = $xml.root.data 
-$sortedStrings = $strings | Sort name
-$count = $strings.length
-
-Write-Output "Found $count strings"
-
-foreach ($_ in $strings) {
-    if($NOISY){
-        Write-Output "Removing string $($_.name)"
+foreach ($path in $PATHS){
+    # Resolve relative path
+    $resolvedPath = Resolve-Path $path
+    $path = $resolvedPath.Path
+    
+    Write-Output "Fetching content of $path"
+    
+    [xml]$xml = Get-Content $path
+    
+    $strings = $xml.root.data 
+    $sortedStrings = $strings | Sort-Object name
+    $count = $strings.length
+    
+    Write-Output "Found $count strings"
+    
+    foreach ($_ in $strings) {
+        if($NOISY){
+            Write-Output "Removing string $($_.name)"
+        }
+        # ignore stdout
+        $xml.root.RemoveChild($_) >  $null
     }
-    # ignore stdout
-    $xml.root.RemoveChild($_) >  $null
-}
-
-Write-Output "Removed unsorted strings"
-
-foreach ($_ in $sortedStrings) {
-    if($NOISY){
-        Write-Output "Adding string $($_.name)"
+    
+    Write-Output "Removed unsorted strings"
+    
+    foreach ($_ in $sortedStrings) {
+        if($NOISY){
+            Write-Output "Adding string $($_.name)"
+        }
+        # ignore stdout
+        $xml.root.AppendChild($_) >  $null
     }
-    # ignore stdout
-    $xml.root.AppendChild($_) >  $null
+    
+    Write-Output "Added sorted strings"
+    
+    Write-Output "Updating content of $path"
+    $xml.Save($path)    
 }
-
-Write-Output "Added sorted strings"
-
-Write-Output "Updating content of $PATH"
-$xml.Save($PATH)

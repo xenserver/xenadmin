@@ -31,39 +31,46 @@
 #Requires -Version 3.0
 
 Param(
-    [Parameter(Mandatory = $true, HelpMessage = "Path of the Messages.resx file.")]
-    [String]$PATH,
+    [Parameter(Mandatory = $true, HelpMessage = "Comma separated paths of the files to check")]
+    [String[]]$PATHS,
     [Parameter(HelpMessage = "Whether to list the names of the examined strings")]
     [switch]$NOISY
 )
 
-[xml]$xml = Get-Content $PATH
+foreach ($path in $PATHS){
 
-$strings = $xml.root.data 
-$sortedStrings = $strings | Sort name
+    Write-Output "Checking strings in $path"
 
-for ($i = 0; $i -lt $strings.length ; $i++) {
-    # check that the node contains a name property
-    if("name" -cnotin $strings[$i].PSobject.Properties.Name)
-    {
-        Write-Output "The following data object is missing a $PROPERTY property. Make sure the input file is correctly formatted"
-        Write-Output $strings[$i]
-        exit 1
+    [xml]$xml = Get-Content $path
+
+    $strings = $xml.root.data 
+    $sortedStrings = $strings | Sort-Object name
+
+    for ($i = 0; $i -lt $strings.length ; $i++) {
+        # check that the node contains a name property
+        if("name" -cnotin $strings[$i].PSobject.Properties.Name)
+        {
+            Write-Output "The following data object is missing a $PROPERTY property. Make sure the input file is correctly formatted"
+            Write-Output $strings[$i]
+            exit 1
+        }
+
+        $stringsName = $strings[$i].name
+        $sortedStringsName = $sortedStrings[$i].name
+
+        if($NOISY){
+            Write-Output "Checking $stringsName against expected string $sortedStringsName"
+        }
+    
+        if ($stringsName -ne $sortedStringsName) {
+            Write-Output "`nThe content of $path isn't sorted alphabetically."
+            Write-Output "Please sort it using the script in scripts/sort_strings.ps1:"
+            Write-Output "./sort_strings.ps1 -PATHS $path"
+            exit 1
+        }
     }
 
-    $stringsName = $strings[$i].name
-    $sortedStringsName = $sortedStrings[$i].name
-
-    if($NOISY){
-        Write-Output "Checking $stringsName against expected string $sortedStringsName"
-    }
-   
-    if ($stringsName -ne $sortedStringsName) {
-        Write-Output "The content of $PATH isn't sorted alphabetically. Please sort it using the script in scripts/sort_strings.ps1."
-        exit 1
-    }
+    Write-Output "Strings in $path are sorted`n"
 }
-
-Write-Output "Strings in $PATH are sorted"
-
 exit 0
+
