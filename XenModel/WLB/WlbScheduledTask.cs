@@ -690,22 +690,19 @@ namespace XenAdmin.Wlb
                 Dictionary<string, string> taskDictionary = scheduleTask.ToDictionary();
                 foreach (string key in taskDictionary.Keys)
                 {
-                    if (null == collectionDictionary)
+                    if (collectionDictionary == null)
                     {
                         collectionDictionary = new Dictionary<string, string>();
                     }
                     collectionDictionary.Add(key, taskDictionary[key]);
                 }
-                foreach (string key in scheduleTask.TaskParameters.Keys)
+
+                if (collectionDictionary != null)
                 {
-                    string complexKey = string.Format("{0}_{1}_{2}", scheduleTask.KeyBase, scheduleTask.TaskId.ToString(), key);
-                    if (collectionDictionary.ContainsKey(complexKey))
+                    foreach (var key in scheduleTask.TaskParameters.Keys)
                     {
+                        var complexKey = $"{scheduleTask.KeyBase}_{scheduleTask.TaskId}_{key}";
                         collectionDictionary[complexKey] = scheduleTask.TaskParameters[key];
-                    }
-                    else
-                    {
-                        collectionDictionary.Add(complexKey, scheduleTask.TaskParameters[key]);
                     }
                 }
             }

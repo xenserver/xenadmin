@@ -276,7 +276,7 @@ namespace XenAdmin.Actions
                 WriteTrustedCertificates(coordinator.Connection);
             }
 
-            string sessionRef = connection.Session != null ? connection.Session.opaque_ref : EmptyParameter;
+            string sessionRef = connection?.Session != null ? connection.Session.opaque_ref : EmptyParameter;
             string objCls = BlankParamter;
             string objUuid = BlankParamter;
             return new List<string>(new string[] { coordinatorAddress, sessionRef, objCls, objUuid });

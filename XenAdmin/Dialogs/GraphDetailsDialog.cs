@@ -190,8 +190,10 @@ namespace XenAdmin.Dialogs
             if (graphList.XenObject?.Connection == null || dataGridView.SelectedRows.Count != 1)
                 return;
 
-            var row = dataGridView.SelectedRows[0] as DataSourceGridViewRow;
-            var dataSource = row?.Dsi.DataSource;
+            if (!(dataGridView.SelectedRows[0] is DataSourceGridViewRow row))
+                return;
+            
+            var dataSource = row.Dsi.DataSource;
             if (dataSource == null)
                 return;
 

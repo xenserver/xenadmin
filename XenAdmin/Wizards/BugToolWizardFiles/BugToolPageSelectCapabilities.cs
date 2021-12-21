@@ -351,16 +351,11 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             totalSize = Helpers.StringFromMaxMinSizeList(sizeMinList, sizeMaxList);
         }
 
-        public List<Capability> Capabilities
-        {
-            get
-            {
-                return (from DataGridViewRow row in dataGridViewItems.Rows
-                    let capRow = row as CapabilityRow
-                    where capRow != null && capRow.Capability.Checked
-                    select capRow.Capability).ToList();
-            }
-        }
+        public List<Capability> CheckedCapabilities =>
+            (from DataGridViewRow row in dataGridViewItems.Rows
+                let capRow = row as CapabilityRow
+                where capRow != null && capRow.Capability.Checked
+                select capRow.Capability).ToList();
 
         #region Control event handlers
 

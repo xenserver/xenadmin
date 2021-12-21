@@ -350,17 +350,21 @@ namespace XenOvf
                 sectionArray = env.Sections;
             }
 
-            foreach (Section_Type sect in sectionArray)
+            if (sectionArray != null)
             {
-                if (sect is DeploymentOptionSection_Type)
+                foreach (Section_Type sect in sectionArray)
                 {
-                    dos = (DeploymentOptionSection_Type)sect;
-                }
-                else
-                {
-                    sections.Add(sect);
+                    if (sect is DeploymentOptionSection_Type)
+                    {
+                        dos = (DeploymentOptionSection_Type)sect;
+                    }
+                    else
+                    {
+                        sections.Add(sect);
+                    }
                 }
             }
+            
             if (dos == null)
             {
                 dos = new DeploymentOptionSection_Type();
@@ -591,7 +595,7 @@ namespace XenOvf
                 sections.Add(eulaSection);
                 ovfEnv.Item.Items = sections.ToArray();
             }
-            return eulaSection.Id;
+            return eulaSection?.Id;
         }
         /// <summary>
         /// Add an external file
@@ -4164,21 +4168,24 @@ namespace XenOvf
                 contentArray = new Content_Type[] { (VirtualSystem_Type)(ovfEnv.Item) };
             }
 
-            foreach (Content_Type vsType in contentArray)
+            if (contentArray != null)
             {
-                if (vsType is VirtualSystem_Type)
+                foreach (Content_Type vsType in contentArray)
                 {
-                    VirtualSystem_Type vst = (VirtualSystem_Type)vsType;
-                    if (vst.id.Equals(vsId))
+                    if (vsType is VirtualSystem_Type)
                     {
-                        foreach (object obj in vst.Items)
+                        VirtualSystem_Type vst = (VirtualSystem_Type)vsType;
+                        if (vst.id.Equals(vsId))
                         {
-                            if (obj is VirtualHardwareSection_Type)
+                            foreach (object obj in vst.Items)
                             {
-                                vhs.Add((VirtualHardwareSection_Type)obj);
+                                if (obj is VirtualHardwareSection_Type)
+                                {
+                                    vhs.Add((VirtualHardwareSection_Type)obj);
+                                }
                             }
+                            break;
                         }
-                        break;
                     }
                 }
             }

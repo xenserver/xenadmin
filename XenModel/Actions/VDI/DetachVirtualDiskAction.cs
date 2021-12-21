@@ -90,7 +90,8 @@ namespace XenAdmin.Actions
             finally
             {
                 PercentComplete = 50;
-                RelatedTask = XenAPI.VBD.async_destroy(Session, vbd.opaque_ref);
+                if(vbd != null)
+                    RelatedTask = XenAPI.VBD.async_destroy(Session, vbd.opaque_ref);
                 PollToCompletion(51, 100);
             }
             Description = Messages.ACTION_DISK_DETACHED;

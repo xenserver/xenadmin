@@ -63,9 +63,12 @@ namespace XenAdmin.ServerDBs.FakeAPI
                 }
             }
 
-            // add host to pool
-            destination.db.Tables["host"].Rows.Add(hostRef, this.proxy.db.Tables["host"].Rows[hostRef].CopyOf());
-            destination.SendCreateObject("host", hostRef);
+            if (destination != null)
+            {
+                // add host to pool
+                destination.db.Tables["host"].Rows.Add(hostRef, this.proxy.db.Tables["host"].Rows[hostRef].CopyOf());
+                destination.SendCreateObject("host", hostRef);
+            }
 
             // remove host from this db.
             return destroyObj("host", hostRef);

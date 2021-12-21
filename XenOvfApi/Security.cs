@@ -471,24 +471,28 @@ namespace XenOvf
                             break;
                         }
                     }
-                    foreach (Security_Type securitytype in securitysection.Security)
+
+                    if (securitysection != null)
                     {
-                        foreach (XenOvf.Definitions.XENC.ReferenceType dataref in securitytype.ReferenceList.Items)
+                        foreach (Security_Type securitytype in securitysection.Security)
                         {
-                            if (dataref is DataReference)
+                            foreach (XenOvf.Definitions.XENC.ReferenceType dataref in securitytype.ReferenceList.Items)
                             {
-                                fileuuids += ":" + ((DataReference)dataref).ValueType;
+                                if (dataref is DataReference)
+                                {
+                                    fileuuids += ":" + ((DataReference)dataref).ValueType;
+                                }
                             }
-                        }
-                        if (securitytype.EncryptionMethod != null &&
-                            securitytype.EncryptionMethod.Algorithm != null)
-                        {
-                            cryptoclassType = GetAlgorithmClass(securitytype.EncryptionMethod.Algorithm);
-                            keysize = Convert.ToInt32(securitytype.EncryptionMethod.KeySize);
-                        }
-                        if (!string.IsNullOrEmpty(securitytype.version))
-                        {
-                            version = securitytype.version;
+                            if (securitytype.EncryptionMethod != null &&
+                                securitytype.EncryptionMethod.Algorithm != null)
+                            {
+                                cryptoclassType = GetAlgorithmClass(securitytype.EncryptionMethod.Algorithm);
+                                keysize = Convert.ToInt32(securitytype.EncryptionMethod.KeySize);
+                            }
+                            if (!string.IsNullOrEmpty(securitytype.version))
+                            {
+                                version = securitytype.version;
+                            }
                         }
                     }
                 }
