@@ -87,7 +87,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         {
             var vm = Connection.Resolve(new XenRef<VM>(sysId));
 
-            if(vm == null)
+            if (vm == null)
                 return null;
 
             var vifs = Connection.ResolveAll(vm.VIFs);

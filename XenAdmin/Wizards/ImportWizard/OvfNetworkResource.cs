@@ -45,6 +45,8 @@ namespace XenAdmin.Wizards.ImportWizard
             rasd = rasdType;
         }
 
+        public string VmNameOverride => null;
+
         public string NetworkName
         {
             get

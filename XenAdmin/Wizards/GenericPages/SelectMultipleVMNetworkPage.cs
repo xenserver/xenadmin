@@ -162,12 +162,18 @@ namespace XenAdmin.Wizards.GenericPages
         protected void FillTableRow(object targetRef, string sysId, string vmName)
         {
             var cb = FillGridComboBox(targetRef, sysId);
+            var networkData = NetworkData(sysId);
 
-            foreach (INetworkResource networkResource in NetworkData(sysId))
+            foreach (INetworkResource networkResource in networkData)
             {
                 var val = networkResource.NetworkName;
-                if (!string.IsNullOrEmpty(vmName))
+                var vmNameOverride = networkResource.VmNameOverride;
+
+                if (!string.IsNullOrEmpty(vmNameOverride))
+                    val = $"{vmNameOverride} - {val}";
+                else if (!string.IsNullOrEmpty(vmName))
                     val = $"{vmName} - {val}";
+
                 if (!string.IsNullOrEmpty(networkResource.MACAddress))
                     val = $"{val} ({networkResource.MACAddress})";
 
