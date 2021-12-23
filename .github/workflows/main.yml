@@ -33,8 +33,9 @@ jobs:
             -NOISY `
             -PATHS ./XenModel/Messages.resx, ./XenModel/FriendlyNames.resx, `
                   ./XenModel/InvisibleMessages.resx, ./XenModel/UnitStrings.resx, `
-                  ./XenOvfApi/Content.resx, ./XenOvfApi/Messages.resx;
-
-          ./scripts/check_strings_sorting.ps1 `
-            -NOISY `
-            -PATHS ./Branding/Branding.resx;
+                  ./XenOvfApi/Content.resx, ./XenOvfApi/Messages.resx; `
+          if($lastexitcode -eq 0){ `
+            ./scripts/check_strings_sorting.ps1 `
+              -NOISY `
+              -PATHS ./Branding/Branding.resx `
+          }
