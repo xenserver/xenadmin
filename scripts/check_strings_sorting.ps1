@@ -79,7 +79,7 @@ function Test-Strings($path)
         # check that the node contains a name property
         if("name" -cnotin $strings[$i].PSobject.Properties.Name)
         {
-            Write-Output "The following data object is missing a $PROPERTY property. Make sure the input file is correctly formatted"
+            Write-Output "The following data object is missing a name property. Make sure the input file is correctly formatted"
             Write-Output $strings[$i]
             exit 1
         }
