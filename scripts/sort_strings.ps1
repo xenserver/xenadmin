@@ -44,7 +44,7 @@ function Test-Paths($paths){
     foreach($path in $paths){
         $path = Get-Path $path
 
-        if((Test-Path $path) -ceq $false){
+        if((Test-Path $path) -eq $false){
             Write-Output "File $path does not exit"
             exit 1;
         }
@@ -56,11 +56,11 @@ function Test-Paths($paths){
         
         if($CHECK_LOCALIZED){
             $fileName = $path.replace(".resx", "")
-            if((Test-Path "$fileName.ja.resx") -ceq $false){
+            if((Test-Path "$fileName.ja.resx") -eq $false){
                 Write-Output "Could not find Japanese localized file for $path. Exiting."
                 exit 1
             }
-            if((Test-Path "$fileName.zh-CN.resx") -ceq $false ){
+            if((Test-Path "$fileName.zh-CN.resx") -eq $false ){
                 Write-Output "Could not find Chinese localized file for $path. Exiting."
                 exit 1
             }
