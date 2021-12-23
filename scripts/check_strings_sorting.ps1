@@ -33,32 +33,34 @@
 Param(
     [Parameter(Mandatory = $true, HelpMessage = "Comma separated paths of the files to check")]
     [String[]]$PATHS,
+    
     [Parameter(HelpMessage = "Whether to also checks for .ja and .zh-CN resx files in the same directory as the input file. Files must be present.")]
     [switch]$CHECK_LOCALIZED,
+
     [Parameter(HelpMessage = "Whether to list the names of the examined strings")]
     [switch]$NOISY
 )
 
 #region Functions
-function Test-Paths($paths){
-    foreach($path in $paths){
-        if((Test-Path $path) -eq $false){
+function Test-Paths($paths) {
+    foreach ($path in $paths) {
+        if ((Test-Path $path) -eq $false) {
             Write-Output "File $path does not exit"
             exit 1;
         }
 
-        if([IO.Path]::GetExtension($path) -cne ".resx"){
+        if ([IO.Path]::GetExtension($path) -cne ".resx") {
             Write-Output "$path is not a .resx file"
             exit 1;
         }
         
-        if($CHECK_LOCALIZED){
+        if ($CHECK_LOCALIZED) {
             $fileName = $path.replace(".resx", "")
-            if((Test-Path "$fileName.ja.resx") -eq $false){
+            if ((Test-Path "$fileName.ja.resx") -eq $false) {
                 Write-Output "Could not find Japanese localized file for $path. Exiting."
                 exit 1
             }
-            if((Test-Path "$fileName.zh-CN.resx") -eq $false ){
+            if ((Test-Path "$fileName.zh-CN.resx") -eq $false ) {
                 Write-Output "Could not find Chinese localized file for $path. Exiting."
                 exit 1
             }
@@ -66,8 +68,7 @@ function Test-Paths($paths){
     }
 }
 
-function Test-Strings($path)
-{
+function Test-Strings($path) {
     Write-Output "Checking strings in $path"
 
     [xml]$xml = Get-Content -Encoding "utf8" -Path $path
@@ -77,8 +78,7 @@ function Test-Strings($path)
 
     for ($i = 0; $i -lt $strings.length ; $i++) {
         # check that the node contains a name property
-        if("name" -cnotin $strings[$i].PSobject.Properties.Name)
-        {
+        if ("name" -cnotin $strings[$i].PSobject.Properties.Name) {
             Write-Output "The following data object is missing a name property. Make sure the input file is correctly formatted"
             Write-Output $strings[$i]
             exit 1
@@ -87,7 +87,7 @@ function Test-Strings($path)
         $stringsName = $strings[$i].name
         $sortedStringsName = $sortedStrings[$i].name
 
-        if($NOISY){
+        if ($NOISY) {
             Write-Output "Checking $stringsName against expected string $sortedStringsName"
         }
     
@@ -108,13 +108,13 @@ function Test-Strings($path)
 
 Test-Paths $PATHS
 
-foreach ($path in $PATHS){
+foreach ($path in $PATHS) {
     # Resolve relative path
     $resolvedPath = Resolve-Path $path
     $path = $resolvedPath.Path
 
     Test-Strings $path
-    if($CHECK_LOCALIZED){
+    if ($CHECK_LOCALIZED) {
         $fileName = $path.replace(".resx", "")
         Test-Strings  "$fileName.ja.resx"
         Test-Strings "$fileName.zh-CN.resx"

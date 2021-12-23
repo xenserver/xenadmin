@@ -40,27 +40,28 @@ Param(
 )
 
 #region Functions
-function Test-Paths($paths){
-    foreach($path in $paths){
+function Test-Paths($paths) {
+    foreach ($path in $paths) {
         $path = Get-ResolvedPath $path
 
-        if((Test-Path $path) -eq $false){
+        if ((Test-Path $path) -eq $false) {
             Write-Output "File $path does not exit"
             exit 1;
         }
 
-        if([IO.Path]::GetExtension($path) -cne ".resx"){
+        if ([IO.Path]::GetExtension($path) -cne ".resx") {
             Write-Output "$path is not a .resx file"
             exit 1;
         }
         
-        if($CHECK_LOCALIZED){
+        if ($CHECK_LOCALIZED) {
             $fileName = $path.replace(".resx", "")
-            if((Test-Path "$fileName.ja.resx") -eq $false){
+            
+            if ((Test-Path "$fileName.ja.resx") -eq $false) {
                 Write-Output "Could not find Japanese localized file for $path. Exiting."
                 exit 1
             }
-            if((Test-Path "$fileName.zh-CN.resx") -eq $false ){
+            if ((Test-Path "$fileName.zh-CN.resx") -eq $false ) {
                 Write-Output "Could not find Chinese localized file for $path. Exiting."
                 exit 1
             }
@@ -68,7 +69,7 @@ function Test-Paths($paths){
     }
 }
 
-function Update-Strings($path){
+function Update-Strings($path) {
     Write-Output "Fetching content of $path"
     
     [xml]$xml = Get-Content -Encoding "utf8" -Path $path
@@ -80,7 +81,7 @@ function Update-Strings($path){
     Write-Output "Found $count strings"
     
     foreach ($_ in $strings) {
-        if($NOISY){
+        if ($NOISY) {
             Write-Output "Removing string $($_.name)"
         }
         # ignore stdout
@@ -90,7 +91,7 @@ function Update-Strings($path){
     Write-Output "Removed unsorted strings"
     
     foreach ($_ in $sortedStrings) {
-        if($NOISY){
+        if ($NOISY) {
             Write-Output "Adding string $($_.name)"
         }
         # ignore stdout
@@ -103,7 +104,7 @@ function Update-Strings($path){
     $xml.Save($path)    
 }
 
-function Get-ResolvedPath($path){
+function Get-ResolvedPath($path) {
     # Resolve relative path
     $resolvedPath = Resolve-Path $path
     return $resolvedPath.Path
@@ -115,10 +116,10 @@ function Get-ResolvedPath($path){
 
 Test-Paths $PATHS
 
-foreach ($path in $PATHS){
+foreach ($path in $PATHS) {
     $path = Get-ResolvedPath $path
     Update-Strings $path
-    if($CHECK_LOCALIZED){
+    if ($CHECK_LOCALIZED) {
         $fileName = $path.replace(".resx", "")
         Update-Strings  "$fileName.ja.resx"
         Update-Strings "$fileName.zh-CN.resx"
