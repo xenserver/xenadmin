@@ -42,7 +42,7 @@ Param(
 #region Functions
 function Test-Paths($paths){
     foreach($path in $paths){
-        $path = Get-Path $path
+        $path = Get-ResolvedPath $path
 
         if((Test-Path $path) -eq $false){
             Write-Output "File $path does not exit"
@@ -103,7 +103,7 @@ function Update-Strings($path){
     $xml.Save($path)    
 }
 
-function Get-Path($path){
+function Get-ResolvedPath($path){
     # Resolve relative path
     $resolvedPath = Resolve-Path $path
     return $resolvedPath.Path
@@ -116,7 +116,7 @@ function Get-Path($path){
 Test-Paths $PATHS
 
 foreach ($path in $PATHS){
-    $path = Get-Path $path
+    $path = Get-ResolvedPath $path
     Update-Strings $path
     if($CHECK_LOCALIZED){
         $fileName = $path.replace(".resx", "")
