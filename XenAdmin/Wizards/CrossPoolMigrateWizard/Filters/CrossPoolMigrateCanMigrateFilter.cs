@@ -215,9 +215,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
         /// <returns>true if at least one snapshot contains a VIF not present in the VM</returns>
         private static bool SnapshotsContainExtraVIFs(VM vm)
         {
-            var snapVIFs = VM.get_snapshots(vm.Connection.Session, vm.opaque_ref)
-                .Select(vm.Connection.Resolve)
-                .SelectMany(snap => snap.VIFs);
+            var snapVIFs = vm.snapshots.Select(vm.Connection.Resolve).SelectMany(snap => snap.VIFs);
             return snapVIFs.Any(snapVIF => !vm.VIFs.Contains(snapVIF));
         }
 

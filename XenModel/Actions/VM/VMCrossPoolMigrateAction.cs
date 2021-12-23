@@ -145,7 +145,7 @@ namespace XenAdmin.Actions.VMActions
             var vmMacs = vmVifs.Select(vif => vif.MAC);
 
             // CA-359124: add VIFs that are present in the VM's snapshots, but not the VM
-            var snapVIFs = VM.get_snapshots(Connection.Session, vm.opaque_ref)
+            var snapVIFs = vm.snapshots
                 .Select(Connection.Resolve)
                 .SelectMany(snap => Connection.ResolveAll(snap.VIFs))
                 // use MAC to identify VIFs that are not in the VM, opaque_ref differentiates between VM and snapshot VIFs

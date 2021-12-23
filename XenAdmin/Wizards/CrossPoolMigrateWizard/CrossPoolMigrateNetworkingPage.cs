@@ -91,11 +91,12 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                 return null;
 
             var vifs = Connection.ResolveAll(vm.VIFs);
+            var macs = vifs.Select(v => v.MAC);
 
-            var snapVIFs = VM.get_snapshots(vm.Connection.Session, vm.opaque_ref)
+            var snapVIFs = vm.snapshots
                 .Select(vm.Connection.Resolve)
-                .SelectMany(snap => Connection.ResolveAll(snap.VIFs))
-                .Where(vif => !vifs.Select(vmVif => vmVif.MAC).Contains(vif.MAC))
+                .SelectMany(s => Connection.ResolveAll(s.VIFs))
+                .Where(v => !macs.Contains(v.MAC))
                 .ToList();
 
             vifs.AddRange(snapVIFs);
