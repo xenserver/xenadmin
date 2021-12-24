@@ -36,7 +36,7 @@ using System.Threading;
 using System.IO;
 using System.Linq;
 using System.Net.NetworkInformation;
-using XenCenterLib.Archive;
+using System.Diagnostics;
 
 namespace XenAdmin.Actions
 {
@@ -52,11 +52,9 @@ namespace XenAdmin.Actions
         private const int MAX_NUMBER_OF_TRIES = 5;
 
         private readonly Uri address;
-        private readonly string outputFileName;
+        private readonly string outputPathAndFileName;
         private readonly string updateName;
-        private readonly string[] updateFileSuffixes;
         private readonly bool downloadUpdate;
-        private readonly bool skipInstall;
         private DownloadState updateDownloadState;
         private Exception updateDownloadError;
 
@@ -64,18 +62,15 @@ namespace XenAdmin.Actions
 
         public string ByteProgressDescription { get; set; }
 
-        public DownloadAndUpdateClientAction(string patchName, Uri uri, string outputFileName, bool suppressHist,
-            params string[] updateFileExtensions)
+        public DownloadAndUpdateClientAction(string updateName, Uri uri, string outputFileName, bool suppressHist, params string[] updateFileExtensions)
             : base(null, uri == null
-                ? string.Format(Messages.UPDATES_WIZARD_EXTRACT_ACTION_TITLE, patchName)
-                : string.Format(Messages.DOWNLOAD_AND_EXTRACT_ACTION_TITLE, patchName), string.Empty, suppressHist)
+                ? string.Format(Messages.UPDATES_WIZARD_EXTRACT_ACTION_TITLE, updateName)
+                : string.Format(Messages.DOWNLOAD_AND_EXTRACT_ACTION_TITLE, updateName), string.Empty, suppressHist)
         {
-            updateName = patchName;
+            this.updateName = updateName;
             address = uri;
             downloadUpdate = address != null;
-            updateFileSuffixes = (from item in updateFileExtensions select '.' + item).ToArray();
-            skipInstall = downloadUpdate && !updateFileSuffixes.Any(item => address.ToString().Contains(item));
-            this.outputFileName = outputFileName;
+            this.outputPathAndFileName = outputFileName;
         }
 
         private WebClient client;
@@ -106,18 +101,18 @@ namespace XenAdmin.Actions
 
                     //start the download
                     updateDownloadState = DownloadState.InProgress;
-                    client.DownloadFileAsync(address, outputFileName);
+                    client.DownloadFileAsync(address, outputPathAndFileName);
 
-                    bool patchDownloadCancelling = false;
+                    bool updateDownloadCancelling = false;
 
                     //wait for the file to be downloaded
                     while (updateDownloadState == DownloadState.InProgress)
                     {
-                        if (!patchDownloadCancelling && (Cancelling || Cancelled))
+                        if (!updateDownloadCancelling && (Cancelling || Cancelled))
                         {
                             Description = Messages.DOWNLOAD_AND_EXTRACT_ACTION_DOWNLOAD_CANCELLED_DESC;
                             client.CancelAsync();
-                            patchDownloadCancelling = true;
+                            updateDownloadCancelling = true;
                         }
 
                         Thread.Sleep(SLEEP_TIME_TO_CHECK_DOWNLOAD_STATUS_MS);
@@ -176,84 +171,11 @@ namespace XenAdmin.Actions
             }
         }
 
-        private void ExtractFile()
-        {
-            ArchiveIterator iterator = null;
-            DotNetZipZipIterator zipIterator = null;
-
-            try
-            {
-                using (Stream stream = new FileStream(outputFileName, FileMode.Open, FileAccess.Read))
-                {
-                    iterator = ArchiveFactory.Reader(ArchiveFactory.Type.Zip, stream);
-                    zipIterator = iterator as DotNetZipZipIterator;
-
-                    if (zipIterator != null)
-                        zipIterator.CurrentFileExtractProgressChanged += archiveIterator_CurrentFileExtractProgressChanged;
-
-                    while (iterator.HasNext())
-                    {
-                        string currentExtension = Path.GetExtension(iterator.CurrentFileName());
-
-                        if (updateFileSuffixes.Any(item => item == currentExtension))
-                        {
-                            string path = downloadUpdate
-                                ? Path.Combine(Path.GetDirectoryName(outputFileName), iterator.CurrentFileName())
-                                : Path.Combine(Path.GetTempPath(), iterator.CurrentFileName());
-
-                            log.InfoFormat(
-                                "Found '{0}' in the downloaded archive when looking for a '{1}' file. Extracting...",
-                                iterator.CurrentFileName(), currentExtension);
-
-                            using (Stream outputStream = new FileStream(path, FileMode.Create))
-                            {
-                                iterator.ExtractCurrentFile(outputStream, null);
-                                PatchPath = path;
-
-                                log.InfoFormat("Update file extracted to '{0}'", path);
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                log.Error("Exception occurred when extracting downloaded archive.", e);
-                throw new Exception(Messages.DOWNLOAD_AND_EXTRACT_ACTION_EXTRACTING_ERROR);
-            }
-            finally
-            {
-                if (zipIterator != null)
-                    zipIterator.CurrentFileExtractProgressChanged -= archiveIterator_CurrentFileExtractProgressChanged;
-
-                if (iterator != null)
-                    iterator.Dispose();
-
-                if (downloadUpdate)
-                {
-                    try { File.Delete(outputFileName); }
-                    catch
-                    {
-                        // ignored
-                    }
-                }
-            }
-
-            if (string.IsNullOrEmpty(PatchPath) && downloadUpdate)
-            {
-                MarkCompleted(new Exception(Messages.DOWNLOAD_AND_EXTRACT_ACTION_FILE_NOT_FOUND));
-                log.InfoFormat(
-                    "The downloaded archive does not contain a file with any of the following extensions: {0}",
-                    string.Join(", ", updateFileSuffixes));
-            }
-        }
-
         protected override void Run()
         {
             if (downloadUpdate)
             {
-                log.InfoFormat("Downloading update '{0}' (from '{1}') to '{2}'", updateName, address, outputFileName);
+                log.InfoFormat("Downloading update '{0}' (from '{1}') to '{2}'", updateName, address, outputPathAndFileName);
                 Description = string.Format(Messages.DOWNLOAD_AND_EXTRACT_ACTION_DOWNLOADING_DESC, updateName);
                 LogDescriptionChanges = false;
                 DownloadFile();
@@ -266,41 +188,29 @@ namespace XenAdmin.Actions
                     throw new CancelledException();
             }
 
-            //TODO: update to install not skip!!!!
-            if (skipInstall)
+            // Install the downloaded msi            
+            try
             {
-                try
+                // Start the install process and end current 
+                if (File.Exists(outputPathAndFileName))
                 {
-                    string newFilePath = Path.Combine(Path.GetDirectoryName(outputFileName), updateName);
-                    // Install file
-                    if (File.Exists(newFilePath))
-                        File.Delete(newFilePath);
-                    File.Move(outputFileName, newFilePath);
-                    PatchPath = newFilePath;
-                    log.DebugFormat("XenServer patch '{0}' is ready", updateName);
-                }
-                catch (Exception e)
-                {
-                    log.Error("Exception occurred when preparing archive.", e);
-                    throw;
+                    // Launch downloaded msi
+                    Process.Start(outputPathAndFileName);
+                    log.DebugFormat("Update {0} found and install started", updateName);
                 }
             }
-            else
+            catch (Exception e)
             {
-                log.DebugFormat("Extracting XenServer patch '{0}'", updateName);
-                Description = string.Format(Messages.DOWNLOAD_AND_EXTRACT_ACTION_EXTRACTING_DESC, updateName);
-                ExtractFile();
-                log.DebugFormat("Extracting XenServer patch '{0}' completed", updateName);
+                if (File.Exists(outputPathAndFileName))
+                {
+                    File.Delete(outputPathAndFileName);
+                }
+                log.Error("Exception occurred when installing CHC.", e);
+                throw;
             }
 
             Description = Messages.COMPLETED;
             MarkCompleted();
-        }
-
-        void archiveIterator_CurrentFileExtractProgressChanged(long bytesTransferred, long totalBytesToTransfer)
-        {
-            int pc = downloadUpdate ? 95 + (int)(5.0 * bytesTransferred / totalBytesToTransfer) : (int)(100.0 * bytesTransferred / totalBytesToTransfer);
-            PercentComplete = pc;
         }
 
         void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
@@ -341,10 +251,6 @@ namespace XenAdmin.Actions
         public override void RecomputeCanCancel()
         {
             CanCancel = !Cancelling && !IsCompleted && (updateDownloadState == DownloadState.InProgress);
-        }
-
-        protected override void CancelRelatedTask()
-        {
         }
 
     }
