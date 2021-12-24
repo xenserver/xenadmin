@@ -976,16 +976,13 @@ namespace XenAdmin.TabPages
             if (alert != null && string.IsNullOrEmpty(alert.NewVersion.Url))
             {
                 alert.FixLinkAction.Invoke();
-            }
-
+            }                
 
             //do not register the event ShowUserInstruction; we show explicitly a message afterwards
-            var downloadAndInstallClientAction = new DownloadAndUpdateClientAction(alert.Name, new Uri(alert.NewVersion.Url), Path.Combine(Path.GetTempPath(), "CH.msi"), true) ;
+            var downloadAndInstallClientAction = new DownloadAndUpdateClientAction(alert.Name, new Uri(alert.NewVersion.Url), Path.Combine(Path.GetTempPath(), $"{alert.Name}.msi"), true) ;
 
             using (var dlg = new ActionProgressDialog(downloadAndInstallClientAction, ProgressBarStyle.Marquee))
                 dlg.ShowDialog(Parent);
-
-            //throw new NotImplementedException("To be implemented via CP-31587");
         }
 
         private void ToolStripMenuItemDismiss_Click(object sender, EventArgs e)
