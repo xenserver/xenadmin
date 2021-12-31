@@ -65,7 +65,7 @@ foreach ($dep in $DEPS_MAP.files) {
         Invoke-WebRequest -Uri $pattern -Method Get -OutFile "$PACKAGE_DIR\$symbolfile"
     }
 
-    if (($filename -eq "putty.exe") -or ($filename -like "*.dll") -or (($filename -like "*.zip") -and $ZIP)) {
+    if (($filename -like "*.dll") -or (($filename -like "*.zip") -and $ZIP)) {
         Write-Output "Downloading $filename"
         Invoke-WebRequest -Uri $pattern -Method Get -OutFile "$PACKAGE_DIR\$filename"
     }

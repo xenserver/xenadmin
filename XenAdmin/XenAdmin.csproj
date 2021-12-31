@@ -6795,8 +6795,6 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>copy "$(ProjectDir)\ReportViewer\resource_report.rdlc" "$(TargetDir)"
-
-copy "$(ProjectDir)\..\packages\putty.exe" "$(TargetDir)"</PostBuildEvent>
+    <PostBuildEvent>copy "$(ProjectDir)\ReportViewer\resource_report.rdlc" "$(TargetDir)"</PostBuildEvent>
   </PropertyGroup>
 </Project>
