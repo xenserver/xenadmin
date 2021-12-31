@@ -62,7 +62,6 @@
                             <File Id="XenCenterMainEXE" Source="$(env.RepoRoot)\XenAdmin\bin\Release\$(var.BrandConsoleNoSpace)Main.exe" />
                             <File Id="XeEXE" Source="$(env.RepoRoot)\xe\bin\Release\xe.exe" />
                             <File Id="xva_verifyEXE" Source="$(env.RepoRoot)\xva_verify\bin\Release\xva_verify.exe" />
-                            <File Id="PuTTYEXE" Source="$(env.RepoRoot)\XenAdmin\bin\Release\putty.exe" />
                             <!-- config -->
                             <File Id="XenCenterMainCONFIG" Source="$(env.RepoRoot)\XenAdmin\bin\Release\$(var.BrandConsoleNoSpace)Main.exe.config" />
                             <!-- DLLs -->
