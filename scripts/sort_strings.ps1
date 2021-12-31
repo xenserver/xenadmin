@@ -45,12 +45,12 @@ function Test-Paths($paths) {
         $path = Get-ResolvedPath $path
 
         if ((Test-Path $path) -eq $false) {
-            Write-Output "File $path does not exit"
+            Write-Output "File $path does not exist. Exiting."
             exit 1;
         }
 
         if ([IO.Path]::GetExtension($path) -cne ".resx") {
-            Write-Output "$path is not a .resx file"
+            Write-Output "$path is not a .resx file. Exiting."
             exit 1;
         }
         
