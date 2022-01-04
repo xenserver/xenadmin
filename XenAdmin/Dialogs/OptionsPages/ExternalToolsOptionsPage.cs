@@ -87,7 +87,6 @@ namespace XenAdmin.Dialogs.OptionsPages
             {
                 tooltipValidation.ToolTipTitle = Messages.FILE_NOT_FOUND;
                 HelpersGUI.ShowBalloonMessage(_tooltipControl, tooltipValidation);
-                _tooltipControl = null;
             }
         }
 
@@ -120,16 +119,12 @@ namespace XenAdmin.Dialogs.OptionsPages
 
         private void textBoxPutty_TextChanged(object sender, System.EventArgs e)
         {
-            if (radioButtonOpenSsh.Checked)
-                radioButtonOpenSsh.Checked = false;
             if (!radioButtonPutty.Checked)
                 radioButtonPutty.Checked = true;
         }
 
         private void textBoxOpenSsh_TextChanged(object sender, System.EventArgs e)
         {
-            if (radioButtonPutty.Checked)
-                radioButtonPutty.Checked = false;
             if (!radioButtonOpenSsh.Checked)
                 radioButtonOpenSsh.Checked = true;
         }
@@ -143,6 +138,7 @@ namespace XenAdmin.Dialogs.OptionsPages
         {
             OpenFileSelection(textBoxOpenSsh);
         }
+
         #endregion
 
         private void OpenFileSelection(TextBox textBox)
