@@ -8169,7 +8169,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Configure SSH Console.
+        ///   Looks up a localized string similar to Configure &amp;SSH Console.
         /// </summary>
         public static string CONFIGURE_SSH_CONSOLE_TITLE {
             get {
@@ -17189,14 +17189,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Path section {0} matches a device name..
-        /// </summary>
-        public static string FILE_PATH_DEVICE_NAME_ERROR_MESSAGE {
-            get {
-                return ResourceManager.GetString("FILE_PATH_DEVICE_NAME_ERROR_MESSAGE", resourceCulture);
-            }
-        }
-
         ///   Looks up a localized string similar to File not found.
         /// </summary>
         public static string FILE_NOT_FOUND {
@@ -17205,7 +17197,15 @@ namespace XenAdmin {
             }
         }
         
-
+        /// <summary>
+        ///   Looks up a localized string similar to Path section {0} matches a device name..
+        /// </summary>
+        public static string FILE_PATH_DEVICE_NAME_ERROR_MESSAGE {
+            get {
+                return ResourceManager.GetString("FILE_PATH_DEVICE_NAME_ERROR_MESSAGE", resourceCulture);
+            }
+        }
+        
         /// <summary>
         ///   Looks up a localized string similar to Acrobat (PDF) file.
         /// </summary>
