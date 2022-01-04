@@ -1485,7 +1485,7 @@ namespace XenAdmin.ConsoleView
             var customSshConsole = Properties.Settings.Default.CustomSshConsole;
             var sshConsolePath = GetConsolePath(customSshConsole);
 
-            if (string.IsNullOrEmpty(sshConsolePath) || customSshConsole == SshConsole.None)
+            if (string.IsNullOrEmpty(sshConsolePath))
             {
                 OpenSshConsoleNotFoundDialog();
                 return;
@@ -1525,14 +1525,13 @@ namespace XenAdmin.ConsoleView
 
         private void OpenSshConsoleNotFoundDialog()
         {
-            var configureSshClientButton = new ThreeButtonDialog.TBDButton(Messages.CONFIGURE_SSH_CONSOLE_TITLE, DialogResult.Yes,
-                ThreeButtonDialog.ButtonType.NONE);
+            var configureSshClientButton = new ThreeButtonDialog.TBDButton(Messages.CONFIGURE_SSH_CONSOLE_TITLE,
+                DialogResult.OK, ThreeButtonDialog.ButtonType.ACCEPT, true);
 
-            var buttons = new[] { configureSshClientButton, ThreeButtonDialog.ButtonOK };
-            using (var dlg = new WarningDialog(Messages.CONFIGURE_SSH_CONSOLE_NOT_FOUND, buttons))
+            using (var dlg = new WarningDialog(Messages.CONFIGURE_SSH_CONSOLE_NOT_FOUND,
+                       configureSshClientButton, ThreeButtonDialog.ButtonCancel))
             {
-                var result = dlg.ShowDialog(Parent);
-                if (result == DialogResult.Yes)
+                if (dlg.ShowDialog(Parent) == DialogResult.OK)
                 {
                     OpenExternalToolsPage();
                 }
@@ -1541,14 +1540,13 @@ namespace XenAdmin.ConsoleView
 
         private void OpenSshConsoleErrorDialog()
         {
-            var configureSshClientButton = new ThreeButtonDialog.TBDButton(Messages.CONFIGURE_SSH_CONSOLE_TITLE, DialogResult.Yes,
-                ThreeButtonDialog.ButtonType.NONE);
+            var configureSshClientButton = new ThreeButtonDialog.TBDButton(Messages.CONFIGURE_SSH_CONSOLE_TITLE,
+                DialogResult.OK, ThreeButtonDialog.ButtonType.ACCEPT, true);
 
-            var buttons = new[] { configureSshClientButton, ThreeButtonDialog.ButtonOK };
-            using (var dlg = new ErrorDialog(Messages.CONFIGURE_SSH_CONSOLE_ERROR, buttons))
+            using (var dlg = new ErrorDialog(Messages.CONFIGURE_SSH_CONSOLE_ERROR,
+                       configureSshClientButton, ThreeButtonDialog.ButtonCancel))
             {
-                var result = dlg.ShowDialog(Parent);
-                if (result == DialogResult.Yes)
+                if (dlg.ShowDialog(Parent) == DialogResult.OK)
                 {
                     OpenExternalToolsPage();
                 }
