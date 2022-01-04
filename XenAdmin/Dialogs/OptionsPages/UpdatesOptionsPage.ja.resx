@@ -112,16 +112,16 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="UpdatesTableLayoutPanel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="UpdatesTableLayoutPanel.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
@@ -137,7 +137,7 @@
   <data name="AllowXenCenterUpdatesCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
   <data name="AllowXenCenterUpdatesCheckBox.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8pt</value>
   </data>
@@ -163,7 +163,7 @@
     <value>AllowXenCenterUpdatesCheckBox</value>
   </data>
   <data name="&gt;&gt;AllowXenCenterUpdatesCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;AllowXenCenterUpdatesCheckBox.Parent" xml:space="preserve">
     <value>XenCenterGroupBox</value>
@@ -238,7 +238,7 @@
     <value>AllowXenServerUpdatesCheckBox</value>
   </data>
   <data name="&gt;&gt;AllowXenServerUpdatesCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;AllowXenServerUpdatesCheckBox.Parent" xml:space="preserve">
     <value>XenServerGroupBox</value>
@@ -274,7 +274,7 @@
     <value>AllowXenServerPatchesCheckBox</value>
   </data>
   <data name="&gt;&gt;AllowXenServerPatchesCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;AllowXenServerPatchesCheckBox.Parent" xml:space="preserve">
     <value>XenServerGroupBox</value>
@@ -343,13 +343,67 @@
     <value>UpdatesBlurb</value>
   </data>
   <data name="&gt;&gt;UpdatesBlurb.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;UpdatesBlurb.Parent" xml:space="preserve">
     <value>UpdatesTableLayoutPanel</value>
   </data>
   <data name="&gt;&gt;UpdatesBlurb.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="clientIdControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="clientIdControl1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 16</value>
+  </data>
+  <data name="clientIdControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>435, 169</value>
+  </data>
+  <data name="clientIdControl1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;clientIdControl1.Name" xml:space="preserve">
+    <value>clientIdControl1</value>
+  </data>
+  <data name="&gt;&gt;clientIdControl1.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.ClientIdControl, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;clientIdControl1.Parent" xml:space="preserve">
+    <value>decentGroupBox1</value>
+  </data>
+  <data name="&gt;&gt;clientIdControl1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="decentGroupBox1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="decentGroupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 178</value>
+  </data>
+  <data name="decentGroupBox1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 0</value>
+  </data>
+  <data name="decentGroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>441, 185</value>
+  </data>
+  <data name="decentGroupBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="decentGroupBox1.Text" xml:space="preserve">
+    <value>クライアント ID</value>
+  </data>
+  <data name="&gt;&gt;decentGroupBox1.Name" xml:space="preserve">
+    <value>decentGroupBox1</value>
+  </data>
+  <data name="&gt;&gt;decentGroupBox1.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.DecentGroupBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;decentGroupBox1.Parent" xml:space="preserve">
+    <value>UpdatesTableLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;decentGroupBox1.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="UpdatesTableLayoutPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -373,7 +427,7 @@
     <value>UpdatesTableLayoutPanel</value>
   </data>
   <data name="&gt;&gt;UpdatesTableLayoutPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;UpdatesTableLayoutPanel.Parent" xml:space="preserve">
     <value>$this</value>
@@ -382,9 +436,9 @@
     <value>0</value>
   </data>
   <data name="UpdatesTableLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="XenCenterGroupBox" Row="2" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="XenServerGroupBox" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="UpdatesBlurb" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="Percent,100" />&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" />&lt;/TableLayoutSettings></value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="XenCenterGroupBox" Row="2" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="XenServerGroupBox" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="UpdatesBlurb" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="decentGroupBox1" Row="3" RowSpan="1" Column="0" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="Percent,100" />&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" />&lt;/TableLayoutSettings></value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
@@ -397,6 +451,6 @@
     <value>UpdatesOptionsPage</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

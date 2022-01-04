@@ -1297,7 +1297,7 @@
     <value>是否确实要分离选定的 USB 设备?</value>
   </data>
   <data name="ACTION_WAIT_FOR_SLAVES_TO_RECOVER" xml:space="preserve">
-    <value>正在等待从属服务器恢复...</value>
+    <value>正在等待其他池成员恢复...</value>
   </data>
   <data name="ACTION_WLB_DECONFIGURE_FAILED" xml:space="preserve">
     <value>在池 {0} 上断开连接 Workload Balancing 失败: {1}。Workload Balancing 已暂停。</value>
@@ -2194,18 +2194,18 @@
   <data name="BOND_DELETE_WILL_DISTURB_BOTH" xml:space="preserve">
     <value>{0}
 
-删除此绑定会自动将绑定上的管理接口和辅助接口转移到绑定的第一个从属成员: 
+删除此绑定会自动将绑定上的管理接口和辅助接口转移到绑定的第一个成员: 
 
 - [XenCenter] 与池之间的连接将暂时中断
 
-- 通过辅助接口进行的通信将中断
+- 通过辅助接口传输的交流将中断
 
 - 如果您的网络配置不正确，[XenCenter] 可能会永久断开与池之间的连接，或者池成员可能无法相互通信。</value>
   </data>
   <data name="BOND_DELETE_WILL_DISTURB_PRIMARY" xml:space="preserve">
     <value>{0}
 
-删除此绑定会自动将绑定上的管理接口转移到绑定的第一个从属成员: 
+删除此绑定会自动将绑定上的管理接口转移到绑定的第一个成员: 
 
 - [XenCenter] 与池之间的连接将暂时中断
 
@@ -2214,7 +2214,7 @@
   <data name="BOND_DELETE_WILL_DISTURB_SECONDARY" xml:space="preserve">
     <value>{0}
 
-删除此绑定将中断通过绑定上的辅助接口进行的通信，而接口将移动到绑定的第一个从属成员。</value>
+删除此绑定将中断通过绑定上的辅助接口传输的流量，而接口将移动到绑定的第一个成员。</value>
   </data>
   <data name="BOND_GONE" xml:space="preserve">
     <value>在 [XenCenter] 的缓存中找不到绑定。</value>
@@ -2638,6 +2638,12 @@
   </data>
   <data name="CHECKING_CLUSTERING_STATUS" xml:space="preserve">
     <value>正在检查群集状态</value>
+  </data>
+  <data name="CHECKING_CONTAINER_MANAGEMENT" xml:space="preserve">
+    <value>Docker 容器管理检查</value>
+  </data>
+  <data name="CHECKING_CONTAINER_MANAGEMENT_GROUP" xml:space="preserve">
+    <value>正在检查旧容器管理补充包</value>
   </data>
   <data name="CHECKING_FOR_PENDING_RESTART" xml:space="preserve">
     <value>检查挂起的重新启动</value>
@@ -3279,6 +3285,9 @@
   <data name="CONTAINER_IMAGE" xml:space="preserve">
     <value>图片</value>
   </data>
+  <data name="CONTAINER_MANAGEMENT_REMOVAL_WARNING" xml:space="preserve">
+    <value>截止 {0}，对容器管理的支持已被删除。请卸载容器管理补充包，因为您无法再使用它来管理 Docker 容器。</value>
+  </data>
   <data name="CONTAINER_ON_VM_TITLE" xml:space="preserve">
     <value>“{1}”{2} 上的 {0}</value>
   </data>
@@ -3663,6 +3672,9 @@
   <data name="CPM_SUMMARY_KEY_DESTINATION" xml:space="preserve">
     <value>目标位置:</value>
   </data>
+  <data name="CPM_SUMMARY_KEY_HOME_SERVER" xml:space="preserve">
+    <value>主服务器:</value>
+  </data>
   <data name="CPM_SUMMARY_KEY_MIGRATE_TEMPLATE" xml:space="preserve">
     <value>模板:</value>
   </data>
@@ -3674,9 +3686,6 @@
   </data>
   <data name="CPM_SUMMARY_KEY_STORAGE" xml:space="preserve">
     <value>存储:</value>
-  </data>
-  <data name="CPM_SUMMARY_KEY_TARGET_SERVER" xml:space="preserve">
-    <value>目标服务器:</value>
   </data>
   <data name="CPM_SUMMARY_KEY_TRANSFER_NETWORK" xml:space="preserve">
     <value>迁移网络:</value>
@@ -3724,7 +3733,10 @@
     <value>选择要将所选 VM 移动到的池或独立服务器。</value>
   </data>
   <data name="CPM_WIZARD_DESTINATION_TABLE_INTRO" xml:space="preserve">
-    <value>(可选)在目标池中指定目标服务器(&amp;T):</value>
+    <value>或者，在目标池中为相应 VM 分配一个主服务器(&amp;H):</value>
+  </data>
+  <data name="CPM_WIZARD_DESTINATION_TABLE_INTRO_TEMPLATES" xml:space="preserve">
+    <value>或者，在目标池中为相应模板分配一个主服务器(&amp;H):</value>
   </data>
   <data name="CPM_WIZARD_DESTINATION_TAB_TITLE" xml:space="preserve">
     <value>目标池</value>
@@ -4451,8 +4463,8 @@
   <data name="DISABLE_HA" xml:space="preserve">
     <value>禁用高可用性</value>
   </data>
-  <data name="DISABLE_HA_CONFIGURE_MANAGEMENT_INTERFACES" xml:space="preserve">
-    <value>如果要配置管理接口，请禁用高可用性</value>
+  <data name="DISABLE_HA_CONFIGURE_IP_ADDRESSES" xml:space="preserve">
+    <value>如果要配置 IP 地址，请禁用高可用性。</value>
   </data>
   <data name="DISABLE_HA_HOTKEY" xml:space="preserve">
     <value>禁用高可用性(&amp;D)</value>
@@ -4686,13 +4698,16 @@
     <value>不使用</value>
   </data>
   <data name="DONT_SELECT_TARGET_SERVER" xml:space="preserve">
-    <value>不选择目标服务器</value>
+    <value>不分配主服务器</value>
   </data>
   <data name="DOWLOAD_LATEST_XS_TITLE" xml:space="preserve">
     <value>{0} 当前可用</value>
   </data>
   <data name="DOWNLOADING_PATCH_FROM" xml:space="preserve">
     <value>正在从“{0}”下载更新(第 {1} 个，共 {2} 个)...</value>
+  </data>
+  <data name="DOWNLOAD_AND_EXTRACT_ACTION_AUTHENTICATING_DESC" xml:space="preserve">
+    <value>正在对您的 {0} 帐户进行身份验证...</value>
   </data>
   <data name="DOWNLOAD_AND_EXTRACT_ACTION_DOWNLOADING_DESC" xml:space="preserve">
     <value>正在下载更新 {0}</value>
@@ -5119,7 +5134,7 @@
     <value>未找到存储库</value>
   </data>
   <data name="DR_WIZARD_STORAGEPAGE_SCAN_RESULT_TITLE" xml:space="preserve">
-    <value>找到以下存储库: 
+    <value>找到以下存储库:
 </value>
   </data>
   <data name="DR_WIZARD_STORAGEPAGE_TEXT" xml:space="preserve">
@@ -5524,7 +5539,7 @@
     <value>{0}弹出 CD</value>
   </data>
   <data name="EVACUATE_HOST_CLUSER_CREATING" xml:space="preserve">
-    <value>在池创建集群的过程中，您无法指定新的主服务器。</value>
+    <value>在池创建群集的过程中，您无法指定新的主服务器。</value>
   </data>
   <data name="EVACUATE_HOST_HA_DISABLING" xml:space="preserve">
     <value>在池中禁用高可用性时，您无法指定新的主服务器。</value>
@@ -5803,8 +5818,44 @@
   <data name="FILER_PARAM_INVALID_CHAR" xml:space="preserve">
     <value>您在一个文件管理器参数中输入了无效字符。</value>
   </data>
+  <data name="FILESERVICE_CLIENTID_INVALID_FILE" xml:space="preserve">
+    <value>客户端 ID 文件无效或损坏。</value>
+  </data>
+  <data name="FILESERVICE_CLIENTID_FILETYPE" xml:space="preserve">
+    <value>客户端 ID 文件(*.json)|*.json</value>
+  </data>
+  <data name="FILESERVICE_CLIENTID_FOUND" xml:space="preserve">
+    <value>已指定客户端 ID。</value>
+  </data>
+  <data name="FILESERVICE_CLIENTID_NOT_FOUND" xml:space="preserve">
+    <value>尚未指定客户端 ID。</value>
+  </data>
+  <data name="FILESERVICE_CLIENTID_TITLE" xml:space="preserve">
+    <value>选择客户端 ID 文件。</value>
+  </data>
+  <data name="FILESERVICE_AUTHENTICATE_ERROR" xml:space="preserve">
+    <value>无法对您的 [Citrix] 帐户进行身份验证。</value>
+  </data>
+  <data name="FILESERVICE_ERROR_400" xml:space="preserve">
+    <value>收到一个错误的请求。</value>
+  </data>
+  <data name="FILESERVICE_ERROR_401" xml:space="preserve">
+    <value>确保您指定的客户端 ID 有效且未被撤消。</value>
+  </data>
+  <data name="FILESERVICE_ERROR_403" xml:space="preserve">
+    <value>您当前的订阅不足，无法下载此更新。</value>
+  </data>
+  <data name="FILESERVICE_ERROR_404" xml:space="preserve">
+    <value>无法下载更新。找不到该文件。</value>
+  </data>
+  <data name="FILESERVICE_ERROR_500" xml:space="preserve">
+    <value>身份验证服务器遇到了不知道如何处理的情况。</value>
+  </data> 
   <data name="FILE_ALL" xml:space="preserve">
     <value>所有文件</value>
+  </data>
+  <data name="FILE_NOT_FOUND" xml:space="preserve">
+    <value>找不到文件</value>
   </data>
   <data name="FILE_PDF" xml:space="preserve">
     <value>Acrobat (PDF) 文件</value>
@@ -8456,7 +8507,7 @@ SCSI ID: {2}
 是否要继续?</value>
   </data>
   <data name="MESSAGEBOX_SLAVES_EJECT" xml:space="preserve">
-    <value>必须先从池中弹出所有从属设备，然后才能删除池。</value>
+    <value>必须先从池中弹出所有其他池成员，然后才能将其删除。</value>
   </data>
   <data name="MESSAGEBOX_VIF_DELETE" xml:space="preserve">
     <value>该操作将永久删除所选网络接口。是否继续?</value>
@@ -8546,7 +8597,7 @@ SCSI ID: {2}
     <value>非活动</value>
   </data>
   <data name="MULTIPATH_NOT_ACTIVE_GFS2" xml:space="preserve">
-    <value>不活动。
+    <value>未处于活动状态。
 为确保系统稳定性，强烈建议您对存储连接使用多路径功能。
 </value>
   </data>
@@ -8836,7 +8887,7 @@ SCSI ID: {2}
     <value>池操作受该服务器许可证的限制</value>
   </data>
   <data name="NEWPOOL_SLAVE_ROLE" xml:space="preserve">
-    <value>您在从属服务器上的当前角色无权将从属服务器添加到池中</value>
+    <value>您在此服务器上的当前角色无权将其添加到池中</value>
   </data>
   <data name="NEWPOOL_UNLICENSED_HOST_LICENSED_MASTER" xml:space="preserve">
     <value>无法将未获得许可的服务器添加到已获得许可的池</value>
@@ -8855,7 +8906,7 @@ SCSI ID: {2}
 
 由于 SMB 存储库属于共享存储库，因此，其中存储的虚拟磁盘允许 VM 在资源池中的任何服务器上启动，以及使用实时迁移功能在这些服务器之间迁移。
 
-配置 SMB 存储库时，只需提供 SMB 服务器的主机名或 IP 地址、用户名、密码以及用来包含存储库的目录路径。SMB 服务器必须配置为导出池中所有服务器的指定路径。</value>
+配置 SMB 存储库时，只需提供 SMB 服务器的主机名或 IP 地址、用户名、密码以及用来包含存储库的目录路径。SMB 服务器必须支持版本 3 且必须配置为导出池中所有服务器的指定路径。</value>
   </data>
   <data name="NEWSR_CIFS_ISO_BLURB" xml:space="preserve">
     <value>如果以 Windows (SMB/CIFS)共享形式提供要连接到主机或池的 VM 安装 ISO 映像库，请选择此选项。</value>
@@ -9620,7 +9671,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>{0} (隐藏)</value>
   </data>
   <data name="NIC_SLAVE" xml:space="preserve">
-    <value>{0} (从属)</value>
+    <value>{0} (已绑定的成员)</value>
   </data>
   <data name="NIC_TAB_TITLE" xml:space="preserve">
     <value>网络接口卡</value>
@@ -9781,7 +9832,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>不受信任</value>
   </data>
   <data name="NOT_UPDATED" xml:space="preserve">
-    <value>已过期</value>
+    <value>已过时</value>
   </data>
   <data name="NOT_UPGRADED" xml:space="preserve">
     <value>未升级</value>
@@ -9889,7 +9940,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>已优化</value>
   </data>
   <data name="OUT_OF_DATE" xml:space="preserve">
-    <value>已过期</value>
+    <value>已过时</value>
   </data>
   <data name="OVERALL_PROGRESS" xml:space="preserve">
     <value>总体进度: 已完成 {0} 个服务器(共 {1} 个)</value>
@@ -10293,7 +10344,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>正在运行预检查...</value>
   </data>
   <data name="PATCHING_WIZARD_SOLVE_MANUALLY" xml:space="preserve">
-    <value>无法解决该问题:\n{0}\n\n请手动解决该问题，然后单击“重新检查”。
+    <value>无法解决此问题:\n{0}\n\n请手动解决此问题，然后单击“重新检查”。
 </value>
   </data>
   <data name="PATCHING_WIZARD_SOLVING_PROBLEMS" xml:space="preserve">
@@ -10326,13 +10377,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="PATCH_NEEDS_NEW_XENCENTER" xml:space="preserve">
     <value>此版本需要 [XenCenter] {0} 或更高版本</value>
-  </data>
-  <data name="PATCH_NOT_FOUND" xml:space="preserve">
-    <value>未找到</value>
-  </data>
-  <data name="PATCH_NOT_FOUND_EXPANDED_DESCRIPTION" xml:space="preserve">
-    <value>{0}
-未找到文件</value>
   </data>
   <data name="PATCH_UPLOADED" xml:space="preserve">
     <value>更新已上载到服务器“{0}” </value>
@@ -10659,6 +10703,15 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="PROBING_HBA_TITLE" xml:space="preserve">
     <value>正在 {0} 上探测 LUN</value>
+  </data>
+  <data name="PROBLEM_CONTAINER_MANAGEMENT_DESCRIPTION" xml:space="preserve">
+    <value>{0}: 截至 {1}，对容器管理的支持已被删除。</value>
+  </data>
+  <data name="PROBLEM_CONTAINER_MANAGEMENT_HELP" xml:space="preserve">
+    <value>请先卸载容器管理补充包，因为您将无法再使用它来管理 Docker 容器。</value>
+  </data>
+  <data name="PROBLEM_CONTAINER_MANAGEMENT_INFO" xml:space="preserve">
+    <value>如果您要升级到 {0} 及更高版本，请先卸载容器管理补充包，因为您将无法再使用它来管理 Docker 容器。</value>
   </data>
   <data name="PROBLEM_HOSTPROBLEM_TITLE" xml:space="preserve">
     <value>服务器“{0}”</value>
@@ -11038,7 +11091,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>是否要删除所选服务器上的故障转储文件?</value>
   </data>
   <data name="REMOVE_CRASHDUMP_WARNING" xml:space="preserve">
-    <value>该操作将从 {0} 中永久删除所有故障转储文件。在删除这些文件前，建议将文件作为“服务器状态报告”的一部分进行编译。
+    <value>此操作将从 {0} 中永久删除所有故障转储文件。在删除这些文件之前，建议将其作为“服务器状态报告”的一部分进行编译。
 
 单击“服务器状态报告”以打开“编译服务器状态报告向导”，或单击“删除文件”以删除故障转储文件而不进行编译。
 </value>
@@ -11335,7 +11388,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="ROLLING_UPGRADE_REBOOT_MESSAGE" xml:space="preserve">
     <value>要在 {0} 上安装 [XenServer] 升级，请执行以下步骤:
     
-1. 将 [XenServer] 安装 CD-ROM 插入到服务器的 CD/DVD 驱动器中或设置 PXE 网络引导顺序。
+1. 将 [XenServer] 安装 CD-ROM 插入到服务器的 CD/DVD 驱动器中或设置 PXE 网络启动。
 2. 单击下面的“立即重新启动”按钮以重新启动服务器并开始安装。
 3. 转至服务器的控制台并按照屏幕上的说明进行操作以安装升级。
 
@@ -11599,7 +11652,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>[XenServer] 已过时</value>
   </data>
   <data name="SERVER_OUT_OF_DATE_DETAIL" xml:space="preserve">
-    <value>服务器“{0}”已过期，不能再与之连接。</value>
+    <value>服务器“{0}”已过时，不能再与之连接。</value>
   </data>
   <data name="SERVER_REQUEST_IN_PROGRESS" xml:space="preserve">
     <value>正在执行服务器请求</value>
@@ -12234,7 +12287,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>0 (最低)</value>
   </data>
   <data name="STRINGIFY_LIST_INNERSEP" xml:space="preserve">
-    <value>, </value>
+    <value>、 </value>
   </data>
   <data name="STRINGIFY_LIST_LASTSEP" xml:space="preserve">
     <value> 和 </value>
@@ -12315,9 +12368,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="TARGET" xml:space="preserve">
     <value>目标</value>
-  </data>
-  <data name="TARGET_SERVER" xml:space="preserve">
-    <value>目标服务器</value>
   </data>
   <data name="TELL_ME_MORE" xml:space="preserve">
     <value>了解更多信息 ...</value>
@@ -12619,8 +12669,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>自动检查 [XenServer] 或 [XenCenter] 更新</value>
   </data>
   <data name="UPDATES_DIALOG_ACTION_REQUIRED" xml:space="preserve">
-    <value>要使更新在应用后生效，需要执行以下操作:
- </value>
+    <value>要使更新在应用后生效，需要执行以下操作: </value>
   </data>
   <data name="UPDATES_DIALOG_APPLIED" xml:space="preserve">
     <value>{0} - 已安装({1})</value>
@@ -12915,22 +12964,22 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>{0}: 由于在池 {1} 上启用了 WLB，因此已跳过检查。</value>
   </data>
   <data name="UPDATE_DISMISS_ALL_CONTINUE" xml:space="preserve">
-    <value>已对更新列表应用过滤器。您想消除每个已连接的服务器中的所有更新，还是仅消除已选择查看的更新? 在这两种情况下，消除的更新都将从服务器中永久删除。
+    <value>You have applied filters to the list of update notifications. Do you want to dismiss all update notifications for every connected server, or only the update notifications you have chosen to view?
 
-请注意，如果启用了 RBAC，则将仅影响您有权消除的更新。</value>
+Note that if RBAC is enabled, only updates which you have privileges to dismiss will be affected.</value>
   </data>
   <data name="UPDATE_DISMISS_ALL_NO_FILTER_CONTINUE" xml:space="preserve">
-    <value>此操作将从每个已连接的服务器中永久删除所有更新。是否要继续?
+    <value>This operation will dismiss all update notifications for every connected server. Do you want to continue?
 
-请注意，如果启用了 RBAC，则将仅影响您有权消除的更新。</value>
+Note that if RBAC is enabled, only updates which you have privileges to dismiss will be affected.</value>
   </data>
   <data name="UPDATE_DISMISS_CONFIRM" xml:space="preserve">
     <value>是否确实要消除此更新?</value>
   </data>
   <data name="UPDATE_DISMISS_SELECTED_CONFIRM" xml:space="preserve">
-    <value>此操作将从服务器中永久删除选定更新。是否要继续?
+    <value>This operation will dismiss all the selected update notifications. Do you want to continue?
 
-请注意，如果启用了 RBAC，则将仅影响您有权消除的更新。</value>
+Note that if RBAC is enabled, only updates which you have privileges to dismiss will be affected.</value>
   </data>
   <data name="UPDATE_ERROR_INTRODUCE" xml:space="preserve">
     <value>无法引入更新。</value>
@@ -13344,7 +13393,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>已优化(已安装 {0} 版本)</value>
   </data>
   <data name="VIRTUALIZATION_OUT_OF_DATE" xml:space="preserve">
-    <value>工具已过期(已安装 {0} 版本)</value>
+    <value>工具已过时(已安装版本 {0})</value>
   </data>
   <data name="VIRTUALIZATION_STATE_VM_INSTALL_IO_DRIVERS_AND_MANAGEMENT_AGENT" xml:space="preserve">
     <value>安装 I/O 驱动程序和管理代理</value>
@@ -14091,7 +14140,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>未针对池“{0}”进行配置</value>
   </data>
   <data name="WLB_NO_PERMISSION_BLURB" xml:space="preserve">
-    <value>权限为“{0}”的用户无法更改 Workload Balancing 设置。 </value>
+    <value>{0} 用户无法更改 Workload Balancing 设置。 </value>
   </data>
   <data name="WLB_OPTIMIZATION_MODE" xml:space="preserve">
     <value>优化模式</value>
@@ -14610,5 +14659,8 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>您在此处</value>
+  </data>
+  <data name="HEALTHCHECK_CANNOT_ALTER_SETTINGS" xml:space="preserve">
+    <value>只有 {0} 用户可以注册使用、配置或禁用运行状况检查，或上载报告和请求报告分析</value>
   </data>
 </root>

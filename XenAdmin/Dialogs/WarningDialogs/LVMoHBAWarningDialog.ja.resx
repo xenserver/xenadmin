@@ -586,7 +586,7 @@
     <value>0</value>
   </data>
   <data name="labelLUNDetails.Text" xml:space="preserve">
-    <value>ベンダ:
+    <value>ベンダー:
 シリアル番号:
 SCSI ID:
 サイズ:
