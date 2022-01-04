@@ -367,7 +367,7 @@
     <value>8</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>以下选定的虚拟磁盘和快照也将删除:
+    <value>以下选定的虚拟磁盘和快照也将被删除:
 
 </value>
   </data>

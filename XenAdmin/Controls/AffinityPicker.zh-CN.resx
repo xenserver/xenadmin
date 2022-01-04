@@ -271,7 +271,7 @@
     <value>0</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>WLB 当前已启用。仅当 WLB 处于禁用状态时，才能使用主服务器设置放置 VM。 </value>
+    <value>WLB 当前已启用。仅当 WLB 处于禁用状态时，才能将主服务器设置用于 VM 放置。 </value>
   </data>
   <data name="label1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>

@@ -136,7 +136,7 @@
     <value>31</value>
   </data>
   <data name="labelBlurb.Text" xml:space="preserve">
-    <value>调整 Workload Balancing 在确定能否将工作负载移至某服务器或者是否应将 VM 分配给其他服务器时为该资源的使用率分配的权重。  </value>
+    <value>调整 Workload Balancing 在确定能否将工作负载移至某个服务器或者是否应将 VM 分配给其他服务器时为资源的使用率分配的权重。  </value>
   </data>
   <data name="&gt;&gt;labelBlurb.Name" xml:space="preserve">
     <value>labelBlurb</value>

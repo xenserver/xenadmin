@@ -145,7 +145,7 @@
     <value>101</value>
   </data>
   <data name="lblNicHelp.Text" xml:space="preserve">
-    <value>选择新网络使用的管理接口并配置任何其他设置，然后继续操作。
+    <value>为新网络选择管理接口以使用并配置任何其他设置，然后继续操作。
 </value>
   </data>
   <data name="lblNicHelp.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">

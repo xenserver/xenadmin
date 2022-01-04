@@ -247,7 +247,7 @@
     <value>5</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>除 VM 的磁盘和元数据外，此类型的快照还将存储 VM 的内存状态(RAM)。请注意，此类型的快照可能会非常大，因此应确保为所有计划快照提供足够的磁盘空间。 </value>
+    <value>除了 VM 的磁盘和元数据之外，此类型的快照还将存储 VM 的内存状态(RAM)。请注意，此类型的快照可能会非常大，因此应确保为所有计划快照提供足够的磁盘空间。 </value>
   </data>
   <data name="&gt;&gt;label3.Name" xml:space="preserve">
     <value>label3</value>

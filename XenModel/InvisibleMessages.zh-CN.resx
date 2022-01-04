@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CLIENT_ID_URL" xml:space="preserve">
+    <value>https://support.citrix.com/xencenterclientiddownload</value>
+  </data>
   <data name="HEALTH_CHECK_PRIVACY_STATEMENT_URL" xml:space="preserve">
     <value>https://cis.citrix.com/legal/</value>
   </data>
@@ -130,7 +133,7 @@
     <value>http://support.citrix.com/article/CTX141433</value>
   </data>
   <data name="LICENSE_EXPIRY_WEBPAGE" xml:space="preserve">
-    <value>http://store.citrix.com/XSInProduct</value>
+    <value>https://store.citrix.com/dr_product/citrix-hypervisor-subscription</value>
   </data>
   <data name="LICENSE_SERVER_DOWNLOAD_LINK" xml:space="preserve">
     <value>http://www.citrix.com/downloads/licensing/license-server</value>
@@ -166,7 +169,7 @@
     <value>http://support.citrix.com/</value>
   </data>
   <data name="UPSELL_SA" xml:space="preserve">
-    <value>http://store.citrix.com/XSInProduct</value>
+    <value>https://store.citrix.com/dr_product/citrix-hypervisor-subscription</value>
   </data>
   <data name="XENDESKTOP_URL" xml:space="preserve">
     <value>http://www.citrix.com/TryXenDesktop</value>
@@ -188,5 +191,8 @@
   </data>
   <data name="DEPRECATION_URL" xml:space="preserve">
     <value>http://docs.citrix.com/zh-cn/citrix-hypervisor/whats-new/removed-features.html</value>
+  </data>
+  <data name="TOKEN_API_URL" xml:space="preserve">
+    <value>https://fileservice.citrix.com/api/session/token</value>
   </data>
 </root>

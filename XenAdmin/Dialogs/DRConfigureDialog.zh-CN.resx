@@ -250,7 +250,7 @@
     <value>1</value>
   </data>
   <data name="autoHeightLabel1.Text" xml:space="preserve">
-    <value>在灾难情况下用来恢复 VM 和 vApp 的必要配置数据必须存储在该池中的一个或多个 SR 上。 </value>
+    <value>在出现灾难时用来恢复 VM 和 vApp 所需的配置数据必须存储在此池中的一个或多个 SR 上。 </value>
   </data>
   <data name="&gt;&gt;autoHeightLabel1.Name" xml:space="preserve">
     <value>autoHeightLabel1</value>
@@ -469,7 +469,7 @@
     <value>0</value>
   </data>
   <data name="m_labelEnable.Text" xml:space="preserve">
-    <value>直到设置了存储镜像并复制所选 SR 时，DR 配置才完成。 </value>
+    <value>设置了存储镜像且正在复制选定 SR 时，DR 配置才算完成。 </value>
   </data>
   <data name="m_labelEnable.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -739,7 +739,7 @@
     <value>1</value>
   </data>
   <data name="m_labelLimit1.Text" xml:space="preserve">
-    <value>您选择的 SR 太多 </value>
+    <value>您选择的 SR 过多 </value>
   </data>
   <data name="&gt;&gt;m_labelLimit1.Name" xml:space="preserve">
     <value>m_labelLimit1</value>

@@ -286,7 +286,7 @@
     <value>2</value>
   </data>
   <data name="autoHeightLabel2.Text" xml:space="preserve">
-    <value>構成データを格納する SR を選択してください。 </value>
+    <value>構成データを格納する SR を選択してください: </value>
   </data>
   <data name="&gt;&gt;autoHeightLabel2.Name" xml:space="preserve">
     <value>autoHeightLabel2</value>
@@ -391,7 +391,7 @@
     <value>1</value>
   </data>
   <data name="m_labelDisable1.Text" xml:space="preserve">
-    <value>SR を選択してください。 </value>
+    <value>SR が選択されていません </value>
   </data>
   <data name="&gt;&gt;m_labelDisable1.Name" xml:space="preserve">
     <value>m_labelDisable1</value>
@@ -739,7 +739,7 @@
     <value>1</value>
   </data>
   <data name="m_labelLimit1.Text" xml:space="preserve">
-    <value>選択した SR の数が多すぎます。 </value>
+    <value>選択した SR の数が多すぎます </value>
   </data>
   <data name="&gt;&gt;m_labelLimit1.Name" xml:space="preserve">
     <value>m_labelLimit1</value>

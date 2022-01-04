@@ -324,11 +324,11 @@
   <data name="tableLayoutPanel2.ColumnCount" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
+  <data name="labelCheckpointInfo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left, Right</value>
+  </data>
   <data name="labelCheckpointInfo.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="labelCheckpointInfo.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
   </data>
   <data name="labelCheckpointInfo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -339,8 +339,8 @@
   <data name="labelCheckpointInfo.Location" type="System.Drawing.Point, System.Drawing">
     <value>45, 122</value>
   </data>
-  <data name="labelCheckpointInfo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
+  <data name="labelCheckpointInfo.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>410, 9999</value>
   </data>
   <data name="labelCheckpointInfo.Size" type="System.Drawing.Size, System.Drawing">
     <value>412, 16</value>
@@ -360,11 +360,11 @@
   <data name="&gt;&gt;labelCheckpointInfo.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="labelQuiesceInfo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left, Right</value>
+  </data>
   <data name="labelQuiesceInfo.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="labelQuiesceInfo.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
   </data>
   <data name="labelQuiesceInfo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -375,8 +375,8 @@
   <data name="labelQuiesceInfo.Location" type="System.Drawing.Point, System.Drawing">
     <value>45, 75</value>
   </data>
-  <data name="labelQuiesceInfo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
+  <data name="labelQuiesceInfo.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>410, 9999</value>
   </data>
   <data name="labelQuiesceInfo.Size" type="System.Drawing.Size, System.Drawing">
     <value>412, 16</value>
@@ -396,11 +396,11 @@
   <data name="&gt;&gt;labelQuiesceInfo.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="labelSnapshotInfo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left, Right</value>
+  </data>
   <data name="labelSnapshotInfo.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="labelSnapshotInfo.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
   </data>
   <data name="labelSnapshotInfo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -411,8 +411,8 @@
   <data name="labelSnapshotInfo.Location" type="System.Drawing.Point, System.Drawing">
     <value>45, 28</value>
   </data>
-  <data name="labelSnapshotInfo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
+  <data name="labelSnapshotInfo.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>410, 9999</value>
   </data>
   <data name="labelSnapshotInfo.Size" type="System.Drawing.Size, System.Drawing">
     <value>412, 16</value>

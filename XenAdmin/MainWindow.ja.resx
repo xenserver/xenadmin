@@ -304,7 +304,7 @@
     <value>22</value>
   </data>
   <data name="TabPageCvmConsole.Text" xml:space="preserve">
-    <value>Nutanix CVM コンソール</value>
+    <value>ドライバー ドメイン コンソール</value>
   </data>
   <data name="&gt;&gt;TabPageCvmConsole.Name" xml:space="preserve">
     <value>TabPageCvmConsole</value>

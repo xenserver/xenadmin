@@ -184,7 +184,7 @@
     <value>VM で必要なブリッジが見つかりません。</value>
   </data>
   <data name="CANNOT_ADD_TUNNEL_TO_BOND_SLAVE" xml:space="preserve">
-    <value>この PIF ボンディング スレーブなのでトンネルを作成できません。</value>
+    <value>この PIF はボンディング メンバーなのでトンネルを作成できません。</value>
   </data>
   <data name="CANNOT_ADD_TUNNEL_TO_SRIOV_LOGICAL" xml:space="preserve">
     <value>これはネットワーク SR-IOV 論理 PIF であり、トンネルは使用できません。</value>
@@ -193,7 +193,7 @@
     <value>これはネットワーク SR-IOV 上の VLAN PIF であり、トンネルは使用できません。</value>
   </data>
   <data name="CANNOT_ADD_VLAN_TO_BOND_SLAVE" xml:space="preserve">
-    <value>この PIF ボンディング スレーブなので VLAN を作成できません。</value>
+    <value>この PIF はボンディング メンバーなので VLAN を作成できません。</value>
   </data>
   <data name="CANNOT_CHANGE_PIF_PROPERTIES" xml:space="preserve">
     <value>この PIF プロパティは変更できません。変更できるのは、ボンディングされていない物理 PIF またはボンド マスターのプロパティのみです。</value>
@@ -235,7 +235,7 @@
     <value>これはネットワーク SR-IOV 論理 PIF であり、消去操作はできません。</value>
   </data>
   <data name="CANNOT_PLUG_BOND_SLAVE" xml:space="preserve">
-    <value>この PIF ボンディング スレーブなので接続できません。</value>
+    <value>この PIF はボンディング メンバーなので接続できません。</value>
   </data>
   <data name="CANNOT_PLUG_VIF" xml:space="preserve">
     <value>ネットワーク インターフェイスが接続できないため、この仮想マシンを起動できません。既にほかで使用されている NIC があります。</value>
@@ -511,13 +511,13 @@
     <value>サーバーが稼働中であるため、この処理を完了できません。</value>
   </data>
   <data name="HOST_IS_SLAVE" xml:space="preserve">
-    <value>対象のサーバーはスレーブです。</value>
+    <value>対象のサーバーはプール メンバーです。</value>
   </data>
   <data name="HOST_ITS_OWN_SLAVE" xml:space="preserve">
-    <value>このホストはこれ自身のスレーブになっています。pool-emergency-transition-to-master または pool-emergency-reset-master を使用してください。</value>
+    <value>このホストは自身のプール メンバーになっています。pool-emergency-transition-to-master または pool-emergency-reset-master を使用してください。</value>
   </data>
   <data name="HOST_MASTER_CANNOT_TALK_BACK" xml:space="preserve">
-    <value>マスターは、指定された管理 IP アドレスのスレーブと通信できません。</value>
+    <value>マスターは、指定された管理 IP アドレスのプール メンバーと通信できません。</value>
   </data>
   <data name="HOST_NAME_INVALID" xml:space="preserve">
     <value>サーバー名が無効です。</value>
@@ -803,6 +803,9 @@
   </data>
   <data name="NO_MORE_REDO_LOGS_ALLOWED" xml:space="preserve">
     <value>アクティブなやり直しログのインスタンスが上限に達しました。</value>
+  </data>
+  <data name="NVIDIA_SRIOV_MISCONFIGURED" xml:space="preserve">
+    <value>NVidia GPU が SR-IOV 用に構成されていません</value>
   </data>
   <data name="NVIDIA_TOOLS_ERROR" xml:space="preserve">
     <value>Nvidia ツールのエラーです。最新の Nvidia ツールをインストールしてください</value>
@@ -1134,7 +1137,7 @@
     <value>このセッション {0} はイベント受信用に登録されていません。event.next の前に event.register を呼び出す必要があります。使用しているセッション ハンドルがエコーされます。</value>
   </data>
   <data name="SLAVE_REQUIRES_MANAGEMENT_INTERFACE" xml:space="preserve">
-    <value>スレーブは緊急モードで動作することがあるため、スレーブ上の管理インターフェイスは無効にできません。</value>
+    <value>プール メンバーは緊急モードで動作することがあるため、プール メンバー上の管理インターフェイスは無効にできません。</value>
   </data>
   <data name="SM_PLUGIN_COMMUNICATION_FAILURE" xml:space="preserve">
     <value>SM プラグインが照会に応答しません。</value>
@@ -1996,6 +1999,9 @@
   </data>
   <data name="VGPU_GUEST_DRIVER_LIMIT" xml:space="preserve">
     <value>ゲストドライバーは、仮想 GPU の移行をサポートしていません。</value>
+  </data>
+  <data name="VGPU_SUSPENSION_NOT_SUPPORTED" xml:space="preserve">
+    <value>仮想 GPU 構成は一時停止をサポートしていません。</value>
   </data>
   <data name="VGPU_TYPE_NOT_COMPATIBLE" xml:space="preserve">
     <value>仮想 GPU が VM 上の既存の種類と互換性がない場合、作成できません。</value>

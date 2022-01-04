@@ -286,7 +286,7 @@
     <value>1</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>欢迎使用灾难恢复向导。您要做些什么? </value>
+    <value>欢迎使用灾难恢复向导。您想采取哪些措施? </value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>

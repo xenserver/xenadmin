@@ -316,7 +316,7 @@
     <value>VM '{0}' の PVS アクセラレータを無効にしています</value>
   </data>
   <data name="ACTION_DISABLE_VM_ENLIGHTENMENT_DESCRIPTION" xml:space="preserve">
-    <value>無効化 </value>
+    <value>無効化: </value>
   </data>
   <data name="ACTION_DISABLE_VM_ENLIGHTENMENT_TITLE" xml:space="preserve">
     <value>VM '{0}' 上のコンテナ管理の無効化</value>
@@ -1297,7 +1297,7 @@
     <value>選択した USB デバイスを接続解除してもよろしいですか?</value>
   </data>
   <data name="ACTION_WAIT_FOR_SLAVES_TO_RECOVER" xml:space="preserve">
-    <value>スレーブの回復を待機しています...</value>
+    <value>ほかのプール メンバーが回復するのを待っています...</value>
   </data>
   <data name="ACTION_WLB_DECONFIGURE_FAILED" xml:space="preserve">
     <value>プール {0} のワークロード バランスの切断に失敗しました。{1}。ワークロード バランスを一時停止しました。</value>
@@ -2198,7 +2198,7 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="BOND_DELETE_WILL_DISTURB_BOTH" xml:space="preserve">
     <value>{0}
 
-このボンディングを削除すると、ボンディング上の管理インターフェイスおよびセカンダリ インターフェイスがボンディングの最初のスレーブに移動されます。 
+このボンディングを削除すると、ボンディング上の管理インターフェイスおよびセカンダリ インターフェイスが最初のボンディングされたメンバーに転送されます。 
 
 - [XenCenter] とプール間の接続が一時的に切断されます。
 
@@ -2209,7 +2209,7 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="BOND_DELETE_WILL_DISTURB_PRIMARY" xml:space="preserve">
     <value>{0}
 
-このボンディングを削除すると、ボンディング上の管理インターフェイスがボンディングの最初のスレーブに移動されます。 
+このボンディングを削除すると、ボンディング上の管理インターフェイスが最初のボンディングされたメンバーに自動的に転送されます。 
 
 - [XenCenter] とプール間の接続が一時的に切断されます。
 
@@ -2218,7 +2218,7 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="BOND_DELETE_WILL_DISTURB_SECONDARY" xml:space="preserve">
     <value>{0}
 
-このボンディングを削除すると、ボンディング上のセカンダリ インターフェイスがボンディングの最初のスレーブに移動され、その間このインターフェイスによるトラフィックが中断されます。</value>
+このボンディングを削除すると、ボンディング上のセカンダリ インターフェイスが最初のボンディングされたメンバーに転送され、その間このインターフェイスによるトラフィックが中断されます。</value>
   </data>
   <data name="BOND_GONE" xml:space="preserve">
     <value>[XenCenter] のキャッシュにボンディングが見つかりません。</value>
@@ -2642,6 +2642,12 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   </data>
   <data name="CHECKING_CLUSTERING_STATUS" xml:space="preserve">
     <value>クラスタリングの状態を確認しています</value>
+  </data>
+  <data name="CHECKING_CONTAINER_MANAGEMENT" xml:space="preserve">
+    <value>Docker コンテナ管理チェック</value>
+  </data>
+  <data name="CHECKING_CONTAINER_MANAGEMENT_GROUP" xml:space="preserve">
+    <value>従来の Container Management Supplemental Pack を確認しています</value>
   </data>
   <data name="CHECKING_FOR_PENDING_RESTART" xml:space="preserve">
     <value>保留中の再起動を確認しています</value>
@@ -3283,6 +3289,9 @@ VM {2} をエクスポートしてもよろしいですか?</value>
   <data name="CONTAINER_IMAGE" xml:space="preserve">
     <value>イメージ</value>
   </data>
+  <data name="CONTAINER_MANAGEMENT_REMOVAL_WARNING" xml:space="preserve">
+    <value>コンテナ管理のサポートは {0} に削除されました。Container Management Supplemental Pack は Docker コンテナの管理に使用できなくなるため、アンインストールしてください。</value>
+  </data>
   <data name="CONTAINER_ON_VM_TITLE" xml:space="preserve">
     <value>'{1}' {2} の {0}</value>
   </data>
@@ -3667,6 +3676,9 @@ VM {2} をエクスポートしてもよろしいですか?</value>
   <data name="CPM_SUMMARY_KEY_DESTINATION" xml:space="preserve">
     <value>移行先:</value>
   </data>
+  <data name="CPM_SUMMARY_KEY_HOME_SERVER" xml:space="preserve">
+    <value>ホーム サーバー:</value>
+  </data>
   <data name="CPM_SUMMARY_KEY_MIGRATE_TEMPLATE" xml:space="preserve">
     <value>テンプレート:</value>
   </data>
@@ -3678,10 +3690,6 @@ VM {2} をエクスポートしてもよろしいですか?</value>
   </data>
   <data name="CPM_SUMMARY_KEY_STORAGE" xml:space="preserve">
     <value>ストレージ:</value>
-  </data>
-  <data name="CPM_SUMMARY_KEY_TARGET_SERVER" xml:space="preserve">
-    <value>ターゲット サーバー:
-</value>
   </data>
   <data name="CPM_SUMMARY_KEY_TRANSFER_NETWORK" xml:space="preserve">
     <value>移行ネットワーク:</value>
@@ -3729,7 +3737,10 @@ VM {2} をエクスポートしてもよろしいですか?</value>
     <value>選択した VM を移動するプールまたはスタンドアロン サーバーを選択します。</value>
   </data>
   <data name="CPM_WIZARD_DESTINATION_TABLE_INTRO" xml:space="preserve">
-    <value>移行先プールのターゲット サーバーを指定する (オプション)(&amp;T):</value>
+    <value>移行先のプールのホーム サーバーに VM を割り当てる (オプション)(&amp;H):</value>
+  </data>
+  <data name="CPM_WIZARD_DESTINATION_TABLE_INTRO_TEMPLATES" xml:space="preserve">
+    <value>移行先のプールのホーム サーバーにテンプレートを割り当てる (オプション)(&amp;H):</value>
   </data>
   <data name="CPM_WIZARD_DESTINATION_TAB_TITLE" xml:space="preserve">
     <value>移行先のプール</value>
@@ -4457,8 +4468,8 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
   <data name="DISABLE_HA" xml:space="preserve">
     <value>高可用性の無効化</value>
   </data>
-  <data name="DISABLE_HA_CONFIGURE_MANAGEMENT_INTERFACES" xml:space="preserve">
-    <value>管理インターフェイスを構成する場合は、高可用性機能を無効にしてください。</value>
+  <data name="DISABLE_HA_CONFIGURE_IP_ADDRESSES" xml:space="preserve">
+    <value>IP アドレスを構成する場合は、高可用性を無効にします。</value>
   </data>
   <data name="DISABLE_HA_HOTKEY" xml:space="preserve">
     <value>高可用性の無効化(&amp;D)</value>
@@ -4692,13 +4703,16 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
     <value>以下を使用しない</value>
   </data>
   <data name="DONT_SELECT_TARGET_SERVER" xml:space="preserve">
-    <value>ターゲット サーバーを選択しない</value>
+    <value>ホーム サーバーを割り当てない</value>
   </data>
   <data name="DOWLOAD_LATEST_XS_TITLE" xml:space="preserve">
     <value>{0} がリリースされています</value>
   </data>
   <data name="DOWNLOADING_PATCH_FROM" xml:space="preserve">
     <value>’{0}’ からダウンロードしています ({1}/{2})...</value>
+  </data>
+  <data name="DOWNLOAD_AND_EXTRACT_ACTION_AUTHENTICATING_DESC" xml:space="preserve">
+    <value>{0} アカウントを認証しています...</value>
   </data>
   <data name="DOWNLOAD_AND_EXTRACT_ACTION_DOWNLOADING_DESC" xml:space="preserve">
     <value>アップデート {0} をダウンロードしています</value>
@@ -5125,7 +5139,7 @@ CD をイジェクトしてから再試行してください。</value>
     <value>ストレージ リポジトリが見つかりません。</value>
   </data>
   <data name="DR_WIZARD_STORAGEPAGE_SCAN_RESULT_TITLE" xml:space="preserve">
-    <value>以下のストレージ リポジトリが見つかりました。 
+    <value>次のストレージ リポジトリが見つかりました:
 </value>
   </data>
   <data name="DR_WIZARD_STORAGEPAGE_TEXT" xml:space="preserve">
@@ -5533,10 +5547,10 @@ CD をイジェクトしてから再試行してください。</value>
     <value>プールがクラスターを作成している間は、新しいマスターを選出することはできません。</value>
   </data>
   <data name="EVACUATE_HOST_HA_DISABLING" xml:space="preserve">
-    <value>プールで高可用性の無効化を実行中は、新しいマスターを選出できません。</value>
+    <value>プールで高可用性が無効になっている間は、新しいマスターを選出できません。</value>
   </data>
   <data name="EVACUATE_HOST_HA_ENABLING" xml:space="preserve">
-    <value>プールで高可用性の有効化の実行中は、新しいマスターを選出できません。</value>
+    <value>プールで高可用性が有効になっている間は、新しいマスターを選出できません。</value>
   </data>
   <data name="EVACUATE_HOST_INSTALL_MGMNT_PROMPT" xml:space="preserve">
     <value>{0} 管理エージェントのインストール</value>
@@ -5809,8 +5823,44 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="FILER_PARAM_INVALID_CHAR" xml:space="preserve">
     <value>ファイラ パラメーターに無効な文字が入力されました。</value>
   </data>
+  <data name="FILESERVICE_CLIENTID_INVALID_FILE" xml:space="preserve">
+    <value>クライアント ID ファイルが無効または破損しています。</value>
+  </data>
+  <data name="FILESERVICE_CLIENTID_FILETYPE" xml:space="preserve">
+    <value>クライアント ID ファイル (*.json)|*.json</value>
+  </data>
+  <data name="FILESERVICE_CLIENTID_FOUND" xml:space="preserve">
+    <value>クライアント ID が指定されました。</value>
+  </data>
+  <data name="FILESERVICE_CLIENTID_NOT_FOUND" xml:space="preserve">
+    <value>クライアント ID が指定されていません。</value>
+  </data>
+  <data name="FILESERVICE_CLIENTID_TITLE" xml:space="preserve">
+    <value>クライアント ID ファイルを選択します。</value>
+  </data>
+  <data name="FILESERVICE_AUTHENTICATE_ERROR" xml:space="preserve">
+    <value>[Citrix] アカウントを認証できませんでした。</value>
+  </data>
+  <data name="FILESERVICE_ERROR_400" xml:space="preserve">
+    <value>不正な要求を受け取りました。</value>
+  </data>
+  <data name="FILESERVICE_ERROR_401" xml:space="preserve">
+    <value>指定したクライアント ID が有効で、取り消されていないことを確認します。</value>
+  </data>
+  <data name="FILESERVICE_ERROR_403" xml:space="preserve">
+    <value>現在のサブスクリプションは、このアップデートをダウンロードするには不十分です。</value>
+  </data>
+  <data name="FILESERVICE_ERROR_404" xml:space="preserve">
+    <value>アップデートをダウンロードできませんでした。ファイルが見つかりませんでした。</value>
+  </data>
+  <data name="FILESERVICE_ERROR_500" xml:space="preserve">
+    <value>認証サーバーは、処理方法がわからない状況に遭遇しました。</value>
+  </data> 
   <data name="FILE_ALL" xml:space="preserve">
     <value>すべてのファイル</value>
+  </data>
+  <data name="FILE_NOT_FOUND" xml:space="preserve">
+    <value>ファイルが見つかりません</value>
   </data>
   <data name="FILE_PDF" xml:space="preserve">
     <value>Acrobat (PDF) ファイル</value>
@@ -8462,7 +8512,7 @@ SCSI ID: {2}
 続行しますか?</value>
   </data>
   <data name="MESSAGEBOX_SLAVES_EJECT" xml:space="preserve">
-    <value>プールを削除する前に、すべてのスレーブをプールからイジェクトする必要があります。</value>
+    <value>プールを削除する前に、すべてのプール メンバーをプールからイジェクトする必要があります。</value>
   </data>
   <data name="MESSAGEBOX_VIF_DELETE" xml:space="preserve">
     <value>選択したネットワーク インターフェイスが完全に削除されます。続行しますか?</value>
@@ -8842,7 +8892,7 @@ SCSI ID: {2}
     <value>このサーバーのライセンスではプール機能を使用できません</value>
   </data>
   <data name="NEWPOOL_SLAVE_ROLE" xml:space="preserve">
-    <value>スレーブに対する現在の役割には、プールへのスレーブの追加が許可されていません。</value>
+    <value>このサーバーでの現在の役割には、プールへのサーバーの追加が許可されていません。</value>
   </data>
   <data name="NEWPOOL_UNLICENSED_HOST_LICENSED_MASTER" xml:space="preserve">
     <value>ライセンスが適用されたプールにライセンスが適用されていないサーバーを追加することはできません</value>
@@ -8861,7 +8911,7 @@ SCSI ID: {2}
 
 SMB ストレージ リポジトリは共有されているため、その中に仮想ディスクを格納することで、リソース プール内の任意のサーバーでの VM の起動が可能になり、ライブ マイグレーションによる移行機能も提供されます。
 
-SMB ストレージ リポジトリを構成する場合は、SMB サーバーのホスト名または IP アドレス、ユーザー名、パスワード、およびそのストレージ リポジトリを格納するディレクトリのパスを入力します。プール内のすべてのサーバーにそのパスがエクスポートされるように SMB サーバーを構成してください。</value>
+SMB ストレージ リポジトリを構成する場合は、SMB サーバーのホスト名または IP アドレス、ユーザー名、パスワード、およびそのストレージ リポジトリを格納するディレクトリのパスを入力します。SMB サーバーはバージョン 3 をサポートする必要があります。プール内のすべてのサーバーにそのパスがエクスポートされるように SMB サーバーを構成してください。</value>
   </data>
   <data name="NEWSR_CIFS_ISO_BLURB" xml:space="preserve">
     <value>仮想マシンのインストール ISO イメージ ライブラリが Windows (SMB/CIFS) 共有にあり、それをホストまたはプールに接続する場合は、このオプションを選択します。</value>
@@ -9622,7 +9672,7 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
     <value>{0} (非表示)</value>
   </data>
   <data name="NIC_SLAVE" xml:space="preserve">
-    <value>{0} (スレーブ)</value>
+    <value>{0} (ボンディングされたメンバー)</value>
   </data>
   <data name="NIC_TAB_TITLE" xml:space="preserve">
     <value>ネットワーク インターフェイス カード</value>
@@ -10329,13 +10379,6 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="PATCH_NEEDS_NEW_XENCENTER" xml:space="preserve">
     <value>このバージョンには [XenCenter] {0} 以降が必要です</value>
   </data>
-  <data name="PATCH_NOT_FOUND" xml:space="preserve">
-    <value>見つかりません</value>
-  </data>
-  <data name="PATCH_NOT_FOUND_EXPANDED_DESCRIPTION" xml:space="preserve">
-    <value>{0}
-ファイルが見つかりません</value>
-  </data>
   <data name="PATCH_UPLOADED" xml:space="preserve">
     <value>アップデートがサーバー '{0}' にアップロードされました </value>
   </data>
@@ -10427,7 +10470,7 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
     <value> 完了しました。</value>
   </data>
   <data name="PLAN_ACTION_ERROR" xml:space="preserve">
-    <value> エラー。</value>
+    <value> エラー.</value>
   </data>
   <data name="PLAN_ACTION_FAILURE_NO_HOSTS_AVAILABLE" xml:space="preserve">
     <value>サーバー '{0}' は、このサーバーから移行されるすべての VM を格納できるサーバーがなかったため、退避できませんでした。アップデート インストール後に再起動を保留している他のサーバーを再起動してから、[再試行] をクリックしてプロセスを再開してください。</value>
@@ -10661,6 +10704,15 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   </data>
   <data name="PROBING_HBA_TITLE" xml:space="preserve">
     <value>{0} の LUN のプローブ</value>
+  </data>
+  <data name="PROBLEM_CONTAINER_MANAGEMENT_DESCRIPTION" xml:space="preserve">
+    <value>{0}: コンテナ管理のサポートは {1} に削除されました。</value>
+  </data>
+  <data name="PROBLEM_CONTAINER_MANAGEMENT_HELP" xml:space="preserve">
+    <value>最初に Docker コンテナの管理に使用できなくなる Container Management Supplemental Pack をアンインストールします。</value>
+  </data>
+  <data name="PROBLEM_CONTAINER_MANAGEMENT_INFO" xml:space="preserve">
+    <value>{0} 以降にアップグレードする場合、最初に Docker コンテナの管理に使用できなくなる Container Management Supplemental Pack をアンインストールします。</value>
   </data>
   <data name="PROBLEM_HOSTPROBLEM_TITLE" xml:space="preserve">
     <value>サーバー '{0}'</value>
@@ -12318,9 +12370,6 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   <data name="TARGET" xml:space="preserve">
     <value>ターゲット</value>
   </data>
-  <data name="TARGET_SERVER" xml:space="preserve">
-    <value>ターゲット サーバー</value>
-  </data>
   <data name="TELL_ME_MORE" xml:space="preserve">
     <value>詳細情報...</value>
   </data>
@@ -12621,8 +12670,7 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
     <value>[XenServer] または [XenCenter] アップデートの自動確認</value>
   </data>
   <data name="UPDATES_DIALOG_ACTION_REQUIRED" xml:space="preserve">
-    <value>適用したアップデートを有効にするには、以下の操作が必要です。
- </value>
+    <value>適用したアップデートを有効にするには、以下の操作が必要です。 </value>
   </data>
   <data name="UPDATES_DIALOG_APPLIED" xml:space="preserve">
     <value>{0} - インストール済み ({1})</value>
@@ -12919,22 +12967,22 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
     <value>{0}: プール {1} の WLB が有効なためチェックがスキップされました。</value>
   </data>
   <data name="UPDATE_DISMISS_ALL_CONTINUE" xml:space="preserve">
-    <value>アップデート一覧にフィルタが適用されています。すべての接続先サーバーのすべてのアップデートをクリアしますか? それとも、現在のフィルタにより表示されているアップデートのみをクリアしますか? いずれの場合でも、クリアしたアップデートは、サーバーから完全に削除されます。
+    <value>You have applied filters to the list of update notifications. Do you want to dismiss all update notifications for every connected server, or only the update notifications you have chosen to view?
 
-注: RBAC が有効な場合、役割で許可されているアップデートのみがクリアされます。</value>
+Note that if RBAC is enabled, only updates which you have privileges to dismiss will be affected.</value>
   </data>
   <data name="UPDATE_DISMISS_ALL_NO_FILTER_CONTINUE" xml:space="preserve">
-    <value>これにより、すべての接続先サーバーのすべてのアップデートが完全に削除されます。続行しますか?
+    <value>This operation will dismiss all update notifications for every connected server. Do you want to continue?
 
-注: RBAC が有効な場合、役割で許可されているアップデートのみがクリアされます。</value>
+Note that if RBAC is enabled, only updates which you have privileges to dismiss will be affected.</value>
   </data>
   <data name="UPDATE_DISMISS_CONFIRM" xml:space="preserve">
     <value>このアップデートをクリアしてもよろしいですか?</value>
   </data>
   <data name="UPDATE_DISMISS_SELECTED_CONFIRM" xml:space="preserve">
-    <value>これにより、選択したアップデートがサーバーから完全に削除されます。続行しますか?
+    <value>This operation will dismiss all the selected update notifications. Do you want to continue?
 
-注: RBAC が有効な場合、役割で許可されているアップデートのみがクリアされます。</value>
+Note that if RBAC is enabled, only updates which you have privileges to dismiss will be affected.</value>
   </data>
   <data name="UPDATE_ERROR_INTRODUCE" xml:space="preserve">
     <value>アップデートのイントロデュースに失敗しました。</value>
@@ -13581,7 +13629,7 @@ VM のパフォーマンスを最適化するために、VCPU の数を物理 CP
     <value>vCPU の最大数、トポロジー、vCPU 優先度を変更するには、VM がシャットダウン状態である必要があります。 </value>
   </data>
   <data name="VM_CPUMEMPAGE_RUBRIC" xml:space="preserve">
-    <value>他の vCPU に対して割り当てられる vCPU の数、トポロジー、優先度を指定します。 </value>
+    <value>ほかの vCPU に対して割り当てられる vCPU の数、トポロジー、優先度を指定します。 </value>
   </data>
   <data name="VM_CPUMEMPAGE_RUBRIC_HOTPLUG" xml:space="preserve">
     <value>vCPU の初期の数が最大数より多く設定されている場合は、仮想マシンの実行中にさらに vCPU を追加できます。 </value>
@@ -14615,5 +14663,8 @@ VM のパフォーマンスを最適化するために、VCPU の数を物理 CP
   </data>
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>現在の位置</value>
+  </data>
+  <data name="HEALTHCHECK_CANNOT_ALTER_SETTINGS" xml:space="preserve">
+    <value>{0} ユーザーのみがヘルスチェックに対して登録、構成、無効化を実行する、またはレポートをアップロードしてレポート分析を要求できます。</value>
   </data>
 </root>
