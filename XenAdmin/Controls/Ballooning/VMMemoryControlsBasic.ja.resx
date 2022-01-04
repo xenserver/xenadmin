@@ -559,7 +559,7 @@
     <value>5</value>
   </data>
   <data name="linkInstallTools.Text" xml:space="preserve">
-    <value>今すぐ [Citrix VM Tools] をインストール</value>
+    <value>{0} を今すぐインストール</value>
   </data>
   <data name="&gt;&gt;linkInstallTools.Name" xml:space="preserve">
     <value>linkInstallTools</value>

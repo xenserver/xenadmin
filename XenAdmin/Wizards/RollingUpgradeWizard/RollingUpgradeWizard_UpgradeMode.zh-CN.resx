@@ -238,7 +238,7 @@
     <value>4</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>在手动模式下，必须从 CD-ROM 或 PXE 网络启动运行 [XenServer] 安装程序并按照服务器控制台中的安装程序屏幕说明进行操作，从而依次对每个服务器手动应用升级。必须为池中的每个服务器重复此过程。</value>
+    <value>在手动模式下，必须从 CD-ROM 或 PXE 网络启动运行 {0} 安装程序并按照服务器控制台中的安装程序屏幕说明进行操作，从而依次对每个服务器手动应用升级。必须为池中的每个服务器重复此过程。</value>
   </data>
   <data name="&gt;&gt;label3.Name" xml:space="preserve">
     <value>label3</value>

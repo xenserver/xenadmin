@@ -157,7 +157,7 @@
     <value>0</value>
   </data>
   <data name="label6.Text" xml:space="preserve">
-    <value>[XenServer] {0} 以降、休止スナップショットは使用できなくなりました。スケジュールされたスナップショットが正常に作成されるようにするには、このオプションの選択を解除してください。</value>
+    <value>{0} {1} 以降、休止スナップショットは使用できなくなりました。スケジュールされたスナップショットが正常に作成されるようにするには、このオプションの選択を解除してください。</value>
   </data>
   <data name="&gt;&gt;label6.Name" xml:space="preserve">
     <value>label6</value>
@@ -322,10 +322,10 @@
     <value>1</value>
   </data>
   <data name="labelWarning.Text" xml:space="preserve">
-    <value>スケジュールされたディスクとメモリのスナップショットは、この の対象 VM が以下のすべての条件を満たす場合のみ作成されます。
+    <value>スケジュールされたディスクとメモリのスナップショットは、このスケジュールの対象 VM が以下のすべての条件を満たす場合のみ作成されます。
 
 1. スケジュールされた時間に VM が実行中である、または一時停止している。
-2. VM に [Citrix VM Tools] がインストールされている。
+2. VM に {0} がインストールされている。
 3. VM に専用の GPU が割り当てられている場合、この GPU がディスクとメモリのスナップショットをサポートします。</value>
   </data>
   <data name="&gt;&gt;labelWarning.Name" xml:space="preserve">

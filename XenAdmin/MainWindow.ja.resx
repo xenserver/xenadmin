@@ -304,7 +304,7 @@
     <value>22</value>
   </data>
   <data name="TabPageCvmConsole.Text" xml:space="preserve">
-    <value>Nutanix CVM コンソール</value>
+    <value>ドライバー ドメイン コンソール</value>
   </data>
   <data name="&gt;&gt;TabPageCvmConsole.Name" xml:space="preserve">
     <value>TabPageCvmConsole</value>
@@ -1900,7 +1900,7 @@
     <value>176, 22</value>
   </data>
   <data name="templatesToolStripMenuItem1.Text" xml:space="preserve">
-    <value>[XenServer] テンプレート(&amp;E)</value>
+    <value>{0} テンプレート(&amp;E)</value>
   </data>
   <data name="localStorageToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>186, 22</value>
@@ -2037,6 +2037,12 @@
   <data name="wlbDisconnectToolStripMenuItem.Text" xml:space="preserve">
     <value>ワークロード バランス サーバーの切断(&amp;B)</value>
   </data>
+  <data name="toolStripMenuItemWlb.Size" type="System.Drawing.Size, System.Drawing">
+    <value>247, 22</value>
+  </data>
+  <data name="toolStripMenuItemWlb.Text" xml:space="preserve">
+    <value>ワークロード バランス(&amp;B)</value>
+  </data>
   <data name="conversionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>277, 22</value>
   </data>
@@ -2057,6 +2063,12 @@
   </data>
   <data name="toolStripMenuItemRotateSecret.Text" xml:space="preserve">
     <value>プール シークレットの入れ替え(&amp;P)</value>
+  </data>
+  <data name="toolStripMenuItemEnableTls.Size" type="System.Drawing.Size, System.Drawing">
+    <value>247, 22</value>
+  </data>
+  <data name="toolStripMenuItemEnableTls.Text" xml:space="preserve">
+    <value>証明書の検証を有効化(&amp;F)</value>
   </data>
   <data name="toolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>274, 6</value>
@@ -2241,6 +2253,18 @@
   <data name="toolStripMenuItemInstallCertificate.Text" xml:space="preserve">
     <value>証明書のインストール(&amp;I)...</value>
   </data>
+  <data name="toolStripMenuItemResetCertificate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="toolStripMenuItemResetCertificate.Text" xml:space="preserve">
+    <value>証明書のリセット(&amp;R)</value>
+  </data>
+  <data name="toolStripMenuItemCertificate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 22</value>
+  </data>
+  <data name="toolStripMenuItemCertificate.Text" xml:space="preserve">
+    <value>証明書(&amp;I)</value>
+  </data>
   <data name="maintenanceModeToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 22</value>
   </data>
@@ -2293,7 +2317,7 @@
     <value>212, 22</value>
   </data>
   <data name="removeHostToolStripMenuItem.Text" xml:space="preserve">
-    <value>[XenCenter] から削除(&amp;V)</value>
+    <value>{0} から削除(&amp;V)</value>
   </data>
   <data name="toolStripSeparator15.Size" type="System.Drawing.Size, System.Drawing">
     <value>209, 6</value>
@@ -2413,7 +2437,7 @@
     <value>246, 22</value>
   </data>
   <data name="installToolsToolStripMenuItem.Text" xml:space="preserve">
-    <value>[Citrix VM Tools] をインストール(&amp;A)</value>
+    <value>installToolsToolStripMenuItem</value>
   </data>
   <data name="sendCtrlAltDelToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>246, 22</value>
@@ -2710,7 +2734,7 @@
     <value>197, 22</value>
   </data>
   <data name="viewApplicationLogToolStripMenuItem.Text" xml:space="preserve">
-    <value>[XenCenter] ログ ファイルの表示(&amp;L)</value>
+    <value>{0} ログ ファイルの表示(&amp;L)</value>
   </data>
   <data name="toolStripMenuItem17.Size" type="System.Drawing.Size, System.Drawing">
     <value>194, 6</value>
@@ -2719,13 +2743,13 @@
     <value>197, 22</value>
   </data>
   <data name="xenSourceOnTheWebToolStripMenuItem.Text" xml:space="preserve">
-    <value>Web 上の [XenServer product](&amp;W)</value>
+    <value>Web 上の {0}(&amp;W)</value>
   </data>
   <data name="xenCenterPluginsOnlineToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>192, 22</value>
   </data>
   <data name="xenCenterPluginsOnlineToolStripMenuItem.Text" xml:space="preserve">
-    <value>[XenCenter] プラグイン オンライン(&amp;P)</value>
+    <value>{0} プラグイン オンライン(&amp;P)</value>
   </data>
   <data name="toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
     <value>194, 6</value>
@@ -2740,7 +2764,7 @@
     <value>197, 22</value>
   </data>
   <data name="aboutXenSourceAdminToolStripMenuItem.Text" xml:space="preserve">
-    <value>バージョン情報(&amp;A)</value>
+    <value>{0} のバージョン情報(&amp;A)</value>
   </data>
   <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>41, 20</value>
@@ -2838,11 +2862,11 @@
   <data name="statusLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="statusLabelAlerts.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="statusLabelErrors.Size" type="System.Drawing.Size, System.Drawing">
     <value>118, 22</value>
   </data>
-  <data name="statusLabelAlerts.Text" xml:space="preserve">
-    <value>toolStripStatusLabel1</value>
+  <data name="statusLabelErrors.Text" xml:space="preserve">
+    <value>toolStripStatusLabel3</value>
   </data>
   <data name="statusLabelUpdates.Size" type="System.Drawing.Size, System.Drawing">
     <value>118, 22</value>
@@ -2850,11 +2874,11 @@
   <data name="statusLabelUpdates.Text" xml:space="preserve">
     <value>toolStripStatusLabel2</value>
   </data>
-  <data name="statusLabelErrors.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="statusLabelAlerts.Size" type="System.Drawing.Size, System.Drawing">
     <value>118, 22</value>
   </data>
-  <data name="statusLabelErrors.Text" xml:space="preserve">
-    <value>toolStripStatusLabel3</value>
+  <data name="statusLabelAlerts.Text" xml:space="preserve">
+    <value>toolStripStatusLabel1</value>
   </data>
   <data name="StatusStrip.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 703</value>
@@ -2899,7 +2923,7 @@
     <value>No</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>[XenCenter]</value>
+    <value>本文</value>
   </data>
   <data name="&gt;&gt;backButton.Name" xml:space="preserve">
     <value>backButton</value>
@@ -3213,6 +3237,18 @@
   <data name="&gt;&gt;highAvailabilityToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
+  <data name="&gt;&gt;toolStripMenuItemHaConfigure.Name" xml:space="preserve">
+    <value>toolStripMenuItemHaConfigure</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemHaConfigure.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemHaDisable.Name" xml:space="preserve">
+    <value>toolStripMenuItemHaDisable</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemHaDisable.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
   <data name="&gt;&gt;disasterRecoveryToolStripMenuItem.Name" xml:space="preserve">
     <value>disasterRecoveryToolStripMenuItem</value>
   </data>
@@ -3243,6 +3279,12 @@
   <data name="&gt;&gt;exportResourceReportPoolToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
+  <data name="&gt;&gt;toolStripMenuItemWlb.Name" xml:space="preserve">
+    <value>toolStripMenuItemWlb</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemWlb.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
   <data name="&gt;&gt;wlbReportsToolStripMenuItem.Name" xml:space="preserve">
     <value>wlbReportsToolStripMenuItem</value>
   </data>
@@ -3271,6 +3313,18 @@
     <value>changePoolPasswordToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;changePoolPasswordToolStripMenuItem.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemRotateSecret.Name" xml:space="preserve">
+    <value>toolStripMenuItemRotateSecret</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemRotateSecret.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemEnableTls.Name" xml:space="preserve">
+    <value>toolStripMenuItemEnableTls</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemEnableTls.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem1.Name" xml:space="preserve">
@@ -3428,6 +3482,12 @@
   </data>
   <data name="&gt;&gt;toolStripSeparator23.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemCertificate.Name" xml:space="preserve">
+    <value>toolStripMenuItemCertificate</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemCertificate.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemInstallCertificate.Name" xml:space="preserve">
     <value>toolStripMenuItemInstallCertificate</value>
@@ -4011,10 +4071,10 @@
   <data name="&gt;&gt;statusLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;statusLabelAlerts.Name" xml:space="preserve">
-    <value>statusLabelAlerts</value>
+  <data name="&gt;&gt;statusLabelErrors.Name" xml:space="preserve">
+    <value>statusLabelErrors</value>
   </data>
-  <data name="&gt;&gt;statusLabelAlerts.Type" xml:space="preserve">
+  <data name="&gt;&gt;statusLabelErrors.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;statusLabelUpdates.Name" xml:space="preserve">
@@ -4023,28 +4083,16 @@
   <data name="&gt;&gt;statusLabelUpdates.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;statusLabelErrors.Name" xml:space="preserve">
-    <value>statusLabelErrors</value>
+  <data name="&gt;&gt;statusLabelAlerts.Name" xml:space="preserve">
+    <value>statusLabelAlerts</value>
   </data>
-  <data name="&gt;&gt;statusLabelErrors.Type" xml:space="preserve">
+  <data name="&gt;&gt;statusLabelAlerts.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripMenuItemRotateSecret.Name" xml:space="preserve">
-    <value>toolStripMenuItemRotateSecret</value>
+  <data name="&gt;&gt;toolStripMenuItemResetCertificate.Name" xml:space="preserve">
+    <value>toolStripMenuItemResetCertificate</value>
   </data>
-  <data name="&gt;&gt;toolStripMenuItemRotateSecret.Type" xml:space="preserve">
-    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemHaConfigure.Name" xml:space="preserve">
-    <value>toolStripMenuItemHaConfigure</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemHaConfigure.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemHaDisable.Name" xml:space="preserve">
-    <value>toolStripMenuItemHaDisable</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemHaDisable.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripMenuItemResetCertificate.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
-    Microsoft ResX Schema 
-    
+  <!--
+    Microsoft ResX Schema
+
     Version 2.0
-    
-    The primary goals of this format is to allow a simple XML format 
-    that is mostly human readable. The generation and parsing of the 
-    various data types are done through the TypeConverter classes 
+
+    The primary goals of this format is to allow a simple XML format
+    that is mostly human readable. The generation and parsing of the
+    various data types are done through the TypeConverter classes
     associated with the data types.
-    
+
     Example:
-    
+
     ... ado.net/XML headers & schema ...
     <resheader name="resmimetype">text/microsoft-resx</resheader>
     <resheader name="version">2.0</resheader>
@@ -26,39 +26,39 @@
         <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
         <comment>This is a comment</comment>
     </data>
-                
-    There are any number of "resheader" rows that contain simple 
+
+    There are any number of "resheader" rows that contain simple
     name/value pairs.
-    
-    Each data row contains a name, and value. The row also contains a 
-    type or mimetype. Type corresponds to a .NET class that support 
-    text/value conversion through the TypeConverter architecture. 
-    Classes that don't support this are serialized and stored with the 
+
+    Each data row contains a name, and value. The row also contains a
+    type or mimetype. Type corresponds to a .NET class that support
+    text/value conversion through the TypeConverter architecture.
+    Classes that don't support this are serialized and stored with the
     mimetype set.
-    
-    The mimetype is used for serialized objects, and tells the 
-    ResXResourceReader how to depersist the object. This is currently not 
+
+    The mimetype is used for serialized objects, and tells the
+    ResXResourceReader how to depersist the object. This is currently not
     extensible. For a given mimetype the value must be set accordingly:
-    
-    Note - application/x-microsoft.net.object.binary.base64 is the format 
-    that the ResXResourceWriter will generate, however the reader can 
+
+    Note - application/x-microsoft.net.object.binary.base64 is the format
+    that the ResXResourceWriter will generate, however the reader can
     read any of the formats listed below.
-    
+
     mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with 
+    value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
-    
+
     mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with 
+    value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
 
     mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array 
+    value   : The object must be serialized into a byte array
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
-    -->
+  -->
   <xsd:schema id="root" xmlns="" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
     <xsd:element msdata:IsDataSet="true" name="root">
@@ -112,16 +112,25 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ACTIVATION_WHILE_NOT_FREE" xml:space="preserve">
     <value>仅当版本设置为“免费”时，才能应用激活密钥。</value>
   </data>
   <data name="ADDRESS_VIOLATES_LOCKING_CONSTRAINT" xml:space="preserve">
     <value>指定 IP 地址与 VIF 锁定配置不符。</value>
+  </data>
+  <data name="APPLY_GUIDANCE_FAILED" xml:space="preserve">
+    <value>更新后无法在主机上应用指南。</value>
+  </data>
+  <data name="APPLY_UPDATES_FAILED" xml:space="preserve">
+    <value>无法在主机上应用更新。</value>
+  </data>
+  <data name="APPLY_UPDATES_IN_PROGRESS" xml:space="preserve">
+    <value>无法执行此操作，因为正在应用更新。</value>
   </data>
   <data name="AUTH_ALREADY_ENABLED" xml:space="preserve">
     <value>已对此服务器启用外部身份验证。</value>
@@ -184,7 +193,7 @@
     <value>找不到 VM 所需的桥接。</value>
   </data>
   <data name="CANNOT_ADD_TUNNEL_TO_BOND_SLAVE" xml:space="preserve">
-    <value>此 PIF 是绑定从属设备，不能带有隧道。</value>
+    <value>此 PIF 是绑定成员，不能带有隧道。</value>
   </data>
   <data name="CANNOT_ADD_TUNNEL_TO_SRIOV_LOGICAL" xml:space="preserve">
     <value>这是网络 SR-IOV 逻辑 PIF，不能在其上创建通道。</value>
@@ -193,10 +202,10 @@
     <value>这是网络 SR-IOV 上的 VLAN PIF，不能在其上创建通道。</value>
   </data>
   <data name="CANNOT_ADD_VLAN_TO_BOND_SLAVE" xml:space="preserve">
-    <value>此 PIF 是绑定从属设备，不能带有 VLAN。</value>
+    <value>此 PIF 是绑定成员，不能带有 VLAN。</value>
   </data>
   <data name="CANNOT_CHANGE_PIF_PROPERTIES" xml:space="preserve">
-    <value>无法更新此 PIF 的这一属性。只能更改非绑定物理 PIF 或绑定主 PIF 的属性。</value>
+    <value>无法更改此 PIF 的属性。只能更改非绑定物理 PIF 或绑定接口的属性。</value>
   </data>
   <data name="CANNOT_CONTACT_HOST" xml:space="preserve">
     <value>无法转发消息，因为无法与服务器联系。该服务器可能已关闭或者可能存在网络连接问题。</value>
@@ -217,13 +226,13 @@
     <value>无法撤离此服务器。</value>
   </data>
   <data name="CANNOT_FETCH_PATCH" xml:space="preserve">
-    <value>无法从主服务器获取请求的更新。</value>
+    <value>无法从协调器获取请求的更新。</value>
   </data>
   <data name="CANNOT_FIND_OEM_BACKUP_PARTITION" xml:space="preserve">
     <value>找不到用于通过流技术推送更新的备份分区</value>
   </data>
   <data name="CANNOT_FIND_PATCH" xml:space="preserve">
-    <value>找不到请求的更新。指定新的主服务器时，可能会发生此情况。请重新上载</value>
+    <value>找不到请求的更新。指定新的协调器时，可能会发生此情况。请重新上载</value>
   </data>
   <data name="CANNOT_FIND_STATE_PARTITION" xml:space="preserve">
     <value>无法执行还原，因为找不到状态分区</value>
@@ -235,13 +244,16 @@
     <value>这是网络 SR-IOV 逻辑 PIF，不能在其上执行忘记操作</value>
   </data>
   <data name="CANNOT_PLUG_BOND_SLAVE" xml:space="preserve">
-    <value>此 PIF 为绑定从属设备，不能插入。</value>
+    <value>此 PIF 是绑定成员，不能插入。</value>
   </data>
   <data name="CANNOT_PLUG_VIF" xml:space="preserve">
     <value>无法启动此 VM，因为无法连接其网络接口。一个 NIC 正在其他位置使用。</value>
   </data>
   <data name="CANNOT_RESET_CONTROL_DOMAIN" xml:space="preserve">
     <value>无法重置控制域的电源状态。</value>
+  </data>
+  <data name="CANNOT_RESTART_DEVICE_MODEL" xml:space="preserve">
+    <value>无法重新启动驻留在主机上的已暂停 VM 的设备模型。</value>
   </data>
   <data name="CERTIFICATE_ALREADY_EXISTS" xml:space="preserve">
     <value>已存在具有指定名称的证书。</value>
@@ -283,13 +295,16 @@
     <value>强制销毁群集时在 Cluster_host 上执行强制销毁失败。</value>
   </data>
   <data name="CLUSTER_HOST_IS_LAST" xml:space="preserve">
-    <value>无法销毁最后一个群集主机。请改为破坏该集群</value>
+    <value>无法销毁最后一个群集主机。请改为破坏该群集</value>
   </data>
   <data name="CLUSTER_HOST_NOT_JOINED" xml:space="preserve">
     <value>cluster_host 操作失败，因为 cluster_host 尚未加入群集。</value>
   </data>
   <data name="CLUSTER_STACK_IN_USE" xml:space="preserve">
     <value>至少一个插入的 PBD 仍在使用群集堆栈。</value>
+  </data>
+  <data name="CONFIGURE_REPOSITORIES_IN_PROGRESS" xml:space="preserve">
+    <value>无法执行该操作，因为已在配置其他存储库。</value>
   </data>
   <data name="COULD_NOT_FIND_NETWORK_INTERFACE_WITH_SPECIFIED_DEVICE_NAME_AND_MAC_ADDRESS" xml:space="preserve">
     <value>找不到具有指定设备名称和 MAC 地址的网络接口。</value>
@@ -361,7 +376,7 @@
     <value>无法还原此 VM，因为它将创建重复项</value>
   </data>
   <data name="EVACUATE_NO_OTHER_HOSTS_FOR_MASTER" xml:space="preserve">
-    <value>没有其他服务器可指定为主服务器。请添加或启用其他一些服务器。</value>
+    <value>没有其他服务器可指定为协调器。请添加或启用其他一些服务器。</value>
   </data>
   <data name="EVENTS_LOST" xml:space="preserve">
     <value>某些事件已从队列中丢失，无法检索。</value>
@@ -384,6 +399,15 @@
   <data name="FIELD_TYPE_ERROR" xml:space="preserve">
     <value>您提供的某个字段使用了错误类型。</value>
   </data>
+  <data name="GET_HOST_UPDATES_FAILED" xml:space="preserve">
+    <value>无法从主机获取可用更新。</value>
+  </data>
+  <data name="GET_UPDATES_FAILED" xml:space="preserve">
+    <value>无法从池中获取可用更新。</value>
+  </data>
+  <data name="GET_UPDATES_IN_PROGRESS" xml:space="preserve">
+    <value>无法执行该操作，因为正在获取更新。</value>
+  </data>
   <data name="GPU_GROUP_CONTAINS_NO_PGPUS" xml:space="preserve">
     <value>GPU 组不包含任何 GPU。</value>
   </data>
@@ -397,7 +421,7 @@
     <value>对象已删除。{0}:{1}</value>
   </data>
   <data name="HA_ABORT_NEW_MASTER" xml:space="preserve">
-    <value>此服务器此时无法接受建议的新主服务器设置。</value>
+    <value>此服务器此时无法接受建议的新协调器设置。</value>
   </data>
   <data name="HA_CANNOT_CHANGE_BOND_STATUS_OF_MGMT_IFACE" xml:space="preserve">
     <value>无法执行此操作，因为在高可用性处于启用状态时不允许创建或删除涉及管理接口的绑定。要执行此操作，请禁用高可用性，创建或删除绑定，然后重新启用高可用性。</value>
@@ -451,7 +475,7 @@
     <value>此服务器无法加入池中，因为该池启用了高可用性，而服务器禁用了高可用性。</value>
   </data>
   <data name="HA_SHOULD_BE_FENCED" xml:space="preserve">
-    <value>服务器无法重新加入池中，因为应为其实施防护(不处于主服务器的分区中)</value>
+    <value>服务器无法重新加入池中，因为应为其实施防护(不处于协调器的分区中)。</value>
   </data>
   <data name="HA_TOO_FEW_HOSTS" xml:space="preserve">
     <value>只能对两个或更多的服务器启用高可用性。请注意，两个服务器需要使用一个预先配置的仲裁决胜脚本。</value>
@@ -493,7 +517,7 @@
     <value>正在撤走此主机。</value>
   </data>
   <data name="HOST_HAS_NO_MANAGEMENT_IP" xml:space="preserve">
-    <value>服务器无法获取其管理接口的 IP 地址，因此无法与主服务器联系。</value>
+    <value>服务器无法获取其管理接口的 IP 地址，因此无法与协调器通信。</value>
   </data>
   <data name="HOST_HAS_RESIDENT_VMS" xml:space="preserve">
     <value>无法忘记此服务器，因为仍有一些用户 VM 正在运行</value>
@@ -511,13 +535,13 @@
     <value>无法完成此操作，因为服务器仍处于活动状态。</value>
   </data>
   <data name="HOST_IS_SLAVE" xml:space="preserve">
-    <value>您正联系的服务器为从属服务器</value>
+    <value>您正在与之通信的服务器为受支持的服务器</value>
   </data>
   <data name="HOST_ITS_OWN_SLAVE" xml:space="preserve">
-    <value>主机为自身的从属服务器。请使用 pool-emergency-transition-to-master 或 pool-emergency-reset-master。</value>
+    <value>主机为自身的受支持服务器。请使用 pool-emergency-transition-to-master 或 pool-emergency-reset-master。</value>
   </data>
   <data name="HOST_MASTER_CANNOT_TALK_BACK" xml:space="preserve">
-    <value>主服务器报告其无法响应所提供管理 IP 地址处的从属服务器。</value>
+    <value>协调器报告其无法通过提供的管理 IP 地址响应受支持的服务器。</value>
   </data>
   <data name="HOST_NAME_INVALID" xml:space="preserve">
     <value>服务器名称无效。</value>
@@ -553,7 +577,7 @@
     <value>服务器仍在启动中。</value>
   </data>
   <data name="HOST_UNKNOWN_TO_MASTER" xml:space="preserve">
-    <value>主服务器表示自己不知道该服务器。该服务器是否在主服务器的数据库中并指向正确的主服务器? 所有服务器是否都使用相同的池密码?</value>
+    <value>协调器表示无法识别该服务器。该服务器是否在协调器的数据库中并指向正确的协调器? 所有服务器是否都使用相同的池密码?</value>
   </data>
   <data name="ILLEGAL_VBD_DEVICE" xml:space="preserve">
     <value>无法识别指定的 VBD 设备: 请使用非负整数</value>
@@ -597,6 +621,9 @@
   <data name="INTERNAL_ERROR" xml:space="preserve">
     <value>内部错误: {0}</value>
   </data>
+  <data name="INVALID_BASE_URL" xml:space="preserve">
+    <value>存储库中的基本 URL 无效。</value>
+  </data>
   <data name="INVALID_CIDR_ADDRESS_SPECIFIED" xml:space="preserve">
     <value>必需参数包含无效 CIDR 地址(&lt;地址&gt;/&lt;前缀长度&gt;)</value>
   </data>
@@ -621,8 +648,14 @@
   <data name="INVALID_PATCH_WITH_LOG" xml:space="preserve">
     <value>上载的更新文件无效。</value>
   </data>
+  <data name="INVALID_REPOMD_XML" xml:space="preserve">
+    <value>repomd.xml 无效。</value>
+  </data>
   <data name="INVALID_UPDATE" xml:space="preserve">
     <value>上载的更新程序包无效。</value>
+  </data>
+  <data name="INVALID_UPDATEINFO_XML" xml:space="preserve">
+    <value>updateinfo.xml 无效。</value>
   </data>
   <data name="INVALID_VALUE" xml:space="preserve">
     <value>值“{1}”对于字段“{0}”无效。</value>
@@ -631,7 +664,7 @@
     <value>无法在隧道访问 PIF 之上创建 VLAN 或隧道 - 请改为使用基础传输 PIF。</value>
   </data>
   <data name="JOINING_HOST_CANNOT_BE_MASTER_OF_OTHER_HOSTS" xml:space="preserve">
-    <value>加入池的服务器不能已经是另一个池的主服务器。</value>
+    <value>加入池的服务器不能已经是另一个池的协调器。</value>
   </data>
   <data name="JOINING_HOST_CANNOT_CONTAIN_SHARED_SRS" xml:space="preserve">
     <value>加入池的服务器不能包含任何共享存储。</value>
@@ -729,6 +762,9 @@
   <data name="MISSING_CONNECTION_DETAILS" xml:space="preserve">
     <value>许可证服务器连接详细信息(地址或端口)缺少或不完整。</value>
   </data>
+  <data name="MULTIPLE_UPDATE_REPOSITORIES_ENABLED" xml:space="preserve">
+    <value>已启用多个更新存储库。</value>
+  </data>
   <data name="NETWORK_ALREADY_CONNECTED" xml:space="preserve">
     <value>您尝试创建 PIF，但尝试将其连接到的网络 {0} 已经连接了其他某个 PIF {1}，因此创建失败。</value>
   </data>
@@ -803,6 +839,12 @@
   </data>
   <data name="NO_MORE_REDO_LOGS_ALLOWED" xml:space="preserve">
     <value>活动恢复日志实例数已达到上限。</value>
+  </data>
+  <data name="NO_REPOSITORY_ENABLED" xml:space="preserve">
+    <value>未启用任何存储库。</value>
+  </data>
+  <data name="NVIDIA_SRIOV_MISCONFIGURED" xml:space="preserve">
+    <value>未按预期为 SR-IOV 配置 NVidia GPU</value>
   </data>
   <data name="NVIDIA_TOOLS_ERROR" xml:space="preserve">
     <value>Nvidia 工具错误。请务必安装最新的 Nvidia 工具</value>
@@ -999,6 +1041,9 @@
   <data name="POOL_JOINING_EXTERNAL_AUTH_MISMATCH" xml:space="preserve">
     <value>加入池的服务器的外部身份验证配置必须与池自身的外部身份验证配置匹配。</value>
   </data>
+  <data name="POOL_JOINING_HOST_CA_CERTIFICATES_CONFLICT" xml:space="preserve">
+    <value>使用相同名称时，加入池的主机具有与池协调器不同的 CA 证书，请卸载它们并重试。</value>
+  </data>
   <data name="POOL_JOINING_HOST_HAS_BONDS" xml:space="preserve">
     <value>加入池的主机不得具有任何绑定。</value>
   </data>
@@ -1018,13 +1063,13 @@
     <value>加入池的服务器必须有物理管理 NIC (就是说，管理 NIC 不能位于 VLAN 或绑定的 PIF 中)。</value>
   </data>
   <data name="POOL_JOINING_HOST_MUST_HAVE_SAME_API_VERSION" xml:space="preserve">
-    <value>加入池的主机的 API 版本必须与池主服务器相同。</value>
+    <value>加入池的主机必须具有与池协调器相同的 API 版本。</value>
   </data>
   <data name="POOL_JOINING_HOST_MUST_HAVE_SAME_DB_SCHEMA" xml:space="preserve">
-    <value>加入池的主机的数据库架构必须与池主服务器相同。</value>
+    <value>加入池的主机必须具有与池协调器相同的数据库架构。</value>
   </data>
   <data name="POOL_JOINING_HOST_MUST_HAVE_SAME_PRODUCT_VERSION" xml:space="preserve">
-    <value>加入池的服务器必须与池的主服务器具有相同的产品版本。</value>
+    <value>加入池的服务器必须具有与池协调器相同的产品版本。</value>
   </data>
   <data name="POOL_JOINING_HOST_MUST_ONLY_HAVE_PHYSICAL_PIFS" xml:space="preserve">
     <value>加入池的主机不得具有任何绑定、VLAN 或隧道。</value>
@@ -1072,6 +1117,21 @@
   </data>
   <data name="REDO_LOG_IS_ENABLED" xml:space="preserve">
     <value>无法执行该操作，因为对池启用了恢复日志。</value>
+  </data>
+  <data name="REPOSITORY_ALREADY_EXISTS" xml:space="preserve">
+    <value>存储库已存在。</value>
+  </data>
+  <data name="REPOSITORY_CLEANUP_FAILED" xml:space="preserve">
+    <value>无法清理协调器上的本地存储库。</value>
+  </data>
+  <data name="REPOSITORY_IS_IN_USE" xml:space="preserve">
+    <value>存储库正在使用中。</value>
+  </data>
+  <data name="REPOSYNC_FAILED" xml:space="preserve">
+    <value>无法与远程 YUM 存储库同步。</value>
+  </data>
+  <data name="REPOSYNC_IN_PROGRESS" xml:space="preserve">
+    <value>该池正在与已启用的远程 YUM 存储库同步。</value>
   </data>
   <data name="REQUIRED_PIF_IS_UNPLUGGED" xml:space="preserve">
     <value>由于指定的 PIF 当前已拔出，因此无法执行请求的操作。</value>
@@ -1127,6 +1187,9 @@
   <data name="SESSION_AUTHENTICATION_FAILED" xml:space="preserve">
     <value>无法对会话进行身份验证。请检查访问凭据并重试。</value>
   </data>
+  <data name="SESSION_AUTHORIZATION_FAILED" xml:space="preserve">
+    <value>用户提供的凭据是正确的，但用户无法获得授权，因此访问被拒绝，并且您尚未收到会话句柄。</value>
+  </data>
   <data name="SESSION_INVALID" xml:space="preserve">
     <value>与服务器的连接丢失。</value>
   </data>
@@ -1134,7 +1197,7 @@
     <value>未注册此会话 {0} 来接收事件。您必须先调用 event.register，然后调用 event.next。所使用的会话句柄将回显。</value>
   </data>
   <data name="SLAVE_REQUIRES_MANAGEMENT_INTERFACE" xml:space="preserve">
-    <value>无法禁用该从属服务器上的管理接口，因为该从属服务器将进入紧急模式。</value>
+    <value>无法禁用某个受支持服务器上的管理接口，因为该受支持的服务器将进入紧急模式。</value>
   </data>
   <data name="SM_PLUGIN_COMMUNICATION_FAILURE" xml:space="preserve">
     <value>SM 插件未响应查询。</value>
@@ -1614,7 +1677,7 @@
     <value>尝试在指定的逻辑卷上创建文件系统时出错</value>
   </data>
   <data name="SR_BACKEND_FAILURE_58" xml:space="preserve">
-    <value>尝试从逻辑卷发出请求时出错。请求必须来自主服务器。</value>
+    <value>尝试从逻辑卷发出请求时出错。请求必须来自协调器。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_59" xml:space="preserve">
     <value>尝试调整逻辑卷大小失败</value>
@@ -1802,6 +1865,9 @@
   <data name="SUSPEND_IMAGE_NOT_ACCESSIBLE" xml:space="preserve">
     <value>检查点的挂起映像不能从运行 VM 的主机进行访问</value>
   </data>
+  <data name="SYNC_UPDATES_IN_PROGRESS" xml:space="preserve">
+    <value>无法执行该操作，因为正在同步更新。</value>
+  </data>
   <data name="SYSTEM_STATUS_MUST_USE_TAR_ON_OEM" xml:space="preserve">
     <value>必须使用 tar 输出从 OEM 服务器检索系统状态。</value>
   </data>
@@ -1834,6 +1900,12 @@
   </data>
   <data name="UNKNOWN_BOOTLOADER" xml:space="preserve">
     <value>所请求的 VM {0} 引导加载程序 {1} 未知</value>
+  </data>
+  <data name="UPDATEINFO_HASH_MISMATCH" xml:space="preserve">
+    <value>Updateinfo 的哈希值与当前哈希值不匹配。可能存在较新的可用更新。</value>
+  </data>
+  <data name="UPDATES_REQUIRE_SYNC" xml:space="preserve">
+    <value>在执行此操作之前需要调用 pool.sync_updates。</value>
   </data>
   <data name="UPDATE_ALREADY_APPLIED" xml:space="preserve">
     <value>已应用此更新。</value>
@@ -1928,6 +2000,9 @@
   <data name="VCPUS_MAX_ALLOWED_TITLE" xml:space="preserve">
     <value>允许的最大虚拟 CPU 数</value>
   </data>
+  <data name="VCPU_MAX_NOT_CORES_PER_SOCKET_MULTIPLE" xml:space="preserve">
+    <value>VCPUs_max 必须是每个插槽的核心数的倍数</value>
+  </data>
   <data name="VDI_CBT_ENABLED" xml:space="preserve">
     <value>不允许对启用了 CBT 的 VDI 或具有此类 VDI 的 VM 执行请求的操作，并且已对指定的 VDI 启用 CBT。</value>
   </data>
@@ -1996,6 +2071,9 @@
   </data>
   <data name="VGPU_GUEST_DRIVER_LIMIT" xml:space="preserve">
     <value>来宾驱动程序不支持 VGPU 迁移。</value>
+  </data>
+  <data name="VGPU_SUSPENSION_NOT_SUPPORTED" xml:space="preserve">
+    <value>VGPU 配置不支持暂停。</value>
   </data>
   <data name="VGPU_TYPE_NOT_COMPATIBLE" xml:space="preserve">
     <value>无法创建与 VM 上的现有类型不兼容的虚拟 GPU。</value>
@@ -2190,7 +2268,7 @@
     <value>VM 意外重新启动</value>
   </data>
   <data name="VM_REQUIRES_GPU" xml:space="preserve">
-    <value>尝试在 GPU 组中没有可用 GPU 的主机上运行 VM，但该 VM 需要 GPU。该 VM 的一个虚拟 GPU 已连接到此 GPU 组。</value>
+    <value>您已尝试在以下主机上运行 VM，该主机在 VM 所需的 GPU 组中没有可用 GPU。</value>
   </data>
   <data name="VM_REQUIRES_GPU-SHORT" xml:space="preserve">
     <value>GPU 不可用</value>
@@ -2214,7 +2292,7 @@
     <value>无法启动 VM，因为无法连接 VM 所需要的 VDI</value>
   </data>
   <data name="VM_REQUIRES_VGPU" xml:space="preserve">
-    <value>VM 无法启动，因为没有可用的 GPU</value>
+    <value>该 VM 无法启动，因为无法在该 VM 所需的 GPU 组中的任何 GPU 上分配它所需的虚拟 GPU。</value>
   </data>
   <data name="VM_REQUIRES_VUSB" xml:space="preserve">
     <value>您尝试在 VM 所需的 VUSB 不能在 VM 所需的 USB_group 中的任何 PUSB 上分配的主机上运行 VM。</value>

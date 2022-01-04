@@ -456,11 +456,25 @@
   <data name="ACTION_ENABLING_AUTOSTART_ON_VM" xml:space="preserve">
     <value>'{0}' の自動起動を有効にしています</value>
   </data>
+  <data name="ACTION_ENABLING_DATASOURCE" xml:space="preserve">
+    <value>測定基準 "{0}" を有効にしています...</value>
+  </data>
+  <data name="ACTION_ENABLING_DATASOURCE_ERROR" xml:space="preserve">
+    <value>測定基準 "{0}" を有効にできませんでした。
+
+これは、データ ソースがデータを生成していないためです。再度有効にする前に、この測定基準を収集するための前提条件が満たされているかを確認する必要があります。</value>
+  </data>
   <data name="ACTION_ENABLING_LIVE_PATCHING" xml:space="preserve">
     <value>'{0}' のライブ パッチを有効にしています</value>
   </data>
   <data name="ACTION_ENABLING_PVS_READ_CACHING" xml:space="preserve">
     <value>選択した VM の PVS アクセラレータを有効にしています</value>
+  </data>
+  <data name="ACTION_ENABLING_TLS_VERIFICATION" xml:space="preserve">
+    <value>証明書の検証を有効にしています...</value>
+  </data>
+  <data name="ACTION_ENABLING_TLS_VERIFICATION_ON" xml:space="preserve">
+    <value>{0} で証明書の検証を有効にしています...</value>
   </data>
   <data name="ACTION_EXPORT_DESCRIPTION_BLOCK_CHECKSUM_FAILED" xml:space="preserve">
     <value>ブロック チェックサムが一致しないため、エクスポートに失敗しました。もう一度エクスポートしてください。</value>
@@ -517,7 +531,7 @@
     <value>領域条件の取得</value>
   </data>
   <data name="ACTION_GET_HEALTH_CHECK_RESULT" xml:space="preserve">
-    <value>[Citrix] Insight Services からヘルス チェック分析の結果を取得</value>
+    <value>{0} からヘルス チェック分析の結果を取得</value>
   </data>
   <data name="ACTION_GET_HEALTH_CHECK_RESULT_FAILED" xml:space="preserve">
     <value>分析結果の取得に失敗しました</value>
@@ -550,10 +564,10 @@
     <value>'{0}' の高可用性再起動優先度の '{1}' への設定</value>
   </data>
   <data name="ACTION_HEALTHCHECK_AUTHENTICATION" xml:space="preserve">
-    <value>[Citrix] Insight Services での認証</value>
+    <value>{0} での認証</value>
   </data>
   <data name="ACTION_HEALTHCHECK_AUTHENTICATION_PROGRESS" xml:space="preserve">
-    <value>[Citrix] Insight Services で認証中</value>
+    <value>{0} で認証中</value>
   </data>
   <data name="ACTION_HOSTS_REBOOTED" xml:space="preserve">
     <value>サーバーが再起動しました</value>
@@ -615,11 +629,8 @@
   <data name="ACTION_MIGRATING_X_VDIS_STARTED" xml:space="preserve">
     <value>仮想ディスクの移行を開始しました</value>
   </data>
-  <data name="ACTION_MOVING_VDI" xml:space="preserve">
-    <value>仮想ディスク '{0}' を移動しています...</value>
-  </data>
   <data name="ACTION_MOVING_VDI_TO_SR" xml:space="preserve">
-    <value>仮想ディスク '{0}' の SR '{1}' への移動</value>
+    <value>Moving Virtual Disk '{0}' from SR '{1}' to SR '{2}'</value>
   </data>
   <data name="ACTION_MOVING_X_VDIS" xml:space="preserve">
     <value>{0} 仮想ディスクの {1} への移動</value>
@@ -972,9 +983,6 @@
   <data name="ACTION_TEMPLATE_CLONE_NEW_NAME" xml:space="preserve">
     <value>{0} のコピー</value>
   </data>
-  <data name="ACTION_TEMPLATE_CLONING" xml:space="preserve">
-    <value>複製しています</value>
-  </data>
   <data name="ACTION_TOOLSTACK_RESTARTED" xml:space="preserve">
     <value>ツールスタックが再起動しました。</value>
   </data>
@@ -996,20 +1004,20 @@
   <data name="ACTION_UPDATE_INTEGRATED_GPU_PASSTHROUGH_TITLE" xml:space="preserve">
     <value>'{0}' 上の統合された GPU パススルーの更新</value>
   </data>
-  <data name="ACTION_UPLOADPATCHTOMASTERPLANACTION_FAILED" xml:space="preserve">
+  <data name="ACTION_UPLOADPATCHTOCOORDINATORPLANACTION_FAILED" xml:space="preserve">
     <value>アップロード エラー。パッチはアップロードされましたが、ホストで見つかりません。</value>
   </data>
   <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT" xml:space="preserve">
-    <value>[Citrix] Insight Services にサーバーの状態レポートをアップロード</value>
+    <value>{0} にサーバーの状態レポートをアップロード</value>
   </data>
   <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT_FAILED" xml:space="preserve">
     <value>状態レポートのアップロードに失敗しました。</value>
   </data>
   <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT_PERCENTAGE" xml:space="preserve">
-    <value>[Citrix] Insight Services にレポートをアップロードしています ({0}/{1})</value>
+    <value>{0} にレポートをアップロードしています ({1}/{2})</value>
   </data>
   <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT_PROGRESS" xml:space="preserve">
-    <value>[Citrix] Insight Services にレポートをアップロードしています</value>
+    <value>{0} にレポートをアップロードしています</value>
   </data>
   <data name="ACTION_USB_PASSTHROUGH_DISABLED" xml:space="preserve">
     <value>USB パススルーが無効です</value>
@@ -1144,7 +1152,7 @@
     <value>{0} のコピーがキャンセルされました</value>
   </data>
   <data name="ACTION_VM_CROSS_POOL_COPY_TITLE" xml:space="preserve">
-    <value>VM '{0}' を '{1}' にコピーしています</value>
+    <value>Copying VM '{0}' from '{1}' to '{2}'</value>
   </data>
   <data name="ACTION_VM_DELETE_SNAPSHOTS_TITLE" xml:space="preserve">
     <value>スナップショットの削除</value>
@@ -1182,8 +1190,11 @@
   <data name="ACTION_VM_MOVING" xml:space="preserve">
     <value>VM '{0}' を新規ストレージに移動</value>
   </data>
-  <data name="ACTION_VM_MOVING_TITLE" xml:space="preserve">
-    <value>VM '{0}' を SR '{2}' 上の '{1}' に移動</value>
+  <data name="ACTION_VM_MOVING_HOST" xml:space="preserve">
+    <value>Moving VM '{0}' from server '{1}' to server '{2}'</value>
+  </data>
+  <data name="ACTION_VM_MOVING_SR" xml:space="preserve">
+    <value>Moving VM '{0}' to SR '{1}'</value>
   </data>
   <data name="ACTION_VM_MOVING_VDI_DESTROY_FAILURE" xml:space="preserve">
     <value>VM '{0}' の新規ストレージへの移動を完了できませんでした。詳しくは、ログを参照してください。</value>
@@ -1296,8 +1307,8 @@
   <data name="ACTION_VUSB_DETACH_CONFIRM" xml:space="preserve">
     <value>選択した USB デバイスを接続解除してもよろしいですか?</value>
   </data>
-  <data name="ACTION_WAIT_FOR_SLAVES_TO_RECOVER" xml:space="preserve">
-    <value>スレーブの回復を待機しています...</value>
+  <data name="ACTION_WAIT_FOR_POOL_MEMBERS_TO_RECOVER" xml:space="preserve">
+    <value>ほかのプール メンバーが回復するのを待っています...</value>
   </data>
   <data name="ACTION_WLB_DECONFIGURE_FAILED" xml:space="preserve">
     <value>プール {0} のワークロード バランスの切断に失敗しました。{1}。ワークロード バランスを一時停止しました。</value>
@@ -1322,14 +1333,6 @@
   </data>
   <data name="ACTIVATE" xml:space="preserve">
     <value>アクティブ化(&amp;C)</value>
-  </data>
-  <data name="ACTIVATION_FAILED_MESSAGE" xml:space="preserve">
-    <value>[XenCenter] でアクティブ化サーバーと通信できません。
-
-インターネットに接続していない場合は、アクティブ化要求をファイルに
-保存しておくことができます。
-
-このファイルを使用するには、https://{0} にアクセスしてください。</value>
   </data>
   <data name="ACTIVATION_REQUEST_SAVED" xml:space="preserve">
     <value>アクティブ化要求を {0} に保存しました。</value>
@@ -1386,7 +1389,7 @@
     <value>アドレス</value>
   </data>
   <data name="ADDSERVER_PASS_NEW" xml:space="preserve">
-    <value>[XenCenter] では、このサーバー用に設定されている資格情報で認証できなくなりました。新しい資格情報を入力してください。</value>
+    <value>{0} では、このサーバー用に設定されている資格情報で認証できなくなりました。新しい資格情報を入力してください。</value>
   </data>
   <data name="ADD_CUSTOM_FIELD" xml:space="preserve">
     <value>カスタム フィールド '{0}' を追加します</value>
@@ -1458,7 +1461,7 @@
   <data name="ADD_HOST_TO_POOL_CPU_MASKING_MESSAGE" xml:space="preserve">
     <value>旧型の CPU を使用しているプールにサーバー '{0}' を追加します。
 
-[XenServer] では、CPU の一部の機能をプールの既存のサーバーに合わせて無効にすることができます。これにより、追加するサーバーが再起動されるため、実行中のすべての VM がシャットダウンされます。この機能は、[XenServer] のハードウェア互換性一覧に含まれている CPU でサポートされます。
+{1} では、CPU の一部の機能をプールの既存のサーバーに合わせて無効にすることができます。これにより、追加するサーバーが再起動されるため、実行中のすべての VM がシャットダウンされます。この機能は、{1} のハードウェア互換性一覧に含まれている CPU でサポートされます。
 
 この機能を使用して続行しますか?</value>
   </data>
@@ -1467,7 +1470,7 @@
 
 {0}
 
-[XenServer] では、CPU の一部の機能をプールの既存のサーバーに合わせて無効にすることができます。これにより、追加するサーバーが再起動されるため、実行中のすべての VM がシャットダウンされます。この機能は、[XenServer] のハードウェア互換性一覧に含まれている CPU でサポートされます。
+{1} では、CPU の一部の機能をプールの既存のサーバーに合わせて無効にすることができます。これにより、追加するサーバーが再起動されるため、実行中のすべての VM がシャットダウンされます。この機能は、{1} のハードウェア互換性一覧に含まれている CPU でサポートされます。
 
 この機能を使用して続行しますか?</value>
   </data>
@@ -1580,19 +1583,22 @@ Active Directory 構成が同じ場合のみ、'{0}' をプールに追加でき
   <data name="AD_CONFIRM_SELF_TERMINATE_OK" xml:space="preserve">
     <value>セッションを終了</value>
   </data>
-  <data name="AD_CONFIRM_SUICIDE" xml:space="preserve">
+  <data name="AD_CONFIRM_LOGOUT_CURRENT_USER" xml:space="preserve">
     <value>ユーザー '{0}' のアクセス許可を無効にします。
 
 現在、 '{0}' として '{1}' にログインしており、この操作により '{1}' から切断されます。再接続するには、ローカルのルート アカウント、またはアクセスが許可されているほかの Active Directory ユーザーの認証情報が必要です。
 
 続行しますか?</value>
   </data>
-  <data name="AD_CONFIRM_SUICIDE_GROUP" xml:space="preserve">
+  <data name="AD_CONFIRM_LOGOUT_CURRENT_USER_GROUP" xml:space="preserve">
     <value>グループ '{0}' のアクセス許可を無効にします。
 
 現在、'{0}' のメンバーとして '{1}' にログインしています。この操作により、現在の接続およびこのグループのすべてのメンバーが '{1}' から切断されます。再接続するには、ローカルのルート アカウント、またはアクセスが許可されているほかの Active Directory ユーザーの認証情報が必要です。
 
 続行しますか?</value>
+  </data>
+  <data name="AD_COORDINATOR_UNAVAILABLE_BLURB" xml:space="preserve">
+    <value>{0} で現在の外部認証の構成を確立しています。お待ちください。</value>
   </data>
   <data name="AD_COULD_NOT_RESOLVE_SUFFIX" xml:space="preserve">
     <value>Active Directory でサブジェクトを解決できません</value>
@@ -1651,18 +1657,47 @@ Active Directory ドメイン '{1}' から削除すると、このサーバー�
   <data name="AD_LOCAL_ROOT_ACCOUNT" xml:space="preserve">
     <value>ローカルのルート アカウント</value>
   </data>
-  <data name="AD_LOGOUT_SUICIDE_MANY" xml:space="preserve">
-    <value>現在のユーザー アカウントが選択されています。このまま続行すると、'{0}' からログアウトされます。
+  <data name="AD_LOGOUT_CURRENT_USER_MANY" xml:space="preserve">
+    <value>You are currently logged in as one of the selected users. If you continue, you will be logged out of '{0}'. All other selected users will also be logged out.
 
-続行しますか?</value>
+Are you sure you want to continue?</value>
   </data>
-  <data name="AD_LOGOUT_SUICIDE_ONE" xml:space="preserve">
-    <value>現在のユーザー アカウントが選択されています。このまま続行すると、'{0}' からログアウトされます。
+  <data name="AD_LOGOUT_CURRENT_USER_MANY_ROLE_CHANGE" xml:space="preserve">
+    <value>You are currently logged in as one of the selected users. If you assign a new role, you will be logged out of '{0}'. All other selected users that are logged in will also be logged out.
 
-続行しますか?</value>
+Are you sure you want to continue?</value>
   </data>
-  <data name="AD_MASTER_UNAVAILABLE_BLURB" xml:space="preserve">
-    <value>[XenCenter] で現在の外部認証の構成を確立しています。お待ちください。</value>
+  <data name="AD_LOGOUT_CURRENT_USER_ONE" xml:space="preserve">
+    <value>You are currently logged in as the selected user. If you continue, you will be logged out of '{0}'.
+
+Are you sure you want to continue?</value>
+  </data>
+  <data name="AD_LOGOUT_CURRENT_USER_ONE_ROLE_CHANGE" xml:space="preserve">
+    <value>You are currently logged in as the selected user. If you assign a new role, you will be logged out of '{0}'.
+
+Are you sure you want to continue?</value>
+  </data>
+  <data name="AD_LOGOUT_USER_MANY" xml:space="preserve">
+    <value>この {0} 人のユーザーをログアウトしてもよろしいですか?</value>
+  </data>
+  <data name="AD_LOGOUT_USER_MANY_ROLE_CHANGE" xml:space="preserve">
+    <value>If you assign a new role to logged in users, they will be logged out.
+
+Are you sure you want to continue?</value>
+  </data>
+  <data name="AD_LOGOUT_USER_ONE" xml:space="preserve">
+    <value>ユーザー '{0}' をログアウトしてもよろしいですか?</value>
+  </data>
+  <data name="AD_LOGOUT_USER_ONE_ROLE_CHANGE" xml:space="preserve">
+    <value>If you assign a new role to user '{0}', the user will be logged out.
+
+Are you sure you want to continue?</value>
+  </data>
+  <data name="AD_REMOVE_USER_MANY" xml:space="preserve">
+    <value>この {0} 人のユーザーを削除してもよろしいですか?</value>
+  </data>
+  <data name="AD_REMOVE_USER_ONE" xml:space="preserve">
+    <value>ユーザー '{0}' を削除してもよろしいですか?</value>
   </data>
   <data name="AD_NOT_CONFIGURED_BLURB" xml:space="preserve">
     <value>プール '{0}' の Active Directory は構成されていません。Active Directory 認証を有効にするには、[ドメインに追加] をクリックしてください。</value>
@@ -1776,7 +1811,7 @@ CPU 使用率が {3} を超えるとアラートが送信されます。</value>
     <value>コントロール ドメインのファイルシステムがいっぱいです</value>
   </data>
   <data name="ALERT_ALARM_FILESYSTEM_DESCRIPTION" xml:space="preserve">
-    <value>{0} のコントロール ドメインのディスク使用量が {1} に達しました。このディスクに空きがなくなると、[XenServer] のパフォーマンスが重大な影響を受けます。ログ ファイルや不要な (ユーザー作成の) ファイルを削除してください。</value>
+    <value>{0} のコントロール ドメインのディスク使用量が {1} に達しました。このディスクに空きがなくなると、{2} のパフォーマンスが重大な影響を受けます。ログ ファイルや不要な (ユーザー作成の) ファイルを削除してください。</value>
   </data>
   <data name="ALERT_ALARM_LOG_FILESYSTEM" xml:space="preserve">
     <value>ログ パーティションのファイル システムがいっぱいです</value>
@@ -1848,6 +1883,39 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="ALERT_EXPORT_ALL_OR_FILTERED" xml:space="preserve">
     <value>アラート一覧にフィルタが適用されています。すべての接続先サーバーのすべてのアラートをエクスポートしますか? それとも、現在のフィルタにより表示されているアラートのみをエクスポートしますか?</value>
   </data>
+  <data name="ALERT_FAILED_LOGIN_ATTEMPT_DESCRIPTION_ALL_UNKNOWN" xml:space="preserve">
+    <value>すべての試行 ({0} 回) が不明なソースから発生しました。</value>
+  </data>
+  <data name="ALERT_FAILED_LOGIN_ATTEMPT_DESCRIPTION_COMMON" xml:space="preserve">
+    <value>最も頻繁にログイン試行が発生したのは、次のソースです:</value>
+  </data>
+  <data name="ALERT_FAILED_LOGIN_ATTEMPT_DESCRIPTION_TOTAL" xml:space="preserve">
+    <value>合計 {0} 回のログイン試行失敗がありました。</value>
+  </data>
+  <data name="ALERT_FAILED_LOGIN_ATTEMPT_DESCRIPTION_UNKNOWN" xml:space="preserve">
+    <value>{0} 回の試行が不明なソースから発生しました。</value>
+  </data>
+  <data name="ALERT_FAILED_LOGIN_ATTEMPT_OFFENDER_DATE" xml:space="preserve">
+    <value>最後の試行: {0}</value>
+  </data>
+  <data name="ALERT_FAILED_LOGIN_ATTEMPT_OFFENDER_IP" xml:space="preserve">
+    <value>IP アドレス: {0}</value>
+  </data>
+  <data name="ALERT_FAILED_LOGIN_ATTEMPT_OFFENDER_NUMBER" xml:space="preserve">
+    <value>試行回数: {0}</value>
+  </data>
+  <data name="ALERT_FAILED_LOGIN_ATTEMPT_OFFENDER_ORIGINATOR" xml:space="preserve">
+    <value>発生元: {0}</value>
+  </data>
+  <data name="ALERT_FAILED_LOGIN_ATTEMPT_OFFENDER_USERAGENT" xml:space="preserve">
+    <value>ユーザー エージェント: {0}</value>
+  </data>
+  <data name="ALERT_FAILED_LOGIN_ATTEMPT_OFFENDER_USERNAME" xml:space="preserve">
+    <value>ユーザー名: {0}</value>
+  </data>
+  <data name="ALERT_FAILED_LOGIN_ATTEMPT_TITLE" xml:space="preserve">
+    <value>過去 1 時間以内に '{0}' へのログイン試行失敗が複数回ありました。</value>
+  </data>
   <data name="ALERT_GENERIC_HELP" xml:space="preserve">
     <value>ヘルプ</value>
   </data>
@@ -1864,7 +1932,7 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
     <value>{0} がリリースされています</value>
   </data>
   <data name="ALERT_NEW_VERSION_DETAILS" xml:space="preserve">
-    <value>{0} がリリースされています。[Citrix] Web サイトから新しいバージョンをダウンロードできます。</value>
+    <value>{0} がリリースされています。{1} Web サイトから新しいバージョンをダウンロードできます。</value>
   </data>
   <data name="ALERT_NEW_VERSION_DOWNLOAD" xml:space="preserve">
     <value>Web ページを開く</value>
@@ -1880,6 +1948,12 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   </data>
   <data name="ALLOWED_MTU_VALUE" xml:space="preserve">
     <value>許容 MTU 値: {0}</value>
+  </data>
+  <data name="ALLOWED_UPDATES_DIALOG_CHECKBOX" xml:space="preserve">
+    <value>インターネット プロキシ設定を表示する(&amp;S)</value>
+  </data>
+  <data name="ALLOWED_UPDATES_DIALOG_MESSAGE" xml:space="preserve">
+    <value>{0} で定期的に {0} や {1} の新しいバージョンをインターネットでチェックしますか?</value>
   </data>
   <data name="ALLOW_TO_CONTINUE" xml:space="preserve">
     <value>続行を許可する(&amp;A)</value>
@@ -1908,7 +1982,7 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="ALREADY_ATTACHED_ELSEWHERE" xml:space="preserve">
     <value>現在、SR '{0}' はほかに接続されています。この SR を '{1}' に接続しますか? 
 
-警告: [XenCenter] に接続していないほかのサーバーがこの SR を使用していないことを確認してください。データが失われる場合があります。</value>
+警告: {2} に接続していないほかのサーバーがこの SR を使用していないことを確認してください。データが失われる場合があります。</value>
   </data>
   <data name="ALREADY_CONNECTED" xml:space="preserve">
     <value>既にサーバー '{0}' に接続されています。</value>
@@ -2043,7 +2117,7 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
 
 - 自動アップデートがプールのすべてのホストに適用されることを確認する。
 
-- 前のページのアップデートの適用チェックボックスを解除する。[XenCenter] はアップデートを適用することなく選択したサーバーを新しいバージョンへアップグレードします。</value>
+- 前のページのアップデートの適用チェックボックスを解除する。{0} はアップデートを適用することなく選択したサーバーを新しいバージョンへアップグレードします。</value>
   </data>
   <data name="AUTOSTART" xml:space="preserve">
     <value>サーバー起動時に自動的に起動する</value>
@@ -2178,9 +2252,9 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="BOND_CREATE_WILL_DISTURB_PRIMARY" xml:space="preserve">
     <value>このボンディングを作成すると、選択したいずれかの NIC 上の管理インターフェイスがボンディングに移動されます。
 
-- [XenCenter] とプール間の接続が一時的に切断されます。
+- {0} とプール間の接続が一時的に切断されます。
 
-- ネットワーク構成に問題があると、[XenCenter] でプールに再接続できなくなったり、プール メンバー間の通信が不能になったりします。</value>
+- ネットワーク構成に問題があると、{0} でプールに再接続できなくなったり、プール メンバー間の通信が不能になったりします。</value>
   </data>
   <data name="BOND_CREATE_WILL_DISTURB_SECONDARY" xml:space="preserve">
     <value>このボンディングを作成すると、選択した NIC 上のセカンダリ インターフェイスがボンディングに移動され、その間このインターフェイスによるトラフィックが中断されます。</value>
@@ -2198,33 +2272,33 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="BOND_DELETE_WILL_DISTURB_BOTH" xml:space="preserve">
     <value>{0}
 
-このボンディングを削除すると、ボンディング上の管理インターフェイスおよびセカンダリ インターフェイスがボンディングの最初のスレーブに移動されます。 
+このボンディングを削除すると、ボンディング上の管理インターフェイスおよびセカンダリ インターフェイスがボンディングのほかの最初のメンバーに自動的に転送されます。 
 
-- [XenCenter] とプール間の接続が一時的に切断されます。
+- {1} とプール間の接続が一時的に切断されます。
 
 - セカンダリ インターフェイスによるトラフィックが中断されます。
 
-- ネットワーク構成に問題があると、[XenCenter] でプールに再接続できなくなったり、プール メンバー間の通信が不能になったりします。</value>
+- ネットワーク構成に問題があると、{1} でプールに再接続できなくなったり、プール メンバー間の通信が不能になったりします。</value>
   </data>
   <data name="BOND_DELETE_WILL_DISTURB_PRIMARY" xml:space="preserve">
     <value>{0}
 
-このボンディングを削除すると、ボンディング上の管理インターフェイスがボンディングの最初のスレーブに移動されます。 
+このボンディングを削除すると、ボンディング上の管理インターフェイスが最初のボンディングされたメンバーに自動的に転送されます。 
 
-- [XenCenter] とプール間の接続が一時的に切断されます。
+- {1} とプール間の接続が一時的に切断されます。
 
-- ネットワーク構成に問題があると、[XenCenter] でプールに再接続できなくなったり、プール メンバー間の通信が不能になったりします。</value>
+- ネットワーク構成に問題があると、{1} でプールに再接続できなくなったり、プール メンバー間の通信が不能になったりします。</value>
   </data>
   <data name="BOND_DELETE_WILL_DISTURB_SECONDARY" xml:space="preserve">
     <value>{0}
 
-このボンディングを削除すると、ボンディング上のセカンダリ インターフェイスがボンディングの最初のスレーブに移動され、その間このインターフェイスによるトラフィックが中断されます。</value>
+このボンディングを削除すると、ボンディング上のセカンダリ インターフェイスが最初のボンディングされたメンバーに転送され、その間このインターフェイスによるトラフィックが中断されます。</value>
   </data>
   <data name="BOND_GONE" xml:space="preserve">
-    <value>[XenCenter] のキャッシュにボンディングが見つかりません。</value>
+    <value>{0} のキャッシュにボンディングが見つかりません。</value>
   </data>
-  <data name="BOND_MASTER_GONE" xml:space="preserve">
-    <value>[XenCenter] のキャッシュにボンド マスターが見つかりません。</value>
+  <data name="BOND_INTERFACE_GONE" xml:space="preserve">
+    <value>{0} のキャッシュにボンディング インターフェイスが見つかりません。</value>
   </data>
   <data name="BOOTORDER" xml:space="preserve">
     <value>起動順序: {0}</value>
@@ -2245,19 +2319,19 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
     <value>アップグレード後に接続に問題が生じた SR があります。この問題を解決するには、SR を再接続してください。</value>
   </data>
   <data name="BROKEN_TOOLS_PROMPT" xml:space="preserve">
-    <value>接続に問題が生じた SR 上に [XenServer product] Tools ISO があるため、[XenCenter] によって修復が試行されます。続行しますか?</value>
+    <value>接続に問題が生じた SR 上に Tools ISO があるため、{0} によって修復が試行されます。続行しますか?</value>
   </data>
   <data name="BUGTOOL_CLIENT_ACTION_LOGS_META" xml:space="preserve">
-    <value>[XenCenter] のログおよびメタデータを収集しています</value>
+    <value>{0} のログおよびメタデータを収集しています</value>
   </data>
   <data name="BUGTOOL_CLIENT_ACTION_META" xml:space="preserve">
-    <value>[XenCenter] のメタデータを収集しています</value>
+    <value>{0} のメタデータを収集しています</value>
   </data>
   <data name="BUGTOOL_CLIENT_LOGS_META" xml:space="preserve">
-    <value>[XenCenter] のログおよびメタデータ</value>
+    <value>{0} のログおよびメタデータ</value>
   </data>
   <data name="BUGTOOL_CLIENT_META" xml:space="preserve">
-    <value>[XenCenter] のメタデータ</value>
+    <value>{0} のメタデータ</value>
   </data>
   <data name="BUGTOOL_FILE_PREFIX" xml:space="preserve">
     <value>状態レポート -</value>
@@ -2373,7 +2447,7 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
     <value>VM '{0}' 上でこの仮想ディスクをアクティブにするには、VM に I/O ドライバーをインストールする必要があります。</value>
   </data>
   <data name="CANNOT_ACTIVATE_VD_VM_NEEDS_TOOLS" xml:space="preserve">
-    <value>VM '{0}' 上でこの仮想ディスクをアクティブにするには、VM に [Citrix VM Tools] をインストールする必要があります。</value>
+    <value>VM '{1}' 上でこの仮想ディスクをアクティブにするには、VM に {0} をインストールする必要があります。</value>
   </data>
   <data name="CANNOT_CHANGE_IP_CLUSTERING_ENABLED" xml:space="preserve">
     <value>{0} でクラスタリングが有効になるため、ホストが保守モードの場合のみインターフェイスを変更できます。</value>
@@ -2409,7 +2483,7 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
     <value>VM '{0}' 上でこの仮想ディスクを非アクティブにするには、VM に I/O ドライバーをインストールする必要があります。</value>
   </data>
   <data name="CANNOT_DEACTIVATE_VDI_NEEDS_TOOLS" xml:space="preserve">
-    <value>VM '{0}' 上でこの仮想ディスクを非アクティブにするには、VM に [Citrix VM Tools] をインストールする必要があります。</value>
+    <value>VM '{1}' 上でこの仮想ディスクを非アクティブにするには、VM に {0} をインストールする必要があります。</value>
   </data>
   <data name="CANNOT_DEACTIVATE_VDI_VM_NOT_RUNNING" xml:space="preserve">
     <value>実行されていない仮想マシン '{0}' 上でこの仮想ディスクを非アクティブにすることはできません。</value>
@@ -2425,7 +2499,7 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
 {1}</value>
   </data>
   <data name="CANNOT_DELETE_DEFAULT_TEMPLATE" xml:space="preserve">
-    <value>[XenServer] テンプレートは削除できません。</value>
+    <value>{0} テンプレートは削除できません。</value>
   </data>
   <data name="CANNOT_DELETE_DR_VD" xml:space="preserve">
     <value>この仮想ディスクは障害回復で使用されています。このディスクを削除するには、このストレージ リポジトリにデータを保存しないように障害回復を構成してください。</value>
@@ -2449,7 +2523,7 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
     <value>このスナップショットは使用中であり削除できません。</value>
   </data>
   <data name="CANNOT_DELETE_TOOLS_SR" xml:space="preserve">
-    <value>[Citrix VM Tools] の ISO ストレージの削除はサポートされていません。</value>
+    <value>{0} の ISO ストレージの削除はサポートされていません。</value>
   </data>
   <data name="CANNOT_DELETE_VDI_ACTIVE_ON" xml:space="preserve">
     <value>この仮想ディスクは VM '{0}' 上でアクティブになっています。非アクティブにしてから削除してください。</value>
@@ -2473,7 +2547,7 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
     <value>XML ノード {0} が見つかりません。</value>
   </data>
   <data name="CANNOT_FIND_SR_WIZARD_TYPE" xml:space="preserve">
-    <value>[XenCenter] で種類 '{0}' の SR を構成できません。</value>
+    <value>{1} で種類 '{0}' の SR を構成できません。</value>
   </data>
   <data name="CANNOT_MIGRATE_VDI_NON_RUNNING_VM" xml:space="preserve">
     <value>この仮想ディスクは実行中でない仮想マシンに接続されているため、削除できません。</value>
@@ -2521,26 +2595,62 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="CD_DVD_DEVICE_ATTACHED" xml:space="preserve">
     <value>CD/DVD ドライブが接続されています。</value>
   </data>
-  <data name="CERTIFICATE_ALERT_EXPIRED_DESCIRPTION" xml:space="preserve">
-    <value>サーバー '{0}' の TLS 証明書は、{1} に有効期限が切れました。</value>
+  <data name="CERTIFICATE_CA_ALERT_EXPIRED_DESCIRPTION" xml:space="preserve">
+    <value>'{0}' の信頼された CA 証明書は {1} で期限切れになりました。</value>
   </data>
-  <data name="CERTIFICATE_ALERT_EXPIRED_TITLE" xml:space="preserve">
-    <value>{0} の証明書の有効期限が切れました</value>
+  <data name="CERTIFICATE_CA_ALERT_EXPIRED_TITLE" xml:space="preserve">
+    <value>{0} の信頼された CA 証明書の有効期限が切れました</value>
   </data>
-  <data name="CERTIFICATE_ALERT_EXPIRING_DESCRIPTION" xml:space="preserve">
-    <value>サーバー '{0}' の TLS 証明書は、{1} に期限切れになります。</value>
+  <data name="CERTIFICATE_CA_ALERT_EXPIRING_DESCRIPTION" xml:space="preserve">
+    <value>'{0}' の信頼された CA 証明書は {1} で期限切れになります。</value>
   </data>
-  <data name="CERTIFICATE_ALERT_EXPIRING_TITLE_DAYS" xml:space="preserve">
-    <value>{0} の証明書は、あと {1} 日で期限切れになります</value>
+  <data name="CERTIFICATE_CA_ALERT_EXPIRING_TITLE_DAYS" xml:space="preserve">
+    <value>{0} の信頼された CA 証明書は、あと ​{1} 日で期限切れになります</value>
   </data>
-  <data name="CERTIFICATE_ALERT_EXPIRING_TITLE_HOURS" xml:space="preserve">
-    <value>{0} の証明書は、あと {1} 時間で期限切れになります</value>
+  <data name="CERTIFICATE_CA_ALERT_EXPIRING_TITLE_HOURS" xml:space="preserve">
+    <value>{0} の信頼された CA 証明書は、あと ​{1} 時間で期限切れになります</value>
   </data>
-  <data name="CERTIFICATE_ALERT_EXPIRING_TITLE_MINUTES" xml:space="preserve">
-    <value>{0} の証明書は、あと {1} 分で期限切れになります</value>
+  <data name="CERTIFICATE_CA_ALERT_EXPIRING_TITLE_MINUTES" xml:space="preserve">
+    <value>{0} の信頼された CA 証明書は、あと ​{1} 分で期限切れになります</value>
   </data>
   <data name="CERTIFICATE_FILETYPES" xml:space="preserve">
     <value>TLS 証明書ファイル (*.pem、*.crt、*.cer)|*.pem;*.crt;*.cer</value>
+  </data>
+  <data name="CERTIFICATE_HOST_ALERT_EXPIRED_DESCIRPTION" xml:space="preserve">
+    <value>サーバー '{0}' の ID 証明書は {1} で期限切れになりました。</value>
+  </data>
+  <data name="CERTIFICATE_HOST_ALERT_EXPIRED_TITLE" xml:space="preserve">
+    <value>{0} のサーバー ID 証明書の有効期限が切れました</value>
+  </data>
+  <data name="CERTIFICATE_HOST_ALERT_EXPIRING_DESCRIPTION" xml:space="preserve">
+    <value>サーバー '{0}' の ID 証明書は {1} に期限切れになります。</value>
+  </data>
+  <data name="CERTIFICATE_HOST_ALERT_EXPIRING_TITLE_DAYS" xml:space="preserve">
+    <value>{0} のサーバー ID 証明書は、あと {1} 日で期限切れになります</value>
+  </data>
+  <data name="CERTIFICATE_HOST_ALERT_EXPIRING_TITLE_HOURS" xml:space="preserve">
+    <value>{0} のサーバー ID 証明書は、あと {1} 時間で期限切れになります</value>
+  </data>
+  <data name="CERTIFICATE_HOST_ALERT_EXPIRING_TITLE_MINUTES" xml:space="preserve">
+    <value>{0} のサーバー ID 証明書は、あと {1} 分で期限切れになります</value>
+  </data>
+  <data name="CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRED_DESCIRPTION" xml:space="preserve">
+    <value>サーバー '{0}' の内部 ID 証明書は {1} で期限切れになりました。</value>
+  </data>
+  <data name="CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRED_TITLE" xml:space="preserve">
+    <value>{0} のサーバーの内部 ID 証明書の有効期限が切れました</value>
+  </data>
+  <data name="CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRING_DESCRIPTION" xml:space="preserve">
+    <value>サーバー '{0}' の内部 ID 証明書は {1} に期限切れになります。</value>
+  </data>
+  <data name="CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRING_TITLE_DAYS" xml:space="preserve">
+    <value>{0} のサーバーの内部 ID 証明書は、あと {1} 日で期限切れになります</value>
+  </data>
+  <data name="CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRING_TITLE_HOURS" xml:space="preserve">
+    <value>{0} のサーバーの内部 ID 証明書は、あと {1} 時間で期限切れになります</value>
+  </data>
+  <data name="CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRING_TITLE_MINUTES" xml:space="preserve">
+    <value>{0} のサーバーの内部 ID 証明書は、あと {1} 分で期限切れになります</value>
   </data>
   <data name="CERTIFICATE_INSTALLATION_FAILURE" xml:space="preserve">
     <value>証明書のインストールに失敗しました。</value>
@@ -2561,6 +2671,25 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="CERTIFICATE_KEY_INVALID" xml:space="preserve">
     <value>選択した TLS キー ファイルが無効です。</value>
   </data>
+  <data name="CERTIFICATE_KEY_LENGTH_CHECK_DESCRIPTION" xml:space="preserve">
+    <value>Server certificate compatibility check</value>
+  </data>
+  <data name="CERTIFICATE_KEY_LENGTH_CHECK_GROUP" xml:space="preserve">
+    <value>Checking compatibility of server identity certificate</value>
+  </data>
+  <data name="CERTIFICATE_KEY_LENGTH_PROBLEM_DESCRIPTION" xml:space="preserve">
+    <value>The key size of the server's identity certificate is too small.</value>
+  </data>
+  <data name="CERTIFICATE_KEY_LENGTH_PROBLEM_MORE_INFO" xml:space="preserve">
+    <value>The key size of the server's identity certificate is smaller than 2048 bytes.
+
+It is recommended that you first install a new certificate with a key size of at least 2048 bytes, otherwise you will not be able to connect to the server after the upgrade.</value>
+  </data>
+  <data name="CERTIFICATE_KEY_LENGTH_WARNING_MORE_INFO" xml:space="preserve">
+    <value>The key size of the server's identity certificate is smaller than 2048 bytes.
+
+If you are upgrading to {0} {1} and above, it is recommended that you first install a new certificate with a key size of at least 2048 bytes, otherwise you will not be able to connect to the server after the upgrade.</value>
+  </data>
   <data name="CERTIFICATE_RBAC_RESTRICTION" xml:space="preserve">
     <value>{0} ユーザーには、サーバーに証明書をインストールするための権限がありません。以下のいずれかの役割を持つアカウントを使用してログインしてください:
 
@@ -2572,14 +2701,29 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="CERTIFICATE_SELECT_KEY_TITLE" xml:space="preserve">
     <value>TLS キー ファイルの選択</value>
   </data>
-  <data name="CERTIFICATE_THUMBPRINT_KEY" xml:space="preserve">
-    <value>拇印</value>
+  <data name="CERTIFICATE_THUMBPRINT_VALUE" xml:space="preserve">
+    <value>拇印: {0}</value>
   </data>
-  <data name="CERTIFICATE_VALIDITY_PERIOD_KEY" xml:space="preserve">
-    <value>有効期間</value>
+  <data name="CERTIFICATE_TYPE_CA" xml:space="preserve">
+    <value>信頼された CA 証明書</value>
+  </data>
+  <data name="CERTIFICATE_TYPE_HOST" xml:space="preserve">
+    <value>サーバー ID 証明書</value>
+  </data>
+  <data name="CERTIFICATE_TYPE_HOST_INTERNAL" xml:space="preserve">
+    <value> サーバーの内部 ID 証明書</value>
   </data>
   <data name="CERTIFICATE_VALIDITY_PERIOD_VALUE" xml:space="preserve">
     <value>{0} から {1} まで有効</value>
+  </data>
+  <data name="CERTIFICATE_VERIFICATION_HOST_DISABLED_IN_POOL" xml:space="preserve">
+    <value>プールでは有効ですが、次では無効になっています:</value>
+  </data>
+  <data name="CERTIFICATE_VERIFICATION_HOST_DISABLED_STANDALONE" xml:space="preserve">
+    <value>無効ですが、プールでは有効になっています</value>
+  </data>
+  <data name="CERTIFICATE_VERIFICATION_KEY" xml:space="preserve">
+    <value>証明書の検証</value>
   </data>
   <data name="CFU_STATUS_CHECK_DESCRIPTION" xml:space="preserve">
     <value>アップデートをダウンロードする機能</value>
@@ -2587,11 +2731,11 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="CHANGE" xml:space="preserve">
     <value>変更...</value>
   </data>
-  <data name="CHANGED_MASTER_PASSWORD" xml:space="preserve">
-    <value>[XenCenter] のマスター パスワードが変更されました</value>
+  <data name="CHANGED_MAIN_PASSWORD" xml:space="preserve">
+    <value>{0} のマスター パスワードが変更されました</value>
   </data>
-  <data name="CHANGED_MASTER_PASSWORD_LONG" xml:space="preserve">
-    <value>セッションを復元するために [XenCenter] のマスター パスワードが変更されました</value>
+  <data name="CHANGED_MAIN_PASSWORD_LONG" xml:space="preserve">
+    <value>セッションを復元するために {0} のメイン パスワードが変更されました</value>
   </data>
   <data name="CHANGED_SERVER_CD" xml:space="preserve">
     <value>Server CD の変更</value>
@@ -2601,9 +2745,6 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   </data>
   <data name="CHANGE_POLICY_STATUS" xml:space="preserve">
     <value>ポリシー '{0}' の状態の変更</value>
-  </data>
-  <data name="CHANGE_SERVER_CD" xml:space="preserve">
-    <value>[XenServer] CD の挿入</value>
   </data>
   <data name="CHANGE_SERVER_PASSWORD" xml:space="preserve">
     <value>サーバーのパスワードの変更...</value>
@@ -2649,6 +2790,9 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="CHECKING_HA_STATUS" xml:space="preserve">
     <value>高可用性と WLB の状態のチェック</value>
   </data>
+  <data name="CHECKING_HEALTH_CHECK_SERVICE" xml:space="preserve">
+    <value>ヘルス チェックへのプールの登録を確認しています</value>
+  </data>
   <data name="CHECKING_HOST_LIVENESS_STATUS" xml:space="preserve">
     <value>ホストのライブネスの状態のチェック</value>
   </data>
@@ -2688,12 +2832,6 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="CHECKING_SECURITY_PROTOCOL_GROUP" xml:space="preserve">
     <value>セキュリティ プロトコルのチェック</value>
   </data>
-  <data name="CHECKING_VSWITCH_CONTROLLER" xml:space="preserve">
-    <value>vSwitch コントローラー チェック</value>
-  </data>
-  <data name="CHECKING_VSWITCH_CONTROLLER_GROUP" xml:space="preserve">
-    <value>vSwitch コントローラーの構成を確認しています</value>
-  </data>
   <data name="CHECKING_SERVER_NEEDS_REBOOT" xml:space="preserve">
     <value>再起動の確認が必要です</value>
   </data>
@@ -2715,8 +2853,14 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="CHECKING_UPGRADE_HOTFIX_STATUS" xml:space="preserve">
     <value>Hotfix のアップグレード状態のチェック</value>
   </data>
+  <data name="CHECKING_VSWITCH_CONTROLLER" xml:space="preserve">
+    <value>vSwitch コントローラー チェック</value>
+  </data>
+  <data name="CHECKING_VSWITCH_CONTROLLER_GROUP" xml:space="preserve">
+    <value>vSwitch コントローラーの構成を確認しています</value>
+  </data>
   <data name="CHECKING_XENCENTER_VERSION" xml:space="preserve">
-    <value>[XenCenter] バージョンの確認</value>
+    <value>{0} バージョンの確認</value>
   </data>
   <data name="CHECK_WLB_ENABLED" xml:space="preserve">
     <value>プール '{0}' の WLB が有効になっています</value>
@@ -2773,7 +2917,7 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
     <value>子ノードを閉じる(&amp;C)</value>
   </data>
   <data name="COMMON_CRITERIA_TEXT" xml:space="preserve">
-    <value>情報セキュリティ国際評価基準 (Common Criteria) バージョンの [XenServer] のみ</value>
+    <value>{0}: 情報セキュリティ国際評価基準 (Common Criteria) バージョンの {1} のみ</value>
   </data>
   <data name="COMPLETED" xml:space="preserve">
     <value>完了</value>
@@ -2836,6 +2980,9 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
     <value>VM のメモリの静的最大サイズを変更すると、VM が強制的に再起動されます。
 
 続行しますか?</value>
+  </data>
+  <data name="CONFIRM_CONTINUE" xml:space="preserve">
+    <value>続行しますか?</value>
   </data>
   <data name="CONFIRM_DELETE" xml:space="preserve">
     <value>選択した {0} を削除してもよろしいですか?</value>
@@ -2937,10 +3084,10 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
     <value>破棄する(&amp;Y)</value>
   </data>
   <data name="CONFIRM_DISABLE_CBT_VM" xml:space="preserve">
-    <value>これにより、選択した VM のディスクで変更ブロック追跡が無効になります。VM のバックアップ作成にサードパーティのソリューションを使用している場合、影響を受けることがあります。[XenCenter] から再度変更ブロック追跡を有効にすることはできません。続行しますか?</value>
+    <value>これにより、選択した VM のディスクで変更ブロック追跡が無効になります。VM のバックアップ作成にサードパーティのソリューションを使用している場合、影響を受けることがあります。{0} から再度変更ブロック追跡を有効にすることはできません。続行しますか?</value>
   </data>
   <data name="CONFIRM_DISABLE_CBT_VMS" xml:space="preserve">
-    <value>これにより、選択した VM のディスクで変更ブロック追跡が無効になります。VM のバックアップ作成にサードパーティのソリューションを使用している場合、影響を受けることがあります。[XenCenter] から再度変更ブロック追跡を有効にすることはできません。続行しますか?</value>
+    <value>これにより、選択した VM のディスクで変更ブロック追跡が無効になります。VM のバックアップ作成にサードパーティのソリューションを使用している場合、影響を受けることがあります。{0} から再度変更ブロック追跡を有効にすることはできません。続行しますか?</value>
   </data>
   <data name="CONFIRM_DISABLE_CBT_VMS_TITLE" xml:space="preserve">
     <value>選択した VM の 変更ブロック追跡を無効化</value>
@@ -3054,10 +3201,10 @@ VM {2} をエクスポートしてもよろしいですか?</value>
     <value>VM の再起動</value>
   </data>
   <data name="CONFIRM_RESTART_TOOLSTACK_MANY_SERVERS" xml:space="preserve">
-    <value>選択したサーバーでツールスタックを再起動しますか? これにより、[XenCenter] とこれらのサーバーとの接続が一時的に切断されます。</value>
+    <value>選択したサーバーでツールスタックを再起動しますか? これにより、{0} とこれらのサーバーとの接続が一時的に切断されます。</value>
   </data>
   <data name="CONFIRM_RESTART_TOOLSTACK_ONE_SERVER" xml:space="preserve">
-    <value>'{0}' でツールスタックを再起動しますか? これにより、[XenCenter] とこのサーバーとの接続が一時的に切断されます。</value>
+    <value>'{0}' でツールスタックを再起動しますか? これにより、{1} とこのサーバーとの接続が一時的に切断されます。</value>
   </data>
   <data name="CONFIRM_RESTART_TOOLSTACK_TITLE" xml:space="preserve">
     <value>ツールスタックの再起動</value>
@@ -3178,11 +3325,11 @@ VM {2} をエクスポートしてもよろしいですか?</value>
   <data name="CONNECTION_FAILED_TITLE" xml:space="preserve">
     <value>{0} への接続に失敗しました</value>
   </data>
-  <data name="CONNECTION_FINDING_MASTER_DESCRIPTION" xml:space="preserve">
-    <value>{1} の {0} のマスターを検索しています...</value>
+  <data name="CONNECTION_FINDING_COORDINATOR_DESCRIPTION" xml:space="preserve">
+    <value>{1} の {0} のコーディネーターを検索しています...</value>
   </data>
-  <data name="CONNECTION_FINDING_MASTER_TITLE" xml:space="preserve">
-    <value>{0} のマスターの検索</value>
+  <data name="CONNECTION_FINDING_COORDINATOR_TITLE" xml:space="preserve">
+    <value>{0} のコーディネーターの検索</value>
   </data>
   <data name="CONNECTION_GENERAL_TAB_TITLE" xml:space="preserve">
     <value>接続の全般プロパティ</value>
@@ -3190,8 +3337,8 @@ VM {2} をエクスポートしてもよろしいですか?</value>
   <data name="CONNECTION_IO_EXCEPTION" xml:space="preserve">
     <value>サーバーと通信できません</value>
   </data>
-  <data name="CONNECTION_LOST_NOTICE_MASTER_IN_X_SECONDS" xml:space="preserve">
-    <value>{0} への接続が失われました。新しいプール マスターを {1} 秒以内に検索します。</value>
+  <data name="CONNECTION_LOST_NOTICE_COORDINATOR_IN_X_SECONDS" xml:space="preserve">
+    <value>{0} への接続が失われました。新しいプール コーディネーターを {1} 秒以内に検索します。</value>
   </data>
   <data name="CONNECTION_LOST_NOTICE_TITLE" xml:space="preserve">
     <value>{0} への接続が失われました</value>
@@ -3206,7 +3353,7 @@ VM {2} をエクスポートしてもよろしいですか?</value>
     <value>{0} に接続しました</value>
   </data>
   <data name="CONNECTION_REDIRECTING" xml:space="preserve">
-    <value>{0} への接続: {1} のプール マスターにリダイレクトしています</value>
+    <value>{0} への接続: {1} のプール コーディネーターにリダイレクトしています</value>
   </data>
   <data name="CONNECTION_REFUSED" xml:space="preserve">
     <value>接続が拒否されました。</value>
@@ -3214,13 +3361,13 @@ VM {2} をエクスポートしてもよろしいですか?</value>
   <data name="CONNECTION_REFUSED_TITLE" xml:space="preserve">
     <value>{0} への接続が拒否されました</value>
   </data>
-  <data name="CONNECTION_RETRYING_SLAVE" xml:space="preserve">
+  <data name="CONNECTION_RETRYING_SUPPORTER" xml:space="preserve">
     <value>{0} への接続: {1} のプールを検索しています</value>
   </data>
   <data name="CONNECTION_WAS_LOST" xml:space="preserve">
     <value>サーバーとの接続が切断されました</value>
   </data>
-  <data name="CONNECTION_WILL_RETRY_SLAVE" xml:space="preserve">
+  <data name="CONNECTION_WILL_RETRY_SUPPORTER" xml:space="preserve">
     <value>{0} への接続: {1} 秒以内にほかのプール メンバーに接続を試行します</value>
   </data>
   <data name="CONNECT_RESOLUTION_FAILURE" xml:space="preserve">
@@ -3282,6 +3429,9 @@ VM {2} をエクスポートしてもよろしいですか?</value>
   </data>
   <data name="CONTAINER_IMAGE" xml:space="preserve">
     <value>イメージ</value>
+  </data>
+  <data name="CONTAINER_MANAGEMENT_REMOVAL_WARNING" xml:space="preserve">
+    <value>コンテナ管理のサポートは {0} に削除されました。Container Management Supplemental Pack は Docker コンテナの管理に使用できなくなるため、アンインストールしてください。</value>
   </data>
   <data name="CONTAINER_ON_VM_TITLE" xml:space="preserve">
     <value>'{1}' {2} の {0}</value>
@@ -3439,7 +3589,7 @@ VM {2} をエクスポートしてもよろしいですか?</value>
     <value>ネットワーク</value>
   </data>
   <data name="CONVERSION_NETWORK_PAGE_TITLE" xml:space="preserve">
-    <value>VM を接続する [XenServer] ネットワークの選択 (オプション)</value>
+    <value>VM を接続する {0} ネットワークの選択 (オプション)</value>
   </data>
   <data name="CONVERSION_RBAC_RESTRICTION" xml:space="preserve">
     <value>{0} ユーザーには、Conversion Manager を実行するための権限がありません。以下のいずれかの役割を持つアカウントを使用してログインしてください:
@@ -3537,10 +3687,10 @@ VM {2} をエクスポートしてもよろしいですか?</value>
     <value>Conversion Manager 仮想アプライアンスのバージョンを取得できません。詳しくはログを参照してください。</value>
   </data>
   <data name="CONVERSION_VERSION_INCOMPATIBILITY" xml:space="preserve">
-    <value>[XenCenter] は、このバージョンの Conversion Manager 仮想アプライアンスと互換性がありません。</value>
+    <value>{0} は、このバージョンの Conversion Manager 仮想アプライアンスと互換性がありません。</value>
   </data>
   <data name="CONVERSION_VERSION_INCOMPATIBILITY_INFO" xml:space="preserve">
-    <value>使用中の Conversion Manager 仮想アプライアンスのバージョンは {0} より前です。従来の Conversion Manager コンソールを使用して、変換をセットアップおよび制御できます。ただし、お使いの [XenServer] のバージョンに一致する Conversion Manager 仮想アプライアンスをインポートして構成することを強くお勧めします。</value>
+    <value>使用中の Conversion Manager 仮想アプライアンスのバージョンは {0} より前です。従来の Conversion Manager コンソールを使用して、変換をセットアップおよび制御できます。ただし、お使いの {1} のバージョンに一致する Conversion Manager 仮想アプライアンスをインポートして構成することを強くお勧めします。</value>
   </data>
   <data name="CONVERSION_VM_PAGE_TEXT" xml:space="preserve">
     <value>仮想マシン</value>
@@ -3575,8 +3725,14 @@ VM {2} をエクスポートしてもよろしいですか?</value>
   <data name="CONVERT_TO_TEMPLATE" xml:space="preserve">
     <value>VM からテンプレートへの変換</value>
   </data>
+  <data name="COORDINATOR" xml:space="preserve">
+    <value>コーディネーター</value>
+  </data>
   <data name="COPY" xml:space="preserve">
     <value>コピー</value>
+  </data>
+  <data name="COPYING_TEMPLATE" xml:space="preserve">
+    <value>テンプレート '{0}' をコピーしています</value>
   </data>
   <data name="COPYRIGHT" xml:space="preserve">
     <value>Copyright © {0} All rights reserved.</value>
@@ -3667,6 +3823,9 @@ VM {2} をエクスポートしてもよろしいですか?</value>
   <data name="CPM_SUMMARY_KEY_DESTINATION" xml:space="preserve">
     <value>移行先:</value>
   </data>
+  <data name="CPM_SUMMARY_KEY_HOME_SERVER" xml:space="preserve">
+    <value>ホーム サーバー:</value>
+  </data>
   <data name="CPM_SUMMARY_KEY_MIGRATE_TEMPLATE" xml:space="preserve">
     <value>テンプレート:</value>
   </data>
@@ -3678,10 +3837,6 @@ VM {2} をエクスポートしてもよろしいですか?</value>
   </data>
   <data name="CPM_SUMMARY_KEY_STORAGE" xml:space="preserve">
     <value>ストレージ:</value>
-  </data>
-  <data name="CPM_SUMMARY_KEY_TARGET_SERVER" xml:space="preserve">
-    <value>ターゲット サーバー:
-</value>
   </data>
   <data name="CPM_SUMMARY_KEY_TRANSFER_NETWORK" xml:space="preserve">
     <value>移行ネットワーク:</value>
@@ -3729,7 +3884,10 @@ VM {2} をエクスポートしてもよろしいですか?</value>
     <value>選択した VM を移動するプールまたはスタンドアロン サーバーを選択します。</value>
   </data>
   <data name="CPM_WIZARD_DESTINATION_TABLE_INTRO" xml:space="preserve">
-    <value>移行先プールのターゲット サーバーを指定する (オプション)(&amp;T):</value>
+    <value>移行先のプールのホーム サーバーに VM を割り当てる (オプション)(&amp;H):</value>
+  </data>
+  <data name="CPM_WIZARD_DESTINATION_TABLE_INTRO_TEMPLATES" xml:space="preserve">
+    <value>移行先のプールのホーム サーバーにテンプレートを割り当てる (オプション)(&amp;H):</value>
   </data>
   <data name="CPM_WIZARD_DESTINATION_TAB_TITLE" xml:space="preserve">
     <value>移行先のプール</value>
@@ -3812,7 +3970,7 @@ VM {2} をエクスポートしてもよろしいですか?</value>
     <value>VM の {0} への移行</value>
   </data>
   <data name="CPM_WIZARD_VM_MISSING_ERROR" xml:space="preserve">
-    <value>選択した VM は [XenCenter] のキャッシュで使用できなくなりました。選択項目を確認して、このウィザードを再度実行してください。</value>
+    <value>選択した VM は {0} のキャッシュで使用できなくなりました。選択項目を確認して、このウィザードを再度実行してください。</value>
   </data>
   <data name="CPM_WIZARD_VM_SELECTION_INTRODUCTION" xml:space="preserve">
     <value>仮想ネットワーク インターフェイス(&amp;V):</value>
@@ -3959,8 +4117,8 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
   <data name="CREATING_MANIFEST_CHECKSUM" xml:space="preserve">
     <value>ファイル '{0}' のチェックサムを計算しています...</value>
   </data>
-  <data name="CREATING_NAMED_POOL_WITH_MASTER" xml:space="preserve">
-    <value>マスター '{1}' の新規プール '{0}' の作成</value>
+  <data name="CREATING_NAMED_POOL_WITH_COORDINATOR" xml:space="preserve">
+    <value>コーディネーター '{1}' の新規プール '{0}' の作成</value>
   </data>
   <data name="CREATING_NEW_FOLDER" xml:space="preserve">
     <value>新規フォルダを作成しています...</value>
@@ -4170,7 +4328,7 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
     <value>VM - 電源状態</value>
   </data>
   <data name="DEFAULT_SEARCH_VMS_WO_XS_TOOLS" xml:space="preserve">
-    <value>[Citrix VM Tools] なしの VM</value>
+    <value>{0} なしの VM</value>
   </data>
   <data name="DEFAULT_VDI_NAME" xml:space="preserve">
     <value>新規仮想ディスク</value>
@@ -4457,8 +4615,8 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
   <data name="DISABLE_HA" xml:space="preserve">
     <value>高可用性の無効化</value>
   </data>
-  <data name="DISABLE_HA_CONFIGURE_MANAGEMENT_INTERFACES" xml:space="preserve">
-    <value>管理インターフェイスを構成する場合は、高可用性機能を無効にしてください。</value>
+  <data name="DISABLE_HA_CONFIGURE_IP_ADDRESSES" xml:space="preserve">
+    <value>IP アドレスを構成する場合は、高可用性を無効にします。</value>
   </data>
   <data name="DISABLE_HA_HOTKEY" xml:space="preserve">
     <value>高可用性の無効化(&amp;D)</value>
@@ -4584,10 +4742,10 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
     <value>サーバーのライセンス条件のため、動的メモリ制御 (DMC) は使用できません。</value>
   </data>
   <data name="DMC_UNAVAILABLE_NOTOOLS" xml:space="preserve">
-    <value>[Citrix VM Tools] が VM にインストールされていないため、メモリ範囲を設定できません。</value>
+    <value>{0} がこの VM にインストールされていないため、メモリ範囲を設定できません。</value>
   </data>
   <data name="DMC_UNAVAILABLE_NOTOOLS_PLURAL" xml:space="preserve">
-    <value>[Citrix VM Tools] が複数の VM にインストールされていないため、メモリ範囲を設定できません。</value>
+    <value>{0} がこれらの VM にインストールされていないため、メモリ範囲を設定できません。</value>
   </data>
   <data name="DMC_UNAVAILABLE_NOTSUPPORTED" xml:space="preserve">
     <value>VM のオペレーティング システムでサポートされないためメモリ範囲を設定できません。</value>
@@ -4602,10 +4760,10 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
     <value>I/O ドライバーが VM にインストールされていないため、メモリ範囲を設定できません。</value>
   </data>
   <data name="DMC_UNAVAILABLE_OLDTOOLS" xml:space="preserve">
-    <value>この VM の [Citrix VM Tools] のバージョンが古いため、メモリ範囲を設定できません。</value>
+    <value>この VM の {0} のバージョンが古いため、メモリ範囲を設定できません。</value>
   </data>
   <data name="DMC_UNAVAILABLE_OLDTOOLS_PLURAL" xml:space="preserve">
-    <value>複数の VM の [Citrix VM Tools] のバージョンが古いため、メモリ範囲を設定できません。</value>
+    <value>これらの VM の {0} のバージョンが古いため、メモリ範囲を設定できません。</value>
   </data>
   <data name="DMC_UNAVAILABLE_TEMPLATE" xml:space="preserve">
     <value>このテンプレートではメモリ範囲を設定できません。</value>
@@ -4692,7 +4850,7 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
     <value>以下を使用しない</value>
   </data>
   <data name="DONT_SELECT_TARGET_SERVER" xml:space="preserve">
-    <value>ターゲット サーバーを選択しない</value>
+    <value>ホーム サーバーを割り当てない</value>
   </data>
   <data name="DOWLOAD_LATEST_XS_TITLE" xml:space="preserve">
     <value>{0} がリリースされています</value>
@@ -4725,7 +4883,7 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
     <value>ダウンロード...</value>
   </data>
   <data name="DOWNLOAD_LATEST_XS_BODY" xml:space="preserve">
-    <value>{0} がリリースされています。[Citrix] Web サイトから最新バージョンをダウンロードできます。</value>
+    <value>{0} がリリースされています。{1} Web サイトから最新バージョンをダウンロードできます。</value>
   </data>
   <data name="DO_NOT_SHOW_THIS_MESSAGE" xml:space="preserve">
     <value>次回からこのメッセージを表示しない(&amp;D)</value>
@@ -4935,9 +5093,6 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="DR_WIZARD_PRECHECKPAGE_OK" xml:space="preserve">
     <value>{0}: OK</value>
   </data>
-  <data name="DR_WIZARD_PRECHECKPAGE_PROBLEM" xml:space="preserve">
-    <value>{0}: {1}</value>
-  </data>
   <data name="DR_WIZARD_PRECHECKPAGE_RESOLVE" xml:space="preserve">
     <value>解決</value>
   </data>
@@ -5014,7 +5169,7 @@ CD をイジェクトしてから再試行してください。</value>
     <value>プール '{0}' へのフェイルバックが完了しました。</value>
   </data>
   <data name="DR_WIZARD_RECOVERPAGE_COMPLETE_FAILOVER" xml:space="preserve">
-    <value>[XenServer] 障害回復が完了しました。</value>
+    <value>{0} 障害回復が完了しました。</value>
   </data>
   <data name="DR_WIZARD_RECOVERPAGE_CONTINUE_DRYRUN" xml:space="preserve">
     <value>フェイルオーバーされた vApp と VM を削除して結果レポートを表示するには、[次へ] をクリックします。</value>
@@ -5032,7 +5187,7 @@ CD をイジェクトしてから再試行してください。</value>
     <value>フェイルバックが進行中です。しばらくお待ちください。</value>
   </data>
   <data name="DR_WIZARD_RECOVERPAGE_IN_PROGRESS_FAILOVER" xml:space="preserve">
-    <value>[XenServer] 障害回復が進行中です。しばらくお待ちください。</value>
+    <value>{0} 障害回復が進行中です。しばらくお待ちください。</value>
   </data>
   <data name="DR_WIZARD_RECOVERPAGE_OVERALL_PROGRESS" xml:space="preserve">
     <value>全体の進行状況: {0}/{1} タスクが完了</value>
@@ -5065,7 +5220,7 @@ CD をイジェクトしてから再試行してください。</value>
     <value>プール '{0}' へのフェイルバックの進行状況</value>
   </data>
   <data name="DR_WIZARD_RECOVERPAGE_TITLE_FAILOVER" xml:space="preserve">
-    <value>[XenServer] 障害回復の進行状況</value>
+    <value>{0} 障害回復の進行状況</value>
   </data>
   <data name="DR_WIZARD_REPORTPAGE_TEXT" xml:space="preserve">
     <value>結果</value>
@@ -5256,6 +5411,32 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="ENABLE_PVS_READ_CACHING_RUBRIC_SINGLE" xml:space="preserve">
     <value>選択した VM がストリーミングされる PVS サイトを選択します。</value>
   </data>
+  <data name="ENABLE_TLS_VERIFICATION_CLUSTERING" xml:space="preserve">
+    <value>プールがクラスターを作成している間は、証明書の検証を有効にすることはできません。</value>
+  </data>
+  <data name="ENABLE_TLS_VERIFICATION_HA_DISABLING" xml:space="preserve">
+    <value>プールで高可用性が無効になっている間は、証明書の検証を有効にすることはできません。</value>
+  </data>
+  <data name="ENABLE_TLS_VERIFICATION_HA_ENABLED" xml:space="preserve">
+    <value>高可用性がオンの場合、証明書の検証を有効にすることはできません。</value>
+  </data>
+  <data name="ENABLE_TLS_VERIFICATION_HA_ENABLING" xml:space="preserve">
+    <value>プールで高可用性が有効になっている間は、証明書の検証を有効にすることはできません。</value>
+  </data>
+  <data name="ENABLE_TLS_VERIFICATION_MENU" xml:space="preserve">
+    <value>証明書の検証を有効化(&amp;F)</value>
+  </data>
+  <data name="ENABLE_TLS_VERIFICATION_NEW_COORDINATOR" xml:space="preserve">
+    <value>新しいプール コーディネーターが選出されている間は、証明書の検証を有効にすることはできません。</value>
+  </data>
+  <data name="ENABLE_TLS_VERIFICATION_RBAC_RESTRICTION" xml:space="preserve">
+    <value>{0} ユーザーには、証明書の検証を有効にするための権限がありません。以下のいずれかの役割を持つアカウントを使用してログインしてください:
+
+{1}</value>
+  </data>
+  <data name="ENABLE_TLS_VERIFICATION_RPU" xml:space="preserve">
+    <value>You cannot enable certificate verification while a rolling pool upgrade is in progress.</value>
+  </data>
   <data name="ENABLE_WLB_ELLIPSIS" xml:space="preserve">
     <value>再開(&amp;U)</value>
   </data>
@@ -5317,7 +5498,7 @@ CD をイジェクトしてから再試行してください。</value>
     <value>ユーザー名とパスワードが一致しません。</value>
   </data>
   <data name="ERROR_CONNECTING_BLURB" xml:space="preserve">
-    <value>[XenCenter] でこのサーバーに接続するときに問題が発生しました。</value>
+    <value>{0} でこのサーバーに接続するときに問題が発生しました。</value>
   </data>
   <data name="ERROR_COULD_NOT_FIND_SR" xml:space="preserve">
     <value>ストレージ リポジトリが見つかりません。デフォルトが割り当てられていません。</value>
@@ -5503,7 +5684,7 @@ CD をイジェクトしてから再試行してください。</value>
     <value>'{0}' のプロキシ サーバーに認証できませんでした。</value>
   </data>
   <data name="ERROR_PUTTY_LAUNCHING" xml:space="preserve">
-    <value>[XenCenter] で PuTTY の開始中に問題が発生しました。</value>
+    <value>PuTTY の起動中に問題が発生しました。</value>
   </data>
   <data name="ERROR_SECURE_CHANNEL_FAILURE" xml:space="preserve">
     <value>SSL/TLS の保護されたチャネルを作成できませんでした。</value>
@@ -5523,26 +5704,26 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="EULAS" xml:space="preserve">
     <value>EULA</value>
   </data>
+  <data name="EVACUATE_HOST_CLUSER_CREATING" xml:space="preserve">
+    <value>プールがクラスターを作成している間は、新しいコーディネーターを選出することはできません。</value>
+  </data>
   <data name="EVACUATE_HOST_DIALOG_TITLE" xml:space="preserve">
     <value>保守モードへの切り替え - {0}</value>
   </data>
   <data name="EVACUATE_HOST_EJECT_CD_PROMPT" xml:space="preserve">
     <value>{0} CD をイジェクトしてください</value>
   </data>
-  <data name="EVACUATE_HOST_CLUSER_CREATING" xml:space="preserve">
-    <value>プールがクラスターを作成している間は、新しいマスターを選出することはできません。</value>
-  </data>
   <data name="EVACUATE_HOST_HA_DISABLING" xml:space="preserve">
-    <value>プールで高可用性の無効化を実行中は、新しいマスターを選出できません。</value>
+    <value>プールで高可用性が無効になっている間は、新しいコーディネーターを選出できません。</value>
   </data>
   <data name="EVACUATE_HOST_HA_ENABLING" xml:space="preserve">
-    <value>プールで高可用性の有効化の実行中は、新しいマスターを選出できません。</value>
+    <value>プールで高可用性が有効になっている間は、新しいコーディネーターを選出できません。</value>
   </data>
   <data name="EVACUATE_HOST_INSTALL_MGMNT_PROMPT" xml:space="preserve">
     <value>{0} 管理エージェントのインストール</value>
   </data>
   <data name="EVACUATE_HOST_INSTALL_TOOLS_PROMPT" xml:space="preserve">
-    <value>{0} [Citrix VM Tools] のインストール</value>
+    <value>{0} {1} のインストール</value>
   </data>
   <data name="EVACUATE_HOST_LOCAL_CD" xml:space="preserve">
     <value>この VM はローカル CD を使用します。</value>
@@ -5574,8 +5755,8 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="EXCEPTION_USER_CANCELLED" xml:space="preserve">
     <value>キャンセルされました</value>
   </data>
-  <data name="EXCEPTION_USER_CANCELLED_MASTER" xml:space="preserve">
-    <value>キャンセルされました。最初にマスターをアップグレードしてください。</value>
+  <data name="EXCEPTION_USER_CANCELLED_COORDINATOR" xml:space="preserve">
+    <value>ユーザーがキャンセルされました。最初にコーディネーターをアップグレードしてください。</value>
   </data>
   <data name="EXIT_MAINTENANCE_MODE" xml:space="preserve">
     <value>保守モードからの切り替え(&amp;M)</value>
@@ -5811,6 +5992,12 @@ CD をイジェクトしてから再試行してください。</value>
   </data>
   <data name="FILE_ALL" xml:space="preserve">
     <value>すべてのファイル</value>
+  </data>
+  <data name="FILE_NAME_IS_DEVICE_NAME_ERROR_MESSAGE" xml:space="preserve">
+    <value>ファイル名をデバイス名にすることはできません。</value>
+  </data>
+  <data name="FILE_PATH_DEVICE_NAME_ERROR_MESSAGE" xml:space="preserve">
+    <value>パスのセクション {0} がデバイス名と一致します。</value>
   </data>
   <data name="FILE_PDF" xml:space="preserve">
     <value>Acrobat (PDF) ファイル</value>
@@ -6145,12 +6332,6 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="GPU_PLACEMENT_POLICY_MIXED_DESCRIPTION" xml:space="preserve">
     <value>混在: GPU グループごとに異なる設定を指定する</value>
   </data>
-  <data name="GPU_RUBRIC_NO_GPUS_POOL" xml:space="preserve">
-    <value>VM に専用の GPU (Graphics Processing Unit) を割り当てて、グラフィック パフォーマンスを向上させることができます。ただし、このプールでは GPU が検出されないため、このオプションは使用できません。</value>
-  </data>
-  <data name="GPU_RUBRIC_NO_GPUS_SERVER" xml:space="preserve">
-    <value>VM に専用の GPU (Graphics Processing Unit) を割り当てて、グラフィック パフォーマンスを向上させることができます。ただし、このサーバーでは GPU が検出されないため、このオプションは使用できません。</value>
-  </data>
   <data name="GPU_RUBRIC_PLEASE_SELECT_WHICH_GPU_MULTIPLE" xml:space="preserve">
     <value>これらの GPU で使用できる仮想 GPU の種類を選択します。</value>
   </data>
@@ -6175,11 +6356,11 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="GRAPHS_DEFAULT_NAME_NETWORK" xml:space="preserve">
     <value>ネットワーク パフォーマンス</value>
   </data>
-  <data name="GRAPHS_DETAILS_TITLE" xml:space="preserve">
-    <value>'{0}' の詳細</value>
-  </data>
   <data name="GRAPHS_EDIT" xml:space="preserve">
     <value>グラフの編集...</value>
+  </data>
+  <data name="GRAPHS_EDIT_TITLE" xml:space="preserve">
+    <value>'{0}' の編集</value>
   </data>
   <data name="GRAPHS_NEW" xml:space="preserve">
     <value>新規グラフ...</value>
@@ -6202,7 +6383,7 @@ CD をイジェクトしてから再試行してください。</value>
     <value>パフォーマンス グラフ</value>
   </data>
   <data name="GRAPH_NEEDS_TOOLS" xml:space="preserve">
-    <value>この VM のメモリ データを表示するには、[Citrix VM Tools] をインストールする必要があります</value>
+    <value>この VM のメモリ データを表示するには、{0} をインストールする必要があります</value>
   </data>
   <data name="GREATER_THAN" xml:space="preserve">
     <value>&gt; {0}</value>
@@ -6214,7 +6395,7 @@ CD をイジェクトしてから再試行してください。</value>
     <value>グループの役割</value>
   </data>
   <data name="GUEFI_BOOT_MODES_EXPERIMENTAL_WARNING" xml:space="preserve">
-    <value>ゲストの UEFI ブートとゲストの UEFI セキュア ブートは試験段階の機能です。UEFI に対応した VM は、実稼働環境に配置されたホスト上に作成できますが、業務用に使用しないでください。ホストを [XenServer] の新しいバージョンにアップグレードすると、VM を再作成する必要があります。</value>
+    <value>ゲストの UEFI ブートとゲストの UEFI セキュア ブートは試験段階の機能です。UEFI に対応した VM は、実稼働環境に配置されたホスト上に作成できますが、業務用に使用しないでください。ホストを {0} の新しいバージョンにアップグレードすると、VM を再作成する必要があります。</value>
   </data>
   <data name="GUEFI_BOOT_MODES_UNSUPPORTED_WARNING" xml:space="preserve">
     <value>UEFI ブート モードおよび UEFI セキュア ブート モードは現在選択したテンプレートでサポートされていません。</value>
@@ -6223,7 +6404,7 @@ CD をイジェクトしてから再試行してください。</value>
     <value>UEFI ブート(&amp;U) - 試験段階</value>
   </data>
   <data name="GUEFI_BOOT_MODE_EXPERIMENTAL_WARNING" xml:space="preserve">
-    <value>ゲストの UEFI ブートは試験段階の機能です。UEFI に対応した VM は、実稼働環境に配置されたホスト上に作成できますが、業務用に使用しないでください。ホストを [XenServer] の新しいバージョンにアップグレードすると、VM を再作成する必要があります。</value>
+    <value>ゲストの UEFI ブートは試験段階の機能です。UEFI に対応した VM は、実稼働環境に配置されたホスト上に作成できますが、業務用に使用しないでください。ホストを {0} の新しいバージョンにアップグレードすると、VM を再作成する必要があります。</value>
   </data>
   <data name="GUEFI_BOOT_MODE_LABEL" xml:space="preserve">
     <value>UEFI ブート(&amp;U)</value>
@@ -6232,7 +6413,7 @@ CD をイジェクトしてから再試行してください。</value>
     <value>UEFI ブート モードは現在選択したテンプレートでサポートされていません。</value>
   </data>
   <data name="GUEFI_SECUREBOOT_MODE_EXPERIMENTAL_WARNING" xml:space="preserve">
-    <value>ゲストの UEFI セキュア ブートは試験段階の機能です。UEFI セキュア ブート モードを使用するように構成された VM は、実稼働環境に配置されたホスト上に作成できますが、業務用に使用しないでください。ホストを [XenServer] の新しいバージョンにアップグレードすると、VM を再作成する必要があります。</value>
+    <value>ゲストの UEFI セキュア ブートは試験段階の機能です。UEFI セキュア ブート モードを使用するように構成された VM は、実稼働環境に配置されたホスト上に作成できますが、業務用に使用しないでください。ホストを {0} の新しいバージョンにアップグレードすると、VM を再作成する必要があります。</value>
   </data>
   <data name="GUEFI_SECUREBOOT_MODE_UNSUPPORTED_WARNING" xml:space="preserve">
     <value>UEFI セキュア ブート モードは現在選択したテンプレートでサポートされていません。</value>
@@ -6243,10 +6424,15 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="GUEFI_SECURE_BOOT_MODE_LABEL" xml:space="preserve">
     <value>UEFI セキュア ブート(&amp;S)</value>
   </data>
-  <data name="GUI_OUT_OF_DATE" xml:space="preserve">
-    <value>[XenCenter] のバージョンが古いため、{0} に接続できません。
+  <data name="GUI_NOT_COMPATIBLE" xml:space="preserve">
+    <value>このバージョンの {0} は、{1} {2} 以降のバージョンにのみ接続できます。{3} には接続できません。
 
-最新バージョンの [XenCenter] は、以下の場所から入手できます:</value>
+互換性のあるバージョンの {4} は、以下の場所から入手できます:</value>
+  </data>
+  <data name="GUI_OUT_OF_DATE" xml:space="preserve">
+    <value>{0} のバージョンが古いため、{1} に接続できません。
+
+互換性のあるバージョンの {0} は、以下の場所から入手できます:</value>
   </data>
   <data name="HA" xml:space="preserve">
     <value>高可用性</value>
@@ -6292,8 +6478,8 @@ CD をイジェクトしてから再試行してください。</value>
 
 {0}</value>
   </data>
-  <data name="HA_CANNOT_EVACUATE_MASTER" xml:space="preserve">
-    <value>高可用性が有効なプールのマスターであるため、サーバー '{0}' を保守モードに切り替えることはできません。</value>
+  <data name="HA_CANNOT_EVACUATE_COORDINATOR" xml:space="preserve">
+    <value>高可用性が有効になっているプールのコーディネーターであるため、サーバー '{0}' を保守モードに切り替えることはできません。</value>
   </data>
   <data name="HA_CHECK_DESCRIPTION" xml:space="preserve">
     <value>高可用性と WLB のチェック</value>
@@ -6345,9 +6531,6 @@ CD をイジェクトしてから再試行してください。</value>
   </data>
   <data name="HA_DISABLE_QUERY" xml:space="preserve">
     <value>プール '{0}' の高可用性を無効にしてもよろしいですか?</value>
-  </data>
-  <data name="HA_EDIT_DIALOG_BLURB" xml:space="preserve">
-    <value>[XenServer] の高可用性 (HA: High Availability) により、リソース プール内のハードウェアや個々のサーバーに障害が発生した場合に、仮想マシンが自動的に再起動します。プール '{0}' の高可用性は有効になっています。</value>
   </data>
   <data name="HA_EDIT_NOW" xml:space="preserve">
     <value>高可用性設定の変更...</value>
@@ -6537,10 +6720,10 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
     <value>高可用性構成の確認と有効化</value>
   </data>
   <data name="HEALTHCHECK_AUTHENTICATION_RUBRIC_EXISTING_TOKEN" xml:space="preserve">
-    <value>この機能を有効にするには、[Citrix] Insight Services による認証が必要です。[XenCenter] によって、ほかの接続プールに対して成功した認証が検出されます。この認証を再び使用するか、新しく認証するかを選択できます。</value>
+    <value>この機能を有効にするには、{0} による認証が必要です。{1} によって、ほかの接続プールに対して成功した認証が検出されます。この認証を再び使用するか、新しく認証するかを選択できます。</value>
   </data>
   <data name="HEALTHCHECK_AUTHENTICATION_RUBRIC_NO_TOKEN" xml:space="preserve">
-    <value>この機能を有効にするには、[Citrix] Insight Services による認証が必要です。MyCitrix 資格情報を入力して登録してください ({0} 参照)。この資格情報はアップロード トークンの取得にのみ使用され、このマシンやサーバーには格納されません。</value>
+    <value>この機能を有効にするには、{0} による認証が必要です。MyCitrix 資格情報を入力して登録してください ({1} 参照)。この資格情報はアップロード トークンの取得にのみ使用され、このマシンやサーバーには格納されません。</value>
   </data>
   <data name="HEALTHCHECK_ENROLLMENT_CONFIRMATION_BUTTON_LABEL" xml:space="preserve">
     <value>OK、ヘルス チェックを有効にする</value>
@@ -6579,7 +6762,7 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
     <value>ヘルスチェック</value>
   </data>
   <data name="HEALTH_CHECK_AUTHENTICATION_FAILED" xml:space="preserve">
-    <value>[Citrix] Insight Services による認証が失敗しました。詳しくは、アプリケーション ログ ファイルを確認してください。</value>
+    <value>{0} による認証が失敗しました。詳しくは、アプリケーション ログ ファイルを確認してください。</value>
   </data>
   <data name="HEALTH_CHECK_AUTHENTICATION_INVALID_CREDENTIALS" xml:space="preserve">
     <value>ユーザー名またはパスワードが無効です。再試行してください。</value>
@@ -6591,7 +6774,7 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
     <value>http://www.citrix.co.jp/about/legal/privacy/</value>
   </data>
   <data name="HEALTH_CHECK_PRIVACY_POLICY" xml:space="preserve">
-    <value>ヘルス チェックによって [Citrix] Insight Services にアップロードされる情報は、トラブルシューティングや診断サポート、および [Citrix] Insight Services Policy ({0}) と [Citrix] Privacy Policy ({1}) で必要な製品の品質、信頼性、パフォーマンスを改善するために使用されます。</value>
+    <value>ヘルス チェックによって {0} にアップロードされる情報は、トラブルシューティングや診断サポート、および {0} Policy ({1}) と {2} Privacy Policy ({3}) で必要な製品の品質、信頼性、パフォーマンスを改善するために使用されます。</value>
   </data>
   <data name="HEALTH_CHECK_USER_HAS_NO_PERMISSION_TO_CONNECT" xml:space="preserve">
     <value>このユーザーにはこのサーバーにアクセスする権限がありません。</value>
@@ -6678,11 +6861,11 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   <data name="HOSTACTION_SHUTDOWN_VM_SHUTDOWN" xml:space="preserve">
     <value>サーバーのシャットダウン準備: {0} のシャットダウン中 ({1} / {2})</value>
   </data>
-  <data name="HOSTACTION_TRANSITIONED_NEW_MASTER" xml:space="preserve">
-    <value>新規マスターとしてサーバー {0} が選出されました</value>
+  <data name="HOSTACTION_TRANSITIONED_NEW_COORDINATOR" xml:space="preserve">
+    <value>新しいコーディネーターとしてサーバー {0} が選出されました</value>
   </data>
-  <data name="HOSTACTION_TRANSITIONING_NEW_MASTER" xml:space="preserve">
-    <value>新規マスターとしてサーバー {0} を選出しています...</value>
+  <data name="HOSTACTION_TRANSITIONING_NEW_COORDINATOR" xml:space="preserve">
+    <value>新しいコーディネーターとしてサーバー {0} を選出しています...</value>
   </data>
   <data name="HOST_ACTION_IN_PROGRESS" xml:space="preserve">
     <value>このサーバーには実行中の処理があります。</value>
@@ -6712,7 +6895,7 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
     <value>サーバーの全般プロパティ</value>
   </data>
   <data name="HOST_GONE" xml:space="preserve">
-    <value>[XenCenter] のキャッシュにホストが見つかりません。</value>
+    <value>{0} のキャッシュにホストが見つかりません。</value>
   </data>
   <data name="HOST_INTERNAL_MANAGEMENT_NETWORK" xml:space="preserve">
     <value>ホスト内部管理ネットワーク</value>
@@ -6730,7 +6913,7 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
     <value>ローカルとリモート ({0})</value>
   </data>
   <data name="HOST_MEMORY_POST_UPGRADE_DEFAULT_WARNING_LONG" xml:space="preserve">
-    <value>[XenServer] {1} 以降にアップグレードすると、{0} のコントロール ドメイン メモリが増加します。
+    <value>{0} {1} 以降にアップグレードすると、{2} のコントロール ドメイン メモリが増加します。
 
 そのため、プールのローリング アップグレード中にこのサーバーに VM を移行できないか、またはアップグレード後、このサーバーに現在配置されているすべての VM を格納できない可能性があります。</value>
   </data>
@@ -6746,7 +6929,7 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
     <value>{0}: コントロール ドメイン メモリの増加により、このサーバーはアップグレード後にすべての VM を格納できない可能性があります。</value>
   </data>
   <data name="HOST_MEMORY_POST_UPGRADE_VERSION_WARNING_LONG" xml:space="preserve">
-    <value>[XenServer] {1} にアップグレードすると、{0} のコントロール ドメイン メモリが増加します。
+    <value>{1} {2} にアップグレードすると、{0} のコントロール ドメイン メモリが増加します。
 
 そのため、プールのローリング アップグレード中にこのサーバーに VM を移行できないか、またはアップグレード後、このサーバーに現在配置されているすべての VM を格納できない可能性があります。</value>
   </data>
@@ -6923,6 +7106,9 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   </data>
   <data name="IGNORE_BUTTON_LABEL" xml:space="preserve">
     <value>無視(&amp;I)</value>
+  </data>
+  <data name="ILLEGAL_CHARACTER_ERROR_MESSAGE" xml:space="preserve">
+    <value>次の文字は無効です: {0}</value>
   </data>
   <data name="ILO_CONNECTION_ERROR" xml:space="preserve">
     <value>iLO サービスに接続できません。構成を確認してください。</value>
@@ -7126,7 +7312,7 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
     <value>インポートするファイルの指定</value>
   </data>
   <data name="IMPORT_TEMPLATE_ALREADY_EXISTS" xml:space="preserve">
-    <value>インポートしようとしている [XenServer] テンプレートは選択したプールに既に存在します。</value>
+    <value>インポートしようとしている {0} テンプレートは選択したプールに既に存在します。</value>
   </data>
   <data name="IMPORT_TEMPLATE_CONFIGURE_STORAGE" xml:space="preserve">
     <value>新規テンプレートのストレージを構成してください</value>
@@ -7249,7 +7435,7 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
     <value>インポートした VM のストレージ リポジトリを選択してください。</value>
   </data>
   <data name="INCOMPATIBLE_PRODUCTS" xml:space="preserve">
-    <value>このバージョンのサーバーには、[XenCenter] との互換性がありません。</value>
+    <value>このバージョンのサーバーには、{0} との互換性がありません。</value>
   </data>
   <data name="INCOMPATIBLE_PROTOCOL_VERSION" xml:space="preserve">
     <value>互換性のないプロトコル バージョン</value>
@@ -7276,7 +7462,7 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
     <value>ディスクおよびメモリのスナップショットを作成するには、I/O ドライバーをインストールする必要があります</value>
   </data>
   <data name="INFO_DISKMEMORY_MODE_NO_TOOLS" xml:space="preserve">
-    <value>ディスクおよびメモリのスナップショットを作成するには、[Citrix VM Tools] をインストールする必要があります</value>
+    <value>ディスクおよびメモリのスナップショットを作成するには、{0} をインストールする必要があります</value>
   </data>
   <data name="INFO_DISKMEMORY_MODE_POWER_STATE" xml:space="preserve">
     <value>ディスクおよびメモリのスナップショットを作成するには、VM が実行中である必要があります</value>
@@ -7291,7 +7477,7 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
     <value>休止スナップショットを作成するには、管理エージェントをインストールする必要があります</value>
   </data>
   <data name="INFO_QUIESCE_MODE_NO_TOOLS" xml:space="preserve">
-    <value>休止スナップショットを作成するには、[Citrix VM Tools] をインストールする必要があります</value>
+    <value>休止スナップショットを作成するには、{0} をインストールする必要があります</value>
   </data>
   <data name="INFO_QUIESCE_MODE_POWER_STATE" xml:space="preserve">
     <value>休止スナップショットを作成するには、VM が実行中である必要があります</value>
@@ -7315,22 +7501,22 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
     <value>選択された VM に CD ドライブが見つかりません。</value>
   </data>
   <data name="INSTALLTOOLS_COULDNOTFIND_WIN" xml:space="preserve">
-    <value>[Citrix VM Tools] インストール ディスクが見つかりません。</value>
+    <value>{0} インストール ディスクが見つかりません。</value>
   </data>
   <data name="INSTALLTOOLS_DONE" xml:space="preserve">
-    <value>[Citrix VM Tools] のインストール プログラムが開始しました。</value>
+    <value>{0} のインストール プログラムが開始しました。</value>
   </data>
   <data name="INSTALLTOOLS_EXIST" xml:space="preserve">
-    <value>[Citrix VM Tools] は、この VM に既にインストールされています。</value>
+    <value>{0} は、この VM に既にインストールされています。</value>
   </data>
   <data name="INSTALLTOOLS_READ_MORE" xml:space="preserve">
-    <value>[Citrix VM Tools] のインストールの詳細情報</value>
+    <value>{0} のインストールの詳細情報</value>
   </data>
   <data name="INSTALLTOOLS_STARTING" xml:space="preserve">
-    <value>[Citrix VM Tools] のインストール プログラムを開始しています。</value>
+    <value>{0} のインストール プログラムを開始しています。</value>
   </data>
   <data name="INSTALLTOOLS_TITLE" xml:space="preserve">
-    <value>VM {0} への [Citrix VM Tools] のインストール</value>
+    <value>VM {1} に {0} をインストールしています</value>
   </data>
   <data name="INSTALL_FILES_CANNOT_BE_FOUND" xml:space="preserve">
     <value>{0}: 指定されたネットワークの場所にインストール ファイルが見つかりません</value>
@@ -7341,11 +7527,11 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   <data name="INSTALL_PENDING_UPDATES" xml:space="preserve">
     <value>保留中のアップデートのインストール(&amp;U)...</value>
   </data>
+  <data name="INSTALL_PENDING_UPDATES_DISABLED_REASON" xml:space="preserve">
+    <value>{0} は {1} {2} を実行しているサーバーへのアップデートのインストールに使用することはできません。代わりに {3} {2} を使用してください。</value>
+  </data>
   <data name="INSTALL_SERVER_CERTIFICATE_ACTION_LINK" xml:space="preserve">
     <value>証明書のインストール...</value>
-  </data>
-  <data name="INSTALL_SERVER_CERTIFICATE_CONTEXT_MENU" xml:space="preserve">
-    <value>証明書のインストール(&amp;F)...</value>
   </data>
   <data name="INSTALL_SERVER_CERTIFICATE_DESCRIPTION" xml:space="preserve">
     <value>サーバー証明書をインストールしています...</value>
@@ -7360,10 +7546,10 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
     <value>サーバー {0} に証明書をインストールしています...</value>
   </data>
   <data name="INSTALL_XENSERVER_TOOLS" xml:space="preserve">
-    <value>[Citrix VM Tools] をインストール</value>
+    <value>{0} をインストール</value>
   </data>
   <data name="INSTALL_XENSERVER_TOOLS_BUTTON" xml:space="preserve">
-    <value>[Citrix VM Tools] をインストール(&amp;I)</value>
+    <value>{0} をインストール(&amp;I)</value>
   </data>
   <data name="INSTANT_VM_CREATE_DESC_COMPLETED" xml:space="preserve">
     <value>VM '{0}' が作成されました</value>
@@ -7532,52 +7718,40 @@ SR UUID: {1}</value>
     <value>アクティブ化済み</value>
   </data>
   <data name="LICENSE_EDITION_DESKTOP" xml:space="preserve">
-    <value>[Citrix] Virtual Apps and Desktops(&amp;A)</value>
+    <value>{0} Virtual Apps and Desktops(&amp;A)</value>
   </data>
   <data name="LICENSE_EDITION_DESKTOP_CLOUD" xml:space="preserve">
-    <value>[Citrix] Virtual Apps and Desktops [Citrix] Cloud(&amp;C)</value>
+    <value>{0} Virtual Apps and Desktops {0} Cloud(&amp;C)</value>
   </data>
   <data name="LICENSE_EDITION_DESKTOP_CLOUD_LEGACY" xml:space="preserve">
-    <value>XenApp/XenDesktop [Citrix] Cloud(&amp;C)</value>
+    <value>XenApp/XenDesktop {0} Cloud(&amp;C)</value>
   </data>
   <data name="LICENSE_EDITION_DESKTOP_LEGACY" xml:space="preserve">
     <value>XenApp/XenDesktop(&amp;D)</value>
   </data>
   <data name="LICENSE_EDITION_DESKTOP_PLUS" xml:space="preserve">
-    <value>[Citrix] Virtual Apps and Desktops Premium(&amp;P)</value>
+    <value>{0} Virtual Apps and Desktops Premium(&amp;P)</value>
   </data>
   <data name="LICENSE_EDITION_DESKTOP_PLUS_LEGACY" xml:space="preserve">
     <value>XenApp/XenDesktop Platinum(&amp;P)</value>
   </data>
   <data name="LICENSE_EDITION_ENTERPRISE_PERSOCKET" xml:space="preserve">
-    <value>[XenServer product] Premium Per-Socket ({0} ソケット分必要)(&amp;R)</value>
+    <value>{0} Premium Per-Socket ({1} ソケット分必要)(&amp;R)</value>
   </data>
   <data name="LICENSE_EDITION_ENTERPRISE_PERSOCKET_LEGACY" xml:space="preserve">
-    <value>{1} Enterprise Per-Socket ({0} ソケット分必要)(&amp;N)</value>
+    <value>{0} Enterprise Per-Socket ({1} ソケット分必要)(&amp;N)</value>
   </data>
   <data name="LICENSE_EDITION_ENTERPRISE_PERUSER" xml:space="preserve">
-    <value>[XenServer product] Premium Per-User(&amp;E)</value>
+    <value>{0} Premium Per-User(&amp;E)</value>
   </data>
   <data name="LICENSE_EDITION_ENTERPRISE_PERUSER_LEGACY" xml:space="preserve">
     <value>{0} Enterprise Per-User(&amp;E)</value>
   </data>
-  <data name="LICENSE_EDITION_PERSOCKET" xml:space="preserve">
-    <value>[XenServer product] Per-Socket ({0} ソケット分必要)(&amp;S)</value>
-  </data>
-  <data name="LICENSE_EDITION_PERSOCKET_LEGACY" xml:space="preserve">
-    <value>{1} Per-Socket ({0} ソケット分必要)(&amp;S)</value>
-  </data>
   <data name="LICENSE_EDITION_STANDARD_PERSOCKET" xml:space="preserve">
-    <value>[XenServer product] Standard Per-Socket ({0} ソケット分必要)(&amp;S)</value>
+    <value>{0} Standard Per-Socket ({1} ソケット分必要)(&amp;S)</value>
   </data>
   <data name="LICENSE_EDITION_STANDARD_PERSOCKET_LEGACY" xml:space="preserve">
-    <value>{1} Standard Per-Socket ({0} ソケット分必要)(&amp;S)</value>
-  </data>
-  <data name="LICENSE_EDITION_XENDESKTOP" xml:space="preserve">
-    <value>[XenServer product] for [Citrix] Virtual Desktops(&amp;D)</value>
-  </data>
-  <data name="LICENSE_EDITION_XENDESKTOP_LEGACY" xml:space="preserve">
-    <value>{0} for XenDesktop(&amp;X)</value>
+    <value>{0} Standard Per-Socket ({1} ソケット分必要)(&amp;S)</value>
   </data>
   <data name="LICENSE_ERROR_1" xml:space="preserve">
     <value>{0} に対するライセンス操作に失敗しました。</value>
@@ -7608,10 +7782,6 @@ SR UUID: {1}</value>
   </data>
   <data name="LICENSE_EXPIRES_ONE_MIN" xml:space="preserve">
     <value>あと 1 分で期限切れ</value>
-  </data>
-  <data name="LICENSE_EXPIRY_PURCHACE" xml:space="preserve">
-    <value>[XenServer] オンライン</value>
-    <comment>this text could be improved</comment>
   </data>
   <data name="LICENSE_FIELD_DISABLED" xml:space="preserve">
     <value>このフィールドは、サーバーのライセンス条件により無効になっています。</value>
@@ -7656,7 +7826,7 @@ SR UUID: {1}</value>
     <value>高可用性が有効であるため、ホストのライセンスを変更できません</value>
   </data>
   <data name="LICENSE_NO_MULTISELECT_ACTIVATE" xml:space="preserve">
-    <value>[XenServer] Express をアクティブ化するときは、サーバーを 1 つだけ選択してください。</value>
+    <value>{0} Express をアクティブ化するときは、サーバーを 1 つだけ選択してください。</value>
   </data>
   <data name="LICENSE_NO_MULTISELECT_LICENSE" xml:space="preserve">
     <value>{0} より前のサーバーにライセンスを適用する場合、一度に 1 つのサーバーのみを選択する必要があります。</value>
@@ -7687,15 +7857,15 @@ SR UUID: {1}</value>
   </data>
   <data name="LICENSE_SUPPORT_AND_DESKTOP_CLOUD_FEATURES_ENABLED" xml:space="preserve">
     <value>サポート契約が有効です
-[Citrix] Virtual Apps and Desktops [Citrix] Cloud 機能が有効です</value>
+{0} Virtual Apps and Desktops {0} Cloud 機能が有効です</value>
   </data>
   <data name="LICENSE_SUPPORT_AND_DESKTOP_FEATURES_ENABLED" xml:space="preserve">
     <value>サポート契約が有効です
-[Citrix] Virtual Apps and Desktops 機能が有効です</value>
+{0} Virtual Apps and Desktops 機能が有効です</value>
   </data>
   <data name="LICENSE_SUPPORT_AND_DESKTOP_PLUS_FEATURES_ENABLED" xml:space="preserve">
     <value>サポート契約が有効です
-[Citrix] Virtual Apps and Desktops Premium 機能が有効です</value>
+{0} Virtual Apps and Desktops Premium 機能が有効です</value>
   </data>
   <data name="LICENSE_SUPPORT_AND_ENTERPRISE_FEATURES_ENABLED" xml:space="preserve">
     <value>サポート契約が有効です
@@ -7708,9 +7878,6 @@ Premium 機能が有効です</value>
   <data name="LICENSE_SUPPORT_AND_STANDARD_FEATURES_ENABLED" xml:space="preserve">
     <value>サポート契約が有効です
 Standard 機能のみ有効です</value>
-  </data>
-  <data name="LICENSE_TOO_MANY_SERVERS_SELECTED_CAPTION" xml:space="preserve">
-    <value>アクティブ化キーを同時に複数の [XenServer] Express 製品に適用することはできません。</value>
   </data>
   <data name="LICENSE_UNLICENSED" xml:space="preserve">
     <value>非ライセンス</value>
@@ -7735,12 +7902,6 @@ Standard 機能のみ有効です</value>
   </data>
   <data name="LICENSE_YOUR_LICENCE_HAS_EXPIRED" xml:space="preserve">
     <value>ライセンスの有効期限が切れました。</value>
-  </data>
-  <data name="LICENSING_DIALOG_EXPIRED_TEXT" xml:space="preserve">
-    <value>有効期限が切れたサーバーがあります。[XenServer] ライセンスを割り当てるか、[XenServer] Express 製品をアクティブ化してください。</value>
-  </data>
-  <data name="LICENSING_DIALOG_EXPIRING_SOON_TEXT" xml:space="preserve">
-    <value>有効期限が切れるサーバーがあります。[XenServer] ライセンスを割り当てるか、[XenServer] Express 製品をアクティブ化してください。</value>
   </data>
   <data name="LINK_STATUS" xml:space="preserve">
     <value>接続状態</value>
@@ -7842,11 +8003,14 @@ SCSI ID: {2}
   <data name="MAIL_LANGUAGE_JAPANESE_NAME" xml:space="preserve">
     <value>日本語 (日本)</value>
   </data>
-  <data name="MAINTENANCE_MODE" xml:space="preserve">
-    <value>保守モード</value>
-  </data>
   <data name="MAINWINDOW_ADD_HOST" xml:space="preserve">
     <value>追加(&amp;A)...</value>
+  </data>
+  <data name="MAINWINDOW_CERTIFICATE_CONTEXT_MENU_TEXT" xml:space="preserve">
+    <value>証明書(&amp;F)</value>
+  </data>
+  <data name="MAINWINDOW_CERTIFICATE_MENU_TEXT" xml:space="preserve">
+    <value>証明書(&amp;I)</value>
   </data>
   <data name="MAINWINDOW_CONFIRM_MIGRATE" xml:space="preserve">
     <value>VM {0} をサーバー {1} に移行してもよろしいですか?</value>
@@ -7961,10 +8125,10 @@ SCSI ID: {2}
     <value>タグの編集(&amp;G)...</value>
   </data>
   <data name="MAINWINDOW_EXPIRE_MESSAGE" xml:space="preserve">
-    <value>'{0}' の [XenServer] ライセンスの有効期限はあと {1} で切れます。</value>
+    <value>'{1}' の {0} ライセンスの有効期限はあと {2} で切れます。</value>
   </data>
   <data name="MAINWINDOW_EXPIRE_MESSAGE_TOO_LATE" xml:space="preserve">
-    <value>'{0}' の [XenServer] ライセンスの有効期限が切れました。</value>
+    <value>'{1}' の {0} ライセンスの有効期限が切れました。</value>
   </data>
   <data name="MAINWINDOW_EXPORT_POOL_RESOURCE_DATA" xml:space="preserve">
     <value>リソース データのエクスポート(&amp;X)...</value>
@@ -8003,7 +8167,7 @@ SCSI ID: {2}
     <value>高可用性(&amp;H)</value>
   </data>
   <data name="MAINWINDOW_INSTALL_TOOLS" xml:space="preserve">
-    <value>[Citrix VM Tools] をインストール(&amp;A)...</value>
+    <value>{0} をインストール(&amp;A)...</value>
   </data>
   <data name="MAINWINDOW_INSTANT_VM_FROM_TEMPLATE" xml:space="preserve">
     <value>高速作成(&amp;Q)</value>
@@ -8069,7 +8233,7 @@ SCSI ID: {2}
     <value>リカバリ モードで起動(&amp;V)</value>
   </data>
   <data name="MAINWINDOW_REMOVE_HOST" xml:space="preserve">
-    <value>[XenCenter] から削除(&amp;V)</value>
+    <value>{0} から削除(&amp;V)</value>
   </data>
   <data name="MAINWINDOW_REMOVE_HOST_CRASHDUMPS" xml:space="preserve">
     <value>クラッシュ ダンプ ファイルの削除(&amp;F)</value>
@@ -8200,9 +8364,6 @@ SCSI ID: {2}
   <data name="MANUAL_CHECK_FOR_UPDATES_UNLICENSED_INFO" xml:space="preserve">
     <value>Subscription Advantage が必要です</value>
   </data>
-  <data name="MASTER" xml:space="preserve">
-    <value>マスター</value>
-  </data>
   <data name="MAX" xml:space="preserve">
     <value>最大</value>
   </data>
@@ -8214,9 +8375,6 @@ SCSI ID: {2}
   </data>
   <data name="MEMORY_COLON" xml:space="preserve">
     <value>メモリ(&amp;M):</value>
-  </data>
-  <data name="MEMORY_XEN" xml:space="preserve">
-    <value>[XenServer]</value>
   </data>
   <data name="MEM_NOT_WHEN_SUSPENDED" xml:space="preserve">
     <value>VM の一時停止中はメモリを変更できません</value>
@@ -8351,6 +8509,15 @@ SCSI ID: {2}
   <data name="MESSAGEBOX_DETACH_VD_TITLE_MUTLIPLE" xml:space="preserve">
     <value>複数仮想ディスクの接続解除</value>
   </data>
+  <data name="MESSAGEBOX_ENABLE_TLS_VERIFICATION_BLURB" xml:space="preserve">
+    <value>'{0}' で証明書の検証が有効になっていません。今すぐ有効にしますか?</value>
+  </data>
+  <data name="MESSAGEBOX_ENABLE_TLS_VERIFICATION_BUTTON" xml:space="preserve">
+    <value>はい。証明書の検証を有効にします(&amp;Y)</value>
+  </data>
+  <data name="MESSAGEBOX_ENABLE_TLS_VERIFICATION_WARNING" xml:space="preserve">
+    <value>証明書の検証を有効にする前に、プールで実行されている処理がないことを確認してください。ある場合、実行中の処理は中断されます。</value>
+  </data>
   <data name="MESSAGEBOX_ERRORTEXT" xml:space="preserve">
     <value>サーバー '{0}' に接続できません。
 {1}
@@ -8413,11 +8580,14 @@ SCSI ID: {2}
   <data name="MESSAGEBOX_PASSWORD_WRITE_FAILED" xml:space="preserve">
     <value>パスワード情報の書き込みに失敗しました。{0}</value>
   </data>
-  <data name="MESSAGEBOX_POOL_DELETE" xml:space="preserve">
-    <value>プール マスターはスタンドアロン サーバになります。続行しますか?</value>
+  <data name="MESSAGEBOX_POOL_COORDINATOR_REMOVE" xml:space="preserve">
+    <value>プールからコーディネーターを削除することはできません。</value>
   </data>
-  <data name="MESSAGEBOX_POOL_MASTER_REMOVE" xml:space="preserve">
-    <value>プールからマスターを削除することはできません。</value>
+  <data name="MESSAGEBOX_POOL_DELETE" xml:space="preserve">
+    <value>プール コーディネーターはスタンドアロン サーバーになります。続行しますか?</value>
+  </data>
+  <data name="MESSAGEBOX_POOL_MEMBERS_EJECT" xml:space="preserve">
+    <value>プールを削除する前に、すべてのプール メンバーをプールからイジェクトする必要があります。</value>
   </data>
   <data name="MESSAGEBOX_PROGRAM_UNEXPECTED" xml:space="preserve">
     <value>[{0}] 予期しないエラーが発生しました。このエラーに関する技術的詳細は、次のファイルに保存されています。このファイルをサポート担当者に送信してください。
@@ -8425,7 +8595,7 @@ SCSI ID: {2}
 {1}</value>
   </data>
   <data name="MESSAGEBOX_PROGRAM_UNEXPECTED_TITLE" xml:space="preserve">
-    <value>[XenCenter] - エラー</value>
+    <value>{0} - エラー</value>
   </data>
   <data name="MESSAGEBOX_RECONNECT_FAIL" xml:space="preserve">
     <value>{0} に再接続できません。サーバーが使用可能ではありません。</value>
@@ -8461,17 +8631,11 @@ SCSI ID: {2}
 
 続行しますか?</value>
   </data>
-  <data name="MESSAGEBOX_SLAVES_EJECT" xml:space="preserve">
-    <value>プールを削除する前に、すべてのスレーブをプールからイジェクトする必要があります。</value>
-  </data>
   <data name="MESSAGEBOX_VIF_DELETE" xml:space="preserve">
     <value>選択したネットワーク インターフェイスが完全に削除されます。続行しますか?</value>
   </data>
   <data name="MESSAGEBOX_VIF_DELETE_TITLE" xml:space="preserve">
     <value>ネットワーク インターフェイスの削除</value>
-  </data>
-  <data name="MESSAGE_ALERT_TITLE" xml:space="preserve">
-    <value>{0}: {1}</value>
   </data>
   <data name="MIGRATE" xml:space="preserve">
     <value>移行</value>
@@ -8546,7 +8710,7 @@ SCSI ID: {2}
     <value>マルチパス対応</value>
   </data>
   <data name="MULTIPATH_FAILED" xml:space="preserve">
-    <value>ストレージのパスのいずれかが正しく動作していません。『[XenServer product] 管理者ガイド』を参照して、ストレージのマルチパス構成を確認してください。</value>
+    <value>ストレージのパスのいずれかが正しく動作していません。『{0} 管理者ガイド』を参照して、ストレージのマルチパス構成を確認してください。</value>
   </data>
   <data name="MULTIPATH_NOT_ACTIVE" xml:space="preserve">
     <value>非アクティブ</value>
@@ -8631,12 +8795,12 @@ SCSI ID: {2}
     <value>IP アドレスの構成 - {0}</value>
   </data>
   <data name="NETWORKING_PROPERTIES_WARNING_CHANGING_MANAGEMENT_HOST" xml:space="preserve">
-    <value>プライマリの管理インターフェイスを再構成します。新しい設定に問題があると、[XenCenter] とサーバーとの接続が完全に切断されます。
+    <value>プライマリの管理インターフェイスを再構成します。新しい設定に問題があると、{0} とサーバーとの接続が完全に切断されます。
 
 設定が正しいことを確認してから続行してください。</value>
   </data>
   <data name="NETWORKING_PROPERTIES_WARNING_CHANGING_MANAGEMENT_POOL" xml:space="preserve">
-    <value>プライマリの管理インターフェイスを再構成します。新しい設定に問題があると、[XenCenter] とサーバーとの接続が完全に切断されたり、プール メンバー間の通信が不能になったりします。
+    <value>プライマリの管理インターフェイスを再構成します。新しい設定に問題があると、{0} とサーバーとの接続が完全に切断されたり、プール メンバー間の通信が不能になったりします。
 
 設定が正しいことを確認してから続行してください。</value>
   </data>
@@ -8770,7 +8934,7 @@ SCSI ID: {2}
     <value>VM が新しいディスクにアクセスする前に、シャットダウンして再起動してください。</value>
   </data>
   <data name="NEWER_GUI_AVAILABLE" xml:space="preserve">
-    <value>[XenCenter] の最新バージョンがリリースされています。サポート担当者に連絡してください。</value>
+    <value>{0} の最新バージョンがリリースされています。サポート担当者に連絡してください。</value>
   </data>
   <data name="NEWNETWORKWIZARD_TITLE" xml:space="preserve">
     <value>新規ネットワーク - {0}</value>
@@ -8781,26 +8945,32 @@ SCSI ID: {2}
   <data name="NEWNETWORK_VNAME" xml:space="preserve">
     <value>新規プライベート ネットワーク</value>
   </data>
-  <data name="NEW_POOL_CLUSTERING_ENABLED" xml:space="preserve">
-    <value>このサーバーでクラスタリングが有効になっています。</value>
+  <data name="NEWPOOL_COORDINATOR_CONNECTING" xml:space="preserve">
+    <value>コーディネーターがまだ接続しています</value>
   </data>
-  <data name="NEWPOOL_DIFFERENT_HOMOGENEOUS_UPDATES_FROM_MASTER" xml:space="preserve">
-    <value>このサーバーにはマスターのものと異なるアップデートがあります</value>
+  <data name="NEWPOOL_COORDINATOR_DISCONNECTED" xml:space="preserve">
+    <value>コーディネーターが切断されています</value>
+  </data>
+  <data name="NEWPOOL_COORDINATOR_ROLE" xml:space="preserve">
+    <value>コーディネーターでの現在の役割には、コーディネーターのプールへのホストの追加が許可されていません</value>
+  </data>
+  <data name="NEWPOOL_DIFFERENT_HOMOGENEOUS_UPDATES_FROM_COORDINATOR" xml:space="preserve">
+    <value>このサーバーにはコーディネーターのものと異なるアップデートがあります</value>
   </data>
   <data name="NEWPOOL_DIFFERENT_HOMOGENEOUS_UPDATES_FROM_POOL" xml:space="preserve">
     <value>このサーバーには既にプールにあるサーバーとは異なるアップデートがあります</value>
   </data>
   <data name="NEWPOOL_DIFFERENT_NETWORK_BACKENDS" xml:space="preserve">
-    <value>このサーバーのネットワーク バックエンドはマスターのものと異なります</value>
+    <value>このサーバーのネットワーク バックエンドはコーディネーターのものと異なります</value>
   </data>
   <data name="NEWPOOL_DIFFERING_AD_CONFIG" xml:space="preserve">
-    <value>このサーバーの Active Directory 構成は、プール マスターのものと異なります</value>
+    <value>このサーバーの Active Directory 構成は、コーディネーターのものと異なります</value>
   </data>
   <data name="NEWPOOL_DIFF_HARDWARE" xml:space="preserve">
-    <value>このサーバーのハードウェアはマスターのものと互換性がありません</value>
+    <value>このサーバーのハードウェアはコーディネーターのものと互換性がありません</value>
   </data>
   <data name="NEWPOOL_DIFF_SERVER" xml:space="preserve">
-    <value>このサーバーのバージョンはマスターのものと異なります</value>
+    <value>このサーバーのバージョンはコーディネーターのものと異なります</value>
   </data>
   <data name="NEWPOOL_HAS_RUNNING_VMS" xml:space="preserve">
     <value>このサーバーには実行中の VM があります</value>
@@ -8815,25 +8985,16 @@ SCSI ID: {2}
     <value>このサーバーには、クラスタリングに使用されるネットワーク上で 1 つの IP アドレスのみが必要です。</value>
   </data>
   <data name="NEWPOOL_IS_A_POOL" xml:space="preserve">
-    <value>このサーバーは既存のプールのマスターとして動作しています</value>
+    <value>このサーバーは既存のプールのコーディネーターとして動作しています</value>
   </data>
-  <data name="NEWPOOL_LICENSED_HOST_UNLICENSED_MASTER" xml:space="preserve">
+  <data name="NEWPOOL_LICENSED_HOST_UNLICENSED_COORDINATOR" xml:space="preserve">
     <value>ライセンスが適用されていないプールにライセンス サーバーを追加することはできません</value>
   </data>
   <data name="NEWPOOL_LICENSEMISMATCH" xml:space="preserve">
-    <value>このサーバーのライセンスはプール マスターのものと異なります</value>
+    <value>このサーバーのライセンスはプール コーディネーターのものと異なります</value>
   </data>
   <data name="NEWPOOL_LINUXPACK" xml:space="preserve">
-    <value>このサーバーの Linux パックのインストール状態はマスターのものと異なります</value>
-  </data>
-  <data name="NEWPOOL_MASTER_CONNECTING" xml:space="preserve">
-    <value>マスターがまだ接続しています</value>
-  </data>
-  <data name="NEWPOOL_MASTER_DISCONNECTED" xml:space="preserve">
-    <value>マスターが切断されています</value>
-  </data>
-  <data name="NEWPOOL_MASTER_ROLE" xml:space="preserve">
-    <value>マスターに対する現在の役割には、このプールへのホストの追加が許可されていません。</value>
+    <value>このサーバーの Linux パックのインストール状態はコーディネーターのものと異なります</value>
   </data>
   <data name="NEWPOOL_MAX_NUMBER_HOST_REACHED" xml:space="preserve">
     <value>このプールのサーバー数は既にライセンスで許可される最大数に達しています</value>
@@ -8841,10 +9002,10 @@ SCSI ID: {2}
   <data name="NEWPOOL_POOLINGRESTRICTED" xml:space="preserve">
     <value>このサーバーのライセンスではプール機能を使用できません</value>
   </data>
-  <data name="NEWPOOL_SLAVE_ROLE" xml:space="preserve">
-    <value>スレーブに対する現在の役割には、プールへのスレーブの追加が許可されていません。</value>
+  <data name="NEWPOOL_SUPPORTER_ROLE" xml:space="preserve">
+    <value>このサーバーでの現在の役割には、プールへのサーバーの追加が許可されていません。</value>
   </data>
-  <data name="NEWPOOL_UNLICENSED_HOST_LICENSED_MASTER" xml:space="preserve">
+  <data name="NEWPOOL_UNLICENSED_HOST_LICENSED_COORDINATOR" xml:space="preserve">
     <value>ライセンスが適用されたプールにライセンスが適用されていないサーバーを追加することはできません</value>
   </data>
   <data name="NEWPOOL_WILL_EXCEED_POOL_MAX_SIZE" xml:space="preserve">
@@ -8861,7 +9022,7 @@ SCSI ID: {2}
 
 SMB ストレージ リポジトリは共有されているため、その中に仮想ディスクを格納することで、リソース プール内の任意のサーバーでの VM の起動が可能になり、ライブ マイグレーションによる移行機能も提供されます。
 
-SMB ストレージ リポジトリを構成する場合は、SMB サーバーのホスト名または IP アドレス、ユーザー名、パスワード、およびそのストレージ リポジトリを格納するディレクトリのパスを入力します。プール内のすべてのサーバーにそのパスがエクスポートされるように SMB サーバーを構成してください。</value>
+SMB ストレージ リポジトリを構成する場合は、SMB サーバーのホスト名または IP アドレス、ユーザー名、パスワード、およびそのストレージ リポジトリを格納するディレクトリのパスを入力します。SMB サーバーはバージョン 3 をサポートする必要があります。プール内のすべてのサーバーにそのパスがエクスポートされるように SMB サーバーを構成してください。</value>
   </data>
   <data name="NEWSR_CIFS_ISO_BLURB" xml:space="preserve">
     <value>仮想マシンのインストール ISO イメージ ライブラリが Windows (SMB/CIFS) 共有にあり、それをホストまたはプールに接続する場合は、このオプションを選択します。</value>
@@ -8915,7 +9076,7 @@ SMB ストレージ リポジトリを構成する場合は、SMB サーバー�
     <value>StorageLink テクノロジ</value>
   </data>
   <data name="NEWSR_EQUAL_LOGIC_BLURB" xml:space="preserve">
-    <value>Dell EqualLogic は、高性能かつスケーラブルなネットワーク接続ストレージで、ダウンタイムのない容量増設をサポートしています。Dell EqualLogic 共有ストレージを使用すると、ライブ マイグレーションや高可用性などの [XenServer] 機能をサポートできます。</value>
+    <value>Dell EqualLogic は、高性能かつスケーラブルなネットワーク接続ストレージで、ダウンタイムのない容量増設をサポートしています。Dell EqualLogic 共有ストレージを使用すると、ライブ マイグレーションや高可用性などの {0} 機能をサポートできます。</value>
   </data>
   <data name="NEWSR_EQUAL_LOGIC_DESCRIPTION" xml:space="preserve">
     <value>Dell EqualLogic SR [{0} ({1})]</value>
@@ -8963,7 +9124,7 @@ SMB ストレージ リポジトリを構成する場合は、SMB サーバー�
     <value>この LUN はサーバー {1} の SR {0} として既に使用されています。</value>
   </data>
   <data name="NEWSR_LVMOFCOE_BLURB" xml:space="preserve">
-    <value>[XenServer] ホストでは、サポートされるコンバージド ネットワーク アダプターを使用した、ソフトウェアベースのファイバ チャネル オーバー イーサネットがサポートされます。
+    <value>{0} ホストでは、サポートされるコンバージド ネットワーク アダプター (CNA) を使用した、ソフトウェアベースのファイバー チャネル オーバー イーサネット (FCoE) がサポートされます。
 
 LUN をホストに提供するための構成は、FCoE ファブリックの構成、CNA の PWWN への LUN の割り当てを含め、すべて手作業で行う必要があります。 
 
@@ -8976,9 +9137,9 @@ LUN をホストに提供するための構成は、FCoE ファブリックの�
     <value>ソフトウェア FCoE</value>
   </data>
   <data name="NEWSR_LVMOHBA_BLURB" xml:space="preserve">
-    <value>[XenServer] ホストでは、ホスト バス アダプター (HBA) を使ったファイバ チャネル (FC)、ファイバ チャネル オーバー イーサネット (FCoE)、および共有 SAS (Serial Attached SCSI) のストレージ エリア ネットワーク (SAN) がサポートされます。
+    <value>{0} ホストでは、ホスト バス アダプター (HBA) を使ったファイバー チャネル (FC)、ファイバー チャネル オーバー イーサネット (FCoE)、および共有 SAS (Serial Attached SCSI) のストレージ エリア ネットワーク (SAN) がサポートされます。
 
-LUN をホストに提供するための構成は、[XenServer] ホストのストレージ デバイス、ネットワーク デバイス、および HBA を含め、すべて手作業で行う必要があります。
+LUN をホストに提供するための構成は、{0} ホストのストレージ デバイス、ネットワーク デバイス、および HBA を含め、すべて手作業で行う必要があります。
 
 すべての構成が完了すると、LUN が割り当てられた SCSI デバイスが HBA を介してホストに提供されます。</value>
   </data>
@@ -9022,9 +9183,9 @@ LUN をホストに提供するための構成は、[XenServer] ホストのス�
     <value>iSCSI</value>
   </data>
   <data name="NEWSR_MULTI_POOL_WARNING" xml:space="preserve">
-    <value>警告: この SR が [XenCenter] に接続していないほかのサーバーで使用されていないことを確認してください。データが失われる場合があります。
+    <value>警告: この SR が {0} に接続していないほかのサーバーで使用されていないことを確認してください。データが失われる場合があります。
 
-SR: {0}
+SR: {1}
 
 SR を再接続しますか?</value>
   </data>
@@ -9298,12 +9459,6 @@ NFS ストレージ リポジトリを構成する場合は、NFS サーバー�
   <data name="NEWVMWIZARD_NETWORKMEDIAPAGE_TITLE" xml:space="preserve">
     <value>オペレーティング システムのインストール メディアの指定</value>
   </data>
-  <data name="NEWVMWIZARD_STORAGEPAGE_DISK" xml:space="preserve">
-    <value>ディスク '{0}'</value>
-  </data>
-  <data name="NEWVMWIZARD_STORAGEPAGE_DISK_DESCRIPTION" xml:space="preserve">
-    <value>テンプレートによるプロビジョニング</value>
-  </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_DEFAULT_LOCAL" xml:space="preserve">
     <value>デフォルトの SR '{0}' は、VM のホーム サーバーからアクセスできません。</value>
   </data>
@@ -9313,8 +9468,20 @@ NFS ストレージ リポジトリを構成する場合は、NFS サーバー�
   <data name="NEWVMWIZARD_STORAGEPAGE_DEFAULT_NOSPACE" xml:space="preserve">
     <value>デフォルトの SR '{0}' には、新しい VM のディスクに必要な空き領域がありません。</value>
   </data>
+  <data name="NEWVMWIZARD_STORAGEPAGE_DISK" xml:space="preserve">
+    <value>ディスク '{0}'</value>
+  </data>
+  <data name="NEWVMWIZARD_STORAGEPAGE_DISK_DESCRIPTION" xml:space="preserve">
+    <value>テンプレートによるプロビジョニング</value>
+  </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_NAME" xml:space="preserve">
     <value>ストレージ</value>
+  </data>
+  <data name="NEWVMWIZARD_STORAGEPAGE_NOSTORAGE" xml:space="preserve">
+    <value>&lt;適切なストレージがありません&gt;</value>
+  </data>
+  <data name="NEWVMWIZARD_STORAGEPAGE_SROVERCOMMIT" xml:space="preserve">
+    <value>SR '{0}' がオーバーコミットされました。空き容量が {1} しかありません。新規 VM では {2} 必要です。</value>
   </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_SUGGESTED_LOCAL" xml:space="preserve">
     <value>テンプレートが示す SR ('{0}') は、VM のホーム サーバーからアクセスできません。</value>
@@ -9325,23 +9492,14 @@ NFS ストレージ リポジトリを構成する場合は、NFS サーバー�
   <data name="NEWVMWIZARD_STORAGEPAGE_SUGGESTED_NOSPACE" xml:space="preserve">
     <value>テンプレート ('{0}') が示す SR には、新しい VM のディスクに必要な空き領域がありません。</value>
   </data>
-  <data name="NEWVMWIZARD_STORAGEPAGE_NOSTORAGE" xml:space="preserve">
-    <value>&lt;適切なストレージがありません&gt;</value>
-  </data>
-  <data name="NEWVMWIZARD_STORAGEPAGE_SROVERCOMMIT" xml:space="preserve">
-    <value>SR '{0}' がオーバーコミットされました。空き容量が {1} しかありません。新規 VM では {2} 必要です。</value>
-  </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_TITLE" xml:space="preserve">
     <value>新規 VM のストレージを構成してください</value>
   </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_XC_SELECTION" xml:space="preserve">
-    <value>[XenCenter] は別の SR を選択しました。</value>
+    <value>{0} は別の SR を選択しました。</value>
   </data>
   <data name="NEWVMWIZARD_TEMPLATEPAGE_CENTOS" xml:space="preserve">
     <value>CentOS</value>
-  </data>
-  <data name="NEWVMWIZARD_TEMPLATEPAGE_CITRIX" xml:space="preserve">
-    <value>[Citrix]</value>
   </data>
   <data name="NEWVMWIZARD_TEMPLATEPAGE_COREOS" xml:space="preserve">
     <value>CoreOS</value>
@@ -9354,9 +9512,6 @@ NFS ストレージ リポジトリを構成する場合は、NFS サーバー�
   </data>
   <data name="NEWVMWIZARD_TEMPLATEPAGE_GOOROOM" xml:space="preserve">
     <value>Gooroom</value>
-  </data>
-  <data name="NEWVMWIZARD_TEMPLATEPAGE_ROCKY" xml:space="preserve">
-    <value>Rocky</value>
   </data>
   <data name="NEWVMWIZARD_TEMPLATEPAGE_LINX" xml:space="preserve">
     <value>Linx</value>
@@ -9375,6 +9530,9 @@ NFS ストレージ リポジトリを構成する場合は、NFS サーバー�
   </data>
   <data name="NEWVMWIZARD_TEMPLATEPAGE_REDHAT" xml:space="preserve">
     <value>Red Hat</value>
+  </data>
+  <data name="NEWVMWIZARD_TEMPLATEPAGE_ROCKY" xml:space="preserve">
+    <value>Rocky</value>
   </data>
   <data name="NEWVMWIZARD_TEMPLATEPAGE_SCILINUX" xml:space="preserve">
     <value>Scientific Linux</value>
@@ -9407,10 +9565,10 @@ NFS ストレージ リポジトリを構成する場合は、NFS サーバー�
     <value>仮想 GPU の割り当て</value>
   </data>
   <data name="NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_POOL" xml:space="preserve">
-    <value>このプールでは [Citrix] Virtual Apps and Desktops ワークロードに対してのみライセンスが有効です</value>
+    <value>このプールでは {0} Virtual Apps and Desktops ワークロードに対してのみライセンスが有効です</value>
   </data>
   <data name="NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_SERVER" xml:space="preserve">
-    <value>このサーバーでは [Citrix] Virtual Apps and Desktops ワークロードに対してのみライセンスが有効です</value>
+    <value>このサーバーでは {0} Virtual Apps and Desktops ワークロードに対してのみライセンスが有効です</value>
   </data>
   <data name="NEWVM_DEFAULTNAME" xml:space="preserve">
     <value>{0} ({1})</value>
@@ -9431,7 +9589,7 @@ NFS ストレージ リポジトリを構成する場合は、NFS サーバー�
     <value>新規仮想ネットワーク インターフェイス - {0}</value>
   </data>
   <data name="NEW_DVD_DRIVES_REQUIRED" xml:space="preserve">
-    <value>[Citrix VM Tools] のインストール先の仮想マシンに DVD ドライブがないものがあります。必要に応じて新しい DVD ドライブを作成してもよろしいですか?</value>
+    <value>{0} のインストール先の仮想マシンに DVD ドライブがないものがあります。必要に応じて新しい DVD ドライブを作成してもよろしいですか?</value>
   </data>
   <data name="NEW_DVD_DRIVE_CREATE_TITLE" xml:space="preserve">
     <value>VM {0} の新規 DVD ドライブの作成</value>
@@ -9447,10 +9605,10 @@ NFS ストレージ リポジトリを構成する場合は、NFS サーバー�
   </data>
   <data name="NEW_DVD_DRIVE_REBOOT_TOOLS" xml:space="preserve">
     <value>新規 DVD ドライブのインストールを完了するには、VM をシャットダウンして再起動する必要があります。
-VM が再起動したら、[[Citrix VM Tools] をインストール] を再度クリックしてください。</value>
+VM が再起動したら、[{0} をインストール] を再度クリックしてください。</value>
   </data>
   <data name="NEW_DVD_DRIVE_REQUIRED" xml:space="preserve">
-    <value>[Citrix VM Tools] のインストール先仮想マシンには、DVD ドライブがありません。DVD ドライブを作成しますか?</value>
+    <value>{0} のインストール先仮想マシンには、DVD ドライブがありません。DVD ドライブを作成しますか?</value>
   </data>
   <data name="NEW_FOLDER" xml:space="preserve">
     <value>新規フォルダ(&amp;N)...</value>
@@ -9468,44 +9626,47 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
     <value>新規ポリシー(&amp;N)...</value>
   </data>
   <data name="NEW_POOL_AD_MESSAGE" xml:space="preserve">
-    <value>Active Directory 認証が使用されるマスターのプールにサーバー '{0}' を追加します。プール内のすべてのメンバーで同じ認証方法を使用する必要があります。
+    <value>Active Directory 認証が使用されるコーディネーターのプールにサーバー '{0}' を追加します。プール内のすべてのメンバーで同じ認証方法を使用する必要があります。
 
 このサーバーの Active Directory 認証を有効にしてプールと同じドメインに追加してもよろしいですか?</value>
   </data>
   <data name="NEW_POOL_AD_MESSAGE_MULTIPLE" xml:space="preserve">
-    <value>Active Directory 認証が使用されるマスターのプールに以下のサーバーを追加します。
+    <value>Active Directory 認証が使用されるコーディネーターのプールに以下のサーバーを追加します。
 
 {0}
 
 プール内のすべてのメンバーで同じ認証方法を使用する必要があります。これらのサーバーの Active Directory 認証を有効にしてプールと同じドメインに追加してもよろしいですか?</value>
   </data>
+  <data name="NEW_POOL_CLUSTERING_ENABLED" xml:space="preserve">
+    <value>このサーバーでクラスタリングが有効になっています。</value>
+  </data>
   <data name="NEW_POOL_CPU_MASKING_MESSAGE" xml:space="preserve">
-    <value>旧型の CPU を使用しているマスターが動作するプールにサーバー '{0}' を追加します。
+    <value>旧型の CPU を使用しているコーディネーターが動作するプールにサーバー '{0}' を追加します。
 
-[XenServer] では、CPU の一部の機能をマスターに合わせて無効にすることができます。これにより、追加するサーバーが再起動されるため、実行中のすべての VM がシャットダウンされます。この機能は、[XenServer] のハードウェア互換性一覧に含まれている CPU でサポートされます。
+{1} では、CPU の一部の機能をコーディネーターに合わせて無効にすることができます。これにより、追加するサーバーが再起動されるため、実行中のすべての VM がシャットダウンされます。この機能は、{1} のハードウェア互換性一覧に含まれている CPU でサポートされます。
 
 この機能を使用して続行しますか?</value>
   </data>
   <data name="NEW_POOL_CPU_MASKING_MESSAGE_MULTIPLE" xml:space="preserve">
-    <value>旧型の CPU を使用しているマスターが動作するプールに以下のサーバーを追加します。
+    <value>旧型の CPU を使用しているコーディネーターが動作するプールに以下のサーバーを追加します。
 
 {0}
 
-[XenServer] では、CPU の一部の機能をマスターに合わせて無効にすることができます。これにより、追加するサーバーが再起動されるため、実行中のすべての VM がシャットダウンされます。この機能は、[XenServer] のハードウェア互換性一覧に含まれている CPU でサポートされます。
+{1} では、CPU の一部の機能をコーディネーターに合わせて無効にすることができます。これにより、追加するサーバーが再起動されるため、実行中のすべての VM がシャットダウンされます。この機能は、{1} のハードウェア互換性一覧に含まれている CPU でサポートされます。
 
 この機能を使用して続行しますか?</value>
   </data>
   <data name="NEW_POOL_LICENSE_MESSAGE" xml:space="preserve">
     <value>ライセンス プールにサーバー '{0}' を追加しています。
 
-マスターのライセンスをこのサーバーに適用しますか?</value>
+コーディネーターのライセンスをこのサーバーに適用しますか?</value>
   </data>
   <data name="NEW_POOL_LICENSE_MESSAGE_MULTIPLE" xml:space="preserve">
-    <value>ライセンス プールに次のサーバー を追加しています。
+    <value>ライセンス プールに次のサーバーを追加しています。
 
 {0}
 
-マスターのライセンスをこれらのサーバーに適用しますか?</value>
+コーディネーターのライセンスをこれらのサーバーに適用しますか?</value>
   </data>
   <data name="NEW_POOL_SUPP_PACK" xml:space="preserve">
     <value>プール内のすべてのサーバーに以下のサプリメンタル パックがインストールされている必要があります。
@@ -9594,9 +9755,6 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="NEW_VM_WIZARD_TEMPLATEPAGE_YINHEKYLIN" xml:space="preserve">
     <value>YinheKylin</value>
   </data>
-  <data name="NEW_XENCENTER_REQUIRED_INFO" xml:space="preserve">
-    <value>新しい [XenCenter] バージョンが必要です</value>
-  </data>
   <data name="NFS_ISO_ALREADY_ATTACHED" xml:space="preserve">
     <value>この NFS ISO ストレージは既に '{0}' に接続されています</value>
   </data>
@@ -9618,11 +9776,11 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="NICS_ARE_SRIOV_ENABLED" xml:space="preserve">
     <value>すべての SR-IOV 対応 NIC で SR-IOV が有効になっています。</value>
   </data>
+  <data name="NIC_BONDED_MEMBER" xml:space="preserve">
+    <value>{0} (ボンディングされたメンバー)</value>
+  </data>
   <data name="NIC_HIDDEN" xml:space="preserve">
     <value>{0} (非表示)</value>
-  </data>
-  <data name="NIC_SLAVE" xml:space="preserve">
-    <value>{0} (スレーブ)</value>
   </data>
   <data name="NIC_TAB_TITLE" xml:space="preserve">
     <value>ネットワーク インターフェイス カード</value>
@@ -9663,14 +9821,14 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS" xml:space="preserve">
     <value>イベント: {0}</value>
   </data>
-  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_IN_PROGRESS" xml:space="preserve">
-    <value>{0} 進行中</value>
+  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ERROR" xml:space="preserve">
+    <value>1 個のエラー</value>
   </data>
   <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ERRORS" xml:space="preserve">
     <value>{0} エラー</value>
   </data>
-  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ERROR" xml:space="preserve">
-    <value>1 個のエラー</value>
+  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_IN_PROGRESS" xml:space="preserve">
+    <value>{0} 進行中</value>
   </data>
   <data name="NOTIFICATIONS_SUBMODE_EVENTS_UNREAD_MANY" xml:space="preserve">
     <value>イベント ({0} 個のエラー)</value>
@@ -9742,7 +9900,7 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
     <value>使用可能な領域: {0}</value>
   </data>
   <data name="NOT_ENOUGH_SPACE_MESSAGE_CLEANUP" xml:space="preserve">
-    <value>残りのアップデート ファイルを削除して、[XenCenter] は {0} を解放できます。クリーンアップを行いますか?</value>
+    <value>残りのアップデート ファイルを削除して、{0} で {1} を解放できます。クリーンアップを行いますか?</value>
   </data>
   <data name="NOT_ENOUGH_SPACE_MESSAGE_INSTALL" xml:space="preserve">
     <value>アップデート '{1}' をインストールするために十分な領域が '{0}' にありません。</value>
@@ -9759,25 +9917,53 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="NOT_IN_A_FOLDER" xml:space="preserve">
     <value>フォルダに属していない</value>
   </data>
-  <data name="NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING_LONG" xml:space="preserve">
-    <value>ローカル ディスク上の VM によって、ディスクの再パーティションが阻止されます。
-
- [XenServer] {0} およびそれ以降では、新しいディスク パーティション スキーマを使用できます。これにより、より多くのメモリが割り当てられた dom0 およびバックアップ パーティション、ログ専用のパーティション、スワッピング、および UEFI を使用できます。
-
-ただし、ローカル ストレージに VM が存在するため、現在のパーティション スキーマが保持されます。 [XenServer] {0} およびそれ以降にアップグレードして再パーティションを行うには、まず VM をローカル ストレージから移動する必要があります。</value>
+  <data name="NOT_SAFE_TO_UPGRADE_DEFAULT" xml:space="preserve">
+    <value>ディスクの再パーティションはできません。</value>
   </data>
-  <data name="NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING_SHORT" xml:space="preserve">
-    <value>{0}: ローカル ディスク上の VM によってディスクの再パーティションが阻止されます。</value>
+  <data name="NOT_SAFE_TO_UPGRADE_DEFAULT_PROBLEM" xml:space="preserve">
+    <value>ただし、新しいパーティション スキーマをサーバーに適用することはできません。これは、ローカル ストレージに VM があるか、パーティション テーブルの種類が DOS であるか、ユーティリティ パーティションが存在しているためです。 {0} にアップグレードするには、まず問題を特定して解決する必要があります。</value>
   </data>
-  <data name="NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_LONG" xml:space="preserve">
-    <value>ローカル ストレージのディスク サイズによって、ディスクの再パーティションが阻止されます。
-
-[XenServer] {0} およびそれ以降では、新しいディスク パーティション スキーマを使用できます。これにより、より多くのメモリが割り当てられた dom0 およびバックアップ パーティション、ログ専用のパーティション、スワッピング、および UEFI を使用できます。
-
-ただし、ディスクの容量が不足しているため、再パーティションは行われず、現在のパーティション スキーマが保持されます。</value>
+  <data name="NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING" xml:space="preserve">
+    <value>ただし、新しいパーティション スキーマをサーバーに適用することはできません。これは、ローカル ストレージに VM があるか、パーティション テーブルの種類が DOS であるか、ユーティリティ パーティションが存在しているためです。{0} 以降にアップグレードしたり、 {0} より古いバージョンへのアップグレード時に再パーティションを行ったりするには、まず問題を特定して解決する必要があります。</value>
   </data>
-  <data name="NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_SHORT" xml:space="preserve">
-    <value>{0}: ローカル ストレージのディスク サイズによってディスクの再パーティションが阻止されます。</value>
+  <data name="NOT_SAFE_TO_UPGRADE_LEGACY_PARTITION_TABLE" xml:space="preserve">
+    <value>このパーティション テーブルの種類によって再パーティションが阻止されます。</value>
+  </data>
+  <data name="NOT_SAFE_TO_UPGRADE_LEGACY_PARTITION_TABLE_PROBLEM" xml:space="preserve">
+    <value>ただし、サーバーのパーティション テーブルの種類は DOS であるため、再パーティションが阻止されます。現在のパーティション スキーマは保持されません。したがって、サーバーを {0} にアップグレードできません。</value>
+  </data>
+  <data name="NOT_SAFE_TO_UPGRADE_LEGACY_PARTITION_TABLE_WARNING" xml:space="preserve">
+    <value>ただし、サーバーのパーティション テーブルの種類は DOS であるため、再パーティションが阻止されます。{0} 以降にアップグレードすると現在のパーティション スキーマは保持されないため、{0} 以降にアップグレードすることはできません。 </value>
+  </data>
+  <data name="NOT_SAFE_TO_UPGRADE_NEW_PARTITION_INFO" xml:space="preserve">
+    <value>{0} 以降、現在のパーティション スキーマはサポートされません。新しいディスクのパーティション スキーマを使用できます。これにより、より多くのメモリが割り当てられた dom0 およびバックアップ パーティション、ログ専用のパーティション、スワッピング、および UEFI を使用できます。</value>
+  </data>
+  <data name="NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE" xml:space="preserve">
+    <value>ローカル ストレージのディスク サイズによって再パーティションが阻止されます。</value>
+  </data>
+  <data name="NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_PROBLEM" xml:space="preserve">
+    <value>ただし、ディスクの容量が不足しているため、再パーティションは行われません。{0} にアップグレードするには、まずローカル ストレージのサイズを増やす必要があります。</value>
+  </data>
+  <data name="NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_WARNING" xml:space="preserve">
+    <value>ただし、ディスクの容量が不足しているため、再パーティションは行われません。{0} 以降にアップグレードすると現在のパーティション スキーマは保持されないため、まずローカル ストレージのサイズを増やす必要があります。</value>
+  </data>
+  <data name="NOT_SAFE_TO_UPGRADE_UTILITY_PARTITION" xml:space="preserve">
+    <value>ユーティリティ パーティションによって再パーティションが阻止されます。</value>
+  </data>
+  <data name="NOT_SAFE_TO_UPGRADE_UTILITY_PARTITION_PROBLEM" xml:space="preserve">
+    <value>ただし、再パーティションを阻止するユーティリティ パーティションが存在しています。{0} にアップグレードするには、ユーティリティ パーティションを削除する必要があります。</value>
+  </data>
+  <data name="NOT_SAFE_TO_UPGRADE_UTILITY_PARTITION_WARNING" xml:space="preserve">
+    <value>ただし、再パーティションを阻止するユーティリティ パーティションが存在しています。{0} 以降にアップグレードすると現在のパーティション スキーマは保持されないため、まず既存のユーティリティ パーティションを削除する必要があります。</value>
+  </data>
+  <data name="NOT_SAFE_TO_UPGRADE_VDI_PRESENT" xml:space="preserve">
+    <value>ローカル ディスク上の VM によってディスクの再パーティションが阻止されます。</value>
+  </data>
+  <data name="NOT_SAFE_TO_UPGRADE_VDI_PRESENT_PROBLEM" xml:space="preserve">
+    <value>ただし、ローカル ストレージに VM があるため、新しいディスク パーティションを適用することはできません。 {0} 以降にアップグレードするには、まず VM をローカル ストレージから移動する必要があります。</value>
+  </data>
+  <data name="NOT_SAFE_TO_UPGRADE_VDI_PRESENT_WARNING" xml:space="preserve">
+    <value>ただし、ローカル ストレージに VM があるため、新しいパーティション スキーマを適用することはできません。{0} 以降にアップグレードしたり、 {0} より古いバージョンへのアップグレード時に再パーティションを行ったりするには、まず VM をローカル ストレージから移動する必要があります。</value>
   </data>
   <data name="NOT_TRUSTED" xml:space="preserve">
     <value>信頼されていない</value>
@@ -9803,8 +9989,8 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="NO_DISKS" xml:space="preserve">
     <value>この VM にはディスクがありません。</value>
   </data>
-  <data name="NO_ELIGIBLE_MASTER" xml:space="preserve">
-    <value>新規プールのマスターとして動作すべきサーバーがありません</value>
+  <data name="NO_ELIGIBLE_COORDINATOR" xml:space="preserve">
+    <value>新しいプールのコーディネーターとして動作すべきサーバーがありません</value>
   </data>
   <data name="NO_GPU_IN_POOL" xml:space="preserve">
     <value>このプールで使用できる GPU がないため、GPU の構成および監視は無効になっています。</value>
@@ -10016,13 +10202,13 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
     <value>必要な操作はありません</value>
   </data>
   <data name="PATCHINGWIZARD_MODEPAGE_RESTARTSERVERS" xml:space="preserve">
-    <value>サーバーの再起動順序 (マスターは常に最初):</value>
+    <value>サーバーの再起動順序 (コーディネーターは常に最初):</value>
   </data>
   <data name="PATCHINGWIZARD_MODEPAGE_RESTARTVMS" xml:space="preserve">
     <value>再起動する VM:</value>
   </data>
   <data name="PATCHINGWIZARD_MODEPAGE_RESTARTXAPI" xml:space="preserve">
-    <value>サーバーでツールスタックを再起動する順序 (マスターは常に最初):</value>
+    <value>サーバーでツールスタックを再起動する順序 (コーディネーターは常に最初):</value>
   </data>
   <data name="PATCHINGWIZARD_MODEPAGE_TEXT" xml:space="preserve">
     <value>アップデート モード</value>
@@ -10124,10 +10310,10 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
     <value>アップデートの選択</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_TITLE" xml:space="preserve">
-    <value>既存のアップデートを選択するか、新たにアップロードします</value>
+    <value>アップロードしてインストールするアップデートを選択します</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_UPDATESEXT" xml:space="preserve">
-    <value>[XenServer] アップデートおよびサプリメンタル パック (*.{0}, *.iso,*.zip)|*.{0};*.iso;*.zip</value>
+    <value>{0} アップデートおよびサプリメンタル パック (*.iso,*.zip)|*.iso;*.zip</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_APPLY_UPDATES" xml:space="preserve">
     <value>新しいバージョンですべてのリリース済みアップデートも適用(&amp;U)</value>
@@ -10136,16 +10322,13 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
     <value>新しいバージョンですべてのリリース済みアップデートも適用 (自動アップデートが使用できるプールでのみ)(&amp;U)</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_HOST_VERSION" xml:space="preserve">
-    <value>この [XenServer] バージョンで自動アップデートはサポートされていません</value>
+    <value>この {0} バージョンで自動アップデートはサポートされていません</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_PARTIALLY_UPGRADED" xml:space="preserve">
-    <value>一部アップグレードされた [XenServer] プールで自動アップデートはサポートされていません</value>
+    <value>一部アップグレードされた {0} プールで自動アップデートはサポートされていません</value>
   </data>
-  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_SUPP_PACKS" xml:space="preserve">
-    <value>この [XenServer] のバージョンにはサプリメンタル パックをインストールできません</value>
-  </data>
-  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_UPDATE_MASTER_POST_7_0" xml:space="preserve">
-    <value>マスターが {0} より新しいバージョンを実行しているため、このホストにアップデートをインストールできません。</value>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_UPDATE_COORDINATOR_POST_7_0" xml:space="preserve">
+    <value>コーディネーターが {0} より新しいバージョンを実行しているため、このホストにアップデートをインストールできません。</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED" xml:space="preserve">
     <value>Subscription Advantage が必要です</value>
@@ -10153,8 +10336,8 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_AUTOMATED_UPDATES" xml:space="preserve">
     <value>プールの 1 つまたは複数のサーバーが自動アップデートのライセンス対象ではありません</value>
   </data>
-  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_NEW_VERSION_UPGRADE_SLAVES_FIRST" xml:space="preserve">
-    <value>[XenCenter] が選択した新しいバージョンを適用する前に、プールの 1 つまたは複数のサーバーをアップグレードする必要があります。</value>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_NEW_VERSION_UPGRADE_SUPPORTERS_FIRST" xml:space="preserve">
+    <value>{0} が選択した新しいバージョンを適用する前に、プールの 1 つまたは複数のサーバーをアップグレードする必要があります。</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_ALREADY_APPLIED" xml:space="preserve">
     <value>アップデート適用済み</value>
@@ -10193,6 +10376,9 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_TITLE" xml:space="preserve">
     <value>アップデートするサーバーを選択します</value>
   </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_VERSION_UNSUPPORTED" xml:space="preserve">
+    <value>{0} はこのサーバーにアップデートまたはサプリメンタル パックをインストールできません。</value>
+  </data>
   <data name="PATCHINGWIZARD_SINGLEUPDATE_FAILURE_MANY" xml:space="preserve">
     <value>選択したすべてのサーバーでアップデート {0} のインストールが正常に完了しませんでした。アップデート プロセスは一時停止しました。[再試行] を選択して再開してください。</value>
   </data>
@@ -10215,7 +10401,7 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
     <value>アップデート {0} のインストールが正常に完了しました。</value>
   </data>
   <data name="PATCHINGWIZARD_SINGLEUPDATE_TITLE" xml:space="preserve">
-    <value>[XenCenter] はシステムにアップデート {0} をインストール中です。</value>
+    <value>{0} はシステムにアップデート {1} をインストール中です。</value>
   </data>
   <data name="PATCHINGWIZARD_SINGLEUPDATE_WARNING_MANY" xml:space="preserve">
     <value>アップデート {0} のインストールは完了しましたが、選択したサーバーの一部に関する警告があります。</value>
@@ -10250,7 +10436,7 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
     <value>アップデート {0} のアップロードが正常に完了しました。</value>
   </data>
   <data name="PATCHINGWIZARD_SINGLEUPLOAD_TITLE" xml:space="preserve">
-    <value>[XenCenter] は、前の手順で指定したサーバーにアップデートをアップロードするために必要な操作を実行しています。操作が完了するまで待ってから [次へ] をクリックしインストールを続行してください。</value>
+    <value>{0} は、前の手順で指定したサーバーにアップデートをアップロードするために必要な操作を実行しています。操作が完了するまで待ってから [次へ] をクリックしインストールを続行してください。</value>
   </data>
   <data name="PATCHINGWIZARD_SINGLEUPLOAD_WARNING_MANY" xml:space="preserve">
     <value>アップデート {0} のアップロードは完了しましたが、選択したサーバーの一部に関する警告があります。</value>
@@ -10265,10 +10451,10 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
     <value>サーバーへの選択したファイルのアップロード</value>
   </data>
   <data name="PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_AUTOMATED_MODE" xml:space="preserve">
-    <value>[XenCenter] はシステムにアップデートをインストール中です。</value>
+    <value>{0} はシステムにアップデートをインストール中です。</value>
   </data>
   <data name="PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_NEW_VERSION_AUTOMATED_MODE" xml:space="preserve">
-    <value>[XenCenter] はシステムに新しいバージョンをインストール中です。</value>
+    <value>{0} はシステムに新しいバージョンをインストール中です。</value>
   </data>
   <data name="PATCHING_EJECT_CDS" xml:space="preserve">
     <value>VM から仮想 CD をイジェクトしてください</value>
@@ -10327,7 +10513,7 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
     <value>インストール サイズ: {0}</value>
   </data>
   <data name="PATCH_NEEDS_NEW_XENCENTER" xml:space="preserve">
-    <value>このバージョンには [XenCenter] {0} 以降が必要です</value>
+    <value>このバージョンには {0} {1} 以降が必要です</value>
   </data>
   <data name="PATCH_NOT_FOUND" xml:space="preserve">
     <value>見つかりません</value>
@@ -10338,6 +10524,9 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   </data>
   <data name="PATCH_UPLOADED" xml:space="preserve">
     <value>アップデートがサーバー '{0}' にアップロードされました </value>
+  </data>
+  <data name="PATH_CAN_NOT_BE_NULL_ERROR_MESSAGE" xml:space="preserve">
+    <value>パスを null または空にすることはできません。</value>
   </data>
   <data name="PATH_DOES_NOT_EXIST" xml:space="preserve">
     <value>パスが存在しません。</value>
@@ -10429,17 +10618,17 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="PLAN_ACTION_ERROR" xml:space="preserve">
     <value> エラー。</value>
   </data>
-  <data name="PLAN_ACTION_FAILURE_NO_HOSTS_AVAILABLE" xml:space="preserve">
-    <value>サーバー '{0}' は、このサーバーから移行されるすべての VM を格納できるサーバーがなかったため、退避できませんでした。アップデート インストール後に再起動を保留している他のサーバーを再起動してから、[再試行] をクリックしてプロセスを再開してください。</value>
-  </data>
   <data name="PLAN_ACTION_FAILURE_NOT_ENOUGH_MEMORY" xml:space="preserve">
     <value>このサーバーからすべての VM を移行するのに十分な空きメモリが他のサーバーになかったため、サーバー '{0}' を退避できませんでした。一部の VM を一時停止またはシャット ダウンしてから、[再試行] を押してプロセスを再開してください。</value>
   </data>
+  <data name="PLAN_ACTION_FAILURE_NO_HOSTS_AVAILABLE" xml:space="preserve">
+    <value>サーバー '{0}' は、このサーバーから移行されるすべての VM を格納できるサーバーがなかったため、退避できませんでした。アップデート インストール後に再起動を保留している他のサーバーを再起動してから、[再試行] をクリックしてプロセスを再開してください。</value>
+  </data>
   <data name="PLAN_ACTION_STATUS_INSTALLING_XENSERVER" xml:space="preserve">
-    <value>'{0}' に [XenServer] をインストールしています...</value>
+    <value>'{1}' に {0} をインストールしています...</value>
   </data>
   <data name="PLAN_ACTION_STATUS_INSTALLING_XENSERVER_VERSION" xml:space="preserve">
-    <value>'{1}' に [XenServer] {0} をインストールしています...</value>
+    <value>'{2}' に {0} {1} をインストールしています...</value>
   </data>
   <data name="PLAN_ACTION_STATUS_RECONNECTING_STORAGE" xml:space="preserve">
     <value>ストレージを再接続しています...</value>
@@ -10454,9 +10643,6 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   </data>
   <data name="PLUGINS" xml:space="preserve">
     <value>プラグイン</value>
-  </data>
-  <data name="PLUGINS_DESC" xml:space="preserve">
-    <value>[XenCenter] のプラグイン設定を変更します</value>
   </data>
   <data name="PLUGINS_MENU_ITEMS_ONLY_ONE_CHILD_ALLOWED" xml:space="preserve">
     <value>メニューの子項目に追加できるのは単一コマンド XML ノードのみです</value>
@@ -10551,6 +10737,12 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="POOL_COLON" xml:space="preserve">
     <value>プール:</value>
   </data>
+  <data name="POOL_COORDINATOR" xml:space="preserve">
+    <value>プール コーディネーター</value>
+  </data>
+  <data name="POOL_COORDINATOR_GONE" xml:space="preserve">
+    <value>{0} のキャッシュにプール コーディネーターが見つかりません。</value>
+  </data>
   <data name="POOL_DELETE_HA_ENABLED" xml:space="preserve">
     <value>プール '{0}' は HA を有効にしています。プールをスタンドアロン サーバーにする前に、HA を無効にする必要があります。</value>
   </data>
@@ -10576,7 +10768,7 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
     <value>プールの全般プロパティ</value>
   </data>
   <data name="POOL_GONE" xml:space="preserve">
-    <value>[XenCenter] のキャッシュにプールが見つかりません。</value>
+    <value>{0} のキャッシュにプールが見つかりません。</value>
   </data>
   <data name="POOL_HAS_MIXED_LICENSES" xml:space="preserve">
     <value>このプールには、異なる種類のライセンスが適用されたホストがあります。</value>
@@ -10589,6 +10781,18 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   </data>
   <data name="POOL_IS_PARTIALLY_LICENSED" xml:space="preserve">
     <value>このプールは一部のみライセンスが適用されています</value>
+  </data>
+  <data name="POOL_JOIN_CERTIFICATE_CHECKING_ONLY_ON_COORDINATOR" xml:space="preserve">
+    <value>証明書の検証はコーディネーターで有効になっていますが、このサーバーでは有効ではありません。プールを作成するには、まずサーバーで証明書の検証を有効にします。</value>
+  </data>
+  <data name="POOL_JOIN_CERTIFICATE_CHECKING_ONLY_ON_COORDINATOR_JOINER" xml:space="preserve">
+    <value>証明書の検証はこのサーバーで有効になっていますが、コーディネーターでは有効ではありません。プールを作成するには、まずコーディネーターで証明書の検証を有効にします。</value>
+  </data>
+  <data name="POOL_JOIN_CERTIFICATE_CHECKING_ONLY_ON_POOL" xml:space="preserve">
+    <value>証明書の検証はプールで有効になっていますが、サーバーでは有効ではありません。サーバーをプールに追加するには、まずサーバーで証明書の検証を有効にします。</value>
+  </data>
+  <data name="POOL_JOIN_CERTIFICATE_CHECKING_ONLY_ON_POOL_JOINER" xml:space="preserve">
+    <value>証明書の検証はこのサーバーで有効になっていますが、プールでは有効ではありません。サーバーをプールに追加するには、まずプールで証明書の検証を有効にします。</value>
   </data>
   <data name="POOL_JOIN_FORBIDDEN_BY_HA" xml:space="preserve">
     <value>プールの高可用性が有効になっています</value>
@@ -10605,12 +10809,6 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="POOL_LICENSE" xml:space="preserve">
     <value>プール ライセンス</value>
   </data>
-  <data name="POOL_MASTER" xml:space="preserve">
-    <value>プール マスター</value>
-  </data>
-  <data name="POOL_MASTER_GONE" xml:space="preserve">
-    <value>[XenCenter] のキャッシュにプール マスターが見つかりません。</value>
-  </data>
   <data name="POOL_NAME_EMPTY" xml:space="preserve">
     <value>プール名を入力してください</value>
   </data>
@@ -10621,13 +10819,15 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
     <value>プールまたはホストが接続されていません</value>
   </data>
   <data name="POOL_PICKER_BLURB_NO_AFFINITY" xml:space="preserve">
-    <value>この VM のインポート先プールまたはサーバーを選択します。ホーム サーバーは、テンプレートで指定されているものが使用されます\n\n選択したリソース プールに該当するサーバーがない場合は無視されます。</value>
+    <value>この VM のインポート先プールまたはサーバーを選択します。ホーム サーバーは、テンプレートで指定されているものが使用されます
+
+選択したリソース プールに該当するサーバーがない場合は無視されます。</value>
   </data>
   <data name="POOL_UPDATE_GONE" xml:space="preserve">
-    <value>[XenCenter] のキャッシュにプールのアップデートが見つかりません。</value>
+    <value>{0} のキャッシュにプールのアップデートが見つかりません。</value>
   </data>
   <data name="POOL_VERSIONS_LINK_TEXT" xml:space="preserve">
-    <value>プールの一部が [XenServer] {0} にアップグレードされました</value>
+    <value>プールの一部が {0} {1} にアップグレードされました</value>
   </data>
   <data name="POOL_VERSIONS_LINK_TEXT_SHORT" xml:space="preserve">
     <value>一部アップグレード済み</value>
@@ -10662,6 +10862,24 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="PROBING_HBA_TITLE" xml:space="preserve">
     <value>{0} の LUN のプローブ</value>
   </data>
+  <data name="PROBLEM_COORDINATOR_PENDING_RESTART_HOST" xml:space="preserve">
+    <value>{0}: 最初にコーディネーターを再起動する必要があります</value>
+  </data>
+  <data name="PROBLEM_COORDINATOR_PENDING_RESTART_HOST_THIS_UPDATE" xml:space="preserve">
+    <value>{0}: このアップデートでは最初にコーディネーターを再起動する必要があります</value>
+  </data>
+  <data name="PROBLEM_COORDINATOR_PENDING_RESTART_TOOLSTACK" xml:space="preserve">
+    <value>{0}: 最初にコーディネーターのツールスタックを再起動する必要があります</value>
+  </data>
+  <data name="PROBLEM_COORDINATOR_PENDING_RESTART_TOOLSTACK_THIS_UPDATE" xml:space="preserve">
+    <value>{0}: このアップデートでは最初にコーディネーター上のツールスタックを再起動する必要があります</value>
+  </data>
+  <data name="PROBLEM_HEALTH_CHECK_HELP" xml:space="preserve">
+    <value>ヘルス チェックを無効にする</value>
+  </data>
+  <data name="PROBLEM_HEALTH_CHECK_SERVICE_DESCRIPTION" xml:space="preserve">
+    <value>{0}: ヘルス チェックが {1} {2} で削除されました。</value>
+  </data>
   <data name="PROBLEM_HOSTPROBLEM_TITLE" xml:space="preserve">
     <value>サーバー '{0}'</value>
   </data>
@@ -10677,15 +10895,6 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="PROBLEM_LEGACY_PROTOCOL_INFO_SERVER" xml:space="preserve">
     <value>{0} 以降にアップグレードする場合、サーバーとの通信に TLS 1.2 より前のセキュリティ プロトコルを使用できなくなり、サーバーに完全にアクセスできなくなる可能性があります。</value>
   </data>
-  <data name="PROBLEM_VSWITCH_CONTROLLER_DESCRIPTION" xml:space="preserve">
-    <value>{0}: vSwitch コントローラーは、{1} ではサポートされません。</value>
-  </data>
-  <data name="PROBLEM_VSWITCH_CONTROLLER_INFO_ERROR" xml:space="preserve">
-    <value>vSwitch コントローラーは、{0} ではサポートされません。このコントローラーを必要とするすべての機能が動作しなくなるため、構成を解除する必要があります。詳しくは、以下のリンクをクリックしてください。</value>
-  </data>
-  <data name="PROBLEM_VSWITCH_CONTROLLER_INFO_WARNING" xml:space="preserve">
-    <value>{0} 以降にアップグレードする場合、このリリースで vSwitch コントローラーがサポートされなくなり、このコントローラーを必要とするすべての機能が動作しなくなるため、構成を解除する必要があります。詳しくは、以下のリンクをクリックしてください。</value>
-  </data>
   <data name="PROBLEM_MAC_ADDRESS_IS_DUPLICATE" xml:space="preserve">
     <value>この MAC アドレスは、次の仮想マシンに割り当て済みです:
  {1} 
@@ -10694,18 +10903,6 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   </data>
   <data name="PROBLEM_MAC_ADDRESS_IS_DUPLICATE_TITLE" xml:space="preserve">
     <value>MAC アドレスの重複</value>
-  </data>
-  <data name="PROBLEM_MASTER_PENDING_RESTART_HOST" xml:space="preserve">
-    <value>{0}: 最初にマスターを再起動する必要があります</value>
-  </data>
-  <data name="PROBLEM_MASTER_PENDING_RESTART_HOST_THIS_UPDATE" xml:space="preserve">
-    <value>{0}: このアップデートでは最初にマスターを再起動する必要があります</value>
-  </data>
-  <data name="PROBLEM_MASTER_PENDING_RESTART_TOOLSTACK" xml:space="preserve">
-    <value>{0}: 最初にマスター上のツールスタックを再起動する必要があります</value>
-  </data>
-  <data name="PROBLEM_MASTER_PENDING_RESTART_TOOLSTACK_THIS_UPDATE" xml:space="preserve">
-    <value>{0}: このアップデートでは最初にマスター上のツールスタックを再起動する必要があります</value>
   </data>
   <data name="PROBLEM_POOLPROBLEM_TITLE" xml:space="preserve">
     <value>プール '{0}'</value>
@@ -10733,15 +10930,20 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="PROBLEM_VMPROBLEM_TITLE" xml:space="preserve">
     <value>VM '{0}'</value>
   </data>
+  <data name="PROBLEM_VSWITCH_CONTROLLER_DESCRIPTION" xml:space="preserve">
+    <value>{0}: vSwitch コントローラーは、{1} ではサポートされません。</value>
+  </data>
+  <data name="PROBLEM_VSWITCH_CONTROLLER_INFO_ERROR" xml:space="preserve">
+    <value>vSwitch コントローラーは、{0} ではサポートされません。このコントローラーを必要とするすべての機能が動作しなくなるため、構成を解除する必要があります。詳しくは、以下のリンクをクリックしてください。</value>
+  </data>
+  <data name="PROBLEM_VSWITCH_CONTROLLER_INFO_WARNING" xml:space="preserve">
+    <value>{0} 以降にアップグレードする場合、このリリースで vSwitch コントローラーがサポートされなくなり、このコントローラーを必要とするすべての機能が動作しなくなるため、構成を解除する必要があります。詳しくは、以下のリンクをクリックしてください。</value>
+  </data>
   <data name="PROBLEM_XENCENTER_VERSION_TITLE" xml:space="preserve">
-    <value>[XenCenter] バージョン</value>
+    <value>{0} バージョン</value>
   </data>
   <data name="PROCEED" xml:space="preserve">
     <value>続行する(&amp;P)</value>
-  </data>
-  <data name="PROMPT_XS_CD" xml:space="preserve">
-    <value>サーバー '{0}' の物理ドライブに [XenServer] CD を挿入してください。
-[OK] をクリックしてウィザードを続行し、サーバーに戻って画面の指示に従います。</value>
   </data>
   <data name="PROPERTIES_DIALOG_TITLE" xml:space="preserve">
     <value>'{0}' プロパティ</value>
@@ -10810,13 +11012,13 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
     <value>PVS アクセラレータ</value>
   </data>
   <data name="PV_DRIVERS_NOT_INSTALLED" xml:space="preserve">
-    <value>[Citrix VM Tools] 未インストール</value>
+    <value>{0} がインストールされていません</value>
   </data>
   <data name="PV_DRIVERS_OUT_OF_DATE" xml:space="preserve">
-    <value>[Citrix VM Tools] の旧バージョン (バージョン {0} インストール済み)</value>
+    <value>{0} の旧バージョン (バージョン {1}.{2} インストール済み)</value>
   </data>
   <data name="PV_DRIVERS_OUT_OF_DATE_UNKNOWN_VERSION" xml:space="preserve">
-    <value>[Citrix VM Tools] の旧バージョン</value>
+    <value>{0} の旧バージョン</value>
   </data>
   <data name="PV_GUESTS_CHECK_DESCRIPTION" xml:space="preserve">
     <value>ゲストの互換性チェック</value>
@@ -10854,18 +11056,6 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="QUESTION_ADMIN_EXIT_PROCEDURE_SOME_OF_MANY" xml:space="preserve">
     <value>削除しようとしているユーザーのうち {0} 人がプール管理者です。</value>
   </data>
-  <data name="QUESTION_LOGOUT_AD_USER_MANY" xml:space="preserve">
-    <value>この {0} 人のユーザーをログアウトしてもよろしいですか?</value>
-  </data>
-  <data name="QUESTION_LOGOUT_AD_USER_ONE" xml:space="preserve">
-    <value>ユーザー '{0}' をログアウトしてもよろしいですか?</value>
-  </data>
-  <data name="QUESTION_REMOVE_AD_USER_MANY" xml:space="preserve">
-    <value>この {0} 人のユーザーを削除してもよろしいですか?</value>
-  </data>
-  <data name="QUESTION_REMOVE_AD_USER_ONE" xml:space="preserve">
-    <value>ユーザー '{0}' を削除してもよろしいですか?</value>
-  </data>
   <data name="QUIESCED_SNAPSHOTS" xml:space="preserve">
     <value>休止スナップショット</value>
   </data>
@@ -10889,11 +11079,23 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
 
 {1}</value>
   </data>
+  <data name="RBAC_CROSS_POOL_COPY_TEMPLATE_BLOCKED" xml:space="preserve">
+    <value>A {0} user cannot copy templates across pools. Log in as a different user with sufficient privileges on both source and destination servers and try again.</value>
+  </data>
+  <data name="RBAC_CROSS_POOL_COPY_VM_BLOCKED" xml:space="preserve">
+    <value>A {0} user cannot copy VMs across pools. Log in as a different user with sufficient privileges on both source and destination servers and try again.</value>
+  </data>
+  <data name="RBAC_CROSS_POOL_MIGRATE_TEMPLATE_BLOCKED" xml:space="preserve">
+    <value>A {0} user cannot migrate templates across pools. Log in as a different user with sufficient privileges on both source and destination servers and try again.</value>
+  </data>
   <data name="RBAC_CROSS_POOL_MIGRATE_VM_BLOCKED" xml:space="preserve">
-    <value>現在のアカウントには、プール間で VM を移行するための権限がありません。移行元および移行先のホストに対する十分な権限を持つアカウントでログインしてください。</value>
+    <value>A {0} user cannot migrate VMs across pools. Log in as a different user with sufficient privileges on both source and destination servers and try again.</value>
   </data>
   <data name="RBAC_DR_WIZARD_MESSAGE" xml:space="preserve">
-    <value>ユーザー {0} には、障害回復ウィザードを実行するための権限がありません。必要な権限を持つユーザーでログインし直して再試行してください。</value>
+    <value>A {0} user does not have sufficient permissions to use Disaster Recovery. Login as a different user with sufficient privileges and try again.</value>
+  </data>
+  <data name="RBAC_GET_SYSTEM_STATUS_BLOCKED" xml:space="preserve">
+    <value>A {0} user cannot download system status reports. Log in as a different user with sufficient privileges and try again.</value>
   </data>
   <data name="RBAC_HA_CONFIGURE_WARNING" xml:space="preserve">
     <value>現在の役割は '{1}' です。
@@ -10907,6 +11109,12 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   </data>
   <data name="RBAC_HTTP_FAILURE" xml:space="preserve">
     <value>{0} ユーザーはこの操作を実行できません。</value>
+  </data>
+  <data name="RBAC_INTRA_POOL_COPY_TEMPLATE_BLOCKED" xml:space="preserve">
+    <value>A {0} user cannot copy templates. Log in as a different user with sufficient privileges and try again.</value>
+  </data>
+  <data name="RBAC_INTRA_POOL_COPY_VM_BLOCKED" xml:space="preserve">
+    <value>A {0} user cannot copy VMs. Log in as a different user with sufficient privileges and try again.</value>
   </data>
   <data name="RBAC_NO_WIZARD_LIMITS" xml:space="preserve">
     <value>チェックが完了しました。このウィザードのすべての機能を使用できます。</value>
@@ -11192,6 +11400,18 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="REQUIRED_UPDATES" xml:space="preserve">
     <value>必要なアップデート</value>
   </data>
+  <data name="RESET_SERVER_CERTIFICATE_DESCRIPTION" xml:space="preserve">
+    <value>証明書をリセット...</value>
+  </data>
+  <data name="RESET_SERVER_CERTIFICATE_MENU" xml:space="preserve">
+    <value>証明書のリセット(&amp;R)...</value>
+  </data>
+  <data name="RESET_SERVER_CERTIFICATE_TITLE" xml:space="preserve">
+    <value>サーバー {0} の証明書をリセット...</value>
+  </data>
+  <data name="RESET_SERVER_CERTIFICATE_WARNING" xml:space="preserve">
+    <value>サーバーの ID 証明書は自己署名証明書に置き換わります。続行しますか?</value>
+  </data>
   <data name="RESOLVED_AS" xml:space="preserve">
     <value>{0} として解決されました</value>
   </data>
@@ -11199,7 +11419,7 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
     <value>クリアされたアップデートを復元</value>
   </data>
   <data name="RESTORE_FROM_BACKUP_FINALIZE" xml:space="preserve">
-    <value>バックアップ ファイルがサーバー '{0}' にロードされました。復元手順については、『[XenServer product] 管理者ガイド』を参照してください。</value>
+    <value>バックアップ ファイルがサーバー '{0}' にロードされました。復元手順については、『{1} 管理者ガイド』を参照してください。</value>
   </data>
   <data name="RESTORE_HOST" xml:space="preserve">
     <value>バックアップから復元...</value>
@@ -11282,12 +11502,6 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="ROLLING_POOL_UPGRADE_ELLIPSIS" xml:space="preserve">
     <value>プールのローリング アップグレード(&amp;U)...</value>
   </data>
-  <data name="ROLLING_UPGRADE_APPLY_UPDATES" xml:space="preserve">
-    <value>新しいバージョンのすべてのリリース済みアップデートを適用(&amp;U)</value>
-  </data>
-  <data name="ROLLING_UPGRADE_APPLY_UPDATES_MIXED" xml:space="preserve">
-    <value>新しいバージョンのすべてのリリース済みアップデートを適用 (自動アップデートが使用できるプールでのみ)(&amp;U)</value>
-  </data>
   <data name="ROLLING_UPGRADE_BUTTON_LABEL_STOP" xml:space="preserve">
     <value>停止(&amp;T)</value>
   </data>
@@ -11324,7 +11538,7 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
     <value>アップグレード オプション</value>
   </data>
   <data name="ROLLING_UPGRADE_EXTRAS_PAGE_TITLE" xml:space="preserve">
-    <value>アップデートまたはサプリメンタル パックの適用 (オプション)</value>
+    <value>サプリメンタル パックの適用 (オプション)</value>
   </data>
   <data name="ROLLING_UPGRADE_MODE_PAGE" xml:space="preserve">
     <value>アップグレード モード (自動または手動) を選択します。</value>
@@ -11335,15 +11549,15 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
 このサーバーの起動順序の設定を確認してサーバーを再起動してください。</value>
   </data>
   <data name="ROLLING_UPGRADE_REBOOT_MESSAGE" xml:space="preserve">
-    <value>{0} に [XenServer] のアップグレードをインストールするには、以下の手順に従います。
+    <value>{1} に {0} のアップグレードをインストールするには、以下の手順に従います。
     
-1. サーバーの CD/DVD ドライブに [XenServer] インストール CD-ROM を挿入するか、PXE ブートを設定します。
+1. サーバーの CD/DVD ドライブに {0} インストール CD-ROM を挿入するか、PXE ブートを設定します。
 2. 下の [再起動する] をクリックします。サーバーが再起動して、インストールが開始されます。
 3. サーバーのコンソール画面の指示に従ってアップグレードをインストールします。
 
-このサーバーをスキップしてプール内の次のサーバーをアップグレードするには、[このサーバーをスキップ] をクリックします。ただし、プール内で異なるバージョンの [XenServer] を運用することはサポートされません。今回のローリング アップグレードでスキップしたサーバーは、後で早急にアップグレードしてください。
+このサーバーをスキップしてプール内の次のサーバーをアップグレードするには、[このサーバーをスキップ] をクリックします。ただし、プール内で異なるバージョンの {0} を運用することはサポートされません。今回のローリング アップグレードでスキップしたサーバーは、後で早急にアップグレードしてください。
 
-最初にプール マスターがアップグレードされます。このため、マスターをスキップすると、このプールのローリング アップグレードがキャンセルされます。
+最初にコーディネーターがアップグレードされます。このため、コーディネーターをスキップすると、このプールのローリング アップグレードがキャンセルされます。
 </value>
   </data>
   <data name="ROLLING_UPGRADE_SUCCESS_MANY" xml:space="preserve">
@@ -11353,10 +11567,10 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
     <value>プールのローリングアップグレード プロセスは正常に完了しました。</value>
   </data>
   <data name="ROLLING_UPGRADE_TIMEOUT" xml:space="preserve">
-    <value>まだ '{0}' への [XenServer] のインストールの完了を待機中です。サーバー コンソールでエラーが発生していないかを確認してください。インストールが進行中であった場合は、このまま待機してください...</value>
+    <value>まだ '{1}' への {0} のインストールの完了を待機中です。サーバー コンソールでエラーが発生していないかを確認してください。インストールが進行中であった場合は、このまま待機してください...</value>
   </data>
   <data name="ROLLING_UPGRADE_TIMEOUT_VERSION" xml:space="preserve">
-    <value>まだ '{1}' への [XenServer] {0} のインストールの完了を待機中です。サーバー コンソールでエラーが発生していないかを確認してください。インストールが進行中であった場合は、このまま待機してください...</value>
+    <value>まだ '{2}' への {0} {1} のインストールの完了を待機中です。サーバー コンソールでエラーが発生していないかを確認してください。インストールが進行中であった場合は、このまま待機してください...</value>
   </data>
   <data name="ROLLING_UPGRADE_TITLE_MODE" xml:space="preserve">
     <value>アップグレード モード</value>
@@ -11385,17 +11599,17 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="ROTATE_POOL_SECRET_HA" xml:space="preserve">
     <value>[高可用性] がオンの場合、プール シークレットを入れ替えることはできません。</value>
   </data>
+  <data name="ROTATE_POOL_SECRET_MENU" xml:space="preserve">
+    <value>プール シークレットの入れ替え(&amp;P)</value>
+  </data>
   <data name="ROTATE_POOL_SECRET_PENDING_CLUSTER" xml:space="preserve">
     <value>プール シークレットの入れ替えの実行中は、クラスタリングを有効にできません。</value>
   </data>
   <data name="ROTATE_POOL_SECRET_PENDING_HA" xml:space="preserve">
     <value>プール シークレットの入れ替えの実行中は、高可用性を構成できません。</value>
   </data>
-  <data name="ROTATE_POOL_SECRET_PENDING_NEW_MASTER" xml:space="preserve">
-    <value>プール シークレットの入れ替えの実行中は、新しいマスターを選出できません。</value>
-  </data>
-  <data name="ROTATE_POOL_SECRET_MENU" xml:space="preserve">
-    <value>プール シークレットの入れ替え(&amp;P)</value>
+  <data name="ROTATE_POOL_SECRET_PENDING_NEW_COORDINATOR" xml:space="preserve">
+    <value>プール シークレットの入れ替えの実行中は、新しいコーディネーターを選出できません。</value>
   </data>
   <data name="ROTATE_POOL_SECRET_RBAC_RESTRICTION" xml:space="preserve">
     <value>{0} ユーザーには、プール シークレットを入れ替えるための権限がありません。以下のいずれかの役割を持つアカウントを使用してログインしてください:
@@ -11474,11 +11688,11 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="SAVING_SEARCH" xml:space="preserve">
     <value>検索 '{0}' を保存しています...</value>
   </data>
-  <data name="SAVING_VM_PROPERTIES_ACTION_TITLE" xml:space="preserve">
-    <value>VM プロパティの保存</value>
-  </data>
   <data name="SAVING_VM_PROPERTIES_ACTION_DESC" xml:space="preserve">
     <value>構成を保存しています...</value>
+  </data>
+  <data name="SAVING_VM_PROPERTIES_ACTION_TITLE" xml:space="preserve">
+    <value>VM プロパティの保存</value>
   </data>
   <data name="SAVING_WLB_CONFIGURATION" xml:space="preserve">
     <value>ワークロード バランス構成を保存しています。</value>
@@ -11586,7 +11800,7 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
     <value>サーバー、VM、カスタム テンプレート、およびリモート SR</value>
   </data>
   <data name="SERVER_API_INCOMPATIBLE" xml:space="preserve">
-    <value>このサーバーは [XenCenter] と互換性のない API を使用しています。</value>
+    <value>このサーバーは {0} と互換性のない API を使用しています。</value>
   </data>
   <data name="SERVER_COLON" xml:space="preserve">
     <value>サーバー:</value>
@@ -11596,9 +11810,6 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   </data>
   <data name="SERVER_LABLE" xml:space="preserve">
     <value>サーバー(&amp;S):</value>
-  </data>
-  <data name="SERVER_OUT_OF_DATE" xml:space="preserve">
-    <value>[XenServer] の旧バージョン</value>
   </data>
   <data name="SERVER_OUT_OF_DATE_DETAIL" xml:space="preserve">
     <value>サーバー '{0}' のバージョンが古いため、これ以降接続できません。</value>
@@ -11625,13 +11836,13 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
     <value>サーバーの機能を照会しています...</value>
   </data>
   <data name="SERVER_TIME" xml:space="preserve">
-    <value>プール マスターの現在の時間: {0}</value>
+    <value>プール コーディネーターの現在の時間: {0}</value>
   </data>
   <data name="SERVER_TOO_OLD" xml:space="preserve">
-    <value>このバージョンの [XenCenter] では [XenServer] {0} 以降のバージョンがサポートされます。</value>
+    <value>このバージョンの {0} では {1} {2} 以降のバージョンがサポートされます。</value>
   </data>
   <data name="SERVER_TOO_OLD_SOLUTION" xml:space="preserve">
-    <value>このサーバーを管理するには、以前のバージョンの [XenCenter] を使用してください。</value>
+    <value>このサーバーを管理するには、以前のバージョンの {0} を使用してください。</value>
   </data>
   <data name="SERVER_X" xml:space="preserve">
     <value>サーバー '{0}'</value>
@@ -11765,11 +11976,11 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   <data name="SHUTTING_DOWN_VM_OUT_OF" xml:space="preserve">
     <value>VM をシャットダウン中: {0} / {1}</value>
   </data>
-  <data name="SHUT_DOWN_POOL_MASTER_MULTIPLE" xml:space="preserve">
-    <value>{0} はプール マスターです。影響を受けるプールごとに新しいマスターを選出してから続行することをお勧めします。</value>
+  <data name="SHUT_DOWN_POOL_COORDINATOR_MULTIPLE" xml:space="preserve">
+    <value>{0} はプール コーディネーターです。影響を受けるプールごとに新しいコーディネーターを選出してから続行することをお勧めします。</value>
   </data>
-  <data name="SHUT_DOWN_POOL_MASTER_SINGLE" xml:space="preserve">
-    <value>{0} はプール マスターです。このプールの新しいマスターを選出してから続行することをお勧めします。</value>
+  <data name="SHUT_DOWN_POOL_COORDINATOR_SINGLE" xml:space="preserve">
+    <value>{0} はプール コーディネーターです。このプールの新しいコーディネーターを選出してから続行することをお勧めします。</value>
   </data>
   <data name="SIGNING_APPLIANCE" xml:space="preserve">
     <value>アプライアンスにデジタル署名を適用しています...</value>
@@ -11794,16 +12005,6 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
   </data>
   <data name="SLACK_LABEL" xml:space="preserve">
     <value>スラック:</value>
-  </data>
-  <data name="SLAVE_ALREADY_CONNECTED" xml:space="preserve">
-    <value>サーバー '{0}' はプール '{1}' のメンバーであり、接続済みです。</value>
-  </data>
-  <data name="SLAVE_CONNECTION_ERROR" xml:space="preserve">
-    <value>サーバー '{0}' はプールに属しています。プールに接続するには、プール マスターに接続する必要があります。
-プール マスター '{1}' に接続しますか?</value>
-  </data>
-  <data name="SLAVE_TOO_OLD" xml:space="preserve">
-    <value>このプールには、[XenServer] {0} より前のサーバーが含まれています。このプールを管理するには、以前のバージョンの [XenCenter] を使用してください。</value>
   </data>
   <data name="SMALLER_THAN" xml:space="preserve">
     <value>＜</value>
@@ -11901,13 +12102,13 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
     <value>正しいユーザー名とパスワードを使用して再試行してください。</value>
   </data>
   <data name="SOLUTION_CHECK_PROXY" xml:space="preserve">
-    <value>'{0}' のプロキシ サーバーの構成および [XenCenter] の接続設定が正しいことを確認して再試行してください。</value>
+    <value>'{0}' のプロキシ サーバーの構成および {1} の接続設定が正しいことを確認して再試行してください。</value>
   </data>
   <data name="SOLUTION_CHECK_XENSERVER" xml:space="preserve">
-    <value>'{0}' 上の [XenServer] が正しく構成されていることを確認して、再試行してください。</value>
+    <value>'{1}' 上の {0} が正しく構成されていることを確認して、再試行してください。</value>
   </data>
   <data name="SOLUTION_CHECK_XENSERVER_WITH_PROXY" xml:space="preserve">
-    <value>プロキシ設定と '{0}' 上のサーバーが正しく構成されていることを確認して、再試行してください。</value>
+    <value>プロキシ設定と '{1}' 上の {0} が正しく構成されていることを確認して、再試行してください。</value>
   </data>
   <data name="SOLUTION_HOST_STILL_BOOTING" xml:space="preserve">
     <value>後で再試行してください。</value>
@@ -11922,7 +12123,7 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
     <value/>
   </data>
   <data name="SOME_ERRORS_ENCOUNTERED" xml:space="preserve">
-    <value>いくつかのエラーが発生しました。詳しくは、[XenCenter] のログを参照してください。</value>
+    <value>いくつかのエラーが発生しました。詳しくは、アプリケーション ログを参照してください。</value>
   </data>
   <data name="SPACED_HYPHEN" xml:space="preserve">
     <value> - </value>
@@ -11943,7 +12144,7 @@ VM が再起動したら、[[Citrix VM Tools] をインストール] を再度�
     <value>SR-IOV を作成する(&amp;S)</value>
   </data>
   <data name="SRIOV_NETWORK_CREATE_WARNING" xml:space="preserve">
-    <value>この SR-IOV ネットワークを作成すると一時的に [XenCenter] からプールへの接続が切断されます。
+    <value>この SR-IOV ネットワークを作成すると一時的に {0} からプールへの接続が切断されます。
 
 SR-IOV ネットワークを有効にするには、サーバーの再起動が必要な場合があります。</value>
   </data>
@@ -11987,10 +12188,10 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
     <value>この SR 上で現在処理中の操作があります。</value>
   </data>
   <data name="SR_CANNOT_BE_DESTROYED_WITH_XC" xml:space="preserve">
-    <value>この SR は [XenCenter] で破棄できません。</value>
+    <value>この SR は {0} で破棄できません。</value>
   </data>
   <data name="SR_CANNOT_BE_FORGOTTEN_WITH_XC" xml:space="preserve">
-    <value>この SR は [XenCenter] で接続消去できません。</value>
+    <value>この SR は {0} で接続消去できません。</value>
   </data>
   <data name="SR_CANNOT_BE_SEEN" xml:space="preserve">
     <value>このストレージ リポジトリは、{0} からアクセスできません</value>
@@ -12001,12 +12202,12 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   <data name="SR_DETACHED" xml:space="preserve">
     <value>SR との接続が解除されています。</value>
   </data>
+  <data name="SR_DISKSIZE_EXCEEDS_DISK_MAX_SIZE" xml:space="preserve">
+    <value>この SR には、{0} を超えるサイズのディスクを作成できません。</value>
+  </data>
   <data name="SR_DISK_SPACE_ALLOCATION" xml:space="preserve">
     <value>初回割り当て: {0} 
 増分割り当て: {1}</value>
-  </data>
-  <data name="SR_DISKSIZE_EXCEEDS_DISK_MAX_SIZE" xml:space="preserve">
-    <value>この SR には、{0} を超えるサイズのディスクを作成できません。</value>
   </data>
   <data name="SR_DOES_NOT_NEED_UPGRADE" xml:space="preserve">
     <value>この SR をアップグレードする必要はありません。</value>
@@ -12026,11 +12227,11 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   <data name="SR_IS_LOCAL" xml:space="preserve">
     <value>ホーム サーバーが設定されていない VM はローカル ストレージにディスクを持つことはできません</value>
   </data>
-  <data name="SR_PICKER_DISK_TOO_BIG" xml:space="preserve">
-    <value>ディスク サイズ ({0}) が SR サイズ ({1}) を超過しています</value>
-  </data>
   <data name="SR_NOT_ENOUGH_SPACE" xml:space="preserve">
     <value>SR {0} に {1} の空き領域がないため、仮想ディスク {2} をインポートできません。</value>
+  </data>
+  <data name="SR_PICKER_DISK_TOO_BIG" xml:space="preserve">
+    <value>ディスク サイズ ({0}) が SR サイズ ({1}) を超過しています</value>
   </data>
   <data name="SR_PICKER_INSUFFICIENT_SPACE" xml:space="preserve">
     <value>{0} 必要ですが {1} しか使用できません</value>
@@ -12158,7 +12359,7 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
     <value>応答待ち</value>
   </data>
   <data name="STATUS_REPORT_ENTER_CREDENTIALS_MESSAGE" xml:space="preserve">
-    <value>MyCitrix 資格情報を入力します ({0} 参照)。この資格情報は、[Citrix] Insight Services での認証に一度のみ使用され、このマシンやサーバーには格納されません。</value>
+    <value>MyCitrix 資格情報を入力します ({0} 参照)。この資格情報は、{1} での認証に一度のみ使用され、このマシンやサーバーには格納されません。</value>
   </data>
   <data name="STATUS_REPORT_ZIP_FAILED" xml:space="preserve">
     <value>サーバーの状態レポートのパッケージ化時にエラーが発生しました。一部のレポートが作成されていない場合があります</value>
@@ -12241,6 +12442,9 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   <data name="STRINGIFY_LIST_LASTSEP" xml:space="preserve">
     <value> および </value>
   </data>
+  <data name="STRING_COLON_SPACE_STRING" xml:space="preserve">
+    <value>{0}: {1}</value>
+  </data>
   <data name="STRING_COMMA_SPACE_STRING" xml:space="preserve">
     <value>{0}, {1}</value>
   </data>
@@ -12256,13 +12460,23 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   <data name="SUNDAY_SHORT" xml:space="preserve">
     <value>日</value>
   </data>
+  <data name="SUPPORTER_ALREADY_CONNECTED" xml:space="preserve">
+    <value>サーバー '{0}' はプール '{1}' のメンバーであり、接続済みです。</value>
+  </data>
+  <data name="SUPPORTER_CONNECTION_ERROR" xml:space="preserve">
+    <value>サーバー '{0}' はプールに属しています。プールに接続するには、プール コーディネーターに接続する必要があります。
+プール コーディネーター '{1}' に接続しますか?</value>
+  </data>
+  <data name="SUPPORTER_TOO_OLD" xml:space="preserve">
+    <value>このプールには、{0} {1} より前のサーバーが含まれています。このプールを管理するには、以前のバージョンの {2} を使用してください。</value>
+  </data>
   <data name="SUPP_PACK_DESCRIPTION" xml:space="preserve">
     <value>{0} (Version {1})</value>
   </data>
   <data name="SUPP_PACK_INSTALL_FAILED" xml:space="preserve">
     <value>'{1}' 上にサプリメンタル パック '{0}' をインストールできませんでした。
 
-サーバーにサプリメンタル パックを手動でインストールする方法については、『[XenServer product] 管理者ガイド』を参照してください。</value>
+サーバーにサプリメンタル パックを手動でインストールする方法については、『{2} 管理者ガイド』を参照してください。</value>
   </data>
   <data name="SUPP_PACK_MISSING_ON" xml:space="preserve">
     <value>{0} ({1} に未インストール)</value>
@@ -12318,9 +12532,6 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   <data name="TARGET" xml:space="preserve">
     <value>ターゲット</value>
   </data>
-  <data name="TARGET_SERVER" xml:space="preserve">
-    <value>ターゲット サーバー</value>
-  </data>
   <data name="TELL_ME_MORE" xml:space="preserve">
     <value>詳細情報...</value>
   </data>
@@ -12347,15 +12558,6 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   </data>
   <data name="TEMPLATE_INFO_OS" xml:space="preserve">
     <value>OS: {0}</value>
-  </data>
-  <data name="TEMPLATE_INFO_TOOLSNOTPRESENT" xml:space="preserve">
-    <value>[Citrix VM Tools]: 未インストール</value>
-  </data>
-  <data name="TEMPLATE_INFO_TOOLSOLD" xml:space="preserve">
-    <value>[Citrix VM Tools]: 旧バージョン (Version {0}.{1} インストール済み)</value>
-  </data>
-  <data name="TEMPLATE_INFO_TOOLSUPTODATE" xml:space="preserve">
-    <value>[Citrix VM Tools]: 最新バージョン</value>
   </data>
   <data name="TEMPLATE_INFO_VCPUS" xml:space="preserve">
     <value>vCPU: {0}</value>
@@ -12453,9 +12655,6 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   <data name="TOOLTIP_DEACTIVATE_SYSVDI" xml:space="preserve">
     <value>VM が実行されているため、システム ディスクをアクティブまたは非アクティブにできません</value>
   </data>
-  <data name="TOOLTIP_DEACTIVATE_VDI_NEED_TOOLS" xml:space="preserve">
-    <value>[Citrix VM Tools] がインストールされていない場合、実行中の VM のディスクをアクティブまたは非アクティブにすることはできません</value>
-  </data>
   <data name="TOOLTIP_DEACTIVATE_VIF_SUSPENDED" xml:space="preserve">
     <value>VM が一時停止しているためネットワークを非アクティブにできません</value>
   </data>
@@ -12468,9 +12667,6 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   <data name="TOOLTIP_DELETE_SYSVDI" xml:space="preserve">
     <value>VM が実行されているためシステム ディスクを削除できません</value>
   </data>
-  <data name="TOOLTIP_DELETE_VDI_NEED_TOOLS" xml:space="preserve">
-    <value>[Citrix VM Tools] がインストールされていない場合、実行中の VM からディスクを削除することはできません</value>
-  </data>
   <data name="TOOLTIP_DETACH_SUSPENDED" xml:space="preserve">
     <value>VM が一時停止しているためディスクをイジェクトできません</value>
   </data>
@@ -12480,23 +12676,17 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   <data name="TOOLTIP_DETACH_VDI_MUST_DEACTIVATE" xml:space="preserve">
     <value>ディスクの接続を解除するには、非アクティブ化しておく必要があります。</value>
   </data>
-  <data name="TOOLTIP_DETACH_VDI_NEED_TOOLS" xml:space="preserve">
-    <value>[Citrix VM Tools] がインストールされていない場合、実行中の VM からディスクを削除することはできません</value>
-  </data>
   <data name="TOOLTIP_EDIT_NETWORK_IO_DRIVERS" xml:space="preserve">
     <value>実行中の VM のネットワークを編集するには、I/O ドライバーをインストールする必要があります</value>
   </data>
   <data name="TOOLTIP_EDIT_NETWORK_TOOLS" xml:space="preserve">
-    <value>実行中の VM のネットワークを編集するには、[Citrix VM Tools] をインストールする必要があります</value>
+    <value>実行中の VM のネットワークを編集するには、{0} をインストールする必要があります</value>
   </data>
   <data name="TOOLTIP_MAX_NETWORKS_FROM_DEFAULT_TEMPLATE" xml:space="preserve">
     <value>デフォルトのテンプレートで VM を作成する場合、サポートされるネットワークの数は最大 {0} です</value>
   </data>
   <data name="TOOLTIP_MAX_NETWORKS_FROM_TEMPLATE" xml:space="preserve">
     <value>このテンプレートでサポートされるネットワークの最大数に達しました。</value>
-  </data>
-  <data name="TOOLTIP_NICS_PER_BOND_LIMIT" xml:space="preserve">
-    <value>[XenServer] のボンディングでサポートされる NIC の最大数は {0} です。</value>
   </data>
   <data name="TOOLTIP_REMOVE_NETWORK_IO_DRIVERS" xml:space="preserve">
     <value>実行中の VM のネットワークを削除するには、I/O ドライバーをインストールする必要があります</value>
@@ -12505,7 +12695,7 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
     <value>一時停止中の VM からネットワークを削除することはできません</value>
   </data>
   <data name="TOOLTIP_REMOVE_NETWORK_TOOLS" xml:space="preserve">
-    <value>実行中の VM のネットワークを削除するには、[Citrix VM Tools] をインストールする必要があります</value>
+    <value>実行中の VM のネットワークを削除するには、{0} をインストールする必要があります</value>
   </data>
   <data name="TOOLTIP_REMOVE_PIF" xml:space="preserve">
     <value>このネットワークは物理デバイスであるため削除できません</value>
@@ -12559,15 +12749,15 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
     <value>UEFI セキュア ブート</value>
   </data>
   <data name="UNABLE_TO_IMPORT_SEARCH" xml:space="preserve">
-    <value>ファイル '{0}' に保存されている検索をインポートできません。
+    <value>{0} がファイル '{1}' に保存されている検索をインポートできません。
 
-このファイルが有効な {1} ファイルであることを確認してください。</value>
+このファイルが有効な {2} ファイルであることを確認してください。</value>
   </data>
   <data name="UNAVAILABLE" xml:space="preserve">
     <value>使用できません</value>
   </data>
   <data name="UNCOMPRESS_APPLIANCE_DESCRIPTION" xml:space="preserve">
-    <value>ファイルが '{0}' に圧縮解除されます。元のファイル '{1}' は削除されます。続行しますか?</value>
+    <value>{0} がファイルを '{1}' に圧縮解除します。元のファイル '{2}' は削除されます。続行しますか?</value>
   </data>
   <data name="UNDEFINED_NAME_LABEL" xml:space="preserve">
     <value>インポートされた VM</value>
@@ -12618,7 +12808,7 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
     <value>アップデート</value>
   </data>
   <data name="UPDATES_DESC" xml:space="preserve">
-    <value>[XenServer] または [XenCenter] アップデートの自動確認</value>
+    <value>{0} または {1} アップデートの自動確認</value>
   </data>
   <data name="UPDATES_DIALOG_ACTION_REQUIRED" xml:space="preserve">
     <value>適用したアップデートを有効にするには、以下の操作が必要です。
@@ -12670,7 +12860,7 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
     <value>ダウンロードしてインストール</value>
   </data>
   <data name="UPDATES_DOWNLOAD_REQUIRED_XENCENTER" xml:space="preserve">
-    <value>[XenCenter] のダウンロード</value>
+    <value>{0} のダウンロード</value>
   </data>
   <data name="UPDATES_WIZARD" xml:space="preserve">
     <value>アップデートのインストール</value>
@@ -12794,10 +12984,10 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
     <value>{0}: プールが部分的にアップグレードされたため、チェックがスキップされました。</value>
   </data>
   <data name="UPDATES_WIZARD_NEWER_XENCENTER_REQUIRED" xml:space="preserve">
-    <value>[XenCenter] バージョン {0} 以降が必要です。</value>
+    <value>{0} バージョン {1} 以降が必要です。</value>
   </data>
   <data name="UPDATES_WIZARD_NEWER_XENCENTER_WARNING" xml:space="preserve">
-    <value>[XenServer] をアップグレードする前に [XenCenter] をアップグレードする必要があります。</value>
+    <value>{2} をアップグレードする前に {0} {1} にアップグレードする必要があります。</value>
   </data>
   <data name="UPDATES_WIZARD_NO_ACTION" xml:space="preserve">
     <value>このアップデートには、これ以上の操作は必要ありません。</value>
@@ -12815,10 +13005,10 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
     <value>{0}: ライブ パッチが使用されるため、このサーバーは再起動する必要がありません。</value>
   </data>
   <data name="UPDATES_WIZARD_NO_TOOLS" xml:space="preserve">
-    <value>{0}: VM {1} には [Citrix VM Tools] がインストールされていません。</value>
+    <value>{0}: VM {1} には {2} がインストールされていません。</value>
   </data>
   <data name="UPDATES_WIZARD_OUT_OF_DATE_TOOLS" xml:space="preserve">
-    <value>{0}: 最新の [Citrix VM Tools] がインストールされるまで、VM {1} を一時停止することはできません。</value>
+    <value>{0}: 最新の {2} がインストールされるまで、VM {1} を一時停止することはできません。</value>
   </data>
   <data name="UPDATES_WIZARD_PATCH_ALREADY_APPLIED" xml:space="preserve">
     <value>{0}: アップデートはこのサーバーに適用済みです。このサーバーはスキップされます。</value>
@@ -12831,9 +13021,6 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   </data>
   <data name="UPDATES_WIZARD_PRECHECK_ERROR" xml:space="preserve">
     <value>事前チェックの実行時にエラーが発生しました。正しくチェックされていない場合があります。</value>
-  </data>
-  <data name="UPDATES_WIZARD_PRECHECK_FAILED" xml:space="preserve">
-    <value>{0}: {1}</value>
   </data>
   <data name="UPDATES_WIZARD_PRECHECK_FAILED_CONFLICTING_UPDATE" xml:space="preserve">
     <value>{0}: 競合するアップデートがあります: {1}</value>
@@ -12919,22 +13106,22 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
     <value>{0}: プール {1} の WLB が有効なためチェックがスキップされました。</value>
   </data>
   <data name="UPDATE_DISMISS_ALL_CONTINUE" xml:space="preserve">
-    <value>アップデート一覧にフィルタが適用されています。すべての接続先サーバーのすべてのアップデートをクリアしますか? それとも、現在のフィルタにより表示されているアップデートのみをクリアしますか? いずれの場合でも、クリアしたアップデートは、サーバーから完全に削除されます。
+    <value>You have applied filters to the list of update notifications. Do you want to dismiss all update notifications for every connected server, or only the update notifications you have chosen to view?
 
-注: RBAC が有効な場合、役割で許可されているアップデートのみがクリアされます。</value>
+Note that if RBAC is enabled, only updates which you have privileges to dismiss will be affected.</value>
   </data>
   <data name="UPDATE_DISMISS_ALL_NO_FILTER_CONTINUE" xml:space="preserve">
-    <value>これにより、すべての接続先サーバーのすべてのアップデートが完全に削除されます。続行しますか?
+    <value>This operation will dismiss all update notifications for every connected server. Do you want to continue?
 
-注: RBAC が有効な場合、役割で許可されているアップデートのみがクリアされます。</value>
+Note that if RBAC is enabled, only updates which you have privileges to dismiss will be affected.</value>
   </data>
   <data name="UPDATE_DISMISS_CONFIRM" xml:space="preserve">
     <value>このアップデートをクリアしてもよろしいですか?</value>
   </data>
   <data name="UPDATE_DISMISS_SELECTED_CONFIRM" xml:space="preserve">
-    <value>これにより、選択したアップデートがサーバーから完全に削除されます。続行しますか?
+    <value>This operation will dismiss all the selected update notifications. Do you want to continue?
 
-注: RBAC が有効な場合、役割で許可されているアップデートのみがクリアされます。</value>
+Note that if RBAC is enabled, only updates which you have privileges to dismiss will be affected.</value>
   </data>
   <data name="UPDATE_ERROR_INTRODUCE" xml:space="preserve">
     <value>アップデートのイントロデュースに失敗しました。</value>
@@ -13002,11 +13189,11 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   <data name="UPGRADEWIZARD_WARNING_INCOMPATIBLE_CPUS" xml:space="preserve">
     <value>{0}: プール '{1}' のホストに互換性のない CPU があるためチェックがスキップされました</value>
   </data>
+  <data name="UPGRADE_COORDINATOR" xml:space="preserve">
+    <value>コーディネーター {0} のアップグレード</value>
+  </data>
   <data name="UPGRADE_HOST" xml:space="preserve">
     <value>サーバー {0} のアップグレード</value>
-  </data>
-  <data name="UPGRADE_MASTER" xml:space="preserve">
-    <value>マスター {0} のアップグレード</value>
   </data>
   <data name="UPGRADE_PLAN" xml:space="preserve">
     <value>アップグレードの適用</value>
@@ -13014,8 +13201,8 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   <data name="UPGRADE_POOL" xml:space="preserve">
     <value>プール {0} のアップグレード</value>
   </data>
-  <data name="UPGRADE_POOL_MASTER" xml:space="preserve">
-    <value>プール マスター '{0}' のアップグレード</value>
+  <data name="UPGRADE_POOL_COORDINATOR" xml:space="preserve">
+    <value>プール コーディネーター '{0}' のアップグレード</value>
   </data>
   <data name="UPGRADE_PRECHECKS_TEXT" xml:space="preserve">
     <value>事前チェック</value>
@@ -13026,7 +13213,7 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   <data name="UPGRADE_SERVER" xml:space="preserve">
     <value>サーバー '{0}' のアップグレード</value>
   </data>
-  <data name="UPGRADE_SLAVE" xml:space="preserve">
+  <data name="UPGRADE_SUPPORTER" xml:space="preserve">
     <value>'{0}' のアップグレード</value>
   </data>
   <data name="UPLOADING_PATCH" xml:space="preserve">
@@ -13051,13 +13238,13 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
     <value>アップデート '{0}' を '{1}' にアップロードしています ({2}/{3})...</value>
   </data>
   <data name="UPSELL_BLURB_AD" xml:space="preserve">
-    <value>Active Directory を有効にするには、サーバー ライセンスをアップグレードします。 Active Directory で指定ユーザー アカウントを追加することで、 [XenServer] のアクセス制御を構成できます。</value>
+    <value>Active Directory を有効にするには、サーバー ライセンスをアップグレードします。 Active Directory で指定ユーザー アカウントを追加することで、 {0} のアクセス制御を構成できます。</value>
   </data>
   <data name="UPSELL_BLURB_ALERTS" xml:space="preserve">
     <value>アラートとレポート機能を使用するには、サーバー ライセンスをアップグレードしてください。パフォーマンス上の問題やエラー状態に関するメール アラートにより、管理者は、基幹サービスが影響を受ける前に潜在的な問題に対処することができます。</value>
   </data>
   <data name="UPSELL_BLURB_CONVERSION" xml:space="preserve">
-    <value>サーバーのライセンスをアップグレードして、Conversion Manager を有効にします。この機能では、VMware 仮想マシンのバッチをお使いの [XenServer] 環境に移動することで、ワークロードを VMware から [XenServer] に移行します。</value>
+    <value>サーバーのライセンスをアップグレードして、Conversion Manager を有効にします。この機能では、VMware 仮想マシンのバッチをお使いの {0} 環境に移動することで、ワークロードを VMware から {0} に移行します。</value>
   </data>
   <data name="UPSELL_BLURB_CPM" xml:space="preserve">
     <value>VM ライブ マイグレーション機能を使用するには、サーバー ライセンスをアップグレードしてください。この機能により、共有ストレージまたはローカル ストレージで実行中の VM を、同一プールまたは別のプールのサーバー間で移行できます。VM のダウンタイムは発生しません。 </value>
@@ -13081,18 +13268,18 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
     <value>高可用性機能を使用するには、サーバー ライセンスをアップグレードしてください。高可用性により、サーバーが動作するハードウェアや個々の VM に障害が発生した場合に、VM が自動的に再起動します。サーバー障害が発生した場合、そのサーバー上の VM は、リソース プール内のほかの仮想サーバー上で正しく再起動します。</value>
   </data>
   <data name="UPSELL_BLURB_MIGRATE_VDI" xml:space="preserve">
-    <value>VDI ライブ マイグレーション機能を使用するには、[XenServer] ライセンスをアップグレードしてください。この機能により、実行中の複数の VDI を、同一プールの SR 間で移行できます。VM のダウンタイムは発生しません。 </value>
+    <value>VDI ライブ マイグレーション機能を使用するには、{0} ライセンスをアップグレードしてください。この機能により、実行中の複数の VDI を、同一プールの SR 間で移行できます。VM のダウンタイムは発生しません。 </value>
   </data>
   <data name="UPSELL_BLURB_PERFORMANCE" xml:space="preserve">
     <value>パフォーマンス レポート機能を使用するには、サーバー ライセンスをアップグレードしてください。これらのレポートにより、環境の全体的なパフォーマンス傾向を分析して、業務ニーズの変化に応じた的確な展開プランニングが可能になります。</value>
   </data>
   <data name="UPSELL_BLURB_RBAC" xml:space="preserve">
-    <value>役割ベースのアクセス制御機能を使用するには、サーバー ライセンスをアップグレードしてください。役割ベースのアクセス制御 (RBAC: Role Based Access Control) では、[XenServer] リソース プール環境の主要コンポーネントへのアクセスを制御するための、詳細な監査ログ機能とシームレスな Active Directory 統合が提供されます。</value>
+    <value>役割ベースのアクセス制御機能を使用するには、サーバー ライセンスをアップグレードしてください。役割ベースのアクセス制御 (RBAC: Role Based Access Control) では、{0} リソース プール環境の主要コンポーネントへのアクセスを制御するための、詳細な監査ログ機能とシームレスな Active Directory 統合が提供されます。</value>
   </data>
   <data name="UPSELL_BLURB_TRIAL" xml:space="preserve">
     <value>
 
-[XenServer] トライアルを開始するには、下のボタンをクリックしてください。</value>
+{0} トライアルを開始するには、下のボタンをクリックしてください。</value>
   </data>
   <data name="UPSELL_BLURB_VMSS" xml:space="preserve">
     <value>仮想マシンのスケジュールされたスナップショット作成を有効にするには、サーバー ライセンスをアップグレードします。仮想マシンのスケジュールされたスナップショット作成機能で、重要な仮想マシンのスナップショットを自動で作成できます。</value>
@@ -13143,7 +13330,7 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
     <value>USB</value>
   </data>
   <data name="USER_AUTHORIZATION_FAILED" xml:space="preserve">
-    <value>[XenCenter] で {0} の操作を許可できません。詳しくは、アプリケーション ログ ファイルを参照してください。</value>
+    <value>{0} で {1} の操作を許可できません。詳しくは、アプリケーション ログ ファイルを参照してください。</value>
   </data>
   <data name="USER_NOT_AUTHORIZED" xml:space="preserve">
     <value>指定したユーザーは、この操作を完了する権限がありません。</value>
@@ -13268,13 +13455,13 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
   <data name="VBD_EDIT_CURRENTLY_IN_USE_BY" xml:space="preserve">
     <value>{0} - '{1}' により使用されています</value>
   </data>
-  <data name="VCPU_ONLY_WHEN_HALTED" xml:space="preserve">
-    <value>vCPU を変更するには、VM がシャットダウン状態である必要があります。</value>
-  </data>
   <data name="VCPUS_MORE_THAN_PCPUS" xml:space="preserve">
     <value>VCPU の数がホスト サーバー上の物理 CPU よりも多いため、 VM のパフォーマンスが大幅に低下します。
 
 VM のパフォーマンスを最適化するために、VCPU の数を物理 CPU と同じか、または少なくしてください。</value>
+  </data>
+  <data name="VCPU_ONLY_WHEN_HALTED" xml:space="preserve">
+    <value>vCPU を変更するには、VM がシャットダウン状態である必要があります。</value>
   </data>
   <data name="VDI" xml:space="preserve">
     <value>VDI</value>
@@ -13310,7 +13497,7 @@ VM のパフォーマンスを最適化するために、VCPU の数を物理 CP
     <value>バージョン</value>
   </data>
   <data name="VERSION_NUMBER" xml:space="preserve">
-    <value>[XenCenter] Version {0} (build {1}.{2}) {3} ビット</value>
+    <value>{0} Version {1} (build {2}) {3} ビット</value>
   </data>
   <data name="VGPU_DESCRIPTION" xml:space="preserve">
     <value>{0} 仮想 GPU ({1}/GPU)</value>
@@ -13436,7 +13623,7 @@ VM のパフォーマンスを最適化するために、VCPU の数を物理 CP
     <value>新規スケジュールの作成</value>
   </data>
   <data name="VMSS_HOST_NOT_LIVE" xml:space="preserve">
-    <value>プール マスターに到達できません</value>
+    <value>プール コーディネーターに到達できません</value>
   </data>
   <data name="VMSS_INVALID_SCHEDULE" xml:space="preserve">
     <value>無効または不完全なスケジュール</value>
@@ -13811,6 +13998,12 @@ VM のパフォーマンスを最適化するために、VCPU の数を物理 CP
   <data name="WARNING_DELETE_VD_MULTIPLE" xml:space="preserve">
     <value>これらの仮想ディスクは完全に削除され、データが破棄されます。</value>
   </data>
+  <data name="WARNING_HEALTH_CHECK_SERVICE_INFO" xml:space="preserve">
+    <value>{0} {1} のヘルス チェックは削除されました。プールをこのバージョンにアップグレードする場合は、最初にヘルス チェックを無効にする必要があります。</value>
+  </data>
+  <data name="WARNING_PRE_CLOUD_VERSION_CONNECTION" xml:space="preserve">
+    <value>{0} は、{1} {2} を実行しているサーバーの一般的な管理にはお勧めしません。代わりに {3} {2} を使用してください。</value>
+  </data>
   <data name="WEB_BROWSER_FAILED" xml:space="preserve">
     <value>'{0}' が見つかりません。</value>
   </data>
@@ -13871,9 +14064,6 @@ VM のパフォーマンスを最適化するために、VCPU の数を物理 CP
   <data name="WLBREPORT_OPTIMIZATION_PERFORMANCE_HISTORY" xml:space="preserve">
     <value>最適化パフォーマンス履歴</value>
   </data>
-  <data name="WLBREPORT_POOL_AUDIT_HISTORY" xml:space="preserve">
-    <value>プール監査ログの履歴</value>
-  </data>
   <data name="WLBREPORT_POOL_CONNECTION_LOST_CAPTION" xml:space="preserve">
     <value>プールからの切断</value>
   </data>
@@ -13882,12 +14072,6 @@ VM のパフォーマンスを最適化するために、VCPU の数を物理 CP
   </data>
   <data name="WLBREPORT_POOL_HEALTH_HISTORY" xml:space="preserve">
     <value>プール ヘルス履歴</value>
-  </data>
-  <data name="WLBREPORT_POOL_OPTIMIZATION_HISTORY" xml:space="preserve">
-    <value>プールの最適化履歴</value>
-  </data>
-  <data name="WLBREPORT_REPORT_CONFIG_ERROR" xml:space="preserve">
-    <value>ワークロード バランス レポート ウィンドウを開くときにエラーが発生しました。レポートの構成ファイルを確認してください。</value>
   </data>
   <data name="WLBREPORT_VM_MOTION_HISTORY" xml:space="preserve">
     <value>仮想マシン移動履歴</value>
@@ -13925,6 +14109,9 @@ VM のパフォーマンスを最適化するために、VCPU の数を物理 CP
   <data name="WLB_AUTO_OPT" xml:space="preserve">
     <value>自動最適化</value>
   </data>
+  <data name="WLB_COMMAND_MENU_ITEM" xml:space="preserve">
+    <value>ワークロード バランス(&amp;B)</value>
+  </data>
   <data name="WLB_CONFIGURATION_DIALOG" xml:space="preserve">
     <value>{0} のワークロード バランス構成</value>
   </data>
@@ -13958,6 +14145,9 @@ VM のパフォーマンスを最適化するために、VCPU の数を物理 CP
   </data>
   <data name="WLB_DISABLE_QUERY" xml:space="preserve">
     <value>プール '{0}' のワークロード バランスを無効にしてもよろしいですか?</value>
+  </data>
+  <data name="WLB_DISCONNECT_MENU_ITEM" xml:space="preserve">
+    <value>WLB サーバーの切断(&amp;D)...</value>
   </data>
   <data name="WLB_DISCONNECT_SERVER" xml:space="preserve">
     <value>ワークロード バランス サーバーから切断してもよろしいですか?
@@ -14242,7 +14432,7 @@ VM のパフォーマンスを最適化するために、VCPU の数を物理 CP
     <value>元のレポートに戻る</value>
   </data>
   <data name="WLB_REPORT_BIND_DATASOURCE" xml:space="preserve">
-    <value>レポート データソースのバインド中にエラーが発生しました。{0}</value>
+    <value>レポート データ ソースのバインド中にエラーが発生しました: {0}</value>
   </data>
   <data name="WLB_REPORT_CHANGECREDENTIALSTEXT" xml:space="preserve">
     <value>認証情報の変更</value>
@@ -14400,6 +14590,9 @@ VM のパフォーマンスを最適化するために、VCPU の数を物理 CP
   <data name="WLB_REPORT_VIEW_CUSTOM" xml:space="preserve">
     <value>カスタム ビュー</value>
   </data>
+  <data name="WLB_REPORT_VIEW_MENU_ITEM" xml:space="preserve">
+    <value>ワークロード レポートを表示( &amp;R)...</value>
+  </data>
   <data name="WLB_REPORT_VIEW_TAG_COLUMN_HEADER" xml:space="preserve">
     <value>フィルタ項目</value>
   </data>
@@ -14415,11 +14608,14 @@ VM のパフォーマンスを最適化するために、VCPU の数を物理 CP
   <data name="WLB_RETRIEVING_CONFIGURATION" xml:space="preserve">
     <value>WLB 構成の取得</value>
   </data>
+  <data name="WLB_RETRIEVING_EVACUATE_RECOMMENDATIONS" xml:space="preserve">
+    <value>サーバー {0}からの VM の移行に関する WLB 推奨事項の取得</value>
+  </data>
   <data name="WLB_RETRIEVING_RECOMMENDATIONS" xml:space="preserve">
     <value>プール {0} の WLB 推奨事項を取得しています</value>
   </data>
   <data name="WLB_RETRIEVING_VM_RECOMMENDATIONS" xml:space="preserve">
-    <value>WLB 推奨事項を取得しています </value>
+    <value>WLB 推奨事項を取得しています</value>
   </data>
   <data name="WLB_SAVING_SETTINGS" xml:space="preserve">
     <value>ワークロード バランス設定の保存</value>
@@ -14537,69 +14733,51 @@ VM のパフォーマンスを最適化するために、VCPU の数を物理 CP
   <data name="WRONG_ROLE_DESC" xml:space="preserve">
     <value>この操作を実行するには、現在の役割に付与されていない追加権限が必要です。</value>
   </data>
-  <data name="XENCENTER" xml:space="preserve">
-    <value>[XenCenter]</value>
-  </data>
   <data name="XENCENTER_CONFIG_FILTER" xml:space="preserve">
-    <value>[XenCenter] 設定|*.config</value>
+    <value>{0} 設定|*.config</value>
   </data>
   <data name="XENCENTER_NEWER_AVAILABLE" xml:space="preserve">
-    <value>新しい [XenCenter] が使用可能</value>
+    <value>新しい {0} が使用可能</value>
   </data>
   <data name="XENCENTER_VERSION_CHECK_DESCRIPTION" xml:space="preserve">
-    <value>[XenCenter] バージョンの確認</value>
+    <value>{0} バージョンの確認</value>
   </data>
   <data name="XENSEARCH_SAVED_SEARCH" xml:space="preserve">
     <value>保存済みの検索 (*.{0})|*.{0}</value>
   </data>
-  <data name="XENSERVER" xml:space="preserve">
-    <value>[XenServer]</value>
-  </data>
-  <data name="XENSERVER_6_5" xml:space="preserve">
-    <value>[XenServer] {0}</value>
-  </data>
-  <data name="XENSERVER_8_1" xml:space="preserve">
-    <value>[XenServer] {0}</value>
-  </data>
-  <data name="XENSERVER_8_2" xml:space="preserve">
-    <value>[XenServer] {0}</value>
-  </data>
   <data name="XENSERVER_TEMPLATES" xml:space="preserve">
-    <value>[XenServer] テンプレート</value>
+    <value>{0} テンプレート</value>
   </data>
   <data name="XENSERVER_UPGRADE_REQUIRED" xml:space="preserve">
     <value>ライセンスをアップグレードしてください</value>
   </data>
-  <data name="XSUPDATE" xml:space="preserve">
-    <value>[XenServer] アップデート ファイル ({0})|{0}|すべてのファイル ({1})|{1}</value>
-  </data>
   <data name="XS_BACKUP_FILES" xml:space="preserve">
-    <value>[XenServer] バックアップ ファイル</value>
+    <value>{0} バックアップ ファイル</value>
   </data>
   <data name="XS_LICENSE_FILES" xml:space="preserve">
-    <value>[XenServer] ライセンス ファイル</value>
+    <value>{0} ライセンス ファイル</value>
   </data>
   <data name="XS_TOOLS_MESSAGE_MORE_THAN_ONE_VM" xml:space="preserve">
-    <value>選択した各 VM の DVD ドライブに [Citrix VM Tools] DVD が挿入されます。これらのドライブに挿入されているディスクはすべてイジェクトされます。
+    <value>選択した各 VM の DVD ドライブに {0} DVD が挿入されます。これらのドライブに挿入されているディスクはすべてイジェクトされます。
 
 各 VM のコンソールを使用して、インストールを完了してください。</value>
   </data>
   <data name="XS_TOOLS_MESSAGE_ONE_VM" xml:space="preserve">
-    <value>[XenCenter] によって、この仮想マシンの DVD ドライブに [Citrix VM Tools] DVD が挿入され、コンソール画面に切り替わります。よろしいですか?
+    <value>{0} によって、この仮想マシンの DVD ドライブに {1} DVD が挿入され、コンソール画面に切り替わります。よろしいですか?
 
-[Citrix VM Tools] のインストールにより、現在仮想マシンの DVD ドライブにあるディスクはすべてイジェクトされます。</value>
+{1} のインストールにより、現在仮想マシンの DVD ドライブにあるディスクはすべてイジェクトされます。</value>
   </data>
   <data name="XS_TOOLS_SR_NOT_FOUND" xml:space="preserve">
-    <value>[Citrix VM Tools] SR が見つかりません。</value>
+    <value>{0} SR が見つかりません。</value>
   </data>
   <data name="X_HIDDEN" xml:space="preserve">
     <value>{0} (非表示)</value>
   </data>
   <data name="X_IS_DEPRECATED_IN_X" xml:space="preserve">
-    <value>{0} 機能は {1} で廃止され、今後のバージョンで削除される可能性があります</value>
+    <value>{0} 機能は {1} で廃止され、今後のバージョンで削除される可能性があります。</value>
   </data>
   <data name="X_IS_REMOVED_IN_X" xml:space="preserve">
-    <value>{0} 機能は {1} 以降のバージョンでは使用できません</value>
+    <value>{0} 機能は {1} 以降のバージョンでは使用できません。</value>
   </data>
   <data name="X_WITH_WARNING_X" xml:space="preserve">
     <value>{0} 警告: {1}</value>
@@ -14615,5 +14793,11 @@ VM のパフォーマンスを最適化するために、VCPU の数を物理 CP
   </data>
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>現在の位置</value>
+  </data>
+  <data name="AD_ADDING_REMOVING_ROLES_ON_MULTIPLE" xml:space="preserve">
+    <value>Assigning new roles to subjects '{0}'</value>
+  </data>
+  <data name="TERMINATING_USER_SESSION_MULTIPLE" xml:space="preserve">
+    <value>Terminating session for users '{0}'</value>
   </data>
 </root>

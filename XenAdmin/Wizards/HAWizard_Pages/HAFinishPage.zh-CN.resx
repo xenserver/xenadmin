@@ -547,7 +547,7 @@
     <value>3</value>
   </data>
   <data name="labelNoVmsProtected.Text" xml:space="preserve">
-    <value>不保护虚拟机。此配置将保护池主服务器，但不保护任何服务。</value>
+    <value>任何虚拟机都不会受到保护。此配置将保护池协调器，但不保护任何服务。</value>
   </data>
   <data name="labelNoVmsProtected.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
