@@ -185,13 +185,13 @@
     <value>3, 43</value>
   </data>
   <data name="radioButtonPutty.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 19</value>
+    <value>58, 19</value>
   </data>
   <data name="radioButtonPutty.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>1</value>
   </data>
   <data name="radioButtonPutty.Text" xml:space="preserve">
-    <value>PuTTY</value>
+    <value>&amp;PuTTY</value>
   </data>
   <data name="&gt;&gt;radioButtonPutty.Name" xml:space="preserve">
     <value>radioButtonPutty</value>
@@ -221,7 +221,7 @@
     <value>4</value>
   </data>
   <data name="radioButtonOpenSsh.Text" xml:space="preserve">
-    <value>OpenSSH</value>
+    <value>&amp;OpenSSH</value>
   </data>
   <data name="&gt;&gt;radioButtonOpenSsh.Name" xml:space="preserve">
     <value>radioButtonOpenSsh</value>
@@ -245,10 +245,10 @@
     <value>78, 23</value>
   </data>
   <data name="buttonBrowseSsh.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>6</value>
   </data>
   <data name="buttonBrowseSsh.Text" xml:space="preserve">
-    <value>Browse...</value>
+    <value>B&amp;rowse...</value>
   </data>
   <data name="&gt;&gt;buttonBrowseSsh.Name" xml:space="preserve">
     <value>buttonBrowseSsh</value>
@@ -275,7 +275,7 @@
     <value>416, 23</value>
   </data>
   <data name="textBoxOpenSsh.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;textBoxOpenSsh.Name" xml:space="preserve">
     <value>textBoxOpenSsh</value>
@@ -302,7 +302,7 @@
     <value>416, 23</value>
   </data>
   <data name="textBoxPutty.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;textBoxPutty.Name" xml:space="preserve">
     <value>textBoxPutty</value>
@@ -326,10 +326,10 @@
     <value>75, 23</value>
   </data>
   <data name="buttonBrowsePutty.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>3</value>
   </data>
   <data name="buttonBrowsePutty.Text" xml:space="preserve">
-    <value>Browse...</value>
+    <value>&amp;Browse...</value>
   </data>
   <data name="&gt;&gt;buttonBrowsePutty.Name" xml:space="preserve">
     <value>buttonBrowsePutty</value>
@@ -359,7 +359,7 @@
     <value>523, 170</value>
   </data>
   <data name="sshConsoleLayoutPanel.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;sshConsoleLayoutPanel.Name" xml:space="preserve">
     <value>sshConsoleLayoutPanel</value>
@@ -374,7 +374,7 @@
     <value>0</value>
   </data>
   <data name="sshConsoleLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="sshClientInfoLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="radioButtonPutty" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonOpenSsh" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="buttonBrowseSsh" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="textBoxOpenSsh" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="textBoxPutty" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="buttonBrowsePutty" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="sshConsoleInfoLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="radioButtonPutty" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonOpenSsh" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="buttonBrowseSsh" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="textBoxOpenSsh" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="textBoxPutty" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="buttonBrowsePutty" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="sshConsoleGroupBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -395,7 +395,7 @@
     <value>537, 200</value>
   </data>
   <data name="sshConsoleGroupBox.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>0</value>
   </data>
   <data name="sshConsoleGroupBox.Text" xml:space="preserve">
     <value>External SSH Console</value>
@@ -428,7 +428,7 @@
     <value>543, 288</value>
   </data>
   <data name="externalToolsLayoutPanel.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;externalToolsLayoutPanel.Name" xml:space="preserve">
     <value>externalToolsLayoutPanel</value>
@@ -443,7 +443,7 @@
     <value>0</value>
   </data>
   <data name="externalToolsLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="sshClientGroupBox" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Percent,100,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="sshConsoleGroupBox" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Percent,100,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="tooltipValidation.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>

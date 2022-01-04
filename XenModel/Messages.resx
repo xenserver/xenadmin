@@ -2889,7 +2889,7 @@ Do you want to assign it to the schedule '{2}' instead?</value>
     <value>Your external SSH console could not be found. Please check that you have selected a valid file.</value>
   </data>
   <data name="CONFIGURE_SSH_CONSOLE_TITLE" xml:space="preserve">
-    <value>Configure SSH Console</value>
+    <value>Configure &amp;SSH Console</value>
   </data>
   <data name="CONFIGURING_WLB" xml:space="preserve">
     <value>Configuring Workload Balancing </value>
