@@ -150,9 +150,6 @@
   <data name="Description-VM.ha_restart_priority.Restart" xml:space="preserve">
     <value>VM の再起動を常に試行します</value>
   </data>
-  <data name="Description-host.system_status-CVSM" xml:space="preserve">
-    <value>[Citrix] StorageLink の構成設定</value>
-  </data>
   <data name="Description-host.system_status-X11" xml:space="preserve">
     <value>X サーバーのログ ファイル</value>
   </data>
@@ -211,13 +208,13 @@
     <value>ネットワーク インターフェイス、ルーティング テーブル、ファイアウォールの現在の状態</value>
   </data>
   <data name="Description-host.system_status-NVIDIA-logs" xml:space="preserve">
-    <value>NVIDIA グラフィック ドライバーの問題を診断するのに役立つログと詳細が含まれています。</value>
+    <value>NVIDIA グラフィック ドライバーの問題を診断するのに役立つログと詳細が含まれています</value>
   </data>
   <data name="Description-host.system_status-oem" xml:space="preserve">
-    <value>OEM プロバイダ固有のデータを収集します。</value>
+    <value>OEM プロバイダ固有のデータを収集します</value>
   </data>
   <data name="Description-host.system_status-pam" xml:space="preserve">
-    <value>[XenServer] の PAM (Pluggable Authentication Modules) により使用される構成ファイルです。</value>
+    <value>PAM (Pluggable Authentication Modules) により使用される構成ファイルです。</value>
   </data>
   <data name="Description-host.system_status-persistent-stats" xml:space="preserve">
     <value>永続的なパフォーマンス統計値</value>
@@ -244,13 +241,13 @@
     <value>このプールを監視している WLB サーバーからのログと状態に関する情報です。</value>
   </data>
   <data name="Description-host.system_status-xapi" xml:space="preserve">
-    <value>[XenServer] デーモンの内部ログ</value>
+    <value>サーバー デーモンの内部ログ</value>
   </data>
   <data name="Description-host.system_status-xapi-debug" xml:space="preserve">
-    <value>[XenServer] デーモン クラッシュ ダンプ</value>
+    <value>サーバー デーモン クラッシュ ダンプ</value>
   </data>
   <data name="Description-host.system_status-xapi-subprocess" xml:space="preserve">
-    <value>[XenServer] デーモン プロセスの詳細</value>
+    <value>サーバー デーモン プロセスの詳細</value>
   </data>
   <data name="Description-host.system_status-xen-info" xml:space="preserve">
     <value>ハイパーバイザーのバージョンと現在の状態</value>
@@ -259,7 +256,7 @@
     <value>VM 内部診断</value>
   </data>
   <data name="Description-host.system_status-xenserver-config" xml:space="preserve">
-    <value>[XenServer] のバージョンとビルドの情報、プライマリ ハード ディスクの場所、プール構成などの詳細</value>
+    <value>ハイパーバイザーのバージョンとビルドの情報、プライマリ ハード ディスクの場所、プール構成などの詳細</value>
   </data>
   <data name="Description-host.system_status-xenserver-databases" xml:space="preserve">
     <value>サーバーの状態に関する情報を格納するデータベース</value>
@@ -301,7 +298,7 @@
     <value>PowerShell プラグインを使用するには、PowerShell をインストールしておく必要があります。PowerShell は、Microsoft 社の Web サイトからダウンロードできます。</value>
   </data>
   <data name="Exception-PowerShellSnapInNotPresent" xml:space="preserve">
-    <value>[XenServer] PowerShell コマンドを使用するには、XenServerPSModule をインストールしておく必要があります。XenServerPSModule は SDK に含まれています。</value>
+    <value>サーバーで PowerShell コマンドを実行するには、XenServerPSModule をインストールしておく必要があります。XenServerPSModule は SDK に含まれています。</value>
   </data>
   <data name="Exception-SearchParseFailed" xml:space="preserve">
     <value>プラグイン '{1}' の検索 '{0}' を構文解析できません。</value>
@@ -543,9 +540,6 @@
   <data name="Label-host.VMMemory" xml:space="preserve">
     <value>VM</value>
   </data>
-  <data name="Label-host.XenMemory" xml:space="preserve">
-    <value>[XenServer]</value>
-  </data>
   <data name="Label-host.address" xml:space="preserve">
     <value>アドレス</value>
   </data>
@@ -603,9 +597,6 @@
   <data name="Label-host.software_version-product_version" xml:space="preserve">
     <value>バージョン</value>
   </data>
-  <data name="Label-host.system_status-CVSM" xml:space="preserve">
-    <value>[Citrix] StorageLink 構成</value>
-  </data>
   <data name="Label-host.system_status-X11" xml:space="preserve">
     <value>X サーバー ログ</value>
   </data>
@@ -619,7 +610,7 @@
     <value>ブート ローダー構成</value>
   </data>
   <data name="Label-host.system_status-client-logs" xml:space="preserve">
-    <value>[XenCenter] ログ</value>
+    <value>{0} ログ</value>
   </data>
   <data name="Label-host.system_status-device-model" xml:space="preserve">
     <value>デバイスのモデル</value>
@@ -697,13 +688,13 @@
     <value>ワークロード バランスの状態</value>
   </data>
   <data name="Label-host.system_status-xapi" xml:space="preserve">
-    <value>[XenServer] デーモンの内部ログ</value>
+    <value>サーバー デーモンの内部ログ</value>
   </data>
   <data name="Label-host.system_status-xapi-debug" xml:space="preserve">
-    <value>[XenServer] デーモン クラッシュ ダンプ</value>
+    <value>サーバー デーモン クラッシュ ダンプ</value>
   </data>
   <data name="Label-host.system_status-xapi-subprocess" xml:space="preserve">
-    <value>[XenServer] デーモン サブプロセス</value>
+    <value>サーバー デーモン サブプロセス</value>
   </data>
   <data name="Label-host.system_status-xen-info" xml:space="preserve">
     <value>ハイパーバイザー構成</value>
@@ -712,19 +703,19 @@
     <value>VM 内部診断</value>
   </data>
   <data name="Label-host.system_status-xenserver-config" xml:space="preserve">
-    <value>[XenServer] 構成</value>
+    <value>サーバー構成</value>
   </data>
   <data name="Label-host.system_status-xenserver-databases" xml:space="preserve">
-    <value>[XenServer] データベース</value>
+    <value>サーバー データベース</value>
   </data>
   <data name="Label-host.system_status-xenserver-domains" xml:space="preserve">
-    <value>[XenServer] ドメイン一覧</value>
+    <value>サーバー ドメイン一覧</value>
   </data>
   <data name="Label-host.system_status-xenserver-install" xml:space="preserve">
-    <value>[XenServer] インストール ログ ファイル</value>
+    <value>サーバー インストール ログ ファイル</value>
   </data>
   <data name="Label-host.system_status-xenserver-logs" xml:space="preserve">
-    <value>[XenServer] ログ</value>
+    <value>サーバー ログ</value>
   </data>
   <data name="Label-host.system_status-xha-liveset" xml:space="preserve">
     <value>高可用性ライブセット</value>
@@ -901,7 +892,7 @@
     <value>空きエージェント メモリ</value>
   </data>
   <data name="Label-performance.xapi_latency" xml:space="preserve">
-    <value>[XenServer] ヘルスチェック遅延</value>
+    <value>サーバー ヘルス チェック遅延</value>
   </data>
   <data name="Label-performance.xapi_live_memory_kib" xml:space="preserve">
     <value>エージェント メモリ ライブ</value>
@@ -967,10 +958,10 @@
     <value>高可用性設定</value>
   </data>
   <data name="Message.action-license_does_not_support_pooling" xml:space="preserve">
-    <value>[XenServer] のオンライン購入</value>
+    <value>ライセンスのオンライン購入</value>
   </data>
   <data name="Message.action-license_expires_soon" xml:space="preserve">
-    <value>[XenServer] のオンライン購入</value>
+    <value>ライセンスのオンライン購入</value>
   </data>
   <data name="Message.action-multipath_periodic_alert" xml:space="preserve">
     <value>ログ ファイルの表示</value>
@@ -1073,6 +1064,9 @@
   <data name="Message.body-license_server_unreachable" xml:space="preserve">
     <value>指定されたアドレスおよびポートでランセンス サーバーに接続できないため、{0} にライセンスがチェックアウトされませんでした。接続設定およびライセンス サーバーが動作していることを確認してください。</value>
   </data>
+  <data name="Message.body-tls_verification_emergency_disabled" xml:space="preserve">
+    <value>証明書の検証はプールで有効になっていますが、サーバー '{0}' で上書きされています。</value>
+  </data>
   <data name="Message.body-metadata_lun_broken" xml:space="preserve">
     <value>プール '{0}' で 高可用性メタデータ ディスクにアクセスできません。アクセスが復元されるまで、サーバー障害時のプール メタデータの変更内容が失われる場合があります。</value>
   </data>
@@ -1080,22 +1074,22 @@
     <value>プール '{0}' の高可用性メタデータ ディスクへのアクセスが復元されました。これにより、サーバー障害からの回復が正しく実行されるようになりました。</value>
   </data>
   <data name="Message.body-multipath_periodic_alert" xml:space="preserve">
-    <value>サーバー '{0}' でマルチパスの状態に変更がありました。現在、{2} パス中 {1} パスがアクティブです。詳しくは、[XenCenter] のログを参照してください。</value>
+    <value>サーバー '{0}' でマルチパスの状態に変更がありました。現在、{2} パス中 {1} パスがアクティブです。詳しくは、アプリケーション ログを参照してください。</value>
   </data>
   <data name="Message.body-multipath_periodic_alert_healthy" xml:space="preserve">
-    <value>プール '{0}' のサーバーでマルチパスの状態に変更がありました。現在、すべてのパスがアクティブです。詳しくは、[XenCenter] のログを参照してください。</value>
+    <value>プール '{0}' のサーバーでマルチパスの状態に変更がありました。現在、すべてのパスがアクティブです。詳しくは、アプリケーション ログを参照してください。</value>
   </data>
   <data name="Message.body-multipath_periodic_alert_healthy_standalone" xml:space="preserve">
-    <value>サーバー '{0}' でマルチパスの状態に変更がありました。現在、すべてのパスがアクティブです。詳しくは、[XenCenter] のログを参照してください。</value>
+    <value>サーバー '{0}' でマルチパスの状態に変更がありました。現在、すべてのパスがアクティブです。詳しくは、アプリケーション ログを参照してください。</value>
   </data>
   <data name="Message.body-multipath_periodic_alert_summary" xml:space="preserve">
-    <value>プール '{0}' のサーバーでマルチパスの状態に変更がありました。現在、次のサーバーにアクティブでないパスがあります。{1}。詳しくは、[XenCenter] のログを参照してください。</value>
+    <value>プール '{0}' のサーバーでマルチパスの状態に変更がありました。現在、次のサーバーにアクティブでないパスがあります。{1}。詳しくは、アプリケーション ログを参照してください。</value>
   </data>
   <data name="Message.body-pbd_plug_failed_on_server_start" xml:space="preserve">
     <value>サーバー '{0}' の起動時にストレージリポジトリを接続できませんでした。</value>
   </data>
   <data name="Message.body-pool_master_transition" xml:space="preserve">
-    <value>現在、サーバー '{0}' がプール '{1}' のマスターとして動作しています。</value>
+    <value>現在、サーバー '{0}' がプール '{1}' のコーディネーターとして動作しています。</value>
   </data>
   <data name="Message.body-vbd_qos_failed" xml:space="preserve">
     <value>仮想マシン '{1}' のディスク '{0}' の QoS (サービス品質) 設定を適用できません。</value>
@@ -1301,6 +1295,9 @@
   <data name="Message.name-license_server_unreachable" xml:space="preserve">
     <value>ライセンス サーバーに接続できません。</value>
   </data>
+  <data name="Message.name-tls_verification_emergency_disabled" xml:space="preserve">
+    <value>証明書の検証は無効になっています。</value>
+  </data>
   <data name="Message.name-metadata_lun_broken" xml:space="preserve">
     <value>高可用性メタデータ ディスクへのアクセス中断</value>
   </data>
@@ -1314,7 +1311,7 @@
     <value>サーバー起動時のストレージ接続の失敗</value>
   </data>
   <data name="Message.name-pool_master_transition" xml:space="preserve">
-    <value>プール マスターの変更</value>
+    <value>プール コーディネーターが変更されました</value>
   </data>
   <data name="Message.name-vbd_qos_failed" xml:space="preserve">
     <value>VM ディスク QoS の失敗</value>
@@ -1475,9 +1472,6 @@
   <data name="SR.name_description-local-storage-host" xml:space="preserve">
     <value>{0} のローカル ストレージ</value>
   </data>
-  <data name="SR.name_description-xenserver-tools" xml:space="preserve">
-    <value>[Citrix VM Tools] ISO</value>
-  </data>
   <data name="SR.name_label-ebs" xml:space="preserve">
     <value>EBS</value>
   </data>
@@ -1502,17 +1496,11 @@
   <data name="SR.name_label-local-storage-host" xml:space="preserve">
     <value>{0} のローカル ストレージ</value>
   </data>
-  <data name="SR.name_label-xenserver-tools" xml:space="preserve">
-    <value>[Citrix VM Tools]</value>
-  </data>
   <data name="VM.TemplateDescription-Demo Linux VM" xml:space="preserve">
     <value>このテンプレートを使用して、デモ用またはテスト用のビルトイン Linux ディストリビューションが動作する Linux 仮想マシンを作成できます。業務での使用は推奨されません。</value>
   </data>
   <data name="VM.TemplateDescription-Other install media" xml:space="preserve">
     <value>一覧にないオペレーティング システムを使用する場合は、このテンプレートを選択します。このテンプレートは、詳しい知識がある管理者向けです。また、弊社の製品は、標準テンプレートでサポートされる特定のディストリビューションおよびバージョンでのみ、動作テストが実施されていることをご了承ください。</value>
-  </data>
-  <data name="VM.TemplateDescription-Xen API SDK" xml:space="preserve">
-    <value>このテンプレートを使用して、[XenServer] Software Development Kit (SDK) API VM を作成できます。 </value>
   </data>
   <data name="SR.name_description-local-hotplug-disk" xml:space="preserve">
     <value>物理リムーバブル ストレージ</value>
@@ -1854,16 +1842,16 @@
     <value>GFS2</value>
   </data>
   <data name="Description-host.system_status-v6d" xml:space="preserve">
-    <value>[XenServer] ライセンス デーモン ログ</value>
+    <value>サーバー ライセンス デーモン ログ</value>
   </data>
   <data name="Description-host.system_status-xapi-clusterd" xml:space="preserve">
-    <value>[XenServer] ツールスタックのクラスター管理デーモンによって生成されたログ。</value>
+    <value>ツールスタックのクラスター管理デーモンによって生成されたログ。</value>
   </data>
   <data name="Label-host.system_status-v6d" xml:space="preserve">
-    <value>[XenServer] ライセンス デーモン</value>
+    <value>サーバー ライセンス デーモン</value>
   </data>
   <data name="Label-host.system_status-xapi-clusterd" xml:space="preserve">
-    <value>[XenServer] クラスター管理デーモン</value>
+    <value>サーバー クラスター管理デーモン</value>
   </data>
   <data name="Message.body-vm_secure_boot_failed" xml:space="preserve">
     <value>仮想マシン '{0}' はセキュア ブートの検証をパスしませんでした。</value>

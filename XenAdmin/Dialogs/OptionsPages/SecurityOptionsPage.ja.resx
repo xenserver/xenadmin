@@ -151,7 +151,7 @@
     <value>0</value>
   </data>
   <data name="SSLLabel.Text" xml:space="preserve">
-    <value>管理対象サーバーで新規または変更された証明書が検出された場合には警告を表示するように [XenCenter] を構成できます。</value>
+    <value>管理対象サーバーで新規または変更された証明書が検出された場合には警告を表示するように {0} を構成できます。</value>
   </data>
   <data name="&gt;&gt;SSLLabel.Name" xml:space="preserve">
     <value>SSLLabel</value>
@@ -247,7 +247,7 @@
     <value>3</value>
   </data>
   <data name="labelReminder.Text" xml:space="preserve">
-    <value>プール シークレットを入れ替えるたびにサーバーのルート パスワードを変更するリマインダーを表示するように [XenCenter] を構成できます。</value>
+    <value>プール シークレットを入れ替えるたびにサーバーのルート パスワードを変更するリマインダーを表示するように {0} を構成できます。</value>
   </data>
   <data name="&gt;&gt;labelReminder.Name" xml:space="preserve">
     <value>labelReminder</value>

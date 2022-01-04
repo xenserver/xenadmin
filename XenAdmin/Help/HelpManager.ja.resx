@@ -183,7 +183,7 @@
   <data name="ChangeHomeDialog" xml:space="preserve">
     <value>vms-properties</value>
   </data>
-  <data name="ChangeMasterPasswordDialog" xml:space="preserve">
+  <data name="ChangeMainPasswordDialog" xml:space="preserve">
     <value>hosts-connect-save</value>
   </data>
   <data name="ChangeServerPasswordDialog" xml:space="preserve">
@@ -423,7 +423,7 @@
   <data name="EnableRDPonVM" xml:space="preserve">
     <value>tabs</value>
   </data>
-  <data name="EnterMasterPasswordDialog" xml:space="preserve">
+  <data name="EnterMainPasswordDialog" xml:space="preserve">
     <value>hosts-connect-save</value>
   </data>
   <data name="EvacuateHostDialog" xml:space="preserve">
@@ -960,7 +960,7 @@
   <data name="SelectVMsToSuspendDialog" xml:space="preserve">
     <value>vms-suspend</value>
   </data>
-  <data name="SetMasterPasswordDialog" xml:space="preserve">
+  <data name="SetMainPasswordDialog" xml:space="preserve">
     <value>hosts-connect-save</value>
   </data>
   <data name="StorageUsageMessageAlert" xml:space="preserve">

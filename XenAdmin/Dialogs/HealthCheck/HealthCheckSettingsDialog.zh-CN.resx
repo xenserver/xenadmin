@@ -898,7 +898,7 @@
     <value>4</value>
   </data>
   <data name="decentGroupBox1.Text" xml:space="preserve">
-    <value>通过 [Citrix] Insight Services 进行身份验证</value>
+    <value>在 {0} 中进行身份验证</value>
   </data>
   <data name="&gt;&gt;decentGroupBox1.Name" xml:space="preserve">
     <value>decentGroupBox1</value>
@@ -940,7 +940,7 @@
     <value>10</value>
   </data>
   <data name="rubricLabel.Text" xml:space="preserve">
-    <value>运行状况检查会自动将服务器状态报告上载到 [Citrix] Insight Services，具体取决于您的 [XenServer] 池上配置的预定义计划。</value>
+    <value>运行状况检查会自动将服务器状态报告上载到 {0}，具体取决于在您的 {1} 池上配置的预定义计划。</value>
   </data>
   <data name="&gt;&gt;rubricLabel.Name" xml:space="preserve">
     <value>rubricLabel</value>
@@ -1144,7 +1144,7 @@
     <value>24</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>请输入运行状况检查服务连接到 [XenServer] 时使用的凭据。</value>
+    <value>请输入运行状况检查服务连接到 {0} 时使用的凭据。</value>
   </data>
   <data name="label3.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -1309,7 +1309,7 @@
     <value>21</value>
   </data>
   <data name="currentXsCredentialsRadioButton.Text" xml:space="preserve">
-    <value>使用当前的 [XenCenter] 凭据(&amp;R)</value>
+    <value>使用当前的 {0} 凭据(&amp;R)</value>
   </data>
   <data name="&gt;&gt;currentXsCredentialsRadioButton.Name" xml:space="preserve">
     <value>currentXsCredentialsRadioButton</value>
@@ -1438,7 +1438,7 @@
     <value>3</value>
   </data>
   <data name="decentGroupBoxXSCredentials.Text" xml:space="preserve">
-    <value>[XenServer] 凭据</value>
+    <value>{0} 凭据</value>
   </data>
   <data name="&gt;&gt;decentGroupBoxXSCredentials.Name" xml:space="preserve">
     <value>decentGroupBoxXSCredentials</value>

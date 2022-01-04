@@ -139,7 +139,7 @@
     <value>COM,FLOPPY,ISO,DISPLAY</value>
   </data>
   <data name="OTHER_SYSTEM_SETTING_DESCRIPTION_1" xml:space="preserve">
-    <value>{0} 专有信息</value>
+    <value>{0} 的特定信息</value>
   </data>
   <data name="OTHER_SYSTEM_SETTING_DESCRIPTION_2" xml:space="preserve">
     <value>启动顺序: CD/DVD - 网络 - 磁盘</value>

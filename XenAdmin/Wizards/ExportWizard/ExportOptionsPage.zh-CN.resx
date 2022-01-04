@@ -157,7 +157,7 @@
     <value>m_tableLayoutPanelEncryption</value>
   </data>
   <data name="&gt;&gt;m_labelPwd.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="m_textBoxPwd.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -181,31 +181,40 @@
     <value>m_tableLayoutPanelEncryption</value>
   </data>
   <data name="&gt;&gt;m_textBoxPwd.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
-  <data name="m_textBoxReEnterPwd.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="m_labelStrength.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
   </data>
-  <data name="m_textBoxReEnterPwd.Location" type="System.Drawing.Point, System.Drawing">
-    <value>125, 52</value>
+  <data name="m_labelStrength.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="m_textBoxReEnterPwd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>194, 19</value>
+  <data name="m_labelStrength.Location" type="System.Drawing.Point, System.Drawing">
+    <value>328, 29</value>
   </data>
-  <data name="m_textBoxReEnterPwd.TabIndex" type="System.Int32, mscorlib">
-    <value>36</value>
+  <data name="m_labelStrength.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 13</value>
   </data>
-  <data name="&gt;&gt;m_textBoxReEnterPwd.Name" xml:space="preserve">
-    <value>m_textBoxReEnterPwd</value>
+  <data name="m_labelStrength.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
-  <data name="&gt;&gt;m_textBoxReEnterPwd.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="m_labelStrength.Text" xml:space="preserve">
+    <value>label1</value>
   </data>
-  <data name="&gt;&gt;m_textBoxReEnterPwd.Parent" xml:space="preserve">
+  <data name="m_labelStrength.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;m_labelStrength.Name" xml:space="preserve">
+    <value>m_labelStrength</value>
+  </data>
+  <data name="&gt;&gt;m_labelStrength.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_labelStrength.Parent" xml:space="preserve">
     <value>m_tableLayoutPanelEncryption</value>
   </data>
-  <data name="&gt;&gt;m_textBoxReEnterPwd.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;m_labelStrength.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="m_labelReEnterPwd.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Left</value>
@@ -235,7 +244,31 @@
     <value>m_tableLayoutPanelEncryption</value>
   </data>
   <data name="&gt;&gt;m_labelReEnterPwd.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
+  </data>
+  <data name="m_textBoxReEnterPwd.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="m_textBoxReEnterPwd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>128, 52</value>
+  </data>
+  <data name="m_textBoxReEnterPwd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 20</value>
+  </data>
+  <data name="m_textBoxReEnterPwd.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;m_textBoxReEnterPwd.Name" xml:space="preserve">
+    <value>m_textBoxReEnterPwd</value>
+  </data>
+  <data name="&gt;&gt;m_textBoxReEnterPwd.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_textBoxReEnterPwd.Parent" xml:space="preserve">
+    <value>m_tableLayoutPanelEncryption</value>
+  </data>
+  <data name="&gt;&gt;m_textBoxReEnterPwd.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="m_pictureBoxTick.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Left</value>
@@ -259,40 +292,7 @@
     <value>m_tableLayoutPanelEncryption</value>
   </data>
   <data name="&gt;&gt;m_pictureBoxTick.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="m_labelStrength.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="m_labelStrength.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="m_labelStrength.Location" type="System.Drawing.Point, System.Drawing">
-    <value>325, 24</value>
-  </data>
-  <data name="m_labelStrength.Size" type="System.Drawing.Size, System.Drawing">
-    <value>260, 25</value>
-  </data>
-  <data name="m_labelStrength.TabIndex" type="System.Int32, mscorlib">
-    <value>34</value>
-  </data>
-  <data name="m_labelStrength.Text" xml:space="preserve">
-    <value>label1</value>
-  </data>
-  <data name="m_labelStrength.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;m_labelStrength.Name" xml:space="preserve">
-    <value>m_labelStrength</value>
-  </data>
-  <data name="&gt;&gt;m_labelStrength.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;m_labelStrength.Parent" xml:space="preserve">
-    <value>m_tableLayoutPanelEncryption</value>
-  </data>
-  <data name="&gt;&gt;m_labelStrength.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="m_tableLayoutPanelEncryption.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -322,7 +322,7 @@
     <value>3</value>
   </data>
   <data name="m_tableLayoutPanelEncryption.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="m_labelPwd" Row="1" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="m_textBoxPwd" Row="1" RowSpan="1" Column="2" ColumnSpan="1" />&lt;Control Name="m_textBoxReEnterPwd" Row="2" RowSpan="1" Column="2" ColumnSpan="1" />&lt;Control Name="m_labelReEnterPwd" Row="2" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="m_pictureBoxTick" Row="2" RowSpan="1" Column="3" ColumnSpan="1" />&lt;Control Name="m_labelStrength" Row="1" RowSpan="1" Column="3" ColumnSpan="1" />&lt;Control Name="m_checkBoxEncrypt" Row="0" RowSpan="1" Column="0" ColumnSpan="4" />&lt;/Controls>&lt;Columns Styles="Absolute,20,AutoSize,0,Absolute,200,Percent,100" />&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20" />&lt;/TableLayoutSettings></value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="m_checkBoxEncrypt" Row="0" RowSpan="1" Column="0" ColumnSpan="4" />&lt;Control Name="m_labelPwd" Row="1" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="m_textBoxPwd" Row="1" RowSpan="1" Column="2" ColumnSpan="1" />&lt;Control Name="m_labelStrength" Row="1" RowSpan="1" Column="3" ColumnSpan="1" />&lt;Control Name="m_labelReEnterPwd" Row="2" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="m_textBoxReEnterPwd" Row="2" RowSpan="1" Column="2" ColumnSpan="1" />&lt;Control Name="m_pictureBoxTick" Row="2" RowSpan="1" Column="3" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="Absolute,20,AutoSize,0,Absolute,200,Percent,100" />&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20" />&lt;/TableLayoutSettings></value>
   </data>
   <data name="m_checkBoxEncrypt.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
@@ -346,7 +346,7 @@
     <value>m_tableLayoutPanelEncryption</value>
   </data>
   <data name="&gt;&gt;m_checkBoxEncrypt.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>0</value>
   </data>
   <data name="m_checkBoxManifest.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -378,119 +378,386 @@
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="m_checkBoxCompressFiles.AutoSize" type="System.Boolean, mscorlib">
+  <data name="sectionHeaderLabel1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="m_checkBoxCompressFiles.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="m_checkBoxCompressFiles.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="m_checkBoxCompressFiles.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 243</value>
-  </data>
-  <data name="m_checkBoxCompressFiles.Size" type="System.Drawing.Size, System.Drawing">
-    <value>588, 18</value>
-  </data>
-  <data name="m_checkBoxCompressFiles.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="m_checkBoxCompressFiles.Text" xml:space="preserve">
-    <value>压缩 OVF 文件(&amp;O)</value>
-  </data>
-  <data name="&gt;&gt;m_checkBoxCompressFiles.Name" xml:space="preserve">
-    <value>m_checkBoxCompressFiles</value>
-  </data>
-  <data name="&gt;&gt;m_checkBoxCompressFiles.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;m_checkBoxCompressFiles.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;m_checkBoxCompressFiles.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="m_checkBoxCreateOVA.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="m_checkBoxCreateOVA.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="m_checkBoxCreateOVA.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="m_checkBoxCreateOVA.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 219</value>
-  </data>
-  <data name="m_checkBoxCreateOVA.Size" type="System.Drawing.Size, System.Drawing">
-    <value>588, 18</value>
-  </data>
-  <data name="m_checkBoxCreateOVA.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="m_checkBoxCreateOVA.Text" xml:space="preserve">
-    <value>创建 OVA 包(单个 OVA 导出文件)(&amp;K)</value>
-  </data>
-  <data name="&gt;&gt;m_checkBoxCreateOVA.Name" xml:space="preserve">
-    <value>m_checkBoxCreateOVA</value>
-  </data>
-  <data name="&gt;&gt;m_checkBoxCreateOVA.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;m_checkBoxCreateOVA.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;m_checkBoxCreateOVA.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="sectionHeaderLabel3.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="sectionHeaderLabel3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="sectionHeaderLabel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
-  <data name="sectionHeaderLabel3.FocusControl" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="sectionHeaderLabel1.FocusControl" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value/>
   </data>
-  <data name="sectionHeaderLabel3.LabelHorizontalAlignment" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+  <data name="sectionHeaderLabel1.LabelHorizontalAlignment" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Left</value>
   </data>
-  <data name="sectionHeaderLabel3.LabelPadding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="sectionHeaderLabel1.LabelPadding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="sectionHeaderLabel3.LabelText" xml:space="preserve">
-    <value>输出文件选项</value>
+  <data name="sectionHeaderLabel1.LabelText" xml:space="preserve">
+    <value>清单和数字签名</value>
   </data>
-  <data name="sectionHeaderLabel3.LinePadding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="sectionHeaderLabel1.LinePadding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="sectionHeaderLabel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 213</value>
+  <data name="sectionHeaderLabel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
   </data>
-  <data name="sectionHeaderLabel3.MinimumSize" type="System.Drawing.Size, System.Drawing">
+  <data name="sectionHeaderLabel1.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>0, 14</value>
   </data>
-  <data name="sectionHeaderLabel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>588, 0</value>
+  <data name="sectionHeaderLabel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>588, 14</value>
   </data>
-  <data name="sectionHeaderLabel3.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+  <data name="sectionHeaderLabel1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="sectionHeaderLabel3.UseMnemonic" type="System.Boolean, mscorlib">
+  <data name="sectionHeaderLabel1.UseMnemonic" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;sectionHeaderLabel3.Name" xml:space="preserve">
-    <value>sectionHeaderLabel3</value>
+  <data name="&gt;&gt;sectionHeaderLabel1.Name" xml:space="preserve">
+    <value>sectionHeaderLabel1</value>
   </data>
-  <data name="&gt;&gt;sectionHeaderLabel3.Type" xml:space="preserve">
+  <data name="&gt;&gt;sectionHeaderLabel1.Type" xml:space="preserve">
     <value>XenAdmin.Controls.SectionHeaderLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;sectionHeaderLabel3.Parent" xml:space="preserve">
+  <data name="&gt;&gt;sectionHeaderLabel1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;sectionHeaderLabel3.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;sectionHeaderLabel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tableLayoutPanel2.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="tableLayoutPanel2.ColumnCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="m_tableLayoutPanelManifest.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="m_tableLayoutPanelManifest.ColumnCount" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="m_checkBoxSign.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="m_checkBoxSign.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="m_checkBoxSign.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="m_checkBoxSign.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 3</value>
+  </data>
+  <data name="m_checkBoxSign.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 17</value>
+  </data>
+  <data name="m_checkBoxSign.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="m_checkBoxSign.Text" xml:space="preserve">
+    <value>签署 OVF 包(&amp;S)</value>
+  </data>
+  <data name="&gt;&gt;m_checkBoxSign.Name" xml:space="preserve">
+    <value>m_checkBoxSign</value>
+  </data>
+  <data name="&gt;&gt;m_checkBoxSign.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_checkBoxSign.Parent" xml:space="preserve">
+    <value>m_tableLayoutPanelManifest</value>
+  </data>
+  <data name="&gt;&gt;m_checkBoxSign.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="m_labelCertificate.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="m_labelCertificate.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="m_labelCertificate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="m_labelCertificate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>43, 31</value>
+  </data>
+  <data name="m_labelCertificate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>81, 13</value>
+  </data>
+  <data name="m_labelCertificate.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="m_labelCertificate.Text" xml:space="preserve">
+    <value>证书路径(&amp;C):</value>
+  </data>
+  <data name="&gt;&gt;m_labelCertificate.Name" xml:space="preserve">
+    <value>m_labelCertificate</value>
+  </data>
+  <data name="&gt;&gt;m_labelCertificate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_labelCertificate.Parent" xml:space="preserve">
+    <value>m_tableLayoutPanelManifest</value>
+  </data>
+  <data name="&gt;&gt;m_labelCertificate.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="m_textBoxCertificate.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left, Right</value>
+  </data>
+  <data name="m_textBoxCertificate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>163, 27</value>
+  </data>
+  <data name="m_textBoxCertificate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>313, 20</value>
+  </data>
+  <data name="m_textBoxCertificate.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
+  </data>
+  <data name="&gt;&gt;m_textBoxCertificate.Name" xml:space="preserve">
+    <value>m_textBoxCertificate</value>
+  </data>
+  <data name="&gt;&gt;m_textBoxCertificate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_textBoxCertificate.Parent" xml:space="preserve">
+    <value>m_tableLayoutPanelManifest</value>
+  </data>
+  <data name="&gt;&gt;m_textBoxCertificate.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="m_buttonBrowseCert.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="m_buttonBrowseCert.Location" type="System.Drawing.Point, System.Drawing">
+    <value>482, 26</value>
+  </data>
+  <data name="m_buttonBrowseCert.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="m_buttonBrowseCert.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="m_buttonBrowseCert.Text" xml:space="preserve">
+    <value>浏览(&amp;B)...</value>
+  </data>
+  <data name="&gt;&gt;m_buttonBrowseCert.Name" xml:space="preserve">
+    <value>m_buttonBrowseCert</value>
+  </data>
+  <data name="&gt;&gt;m_buttonBrowseCert.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_buttonBrowseCert.Parent" xml:space="preserve">
+    <value>m_tableLayoutPanelManifest</value>
+  </data>
+  <data name="&gt;&gt;m_buttonBrowseCert.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="m_labelPrivateKeyPwd.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="m_labelPrivateKeyPwd.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="m_labelPrivateKeyPwd.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="m_labelPrivateKeyPwd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>43, 60</value>
+  </data>
+  <data name="m_labelPrivateKeyPwd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 13</value>
+  </data>
+  <data name="m_labelPrivateKeyPwd.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="m_labelPrivateKeyPwd.Text" xml:space="preserve">
+    <value>私钥密码(&amp;W):</value>
+  </data>
+  <data name="&gt;&gt;m_labelPrivateKeyPwd.Name" xml:space="preserve">
+    <value>m_labelPrivateKeyPwd</value>
+  </data>
+  <data name="&gt;&gt;m_labelPrivateKeyPwd.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_labelPrivateKeyPwd.Parent" xml:space="preserve">
+    <value>m_tableLayoutPanelManifest</value>
+  </data>
+  <data name="&gt;&gt;m_labelPrivateKeyPwd.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="m_textBoxPrivateKeyPwd.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left, Right</value>
+  </data>
+  <data name="m_textBoxPrivateKeyPwd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>163, 56</value>
+  </data>
+  <data name="m_textBoxPrivateKeyPwd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>313, 20</value>
+  </data>
+  <data name="m_textBoxPrivateKeyPwd.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;m_textBoxPrivateKeyPwd.Name" xml:space="preserve">
+    <value>m_textBoxPrivateKeyPwd</value>
+  </data>
+  <data name="&gt;&gt;m_textBoxPrivateKeyPwd.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_textBoxPrivateKeyPwd.Parent" xml:space="preserve">
+    <value>m_tableLayoutPanelManifest</value>
+  </data>
+  <data name="&gt;&gt;m_textBoxPrivateKeyPwd.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="m_buttonValidate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>482, 55</value>
+  </data>
+  <data name="m_buttonValidate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="m_buttonValidate.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="m_buttonValidate.Text" xml:space="preserve">
+    <value>验证(&amp;V)</value>
+  </data>
+  <data name="&gt;&gt;m_buttonValidate.Name" xml:space="preserve">
+    <value>m_buttonValidate</value>
+  </data>
+  <data name="&gt;&gt;m_buttonValidate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_buttonValidate.Parent" xml:space="preserve">
+    <value>m_tableLayoutPanelManifest</value>
+  </data>
+  <data name="&gt;&gt;m_buttonValidate.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="m_pictureBoxTickValidate.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="m_pictureBoxTickValidate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>563, 58</value>
+  </data>
+  <data name="m_pictureBoxTickValidate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 16</value>
+  </data>
+  <data name="m_pictureBoxTickValidate.TabIndex" type="System.Int32, mscorlib">
+    <value>62</value>
+  </data>
+  <data name="&gt;&gt;m_pictureBoxTickValidate.Name" xml:space="preserve">
+    <value>m_pictureBoxTickValidate</value>
+  </data>
+  <data name="&gt;&gt;m_pictureBoxTickValidate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_pictureBoxTickValidate.Parent" xml:space="preserve">
+    <value>m_tableLayoutPanelManifest</value>
+  </data>
+  <data name="&gt;&gt;m_pictureBoxTickValidate.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="m_ctrlErrorCert.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="m_ctrlErrorCert.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="m_ctrlErrorCert.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="m_ctrlErrorCert.Error" xml:space="preserve">
+    <value/>
+  </data>
+  <data name="m_ctrlErrorCert.Location" type="System.Drawing.Point, System.Drawing">
+    <value>160, 81</value>
+  </data>
+  <data name="m_ctrlErrorCert.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="m_ctrlErrorCert.Size" type="System.Drawing.Size, System.Drawing">
+    <value>319, 35</value>
+  </data>
+  <data name="m_ctrlErrorCert.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;m_ctrlErrorCert.Name" xml:space="preserve">
+    <value>m_ctrlErrorCert</value>
+  </data>
+  <data name="&gt;&gt;m_ctrlErrorCert.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.Common.PasswordFailure, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;m_ctrlErrorCert.Parent" xml:space="preserve">
+    <value>m_tableLayoutPanelManifest</value>
+  </data>
+  <data name="&gt;&gt;m_ctrlErrorCert.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="m_tableLayoutPanelManifest.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="m_tableLayoutPanelManifest.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 26</value>
+  </data>
+  <data name="m_tableLayoutPanelManifest.RowCount" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="m_tableLayoutPanelManifest.Size" type="System.Drawing.Size, System.Drawing">
+    <value>582, 116</value>
+  </data>
+  <data name="m_tableLayoutPanelManifest.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;m_tableLayoutPanelManifest.Name" xml:space="preserve">
+    <value>m_tableLayoutPanelManifest</value>
+  </data>
+  <data name="&gt;&gt;m_tableLayoutPanelManifest.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_tableLayoutPanelManifest.Parent" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;m_tableLayoutPanelManifest.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="m_tableLayoutPanelManifest.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="m_checkBoxSign" Row="0" RowSpan="1" Column="1" ColumnSpan="2" />&lt;Control Name="m_labelCertificate" Row="1" RowSpan="1" Column="2" ColumnSpan="1" />&lt;Control Name="m_textBoxCertificate" Row="1" RowSpan="1" Column="3" ColumnSpan="1" />&lt;Control Name="m_buttonBrowseCert" Row="1" RowSpan="1" Column="4" ColumnSpan="1" />&lt;Control Name="m_labelPrivateKeyPwd" Row="2" RowSpan="1" Column="2" ColumnSpan="1" />&lt;Control Name="m_textBoxPrivateKeyPwd" Row="2" RowSpan="1" Column="3" ColumnSpan="1" />&lt;Control Name="m_buttonValidate" Row="2" RowSpan="1" Column="4" ColumnSpan="1" />&lt;Control Name="m_pictureBoxTickValidate" Row="2" RowSpan="1" Column="5" ColumnSpan="1" />&lt;Control Name="m_ctrlErrorCert" Row="3" RowSpan="1" Column="3" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="Absolute,20,Absolute,20,AutoSize,0,Percent,100,AutoSize,0,AutoSize,0" />&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,Absolute,35" />&lt;/TableLayoutSettings></value>
+  </data>
+  <data name="tableLayoutPanel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="tableLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 23</value>
+  </data>
+  <data name="tableLayoutPanel2.RowCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>588, 145</value>
+  </data>
+  <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel2.Name" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel2.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="m_checkBoxManifest" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="m_tableLayoutPanelManifest" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="Percent,100" />&lt;Rows Styles="AutoSize,0,AutoSize,0" />&lt;/TableLayoutSettings></value>
   </data>
   <data name="sectionHeaderLabel2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -538,388 +805,175 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;sectionHeaderLabel2.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>2</value>
   </data>
-  <data name="sectionHeaderLabel1.AutoSize" type="System.Boolean, mscorlib">
+  <data name="sectionHeaderLabel3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="sectionHeaderLabel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="sectionHeaderLabel3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
-  <data name="sectionHeaderLabel1.FocusControl" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="sectionHeaderLabel3.FocusControl" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value/>
   </data>
-  <data name="sectionHeaderLabel1.LabelHorizontalAlignment" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+  <data name="sectionHeaderLabel3.LabelHorizontalAlignment" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Left</value>
   </data>
-  <data name="sectionHeaderLabel1.LabelPadding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="sectionHeaderLabel3.LabelPadding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="sectionHeaderLabel1.LabelText" xml:space="preserve">
-    <value>清单和数字签名</value>
+  <data name="sectionHeaderLabel3.LabelText" xml:space="preserve">
+    <value>输出文件选项</value>
   </data>
-  <data name="sectionHeaderLabel1.LinePadding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="sectionHeaderLabel3.LinePadding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="sectionHeaderLabel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
+  <data name="sectionHeaderLabel3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 275</value>
   </data>
-  <data name="sectionHeaderLabel1.MinimumSize" type="System.Drawing.Size, System.Drawing">
+  <data name="sectionHeaderLabel3.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>0, 14</value>
   </data>
-  <data name="sectionHeaderLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>588, 0</value>
+  <data name="sectionHeaderLabel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>588, 14</value>
   </data>
-  <data name="sectionHeaderLabel1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="sectionHeaderLabel3.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
   </data>
-  <data name="sectionHeaderLabel1.UseMnemonic" type="System.Boolean, mscorlib">
+  <data name="sectionHeaderLabel3.UseMnemonic" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;sectionHeaderLabel1.Name" xml:space="preserve">
-    <value>sectionHeaderLabel1</value>
+  <data name="&gt;&gt;sectionHeaderLabel3.Name" xml:space="preserve">
+    <value>sectionHeaderLabel3</value>
   </data>
-  <data name="&gt;&gt;sectionHeaderLabel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;sectionHeaderLabel3.Type" xml:space="preserve">
     <value>XenAdmin.Controls.SectionHeaderLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;sectionHeaderLabel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;sectionHeaderLabel3.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;sectionHeaderLabel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;sectionHeaderLabel3.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="m_checkBoxCreateOVA.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="m_checkBoxCreateOVA.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="m_checkBoxCreateOVA.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 295</value>
+  </data>
+  <data name="m_checkBoxCreateOVA.Size" type="System.Drawing.Size, System.Drawing">
+    <value>203, 17</value>
+  </data>
+  <data name="m_checkBoxCreateOVA.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="tableLayoutPanel2.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="m_checkBoxCreateOVA.Text" xml:space="preserve">
+    <value>创建 OVA 包(单个 .ova 文件)(&amp;K)</value>
   </data>
-  <data name="tableLayoutPanel2.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
+  <data name="&gt;&gt;m_checkBoxCreateOVA.Name" xml:space="preserve">
+    <value>m_checkBoxCreateOVA</value>
   </data>
-  <data name="tableLayoutPanel2.ColumnCount" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="m_tableLayoutPanelManifest.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="m_tableLayoutPanelManifest.ColumnCount" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="m_labelCertificate.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Left</value>
-  </data>
-  <data name="m_labelCertificate.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="m_labelCertificate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="m_labelCertificate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>43, 30</value>
-  </data>
-  <data name="m_labelCertificate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 17</value>
-  </data>
-  <data name="m_labelCertificate.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
-  </data>
-  <data name="m_labelCertificate.Text" xml:space="preserve">
-    <value>证书路径(&amp;C):</value>
-  </data>
-  <data name="&gt;&gt;m_labelCertificate.Name" xml:space="preserve">
-    <value>m_labelCertificate</value>
-  </data>
-  <data name="&gt;&gt;m_labelCertificate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;m_labelCertificate.Parent" xml:space="preserve">
-    <value>m_tableLayoutPanelManifest</value>
-  </data>
-  <data name="&gt;&gt;m_labelCertificate.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="m_labelPrivateKeyPwd.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Left</value>
-  </data>
-  <data name="m_labelPrivateKeyPwd.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="m_labelPrivateKeyPwd.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="m_labelPrivateKeyPwd.Location" type="System.Drawing.Point, System.Drawing">
-    <value>43, 59</value>
-  </data>
-  <data name="m_labelPrivateKeyPwd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 17</value>
-  </data>
-  <data name="m_labelPrivateKeyPwd.TabIndex" type="System.Int32, mscorlib">
-    <value>25</value>
-  </data>
-  <data name="m_labelPrivateKeyPwd.Text" xml:space="preserve">
-    <value>私钥密码(&amp;W):</value>
-  </data>
-  <data name="&gt;&gt;m_labelPrivateKeyPwd.Name" xml:space="preserve">
-    <value>m_labelPrivateKeyPwd</value>
-  </data>
-  <data name="&gt;&gt;m_labelPrivateKeyPwd.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;m_labelPrivateKeyPwd.Parent" xml:space="preserve">
-    <value>m_tableLayoutPanelManifest</value>
-  </data>
-  <data name="&gt;&gt;m_labelPrivateKeyPwd.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="m_checkBoxSign.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Left</value>
-  </data>
-  <data name="m_checkBoxSign.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="m_checkBoxSign.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="m_checkBoxSign.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 3</value>
-  </data>
-  <data name="m_checkBoxSign.Size" type="System.Drawing.Size, System.Drawing">
-    <value>106, 18</value>
-  </data>
-  <data name="m_checkBoxSign.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
-  </data>
-  <data name="m_checkBoxSign.Text" xml:space="preserve">
-    <value>签署 OVF 包(&amp;S)</value>
-  </data>
-  <data name="&gt;&gt;m_checkBoxSign.Name" xml:space="preserve">
-    <value>m_checkBoxSign</value>
-  </data>
-  <data name="&gt;&gt;m_checkBoxSign.Type" xml:space="preserve">
+  <data name="&gt;&gt;m_checkBoxCreateOVA.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;m_checkBoxSign.Parent" xml:space="preserve">
-    <value>m_tableLayoutPanelManifest</value>
-  </data>
-  <data name="&gt;&gt;m_checkBoxSign.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="m_buttonBrowseCert.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="m_buttonBrowseCert.Location" type="System.Drawing.Point, System.Drawing">
-    <value>474, 27</value>
-  </data>
-  <data name="m_buttonBrowseCert.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="m_buttonBrowseCert.TabIndex" type="System.Int32, mscorlib">
-    <value>24</value>
-  </data>
-  <data name="m_buttonBrowseCert.Text" xml:space="preserve">
-    <value>浏览(&amp;B)...</value>
-  </data>
-  <data name="&gt;&gt;m_buttonBrowseCert.Name" xml:space="preserve">
-    <value>m_buttonBrowseCert</value>
-  </data>
-  <data name="&gt;&gt;m_buttonBrowseCert.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;m_buttonBrowseCert.Parent" xml:space="preserve">
-    <value>m_tableLayoutPanelManifest</value>
-  </data>
-  <data name="&gt;&gt;m_buttonBrowseCert.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="m_textBoxPrivateKeyPwd.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Left, Right</value>
-  </data>
-  <data name="m_textBoxPrivateKeyPwd.Location" type="System.Drawing.Point, System.Drawing">
-    <value>135, 56</value>
-  </data>
-  <data name="m_textBoxPrivateKeyPwd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>333, 19</value>
-  </data>
-  <data name="m_textBoxPrivateKeyPwd.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
-  </data>
-  <data name="&gt;&gt;m_textBoxPrivateKeyPwd.Name" xml:space="preserve">
-    <value>m_textBoxPrivateKeyPwd</value>
-  </data>
-  <data name="&gt;&gt;m_textBoxPrivateKeyPwd.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;m_textBoxPrivateKeyPwd.Parent" xml:space="preserve">
-    <value>m_tableLayoutPanelManifest</value>
-  </data>
-  <data name="&gt;&gt;m_textBoxPrivateKeyPwd.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="m_textBoxCertificate.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Left, Right</value>
-  </data>
-  <data name="m_textBoxCertificate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>135, 27</value>
-  </data>
-  <data name="m_textBoxCertificate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>333, 19</value>
-  </data>
-  <data name="m_textBoxCertificate.TabIndex" type="System.Int32, mscorlib">
-    <value>23</value>
-  </data>
-  <data name="&gt;&gt;m_textBoxCertificate.Name" xml:space="preserve">
-    <value>m_textBoxCertificate</value>
-  </data>
-  <data name="&gt;&gt;m_textBoxCertificate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;m_textBoxCertificate.Parent" xml:space="preserve">
-    <value>m_tableLayoutPanelManifest</value>
-  </data>
-  <data name="&gt;&gt;m_textBoxCertificate.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="m_ctrlErrorCert.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="m_ctrlErrorCert.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
-  </data>
-  <data name="m_ctrlErrorCert.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="m_ctrlErrorCert.Error" xml:space="preserve">
-    <value/>
-  </data>
-  <data name="m_ctrlErrorCert.Location" type="System.Drawing.Point, System.Drawing">
-    <value>132, 82</value>
-  </data>
-  <data name="m_ctrlErrorCert.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="m_ctrlErrorCert.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 1</value>
-  </data>
-  <data name="m_ctrlErrorCert.TabIndex" type="System.Int32, mscorlib">
-    <value>28</value>
-  </data>
-  <data name="&gt;&gt;m_ctrlErrorCert.Name" xml:space="preserve">
-    <value>m_ctrlErrorCert</value>
-  </data>
-  <data name="&gt;&gt;m_ctrlErrorCert.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.Common.PasswordFailure, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;m_ctrlErrorCert.Parent" xml:space="preserve">
-    <value>m_tableLayoutPanelManifest</value>
-  </data>
-  <data name="&gt;&gt;m_ctrlErrorCert.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="m_buttonValidate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>474, 56</value>
-  </data>
-  <data name="m_buttonValidate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="m_buttonValidate.TabIndex" type="System.Int32, mscorlib">
-    <value>27</value>
-  </data>
-  <data name="m_buttonValidate.Text" xml:space="preserve">
-    <value>验证(&amp;V)</value>
-  </data>
-  <data name="&gt;&gt;m_buttonValidate.Name" xml:space="preserve">
-    <value>m_buttonValidate</value>
-  </data>
-  <data name="&gt;&gt;m_buttonValidate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;m_buttonValidate.Parent" xml:space="preserve">
-    <value>m_tableLayoutPanelManifest</value>
-  </data>
-  <data name="&gt;&gt;m_buttonValidate.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="m_pictureBoxTickValidate.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Left</value>
-  </data>
-  <data name="m_pictureBoxTickValidate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>555, 59</value>
-  </data>
-  <data name="m_pictureBoxTickValidate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>16, 16</value>
-  </data>
-  <data name="m_pictureBoxTickValidate.TabIndex" type="System.Int32, mscorlib">
-    <value>62</value>
-  </data>
-  <data name="&gt;&gt;m_pictureBoxTickValidate.Name" xml:space="preserve">
-    <value>m_pictureBoxTickValidate</value>
-  </data>
-  <data name="&gt;&gt;m_pictureBoxTickValidate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;m_pictureBoxTickValidate.Parent" xml:space="preserve">
-    <value>m_tableLayoutPanelManifest</value>
-  </data>
-  <data name="&gt;&gt;m_pictureBoxTickValidate.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="m_tableLayoutPanelManifest.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="m_tableLayoutPanelManifest.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 27</value>
-  </data>
-  <data name="m_tableLayoutPanelManifest.RowCount" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="m_tableLayoutPanelManifest.Size" type="System.Drawing.Size, System.Drawing">
-    <value>582, 82</value>
-  </data>
-  <data name="m_tableLayoutPanelManifest.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="&gt;&gt;m_tableLayoutPanelManifest.Name" xml:space="preserve">
-    <value>m_tableLayoutPanelManifest</value>
-  </data>
-  <data name="&gt;&gt;m_tableLayoutPanelManifest.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;m_tableLayoutPanelManifest.Parent" xml:space="preserve">
-    <value>tableLayoutPanel2</value>
-  </data>
-  <data name="&gt;&gt;m_tableLayoutPanelManifest.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="m_tableLayoutPanelManifest.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="m_labelCertificate" Row="1" RowSpan="1" Column="2" ColumnSpan="1" />&lt;Control Name="m_labelPrivateKeyPwd" Row="2" RowSpan="1" Column="2" ColumnSpan="1" />&lt;Control Name="m_checkBoxSign" Row="0" RowSpan="1" Column="1" ColumnSpan="2" />&lt;Control Name="m_buttonBrowseCert" Row="1" RowSpan="1" Column="4" ColumnSpan="1" />&lt;Control Name="m_textBoxPrivateKeyPwd" Row="2" RowSpan="1" Column="3" ColumnSpan="1" />&lt;Control Name="m_textBoxCertificate" Row="1" RowSpan="1" Column="3" ColumnSpan="1" />&lt;Control Name="m_ctrlErrorCert" Row="3" RowSpan="1" Column="3" ColumnSpan="1" />&lt;Control Name="m_buttonValidate" Row="2" RowSpan="1" Column="4" ColumnSpan="1" />&lt;Control Name="m_pictureBoxTickValidate" Row="2" RowSpan="1" Column="5" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="Absolute,20,Absolute,20,AutoSize,0,Percent,100,AutoSize,0,AutoSize,0" />&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,Absolute,35" />&lt;/TableLayoutSettings></value>
-  </data>
-  <data name="tableLayoutPanel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="tableLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 9</value>
-  </data>
-  <data name="tableLayoutPanel2.RowCount" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>588, 112</value>
-  </data>
-  <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel2.Name" xml:space="preserve">
-    <value>tableLayoutPanel2</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;m_checkBoxCreateOVA.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;m_checkBoxCreateOVA.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="m_checkBoxCompressFiles.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="m_checkBoxCompressFiles.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="m_checkBoxCompressFiles.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 318</value>
+  </data>
+  <data name="m_checkBoxCompressFiles.Size" type="System.Drawing.Size, System.Drawing">
+    <value>117, 17</value>
+  </data>
+  <data name="m_checkBoxCompressFiles.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="m_checkBoxManifest" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="m_tableLayoutPanelManifest" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="Percent,100" />&lt;Rows Styles="AutoSize,0,AutoSize,0" />&lt;/TableLayoutSettings></value>
+  <data name="m_checkBoxCompressFiles.Text" xml:space="preserve">
+    <value>压缩包(&amp;O)</value>
+  </data>
+  <data name="&gt;&gt;m_checkBoxCompressFiles.Name" xml:space="preserve">
+    <value>m_checkBoxCompressFiles</value>
+  </data>
+  <data name="&gt;&gt;m_checkBoxCompressFiles.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_checkBoxCompressFiles.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;m_checkBoxCompressFiles.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="labelGzipOva.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelGzipOva.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 338</value>
+  </data>
+  <data name="labelGzipOva.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>20, 0, 3, 0</value>
+  </data>
+  <data name="labelGzipOva.Size" type="System.Drawing.Size, System.Drawing">
+    <value>272, 13</value>
+  </data>
+  <data name="labelGzipOva.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="labelGzipOva.Text" xml:space="preserve">
+    <value>OVA 包将被压缩为 .ova.gz 文件。</value>
+  </data>
+  <data name="&gt;&gt;labelGzipOva.Name" xml:space="preserve">
+    <value>labelGzipOva</value>
+  </data>
+  <data name="&gt;&gt;labelGzipOva.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelGzipOva.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;labelGzipOva.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="labelGzipOvfDisks.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelGzipOvfDisks.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 351</value>
+  </data>
+  <data name="labelGzipOvfDisks.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>20, 0, 3, 0</value>
+  </data>
+  <data name="labelGzipOvfDisks.Size" type="System.Drawing.Size, System.Drawing">
+    <value>358, 13</value>
+  </data>
+  <data name="labelGzipOvfDisks.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="labelGzipOvfDisks.Text" xml:space="preserve">
+    <value>OVF 包的每个磁盘都将被压缩为 .vhd.gz 文件。</value>
+  </data>
+  <data name="&gt;&gt;labelGzipOvfDisks.Name" xml:space="preserve">
+    <value>labelGzipOvfDisks</value>
+  </data>
+  <data name="&gt;&gt;labelGzipOvfDisks.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelGzipOvfDisks.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;labelGzipOvfDisks.ZOrder" xml:space="preserve">
+    <value>8</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -928,7 +982,7 @@
     <value>0, 0</value>
   </data>
   <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>594, 370</value>
@@ -949,7 +1003,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="m_checkBoxCompressFiles" Row="6" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="m_checkBoxCreateOVA" Row="5" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="sectionHeaderLabel3" Row="4" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="m_tableLayoutPanelEncryption" Row="3" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="sectionHeaderLabel2" Row="2" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="sectionHeaderLabel1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="tableLayoutPanel2" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="Percent,100" />&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20" />&lt;/TableLayoutSettings></value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="sectionHeaderLabel1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="tableLayoutPanel2" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="sectionHeaderLabel2" Row="2" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="m_tableLayoutPanelEncryption" Row="3" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="sectionHeaderLabel3" Row="4" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="m_checkBoxCreateOVA" Row="5" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="m_checkBoxCompressFiles" Row="6" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="labelGzipOva" Row="7" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="labelGzipOvfDisks" Row="8" RowSpan="1" Column="0" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="Percent,100" />&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100" />&lt;/TableLayoutSettings></value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

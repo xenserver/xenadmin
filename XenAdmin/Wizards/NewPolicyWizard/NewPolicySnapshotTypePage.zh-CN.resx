@@ -157,7 +157,7 @@
     <value>0</value>
   </data>
   <data name="label6.Text" xml:space="preserve">
-    <value>自 [XenServer] {0} 起，静止快照不再可用。请取消选择此选项以确保成功创建计划快照。</value>
+    <value>自 {0} {1} 起，静止快照不再可用。请取消选择此选项以确保成功创建计划快照。</value>
   </data>
   <data name="&gt;&gt;label6.Name" xml:space="preserve">
     <value>label6</value>
@@ -325,7 +325,7 @@
     <value>请注意，将仅创建此计划中满足以下所有条件的 VM 的计划磁盘和内存快照:
 
 1. 计划创建快照时 VM 正在运行或已暂停。
-2. VM 上已安装 [Citrix VM Tools]。
+2. VM 上已安装 {0}。
 3. 如果为 VM 分配了专用 GPU，此 GPU 将支持磁盘和内存快照。</value>
   </data>
   <data name="&gt;&gt;labelWarning.Name" xml:space="preserve">

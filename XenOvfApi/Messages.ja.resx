@@ -144,9 +144,6 @@
   <data name="EULA_RB_REJECT" xml:space="preserve">
     <value>拒否</value>
   </data>
-  <data name="EULA_TITLE" xml:space="preserve">
-    <value>[Citrix] OVF EULA</value>
-  </data>
   <data name="FAILED_TO_ADD_OS_SECTION" xml:space="preserve">
     <value>仮想システム コレクションが無効なため、オペレーティング システム セクションを追加できませんでした。</value>
   </data>
@@ -184,7 +181,7 @@
     <value>{0} を開けません。</value>
   </data>
   <data name="OVF_CREATED" xml:space="preserve">
-    <value>[XenCenter] ディスク イメージのインポート機能により作成</value>
+    <value>ディスク イメージのインポート機能により作成</value>
   </data>
   <data name="OVF_DEPLOYMENT_CFG_SECTION_MISSING" xml:space="preserve">
     <value>展開構成セクションが見つかりません。</value>

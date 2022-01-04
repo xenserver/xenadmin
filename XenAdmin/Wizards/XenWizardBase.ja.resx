@@ -556,7 +556,7 @@
     <value>1</value>
   </data>
   <data name="labelGeneralInformationMessage.Text" xml:space="preserve">
-    <value>このプールでは [Citrix] Virtual Apps and Desktops ワークロードに対してのみライセンスが有効です</value>
+    <value>情報</value>
   </data>
   <data name="labelGeneralInformationMessage.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>BottomLeft</value>

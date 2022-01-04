@@ -199,7 +199,7 @@
     <value>deprecationBanner1</value>
   </data>
   <data name="&gt;&gt;deprecationBanner1.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.DeprecationBanner, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.DeprecationBanner, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;deprecationBanner1.Parent" xml:space="preserve">
     <value>tableLayoutPanelBanner</value>
@@ -238,7 +238,7 @@
     <value>1</value>
   </data>
   <data name="tableLayoutPanelBanner.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="deprecationBanner1" Row="0" RowSpan="1" Column="1" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="Percent,10,Percent,80,Percent,10" />&lt;Rows Styles="Percent,100" />&lt;/TableLayoutSettings></value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="deprecationBanner1" Row="0" RowSpan="1" Column="0" ColumnSpan="3" />&lt;/Controls>&lt;Columns Styles="Percent,10,Percent,80,Percent,10" />&lt;Rows Styles="Percent,100" />&lt;/TableLayoutSettings></value>
   </data>
   <data name="titleLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Bottom</value>
@@ -298,7 +298,7 @@
     <value>gradientPanel1</value>
   </data>
   <data name="&gt;&gt;gradientPanel1.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.GradientPanel.GradientPanel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.GradientPanel.HorizontalGradientPanel, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;gradientPanel1.Parent" xml:space="preserve">
     <value>$this</value>

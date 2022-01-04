@@ -562,7 +562,7 @@
     <value>5</value>
   </data>
   <data name="linkLabel1.Text" xml:space="preserve">
-    <value>[Citrix] 隐私声明</value>
+    <value>{0} 隐私声明</value>
   </data>
   <data name="&gt;&gt;linkLabel1.Name" xml:space="preserve">
     <value>linkLabel1</value>
