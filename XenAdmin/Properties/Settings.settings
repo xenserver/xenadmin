@@ -197,13 +197,13 @@
     <Setting Name="RemindChangePassword" Roaming="true" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="CustomSshConsole" Type="XenAdmin.Core.SSHClient" Scope="User">
+    <Setting Name="CustomSshConsole" Roaming="true" Type="XenAdmin.SshConsole" Scope="User">
       <Value Profile="(Default)">None</Value>
     </Setting>
-    <Setting Name="PuttyLocation" Type="System.String" Scope="User">
+    <Setting Name="PuttyLocation" Roaming="true" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="OpenSSHLocation" Type="System.String" Scope="User">
+    <Setting Name="OpenSSHLocation" Roaming="true" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
   </Settings>

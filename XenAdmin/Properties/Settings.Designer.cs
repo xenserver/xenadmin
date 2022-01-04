@@ -856,6 +856,7 @@ namespace XenAdmin.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("None")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
         public global::XenAdmin.SshConsole CustomSshConsole {
             get {
                 return ((global::XenAdmin.SshConsole)(this["CustomSshConsole"]));
@@ -868,6 +869,7 @@ namespace XenAdmin.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
         public string PuttyLocation {
             get {
                 return ((string)(this["PuttyLocation"]));
@@ -880,6 +882,7 @@ namespace XenAdmin.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
         public string OpenSSHLocation {
             get {
                 return ((string)(this["OpenSSHLocation"]));
