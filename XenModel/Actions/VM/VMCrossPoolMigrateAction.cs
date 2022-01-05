@@ -141,19 +141,30 @@ namespace XenAdmin.Actions.VMActions
         private Dictionary<XenRef<VIF>, XenRef<XenAPI.Network>> GetVifMap(VmMapping vmMap, VM vm) 
         { 
             var map = new Dictionary<XenRef<VIF>, XenRef<XenAPI.Network>>();
+            var vmVifs = vm.Connection.ResolveAll(vm.VIFs);
+            var vmMacs = vmVifs.Select(vif => vif.MAC);
 
-            //VM mapping is local network to remote network
-            foreach (var pair in vmMap.Networks)
+            // CA-359124: add VIFs that are present in the VM's snapshots, but not the VM
+            var snapVIFs = vm.snapshots
+                .Select(Connection.Resolve)
+                .SelectMany(snap => Connection.ResolveAll(snap.VIFs))
+                // use MAC to identify VIFs that are not in the VM, opaque_ref differentiates between VM and snapshot VIFs
+                .Where(snapVif => !vmMacs.Contains(snapVif.MAC))
+                .ToList();
+
+            var allVifs = vmVifs.Concat(snapVIFs).ToList();
+            foreach (var pair in vmMap.VIFs)
             {
-                var network = vm.Connection.Resolve(new XenRef<XenAPI.Network>(pair.Key));
-                if (network == null)
-                    continue;
+                var vifMac = pair.Key;
 
-                foreach (var vifRef in network.VIFs)
+                var vif = allVifs.FirstOrDefault(v => v.MAC.Equals(vifMac));
+                if (vif == null)
                 {
-                    if (vm.VIFs.Contains(vifRef))
-                        map.Add(new XenRef<VIF>(vifRef), new XenRef<XenAPI.Network>(pair.Value.opaque_ref));
+                    continue;
                 }
+                var vifRef = new XenRef<VIF>(vif);
+                var networkRef = new XenRef<XenAPI.Network>(pair.Value);
+                map.Add(vifRef, networkRef);
             }
 
             return map;
