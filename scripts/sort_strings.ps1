@@ -101,7 +101,14 @@ function Update-Strings($path) {
     Write-Output "Added sorted strings"
     
     Write-Output "Updating content of $path`n"
-    $xml.Save($path)    
+    $xml.Save($path)
+
+    # Make sure all line endings are CRLF
+
+    $content = Get-Content -Encoding UTF8 -Path $path
+    $content = $content -replace '`r`n','`n'
+    $content = $content -replace '`n','`r`n'
+    Set-Content -Path $path -Encoding UTF8 -Value $content
 }
 
 function Get-ResolvedPath($path) {
