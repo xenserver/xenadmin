@@ -60,32 +60,39 @@ namespace XenAdmin.Dialogs.OptionsPages
 
         public bool IsValidToSave()
         {
-            if (radioButtonPutty.Checked && !File.Exists(textBoxPutty.Text))
-            {
-                return false;
-            }
-
-            if (radioButtonOpenSsh.Checked && !File.Exists(textBoxOpenSsh.Text))
-            {
-                return false;
-            }
-            return true;
+            return !(radioButtonPutty.Checked && !File.Exists(textBoxPutty.Text) ||
+                     radioButtonOpenSsh.Checked && !File.Exists(textBoxOpenSsh.Text) ||
+                     textBoxPutty.Text.Length > 0 && !textBoxPutty.Text.ToLower().EndsWith(".exe") ||
+                     textBoxOpenSsh.Text.Length > 0 && !textBoxOpenSsh.Text.ToLower().EndsWith(".exe"));
         }
 
         public void ShowValidationMessages()
         {
-            if (radioButtonPutty.Checked && !File.Exists(textBoxPutty.Text))
+            var message = string.Empty;
+            if (textBoxPutty.Text.Length > 0 && !textBoxPutty.Text.ToLower().EndsWith(".exe"))
             {
                 _tooltipControl = textBoxPutty;
+                message = Messages.EXTERNAl_TOOLS_FILE_INVALID;
+            }
+            else if (textBoxOpenSsh.Text.Length > 0 && !textBoxOpenSsh.Text.ToLower().EndsWith(".exe"))
+            {
+                _tooltipControl = textBoxOpenSsh;
+                message = Messages.EXTERNAl_TOOLS_FILE_INVALID;
+            }
+            else if (radioButtonPutty.Checked && !File.Exists(textBoxPutty.Text))
+            {
+                _tooltipControl = textBoxPutty;
+                message = Messages.FILE_NOT_FOUND;
             }
             else if (radioButtonOpenSsh.Checked && !File.Exists(textBoxOpenSsh.Text))
             {
                 _tooltipControl = textBoxOpenSsh;
+                message = Messages.FILE_NOT_FOUND;
             }
 
             if (_tooltipControl != null)
             {
-                tooltipValidation.ToolTipTitle = Messages.FILE_NOT_FOUND;
+                tooltipValidation.ToolTipTitle = message;
                 HelpersGUI.ShowBalloonMessage(_tooltipControl, tooltipValidation);
             }
         }
