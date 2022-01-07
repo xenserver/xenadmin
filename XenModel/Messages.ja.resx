@@ -630,7 +630,7 @@
     <value>仮想ディスクの移行を開始しました</value>
   </data>
   <data name="ACTION_MOVING_VDI_TO_SR" xml:space="preserve">
-    <value>Moving Virtual Disk '{0}' from SR '{1}' to SR '{2}'</value>
+    <value>SR '{1}' から SR '{2}' への仮想ディスク '{0}' の移動</value>
   </data>
   <data name="ACTION_MOVING_X_VDIS" xml:space="preserve">
     <value>{0} 仮想ディスクの {1} への移動</value>
@@ -1152,7 +1152,7 @@
     <value>{0} のコピーがキャンセルされました</value>
   </data>
   <data name="ACTION_VM_CROSS_POOL_COPY_TITLE" xml:space="preserve">
-    <value>Copying VM '{0}' from '{1}' to '{2}'</value>
+    <value>'{1}' から '{2}' への VM '{0}' のコピー</value>
   </data>
   <data name="ACTION_VM_DELETE_SNAPSHOTS_TITLE" xml:space="preserve">
     <value>スナップショットの削除</value>
@@ -1191,10 +1191,10 @@
     <value>VM '{0}' を新規ストレージに移動</value>
   </data>
   <data name="ACTION_VM_MOVING_HOST" xml:space="preserve">
-    <value>Moving VM '{0}' from server '{1}' to server '{2}'</value>
+    <value>サーバー '{1}' からサーバー '{2}' への VM '{0}' の移動</value>
   </data>
   <data name="ACTION_VM_MOVING_SR" xml:space="preserve">
-    <value>Moving VM '{0}' to SR '{1}'</value>
+    <value>VM '{0}' の SR '{1}' への移動</value>
   </data>
   <data name="ACTION_VM_MOVING_VDI_DESTROY_FAILURE" xml:space="preserve">
     <value>VM '{0}' の新規ストレージへの移動を完了できませんでした。詳しくは、ログを参照してください。</value>
@@ -1658,40 +1658,40 @@ Active Directory ドメイン '{1}' から削除すると、このサーバー�
     <value>ローカルのルート アカウント</value>
   </data>
   <data name="AD_LOGOUT_CURRENT_USER_MANY" xml:space="preserve">
-    <value>You are currently logged in as one of the selected users. If you continue, you will be logged out of '{0}'. All other selected users will also be logged out.
+    <value>現在、選択したユーザーの 1 人としてログインしています。続行すると、'{0}' からログアウトされます。選択したほかのすべてのユーザーもログアウトされます。
 
-Are you sure you want to continue?</value>
+ 続行してもよろしいですか?</value>
   </data>
   <data name="AD_LOGOUT_CURRENT_USER_MANY_ROLE_CHANGE" xml:space="preserve">
-    <value>You are currently logged in as one of the selected users. If you assign a new role, you will be logged out of '{0}'. All other selected users that are logged in will also be logged out.
+    <value>現在、選択したユーザーの 1 人としてログインしています。新しい役割を割り当てると、'{0}' からログアウトされます。ログインしているほかのすべての選択ユーザーもログアウトされます。
 
-Are you sure you want to continue?</value>
+ 続行してもよろしいですか?</value>
   </data>
   <data name="AD_LOGOUT_CURRENT_USER_ONE" xml:space="preserve">
-    <value>You are currently logged in as the selected user. If you continue, you will be logged out of '{0}'.
+    <value>現在、選択したユーザーの 1 人としてログインしています。続行すると、'{0}' からログアウトされます。
 
-Are you sure you want to continue?</value>
+ 続行してもよろしいですか?</value>
   </data>
   <data name="AD_LOGOUT_CURRENT_USER_ONE_ROLE_CHANGE" xml:space="preserve">
-    <value>You are currently logged in as the selected user. If you assign a new role, you will be logged out of '{0}'.
+    <value>現在、選択したユーザーの 1 人としてログインしています。新しい役割を割り当てると、'{0}' からログアウトされます。
 
-Are you sure you want to continue?</value>
+ 続行してもよろしいですか?</value>
   </data>
   <data name="AD_LOGOUT_USER_MANY" xml:space="preserve">
     <value>この {0} 人のユーザーをログアウトしてもよろしいですか?</value>
   </data>
   <data name="AD_LOGOUT_USER_MANY_ROLE_CHANGE" xml:space="preserve">
-    <value>If you assign a new role to logged in users, they will be logged out.
+    <value>ログインしているユーザーに新しい役割を割り当てると、ユーザーはログアウトされます。
 
-Are you sure you want to continue?</value>
+続行してもよろしいですか?</value>
   </data>
   <data name="AD_LOGOUT_USER_ONE" xml:space="preserve">
     <value>ユーザー '{0}' をログアウトしてもよろしいですか?</value>
   </data>
   <data name="AD_LOGOUT_USER_ONE_ROLE_CHANGE" xml:space="preserve">
-    <value>If you assign a new role to user '{0}', the user will be logged out.
+    <value>ユーザー '{0}' に新しい役割を割り当てると、ユーザーはログアウトされます。
 
-Are you sure you want to continue?</value>
+続行してもよろしいですか?</value>
   </data>
   <data name="AD_REMOVE_USER_MANY" xml:space="preserve">
     <value>この {0} 人のユーザーを削除してもよろしいですか?</value>
@@ -2672,23 +2672,23 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
     <value>選択した TLS キー ファイルが無効です。</value>
   </data>
   <data name="CERTIFICATE_KEY_LENGTH_CHECK_DESCRIPTION" xml:space="preserve">
-    <value>Server certificate compatibility check</value>
+    <value>サーバー証明書の互換性チェック</value>
   </data>
   <data name="CERTIFICATE_KEY_LENGTH_CHECK_GROUP" xml:space="preserve">
-    <value>Checking compatibility of server identity certificate</value>
+    <value>サーバー ID 証明書の互換性を確認</value>
   </data>
   <data name="CERTIFICATE_KEY_LENGTH_PROBLEM_DESCRIPTION" xml:space="preserve">
-    <value>The key size of the server's identity certificate is too small.</value>
+    <value>サーバーの ID 証明書のキー サイズが小さすぎます。</value>
   </data>
   <data name="CERTIFICATE_KEY_LENGTH_PROBLEM_MORE_INFO" xml:space="preserve">
-    <value>The key size of the server's identity certificate is smaller than 2048 bytes.
+    <value>サーバーの ID 証明書のキー サイズが 2048 バイト未満です。
 
-It is recommended that you first install a new certificate with a key size of at least 2048 bytes, otherwise you will not be able to connect to the server after the upgrade.</value>
+最初にキー サイズが 2048 バイト以上の新しい証明書をインストールすることをお勧めします。そうしないと、アップグレード後にサーバーに接続できなくなります。</value>
   </data>
   <data name="CERTIFICATE_KEY_LENGTH_WARNING_MORE_INFO" xml:space="preserve">
-    <value>The key size of the server's identity certificate is smaller than 2048 bytes.
+    <value>サーバーの ID 証明書のキー サイズが 2048 バイト未満です。
 
-If you are upgrading to {0} {1} and above, it is recommended that you first install a new certificate with a key size of at least 2048 bytes, otherwise you will not be able to connect to the server after the upgrade.</value>
+{0} {1} 以降にアップグレードする場合、最初にキー サイズが 2048 バイト以上の新しい証明書をインストールすることをお勧めします。そうしないと、アップグレード後にサーバーに接続できなくなります。</value>
   </data>
   <data name="CERTIFICATE_RBAC_RESTRICTION" xml:space="preserve">
     <value>{0} ユーザーには、サーバーに証明書をインストールするための権限がありません。以下のいずれかの役割を持つアカウントを使用してログインしてください:
@@ -5435,7 +5435,7 @@ CD をイジェクトしてから再試行してください。</value>
 {1}</value>
   </data>
   <data name="ENABLE_TLS_VERIFICATION_RPU" xml:space="preserve">
-    <value>You cannot enable certificate verification while a rolling pool upgrade is in progress.</value>
+    <value>プールのローリング アップグレード中は、証明書の検証を有効にすることはできません。</value>
   </data>
   <data name="ENABLE_WLB_ELLIPSIS" xml:space="preserve">
     <value>再開(&amp;U)</value>
@@ -11080,22 +11080,22 @@ VM が再起動したら、[{0} をインストール] を再度クリックし�
 {1}</value>
   </data>
   <data name="RBAC_CROSS_POOL_COPY_TEMPLATE_BLOCKED" xml:space="preserve">
-    <value>A {0} user cannot copy templates across pools. Log in as a different user with sufficient privileges on both source and destination servers and try again.</value>
+    <value>{0} ユーザーはプール間でテンプレートをコピーできません。コピー元サーバーとコピー先サーバーの両方で必要な権限を持つユーザーでログインし直して再試行してください。</value>
   </data>
   <data name="RBAC_CROSS_POOL_COPY_VM_BLOCKED" xml:space="preserve">
-    <value>A {0} user cannot copy VMs across pools. Log in as a different user with sufficient privileges on both source and destination servers and try again.</value>
+    <value>{0} ユーザーはプール間で VM をコピーできません。コピー元サーバーとコピー先サーバーの両方で必要な権限を持つユーザーでログインし直して再試行してください。</value>
   </data>
   <data name="RBAC_CROSS_POOL_MIGRATE_TEMPLATE_BLOCKED" xml:space="preserve">
-    <value>A {0} user cannot migrate templates across pools. Log in as a different user with sufficient privileges on both source and destination servers and try again.</value>
+    <value>{0} ユーザーはプール間でテンプレートを移行できません。移行元サーバーと移行先サーバーの両方で必要な権限を持つユーザーでログインし直して再試行してください。</value>
   </data>
   <data name="RBAC_CROSS_POOL_MIGRATE_VM_BLOCKED" xml:space="preserve">
-    <value>A {0} user cannot migrate VMs across pools. Log in as a different user with sufficient privileges on both source and destination servers and try again.</value>
+    <value>{0} ユーザーはプール間で VM を移行できません。移行元サーバーと移行先サーバーの両方で必要な権限を持つユーザーでログインし直して再試行してください。</value>
   </data>
   <data name="RBAC_DR_WIZARD_MESSAGE" xml:space="preserve">
-    <value>A {0} user does not have sufficient permissions to use Disaster Recovery. Login as a different user with sufficient privileges and try again.</value>
+    <value>{0} ユーザーには、障害回復を使用するための十分な権限がありません。必要な権限を持つユーザーでログインし直して再試行してください。</value>
   </data>
   <data name="RBAC_GET_SYSTEM_STATUS_BLOCKED" xml:space="preserve">
-    <value>A {0} user cannot download system status reports. Log in as a different user with sufficient privileges and try again.</value>
+    <value>{0} ユーザーはシステムの状態レポートをダウンロードできません。必要な権限を持つユーザーでログインし直して再試行してください。</value>
   </data>
   <data name="RBAC_HA_CONFIGURE_WARNING" xml:space="preserve">
     <value>現在の役割は '{1}' です。
@@ -11111,10 +11111,10 @@ VM が再起動したら、[{0} をインストール] を再度クリックし�
     <value>{0} ユーザーはこの操作を実行できません。</value>
   </data>
   <data name="RBAC_INTRA_POOL_COPY_TEMPLATE_BLOCKED" xml:space="preserve">
-    <value>A {0} user cannot copy templates. Log in as a different user with sufficient privileges and try again.</value>
+    <value>{0} ユーザーはテンプレートをコピーできません。必要な権限を持つユーザーでログインし直して再試行してください。</value>
   </data>
   <data name="RBAC_INTRA_POOL_COPY_VM_BLOCKED" xml:space="preserve">
-    <value>A {0} user cannot copy VMs. Log in as a different user with sufficient privileges and try again.</value>
+    <value>{0} ユーザーは VM をコピーできません。必要な権限を持つユーザーでログインし直して再試行してください。</value>
   </data>
   <data name="RBAC_NO_WIZARD_LIMITS" xml:space="preserve">
     <value>チェックが完了しました。このウィザードのすべての機能を使用できます。</value>
@@ -13106,22 +13106,22 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
     <value>{0}: プール {1} の WLB が有効なためチェックがスキップされました。</value>
   </data>
   <data name="UPDATE_DISMISS_ALL_CONTINUE" xml:space="preserve">
-    <value>You have applied filters to the list of update notifications. Do you want to dismiss all update notifications for every connected server, or only the update notifications you have chosen to view?
+    <value>アップデート通知の一覧にフィルタが適用されています。すべての接続先サーバーのすべてのアップデート通知をクリアしますか? それとも、現在のフィルタにより表示されているアップデート通知のみをクリアしますか?
 
-Note that if RBAC is enabled, only updates which you have privileges to dismiss will be affected.</value>
+注: RBAC が有効な場合、役割で許可されているアラートのみがクリアされます。</value>
   </data>
   <data name="UPDATE_DISMISS_ALL_NO_FILTER_CONTINUE" xml:space="preserve">
-    <value>This operation will dismiss all update notifications for every connected server. Do you want to continue?
+    <value>これにより、すべての接続先サーバーのすべてのアップデート通知がクリアされます。続行しますか?
 
-Note that if RBAC is enabled, only updates which you have privileges to dismiss will be affected.</value>
+注: RBAC が有効な場合、役割で許可されているアップデートのみがクリアされます。</value>
   </data>
   <data name="UPDATE_DISMISS_CONFIRM" xml:space="preserve">
     <value>このアップデートをクリアしてもよろしいですか?</value>
   </data>
   <data name="UPDATE_DISMISS_SELECTED_CONFIRM" xml:space="preserve">
-    <value>This operation will dismiss all the selected update notifications. Do you want to continue?
+    <value>これにより、選択したすべてのアップデート通知がクリアされます。続行しますか?
 
-Note that if RBAC is enabled, only updates which you have privileges to dismiss will be affected.</value>
+注: RBAC が有効な場合、役割で許可されているアップデートのみがクリアされます。</value>
   </data>
   <data name="UPDATE_ERROR_INTRODUCE" xml:space="preserve">
     <value>アップデートのイントロデュースに失敗しました。</value>
@@ -14795,9 +14795,9 @@ VM のパフォーマンスを最適化するために、VCPU の数を物理 CP
     <value>現在の位置</value>
   </data>
   <data name="AD_ADDING_REMOVING_ROLES_ON_MULTIPLE" xml:space="preserve">
-    <value>Assigning new roles to subjects '{0}'</value>
+    <value>サブジェクト '{0}' に新しい役割を割り当てる</value>
   </data>
   <data name="TERMINATING_USER_SESSION_MULTIPLE" xml:space="preserve">
-    <value>Terminating session for users '{0}'</value>
+    <value>ユーザー '{0}' のセッションを終了</value>
   </data>
 </root>
