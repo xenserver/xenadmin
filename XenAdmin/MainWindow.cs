@@ -63,7 +63,7 @@ using System.Linq;
 using XenAdmin.Controls.GradientPanel;
 using XenAdmin.Help;
 using XenAdmin.Wizards;
-
+using System.IO;
 
 namespace XenAdmin
 {
@@ -141,6 +141,8 @@ namespace XenAdmin
 
         private bool expandTreeNodesOnStartup;
         private int connectionsInProgressOnStartup;
+
+        private ClientUpdateAlert updateAlert = null;
 
         [DllImport("kernel32.dll", CharSet = CharSet.Auto)]
         static extern uint RegisterApplicationRestart(string pszCommandline, uint dwFlags);
@@ -262,6 +264,8 @@ namespace XenAdmin
             OtherConfigAndTagsWatcher.RegisterEventHandlers();
             Alert.RegisterAlertCollectionChanged(XenCenterAlerts_CollectionChanged);
             Updates.UpdateAlertCollectionChanged += Updates_CollectionChanged;
+            Updates.CheckForUpdatesStarted += UpdatesCheck_Started;
+            Updates.CheckForUpdatesCompleted += UpdatesCheck_Completed;
             ConnectionsManager.History.CollectionChanged += History_CollectionChanged;
             //ConnectionsManager.XenConnections.CollectionChanged is registered in OnShown
             Properties.Settings.Default.SettingChanging += Default_SettingChanging;
@@ -275,6 +279,8 @@ namespace XenAdmin
             OtherConfigAndTagsWatcher.DeregisterEventHandlers();
             Alert.DeregisterAlertCollectionChanged(XenCenterAlerts_CollectionChanged);
             Updates.UpdateAlertCollectionChanged -= Updates_CollectionChanged;
+            Updates.CheckForUpdatesStarted -= UpdatesCheck_Started;
+            Updates.CheckForUpdatesCompleted -= UpdatesCheck_Completed;
             ConnectionsManager.History.CollectionChanged -= History_CollectionChanged;
             ConnectionsManager.XenConnections.CollectionChanged -= XenConnection_CollectionChanged;
             Properties.Settings.Default.SettingChanging -= Default_SettingChanging;
@@ -2658,6 +2664,20 @@ namespace XenAdmin
                 });
         }
 
+        private void UpdatesCheck_Completed(bool suceeded, string err)
+        {
+            
+            Program.Invoke(this, () => {
+                updateAlert = Updates.UpdateAlerts.FirstOrDefault(update => update is ClientUpdateAlert) as ClientUpdateAlert;
+                updateClientToolStripMenuItem.Enabled = true;//updateAlert != null; 
+            });            
+        }
+
+        private void UpdatesCheck_Started()
+        {
+            Program.Invoke(this, () => { updateClientToolStripMenuItem.Enabled = false; });
+        }
+
         private void CloseWhenActionsCanceled(object o)
         {
             int i = 0;
@@ -3308,6 +3328,14 @@ namespace XenAdmin
         private void statusLabelErrors_Click(object sender, EventArgs e)
         {
             navigationPane.SwitchToNotificationsView(NotificationsSubMode.Events);
+        }
+
+        private void updateToolStripMenuItem_Click(object sender, EventArgs e)
+        {            
+            var downloadAndInstallClientAction = new DownloadAndUpdateClientAction(updateAlert.Name, new Uri(updateAlert.NewVersion.Url), Path.Combine(Path.GetTempPath(), $"{updateAlert.Name}.msi"), true);
+
+            using (var dlg = new ActionProgressDialog(downloadAndInstallClientAction, ProgressBarStyle.Marquee))
+                dlg.ShowDialog(Parent);
         }
     }
 }
