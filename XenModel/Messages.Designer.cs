@@ -8160,6 +8160,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The file associated with your external SSH console doesn&apos;t exist. Please check that you have selected a valid path..
+        /// </summary>
+        public static string CONFIGURE_SSH_CONSOLE_FILE_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("CONFIGURE_SSH_CONSOLE_FILE_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Your external SSH console could not be found. Please check that you have selected a valid file..
         /// </summary>
         public static string CONFIGURE_SSH_CONSOLE_NOT_FOUND {
@@ -17011,9 +17020,9 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to File is invalid. Please select an .exe file..
         /// </summary>
-        public static string EXTERNAl_TOOLS_FILE_INVALID {
+        public static string EXTERNAL_TOOLS_FILE_INVALID {
             get {
-                return ResourceManager.GetString("EXTERNAl_TOOLS_FILE_INVALID", resourceCulture);
+                return ResourceManager.GetString("EXTERNAL_TOOLS_FILE_INVALID", resourceCulture);
             }
         }
         

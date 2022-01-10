@@ -1491,6 +1491,12 @@ namespace XenAdmin.ConsoleView
                 return;
             }
 
+            if (!File.Exists(sshConsolePath))
+            {
+                OpenSshConsoleFileNotFoundDialog();
+                return;
+            }
+
             try
             {
                 var command = $"{source.IPAddressForSSH()}";
@@ -1529,6 +1535,21 @@ namespace XenAdmin.ConsoleView
                 DialogResult.OK, ThreeButtonDialog.ButtonType.ACCEPT, true);
 
             using (var dlg = new WarningDialog(Messages.CONFIGURE_SSH_CONSOLE_NOT_FOUND,
+                       configureSshClientButton, ThreeButtonDialog.ButtonCancel))
+            {
+                if (dlg.ShowDialog(Parent) == DialogResult.OK)
+                {
+                    OpenExternalToolsPage();
+                }
+            }
+        }
+
+        private void OpenSshConsoleFileNotFoundDialog()
+        {
+            var configureSshClientButton = new ThreeButtonDialog.TBDButton(Messages.CONFIGURE_SSH_CONSOLE_TITLE,
+                DialogResult.OK, ThreeButtonDialog.ButtonType.ACCEPT, true);
+
+            using (var dlg = new WarningDialog(Messages.CONFIGURE_SSH_CONSOLE_FILE_NOT_FOUND,
                        configureSshClientButton, ThreeButtonDialog.ButtonCancel))
             {
                 if (dlg.ShowDialog(Parent) == DialogResult.OK)
