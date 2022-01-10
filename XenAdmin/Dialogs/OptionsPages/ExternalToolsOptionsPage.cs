@@ -108,6 +108,7 @@ namespace XenAdmin.Dialogs.OptionsPages
             Properties.Settings.Default.CustomSshConsole = radioButtonOpenSsh.Checked ? SshConsole.OpenSSH : SshConsole.Putty;
             Properties.Settings.Default.OpenSSHLocation = textBoxOpenSsh.Text;
             Properties.Settings.Default.PuttyLocation = textBoxPutty.Text;
+            Properties.Settings.Default.Save();
         }
 
         #endregion

@@ -361,6 +361,8 @@ namespace XenAdmin
             {
                 Properties.Settings.Default.OpenSSHLocation = openSshLocation;
             }
+
+            Properties.Settings.Default.Save();
         }
 
         private static void AddConnection(IXenConnection connection)
