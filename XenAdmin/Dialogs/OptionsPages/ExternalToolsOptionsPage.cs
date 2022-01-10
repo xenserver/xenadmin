@@ -60,6 +60,17 @@ namespace XenAdmin.Dialogs.OptionsPages
 
         public bool IsValidToSave()
         {
+            // CA-362355: don't check if paths are valid if they haven't changed.
+            // Avoids users not being able to save other options if the selected 
+            // SSH console location isn't valid.
+            var puttyPath = Properties.Settings.Default.PuttyLocation;
+            var openSshPath = Properties.Settings.Default.OpenSSHLocation;
+            if (radioButtonPutty.Checked && !string.IsNullOrEmpty(puttyPath) && puttyPath == textBoxPutty.Text ||
+                radioButtonOpenSsh.Checked && !string.IsNullOrEmpty(openSshPath) && openSshPath == textBoxOpenSsh.Text)
+            {
+                return true;
+            }
+
             return !(radioButtonPutty.Checked && !File.Exists(textBoxPutty.Text) ||
                      radioButtonOpenSsh.Checked && !File.Exists(textBoxOpenSsh.Text) ||
                      textBoxPutty.Text.Length > 0 && !textBoxPutty.Text.ToLower().EndsWith(".exe") ||
