@@ -2888,6 +2888,9 @@ Do you want to assign it to the schedule '{2}' instead?</value>
   <data name="CONFIGURE_SSH_CONSOLE_NOT_FOUND" xml:space="preserve">
     <value>Your external SSH console could not be found. Please check that you have selected a valid file.</value>
   </data>
+	<data name="CONFIGURE_SSH_CONSOLE_FILE_NOT_FOUND" xml:space="preserve">
+    <value>The file associated with your external SSH console doesn't exist. Please check that you have selected a valid path.</value>
+  </data>
   <data name="CONFIGURE_SSH_CONSOLE_TITLE" xml:space="preserve">
     <value>Configure &amp;SSH Console</value>
   </data>
@@ -5899,7 +5902,7 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="EXTERNAL_TOOLS_DETAILS" xml:space="preserve">
     <value>Manage external tools</value>
   </data>
-  <data name="EXTERNAl_TOOLS_FILE_INVALID" xml:space="preserve">
+  <data name="EXTERNAL_TOOLS_FILE_INVALID" xml:space="preserve">
     <value>File is invalid. Please select an .exe file.</value>
   </data>
   <data name="EXTERNAL_TOOLS_OPEN_FILE_TITLE" xml:space="preserve">
