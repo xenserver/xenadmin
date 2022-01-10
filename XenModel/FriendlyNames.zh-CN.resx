@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -60,45 +60,45 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema id="root" xmlns="" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element msdata:IsDataSet="true" name="root">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element minOccurs="0" name="value" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="value" type="xsd:string" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required"/>
-              <xsd:attribute name="type" type="xsd:string"/>
-              <xsd:attribute name="mimetype" type="xsd:string"/>
-              <xsd:attribute ref="xml:space"/>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string"/>
-              <xsd:attribute name="name" type="xsd:string"/>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
-                <xsd:element minOccurs="0" msdata:Ordinal="2" name="comment" type="xsd:string"/>
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string" />
+                <xsd:element minOccurs="0" msdata:Ordinal="2" name="comment" type="xsd:string" />
               </xsd:sequence>
-              <xsd:attribute msdata:Ordinal="1" name="name" type="xsd:string" use="required"/>
-              <xsd:attribute msdata:Ordinal="3" name="type" type="xsd:string"/>
-              <xsd:attribute msdata:Ordinal="4" name="mimetype" type="xsd:string"/>
-              <xsd:attribute ref="xml:space"/>
+              <xsd:attribute msdata:Ordinal="1" name="name" type="xsd:string" use="required" />
+              <xsd:attribute msdata:Ordinal="3" name="type" type="xsd:string" />
+              <xsd:attribute msdata:Ordinal="4" name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -135,27 +135,6 @@
   <data name="AD.PropertyKey-subject-password-expired" xml:space="preserve">
     <value>密码已过期</value>
   </data>
-  <data name="Description-VM.ha_restart_priority.AlwaysRestart" xml:space="preserve">
-    <value>始终尝试重新启动 VM</value>
-  </data>
-  <data name="Description-VM.ha_restart_priority.AlwaysRestartHighPriority" xml:space="preserve">
-    <value>始终尝试首先重新启动 VM (最高优先级)</value>
-  </data>
-  <data name="Description-VM.ha_restart_priority.BestEffort" xml:space="preserve">
-    <value>在资源可用时尝试重新启动 VM</value>
-  </data>
-  <data name="Description-VM.ha_restart_priority.DoNotRestart" xml:space="preserve">
-    <value>VM 将不重新启动</value>
-  </data>
-  <data name="Description-VM.ha_restart_priority.Restart" xml:space="preserve">
-    <value>始终尝试重新启动 VM</value>
-  </data>
-  <data name="Description-host.system_status-X11" xml:space="preserve">
-    <value>来自 X 服务器的日志文件</value>
-  </data>
-  <data name="Description-host.system_status-X11-auth" xml:space="preserve">
-    <value>X 服务器授权文件</value>
-  </data>
   <data name="Description-host.system_status-blobs" xml:space="preserve">
     <value>检索以二进制对象形式存储在服务器上的用户信息。</value>
   </data>
@@ -165,11 +144,20 @@
   <data name="Description-host.system_status-client-logs" xml:space="preserve">
     <value>客户端应用程序日志文件</value>
   </data>
+  <data name="Description-host.system_status-conntest" xml:space="preserve">
+    <value>服务器与 Internet 之间的连接性测试</value>
+  </data>
+  <data name="Description-host.system_status-control-slice" xml:space="preserve">
+    <value>与系统的控制组有关的信息和统计数据</value>
+  </data>
   <data name="Description-host.system_status-device-model" xml:space="preserve">
     <value>设备模拟日志</value>
   </data>
   <data name="Description-host.system_status-disk-info" xml:space="preserve">
     <value>分区表、可用空间、iSCSI 和 LVM 配置</value>
+  </data>
+  <data name="Description-host.system_status-fcoe" xml:space="preserve">
+    <value>以太网光纤通道(FCoE)日志</value>
   </data>
   <data name="Description-host.system_status-filesystem_summarise" xml:space="preserve">
     <value>Dom 0 中已更改文件的列表</value>
@@ -197,6 +185,9 @@
   </data>
   <data name="Description-host.system_status-loopback-devices" xml:space="preserve">
     <value>环回设备的详细信息</value>
+  </data>
+  <data name="Description-host.system_status-message-switch" xml:space="preserve">
+    <value>在系统守护程序之间交换的消息的日志</value>
   </data>
   <data name="Description-host.system_status-multipath" xml:space="preserve">
     <value>检索服务器的存储多路径配置</value>
@@ -234,20 +225,41 @@
   <data name="Description-host.system_status-tapdisk-logs" xml:space="preserve">
     <value>存储子系统日志</value>
   </data>
+  <data name="Description-host.system_status-tboot" xml:space="preserve">
+    <value>测量启动日志</value>
+  </data>
+  <data name="Description-host.system_status-v6d" xml:space="preserve">
+    <value>服务器许可守护程序日志</value>
+  </data>
+  <data name="Description-host.system_status-VM-snapshot-schedule" xml:space="preserve">
+    <value>计划快照日志文件</value>
+  </data>
   <data name="Description-host.system_status-vncterm" xml:space="preserve">
     <value>来自 VNCTerm 守护程序的故障转储文件</value>
   </data>
   <data name="Description-host.system_status-wlb" xml:space="preserve">
     <value>来自监视该池的 WLB 服务器的日志和状态信息。</value>
   </data>
+  <data name="Description-host.system_status-X11" xml:space="preserve">
+    <value>来自 X 服务器的日志文件</value>
+  </data>
+  <data name="Description-host.system_status-X11-auth" xml:space="preserve">
+    <value>X 服务器授权文件</value>
+  </data>
   <data name="Description-host.system_status-xapi" xml:space="preserve">
     <value>服务器守护程序内部日志</value>
+  </data>
+  <data name="Description-host.system_status-xapi-clusterd" xml:space="preserve">
+    <value>群集管理守护程序为 Toolstack 生成的日志。</value>
   </data>
   <data name="Description-host.system_status-xapi-debug" xml:space="preserve">
     <value>服务器守护程序故障转储</value>
   </data>
   <data name="Description-host.system_status-xapi-subprocess" xml:space="preserve">
     <value>服务器守护程序进程详细信息</value>
+  </data>
+  <data name="Description-host.system_status-xcp-rrdd-plugins" xml:space="preserve">
+    <value>来自 RRD 守护程序的日志文件</value>
   </data>
   <data name="Description-host.system_status-xen-info" xml:space="preserve">
     <value>虚拟机管理程序版本及其当前状态的详细信息</value>
@@ -270,11 +282,35 @@
   <data name="Description-host.system_status-xenserver-logs" xml:space="preserve">
     <value>有关服务器活动的日志文件</value>
   </data>
+  <data name="Description-host.system_status-xenvm" xml:space="preserve">
+    <value>卷管理器日志</value>
+  </data>
   <data name="Description-host.system_status-xha-liveset" xml:space="preserve">
     <value>高可用性实时集</value>
   </data>
+  <data name="Description-host.system_status-xscontainer" xml:space="preserve">
+    <value>容器管理日志</value>
+  </data>
+  <data name="Description-host.system_status-xspvscache" xml:space="preserve">
+    <value>PVS 加速器状态</value>
+  </data>
   <data name="Description-host.system_status-yum" xml:space="preserve">
     <value>YUM 库信息和 RPM 包数据库列表</value>
+  </data>
+  <data name="Description-VM.ha_restart_priority.AlwaysRestart" xml:space="preserve">
+    <value>始终尝试重新启动 VM</value>
+  </data>
+  <data name="Description-VM.ha_restart_priority.AlwaysRestartHighPriority" xml:space="preserve">
+    <value>始终尝试首先重新启动 VM (最高优先级)</value>
+  </data>
+  <data name="Description-VM.ha_restart_priority.BestEffort" xml:space="preserve">
+    <value>在资源可用时尝试重新启动 VM</value>
+  </data>
+  <data name="Description-VM.ha_restart_priority.DoNotRestart" xml:space="preserve">
+    <value>VM 将不重新启动</value>
+  </data>
+  <data name="Description-VM.ha_restart_priority.Restart" xml:space="preserve">
+    <value>始终尝试重新启动 VM</value>
   </data>
   <data name="Exception-PluginLabelNotDefined" xml:space="preserve">
     <value>尚未在插件“{1}”的资源文件中定义“{0}.label”。</value>
@@ -324,222 +360,6 @@
   <data name="Label-Action.Information" xml:space="preserve">
     <value>信息</value>
   </data>
-  <data name="Label-Pool_patch.applied" xml:space="preserve">
-    <value>已应用</value>
-  </data>
-  <data name="Label-Pool_patch.fully_applied" xml:space="preserve">
-    <value>已完全应用</value>
-  </data>
-  <data name="Label-Pool_patch.not_applied" xml:space="preserve">
-    <value>未应用</value>
-  </data>
-  <data name="Label-Pool_patch.partially_applied" xml:space="preserve">
-    <value>已部分应用</value>
-  </data>
-  <data name="Label-SR.SRTypes-smb" xml:space="preserve">
-    <value>SMB</value>
-  </data>
-  <data name="Label-SR.SRTypes-cslg" xml:space="preserve">
-    <value>StorageLink</value>
-  </data>
-  <data name="Label-SR.SRTypes-dummy" xml:space="preserve">
-    <value>未知</value>
-  </data>
-  <data name="Label-SR.SRTypes-ebs" xml:space="preserve">
-    <value>弹性块存储</value>
-  </data>
-  <data name="Label-SR.SRTypes-egenera" xml:space="preserve">
-    <value>Egenera 虚拟存储</value>
-  </data>
-  <data name="Label-SR.SRTypes-egeneracd" xml:space="preserve">
-    <value>Egenera 虚拟 DVD 驱动器</value>
-  </data>
-  <data name="Label-SR.SRTypes-equal" xml:space="preserve">
-    <value>Dell EqualLogic</value>
-  </data>
-  <data name="Label-SR.SRTypes-ext" xml:space="preserve">
-    <value>Ext3</value>
-  </data>
-  <data name="Label-SR.SRTypes-iscsi" xml:space="preserve">
-    <value>VDI-per-LUN iSCSI</value>
-  </data>
-  <data name="Label-SR.SRTypes-iso" xml:space="preserve">
-    <value>ISO</value>
-  </data>
-  <data name="Label-SR.SRTypes-local" xml:space="preserve">
-    <value>本地</value>
-  </data>
-  <data name="Label-SR.SRTypes-lvm" xml:space="preserve">
-    <value>LVM</value>
-  </data>
-  <data name="Label-SR.SRTypes-lvmofc" xml:space="preserve">
-    <value>硬件 HBA</value>
-  </data>
-  <data name="Label-SR.SRTypes-lvmohba" xml:space="preserve">
-    <value>硬件 HBA</value>
-  </data>
-  <data name="Label-SR.SRTypes-lvmoiscsi" xml:space="preserve">
-    <value>基于 iSCSI 的 LVM</value>
-  </data>
-  <data name="Label-SR.SRTypes-netapp" xml:space="preserve">
-    <value>NetApp</value>
-  </data>
-  <data name="Label-SR.SRTypes-nfs" xml:space="preserve">
-    <value>NFS</value>
-  </data>
-  <data name="Label-SR.SRTypes-shm" xml:space="preserve">
-    <value>本地性能监视</value>
-  </data>
-  <data name="Label-SR.SRTypes-tmpfs" xml:space="preserve">
-    <value>未知</value>
-  </data>
-  <data name="Label-SR.SRTypes-udev" xml:space="preserve">
-    <value>udev</value>
-  </data>
-  <data name="Label-SR.SRTypes-unknown" xml:space="preserve">
-    <value>未知</value>
-  </data>
-  <data name="Label-SR.scsiid" xml:space="preserve">
-    <value>SCSI ID</value>
-  </data>
-  <data name="Label-SR.size" xml:space="preserve">
-    <value>大小</value>
-  </data>
-  <data name="Label-SR.state" xml:space="preserve">
-    <value>状态</value>
-  </data>
-  <data name="Label-VM.BootOrder" xml:space="preserve">
-    <value>引导顺序</value>
-  </data>
-  <data name="Label-VM.BootMode" xml:space="preserve">
-    <value>引导模式</value>
-  </data>
-  <data name="Label-VM.ImageId" xml:space="preserve">
-    <value>映像 ID</value>
-  </data>
-  <data name="Label-VM.InstanceId" xml:space="preserve">
-    <value>实例 ID</value>
-  </data>
-  <data name="Label-VM.InstanceType" xml:space="preserve">
-    <value>实例类型</value>
-  </data>
-  <data name="Label-VM.KeyName" xml:space="preserve">
-    <value>项名</value>
-  </data>
-  <data name="Label-VM.OSName" xml:space="preserve">
-    <value>操作系统</value>
-  </data>
-  <data name="Label-VM.P2V_ImportDate" xml:space="preserve">
-    <value>P2V 导入日期</value>
-  </data>
-  <data name="Label-VM.P2V_SourceMachine" xml:space="preserve">
-    <value>P2V 源计算机</value>
-  </data>
-  <data name="Label-VM.PV_args" xml:space="preserve">
-    <value>操作系统启动参数</value>
-  </data>
-  <data name="Label-VM.PrivateDnsName" xml:space="preserve">
-    <value>专用 DNS 条目</value>
-  </data>
-  <data name="Label-VM.PublicDnsName" xml:space="preserve">
-    <value>公用 DNS 条目</value>
-  </data>
-  <data name="Label-VM.VCPUWeight" xml:space="preserve">
-    <value>vCPU 优先级</value>
-  </data>
-  <data name="Label-VM.VCPUWeight-0" xml:space="preserve">
-    <value>最低</value>
-  </data>
-  <data name="Label-VM.VCPUWeight-1" xml:space="preserve">
-    <value>非常低</value>
-  </data>
-  <data name="Label-VM.VCPUWeight-2" xml:space="preserve">
-    <value>低</value>
-  </data>
-  <data name="Label-VM.VCPUWeight-3" xml:space="preserve">
-    <value>低于标准</value>
-  </data>
-  <data name="Label-VM.VCPUWeight-4" xml:space="preserve">
-    <value>标准</value>
-  </data>
-  <data name="Label-VM.VCPUWeight-5" xml:space="preserve">
-    <value>高于标准</value>
-  </data>
-  <data name="Label-VM.VCPUWeight-6" xml:space="preserve">
-    <value>高</value>
-  </data>
-  <data name="Label-VM.VCPUWeight-7" xml:space="preserve">
-    <value>非常高</value>
-  </data>
-  <data name="Label-VM.VCPUWeight-8" xml:space="preserve">
-    <value>最高</value>
-  </data>
-  <data name="Label-VM.VCPUs" xml:space="preserve">
-    <value>虚拟 CPU</value>
-  </data>
-  <data name="Label-VM.VirtualizationState" xml:space="preserve">
-    <value>虚拟化状态</value>
-  </data>
-  <data name="Label-VM.affinity" xml:space="preserve">
-    <value>主服务器</value>
-  </data>
-  <data name="Label-VM.auto_boot" xml:space="preserve">
-    <value>自动引导</value>
-  </data>
-  <data name="Label-VM.ha_restart_priority" xml:space="preserve">
-    <value>高可用性重启优先级</value>
-  </data>
-  <data name="Label-VM.ha_restart_priority.AlwaysRestart" xml:space="preserve">
-    <value>重新启动</value>
-  </data>
-  <data name="Label-VM.ha_restart_priority.AlwaysRestartHighPriority" xml:space="preserve">
-    <value>首先重新启动</value>
-  </data>
-  <data name="Label-VM.ha_restart_priority.BestEffort" xml:space="preserve">
-    <value>在可能时重新启动</value>
-  </data>
-  <data name="Label-VM.ha_restart_priority.DoNotRestart" xml:space="preserve">
-    <value>不重新启动</value>
-  </data>
-  <data name="Label-VM.ha_restart_priority.High" xml:space="preserve">
-    <value>高</value>
-  </data>
-  <data name="Label-VM.ha_restart_priority.Low" xml:space="preserve">
-    <value>低</value>
-  </data>
-  <data name="Label-VM.ha_restart_priority.Medium" xml:space="preserve">
-    <value>中</value>
-  </data>
-  <data name="Label-VM.ha_restart_priority.Restart" xml:space="preserve">
-    <value>重新启动</value>
-  </data>
-  <data name="Label-VM.memory_static_max" xml:space="preserve">
-    <value>内存</value>
-  </data>
-  <data name="Label-VM.power_state-Halted" xml:space="preserve">
-    <value>已停止</value>
-  </data>
-  <data name="Label-VM.power_state-Paused" xml:space="preserve">
-    <value>已暂停</value>
-  </data>
-  <data name="Label-VM.power_state-Running" xml:space="preserve">
-    <value>正在运行</value>
-  </data>
-  <data name="Label-VM.power_state-Suspended" xml:space="preserve">
-    <value>已挂起</value>
-  </data>
-  <data name="Label-VM.power_state-unknown" xml:space="preserve">
-    <value>未知</value>
-  </data>
-  <data name="Label-VM.uptime" xml:space="preserve">
-    <value>启动后经过的时间</value>
-  </data>
-  <data name="Label-host.ServerMemory" xml:space="preserve">
-    <value>服务器</value>
-  </data>
-  <data name="Label-host.VMMemory" xml:space="preserve">
-    <value>VM</value>
-  </data>
   <data name="Label-host.address" xml:space="preserve">
     <value>地址</value>
   </data>
@@ -588,6 +408,9 @@
   <data name="Label-host.pool_members" xml:space="preserve">
     <value>池成员</value>
   </data>
+  <data name="Label-host.ServerMemory" xml:space="preserve">
+    <value>服务器</value>
+  </data>
   <data name="Label-host.software_version-build_number" xml:space="preserve">
     <value>内部版本号</value>
   </data>
@@ -596,12 +419,6 @@
   </data>
   <data name="Label-host.software_version-product_version" xml:space="preserve">
     <value>版本</value>
-  </data>
-  <data name="Label-host.system_status-X11" xml:space="preserve">
-    <value>X 服务器日志</value>
-  </data>
-  <data name="Label-host.system_status-X11-auth" xml:space="preserve">
-    <value>X11 授权</value>
   </data>
   <data name="Label-host.system_status-blobs" xml:space="preserve">
     <value>用户创建的二进制对象</value>
@@ -612,11 +429,20 @@
   <data name="Label-host.system_status-client-logs" xml:space="preserve">
     <value>{0} 日志</value>
   </data>
+  <data name="Label-host.system_status-conntest" xml:space="preserve">
+    <value>测试连接</value>
+  </data>
+  <data name="Label-host.system_status-control-slice" xml:space="preserve">
+    <value>控制组统计数据</value>
+  </data>
   <data name="Label-host.system_status-device-model" xml:space="preserve">
     <value>设备型号</value>
   </data>
   <data name="Label-host.system_status-disk-info" xml:space="preserve">
     <value>磁盘信息</value>
+  </data>
+  <data name="Label-host.system_status-fcoe" xml:space="preserve">
+    <value>FCoE 日志</value>
   </data>
   <data name="Label-host.system_status-filesystem_summarise" xml:space="preserve">
     <value>已更改的文件</value>
@@ -644,6 +470,9 @@
   </data>
   <data name="Label-host.system_status-loopback-devices" xml:space="preserve">
     <value>环回设备</value>
+  </data>
+  <data name="Label-host.system_status-message-switch" xml:space="preserve">
+    <value>内部消息日志</value>
   </data>
   <data name="Label-host.system_status-multipath" xml:space="preserve">
     <value>多路径配置</value>
@@ -681,20 +510,41 @@
   <data name="Label-host.system_status-tapdisk-logs" xml:space="preserve">
     <value>存储子系统日志</value>
   </data>
+  <data name="Label-host.system_status-tboot" xml:space="preserve">
+    <value>测量启动日志</value>
+  </data>
+  <data name="Label-host.system_status-v6d" xml:space="preserve">
+    <value>服务器许可守护程序</value>
+  </data>
+  <data name="Label-host.system_status-VM-snapshot-schedule" xml:space="preserve">
+    <value>计划快照日志文件</value>
+  </data>
   <data name="Label-host.system_status-vncterm" xml:space="preserve">
     <value>VNCTerm 故障转储</value>
   </data>
   <data name="Label-host.system_status-wlb" xml:space="preserve">
     <value>Workload Balancing 状态</value>
   </data>
+  <data name="Label-host.system_status-X11" xml:space="preserve">
+    <value>X 服务器日志</value>
+  </data>
+  <data name="Label-host.system_status-X11-auth" xml:space="preserve">
+    <value>X11 授权</value>
+  </data>
   <data name="Label-host.system_status-xapi" xml:space="preserve">
     <value>服务器守护程序内部日志</value>
+  </data>
+  <data name="Label-host.system_status-xapi-clusterd" xml:space="preserve">
+    <value>服务器群集管理守护程序</value>
   </data>
   <data name="Label-host.system_status-xapi-debug" xml:space="preserve">
     <value>服务器守护程序故障转储</value>
   </data>
   <data name="Label-host.system_status-xapi-subprocess" xml:space="preserve">
     <value>服务器守护程序子进程</value>
+  </data>
+  <data name="Label-host.system_status-xcp-rrdd-plugins" xml:space="preserve">
+    <value>RRD 插件日志</value>
   </data>
   <data name="Label-host.system_status-xen-info" xml:space="preserve">
     <value>虚拟机管理程序配置</value>
@@ -717,8 +567,17 @@
   <data name="Label-host.system_status-xenserver-logs" xml:space="preserve">
     <value>服务器日志</value>
   </data>
+  <data name="Label-host.system_status-xenvm" xml:space="preserve">
+    <value>卷管理器日志</value>
+  </data>
   <data name="Label-host.system_status-xha-liveset" xml:space="preserve">
     <value>高可用性实时集</value>
+  </data>
+  <data name="Label-host.system_status-xscontainer" xml:space="preserve">
+    <value>容器管理日志</value>
+  </data>
+  <data name="Label-host.system_status-xspvscache" xml:space="preserve">
+    <value>PVS 加速器状态</value>
   </data>
   <data name="Label-host.system_status-yum" xml:space="preserve">
     <value>RPM 包数据库</value>
@@ -728,6 +587,9 @@
   </data>
   <data name="Label-host.uuid" xml:space="preserve">
     <value>UUID</value>
+  </data>
+  <data name="Label-host.VMMemory" xml:space="preserve">
+    <value>VM</value>
   </data>
   <data name="Label-performance.avg_cpu" xml:space="preserve">
     <value>平均 CPU 使用率</value>
@@ -747,8 +609,35 @@
   <data name="Label-performance.cpu" xml:space="preserve">
     <value>CPU {0}</value>
   </data>
+  <data name="Label-performance.cpu_avg" xml:space="preserve">
+    <value>平均 CPU 使用率</value>
+  </data>
   <data name="Label-performance.cpu-avg-freq" xml:space="preserve">
     <value>CPU {0} 平均频率</value>
+  </data>
+  <data name="Label-performance.cpu-state" xml:space="preserve">
+    <value>CPU {0} {1}-状态 {2}</value>
+  </data>
+  <data name="Label-performance.gpu_memory_free" xml:space="preserve">
+    <value>{0} {1} 可用内存</value>
+  </data>
+  <data name="Label-performance.gpu_memory_used" xml:space="preserve">
+    <value>{0} {1} 已用内存</value>
+  </data>
+  <data name="Label-performance.gpu_power_usage" xml:space="preserve">
+    <value>{0} {1} 电源使用率</value>
+  </data>
+  <data name="Label-performance.gpu_temperature" xml:space="preserve">
+    <value>{0} {1} 温度</value>
+  </data>
+  <data name="Label-performance.gpu_utilisation_compute" xml:space="preserve">
+    <value>{0} {1} 利用率</value>
+  </data>
+  <data name="Label-performance.gpu_utilisation_memory_io" xml:space="preserve">
+    <value>{0} {1} 内存利用率</value>
+  </data>
+  <data name="Label-performance.io_errors" xml:space="preserve">
+    <value>I/O 错误</value>
   </data>
   <data name="Label-performance.lo_rx" xml:space="preserve">
     <value>环回接收</value>
@@ -777,6 +666,12 @@
   <data name="Label-performance.memory_internal_used" xml:space="preserve">
     <value>已用内存</value>
   </data>
+  <data name="Label-performance.memory_reclaimed" xml:space="preserve">
+    <value>回收的内存</value>
+  </data>
+  <data name="Label-performance.memory_reclaimed_max" xml:space="preserve">
+    <value>潜在回收的内存</value>
+  </data>
   <data name="Label-performance.memory_target" xml:space="preserve">
     <value>内存目标</value>
   </data>
@@ -801,6 +696,42 @@
   <data name="Label-performance.nic_tx_errors" xml:space="preserve">
     <value>NIC {0} 发送错误</value>
   </data>
+  <data name="Label-performance.pif_aggr_rx" xml:space="preserve">
+    <value>NIC 接收的总数据量</value>
+  </data>
+  <data name="Label-performance.pif_aggr_tx" xml:space="preserve">
+    <value>NIC 发送的总数据量</value>
+  </data>
+  <data name="Label-performance.pool_session_count" xml:space="preserve">
+    <value>会话数</value>
+  </data>
+  <data name="Label-performance.pool_task_count" xml:space="preserve">
+    <value>任务数</value>
+  </data>
+  <data name="Label-performance.pvsaccelerator_evicted" xml:space="preserve">
+    <value>PVS 加速器逐出率</value>
+  </data>
+  <data name="Label-performance.pvsaccelerator_read_hits" xml:space="preserve">
+    <value>PVS 加速器命中率</value>
+  </data>
+  <data name="Label-performance.pvsaccelerator_read_misses" xml:space="preserve">
+    <value>PVS 加速器未命中率</value>
+  </data>
+  <data name="Label-performance.pvsaccelerator_read_total" xml:space="preserve">
+    <value>PVS 加速器观察到的读取率</value>
+  </data>
+  <data name="Label-performance.pvsaccelerator_space_utilization" xml:space="preserve">
+    <value>PVS 加速器空间利用率</value>
+  </data>
+  <data name="Label-performance.pvsaccelerator_traffic_client_sent" xml:space="preserve">
+    <value>PVS 加速器观察到的来自客户端的网络流量</value>
+  </data>
+  <data name="Label-performance.pvsaccelerator_traffic_proxy_saved" xml:space="preserve">
+    <value>PVS 加速器保存的网络流量</value>
+  </data>
+  <data name="Label-performance.pvsaccelerator_traffic_server_sent" xml:space="preserve">
+    <value>PVS 加速器观察到的来自服务器的网络流量</value>
+  </data>
   <data name="Label-performance.runstate_blocked" xml:space="preserve">
     <value>vCPU 空闲</value>
   </data>
@@ -822,6 +753,9 @@
   <data name="Label-performance.runstate_partial_run" xml:space="preserve">
     <value>vCPU 部分运行</value>
   </data>
+  <data name="Label-performance.sr_avgqu_sz" xml:space="preserve">
+    <value>“{0}”队列大小</value>
+  </data>
   <data name="Label-performance.sr_cache_hits" xml:space="preserve">
     <value>IntelliCache 缓存命中数</value>
   </data>
@@ -830,6 +764,45 @@
   </data>
   <data name="Label-performance.sr_cache_size" xml:space="preserve">
     <value>IntelliCache 缓存大小</value>
+  </data>
+  <data name="Label-performance.sr_inflight" xml:space="preserve">
+    <value>“{0}”传输请求</value>
+  </data>
+  <data name="Label-performance.sr_io_throughput_read" xml:space="preserve">
+    <value>“{0}”读取吞吐量</value>
+  </data>
+  <data name="Label-performance.sr_io_throughput_total" xml:space="preserve">
+    <value>“{0}”总吞吐量</value>
+  </data>
+  <data name="Label-performance.sr_io_throughput_write" xml:space="preserve">
+    <value>“{0}”写入吞吐量</value>
+  </data>
+  <data name="Label-performance.sr_iops_read" xml:space="preserve">
+    <value>“{0}”读取 IOPS</value>
+  </data>
+  <data name="Label-performance.sr_iops_total" xml:space="preserve">
+    <value>“{0}”总 IOPS</value>
+  </data>
+  <data name="Label-performance.sr_iops_write" xml:space="preserve">
+    <value>“{0}”写入 IOPS</value>
+  </data>
+  <data name="Label-performance.sr_iowait" xml:space="preserve">
+    <value>“{0}”IO 等待</value>
+  </data>
+  <data name="Label-performance.sr_latency" xml:space="preserve">
+    <value>“{0}”延迟</value>
+  </data>
+  <data name="Label-performance.sr_rw_read" xml:space="preserve">
+    <value>“{0}”读取吞吐量</value>
+  </data>
+  <data name="Label-performance.sr_rw_read_latency" xml:space="preserve">
+    <value>“{0}”读取延迟</value>
+  </data>
+  <data name="Label-performance.sr_rw_write" xml:space="preserve">
+    <value>“{0}”写入吞吐量</value>
+  </data>
+  <data name="Label-performance.sr_rw_write_latency" xml:space="preserve">
+    <value>“{0}”写入延迟</value>
   </data>
   <data name="Label-performance.statefile_latency" xml:space="preserve">
     <value>高可用性状态文件延迟</value>
@@ -845,6 +818,36 @@
   </data>
   <data name="Label-performance.tap_tx_errors" xml:space="preserve">
     <value>TAP {0} 发送错误</value>
+  </data>
+  <data name="Label-performance.Tapdisks_in_low_memory_mode" xml:space="preserve">
+    <value>Tapdisk 处于低内存模式</value>
+  </data>
+  <data name="Label-performance.vbd_avgqu_sz" xml:space="preserve">
+    <value>磁盘 {0} 队列大小</value>
+  </data>
+  <data name="Label-performance.vbd_inflight" xml:space="preserve">
+    <value>磁盘 {0} 传输请求</value>
+  </data>
+  <data name="Label-performance.vbd_io_throughput_read" xml:space="preserve">
+    <value>磁盘 {0} IO 读取存储量</value>
+  </data>
+  <data name="Label-performance.vbd_io_throughput_total" xml:space="preserve">
+    <value>磁盘 {0} IO 总吞吐量</value>
+  </data>
+  <data name="Label-performance.vbd_io_throughput_write" xml:space="preserve">
+    <value>磁盘 {0} IO 写入吞吐量</value>
+  </data>
+  <data name="Label-performance.vbd_iops_read" xml:space="preserve">
+    <value>磁盘 {0} 读取 IOPS</value>
+  </data>
+  <data name="Label-performance.vbd_iops_total" xml:space="preserve">
+    <value>磁盘 {0} 总 IOPS</value>
+  </data>
+  <data name="Label-performance.vbd_iops_write" xml:space="preserve">
+    <value>磁盘 {0} 写入 IOPS</value>
+  </data>
+  <data name="Label-performance.vbd_iowait" xml:space="preserve">
+    <value>磁盘 {0} IO 等待</value>
   </data>
   <data name="Label-performance.vbd_latency" xml:space="preserve">
     <value>磁盘 {0} 平均 I/O 延迟</value>
@@ -900,6 +903,9 @@
   <data name="Label-performance.xapi_memory_usage_kib" xml:space="preserve">
     <value>代理内存使用量</value>
   </data>
+  <data name="Label-performance.xapi_open_fds" xml:space="preserve">
+    <value>打开的文件描述符数</value>
+  </data>
   <data name="Label-performance.xapi_rx" xml:space="preserve">
     <value>&lt;内部&gt; 网络 {0} 接收</value>
   </data>
@@ -926,6 +932,273 @@
   </data>
   <data name="Label-pool.ha_enabled" xml:space="preserve">
     <value>池高可用性已启用</value>
+  </data>
+  <data name="Label-Pool_patch.applied" xml:space="preserve">
+    <value>已应用</value>
+  </data>
+  <data name="Label-Pool_patch.fully_applied" xml:space="preserve">
+    <value>已完全应用</value>
+  </data>
+  <data name="Label-Pool_patch.not_applied" xml:space="preserve">
+    <value>未应用</value>
+  </data>
+  <data name="Label-Pool_patch.partially_applied" xml:space="preserve">
+    <value>已部分应用</value>
+  </data>
+  <data name="Label-Pool_patch.required-updates" xml:space="preserve">
+    <value>必需的更新</value>
+  </data>
+  <data name="Label-pvsaccelerator" xml:space="preserve">
+    <value>PVS 加速器</value>
+  </data>
+  <data name="Label-SR.disk-space-allocations" xml:space="preserve">
+    <value>磁盘空间分配</value>
+  </data>
+  <data name="Label-SR.provisioning" xml:space="preserve">
+    <value>预配</value>
+  </data>
+  <data name="Label-SR.scsiid" xml:space="preserve">
+    <value>SCSI ID</value>
+  </data>
+  <data name="Label-SR.size" xml:space="preserve">
+    <value>大小</value>
+  </data>
+  <data name="Label-SR.SRTypes-cslg" xml:space="preserve">
+    <value>StorageLink</value>
+  </data>
+  <data name="Label-SR.SRTypes-dummy" xml:space="preserve">
+    <value>未知</value>
+  </data>
+  <data name="Label-SR.SRTypes-ebs" xml:space="preserve">
+    <value>弹性块存储</value>
+  </data>
+  <data name="Label-SR.SRTypes-egenera" xml:space="preserve">
+    <value>Egenera 虚拟存储</value>
+  </data>
+  <data name="Label-SR.SRTypes-egeneracd" xml:space="preserve">
+    <value>Egenera 虚拟 DVD 驱动器</value>
+  </data>
+  <data name="Label-SR.SRTypes-equal" xml:space="preserve">
+    <value>Dell EqualLogic</value>
+  </data>
+  <data name="Label-SR.SRTypes-ext" xml:space="preserve">
+    <value>Ext3</value>
+  </data>
+  <data name="Label-SR.SRTypes-gfs2" xml:space="preserve">
+    <value>GFS2</value>
+  </data>
+  <data name="Label-SR.SRTypes-iscsi" xml:space="preserve">
+    <value>VDI-per-LUN iSCSI</value>
+  </data>
+  <data name="Label-SR.SRTypes-iso" xml:space="preserve">
+    <value>ISO</value>
+  </data>
+  <data name="Label-SR.SRTypes-local" xml:space="preserve">
+    <value>本地</value>
+  </data>
+  <data name="Label-SR.SRTypes-lvm" xml:space="preserve">
+    <value>LVM</value>
+  </data>
+  <data name="Label-SR.SRTypes-lvmofc" xml:space="preserve">
+    <value>硬件 HBA</value>
+  </data>
+  <data name="Label-SR.SRTypes-lvmofcoe" xml:space="preserve">
+    <value>FCoE</value>
+  </data>
+  <data name="Label-SR.SRTypes-lvmohba" xml:space="preserve">
+    <value>硬件 HBA</value>
+  </data>
+  <data name="Label-SR.SRTypes-lvmoiscsi" xml:space="preserve">
+    <value>基于 iSCSI 的 LVM</value>
+  </data>
+  <data name="Label-SR.SRTypes-netapp" xml:space="preserve">
+    <value>NetApp</value>
+  </data>
+  <data name="Label-SR.SRTypes-nfs" xml:space="preserve">
+    <value>NFS</value>
+  </data>
+  <data name="Label-SR.SRTypes-nutanix" xml:space="preserve">
+    <value>Nutanix</value>
+  </data>
+  <data name="Label-SR.SRTypes-nutanixiso" xml:space="preserve">
+    <value>Nutanix ISO</value>
+  </data>
+  <data name="Label-SR.SRTypes-rawhba" xml:space="preserve">
+    <value>LUN-per-VDI</value>
+  </data>
+  <data name="Label-SR.SRTypes-shm" xml:space="preserve">
+    <value>本地性能监视</value>
+  </data>
+  <data name="Label-SR.SRTypes-smb" xml:space="preserve">
+    <value>SMB</value>
+  </data>
+  <data name="Label-SR.SRTypes-tmpfs" xml:space="preserve">
+    <value>未知</value>
+  </data>
+  <data name="Label-SR.SRTypes-udev" xml:space="preserve">
+    <value>udev</value>
+  </data>
+  <data name="Label-SR.SRTypes-unknown" xml:space="preserve">
+    <value>未知</value>
+  </data>
+  <data name="Label-SR.state" xml:space="preserve">
+    <value>状态</value>
+  </data>
+  <data name="Label-Supplemental_packs.installed" xml:space="preserve">
+    <value>安装的补充包</value>
+  </data>
+  <data name="Label-VM.affinity" xml:space="preserve">
+    <value>主服务器</value>
+  </data>
+  <data name="Label-VM.auto_boot" xml:space="preserve">
+    <value>自动引导</value>
+  </data>
+  <data name="Label-VM.BootMode" xml:space="preserve">
+    <value>引导模式</value>
+  </data>
+  <data name="Label-VM.BootOrder" xml:space="preserve">
+    <value>引导顺序</value>
+  </data>
+  <data name="Label-VM.ha_restart_priority" xml:space="preserve">
+    <value>高可用性重启优先级</value>
+  </data>
+  <data name="Label-VM.ha_restart_priority.AlwaysRestart" xml:space="preserve">
+    <value>重新启动</value>
+  </data>
+  <data name="Label-VM.ha_restart_priority.AlwaysRestartHighPriority" xml:space="preserve">
+    <value>首先重新启动</value>
+  </data>
+  <data name="Label-VM.ha_restart_priority.BestEffort" xml:space="preserve">
+    <value>在可能时重新启动</value>
+  </data>
+  <data name="Label-VM.ha_restart_priority.DoNotRestart" xml:space="preserve">
+    <value>不重新启动</value>
+  </data>
+  <data name="Label-VM.ha_restart_priority.High" xml:space="preserve">
+    <value>高</value>
+  </data>
+  <data name="Label-VM.ha_restart_priority.Low" xml:space="preserve">
+    <value>低</value>
+  </data>
+  <data name="Label-VM.ha_restart_priority.Medium" xml:space="preserve">
+    <value>中</value>
+  </data>
+  <data name="Label-VM.ha_restart_priority.Restart" xml:space="preserve">
+    <value>重新启动</value>
+  </data>
+  <data name="Label-VM.ImageId" xml:space="preserve">
+    <value>映像 ID</value>
+  </data>
+  <data name="Label-VM.InstanceId" xml:space="preserve">
+    <value>实例 ID</value>
+  </data>
+  <data name="Label-VM.InstanceType" xml:space="preserve">
+    <value>实例类型</value>
+  </data>
+  <data name="Label-VM.KeyName" xml:space="preserve">
+    <value>项名</value>
+  </data>
+  <data name="Label-VM.MaxVCPUs" xml:space="preserve">
+    <value>vCPU 的最大数量</value>
+  </data>
+  <data name="Label-VM.memory_static_max" xml:space="preserve">
+    <value>内存</value>
+  </data>
+  <data name="Label-VM.OperatingMode" xml:space="preserve">
+    <value>虚拟化模式</value>
+  </data>
+  <data name="Label-VM.OSName" xml:space="preserve">
+    <value>操作系统</value>
+  </data>
+  <data name="Label-VM.P2V_ImportDate" xml:space="preserve">
+    <value>P2V 导入日期</value>
+  </data>
+  <data name="Label-VM.P2V_SourceMachine" xml:space="preserve">
+    <value>P2V 源计算机</value>
+  </data>
+  <data name="Label-VM.power_state-Halted" xml:space="preserve">
+    <value>已停止</value>
+  </data>
+  <data name="Label-VM.power_state-Paused" xml:space="preserve">
+    <value>已暂停</value>
+  </data>
+  <data name="Label-VM.power_state-Running" xml:space="preserve">
+    <value>正在运行</value>
+  </data>
+  <data name="Label-VM.power_state-Suspended" xml:space="preserve">
+    <value>已挂起</value>
+  </data>
+  <data name="Label-VM.power_state-unknown" xml:space="preserve">
+    <value>未知</value>
+  </data>
+  <data name="Label-VM.PrivateDnsName" xml:space="preserve">
+    <value>专用 DNS 条目</value>
+  </data>
+  <data name="Label-VM.PublicDnsName" xml:space="preserve">
+    <value>公用 DNS 条目</value>
+  </data>
+  <data name="Label-VM.PV_args" xml:space="preserve">
+    <value>操作系统启动参数</value>
+  </data>
+  <data name="Label-VM.pvs_read_caching_status" xml:space="preserve">
+    <value>PVS 加速器状态</value>
+  </data>
+  <data name="Label-VM.read_caching_disks" xml:space="preserve">
+    <value>磁盘</value>
+  </data>
+  <data name="Label-VM.read_caching_reason" xml:space="preserve">
+    <value>原因</value>
+  </data>
+  <data name="Label-VM.read_caching_status" xml:space="preserve">
+    <value>状态</value>
+  </data>
+  <data name="Label-VM.Topology" xml:space="preserve">
+    <value>拓扑</value>
+  </data>
+  <data name="Label-VM.uptime" xml:space="preserve">
+    <value>启动后经过的时间</value>
+  </data>
+  <data name="Label-VM.VCPUs" xml:space="preserve">
+    <value>虚拟 CPU</value>
+  </data>
+  <data name="Label-VM.VCPUWeight" xml:space="preserve">
+    <value>vCPU 优先级</value>
+  </data>
+  <data name="Label-VM.VCPUWeight-0" xml:space="preserve">
+    <value>最低</value>
+  </data>
+  <data name="Label-VM.VCPUWeight-1" xml:space="preserve">
+    <value>非常低</value>
+  </data>
+  <data name="Label-VM.VCPUWeight-2" xml:space="preserve">
+    <value>低</value>
+  </data>
+  <data name="Label-VM.VCPUWeight-3" xml:space="preserve">
+    <value>低于标准</value>
+  </data>
+  <data name="Label-VM.VCPUWeight-4" xml:space="preserve">
+    <value>标准</value>
+  </data>
+  <data name="Label-VM.VCPUWeight-5" xml:space="preserve">
+    <value>高于标准</value>
+  </data>
+  <data name="Label-VM.VCPUWeight-6" xml:space="preserve">
+    <value>高</value>
+  </data>
+  <data name="Label-VM.VCPUWeight-7" xml:space="preserve">
+    <value>非常高</value>
+  </data>
+  <data name="Label-VM.VCPUWeight-8" xml:space="preserve">
+    <value>最高</value>
+  </data>
+  <data name="Label-VM.VirtualizationState" xml:space="preserve">
+    <value>虚拟化状态</value>
+  </data>
+  <data name="Label-xenserver-measured-boot" xml:space="preserve">
+    <value>测量启动</value>
+  </data>
+  <data name="Label-xscontainer" xml:space="preserve">
+    <value>容器管理</value>
   </data>
   <data name="Message.action-ha_heartbeat_approaching_timeout" xml:space="preserve">
     <value>高可用性设置</value>
@@ -965,6 +1238,9 @@
   </data>
   <data name="Message.action-multipath_periodic_alert" xml:space="preserve">
     <value>查看日志文件</value>
+  </data>
+  <data name="Message.action-pbd_plug_failed_on_server_start" xml:space="preserve">
+    <value>修复存储</value>
   </data>
   <data name="Message.action-vbd_qos_failed" xml:space="preserve">
     <value>应用许可证</value>
@@ -1040,6 +1316,12 @@
   <data name="Message.body-host_clock_went_backwards" xml:space="preserve">
     <value>“{0}”上的服务器时钟已倒退。</value>
   </data>
+  <data name="Message.body-host_cpu_features_down" xml:space="preserve">
+    <value>已降低主机“{0}”上的 CPU 功能级别。</value>
+  </data>
+  <data name="Message.body-host_cpu_features_up" xml:space="preserve">
+    <value>已提高主机“{0}”上的 CPU 功能级别。</value>
+  </data>
   <data name="Message.body-host_sync_data_failed" xml:space="preserve">
     <value>在池中同步性能统计信息时出现临时故障，这可能是因为一个或多个服务器处于脱机状态。稍后将再次尝试同步。</value>
   </data>
@@ -1064,8 +1346,8 @@
   <data name="Message.body-license_server_unreachable" xml:space="preserve">
     <value>无法为 {0} 签出许可证，因为在给定地址和端口处无法访问许可证服务器。请检查连接的详细信息，并确认许可证服务器正在运行。</value>
   </data>
-  <data name="Message.body-tls_verification_emergency_disabled" xml:space="preserve">
-    <value>证书验证已在池上启用，但在服务器“{0}”上被覆盖。</value>
+  <data name="Message.body-license_server_version_obsolete" xml:space="preserve">
+    <value>{0} 的许可证服务器版本已过时。</value>
   </data>
   <data name="Message.body-metadata_lun_broken" xml:space="preserve">
     <value>池“{0}”无法访问高可用性元数据磁盘。在恢复访问前，如果发生高可用性故障转移，对池元数据进行的更改可能会丢失。</value>
@@ -1088,8 +1370,20 @@
   <data name="Message.body-pbd_plug_failed_on_server_start" xml:space="preserve">
     <value>服务器“{0}”启动时无法附加存储库。</value>
   </data>
+  <data name="Message.body-pool_cpu_features_down" xml:space="preserve">
+    <value>已降低池“{0}”上的 CPU 功能级别。</value>
+  </data>
+  <data name="Message.body-pool_cpu_features_up" xml:space="preserve">
+    <value>已提高池“{0}”上的 CPU 功能级别。</value>
+  </data>
   <data name="Message.body-pool_master_transition" xml:space="preserve">
     <value>服务器“{0}”现在是池“{1}”的协调器。</value>
+  </data>
+  <data name="Message.body-pvs_proxy_no_cache_sr_available" xml:space="preserve">
+    <value>无法在 VM“{0}”上设置 PVS 加速器。在站点“{1}”上未找到缓存存储。</value>
+  </data>
+  <data name="Message.body-tls_verification_emergency_disabled" xml:space="preserve">
+    <value>证书验证已在池上启用，但在服务器“{0}”上被覆盖。</value>
   </data>
   <data name="Message.body-vbd_qos_failed" xml:space="preserve">
     <value>无法遵循虚拟机“{1}”上磁盘“{0}”的服务质量设置。</value>
@@ -1120,6 +1414,9 @@
   </data>
   <data name="Message.body-vm_resumed" xml:space="preserve">
     <value>虚拟机“{0}”已恢复。</value>
+  </data>
+  <data name="Message.body-vm_secure_boot_failed" xml:space="preserve">
+    <value>虚拟机“{0}”无法通过安全启动验证。</value>
   </data>
   <data name="Message.body-vm_shutdown" xml:space="preserve">
     <value>虚拟机“{0}”已关闭。</value>
@@ -1160,6 +1457,12 @@
   <data name="Message.help-alarm" xml:space="preserve">
     <value>有关警报的帮助</value>
   </data>
+  <data name="Message.help-extauth_in_pool_is_non_homogeneous" xml:space="preserve">
+    <value>有关 AD 的帮助</value>
+  </data>
+  <data name="Message.help-extauth_init_in_host_failed" xml:space="preserve">
+    <value>有关 AD 的帮助</value>
+  </data>
   <data name="Message.help-ha_heartbeat_approaching_timeout" xml:space="preserve">
     <value>有关高可用性的帮助</value>
   </data>
@@ -1194,6 +1497,24 @@
     <value>有关高可用性的帮助</value>
   </data>
   <data name="Message.help-license_does_not_support_pooling" xml:space="preserve">
+    <value>有关许可的帮助</value>
+  </data>
+  <data name="Message.help-license_expired" xml:space="preserve">
+    <value>有关许可的帮助</value>
+  </data>
+  <data name="Message.help-license_not_available" xml:space="preserve">
+    <value>有关许可的帮助</value>
+  </data>
+  <data name="Message.help-license_server_connected" xml:space="preserve">
+    <value>有关许可的帮助</value>
+  </data>
+  <data name="Message.help-license_server_unavailable" xml:space="preserve">
+    <value>有关许可的帮助</value>
+  </data>
+  <data name="Message.help-license_server_unreachable" xml:space="preserve">
+    <value>有关许可的帮助</value>
+  </data>
+  <data name="Message.help-license_server_version_obsolete" xml:space="preserve">
     <value>有关许可的帮助</value>
   </data>
   <data name="Message.help-pbd_plug_failed_on_server_start" xml:space="preserve">
@@ -1268,6 +1589,12 @@
   <data name="Message.name-host_clock_went_backwards" xml:space="preserve">
     <value>服务器时钟已倒退</value>
   </data>
+  <data name="Message.name-host_cpu_features_down" xml:space="preserve">
+    <value>已减少主机 CPU 功能</value>
+  </data>
+  <data name="Message.name-host_cpu_features_up" xml:space="preserve">
+    <value>已增加主机 CPU 功能</value>
+  </data>
   <data name="Message.name-host_sync_data_failed" xml:space="preserve">
     <value>服务器统计信息同步失败</value>
   </data>
@@ -1295,8 +1622,8 @@
   <data name="Message.name-license_server_unreachable" xml:space="preserve">
     <value>无法访问许可证服务器。</value>
   </data>
-  <data name="Message.name-tls_verification_emergency_disabled" xml:space="preserve">
-    <value>证书验证已禁用。</value>
+  <data name="Message.name-license_server_version_obsolete" xml:space="preserve">
+    <value>许可证服务器版本已过时。</value>
   </data>
   <data name="Message.name-metadata_lun_broken" xml:space="preserve">
     <value>已失去对高可用性元数据磁盘的访问</value>
@@ -1310,8 +1637,32 @@
   <data name="Message.name-pbd_plug_failed_on_server_start" xml:space="preserve">
     <value>无法在服务器启动时连接存储</value>
   </data>
+  <data name="Message.name-pool_cpu_features_down" xml:space="preserve">
+    <value>已减少池 CPU 功能</value>
+  </data>
+  <data name="Message.name-pool_cpu_features_up" xml:space="preserve">
+    <value>已增加池 CPU 功能</value>
+  </data>
   <data name="Message.name-pool_master_transition" xml:space="preserve">
     <value>已更改池协调器</value>
+  </data>
+  <data name="Message.name-pvs_proxy_no_cache_sr_available" xml:space="preserve">
+    <value>没有可用于 PVS 站点的缓存存储</value>
+  </data>
+  <data name="Message.name-pvs_proxy_setup_failed" xml:space="preserve">
+    <value>PVS 代理设置失败</value>
+  </data>
+  <data name="Message.name-SRUnavailable" xml:space="preserve">
+    <value>无法回收释放的空间，因为 SR 正忙</value>
+  </data>
+  <data name="Message.name-tls_verification_emergency_disabled" xml:space="preserve">
+    <value>证书验证已禁用。</value>
+  </data>
+  <data name="Message.name-UnknownTrimException" xml:space="preserve">
+    <value>回收释放的空间时出现未知错误</value>
+  </data>
+  <data name="Message.name-UnsupportedSRForTrim" xml:space="preserve">
+    <value>不支持在此 SR 上回收释放的空间</value>
   </data>
   <data name="Message.name-vbd_qos_failed" xml:space="preserve">
     <value>VM 磁盘 QoS 失败</value>
@@ -1342,6 +1693,9 @@
   </data>
   <data name="Message.name-vm_resumed" xml:space="preserve">
     <value>VM 已恢复</value>
+  </data>
+  <data name="Message.name-vm_secure_boot_failed" xml:space="preserve">
+    <value>VM 安全启动验证失败</value>
   </data>
   <data name="Message.name-vm_shutdown" xml:space="preserve">
     <value>VM 已关闭</value>
@@ -1390,6 +1744,39 @@
   </data>
   <data name="Message.name-wlb_vm_relocation" xml:space="preserve">
     <value>WLB VM 重新定位</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_ERROR_PREPARING_HOST" xml:space="preserve">
+    <value>准备主机以进行升级时出现错误。</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_FORBIDDEN" xml:space="preserve">
+    <value>禁止访问指定的网络位置。</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_INVALID_URL" xml:space="preserve">
+    <value>安装程序文件的 URL 无效。</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_INVALID_VER" xml:space="preserve">
+    <value>指定位置包含非适用版本的安装程序文件。</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_MISSING_URL" xml:space="preserve">
+    <value>缺少 URL。</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_NOT_FOUND" xml:space="preserve">
+    <value>找不到指定的网络位置。</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_PROXY AUTH FAILURE" xml:space="preserve">
+    <value>访问指定的网络位置需要代理身份验证。</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_REPO_IOERROR" xml:space="preserve">
+    <value>打开安装程序文件时出错。</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_REPO_SERVER_ERROR_5XX" xml:space="preserve">
+    <value>服务器托管和安装程序文件遇到错误。</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_TIMEOUT" xml:space="preserve">
+    <value>请求已超时。</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_UNAUTH_URL" xml:space="preserve">
+    <value>您无权使用输入的凭据访问指定的网络位置。</value>
   </data>
   <data name="Role.pool-admin.Description" xml:space="preserve">
     <value>池管理员对所有功能和设置具有完全访问权限。可以访问服务器控制台并管理其他用户的角色。
@@ -1463,6 +1850,9 @@
   <data name="SR.name_description-local-hotplug-cd-host" xml:space="preserve">
     <value>{0} 上的物理 DVD 驱动器</value>
   </data>
+  <data name="SR.name_description-local-hotplug-disk" xml:space="preserve">
+    <value>可移动物理存储</value>
+  </data>
   <data name="SR.name_description-local-hotplug-disk-host" xml:space="preserve">
     <value>{0} 上的可移动物理存储</value>
   </data>
@@ -1501,395 +1891,5 @@
   </data>
   <data name="VM.TemplateDescription-Other install media" xml:space="preserve">
     <value>如果未列出您要使用的操作系统，或许可以通过选择此模板来进行安装。建议仅由高级用户尝试使用此模板，并且请注意，我们的产品仅在运行标准随附模板所涵盖的受支持发行版和特定版本的情况下经过测试。</value>
-  </data>
-  <data name="SR.name_description-local-hotplug-disk" xml:space="preserve">
-    <value>可移动物理存储</value>
-  </data>
-  <data name="Label-performance.cpu_avg" xml:space="preserve">
-    <value>平均 CPU 使用率</value>
-  </data>
-  <data name="Label-performance.pif_aggr_rx" xml:space="preserve">
-    <value>NIC 接收的总数据量</value>
-  </data>
-  <data name="Label-performance.pif_aggr_tx" xml:space="preserve">
-    <value>NIC 发送的总数据量</value>
-  </data>
-  <data name="Label-SR.SRTypes-rawhba" xml:space="preserve">
-    <value>LUN-per-VDI</value>
-  </data>
-  <data name="Label-performance.sr_avgqu_sz" xml:space="preserve">
-    <value>“{0}”队列大小</value>
-  </data>
-  <data name="Label-performance.cpu-state" xml:space="preserve">
-    <value>CPU {0} {1}-状态 {2}</value>
-  </data>
-  <data name="Label-performance.sr_inflight" xml:space="preserve">
-    <value>“{0}”传输请求</value>
-  </data>
-  <data name="Label-performance.sr_iops_read" xml:space="preserve">
-    <value>“{0}”读取 IOPS</value>
-  </data>
-  <data name="Label-performance.sr_iops_total" xml:space="preserve">
-    <value>“{0}”总 IOPS</value>
-  </data>
-  <data name="Label-performance.sr_iops_write" xml:space="preserve">
-    <value>“{0}”写入 IOPS</value>
-  </data>
-  <data name="Label-performance.sr_iowait" xml:space="preserve">
-    <value>“{0}”IO 等待</value>
-  </data>
-  <data name="Label-performance.sr_io_throughput_read" xml:space="preserve">
-    <value>“{0}”读取吞吐量</value>
-  </data>
-  <data name="Label-performance.sr_io_throughput_total" xml:space="preserve">
-    <value>“{0}”总吞吐量</value>
-  </data>
-  <data name="Label-performance.sr_io_throughput_write" xml:space="preserve">
-    <value>“{0}”写入吞吐量</value>
-  </data>
-  <data name="Label-performance.sr_latency" xml:space="preserve">
-    <value>“{0}”延迟</value>
-  </data>
-  <data name="Label-performance.memory_reclaimed" xml:space="preserve">
-    <value>回收的内存</value>
-  </data>
-  <data name="Label-performance.memory_reclaimed_max" xml:space="preserve">
-    <value>潜在回收的内存</value>
-  </data>
-  <data name="Message.help-extauth_init_in_host_failed" xml:space="preserve">
-    <value>有关 AD 的帮助</value>
-  </data>
-  <data name="Message.help-extauth_in_pool_is_non_homogeneous" xml:space="preserve">
-    <value>有关 AD 的帮助</value>
-  </data>
-  <data name="Label-performance.vbd_avgqu_sz" xml:space="preserve">
-    <value>磁盘 {0} 队列大小</value>
-  </data>
-  <data name="Label-performance.vbd_inflight" xml:space="preserve">
-    <value>磁盘 {0} 传输请求</value>
-  </data>
-  <data name="Label-performance.vbd_iops_read" xml:space="preserve">
-    <value>磁盘 {0} 读取 IOPS</value>
-  </data>
-  <data name="Label-performance.vbd_iops_total" xml:space="preserve">
-    <value>磁盘 {0} 总 IOPS</value>
-  </data>
-  <data name="Label-performance.vbd_iops_write" xml:space="preserve">
-    <value>磁盘 {0} 写入 IOPS</value>
-  </data>
-  <data name="Label-performance.vbd_iowait" xml:space="preserve">
-    <value>磁盘 {0} IO 等待</value>
-  </data>
-  <data name="Label-performance.gpu_memory_free" xml:space="preserve">
-    <value>{0} {1} 可用内存</value>
-  </data>
-  <data name="Label-performance.gpu_memory_used" xml:space="preserve">
-    <value>{0} {1} 已用内存</value>
-  </data>
-  <data name="Label-performance.gpu_power_usage" xml:space="preserve">
-    <value>{0} {1} 电源使用率</value>
-  </data>
-  <data name="Label-performance.gpu_temperature" xml:space="preserve">
-    <value>{0} {1} 温度</value>
-  </data>
-  <data name="Label-performance.gpu_utilisation_compute" xml:space="preserve">
-    <value>{0} {1} 利用率</value>
-  </data>
-  <data name="Label-performance.gpu_utilisation_memory_io" xml:space="preserve">
-    <value>{0} {1} 内存利用率</value>
-  </data>
-  <data name="Message.name-SRUnavailable" xml:space="preserve">
-    <value>无法回收释放的空间，因为 SR 正忙</value>
-  </data>
-  <data name="Message.name-UnknownTrimException" xml:space="preserve">
-    <value>回收释放的空间时出现未知错误</value>
-  </data>
-  <data name="Message.name-UnsupportedSRForTrim" xml:space="preserve">
-    <value>不支持在此 SR 上回收释放的空间</value>
-  </data>
-  <data name="Description-host.system_status-xcp-rrdd-plugins" xml:space="preserve">
-    <value>来自 RRD 守护程序的日志文件</value>
-  </data>
-  <data name="Label-host.system_status-xcp-rrdd-plugins" xml:space="preserve">
-    <value>RRD 插件日志</value>
-  </data>
-  <data name="Label-VM.Topology" xml:space="preserve">
-    <value>拓扑</value>
-  </data>
-  <data name="Label-VM.MaxVCPUs" xml:space="preserve">
-    <value>vCPU 的最大数量</value>
-  </data>
-  <data name="Message.body-license_server_version_obsolete" xml:space="preserve">
-    <value>{0} 的许可证服务器版本已过时。</value>
-  </data>
-  <data name="Message.name-license_server_version_obsolete" xml:space="preserve">
-    <value>许可证服务器版本已过时。</value>
-  </data>
-  <data name="Message.help-license_expired" xml:space="preserve">
-    <value>有关许可的帮助</value>
-  </data>
-  <data name="Message.help-license_not_available" xml:space="preserve">
-    <value>有关许可的帮助</value>
-  </data>
-  <data name="Message.help-license_server_connected" xml:space="preserve">
-    <value>有关许可的帮助</value>
-  </data>
-  <data name="Message.help-license_server_unavailable" xml:space="preserve">
-    <value>有关许可的帮助</value>
-  </data>
-  <data name="Message.help-license_server_unreachable" xml:space="preserve">
-    <value>有关许可的帮助</value>
-  </data>
-  <data name="Message.help-license_server_version_obsolete" xml:space="preserve">
-    <value>有关许可的帮助</value>
-  </data>
-  <data name="Label-Supplemental_packs.installed" xml:space="preserve">
-    <value>安装的补充包</value>
-  </data>
-  <data name="Label-VM.read_caching_status" xml:space="preserve">
-    <value>状态</value>
-  </data>
-  <data name="Label-VM.read_caching_disks" xml:space="preserve">
-    <value>磁盘</value>
-  </data>
-  <data name="Label-VM.read_caching_reason" xml:space="preserve">
-    <value>原因</value>
-  </data>
-  <data name="Label-performance.vbd_io_throughput_total" xml:space="preserve">
-    <value>磁盘 {0} IO 总吞吐量</value>
-  </data>
-  <data name="Label-performance.vbd_io_throughput_read" xml:space="preserve">
-    <value>磁盘 {0} IO 读取存储量</value>
-  </data>
-  <data name="Label-performance.vbd_io_throughput_write" xml:space="preserve">
-    <value>磁盘 {0} IO 写入吞吐量</value>
-  </data>
-  <data name="Label-VM.OperatingMode" xml:space="preserve">
-    <value>虚拟化模式</value>
-  </data>
-  <data name="Label-SR.SRTypes-lvmofcoe" xml:space="preserve">
-    <value>FCoE</value>
-  </data>
-  <data name="Label-SR.provisioning" xml:space="preserve">
-    <value>预配</value>
-  </data>
-  <data name="Label-SR.disk-space-allocations" xml:space="preserve">
-    <value>磁盘空间分配</value>
-  </data>
-  <data name="Label-performance.pool_session_count" xml:space="preserve">
-    <value>会话数</value>
-  </data>
-  <data name="Label-performance.pool_task_count" xml:space="preserve">
-    <value>任务数</value>
-  </data>
-  <data name="Label-performance.Tapdisks_in_low_memory_mode" xml:space="preserve">
-    <value>Tapdisk 处于低内存模式</value>
-  </data>
-  <data name="Label-performance.xapi_open_fds" xml:space="preserve">
-    <value>打开的文件描述符数</value>
-  </data>
-  <data name="Label-performance.io_errors" xml:space="preserve">
-    <value>I/O 错误</value>
-  </data>
-  <data name="Message.body-host_cpu_features_down" xml:space="preserve">
-    <value>已降低主机“{0}”上的 CPU 功能级别。</value>
-  </data>
-  <data name="Message.body-host_cpu_features_up" xml:space="preserve">
-    <value>已提高主机“{0}”上的 CPU 功能级别。</value>
-  </data>
-  <data name="Message.body-pool_cpu_features_down" xml:space="preserve">
-    <value>已降低池“{0}”上的 CPU 功能级别。</value>
-  </data>
-  <data name="Message.body-pool_cpu_features_up" xml:space="preserve">
-    <value>已提高池“{0}”上的 CPU 功能级别。</value>
-  </data>
-  <data name="Message.name-host_cpu_features_down" xml:space="preserve">
-    <value>已减少主机 CPU 功能</value>
-  </data>
-  <data name="Message.name-host_cpu_features_up" xml:space="preserve">
-    <value>已增加主机 CPU 功能</value>
-  </data>
-  <data name="Message.name-pool_cpu_features_down" xml:space="preserve">
-    <value>已减少池 CPU 功能</value>
-  </data>
-  <data name="Message.name-pool_cpu_features_up" xml:space="preserve">
-    <value>已增加池 CPU 功能</value>
-  </data>
-  <data name="Description-host.system_status-control-slice" xml:space="preserve">
-    <value>与系统的控制组有关的信息和统计数据</value>
-  </data>
-  <data name="Description-host.system_status-fcoe" xml:space="preserve">
-    <value>以太网光纤通道(FCoE)日志</value>
-  </data>
-  <data name="Description-host.system_status-message-switch" xml:space="preserve">
-    <value>在系统守护程序之间交换的消息的日志</value>
-  </data>
-  <data name="Description-host.system_status-xenvm" xml:space="preserve">
-    <value>卷管理器日志</value>
-  </data>
-  <data name="Label-host.system_status-control-slice" xml:space="preserve">
-    <value>控制组统计数据</value>
-  </data>
-  <data name="Label-host.system_status-fcoe" xml:space="preserve">
-    <value>FCoE 日志</value>
-  </data>
-  <data name="Label-host.system_status-message-switch" xml:space="preserve">
-    <value>内部消息日志</value>
-  </data>
-  <data name="Label-host.system_status-xenvm" xml:space="preserve">
-    <value>卷管理器日志</value>
-  </data>
-  <data name="Label-host.system_status-xscontainer" xml:space="preserve">
-    <value>容器管理日志</value>
-  </data>
-  <data name="Description-host.system_status-xscontainer" xml:space="preserve">
-    <value>容器管理日志</value>
-  </data>
-  <data name="Label-host.system_status-tboot" xml:space="preserve">
-    <value>测量启动日志</value>
-  </data>
-  <data name="Description-host.system_status-tboot" xml:space="preserve">
-    <value>测量启动日志</value>
-  </data>
-  <data name="Description-host.system_status-conntest" xml:space="preserve">
-    <value>服务器与 Internet 之间的连接性测试</value>
-  </data>
-  <data name="Label-host.system_status-conntest" xml:space="preserve">
-    <value>测试连接</value>
-  </data>
-  <data name="Label-Pool_patch.required-updates" xml:space="preserve">
-    <value>必需的更新</value>
-  </data>
-  <data name="Label-SR.SRTypes-nutanix" xml:space="preserve">
-    <value>Nutanix</value>
-  </data>
-  <data name="Label-SR.SRTypes-nutanixiso" xml:space="preserve">
-    <value>Nutanix ISO</value>
-  </data>
-  <data name="Message.name-pvs_proxy_setup_failed" xml:space="preserve">
-    <value>PVS 代理设置失败</value>
-  </data>
-  <data name="Message.name-pvs_proxy_no_cache_sr_available" xml:space="preserve">
-    <value>没有可用于 PVS 站点的缓存存储</value>
-  </data>
-  <data name="Message.body-pvs_proxy_no_cache_sr_available" xml:space="preserve">
-    <value>无法在 VM“{0}”上设置 PVS 加速器。在站点“{1}”上未找到缓存存储。</value>
-  </data>
-  <data name="Label-performance.pvsaccelerator_evicted" xml:space="preserve">
-    <value>PVS 加速器逐出率</value>
-  </data>
-  <data name="Label-performance.pvsaccelerator_read_hits" xml:space="preserve">
-    <value>PVS 加速器命中率</value>
-  </data>
-  <data name="Label-performance.pvsaccelerator_read_misses" xml:space="preserve">
-    <value>PVS 加速器未命中率</value>
-  </data>
-  <data name="Label-performance.pvsaccelerator_read_total" xml:space="preserve">
-    <value>PVS 加速器观察到的读取率</value>
-  </data>
-  <data name="Label-performance.pvsaccelerator_space_utilization" xml:space="preserve">
-    <value>PVS 加速器空间利用率</value>
-  </data>
-  <data name="Label-performance.pvsaccelerator_traffic_client_sent" xml:space="preserve">
-    <value>PVS 加速器观察到的来自客户端的网络流量</value>
-  </data>
-  <data name="Label-performance.pvsaccelerator_traffic_proxy_saved" xml:space="preserve">
-    <value>PVS 加速器保存的网络流量</value>
-  </data>
-  <data name="Label-performance.pvsaccelerator_traffic_server_sent" xml:space="preserve">
-    <value>PVS 加速器观察到的来自服务器的网络流量</value>
-  </data>
-  <data name="Label-VM.pvs_read_caching_status" xml:space="preserve">
-    <value>PVS 加速器状态</value>
-  </data>
-  <data name="Label-performance.sr_rw_read" xml:space="preserve">
-    <value>“{0}”读取吞吐量</value>
-  </data>
-  <data name="Label-performance.sr_rw_read_latency" xml:space="preserve">
-    <value>“{0}”读取延迟</value>
-  </data>
-  <data name="Label-performance.sr_rw_write" xml:space="preserve">
-    <value>“{0}”写入吞吐量</value>
-  </data>
-  <data name="Label-performance.sr_rw_write_latency" xml:space="preserve">
-    <value>“{0}”写入延迟</value>
-  </data>
-  <data name="Label-pvsaccelerator" xml:space="preserve">
-    <value>PVS 加速器</value>
-  </data>
-  <data name="Label-xenserver-measured-boot" xml:space="preserve">
-    <value>测量启动</value>
-  </data>
-  <data name="Label-xscontainer" xml:space="preserve">
-    <value>容器管理</value>
-  </data>
-  <data name="Description-host.system_status-xspvscache" xml:space="preserve">
-    <value>PVS 加速器状态</value>
-  </data>
-  <data name="Label-host.system_status-xspvscache" xml:space="preserve">
-    <value>PVS 加速器状态</value>
-  </data>
-  <data name="Description-host.system_status-VM-snapshot-schedule" xml:space="preserve">
-    <value>计划快照日志文件</value>
-  </data>
-  <data name="Label-host.system_status-VM-snapshot-schedule" xml:space="preserve">
-    <value>计划快照日志文件</value>
-  </data>
-  <data name="Message.action-pbd_plug_failed_on_server_start" xml:space="preserve">
-    <value>修复存储</value>
-  </data>
-  <data name="Label-SR.SRTypes-gfs2" xml:space="preserve">
-    <value>GFS2</value>
-  </data>
-  <data name="Description-host.system_status-v6d" xml:space="preserve">
-    <value>服务器许可守护程序日志</value>
-  </data>
-  <data name="Description-host.system_status-xapi-clusterd" xml:space="preserve">
-    <value>群集管理守护程序为 Toolstack 生成的日志。</value>
-  </data>
-  <data name="Label-host.system_status-v6d" xml:space="preserve">
-    <value>服务器许可守护程序</value>
-  </data>
-  <data name="Label-host.system_status-xapi-clusterd" xml:space="preserve">
-    <value>服务器群集管理守护程序</value>
-  </data>
-  <data name="Message.body-vm_secure_boot_failed" xml:space="preserve">
-    <value>虚拟机“{0}”无法通过安全启动验证。</value>
-  </data>
-  <data name="Message.name-vm_secure_boot_failed" xml:space="preserve">
-    <value>VM 安全启动验证失败</value>
-  </data>
-  <data name="PREPARE_HOST_UPGRADE_ERROR_PREPARING_HOST" xml:space="preserve">
-    <value>准备主机以进行升级时出现错误。</value>
-  </data>
-  <data name="PREPARE_HOST_UPGRADE_FORBIDDEN" xml:space="preserve">
-    <value>禁止访问指定的网络位置。</value>
-  </data>
-  <data name="PREPARE_HOST_UPGRADE_INVALID_URL" xml:space="preserve">
-    <value>安装程序文件的 URL 无效。</value>
-  </data>
-  <data name="PREPARE_HOST_UPGRADE_INVALID_VER" xml:space="preserve">
-    <value>指定位置包含非适用版本的安装程序文件。</value>
-  </data>
-  <data name="PREPARE_HOST_UPGRADE_MISSING_URL" xml:space="preserve">
-    <value>缺少 URL。</value>
-  </data>
-  <data name="PREPARE_HOST_UPGRADE_TIMEOUT" xml:space="preserve">
-    <value>请求已超时。</value>
-  </data>
-  <data name="PREPARE_HOST_UPGRADE_UNAUTH_URL" xml:space="preserve">
-    <value>您无权使用输入的凭据访问指定的网络位置。</value>
-  </data>
-  <data name="PREPARE_HOST_UPGRADE_NOT_FOUND" xml:space="preserve">
-    <value>找不到指定的网络位置。</value>
-  </data>
-  <data name="PREPARE_HOST_UPGRADE_PROXY AUTH FAILURE" xml:space="preserve">
-    <value>访问指定的网络位置需要代理身份验证。</value>
-  </data>
-  <data name="PREPARE_HOST_UPGRADE_REPO_SERVER_ERROR_5XX" xml:space="preserve">
-    <value>服务器托管和安装程序文件遇到错误。</value>
-  </data>
-  <data name="PREPARE_HOST_UPGRADE_REPO_IOERROR" xml:space="preserve">
-    <value>打开安装程序文件时出错。</value>
   </data>
 </root>
