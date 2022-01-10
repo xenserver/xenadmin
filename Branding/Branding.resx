@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,8 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-
-
   <data name="BRAND_CONSOLE" xml:space="preserve">
     <value>[XenCenter]</value>
   </data>
@@ -145,65 +143,6 @@
   </data>
   <data name="HELP_PATH" xml:space="preserve">
     <value>xencenter/current-release/</value>
-  </data>
-  <data name="LEGACY_PRODUCT" xml:space="preserve">
-    <value>XenServer</value>
-  </data>
-  <data name="LEGACY_CONSOLE" xml:space="preserve">
-    <value>XenCenter</value>
-  </data>
-  <data name="PERF_ALERT_MAIL_DEFAULT_LANGUAGE" xml:space="preserve">
-    <value>en-US</value>
-  </data>
-  <data name="PRODUCT_BRAND" xml:space="preserve">
-    <value>[XenServer product]</value>
-  </data>
-  <data name="PRODUCT_BRAND_WITH_COMPANY" xml:space="preserve">
-    <value>[Citrix XenServer]</value>
-  </data>
-  <data name="PRODUCT_VERSION_5_6" xml:space="preserve">
-    <value>5.6</value>
-  </data>
-  <data name="PRODUCT_VERSION_6_5" xml:space="preserve">
-    <value>6.5</value>
-  </data>
-  <data name="PRODUCT_VERSION_7_0" xml:space="preserve">
-    <value>7.0</value>
-  </data>
-  <data name="PRODUCT_VERSION_7_1_2" xml:space="preserve">
-    <value>7.1.2</value>
-  </data>
-  <data name="PRODUCT_VERSION_8_0" xml:space="preserve">
-    <value>8.0</value>
-  </data>
-  <data name="PRODUCT_VERSION_8_1" xml:space="preserve">
-    <value>8.1</value>
-  </data>
-  <data name="PRODUCT_VERSION_8_2" xml:space="preserve">
-    <value>8.2</value>
-  </data>
-  <data name="PRODUCT_VERSION_8_2_1" xml:space="preserve">
-    <value>8.2.1</value>
-  </data>
-  <data name="PRODUCT_VERSION_POST_8_2" xml:space="preserve">
-    <value>[BRANDING_PRODUCT_VERSION_TEXT]</value>
-  </data>
-  <data name="PRODUCT_VERSION_TEXT" xml:space="preserve">
-    <value>[BRANDING_PRODUCT_VERSION_TEXT]</value>
-  </data>
-  <data name="UPDATES_URL" xml:space="preserve">
-    <value>https://updates.xensource.com/XenServer/updates.xml</value>
-  </data>
-  <data name="VM_TOOLS" xml:space="preserve">
-    <value>[Citrix VM Tools]</value>
-  </data>
-  <data name="XENCENTER_VERSION" xml:space="preserve">
-    <value>0.0.0</value>
-  </data>
-
-
-  <data name="Label-host.XenMemory" xml:space="preserve">
-    <value>[Citrix XenServer] Host</value>
   </data>
   <data name="Label-host.edition-basic" xml:space="preserve">
     <value>[Citrix XenServer] Basic Edition</value>
@@ -283,12 +222,67 @@
   <data name="Label-host.edition-xendesktop" xml:space="preserve">
     <value>[XenServer product] for [Citrix] Virtual Desktops</value>
   </data>
-
+  <data name="Label-host.XenMemory" xml:space="preserve">
+    <value>[Citrix XenServer] Host</value>
+  </data>
+  <data name="LEGACY_CONSOLE" xml:space="preserve">
+    <value>XenCenter</value>
+  </data>
+  <data name="LEGACY_PRODUCT" xml:space="preserve">
+    <value>XenServer</value>
+  </data>
+  <data name="PERF_ALERT_MAIL_DEFAULT_LANGUAGE" xml:space="preserve">
+    <value>en-US</value>
+  </data>
+  <data name="PRODUCT_BRAND" xml:space="preserve">
+    <value>[XenServer product]</value>
+  </data>
+  <data name="PRODUCT_BRAND_WITH_COMPANY" xml:space="preserve">
+    <value>[Citrix XenServer]</value>
+  </data>
+  <data name="PRODUCT_VERSION_5_6" xml:space="preserve">
+    <value>5.6</value>
+  </data>
+  <data name="PRODUCT_VERSION_6_5" xml:space="preserve">
+    <value>6.5</value>
+  </data>
+  <data name="PRODUCT_VERSION_7_0" xml:space="preserve">
+    <value>7.0</value>
+  </data>
+  <data name="PRODUCT_VERSION_7_1_2" xml:space="preserve">
+    <value>7.1.2</value>
+  </data>
+  <data name="PRODUCT_VERSION_8_0" xml:space="preserve">
+    <value>8.0</value>
+  </data>
+  <data name="PRODUCT_VERSION_8_1" xml:space="preserve">
+    <value>8.1</value>
+  </data>
+  <data name="PRODUCT_VERSION_8_2" xml:space="preserve">
+    <value>8.2</value>
+  </data>
+  <data name="PRODUCT_VERSION_8_2_1" xml:space="preserve">
+    <value>8.2.1</value>
+  </data>
+  <data name="PRODUCT_VERSION_POST_8_2" xml:space="preserve">
+    <value>[BRANDING_PRODUCT_VERSION_TEXT]</value>
+  </data>
+  <data name="PRODUCT_VERSION_TEXT" xml:space="preserve">
+    <value>[BRANDING_PRODUCT_VERSION_TEXT]</value>
+  </data>
   <data name="SR.name_description-xenserver-tools" xml:space="preserve">
     <value>[Citrix VM Tools] ISOs</value>
   </data>
   <data name="SR.name_label-xenserver-tools" xml:space="preserve">
     <value>[Citrix VM Tools]</value>
   </data>
-
+  <data name="UPDATES_URL" xml:space="preserve">
+    <value>https://updates.xensource.com/XenServer/updates.xml</value>
+  </data>
+  <data name="VM_TOOLS" xml:space="preserve">
+    <value>[Citrix VM Tools]</value>
+  </data>
+  <data name="XENCENTER_VERSION" xml:space="preserve">
+    <value>0.0.0</value>
+  </data>
 </root>
