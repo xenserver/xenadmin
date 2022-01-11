@@ -101,7 +101,7 @@ namespace XenAdmin.Commands
                 return false;
 
             var conn = selection.GetConnectionOfAllItems();
-            if (conn == null || !Helpers.PostStockholm(conn) || conn.Cache.Hosts.Any(Host.RestrictCertificateVerification))
+            if (conn == null || !Helpers.Post82X(conn) || conn.Cache.Hosts.Any(Host.RestrictCertificateVerification))
                 return false;
 
             var pool = Helpers.GetPoolOfOne(conn);
