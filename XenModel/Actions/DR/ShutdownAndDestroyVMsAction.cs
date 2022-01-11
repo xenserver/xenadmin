@@ -77,8 +77,8 @@ namespace XenAdmin.Actions.DR
                 DestroyVM(Session, vm);
                 PercentComplete += increment;
             }
-            Description = Messages.ACTION_VM_DESTROYED;
-            PercentComplete = 100;
+
+            Tick(100, Messages.ACTION_VM_DESTROYED);
         }
 
 

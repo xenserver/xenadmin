@@ -73,10 +73,9 @@ namespace XenAdmin.Actions
                     HTTP_actions.get_pool_patch_download(
                         bytes =>
                         {
-                            PercentComplete = (int)(100 * (double)bytes / patch.size);
-
-                            Description = string.Format(Messages.DOWNLOADING_PATCH_FROM, patch.Connection.Name,
-                                Util.DiskSizeString(bytes, 1, "F1"), Util.DiskSizeString(patch.size));
+                            Tick((int)(100 * (double)bytes / patch.size),
+                                string.Format(Messages.DOWNLOADING_PATCH_FROM, patch.Connection.Name,
+                                    Util.DiskSizeString(bytes, 1, "F1"), Util.DiskSizeString(patch.size)));
                         },
                         () => XenAdminConfigManager.Provider.ForcedExiting || GetCancelling(),
                         XenAdminConfigManager.Provider.GetProxyTimeout(true),

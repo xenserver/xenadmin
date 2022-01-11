@@ -101,8 +101,7 @@ namespace XenAdmin.Actions
 
                 PollToCompletion();
                 Status = ReportStatus.succeeded;
-                Description = Messages.COMPLETED;
-                PercentComplete = 100;
+                Tick(100, Messages.COMPLETED);
             }
             catch (Exception e)
             {

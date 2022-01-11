@@ -260,9 +260,13 @@ namespace XenAdmin.Actions
                 NewAction?.Invoke(this);
         }
 
+        /// <remarks>
+        /// If you want to set the PercentComplete and the Description at the
+        /// same time,  use Tick() in order to avoid firing OnChanged() twice
+        /// </remarks>
         public string Description
         {
-            get { return _description; }
+            get => _description;
             set
             {
                 if (_description != value)
@@ -277,7 +281,7 @@ namespace XenAdmin.Actions
 
         public bool IsCompleted
         {
-            get { return _isCompleted; }
+            get => _isCompleted;
             set
             {
                 if (_isCompleted != value)
@@ -289,14 +293,18 @@ namespace XenAdmin.Actions
             }
         }
 
+        /// <remarks>
+        /// If you want to set the PercentComplete and the Description at the
+        /// same time,  use Tick() in order to avoid firing OnChanged() twice
+        /// </remarks>
         public virtual int PercentComplete
         {
-            get { return _percentComplete; }
+            get => _percentComplete;
             set
             {
                 if (_percentComplete != value)
                 {
-                    System.Diagnostics.Debug.Assert(0 <= value && value <= 100, string.Format("value percent is {0}", value));
+                    System.Diagnostics.Debug.Assert(0 <= value && value <= 100, $"Percent is {value}");
 
                     var percent = value;
                     if (percent < 0)
@@ -317,6 +325,8 @@ namespace XenAdmin.Actions
             if (_percentComplete != percent || _description != description)
             {
                 _description = description;
+
+                System.Diagnostics.Debug.Assert(0 <= percent && percent <= 100, $"Percent is {percent}");
 
                 if (percent < 0)
                     percent = 0;

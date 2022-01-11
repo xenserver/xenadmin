@@ -64,8 +64,9 @@ namespace XenAdmin.Actions
             {
                 VM.set_snapshot_schedule(Session, selectedVM.opaque_ref, vmssref.opaque_ref);
             }
-            Description = string.Format(Messages.CREATED_VMSS, _record.Name());
-            PercentComplete = 60;
+
+            Tick(60, string.Format(Messages.CREATED_VMSS, _record.Name()));
+
             if (_runNow)
                 VMSS.snapshot_now(Session, vmssref);
             PercentComplete = 100;
