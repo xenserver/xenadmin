@@ -19,7 +19,7 @@ namespace XenAdmin {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class FriendlyNames {
@@ -4752,6 +4752,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Checkpoint for virtual machine has been created.
+        /// </summary>
+        public static string Message_name_vm_checkpointed {
+            get {
+                return ResourceManager.GetString("Message.name-vm_checkpointed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to VM Cloned.
         /// </summary>
         public static string Message_name_vm_cloned {
@@ -4766,6 +4775,24 @@ namespace XenAdmin {
         public static string Message_name_vm_crashed {
             get {
                 return ResourceManager.GetString("Message.name-vm_crashed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Virtual Machine has been migrated.
+        /// </summary>
+        public static string Message_name_vm_migrated {
+            get {
+                return ResourceManager.GetString("Message.name-vm_migrated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Virtual machine has been paused.
+        /// </summary>
+        public static string Message_name_vm_paused {
+            get {
+                return ResourceManager.GetString("Message.name-vm_paused", resourceCulture);
             }
         }
         
@@ -4806,6 +4833,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Snapshot for virtual machine has been reverted.
+        /// </summary>
+        public static string Message_name_vm_snapshot_reverted {
+            get {
+                return ResourceManager.GetString("Message.name-vm_snapshot_reverted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Snapshot for virtual machine has been created.
+        /// </summary>
+        public static string Message_name_vm_snapshotted {
+            get {
+                return ResourceManager.GetString("Message.name-vm_snapshotted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to VM Started.
         /// </summary>
         public static string Message_name_vm_started {
@@ -4829,6 +4874,15 @@ namespace XenAdmin {
         public static string Message_name_vm_uncooperative {
             get {
                 return ResourceManager.GetString("Message.name-vm_uncooperative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Virtual machine has been unpaused.
+        /// </summary>
+        public static string Message_name_vm_unpaused {
+            get {
+                return ResourceManager.GetString("Message.name-vm_unpaused", resourceCulture);
             }
         }
         
