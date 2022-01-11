@@ -21392,15 +21392,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Importing VM....
-        /// </summary>
-        public static string IMPORTVM_IMPORTING {
-            get {
-                return ResourceManager.GetString("IMPORTVM_IMPORTING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Preparing to Import VM.
         /// </summary>
         public static string IMPORTVM_PREP {
@@ -21433,6 +21424,15 @@ namespace XenAdmin {
         public static string IMPORTVM_UPDATING_VM {
             get {
                 return ResourceManager.GetString("IMPORTVM_UPDATING_VM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uploading &apos;{0}&apos; to &apos;{1}&apos; ({2}% done)....
+        /// </summary>
+        public static string IMPORTVM_UPLOADING {
+            get {
+                return ResourceManager.GetString("IMPORTVM_UPLOADING", resourceCulture);
             }
         }
         
