@@ -7415,9 +7415,6 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   <data name="IMPORTVM_IMPORTCOMPLETE" xml:space="preserve">
     <value>Import VM complete</value>
   </data>
-  <data name="IMPORTVM_IMPORTING" xml:space="preserve">
-    <value>Importing VM...</value>
-  </data>
   <data name="IMPORTVM_PREP" xml:space="preserve">
     <value>Preparing to Import VM</value>
   </data>
@@ -7429,6 +7426,9 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   </data>
   <data name="IMPORTVM_UPDATING_VM" xml:space="preserve">
     <value>Updating VM...</value>
+  </data>
+  <data name="IMPORTVM_UPLOADING" xml:space="preserve">
+    <value>Uploading '{0}' to '{1}' ({2}% done)...</value>
   </data>
   <data name="IMPORTVM_WAITING_FOR_WIZARD" xml:space="preserve">
     <value>Waiting for Import VM wizard to complete...</value>
