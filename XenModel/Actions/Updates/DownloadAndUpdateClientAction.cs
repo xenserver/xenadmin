@@ -37,6 +37,9 @@ using System.IO;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Diagnostics;
+using System.Security.Cryptography;
+using XenCenterLib;
+using System.Text;
 
 namespace XenAdmin.Actions
 {
@@ -57,12 +60,13 @@ namespace XenAdmin.Actions
         private readonly bool downloadUpdate;
         private DownloadState updateDownloadState;
         private Exception updateDownloadError;
+        private string checksum; 
 
         public string PatchPath { get; private set; }
 
         public string ByteProgressDescription { get; set; }
 
-        public DownloadAndUpdateClientAction(string updateName, Uri uri, string outputFileName, bool suppressHist, params string[] updateFileExtensions)
+        public DownloadAndUpdateClientAction(string updateName, Uri uri, string outputFileName, bool suppressHist, string checksum, params string[] updateFileExtensions)
             : base(null, uri == null
                 ? string.Format(Messages.UPDATES_WIZARD_EXTRACT_ACTION_TITLE, updateName)
                 : string.Format(Messages.DOWNLOAD_AND_EXTRACT_ACTION_TITLE, updateName), string.Empty, suppressHist)
@@ -71,6 +75,7 @@ namespace XenAdmin.Actions
             address = uri;
             downloadUpdate = address != null;
             this.outputPathAndFileName = outputFileName;
+            this.checksum = checksum;
         }
 
         private WebClient client;
@@ -187,30 +192,67 @@ namespace XenAdmin.Actions
                 if (Cancelling)
                     throw new CancelledException();
             }
-
-            // Install the downloaded msi            
-            try
+            if (ValidMsi())
             {
-                // Start the install process and end current 
-                if (File.Exists(outputPathAndFileName))
+                // Install the downloaded msi            
+                try
                 {
-                    // Launch downloaded msi
-                    Process.Start(outputPathAndFileName);
-                    log.DebugFormat("Update {0} found and install started", updateName);
+                    // Start the install process and end current 
+                    if (File.Exists(outputPathAndFileName))
+                    {
+                        // Launch downloaded msi
+                        Process.Start(outputPathAndFileName);
+                        log.DebugFormat("Update {0} found and install started", updateName);
+                    }
                 }
-            }
-            catch (Exception e)
-            {
-                if (File.Exists(outputPathAndFileName))
+                catch (Exception e)
                 {
-                    File.Delete(outputPathAndFileName);
+                    if (File.Exists(outputPathAndFileName))
+                    {
+                        File.Delete(outputPathAndFileName);
+                    }
+                    log.Error("Exception occurred when installing CHC.", e);
+                    throw;
                 }
-                log.Error("Exception occurred when installing CHC.", e);
-                throw;
             }
 
             Description = Messages.COMPLETED;
             MarkCompleted();
+        }
+
+        private bool ValidMsi()
+        {
+            using (FileStream stream = new FileStream(outputPathAndFileName, FileMode.Open, FileAccess.Read))
+            {
+                var hash = StreamUtilities.ComputeHash(stream, out var hashAlgorithm);
+                //Convert to Hex string
+                StringBuilder sb = new StringBuilder();
+                foreach (var b in hash)
+                {
+                    sb.Append(b.ToString("x2"));
+                }
+                var calculatedChecksum = sb.ToString();
+                // Check if calculatedChecksum matches what is in chcupdates.xml
+                if (checksum != calculatedChecksum)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+
+            // TODO: Check digital signature of .msi
+
+        }
+        // Display the byte array in a readable format.
+        public static void PrintByteArray(byte[] array)
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                Console.Write($"{array[i]:X2}");
+                if ((i % 4) == 3) Console.Write(" ");
+            }
+            Console.WriteLine();
         }
 
         void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
