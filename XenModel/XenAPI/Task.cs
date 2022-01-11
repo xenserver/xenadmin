@@ -685,6 +685,36 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Set the task result
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_task">The opaque_ref of the given task</param>
+        /// <param name="_value">Task result to be set</param>
+        public static void set_result(Session session, string _task, string _value)
+        {
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.task_set_result(session.opaque_ref, _task, _value);
+            else
+                session.XmlRpcProxy.task_set_result(session.opaque_ref, _task ?? "", _value ?? "").parse();
+        }
+
+        /// <summary>
+        /// Set the task error info
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_task">The opaque_ref of the given task</param>
+        /// <param name="_value">Task error info to be set</param>
+        public static void set_error_info(Session session, string _task, string[] _value)
+        {
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.task_set_error_info(session.opaque_ref, _task, _value);
+            else
+                session.XmlRpcProxy.task_set_error_info(session.opaque_ref, _task ?? "", _value).parse();
+        }
+
+        /// <summary>
         /// Return a list of all the tasks known to the system.
         /// First published in XenServer 4.0.
         /// </summary>

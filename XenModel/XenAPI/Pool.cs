@@ -93,7 +93,9 @@ namespace XenAPI
             bool tls_verification_enabled,
             List<XenRef<Repository>> repositories,
             bool client_certificate_auth_enabled,
-            string client_certificate_auth_name)
+            string client_certificate_auth_name,
+            string repository_proxy_url,
+            string repository_proxy_username)
         {
             this.uuid = uuid;
             this.name_label = name_label;
@@ -137,6 +139,8 @@ namespace XenAPI
             this.repositories = repositories;
             this.client_certificate_auth_enabled = client_certificate_auth_enabled;
             this.client_certificate_auth_name = client_certificate_auth_name;
+            this.repository_proxy_url = repository_proxy_url;
+            this.repository_proxy_username = repository_proxy_username;
         }
 
         /// <summary>
@@ -210,6 +214,8 @@ namespace XenAPI
             repositories = record.repositories;
             client_certificate_auth_enabled = record.client_certificate_auth_enabled;
             client_certificate_auth_name = record.client_certificate_auth_name;
+            repository_proxy_url = record.repository_proxy_url;
+            repository_proxy_username = record.repository_proxy_username;
         }
 
         internal void UpdateFrom(Proxy_Pool proxy)
@@ -256,6 +262,8 @@ namespace XenAPI
             repositories = proxy.repositories == null ? null : XenRef<Repository>.Create(proxy.repositories);
             client_certificate_auth_enabled = (bool)proxy.client_certificate_auth_enabled;
             client_certificate_auth_name = proxy.client_certificate_auth_name == null ? null : proxy.client_certificate_auth_name;
+            repository_proxy_url = proxy.repository_proxy_url == null ? null : proxy.repository_proxy_url;
+            repository_proxy_username = proxy.repository_proxy_username == null ? null : proxy.repository_proxy_username;
         }
 
         /// <summary>
@@ -350,6 +358,10 @@ namespace XenAPI
                 client_certificate_auth_enabled = Marshalling.ParseBool(table, "client_certificate_auth_enabled");
             if (table.ContainsKey("client_certificate_auth_name"))
                 client_certificate_auth_name = Marshalling.ParseString(table, "client_certificate_auth_name");
+            if (table.ContainsKey("repository_proxy_url"))
+                repository_proxy_url = Marshalling.ParseString(table, "repository_proxy_url");
+            if (table.ContainsKey("repository_proxy_username"))
+                repository_proxy_username = Marshalling.ParseString(table, "repository_proxy_username");
         }
 
         public Proxy_Pool ToProxy()
@@ -397,6 +409,8 @@ namespace XenAPI
             result_.repositories = repositories == null ? new string[] {} : Helper.RefListToStringArray(repositories);
             result_.client_certificate_auth_enabled = client_certificate_auth_enabled;
             result_.client_certificate_auth_name = client_certificate_auth_name ?? "";
+            result_.repository_proxy_url = repository_proxy_url ?? "";
+            result_.repository_proxy_username = repository_proxy_username ?? "";
             return result_;
         }
 
@@ -450,7 +464,9 @@ namespace XenAPI
                 Helper.AreEqual2(this._tls_verification_enabled, other._tls_verification_enabled) &&
                 Helper.AreEqual2(this._repositories, other._repositories) &&
                 Helper.AreEqual2(this._client_certificate_auth_enabled, other._client_certificate_auth_enabled) &&
-                Helper.AreEqual2(this._client_certificate_auth_name, other._client_certificate_auth_name);
+                Helper.AreEqual2(this._client_certificate_auth_name, other._client_certificate_auth_name) &&
+                Helper.AreEqual2(this._repository_proxy_url, other._repository_proxy_url) &&
+                Helper.AreEqual2(this._repository_proxy_username, other._repository_proxy_username);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Pool server)
@@ -1149,6 +1165,34 @@ namespace XenAPI
                 return session.JsonRpcClient.pool_get_client_certificate_auth_name(session.opaque_ref, _pool);
             else
                 return session.XmlRpcProxy.pool_get_client_certificate_auth_name(session.opaque_ref, _pool ?? "").parse();
+        }
+
+        /// <summary>
+        /// Get the repository_proxy_url field of the given pool.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        public static string get_repository_proxy_url(Session session, string _pool)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pool_get_repository_proxy_url(session.opaque_ref, _pool);
+            else
+                return session.XmlRpcProxy.pool_get_repository_proxy_url(session.opaque_ref, _pool ?? "").parse();
+        }
+
+        /// <summary>
+        /// Get the repository_proxy_username field of the given pool.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        public static string get_repository_proxy_username(Session session, string _pool)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pool_get_repository_proxy_username(session.opaque_ref, _pool);
+            else
+                return session.XmlRpcProxy.pool_get_repository_proxy_username(session.opaque_ref, _pool ?? "").parse();
         }
 
         /// <summary>
@@ -3046,12 +3090,14 @@ namespace XenAPI
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
         /// <param name="_force">If true local mirroring repo will be removed before syncing</param>
-        public static string sync_updates(Session session, string _pool, bool _force)
+        /// <param name="_token">The token for repository client authentication</param>
+        /// <param name="_token_id">The ID of the token</param>
+        public static string sync_updates(Session session, string _pool, bool _force, string _token, string _token_id)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pool_sync_updates(session.opaque_ref, _pool, _force);
+                return session.JsonRpcClient.pool_sync_updates(session.opaque_ref, _pool, _force, _token, _token_id);
             else
-                return session.XmlRpcProxy.pool_sync_updates(session.opaque_ref, _pool ?? "", _force).parse();
+                return session.XmlRpcProxy.pool_sync_updates(session.opaque_ref, _pool ?? "", _force, _token ?? "", _token_id ?? "").parse();
         }
 
         /// <summary>
@@ -3061,12 +3107,14 @@ namespace XenAPI
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
         /// <param name="_force">If true local mirroring repo will be removed before syncing</param>
-        public static XenRef<Task> async_sync_updates(Session session, string _pool, bool _force)
+        /// <param name="_token">The token for repository client authentication</param>
+        /// <param name="_token_id">The ID of the token</param>
+        public static XenRef<Task> async_sync_updates(Session session, string _pool, bool _force, string _token, string _token_id)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_pool_sync_updates(session.opaque_ref, _pool, _force);
+              return session.JsonRpcClient.async_pool_sync_updates(session.opaque_ref, _pool, _force, _token, _token_id);
           else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_pool_sync_updates(session.opaque_ref, _pool ?? "", _force).parse());
+              return XenRef<Task>.Create(session.XmlRpcProxy.async_pool_sync_updates(session.opaque_ref, _pool ?? "", _force, _token ?? "", _token_id ?? "").parse());
         }
 
         /// <summary>
@@ -3155,6 +3203,40 @@ namespace XenAPI
               return session.JsonRpcClient.async_pool_disable_client_certificate_auth(session.opaque_ref, _pool);
           else
               return XenRef<Task>.Create(session.XmlRpcProxy.async_pool_disable_client_certificate_auth(session.opaque_ref, _pool ?? "").parse());
+        }
+
+        /// <summary>
+        /// Configure the proxy used in syncing with the enabled repositories
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        /// <param name="_url">The URL of the proxy server</param>
+        /// <param name="_username">The username used to authenticate with the proxy server</param>
+        /// <param name="_password">The password used to authenticate with the proxy server</param>
+        public static void configure_repository_proxy(Session session, string _pool, string _url, string _username, string _password)
+        {
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.pool_configure_repository_proxy(session.opaque_ref, _pool, _url, _username, _password);
+            else
+                session.XmlRpcProxy.pool_configure_repository_proxy(session.opaque_ref, _pool ?? "", _url ?? "", _username ?? "", _password ?? "").parse();
+        }
+
+        /// <summary>
+        /// Configure the proxy used in syncing with the enabled repositories
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        /// <param name="_url">The URL of the proxy server</param>
+        /// <param name="_username">The username used to authenticate with the proxy server</param>
+        /// <param name="_password">The password used to authenticate with the proxy server</param>
+        public static XenRef<Task> async_configure_repository_proxy(Session session, string _pool, string _url, string _username, string _password)
+        {
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_pool_configure_repository_proxy(session.opaque_ref, _pool, _url, _username, _password);
+          else
+              return XenRef<Task>.Create(session.XmlRpcProxy.async_pool_configure_repository_proxy(session.opaque_ref, _pool ?? "", _url ?? "", _username ?? "", _password ?? "").parse());
         }
 
         /// <summary>
@@ -3943,5 +4025,41 @@ namespace XenAPI
             }
         }
         private string _client_certificate_auth_name = "";
+
+        /// <summary>
+        /// Url of the proxy used in syncing with the enabled repositories
+        /// First published in Unreleased.
+        /// </summary>
+        public virtual string repository_proxy_url
+        {
+            get { return _repository_proxy_url; }
+            set
+            {
+                if (!Helper.AreEqual(value, _repository_proxy_url))
+                {
+                    _repository_proxy_url = value;
+                    NotifyPropertyChanged("repository_proxy_url");
+                }
+            }
+        }
+        private string _repository_proxy_url = "";
+
+        /// <summary>
+        /// Username for the authentication of the proxy used in syncing with the enabled repositories
+        /// First published in Unreleased.
+        /// </summary>
+        public virtual string repository_proxy_username
+        {
+            get { return _repository_proxy_username; }
+            set
+            {
+                if (!Helper.AreEqual(value, _repository_proxy_username))
+                {
+                    _repository_proxy_username = value;
+                    NotifyPropertyChanged("repository_proxy_username");
+                }
+            }
+        }
+        private string _repository_proxy_username = "";
     }
 }

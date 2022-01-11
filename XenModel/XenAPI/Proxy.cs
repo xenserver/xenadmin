@@ -138,6 +138,10 @@ namespace XenAPI
         Response<string>
         session_get_originator(string session, string _session);
 
+        [XmlRpcMethod("session.get_client_certificate")]
+        Response<bool>
+        session_get_client_certificate(string session, string _session);
+
         [XmlRpcMethod("session.set_other_config")]
         Response<string>
         session_set_other_config(string session, string _session, Object _other_config);
@@ -450,6 +454,14 @@ namespace XenAPI
         Response<string>
         task_set_progress(string session, string _task, double _value);
 
+        [XmlRpcMethod("task.set_result")]
+        Response<string>
+        task_set_result(string session, string _task, string _value);
+
+        [XmlRpcMethod("task.set_error_info")]
+        Response<string>
+        task_set_error_info(string session, string _task, string [] _value);
+
         [XmlRpcMethod("task.get_all")]
         Response<string []>
         task_get_all(string session);
@@ -633,6 +645,14 @@ namespace XenAPI
         [XmlRpcMethod("pool.get_client_certificate_auth_name")]
         Response<string>
         pool_get_client_certificate_auth_name(string session, string _pool);
+
+        [XmlRpcMethod("pool.get_repository_proxy_url")]
+        Response<string>
+        pool_get_repository_proxy_url(string session, string _pool);
+
+        [XmlRpcMethod("pool.get_repository_proxy_username")]
+        Response<string>
+        pool_get_repository_proxy_username(string session, string _pool);
 
         [XmlRpcMethod("pool.set_name_label")]
         Response<string>
@@ -1148,11 +1168,11 @@ namespace XenAPI
 
         [XmlRpcMethod("pool.sync_updates")]
         Response<string>
-        pool_sync_updates(string session, string _pool, bool _force);
+        pool_sync_updates(string session, string _pool, bool _force, string _token, string _token_id);
 
         [XmlRpcMethod("Async.pool.sync_updates")]
         Response<string>
-        async_pool_sync_updates(string session, string _pool, bool _force);
+        async_pool_sync_updates(string session, string _pool, bool _force, string _token, string _token_id);
 
         [XmlRpcMethod("pool.check_update_readiness")]
         Response<string []>
@@ -1177,6 +1197,14 @@ namespace XenAPI
         [XmlRpcMethod("Async.pool.disable_client_certificate_auth")]
         Response<string>
         async_pool_disable_client_certificate_auth(string session, string _pool);
+
+        [XmlRpcMethod("pool.configure_repository_proxy")]
+        Response<string>
+        pool_configure_repository_proxy(string session, string _pool, string _url, string _username, string _password);
+
+        [XmlRpcMethod("Async.pool.configure_repository_proxy")]
+        Response<string>
+        async_pool_configure_repository_proxy(string session, string _pool, string _url, string _username, string _password);
 
         [XmlRpcMethod("pool.get_all")]
         Response<string []>
@@ -8660,6 +8688,7 @@ namespace XenAPI
         public string [] tasks;
         public string parent;
         public string originator;
+        public bool client_certificate;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -8752,6 +8781,8 @@ namespace XenAPI
         public string [] repositories;
         public bool client_certificate_auth_enabled;
         public string client_certificate_auth_name;
+        public string repository_proxy_url;
+        public string repository_proxy_username;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
