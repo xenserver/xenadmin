@@ -61,8 +61,8 @@ namespace XenAdmin.Actions
             {
                 VM.set_appliance(Session, selectedVM.opaque_ref, vmApplianceRef.opaque_ref);
             }
-            Description = string.Format(Messages.CREATED_VM_APPLIANCE, _record.Name());
-            PercentComplete = 100;
+
+            Tick(100, string.Format(Messages.CREATED_VM_APPLIANCE, _record.Name()));
         }
     }
 }

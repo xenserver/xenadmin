@@ -130,8 +130,8 @@ namespace XenAdmin.Actions.DR
                     // ignored
                 }
             }
-            PercentComplete = 100;
-            Description = Messages.ACTION_VDI_LOAD_METADATA_DONE;
+
+            Tick(100, Messages.ACTION_VDI_LOAD_METADATA_DONE);
         }
     }
 

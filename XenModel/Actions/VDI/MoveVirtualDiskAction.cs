@@ -122,8 +122,7 @@ namespace XenAdmin.Actions
             foreach (var newVbd in newVbds)
                 Connection.WaitForCache(VBD.create(Session, newVbd));
 
-            PercentComplete = 100;
-            Description = Messages.MOVED;
+            Tick(100, Messages.MOVED);
             log.DebugFormat("Moved VDI '{0}'", Helpers.GetName(vdi));
         }
 
