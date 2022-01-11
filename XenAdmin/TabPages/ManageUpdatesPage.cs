@@ -644,7 +644,7 @@ namespace XenAdmin.TabPages
             AutoCheckForUpdatesDisabledLabel.Visible = visible;
             checkForUpdatesNowLink.Visible = visible;
             labelLegacyUpdates.Visible = ConnectionsManager.XenConnectionsCopy.Any(c =>
-                c.IsConnected && !Helpers.PostStockholm(c));
+                c.IsConnected && !Helpers.Post82X(c));
         }
 
         /// <summary>

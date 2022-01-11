@@ -130,7 +130,7 @@ namespace XenAdmin.Commands
 
         protected override bool CanRunCore(SelectedItemCollection selection)
         {
-            return selection.Count == 1 && selection[0].XenObject is Host host && Helpers.PostStockholm(host);
+            return selection.Count == 1 && selection[0].XenObject is Host host && Helpers.Post82X(host);
         }
 
         public override string ContextMenuText => MenuText;

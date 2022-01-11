@@ -1109,7 +1109,7 @@ namespace XenAdmin.TabPages
 
                     var thumbprint = string.Format(Messages.CERTIFICATE_THUMBPRINT_VALUE, certificate.fingerprint);
 
-                    if (!Helpers.PostStockholm(host) || certificate.type == certificate_type.host)
+                    if (!Helpers.Post82X(host) || certificate.type == certificate_type.host)
                         pdSectionCertificate.AddEntry(GetCertificateType(certificate.type), $"{validity}\n{thumbprint}",
                             new CommandToolStripMenuItem(new InstallCertificateCommand(Program.MainWindow, host), true),
                             new CommandToolStripMenuItem(new ResetCertificateCommand(Program.MainWindow, host), true));
@@ -1118,7 +1118,7 @@ namespace XenAdmin.TabPages
                 }
             }
 
-            if (xenObject is Pool pool && Helpers.PostStockholm(pool.Connection))
+            if (xenObject is Pool pool && Helpers.Post82X(pool.Connection))
             {
                 var certificates = pool.Connection.Cache.Certificates.Where(c => c != null && c.type == certificate_type.ca).OrderBy(c => c.name).ToList();
 
@@ -1180,7 +1180,7 @@ namespace XenAdmin.TabPages
                     s.AddEntry(FriendlyName("host.enabled"), Messages.YES, item);
                 }
 
-                if (Helpers.PostStockholm(host))
+                if (Helpers.Post82X(host))
                 {
                     var pool = Helpers.GetPoolOfOne(xenObject.Connection);
 
@@ -1323,7 +1323,7 @@ namespace XenAdmin.TabPages
                         : Helpers.GetFriendlyLicenseName(p));
                 s.AddEntry(Messages.NUMBER_OF_SOCKETS, p.CpuSockets().ToString());
 
-                if (Helpers.PostStockholm(p.Connection))
+                if (Helpers.Post82X(p.Connection))
                 {
                     if (p.tls_verification_enabled)
                     {
@@ -1778,7 +1778,7 @@ namespace XenAdmin.TabPages
                 Banner.LinkUri = new Uri(InvisibleMessages.DEPRECATION_URL);
                 Banner.Visible = true;
             }
-            else if (!Helpers.PostStockholm(xenObject.Connection))
+            else if (!Helpers.Post82X(xenObject.Connection))
             {
                 Banner.BannerType = DeprecationBanner.Type.Deprecation;
                 Banner.WarningMessage = string.Format(Messages.WARNING_PRE_CLOUD_VERSION_CONNECTION, BrandManager.BrandConsole, BrandManager.ProductBrand, BrandManager.ProductVersion82, BrandManager.LegacyConsole);
