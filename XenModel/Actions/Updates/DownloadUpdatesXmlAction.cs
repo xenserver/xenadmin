@@ -110,6 +110,7 @@ namespace XenAdmin.Actions
                     bool latest_cr = false;
                     string url = "";
                     string timestamp = "";
+                    string checksum = "";
 
                     foreach (XmlAttribute attrib in version.Attributes)
                     {
@@ -125,9 +126,11 @@ namespace XenAdmin.Actions
                             url = attrib.Value;
                         else if (attrib.Name == "timestamp")
                             timestamp = attrib.Value;
+                        else if (attrib.Name == "checksum")
+                            checksum = attrib.Value;
                     }
 
-                    ClientVersions.Add(new ClientVersion(version_lang, name, latest, latest_cr, url, timestamp));
+                    ClientVersions.Add(new ClientVersion(version_lang, name, latest, latest_cr, url, timestamp, checksum));
                 }
             }
         }

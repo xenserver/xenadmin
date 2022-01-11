@@ -43,8 +43,9 @@ namespace XenAdmin.Core
         public string Url;
         public string Lang;
         public DateTime TimeStamp;
+        public string Checksum;
 
-        public ClientVersion(string version_lang, string name, bool latest, bool latest_cr, string url, string timestamp)
+        public ClientVersion(string version_lang, string name, bool latest, bool latest_cr, string url, string timestamp, string checksum = "")
         {
             ParseVersion(version_lang);
             Name = name;
@@ -52,6 +53,7 @@ namespace XenAdmin.Core
             LatestCr = latest_cr;
             Url = url;
             DateTime.TryParse(timestamp, out TimeStamp);
+            Checksum = checksum;
         }
 
         private void ParseVersion(string version_lang)

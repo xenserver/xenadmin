@@ -44,6 +44,7 @@ namespace XenAdmin.Alerts
         {
             NewVersion = version;
             _timestamp = NewVersion.TimeStamp;
+            Checksum = version.Checksum;
         }
 
         public override AlertPriority Priority => AlertPriority.Priority5;
@@ -72,8 +73,10 @@ namespace XenAdmin.Alerts
             get {
                 // TODO: Implement proper check in CP-31587
                 return true;
+            }
         }
-        }
+
+        public string Checksum = string.Empty;
 
         static int DISMISSED_XC_VERSIONS_LIMIT = 5;
 

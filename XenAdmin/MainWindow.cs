@@ -3332,7 +3332,7 @@ namespace XenAdmin
 
         private void updateToolStripMenuItem_Click(object sender, EventArgs e)
         {            
-            var downloadAndInstallClientAction = new DownloadAndUpdateClientAction(updateAlert.Name, new Uri(updateAlert.NewVersion.Url), Path.Combine(Path.GetTempPath(), $"{updateAlert.Name}.msi"), true);
+            var downloadAndInstallClientAction = new DownloadAndUpdateClientAction(updateAlert.Name, new Uri(updateAlert.NewVersion.Url), Path.Combine(Path.GetTempPath(), $"{updateAlert.Name}.msi"), true, updateAlert.Checksum);
 
             using (var dlg = new ActionProgressDialog(downloadAndInstallClientAction, ProgressBarStyle.Marquee))
                 dlg.ShowDialog(Parent);
