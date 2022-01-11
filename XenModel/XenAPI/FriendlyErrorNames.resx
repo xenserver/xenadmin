@@ -651,6 +651,12 @@
   <data name="INVALID_REPOMD_XML" xml:space="preserve">
     <value>The repomd.xml is invalid.</value>
   </data>
+  <data name="INVALID_REPOSITORY_PROXY_CREDENTIAL" xml:space="preserve">
+    <value>The repository proxy username/password is invalid.</value>
+  </data>
+  <data name="INVALID_REPOSITORY_PROXY_URL" xml:space="preserve">
+    <value>The repository proxy URL is invalid.</value>
+  </data>
   <data name="INVALID_UPDATE" xml:space="preserve">
     <value>The uploaded update package is invalid.</value>
   </data>

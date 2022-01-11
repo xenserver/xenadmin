@@ -207,6 +207,13 @@ namespace XenAPI
             return Rpc<string>("session.get_originator", new JArray(session, _session ?? ""), serializer);
         }
 
+        public bool session_get_client_certificate(string session, string _session)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            return Rpc<bool>("session.get_client_certificate", new JArray(session, _session ?? ""), serializer);
+        }
+
         public void session_set_other_config(string session, string _session, Dictionary<string, string> _other_config)
         {
             var converters = new List<JsonConverter> {new StringStringMapConverter()};
@@ -753,6 +760,20 @@ namespace XenAPI
             Rpc("task.set_progress", new JArray(session, _task ?? "", _value), serializer);
         }
 
+        public void task_set_result(string session, string _task, string _value)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            Rpc("task.set_result", new JArray(session, _task ?? "", _value ?? ""), serializer);
+        }
+
+        public void task_set_error_info(string session, string _task, string[] _value)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            Rpc("task.set_error_info", new JArray(session, _task ?? "", _value == null ? new JArray() : JArray.FromObject(_value)), serializer);
+        }
+
         public List<XenRef<Task>> task_get_all(string session)
         {
             var converters = new List<JsonConverter> {new XenRefListConverter<Task>()};
@@ -1073,6 +1094,20 @@ namespace XenAPI
             var converters = new List<JsonConverter> {};
             var serializer = CreateSerializer(converters);
             return Rpc<string>("pool.get_client_certificate_auth_name", new JArray(session, _pool ?? ""), serializer);
+        }
+
+        public string pool_get_repository_proxy_url(string session, string _pool)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            return Rpc<string>("pool.get_repository_proxy_url", new JArray(session, _pool ?? ""), serializer);
+        }
+
+        public string pool_get_repository_proxy_username(string session, string _pool)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            return Rpc<string>("pool.get_repository_proxy_username", new JArray(session, _pool ?? ""), serializer);
         }
 
         public void pool_set_name_label(string session, string _pool, string _name_label)
@@ -1971,18 +2006,18 @@ namespace XenAPI
             return Rpc<XenRef<Task>>("Async.pool.remove_repository", new JArray(session, _pool ?? "", _value ?? ""), serializer);
         }
 
-        public string pool_sync_updates(string session, string _pool, bool _force)
+        public string pool_sync_updates(string session, string _pool, bool _force, string _token, string _token_id)
         {
             var converters = new List<JsonConverter> {};
             var serializer = CreateSerializer(converters);
-            return Rpc<string>("pool.sync_updates", new JArray(session, _pool ?? "", _force), serializer);
+            return Rpc<string>("pool.sync_updates", new JArray(session, _pool ?? "", _force, _token ?? "", _token_id ?? ""), serializer);
         }
 
-        public XenRef<Task> async_pool_sync_updates(string session, string _pool, bool _force)
+        public XenRef<Task> async_pool_sync_updates(string session, string _pool, bool _force, string _token, string _token_id)
         {
             var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
             var serializer = CreateSerializer(converters);
-            return Rpc<XenRef<Task>>("Async.pool.sync_updates", new JArray(session, _pool ?? "", _force), serializer);
+            return Rpc<XenRef<Task>>("Async.pool.sync_updates", new JArray(session, _pool ?? "", _force, _token ?? "", _token_id ?? ""), serializer);
         }
 
         public string[] pool_check_update_readiness(string session, string _pool, bool _requires_reboot)
@@ -2025,6 +2060,20 @@ namespace XenAPI
             var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
             var serializer = CreateSerializer(converters);
             return Rpc<XenRef<Task>>("Async.pool.disable_client_certificate_auth", new JArray(session, _pool ?? ""), serializer);
+        }
+
+        public void pool_configure_repository_proxy(string session, string _pool, string _url, string _username, string _password)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            Rpc("pool.configure_repository_proxy", new JArray(session, _pool ?? "", _url ?? "", _username ?? "", _password ?? ""), serializer);
+        }
+
+        public XenRef<Task> async_pool_configure_repository_proxy(string session, string _pool, string _url, string _username, string _password)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<XenRef<Task>>("Async.pool.configure_repository_proxy", new JArray(session, _pool ?? "", _url ?? "", _username ?? "", _password ?? ""), serializer);
         }
 
         public List<XenRef<Pool>> pool_get_all(string session)
