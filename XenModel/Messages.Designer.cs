@@ -19,7 +19,7 @@ namespace XenAdmin {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Messages {
@@ -8031,20 +8031,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The file associated with your external SSH console doesn&apos;t exist. Please check that you have selected a valid path..
+        ///   Looks up a localized string similar to An external SSH console has not been configured..
         /// </summary>
-        public static string CONFIGURE_SSH_CONSOLE_FILE_NOT_FOUND {
+        public static string CONFIGURE_SSH_CONSOLE_FILE_NOT_CONFIGURED {
             get {
-                return ResourceManager.GetString("CONFIGURE_SSH_CONSOLE_FILE_NOT_FOUND", resourceCulture);
+                return ResourceManager.GetString("CONFIGURE_SSH_CONSOLE_FILE_NOT_CONFIGURED", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your external SSH console could not be found. Please check that you have selected a valid file..
+        ///   Looks up a localized string similar to The file associated with your external SSH console doesn&apos;t exist. Please check that you have selected a valid file..
         /// </summary>
-        public static string CONFIGURE_SSH_CONSOLE_NOT_FOUND {
+        public static string CONFIGURE_SSH_CONSOLE_FILE_NOT_FOUND {
             get {
-                return ResourceManager.GetString("CONFIGURE_SSH_CONSOLE_NOT_FOUND", resourceCulture);
+                return ResourceManager.GetString("CONFIGURE_SSH_CONSOLE_FILE_NOT_FOUND", resourceCulture);
             }
         }
         

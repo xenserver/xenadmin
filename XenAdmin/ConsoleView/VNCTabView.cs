@@ -1487,13 +1487,13 @@ namespace XenAdmin.ConsoleView
 
             if (string.IsNullOrEmpty(sshConsolePath))
             {
-                OpenSshConsoleNotFoundDialog();
+                OpenSshConsoleWarningDialog(Messages.CONFIGURE_SSH_CONSOLE_FILE_NOT_CONFIGURED);
                 return;
             }
 
             if (!File.Exists(sshConsolePath))
             {
-                OpenSshConsoleFileNotFoundDialog();
+                OpenSshConsoleWarningDialog(Messages.CONFIGURE_SSH_CONSOLE_FILE_NOT_FOUND);
                 return;
             }
 
@@ -1529,28 +1529,12 @@ namespace XenAdmin.ConsoleView
             }
         }
 
-        private void OpenSshConsoleNotFoundDialog()
+        private void OpenSshConsoleWarningDialog(string message)
         {
             var configureSshClientButton = new ThreeButtonDialog.TBDButton(Messages.CONFIGURE_SSH_CONSOLE_TITLE,
                 DialogResult.OK, ThreeButtonDialog.ButtonType.ACCEPT, true);
 
-            using (var dlg = new WarningDialog(Messages.CONFIGURE_SSH_CONSOLE_NOT_FOUND,
-                       configureSshClientButton, ThreeButtonDialog.ButtonCancel))
-            {
-                if (dlg.ShowDialog(Parent) == DialogResult.OK)
-                {
-                    OpenExternalToolsPage();
-                }
-            }
-        }
-
-        private void OpenSshConsoleFileNotFoundDialog()
-        {
-            var configureSshClientButton = new ThreeButtonDialog.TBDButton(Messages.CONFIGURE_SSH_CONSOLE_TITLE,
-                DialogResult.OK, ThreeButtonDialog.ButtonType.ACCEPT, true);
-
-            using (var dlg = new WarningDialog(Messages.CONFIGURE_SSH_CONSOLE_FILE_NOT_FOUND,
-                       configureSshClientButton, ThreeButtonDialog.ButtonCancel))
+            using (var dlg = new WarningDialog(message, configureSshClientButton, ThreeButtonDialog.ButtonCancel))
             {
                 if (dlg.ShowDialog(Parent) == DialogResult.OK)
                 {

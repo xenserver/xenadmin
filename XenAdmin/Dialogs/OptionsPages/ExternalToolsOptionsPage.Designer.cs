@@ -103,14 +103,12 @@ namespace XenAdmin.Dialogs.OptionsPages
             // 
             resources.ApplyResources(this.textBoxOpenSsh, "textBoxOpenSsh");
             this.textBoxOpenSsh.Name = "textBoxOpenSsh";
-            this.textBoxOpenSsh.Text = global::XenAdmin.Properties.Settings.Default.OpenSSHLocation;
             this.textBoxOpenSsh.TextChanged += new System.EventHandler(this.textBoxOpenSsh_TextChanged);
             // 
             // textBoxPutty
             // 
             resources.ApplyResources(this.textBoxPutty, "textBoxPutty");
             this.textBoxPutty.Name = "textBoxPutty";
-            this.textBoxPutty.Text = global::XenAdmin.Properties.Settings.Default.PuttyLocation;
             this.textBoxPutty.TextChanged += new System.EventHandler(this.textBoxPutty_TextChanged);
             // 
             // buttonBrowsePutty

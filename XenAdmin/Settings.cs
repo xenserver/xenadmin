@@ -310,9 +310,6 @@ namespace XenAdmin
             var puttyLocation = Properties.Settings.Default.PuttyLocation;
             var openSshLocation = Properties.Settings.Default.OpenSSHLocation;
 
-            // if user has uninstalled or moved a client, we reset their locations
-            puttyLocation = File.Exists(puttyLocation) ? puttyLocation : null;
-            openSshLocation = File.Exists(openSshLocation) ? openSshLocation : null;
             if (string.IsNullOrEmpty(puttyLocation) && customSshClient == SshConsole.Putty ||
                 string.IsNullOrEmpty(openSshLocation) && customSshClient == SshConsole.OpenSSH)
             {
@@ -362,7 +359,7 @@ namespace XenAdmin
                 Properties.Settings.Default.OpenSSHLocation = openSshLocation;
             }
 
-            Properties.Settings.Default.Save();
+            TrySaveSettings();
         }
 
         private static void AddConnection(IXenConnection connection)

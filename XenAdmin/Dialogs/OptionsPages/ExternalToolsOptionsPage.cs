@@ -40,72 +40,96 @@ namespace XenAdmin.Dialogs.OptionsPages
     public partial class ExternalToolsOptionsPage : UserControl, IOptionsPage
     {
         private TextBox _tooltipControl;
+        private bool _updating;
+
         public ExternalToolsOptionsPage()
         {
             InitializeComponent();
             sshConsoleInfoLabel.Text = string.Format(sshConsoleInfoLabel.Text, BrandManager.BrandConsole);
-
-            var customSshConsole = Properties.Settings.Default.CustomSshConsole;
-
-            radioButtonOpenSsh.Checked = customSshConsole == SshConsole.OpenSSH;
-            radioButtonPutty.Checked = customSshConsole == SshConsole.Putty;
         }
 
         #region IOptionsPage Members
 
         public void Build()
         {
+            try
+            {
+                _updating = true;
+                textBoxPutty.Text = Properties.Settings.Default.PuttyLocation;
+                textBoxOpenSsh.Text = Properties.Settings.Default.OpenSSHLocation;
+            }
+            finally
+            {
+                _updating = false;
+            }
 
+            var customSshConsole = Properties.Settings.Default.CustomSshConsole;
+
+            if (customSshConsole == SshConsole.Putty)
+                radioButtonPutty.Checked = true;
+            else if (customSshConsole == SshConsole.OpenSSH)
+                radioButtonOpenSsh.Checked = true;
         }
 
         public bool IsValidToSave()
         {
+            _tooltipControl = null;
+
             // CA-362355: don't check if paths are valid if they haven't changed.
             // Avoids users not being able to save other options if the selected 
             // SSH console location isn't valid.
+            var selectedConsole = Properties.Settings.Default.CustomSshConsole;
             var puttyPath = Properties.Settings.Default.PuttyLocation;
             var openSshPath = Properties.Settings.Default.OpenSSHLocation;
-            if (radioButtonPutty.Checked && !string.IsNullOrEmpty(puttyPath) && puttyPath == textBoxPutty.Text ||
-                radioButtonOpenSsh.Checked && !string.IsNullOrEmpty(openSshPath) && openSshPath == textBoxOpenSsh.Text)
+
+            if ((selectedConsole == SshConsole.Putty && radioButtonPutty.Checked ||
+                 selectedConsole == SshConsole.OpenSSH && radioButtonOpenSsh.Checked) &&
+                puttyPath == textBoxPutty.Text &&
+                openSshPath == textBoxOpenSsh.Text)
             {
                 return true;
             }
 
-            return !(radioButtonPutty.Checked && !File.Exists(textBoxPutty.Text) ||
-                     radioButtonOpenSsh.Checked && !File.Exists(textBoxOpenSsh.Text) ||
-                     textBoxPutty.Text.Length > 0 && !textBoxPutty.Text.ToLower().EndsWith(".exe") ||
-                     textBoxOpenSsh.Text.Length > 0 && !textBoxOpenSsh.Text.ToLower().EndsWith(".exe"));
+            if (radioButtonPutty.Checked)
+            {
+                if (string.IsNullOrEmpty(textBoxPutty.Text) || !textBoxPutty.Text.ToLower().EndsWith(".exe"))
+                {
+                    _tooltipControl = textBoxPutty;
+                    tooltipValidation.ToolTipTitle = Messages.EXTERNAL_TOOLS_FILE_INVALID;
+                    return false;
+                }
+
+                if (!File.Exists(textBoxPutty.Text))
+                {
+                    _tooltipControl = textBoxPutty;
+                    tooltipValidation.ToolTipTitle = Messages.FILE_NOT_FOUND;
+                    return false;
+                }
+            }
+            else if (radioButtonOpenSsh.Checked)
+            {
+                if (string.IsNullOrEmpty(textBoxOpenSsh.Text) || !textBoxOpenSsh.Text.ToLower().EndsWith(".exe"))
+                {
+                    _tooltipControl = textBoxOpenSsh;
+                    tooltipValidation.ToolTipTitle = Messages.EXTERNAL_TOOLS_FILE_INVALID;
+                    return false;
+                }
+
+                if (!File.Exists(textBoxOpenSsh.Text))
+                {
+                    _tooltipControl = textBoxOpenSsh;
+                    tooltipValidation.ToolTipTitle = Messages.FILE_NOT_FOUND;
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         public void ShowValidationMessages()
         {
-            var message = string.Empty;
-            if (textBoxPutty.Text.Length > 0 && !textBoxPutty.Text.ToLower().EndsWith(".exe"))
-            {
-                _tooltipControl = textBoxPutty;
-                message = Messages.EXTERNAl_TOOLS_FILE_INVALID;
-            }
-            else if (textBoxOpenSsh.Text.Length > 0 && !textBoxOpenSsh.Text.ToLower().EndsWith(".exe"))
-            {
-                _tooltipControl = textBoxOpenSsh;
-                message = Messages.EXTERNAl_TOOLS_FILE_INVALID;
-            }
-            else if (radioButtonPutty.Checked && !File.Exists(textBoxPutty.Text))
-            {
-                _tooltipControl = textBoxPutty;
-                message = Messages.FILE_NOT_FOUND;
-            }
-            else if (radioButtonOpenSsh.Checked && !File.Exists(textBoxOpenSsh.Text))
-            {
-                _tooltipControl = textBoxOpenSsh;
-                message = Messages.FILE_NOT_FOUND;
-            }
-
             if (_tooltipControl != null)
-            {
-                tooltipValidation.ToolTipTitle = message;
                 HelpersGUI.ShowBalloonMessage(_tooltipControl, tooltipValidation);
-            }
         }
 
         public void HideValidationMessages()
@@ -119,7 +143,6 @@ namespace XenAdmin.Dialogs.OptionsPages
             Properties.Settings.Default.CustomSshConsole = radioButtonOpenSsh.Checked ? SshConsole.OpenSSH : SshConsole.Putty;
             Properties.Settings.Default.OpenSSHLocation = textBoxOpenSsh.Text;
             Properties.Settings.Default.PuttyLocation = textBoxPutty.Text;
-            Properties.Settings.Default.Save();
         }
 
         #endregion
@@ -138,13 +161,13 @@ namespace XenAdmin.Dialogs.OptionsPages
 
         private void textBoxPutty_TextChanged(object sender, System.EventArgs e)
         {
-            if (!radioButtonPutty.Checked)
+            if (!_updating && !radioButtonPutty.Checked)
                 radioButtonPutty.Checked = true;
         }
 
         private void textBoxOpenSsh_TextChanged(object sender, System.EventArgs e)
         {
-            if (!radioButtonOpenSsh.Checked)
+            if (!_updating && !radioButtonOpenSsh.Checked)
                 radioButtonOpenSsh.Checked = true;
         }
 

@@ -240,6 +240,7 @@ namespace XenAdmin
             Session.UserAgent = $"{BrandManager.BrandConsole} {Version}";
             RememberProxyAuthenticationModules();
             ReconfigureConnectionSettings();
+            Settings.ConfigureExternalSshClientSettings();
 
             log.Info("Application started");
             logSystemDetails();
@@ -276,8 +277,6 @@ namespace XenAdmin
 
             Application.ApplicationExit -= Application_ApplicationExit;
             Application.ApplicationExit += Application_ApplicationExit;
-
-            Settings.ConfigureExternalSshClientSettings();
 
             MainWindow mainWindow = new MainWindow(firstArgType, tailArgs);
             Application.Run(mainWindow);
