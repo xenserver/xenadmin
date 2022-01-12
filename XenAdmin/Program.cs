@@ -152,25 +152,26 @@ namespace XenAdmin
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static public void Main(string[] Args)
+        public static void Main(string[] args)
         {
-            //Upgrade settings
             string appVersionString = Version.ToString();
-            log.DebugFormat("Application version of new settings {0}", appVersionString);
+            log.InfoFormat("Application version of current settings {0}", appVersionString);
 
             try
             {
                 if (Properties.Settings.Default.ApplicationVersion != appVersionString)
                 {
-                    log.Debug("Upgrading settings...");
+                    log.Info("Upgrading settings...");
                     Properties.Settings.Default.Upgrade();
 
                     // if program's hash has changed (e.g. by upgrading to .NET 4.0), then Upgrade() doesn't import the previous application settings 
                     // because it cannot locate a previous user.config file. In this case a new user.config file is created with the default settings.
                     // We will try and find a config file from a previous installation and update the settings from it
+
                     if (Properties.Settings.Default.ApplicationVersion == "" && Properties.Settings.Default.DoUpgrade)
                         SettingsUpdate.Update();
-                    log.DebugFormat("Settings upgraded from '{0}' to '{1}'", Properties.Settings.Default.ApplicationVersion, appVersionString);
+
+                    log.InfoFormat("Settings upgraded from '{0}' to '{1}'", Properties.Settings.Default.ApplicationVersion, appVersionString);
                     Properties.Settings.Default.ApplicationVersion = appVersionString;
                     Settings.TrySaveSettings();
                 }
@@ -247,7 +248,7 @@ namespace XenAdmin
             Settings.Log();
 
             // Remove the '--wait' argument, which may have been passed to the splash screen
-            var sanitizedArgs = Args.Where(ar => ar != "--wait").ToArray();
+            var sanitizedArgs = args.Where(ar => ar != "--wait").ToArray();
 
             var firstArgType = ParseFileArgs(sanitizedArgs, out string[] tailArgs);
 
@@ -927,7 +928,9 @@ namespace XenAdmin
             var authModules = AuthenticationManager.RegisteredModules;
             while (authModules.MoveNext())
             {
-                var module = (IAuthenticationModule)authModules.Current;
+                if (!(authModules.Current is IAuthenticationModule module))
+                    continue;
+
                 if (module.AuthenticationType == "Basic")
                     BasicAuthenticationModule = module;
                 else if (module.AuthenticationType == "Digest")

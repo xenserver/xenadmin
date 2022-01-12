@@ -39,9 +39,6 @@ namespace XenAdmin
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        // The path of the user.config files looks something like this:
-        // <Profile Directory>\<Company Name>\<App Name>_<Evidence Type>_<Evidence Hash>\<Version>\user.config
-
         /// <summary>
         /// Looks for a config file from a previous installation of the application and updates the settings from it.
         /// </summary>
@@ -49,25 +46,20 @@ namespace XenAdmin
         {
             try
             {
-                Assembly a = Assembly.GetExecutingAssembly();
-                Version appVersion = a.GetName().Version;
-
-                // get previous config file by enumerating through all the folders in <Profile Directory>\<Company Name> 
-                // to find a previous user.config file
+                // The path of the user.config files looks something like this:
+                // <Profile Directory>\<Company Name>\<App Name>_<Evidence Type>_<Evidence Hash>\<Version>\user.config
+                // Get a previous user.config file by enumerating through all the folders in <Profile Directory>\<Company Name> 
 
                 var currentConfigFolder = new DirectoryInfo(Settings.GetUserConfigPath()).Parent;
 
-                if (currentConfigFolder == null)
-                    return;
-
-                var appDomainName = AppDomain.CurrentDomain.FriendlyName;
-                var companyFolder = currentConfigFolder.Parent != null ? currentConfigFolder.Parent.Parent : null;
-
+                var companyFolder = currentConfigFolder?.Parent?.Parent;
                 if (companyFolder == null)
                     return;
 
                 FileInfo previousConfig = null;
                 Version previousVersion = null;
+                Version currentVersion = Program.Version;
+                var appDomainName = AppDomain.CurrentDomain.FriendlyName;
 
                 foreach (var subDir in companyFolder.GetDirectories("*" + appDomainName + "*", SearchOption.AllDirectories))
                 {
@@ -78,7 +70,7 @@ namespace XenAdmin
                         {
                             var configVersion = new Version(configFolderName);
 
-                            if ((configVersion <= appVersion) && (previousVersion == null || configVersion > previousVersion))
+                            if (configVersion <= currentVersion && (previousVersion == null || configVersion > previousVersion))
                             {
                                 previousVersion = configVersion;
                                 previousConfig = file;
@@ -86,7 +78,7 @@ namespace XenAdmin
                         }
                     }
                 }
-            
+
                 if (previousConfig != null)
                 {
                     // copy previous config file to current config location
