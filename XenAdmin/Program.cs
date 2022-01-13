@@ -169,7 +169,7 @@ namespace XenAdmin
                     // We will try and find a config file from a previous installation and update the settings from it
 
                     if (Properties.Settings.Default.ApplicationVersion == "" && Properties.Settings.Default.DoUpgrade)
-                        SettingsUpdate.Update();
+                        Settings.UpgradeFromPreviousInstallation();
 
                     log.InfoFormat("Settings upgraded from '{0}' to '{1}'", Properties.Settings.Default.ApplicationVersion, appVersionString);
                     Properties.Settings.Default.ApplicationVersion = appVersionString;

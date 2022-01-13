@@ -37,6 +37,7 @@ using XenAdmin.Dialogs;
 using XenAdmin.Dialogs.RestoreSession;
 using XenAdmin.Network;
 using System.Configuration;
+using System.IO;
 using XenCenterLib;
 using System.Linq;
 
@@ -628,6 +629,70 @@ namespace XenAdmin
             log.Info($"=== DoNotConfirmDismissUpdates: {Properties.Settings.Default.DoNotConfirmDismissUpdates}" );
             log.Info($"=== DoNotConfirmDismissEvents: {Properties.Settings.Default.DoNotConfirmDismissEvents}" );
             log.Info($"=== IgnoreOvfValidationWarnings: {Properties.Settings.Default.IgnoreOvfValidationWarnings}");
+        }
+
+        /// <summary>
+        /// Looks for a config file from a previous installation of the application and updates the settings from it.
+        /// </summary>
+        public static void UpgradeFromPreviousInstallation()
+        {
+            try
+            {
+                // The path of the user.config files looks something like this:
+                // <Profile Directory>\<Company Name>\<App Name>_<Evidence Type>_<Evidence Hash>\<Version>\user.config
+                // Get a previous user.config file by enumerating through all the folders in <Profile Directory>\<Company Name> 
+
+                var currentConfigFolder = new DirectoryInfo(Settings.GetUserConfigPath()).Parent;
+
+                var companyFolder = currentConfigFolder?.Parent?.Parent;
+                if (companyFolder == null)
+                    return;
+
+                FileInfo previousConfig = null;
+                Version previousVersion = null;
+                Version currentVersion = Program.Version;
+                var appDomainName = AppDomain.CurrentDomain.FriendlyName;
+
+                foreach (var subDir in companyFolder.GetDirectories("*" + appDomainName + "*", SearchOption.AllDirectories))
+                {
+                    foreach (var file in subDir.GetFiles("user.config", SearchOption.AllDirectories))
+                    {
+                        var configFolderName = Path.GetFileName(Path.GetDirectoryName(file.FullName));
+                        if (configFolderName != null)
+                        {
+                            var configVersion = new Version(configFolderName);
+
+                            if (configVersion <= currentVersion && (previousVersion == null || configVersion > previousVersion))
+                            {
+                                previousVersion = configVersion;
+                                previousConfig = file;
+                            }
+                        }
+                    }
+                }
+
+                if (previousConfig != null)
+                {
+                    // copy previous config file to current config location
+                    var destinationFile = Path.GetDirectoryName(currentConfigFolder.FullName);
+
+                    destinationFile = Path.Combine(destinationFile, previousVersion.ToString());
+
+                    if (!Directory.Exists(destinationFile))
+                        Directory.CreateDirectory(destinationFile);
+
+                    destinationFile = Path.Combine(destinationFile, previousConfig.Name);
+
+                    File.Copy(previousConfig.FullName, destinationFile);
+
+                    // upgrade settings
+                    XenAdmin.Properties.Settings.Default.Upgrade();
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Debug("Exception while updating settings.", ex);
+            }
         }
     }
 }
