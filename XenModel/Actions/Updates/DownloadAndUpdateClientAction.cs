@@ -40,6 +40,7 @@ using System.Diagnostics;
 using System.Security.Cryptography;
 using XenCenterLib;
 using System.Text;
+using System.Security.Cryptography.X509Certificates;
 
 namespace XenAdmin.Actions
 {
@@ -192,67 +193,72 @@ namespace XenAdmin.Actions
                 if (Cancelling)
                     throw new CancelledException();
             }
-            if (ValidMsi())
+            
+            ValidateMsi();
+
+            // Install the msi            
+            try
             {
-                // Install the downloaded msi            
-                try
+                if (File.Exists(outputPathAndFileName))
                 {
-                    // Start the install process and end current 
-                    if (File.Exists(outputPathAndFileName))
-                    {
-                        // Launch downloaded msi
-                        Process.Start(outputPathAndFileName);
-                        log.DebugFormat("Update {0} found and install started", updateName);
-                    }
+                    // Start the install process, it will handle closing of application.
+                    Process.Start(outputPathAndFileName);
+                    log.DebugFormat("Update {0} found and install started", updateName);
                 }
-                catch (Exception e)
+            }
+            catch (Exception e)
+            {
+                if (File.Exists(outputPathAndFileName))
                 {
-                    if (File.Exists(outputPathAndFileName))
-                    {
-                        File.Delete(outputPathAndFileName);
-                    }
-                    log.Error("Exception occurred when installing CHC.", e);
-                    throw;
+                    File.Delete(outputPathAndFileName);
                 }
+                log.Error("Exception occurred when installing CHC.", e);
+                throw;
             }
 
             Description = Messages.COMPLETED;
             MarkCompleted();
         }
 
-        private bool ValidMsi()
+        private void ValidateMsi()
         {
+
             using (FileStream stream = new FileStream(outputPathAndFileName, FileMode.Open, FileAccess.Read))
             {
                 var hash = StreamUtilities.ComputeHash(stream, out var hashAlgorithm);
+                
                 //Convert to Hex string
                 StringBuilder sb = new StringBuilder();
                 foreach (var b in hash)
-                {
                     sb.Append(b.ToString("x2"));
-                }
+             
                 var calculatedChecksum = sb.ToString();
+                
                 // Check if calculatedChecksum matches what is in chcupdates.xml
                 if (checksum != calculatedChecksum)
+                    throw new Exception("The checksum of the downloaded MSI does not match what is expected. This indicates it has been tampered with.");
+            }
+
+            var valid = false;
+            // Check digital signature of .msi
+            using (var basicSigner = X509Certificate.CreateFromSignedFile(outputPathAndFileName))
+            {
+                using (var cert = new X509Certificate2(basicSigner))
                 {
-                    return false;
+                    try
+                    {
+                        valid = cert.Verify();
+                        valid = false;
+                    }
+                    catch (Exception e)
+                    {
+                        throw new Exception("Unable to validate digital signature on msi.", e);
+                    }
                 }
             }
 
-            return true;
-
-            // TODO: Check digital signature of .msi
-
-        }
-        // Display the byte array in a readable format.
-        public static void PrintByteArray(byte[] array)
-        {
-            for (int i = 0; i < array.Length; i++)
-            {
-                Console.Write($"{array[i]:X2}");
-                if ((i % 4) == 3) Console.Write(" ");
-            }
-            Console.WriteLine();
+            if (!valid)
+                throw new Exception("Invalid digital signature on msi.");
         }
 
         void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
