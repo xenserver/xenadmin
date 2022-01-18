@@ -980,8 +980,16 @@ namespace XenAdmin.TabPages
 
             var downloadAndInstallClientAction = new DownloadAndUpdateClientAction(alert.Name, new Uri(alert.NewVersion.Url), Path.Combine(Path.GetTempPath(), $"{alert.Name}.msi"), true, alert.Checksum) ;
 
-            using (var dlg = new ActionProgressDialog(downloadAndInstallClientAction, ProgressBarStyle.Marquee))
-                dlg.ShowDialog(Parent);
+            DialogResult dialogResult = MessageBox.Show("In order to update your client will be closed. Is all your work done and saved?.", "Are you ready to update?", MessageBoxButtons.YesNo);
+            // Only start if user says yes.
+            if (dialogResult == DialogResult.Yes)
+            {
+                // Start the download and show progress
+                using (var dlg = new ActionProgressDialog(downloadAndInstallClientAction, ProgressBarStyle.Marquee))
+                {
+                    dlg.ShowDialog(Parent);
+                }
+            }
         }
 
         private void ToolStripMenuItemDismiss_Click(object sender, EventArgs e)
