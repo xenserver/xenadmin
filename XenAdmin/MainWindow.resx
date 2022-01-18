@@ -2784,14 +2784,26 @@
   <data name="MainMenuBar.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
+  <data name="downloadInstallToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="downloadInstallToolStripMenuItem.Text" xml:space="preserve">
+    <value>Download and Install</value>
+  </data>
+  <data name="skipToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="skipToolStripMenuItem.Text" xml:space="preserve">
+    <value>Skip</value>
+  </data>
   <data name="updateClientToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="updateClientToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 20</value>
+    <value>70, 20</value>
   </data>
   <data name="updateClientToolStripMenuItem.Text" xml:space="preserve">
-    <value>Update Client</value>
+    <value>Update</value>
   </data>
   <data name="MainMenuBar.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -4074,6 +4086,12 @@
   <data name="&gt;&gt;updateClientToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;skipToolStripMenuItem.Name" xml:space="preserve">
+    <value>skipToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;skipToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;securityGroupsToolStripMenuItem.Name" xml:space="preserve">
     <value>securityGroupsToolStripMenuItem</value>
   </data>
@@ -4109,6 +4127,12 @@
   </data>
   <data name="&gt;&gt;statusLabelAlerts.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;downloadInstallToolStripMenuItem.Name" xml:space="preserve">
+    <value>downloadInstallToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;downloadInstallToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainWindow</value>

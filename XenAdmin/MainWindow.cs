@@ -2655,7 +2655,7 @@ namespace XenAdmin
 
                     statusLabelUpdates.Text = string.Format(Messages.NOTIFICATIONS_SUBMODE_UPDATES_STATUS, updatesCount);
                     statusLabelUpdates.Visible = updatesCount > 0;
-
+                    updateAlert = Updates.UpdateAlerts.FirstOrDefault(update => update is ClientUpdateAlert) as ClientUpdateAlert;
                     if (updatesPage.Visible)
                     {
                         TitleLabel.Text = NotificationsSubModeItem.GetText(NotificationsSubMode.Updates, updatesCount);
@@ -2669,7 +2669,7 @@ namespace XenAdmin
             
             Program.Invoke(this, () => {
                 updateAlert = Updates.UpdateAlerts.FirstOrDefault(update => update is ClientUpdateAlert) as ClientUpdateAlert;
-                updateClientToolStripMenuItem.Enabled = true;//updateAlert != null; 
+                updateClientToolStripMenuItem.Enabled = updateAlert != null; 
             });            
         }
 
@@ -3330,12 +3330,26 @@ namespace XenAdmin
             navigationPane.SwitchToNotificationsView(NotificationsSubMode.Events);
         }
 
-        private void updateToolStripMenuItem_Click(object sender, EventArgs e)
-        {            
+        private void skipToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            updateAlert.Dismiss();
+            Program.Invoke(this, () => { updateClientToolStripMenuItem.Enabled = false; });
+        }
+
+        private void downloadInstallToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             var downloadAndInstallClientAction = new DownloadAndUpdateClientAction(updateAlert.Name, new Uri(updateAlert.NewVersion.Url), Path.Combine(Path.GetTempPath(), $"{updateAlert.Name}.msi"), true, updateAlert.Checksum);
 
-            using (var dlg = new ActionProgressDialog(downloadAndInstallClientAction, ProgressBarStyle.Marquee))
-                dlg.ShowDialog(Parent);
+            DialogResult dialogResult = MessageBox.Show("In order to update your client will be closed. Is all your work done and saved?.", "Are you ready to update?", MessageBoxButtons.YesNo);
+            // Only start if user says yes.
+            if (dialogResult == DialogResult.Yes)
+            {
+                // Start the download and show progress
+                using (var dlg = new ActionProgressDialog(downloadAndInstallClientAction, ProgressBarStyle.Marquee))
+                {
+                    dlg.ShowDialog(Parent);
+                }
+            }
         }
     }
 }
