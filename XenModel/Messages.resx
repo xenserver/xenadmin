@@ -3791,7 +3791,7 @@ This action cannot be undone. Are you sure you want to continue?</value>
     <value>Copy VM to {0}</value>
   </data>
   <data name="COPYING_TEMPLATE" xml:space="preserve">
-    <value>Copying template '{0}'</value>
+    <value>Copying template '{0}' to SR '{1}'</value>
   </data>
   <data name="COPYRIGHT" xml:space="preserve">
     <value>Copyright © {0} All rights reserved.</value>
