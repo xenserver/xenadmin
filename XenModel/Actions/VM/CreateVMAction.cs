@@ -200,19 +200,11 @@ namespace XenAdmin.Actions.VMActions
         {
             if (FullCopySR != null)
             {
-                // VM.copy is the best call to make if all target disks are on the same SR.
-                // however, if the target disks are on the same SR as the source disks, then the user is 
-                // given the choice of a fast-clone (VM.clone) or a full-copy (VM.copy) on the storage page of the wizard. If the
-                // user chose a VM.clone, then FullCopySR will be null.
-
-                Description = string.Format(Messages.COPYING_TEMPLATE, Helpers.GetName(Template));
+                Description = string.Format(Messages.COPYING_TEMPLATE, Helpers.GetName(Template), FullCopySR.Name());
                 RelatedTask = VM.async_copy(Session, Template.opaque_ref, Helpers.MakeHiddenName(NameLabel), FullCopySR.opaque_ref);
             }
             else
             {
-                // if the target disks are on mixed storage or the user chose to a do a fast-clone on the storage
-                // page then we end up here.
-
                 Description = string.Format(Messages.CLONING_TEMPLATE, Helpers.GetName(Template));
                 RelatedTask = VM.async_clone(Session, Template.opaque_ref, Helpers.MakeHiddenName(NameLabel));
             }

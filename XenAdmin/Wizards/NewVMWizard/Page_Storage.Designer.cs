@@ -59,6 +59,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             // 
             this.DisksGridView.BackgroundColor = System.Drawing.SystemColors.Window;
             this.DisksGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            resources.ApplyResources(this.DisksGridView, "DisksGridView");
             this.DisksGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.DisksGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ImageColumn,
@@ -74,9 +75,9 @@ namespace XenAdmin.Wizards.NewVMWizard
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.DisksGridView.DefaultCellStyle = dataGridViewCellStyle1;
-            resources.ApplyResources(this.DisksGridView, "DisksGridView");
             this.DisksGridView.Name = "DisksGridView";
             this.tableLayoutPanel1.SetRowSpan(this.DisksGridView, 3);
+            this.DisksGridView.Enter += new System.EventHandler(this.DisksGridView_Enter);
             this.DisksGridView.SelectionChanged += new System.EventHandler(this.DisksGridView_SelectionChanged);
             // 
             // ImageColumn

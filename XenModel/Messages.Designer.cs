@@ -10622,7 +10622,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Copying template &apos;{0}&apos;.
+        ///   Looks up a localized string similar to Copying template &apos;{0}&apos; to SR &apos;{1}&apos;.
         /// </summary>
         public static string COPYING_TEMPLATE {
             get {
