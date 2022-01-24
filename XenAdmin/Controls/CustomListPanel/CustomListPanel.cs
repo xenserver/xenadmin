@@ -101,7 +101,7 @@ namespace XenAdmin.Controls
 
         public void ClearRows()
         {
-            foreach (CustomListRow row in Rows)
+            foreach (var row in Rows)
             {
                 row.Dispose();
             }

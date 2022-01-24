@@ -77,7 +77,7 @@ namespace XenAdmin.ConsoleView
             get { return terminated; }
         }
 
-        private CustomCursor RemoteCursor = null;
+        private CustomCursor RemoteCursor;
         private CustomCursor LocalCursor = new CustomCursor(Images.StaticImages.vnc_local_cursor, 2, 2);
 
         /// <summary>
@@ -430,7 +430,7 @@ namespace XenAdmin.ConsoleView
         [DllImport("user32.dll")]
         public static extern bool DestroyIcon(IntPtr hIcon);
 
-        class CustomCursor
+        class CustomCursor : IDisposable
         {
             private Cursor cursor = null;
             private IntPtr handle = IntPtr.Zero;
