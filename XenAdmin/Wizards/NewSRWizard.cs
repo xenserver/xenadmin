@@ -222,8 +222,7 @@ namespace XenAdmin.Wizards
             xenTabPageLvmoHbaSummary.SuccessfullyCreatedSRs.Clear();
             xenTabPageLvmoHbaSummary.FailedToCreateSRs.Clear();
 
-            bool closeWizard;
-            RunFinalAction(out closeWizard);
+            RunFinalAction(out var closeWizard);
             return closeWizard;
         }
 
