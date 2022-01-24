@@ -6,11 +6,6 @@
       "flat": "true"
     },
     {
-      "pattern": "@REMOTE_DOTNET@/putty.exe",
-      "target": "xenadmin.git/packages/",
-      "flat": "true"
-    },
-    {
       "pattern": "@REMOTE_DOTNET@/dotnet48/CookComputing.XmlRpcV2.dll",
       "target": "xenadmin.git/packages/",
       "flat": "true"

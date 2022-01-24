@@ -2933,6 +2933,18 @@ Do you want to assign these VMs to the schedule '{0}' instead?</value>
   <data name="CONFIGURE_HA_ELLIPSIS" xml:space="preserve">
     <value>&amp;Configure HA...</value>
   </data>
+  <data name="CONFIGURE_SSH_CONSOLE_ERROR" xml:space="preserve">
+    <value>Your external SSH console could not be launched. Please check that you have selected a valid file.</value>
+  </data>
+  <data name="CONFIGURE_SSH_CONSOLE_FILE_NOT_CONFIGURED" xml:space="preserve">
+    <value>An external SSH console has not been configured.</value>
+  </data>
+  <data name="CONFIGURE_SSH_CONSOLE_FILE_NOT_FOUND" xml:space="preserve">
+    <value>The file associated with your external SSH console doesn't exist. Please check that you have selected a valid file.</value>
+  </data>
+  <data name="CONFIGURE_SSH_CONSOLE_TITLE" xml:space="preserve">
+    <value>Configure &amp;SSH Console</value>
+  </data>
   <data name="CONFIGURING_WLB" xml:space="preserve">
     <value>Configuring Workload Balancing </value>
   </data>
@@ -5938,6 +5950,21 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="EXTERNAL_PLUGIN_WIN32" xml:space="preserve">
     <value>Failed to run plug-in executable. Please see the client log for details.</value>
   </data>
+  <data name="EXTERNAL_TOOLS" xml:space="preserve">
+    <value>External Tools</value>
+  </data>
+  <data name="EXTERNAL_TOOLS_DETAILS" xml:space="preserve">
+    <value>Manage external tools</value>
+  </data>
+  <data name="EXTERNAL_TOOLS_FILE_INVALID" xml:space="preserve">
+    <value>File is invalid. Please select an .exe file.</value>
+  </data>
+  <data name="EXTERNAL_TOOLS_OPEN_FILE_TITLE" xml:space="preserve">
+    <value>Select SSH console</value>
+  </data>
+  <data name="EXTERNAL_TOOLS_OPEN_FILE_TYPE" xml:space="preserve">
+    <value>Executables (*.exe)|*.exe</value>
+  </data>
   <data name="FAILED" xml:space="preserve">
     <value>Failed</value>
   </data>
@@ -5991,6 +6018,9 @@ Would you like to eject these ISOs before continuing?</value>
   </data>
   <data name="FILE_NAME_IS_DEVICE_NAME_ERROR_MESSAGE" xml:space="preserve">
     <value>A file name cannot be a device name.</value>
+  </data>
+  <data name="FILE_NOT_FOUND" xml:space="preserve">
+    <value>File not found</value>
   </data>
   <data name="FILE_PATH_DEVICE_NAME_ERROR_MESSAGE" xml:space="preserve">
     <value>Path section {0} matches a device name.</value>

@@ -37,6 +37,7 @@ using XenAdmin.Dialogs;
 using XenAdmin.Dialogs.RestoreSession;
 using XenAdmin.Network;
 using System.Configuration;
+using System.IO;
 using XenCenterLib;
 using System.Linq;
 
@@ -301,6 +302,64 @@ namespace XenAdmin
             }
 
             return true;
+        }
+
+        public static void ConfigureExternalSshClientSettings()
+        {
+            var customSshClient = Properties.Settings.Default.CustomSshConsole;
+            var puttyLocation = Properties.Settings.Default.PuttyLocation;
+            var openSshLocation = Properties.Settings.Default.OpenSSHLocation;
+
+            if (string.IsNullOrEmpty(puttyLocation) && customSshClient == SshConsole.Putty ||
+                string.IsNullOrEmpty(openSshLocation) && customSshClient == SshConsole.OpenSSH)
+            {
+                customSshClient = SshConsole.None;
+            }
+
+            // attempt to locate clients in their default locations
+            if (string.IsNullOrEmpty(puttyLocation))
+            {
+                var defaultPaths = new[] {
+                        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "PuTTY\\putty.exe"),
+                        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "PuTTY\\putty.exe")
+                };
+                puttyLocation = defaultPaths.Where(File.Exists).FirstOrDefault();
+            }
+            if (string.IsNullOrEmpty(openSshLocation))
+            {
+                // https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_server_configuration
+                var defaultPath = Path.Combine(Environment.SystemDirectory, "OpenSSH\\ssh.exe");
+                openSshLocation = File.Exists(defaultPath) ? defaultPath : openSshLocation;
+            }
+
+            // we prioritize PuTTY since that must have been installed by the user
+            if (customSshClient == SshConsole.None)
+            {
+                if (!string.IsNullOrEmpty(puttyLocation))
+                {
+                    customSshClient = SshConsole.Putty;
+                }
+                else if (!string.IsNullOrEmpty(openSshLocation))
+                {
+                    customSshClient = SshConsole.OpenSSH;
+                }
+            }
+
+            // avoid updating settings if they haven't changed
+            if (customSshClient != Properties.Settings.Default.CustomSshConsole)
+            {
+                Properties.Settings.Default.CustomSshConsole = customSshClient;
+            }
+            if (puttyLocation != null && !puttyLocation.Equals(Properties.Settings.Default.PuttyLocation))
+            {
+                Properties.Settings.Default.PuttyLocation = puttyLocation;
+            }
+            if (openSshLocation != null && !openSshLocation.Equals(Properties.Settings.Default.OpenSSHLocation))
+            {
+                Properties.Settings.Default.OpenSSHLocation = openSshLocation;
+            }
+
+            TrySaveSettings();
         }
 
         private static void AddConnection(IXenConnection connection)
