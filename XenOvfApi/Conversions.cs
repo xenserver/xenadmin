@@ -34,8 +34,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Management;
 using System.Reflection;
-using System.Text;
-
 using XenOvf.Definitions;
 using XenOvf.Definitions.VMC;
 using XenOvf.Utilities;

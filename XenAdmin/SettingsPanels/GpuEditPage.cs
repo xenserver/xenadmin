@@ -40,7 +40,6 @@ using XenAdmin.Controls;
 using XenAdmin.Controls.DataGridViewEx;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
-using XenAdmin.Network;
 using XenAPI;
 
 

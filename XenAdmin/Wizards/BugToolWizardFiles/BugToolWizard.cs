@@ -30,7 +30,6 @@
  */
 
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
@@ -40,7 +39,6 @@ using XenAPI;
 using XenAdmin.Wizards.BugToolWizardFiles;
 using XenAdmin.Dialogs;
 using XenAdmin.Actions;
-using XenAdmin.Network;
 using XenAdmin.Wizards.GenericPages;
 
 namespace XenAdmin.Wizards

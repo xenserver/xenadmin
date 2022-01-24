@@ -31,7 +31,6 @@
 
 using System;
 using XenAdmin.Controls;
-using XenCenterLib;
 using XenModel;
 
 namespace XenAdmin.Wizards.ImportWizard

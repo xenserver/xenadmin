@@ -56,13 +56,11 @@ using XenAdmin.Model;
 using XenAdmin.Network;
 using XenAdmin.TabPages;
 using XenAdmin.XenSearch;
-using XenAdmin.Wizards.PatchingWizard;
 using XenAdmin.Plugins;
 using XenCenterLib;
 using System.Linq;
 using XenAdmin.Controls.GradientPanel;
 using XenAdmin.Help;
-using XenAdmin.Wizards;
 
 
 namespace XenAdmin
