@@ -30,7 +30,6 @@
  */
 
 using System.Collections.Generic;
-using System.Windows.Forms;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
 using XenAdmin.Wizards.DRWizards;

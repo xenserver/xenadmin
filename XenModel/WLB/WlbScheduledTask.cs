@@ -31,7 +31,6 @@
 
 using System;
 using System.Collections.Generic;
-using XenAdmin.Core;
 
 
 namespace XenAdmin.Wlb

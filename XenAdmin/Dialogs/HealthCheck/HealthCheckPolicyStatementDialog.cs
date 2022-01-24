@@ -29,7 +29,6 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Windows.Forms;
 using XenAdmin.Core;
 

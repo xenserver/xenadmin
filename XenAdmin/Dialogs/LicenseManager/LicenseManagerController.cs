@@ -35,7 +35,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Actions;
-using XenAdmin.Commands;
 using XenAdmin.Controls.CheckableDataGridView;
 using XenAdmin.Controls.SummaryPanel;
 using XenAdmin.Core;

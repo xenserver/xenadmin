@@ -30,10 +30,8 @@
  */
 
 using System;
-using System.Collections.Generic;
 using XenAdmin.Controls;
 using XenAdmin.Core;
-using XenAPI;
 
 
 namespace XenAdmin.Wizards.RollingUpgradeWizard
