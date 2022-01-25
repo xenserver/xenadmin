@@ -2595,22 +2595,22 @@ This will cancel compilation of the status report.</value>
     <value>The DVD drive cannot be created, because you have reached the maximum number of virtual disks allowed for this virtual machine.</value>
   </data>
   <data name="CERTIFICATE_CA_ALERT_EXPIRED_DESCIRPTION" xml:space="preserve">
-    <value>The trusted CA certificate of '{0}' expired on {1}.</value>
+    <value>The trusted CA certificate '{0}' of '{1}' expired on {2}.</value>
   </data>
   <data name="CERTIFICATE_CA_ALERT_EXPIRED_TITLE" xml:space="preserve">
-    <value>Trusted CA certificate on {0} expired</value>
+    <value>Trusted CA certificate '{0}' on {1} expired</value>
   </data>
   <data name="CERTIFICATE_CA_ALERT_EXPIRING_DESCRIPTION" xml:space="preserve">
-    <value>The trusted CA certificate of '{0}' will expire on {1}.</value>
+    <value>The trusted CA certificate '{0}' of '{1}' will expire on {2}.</value>
   </data>
   <data name="CERTIFICATE_CA_ALERT_EXPIRING_TITLE_DAYS" xml:space="preserve">
-    <value>Trusted CA certificate on {0} expiring in {1} day(s)</value>
+    <value>Trusted CA certificate '{0}' on {1} expiring in {2} day(s)</value>
   </data>
   <data name="CERTIFICATE_CA_ALERT_EXPIRING_TITLE_HOURS" xml:space="preserve">
-    <value>Trusted CA certificate on {0} expiring in {1} hour(s)</value>
+    <value>Trusted CA certificate '{0}' on {1} expiring in {2} hour(s)</value>
   </data>
   <data name="CERTIFICATE_CA_ALERT_EXPIRING_TITLE_MINUTES" xml:space="preserve">
-    <value>Trusted CA certificate on {0} expiring in {1} minute(s)</value>
+    <value>Trusted CA certificate '{0}' on {1} expiring in {2} minute(s)</value>
   </data>
   <data name="CERTIFICATE_FILETYPES" xml:space="preserve">
     <value>TLS certificate files (*.pem;*.crt;*.cer)|*.pem;*.crt;*.cer</value>

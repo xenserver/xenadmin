@@ -52,7 +52,7 @@ namespace XenAdmin.Alerts
         public PolicyAlert(Message msg)
             : base(msg)
         {
-            var policyName = Helpers.XenObjectFromMessage(msg) is VMSS vmss ? vmss.Name() : "";
+            var policyName = msg.GetXenObject() is VMSS vmss ? vmss.Name() : "";
 
             Time = msg.TimestampLocal();
             Type = FromPriority(msg.priority);
