@@ -88,5 +88,32 @@ namespace XenAPI
             // We don't show HA_POOL_OVERCOMMITTED because we get HA_POOL_DROP_IN_PLAN_EXISTS_FOR at the same time.
             return Type == MessageType.HA_POOL_OVERCOMMITTED;
         }
+
+        /// <summary>
+        /// Retrieves the IXenObject the message was issued for.
+        /// May return null if the object is of unknown type or not found.
+        /// </summary>
+        public IXenObject GetXenObject()
+        {
+            switch (cls)
+            {
+                case cls.Pool:
+                    return Connection.Cache.Find_By_Uuid<Pool>(obj_uuid);
+                case cls.Host:
+                    return Connection.Cache.Find_By_Uuid<Host>(obj_uuid);
+                case cls.VM:
+                    return Connection.Cache.Find_By_Uuid<VM>(obj_uuid);
+                case cls.SR:
+                    return Connection.Cache.Find_By_Uuid<SR>(obj_uuid);
+                case cls.VMSS:
+                    return Connection.Cache.Find_By_Uuid<VMSS>(obj_uuid);
+                case cls.PVS_proxy:
+                    return Connection.Cache.Find_By_Uuid<PVS_proxy>(obj_uuid);
+                case cls.Certificate:
+                    return Connection.Cache.Find_By_Uuid<Certificate>(obj_uuid);
+                default:
+                    return null;
+            }
+        }
     }
 }

@@ -1497,49 +1497,6 @@ namespace XenAdmin.Core
             return result;
         }
 
-        /// <summary>
-        /// Retrieves a IXenObject from a message. May return null if type not recognised.
-        /// </summary>
-        /// <param name="message"></param>
-        /// <returns></returns>
-        public static IXenObject XenObjectFromMessage(XenAPI.Message message)
-        {
-            switch (message.cls)
-            {
-                case cls.Pool:
-                    Pool pool = message.Connection.Cache.Find_By_Uuid<Pool>(message.obj_uuid);
-                    if (pool != null)
-                        return pool;
-                    break;
-                case cls.Host:
-                    Host host = message.Connection.Cache.Find_By_Uuid<Host>(message.obj_uuid);
-                    if (host != null)
-                        return host;
-                    break;
-                case cls.VM:
-                    VM vm = message.Connection.Cache.Find_By_Uuid<VM>(message.obj_uuid);
-                    if (vm != null)
-                        return vm;
-                    break;
-                case cls.SR:
-                    SR sr = message.Connection.Cache.Find_By_Uuid<SR>(message.obj_uuid);
-                    if (sr != null)
-                        return sr;
-                    break;
-                case cls.VMSS:
-                    VMSS vmss = message.Connection.Cache.Find_By_Uuid<VMSS>(message.obj_uuid);
-                    if (vmss != null)
-                        return vmss;
-                    break;
-                case cls.PVS_proxy:
-                    PVS_proxy proxy = message.Connection.Cache.Find_By_Uuid<PVS_proxy>(message.obj_uuid);
-                    if (proxy != null)
-                        return proxy;
-                    break;
-            }
-            return null;
-        }
-
         public static Regex HostnameOrIpRegex = new Regex(@"[\w.]+");
 
         public static string HostnameFromLocation(string p)

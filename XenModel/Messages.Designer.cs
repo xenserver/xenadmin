@@ -7164,7 +7164,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The trusted CA certificate of &apos;{0}&apos; expired on {1}..
+        ///   Looks up a localized string similar to The trusted CA certificate &apos;{0}&apos; of &apos;{1}&apos; expired on {2}..
         /// </summary>
         public static string CERTIFICATE_CA_ALERT_EXPIRED_DESCIRPTION {
             get {
@@ -7173,7 +7173,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Trusted CA certificate on {0} expired.
+        ///   Looks up a localized string similar to Trusted CA certificate &apos;{0}&apos; on {1} expired.
         /// </summary>
         public static string CERTIFICATE_CA_ALERT_EXPIRED_TITLE {
             get {
@@ -7182,7 +7182,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The trusted CA certificate of &apos;{0}&apos; will expire on {1}..
+        ///   Looks up a localized string similar to The trusted CA certificate &apos;{0}&apos; of &apos;{1}&apos; will expire on {2}..
         /// </summary>
         public static string CERTIFICATE_CA_ALERT_EXPIRING_DESCRIPTION {
             get {
@@ -7191,7 +7191,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Trusted CA certificate on {0} expiring in {1} day(s).
+        ///   Looks up a localized string similar to Trusted CA certificate &apos;{0}&apos; on {1} expiring in {2} day(s).
         /// </summary>
         public static string CERTIFICATE_CA_ALERT_EXPIRING_TITLE_DAYS {
             get {
@@ -7200,7 +7200,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Trusted CA certificate on {0} expiring in {1} hour(s).
+        ///   Looks up a localized string similar to Trusted CA certificate &apos;{0}&apos; on {1} expiring in {2} hour(s).
         /// </summary>
         public static string CERTIFICATE_CA_ALERT_EXPIRING_TITLE_HOURS {
             get {
@@ -7209,7 +7209,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Trusted CA certificate on {0} expiring in {1} minute(s).
+        ///   Looks up a localized string similar to Trusted CA certificate &apos;{0}&apos; on {1} expiring in {2} minute(s).
         /// </summary>
         public static string CERTIFICATE_CA_ALERT_EXPIRING_TITLE_MINUTES {
             get {
