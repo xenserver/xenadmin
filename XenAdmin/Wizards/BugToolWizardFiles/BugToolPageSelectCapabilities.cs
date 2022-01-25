@@ -541,14 +541,18 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             {
                 _key = value;
 
-                _name = FriendlyNameManager.GetFriendlyName(string.Format("Label-host.system_status-{0}", _key));
+                _name = FriendlyNameManager.GetFriendlyName($"Label-host.system_status-{_key}");
+                _description = FriendlyNameManager.GetFriendlyName($"Description-host.system_status-{_key}");
 
                 if (string.IsNullOrEmpty(_name))
                     _name = _key;
                 else if (_key == "client-logs")
                     _name = string.Format(_name, BrandManager.BrandConsole);
-
-                _description = FriendlyNameManager.GetFriendlyName(string.Format("Description-host.system_status-{0}", _key));
+                else if (_key == "CVSM")
+                {
+                    _name = string.Format(_name, BrandManager.CompanyNameShort);
+                    _description = string.Format(_description, BrandManager.CompanyNameShort);
+                }
             }
         }
 
