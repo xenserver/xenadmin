@@ -150,6 +150,9 @@
   <data name="Description-host.system_status-control-slice" xml:space="preserve">
     <value>システムの制御グループについての情報および統計</value>
   </data>
+  <data name="Description-host.system_status-CVSM" xml:space="preserve">
+    <value>{0} StorageLink の構成設定</value>
+  </data>
   <data name="Description-host.system_status-device-model" xml:space="preserve">
     <value>デバイス エミュレーション ログ</value>
   </data>
@@ -434,6 +437,9 @@
   </data>
   <data name="Label-host.system_status-control-slice" xml:space="preserve">
     <value>制御グループ統計</value>
+  </data>
+  <data name="Label-host.system_status-CVSM" xml:space="preserve">
+    <value>{0} StorageLink 構成</value>
   </data>
   <data name="Label-host.system_status-device-model" xml:space="preserve">
     <value>デバイスのモデル</value>

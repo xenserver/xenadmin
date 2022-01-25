@@ -150,6 +150,9 @@
   <data name="Description-host.system_status-control-slice" xml:space="preserve">
     <value>与系统的控制组有关的信息和统计数据</value>
   </data>
+  <data name="Description-host.system_status-CVSM" xml:space="preserve">
+    <value>{0} Storagelink 的配置设置</value>
+  </data>
   <data name="Description-host.system_status-device-model" xml:space="preserve">
     <value>设备模拟日志</value>
   </data>
@@ -434,6 +437,9 @@
   </data>
   <data name="Label-host.system_status-control-slice" xml:space="preserve">
     <value>控制组统计数据</value>
+  </data>
+  <data name="Label-host.system_status-CVSM" xml:space="preserve">
+    <value>{0} StorageLink 配置</value>
   </data>
   <data name="Label-host.system_status-device-model" xml:space="preserve">
     <value>设备型号</value>
