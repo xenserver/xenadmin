@@ -44,6 +44,11 @@ namespace XenAdmin.Diagnostics.Checks
         {
         }
 
+        public override bool CanRun()
+        {
+            return Helpers.KolkataOrGreater(Host.Connection) && !Helpers.LimaOrGreater(Host.Connection);
+        }
+
         protected override Problem RunHostCheck()
         {
             var clusteringEnabled = Host.Connection.Cache.Cluster_hosts.Any(cluster => cluster.enabled);
@@ -51,7 +56,6 @@ namespace XenAdmin.Diagnostics.Checks
 
             if (clusteringEnabled || hasGfs2Sr)
                 return new PoolHasGFS2SRProblem(this, Helpers.GetPoolOfOne(Host.Connection), clusteringEnabled, hasGfs2Sr);
-
 
             return null;
         }
