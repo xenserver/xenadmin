@@ -356,54 +356,6 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             groups.Add(new CheckGroup(Messages.CHECKING_HOST_LIVENESS_STATUS, livenessChecks));
 
-            if (WizardMode == WizardMode.NewVersion)
-            {
-                //vSwitch controller check - for each pool
-                var vSwitchChecks = (from Pool pool in SelectedPools
-                    let check = new VSwitchControllerCheck(pool.Connection.Resolve(pool.master), UpdateAlert?.NewServerVersion)
-                    where check.CanRun()
-                    select check as Check).ToList();
-
-                if (vSwitchChecks.Count > 0)
-                    groups.Add(new CheckGroup(Messages.CHECKING_VSWITCH_CONTROLLER_GROUP, vSwitchChecks));
-
-                //protocol check - for each pool
-                var sslChecks = (from Pool pool in SelectedPools
-                    let check = new PoolLegacySslCheck(pool.Connection.Resolve(pool.master), UpdateAlert?.NewServerVersion)
-                    where check.CanRun()
-                    select check as Check).ToList();
-
-                if (sslChecks.Count > 0)
-                    groups.Add(new CheckGroup(Messages.CHECKING_SECURITY_PROTOCOL_GROUP, sslChecks));
-
-                //power on mode check - for each host
-                var iloChecks = (from Host host in SelectedServers
-                    let check = new PowerOniLoCheck(host, UpdateAlert?.NewServerVersion)
-                    where check.CanRun()
-                    select check as Check).ToList();
-
-                if (iloChecks.Count > 0)
-                    groups.Add(new CheckGroup(Messages.CHECKING_POWER_ON_MODE_GROUP, iloChecks));
-
-                //container management check - for each pool
-                var dockerChecks = (from Pool pool in SelectedPools
-                    let check = new PoolContainerManagementCheck(pool.Connection.Resolve(pool.master), UpdateAlert?.NewServerVersion)
-                    where check.CanRun()
-                    select check as Check).ToList();
-
-                if (dockerChecks.Count > 0)
-                    groups.Add(new CheckGroup(Messages.CHECKING_CONTAINER_MANAGEMENT_GROUP, dockerChecks));
-
-                //PVGuestsCheck checks
-                var pvChecks = (from Pool pool in SelectedPools
-                    let check = new PVGuestsCheck(pool.Connection.Resolve(pool.master), UpdateAlert?.NewServerVersion)
-                    where check.CanRun()
-                    select check as Check).ToList();
-
-                if (pvChecks.Count > 0)
-                    groups.Add(new CheckGroup(Messages.CHECKING_PV_GUESTS, pvChecks));
-            }
-
             //HA checks
 
             var haChecks = new List<Check>();
@@ -511,31 +463,69 @@ namespace XenAdmin.Wizards.PatchingWizard
                     groups.Add(new CheckGroup(Messages.CHECKING_CANEVACUATE_STATUS, evacuateChecks));
             }
 
-            //XenCenter version check
-            if (highestNewVersion != null || UpdateAlert?.NewServerVersion != null)
+            var newServerversion = highestNewVersion ?? UpdateAlert.NewServerVersion;
+
+            if (newServerversion != null)
             {
                 // add XenCenter version check as the first group
                 groups.Insert(0, new CheckGroup(Messages.CHECKING_XENCENTER_VERSION,
-                    new List<Check> { new XenCenterVersionCheck(highestNewVersion ?? UpdateAlert.NewServerVersion) }));
-            }
+                    new List<Check> { new XenCenterVersionCheck(newServerversion) }));
 
-            //GFS2 check for version updates
-            if (WizardMode == WizardMode.NewVersion)
-            {
-                var gfs2Checks = new List<Check>();
+                //then all the following checks after the liveness check
 
-                foreach (Pool pool in SelectedPools.Where(p =>
-                    Helpers.KolkataOrGreater(p.Connection) && !Helpers.LimaOrGreater(p.Connection)))
-                {
-                    Host host = pool.Connection.Resolve(pool.master);
-                    gfs2Checks.Add(new PoolHasGFS2SR(host));
-                }
+                //GFS2 check for version updates
+                var gfs2Checks = (from Pool pool in SelectedPools
+                    let check = new PoolHasGFS2SR(pool.Connection.Resolve(pool.master))
+                    where check.CanRun()
+                    select check as Check).ToList();
 
                 if (gfs2Checks.Count > 0)
-                {
-                    groups.Add(new CheckGroup(Messages.CHECKING_CLUSTERING_STATUS, gfs2Checks)); 
-                }
-                
+                    groups.Insert(2, new CheckGroup(Messages.CHECKING_CLUSTERING_STATUS, gfs2Checks));
+
+                 //PVGuestsCheck checks
+                var pvChecks = (from Pool pool in SelectedPools
+                    let check = new PVGuestsCheck(pool.Connection.Resolve(pool.master), newServerversion)
+                    where check.CanRun()
+                    select check as Check).ToList();
+
+                if (pvChecks.Count > 0)
+                    groups.Insert(2, new CheckGroup(Messages.CHECKING_PV_GUESTS, pvChecks));
+
+                //container management check - for each pool
+                var dockerChecks = (from Pool pool in SelectedPools
+                    let check = new PoolContainerManagementCheck(pool.Connection.Resolve(pool.master), newServerversion)
+                    where check.CanRun()
+                    select check as Check).ToList();
+
+                if (dockerChecks.Count > 0)
+                    groups.Insert(2, new CheckGroup(Messages.CHECKING_CONTAINER_MANAGEMENT_GROUP, dockerChecks));
+
+                //power on mode check - for each host
+                var iloChecks = (from Host host in SelectedServers
+                    let check = new PowerOniLoCheck(host, newServerversion)
+                    where check.CanRun()
+                    select check as Check).ToList();
+
+                if (iloChecks.Count > 0)
+                    groups.Insert(2, new CheckGroup(Messages.CHECKING_POWER_ON_MODE_GROUP, iloChecks));
+
+                //protocol check - for each pool
+                var sslChecks = (from Pool pool in SelectedPools
+                    let check = new PoolLegacySslCheck(pool.Connection.Resolve(pool.master), newServerversion)
+                    where check.CanRun()
+                    select check as Check).ToList();
+
+                if (sslChecks.Count > 0)
+                    groups.Insert(2, new CheckGroup(Messages.CHECKING_SECURITY_PROTOCOL_GROUP, sslChecks));
+
+                //vSwitch controller check - for each pool
+                var vSwitchChecks = (from Pool pool in SelectedPools
+                    let check = new VSwitchControllerCheck(pool.Connection.Resolve(pool.master), newServerversion)
+                    where check.CanRun()
+                    select check as Check).ToList();
+
+                if (vSwitchChecks.Count > 0)
+                    groups.Insert(2, new CheckGroup(Messages.CHECKING_VSWITCH_CONTROLLER_GROUP, vSwitchChecks));
             }
 
             return groups;
