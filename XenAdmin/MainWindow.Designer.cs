@@ -276,6 +276,7 @@ namespace XenAdmin
             this.aboutXenSourceAdminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainMenuBar = new XenAdmin.Controls.MenuStripEx();
             this.updateClientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.downloadInstallToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.skipToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.securityGroupsToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.MenuPanel = new System.Windows.Forms.Panel();
@@ -285,7 +286,6 @@ namespace XenAdmin
             this.statusLabelErrors = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLabelUpdates = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLabelAlerts = new System.Windows.Forms.ToolStripStatusLabel();
-            this.downloadInstallToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -1932,7 +1932,7 @@ namespace XenAdmin
             // updateClientToolStripMenuItem
             // 
             this.updateClientToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.updateClientToolStripMenuItem.BackColor = System.Drawing.SystemColors.Window;
+            this.updateClientToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
             this.updateClientToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.downloadInstallToolStripMenuItem,
             this.skipToolStripMenuItem});
@@ -1940,6 +1940,12 @@ namespace XenAdmin
             this.updateClientToolStripMenuItem.Image = global::XenAdmin.Properties.Resources._075_WarningRound_h32bit_16;
             this.updateClientToolStripMenuItem.Margin = new System.Windows.Forms.Padding(0, 0, 5, 0);
             this.updateClientToolStripMenuItem.Name = "updateClientToolStripMenuItem";
+            // 
+            // downloadInstallToolStripMenuItem
+            // 
+            this.downloadInstallToolStripMenuItem.Name = "downloadInstallToolStripMenuItem";
+            resources.ApplyResources(this.downloadInstallToolStripMenuItem, "downloadInstallToolStripMenuItem");
+            this.downloadInstallToolStripMenuItem.Click += new System.EventHandler(this.downloadInstallToolStripMenuItem_Click);
             // 
             // skipToolStripMenuItem
             // 
@@ -2020,12 +2026,6 @@ namespace XenAdmin
             resources.ApplyResources(this.statusLabelAlerts, "statusLabelAlerts");
             this.statusLabelAlerts.VisitedLinkColor = System.Drawing.SystemColors.ControlDarkDark;
             this.statusLabelAlerts.Click += new System.EventHandler(this.statusLabelAlerts_Click);
-            // 
-            // downloadInstallToolStripMenuItem
-            // 
-            this.downloadInstallToolStripMenuItem.Name = "downloadInstallToolStripMenuItem";
-            resources.ApplyResources(this.downloadInstallToolStripMenuItem, "downloadInstallToolStripMenuItem");
-            this.downloadInstallToolStripMenuItem.Click += new System.EventHandler(this.downloadInstallToolStripMenuItem_Click);
             // 
             // MainWindow
             // 

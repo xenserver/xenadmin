@@ -61,14 +61,12 @@ namespace XenAdmin.Actions
         private Exception updateDownloadError;
         private string checksum; 
 
-        public string PatchPath { get; private set; }
-
         public string ByteProgressDescription { get; set; }
 
-        public DownloadAndUpdateClientAction(string updateName, Uri uri, string outputFileName, bool suppressHist, string checksum, params string[] updateFileExtensions)
+        public DownloadAndUpdateClientAction(string updateName, Uri uri, string outputFileName, bool suppressHistory, string checksum)
             : base(null, uri == null
                 ? string.Format(Messages.UPDATES_WIZARD_EXTRACT_ACTION_TITLE, updateName)
-                : string.Format(Messages.DOWNLOAD_AND_EXTRACT_ACTION_TITLE, updateName), string.Empty, suppressHist)
+                : string.Format(Messages.DOWNLOAD_AND_EXTRACT_ACTION_TITLE, updateName), string.Empty, suppressHistory)
         {
             this.updateName = updateName;
             address = uri;
@@ -223,7 +221,7 @@ namespace XenAdmin.Actions
 
             using (FileStream stream = new FileStream(outputPathAndFileName, FileMode.Open, FileAccess.Read))
             {
-                var hash = StreamUtilities.ComputeHash(stream, out var hashAlgorithm);
+                var hash = StreamUtilities.ComputeHash(stream, out _);
                 
                 //Convert to Hex string
                 StringBuilder sb = new StringBuilder();
@@ -246,11 +244,10 @@ namespace XenAdmin.Actions
                     try
                     {
                         valid = cert.Verify();
-                        valid = false;
                     }
                     catch (Exception e)
                     {
-                        throw new Exception("Unable to validate digital signature on msi.", e);
+                        throw new Exception("CHC could not validate the certificate associated with the installation file.", e);
                     }
                 }
             }
@@ -274,24 +271,23 @@ namespace XenAdmin.Actions
             if (e.Cancelled && updateDownloadState == DownloadState.Error) // cancelled due to network connectivity issue (see NetworkAvailabilityChanged)
                 return;
 
-            if (e.Cancelled) //user cancelled
+            if (e.Cancelled)
             {
                 updateDownloadState = DownloadState.Cancelled;
-                log.DebugFormat("XenServer patch '{0}' download cancelled by the user", updateName);
+                log.DebugFormat("CHC client update '{0}' download cancelled by the user", updateName);
                 return;
             }
 
-            if (e.Error != null) //failure
+            if (e.Error != null)
             {
                 updateDownloadError = e.Error;
-                log.DebugFormat("XenServer patch '{0}' download failed", updateName);
+                log.DebugFormat("CHC client update '{0}' download failed", updateName);
                 updateDownloadState = DownloadState.Error;
                 return;
             }
 
-            //success
             updateDownloadState = DownloadState.Completed;
-            log.DebugFormat("XenServer patch '{0}' download completed successfully", updateName);
+            log.DebugFormat("CHC client update '{0}' download completed successfully", updateName);
         }
 
         public override void RecomputeCanCancel()
