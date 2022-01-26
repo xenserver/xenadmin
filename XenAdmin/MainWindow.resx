@@ -4086,6 +4086,12 @@
   <data name="&gt;&gt;updateClientToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;downloadInstallToolStripMenuItem.Name" xml:space="preserve">
+    <value>downloadInstallToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;downloadInstallToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;skipToolStripMenuItem.Name" xml:space="preserve">
     <value>skipToolStripMenuItem</value>
   </data>
@@ -4127,12 +4133,6 @@
   </data>
   <data name="&gt;&gt;statusLabelAlerts.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;downloadInstallToolStripMenuItem.Name" xml:space="preserve">
-    <value>downloadInstallToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;downloadInstallToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainWindow</value>

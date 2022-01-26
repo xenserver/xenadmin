@@ -13051,6 +13051,12 @@ Please check your settings and try again.</value>
   <data name="UPDATES_WIZARD_WLB_ON_WARNING" xml:space="preserve">
     <value>{0}: Check skipped because WLB is enabled on pool {1}.</value>
   </data>
+  <data name="UPDATE_CLIENT_CONFIRMATION_MESSAGE" xml:space="preserve">
+    <value>In order to update Citrix Hypervisor Center will be closed. Please make sure you've completed and saved your work.</value>
+  </data>
+  <data name="UPDATE_CLIENT_CONFIRMATION_MESSAGE_TITLE" xml:space="preserve">
+    <value>Update Citrix Hypervisor Center</value>
+  </data>
   <data name="UPDATE_DISMISS_ALL_CONTINUE" xml:space="preserve">
     <value>You have applied filters to the list of updates. Do you want to dismiss all updates from every connected server, or only the updates you have chosen to view? In both cases the dismissed updates will be removed from the servers permanently.
 

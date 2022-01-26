@@ -36886,6 +36886,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to In order to update Citrix Hypervisor Center will be closed. Please make sure you&apos;ve completed and saved your work..
+        /// </summary>
+        public static string UPDATE_CLIENT_CONFIRMATION_MESSAGE {
+            get {
+                return ResourceManager.GetString("UPDATE_CLIENT_CONFIRMATION_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update Citrix Hypervisor Center.
+        /// </summary>
+        public static string UPDATE_CLIENT_CONFIRMATION_MESSAGE_TITLE {
+            get {
+                return ResourceManager.GetString("UPDATE_CLIENT_CONFIRMATION_MESSAGE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You have applied filters to the list of updates. Do you want to dismiss all updates from every connected server, or only the updates you have chosen to view? In both cases the dismissed updates will be removed from the servers permanently.
         ///
         ///Note that if RBAC is enabled, only updates which you have privileges to dismiss will be affected..

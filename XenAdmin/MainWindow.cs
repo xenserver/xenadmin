@@ -2666,16 +2666,27 @@ namespace XenAdmin
 
         private void UpdatesCheck_Completed(bool suceeded, string err)
         {
-            
-            Program.Invoke(this, () => {
+
+            Program.Invoke(this, () =>
+            {
                 updateAlert = Updates.UpdateAlerts.FirstOrDefault(update => update is ClientUpdateAlert) as ClientUpdateAlert;
-                updateClientToolStripMenuItem.Enabled = updateAlert != null; 
+                DisableAndHideUpdateClientToolStripMenuItem(updateAlert != null);
             });            
+        }
+
+        /// <summary>
+        /// Hides and disables the update client button
+        /// </summary>
+        /// <param name="enable">Whether to hide the update client button or not</param>
+        private void DisableAndHideUpdateClientToolStripMenuItem(bool enable)
+        {
+            updateClientToolStripMenuItem.Enabled = enable;
+            updateClientToolStripMenuItem.Visible = enable;
         }
 
         private void UpdatesCheck_Started()
         {
-            Program.Invoke(this, () => { updateClientToolStripMenuItem.Enabled = false; });
+            Program.Invoke(this, () => { DisableAndHideUpdateClientToolStripMenuItem(false); });
         }
 
         private void CloseWhenActionsCanceled(object o)
@@ -3333,16 +3344,16 @@ namespace XenAdmin
         private void skipToolStripMenuItem_Click(object sender, EventArgs e)
         {
             updateAlert.Dismiss();
-            Program.Invoke(this, () => { updateClientToolStripMenuItem.Enabled = false; });
+            Program.Invoke(this, () => { DisableAndHideUpdateClientToolStripMenuItem(false); });
         }
 
         private void downloadInstallToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var downloadAndInstallClientAction = new DownloadAndUpdateClientAction(updateAlert.Name, new Uri(updateAlert.NewVersion.Url), Path.Combine(Path.GetTempPath(), $"{updateAlert.Name}.msi"), true, updateAlert.Checksum);
 
-            DialogResult dialogResult = MessageBox.Show("In order to update your client will be closed. Is all your work done and saved?.", "Are you ready to update?", MessageBoxButtons.YesNo);
+            DialogResult dialogResult = MessageBox.Show(Messages.UPDATE_CLIENT_CONFIRMATION_MESSAGE, Messages.UPDATE_CLIENT_CONFIRMATION_MESSAGE_TITLE, MessageBoxButtons.OKCancel);
             // Only start if user says yes.
-            if (dialogResult == DialogResult.Yes)
+            if (dialogResult == DialogResult.OK)
             {
                 // Start the download and show progress
                 using (var dlg = new ActionProgressDialog(downloadAndInstallClientAction, ProgressBarStyle.Marquee))

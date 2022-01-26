@@ -980,7 +980,8 @@ namespace XenAdmin.TabPages
 
             var downloadAndInstallClientAction = new DownloadAndUpdateClientAction(alert.Name, new Uri(alert.NewVersion.Url), Path.Combine(Path.GetTempPath(), $"{alert.Name}.msi"), true, alert.Checksum) ;
 
-            DialogResult dialogResult = MessageBox.Show("In order to update your client will be closed. Is all your work done and saved?.", "Are you ready to update?", MessageBoxButtons.YesNo);
+            DialogResult dialogResult = MessageBox.Show(Messages.UPDATE_CLIENT_CONFIRMATION_MESSAGE, Messages.UPDATE_CLIENT_CONFIRMATION_MESSAGE_TITLE, MessageBoxButtons.YesNo);
+
             // Only start if user says yes.
             if (dialogResult == DialogResult.Yes)
             {

@@ -997,9 +997,7 @@ namespace XenAdmin
         /// </summary>
         public static bool ForcedExiting = false;
 
-        //public static Version Version => Assembly.GetExecutingAssembly().GetName().Version;
-        public static Version Version => new Version(1, 0, 0, 0);//Assembly.GetExecutingAssembly().GetName().Version;
-
+        public static Version Version => Assembly.GetExecutingAssembly().GetName().Version;
 
         public static string CurrentLanguage => Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
 
