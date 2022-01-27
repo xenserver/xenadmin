@@ -3206,7 +3206,7 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Configure the proxy used in syncing with the enabled repositories
+        /// Configure proxy for RPM package repositories.
         /// First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
@@ -3223,7 +3223,7 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Configure the proxy used in syncing with the enabled repositories
+        /// Configure proxy for RPM package repositories.
         /// First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
@@ -3237,6 +3237,34 @@ namespace XenAPI
               return session.JsonRpcClient.async_pool_configure_repository_proxy(session.opaque_ref, _pool, _url, _username, _password);
           else
               return XenRef<Task>.Create(session.XmlRpcProxy.async_pool_configure_repository_proxy(session.opaque_ref, _pool ?? "", _url ?? "", _username ?? "", _password ?? "").parse());
+        }
+
+        /// <summary>
+        /// Disable the proxy for RPM package repositories.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        public static void disable_repository_proxy(Session session, string _pool)
+        {
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.pool_disable_repository_proxy(session.opaque_ref, _pool);
+            else
+                session.XmlRpcProxy.pool_disable_repository_proxy(session.opaque_ref, _pool ?? "").parse();
+        }
+
+        /// <summary>
+        /// Disable the proxy for RPM package repositories.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        public static XenRef<Task> async_disable_repository_proxy(Session session, string _pool)
+        {
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_pool_disable_repository_proxy(session.opaque_ref, _pool);
+          else
+              return XenRef<Task>.Create(session.XmlRpcProxy.async_pool_disable_repository_proxy(session.opaque_ref, _pool ?? "").parse());
         }
 
         /// <summary>

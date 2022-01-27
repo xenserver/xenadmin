@@ -314,6 +314,10 @@ namespace XenAPI
         Response<string []>
         role_get_subroles(string session, string _role);
 
+        [XmlRpcMethod("role.get_is_internal")]
+        Response<bool>
+        role_get_is_internal(string session, string _role);
+
         [XmlRpcMethod("role.get_permissions")]
         Response<string []>
         role_get_permissions(string session, string _role);
@@ -1206,6 +1210,14 @@ namespace XenAPI
         Response<string>
         async_pool_configure_repository_proxy(string session, string _pool, string _url, string _username, string _password);
 
+        [XmlRpcMethod("pool.disable_repository_proxy")]
+        Response<string>
+        pool_disable_repository_proxy(string session, string _pool);
+
+        [XmlRpcMethod("Async.pool.disable_repository_proxy")]
+        Response<string>
+        async_pool_disable_repository_proxy(string session, string _pool);
+
         [XmlRpcMethod("pool.get_all")]
         Response<string []>
         pool_get_all(string session);
@@ -2001,6 +2013,14 @@ namespace XenAPI
         [XmlRpcMethod("Async.VM.snapshot")]
         Response<string>
         async_vm_snapshot(string session, string _vm, string _new_name);
+
+        [XmlRpcMethod("VM.snapshot")]
+        Response<string>
+        vm_snapshot(string session, string _vm, string _new_name, string [] _ignore_vdis);
+
+        [XmlRpcMethod("Async.VM.snapshot")]
+        Response<string>
+        async_vm_snapshot(string session, string _vm, string _new_name, string [] _ignore_vdis);
 
         [XmlRpcMethod("VM.snapshot_with_quiesce")]
         Response<string>
@@ -8712,6 +8732,7 @@ namespace XenAPI
         public string name_label;
         public string name_description;
         public string [] subroles;
+        public bool is_internal;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
