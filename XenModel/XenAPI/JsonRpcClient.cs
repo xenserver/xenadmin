@@ -515,6 +515,13 @@ namespace XenAPI
             return Rpc<List<XenRef<Role>>>("role.get_subroles", new JArray(session, _role ?? ""), serializer);
         }
 
+        public bool role_get_is_internal(string session, string _role)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            return Rpc<bool>("role.get_is_internal", new JArray(session, _role ?? ""), serializer);
+        }
+
         public List<XenRef<Role>> role_get_permissions(string session, string _role)
         {
             var converters = new List<JsonConverter> {new XenRefListConverter<Role>()};
@@ -2076,6 +2083,20 @@ namespace XenAPI
             return Rpc<XenRef<Task>>("Async.pool.configure_repository_proxy", new JArray(session, _pool ?? "", _url ?? "", _username ?? "", _password ?? ""), serializer);
         }
 
+        public void pool_disable_repository_proxy(string session, string _pool)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            Rpc("pool.disable_repository_proxy", new JArray(session, _pool ?? ""), serializer);
+        }
+
+        public XenRef<Task> async_pool_disable_repository_proxy(string session, string _pool)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<XenRef<Task>>("Async.pool.disable_repository_proxy", new JArray(session, _pool ?? ""), serializer);
+        }
+
         public List<XenRef<Pool>> pool_get_all(string session)
         {
             var converters = new List<JsonConverter> {new XenRefListConverter<Pool>()};
@@ -3467,6 +3488,20 @@ namespace XenAPI
             var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
             var serializer = CreateSerializer(converters);
             return Rpc<XenRef<Task>>("Async.VM.snapshot", new JArray(session, _vm ?? "", _new_name ?? ""), serializer);
+        }
+
+        public XenRef<VM> vm_snapshot(string session, string _vm, string _new_name, List<XenRef<VDI>> _ignore_vdis)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<VM>(), new XenRefListConverter<VDI>()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<XenRef<VM>>("VM.snapshot", new JArray(session, _vm ?? "", _new_name ?? "", _ignore_vdis == null ? new JArray() : JArray.FromObject(_ignore_vdis, serializer)), serializer);
+        }
+
+        public XenRef<Task> async_vm_snapshot(string session, string _vm, string _new_name, List<XenRef<VDI>> _ignore_vdis)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>(), new XenRefListConverter<VDI>()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<XenRef<Task>>("Async.VM.snapshot", new JArray(session, _vm ?? "", _new_name ?? "", _ignore_vdis == null ? new JArray() : JArray.FromObject(_ignore_vdis, serializer)), serializer);
         }
 
         public XenRef<VM> vm_snapshot_with_quiesce(string session, string _vm, string _new_name)

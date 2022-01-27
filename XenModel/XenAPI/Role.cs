@@ -55,12 +55,14 @@ namespace XenAPI
         public Role(string uuid,
             string name_label,
             string name_description,
-            List<XenRef<Role>> subroles)
+            List<XenRef<Role>> subroles,
+            bool is_internal)
         {
             this.uuid = uuid;
             this.name_label = name_label;
             this.name_description = name_description;
             this.subroles = subroles;
+            this.is_internal = is_internal;
         }
 
         /// <summary>
@@ -96,6 +98,7 @@ namespace XenAPI
             name_label = record.name_label;
             name_description = record.name_description;
             subroles = record.subroles;
+            is_internal = record.is_internal;
         }
 
         internal void UpdateFrom(Proxy_Role proxy)
@@ -104,6 +107,7 @@ namespace XenAPI
             name_label = proxy.name_label == null ? null : proxy.name_label;
             name_description = proxy.name_description == null ? null : proxy.name_description;
             subroles = proxy.subroles == null ? null : XenRef<Role>.Create(proxy.subroles);
+            is_internal = (bool)proxy.is_internal;
         }
 
         /// <summary>
@@ -122,6 +126,8 @@ namespace XenAPI
                 name_description = Marshalling.ParseString(table, "name_description");
             if (table.ContainsKey("subroles"))
                 subroles = Marshalling.ParseSetRef<Role>(table, "subroles");
+            if (table.ContainsKey("is_internal"))
+                is_internal = Marshalling.ParseBool(table, "is_internal");
         }
 
         public Proxy_Role ToProxy()
@@ -131,6 +137,7 @@ namespace XenAPI
             result_.name_label = name_label ?? "";
             result_.name_description = name_description ?? "";
             result_.subroles = subroles == null ? new string[] {} : Helper.RefListToStringArray(subroles);
+            result_.is_internal = is_internal;
             return result_;
         }
 
@@ -144,7 +151,8 @@ namespace XenAPI
             return Helper.AreEqual2(this._uuid, other._uuid) &&
                 Helper.AreEqual2(this._name_label, other._name_label) &&
                 Helper.AreEqual2(this._name_description, other._name_description) &&
-                Helper.AreEqual2(this._subroles, other._subroles);
+                Helper.AreEqual2(this._subroles, other._subroles) &&
+                Helper.AreEqual2(this._is_internal, other._is_internal);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Role server)
@@ -256,6 +264,20 @@ namespace XenAPI
                 return session.JsonRpcClient.role_get_subroles(session.opaque_ref, _role);
             else
                 return XenRef<Role>.Create(session.XmlRpcProxy.role_get_subroles(session.opaque_ref, _role ?? "").parse());
+        }
+
+        /// <summary>
+        /// Get the is_internal field of the given role.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_role">The opaque_ref of the given role</param>
+        public static bool get_is_internal(Session session, string _role)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.role_get_is_internal(session.opaque_ref, _role);
+            else
+                return (bool)session.XmlRpcProxy.role_get_is_internal(session.opaque_ref, _role ?? "").parse();
         }
 
         /// <summary>
@@ -408,5 +430,23 @@ namespace XenAPI
             }
         }
         private List<XenRef<Role>> _subroles = new List<XenRef<Role>>() {};
+
+        /// <summary>
+        /// Indicates whether the role is only to be assigned internally by xapi, or can be used by clients
+        /// First published in Unreleased.
+        /// </summary>
+        public virtual bool is_internal
+        {
+            get { return _is_internal; }
+            set
+            {
+                if (!Helper.AreEqual(value, _is_internal))
+                {
+                    _is_internal = value;
+                    NotifyPropertyChanged("is_internal");
+                }
+            }
+        }
+        private bool _is_internal = false;
     }
 }
