@@ -36886,7 +36886,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to In order to update Citrix Hypervisor Center will be closed. Please make sure you&apos;ve completed and saved your work..
+        ///   Looks up a localized string similar to In order to update {0} will be closed. Please make sure you&apos;ve completed and saved your work..
         /// </summary>
         public static string UPDATE_CLIENT_CONFIRMATION_MESSAGE {
             get {
@@ -36895,11 +36895,38 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Update Citrix Hypervisor Center.
+        ///   Looks up a localized string similar to Update {0}.
         /// </summary>
         public static string UPDATE_CLIENT_CONFIRMATION_MESSAGE_TITLE {
             get {
                 return ResourceManager.GetString("UPDATE_CLIENT_CONFIRMATION_MESSAGE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} could not validate the certificate associated with the installation file..
+        /// </summary>
+        public static string UPDATE_CLIENT_FAILED_CERTIFICATE_CHECK {
+            get {
+                return ResourceManager.GetString("UPDATE_CLIENT_FAILED_CERTIFICATE_CHECK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The checksum of the installer does not match what is expected..
+        /// </summary>
+        public static string UPDATE_CLIENT_INVALID_CHECKSUM {
+            get {
+                return ResourceManager.GetString("UPDATE_CLIENT_INVALID_CHECKSUM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid digital signature on msi..
+        /// </summary>
+        public static string UPDATE_CLIENT_INVALID_DIGITAL_CERTIFICATE {
+            get {
+                return ResourceManager.GetString("UPDATE_CLIENT_INVALID_DIGITAL_CERTIFICATE", resourceCulture);
             }
         }
         

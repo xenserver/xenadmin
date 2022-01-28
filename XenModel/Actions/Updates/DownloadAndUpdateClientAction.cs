@@ -39,6 +39,7 @@ using System.Diagnostics;
 using XenCenterLib;
 using System.Text;
 using System.Security.Cryptography.X509Certificates;
+using XenAdmin.Core;
 
 namespace XenAdmin.Actions
 {
@@ -232,7 +233,7 @@ namespace XenAdmin.Actions
                 
                 // Check if calculatedChecksum matches what is in chcupdates.xml
                 if (checksum != calculatedChecksum)
-                    throw new Exception("The checksum of the downloaded MSI does not match what is expected. This indicates it has been tampered with.");
+                    throw new Exception(Messages.UPDATE_CLIENT_INVALID_CHECKSUM );
             }
 
             var valid = false;
@@ -247,13 +248,13 @@ namespace XenAdmin.Actions
                     }
                     catch (Exception e)
                     {
-                        throw new Exception("CHC could not validate the certificate associated with the installation file.", e);
+                        throw new Exception(string.Format(Messages.UPDATE_CLIENT_FAILED_CERTIFICATE_CHECK, BrandManager.ProductBrand), e);
                     }
                 }
             }
 
             if (!valid)
-                throw new Exception("Invalid digital signature on msi.");
+                throw new Exception(Messages.UPDATE_CLIENT_INVALID_DIGITAL_CERTIFICATE);
         }
 
         void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)

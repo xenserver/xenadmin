@@ -2805,6 +2805,9 @@
   <data name="updateClientToolStripMenuItem.Text" xml:space="preserve">
     <value>Update</value>
   </data>
+  <data name="updateClientToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="MainMenuBar.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>

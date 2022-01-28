@@ -13052,10 +13052,19 @@ Please check your settings and try again.</value>
     <value>{0}: Check skipped because WLB is enabled on pool {1}.</value>
   </data>
   <data name="UPDATE_CLIENT_CONFIRMATION_MESSAGE" xml:space="preserve">
-    <value>In order to update Citrix Hypervisor Center will be closed. Please make sure you've completed and saved your work.</value>
+    <value>In order to update {0} will be closed. Please make sure you've completed and saved your work.</value>
   </data>
   <data name="UPDATE_CLIENT_CONFIRMATION_MESSAGE_TITLE" xml:space="preserve">
-    <value>Update Citrix Hypervisor Center</value>
+    <value>Update {0}</value>
+  </data>
+  <data name="UPDATE_CLIENT_FAILED_CERTIFICATE_CHECK" xml:space="preserve">
+    <value>{0} could not validate the certificate associated with the installation file.</value>
+  </data>
+  <data name="UPDATE_CLIENT_INVALID_CHECKSUM" xml:space="preserve">
+    <value>The checksum of the installer does not match what is expected.</value>
+  </data>
+  <data name="UPDATE_CLIENT_INVALID_DIGITAL_CERTIFICATE" xml:space="preserve">
+    <value>Invalid digital signature on msi.</value>
   </data>
   <data name="UPDATE_DISMISS_ALL_CONTINUE" xml:space="preserve">
     <value>You have applied filters to the list of updates. Do you want to dismiss all updates from every connected server, or only the updates you have chosen to view? In both cases the dismissed updates will be removed from the servers permanently.

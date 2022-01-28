@@ -2675,9 +2675,9 @@ namespace XenAdmin
         }
 
         /// <summary>
-        /// Hides and disables the update client button
+        /// Changes disabled state and visibility of the update client button
         /// </summary>
-        /// <param name="enable">Whether to hide the update client button or not</param>
+        /// <param name="enable">Whether to hide and disable the update client button or not</param>
         private void DisableAndHideUpdateClientToolStripMenuItem(bool enable)
         {
             updateClientToolStripMenuItem.Enabled = enable;
@@ -3351,7 +3351,7 @@ namespace XenAdmin
         {
             var downloadAndInstallClientAction = new DownloadAndUpdateClientAction(updateAlert.Name, new Uri(updateAlert.NewVersion.Url), Path.Combine(Path.GetTempPath(), $"{updateAlert.Name}.msi"), true, updateAlert.Checksum);
 
-            DialogResult dialogResult = MessageBox.Show(Messages.UPDATE_CLIENT_CONFIRMATION_MESSAGE, Messages.UPDATE_CLIENT_CONFIRMATION_MESSAGE_TITLE, MessageBoxButtons.OKCancel);
+            DialogResult dialogResult = MessageBox.Show(string.Format(Messages.UPDATE_CLIENT_CONFIRMATION_MESSAGE, BrandManager.ProductBrand), string.Format(Messages.UPDATE_CLIENT_CONFIRMATION_MESSAGE_TITLE, BrandManager.ProductBrand), MessageBoxButtons.OKCancel);
             // Only start if user says yes.
             if (dialogResult == DialogResult.OK)
             {
