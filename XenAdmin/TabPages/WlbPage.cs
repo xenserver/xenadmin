@@ -348,7 +348,7 @@ namespace XenAdmin.TabPages
 
         private bool PassedRbacChecks()
         {
-            return Role.CanPerform(WLB_PERMISSION_CHECKS, _pool.Connection);
+            return Role.CanPerform(WLB_PERMISSION_CHECKS, _pool.Connection, out _);
         }
 
         private void SetButtonState()

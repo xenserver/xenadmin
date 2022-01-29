@@ -797,7 +797,7 @@ namespace XenAdmin.Controls.Wlb
 
         private bool PassedRbacChecks()
         {
-            return Role.CanPerform(WLB_PERMISSION_CHECKS, this._pool.Connection);
+            return Role.CanPerform(WLB_PERMISSION_CHECKS, this._pool.Connection, out _);
         }
         #endregion
 
