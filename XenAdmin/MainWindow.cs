@@ -1824,11 +1824,6 @@ namespace XenAdmin
             {
                 ConsolePanel.PauseAllViews();  
                 CvmConsolePanel.PauseAllViews();
-                
-                // Start timer for closing the VNC connection after an interval (20 seconds)
-                // when the console tab is not selected
-                ConsolePanel.StartCloseVNCTimer(ConsolePanel.activeVNCView);
-                CvmConsolePanel.StartCloseVNCTimer(CvmConsolePanel.activeVNCView);
 
                 if (t == TabPageGeneral)
                 {
@@ -2047,16 +2042,8 @@ namespace XenAdmin
 
         private void UnpauseVNC(bool focus)
         {
-            ConsolePanel.UnpauseActiveView();
-            CvmConsolePanel.UnpauseActiveView();
-
-            if (focus)
-            {
-                ConsolePanel.FocusActiveView();
-                CvmConsolePanel.FocusActiveView();
-                ConsolePanel.SwitchIfRequired();
-                CvmConsolePanel.SwitchIfRequired();
-            }
+            ConsolePanel.UnpauseActiveView(focus);
+            CvmConsolePanel.UnpauseActiveView(focus);
         }
 
         /// <summary>
