@@ -65,9 +65,9 @@ namespace XenAdmin.Controls
             // The VNCView deals with undocked cases.
 
             foreach (VNCView vncView in vncViews.Values)
-            {
                 vncView.Pause();
-            }
+
+            StartCloseVNCTimer(activeVNCView);
         }
 
         public void ResetAllViews()
@@ -75,7 +75,7 @@ namespace XenAdmin.Controls
             vncViews.Clear();
         }
 
-        public void UnpauseActiveView()
+        public void UnpauseActiveView(bool focus)
         {
             // We're going to explicitly pause all the consoles 
             // except the active one, then explicitly unpause the active one.
@@ -89,16 +89,13 @@ namespace XenAdmin.Controls
             if (activeVNCView != null)
             {
                 activeVNCView.Unpause();
-            }
-        }
 
-        /// <summary>
-        /// Gives focus to the console, as if the user had clicked it.
-        /// </summary>
-        internal void FocusActiveView()
-        {
-            if (activeVNCView != null)
-                activeVNCView.FocusConsole();
+                if (focus)
+                {
+                    activeVNCView.FocusConsole();
+                    activeVNCView.SwitchIfRequired();
+                }
+            }
         }
 
         public void UpdateRDPResolution(bool fullscreen = false)
@@ -181,7 +178,7 @@ namespace XenAdmin.Controls
                 SetCurrentSource(dom0);
         }
 
-        public static bool RbacDenied(VM source, out List<Role> allowedRoles)
+        private static bool RbacDenied(VM source, out List<Role> allowedRoles)
         {
 
             if (source == null || source.Connection == null)
@@ -291,19 +288,13 @@ namespace XenAdmin.Controls
                 activeVNCView.SendCAD();
         }
 
-        internal void SwitchIfRequired()
-        {
-            if (activeVNCView != null)
-                activeVNCView.SwitchIfRequired();
-        }
-
         #region Close VNC connection
 
         private const int CLOSE_VNC_INTERVAL = 20000; //20 milliseconds 
 
         private static readonly Dictionary<VM, Timer> CloseVNCTimers = new Dictionary<VM, Timer>();
 
-        public void StartCloseVNCTimer(VNCView vncView)
+        private void StartCloseVNCTimer(VNCView vncView)
         {
             if (vncView == null)
                 return;
