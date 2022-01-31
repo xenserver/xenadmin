@@ -107,7 +107,7 @@ namespace XenAdmin.Controls
                 activeVNCView.UpdateRDPResolution(fullscreen);
         }
 
-        internal void setCurrentSource(VM source)
+        internal void SetCurrentSource(VM source)
         {
             Program.AssertOnEventThread();
 
@@ -145,7 +145,7 @@ namespace XenAdmin.Controls
             var viewsToRemove = vncViews.Where(v => v.Key.opaque_ref != source.opaque_ref).Take(vncViews.Count - 1 - MAX_ACTIVE_VM_CONSOLES).ToList();
 
             foreach (var view in viewsToRemove)
-                closeVNCForSource(view.Key);
+                CloseVncForSource(view.Key);
 
             if (vncViews.ContainsKey(source))
             {
@@ -162,7 +162,7 @@ namespace XenAdmin.Controls
             ClearErrorMessage();
         }
 
-        internal virtual void setCurrentSource(Host source)
+        internal virtual void SetCurrentSource(Host source)
         {
             if (source == null)
             {
@@ -178,7 +178,7 @@ namespace XenAdmin.Controls
                 SetErrorMessage(Messages.VNC_COULD_NOT_FIND_CONSOLES);
             }
             else
-                setCurrentSource(dom0);
+                SetCurrentSource(dom0);
         }
 
         public static bool RbacDenied(VM source, out List<Role> allowedRoles)
@@ -221,7 +221,7 @@ namespace XenAdmin.Controls
                         view = new VNCView(vm, elevatedUsername, elevatedPassword) { Dock = DockStyle.Fill };
                     else
                     {
-                        setCurrentSource(vm);
+                        SetCurrentSource(vm);
                         if (vncViews.ContainsKey(vm))
                             view = vncViews[vm];
                     }
@@ -249,7 +249,7 @@ namespace XenAdmin.Controls
             return snapshot;
         }
 
-        public void closeVNCForSource(VM source)
+        public void CloseVncForSource(VM source)
         {
             Program.AssertOnEventThread();
 
@@ -265,19 +265,19 @@ namespace XenAdmin.Controls
             vncView.Dispose();
         }
 
-        public void closeVNCForSource(VM source, bool vncOnly)
+        public void CloseVncForSource(VM source, bool vncOnly)
         {
             if (!vncViews.ContainsKey(source) || vncViews[source] == null
                 || (vncOnly && !vncViews[source].IsVNC))
                 return;
-            closeVNCForSource(source);
+            CloseVncForSource(source);
         }
 
         protected void SetErrorMessage(string message)
         {
             errorLabel.Text = message;
             tableLayoutPanelError.Visible = true;
-            setCurrentSource((VM)null);
+            SetCurrentSource((VM)null);
         }
 
         private void ClearErrorMessage()
@@ -331,7 +331,7 @@ namespace XenAdmin.Controls
                               try
                               {
                                   log.DebugFormat("ConsolePanel: closeVNCForSource({0}) in delegate", vm.Name());
-                                  closeVNCForSource(vm, true);
+                                  CloseVncForSource(vm, true);
                               }
                               catch (Exception exception)
                               {
@@ -368,7 +368,7 @@ namespace XenAdmin.Controls
 
     internal class CvmConsolePanel : ConsolePanel
     {
-        internal override void setCurrentSource(Host source)
+        internal override void SetCurrentSource(Host source)
         {
             if (source == null)
             {
@@ -384,7 +384,7 @@ namespace XenAdmin.Controls
                 SetErrorMessage(Messages.VNC_COULD_NOT_FIND_CONSOLES);
             }
             else
-                setCurrentSource(cvm);
+                SetCurrentSource(cvm);
         }
 
         public override string HelpID => "TabPageCvmConsole";

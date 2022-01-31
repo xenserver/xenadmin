@@ -290,9 +290,9 @@ namespace XenAdmin
                 ConsolePanel.ResetAllViews();
 
 				if (SelectionManager.Selection.FirstIsRealVM)
-					ConsolePanel.setCurrentSource((VM)SelectionManager.Selection.First);
+					ConsolePanel.SetCurrentSource((VM)SelectionManager.Selection.First);
                 else if (SelectionManager.Selection.FirstIs<Host>())
-                    ConsolePanel.setCurrentSource((Host)SelectionManager.Selection.First);
+                    ConsolePanel.SetCurrentSource((Host)SelectionManager.Selection.First);
 
                 UnpauseVNC(sender == TheTabControl);
             }
@@ -861,15 +861,15 @@ namespace XenAdmin
 
                         foreach (VM vm in con.Cache.VMs)
                         {
-                            ConsolePanel.closeVNCForSource(vm);
+                            ConsolePanel.CloseVncForSource(vm);
                         }
 
                         foreach (Host host in con.Cache.Hosts)
                         {
-                            ConsolePanel.closeVNCForSource(host.ControlDomainZero());
+                            ConsolePanel.CloseVncForSource(host.ControlDomainZero());
 
                             foreach (VM vm in host.OtherControlDomains())
-                                CvmConsolePanel.closeVNCForSource(vm);
+                                CvmConsolePanel.CloseVncForSource(vm);
                         }
 
                         con.EndConnect();
@@ -1185,7 +1185,7 @@ namespace XenAdmin
                 if (o is VM)
                 {
                     VM vm = (VM)e.Element;
-                    ConsolePanel.closeVNCForSource(vm);
+                    ConsolePanel.CloseVncForSource(vm);
                     XenDialogBase.CloseAll(vm);
                 }
 
@@ -1908,12 +1908,12 @@ namespace XenAdmin
             {
                 if (SelectionManager.Selection.FirstIsRealVM)
                 {
-                    ConsolePanel.setCurrentSource((VM)SelectionManager.Selection.First);
+                    ConsolePanel.SetCurrentSource((VM)SelectionManager.Selection.First);
                     UnpauseVNC(e != null && sender == TheTabControl);
                 }
                 else if (SelectionManager.Selection.FirstIs<Host>())
                 {
-                    ConsolePanel.setCurrentSource((Host)SelectionManager.Selection.First);
+                    ConsolePanel.SetCurrentSource((Host)SelectionManager.Selection.First);
                     UnpauseVNC(e != null && sender == TheTabControl);
                 }
                 ConsolePanel.UpdateRDPResolution();
@@ -1922,7 +1922,7 @@ namespace XenAdmin
             {
                 if (SelectionManager.Selection.First is SR sr && sr.HasDriverDomain(out var vm))
                 {
-                    CvmConsolePanel.setCurrentSource(vm);
+                    CvmConsolePanel.SetCurrentSource(vm);
                     UnpauseVNC(e != null && sender == TheTabControl);
                 }
             }

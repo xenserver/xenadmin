@@ -87,7 +87,7 @@ namespace XenAdmin.Commands
             VM vm = (VM)selection[0].XenObject;
             var snapshotAllowed = vm.allowed_operations.Contains(vm_operations.snapshot);
 
-            Program.MainWindow.ConsolePanel.setCurrentSource(vm);
+            Program.MainWindow.ConsolePanel.SetCurrentSource(vm);
 
             using (var dialog = new WarningDialog(string.Format(Messages.SNAPSHOT_REVERT_BLURB, _snapshot.Name()),
                 ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
