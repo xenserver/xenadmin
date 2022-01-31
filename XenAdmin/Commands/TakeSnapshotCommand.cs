@@ -84,7 +84,7 @@ namespace XenAdmin.Commands
                     {
                         if (dialog.ShowDialog(Parent) != DialogResult.Cancel && dialog.SnapshotName != null)
                         {
-                            Program.Invoke(Program.MainWindow, () => Program.MainWindow.ConsolePanel.setCurrentSource(vm));
+                            Program.Invoke(Program.MainWindow, () => Program.MainWindow.ConsolePanel.SetCurrentSource(vm));
                             return new VMSnapshotCreateAction(vm, dialog.SnapshotName, dialog.SnapshotDescription, dialog.SnapshotType,
                                                               (vmToSnapshot, username, password) =>
                                                               Program.MainWindow.ConsolePanel.Snapshot(
