@@ -1785,12 +1785,9 @@ namespace XenAdmin
         }
 
         /// <param name="sender"></param>
-        /// <param name="e">
-        /// If null, then we deduce the method was called by TreeView_AfterSelect
-        /// and don't focus the VNC console. i.e. we only focus the VNC console if the user
-        /// explicitly clicked on the console tab rather than arriving there by navigating
-        /// in treeView.
-        /// </param>
+        /// <param name="e">If null, then we deduce the method was called by navigation panel
+        /// events (e.g. navigating in the treeView). In this case do not focus the VNC console,
+        /// we only do it if the user explicitly clicked on the console tab.</param>
         private void TheTabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (IgnoreTabChanges)
@@ -2821,13 +2818,11 @@ namespace XenAdmin
         {
             UpdateToolbars();
 
-            //
             // NB do not trigger updates to the panels in this method
             // instead, put them in TheTabControl_SelectedIndexChanged,
             // so only the selected tab is updated
-            //
 
-            TheTabControl_SelectedIndexChanged(null, EventArgs.Empty);
+            TheTabControl_SelectedIndexChanged(null, null);
 
             if (TheTabControl.SelectedTab != null)
                 TheTabControl.SelectedTab.Refresh();
