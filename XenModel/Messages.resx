@@ -4827,6 +4827,15 @@ Plugging in untrustworthy USB devices to your computer may put your computer at 
   <data name="DOWNLOAD_AND_EXTRACT_ACTION_TITLE" xml:space="preserve">
     <value>Download and extract update {0}</value>
   </data>
+  <data name="DOWNLOAD_CLIENT_INSTALLER_ACTION_DESCRIPTION" xml:space="preserve">
+    <value>Downloading {0} installer</value>
+  </data>
+  <data name="DOWNLOAD_CLIENT_INSTALLER_ACTION_PROGRESS_DESCRIPTION" xml:space="preserve">
+    <value>Downloading {0} installer ({1} of {2})...</value>
+  </data>
+  <data name="DOWNLOAD_CLIENT_INSTALLER_ACTION_TITLE" xml:space="preserve">
+    <value>Download {0} installer</value>
+  </data>
   <data name="DOWNLOAD_ELLIPSES" xml:space="preserve">
     <value>Download...</value>
   </data>
@@ -13052,16 +13061,16 @@ Please check your settings and try again.</value>
     <value>{0}: Check skipped because WLB is enabled on pool {1}.</value>
   </data>
   <data name="UPDATE_CLIENT_CONFIRMATION_MESSAGE" xml:space="preserve">
-    <value>In order to update {0} will be closed. Please make sure you've completed and saved your work.</value>
+    <value>In order to update, {0} will be closed. Please make sure there are no unfinished tasks running, then click OK to proceed.</value>
   </data>
   <data name="UPDATE_CLIENT_CONFIRMATION_MESSAGE_TITLE" xml:space="preserve">
     <value>Update {0}</value>
   </data>
   <data name="UPDATE_CLIENT_FAILED_CERTIFICATE_CHECK" xml:space="preserve">
-    <value>{0} could not validate the certificate associated with the installation file.</value>
+    <value>Could not validate the certificate associated with the downloaded installer.</value>
   </data>
   <data name="UPDATE_CLIENT_INVALID_CHECKSUM" xml:space="preserve">
-    <value>The checksum of the installer does not match what is expected.</value>
+    <value>The checksum of the downloaded installer does not match the expected value.</value>
   </data>
   <data name="UPDATE_CLIENT_INVALID_DIGITAL_CERTIFICATE" xml:space="preserve">
     <value>Invalid digital signature on msi.</value>
