@@ -31,13 +31,19 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Windows.Forms;
+using XenAdmin.Actions;
 using XenAdmin.Core;
+using XenAdmin.Dialogs;
 
 
 namespace XenAdmin.Alerts
 {
     public class ClientUpdateAlert : Alert
     {
+        private static int DISMISSED_XC_VERSIONS_LIMIT = 5;
+
         public readonly ClientVersion NewVersion;
 
         public ClientUpdateAlert(ClientVersion version)
@@ -49,7 +55,7 @@ namespace XenAdmin.Alerts
 
         public override AlertPriority Priority => AlertPriority.Priority5;
 
-        public override string WebPageLabel => NewVersion.Url;
+        public override string WebPageLabel => InvisibleMessages.DOCS_URL + BrandManager.HelpPath;
 
         public override string Name => NewVersion.Name;
 
@@ -60,7 +66,7 @@ namespace XenAdmin.Alerts
 
         public override Action FixLinkAction
         {
-            get { return () => Program.OpenURL(NewVersion.Url); }
+            get { return () => Program.OpenURL(WebPageLabel); }
         }
 
         public override string FixLinkText => Messages.ALERT_NEW_VERSION_DOWNLOAD;
@@ -69,16 +75,7 @@ namespace XenAdmin.Alerts
 
         public override string HelpID => "XenCenterUpdateAlert";
 
-        public bool Downloadable { 
-            get {
-                // TODO: Implement proper check in CP-31587
-                return true;
-            }
-        }
-
-        public string Checksum = string.Empty;
-
-        static int DISMISSED_XC_VERSIONS_LIMIT = 5;
+        public string Checksum { get; }
 
         public override void Dismiss()
         {
@@ -105,6 +102,25 @@ namespace XenAdmin.Alerts
                 return NewVersion.VersionAndLang == clientAlert.NewVersion.VersionAndLang;
 
             return base.Equals(other);
+        }
+
+        public static void DownloadAndInstallNewClient(ClientUpdateAlert updateAlert, IWin32Window parent)
+        {
+            using (var dialog = new WarningDialog(
+                           string.Format(Messages.UPDATE_CLIENT_CONFIRMATION_MESSAGE, BrandManager.BrandConsole),
+                           ThreeButtonDialog.ButtonOK, ThreeButtonDialog.ButtonCancel)
+                       {WindowTitle = string.Format(Messages.UPDATE_CLIENT_CONFIRMATION_MESSAGE_TITLE, BrandManager.BrandConsole)})
+            {
+                if (dialog.ShowDialog(parent) != DialogResult.OK)
+                    return;
+            }
+
+            var downloadAndInstallClientAction = new DownloadAndUpdateClientAction(updateAlert.Name, new Uri(updateAlert.NewVersion.Url), Path.Combine(Path.GetTempPath(), $"{updateAlert.Name}.msi"), updateAlert.Checksum);
+
+            using (var dlg = new ActionProgressDialog(downloadAndInstallClientAction, ProgressBarStyle.Marquee))
+            {
+                dlg.ShowDialog(parent);
+            }
         }
     }
 }

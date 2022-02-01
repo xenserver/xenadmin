@@ -44,7 +44,7 @@ namespace XenAdminTests.UnitTests.AlertTests
         public void VerifyStoredDataWithDefaultConstructor()
         {
             var version = new ClientVersion("6.0.2", "xc", true, false, "http://url",
-                new DateTime(2011, 12, 09).ToString());
+                new DateTime(2011, 12, 09).ToString(), "abcde");
 
             ClassVerifiers.VerifyGetters(new ClientUpdateAlert(version),
                 new AlertClassUnitTestData
@@ -56,7 +56,8 @@ namespace XenAdminTests.UnitTests.AlertTests
                                   + BrandManager.CompanyNameShort + " website.",
                     HelpLinkText = "Help",
                     Title = "xc is now available",
-                    Priority = "Priority5"
+                    Priority = "Priority5",
+                    Checksum = "abcde"
                 });
         }
     }

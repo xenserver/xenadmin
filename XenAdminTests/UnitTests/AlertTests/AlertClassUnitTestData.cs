@@ -40,5 +40,6 @@ namespace XenAdminTests.UnitTests.AlertTests
         public string HelpLinkText;
         public string Title;
         public string Priority;
+        public string Checksum;
     }
 }

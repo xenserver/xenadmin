@@ -142,7 +142,7 @@ namespace XenAdmin
         private bool expandTreeNodesOnStartup;
         private int connectionsInProgressOnStartup;
 
-        private ClientUpdateAlert updateAlert = null;
+        private ClientUpdateAlert updateAlert;
 
         [DllImport("kernel32.dll", CharSet = CharSet.Auto)]
         static extern uint RegisterApplicationRestart(string pszCommandline, uint dwFlags);
@@ -1704,6 +1704,10 @@ namespace XenAdmin
                 }
 
                 // get insert index using the placeholder
+
+                if (!pluginMenuItemStartIndexes.ContainsKey(menu))
+                    continue;
+
                 int insertIndex = pluginMenuItemStartIndexes[menu];
 
                 bool itemAdded = false;
@@ -2655,7 +2659,10 @@ namespace XenAdmin
 
                     statusLabelUpdates.Text = string.Format(Messages.NOTIFICATIONS_SUBMODE_UPDATES_STATUS, updatesCount);
                     statusLabelUpdates.Visible = updatesCount > 0;
+
                     updateAlert = Updates.UpdateAlerts.FirstOrDefault(update => update is ClientUpdateAlert) as ClientUpdateAlert;
+                    updateClientToolStripMenuItem.Visible = updateAlert != null;
+
                     if (updatesPage.Visible)
                     {
                         TitleLabel.Text = NotificationsSubModeItem.GetText(NotificationsSubMode.Updates, updatesCount);
@@ -2664,29 +2671,18 @@ namespace XenAdmin
                 });
         }
 
-        private void UpdatesCheck_Completed(bool suceeded, string err)
+        private void UpdatesCheck_Completed(bool succeeded, string err)
         {
-
             Program.Invoke(this, () =>
             {
                 updateAlert = Updates.UpdateAlerts.FirstOrDefault(update => update is ClientUpdateAlert) as ClientUpdateAlert;
-                DisableAndHideUpdateClientToolStripMenuItem(updateAlert != null);
+                updateClientToolStripMenuItem.Visible = updateAlert != null;
             });            
-        }
-
-        /// <summary>
-        /// Changes disabled state and visibility of the update client button
-        /// </summary>
-        /// <param name="enable">Whether to hide and disable the update client button or not</param>
-        private void DisableAndHideUpdateClientToolStripMenuItem(bool enable)
-        {
-            updateClientToolStripMenuItem.Enabled = enable;
-            updateClientToolStripMenuItem.Visible = enable;
         }
 
         private void UpdatesCheck_Started()
         {
-            Program.Invoke(this, () => { DisableAndHideUpdateClientToolStripMenuItem(false); });
+            Program.Invoke(this, () => { updateClientToolStripMenuItem.Visible = false; });
         }
 
         private void CloseWhenActionsCanceled(object o)
@@ -3341,26 +3337,15 @@ namespace XenAdmin
             navigationPane.SwitchToNotificationsView(NotificationsSubMode.Events);
         }
 
-        private void skipToolStripMenuItem_Click(object sender, EventArgs e)
+        private void dismissToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Program.Invoke(this, () => { updateClientToolStripMenuItem.Visible = false; });
             updateAlert.Dismiss();
-            Program.Invoke(this, () => { DisableAndHideUpdateClientToolStripMenuItem(false); });
         }
 
         private void downloadInstallToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var downloadAndInstallClientAction = new DownloadAndUpdateClientAction(updateAlert.Name, new Uri(updateAlert.NewVersion.Url), Path.Combine(Path.GetTempPath(), $"{updateAlert.Name}.msi"), true, updateAlert.Checksum);
-
-            DialogResult dialogResult = MessageBox.Show(string.Format(Messages.UPDATE_CLIENT_CONFIRMATION_MESSAGE, BrandManager.ProductBrand), string.Format(Messages.UPDATE_CLIENT_CONFIRMATION_MESSAGE_TITLE, BrandManager.ProductBrand), MessageBoxButtons.OKCancel);
-            // Only start if user says yes.
-            if (dialogResult == DialogResult.OK)
-            {
-                // Start the download and show progress
-                using (var dlg = new ActionProgressDialog(downloadAndInstallClientAction, ProgressBarStyle.Marquee))
-                {
-                    dlg.ShowDialog(Parent);
-                }
-            }
+            ClientUpdateAlert.DownloadAndInstallNewClient(updateAlert, this);
         }
     }
 }
