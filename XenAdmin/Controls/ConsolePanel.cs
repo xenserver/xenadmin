@@ -45,7 +45,7 @@ namespace XenAdmin.Controls
     {
         private const int MAX_ACTIVE_VM_CONSOLES = 10;
 
-        public VNCView activeVNCView;
+        private VNCView activeVNCView;
         private Dictionary<VM, VNCView> vncViews = new Dictionary<VM, VNCView>();
 
         protected static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -66,8 +66,6 @@ namespace XenAdmin.Controls
                 if (vncView.IsDocked)
                     vncView.Pause();
             }
-
-            StartCloseVNCTimer(activeVNCView);
         }
 
         public void ResetAllViews()
@@ -108,24 +106,26 @@ namespace XenAdmin.Controls
         {
             Program.AssertOnEventThread();
 
-            // activeVNCView is going to change, so the current activeVNCView will become inactive
-            // Start a timer for closing the inactive VNC connection after an interval (20 seconds)
-            StartCloseVNCTimer(activeVNCView);
-
             tableLayoutPanelRbac.Visible = false;
 
-            if (activeVNCView != null)
+            if (source == null)
             {
-                Controls.Remove(activeVNCView);
-                activeVNCView = null;
+                if (activeVNCView != null)
+                {
+                    Controls.Remove(activeVNCView);
+                    activeVNCView = null;
+                }
+                return;
             }
 
-            if (source == null)
-                return;
-
-            List<Role> allowedRoles;
-            if (RbacDenied(source, out allowedRoles))
+            if (RbacDenied(source, out var allowedRoles))
             {
+                if (activeVNCView != null)
+                {
+                    Controls.Remove(activeVNCView);
+                    activeVNCView = null;
+                }
+
                 string msg = allowedRoles.Count == 1 ? Messages.RBAC_CONSOLE_WARNING_ONE : Messages.RBAC_CONSOLE_WARNING_MANY;
                 lableRbacWarning.Text = string.Format(msg,
                     Role.FriendlyCSVRoleList(source.Connection.Session.Roles),
@@ -135,27 +135,32 @@ namespace XenAdmin.Controls
                 return;
             }
 
-            StopCloseVncTimer(source);
-
-            //remove one more as we're adding the selected further down
-            //Take(arg) returns empty list if the arg <= 0
-            var viewsToRemove = vncViews.Where(v => v.Key.opaque_ref != source.opaque_ref).Take(vncViews.Count - 1 - MAX_ACTIVE_VM_CONSOLES).ToList();
-
-            foreach (var view in viewsToRemove)
-                CloseVncForSource(view.Key);
-
-            if (vncViews.ContainsKey(source))
+            if (!vncViews.ContainsKey(source))
             {
-                activeVNCView = vncViews[source];
+                //remove one more as we're adding the selected further down
+                //Take(arg) returns empty list if the arg <= 0
+                var viewsToRemove = vncViews.Take(vncViews.Count - MAX_ACTIVE_VM_CONSOLES + 1).ToList();
+
+                foreach (var view in viewsToRemove)
+                {
+                    if (!view.Value.IsDocked)
+                    {
+                        vncViews.Remove(view.Key);
+                        view.Value.Dispose();
+                    }
+                }
+
+                vncViews[source] = new VNCView(source, null, null) {Dock = DockStyle.Fill};
             }
-            else
+
+            if (activeVNCView != vncViews[source])
             {
-                activeVNCView = new VNCView(source, null, null) { Dock = DockStyle.Fill };
-                vncViews[source] = activeVNCView;
+                Controls.Remove(activeVNCView);
+                activeVNCView = vncViews[source];
+                Controls.Add(activeVNCView);
             }
 
             activeVNCView.refreshIsoList();
-            Controls.Add(activeVNCView);
             ClearErrorMessage();
         }
 
@@ -279,75 +284,6 @@ namespace XenAdmin.Controls
             if (activeVNCView != null)
                 activeVNCView.SendCAD();
         }
-
-        #region Close VNC connection
-
-        private const int CLOSE_VNC_INTERVAL = 20000; //20 milliseconds 
-
-        private static readonly Dictionary<VM, Timer> CloseVNCTimers = new Dictionary<VM, Timer>();
-
-        private void StartCloseVNCTimer(VNCView vncView)
-        {
-            if (vncView == null)
-                return;
-
-            // find the <VM, VNCView> pair in vncViews and start timer on the vm
-            var views = vncViews.Where(kvp => kvp.Value == vncView).ToList();
-            foreach (var kvp in views)
-            {
-                StartCloseVNCTimer(kvp.Key);
-                break;
-            }
-        }
-
-        private void StartCloseVNCTimer(VM vm)
-        {
-            Program.AssertOnEventThread();
-
-            if (CloseVNCTimers.ContainsKey(vm) || !vncViews.ContainsKey(vm))
-                return;
-
-            var t = new Timer {Interval = CLOSE_VNC_INTERVAL};
-
-            t.Tick += delegate
-                          {
-                              Program.AssertOnEventThread();
-                              try
-                              {
-                                  log.DebugFormat("ConsolePanel: closeVNCForSource({0}) in delegate", vm.Name());
-                                  CloseVncForSource(vm);
-                              }
-                              catch (Exception exception)
-                              {
-                                  log.ErrorFormat("ConsolePanel: Exception closing the VNC console for {0}: {1}",
-                                                  vm.Name(), exception.Message);
-                              }
-
-                              t.Stop();
-                              CloseVNCTimers.Remove(vm);
-                              log.DebugFormat(
-                                  "ConsolePanel: CloseVNCTimer({0}): Timer stopped and removed in delegate",
-                                  vm.Name());
-                          };
-
-            CloseVNCTimers.Add(vm, t);
-            log.DebugFormat("ConsolePanel: CloseVNCTimer({0}): Start timer (timers count {1})", vm.Name(), CloseVNCTimers.Count);
-            t.Start();
-        }
-
-        private static void StopCloseVncTimer(VM vm)
-        {
-            Program.AssertOnEventThread();
-
-            if (!CloseVNCTimers.ContainsKey(vm) || CloseVNCTimers[vm] == null) 
-                return;
-
-            CloseVNCTimers[vm].Stop();
-            CloseVNCTimers.Remove(vm);
-            log.DebugFormat("ConsolePanel: StopCloseVncTimer({0}): Timer stopped and removed", vm.Name());
-        }
-
-        #endregion
     }
 
     internal class CvmConsolePanel : ConsolePanel
