@@ -59,13 +59,13 @@ namespace XenAdmin.Controls
 
         public virtual string HelpID => "TabPageConsole";
 
-        public void PauseAllViews()
+        public void PauseAllDockedViews()
         {
-            // We're going to pause all of our VNCViews here, as this gets called when the VNC tab is not selected.
-            // The VNCView deals with undocked cases.
-
             foreach (VNCView vncView in vncViews.Values)
-                vncView.Pause();
+            {
+                if (vncView.IsDocked)
+                    vncView.Pause();
+            }
 
             StartCloseVNCTimer(activeVNCView);
         }
@@ -82,7 +82,7 @@ namespace XenAdmin.Controls
 
             foreach (VNCView vncView in vncViews.Values)
             {
-                if (vncView != activeVNCView)
+                if (vncView != activeVNCView && vncView.IsDocked)
                     vncView.Pause();
             }
 
@@ -255,7 +255,7 @@ namespace XenAdmin.Controls
 
             VNCView vncView = vncViews[source];
 
-            if (!vncView.isDocked)
+            if (!vncView.IsDocked)
                 return;
 
             vncViews.Remove(source);
