@@ -294,7 +294,7 @@ namespace XenAdmin
                 else if (SelectionManager.Selection.FirstIs<Host>())
                     ConsolePanel.SetCurrentSource((Host)SelectionManager.Selection.First);
 
-                UnpauseVNC(sender == TheTabControl);
+                ConsolePanel.UnpauseActiveView(sender == TheTabControl);
             }
         }
 
@@ -1903,24 +1903,28 @@ namespace XenAdmin
 
             if (t == TabPageConsole)
             {
+                CvmConsolePanel.PauseAllDockedViews();
+
                 if (SelectionManager.Selection.FirstIsRealVM)
                 {
                     ConsolePanel.SetCurrentSource((VM)SelectionManager.Selection.First);
-                    UnpauseVNC(e != null && sender == TheTabControl);
+                    ConsolePanel.UnpauseActiveView(e != null && sender == TheTabControl);
                 }
                 else if (SelectionManager.Selection.FirstIs<Host>())
                 {
                     ConsolePanel.SetCurrentSource((Host)SelectionManager.Selection.First);
-                    UnpauseVNC(e != null && sender == TheTabControl);
+                    ConsolePanel.UnpauseActiveView(e != null && sender == TheTabControl);
                 }
                 ConsolePanel.UpdateRDPResolution();
             }
             else if (t == TabPageCvmConsole)
             {
+                ConsolePanel.PauseAllDockedViews();
+
                 if (SelectionManager.Selection.First is SR sr && sr.HasDriverDomain(out var vm))
                 {
                     CvmConsolePanel.SetCurrentSource(vm);
-                    UnpauseVNC(e != null && sender == TheTabControl);
+                    CvmConsolePanel.UnpauseActiveView(e != null && sender == TheTabControl);
                 }
             }
             else
@@ -2141,12 +2145,6 @@ namespace XenAdmin
                         f.SetUrl();
                 }
             }
-        }
-
-        private void UnpauseVNC(bool focus)
-        {
-            ConsolePanel.UnpauseActiveView(focus);
-            CvmConsolePanel.UnpauseActiveView(focus);
         }
 
         /// <summary>
