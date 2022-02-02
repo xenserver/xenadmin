@@ -1464,11 +1464,6 @@ namespace XenAdmin.ConsoleView
             dedicatedGpuWarning.Visible = mustConnectRemoteDesktop;
         }
 
-        internal bool IsVNC
-        {
-            get { return vncScreen.UseVNC; }
-        }
-
         public void UpdateRDPResolution(bool fullscreen = false)
         {
             if (vncScreen != null)
