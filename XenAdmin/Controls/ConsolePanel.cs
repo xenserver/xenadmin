@@ -262,14 +262,6 @@ namespace XenAdmin.Controls
             vncView.Dispose();
         }
 
-        public void CloseVncForSource(VM source, bool vncOnly)
-        {
-            if (!vncViews.ContainsKey(source) || vncViews[source] == null
-                || (vncOnly && !vncViews[source].IsVNC))
-                return;
-            CloseVncForSource(source);
-        }
-
         protected void SetErrorMessage(string message)
         {
             errorLabel.Text = message;
@@ -323,7 +315,7 @@ namespace XenAdmin.Controls
                               try
                               {
                                   log.DebugFormat("ConsolePanel: closeVNCForSource({0}) in delegate", vm.Name());
-                                  CloseVncForSource(vm, true);
+                                  CloseVncForSource(vm);
                               }
                               catch (Exception exception)
                               {
