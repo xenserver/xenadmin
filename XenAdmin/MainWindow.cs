@@ -1822,8 +1822,8 @@ namespace XenAdmin
             }
             else
             {
-                ConsolePanel.PauseAllViews();  
-                CvmConsolePanel.PauseAllViews();
+                ConsolePanel.PauseAllDockedViews();  
+                CvmConsolePanel.PauseAllDockedViews();
 
                 if (t == TabPageGeneral)
                 {

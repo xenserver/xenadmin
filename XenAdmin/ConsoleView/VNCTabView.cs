@@ -255,7 +255,7 @@ namespace XenAdmin.ConsoleView
                 {
                     // the VM we are looking at has gone away. We should redock if necessary, otherwise it
                     // avoids the destroy (and re-create in the case of dom0) when the tab itself goes.
-                    if (!parentVNCView.isDocked)
+                    if (!parentVNCView.IsDocked)
                         parentVNCView.DockUnDock();
                 }
             }
@@ -473,7 +473,7 @@ namespace XenAdmin.ConsoleView
 
         public void UpdateDockButton()
         {
-            dockButton.Text = parentVNCView.isDocked ? Messages.VNC_UNDOCK : Messages.VNC_REDOCK;
+            dockButton.Text = parentVNCView.IsDocked ? Messages.VNC_UNDOCK : Messages.VNC_REDOCK;
             if (Properties.Settings.Default.DockShortcutKey == 1)
             {
                 dockButton.Text += Messages.VNC_DOCK_ALT_SHIFT_U;
@@ -482,7 +482,7 @@ namespace XenAdmin.ConsoleView
             {
                 dockButton.Text += Messages.VNC_DOCK_F11;
             }
-            dockButton.Image = parentVNCView.isDocked ? Images.StaticImages.detach_24 : Images.StaticImages.attach_24;
+            dockButton.Image = parentVNCView.IsDocked ? Images.StaticImages.detach_24 : Images.StaticImages.attach_24;
         }
 
         public void UpdateFullScreenButton()
