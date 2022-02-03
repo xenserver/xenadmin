@@ -311,13 +311,23 @@ namespace XenAdmin.Actions.OvfActions
 
                 #region OPEN DISK
 
-                long dataCapacity;
+                long dataLength;
+                long virtualSize;
+                string format = string.Empty;
 
-                if (VirtualDisk.SupportedDiskFormats.Any(f => ext.ToLower().EndsWith(f.ToLower())))
+                if (ext.ToLower().EndsWith(".vhd"))
+                {
+                    vhdDisk = VirtualDisk.OpenDisk(sourcefile, FileAccess.Read);
+                    virtualSize = vhdDisk.Capacity;
+                    dataStream = File.OpenRead(filePath);
+                    dataLength = dataStream.Length;
+                    format = "vhd";
+                }
+                else if (VirtualDisk.SupportedDiskFormats.Any(f => ext.ToLower().EndsWith(f.ToLower())))
                 {
                     vhdDisk = VirtualDisk.OpenDisk(sourcefile, FileAccess.Read);
                     dataStream = vhdDisk.Content;
-                    dataCapacity = vhdDisk.Capacity;
+                    dataLength = virtualSize = vhdDisk.Capacity;
                 }
                 else if (ext.ToLower().EndsWith("iso"))
                 {
@@ -328,7 +338,7 @@ namespace XenAdmin.Actions.OvfActions
                     }
 
                     dataStream = File.OpenRead(filePath);
-                    dataCapacity = dataStream.Length;
+                    dataLength = virtualSize = dataStream.Length;
                 }
                 else
                 {
@@ -351,17 +361,16 @@ namespace XenAdmin.Actions.OvfActions
                     if (sr != null)
                         freespace = sr.physical_size - sr.physical_utilisation;
 
-                    if (freespace < dataCapacity)
+                    if (freespace < virtualSize)
                         throw new IOException(string.Format(Messages.SR_NOT_ENOUGH_SPACE,
-                            sruuid, Util.DiskSizeString(dataCapacity), filename));
+                            sruuid, Util.DiskSizeString(virtualSize), filename));
 
                     VDI newVdi = new VDI
                     {
                         name_label = diskName,
                         name_description = description,
                         SR = new XenRef<SR>(sr == null ? Helper.NullOpaqueRef : sr.opaque_ref),//sr==null is unlikely
-                        virtual_size = dataCapacity,
-                        physical_utilisation = dataCapacity,
+                        virtual_size = virtualSize,
                         type = vdi_type.user,
                         sharable = false,
                         read_only = false,
@@ -387,9 +396,9 @@ namespace XenAdmin.Actions.OvfActions
                         vdiRef = new XenRef<VDI>(vdi.opaque_ref);
                     }
 
-                    if (freespace < dataCapacity)
+                    if (freespace < virtualSize)
                         throw new IOException(string.Format(Messages.VDI_NOT_ENOUGH_SPACE,
-                            vdiuuid, Util.DiskSizeString(dataCapacity), filename));
+                            vdiuuid, Util.DiskSizeString(virtualSize), filename));
                 }
 
                 #endregion
@@ -405,8 +414,8 @@ namespace XenAdmin.Actions.OvfActions
                     Host = Connection.Hostname,
                     Port = Connection.Port,
                     Path = "/import_raw_vdi",
-                    Query = string.Format("session_id={0}&task_id={1}&vdi={2}",
-                        Connection.Session.opaque_ref, taskRef.opaque_ref, vdiuuid)
+                    Query = string.Format("session_id={0}&task_id={1}&vdi={2}&format={3}",
+                        Connection.Session.opaque_ref, taskRef.opaque_ref, vdiuuid, format)
                 };
 
                 using (Stream outStream = HTTPHelper.PUT(uriBuilder.Uri, dataStream.Length, true))
@@ -414,9 +423,9 @@ namespace XenAdmin.Actions.OvfActions
                         b =>
                         {
                             Description = string.Format(Messages.IMPORT_VDI, filename,
-                                Util.DiskSizeString(b, 2, "F2"), Util.DiskSizeString(dataCapacity));
+                                Util.DiskSizeString(b, 2, "F2"), Util.DiskSizeString(dataLength));
 
-                            updatePercentage((float)b / dataCapacity);
+                            updatePercentage((float)b / dataLength);
                         },
                         () => Cancelling);
 
