@@ -36,16 +36,14 @@ using System.Threading;
 using System.IO;
 using System.Net.NetworkInformation;
 using System.Diagnostics;
+using System.Linq;
 using XenCenterLib;
-using System.Text;
 using System.Security.Cryptography.X509Certificates;
-using XenAdmin.Core;
 
 namespace XenAdmin.Actions
 {
     public class DownloadAndUpdateClientAction : AsyncAction, IByteProgressAction
     {
-
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private const int SLEEP_TIME_TO_CHECK_DOWNLOAD_STATUS_MS = 900;
@@ -64,10 +62,9 @@ namespace XenAdmin.Actions
 
         public string ByteProgressDescription { get; set; }
 
-        public DownloadAndUpdateClientAction(string updateName, Uri uri, string outputFileName, bool suppressHistory, string checksum)
-            : base(null, uri == null
-                ? string.Format(Messages.UPDATES_WIZARD_EXTRACT_ACTION_TITLE, updateName)
-                : string.Format(Messages.DOWNLOAD_AND_EXTRACT_ACTION_TITLE, updateName), string.Empty, suppressHistory)
+        public DownloadAndUpdateClientAction(string updateName, Uri uri, string outputFileName, string checksum)
+            : base(null, string.Format(Messages.DOWNLOAD_CLIENT_INSTALLER_ACTION_TITLE, updateName),
+                string.Empty, true)
         {
             this.updateName = updateName;
             address = uri;
@@ -178,8 +175,8 @@ namespace XenAdmin.Actions
         {
             if (downloadUpdate)
             {
-                log.InfoFormat("Downloading update '{0}' (from '{1}') to '{2}'", updateName, address, outputPathAndFileName);
-                Description = string.Format(Messages.DOWNLOAD_AND_EXTRACT_ACTION_DOWNLOADING_DESC, updateName);
+                log.InfoFormat("Downloading '{0}' installer (from '{1}') to '{2}'", updateName, address, outputPathAndFileName);
+                Description = string.Format(Messages.DOWNLOAD_CLIENT_INSTALLER_ACTION_DESCRIPTION, updateName);
                 LogDescriptionChanges = false;
                 DownloadFile();
                 LogDescriptionChanges = true;
@@ -206,10 +203,9 @@ namespace XenAdmin.Actions
             catch (Exception e)
             {
                 if (File.Exists(outputPathAndFileName))
-                {
                     File.Delete(outputPathAndFileName);
-                }
-                log.Error("Exception occurred when installing CHC.", e);
+
+                log.Error("Exception occurred when starting the installation process.", e);
                 throw;
             }
 
@@ -219,24 +215,20 @@ namespace XenAdmin.Actions
 
         private void ValidateMsi()
         {
-
             using (FileStream stream = new FileStream(outputPathAndFileName, FileMode.Open, FileAccess.Read))
             {
+                var calculatedChecksum = string.Empty; 
+
                 var hash = StreamUtilities.ComputeHash(stream, out _);
-                
-                //Convert to Hex string
-                StringBuilder sb = new StringBuilder();
-                foreach (var b in hash)
-                    sb.Append(b.ToString("x2"));
-             
-                var calculatedChecksum = sb.ToString();
-                
+                if (hash != null)
+                    calculatedChecksum = string.Join("", hash.Select(b => $"{b:x2}"));
+
                 // Check if calculatedChecksum matches what is in chcupdates.xml
                 if (checksum != calculatedChecksum)
                     throw new Exception(Messages.UPDATE_CLIENT_INVALID_CHECKSUM );
             }
 
-            var valid = false;
+            bool valid;
             // Check digital signature of .msi
             using (var basicSigner = X509Certificate.CreateFromSignedFile(outputPathAndFileName))
             {
@@ -248,7 +240,7 @@ namespace XenAdmin.Actions
                     }
                     catch (Exception e)
                     {
-                        throw new Exception(string.Format(Messages.UPDATE_CLIENT_FAILED_CERTIFICATE_CHECK, BrandManager.ProductBrand), e);
+                        throw new Exception(Messages.UPDATE_CLIENT_FAILED_CERTIFICATE_CHECK, e);
                     }
                 }
             }
@@ -257,17 +249,17 @@ namespace XenAdmin.Actions
                 throw new Exception(Messages.UPDATE_CLIENT_INVALID_DIGITAL_CERTIFICATE);
         }
 
-        void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        private void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
             int pc = (int)(95.0 * e.BytesReceived / e.TotalBytesToReceive);
-            var descr = string.Format(Messages.DOWNLOAD_AND_EXTRACT_ACTION_DOWNLOADING_DETAILS_DESC, updateName,
+            var descr = string.Format(Messages.DOWNLOAD_CLIENT_INSTALLER_ACTION_PROGRESS_DESCRIPTION, updateName,
                                             Util.DiskSizeString(e.BytesReceived, "F1"),
                                             Util.DiskSizeString(e.TotalBytesToReceive));
             ByteProgressDescription = descr;
             Tick(pc, descr);
         }
 
-        void client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
+        private void client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
             if (e.Cancelled && updateDownloadState == DownloadState.Error) // cancelled due to network connectivity issue (see NetworkAvailabilityChanged)
                 return;
@@ -275,27 +267,26 @@ namespace XenAdmin.Actions
             if (e.Cancelled)
             {
                 updateDownloadState = DownloadState.Cancelled;
-                log.DebugFormat("CHC client update '{0}' download cancelled by the user", updateName);
+                log.DebugFormat("Client update '{0}' download cancelled by the user", updateName);
                 return;
             }
 
             if (e.Error != null)
             {
                 updateDownloadError = e.Error;
-                log.DebugFormat("CHC client update '{0}' download failed", updateName);
+                log.DebugFormat("Client update '{0}' download failed", updateName);
                 updateDownloadState = DownloadState.Error;
                 return;
             }
 
             updateDownloadState = DownloadState.Completed;
-            log.DebugFormat("CHC client update '{0}' download completed successfully", updateName);
+            log.DebugFormat("Client update '{0}' download completed successfully", updateName);
         }
 
         public override void RecomputeCanCancel()
         {
             CanCancel = !Cancelling && !IsCompleted && (updateDownloadState == DownloadState.InProgress);
         }
-
     }
 }
 

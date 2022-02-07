@@ -13687,6 +13687,33 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Downloading {0} installer.
+        /// </summary>
+        public static string DOWNLOAD_CLIENT_INSTALLER_ACTION_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("DOWNLOAD_CLIENT_INSTALLER_ACTION_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Downloading {0} installer ({1} of {2})....
+        /// </summary>
+        public static string DOWNLOAD_CLIENT_INSTALLER_ACTION_PROGRESS_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("DOWNLOAD_CLIENT_INSTALLER_ACTION_PROGRESS_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download {0} installer.
+        /// </summary>
+        public static string DOWNLOAD_CLIENT_INSTALLER_ACTION_TITLE {
+            get {
+                return ResourceManager.GetString("DOWNLOAD_CLIENT_INSTALLER_ACTION_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Download....
         /// </summary>
         public static string DOWNLOAD_ELLIPSES {
@@ -36886,7 +36913,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to In order to update {0} will be closed. Please make sure you&apos;ve completed and saved your work..
+        ///   Looks up a localized string similar to In order to update, {0} will be closed. Please make sure there are no unfinished tasks running, then click OK to proceed..
         /// </summary>
         public static string UPDATE_CLIENT_CONFIRMATION_MESSAGE {
             get {
@@ -36904,7 +36931,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} could not validate the certificate associated with the installation file..
+        ///   Looks up a localized string similar to Could not validate the certificate associated with the downloaded installer..
         /// </summary>
         public static string UPDATE_CLIENT_FAILED_CERTIFICATE_CHECK {
             get {
@@ -36913,7 +36940,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The checksum of the installer does not match what is expected..
+        ///   Looks up a localized string similar to The checksum of the downloaded installer does not match the expected value..
         /// </summary>
         public static string UPDATE_CLIENT_INVALID_CHECKSUM {
             get {

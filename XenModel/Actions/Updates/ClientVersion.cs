@@ -45,7 +45,7 @@ namespace XenAdmin.Core
         public DateTime TimeStamp;
         public string Checksum;
 
-        public ClientVersion(string version_lang, string name, bool latest, bool latest_cr, string url, string timestamp, string checksum = "")
+        public ClientVersion(string version_lang, string name, bool latest, bool latest_cr, string url, string timestamp, string checksum)
         {
             ParseVersion(version_lang);
             Name = name;

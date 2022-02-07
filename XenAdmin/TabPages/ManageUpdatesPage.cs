@@ -830,12 +830,10 @@ namespace XenAdmin.TabPages
                 items.Add(fix);
             }
 
-            if (alert is ClientUpdateAlert)
+            if (alert is ClientUpdateAlert cua)
             {
                 var download = new ToolStripMenuItem(Messages.UPDATES_DOWNLOAD_AND_INSTALL);
                 download.Click += ToolStripMenuItemDownloadInstall_Click;
-                //TODO: Check if path is url or msi to set downloadable
-                download.Enabled = (alert as ClientUpdateAlert).Downloadable; 
                 items.Add(download);
             }
 
@@ -967,30 +965,12 @@ namespace XenAdmin.TabPages
 
         private void ToolStripMenuItemDownloadInstall_Click(object sender, EventArgs e)
         {
-            //Get the current clicked row
             DataGridViewRow clickedRow = FindAlertRow(sender as ToolStripMenuItem);
-            if (clickedRow == null)
+
+            if (clickedRow == null || !(clickedRow.Tag is ClientUpdateAlert alert))
                 return;
 
-            ClientUpdateAlert alert = (ClientUpdateAlert)clickedRow.Tag;
-            if (alert != null && string.IsNullOrEmpty(alert.NewVersion.Url))
-            {
-                alert.FixLinkAction.Invoke();
-            }                
-
-            var downloadAndInstallClientAction = new DownloadAndUpdateClientAction(alert.Name, new Uri(alert.NewVersion.Url), Path.Combine(Path.GetTempPath(), $"{alert.Name}.msi"), true, alert.Checksum) ;
-
-            DialogResult dialogResult = MessageBox.Show(Messages.UPDATE_CLIENT_CONFIRMATION_MESSAGE, Messages.UPDATE_CLIENT_CONFIRMATION_MESSAGE_TITLE, MessageBoxButtons.YesNo);
-
-            // Only start if user says yes.
-            if (dialogResult == DialogResult.Yes)
-            {
-                // Start the download and show progress
-                using (var dlg = new ActionProgressDialog(downloadAndInstallClientAction, ProgressBarStyle.Marquee))
-                {
-                    dlg.ShowDialog(Parent);
-                }
-            }
+            ClientUpdateAlert.DownloadAndInstallNewClient(alert, Parent);
         }
 
         private void ToolStripMenuItemDismiss_Click(object sender, EventArgs e)
