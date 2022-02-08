@@ -43,32 +43,24 @@ namespace XenAdmin.ConsoleView
     {
         private readonly VM source;
         private readonly VNCTabView vncTabView;
-        public Form undockedForm = null;
+        public Form undockedForm;
 
         /// <summary>
         /// Helper boolean to only trigger Resize_End when window is really resized by dragging edges
         /// Without this Resize_End is triggered even when window is moved around and not resized
         /// </summary>
-        private bool undockedFormResized = false;
+        private bool undockedFormResized;
 
-        public bool isDocked
-        {
-            get
-            {
-                return this.undockedForm == null || !this.undockedForm.Visible;
-            }
-        }
+        public bool IsDocked => undockedForm == null || !undockedForm.Visible;
 
         public void Pause()
         {
-            if (vncTabView != null && isDocked)
-                vncTabView.Pause();
+            vncTabView?.Pause();
         }
 
         public void Unpause()
         {
-            if(vncTabView != null)
-                vncTabView.Unpause();
+            vncTabView?.Unpause();
         }
 
         public VNCView(VM source, string elevatedUsername, string elevatedPassword)
@@ -94,7 +86,7 @@ namespace XenAdmin.ConsoleView
 
         public void DockUnDock()
         {
-            if (this.isDocked)
+            if (IsDocked)
             {
                 if (this.undockedForm == null)
                 {
@@ -235,7 +227,7 @@ namespace XenAdmin.ConsoleView
 
         private void findConsoleButton_Click(object sender, EventArgs e)
         {
-            if (!this.isDocked)
+            if (!IsDocked)
                 undockedForm.BringToFront();
             if (undockedForm.WindowState == FormWindowState.Minimized)
                 undockedForm.WindowState = FormWindowState.Normal;
@@ -271,11 +263,6 @@ namespace XenAdmin.ConsoleView
         public void refreshIsoList()
         {
             vncTabView.setupCD();
-        }
-
-        internal bool IsVNC
-        {
-            get { return vncTabView.IsVNC; }
         }
 
         public void UpdateRDPResolution(bool fullscreen = false)
