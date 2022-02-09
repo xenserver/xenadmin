@@ -104,24 +104,24 @@ namespace XenAdmin.Actions
             {
                 foreach (XmlNode version in versions.ChildNodes)
                 {
-                    string version_lang = "";
-                    string name = "";
+                    string versionLang = string.Empty;
+                    string name = string.Empty;
                     bool latest = false;
-                    bool latest_cr = false;
-                    string url = "";
-                    string timestamp = "";
-                    string checksum = "";
+                    bool latestCr = false;
+                    string url = string.Empty;
+                    string timestamp = string.Empty;
+                    string checksum = string.Empty;
 
                     foreach (XmlAttribute attrib in version.Attributes)
                     {
                         if (attrib.Name == "value")
-                            version_lang = attrib.Value;
+                            versionLang = attrib.Value;
                         else if (attrib.Name == "name")
                             name = attrib.Value;
                         else if (attrib.Name == "latest")
                             latest = attrib.Value.ToUpperInvariant() == bool.TrueString.ToUpperInvariant();
                         else if (attrib.Name == "latestcr")
-                            latest_cr = attrib.Value.ToUpperInvariant() == bool.TrueString.ToUpperInvariant();
+                            latestCr = attrib.Value.ToUpperInvariant() == bool.TrueString.ToUpperInvariant();
                         else if (attrib.Name == "url")
                             url = attrib.Value;
                         else if (attrib.Name == "timestamp")
@@ -130,7 +130,7 @@ namespace XenAdmin.Actions
                             checksum = attrib.Value;
                     }
 
-                    ClientVersions.Add(new ClientVersion(version_lang, name, latest, latest_cr, url, timestamp, checksum));
+                    ClientVersions.Add(new ClientVersion(versionLang, name, latest, latestCr, url, timestamp, checksum));
                 }
             }
         }

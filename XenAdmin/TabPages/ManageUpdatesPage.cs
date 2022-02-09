@@ -830,7 +830,7 @@ namespace XenAdmin.TabPages
                 items.Add(fix);
             }
 
-            if (alert is ClientUpdateAlert cua)
+            if (alert is ClientUpdateAlert)
             {
                 var download = new ToolStripMenuItem(Messages.UPDATES_DOWNLOAD_AND_INSTALL);
                 download.Click += ToolStripMenuItemDownloadInstall_Click;

@@ -4836,6 +4836,9 @@ Plugging in untrustworthy USB devices to your computer may put your computer at 
   <data name="DOWNLOAD_CLIENT_INSTALLER_ACTION_TITLE" xml:space="preserve">
     <value>Download {0} installer</value>
   </data>
+  <data name="DOWNLOAD_CLIENT_INSTALLER_MSI_NOT_FOUND" xml:space="preserve">
+    <value>The downloaded installer can no longer be found.</value>
+  </data>
   <data name="DOWNLOAD_ELLIPSES" xml:space="preserve">
     <value>Download...</value>
   </data>
