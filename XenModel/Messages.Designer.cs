@@ -13714,6 +13714,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The downloaded installer can no longer be found..
+        /// </summary>
+        public static string DOWNLOAD_CLIENT_INSTALLER_MSI_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("DOWNLOAD_CLIENT_INSTALLER_MSI_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Download....
         /// </summary>
         public static string DOWNLOAD_ELLIPSES {

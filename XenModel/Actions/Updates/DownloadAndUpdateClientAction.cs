@@ -58,7 +58,8 @@ namespace XenAdmin.Actions
         private readonly bool downloadUpdate;
         private DownloadState updateDownloadState;
         private Exception updateDownloadError;
-        private string checksum; 
+        private string checksum;
+        private WebClient client;
 
         public string ByteProgressDescription { get; set; }
 
@@ -73,15 +74,12 @@ namespace XenAdmin.Actions
             this.checksum = checksum;
         }
 
-        private WebClient client;
-
         private void DownloadFile()
         {
             int errorCount = 0;
             bool needToRetry = false;
 
             client = new WebClient();
-            //register download events
             client.DownloadProgressChanged += client_DownloadProgressChanged;
             client.DownloadFileCompleted += client_DownloadFileCompleted;
 
@@ -142,7 +140,6 @@ namespace XenAdmin.Actions
             }
             finally
             {
-                //deregister download events
                 client.DownloadProgressChanged -= client_DownloadProgressChanged;
                 client.DownloadFileCompleted -= client_DownloadFileCompleted;
 
@@ -155,10 +152,8 @@ namespace XenAdmin.Actions
             if (updateDownloadState == DownloadState.Error)
             {
                 log.ErrorFormat("Giving up - Maximum number of retries ({0}) has been reached.", MAX_NUMBER_OF_TRIES);
-
-                MarkCompleted(updateDownloadError ?? new Exception(Messages.ERROR_UNKNOWN));
+                throw updateDownloadError ?? new Exception(Messages.ERROR_UNKNOWN);
             }
-
         }
 
         private void NetworkAvailabilityChanged(object sender, NetworkAvailabilityEventArgs e)
@@ -190,15 +185,15 @@ namespace XenAdmin.Actions
             
             ValidateMsi();
 
+            if (!File.Exists(outputPathAndFileName))
+                throw new Exception(Messages.DOWNLOAD_CLIENT_INSTALLER_MSI_NOT_FOUND);
+
             // Install the msi            
             try
             {
-                if (File.Exists(outputPathAndFileName))
-                {
-                    // Start the install process, it will handle closing of application.
-                    Process.Start(outputPathAndFileName);
-                    log.DebugFormat("Update {0} found and install started", updateName);
-                }
+                // Start the install process, it will handle closing of application.
+                Process.Start(outputPathAndFileName);
+                log.DebugFormat("Update {0} found and install started", updateName);
             }
             catch (Exception e)
             {
@@ -210,7 +205,6 @@ namespace XenAdmin.Actions
             }
 
             Description = Messages.COMPLETED;
-            MarkCompleted();
         }
 
         private void ValidateMsi()
@@ -224,7 +218,7 @@ namespace XenAdmin.Actions
                     calculatedChecksum = string.Join("", hash.Select(b => $"{b:x2}"));
 
                 // Check if calculatedChecksum matches what is in chcupdates.xml
-                if (checksum != calculatedChecksum)
+                if (checksum.ToLower() != calculatedChecksum.ToLower())
                     throw new Exception(Messages.UPDATE_CLIENT_INVALID_CHECKSUM );
             }
 
