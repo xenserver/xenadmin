@@ -61,12 +61,12 @@ foreach ($dep in $DEPS_MAP.files) {
 
     if (($filename -like "*.dll") -and $SYMBOLS) {
         $symbolfile = [IO.Path]::GetFileNameWithoutExtension($filename) + ".pdb"
-        Write-Output "Downloading $symbolfile"
+        Write-Host "Downloading $symbolfile"
         Invoke-WebRequest -Uri $pattern -Method Get -OutFile "$PACKAGE_DIR\$symbolfile"
     }
 
     if (($filename -like "*.dll") -or (($filename -like "*.zip") -and $ZIP)) {
-        Write-Output "Downloading $filename"
+        Write-Host "Downloading $filename"
         Invoke-WebRequest -Uri $pattern -Method Get -OutFile "$PACKAGE_DIR\$filename"
     }
 }

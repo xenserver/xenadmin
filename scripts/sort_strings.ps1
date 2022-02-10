@@ -45,12 +45,12 @@ function Test-Paths($paths) {
         $path = Get-ResolvedPath $path
 
         if ((Test-Path $path) -eq $false) {
-            Write-Output "File $path does not exist. Exiting."
+            Write-Host "File $path does not exist. Exiting."
             exit 1;
         }
 
         if ([IO.Path]::GetExtension($path) -cne ".resx") {
-            Write-Output "$path is not a .resx file. Exiting."
+            Write-Host "$path is not a .resx file. Exiting."
             exit 1;
         }
         
@@ -58,11 +58,11 @@ function Test-Paths($paths) {
             $fileName = $path.replace(".resx", "")
             
             if ((Test-Path "$fileName.ja.resx") -eq $false) {
-                Write-Output "Could not find Japanese localized file for $path. Exiting."
+                Write-Host "Could not find Japanese localized file for $path. Exiting."
                 exit 1
             }
             if ((Test-Path "$fileName.zh-CN.resx") -eq $false ) {
-                Write-Output "Could not find Chinese localized file for $path. Exiting."
+                Write-Host "Could not find Chinese localized file for $path. Exiting."
                 exit 1
             }
         }
@@ -70,7 +70,7 @@ function Test-Paths($paths) {
 }
 
 function Update-Strings($path) {
-    Write-Output "Fetching content of $path"
+    Write-Host "Fetching content of $path"
     
     [xml]$xml = Get-Content -Encoding "utf8" -Path $path
     
@@ -78,29 +78,29 @@ function Update-Strings($path) {
     $sortedStrings = $strings | Sort-Object name
     $count = $strings.length
     
-    Write-Output "Found $count strings"
+    Write-Host "Found $count strings"
     
     foreach ($_ in $strings) {
         if ($NOISY) {
-            Write-Output "Removing string $($_.name)"
+            Write-Host "Removing string $($_.name)"
         }
         # ignore stdout
         $xml.root.RemoveChild($_) >  $null
     }
     
-    Write-Output "Removed unsorted strings"
+    Write-Host "Removed unsorted strings"
     
     foreach ($_ in $sortedStrings) {
         if ($NOISY) {
-            Write-Output "Adding string $($_.name)"
+            Write-Host "Adding string $($_.name)"
         }
         # ignore stdout
         $xml.root.AppendChild($_) >  $null
     }
     
-    Write-Output "Added sorted strings"
+    Write-Host "Added sorted strings"
     
-    Write-Output "Updating content of $path`n"
+    Write-Host "Updating content of $path`n"
     $xml.Save($path)
 
     # Make sure all line endings are CRLF

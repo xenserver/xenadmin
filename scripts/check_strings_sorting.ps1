@@ -45,23 +45,23 @@ Param(
 function Test-Paths($paths) {
     foreach ($path in $paths) {
         if ((Test-Path $path) -eq $false) {
-            Write-Output "File $path does not exist. Exiting."
+            Write-Host "File $path does not exist. Exiting."
             exit 1;
         }
 
         if ([IO.Path]::GetExtension($path) -cne ".resx") {
-            Write-Output "$path is not a .resx file. Exiting."
+            Write-Host "$path is not a .resx file. Exiting."
             exit 1;
         }
         
         if ($CHECK_LOCALIZED) {
             $fileName = $path.replace(".resx", "")
             if ((Test-Path "$fileName.ja.resx") -eq $false) {
-                Write-Output "Could not find Japanese localized file for $path. Exiting."
+                Write-Host "Could not find Japanese localized file for $path. Exiting."
                 exit 1
             }
             if ((Test-Path "$fileName.zh-CN.resx") -eq $false ) {
-                Write-Output "Could not find Chinese localized file for $path. Exiting."
+                Write-Host "Could not find Chinese localized file for $path. Exiting."
                 exit 1
             }
         }
@@ -69,7 +69,7 @@ function Test-Paths($paths) {
 }
 
 function Test-Strings($path) {
-    Write-Output "Checking strings in $path"
+    Write-Host "Checking strings in $path"
 
     [xml]$xml = Get-Content -Encoding "utf8" -Path $path
 
@@ -79,8 +79,8 @@ function Test-Strings($path) {
     for ($i = 0; $i -lt $strings.length ; $i++) {
         # check that the node contains a name property
         if ("name" -cnotin $strings[$i].PSobject.Properties.Name) {
-            Write-Output "The following data object is missing a name property. Make sure the input file is correctly formatted"
-            Write-Output $strings[$i]
+            Write-Host "The following data object is missing a name property. Make sure the input file is correctly formatted"
+            Write-Host $strings[$i]
             exit 1
         }
 
@@ -88,18 +88,18 @@ function Test-Strings($path) {
         $sortedStringsName = $sortedStrings[$i].name
 
         if ($NOISY) {
-            Write-Output "Checking $stringsName against expected string $sortedStringsName"
+            Write-Host "Checking $stringsName against expected string $sortedStringsName"
         }
     
         if ($stringsName -ne $sortedStringsName) {
-            Write-Output "`nThe content of $path isn't sorted alphabetically."
-            Write-Output "Please sort it using the script in scripts/sort_strings.ps1:"
-            Write-Output "./sort_strings.ps1 -PATHS $path"
+            Write-Host "`nThe content of $path isn't sorted alphabetically."
+            Write-Host "Please sort it using the script in scripts/sort_strings.ps1:"
+            Write-Host "./sort_strings.ps1 -PATHS $path"
             exit 1
         }
     }
 
-    Write-Output "Strings in $path are sorted`n"
+    Write-Host "Strings in $path are sorted`n"
 }
 
 #endregion
