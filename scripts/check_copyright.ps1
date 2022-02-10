@@ -33,7 +33,7 @@ Param(
     [switch]$NOISY
 )
 
-Write-Output "Started copyright check at $(Get-Date)"
+Write-Host "Started copyright check at $(Get-Date)"
 
 $INCLUDES = @("*.cs", "*.sh", "*.wxs", "*.wxi", "*.wxl", "*.patch")
 $EXCLUDES = @("*.Designer.cs")
@@ -45,7 +45,7 @@ $files = Get-ChildItem -Recurse -File -Path $REPO -Include $INCLUDES -Exclude $E
 
 foreach ($file in $files) {
     if ($NOISY) {
-        Write-Output "Copyright check on $file"
+        Write-Host "Copyright check on $file"
     }
 
     $result = Select-String -Path $file -Pattern 'Copyright (c) Citrix Systems, Inc.' -CaseSensitive -SimpleMatch
@@ -54,7 +54,7 @@ foreach ($file in $files) {
     }
 }
 
-$badFiles | Select-Object FullName | Write-Output
+$badFiles | Select-Object FullName | Write-Host
 
-Write-Output "Finished copyright check at $(Get-Date)"
+Write-Host "Finished copyright check at $(Get-Date)"
 exit $badFiles.Count
