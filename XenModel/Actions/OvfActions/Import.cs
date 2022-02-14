@@ -321,13 +321,7 @@ namespace XenAdmin.Actions.OvfActions
                     virtualSize = vhdDisk.Capacity;
                     dataStream = File.OpenRead(filePath);
                     dataLength = dataStream.Length;
-                    format = "vhd";
-                }
-                else if (VirtualDisk.SupportedDiskFormats.Any(f => ext.ToLower().EndsWith(f.ToLower())))
-                {
-                    vhdDisk = VirtualDisk.OpenDisk(sourcefile, FileAccess.Read);
-                    dataStream = vhdDisk.Content;
-                    dataLength = virtualSize = vhdDisk.Capacity;
+                    format = "&format=vhd";
                 }
                 else if (ext.ToLower().EndsWith("iso"))
                 {
@@ -339,6 +333,12 @@ namespace XenAdmin.Actions.OvfActions
 
                     dataStream = File.OpenRead(filePath);
                     dataLength = virtualSize = dataStream.Length;
+                }
+                else if (VirtualDisk.SupportedDiskFormats.Any(f => ext.ToLower().EndsWith(f.ToLower())))
+                {
+                    vhdDisk = VirtualDisk.OpenDisk(sourcefile, FileAccess.Read);
+                    dataStream = vhdDisk.Content;
+                    dataLength = virtualSize = vhdDisk.Capacity;
                 }
                 else
                 {
@@ -414,7 +414,7 @@ namespace XenAdmin.Actions.OvfActions
                     Host = Connection.Hostname,
                     Port = Connection.Port,
                     Path = "/import_raw_vdi",
-                    Query = string.Format("session_id={0}&task_id={1}&vdi={2}&format={3}",
+                    Query = string.Format("session_id={0}&task_id={1}&vdi={2}{3}",
                         Connection.Session.opaque_ref, taskRef.opaque_ref, vdiuuid, format)
                 };
 
