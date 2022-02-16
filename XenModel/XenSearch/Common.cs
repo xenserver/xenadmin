@@ -531,7 +531,7 @@ namespace XenAdmin.XenSearch
             if (o is VM vm)
             {
                 return vm.is_a_real_vm() &&
-                       vm.power_state != vm_power_state.Running &&
+                       vm.power_state == vm_power_state.Running &&
                        vm.GetVirtualisationStatus(out _).HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED)
                     ? PropertyAccessorHelper.vmNetworkUsageString(vm)
                     : null;
