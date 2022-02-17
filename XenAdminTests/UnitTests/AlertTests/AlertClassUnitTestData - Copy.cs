@@ -31,14 +31,8 @@
 
 namespace XenAdminTests.UnitTests.AlertTests
 {
-    internal class AlertClassUnitTestData
+    internal class UpdateAlertClassUnitTestData : AlertClassUnitTestData
     {
-        public string AppliesTo;
-        public string Description;
-        public string FixLinkText;
-        public string HelpID;
-        public string HelpLinkText;
-        public string Title;
-        public string Priority;
+        public string Checksum;
     }
 }
