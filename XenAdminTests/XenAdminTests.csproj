@@ -95,7 +95,6 @@
     <Compile Include="TreeTests\FlickerFreeTreeViewTests.cs" />
     <Compile Include="TreeTests\MultiSelectTreeViewTests.cs" />
     <Compile Include="TreeTests\VirtualTreeViewTests.cs" />
-    <Compile Include="UnitTests\AlertTests\AlertClassUnitTestData - Copy.cs" />
     <Compile Include="UnitTests\AlertTests\AlertClassUnitTestData.cs" />
     <Compile Include="UnitTests\AlertTests\DuplicateIqnAlertTests.cs" />
     <Compile Include="UnitTests\AlertTests\GuiOldAlertTest.cs" />

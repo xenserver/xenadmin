@@ -41,4 +41,9 @@ namespace XenAdminTests.UnitTests.AlertTests
         public string Title;
         public string Priority;
     }
+
+    internal class UpdateAlertClassUnitTestData : AlertClassUnitTestData
+    {
+        public string Checksum;
+    }
 }
