@@ -463,7 +463,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     groups.Add(new CheckGroup(Messages.CHECKING_CANEVACUATE_STATUS, evacuateChecks));
             }
 
-            var newServerversion = highestNewVersion ?? UpdateAlert.NewServerVersion;
+            var newServerversion = highestNewVersion ?? UpdateAlert?.NewServerVersion;
 
             if (newServerversion != null)
             {
