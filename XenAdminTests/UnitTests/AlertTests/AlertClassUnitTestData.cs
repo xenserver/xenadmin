@@ -31,7 +31,7 @@
 
 namespace XenAdminTests.UnitTests.AlertTests
 {
-    internal struct AlertClassUnitTestData
+    internal class AlertClassUnitTestData
     {
         public string AppliesTo;
         public string Description;
@@ -40,6 +40,10 @@ namespace XenAdminTests.UnitTests.AlertTests
         public string HelpLinkText;
         public string Title;
         public string Priority;
+    }
+
+    internal class UpdateAlertClassUnitTestData : AlertClassUnitTestData
+    {
         public string Checksum;
     }
 }

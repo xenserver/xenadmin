@@ -218,7 +218,7 @@ namespace XenAdmin.Actions
                     calculatedChecksum = string.Join("", hash.Select(b => $"{b:x2}"));
 
                 // Check if calculatedChecksum matches what is in chcupdates.xml
-                if (checksum.ToLower() != calculatedChecksum.ToLower())
+                if (!checksum.Equals(calculatedChecksum, StringComparison.InvariantCultureIgnoreCase))
                     throw new Exception(Messages.UPDATE_CLIENT_INVALID_CHECKSUM );
             }
 

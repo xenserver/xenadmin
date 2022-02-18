@@ -47,7 +47,7 @@ namespace XenAdminTests.UnitTests.AlertTests
                 new DateTime(2011, 12, 09).ToString(), "abcde");
 
             ClassVerifiers.VerifyGetters(new ClientUpdateAlert(version),
-                new AlertClassUnitTestData
+                new UpdateAlertClassUnitTestData
                 {
                     AppliesTo = BrandManager.BrandConsole,
                     FixLinkText = "Go to Web Page",
