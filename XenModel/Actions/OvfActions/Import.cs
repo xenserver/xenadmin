@@ -533,13 +533,14 @@ namespace XenAdmin.Actions.OvfActions
                 //There may be more than one entries corresponding to CPUs
                 //The VirtualQuantity in each one is Cores
 
-                foreach (RASD_Type rasd in rasds)
+                foreach (var rasd in rasds)
                 {
                     cpuCount += rasd.VirtualQuantity.Value;
                     // CA-361078: Older versions of CHC/XC used to set the limit to 100,000 by default, and use 
                     // VirtualQuantity for max vCPUs.
                     // This way, we keep backwards compatibility with older OVFs.
-                    maxCpusCount += rasd.Limit.Value >= 100_000 ? rasd.VirtualQuantity.Value : rasd.Limit.Value;
+                    var limit = rasd.Limit?.Value ?? 100_000;
+                    maxCpusCount += limit >= 100_000 ? rasd.VirtualQuantity.Value : limit;
                 }
                    
             }
