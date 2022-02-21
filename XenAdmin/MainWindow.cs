@@ -245,6 +245,8 @@ namespace XenAdmin
             licenseTimer = new LicenseTimer(licenseManagerLauncher);
             GeneralPage.LicenseLauncher = licenseManagerLauncher;
 
+            updateClientToolStripMenuItem.Visible = false;
+
             xenSourceOnTheWebToolStripMenuItem.Text = string.Format(xenSourceOnTheWebToolStripMenuItem.Text,
                 BrandManager.ProductBrand);
             viewApplicationLogToolStripMenuItem.Text = string.Format(viewApplicationLogToolStripMenuItem.Text, BrandManager.BrandConsole);
@@ -3340,7 +3342,7 @@ namespace XenAdmin
         private void dismissToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Program.Invoke(this, () => { updateClientToolStripMenuItem.Visible = false; });
-            updateAlert.Dismiss();
+            updateAlert?.Dismiss();
         }
 
         private void downloadInstallToolStripMenuItem_Click(object sender, EventArgs e)
