@@ -764,7 +764,8 @@ namespace XenAdmin.Core
             foreach (IXenConnection connection in ConnectionsManager.XenConnectionsCopy)
                 actions.Add(new RestoreDismissedUpdatesAction(connection));
 
-            var action = new ParallelAction(Messages.RESTORE_DISMISSED_UPDATES, Messages.RESTORING, Messages.COMPLETED, actions, true, false);
+            var action = new ParallelAction(Messages.RESTORE_DISMISSED_UPDATES, Messages.RESTORING, Messages.COMPLETED,
+                actions, suppressHistory: true, showSubActionsDetails: false);
             action.Completed += action_Completed;
 
             RestoreDismissedUpdatesStarted?.Invoke();

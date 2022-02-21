@@ -109,11 +109,12 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
             if (subActions.Count == 0)
                 return null;
 
-            return subActions.Count == 1
-                       ? subActions[0]
-                       : new ParallelAction(pool.Connection, Messages.ACTION_MULTIPLE_DR_TASK_CREATE_TITLE,
-                                            Messages.ACTION_MULTIPLE_DR_TASK_CREATE_START,
-                                            Messages.ACTION_MULTIPLE_DR_TASK_CREATE_END, subActions);
+            if (subActions.Count == 1)
+                return subActions[0];
+
+            return new ParallelAction(Messages.ACTION_MULTIPLE_DR_TASK_CREATE_TITLE,
+                Messages.ACTION_MULTIPLE_DR_TASK_CREATE_START,
+                Messages.ACTION_MULTIPLE_DR_TASK_CREATE_END, subActions, pool.Connection);
         }
     }
 

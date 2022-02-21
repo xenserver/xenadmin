@@ -120,8 +120,9 @@ namespace XenAdmin.Dialogs
                 var batch = from VDI vdi in _vdis
                     select (AsyncAction)new MoveVirtualDiskAction(connection, vdi, SelectedSR);
 
-                new ParallelAction(connection, title, Messages.ACTION_MOVING_X_VDIS_STARTED,
-                    Messages.ACTION_MOVING_X_VDIS_COMPLETED, batch.ToList(), BATCH_SIZE).RunAsync();
+                new ParallelAction(title, Messages.ACTION_MOVING_X_VDIS_STARTED,
+                    Messages.ACTION_MOVING_X_VDIS_COMPLETED, batch.ToList(),
+                    connection, maxNumberOfParallelActions: BATCH_SIZE).RunAsync();
             }
         }
 
@@ -160,8 +161,9 @@ namespace XenAdmin.Dialogs
                 var batch = from VDI vdi in _vdis
                     select (AsyncAction)new MigrateVirtualDiskAction(connection, vdi, SelectedSR);
 
-                new ParallelAction(connection, title, Messages.ACTION_MIGRATING_X_VDIS_STARTED,
-                    Messages.ACTION_MIGRATING_X_VDIS_COMPLETED, batch.ToList(), BATCH_SIZE).RunAsync();
+                new ParallelAction(title, Messages.ACTION_MIGRATING_X_VDIS_STARTED,
+                    Messages.ACTION_MIGRATING_X_VDIS_COMPLETED, batch.ToList(),
+                    connection, maxNumberOfParallelActions: BATCH_SIZE).RunAsync();
             }
         }
     }

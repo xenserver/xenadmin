@@ -44,38 +44,24 @@ namespace XenAdmin.Actions
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        protected readonly List<AsyncAction> subActions;
+        private readonly List<AsyncAction> subActions;
         private readonly string endDescription;
-        public bool ShowSubActionsDetails { get; private set; }
+        public bool ShowSubActionsDetails { get; }
         public string SubActionTitle { get; private set; }
         public string SubActionDescription { get; private set; }
-        public bool StopOnFirstException { get; private set; }
+        private readonly bool _stopOnFirstException;
 
-        public MultipleAction(IXenConnection connection, string title, string startDescription, string endDescription, List<AsyncAction> subActions, bool suppressHistory)
+        public MultipleAction(IXenConnection connection, string title, string startDescription,
+            string endDescription, List<AsyncAction> subActions, bool suppressHistory = false,
+            bool showSubActionsDetails = false, bool stopOnFirstException = false)
             : base(connection, title, startDescription, suppressHistory)
         {
             this.endDescription = endDescription;
             this.subActions = subActions;
-            this.Completed += MultipleAction_Completed;
-            RegisterEvents();
-        }
-
-        public MultipleAction(IXenConnection connection, string title, string startDescription, string endDescription, List<AsyncAction> subActions)
-            : this(connection, title, startDescription, endDescription, subActions, false)
-        {}
-
-        public MultipleAction(IXenConnection connection, string title, string startDescription, string endDescription,
-            List<AsyncAction> subActions, bool suppressHistory, bool showSubActionsDetails)
-            : this(connection, title, startDescription, endDescription, subActions, suppressHistory)
-        {
             ShowSubActionsDetails = showSubActionsDetails;
-        }
-
-        public MultipleAction(IXenConnection connection, string title, string startDescription, string endDescription,
-            List<AsyncAction> subActions, bool suppressHistory, bool showSubActionsDetails, bool stopOnFirstException)
-            : this(connection, title, startDescription, endDescription, subActions, suppressHistory, showSubActionsDetails)
-        {
-            StopOnFirstException = stopOnFirstException;
+            _stopOnFirstException = stopOnFirstException;
+            Completed += MultipleAction_Completed;
+            RegisterEvents();
         }
 
         // The multiple action gets its ApiMethodsToRoleCheck by accumulating the lists from each of the subactions
@@ -90,7 +76,7 @@ namespace XenAdmin.Actions
             }
         }
         
-        protected override void Run()
+        protected sealed override void Run()
         {
             PercentComplete = 0;
             var exceptions = new List<Exception>();
@@ -138,8 +124,7 @@ namespace XenAdmin.Actions
 
         private void SubActionChanged(ActionBase sender)
         {
-            AsyncAction subAction = sender as AsyncAction;
-            if (subAction != null)
+            if (sender is AsyncAction subAction)
             {
                 SubActionTitle = subAction.Title;
                 SubActionDescription = subAction.Description;
@@ -154,7 +139,7 @@ namespace XenAdmin.Actions
             int n = subActions.Count;
             foreach (var action in subActions)
                 total += action.PercentComplete;
-            PercentComplete = (int)(total / n);
+            PercentComplete = total / n;
         }
 
         protected virtual void RunSubActions(List<Exception> exceptions)
@@ -170,8 +155,7 @@ namespace XenAdmin.Actions
                 }
                 catch (Exception e)
                 {
-                    Failure f = e as Failure;
-                    if (f != null && Connection != null && f.ErrorDescription[0] == Failure.RBAC_PERMISSION_DENIED)
+                    if (e is Failure f && Connection != null && f.ErrorDescription[0] == Failure.RBAC_PERMISSION_DENIED)
                     {
                         Failure.ParseRBACFailure(f, Connection, Session ?? Connection.Session);
                     }
@@ -179,7 +163,7 @@ namespace XenAdmin.Actions
                     // Record the first exception we come to. Though later if there are more than one we will replace this with non specific one.
                     if (Exception == null)
                         Exception = e;
-                    if (StopOnFirstException)
+                    if (_stopOnFirstException)
                         break;
                 }
             }
