@@ -175,6 +175,9 @@ namespace XenAdmin.Actions
 
         protected override void RecalculatePercentComplete()
         {
+            if (actionsCount == 0)
+                return;
+
             int total = 0;
             foreach (IXenConnection connection in actionsByConnection.Keys)
             {
