@@ -180,7 +180,7 @@ namespace XenAdmin.Wizards.DRWizards
                     bool poolMetadataDetected = vdis.Any(vdi => vdi.type == vdi_type.metadata);
 
                     var row = dataGridViewSRs.Rows.Cast<SrRow>().FirstOrDefault(r => r.SrUuid == sr.uuid);
-                    if (row != null)
+                    if (row == null)
                     {
                         row = new SrRow(sr, poolMetadataDetected, SelectedSRsUuids.Contains(sr.uuid));
                         dataGridViewSRs.Rows.Add(row);
@@ -193,7 +193,7 @@ namespace XenAdmin.Wizards.DRWizards
                     foreach (var srInfo in scannedDevice.SRList)
                     {
                         var row = dataGridViewSRs.Rows.Cast<SrRow>().FirstOrDefault(r => r.SrUuid == srInfo.UUID);
-                        if (row != null)
+                        if (row == null)
                         {
                             row = new SrRow(srInfo, scannedDevice.Type, srInfo.PoolMetadataDetected,
                                             SelectedSRsUuids.Contains(srInfo.UUID));
@@ -358,7 +358,7 @@ namespace XenAdmin.Wizards.DRWizards
             {
                 var row = dataGridViewSRs.Rows.Cast<SrRow>().FirstOrDefault(r => r.SrUuid == srInfo.UUID);
 
-                if (row != null)
+                if (row == null)
                 {
                     row = new SrRow(srInfo, type, srInfo.PoolMetadataDetected, srInfo.PoolMetadataDetected);
                     dataGridViewSRs.Rows.Add(row);
