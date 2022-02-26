@@ -336,7 +336,7 @@ namespace XenAdmin.TabPages
             foreach (VM vm in vms)
             {
                 MemSettings settings =
-                    vm.has_ballooning()
+                    vm.SupportsBallooning()
                         ? new MemSettings(true, vm.power_state, vm.memory_static_min, vm.memory_static_max,
                             vm.memory_dynamic_min, vm.memory_dynamic_max)
                         : new MemSettings(false, vm.power_state, 0, vm.memory_static_max, 0, 0);  // don't consider other mem settings if ballooning off
@@ -457,7 +457,7 @@ namespace XenAdmin.TabPages
         private void SetupDeprecationBanner()
         {
             if (Helpers.QuebecOrGreater(xenObject.Connection) &&
-                vms.Any(vm => vm.has_ballooning() && vm.memory_dynamic_min != vm.memory_static_max))
+                vms.Any(vm => vm.SupportsBallooning() && vm.memory_dynamic_min != vm.memory_static_max))
             {
                 Banner.AppliesToVersion = string.Format(Messages.STRING_SPACE_STRING, BrandManager.ProductBrand, BrandManager.ProductVersion81);
                 Banner.BannerType = DeprecationBanner.Type.Deprecation;

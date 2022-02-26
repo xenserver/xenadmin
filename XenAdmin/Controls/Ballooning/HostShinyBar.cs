@@ -120,7 +120,7 @@ namespace XenAdmin.Controls.Ballooning
             string bytesString = Util.MemorySizeStringSuitableUnits(mem, false);
             string caption = name + "\n" + bytesString;
             string toolTip = name + "\n" + string.Format(Messages.CURRENT_MEMORY_USAGE, Util.MemorySizeStringSuitableUnits(mem, true));
-            if (vm != null && vm.has_ballooning())
+            if (vm != null && vm.SupportsBallooning())
             {
                 if (vm.memory_dynamic_max == vm.memory_static_max)
                     toolTip += string.Format("\n{0}: {1}\n{2}: {3}",
