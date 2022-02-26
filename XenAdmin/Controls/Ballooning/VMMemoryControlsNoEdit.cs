@@ -98,7 +98,7 @@ namespace XenAdmin.Controls.Ballooning
 
             vmShinyBar.Populate(vms, false);
 
-            if (vm0.has_ballooning())
+            if (vm0.SupportsBallooning())
             {
                 valueDynMin.Text = Util.MemorySizeStringSuitableUnits(vm0.memory_dynamic_min, true);
                 valueDynMax.Text = Util.MemorySizeStringSuitableUnits(vm0.memory_dynamic_max, true);
