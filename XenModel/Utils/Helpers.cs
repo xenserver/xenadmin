@@ -91,8 +91,7 @@ namespace XenAdmin.Core
             return host.PlatformVersion();
         }
 
-        private delegate string HostToStr(Host host);
-        private static string FromHostOrCoordinator(Host host, HostToStr fn)
+        private static string FromHostOrCoordinator(Host host, Func<Host, string> fn)
         {
             if (host == null)
                 return null;
@@ -275,6 +274,8 @@ namespace XenAdmin.Core
             }
             return false;
         }
+
+        #region Versions
 
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool DundeeOrGreater(IXenConnection conn)
@@ -476,7 +477,7 @@ namespace XenAdmin.Core
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool Post82X(IXenConnection conn)
         {
-            return conn == null || Post82X(Helpers.GetCoordinator(conn));
+            return conn == null || Post82X(GetCoordinator(conn));
         }
 
         /// <param name="host">May be null, in which case true is returned.</param>
@@ -507,6 +508,36 @@ namespace XenAdmin.Core
         {
             return platformVersion != null && productVersionCompare(platformVersion, "3.2.1") >= 0;
         }
+
+        public static bool XapiEqualOrGreater_1_290_0(IXenConnection conn)
+        {
+            var coordinator = GetCoordinator(conn);
+            return coordinator == null || productVersionCompare(coordinator.GetXapiVersion(), "1.290.0") >= 0;
+        }
+
+        public static bool XapiEqualOrGreater_1_290_0(Host host)
+        {
+            return host == null || productVersionCompare(host.GetXapiVersion(), "1.290.0") >= 0;
+        }
+
+        public static bool XapiEqualOrGreater_1_313_0(IXenConnection conn)
+        {
+            var coordinator = GetCoordinator(conn);
+            return coordinator == null || productVersionCompare(coordinator.GetXapiVersion(), "1.313.0") >= 0;
+        }
+
+        public static bool XapiEqualOrGreater_1_313_0(Host host)
+        {
+            return host == null || productVersionCompare(host.GetXapiVersion(), "1.313.0") >= 0;
+        }
+
+        public static bool XapiEqualOrGreater_22_5_0(IXenConnection conn)
+        {
+            var coordinator = GetCoordinator(conn);
+            return coordinator == null || productVersionCompare(coordinator.GetXapiVersion(), "22.5.0") >= 0;
+        }
+
+        #endregion
 
         // CP-3435: Disable Check for Updates in Common Criteria Certification project
         public static bool CommonCriteriaCertificationRelease
