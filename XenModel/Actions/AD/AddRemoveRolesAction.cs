@@ -64,7 +64,7 @@ namespace XenAdmin.Actions
         protected override void Run()
         {
             var serverRoles = Connection.Cache.Roles
-                .Where(r => (!Helpers.Post82X(Connection) || !r.is_internal) && r.subroles.Count > 0)
+                .Where(r => (!Helpers.Post82X(Connection) || !Helpers.XapiEqualOrGreater_22_5_0(Connection) || !r.is_internal) && r.subroles.Count > 0)
                 .ToList();
 
             var toAdd = serverRoles.Where(role => _newRoles.Contains(role) &&

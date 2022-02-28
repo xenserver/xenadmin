@@ -642,6 +642,11 @@ namespace XenAPI
             return Get(software_version, "platform_version");
         }
 
+        public string GetXapiVersion()
+        {
+            return Get(software_version, "xapi");
+        }
+
         /// <summary>
         /// For legacy build numbers only (used to be integers + one char at the end)
         /// From Falcon, this property is not used.
@@ -758,11 +763,6 @@ namespace XenAPI
             }
 
             return updates;
-        }
-
-        public string XAPI_version()
-        {
-            return Get(software_version, "xapi");
         }
 
         public bool LinuxPackPresent()

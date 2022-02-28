@@ -1775,7 +1775,7 @@ namespace XenAdmin
                 s.Connection != null && Helpers.StockholmOrGreater(s.Connection) &&
                 !s.Connection.Cache.Hosts.Any(Host.RestrictPoolSecretRotation));
             toolStripMenuItemEnableTls.Available = SelectionManager.Selection.Any(s =>
-                s.Connection != null && Helpers.Post82X(s.Connection) &&
+                s.Connection != null && Helpers.Post82X(s.Connection) && Helpers.XapiEqualOrGreater_1_290_0(s.Connection) &&
                 !s.Connection.Cache.Hosts.Any(Host.RestrictCertificateVerification) &&
                 s.Connection.Cache.Pools.Any(p => !p.tls_verification_enabled));
         }

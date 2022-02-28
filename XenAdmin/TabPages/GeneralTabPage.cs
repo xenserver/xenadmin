@@ -1098,7 +1098,7 @@ namespace XenAdmin.TabPages
 
                     var thumbprint = string.Format(Messages.CERTIFICATE_THUMBPRINT_VALUE, certificate.fingerprint);
 
-                    if (!Helpers.Post82X(host) || certificate.type == certificate_type.host)
+                    if (!Helpers.Post82X(host) || !Helpers.XapiEqualOrGreater_1_290_0(host) || certificate.type == certificate_type.host)
                         pdSectionCertificate.AddEntry(GetCertificateType(certificate.type), $"{validity}\n{thumbprint}",
                             new CommandToolStripMenuItem(new InstallCertificateCommand(Program.MainWindow, host), true),
                             new CommandToolStripMenuItem(new ResetCertificateCommand(Program.MainWindow, host), true));
@@ -1169,15 +1169,17 @@ namespace XenAdmin.TabPages
                     s.AddEntry(FriendlyName("host.enabled"), Messages.YES, item);
                 }
 
-                if (Helpers.Post82X(host))
+                if (Helpers.Post82X(host) && Helpers.XapiEqualOrGreater_1_290_0(host))
                 {
                     var pool = Helpers.GetPoolOfOne(xenObject.Connection);
 
-                    if (pool.tls_verification_enabled && host.tls_verification_enabled)
+                    if (pool.tls_verification_enabled &&
+                        (!Helpers.XapiEqualOrGreater_1_313_0(host) || host.tls_verification_enabled))
                     {
                         s.AddEntry(Messages.CERTIFICATE_VERIFICATION_KEY, Messages.ENABLED);
                     }
-                    else if (pool.tls_verification_enabled && isStandAloneHost)
+                    else if (pool.tls_verification_enabled && Helpers.XapiEqualOrGreater_1_313_0(host) &&
+                             !host.tls_verification_enabled && isStandAloneHost)
                     {
                         s.AddEntry(Messages.CERTIFICATE_VERIFICATION_KEY,
                             Messages.CERTIFICATE_VERIFICATION_HOST_DISABLED_STANDALONE,
@@ -1313,12 +1315,13 @@ namespace XenAdmin.TabPages
                         : Helpers.GetFriendlyLicenseName(p));
                 s.AddEntry(Messages.NUMBER_OF_SOCKETS, p.CpuSockets().ToString());
 
-                if (Helpers.Post82X(p.Connection))
+                if (Helpers.Post82X(p.Connection) && Helpers.XapiEqualOrGreater_1_290_0(p.Connection))
                 {
                     if (p.tls_verification_enabled)
                     {
                         var disabledHosts = p.Connection.Cache.Hosts.Where(h => !h.tls_verification_enabled).ToList();
-                        if (disabledHosts.Count > 0)
+
+                        if (Helpers.XapiEqualOrGreater_1_313_0(p.Connection) && disabledHosts.Count > 0)
                         {
                             var sb = new StringBuilder(Messages.CERTIFICATE_VERIFICATION_HOST_DISABLED_IN_POOL);
                             foreach (var h in disabledHosts)
