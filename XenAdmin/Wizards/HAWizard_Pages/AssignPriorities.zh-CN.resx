@@ -493,7 +493,7 @@
     <value>True</value>
   </metadata>
   <data name="colImage.HeaderText" xml:space="preserve">
-    <value />
+    <value/>
   </data>
   <data name="colImage.Width" type="System.Int32, mscorlib">
     <value>5</value>

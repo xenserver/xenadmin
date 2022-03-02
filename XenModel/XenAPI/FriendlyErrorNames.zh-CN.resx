@@ -651,6 +651,12 @@
   <data name="INVALID_REPOMD_XML" xml:space="preserve">
     <value>repomd.xml 无效。</value>
   </data>
+  <data name="INVALID_REPOSITORY_PROXY_CREDENTIAL" xml:space="preserve">
+    <value>存储库代理用户名/密码无效。</value>
+  </data>
+  <data name="INVALID_REPOSITORY_PROXY_URL" xml:space="preserve">
+    <value>存储库代理 URL 无效。</value>
+  </data>
   <data name="INVALID_UPDATE" xml:space="preserve">
     <value>上载的更新程序包无效。</value>
   </data>

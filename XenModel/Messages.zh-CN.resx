@@ -60,45 +60,45 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema id="root" xmlns="" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
     <xsd:element msdata:IsDataSet="true" name="root">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element minOccurs="0" name="value" type="xsd:string" />
+                <xsd:element minOccurs="0" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string" />
-                <xsd:element minOccurs="0" msdata:Ordinal="2" name="comment" type="xsd:string" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
+                <xsd:element minOccurs="0" msdata:Ordinal="2" name="comment" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute msdata:Ordinal="1" name="name" type="xsd:string" use="required" />
-              <xsd:attribute msdata:Ordinal="3" name="type" type="xsd:string" />
-              <xsd:attribute msdata:Ordinal="4" name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute msdata:Ordinal="1" name="name" type="xsd:string" use="required"/>
+              <xsd:attribute msdata:Ordinal="3" name="type" type="xsd:string"/>
+              <xsd:attribute msdata:Ordinal="4" name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -2595,22 +2595,22 @@
     <value>无法创建 DVD 驱动器，因为已达到允许您为此虚拟机创建的虚拟磁盘数量上限。</value>
   </data>
   <data name="CERTIFICATE_CA_ALERT_EXPIRED_DESCIRPTION" xml:space="preserve">
-    <value>{0} 的可信 CA 证书已于 {1} 过期。</value>
+    <value>“{1}”的可信 CA 证书“{0}”已于 {2} 过期。</value>
   </data>
   <data name="CERTIFICATE_CA_ALERT_EXPIRED_TITLE" xml:space="preserve">
-    <value>{0} 上的可信 CA 证书已过期</value>
+    <value>{1} 上的可信 CA 证书“{0}”已过期</value>
   </data>
   <data name="CERTIFICATE_CA_ALERT_EXPIRING_DESCRIPTION" xml:space="preserve">
-    <value>“{0}”的可信 CA 证书将于 {1} 过期。</value>
+    <value>“{1}”的可信 CA 证书“{0}”将于 {2} 过期。</value>
   </data>
   <data name="CERTIFICATE_CA_ALERT_EXPIRING_TITLE_DAYS" xml:space="preserve">
-    <value>{0} 上的可信 CA 证书将在 {1} 天后过期</value>
+    <value>{1} 上的可信 CA 证书“{0}”将于 {2} 天后过期</value>
   </data>
   <data name="CERTIFICATE_CA_ALERT_EXPIRING_TITLE_HOURS" xml:space="preserve">
-    <value>{0} 上的可信 CA 证书将在 {1} 小时后过期</value>
+    <value>{1} 上的可信 CA 证书“{0}”将于 {2} 小时后过期</value>
   </data>
   <data name="CERTIFICATE_CA_ALERT_EXPIRING_TITLE_MINUTES" xml:space="preserve">
-    <value>{0} 上的可信 CA 证书将在 {1} 分钟后过期</value>
+    <value>{1} 上的可信 CA 证书“{0}”将于 {2} 分钟后过期</value>
   </data>
   <data name="CERTIFICATE_FILETYPES" xml:space="preserve">
     <value>TLS 证书文件 (*.pem;*.crt;*.cer)|*.pem;*.crt;*.cer</value>
@@ -2932,6 +2932,18 @@
   </data>
   <data name="CONFIGURE_HA_ELLIPSIS" xml:space="preserve">
     <value>配置高可用性(&amp;C)...</value>
+  </data>
+  <data name="CONFIGURE_SSH_CONSOLE_ERROR" xml:space="preserve">
+    <value>无法启动您的外部 SSH 控制台。请检查您是否选择了有效的文件。</value>
+  </data>
+  <data name="CONFIGURE_SSH_CONSOLE_FILE_NOT_CONFIGURED" xml:space="preserve">
+    <value>尚未配置外部 SSH 控制台。</value>
+  </data>
+  <data name="CONFIGURE_SSH_CONSOLE_FILE_NOT_FOUND" xml:space="preserve">
+    <value>与您的外部 SSH 控制台关联的文件不存在。请检查您是否选择了有效的文件。</value>
+  </data>
+  <data name="CONFIGURE_SSH_CONSOLE_TITLE" xml:space="preserve">
+    <value>配置 SSH 控制台(&amp;S)</value>
   </data>
   <data name="CONFIGURING_WLB" xml:space="preserve">
     <value>正在配置 Workload Balancing </value>
@@ -3791,7 +3803,7 @@
     <value>将 VM 复制到 {0}</value>
   </data>
   <data name="COPYING_TEMPLATE" xml:space="preserve">
-    <value>正在复制模板“{0}”</value>
+    <value>正在将模板“{0}”复制到 SR“{1}”</value>
   </data>
   <data name="COPYRIGHT" xml:space="preserve">
     <value>版权所有 © {0} 保留所有权利。</value>
@@ -5937,6 +5949,21 @@
   <data name="EXTERNAL_PLUGIN_WIN32" xml:space="preserve">
     <value>无法运行插件可执行文件。有关详细信息，请参阅客户端日志。</value>
   </data>
+  <data name="EXTERNAL_TOOLS" xml:space="preserve">
+    <value>外部工具</value>
+  </data>
+  <data name="EXTERNAL_TOOLS_DETAILS" xml:space="preserve">
+    <value>管理外部工具</value>
+  </data>
+  <data name="EXTERNAL_TOOLS_FILE_INVALID" xml:space="preserve">
+    <value>文件无效。请选择 .exe 文件。</value>
+  </data>
+  <data name="EXTERNAL_TOOLS_OPEN_FILE_TITLE" xml:space="preserve">
+    <value>选择 SSH 控制台</value>
+  </data>
+  <data name="EXTERNAL_TOOLS_OPEN_FILE_TYPE" xml:space="preserve">
+    <value>可执行文件(*.exe)|*.exe</value>
+  </data>
   <data name="FAILED" xml:space="preserve">
     <value>失败</value>
   </data>
@@ -5990,6 +6017,9 @@
   </data>
   <data name="FILE_NAME_IS_DEVICE_NAME_ERROR_MESSAGE" xml:space="preserve">
     <value>文件名不能是设备名称。</value>
+  </data>
+  <data name="FILE_NOT_FOUND" xml:space="preserve">
+    <value>找不到文件</value>
   </data>
   <data name="FILE_PATH_DEVICE_NAME_ERROR_MESSAGE" xml:space="preserve">
     <value>路径部分 {0} 与设备名称匹配。</value>
@@ -7414,9 +7444,6 @@
   <data name="IMPORTVM_IMPORTCOMPLETE" xml:space="preserve">
     <value>VM 的导入已完成</value>
   </data>
-  <data name="IMPORTVM_IMPORTING" xml:space="preserve">
-    <value>正在导入 VM...</value>
-  </data>
   <data name="IMPORTVM_PREP" xml:space="preserve">
     <value>正在准备导入 VM</value>
   </data>
@@ -7428,6 +7455,9 @@
   </data>
   <data name="IMPORTVM_UPDATING_VM" xml:space="preserve">
     <value>正在更新 VM...</value>
+  </data>
+  <data name="IMPORTVM_UPLOADING" xml:space="preserve">
+    <value>正在将“{0}”上载到“{1}”(已完成 {2}%)...</value>
   </data>
   <data name="IMPORTVM_WAITING_FOR_WIZARD" xml:space="preserve">
     <value>正在等待“导入 VM”向导完成...</value>
@@ -12122,7 +12152,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>输入有效主机名或 IP 地址，然后重试。</value>
   </data>
   <data name="SOLUTION_UNKNOWN" xml:space="preserve">
-    <value />
+    <value/>
   </data>
   <data name="SOME_ERRORS_ENCOUNTERED" xml:space="preserve">
     <value>遇到了一些错误。有关详细信息，请参阅应用程序日志。</value>
@@ -12739,7 +12769,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>从 OVF 或 OVA 包导入设备。</value>
   </data>
   <data name="TYPE_PAGE_DESCRIPTION_HEADER_VHD" xml:space="preserve">
-    <value />
+    <value/>
   </data>
   <data name="TYPE_PAGE_DESCRIPTION_HEADER_XVA" xml:space="preserve">
     <value>将本地存储的 VM、模板或快照作为新 VM 导入。</value>
@@ -14061,7 +14091,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>高级</value>
   </data>
   <data name="WLB_ADVANCED_CONFIGURATION_SUBTEXT" xml:space="preserve">
-    <value />
+    <value/>
   </data>
   <data name="WLB_AUDIT_LOG_MAXIMUM" xml:space="preserve">
     <value>最大值</value>
