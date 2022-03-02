@@ -651,6 +651,12 @@
   <data name="INVALID_REPOMD_XML" xml:space="preserve">
     <value>repomd.xml が無効です。</value>
   </data>
+  <data name="INVALID_REPOSITORY_PROXY_CREDENTIAL" xml:space="preserve">
+    <value>リポジトリ プロキシのユーザー名/パスワードが無効です。</value>
+  </data>
+  <data name="INVALID_REPOSITORY_PROXY_URL" xml:space="preserve">
+    <value>リポジトリ プロキシの URL が無効です。</value>
+  </data>
   <data name="INVALID_UPDATE" xml:space="preserve">
     <value>アップロードされたアップデート パッケージが無効です。</value>
   </data>

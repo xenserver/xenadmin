@@ -60,45 +60,45 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema id="root" xmlns="" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
     <xsd:element msdata:IsDataSet="true" name="root">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element minOccurs="0" name="value" type="xsd:string" />
+                <xsd:element minOccurs="0" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string" />
-                <xsd:element minOccurs="0" msdata:Ordinal="2" name="comment" type="xsd:string" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
+                <xsd:element minOccurs="0" msdata:Ordinal="2" name="comment" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute msdata:Ordinal="1" name="name" type="xsd:string" use="required" />
-              <xsd:attribute msdata:Ordinal="3" name="type" type="xsd:string" />
-              <xsd:attribute msdata:Ordinal="4" name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute msdata:Ordinal="1" name="name" type="xsd:string" use="required"/>
+              <xsd:attribute msdata:Ordinal="3" name="type" type="xsd:string"/>
+              <xsd:attribute msdata:Ordinal="4" name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -151,7 +151,7 @@
     <value>与系统的控制组有关的信息和统计数据</value>
   </data>
   <data name="Description-host.system_status-CVSM" xml:space="preserve">
-    <value>{0} Storagelink 的配置设置</value>
+    <value>{0} StorageLink 的配置设置</value>
   </data>
   <data name="Description-host.system_status-device-model" xml:space="preserve">
     <value>设备模拟日志</value>
@@ -1688,11 +1688,20 @@
   <data name="Message.name-vif_qos_failed" xml:space="preserve">
     <value>VM 网络接口 QoS 失败</value>
   </data>
+  <data name="Message.name-vm_checkpointed" xml:space="preserve">
+    <value>已创建虚拟机的检查点</value>
+  </data>
   <data name="Message.name-vm_cloned" xml:space="preserve">
     <value>VM 已克隆</value>
   </data>
   <data name="Message.name-vm_crashed" xml:space="preserve">
     <value>VM 已崩溃</value>
+  </data>
+  <data name="Message.name-vm_migrated" xml:space="preserve">
+    <value>虚拟机已迁移</value>
+  </data>
+  <data name="Message.name-vm_paused" xml:space="preserve">
+    <value>虚拟机已暂停</value>
   </data>
   <data name="Message.name-vm_rebooted" xml:space="preserve">
     <value>VM 已重新引导</value>
@@ -1706,6 +1715,12 @@
   <data name="Message.name-vm_shutdown" xml:space="preserve">
     <value>VM 已关闭</value>
   </data>
+  <data name="Message.name-vm_snapshot_reverted" xml:space="preserve">
+    <value>已还原虚拟机的快照</value>
+  </data>
+  <data name="Message.name-vm_snapshotted" xml:space="preserve">
+    <value>已创建虚拟机的快照</value>
+  </data>
   <data name="Message.name-vm_started" xml:space="preserve">
     <value>VM 已启动</value>
   </data>
@@ -1714,6 +1729,9 @@
   </data>
   <data name="Message.name-vm_uncooperative" xml:space="preserve">
     <value>VM 不合作</value>
+  </data>
+  <data name="Message.name-vm_unpaused" xml:space="preserve">
+    <value>虚拟机已取消暂停</value>
   </data>
   <data name="Message.name-vmss_license_error" xml:space="preserve">
     <value>快照计划失败: 计划的快照的许可证数量不足</value>

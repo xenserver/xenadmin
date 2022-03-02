@@ -60,45 +60,45 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema id="root" xmlns="" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
     <xsd:element msdata:IsDataSet="true" name="root">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element minOccurs="0" name="value" type="xsd:string" />
+                <xsd:element minOccurs="0" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string" />
-                <xsd:element minOccurs="0" msdata:Ordinal="2" name="comment" type="xsd:string" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
+                <xsd:element minOccurs="0" msdata:Ordinal="2" name="comment" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute msdata:Ordinal="1" name="name" type="xsd:string" use="required" />
-              <xsd:attribute msdata:Ordinal="3" name="type" type="xsd:string" />
-              <xsd:attribute msdata:Ordinal="4" name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute msdata:Ordinal="1" name="name" type="xsd:string" use="required"/>
+              <xsd:attribute msdata:Ordinal="3" name="type" type="xsd:string"/>
+              <xsd:attribute msdata:Ordinal="4" name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -1688,11 +1688,20 @@
   <data name="Message.name-vif_qos_failed" xml:space="preserve">
     <value>VM ネットワーク インターフェイス QoS の失敗</value>
   </data>
+  <data name="Message.name-vm_checkpointed" xml:space="preserve">
+    <value>仮想マシンのチェックポイントが作成されました</value>
+  </data>
   <data name="Message.name-vm_cloned" xml:space="preserve">
     <value>VM の複製</value>
   </data>
   <data name="Message.name-vm_crashed" xml:space="preserve">
     <value>VM のクラッシュ</value>
+  </data>
+  <data name="Message.name-vm_migrated" xml:space="preserve">
+    <value>仮想マシンが移行されました</value>
+  </data>
+  <data name="Message.name-vm_paused" xml:space="preserve">
+    <value>仮想マシンが一時停止されました</value>
   </data>
   <data name="Message.name-vm_rebooted" xml:space="preserve">
     <value>VM の再起動</value>
@@ -1706,6 +1715,12 @@
   <data name="Message.name-vm_shutdown" xml:space="preserve">
     <value>VM のシャットダウン</value>
   </data>
+  <data name="Message.name-vm_snapshot_reverted" xml:space="preserve">
+    <value>仮想マシンのスナップショットが復元されました</value>
+  </data>
+  <data name="Message.name-vm_snapshotted" xml:space="preserve">
+    <value>仮想マシンのスナップショットが作成されました</value>
+  </data>
   <data name="Message.name-vm_started" xml:space="preserve">
     <value>VM の起動</value>
   </data>
@@ -1714,6 +1729,9 @@
   </data>
   <data name="Message.name-vm_uncooperative" xml:space="preserve">
     <value>VM の非協調</value>
+  </data>
+  <data name="Message.name-vm_unpaused" xml:space="preserve">
+    <value>仮想マシンの一時停止が解除されました</value>
   </data>
   <data name="Message.name-vmss_license_error" xml:space="preserve">
     <value>スナップショット スケジュールの失敗: 定期的なスナップショット機能のライセンスがありません</value>

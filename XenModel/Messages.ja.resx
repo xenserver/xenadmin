@@ -60,45 +60,45 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema id="root" xmlns="" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
     <xsd:element msdata:IsDataSet="true" name="root">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element minOccurs="0" name="value" type="xsd:string" />
+                <xsd:element minOccurs="0" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string" />
-                <xsd:element minOccurs="0" msdata:Ordinal="2" name="comment" type="xsd:string" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
+                <xsd:element minOccurs="0" msdata:Ordinal="2" name="comment" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute msdata:Ordinal="1" name="name" type="xsd:string" use="required" />
-              <xsd:attribute msdata:Ordinal="3" name="type" type="xsd:string" />
-              <xsd:attribute msdata:Ordinal="4" name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute msdata:Ordinal="1" name="name" type="xsd:string" use="required"/>
+              <xsd:attribute msdata:Ordinal="3" name="type" type="xsd:string"/>
+              <xsd:attribute msdata:Ordinal="4" name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -2599,22 +2599,22 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
     <value>この仮想マシンに許可される仮想ディスクの最大数に達したため、DVD ドライブを作成できません。</value>
   </data>
   <data name="CERTIFICATE_CA_ALERT_EXPIRED_DESCIRPTION" xml:space="preserve">
-    <value>'{0}' の信頼された CA 証明書は {1} で期限切れになりました。</value>
+    <value>'{1}' の信頼された CA 証明書 '{0}' は {2} で期限切れになりました。</value>
   </data>
   <data name="CERTIFICATE_CA_ALERT_EXPIRED_TITLE" xml:space="preserve">
-    <value>{0} の信頼された CA 証明書の有効期限が切れました</value>
+    <value>{1} の信頼された CA 証明書 '{0}' の有効期限が切れました</value>
   </data>
   <data name="CERTIFICATE_CA_ALERT_EXPIRING_DESCRIPTION" xml:space="preserve">
-    <value>'{0}' の信頼された CA 証明書は {1} で期限切れになります。</value>
+    <value>'{1}' の信頼された CA 証明書 '{0}' は {2} に期限切れになります。</value>
   </data>
   <data name="CERTIFICATE_CA_ALERT_EXPIRING_TITLE_DAYS" xml:space="preserve">
-    <value>{0} の信頼された CA 証明書は、あと ​{1} 日で期限切れになります</value>
+    <value>{1} の信頼された CA 証明書 '{0}' は、あと ​{2} 日で期限切れになります</value>
   </data>
   <data name="CERTIFICATE_CA_ALERT_EXPIRING_TITLE_HOURS" xml:space="preserve">
-    <value>{0} の信頼された CA 証明書は、あと ​{1} 時間で期限切れになります</value>
+    <value>{1} の信頼された CA 証明書 '{0}' は、あと ​{2} 時間で期限切れになります</value>
   </data>
   <data name="CERTIFICATE_CA_ALERT_EXPIRING_TITLE_MINUTES" xml:space="preserve">
-    <value>{0} の信頼された CA 証明書は、あと ​{1} 分で期限切れになります</value>
+    <value>{1} の信頼された CA 証明書 '{0}' は、あと ​{2} 分で期限切れになります</value>
   </data>
   <data name="CERTIFICATE_FILETYPES" xml:space="preserve">
     <value>TLS 証明書ファイル (*.pem、*.crt、*.cer)|*.pem;*.crt;*.cer</value>
@@ -2936,6 +2936,18 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   </data>
   <data name="CONFIGURE_HA_ELLIPSIS" xml:space="preserve">
     <value>高可用性の構成(&amp;C)...</value>
+  </data>
+  <data name="CONFIGURE_SSH_CONSOLE_ERROR" xml:space="preserve">
+    <value>外部 SSH コンソールを起動できませんでした。有効なファイルが選択されていることを確認してください。</value>
+  </data>
+  <data name="CONFIGURE_SSH_CONSOLE_FILE_NOT_CONFIGURED" xml:space="preserve">
+    <value>外部 SSH コンソールが構成されていません。</value>
+  </data>
+  <data name="CONFIGURE_SSH_CONSOLE_FILE_NOT_FOUND" xml:space="preserve">
+    <value>外部 SSH コンソールに関連付けられているファイルが存在しません。有効なファイルが選択されていることを確認してください。</value>
+  </data>
+  <data name="CONFIGURE_SSH_CONSOLE_TITLE" xml:space="preserve">
+    <value>SSH コンソールの構成(&amp;S)</value>
   </data>
   <data name="CONFIGURING_WLB" xml:space="preserve">
     <value>ワークロード バランスを構成しています </value>
@@ -3795,7 +3807,7 @@ VM {2} をエクスポートしてもよろしいですか?</value>
     <value>VM を {0} にコピー</value>
   </data>
   <data name="COPYING_TEMPLATE" xml:space="preserve">
-    <value>テンプレート '{0}' をコピーしています</value>
+    <value>テンプレート '{0}' を SR '{1}' にコピーしています</value>
   </data>
   <data name="COPYRIGHT" xml:space="preserve">
     <value>Copyright © {0} All rights reserved.</value>
@@ -5942,6 +5954,21 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="EXTERNAL_PLUGIN_WIN32" xml:space="preserve">
     <value>プラグイン ファイルの実行に失敗しました。詳しくは、クライアント ログを参照してください。</value>
   </data>
+  <data name="EXTERNAL_TOOLS" xml:space="preserve">
+    <value>外部ツール</value>
+  </data>
+  <data name="EXTERNAL_TOOLS_DETAILS" xml:space="preserve">
+    <value>外部ツールを管理します</value>
+  </data>
+  <data name="EXTERNAL_TOOLS_FILE_INVALID" xml:space="preserve">
+    <value>ファイルが無効です。.exe ファイルを選択してください。</value>
+  </data>
+  <data name="EXTERNAL_TOOLS_OPEN_FILE_TITLE" xml:space="preserve">
+    <value>SSH コンソールの選択</value>
+  </data>
+  <data name="EXTERNAL_TOOLS_OPEN_FILE_TYPE" xml:space="preserve">
+    <value>実行可能ファイル (*.exe) |*.exe</value>
+  </data>
   <data name="FAILED" xml:space="preserve">
     <value>失敗</value>
   </data>
@@ -5995,6 +6022,9 @@ CD をイジェクトしてから再試行してください。</value>
   </data>
   <data name="FILE_NAME_IS_DEVICE_NAME_ERROR_MESSAGE" xml:space="preserve">
     <value>ファイル名をデバイス名にすることはできません。</value>
+  </data>
+  <data name="FILE_NOT_FOUND" xml:space="preserve">
+    <value>ファイルが見つかりません</value>
   </data>
   <data name="FILE_PATH_DEVICE_NAME_ERROR_MESSAGE" xml:space="preserve">
     <value>パスのセクション {0} がデバイス名と一致します。</value>
@@ -7419,9 +7449,6 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   <data name="IMPORTVM_IMPORTCOMPLETE" xml:space="preserve">
     <value>VM がインポートされました</value>
   </data>
-  <data name="IMPORTVM_IMPORTING" xml:space="preserve">
-    <value>VM をインポートしています...</value>
-  </data>
   <data name="IMPORTVM_PREP" xml:space="preserve">
     <value>VM のインポート準備</value>
   </data>
@@ -7433,6 +7460,9 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   </data>
   <data name="IMPORTVM_UPDATING_VM" xml:space="preserve">
     <value>VM をアップデートしています...</value>
+  </data>
+  <data name="IMPORTVM_UPLOADING" xml:space="preserve">
+    <value>'{0}' を '{1}' にアップロードしています ({2}% 完了)...</value>
   </data>
   <data name="IMPORTVM_WAITING_FOR_WIZARD" xml:space="preserve">
     <value>VM のインポート ウィザードの完了を待機しています...</value>
@@ -12123,7 +12153,7 @@ NFS ストレージ リポジトリを構成する場合は、NFS サーバー�
     <value>有効なホスト名または IP アドレスを入力して再試行してください。</value>
   </data>
   <data name="SOLUTION_UNKNOWN" xml:space="preserve">
-    <value />
+    <value/>
   </data>
   <data name="SOME_ERRORS_ENCOUNTERED" xml:space="preserve">
     <value>いくつかのエラーが発生しました。詳しくは、アプリケーション ログを参照してください。</value>
@@ -12740,7 +12770,7 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
     <value>OVF または OVA パッケージからアプライアンスをインポートします。</value>
   </data>
   <data name="TYPE_PAGE_DESCRIPTION_HEADER_VHD" xml:space="preserve">
-    <value />
+    <value/>
   </data>
   <data name="TYPE_PAGE_DESCRIPTION_HEADER_XVA" xml:space="preserve">
     <value>ローカルに格納された VM、テンプレート、またはスナップショットを新規 VM としてインポートします。</value>
@@ -14065,7 +14095,7 @@ VM のパフォーマンスを最適化するために、VCPU の数を物理 CP
     <value>詳細</value>
   </data>
   <data name="WLB_ADVANCED_CONFIGURATION_SUBTEXT" xml:space="preserve">
-    <value />
+    <value/>
   </data>
   <data name="WLB_AUDIT_LOG_MAXIMUM" xml:space="preserve">
     <value>最大</value>
