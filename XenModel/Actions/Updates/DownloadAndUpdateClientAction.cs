@@ -39,6 +39,7 @@ using System.Diagnostics;
 using System.Linq;
 using XenCenterLib;
 using System.Security.Cryptography.X509Certificates;
+using System.Windows.Forms;
 
 namespace XenAdmin.Actions
 {
@@ -194,6 +195,7 @@ namespace XenAdmin.Actions
                 // Start the install process, it will handle closing of application.
                 Process.Start(outputPathAndFileName);
                 log.DebugFormat("Update {0} found and install started", updateName);
+                Application.Exit();
             }
             catch (Exception e)
             {

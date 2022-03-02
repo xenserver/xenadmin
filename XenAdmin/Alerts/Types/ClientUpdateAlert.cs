@@ -34,6 +34,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 using XenAdmin.Actions;
+using XenAdmin.Actions.GUIActions;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
 
@@ -106,15 +107,24 @@ namespace XenAdmin.Alerts
 
         public static void DownloadAndInstallNewClient(ClientUpdateAlert updateAlert, IWin32Window parent)
         {
-            using (var dialog = new WarningDialog(
-                           string.Format(Messages.UPDATE_CLIENT_CONFIRMATION_MESSAGE, BrandManager.BrandConsole),
-                           ThreeButtonDialog.ButtonOK, ThreeButtonDialog.ButtonCancel)
-                       {WindowTitle = string.Format(Messages.UPDATE_CLIENT_CONFIRMATION_MESSAGE_TITLE, BrandManager.BrandConsole)})
+            bool currentTasks = false;
+            foreach (ActionBase a in ConnectionsManager.History)
             {
-                if (dialog.ShowDialog(parent) != DialogResult.OK)
-                    return;
+                if (a is MeddlingAction || a.IsCompleted)
+                    continue;
+
+                currentTasks = true;
+                break;
             }
 
+            if (currentTasks)
+            {
+                if (new Dialogs.WarningDialogs.CloseXenCenterWarningDialog().ShowDialog() != DialogResult.OK)
+                {
+                    return;
+                }
+            }
+            
             var downloadAndInstallClientAction = new DownloadAndUpdateClientAction(updateAlert.Name, new Uri(updateAlert.NewVersion.Url), Path.Combine(Path.GetTempPath(), $"{updateAlert.Name}.msi"), updateAlert.Checksum);
 
             using (var dlg = new ActionProgressDialog(downloadAndInstallClientAction, ProgressBarStyle.Marquee))
