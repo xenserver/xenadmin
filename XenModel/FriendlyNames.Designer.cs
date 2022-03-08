@@ -4770,7 +4770,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Checkpoint for virtual machine has been created.
+        ///   Looks up a localized string similar to Snapshot of disks and memory for virtual machine has been created.
         /// </summary>
         public static string Message_name_vm_checkpointed {
             get {
@@ -4797,7 +4797,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Virtual Machine has been migrated.
+        ///   Looks up a localized string similar to Virtual machine has been migrated.
         /// </summary>
         public static string Message_name_vm_migrated {
             get {
@@ -4851,7 +4851,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Snapshot for virtual machine has been reverted.
+        ///   Looks up a localized string similar to Virtual machine has been reverted to snapshot.
         /// </summary>
         public static string Message_name_vm_snapshot_reverted {
             get {
@@ -4860,7 +4860,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Snapshot for virtual machine has been created.
+        ///   Looks up a localized string similar to Snapshot of disks for virtual machine has been created.
         /// </summary>
         public static string Message_name_vm_snapshotted {
             get {
