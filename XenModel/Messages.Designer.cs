@@ -14401,7 +14401,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Click Fail Over to begin the test recovery of the selected vApps and VMs..
+        ///   Looks up a localized string similar to Once done, click Fail Over to begin the test recovery of the selected vApps and VMs..
         /// </summary>
         public static string DR_WIZARD_PRECHECKPAGE_CONTINUE_DRYRUN {
             get {
@@ -14410,7 +14410,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Click Fail Back to begin recovery of the selected vApps and VMs to your primary data site..
+        ///   Looks up a localized string similar to Once done, click Fail Back to begin recovery of the selected vApps and VMs to your primary data site..
         /// </summary>
         public static string DR_WIZARD_PRECHECKPAGE_CONTINUE_FAILBACK {
             get {
@@ -14419,7 +14419,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Click Fail Over to begin recovery of the selected vApps and VMs..
+        ///   Looks up a localized string similar to Once done, click Fail Over to begin recovery of the selected vApps and VMs..
         /// </summary>
         public static string DR_WIZARD_PRECHECKPAGE_CONTINUE_FAILOVER {
             get {
@@ -14505,33 +14505,6 @@ namespace XenAdmin {
         public static string DR_WIZARD_PRECHECKPAGE_RESOLVE {
             get {
                 return ResourceManager.GetString("DR_WIZARD_PRECHECKPAGE_RESOLVE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Failover pre-checks completed: {0} issues found.
-        /// </summary>
-        public static string DR_WIZARD_PRECHECKPAGE_STATUS_FAILURE {
-            get {
-                return ResourceManager.GetString("DR_WIZARD_PRECHECKPAGE_STATUS_FAILURE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Running failover pre-checks:.
-        /// </summary>
-        public static string DR_WIZARD_PRECHECKPAGE_STATUS_RUNNING {
-            get {
-                return ResourceManager.GetString("DR_WIZARD_PRECHECKPAGE_STATUS_RUNNING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Failover pre-checks completed: No issues found.
-        /// </summary>
-        public static string DR_WIZARD_PRECHECKPAGE_STATUS_SUCCESS {
-            get {
-                return ResourceManager.GetString("DR_WIZARD_PRECHECKPAGE_STATUS_SUCCESS", resourceCulture);
             }
         }
         
@@ -14667,6 +14640,15 @@ namespace XenAdmin {
         public static string DR_WIZARD_PROBLEM_MISSING_SR_HELPMESSAGE {
             get {
                 return ResourceManager.GetString("DR_WIZARD_PROBLEM_MISSING_SR_HELPMESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing SR information not found.
+        /// </summary>
+        public static string DR_WIZARD_PROBLEM_MISSING_SR_NO_INFO {
+            get {
+                return ResourceManager.GetString("DR_WIZARD_PROBLEM_MISSING_SR_NO_INFO", resourceCulture);
             }
         }
         

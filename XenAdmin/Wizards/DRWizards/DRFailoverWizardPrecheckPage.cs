@@ -53,6 +53,11 @@ namespace XenAdmin.Wizards.DRWizards
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
+        private readonly BackgroundWorker _worker;
+        private int _numberChecks;
+        private readonly object _lock = new object();
+        private bool _enableNext;
+
         public event Action<string> NewDrTaskIntroduced;
         public event Action<XenRef<SR>> SrIntroduced;
 
@@ -75,6 +80,19 @@ namespace XenAdmin.Wizards.DRWizards
         {
             InitializeComponent();
             dataGridView1.BackgroundColor = dataGridView1.DefaultCellStyle.BackColor;
+
+            _worker = new BackgroundWorker
+            {
+                WorkerReportsProgress = true,
+                WorkerSupportsCancellation = true
+            };
+            _worker.DoWork += worker_DoWork;
+            _worker.ProgressChanged += worker_ProgressChanged;
+            _worker.RunWorkerCompleted += _worker_RunWorkerCompleted;
+
+            panelErrorsFound.Visible = false;
+            labelPrecheckStatus.Visible = false;
+            checkBoxHideSuccessful.Checked = true;
         }
 
         public override string PageTitle
@@ -91,13 +109,7 @@ namespace XenAdmin.Wizards.DRWizards
             }
         }
 
-        public override string Text
-        {
-            get
-            {
-                return Messages.DR_WIZARD_PRECHECKPAGE_TEXT;
-            }
-        }
+        public override string Text => Messages.DR_WIZARD_PRECHECKPAGE_TEXT;
 
         public override string HelpID
         {
@@ -129,8 +141,6 @@ namespace XenAdmin.Wizards.DRWizards
             }
             return (int)(((float)i / (float)(count)) * 100);
         }
-
-        private BackgroundWorker _worker = null;
 
         protected override void PageLoadedCore(PageLoadedDirection direction)
         {
@@ -171,55 +181,68 @@ namespace XenAdmin.Wizards.DRWizards
             } 
         }
 
-        protected void RefreshRechecks()
+        private void RefreshRechecks()
         {
             buttonResolveAll.Enabled = buttonReCheckProblems.Enabled = false;
-            _worker = null;
-            _worker = new BackgroundWorker();
-            _worker.DoWork += new DoWorkEventHandler(worker_DoWork);
-            _worker.WorkerReportsProgress = true;
-            _worker.WorkerSupportsCancellation = true;
-            _worker.ProgressChanged += new ProgressChangedEventHandler(worker_ProgressChanged);
-            _worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(_worker_RunWorkerCompleted);
+            panelErrorsFound.Visible = false;
+            labelPrecheckStatus.Visible = true;
             _worker.RunWorkerAsync();
+            OnPageUpdated();
         }
 
-        void _worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void _worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (!e.Cancelled)
+            if (e.Cancelled)
+            {
                 OnPageUpdated();
+                return;
+            }
+
             progressBar1.Value = 100;
+
             bool problemsFound = false;
+            bool allFixable = true;
+
             foreach (PreCheckGridRow row in dataGridView1.Rows)
             {
-                PreCheckItemRow preCheckRow = row as PreCheckItemRow;
-                if (preCheckRow != null && preCheckRow.Problem != null)
+                if (row is PreCheckItemRow preCheckRow && preCheckRow.Problem != null)
                 {
                     problemsFound = true;
-                    break;
+
+                    if (!preCheckRow.IsFixable)
+                    {
+                        allFixable = false;
+                        break;
+                    }
                 }
             }
-            buttonResolveAll.Enabled = problemsFound;
+
+            labelPrecheckStatus.Visible = false;
             buttonReCheckProblems.Enabled = true;
+            panelErrorsFound.Visible = problemsFound;
+            buttonResolveAll.Enabled = problemsFound && allFixable;
+            _enableNext = !problemsFound;
+            OnPageUpdated();
         }
 
-        void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        private void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             try
             {
-                var row = e.UserState as DataGridViewRow;
-                if (row != null && !dataGridView1.Rows.Contains(row))
+                if (e.UserState is DataGridViewRow row && !dataGridView1.Rows.Contains(row))
                 {
-                    PreCheckItemRow preCheckRow = row as PreCheckItemRow;
-                    if (preCheckRow != null && preCheckRow.IsProblem)
+                    if (row is PreCheckHeaderRow headerRow)
+                        headerRow.Visible = true;
+                    else if (row is PreCheckItemRow preCheckRow && preCheckRow.IsProblem)
                         preCheckRow.Visible = true;
                     else
-                        row.Visible = !checkBoxViewPrecheckFailuresOnly.Checked;
+                        row.Visible = !checkBoxHideSuccessful.Checked;
+
                     dataGridView1.Rows.Add(row);
                 }
 
-                int step = (int)((1.0 / ((float)_numberChecks)) * e.ProgressPercentage);
-                progressBar1.Value += (step + progressBar1.Value) > 100 ? 0 : step;
+                int step = (int)(1.0 / ((float)_numberChecks) * e.ProgressPercentage);
+                progressBar1.Value += step + progressBar1.Value > 100 ? 0 : step;
             }
             catch (Exception)
             {
@@ -239,9 +262,7 @@ namespace XenAdmin.Wizards.DRWizards
             return new PreCheckItemRow(check);
         }
 
-        private int _numberChecks = 0;
-        private readonly object _lock = new object();
-        void worker_DoWork(object sender, DoWorkEventArgs e)
+        private void worker_DoWork(object sender, DoWorkEventArgs e)
         {
             lock (_lock)
             {
@@ -421,45 +442,17 @@ namespace XenAdmin.Wizards.DRWizards
         protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
             if (direction == PageLoadedDirection.Back)
-            {
                 _worker.CancelAsync();
-                _worker = null;
-            }
         }
 
         public override bool EnableNext()
         {
-            int problemsCount = 0;
-            foreach (DataGridViewRow row in dataGridView1.Rows)
-            {
-                PreCheckItemRow preCheckRow = row as PreCheckItemRow;
-                if (preCheckRow != null && preCheckRow.IsProblem)
-                {
-                    problemsCount++;
-                }
-
-            }
-
-            if (_worker != null && _worker.IsBusy)
-                labelPrecheckStatus.Text = Messages.DR_WIZARD_PRECHECKPAGE_STATUS_RUNNING;
-            else
-            {
-                labelPrecheckStatus.Text = problemsCount > 0
-                                               ? string.Format(Messages.DR_WIZARD_PRECHECKPAGE_STATUS_FAILURE, problemsCount)
-                                               : Messages.DR_WIZARD_PRECHECKPAGE_STATUS_SUCCESS;
-            }
-
-            bool result = _worker != null && !_worker.IsBusy && problemsCount==0;
-            panelErrorsFound.Visible = !result;
-            labelContinue.Visible = result;
-
-            return result;
+            return _enableNext;
         }
 
         public override void PageCancelled(ref bool cancel)
         {
-            if (_worker != null)
-                _worker.CancelAsync();
+            _worker.CancelAsync();
         }
 
         internal List<string> GetWarnings()
@@ -475,7 +468,6 @@ namespace XenAdmin.Wizards.DRWizards
             }
             return warnings;
         }
-
 
         private void RunSolution(PreCheckItemRow preCheckRow)
         {
@@ -551,28 +543,25 @@ namespace XenAdmin.Wizards.DRWizards
 
         private void checkBoxViewPrecheckFailuresOnly_CheckedChanged(object sender, EventArgs e)
         {
-            //RefreshRechecks();
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
-                var preCheckRow = row as PreCheckItemRow;
-                if (preCheckRow != null && preCheckRow.IsProblem)
+                if (row is PreCheckHeaderRow headerRow)
+                    headerRow.Visible = true;
+                else if (row is PreCheckItemRow preCheckRow && preCheckRow.IsProblem)
                     preCheckRow.Visible = true;
                 else
-                    row.Visible = !checkBoxViewPrecheckFailuresOnly.Checked;
+                    row.Visible = !checkBoxHideSuccessful.Checked;
             }
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            PreCheckItemRow preChecRow = dataGridView1.Rows[e.RowIndex] as PreCheckItemRow;
-            if (preChecRow != null && e.ColumnIndex == 2)
-            {
-                RunSolution(preChecRow);
-                return;
-            }
+            if (dataGridView1.Rows[e.RowIndex] is PreCheckItemRow preCheckRow && e.ColumnIndex == 2)
+                RunSolution(preCheckRow);
         } 
 
         #region PreCheckGridRow
+
         private abstract class PreCheckGridRow : DataGridViewRow
         {           
             protected DataGridViewImageCell _iconCell = new DataGridViewImageCell();
@@ -599,11 +588,10 @@ namespace XenAdmin.Wizards.DRWizards
 
         private class PreCheckItemRow : PreCheckGridRow
         {
-            private readonly Problem _problem;
             private readonly Check _check;
             public PreCheckItemRow(Problem problem)
             {
-                _problem = problem;
+                Problem = problem;
                 _check = problem.Check;
                 UpdateRowFields();
             }
@@ -629,13 +617,7 @@ namespace XenAdmin.Wizards.DRWizards
                 _solutionCell.Value = Problem == null ? string.Empty : Problem.HelpMessage;
             }
 
-            public Problem Problem
-            {
-                get
-                {
-                    return _problem;
-                }
-            }
+            public Problem Problem { get; }
 
             public string Description
             {
@@ -645,29 +627,25 @@ namespace XenAdmin.Wizards.DRWizards
                 }
             }
 
-            public bool IsProblem
-            {
-                get { return _problem != null && !(_problem is Warning); }
-            }
+            public bool IsProblem => Problem != null && !(Problem is Warning);
 
-            public bool IsWarning
-            {
-                get { return _problem != null && _problem is Warning; }
-            }
+            public bool IsFixable => Problem != null && Problem.IsFixable && !string.IsNullOrEmpty(Problem.HelpMessage);
+
+            public bool IsWarning => Problem != null && Problem is Warning;
 
             public override bool Equals(object obj)
             {
-                PreCheckItemRow other = obj as PreCheckItemRow;
-                if (other != null && other.Problem != null && _problem != null)
-                    return _problem.CompareTo(other.Problem) == 0;
+                if (obj is PreCheckItemRow other && other.Problem != null && Problem != null)
+                    return Problem.CompareTo(other.Problem) == 0;
                 return false;
             }
 
             public override int GetHashCode()
             {
-                return (_problem != null ? _problem.GetHashCode() : 0);
+                return Problem != null ? Problem.GetHashCode() : 0;
             }
         }
+
         #endregion
     }
 

@@ -13,9 +13,12 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing)
             {
-                components.Dispose();
+                _worker.Dispose();
+
+                if (components != null)
+                    components.Dispose();
             }
             base.Dispose(disposing);
         }
@@ -31,8 +34,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DRFailoverWizardPrecheckPage));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.checkBoxViewPrecheckFailuresOnly = new System.Windows.Forms.CheckBox();
-            this.panelErrorsFound = new System.Windows.Forms.Panel();
+            this.checkBoxHideSuccessful = new System.Windows.Forms.CheckBox();
+            this.panelErrorsFound = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
@@ -52,31 +55,30 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // checkBoxViewPrecheckFailuresOnly
+            // checkBoxHideSuccessful
             // 
-            resources.ApplyResources(this.checkBoxViewPrecheckFailuresOnly, "checkBoxViewPrecheckFailuresOnly");
-            this.checkBoxViewPrecheckFailuresOnly.Name = "checkBoxViewPrecheckFailuresOnly";
-            this.checkBoxViewPrecheckFailuresOnly.UseVisualStyleBackColor = true;
-            this.checkBoxViewPrecheckFailuresOnly.CheckedChanged += new System.EventHandler(this.checkBoxViewPrecheckFailuresOnly_CheckedChanged);
+            resources.ApplyResources(this.checkBoxHideSuccessful, "checkBoxHideSuccessful");
+            this.checkBoxHideSuccessful.Name = "checkBoxHideSuccessful";
+            this.checkBoxHideSuccessful.UseVisualStyleBackColor = true;
+            this.checkBoxHideSuccessful.CheckedChanged += new System.EventHandler(this.checkBoxViewPrecheckFailuresOnly_CheckedChanged);
             // 
             // panelErrorsFound
             // 
             resources.ApplyResources(this.panelErrorsFound, "panelErrorsFound");
             this.tableLayoutPanel1.SetColumnSpan(this.panelErrorsFound, 3);
-            this.panelErrorsFound.Controls.Add(this.label1);
-            this.panelErrorsFound.Controls.Add(this.pictureBox1);
+            this.panelErrorsFound.Controls.Add(this.label1, 1, 0);
+            this.panelErrorsFound.Controls.Add(this.pictureBox1, 0, 0);
             this.panelErrorsFound.Name = "panelErrorsFound";
             // 
             // label1
             // 
             resources.ApplyResources(this.label1, "label1");
-            this.label1.AutoEllipsis = true;
             this.label1.Name = "label1";
             // 
             // pictureBox1
             // 
             resources.ApplyResources(this.pictureBox1, "pictureBox1");
-            this.pictureBox1.Image = global::XenAdmin.Properties.Resources._000_Alert2_h32bit_16;
+            this.pictureBox1.Image = global::XenAdmin.Properties.Resources._000_error_h32bit_16;
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.TabStop = false;
             // 
@@ -152,7 +154,6 @@
             // 
             // labelPrechecksFirstLine
             // 
-            this.labelPrechecksFirstLine.AutoEllipsis = true;
             resources.ApplyResources(this.labelPrechecksFirstLine, "labelPrechecksFirstLine");
             this.tableLayoutPanel1.SetColumnSpan(this.labelPrechecksFirstLine, 3);
             this.labelPrechecksFirstLine.Name = "labelPrechecksFirstLine";
@@ -160,27 +161,25 @@
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.labelContinue, 0, 6);
-            this.tableLayoutPanel1.Controls.Add(this.labelPrecheckStatus, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.panelErrorsFound, 0, 5);
-            this.tableLayoutPanel1.Controls.Add(this.checkBoxViewPrecheckFailuresOnly, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.progressBar1, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.buttonResolveAll, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.buttonReCheckProblems, 2, 4);
+            this.tableLayoutPanel1.Controls.Add(this.labelContinue, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.labelPrecheckStatus, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.panelErrorsFound, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.checkBoxHideSuccessful, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.progressBar1, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.buttonResolveAll, 2, 3);
+            this.tableLayoutPanel1.Controls.Add(this.buttonReCheckProblems, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.labelPrechecksFirstLine, 0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // labelContinue
             // 
             resources.ApplyResources(this.labelContinue, "labelContinue");
-            this.labelContinue.AutoEllipsis = true;
             this.tableLayoutPanel1.SetColumnSpan(this.labelContinue, 3);
             this.labelContinue.Name = "labelContinue";
             // 
             // labelPrecheckStatus
             // 
-            this.labelPrecheckStatus.AutoEllipsis = true;
             resources.ApplyResources(this.labelPrecheckStatus, "labelPrecheckStatus");
             this.tableLayoutPanel1.SetColumnSpan(this.labelPrecheckStatus, 3);
             this.labelPrecheckStatus.Name = "labelPrecheckStatus";
@@ -192,6 +191,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "DRFailoverWizardPrecheckPage";
             this.panelErrorsFound.ResumeLayout(false);
+            this.panelErrorsFound.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -202,8 +202,8 @@
 
         #endregion
 
-        private System.Windows.Forms.CheckBox checkBoxViewPrecheckFailuresOnly;
-        private System.Windows.Forms.Panel panelErrorsFound;
+        private System.Windows.Forms.CheckBox checkBoxHideSuccessful;
+        private System.Windows.Forms.TableLayoutPanel panelErrorsFound;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ProgressBar progressBar1;

@@ -54,34 +54,30 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
             this.device_config = device_config;
         }
 
-        public override string Title
-        {
-            get { return Check.Description; }
-        }
+        public override string Title => Check.Description;
 
 
         public override string Description
         {
             get
             {
-                return String.Format(sr.shared ? Messages.DR_WIZARD_PROBLEM_MISSING_SR : Messages.DR_WIZARD_PROBLEM_LOCAL_STORAGE, sr.Name());
+                if (sr == null)
+                    return Messages.DR_WIZARD_PROBLEM_MISSING_SR_NO_INFO;
+
+                return string.Format(sr.shared ? Messages.DR_WIZARD_PROBLEM_MISSING_SR : Messages.DR_WIZARD_PROBLEM_LOCAL_STORAGE, sr.Name());
             }
         }
 
-        public override string HelpMessage
-        {
-            get
-            {
-                return sr.shared ? Messages.DR_WIZARD_PROBLEM_MISSING_SR_HELPMESSAGE : "";
-            }
-        }
+        public override string HelpMessage => sr != null && sr.shared
+            ? Messages.DR_WIZARD_PROBLEM_MISSING_SR_HELPMESSAGE
+            : "";
 
         protected override AsyncAction CreateAction(out bool cancelled)
         {
             Program.AssertOnEventThread();
             cancelled = false;
 
-            if (!sr.shared)
+            if (sr == null || !sr.shared)
             {
                 return null;
             }
