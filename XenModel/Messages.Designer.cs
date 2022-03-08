@@ -36922,24 +36922,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to In order to update, {0} will be closed. Please make sure there are no unfinished tasks running, then click OK to proceed..
-        /// </summary>
-        public static string UPDATE_CLIENT_CONFIRMATION_MESSAGE {
-            get {
-                return ResourceManager.GetString("UPDATE_CLIENT_CONFIRMATION_MESSAGE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Update {0}.
-        /// </summary>
-        public static string UPDATE_CLIENT_CONFIRMATION_MESSAGE_TITLE {
-            get {
-                return ResourceManager.GetString("UPDATE_CLIENT_CONFIRMATION_MESSAGE_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Could not validate the certificate associated with the downloaded installer..
         /// </summary>
         public static string UPDATE_CLIENT_FAILED_CERTIFICATE_CHECK {
