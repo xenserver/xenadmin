@@ -97,10 +97,11 @@ namespace XenAdmin.Actions.DR
                     if (poolValues.Count > 0)
                     {
                         var pool = poolValues.First();
-                        var poolName = string.IsNullOrEmpty(pool.name_label) && pool.master != null
-                            ? Host.get_name_label(MetadataSession, pool.master.opaque_ref)
-                            : pool.name_label;
-                        _poolMetadata.Pool.name_label = poolName;
+                        _poolMetadata.Pool = pool;
+
+                        if (string.IsNullOrEmpty(pool.name_label) && pool.master != null)
+                            _poolMetadata.Pool.name_label = Host.get_name_label(MetadataSession, pool.master.opaque_ref);
+
                         log.DebugFormat("Found metadata of pool '{0}' (UUID={1})", _poolMetadata.Pool.Name(),
                             _poolMetadata.Pool.uuid);
                     }
