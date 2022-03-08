@@ -52,11 +52,6 @@ namespace XenAdmin.Diagnostics.Checks.DR
             Vdi = vdi;
         }
 
-        private SR RetrieveSR(XenRef<SR> xenRefSr)
-        {
-            return SR.get_record(MetadataSession, xenRefSr);
-        }
-
         private List<SR> GetRequiredSRs(IXenObject xenObject)
         {
             List<XenRef<SR>> xenRefSRs = new List<XenRef<SR>>();
@@ -67,7 +62,7 @@ namespace XenAdmin.Diagnostics.Checks.DR
                 xenRefSRs = VM_appliance.get_SRs_required_for_recovery(MetadataSession, xenObject.opaque_ref, Pool.Connection.Session.opaque_ref);
 
             if (xenRefSRs != null && xenRefSRs.Count > 0)
-                return xenRefSRs.Select(item => RetrieveSR(item)).ToList();
+                return xenRefSRs.Select(srRef => SR.get_record(MetadataSession, srRef)).ToList();
 
             return null;
         }
@@ -114,7 +109,18 @@ namespace XenAdmin.Diagnostics.Checks.DR
                 {
                     List<SR> requiredSRs = GetRequiredSRs(xenObject) ?? new List<SR>();
 
-                    SR sr = RetrieveSR(new XenRef<SR>(f.ErrorDescription[2]));
+                    SR sr = null;
+
+                    try
+                    {
+                        sr = SR.get_record(MetadataSession, new XenRef<SR>(f.ErrorDescription[2]));
+                    }
+                    catch (Failure failure)
+                    {
+                        if (failure.ErrorDescription.Count > 0 && failure.ErrorDescription[0] == Failure.HANDLE_INVALID)
+                            return new MissingSRProblem(this, Pool, null, null);
+                    }
+                    
                     if (!requiredSRs.Contains(sr))
                         requiredSRs.Add(sr);
 

@@ -112,49 +112,52 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="checkBoxViewPrecheckFailuresOnly.AutoSize" type="System.Boolean, mscorlib">
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="checkBoxHideSuccessful.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="checkBoxHideSuccessful.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="checkBoxViewPrecheckFailuresOnly.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="checkBoxHideSuccessful.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="checkBoxViewPrecheckFailuresOnly.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 326</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="checkBoxHideSuccessful.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 307</value>
   </data>
-  <data name="checkBoxViewPrecheckFailuresOnly.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="checkBoxHideSuccessful.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 2, 0, 0</value>
   </data>
-  <data name="checkBoxViewPrecheckFailuresOnly.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 19</value>
+  <data name="checkBoxHideSuccessful.Size" type="System.Drawing.Size, System.Drawing">
+    <value>157, 19</value>
   </data>
-  <data name="checkBoxViewPrecheckFailuresOnly.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="checkBoxViewPrecheckFailuresOnly.Text" xml:space="preserve">
-    <value>&amp;View only pre-check failures/issues</value>
-  </data>
-  <data name="&gt;&gt;checkBoxViewPrecheckFailuresOnly.Name" xml:space="preserve">
-    <value>checkBoxViewPrecheckFailuresOnly</value>
-  </data>
-  <data name="&gt;&gt;checkBoxViewPrecheckFailuresOnly.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkBoxViewPrecheckFailuresOnly.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;checkBoxViewPrecheckFailuresOnly.ZOrder" xml:space="preserve">
+  <data name="checkBoxHideSuccessful.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="panelErrorsFound.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="checkBoxHideSuccessful.Text" xml:space="preserve">
+    <value>&amp;Hide successful pre-checks</value>
+  </data>
+  <data name="&gt;&gt;checkBoxHideSuccessful.Name" xml:space="preserve">
+    <value>checkBoxHideSuccessful</value>
+  </data>
+  <data name="&gt;&gt;checkBoxHideSuccessful.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBoxHideSuccessful.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;checkBoxHideSuccessful.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="panelErrorsFound.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="tableLayoutPanel1.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
@@ -163,19 +166,25 @@
     <value>3</value>
   </data>
   <data name="labelContinue.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+    <value>Left</value>
+  </data>
+  <data name="labelContinue.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="labelContinue.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="labelContinue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 381</value>
+    <value>3, 32</value>
+  </data>
+  <data name="labelContinue.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 0, 3, 10</value>
   </data>
   <data name="labelContinue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>540, 23</value>
+    <value>317, 13</value>
   </data>
   <data name="labelContinue.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+    <value>1</value>
   </data>
   <data name="labelContinue.Text" xml:space="preserve">
     <value>Click Fail Over to begin recovery of the selected vApps and VMs. </value>
@@ -187,13 +196,16 @@
     <value>labelContinue</value>
   </data>
   <data name="&gt;&gt;labelContinue.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelContinue.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;labelContinue.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="labelPrecheckStatus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
   </data>
   <data name="labelPrecheckStatus.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -202,28 +214,22 @@
     <value>NoControl</value>
   </data>
   <data name="labelPrecheckStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 39</value>
-  </data>
-  <data name="labelPrecheckStatus.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="labelPrecheckStatus.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 3, 0, 6</value>
+    <value>3, 359</value>
   </data>
   <data name="labelPrecheckStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>231, 22</value>
+    <value>149, 13</value>
   </data>
   <data name="labelPrecheckStatus.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>7</value>
   </data>
   <data name="labelPrecheckStatus.Text" xml:space="preserve">
-    <value>Failover pre-checks completed: {0} issues found</value>
+    <value>Running failover pre-checks...</value>
   </data>
   <data name="&gt;&gt;labelPrecheckStatus.Name" xml:space="preserve">
     <value>labelPrecheckStatus</value>
   </data>
   <data name="&gt;&gt;labelPrecheckStatus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelPrecheckStatus.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -238,19 +244,22 @@
     <value>NoControl</value>
   </data>
   <data name="progressBar1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 64</value>
+    <value>3, 378</value>
+  </data>
+  <data name="progressBar1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 6, 3, 3</value>
   </data>
   <data name="progressBar1.Size" type="System.Drawing.Size, System.Drawing">
     <value>540, 23</value>
   </data>
   <data name="progressBar1.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>8</value>
   </data>
   <data name="&gt;&gt;progressBar1.Name" xml:space="preserve">
     <value>progressBar1</value>
   </data>
   <data name="&gt;&gt;progressBar1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ProgressBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ProgressBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;progressBar1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -258,7 +267,7 @@
   <data name="&gt;&gt;progressBar1.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <metadata name="ColumnState.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="ColumnState.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="ColumnState.HeaderText" xml:space="preserve">
@@ -270,13 +279,13 @@
   <data name="ColumnState.Width" type="System.Int32, mscorlib">
     <value>20</value>
   </data>
-  <metadata name="ColumnDescription.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="ColumnDescription.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="ColumnDescription.HeaderText" xml:space="preserve">
     <value />
   </data>
-  <metadata name="ColumnSolution.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="ColumnSolution.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="ColumnSolution.HeaderText" xml:space="preserve">
@@ -292,22 +301,22 @@
     <value>Fill</value>
   </data>
   <data name="dataGridView1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 93</value>
+    <value>0, 58</value>
   </data>
   <data name="dataGridView1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 3, 0, 3</value>
   </data>
   <data name="dataGridView1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>546, 227</value>
+    <value>546, 241</value>
   </data>
   <data name="dataGridView1.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;dataGridView1.Name" xml:space="preserve">
     <value>dataGridView1</value>
   </data>
   <data name="&gt;&gt;dataGridView1.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.DataGridViewEx.DataGridViewEx, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.DataGridViewEx.DataGridViewEx, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dataGridView1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -315,17 +324,23 @@
   <data name="&gt;&gt;dataGridView1.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="buttonResolveAll.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="buttonResolveAll.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="buttonResolveAll.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="buttonResolveAll.Location" type="System.Drawing.Point, System.Drawing">
-    <value>377, 326</value>
+    <value>463, 305</value>
   </data>
   <data name="buttonResolveAll.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 23</value>
   </data>
   <data name="buttonResolveAll.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>5</value>
   </data>
   <data name="buttonResolveAll.Text" xml:space="preserve">
     <value>&amp;Resolve All</value>
@@ -334,7 +349,7 @@
     <value>buttonResolveAll</value>
   </data>
   <data name="&gt;&gt;buttonResolveAll.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonResolveAll.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -342,26 +357,32 @@
   <data name="&gt;&gt;buttonResolveAll.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="buttonReCheckProblems.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="buttonReCheckProblems.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="buttonReCheckProblems.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="buttonReCheckProblems.Location" type="System.Drawing.Point, System.Drawing">
-    <value>463, 326</value>
+    <value>377, 305</value>
   </data>
   <data name="buttonReCheckProblems.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 23</value>
   </data>
   <data name="buttonReCheckProblems.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>4</value>
   </data>
   <data name="buttonReCheckProblems.Text" xml:space="preserve">
-    <value>&amp;Check again</value>
+    <value>&amp;Check Again</value>
   </data>
   <data name="&gt;&gt;buttonReCheckProblems.Name" xml:space="preserve">
     <value>buttonReCheckProblems</value>
   </data>
   <data name="&gt;&gt;buttonReCheckProblems.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonReCheckProblems.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -372,23 +393,23 @@
   <data name="labelPrechecksFirstLine.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="labelPrechecksFirstLine.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
   <data name="labelPrechecksFirstLine.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="labelPrechecksFirstLine.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+    <value>3, 0</value>
   </data>
   <data name="labelPrechecksFirstLine.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="labelPrechecksFirstLine.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 3, 0, 10</value>
+    <value>3, 0, 3, 6</value>
   </data>
   <data name="labelPrechecksFirstLine.Size" type="System.Drawing.Size, System.Drawing">
-    <value>525, 39</value>
+    <value>540, 26</value>
   </data>
   <data name="labelPrechecksFirstLine.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>0</value>
   </data>
   <data name="labelPrechecksFirstLine.Text" xml:space="preserve">
     <value>Failover pre-checks are performed to ensure that the selected vApps and VMs can be failed over. Please take appropriate action to resolve any issues. </value>
@@ -397,7 +418,7 @@
     <value>labelPrechecksFirstLine</value>
   </data>
   <data name="&gt;&gt;labelPrechecksFirstLine.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelPrechecksFirstLine.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -418,13 +439,13 @@
     <value>546, 404</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -433,19 +454,22 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelContinue" Row="6" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="labelPrecheckStatus" Row="1" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="panelErrorsFound" Row="5" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="checkBoxViewPrecheckFailuresOnly" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="progressBar1" Row="2" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="dataGridView1" Row="3" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="buttonResolveAll" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="buttonReCheckProblems" Row="4" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="labelPrechecksFirstLine" Row="0" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,AutoSize,50,AutoSize,180" /&gt;&lt;Rows Styles="AutoSize,20,AutoSize,61,AutoSize,50,Percent,100,AutoSize,36,AutoSize,49,AutoSize,20,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelContinue" Row="1" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="labelPrecheckStatus" Row="5" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="panelErrorsFound" Row="4" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="checkBoxHideSuccessful" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="progressBar1" Row="6" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="dataGridView1" Row="2" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="buttonResolveAll" Row="3" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="buttonReCheckProblems" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelPrechecksFirstLine" Row="0" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,AutoSize,0,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Percent,100,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="label1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+    <value>Left</value>
+  </data>
+  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 0</value>
+    <value>25, 4</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>512, 23</value>
+    <value>391, 13</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -460,7 +484,7 @@
     <value>label1</value>
   </data>
   <data name="&gt;&gt;label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label1.Parent" xml:space="preserve">
     <value>panelErrorsFound</value>
@@ -469,19 +493,16 @@
     <value>0</value>
   </data>
   <data name="pictureBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left</value>
+    <value>Left</value>
   </data>
   <data name="pictureBox1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="pictureBox1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 0, 0</value>
+    <value>3, 3</value>
   </data>
   <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 23</value>
+    <value>16, 16</value>
   </data>
   <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -490,7 +511,7 @@
     <value>pictureBox1</value>
   </data>
   <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
     <value>panelErrorsFound</value>
@@ -498,14 +519,17 @@
   <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="panelErrorsFound.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
   <data name="panelErrorsFound.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 355</value>
+    <value>3, 334</value>
   </data>
   <data name="panelErrorsFound.Size" type="System.Drawing.Size, System.Drawing">
-    <value>540, 23</value>
+    <value>540, 22</value>
   </data>
   <data name="panelErrorsFound.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>6</value>
   </data>
   <data name="panelErrorsFound.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -514,7 +538,7 @@
     <value>panelErrorsFound</value>
   </data>
   <data name="&gt;&gt;panelErrorsFound.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;panelErrorsFound.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -522,7 +546,10 @@
   <data name="&gt;&gt;panelErrorsFound.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="panelErrorsFound.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="pictureBox1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
@@ -535,24 +562,24 @@
     <value>ColumnState</value>
   </data>
   <data name="&gt;&gt;ColumnState.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ColumnDescription.Name" xml:space="preserve">
     <value>ColumnDescription</value>
   </data>
   <data name="&gt;&gt;ColumnDescription.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ColumnSolution.Name" xml:space="preserve">
     <value>ColumnSolution</value>
   </data>
   <data name="&gt;&gt;ColumnSolution.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>DRFailoverWizardPrecheckPage</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.XenTabPage, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

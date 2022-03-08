@@ -5086,13 +5086,13 @@ Click Cancel if you prefer to reconfigure your VMs' memory settings manually.</v
     <value>Failover prerequisites</value>
   </data>
   <data name="DR_WIZARD_PRECHECKPAGE_CONTINUE_DRYRUN" xml:space="preserve">
-    <value>Click Fail Over to begin the test recovery of the selected vApps and VMs.</value>
+    <value>Once done, click Fail Over to begin the test recovery of the selected vApps and VMs.</value>
   </data>
   <data name="DR_WIZARD_PRECHECKPAGE_CONTINUE_FAILBACK" xml:space="preserve">
-    <value>Click Fail Back to begin recovery of the selected vApps and VMs to your primary data site.</value>
+    <value>Once done, click Fail Back to begin recovery of the selected vApps and VMs to your primary data site.</value>
   </data>
   <data name="DR_WIZARD_PRECHECKPAGE_CONTINUE_FAILOVER" xml:space="preserve">
-    <value>Click Fail Over to begin recovery of the selected vApps and VMs.</value>
+    <value>Once done, click Fail Over to begin recovery of the selected vApps and VMs.</value>
   </data>
   <data name="DR_WIZARD_PRECHECKPAGE_DESCRIPTION_FAILBACK" xml:space="preserve">
     <value>Failover pre-checks are performed to ensure that the selected vApps and VMs can be failed back to the selected pool. Please take appropriate action to resolve any issues.</value>
@@ -5120,15 +5120,6 @@ Click Cancel if you prefer to reconfigure your VMs' memory settings manually.</v
   </data>
   <data name="DR_WIZARD_PRECHECKPAGE_RESOLVE" xml:space="preserve">
     <value>Resolve</value>
-  </data>
-  <data name="DR_WIZARD_PRECHECKPAGE_STATUS_FAILURE" xml:space="preserve">
-    <value>Failover pre-checks completed: {0} issues found</value>
-  </data>
-  <data name="DR_WIZARD_PRECHECKPAGE_STATUS_RUNNING" xml:space="preserve">
-    <value>Running failover pre-checks:</value>
-  </data>
-  <data name="DR_WIZARD_PRECHECKPAGE_STATUS_SUCCESS" xml:space="preserve">
-    <value>Failover pre-checks completed: No issues found</value>
   </data>
   <data name="DR_WIZARD_PRECHECKPAGE_TEXT" xml:space="preserve">
     <value>Pre-checks</value>
@@ -5174,6 +5165,9 @@ Click Cancel if you prefer to reconfigure your VMs' memory settings manually.</v
   </data>
   <data name="DR_WIZARD_PROBLEM_MISSING_SR_HELPMESSAGE" xml:space="preserve">
     <value>Attach SR</value>
+  </data>
+  <data name="DR_WIZARD_PROBLEM_MISSING_SR_NO_INFO" xml:space="preserve">
+    <value>Missing SR information not found</value>
   </data>
   <data name="DR_WIZARD_PROBLEM_RUNNING_APPLIANCE" xml:space="preserve">
     <value>Is running on pool '{0}'</value>
