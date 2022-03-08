@@ -1186,6 +1186,9 @@ namespace XenAdmin.TabPages
             var action = NewLogOutSubjectAction(currentSubject);
             action.Completed += actionBase => Program.Invoke(this, () =>
             {
+                if (actionBase.IsCancelled)
+                    return;
+
                 //Session.logout_subject_identifier logs out all sessions except the current one,
                 //so if an elevated session was not needed, the current session will not have been
                 //logged out, hence we need to disconnect explicitly.
