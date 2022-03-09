@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using XenAdmin.Diagnostics.Hotfixing;
 using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Diagnostics.Problems.HostProblem;
 using XenAPI;
@@ -42,21 +43,26 @@ namespace XenAdmin.Diagnostics.Checks
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private readonly Dictionary<string, string> installMethodConfig;
+        private readonly Dictionary<string, string> _installMethodConfig;
 
         public PrepareToUpgradeCheck(Host host, Dictionary<string, string> installMethodConfig)
             : base(host)
         {
-            this.installMethodConfig = installMethodConfig;
+            _installMethodConfig = installMethodConfig;
         }
 
         public override string Description => Messages.CHECKING_PREPARE_TO_UPGRADE_DESCRIPTION;
 
         protected override Problem RunHostCheck()
         {
+            var hotfix = HotfixFactory.Hotfix(Host);
+            if (hotfix != null && hotfix.ShouldBeAppliedTo(Host))
+                return new HostDoesNotHaveHotfixWarning(this, Host);
+
             try
             {
-                var result = Host.call_plugin(Host.Connection.Session, Host.opaque_ref, "prepare_host_upgrade.py", "testUrl", installMethodConfig);
+                var result = Host.call_plugin(Host.Connection.Session, Host.opaque_ref,
+                    "prepare_host_upgrade.py", "testUrl", _installMethodConfig);
 
                 if (result.ToLower() == "true")
                     return null;
