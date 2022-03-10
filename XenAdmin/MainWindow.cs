@@ -997,15 +997,17 @@ namespace XenAdmin
                     return;
                 }
 
-                // Allow Citrix Hypervisor Center connect to Stockholm and cloud released versions only
+                // Allow connection only to Yangtze and cloud released versions
                 //
-                if (!Helpers.StockholmOrGreater(coordinator))
+                if (!Helpers.YangtzeOrGreater(coordinator))
                 {
                     connection.EndConnect();
 
                     Program.Invoke(Program.MainWindow, delegate
                     {
-                        var msg = string.Format(Messages.GUI_NOT_COMPATIBLE, BrandManager.BrandConsole, BrandManager.ProductBrand, BrandManager.ProductVersion82, Helpers.GetName(coordinator), BrandManager.LegacyConsole);
+                        var msg = string.Format(Messages.GUI_NOT_COMPATIBLE, BrandManager.BrandConsole,
+                            BrandManager.ProductBrand, BrandManager.ProductVersion821,
+                            Helpers.GetName(coordinator), BrandManager.LegacyConsole);
                         var url = InvisibleMessages.OUT_OF_DATE_WEBSITE;
                         var title = string.Format(Messages.CONNECTION_REFUSED_TITLE, Helpers.GetName(coordinator).Ellipsise(80));
                         var error = $"{msg}\n{url}";
