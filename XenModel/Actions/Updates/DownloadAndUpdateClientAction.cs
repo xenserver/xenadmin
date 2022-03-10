@@ -222,22 +222,23 @@ namespace XenAdmin.Actions
                     throw new Exception(Messages.UPDATE_CLIENT_INVALID_CHECKSUM );
             }
 
-            bool valid;
-            // Check digital signature of .msi
-            using (var basicSigner = X509Certificate.CreateFromSignedFile(outputPathAndFileName))
+            bool valid = false;
+            try
             {
-                using (var cert = new X509Certificate2(basicSigner))
+                // Check digital signature of .msi
+                using (var basicSigner = X509Certificate.CreateFromSignedFile(outputPathAndFileName))
                 {
-                    try
+                    using (var cert = new X509Certificate2(basicSigner))
                     {
                         valid = cert.Verify();
                     }
-                    catch (Exception e)
-                    {
-                        throw new Exception(Messages.UPDATE_CLIENT_FAILED_CERTIFICATE_CHECK, e);
-                    }
                 }
             }
+            catch (Exception e)
+            {
+                throw new Exception(Messages.UPDATE_CLIENT_FAILED_CERTIFICATE_CHECK, e);
+            }
+            
 
             if (!valid)
                 throw new Exception(Messages.UPDATE_CLIENT_INVALID_DIGITAL_CERTIFICATE);
