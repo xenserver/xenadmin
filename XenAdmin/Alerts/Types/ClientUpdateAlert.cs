@@ -107,6 +107,22 @@ namespace XenAdmin.Alerts
 
         public static void DownloadAndInstallNewClient(ClientUpdateAlert updateAlert, IWin32Window parent)
         {
+            var downloadAndInstallClientAction = new DownloadAndUpdateClientAction(updateAlert.Name, new Uri(updateAlert.NewVersion.Url), Path.Combine(Path.GetTempPath(), $"{updateAlert.Name}.msi"), updateAlert.Checksum);
+            downloadAndInstallClientAction.OnDownloaded += DownloadAndInstallClientAction_OnDownloaded;
+            downloadAndInstallClientAction.OnInstall += DownloadAndInstallClientAction_OnInstall;
+            using (var dlg = new ActionProgressDialog(downloadAndInstallClientAction, ProgressBarStyle.Continuous))
+            {
+                dlg.ShowDialog(parent);
+            }
+        }
+
+        /// <summary>
+        /// When the Download has completed need to check for background tasks before closing the application to install update
+        /// </summary>
+        /// <param name="sender">The sender</param>
+        /// <param name="e">Event Args</param>
+        private static void DownloadAndInstallClientAction_OnDownloaded(object sender, EventArgs e)
+        {
             bool currentTasks = false;
             foreach (ActionBase a in ConnectionsManager.History)
             {
@@ -117,20 +133,22 @@ namespace XenAdmin.Alerts
                 break;
             }
 
+            var action = (sender as DownloadAndUpdateClientAction);
             if (currentTasks)
             {
-                if (new Dialogs.WarningDialogs.CloseXenCenterWarningDialog().ShowDialog() != DialogResult.OK)
+                if (new Dialogs.WarningDialogs.CloseXenCenterWarningDialog(true).ShowDialog() != DialogResult.OK)
                 {
+                    action.Cancel();
                     return;
                 }
             }
-            
-            var downloadAndInstallClientAction = new DownloadAndUpdateClientAction(updateAlert.Name, new Uri(updateAlert.NewVersion.Url), Path.Combine(Path.GetTempPath(), $"{updateAlert.Name}.msi"), updateAlert.Checksum);
 
-            using (var dlg = new ActionProgressDialog(downloadAndInstallClientAction, ProgressBarStyle.Marquee))
-            {
-                dlg.ShowDialog(parent);
-            }
+            action.InstallMsi();
+        }
+
+        private static void DownloadAndInstallClientAction_OnInstall(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

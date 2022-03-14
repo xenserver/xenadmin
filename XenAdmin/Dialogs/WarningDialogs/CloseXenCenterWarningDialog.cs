@@ -44,13 +44,13 @@ namespace XenAdmin.Dialogs.WarningDialogs
 {
     public partial class CloseXenCenterWarningDialog : XenDialogBase
     {
-        public CloseXenCenterWarningDialog(IXenConnection connection = null)
+        public CloseXenCenterWarningDialog(bool fromUpdate = false, IXenConnection connection = null)
             :base(connection)
         {
             InitializeComponent();
 
             label1.Text = string.Format(label1.Text, BrandManager.BrandConsole);
-            label2.Text = string.Format(label2.Text, BrandManager.BrandConsole);
+            label2.Text = Label2Text(fromUpdate);
             ExitButton.Text = string.Format(ExitButton.Text, BrandManager.BrandConsole);
 
             if (connection != null)
@@ -62,6 +62,18 @@ namespace XenAdmin.Dialogs.WarningDialogs
 
             ConnectionsManager.History.CollectionChanged += History_CollectionChanged;
             BuildList();
+        }
+
+        //Formats the string based on if being closed from update or not.
+        /// <summary>
+        /// Formats label2 based on if being closed from update or not.
+        /// </summary>
+        /// <param name="updating">bool to say if updating or not</param>
+        /// <returns></returns>
+        private string Label2Text(bool updating)
+        {
+            var label2Text = updating ? label2.Text.Replace("exit", "update") : label2.Text;
+            return string.Format(label2Text, BrandManager.BrandConsole);
         }
 
         protected override void OnLoad(EventArgs e)

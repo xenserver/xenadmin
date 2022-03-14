@@ -30,16 +30,15 @@
  */
 
 using System;
-using System.Net;
 using System.ComponentModel;
-using System.Threading;
-using System.IO;
-using System.Net.NetworkInformation;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
-using XenCenterLib;
+using System.Net;
+using System.Net.NetworkInformation;
 using System.Security.Cryptography.X509Certificates;
-using System.Windows.Forms;
+using System.Threading;
+using XenCenterLib;
 
 namespace XenAdmin.Actions
 {
@@ -62,6 +61,9 @@ namespace XenAdmin.Actions
         private string checksum;
         private WebClient client;
 
+        public event EventHandler OnDownloaded;
+        public event EventHandler OnInstall;
+        
         public string ByteProgressDescription { get; set; }
 
         public DownloadAndUpdateClientAction(string updateName, Uri uri, string outputFileName, string checksum)
@@ -73,6 +75,7 @@ namespace XenAdmin.Actions
             downloadUpdate = address != null;
             this.outputPathAndFileName = outputFileName;
             this.checksum = checksum;
+            this.CanCancel = true;
         }
 
         private void DownloadFile()
@@ -183,7 +186,10 @@ namespace XenAdmin.Actions
                 if (Cancelling)
                     throw new CancelledException();
             }
-            
+        }
+
+        public void InstallMsi()
+        {
             ValidateMsi();
 
             if (!File.Exists(outputPathAndFileName))
@@ -195,7 +201,7 @@ namespace XenAdmin.Actions
                 // Start the install process, it will handle closing of application.
                 Process.Start(outputPathAndFileName);
                 log.DebugFormat("Update {0} found and install started", updateName);
-                Application.Exit();
+                OnInstall.Invoke(this, EventArgs.Empty);
             }
             catch (Exception e)
             {
@@ -277,6 +283,8 @@ namespace XenAdmin.Actions
 
             updateDownloadState = DownloadState.Completed;
             log.DebugFormat("Client update '{0}' download completed successfully", updateName);
+
+            OnDownloaded?.Invoke(this, EventArgs.Empty);
         }
 
         public override void RecomputeCanCancel()
