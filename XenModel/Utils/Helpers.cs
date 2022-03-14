@@ -1832,6 +1832,9 @@ namespace XenAdmin.Core
 
         public static bool PvsCacheCapability(IXenConnection connection)
         {
+            if (Post82X(connection))
+                return true;
+
             var coordinator = GetCoordinator(connection);
             return coordinator != null && coordinator.AppliedUpdates().Any(update => update.Name().ToLower().StartsWith("pvsaccelerator"));
         }
