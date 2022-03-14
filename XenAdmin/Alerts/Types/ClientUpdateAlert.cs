@@ -112,6 +112,7 @@ namespace XenAdmin.Alerts
             downloadAndInstallClientAction.OnInstall += DownloadAndInstallClientAction_OnInstall;
             using (var dlg = new ActionProgressDialog(downloadAndInstallClientAction, ProgressBarStyle.Continuous))
             {
+                dlg.ShowCancel = true;
                 dlg.ShowDialog(parent);
             }
         }
