@@ -21752,7 +21752,8 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} cannot be used for installing updates on servers running {1} {2}. Please use {3} {2} instead..
+        ///   Looks up a localized string similar to {0} cannot be used for installing updates on servers running {1} {2}.
+        ///Please use latest available {3} for {1} {2} instead..
         /// </summary>
         public static string INSTALL_PENDING_UPDATES_DISABLED_REASON {
             get {
@@ -40759,7 +40760,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} is not recommended for general management of servers running {1} {2}. Please use {3} {2} instead..
+        ///   Looks up a localized string similar to {0} is not recommended for general management of servers running {1} {2}. Please use latest available {3} for {1} {2} instead..
         /// </summary>
         public static string WARNING_PRE_CLOUD_VERSION_CONNECTION {
             get {
