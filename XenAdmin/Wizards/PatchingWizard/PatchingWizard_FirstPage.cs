@@ -41,7 +41,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             InitializeComponent();
             label5.Text = string.Format(label5.Text, BrandManager.ProductBrand,
-                BrandManager.ProductVersion82, BrandManager.LegacyConsole);
+                BrandManager.ProductVersion821, BrandManager.LegacyConsole);
             label9.Text = string.Format(label9.Text, BrandManager.BrandConsole);
             label5.Visible = ConnectionsManager.XenConnectionsCopy.Any(c => c.IsConnected && !Helpers.Post82X(c));
         }

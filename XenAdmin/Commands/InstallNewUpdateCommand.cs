@@ -73,7 +73,7 @@ namespace XenAdmin.Commands
             if (connected.Count > 0 && connected.All(c => !Helpers.Post82X(c)))
                 return string.Format(Messages.INSTALL_PENDING_UPDATES_DISABLED_REASON,
                     BrandManager.BrandConsole, BrandManager.ProductBrand,
-                    BrandManager.ProductVersion82, BrandManager.LegacyConsole);
+                    BrandManager.ProductVersion821, BrandManager.LegacyConsole);
 
             return base.GetCantRunReasonCore(item);
         }

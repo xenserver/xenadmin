@@ -53,8 +53,7 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
         public override string Description => string.Format(Messages.STRING_COLON_SPACE_STRING,
             _host.Name(), Messages.CERTIFICATE_KEY_LENGTH_PROBLEM_DESCRIPTION);
 
-        public override string Message => string.Format(Messages.CERTIFICATE_KEY_LENGTH_PROBLEM_MORE_INFO,
-            BrandManager.ProductBrand, BrandManager.ProductVersionPost82);
+        public override string Message => Messages.CERTIFICATE_KEY_LENGTH_PROBLEM_MORE_INFO;
 
         protected override AsyncAction CreateAction(out bool cancelled)
         {

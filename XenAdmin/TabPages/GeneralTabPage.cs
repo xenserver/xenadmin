@@ -1774,7 +1774,7 @@ namespace XenAdmin.TabPages
             else if (!Helpers.Post82X(xenObject.Connection))
             {
                 Banner.BannerType = DeprecationBanner.Type.Deprecation;
-                Banner.WarningMessage = string.Format(Messages.WARNING_PRE_CLOUD_VERSION_CONNECTION, BrandManager.BrandConsole, BrandManager.ProductBrand, BrandManager.ProductVersion82, BrandManager.LegacyConsole);
+                Banner.WarningMessage = string.Format(Messages.WARNING_PRE_CLOUD_VERSION_CONNECTION, BrandManager.BrandConsole, BrandManager.ProductBrand, BrandManager.ProductVersion821, BrandManager.LegacyConsole);
                 Banner.LinkText = Messages.PATCHING_WIZARD_WEBPAGE_CELL;
                 Banner.LinkUri = new Uri(InvisibleMessages.OUT_OF_DATE_WEBSITE);
                 Banner.Visible = true;
