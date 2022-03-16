@@ -192,7 +192,7 @@
     <value>[BRANDING_PRODUCT_VERSION_TEXT]</value>
   </data>
   <data name="UPDATES_URL" xml:space="preserve">
-    <value>https://updates.xensource.com/XenServer/updates.xml</value>
+    <value>[UPDATES_URL]</value>
   </data>
   <data name="VM_TOOLS" xml:space="preserve">
     <value>[Citrix VM Tools]</value>

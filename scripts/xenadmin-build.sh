@@ -55,6 +55,11 @@ if [ ! -f "${MSBUILD}" ] ; then
   MSBUILD="/cygdrive/c/Program Files (x86)/Microsoft Visual Studio/2019/Professional/MSBuild/Current/Bin/MSBuild.exe"
 fi
 
+if [ ! -f "${MSBUILD}" ] ; then
+  echo "DEBUG: Did not find VS Professional edition. Trying Enterprise"
+  MSBUILD="/cygdrive/c/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/MSBuild/Current/Bin/MSBuild.exe"
+fi
+
 mkdir_clean ${SCRATCH_DIR}
 mkdir_clean ${OUTPUT_DIR}
 
