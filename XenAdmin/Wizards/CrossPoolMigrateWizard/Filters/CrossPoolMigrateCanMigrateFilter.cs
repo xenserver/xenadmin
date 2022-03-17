@@ -179,8 +179,11 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
                             vmIsMigratable = true;
                             break;
                         }
+
                         if (failure.ErrorDescription.Count > 0 && failure.ErrorDescription[0] == Failure.RBAC_PERMISSION_DENIED)
                             disableReason = failure.Message.Split('\n')[0].TrimEnd('\r'); // we want the first line only
+                        else if (failure.ErrorDescription.Count > 1 && failure.ErrorDescription[1].Contains(Failure.DYNAMIC_MEMORY_CONTROL_UNAVAILABLE))
+                            disableReason = FriendlyErrorNames.DYNAMIC_MEMORY_CONTROL_UNAVAILABLE;
                         else
                             disableReason = failure.Message;
 
