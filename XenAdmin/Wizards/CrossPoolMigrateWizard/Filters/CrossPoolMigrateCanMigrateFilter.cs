@@ -147,6 +147,17 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
                             throw new Failure(Messages.OLDER_THAN_CURRENT_SERVER);
                         }
 
+                        if (Host.RestrictDMC(host) &&
+                            (vm.power_state == vm_power_state.Running ||
+                             vm.power_state == vm_power_state.Paused ||
+                             vm.power_state == vm_power_state.Suspended) &&
+                            (vm.memory_static_min > vm.memory_dynamic_min || //corner case, probably unlikely
+                             vm.memory_dynamic_min != vm.memory_dynamic_max ||
+                             vm.memory_dynamic_max != vm.memory_static_max))
+                        {
+                            throw new Failure(FriendlyErrorNames.DYNAMIC_MEMORY_CONTROL_UNAVAILABLE);
+                        }
+
                         PIF managementPif = host.Connection.Cache.PIFs.First(p => p.management);
                         XenAPI.Network managementNetwork = host.Connection.Cache.Resolve(managementPif.network);
 
