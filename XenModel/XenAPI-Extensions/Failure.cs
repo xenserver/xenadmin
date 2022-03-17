@@ -40,6 +40,7 @@ namespace XenAPI
     {
         public const string CANNOT_EVACUATE_HOST = "CANNOT_EVACUATE_HOST";
         public const string DEVICE_ALREADY_DETACHED = "DEVICE_ALREADY_DETACHED";
+        public const string DYNAMIC_MEMORY_CONTROL_UNAVAILABLE = "DYNAMIC_MEMORY_CONTROL_UNAVAILABLE";
         public const string HANDLE_INVALID = "HANDLE_INVALID";
         public const string HA_NO_PLAN = "HA_NO_PLAN";
         public const string HA_OPERATION_WOULD_BREAK_FAILOVER_PLAN = "HA_OPERATION_WOULD_BREAK_FAILOVER_PLAN";
