@@ -12964,22 +12964,22 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>{0}: 由于在池 {1} 上启用了 WLB，因此已跳过检查。</value>
   </data>
   <data name="UPDATE_DISMISS_ALL_CONTINUE" xml:space="preserve">
-    <value>You have applied filters to the list of update notifications. Do you want to dismiss all update notifications for every connected server, or only the update notifications you have chosen to view?
+    <value>您已将过滤器应用到更新通知列表。您要关闭每个已连接的服务器的所有更新通知，还是仅关闭您选择查看的更新通知?
 
-Note that if RBAC is enabled, only updates which you have privileges to dismiss will be affected.</value>
+请注意，如果启用了 RBAC，则将仅影响您有权关闭的更新。</value>
   </data>
   <data name="UPDATE_DISMISS_ALL_NO_FILTER_CONTINUE" xml:space="preserve">
-    <value>This operation will dismiss all update notifications for every connected server. Do you want to continue?
+    <value>此操作将关闭每个已连接的服务器的所有更新通知。是否要继续?
 
-Note that if RBAC is enabled, only updates which you have privileges to dismiss will be affected.</value>
+请注意，如果启用了 RBAC，则将仅影响您有权关闭的更新。</value>
   </data>
   <data name="UPDATE_DISMISS_CONFIRM" xml:space="preserve">
     <value>是否确实要消除此更新?</value>
   </data>
   <data name="UPDATE_DISMISS_SELECTED_CONFIRM" xml:space="preserve">
-    <value>This operation will dismiss all the selected update notifications. Do you want to continue?
+    <value>此操作将关闭所有选定的更新通知。是否要继续?
 
-Note that if RBAC is enabled, only updates which you have privileges to dismiss will be affected.</value>
+请注意，如果启用了 RBAC，则将仅影响您有权关闭的更新。</value>
   </data>
   <data name="UPDATE_ERROR_INTRODUCE" xml:space="preserve">
     <value>无法引入更新。</value>
