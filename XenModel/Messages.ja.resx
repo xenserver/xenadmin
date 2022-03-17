@@ -12967,22 +12967,22 @@ SR-IOV ネットワークを有効にするには、サーバーの再起動が�
     <value>{0}: プール {1} の WLB が有効なためチェックがスキップされました。</value>
   </data>
   <data name="UPDATE_DISMISS_ALL_CONTINUE" xml:space="preserve">
-    <value>You have applied filters to the list of update notifications. Do you want to dismiss all update notifications for every connected server, or only the update notifications you have chosen to view?
+    <value>アップデート通知の一覧にフィルタが適用されています。すべての接続先サーバーのすべてのアップデート通知をクリアしますか? それとも、現在のフィルタにより表示されているアップデート通知のみをクリアしますか?
 
-Note that if RBAC is enabled, only updates which you have privileges to dismiss will be affected.</value>
+注: RBAC が有効な場合、役割で許可されているアラートのみがクリアされます。</value>
   </data>
   <data name="UPDATE_DISMISS_ALL_NO_FILTER_CONTINUE" xml:space="preserve">
-    <value>This operation will dismiss all update notifications for every connected server. Do you want to continue?
+    <value>これにより、すべての接続先サーバーのすべてのアップデート通知がクリアされます。続行しますか?
 
-Note that if RBAC is enabled, only updates which you have privileges to dismiss will be affected.</value>
+注: RBAC が有効な場合、役割で許可されているアップデートのみがクリアされます。</value>
   </data>
   <data name="UPDATE_DISMISS_CONFIRM" xml:space="preserve">
     <value>このアップデートをクリアしてもよろしいですか?</value>
   </data>
   <data name="UPDATE_DISMISS_SELECTED_CONFIRM" xml:space="preserve">
-    <value>This operation will dismiss all the selected update notifications. Do you want to continue?
+    <value>これにより、選択したすべてのアップデート通知がクリアされます。続行しますか?
 
-Note that if RBAC is enabled, only updates which you have privileges to dismiss will be affected.</value>
+注: RBAC が有効な場合、役割で許可されているアップデートのみがクリアされます。</value>
   </data>
   <data name="UPDATE_ERROR_INTRODUCE" xml:space="preserve">
     <value>アップデートのイントロデュースに失敗しました。</value>
