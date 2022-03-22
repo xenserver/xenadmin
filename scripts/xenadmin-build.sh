@@ -222,7 +222,33 @@ cp ${REPO}/XenAdmin/bin/Release/{CommandLib.pdb,${BRANDING_BRAND_CONSOLE_NO_SPAC
 
 cd ${OUTPUT_DIR} && zip -r -m  ${BRANDING_BRAND_CONSOLE_NO_SPACE}.Symbols.zip *.pdb
 
-sha256sum ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE_NO_SPACE}.msi > ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE_NO_SPACE}.msi.checksum
+msi_checksum_with_file_name=`sha256sum ./CitrixHypervisorCenter.msi`
+echo $msi_checksum_with_file_name > ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE_NO_SPACE}.msi.checksum
+msi_checksum=($msi_checksum_with_file_name)
+
 sha256sum ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE_NO_SPACE}-source.zip > ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE_NO_SPACE}-source.zip.checksum
+
+echo "INFO: Generating CHCUpdates.xml"
+
+output_xml="<?xml version=\"1.0\" ?>
+<patchdata>
+    <chcversions>
+        <version
+            latest=\"true\"
+            latestcr=\"true\"
+            name=\"${BRANDING_BRAND_CONSOLE} ${BRANDING_XC_PRODUCT_VERSION}.${1}\"
+            timestamp=\"`date -u +"%Y-%m-%dT%H:%M:%SZ"`\"
+            url=\"${UPDATES_URL}\"
+            checksum=\"${msi_checksum}\"
+            value=\"${BRANDING_XC_PRODUCT_VERSION}.${1}\"
+        />	
+    </chcversions>
+</patchdata>"
+
+echo $output_xml > ${OUTPUT_DIR}/CHCUpdates.xml
+
+echo "INFO: Generating dev-CHCUpdates.xml. URL is a placeholder value"
+
+echo "${output_xml/"url=\"${UPDATES_URL}\""/"url=\"@DEV_MSI_URL_PLACEHOLDER@\""}" > ${OUTPUT_DIR}/dev-CHCUpdates.xml
 
 set +u
