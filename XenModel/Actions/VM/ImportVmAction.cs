@@ -215,7 +215,12 @@ namespace XenAdmin.Actions
             Description = isTemplate ? Messages.IMPORT_TEMPLATE_IMPORTCOMPLETE : Messages.IMPORTVM_IMPORTCOMPLETE;
 
             if (vm != null && !vm.is_a_template && m_startAutomatically)
-                new VMStartAction(vm, _warningDelegate, _failureDiagnosisDelegate).RunAsync();
+            {
+                if (vm.power_state == vm_power_state.Suspended)
+                    new VMResumeAction(vm, _warningDelegate, _failureDiagnosisDelegate).RunAsync();
+                else
+                    new VMStartAction(vm, _warningDelegate, _failureDiagnosisDelegate).RunAsync();
+            }
         }
 
         private int VMsWithName(string name)
@@ -283,7 +288,7 @@ namespace XenAdmin.Actions
             }
             catch (Exception e)
             {
-                PollToCompletion(suppressFailures: true);
+                PollToCompletion();
                 if (e is CancelledException || e is HTTP.CancelledException || e.InnerException is CancelledException)
                     throw new CancelledException();
                 throw;
