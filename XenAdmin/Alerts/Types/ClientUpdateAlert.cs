@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using XenAdmin.Actions;
@@ -43,6 +44,8 @@ namespace XenAdmin.Alerts
 {
     public class ClientUpdateAlert : Alert
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private static int DISMISSED_XC_VERSIONS_LIMIT = 5;
 
         public readonly ClientVersion NewVersion;
@@ -107,23 +110,19 @@ namespace XenAdmin.Alerts
 
         public static void DownloadAndInstallNewClient(ClientUpdateAlert updateAlert, IWin32Window parent)
         {
-            var downloadAndInstallClientAction = new DownloadAndUpdateClientAction(updateAlert.Name, new Uri(updateAlert.NewVersion.Url), Path.Combine(Path.GetTempPath(), $"{updateAlert.Name}.msi"), updateAlert.Checksum);
-            downloadAndInstallClientAction.OnDownloaded += DownloadAndInstallClientAction_OnDownloaded;
-            downloadAndInstallClientAction.OnInstall += DownloadAndInstallClientAction_OnInstall;
+            var outputPathAndFileName = Path.Combine(Path.GetTempPath(), $"{updateAlert.Name}.msi");
+
+            var downloadAndInstallClientAction = new DownloadAndUpdateClientAction(updateAlert.Name, new Uri(updateAlert.NewVersion.Url), outputPathAndFileName, updateAlert.Checksum);
+
             using (var dlg = new ActionProgressDialog(downloadAndInstallClientAction, ProgressBarStyle.Continuous))
             {
                 dlg.ShowCancel = true;
                 dlg.ShowDialog(parent);
             }
-        }
 
-        /// <summary>
-        /// When the Download has completed need to check for background tasks before closing the application to install update
-        /// </summary>
-        /// <param name="sender">The sender</param>
-        /// <param name="e">Event Args</param>
-        private static void DownloadAndInstallClientAction_OnDownloaded(object sender, EventArgs e)
-        {
+            if (!downloadAndInstallClientAction.Succeeded)
+                return;
+
             bool currentTasks = false;
             foreach (ActionBase a in ConnectionsManager.History)
             {
@@ -134,22 +133,28 @@ namespace XenAdmin.Alerts
                 break;
             }
 
-            var action = (sender as DownloadAndUpdateClientAction);
             if (currentTasks)
             {
                 if (new Dialogs.WarningDialogs.CloseXenCenterWarningDialog(true).ShowDialog() != DialogResult.OK)
-                {
-                    action.Cancel();
                     return;
-                }
             }
 
-            action.InstallMsi();
-        }
+            // Install the msi            
+            try
+            {
+                // Start the install process, it will handle closing of application.
+                Process.Start(outputPathAndFileName);
+                log.DebugFormat("Update {0} found and install started", updateAlert.Name);
+                Application.Exit();
+            }
+            catch (Exception e)
+            {
+                if (File.Exists(outputPathAndFileName))
+                    File.Delete(outputPathAndFileName);
 
-        private static void DownloadAndInstallClientAction_OnInstall(object sender, EventArgs e)
-        {
-            Application.Exit();
+                log.Error("Exception occurred when starting the installation process.", e);
+                throw;
+            }
         }
     }
 }

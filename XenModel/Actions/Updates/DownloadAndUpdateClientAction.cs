@@ -31,7 +31,6 @@
 
 using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -61,9 +60,6 @@ namespace XenAdmin.Actions
         private string checksum;
         private WebClient client;
 
-        public event EventHandler OnDownloaded;
-        public event EventHandler OnInstall;
-        
         public string ByteProgressDescription { get; set; }
 
         public DownloadAndUpdateClientAction(string updateName, Uri uri, string outputFileName, string checksum)
@@ -75,7 +71,6 @@ namespace XenAdmin.Actions
             downloadUpdate = address != null;
             this.outputPathAndFileName = outputFileName;
             this.checksum = checksum;
-            this.CanCancel = true;
         }
 
         private void DownloadFile()
@@ -186,31 +181,11 @@ namespace XenAdmin.Actions
                 if (Cancelling)
                     throw new CancelledException();
             }
-        }
 
-        public void InstallMsi()
-        {
             ValidateMsi();
 
             if (!File.Exists(outputPathAndFileName))
                 throw new Exception(Messages.DOWNLOAD_CLIENT_INSTALLER_MSI_NOT_FOUND);
-
-            // Install the msi            
-            try
-            {
-                // Start the install process, it will handle closing of application.
-                Process.Start(outputPathAndFileName);
-                log.DebugFormat("Update {0} found and install started", updateName);
-                OnInstall.Invoke(this, EventArgs.Empty);
-            }
-            catch (Exception e)
-            {
-                if (File.Exists(outputPathAndFileName))
-                    File.Delete(outputPathAndFileName);
-
-                log.Error("Exception occurred when starting the installation process.", e);
-                throw;
-            }
 
             Description = Messages.COMPLETED;
         }
@@ -283,8 +258,6 @@ namespace XenAdmin.Actions
 
             updateDownloadState = DownloadState.Completed;
             log.DebugFormat("Client update '{0}' download completed successfully", updateName);
-
-            OnDownloaded?.Invoke(this, EventArgs.Empty);
         }
 
         public override void RecomputeCanCancel()
