@@ -30,15 +30,14 @@
  */
 
 using System;
-using System.Net;
 using System.ComponentModel;
-using System.Threading;
 using System.IO;
-using System.Net.NetworkInformation;
-using System.Diagnostics;
 using System.Linq;
-using XenCenterLib;
+using System.Net;
+using System.Net.NetworkInformation;
 using System.Security.Cryptography.X509Certificates;
+using System.Threading;
+using XenCenterLib;
 
 namespace XenAdmin.Actions
 {
@@ -182,27 +181,11 @@ namespace XenAdmin.Actions
                 if (Cancelling)
                     throw new CancelledException();
             }
-            
+
             ValidateMsi();
 
             if (!File.Exists(outputPathAndFileName))
                 throw new Exception(Messages.DOWNLOAD_CLIENT_INSTALLER_MSI_NOT_FOUND);
-
-            // Install the msi            
-            try
-            {
-                // Start the install process, it will handle closing of application.
-                Process.Start(outputPathAndFileName);
-                log.DebugFormat("Update {0} found and install started", updateName);
-            }
-            catch (Exception e)
-            {
-                if (File.Exists(outputPathAndFileName))
-                    File.Delete(outputPathAndFileName);
-
-                log.Error("Exception occurred when starting the installation process.", e);
-                throw;
-            }
 
             Description = Messages.COMPLETED;
         }

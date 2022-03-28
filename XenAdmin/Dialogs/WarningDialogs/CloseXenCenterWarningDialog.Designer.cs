@@ -49,6 +49,7 @@ namespace XenAdmin.Dialogs.WarningDialogs
             this.columnMessage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label3 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewActions)).BeginInit();
             this.SuspendLayout();
@@ -82,11 +83,12 @@ namespace XenAdmin.Dialogs.WarningDialogs
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.ExitButton, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.DontExitButton, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.dataGridViewActions, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.ExitButton, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.DontExitButton, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.dataGridViewActions, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.label3, 0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // dataGridViewActions
@@ -114,8 +116,8 @@ namespace XenAdmin.Dialogs.WarningDialogs
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewActions.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
-            this.dataGridViewActions.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.datagridViewActions_ColumnHeaderMouseClick);
             this.dataGridViewActions.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellClick);
+            this.dataGridViewActions.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.datagridViewActions_ColumnHeaderMouseClick);
             // 
             // columnExpander
             // 
@@ -160,6 +162,12 @@ namespace XenAdmin.Dialogs.WarningDialogs
             resources.ApplyResources(this.columnDate, "columnDate");
             this.columnDate.Name = "columnDate";
             // 
+            // label3
+            // 
+            resources.ApplyResources(this.label3, "label3");
+            this.tableLayoutPanel1.SetColumnSpan(this.label3, 2);
+            this.label3.Name = "label3";
+            // 
             // CloseXenCenterWarningDialog
             // 
             this.AcceptButton = this.ExitButton;
@@ -190,5 +198,6 @@ namespace XenAdmin.Dialogs.WarningDialogs
         private System.Windows.Forms.DataGridViewTextBoxColumn columnMessage;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnLocation;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnDate;
+        private System.Windows.Forms.Label label3;
     }
 }

@@ -107,7 +107,7 @@ namespace XenAdmin.Commands
             if (!AllActionsFinished(connection, true))
             {
                 if (MainWindowCommandInterface.RunInAutomatedTestMode ||
-                    new CloseXenCenterWarningDialog(connection).ShowDialog(Parent) == DialogResult.OK)
+                    new CloseXenCenterWarningDialog(false, connection).ShowDialog(Parent) == DialogResult.OK)
                 {
                     ConnectionsManager.CancelAllActions(connection);
 

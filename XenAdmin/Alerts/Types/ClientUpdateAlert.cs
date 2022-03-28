@@ -31,9 +31,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using XenAdmin.Actions;
+using XenAdmin.Actions.GUIActions;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
 
@@ -42,6 +44,8 @@ namespace XenAdmin.Alerts
 {
     public class ClientUpdateAlert : Alert
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private static int DISMISSED_XC_VERSIONS_LIMIT = 5;
 
         public readonly ClientVersion NewVersion;
@@ -106,20 +110,50 @@ namespace XenAdmin.Alerts
 
         public static void DownloadAndInstallNewClient(ClientUpdateAlert updateAlert, IWin32Window parent)
         {
-            using (var dialog = new WarningDialog(
-                           string.Format(Messages.UPDATE_CLIENT_CONFIRMATION_MESSAGE, BrandManager.BrandConsole),
-                           ThreeButtonDialog.ButtonOK, ThreeButtonDialog.ButtonCancel)
-                       {WindowTitle = string.Format(Messages.UPDATE_CLIENT_CONFIRMATION_MESSAGE_TITLE, BrandManager.BrandConsole)})
+            var outputPathAndFileName = Path.Combine(Path.GetTempPath(), $"{updateAlert.Name}.msi");
+
+            var downloadAndInstallClientAction = new DownloadAndUpdateClientAction(updateAlert.Name, new Uri(updateAlert.NewVersion.Url), outputPathAndFileName, updateAlert.Checksum);
+
+            using (var dlg = new ActionProgressDialog(downloadAndInstallClientAction, ProgressBarStyle.Continuous))
             {
-                if (dialog.ShowDialog(parent) != DialogResult.OK)
+                dlg.ShowCancel = true;
+                dlg.ShowDialog(parent);
+            }
+
+            if (!downloadAndInstallClientAction.Succeeded)
+                return;
+
+            bool currentTasks = false;
+            foreach (ActionBase a in ConnectionsManager.History)
+            {
+                if (a is MeddlingAction || a.IsCompleted)
+                    continue;
+
+                currentTasks = true;
+                break;
+            }
+
+            if (currentTasks)
+            {
+                if (new Dialogs.WarningDialogs.CloseXenCenterWarningDialog(true).ShowDialog() != DialogResult.OK)
                     return;
             }
 
-            var downloadAndInstallClientAction = new DownloadAndUpdateClientAction(updateAlert.Name, new Uri(updateAlert.NewVersion.Url), Path.Combine(Path.GetTempPath(), $"{updateAlert.Name}.msi"), updateAlert.Checksum);
-
-            using (var dlg = new ActionProgressDialog(downloadAndInstallClientAction, ProgressBarStyle.Marquee))
+            // Install the msi            
+            try
             {
-                dlg.ShowDialog(parent);
+                // Start the install process, it will handle closing of application.
+                Process.Start(outputPathAndFileName);
+                log.DebugFormat("Update {0} found and install started", updateAlert.Name);
+                Application.Exit();
+            }
+            catch (Exception e)
+            {
+                if (File.Exists(outputPathAndFileName))
+                    File.Delete(outputPathAndFileName);
+
+                log.Error("Exception occurred when starting the installation process.", e);
+                throw;
             }
         }
     }

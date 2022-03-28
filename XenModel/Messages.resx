@@ -13063,12 +13063,6 @@ Please check your settings and try again.</value>
   <data name="UPDATES_WIZARD_WLB_ON_WARNING" xml:space="preserve">
     <value>{0}: Check skipped because WLB is enabled on pool {1}.</value>
   </data>
-  <data name="UPDATE_CLIENT_CONFIRMATION_MESSAGE" xml:space="preserve">
-    <value>In order to update, {0} will be closed. Please make sure there are no unfinished tasks running, then click OK to proceed.</value>
-  </data>
-  <data name="UPDATE_CLIENT_CONFIRMATION_MESSAGE_TITLE" xml:space="preserve">
-    <value>Update {0}</value>
-  </data>
   <data name="UPDATE_CLIENT_FAILED_CERTIFICATE_CHECK" xml:space="preserve">
     <value>Could not validate the certificate associated with the downloaded installer.</value>
   </data>

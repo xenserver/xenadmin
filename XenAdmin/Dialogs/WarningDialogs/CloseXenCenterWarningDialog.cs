@@ -44,13 +44,15 @@ namespace XenAdmin.Dialogs.WarningDialogs
 {
     public partial class CloseXenCenterWarningDialog : XenDialogBase
     {
-        public CloseXenCenterWarningDialog(IXenConnection connection = null)
+        public CloseXenCenterWarningDialog(bool fromUpdate = false, IXenConnection connection = null)
             :base(connection)
         {
             InitializeComponent();
 
             label1.Text = string.Format(label1.Text, BrandManager.BrandConsole);
             label2.Text = string.Format(label2.Text, BrandManager.BrandConsole);
+            label3.Text = string.Format(label3.Text, BrandManager.BrandConsole);
+            label3.Visible = fromUpdate;
             ExitButton.Text = string.Format(ExitButton.Text, BrandManager.BrandConsole);
 
             if (connection != null)
