@@ -176,11 +176,12 @@ namespace XenAdmin.ConsoleView
             else
             {
                 toggleConsoleButton.Visible = true;
-                this.vncScreen.OnDetectRDP = this.OnDetectRDP;
-                this.vncScreen.OnDetectVNC = this.OnDetectVNC;
                 this.vncScreen.UserCancelledAuth += this.OnUserCancelledAuth;
                 this.vncScreen.VncConnectionAttemptCancelled += this.OnVncConnectionAttemptCancelled;
             }
+
+            this.vncScreen.OnDetectRDP = this.OnDetectRDP;
+            this.vncScreen.OnDetectVNC = this.OnDetectVNC;
 
             LastDesktopSize = vncScreen.DesktopSize;
 
@@ -591,17 +592,10 @@ namespace XenAdmin.ConsoleView
 
         private void EnableRDPIfCapable()
         {
-            if (!toggleConsoleButton.Visible && hasRDP)
-            {
-                // The toggle button is not visible now, because RDP had not been enabled on the VM when we started the console.
-                // However, the current guest_metrics indicates that RDP is now supported (HasRDP==true). (eg. XenTools has been installed in the meantime.)
-                // This means that now we should show and enable the toggle RDP button and start polling (if allowed) RDP as well.
-
+            var enable = source.CanUseRDP();
+            if(enable)
                 log.DebugFormat("'{0}' console: Enabling RDP button, because RDP capability has appeared.", source);
-
-                toggleConsoleButton.Visible = true;
-                toggleConsoleButton.Enabled = true;
-            }
+            toggleConsoleButton.Visible = toggleConsoleButton.Enabled = enable;
         }
 
         private void Server_EnabledPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -1099,11 +1093,11 @@ namespace XenAdmin.ConsoleView
             {
                 log.DebugFormat("RDP detected for VM '{0}'", source == null ? "unknown/null" : source.name_label);
                 toggleToXVNCorRDP = RDP;
-
+                
                 if (vncScreen.UseVNC)
                     toggleConsoleButton.Text = CanEnableRDP() ? enableRDP : UseRDP;
 
-                toggleConsoleButton.Enabled = true;
+                EnableRDPIfCapable();
                 tip.SetToolTip(toggleConsoleButton, null);
                 if (!vncScreen.UserWantsToSwitchProtocol && Properties.Settings.Default.AutoSwitchToRDP)
                 {

@@ -295,8 +295,6 @@ namespace XenAdmin.ConsoleView
         {
             if (hasRDP)
             {
-                if (connectionPoller != null)
-                    connectionPoller.Change(Timeout.Infinite, Timeout.Infinite);
                 if (OnDetectRDP != null)
                     Program.Invoke(this, OnDetectRDP);
             }
@@ -308,8 +306,6 @@ namespace XenAdmin.ConsoleView
                 if (openIP != null)
                 {
                     rdpIP = openIP;
-                    if (connectionPoller != null)
-                        connectionPoller.Change(Timeout.Infinite, Timeout.Infinite);
                     if (OnDetectRDP != null)
                         Program.Invoke(this, OnDetectRDP);
                 }
@@ -773,7 +769,7 @@ namespace XenAdmin.ConsoleView
                     {
                         connectionPoller = new Timer(PollVNCPort, null, RETRY_SLEEP_TIME, RDP_POLL_INTERVAL);
                     }
-                    else if (hasRDP)
+                    else
                     {
                         connectionPoller = new Timer(PollRDPPort, null, RETRY_SLEEP_TIME, RDP_POLL_INTERVAL);
                     }

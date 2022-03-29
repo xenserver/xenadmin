@@ -370,6 +370,21 @@ namespace XenAPI
             return 0 != IntKey(metrics.other, "feature-ts2", 0);
         }
 
+        public bool CanUseRDP()
+        {
+            var guestMetrics = Connection.Resolve(guest_metrics);
+            if (guestMetrics == null)
+                return false;
+
+            return IntKey(guestMetrics.other, "feature-ts2", 0) != 0 &&
+                   IntKey(guestMetrics.other, "feature-ts", 0) != 0 &&
+                   IntKey(guestMetrics.other, "data-ts", 0) != 0 &&
+                   // CA-322672: Can't connect using RDP if there are no networks.
+                   // Also, this value is empty before the reboot required
+                   // after installing VM Tools on a Windows VM
+                   guestMetrics.networks.Count > 0;
+        }
+
         /// <summary>Returns true if
         /// 1) the guest is HVM and
         ///   2a) the allow-gpu-passthrough restriction is absent or
