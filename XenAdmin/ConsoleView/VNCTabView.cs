@@ -1174,7 +1174,7 @@ namespace XenAdmin.ConsoleView
                     }
 
                     // disable toggleConsoleButton; it will be re-enabled in TryToConnectRDP() when rdp port polling is complete (CA-102755)
-                    if (vncScreen.rdpIP == null)
+                    if (vncScreen.RdpIp == null)
                         toggleConsoleButton.Enabled = false;
                     ThreadPool.QueueUserWorkItem(TryToConnectRDP);
                 }
@@ -1227,8 +1227,8 @@ namespace XenAdmin.ConsoleView
 
         private void TryToConnectRDP(object x)
         {
-            bool hasToReconnect = vncScreen.rdpIP == null;
-            vncScreen.rdpIP = vncScreen.PollPort(XSVNCScreen.RDP_PORT, true);
+            bool hasToReconnect = vncScreen.RdpIp == null;
+            vncScreen.RdpIp = vncScreen.PollPort(XSVNCScreen.RDP_PORT, true);
             Program.Invoke(this, (MethodInvoker)(() =>
             {
                 if (hasToReconnect)
