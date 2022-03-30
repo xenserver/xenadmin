@@ -1093,7 +1093,7 @@ namespace XenAdmin.ConsoleView
             {
                 log.DebugFormat("RDP detected for VM '{0}'", source == null ? "unknown/null" : source.name_label);
                 toggleToXVNCorRDP = RDP;
-                
+
                 if (vncScreen.UseVNC)
                     toggleConsoleButton.Text = CanEnableRDP() ? enableRDP : UseRDP;
 
