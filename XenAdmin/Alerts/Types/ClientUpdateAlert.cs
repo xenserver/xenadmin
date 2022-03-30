@@ -133,28 +133,14 @@ namespace XenAdmin.Alerts
                 break;
             }
 
-            if (currentTasks)
+            if (!currentTasks)
             {
                 if (new Dialogs.WarningDialogs.CloseXenCenterWarningDialog(true).ShowDialog() != DialogResult.OK)
                     return;
             }
 
-            // Install the msi            
-            try
-            {
-                // Start the install process, it will handle closing of application.
-                Process.Start(outputPathAndFileName);
-                log.DebugFormat("Update {0} found and install started", updateAlert.Name);
-                Application.Exit();
-            }
-            catch (Exception e)
-            {
-                if (File.Exists(outputPathAndFileName))
-                    File.Delete(outputPathAndFileName);
-
-                log.Error("Exception occurred when starting the installation process.", e);
-                throw;
-            }
+            downloadAndInstallClientAction.InstallMsi();
+            Application.Exit();
         }
     }
 }
