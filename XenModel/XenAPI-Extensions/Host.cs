@@ -642,6 +642,11 @@ namespace XenAPI
             return Get(software_version, "platform_version");
         }
 
+        public string GetXapiVersion()
+        {
+            return Get(software_version, "xapi");
+        }
+
         /// <summary>
         /// For legacy build numbers only (used to be integers + one char at the end)
         /// From Falcon, this property is not used.
@@ -758,11 +763,6 @@ namespace XenAPI
             }
 
             return updates;
-        }
-
-        public string XAPI_version()
-        {
-            return Get(software_version, "xapi");
         }
 
         public bool LinuxPackPresent()
@@ -1154,7 +1154,7 @@ namespace XenAPI
             foreach (VM vm in Connection.ResolveAll(resident_VMs))
             {
                 if (!vm.is_control_domain)
-                    ans += vm.has_ballooning() ? vm.memory_dynamic_min : vm.memory_static_max;
+                    ans += vm.SupportsBallooning() ? vm.memory_dynamic_min : vm.memory_static_max;
             }
             return ans;
         }
@@ -1169,7 +1169,7 @@ namespace XenAPI
             foreach (VM vm in Connection.ResolveAll(resident_VMs))
             {
                 if (!vm.is_control_domain)
-                    ans += vm.has_ballooning() ? vm.memory_dynamic_max : vm.memory_static_max;
+                    ans += vm.SupportsBallooning() ? vm.memory_dynamic_max : vm.memory_static_max;
             }
             return ans;
         }

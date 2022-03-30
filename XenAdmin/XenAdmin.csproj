@@ -236,6 +236,8 @@
     <Compile Include="Diagnostics\Checks\PowerOniLoCheck.cs" />
     <Compile Include="Diagnostics\Checks\PoolLegacySslCheck.cs" />
     <Compile Include="Diagnostics\Checks\PrepareToUpgradeCheck.cs" />
+    <Compile Include="Diagnostics\Checks\CertificateKeyLengthCheck.cs" />
+    <Compile Include="Diagnostics\Checks\DmcCheck.cs" />
     <Compile Include="Diagnostics\Checks\PVGuestsCheck.cs" />
     <Compile Include="Diagnostics\Checks\RebootPendingOnMasterCheck.cs" />
     <Compile Include="Diagnostics\Checks\HostNeedsRebootCheck.cs" />
@@ -245,9 +247,11 @@
     <Compile Include="Diagnostics\Checks\ClientVersionCheck.cs" />
     <Compile Include="Diagnostics\Checks\HostMemoryPostUpgradeCheck.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\BrokenSR.cs" />
+    <Compile Include="Diagnostics\Problems\HostProblem\CertificateKeyLengthProblem.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\PowerOniLoProblem.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\HealthCheckServiceProblem.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\LegacySslProblem.cs" />
+    <Compile Include="Diagnostics\Problems\PoolProblem\PoolHasVmsWithDmcProblem.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\PoolHasPVGuestWarningUrl.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\HostMemoryPostUpgradeWarning.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\HostPrepareToUpgradeProblem.cs" />
@@ -303,6 +307,12 @@
     </Compile>
     <Compile Include="Dialogs\OptionsPages\ConfirmationOptionsPage.Designer.cs">
       <DependentUpon>ConfirmationOptionsPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\OptionsPages\ExternalToolsOptionsPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dialogs\OptionsPages\ExternalToolsOptionsPage.Designer.cs">
+      <DependentUpon>ExternalToolsOptionsPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\OvfValidationDialog.cs">
       <SubType>Form</SubType>
@@ -475,7 +485,6 @@
       <DependentUpon>WlbThresholdsPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Plugins\Features\ParentMenuItemFeature.cs" />
-    <Compile Include="SettingsUpdate.cs" />
     <Compile Include="TabPages\BaseTabPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1808,6 +1817,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\OptionsPages\ConfirmationOptionsPage.zh-CN.resx">
       <DependentUpon>ConfirmationOptionsPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\OptionsPages\ExternalToolsOptionsPage.ja.resx">
+      <DependentUpon>ExternalToolsOptionsPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\OptionsPages\ExternalToolsOptionsPage.resx">
+      <DependentUpon>ExternalToolsOptionsPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\OptionsPages\ExternalToolsOptionsPage.zh-CN.resx">
+      <DependentUpon>ExternalToolsOptionsPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\OvfValidationDialog.ja.resx">
       <DependentUpon>OvfValidationDialog.cs</DependentUpon>
@@ -3359,7 +3377,6 @@
     <Compile Include="Commands\DisconnectHostsAndPoolsCommand.cs" />
     <Compile Include="Commands\DisconnectPoolCommand.cs">
     </Compile>
-    <Compile Include="Commands\CopyTemplateCommand.cs" />
     <Compile Include="Commands\DragDropCommand.cs" />
     <Compile Include="Commands\DragDropAddHostToPoolCommand.cs" />
     <Compile Include="Commands\DragDropMigrateVMCommand.cs" />
@@ -6780,8 +6797,6 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>copy "$(ProjectDir)\ReportViewer\resource_report.rdlc" "$(TargetDir)"
-
-copy "$(ProjectDir)\..\packages\putty.exe" "$(TargetDir)"</PostBuildEvent>
+    <PostBuildEvent>copy "$(ProjectDir)\ReportViewer\resource_report.rdlc" "$(TargetDir)"</PostBuildEvent>
   </PropertyGroup>
 </Project>

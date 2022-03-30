@@ -186,61 +186,64 @@
   <data name="tableLayoutPanel2.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="warningIcon.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="warningImage.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 0</value>
   </data>
-  <data name="warningIcon.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="warningImage.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 0, 3, 0</value>
   </data>
-  <data name="warningIcon.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 35</value>
+  <data name="warningImage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 45</value>
   </data>
-  <data name="warningIcon.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+  <data name="warningImage.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>CenterImage</value>
   </data>
-  <data name="warningIcon.TabIndex" type="System.Int32, mscorlib">
+  <data name="warningImage.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;warningIcon.Name" xml:space="preserve">
-    <value>warningIcon</value>
+  <data name="&gt;&gt;warningImage.Name" xml:space="preserve">
+    <value>warningImage</value>
   </data>
-  <data name="&gt;&gt;warningIcon.Type" xml:space="preserve">
+  <data name="&gt;&gt;warningImage.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;warningIcon.Parent" xml:space="preserve">
+  <data name="&gt;&gt;warningImage.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;warningIcon.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;warningImage.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="warningText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="warningLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Left, Right</value>
   </data>
-  <data name="warningText.AutoSize" type="System.Boolean, mscorlib">
+  <data name="warningLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="warningText.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="warningLabel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
-  <data name="warningText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>41, 12</value>
+  <data name="warningLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="warningText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 16</value>
+  <data name="warningLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 16</value>
   </data>
-  <data name="warningText.TabIndex" type="System.Int32, mscorlib">
+  <data name="warningLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>201, 13</value>
+  </data>
+  <data name="warningLabel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;warningText.Name" xml:space="preserve">
-    <value>warningText</value>
+  <data name="&gt;&gt;warningLabel.Name" xml:space="preserve">
+    <value>warningLabel</value>
   </data>
-  <data name="&gt;&gt;warningText.Type" xml:space="preserve">
+  <data name="&gt;&gt;warningLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;warningText.Parent" xml:space="preserve">
+  <data name="&gt;&gt;warningLabel.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;warningText.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;warningLabel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -274,7 +277,7 @@
     <value>2</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="warningIcon" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="warningText" Row="0" RowSpan="1" Column="1" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,Percent,100" />&lt;Rows Styles="Percent,100" />&lt;/TableLayoutSettings></value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="warningImage" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="warningLabel" Row="0" RowSpan="1" Column="1" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,Percent,100" />&lt;Rows Styles="Percent,100" />&lt;/TableLayoutSettings></value>
   </data>
   <data name="informationLayoutPanel.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
@@ -306,31 +309,34 @@
   <data name="&gt;&gt;informationImage.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="informationMessage.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="informationLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Left</value>
   </data>
-  <data name="informationMessage.AutoSize" type="System.Boolean, mscorlib">
+  <data name="informationLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="informationMessage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>42, 12</value>
+  <data name="informationLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="informationMessage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 16</value>
+  <data name="informationLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 13</value>
   </data>
-  <data name="informationMessage.TabIndex" type="System.Int32, mscorlib">
+  <data name="informationLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>0, 13</value>
+  </data>
+  <data name="informationLabel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;informationMessage.Name" xml:space="preserve">
-    <value>informationMessage</value>
+  <data name="&gt;&gt;informationLabel.Name" xml:space="preserve">
+    <value>informationLabel</value>
   </data>
-  <data name="&gt;&gt;informationMessage.Type" xml:space="preserve">
+  <data name="&gt;&gt;informationLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;informationMessage.Parent" xml:space="preserve">
+  <data name="&gt;&gt;informationLabel.Parent" xml:space="preserve">
     <value>informationLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;informationMessage.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;informationLabel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="informationLayoutPanel.Location" type="System.Drawing.Point, System.Drawing">
@@ -358,7 +364,7 @@
     <value>3</value>
   </data>
   <data name="informationLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="informationImage" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="informationMessage" Row="0" RowSpan="1" Column="1" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,Percent,100" />&lt;Rows Styles="Percent,100" />&lt;/TableLayoutSettings></value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="informationImage" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="informationLabel" Row="0" RowSpan="1" Column="1" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,Percent,100" />&lt;Rows Styles="Percent,100" />&lt;/TableLayoutSettings></value>
   </data>
   <data name="helperLink.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>

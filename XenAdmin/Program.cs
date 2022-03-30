@@ -34,18 +34,17 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.Diagnostics;
+using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Reflection;
-using System.Windows.Forms;
 using System.Threading;
-using System.Drawing;
-using System.Linq;
+using System.Windows.Forms;
 using XenAdmin.Core;
-using XenAdmin.Network;
 using XenAdmin.Dialogs;
-using XenAdmin.Help;
+using XenAdmin.Network;
 using XenAdmin.XenSearch;
 using XenAPI;
 using XenCenterLib;
@@ -96,7 +95,7 @@ namespace XenAdmin
 
         public static CollectionChangeEventHandler ProgramInvokeHandler(CollectionChangeEventHandler handler)
         {
-            return delegate(object s, CollectionChangeEventArgs args)
+            return delegate (object s, CollectionChangeEventArgs args)
             {
                 if (MainWindow != null)
                 {
@@ -152,25 +151,26 @@ namespace XenAdmin
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static public void Main(string[] Args)
+        public static void Main(string[] args)
         {
-            //Upgrade settings
             string appVersionString = Version.ToString();
-            log.DebugFormat("Application version of new settings {0}", appVersionString);
+            log.InfoFormat("Application version of current settings {0}", appVersionString);
 
             try
             {
                 if (Properties.Settings.Default.ApplicationVersion != appVersionString)
                 {
-                    log.Debug("Upgrading settings...");
+                    log.Info("Upgrading settings...");
                     Properties.Settings.Default.Upgrade();
 
                     // if program's hash has changed (e.g. by upgrading to .NET 4.0), then Upgrade() doesn't import the previous application settings 
                     // because it cannot locate a previous user.config file. In this case a new user.config file is created with the default settings.
                     // We will try and find a config file from a previous installation and update the settings from it
+
                     if (Properties.Settings.Default.ApplicationVersion == "" && Properties.Settings.Default.DoUpgrade)
-                        SettingsUpdate.Update();
-                    log.DebugFormat("Settings upgraded from '{0}' to '{1}'", Properties.Settings.Default.ApplicationVersion, appVersionString);
+                        Settings.UpgradeFromPreviousInstallation();
+
+                    log.InfoFormat("Settings upgraded from '{0}' to '{1}'", Properties.Settings.Default.ApplicationVersion, appVersionString);
                     Properties.Settings.Default.ApplicationVersion = appVersionString;
                     Settings.TrySaveSettings();
                 }
@@ -181,14 +181,14 @@ namespace XenAdmin
                 var msg = string.Format("{0}\n\n{1}", Messages.MESSAGEBOX_LOAD_CORRUPTED_TITLE,
                                         string.Format(Messages.MESSAGEBOX_LOAD_CORRUPTED, Settings.GetUserConfigPath()));
                 using (var dlg = new ErrorDialog(msg)
-                               {
-                                   StartPosition = FormStartPosition.CenterScreen,
-                                   //For reasons I do not fully comprehend at the moment, the runtime
-                                   //overrides the above StartPosition with WindowsDefaultPosition if
-                                   //ShowInTaskbar is false. However it's a good idea anyway to show it
-                                   //in the taskbar since the main form is not launched at this point.
-                                   ShowInTaskbar = true
-                               })
+                {
+                    StartPosition = FormStartPosition.CenterScreen,
+                    //For reasons I do not fully comprehend at the moment, the runtime
+                    //overrides the above StartPosition with WindowsDefaultPosition if
+                    //ShowInTaskbar is false. However it's a good idea anyway to show it
+                    //in the taskbar since the main form is not launched at this point.
+                    ShowInTaskbar = true
+                })
                 {
                     dlg.ShowDialog();
                 }
@@ -206,7 +206,7 @@ namespace XenAdmin
 
             Search.InitSearch(BrandManager.ExtensionSearch);
             TreeSearch.InitSearch();
-            
+
             AppDomain.CurrentDomain.UnhandledException -= CurrentDomain_UnhandledException;
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             Application.ThreadException -= Application_ThreadException;
@@ -241,13 +241,14 @@ namespace XenAdmin
             Session.UserAgent = $"{BrandManager.BrandConsole} {Version}";
             RememberProxyAuthenticationModules();
             ReconfigureConnectionSettings();
+            Settings.ConfigureExternalSshClientSettings();
 
             log.Info("Application started");
             logSystemDetails();
             Settings.Log();
 
             // Remove the '--wait' argument, which may have been passed to the splash screen
-            var sanitizedArgs = Args.Where(ar => ar != "--wait").ToArray();
+            var sanitizedArgs = args.Where(ar => ar != "--wait").ToArray();
 
             var firstArgType = ParseFileArgs(sanitizedArgs, out string[] tailArgs);
 
@@ -352,7 +353,7 @@ namespace XenAdmin
 
             log.InfoFormat(@"Successfully created pipe '{0}' - proceeding to launch XenCenter", pipe_path);
 
-            pipe.Read += delegate(object sender, NamedPipes.PipeReadEventArgs e)
+            pipe.Read += delegate (object sender, NamedPipes.PipeReadEventArgs e)
             {
                 MainWindow m = MainWindow;
                 if (m == null || RunInAutomatedTestMode)
@@ -362,18 +363,18 @@ namespace XenAdmin
 
                 var firstArgType = ParseFileArgs(bits, out string[] tailArgs);
 
-                    if (firstArgType == ArgType.Passwords)
-                    {
-                        log.ErrorFormat("Refusing to accept passwords request down pipe.  Use {0}Main.exe directly", BrandManager.BrandConsole.Replace(" ",""));
-                        return;
-                    }
-                    if (firstArgType == ArgType.Connect)
-                    {
-                        log.ErrorFormat("Connect not supported down pipe. Use {0}Main.exe directly", BrandManager.BrandConsole.Replace(" ",""));
-                        return;
-                    }
-                    if (firstArgType == ArgType.None)
-                        return;
+                if (firstArgType == ArgType.Passwords)
+                {
+                    log.ErrorFormat("Refusing to accept passwords request down pipe.  Use {0}Main.exe directly", BrandManager.BrandConsole.Replace(" ", ""));
+                    return;
+                }
+                if (firstArgType == ArgType.Connect)
+                {
+                    log.ErrorFormat("Connect not supported down pipe. Use {0}Main.exe directly", BrandManager.BrandConsole.Replace(" ", ""));
+                    return;
+                }
+                if (firstArgType == ArgType.None)
+                    return;
 
                 // The C++ splash screen passes its command line as a literal string.
                 // This means we will get an e.Message like
@@ -460,7 +461,7 @@ namespace XenAdmin
 
             log.InfoFormat("Virtual memory size: {0} B({1})", p.VirtualMemorySize64, Util.MemorySizeStringSuitableUnits(p.VirtualMemorySize64, false));
             log.InfoFormat("Working set: {0} B({1})", p.WorkingSet64, Util.MemorySizeStringSuitableUnits(p.WorkingSet64, false));
-            log.InfoFormat("Private memory size: {0} B({1})",p.PrivateMemorySize64, Util.MemorySizeStringSuitableUnits(p.PrivateMemorySize64, false));
+            log.InfoFormat("Private memory size: {0} B({1})", p.PrivateMemorySize64, Util.MemorySizeStringSuitableUnits(p.PrivateMemorySize64, false));
             log.InfoFormat("Nonpaged system memory size: {0} B({1})", p.NonpagedSystemMemorySize64, Util.MemorySizeStringSuitableUnits(p.NonpagedSystemMemorySize64, false));
             log.InfoFormat("Paged memory size: {0} B({1})", p.PagedMemorySize64, Util.MemorySizeStringSuitableUnits(p.PagedMemorySize64, false));
             log.InfoFormat("Paged system memory size: {0} B({1})", p.PagedSystemMemorySize64, Util.MemorySizeStringSuitableUnits(p.PagedSystemMemorySize64, false));
@@ -513,7 +514,7 @@ namespace XenAdmin
                     string filepath = GetLogFile() ?? Messages.MESSAGEBOX_LOGFILE_MISSING;
 
                     using (var d = new ErrorDialog(String.Format(Messages.MESSAGEBOX_PROGRAM_UNEXPECTED, HelpersGUI.DateTimeToString(DateTime.Now, "yyyy-MM-dd HH:mm:ss", false), filepath))
-                        {WindowTitle = string.Format(Messages.MESSAGEBOX_PROGRAM_UNEXPECTED_TITLE, BrandManager.BrandConsole)})
+                    { WindowTitle = string.Format(Messages.MESSAGEBOX_PROGRAM_UNEXPECTED_TITLE, BrandManager.BrandConsole) })
                     {
                         // CA-44733
                         if (IsInvokable(MainWindow) && !MainWindow.InvokeRequired)
@@ -671,7 +672,7 @@ namespace XenAdmin
             else
             {
                 using (var dlg = new ErrorDialog(msg)
-                    {WindowTitle = string.Format(Messages.MESSAGEBOX_PROGRAM_UNEXPECTED_TITLE, BrandManager.BrandConsole)})
+                { WindowTitle = string.Format(Messages.MESSAGEBOX_PROGRAM_UNEXPECTED_TITLE, BrandManager.BrandConsole) })
                     dlg.ShowDialog();
             }
         }
@@ -927,7 +928,9 @@ namespace XenAdmin
             var authModules = AuthenticationManager.RegisteredModules;
             while (authModules.MoveNext())
             {
-                var module = (IAuthenticationModule)authModules.Current;
+                if (!(authModules.Current is IAuthenticationModule module))
+                    continue;
+
                 if (module.AuthenticationType == "Basic")
                     BasicAuthenticationModule = module;
                 else if (module.AuthenticationType == "Digest")

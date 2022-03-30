@@ -154,7 +154,7 @@
     <value>1</value>
   </data>
   <data name="m_labelIntro.Text" xml:space="preserve">
-    <value>操作系统修复将为在非 [XenServer] 平台上创建的 OVF 包(例如，在 VMware 环境中创建的 OVF 包)和磁盘映像创建基本级别的互操作性。操作系统修复将尝试修复导入的 VM 中出现的可能会阻止 VM 的操作系统重新启动的问题。
+    <value>操作系统修复将为在非 {0} 平台上创建的 OVF 包(例如，在 VMware 环境中创建的 OVF 包)和磁盘映像创建基本级别的互操作性。操作系统修复将尝试修复导入的 VM 中出现的可能会阻止 VM 的操作系统重新启动的问题。
 
 操作系统修复以可引导的 ISO 映像方式提供，附加到导入的 VM 的 DVD 驱动器上，在首次启动时对该 VM 执行必要的修复。</value>
   </data>
@@ -222,7 +222,7 @@
     <value>3</value>
   </data>
   <data name="m_labelDontRunOSFixups.Text" xml:space="preserve">
-    <value>如果正在导入的 VM 是在 [XenServer] 上创建的，请选择此选项。</value>
+    <value>如果正在导入的 VM 是在 {0} 上创建的，请选择此选项。</value>
   </data>
   <data name="&gt;&gt;m_labelDontRunOSFixups.Name" xml:space="preserve">
     <value>m_labelDontRunOSFixups</value>
@@ -288,7 +288,7 @@
     <value>5</value>
   </data>
   <data name="m_labelRunOSFixups.Text" xml:space="preserve">
-    <value>如果正在导入的 VM 是在除 [XenServer] 外的虚拟机管理程序上创建的，请选择此选项。</value>
+    <value>如果正在导入的 VM 是在除 {0} 外的虚拟机管理程序上创建的，请选择此选项。</value>
   </data>
   <data name="&gt;&gt;m_labelRunOSFixups.Name" xml:space="preserve">
     <value>m_labelRunOSFixups</value>

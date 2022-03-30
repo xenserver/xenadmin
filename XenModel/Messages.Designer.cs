@@ -1593,16 +1593,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Moving virtual disk &apos;{0}&apos;....
-        /// </summary>
-        public static string ACTION_MOVING_VDI {
-            get {
-                return ResourceManager.GetString("ACTION_MOVING_VDI", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Moving Virtual Disk &apos;{0}&apos; to SR &apos;{1}&apos;.
+        ///   Looks up a localized string similar to Moving Virtual Disk &apos;{0}&apos; from SR &apos;{1}&apos; to SR &apos;{2}&apos;.
         /// </summary>
         public static string ACTION_MOVING_VDI_TO_SR {
             get {
@@ -2664,15 +2655,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Duplicating.
-        /// </summary>
-        public static string ACTION_TEMPLATE_CLONING {
-            get {
-                return ResourceManager.GetString("ACTION_TEMPLATE_CLONING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Restart toolstack on &apos;{0}&apos;.
         /// </summary>
         public static string ACTION_TOOLSTACK_RESTART_ON {
@@ -3114,7 +3096,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Copying VM &apos;{0}&apos; to &apos;{1}&apos;.
+        ///   Looks up a localized string similar to Copying VM &apos;{0}&apos; from &apos;{1}&apos; to &apos;{2}&apos;.
         /// </summary>
         public static string ACTION_VM_CROSS_POOL_COPY_TITLE {
             get {
@@ -3231,11 +3213,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Moving VM &apos;{0}&apos; to &apos;{1}&apos; on SR &apos;{2}&apos;.
+        ///   Looks up a localized string similar to Moving VM &apos;{0}&apos; from server &apos;{1}&apos; to server &apos;{2}&apos;.
         /// </summary>
-        public static string ACTION_VM_MOVING_TITLE {
+        public static string ACTION_VM_MOVING_HOST {
             get {
-                return ResourceManager.GetString("ACTION_VM_MOVING_TITLE", resourceCulture);
+                return ResourceManager.GetString("ACTION_VM_MOVING_HOST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Moving VM &apos;{0}&apos; to SR &apos;{1}&apos;.
+        /// </summary>
+        public static string ACTION_VM_MOVING_SR {
+            get {
+                return ResourceManager.GetString("ACTION_VM_MOVING_SR", resourceCulture);
             }
         }
         
@@ -3789,6 +3780,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Assigning new roles to subjects &apos;{0}&apos;.
+        /// </summary>
+        public static string AD_ADDING_REMOVING_ROLES_ON_MULTIPLE {
+            get {
+                return ResourceManager.GetString("AD_ADDING_REMOVING_ROLES_ON_MULTIPLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to (Always granted access).
         /// </summary>
         public static string AD_ALWAYS_GRANTED_ACCESS {
@@ -3864,6 +3864,32 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You are about to revoke the permissions for user &apos;{0}&apos;.
+        ///
+        ///You are currently logged in as &apos;{0}&apos; on &apos;{1}&apos;, and doing this will disconnect you from &apos;{1}&apos;. To reconnect, you will need to supply the local root account credentials, or the credentials for another authorized AD user.
+        ///
+        ///Do you want to continue?.
+        /// </summary>
+        public static string AD_CONFIRM_LOGOUT_CURRENT_USER {
+            get {
+                return ResourceManager.GetString("AD_CONFIRM_LOGOUT_CURRENT_USER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are about to revoke the permissions for group &apos;{0}&apos;.
+        ///
+        ///The user you are currently logged into &apos;{1}&apos; with is a member of &apos;{0}&apos;. Proceeding will disconnect you and any other members of this group from &apos;{1}&apos;. To reconnect, you will need to supply the local root account credentials, or the credentials for another authorized AD user.
+        ///
+        ///Do you want to continue?.
+        /// </summary>
+        public static string AD_CONFIRM_LOGOUT_CURRENT_USER_GROUP {
+            get {
+                return ResourceManager.GetString("AD_CONFIRM_LOGOUT_CURRENT_USER_GROUP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to terminate this user session?
         ///
         ///This will disconnect you from &apos;{0}&apos;..
@@ -3880,32 +3906,6 @@ namespace XenAdmin {
         public static string AD_CONFIRM_SELF_TERMINATE_OK {
             get {
                 return ResourceManager.GetString("AD_CONFIRM_SELF_TERMINATE_OK", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You are about to revoke the permissions for user &apos;{0}&apos;.
-        ///
-        ///You are currently logged in as &apos;{0}&apos; on &apos;{1}&apos;, and doing this will disconnect you from &apos;{1}&apos;. To reconnect, you will need to supply the local root account credentials, or the credentials for another authorized AD user.
-        ///
-        ///Do you want to continue?.
-        /// </summary>
-        public static string AD_CONFIRM_SUICIDE {
-            get {
-                return ResourceManager.GetString("AD_CONFIRM_SUICIDE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You are about to revoke the permissions for group &apos;{0}&apos;.
-        ///
-        ///The user you are currently logged into &apos;{1}&apos; with is a member of &apos;{0}&apos;. Proceeding will disconnect you and any other members of this group from &apos;{1}&apos;. To reconnect, you will need to supply the local root account credentials, or the credentials for another authorized AD user.
-        ///
-        ///Do you want to continue?.
-        /// </summary>
-        public static string AD_CONFIRM_SUICIDE_GROUP {
-            get {
-                return ResourceManager.GetString("AD_CONFIRM_SUICIDE_GROUP", resourceCulture);
             }
         }
         
@@ -4060,24 +4060,86 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You are currently logged in as one of the selected users. If you continue you will be logged out of &apos;{0}&apos;.
+        ///   Looks up a localized string similar to You are currently logged in as one of the selected users. If you continue, you will be logged out of &apos;{0}&apos;. All other selected users will also be logged out.
         ///
-        ///Do you want to continue?.
+        ///Are you sure you want to continue?.
         /// </summary>
-        public static string AD_LOGOUT_SUICIDE_MANY {
+        public static string AD_LOGOUT_CURRENT_USER_MANY {
             get {
-                return ResourceManager.GetString("AD_LOGOUT_SUICIDE_MANY", resourceCulture);
+                return ResourceManager.GetString("AD_LOGOUT_CURRENT_USER_MANY", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You are currently logged in as the selected user. If you continue you will be logged out of &apos;{0}&apos;.
+        ///   Looks up a localized string similar to You are currently logged in as one of the selected users. If you assign a new role, you will be logged out of &apos;{0}&apos;. All other selected users that are logged in will also be logged out.
         ///
-        ///Do you want to continue?.
+        ///Are you sure you want to continue?.
         /// </summary>
-        public static string AD_LOGOUT_SUICIDE_ONE {
+        public static string AD_LOGOUT_CURRENT_USER_MANY_ROLE_CHANGE {
             get {
-                return ResourceManager.GetString("AD_LOGOUT_SUICIDE_ONE", resourceCulture);
+                return ResourceManager.GetString("AD_LOGOUT_CURRENT_USER_MANY_ROLE_CHANGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are currently logged in as the selected user. If you continue, you will be logged out of &apos;{0}&apos;.
+        ///
+        ///Are you sure you want to continue?.
+        /// </summary>
+        public static string AD_LOGOUT_CURRENT_USER_ONE {
+            get {
+                return ResourceManager.GetString("AD_LOGOUT_CURRENT_USER_ONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are currently logged in as the selected user. If you assign a new role, you will be logged out of &apos;{0}&apos;.
+        ///
+        ///Are you sure you want to continue?.
+        /// </summary>
+        public static string AD_LOGOUT_CURRENT_USER_ONE_ROLE_CHANGE {
+            get {
+                return ResourceManager.GetString("AD_LOGOUT_CURRENT_USER_ONE_ROLE_CHANGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to log out these {0} users?.
+        /// </summary>
+        public static string AD_LOGOUT_USER_MANY {
+            get {
+                return ResourceManager.GetString("AD_LOGOUT_USER_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you assign a new role to logged in users, they will be logged out.
+        ///
+        ///Are you sure you want to continue?.
+        /// </summary>
+        public static string AD_LOGOUT_USER_MANY_ROLE_CHANGE {
+            get {
+                return ResourceManager.GetString("AD_LOGOUT_USER_MANY_ROLE_CHANGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to log out the user &apos;{0}&apos;?.
+        /// </summary>
+        public static string AD_LOGOUT_USER_ONE {
+            get {
+                return ResourceManager.GetString("AD_LOGOUT_USER_ONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you assign a new role to user &apos;{0}&apos;, the user will be logged out.
+        ///
+        ///Are you sure you want to continue?.
+        /// </summary>
+        public static string AD_LOGOUT_USER_ONE_ROLE_CHANGE {
+            get {
+                return ResourceManager.GetString("AD_LOGOUT_USER_ONE_ROLE_CHANGE", resourceCulture);
             }
         }
         
@@ -4096,6 +4158,24 @@ namespace XenAdmin {
         public static string AD_NOT_CONFIGURED_BLURB_HOST {
             get {
                 return ResourceManager.GetString("AD_NOT_CONFIGURED_BLURB_HOST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to remove these {0} users?.
+        /// </summary>
+        public static string AD_REMOVE_USER_MANY {
+            get {
+                return ResourceManager.GetString("AD_REMOVE_USER_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to remove the user &apos;{0}&apos;?.
+        /// </summary>
+        public static string AD_REMOVE_USER_ONE {
+            get {
+                return ResourceManager.GetString("AD_REMOVE_USER_ONE", resourceCulture);
             }
         }
         
@@ -7084,7 +7164,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The trusted CA certificate of &apos;{0}&apos; expired on {1}..
+        ///   Looks up a localized string similar to The trusted CA certificate &apos;{0}&apos; of &apos;{1}&apos; expired on {2}..
         /// </summary>
         public static string CERTIFICATE_CA_ALERT_EXPIRED_DESCIRPTION {
             get {
@@ -7093,7 +7173,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Trusted CA certificate on {0} expired.
+        ///   Looks up a localized string similar to Trusted CA certificate &apos;{0}&apos; on {1} expired.
         /// </summary>
         public static string CERTIFICATE_CA_ALERT_EXPIRED_TITLE {
             get {
@@ -7102,7 +7182,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The trusted CA certificate of &apos;{0}&apos; will expire on {1}..
+        ///   Looks up a localized string similar to The trusted CA certificate &apos;{0}&apos; of &apos;{1}&apos; will expire on {2}..
         /// </summary>
         public static string CERTIFICATE_CA_ALERT_EXPIRING_DESCRIPTION {
             get {
@@ -7111,7 +7191,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Trusted CA certificate on {0} expiring in {1} day(s).
+        ///   Looks up a localized string similar to Trusted CA certificate &apos;{0}&apos; on {1} expiring in {2} day(s).
         /// </summary>
         public static string CERTIFICATE_CA_ALERT_EXPIRING_TITLE_DAYS {
             get {
@@ -7120,7 +7200,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Trusted CA certificate on {0} expiring in {1} hour(s).
+        ///   Looks up a localized string similar to Trusted CA certificate &apos;{0}&apos; on {1} expiring in {2} hour(s).
         /// </summary>
         public static string CERTIFICATE_CA_ALERT_EXPIRING_TITLE_HOURS {
             get {
@@ -7129,7 +7209,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Trusted CA certificate on {0} expiring in {1} minute(s).
+        ///   Looks up a localized string similar to Trusted CA certificate &apos;{0}&apos; on {1} expiring in {2} minute(s).
         /// </summary>
         public static string CERTIFICATE_CA_ALERT_EXPIRING_TITLE_MINUTES {
             get {
@@ -7306,6 +7386,55 @@ namespace XenAdmin {
         public static string CERTIFICATE_KEY_INVALID {
             get {
                 return ResourceManager.GetString("CERTIFICATE_KEY_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server certificate compatibility check.
+        /// </summary>
+        public static string CERTIFICATE_KEY_LENGTH_CHECK_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_KEY_LENGTH_CHECK_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checking compatibility of server identity certificate.
+        /// </summary>
+        public static string CERTIFICATE_KEY_LENGTH_CHECK_GROUP {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_KEY_LENGTH_CHECK_GROUP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The key size of the server&apos;s identity certificate is too small..
+        /// </summary>
+        public static string CERTIFICATE_KEY_LENGTH_PROBLEM_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_KEY_LENGTH_PROBLEM_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The key size of the server&apos;s identity certificate is smaller than 2048 bytes.
+        ///
+        ///It is recommended that you first install a new certificate with a key size of at least 2048 bytes, otherwise you will not be able to connect to the server after the upgrade..
+        /// </summary>
+        public static string CERTIFICATE_KEY_LENGTH_PROBLEM_MORE_INFO {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_KEY_LENGTH_PROBLEM_MORE_INFO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The key size of the server&apos;s identity certificate is smaller than 2048 bytes.
+        ///
+        ///If you are upgrading to {0} {1} and above, it is recommended that you first install a new certificate with a key size of at least 2048 bytes, otherwise you will not be able to connect to the server after the upgrade..
+        /// </summary>
+        public static string CERTIFICATE_KEY_LENGTH_WARNING_MORE_INFO {
+            get {
+                return ResourceManager.GetString("CERTIFICATE_KEY_LENGTH_WARNING_MORE_INFO", resourceCulture);
             }
         }
         
@@ -8018,6 +8147,42 @@ namespace XenAdmin {
         public static string CONFIGURE_HA_ELLIPSIS {
             get {
                 return ResourceManager.GetString("CONFIGURE_HA_ELLIPSIS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your external SSH console could not be launched. Please check that you have selected a valid file..
+        /// </summary>
+        public static string CONFIGURE_SSH_CONSOLE_ERROR {
+            get {
+                return ResourceManager.GetString("CONFIGURE_SSH_CONSOLE_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An external SSH console has not been configured..
+        /// </summary>
+        public static string CONFIGURE_SSH_CONSOLE_FILE_NOT_CONFIGURED {
+            get {
+                return ResourceManager.GetString("CONFIGURE_SSH_CONSOLE_FILE_NOT_CONFIGURED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The file associated with your external SSH console doesn&apos;t exist. Please check that you have selected a valid file..
+        /// </summary>
+        public static string CONFIGURE_SSH_CONSOLE_FILE_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("CONFIGURE_SSH_CONSOLE_FILE_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Configure &amp;SSH Console.
+        /// </summary>
+        public static string CONFIGURE_SSH_CONSOLE_TITLE {
+            get {
+                return ResourceManager.GetString("CONFIGURE_SSH_CONSOLE_TITLE", resourceCulture);
             }
         }
         
@@ -10457,7 +10622,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Copying template &apos;{0}&apos;.
+        ///   Looks up a localized string similar to Copying template &apos;{0}&apos; to SR &apos;{1}&apos;.
         /// </summary>
         public static string COPYING_TEMPLATE {
             get {
@@ -13260,6 +13425,69 @@ namespace XenAdmin {
         public static string DMC {
             get {
                 return ResourceManager.GetString("DMC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checking for VMs using Dynamic Memory Control (DMC).
+        /// </summary>
+        public static string DMC_CHECK_ENABLED {
+            get {
+                return ResourceManager.GetString("DMC_CHECK_ENABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shut Down VMs and &amp;Disable DMC.
+        /// </summary>
+        public static string DMC_DISABLE {
+            get {
+                return ResourceManager.GetString("DMC_DISABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disabling Dynamic Memory Control....
+        /// </summary>
+        public static string DMC_DISABLE_ACTION_TITLE {
+            get {
+                return ResourceManager.GetString("DMC_DISABLE_ACTION_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 
+        ///Your system has VMs that use DMC. Their memory settings must be reconfigured before you can upgrade to {0} because support for DMC has been removed in this release.
+        ///
+        ///Click Shut Down VMs and Disable DMC if you want {1} to reconfigure your VMs&apos; memory settings.
+        ///
+        ///Click Cancel if you prefer to reconfigure your VMs&apos; memory settings manually..
+        /// </summary>
+        public static string DMC_REMOVAL_LONG_ERROR {
+            get {
+                return ResourceManager.GetString("DMC_REMOVAL_LONG_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your system has VMs that use DMC. If you are upgrading to {0}, their memory settings must be reconfigured because support for DMC has been removed in this release.
+        ///
+        ///Click Shut Down VMs and Disable DMC if you want {1} to reconfigure your VMs&apos; memory settings.
+        ///
+        ///Click Cancel if you prefer to reconfigure your VMs&apos; memory settings manually..
+        /// </summary>
+        public static string DMC_REMOVAL_LONG_WARNING {
+            get {
+                return ResourceManager.GetString("DMC_REMOVAL_LONG_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: Support for Dynamic Memory Control (DMC) has been removed in {1}..
+        /// </summary>
+        public static string DMC_REMOVAL_SHORT {
+            get {
+                return ResourceManager.GetString("DMC_REMOVAL_SHORT", resourceCulture);
             }
         }
         
@@ -16871,6 +17099,51 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to External Tools.
+        /// </summary>
+        public static string EXTERNAL_TOOLS {
+            get {
+                return ResourceManager.GetString("EXTERNAL_TOOLS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage external tools.
+        /// </summary>
+        public static string EXTERNAL_TOOLS_DETAILS {
+            get {
+                return ResourceManager.GetString("EXTERNAL_TOOLS_DETAILS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File is invalid. Please select an .exe file..
+        /// </summary>
+        public static string EXTERNAL_TOOLS_FILE_INVALID {
+            get {
+                return ResourceManager.GetString("EXTERNAL_TOOLS_FILE_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select SSH console.
+        /// </summary>
+        public static string EXTERNAL_TOOLS_OPEN_FILE_TITLE {
+            get {
+                return ResourceManager.GetString("EXTERNAL_TOOLS_OPEN_FILE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Executables (*.exe)|*.exe.
+        /// </summary>
+        public static string EXTERNAL_TOOLS_OPEN_FILE_TYPE {
+            get {
+                return ResourceManager.GetString("EXTERNAL_TOOLS_OPEN_FILE_TYPE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed.
         /// </summary>
         public static string FAILED {
@@ -17029,6 +17302,15 @@ namespace XenAdmin {
         public static string FILE_NAME_IS_DEVICE_NAME_ERROR_MESSAGE {
             get {
                 return ResourceManager.GetString("FILE_NAME_IS_DEVICE_NAME_ERROR_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File not found.
+        /// </summary>
+        public static string FILE_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("FILE_NOT_FOUND", resourceCulture);
             }
         }
         
@@ -21209,15 +21491,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Importing VM....
-        /// </summary>
-        public static string IMPORTVM_IMPORTING {
-            get {
-                return ResourceManager.GetString("IMPORTVM_IMPORTING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Preparing to Import VM.
         /// </summary>
         public static string IMPORTVM_PREP {
@@ -21250,6 +21523,15 @@ namespace XenAdmin {
         public static string IMPORTVM_UPDATING_VM {
             get {
                 return ResourceManager.GetString("IMPORTVM_UPDATING_VM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uploading &apos;{0}&apos; to &apos;{1}&apos; ({2}% done)....
+        /// </summary>
+        public static string IMPORTVM_UPLOADING {
+            get {
+                return ResourceManager.GetString("IMPORTVM_UPLOADING", resourceCulture);
             }
         }
         
@@ -21506,7 +21788,8 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} cannot be used for installing updates on servers running {1} {2}. Please use {3} {2} instead..
+        ///   Looks up a localized string similar to {0} cannot be used for installing updates on servers running {1} {2}.
+        ///Please use latest available {3} for {1} {2} instead..
         /// </summary>
         public static string INSTALL_PENDING_UPDATES_DISABLED_REASON {
             get {
@@ -31826,42 +32109,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to log out these {0} users?.
-        /// </summary>
-        public static string QUESTION_LOGOUT_AD_USER_MANY {
-            get {
-                return ResourceManager.GetString("QUESTION_LOGOUT_AD_USER_MANY", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to log out the user &apos;{0}&apos;?.
-        /// </summary>
-        public static string QUESTION_LOGOUT_AD_USER_ONE {
-            get {
-                return ResourceManager.GetString("QUESTION_LOGOUT_AD_USER_ONE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to remove these {0} users?.
-        /// </summary>
-        public static string QUESTION_REMOVE_AD_USER_MANY {
-            get {
-                return ResourceManager.GetString("QUESTION_REMOVE_AD_USER_MANY", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to remove the user &apos;{0}&apos;?.
-        /// </summary>
-        public static string QUESTION_REMOVE_AD_USER_ONE {
-            get {
-                return ResourceManager.GetString("QUESTION_REMOVE_AD_USER_ONE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Quiesced snapshots.
         /// </summary>
         public static string QUIESCED_SNAPSHOTS {
@@ -31915,7 +32162,34 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Current access levels do not allow migration of VMs across pools. Log in as a different user with sufficient privileges on both source and target hosts and try again..
+        ///   Looks up a localized string similar to A {0} user cannot copy templates across pools. Log in as a different user with sufficient privileges on both source and destination servers and try again..
+        /// </summary>
+        public static string RBAC_CROSS_POOL_COPY_TEMPLATE_BLOCKED {
+            get {
+                return ResourceManager.GetString("RBAC_CROSS_POOL_COPY_TEMPLATE_BLOCKED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A {0} user cannot copy VMs across pools. Log in as a different user with sufficient privileges on both source and destination servers and try again..
+        /// </summary>
+        public static string RBAC_CROSS_POOL_COPY_VM_BLOCKED {
+            get {
+                return ResourceManager.GetString("RBAC_CROSS_POOL_COPY_VM_BLOCKED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A {0} user cannot migrate templates across pools. Log in as a different user with sufficient privileges on both source and destination servers and try again..
+        /// </summary>
+        public static string RBAC_CROSS_POOL_MIGRATE_TEMPLATE_BLOCKED {
+            get {
+                return ResourceManager.GetString("RBAC_CROSS_POOL_MIGRATE_TEMPLATE_BLOCKED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A {0} user cannot migrate VMs across pools. Log in as a different user with sufficient privileges on both source and destination servers and try again..
         /// </summary>
         public static string RBAC_CROSS_POOL_MIGRATE_VM_BLOCKED {
             get {
@@ -31924,11 +32198,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User {0} does not have sufficient permissions to run a Disaster Recovery wizard. Login as a different user with sufficient privileges and try again..
+        ///   Looks up a localized string similar to A {0} user does not have sufficient permissions to use Disaster Recovery. Login as a different user with sufficient privileges and try again..
         /// </summary>
         public static string RBAC_DR_WIZARD_MESSAGE {
             get {
                 return ResourceManager.GetString("RBAC_DR_WIZARD_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A {0} user cannot download system status reports. Log in as a different user with sufficient privileges and try again..
+        /// </summary>
+        public static string RBAC_GET_SYSTEM_STATUS_BLOCKED {
+            get {
+                return ResourceManager.GetString("RBAC_GET_SYSTEM_STATUS_BLOCKED", resourceCulture);
             }
         }
         
@@ -31960,6 +32243,24 @@ namespace XenAdmin {
         public static string RBAC_HTTP_FAILURE {
             get {
                 return ResourceManager.GetString("RBAC_HTTP_FAILURE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A {0} user cannot copy templates. Log in as a different user with sufficient privileges and try again..
+        /// </summary>
+        public static string RBAC_INTRA_POOL_COPY_TEMPLATE_BLOCKED {
+            get {
+                return ResourceManager.GetString("RBAC_INTRA_POOL_COPY_TEMPLATE_BLOCKED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A {0} user cannot copy VMs. Log in as a different user with sufficient privileges and try again..
+        /// </summary>
+        public static string RBAC_INTRA_POOL_COPY_VM_BLOCKED {
+            get {
+                return ResourceManager.GetString("RBAC_INTRA_POOL_COPY_VM_BLOCKED", resourceCulture);
             }
         }
         
@@ -36263,6 +36564,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Terminating session for users &apos;{0}&apos;.
+        /// </summary>
+        public static string TERMINATING_USER_SESSION_MULTIPLE {
+            get {
+                return ResourceManager.GetString("TERMINATING_USER_SESSION_MULTIPLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Test archive target location.
         /// </summary>
         public static string TEST_ARCHIVE_LOCATION {
@@ -36949,7 +37259,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You have applied filters to the list of updates. Do you want to dismiss all updates from every connected server, or only the updates you have chosen to view? In both cases the dismissed updates will be removed from the servers permanently.
+        ///   Looks up a localized string similar to You have applied filters to the list of update notifications. Do you want to dismiss all update notifications for every connected server, or only the update notifications you have chosen to view?
         ///
         ///Note that if RBAC is enabled, only updates which you have privileges to dismiss will be affected..
         /// </summary>
@@ -36960,7 +37270,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This operation will remove permanently all updates from every connected server. Do you want to continue?
+        ///   Looks up a localized string similar to This operation will dismiss all update notifications for every connected server. Do you want to continue?
         ///
         ///Note that if RBAC is enabled, only updates which you have privileges to dismiss will be affected..
         /// </summary>
@@ -36980,7 +37290,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This operation will remove the selected updates from the servers permanently. Do you want to continue?
+        ///   Looks up a localized string similar to This operation will dismiss all the selected update notifications. Do you want to continue?
         ///
         ///Note that if RBAC is enabled, only updates which you have privileges to dismiss will be affected..
         /// </summary>
@@ -40513,7 +40823,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} is not recommended for general management of servers running {1} {2}. Please use {3} {2} instead..
+        ///   Looks up a localized string similar to {0} is not recommended for general management of servers running {1} {2}. Please use latest available {3} for {1} {2} instead..
         /// </summary>
         public static string WARNING_PRE_CLOUD_VERSION_CONNECTION {
             get {

@@ -58,8 +58,8 @@ namespace XenAdmin.Actions
             RelatedTask = XenAPI.VM.async_revert(Session, m_Snapshot.opaque_ref);
             PollToCompletion();
             _finished = true;
-            PercentComplete = 90;
-            Description = String.Format(Messages.REVERTING_POWER_STATE, VM.Name());
+            Tick(90, string.Format(Messages.REVERTING_POWER_STATE, VM.Name()));
+
             try
             {
                 RevertPowerState(m_Snapshot, VM);
@@ -69,8 +69,7 @@ namespace XenAdmin.Actions
                 // ignored
             }
 
-            PercentComplete = 100;
-            Description = String.Format(Messages.VM_REVERTED, m_Snapshot.Name());
+            Tick(100, string.Format(Messages.VM_REVERTED, m_Snapshot.Name()));
         }
 
         public override int PercentComplete

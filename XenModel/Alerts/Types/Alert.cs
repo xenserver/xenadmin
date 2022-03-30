@@ -117,7 +117,7 @@ namespace XenAdmin.Alerts
             lock (XenCenterAlertsLock)
             {
                 if (index >= 0 && index < XenCenterAlerts.Count)
-                    XenCenterAlerts[index] = XenCenterAlerts[index]; // this will trigger the CollectionChanged event with CollectionChangeAction.Refresh
+                    XenCenterAlerts.RefreshElement(XenCenterAlerts[index]);
             }
         }
 

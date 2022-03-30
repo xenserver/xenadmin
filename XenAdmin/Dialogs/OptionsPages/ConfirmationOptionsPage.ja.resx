@@ -151,7 +151,7 @@
     <value>7</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>インポートするOVF / OVAパッケージの検証時に発行される警告を表示するように [XenCenter] を構成できます。</value>
+    <value>インポートするOVF / OVAパッケージの検証時に発行される警告を表示するように {0} を構成できます。</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
@@ -187,7 +187,7 @@
     <value>0</value>
   </data>
   <data name="labelBlurb.Text" xml:space="preserve">
-    <value>'通知' ビューの 1 つまたは複数のアラート、アップデート、またはイベントをクリアするたびに表示する警告を [XenCenter] で構成できます。</value>
+    <value>'通知' ビューの 1 つまたは複数のアラート、アップデート、またはイベントをクリアするたびに表示する警告を {0} で構成できます。</value>
   </data>
   <data name="&gt;&gt;labelBlurb.Name" xml:space="preserve">
     <value>labelBlurb</value>

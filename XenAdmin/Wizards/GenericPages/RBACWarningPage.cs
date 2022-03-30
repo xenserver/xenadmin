@@ -38,6 +38,7 @@ using XenAdmin.Network;
 using XenAPI;
 using System.Threading;
 using XenAdmin.Core;
+using IXenConnection = XenAdmin.Network.IXenConnection;
 
 
 namespace XenAdmin.Wizards.GenericPages
@@ -46,11 +47,11 @@ namespace XenAdmin.Wizards.GenericPages
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private readonly Dictionary<IXenConnection, List<WizardPermissionCheck>> checksPerConnectionDict;
+        private readonly Dictionary<IXenConnection, List<WizardRbacCheck>> checksPerConnectionDict;
         private Thread bgThread;
-        private bool refreshPage = false;
-        private bool finished = false;
-        public bool blockProgress = false;
+        private bool refreshPage;
+        private bool finished;
+        private bool blockProgress;
 
         public RBACWarningPage(string description) 
             : this()
@@ -61,30 +62,54 @@ namespace XenAdmin.Wizards.GenericPages
         public RBACWarningPage()
         {
             InitializeComponent();
-            checksPerConnectionDict = new Dictionary<IXenConnection, List<WizardPermissionCheck>>();
+            checksPerConnectionDict = new Dictionary<IXenConnection, List<WizardRbacCheck>>();
         }
 
-        public override string HelpID { get { return "RBAC"; } }
+        public override string HelpID => "RBAC";
 
-        public override string Text { get { return Messages.RBAC_WARNING_PAGE_TEXT_TITLE; } }
-        
-        public override string PageTitle { get { return Messages.RBAC_WARNING_PAGE_TEXT_TITLE; } }
+        public override string Text => Messages.RBAC_WARNING_PAGE_TEXT_TITLE;
 
-        public void AddPermissionChecks(IXenConnection connection, params WizardPermissionCheck[] permissionChecks)
+        public override string PageTitle => Messages.RBAC_WARNING_PAGE_TEXT_TITLE;
+
+        #region AddApiMethodsCheck and overloads
+
+        /// <summary>
+        /// Clears the existing permission checks and adds the ones specified.
+        /// </summary>
+        public void SetPermissionChecks(IEnumerable<IXenConnection> connectionsToCheck, params WizardRbacCheck[] checks)
+        {
+            ClearPermissionChecks();
+
+            foreach (var connection in connectionsToCheck)
+                AddPermissionChecks(connection, checks);
+        }
+
+        /// <summary>
+        /// Clears the existing permission checks and adds the ones specified.
+        /// </summary>
+        public void SetPermissionChecks(IXenConnection connectionToCheck, params WizardRbacCheck[] checks)
+        {
+            SetPermissionChecks(new List<IXenConnection> {connectionToCheck}, checks);
+        }
+
+        /// <summary>
+        /// Adds the permission checks specified to the existing ones (without clearing them first).
+        /// </summary>
+        public void AddPermissionChecks(IXenConnection connection, params WizardRbacCheck[] checks)
         {
             if (!checksPerConnectionDict.ContainsKey(connection))
-            {
-                checksPerConnectionDict.Add(connection, new List<WizardPermissionCheck>());
-            }
+                checksPerConnectionDict.Add(connection, new List<WizardRbacCheck>());
 
-            checksPerConnectionDict[connection].AddRange(permissionChecks);
+            checksPerConnectionDict[connection].AddRange(checks);
         }
 
-		public void ClearPermissionChecks()
+        private void ClearPermissionChecks()
 		{
             DeregisterConnectionEvents();
             checksPerConnectionDict.Clear();
 		}
+
+        #endregion
 
         protected override void PageLoadedCore(PageLoadedDirection direction)
         {
@@ -145,23 +170,22 @@ namespace XenAdmin.Wizards.GenericPages
             }
         }
 
-        private PermissionCheckResult RunPermissionChecks(IXenConnection connection,
-            List<WizardPermissionCheck> permissionChecks, out List<WizardPermissionCheck> errors,
-            out List<WizardPermissionCheck> warnings)
+        private PermissionCheckResult RunPermissionChecks(IXenConnection connection, List<WizardRbacCheck> permissionChecks,
+            out List<WizardRbacCheck> errors, out List<WizardRbacCheck> warnings)
         {
             PermissionCheckResult checkResult = PermissionCheckResult.OK;
 
-            errors = new List<WizardPermissionCheck>();
-            warnings = new List<WizardPermissionCheck>();
-            foreach (WizardPermissionCheck wpc in permissionChecks)
+            errors = new List<WizardRbacCheck>();
+            warnings = new List<WizardRbacCheck>();
+
+            foreach (WizardRbacCheck wpc in permissionChecks)
             {
-                List<Role> rolesAbleToComplete = Role.ValidRoleList(wpc.ApiCallsToCheck, connection);
+                List<Role> rolesAbleToComplete = wpc.GetValidRoles(connection);
                 List<Role> subjectRoles = connection.Session.Roles;
 
                 if (subjectRoles.Find(rolesAbleToComplete.Contains) != null)
                     continue;
 
-                log.DebugFormat("Failed RBAC check: {0}", wpc.WarningMessage);
                 if (wpc.Blocking)
                 {
                     errors.Add(wpc);
@@ -193,8 +217,8 @@ namespace XenAdmin.Wizards.GenericPages
                 }
                 else
                 {
-                    List<WizardPermissionCheck> errors;
-                    List<WizardPermissionCheck> warnings;
+                    List<WizardRbacCheck> errors;
+                    List<WizardRbacCheck> warnings;
                     checkResult = RunPermissionChecks(connection, connectionChecks.Value, out errors, out warnings);
                     switch (checkResult)
                     {
@@ -214,7 +238,7 @@ namespace XenAdmin.Wizards.GenericPages
             FinishedUpdating();
         }
 
-        private void AddErrors(IXenConnection connection, List<WizardPermissionCheck> errors)
+        private void AddErrors(IXenConnection connection, List<WizardRbacCheck> errors)
         {
             Program.AssertOffEventThread();
 
@@ -227,10 +251,10 @@ namespace XenAdmin.Wizards.GenericPages
             List<Role> roleList = connection.Session.Roles;
             roleList.Sort();
 
-            foreach (WizardPermissionCheck wizardPermissionCheck in errors)
+            foreach (WizardRbacCheck wizardPermissionCheck in errors)
             {
-                // the string is a format string that needs to take the current role (we use the subject they were authorised under which could be a group or user)
-                string description = String.Format(wizardPermissionCheck.WarningMessage, roleList[0].FriendlyName());
+                // the string is a format string that needs to take the current role (we use the subject they were authorized under which could be a group or user)
+                var description = string.Format(wizardPermissionCheck.WarningMessage, roleList[0].FriendlyName());
                 AddDetailsRow(description, PermissionCheckResult.Failed);
             }
 
@@ -254,15 +278,14 @@ namespace XenAdmin.Wizards.GenericPages
             });
         }
 
-        private void AddWarnings(IXenConnection connection, List<WizardPermissionCheck> warnings)
+        private void AddWarnings(IXenConnection connection, List<WizardRbacCheck> warnings)
         {
             List<Role> roleList = connection.Session.Roles;
             roleList.Sort();
 
-            foreach (WizardPermissionCheck wizardPermissionCheck in warnings)
+            foreach (WizardRbacCheck wizardPermissionCheck in warnings)
             {
-                if (wizardPermissionCheck.WarningAction != null)
-                    wizardPermissionCheck.WarningAction();
+                wizardPermissionCheck.WarningAction?.Invoke();
 
                 // the string is a format string that needs to take the current role (we use the subject they were authorised under which could be a group or user)
                 string description = String.Format(wizardPermissionCheck.WarningMessage, roleList[0].FriendlyName());
@@ -325,8 +348,10 @@ namespace XenAdmin.Wizards.GenericPages
                                      });
         }
 
+
         internal enum PermissionCheckResult { OK, Warning, Failed }
 
+        
         private abstract class PermissionCheckGridRow : DataGridViewRow
         {
             protected DataGridViewImageCell iconCell = new DataGridViewImageCell();
@@ -379,52 +404,55 @@ namespace XenAdmin.Wizards.GenericPages
                 descriptionCell.Value = desc;
             }
         }
+    }
 
-        public delegate void PermissionCheckActionDelegate();
-        public class WizardPermissionCheck
+
+    public class WizardRbacCheck
+    {
+        private readonly RbacMethodList _apiMethodsToCheck = new RbacMethodList();
+
+        /// <summary>
+        /// This is the warning message will be displayed. It should be a format string with one
+        /// placeholder for the user's current role, which will be supplied when the page is displayed.
+        /// </summary>
+        public string WarningMessage { get; }
+
+        /// <summary>
+        /// Whether this check should prevent the user from proceeding further on the wizard
+        /// </summary>
+        public bool Blocking { get; set; }
+
+        public Action WarningAction { get; set; }
+
+        public WizardRbacCheck(string warningMessage, RbacMethodList methodList)
         {
-            public RbacMethodList ApiCallsToCheck;
-            /// <summary>
-            /// This is the warning message will be displayed. It should be a format string which takes one input, the users current role, which will be supplied when the page is displayed.
-            /// </summary>
-            public string WarningMessage;
-            /// <summary>
-            /// If true, this warning will be the only one that displays, and will use the cross icon.
-            /// </summary>
-            public bool Blocking = false;
-            public PermissionCheckActionDelegate WarningAction;
-            
-            public WizardPermissionCheck(string warningMessage)
-            {
-                this.WarningMessage = warningMessage;
-                ApiCallsToCheck = new RbacMethodList();
-            }
+#if DEBUG
+            System.Diagnostics.Debug.Assert(warningMessage.Contains("{0}"),
+                "WarningMessage should be a format string with one placeholder for the user's current role");
+#endif
+            WarningMessage = warningMessage;
+            _apiMethodsToCheck = methodList;
+        }
 
-            public void AddApiCheck(string s)
-            {
-                ApiCallsToCheck.Add(s);
-            }
+        public WizardRbacCheck(string warningMessage, params string[] strings)
+            : this(warningMessage, new RbacMethodList(strings))
+        {
+        }
 
-            public void AddApiCheck(RbacMethod method)
-            {
-                ApiCallsToCheck.Add(method);
-            }
+        public void AddApiMethods(params string[] strings)
+        {
+            _apiMethodsToCheck.AddRange(strings);
+        }
 
-            public void AddApiCheckRange(params string[] strings)
-            {
-                ApiCallsToCheck.AddRange(strings);
-            }
+        public void AddApiMethods(RbacMethodList methodList)
+        {
+            foreach (var method in methodList)
+                _apiMethodsToCheck.Add(method);
+        }
 
-			public void AddApiCheckRange(RbacMethodList methodList)
-			{
-				foreach (var method in methodList)
-					ApiCallsToCheck.Add(method);
-			}
-
-            public void AddWarningAction(PermissionCheckActionDelegate d)
-            {
-                WarningAction = d;
-            }
+        public List<Role> GetValidRoles(IXenConnection connection)
+        {
+            return Role.ValidRoleList(_apiMethodsToCheck, connection);
         }
     }
 }

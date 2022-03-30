@@ -1069,7 +1069,7 @@
     <value>Segoe UI, 9pt, style=Bold</value>
   </data>
   <data name="labelLegacyUpdates.Location" type="System.Drawing.Point, System.Drawing">
-    <value>126, 0</value>
+    <value>64, 0</value>
   </data>
   <data name="labelLegacyUpdates.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>10, 0, 10, 10</value>
@@ -1078,13 +1078,13 @@
     <value>5, 5, 5, 5</value>
   </data>
   <data name="labelLegacyUpdates.Size" type="System.Drawing.Size, System.Drawing">
-    <value>524, 27</value>
+    <value>647, 27</value>
   </data>
   <data name="labelLegacyUpdates.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
   <data name="labelLegacyUpdates.Text" xml:space="preserve">
-    <value>{0} does not check for {1} updates any longer. To install updates on {1} {2} use {3} {2} instead.</value>
+    <value>{0} does not check for {1} updates any longer. To install updates on {1} {2} use latest available {3} for {1} {2} instead.</value>
   </data>
   <data name="&gt;&gt;labelLegacyUpdates.Name" xml:space="preserve">
     <value>labelLegacyUpdates</value>

@@ -375,6 +375,9 @@
   <data name="DUPLICATE_VM" xml:space="preserve">
     <value>Cannot restore this VM because it would create a duplicate</value>
   </data>
+  <data name="DYNAMIC_MEMORY_CONTROL_UNAVAILABLE" xml:space="preserve">
+    <value>The VM requires Dynamic Memory Control (DMC), which is unavailable</value>
+  </data>
   <data name="EVACUATE_NO_OTHER_HOSTS_FOR_MASTER" xml:space="preserve">
     <value>No other server available to nominate as coordinator.  Please add or enable some other servers.</value>
   </data>
@@ -651,6 +654,12 @@
   <data name="INVALID_REPOMD_XML" xml:space="preserve">
     <value>The repomd.xml is invalid.</value>
   </data>
+  <data name="INVALID_REPOSITORY_PROXY_CREDENTIAL" xml:space="preserve">
+    <value>The repository proxy username/password is invalid.</value>
+  </data>
+  <data name="INVALID_REPOSITORY_PROXY_URL" xml:space="preserve">
+    <value>The repository proxy URL is invalid.</value>
+  </data>
   <data name="INVALID_UPDATE" xml:space="preserve">
     <value>The uploaded update package is invalid.</value>
   </data>
@@ -733,7 +742,7 @@
     <value>The dynamic memory range does not satisfy the following constraint.</value>
   </data>
   <data name="MEMORY_CONSTRAINT_VIOLATION_MAXPIN" xml:space="preserve">
-    <value>The dynamic memory range violates constraint static_min = dynamic_min = dynamic_max = static_max.</value>
+    <value>The dynamic memory range violates constraint static_min &lt;= dynamic_min = dynamic_max = static_max.</value>
   </data>
   <data name="MEMORY_CONSTRAINT_VIOLATION_ORDER" xml:space="preserve">
     <value>The dynamic memory range violates constraint static_min &lt;= dynamic_min &lt;= dynamic_max &lt;= static_max.</value>
@@ -1128,7 +1137,7 @@ Authorized Roles: {1}</value>
     <value>The repository is in use.</value>
   </data>
   <data name="REPOSYNC_FAILED" xml:space="preserve">
-    <value>Syning with remote YUM repository failed.</value>
+    <value>Syncing with remote YUM repository failed.</value>
   </data>
   <data name="REPOSYNC_IN_PROGRESS" xml:space="preserve">
     <value>The pool is syncing with the enabled remote YUM repository.</value>

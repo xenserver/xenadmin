@@ -144,9 +144,6 @@
   <data name="EULA_RB_REJECT" xml:space="preserve">
     <value>拒绝</value>
   </data>
-  <data name="EULA_TITLE" xml:space="preserve">
-    <value>[Citrix] OVF EULA</value>
-  </data>
   <data name="FAILED_TO_ADD_OS_SECTION" xml:space="preserve">
     <value>无法添加操作系统部分，因为虚拟系统集合无效。</value>
   </data>
@@ -184,7 +181,7 @@
     <value>无法打开 {0}。</value>
   </data>
   <data name="OVF_CREATED" xml:space="preserve">
-    <value>由 [XenCenter] 磁盘映像导入创建</value>
+    <value>由磁盘映像导入创建</value>
   </data>
   <data name="OVF_DEPLOYMENT_CFG_SECTION_MISSING" xml:space="preserve">
     <value>找不到部署配置部分。</value>

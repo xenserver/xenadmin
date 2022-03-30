@@ -556,7 +556,7 @@
     <value>1</value>
   </data>
   <data name="labelGeneralInformationMessage.Text" xml:space="preserve">
-    <value>仅许可此池使用 [Citrix] Virtual Apps and Desktops 工作负载</value>
+    <value>信息</value>
   </data>
   <data name="labelGeneralInformationMessage.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>BottomLeft</value>

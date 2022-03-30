@@ -32,12 +32,12 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Windows.Forms;
 using System.Drawing.Drawing2D;
+using System.Windows.Forms;
 
 namespace XenAdmin.Controls
 {
-    public class CustomListRow
+    public class CustomListRow : IDisposable
     {
         private Color ForeColor_ = SystemColors.ControlText;
         private Color BackColor_ = SystemColors.Control;
@@ -258,18 +258,14 @@ namespace XenAdmin.Controls
 
         public void Dispose()
         {
-            if (ForePen != null)
-                ForePen.Dispose();
-            if (BorderPen != null)
-                BorderPen.Dispose();
-            if (BackBrush != null)
-                BackBrush.Dispose();
-            if (SelectedBackBrush != null)
-                SelectedBackBrush.Dispose();
+            ForePen?.Dispose();
+            BorderPen?.Dispose();
+            BackBrush?.Dispose();
+            SelectedBackBrush?.Dispose();
 
-            foreach (CustomListRow r in Children)
+            foreach (var row in Children)
             {
-                r.Dispose();
+                row.Dispose();
             }
         }
 

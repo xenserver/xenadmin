@@ -97,7 +97,7 @@ namespace XenAdmin.SettingsPanels
             }
             else if (vm.power_state != vm_power_state.Halted)
             {
-                var msg = vm.has_ballooning() && !Helpers.FeatureForbidden(vm, Host.RestrictDMC)
+                var msg = vm.SupportsBallooning() && !Helpers.FeatureForbidden(vm, Host.RestrictDMC)
                     ? Messages.CONFIRM_CHANGE_MEMORY_MAX_SINGULAR
                     : Messages.CONFIRM_CHANGE_MEMORY_SINGULAR;
 

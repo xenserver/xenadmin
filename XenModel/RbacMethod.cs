@@ -87,7 +87,7 @@ namespace XenAdmin.Core
         }
 
         /// <summary>
-        /// Note that this constructor takes simple API calls, or complex ones with hash table edits and keys deliminated by a RbacMethod.KEY_SPLITTER
+        /// Note that this constructor takes simple API calls, or complex ones with hash table edits and keys delimited by a RbacMethod.KEY_SPLITTER
         /// Silently ignores blank methods, blank keys and entries with too many RbacMethod.KEY_SPLITTER
         /// </summary>
         public RbacMethodList(params string[] methods)

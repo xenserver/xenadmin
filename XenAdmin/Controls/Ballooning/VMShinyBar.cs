@@ -129,7 +129,7 @@ namespace XenAdmin.Controls.Ballooning
             static_max = vm.memory_static_max;
             dynamic_min = dynamic_min_orig = Util.CorrectRoundingErrors(vm.memory_dynamic_min);
             dynamic_max = dynamic_max_orig = Util.CorrectRoundingErrors(vm.memory_dynamic_max);
-            has_ballooning = vm.has_ballooning();
+            has_ballooning = vm.SupportsBallooning();
             allowEdit = allowMemEdit;
         }
 

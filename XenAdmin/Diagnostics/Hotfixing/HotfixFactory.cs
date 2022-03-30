@@ -45,12 +45,12 @@ namespace XenAdmin.Diagnostics.Hotfixing
         private static readonly Hotfix stockholmHotfix = new SingleHotfix
         {
             Filename = "RPU005",
-            UUID = "d356e876-81f4-4ca1-8940-3970b9a0daae"
+            UUID = "f9f63a51-509f-46fc-8c99-820fcac2228c"
         };
 
         public static Hotfix Hotfix(Host host)
         {
-            if (Helpers.StockholmOrGreater(host) && !Helpers.YangtzeOrGreater(host))
+            if (Helpers.StockholmOrGreater(host) && !Helpers.Post82X(host))
                 return Hotfix(HotfixableServerVersion.Stockholm);
             return null;
         }

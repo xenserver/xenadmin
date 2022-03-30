@@ -169,6 +169,12 @@
     <Compile Include="Actions\ZipStatusReportAction.cs" />
     <Compile Include="Alerts\Types\Alert.cs" />
     <Compile Include="BrandManager.cs" />
+    <Compile Include="SshConsole.cs" />
+    <Compile Include="FriendlyNames.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FriendlyNames.resx</DependentUpon>
+    </Compile>
     <Compile Include="PathValidator.cs" />
     <Compile Include="UnitStrings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -191,11 +197,6 @@
     <Compile Include="CustomFields\CustomFieldsManager.cs" />
     <Compile Include="DockerContainer.cs" />
     <Compile Include="Folders.cs" />
-    <Compile Include="FriendlyNames.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>FriendlyNames.resx</DependentUpon>
-    </Compile>
     <Compile Include="FriendlyNameManager.cs" />
     <Compile Include="HealthCheckSettings.cs" />
     <Compile Include="InvokeHelper.cs" />
@@ -354,6 +355,7 @@
     <Compile Include="WLB\WlbConfigurationBase.cs" />
     <Compile Include="WLB\WlbHostConfiguration.cs" />
     <Compile Include="WLB\WlbServerState.cs" />
+    <Compile Include="XenAPI-Extensions\Certificate.cs" />
     <Compile Include="XenAPI-Extensions\Blob.cs" />
     <Compile Include="XenAPI-Extensions\HostPowerOnMode.cs" />
     <Compile Include="XenAPI-Extensions\PUSB.cs" />

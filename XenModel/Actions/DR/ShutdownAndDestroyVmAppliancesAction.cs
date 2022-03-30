@@ -101,8 +101,8 @@ namespace XenAdmin.Actions.DR
                 }
                 PercentComplete += increment;
             }
-            Description = Messages.DELETED_VM_APPLIANCES;
-            PercentComplete = 100;
+
+            Tick(100, Messages.DELETED_VM_APPLIANCES);
         }
     }
 }

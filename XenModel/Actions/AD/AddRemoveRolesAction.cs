@@ -63,7 +63,9 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            var serverRoles = Connection.Cache.Roles.Where(r => r.subroles.Count > 0).ToList();
+            var serverRoles = Connection.Cache.Roles
+                .Where(r => (!Helpers.Post82X(Connection) || !Helpers.XapiEqualOrGreater_22_5_0(Connection) || !r.is_internal) && r.subroles.Count > 0)
+                .ToList();
 
             var toAdd = serverRoles.Where(role => _newRoles.Contains(role) &&
                                                   !subject.roles.Contains(new XenRef<Role>(role.opaque_ref))).ToList();
@@ -86,7 +88,6 @@ namespace XenAdmin.Actions
             {
                 log.DebugFormat("Removing role {0} from subject '{1}'.", r.FriendlyName(), subj);
                 Subject.remove_from_roles(Session, subject.opaque_ref, r.opaque_ref);
-                done++;
                 PercentComplete = 100 * ++done / count;
             }
 

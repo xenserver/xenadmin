@@ -78,7 +78,7 @@ namespace XenAdmin.TabPages
             toolStripSeparator2.Visible = false;
             toolStripButtonUpdate.Visible = false;
             labelLegacyUpdates.Text = string.Format(labelLegacyUpdates.Text, BrandManager.BrandConsole,
-                BrandManager.ProductBrand, BrandManager.ProductVersion82, BrandManager.LegacyConsole);
+                BrandManager.ProductBrand, BrandManager.ProductVersion821, BrandManager.LegacyConsole);
 
             try
             {
@@ -644,7 +644,7 @@ namespace XenAdmin.TabPages
             AutoCheckForUpdatesDisabledLabel.Visible = visible;
             checkForUpdatesNowLink.Visible = visible;
             labelLegacyUpdates.Visible = ConnectionsManager.XenConnectionsCopy.Any(c =>
-                c.IsConnected && !Helpers.PostStockholm(c));
+                c.IsConnected && !Helpers.Post82X(c));
         }
 
         /// <summary>

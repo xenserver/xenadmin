@@ -254,7 +254,7 @@ namespace XenAdmin.Actions
                 {
                     if (!Connection.Session.IsLocalSuperuser && selfSid == sid)
                     {
-                        // Committing suicide. We will log ourselves out later.
+                        // We will log ourselves out later.
                         logoutSession = true;
                     }
                     else

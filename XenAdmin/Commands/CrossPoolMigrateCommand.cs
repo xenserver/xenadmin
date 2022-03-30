@@ -32,7 +32,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Windows.Forms;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
 using XenAdmin.Wizards.CrossPoolMigrateWizard;

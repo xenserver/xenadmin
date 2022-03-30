@@ -2944,6 +2944,38 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Snapshots the specified VM, making a new VM. Snapshot automatically exploits the capabilities of the underlying storage repository in which the VM's disk images are stored (e.g. Copy on Write).
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_new_name">The name of the snapshotted VM</param>
+        /// <param name="_ignore_vdis">A list of VDIs to ignore for the snapshot First published in Unreleased.</param>
+        public static XenRef<VM> snapshot(Session session, string _vm, string _new_name, List<XenRef<VDI>> _ignore_vdis)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_snapshot(session.opaque_ref, _vm, _new_name, _ignore_vdis);
+            else
+                return XenRef<VM>.Create(session.XmlRpcProxy.vm_snapshot(session.opaque_ref, _vm ?? "", _new_name ?? "", _ignore_vdis == null ? new string[] {} : Helper.RefListToStringArray(_ignore_vdis)).parse());
+        }
+
+        /// <summary>
+        /// Snapshots the specified VM, making a new VM. Snapshot automatically exploits the capabilities of the underlying storage repository in which the VM's disk images are stored (e.g. Copy on Write).
+        /// First published in XenServer 5.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_new_name">The name of the snapshotted VM</param>
+        /// <param name="_ignore_vdis">A list of VDIs to ignore for the snapshot First published in Unreleased.</param>
+        public static XenRef<Task> async_snapshot(Session session, string _vm, string _new_name, List<XenRef<VDI>> _ignore_vdis)
+        {
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_snapshot(session.opaque_ref, _vm, _new_name, _ignore_vdis);
+          else
+              return XenRef<Task>.Create(session.XmlRpcProxy.async_vm_snapshot(session.opaque_ref, _vm ?? "", _new_name ?? "", _ignore_vdis == null ? new string[] {} : Helper.RefListToStringArray(_ignore_vdis)).parse());
+        }
+
+        /// <summary>
         /// Snapshots the specified VM with quiesce, making a new VM. Snapshot automatically exploits the capabilities of the underlying storage repository in which the VM's disk images are stored (e.g. Copy on Write).
         /// First published in XenServer 5.0.
         /// </summary>

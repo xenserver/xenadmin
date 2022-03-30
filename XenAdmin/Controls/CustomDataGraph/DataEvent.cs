@@ -48,7 +48,7 @@ namespace XenAdmin.Controls.CustomDataGraph
             : base(x, y)
         {
             Message = message;
-            xo = Helpers.XenObjectFromMessage(message);
+            xo = message.GetXenObject();
         }
 
         public void DrawToBuffer(Graphics g, Point p, Rectangle rectangle, int stripheight)

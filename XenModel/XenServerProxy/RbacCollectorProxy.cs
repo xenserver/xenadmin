@@ -57,24 +57,24 @@ namespace XenAdmin.Core
         {
              if(proxyMethodName== "Url")
                     return null;
-            ProxyMethodInfo pmi = SimpleProxyMethodParser.ParseTypeAndNameOnly(proxyMethodName);
-            string method = pmi.TypeName + "." + pmi.MethodName;
+             ProxyMethodInfo pmi = SimpleProxyMethodParser.ParseTypeAndNameOnly(proxyMethodName);
+             string method = pmi.TypeName + "." + pmi.MethodName;
             
-            if (proxyMethodName == "task_get_record")
-            {
-                Proxy_Task task = new Proxy_Task() { progress = 100, status=XenAPI.task_status_type.success.ToString(),result = ""};
-                return new Response<Proxy_Task>(task);
-            }
+             if (proxyMethodName == "task_get_record")
+             {
+                 Proxy_Task task = new Proxy_Task() { progress = 100, status=XenAPI.task_status_type.success.ToString(),result = ""};
+                 return new Response<Proxy_Task>(task);
+             }
             
-            if (proxyMethodName == "host_call_plugin" && args != null && args.Length > 2 && "trim".Equals(args[2]))
-                return new Response<string>("True");;
+             if (proxyMethodName == "host_call_plugin" && args != null && args.Length > 2 && "trim".Equals(args[2]))
+                 return new Response<string>("True");;
 
-            if (pmi.MethodName == "add_to_other_config" || pmi.MethodName == "remove_from_other_config")  // these calls are special because they can have per-key permissions
-                rbacMethods.Add(method, (string)args[2]);
-            else
-                rbacMethods.Add(method);
+             if (args != null && args.Length > 2 && (pmi.MethodName == "add_to_other_config" || pmi.MethodName == "remove_from_other_config"))  // these calls are special because they can have per-key permissions
+                 rbacMethods.Add(method, (string)args[2]);
+             else
+                 rbacMethods.Add(method);
             
-            return ResponseByType(returnType);
+             return ResponseByType(returnType);
         }
 
         private object ResponseByType(string returnType)

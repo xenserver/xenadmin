@@ -117,104 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="&gt;&gt;AddNetworkButton.Name" xml:space="preserve">
-    <value>AddNetworkButton</value>
-  </data>
-  <data name="&gt;&gt;AddNetworkButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;AddNetworkButton.Parent" xml:space="preserve">
-    <value>flowLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;AddNetworkButton.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;EditButtonContainer.Name" xml:space="preserve">
-    <value>EditButtonContainer</value>
-  </data>
-  <data name="&gt;&gt;EditButtonContainer.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.ToolTipContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;EditButtonContainer.Parent" xml:space="preserve">
-    <value>flowLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;EditButtonContainer.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;RemoveButtonContainer.Name" xml:space="preserve">
-    <value>RemoveButtonContainer</value>
-  </data>
-  <data name="&gt;&gt;RemoveButtonContainer.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.ToolTipContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;RemoveButtonContainer.Parent" xml:space="preserve">
-    <value>flowLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;RemoveButtonContainer.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
-    <value>flowLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;toolTipContainerActivateToggle.Name" xml:space="preserve">
-    <value>toolTipContainerActivateToggle</value>
-  </data>
-  <data name="&gt;&gt;toolTipContainerActivateToggle.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.ToolTipContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;toolTipContainerActivateToggle.Parent" xml:space="preserve">
-    <value>flowLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;toolTipContainerActivateToggle.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
+  <data name="AddNetworkButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
-  <data name="flowLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Bottom</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
-  <data name="flowLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 182</value>
-  </data>
-  <data name="flowLayoutPanel1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 5, 0, 0</value>
-  </data>
-  <data name="flowLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>595, 35</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
-  <data name="flowLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
-    <value>48</value>
-  </data>
-  <data name="&gt;&gt;flowLayoutPanel1.Name" xml:space="preserve">
-    <value>flowLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;flowLayoutPanel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;flowLayoutPanel1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;flowLayoutPanel1.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="AddNetworkButton.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
   <data name="AddNetworkButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
   <data name="AddNetworkButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 5</value>
   </data>
   <data name="AddNetworkButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 3, 0</value>
+    <value>0, 3, 3, 3</value>
+  </data>
+  <data name="AddNetworkButton.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
   </data>
   <data name="AddNetworkButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>102, 23</value>
@@ -234,53 +156,29 @@
   <data name="&gt;&gt;AddNetworkButton.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;EditNetworkButton.Name" xml:space="preserve">
-    <value>EditNetworkButton</value>
+  <data name="EditButtonContainer.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="&gt;&gt;EditNetworkButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="EditButtonContainer.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
-  <data name="&gt;&gt;EditNetworkButton.Parent" xml:space="preserve">
-    <value>EditButtonContainer</value>
+  <data name="EditNetworkButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="&gt;&gt;EditNetworkButton.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="EditButtonContainer.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="EditButtonContainer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>105, 5</value>
-  </data>
-  <data name="EditButtonContainer.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 3, 0</value>
-  </data>
-  <data name="EditButtonContainer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 23</value>
-  </data>
-  <data name="EditButtonContainer.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;EditButtonContainer.Name" xml:space="preserve">
-    <value>EditButtonContainer</value>
-  </data>
-  <data name="&gt;&gt;EditButtonContainer.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.ToolTipContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;EditButtonContainer.Parent" xml:space="preserve">
-    <value>flowLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;EditButtonContainer.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="EditNetworkButton.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="EditNetworkButton.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
   <data name="EditNetworkButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="EditNetworkButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
+  </data>
+  <data name="EditNetworkButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="EditNetworkButton.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
   </data>
   <data name="EditNetworkButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>102, 23</value>
@@ -300,53 +198,50 @@
   <data name="&gt;&gt;EditNetworkButton.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="RemoveButtonContainer.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="EditButtonContainer.Location" type="System.Drawing.Point, System.Drawing">
+    <value>81, 6</value>
   </data>
-  <data name="&gt;&gt;RemoveNetworkButton.Name" xml:space="preserve">
-    <value>RemoveNetworkButton</value>
+  <data name="EditButtonContainer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
   </data>
-  <data name="&gt;&gt;RemoveNetworkButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;RemoveNetworkButton.Parent" xml:space="preserve">
-    <value>RemoveButtonContainer</value>
-  </data>
-  <data name="&gt;&gt;RemoveNetworkButton.ZOrder" xml:space="preserve">
+  <data name="EditButtonContainer.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="RemoveButtonContainer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>210, 5</value>
+  <data name="&gt;&gt;EditButtonContainer.Name" xml:space="preserve">
+    <value>EditButtonContainer</value>
   </data>
-  <data name="RemoveButtonContainer.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 3, 0</value>
-  </data>
-  <data name="RemoveButtonContainer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 23</value>
-  </data>
-  <data name="RemoveButtonContainer.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;RemoveButtonContainer.Name" xml:space="preserve">
-    <value>RemoveButtonContainer</value>
-  </data>
-  <data name="&gt;&gt;RemoveButtonContainer.Type" xml:space="preserve">
+  <data name="&gt;&gt;EditButtonContainer.Type" xml:space="preserve">
     <value>XenAdmin.Controls.ToolTipContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;RemoveButtonContainer.Parent" xml:space="preserve">
+  <data name="&gt;&gt;EditButtonContainer.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;RemoveButtonContainer.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;EditButtonContainer.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
-  <data name="RemoveNetworkButton.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="RemoveButtonContainer.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="RemoveButtonContainer.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="RemoveNetworkButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="RemoveNetworkButton.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
   <data name="RemoveNetworkButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="RemoveNetworkButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
+  </data>
+  <data name="RemoveNetworkButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="RemoveNetworkButton.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
   </data>
   <data name="RemoveNetworkButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>102, 23</value>
@@ -366,11 +261,29 @@
   <data name="&gt;&gt;RemoveNetworkButton.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>315, 5</value>
+  <data name="RemoveButtonContainer.Location" type="System.Drawing.Point, System.Drawing">
+    <value>162, 6</value>
   </data>
-  <data name="groupBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 3, 0</value>
+  <data name="RemoveButtonContainer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="RemoveButtonContainer.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;RemoveButtonContainer.Name" xml:space="preserve">
+    <value>RemoveButtonContainer</value>
+  </data>
+  <data name="&gt;&gt;RemoveButtonContainer.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.ToolTipContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;RemoveButtonContainer.Parent" xml:space="preserve">
+    <value>flowLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;RemoveButtonContainer.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>243, 6</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>2, 20</value>
@@ -393,50 +306,29 @@
   <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;buttonActivateToggle.Name" xml:space="preserve">
-    <value>buttonActivateToggle</value>
+  <data name="toolTipContainerActivateToggle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="&gt;&gt;buttonActivateToggle.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="toolTipContainerActivateToggle.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
-  <data name="&gt;&gt;buttonActivateToggle.Parent" xml:space="preserve">
-    <value>toolTipContainerActivateToggle</value>
+  <data name="buttonActivateToggle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="&gt;&gt;buttonActivateToggle.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="toolTipContainerActivateToggle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>320, 5</value>
-  </data>
-  <data name="toolTipContainerActivateToggle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="toolTipContainerActivateToggle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 23</value>
-  </data>
-  <data name="toolTipContainerActivateToggle.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;toolTipContainerActivateToggle.Name" xml:space="preserve">
-    <value>toolTipContainerActivateToggle</value>
-  </data>
-  <data name="&gt;&gt;toolTipContainerActivateToggle.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.ToolTipContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;toolTipContainerActivateToggle.Parent" xml:space="preserve">
-    <value>flowLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;toolTipContainerActivateToggle.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="buttonActivateToggle.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="buttonActivateToggle.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
   <data name="buttonActivateToggle.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="buttonActivateToggle.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
+  </data>
+  <data name="buttonActivateToggle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="buttonActivateToggle.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
   </data>
   <data name="buttonActivateToggle.Size" type="System.Drawing.Size, System.Drawing">
     <value>101, 23</value>
@@ -459,18 +351,57 @@
   <data name="&gt;&gt;buttonActivateToggle.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="toolTipContainerActivateToggle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>251, 6</value>
+  </data>
+  <data name="toolTipContainerActivateToggle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="toolTipContainerActivateToggle.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;toolTipContainerActivateToggle.Name" xml:space="preserve">
+    <value>toolTipContainerActivateToggle</value>
+  </data>
+  <data name="&gt;&gt;toolTipContainerActivateToggle.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.ToolTipContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;toolTipContainerActivateToggle.Parent" xml:space="preserve">
+    <value>flowLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;toolTipContainerActivateToggle.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="flowLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="flowLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 182</value>
+  </data>
+  <data name="flowLayoutPanel1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 3, 0, 0</value>
+  </data>
+  <data name="flowLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>595, 35</value>
+  </data>
+  <data name="flowLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel1.Name" xml:space="preserve">
+    <value>flowLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="contextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 92</value>
-  </data>
-  <data name="&gt;&gt;contextMenuStrip1.Name" xml:space="preserve">
-    <value>contextMenuStrip1</value>
-  </data>
-  <data name="&gt;&gt;contextMenuStrip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="copyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>127, 22</value>
   </data>
@@ -495,17 +426,17 @@
   <data name="propertiesToolStripMenuItem.Text" xml:space="preserve">
     <value>属性</value>
   </data>
+  <data name="contextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>128, 92</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStrip1.Name" xml:space="preserve">
+    <value>contextMenuStrip1</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStrip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="NetworksGridView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
-  </data>
-  <metadata name="NetworkSriovColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="NetworkSriovColumn.HeaderText" xml:space="preserve">
-    <value>SR-IOV</value>
-  </data>
-  <data name="NetworkSriovColumn.Width" type="System.Int32, mscorlib">
-    <value>68</value>
   </data>
   <data name="NetworksGridView.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -614,6 +545,12 @@
   </metadata>
   <data name="MtuColumn.HeaderText" xml:space="preserve">
     <value>MTU</value>
+  </data>
+  <metadata name="NetworkSriovColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="NetworkSriovColumn.HeaderText" xml:space="preserve">
+    <value>SR-IOV</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

@@ -37,6 +37,7 @@ using XenAdmin.Dialogs;
 using XenAdmin.Dialogs.RestoreSession;
 using XenAdmin.Network;
 using System.Configuration;
+using System.IO;
 using XenCenterLib;
 using System.Linq;
 
@@ -68,15 +69,30 @@ namespace XenAdmin
         private static Dictionary<string, string> VNCPasswords = new Dictionary<string, string>();
 
         /// <summary>
-        /// MSDN info regarding the path to the user.config file is somewhat confusing. It turns out
-        /// it is not in Application.UserAppDataPath as stated on http://msdn.microsoft.com/en-us/library/8eyb2ct1.aspx
-        /// but rather in a location like BasePath\CompanyName\AppName_EvidenceType_EvidenceHash\Version as described on
+        /// MSDN info regarding the path to the user.config file is somewhat confusing.
+        /// It turns out it is not in Application.UserAppDataPath as stated on
+        /// http://msdn.microsoft.com/en-us/library/8eyb2ct1.aspx. As described on
         /// http://stackoverflow.com/questions/1075204/when-using-a-settings-settings-file-in-net-where-is-the-config-actually-stored
-        /// and on http://msdn.microsoft.com/en-us/library/ms379611.aspx.
-        /// Trying to retrieve the filename at the places where this method's caller caught the ConfigurationErrorsException
-        /// returns null, so this one has to be called.
+        /// and on http://msdn.microsoft.com/en-us/library/ms379611.aspx, it is
+        /// ProfileDirectory\CompanyName\AppName_EvidenceType_EvidenceHash\Version\user.config 
+        /// where
+        /// - ProfileDirectory: either the roaming profile directory or the local one.
+        ///   Settings are stored by default in the local user.config file. To store a
+        ///   setting in the roaming user.config file, you need to mark the setting with
+        ///   the SettingsManageabilityAttribute with SettingsManageability set to Roaming.
+        /// - CompanyName: typically the string specified by the AssemblyCompanyAttribute
+        ///   (with the caveat that the string is escaped and truncated as necessary, and if
+        ///   not specified on the assembly, we have a fallback procedure).
+        /// - AppName: typically the string specified by the AssemblyProductAttribute
+        ///   (same caveats as for company name).
+        /// - EvidenceType and EvidenceHash: information derived from the app domain evidence
+        ///   to provide proper app domain and assembly isolation.
+        /// - Version: typically the version specified in the AssemblyVersionAttribute.
+        ///   This is required to isolate different versions of the app deployed side by side.
+        /// - The file name is always simply 'user.config
+        /// Trying to retrieve the filename at the places where this method's caller caught
+        /// the ConfigurationErrorsException returns null, so this one has to be called.
         /// </summary>
-        /// <returns></returns>
         public static string GetUserConfigPath()
         {
             try
@@ -301,6 +317,64 @@ namespace XenAdmin
             }
 
             return true;
+        }
+
+        public static void ConfigureExternalSshClientSettings()
+        {
+            var customSshClient = Properties.Settings.Default.CustomSshConsole;
+            var puttyLocation = Properties.Settings.Default.PuttyLocation;
+            var openSshLocation = Properties.Settings.Default.OpenSSHLocation;
+
+            if (string.IsNullOrEmpty(puttyLocation) && customSshClient == SshConsole.Putty ||
+                string.IsNullOrEmpty(openSshLocation) && customSshClient == SshConsole.OpenSSH)
+            {
+                customSshClient = SshConsole.None;
+            }
+
+            // attempt to locate clients in their default locations
+            if (string.IsNullOrEmpty(puttyLocation))
+            {
+                var defaultPaths = new[] {
+                        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "PuTTY\\putty.exe"),
+                        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "PuTTY\\putty.exe")
+                };
+                puttyLocation = defaultPaths.Where(File.Exists).FirstOrDefault();
+            }
+            if (string.IsNullOrEmpty(openSshLocation))
+            {
+                // https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_server_configuration
+                var defaultPath = Path.Combine(Environment.SystemDirectory, "OpenSSH\\ssh.exe");
+                openSshLocation = File.Exists(defaultPath) ? defaultPath : openSshLocation;
+            }
+
+            // we prioritize PuTTY since that must have been installed by the user
+            if (customSshClient == SshConsole.None)
+            {
+                if (!string.IsNullOrEmpty(puttyLocation))
+                {
+                    customSshClient = SshConsole.Putty;
+                }
+                else if (!string.IsNullOrEmpty(openSshLocation))
+                {
+                    customSshClient = SshConsole.OpenSSH;
+                }
+            }
+
+            // avoid updating settings if they haven't changed
+            if (customSshClient != Properties.Settings.Default.CustomSshConsole)
+            {
+                Properties.Settings.Default.CustomSshConsole = customSshClient;
+            }
+            if (puttyLocation != null && !puttyLocation.Equals(Properties.Settings.Default.PuttyLocation))
+            {
+                Properties.Settings.Default.PuttyLocation = puttyLocation;
+            }
+            if (openSshLocation != null && !openSshLocation.Equals(Properties.Settings.Default.OpenSSHLocation))
+            {
+                Properties.Settings.Default.OpenSSHLocation = openSshLocation;
+            }
+
+            TrySaveSettings();
         }
 
         private static void AddConnection(IXenConnection connection)
@@ -628,6 +702,73 @@ namespace XenAdmin
             log.Info($"=== DoNotConfirmDismissUpdates: {Properties.Settings.Default.DoNotConfirmDismissUpdates}" );
             log.Info($"=== DoNotConfirmDismissEvents: {Properties.Settings.Default.DoNotConfirmDismissEvents}" );
             log.Info($"=== IgnoreOvfValidationWarnings: {Properties.Settings.Default.IgnoreOvfValidationWarnings}");
+        }
+
+        /// <summary>
+        /// Looks for a config file from a previous installation of the application and updates the settings from it.
+        /// </summary>
+        public static void UpgradeFromPreviousInstallation()
+        {
+            try
+            {
+                // The path of the user.config files looks something like this:
+                // <Profile Directory>\<Company Name>\<App Name>_<Evidence Type>_<Evidence Hash>\<Version>\user.config
+                // Get a previous user.config file by enumerating through all the folders in <Profile Directory>\<Company Name> 
+
+                var currentConfigFolder = new DirectoryInfo(GetUserConfigPath()).Parent;
+
+                var companyFolder = currentConfigFolder?.Parent?.Parent;
+                if (companyFolder == null)
+                    return;
+
+                FileInfo previousConfig = null;
+                Version previousVersion = null;
+                Version currentVersion = Program.Version;
+
+                var directories = companyFolder.GetDirectories($"{BrandManager.BrandConsoleNoSpace}*");
+
+                foreach (var dir in directories)
+                {
+                    var configFiles = dir.GetFiles("user.config", SearchOption.AllDirectories);
+
+                    foreach (var file in configFiles)
+                    {
+                        var configFolderName = Path.GetFileName(Path.GetDirectoryName(file.FullName));
+                        if (configFolderName != null)
+                        {
+                            var configVersion = new Version(configFolderName);
+
+                            if (configVersion <= currentVersion && (previousVersion == null || configVersion > previousVersion))
+                            {
+                                previousVersion = configVersion;
+                                previousConfig = file;
+                            }
+                        }
+                    }
+                }
+
+                if (previousConfig != null)
+                {
+                    // copy previous config file to current config location
+                    var destinationFile = Path.GetDirectoryName(currentConfigFolder.FullName);
+
+                    destinationFile = Path.Combine(destinationFile, previousVersion.ToString());
+
+                    if (!Directory.Exists(destinationFile))
+                        Directory.CreateDirectory(destinationFile);
+
+                    destinationFile = Path.Combine(destinationFile, previousConfig.Name);
+
+                    File.Copy(previousConfig.FullName, destinationFile);
+
+                    // upgrade settings
+                    XenAdmin.Properties.Settings.Default.Upgrade();
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Debug("Exception while updating settings.", ex);
+            }
         }
     }
 }

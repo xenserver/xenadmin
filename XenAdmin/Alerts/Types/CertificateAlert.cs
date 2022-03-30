@@ -64,34 +64,38 @@ namespace XenAdmin.Alerts
         {
             get
             {
+                var objectName = XenObject == null ? Messages.UNKNOWN_OBJECT : XenObject.Name();
+
                 switch (Message.Type)
                 {
                     case Message.MessageType.POOL_CA_CERTIFICATE_EXPIRED:
-                        return string.Format(Messages.CERTIFICATE_CA_ALERT_EXPIRED_TITLE, XenObject.Name());
+                        var pool1 = Helpers.GetPoolOfOne(Connection);
+                        return string.Format(Messages.CERTIFICATE_CA_ALERT_EXPIRED_TITLE, objectName, pool1.Name());
 
                     case Message.MessageType.POOL_CA_CERTIFICATE_EXPIRING_07:
                     case Message.MessageType.POOL_CA_CERTIFICATE_EXPIRING_14:
                     case Message.MessageType.POOL_CA_CERTIFICATE_EXPIRING_30:
+                        var pool2 = Helpers.GetPoolOfOne(Connection);
                         if (_certificateExpiryDate.HasValue && _certificateExpiryDate.Value > Timestamp)
                         {
                             var eta = _certificateExpiryDate.Value - Timestamp;
 
                             if (eta.TotalDays >= 1)
-                                return string.Format(Messages.CERTIFICATE_CA_ALERT_EXPIRING_TITLE_DAYS, XenObject.Name(),
-                                    Math.Round(eta.TotalDays, MidpointRounding.AwayFromZero));
+                                return string.Format(Messages.CERTIFICATE_CA_ALERT_EXPIRING_TITLE_DAYS, objectName,
+                                    pool2.Name(), Math.Round(eta.TotalDays, MidpointRounding.AwayFromZero));
 
                             if (eta.TotalHours >= 1)
-                                return string.Format(Messages.CERTIFICATE_CA_ALERT_EXPIRING_TITLE_HOURS, XenObject.Name(),
-                                    Math.Round(eta.TotalHours, MidpointRounding.AwayFromZero));
+                                return string.Format(Messages.CERTIFICATE_CA_ALERT_EXPIRING_TITLE_HOURS, objectName,
+                                    pool2.Name(), Math.Round(eta.TotalHours, MidpointRounding.AwayFromZero));
 
                             if (eta.TotalMinutes >= 1)
-                                return string.Format(Messages.CERTIFICATE_CA_ALERT_EXPIRING_TITLE_MINUTES, XenObject.Name(),
-                                    Math.Round(eta.TotalMinutes, MidpointRounding.AwayFromZero));
+                                return string.Format(Messages.CERTIFICATE_CA_ALERT_EXPIRING_TITLE_MINUTES, objectName,
+                                    pool2.Name(), Math.Round(eta.TotalMinutes, MidpointRounding.AwayFromZero));
                         }
-                        return string.Format(Messages.CERTIFICATE_CA_ALERT_EXPIRED_TITLE, XenObject.Name());
+                        return string.Format(Messages.CERTIFICATE_CA_ALERT_EXPIRED_TITLE, objectName, pool2.Name());
 
                     case Message.MessageType.HOST_INTERNAL_CERTIFICATE_EXPIRED:
-                        return string.Format(Messages.CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRED_TITLE, XenObject.Name());
+                        return string.Format(Messages.CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRED_TITLE, objectName);
 
                     case Message.MessageType.HOST_INTERNAL_CERTIFICATE_EXPIRING_07:
                     case Message.MessageType.HOST_INTERNAL_CERTIFICATE_EXPIRING_14:
@@ -101,21 +105,21 @@ namespace XenAdmin.Alerts
                             var eta = _certificateExpiryDate.Value - Timestamp;
 
                             if (eta.TotalDays >= 1)
-                                return string.Format(Messages.CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRING_TITLE_DAYS, XenObject.Name(),
+                                return string.Format(Messages.CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRING_TITLE_DAYS, objectName,
                                     Math.Round(eta.TotalDays, MidpointRounding.AwayFromZero));
 
                             if (eta.TotalHours >= 1)
-                                return string.Format(Messages.CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRING_TITLE_HOURS, XenObject.Name(),
+                                return string.Format(Messages.CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRING_TITLE_HOURS, objectName,
                                     Math.Round(eta.TotalHours, MidpointRounding.AwayFromZero));
 
                             if (eta.TotalMinutes >= 1)
-                                return string.Format(Messages.CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRING_TITLE_MINUTES, XenObject.Name(),
+                                return string.Format(Messages.CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRING_TITLE_MINUTES, objectName,
                                     Math.Round(eta.TotalMinutes, MidpointRounding.AwayFromZero));
                         }
-                        return string.Format(Messages.CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRED_TITLE, XenObject.Name());
+                        return string.Format(Messages.CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRED_TITLE, objectName);
 
                     case Message.MessageType.HOST_SERVER_CERTIFICATE_EXPIRED:
-                        return string.Format(Messages.CERTIFICATE_HOST_ALERT_EXPIRED_TITLE, XenObject.Name());
+                        return string.Format(Messages.CERTIFICATE_HOST_ALERT_EXPIRED_TITLE, objectName);
 
                     case Message.MessageType.HOST_SERVER_CERTIFICATE_EXPIRING_07:
                     case Message.MessageType.HOST_SERVER_CERTIFICATE_EXPIRING_14:
@@ -125,18 +129,18 @@ namespace XenAdmin.Alerts
                             var eta = _certificateExpiryDate.Value - Timestamp;
 
                             if (eta.TotalDays >= 1)
-                                return string.Format(Messages.CERTIFICATE_HOST_ALERT_EXPIRING_TITLE_DAYS, XenObject.Name(),
+                                return string.Format(Messages.CERTIFICATE_HOST_ALERT_EXPIRING_TITLE_DAYS, objectName,
                                     Math.Round(eta.TotalDays, MidpointRounding.AwayFromZero));
 
                             if (eta.TotalHours >= 1)
-                                return string.Format(Messages.CERTIFICATE_HOST_ALERT_EXPIRING_TITLE_HOURS, XenObject.Name(),
+                                return string.Format(Messages.CERTIFICATE_HOST_ALERT_EXPIRING_TITLE_HOURS, objectName,
                                     Math.Round(eta.TotalHours, MidpointRounding.AwayFromZero));
 
                             if (eta.TotalMinutes >= 1)
-                                return string.Format(Messages.CERTIFICATE_HOST_ALERT_EXPIRING_TITLE_MINUTES, XenObject.Name(),
+                                return string.Format(Messages.CERTIFICATE_HOST_ALERT_EXPIRING_TITLE_MINUTES, objectName,
                                     Math.Round(eta.TotalMinutes, MidpointRounding.AwayFromZero));
                         }
-                        return string.Format(Messages.CERTIFICATE_HOST_ALERT_EXPIRED_TITLE, XenObject.Name());
+                        return string.Format(Messages.CERTIFICATE_HOST_ALERT_EXPIRED_TITLE, objectName);
 
                     default:
                         return base.Title;
@@ -149,37 +153,38 @@ namespace XenAdmin.Alerts
         {
             get
             {
-                if (XenObject == null)
-                    return base.Title;
+                var objectName = XenObject == null ? Messages.UNKNOWN_OBJECT : XenObject.Name();
 
                 switch (Message.Type)
                 {
                     case Message.MessageType.POOL_CA_CERTIFICATE_EXPIRED:
-                        return string.Format(Messages.CERTIFICATE_CA_ALERT_EXPIRED_DESCIRPTION, XenObject.Name(), GetExpiryDate());
+                        var pool1 = Helpers.GetPoolOfOne(Connection);
+                        return string.Format(Messages.CERTIFICATE_CA_ALERT_EXPIRED_DESCIRPTION, objectName, pool1.Name(), GetExpiryDate());
 
                     case Message.MessageType.POOL_CA_CERTIFICATE_EXPIRING_07:
                     case Message.MessageType.POOL_CA_CERTIFICATE_EXPIRING_14:
                     case Message.MessageType.POOL_CA_CERTIFICATE_EXPIRING_30:
+                        var pool2 = Helpers.GetPoolOfOne(Connection);
                         return string.Format(Messages.CERTIFICATE_CA_ALERT_EXPIRING_DESCRIPTION,
-                            XenObject.Name(), GetExpiryDate());
+                            objectName, pool2.Name(), GetExpiryDate());
 
                     case Message.MessageType.HOST_INTERNAL_CERTIFICATE_EXPIRED:
-                        return string.Format(Messages.CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRED_DESCIRPTION, XenObject.Name(), GetExpiryDate());
+                        return string.Format(Messages.CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRED_DESCIRPTION, objectName, GetExpiryDate());
 
                     case Message.MessageType.HOST_INTERNAL_CERTIFICATE_EXPIRING_07:
                     case Message.MessageType.HOST_INTERNAL_CERTIFICATE_EXPIRING_14:
                     case Message.MessageType.HOST_INTERNAL_CERTIFICATE_EXPIRING_30:
                         return string.Format(Messages.CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRING_DESCRIPTION,
-                            XenObject.Name(), GetExpiryDate());
+                            objectName, GetExpiryDate());
 
                     case Message.MessageType.HOST_SERVER_CERTIFICATE_EXPIRED:
-                        return string.Format(Messages.CERTIFICATE_HOST_ALERT_EXPIRED_DESCIRPTION, XenObject.Name(), GetExpiryDate());
+                        return string.Format(Messages.CERTIFICATE_HOST_ALERT_EXPIRED_DESCIRPTION, objectName, GetExpiryDate());
 
                     case Message.MessageType.HOST_SERVER_CERTIFICATE_EXPIRING_07:
                     case Message.MessageType.HOST_SERVER_CERTIFICATE_EXPIRING_14:
                     case Message.MessageType.HOST_SERVER_CERTIFICATE_EXPIRING_30:
                         return string.Format(Messages.CERTIFICATE_HOST_ALERT_EXPIRING_DESCRIPTION,
-                            XenObject.Name(), GetExpiryDate());
+                            objectName, GetExpiryDate());
 
                     default:
                         return base.Title;

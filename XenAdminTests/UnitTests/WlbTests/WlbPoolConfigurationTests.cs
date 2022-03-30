@@ -42,7 +42,7 @@ namespace XenAdminTests.UnitTests.WlbTests
     public class WlbPoolConfigurationTests
     {
         private WlbPoolConfiguration wlbPool;
-        private const int NUMBER_OF_PROPERTIES = 33;
+        private const int NUMBER_OF_PROPERTIES = 32;
 
         [Test]
         public void NullCtorThrows()
@@ -114,7 +114,6 @@ namespace XenAdminTests.UnitTests.WlbTests
             {
                 //Simple setters.....
                 {"OptimizationMode", "MaximizeDensity"}, //PerformanceMode
-                {"MetricGroomingPeriod", "2.0"},
                 {"RecentMoveMinutes", "2.0"},
                 //{"ReportingUseRSServer", "false"},
                 {"ReportingSMTPServer", "some string"},
@@ -136,7 +135,6 @@ namespace XenAdminTests.UnitTests.WlbTests
             var data = new MRInSensitiveData
             {
                 PerformanceMode = WlbPoolPerformanceMode.MaximizePerformance,
-                MetricGroomingPeriod = 5.0,
                 RecentMoveMinutes = 6.0,
                 //ReportingUseRSServer = true,
                 ReportingSMTPServer = "who knows what?!",
@@ -198,9 +196,7 @@ namespace XenAdminTests.UnitTests.WlbTests
         private struct MRInSensitiveData
         {
             public WlbPoolPerformanceMode PerformanceMode;
-            public double MetricGroomingPeriod;
             public double RecentMoveMinutes;
-            //public bool ReportingUseRSServer;
             public string ReportingSMTPServer;
             public int HostCpuThresholdCritical;
             public double HostMemoryThresholdCritical;

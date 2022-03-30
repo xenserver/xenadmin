@@ -74,8 +74,7 @@ namespace XenAdmin.Actions.OvfActions
 			string systemid = m_vmMappings.Keys.ElementAt(0);
 			var mapping = m_vmMappings.Values.ElementAt(0);
 
-			PercentComplete = 20;
-			Description = Messages.IMPORTING_DISK_IMAGE;
+			Tick(20, Messages.IMPORTING_DISK_IMAGE);
 
 			//create a copy of the ovf envelope
 			EnvelopeType[] envs = OVF.Split(m_ovfEnvelope, "system", new object[] {new[] {systemid}});
@@ -100,8 +99,7 @@ namespace XenAdmin.Actions.OvfActions
 			{
                 importedObject = Process(curEnv, m_directory);
 
-				PercentComplete = 100;
-				Description = Messages.COMPLETED;
+				Tick(100, Messages.COMPLETED);
 			}
 			catch (OperationCanceledException)
 			{

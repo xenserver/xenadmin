@@ -81,7 +81,7 @@ namespace XenAdmin.Diagnostics.Problems
         }
 
         public abstract string Message { get; }
-
+        public override string Title => Check.Description;
         public virtual string LinkData => null;
         public virtual string LinkText => LinkData;
     }

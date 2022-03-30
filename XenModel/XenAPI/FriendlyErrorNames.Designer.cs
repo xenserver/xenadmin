@@ -835,6 +835,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The VM requires Dynamic Memory Control (DMC), which is unavailable.
+        /// </summary>
+        public static string DYNAMIC_MEMORY_CONTROL_UNAVAILABLE {
+            get {
+                return ResourceManager.GetString("DYNAMIC_MEMORY_CONTROL_UNAVAILABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No other server available to nominate as coordinator.  Please add or enable some other servers..
         /// </summary>
         public static string EVACUATE_NO_OTHER_HOSTS_FOR_MASTER {
@@ -1663,6 +1672,24 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The repository proxy username/password is invalid..
+        /// </summary>
+        public static string INVALID_REPOSITORY_PROXY_CREDENTIAL {
+            get {
+                return ResourceManager.GetString("INVALID_REPOSITORY_PROXY_CREDENTIAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The repository proxy URL is invalid..
+        /// </summary>
+        public static string INVALID_REPOSITORY_PROXY_URL {
+            get {
+                return ResourceManager.GetString("INVALID_REPOSITORY_PROXY_URL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The uploaded update package is invalid..
         /// </summary>
         public static string INVALID_UPDATE {
@@ -1924,7 +1951,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The dynamic memory range violates constraint static_min = dynamic_min = dynamic_max = static_max..
+        ///   Looks up a localized string similar to The dynamic memory range violates constraint static_min &lt;= dynamic_min = dynamic_max = static_max..
         /// </summary>
         public static string MEMORY_CONSTRAINT_VIOLATION_MAXPIN {
             get {
@@ -3081,7 +3108,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Syning with remote YUM repository failed..
+        ///   Looks up a localized string similar to Syncing with remote YUM repository failed..
         /// </summary>
         public static string REPOSYNC_FAILED {
             get {

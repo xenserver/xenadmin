@@ -311,13 +311,17 @@ namespace XenAdmin.Actions.OvfActions
 
                 #region OPEN DISK
 
-                long dataCapacity;
+                long dataLength;
+                long virtualSize;
+                string format = string.Empty;
 
-                if (VirtualDisk.SupportedDiskFormats.Any(f => ext.ToLower().EndsWith(f.ToLower())))
+                if (ext.ToLower().EndsWith(".vhd"))
                 {
                     vhdDisk = VirtualDisk.OpenDisk(sourcefile, FileAccess.Read);
-                    dataStream = vhdDisk.Content;
-                    dataCapacity = vhdDisk.Capacity;
+                    virtualSize = vhdDisk.Capacity;
+                    dataStream = File.OpenRead(filePath);
+                    dataLength = dataStream.Length;
+                    format = "&format=vhd";
                 }
                 else if (ext.ToLower().EndsWith("iso"))
                 {
@@ -328,7 +332,13 @@ namespace XenAdmin.Actions.OvfActions
                     }
 
                     dataStream = File.OpenRead(filePath);
-                    dataCapacity = dataStream.Length;
+                    dataLength = virtualSize = dataStream.Length;
+                }
+                else if (VirtualDisk.SupportedDiskFormats.Any(f => ext.ToLower().EndsWith(f.ToLower())))
+                {
+                    vhdDisk = VirtualDisk.OpenDisk(sourcefile, FileAccess.Read);
+                    dataStream = vhdDisk.Content;
+                    dataLength = virtualSize = vhdDisk.Capacity;
                 }
                 else
                 {
@@ -351,17 +361,16 @@ namespace XenAdmin.Actions.OvfActions
                     if (sr != null)
                         freespace = sr.physical_size - sr.physical_utilisation;
 
-                    if (freespace < dataCapacity)
+                    if (freespace < virtualSize)
                         throw new IOException(string.Format(Messages.SR_NOT_ENOUGH_SPACE,
-                            sruuid, Util.DiskSizeString(dataCapacity), filename));
+                            sruuid, Util.DiskSizeString(virtualSize), filename));
 
                     VDI newVdi = new VDI
                     {
                         name_label = diskName,
                         name_description = description,
                         SR = new XenRef<SR>(sr == null ? Helper.NullOpaqueRef : sr.opaque_ref),//sr==null is unlikely
-                        virtual_size = dataCapacity,
-                        physical_utilisation = dataCapacity,
+                        virtual_size = virtualSize,
                         type = vdi_type.user,
                         sharable = false,
                         read_only = false,
@@ -387,9 +396,9 @@ namespace XenAdmin.Actions.OvfActions
                         vdiRef = new XenRef<VDI>(vdi.opaque_ref);
                     }
 
-                    if (freespace < dataCapacity)
+                    if (freespace < virtualSize)
                         throw new IOException(string.Format(Messages.VDI_NOT_ENOUGH_SPACE,
-                            vdiuuid, Util.DiskSizeString(dataCapacity), filename));
+                            vdiuuid, Util.DiskSizeString(virtualSize), filename));
                 }
 
                 #endregion
@@ -405,8 +414,8 @@ namespace XenAdmin.Actions.OvfActions
                     Host = Connection.Hostname,
                     Port = Connection.Port,
                     Path = "/import_raw_vdi",
-                    Query = string.Format("session_id={0}&task_id={1}&vdi={2}",
-                        Connection.Session.opaque_ref, taskRef.opaque_ref, vdiuuid)
+                    Query = string.Format("session_id={0}&task_id={1}&vdi={2}{3}",
+                        Connection.Session.opaque_ref, taskRef.opaque_ref, vdiuuid, format)
                 };
 
                 using (Stream outStream = HTTPHelper.PUT(uriBuilder.Uri, dataStream.Length, true))
@@ -414,9 +423,9 @@ namespace XenAdmin.Actions.OvfActions
                         b =>
                         {
                             Description = string.Format(Messages.IMPORT_VDI, filename,
-                                Util.DiskSizeString(b, 2, "F2"), Util.DiskSizeString(dataCapacity));
+                                Util.DiskSizeString(b, 2, "F2"), Util.DiskSizeString(dataLength));
 
-                            updatePercentage((float)b / dataCapacity);
+                            updatePercentage((float)b / dataLength);
                         },
                         () => Cancelling);
 
@@ -516,6 +525,7 @@ namespace XenAdmin.Actions.OvfActions
             #region CPU COUNT
 
             ulong cpuCount = 0;
+            ulong maxCpusCount = 0;
             rasds = OVF.FindRasdByType(system, 3);
 
             if (rasds != null && rasds.Length > 0)
@@ -523,14 +533,27 @@ namespace XenAdmin.Actions.OvfActions
                 //There may be more than one entries corresponding to CPUs
                 //The VirtualQuantity in each one is Cores
 
-                foreach (RASD_Type rasd in rasds)
+                foreach (var rasd in rasds)
+                {
                     cpuCount += rasd.VirtualQuantity.Value;
+                    // CA-361078: Older versions of CHC/XC used to set the limit to 100,000 by default, and use 
+                    // VirtualQuantity for max vCPUs.
+                    // This way, we keep backwards compatibility with older OVFs.
+                    var limit = rasd.Limit?.Value ?? 100_000;
+                    maxCpusCount += limit >= 100_000 ? rasd.VirtualQuantity.Value : limit;
+                }
+                   
             }
 
             if (cpuCount < 1) //default minimum
                 cpuCount = 1;
             else if (cpuCount > long.MaxValue) //unlikely, but better be safe
                 cpuCount = long.MaxValue;
+
+            if (maxCpusCount < 1)
+                maxCpusCount = 1;
+            else if (maxCpusCount > long.MaxValue)
+                maxCpusCount = long.MaxValue;
 
             #endregion
 
@@ -546,7 +569,7 @@ namespace XenAdmin.Actions.OvfActions
                 memory_dynamic_max = (long)memorySize,
                 memory_dynamic_min = (long)memorySize,
                 memory_static_min = (long)memorySize,
-                VCPUs_max = (long)cpuCount,
+                VCPUs_max = (long)maxCpusCount,
                 VCPUs_at_startup = (long)cpuCount,
                 actions_after_shutdown = on_normal_exit.destroy,
                 actions_after_reboot = on_normal_exit.restart,
@@ -1104,7 +1127,7 @@ namespace XenAdmin.Actions.OvfActions
 
             if (usethisdevice == null)
             {
-                if (!device.EndsWith("+"))
+                if (device != null && !device.EndsWith("+"))
                     usethisdevice = device + "+";                
             }
             return usethisdevice;

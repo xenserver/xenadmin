@@ -71,9 +71,8 @@ namespace XenAdmin.Actions.DR
             {
                 MetadataSession = Session.get_record(Session, MetadataSessionRef);
             }
-            PercentComplete = 100;
-            
-            Description = Messages.ACTION_VDI_OPEN_DATABASE_DONE;
+
+            Tick(100, Messages.ACTION_VDI_OPEN_DATABASE_DONE);
         }
     }
 }
