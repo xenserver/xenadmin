@@ -43,6 +43,10 @@ namespace XenAdmin.Controls.CustomDataGraph
             if (points.Count == 0)
                 return;
 
+            // CA-334613: Sharp turns in the graph can result in
+            // the line being drawn outside of the box
+            g.SetClip(r);
+
             int index = points.FindIndex(dataPoint => dataPoint.Y < 0);
             if (index >= 0)
             {
