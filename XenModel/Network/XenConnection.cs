@@ -953,7 +953,7 @@ namespace XenAdmin.Network
             string msg = string.Format(Messages.CONNECTING_NOTICE_TEXT, name);
             log.Info($"Connecting to {name} in progress.");
 
-            ConnectAction = new ActionBase(title, msg, false, false);
+            ConnectAction = new ActionBase(title, msg, false);
 
             ExpectPasswordIsCorrect = true;
             OnConnectionResult(true, null, null);

@@ -231,17 +231,7 @@ namespace XenAdmin.Actions
         public bool ShowProgress { get; protected set; } = true;
 
 
-        public ActionBase(string title, string description, bool suppressHistory)
-            : this(title, description, suppressHistory, false)
-        {
-
-        }
-
-        public ActionBase(string title, string description, bool suppressHistory, bool completeImmediately)
-            : this(title, description, suppressHistory, completeImmediately, null)
-        {}
-
-        public ActionBase(string title, string description, bool suppressHistory, bool completeImmediately, string error)
+        public ActionBase(string title, string description, bool suppressHistory, bool completeImmediately = false, string error = null)
         {
             Title = title;
             _description = description;
