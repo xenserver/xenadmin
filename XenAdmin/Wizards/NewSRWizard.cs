@@ -536,9 +536,9 @@ namespace XenAdmin.Wizards
             if (actionList.Count == 1)
                 FinalAction = actionList[0];
             else
-                FinalAction = new ParallelAction(xenConnection, Messages.NEW_SR_WIZARD_FINAL_ACTION_TITLE,
-                                                 Messages.NEW_SR_WIZARD_FINAL_ACTION_START,
-                                                 Messages.NEW_SR_WIZARD_FINAL_ACTION_END, actionList);
+                FinalAction = new ParallelAction(Messages.NEW_SR_WIZARD_FINAL_ACTION_TITLE,
+                    Messages.NEW_SR_WIZARD_FINAL_ACTION_START,
+                    Messages.NEW_SR_WIZARD_FINAL_ACTION_END, actionList, xenConnection);
 
             // if this is a Disaster Recovery Task, it could be either a "Find existing SRs" or an "Attach SR needed for DR" case
             if (m_srWizardType.DisasterRecoveryTask)

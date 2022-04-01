@@ -44,99 +44,83 @@ namespace XenAdmin.Actions
     /// </summary>
     public class ParallelAction : MultipleAction
     {
-        //Change parameter to increase the number of concurrent actions running
+        /// <summary>
+        /// Change this to increase the number of concurrent actions running
+        /// </summary>
         private const int DEFAULT_MAX_NUMBER_OF_PARALLEL_ACTIONS = 25;
 
-        private Dictionary<IXenConnection, List<AsyncAction>> actionsByConnection = new Dictionary<IXenConnection, List<AsyncAction>>();
-        private Dictionary<IXenConnection, ProduceConsumerQueue> queuesByConnection = new Dictionary<IXenConnection, ProduceConsumerQueue>();
+        private readonly Dictionary<IXenConnection, List<AsyncAction>> _actionsByConnection = new Dictionary<IXenConnection, List<AsyncAction>>();
+        private readonly Dictionary<IXenConnection, ProduceConsumerQueue> _queuesByConnection = new Dictionary<IXenConnection, ProduceConsumerQueue>();
 
-        private List<AsyncAction> actionsWithNoConnection = new List<AsyncAction>();
-        private ProduceConsumerQueue queueWithNoConnection;
+        private readonly List<AsyncAction> _actionsWithNoConnection = new List<AsyncAction>();
+        private ProduceConsumerQueue _queueWithNoConnection;
 
-        private readonly int maxNumberOfParallelActions;
-        private int actionsCount;
+        private readonly int _maxNumberOfParallelActions;
+        private readonly int _actionsCount;
+        private readonly object _lock = new object();
+        private volatile int _completedActionsCount ;
 
-        public ParallelAction(IXenConnection connection, string title, string startDescription, string endDescription, List<AsyncAction> subActions, bool suppressHistory, bool showSubActionsDetails, int maxNumberOfParallelActions = DEFAULT_MAX_NUMBER_OF_PARALLEL_ACTIONS)
-            : base(connection, title, startDescription, endDescription, subActions, suppressHistory, showSubActionsDetails)
-        {
-            if (Connection != null)
-            {
-                actionsByConnection.Add(Connection, subActions);
-                actionsCount = subActions.Count;
-            }
-            else
-                GroupActionsByConnection(); 
-            this.maxNumberOfParallelActions = maxNumberOfParallelActions;
-        }
-
-        public ParallelAction(IXenConnection connection, string title, string startDescription, string endDescription, List<AsyncAction> subActions, int maxNumberOfParallelActions = DEFAULT_MAX_NUMBER_OF_PARALLEL_ACTIONS)
-            : this(connection, title, startDescription, endDescription, subActions, false, false, maxNumberOfParallelActions)
-        { }
-      
         /// <summary>
         /// Use this constructor to create a cross connection ParallelAction.
         /// It takes a list of any number of actions, separates them by connections 
         /// and runs a certain number of them simultaneously on each connection, all connections in parallel.
-        /// Once one simultaneous action is finished the next one in the queue is started until all are complete.
+        /// Once a simultaneous action is finished the next one in the queue is started until all are complete.
         /// </summary>
-        public ParallelAction(string title, string startDescription, string endDescription, List<AsyncAction> subActions, bool suppressHistory, bool showSubActionsDetails, int maxNumberOfParallelActions = DEFAULT_MAX_NUMBER_OF_PARALLEL_ACTIONS)
-            : base(null, title, startDescription, endDescription, subActions, suppressHistory, showSubActionsDetails)
+        public ParallelAction(string title, string startDescription, string endDescription,
+            List<AsyncAction> subActions, IXenConnection connection = null,
+            bool suppressHistory = false, bool showSubActionsDetails = false,
+            int maxNumberOfParallelActions = DEFAULT_MAX_NUMBER_OF_PARALLEL_ACTIONS)
+            : base(connection, title, startDescription, endDescription, subActions, suppressHistory, showSubActionsDetails)
         {
-            GroupActionsByConnection();
-            this.maxNumberOfParallelActions = maxNumberOfParallelActions;
-        }
-
-        public ParallelAction(string title, string startDescription, string endDescription, List<AsyncAction> subActions, int maxNumberOfParallelActions = DEFAULT_MAX_NUMBER_OF_PARALLEL_ACTIONS)
-            : this(title, startDescription, endDescription, subActions, false, false, maxNumberOfParallelActions)
-        { }
-
-        private void GroupActionsByConnection()
-        {
-            actionsCount = 0;
-            foreach (AsyncAction action in subActions)
+            if (Connection == null)
             {
-                if (action.Connection != null)
+                foreach (var action in subActions)
                 {
-                    if (action.Connection.IsConnected)
+                    if (action.Connection == null)
                     {
-                        if (!actionsByConnection.ContainsKey(action.Connection))
-                        {
-                            actionsByConnection.Add(action.Connection, new List<AsyncAction>());
-                        }
+                        _actionsWithNoConnection.Add(action);
+                        _actionsCount++;
+                    }
+                    else if (action.Connection.IsConnected)
+                    {
+                        if (!_actionsByConnection.ContainsKey(action.Connection))
+                            _actionsByConnection.Add(action.Connection, new List<AsyncAction>());
 
-                        actionsByConnection[action.Connection].Add(action);
-                        actionsCount++;
+                        _actionsByConnection[action.Connection].Add(action);
+                        _actionsCount++;
                     }
                 }
-                else
-                {
-                    actionsWithNoConnection.Add(action);
-                    actionsCount++;
-                }
             }
+            else
+            {
+                _actionsByConnection.Add(Connection, subActions);
+                _actionsCount = subActions.Count;
+            }
+
+            _maxNumberOfParallelActions = maxNumberOfParallelActions;
         }
 
 
         protected override void RunSubActions(List<Exception> exceptions)
         {
-            if (actionsCount == 0)
+            if (_actionsCount == 0)
                 return;
 
-            foreach (IXenConnection connection in actionsByConnection.Keys)
+            foreach (var connection in _actionsByConnection.Keys)
             {
-                queuesByConnection[connection] = new ProduceConsumerQueue(Math.Min(maxNumberOfParallelActions, actionsByConnection[connection].Count));
-                foreach (AsyncAction subAction in actionsByConnection[connection])
+                _queuesByConnection[connection] = new ProduceConsumerQueue(Math.Min(_maxNumberOfParallelActions, _actionsByConnection[connection].Count));
+                foreach (AsyncAction subAction in _actionsByConnection[connection])
                 {
-                    EnqueueAction(subAction, queuesByConnection[connection], exceptions);
+                    EnqueueAction(subAction, _queuesByConnection[connection], exceptions);
                 }
             }
 
-            if (actionsWithNoConnection.Count > 0)
-                queueWithNoConnection = new ProduceConsumerQueue(Math.Min(maxNumberOfParallelActions, actionsWithNoConnection.Count));
+            if (_actionsWithNoConnection.Count > 0)
+                _queueWithNoConnection = new ProduceConsumerQueue(Math.Min(_maxNumberOfParallelActions, _actionsWithNoConnection.Count));
 
-            foreach (AsyncAction subAction in actionsWithNoConnection)
+            foreach (var subAction in _actionsWithNoConnection)
             {
-                EnqueueAction(subAction, queueWithNoConnection, exceptions);
+                EnqueueAction(subAction, _queueWithNoConnection, exceptions);
             }
 
             lock (_lock)
@@ -145,7 +129,7 @@ namespace XenAdmin.Actions
             }
         }
 
-        void EnqueueAction(AsyncAction action, ProduceConsumerQueue queue, List<Exception> exceptions)
+        private void EnqueueAction(AsyncAction action, ProduceConsumerQueue queue, List<Exception> exceptions)
         {
             action.Completed += action_Completed;
             queue.EnqueueItem(
@@ -159,12 +143,12 @@ namespace XenAdmin.Actions
                     }
                     catch (Exception e)
                     {
-                        Failure f = e as Failure;
-                        if (f != null && Connection != null &&
+                        if (e is Failure f && Connection != null &&
                             f.ErrorDescription[0] == Failure.RBAC_PERMISSION_DENIED)
                         {
                             Failure.ParseRBACFailure(f, action.Connection, action.Session ?? action.Connection.Session);
                         }
+
                         exceptions.Add(e);
                         // Record the first exception we come to. Though later if there are more than one we will replace this with non specific one.
                         if (Exception == null)
@@ -175,30 +159,30 @@ namespace XenAdmin.Actions
 
         protected override void RecalculatePercentComplete()
         {
-            if (actionsCount == 0)
+            if (_actionsCount == 0)
                 return;
 
             int total = 0;
-            foreach (IXenConnection connection in actionsByConnection.Keys)
+
+            foreach (var connection in _actionsByConnection.Keys)
             {
-                foreach (var action in actionsByConnection[connection]) 
+                foreach (var action in _actionsByConnection[connection]) 
                     total += action.PercentComplete;
             }
-            foreach (var action in actionsWithNoConnection)
+
+            foreach (var action in _actionsWithNoConnection)
                 total += action.PercentComplete;
-            PercentComplete = (int)(total / actionsCount);
+
+            PercentComplete = total / _actionsCount;
         }
 
-        private readonly object _lock = new object();
-        private volatile int i = 0;
-        
-        void action_Completed(ActionBase sender)
+        private void action_Completed(ActionBase sender)
         {
             sender.Completed -= action_Completed;
             lock (_lock)
             {
-                i++;
-                if (i == actionsCount)
+                _completedActionsCount++;
+                if (_completedActionsCount == _actionsCount)
                 {
                     Monitor.Pulse(_lock);
                     PercentComplete = 100;
@@ -210,13 +194,11 @@ namespace XenAdmin.Actions
         {
             base.MultipleAction_Completed(sender);
 
-            foreach (IXenConnection connection in queuesByConnection.Keys)
-            {
-                queuesByConnection[connection].StopWorkers(false);
-            }
+            foreach (var connection in _queuesByConnection.Keys)
+                _queuesByConnection[connection].StopWorkers(false);
 
-            if (queueWithNoConnection != null)
-                queueWithNoConnection.StopWorkers(false);
+
+            _queueWithNoConnection?.StopWorkers(false);
         }
     }
 }

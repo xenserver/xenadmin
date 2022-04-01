@@ -815,7 +815,10 @@ namespace XenAdmin.Wizards.PatchingWizard
                     }
                 }
             }
-            resolvePrechecksAction = new ParallelAction(Messages.PATCHINGWIZARD_PRECHECKPAGE_RESOLVING_ALL, Messages.PATCHINGWIZARD_PRECHECKPAGE_RESOLVING_ALL, Messages.COMPLETED, actions, true, false);
+
+            resolvePrechecksAction = new ParallelAction(Messages.PATCHINGWIZARD_PRECHECKPAGE_RESOLVING_ALL,
+                Messages.PATCHINGWIZARD_PRECHECKPAGE_RESOLVING_ALL, Messages.COMPLETED,
+                actions, suppressHistory: true, showSubActionsDetails: false);
             StartResolvePrechecksAction();
         }
 
