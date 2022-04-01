@@ -110,7 +110,7 @@ namespace XenAdmin.Core
 
         public static bool PassedRbacChecks(IXenConnection connection)
         {
-            return Role.CanPerform(new RbacMethodList("pool.set_health_check_config"), connection);
+            return Role.CanPerform(new RbacMethodList("pool.set_health_check_config"), connection, out _);
         }
 
         private static void actionCompleted(ActionBase sender)

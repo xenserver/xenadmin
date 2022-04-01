@@ -82,7 +82,9 @@ namespace XenAdmin.Dialogs
             }
 
             // Get the list of roles off the server and arrange them into rank
-            var serverRoles = connection.Cache.Roles.Where(r => r.subroles.Count > 0).OrderBy(r => r).Reverse().ToList();
+            var serverRoles = connection.Cache.Roles
+                .Where(r => (!Helpers.Post82X(connection) || !Helpers.XapiEqualOrGreater_22_5_0(connection) || !r.is_internal) && r.subroles.Count > 0)
+                .OrderBy(r => r).Reverse().ToList();
             _subjectsPerRole = new Dictionary<Role, List<Subject>>();
 
             foreach (Role role in serverRoles)

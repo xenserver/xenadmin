@@ -39,6 +39,7 @@ using XenAPI;
 using XenAdmin.Wizards.BugToolWizardFiles;
 using XenAdmin.Dialogs;
 using XenAdmin.Actions;
+using XenAdmin.Wizards.GenericPages;
 
 namespace XenAdmin.Wizards
 {
@@ -48,6 +49,7 @@ namespace XenAdmin.Wizards
 
         private readonly GenericSelectHostsPage bugToolPageSelectHosts1;
         private readonly BugToolPageSelectCapabilities bugToolPageSelectCapabilities1;
+        private readonly RBACWarningPage rbacWarningPage;
         private readonly BugToolPageRetrieveData bugToolPageRetrieveData;
         private readonly BugToolPageDestination bugToolPageDestination1;
 
@@ -63,6 +65,7 @@ namespace XenAdmin.Wizards
 
             bugToolPageSelectHosts1 = new GenericSelectHostsPage();
             bugToolPageSelectCapabilities1 = new BugToolPageSelectCapabilities();
+            rbacWarningPage = new RBACWarningPage();
             bugToolPageRetrieveData = new BugToolPageRetrieveData();
             bugToolPageDestination1 = new BugToolPageDestination();
 
@@ -97,7 +100,7 @@ namespace XenAdmin.Wizards
             action.RunAsync();
 
             log.Debug("Cleaning up crash dump logs on server");
-            var capabilities = bugToolPageSelectCapabilities1.Capabilities;
+            var capabilities = bugToolPageSelectCapabilities1.CheckedCapabilities;
             foreach (Capability c in capabilities)
             {
                 if (c.Key == "host-crashdump-dumps" && c.Checked)
@@ -133,14 +136,22 @@ namespace XenAdmin.Wizards
         protected override void UpdateWizardContent(XenTabPage senderPage)
         {
             var prevPageType = senderPage.GetType();
-
             if (prevPageType == typeof(GenericSelectHostsPage))
             {
                 bugToolPageRetrieveData.SelectedHosts = bugToolPageSelectHosts1.SelectedHosts;
+
+                var selectedHostsConnections = bugToolPageSelectHosts1.SelectedHosts.Select(host => host.Connection).ToList();
+
+                if (selectedHostsConnections.Any(Helpers.ConnectionRequiresRbac))
+                {
+                    rbacWarningPage.SetPermissionChecks(selectedHostsConnections,
+                        new WizardRbacCheck(Messages.RBAC_GET_SYSTEM_STATUS_BLOCKED, SingleHostStatusAction.StaticRBACDependencies) {Blocking = true});
+                    AddAfterPage(bugToolPageSelectHosts1, rbacWarningPage);
+                }
             }
             else if (prevPageType == typeof(BugToolPageSelectCapabilities))
             {
-                bugToolPageRetrieveData.CapabilityList = bugToolPageSelectCapabilities1.Capabilities;
+                bugToolPageRetrieveData.CapabilityList = bugToolPageSelectCapabilities1.CheckedCapabilities;
             }
         }
 

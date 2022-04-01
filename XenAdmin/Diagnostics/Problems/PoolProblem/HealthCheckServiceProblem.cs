@@ -34,7 +34,6 @@ using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAdmin.Diagnostics.Checks;
 using XenAdmin.Dialogs;
-using XenAdmin.Model;
 using XenAPI;
 
 
@@ -71,8 +70,6 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
         {
             this.pool = pool;
         }
-
-        public override string Title => Check.Description;
 
         public override string Description =>
             string.Format(Messages.PROBLEM_HEALTH_CHECK_SERVICE_DESCRIPTION, pool, BrandManager.ProductBrand, BrandManager.ProductVersionPost82);

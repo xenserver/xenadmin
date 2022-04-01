@@ -147,8 +147,11 @@ namespace XenAdmin.Wlb
                      *    Or
                      *  - if the moving vm is running, toHost not equal to fromHost, and toHost is disable but it's a powerOnHost or toHost is enabled  
                      */ 
-                    if ((vm.is_control_domain && fromHost!=null)
-                        || (vm.power_state == XenAPI.vm_power_state.Running && toHost != fromHost && ((powerOnHosts.Count > 0 && !toHost.enabled && powerOnHosts.Contains(toHost)) || (toHost != null && toHost.enabled))))
+                    if ((vm.is_control_domain && fromHost != null)
+                        || (vm.power_state == vm_power_state.Running 
+                            && toHost != fromHost 
+                            && ((powerOnHosts.Count > 0 && toHost != null && !toHost.enabled && powerOnHosts.Contains(toHost)) 
+                                || (toHost != null && toHost.enabled))))
                     {
 
                         // If it's a powerOn host, add it to the powerOnHosts list

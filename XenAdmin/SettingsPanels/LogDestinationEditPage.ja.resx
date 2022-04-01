@@ -316,7 +316,7 @@
     <value>0</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>[XenServer] では、サーバーのシステム ログがローカルに格納されます。システム ログをローカル サーバーに格納するだけでなくリモート サーバーに送信する場合は、ログの格納先を指定します。</value>
+    <value>{0} では、サーバーのシステム ログがローカルに格納されます。システム ログをローカル サーバーに格納するだけでなくリモート サーバーに送信する場合は、ログの格納先を指定します。</value>
   </data>
   <data name="&gt;&gt;label3.Name" xml:space="preserve">
     <value>label3</value>

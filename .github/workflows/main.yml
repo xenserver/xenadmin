@@ -25,3 +25,17 @@ jobs:
           cyg-get.bat aspell aspell-en
           $env:Path += ";C:\tools\cygwin\bin;"
           ./scripts/check_spelling.ps1 -NOISY
+
+      - name: Run string sort check
+        shell: powershell
+        run: ./scripts/check_strings_sorting.ps1 `
+            -CHECK_LOCALIZED `
+            -NOISY `
+            -PATHS ./XenModel/Messages.resx, ./XenModel/FriendlyNames.resx, `
+                  ./XenModel/InvisibleMessages.resx, ./XenModel/UnitStrings.resx, `
+                  ./XenOvfApi/Content.resx, ./XenOvfApi/Messages.resx; `
+          if($lastexitcode -eq 0){ `
+            ./scripts/check_strings_sorting.ps1 `
+              -NOISY `
+              -PATHS ./Branding/Branding.resx `
+          }

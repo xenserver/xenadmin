@@ -80,8 +80,7 @@ namespace XenAdmin.Actions
                 if (pvsSite == null)
                 {
                     log.InfoFormat("PVS Site '{0}' cannot be configured, because it cannot be found.", siteName);
-                    PercentComplete = 100;
-                    Description = Messages.COMPLETED;
+                    Tick(100, Messages.COMPLETED);
                     return;
                 }
 
@@ -133,8 +132,8 @@ namespace XenAdmin.Actions
                     PercentComplete += inc;
                 }
             }
-            PercentComplete = 100;
-            Description = Messages.ACTION_CONFUGURE_PVS_SITE_DONE;
+
+            Tick(100, Messages.ACTION_CONFUGURE_PVS_SITE_DONE);
         }
     }
 }

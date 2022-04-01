@@ -256,13 +256,13 @@
     <value>14, 3, 14, 5</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>281, 21</value>
+    <value>58, 15</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>Copyright © [Citrix] Systems, Inc. All rights reserved.</value>
+    <value>著作権</value>
   </data>
   <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>
@@ -292,13 +292,13 @@
     <value>14, 23, 14, 5</value>
   </data>
   <data name="licenseDetailsLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>254, 15</value>
+    <value>84, 15</value>
   </data>
   <data name="licenseDetailsLabel.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
   </data>
   <data name="licenseDetailsLabel.Text" xml:space="preserve">
-    <value>[XenServer product] のライセンス適用先:</value>
+    <value>{0} のライセンス適用先:</value>
   </data>
   <data name="&gt;&gt;licenseDetailsLabel.Name" xml:space="preserve">
     <value>licenseDetailsLabel</value>
@@ -328,13 +328,13 @@
     <value>14, 23, 14, 5</value>
   </data>
   <data name="VersionLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>323, 15</value>
+    <value>45, 15</value>
   </data>
   <data name="VersionLabel.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
   </data>
   <data name="VersionLabel.Text" xml:space="preserve">
-    <value>[XenCenter] Version 1.2.3 (build 4567)</value>
+    <value>バージョン</value>
   </data>
   <data name="&gt;&gt;VersionLabel.Name" xml:space="preserve">
     <value>VersionLabel</value>
@@ -364,13 +364,13 @@
     <value>12, 6, 3, 3</value>
   </data>
   <data name="showAgainCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>321, 19</value>
+    <value>209, 19</value>
   </data>
   <data name="showAgainCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
   </data>
   <data name="showAgainCheckBox.Text" xml:space="preserve">
-    <value>[XenCenter] を開くときにこのダイアログ ボックスを開く(&amp;S)</value>
+    <value>{0} を開くときにこのダイアログ ボックスを開く(&amp;S)</value>
   </data>
   <data name="showAgainCheckBox.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -472,7 +472,7 @@
     <value>CenterParent</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>[XenCenter] について</value>
+    <value>{0} のバージョン情報</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>AboutDialog</value>

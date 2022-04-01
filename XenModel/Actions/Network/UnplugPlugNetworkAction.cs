@@ -143,8 +143,8 @@ namespace XenAdmin.Actions
                 PercentComplete += percentStep;
             }
 
-            PercentComplete = 100;
-            Description = error != null ? Messages.COMPLETED_WITH_ERRORS : Messages.COMPLETED;
+            Tick(100, error != null ? Messages.COMPLETED_WITH_ERRORS : Messages.COMPLETED);
+
             if (error != null)
             {
                 throw error;

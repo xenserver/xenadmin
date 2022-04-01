@@ -64,8 +64,8 @@ namespace XenAdmin.Actions
                     : PGPU.async_disable_dom0_access(Session, pGpu.opaque_ref);
                 PollToCompletion(50, 100);
             }
-            PercentComplete = 100;
-            Description = string.Format(Messages.UPDATED_PROPERTIES, Helpers.GetName(Host).Ellipsise(50));
+
+            Tick(100, string.Format(Messages.UPDATED_PROPERTIES, Helpers.GetName(Host).Ellipsise(50)));
         }
     }
 }

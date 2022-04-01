@@ -261,7 +261,7 @@ namespace XenAPI
                 return Messages.AD_LOCAL_ROOT_ACCOUNT;
 
             //Sort roles from highest to lowest
-            roles.Sort((r1, r2) => { return r2.CompareTo(r1); });
+            roles.Sort((r1, r2) => r2.CompareTo(r1));
             //Take the highest role
             return roles[0].FriendlyName();
         }

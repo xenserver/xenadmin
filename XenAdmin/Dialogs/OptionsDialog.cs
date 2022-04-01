@@ -94,6 +94,11 @@ namespace XenAdmin.Dialogs
             SelectPage(connectionOptionsPage1);
         }
 
+        public void SelectExternalToolsPage()
+        {
+            SelectPage(externalToolsOptionsPage1);
+        }
+
         private void OptionsDialog_Move(object sender, EventArgs e)
         {
             HideValidationToolTips();

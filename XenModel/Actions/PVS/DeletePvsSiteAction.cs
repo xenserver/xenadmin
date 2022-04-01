@@ -66,8 +66,7 @@ namespace XenAdmin.Actions
 
             RelatedTask = PVS_site.async_forget(Session, pvsSite.opaque_ref);
             PollToCompletion();
-            Description = Messages.ACTION_DELETE_PVS_SITE_DONE;
-            PercentComplete = 100;
+            Tick(100, Messages.ACTION_DELETE_PVS_SITE_DONE);
         }
     }
 }

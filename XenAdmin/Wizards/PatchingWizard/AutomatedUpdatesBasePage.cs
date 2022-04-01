@@ -415,11 +415,14 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
             catch (Exception e)
             {
-                if (action.Error == null)
-                    action.Error = new Exception(Messages.ERROR_UNKNOWN);
+                if (action != null)
+                {
+                    if (action.Error == null)
+                        action.Error = new Exception(Messages.ERROR_UNKNOWN);
 
-                log.Error($"Failed to carry out plan {action.CurrentProgressStep}.", e);
-                doWorkEventArgs.Result = new Exception(action.CurrentProgressStep, e);
+                    log.Error($"Failed to carry out plan {action.CurrentProgressStep}.", e);
+                    doWorkEventArgs.Result = new Exception(action.CurrentProgressStep, e);
+                }
             }
         }
 

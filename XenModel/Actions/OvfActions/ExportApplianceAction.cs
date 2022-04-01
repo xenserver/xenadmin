@@ -163,8 +163,7 @@ namespace XenAdmin.Actions.OvfActions
                 ManifestAndSign(env, appFolder, appFile);
 			}
 
-			PercentComplete = 100;
-			Description = Messages.COMPLETED;
+            Tick(100, Messages.COMPLETED);
 		}
 
         private void ManifestAndSign(EnvelopeType ovfEnv, string appFolder, string appFile)

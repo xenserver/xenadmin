@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
-    Microsoft ResX Schema 
-    
+  <!--
+    Microsoft ResX Schema
+
     Version 2.0
-    
-    The primary goals of this format is to allow a simple XML format 
-    that is mostly human readable. The generation and parsing of the 
-    various data types are done through the TypeConverter classes 
+
+    The primary goals of this format is to allow a simple XML format
+    that is mostly human readable. The generation and parsing of the
+    various data types are done through the TypeConverter classes
     associated with the data types.
-    
+
     Example:
-    
+
     ... ado.net/XML headers & schema ...
     <resheader name="resmimetype">text/microsoft-resx</resheader>
     <resheader name="version">2.0</resheader>
@@ -26,39 +26,39 @@
         <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
         <comment>This is a comment</comment>
     </data>
-                
-    There are any number of "resheader" rows that contain simple 
+
+    There are any number of "resheader" rows that contain simple
     name/value pairs.
-    
-    Each data row contains a name, and value. The row also contains a 
-    type or mimetype. Type corresponds to a .NET class that support 
-    text/value conversion through the TypeConverter architecture. 
-    Classes that don't support this are serialized and stored with the 
+
+    Each data row contains a name, and value. The row also contains a
+    type or mimetype. Type corresponds to a .NET class that support
+    text/value conversion through the TypeConverter architecture.
+    Classes that don't support this are serialized and stored with the
     mimetype set.
-    
-    The mimetype is used for serialized objects, and tells the 
-    ResXResourceReader how to depersist the object. This is currently not 
+
+    The mimetype is used for serialized objects, and tells the
+    ResXResourceReader how to depersist the object. This is currently not
     extensible. For a given mimetype the value must be set accordingly:
-    
-    Note - application/x-microsoft.net.object.binary.base64 is the format 
-    that the ResXResourceWriter will generate, however the reader can 
+
+    Note - application/x-microsoft.net.object.binary.base64 is the format
+    that the ResXResourceWriter will generate, however the reader can
     read any of the formats listed below.
-    
+
     mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with 
+    value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
-    
+
     mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with 
+    value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
 
     mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array 
+    value   : The object must be serialized into a byte array
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
-    -->
+  -->
   <xsd:schema id="root" xmlns="" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
     <xsd:element msdata:IsDataSet="true" name="root">
@@ -112,16 +112,25 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ACTIVATION_WHILE_NOT_FREE" xml:space="preserve">
     <value>アクティブ化キーを適用するには、エディションの設定が free である必要があります。</value>
   </data>
   <data name="ADDRESS_VIOLATES_LOCKING_CONSTRAINT" xml:space="preserve">
     <value>指定された IP アドレスは、VIF のロック構成を違反しています。</value>
+  </data>
+  <data name="APPLY_GUIDANCE_FAILED" xml:space="preserve">
+    <value>アップデート後、ホストにガイダンスを適用できませんでした。</value>
+  </data>
+  <data name="APPLY_UPDATES_FAILED" xml:space="preserve">
+    <value>ホストにアップデートを適用できませんでした。</value>
+  </data>
+  <data name="APPLY_UPDATES_IN_PROGRESS" xml:space="preserve">
+    <value>アップデートの適用が進行中であるため、この操作を実行できませんでした。</value>
   </data>
   <data name="AUTH_ALREADY_ENABLED" xml:space="preserve">
     <value>このサーバーへの外部認証は既に有効になっています。</value>
@@ -184,7 +193,7 @@
     <value>VM で必要なブリッジが見つかりません。</value>
   </data>
   <data name="CANNOT_ADD_TUNNEL_TO_BOND_SLAVE" xml:space="preserve">
-    <value>この PIF ボンディング スレーブなのでトンネルを作成できません。</value>
+    <value>この PIF はボンディング メンバーなのでトンネルを作成できません。</value>
   </data>
   <data name="CANNOT_ADD_TUNNEL_TO_SRIOV_LOGICAL" xml:space="preserve">
     <value>これはネットワーク SR-IOV 論理 PIF であり、トンネルは使用できません。</value>
@@ -193,10 +202,10 @@
     <value>これはネットワーク SR-IOV 上の VLAN PIF であり、トンネルは使用できません。</value>
   </data>
   <data name="CANNOT_ADD_VLAN_TO_BOND_SLAVE" xml:space="preserve">
-    <value>この PIF ボンディング スレーブなので VLAN を作成できません。</value>
+    <value>この PIF はボンディング メンバーなので VLAN を作成できません。</value>
   </data>
   <data name="CANNOT_CHANGE_PIF_PROPERTIES" xml:space="preserve">
-    <value>この PIF プロパティは変更できません。変更できるのは、ボンディングされていない物理 PIF またはボンド マスターのプロパティのみです。</value>
+    <value>この PIF のプロパティは変更できません。変更できるのは、ボンディングされていない物理 PIF またはボンディング インターフェイスのプロパティのみです。</value>
   </data>
   <data name="CANNOT_CONTACT_HOST" xml:space="preserve">
     <value>サーバーと通信できないため、メッセージを転送できません。サーバーの電源が切れているか、ネットワーク接続に問題がある可能性があります。</value>
@@ -217,13 +226,13 @@
     <value>このサーバーは退避できません。</value>
   </data>
   <data name="CANNOT_FETCH_PATCH" xml:space="preserve">
-    <value>要求されたアップデートをマスターから取得できません。</value>
+    <value>要求されたアップデートをコーディネーターから取得できません。</value>
   </data>
   <data name="CANNOT_FIND_OEM_BACKUP_PARTITION" xml:space="preserve">
     <value>アップデートをストリームするためのバックアップ パーティションが見つかりません。</value>
   </data>
   <data name="CANNOT_FIND_PATCH" xml:space="preserve">
-    <value>要求されたアップデートが見つかりません。この問題は、新しいマスターを指名した場合に発生することがあります。もう一度アップロードしてください。</value>
+    <value>要求されたアップデートが見つかりません。この問題は、新しいコーディネーターを指名した場合に発生することがあります。もう一度アップロードしてください。</value>
   </data>
   <data name="CANNOT_FIND_STATE_PARTITION" xml:space="preserve">
     <value>ステート パーティションが見つからないため、復元を実行できませんでした。</value>
@@ -235,13 +244,16 @@
     <value>これはネットワーク SR-IOV 論理 PIF であり、消去操作はできません。</value>
   </data>
   <data name="CANNOT_PLUG_BOND_SLAVE" xml:space="preserve">
-    <value>この PIF ボンディング スレーブなので接続できません。</value>
+    <value>この PIF はボンディング メンバーなので接続できません。</value>
   </data>
   <data name="CANNOT_PLUG_VIF" xml:space="preserve">
     <value>ネットワーク インターフェイスが接続できないため、この仮想マシンを起動できません。既にほかで使用されている NIC があります。</value>
   </data>
   <data name="CANNOT_RESET_CONTROL_DOMAIN" xml:space="preserve">
     <value>コントロール ドメインの電源の状態をリセットすることはできません。</value>
+  </data>
+  <data name="CANNOT_RESTART_DEVICE_MODEL" xml:space="preserve">
+    <value>ホスト上で一時停止状態の VM のデバイス モデルは再起動できません。</value>
   </data>
   <data name="CERTIFICATE_ALREADY_EXISTS" xml:space="preserve">
     <value>指定した名前の証明書が既に存在します。</value>
@@ -290,6 +302,9 @@
   </data>
   <data name="CLUSTER_STACK_IN_USE" xml:space="preserve">
     <value>少なくとも 1 つの接続された PBD によって、クラスター スタックが使用されています。</value>
+  </data>
+  <data name="CONFIGURE_REPOSITORIES_IN_PROGRESS" xml:space="preserve">
+    <value>ほかのリポジトリが既に構成されているため、この処理は実行できません。</value>
   </data>
   <data name="COULD_NOT_FIND_NETWORK_INTERFACE_WITH_SPECIFIED_DEVICE_NAME_AND_MAC_ADDRESS" xml:space="preserve">
     <value>指定したデバイス名および MAC アドレスのネットワーク インターフェイスが見つかりません。</value>
@@ -361,7 +376,7 @@
     <value>重複が生じるため、この VM は復元できません。</value>
   </data>
   <data name="EVACUATE_NO_OTHER_HOSTS_FOR_MASTER" xml:space="preserve">
-    <value>使用可能なサーバーがないため、マスターを選出できません。サーバーを追加するか有効にしてください。</value>
+    <value>使用可能なサーバーがないため、コーディネーターを選出できません。サーバーを追加するか有効にしてください。</value>
   </data>
   <data name="EVENTS_LOST" xml:space="preserve">
     <value>いくつかのイベントがキューから失われたため、取得できません。</value>
@@ -384,6 +399,15 @@
   <data name="FIELD_TYPE_ERROR" xml:space="preserve">
     <value>指定したフィールドの中に、種類が不正なものがあります。</value>
   </data>
+  <data name="GET_HOST_UPDATES_FAILED" xml:space="preserve">
+    <value>ホストから利用可能なアップデートを取得できませんでした。</value>
+  </data>
+  <data name="GET_UPDATES_FAILED" xml:space="preserve">
+    <value>プールから利用可能なアップデートを取得できませんでした。</value>
+  </data>
+  <data name="GET_UPDATES_IN_PROGRESS" xml:space="preserve">
+    <value>アップデートの取得が進行中であるため、この操作を実行できませんでした。</value>
+  </data>
   <data name="GPU_GROUP_CONTAINS_NO_PGPUS" xml:space="preserve">
     <value>この GPU グループには GPU が含まれていません。</value>
   </data>
@@ -397,7 +421,7 @@
     <value>オブジェクトが削除されました。{0}:{1}</value>
   </data>
   <data name="HA_ABORT_NEW_MASTER" xml:space="preserve">
-    <value>現在このサーバーは、指定された新規マスター設定を受け入れることはできません。</value>
+    <value>現在このサーバーは、指定された新しいコーディネーター設定を受け入れることはできません。</value>
   </data>
   <data name="HA_CANNOT_CHANGE_BOND_STATUS_OF_MGMT_IFACE" xml:space="preserve">
     <value>高可用性が有効なときに管理インターフェイスのボンディングを作成したり削除したりできないため、この処理は実行できません。高可用性を無効にしてからボンディングを作成または削除し、その後で再度高可用性を有効にしてください。</value>
@@ -451,7 +475,7 @@
     <value>高可用性がプールで有効になっており、このサーバーで無効になっています。このため、このサーバーをプールに追加することはできません。</value>
   </data>
   <data name="HA_SHOULD_BE_FENCED" xml:space="preserve">
-    <value>サーバーが隔離されている (つまりマスターのパーティション内に含まれていない) ため、プールに追加できません。</value>
+    <value>サーバーが隔離されている (つまりコーディネーターのパーティション内に含まれていない) ため、プールに追加できません。</value>
   </data>
   <data name="HA_TOO_FEW_HOSTS" xml:space="preserve">
     <value>高可用性は、複数のサーバーに対して有効にできます。ただし、これらのサーバーには事前にクォーラム タイブレイク スクリプトを構成しておく必要があります。</value>
@@ -493,7 +517,7 @@
     <value>このホストを退避しています。</value>
   </data>
   <data name="HOST_HAS_NO_MANAGEMENT_IP" xml:space="preserve">
-    <value>このサーバーの管理インターフェイスの IP アドレスを取得できないため、マスターと通信できません。</value>
+    <value>このサーバーの管理インターフェイスの IP アドレスを取得できないため、コーディネーターと通信できません。</value>
   </data>
   <data name="HOST_HAS_RESIDENT_VMS" xml:space="preserve">
     <value>動作中のユーザー VM があるため、このサーバーとの接続を消去できません。</value>
@@ -511,13 +535,13 @@
     <value>サーバーが稼働中であるため、この処理を完了できません。</value>
   </data>
   <data name="HOST_IS_SLAVE" xml:space="preserve">
-    <value>対象のサーバーはスレーブです。</value>
+    <value>通信しているサーバーはサポーターです。</value>
   </data>
   <data name="HOST_ITS_OWN_SLAVE" xml:space="preserve">
-    <value>このホストはこれ自身のスレーブになっています。pool-emergency-transition-to-master または pool-emergency-reset-master を使用してください。</value>
+    <value>ホストがホスト自身のサポーターになっています。pool-emergency-transition-to-master または pool-emergency-reset-master を使用してください。</value>
   </data>
   <data name="HOST_MASTER_CANNOT_TALK_BACK" xml:space="preserve">
-    <value>マスターは、指定された管理 IP アドレスのスレーブと通信できません。</value>
+    <value>コーディネーターは、指定された管理 IP アドレスのサポーターと通信できません。</value>
   </data>
   <data name="HOST_NAME_INVALID" xml:space="preserve">
     <value>サーバー名が無効です。</value>
@@ -553,7 +577,7 @@
     <value>サーバーがまだ起動中です。</value>
   </data>
   <data name="HOST_UNKNOWN_TO_MASTER" xml:space="preserve">
-    <value>マスターがサーバーを認識できません。このサーバーがマスターのデータベースにあり、正しいマスターをポイントしていること、すべてのサーバーが同じプール シークレットを使用していることを確認してください。</value>
+    <value>コーディネーターがサーバーを認識できません。このサーバーがコーディネーターのデータベースにあり、正しいコーディネーターをポイントしていること、すべてのサーバーが同じプール シークレットを使用していることを確認してください。</value>
   </data>
   <data name="ILLEGAL_VBD_DEVICE" xml:space="preserve">
     <value>指定した VBD デバイスが認識されません。正の整数を指定してください。</value>
@@ -597,6 +621,9 @@
   <data name="INTERNAL_ERROR" xml:space="preserve">
     <value>内部エラー: {0}</value>
   </data>
+  <data name="INVALID_BASE_URL" xml:space="preserve">
+    <value>リポジトリのベース URL が無効です。</value>
+  </data>
   <data name="INVALID_CIDR_ADDRESS_SPECIFIED" xml:space="preserve">
     <value>必要なパラメーターに無効な CIDR アドレスが含まれています (&lt;アドレス&gt;/&lt;プレフィックスの長さ&gt;)</value>
   </data>
@@ -621,8 +648,20 @@
   <data name="INVALID_PATCH_WITH_LOG" xml:space="preserve">
     <value>アップロードされたアップデート ファイルが無効です。</value>
   </data>
+  <data name="INVALID_REPOMD_XML" xml:space="preserve">
+    <value>repomd.xml が無効です。</value>
+  </data>
+  <data name="INVALID_REPOSITORY_PROXY_CREDENTIAL" xml:space="preserve">
+    <value>リポジトリ プロキシのユーザー名/パスワードが無効です。</value>
+  </data>
+  <data name="INVALID_REPOSITORY_PROXY_URL" xml:space="preserve">
+    <value>リポジトリ プロキシの URL が無効です。</value>
+  </data>
   <data name="INVALID_UPDATE" xml:space="preserve">
     <value>アップロードされたアップデート パッケージが無効です。</value>
+  </data>
+  <data name="INVALID_UPDATEINFO_XML" xml:space="preserve">
+    <value>updateinfo.xml が無効です。</value>
   </data>
   <data name="INVALID_VALUE" xml:space="preserve">
     <value>値 '{1}' はフィールド '{0}' に対して無効です。</value>
@@ -631,7 +670,7 @@
     <value>トンネル アクセス PIF 上に VLAN またはトンネルを作成できません。代わりにトランスポート PIF を使用してください。</value>
   </data>
   <data name="JOINING_HOST_CANNOT_BE_MASTER_OF_OTHER_HOSTS" xml:space="preserve">
-    <value>ほかのプールのマスターとして動作するサーバーを別のプールに追加することはできません。</value>
+    <value>別のプールのコーディネーターとして動作するサーバーをこのプールに追加することはできません。</value>
   </data>
   <data name="JOINING_HOST_CANNOT_CONTAIN_SHARED_SRS" xml:space="preserve">
     <value>共有ストレージを持つサーバーをこのプールに追加することはできません。</value>
@@ -729,6 +768,9 @@
   <data name="MISSING_CONNECTION_DETAILS" xml:space="preserve">
     <value>ライセンス サーバーへの接続設定 (アドレスまたはポート) が未指定または不完全です。</value>
   </data>
+  <data name="MULTIPLE_UPDATE_REPOSITORIES_ENABLED" xml:space="preserve">
+    <value>有効になっているアップデート リポジトリが複数あります。</value>
+  </data>
   <data name="NETWORK_ALREADY_CONNECTED" xml:space="preserve">
     <value>PIF を作成しようとしましたが、接続しようとしたネットワーク {0} は別の PIF {1} に接続されているため、作成に失敗しました。</value>
   </data>
@@ -803,6 +845,12 @@
   </data>
   <data name="NO_MORE_REDO_LOGS_ALLOWED" xml:space="preserve">
     <value>アクティブなやり直しログのインスタンスが上限に達しました。</value>
+  </data>
+  <data name="NO_REPOSITORY_ENABLED" xml:space="preserve">
+    <value>有効になっているリポジトリはありません。</value>
+  </data>
+  <data name="NVIDIA_SRIOV_MISCONFIGURED" xml:space="preserve">
+    <value>NVidia GPU が SR-IOV 用に構成されていません</value>
   </data>
   <data name="NVIDIA_TOOLS_ERROR" xml:space="preserve">
     <value>Nvidia ツールのエラーです。最新の Nvidia ツールをインストールしてください</value>
@@ -999,6 +1047,9 @@
   <data name="POOL_JOINING_EXTERNAL_AUTH_MISMATCH" xml:space="preserve">
     <value>プールに追加するサーバーの外部認証の構成は、追加先プールの設定と同じである必要があります。</value>
   </data>
+  <data name="POOL_JOINING_HOST_CA_CERTIFICATES_CONFLICT" xml:space="preserve">
+    <value>プールに参加しているホストは、プール コーディネーターと同じ名前を使用し異なる CA 証明書を持っています。それらをアンインストールして、再試行してください。</value>
+  </data>
   <data name="POOL_JOINING_HOST_HAS_BONDS" xml:space="preserve">
     <value>プールに追加しているホストに、ボンディングを含めることができません。</value>
   </data>
@@ -1018,13 +1069,13 @@
     <value>プールに追加するサーバーには、物理管理 NIC (つまり VLAN またはボンディングした PIF 以外の NIC) がある必要があります。</value>
   </data>
   <data name="POOL_JOINING_HOST_MUST_HAVE_SAME_API_VERSION" xml:space="preserve">
-    <value>プールに追加するホストには、プール マスターと同じ API バージョンが必要です。</value>
+    <value>プールに追加するホストには、プール コーディネーターと同じ API バージョンが必要です。</value>
   </data>
   <data name="POOL_JOINING_HOST_MUST_HAVE_SAME_DB_SCHEMA" xml:space="preserve">
-    <value>プールに追加するホストには、プール マスターと同じデータベース スキーマが必要です。</value>
+    <value>プールに追加するホストには、プール コーディネーターと同じデータベース スキーマが必要です。</value>
   </data>
   <data name="POOL_JOINING_HOST_MUST_HAVE_SAME_PRODUCT_VERSION" xml:space="preserve">
-    <value>プールに追加するサーバーの製品バージョンは、プール マスターのものと同じである必要があります。</value>
+    <value>プールに追加するサーバーの製品バージョンは、プール コーディネーターのものと同じである必要があります。</value>
   </data>
   <data name="POOL_JOINING_HOST_MUST_ONLY_HAVE_PHYSICAL_PIFS" xml:space="preserve">
     <value>プールに追加しているホストに、ボンディング、VLAN、またはトンネルを含めることができません。</value>
@@ -1072,6 +1123,21 @@
   </data>
   <data name="REDO_LOG_IS_ENABLED" xml:space="preserve">
     <value>プールのやり直しログが有効になっているため、この処理は実行できません。</value>
+  </data>
+  <data name="REPOSITORY_ALREADY_EXISTS" xml:space="preserve">
+    <value>リポジトリは既に存在します。</value>
+  </data>
+  <data name="REPOSITORY_CLEANUP_FAILED" xml:space="preserve">
+    <value>コーディネーターのローカル リポジトリをクリーンアップできませんでした。</value>
+  </data>
+  <data name="REPOSITORY_IS_IN_USE" xml:space="preserve">
+    <value>リポジトリは使用中です。</value>
+  </data>
+  <data name="REPOSYNC_FAILED" xml:space="preserve">
+    <value>リモート YUM リポジトリとの同期に失敗しました。</value>
+  </data>
+  <data name="REPOSYNC_IN_PROGRESS" xml:space="preserve">
+    <value>プールは、有効なリモート YUM リポジトリと同期しています。</value>
   </data>
   <data name="REQUIRED_PIF_IS_UNPLUGGED" xml:space="preserve">
     <value>指定された PIF が現在アンプラグされているため、要求された処理を実行できません。</value>
@@ -1127,6 +1193,9 @@
   <data name="SESSION_AUTHENTICATION_FAILED" xml:space="preserve">
     <value>セッションを認証できません。アカウント情報を確認し、もう一度実行してください。</value>
   </data>
+  <data name="SESSION_AUTHORIZATION_FAILED" xml:space="preserve">
+    <value>ユーザーによって指定された資格情報は正しいものですが、ユーザーを認証できなかったため、アクセスが拒否され、セッション ハンドルが発行されていません。</value>
+  </data>
   <data name="SESSION_INVALID" xml:space="preserve">
     <value>サーバーへの接続が切断されました。</value>
   </data>
@@ -1134,7 +1203,7 @@
     <value>このセッション {0} はイベント受信用に登録されていません。event.next の前に event.register を呼び出す必要があります。使用しているセッション ハンドルがエコーされます。</value>
   </data>
   <data name="SLAVE_REQUIRES_MANAGEMENT_INTERFACE" xml:space="preserve">
-    <value>スレーブは緊急モードで動作することがあるため、スレーブ上の管理インターフェイスは無効にできません。</value>
+    <value>サポーターは緊急モードで動作することがあるため、サポーター上の管理インターフェイスは無効にできません。</value>
   </data>
   <data name="SM_PLUGIN_COMMUNICATION_FAILURE" xml:space="preserve">
     <value>SM プラグインが照会に応答しません。</value>
@@ -1614,7 +1683,7 @@
     <value>指定された論理ボリュームのファイルシステムの作成中にエラーが発生しました。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_58" xml:space="preserve">
-    <value>論理ボリュームから要求を送信しようとしてエラーが発生しました。リクエストはマスターから送信されなければなりません。</value>
+    <value>論理ボリュームから要求を送信しようとしてエラーが発生しました。リクエストはコーディネーターから送信されなければなりません。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_59" xml:space="preserve">
     <value>論理ボリュームのサイズ変更に失敗しました。</value>
@@ -1802,6 +1871,9 @@
   <data name="SUSPEND_IMAGE_NOT_ACCESSIBLE" xml:space="preserve">
     <value>VM が実行中のホストから、チェックポイントの中断イメージにアクセスすることはできません</value>
   </data>
+  <data name="SYNC_UPDATES_IN_PROGRESS" xml:space="preserve">
+    <value>アップデートの同期が進行中であるため、この操作を実行できませんでした。</value>
+  </data>
   <data name="SYSTEM_STATUS_MUST_USE_TAR_ON_OEM" xml:space="preserve">
     <value>OEM サーバーからシステムの状態を取得するには、tar 出力を使用してください。</value>
   </data>
@@ -1834,6 +1906,12 @@
   </data>
   <data name="UNKNOWN_BOOTLOADER" xml:space="preserve">
     <value>要求された VM {0} の ブートローダー {1} が不明です。</value>
+  </data>
+  <data name="UPDATEINFO_HASH_MISMATCH" xml:space="preserve">
+    <value>updateinfo のハッシュが現在のハッシュと一致しません。新しいアップデートが利用可能な可能性があります。</value>
+  </data>
+  <data name="UPDATES_REQUIRE_SYNC" xml:space="preserve">
+    <value>この操作の前に、pool.sync_updates を呼び出す必要があります。</value>
   </data>
   <data name="UPDATE_ALREADY_APPLIED" xml:space="preserve">
     <value>このアップデートは適用済みです。</value>
@@ -1928,6 +2006,9 @@
   <data name="VCPUS_MAX_ALLOWED_TITLE" xml:space="preserve">
     <value>許可される仮想 CPU の最大数</value>
   </data>
+  <data name="VCPU_MAX_NOT_CORES_PER_SOCKET_MULTIPLE" xml:space="preserve">
+    <value>VCPUs_max は、ソケットあたりのコア数の倍数である必要があります</value>
+  </data>
   <data name="VDI_CBT_ENABLED" xml:space="preserve">
     <value>指定された VDI で CBT が有効になっています。要求された操作は CBT が有効になった VDI またはその VDI がある仮想マシンで許可されていません。</value>
   </data>
@@ -1996,6 +2077,9 @@
   </data>
   <data name="VGPU_GUEST_DRIVER_LIMIT" xml:space="preserve">
     <value>ゲストドライバーは、仮想 GPU の移行をサポートしていません。</value>
+  </data>
+  <data name="VGPU_SUSPENSION_NOT_SUPPORTED" xml:space="preserve">
+    <value>仮想 GPU 構成は一時停止をサポートしていません。</value>
   </data>
   <data name="VGPU_TYPE_NOT_COMPATIBLE" xml:space="preserve">
     <value>仮想 GPU が VM 上の既存の種類と互換性がない場合、作成できません。</value>
@@ -2190,7 +2274,7 @@
     <value>VM が予期せず再起動しました</value>
   </data>
   <data name="VM_REQUIRES_GPU" xml:space="preserve">
-    <value>GPU グループ内に使用可能な GPU がないホスト上で VM を起動しようとしました。この VM の GPU グループには仮想 GPU が接続されています。</value>
+    <value>VM が必要とする GPU グループに使用可能な GPU がないホストで VM を実行しようとしました。</value>
   </data>
   <data name="VM_REQUIRES_GPU-SHORT" xml:space="preserve">
     <value>GPU を使用できません</value>
@@ -2214,7 +2298,7 @@
     <value>必要な VDI を接続できないため、VM を起動できません</value>
   </data>
   <data name="VM_REQUIRES_VGPU" xml:space="preserve">
-    <value>使用可能な GPU がないため VM を起動できません。</value>
+    <value>VM が必要とする GPU グループで VM に必要な仮想 GPU を GPU に割り当てることができないため、VM を起動できません。</value>
   </data>
   <data name="VM_REQUIRES_VUSB" xml:space="preserve">
     <value>VUSB が必要なホスト上で VM を実行しようとすると、VM に必要な USB_group の任意の PUSBに VM を割り当てることができません。</value>

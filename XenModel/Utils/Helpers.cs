@@ -31,16 +31,15 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.IO;
-using XenAdmin.Network;
-
-using XenAPI;
-using System.Globalization;
-using System.Reflection;
 using System.Xml;
+using XenAdmin.Network;
+using XenAPI;
 using XenCenterLib;
 
 
@@ -56,7 +55,7 @@ namespace XenAdmin.Core
         public const long XLVHD_MIN_ALLOCATION_QUANTUM = 16777216; // 16 MB
 
         public const int DEFAULT_NAME_TRIM_LENGTH = 50;
-        
+
         public const string GuiTempObjectPrefix = "__gui__";
 
         public static NumberFormatInfo _nfi = new CultureInfo("en-US", false).NumberFormat;
@@ -92,8 +91,7 @@ namespace XenAdmin.Core
             return host.PlatformVersion();
         }
 
-        private delegate string HostToStr(Host host);
-        private static string FromHostOrCoordinator(Host host, HostToStr fn)
+        private static string FromHostOrCoordinator(Host host, Func<Host, string> fn)
         {
             if (host == null)
                 return null;
@@ -277,6 +275,8 @@ namespace XenAdmin.Core
             return false;
         }
 
+        #region Versions
+
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool DundeeOrGreater(IXenConnection conn)
         {
@@ -370,7 +370,7 @@ namespace XenAdmin.Core
         }
 
         /// <param name="conn">May be null, in which case true is returned.</param>
-         public static bool JuraOrGreater(IXenConnection conn)
+        public static bool JuraOrGreater(IXenConnection conn)
         {
             return conn == null || JuraOrGreater(Helpers.GetCoordinator(conn));
         }
@@ -475,18 +475,18 @@ namespace XenAdmin.Core
         }
 
         /// <param name="conn">May be null, in which case true is returned.</param>
-        public static bool PostStockholm(IXenConnection conn)
+        public static bool Post82X(IXenConnection conn)
         {
-            return conn == null || PostStockholm(Helpers.GetCoordinator(conn));
+            return conn == null || Post82X(GetCoordinator(conn));
         }
 
         /// <param name="host">May be null, in which case true is returned.</param>
-        public static bool PostStockholm(Host host)
+        public static bool Post82X(Host host)
         {
-            return host == null || PostStockholm(HostPlatformVersion(host));
+            return host == null || Post82X(HostPlatformVersion(host));
         }
 
-        public static bool PostStockholm(string platformVersion)
+        public static bool Post82X(string platformVersion)
         {
             return platformVersion != null && productVersionCompare(platformVersion, "3.2.50") >= 0;
         }
@@ -509,6 +509,36 @@ namespace XenAdmin.Core
             return platformVersion != null && productVersionCompare(platformVersion, "3.2.1") >= 0;
         }
 
+        public static bool XapiEqualOrGreater_1_290_0(IXenConnection conn)
+        {
+            var coordinator = GetCoordinator(conn);
+            return coordinator == null || productVersionCompare(coordinator.GetXapiVersion(), "1.290.0") >= 0;
+        }
+
+        public static bool XapiEqualOrGreater_1_290_0(Host host)
+        {
+            return host == null || productVersionCompare(host.GetXapiVersion(), "1.290.0") >= 0;
+        }
+
+        public static bool XapiEqualOrGreater_1_313_0(IXenConnection conn)
+        {
+            var coordinator = GetCoordinator(conn);
+            return coordinator == null || productVersionCompare(coordinator.GetXapiVersion(), "1.313.0") >= 0;
+        }
+
+        public static bool XapiEqualOrGreater_1_313_0(Host host)
+        {
+            return host == null || productVersionCompare(host.GetXapiVersion(), "1.313.0") >= 0;
+        }
+
+        public static bool XapiEqualOrGreater_22_5_0(IXenConnection conn)
+        {
+            var coordinator = GetCoordinator(conn);
+            return coordinator == null || productVersionCompare(coordinator.GetXapiVersion(), "22.5.0") >= 0;
+        }
+
+        #endregion
+
         // CP-3435: Disable Check for Updates in Common Criteria Certification project
         public static bool CommonCriteriaCertificationRelease
         {
@@ -523,7 +553,7 @@ namespace XenAdmin.Core
 
         public static bool WlbEnabledAndConfigured(IXenConnection conn)
         {
-            return WlbEnabled(conn)&& WlbConfigured(conn);
+            return WlbEnabled(conn) && WlbConfigured(conn);
         }
 
         public static bool WlbConfigured(IXenConnection conn)
@@ -851,8 +881,8 @@ namespace XenAdmin.Core
 
         public static string GetFriendlyLicenseName(Host host)
         {
-			if (string.IsNullOrEmpty(host.edition))
-				return Messages.UNKNOWN;
+            if (string.IsNullOrEmpty(host.edition))
+                return Messages.UNKNOWN;
 
             string legacy = NaplesOrGreater(host) ? "" : "legacy-";
             string name = FriendlyNameManager.GetFriendlyName("Label-host.edition-" + legacy + host.edition);
@@ -1099,41 +1129,41 @@ namespace XenAdmin.Core
             if (m.Success)
                 return FormatFriendly(string.Format("Label-performance.nic_{0}{1}", m.Groups[2].Value, m.Groups[3].Value), m.Groups[1].Value);
 
-        	m = PifVlanRegex.Match(name);
-			if (m.Success)
-			{
-				string device = string.Format("eth{0}", m.Groups[1].Value);
-				XenAPI.Network network = FindVlan(iXenObject, device, m.Groups[2].Value);
-			    return network == null
-			               ? null //don't try to retrieve it in the FriendlyNames.
-			               : FormatFriendly(string.Format("Label-performance.vlan_{0}{1}",
-			                   m.Groups[3].Value, m.Groups[4].Value), network.Name());
-			}
+            m = PifVlanRegex.Match(name);
+            if (m.Success)
+            {
+                string device = string.Format("eth{0}", m.Groups[1].Value);
+                XenAPI.Network network = FindVlan(iXenObject, device, m.Groups[2].Value);
+                return network == null
+                           ? null //don't try to retrieve it in the FriendlyNames.
+                           : FormatFriendly(string.Format("Label-performance.vlan_{0}{1}",
+                               m.Groups[3].Value, m.Groups[4].Value), network.Name());
+            }
 
             m = PifBrRegex.Match(name);
             if (m.Success)
             {
                 string device = string.Format("eth{0}", m.Groups[1].Value);
                 XenAPI.Network network = FindNetworkOfPIF(iXenObject, device);
-            	return network == null
-            	       	? null //don't try to retrieve it in the FriendlyNames.
-            	       	: FormatFriendly(string.Format("Label-performance.xenbr_{0}{1}", m.Groups[2].Value, m.Groups[3].Value), network.Name());
+                return network == null
+                           ? null //don't try to retrieve it in the FriendlyNames.
+                        : FormatFriendly(string.Format("Label-performance.xenbr_{0}{1}", m.Groups[2].Value, m.Groups[3].Value), network.Name());
             }
 
-        	m = PifXapiRegex.Match(name);
-			if (m.Success)
-				return FormatFriendly(string.Format("Label-performance.xapi_{0}{1}", m.Groups[2].Value, m.Groups[3].Value), m.Groups[1].Value);
+            m = PifXapiRegex.Match(name);
+            if (m.Success)
+                return FormatFriendly(string.Format("Label-performance.xapi_{0}{1}", m.Groups[2].Value, m.Groups[3].Value), m.Groups[1].Value);
 
             m = PifBondRegex.Match(name);
             if (m.Success)
             {
-            	PIF pif = FindPIF(iXenObject, m.Groups[1].Value, false);
-            	return pif == null
-            	       	? null //pif doesn't exist anymore so don't try to retrieve it in the FriendlyNames.
-            	       	: FormatFriendly(string.Format("Label-performance.bond_{0}{1}", m.Groups[2].Value, m.Groups[3].Value), pif.Name());
+                PIF pif = FindPIF(iXenObject, m.Groups[1].Value, false);
+                return pif == null
+                           ? null //pif doesn't exist anymore so don't try to retrieve it in the FriendlyNames.
+                        : FormatFriendly(string.Format("Label-performance.bond_{0}{1}", m.Groups[2].Value, m.Groups[3].Value), pif.Name());
             }
 
-        	m = PifLoRegex.Match(name);
+            m = PifLoRegex.Match(name);
             if (m.Success)
                 return FormatFriendly(string.Format("Label-performance.lo_{0}{1}", m.Groups[1].Value, m.Groups[2].Value));
 
@@ -1180,9 +1210,9 @@ namespace XenAdmin.Core
                                vbd.userdevice);
             }
 
-			m = SrRegex.Match(name);
-			if (m.Success)
-				return FormatFriendly(string.Format("Label-performance.sr_cache_{0}", m.Groups[1].Value));
+            m = SrRegex.Match(name);
+            if (m.Success)
+                return FormatFriendly(string.Format("Label-performance.sr_cache_{0}", m.Groups[1].Value));
 
             m = CpuStateRegex.Match(name);
             if (m.Success)
@@ -1301,17 +1331,17 @@ namespace XenAdmin.Core
             return null;
         }
 
-		private static XenAPI.Network FindVlan(IXenObject iXenObject, string device, string tag)
-		{
-			foreach (PIF pif in iXenObject.Connection.Cache.PIFs)
-			{
-				if (pif.device == device && (iXenObject is Host && pif.host.opaque_ref == iXenObject.opaque_ref || iXenObject is VM && pif.host.opaque_ref == ((VM)iXenObject).resident_on.opaque_ref) && pif.VLAN == long.Parse(tag))
-				{
-					return iXenObject.Connection.Resolve(pif.network);
-				}
-			}
-			return null;
-		}
+        private static XenAPI.Network FindVlan(IXenObject iXenObject, string device, string tag)
+        {
+            foreach (PIF pif in iXenObject.Connection.Cache.PIFs)
+            {
+                if (pif.device == device && (iXenObject is Host && pif.host.opaque_ref == iXenObject.opaque_ref || iXenObject is VM && pif.host.opaque_ref == ((VM)iXenObject).resident_on.opaque_ref) && pif.VLAN == long.Parse(tag))
+                {
+                    return iXenObject.Connection.Resolve(pif.network);
+                }
+            }
+            return null;
+        }
 
         private static PIF FindPIF(IXenObject iXenObject, string device, bool physical)
         {
@@ -1373,7 +1403,7 @@ namespace XenAdmin.Core
             else
                 return Convert.ToDouble(str, CultureInfo.InvariantCulture);
         }
-      
+
         public static bool HAEnabled(IXenConnection connection)
         {
             Pool pool = Helpers.GetPoolOfOne(connection);
@@ -1400,7 +1430,7 @@ namespace XenAdmin.Core
             {
                 if (vm.IsControlDomainZero(out var host))
                     return string.Format(Messages.SERVER_X, GetName(host));
-                
+
                 return string.Format(Messages.VM_X, GetName(XenObject));
             }
 
@@ -1445,7 +1475,7 @@ namespace XenAdmin.Core
         /// </summary>
         /// <param name="connection">Must not be null.</param>
         /// <returns></returns>
-        public static Dictionary<VM, VM.HA_Restart_Priority> GetVmHaRestartPriorities(IXenConnection connection,bool showHiddenVMs)
+        public static Dictionary<VM, VM.HA_Restart_Priority> GetVmHaRestartPriorities(IXenConnection connection, bool showHiddenVMs)
         {
             Dictionary<VM, VM.HA_Restart_Priority> result = new Dictionary<VM, VM.HA_Restart_Priority>();
             foreach (VM vm in connection.Cache.VMs)
@@ -1496,49 +1526,6 @@ namespace XenAdmin.Core
                 }
             }
             return result;
-        }
-
-        /// <summary>
-        /// Retrieves a IXenObject from a message. May return null if type not recognised.
-        /// </summary>
-        /// <param name="message"></param>
-        /// <returns></returns>
-        public static IXenObject XenObjectFromMessage(XenAPI.Message message)
-        {
-            switch (message.cls)
-            {
-                case cls.Pool:
-                    Pool pool = message.Connection.Cache.Find_By_Uuid<Pool>(message.obj_uuid);
-                    if (pool != null)
-                        return pool;
-                    break;
-                case cls.Host:
-                    Host host = message.Connection.Cache.Find_By_Uuid<Host>(message.obj_uuid);
-                    if (host != null)
-                        return host;
-                    break;
-                case cls.VM:
-                    VM vm = message.Connection.Cache.Find_By_Uuid<VM>(message.obj_uuid);
-                    if (vm != null)
-                        return vm;
-                    break;
-                case cls.SR:
-                    SR sr = message.Connection.Cache.Find_By_Uuid<SR>(message.obj_uuid);
-                    if (sr != null)
-                        return sr;
-                    break;
-                case cls.VMSS:
-                    VMSS vmss = message.Connection.Cache.Find_By_Uuid<VMSS>(message.obj_uuid);
-                    if (vmss != null)
-                        return vmss;
-					 break;					 
-                case cls.PVS_proxy:
-                    PVS_proxy proxy = message.Connection.Cache.Find_By_Uuid<PVS_proxy>(message.obj_uuid);
-                    if (proxy != null)
-                        return proxy;
-					break;
-            }
-            return null;
         }
 
         public static Regex HostnameOrIpRegex = new Regex(@"[\w.]+");
@@ -1754,65 +1741,65 @@ namespace XenAdmin.Core
             return ans.ToString();
         }
 
-       /// <summary>
-       /// Does the connection support Link aggregation (LACP) bonds (i.e. on the vSwitch backend)?
-       /// </summary>
-       public static bool SupportsLinkAggregationBond(IXenConnection connection)
-       {
-           Host coordinator = GetCoordinator(connection);
-           return coordinator != null && coordinator.vSwitchNetworkBackend();
-       }
+        /// <summary>
+        /// Does the connection support Link aggregation (LACP) bonds (i.e. on the vSwitch backend)?
+        /// </summary>
+        public static bool SupportsLinkAggregationBond(IXenConnection connection)
+        {
+            Host coordinator = GetCoordinator(connection);
+            return coordinator != null && coordinator.vSwitchNetworkBackend();
+        }
 
-       /// <summary>
-       /// Number of alloowed NICs per bond
-       /// </summary>
-       public static int BondSizeLimit(IXenConnection connection)
-       {
-           Host coordinator = GetCoordinator(connection);
-           // For hosts on the vSwitch backend, we allow 4 NICs per bond; otherwise, 2
-           return coordinator != null && coordinator.vSwitchNetworkBackend() ? 4 : 2;
-       }
+        /// <summary>
+        /// Number of alloowed NICs per bond
+        /// </summary>
+        public static int BondSizeLimit(IXenConnection connection)
+        {
+            Host coordinator = GetCoordinator(connection);
+            // For hosts on the vSwitch backend, we allow 4 NICs per bond; otherwise, 2
+            return coordinator != null && coordinator.vSwitchNetworkBackend() ? 4 : 2;
+        }
 
-       public static Host GetHostAncestor(IXenObject xenObject)
-       {
-           if (xenObject == null || xenObject.Connection == null)
-               return null;
+        public static Host GetHostAncestor(IXenObject xenObject)
+        {
+            if (xenObject == null || xenObject.Connection == null)
+                return null;
 
-           var h = xenObject as Host;
-           if (h != null)
-               return h;
+            var h = xenObject as Host;
+            if (h != null)
+                return h;
 
-           var sr = xenObject as SR;
-           if (sr != null)
-               return sr.Home();
+            var sr = xenObject as SR;
+            if (sr != null)
+                return sr.Home();
 
-           var vm = xenObject as VM;
-           if (vm != null)
-               return vm.Home();
+            var vm = xenObject as VM;
+            if (vm != null)
+                return vm.Home();
 
-           return null;
-       }
+            return null;
+        }
 
-       public static bool SameServerVersion(Host host, string longProductVersion)
-       {
-           return host != null && host.LongProductVersion() == longProductVersion;
-       }
+        public static bool SameServerVersion(Host host, string longProductVersion)
+        {
+            return host != null && host.LongProductVersion() == longProductVersion;
+        }
 
-       public static bool EnabledTargetExists(Host host, IXenConnection connection)
-       {
-           if (host != null)
-               return host.enabled;
+        public static bool EnabledTargetExists(Host host, IXenConnection connection)
+        {
+            if (host != null)
+                return host.enabled;
 
-           return connection.Cache.Hosts.Any(h => h.enabled);
-       }
+            return connection.Cache.Hosts.Any(h => h.enabled);
+        }
 
-       public static bool GpuCapability(IXenConnection connection)
-       {
-           if (FeatureForbidden(connection, Host.RestrictGpu))
-               return false;
-           var pool = GetPoolOfOne(connection);
-           return pool != null && pool.HasGpu();
-       }
+        public static bool GpuCapability(IXenConnection connection)
+        {
+            if (FeatureForbidden(connection, Host.RestrictGpu))
+                return false;
+            var pool = GetPoolOfOne(connection);
+            return pool != null && pool.HasGpu();
+        }
 
         public static bool VGpuCapability(IXenConnection connection)
         {
@@ -1823,31 +1810,34 @@ namespace XenAdmin.Core
         }
 
         /// <summary>
-       /// Whether creation of VLAN 0 is allowed.
-       /// </summary>
-       public static bool VLAN0Allowed(IXenConnection connection)
-       {
-           Host coordinator = GetCoordinator(connection);
-           // For Creedence or later on the vSwitch backend, we allow creation of VLAN 0
-           return coordinator != null && coordinator.vSwitchNetworkBackend();
-       }
+        /// Whether creation of VLAN 0 is allowed.
+        /// </summary>
+        public static bool VLAN0Allowed(IXenConnection connection)
+        {
+            Host coordinator = GetCoordinator(connection);
+            // For Creedence or later on the vSwitch backend, we allow creation of VLAN 0
+            return coordinator != null && coordinator.vSwitchNetworkBackend();
+        }
 
-       public static bool ContainerCapability(IXenConnection connection)
-       {
-           var coordinator = GetCoordinator(connection);
-           if (coordinator == null || StockholmOrGreater(connection))
-               return false;
+        public static bool ContainerCapability(IXenConnection connection)
+        {
+            var coordinator = GetCoordinator(connection);
+            if (coordinator == null || StockholmOrGreater(connection))
+                return false;
 
-           if (ElyOrGreater(connection))
-               return coordinator.AppliedUpdates().Any(update => update.Name().ToLower().StartsWith("xscontainer")); 
-           return coordinator.SuppPacks().Any(suppPack => suppPack.Name.ToLower().StartsWith("xscontainer")); 
-       }
+            if (ElyOrGreater(connection))
+                return coordinator.AppliedUpdates().Any(update => update.Name().ToLower().StartsWith("xscontainer"));
+            return coordinator.SuppPacks().Any(suppPack => suppPack.Name.ToLower().StartsWith("xscontainer"));
+        }
 
-       public static bool PvsCacheCapability(IXenConnection connection)
-       {
-           var coordinator = GetCoordinator(connection);
-           return coordinator != null && coordinator.AppliedUpdates().Any(update => update.Name().ToLower().StartsWith("pvsaccelerator"));
-       }
+        public static bool PvsCacheCapability(IXenConnection connection)
+        {
+            if (Post82X(connection))
+                return true;
+
+            var coordinator = GetCoordinator(connection);
+            return coordinator != null && coordinator.AppliedUpdates().Any(update => update.Name().ToLower().StartsWith("pvsaccelerator"));
+        }
 
         public static string UrlEncode(this string str)
         {
@@ -1902,14 +1892,25 @@ namespace XenAdmin.Core
 
             return
                 (from network in networks
-                    where network.Key.StartsWith(string.Format("{0}/ip", device))
-                    orderby network.Key
-                    select network.Value.Split(new[] { "\n", "%n" }, StringSplitOptions.RemoveEmptyEntries)).SelectMany(x => x).Distinct().ToList();
+                 where network.Key.StartsWith(string.Format("{0}/ip", device))
+                 orderby network.Key
+                 select network.Value.Split(new[] { "\n", "%n" }, StringSplitOptions.RemoveEmptyEntries)).SelectMany(x => x).Distinct().ToList();
         }
 
         public static bool GpusAvailable(IXenConnection connection)
         {
             return connection?.Cache.GPU_groups.Any(g => g.PGPUs.Count > 0 && g.supported_VGPU_types.Count != 0) ?? false;
+        }
+
+        public static bool ConnectionRequiresRbac(IXenConnection connection)
+        {
+            if (connection?.Session == null)
+                throw new NullReferenceException("RBAC check was given a null connection");
+
+            if (connection.Session.IsLocalSuperuser)
+                return false;
+
+            return GetCoordinator(connection).external_auth_type != Auth.AUTH_TYPE_NONE;
         }
     }
 }

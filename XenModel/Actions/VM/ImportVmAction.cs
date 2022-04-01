@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using XenAdmin.Core;
 using XenAPI;
@@ -72,9 +73,10 @@ namespace XenAdmin.Actions
 
         public ImportVmAction(IXenConnection connection, Host affinity, string filename, SR sr,
             Action<VM, bool> warningDelegate, Action<VMStartAbstractAction, Failure> failureDiagnosisDelegate)
-			: base(connection, string.Format(Messages.IMPORTVM_TITLE, filename, Helpers.GetName(connection)), Messages.IMPORTVM_PREP)
-		{
-			Pool = Helpers.GetPoolOfOne(connection);
+			: base(connection, "")
+        {
+            Description = Messages.IMPORTVM_PREP;
+            Pool = Helpers.GetPoolOfOne(connection);
 			m_affinity = affinity;
 			Host = affinity ?? connection.Resolve(Pool.master);
 			SR = sr;
@@ -94,13 +96,15 @@ namespace XenAdmin.Actions
 			ApiMethodsToRoleCheck.AddRange(Role.CommonSessionApiList);
 
 			#endregion
-		}
+
+            Title = string.Format(Messages.IMPORTVM_TITLE, filename, Host.NameWithLocation());
+        }
 
         protected override void Run()
         {
             SafeToExit = false;
 
-            string vmRef = ApplyFile(out string importTaskRef);
+            string vmRef = UploadFile(out string importTaskRef);
             if (string.IsNullOrEmpty(vmRef))
                 return;
 
@@ -240,37 +244,37 @@ namespace XenAdmin.Actions
             return name;
         }
 
-        private string ApplyFile(out string importTaskRef)
+        private string UploadFile(out string importTaskRef)
         {
-            log.DebugFormat("Importing XVA from {0} to SR {1}", m_filename, SR.Name());
-
             Host host = SR.GetStorageHost();
 
-            string hostURL;
+            string hostUrl;
             if (host == null)
             {
                 Uri uri = new Uri(Session.Url);
-                hostURL = uri.Host;
+                hostUrl = uri.Host;
+                log.InfoFormat("SR {0} is shared or disconnected or SR host could not be resolved. Uploading XVA {1} to {2}", SR.Name(), m_filename, hostUrl);
             }
             else
             {
-                log.DebugFormat("SR is not shared -- redirecting to {0}", host.address);
-                hostURL = host.address;
+                hostUrl = host.address;
+                log.InfoFormat("Resolved host for SR {0}. Uploading XVA {1} to {2}", SR.Name(), m_filename, hostUrl);
             }
-
-            log.DebugFormat("Using {0} for import", hostURL);
 
             try
             {
-                RelatedTask = Task.create(Session, "put_import_task", hostURL);
+                RelatedTask = Task.create(Session, "put_import_task", hostUrl);
                 //at the end of polling, the RelatedTask is destroyed; make a note of it for later use
                 importTaskRef = RelatedTask.opaque_ref;
 
-                log.DebugFormat("HTTP PUTTING file from {0} to {1}", m_filename, hostURL);
+                log.DebugFormat("HTTP PUTTING file from {0} to {1}", m_filename, hostUrl);
 
-                HTTP_actions.put_import(percent => PercentComplete = percent,
+                HTTP_actions.put_import(percent =>
+                    {
+                        Tick(percent, string.Format(Messages.IMPORTVM_UPLOADING, Path.GetFileName(m_filename), Pool.Name(), percent));
+                    },
                     () => XenAdminConfigManager.Provider.ForcedExiting || GetCancelling(),
-                    HTTP_PUT_TIMEOUT, hostURL,
+                    HTTP_PUT_TIMEOUT, hostUrl,
                     XenAdminConfigManager.Provider.GetProxyFromSettings(Connection),
                     m_filename, RelatedTask.opaque_ref, Session.opaque_ref, false, false, SR.opaque_ref);
 

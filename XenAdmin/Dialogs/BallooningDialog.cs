@@ -32,6 +32,7 @@
 using System;
 using System.Collections.Generic;
 using XenAdmin.Controls.Ballooning;
+using XenAdmin.Core;
 using XenAPI;
 
 namespace XenAdmin.Dialogs
@@ -52,7 +53,7 @@ namespace XenAdmin.Dialogs
             InitializeComponent();
             _vm = vm;
 
-            if (vm.advanced_ballooning())
+            if (!Helpers.FeatureForbidden(vm.Connection, Host.RestrictDMC) && vm.UsesBallooning())
             {
                 memoryControls = new VMMemoryControlsAdvanced();
 

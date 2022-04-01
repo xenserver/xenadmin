@@ -50,8 +50,7 @@ namespace XenAdmin.Actions
         {
             PercentComplete = 40;
             PIF.scan(Session, Host.opaque_ref);
-            Description = Messages.COMPLETED;
-            PercentComplete = 100;
+            Tick(100, Messages.COMPLETED);
         }
     }
 }

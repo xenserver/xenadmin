@@ -32,6 +32,7 @@
 using System;
 using System.IO;
 using System.Net;
+using System.Reflection;
 using System.Xml;
 
 namespace XenCenterLib
@@ -40,7 +41,7 @@ namespace XenCenterLib
     {
         public override ICredentials Credentials
         {
-            set { }
+            set => throw new NotSupportedException($"Invalid set call for '{MethodBase.GetCurrentMethod()?.Name}', value: '{value}'");
         }
 
         public override object GetEntity(Uri absoluteUri, string role, Type ofObjectToReturn)

@@ -34,8 +34,8 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using XenAdmin.Actions;
-using XenAPI;
 using XenAdmin.Dialogs;
+using XenAPI;
 
 
 namespace XenAdmin.Commands
@@ -97,7 +97,7 @@ namespace XenAdmin.Commands
         /// <param name="mainWindow">The application main window.</param>
         /// <param name="selection">The selection context for the Command.</param>
         protected Command(IMainWindow mainWindow, SelectedItem selection)
-            : this(mainWindow, new [] { selection })
+            : this(mainWindow, new[] { selection })
         {
         }
 
@@ -287,7 +287,7 @@ namespace XenAdmin.Commands
                 selected: ConfirmationDialogNoButtonSelected);
 
             using (var dialog = new WarningDialog(ConfirmationDialogText, buttonYes, buttonNo)
-                {WindowTitle = ConfirmationDialogTitle})
+            { WindowTitle = ConfirmationDialogTitle })
             {
                 if (!string.IsNullOrEmpty(ConfirmationDialogHelpId))
                     dialog.HelpNameSetter = ConfirmationDialogHelpId;

@@ -547,7 +547,7 @@
     <value>3</value>
   </data>
   <data name="labelNoVmsProtected.Text" xml:space="preserve">
-    <value>保護されている VM がありません。この構成によりプール マスターが保護されますが、サーバーは保護されません。</value>
+    <value>保護されている VM がありません。この構成によりプール コーディネーターが保護されますが、サービスは保護されません。</value>
   </data>
   <data name="labelNoVmsProtected.Visible" type="System.Boolean, mscorlib">
     <value>False</value>

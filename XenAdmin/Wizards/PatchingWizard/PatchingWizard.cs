@@ -38,7 +38,6 @@ using XenAdmin.Dialogs;
 using XenAPI;
 using System.Linq;
 using System.IO;
-using XenAdmin.Alerts;
 using XenAdmin.Core;
 using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Wizards.PatchingWizard.PlanActions;

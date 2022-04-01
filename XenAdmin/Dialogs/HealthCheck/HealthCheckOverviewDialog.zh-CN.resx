@@ -1267,7 +1267,7 @@
     <value>12</value>
   </data>
   <data name="rubricLabel.Text" xml:space="preserve">
-    <value>运行状况检查会自动将服务器状态报告上载到 [Citrix] Insight Services，具体取决于您的 [XenServer] 池上配置的预定义计划。</value>
+    <value>运行状况检查会自动将服务器状态报告上载到 {0}，具体取决于在您的 {1} 池上配置的预定义计划。</value>
   </data>
   <data name="&gt;&gt;rubricLabel.Name" xml:space="preserve">
     <value>rubricLabel</value>

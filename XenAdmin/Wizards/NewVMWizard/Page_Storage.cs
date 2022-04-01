@@ -53,26 +53,19 @@ namespace XenAdmin.Wizards.NewVMWizard
         private Host _affinity;
         private bool _loadRequired = true;
         private bool loading;
+        private SR _fullCopySR;
+        private bool _canCreateFullCopy;
 
         public Page_Storage()
         {
             InitializeComponent();
         }
 
-        public override string Text
-        {
-            get { return Messages.NEWVMWIZARD_STORAGEPAGE_NAME; }
-        }
+        public override string Text => Messages.NEWVMWIZARD_STORAGEPAGE_NAME;
 
-        public override string PageTitle
-        {
-            get { return Messages.NEWVMWIZARD_STORAGEPAGE_TITLE; }
-        }
+        public override string PageTitle => Messages.NEWVMWIZARD_STORAGEPAGE_TITLE;
 
-        public override string HelpID
-        {
-            get { return "Storage"; }
-        }
+        public override string HelpID => "Storage";
 
         protected override void PageLoadedCore(PageLoadedDirection direction)
         {
@@ -81,14 +74,23 @@ namespace XenAdmin.Wizards.NewVMWizard
 
             loading = true;
 
+            var isDefaultTemplate = Template.DefaultTemplate();
+            var isHvmTemplate = Template.IsHVM();
+
+            DisklessVMRadioButton.Enabled = isHvmTemplate && SelectedInstallMethod == InstallMethod.Network;
+
             // CA-46213 The default should be "diskless" if the install method is "boot from network"
-            if (!Template.DefaultTemplate() && !Template.HasAtLeastOneDisk()
-                || Template.IsHVM() && SelectedInstallMethod == InstallMethod.Network)
+            if (!isDefaultTemplate && !Template.HasAtLeastOneDisk() ||
+                isHvmTemplate && SelectedInstallMethod == InstallMethod.Network)
             {
                 DisklessVMRadioButton.Checked = true;
             }
             else
+            {
                 DisksRadioButton.Checked = true;
+            }
+
+            CloneCheckBox.Visible = !isDefaultTemplate;
 
             LoadDisks();
             loading = false;
@@ -98,7 +100,8 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         public override void SelectDefaultControl()
         {
-            DisksGridView.Select();
+            if (DisksRadioButton.Checked)
+                DisksGridView.Select();
         }
 
         private void LoadDisks()
@@ -139,7 +142,9 @@ namespace XenAdmin.Wizards.NewVMWizard
             }
             else
             {
+                _canCreateFullCopy = true;
                 var vbds = Connection.ResolveAll(Template.VBDs);
+
                 foreach (VBD vbd in vbds)
                 {
                     if (vbd.type != vbd_type.Disk)
@@ -148,6 +153,9 @@ namespace XenAdmin.Wizards.NewVMWizard
                     VDI vdi = Connection.Resolve(vbd.VDI);
                     if (vdi == null)
                         continue;
+
+                    if (!vdi.allowed_operations.Contains(vdi_operations.copy))
+                        _canCreateFullCopy = false;
 
                     var sourceSr = Connection.Resolve(vdi.SR);
 
@@ -268,38 +276,45 @@ namespace XenAdmin.Wizards.NewVMWizard
             if (loading)
                 return;
 
-            AddButton.Enabled = DisksRadioButton.Checked && DisksGridView.Rows.Count < Template.MaxVBDsAllowed() - 1;
-            EditButton.Enabled = DisksRadioButton.Checked && DisksGridView.SelectedRows.Count > 0;
-            DeleteButton.Enabled = DisksRadioButton.Checked && DisksGridView.SelectedRows.Count > 0 && ((DiskGridRowItem)DisksGridView.SelectedRows[0]).CanDelete;
-            DisksGridView.Enabled = DisksRadioButton.Checked;
-            DisklessVMRadioButton.Enabled = Template.IsHVM() && SelectedInstallMethod == InstallMethod.Network;
+            AddButton.Enabled = DisksGridView.Rows.Count < Template.MaxVBDsAllowed() - 1;
+            EditButton.Enabled = DisksGridView.SelectedRows.Count == 1;
+            DeleteButton.Enabled = DisksGridView.SelectedRows.Count == 1 && ((DiskGridRowItem)DisksGridView.SelectedRows[0]).CanDelete;
 
-            bool isDefaultTemplate = Template.DefaultTemplate();
-            bool canCreateFullCopy = true;
+            _fullCopySR = null;
 
-            if (!isDefaultTemplate)
+            if (!Template.DefaultTemplate())
             {
-                foreach (var vbdRef in Template.VBDs)
+                if (_canCreateFullCopy)
                 {
-                    var vbd = Connection.Resolve(vbdRef);
-                    if (vbd == null)
-                        continue;
+                    var targetSRs = new List<SR>();
+                    var fullCopySize = DisksGridView.Rows.Cast<DiskGridRowItem>()
+                        .Where(r => !r.CanDelete && r.SourceSR != null && r.Disk != null)
+                        .Select(r => r.Disk).Sum(vdi => vdi.virtual_size);
 
-                    var vdi = Connection.Resolve(vbd.VDI);
-                    if (vdi == null)
-                        continue;
+                    foreach (DiskGridRowItem row in DisksGridView.Rows)
+                    {
+                        if (row.CanDelete || row.SourceSR == null || row.Disk == null)
+                            continue;
 
-                    if (vdi.allowed_operations.Contains(vdi_operations.copy))
-                        continue;
+                        SR target = Connection.Resolve(row.Disk.SR);
 
-                    canCreateFullCopy = false;
-                    break;
+                        if (_fullCopySR == null && row.SourceSR.Equals(target) &&
+                            target.VdiCreationCanProceed(fullCopySize))
+                            _fullCopySR = target;
+
+                        if (!targetSRs.Contains(target))
+                            targetSRs.Add(target);
+                    }
+
+                    if (targetSRs.Count == 1 && targetSRs[0].VdiCreationCanProceed(fullCopySize))
+                        _fullCopySR = targetSRs[0];
                 }
-            }
 
-            CloneCheckBox.Visible = !isDefaultTemplate;
-            CloneCheckBox.Enabled = canCreateFullCopy;
-            CloneCheckBox.Checked = !canCreateFullCopy || pageLoad;
+                CloneCheckBox.Enabled = _fullCopySR != null;
+
+                if (_fullCopySR == null || pageLoad)
+                    CloneCheckBox.Checked = true;
+            }
 
             OnPageUpdated();
         }
@@ -362,18 +377,20 @@ namespace XenAdmin.Wizards.NewVMWizard
         private void DisksRadioButton_CheckedChanged(object sender, EventArgs e)
         {
             if (DisksRadioButton.Checked)
-                UpdateEnablement();
+                OnPageUpdated();
         }
 
         private void DisklessVMRadioButton_CheckedChanged(object sender, EventArgs e)
         {
             if (DisklessVMRadioButton.Checked)
-                UpdateEnablement();
+                OnPageUpdated();
         }
 
 
         private void AddButton_Click(object sender, EventArgs e)
         {
+            DisksRadioButton.Checked = true;
+
             using (var dialog = new NewDiskDialog(Connection, Template, Affinity, SrPicker.SRPickerType.LunPerVDI, null,
                     true, 0, AddedVDIs) { DontCreateVDI = true })
             {
@@ -381,13 +398,16 @@ namespace XenAdmin.Wizards.NewVMWizard
                     return;
 
                 DisksGridView.Rows.Add(new DiskGridRowItem(Connection, dialog.NewDisk(), dialog.NewDevice(), DiskSource.New));
-                UpdateStatusForEachDisk();
-                UpdateEnablement();
             }
+
+            UpdateStatusForEachDisk();
+            UpdateEnablement();
         }
 
         private void DeleteButton_Click(object sender, EventArgs e)
         {
+            DisksRadioButton.Checked = true;
+
             if (DisksGridView.SelectedRows.Count <= 0)
                 return;
 
@@ -398,6 +418,8 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         private void EditButton_Click(object sender, EventArgs e)
         {
+            DisksRadioButton.Checked = true;
+
             if (DisksGridView.SelectedRows.Count <= 0)
                 return;
 
@@ -412,15 +434,22 @@ namespace XenAdmin.Wizards.NewVMWizard
 
                 selectedItem.Disk = dialog.NewDisk();
                 selectedItem.UpdateDetails();
-                UpdateStatusForEachDisk();
-                UpdateEnablement();
             }
+
+            UpdateStatusForEachDisk();
+            UpdateEnablement();
         }
 
 
         private void DisksGridView_SelectionChanged(object sender, EventArgs e)
         {
-            UpdateEnablement();
+            EditButton.Enabled = DisksGridView.SelectedRows.Count == 1;
+            DeleteButton.Enabled = DisksGridView.SelectedRows.Count == 1 && ((DiskGridRowItem)DisksGridView.SelectedRows[0]).CanDelete;
+        }
+
+        private void DisksGridView_Enter(object sender, EventArgs e)
+        {
+            DisksRadioButton.Checked = true;
         }
 
         #endregion
@@ -430,41 +459,10 @@ namespace XenAdmin.Wizards.NewVMWizard
         private IEnumerable<VDI> AddedVDIs =>
             from DiskGridRowItem row in DisksGridView.Rows select row.Disk;
 
-        /// <summary>
-        /// When the VM is created by the New VM Wizard, VM.copy or VM.clone is
-        /// used depending on what SRs the disks are on:
-        /// - If the disks are all on the same SR, this SR is returned and VM.copy is used.
-        /// - If at least one disk is on same SR as the source disk, this SR is returned and VM.copy is used.
-        /// - Otherwise, this property returns null and VM.clone is used.
-        /// </summary>
-        public SR FullCopySR
-        {
-            get
-            {
-                if (!Template.DefaultTemplate() && !CloneCheckBox.Checked)
-                {
-                    SR sr = null;
-                    List<SR> targetSRs = new List<SR>();
-                    foreach (DiskGridRowItem row in DisksGridView.Rows)
-                    {
-                        if (!row.CanDelete && row.SourceSR != null && row.Disk != null)
-                        {
-                            SR target = Connection.Resolve(row.Disk.SR);
-
-                            if (sr == null && row.SourceSR.Equals(target))
-                                sr = row.SourceSR;
-
-                            if (!targetSRs.Contains(target))
-                                targetSRs.Add(target);
-                        }
-                    }
-
-                    return targetSRs.Count == 1 ? targetSRs[0] : sr;
-                }
-
-                return null;
-            }
-        }
+        public SR FullCopySR =>
+            Template.DefaultTemplate() || _fullCopySR == null || CloneCheckBox.Checked
+                ? null
+                : _fullCopySR;
 
         public override List<KeyValuePair<string, string>> PageSummary
         {

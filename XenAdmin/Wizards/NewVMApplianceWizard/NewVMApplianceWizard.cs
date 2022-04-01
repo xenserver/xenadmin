@@ -63,16 +63,10 @@ namespace XenAdmin.Wizards.NewVMApplianceWizard
             xenTabPageVMs.Pool = pool;
 
             #region RBAC Warning Page Checks
-            if (Pool.Connection.Session.IsLocalSuperuser || Helpers.GetCoordinator(Pool.Connection).external_auth_type == Auth.AUTH_TYPE_NONE)
+            if (Helpers.ConnectionRequiresRbac(Pool.Connection))
             {
-                //do nothing
-            }
-            else
-            {
-                RBACWarningPage.WizardPermissionCheck check = new RBACWarningPage.WizardPermissionCheck(Messages.RBAC_WARNING_VM_APPLIANCE); 
-                check.AddApiCheck("VM_appliance.async_create");
-                check.Blocking = true;
-                xenTabPageRBAC.AddPermissionChecks(xenConnection, check);
+                xenTabPageRBAC.SetPermissionChecks(xenConnection,
+                    new WizardRbacCheck(Messages.RBAC_WARNING_VM_APPLIANCE, "VM_appliance.async_create") {Blocking = true});
                 AddPage(xenTabPageRBAC, 0);
             }
             #endregion

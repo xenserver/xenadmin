@@ -35,6 +35,7 @@ namespace XenAdmin.Wizards.GenericPages
 {
     public interface INetworkResource
     {
+        string VmNameOverride { get; }
         string NetworkName { get; }
         string MACAddress { get; }
         string NetworkID { get; }

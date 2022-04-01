@@ -105,7 +105,13 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
             {
                 var frontend = (SrWizardType)radioButton.Tag;
                 frontend.ResetSrName(Connection);
-                frontend.AllowToCreateNewSr = SrToReattach == null && !DisasterRecoveryTask;
+
+                // these SR types have a blocked setter
+                if (!(frontend is SrWizardType_Cslg || frontend is SrWizardType_CifsIso || frontend is SrWizardType_NfsIso || frontend is SrWizardType_Cifs))
+                {
+                    frontend.AllowToCreateNewSr = SrToReattach == null && !DisasterRecoveryTask;
+                }
+
                 frontend.DisasterRecoveryTask = DisasterRecoveryTask;
                 frontend.SrToReattach = SrToReattach;
             }

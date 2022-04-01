@@ -56,13 +56,11 @@ using XenAdmin.Model;
 using XenAdmin.Network;
 using XenAdmin.TabPages;
 using XenAdmin.XenSearch;
-using XenAdmin.Wizards.PatchingWizard;
 using XenAdmin.Plugins;
 using XenCenterLib;
 using System.Linq;
 using XenAdmin.Controls.GradientPanel;
 using XenAdmin.Help;
-using XenAdmin.Wizards;
 using System.IO;
 
 namespace XenAdmin
@@ -128,7 +126,7 @@ namespace XenAdmin
 
         private static readonly System.Windows.Forms.Timer CheckForUpdatesTimer = new System.Windows.Forms.Timer();
 
-        private readonly PluginManager pluginManager;
+        public readonly PluginManager PluginManager;
         private readonly ContextMenuBuilder contextMenuBuilder;
 
         private readonly LicenseManagerLauncher licenseManagerLauncher;
@@ -222,11 +220,11 @@ namespace XenAdmin
             CommandLineArgType = argType;
             CommandLineParam = args;
 
-            pluginManager = new PluginManager();
-            pluginManager.PluginsChanged += pluginManager_PluginsChanged;
-            pluginManager.LoadPlugins();
-            contextMenuBuilder = new ContextMenuBuilder(pluginManager, this);
-            ((WinformsXenAdminConfigProvider) XenAdminConfigManager.Provider).PluginManager = pluginManager;
+            PluginManager = new PluginManager();
+            PluginManager.PluginsChanged += pluginManager_PluginsChanged;
+            PluginManager.LoadPlugins();
+            contextMenuBuilder = new ContextMenuBuilder(PluginManager, this);
+            ((WinformsXenAdminConfigProvider) XenAdminConfigManager.Provider).PluginManager = PluginManager;
 
             FormFontFixer.Fix(this);
 
@@ -642,7 +640,7 @@ namespace XenAdmin
 
                         if (result && dlg.IsCheckBoxChecked)
                         {
-                            using (var dialog = new OptionsDialog(pluginManager))
+                            using (var dialog = new OptionsDialog(PluginManager))
                             {
                                 dialog.SelectConnectionOptionsPage();
                                 dialog.ShowDialog(this);
@@ -1007,15 +1005,17 @@ namespace XenAdmin
                     return;
                 }
 
-                // Allow Citrix Hypervisor Center connect to Stockholm and cloud released versions only
+                // Allow connection only to Yangtze and cloud released versions
                 //
-                if (!Helpers.StockholmOrGreater(coordinator))
+                if (!Helpers.YangtzeOrGreater(coordinator))
                 {
                     connection.EndConnect();
 
                     Program.Invoke(Program.MainWindow, delegate
                     {
-                        var msg = string.Format(Messages.GUI_NOT_COMPATIBLE, BrandManager.BrandConsole, BrandManager.ProductBrand, BrandManager.ProductVersion82, Helpers.GetName(coordinator), BrandManager.LegacyConsole);
+                        var msg = string.Format(Messages.GUI_NOT_COMPATIBLE, BrandManager.BrandConsole,
+                            BrandManager.ProductBrand, BrandManager.ProductVersion821,
+                            Helpers.GetName(coordinator), BrandManager.LegacyConsole);
                         var url = InvisibleMessages.OUT_OF_DATE_WEBSITE;
                         var title = string.Format(Messages.CONNECTION_REFUSED_TITLE, Helpers.GetName(coordinator).Ellipsise(80));
                         var error = $"{msg}\n{url}";
@@ -1198,7 +1198,7 @@ namespace XenAdmin
                 }
 
                 selectedTabs.Remove(o);
-                pluginManager.DisposeURLs(o);
+                PluginManager.DisposeURLs(o);
             }
         }
 
@@ -1586,7 +1586,7 @@ namespace XenAdmin
             consoleFeatures = new List<TabPageFeature>();
             otherFeatures = new List<TabPageFeature>();
 
-            var plugins = pluginManager.Plugins;
+            var plugins = PluginManager.Plugins;
             foreach (var p in plugins)
             {
                 var features = p.Features;
@@ -1715,7 +1715,7 @@ namespace XenAdmin
                 bool itemAdded = false;
 
                 // add plugin items for this menu at insertIndex
-                foreach (PluginDescriptor plugin in pluginManager.Plugins)
+                foreach (PluginDescriptor plugin in PluginManager.Plugins)
                 {
                     if (!plugin.Enabled)
                         continue;
@@ -1789,7 +1789,7 @@ namespace XenAdmin
                 s.Connection != null && Helpers.StockholmOrGreater(s.Connection) &&
                 !s.Connection.Cache.Hosts.Any(Host.RestrictPoolSecretRotation));
             toolStripMenuItemEnableTls.Available = SelectionManager.Selection.Any(s =>
-                s.Connection != null && Helpers.PostStockholm(s.Connection) &&
+                s.Connection != null && Helpers.Post82X(s.Connection) && Helpers.XapiEqualOrGreater_1_290_0(s.Connection) &&
                 !s.Connection.Cache.Hosts.Any(Host.RestrictCertificateVerification) &&
                 s.Connection.Cache.Pools.Any(p => !p.tls_verification_enabled));
         }
@@ -1840,7 +1840,14 @@ namespace XenAdmin
 
             if (result == DialogResult.OK || Program.RunInAutomatedTestMode)
             {
-                filepath = Program.RunInAutomatedTestMode ? "" : filepath == "" ? dialog.FileName : filepath;
+                if (Program.RunInAutomatedTestMode)
+                {
+                    filepath = string.Empty;
+                }
+                else if (filepath == string.Empty && dialog != null)
+                {
+                    filepath = dialog.FileName;
+                }
 
                 Host hostAncestor = SelectionManager.Selection.Count == 1 ? SelectionManager.Selection[0].HostAncestor : null;
 
@@ -2130,7 +2137,7 @@ namespace XenAdmin
 
         private void UpdateTabePageFeatures()
         {
-            var plugins = pluginManager.Plugins;
+            var plugins = PluginManager.Plugins;
             foreach (var p in plugins)
             {
                 var features = p.Features;
@@ -2718,7 +2725,7 @@ namespace XenAdmin
 
         private void preferencesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (var dialog = new OptionsDialog(pluginManager))
+            using (var dialog = new OptionsDialog(PluginManager))
                 dialog.ShowDialog(this);
         }
 
@@ -2735,7 +2742,7 @@ namespace XenAdmin
         {
             HelpersGUI.BringFormToFront(this);
             Host hostAncestor = SelectionManager.Selection.Count == 1 ? SelectionManager.Selection[0].HostAncestor : null;
-            new ImportWizard(SelectionManager.Selection.GetConnectionOfFirstItem(), hostAncestor, param, false).Show();
+            new ImportWizard(SelectionManager.Selection.GetConnectionOfFirstItem(), hostAncestor, param).Show();
         }
 
         #region XenSearch

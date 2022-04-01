@@ -88,8 +88,9 @@ namespace XenAdmin.Wizards.ConversionWizard
             NetworkID = network.Id;
         }
 
+        public string VmNameOverride  => null;
         public string NetworkName { get; }
-        public string MACAddress { get; }
+        public string MACAddress  => null;
         public string NetworkID { get; }
     }
 

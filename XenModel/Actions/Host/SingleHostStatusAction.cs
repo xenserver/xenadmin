@@ -58,6 +58,16 @@ namespace XenAdmin.Actions
 
         public long DataTransferred;
 
+        public static RbacMethodList StaticRBACDependencies
+        {
+            get
+            {
+                var list = new RbacMethodList("HTTP/get_system_status");
+                list.AddRange(Role.CommonSessionApiList);
+                list.AddRange(Role.CommonTaskApiList);
+                return list;
+            }
+        }
         protected override void Run()
         {
             Description = string.Format(Messages.ACTION_SYSTEM_STATUS_COMPILING, Helpers.GetName(host));
@@ -91,8 +101,7 @@ namespace XenAdmin.Actions
 
                 PollToCompletion();
                 Status = ReportStatus.succeeded;
-                Description = Messages.COMPLETED;
-                PercentComplete = 100;
+                Tick(100, Messages.COMPLETED);
             }
             catch (Exception e)
             {

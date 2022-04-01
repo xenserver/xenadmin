@@ -66,7 +66,7 @@ namespace XenAdmin.Controls.Ballooning
                 {
                     vm0 = vms[0];
                     _origStaticMax = vm0.memory_static_max;
-                    hasBallooning = vm0.has_ballooning();
+                    hasBallooning = vm0.SupportsBallooning();
                     maxMemAllowed = vms.Select(v => v.MaxMemAllowed()).Min();
                     Populate();
                 }
@@ -305,7 +305,7 @@ namespace XenAdmin.Controls.Ballooning
                         msg = VMs.Count == 1
                             ? Messages.CONFIRM_CHANGE_STATIC_MAX_SINGULAR
                             : Messages.CONFIRM_CHANGE_STATIC_MAX_PLURAL;
-                    else if (vm.has_ballooning() && !Helpers.FeatureForbidden(vm, Host.RestrictDMC))
+                    else if (vm.SupportsBallooning() && !Helpers.FeatureForbidden(vm, Host.RestrictDMC))
                         msg = VMs.Count == 1
                             ? Messages.CONFIRM_CHANGE_MEMORY_MAX_SINGULAR
                             : Messages.CONFIRM_CHANGE_MEMORY_MAX_PLURAL;

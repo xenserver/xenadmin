@@ -151,7 +151,7 @@
     <value>0</value>
   </data>
   <data name="SSLLabel.Text" xml:space="preserve">
-    <value>可以将 [XenCenter] 配置为每次在托管服务器上找到新的或修改过的证书时显示警告。</value>
+    <value>可以将 {0} 配置为每当在托管服务器上找到新的或修改过的证书时显示警告。</value>
   </data>
   <data name="&gt;&gt;SSLLabel.Name" xml:space="preserve">
     <value>SSLLabel</value>
@@ -247,7 +247,7 @@
     <value>3</value>
   </data>
   <data name="labelReminder.Text" xml:space="preserve">
-    <value>可以将 [XenCenter] 配置为在每次轮换池密码时显示更改服务器 root 用户密码的提醒。</value>
+    <value>可以将 {0} 配置为在每次轮换池密码时显示更改服务器 root 用户密码的提醒。</value>
   </data>
   <data name="&gt;&gt;labelReminder.Name" xml:space="preserve">
     <value>labelReminder</value>

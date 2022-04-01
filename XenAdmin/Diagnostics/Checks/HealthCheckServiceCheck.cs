@@ -52,7 +52,7 @@ namespace XenAdmin.Diagnostics.Checks
 
         public override bool CanRun()
         {
-            if (Helpers.PostStockholm(Pool.Connection))
+            if (Helpers.Post82X(Pool.Connection))
                 return false;
 
             return Pool.HealthCheckStatus() == HealthCheckStatus.Enabled;
@@ -65,7 +65,7 @@ namespace XenAdmin.Diagnostics.Checks
             if (_installMethodConfig != null)
                 Host.TryGetUpgradeVersion(Helpers.GetCoordinator(Pool.Connection), _installMethodConfig, out upgradePlatformVersion, out _);
 
-            if (Helpers.PostStockholm(upgradePlatformVersion))
+            if (Helpers.Post82X(upgradePlatformVersion))
                 return new HealthCheckServiceProblem(this, Pool);
 
             if (string.IsNullOrEmpty(upgradePlatformVersion))

@@ -98,8 +98,8 @@ namespace XenAdmin.Actions
 
             RunSubActions(exceptions);
 
-            PercentComplete = 100;
-            Description = endDescription;
+            Tick(100, endDescription);
+
             if (exceptions.Count > 1)
             {
                 foreach (Exception e in exceptions)

@@ -34,6 +34,7 @@ using System.Collections.Generic;
 using System.Linq;
 using XenAdmin.Controls;
 using XenAdmin.Controls.Ballooning;
+using XenAdmin.Core;
 using XenAPI;
 
 namespace XenAdmin.Wizards.BallooningWizard_Pages
@@ -64,7 +65,11 @@ namespace XenAdmin.Wizards.BallooningWizard_Pages
             if (!_changed)
                 return;
 
-            if (VMs != null && VMs.Count > 0 && VMs[0].advanced_ballooning())
+            var connection = VMs?.FirstOrDefault()?.Connection;
+            var ballooningInUse = VMs?.FirstOrDefault()?.UsesBallooning();
+
+            if (!Helpers.FeatureForbidden(connection, Host.RestrictDMC) &&
+                ballooningInUse.HasValue && ballooningInUse.Value)
             {
                 memoryControlsBasic.Visible = false;
                 memoryControls = memoryControlsAdvanced;

@@ -288,7 +288,7 @@ namespace XenAdmin.Commands
 
             //whether RBAC allows connection to the VM's console
             return vm.Connection.Session != null &&
-                   Role.CanPerform(new RbacMethodList("http/connect_console"), vm.Connection, out _, false);
+                   Role.CanPerform(new RbacMethodList("http/connect_console"), vm.Connection, out _);
         }
 
         protected override bool CanRunCore(SelectedItemCollection selection)

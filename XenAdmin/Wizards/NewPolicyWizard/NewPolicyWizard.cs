@@ -68,19 +68,14 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             xenTabPageSnapshotFrequency.Connection = pool.Connection;
             
             #region RBAC Warning Page Checks
-            if (Pool.Connection.Session.IsLocalSuperuser || Helpers.GetCoordinator(Pool.Connection).external_auth_type == Auth.AUTH_TYPE_NONE)
+
+            if (Helpers.ConnectionRequiresRbac(Pool.Connection))
             {
-                //do nothing
-            }
-            else
-            {
-                RBACWarningPage.WizardPermissionCheck check;
-                check = new RBACWarningPage.WizardPermissionCheck(Messages.RBAC_WARNING_VMSS);
-                check.AddApiCheck("VMSS.async_create");
-                check.Blocking = true;
-                xenTabPageRBAC.AddPermissionChecks(xenConnection, check);
+                xenTabPageRBAC.SetPermissionChecks(xenConnection,
+                    new WizardRbacCheck(Messages.RBAC_WARNING_VMSS, "VMSS.async_create") {Blocking = true});
                 AddPage(xenTabPageRBAC, 0);
             }
+
             #endregion
 
             AddPages(xenTabPagePolicy, xenTabPageVMsPage);

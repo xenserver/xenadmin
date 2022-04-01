@@ -154,7 +154,7 @@
     <value>1</value>
   </data>
   <data name="m_labelIntro.Text" xml:space="preserve">
-    <value>オペレーティング システムの修復機能では、[XenServer] 以外のプラットフォーム上で作成されたディスク イメージや OVF パッケージの互換性に関する基本的な問題が修復されます。例えば、VMware 環境で作成された OVF パッケージでこの機能を使用できます。これにより、インポートした VM が [XenServer] 上で正しく起動するようになります。
+    <value>オペレーティング システムの修復機能では、{0} 以外のプラットフォーム上で作成されたディスク イメージや OVF パッケージの互換性に関する基本的な問題が修復されます。例えば、VMware 環境で作成された OVF パッケージでこの機能を使用できます。これにより、インポートした VM が 正しく起動するようになります。
 
 オペレーティング システムの修復機能を有効にすると、インポートする VM の DVD ドライブに起動可能な ISO イメージがセットされます。これにより、VM の初回起動時に適切な修復が行われます。</value>
   </data>
@@ -222,7 +222,7 @@
     <value>3</value>
   </data>
   <data name="m_labelDontRunOSFixups.Text" xml:space="preserve">
-    <value>インポートする VM が [XenServer] で作成されたものである場合は、このオプションを選択します。</value>
+    <value>インポートする VM が {0} で作成されたものである場合は、このオプションを選択します。</value>
   </data>
   <data name="&gt;&gt;m_labelDontRunOSFixups.Name" xml:space="preserve">
     <value>m_labelDontRunOSFixups</value>
@@ -288,7 +288,7 @@
     <value>5</value>
   </data>
   <data name="m_labelRunOSFixups.Text" xml:space="preserve">
-    <value>インポートする VM が [XenServer] 以外のハイパーバイザーで作成されたものである場合は、このオプションを選択します。</value>
+    <value>インポートする VM が {0} 以外のハイパーバイザーで作成されたものである場合は、このオプションを選択します。</value>
   </data>
   <data name="&gt;&gt;m_labelRunOSFixups.Name" xml:space="preserve">
     <value>m_labelRunOSFixups</value>

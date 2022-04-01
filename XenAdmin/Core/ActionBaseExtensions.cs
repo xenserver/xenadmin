@@ -59,7 +59,10 @@ namespace XenAdmin.Core
         internal static string GetDetails(this ActionBase action)
         {
             var sb = new StringBuilder(GetTitle(action));
-            sb.Append("\n").Append(GetDescription(action));
+
+            var description = GetDescription(action);
+            if (!string.IsNullOrEmpty(description))
+                sb.Append("\n").Append(description);
 
             string timeString = GetTimeElapsed(action);
             if (!string.IsNullOrEmpty(timeString))

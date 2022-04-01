@@ -37,46 +37,40 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 {
     internal class CrossPoolMigrationNetworkResource : INetworkResource
     {
-        private readonly VIF vif;
+        private readonly VIF _vif;
+
         public CrossPoolMigrationNetworkResource(VIF vif)
         {
-            this.vif = vif;
-        }
-        public string NetworkName
-        {
-            get { return vif.NetworkName(); }
+            _vif = vif;
         }
 
-        public string MACAddress
-        {
-            get { return vif.MAC; }
-        }
+        public string VmNameOverride => _vif.Connection?.Resolve(_vif.VM)?.Name();
 
-        public string NetworkID
-        {
-            get { return vif.network.opaque_ref; }
-        }
+        public string NetworkName => _vif.NetworkName();
+
+        public string MACAddress => _vif.MAC;
+
+        public string NetworkID => _vif.network.opaque_ref;
     }
+
 
     internal class CrossPoolMigrationNetworkResourceContainer : NetworkResourceContainer
     {
-        private readonly List<VIF> vifs;
-        private int counter;
+        private readonly List<VIF> _vifs;
+        private int _counter;
 
         public CrossPoolMigrationNetworkResourceContainer(List<VIF> vifs)
         {
-            this.vifs = vifs;
+            _vifs = vifs;
         }
+
         public override INetworkResource Next()
         {
-            INetworkResource res =  new CrossPoolMigrationNetworkResource(vifs[counter]);
-            counter++;
+            INetworkResource res =  new CrossPoolMigrationNetworkResource(_vifs[_counter]);
+            _counter++;
             return res;
         }
 
-        public override bool IsNext
-        {
-            get { return counter < vifs.Count; }
-        }
+        public override bool IsNext => _counter < _vifs.Count;
     }
 }

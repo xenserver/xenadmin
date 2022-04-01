@@ -229,6 +229,15 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             if (sslChecks.Count > 0)
                 groups.Add(new CheckGroup(Messages.CHECKING_SECURITY_PROTOCOL_GROUP, sslChecks));
 
+            //certificate key length - for each host
+            var certKeyLengthChecks = (from Host server in hostsToUpgradeOrUpdate
+                let check = new CertificateKeyLengthCheck(server, ManualUpgrade, InstallMethodConfig)
+                where check.CanRun()
+                select check as Check).ToList();
+
+            if (certKeyLengthChecks.Count > 0)
+                groups.Add(new CheckGroup(Messages.CERTIFICATE_KEY_LENGTH_CHECK_GROUP, certKeyLengthChecks));
+
             //power on mode check - for each host
             var iloChecks = (from Host server in hostsToUpgradeOrUpdate
                 let check = new PowerOniLoCheck(server, InstallMethodConfig, ManualUpgrade)
@@ -237,6 +246,15 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
             if (iloChecks.Count > 0)
                 groups.Add(new CheckGroup(Messages.CHECKING_POWER_ON_MODE_GROUP, iloChecks));
+
+            //Checking DMC
+            var dmcChecks = (from Pool pool in SelectedPools
+                let check = new DmcCheck(this, pool, InstallMethodConfig, ManualUpgrade)
+                where check.CanRun()
+                select check as Check).ToList();
+
+            if (dmcChecks.Count > 0)
+                groups.Add(new CheckGroup(Messages.DMC_CHECK_ENABLED, dmcChecks));
 
             //Checking PV guests - for hosts that have any PV guests and warn the user before the upgrade.
             var pvChecks = (from Host server in SelectedCoordinators

@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAdmin.Network;
@@ -157,7 +158,10 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
         public abstract bool ShowIntroducePrompt { get; }
         public abstract bool ShowReattachWarning { get; }
         public abstract bool AllowToCreateNewSr { get; set; }
-        public virtual bool IsGfs2 { get { return false; } set { } }
+        public virtual bool IsGfs2 {
+            get => false;
+            set => throw new NotSupportedException($"Invalid set call for '{MethodBase.GetCurrentMethod()?.Name}', value: '{value}'");
+        }
 
         public string SrName
         {
@@ -256,7 +260,11 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
         public override string ContentType { get { return SR.Content_Type_ISO; } }
         public override bool ShowIntroducePrompt { get { return false; } }
         public override bool ShowReattachWarning { get { return false; } }
-        public override bool AllowToCreateNewSr { get { return true; } set { } }
+        public override bool AllowToCreateNewSr
+        {
+            get => true;
+            set => throw new NotSupportedException($"Invalid set call for '{MethodBase.GetCurrentMethod()?.Name}', value: '{value}'");
+        }
 
         public override void ResetSrName(IXenConnection connection)
         {
@@ -340,7 +348,11 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
         public override string ContentType { get { return SR.Content_Type_ISO; } }
         public override bool ShowIntroducePrompt { get { return false; } }
         public override bool ShowReattachWarning { get { return false; } }
-        public override bool AllowToCreateNewSr { get { return true; } set { } }
+        public override bool AllowToCreateNewSr
+        {
+            get => true;
+            set => throw new NotSupportedException($"Invalid set call for '{MethodBase.GetCurrentMethod()?.Name}', value: '{value}'");
+        }
 
         public override void ResetSrName(IXenConnection connection)
         {
@@ -362,7 +374,10 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
         public override string ContentType { get { return ""; } }
         public override bool ShowIntroducePrompt { get { return false; } }
         public override bool ShowReattachWarning { get { return false; } }
-        public override bool AllowToCreateNewSr { get { return true; } set { } }
+        public override bool AllowToCreateNewSr { 
+            get => true;
+            set => throw new NotSupportedException($"Invalid set call for '{MethodBase.GetCurrentMethod()?.Name}', value: '{value}'");
+        }
 
         public override void ResetSrName(IXenConnection connection)
         {
@@ -379,7 +394,11 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
         public override string ContentType { get { return ""; } }
         public override bool ShowIntroducePrompt { get { return true; } }
         public override bool ShowReattachWarning { get { return true; } }
-        public override bool AllowToCreateNewSr { get { return true; } set { } }
+        public override bool AllowToCreateNewSr
+        {
+            get => true;
+            set => throw new NotSupportedException($"Invalid set call for '{MethodBase.GetCurrentMethod()?.Name}', value: '{value}'");
+        }
 
         public SrWizardType_NetApp ToNetApp()
         {

@@ -67,91 +67,91 @@ namespace XenAdmin.SettingsPanels
             Text = Messages.ALERTS;
 
             m_invalidParamToolTip = new ToolTip
-                {
-                    IsBalloon = true,
-                    ToolTipIcon = ToolTipIcon.Warning,
-                    ToolTipTitle = Messages.INVALID_PARAMETER
-                };
+            {
+                IsBalloon = true,
+                ToolTipIcon = ToolTipIcon.Warning,
+                ToolTipTitle = Messages.INVALID_PARAMETER
+            };
 
             ////xapi trigger level is a fraction; gui shows percentage
             cpuAlert = new AlertGroup(CPUAlertCheckBox, CpuGroupBox,
                 nudCPUUsagePercent, nudCPUDurationThreshold, nudAlertInterval,
                 new[] { cpuMinutesLabel, cpuPercentLabel, CPUUsagePercentLabel, CPUDurationThresholdLabel })
-                {
-                    AlertEnablementChanged = SetAlertIntervalEnablement,
-                    SubTextFormat = Messages.ALERT_CPUS_SUB_TEXT,
-                    PerfmonDefinitionName = PerfmonDefinition.ALARM_TYPE_CPU,
-                    XapiToGuiTriggerLevel = (num => num * 100),
-                    XapiToGuiTriggerPeriod = (num => num / 60),
-                    XapiToGuiAlertInterval = (num => num / 60),
-                    GuiToXapiTriggerLevel = (num => num / 100),
-                    GuiToXapiTriggerPeriod = (num => num * 60),
-                    GuiToXapiAlertInterval = (num => num * 60),
-                };
+            {
+                AlertEnablementChanged = SetAlertIntervalEnablement,
+                SubTextFormat = Messages.ALERT_CPUS_SUB_TEXT,
+                PerfmonDefinitionName = PerfmonDefinition.ALARM_TYPE_CPU,
+                XapiToGuiTriggerLevel = (num => num * 100),
+                XapiToGuiTriggerPeriod = (num => num / 60),
+                XapiToGuiAlertInterval = (num => num / 60),
+                GuiToXapiTriggerLevel = (num => num / 100),
+                GuiToXapiTriggerPeriod = (num => num * 60),
+                GuiToXapiAlertInterval = (num => num * 60),
+            };
 
             //xapi trigger level is in B/s; gui shows KB/s
             netAlert = new AlertGroup(NetAlertCheckBox, NetGroupBox,
                 nudNetUsagePercent, nudNetDurationThreshold, nudAlertInterval,
                 new[] { NetMinutesLabel, NetPercentLabel, NetUsagePercentLabel, NetDurationThresholdLabel })
-                {
-                    AlertEnablementChanged = SetAlertIntervalEnablement,
-                    SubTextFormat = Messages.ALERT_NET_SUB_TEXT,
-                    PerfmonDefinitionName = PerfmonDefinition.ALARM_TYPE_NETWORK,
-                    XapiToGuiTriggerLevel = (num => num / 1024),
-                    XapiToGuiTriggerPeriod = (num => num / 60),
-                    XapiToGuiAlertInterval = (num => num / 60),
-                    GuiToXapiTriggerLevel = (num => num * 1024),
-                    GuiToXapiTriggerPeriod = (num => num * 60),
-                    GuiToXapiAlertInterval = (num => num * 60),
-                };
+            {
+                AlertEnablementChanged = SetAlertIntervalEnablement,
+                SubTextFormat = Messages.ALERT_NET_SUB_TEXT,
+                PerfmonDefinitionName = PerfmonDefinition.ALARM_TYPE_NETWORK,
+                XapiToGuiTriggerLevel = (num => num / 1024),
+                XapiToGuiTriggerPeriod = (num => num / 60),
+                XapiToGuiAlertInterval = (num => num / 60),
+                GuiToXapiTriggerLevel = (num => num * 1024),
+                GuiToXapiTriggerPeriod = (num => num * 60),
+                GuiToXapiAlertInterval = (num => num * 60),
+            };
 
             //xapi trigger level is in B/s; gui shows KB/s
             diskAlert = new AlertGroup(DiskAlertCheckBox, DiskGroupBox,
                 nudDiskUsagePercent, nudDiskDurationThreshold, nudAlertInterval,
                 new[] { DiskMinutesLabel, DiskPercentLabel, DiskUsagePercentLabel, DiskDurationThresholdLabel })
-                {
-                    AlertEnablementChanged = SetAlertIntervalEnablement,
-                    SubTextFormat = Messages.ALERT_DISK_SUB_TEXT,
-                    PerfmonDefinitionName = PerfmonDefinition.ALARM_TYPE_DISK,
-                    XapiToGuiTriggerLevel = (num => num / 1024),
-                    XapiToGuiTriggerPeriod = (num => num / 60),
-                    XapiToGuiAlertInterval = (num => num / 60),
-                    GuiToXapiTriggerLevel = (num => num * 1024),
-                    GuiToXapiTriggerPeriod = (num => num * 60),
-                    GuiToXapiAlertInterval = (num => num * 60),
-                };
+            {
+                AlertEnablementChanged = SetAlertIntervalEnablement,
+                SubTextFormat = Messages.ALERT_DISK_SUB_TEXT,
+                PerfmonDefinitionName = PerfmonDefinition.ALARM_TYPE_DISK,
+                XapiToGuiTriggerLevel = (num => num / 1024),
+                XapiToGuiTriggerPeriod = (num => num / 60),
+                XapiToGuiAlertInterval = (num => num / 60),
+                GuiToXapiTriggerLevel = (num => num * 1024),
+                GuiToXapiTriggerPeriod = (num => num * 60),
+                GuiToXapiAlertInterval = (num => num * 60),
+            };
 
             //xapi trigger level is in kiB; gui shows MB
             memoryAlert = new AlertGroup(MemoryAlertCheckBox, MemoryGroupBox,
                 nudMemoryUsage, nudMemoryDurationThreshold, nudAlertInterval,
                 new[] { memoryMinutesLabel, memoryUsageLabel, memoryUnitsLabel, memoryDurationThresholdLabel })
-                {
-                    AlertEnablementChanged = SetAlertIntervalEnablement,
-                    SubTextFormat = Messages.ALERT_MEMORY_SUB_TEXT,
-                    PerfmonDefinitionName = PerfmonDefinition.ALARM_TYPE_MEMORY_FREE,
-                    XapiToGuiTriggerLevel = (num => num / 1024),
-                    XapiToGuiTriggerPeriod = (num => num / 60),
-                    XapiToGuiAlertInterval = (num => num / 60),
-                    GuiToXapiTriggerLevel = (num => num * 1024),
-                    GuiToXapiTriggerPeriod = (num => num * 60),
-                    GuiToXapiAlertInterval = (num => num * 60),
-                };
+            {
+                AlertEnablementChanged = SetAlertIntervalEnablement,
+                SubTextFormat = Messages.ALERT_MEMORY_SUB_TEXT,
+                PerfmonDefinitionName = PerfmonDefinition.ALARM_TYPE_MEMORY_FREE,
+                XapiToGuiTriggerLevel = (num => num / 1024),
+                XapiToGuiTriggerPeriod = (num => num / 60),
+                XapiToGuiAlertInterval = (num => num / 60),
+                GuiToXapiTriggerLevel = (num => num * 1024),
+                GuiToXapiTriggerPeriod = (num => num * 60),
+                GuiToXapiAlertInterval = (num => num * 60),
+            };
 
             //xapi trigger level is in MiB/s; gui shows KB/s
             srAlert = new AlertGroup(SrAlertCheckBox, SrGroupBox,
                 nudSrUsage, nudSrMinutes, nudAlertInterval,
                 new[] { SrUsageLabel, srMinutesLabel, srUnitsLabel, SrDurationThresholdLabel })
-                {
-                    AlertEnablementChanged = SetAlertIntervalEnablement,
-                    SubTextFormat = Messages.ALERT_SR_SUB_TEXT,
-                    PerfmonDefinitionName = PerfmonDefinition.ALARM_TYPE_SR,
-                    XapiToGuiTriggerLevel = (num => num * 1024),
-                    XapiToGuiTriggerPeriod = (num => num / 60),
-                    XapiToGuiAlertInterval = (num => num / 60),
-                    GuiToXapiTriggerLevel = (num => num / 1024),
-                    GuiToXapiTriggerPeriod = (num => num * 60),
-                    GuiToXapiAlertInterval = (num => num * 60),
-                };
+            {
+                AlertEnablementChanged = SetAlertIntervalEnablement,
+                SubTextFormat = Messages.ALERT_SR_SUB_TEXT,
+                PerfmonDefinitionName = PerfmonDefinition.ALARM_TYPE_SR,
+                XapiToGuiTriggerLevel = (num => num * 1024),
+                XapiToGuiTriggerPeriod = (num => num / 60),
+                XapiToGuiAlertInterval = (num => num / 60),
+                GuiToXapiTriggerLevel = (num => num / 1024),
+                GuiToXapiTriggerPeriod = (num => num * 60),
+                GuiToXapiAlertInterval = (num => num * 60),
+            };
 
 
             dom0MemoryAlert = new AlertGroup(Dom0MemoryAlertCheckBox, Dom0MemoryUsageGroupBox,
@@ -183,7 +183,7 @@ namespace XenAdmin.SettingsPanels
                 GuiToXapiTriggerPeriod = (num => num * 60),
                 GuiToXapiAlertInterval = (num => num * 60),
             };
-            
+
             cpuAlert.ToggleAlertGroupEnablement();
             netAlert.ToggleAlertGroupEnablement();
             diskAlert.ToggleAlertGroupEnablement();
@@ -230,7 +230,7 @@ namespace XenAdmin.SettingsPanels
                 Host host = (Host)_XenObject;
                 Host_metrics metrics = host.Connection.Resolve(host.metrics);
                 if (metrics != null)
-                    nudMemoryUsage.Maximum = (decimal) metrics.memory_total / (1024 * 1024);
+                    nudMemoryUsage.Maximum = (decimal)metrics.memory_total / (1024 * 1024);
             }
 
             Repopulate();
@@ -240,7 +240,7 @@ namespace XenAdmin.SettingsPanels
         {
             if (_XenObject == null)
                 return;
-            
+
             try
             {
                 var perfmonDefinitions = PerfmonDefinition.GetPerfmonDefinitions(_XenObject);
@@ -381,7 +381,7 @@ namespace XenAdmin.SettingsPanels
 
             if (_XenObject is SR && physicalUtilisationAlert.Enabled)
                 perfmonDefinitions.Add(physicalUtilisationAlert.AlertDefinition);
-                
+
             return new PerfmonDefinitionAction(_XenObject, perfmonDefinitions, true);
         }
 
@@ -419,7 +419,8 @@ namespace XenAdmin.SettingsPanels
             m_upDownTriggerPeriod = triggerThresholdUpDown;
             m_upDownAlertInterval = alertIntervalUpDown;
             m_labels = theLabels;
-            m_checkBox.CheckedChanged += m_theCheckBox_CheckedChanged;
+            if (m_checkBox != null)
+                m_checkBox.CheckedChanged += m_theCheckBox_CheckedChanged;
 
             StoreOriginalSetting();
         }

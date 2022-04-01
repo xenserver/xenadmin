@@ -199,7 +199,7 @@
     <value>0</value>
   </data>
   <data name="labelRubric.Text" xml:space="preserve">
-    <value>ライブ パッチによって、サーバーを再起動することなく Linux カーネルや Xen のアップデートをインストールできます。可能な場合にライブパッチを適用するかどうかを選択してください。</value>
+    <value>ライブ パッチによって、サーバーを再起動することなく Linux カーネルや Xen のアップデートをインストールできます。可能な場合にライブ パッチを適用するかどうかを選択してください。</value>
   </data>
   <data name="&gt;&gt;labelRubric.Name" xml:space="preserve">
     <value>labelRubric</value>

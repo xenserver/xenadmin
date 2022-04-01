@@ -29,7 +29,7 @@
  * SUCH DAMAGE.
  */
 
-using System.Collections.Generic;
+using System.Linq;
 using XenAdmin.Controls;
 using XenAdmin.Wizards.GenericPages;
 using XenAPI;
@@ -85,12 +85,22 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
         protected override NetworkResourceContainer NetworkData(string sysId)
         {
-            VM vm = Connection.Resolve(new XenRef<VM>(sysId));
+            var vm = Connection.Resolve(new XenRef<VM>(sysId));
 
-            if(vm == null)
+            if (vm == null)
                 return null;
 
-            List<VIF> vifs = Connection.ResolveAll(vm.VIFs);
+            var vifs = Connection.ResolveAll(vm.VIFs);
+            var macs = vifs.Select(v => v.MAC);
+
+            var snapVIFs = vm.snapshots
+                .Select(vm.Connection.Resolve)
+                .SelectMany(s => Connection.ResolveAll(s.VIFs))
+                .Where(v => !macs.Contains(v.MAC))
+                .ToList();
+
+            vifs.AddRange(snapVIFs);
+
             return new CrossPoolMigrationNetworkResourceContainer(vifs);
         }
 

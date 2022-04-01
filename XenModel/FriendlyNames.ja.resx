@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -135,30 +135,6 @@
   <data name="AD.PropertyKey-subject-password-expired" xml:space="preserve">
     <value>パスワード期限切れ</value>
   </data>
-  <data name="Description-VM.ha_restart_priority.AlwaysRestart" xml:space="preserve">
-    <value>VM の再起動を常に試行します</value>
-  </data>
-  <data name="Description-VM.ha_restart_priority.AlwaysRestartHighPriority" xml:space="preserve">
-    <value>VM の再起動を常に最初に試行します (最高優先度)</value>
-  </data>
-  <data name="Description-VM.ha_restart_priority.BestEffort" xml:space="preserve">
-    <value>十分なリソースがある場合に VM の再起動を試行します</value>
-  </data>
-  <data name="Description-VM.ha_restart_priority.DoNotRestart" xml:space="preserve">
-    <value>VM は再起動されません</value>
-  </data>
-  <data name="Description-VM.ha_restart_priority.Restart" xml:space="preserve">
-    <value>VM の再起動を常に試行します</value>
-  </data>
-  <data name="Description-host.system_status-CVSM" xml:space="preserve">
-    <value>[Citrix] StorageLink の構成設定</value>
-  </data>
-  <data name="Description-host.system_status-X11" xml:space="preserve">
-    <value>X サーバーのログ ファイル</value>
-  </data>
-  <data name="Description-host.system_status-X11-auth" xml:space="preserve">
-    <value>X サーバーの認証ファイル</value>
-  </data>
   <data name="Description-host.system_status-blobs" xml:space="preserve">
     <value>サーバー上にバイナリ オブジェクトとして格納されているユーザー情報を取得します。</value>
   </data>
@@ -168,11 +144,23 @@
   <data name="Description-host.system_status-client-logs" xml:space="preserve">
     <value>クライアント アプリケーションのログ ファイル</value>
   </data>
+  <data name="Description-host.system_status-conntest" xml:space="preserve">
+    <value>サーバーとインターネットの間の接続をテスト</value>
+  </data>
+  <data name="Description-host.system_status-control-slice" xml:space="preserve">
+    <value>システムの制御グループについての情報および統計</value>
+  </data>
+  <data name="Description-host.system_status-CVSM" xml:space="preserve">
+    <value>{0} StorageLink の構成設定</value>
+  </data>
   <data name="Description-host.system_status-device-model" xml:space="preserve">
     <value>デバイス エミュレーション ログ</value>
   </data>
   <data name="Description-host.system_status-disk-info" xml:space="preserve">
     <value>パーティションテーブル、空き容量、iSCSI と LVM の構成</value>
+  </data>
+  <data name="Description-host.system_status-fcoe" xml:space="preserve">
+    <value>ファイバ チャネル オーバー イーサネット (FCoE) のログ</value>
   </data>
   <data name="Description-host.system_status-filesystem_summarise" xml:space="preserve">
     <value>Dom 0 で変更されたファイルの一覧</value>
@@ -201,6 +189,9 @@
   <data name="Description-host.system_status-loopback-devices" xml:space="preserve">
     <value>ループバック デバイスの詳細</value>
   </data>
+  <data name="Description-host.system_status-message-switch" xml:space="preserve">
+    <value>システム デーモン間で交換されるメッセージのログ</value>
+  </data>
   <data name="Description-host.system_status-multipath" xml:space="preserve">
     <value>サーバーのストレージのマルチパス構成を取得します</value>
   </data>
@@ -211,13 +202,13 @@
     <value>ネットワーク インターフェイス、ルーティング テーブル、ファイアウォールの現在の状態</value>
   </data>
   <data name="Description-host.system_status-NVIDIA-logs" xml:space="preserve">
-    <value>NVIDIA グラフィック ドライバーの問題を診断するのに役立つログと詳細が含まれています。</value>
+    <value>NVIDIA グラフィック ドライバーの問題を診断するのに役立つログと詳細が含まれています</value>
   </data>
   <data name="Description-host.system_status-oem" xml:space="preserve">
-    <value>OEM プロバイダ固有のデータを収集します。</value>
+    <value>OEM プロバイダ固有のデータを収集します</value>
   </data>
   <data name="Description-host.system_status-pam" xml:space="preserve">
-    <value>[XenServer] の PAM (Pluggable Authentication Modules) により使用される構成ファイルです。</value>
+    <value>PAM (Pluggable Authentication Modules) により使用される構成ファイルです。</value>
   </data>
   <data name="Description-host.system_status-persistent-stats" xml:space="preserve">
     <value>永続的なパフォーマンス統計値</value>
@@ -237,20 +228,41 @@
   <data name="Description-host.system_status-tapdisk-logs" xml:space="preserve">
     <value>ストレージ サブシステム ログ</value>
   </data>
+  <data name="Description-host.system_status-tboot" xml:space="preserve">
+    <value>メジャー ブート ログ</value>
+  </data>
+  <data name="Description-host.system_status-v6d" xml:space="preserve">
+    <value>サーバー ライセンス デーモン ログ</value>
+  </data>
+  <data name="Description-host.system_status-VM-snapshot-schedule" xml:space="preserve">
+    <value>スケジュールされたスナップショットのログ ファイル</value>
+  </data>
   <data name="Description-host.system_status-vncterm" xml:space="preserve">
     <value>VNCTerm デーモンからのクラッシュ ダンプ ファイル</value>
   </data>
   <data name="Description-host.system_status-wlb" xml:space="preserve">
     <value>このプールを監視している WLB サーバーからのログと状態に関する情報です。</value>
   </data>
+  <data name="Description-host.system_status-X11" xml:space="preserve">
+    <value>X サーバーのログ ファイル</value>
+  </data>
+  <data name="Description-host.system_status-X11-auth" xml:space="preserve">
+    <value>X サーバーの認証ファイル</value>
+  </data>
   <data name="Description-host.system_status-xapi" xml:space="preserve">
-    <value>[XenServer] デーモンの内部ログ</value>
+    <value>サーバー デーモンの内部ログ</value>
+  </data>
+  <data name="Description-host.system_status-xapi-clusterd" xml:space="preserve">
+    <value>ツールスタックのクラスター管理デーモンによって生成されたログ。</value>
   </data>
   <data name="Description-host.system_status-xapi-debug" xml:space="preserve">
-    <value>[XenServer] デーモン クラッシュ ダンプ</value>
+    <value>サーバー デーモン クラッシュ ダンプ</value>
   </data>
   <data name="Description-host.system_status-xapi-subprocess" xml:space="preserve">
-    <value>[XenServer] デーモン プロセスの詳細</value>
+    <value>サーバー デーモン プロセスの詳細</value>
+  </data>
+  <data name="Description-host.system_status-xcp-rrdd-plugins" xml:space="preserve">
+    <value>RRD デーモンのログ ファイル</value>
   </data>
   <data name="Description-host.system_status-xen-info" xml:space="preserve">
     <value>ハイパーバイザーのバージョンと現在の状態</value>
@@ -259,7 +271,7 @@
     <value>VM 内部診断</value>
   </data>
   <data name="Description-host.system_status-xenserver-config" xml:space="preserve">
-    <value>[XenServer] のバージョンとビルドの情報、プライマリ ハード ディスクの場所、プール構成などの詳細</value>
+    <value>ハイパーバイザーのバージョンとビルドの情報、プライマリ ハード ディスクの場所、プール構成などの詳細</value>
   </data>
   <data name="Description-host.system_status-xenserver-databases" xml:space="preserve">
     <value>サーバーの状態に関する情報を格納するデータベース</value>
@@ -273,11 +285,35 @@
   <data name="Description-host.system_status-xenserver-logs" xml:space="preserve">
     <value>サーバーのアクティビティに関するログ ファイル</value>
   </data>
+  <data name="Description-host.system_status-xenvm" xml:space="preserve">
+    <value>ボリューム マネージャーのログ</value>
+  </data>
   <data name="Description-host.system_status-xha-liveset" xml:space="preserve">
     <value>高可用性ライブセット</value>
   </data>
+  <data name="Description-host.system_status-xscontainer" xml:space="preserve">
+    <value>コンテナー管理のログ</value>
+  </data>
+  <data name="Description-host.system_status-xspvscache" xml:space="preserve">
+    <value>PVS アクセラレータの状態</value>
+  </data>
   <data name="Description-host.system_status-yum" xml:space="preserve">
     <value>YUM リポジトリ情報と RPM パッケージの詳細</value>
+  </data>
+  <data name="Description-VM.ha_restart_priority.AlwaysRestart" xml:space="preserve">
+    <value>VM の再起動を常に試行します</value>
+  </data>
+  <data name="Description-VM.ha_restart_priority.AlwaysRestartHighPriority" xml:space="preserve">
+    <value>VM の再起動を常に最初に試行します (最高優先度)</value>
+  </data>
+  <data name="Description-VM.ha_restart_priority.BestEffort" xml:space="preserve">
+    <value>十分なリソースがある場合に VM の再起動を試行します</value>
+  </data>
+  <data name="Description-VM.ha_restart_priority.DoNotRestart" xml:space="preserve">
+    <value>VM は再起動されません</value>
+  </data>
+  <data name="Description-VM.ha_restart_priority.Restart" xml:space="preserve">
+    <value>VM の再起動を常に試行します</value>
   </data>
   <data name="Exception-PluginLabelNotDefined" xml:space="preserve">
     <value>プラグイン '{1}' のリソース ファイルで '{0}.label' が定義されていません。</value>
@@ -301,7 +337,7 @@
     <value>PowerShell プラグインを使用するには、PowerShell をインストールしておく必要があります。PowerShell は、Microsoft 社の Web サイトからダウンロードできます。</value>
   </data>
   <data name="Exception-PowerShellSnapInNotPresent" xml:space="preserve">
-    <value>[XenServer] PowerShell コマンドを使用するには、XenServerPSModule をインストールしておく必要があります。XenServerPSModule は SDK に含まれています。</value>
+    <value>サーバーで PowerShell コマンドを実行するには、XenServerPSModule をインストールしておく必要があります。XenServerPSModule は SDK に含まれています。</value>
   </data>
   <data name="Exception-SearchParseFailed" xml:space="preserve">
     <value>プラグイン '{1}' の検索 '{0}' を構文解析できません。</value>
@@ -326,225 +362,6 @@
   </data>
   <data name="Label-Action.Information" xml:space="preserve">
     <value>情報</value>
-  </data>
-  <data name="Label-Pool_patch.applied" xml:space="preserve">
-    <value>適用済み</value>
-  </data>
-  <data name="Label-Pool_patch.fully_applied" xml:space="preserve">
-    <value>すべて適用済み</value>
-  </data>
-  <data name="Label-Pool_patch.not_applied" xml:space="preserve">
-    <value>未適用</value>
-  </data>
-  <data name="Label-Pool_patch.partially_applied" xml:space="preserve">
-    <value>一部適用済み</value>
-  </data>
-  <data name="Label-SR.SRTypes-smb" xml:space="preserve">
-    <value>SMB</value>
-  </data>
-  <data name="Label-SR.SRTypes-cslg" xml:space="preserve">
-    <value>StorageLink</value>
-  </data>
-  <data name="Label-SR.SRTypes-dummy" xml:space="preserve">
-    <value>不明</value>
-  </data>
-  <data name="Label-SR.SRTypes-ebs" xml:space="preserve">
-    <value>Elastic Block Storage</value>
-  </data>
-  <data name="Label-SR.SRTypes-egenera" xml:space="preserve">
-    <value>Egenera 仮想ストレージ</value>
-  </data>
-  <data name="Label-SR.SRTypes-egeneracd" xml:space="preserve">
-    <value>Egenera 仮想 DVD ドライブ</value>
-  </data>
-  <data name="Label-SR.SRTypes-equal" xml:space="preserve">
-    <value>Dell EqualLogic</value>
-  </data>
-  <data name="Label-SR.SRTypes-ext" xml:space="preserve">
-    <value>Ext3</value>
-  </data>
-  <data name="Label-SR.SRTypes-iscsi" xml:space="preserve">
-    <value>VDI-per-LUN iSCSI</value>
-  </data>
-  <data name="Label-SR.SRTypes-iso" xml:space="preserve">
-    <value>ISO</value>
-  </data>
-  <data name="Label-SR.SRTypes-local" xml:space="preserve">
-    <value>ローカル</value>
-  </data>
-  <data name="Label-SR.SRTypes-lvm" xml:space="preserve">
-    <value>LVM</value>
-  </data>
-  <data name="Label-SR.SRTypes-lvmofc" xml:space="preserve">
-    <value>ハードウェア HBA</value>
-  </data>
-  <data name="Label-SR.SRTypes-lvmohba" xml:space="preserve">
-    <value>ハードウェア HBA</value>
-  </data>
-  <data name="Label-SR.SRTypes-lvmoiscsi" xml:space="preserve">
-    <value>iSCSI 上の LVM</value>
-  </data>
-  <data name="Label-SR.SRTypes-netapp" xml:space="preserve">
-    <value>NetApp</value>
-  </data>
-  <data name="Label-SR.SRTypes-nfs" xml:space="preserve">
-    <value>NFS</value>
-  </data>
-  <data name="Label-SR.SRTypes-shm" xml:space="preserve">
-    <value>Local Performance Monitoring</value>
-  </data>
-  <data name="Label-SR.SRTypes-tmpfs" xml:space="preserve">
-    <value>不明</value>
-  </data>
-  <data name="Label-SR.SRTypes-udev" xml:space="preserve">
-    <value>udev</value>
-  </data>
-  <data name="Label-SR.SRTypes-unknown" xml:space="preserve">
-    <value>不明</value>
-  </data>
-  <data name="Label-SR.scsiid" xml:space="preserve">
-    <value>SCSI ID</value>
-  </data>
-  <data name="Label-SR.size" xml:space="preserve">
-    <value>サイズ</value>
-  </data>
-  <data name="Label-SR.state" xml:space="preserve">
-    <value>状態</value>
-  </data>
-  <data name="Label-VM.BootOrder" xml:space="preserve">
-    <value>起動順序</value>
-  </data>
-  <data name="Label-VM.BootMode" xml:space="preserve">
-    <value>起動モード</value>
-  </data>
-  <data name="Label-VM.ImageId" xml:space="preserve">
-    <value>イメージ ID</value>
-  </data>
-  <data name="Label-VM.InstanceId" xml:space="preserve">
-    <value>インスタンス ID</value>
-  </data>
-  <data name="Label-VM.InstanceType" xml:space="preserve">
-    <value>インスタンスの種類</value>
-  </data>
-  <data name="Label-VM.KeyName" xml:space="preserve">
-    <value>キー名</value>
-  </data>
-  <data name="Label-VM.OSName" xml:space="preserve">
-    <value>オペレーティング システム</value>
-  </data>
-  <data name="Label-VM.P2V_ImportDate" xml:space="preserve">
-    <value>P2V インポート日</value>
-  </data>
-  <data name="Label-VM.P2V_SourceMachine" xml:space="preserve">
-    <value>P2V ソース マシン</value>
-  </data>
-  <data name="Label-VM.PV_args" xml:space="preserve">
-    <value>OS 起動パラメーター</value>
-  </data>
-  <data name="Label-VM.PrivateDnsName" xml:space="preserve">
-    <value>プライベート DNS エントリ</value>
-  </data>
-  <data name="Label-VM.PublicDnsName" xml:space="preserve">
-    <value>パブリック DNS エントリ</value>
-  </data>
-  <data name="Label-VM.VCPUWeight" xml:space="preserve">
-    <value>vCPU 優先度</value>
-  </data>
-  <data name="Label-VM.VCPUWeight-0" xml:space="preserve">
-    <value>最低</value>
-  </data>
-  <data name="Label-VM.VCPUWeight-1" xml:space="preserve">
-    <value>非常に低い</value>
-  </data>
-  <data name="Label-VM.VCPUWeight-2" xml:space="preserve">
-    <value>低</value>
-  </data>
-  <data name="Label-VM.VCPUWeight-3" xml:space="preserve">
-    <value>通常以下</value>
-  </data>
-  <data name="Label-VM.VCPUWeight-4" xml:space="preserve">
-    <value>通常</value>
-  </data>
-  <data name="Label-VM.VCPUWeight-5" xml:space="preserve">
-    <value>通常以上</value>
-  </data>
-  <data name="Label-VM.VCPUWeight-6" xml:space="preserve">
-    <value>高</value>
-  </data>
-  <data name="Label-VM.VCPUWeight-7" xml:space="preserve">
-    <value>非常に高い</value>
-  </data>
-  <data name="Label-VM.VCPUWeight-8" xml:space="preserve">
-    <value>最高</value>
-  </data>
-  <data name="Label-VM.VCPUs" xml:space="preserve">
-    <value>仮想 CPU</value>
-  </data>
-  <data name="Label-VM.VirtualizationState" xml:space="preserve">
-    <value>仮想化の状態</value>
-  </data>
-  <data name="Label-VM.affinity" xml:space="preserve">
-    <value>ホーム サーバー</value>
-  </data>
-  <data name="Label-VM.auto_boot" xml:space="preserve">
-    <value>自動起動</value>
-  </data>
-  <data name="Label-VM.ha_restart_priority" xml:space="preserve">
-    <value>高可用性再起動優先度</value>
-  </data>
-  <data name="Label-VM.ha_restart_priority.AlwaysRestart" xml:space="preserve">
-    <value>再起動</value>
-  </data>
-  <data name="Label-VM.ha_restart_priority.AlwaysRestartHighPriority" xml:space="preserve">
-    <value>最初に再起動</value>
-  </data>
-  <data name="Label-VM.ha_restart_priority.BestEffort" xml:space="preserve">
-    <value>可能なら再起動</value>
-  </data>
-  <data name="Label-VM.ha_restart_priority.DoNotRestart" xml:space="preserve">
-    <value>再起動しない</value>
-  </data>
-  <data name="Label-VM.ha_restart_priority.High" xml:space="preserve">
-    <value>高</value>
-  </data>
-  <data name="Label-VM.ha_restart_priority.Low" xml:space="preserve">
-    <value>低</value>
-  </data>
-  <data name="Label-VM.ha_restart_priority.Medium" xml:space="preserve">
-    <value>中</value>
-  </data>
-  <data name="Label-VM.ha_restart_priority.Restart" xml:space="preserve">
-    <value>再起動</value>
-  </data>
-  <data name="Label-VM.memory_static_max" xml:space="preserve">
-    <value>メモリ</value>
-  </data>
-  <data name="Label-VM.power_state-Halted" xml:space="preserve">
-    <value>停止</value>
-  </data>
-  <data name="Label-VM.power_state-Paused" xml:space="preserve">
-    <value>一時停止</value>
-  </data>
-  <data name="Label-VM.power_state-Running" xml:space="preserve">
-    <value>実行中</value>
-  </data>
-  <data name="Label-VM.power_state-Suspended" xml:space="preserve">
-    <value>一時停止</value>
-  </data>
-  <data name="Label-VM.power_state-unknown" xml:space="preserve">
-    <value>不明</value>
-  </data>
-  <data name="Label-VM.uptime" xml:space="preserve">
-    <value>起動からの経過時間</value>
-  </data>
-  <data name="Label-host.ServerMemory" xml:space="preserve">
-    <value>サーバー</value>
-  </data>
-  <data name="Label-host.VMMemory" xml:space="preserve">
-    <value>VM</value>
-  </data>
-  <data name="Label-host.XenMemory" xml:space="preserve">
-    <value>[XenServer]</value>
   </data>
   <data name="Label-host.address" xml:space="preserve">
     <value>アドレス</value>
@@ -594,6 +411,9 @@
   <data name="Label-host.pool_members" xml:space="preserve">
     <value>プール メンバー</value>
   </data>
+  <data name="Label-host.ServerMemory" xml:space="preserve">
+    <value>サーバー</value>
+  </data>
   <data name="Label-host.software_version-build_number" xml:space="preserve">
     <value>ビルド番号</value>
   </data>
@@ -603,15 +423,6 @@
   <data name="Label-host.software_version-product_version" xml:space="preserve">
     <value>バージョン</value>
   </data>
-  <data name="Label-host.system_status-CVSM" xml:space="preserve">
-    <value>[Citrix] StorageLink 構成</value>
-  </data>
-  <data name="Label-host.system_status-X11" xml:space="preserve">
-    <value>X サーバー ログ</value>
-  </data>
-  <data name="Label-host.system_status-X11-auth" xml:space="preserve">
-    <value>X11 認証</value>
-  </data>
   <data name="Label-host.system_status-blobs" xml:space="preserve">
     <value>ユーザー作成のバイナリ オブジェクト</value>
   </data>
@@ -619,13 +430,25 @@
     <value>ブート ローダー構成</value>
   </data>
   <data name="Label-host.system_status-client-logs" xml:space="preserve">
-    <value>[XenCenter] ログ</value>
+    <value>{0} ログ</value>
+  </data>
+  <data name="Label-host.system_status-conntest" xml:space="preserve">
+    <value>接続テスト</value>
+  </data>
+  <data name="Label-host.system_status-control-slice" xml:space="preserve">
+    <value>制御グループ統計</value>
+  </data>
+  <data name="Label-host.system_status-CVSM" xml:space="preserve">
+    <value>{0} StorageLink 構成</value>
   </data>
   <data name="Label-host.system_status-device-model" xml:space="preserve">
     <value>デバイスのモデル</value>
   </data>
   <data name="Label-host.system_status-disk-info" xml:space="preserve">
     <value>ディスク情報</value>
+  </data>
+  <data name="Label-host.system_status-fcoe" xml:space="preserve">
+    <value>FCoE ログ</value>
   </data>
   <data name="Label-host.system_status-filesystem_summarise" xml:space="preserve">
     <value>変更されたファイル</value>
@@ -653,6 +476,9 @@
   </data>
   <data name="Label-host.system_status-loopback-devices" xml:space="preserve">
     <value>ループバック デバイス</value>
+  </data>
+  <data name="Label-host.system_status-message-switch" xml:space="preserve">
+    <value>内部メッセージのログ</value>
   </data>
   <data name="Label-host.system_status-multipath" xml:space="preserve">
     <value>マルチパス構成</value>
@@ -690,20 +516,41 @@
   <data name="Label-host.system_status-tapdisk-logs" xml:space="preserve">
     <value>ストレージ サブシステム ログ</value>
   </data>
+  <data name="Label-host.system_status-tboot" xml:space="preserve">
+    <value>メジャー ブート ログ</value>
+  </data>
+  <data name="Label-host.system_status-v6d" xml:space="preserve">
+    <value>サーバー ライセンス デーモン</value>
+  </data>
+  <data name="Label-host.system_status-VM-snapshot-schedule" xml:space="preserve">
+    <value>スケジュールされたスナップショットのログ ファイル</value>
+  </data>
   <data name="Label-host.system_status-vncterm" xml:space="preserve">
     <value>VNCTerm クラッシュ ダンプ</value>
   </data>
   <data name="Label-host.system_status-wlb" xml:space="preserve">
     <value>ワークロード バランスの状態</value>
   </data>
+  <data name="Label-host.system_status-X11" xml:space="preserve">
+    <value>X サーバー ログ</value>
+  </data>
+  <data name="Label-host.system_status-X11-auth" xml:space="preserve">
+    <value>X11 認証</value>
+  </data>
   <data name="Label-host.system_status-xapi" xml:space="preserve">
-    <value>[XenServer] デーモンの内部ログ</value>
+    <value>サーバー デーモンの内部ログ</value>
+  </data>
+  <data name="Label-host.system_status-xapi-clusterd" xml:space="preserve">
+    <value>サーバー クラスター管理デーモン</value>
   </data>
   <data name="Label-host.system_status-xapi-debug" xml:space="preserve">
-    <value>[XenServer] デーモン クラッシュ ダンプ</value>
+    <value>サーバー デーモン クラッシュ ダンプ</value>
   </data>
   <data name="Label-host.system_status-xapi-subprocess" xml:space="preserve">
-    <value>[XenServer] デーモン サブプロセス</value>
+    <value>サーバー デーモン サブプロセス</value>
+  </data>
+  <data name="Label-host.system_status-xcp-rrdd-plugins" xml:space="preserve">
+    <value>RRD プラグインのログ</value>
   </data>
   <data name="Label-host.system_status-xen-info" xml:space="preserve">
     <value>ハイパーバイザー構成</value>
@@ -712,22 +559,31 @@
     <value>VM 内部診断</value>
   </data>
   <data name="Label-host.system_status-xenserver-config" xml:space="preserve">
-    <value>[XenServer] 構成</value>
+    <value>サーバー構成</value>
   </data>
   <data name="Label-host.system_status-xenserver-databases" xml:space="preserve">
-    <value>[XenServer] データベース</value>
+    <value>サーバー データベース</value>
   </data>
   <data name="Label-host.system_status-xenserver-domains" xml:space="preserve">
-    <value>[XenServer] ドメイン一覧</value>
+    <value>サーバー ドメイン一覧</value>
   </data>
   <data name="Label-host.system_status-xenserver-install" xml:space="preserve">
-    <value>[XenServer] インストール ログ ファイル</value>
+    <value>サーバー インストール ログ ファイル</value>
   </data>
   <data name="Label-host.system_status-xenserver-logs" xml:space="preserve">
-    <value>[XenServer] ログ</value>
+    <value>サーバー ログ</value>
+  </data>
+  <data name="Label-host.system_status-xenvm" xml:space="preserve">
+    <value>ボリューム マネージャーのログ</value>
   </data>
   <data name="Label-host.system_status-xha-liveset" xml:space="preserve">
     <value>高可用性ライブセット</value>
+  </data>
+  <data name="Label-host.system_status-xscontainer" xml:space="preserve">
+    <value>コンテナー管理のログ</value>
+  </data>
+  <data name="Label-host.system_status-xspvscache" xml:space="preserve">
+    <value>PVS アクセラレータの状態</value>
   </data>
   <data name="Label-host.system_status-yum" xml:space="preserve">
     <value>RPM パッケージ データベース</value>
@@ -737,6 +593,9 @@
   </data>
   <data name="Label-host.uuid" xml:space="preserve">
     <value>UUID</value>
+  </data>
+  <data name="Label-host.VMMemory" xml:space="preserve">
+    <value>VM</value>
   </data>
   <data name="Label-performance.avg_cpu" xml:space="preserve">
     <value>平均 CPU</value>
@@ -756,8 +615,35 @@
   <data name="Label-performance.cpu" xml:space="preserve">
     <value>CPU {0}</value>
   </data>
+  <data name="Label-performance.cpu_avg" xml:space="preserve">
+    <value>平均 CPU</value>
+  </data>
   <data name="Label-performance.cpu-avg-freq" xml:space="preserve">
     <value>CPU {0} の平均周波数</value>
+  </data>
+  <data name="Label-performance.cpu-state" xml:space="preserve">
+    <value>CPU {0} {1}-状態 {2}</value>
+  </data>
+  <data name="Label-performance.gpu_memory_free" xml:space="preserve">
+    <value>{0} {1} 空きメモリ</value>
+  </data>
+  <data name="Label-performance.gpu_memory_used" xml:space="preserve">
+    <value>{0} {1} 使用メモリ</value>
+  </data>
+  <data name="Label-performance.gpu_power_usage" xml:space="preserve">
+    <value>{0} {1} 使用電力</value>
+  </data>
+  <data name="Label-performance.gpu_temperature" xml:space="preserve">
+    <value>{0} {1} 温度</value>
+  </data>
+  <data name="Label-performance.gpu_utilisation_compute" xml:space="preserve">
+    <value>{0} {1} 使用率</value>
+  </data>
+  <data name="Label-performance.gpu_utilisation_memory_io" xml:space="preserve">
+    <value>{0} {1} メモリ使用率</value>
+  </data>
+  <data name="Label-performance.io_errors" xml:space="preserve">
+    <value>I/O エラー</value>
   </data>
   <data name="Label-performance.lo_rx" xml:space="preserve">
     <value>ループバック受信</value>
@@ -786,6 +672,12 @@
   <data name="Label-performance.memory_internal_used" xml:space="preserve">
     <value>使用メモリ</value>
   </data>
+  <data name="Label-performance.memory_reclaimed" xml:space="preserve">
+    <value>解放されたメモリ</value>
+  </data>
+  <data name="Label-performance.memory_reclaimed_max" xml:space="preserve">
+    <value>解放されるメモリ (概算値)</value>
+  </data>
   <data name="Label-performance.memory_target" xml:space="preserve">
     <value>メモリ目標値</value>
   </data>
@@ -810,6 +702,42 @@
   <data name="Label-performance.nic_tx_errors" xml:space="preserve">
     <value>NIC {0} 送信エラー</value>
   </data>
+  <data name="Label-performance.pif_aggr_rx" xml:space="preserve">
+    <value>NIC 受信合計</value>
+  </data>
+  <data name="Label-performance.pif_aggr_tx" xml:space="preserve">
+    <value>NIC 送信合計</value>
+  </data>
+  <data name="Label-performance.pool_session_count" xml:space="preserve">
+    <value>セッションの数</value>
+  </data>
+  <data name="Label-performance.pool_task_count" xml:space="preserve">
+    <value>タスクの数</value>
+  </data>
+  <data name="Label-performance.pvsaccelerator_evicted" xml:space="preserve">
+    <value>PVS アクセラレータの削除の割合</value>
+  </data>
+  <data name="Label-performance.pvsaccelerator_read_hits" xml:space="preserve">
+    <value>PVS アクセラレータでヒットした割合</value>
+  </data>
+  <data name="Label-performance.pvsaccelerator_read_misses" xml:space="preserve">
+    <value>PVS アクセラレータでヒットしなかった割合</value>
+  </data>
+  <data name="Label-performance.pvsaccelerator_read_total" xml:space="preserve">
+    <value>PVS アクセラレータで確認した読み取りの割合</value>
+  </data>
+  <data name="Label-performance.pvsaccelerator_space_utilization" xml:space="preserve">
+    <value>PVS アクセラレータの容量使用率</value>
+  </data>
+  <data name="Label-performance.pvsaccelerator_traffic_client_sent" xml:space="preserve">
+    <value>PVS アクセラレータはクライアントからのネットワーク トラフィックを確認しました</value>
+  </data>
+  <data name="Label-performance.pvsaccelerator_traffic_proxy_saved" xml:space="preserve">
+    <value>PVS アクセラレータはネットワーク トラフィックを保存しました</value>
+  </data>
+  <data name="Label-performance.pvsaccelerator_traffic_server_sent" xml:space="preserve">
+    <value>PVS アクセラレータはサーバーからのネットワーク トラフィックを確認しました</value>
+  </data>
   <data name="Label-performance.runstate_blocked" xml:space="preserve">
     <value>vCPU アイドル</value>
   </data>
@@ -831,6 +759,9 @@
   <data name="Label-performance.runstate_partial_run" xml:space="preserve">
     <value>vCPU 部分実行</value>
   </data>
+  <data name="Label-performance.sr_avgqu_sz" xml:space="preserve">
+    <value>'{0}' キューのサイズ</value>
+  </data>
   <data name="Label-performance.sr_cache_hits" xml:space="preserve">
     <value>IntelliCache キャッシュ成功</value>
   </data>
@@ -839,6 +770,45 @@
   </data>
   <data name="Label-performance.sr_cache_size" xml:space="preserve">
     <value>IntelliCache キャッシュ サイズ</value>
+  </data>
+  <data name="Label-performance.sr_inflight" xml:space="preserve">
+    <value>'{0}' インフライト要求</value>
+  </data>
+  <data name="Label-performance.sr_io_throughput_read" xml:space="preserve">
+    <value>'{0}' 読み取りスループット</value>
+  </data>
+  <data name="Label-performance.sr_io_throughput_total" xml:space="preserve">
+    <value>'{0}' 合計スループット</value>
+  </data>
+  <data name="Label-performance.sr_io_throughput_write" xml:space="preserve">
+    <value>'{0}' 書き込みスループット</value>
+  </data>
+  <data name="Label-performance.sr_iops_read" xml:space="preserve">
+    <value>'{0}' 読み取り IOPS</value>
+  </data>
+  <data name="Label-performance.sr_iops_total" xml:space="preserve">
+    <value>'{0}' 合計 IOPS</value>
+  </data>
+  <data name="Label-performance.sr_iops_write" xml:space="preserve">
+    <value>'{0}' 書き込み IOPS</value>
+  </data>
+  <data name="Label-performance.sr_iowait" xml:space="preserve">
+    <value>'{0}' IO 待機</value>
+  </data>
+  <data name="Label-performance.sr_latency" xml:space="preserve">
+    <value>'{0}' 遅延</value>
+  </data>
+  <data name="Label-performance.sr_rw_read" xml:space="preserve">
+    <value>'{0}' 読み取りスループット</value>
+  </data>
+  <data name="Label-performance.sr_rw_read_latency" xml:space="preserve">
+    <value>'{0}' 読み取りの遅延</value>
+  </data>
+  <data name="Label-performance.sr_rw_write" xml:space="preserve">
+    <value>'{0}' 書き込みスループット</value>
+  </data>
+  <data name="Label-performance.sr_rw_write_latency" xml:space="preserve">
+    <value>'{0}' 書き込みの遅延</value>
   </data>
   <data name="Label-performance.statefile_latency" xml:space="preserve">
     <value>高可用性ステート ファイル遅延</value>
@@ -854,6 +824,36 @@
   </data>
   <data name="Label-performance.tap_tx_errors" xml:space="preserve">
     <value>TAP {0} 送信エラー</value>
+  </data>
+  <data name="Label-performance.Tapdisks_in_low_memory_mode" xml:space="preserve">
+    <value>低メモリモードの Tapdisk</value>
+  </data>
+  <data name="Label-performance.vbd_avgqu_sz" xml:space="preserve">
+    <value>ディスク {0} キューのサイズ</value>
+  </data>
+  <data name="Label-performance.vbd_inflight" xml:space="preserve">
+    <value>ディスク {0} インフライト要求</value>
+  </data>
+  <data name="Label-performance.vbd_io_throughput_read" xml:space="preserve">
+    <value>ディスク {0} IO 読み取りスループット</value>
+  </data>
+  <data name="Label-performance.vbd_io_throughput_total" xml:space="preserve">
+    <value>ディスク {0} IO 合計スループット</value>
+  </data>
+  <data name="Label-performance.vbd_io_throughput_write" xml:space="preserve">
+    <value>ディスク {0} IO 書き込みスループット</value>
+  </data>
+  <data name="Label-performance.vbd_iops_read" xml:space="preserve">
+    <value>ディスク {0} 読み取り IOPS</value>
+  </data>
+  <data name="Label-performance.vbd_iops_total" xml:space="preserve">
+    <value>ディスク {0} 合計 IOPS</value>
+  </data>
+  <data name="Label-performance.vbd_iops_write" xml:space="preserve">
+    <value>ディスク {0} 書き込み IOPS</value>
+  </data>
+  <data name="Label-performance.vbd_iowait" xml:space="preserve">
+    <value>ディスク {0} IO 待機</value>
   </data>
   <data name="Label-performance.vbd_latency" xml:space="preserve">
     <value>ディスク {0} 平均 I/O 遅延</value>
@@ -901,13 +901,16 @@
     <value>空きエージェント メモリ</value>
   </data>
   <data name="Label-performance.xapi_latency" xml:space="preserve">
-    <value>[XenServer] ヘルスチェック遅延</value>
+    <value>サーバー ヘルス チェック遅延</value>
   </data>
   <data name="Label-performance.xapi_live_memory_kib" xml:space="preserve">
     <value>エージェント メモリ ライブ</value>
   </data>
   <data name="Label-performance.xapi_memory_usage_kib" xml:space="preserve">
     <value>エージェント メモリ使用</value>
+  </data>
+  <data name="Label-performance.xapi_open_fds" xml:space="preserve">
+    <value>開いているファイル記述子の数</value>
   </data>
   <data name="Label-performance.xapi_rx" xml:space="preserve">
     <value>&lt;内部&gt; ネットワーク {0} 受信</value>
@@ -935,6 +938,273 @@
   </data>
   <data name="Label-pool.ha_enabled" xml:space="preserve">
     <value>プールの高可用性が有効</value>
+  </data>
+  <data name="Label-Pool_patch.applied" xml:space="preserve">
+    <value>適用済み</value>
+  </data>
+  <data name="Label-Pool_patch.fully_applied" xml:space="preserve">
+    <value>すべて適用済み</value>
+  </data>
+  <data name="Label-Pool_patch.not_applied" xml:space="preserve">
+    <value>未適用</value>
+  </data>
+  <data name="Label-Pool_patch.partially_applied" xml:space="preserve">
+    <value>一部適用済み</value>
+  </data>
+  <data name="Label-Pool_patch.required-updates" xml:space="preserve">
+    <value>必要なアップデート</value>
+  </data>
+  <data name="Label-pvsaccelerator" xml:space="preserve">
+    <value>PVS アクセラレータ</value>
+  </data>
+  <data name="Label-SR.disk-space-allocations" xml:space="preserve">
+    <value>ディスク容量割り当て</value>
+  </data>
+  <data name="Label-SR.provisioning" xml:space="preserve">
+    <value>プロビジョニング</value>
+  </data>
+  <data name="Label-SR.scsiid" xml:space="preserve">
+    <value>SCSI ID</value>
+  </data>
+  <data name="Label-SR.size" xml:space="preserve">
+    <value>サイズ</value>
+  </data>
+  <data name="Label-SR.SRTypes-cslg" xml:space="preserve">
+    <value>StorageLink</value>
+  </data>
+  <data name="Label-SR.SRTypes-dummy" xml:space="preserve">
+    <value>不明</value>
+  </data>
+  <data name="Label-SR.SRTypes-ebs" xml:space="preserve">
+    <value>Elastic Block Storage</value>
+  </data>
+  <data name="Label-SR.SRTypes-egenera" xml:space="preserve">
+    <value>Egenera 仮想ストレージ</value>
+  </data>
+  <data name="Label-SR.SRTypes-egeneracd" xml:space="preserve">
+    <value>Egenera 仮想 DVD ドライブ</value>
+  </data>
+  <data name="Label-SR.SRTypes-equal" xml:space="preserve">
+    <value>Dell EqualLogic</value>
+  </data>
+  <data name="Label-SR.SRTypes-ext" xml:space="preserve">
+    <value>Ext3</value>
+  </data>
+  <data name="Label-SR.SRTypes-gfs2" xml:space="preserve">
+    <value>GFS2</value>
+  </data>
+  <data name="Label-SR.SRTypes-iscsi" xml:space="preserve">
+    <value>VDI-per-LUN iSCSI</value>
+  </data>
+  <data name="Label-SR.SRTypes-iso" xml:space="preserve">
+    <value>ISO</value>
+  </data>
+  <data name="Label-SR.SRTypes-local" xml:space="preserve">
+    <value>ローカル</value>
+  </data>
+  <data name="Label-SR.SRTypes-lvm" xml:space="preserve">
+    <value>LVM</value>
+  </data>
+  <data name="Label-SR.SRTypes-lvmofc" xml:space="preserve">
+    <value>ハードウェア HBA</value>
+  </data>
+  <data name="Label-SR.SRTypes-lvmofcoe" xml:space="preserve">
+    <value>FCoE</value>
+  </data>
+  <data name="Label-SR.SRTypes-lvmohba" xml:space="preserve">
+    <value>ハードウェア HBA</value>
+  </data>
+  <data name="Label-SR.SRTypes-lvmoiscsi" xml:space="preserve">
+    <value>iSCSI 上の LVM</value>
+  </data>
+  <data name="Label-SR.SRTypes-netapp" xml:space="preserve">
+    <value>NetApp</value>
+  </data>
+  <data name="Label-SR.SRTypes-nfs" xml:space="preserve">
+    <value>NFS</value>
+  </data>
+  <data name="Label-SR.SRTypes-nutanix" xml:space="preserve">
+    <value>Nutanix</value>
+  </data>
+  <data name="Label-SR.SRTypes-nutanixiso" xml:space="preserve">
+    <value>Nutanix ISO</value>
+  </data>
+  <data name="Label-SR.SRTypes-rawhba" xml:space="preserve">
+    <value>LUN-per-VDI</value>
+  </data>
+  <data name="Label-SR.SRTypes-shm" xml:space="preserve">
+    <value>Local Performance Monitoring</value>
+  </data>
+  <data name="Label-SR.SRTypes-smb" xml:space="preserve">
+    <value>SMB</value>
+  </data>
+  <data name="Label-SR.SRTypes-tmpfs" xml:space="preserve">
+    <value>不明</value>
+  </data>
+  <data name="Label-SR.SRTypes-udev" xml:space="preserve">
+    <value>udev</value>
+  </data>
+  <data name="Label-SR.SRTypes-unknown" xml:space="preserve">
+    <value>不明</value>
+  </data>
+  <data name="Label-SR.state" xml:space="preserve">
+    <value>状態</value>
+  </data>
+  <data name="Label-Supplemental_packs.installed" xml:space="preserve">
+    <value>インストールされたサプリメンタル パック</value>
+  </data>
+  <data name="Label-VM.affinity" xml:space="preserve">
+    <value>ホーム サーバー</value>
+  </data>
+  <data name="Label-VM.auto_boot" xml:space="preserve">
+    <value>自動起動</value>
+  </data>
+  <data name="Label-VM.BootMode" xml:space="preserve">
+    <value>起動モード</value>
+  </data>
+  <data name="Label-VM.BootOrder" xml:space="preserve">
+    <value>起動順序</value>
+  </data>
+  <data name="Label-VM.ha_restart_priority" xml:space="preserve">
+    <value>高可用性再起動優先度</value>
+  </data>
+  <data name="Label-VM.ha_restart_priority.AlwaysRestart" xml:space="preserve">
+    <value>再起動</value>
+  </data>
+  <data name="Label-VM.ha_restart_priority.AlwaysRestartHighPriority" xml:space="preserve">
+    <value>最初に再起動</value>
+  </data>
+  <data name="Label-VM.ha_restart_priority.BestEffort" xml:space="preserve">
+    <value>可能なら再起動</value>
+  </data>
+  <data name="Label-VM.ha_restart_priority.DoNotRestart" xml:space="preserve">
+    <value>再起動しない</value>
+  </data>
+  <data name="Label-VM.ha_restart_priority.High" xml:space="preserve">
+    <value>高</value>
+  </data>
+  <data name="Label-VM.ha_restart_priority.Low" xml:space="preserve">
+    <value>低</value>
+  </data>
+  <data name="Label-VM.ha_restart_priority.Medium" xml:space="preserve">
+    <value>中</value>
+  </data>
+  <data name="Label-VM.ha_restart_priority.Restart" xml:space="preserve">
+    <value>再起動</value>
+  </data>
+  <data name="Label-VM.ImageId" xml:space="preserve">
+    <value>イメージ ID</value>
+  </data>
+  <data name="Label-VM.InstanceId" xml:space="preserve">
+    <value>インスタンス ID</value>
+  </data>
+  <data name="Label-VM.InstanceType" xml:space="preserve">
+    <value>インスタンスの種類</value>
+  </data>
+  <data name="Label-VM.KeyName" xml:space="preserve">
+    <value>キー名</value>
+  </data>
+  <data name="Label-VM.MaxVCPUs" xml:space="preserve">
+    <value>vCPU の最大数</value>
+  </data>
+  <data name="Label-VM.memory_static_max" xml:space="preserve">
+    <value>メモリ</value>
+  </data>
+  <data name="Label-VM.OperatingMode" xml:space="preserve">
+    <value>仮想化モード</value>
+  </data>
+  <data name="Label-VM.OSName" xml:space="preserve">
+    <value>オペレーティング システム</value>
+  </data>
+  <data name="Label-VM.P2V_ImportDate" xml:space="preserve">
+    <value>P2V インポート日</value>
+  </data>
+  <data name="Label-VM.P2V_SourceMachine" xml:space="preserve">
+    <value>P2V ソース マシン</value>
+  </data>
+  <data name="Label-VM.power_state-Halted" xml:space="preserve">
+    <value>停止</value>
+  </data>
+  <data name="Label-VM.power_state-Paused" xml:space="preserve">
+    <value>一時停止</value>
+  </data>
+  <data name="Label-VM.power_state-Running" xml:space="preserve">
+    <value>実行中</value>
+  </data>
+  <data name="Label-VM.power_state-Suspended" xml:space="preserve">
+    <value>一時停止</value>
+  </data>
+  <data name="Label-VM.power_state-unknown" xml:space="preserve">
+    <value>不明</value>
+  </data>
+  <data name="Label-VM.PrivateDnsName" xml:space="preserve">
+    <value>プライベート DNS エントリ</value>
+  </data>
+  <data name="Label-VM.PublicDnsName" xml:space="preserve">
+    <value>パブリック DNS エントリ</value>
+  </data>
+  <data name="Label-VM.PV_args" xml:space="preserve">
+    <value>OS 起動パラメーター</value>
+  </data>
+  <data name="Label-VM.pvs_read_caching_status" xml:space="preserve">
+    <value>PVS アクセラレータの状態</value>
+  </data>
+  <data name="Label-VM.read_caching_disks" xml:space="preserve">
+    <value>ディスク</value>
+  </data>
+  <data name="Label-VM.read_caching_reason" xml:space="preserve">
+    <value>理由</value>
+  </data>
+  <data name="Label-VM.read_caching_status" xml:space="preserve">
+    <value>状態</value>
+  </data>
+  <data name="Label-VM.Topology" xml:space="preserve">
+    <value>トポロジ</value>
+  </data>
+  <data name="Label-VM.uptime" xml:space="preserve">
+    <value>起動からの経過時間</value>
+  </data>
+  <data name="Label-VM.VCPUs" xml:space="preserve">
+    <value>仮想 CPU</value>
+  </data>
+  <data name="Label-VM.VCPUWeight" xml:space="preserve">
+    <value>vCPU 優先度</value>
+  </data>
+  <data name="Label-VM.VCPUWeight-0" xml:space="preserve">
+    <value>最低</value>
+  </data>
+  <data name="Label-VM.VCPUWeight-1" xml:space="preserve">
+    <value>非常に低い</value>
+  </data>
+  <data name="Label-VM.VCPUWeight-2" xml:space="preserve">
+    <value>低</value>
+  </data>
+  <data name="Label-VM.VCPUWeight-3" xml:space="preserve">
+    <value>通常以下</value>
+  </data>
+  <data name="Label-VM.VCPUWeight-4" xml:space="preserve">
+    <value>通常</value>
+  </data>
+  <data name="Label-VM.VCPUWeight-5" xml:space="preserve">
+    <value>通常以上</value>
+  </data>
+  <data name="Label-VM.VCPUWeight-6" xml:space="preserve">
+    <value>高</value>
+  </data>
+  <data name="Label-VM.VCPUWeight-7" xml:space="preserve">
+    <value>非常に高い</value>
+  </data>
+  <data name="Label-VM.VCPUWeight-8" xml:space="preserve">
+    <value>最高</value>
+  </data>
+  <data name="Label-VM.VirtualizationState" xml:space="preserve">
+    <value>仮想化の状態</value>
+  </data>
+  <data name="Label-xenserver-measured-boot" xml:space="preserve">
+    <value>メジャー ブート</value>
+  </data>
+  <data name="Label-xscontainer" xml:space="preserve">
+    <value>コンテナ管理</value>
   </data>
   <data name="Message.action-ha_heartbeat_approaching_timeout" xml:space="preserve">
     <value>高可用性設定</value>
@@ -967,13 +1237,16 @@
     <value>高可用性設定</value>
   </data>
   <data name="Message.action-license_does_not_support_pooling" xml:space="preserve">
-    <value>[XenServer] のオンライン購入</value>
+    <value>ライセンスのオンライン購入</value>
   </data>
   <data name="Message.action-license_expires_soon" xml:space="preserve">
-    <value>[XenServer] のオンライン購入</value>
+    <value>ライセンスのオンライン購入</value>
   </data>
   <data name="Message.action-multipath_periodic_alert" xml:space="preserve">
     <value>ログ ファイルの表示</value>
+  </data>
+  <data name="Message.action-pbd_plug_failed_on_server_start" xml:space="preserve">
+    <value>ストレージの修復</value>
   </data>
   <data name="Message.action-vbd_qos_failed" xml:space="preserve">
     <value>ライセンスの適用</value>
@@ -1049,6 +1322,12 @@
   <data name="Message.body-host_clock_went_backwards" xml:space="preserve">
     <value>サーバー '{0}' の時計が戻されました。</value>
   </data>
+  <data name="Message.body-host_cpu_features_down" xml:space="preserve">
+    <value>ホスト '{0}' の CPU 機能レベルが低下しました。</value>
+  </data>
+  <data name="Message.body-host_cpu_features_up" xml:space="preserve">
+    <value>ホスト '{0}' の CPU 機能レベルが上昇しました。</value>
+  </data>
   <data name="Message.body-host_sync_data_failed" xml:space="preserve">
     <value>プール内でのパフォーマンス統計値の同期に一時的な障害が発生しました。一部のサーバーがオフラインであることが考えられます。</value>
   </data>
@@ -1073,6 +1352,9 @@
   <data name="Message.body-license_server_unreachable" xml:space="preserve">
     <value>指定されたアドレスおよびポートでランセンス サーバーに接続できないため、{0} にライセンスがチェックアウトされませんでした。接続設定およびライセンス サーバーが動作していることを確認してください。</value>
   </data>
+  <data name="Message.body-license_server_version_obsolete" xml:space="preserve">
+    <value>{0} のライセンス サーバーのバージョンが古すぎます。</value>
+  </data>
   <data name="Message.body-metadata_lun_broken" xml:space="preserve">
     <value>プール '{0}' で 高可用性メタデータ ディスクにアクセスできません。アクセスが復元されるまで、サーバー障害時のプール メタデータの変更内容が失われる場合があります。</value>
   </data>
@@ -1080,22 +1362,34 @@
     <value>プール '{0}' の高可用性メタデータ ディスクへのアクセスが復元されました。これにより、サーバー障害からの回復が正しく実行されるようになりました。</value>
   </data>
   <data name="Message.body-multipath_periodic_alert" xml:space="preserve">
-    <value>サーバー '{0}' でマルチパスの状態に変更がありました。現在、{2} パス中 {1} パスがアクティブです。詳しくは、[XenCenter] のログを参照してください。</value>
+    <value>サーバー '{0}' でマルチパスの状態に変更がありました。現在、{2} パス中 {1} パスがアクティブです。詳しくは、アプリケーション ログを参照してください。</value>
   </data>
   <data name="Message.body-multipath_periodic_alert_healthy" xml:space="preserve">
-    <value>プール '{0}' のサーバーでマルチパスの状態に変更がありました。現在、すべてのパスがアクティブです。詳しくは、[XenCenter] のログを参照してください。</value>
+    <value>プール '{0}' のサーバーでマルチパスの状態に変更がありました。現在、すべてのパスがアクティブです。詳しくは、アプリケーション ログを参照してください。</value>
   </data>
   <data name="Message.body-multipath_periodic_alert_healthy_standalone" xml:space="preserve">
-    <value>サーバー '{0}' でマルチパスの状態に変更がありました。現在、すべてのパスがアクティブです。詳しくは、[XenCenter] のログを参照してください。</value>
+    <value>サーバー '{0}' でマルチパスの状態に変更がありました。現在、すべてのパスがアクティブです。詳しくは、アプリケーション ログを参照してください。</value>
   </data>
   <data name="Message.body-multipath_periodic_alert_summary" xml:space="preserve">
-    <value>プール '{0}' のサーバーでマルチパスの状態に変更がありました。現在、次のサーバーにアクティブでないパスがあります。{1}。詳しくは、[XenCenter] のログを参照してください。</value>
+    <value>プール '{0}' のサーバーでマルチパスの状態に変更がありました。現在、次のサーバーにアクティブでないパスがあります。{1}。詳しくは、アプリケーション ログを参照してください。</value>
   </data>
   <data name="Message.body-pbd_plug_failed_on_server_start" xml:space="preserve">
     <value>サーバー '{0}' の起動時にストレージリポジトリを接続できませんでした。</value>
   </data>
+  <data name="Message.body-pool_cpu_features_down" xml:space="preserve">
+    <value>プール '{0}' の CPU 機能レベルが低下しました。</value>
+  </data>
+  <data name="Message.body-pool_cpu_features_up" xml:space="preserve">
+    <value>プール '{0}' の CPU 機能レベルが上昇しました。</value>
+  </data>
   <data name="Message.body-pool_master_transition" xml:space="preserve">
-    <value>現在、サーバー '{0}' がプール '{1}' のマスターとして動作しています。</value>
+    <value>現在、サーバー '{0}' がプール '{1}' のコーディネーターとして動作しています。</value>
+  </data>
+  <data name="Message.body-pvs_proxy_no_cache_sr_available" xml:space="preserve">
+    <value>VM '{0}' で PVS アクセラレータをセットアップできません。サイト '{1}' にキャッシュ ストレージがありません。</value>
+  </data>
+  <data name="Message.body-tls_verification_emergency_disabled" xml:space="preserve">
+    <value>証明書の検証はプールで有効になっていますが、サーバー '{0}' で上書きされています。</value>
   </data>
   <data name="Message.body-vbd_qos_failed" xml:space="preserve">
     <value>仮想マシン '{1}' のディスク '{0}' の QoS (サービス品質) 設定を適用できません。</value>
@@ -1126,6 +1420,9 @@
   </data>
   <data name="Message.body-vm_resumed" xml:space="preserve">
     <value>仮想マシン '{0}' が再開しました。</value>
+  </data>
+  <data name="Message.body-vm_secure_boot_failed" xml:space="preserve">
+    <value>仮想マシン '{0}' はセキュア ブートの検証をパスしませんでした。</value>
   </data>
   <data name="Message.body-vm_shutdown" xml:space="preserve">
     <value>仮想マシン '{0}' がシャットダウンしました。</value>
@@ -1166,6 +1463,12 @@
   <data name="Message.help-alarm" xml:space="preserve">
     <value>アラートのヘルプ</value>
   </data>
+  <data name="Message.help-extauth_in_pool_is_non_homogeneous" xml:space="preserve">
+    <value>AD のヘルプ</value>
+  </data>
+  <data name="Message.help-extauth_init_in_host_failed" xml:space="preserve">
+    <value>AD のヘルプ</value>
+  </data>
   <data name="Message.help-ha_heartbeat_approaching_timeout" xml:space="preserve">
     <value>高可用性のヘルプ</value>
   </data>
@@ -1200,6 +1503,24 @@
     <value>高可用性のヘルプ</value>
   </data>
   <data name="Message.help-license_does_not_support_pooling" xml:space="preserve">
+    <value>ライセンスのヘルプ</value>
+  </data>
+  <data name="Message.help-license_expired" xml:space="preserve">
+    <value>ライセンスのヘルプ</value>
+  </data>
+  <data name="Message.help-license_not_available" xml:space="preserve">
+    <value>ライセンスのヘルプ</value>
+  </data>
+  <data name="Message.help-license_server_connected" xml:space="preserve">
+    <value>ライセンスのヘルプ</value>
+  </data>
+  <data name="Message.help-license_server_unavailable" xml:space="preserve">
+    <value>ライセンスのヘルプ</value>
+  </data>
+  <data name="Message.help-license_server_unreachable" xml:space="preserve">
+    <value>ライセンスのヘルプ</value>
+  </data>
+  <data name="Message.help-license_server_version_obsolete" xml:space="preserve">
     <value>ライセンスのヘルプ</value>
   </data>
   <data name="Message.help-pbd_plug_failed_on_server_start" xml:space="preserve">
@@ -1274,6 +1595,12 @@
   <data name="Message.name-host_clock_went_backwards" xml:space="preserve">
     <value>サーバーの時計が戻されました</value>
   </data>
+  <data name="Message.name-host_cpu_features_down" xml:space="preserve">
+    <value>ホスト CPU 機能が低下しています</value>
+  </data>
+  <data name="Message.name-host_cpu_features_up" xml:space="preserve">
+    <value>ホスト CPU 機能が上昇しています</value>
+  </data>
   <data name="Message.name-host_sync_data_failed" xml:space="preserve">
     <value>サーバー統計値の同期の失敗</value>
   </data>
@@ -1301,6 +1628,9 @@
   <data name="Message.name-license_server_unreachable" xml:space="preserve">
     <value>ライセンス サーバーに接続できません。</value>
   </data>
+  <data name="Message.name-license_server_version_obsolete" xml:space="preserve">
+    <value>ライセンス サーバーのバージョンが古すぎます。</value>
+  </data>
   <data name="Message.name-metadata_lun_broken" xml:space="preserve">
     <value>高可用性メタデータ ディスクへのアクセス中断</value>
   </data>
@@ -1313,8 +1643,32 @@
   <data name="Message.name-pbd_plug_failed_on_server_start" xml:space="preserve">
     <value>サーバー起動時のストレージ接続の失敗</value>
   </data>
+  <data name="Message.name-pool_cpu_features_down" xml:space="preserve">
+    <value>プール CPU 機能が低下しています</value>
+  </data>
+  <data name="Message.name-pool_cpu_features_up" xml:space="preserve">
+    <value>プール CPU 機能が上昇しました</value>
+  </data>
   <data name="Message.name-pool_master_transition" xml:space="preserve">
-    <value>プール マスターの変更</value>
+    <value>プール コーディネーターが変更されました</value>
+  </data>
+  <data name="Message.name-pvs_proxy_no_cache_sr_available" xml:space="preserve">
+    <value>PVS サイトにキャッシュ ストレージがありません</value>
+  </data>
+  <data name="Message.name-pvs_proxy_setup_failed" xml:space="preserve">
+    <value>PVS プロキシのセットアップに失敗しました</value>
+  </data>
+  <data name="Message.name-SRUnavailable" xml:space="preserve">
+    <value>SR が既に使用中であるため空き領域を解放できません</value>
+  </data>
+  <data name="Message.name-tls_verification_emergency_disabled" xml:space="preserve">
+    <value>証明書の検証は無効になっています。</value>
+  </data>
+  <data name="Message.name-UnknownTrimException" xml:space="preserve">
+    <value>空き領域を解放するときに不明なエラーが発生しました</value>
+  </data>
+  <data name="Message.name-UnsupportedSRForTrim" xml:space="preserve">
+    <value>この SR は空き領域の解放をサポートしていません</value>
   </data>
   <data name="Message.name-vbd_qos_failed" xml:space="preserve">
     <value>VM ディスク QoS の失敗</value>
@@ -1334,11 +1688,20 @@
   <data name="Message.name-vif_qos_failed" xml:space="preserve">
     <value>VM ネットワーク インターフェイス QoS の失敗</value>
   </data>
+  <data name="Message.name-vm_checkpointed" xml:space="preserve">
+    <value>仮想マシンのチェックポイントが作成されました</value>
+  </data>
   <data name="Message.name-vm_cloned" xml:space="preserve">
     <value>VM の複製</value>
   </data>
   <data name="Message.name-vm_crashed" xml:space="preserve">
     <value>VM のクラッシュ</value>
+  </data>
+  <data name="Message.name-vm_migrated" xml:space="preserve">
+    <value>仮想マシンが移行されました</value>
+  </data>
+  <data name="Message.name-vm_paused" xml:space="preserve">
+    <value>仮想マシンが一時停止されました</value>
   </data>
   <data name="Message.name-vm_rebooted" xml:space="preserve">
     <value>VM の再起動</value>
@@ -1346,8 +1709,17 @@
   <data name="Message.name-vm_resumed" xml:space="preserve">
     <value>VM の再開</value>
   </data>
+  <data name="Message.name-vm_secure_boot_failed" xml:space="preserve">
+    <value>仮想マシンのセキュア ブート検証が失敗しました</value>
+  </data>
   <data name="Message.name-vm_shutdown" xml:space="preserve">
     <value>VM のシャットダウン</value>
+  </data>
+  <data name="Message.name-vm_snapshot_reverted" xml:space="preserve">
+    <value>仮想マシンのスナップショットが復元されました</value>
+  </data>
+  <data name="Message.name-vm_snapshotted" xml:space="preserve">
+    <value>仮想マシンのスナップショットが作成されました</value>
   </data>
   <data name="Message.name-vm_started" xml:space="preserve">
     <value>VM の起動</value>
@@ -1357,6 +1729,9 @@
   </data>
   <data name="Message.name-vm_uncooperative" xml:space="preserve">
     <value>VM の非協調</value>
+  </data>
+  <data name="Message.name-vm_unpaused" xml:space="preserve">
+    <value>仮想マシンの一時停止が解除されました</value>
   </data>
   <data name="Message.name-vmss_license_error" xml:space="preserve">
     <value>スナップショット スケジュールの失敗: 定期的なスナップショット機能のライセンスがありません</value>
@@ -1393,6 +1768,39 @@
   </data>
   <data name="Message.name-wlb_vm_relocation" xml:space="preserve">
     <value>WLB VM 再配置</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_ERROR_PREPARING_HOST" xml:space="preserve">
+    <value>アップグレードのためにホストを準備中にエラーが発生しました。</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_FORBIDDEN" xml:space="preserve">
+    <value>指定されたネットワークの場所にアクセスすることはできません。</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_INVALID_URL" xml:space="preserve">
+    <value>無効なインストーラー ファイル URL。</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_INVALID_VER" xml:space="preserve">
+    <value>指定された場所にあるインストーラー ファイルは使用できないバージョンです。</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_MISSING_URL" xml:space="preserve">
+    <value>不明な URL。</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_NOT_FOUND" xml:space="preserve">
+    <value>指定されたネットワークの場所が見つかりません。</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_PROXY AUTH FAILURE" xml:space="preserve">
+    <value>指定されたネットワークの場所にアクセスするには、プロキシ認証が必要です。</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_REPO_IOERROR" xml:space="preserve">
+    <value>インストーラー ファイルを開くときにエラーが発生しました。</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_REPO_SERVER_ERROR_5XX" xml:space="preserve">
+    <value>インストーラー ファイルをホストしているサーバーでエラーが発生しました。</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_TIMEOUT" xml:space="preserve">
+    <value>要求がタイムアウトになりました。</value>
+  </data>
+  <data name="PREPARE_HOST_UPGRADE_UNAUTH_URL" xml:space="preserve">
+    <value>入力した資格情報では、指定されたネットワークの場所へのアクセスが許可されていません。</value>
   </data>
   <data name="Role.pool-admin.Description" xml:space="preserve">
     <value>プール管理者には、すべての機能および設定に対する完全なアクセス権が付与されます。プール管理者は、サーバー コンソールを使ってほかのユーザーの役割を管理できます。
@@ -1466,6 +1874,9 @@
   <data name="SR.name_description-local-hotplug-cd-host" xml:space="preserve">
     <value>{0} の物理 DVD ドライブ</value>
   </data>
+  <data name="SR.name_description-local-hotplug-disk" xml:space="preserve">
+    <value>物理リムーバブル ストレージ</value>
+  </data>
   <data name="SR.name_description-local-hotplug-disk-host" xml:space="preserve">
     <value>{0} の物理リムーバブル ストレージ</value>
   </data>
@@ -1474,9 +1885,6 @@
   </data>
   <data name="SR.name_description-local-storage-host" xml:space="preserve">
     <value>{0} のローカル ストレージ</value>
-  </data>
-  <data name="SR.name_description-xenserver-tools" xml:space="preserve">
-    <value>[Citrix VM Tools] ISO</value>
   </data>
   <data name="SR.name_label-ebs" xml:space="preserve">
     <value>EBS</value>
@@ -1502,406 +1910,10 @@
   <data name="SR.name_label-local-storage-host" xml:space="preserve">
     <value>{0} のローカル ストレージ</value>
   </data>
-  <data name="SR.name_label-xenserver-tools" xml:space="preserve">
-    <value>[Citrix VM Tools]</value>
-  </data>
   <data name="VM.TemplateDescription-Demo Linux VM" xml:space="preserve">
     <value>このテンプレートを使用して、デモ用またはテスト用のビルトイン Linux ディストリビューションが動作する Linux 仮想マシンを作成できます。業務での使用は推奨されません。</value>
   </data>
   <data name="VM.TemplateDescription-Other install media" xml:space="preserve">
     <value>一覧にないオペレーティング システムを使用する場合は、このテンプレートを選択します。このテンプレートは、詳しい知識がある管理者向けです。また、弊社の製品は、標準テンプレートでサポートされる特定のディストリビューションおよびバージョンでのみ、動作テストが実施されていることをご了承ください。</value>
-  </data>
-  <data name="VM.TemplateDescription-Xen API SDK" xml:space="preserve">
-    <value>このテンプレートを使用して、[XenServer] Software Development Kit (SDK) API VM を作成できます。 </value>
-  </data>
-  <data name="SR.name_description-local-hotplug-disk" xml:space="preserve">
-    <value>物理リムーバブル ストレージ</value>
-  </data>
-  <data name="Label-performance.cpu_avg" xml:space="preserve">
-    <value>平均 CPU</value>
-  </data>
-  <data name="Label-performance.pif_aggr_rx" xml:space="preserve">
-    <value>NIC 受信合計</value>
-  </data>
-  <data name="Label-performance.pif_aggr_tx" xml:space="preserve">
-    <value>NIC 送信合計</value>
-  </data>
-  <data name="Label-SR.SRTypes-rawhba" xml:space="preserve">
-    <value>LUN-per-VDI</value>
-  </data>
-  <data name="Label-performance.sr_avgqu_sz" xml:space="preserve">
-    <value>'{0}' キューのサイズ</value>
-  </data>
-  <data name="Label-performance.cpu-state" xml:space="preserve">
-    <value>CPU {0} {1}-状態 {2}</value>
-  </data>
-  <data name="Label-performance.sr_inflight" xml:space="preserve">
-    <value>'{0}' インフライト要求</value>
-  </data>
-  <data name="Label-performance.sr_iops_read" xml:space="preserve">
-    <value>'{0}' 読み取り IOPS</value>
-  </data>
-  <data name="Label-performance.sr_iops_total" xml:space="preserve">
-    <value>'{0}' 合計 IOPS</value>
-  </data>
-  <data name="Label-performance.sr_iops_write" xml:space="preserve">
-    <value>'{0}' 書き込み IOPS</value>
-  </data>
-  <data name="Label-performance.sr_iowait" xml:space="preserve">
-    <value>'{0}' IO 待機</value>
-  </data>
-  <data name="Label-performance.sr_io_throughput_read" xml:space="preserve">
-    <value>'{0}' 読み取りスループット</value>
-  </data>
-  <data name="Label-performance.sr_io_throughput_total" xml:space="preserve">
-    <value>'{0}' 合計スループット</value>
-  </data>
-  <data name="Label-performance.sr_io_throughput_write" xml:space="preserve">
-    <value>'{0}' 書き込みスループット</value>
-  </data>
-  <data name="Label-performance.sr_latency" xml:space="preserve">
-    <value>'{0}' 遅延</value>
-  </data>
-  <data name="Label-performance.memory_reclaimed" xml:space="preserve">
-    <value>解放されたメモリ</value>
-  </data>
-  <data name="Label-performance.memory_reclaimed_max" xml:space="preserve">
-    <value>解放されるメモリ (概算値)</value>
-  </data>
-  <data name="Message.help-extauth_init_in_host_failed" xml:space="preserve">
-    <value>AD のヘルプ</value>
-  </data>
-  <data name="Message.help-extauth_in_pool_is_non_homogeneous" xml:space="preserve">
-    <value>AD のヘルプ</value>
-  </data>
-  <data name="Label-performance.vbd_avgqu_sz" xml:space="preserve">
-    <value>ディスク {0} キューのサイズ</value>
-  </data>
-  <data name="Label-performance.vbd_inflight" xml:space="preserve">
-    <value>ディスク {0} インフライト要求</value>
-  </data>
-  <data name="Label-performance.vbd_iops_read" xml:space="preserve">
-    <value>ディスク {0} 読み取り IOPS</value>
-  </data>
-  <data name="Label-performance.vbd_iops_total" xml:space="preserve">
-    <value>ディスク {0} 合計 IOPS</value>
-  </data>
-  <data name="Label-performance.vbd_iops_write" xml:space="preserve">
-    <value>ディスク {0} 書き込み IOPS</value>
-  </data>
-  <data name="Label-performance.vbd_iowait" xml:space="preserve">
-    <value>ディスク {0} IO 待機</value>
-  </data>
-  <data name="Label-performance.gpu_memory_free" xml:space="preserve">
-    <value>{0} {1} 空きメモリ</value>
-  </data>
-  <data name="Label-performance.gpu_memory_used" xml:space="preserve">
-    <value>{0} {1} 使用メモリ</value>
-  </data>
-  <data name="Label-performance.gpu_power_usage" xml:space="preserve">
-    <value>{0} {1} 使用電力</value>
-  </data>
-  <data name="Label-performance.gpu_temperature" xml:space="preserve">
-    <value>{0} {1} 温度</value>
-  </data>
-  <data name="Label-performance.gpu_utilisation_compute" xml:space="preserve">
-    <value>{0} {1} 使用率</value>
-  </data>
-  <data name="Label-performance.gpu_utilisation_memory_io" xml:space="preserve">
-    <value>{0} {1} メモリ使用率</value>
-  </data>
-  <data name="Message.name-SRUnavailable" xml:space="preserve">
-    <value>SR が既に使用中であるため空き領域を解放できません</value>
-  </data>
-  <data name="Message.name-UnknownTrimException" xml:space="preserve">
-    <value>空き領域を解放するときに不明なエラーが発生しました</value>
-  </data>
-  <data name="Message.name-UnsupportedSRForTrim" xml:space="preserve">
-    <value>この SR は空き領域の解放をサポートしていません</value>
-  </data>
-  <data name="Description-host.system_status-xcp-rrdd-plugins" xml:space="preserve">
-    <value>RRD デーモンのログ ファイル</value>
-  </data>
-  <data name="Label-host.system_status-xcp-rrdd-plugins" xml:space="preserve">
-    <value>RRD プラグインのログ</value>
-  </data>
-  <data name="Label-VM.Topology" xml:space="preserve">
-    <value>トポロジ</value>
-  </data>
-  <data name="Label-VM.MaxVCPUs" xml:space="preserve">
-    <value>vCPU の最大数</value>
-  </data>
-  <data name="Message.body-license_server_version_obsolete" xml:space="preserve">
-    <value>{0} のライセンス サーバーのバージョンが古すぎます。</value>
-  </data>
-  <data name="Message.name-license_server_version_obsolete" xml:space="preserve">
-    <value>ライセンス サーバーのバージョンが古すぎます。</value>
-  </data>
-  <data name="Message.help-license_expired" xml:space="preserve">
-    <value>ライセンスのヘルプ</value>
-  </data>
-  <data name="Message.help-license_not_available" xml:space="preserve">
-    <value>ライセンスのヘルプ</value>
-  </data>
-  <data name="Message.help-license_server_connected" xml:space="preserve">
-    <value>ライセンスのヘルプ</value>
-  </data>
-  <data name="Message.help-license_server_unavailable" xml:space="preserve">
-    <value>ライセンスのヘルプ</value>
-  </data>
-  <data name="Message.help-license_server_unreachable" xml:space="preserve">
-    <value>ライセンスのヘルプ</value>
-  </data>
-  <data name="Message.help-license_server_version_obsolete" xml:space="preserve">
-    <value>ライセンスのヘルプ</value>
-  </data>
-  <data name="Label-Supplemental_packs.installed" xml:space="preserve">
-    <value>インストールされたサプリメンタル パック</value>
-  </data>
-  <data name="Label-VM.read_caching_status" xml:space="preserve">
-    <value>状態</value>
-  </data>
-  <data name="Label-VM.read_caching_disks" xml:space="preserve">
-    <value>ディスク</value>
-  </data>
-  <data name="Label-VM.read_caching_reason" xml:space="preserve">
-    <value>理由</value>
-  </data>
-  <data name="Label-performance.vbd_io_throughput_total" xml:space="preserve">
-    <value>ディスク {0} IO 合計スループット</value>
-  </data>
-  <data name="Label-performance.vbd_io_throughput_read" xml:space="preserve">
-    <value>ディスク {0} IO 読み取りスループット</value>
-  </data>
-  <data name="Label-performance.vbd_io_throughput_write" xml:space="preserve">
-    <value>ディスク {0} IO 書き込みスループット</value>
-  </data>
-  <data name="Label-VM.OperatingMode" xml:space="preserve">
-    <value>仮想化モード</value>
-  </data>
-  <data name="Label-SR.SRTypes-lvmofcoe" xml:space="preserve">
-    <value>FCoE</value>
-  </data>
-  <data name="Label-SR.provisioning" xml:space="preserve">
-    <value>プロビジョニング</value>
-  </data>
-  <data name="Label-SR.disk-space-allocations" xml:space="preserve">
-    <value>ディスク容量割り当て</value>
-  </data>
-  <data name="Label-performance.pool_session_count" xml:space="preserve">
-    <value>セッションの数</value>
-  </data>
-  <data name="Label-performance.pool_task_count" xml:space="preserve">
-    <value>タスクの数</value>
-  </data>
-  <data name="Label-performance.Tapdisks_in_low_memory_mode" xml:space="preserve">
-    <value>低メモリモードの Tapdisk</value>
-  </data>
-  <data name="Label-performance.xapi_open_fds" xml:space="preserve">
-    <value>開いているファイル記述子の数</value>
-  </data>
-  <data name="Label-performance.io_errors" xml:space="preserve">
-    <value>I/O エラー</value>
-  </data>
-  <data name="Message.body-host_cpu_features_down" xml:space="preserve">
-    <value>ホスト '{0}' の CPU 機能レベルが低下しました。</value>
-  </data>
-  <data name="Message.body-host_cpu_features_up" xml:space="preserve">
-    <value>ホスト '{0}' の CPU 機能レベルが上昇しました。</value>
-  </data>
-  <data name="Message.body-pool_cpu_features_down" xml:space="preserve">
-    <value>プール '{0}' の CPU 機能レベルが低下しました。</value>
-  </data>
-  <data name="Message.body-pool_cpu_features_up" xml:space="preserve">
-    <value>プール '{0}' の CPU 機能レベルが上昇しました。</value>
-  </data>
-  <data name="Message.name-host_cpu_features_down" xml:space="preserve">
-    <value>ホスト CPU 機能が低下しています</value>
-  </data>
-  <data name="Message.name-host_cpu_features_up" xml:space="preserve">
-    <value>ホスト CPU 機能が上昇しています</value>
-  </data>
-  <data name="Message.name-pool_cpu_features_down" xml:space="preserve">
-    <value>プール CPU 機能が低下しています</value>
-  </data>
-  <data name="Message.name-pool_cpu_features_up" xml:space="preserve">
-    <value>プール CPU 機能が上昇しました</value>
-  </data>
-  <data name="Description-host.system_status-control-slice" xml:space="preserve">
-    <value>システムの制御グループについての情報および統計</value>
-  </data>
-  <data name="Description-host.system_status-fcoe" xml:space="preserve">
-    <value>ファイバ チャネル オーバー イーサネット (FCoE) のログ</value>
-  </data>
-  <data name="Description-host.system_status-message-switch" xml:space="preserve">
-    <value>システム デーモン間で交換されるメッセージのログ</value>
-  </data>
-  <data name="Description-host.system_status-xenvm" xml:space="preserve">
-    <value>ボリューム マネージャーのログ</value>
-  </data>
-  <data name="Label-host.system_status-control-slice" xml:space="preserve">
-    <value>制御グループ統計</value>
-  </data>
-  <data name="Label-host.system_status-fcoe" xml:space="preserve">
-    <value>FCoE ログ</value>
-  </data>
-  <data name="Label-host.system_status-message-switch" xml:space="preserve">
-    <value>内部メッセージのログ</value>
-  </data>
-  <data name="Label-host.system_status-xenvm" xml:space="preserve">
-    <value>ボリューム マネージャーのログ</value>
-  </data>
-  <data name="Label-host.system_status-xscontainer" xml:space="preserve">
-    <value>コンテナー管理のログ</value>
-  </data>
-  <data name="Description-host.system_status-xscontainer" xml:space="preserve">
-    <value>コンテナー管理のログ</value>
-  </data>
-  <data name="Label-host.system_status-tboot" xml:space="preserve">
-    <value>メジャー ブート ログ</value>
-  </data>
-  <data name="Description-host.system_status-tboot" xml:space="preserve">
-    <value>メジャー ブート ログ</value>
-  </data>
-  <data name="Description-host.system_status-conntest" xml:space="preserve">
-    <value>サーバーとインターネットの間の接続をテスト</value>
-  </data>
-  <data name="Label-host.system_status-conntest" xml:space="preserve">
-    <value>接続テスト</value>
-  </data>
-  <data name="Label-Pool_patch.required-updates" xml:space="preserve">
-    <value>必要なアップデート</value>
-  </data>
-  <data name="Label-SR.SRTypes-nutanix" xml:space="preserve">
-    <value>Nutanix</value>
-  </data>
-  <data name="Label-SR.SRTypes-nutanixiso" xml:space="preserve">
-    <value>Nutanix ISO</value>
-  </data>
-  <data name="Message.name-pvs_proxy_setup_failed" xml:space="preserve">
-    <value>PVS プロキシのセットアップに失敗しました</value>
-  </data>
-  <data name="Message.name-pvs_proxy_no_cache_sr_available" xml:space="preserve">
-    <value>PVS サイトにキャッシュ ストレージがありません</value>
-  </data>
-  <data name="Message.body-pvs_proxy_no_cache_sr_available" xml:space="preserve">
-    <value>VM '{0}' で PVS アクセラレータをセットアップできません。サイト '{1}' にキャッシュ ストレージがありません。</value>
-  </data>
-  <data name="Label-performance.pvsaccelerator_evicted" xml:space="preserve">
-    <value>PVS アクセラレータの削除の割合</value>
-  </data>
-  <data name="Label-performance.pvsaccelerator_read_hits" xml:space="preserve">
-    <value>PVS アクセラレータでヒットした割合</value>
-  </data>
-  <data name="Label-performance.pvsaccelerator_read_misses" xml:space="preserve">
-    <value>PVS アクセラレータでヒットしなかった割合</value>
-  </data>
-  <data name="Label-performance.pvsaccelerator_read_total" xml:space="preserve">
-    <value>PVS アクセラレータで確認した読み取りの割合</value>
-  </data>
-  <data name="Label-performance.pvsaccelerator_space_utilization" xml:space="preserve">
-    <value>PVS アクセラレータの容量使用率</value>
-  </data>
-  <data name="Label-performance.pvsaccelerator_traffic_client_sent" xml:space="preserve">
-    <value>PVS アクセラレータはクライアントからのネットワーク トラフィックを確認しました</value>
-  </data>
-  <data name="Label-performance.pvsaccelerator_traffic_proxy_saved" xml:space="preserve">
-    <value>PVS アクセラレータはネットワーク トラフィックを保存しました</value>
-  </data>
-  <data name="Label-performance.pvsaccelerator_traffic_server_sent" xml:space="preserve">
-    <value>PVS アクセラレータはサーバーからのネットワーク トラフィックを確認しました</value>
-  </data>
-  <data name="Label-VM.pvs_read_caching_status" xml:space="preserve">
-    <value>PVS アクセラレータの状態</value>
-  </data>
-  <data name="Label-performance.sr_rw_read" xml:space="preserve">
-    <value>'{0}' 読み取りスループット</value>
-  </data>
-  <data name="Label-performance.sr_rw_read_latency" xml:space="preserve">
-    <value>'{0}' 読み取りの遅延</value>
-  </data>
-  <data name="Label-performance.sr_rw_write" xml:space="preserve">
-    <value>'{0}' 書き込みスループット</value>
-  </data>
-  <data name="Label-performance.sr_rw_write_latency" xml:space="preserve">
-    <value>'{0}' 書き込みの遅延</value>
-  </data>
-  <data name="Label-pvsaccelerator" xml:space="preserve">
-    <value>PVS アクセラレータ</value>
-  </data>
-  <data name="Label-xenserver-measured-boot" xml:space="preserve">
-    <value>メジャー ブート</value>
-  </data>
-  <data name="Label-xscontainer" xml:space="preserve">
-    <value>コンテナ管理</value>
-  </data>
-  <data name="Description-host.system_status-xspvscache" xml:space="preserve">
-    <value>PVS アクセラレータの状態</value>
-  </data>
-  <data name="Label-host.system_status-xspvscache" xml:space="preserve">
-    <value>PVS アクセラレータの状態</value>
-  </data>
-  <data name="Description-host.system_status-VM-snapshot-schedule" xml:space="preserve">
-    <value>スケジュールされたスナップショットのログ ファイル</value>
-  </data>
-  <data name="Label-host.system_status-VM-snapshot-schedule" xml:space="preserve">
-    <value>スケジュールされたスナップショットのログ ファイル</value>
-  </data>
-  <data name="Message.action-pbd_plug_failed_on_server_start" xml:space="preserve">
-    <value>ストレージの修復</value>
-  </data>
-  <data name="Label-SR.SRTypes-gfs2" xml:space="preserve">
-    <value>GFS2</value>
-  </data>
-  <data name="Description-host.system_status-v6d" xml:space="preserve">
-    <value>[XenServer] ライセンス デーモン ログ</value>
-  </data>
-  <data name="Description-host.system_status-xapi-clusterd" xml:space="preserve">
-    <value>[XenServer] ツールスタックのクラスター管理デーモンによって生成されたログ。</value>
-  </data>
-  <data name="Label-host.system_status-v6d" xml:space="preserve">
-    <value>[XenServer] ライセンス デーモン</value>
-  </data>
-  <data name="Label-host.system_status-xapi-clusterd" xml:space="preserve">
-    <value>[XenServer] クラスター管理デーモン</value>
-  </data>
-  <data name="Message.body-vm_secure_boot_failed" xml:space="preserve">
-    <value>仮想マシン '{0}' はセキュア ブートの検証をパスしませんでした。</value>
-  </data>
-  <data name="Message.name-vm_secure_boot_failed" xml:space="preserve">
-    <value>仮想マシンのセキュア ブート検証が失敗しました</value>
-  </data>
-  <data name="PREPARE_HOST_UPGRADE_ERROR_PREPARING_HOST" xml:space="preserve">
-    <value>アップグレードのためにホストを準備中にエラーが発生しました。</value>
-  </data>
-  <data name="PREPARE_HOST_UPGRADE_FORBIDDEN" xml:space="preserve">
-    <value>指定されたネットワークの場所にアクセスすることはできません。</value>
-  </data>
-  <data name="PREPARE_HOST_UPGRADE_INVALID_URL" xml:space="preserve">
-    <value>無効なインストーラー ファイル URL。</value>
-  </data>
-  <data name="PREPARE_HOST_UPGRADE_INVALID_VER" xml:space="preserve">
-    <value>指定された場所にあるインストーラー ファイルは使用できないバージョンです。</value>
-  </data>
-  <data name="PREPARE_HOST_UPGRADE_MISSING_URL" xml:space="preserve">
-    <value>不明な URL。</value>
-  </data>
-  <data name="PREPARE_HOST_UPGRADE_TIMEOUT" xml:space="preserve">
-    <value>要求がタイムアウトになりました。</value>
-  </data>
-  <data name="PREPARE_HOST_UPGRADE_UNAUTH_URL" xml:space="preserve">
-    <value>入力した資格情報では、指定されたネットワークの場所へのアクセスが許可されていません。</value>
-  </data>
-  <data name="PREPARE_HOST_UPGRADE_NOT_FOUND" xml:space="preserve">
-    <value>指定されたネットワークの場所が見つかりません。</value>
-  </data>
-  <data name="PREPARE_HOST_UPGRADE_PROXY AUTH FAILURE" xml:space="preserve">
-    <value>指定されたネットワークの場所にアクセスするには、プロキシ認証が必要です。</value>
-  </data>
-  <data name="PREPARE_HOST_UPGRADE_REPO_SERVER_ERROR_5XX" xml:space="preserve">
-    <value>インストーラー ファイルをホストしているサーバーでエラーが発生しました。</value>
-  </data>
-  <data name="PREPARE_HOST_UPGRADE_REPO_IOERROR" xml:space="preserve">
-    <value>インストーラー ファイルを開くときにエラーが発生しました。</value>
   </data>
 </root>

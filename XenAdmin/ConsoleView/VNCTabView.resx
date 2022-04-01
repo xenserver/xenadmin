@@ -577,7 +577,7 @@
     <value>2</value>
   </data>
   <data name="buttonSSH.Text" xml:space="preserve">
-    <value>Open SSH Console</value>
+    <value>Launch SSH Console</value>
   </data>
   <data name="&gt;&gt;buttonSSH.Name" xml:space="preserve">
     <value>buttonSSH</value>

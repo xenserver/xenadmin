@@ -114,8 +114,6 @@ namespace XenAdmin.Wlb
         private double _diskWriteMediumWeightFactor = .60;
         private double _diskWriteLowWeightFactor = .30;
 
-        private double _metricGroomingPeriod = 0; //0 indicates grroming disabled (SQLExpress)
-
         private WlbHostConfigurations _hostConfigurations;
         private WlbScheduledTasks _scheduledTasks;
 #endregion
@@ -349,13 +347,6 @@ namespace XenAdmin.Wlb
                 SetConfigValuePercent("VmNetworkWriteWeightMedium", (int)(value * _networkWriteMediumWeightFactor));
                 SetConfigValuePercent("VmNetworkWriteWeightLow", (int)(value* _networkWriteLowWeightFactor));
             }
-        }
-
-        // Removed from WLB Web Service in Tampa
-        public double MetricGroomingPeriod
-        {
-            get { return GetConfigValueDouble("MetricGroomingPeriod", _metricGroomingPeriod); }
-            set { SetConfigValueDouble("MetricGroomingPeriod", value); }
         }
 
         public bool CredentialsValid

@@ -90,7 +90,7 @@ namespace XenAPI
         /// <summary>Citrix Hypervisor 8.2 (stockholm)</summary>
         API_2_15 = 26,
         /// <summary>Unreleased (next)</summary>
-        API_2_16 = 27,
+        API_2_20 = 27,
         LATEST = 27,
         UNKNOWN = 99
     }
@@ -153,8 +153,8 @@ namespace XenAPI
                     return "2.14";
                 case API_Version.API_2_15:
                     return "2.15";
-                case API_Version.API_2_16:
-                    return "2.16";
+                case API_Version.API_2_20:
+                    return "2.20";
                 default:
                     return "Unknown";
             }

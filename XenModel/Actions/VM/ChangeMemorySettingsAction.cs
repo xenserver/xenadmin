@@ -39,56 +39,68 @@ namespace XenAdmin.Actions
 {
     public class ChangeMemorySettingsAction : AsyncAction
     {
-        long static_min, static_max, dynamic_min, dynamic_max;
+        private readonly long _staticMin, _staticMax, _dynamicMin, _dynamicMax;
+
         private Action<VMStartAbstractAction, Failure> _startDiagnosticForm;
-        private Action<VM, bool> _warningDialogHAInvalidConfig;
+        private Action<VM, bool> _warningDialogHaInvalidConfig;
+
+        private readonly bool _staticChanged;
+        private readonly bool _needReboot;
+        private readonly Host _vmHost;
 
         public ChangeMemorySettingsAction(VM vm, string title,
-            long static_min, long dynamic_min, long dynamic_max, long static_max, Action<VM, bool> warningDialogHAInvalidConfig, Action<VMStartAbstractAction, Failure> startDiagnosticForm, bool suppressHistory)
+            long staticMin, long dynamicMin, long dynamicMax, long staticMax, Action<VM, bool> warningDialogHaInvalidConfig, Action<VMStartAbstractAction, Failure> startDiagnosticForm, bool suppressHistory)
             : base(vm.Connection, title, suppressHistory)
         {
-            _warningDialogHAInvalidConfig = warningDialogHAInvalidConfig;
+            _warningDialogHaInvalidConfig = warningDialogHaInvalidConfig;
             _startDiagnosticForm = startDiagnosticForm;
             VM = vm;
-            this.static_min = static_min;
-            this.dynamic_min = dynamic_min;
-            this.dynamic_max = dynamic_max;
-            this.static_max = static_max;
+
+            _staticMin = staticMin;
+            _dynamicMin = dynamicMin;
+            _dynamicMax = dynamicMax;
+            _staticMax = staticMax;
+
+            _vmHost = VM.Home();
+            _staticChanged = staticMin != VM.memory_static_min || staticMax != VM.memory_static_max;
+
+            if (_staticChanged)
+                _needReboot = VM.power_state != vm_power_state.Halted;
+            else
+                _needReboot = VM.power_state != vm_power_state.Halted && VM.power_state != vm_power_state.Running;
 
             #region RBAC Dependencies
 
-            if (staticChanged)
+            if (_staticChanged)
                 ApiMethodsToRoleCheck.Add("vm.set_memory_limits");
             else
                 ApiMethodsToRoleCheck.Add("vm.set_memory_dynamic_range");
 
-            if (needReboot)
+            if (_needReboot)
             {
-                if (VM.allowed_operations.Contains(XenAPI.vm_operations.clean_shutdown))
+                if (VM.allowed_operations.Contains(vm_operations.clean_shutdown))
                     ApiMethodsToRoleCheck.Add("vm.clean_shutdown");
                 else
                     ApiMethodsToRoleCheck.Add("vm.hard_shutdown");
-                ApiMethodsToRoleCheck.Add("vm.start_on");
+
+                if (_vmHost == null)
+                    ApiMethodsToRoleCheck.Add("vm.start");
+                else
+                    ApiMethodsToRoleCheck.Add("vm.start_on");
             }
 
             #endregion
         }
 
-        private bool staticChanged => static_min != VM.memory_static_min || static_max != VM.memory_static_max;
-
-        private bool needReboot => staticChanged && VM.power_state != vm_power_state.Halted;
-
         protected override void Run()
         {
             // If either of the static memories has changed, we need to shut down the VM
             // before and reboot afterwards. The user has already been warned about this.
-            bool reboot = needReboot;
-            XenAPI.Host vmHost = null;
-            if (reboot)
+
+            if (_needReboot)
             {
-                vmHost = VM.Home();
-                AsyncAction action = null;
-                if (VM.allowed_operations.Contains(XenAPI.vm_operations.clean_shutdown))
+                AsyncAction action;
+                if (VM.allowed_operations.Contains(vm_operations.clean_shutdown))
                     action = new VMCleanShutdown(VM);
                 else
                     action = new VMHardShutdown(VM);
@@ -115,20 +127,25 @@ namespace XenAdmin.Actions
             // Now save the memory settings. We can't use VM.SaveChanges() for this,
             // because we have to do the operations simultaneously or we will
             // violate the memory ordering constraints.
+
             try
             {
-                if (staticChanged)
-                    XenAPI.VM.set_memory_limits(Session, VM.opaque_ref, static_min, static_max, dynamic_min, dynamic_max);
+                if (_staticChanged)
+                    VM.set_memory_limits(Session, VM.opaque_ref, _staticMin, _staticMax, _dynamicMin, _dynamicMax);
                 else
-                    XenAPI.VM.set_memory_dynamic_range(Session, VM.opaque_ref, dynamic_min, dynamic_max);
+                    VM.set_memory_dynamic_range(Session, VM.opaque_ref, _dynamicMin, _dynamicMax);
             }
-
-            // Reboot the VM, even if we failed to change the memory settings
             finally
             {
-                if (reboot)
+                if (_needReboot)
                 {
-                    var action = new VMStartOnAction(VM, vmHost, _warningDialogHAInvalidConfig, _startDiagnosticForm);
+                    // boot the VM, even if we failed to change the memory settings after the shutdown
+                    VMStartAbstractAction action;
+                    if (_vmHost == null)
+                        action = new VMStartAction(VM, _warningDialogHaInvalidConfig, _startDiagnosticForm);
+                    else
+                        action = new VMStartOnAction(VM, _vmHost, _warningDialogHaInvalidConfig, _startDiagnosticForm);
+
                     action.RunExternal(Session);
                 }
             }

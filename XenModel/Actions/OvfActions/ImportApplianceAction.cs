@@ -116,8 +116,7 @@ namespace XenAdmin.Actions.OvfActions
 				}
 			}
 
-			PercentComplete = 20;
-			Description = string.Format(Messages.IMPORT_APPLIANCE_PREPARING, m_package.Name);
+			Tick(20, string.Format(Messages.IMPORT_APPLIANCE_PREPARING, m_package.Name));
 
 			//create a copy of the OVF
 			var envelopes = new List<EnvelopeType>();
@@ -170,8 +169,7 @@ namespace XenAdmin.Actions.OvfActions
                 m_package.CleanUpWorkingDir();
             }
 
-			PercentComplete = 100;
-			Description = Messages.COMPLETED;
+            Tick(100, Messages.COMPLETED);
 
             if (_startAutomatically && importedObject is XenRef<VM_appliance> applianceRef)
             {

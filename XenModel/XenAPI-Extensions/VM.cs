@@ -723,32 +723,29 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Does this VM support ballooning? I.e., are tools installed, on a ballonable OS?
-        /// Doesn't check for Midnight Ride or licensing constraints.
+        /// Returns whether this VM support ballooning.
+        /// Real VMs support ballooning if tools are installed on a balloonable OS.
+        /// For templates we cannot tell whether tools are installed, so ballooning is
+        /// supported if and only if dynamic min != static_max (CA-34258/CA-34260).
         /// </summary>
-        public bool has_ballooning()
+        public bool SupportsBallooning()
         {
             if (Connection == null)
                 return false;
 
-            // For templates see comments in CA-34258/CA-34260: we cannot tell whether tools
-            // are installed so we offer ballooning if and only if the dynamic min != static_max.
             if (is_a_template)
-                return (memory_dynamic_min != memory_static_max);
+                return memory_dynamic_min != memory_static_max;
 
-            VM_guest_metrics metrics = Connection.Resolve<VM_guest_metrics>(guest_metrics);
-            if (metrics == null)
-                return false;
-            Dictionary<string, string> other_key = metrics.other;
-            return (other_key != null && other_key.ContainsKey("feature-balloon"));
+            var otherKey = Connection.Resolve(guest_metrics)?.other;
+            return otherKey != null && otherKey.ContainsKey("feature-balloon");
         }
 
         /// <summary>
-        /// Whether to show advanced ballooning UI (i.e., separate setting of dynamic_max and static_max)
+        /// Whether the VM uses ballooning (has different setting of dynamic_max and static_max)
         /// </summary>
-        public bool advanced_ballooning()
+        public bool UsesBallooning()
         {
-            return !Helpers.FeatureForbidden(Connection, Host.RestrictDMC) && memory_dynamic_max != memory_static_max && has_ballooning();
+            return memory_dynamic_max != memory_static_max && SupportsBallooning();
         }
 
         /// <summary>
@@ -1635,18 +1632,6 @@ namespace XenAPI
             if (!is_a_template && !Locked && allowed_operations != null && allowed_operations.Contains(vm_operations.export) && power_state != vm_power_state.Suspended)
             {
                 return Connection.ResolveAll(VBDs).Find(v => v.GetIsOwner()) != null;
-            }
-            return false;
-        }
-
-        /// <summary>
-        /// Whether the VM can be copied inside the pool (vm.copy)
-        /// </summary>
-        public bool CanBeCopied()
-        {
-            if (!is_a_template && !Locked && allowed_operations != null && allowed_operations.Contains(vm_operations.export) && power_state != vm_power_state.Suspended)
-            {
-                return true;
             }
             return false;
         }

@@ -358,7 +358,7 @@
     <value>3</value>
   </data>
   <data name="CdDropDownBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+    <value>Left, Right</value>
   </data>
   <data name="CdDropDownBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>23, 29</value>
@@ -385,7 +385,7 @@
     <value>5</value>
   </data>
   <data name="UrlTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+    <value>Left, Right</value>
   </data>
   <data name="UrlTextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>23, 88</value>
@@ -411,20 +411,17 @@
   <data name="&gt;&gt;UrlTextBox.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="linkLabelAttachNewIsoStore.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
   <data name="linkLabelAttachNewIsoStore.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="linkLabelAttachNewIsoStore.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
   </data>
   <data name="linkLabelAttachNewIsoStore.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="linkLabelAttachNewIsoStore.Location" type="System.Drawing.Point, System.Drawing">
-    <value>419, 26</value>
-  </data>
-  <data name="linkLabelAttachNewIsoStore.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>12, 0, 3, 0</value>
+    <value>410, 73</value>
   </data>
   <data name="linkLabelAttachNewIsoStore.Size" type="System.Drawing.Size, System.Drawing">
     <value>123, 27</value>
@@ -434,9 +431,6 @@
   </data>
   <data name="linkLabelAttachNewIsoStore.Text" xml:space="preserve">
     <value>新建 ISO 库...</value>
-  </data>
-  <data name="linkLabelAttachNewIsoStore.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
   </data>
   <data name="&gt;&gt;linkLabelAttachNewIsoStore.Name" xml:space="preserve">
     <value>linkLabelAttachNewIsoStore</value>

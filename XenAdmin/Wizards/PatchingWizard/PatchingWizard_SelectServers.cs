@@ -238,7 +238,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             tooltipText = null;
 
-            if (!Helpers.PostStockholm(host))
+            if (!Helpers.Post82X(host))
             {
                 tooltipText = string.Format(Messages.PATCHINGWIZARD_SELECTSERVERPAGE_VERSION_UNSUPPORTED, BrandManager.BrandConsole);
                 return false;
@@ -391,7 +391,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 //Do RBAC check
                 foreach (Host coordinator in coordinators)
                 {
-                    if (!(Role.CanPerform(new RbacMethodList("pool_patch.apply"), coordinator.Connection)))
+                    if (!Role.CanPerform(new RbacMethodList("pool_patch.apply"), coordinator.Connection, out _))
                     {
                         string nameLabel = coordinator.Name();
                         Pool pool = Helpers.GetPoolOfOne(coordinator.Connection);

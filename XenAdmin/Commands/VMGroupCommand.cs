@@ -31,7 +31,6 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Forms;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
 using XenAPI;

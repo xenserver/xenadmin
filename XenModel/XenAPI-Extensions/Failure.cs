@@ -40,6 +40,7 @@ namespace XenAPI
     {
         public const string CANNOT_EVACUATE_HOST = "CANNOT_EVACUATE_HOST";
         public const string DEVICE_ALREADY_DETACHED = "DEVICE_ALREADY_DETACHED";
+        public const string DYNAMIC_MEMORY_CONTROL_UNAVAILABLE = "DYNAMIC_MEMORY_CONTROL_UNAVAILABLE";
         public const string HANDLE_INVALID = "HANDLE_INVALID";
         public const string HA_NO_PLAN = "HA_NO_PLAN";
         public const string HA_OPERATION_WOULD_BREAK_FAILOVER_PLAN = "HA_OPERATION_WOULD_BREAK_FAILOVER_PLAN";
@@ -91,6 +92,7 @@ namespace XenAPI
         public const string UPDATE_ALREADY_APPLIED = "UPDATE_ALREADY_APPLIED";
         public const string UPDATE_ALREADY_EXISTS = "UPDATE_ALREADY_EXISTS";
         public const string MEMORY_CONSTRAINT_VIOLATION = "MEMORY_CONSTRAINT_VIOLATION";
+        public const string VIF_NOT_IN_MAP = "VIF_NOT_IN_MAP";
 
         /// <summary>
         /// Changes a techy RBAC Failure into a pretty print one that shows the roles that would be required to complete the failed action.

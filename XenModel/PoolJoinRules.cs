@@ -524,7 +524,7 @@ namespace XenAdmin.Core
 
         private static bool RoleOK(IXenConnection connection)
         {
-            return Role.CanPerform(new RbacMethodList("pool.join"), connection);
+            return Role.CanPerform(new RbacMethodList("pool.join"), connection, out _);
         }
 
         private static bool DifferentNetworkBackends(Host supporter, Host coordinator)
