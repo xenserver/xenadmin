@@ -37241,6 +37241,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An error occurred when launching the downloaded installer. Please see the logs for more information..
+        /// </summary>
+        public static string UPDATE_CLIENT_FAILED_INSTALLER_LAUNCH {
+            get {
+                return ResourceManager.GetString("UPDATE_CLIENT_FAILED_INSTALLER_LAUNCH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The checksum of the downloaded installer does not match the expected value..
         /// </summary>
         public static string UPDATE_CLIENT_INVALID_CHECKSUM {

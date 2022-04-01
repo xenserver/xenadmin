@@ -31,7 +31,6 @@
 
 using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -60,9 +59,9 @@ namespace XenAdmin.Actions.Updates
         private Exception _updateDownloadError;
         private readonly string _checksum;
         private WebClient _client;
+        private FileStream _msiStream;
 
         public string ByteProgressDescription { get; set; }
-        public FileStream MsiStream { get; private set; }
 
         public DownloadAndUpdateClientAction(string updateName, Uri uri, string outputFileName, string checksum)
             : base(null, string.Format(Messages.DOWNLOAD_CLIENT_INSTALLER_ACTION_TITLE, updateName),
@@ -169,58 +168,61 @@ namespace XenAdmin.Actions.Updates
 
         protected override void Run()
         {
-            if (_downloadUpdate)
-            {
-                log.InfoFormat("Downloading '{0}' installer (from '{1}') to '{2}'", _updateName, _address, _outputPathAndFileName);
-                Description = string.Format(Messages.DOWNLOAD_CLIENT_INSTALLER_ACTION_DESCRIPTION, _updateName);
-                LogDescriptionChanges = false;
-                DownloadFile();
-                LogDescriptionChanges = true;
+            if (!_downloadUpdate)
+                return;
 
-                if (IsCompleted || Cancelled)
-                    return;
+            log.InfoFormat("Downloading '{0}' installer (from '{1}') to '{2}'", _updateName, _address, _outputPathAndFileName);
+            Description = string.Format(Messages.DOWNLOAD_CLIENT_INSTALLER_ACTION_DESCRIPTION, _updateName);
+            LogDescriptionChanges = false;
+            DownloadFile();
+            LogDescriptionChanges = true;
 
-                if (Cancelling)
-                    throw new CancelledException();
-            }
-        }
+            if (IsCompleted || Cancelled)
+                return;
 
-        public void InstallMsi()
-        {
+            if (Cancelling)
+                throw new CancelledException();
+
             if (!File.Exists(_outputPathAndFileName))
                 throw new Exception(Messages.DOWNLOAD_CLIENT_INSTALLER_MSI_NOT_FOUND);
 
-            // Install the msi            
-            try
-            {
-                ValidateMsi();
-                // Start the install process, it will handle closing of application.
-                Process.Start(_outputPathAndFileName);
-                log.DebugFormat("Update {0} found and install started", _updateName);
-            }
-            catch (Exception e)
-            {
-                if (File.Exists(_outputPathAndFileName))
-                    File.Delete(_outputPathAndFileName);
-
-                log.Error("Exception occurred when starting the installation process.", e);
-                throw;
-            }
-            finally
-            {
-                MsiStream?.Dispose();
-            }
+            ValidateMsi();
 
             Description = Messages.COMPLETED;
         }
 
+        protected override void CleanOnError()
+        {
+            ReleaseInstaller(true);
+        }
+
+        public void ReleaseInstaller(bool deleteMsi = false)
+        {
+            _msiStream?.Dispose();
+
+            if (!deleteMsi)
+                return;
+
+            try
+            {
+                if (File.Exists(_outputPathAndFileName))
+                    File.Delete(_outputPathAndFileName);
+            }
+            catch
+            {
+                //ignore
+            }
+        }
+
         private void ValidateMsi()
         {
-            MsiStream = new FileStream(_outputPathAndFileName, FileMode.Open, FileAccess.Read);
+            Description = Messages.UPDATE_CLIENT_VALIDATING_INSTALLER;
+
+            _msiStream = new FileStream(_outputPathAndFileName, FileMode.Open, FileAccess.Read);
 
             var calculatedChecksum = string.Empty; 
 
-            var hash = StreamUtilities.ComputeHash(MsiStream, out _);
+            var hash = StreamUtilities.ComputeHash(_msiStream, out _);
             if (hash != null)
                 calculatedChecksum = string.Join(string.Empty, hash.Select(b => $"{b:x2}"));
 
@@ -228,23 +230,20 @@ namespace XenAdmin.Actions.Updates
             if (!_checksum.Equals(calculatedChecksum, StringComparison.InvariantCultureIgnoreCase))
                 throw new Exception(Messages.UPDATE_CLIENT_INVALID_CHECKSUM );
 
-            bool valid = false;
+            bool valid;
             try
             {
                 // Check digital signature of .msi
                 using (var basicSigner = X509Certificate.CreateFromSignedFile(_outputPathAndFileName))
                 {
                     using (var cert = new X509Certificate2(basicSigner))
-                    {
                         valid = cert.Verify();
-                    }
                 }
             }
             catch (Exception e)
             {
                 throw new Exception(Messages.UPDATE_CLIENT_FAILED_CERTIFICATE_CHECK, e);
             }
-            
 
             if (!valid)
                 throw new Exception(Messages.UPDATE_CLIENT_INVALID_DIGITAL_CERTIFICATE);
