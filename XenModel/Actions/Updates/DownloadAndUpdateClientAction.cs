@@ -35,13 +35,12 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Net.Mime;
 using System.Net.NetworkInformation;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using XenCenterLib;
 
-namespace XenAdmin.Actions
+namespace XenAdmin.Actions.Updates
 {
     public class DownloadAndUpdateClientAction : AsyncAction, IByteProgressAction
     {
@@ -59,7 +58,7 @@ namespace XenAdmin.Actions
         private readonly bool _downloadUpdate;
         private DownloadState _updateDownloadState;
         private Exception _updateDownloadError;
-        private string _checksum;
+        private readonly string _checksum;
         private WebClient _client;
 
         public string ByteProgressDescription { get; set; }
@@ -223,7 +222,7 @@ namespace XenAdmin.Actions
 
             var hash = StreamUtilities.ComputeHash(MsiStream, out _);
             if (hash != null)
-                calculatedChecksum = string.Join("", hash.Select(b => $"{b:x2}"));
+                calculatedChecksum = string.Join(string.Empty, hash.Select(b => $"{b:x2}"));
 
             // Check if calculatedChecksum matches what is in chcupdates.xml
             if (!_checksum.Equals(calculatedChecksum, StringComparison.InvariantCultureIgnoreCase))

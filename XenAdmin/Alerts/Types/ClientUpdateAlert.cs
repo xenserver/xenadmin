@@ -31,11 +31,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Actions.GUIActions;
+using XenAdmin.Actions.Updates;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
 
@@ -133,7 +133,7 @@ namespace XenAdmin.Alerts
                 break;
             }
 
-            if (!currentTasks)
+            if (currentTasks)
             {
                 if (new Dialogs.WarningDialogs.CloseXenCenterWarningDialog(true).ShowDialog() != DialogResult.OK)
                     return;
