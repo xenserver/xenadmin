@@ -75,9 +75,7 @@ namespace XenAPI
             public override void GetObjectData(SerializationInfo info, StreamingContext context)
             {
                 if (info == null)
-                {
-                    throw new ArgumentNullException("info");
-                }
+                    throw new ArgumentNullException(nameof(info));
 
                 info.AddValue("redirect", redirect);
                 info.AddValue("uri", uri, typeof(Uri));
@@ -773,11 +771,21 @@ namespace XenAPI
         public static void Get(DataCopiedDelegate dataCopiedDelegate, FuncBool cancellingDelegate,
             Uri uri, IWebProxy proxy, string path, int timeoutMs)
         {
-            string tmpFile = Path.GetTempFileName();
+            var dir = Path.GetDirectoryName(path);
+            if (dir == null)
+            {
+                if (path == null)
+                    throw new ArgumentNullException(nameof(path));
+                throw new ArgumentException(nameof(path));
+            }
+
+            var tmpFile = Path.Combine(dir, Path.GetRandomFileName());
+            File.Delete(tmpFile);
+
             try
             {
                 using (Stream fileStream = new FileStream(tmpFile, FileMode.Create, FileAccess.Write, FileShare.None),
-                    downloadStream = HttpGetStream(uri, proxy, timeoutMs))
+                       downloadStream = HttpGetStream(uri, proxy, timeoutMs))
                 {
                     CopyStream(downloadStream, fileStream, dataCopiedDelegate, cancellingDelegate);
                     fileStream.Flush();
