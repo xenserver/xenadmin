@@ -189,10 +189,8 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 throw new Exception(Messages.ACTION_UPLOADPATCHTOCOORDINATORPLANACTION_FAILED);
             }
 
-            var newMapping = new PoolUpdateMapping(xenServerPatch, poolUpdate, Helpers.GetCoordinator(conn))
-            {
-                SrsWithUploadedUpdatesPerHost = new Dictionary<Host, SR>(uploadIsoAction.SrsWithUploadedUpdatesPerHost)
-            };
+            var newMapping = new PoolUpdateMapping(xenServerPatch, poolUpdate, Helpers.GetCoordinator(conn),
+                new Dictionary<Host, SR>(uploadIsoAction.SrsWithUploadedUpdatesPerHost));
 
             if (!mappings.Contains(newMapping))
                 mappings.Add(newMapping);
@@ -263,11 +261,8 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                     suppPackVdis.Add(kvp.Key, vdi);
             }
 
-            var newMapping = new SuppPackMapping(updateFilePath, poolUpdate, Helpers.GetCoordinator(conn))
-            {
-                SrsWithUploadedUpdatesPerHost = new Dictionary<Host, SR>(uploadIsoAction.SrsWithUploadedUpdatesPerHost),
-                SuppPackVdis = suppPackVdis
-            };
+            var newMapping = new SuppPackMapping(updateFilePath, poolUpdate, Helpers.GetCoordinator(conn),
+                new Dictionary<Host, SR>(uploadIsoAction.SrsWithUploadedUpdatesPerHost), suppPackVdis);
 
             if (!mappings.Contains(newMapping))
                 mappings.Add(newMapping);

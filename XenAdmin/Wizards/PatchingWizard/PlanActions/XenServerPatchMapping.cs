@@ -40,11 +40,12 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
     public abstract class HostUpdateMapping
     {
         protected readonly Host CoordinatorHost;
-        public List<string> HostsThatNeedEvacuated = new List<string>();
+        public readonly List<string> HostsThatNeedEvacuation;
 
-        protected HostUpdateMapping(Host coordinatorHost)
+        protected HostUpdateMapping(Host coordinatorHost, List<string> hostsThatNeedEvacuation)
         {
-            CoordinatorHost = coordinatorHost ?? throw new ArgumentNullException("coordinatorHost");
+            CoordinatorHost = coordinatorHost ?? throw new ArgumentNullException(nameof(coordinatorHost));
+            HostsThatNeedEvacuation = hostsThatNeedEvacuation ?? new List<string>();
         }
 
         protected bool Matches(Host coordinatorHost)
@@ -64,7 +65,10 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
         public abstract bool IsValid { get; }
 
-        public abstract void RefreshUpdate();
+        /// <summary>
+        /// Refresh the update/patch record based on uuid
+        /// </summary>
+        public abstract HostUpdateMapping RefreshUpdate();
     }
 
     
@@ -72,10 +76,10 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
     {
         public readonly XenServerPatch XenServerPatch;
 
-        protected XenServerPatchMapping(XenServerPatch xenServerPatch, Host coordinatorHost)
-            : base(coordinatorHost)
+        protected XenServerPatchMapping(XenServerPatch xenServerPatch, Host coordinatorHost, List<string> hostsThatNeedEvacuation)
+            : base(coordinatorHost, hostsThatNeedEvacuation)
         {
-            XenServerPatch = xenServerPatch ?? throw new ArgumentNullException("xenServerPatch");
+            XenServerPatch = xenServerPatch ?? throw new ArgumentNullException(nameof(xenServerPatch));
         }
 
         public bool Matches(Host coordinatorHost, XenServerPatch xenServerPatch)
@@ -97,12 +101,12 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
     public class PoolPatchMapping : XenServerPatchMapping
     {
-        public Pool_patch Pool_patch;
+        public readonly Pool_patch Pool_patch;
 
-        public PoolPatchMapping(XenServerPatch xenServerPatch, Pool_patch pool_patch, Host coordinatorHost)
-            : base(xenServerPatch, coordinatorHost)
+        public PoolPatchMapping(XenServerPatch xenServerPatch, Pool_patch poolPatch, Host coordinatorHost, List<string> hostsThatNeedEvacuation = null)
+            : base(xenServerPatch, coordinatorHost, hostsThatNeedEvacuation)
         {
-            Pool_patch = pool_patch ?? throw new ArgumentNullException("pool_patch");
+            Pool_patch = poolPatch ?? throw new ArgumentNullException(nameof(poolPatch));
         }
 
         public bool Matches(Host coordinatorHost, XenServerPatch xenServerPatch, Pool_patch patch )
@@ -126,27 +130,33 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             get { return Pool_patch != null && Pool_patch.opaque_ref != null; }
         }
 
-        public override void RefreshUpdate()
+        public override HostUpdateMapping RefreshUpdate()
         {
             if (Pool_patch != null)
             {
-                var patch = CoordinatorHost.Connection?.Cache.Pool_patches.FirstOrDefault(u => string.Equals(u.uuid, Pool_patch.uuid, StringComparison.OrdinalIgnoreCase));
+                var patch = CoordinatorHost.Connection?.Cache.Pool_patches.FirstOrDefault(u =>
+                    string.Equals(u.uuid, Pool_patch.uuid, StringComparison.OrdinalIgnoreCase));
+
                 if (patch != null && patch.opaque_ref != Pool_patch.opaque_ref)
-                    Pool_patch = patch;
+                    return new PoolPatchMapping(XenServerPatch, patch, CoordinatorHost, HostsThatNeedEvacuation);
             }
+
+            return this;
         }
     }
 
     
     public class PoolUpdateMapping : XenServerPatchMapping
     {
-        public Pool_update Pool_update;
-        public Dictionary<Host, SR> SrsWithUploadedUpdatesPerHost = new Dictionary<Host, SR>();
+        public readonly Pool_update Pool_update;
+        public readonly Dictionary<Host, SR> SrsWithUploadedUpdatesPerHost;
 
-        public PoolUpdateMapping(XenServerPatch xenServerPatch, Pool_update pool_update, Host coordinatorHost)
-            : base(xenServerPatch, coordinatorHost)
+        public PoolUpdateMapping(XenServerPatch xenServerPatch, Pool_update poolUpdate, Host coordinatorHost,
+            Dictionary<Host, SR> srsWithUploadedUpdatesPerHost, List<string> hostsThatNeedEvacuation = null)
+            : base(xenServerPatch, coordinatorHost, hostsThatNeedEvacuation)
         {
-            Pool_update = pool_update ?? throw new ArgumentNullException("pool_update");
+            Pool_update = poolUpdate ?? throw new ArgumentNullException(nameof(poolUpdate));
+            SrsWithUploadedUpdatesPerHost = srsWithUploadedUpdatesPerHost ?? new Dictionary<Host, SR>();
         }
 
         public bool Matches(Host coordinatorHost, XenServerPatch xenServerPatch, Pool_update update)
@@ -170,17 +180,19 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             get { return Pool_update != null && Pool_update.opaque_ref != null; }
         }
 
-        public override void RefreshUpdate()
+        public override HostUpdateMapping RefreshUpdate()
         {
             if (Pool_update != null)
             {
-                var update = Pool_update.Connection?.Cache.Pool_updates.FirstOrDefault(u => string.Equals(u.uuid, Pool_update.uuid, StringComparison.OrdinalIgnoreCase));
+                var update = Pool_update.Connection?.Cache.Pool_updates.FirstOrDefault(u =>
+                    string.Equals(u.uuid, Pool_update.uuid, StringComparison.OrdinalIgnoreCase));
+
                 if (update != null && update.opaque_ref != Pool_update.opaque_ref)
-                {
-                    Pool_update = update;
-                }
+                    return new PoolUpdateMapping(XenServerPatch, update, CoordinatorHost,
+                        SrsWithUploadedUpdatesPerHost, HostsThatNeedEvacuation);
             }
-            
+
+            return this;
         }
     }
 
@@ -188,12 +200,12 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
     public class OtherLegacyMapping : HostUpdateMapping
     {
         public readonly string Path;
-        public Pool_patch Pool_patch;
+        public readonly Pool_patch Pool_patch;
 
-        public OtherLegacyMapping(string path, Pool_patch pool_patch, Host coordinatorHost)
-            : base(coordinatorHost)
+        public OtherLegacyMapping(string path, Pool_patch pool_patch, Host coordinatorHost, List<string> hostsThatNeedEvacuation = null)
+            : base(coordinatorHost, hostsThatNeedEvacuation)
         {
-            Path = !string.IsNullOrEmpty(path) ? path : throw new ArgumentNullException("path");
+            Path = !string.IsNullOrEmpty(path) ? path : throw new ArgumentNullException(nameof(path));
             Pool_patch = pool_patch;
         }
 
@@ -230,14 +242,18 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             }
         }
 
-        public override void RefreshUpdate()
+        public override HostUpdateMapping RefreshUpdate()
         {
             if (Pool_patch != null)
             {
-                var patch = CoordinatorHost.Connection?.Cache.Pool_patches.FirstOrDefault(u => string.Equals(u.uuid, Pool_patch.uuid, StringComparison.OrdinalIgnoreCase));
+                var patch = CoordinatorHost.Connection?.Cache.Pool_patches.FirstOrDefault(u =>
+                    string.Equals(u.uuid, Pool_patch.uuid, StringComparison.OrdinalIgnoreCase));
+
                 if (patch != null && patch.opaque_ref != Pool_patch.opaque_ref)
-                    Pool_patch = patch;
+                    return new OtherLegacyMapping(Path, patch, CoordinatorHost, HostsThatNeedEvacuation);
             }
+
+            return this;
         }
     }
 
@@ -245,15 +261,19 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
     public class SuppPackMapping : HostUpdateMapping
     {
         public readonly string Path;
-        public Pool_update Pool_update;
-        public Dictionary<Host, SR> SrsWithUploadedUpdatesPerHost = new Dictionary<Host, SR>();
-        public Dictionary<Host, VDI> SuppPackVdis = new Dictionary<Host, VDI>();
+        public readonly Pool_update Pool_update;
+        public readonly Dictionary<Host, SR> SrsWithUploadedUpdatesPerHost;
+        public readonly Dictionary<Host, VDI> SuppPackVdis;
 
-        public SuppPackMapping(string path, Pool_update pool_update, Host coordinatorHost)
-            : base(coordinatorHost)
+        public SuppPackMapping(string path, Pool_update poolUpdate, Host coordinatorHost,
+            Dictionary<Host, SR> srsWithUploadedUpdatesPerHost, Dictionary<Host, VDI> suppPackVdis,
+            List<string> hostsThatNeedEvacuation = null)
+            : base(coordinatorHost, hostsThatNeedEvacuation)
         {
-            Path = !string.IsNullOrEmpty(path) ? path : throw new ArgumentNullException("path");
-            Pool_update = pool_update;
+            Path = !string.IsNullOrEmpty(path) ? path : throw new ArgumentNullException(nameof(path));
+            Pool_update = poolUpdate;
+            SrsWithUploadedUpdatesPerHost = srsWithUploadedUpdatesPerHost ?? new Dictionary<Host, SR>();
+            SuppPackVdis = suppPackVdis ?? new Dictionary<Host, VDI>();
         }
 
         public bool Matches(Host coordinatorHost, string path, Pool_update update = null)
@@ -289,14 +309,19 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             }
         }
 
-        public override void RefreshUpdate()
+        public override HostUpdateMapping RefreshUpdate()
         {
             if (Pool_update != null)
             {
-                var update = CoordinatorHost.Connection?.Cache.Pool_updates.FirstOrDefault(u => string.Equals(u.uuid, Pool_update.uuid, StringComparison.OrdinalIgnoreCase));
+                var update = CoordinatorHost.Connection?.Cache.Pool_updates.FirstOrDefault(u =>
+                    string.Equals(u.uuid, Pool_update.uuid, StringComparison.OrdinalIgnoreCase));
+
                 if (update != null && update.opaque_ref != Pool_update.opaque_ref)
-                    Pool_update = update;
+                    return new SuppPackMapping(Path, update, CoordinatorHost, SrsWithUploadedUpdatesPerHost,
+                        SuppPackVdis, HostsThatNeedEvacuation);
             }
+
+            return this;
         }
     }
 }

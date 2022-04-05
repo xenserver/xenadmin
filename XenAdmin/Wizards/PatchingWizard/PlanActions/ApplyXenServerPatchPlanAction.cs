@@ -53,7 +53,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         protected override void RunWithSession(ref Session session)
         {
             var coordinator = Helpers.GetCoordinator(Connection);
-            var mapping = (from HostUpdateMapping hum in mappings
+            HostUpdateMapping mapping = (from HostUpdateMapping hum in mappings
                 let xpm = hum as XenServerPatchMapping
                 where xpm != null && xpm.Matches(coordinator, xenServerPatch)
                 select xpm).FirstOrDefault();
@@ -70,13 +70,16 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             try
             {
                 // evacuate the host, if needed, before applying the update
-                if (mapping.HostsThatNeedEvacuated.Contains(host.uuid))
+                if (mapping.HostsThatNeedEvacuation.Contains(host.uuid))
                     EvacuateHost(ref session);
 
                 AddProgressStep(string.Format(Messages.UPDATES_WIZARD_APPLYING_UPDATE, xenServerPatch.Name,
                     host.Name()));
 
-                PatchPrecheckOnHostPlanAction.RefreshUpdate(host, mapping, session);
+                if (mapping is PoolUpdateMapping pum)
+                    PatchPrecheckOnHostPlanAction.ReIntroducePoolUpdate(host, pum.Pool_update, session);
+
+                mapping = mapping.RefreshUpdate();
 
                 XenRef<Task> task = null;
 
