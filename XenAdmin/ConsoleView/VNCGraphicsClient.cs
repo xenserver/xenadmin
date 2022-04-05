@@ -52,18 +52,15 @@ namespace XenAdmin.ConsoleView
 
         private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public event Action<object, Exception> ErrorOccurred = null;
-        public event EventHandler ConnectionSuccess = null;
-        private VNCStream vncStream = null;
+        public event Action<object, Exception> ErrorOccurred;
+        public event EventHandler ConnectionSuccess;
+        private VNCStream vncStream;
 
         /// <summary>
         /// connected implies that vncStream is non-null and ready to be used.
         /// </summary>
-        private volatile bool connected = false;
-        public bool Connected
-        {
-            get { return connected; }
-        }
+        private volatile bool connected;
+        public bool Connected => connected;
 
         /// <summary>
         /// terminated means that we have been told to disconnect.  connected starts off false, becomes
@@ -71,11 +68,8 @@ namespace XenAdmin.ConsoleView
         /// whatever reason.  In contrast, terminated may become true even before a connection has been
         /// made.
         /// </summary>
-        private volatile bool terminated = false;
-        public bool Terminated
-        {
-            get { return terminated; }
-        }
+        private volatile bool terminated;
+        public bool Terminated => terminated;
 
         private CustomCursor RemoteCursor;
         private CustomCursor LocalCursor = new CustomCursor(Images.StaticImages.vnc_local_cursor, 2, 2);
@@ -85,77 +79,57 @@ namespace XenAdmin.ConsoleView
         /// It is set in the constructor below, and then there is a delicate handover during desktop
         /// resize to keep this safe.
         /// </summary>
-        private Bitmap backBuffer = null;
+        private Bitmap backBuffer;
 
         /// <summary>
         /// The contents of the backbuffer are interesting if the backbuffer has been drawn to,
         /// and we will present them to the user even after disconnect (if they are not interesting
         /// we just show a blank rectangle instead).
         /// </summary>
-        private volatile bool backBufferInteresting = false;
+        private volatile bool backBufferInteresting;
 
         /// <summary>
         /// A Graphics object onto backBuffer.  Access to this field must always be locked under backBuffer.
         /// This field will be set to null in Dispose.
         /// </summary>
-        private Graphics backGraphics = null;
+        private Graphics backGraphics;
 
         /// <summary>
         /// Graphics on actual screen.  Access to this field must always be locked under backBuffer.
         /// This field will be set to null in Dispose.
         /// </summary>
-        private Graphics frontGraphics = null;
+        private Graphics frontGraphics;
 
-        private Object mouseEventLock = new Object();
+        private object mouseEventLock = new object();
 
         private Rectangle damage = Rectangle.Empty;
 
         private float scale;
         private float dx;
         private float dy;
-        private float oldDx = 0;
-        private float oldDy = 0;
+        private float oldDx;
+        private float oldDy;
         private int Bump;
-        private bool scaling = false;
+        private bool scaling;
         private bool sendScanCodes = true;
-        private bool useSource = false;
+        private bool useSource;
 
         public bool UseSource
         {
-            set
-            {
-                useSource = value;
-            }
+            set => useSource = value;
         }
 
-        public bool talkingToVNCTerm
-        {
-            get
-            {
-                return !sendScanCodes && useSource;
-            }
-        }
+        public bool talkingToVNCTerm => !sendScanCodes && useSource;
 
-        public string UUID
-        {
-            get { return sourceVM.uuid; }
-        }
+        public string UUID => SourceVM.uuid;
 
-        private XenAPI.VM sourceVM;
-        public XenAPI.VM SourceVM
-        {
-            get { return sourceVM; }
-            set { sourceVM = value; }
-        }
+        public XenAPI.VM SourceVM { get; set; }
 
-        public string VmName
-        {
-            get { return sourceVM.name_label; }
-        }
+        public string VmName => SourceVM.name_label;
 
         public object Console;
 
-        public event EventHandler DesktopResized = null;
+        public event EventHandler DesktopResized;
 
         public bool UseQemuExtKeyEncoding { set; private get; }
 
@@ -169,10 +143,10 @@ namespace XenAdmin.ConsoleView
             SetStyle(ControlStyles.Opaque, false);
 
             frontGraphics = CreateGraphics();
-            setupGraphicsOptions(frontGraphics);
+            SetupGraphicsOptions(frontGraphics);
             backBuffer = new Bitmap(640, 480, frontGraphics);
             backGraphics = Graphics.FromImage(backBuffer);
-            setupGraphicsOptions(backGraphics);
+            SetupGraphicsOptions(backGraphics);
             using (SolidBrush backBrush = new SolidBrush(BackColor))
             {
                 backGraphics.FillRectangle(backBrush, 0, 0, 640, 480);
@@ -187,7 +161,7 @@ namespace XenAdmin.ConsoleView
             parent.Controls.Add(this);
         }
 
-        private static void setupGraphicsOptions(Graphics g)
+        private static void SetupGraphicsOptions(Graphics g)
         {
             g.CompositingQuality = CompositingQuality.AssumeLinear;
             g.InterpolationMode = InterpolationMode.Default;
@@ -226,15 +200,15 @@ namespace XenAdmin.ConsoleView
             }
         }
 
-        internal void connect(Stream stream, char[] password)
+        internal void Connect(Stream stream, char[] password)
         {
             Program.AssertOnEventThread();
 
-            this.vncStream = new VNCStream(this, stream, helperIsPaused);
-            this.vncStream.ErrorOccurred += this.OnError;
-            this.vncStream.ConnectionSuccess += this.vncStream_ConnectionSuccess;
-            this.connected = true;
-            this.vncStream.connect(password);
+            vncStream = new VNCStream(this, stream, helperIsPaused);
+            vncStream.ErrorOccurred += OnError;
+            vncStream.ConnectionSuccess += vncStream_ConnectionSuccess;
+            connected = true;
+            vncStream.connect(password);
         }
 
         private void vncStream_ConnectionSuccess(object sender, EventArgs e)
@@ -256,15 +230,12 @@ namespace XenAdmin.ConsoleView
             if (sender != vncStream)
                 return;
             
-            this.connected = false;
+            connected = false;
             if (ErrorOccurred != null)
                 ErrorOccurred(this, e);
         }
 
-        /// <summary>
-        /// Nothrow guarantee.
-        /// </summary>
-        public void Disconnect()
+        private void Disconnect()
         {
             connected = false;
             terminated = true;
@@ -275,19 +246,17 @@ namespace XenAdmin.ConsoleView
             } 
             VNCStream s = vncStream;
             vncStream = null;
-            if (s != null)
-            {
-                s.Close();
-            }
+            s?.Close();
         }
 
         private bool RedirectingClipboard()
         {
-            return XenAdmin.Properties.Settings.Default.ClipboardAndPrinterRedirection;
+            return Properties.Settings.Default.ClipboardAndPrinterRedirection;
         }
 
-        private static bool handlingChange = false;
-        private bool updateClipboardOnFocus = false;
+        private static bool handlingChange;
+        private bool updateClipboardOnFocus;
+
         private void ClipboardChanged(object sender, EventArgs args)
         {
             Program.AssertOnEventThread();
@@ -300,12 +269,12 @@ namespace XenAdmin.ConsoleView
                 if (!handlingChange && connected)
                 {
                     if (Focused)
-                        setConsoleClipboard();
+                        SetConsoleClipboard();
                     else
                         updateClipboardOnFocus = true;
                 }
             }
-            catch (System.IO.IOException)
+            catch (IOException)
             {
                 // The server's gone away -- that's fine.
             }
@@ -316,7 +285,7 @@ namespace XenAdmin.ConsoleView
             }
         }
 
-        private void setConsoleClipboard()
+        private void SetConsoleClipboard()
         {
             try
             {
@@ -347,13 +316,13 @@ namespace XenAdmin.ConsoleView
                 r.Inflate(Bump, Bump); // Fix for scaling issues
             }
 
-            if (this.damage.IsEmpty)
+            if (damage.IsEmpty)
             {
-                this.damage = r;
+                damage = r;
             }
             else
             {
-                this.damage = Rectangle.Union(this.damage, r);
+                damage = Rectangle.Union(damage, r);
             }
         }
 
@@ -371,7 +340,6 @@ namespace XenAdmin.ConsoleView
         {
             Program.AssertOffEventThread();
 
-            //GraphicsUtils.startTime();
             Damage(x, y, width, height);
             lock (backBuffer)
             {
@@ -382,7 +350,7 @@ namespace XenAdmin.ConsoleView
                 }
                 catch (Exception e)
                 {
-                    // We seem to be very occasionally getting wierd exception from this.  These are probably due to
+                    // We seem to be very occasionally getting weird exception from this.  These are probably due to
                     // bad server messages, so we can just log and ignore them
 
                     Log.Error("Error drawing image from server", e);
@@ -400,11 +368,8 @@ namespace XenAdmin.ConsoleView
                     {
                         // ignored
                     }
-
-                    return;
                 }
             }
-            //GraphicsUtils.endTime("drawImage");
         }
 
         #endregion
@@ -432,7 +397,7 @@ namespace XenAdmin.ConsoleView
 
         class CustomCursor : IDisposable
         {
-            private Cursor cursor = null;
+            private Cursor cursor ;
             private IntPtr handle = IntPtr.Zero;
 
             internal CustomCursor(Bitmap bitmap, int x, int y)
@@ -476,24 +441,20 @@ namespace XenAdmin.ConsoleView
                 }
             }
 
-            public Cursor Cursor
-            {
-                get { return cursor; }
-            }
+            public Cursor Cursor => cursor;
         }
 
         public void ClientSetCursor(Bitmap image, int x, int y, int width, int height)
         {
             Program.AssertOffEventThread();
 
-            if (RemoteCursor != null)
-                RemoteCursor.Dispose();
+            RemoteCursor?.Dispose();
             RemoteCursor = new CustomCursor(image, x, y);
 
-            Program.Invoke(this, delegate()
+            Program.Invoke(this, () =>
             {
                 if (cursorOver)
-                    this.Cursor = RemoteCursor.Cursor;
+                    Cursor = RemoteCursor.Cursor;
             });
         }
 
@@ -503,21 +464,18 @@ namespace XenAdmin.ConsoleView
         {
             Program.AssertOffEventThread();
 
-            //GraphicsUtils.startTime();
             Damage(dx, dy, width, height);
             lock (backBuffer)
             {
                 if (backGraphics != null)
                     GraphicsUtils.copyRect(backBuffer, x, y, width, height, backGraphics, dx, dy);
             }
-            //GraphicsUtils.endTime("copyRectangle");
         }
 
         public void ClientFillRectangle(int x, int y, int width, int height, Color color)
         {
             Program.AssertOffEventThread();
 
-            //GraphicsUtils.startTime();
             Damage(x, y, width, height);
             lock (backBuffer)
             {
@@ -529,14 +487,12 @@ namespace XenAdmin.ConsoleView
                     }
                 }
             }
-            //GraphicsUtils.endTime("FillRect");
         }
 
         public void ClientFrameBufferUpdate()
         {
             Program.AssertOffEventThread();
 
-            //GraphicsUtils.startTime();
             lock (backBuffer)
             {
                 try
@@ -557,21 +513,20 @@ namespace XenAdmin.ConsoleView
             }
 
             /*
-             * If theres a pending mouse event, send it.
+             * If there is a pending mouse event, send it.
              * Also reset the mouse event counters
              */
-            lock (this.mouseEventLock)
+            lock (mouseEventLock)
             {
-                if (this.pending != null)
+                if (pending != null)
                 {
-                    mouseEvent(this.pendingState, this.pending.X, this.pending.Y);
-                    this.pending = null;
+                    MouseEvent(pendingState, pending.X, pending.Y);
+                    pending = null;
                 }
 
-                this.mouseMoved = 0;
-                this.mouseNotMoved = 0;
+                mouseMoved = 0;
+                mouseNotMoved = 0;
             }
-            //GraphicsUtils.endTime("franeBufferUpdate");
         }
 
         public void ClientBell()
@@ -593,7 +548,7 @@ namespace XenAdmin.ConsoleView
             {
                 if (!RedirectingClipboard())
                     return;
-                Program.Invoke(this, delegate()
+                Program.Invoke(this, () =>
                 {
                     if (Clipboard.ContainsText() && Clipboard.GetText() == text)
                         return;
@@ -616,9 +571,9 @@ namespace XenAdmin.ConsoleView
             // Cannot do an invoke with a locked back buffer, as it may event thread
             // (onPaint) tried to lock back buffer as well - therefore deadlock.
 
-            Program.Invoke(this, delegate()
+            Program.Invoke(this, () =>
             {
-                Bitmap old_back_buffer;
+                Bitmap oldBackBuffer;
                 lock (backBuffer)
                 {
                     if (width <= 0)
@@ -632,17 +587,17 @@ namespace XenAdmin.ConsoleView
                         return;
                     }
 
-                    old_back_buffer = backBuffer;
+                    oldBackBuffer = backBuffer;
 
                     backGraphics.Dispose();
                     frontGraphics.Dispose();
 
                     frontGraphics = CreateGraphics();
-                    setupGraphicsOptions(frontGraphics);
+                    SetupGraphicsOptions(frontGraphics);
 
                     Bitmap new_back_buffer = new Bitmap(width, height, frontGraphics);
                     backGraphics = Graphics.FromImage(new_back_buffer);
-                    setupGraphicsOptions(backGraphics);
+                    SetupGraphicsOptions(backGraphics);
 
                     using (SolidBrush backBrush = new SolidBrush(BackColor))
                     {
@@ -664,7 +619,7 @@ namespace XenAdmin.ConsoleView
                 Invalidate();
                 Update();
 
-                old_back_buffer.Dispose();
+                oldBackBuffer.Dispose();
 
                 OnDesktopResized();
             });
@@ -678,18 +633,15 @@ namespace XenAdmin.ConsoleView
                 DesktopResized(this, null);
         }
 
-        /**
-         * Overridden Events
-         */
         protected override void OnScroll(ScrollEventArgs se)
         {
             base.OnScroll(se);
 
-            if (!this.scaling && se.OldValue != se.NewValue)
+            if (!scaling && se.OldValue != se.NewValue)
             {
                 if (se.ScrollOrientation == ScrollOrientation.HorizontalScroll)
                 {
-                    dx = (-1 * se.NewValue) + (displayBorder ? BORDER_PADDING : 0);
+                    dx = -1 * se.NewValue + (displayBorder ? BORDER_PADDING : 0);
                     lock (backBuffer)
                     {
                         if (frontGraphics != null)
@@ -737,14 +689,13 @@ namespace XenAdmin.ConsoleView
 
         protected override void OnPaintBackground(PaintEventArgs e)
         {
-            //base.OnPaintBackground(e);
+            //do nothing
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
             Program.AssertOnEventThread();
 
-            //base.OnPaint(e);
             if (this.connected || backBufferInteresting)
             {
                 /*
@@ -754,17 +705,15 @@ namespace XenAdmin.ConsoleView
 
                 // Draw two vertical bars at either end
 
-                int w = (int)dx;//Math.Max(displayBorder ? BORDER_PADDING : 0,(int)Math.Ceiling((this.Size.Width - (this.DesktopSize.Width * this.scale)) / 2));
+                int w = (int)dx;
 
                 Graphics g = e.Graphics;
 
-                //GraphicsUtils.startTime();
                 lock (backBuffer)
                 {
                     if (frontGraphics != null)
                         frontGraphics.DrawImageUnscaled(backBuffer, 0, 0);
                 }
-                //GraphicsUtils.endTime("OnPaint");
 
                 if (w > 0)
                     MyPaintBackground(g, 0, 0, w + 1, ClientSize.Height);
@@ -785,14 +734,6 @@ namespace XenAdmin.ConsoleView
 
                 if (h > 0)
                     MyPaintBackground(g, 0, ClientSize.Height - h, Size.Width, h);
-
-                /*
-                 * Draw the focus rect
-                 */
-                /*if (Focused)
-                {
-                    DrawFocusRect(e);
-                }*/
             }
             else
             {
@@ -814,47 +755,47 @@ namespace XenAdmin.ConsoleView
                 if (frontGraphics != null)
                     frontGraphics.Dispose();
                 frontGraphics = CreateGraphics();
-                setupGraphicsOptions(frontGraphics);
+                SetupGraphicsOptions(frontGraphics);
                 SetupScaling();
 
                 // We don't need to redraw, as the window will repaint us
             }
         }
 
-        private int currentMouseState = 0;
+        private int currentMouseState;
         /*
          * We're going to track how many moves we have between screen updates 
          * to stop the mouse running away with long updates.
          * Unfortunately we sometimes seem to send moves and get no update
          * back, so we cap the number of 'dropped' moves.
          */
-        private volatile int mouseMoved = 0;
-        private volatile int mouseNotMoved = 0;
+        private volatile int mouseMoved;
+        private volatile int mouseNotMoved;
 
         private const int MOUSE_EVENTS_BEFORE_UPDATE = 2;
         private const int MOUSE_EVENTS_DROPPED = 5; // should this be proportional to bandwidth?
 
-        private MouseEventArgs pending = null;
-        private int pendingState = 0;
-        private bool cursorOver = false;
+        private MouseEventArgs pending ;
+        private int pendingState;
+        private bool cursorOver;
 
-        private int last_state = 0;
+        private int last_state;
 
-        private void mouseEvent(int state, int x, int y)
+        private void MouseEvent(int state, int x, int y)
         {
-            DoIfConnected(delegate()
+            DoIfConnected(() =>
             {
                 if (talkingToVNCTerm && last_state == 4 && state == 0)
                 {
                     ShowPopupMenu(x, y);
                 }
-                else if (this.scaling)
+                else if (scaling)
                 {
-                    this.vncStream.pointerEvent(state, (int)((x - dx) / this.scale), (int)((y - dy) / this.scale));
+                    vncStream.pointerEvent(state, (int)((x - dx) / scale), (int)((y - dy) / scale));
                 }
                 else
                 {
-                    this.vncStream.pointerEvent(state, x - (int)dx, y - (int)dy);
+                    vncStream.pointerEvent(state, x - (int)dx, y - (int)dy);
                 }
 
                 last_state = state;
@@ -871,7 +812,7 @@ namespace XenAdmin.ConsoleView
             copyItem.Click += copyItem_Click;
 
             popupMenu.Items.Add(copyItem);
-            if (sourceVM != null && sourceVM.power_state == XenAPI.vm_power_state.Running)
+            if (SourceVM != null && SourceVM.power_state == XenAPI.vm_power_state.Running)
             {
                 ToolStripMenuItem pasteItem = new ToolStripMenuItem(Messages.PASTE);
                 pasteItem.Image = Images.StaticImages.paste_16;
@@ -882,7 +823,7 @@ namespace XenAdmin.ConsoleView
             popupMenu.Show(this, x, y);
         }
 
-        void copyItem_Click(object sender, EventArgs e)
+        private void copyItem_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Trace.Assert(talkingToVNCTerm);
             Program.AssertOnEventThread();
@@ -892,7 +833,7 @@ namespace XenAdmin.ConsoleView
             }
         }
 
-        void pasteItem_Click(object sender, EventArgs e)
+        private void pasteItem_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Trace.Assert(talkingToVNCTerm);
             Program.AssertOnEventThread();
@@ -900,17 +841,17 @@ namespace XenAdmin.ConsoleView
             if (Clipboard.ContainsText())
             {
                 vncStream.clientCutText(Clipboard.GetText().Replace("\r\n", "\n"));
-                mouseEvent(2, 0, 0);
-                mouseEvent(0, 0, 0);
+                MouseEvent(2, 0, 0);
+                MouseEvent(0, 0, 0);
             }
         }
 
-        public void DisableMenuShortcuts()
+        private void DisableMenuShortcuts()
         {
             Program.MainWindow.MenuShortcutsEnabled = false;
         }
 
-        public void EnableMenuShortcuts()
+        private void EnableMenuShortcuts()
         {
             Program.MainWindow.MenuShortcutsEnabled = true;
         }
@@ -928,10 +869,7 @@ namespace XenAdmin.ConsoleView
             }
 
             if (updateClipboardOnFocus)
-                setConsoleClipboard();
-
-            /*Invalidate();
-            Update();*/
+                SetConsoleClipboard();
         }
 
         protected override void OnLostFocus(EventArgs e)
@@ -948,7 +886,7 @@ namespace XenAdmin.ConsoleView
             Cursor = Cursors.Default;
 
             //Release any held keys
-            DoIfConnected(delegate()
+            DoIfConnected(() =>
             {
                 foreach (Keys key in pressedKeys)
                 {
@@ -964,11 +902,8 @@ namespace XenAdmin.ConsoleView
                 }
             });
 
-            this.pressedKeys = new Set<Keys>();
-            this.pressedScans = new Set<int>();
-
-            /*Invalidate();
-            Update();*/
+            pressedKeys = new Set<Keys>();
+            pressedScans = new Set<int>();
         }
 
         protected override void OnMouseMove(MouseEventArgs e)
@@ -993,49 +928,48 @@ namespace XenAdmin.ConsoleView
                     else
                         Cursor = RemoteCursor.Cursor;
 
-                    lock (this.mouseEventLock)
+                    lock (mouseEventLock)
                     {
-                        if (this.mouseMoved < MOUSE_EVENTS_BEFORE_UPDATE)
+                        if (mouseMoved < MOUSE_EVENTS_BEFORE_UPDATE)
                         {
-                            this.mouseMoved++;
+                            mouseMoved++;
 
-                            mouseEvent(currentMouseState, e.X, e.Y);
+                            MouseEvent(currentMouseState, e.X, e.Y);
                         }
-                        else if (this.mouseNotMoved > MOUSE_EVENTS_DROPPED)
+                        else if (mouseNotMoved > MOUSE_EVENTS_DROPPED)
                         {
-                            this.mouseMoved = 0;
-                            this.mouseNotMoved = 0;
+                            mouseMoved = 0;
+                            mouseNotMoved = 0;
                         }
                         else
                         {
-                            this.mouseNotMoved++;
+                            mouseNotMoved++;
 
-                            this.pendingState = currentMouseState;
-                            this.pending = e;
+                            pendingState = currentMouseState;
+                            pending = e;
                         }
                     }
                 }
                 else
                 {
                     cursorOver = false;
-
                     Cursor = Cursors.Default;
                 }
             }
         }
 
-        /*
-         * We're not going to buffer any clicks etc.
-         * Don't forget to clear any pending moves.
-         */
+        /// <summary>
+        /// We're not going to buffer any clicks etc.
+        /// Don't forget to clear any pending moves.
+        /// </summary>
         protected override void OnMouseDown(MouseEventArgs e)
         {
             //added this line to track mouse clicks for automatic switch to RDP
-            //if there are any issues with focu start looking here
+            //if there are any issues with focus start looking here
             base.OnMouseDown(e);
-            this.Focus();
+            Focus();
 
-            this.pending = null;
+            pending = null;
             switch (e.Button)
             {
                 case MouseButtons.Left:
@@ -1048,12 +982,12 @@ namespace XenAdmin.ConsoleView
                     currentMouseState |= 2;
                     break;
             }
-            mouseEvent(currentMouseState, e.X, e.Y);
+            MouseEvent(currentMouseState, e.X, e.Y);
         }
 
         protected override void OnMouseUp(MouseEventArgs e)
         {
-            this.pending = null;
+            pending = null;
             switch (e.Button)
             {
                 case MouseButtons.Left:
@@ -1066,18 +1000,15 @@ namespace XenAdmin.ConsoleView
                     currentMouseState &= ~2;
                     break;
             }
-            mouseEvent(currentMouseState, e.X, e.Y);
+            MouseEvent(currentMouseState, e.X, e.Y);
         }
 
         protected override void OnMouseWheel(MouseEventArgs e)
         {
             if (Focused)
             {
-                DoIfConnected(delegate()
-                {
-                    this.vncStream.pointerWheelEvent((int)((e.X - dx) / this.scale), (int)((e.Y - dy) / this.scale),
-                                                     e.Delta * -SystemInformation.MouseWheelScrollLines / 120);
-                });
+                DoIfConnected(() => vncStream.pointerWheelEvent((int)((e.X - dx) / scale), (int)((e.Y - dy) / scale),
+                    e.Delta * -SystemInformation.MouseWheelScrollLines / 120));
 
             }
         }
@@ -1094,19 +1025,10 @@ namespace XenAdmin.ConsoleView
         private Set<Keys> pressedKeys = new Set<Keys>();
         private Set<int> pressedScans = new Set<int>();
 
-        private bool modifierKeyPressedAlone = false;
+        private bool modifierKeyPressedAlone;
 
         protected override bool ProcessTabKey(bool forward)
         {
-            /*if (sendScanCodes)
-                return true;
-
-            DoIfConnected((MethodInvoker)delegate()
-            {
-                this.Keysym(true, Keys.Tab);
-                this.Keysym(false, Keys.Tab);
-            });*/
-
             return true;
         }
 
@@ -1118,7 +1040,7 @@ namespace XenAdmin.ConsoleView
                 {
                     methodInvoker();
                 }
-                catch (System.IO.IOException)
+                catch (IOException)
                 {
                     // The server's gone away -- that's fine.
                 }
@@ -1137,31 +1059,21 @@ namespace XenAdmin.ConsoleView
 
             bool down = ((msg.Msg == WM_KEYDOWN) || (msg.Msg == WM_SYSKEYDOWN));
 
-            //System.Console.WriteLine(keyData + " " + down);
-
             Keys key = keyData;
 
             if ((key & Keys.Control) == Keys.Control)
-                key = key & ~Keys.Control;
+                key &= ~Keys.Control;
 
             if ((key & Keys.Alt) == Keys.Alt)
-                key = key & ~Keys.Alt;
+                key &= ~Keys.Alt;
 
             if ((key & Keys.Shift) == Keys.Shift)
-                key = key & ~Keys.Shift;
+                key &= ~Keys.Shift;
 
             // use TranslateKeyMessage to identify if Left or Right modifier keys have been pressed/released
             Keys extKey = ConsoleKeyHandler.TranslateKeyMessage(msg);
 
             return Keysym(down, key, extKey);
-        }
-
-        protected override void OnKeyDown(KeyEventArgs e)
-        {
-            //added this line to track key presses for automatic switch to RDP
-            //if there are any issues with focu start looking here
-            base.OnKeyDown(e);
-            //e.Handled = Keysym(true, e.KeyCode);
         }
 
         protected override void OnKeyUp(KeyEventArgs e)
@@ -1208,7 +1120,7 @@ namespace XenAdmin.ConsoleView
             if (sendScanCodes)
                 return true;
 
-            if (KeyHandler.handleExtras<Keys>(pressed, pressedKeys, KeyHandler.ExtraKeys, extendedKey, KeyHandler.ModifierKeys, ref modifierKeyPressedAlone))
+            if (KeyHandler.handleExtras(pressed, pressedKeys, KeyHandler.ExtraKeys, extendedKey, KeyHandler.ModifierKeys, ref modifierKeyPressedAlone))
             {
                 if (!pressed && modifierKeyPressedAlone)
                 {
@@ -1216,7 +1128,7 @@ namespace XenAdmin.ConsoleView
                     modifierKeyPressedAlone = false;
                     return Keysym_(pressed, key);
                 }
-                this.Parent.Focus();
+                Parent.Focus();
                 return true;
             }
 
@@ -1242,21 +1154,16 @@ namespace XenAdmin.ConsoleView
 
             if (keysym > 0)
             {
-                DoIfConnected(delegate()
-                {
-                    this.vncStream.keyCodeEvent(pressed, keysym);
-                });
+                DoIfConnected(() => vncStream.keyCodeEvent(pressed, keysym));
                 return true;
             }
-            else
-            {
-                return false;
-            }
+
+            return false;
         }
 
         public void keyScan(bool pressed, int scanCode, int keySym)
         {
-            if (KeyHandler.handleExtras<int>(pressed, pressedScans, KeyHandler.ExtraScans, scanCode, KeyHandler.ModifierScans, ref modifierKeyPressedAlone))
+            if (KeyHandler.handleExtras(pressed, pressedScans, KeyHandler.ExtraScans, scanCode, KeyHandler.ModifierScans, ref modifierKeyPressedAlone))
             {
                 if (!pressed && modifierKeyPressedAlone)
                 {
@@ -1272,40 +1179,20 @@ namespace XenAdmin.ConsoleView
             keyScan_(pressed, scanCode, keySym);
         }
 
-        private void keyScan_(bool pressed, int scanCode)
+        private void keyScan_(bool pressed, int scanCode, int keySym = -1)
         {
-            keyScan_(pressed, scanCode, -1);
-        }
-
-        private void keyScan_(bool pressed, int scanCode, int keySym)
-        {
-            DoIfConnected(delegate()
-            {
-                this.vncStream.keyScanEvent(pressed, scanCode, keySym, UseQemuExtKeyEncoding);
-            });
-        }
-
-        public void Clear()
-        {
-            ThreadPool.QueueUserWorkItem(new WaitCallback(delegate(Object o)
-            {
-                ClientFillRectangle(0, 0, DesktopSize.Width, DesktopSize.Height, Color.Black);
-            }), null);
-
+            DoIfConnected(() => vncStream.keyScanEvent(pressed, scanCode, keySym, UseQemuExtKeyEncoding));
         }
 
         #region IRemoteConsole implementation
         
         public ConsoleKeyHandler KeyHandler { get; set; }
 
-        public Control ConsoleControl
-        {
-            get { return this; }
-        }
+        public Control ConsoleControl => this;
 
         public void Activate()
         {
-            this.Select();
+            Select();
         }
 
         public void DisconnectAndDispose()
@@ -1319,15 +1206,13 @@ namespace XenAdmin.ConsoleView
         public void Pause()
         {
             helperIsPaused = true;
-            if (this.vncStream != null)
-                this.vncStream.Pause();
+            vncStream?.Pause();
         }
 
         public void Unpause()
         {
             helperIsPaused = false;
-            if (this.vncStream != null)
-                this.vncStream.Unpause();
+            vncStream?.Unpause();
         }
 
         public void SendCAD()
@@ -1368,16 +1253,7 @@ namespace XenAdmin.ConsoleView
 
             lock (backBuffer)
             {
-                //if (!backBufferInteresting)
-                //    return null;
-
                 Image image = new Bitmap(backBuffer);
-                //Graphics graphics = Graphics.FromImage(image);
-                //setupGraphicsOptions(graphics);
-
-                //graphics.DrawImage(backBuffer, 0, 0, x, y);
-                //graphics.Dispose();
-
                 return image;
             }
         }    
@@ -1398,7 +1274,7 @@ namespace XenAdmin.ConsoleView
                 }
                 else if (Focused)
                 {
-                    InterceptKeys.grabKeys(this.keyScan, false);
+                    InterceptKeys.grabKeys(keyScan, false);
                 }
 
                 sendScanCodes = value;
@@ -1410,7 +1286,7 @@ namespace XenAdmin.ConsoleView
             get
             {
                 Program.AssertOnEventThread();
-                return this.scaling;
+                return scaling;
             }
             set
             {
@@ -1422,16 +1298,16 @@ namespace XenAdmin.ConsoleView
                 // it going to scaling, quickly save the old dx, dy values
                 if (value)
                 {
-                    this.oldDx = dx;
-                    this.oldDy = dy;
+                    oldDx = dx;
+                    oldDy = dy;
                 }
 
-                lock (this.backBuffer)
+                lock (backBuffer)
                 {
-                    this.scaling = value;
-                    this.SetupScaling();
+                    scaling = value;
+                    SetupScaling();
                 }
-                this.Invalidate();
+                Invalidate();
             }
         }
         /// <summary>
@@ -1444,45 +1320,45 @@ namespace XenAdmin.ConsoleView
             if (frontGraphics == null)
                 return;
 
-            if (this.scaling)
+            if (scaling)
             {
-                this.AutoScroll = false;
+                AutoScroll = false;
 
-                float xScale = this.Size.Width /
-                    (float)(displayBorder ? this.DesktopSize.Width + BORDER_PADDING * 3 : this.DesktopSize.Width);
-                float yScale = this.Size.Height /
-                    (float)(displayBorder ? this.DesktopSize.Height + BORDER_PADDING * 3 : this.DesktopSize.Height);
+                float xScale = Size.Width /
+                    (float)(displayBorder ? DesktopSize.Width + BORDER_PADDING * 3 : DesktopSize.Width);
+                float yScale = Size.Height /
+                    (float)(displayBorder ? DesktopSize.Height + BORDER_PADDING * 3 : DesktopSize.Height);
 
-                scale = (xScale > yScale) ? yScale : xScale;
-                scale = (scale > 0.01) ? scale : (float)0.01;
+                scale = xScale > yScale ? yScale : xScale;
+                scale = scale > 0.01 ? scale : (float)0.01;
 
                 Bump = (int)Math.Ceiling(1 / scale);
 
                 // Now do the offset
 
-                dx = (this.Size.Width - (this.DesktopSize.Width * scale)) / 2;
-                dy = (this.Size.Height - (this.DesktopSize.Height * scale)) / 2;
+                dx = (Size.Width - DesktopSize.Width * scale) / 2;
+                dy = (Size.Height - DesktopSize.Height * scale) / 2;
 
                 Matrix transform = new Matrix();
                 transform.Translate(dx, dy);
                 transform.Scale(scale, scale);
 
-                this.frontGraphics.Transform = transform;
+                frontGraphics.Transform = transform;
             }
             else
             {
-                this.scale = 1;
-                this.Bump = 0;
+                scale = 1;
+                Bump = 0;
 
-                if (this.connected)
+                if (connected)
                 {
-                    this.AutoScrollMinSize = new Size(
+                    AutoScrollMinSize = new Size(
                         displayBorder ? DesktopSize.Width + BORDER_PADDING + BORDER_PADDING : DesktopSize.Width,
                         displayBorder ? DesktopSize.Height + BORDER_PADDING + BORDER_PADDING : DesktopSize.Height);
                 }
                 else
                 {
-                    this.AutoScrollMinSize = new Size(0, 0);
+                    AutoScrollMinSize = new Size(0, 0);
                 }
 
                 // The change of AutoScrollMinSize can trigger a resize event, which in turn can trigger
@@ -1493,48 +1369,48 @@ namespace XenAdmin.ConsoleView
                     return;
                 }
 
-                this.AutoScroll = true;
+                AutoScroll = true;
 
-                if (this.Size.Height >= (displayBorder ? this.DesktopSize.Height + BORDER_PADDING + BORDER_PADDING : DesktopSize.Height))
+                if (Size.Height >= (displayBorder ? DesktopSize.Height + BORDER_PADDING + BORDER_PADDING : DesktopSize.Height))
                 {
-                    this.dy = ((float) this.Size.Height - this.DesktopSize.Height) / 2;
+                    dy = ((float) Size.Height - DesktopSize.Height) / 2;
                 }
                 else
                 {
                     if (displayBorder)
                     {
-                        this.dy = BORDER_PADDING;
-                        this.AutoScrollPosition = new Point(BORDER_PADDING, (int)this.oldDy);
+                        dy = BORDER_PADDING;
+                        AutoScrollPosition = new Point(BORDER_PADDING, (int)oldDy);
                     }
                     else
                     {
-                        this.dy = 0;
-                        this.AutoScrollPosition = new Point(0, (int)this.oldDy);
+                        dy = 0;
+                        AutoScrollPosition = new Point(0, (int)oldDy);
                     }
                 }
 
-                if (this.Size.Width >= (displayBorder ? this.DesktopSize.Width + BORDER_PADDING + BORDER_PADDING : DesktopSize.Width))
+                if (Size.Width >= (displayBorder ? DesktopSize.Width + BORDER_PADDING + BORDER_PADDING : DesktopSize.Width))
                 {
-                    this.dx = ((float) this.Size.Width - this.DesktopSize.Width) / 2;
+                    dx = ((float)Size.Width - DesktopSize.Width) / 2;
                 }
                 else
                 {
                     if (displayBorder)
                     {
-                        this.dx = BORDER_PADDING;
-                        this.AutoScrollPosition = new Point((int)this.oldDx, BORDER_PADDING);
+                        dx = BORDER_PADDING;
+                        AutoScrollPosition = new Point((int)oldDx, BORDER_PADDING);
                     }
                     else
                     {
-                        this.dx = 0;
-                        this.AutoScrollPosition = new Point((int)this.oldDx, 0);
+                        dx = 0;
+                        AutoScrollPosition = new Point((int)oldDx, 0);
                     }
                 }
 
                 Matrix transform = new Matrix();
                 transform.Translate(dx, dy);
 
-                this.frontGraphics.Transform = transform;
+                frontGraphics.Transform = transform;
             }
         }
 
@@ -1552,21 +1428,17 @@ namespace XenAdmin.ConsoleView
                 {
                     SetupScaling();
                 }
-                this.Invalidate();
-                this.Update();
+                Invalidate();
+                Update();
             }
         }
 
         public Size DesktopSize { get; set; }
 
-        public Rectangle ConsoleBounds
-        {
-            get
-            {
-                return scaling ? new Rectangle((int)dx, (int)dy, Size.Width - (2 * (int)dx), Size.Height - (2 * (int)dy))
-                    : new Rectangle((int)dx, (int)dy, DesktopSize.Width, DesktopSize.Height);
-            }
-        }
+        public Rectangle ConsoleBounds =>
+            scaling
+                ? new Rectangle((int)dx, (int)dy, Size.Width - 2 * (int)dx, Size.Height - 2 * (int)dy)
+                : new Rectangle((int)dx, (int)dy, DesktopSize.Width, DesktopSize.Height);
 
         #endregion
     }
