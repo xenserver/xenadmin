@@ -107,7 +107,7 @@ namespace XenAdmin.Actions
 
                 try
                 {
-                    action.RunExternal(Session);
+                    action.RunSync(Session);
                 }
                 catch
                 {
@@ -146,7 +146,7 @@ namespace XenAdmin.Actions
                     else
                         action = new VMStartOnAction(VM, _vmHost, _warningDialogHaInvalidConfig, _startDiagnosticForm);
 
-                    action.RunExternal(Session);
+                    action.RunSync(Session);
                 }
             }
 

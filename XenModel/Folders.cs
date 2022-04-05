@@ -446,7 +446,7 @@ namespace XenAdmin.Model
             if (session == null)
                 action.RunAsync();
             else
-                action.RunExternal(session);
+                action.RunSync(session);
         }
 
         public static void Move(IXenObject ixmo, Folder target)
@@ -477,7 +477,7 @@ namespace XenAdmin.Model
             if (session == null)
                 action.RunAsync();
             else
-                action.RunExternal(session);
+                action.RunSync(session);
         }
 
         public static void Unfolder(IXenObject ixmo)

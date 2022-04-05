@@ -85,7 +85,7 @@ namespace XenAdmin.Actions.VMActions
                         // Warn the user about this and ask if they want to fix it.
                         log.Debug("VM is not agile, but protected", exn);
                         _WarningDialogHAInvalidConfig(VM,IsStart);
-                        new HAUnprotectVMAction(VM).RunExternal(Session);
+                        new HAUnprotectVMAction(VM).RunSync(Session);
                     }
                 }
 

@@ -143,7 +143,7 @@ namespace XenAdmin.Dialogs
                 }
                 if (dialogResult != DialogResult.Yes)
                     return;
-                new HAUnprotectVMAction(TheVM).RunExternal(TheVM.Connection.Session);
+                new HAUnprotectVMAction(TheVM).RunSync(TheVM.Connection.Session);
             }
 
             VDI vdi = NewDisk();

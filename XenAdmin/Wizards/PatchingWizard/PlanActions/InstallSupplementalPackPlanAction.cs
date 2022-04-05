@@ -52,7 +52,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         {
             AddProgressStep(string.Format(Messages.UPDATES_WIZARD_APPLYING_UPDATE, vdi.Name(), host.Name()));
             var suppPackVdis = new Dictionary<Host, VDI> { { host, vdi } };
-            new InstallSupplementalPackAction(suppPackVdis, true).RunExternal(session);
+            new InstallSupplementalPackAction(suppPackVdis, true).RunSync(session);
         }
     }
 }

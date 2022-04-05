@@ -63,7 +63,7 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
                                             ss =>
                                                 {
                                                     var action = new DisableWLBAction(Pool, false);
-                                                    action.RunExternal(ss);
+                                                    action.RunSync(ss);
                                                     int count = 0;
                                                     while (Helpers.WlbEnabled(Pool.Connection) && count < 10)
                                                     {

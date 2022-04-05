@@ -87,7 +87,7 @@ namespace XenAdmin.Actions
 
                 var cdCreate = new VbdSaveAndPlugAction(VM, cdDrive, Messages.DVD_DRIVE, Session, true);
                 cdCreate.ShowUserInstruction += msg => ShowUserInstruction?.Invoke(msg);
-                cdCreate.RunExternal(Session);
+                cdCreate.RunSync(Session);
                 Description = Messages.NEW_DVD_DRIVE_DONE;
             }
         }

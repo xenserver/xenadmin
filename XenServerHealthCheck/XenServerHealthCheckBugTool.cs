@@ -94,7 +94,7 @@ namespace XenServerHealthCheck
             foreach (Host host in connection.Cache.Hosts)
             {
                 GetSystemStatusCapabilities action = new GetSystemStatusCapabilities(host);
-                action.RunExternal(session);
+                action.RunSync(session);
                 if (!action.Succeeded)
                     return;
 
@@ -178,7 +178,7 @@ namespace XenServerHealthCheck
                 }
 
                 var statAction = new SingleHostStatusAction(host, 0, reportIncluded, filepath, timestring + "-" + ++i);
-                statAction.RunExternal(session);
+                statAction.RunSync(session);
             }
 
             // output the supporter/coordinator info
@@ -193,7 +193,7 @@ namespace XenServerHealthCheck
             // Finish the collection of logs with bugtool.
             // Start to zip the files.
             ZipStatusReportAction zipAction = new ZipStatusReportAction(filepath, outputFile);
-            zipAction.RunExternal(session);
+            zipAction.RunSync(session);
             log.InfoFormat("Server Status Report is collected: {0}", outputFile);
         }
 

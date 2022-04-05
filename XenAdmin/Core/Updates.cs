@@ -142,7 +142,7 @@ namespace XenAdmin.Core
             }
             else
             {
-                action.RunExternal(action.Session);
+                action.RunSync(action.Session);
             }
 
             return action.Succeeded;

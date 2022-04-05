@@ -72,7 +72,7 @@ namespace XenAdmin.Actions.VMActions
                 Description = string.Format(Messages.SUSPENDING_VM_OUT_OF, ActionCountCompleted + 1, VmsToSuspend.Count);
                 var action = new VMSuspendAction(vm);
                 action.Changed += action_Changed;
-                action.RunExternal(Session);
+                action.RunSync(Session);
                 ActionCountCompleted++;
             }
 
@@ -81,7 +81,7 @@ namespace XenAdmin.Actions.VMActions
                 Description = string.Format(Messages.SHUTTING_DOWN_VM_OUT_OF, ActionCountCompleted - VmsToSuspend.Count + 1, VmsToShutdown.Count);
                 var action = new VMHardShutdown(vm);
                 action.Changed += action_Changed;
-                action.RunExternal(Session);
+                action.RunSync(Session);
                 ActionCountCompleted++;
             }
         }

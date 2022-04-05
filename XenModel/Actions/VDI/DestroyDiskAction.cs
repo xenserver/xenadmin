@@ -95,7 +95,7 @@ namespace XenAdmin.Actions
                         Helpers.GetName(vm).Ellipsise(20)));
                 }
                 DetachVirtualDiskAction action = new DetachVirtualDiskAction(Disk, vm, false);
-                action.RunExternal(Session);
+                action.RunSync(Session);
             }
 
             RelatedTask = XenAPI.VDI.async_destroy(Session, Disk.opaque_ref);

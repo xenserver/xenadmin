@@ -82,7 +82,7 @@ namespace XenAdmin.Actions.VMActions
                     action = new VMResumeAction(vm, _warningDialogHAInvalidConfig, _startDiagnosisForm);
 
                 action.Changed += action_Changed;
-                action.RunExternal(Session);
+                action.RunSync(Session);
                 ActionCountCompleted++;
             }
 
@@ -97,7 +97,7 @@ namespace XenAdmin.Actions.VMActions
                     action = new VMStartAction(vm, _warningDialogHAInvalidConfig, _startDiagnosisForm);
 
                 action.Changed += action_Changed;
-                action.RunExternal(Session);
+                action.RunSync(Session);
                 ActionCountCompleted++;
             }
         }

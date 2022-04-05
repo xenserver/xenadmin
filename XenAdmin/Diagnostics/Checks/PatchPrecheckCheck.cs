@@ -283,7 +283,7 @@ namespace XenAdmin.Diagnostics.Checks
                             : new GetDiskSpaceRequirementsAction(Host, Update.Name(), Update.installation_size, true);
                         try
                         {
-                            action.RunExternal(action.Session);
+                            action.RunSync(action.Session);
                         }
                         catch
                         {

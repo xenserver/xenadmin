@@ -84,7 +84,7 @@ namespace XenAdmin.Actions
                 var getDiskSpaceRequirementsAction = new GetDiskSpaceRequirementsAction(Host, fileName, fileSize, true);
                 try
                 {
-                    getDiskSpaceRequirementsAction.RunExternal(Session);
+                    getDiskSpaceRequirementsAction.RunSync(Session);
                     diskSpaceRequirements = getDiskSpaceRequirementsAction.DiskSpaceRequirements;
                 }
                 catch (Failure failure)

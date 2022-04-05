@@ -430,7 +430,7 @@ namespace XenAdmin.Alerts
 
         public override void Dismiss()
         {
-            new DestroyMessageAction(Message).RunExternal(Connection.Session);
+            new DestroyMessageAction(Message).RunSync(Connection.Session);
             RemoveAlert(this);
         }
 

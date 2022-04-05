@@ -156,7 +156,7 @@ namespace XenAdmin.Actions
                 try
                 {
                     SubActionTitle = subAction.Title;
-                    subAction.RunExternal(Session);
+                    subAction.RunSync(Session);
                 }
                 catch (Exception e)
                 {

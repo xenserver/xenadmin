@@ -56,7 +56,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 EvacuateHost(ref session);
 
             AddProgressStep(string.Format(Messages.UPDATES_WIZARD_APPLYING_UPDATE, _poolUpdate.Name(), host.Name()));
-            new ApplyUpdateAction(_poolUpdate, host, true).RunExternal(session);
+            new ApplyUpdateAction(_poolUpdate, host, true).RunSync(session);
         }
     }
 }

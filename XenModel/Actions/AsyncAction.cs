@@ -170,7 +170,7 @@ namespace XenAdmin.Actions
         public void RunAsync(SudoElevationResult sudoElevationResult)
         {
             AuditLogStarted();
-            System.Threading.ThreadPool.QueueUserWorkItem(RunWorkerThread, sudoElevationResult);
+            ThreadPool.QueueUserWorkItem(RunWorkerThread, sudoElevationResult);
         }
 
         /// <summary>
@@ -179,7 +179,7 @@ namespace XenAdmin.Actions
         /// use that session for the action: it is then the responsibility of the calling function
         /// to make sure the session has the appropriate privileges and tidy it up afterwards.
         /// </summary>
-        public void RunExternal(Session session)
+        public void RunSync(Session session)
         {
             RunWorkerThread(session);
             if (Exception != null)

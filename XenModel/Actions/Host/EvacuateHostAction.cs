@@ -112,7 +112,7 @@ namespace XenAdmin.Actions
                                         {
                                             try
                                             {
-                                                new HostPowerOnAction(toHost).RunExternal(Session);
+                                                new HostPowerOnAction(toHost).RunSync(Session);
                                             }
                                             catch (Exception)
                                             {
