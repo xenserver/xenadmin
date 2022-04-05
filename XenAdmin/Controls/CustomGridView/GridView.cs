@@ -845,9 +845,7 @@ namespace XenAdmin.Controls.CustomGridView
             }
         }
 
-
-
-        public virtual void StartDragDrop()
+        public void StartDragDrop()
         {
             GridRowCollection rows = new GridRowCollection();
             foreach (GridRow row in RowsAndChildren)
@@ -859,7 +857,7 @@ namespace XenAdmin.Controls.CustomGridView
                 DoDragDrop(rows, DragDropEffects.Move);
         }
 
-        public virtual bool IsDraggableRow(GridRow row)
+        protected virtual bool IsDraggableRow(GridRow row)
         {
             return true;
         }

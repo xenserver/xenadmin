@@ -181,7 +181,7 @@ namespace XenAdmin.Controls.XenSearch
 
         private void SetupHeaderRow()
         {
-            GridHeaderRow = new GridHeaderRow(ROW_HEIGHT);
+            GridHeaderRow = new GridHeaderRow {RowHeight = ROW_HEIGHT};
 
             foreach (string s in DEFAULT_COLUMNS)
                 ShowColumn(s);
@@ -500,7 +500,7 @@ namespace XenAdmin.Controls.XenSearch
 
         private void listUpdateManager_Update()
         {
-            GridRow root = new GridRow(-1);
+            GridRow root = new GridRow {RowHeight = -1};
             RowGroupAcceptor acceptor = new RowGroupAcceptor(root);
             CollectionAcceptor ca = new CollectionAcceptor();
 
@@ -565,7 +565,7 @@ namespace XenAdmin.Controls.XenSearch
 
         private void AddNoResultsRow()
         {
-            GridRow row = new GridRow(ROW_HEIGHT);
+            GridRow row = new GridRow {RowHeight = ROW_HEIGHT};
             GridStringItem resultsItem = new GridStringItem(Messages.OVERVIEW_NO_RESULTS, HorizontalAlignment.Left, VerticalAlignment.Middle, false, false, TextBrush, Program.DefaultFont, 6);
             row.AddItem("name", resultsItem);
             AddRow(row);
@@ -618,16 +618,6 @@ namespace XenAdmin.Controls.XenSearch
             return new GridVerticalArrayItem(items.ToArray(), false);
         }
 
-        private static GridRow NewGroupRow(string opaqueref, object tag, int rowHeight, int priority)
-        {
-            GridRow row = new GridRow(rowHeight);
-            row.OpaqueRef = opaqueref;
-            row.Tag = tag;
-            row.Expanded = true;
-            row.Priority = priority;
-            return row;
-        }
-
         private static GridHorizontalArrayItem NewNameItem(GridItemBase iconItem, GridItemBase dataItem, int iconWidth, int indent)
         {
             GridTreeExpanderItem expander = new GridTreeExpanderItem();
@@ -639,11 +629,16 @@ namespace XenAdmin.Controls.XenSearch
 
         private static GridRow CreateRow(Grouping grouping, Object o, int indent)
         {
-            IXenObject ixmo = o as IXenObject;
-            if (ixmo != null)
+            if (o is IXenObject ixmo)
             {
-                bool isFolderRow = (o is Folder);
-                GridRow _row = NewGroupRow(ixmo.opaque_ref, ixmo, isFolderRow ? FOLDER_ROW_HEIGHT : ROW_HEIGHT, 0);
+                bool isFolderRow = o is Folder;
+                var _row = new GridRow(ixmo.opaque_ref)
+                {
+                    Tag = ixmo,
+                    Expanded = true,
+                    Priority = 0,
+                    RowHeight = isFolderRow ? FOLDER_ROW_HEIGHT : ROW_HEIGHT
+                };
 
                 foreach (ColumnNames column in Enum.GetValues(typeof(ColumnNames)))
                 {
@@ -686,15 +681,16 @@ namespace XenAdmin.Controls.XenSearch
             if (grouping == null)
                 return null;
 
-
-            GridRow row = NewGroupRow(String.Format("{0}: {1}", grouping.GroupingName, o), null, ROW_HEIGHT, 0);
+            GridRow row = new GridRow($"{grouping.GroupingName}: {o}")
+            {
+                Expanded = true,
+                Priority = 0,
+                RowHeight = ROW_HEIGHT
+            };
 
             GridImageItem statusItem = new GridImageItem(
                 grouping.GroupingName,
-                new ImageDelegate(delegate()
-                {
-                    return Images.GetImage16For(grouping.GetGroupIcon(o));
-                }),
+                () => Images.GetImage16For(grouping.GetGroupIcon(o)),
                 HorizontalAlignment.Left, VerticalAlignment.Top, true);
 
             GridVerticalArrayItem nameItem = NewDoubleRowItem(grouping, o);
@@ -704,10 +700,9 @@ namespace XenAdmin.Controls.XenSearch
             return row;
         }
 
-        public override bool IsDraggableRow(GridRow row)
+        protected override bool IsDraggableRow(GridRow row)
         {
-            IXenObject o = row.Tag as IXenObject;
-            return o != null;
+            return row.Tag is IXenObject;
         }
 
         private void MetricsUpdated(object o, EventArgs e)
