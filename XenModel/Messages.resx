@@ -2750,12 +2750,6 @@ Do you want to assign these VMs to the schedule '{0}' instead?</value>
   <data name="CHANGE_VMSS_POLICY" xml:space="preserve">
     <value>Assign VM to snapshot schedule</value>
   </data>
-  <data name="CHANGED_MAIN_PASSWORD" xml:space="preserve">
-    <value>Changed {0} main password</value>
-  </data>
-  <data name="CHANGED_MAIN_PASSWORD_LONG" xml:space="preserve">
-    <value>Changed {0} main password for session restore</value>
-  </data>
   <data name="CHANGED_SERVER_CD" xml:space="preserve">
     <value>Server CD changed</value>
   </data>

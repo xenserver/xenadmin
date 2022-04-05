@@ -7602,24 +7602,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Changed {0} main password.
-        /// </summary>
-        public static string CHANGED_MAIN_PASSWORD {
-            get {
-                return ResourceManager.GetString("CHANGED_MAIN_PASSWORD", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Changed {0} main password for session restore.
-        /// </summary>
-        public static string CHANGED_MAIN_PASSWORD_LONG {
-            get {
-                return ResourceManager.GetString("CHANGED_MAIN_PASSWORD_LONG", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Server CD changed.
         /// </summary>
         public static string CHANGED_SERVER_CD {
