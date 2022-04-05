@@ -36,8 +36,11 @@ namespace XenAdmin.Mappings
 {
     public class VmMapping
     {
-        public VmMapping()
+        private readonly string _id;
+
+        public VmMapping(string id)
         {
+            _id = id;
             Storage = new Dictionary<string, SR>();
             StorageToAttach = new Dictionary<string, VDI>();
             Networks = new Dictionary<string, XenAPI.Network>();
@@ -93,7 +96,7 @@ namespace XenAdmin.Mappings
 
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return _id.GetHashCode();
         }
     }
 }

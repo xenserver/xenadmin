@@ -1305,32 +1305,26 @@ namespace XenOvf
             return vhs;
         }
 
-        public static string AddVirtualSystem(EnvelopeType ovfObj, string ovfname)
-        {
-            return AddVirtualSystem(ovfObj, LANGUAGE, ovfname);
-        }
         /// <summary>
         /// Add a Virtual System Section to OVF
         /// MUST be done at least once.
         /// </summary>
         /// <param name="ovfObj">object of type EnvelopeType</param>
-        /// <param name="lang">Language</param>
         /// <param name="ovfname">Name of the OVF</param>
+        /// <param name="sysId">the unique id of the virtual system</param>
+        /// <param name="lang">Language</param>
         /// <returns>InstanceId of Virtual System</returns>
-        public static string AddVirtualSystem(EnvelopeType ovfObj, string lang, string ovfname)
+        public static void AddVirtualSystem(EnvelopeType ovfObj, string ovfname, string sysId, string lang = LANGUAGE)
         {
-
-            VirtualSystem_Type vs = new VirtualSystem_Type();
-            vs.id = Guid.NewGuid().ToString();
+            VirtualSystem_Type vs = new VirtualSystem_Type {id = sysId};
             string info = _ovfrm.GetString("VIRTUAL_SYSTEM_TYPE_INFO");
             vs.Info = new Msg_Type(AddToStringSection(ovfObj, lang, info), info);
-            vs.Name = new Msg_Type[1] { new Msg_Type(AddToStringSection(ovfObj, lang, ovfname), ovfname) };
+            vs.Name = new[] {new Msg_Type(AddToStringSection(ovfObj, lang, ovfname), ovfname)};
 
             AddVirtualSystem(ovfObj, vs);
             AddOperatingSystemSection(ovfObj, vs.id, lang, null, null);
 
             log.Debug("OVF.AddVirtualSystem(obj,lang,ovfname) completed");
-            return vs.id;
         }
 
         public static void AddVirtualSystem(EnvelopeType ovfEnv, VirtualSystem_Type vs)
@@ -1391,12 +1385,12 @@ namespace XenOvf
 
         #region CREATEs
 
-        public static EnvelopeType CreateOvfEnvelope(string vmName, ulong cpuCount, ulong memory,
+        public static EnvelopeType CreateOvfEnvelope(string systemID, string vmName, ulong cpuCount, ulong memory,
             string bootParams, string platformSettings, ulong capacity,
             string diskPath, ulong imageLength, string productBrand)
         {
             EnvelopeType env = CreateEnvelope(vmName);
-            string systemID = AddVirtualSystem(env, vmName);
+            AddVirtualSystem(env, vmName, systemID);
 
             string hdwareSectionId = AddVirtualHardwareSection(env, systemID);
             string guid = Guid.NewGuid().ToString();
@@ -1463,26 +1457,6 @@ namespace XenOvf
 
             config.Value = new cimString(value);
             return env;
-        }
-
-        public EnvelopeType Create(DiskInfo[] vhdExports, string pathToOvf, string ovfName)
-        {
-            return Create(vhdExports, pathToOvf, ovfName, LANGUAGE);
-        }
-        /// <summary>
-        /// Create an OVF (xml string) from local system.
-        /// *** Element[0] of VHDExports MUST be the BOOT Disk ***
-        /// DiskInfo.VHDFileName == The name the VHD will have after export.
-        /// DiskInfo.DriveId == "PHYSICALDRIVE0","PHYSICALDRIVE1"... 
-        /// </summary>
-        /// <param name="vhdExports">LIST of Names to the VHD Files to be created REQUIREMENTS: 1. Element[0] MUST be the boot device</param>
-        /// <param name="pathToOvf"></param>
-        /// <param name="lang"></param>
-        /// <param name="ovfName">Name of the OVF Package</param>
-        /// <returns>xml string representing the OVF</returns>
-        public EnvelopeType Create(DiskInfo[] vhdExports, string pathToOvf, string ovfName, string lang)
-        {
-            return ConvertPhysicaltoOVF(vhdExports, pathToOvf, ovfName, lang);
         }
 
         public static EnvelopeType CreateEnvelope(string ovfName)

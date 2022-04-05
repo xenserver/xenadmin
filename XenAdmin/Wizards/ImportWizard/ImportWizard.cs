@@ -209,7 +209,7 @@ namespace XenAdmin.Wizards.ImportWizard
                             m_vmMappings.Clear();
                             string[] sysIds = OVF.FindSystemIds(_selectedOvfPackage.OvfEnvelope);
                             foreach (string sysId in sysIds)
-                                m_vmMappings.Add(sysId, new VmMapping {VmNameLabel = FindVMName(_selectedOvfPackage.OvfEnvelope, sysId)});
+                                m_vmMappings.Add(sysId, new VmMapping(sysId) {VmNameLabel = FindVMName(_selectedOvfPackage.OvfEnvelope, sysId)});
 
                             m_pageHost.SelectedOvfEnvelope = _selectedOvfPackage.OvfEnvelope;
                             m_pageHost.SetDefaultTarget(m_pageHost.ChosenItem ?? m_selectedObject);
@@ -262,7 +262,9 @@ namespace XenAdmin.Wizards.ImportWizard
             }
             else if (type == typeof(ImageVMConfigPage))
             {
-                var newMapping = new VmMapping
+                var sysId = Guid.NewGuid().ToString();
+
+                var newMapping = new VmMapping(sysId)
                 {
                     VmNameLabel = m_pageVMconfig.VmName,
                     CpuCount = m_pageVMconfig.CpuCount,
@@ -284,14 +286,13 @@ namespace XenAdmin.Wizards.ImportWizard
 
                 if (!newMapping.Equals(oldMapping))
                 {
-                    m_envelopeFromVhd = OVF.CreateOvfEnvelope(newMapping.VmNameLabel,
+                    m_envelopeFromVhd = OVF.CreateOvfEnvelope(sysId, newMapping.VmNameLabel,
                         newMapping.CpuCount, newMapping.Memory,
                         newMapping.BootParams, newMapping.PlatformSettings,
                         newMapping.Capacity,
                         m_pageImportSource.FilePath, m_pageImportSource.ImageLength, BrandManager.ProductBrand);
 
                     m_vmMappings.Clear();
-                    var sysId = OVF.FindSystemIds(m_envelopeFromVhd).First();
                     m_vmMappings.Add(sysId, newMapping);
 
                     m_pageHost.VmMappings = m_vmMappings;
