@@ -953,7 +953,7 @@ namespace XenAdmin.Network
             string msg = string.Format(Messages.CONNECTING_NOTICE_TEXT, name);
             log.Info($"Connecting to {name} in progress.");
 
-            ConnectAction = new ActionBase(title, msg, false);
+            ConnectAction = ActionBase.CreateDummyAction(title, msg, false);
 
             ExpectPasswordIsCorrect = true;
             OnConnectionResult(true, null, null);
@@ -1447,7 +1447,7 @@ namespace XenAdmin.Network
                     {
                         // Create a new log message to say the connection attempt failed
                         string title = string.Format(Messages.CONNECTION_FAILED_TITLE, HostnameWithPort);
-                        ActionBase n = new ActionBase(title, reason, false, true, reason);
+                        ActionBase n = ActionBase.CreateDummyAction(title, reason, error:reason);
                         SetPoolAndHostInAction(n, pool, PoolOpaqueRef);
                     }
 
@@ -1598,7 +1598,7 @@ namespace XenAdmin.Network
 
             string title = string.Format(Messages.CONNECTION_LOST_NOTICE_TITLE,
                                          LastConnectionFullName);
-            ActionBase n = new ActionBase(title, description, false, true, description);
+            ActionBase n = ActionBase.CreateDummyAction(title, description, error: description);
             SetPoolAndHostInAction(n, pool, poolopaqueref);
             OnConnectionLost();
         }
@@ -1740,7 +1740,7 @@ namespace XenAdmin.Network
             // Add an informational entry to the log
             string title = string.Format(Messages.CONNECTION_FINDING_COORDINATOR_TITLE, LastConnectionFullName);
             string descr = string.Format(Messages.CONNECTION_FINDING_COORDINATOR_DESCRIPTION, LastConnectionFullName, Hostname);
-            ActionBase action = new ActionBase(title, descr, false, true);
+            ActionBase action = ActionBase.CreateDummyAction(title, descr);
             SetPoolAndHostInAction(action, null, PoolOpaqueRef);
             log.DebugFormat("Looking for coordinator for {0} on {1}...", LastConnectionFullName, Hostname);
 

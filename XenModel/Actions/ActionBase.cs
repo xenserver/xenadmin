@@ -230,8 +230,7 @@ namespace XenAdmin.Actions
 
         public bool ShowProgress { get; protected set; } = true;
 
-
-        public ActionBase(string title, string description, bool suppressHistory, bool completeImmediately = false, string error = null)
+        protected ActionBase(string title, string description, bool suppressHistory, bool completeImmediately = false, string error = null)
         {
             Title = title;
             _description = description;
@@ -248,6 +247,11 @@ namespace XenAdmin.Actions
 
             if (!suppressHistory)
                 NewAction?.Invoke(this);
+        }
+
+        public static ActionBase CreateDummyAction(string title, string description, bool completeImmediately = true, string error = null)
+        {
+            return new ActionBase(title, description, false, completeImmediately, error);
         }
 
         /// <remarks>
@@ -310,7 +314,7 @@ namespace XenAdmin.Actions
 
         protected bool SuppressProgressReport { get; set; }
 
-        public void Tick(int percent, string description)
+        protected void Tick(int percent, string description)
         {
             if (_percentComplete != percent || _description != description)
             {
