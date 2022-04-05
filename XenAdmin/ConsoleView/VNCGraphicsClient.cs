@@ -1361,14 +1361,6 @@ namespace XenAdmin.ConsoleView
                     AutoScrollMinSize = new Size(0, 0);
                 }
 
-                // The change of AutoScrollMinSize can trigger a resize event, which in turn can trigger
-                // scaling to be turned off.  If this happens, restart this calculation altogether.
-                if (scaling)
-                {
-                    SetupScaling();
-                    return;
-                }
-
                 AutoScroll = true;
 
                 if (Size.Height >= (displayBorder ? DesktopSize.Height + BORDER_PADDING + BORDER_PADDING : DesktopSize.Height))
