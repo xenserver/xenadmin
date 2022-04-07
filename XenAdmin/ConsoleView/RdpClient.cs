@@ -433,7 +433,7 @@ namespace XenAdmin.ConsoleView
         {
         }
 
-        public void Unpause()
+        public void UnPause()
         {
         }
 

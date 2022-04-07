@@ -245,7 +245,7 @@ namespace XenAdmin.ConsoleView
             if (RemoteConsole != null)
             {
                 wasPaused = false;
-                RemoteConsole.Unpause();
+                RemoteConsole.UnPause();
             }
         }
 
@@ -577,7 +577,7 @@ namespace XenAdmin.ConsoleView
                 if (wasPaused)
                     RemoteConsole.Pause();
                 else
-                    RemoteConsole.Unpause();
+                    RemoteConsole.UnPause();
                 ConnectToRemoteConsole();
 
                 if (wasFocused)
