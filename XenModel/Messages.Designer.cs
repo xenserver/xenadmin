@@ -37268,6 +37268,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Validating the downloaded installer....
+        /// </summary>
+        public static string UPDATE_CLIENT_VALIDATING_INSTALLER {
+            get {
+                return ResourceManager.GetString("UPDATE_CLIENT_VALIDATING_INSTALLER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You have applied filters to the list of update notifications. Do you want to dismiss all update notifications for every connected server, or only the update notifications you have chosen to view?
         ///
         ///Note that if RBAC is enabled, only updates which you have privileges to dismiss will be affected..
