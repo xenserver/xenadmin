@@ -123,7 +123,7 @@ namespace XenAdmin.Wizards
             if (string.IsNullOrEmpty(zippedUpdatePath))
                 return null;
 
-            var unzipAction = new UnzipXenServerPatchAction(zippedUpdatePath, BrandManager.ExtensionUpdate, InvisibleMessages.ISO_UPDATE);
+            var unzipAction = new UnzipXenServerPatchAction(zippedUpdatePath, BrandManager.ExtensionUpdate, "iso");
 
             using (var dlg = new ActionProgressDialog(unzipAction, ProgressBarStyle.Marquee))
             {

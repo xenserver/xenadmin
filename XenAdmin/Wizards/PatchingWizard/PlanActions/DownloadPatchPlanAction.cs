@@ -98,7 +98,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
             Uri address = new Uri(patchUri);
 
-            var exts = Helpers.ElyOrGreater(Connection) ? InvisibleMessages.ISO_UPDATE : BrandManager.ExtensionUpdate;
+            var exts = Helpers.ElyOrGreater(Connection) ? "iso" : BrandManager.ExtensionUpdate;
             var downloadAction = new DownloadAndUnzipXenServerPatchAction(patch.Name, address, exts);
 
             downloadAction.Changed += downloadAndUnzipXenServerPatchAction_Changed;
