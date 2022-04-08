@@ -80,7 +80,7 @@ namespace CFUValidator.Validators
             }
 
             var action = new DownloadAndUnzipXenServerPatchAction(patch.Patch.Name, new Uri(patch.Patch.PatchUrl),
-                BrandManager.ExtensionUpdate, InvisibleMessages.ISO_UPDATE);
+                BrandManager.ExtensionUpdate, "iso");
 
             try
             {

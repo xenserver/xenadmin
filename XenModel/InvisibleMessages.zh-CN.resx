@@ -177,9 +177,6 @@
   <data name="XEN_UPDATE" xml:space="preserve">
     <value>xsupdate</value>
   </data>
-  <data name="ISO_UPDATE" xml:space="preserve">
-    <value>iso</value>
-  </data>
   <data name="UPSELL_LEARNMOREURL_TRIAL" xml:space="preserve">
     <value>https://www.citrix.com/products/citrix-hypervisor/get-started.html</value>
   </data>

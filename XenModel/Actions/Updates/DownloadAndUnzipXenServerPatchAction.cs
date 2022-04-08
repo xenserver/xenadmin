@@ -65,7 +65,7 @@ namespace XenAdmin.Actions.Updates
             : base(null, string.Empty, string.Empty, true) 
         {
             updateName = patchName;
-            updateFileSuffixes = (from item in updateFileExtensions select '.' + item).ToArray();
+            updateFileSuffixes = (from item in updateFileExtensions select $".{item}").ToArray();
         }
 
         protected string ExtractFile(string zippedFilePath, bool deleteOriginal)
@@ -92,7 +92,7 @@ namespace XenAdmin.Actions.Updates
                     {
                         string currentExtension = Path.GetExtension(iterator.CurrentFileName());
 
-                        if (updateFileSuffixes.Any(item => item == currentExtension))
+                        if (updateFileSuffixes.Any(item => item.ToLowerInvariant() == currentExtension.ToLowerInvariant()))
                         {
                             log.InfoFormat("Found file '{0}'. Extracting...", iterator.CurrentFileName());
 
@@ -175,7 +175,7 @@ namespace XenAdmin.Actions.Updates
         {
             Title = string.Format(Messages.DOWNLOAD_AND_EXTRACT_ACTION_TITLE, patchName);
             _patchUri = uri;
-            skipUnzipping = updateFileSuffixes.Any(item => _patchUri.ToString().EndsWith(item));
+            skipUnzipping = updateFileSuffixes.Any(item => _patchUri.ToString().ToLowerInvariant().EndsWith(item.ToLowerInvariant()));
         }
 
         public override void RecomputeCanCancel()

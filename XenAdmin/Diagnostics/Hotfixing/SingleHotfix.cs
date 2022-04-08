@@ -87,7 +87,7 @@ namespace XenAdmin.Diagnostics.Hotfixing
             if (update == null)
             {
                 var master = Helpers.GetMaster(host.Connection);
-                var filePath = Path.Combine(Program.AssemblyDir, string.Format("{0}.{1}", Filename, InvisibleMessages.ISO_UPDATE));
+                var filePath = Path.Combine(Program.AssemblyDir, $"{Filename}.iso");
                 var action = new UploadSupplementalPackAction(master.Connection, new List<Host> { master }, filePath, false);
                 action.RunExternal(session);
                 update = action.PoolUpdate;
