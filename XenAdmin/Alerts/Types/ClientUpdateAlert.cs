@@ -36,6 +36,7 @@ using System.IO;
 using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Actions.GUIActions;
+using XenAdmin.Actions.Updates;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
 
@@ -135,25 +136,24 @@ namespace XenAdmin.Alerts
 
             if (currentTasks)
             {
-                if (new Dialogs.WarningDialogs.CloseXenCenterWarningDialog(true).ShowDialog() != DialogResult.OK)
+                if (new Dialogs.WarningDialogs.CloseXenCenterWarningDialog(true).ShowDialog(parent) != DialogResult.OK)
                     return;
             }
 
-            // Install the msi            
             try
             {
-                // Start the install process, it will handle closing of application.
                 Process.Start(outputPathAndFileName);
                 log.DebugFormat("Update {0} found and install started", updateAlert.Name);
+                downloadAndInstallClientAction.ReleaseInstaller();
                 Application.Exit();
             }
             catch (Exception e)
             {
-                if (File.Exists(outputPathAndFileName))
-                    File.Delete(outputPathAndFileName);
-
                 log.Error("Exception occurred when starting the installation process.", e);
-                throw;
+                downloadAndInstallClientAction.ReleaseInstaller(true);
+
+                using (var dlg = new ErrorDialog(Messages.UPDATE_CLIENT_FAILED_INSTALLER_LAUNCH))
+                    dlg.ShowDialog(parent);
             }
         }
     }

@@ -12874,11 +12874,17 @@ Verify that the file is a valid {2} export.</value>
   <data name="UPDATE_CLIENT_FAILED_CERTIFICATE_CHECK" xml:space="preserve">
     <value>Could not validate the certificate associated with the downloaded installer.</value>
   </data>
+  <data name="UPDATE_CLIENT_FAILED_INSTALLER_LAUNCH" xml:space="preserve">
+    <value>An error occurred when launching the downloaded installer. Please see the logs for more information.</value>
+  </data>
   <data name="UPDATE_CLIENT_INVALID_CHECKSUM" xml:space="preserve">
     <value>The checksum of the downloaded installer does not match the expected value.</value>
   </data>
   <data name="UPDATE_CLIENT_INVALID_DIGITAL_CERTIFICATE" xml:space="preserve">
     <value>Invalid digital signature on msi.</value>
+  </data>
+  <data name="UPDATE_CLIENT_VALIDATING_INSTALLER" xml:space="preserve">
+    <value>Validating the downloaded installer...</value>
   </data>
   <data name="UPDATE_DISMISS_ALL_CONTINUE" xml:space="preserve">
     <value>You have applied filters to the list of update notifications. Do you want to dismiss all update notifications for every connected server, or only the update notifications you have chosen to view?
