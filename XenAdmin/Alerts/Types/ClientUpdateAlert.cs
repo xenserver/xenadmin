@@ -137,7 +137,10 @@ namespace XenAdmin.Alerts
             if (currentTasks)
             {
                 if (new Dialogs.WarningDialogs.CloseXenCenterWarningDialog(true).ShowDialog(parent) != DialogResult.OK)
+                {
+                    downloadAndInstallClientAction.ReleaseInstaller();
                     return;
+                }
             }
 
             try
