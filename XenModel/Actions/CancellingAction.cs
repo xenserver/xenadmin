@@ -68,11 +68,6 @@ namespace XenAdmin.Actions
         {
         }
 
-        protected CancellingAction(string title, string description, bool suppressHistory, bool completeImmediately)
-            : base(title, description, suppressHistory, completeImmediately)
-        {
-        }
-
         private XenRef<Task> _relatedTask;
 
         private readonly object connectionLock = new object();

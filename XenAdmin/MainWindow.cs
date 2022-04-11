@@ -918,7 +918,7 @@ namespace XenAdmin
                 Program.Invoke(Program.MainWindow, delegate
                 {
                     var title = string.Format(Messages.CONNECTION_REFUSED_TITLE, Helpers.GetName(coordinator).Ellipsise(80));
-                    ActionBase.CreateDummyAction(title, "", error: string.Format(Messages.INCOMPATIBLE_PRODUCTS, BrandManager.BrandConsole));
+                    new DummyAction(title, "", string.Format(Messages.INCOMPATIBLE_PRODUCTS, BrandManager.BrandConsole)).Run();
 
                     using (var dlog = new ErrorDialog(string.Format(Messages.INCOMPATIBLE_PRODUCTS, BrandManager.BrandConsole))
                         {WindowTitle = title})
@@ -943,8 +943,8 @@ namespace XenAdmin
                 {
                     var title = string.Format(Messages.CONNECTION_REFUSED_TITLE, Helpers.GetName(coordinator).Ellipsise(80));
                     var msg = string.Format(Messages.SUPPORTER_TOO_OLD, BrandManager.ProductBrand, BrandManager.ProductVersion70, BrandManager.BrandConsole);
-                    
-                    ActionBase.CreateDummyAction(title, "", error: msg);
+
+                    new DummyAction(title, "", msg).Run();
 
                     using (var dlg = new ErrorDialog(msg, ThreeButtonDialog.ButtonOK)
                         {WindowTitle = Messages.CONNECT_TO_SERVER})
@@ -983,7 +983,7 @@ namespace XenAdmin
                         var title = string.Format(Messages.CONNECTION_REFUSED_TITLE, Helpers.GetName(coordinator).Ellipsise(80));
                         var error = $"{msg}\n{url}";
 
-                        ActionBase.CreateDummyAction(title, "", error: error);
+                        new DummyAction(title, "", error).Run();
 
                         using (var dlog = new ErrorDialog(msg)
                         {
@@ -1012,7 +1012,7 @@ namespace XenAdmin
                         var title = string.Format(Messages.CONNECTION_REFUSED_TITLE, Helpers.GetName(coordinator).Ellipsise(80));
                         var error = $"{msg}\n{url}";
 
-                        ActionBase.CreateDummyAction(title, "", error: error);
+                        new DummyAction(title, "", error).Run();
 
                         using (var dlog = new ErrorDialog(msg)
                         {

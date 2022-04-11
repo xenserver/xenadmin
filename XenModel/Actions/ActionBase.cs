@@ -230,28 +230,14 @@ namespace XenAdmin.Actions
 
         public bool ShowProgress { get; protected set; } = true;
 
-        protected ActionBase(string title, string description, bool suppressHistory, bool completeImmediately = false, string error = null)
+        protected ActionBase(string title, string description, bool suppressHistory)
         {
             Title = title;
             _description = description;
             log.Debug(_description);
-            if (completeImmediately)
-            {
-                if (!string.IsNullOrEmpty(error))
-                    _exception = new Exception(error);
-
-                Finished = DateTime.Now;
-                _percentComplete = 100;
-                _isCompleted = true;
-            }
 
             if (!suppressHistory)
                 NewAction?.Invoke(this);
-        }
-
-        public static ActionBase CreateDummyAction(string title, string description, bool completeImmediately = true, string error = null)
-        {
-            return new ActionBase(title, description, false, completeImmediately, error);
         }
 
         /// <remarks>

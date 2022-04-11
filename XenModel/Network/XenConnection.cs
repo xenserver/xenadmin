@@ -541,16 +541,6 @@ namespace XenAdmin.Network
             return p1.opaque_ref.CompareTo(p2.opaque_ref);
         }
 
-        /// <summary>
-        /// Set the pool and coordinator details in the Action to allow proper filtering in HistoryPanel.
-        /// </summary>
-        private void SetPoolAndHostInAction(ActionBase action)
-        {
-            Pool pool = Helpers.GetPoolOfOne(this);
-            if (pool != null)
-                SetPoolAndHostInAction(action, pool, PoolOpaqueRef);
-        }
-
         private void SetPoolAndHostInAction(ActionBase action, Pool pool, string poolopaqueref)
         {
             if (pool != null && !string.IsNullOrEmpty(poolopaqueref))
@@ -953,7 +943,7 @@ namespace XenAdmin.Network
             string msg = string.Format(Messages.CONNECTING_NOTICE_TEXT, name);
             log.Info($"Connecting to {name} in progress.");
 
-            ConnectAction = ActionBase.CreateDummyAction(title, msg, false);
+            ConnectAction = new DummyAction(title, msg);
 
             ExpectPasswordIsCorrect = true;
             OnConnectionResult(true, null, null);
@@ -1126,7 +1116,10 @@ namespace XenAdmin.Network
                 log.Info($"Connection to {Hostname} successful.");
                 ConnectAction.Title = title;
                 ConnectAction.Description = msg;
-                SetPoolAndHostInAction(ConnectAction);
+
+                Pool pool = Helpers.GetPoolOfOne(this);
+                if (pool != null)
+                    SetPoolAndHostInAction(ConnectAction, pool, PoolOpaqueRef);
 
                 // mark the connect action as completed
                 ConnectAction.Finished = DateTime.Now;
@@ -1447,8 +1440,9 @@ namespace XenAdmin.Network
                     {
                         // Create a new log message to say the connection attempt failed
                         string title = string.Format(Messages.CONNECTION_FAILED_TITLE, HostnameWithPort);
-                        ActionBase n = ActionBase.CreateDummyAction(title, reason, error:reason);
-                        SetPoolAndHostInAction(n, pool, PoolOpaqueRef);
+                        var action =  new DummyAction(title, reason, reason);
+                        SetPoolAndHostInAction(action, pool, PoolOpaqueRef);
+                        action.Run();
                     }
 
                     // We only want to continue the coordinator search in certain circumstances
@@ -1598,8 +1592,9 @@ namespace XenAdmin.Network
 
             string title = string.Format(Messages.CONNECTION_LOST_NOTICE_TITLE,
                                          LastConnectionFullName);
-            ActionBase n = ActionBase.CreateDummyAction(title, description, error: description);
-            SetPoolAndHostInAction(n, pool, poolopaqueref);
+            var action =  new DummyAction(title, description, description);
+            SetPoolAndHostInAction(action, pool, poolopaqueref);
+            action.Run();
             OnConnectionLost();
         }
 
@@ -1740,18 +1735,14 @@ namespace XenAdmin.Network
             // Add an informational entry to the log
             string title = string.Format(Messages.CONNECTION_FINDING_COORDINATOR_TITLE, LastConnectionFullName);
             string descr = string.Format(Messages.CONNECTION_FINDING_COORDINATOR_DESCRIPTION, LastConnectionFullName, Hostname);
-            ActionBase action = ActionBase.CreateDummyAction(title, descr);
+            var action =  new DummyAction(title, descr);
             SetPoolAndHostInAction(action, null, PoolOpaqueRef);
+            action.Run();
             log.DebugFormat("Looking for coordinator for {0} on {1}...", LastConnectionFullName, Hostname);
 
             if (!XenAdminConfigManager.Provider.Exiting)
             {
-                InvokeHelper.Invoke(delegate()
-                {
-                    /*ConnectionResult += new EventHandler<ConnectionResultEventArgs>(XenConnection_ConnectionResult);
-                    CachePopulated += new EventHandler<EventArgs>(XenConnection_CachePopulated);*/
-                    BeginConnect(false, _promptForNewPassword);
-                });
+                InvokeHelper.Invoke(() => BeginConnect(false, _promptForNewPassword));
                 OnConnectionReconnecting();
             }
         }
