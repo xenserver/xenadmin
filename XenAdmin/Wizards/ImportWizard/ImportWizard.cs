@@ -339,21 +339,21 @@ namespace XenAdmin.Wizards.ImportWizard
                 if (oldMapping.BootParams != m_pageBootOptions.BootParams ||
                     oldMapping.PlatformSettings != m_pageBootOptions.PlatformSettings)
                 {
-                    string systemId = null;
+                    string sysId = null;
                     if (m_envelopeFromVhd.Item is VirtualSystem_Type vs)
-                        systemId = vs.id;
+                        sysId = vs.id;
                     else if (m_envelopeFromVhd.Item is VirtualSystemCollection_Type vsc)
-                        systemId = vsc.Content.FirstOrDefault()?.id;
+                        sysId = vsc.Content.FirstOrDefault()?.id;
 
                     if (oldMapping.BootParams != m_pageBootOptions.BootParams)
                     {
-                        m_envelopeFromVhd = OVF.UpdateBootParams(m_envelopeFromVhd, systemId, m_pageBootOptions.BootParams);
+                        m_envelopeFromVhd = OVF.UpdateBootParams(m_envelopeFromVhd, sysId, m_pageBootOptions.BootParams);
                         m_vmMappings.Values.First().BootParams = m_pageBootOptions.BootParams;
                     }
 
                     if (oldMapping.PlatformSettings != m_pageBootOptions.PlatformSettings)
                     {
-                        m_envelopeFromVhd = OVF.UpdatePlatform(m_envelopeFromVhd, systemId, m_pageBootOptions.PlatformSettings);
+                        m_envelopeFromVhd = OVF.UpdatePlatform(m_envelopeFromVhd, sysId, m_pageBootOptions.PlatformSettings);
                         m_vmMappings.Values.First().PlatformSettings = m_pageBootOptions.PlatformSettings;
                     }
                 }
@@ -668,9 +668,9 @@ namespace XenAdmin.Wizards.ImportWizard
 
         // Find a name to use of a VM within an envelope that could have come from any hypervisor.
         // TODO: Consider refactoring this method because it is very similar to OVF.FindSystemName().
-        private string FindVMName(EnvelopeType ovfEnv, string systemid)
+        private string FindVMName(EnvelopeType ovfEnv, string sysId)
         {
-            VirtualSystem_Type vSystem = OVF.FindVirtualSystemById(ovfEnv, systemid);
+            VirtualSystem_Type vSystem = OVF.FindVirtualSystemById(ovfEnv, sysId);
 
             // Use the given name if present and valid.
             // The given name is Envelope.VirtualSystem.Name specified in the OVF Specification 1.1 clause 7.2.
@@ -688,7 +688,7 @@ namespace XenAdmin.Wizards.ImportWizard
                 choices.Add(vSystem.id);
 
             // VirtualHardwareSection_Type.VirtualSystemIdentifier is next preference because Virtual Box will also set this property to the VM name.
-            VirtualHardwareSection_Type[] vhsList = OVF.FindVirtualHardwareSection(ovfEnv, systemid);
+            VirtualHardwareSection_Type[] vhsList = OVF.FindVirtualHardwareSection(ovfEnv, sysId);
 
             foreach (VirtualHardwareSection_Type vhs in vhsList)
             {
