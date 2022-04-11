@@ -29,10 +29,9 @@
  * SUCH DAMAGE.
  */
 
-using System;
+using System.Drawing;
 using System.Windows.Forms;
 using XenAdmin.XenSearch;
-using System.Drawing;
 using XenAPI;
 using XenCenterLib;
 
@@ -135,7 +134,7 @@ namespace XenAdmin.Core
         }
 
         private static void PopulateMenuWith(ToolStripSplitButton button, LimitedStack<HistoryItem> history, 
-            HistoryNavigationDelegate historyNaviagtionDelegate)
+            HistoryNavigationDelegate historyNavigationDelegate)
         {
             button.DropDownItems.Clear();
 
@@ -143,14 +142,13 @@ namespace XenAdmin.Core
             foreach (HistoryItem item in history)
             {
                 int j = ++i;
-                ToolStripMenuItem menuItem = new ToolStripMenuItem();
-                menuItem.Text = item.Name.EscapeAmpersands();
-                menuItem.Image = item.Image;
-                menuItem.ImageScaling = ToolStripItemImageScaling.None;
-                menuItem.Click += delegate(Object sender, EventArgs e)
+                var menuItem = new ToolStripMenuItem
                 {
-                    historyNaviagtionDelegate(j);
+                    Text = item.Name.EscapeAmpersands(),
+                    Image = item.Image,
+                    ImageScaling = ToolStripItemImageScaling.None
                 };
+                menuItem.Click += (sender, e) => historyNavigationDelegate(j);
 
                 button.DropDownItems.Add(menuItem);
             }
@@ -207,13 +205,7 @@ namespace XenAdmin.Core
         public override string Name => string.Format("{0}, ({1})",
             o == null ? BrandManager.BrandConsole : Helpers.GetName(o), tab.Text);
 
-        public override Image Image
-        {
-            get
-            {
-                return o == null ? Images.GetImage16For(Icons.XenCenter) : Images.GetImage16For(o);
-            }
-        }
+        public override Image Image => o == null ? Images.GetImage16For(Icons.XenCenter) : Images.GetImage16For(o);
     }
 
     internal class SearchHistoryItem : HistoryItem
@@ -244,21 +236,9 @@ namespace XenAdmin.Core
             return search.GetHashCode();
         }
 
-        public override string Name
-        {
-            get
-            {
-                return search.Name;
-            }
-        }
+        public override string Name => search.Name;
 
-        public override Image Image
-        {
-            get
-            {
-                return Images.GetImage16For(search);
-            }
-        }
+        public override Image Image => Images.GetImage16For(search);
     }
 
     internal class ModifiedSearchHistoryItem : HistoryItem
@@ -307,12 +287,6 @@ namespace XenAdmin.Core
         public override string Name => string.Format("{0}, ({1})",
             o == null ? BrandManager.BrandConsole : Helpers.GetName(o), Program.MainWindow.TabPageSearch.Text);
 
-        public override Image Image
-        {
-            get
-            {
-                return o == null ? Images.GetImage16For(Icons.XenCenter) : Images.GetImage16For(o);
-            }
-        }
+        public override Image Image => o == null ? Images.GetImage16For(Icons.XenCenter) : Images.GetImage16For(o);
     }
 }

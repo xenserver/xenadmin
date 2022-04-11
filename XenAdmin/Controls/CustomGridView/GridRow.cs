@@ -38,7 +38,7 @@ namespace XenAdmin.Controls.CustomGridView
 {
     public class GridRow : IComparable<GridRow>
     {
-        public Dictionary<string, GridItemBase> Items { get; }= new Dictionary<string, GridItemBase>();
+        public Dictionary<string, GridItemBase> Items { get; } = new Dictionary<string, GridItemBase>();
         public List<GridRow> Rows { get; } = new List<GridRow>();
 
         private Image Image => Expanded
