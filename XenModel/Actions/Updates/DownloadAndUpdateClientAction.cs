@@ -90,6 +90,9 @@ namespace XenAdmin.Actions.Updates
             {
                 do
                 {
+                    if (Cancelling)
+                        throw new CancelledException();
+
                     if (needToRetry)
                         Thread.Sleep(SLEEP_TIME_BEFORE_RETRY_MS);
 

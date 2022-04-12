@@ -111,7 +111,7 @@ namespace XenAdmin.Alerts
 
         public static void DownloadAndInstallNewClient(ClientUpdateAlert updateAlert, IWin32Window parent)
         {
-            var outputPathAndFileName = Path.Combine(Path.GetTempPath(), $"{updateAlert.Name}.msi");
+            var outputPathAndFileName = Path.Combine(Path.GetTempPath(), $"{BrandManager.BrandConsoleNoSpace}.msi");
 
             var downloadAndInstallClientAction = new DownloadAndUpdateClientAction(updateAlert.Name, new Uri(updateAlert.NewVersion.Url), outputPathAndFileName, updateAlert.Checksum);
 
@@ -137,7 +137,10 @@ namespace XenAdmin.Alerts
             if (currentTasks)
             {
                 if (new Dialogs.WarningDialogs.CloseXenCenterWarningDialog(true).ShowDialog(parent) != DialogResult.OK)
+                {
+                    downloadAndInstallClientAction.ReleaseInstaller();
                     return;
+                }
             }
 
             try
