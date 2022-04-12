@@ -19,7 +19,7 @@ namespace XenAdmin {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class InvisibleMessages {
@@ -120,15 +120,6 @@ namespace XenAdmin {
         public static string ISL_DEPRECATION_URL {
             get {
                 return ResourceManager.GetString("ISL_DEPRECATION_URL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to iso.
-        /// </summary>
-        public static string ISO_UPDATE {
-            get {
-                return ResourceManager.GetString("ISO_UPDATE", resourceCulture);
             }
         }
         

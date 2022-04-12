@@ -110,7 +110,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 if (SelectedPatchFilePath.ToLowerInvariant().EndsWith($".{BrandManager.ExtensionUpdate.ToLowerInvariant()}"))
                     SelectedUpdateType = UpdateType.Legacy;
-                else if (SelectedPatchFilePath.ToLowerInvariant().EndsWith($".{InvisibleMessages.ISO_UPDATE.ToLowerInvariant()}"))
+                else if (SelectedPatchFilePath.ToLowerInvariant().EndsWith(".iso"))
                     SelectedUpdateType = UpdateType.ISO;
 
                 AlertFromFileOnDisk = GetAlertFromFile(SelectedPatchFilePath, out var hasUpdateXml, out var isUpgradeIso);
@@ -146,7 +146,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             hasUpdateXml = false;
             isUpgradeIso = false;
 
-            if (!fileName.ToLowerInvariant().EndsWith($".{InvisibleMessages.ISO_UPDATE.ToLowerInvariant()}"))
+            if (!fileName.ToLowerInvariant().EndsWith(".iso"))
                 return null;
 
             var xmlDoc = new XmlDocument();
