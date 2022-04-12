@@ -194,38 +194,34 @@ namespace XenAdmin.Dialogs.Wlb
 
         private bool checkEnabled_OkButton()
         {
-            int dummy;
-            return (textboxWlbUrl.Text.Length > 0) &&
-                   (IsValidServerAddress(textboxWlbUrl.Text)) &&
-                   (textboxWLBPort.Text.Length > 0) &&
-                   (int.TryParse(textboxWLBPort.Text, out dummy)) &&
-                   (textboxWlbUserName.Text.Length > 0) &&
-                   (textboxWlbPassword.Text.Length > 0) &&
-                   (textboxXSUserName.Text.Length>0) &&
-                   (textboxXSPassword.Text.Length>0);
+            return textboxWlbUrl.Text.Length > 0 &&
+                   IsValidServerAddress(textboxWlbUrl.Text) &&
+                   textboxWLBPort.Text.Length > 0 &&
+                   int.TryParse(textboxWLBPort.Text, out _) &&
+                   textboxWlbUserName.Text.Length > 0 &&
+                   textboxWlbPassword.Text.Length > 0 &&
+                   textboxXSUserName.Text.Length > 0 &&
+                   textboxXSPassword.Text.Length > 0;
         }
 
         private bool IsValidServerAddress(string addr)
         {
             // A valid server address should be an IPv4 / IPv6 address or a valid domain name
 
-            IPAddress address;
-            if (IPAddress.TryParse(addr, out address))
+            if (IPAddress.TryParse(addr, out var address))
             {
                 return address.AddressFamily == AddressFamily.InterNetwork || address.AddressFamily == AddressFamily.InterNetworkV6;
             }
-            else
+
+            try
             {
-                try
-                {
-                    // adopt UriBuilder as a quick validator
-                    UriBuilder ub = new UriBuilder(string.Format("http://user:password@{0}:80/", addr));
-                    return ub.Host == addr;
-                }
-                catch
-                {
-                    return false;
-                }
+                // use UriBuilder as a quick validator
+                var ub = new UriBuilder($"http://{addr}:80/");
+                return ub.Host == addr;
+            }
+            catch
+            {
+                return false;
             }
         }
 

@@ -50,15 +50,10 @@ namespace XenAdmin.Actions
         private string uploadToken;
         private string diagnosticToken;
 
-        private const string identityTokenUrl = "/auth/api/create_identity/";
-        private const string uploadGrantTokenUrl = "/feeds/api/create_grant/";
-        private const string uploadTokenUrl = "/feeds/api/create_upload/";
-        private const string diagnosticTokenUrl = "/diag_sdk/token_grant/";
-
-        private readonly string identityTokenDomainName = "https://cis.citrix.com";
-        private readonly string uploadGrantTokenDomainName = "https://rttf.citrix.com";
-        private readonly string uploadTokenDomainName = "https://rttf.citrix.com";
-        private readonly string diagnosticTokenDomainName = " https://cis.citrix.com";
+        private readonly string _identityDomain = "https://cis.citrix.com";
+        private readonly string _uploadGrantDomain = "https://rttf.citrix.com";
+        private readonly string _uploadDomain = "https://rttf.citrix.com";
+        private readonly string _diagnosticDomain = " https://cis.citrix.com";
 
         private readonly string productKey = "1a2d94a4263cd016dd7a7d510bde87f058a0b75d";
 
@@ -75,20 +70,25 @@ namespace XenAdmin.Actions
         }
 
         public HealthCheckAuthenticationAction(string username, string password,
-            string identityTokenDomainName, string uploadGrantTokenDomainName, string uploadTokenDomainName, string diagnosticTokenDomainName, 
+            string identityDomain, string uploadGrantDomain, string uploadDomain, string diagnosticDomain, 
             string productKey, long tokenExpiration, bool diagnosticTokenRequired, bool suppressHistory)
             : this(username, password, tokenExpiration, suppressHistory)
         {
-            if (!string.IsNullOrEmpty(identityTokenDomainName))
-                this.identityTokenDomainName = identityTokenDomainName;
-            if (!string.IsNullOrEmpty(uploadGrantTokenDomainName))
-                this.uploadGrantTokenDomainName = uploadGrantTokenDomainName;
-            if (!string.IsNullOrEmpty(uploadTokenDomainName))
-                this.uploadTokenDomainName = uploadTokenDomainName;
-            if (!string.IsNullOrEmpty(diagnosticTokenDomainName))
-                this.diagnosticTokenDomainName = diagnosticTokenDomainName;
+            if (!string.IsNullOrEmpty(identityDomain))
+                _identityDomain = identityDomain;
+
+            if (!string.IsNullOrEmpty(uploadGrantDomain))
+                _uploadGrantDomain = uploadGrantDomain;
+
+            if (!string.IsNullOrEmpty(uploadDomain))
+                _uploadDomain = uploadDomain;
+
+            if (!string.IsNullOrEmpty(diagnosticDomain))
+                _diagnosticDomain = diagnosticDomain;
+
             if (!string.IsNullOrEmpty(productKey))
                 this.productKey = productKey;
+
             this.diagnosticTokenRequired = diagnosticTokenRequired;
         }
 
@@ -131,21 +131,21 @@ namespace XenAdmin.Actions
                 username,
                 password
             });
-            var urlString = string.Format("{0}{1}", identityTokenDomainName, identityTokenUrl);
+            var urlString = $"{_identityDomain}/auth/api/create_identity/";
             try
             {
                 return GetToken(urlString, json, null);
             }
             catch (WebException e)
             {
-                log.Info($"WebException while getting identity token from {identityTokenDomainName}.", e);
+                log.Info($"WebException while getting identity token from {_identityDomain}.", e);
                 if (e.Status == WebExceptionStatus.ProtocolError && ((HttpWebResponse) e.Response).StatusCode == HttpStatusCode.Forbidden)
                     throw new HealthCheckAuthenticationException(Messages.HEALTH_CHECK_AUTHENTICATION_INVALID_CREDENTIALS, e);
                 throw;
             }
             catch (Exception e) 
             {
-                log.Info($"Exception while getting identity token from {identityTokenDomainName}.", e);
+                log.Info($"Exception while getting identity token from {_identityDomain}.", e);
                 throw;
             }
         }
@@ -164,7 +164,7 @@ namespace XenAdmin.Actions
                     expiration = tokenExpiration
                 });
             }
-            var urlString = string.Format("{0}{1}", uploadGrantTokenDomainName, uploadGrantTokenUrl);
+            var urlString = $"{_uploadGrantDomain}/feeds/api/create_grant/";
 
             try
             {
@@ -172,7 +172,7 @@ namespace XenAdmin.Actions
             }
             catch (Exception e)
             {
-                log.Info($"Exception while getting upload grant token from {uploadGrantTokenDomainName}.", e);
+                log.Info($"Exception while getting upload grant token from {_uploadGrantDomain}.", e);
                 throw;
             }
         }
@@ -185,14 +185,14 @@ namespace XenAdmin.Actions
                 product_key = productKey,
                 expiration = tokenExpiration
             });
-            var urlString = string.Format("{0}{1}", uploadTokenDomainName, uploadTokenUrl);
+            var urlString = $"{_uploadDomain}/feeds/api/create_upload/";
             try
             {
                 return GetToken(urlString, json, null);
             }
             catch (Exception e)
             {
-                log.Info($"Exception while getting upload token from {uploadTokenDomainName}.", e);
+                log.Info($"Exception while getting upload token from {_uploadDomain}.", e);
                 throw;
             }
         }
@@ -204,7 +204,7 @@ namespace XenAdmin.Actions
                 agent = "XenServer",
                 max_age = tokenExpiration
             });
-            var urlString = string.Format("{0}{1}", diagnosticTokenDomainName, diagnosticTokenUrl);
+            var urlString = $"{_diagnosticDomain}/diag_sdk/token_grant/";
 
             try
             {
@@ -212,7 +212,7 @@ namespace XenAdmin.Actions
             }
             catch (Exception e)
             {
-                log.Info($"Exception while getting diagnostic token from {diagnosticTokenDomainName}.", e);
+                log.Info($"Exception while getting diagnostic token from {_diagnosticDomain}.", e);
                 throw;
             }
         }
