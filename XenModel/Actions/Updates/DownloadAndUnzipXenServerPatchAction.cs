@@ -81,7 +81,7 @@ namespace XenAdmin.Actions
             address = uri;
             downloadUpdate = address != null;
             updateFileSuffixes = (from item in updateFileExtensions select $".{item}").ToArray();
-            skipUnzipping = downloadUpdate && updateFileSuffixes.Any(item => address.ToString().ToLowerInvariant().Contains(item));
+            skipUnzipping = downloadUpdate && updateFileSuffixes.Any(item => address.ToString().ToLowerInvariant().Contains(item.ToLowerInvariant()));
             this.outputFileName = outputFileName;
         }
 
@@ -200,9 +200,9 @@ namespace XenAdmin.Actions
 
                     while (iterator.HasNext())
                     {
-                        string currentExtension = Path.GetExtension(iterator.CurrentFileName()).ToLowerInvariant();
+                        string currentExtension = Path.GetExtension(iterator.CurrentFileName());
 
-                        if (updateFileSuffixes.Any(item => item.ToLowerInvariant() == currentExtension))
+                        if (updateFileSuffixes.Any(item => item.ToLowerInvariant() == currentExtension.ToLowerInvariant()))
                         {
                             string path = downloadUpdate
                                 ? Path.Combine(Path.GetDirectoryName(outputFileName), iterator.CurrentFileName())
