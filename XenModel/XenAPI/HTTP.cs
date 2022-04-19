@@ -771,16 +771,24 @@ namespace XenAPI
         public static void Get(DataCopiedDelegate dataCopiedDelegate, FuncBool cancellingDelegate,
             Uri uri, IWebProxy proxy, string path, int timeoutMs)
         {
-            var dir = Path.GetDirectoryName(path);
-            if (dir == null)
-            {
-                if (path == null)
-                    throw new ArgumentNullException(nameof(path));
+            if (string.IsNullOrWhiteSpace(path))
                 throw new ArgumentException(nameof(path));
-            }
 
-            var tmpFile = Path.Combine(dir, Path.GetRandomFileName());
-            File.Delete(tmpFile);
+            var tmpFile = Path.GetTempFileName();
+
+            if (Path.GetPathRoot(path) != Path.GetPathRoot(tmpFile))
+            {
+                //CA-365905: if the target path is under a root different from
+                //the temp file, use instead a temp file under the target root,
+                //otherwise there may not be enough space for the download
+
+                var dir = Path.GetDirectoryName(path);
+                if (dir == null) //path is root directory
+                    throw new ArgumentException(nameof(path));
+
+                tmpFile = Path.Combine(dir, Path.GetRandomFileName());
+                File.Delete(tmpFile);
+            }
 
             try
             {
