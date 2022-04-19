@@ -103,7 +103,7 @@ namespace XenAdmin.Actions
 
         private void CopyClientLogs()
         {
-            string logDestination = string.Format("{0}\\{1}-{2}.log", filePath, timeString, BrandManager.BrandConsole);
+            string logDestination = string.Format("{0}\\{1}-{2}.log", filePath, timeString, BrandManager.BrandConsoleNoSpace);
             if (includeClientLogs)
             {
                 string logPath = XenAdminConfigManager.Provider.GetLogFile();
