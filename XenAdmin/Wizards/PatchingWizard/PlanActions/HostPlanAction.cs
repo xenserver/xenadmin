@@ -98,6 +98,16 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                         if (hostObj.Connection.Cache.Hosts.Any(h=>h.updates_requiring_reboot.Count > 0 && !h.enabled))
                             throw new Exception(string.Format(Messages.PLAN_ACTION_FAILURE_NO_HOSTS_AVAILABLE, hostObj.Name()));
                     }
+
+                    if (f.ErrorDescription.Count > 1 && f.ErrorDescription[0] == Failure.VM_LACKS_FEATURE)
+                    {
+                        log.WarnFormat("Host {0} cannot be evacuated: {1}", hostObj.Name(), f.Message);
+
+                        var vm = hostObj.Connection.Resolve(new XenRef<VM>(f.ErrorDescription[1]));
+                        if (vm != null)
+                            throw new Exception(string.Format(Messages.PLAN_ACTION_FAILURE_VM_LACKS_FEATURE, hostObj.Name(), vm.Name()));
+                    }
+
                     throw;
                 }
             }
