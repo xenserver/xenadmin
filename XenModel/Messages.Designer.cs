@@ -30678,6 +30678,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Server &apos;{0}&apos; could not be evacuated because VM &apos;{1}&apos; lacks the feature the attempted operation needs..
+        /// </summary>
+        public static string PLAN_ACTION_FAILURE_VM_LACKS_FEATURE {
+            get {
+                return ResourceManager.GetString("PLAN_ACTION_FAILURE_VM_LACKS_FEATURE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Installing {0} on &apos;{1}&apos;....
         /// </summary>
         public static string PLAN_ACTION_STATUS_INSTALLING_XENSERVER {
