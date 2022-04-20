@@ -139,7 +139,7 @@ namespace XenAdmin.Actions
                         return;
                     try
                     {
-                        action.RunExternal(action.Session);
+                        action.RunSync(action.Session);
                     }
                     catch (Exception e)
                     {

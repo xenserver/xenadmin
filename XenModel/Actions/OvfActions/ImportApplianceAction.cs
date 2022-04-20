@@ -125,26 +125,26 @@ namespace XenAdmin.Actions.OvfActions
 			{
                 CheckForCancellation();
 
-				string systemid = vmMapping.Key;
+				string sysId = vmMapping.Key;
 				var mapping = vmMapping.Value;
-                EnvelopeType[] envs = OVF.Split(m_package.OvfEnvelope, "system", new object[] {new[] {systemid}});
+                EnvelopeType[] envs = OVF.Split(m_package.OvfEnvelope, "system", new object[] {new[] {sysId}});
 
 				//storage
 				foreach (var kvp in mapping.Storage)
-					OVF.SetTargetSRInRASD(envs[0], systemid, kvp.Key, kvp.Value.uuid);
+					OVF.SetTargetSRInRASD(envs[0], sysId, kvp.Key, kvp.Value.uuid);
 
 			    foreach (var kvp in mapping.StorageToAttach)
-                    OVF.SetTargetVDIInRASD(envs[0], systemid, kvp.Key, kvp.Value.uuid);
+                    OVF.SetTargetVDIInRASD(envs[0], sysId, kvp.Key, kvp.Value.uuid);
 
 				//network
 				foreach (var kvp in mapping.Networks)
-					OVF.SetTargetNetworkInRASD(envs[0], systemid, kvp.Key, kvp.Value.uuid);
+					OVF.SetTargetNetworkInRASD(envs[0], sysId, kvp.Key, kvp.Value.uuid);
 
 				if (m_runfixups)
 				{
-					string cdId = OVF.SetRunOnceBootCDROMOSFixup(envs[0], systemid,
+					string cdId = OVF.SetRunOnceBootCDROMOSFixup(envs[0], sysId,
                         Path.GetDirectoryName(m_package.PackageSourceFile), BrandManager.ProductBrand);
-					OVF.SetTargetISOSRInRASD(envs[0], systemid, cdId, m_selectedIsoSr.uuid);
+					OVF.SetTargetISOSRInRASD(envs[0], sysId, cdId, m_selectedIsoSr.uuid);
 				}
 
 				envelopes.Add(envs[0]);

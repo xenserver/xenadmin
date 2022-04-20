@@ -59,7 +59,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             {
                 var action = _problems[i].CreateUnwindChangesAction();
                 if (action != null && action.Connection != null && action.Connection.IsConnected)
-                    action.RunExternal(null);
+                    action.RunSync(null);
                 PercentComplete = i * 100 / _problems.Count;
             }
         }

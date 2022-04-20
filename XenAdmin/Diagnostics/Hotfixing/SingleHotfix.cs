@@ -75,10 +75,10 @@ namespace XenAdmin.Diagnostics.Hotfixing
                 var coordinator = Helpers.GetCoordinator(host.Connection);
                 var filePath = Path.Combine(Program.AssemblyDir, String.Format("{0}.{1}", Filename, BrandManager.ExtensionUpdate));
                 var action = new UploadPatchAction(coordinator.Connection, filePath, false, false);
-                action.RunExternal(session);
+                action.RunSync(session);
                 patch = action.Patch;
             }
-            new ApplyPatchAction(patch, host).RunExternal(session);
+            new ApplyPatchAction(patch, host).RunSync(session);
         }
 
         private void UploadAndApplyUpdate(Host host, Session session)
@@ -89,10 +89,10 @@ namespace XenAdmin.Diagnostics.Hotfixing
                 var coordinator = Helpers.GetCoordinator(host.Connection);
                 var filePath = Path.Combine(Program.AssemblyDir, $"{Filename}.iso");
                 var action = new UploadSupplementalPackAction(coordinator.Connection, new List<Host> { coordinator }, filePath, false);
-                action.RunExternal(session);
+                action.RunSync(session);
                 update = action.PoolUpdate;
             }
-            new ApplyUpdateAction(update, host, false).RunExternal(session);
+            new ApplyUpdateAction(update, host, false).RunSync(session);
         }
         
         public override bool ShouldBeAppliedTo(Host host)

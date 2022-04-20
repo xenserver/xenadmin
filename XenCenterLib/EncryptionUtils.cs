@@ -128,11 +128,14 @@ namespace XenCenterLib
         {
             byte[] saltBytes = GetSalt();
 
-            using (var alg = new AesManaged())
+            using (var alg = new AesManaged
+                   {
+                       Key = keyBytes,
+                       IV = saltBytes,
+                       Padding = PaddingMode.PKCS7,//default value
+                       Mode = CipherMode.CBC//default value
+                   })
             {
-                alg.Key = keyBytes;
-                alg.IV = saltBytes;
-
                 using (var ms = new MemoryStream())
                 using (var cs = new CryptoStream(ms, alg.CreateEncryptor(), CryptoStreamMode.Write))
                 {
@@ -161,12 +164,14 @@ namespace XenCenterLib
 
             try
             {
-                using (var alg = new AesManaged())
-                {
-                    alg.IV = saltBytes;
-                    alg.Key = ComputeHash(key);
+                using (var alg = new AesManaged
+                       {
+                           IV = saltBytes,
+                           Key = ComputeHash(key),
+                           Padding = PaddingMode.PKCS7,//default value
+                           Mode = CipherMode.CBC//default value
+                       })
                     return DecryptString(cipherBytes, alg);
-                }
             }
             catch (Exception e)
             {

@@ -151,7 +151,7 @@ namespace XenAdmin.Wizards.NewVMWizard
 
             try
             {
-                action.RunExternal(Connection.Session);
+                action.RunSync(Connection.Session);
                 var result = action.Result.Replace("\n", Environment.NewLine);
                 ConfigDriveTemplateTextBox.Text = result;
                 existingConfig = result;

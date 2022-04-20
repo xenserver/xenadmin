@@ -139,9 +139,11 @@ namespace XenAdmin.Commands
         private void DoDisconnect(IXenConnection connection)
         {
             string msg = string.Format(Messages.CONNECTION_CLOSED_NOTICE_TEXT, connection.Hostname);
-            ActionBase notice = new ActionBase(msg, msg, false, true);
-            notice.Pool = Helpers.GetPoolOfOne(connection);
-            notice.Host = Helpers.GetCoordinator(connection);
+            new DummyAction(msg, msg)
+            {
+                Pool = Helpers.GetPoolOfOne(connection),
+                Host = Helpers.GetCoordinator(connection)
+            }.Run();
             log.Warn($"Connection to {connection.Hostname} closed.");
 
             MainWindowCommandInterface.CloseActiveWizards(connection);

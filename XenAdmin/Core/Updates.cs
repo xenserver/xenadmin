@@ -120,34 +120,6 @@ namespace XenAdmin.Core
                 userAgent);
         }
 
-        /// <summary>
-        /// It does exactly what CheckForUpdates(true) does, but this is sync and shows an ActionProgressDialog while running
-        /// </summary>
-        /// <returns>true if the action has succeeded</returns>
-        public static bool CheckForUpdatesSync(Control parentForProgressDialog)
-        {
-            if (Helpers.CommonCriteriaCertificationRelease)
-                return false;
-
-            var action = CreateDownloadUpdatesXmlAction(true, true, true);
-            action.Completed += actionCompleted;
-
-            if (CheckForUpdatesStarted != null)
-                CheckForUpdatesStarted();
-
-            if (parentForProgressDialog != null)
-            {
-                using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
-                    dialog.ShowDialog(parentForProgressDialog);
-            }
-            else
-            {
-                action.RunExternal(action.Session);
-            }
-
-            return action.Succeeded;
-        }
-
         private static void actionCompleted(ActionBase sender)
         {
             Program.AssertOffEventThread();

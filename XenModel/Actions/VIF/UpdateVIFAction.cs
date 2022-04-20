@@ -55,10 +55,10 @@ namespace XenAdmin.Actions
         {
             Description = Messages.ACTION_VIF_UPDATING;
 
-            new DeleteVIFAction(vif, true).RunExternal(Session);
+            new DeleteVIFAction(vif, true).RunSync(Session);
 
             var createAction = new CreateVIFAction(VM, vifDescriptor, true);
-            createAction.RunExternal(Session);
+            createAction.RunSync(Session);
             RebootRequired = createAction.RebootRequired;
 
             Description = Messages.ACTION_VIF_UPDATED;

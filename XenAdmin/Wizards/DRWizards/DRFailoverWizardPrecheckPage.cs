@@ -313,7 +313,7 @@ namespace XenAdmin.Wizards.DRWizards
                                 VdiOpenDatabaseAction action = new VdiOpenDatabaseAction(Connection,
                                                                                          ((AssertCanBeRecoveredCheck
                                                                                           )checkGroup[0]).Vdi);
-                                action.RunExternal(action.Session);
+                                action.RunSync(action.Session);
                                 if (action.Succeeded && action.MetadataSession != null)
                                     metadataSession = action.MetadataSession;
                             }

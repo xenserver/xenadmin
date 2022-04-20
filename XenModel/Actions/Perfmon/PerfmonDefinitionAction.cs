@@ -170,7 +170,7 @@ namespace XenAdmin.Actions
                     new RunPluginAction(host.Connection, host,
                         XenServerPlugins.PLUGIN_PERFMON_PLUGIN,
                         XenServerPlugins.PLUGIN_PERFMON_FUNCTION_REFRESH,
-                        new Dictionary<string, string>(), true).RunExternal(Session);
+                        new Dictionary<string, string>(), true).RunSync(Session);
                 }
                 catch (Exception e)
                 {
@@ -183,12 +183,12 @@ namespace XenAdmin.Actions
                             new RunPluginAction(host.Connection, host,
                                 XenServerPlugins.PLUGIN_PERFMON_PLUGIN,
                                 XenServerPlugins.PLUGIN_PERFMON_FUNCTION_START,
-                                new Dictionary<string, string>(), true).RunExternal(Session);
+                                new Dictionary<string, string>(), true).RunSync(Session);
 
                             new RunPluginAction(host.Connection, host,
                                 XenServerPlugins.PLUGIN_PERFMON_PLUGIN,
                                 XenServerPlugins.PLUGIN_PERFMON_FUNCTION_REFRESH,
-                                new Dictionary<string, string>(), true).RunExternal(Session);
+                                new Dictionary<string, string>(), true).RunSync(Session);
                         }
                         catch (Exception ex)
                         {

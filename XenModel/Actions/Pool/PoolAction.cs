@@ -68,7 +68,7 @@ namespace XenAdmin.Actions
             Host poolCoordinator = Helpers.GetCoordinator(pool);
             AsyncAction action = new ApplyLicenseEditionAction(hostsToRelicense.ConvertAll(h=>h as IXenObject), Host.GetEdition(poolCoordinator.edition), poolCoordinator.license_server["address"], poolCoordinator.license_server["port"], 
                 doOnLicensingFailure);
-            action.RunExternal(null);
+            action.RunSync(null);
         }
 
         /// <summary>
@@ -167,7 +167,7 @@ namespace XenAdmin.Actions
                         action = new EnableAdAction(h.Connection, poolCoordinator.external_auth_service_name,
                                 adUserAndPassword.Username, adUserAndPassword.Password)
                             {Host = h};
-                        action.RunExternal(null);
+                        action.RunSync(null);
                     }
                 }
                 catch (EnableAdAction.CredentialsFailure)

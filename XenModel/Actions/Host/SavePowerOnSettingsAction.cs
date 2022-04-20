@@ -93,7 +93,7 @@ namespace XenAdmin.Actions
 
                             var wlbAction = new SendWlbConfigurationAction(pool, hostConfig.ToDictionary(),
                                 SendWlbConfigurationKind.SetHostConfiguration);
-                            wlbAction.RunExternal(Session);
+                            wlbAction.RunSync(Session);
                         }
                     }
                     catch

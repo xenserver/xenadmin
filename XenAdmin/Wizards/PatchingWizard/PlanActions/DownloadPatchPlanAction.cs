@@ -93,7 +93,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             downloadAction.Changed += downloadAndUnzipXenServerPatchAction_Changed;
             downloadAction.Completed += downloadAndUnzipXenServerPatchAction_Completed;
 
-            downloadAction.RunExternal(session);
+            downloadAction.RunSync(session);
         }
 
         private void downloadAndUnzipXenServerPatchAction_Changed(ActionBase action)

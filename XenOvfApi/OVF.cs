@@ -1305,32 +1305,26 @@ namespace XenOvf
             return vhs;
         }
 
-        public static string AddVirtualSystem(EnvelopeType ovfObj, string ovfname)
-        {
-            return AddVirtualSystem(ovfObj, LANGUAGE, ovfname);
-        }
         /// <summary>
         /// Add a Virtual System Section to OVF
         /// MUST be done at least once.
         /// </summary>
         /// <param name="ovfObj">object of type EnvelopeType</param>
-        /// <param name="lang">Language</param>
         /// <param name="ovfname">Name of the OVF</param>
+        /// <param name="sysId">the unique id of the virtual system</param>
+        /// <param name="lang">Language</param>
         /// <returns>InstanceId of Virtual System</returns>
-        public static string AddVirtualSystem(EnvelopeType ovfObj, string lang, string ovfname)
+        public static void AddVirtualSystem(EnvelopeType ovfObj, string ovfname, string sysId, string lang = LANGUAGE)
         {
-
-            VirtualSystem_Type vs = new VirtualSystem_Type();
-            vs.id = Guid.NewGuid().ToString();
+            VirtualSystem_Type vs = new VirtualSystem_Type {id = sysId};
             string info = _ovfrm.GetString("VIRTUAL_SYSTEM_TYPE_INFO");
             vs.Info = new Msg_Type(AddToStringSection(ovfObj, lang, info), info);
-            vs.Name = new Msg_Type[1] { new Msg_Type(AddToStringSection(ovfObj, lang, ovfname), ovfname) };
+            vs.Name = new[] {new Msg_Type(AddToStringSection(ovfObj, lang, ovfname), ovfname)};
 
             AddVirtualSystem(ovfObj, vs);
             AddOperatingSystemSection(ovfObj, vs.id, lang, null, null);
 
             log.Debug("OVF.AddVirtualSystem(obj,lang,ovfname) completed");
-            return vs.id;
         }
 
         public static void AddVirtualSystem(EnvelopeType ovfEnv, VirtualSystem_Type vs)
@@ -1391,54 +1385,54 @@ namespace XenOvf
 
         #region CREATEs
 
-        public static EnvelopeType CreateOvfEnvelope(string vmName, ulong cpuCount, ulong memory,
+        public static EnvelopeType CreateOvfEnvelope(string sysId, string vmName, ulong cpuCount, ulong memory,
             string bootParams, string platformSettings, ulong capacity,
             string diskPath, ulong imageLength, string productBrand)
         {
             EnvelopeType env = CreateEnvelope(vmName);
-            string systemID = AddVirtualSystem(env, vmName);
+            AddVirtualSystem(env, vmName, sysId);
 
-            string hdwareSectionId = AddVirtualHardwareSection(env, systemID);
+            string hdwareSectionId = AddVirtualHardwareSection(env, sysId);
             string guid = Guid.NewGuid().ToString();
-            AddVirtualSystemSettingData(env, systemID, hdwareSectionId, env.Name, Messages.VIRTUAL_MACHINE, Messages.OVF_CREATED, guid, "hvm-3.0-unknown");
+            AddVirtualSystemSettingData(env, sysId, hdwareSectionId, env.Name, Messages.VIRTUAL_MACHINE, Messages.OVF_CREATED, guid, "hvm-3.0-unknown");
 
-            AddOtherSystemSettingData(env, systemID, "HVM_boot_policy", "BIOS order", GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_2"));
+            AddOtherSystemSettingData(env, sysId, "HVM_boot_policy", "BIOS order", GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_2"));
 
-            AddOtherSystemSettingData(env, systemID, "HVM_boot_params",
+            AddOtherSystemSettingData(env, sysId, "HVM_boot_params",
                 "order=dc;" + bootParams,
                 GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_6"));
 
-            AddOtherSystemSettingData(env, systemID, "platform",
+            AddOtherSystemSettingData(env, sysId, "platform",
                 "nx=true;acpi=true;apic=true;pae=true;stdvga=0;" + platformSettings,
                 string.Format(GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_3"), productBrand));
 
-            SetCPUs(env, systemID, cpuCount);
-            SetMemory(env, systemID, memory, "MB");
+            SetCPUs(env, sysId, cpuCount);
+            SetMemory(env, sysId, memory, "MB");
 
             string netId = Guid.NewGuid().ToString();
-            AddNetwork(env, systemID, netId, string.Format(Messages.NETWORK_NAME, 0), Messages.OVF_NET_DESCRIPTION, null);
+            AddNetwork(env, sysId, netId, string.Format(Messages.NETWORK_NAME, 0), Messages.OVF_NET_DESCRIPTION, null);
 
             string diskId = Guid.NewGuid().ToString();
 
-            AddDisk(env, systemID, diskId, diskPath, true, Messages.OVF_DISK_CAPTION, Messages.OVF_CREATED, imageLength, capacity);
+            AddDisk(env, sysId, diskId, diskPath, true, Messages.OVF_DISK_CAPTION, Messages.OVF_CREATED, imageLength, capacity);
 
             FinalizeEnvelope(env);
             return env;
         }
 
-        public static EnvelopeType UpdateBootParams(EnvelopeType env, string systemID, string bootParams)
+        public static EnvelopeType UpdateBootParams(EnvelopeType env, string sysId, string bootParams)
         {
-            return UpdateOtherSystemSettingsData(env, systemID, "HVM_boot_params", "order=dc;" + bootParams);
+            return UpdateOtherSystemSettingsData(env, sysId, "HVM_boot_params", "order=dc;" + bootParams);
         }
 
-        public static EnvelopeType UpdatePlatform(EnvelopeType env, string systemID, string platformSettings)
+        public static EnvelopeType UpdatePlatform(EnvelopeType env, string sysId, string platformSettings)
         {
-            return UpdateOtherSystemSettingsData(env, systemID, "platform", "nx=true;acpi=true;apic=true;pae=true;stdvga=0;" + platformSettings);
+            return UpdateOtherSystemSettingsData(env, sysId, "platform", "nx=true;acpi=true;apic=true;pae=true;stdvga=0;" + platformSettings);
         }
 
-        private static EnvelopeType UpdateOtherSystemSettingsData(EnvelopeType env, string systemID, string setting, string value)
+        private static EnvelopeType UpdateOtherSystemSettingsData(EnvelopeType env, string sysId, string setting, string value)
         {
-            VirtualHardwareSection_Type[] vhsArray = FindVirtualHardwareSection(env, systemID);
+            VirtualHardwareSection_Type[] vhsArray = FindVirtualHardwareSection(env, sysId);
             VirtualHardwareSection_Type foundVhs = null;
 
             foreach (VirtualHardwareSection_Type vhs in vhsArray)
@@ -1463,26 +1457,6 @@ namespace XenOvf
 
             config.Value = new cimString(value);
             return env;
-        }
-
-        public EnvelopeType Create(DiskInfo[] vhdExports, string pathToOvf, string ovfName)
-        {
-            return Create(vhdExports, pathToOvf, ovfName, LANGUAGE);
-        }
-        /// <summary>
-        /// Create an OVF (xml string) from local system.
-        /// *** Element[0] of VHDExports MUST be the BOOT Disk ***
-        /// DiskInfo.VHDFileName == The name the VHD will have after export.
-        /// DiskInfo.DriveId == "PHYSICALDRIVE0","PHYSICALDRIVE1"... 
-        /// </summary>
-        /// <param name="vhdExports">LIST of Names to the VHD Files to be created REQUIREMENTS: 1. Element[0] MUST be the boot device</param>
-        /// <param name="pathToOvf"></param>
-        /// <param name="lang"></param>
-        /// <param name="ovfName">Name of the OVF Package</param>
-        /// <returns>xml string representing the OVF</returns>
-        public EnvelopeType Create(DiskInfo[] vhdExports, string pathToOvf, string ovfName, string lang)
-        {
-            return ConvertPhysicaltoOVF(vhdExports, pathToOvf, ovfName, lang);
         }
 
         public static EnvelopeType CreateEnvelope(string ovfName)
@@ -3654,8 +3628,8 @@ namespace XenOvf
             return systemIds.ToArray();
         }
         /// <summary>
-        // Find a name to use of a VM within an envelope that could have come from any hypervisor.
-        // TODO: Consider refactoring this method because it is very similar to XenAdmin.Wizards.ImportWizard().
+        /// Find a name to use of a VM within an envelope that could have come from any hypervisor.
+        /// TODO: Consider refactoring this method because it is very similar to XenAdmin.Wizards.ImportWizard().
         /// </summary>
         /// <param name="ovfObj"></param>
         /// <param name="sysId"></param>

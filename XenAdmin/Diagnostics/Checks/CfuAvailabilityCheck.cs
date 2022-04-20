@@ -46,7 +46,7 @@ namespace XenAdmin.Diagnostics.Checks
 
             try
             {
-                action.RunExternal(action.Session);
+                action.RunSync(action.Session);
             }
             catch
             {

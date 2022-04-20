@@ -29,34 +29,28 @@
  * SUCH DAMAGE.
  */
 
-using XenAdmin.Actions;
-using XenAPI;
+using System;
 
-
-namespace XenAdmin.Wizards.PatchingWizard.PlanActions
+namespace XenAdmin.Actions
 {
-    public class ApplyPoolUpdatePlanAction : HostPlanAction
+    public class DummyAction : ActionBase
     {
-        private readonly Pool_update _poolUpdate;
-        private readonly bool _hostNeedsEvacuated;
+        private string _error;
 
-        public ApplyPoolUpdatePlanAction(Host host, Pool_update patch, bool hostNeedsEvacuated)
-            : base(host)
+        public DummyAction(string title, string description, string error = null)
+            : base(title, description, false)
         {
-            _poolUpdate = patch;
-            _hostNeedsEvacuated = hostNeedsEvacuated;
+            _error = error;
         }
 
-        protected override void RunWithSession(ref Session session)
+        public void Run()
         {
-            var host = GetResolvedHost();
+            if (!string.IsNullOrEmpty(_error))
+                Exception = new Exception(_error);
 
-            // evacuate the host, if needed,  before applying the update
-            if (_hostNeedsEvacuated)
-                EvacuateHost(ref session);
-
-            AddProgressStep(string.Format(Messages.UPDATES_WIZARD_APPLYING_UPDATE, _poolUpdate.Name(), host.Name()));
-            new ApplyUpdateAction(_poolUpdate, host, true).RunSync(session);
+            Finished = DateTime.Now;
+            PercentComplete = 100;
+            IsCompleted = true;
         }
     }
 }

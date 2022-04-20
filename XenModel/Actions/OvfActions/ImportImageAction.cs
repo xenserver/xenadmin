@@ -71,27 +71,27 @@ namespace XenAdmin.Actions.OvfActions
         {
             Debug.Assert(m_vmMappings.Count == 1, "There must be only one VM mapping");
 
-			string systemid = m_vmMappings.Keys.ElementAt(0);
+			string sysId = m_vmMappings.Keys.ElementAt(0);
 			var mapping = m_vmMappings.Values.ElementAt(0);
 
 			Tick(20, Messages.IMPORTING_DISK_IMAGE);
 
 			//create a copy of the ovf envelope
-			EnvelopeType[] envs = OVF.Split(m_ovfEnvelope, "system", new object[] {new[] {systemid}});
+			EnvelopeType[] envs = OVF.Split(m_ovfEnvelope, "system", new object[] {new[] {sysId}});
 			EnvelopeType curEnv = envs[0];
 
 			//storage
 			foreach (var kvp in mapping.Storage)
-				OVF.SetTargetSRInRASD(curEnv, systemid, kvp.Key, kvp.Value.uuid);
+				OVF.SetTargetSRInRASD(curEnv, sysId, kvp.Key, kvp.Value.uuid);
 
 			//network
 			foreach (var kvp in mapping.Networks)
-				OVF.SetTargetNetworkInRASD(curEnv, systemid, kvp.Key, kvp.Value.uuid);
+				OVF.SetTargetNetworkInRASD(curEnv, sysId, kvp.Key, kvp.Value.uuid);
 
 			if (m_runfixups)
 			{
-				string cdId = OVF.SetRunOnceBootCDROMOSFixup(curEnv, systemid, m_directory, BrandManager.ProductBrand);
-				OVF.SetTargetISOSRInRASD(curEnv, systemid, cdId, m_selectedIsoSr.uuid);
+				string cdId = OVF.SetRunOnceBootCDROMOSFixup(curEnv, sysId, m_directory, BrandManager.ProductBrand);
+				OVF.SetTargetISOSRInRASD(curEnv, sysId, cdId, m_selectedIsoSr.uuid);
 			}
 
             object importedObject;

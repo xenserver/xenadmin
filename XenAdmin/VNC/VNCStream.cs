@@ -44,8 +44,6 @@ namespace DotNetVnc
 {
     public class VNCStream
     {
-        private const int THUMBNAIL_SLEEP_TIME = 500;
-
         private const int RAW_ENCODING = 0;
         private const int COPY_RECTANGLE_ENCODING = 1;
         private const int RRE_ENCODING = 2;
@@ -79,11 +77,10 @@ namespace DotNetVnc
 
         private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private Thread thread = null;
+        private Thread thread;
 
-        /**
-         * Current color properties
-         */
+        #region Current color properties
+
         private int bitsPerPixel;
         private int bytesPerPixel;
         private int depth;
@@ -103,19 +100,20 @@ namespace DotNetVnc
         private int blueShift;
         private bool rgb565;
 
+        #endregion
+
         /// <summary>
         /// This event will be fired when an error occurs.  The helper thread is guaranteed to be
         /// closing down at this point.
         /// </summary>
-        public event Action<object,Exception> ErrorOccurred = null;
+        public event Action<object,Exception> ErrorOccurred;
 
-        public event EventHandler ConnectionSuccess = null;
+        public event EventHandler ConnectionSuccess;
 
-        /**
-         * The encodings used.  Note that these are ordered: preferred encoding first.
-         */
-        private static readonly int[] encodings = new int[] {
-            //HEXTILE_ENCODING,
+        /// <summary>
+        /// The encodings used.  Note that these are ordered: preferred encoding first.
+        /// </summary>
+        private static readonly int[] encodings = {
             CORRE_ENCODING,
             RRE_ENCODING,
 	        COPY_RECTANGLE_ENCODING,
@@ -130,61 +128,57 @@ namespace DotNetVnc
 
         private readonly MyStream stream;
 
-        private readonly Object writeLock = new Object();
-        private Object pauseMonitor = new Object();
+        private readonly object writeLock = new object();
+        private readonly object pauseMonitor = new object();
 
         private volatile bool running = true;
+        private bool paused;
 
-        private int width;
-        private int height;
+        private int _width;
+        private int _height;
 
-        private bool incremental;
-        private bool qemu_ext_key_encoding = false;
+        private bool _incremental;
+        private bool qemu_ext_key_encoding;
 
         private PixelFormat pixelFormat;
         private PixelFormat pixelFormatCursor;
 
-        private byte[] data = new byte[1228800]; //640*480*32bpp
-        private byte[] data_8bpp = null;
+        private byte[] _data = new byte[1228800]; //640*480*32bpp
+        private byte[] data_8bpp;
 
         private readonly long imageUpdateThreshold;
 
-        /*
-        public struct StatsEntry
-        {
-            public double time;
-            public int size;
-        }
-        */
+        public readonly object updateMonitor = new object(); 
 
         public VNCStream(IVNCGraphicsClient client, Stream stream, bool startPaused)
         {
             this.client = client;
             this.stream = new MyStream(stream);
-            this.paused = startPaused;
+            paused = startPaused;
 
-            long freq;
-            if (!Win32.QueryPerformanceFrequency(out freq))
+            if (!Win32.QueryPerformanceFrequency(out var freq))
             {
                 System.Diagnostics.Trace.Assert(false);
             }
             imageUpdateThreshold = freq / 3;
         }
 
-        public void connect(char[] password)
+        public void Connect(char[] password)
         {
             System.Diagnostics.Trace.Assert(thread == null);
 
-            thread = new Thread(this.run);
-            thread.Name = String.Format("VNC connection to {0} - {1}", client.VmName, client.UUID);
-            thread.IsBackground = true;
+            thread = new Thread(Run)
+            {
+                Name = $"VNC connection to {client.VmName} - {client.UUID}",
+                IsBackground = true
+            };
             thread.Start(password);
         }
 
         private void CheckProtocolVersion()
         {
             byte[] buffer = new byte[12];
-            this.stream.readFully(buffer, 0, 12);
+            stream.readFully(buffer, 0, 12);
             char[] chars = new char[12];
             Encoding.ASCII.GetDecoder().GetChars(buffer, 0, 12, chars, 0);
             String s = new String(chars);
@@ -200,80 +194,78 @@ namespace DotNetVnc
                 throw new VNCException($"Unsupported protocol version {major}.{minor}");
         }
 
-        private void sendProtocolVersion()
+        private void SendProtocolVersion()
         {
-            lock (this.writeLock)
+            lock (writeLock)
             {
                 byte[] bytes = Encoding.ASCII.GetBytes("RFB 003.003\n");
-                this.stream.Write(bytes, 0, bytes.Length);
-                this.stream.Flush();
+                stream.Write(bytes, 0, bytes.Length);
+                stream.Flush();
             }
         }
 
-        private void readPixelFormat()
+        private void ReadPixelFormat()
         {
-            this.bitsPerPixel = this.stream.readCard8();
-            this.depth = this.stream.readCard8();
-            this.bigEndian = this.stream.readFlag();
-            this.trueColor = this.stream.readFlag();
-            this.redMax = this.stream.readCard16();
-            this.greenMax = this.stream.readCard16();
-            this.blueMax = this.stream.readCard16();
-            this.redShift = this.stream.readCard8();
-            this.greenShift = this.stream.readCard8();
-            this.blueShift = this.stream.readCard8();
-            this.stream.readPadding(3);
-            Log.Debug("readPixelFormat " + this.bitsPerPixel +
-                         " " + this.depth);
+            bitsPerPixel = stream.readCard8();
+            depth = stream.readCard8();
+            bigEndian = stream.readFlag();
+            trueColor = stream.readFlag();
+            redMax = stream.readCard16();
+            greenMax = stream.readCard16();
+            blueMax = stream.readCard16();
+            redShift = stream.readCard8();
+            greenShift = stream.readCard8();
+            blueShift = stream.readCard8();
+            stream.readPadding(3);
+            Log.Debug("readPixelFormat " + bitsPerPixel + " " + depth);
         }
 
-        private void writePixelFormat()
+        private void WritePixelFormat()
         {
-            Log.Debug("writePixelFormat " + this.bitsPerPixel +
-                         " " + this.depth);
-            this.stream.writeInt8(SET_PIXEL_FORMAT);
-            this.stream.writePadding(3);
+            Log.Debug("writePixelFormat " + bitsPerPixel + " " + depth);
+            stream.writeInt8(SET_PIXEL_FORMAT);
+            stream.writePadding(3);
 
-            this.stream.writeInt8(this.bitsPerPixel);
-            this.stream.writeInt8(this.depth);
-            this.stream.writeFlag(this.bigEndian);
-            this.stream.writeFlag(this.trueColor);
-            this.stream.writeInt16(this.redMax);
-            this.stream.writeInt16(this.greenMax);
-            this.stream.writeInt16(this.blueMax);
-            this.stream.writeInt8(this.redShift);
-            this.stream.writeInt8(this.greenShift);
-            this.stream.writeInt8(this.blueShift);
+            stream.writeInt8(bitsPerPixel);
+            stream.writeInt8(depth);
+            stream.writeFlag(bigEndian);
+            stream.writeFlag(trueColor);
+            stream.writeInt16(redMax);
+            stream.writeInt16(greenMax);
+            stream.writeInt16(blueMax);
+            stream.writeInt8(redShift);
+            stream.writeInt8(greenShift);
+            stream.writeInt8(blueShift);
 
-            this.stream.writePadding(3);
+            stream.writePadding(3);
         }
 
-        private void force32bpp()
+        private void Force32bpp()
         {
             Log.Debug("force32bpp()");
 
-            this.bitsPerPixel = 32;
-            this.depth = 24;
-            this.trueColor = true;
-            this.redMax = 255;
-            this.greenMax = 255;
-            this.blueMax = 255;
-            this.redShift = 16;
-            this.greenShift = 8;
-            this.blueShift = 0;
+            bitsPerPixel = 32;
+            depth = 24;
+            trueColor = true;
+            redMax = 255;
+            greenMax = 255;
+            blueMax = 255;
+            redShift = 16;
+            greenShift = 8;
+            blueShift = 0;
 
             // Note that we keep the endian value from the server.
 
-            setupPixelFormat();
+            SetupPixelFormat();
 
-            lock (this.writeLock)
+            lock (writeLock)
             {
-                writePixelFormat();
+                WritePixelFormat();
             }
         }
 
 
-        private void setupPixelFormat()
+        private void SetupPixelFormat()
         {
             Log.Debug("setupPixelFormat(" + bitsPerPixel + ")");
 
@@ -307,98 +299,85 @@ namespace DotNetVnc
             }
         }
 
-        private void writeSetEncodings()
+        private void WriteSetEncodings()
         {
             Log.Debug("writeSetEncodings");
-            this.stream.writeInt8(SET_ENCODINGS);
-            this.stream.writePadding(1);
-            this.stream.writeInt16(encodings.Length);
-            for (int i = 0; i < encodings.Length; ++i)
-            {
-                this.stream.writeInt32(encodings[i]);
-            }
+            stream.writeInt8(SET_ENCODINGS);
+            stream.writePadding(1);
+            stream.writeInt16(encodings.Length);
+            foreach (var encoding in encodings)
+                stream.writeInt32(encoding);
         }
 
-        private void writeFramebufferUpdateRequest(
-            int x, int y, int width, int height, bool incremental
-        )
+        private void WriteFramebufferUpdateRequest(int x, int y, int width, int height, bool incremental)
         {
-            this.stream.writeInt8(FRAMEBUFFER_UPDATE_REQUEST);
-            this.stream.writeFlag(incremental);
-            this.stream.writeInt16(x);
-            this.stream.writeInt16(y);
-            this.stream.writeInt16(width);
-            this.stream.writeInt16(height);
+            stream.writeInt8(FRAMEBUFFER_UPDATE_REQUEST);
+            stream.writeFlag(incremental);
+            stream.writeInt16(x);
+            stream.writeInt16(y);
+            stream.writeInt16(width);
+            stream.writeInt16(height);
         }
 
-        private void authenticationExchange(char[] password)
+        private void AuthenticationExchange(char[] password)
         {
             Log.Debug("authenticationExchange");
 
-            int scheme = this.stream.readCard32();
-            if (scheme == 0)
+            int scheme = stream.readCard32();
+
+            switch (scheme)
             {
-                String reason = this.stream.readString();
-                throw new VNCException("connection failed: " + reason);
-            }
-            else if (scheme == 1)
-            {
-                // no authentication needed
-            }
-            else if (scheme == 2)
-            {
-                PasswordAuthentication(password);
-            }
-            else
-            {
-                throw new VNCException(
-                    "unexpected authentication scheme: " + scheme
-                );
+                case 0:
+                    var reason = stream.readString();
+                    throw new VNCException("connection failed: " + reason);
+                case 1:
+                    // no authentication needed
+                    break;
+                case 2:
+                    PasswordAuthentication(password);
+                    break;
+                default:
+                    throw new VNCException("unexpected authentication scheme: " + scheme);
             }
         }
 
         private void PasswordAuthentication(char[] password)
         {
             byte[] keyBytes = new byte[8];
-            for (int i = 0; (i < 8) && (i < password.Length); ++i)
+            for (int i = 0; i < 8 && i < password.Length; ++i)
+                keyBytes[i] = Reverse((byte)password[i]);
+
+            DESCryptoServiceProvider des = new DESCryptoServiceProvider
             {
-                keyBytes[i] = reverse((byte)password[i]);
-            }
+                Padding = PaddingMode.None,
+                Mode = CipherMode.ECB
+            };
 
-            DESCryptoServiceProvider des =
-                new DESCryptoServiceProvider();
-
-            des.Padding = PaddingMode.None;
-            des.Mode = CipherMode.ECB;
-
-            ICryptoTransform chiper =
-                des.CreateEncryptor(keyBytes, null);
+            ICryptoTransform cipher = des.CreateEncryptor(keyBytes, null);
 
             byte[] challenge = new byte[16];
-            this.stream.readFully(challenge, 0, 16);
+            stream.readFully(challenge, 0, 16);
 
-            byte[] response = chiper.TransformFinalBlock(challenge, 0, 16);
+            byte[] response = cipher.TransformFinalBlock(challenge, 0, 16);
 
-            this.stream.Write(response, 0, 16);
-            this.stream.Flush();
+            stream.Write(response, 0, 16);
+            stream.Flush();
 
-            int status = this.stream.readCard32();
+            int status = stream.readCard32();
 
-            if (status == 0)
+            switch (status)
             {
-                // ok
-            }
-            else if (status == 1 || status == 2)
-            {
-                throw new VNCAuthenticationException();
-            }
-            else
-            {
-                throw new VNCException("Bad Authentication Response");
+                case 0:
+                    break;
+                case 1:
+                case 2:
+                    throw new VNCAuthenticationException();
+                default:
+                    throw new VNCException("Bad Authentication Response");
             }
         }
 
-        private static byte reverse(byte v)
+        private static byte Reverse(byte v)
         {
             byte r = 0;
             if ((v & 0x01) != 0) r |= 0x80;
@@ -412,66 +391,67 @@ namespace DotNetVnc
             return r;
         }
 
-        private void clientInitialization()
+        private void InitializeClient()
         {
             Log.Debug("clientInitialisation");
-            lock (this.writeLock)
+            lock (writeLock)
             {
-                this.stream.writeFlag(true); // shared
-                this.stream.Flush();
+                stream.writeFlag(true); // shared
+                stream.Flush();
             }
         }
 
-        private void serverInitialization()
+        private void InitializateServer()
         {
             Log.Debug("serverInitialisation");
-            int width = this.stream.readCard16();
-            int height = this.stream.readCard16();
+            int width = stream.readCard16();
+            int height = stream.readCard16();
 
-            readPixelFormat();
+            ReadPixelFormat();
 
             stream.readString(); /* The desktop name -- we don't care. */
 
             if (trueColor)
             {
-                setupPixelFormat();
+                SetupPixelFormat();
+
                 lock (writeLock)
                 {
-                    writePixelFormat();
+                    WritePixelFormat();
                 }
             }
             else
             {
-                force32bpp();
+                Force32bpp();
             }
 
-            desktopSize(width, height);
+            DesktopSize(width, height);
 
-            lock (this.writeLock)
+            lock (writeLock)
             {
-                writeSetEncodings();
+                WriteSetEncodings();
             }
         }
 
         /**
          * Expects to be lock on writeLock.
          */
-        private void writeKey(int command, bool down, int key)
+        private void WriteKey(int command, bool down, int key)
         {
-            this.stream.writeInt8(command); //Send Scancodes
-            this.stream.writeFlag(down);
-            this.stream.writePadding(2);
-            this.stream.writeInt32(key);
+            stream.writeInt8(command); //Send Scancodes
+            stream.writeFlag(down);
+            stream.writePadding(2);
+            stream.writeInt32(key);
         }
 
-        private void writeQemuExtKey(int command, bool down, int key, int sym)
+        private void WriteQemuExtKey(int command, bool down, int key, int sym)
         {
-            this.stream.writeInt8(command);
-            this.stream.writeInt8(QEMU_EXT_KEY_EVENT);
-            this.stream.writePadding(1);
-            this.stream.writeFlag(down);
-            this.stream.writeInt32(sym);
-            this.stream.writeInt32(key);
+            stream.writeInt8(command);
+            stream.writeInt8(QEMU_EXT_KEY_EVENT);
+            stream.writePadding(1);
+            stream.writeFlag(down);
+            stream.writeInt32(sym);
+            stream.writeInt32(key);
         }
 
         /**
@@ -482,19 +462,19 @@ namespace DotNetVnc
          */
         public void keyScanEvent(bool down, int key, int sym, bool use_qemu_ext_key_encoding)
         {
-            lock (this.writeLock)
+            lock (writeLock)
             {
                 try
                 {
                     if (qemu_ext_key_encoding && use_qemu_ext_key_encoding)
                     {
-                        writeQemuExtKey(QEMU_MSG, down, key, sym);
+                        WriteQemuExtKey(QEMU_MSG, down, key, sym);
                     }
                     else
                     {
-                        writeKey(KEY_SCAN_EVENT, down, key);
+                        WriteKey(KEY_SCAN_EVENT, down, key);
                     }
-                    this.stream.Flush();
+                    stream.Flush();
                 }
                 catch (IOException e)
                 {
@@ -505,12 +485,12 @@ namespace DotNetVnc
 
         public void keyCodeEvent(bool down, int key)
         {
-            lock (this.writeLock)
+            lock (writeLock)
             {
                 try
                 {
-                    writeKey(KEY_EVENT, down, key);
-                    this.stream.Flush();
+                    WriteKey(KEY_EVENT, down, key);
+                    stream.Flush();
                 }
                 catch (IOException e)
                 {
@@ -519,32 +499,32 @@ namespace DotNetVnc
             }
         }
 
-        public void pointerEvent(int buttonMask, int x, int y)
+        public void PointerEvent(int buttonMask, int x, int y)
         {
             if (x < 0)
             {
                 x = 0;
             }
-            else if (x >= width)
+            else if (x >= _width)
             {
-                x = width - 1;
+                x = _width - 1;
             }
 
             if (y < 0)
             {
                 y = 0;
             }
-            else if (y >= height)
+            else if (y >= _height)
             {
-                y = height - 1;
+                y = _height - 1;
             }
 
-            lock (this.writeLock)
+            lock (writeLock)
             {
                 try
                 {
-                    pointerEvent_(buttonMask, x, y);
-                    this.stream.Flush();
+                    PointerEvent_(buttonMask, x, y);
+                    stream.Flush();
                 }
                 catch (IOException e)
                 {
@@ -553,9 +533,9 @@ namespace DotNetVnc
             }
         }
 
-        public void pointerWheelEvent(int x, int y, int r)
+        public void PointerWheelEvent(int x, int y, int r)
         {
-            lock (this.writeLock)
+            lock (writeLock)
             {
                 try
                 {
@@ -578,11 +558,11 @@ namespace DotNetVnc
                     }
                     for (int i = 0; i < r; i++)
                     {
-                        pointerEvent_(m, x, y);
-                        pointerEvent_(0, x, y);
+                        PointerEvent_(m, x, y);
+                        PointerEvent_(0, x, y);
                     }
 
-                    this.stream.Flush();
+                    stream.Flush();
                 }
                 catch (IOException e)
                 {
@@ -591,28 +571,26 @@ namespace DotNetVnc
             }
         }
 
-
-        private void pointerEvent_(int buttonMask, int x, int y)
+        private void PointerEvent_(int buttonMask, int x, int y)
         {
-            this.stream.writeInt8(POINTER_EVENT);
-            this.stream.writeInt8(buttonMask);
-            this.stream.writeInt16(x);
-            this.stream.writeInt16(y);
+            stream.writeInt8(POINTER_EVENT);
+            stream.writeInt8(buttonMask);
+            stream.writeInt16(x);
+            stream.writeInt16(y);
         }
 
-
-        public void clientCutText(String text)
+        public void ClientCutText(string text)
         {
             Log.Debug("cutEvent");
 
-            lock (this.writeLock)
+            lock (writeLock)
             {
                 try
                 {
-                    this.stream.writeInt8(CLIENT_CUT_TEXT);
-                    this.stream.writePadding(3);
-                    this.stream.writeString(text);
-                    this.stream.Flush();
+                    stream.writeInt8(CLIENT_CUT_TEXT);
+                    stream.writePadding(3);
+                    stream.writeString(text);
+                    stream.Flush();
                 }
                 catch (IOException e)
                 {
@@ -624,24 +602,29 @@ namespace DotNetVnc
         /// <summary>
         /// Creates an image in place in this.data.  It expects the pixel data to already be in this.data.  
         /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         /// <param name="start">the start of image data in this.data</param>
         /// <param name="length">the length of image data in this data</param>
-        /// <param name="mask_length">length of cursor mask (after the image in this.data), as specified by
+        /// <param name="maskLength">length of cursor mask (after the image in this.data), as specified by
         /// the RFB protocol specification for the Cursor pseudo-encoding (1-bpp, packed). If 0,
         /// the mask is assumed to be totally opaque (as used by normal "raw" packets). Masks are not
         /// supported for 8-bpp images.</param>
-        private void createImage(int width, int height, int x, int y, int start, int length, int mask_length, bool cursor)
+        /// <param name="cursor"></param>
+        private void CreateImage(int width, int height, int x, int y, int start, int length, int maskLength, bool cursor)
         {
             if (width == 0 || height == 0)
                 return;
 
-            byte[] data_to_render;
+            byte[] dataToRender;
             int stride;
 
             if (bitsPerPixel == 32)
             {
                 stride = width * 4;
-                data_to_render = data;
+                dataToRender = _data;
 
                 System.Diagnostics.Debug.Assert(length == height * stride);
 
@@ -654,8 +637,8 @@ namespace DotNetVnc
 
                     for (int i = start; i < start + length; i += 4)
                     {
-                        bool mask = (data[k] & (1 << (7 - j))) == 0;
-                        data[i + 3] = (byte)(mask ? 0 : 0xff);
+                        bool mask = (_data[k] & (1 << (7 - j))) == 0;
+                        _data[i + 3] = (byte)(mask ? 0 : 0xff);
 
                         j++;
                         m++;
@@ -681,7 +664,7 @@ namespace DotNetVnc
                 bool expand_data = width % 2 == 1;
                 int stride_correction = expand_data ? 2 : 0;
                 stride = width * 2 + stride_correction;
-                data_to_render = expand_data ? new byte[stride * height] : data;
+                dataToRender = expand_data ? new byte[stride * height] : _data;
 
                 System.Diagnostics.Debug.Assert(length == height * width * 2);
 
@@ -695,20 +678,20 @@ namespace DotNetVnc
 
                     for (int i = start; i < start + length; i += 2)
                     {
-                        bool mask = (data[k] & (1 << (7 - j))) == 0;
+                        bool mask = (_data[k] & (1 << (7 - j))) == 0;
                         byte mask_bit = (byte)(mask ? 0 : 0x80);
 
                         if (rgb565)
                         {
                             // Convert the 565 data into 1555.
-                            data_to_render[p] = (byte)((data[i] & 0x1f) | ((data[i] & 0xe0) >> 1));
-                            data_to_render[p + 1] = (byte)(((data[i + 1] & 0x7) >> 1) | (data[i + 1] & 0x78) | mask_bit);
+                            dataToRender[p] = (byte)((_data[i] & 0x1f) | ((_data[i] & 0xe0) >> 1));
+                            dataToRender[p + 1] = (byte)(((_data[i + 1] & 0x7) >> 1) | (_data[i + 1] & 0x78) | mask_bit);
                         }
                         else
                         {
                             // Add the mask bit -- everything else is OK because it's already 555.
-                            data_to_render[p] = data[i];
-                            data_to_render[p + 1] = (byte)(data[i + 1] | mask_bit);
+                            dataToRender[p] = _data[i];
+                            dataToRender[p + 1] = (byte)(_data[i + 1] | mask_bit);
                         }
 
                         j++;
@@ -737,7 +720,7 @@ namespace DotNetVnc
 
                     for (int m = 0; m < height; m++)
                     {
-                        Array.Copy(data, i, data_to_render, p, w2);
+                        Array.Copy(_data, i, dataToRender, p, w2);
                         i += w2;
                         p += stride;
                     }
@@ -746,7 +729,7 @@ namespace DotNetVnc
             else if (bitsPerPixel == 8)
             {
                 stride = width * 4;
-                data_to_render = data_8bpp;
+                dataToRender = data_8bpp;
 
                 System.Diagnostics.Debug.Assert(length == width * height);
 
@@ -757,12 +740,12 @@ namespace DotNetVnc
 
                 for (int i = start, n = 0; i < start + length; i++, n += 4)
                 {
-                    data_8bpp[n + 2] = (byte)(((((data[i] >> redShift) & redMax) << 8) + redMaxOver2) / redMaxPlus1);
-                    data_8bpp[n + 1] = (byte)(((((data[i] >> greenShift) & greenMax) << 8) + greenMaxOver2) / greenMaxPlus1);
-                    data_8bpp[n] = (byte)(((((data[i] >> blueShift) & blueMax) << 8) + blueMaxOver2) / blueMaxPlus1);
+                    data_8bpp[n + 2] = (byte)(((((_data[i] >> redShift) & redMax) << 8) + redMaxOver2) / redMaxPlus1);
+                    data_8bpp[n + 1] = (byte)(((((_data[i] >> greenShift) & greenMax) << 8) + greenMaxOver2) / greenMaxPlus1);
+                    data_8bpp[n] = (byte)(((((_data[i] >> blueShift) & blueMax) << 8) + blueMaxOver2) / blueMaxPlus1);
                     if (cursor)
                     {
-                        bool mask = (data[k] & (1 << (7 - j))) == 0;
+                        bool mask = (_data[k] & (1 << (7 - j))) == 0;
                         data_8bpp[n + 3] = (byte)(mask ? 0 : 0xff);
 
                         j++;
@@ -791,7 +774,7 @@ namespace DotNetVnc
                 throw new Exception("unexpected bits per pixel");
             }
 
-            BitmapToClient(width, height, x, y, start, stride, cursor, data_to_render);
+            BitmapToClient(width, height, x, y, start, stride, cursor, dataToRender);
         }
 
         private void BitmapToClient(int width, int height, int x, int y, int start, int stride, bool cursor, byte [] img)
@@ -822,9 +805,9 @@ namespace DotNetVnc
             }
         }
 
-        private void readRawEncoding(int x, int y, int width, int height)
+        private void ReadRawEncoding(int x, int y, int width, int height)
         {
-            readRawEncoding_(0, x, y, width, height, false);
+            ReadRawEncoding_(0, x, y, width, height, false);
         }
 
         /**
@@ -832,7 +815,7 @@ namespace DotNetVnc
          * Cursor pseudo-encoding.
          * @param start The position in this.data to start using
          */
-        private void readRawEncoding_(int start, int x, int y, int width, int height, bool cursor)
+        private void ReadRawEncoding_(int start, int x, int y, int width, int height, bool cursor)
         {
             if (width < 0 || height < 0)
             {
@@ -841,50 +824,55 @@ namespace DotNetVnc
             }
 
             int length = width * height * bytesPerPixel;
-            if (data.Length < start + length)
+            if (_data.Length < start + length)
                 throw new VNCException("Server error: received rectangle bigger than desktop!");
-            this.stream.readFully(this.data, start, length);
+            stream.readFully(_data, start, length);
 
-            int mask_length = 0;
-
+            int maskLength = 0;
             if (cursor)
             {
                 // 1 bit mask.
                 int scanline = (width + 7) >> 3;
-                mask_length = scanline * height;
-                System.Diagnostics.Trace.Assert(this.data.Length >= start + length + mask_length);
-                this.stream.readFully(this.data, start + length, mask_length);
+                maskLength = scanline * height;
+                System.Diagnostics.Trace.Assert(_data.Length >= start + length + maskLength);
+                stream.readFully(_data, start + length, maskLength);
             }
 
-            createImage(width, height, x, y, start, length, mask_length, cursor);
+            CreateImage(width, height, x, y, start, length, maskLength, cursor);
         }
 
-
-        private void readCopyRectangleEncoding(int dx, int dy, int width, int height)
+        private void ReadCopyRectangleEncoding(int dx, int dy, int width, int height)
         {
-            int x = this.stream.readCard16();
-            int y = this.stream.readCard16();
+            int x = stream.readCard16();
+            int y = stream.readCard16();
             client.ClientCopyRectangle(x, y, width, height, dx, dy);
         }
 
-        private Color readColor()
+        private Color ReadColor()
         {
-            byte[] color = readColorBytes();
+            byte[] color = ReadColorBytes();
             return Color.FromArgb(color[2], color[1], color[0]);
         }
 
-        private byte[] readColorBytes(byte[] color, int start)
+        private byte[] ReadColorBytes(byte[] color, int start)
         {
-            uint pixel =
-                bitsPerPixel == 32 ?
-                    (uint)(color[start] |
-                           color[start + 1] << 8 |
-                           color[start + 2] << 16 |
-                           color[start + 3] << 24) :
-                bitsPerPixel == 16 ?
-                    (uint)(color[start] |
-                           color[start + 1] << 8) :
-                    (uint)color[start];
+            uint pixel;
+            switch (bitsPerPixel)
+            {
+                case 32:
+                    pixel = (uint)(color[start] |
+                                   color[start + 1] << 8 |
+                                   color[start + 2] << 16 |
+                                   color[start + 3] << 24);
+                    break;
+                case 16:
+                    pixel = (uint)(color[start] |
+                                   color[start + 1] << 8);
+                    break;
+                default:
+                    pixel = color[start];
+                    break;
+            }
 
             byte[] newColor = new byte[4];
 
@@ -897,61 +885,61 @@ namespace DotNetVnc
             return newColor;
         }
 
-        private byte[] readColorBytes()
+        private byte[] ReadColorBytes()
         {
             int n = bitsPerPixel >> 3;
             byte[] color = new byte[n];
 
-            this.stream.readFully(color, 0, n);
+            stream.readFully(color, 0, n);
 
-            return readColorBytes(color, 0);
+            return ReadColorBytes(color, 0);
         }
 
-        private void readRREEncoding(int x, int y, int width, int height)
+        private void ReadRREEncoding(int x, int y, int width, int height)
         {
-            int n = this.stream.readCard32();
-            Color background = readColor();
+            int n = stream.readCard32();
+            Color background = ReadColor();
             client.ClientFillRectangle(x, y, width, height, background);
             for (int i = 0; i < n; ++i)
             {
-                Color foreground = readColor();
-                int rx = this.stream.readCard16();
-                int ry = this.stream.readCard16();
-                int rw = this.stream.readCard16();
-                int rh = this.stream.readCard16();
+                Color foreground = ReadColor();
+                int rx = stream.readCard16();
+                int ry = stream.readCard16();
+                int rw = stream.readCard16();
+                int rh = stream.readCard16();
                 client.ClientFillRectangle(x + rx, y + ry, rw, rh, foreground);
             }
         }
 
-        private void readCoRREEncoding(int x, int y, int width, int height)
+        private void ReadCoRREEncoding(int x, int y, int width, int height)
         {
-            int n = this.stream.readCard32();
-            Color background = readColor();
+            int n = stream.readCard32();
+            Color background = ReadColor();
             client.ClientFillRectangle(x, y, width, height, background);
             for (int i = 0; i < n; ++i)
             {
-                Color foreground = readColor();
-                int rx = this.stream.readCard8();
-                int ry = this.stream.readCard8();
-                int rw = this.stream.readCard8();
-                int rh = this.stream.readCard8();
+                Color foreground = ReadColor();
+                int rx = stream.readCard8();
+                int ry = stream.readCard8();
+                int rw = stream.readCard8();
+                int rh = stream.readCard8();
                 client.ClientFillRectangle(x + rx, y + ry, rw, rh, foreground);
             }
         }
 
-        private void readFillRectangles(int rx, int ry, int n)
+        private void ReadFillRectangles(int rx, int ry, int n)
         {
-            int pixelSize = (this.bitsPerPixel + 7) >> 3;
+            int pixelSize = (bitsPerPixel + 7) >> 3;
             int length = n * (pixelSize + 2);
-            this.stream.readFully(data, 0, length);
+            stream.readFully(_data, 0, length);
             int index = 0;
             for (int i = 0; i < n; ++i)
             {
-                Color foreground = readColor();
-                int sxy = data[index++] & 0xff;
+                Color foreground = ReadColor();
+                int sxy = _data[index++] & 0xff;
                 int sx = sxy >> 4;
                 int sy = sxy & 0xf;
-                int swh = data[index++] & 0xff;
+                int swh = _data[index++] & 0xff;
                 int sw = (swh >> 4) + 1;
                 int sh = (swh & 0xf) + 1;
                 client.ClientFillRectangle(
@@ -960,14 +948,14 @@ namespace DotNetVnc
             }
         }
 
-        private void readRectangles(int rx, int ry, int n, Color foreground)
+        private void ReadRectangles(int rx, int ry, int n, Color foreground)
         {
             for (int i = 0; i < n; ++i)
             {
-                int sxy = this.stream.readCard8();
+                int sxy = stream.readCard8();
                 int sx = sxy >> 4;
                 int sy = sxy & 0xf;
-                int swh = this.stream.readCard8();
+                int swh = stream.readCard8();
                 int sw = (swh >> 4) + 1;
                 int sh = (swh & 0xf) + 1;
                 client.ClientFillRectangle(
@@ -976,7 +964,7 @@ namespace DotNetVnc
             }
         }
 
-        private void fillRectBytes(byte[] data, int stride, int x, int y, int width, int height, byte[] color)
+        private void FillRectBytes(byte[] data, int stride, int x, int y, int width, int height, byte[] color)
         {
             // Fast path thin rectangles
 
@@ -1036,7 +1024,7 @@ namespace DotNetVnc
             }
         }
 
-        private void readHextileEncoding(int x, int y, int width, int height)
+        private void ReadHextileEncoding(int x, int y, int width, int height)
         {
             /*
              * Basically, we have two ways of doing this.
@@ -1064,12 +1052,12 @@ namespace DotNetVnc
                     {
                         int swidth = Math.Min(16, width - sx);
 
-                        int mask = this.stream.readCard8();
+                        int mask = stream.readCard8();
 
                         if ((mask & RAW_SUBENCODING) != 0)
                         {
                             int length = swidth * sheight * 4;
-                            this.stream.readFully(this.data, 0, length);
+                            stream.readFully(_data, 0, length);
 
                             int index = 0;
                             int skip = stride - (swidth * 4);
@@ -1079,7 +1067,7 @@ namespace DotNetVnc
                             {
                                 for (int j = 0; j < swidth; j++)
                                 {
-                                    byte[] color = readColorBytes(this.data, index);
+                                    byte[] color = ReadColorBytes(_data, index);
 
                                     index += 4; //assumed 32bpp here
 
@@ -1098,63 +1086,61 @@ namespace DotNetVnc
                         {
                             if ((mask & BACKGROUND_SPECIFIED_SUBENCODING) != 0)
                             {
-                                background = readColorBytes();
+                                background = ReadColorBytes();
                             }
 
-                            fillRectBytes(buff, stride, sx, sy, swidth, sheight, background);
+                            FillRectBytes(buff, stride, sx, sy, swidth, sheight, background);
 
                             if ((mask & FOREGROUND_SPECIFIED_SUBENCODING) != 0)
                             {
-                                foreground = readColorBytes();
+                                foreground = ReadColorBytes();
                             }
 
                             if ((mask & ANY_SUBRECTS_SUBENCODING) != 0)
                             {
-                                int n = this.stream.readCard8();
+                                int n = stream.readCard8();
                                 if ((mask & SUBRECTS_COLORED_SUBENCODING) != 0)
                                 {
                                     int length = n * 6; //assume 32bpp
-                                    this.stream.readFully(data, 0, length);
+                                    stream.readFully(_data, 0, length);
                                     int index = 0;
                                     for (int i = 0; i < n; ++i)
                                     {
                                         byte[] color = new byte[4];
-                                        uint pixel = (uint)(data[index + 0] & 0xFF | data[index + 1] << 8
-                                                     | data[index + 2] << 16 | data[index + 3] << 24);
+                                        uint pixel = (uint)(_data[index + 0] & 0xFF |
+                                                            _data[index + 1] << 8 |
+                                                            _data[index + 2] << 16 |
+                                                            _data[index + 3] << 24);
 
                                         //ARGB Encoding
                                         color[3] = 0xFF;
-                                        color[2] = (byte)((pixel >> this.redShift) & this.redMax);
-                                        color[1] = (byte)((pixel >> this.greenShift) & this.greenMax);
-                                        color[0] = (byte)((pixel >> this.blueShift) & this.blueMax);
+                                        color[2] = (byte)((pixel >> redShift) & redMax);
+                                        color[1] = (byte)((pixel >> greenShift) & greenMax);
+                                        color[0] = (byte)((pixel >> blueShift) & blueMax);
 
                                         index += 4;
-                                        int txy = data[index++] & 0xff;
+                                        int txy = _data[index++] & 0xff;
                                         int tx = txy >> 4;
                                         int ty = txy & 0xf;
-                                        int twh = data[index++] & 0xff;
+                                        int twh = _data[index++] & 0xff;
                                         int tw = (twh >> 4) + 1;
                                         int th = (twh & 0xf) + 1;
 
-                                        this.fillRectBytes(
-                                            buff, stride, sx + tx, sy + ty, tw, th, color
-                                        );
+                                        FillRectBytes(buff, stride, sx + tx, sy + ty, tw, th, color);
                                     }
                                 }
                                 else
                                 {
                                     for (int i = 0; i < n; ++i)
                                     {
-                                        int txy = this.stream.readCard8();
+                                        int txy = stream.readCard8();
                                         int tx = txy >> 4;
                                         int ty = txy & 0xf;
-                                        int twh = this.stream.readCard8();
+                                        int twh = stream.readCard8();
                                         int tw = (twh >> 4) + 1;
                                         int th = (twh & 0xf) + 1;
 
-                                        this.fillRectBytes(
-                                            buff, stride, sx + tx, sy + ty, tw, th, foreground
-                                        );
+                                        FillRectBytes(buff, stride, sx + tx, sy + ty, tw, th, foreground);
                                     }
                                 }
                             }
@@ -1200,32 +1186,32 @@ namespace DotNetVnc
                         {
                             rw = 16;
                         }
-                        int mask = this.stream.readCard8();
+                        int mask = stream.readCard8();
                         if ((mask & RAW_SUBENCODING) != 0)
                         {
-                            readRawEncoding(rx, ry, rw, rh);
+                            ReadRawEncoding(rx, ry, rw, rh);
                         }
                         else
                         {
                             if ((mask & BACKGROUND_SPECIFIED_SUBENCODING) != 0)
                             {
-                                background = readColor();
+                                background = ReadColor();
                             }
                             client.ClientFillRectangle(rx, ry, rw, rh, background);
                             if ((mask & FOREGROUND_SPECIFIED_SUBENCODING) != 0)
                             {
-                                foreground = readColor();
+                                foreground = ReadColor();
                             }
                             if ((mask & ANY_SUBRECTS_SUBENCODING) != 0)
                             {
-                                int n = this.stream.readCard8();
+                                int n = stream.readCard8();
                                 if ((mask & SUBRECTS_COLORED_SUBENCODING) != 0)
                                 {
-                                    readFillRectangles(rx, ry, n);
+                                    ReadFillRectangles(rx, ry, n);
                                 }
                                 else
                                 {
-                                    readRectangles(rx, ry, n, foreground);
+                                    ReadRectangles(rx, ry, n, foreground);
                                 }
                             }
                         }
@@ -1241,56 +1227,53 @@ namespace DotNetVnc
             this.client.stats.Add(entry);*/
         }
 
-        private void readCursorPseudoEncoding(int x, int y, int width,
-                                              int height)
+        private void ReadCursorPseudoEncoding(int x, int y, int width, int height)
         {
-            readRawEncoding_(0, x, y, width, height, true);
+            ReadRawEncoding_(0, x, y, width, height, true);
         }
 
-        private void readFrameBufferUpdate()
+        private void ReadFrameBufferUpdate()
         {
-            this.stream.readPadding(1);
-            int n = this.stream.readCard16();
+            stream.readPadding(1);
+            int n = stream.readCard16();
             Log.Debug("reading " + n + " rectangles");
             bool fb_updated = false;
-            long start;
-            long end;
-            Win32.QueryPerformanceCounter(out start);
+
+            Win32.QueryPerformanceCounter(out var start);
             for (int i = 0; i < n; ++i)
             {
-                int x = this.stream.readCard16();
-                int y = this.stream.readCard16();
-                int width = this.stream.readCard16();
-                int height = this.stream.readCard16();
-                int encoding = this.stream.readCard32();
-                Log.Debug("read " + x + " " + y + " " + width + " " +
-                             height + " " + encoding);
+                int x = stream.readCard16();
+                int y = stream.readCard16();
+                int width = stream.readCard16();
+                int height = stream.readCard16();
+                int encoding = stream.readCard32();
+                Log.Debug("read " + x + " " + y + " " + width + " " + height + " " + encoding);
                 switch (encoding)
                 {
                     case RAW_ENCODING:
-                        readRawEncoding(x, y, width, height);
+                        ReadRawEncoding(x, y, width, height);
                         break;
                     case RRE_ENCODING:
-                        readRREEncoding(x, y, width, height);
+                        ReadRREEncoding(x, y, width, height);
                         break;
                     case CORRE_ENCODING:
-                        readCoRREEncoding(x, y, width, height);
+                        ReadCoRREEncoding(x, y, width, height);
                         break;
                     case COPY_RECTANGLE_ENCODING:
-                        readCopyRectangleEncoding(x, y, width, height);
+                        ReadCopyRectangleEncoding(x, y, width, height);
                         break;
                     case HEXTILE_ENCODING:
-                        readHextileEncoding(x, y, width, height);
+                        ReadHextileEncoding(x, y, width, height);
                         break;
 
                     case CURSOR_PSEUDO_ENCODING:
-                        readCursorPseudoEncoding(x, y, width, height);
+                        ReadCursorPseudoEncoding(x, y, width, height);
                         break;
 
                     case DESKTOP_SIZE_PSEUDO_ENCODING:
-                        desktopSize(width, height);
+                        DesktopSize(width, height);
                         // Since the desktop size has changed, we want a full buffer update next time
-                        incremental = false;
+                        _incremental = false;
                         break;
 
                     case QEMU_EXT_KEY_ENCODING:
@@ -1301,7 +1284,7 @@ namespace DotNetVnc
                         throw new VNCException("unimplemented encoding: " + encoding);
                 }
 
-                Win32.QueryPerformanceCounter(out end);
+                Win32.QueryPerformanceCounter(out var end);
                 if (end - start > imageUpdateThreshold)
                 {
                     client.ClientFrameBufferUpdate();
@@ -1319,14 +1302,14 @@ namespace DotNetVnc
         }
 
 
-        private void desktopSize(int width, int height)
+        private void DesktopSize(int width, int height)
         {
-            this.width = width;
-            this.height = height;
+            _width = width;
+            _height = height;
             int neededBytes = width * height * bytesPerPixel;
-            if (neededBytes > data.Length)
+            if (neededBytes > _data.Length)
             {
-                data = new byte[neededBytes];
+                _data = new byte[neededBytes];
             }
             if (bitsPerPixel == 8 && (data_8bpp == null || neededBytes * 4 > data_8bpp.Length))
             {
@@ -1335,26 +1318,24 @@ namespace DotNetVnc
             client.ClientDesktopSize(width, height);
         }
 
-        private void readServerCutText()
+        private void ReadServerCutText()
         {
-            this.stream.readPadding(3);
-            String text = this.stream.readString();
+            stream.readPadding(3);
+            String text = stream.readString();
             client.ClientCutText(text);
         }
 
-        private void readServerMessage()
+        private void ReadServerMessage()
         {
             Log.Debug("readServerMessage");
 
-            int type = this.stream.readCard8();
+            int type = stream.readCard8();
 
             switch (type)
             {
                 case FRAME_BUFFER_UPDATE:
                     Log.Debug("Update");
-                    //GraphicsUtils.startTime();
-                    readFrameBufferUpdate();
-                    //GraphicsUtils.endTime("readFrameBufferUpdate");
+                    ReadFrameBufferUpdate();
                     break;
                 case BELL:
                     Log.Debug("Bell");
@@ -1362,44 +1343,42 @@ namespace DotNetVnc
                     break;
                 case SERVER_CUT_TEXT:
                     Log.Debug("Cut text");
-                    readServerCutText();
+                    ReadServerCutText();
                     break;
                 default:
                     throw new VNCException("unknown server message: " + type);
             }
         }
 
-        public readonly Object updateMonitor = new Object(); 
-
-        private void run(object o)
+        private void Run(object o)
         {
             char[] password = (char[])o;
 
             try
             {
                 CheckProtocolVersion();
-                sendProtocolVersion();
-                authenticationExchange(password);
-                clientInitialization();
-                serverInitialization();
+                SendProtocolVersion();
+                AuthenticationExchange(password);
+                InitializeClient();
+                InitializateServer();
 
                 if (ConnectionSuccess != null)
                     ConnectionSuccess(this, null);
 
                 // Request a full framebuffer update the first time
-                incremental = false;
+                _incremental = false;
 
                 while (running)
                 {
-                    lock (this.writeLock)
+                    lock (writeLock)
                     {
-                        writeFramebufferUpdateRequest(0, 0, width, height, incremental);
-                        this.stream.Flush();
+                        WriteFramebufferUpdateRequest(0, 0, _width, _height, _incremental);
+                        stream.Flush();
                     }
 
-                    incremental = true;
+                    _incremental = true;
 
-                    readServerMessage();
+                    ReadServerMessage();
 
                     lock (pauseMonitor)
                     {
@@ -1413,14 +1392,11 @@ namespace DotNetVnc
             }
             catch (Exception e)
             {
-                if (running && this.ErrorOccurred != null)
+                if (running && ErrorOccurred != null)
                     ErrorOccurred(this, e);
             }
         }
 
-        /// <summary>
-        /// Nothrow guarantee.
-        /// </summary>
         public void Close()
         {
             if (!running)
@@ -1431,7 +1407,7 @@ namespace DotNetVnc
             {
                 stream.Close();
                 lock (pauseMonitor)
-                    Monitor.PulseAll(this.pauseMonitor);
+                    Monitor.PulseAll(pauseMonitor);
                 thread.Interrupt();
             }
             catch
@@ -1440,24 +1416,17 @@ namespace DotNetVnc
             }
         }
 
-        private bool paused = true;
-
         public void Pause()
         {
             paused = true;
         }
 
-        public void Unpause(bool fullupdate)
+        public void UnPause(bool fullupdate = false)
         {
-            incremental = !fullupdate;
+            _incremental = !fullupdate;
             paused = false;
-            lock (this.pauseMonitor)
-                Monitor.PulseAll(this.pauseMonitor);
-        }
-
-        public void Unpause()
-        {
-            Unpause(false);
+            lock (pauseMonitor)
+                Monitor.PulseAll(pauseMonitor);
         }
     }
 }

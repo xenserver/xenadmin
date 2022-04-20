@@ -245,7 +245,7 @@ namespace XenAdmin.ConsoleView
             if (RemoteConsole != null)
             {
                 wasPaused = false;
-                RemoteConsole.Unpause();
+                RemoteConsole.UnPause();
             }
         }
 
@@ -577,7 +577,7 @@ namespace XenAdmin.ConsoleView
                 if (wasPaused)
                     RemoteConsole.Pause();
                 else
-                    RemoteConsole.Unpause();
+                    RemoteConsole.UnPause();
                 ConnectToRemoteConsole();
 
                 if (wasFocused)
@@ -1121,7 +1121,7 @@ namespace XenAdmin.ConsoleView
                     v.SourceVM = sourceVM;
                     v.Console = console;
                     v.UseQemuExtKeyEncoding = sourceVM != null && Helpers.InvernessOrGreater(sourceVM.Connection);
-                    v.connect(stream, this.vncPassword);
+                    v.Connect(stream, this.vncPassword);
                 }
             });
         }

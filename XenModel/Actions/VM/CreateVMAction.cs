@@ -284,7 +284,7 @@ namespace XenAdmin.Actions.VMActions
                             parameters,
                             true); //hidefromlogs
 
-                action.RunExternal(Connection.Session);
+                action.RunSync(Connection.Session);
                 var result = action.Result.Replace("\n", Environment.NewLine);
             }
         }
@@ -304,7 +304,7 @@ namespace XenAdmin.Actions.VMActions
                     });
                 }
                 var action = new GpuAssignAction(VM, newvGpus);
-                action.RunExternal(Session);
+                action.RunSync(Session);
             }
         }
 
@@ -329,7 +329,7 @@ namespace XenAdmin.Actions.VMActions
             XenAPI.VM.set_name_label(Session, VM.opaque_ref, NameLabel);
             XenAPI.VM.set_name_description(Session, VM.opaque_ref, NameDescription);
             ChangeVCPUSettingsAction vcpuAction = new ChangeVCPUSettingsAction(VM, VcpusMax, VcpusAtStartup);
-            vcpuAction.RunExternal(Session);
+            vcpuAction.RunSync(Session);
 
             // set cores-per-socket
             Dictionary<string, string> platform = VM.platform == null ?

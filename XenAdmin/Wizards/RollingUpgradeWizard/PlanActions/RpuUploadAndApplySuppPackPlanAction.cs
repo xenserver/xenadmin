@@ -134,7 +134,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
                     uploadIsoAction = new UploadSupplementalPackAction(connection, new List<Host> { coordinator }, suppPackPath, true);
                     uploadIsoAction.Changed += uploadAction_Changed;
                     uploadIsoAction.Completed += uploadAction_Completed;
-                    uploadIsoAction.RunExternal(session);
+                    uploadIsoAction.RunSync(session);
                 }
                 catch (Exception ex)
                 {

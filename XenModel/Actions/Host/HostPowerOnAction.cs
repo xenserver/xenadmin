@@ -121,7 +121,7 @@ namespace XenAdmin.Actions.HostActions
                 if (null != pool)
                 {
                     SendWlbConfigurationAction action = new SendWlbConfigurationAction(pool, hostConfig.ToDictionary(), SendWlbConfigurationKind.SetHostConfiguration);
-                    action.RunExternal(Session);
+                    action.RunSync(Session);
                 }
                 else
                 {

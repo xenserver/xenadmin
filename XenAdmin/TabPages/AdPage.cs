@@ -774,7 +774,7 @@ namespace XenAdmin.TabPages
                     if (result != DialogResult.Ignore)
                     {
                         creds.Add(DisableAdAction.KEY_USER, passPrompt.Username);
-                        creds.Add(DisableAdAction.KEY_PASSWORD, passPrompt.Password);
+                        creds.Add(DisableAdAction.KEY_PASS, passPrompt.Password);
                     }
 
                     new DisableAdAction(_connection, creds).RunAsync();

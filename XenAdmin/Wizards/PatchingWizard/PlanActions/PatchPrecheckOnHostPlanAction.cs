@@ -63,7 +63,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         {
             var coordinator = Helpers.GetCoordinator(Connection);
 
-            var mapping = (from HostUpdateMapping hum in mappings
+            HostUpdateMapping mapping = (from HostUpdateMapping hum in mappings
                 let xpm = hum as XenServerPatchMapping
                 where xpm != null && xpm.Matches(coordinator, xenServerPatch)
                 select xpm).FirstOrDefault();
@@ -82,7 +82,10 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             {
                 AddProgressStep(string.Format(Messages.UPDATES_WIZARD_RUNNING_PRECHECK, xenServerPatch.Name, host.Name()));
 
-                RefreshUpdate(host, mapping, session);
+                if (mapping is PoolUpdateMapping pum)
+                    ReIntroducePoolUpdate(host, pum.Pool_update, session);
+
+                mapping = mapping.RefreshUpdate();
 
                 List<Problem> problems = null;
 
@@ -115,8 +118,8 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
             if(updateRequiresHostReboot && !hostsThatWillRequireReboot.Contains(host.uuid))
                 hostsThatWillRequireReboot.Add(host.uuid);
-            if (updateRequiresHostReboot && !mapping.HostsThatNeedEvacuated.Contains(host.uuid))
-                mapping.HostsThatNeedEvacuated.Add(host.uuid);
+            if (updateRequiresHostReboot && !mapping.HostsThatNeedEvacuation.Contains(host.uuid))
+                mapping.HostsThatNeedEvacuation.Add(host.uuid);
             if (livePatchStatus.ContainsKey(host.uuid) && livePatchStatus[host.uuid] == livepatch_status.ok_livepatch_complete)
             {
                 if (!livePatchAttempts.ContainsKey(host.uuid) || livePatchAttempts[host.uuid] == null)
@@ -125,25 +128,25 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             }
         }
 
-        public static void RefreshUpdate(Host host, HostUpdateMapping mapping, Session session)
+
+        public static void ReIntroducePoolUpdate(Host host, Pool_update poolUpdate, Session session)
         {
-            // re-introduce pool_update if needed
-            if (mapping is PoolUpdateMapping poolUpdateMapping 
-                && session.Connection.Cache.Pool_updates.FirstOrDefault(u => string.Equals(u.uuid, poolUpdateMapping.Pool_update.uuid, StringComparison.OrdinalIgnoreCase)) == null)
+            if (session.Connection.Cache.Pool_updates.FirstOrDefault(u => string.Equals(u.uuid, poolUpdate.uuid, StringComparison.OrdinalIgnoreCase)) == null)
             {
                 log.InfoFormat("Re-introduce update on '{0}'. Update = '{1}' (uuid = '{2}'; old opaque_ref = '{3}')",
-                    host.Name(), poolUpdateMapping.Pool_update.Name(), poolUpdateMapping.Pool_update.uuid,
-                    poolUpdateMapping.Pool_update.opaque_ref);
+                    host.Name(), poolUpdate.Name(), poolUpdate.uuid,
+                    poolUpdate.opaque_ref);
+
                 try
                 {
-                    var newUpdateRef = Pool_update.introduce(session, poolUpdateMapping.Pool_update.vdi.opaque_ref);
+                    var newUpdateRef = Pool_update.introduce(session, poolUpdate.vdi.opaque_ref);
                     session.Connection.WaitForCache(newUpdateRef);
                 }
                 catch (Exception e)
                 {
                     if (e is Failure failure && failure.ErrorDescription != null && failure.ErrorDescription.Count > 1 && failure.ErrorDescription[0] == Failure.UPDATE_ALREADY_EXISTS)
                     {
-                        log.InfoFormat("Update '{0}' already exists", poolUpdateMapping.Pool_update.Name());
+                        log.InfoFormat("Update '{0}' already exists", poolUpdate.Name());
                     }
                     else
                     {
@@ -152,9 +155,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                     }
                 }
             }
-
-            // refresh the update/patch record based on uuid
-            mapping.RefreshUpdate();
         }
     }
 }

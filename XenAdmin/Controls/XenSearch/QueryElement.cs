@@ -1280,7 +1280,7 @@ namespace XenAdmin.Controls.XenSearch
 
             internal class ExtraComboEntry
             {
-                public DatePropertyQuery.PropertyQueryType type;
+                public readonly DatePropertyQuery.PropertyQueryType type;
                 public ExtraComboEntry(DatePropertyQuery.PropertyQueryType type)
                 {
                     this.type = type;
@@ -1327,7 +1327,7 @@ namespace XenAdmin.Controls.XenSearch
 
                 public override int GetHashCode()
                 {
-                    return (int) type;
+                    return (int)type;
                 }
             }
 

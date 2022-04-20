@@ -78,7 +78,7 @@ namespace XenAdmin.Actions.GUIActions
         private vm_operations vmOperation;
 
         public MeddlingAction(Task task)
-            : base(task.Name(), task.Description(), false, false)
+            : base(task.Name(), task.Description(), false)
         {
             RelatedTask = new XenRef<Task>(task.opaque_ref);
 

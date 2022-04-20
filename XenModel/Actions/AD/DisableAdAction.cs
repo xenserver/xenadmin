@@ -40,7 +40,7 @@ namespace XenAdmin.Actions
     public class DisableAdAction : PureAsyncAction
     {
         public static readonly string KEY_USER = "user";
-        public static readonly string KEY_PASSWORD = "pass";
+        public static readonly string KEY_PASS = "pass";
         private Dictionary<string, string> creds;
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 

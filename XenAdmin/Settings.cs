@@ -59,7 +59,7 @@ namespace XenAdmin
         /// Anybody who chooses this for their password deserves a crash:
         /// MODIFIER LETTER REVERSED GLOTTAL STOP, NKO SYMBOL GBAKURUNEN, CHAM PUNCTUATION DOUBLE DANDA, BOPOMOFO LETTER INNN
         /// </summary>
-        private const string NO_PASSWORD = "\x02c1\x07f7\xaa5e\x31b3";
+        private const string MARKER_VALUE = "\x02c1\x07f7\xaa5e\x31b3";
         private const string DISCONNECTED = "disconnected";
         private const string CONNECTED = "connected";
 
@@ -288,8 +288,8 @@ namespace XenAdmin
                     connection.Username = entryComps[0];
                     connection.Hostname = entryComps[1];
                     connection.Port = port;
-                    // If password is NO_PASSWORD, this indicates we didn't save a password for this connection
-                    if (entryComps[3] == NO_PASSWORD)
+                    // If password is MARKER_VALUE, this indicates we didn't save a password for this connection
+                    if (entryComps[3] == MARKER_VALUE)
                     {
                         connection.Password = null;
                         connection.ExpectPasswordIsCorrect = false;
@@ -518,7 +518,7 @@ namespace XenAdmin
             if (password == null)
             {
                 // We don't have a password saved for this connection: save a special marker value
-                password = NO_PASSWORD;
+                password = MARKER_VALUE;
             }
             string entryStr = string.Join(SEPARATOR.ToString(), new string[] { username, serverName, port.ToString(), password, (saveDisconnected ? DISCONNECTED : CONNECTED), friendlyName });
             if (poolMembers != null && poolMembers.Count > 0)

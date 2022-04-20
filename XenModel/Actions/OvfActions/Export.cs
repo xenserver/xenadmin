@@ -61,7 +61,8 @@ namespace XenAdmin.Actions.OvfActions
 
             #region CREATE ENVELOPE / ADD VIRTUAL SYSTEM
             EnvelopeType ovfEnv = OVF.CreateEnvelope(m_applianceFileName);
-            string vsId = OVF.AddVirtualSystem(ovfEnv, vm.name_label);
+            string vsId = Guid.NewGuid().ToString();
+            OVF.AddVirtualSystem(ovfEnv, vm.name_label, vsId);
             string vhsId = OVF.AddVirtualHardwareSection(ovfEnv, vsId);
             #endregion
 

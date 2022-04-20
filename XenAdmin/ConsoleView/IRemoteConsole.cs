@@ -42,7 +42,7 @@ namespace XenAdmin.ConsoleView
         void Activate();
         void DisconnectAndDispose();
         void Pause();
-        void Unpause();
+        void UnPause();
         void SendCAD();
         Image Snapshot();
         bool SendScanCodes { set; }

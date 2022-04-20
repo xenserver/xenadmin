@@ -75,7 +75,7 @@ namespace XenAdmin.Actions
                     try
                     {
                         SrRepairAction action = new SrRepairAction(sr.Connection, sr, false);
-                        action.RunExternal(Session);
+                        action.RunSync(Session);
                     }
                     catch (Failure f)
                     {

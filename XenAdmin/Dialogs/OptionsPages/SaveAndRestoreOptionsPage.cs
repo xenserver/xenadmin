@@ -32,7 +32,6 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAdmin.Dialogs.RestoreSession;
 
@@ -40,12 +39,16 @@ using XenAdmin.Dialogs.RestoreSession;
 namespace XenAdmin.Dialogs.OptionsPages
 {
     /// <summary>
-    /// The page is used to set whether or not to save server usernames and passwords and whether a coordinator password should be set to protect these passwords
+    /// The page is used to set whether or not to save server usernames and passwords
+    /// and whether a main password should be set to protect these passwords
     /// </summary>
     public partial class SaveAndRestoreOptionsPage : UserControl, IOptionsPage
     {
-        private byte[] TemporaryMainPassword;
-        // call save serverlist on OK
+        private byte[] _mainPassword;
+
+        /// <summary>
+        /// Whether to save the server list on OK
+        /// </summary>
         protected internal bool SaveAllAfter { get; set; }
 
         public SaveAndRestoreOptionsPage() 
@@ -54,16 +57,13 @@ namespace XenAdmin.Dialogs.OptionsPages
             saveStateLabel.Text = string.Format(saveStateLabel.Text, BrandManager.BrandConsole);
         }
 
-        // all prompts for old password should have been made
         private void SaveEverything()
         {
             if (!Registry.AllowCredentialSave)
-            {
                 return;
-            }
+
             if (!saveStateCheckBox.Checked)
             {
-                // save nothing and nobody (personally my two favourite servers anyway...)
                 Properties.Settings.Default.SaveSession = false;
                 Properties.Settings.Default.RequirePass = false;
 
@@ -71,7 +71,6 @@ namespace XenAdmin.Dialogs.OptionsPages
             }
             else if (!requireMainPasswordCheckBox.Checked)
             {
-                // we need to save stuff but without a password
                 Properties.Settings.Default.SaveSession = true;
                 Properties.Settings.Default.RequirePass = false;
 
@@ -79,19 +78,12 @@ namespace XenAdmin.Dialogs.OptionsPages
             }
             else
             {
-                // password protect stuff
                 Properties.Settings.Default.SaveSession = true;
                 Properties.Settings.Default.RequirePass = true;
 
-                // set password
-                if (Program.MainPassword != TemporaryMainPassword) 
-                {
-                    Program.MainPassword = TemporaryMainPassword;
-                    new ActionBase(string.Format(Messages.CHANGED_MAIN_PASSWORD, BrandManager.BrandConsole),
-                        string.Format(Messages.CHANGED_MAIN_PASSWORD_LONG, BrandManager.BrandConsole),
-                        false, true);
-                }
+                Program.MainPassword = _mainPassword;
             }
+
             if (SaveAllAfter)
                 Settings.SaveServerList();
         }
@@ -100,13 +92,11 @@ namespace XenAdmin.Dialogs.OptionsPages
 
         private void changeMainPasswordButton_Click(object sender, EventArgs e)
         {
-            // tell the dialog what to use as the "current" password
-            using (var changePassword = new ChangeMainPasswordDialog(TemporaryMainPassword))
+            using (var changePassword = new ChangeMainPasswordDialog(_mainPassword))
             {
                 if (changePassword.ShowDialog(this) == DialogResult.OK)
                 {
-                    // password has been successfully changed
-                    TemporaryMainPassword = changePassword.NewPassword;
+                    _mainPassword = changePassword.NewPassword;
                 }
             }
         }
@@ -119,11 +109,11 @@ namespace XenAdmin.Dialogs.OptionsPages
 
             if (requireMainPasswordCheckBox.Checked)
             {
-                using (var enterPassword = new EnterMainPasswordDialog(TemporaryMainPassword))
+                using (var enterPassword = new EnterMainPasswordDialog(_mainPassword))
                 {
                     if (enterPassword.ShowDialog(this) == DialogResult.OK)
                     {
-                        TemporaryMainPassword = null;
+                        _mainPassword = null;
                         requireMainPasswordCheckBox.Checked = false;
                         changeMainPasswordButton.Enabled = false;
                     }
@@ -131,16 +121,16 @@ namespace XenAdmin.Dialogs.OptionsPages
             }
             else
             {
-                System.Diagnostics.Debug.Assert(TemporaryMainPassword == null, "Main password is set, but not reflected on GUI");
+                System.Diagnostics.Debug.Assert(_mainPassword == null, "Main password is set, but not reflected on GUI");
 
-                if (TemporaryMainPassword == null)
+                if (_mainPassword == null)
                 {
                     // no previous password existed => set a new one
                     using (var setPassword = new SetMainPasswordDialog())
                     {
                         if (setPassword.ShowDialog(this) == DialogResult.OK)
                         {
-                            TemporaryMainPassword = setPassword.NewPassword;
+                            _mainPassword = setPassword.NewPassword;
                             requireMainPasswordCheckBox.Checked = true;
                             changeMainPasswordButton.Enabled = true;
                         }
@@ -167,11 +157,11 @@ namespace XenAdmin.Dialogs.OptionsPages
 
             if (saveStateCheckBox.Checked && requireMainPasswordCheckBox.Checked)
             {
-                using (var enterPassword = new EnterMainPasswordDialog(TemporaryMainPassword))
+                using (var enterPassword = new EnterMainPasswordDialog(_mainPassword))
                 {
                     if (enterPassword.ShowDialog(this) == DialogResult.OK)
                     {
-                        TemporaryMainPassword = null;
+                        _mainPassword = null;
                         saveStateCheckBox.Checked = false;
                         requireMainPasswordCheckBox.Checked = false;
                         mainPasswordGroupBox.Enabled = false;
@@ -199,16 +189,13 @@ namespace XenAdmin.Dialogs.OptionsPages
             saveStateLabel.Enabled = allowCredSave;
             saveStateCheckBox.Enabled = allowCredSave;
             
-            // use the SaveSession variable to denote whether to save passwords or not
             saveStateCheckBox.Checked = saveSession && allowCredSave;
             mainPasswordGroupBox.Enabled = saveSession && allowCredSave;
             
-            // use the RequirePass variable to say if a main password has been set
             requireMainPasswordCheckBox.Checked = reqPass && Program.MainPassword != null && allowCredSave;
             changeMainPasswordButton.Enabled = reqPass && Program.MainPassword != null && allowCredSave;
             
-            // the temporary password starts as the MainPassword
-            TemporaryMainPassword = Program.MainPassword;
+            _mainPassword = Program.MainPassword;
         }
 
         public bool IsValidToSave()

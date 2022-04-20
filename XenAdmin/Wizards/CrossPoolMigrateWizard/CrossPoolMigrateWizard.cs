@@ -175,7 +175,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                     continue;
 
                 vmsFromSelection.Add(vm);
-                m_vmMappings.Add(item.XenObject.opaque_ref, new VmMapping { VmNameLabel = item.XenObject.Name() });
+                m_vmMappings.Add(item.XenObject.opaque_ref, new VmMapping(item.XenObject.opaque_ref) {VmNameLabel = item.XenObject.Name()});
             }
 
             HasTemplatesOnly = vmsFromSelection.Count > 0 && vmsFromSelection.All(vm => vm.is_a_template);
