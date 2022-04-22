@@ -29,20 +29,20 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Collections.Generic;
-using XenAdmin.Network;
 using XenAdmin.Controls.CustomDataGraph;
-using XenAPI;
 using XenAdmin.Core;
+using XenAdmin.Network;
+using XenAPI;
+
 
 namespace XenAdmin.Actions
 {
     public class SaveDataSourceStateAction : PureAsyncAction
     {
-        List<DataSourceItem> DataSourceItems;
-        List<DesignedGraph> Graphs;
-        IXenObject XenObject;
+        private readonly List<DataSourceItem> _dataSourceItems;
+        private readonly List<DesignedGraph> _graphs;
+        private readonly IXenObject _xenObject;
 
         private Pool GetPool()
         {
@@ -58,92 +58,87 @@ namespace XenAdmin.Actions
         public SaveDataSourceStateAction(IXenConnection connection, IXenObject xmo, List<DataSourceItem> items, List<DesignedGraph> graphs)
             : base(connection, Messages.ACTION_SAVE_DATASOURCES, Messages.ACTION_SAVING_DATASOURCES, true)
         {
-            DataSourceItems = items;
-            XenObject = xmo;
-            Graphs = graphs;
+            _dataSourceItems = items;
+            _xenObject = xmo;
+            _graphs = graphs;
         }
 
         protected override void Run()
         {
-            Dictionary<string, string> gui_config = GetGuiConfig();
+            Dictionary<string, string> guiConfig = GetGuiConfig();
 
-            if (DataSourceItems != null)
+            if (_dataSourceItems != null)
             {
-                foreach (DataSourceItem ds in DataSourceItems)
+                foreach (DataSourceItem ds in _dataSourceItems)
                 {
                     if (ds.DataSource.enabled != ds.Enabled)
                     {
-                        Host host = XenObject as Host;
-                        VM vm = XenObject as VM;
-                        if (host != null)
+                        if (_xenObject is Host host)
                         {
                             if (ds.Enabled)
-                                XenAPI.Host.record_data_source(Session, host.opaque_ref, ds.DataSource.name_label);
+                                Host.record_data_source(Session, host.opaque_ref, ds.DataSource.name_label);
                             else
-                                XenAPI.Host.forget_data_source_archives(Session, host.opaque_ref, ds.DataSource.name_label);
+                                Host.forget_data_source_archives(Session, host.opaque_ref, ds.DataSource.name_label);
                         }
-                        else if (vm != null && vm.allowed_operations.Contains(vm_operations.data_source_op))
+                        else if (_xenObject is VM vm && vm.allowed_operations.Contains(vm_operations.data_source_op))
                         {
                             if (ds.Enabled)
-                                XenAPI.VM.record_data_source(Session, vm.opaque_ref, ds.DataSource.name_label);
+                                VM.record_data_source(Session, vm.opaque_ref, ds.DataSource.name_label);
                             else
-                                XenAPI.VM.forget_data_source_archives(Session, vm.opaque_ref, ds.DataSource.name_label);
+                                VM.forget_data_source_archives(Session, vm.opaque_ref, ds.DataSource.name_label);
                         }
                     }
 
-                    if (ds.ColorChanged)
+                    if (ds.ColorChanged && guiConfig != null)
                     {
-                        if (gui_config != null)
-                        {
-                            string key = Palette.GetColorKey(ds.DataSource.name_label, XenObject);
-                            string value = ds.Color.ToArgb().ToString();
+                        string key = Palette.GetColorKey(ds.DataSource.name_label, _xenObject);
+                        string value = ds.Color.ToArgb().ToString();
 
-                            if (!gui_config.ContainsKey(key))
-                                gui_config.Add(key, value);
-                            else
-                                gui_config[key] = value;
-                        }
+                        if (!guiConfig.ContainsKey(key))
+                            guiConfig.Add(key, value);
+                        else
+                            guiConfig[key] = value;
                     }
                 }
             }
 
-            Dictionary<string, string> new_gui_config = new Dictionary<string, string>();
-            string uuid = Helpers.GetUuid(XenObject);
+            var newGuiConfig = new Dictionary<string, string>();
+            string uuid = Helpers.GetUuid(_xenObject);
 
             // build new gui config dictionary:
             // add keys not related to current XenObject
-            if (gui_config != null)
+            if (guiConfig != null)
             {
-                foreach (string key in gui_config.Keys)
+                foreach (string key in guiConfig.Keys)
                 {
                     bool isMatch = (Palette.LayoutKey.IsMatch(key) || Palette.GraphNameKey.IsMatch(key));
                     if (isMatch && key.Contains(uuid))
                         continue;
-                    new_gui_config.Add(key, gui_config[key]);
+                    newGuiConfig.Add(key, guiConfig[key]);
                 }
             }
 
-            if (Graphs != null)
+            if (_graphs != null)
             {
                 // add current XenObject keys
-                for (int i = 0; i < Graphs.Count; i++)
+                for (int i = 0; i < _graphs.Count; i++)
                 {
-                    string key = Palette.GetLayoutKey(i, XenObject);
-                    string value = Graphs[i].ToString();
+                    string key = Palette.GetLayoutKey(i, _xenObject);
+                    string value = _graphs[i].ToString();
 
                     // 'key' should not exist in the new gui config dictionary
-                    new_gui_config.Add(key, value);
+                    newGuiConfig.Add(key, value);
 
-                    key = Palette.GetGraphNameKey(i, XenObject);
-                    value = Graphs[i].DisplayName;
-                    if (value != String.Empty)
+                    key = Palette.GetGraphNameKey(i, _xenObject);
+                    value = _graphs[i].DisplayName;
+                    if (value != string.Empty)
                     {
-                        new_gui_config.Add(key, value);
+                        newGuiConfig.Add(key, value);
                     }
                 }
             }
 
-            XenAPI.Pool.set_gui_config(Session, GetPool().opaque_ref, new_gui_config);
+            Pool.set_gui_config(Session, GetPool().opaque_ref, newGuiConfig);
         }
     }
 }
