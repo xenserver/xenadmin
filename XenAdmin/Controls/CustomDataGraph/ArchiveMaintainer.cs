@@ -198,7 +198,8 @@ namespace XenAdmin.Controls.CustomDataGraph
 
                         if (xenObject is Host h)
                             _dataSources = Host.get_data_sources(h.Connection.Session, h.opaque_ref);
-                        else if (xenObject is VM vm && vm.power_state == vm_power_state.Running)
+                        else if (xenObject is VM vm && vm.power_state == vm_power_state.Running &&
+                                 vm.allowed_operations.Contains(vm_operations.data_source_op))
                             _dataSources = VM.get_data_sources(vm.Connection.Session, vm.opaque_ref);
 
                         Get(ArchiveInterval.None, RrdsUri, RRD_Full_InspectCurrentNode, xenObject);

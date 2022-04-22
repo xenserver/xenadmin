@@ -82,7 +82,7 @@ namespace XenAdmin.Actions
                             else
                                 XenAPI.Host.forget_data_source_archives(Session, host.opaque_ref, ds.DataSource.name_label);
                         }
-                        else if (vm != null)
+                        else if (vm != null && vm.allowed_operations.Contains(vm_operations.data_source_op))
                         {
                             if (ds.Enabled)
                                 XenAPI.VM.record_data_source(Session, vm.opaque_ref, ds.DataSource.name_label);
