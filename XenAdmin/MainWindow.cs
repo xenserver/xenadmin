@@ -290,11 +290,11 @@ namespace XenAdmin
                 ConsolePanel.ResetAllViews();
 
 				if (SelectionManager.Selection.FirstIsRealVM)
-					ConsolePanel.setCurrentSource((VM)SelectionManager.Selection.First);
+					ConsolePanel.SetCurrentSource((VM)SelectionManager.Selection.First);
                 else if (SelectionManager.Selection.FirstIs<Host>())
-                    ConsolePanel.setCurrentSource((Host)SelectionManager.Selection.First);
+                    ConsolePanel.SetCurrentSource((Host)SelectionManager.Selection.First);
 
-                UnpauseVNC(sender == TheTabControl);
+                ConsolePanel.UnpauseActiveView(sender == TheTabControl);
             }
         }
 
@@ -861,15 +861,15 @@ namespace XenAdmin
 
                         foreach (VM vm in con.Cache.VMs)
                         {
-                            ConsolePanel.closeVNCForSource(vm);
+                            ConsolePanel.CloseVncForSource(vm);
                         }
 
                         foreach (Host host in con.Cache.Hosts)
                         {
-                            ConsolePanel.closeVNCForSource(host.ControlDomainZero());
+                            ConsolePanel.CloseVncForSource(host.ControlDomainZero());
 
                             foreach (VM vm in host.OtherControlDomains())
-                                CvmConsolePanel.closeVNCForSource(vm);
+                                CvmConsolePanel.CloseVncForSource(vm);
                         }
 
                         con.EndConnect();
@@ -1185,7 +1185,7 @@ namespace XenAdmin
                 if (o is VM)
                 {
                     VM vm = (VM)e.Element;
-                    ConsolePanel.closeVNCForSource(vm);
+                    ConsolePanel.CloseVncForSource(vm);
                     XenDialogBase.CloseAll(vm);
                 }
 
@@ -1888,12 +1888,9 @@ namespace XenAdmin
         }
 
         /// <param name="sender"></param>
-        /// <param name="e">
-        /// If null, then we deduce the method was called by TreeView_AfterSelect
-        /// and don't focus the VNC console. i.e. we only focus the VNC console if the user
-        /// explicitly clicked on the console tab rather than arriving there by navigating
-        /// in treeView.
-        /// </param>
+        /// <param name="e">If null, then we deduce the method was called by navigation panel
+        /// events (e.g. navigating in the treeView). In this case do not focus the VNC console,
+        /// we only do it if the user explicitly clicked on the console tab.</param>
         private void TheTabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (IgnoreTabChanges)
@@ -1906,35 +1903,34 @@ namespace XenAdmin
 
             if (t == TabPageConsole)
             {
+                CvmConsolePanel.PauseAllDockedViews();
+
                 if (SelectionManager.Selection.FirstIsRealVM)
                 {
-                    ConsolePanel.setCurrentSource((VM)SelectionManager.Selection.First);
-                    UnpauseVNC(e != null && sender == TheTabControl);
+                    ConsolePanel.SetCurrentSource((VM)SelectionManager.Selection.First);
+                    ConsolePanel.UnpauseActiveView(e != null && sender == TheTabControl);
                 }
                 else if (SelectionManager.Selection.FirstIs<Host>())
                 {
-                    ConsolePanel.setCurrentSource((Host)SelectionManager.Selection.First);
-                    UnpauseVNC(e != null && sender == TheTabControl);
+                    ConsolePanel.SetCurrentSource((Host)SelectionManager.Selection.First);
+                    ConsolePanel.UnpauseActiveView(e != null && sender == TheTabControl);
                 }
                 ConsolePanel.UpdateRDPResolution();
             }
             else if (t == TabPageCvmConsole)
             {
+                ConsolePanel.PauseAllDockedViews();
+
                 if (SelectionManager.Selection.First is SR sr && sr.HasDriverDomain(out var vm))
                 {
-                    CvmConsolePanel.setCurrentSource(vm);
-                    UnpauseVNC(e != null && sender == TheTabControl);
+                    CvmConsolePanel.SetCurrentSource(vm);
+                    CvmConsolePanel.UnpauseActiveView(e != null && sender == TheTabControl);
                 }
             }
             else
             {
-                ConsolePanel.PauseAllViews();  
-                CvmConsolePanel.PauseAllViews();
-                
-                // Start timer for closing the VNC connection after an interval (20 seconds)
-                // when the console tab is not selected
-                ConsolePanel.StartCloseVNCTimer(ConsolePanel.activeVNCView);
-                CvmConsolePanel.StartCloseVNCTimer(CvmConsolePanel.activeVNCView);
+                ConsolePanel.PauseAllDockedViews();  
+                CvmConsolePanel.PauseAllDockedViews();
 
                 if (t == TabPageGeneral)
                 {
@@ -2148,20 +2144,6 @@ namespace XenAdmin
                     if (page != null && page.Tag == f)
                         f.SetUrl();
                 }
-            }
-        }
-
-        private void UnpauseVNC(bool focus)
-        {
-            ConsolePanel.UnpauseActiveView();
-            CvmConsolePanel.UnpauseActiveView();
-
-            if (focus)
-            {
-                ConsolePanel.FocusActiveView();
-                CvmConsolePanel.FocusActiveView();
-                ConsolePanel.SwitchIfRequired();
-                CvmConsolePanel.SwitchIfRequired();
             }
         }
 
@@ -2911,13 +2893,11 @@ namespace XenAdmin
         {
             UpdateToolbars();
 
-            //
             // NB do not trigger updates to the panels in this method
             // instead, put them in TheTabControl_SelectedIndexChanged,
             // so only the selected tab is updated
-            //
 
-            TheTabControl_SelectedIndexChanged(null, EventArgs.Empty);
+            TheTabControl_SelectedIndexChanged(null, null);
 
             if (TheTabControl.SelectedTab != null)
                 TheTabControl.SelectedTab.Refresh();
