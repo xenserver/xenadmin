@@ -72,8 +72,9 @@ namespace XenAdmin.Wizards.PatchingWizard
         protected List<string> hostsThatWillRequireReboot = new List<string>();
         protected Dictionary<string, List<string>> livePatchAttempts = new Dictionary<string, List<string>>();
         public Dictionary<XenServerPatch, string> AllDownloadedPatches = new Dictionary<XenServerPatch, string>();
+        private bool _userMovedVerticalScrollbar;
 
-        public AutomatedUpdatesBasePage()
+        protected AutomatedUpdatesBasePage()
         {
             InitializeComponent();
             panel1.Visible = false;
@@ -171,7 +172,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         protected virtual void DoAfterInitialPlanActions(UpdateProgressBackgroundWorker bgw, Host host, List<Host> hosts) { }
         #endregion
 
-        #region background workers
+        #region Backround workers
         private bool StartUpgradeWorkers()
         {
             //reset the background workers
@@ -270,7 +271,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 newVal = 0;
             else if (newVal > 100)
                 newVal = 100;
-            progressBar.Value = (int)newVal;
+            progressBar.Value = (int) newVal;
 
             var allsb = new StringBuilder();
 
@@ -302,7 +303,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                         if (pa.IsSkippable)
                         {
                             Debug.Assert(!string.IsNullOrEmpty(pa.Title));
-                            errorSb.AppendLine(string.Format(Messages.RPU_WIZARD_ERROR_SKIP_MSG, pa.Title)).AppendLine();
+                            errorSb.AppendLine(string.Format(Messages.RPU_WIZARD_ERROR_SKIP_MSG, pa.Title))
+                                .AppendLine();
                         }
 
                         bgwErrorCount++;
@@ -336,7 +338,8 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             textBoxLog.Text = allsb.ToString();
             textBoxLog.SelectionStart = textBoxLog.Text.Length;
-            textBoxLog.ScrollToCaret();
+            if (!_userMovedVerticalScrollbar)
+                textBoxLog.ScrollToCaret();
         }
 
         private void WorkerDoWork(object sender, DoWorkEventArgs doWorkEventArgs)
@@ -572,6 +575,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             OnPageUpdated();
         }
 
+        #region Event handlers
         private void buttonRetry_Click(object sender, EventArgs e)
         {
             RetryFailedActions();
@@ -581,7 +585,16 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             SkipFailedActions();
         }
-
+        private void TextBoxLog_OnScrollChange(int _, Orientation orientation)
+        {
+            if (orientation == Orientation.Vertical)
+            {
+                // if the user scrolls all the way to the bottom, we reset the status
+                _userMovedVerticalScrollbar = !textBoxLog.IsVerticalScrollBarAtBottom;
+            }
+        }
+        #endregion
+        
         protected HostPlan GetUpdatePlanActionsForHost(Host host, List<Host> hosts, List<XenServerPatch> minimalPatches,
             List<XenServerPatch> uploadedPatches, KeyValuePair<XenServerPatch, string> patchFromDisk, bool repatriateVms = true)
         {

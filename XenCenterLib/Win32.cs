@@ -212,6 +212,7 @@ namespace XenCenterLib
         public const int WM_MBUTTONDBLCLK = 0x209;
         public const int WM_MOUSEWHEEL = 0x20A;
         public const int WM_MOUSEHWHEEL = 0x20E;
+        public const int WM_SYSKEYDOWN = 0x104;
 
         public const int WM_PARENTNOTIFY = 0x210;
 
@@ -387,6 +388,21 @@ namespace XenCenterLib
            uint dwFlags, IntPtr lParam);
 
         #region Window scrolling functions
+
+        /// <summary>
+        /// Get the current position of the input scrollbar
+        /// </summary>
+        /// <param name="scrollBarHandle">Handler of the control. Usually the Handler field</param>
+        /// <param name="scrollBarConstant">SB_VERT or SB_HORZ</param>
+        /// <returns>The position as returned by GetScrollInfo</returns>
+        public static int GetScrollBarPosition(IntPtr scrollBarHandle, ScrollBarConstants scrollBarConstant)
+        {
+            var scrollInfo = new ScrollInfo();
+            scrollInfo.cbSize = (uint)Marshal.SizeOf(scrollInfo);
+            scrollInfo.fMask = (uint)ScrollInfoMask.SIF_TRACKPOS;
+            GetScrollInfo(scrollBarHandle, (int)scrollBarConstant, ref scrollInfo);
+            return scrollInfo.nTrackPos;
+        }
 
         [StructLayout(LayoutKind.Sequential)]
         public struct ScrollInfo
