@@ -14635,6 +14635,39 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Test failover is in progress. This may take some time.
+        ///
+        ///Once done, click Next to remove the vApps and VMs that were failed over and to see the summary report..
+        /// </summary>
+        public static string DR_WIZARD_RECOVERPAGE_BLURB_DRYRUN {
+            get {
+                return ResourceManager.GetString("DR_WIZARD_RECOVERPAGE_BLURB_DRYRUN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failback is in progress. This may take some time.
+        ///
+        ///Once done,  click Next to see the summary report..
+        /// </summary>
+        public static string DR_WIZARD_RECOVERPAGE_BLURB_FAILBACK {
+            get {
+                return ResourceManager.GetString("DR_WIZARD_RECOVERPAGE_BLURB_FAILBACK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} Disaster Recovery is in progress. This may take some time.
+        ///
+        ///Once done, click Next to see the summary report..
+        /// </summary>
+        public static string DR_WIZARD_RECOVERPAGE_BLURB_FAILOVER {
+            get {
+                return ResourceManager.GetString("DR_WIZARD_RECOVERPAGE_BLURB_FAILOVER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Test failover to pool &apos;{0}&apos; is complete..
         /// </summary>
         public static string DR_WIZARD_RECOVERPAGE_COMPLETE_DRYRUN {
@@ -14658,60 +14691,6 @@ namespace XenAdmin {
         public static string DR_WIZARD_RECOVERPAGE_COMPLETE_FAILOVER {
             get {
                 return ResourceManager.GetString("DR_WIZARD_RECOVERPAGE_COMPLETE_FAILOVER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Click Next to remove the vApps and VMs that were failed over and to see the summary report..
-        /// </summary>
-        public static string DR_WIZARD_RECOVERPAGE_CONTINUE_DRYRUN {
-            get {
-                return ResourceManager.GetString("DR_WIZARD_RECOVERPAGE_CONTINUE_DRYRUN", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Click Next to see the summary report..
-        /// </summary>
-        public static string DR_WIZARD_RECOVERPAGE_CONTINUE_FAILBACK {
-            get {
-                return ResourceManager.GetString("DR_WIZARD_RECOVERPAGE_CONTINUE_FAILBACK", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Click Next to see the summary report..
-        /// </summary>
-        public static string DR_WIZARD_RECOVERPAGE_CONTINUE_FAILOVER {
-            get {
-                return ResourceManager.GetString("DR_WIZARD_RECOVERPAGE_CONTINUE_FAILOVER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Test failover is in progress. This may take some time..
-        /// </summary>
-        public static string DR_WIZARD_RECOVERPAGE_IN_PROGRESS_DRYRUN {
-            get {
-                return ResourceManager.GetString("DR_WIZARD_RECOVERPAGE_IN_PROGRESS_DRYRUN", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Failback is in progress. This may take some time..
-        /// </summary>
-        public static string DR_WIZARD_RECOVERPAGE_IN_PROGRESS_FAILBACK {
-            get {
-                return ResourceManager.GetString("DR_WIZARD_RECOVERPAGE_IN_PROGRESS_FAILBACK", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} Disaster Recovery is in progress. This may take some time..
-        /// </summary>
-        public static string DR_WIZARD_RECOVERPAGE_IN_PROGRESS_FAILOVER {
-            get {
-                return ResourceManager.GetString("DR_WIZARD_RECOVERPAGE_IN_PROGRESS_FAILOVER", resourceCulture);
             }
         }
         

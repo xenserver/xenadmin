@@ -5163,6 +5163,21 @@ Click Cancel if you prefer to reconfigure your VMs' memory settings manually.</v
   <data name="DR_WIZARD_PROBLEM_RUNNING_VM_HELPMESSAGE" xml:space="preserve">
     <value>Shut down VM</value>
   </data>
+  <data name="DR_WIZARD_RECOVERPAGE_BLURB_DRYRUN" xml:space="preserve">
+    <value>Test failover is in progress. This may take some time.
+
+Once done, click Next to remove the vApps and VMs that were failed over and to see the summary report.</value>
+  </data>
+  <data name="DR_WIZARD_RECOVERPAGE_BLURB_FAILBACK" xml:space="preserve">
+    <value>Failback is in progress. This may take some time.
+
+Once done,  click Next to see the summary report.</value>
+  </data>
+  <data name="DR_WIZARD_RECOVERPAGE_BLURB_FAILOVER" xml:space="preserve">
+    <value>{0} Disaster Recovery is in progress. This may take some time.
+
+Once done, click Next to see the summary report.</value>
+  </data>
   <data name="DR_WIZARD_RECOVERPAGE_COMPLETE_DRYRUN" xml:space="preserve">
     <value>Test failover to pool '{0}' is complete.</value>
   </data>
@@ -5171,24 +5186,6 @@ Click Cancel if you prefer to reconfigure your VMs' memory settings manually.</v
   </data>
   <data name="DR_WIZARD_RECOVERPAGE_COMPLETE_FAILOVER" xml:space="preserve">
     <value>{0} Disaster Recovery is complete.</value>
-  </data>
-  <data name="DR_WIZARD_RECOVERPAGE_CONTINUE_DRYRUN" xml:space="preserve">
-    <value>Click Next to remove the vApps and VMs that were failed over and to see the summary report.</value>
-  </data>
-  <data name="DR_WIZARD_RECOVERPAGE_CONTINUE_FAILBACK" xml:space="preserve">
-    <value>Click Next to see the summary report.</value>
-  </data>
-  <data name="DR_WIZARD_RECOVERPAGE_CONTINUE_FAILOVER" xml:space="preserve">
-    <value>Click Next to see the summary report.</value>
-  </data>
-  <data name="DR_WIZARD_RECOVERPAGE_IN_PROGRESS_DRYRUN" xml:space="preserve">
-    <value>Test failover is in progress. This may take some time.</value>
-  </data>
-  <data name="DR_WIZARD_RECOVERPAGE_IN_PROGRESS_FAILBACK" xml:space="preserve">
-    <value>Failback is in progress. This may take some time.</value>
-  </data>
-  <data name="DR_WIZARD_RECOVERPAGE_IN_PROGRESS_FAILOVER" xml:space="preserve">
-    <value>{0} Disaster Recovery is in progress. This may take some time.</value>
   </data>
   <data name="DR_WIZARD_RECOVERPAGE_OVERALL_PROGRESS" xml:space="preserve">
     <value>Overall progress: {0} of {1} tasks completed</value>

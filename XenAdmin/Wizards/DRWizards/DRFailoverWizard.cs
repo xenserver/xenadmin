@@ -61,11 +61,8 @@ namespace XenAdmin.Wizards.DRWizards
         private DRWizardType WizardType;
         private SummaryReport SummaryReport = new SummaryReport();
 
-        public DRFailoverWizard(Pool pool)
-            : this(pool, DRWizardType.Unknown)
-        { }
-         
-        public DRFailoverWizard(Pool pool, DRWizardType wizardType)
+
+        public DRFailoverWizard(Pool pool, DRWizardType wizardType = DRWizardType.Unknown)
             : base(pool.Connection)
         {
             InitializeComponent();
