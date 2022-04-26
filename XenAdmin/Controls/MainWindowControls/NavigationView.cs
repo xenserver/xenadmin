@@ -742,7 +742,7 @@ namespace XenAdmin.Controls.MainWindowControls
                 if (cmd.CanRun())
                     targetToHighlight = cmd.HighlightNode;
 
-                if (cmd.StatusBarText != null)
+                if (!string.IsNullOrEmpty(cmd.StatusBarText))
                     statusBarText = cmd.StatusBarText;
             }
 

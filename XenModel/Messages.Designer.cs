@@ -24951,7 +24951,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This VM may not migrate at the moment.
+        ///   Looks up a localized string similar to &apos;{0}&apos; may not migrate at the moment. Please ensure you have installed {1} on it.
         /// </summary>
         public static string MIGRATION_NOT_ALLOWED {
             get {
@@ -24960,7 +24960,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This VM may not migrate because the destination host does not have some of the CPU features that the VM is currently using.
+        ///   Looks up a localized string similar to &apos;{0}&apos; may not migrate because the destination host does not have some of the CPU features that the VM is currently using.
         /// </summary>
         public static string MIGRATION_NOT_ALLOWED_CPU_FEATURES {
             get {
@@ -24969,7 +24969,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This VM may not migrate; it is not on shared storage.
+        ///   Looks up a localized string similar to &apos;{0}&apos; may not migrate because it is not on shared storage.
         /// </summary>
         public static string MIGRATION_NOT_ALLOWED_NO_SHARED_STORAGE {
             get {
@@ -24978,7 +24978,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A VM may not migrate outside of its pool.
+        ///   Looks up a localized string similar to &apos;{0}&apos; may not migrate outside its pool.
         /// </summary>
         public static string MIGRATION_NOT_ALLOWED_OUTSIDE_POOL {
             get {

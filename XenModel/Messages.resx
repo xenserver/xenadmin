@@ -8677,16 +8677,16 @@ Do you want to continue?</value>
     <value>Please eject your CD</value>
   </data>
   <data name="MIGRATION_NOT_ALLOWED" xml:space="preserve">
-    <value>This VM may not migrate at the moment</value>
+    <value>'{0}' may not migrate at the moment. Please ensure you have installed {1} on it</value>
   </data>
   <data name="MIGRATION_NOT_ALLOWED_CPU_FEATURES" xml:space="preserve">
-    <value>This VM may not migrate because the destination host does not have some of the CPU features that the VM is currently using</value>
+    <value>'{0}' may not migrate because the destination host does not have some of the CPU features that the VM is currently using</value>
   </data>
   <data name="MIGRATION_NOT_ALLOWED_NO_SHARED_STORAGE" xml:space="preserve">
-    <value>This VM may not migrate; it is not on shared storage</value>
+    <value>'{0}' may not migrate because it is not on shared storage</value>
   </data>
   <data name="MIGRATION_NOT_ALLOWED_OUTSIDE_POOL" xml:space="preserve">
-    <value>A VM may not migrate outside of its pool</value>
+    <value>'{0}' may not migrate outside its pool</value>
   </data>
   <data name="MIN" xml:space="preserve">
     <value>Min</value>

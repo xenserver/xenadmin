@@ -53,47 +53,46 @@ namespace XenAdmin.Commands
         {
             get
             {
-                if (!CanRun())
+                if (CanRun())
+                    return null;
+
+                var targetHost = GetTargetNodeAncestorAsXenObjectOrGroupingTag<Host>();
+                if (targetHost == null)
+                    return null;
+
+                var draggedVMs = GetDraggedItemsAsXenObjects<VM>();
+
+                foreach (VM vm in draggedVMs)
                 {
-                    Host targetHost = GetTargetNodeAncestorAsXenObjectOrGroupingTag<Host>();
-                    
-                    if (targetHost != null)
+                    if (vm == null)
+                        continue;
+
+                    if (!vm.allowed_operations.Contains(vm_operations.migrate_send))
                     {
-                        foreach (VM draggedVM in GetDraggedItemsAsXenObjects<VM>())
-                        {
-                            Pool draggedVMPool = Helpers.GetPool(draggedVM.Connection);
-                            Host draggedVMHome = draggedVM.Home();
-
-                            if (draggedVM == null || draggedVMPool == null || 
-                                draggedVMHome == null || 
-                                !draggedVM.allowed_operations.Contains(vm_operations.migrate_send))
-                            {
-                                if (draggedVM.power_state == vm_power_state.Running)
-                                    return Messages.MIGRATION_NOT_ALLOWED;
-                                return null;
-                            }
-
-                            if(!LiveMigrateAllowedInVersion(targetHost, draggedVM))
-                            {
-                                if (IsACrossPoolMigrate(targetHost, draggedVM))
-                                {
-                                    return Messages.MIGRATION_NOT_ALLOWED_OUTSIDE_POOL;
-                                }
-                                if (draggedVM.GetStorageHost(true) != null)
-                                {
-                                    // Non-agile.
-                                    return Messages.MIGRATION_NOT_ALLOWED_NO_SHARED_STORAGE;
-                                }
-                            }
-
-                            if (Helpers.productVersionCompare(Helpers.HostProductVersion(targetHost), Helpers.HostProductVersion(draggedVMHome)) < 0)
-                                return Messages.OLDER_THAN_CURRENT_SERVER;
-
-                            if (targetHost != draggedVMHome && VMOperationHostCommand.VmCpuIncompatibleWithHost(targetHost, draggedVM))
-                                return Messages.MIGRATION_NOT_ALLOWED_CPU_FEATURES;
-                        }
+                        if (vm.power_state == vm_power_state.Running)
+                            return string.Format(Messages.MIGRATION_NOT_ALLOWED, vm.Name().Ellipsise(50), BrandManager.VmTools);
+                        return null;
                     }
+
+                    if (!LiveMigrateAllowedInVersion(targetHost, vm))
+                    {
+                        if (IsACrossPoolMigrate(targetHost, vm))
+                            return string.Format(Messages.MIGRATION_NOT_ALLOWED_OUTSIDE_POOL, vm.Name().Ellipsise(50));
+
+                        if (vm.GetStorageHost(true) != null) //Non-agile
+                            return string.Format(Messages.MIGRATION_NOT_ALLOWED_NO_SHARED_STORAGE, vm.Name().Ellipsise(50));
+                    }
+
+                    var homeHost = vm.Home();
+
+                    if (Helpers.productVersionCompare(Helpers.HostProductVersion(targetHost),
+                            Helpers.HostProductVersion(homeHost ?? Helpers.GetCoordinator(vm.Connection))) < 0)
+                        return Messages.OLDER_THAN_CURRENT_SERVER;
+
+                    if (targetHost != homeHost && VMOperationHostCommand.VmCpuIncompatibleWithHost(targetHost, vm))
+                        return string.Format(Messages.MIGRATION_NOT_ALLOWED_CPU_FEATURES, vm.Name().Ellipsise(50));
                 }
+
                 return null;
             }
         }

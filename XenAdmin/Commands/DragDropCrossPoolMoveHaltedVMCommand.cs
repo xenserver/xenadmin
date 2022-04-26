@@ -51,37 +51,39 @@ namespace XenAdmin.Commands
         {
             get
             {
-                if (!CanRun())
+                if (CanRun())
+                    return null;
+
+                var targetHost = GetTargetNodeAncestorAsXenObjectOrGroupingTag<Host>();
+                if (targetHost == null)
+                    return null;
+
+                var draggedVMs = GetDraggedItemsAsXenObjects<VM>();
+
+                foreach (VM vm in draggedVMs)
                 {
-                    Host targetHost = GetTargetNodeAncestorAsXenObjectOrGroupingTag<Host>();
-                    
-                    if (targetHost != null)
+                    if (vm == null)
+                        continue;
+
+                    if (!LiveMigrateAllowedInVersion(targetHost, vm))
                     {
-                        foreach (VM draggedVM in GetDraggedItemsAsXenObjects<VM>())
-                        {
-                            Host draggedVMHome = draggedVM.Home();
+                        if (IsACrossPoolMigrate(targetHost, vm))
+                            return string.Format(Messages.MIGRATION_NOT_ALLOWED_OUTSIDE_POOL, vm.Name().Ellipsise(50));
 
-                            if(!LiveMigrateAllowedInVersion(targetHost, draggedVM))
-                            {
-                                if (IsACrossPoolMigrate(targetHost, draggedVM))
-                                {
-                                    return Messages.MIGRATION_NOT_ALLOWED_OUTSIDE_POOL;
-                                }
-                                if (draggedVM.GetStorageHost(true) != null)
-                                {
-                                    // Non-agile.
-                                    return Messages.MIGRATION_NOT_ALLOWED_NO_SHARED_STORAGE;
-                                }
-                            }
-                            
-                            if (Helpers.productVersionCompare(Helpers.HostProductVersion(targetHost), Helpers.HostProductVersion(draggedVMHome ?? Helpers.GetCoordinator(draggedVM.Connection))) < 0)
-                                return Messages.OLDER_THAN_CURRENT_SERVER;
-
-                            if (targetHost != draggedVMHome && VMOperationHostCommand.VmCpuIncompatibleWithHost(targetHost, draggedVM))
-                                return Messages.MIGRATION_NOT_ALLOWED_CPU_FEATURES;
-                        }
+                        if (vm.GetStorageHost(true) != null) //Non-agile
+                            return string.Format(Messages.MIGRATION_NOT_ALLOWED_NO_SHARED_STORAGE, vm.Name().Ellipsise(50));
                     }
+
+                    var homeHost = vm.Home();
+
+                    if (Helpers.productVersionCompare(Helpers.HostProductVersion(targetHost),
+                            Helpers.HostProductVersion(homeHost ?? Helpers.GetCoordinator(vm.Connection))) < 0)
+                        return Messages.OLDER_THAN_CURRENT_SERVER;
+
+                    if (targetHost != homeHost && VMOperationHostCommand.VmCpuIncompatibleWithHost(targetHost, vm))
+                        return string.Format(Messages.MIGRATION_NOT_ALLOWED_CPU_FEATURES, vm.Name().Ellipsise(50));
                 }
+
                 return null;
             }
         }
