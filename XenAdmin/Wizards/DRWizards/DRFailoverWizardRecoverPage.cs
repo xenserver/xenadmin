@@ -119,8 +119,7 @@ namespace XenAdmin.Wizards.DRWizards
 
         public override bool EnableNext()
         {
-            SetupLabels();
-            return (progressBar1.Value == 100);
+            return progressBar1.Value == 100;
         }
 
         public override bool EnablePrevious()
@@ -128,30 +127,36 @@ namespace XenAdmin.Wizards.DRWizards
             return false;
         }
 
-        private void SetupLabels()
+        private void SetBlurb()
         {
             switch (WizardType)
             {
                 case DRWizardType.Failback:
-                    labelTitle.Text = progressBar1.Value == 100 
-                        ? String.Format(Messages.DR_WIZARD_RECOVERPAGE_COMPLETE_FAILBACK, Connection.Name) 
-                        : Messages.DR_WIZARD_RECOVERPAGE_IN_PROGRESS_FAILBACK; 
-                    labelContinue.Text = Messages.DR_WIZARD_RECOVERPAGE_CONTINUE_FAILBACK;
+                    labelTitle.Text = Messages.DR_WIZARD_RECOVERPAGE_BLURB_FAILBACK;
                     break;
                 case DRWizardType.Dryrun:
-                    labelTitle.Text = progressBar1.Value == 100
-                        ? String.Format(Messages.DR_WIZARD_RECOVERPAGE_COMPLETE_DRYRUN, Connection.Name)  
-                        : Messages.DR_WIZARD_RECOVERPAGE_IN_PROGRESS_DRYRUN;
-                    labelContinue.Text = Messages.DR_WIZARD_RECOVERPAGE_CONTINUE_DRYRUN;
+                    labelTitle.Text = Messages.DR_WIZARD_RECOVERPAGE_BLURB_DRYRUN;
                     break;
                 default:
-                    labelTitle.Text = progressBar1.Value == 100 
-                        ? string.Format(Messages.DR_WIZARD_RECOVERPAGE_COMPLETE_FAILOVER, BrandManager.ProductBrand) 
-                        : string.Format(Messages.DR_WIZARD_RECOVERPAGE_IN_PROGRESS_FAILOVER, BrandManager.ProductBrand);
-                    labelContinue.Text = Messages.DR_WIZARD_RECOVERPAGE_CONTINUE_FAILOVER;
+                    labelTitle.Text = string.Format(Messages.DR_WIZARD_RECOVERPAGE_BLURB_FAILOVER, BrandManager.ProductBrand);
                     break;
             }
-            labelContinue.Visible = progressBar1.Value == 100;
+        }
+
+        private void SetCompletedMessages()
+        {
+            switch (WizardType)
+            {
+                case DRWizardType.Failback:
+                    labelOverallProgress.Text = string.Format(Messages.DR_WIZARD_RECOVERPAGE_COMPLETE_FAILBACK, Connection.Name);
+                    break;
+                case DRWizardType.Dryrun:
+                    labelOverallProgress.Text = string.Format(Messages.DR_WIZARD_RECOVERPAGE_COMPLETE_DRYRUN, Connection.Name) ;
+                    break;
+                default:
+                    labelOverallProgress.Text = string.Format(Messages.DR_WIZARD_RECOVERPAGE_COMPLETE_FAILOVER, BrandManager.ProductBrand) ;
+                    break;
+            }
         }
 
         public DRWizardType WizardType { private get; set; }
@@ -174,6 +179,7 @@ namespace XenAdmin.Wizards.DRWizards
             if (ReportStarted != null)
                 ReportStarted();
             
+            SetBlurb();
             OnPageUpdated();
 
             dataGridView1.Rows.Clear();
@@ -349,6 +355,7 @@ namespace XenAdmin.Wizards.DRWizards
                             break;
                         default:
                             progressBar1.Value = 100;
+                            SetCompletedMessages();
                             OnPageUpdated();
                             if (ReportLineGot != null)
                                 ReportLineGot(labelTitle.Text, 0, true);
@@ -451,8 +458,7 @@ namespace XenAdmin.Wizards.DRWizards
             Program.BeginInvoke(this, () =>
             {
                 progressBar1.Value = 100;
-                var row = dataGridView1.Rows[dataGridView1.RowCount - 1] as DataGridViewRowRecover; //last row is "Start VMs and Appliances" row
-                if (row != null)
+                if (dataGridView1.Rows[dataGridView1.RowCount - 1] is DataGridViewRowRecover row) //last row is "Start VMs and Appliances" row
                 {
                     if (senderAction.Succeeded)
                         row.UpdateStatus(RecoverState.Recovered, Messages.DR_WIZARD_RECOVERPAGE_STATUS_COMPLETED);
@@ -461,6 +467,8 @@ namespace XenAdmin.Wizards.DRWizards
                     labelOverallProgress.Text = string.Format(Messages.DR_WIZARD_RECOVERPAGE_OVERALL_PROGRESS,
                                                               row.Index + 1, dataGridView1.Rows.Count);
                 }
+
+                SetCompletedMessages();
                 OnPageUpdated();
                 if (ReportLineGot != null)
                     ReportLineGot(labelTitle.Text, 0, true);
