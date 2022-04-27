@@ -46,13 +46,7 @@ namespace XenAdmin.Commands
         {
         }
 
-        public override VirtualTreeNode HighlightNode
-        {
-            get
-            {
-                return GetTargetNodeAncestor<GroupingTag>();
-            }
-        }
+        public override VirtualTreeNode HighlightNode => GetTargetNodeAncestor<GroupingTag>();
 
         protected override bool CanRunCore()
         {

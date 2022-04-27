@@ -51,9 +51,6 @@ namespace XenAdmin.Commands
         {
             get
             {
-                if (CanRun())
-                    return null;
-
                 var targetHost = GetTargetNodeAncestorAsXenObjectOrGroupingTag<Host>();
                 if (targetHost == null)
                     return null;
@@ -172,12 +169,6 @@ namespace XenAdmin.Commands
             }
         }
 
-        public override VirtualTreeNode HighlightNode
-        {
-            get
-            {
-                return CanRun() ? GetTargetNodeAncestor<Host>() : null;
-            }
-        }
+        public override VirtualTreeNode HighlightNode => GetTargetNodeAncestor<Host>();
     }
 }
