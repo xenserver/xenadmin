@@ -17,7 +17,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             if (disposing)
             {
-                backgroundWorkers.ForEach(bgw => bgw.Dispose());
+                _backgroundWorkers.ForEach(bgw => bgw.Dispose());
                 if (components != null)
                     components.Dispose();
             }
