@@ -99,14 +99,6 @@ namespace XenAdmin.Wizards.GenericPages
             ThreadPool.QueueUserWorkItem(delegate { FetchFailureReasonWithRetry(DEFAULT_RETRIES, DEFAULT_TIMEOUT); });
         }
 
-        /// <summary>
-        /// Fetch the reason on the current thread
-        /// </summary>
-        public void LoadSync()
-        {
-            FetchFailureReasonWithRetry(DEFAULT_RETRIES, DEFAULT_TIMEOUT);
-        }
- 
         public void CancelFilters()
         {
             foreach (ReasoningFilter filter in _filters)
