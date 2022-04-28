@@ -50,7 +50,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
             this.preSelectedVMs = preSelectedVMs;
         }
 
-        public override bool FailureFoundFor(IXenObject itemToFilterOn)
+        protected override bool FailureFoundFor(IXenObject itemToFilterOn)
         {
             bool targetWlb = false;
 

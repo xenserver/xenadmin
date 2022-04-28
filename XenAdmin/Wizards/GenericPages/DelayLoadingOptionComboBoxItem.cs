@@ -66,7 +66,7 @@ namespace XenAdmin.Wizards.GenericPages
 
         public void CopyFrom(DelayLoadingOptionComboBoxItem toCopy)
         {
-            xenObject = toCopy.xenObject;
+            xenObject = toCopy.Item;
             failureReason = toCopy.FailureReason;
             Enabled = toCopy.Enabled;
             PreferAsSelectedItem = toCopy.PreferAsSelectedItem;
@@ -75,10 +75,7 @@ namespace XenAdmin.Wizards.GenericPages
         /// <summary>
         /// Underlying Xen Object
         /// </summary>
-        public IXenObject Item
-        {
-            get { return xenObject; }
-        }
+        public IXenObject Item => xenObject;
 
         /// <summary>
         /// You would prefer this item to be the one that is selected
@@ -125,7 +122,18 @@ namespace XenAdmin.Wizards.GenericPages
             {
                 try
                 {
-                    FailureReason = FetchFailureReason();
+                    var result = string.Empty;
+
+                    foreach (ReasoningFilter filter in _filters)
+                    {
+                        if (filter.FailureFound)
+                        {
+                            result = filter.Reason;
+                            break;
+                        }
+                    }
+
+                    FailureReason = result;
                     return;
                 }
                 catch
@@ -178,25 +186,6 @@ namespace XenAdmin.Wizards.GenericPages
                 return Item.Name();
 
             return String.Format(Messages.DELAY_LOADED_COMBO_BOX_ITEM_FAILURE_REASON, Item.Name(), FailureReason);
-        }
-
-        /// <summary>
-        /// Fetch the reason from somewhere that may take some time
-        /// Called in a separate thread by the constructor
-        /// Returning String.Empty or null will mean no failure has been found
-        /// </summary>
-        /// <returns></returns>
-        protected virtual string FetchFailureReason()
-        {
-            foreach (ReasoningFilter filter in _filters)
-            {
-                if (filter.FailureFoundFor(Item))
-                {
-                    return filter.Reason;
-                }
-            }
-
-            return string.Empty;
         }
     }
 }

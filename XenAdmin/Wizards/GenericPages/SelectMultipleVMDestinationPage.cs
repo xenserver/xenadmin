@@ -388,7 +388,7 @@ namespace XenAdmin.Wizards.GenericPages
             }
         }
         
-        private void PopulateDataGridView(IEnableableXenObjectComboBoxItem selectedItem)
+        private void PopulateDataGridView()
         {
             Program.AssertOnEventThread();
 
@@ -407,7 +407,6 @@ namespace XenAdmin.Wizards.GenericPages
                 {
                     var tb = new DataGridViewTextBoxCell {Value = kvp.Value.VmNameLabel, Tag = kvp.Key};
                     var cb = new DataGridViewEnableableComboBoxCell{FlatStyle = FlatStyle.Flat};
-                    var homeserverFilters = CreateTargetServerFilterList(selectedItem, new List<string> {kvp.Key});
 
                     if (target != null)
                     {
@@ -430,9 +429,11 @@ namespace XenAdmin.Wizards.GenericPages
                         var sortedHosts = new List<Host>(target.Item.Connection.Cache.Hosts);
                         sortedHosts.Sort();
 
+                        var homeServerFilters = CreateTargetServerFilterList(target, new List<string> {kvp.Key});
+
                         foreach (var host in sortedHosts)
                         {
-                            var item = new DelayLoadingOptionComboBoxItem(host, homeserverFilters);
+                            var item = new DelayLoadingOptionComboBoxItem(host, homeServerFilters);
                             cb.Items.Add(item);
                             item.ParentComboBox = cb;
                             item.PreferAsSelectedItem = m_selectedObject != null && m_selectedObject.opaque_ref == host.opaque_ref ||
@@ -630,8 +631,8 @@ namespace XenAdmin.Wizards.GenericPages
 			    try
 			    {
 			        Cursor.Current = Cursors.WaitCursor;
-			        ChosenItem = item == null ? null : item.Item;
-			        PopulateDataGridView(item);
+                    ChosenItem = item?.Item;
+                    PopulateDataGridView();
 			    }
 			    finally
 			    {

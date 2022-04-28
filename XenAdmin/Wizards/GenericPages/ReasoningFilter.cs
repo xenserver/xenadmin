@@ -36,24 +36,21 @@ namespace XenAdmin.Wizards.GenericPages
 {
     public abstract class ReasoningFilter
     {
+        private readonly IXenObject _baseItemToFilterOn;
+
         protected ReasoningFilter(IXenObject itemToFilterOn)
         {
             if (!(itemToFilterOn is Host) && !(itemToFilterOn is Pool))
                 throw new ArgumentException("Target should be host or pool");
 
-            baseItemToFilterOn = itemToFilterOn;
+            _baseItemToFilterOn = itemToFilterOn;
         }
 
-        /// <summary>
-        /// Base item that should be used to filter on
-        /// </summary>
-        private IXenObject baseItemToFilterOn { get; set; }
-        //public abstract bool FailureFound { get; }
         public abstract string Reason { get; }
 
-        public abstract bool FailureFoundFor(IXenObject xenObject);
+        protected abstract bool FailureFoundFor(IXenObject xenObject);
 
-        public bool FailureFound => FailureFoundFor(baseItemToFilterOn);
+        public bool FailureFound => FailureFoundFor(_baseItemToFilterOn);
 
         public virtual void Cancel() { }
     } 

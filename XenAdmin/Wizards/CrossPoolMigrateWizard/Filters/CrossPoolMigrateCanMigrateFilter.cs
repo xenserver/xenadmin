@@ -68,10 +68,9 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
             canceled = true;
         }
 
-        public override bool FailureFoundFor(IXenObject itemToFilterOn)
+        protected override bool FailureFoundFor(IXenObject itemToFilterOn)
         {
-            Pool targetPool;
-            List<Host> targets = CollateHosts(itemToFilterOn, out targetPool);
+            List<Host> targets = CollateHosts(itemToFilterOn, out var targetPool);
 
             foreach (VM vm in preSelectedVMs)
             {

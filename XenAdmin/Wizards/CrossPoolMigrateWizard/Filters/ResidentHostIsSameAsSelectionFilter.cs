@@ -49,7 +49,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
             this.preSelectedVMs = preSelectedVMs;
         }
 
-        public override bool FailureFoundFor(IXenObject itemToFilterOn)
+        protected override bool FailureFoundFor(IXenObject itemToFilterOn)
         {
             var residentHosts = from VM vm in preSelectedVMs
                 let home = vm.Home()
