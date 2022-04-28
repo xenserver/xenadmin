@@ -246,8 +246,8 @@ output_xml="<?xml version=\"1.0\" ?>
 
 echo $output_xml > ${OUTPUT_DIR}/CHCUpdates.xml
 
-echo "INFO: Generating dev-CHCUpdates.xml. URL is a placeholder value"
+echo "INFO: Generating stage-test-CHCUpdates.xml. URL is a placeholder value"
 
-echo "${output_xml/"url=\"${UPDATES_URL}\""/"url=\"@DEV_MSI_URL_PLACEHOLDER@\""}" > ${OUTPUT_DIR}/dev-CHCUpdates.xml
+echo "${output_xml/"url=\"${UPDATES_URL}\""/"url=\"@DEV_MSI_URL_PLACEHOLDER@\""}" > ${OUTPUT_DIR}/stage-test-CHCUpdates.xml
 
 set +u
