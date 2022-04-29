@@ -126,7 +126,7 @@ namespace XenAdmin.Commands
 
         protected override bool CanLaunchMigrateWizard(VM vm)
         {
-            return vm.power_state == vm_power_state.Halted && CrossPoolMigrateCommand.CanRun(vm, null);
+            return vm.power_state == vm_power_state.Halted && CrossPoolMigrateCommand.CanRun(vm, null, out _);
         }
 
         public override string MenuText => Messages.MAINWINDOW_COPY_VM;
@@ -157,7 +157,7 @@ namespace XenAdmin.Commands
 
         protected override bool CanLaunchMigrateWizard(VM vm)
         {
-            return !vm.DefaultTemplate() && CrossPoolMigrateCommand.CanRun(vm, null);
+            return !vm.DefaultTemplate() && CrossPoolMigrateCommand.CanRun(vm, null, out _);
         }
 
         public override string MenuText => Messages.MAINWINDOW_COPY_TEMPLATE;

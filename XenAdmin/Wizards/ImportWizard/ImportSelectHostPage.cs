@@ -161,12 +161,12 @@ namespace XenAdmin.Wizards.ImportWizard
             return new DelayLoadingOptionComboBoxItem(xenItem, filters);
         }
 
-        protected override List<ReasoningFilter> CreateTargetServerFilterList(IEnableableXenObjectComboBoxItem item, List<string> vmOpaqueRefs)
+        protected override List<ReasoningFilter> CreateTargetServerFilterList(IXenObject xenObject, List<string> vmOpaqueRefs)
         {
             var filters = new List<ReasoningFilter>();
 
-            if (item != null)
-                filters.Add(new HardwareCompatibilityFilter(item.Item, hardwarePlatformSettings));
+            if (xenObject != null)
+                filters.Add(new HardwareCompatibilityFilter(xenObject, hardwarePlatformSettings));
 
             return filters;
         }

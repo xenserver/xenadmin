@@ -39,29 +39,27 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
 {
     internal class ResidentHostIsSameAsSelectionFilter : ReasoningFilter
     {
-        private readonly List<VM> preSelectedVMs;
+        private readonly List<VM> _preSelectedVMs;
 
         public ResidentHostIsSameAsSelectionFilter(IXenObject item, List<VM> preSelectedVMs)
             :base(item)
         {
-            if (preSelectedVMs == null)
-                throw new ArgumentNullException("Pre-selected VMs are null");
-            this.preSelectedVMs = preSelectedVMs;
+            _preSelectedVMs = preSelectedVMs ?? throw new ArgumentNullException(nameof(preSelectedVMs));
         }
 
-        protected override bool FailureFoundFor(IXenObject itemToFilterOn)
+        protected override bool FailureFoundFor(IXenObject itemToFilterOn, out string failureReason)
         {
-            var residentHosts = from VM vm in preSelectedVMs
+            failureReason = Messages.HOST_MENU_CURRENT_SERVER;
+
+            var residentHosts = from VM vm in _preSelectedVMs
                 let home = vm.Home()
                 where home != null
                 select home;
 
-
             if (itemToFilterOn is Host)
                 return residentHosts.Any(h => h == itemToFilterOn);
 
-            Pool tempPool = itemToFilterOn as Pool;
-            if (tempPool != null)
+            if (itemToFilterOn is Pool tempPool)
             {
                 if (tempPool.Connection.Cache.Hosts.Length > 1)
                     return false;
@@ -72,11 +70,6 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
             }
 
             return false;
-        }
-
-        public override string Reason
-        {
-            get { return Messages.HOST_MENU_CURRENT_SERVER; }
         }
     }
 }

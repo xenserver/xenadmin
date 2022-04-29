@@ -24966,6 +24966,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; may not migrate because it is on storage that doesn&apos;t support migration.
+        /// </summary>
+        public static string MIGRATION_NOT_ALLOWED_USUPPORTED_SR {
+            get {
+                return ResourceManager.GetString("MIGRATION_NOT_ALLOWED_USUPPORTED_SR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Min.
         /// </summary>
         public static string MIN {

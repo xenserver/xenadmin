@@ -429,11 +429,10 @@ namespace XenAdmin.Wizards.GenericPages
                         var sortedHosts = new List<Host>(target.Item.Connection.Cache.Hosts);
                         sortedHosts.Sort();
 
-                        var homeServerFilters = CreateTargetServerFilterList(target, new List<string> {kvp.Key});
-
                         foreach (var host in sortedHosts)
                         {
-                            var item = new DelayLoadingOptionComboBoxItem(host, homeServerFilters);
+                            var filters = CreateTargetServerFilterList(host, new List<string> {kvp.Key});
+                            var item = new DelayLoadingOptionComboBoxItem(host, filters);
                             cb.Items.Add(item);
                             item.ParentComboBox = cb;
                             item.PreferAsSelectedItem = m_selectedObject != null && m_selectedObject.opaque_ref == host.opaque_ref ||
@@ -646,10 +645,10 @@ namespace XenAdmin.Wizards.GenericPages
         /// <summary>
         /// Create a set of filters for the homeserver combo box selection
         /// </summary>
-        /// <param name="item">selected item from the host combobox</param>
-        /// <param name="vmOpaqueRefs">OpaqRefs of VMs which need to apply those filters</param>
+        /// <param name="xenObject">XenObject behind the selected item from the host combobox</param>
+        /// <param name="vmOpaqueRefs">OpaqueRefs of VMs which need to apply those filters</param>
         /// <returns></returns>
-        protected virtual List<ReasoningFilter> CreateTargetServerFilterList(IEnableableXenObjectComboBoxItem item, List<string> vmOpaqueRefs)
+        protected virtual List<ReasoningFilter> CreateTargetServerFilterList(IXenObject xenObject, List<string> vmOpaqueRefs)
         {
             return new List<ReasoningFilter>();
         }

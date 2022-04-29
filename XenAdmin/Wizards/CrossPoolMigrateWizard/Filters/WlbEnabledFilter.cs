@@ -40,32 +40,30 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
 {
     internal class WlbEnabledFilter : ReasoningFilter
     {
-        private readonly List<VM> preSelectedVMs;
+        private readonly List<VM> _preSelectedVMs;
 
         public WlbEnabledFilter(IXenObject item, List<VM> preSelectedVMs)
             : base(item)
         {
-            if (preSelectedVMs == null)
-                throw new ArgumentNullException("Pre-selected VMs are null");
-            this.preSelectedVMs = preSelectedVMs;
+            _preSelectedVMs = preSelectedVMs ?? throw new ArgumentNullException(nameof(preSelectedVMs));
         }
 
-        protected override bool FailureFoundFor(IXenObject itemToFilterOn)
+        protected override bool FailureFoundFor(IXenObject itemToFilterOn, out string failureReason)
         {
-            bool targetWlb = false;
+            if (_preSelectedVMs.Any(vm => Helpers.CrossPoolMigrationRestrictedWithWlb(vm.Connection)))
+            {
+                failureReason = Messages.CPM_WLB_ENABLED_ON_VM_FAILURE_REASON;
+                return true;
+            }
 
-            if(itemToFilterOn != null)
-                targetWlb = Helpers.CrossPoolMigrationRestrictedWithWlb(itemToFilterOn.Connection);
+            if (itemToFilterOn != null && Helpers.CrossPoolMigrationRestrictedWithWlb(itemToFilterOn.Connection))
+            {
+                failureReason =  Messages.CPM_WLB_ENABLED_ON_HOST_FAILURE_REASON;
+                return true;
+            }
 
-            bool sourceWlb = preSelectedVMs.Any(vm => Helpers.CrossPoolMigrationRestrictedWithWlb(vm.Connection));
-
-            reason = targetWlb ? Messages.CPM_WLB_ENABLED_ON_HOST_FAILURE_REASON : Messages.CPM_WLB_ENABLED_ON_VM_FAILURE_REASON;
-
-            return targetWlb || sourceWlb;
+            failureReason = string.Empty;
+            return false;
         }
-
-        private string reason = Messages.UNKNOWN;
-
-        public override string Reason { get { return reason; } }
     }
 }

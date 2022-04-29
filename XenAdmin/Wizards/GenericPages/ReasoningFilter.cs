@@ -40,17 +40,18 @@ namespace XenAdmin.Wizards.GenericPages
 
         protected ReasoningFilter(IXenObject itemToFilterOn)
         {
-            if (!(itemToFilterOn is Host) && !(itemToFilterOn is Pool))
+            if (itemToFilterOn != null && !(itemToFilterOn is Host) && !(itemToFilterOn is Pool))
                 throw new ArgumentException("Target should be host or pool");
 
             _baseItemToFilterOn = itemToFilterOn;
         }
 
-        public abstract string Reason { get; }
+        protected abstract bool FailureFoundFor(IXenObject xenObject, out string failureReason);
 
-        protected abstract bool FailureFoundFor(IXenObject xenObject);
-
-        public bool FailureFound => FailureFoundFor(_baseItemToFilterOn);
+        public bool FailureFound(out string failureReason)
+        {
+            return FailureFoundFor(_baseItemToFilterOn, out failureReason);
+        }
 
         public virtual void Cancel() { }
     } 

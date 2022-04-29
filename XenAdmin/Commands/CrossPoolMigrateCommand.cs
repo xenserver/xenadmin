@@ -43,13 +43,15 @@ namespace XenAdmin.Commands
 {
     internal class CrossPoolMigrateCommand : VMOperationCommand
     {
-        private bool _resumeAfter;
+        private readonly Dictionary<string, Dictionary<string, string>> cantRunReasons = new Dictionary<string, Dictionary<string, string>>();
+
+        private readonly bool _resumeAfter;
+        protected Host preSelectedHost;
 
         public CrossPoolMigrateCommand(IMainWindow mainWindow, IEnumerable<SelectedItem> selection)
             : base(mainWindow, selection)
         { }
 
-        protected Host preSelectedHost = null;
         public CrossPoolMigrateCommand(IMainWindow mainWindow, IEnumerable<SelectedItem> selection, Host preSelectedHost, bool resumeAfter=false)
             : base(mainWindow, selection)
         {
@@ -71,12 +73,11 @@ namespace XenAdmin.Commands
             }
         }
 
-        public override string ContextMenuText { get { return Messages.HOST_MENU_CPM_TEXT; } }
+        public override string ContextMenuText => Messages.HOST_MENU_CPM_TEXT;
 
-        public override Image MenuImage
-        {
-            get { return preSelectedHost == null ? Images.StaticImages._000_MigrateVM_h32bit_16 : Images.StaticImages._000_TreeConnected_h32bit_16; }
-        }
+        public override Image MenuImage => preSelectedHost == null
+            ? Images.StaticImages._000_MigrateVM_h32bit_16
+            : Images.StaticImages._000_TreeConnected_h32bit_16;
 
         protected override void RunCore(SelectedItemCollection selection)
         {
@@ -98,54 +99,42 @@ namespace XenAdmin.Commands
             return Helpers.GetCoordinator(vm.Connection);
         }
 
-        private readonly Dictionary<VM, string> cantRunReasons = new Dictionary<VM, string>();
-
         protected override bool CanRun(VM vm)
         {
-            if (preSelectedHost == null)
-                return CanRun(vm, preSelectedHost);
-
-            var filter = new CrossPoolMigrateCanMigrateFilter(preSelectedHost, new List<VM> {vm}, WizardMode.Migrate);
-            var canRun = CanRun(vm, preSelectedHost, filter);
-            if (string.IsNullOrEmpty(filter.Reason))
-                cantRunReasons.Remove(vm);
-            else
-                cantRunReasons[vm] = filter.Reason;
+            var canRun = CanRun(vm, preSelectedHost, out var failureReason, cantRunReasons);
+            CantRunReason = failureReason;
             return canRun;
         }
 
-        public static bool CanRun(VM vm, Host preselectedHost, CrossPoolMigrateCanMigrateFilter filter = null)
+        public static bool CanRun(VM vm, Host preselectedHost, out string failureReason, Dictionary<string, Dictionary<string, string>> cache = null)
         {
-            bool failureFound = false;
-
-            if (preselectedHost != null)
+            if (vm.allowed_operations == null || !vm.allowed_operations.Contains(vm_operations.migrate_send))
             {
-                failureFound = filter == null 
-                    ? new CrossPoolMigrateCanMigrateFilter(preselectedHost, new List<VM> {vm}, WizardMode.Migrate).FailureFound
-                    : filter.FailureFound;
+                failureReason = Messages.MIGRATION_NOT_ALLOWED;
+                return false;
             }
 
-            return !failureFound &&
-                   vm.allowed_operations != null &&
-                   vm.allowed_operations.Contains(vm_operations.migrate_send) &&
-                   !Helpers.CrossPoolMigrationRestrictedWithWlb(vm.Connection) &&
-                   vm.SRs().ToList().All(sr=> sr != null && !sr.HBALunPerVDI()) &&
-                   (preselectedHost == null || vm.Connection.Resolve(vm.resident_on) != preselectedHost); //Not the same as the pre-selected host
-        }
-
-        public string CantRunReason
-        {
-            get
+            if (!vm.SRs().ToList().All(sr => sr != null && !sr.HBALunPerVDI()))
             {
-                if (cantRunReasons.Count == GetSelection().Count) // none can run
-                {
-                    var uniqueReasons = cantRunReasons.Values.Distinct().ToList();
-
-                    if (uniqueReasons.Count == 1)
-                        return uniqueReasons[0];
-                }
-                return null;
+                failureReason = Messages.MIGRATION_NOT_ALLOWED_USUPPORTED_SR;
+                return false;
             }
+
+            var vms = new List<VM> {vm};
+
+            if (preselectedHost != null && new ResidentHostIsSameAsSelectionFilter(preselectedHost, vms).FailureFound(out failureReason))
+                return false;
+
+            if (new WlbEnabledFilter(preselectedHost, vms).FailureFound(out failureReason))
+                return false;
+
+            if (preselectedHost != null && new CrossPoolMigrateCanMigrateFilter(preselectedHost, new List<VM> {vm},
+                    WizardMode.Migrate, cache).FailureFound(out failureReason))
+                return false;
+
+            return true;
         }
+
+        public string CantRunReason { get; private set; }
     }
 }

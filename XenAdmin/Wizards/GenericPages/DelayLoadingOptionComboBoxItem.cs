@@ -118,9 +118,9 @@ namespace XenAdmin.Wizards.GenericPages
 
                     foreach (ReasoningFilter filter in _filters)
                     {
-                        if (filter.FailureFound)
+                        if (filter.FailureFound(out var reason))
                         {
-                            result = filter.Reason;
+                            result = reason;
                             break;
                         }
                     }
