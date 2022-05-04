@@ -564,27 +564,14 @@ namespace XenAdmin
             if (rendProf != null)
                 rendProf.RoundedEdges = false;
 
-            ConnectionsManager.XenConnections.CollectionChanged += XenConnection_CollectionChanged;
-            try
-            {
-                Settings.RestoreSession();
-                if (Registry.GetBrandOverride() == "XenCenter" || BrandManager.BrandConsole == "XenCenter")
-                    HealthCheck.SendProxySettingsToHealthCheck();
-            }
-            catch (ConfigurationErrorsException ex)
-            {
-                log.Error("Could not load settings.", ex);
-                Program.CloseSplash();
-                using (var dlg = new ErrorDialog(string.Format(Messages.MESSAGEBOX_LOAD_CORRUPTED, Settings.GetUserConfigPath()))
-                    {WindowTitle = Messages.MESSAGEBOX_LOAD_CORRUPTED_TITLE})
-                {
-                    dlg.ShowDialog(this);
-                }
-                Application.Exit();
-                return; //return explicitly because Application.Exit() does not exit the current method.
-            }
-
             RequestRefreshTreeView();
+
+            ConnectionsManager.XenConnections.CollectionChanged += XenConnection_CollectionChanged;
+            
+            //no need to catch ConfigurationErrorsException as the settings have already been loaded
+            Settings.RestoreSession();
+            if (Registry.GetBrandOverride() == "XenCenter" || BrandManager.BrandConsole == "XenCenter")
+                HealthCheck.SendProxySettingsToHealthCheck();
 
             // if there are fewer than 30 connections, then expand the tree nodes.
             expandTreeNodesOnStartup = ConnectionsManager.XenConnectionsCopy.Count < 30;
