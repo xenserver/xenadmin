@@ -108,7 +108,6 @@ namespace XenAdmin
         private ActionBase statusBarAction = null;
 
         private bool IgnoreTabChanges = false;
-        private bool ToolbarsEnabled;
 
         /// <summary>
         /// Helper boolean to only trigger Resize_End when window is really resized by dragging edges
@@ -585,7 +584,6 @@ namespace XenAdmin
                 return; //return explicitly because Application.Exit() does not exit the current method.
             }
 
-            ToolbarsEnabled = Properties.Settings.Default.ToolbarsEnabled;
             RequestRefreshTreeView();
 
             // if there are fewer than 30 connections, then expand the tree nodes.
@@ -1429,9 +1427,9 @@ namespace XenAdmin
             // refresh the selection-manager
             SelectionManager.RefreshSelection();
 
-            ToolStrip.Height = ToolbarsEnabled ? TOOLBAR_HEIGHT : 0;
-            ToolStrip.Enabled = ToolbarsEnabled;
-            ShowToolbarMenuItem.Checked = toolbarToolStripMenuItem.Checked = ToolbarsEnabled;
+            ToolStrip.Height = Properties.Settings.Default.ToolbarsEnabled ? TOOLBAR_HEIGHT : 0;
+            ToolStrip.Enabled = Properties.Settings.Default.ToolbarsEnabled;
+            ShowToolbarMenuItem.Checked = toolbarToolStripMenuItem.Checked = Properties.Settings.Default.ToolbarsEnabled;
 
             bool containerButtonsAvailable = startContainerToolStripButton.Enabled || stopContainerToolStripButton.Enabled || 
                 resumeContainerToolStripButton.Enabled || pauseContainerToolStripButton.Enabled || restartContainerToolStripButton.Enabled;
@@ -3063,8 +3061,7 @@ namespace XenAdmin
 
         private void ShowToolbarMenuItem_Click(object sender, EventArgs e)
         {
-            ToolbarsEnabled = !ToolbarsEnabled;
-            Properties.Settings.Default.ToolbarsEnabled = ToolbarsEnabled;
+            Properties.Settings.Default.ToolbarsEnabled = !Properties.Settings.Default.ToolbarsEnabled;
             UpdateToolbars();
         }
 
