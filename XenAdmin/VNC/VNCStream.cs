@@ -150,6 +150,15 @@ namespace DotNetVnc
 
         public readonly object updateMonitor = new object(); 
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("csharpsquid",
+            "S5547:Cipher algorithms should be robust",
+            Justification = "Needed by the server side.")]
+        private DESCryptoServiceProvider des = new DESCryptoServiceProvider
+        {
+            Padding = PaddingMode.None,
+            Mode = CipherMode.ECB
+        };
+
         public VNCStream(IVNCGraphicsClient client, Stream stream, bool startPaused)
         {
             this.client = client;
@@ -346,12 +355,6 @@ namespace DotNetVnc
             byte[] keyBytes = new byte[8];
             for (int i = 0; i < 8 && i < password.Length; ++i)
                 keyBytes[i] = Reverse((byte)password[i]);
-
-            DESCryptoServiceProvider des = new DESCryptoServiceProvider
-            {
-                Padding = PaddingMode.None,
-                Mode = CipherMode.ECB
-            };
 
             ICryptoTransform cipher = des.CreateEncryptor(keyBytes, null);
 

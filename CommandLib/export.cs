@@ -63,20 +63,24 @@ namespace CommandLib
 
     public class Export
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("csharpsquid",
+            "S4790:Using weak hashing algorithms is security-sensitive",
+            Justification = "Used only for checksum verification for backwards compatibility.")]
+        private readonly SHA1 _sha1 = new SHA1CryptoServiceProvider();
+
+        private readonly XXHash64 _xxHash = new XXHash64();
+
         public static bool verbose_debugging = false;
 
-        public static void debug(string x)
+        private static void debug(string x)
         {
             if (verbose_debugging)
                 Console.WriteLine(x);
         }
 
-        private readonly SHA1 sha = new SHA1CryptoServiceProvider();
-        private XXHash64 xxhash = new XXHash64();
-
         private string checksum_sha1(byte[] data)
         {
-            byte[] result = sha.ComputeHash(data);
+            byte[] result = _sha1.ComputeHash(data);
             return hex(result).ToLower();
         }
 
@@ -97,8 +101,8 @@ namespace CommandLib
 
         private string checksum_xxhash(byte[] data)
         {
-            xxhash.Initialize();
-            return hex(xxhash.ComputeHash(data));
+            _xxHash.Initialize();
+            return hex(_xxHash.ComputeHash(data));
         }
 
         private static Hashtable parse_checksum_table(string checksum_xml)
