@@ -58,17 +58,5 @@ namespace CommandLib
             unmarshal_n_into(stream, n, buffer);
             return buffer;
         }
-
-        public static void skip(Stream stream, uint n)
-        {
-            byte[] buffer = new byte[63356];
-            while (n > 0)
-            {
-                uint toread = (uint)buffer.Length;
-                if (n < toread) toread = n;
-                unmarshal_n_into(stream, toread, buffer);
-                n -= toread;
-            }
-        }
     }
 }

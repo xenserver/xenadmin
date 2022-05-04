@@ -162,20 +162,16 @@ namespace CommandLib
             return new string(chars);
         }
 
-        public delegate void verifyCallback(uint read);
-
-        public delegate bool cancellingCallback();
-
         /// <summary>
         /// 'input' is the source of the export data, if 'output' is not null then
         /// a perfect copy should be echoed there. 
         /// </summary>
-        public void verify(Stream input, Stream output, cancellingCallback cancelling)
+        public void verify(Stream input, Stream output, Func<bool> cancelling)
         {
             verify(input, output, cancelling, null);
         }
 
-        private Header nextHeader(Stream input, Stream output, verifyCallback callback)
+        private Header nextHeader(Stream input, Stream output, Action<uint> callback)
         {
             // Interperate the next bytes from the stream as a Tar header
             byte[] bytes = nextData(input, output, callback, Header.length);
@@ -194,7 +190,7 @@ namespace CommandLib
             return new Header(bytes);
         }
 
-        private byte[] nextData(Stream input, Stream output, verifyCallback callback, uint size)
+        private byte[] nextData(Stream input, Stream output, Action<uint> callback, uint size)
         {
             // Returns the next given number of bytes from the input
             byte[] bytes = IO.unmarshal_n(input, size);
@@ -203,7 +199,7 @@ namespace CommandLib
             return bytes;
         }
 
-        public void verify(Stream input, Stream output, cancellingCallback cancelling, verifyCallback callback)
+        public void verify(Stream input, Stream output, Func<bool> cancelling, Action<uint> callback)
         {
             Hashtable recomputed_checksums = new Hashtable();
             Hashtable original_checksums = null;

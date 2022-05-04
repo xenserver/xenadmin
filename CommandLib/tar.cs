@@ -30,7 +30,6 @@
  */
 
 using System;
-using System.IO;
 using System.Text;
 
 namespace CommandLib
@@ -63,10 +62,6 @@ namespace CommandLib
     /// </summary>
     class EndOfArchive : ApplicationException
     {
-        public EndOfArchive()
-        {
-        }
-
         public override string ToString()
         {
             return "End of tar archive";
@@ -233,45 +228,6 @@ namespace CommandLib
             if (chksum != recomputed)
                 throw new HeaderChecksumFailed(recomputed, chksum);
 
-        }
-
-        /// <summary>
-        /// Read a tar header from a stream
-        /// </summary>
-        public static Header fromStream(Stream input)
-        {
-            byte[] one = IO.unmarshal_n(input, length);
-            if (all_zeroes(one))
-            {
-                byte[] two = IO.unmarshal_n(input, length);
-                if (all_zeroes(two))
-                    throw new EndOfArchive();
-                return new Header(two);
-            }
-
-            return new Header(one);
-        }
-    }
-
-    public class Archive
-    {
-        public static void list(Stream stream)
-        {
-            try
-            {
-                while (true)
-                {
-                    Header x = Header.fromStream(stream);
-                    Console.WriteLine(x);
-                    IO.skip(stream, x.file_size);
-                    IO.skip(stream, x.paddingLength());
-                }
-
-            }
-            catch (EndOfArchive)
-            {
-                Console.WriteLine("EOF");
-            }
         }
     }
 }
