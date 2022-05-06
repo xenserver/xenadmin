@@ -38,7 +38,7 @@ namespace ThinCLI
     {
         public static void Main(string[] args)
         {
-            var tCliProtocol = new thinCLIProtocol(Debug,
+            var tCliProtocol = new thinCLIProtocol(
                 Console.Write, Console.WriteLine, Console.ReadLine,
                 Environment.Exit, i => { }, new Config());
 
@@ -109,14 +109,6 @@ namespace ThinCLI
 
             Messages.performCommand(body, tCliProtocol);
         }
-
-        
-
-        private static void Debug(string msg, thinCLIProtocol tCliProtocol)
-        {
-            if (tCliProtocol.conf.debug)
-                Console.WriteLine("Debug: " + msg);
-        }
     }
 
     internal static class Logger
@@ -126,6 +118,12 @@ namespace ThinCLI
             Console.WriteLine("Usage:");
             Console.WriteLine("  xe -s <server> -u <username> -pw <password> [-p <port>] <command> <arguments>");
             Console.WriteLine("For help, use xe -s <server> -u <user> -pw <password> [-p <port>] help");
+        }
+
+        internal static void Debug(string msg, thinCLIProtocol tCliProtocol)
+        {
+            if (tCliProtocol.conf.debug)
+                Console.WriteLine("Debug: " + msg);
         }
 
         internal static void Error(string x)

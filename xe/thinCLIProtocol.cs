@@ -52,7 +52,6 @@ namespace ThinCLI
         public bool debug = false;
     }
     
-    public delegate void delegateGlobalDebug(String s, thinCLIProtocol tCLIprotocol);
     public delegate void delegateConsoleWrite(String s);
     public delegate void delegateConsoleWriteLine(String s);
     public delegate string delegateConsoleReadLine();
@@ -61,7 +60,6 @@ namespace ThinCLI
 
     public class thinCLIProtocol
     {
-        public delegateGlobalDebug dGlobalDebug;
         public delegateConsoleWrite dConsoleWrite;
         public delegateConsoleWriteLine dConsoleWriteLine;
         public delegateConsoleReadLine dConsoleReadLine;
@@ -75,7 +73,6 @@ namespace ThinCLI
         public List<string> EnteredParamValues;
 
         public thinCLIProtocol( 
-            delegateGlobalDebug dGlobalDebug, 
             delegateConsoleWrite dConsoleWrite, 
             delegateConsoleWriteLine dConsoleWriteLine, 
             delegateConsoleReadLine dConsoleReadLine,
@@ -83,7 +80,6 @@ namespace ThinCLI
             delegateProgress dProgress,
             Config conf)
         {
-            this.dGlobalDebug = dGlobalDebug;
             this.dConsoleWrite = dConsoleWrite;
             this.dConsoleWriteLine = dConsoleWriteLine;
             this.dConsoleReadLine = dConsoleReadLine;
@@ -448,8 +444,8 @@ namespace ThinCLI
             /* Read the remote version numbers */
             int remote_major = Types.unmarshal_int(stream);
             int remote_minor = Types.unmarshal_int(stream);
-            tCLIprotocol.dGlobalDebug("Remote host has version " + remote_major + "." + remote_minor, tCLIprotocol);
-            tCLIprotocol.dGlobalDebug("Client has version " + tCLIprotocol.major + "." + tCLIprotocol.minor, tCLIprotocol);
+            Logger.Debug("Remote host has version " + remote_major + "." + remote_minor, tCLIprotocol);
+            Logger.Debug("Client has version " + tCLIprotocol.major + "." + tCLIprotocol.minor, tCLIprotocol);
             if (tCLIprotocol.major != remote_major)
             {
                 Logger.Error("Protocol version mismatch talking to server on " + tCLIprotocol.conf.hostname + ":" + tCLIprotocol.conf.port);
@@ -552,7 +548,7 @@ namespace ThinCLI
 
                     if (fullpath.StartsWith(valueFullPath))
                     {
-                        tCLIprotocol.dGlobalDebug("Passed permit files check", tCLIprotocol);
+                        Logger.Debug("Passed permit files check", tCLIprotocol);
                         return;
                     }
                 }
@@ -582,26 +578,26 @@ namespace ThinCLI
                         {
                             case Messages.tag.Print:
                                 msg = Types.unmarshal_string(stream);
-                                tCLIprotocol.dGlobalDebug("Read: Print: " + msg, tCLIprotocol);
+                                Logger.Debug("Read: Print: " + msg, tCLIprotocol);
                                 tCLIprotocol.dConsoleWriteLine(msg);
                                 break;
                             case Messages.tag.PrintStderr:
                                 msg = Types.unmarshal_string(stream);
-                                tCLIprotocol.dGlobalDebug("Read: PrintStderr: " + msg, tCLIprotocol);
+                                Logger.Debug("Read: PrintStderr: " + msg, tCLIprotocol);
                                 tCLIprotocol.dConsoleWriteLine(msg); 
                                 break;
                             case Messages.tag.Debug:
                                 msg = Types.unmarshal_string(stream);
-                                tCLIprotocol.dGlobalDebug("Read: Debug: " + msg, tCLIprotocol);
+                                Logger.Debug("Read: Debug: " + msg, tCLIprotocol);
                                 tCLIprotocol.dConsoleWriteLine(msg);
                                 break;
                             case Messages.tag.Exit:
                                 int code = Types.unmarshal_int(stream);
-                                tCLIprotocol.dGlobalDebug("Read: Command Exit " + code, tCLIprotocol);
+                                Logger.Debug("Read: Command Exit " + code, tCLIprotocol);
                                 tCLIprotocol.dExit(code);
                                 break;
                             case Messages.tag.Error:
-                                tCLIprotocol.dGlobalDebug("Read: Command Error", tCLIprotocol);
+                                Logger.Debug("Read: Command Error", tCLIprotocol);
                                 string err_code = Types.unmarshal_string(stream);
                                 tCLIprotocol.dConsoleWriteLine("Error code: " + err_code);
                                 tCLIprotocol.dConsoleWrite("Error params: ");
@@ -615,7 +611,7 @@ namespace ThinCLI
                                 tCLIprotocol.dConsoleWriteLine("");
                                 break;
                             case Messages.tag.Prompt:
-                                tCLIprotocol.dGlobalDebug("Read: Command Prompt", tCLIprotocol);
+                                Logger.Debug("Read: Command Prompt", tCLIprotocol);
                                 string response = tCLIprotocol.dConsoleReadLine();
 				tCLIprotocol.dConsoleWriteLine("Read "+response);
 				/* NB, 4+4+4 here for the blob, chunk and string length, put in by the marshal_string
@@ -631,7 +627,7 @@ namespace ThinCLI
                             case Messages.tag.Load:
                                 filename = Types.unmarshal_string(stream);
                                 CheckPermitFiles(filename, tCLIprotocol);
-                                tCLIprotocol.dGlobalDebug("Read: Load " + filename, tCLIprotocol);
+                                Logger.Debug("Read: Load " + filename, tCLIprotocol);
                                 Messages.load(stream, filename, tCLIprotocol);
                                 break;
                             case Messages.tag.HttpPut:
@@ -639,7 +635,7 @@ namespace ThinCLI
                                 CheckPermitFiles(filename, tCLIprotocol);
                                 path = Types.unmarshal_string(stream);
                                 Uri uri = ParseUri(path, tCLIprotocol);
-                                tCLIprotocol.dGlobalDebug("Read: HttpPut " + filename + " -> " + uri, tCLIprotocol);
+                                Logger.Debug("Read: HttpPut " + filename + " -> " + uri, tCLIprotocol);
                                 Messages.http_put(stream, filename, uri, tCLIprotocol);
                                 break;
                             case Messages.tag.HttpGet:
@@ -647,7 +643,7 @@ namespace ThinCLI
                                 CheckPermitFiles(filename, tCLIprotocol, true);
                                 path = Types.unmarshal_string(stream);
                                 uri = ParseUri(path, tCLIprotocol);
-                                tCLIprotocol.dGlobalDebug("Read: HttpGet " + filename + " -> " + uri, tCLIprotocol);
+                                Logger.Debug("Read: HttpGet " + filename + " -> " + uri, tCLIprotocol);
                                 Messages.http_get(stream, filename, uri, tCLIprotocol);
                                 break;
                             default:
