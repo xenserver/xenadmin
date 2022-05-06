@@ -30,7 +30,6 @@
  */
 
 using System;
-using CommandLib;
 
 
 namespace ThinCLI

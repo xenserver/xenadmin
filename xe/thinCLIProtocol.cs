@@ -39,7 +39,7 @@ using System.Net.Sockets;
 using System.Security.Authentication;
 
 
-namespace CommandLib
+namespace ThinCLI
 {
     public class Config
     {
@@ -103,7 +103,8 @@ namespace CommandLib
         
     }        
 
-    public class Transport{
+    public class Transport
+    {
         // The following method is invoked by the RemoteCertificateValidationDelegate.
         private static bool ValidateServerCertificate(
               object sender,
@@ -150,7 +151,8 @@ namespace CommandLib
         }
     }
 
-    public class HTTP{
+    public class HTTP
+    {
 	    public static string readLine(Stream stream){
 		    StringBuilder messageData = new StringBuilder();
 		    do {
@@ -235,7 +237,8 @@ namespace CommandLib
         }
     }
 
-    public class Types{
+    public class Types
+    {
 	    public static uint unmarshal_int32(Stream stream){
 		    uint a = (uint)stream.ReadByte();
 		    uint b = (uint)stream.ReadByte();
@@ -292,22 +295,26 @@ namespace CommandLib
             Print = 0, Load = 1, HttpGet = 12, HttpPut = 13, Prompt = 3, Exit = 4,
             Error = 14, OK = 5, Failed = 6, Chunk = 7, End = 8, Command = 9, Response = 10,
             Blob = 11, Debug = 15, PrintStderr = 16
-        };
+        }
+
         public static tag unmarshal_tag(Stream stream)
         {
             int x = Types.unmarshal_int(stream);
             return (tag)x;
         }
+
         public static void marshal_tag(Stream stream, tag tag)
         {
             Types.marshal_int(stream, (int)tag);
         }
+        
         public static void marshal_response(Stream stream, tag t)
         {
             Types.marshal_int(stream, 4 + 4);
             marshal_tag(stream, tag.Response);
             marshal_tag(stream, t);
         }
+        
         public static void protocol_failure(string msg, tag t, thinCLIProtocol tCLIprotocol)
         {
             tCLIprotocol.dGlobalError("Protocol failure: Reading " + msg + ": unexpected tag: " + t);
@@ -527,7 +534,6 @@ namespace CommandLib
                 }
             }
         }
-
 
         public static void CheckPermitFiles(String filename, thinCLIProtocol tCLIprotocol, bool includeCurrentDir = false)
         {
