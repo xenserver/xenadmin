@@ -78,6 +78,11 @@ namespace XenServerHealthCheck
             return string.Empty;
         }
 
+        public string GetInternalStageAuthToken()
+        {
+            return string.Empty;
+        }
+
         public int GetProxyTimeout(bool timeout)
         {
             return timeout ? Properties.Settings.Default.HttpTimeout : 0;
