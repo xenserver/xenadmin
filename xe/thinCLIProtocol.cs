@@ -52,13 +52,11 @@ namespace ThinCLI
         public bool debug = false;
     }
     
-    public delegate void delegateExit(int i);
     public delegate void delegateProgress(int i);
 
     public class thinCLIProtocol
     {
         public delegateProgress dProgress;
-        public delegateExit dExit;
         public Config conf;
         public string magic_string = "XenSource thin CLI protocol";
 	    public int major = 0;
@@ -67,11 +65,9 @@ namespace ThinCLI
         public List<string> EnteredParamValues;
 
         public thinCLIProtocol( 
-            delegateExit dExit,
             delegateProgress dProgress,
             Config conf)
         {
-            this.dExit = dExit;
             this.dProgress = dProgress;
             this.conf = conf;
             dropOut = false;
@@ -292,12 +288,6 @@ namespace ThinCLI
             marshal_tag(stream, t);
         }
         
-        public static void protocol_failure(string msg, tag t, thinCLIProtocol tCLIprotocol)
-        {
-            Logger.Error("Protocol failure: Reading " + msg + ": unexpected tag: " + t);
-            tCLIprotocol.dExit(1);
-        }
-
         public static void load(Stream stream, string filename, thinCLIProtocol tCLIprotocol)
         {
             try
@@ -426,7 +416,7 @@ namespace ThinCLI
                 {
                     Logger.Error("Failed to find a server on " + tCLIprotocol.conf.hostname + ":" + tCLIprotocol.conf.port);
                     Logger.Usage();
-                    tCLIprotocol.dExit(1);
+                    Environment.Exit(1);
                 }
             }
             /* Read the remote version numbers */
@@ -438,7 +428,7 @@ namespace ThinCLI
             {
                 Logger.Error("Protocol version mismatch talking to server on " + tCLIprotocol.conf.hostname + ":" + tCLIprotocol.conf.port);
                 Logger.Usage();
-                tCLIprotocol.dExit(1);
+                Environment.Exit(1);
             }
             /* Tell the server our version numbers */
             for (int i = 0; i < tCLIprotocol.magic_string.Length; i++)
@@ -474,7 +464,7 @@ namespace ThinCLI
                 if (stream == null)
                 {
                     // The SSL functions already tell us what happened
-                    tCLIprotocol.dExit(1);
+                    Environment.Exit(1);
                     return;
                 }
 
@@ -487,14 +477,14 @@ namespace ThinCLI
             catch (SocketException)
             {
                 Logger.Error("Connection to " + tCLIprotocol.conf.hostname + ":" + tCLIprotocol.conf.port + " refused.");
-                tCLIprotocol.dExit(1);
+                Environment.Exit(1);
             }
             catch (Exception e)
             {
                 if (tCLIprotocol.conf.debug)
                     throw;
                 Logger.Error("Caught exception: " + e.Message);
-                tCLIprotocol.dExit(1);
+                Environment.Exit(1);
             }
             finally
             {
@@ -582,7 +572,7 @@ namespace ThinCLI
                             case Messages.tag.Exit:
                                 int code = Types.unmarshal_int(stream);
                                 Logger.Debug("Read: Command Exit " + code, tCLIprotocol);
-                                tCLIprotocol.dExit(code);
+                                Environment.Exit(code);
                                 break;
                             case Messages.tag.Error:
                                 Logger.Debug("Read: Command Error", tCLIprotocol);
@@ -634,12 +624,14 @@ namespace ThinCLI
                                 Messages.http_get(stream, filename, uri, tCLIprotocol);
                                 break;
                             default:
-                                Messages.protocol_failure("Command", t, tCLIprotocol);
+                                Logger.Error("Protocol failure: Reading Command: unexpected tag: " + t);
+                                Environment.Exit(1);
                                 break;
                         }
                         break;
                     default:
-                        Messages.protocol_failure("Message", t, tCLIprotocol);
+                        Logger.Error("Protocol failure: Reading Message: unexpected tag: " + t);
+                        Environment.Exit(1);
                         break;
                 }
             }

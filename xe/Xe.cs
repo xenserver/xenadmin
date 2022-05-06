@@ -39,7 +39,7 @@ namespace ThinCLI
         public static void Main(string[] args)
         {
             var tCliProtocol = new thinCLIProtocol(
-                Environment.Exit, i => { }, new Config());
+                i => { }, new Config());
 
             string body = "";
             char[] eqsep = {'='};
