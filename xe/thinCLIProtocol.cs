@@ -55,7 +55,6 @@ namespace ThinCLI
     public class ThinCliProtocol
     {
         public Config conf;
-        public string magic_string = "XenSource thin CLI protocol";
         public List<string> EnteredParamValues;
 
         public ThinCliProtocol(Config conf)
@@ -258,6 +257,7 @@ namespace ThinCLI
 
     public static class Messages
     {
+        private const string MAGIC_STRING = "XenSource thin CLI protocol";
         private const int CLI_PROTOCOL_MAJOR = 0;
         private const int CLI_PROTOCOL_MINOR = 2;
 
@@ -404,11 +404,12 @@ namespace ThinCLI
 
         private static void VersionHandshake(Stream stream, ThinCliProtocol tCLIprotocol)
         {
-            /* Check for the initial magic string */
-            byte[] magic = Types.unmarshal_n(stream, (uint)tCLIprotocol.magic_string.Length);
-            for (int i = 0; i < tCLIprotocol.magic_string.Length; i++)
+            // Check for the initial magic string
+            byte[] magic = Types.unmarshal_n(stream, (uint)MAGIC_STRING.Length);
+
+            for (int i = 0; i < MAGIC_STRING.Length; i++)
             {
-                if (magic[i] != tCLIprotocol.magic_string[i])
+                if (magic[i] != MAGIC_STRING[i])
                 {
                     Logger.Error("Failed to find a server on " + tCLIprotocol.conf.hostname + ":" + tCLIprotocol.conf.port);
                     Logger.Usage();
@@ -431,7 +432,7 @@ namespace ThinCLI
             }
 
             // Tell the server our version numbers
-            foreach (var t in tCLIprotocol.magic_string)
+            foreach (var t in MAGIC_STRING)
                 stream.WriteByte((byte)t);
 
             Types.marshal_int(stream, CLI_PROTOCOL_MAJOR);
