@@ -52,13 +52,11 @@ namespace ThinCLI
         public bool debug = false;
     }
     
-    public delegate string delegateConsoleReadLine();
     public delegate void delegateExit(int i);
     public delegate void delegateProgress(int i);
 
     public class thinCLIProtocol
     {
-        public delegateConsoleReadLine dConsoleReadLine;
         public delegateProgress dProgress;
         public delegateExit dExit;
         public Config conf;
@@ -69,12 +67,10 @@ namespace ThinCLI
         public List<string> EnteredParamValues;
 
         public thinCLIProtocol( 
-            delegateConsoleReadLine dConsoleReadLine,
             delegateExit dExit,
             delegateProgress dProgress,
             Config conf)
         {
-            this.dConsoleReadLine = dConsoleReadLine;
             this.dExit = dExit;
             this.dProgress = dProgress;
             this.conf = conf;
@@ -603,10 +599,10 @@ namespace ThinCLI
                                 break;
                             case Messages.tag.Prompt:
                                 Logger.Debug("Read: Command Prompt", tCLIprotocol);
-                                string response = tCLIprotocol.dConsoleReadLine();
+                                string response = Console.ReadLine();
                                 Logger.Info("Read "+response);
-				/* NB, 4+4+4 here for the blob, chunk and string length, put in by the marshal_string
-				function. A franken-marshal. */
+                                /* NB, 4+4+4 here for the blob, chunk and string length, put in by the marshal_string
+                                 function. A franken-marshal. */
                                 Types.marshal_int(stream, 4 + 4 + 4); // length
                                 Messages.marshal_tag(stream, Messages.tag.Blob);
                                 Messages.marshal_tag(stream, Messages.tag.Chunk);

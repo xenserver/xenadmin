@@ -39,7 +39,6 @@ namespace ThinCLI
         public static void Main(string[] args)
         {
             var tCliProtocol = new thinCLIProtocol(
-                Console.ReadLine,
                 Environment.Exit, i => { }, new Config());
 
             string body = "";
