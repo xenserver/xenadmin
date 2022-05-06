@@ -52,11 +52,8 @@ namespace ThinCLI
         public bool debug = false;
     }
     
-    public delegate void delegateProgress(int i);
-
     public class thinCLIProtocol
     {
-        public delegateProgress dProgress;
         public Config conf;
         public string magic_string = "XenSource thin CLI protocol";
 	    public int major = 0;
@@ -64,11 +61,8 @@ namespace ThinCLI
         public bool dropOut;
         public List<string> EnteredParamValues;
 
-        public thinCLIProtocol( 
-            delegateProgress dProgress,
-            Config conf)
+        public thinCLIProtocol(Config conf)
         {
-            this.dProgress = dProgress;
             this.conf = conf;
             dropOut = false;
             EnteredParamValues = new List<string>();
@@ -317,7 +311,6 @@ namespace ThinCLI
                             break;
                         }
                         stream.Write(block, 0, n);
-                        tCLIprotocol.dProgress(n);
                     }
                 }
             }

@@ -38,8 +38,7 @@ namespace ThinCLI
     {
         public static void Main(string[] args)
         {
-            var tCliProtocol = new thinCLIProtocol(
-                i => { }, new Config());
+            var tCliProtocol = new thinCLIProtocol(new Config());
 
             string body = "";
             char[] eqsep = {'='};
