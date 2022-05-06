@@ -52,7 +52,6 @@ namespace ThinCLI
         public bool debug = false;
     }
     
-    public delegate void delegateConsoleWrite(String s);
     public delegate void delegateConsoleWriteLine(String s);
     public delegate string delegateConsoleReadLine();
     public delegate void delegateExit(int i);
@@ -60,7 +59,6 @@ namespace ThinCLI
 
     public class thinCLIProtocol
     {
-        public delegateConsoleWrite dConsoleWrite;
         public delegateConsoleWriteLine dConsoleWriteLine;
         public delegateConsoleReadLine dConsoleReadLine;
         public delegateProgress dProgress;
@@ -73,14 +71,12 @@ namespace ThinCLI
         public List<string> EnteredParamValues;
 
         public thinCLIProtocol( 
-            delegateConsoleWrite dConsoleWrite, 
             delegateConsoleWriteLine dConsoleWriteLine, 
             delegateConsoleReadLine dConsoleReadLine,
             delegateExit dExit,
             delegateProgress dProgress,
             Config conf)
         {
-            this.dConsoleWrite = dConsoleWrite;
             this.dConsoleWriteLine = dConsoleWriteLine;
             this.dConsoleReadLine = dConsoleReadLine;
             this.dExit = dExit;
@@ -600,15 +596,14 @@ namespace ThinCLI
                                 Logger.Debug("Read: Command Error", tCLIprotocol);
                                 string err_code = Types.unmarshal_string(stream);
                                 tCLIprotocol.dConsoleWriteLine("Error code: " + err_code);
-                                tCLIprotocol.dConsoleWrite("Error params: ");
+                                var paramList = new List<string>();
                                 int length = Types.unmarshal_int(stream);
                                 for (int i = 0; i < length; i++)
                                 {
                                     string param = Types.unmarshal_string(stream);
-                                    tCLIprotocol.dConsoleWrite(param);
-                                    if (i != (length - 1)) tCLIprotocol.dConsoleWrite(", ");
+                                    paramList.Add(param);
                                 }
-                                tCLIprotocol.dConsoleWriteLine("");
+                                tCLIprotocol.dConsoleWriteLine("Error params: " + string.Join(", ", paramList));
                                 break;
                             case Messages.tag.Prompt:
                                 Logger.Debug("Read: Command Prompt", tCLIprotocol);
