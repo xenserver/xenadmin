@@ -52,7 +52,7 @@ namespace ThinCLI
         public bool debug = false;
     }
     
-    public class thinCLIProtocol
+    public class ThinCliProtocol
     {
         public Config conf;
         public string magic_string = "XenSource thin CLI protocol";
@@ -61,7 +61,7 @@ namespace ThinCLI
         public bool dropOut;
         public List<string> EnteredParamValues;
 
-        public thinCLIProtocol(Config conf)
+        public ThinCliProtocol(Config conf)
         {
             this.conf = conf;
             dropOut = false;
@@ -70,7 +70,7 @@ namespace ThinCLI
         
     }        
 
-    public class Transport
+    public static class Transport
     {
         // The following method is invoked by the RemoteCertificateValidationDelegate.
         private static bool ValidateServerCertificate(
@@ -86,7 +86,7 @@ namespace ThinCLI
         /// <summary>
         /// Create an SSL stream that will close the client's stream.
         /// </summary>
-        public static Stream Connect(TcpClient client, thinCLIProtocol tCLIprotocol, int port)
+        public static Stream Connect(TcpClient client, ThinCliProtocol tCLIprotocol, int port)
         {
             if (port != 443)
                 return client.GetStream();
@@ -118,9 +118,9 @@ namespace ThinCLI
         }
     }
 
-    public class HTTP
+    public static class HTTP
     {
-	    public static string readLine(Stream stream){
+        private static string readLine(Stream stream){
 		    StringBuilder messageData = new StringBuilder();
 		    do {
         	    int i = stream.ReadByte();
@@ -139,23 +139,23 @@ namespace ThinCLI
             return messageData.ToString();
 	    }
 
-	    public static void writeLine(Stream stream, string line){
-            byte[] message = Encoding.UTF8.GetBytes(string.Format("{0}\r\n", line));
+        private static void writeLine(Stream stream, string line){
+            byte[] message = Encoding.UTF8.GetBytes($"{line}\r\n");
 		    stream.Write(message, 0, message.Length);
 		    stream.Flush();
 	    }
 
-	    public static int getResultCode(string line){
-		    string[] bits = line.Split(new char[] {' '});
+        private static int getResultCode(string line){
+		    string[] bits = line.Split(' ');
 		    if (bits.Length < 2) return 0;
 		    return Int32.Parse(bits[1]);
 	    }
 
-        public static Stream doRPC(TcpClient client, string method, Uri uri, thinCLIProtocol tCLIprotocol, params string[] headers)
+        public static Stream DoRPC(TcpClient client, string method, Uri uri, ThinCliProtocol tCLIprotocol, params string[] headers)
         {
             Stream http = Transport.Connect(client, tCLIprotocol, uri.Port);
 
-            var startLine = string.Format("{0} {1} HTTP/1.0", method, uri.PathAndQuery);
+            var startLine = $"{method} {uri.PathAndQuery} HTTP/1.0";
             writeLine(http, startLine);
             foreach (string h in headers)
                 writeLine(http, h);
@@ -184,10 +184,10 @@ namespace ThinCLI
                     tCLIprotocol.conf.hostname = redirect.Host;
                     http.Close();
                     http.Dispose();
-                    return doRPC(client, method, redirect, tCLIprotocol, headers);
+                    return DoRPC(client, method, redirect, tCLIprotocol, headers);
 
                 default:
-                    Logger.Error(string.Format("Received error code {0} from the server doing an HTTP {1}", code, method));
+                    Logger.Error($"Received error code {code} from the server doing an HTTP {method}");
                     http.Close();
                     http.Dispose();
                     return null;
@@ -204,7 +204,7 @@ namespace ThinCLI
         }
     }
 
-    public class Types
+    public static class Types
     {
 	    public static uint unmarshal_int32(Stream stream){
 		    uint a = (uint)stream.ReadByte();
@@ -214,20 +214,24 @@ namespace ThinCLI
 		    //Console.WriteLine("a = " + a + " b = " + b + " c = " + c + " d = " + d);
 		    return (a << 0) | (b << 8) | (c << 16) | (d << 24);
 	    }
-	    public static void marshal_int32(Stream stream, uint x){
+
+        public static void marshal_int32(Stream stream, uint x){
 		    uint mask = 0xff;
 		    stream.WriteByte((byte) ((x >> 0) & mask));
 		    stream.WriteByte((byte) ((x >> 8) & mask));
 		    stream.WriteByte((byte) ((x >> 16) & mask));
 		    stream.WriteByte((byte) ((x >> 24) & mask));
 	    }
-	    public static int unmarshal_int(Stream stream){
+
+        public static int unmarshal_int(Stream stream){
 		    return (int)unmarshal_int32(stream);
 	    }
-	    public static void marshal_int(Stream stream, int x){
+
+        public static void marshal_int(Stream stream, int x){
 		    marshal_int32(stream, (uint)x);
 	    }
-	    public static byte[] unmarshal_n(Stream stream, uint n){
+
+        public static byte[] unmarshal_n(Stream stream, uint n){
 		    byte[] buffer = new byte[n];
 		    int toread = (int)n;
 		    int offset = 0;
@@ -237,7 +241,8 @@ namespace ThinCLI
 		    }
 		    return buffer;
 	    }
-	    public static string unmarshal_string(Stream stream){
+
+        public static string unmarshal_string(Stream stream){
 		    uint length = unmarshal_int32(stream);
 		    byte[] buffer = unmarshal_n(stream, length);
 		    Decoder decoder = Encoding.UTF8.GetDecoder();
@@ -245,7 +250,8 @@ namespace ThinCLI
 		    decoder.GetChars(buffer, 0, (int)length, chars, 0);
 		    return new string(chars);
 	    }
-	    public static void marshal_string(Stream stream, string x){
+
+        public static void marshal_string(Stream stream, string x){
 		    marshal_int(stream, x.Length);
 		    char[] c = x.ToCharArray();
 		    Encoder encoder = Encoding.UTF8.GetEncoder();
@@ -255,34 +261,34 @@ namespace ThinCLI
 	    }
     }
 
-    public class Messages
+    public static class Messages
     {
-        public enum tag
+        private enum Tag
         {
             Print = 0, Load = 1, HttpGet = 12, HttpPut = 13, Prompt = 3, Exit = 4,
             Error = 14, OK = 5, Failed = 6, Chunk = 7, End = 8, Command = 9, Response = 10,
             Blob = 11, Debug = 15, PrintStderr = 16
         }
 
-        public static tag unmarshal_tag(Stream stream)
+        private static Tag UnmarshalTag(Stream stream)
         {
             int x = Types.unmarshal_int(stream);
-            return (tag)x;
+            return (Tag)x;
         }
 
-        public static void marshal_tag(Stream stream, tag tag)
+        private static void MarshalTag(Stream stream, Tag tag)
         {
             Types.marshal_int(stream, (int)tag);
         }
         
-        public static void marshal_response(Stream stream, tag t)
+        private static void MarshalResponse(Stream stream, Tag t)
         {
             Types.marshal_int(stream, 4 + 4);
-            marshal_tag(stream, tag.Response);
-            marshal_tag(stream, t);
+            MarshalTag(stream, Tag.Response);
+            MarshalTag(stream, t);
         }
         
-        public static void load(Stream stream, string filename, thinCLIProtocol tCLIprotocol)
+        private static void Load(Stream stream, string filename, ThinCliProtocol tCLIprotocol)
         {
             try
             {
@@ -290,13 +296,13 @@ namespace ThinCLI
                 {
                     FileInfo fi = new FileInfo(filename);
                     // Immediately report our success in opening the file
-                    marshal_response(stream, tag.OK);
+                    MarshalResponse(stream, Tag.OK);
 
                     // The server doesn't like multiple chunks but this is fine for
                     // Zurich/Geneva imports
                     Types.marshal_int(stream, 4 + 4 + 4);
-                    marshal_tag(stream, tag.Blob);
-                    marshal_tag(stream, tag.Chunk);
+                    MarshalTag(stream, Tag.Blob);
+                    MarshalTag(stream, Tag.Chunk);
                     Types.marshal_int32(stream, (uint)fi.Length);
 
                     byte[] block = new byte[tCLIprotocol.conf.block_size];
@@ -306,8 +312,8 @@ namespace ThinCLI
                         if (n == 0)
                         {
                             Types.marshal_int(stream, 4 + 4);
-                            marshal_tag(stream, tag.Blob);
-                            marshal_tag(stream, tag.End);
+                            MarshalTag(stream, Tag.Blob);
+                            MarshalTag(stream, Tag.End);
                             break;
                         }
                         stream.Write(block, 0, n);
@@ -316,27 +322,26 @@ namespace ThinCLI
             }
             catch (DirectoryNotFoundException)
             {
-                marshal_response(stream, tag.Failed);
+                MarshalResponse(stream, Tag.Failed);
             }
             catch (FileNotFoundException)
             {
-                marshal_response(stream, tag.Failed);
+                MarshalResponse(stream, Tag.Failed);
             }
         }
 
-        public static void http_put(Stream stream, string filename, Uri uri, thinCLIProtocol tCLIprotocol)
+        private static void HttpPut(Stream stream, string filename, Uri uri, ThinCliProtocol tCLIprotocol)
         {
             try
             {
                 using (FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read))
                 {
                     using (TcpClient client = new TcpClient(uri.Host, uri.Port))
-                    using (Stream http = HTTP.doRPC(client, "PUT", uri, tCLIprotocol, 
-                        string.Format("Content-Length: {0}", fs.Length)))
+                    using (Stream http = HTTP.DoRPC(client, "PUT", uri, tCLIprotocol, $"Content-Length: {fs.Length}"))
                     {
                         if (http == null)
                         {
-                            marshal_response(stream, tag.Failed);
+                            MarshalResponse(stream, Tag.Failed);
                             return;
                         }
                         byte[] block = new byte[tCLIprotocol.conf.block_size];
@@ -346,38 +351,38 @@ namespace ThinCLI
                             if (n == 0) break;
                             http.Write(block, 0, n);
                         }
-                        marshal_response(stream, tag.OK);
+                        MarshalResponse(stream, Tag.OK);
                     }
                 }
             }
             catch (FileNotFoundException)
             {
                 Logger.Error("File not found");
-                marshal_response(stream, tag.Failed);
+                MarshalResponse(stream, Tag.Failed);
             }
             catch (Exception e)
             {
-                Logger.Error(string.Format("Received exception: {0}", e.Message));
-                marshal_response(stream, tag.Failed);
+                Logger.Error($"Received exception: {e.Message}");
+                MarshalResponse(stream, Tag.Failed);
             }
         }
 
-        public static void http_get(Stream stream, string filename, Uri uri, thinCLIProtocol tCLIprotocol)
+        private static void HttpGet(Stream stream, string filename, Uri uri, ThinCliProtocol tCLIprotocol)
         {
             try
             {
                 if (File.Exists(filename))
-                    throw new Exception(string.Format("The file '{0}' already exists", filename));
+                    throw new Exception($"The file '{filename}' already exists");
 
                 using (FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write))
                 {
                     using (TcpClient client = new TcpClient(uri.Host, uri.Port))
-                    using (Stream http = HTTP.doRPC(client, "GET", uri, tCLIprotocol))
+                    using (Stream http = HTTP.DoRPC(client, "GET", uri, tCLIprotocol))
                     {
                         if (http == null)
                         {
                             Logger.Error("Server rejected request");
-                            marshal_response(stream, tag.Failed);
+                            MarshalResponse(stream, Tag.Failed);
                             return;
                         }
                         byte[] block = new byte[tCLIprotocol.conf.block_size];
@@ -387,7 +392,7 @@ namespace ThinCLI
                             if (n == 0) break;
                             fs.Write(block, 0, n);
                         }
-                        marshal_response(stream, tag.OK);
+                        MarshalResponse(stream, Tag.OK);
                     }
                 }
             }
@@ -395,11 +400,11 @@ namespace ThinCLI
             {
                 Logger.Error("Received exception: " + e.Message);
                 Logger.Error("Unable to write output file: " + filename);
-                marshal_response(stream, tag.Failed);
+                MarshalResponse(stream, Tag.Failed);
             }
         }
 
-        public static void version_handshake(Stream stream, thinCLIProtocol tCLIprotocol)
+        private static void VersionHandshake(Stream stream, ThinCliProtocol tCLIprotocol)
         {
             /* Check for the initial magic string */
             byte[] magic = Types.unmarshal_n(stream, (uint)tCLIprotocol.magic_string.Length);
@@ -432,7 +437,7 @@ namespace ThinCLI
             Types.marshal_int(stream, tCLIprotocol.minor);
         }
 
-        public static void performCommand(string Body, thinCLIProtocol tCLIprotocol)
+        public static void PerformCommand(string Body, ThinCliProtocol tCLIprotocol)
         {
             string body = Body;
             body += "username=" + tCLIprotocol.conf.username + "\n";
@@ -464,8 +469,8 @@ namespace ThinCLI
                 byte[] message = Encoding.UTF8.GetBytes(tosend);
                 stream.Write(message, 0, message.Length);
                 stream.Flush();
-                version_handshake(stream, tCLIprotocol);
-                interpreter(stream, tCLIprotocol);
+                VersionHandshake(stream, tCLIprotocol);
+                Interpreter(stream, tCLIprotocol);
             }
             catch (SocketException)
             {
@@ -495,9 +500,9 @@ namespace ThinCLI
             }
         }
 
-        public static void CheckPermitFiles(String filename, thinCLIProtocol tCLIprotocol, bool includeCurrentDir = false)
+        private static void CheckPermitFiles(String filename, ThinCliProtocol tCLIprotocol, bool includeCurrentDir = false)
         {
-            string fullpath = "";
+            string fullpath;
 
             try
             {
@@ -505,7 +510,7 @@ namespace ThinCLI
             }
             catch (Exception ex)
             {
-                throw new Exception(string.Format("Failed to retrieve full path of file '{0}', '{1}'", filename, ex.Message));
+                throw new Exception($"Failed to retrieve full path of file '{filename}', '{ex.Message}'");
             }
 
             if (includeCurrentDir)
@@ -529,45 +534,46 @@ namespace ThinCLI
                 }
             }
 
-            throw new Exception(string.Format("The file with name '{0}' is not present at the command line.", filename));
+            throw new Exception($"The file with name '{filename}' is not present at the command line.");
         }
 
-        public static void interpreter(Stream stream, thinCLIProtocol tCLIprotocol)
+        private static void Interpreter(Stream stream, ThinCliProtocol tCLIprotocol)
         {
-            string filename = "";
-            string path = "";
-            string msg = "";
+            string filename;
+            string path;
+            string msg;
+
             while (!tCLIprotocol.dropOut)
             {
                 Types.unmarshal_int32(stream); // total message length (unused here)	
-                Messages.tag t = Messages.unmarshal_tag(stream);
+                Tag t = UnmarshalTag(stream);
                 switch (t)
                 {
-                    case Messages.tag.Command:
-                        t = Messages.unmarshal_tag(stream);
+                    case Tag.Command:
+                        t = UnmarshalTag(stream);
                         switch (t)
                         {
-                            case Messages.tag.Print:
+                            case Tag.Print:
                                 msg = Types.unmarshal_string(stream);
                                 Logger.Debug("Read: Print: " + msg, tCLIprotocol);
                                 Logger.Info(msg);
                                 break;
-                            case Messages.tag.PrintStderr:
+                            case Tag.PrintStderr:
                                 msg = Types.unmarshal_string(stream);
                                 Logger.Debug("Read: PrintStderr: " + msg, tCLIprotocol);
                                 Logger.Info(msg); 
                                 break;
-                            case Messages.tag.Debug:
+                            case Tag.Debug:
                                 msg = Types.unmarshal_string(stream);
                                 Logger.Debug("Read: Debug: " + msg, tCLIprotocol);
                                 Logger.Info(msg);
                                 break;
-                            case Messages.tag.Exit:
+                            case Tag.Exit:
                                 int code = Types.unmarshal_int(stream);
                                 Logger.Debug("Read: Command Exit " + code, tCLIprotocol);
                                 Environment.Exit(code);
                                 break;
-                            case Messages.tag.Error:
+                            case Tag.Error:
                                 Logger.Debug("Read: Command Error", tCLIprotocol);
                                 string err_code = Types.unmarshal_string(stream);
                                 Logger.Info("Error code: " + err_code);
@@ -580,41 +586,41 @@ namespace ThinCLI
                                 }
                                 Logger.Info("Error params: " + string.Join(", ", paramList));
                                 break;
-                            case Messages.tag.Prompt:
+                            case Tag.Prompt:
                                 Logger.Debug("Read: Command Prompt", tCLIprotocol);
                                 string response = Console.ReadLine();
                                 Logger.Info("Read "+response);
                                 /* NB, 4+4+4 here for the blob, chunk and string length, put in by the marshal_string
                                  function. A franken-marshal. */
                                 Types.marshal_int(stream, 4 + 4 + 4); // length
-                                Messages.marshal_tag(stream, Messages.tag.Blob);
-                                Messages.marshal_tag(stream, Messages.tag.Chunk);
+                                MarshalTag(stream, Tag.Blob);
+                                MarshalTag(stream, Tag.Chunk);
                                 Types.marshal_string(stream, response);
                                 Types.marshal_int(stream, 4 + 4); // length
-                                Messages.marshal_tag(stream, Messages.tag.Blob);
-                                Messages.marshal_tag(stream, Messages.tag.End);
+                                MarshalTag(stream, Tag.Blob);
+                                MarshalTag(stream, Tag.End);
                                 break;
-                            case Messages.tag.Load:
+                            case Tag.Load:
                                 filename = Types.unmarshal_string(stream);
                                 CheckPermitFiles(filename, tCLIprotocol);
                                 Logger.Debug("Read: Load " + filename, tCLIprotocol);
-                                Messages.load(stream, filename, tCLIprotocol);
+                                Load(stream, filename, tCLIprotocol);
                                 break;
-                            case Messages.tag.HttpPut:
+                            case Tag.HttpPut:
                                 filename = Types.unmarshal_string(stream);
                                 CheckPermitFiles(filename, tCLIprotocol);
                                 path = Types.unmarshal_string(stream);
                                 Uri uri = ParseUri(path, tCLIprotocol);
                                 Logger.Debug("Read: HttpPut " + filename + " -> " + uri, tCLIprotocol);
-                                Messages.http_put(stream, filename, uri, tCLIprotocol);
+                                HttpPut(stream, filename, uri, tCLIprotocol);
                                 break;
-                            case Messages.tag.HttpGet:
+                            case Tag.HttpGet:
                                 filename = Types.unmarshal_string(stream);
                                 CheckPermitFiles(filename, tCLIprotocol, true);
                                 path = Types.unmarshal_string(stream);
                                 uri = ParseUri(path, tCLIprotocol);
                                 Logger.Debug("Read: HttpGet " + filename + " -> " + uri, tCLIprotocol);
-                                Messages.http_get(stream, filename, uri, tCLIprotocol);
+                                HttpGet(stream, filename, uri, tCLIprotocol);
                                 break;
                             default:
                                 Logger.Error("Protocol failure: Reading Command: unexpected tag: " + t);
@@ -630,7 +636,7 @@ namespace ThinCLI
             }
         }
 
-        private static Uri ParseUri(string path, thinCLIProtocol tcli)
+        private static Uri ParseUri(string path, ThinCliProtocol tcli)
         {
             // The server sometimes sends us a relative path (e.g. for VM import)
             // and sometimes an absolute URI (https://host/path). Construct the absolute URI
