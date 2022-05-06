@@ -218,5 +218,10 @@ namespace XenAdmin
         {
             return Registry.GetCustomUpdatesXmlLocation();
         }
+
+        public string GetInternalStageAuthToken()
+        {
+            return Registry.GetInternalStageAuthToken();
+        }
     }
 }

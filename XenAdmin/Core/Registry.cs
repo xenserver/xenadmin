@@ -171,6 +171,12 @@ namespace XenAdmin.Core
                    ReadRegistryValue(RegistryHive.LocalMachine, XENCENTER_LOCAL_KEYS, CUSTOM_UPDATES_XML_LOCATION);
         }
 
+        public static string GetInternalStageAuthToken()
+        {
+            return ReadRegistryValue(RegistryHive.CurrentUser, XENCENTER_LOCAL_KEYS, INTERNAL_STAGE_AUTH_TOKEN) ??
+                   ReadRegistryValue(RegistryHive.LocalMachine, XENCENTER_LOCAL_KEYS, INTERNAL_STAGE_AUTH_TOKEN);
+        }
+
         public static string GetBrandOverride()
         {
             return ReadRegistryValue(RegistryHive.CurrentUser, XENCENTER_LOCAL_KEYS, BRAND_OVERRIDE) ??
@@ -200,6 +206,7 @@ namespace XenAdmin.Core
         private const string HIDDEN_FEATURES = "HiddenFeatures";
         private const string ADDITIONAL_FEATURES = "AdditionalFeatures";
         private const string CUSTOM_UPDATES_XML_LOCATION = "CheckForUpdatesXmlLocationOverride";
+        private const string INTERNAL_STAGE_AUTH_TOKEN = "InternalStageAuthToken";
         private const string BRAND_OVERRIDE = "BrandOverride";
         private const string HELP_URL_OVERRIDE = "HelpUrlOverride";
     }

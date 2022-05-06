@@ -30,6 +30,7 @@
  */
 
 using System;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -58,6 +59,7 @@ namespace XenAdmin.Actions.Updates
         private DownloadState _updateDownloadState;
         private Exception _updateDownloadError;
         private readonly string _checksum;
+        private readonly string _authToken;
         private WebClient _client;
         private FileStream _msiStream;
 
@@ -72,6 +74,7 @@ namespace XenAdmin.Actions.Updates
             _downloadUpdate = _address != null;
             _outputPathAndFileName = outputFileName;
             _checksum = checksum;
+            _authToken = XenAdminConfigManager.Provider.GetInternalStageAuthToken();
         }
 
         private void DownloadFile()
@@ -102,6 +105,13 @@ namespace XenAdmin.Actions.Updates
 
                     //start the download
                     _updateDownloadState = DownloadState.InProgress;
+
+                    if (!string.IsNullOrEmpty(_authToken))
+                    {
+                        NameValueCollection myQueryStringCollection = new NameValueCollection();
+                        myQueryStringCollection.Add("burritoToken", _authToken);
+                        _client.QueryString = myQueryStringCollection;
+                    }
                     _client.DownloadFileAsync(_address, _outputPathAndFileName);
 
                     bool updateDownloadCancelling = false;
