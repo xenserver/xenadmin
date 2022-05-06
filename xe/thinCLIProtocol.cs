@@ -50,19 +50,8 @@ namespace ThinCLI
         public int block_size = 65536;
         public bool nossl = false;
         public bool debug = false;
+        public List<string> EnteredParamValues = new List<string>();
     }
-    
-    public class ThinCliProtocol
-    {
-        public Config conf;
-        public List<string> EnteredParamValues;
-
-        public ThinCliProtocol(Config conf)
-        {
-            this.conf = conf;
-            EnteredParamValues = new List<string>();
-        }
-    }        
 
     public static class Transport
     {
@@ -80,7 +69,7 @@ namespace ThinCLI
         /// <summary>
         /// Create an SSL stream that will close the client's stream.
         /// </summary>
-        public static Stream Connect(TcpClient client, ThinCliProtocol tCLIprotocol, int port)
+        public static Stream Connect(TcpClient client, Config conf, int port)
         {
             if (port != 443)
                 return client.GetStream();
@@ -95,7 +84,7 @@ namespace ThinCLI
             }
             catch (AuthenticationException)
             {
-                if (tCLIprotocol.conf.debug)
+                if (conf.debug)
                     throw;
                 Logger.Error("Authentication failed - closing the connection.");
                 client.Close();
@@ -103,7 +92,7 @@ namespace ThinCLI
             }
             catch
             {
-                if (tCLIprotocol.conf.debug)
+                if (conf.debug)
                     throw;
                 Logger.Error("Exception during SSL auth - closing the connection.");
                 client.Close();
@@ -145,9 +134,9 @@ namespace ThinCLI
 		    return Int32.Parse(bits[1]);
 	    }
 
-        public static Stream DoRPC(TcpClient client, string method, Uri uri, ThinCliProtocol tCLIprotocol, params string[] headers)
+        public static Stream DoRPC(TcpClient client, string method, Uri uri, Config conf, params string[] headers)
         {
-            Stream http = Transport.Connect(client, tCLIprotocol, uri.Port);
+            Stream http = Transport.Connect(client, conf, uri.Port);
 
             var startLine = $"{method} {uri.PathAndQuery} HTTP/1.0";
             writeLine(http, startLine);
@@ -175,10 +164,10 @@ namespace ThinCLI
                     }
 
                     Uri redirect = new Uri(url.Trim());
-                    tCLIprotocol.conf.hostname = redirect.Host;
+                    conf.hostname = redirect.Host;
                     http.Close();
                     http.Dispose();
-                    return DoRPC(client, method, redirect, tCLIprotocol, headers);
+                    return DoRPC(client, method, redirect, conf, headers);
 
                 default:
                     Logger.Error($"Received error code {code} from the server doing an HTTP {method}");
@@ -286,7 +275,7 @@ namespace ThinCLI
             MarshalTag(stream, t);
         }
         
-        private static void Load(Stream stream, string filename, ThinCliProtocol tCLIprotocol)
+        private static void Load(Stream stream, string filename, Config conf)
         {
             try
             {
@@ -303,7 +292,7 @@ namespace ThinCLI
                     MarshalTag(stream, Tag.Chunk);
                     Types.marshal_int32(stream, (uint)fi.Length);
 
-                    byte[] block = new byte[tCLIprotocol.conf.block_size];
+                    byte[] block = new byte[conf.block_size];
                     while (true)
                     {
                         int n = fs.Read(block, 0, block.Length);
@@ -328,21 +317,21 @@ namespace ThinCLI
             }
         }
 
-        private static void HttpPut(Stream stream, string filename, Uri uri, ThinCliProtocol tCLIprotocol)
+        private static void HttpPut(Stream stream, string filename, Uri uri, Config conf)
         {
             try
             {
                 using (FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read))
                 {
                     using (TcpClient client = new TcpClient(uri.Host, uri.Port))
-                    using (Stream http = HTTP.DoRPC(client, "PUT", uri, tCLIprotocol, $"Content-Length: {fs.Length}"))
+                    using (Stream http = HTTP.DoRPC(client, "PUT", uri, conf, $"Content-Length: {fs.Length}"))
                     {
                         if (http == null)
                         {
                             MarshalResponse(stream, Tag.Failed);
                             return;
                         }
-                        byte[] block = new byte[tCLIprotocol.conf.block_size];
+                        byte[] block = new byte[conf.block_size];
                         while (true)
                         {
                             int n = fs.Read(block, 0, block.Length);
@@ -365,7 +354,7 @@ namespace ThinCLI
             }
         }
 
-        private static void HttpGet(Stream stream, string filename, Uri uri, ThinCliProtocol tCLIprotocol)
+        private static void HttpGet(Stream stream, string filename, Uri uri, Config conf)
         {
             try
             {
@@ -375,7 +364,7 @@ namespace ThinCLI
                 using (FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write))
                 {
                     using (TcpClient client = new TcpClient(uri.Host, uri.Port))
-                    using (Stream http = HTTP.DoRPC(client, "GET", uri, tCLIprotocol))
+                    using (Stream http = HTTP.DoRPC(client, "GET", uri, conf))
                     {
                         if (http == null)
                         {
@@ -383,7 +372,7 @@ namespace ThinCLI
                             MarshalResponse(stream, Tag.Failed);
                             return;
                         }
-                        byte[] block = new byte[tCLIprotocol.conf.block_size];
+                        byte[] block = new byte[conf.block_size];
                         while (true)
                         {
                             int n = http.Read(block, 0, block.Length);
@@ -402,7 +391,7 @@ namespace ThinCLI
             }
         }
 
-        private static void VersionHandshake(Stream stream, ThinCliProtocol tCLIprotocol)
+        private static void VersionHandshake(Stream stream, Config conf)
         {
             // Check for the initial magic string
             byte[] magic = Types.unmarshal_n(stream, (uint)MAGIC_STRING.Length);
@@ -411,7 +400,7 @@ namespace ThinCLI
             {
                 if (magic[i] != MAGIC_STRING[i])
                 {
-                    Logger.Error("Failed to find a server on " + tCLIprotocol.conf.hostname + ":" + tCLIprotocol.conf.port);
+                    Logger.Error($"Failed to find a server on {conf.hostname}:{conf.port}");
                     Logger.Usage();
                     Environment.Exit(1);
                 }
@@ -426,7 +415,7 @@ namespace ThinCLI
 
             if (CLI_PROTOCOL_MAJOR != remoteMajor || CLI_PROTOCOL_MINOR != remoteMinor)
             {
-                Logger.Error("Protocol version mismatch talking to server on " + tCLIprotocol.conf.hostname + ":" + tCLIprotocol.conf.port);
+                Logger.Error($"Protocol version mismatch talking to server on {conf.hostname}:{conf.port}");
                 Logger.Usage();
                 Environment.Exit(1);
             }
@@ -439,11 +428,11 @@ namespace ThinCLI
             Types.marshal_int(stream, CLI_PROTOCOL_MINOR);
         }
 
-        public static void PerformCommand(string Body, ThinCliProtocol tCLIprotocol)
+        public static void PerformCommand(string Body, Config conf)
         {
             string body = Body;
-            body += "username=" + tCLIprotocol.conf.username + "\n";
-            body += "password=" + tCLIprotocol.conf.password + "\n";
+            body += "username=" + conf.username + "\n";
+            body += "password=" + conf.password + "\n";
             if (body.Length != 0)
             {
                 body = body.Substring(0, body.Length - 1); // strip last "\n"
@@ -458,8 +447,8 @@ namespace ThinCLI
 
             try
             {
-                client = new TcpClient(tCLIprotocol.conf.hostname, tCLIprotocol.conf.port);
-                stream = Transport.Connect(client, tCLIprotocol, tCLIprotocol.conf.port);
+                client = new TcpClient(conf.hostname, conf.port);
+                stream = Transport.Connect(client, conf, conf.port);
 
                 if (stream == null)
                 {
@@ -471,17 +460,17 @@ namespace ThinCLI
                 byte[] message = Encoding.UTF8.GetBytes(tosend);
                 stream.Write(message, 0, message.Length);
                 stream.Flush();
-                VersionHandshake(stream, tCLIprotocol);
-                Interpreter(stream, tCLIprotocol);
+                VersionHandshake(stream, conf);
+                Interpreter(stream, conf);
             }
             catch (SocketException)
             {
-                Logger.Error("Connection to " + tCLIprotocol.conf.hostname + ":" + tCLIprotocol.conf.port + " refused.");
+                Logger.Error($"Connection to {conf.hostname}:{conf.port} refused.");
                 Environment.Exit(1);
             }
             catch (Exception e)
             {
-                if (tCLIprotocol.conf.debug)
+                if (conf.debug)
                     throw;
                 Logger.Error("Caught exception: " + e.Message);
                 Environment.Exit(1);
@@ -502,7 +491,7 @@ namespace ThinCLI
             }
         }
 
-        private static void CheckPermitFiles(String filename, ThinCliProtocol tCLIprotocol, bool includeCurrentDir = false)
+        private static void CheckPermitFiles(String filename, Config conf, bool includeCurrentDir = false)
         {
             string fullpath;
 
@@ -516,9 +505,9 @@ namespace ThinCLI
             }
 
             if (includeCurrentDir)
-                tCLIprotocol.EnteredParamValues.Add(Directory.GetCurrentDirectory());
+                conf.EnteredParamValues.Add(Directory.GetCurrentDirectory());
 
-            foreach (string value in tCLIprotocol.EnteredParamValues)
+            foreach (string value in conf.EnteredParamValues)
             {
                 try
                 {
@@ -526,7 +515,7 @@ namespace ThinCLI
 
                     if (fullpath.StartsWith(valueFullPath))
                     {
-                        Logger.Debug("Passed permit files check", tCLIprotocol);
+                        Logger.Debug("Passed permit files check", conf);
                         return;
                     }
                 }
@@ -539,7 +528,7 @@ namespace ThinCLI
             throw new Exception($"The file with name '{filename}' is not present at the command line.");
         }
 
-        private static void Interpreter(Stream stream, ThinCliProtocol tCLIprotocol)
+        private static void Interpreter(Stream stream, Config conf)
         {
             string filename;
             string path;
@@ -557,26 +546,26 @@ namespace ThinCLI
                         {
                             case Tag.Print:
                                 msg = Types.unmarshal_string(stream);
-                                Logger.Debug("Read: Print: " + msg, tCLIprotocol);
+                                Logger.Debug("Read: Print: " + msg, conf);
                                 Logger.Info(msg);
                                 break;
                             case Tag.PrintStderr:
                                 msg = Types.unmarshal_string(stream);
-                                Logger.Debug("Read: PrintStderr: " + msg, tCLIprotocol);
+                                Logger.Debug("Read: PrintStderr: " + msg, conf);
                                 Logger.Info(msg); 
                                 break;
                             case Tag.Debug:
                                 msg = Types.unmarshal_string(stream);
-                                Logger.Debug("Read: Debug: " + msg, tCLIprotocol);
+                                Logger.Debug("Read: Debug: " + msg, conf);
                                 Logger.Info(msg);
                                 break;
                             case Tag.Exit:
                                 int code = Types.unmarshal_int(stream);
-                                Logger.Debug("Read: Command Exit " + code, tCLIprotocol);
+                                Logger.Debug("Read: Command Exit " + code, conf);
                                 Environment.Exit(code);
                                 break;
                             case Tag.Error:
-                                Logger.Debug("Read: Command Error", tCLIprotocol);
+                                Logger.Debug("Read: Command Error", conf);
                                 string err_code = Types.unmarshal_string(stream);
                                 Logger.Info("Error code: " + err_code);
                                 var paramList = new List<string>();
@@ -589,7 +578,7 @@ namespace ThinCLI
                                 Logger.Info("Error params: " + string.Join(", ", paramList));
                                 break;
                             case Tag.Prompt:
-                                Logger.Debug("Read: Command Prompt", tCLIprotocol);
+                                Logger.Debug("Read: Command Prompt", conf);
                                 string response = Console.ReadLine();
                                 Logger.Info("Read "+response);
                                 /* NB, 4+4+4 here for the blob, chunk and string length, put in by the marshal_string
@@ -604,25 +593,25 @@ namespace ThinCLI
                                 break;
                             case Tag.Load:
                                 filename = Types.unmarshal_string(stream);
-                                CheckPermitFiles(filename, tCLIprotocol);
-                                Logger.Debug("Read: Load " + filename, tCLIprotocol);
-                                Load(stream, filename, tCLIprotocol);
+                                CheckPermitFiles(filename, conf);
+                                Logger.Debug("Read: Load " + filename, conf);
+                                Load(stream, filename, conf);
                                 break;
                             case Tag.HttpPut:
                                 filename = Types.unmarshal_string(stream);
-                                CheckPermitFiles(filename, tCLIprotocol);
+                                CheckPermitFiles(filename, conf);
                                 path = Types.unmarshal_string(stream);
-                                Uri uri = ParseUri(path, tCLIprotocol);
-                                Logger.Debug("Read: HttpPut " + filename + " -> " + uri, tCLIprotocol);
-                                HttpPut(stream, filename, uri, tCLIprotocol);
+                                Uri uri = ParseUri(path, conf);
+                                Logger.Debug("Read: HttpPut " + filename + " -> " + uri, conf);
+                                HttpPut(stream, filename, uri, conf);
                                 break;
                             case Tag.HttpGet:
                                 filename = Types.unmarshal_string(stream);
-                                CheckPermitFiles(filename, tCLIprotocol, true);
+                                CheckPermitFiles(filename, conf, true);
                                 path = Types.unmarshal_string(stream);
-                                uri = ParseUri(path, tCLIprotocol);
-                                Logger.Debug("Read: HttpGet " + filename + " -> " + uri, tCLIprotocol);
-                                HttpGet(stream, filename, uri, tCLIprotocol);
+                                uri = ParseUri(path, conf);
+                                Logger.Debug("Read: HttpGet " + filename + " -> " + uri, conf);
+                                HttpGet(stream, filename, uri, conf);
                                 break;
                             default:
                                 Logger.Error("Protocol failure: Reading Command: unexpected tag: " + t);
@@ -638,7 +627,7 @@ namespace ThinCLI
             }
         }
 
-        private static Uri ParseUri(string path, ThinCliProtocol tcli)
+        private static Uri ParseUri(string path, Config conf)
         {
             // The server sometimes sends us a relative path (e.g. for VM import)
             // and sometimes an absolute URI (https://host/path). Construct the absolute URI
@@ -649,8 +638,8 @@ namespace ThinCLI
                 string[] bits = path.Split('?');
                 UriBuilder uriBuilder = new UriBuilder();
                 uriBuilder.Scheme = "https";
-                uriBuilder.Host = tcli.conf.hostname;
-                uriBuilder.Port = tcli.conf.port;
+                uriBuilder.Host = conf.hostname;
+                uriBuilder.Port = conf.port;
                 uriBuilder.Path = bits[0];
                 if (bits.Length > 1)
                     uriBuilder.Query = bits[1];

@@ -41,7 +41,7 @@ namespace ThinCLI
 
         public static void Main(string[] args)
         {
-            var tCliProtocol = new ThinCliProtocol(new Config());
+            var conf = new Config();
 
             string body = "";
             char[] eqsep = {'='};
@@ -53,31 +53,31 @@ namespace ThinCLI
                 {
                     if (s.StartsWith("server"))
                     {
-                        tCliProtocol.conf.hostname = s.Split(eqsep)[1];
+                        conf.hostname = s.Split(eqsep)[1];
                     }
                     else if (s.Equals("-s"))
                     {
-                        tCliProtocol.conf.hostname = args[++i];
+                        conf.hostname = args[++i];
                     }
                     else if (s.Equals("-u"))
                     {
-                        tCliProtocol.conf.username = args[++i];
+                        conf.username = args[++i];
                     }
                     else if (s.Equals("-pw"))
                     {
-                        tCliProtocol.conf.password = args[++i];
+                        conf.password = args[++i];
                     }
                     else if (s.Equals("-p"))
                     {
-                        tCliProtocol.conf.port = int.Parse(args[++i]);
+                        conf.port = int.Parse(args[++i]);
                     }
                     else if (s.Equals("--nossl"))
                     {
-                        tCliProtocol.conf.nossl = true;
+                        conf.nossl = true;
                     }
                     else if (s.Equals("-debug"))
                     {
-                        tCliProtocol.conf.debug = true;
+                        conf.debug = true;
                     }
                     else if (s.Equals("-version"))
                     {
@@ -87,9 +87,8 @@ namespace ThinCLI
                     else
                     {
                         if (s.Contains("="))
-                        {
-                            tCliProtocol.EnteredParamValues.Add(s.Split(eqsep)[1]);
-                        }
+                            conf.EnteredParamValues.Add(s.Split(eqsep)[1]);
+
                         body += s + "\n";
                     }
                 }
@@ -101,14 +100,14 @@ namespace ThinCLI
                 }
             }
 
-            if (tCliProtocol.conf.hostname.Equals(""))
+            if (conf.hostname.Equals(""))
             {
                 Logger.Error("No hostname was specified.");
                 Logger.Usage();
                 Environment.Exit(1);
             }
 
-            Messages.PerformCommand(body, tCliProtocol);
+            Messages.PerformCommand(body, conf);
         }
     }
 
@@ -121,9 +120,9 @@ namespace ThinCLI
             Console.WriteLine("For help, use xe -s <server> -u <user> -pw <password> [-p <port>] help");
         }
 
-        internal static void Debug(string msg, ThinCliProtocol tCliProtocol)
+        internal static void Debug(string msg, Config conf)
         {
-            if (tCliProtocol.conf.debug)
+            if (conf.debug)
                 Console.WriteLine("Debug: " + msg);
         }
 
