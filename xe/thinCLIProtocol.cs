@@ -48,7 +48,6 @@ namespace ThinCLI
         public string password = "";
         public int port = 443;
         public int block_size = 65536;
-        public bool nossl = false;
         public bool debug = false;
         public List<string> EnteredParamValues = new List<string>();
     }

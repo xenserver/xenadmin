@@ -71,10 +71,6 @@ namespace ThinCLI
                     {
                         conf.port = int.Parse(args[++i]);
                     }
-                    else if (s.Equals("--nossl"))
-                    {
-                        conf.nossl = true;
-                    }
                     else if (s.Equals("-debug"))
                     {
                         conf.debug = true;
