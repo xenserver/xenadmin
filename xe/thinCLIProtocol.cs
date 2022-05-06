@@ -56,8 +56,6 @@ namespace ThinCLI
     {
         public Config conf;
         public string magic_string = "XenSource thin CLI protocol";
-	    public int major = 0;
-	    public int minor = 1;
         public List<string> EnteredParamValues;
 
         public ThinCliProtocol(Config conf)
@@ -260,6 +258,9 @@ namespace ThinCLI
 
     public static class Messages
     {
+        private const int CLI_PROTOCOL_MAJOR = 0;
+        private const int CLI_PROTOCOL_MINOR = 2;
+
         private enum Tag
         {
             Print = 0, Load = 1, HttpGet = 12, HttpPut = 13, Prompt = 3, Exit = 4,
@@ -414,24 +415,27 @@ namespace ThinCLI
                     Environment.Exit(1);
                 }
             }
-            /* Read the remote version numbers */
-            int remote_major = Types.unmarshal_int(stream);
-            int remote_minor = Types.unmarshal_int(stream);
-            Logger.Debug("Remote host has version " + remote_major + "." + remote_minor, tCLIprotocol);
-            Logger.Debug("Client has version " + tCLIprotocol.major + "." + tCLIprotocol.minor, tCLIprotocol);
-            if (tCLIprotocol.major != remote_major)
+
+            // Read the remote version numbers
+            int remoteMajor = Types.unmarshal_int(stream);
+            int remoteMinor = Types.unmarshal_int(stream);
+
+            Logger.Debug($"Remote thin CLI protocol has version {remoteMajor}.{remoteMinor}", tCLIprotocol);
+            Logger.Debug($"Client expects version {CLI_PROTOCOL_MAJOR}.{CLI_PROTOCOL_MINOR}", tCLIprotocol);
+
+            if (CLI_PROTOCOL_MAJOR != remoteMajor || CLI_PROTOCOL_MINOR != remoteMinor)
             {
                 Logger.Error("Protocol version mismatch talking to server on " + tCLIprotocol.conf.hostname + ":" + tCLIprotocol.conf.port);
                 Logger.Usage();
                 Environment.Exit(1);
             }
-            /* Tell the server our version numbers */
-            for (int i = 0; i < tCLIprotocol.magic_string.Length; i++)
-            {
-                stream.WriteByte((byte)tCLIprotocol.magic_string[i]);
-            }
-            Types.marshal_int(stream, tCLIprotocol.major);
-            Types.marshal_int(stream, tCLIprotocol.minor);
+
+            // Tell the server our version numbers
+            foreach (var t in tCLIprotocol.magic_string)
+                stream.WriteByte((byte)t);
+
+            Types.marshal_int(stream, CLI_PROTOCOL_MAJOR);
+            Types.marshal_int(stream, CLI_PROTOCOL_MINOR);
         }
 
         public static void PerformCommand(string Body, ThinCliProtocol tCLIprotocol)

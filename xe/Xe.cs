@@ -30,12 +30,15 @@
  */
 
 using System;
+using System.Reflection;
 
 
 namespace ThinCLI
 {
     static class MainClass
     {
+        public static readonly Version Version = Assembly.GetExecutingAssembly().GetName().Version;
+
         public static void Main(string[] args)
         {
             var tCliProtocol = new ThinCliProtocol(new Config());
@@ -66,7 +69,7 @@ namespace ThinCLI
                     }
                     else if (s.Equals("-p"))
                     {
-                        tCliProtocol.conf.port = Int32.Parse(args[++i]);
+                        tCliProtocol.conf.port = int.Parse(args[++i]);
                     }
                     else if (s.Equals("--nossl"))
                     {
@@ -78,7 +81,7 @@ namespace ThinCLI
                     }
                     else if (s.Equals("-version"))
                     {
-                        Console.WriteLine("ThinCLI protocol: " + tCliProtocol.major + "." + tCliProtocol.minor);
+                        Console.WriteLine(Version.ToString());
                         Environment.Exit(0);
                     }
                     else
