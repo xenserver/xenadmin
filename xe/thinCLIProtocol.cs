@@ -409,8 +409,8 @@ namespace ThinCLI
             int remoteMajor = Types.unmarshal_int(stream);
             int remoteMinor = Types.unmarshal_int(stream);
 
-            Logger.Debug($"Remote thin CLI protocol has version {remoteMajor}.{remoteMinor}", tCLIprotocol);
-            Logger.Debug($"Client expects version {CLI_PROTOCOL_MAJOR}.{CLI_PROTOCOL_MINOR}", tCLIprotocol);
+            Logger.Debug($"Remote thin CLI protocol has version {remoteMajor}.{remoteMinor}", conf);
+            Logger.Debug($"Client expects version {CLI_PROTOCOL_MAJOR}.{CLI_PROTOCOL_MINOR}", conf);
 
             if (CLI_PROTOCOL_MAJOR != remoteMajor || CLI_PROTOCOL_MINOR != remoteMinor)
             {

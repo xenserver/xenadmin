@@ -31,6 +31,7 @@
 
 using System;
 using System.Reflection;
+using System.Text;
 
 
 namespace ThinCLI
@@ -51,11 +52,7 @@ namespace ThinCLI
                 string s = args[i];
                 try
                 {
-                    if (s.StartsWith("server"))
-                    {
-                        conf.hostname = s.Split(eqsep)[1];
-                    }
-                    else if (s.Equals("-s"))
+                    if (s.Equals("-s"))
                     {
                         conf.hostname = args[++i];
                     }
@@ -78,6 +75,11 @@ namespace ThinCLI
                     else if (s.Equals("-version"))
                     {
                         Console.WriteLine(Version.ToString());
+                        Environment.Exit(0);
+                    }
+                    else if (s.Equals("-help") || s.Equals("/?"))
+                    {
+                        Logger.Usage();
                         Environment.Exit(0);
                     }
                     else
@@ -111,9 +113,18 @@ namespace ThinCLI
     {
         internal static void Usage()
         {
-            Console.WriteLine("Usage:");
-            Console.WriteLine("  xe -s <server> -u <username> -pw <password> [-p <port>] <command> <arguments>");
-            Console.WriteLine("For help, use xe -s <server> -u <user> -pw <password> [-p <port>] help");
+            var sb = new StringBuilder();
+            sb.AppendLine("Usage:");
+            sb.AppendLine("  xe -version").AppendLine();
+            sb.AppendLine("  xe -help").AppendLine();
+            sb.AppendLine("  xe -s <server> -u <username> -pw <password> [options] <command> <arguments>").AppendLine();
+            sb.AppendLine("Options:");
+            sb.AppendLine("  -p <port>");
+            sb.AppendLine("  -debug");
+            sb.AppendLine();
+            sb.AppendLine("For command help, use xe -s <server> -u <user> -pw <password> [options] help");
+
+            Console.WriteLine(sb);
         }
 
         internal static void Debug(string msg, Config conf)
