@@ -52,7 +52,6 @@ namespace ThinCLI
         public bool debug = false;
     }
     
-    public delegate void delegateGlobalError(String s);
     public delegate void delegateGlobalUsage();
     public delegate void delegateGlobalDebug(String s, thinCLIProtocol tCLIprotocol);
     public delegate void delegateConsoleWrite(String s);
@@ -63,7 +62,6 @@ namespace ThinCLI
 
     public class thinCLIProtocol
     {
-        public delegateGlobalError dGlobalError;
         public delegateGlobalUsage dGlobalUsage;
         public delegateGlobalDebug dGlobalDebug;
         public delegateConsoleWrite dConsoleWrite;
@@ -78,7 +76,7 @@ namespace ThinCLI
         public bool dropOut;
         public List<string> EnteredParamValues;
 
-        public thinCLIProtocol(delegateGlobalError dGlobalError, 
+        public thinCLIProtocol( 
             delegateGlobalUsage dGlobalUsage, 
             delegateGlobalDebug dGlobalDebug, 
             delegateConsoleWrite dConsoleWrite, 
@@ -88,7 +86,6 @@ namespace ThinCLI
             delegateProgress dProgress,
             Config conf)
         {
-            this.dGlobalError = dGlobalError;
             this.dGlobalUsage = dGlobalUsage;
             this.dGlobalDebug = dGlobalDebug;
             this.dConsoleWrite = dConsoleWrite;
@@ -136,7 +133,7 @@ namespace ThinCLI
             {
                 if (tCLIprotocol.conf.debug)
                     throw;
-                tCLIprotocol.dGlobalError("Authentication failed - closing the connection.");
+                Logger.Error("Authentication failed - closing the connection.");
                 client.Close();
                 return null;
             }
@@ -144,7 +141,7 @@ namespace ThinCLI
             {
                 if (tCLIprotocol.conf.debug)
                     throw;
-                tCLIprotocol.dGlobalError("Exception during SSL auth - closing the connection.");
+                Logger.Error("Exception during SSL auth - closing the connection.");
                 client.Close();
                 return null;
             }
@@ -220,7 +217,7 @@ namespace ThinCLI
                     return doRPC(client, method, redirect, tCLIprotocol, headers);
 
                 default:
-                    tCLIprotocol.dGlobalError(string.Format("Received error code {0} from the server doing an HTTP {1}", code, method));
+                    Logger.Error(string.Format("Received error code {0} from the server doing an HTTP {1}", code, method));
                     http.Close();
                     http.Dispose();
                     return null;
@@ -317,7 +314,7 @@ namespace ThinCLI
         
         public static void protocol_failure(string msg, tag t, thinCLIProtocol tCLIprotocol)
         {
-            tCLIprotocol.dGlobalError("Protocol failure: Reading " + msg + ": unexpected tag: " + t);
+            Logger.Error("Protocol failure: Reading " + msg + ": unexpected tag: " + t);
             tCLIprotocol.dExit(1);
         }
 
@@ -392,12 +389,12 @@ namespace ThinCLI
             }
             catch (FileNotFoundException)
             {
-                tCLIprotocol.dGlobalError("File not found");
+                Logger.Error("File not found");
                 marshal_response(stream, tag.Failed);
             }
             catch (Exception e)
             {
-                tCLIprotocol.dGlobalError(string.Format("Received exception: {0}", e.Message));
+                Logger.Error(string.Format("Received exception: {0}", e.Message));
                 marshal_response(stream, tag.Failed);
             }
         }
@@ -416,7 +413,7 @@ namespace ThinCLI
                     {
                         if (http == null)
                         {
-                            tCLIprotocol.dGlobalError("Server rejected request");
+                            Logger.Error("Server rejected request");
                             marshal_response(stream, tag.Failed);
                             return;
                         }
@@ -433,8 +430,8 @@ namespace ThinCLI
             }
             catch (Exception e)
             {
-                tCLIprotocol.dGlobalError("Received exception: " + e.Message);
-                tCLIprotocol.dGlobalError("Unable to write output file: " + filename);
+                Logger.Error("Received exception: " + e.Message);
+                Logger.Error("Unable to write output file: " + filename);
                 marshal_response(stream, tag.Failed);
             }
         }
@@ -447,7 +444,7 @@ namespace ThinCLI
             {
                 if (magic[i] != tCLIprotocol.magic_string[i])
                 {
-                    tCLIprotocol.dGlobalError("Failed to find a server on " + tCLIprotocol.conf.hostname + ":" + tCLIprotocol.conf.port);
+                    Logger.Error("Failed to find a server on " + tCLIprotocol.conf.hostname + ":" + tCLIprotocol.conf.port);
                     tCLIprotocol.dGlobalUsage();
                     tCLIprotocol.dExit(1);
                 }
@@ -459,7 +456,7 @@ namespace ThinCLI
             tCLIprotocol.dGlobalDebug("Client has version " + tCLIprotocol.major + "." + tCLIprotocol.minor, tCLIprotocol);
             if (tCLIprotocol.major != remote_major)
             {
-                tCLIprotocol.dGlobalError("Protocol version mismatch talking to server on " + tCLIprotocol.conf.hostname + ":" + tCLIprotocol.conf.port);
+                Logger.Error("Protocol version mismatch talking to server on " + tCLIprotocol.conf.hostname + ":" + tCLIprotocol.conf.port);
                 tCLIprotocol.dGlobalUsage();
                 tCLIprotocol.dExit(1);
             }
@@ -509,14 +506,14 @@ namespace ThinCLI
             }
             catch (SocketException)
             {
-                tCLIprotocol.dGlobalError("Connection to " + tCLIprotocol.conf.hostname + ":" + tCLIprotocol.conf.port + " refused.");
+                Logger.Error("Connection to " + tCLIprotocol.conf.hostname + ":" + tCLIprotocol.conf.port + " refused.");
                 tCLIprotocol.dExit(1);
             }
             catch (Exception e)
             {
                 if (tCLIprotocol.conf.debug)
                     throw;
-                tCLIprotocol.dGlobalError("Caught exception: " + e.Message);
+                Logger.Error("Caught exception: " + e.Message);
                 tCLIprotocol.dExit(1);
             }
             finally
