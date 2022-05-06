@@ -52,14 +52,12 @@ namespace ThinCLI
         public bool debug = false;
     }
     
-    public delegate void delegateConsoleWriteLine(String s);
     public delegate string delegateConsoleReadLine();
     public delegate void delegateExit(int i);
     public delegate void delegateProgress(int i);
 
     public class thinCLIProtocol
     {
-        public delegateConsoleWriteLine dConsoleWriteLine;
         public delegateConsoleReadLine dConsoleReadLine;
         public delegateProgress dProgress;
         public delegateExit dExit;
@@ -71,13 +69,11 @@ namespace ThinCLI
         public List<string> EnteredParamValues;
 
         public thinCLIProtocol( 
-            delegateConsoleWriteLine dConsoleWriteLine, 
             delegateConsoleReadLine dConsoleReadLine,
             delegateExit dExit,
             delegateProgress dProgress,
             Config conf)
         {
-            this.dConsoleWriteLine = dConsoleWriteLine;
             this.dConsoleReadLine = dConsoleReadLine;
             this.dExit = dExit;
             this.dProgress = dProgress;
@@ -575,17 +571,17 @@ namespace ThinCLI
                             case Messages.tag.Print:
                                 msg = Types.unmarshal_string(stream);
                                 Logger.Debug("Read: Print: " + msg, tCLIprotocol);
-                                tCLIprotocol.dConsoleWriteLine(msg);
+                                Logger.Info(msg);
                                 break;
                             case Messages.tag.PrintStderr:
                                 msg = Types.unmarshal_string(stream);
                                 Logger.Debug("Read: PrintStderr: " + msg, tCLIprotocol);
-                                tCLIprotocol.dConsoleWriteLine(msg); 
+                                Logger.Info(msg); 
                                 break;
                             case Messages.tag.Debug:
                                 msg = Types.unmarshal_string(stream);
                                 Logger.Debug("Read: Debug: " + msg, tCLIprotocol);
-                                tCLIprotocol.dConsoleWriteLine(msg);
+                                Logger.Info(msg);
                                 break;
                             case Messages.tag.Exit:
                                 int code = Types.unmarshal_int(stream);
@@ -595,7 +591,7 @@ namespace ThinCLI
                             case Messages.tag.Error:
                                 Logger.Debug("Read: Command Error", tCLIprotocol);
                                 string err_code = Types.unmarshal_string(stream);
-                                tCLIprotocol.dConsoleWriteLine("Error code: " + err_code);
+                                Logger.Info("Error code: " + err_code);
                                 var paramList = new List<string>();
                                 int length = Types.unmarshal_int(stream);
                                 for (int i = 0; i < length; i++)
@@ -603,12 +599,12 @@ namespace ThinCLI
                                     string param = Types.unmarshal_string(stream);
                                     paramList.Add(param);
                                 }
-                                tCLIprotocol.dConsoleWriteLine("Error params: " + string.Join(", ", paramList));
+                                Logger.Info("Error params: " + string.Join(", ", paramList));
                                 break;
                             case Messages.tag.Prompt:
                                 Logger.Debug("Read: Command Prompt", tCLIprotocol);
                                 string response = tCLIprotocol.dConsoleReadLine();
-				tCLIprotocol.dConsoleWriteLine("Read "+response);
+                                Logger.Info("Read "+response);
 				/* NB, 4+4+4 here for the blob, chunk and string length, put in by the marshal_string
 				function. A franken-marshal. */
                                 Types.marshal_int(stream, 4 + 4 + 4); // length

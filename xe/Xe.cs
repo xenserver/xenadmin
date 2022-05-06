@@ -39,7 +39,7 @@ namespace ThinCLI
         public static void Main(string[] args)
         {
             var tCliProtocol = new thinCLIProtocol(
-                Console.WriteLine, Console.ReadLine,
+                Console.ReadLine,
                 Environment.Exit, i => { }, new Config());
 
             string body = "";
@@ -129,6 +129,11 @@ namespace ThinCLI
         internal static void Error(string x)
         {
             Console.WriteLine("Error: " + x);
+        }
+
+        internal static void Info(string x)
+        {
+            Console.WriteLine(x);
         }
     }
 }
