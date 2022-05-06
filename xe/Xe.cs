@@ -38,7 +38,7 @@ namespace ThinCLI
     {
         public static void Main(string[] args)
         {
-            var tCliProtocol = new thinCLIProtocol(Usage, Debug,
+            var tCliProtocol = new thinCLIProtocol(Debug,
                 Console.Write, Console.WriteLine, Console.ReadLine,
                 Environment.Exit, i => { }, new Config());
 
@@ -95,7 +95,7 @@ namespace ThinCLI
                 catch
                 {
                     Logger.Error("Failed to parse command-line arguments");
-                    Usage();
+                    Logger.Usage();
                     Environment.Exit(1);
                 }
             }
@@ -103,7 +103,7 @@ namespace ThinCLI
             if (tCliProtocol.conf.hostname.Equals(""))
             {
                 Logger.Error("No hostname was specified.");
-                Usage();
+                Logger.Usage();
                 Environment.Exit(1);
             }
 
@@ -117,17 +117,17 @@ namespace ThinCLI
             if (tCliProtocol.conf.debug)
                 Console.WriteLine("Debug: " + msg);
         }
+    }
 
-        private static void Usage()
+    internal static class Logger
+    {
+        internal static void Usage()
         {
             Console.WriteLine("Usage:");
             Console.WriteLine("  xe -s <server> -u <username> -pw <password> [-p <port>] <command> <arguments>");
             Console.WriteLine("For help, use xe -s <server> -u <user> -pw <password> [-p <port>] help");
         }
-    }
 
-    internal static class Logger
-    {
         internal static void Error(string x)
         {
             Console.WriteLine("Error: " + x);

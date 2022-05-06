@@ -52,7 +52,6 @@ namespace ThinCLI
         public bool debug = false;
     }
     
-    public delegate void delegateGlobalUsage();
     public delegate void delegateGlobalDebug(String s, thinCLIProtocol tCLIprotocol);
     public delegate void delegateConsoleWrite(String s);
     public delegate void delegateConsoleWriteLine(String s);
@@ -62,7 +61,6 @@ namespace ThinCLI
 
     public class thinCLIProtocol
     {
-        public delegateGlobalUsage dGlobalUsage;
         public delegateGlobalDebug dGlobalDebug;
         public delegateConsoleWrite dConsoleWrite;
         public delegateConsoleWriteLine dConsoleWriteLine;
@@ -77,7 +75,6 @@ namespace ThinCLI
         public List<string> EnteredParamValues;
 
         public thinCLIProtocol( 
-            delegateGlobalUsage dGlobalUsage, 
             delegateGlobalDebug dGlobalDebug, 
             delegateConsoleWrite dConsoleWrite, 
             delegateConsoleWriteLine dConsoleWriteLine, 
@@ -86,7 +83,6 @@ namespace ThinCLI
             delegateProgress dProgress,
             Config conf)
         {
-            this.dGlobalUsage = dGlobalUsage;
             this.dGlobalDebug = dGlobalDebug;
             this.dConsoleWrite = dConsoleWrite;
             this.dConsoleWriteLine = dConsoleWriteLine;
@@ -445,7 +441,7 @@ namespace ThinCLI
                 if (magic[i] != tCLIprotocol.magic_string[i])
                 {
                     Logger.Error("Failed to find a server on " + tCLIprotocol.conf.hostname + ":" + tCLIprotocol.conf.port);
-                    tCLIprotocol.dGlobalUsage();
+                    Logger.Usage();
                     tCLIprotocol.dExit(1);
                 }
             }
@@ -457,7 +453,7 @@ namespace ThinCLI
             if (tCLIprotocol.major != remote_major)
             {
                 Logger.Error("Protocol version mismatch talking to server on " + tCLIprotocol.conf.hostname + ":" + tCLIprotocol.conf.port);
-                tCLIprotocol.dGlobalUsage();
+                Logger.Usage();
                 tCLIprotocol.dExit(1);
             }
             /* Tell the server our version numbers */
