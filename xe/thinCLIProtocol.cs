@@ -58,16 +58,13 @@ namespace ThinCLI
         public string magic_string = "XenSource thin CLI protocol";
 	    public int major = 0;
 	    public int minor = 1;
-        public bool dropOut;
         public List<string> EnteredParamValues;
 
         public ThinCliProtocol(Config conf)
         {
             this.conf = conf;
-            dropOut = false;
             EnteredParamValues = new List<string>();
         }
-        
     }        
 
     public static class Transport
@@ -543,7 +540,7 @@ namespace ThinCLI
             string path;
             string msg;
 
-            while (!tCLIprotocol.dropOut)
+            while (true)
             {
                 Types.unmarshal_int32(stream); // total message length (unused here)	
                 Tag t = UnmarshalTag(stream);
