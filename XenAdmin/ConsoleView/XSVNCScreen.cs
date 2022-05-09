@@ -178,7 +178,7 @@ namespace XenAdmin.ConsoleView
         void Default_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "EnableRDPPolling")
-                Program.Invoke(this, startPolling);
+                Program.Invoke(this, StartPolling);
         }
 
         private void UnregisterEventListeners()
@@ -210,7 +210,7 @@ namespace XenAdmin.ConsoleView
 
                     cachedNetworks = newNetworks;
 
-                    Program.Invoke(this, startPolling);
+                    Program.Invoke(this, StartPolling);
                 }
             }
         }
@@ -288,84 +288,77 @@ namespace XenAdmin.ConsoleView
 
         public MethodInvoker OnDetectRDP = null;
         public MethodInvoker OnDetectVNC = null;
-        public String rdpIP = null;
-        public String vncIP = null;
+        public string RdpIp;
+        public string VncIp;
 
-        private void PollRDPPort(Object Sender)
+        private void PollRDPPort(object sender)
         {
             if (hasRDP)
             {
-                if (connectionPoller != null)
-                    connectionPoller.Change(Timeout.Infinite, Timeout.Infinite);
                 if (OnDetectRDP != null)
                     Program.Invoke(this, OnDetectRDP);
             }
             else
             {
-                rdpIP = null;
-                String openIP = PollPort(RDP_PORT, false);
+                RdpIp = null;
+                var openIp = PollPort(RDP_PORT, false);
 
-                if (openIP != null)
-                {
-                    rdpIP = openIP;
-                    if (connectionPoller != null)
-                        connectionPoller.Change(Timeout.Infinite, Timeout.Infinite);
-                    if (OnDetectRDP != null)
-                        Program.Invoke(this, OnDetectRDP);
-                }
+                if (openIp == null)
+                    return;
+                RdpIp = openIp;
+                if (OnDetectRDP != null)
+                    Program.Invoke(this, OnDetectRDP);
             }
         }
 
-        private void PollVNCPort(Object Sender)
+        private void PollVNCPort(object sender)
         {
-            vncIP = null;
-            String openIP = PollPort(VNC_PORT, true);
+            VncIp = null;
+            var openIp = PollPort(VNC_PORT, true);
 
-            if (openIP != null)
-            {
-                vncIP = openIP;
-                if (connectionPoller != null)
-                    connectionPoller.Change(Timeout.Infinite, Timeout.Infinite);
-                if (OnDetectVNC != null)
-                    Program.Invoke(this, OnDetectVNC);
-            }
+            if (openIp == null) 
+                return;
+            VncIp = openIp;
+
+            connectionPoller?.Change(Timeout.Infinite, Timeout.Infinite);
+
+            if (OnDetectVNC != null)
+                Program.Invoke(this, OnDetectVNC);
         }
 
         /// <summary>
         /// scan each ip address (from the guest agent) for an open port
         /// </summary>
-        public String PollPort(int port, bool vnc)
+        public string PollPort(int port, bool vnc)
         {
             try
             {
                 if (Source == null)
                     return null;
 
-                VM vm = Source;
+                var vm = Source;
 
-                XenRef<VM_guest_metrics> guestMetricsRef = vm.guest_metrics;
+                var guestMetricsRef = vm.guest_metrics;
                 if (guestMetricsRef == null || Helper.IsNullOrEmptyOpaqueRef(guestMetricsRef.opaque_ref))
                     return null;
 
-                VM_guest_metrics metrics = vm.Connection.Resolve(guestMetricsRef);
-                if (metrics == null)
-                    return null;
-                Dictionary<string, string> networks = metrics.networks;
+                var metrics = vm.Connection.Resolve(guestMetricsRef);
+                var networks = metrics?.networks;
 
                 if (networks == null)
                     return null;
 
-                List<string> ipAddresses = new List<string>();
-                List<string> ipv6Addresses = new List<string>();
-                List<string> ipAddressesForNetworksWithoutPifs = new List<string>();
-                List<string> ipv6AddressesForNetworksWithoutPifs = new List<string>();
+                var ipAddresses = new List<string>();
+                var ipv6Addresses = new List<string>();
+                var ipAddressesForNetworksWithoutPifs = new List<string>();
+                var ipv6AddressesForNetworksWithoutPifs = new List<string>();
 
-                foreach (VIF vif in vm.Connection.ResolveAll(vm.VIFs))
+                foreach (var vif in vm.Connection.ResolveAll(vm.VIFs))
                 {
-                    XenAPI.Network network = vif.Connection.Resolve(vif.network);
-                    Host host = vm.Connection.Resolve(vm.resident_on);
-                    PIF pif = Helpers.FindPIF(network, host);
-                    foreach (var networkInfo in networks.Where(n => n.Key.StartsWith(String.Format("{0}/ip", vif.device))))
+                    var network = vif.Connection.Resolve(vif.network);
+                    var host = vm.Connection.Resolve(vm.resident_on);
+                    var pif = Helpers.FindPIF(network, host);
+                    foreach (var networkInfo in networks.Where(n => n.Key.StartsWith($"{vif.device}/ip")))
                     {
                         if (networkInfo.Key.EndsWith("ip") || networkInfo.Key.Contains("ipv4")) // IPv4 address
                         {
@@ -379,12 +372,10 @@ namespace XenAdmin.ConsoleView
                             if (networkInfo.Key.Contains("ipv6")) // IPv6 address, enclose in square brackets
                             {
                                 if (pif == null)
-                                    ipv6AddressesForNetworksWithoutPifs.Add(String.Format("[{0}]", networkInfo.Value));
+                                    ipv6AddressesForNetworksWithoutPifs.Add($"[{networkInfo.Value}]");
                                 else if (pif.LinkStatus() == PIF.LinkState.Connected)
-                                    ipv6Addresses.Add(String.Format("[{0}]", networkInfo.Value));
+                                    ipv6Addresses.Add($"[{networkInfo.Value}]");
                             }
-                            else
-                                continue;
                         }
                     }
                 }
@@ -396,12 +387,12 @@ namespace XenAdmin.ConsoleView
                 ipAddresses.AddRange(ipv6AddressesForNetworksWithoutPifs); 
 
 
-                foreach (String ipAddress in ipAddresses)
+                foreach (var ipAddress in ipAddresses)
                 {
                     try
                     {
                         Log.DebugFormat("Poll port {0}:{1}", ipAddress, port);
-                        Stream s = connectGuest(ipAddress, port, vm.Connection);
+                        var s = connectGuest(ipAddress, port, vm.Connection);
                         if (vnc)
                         {
                             Log.DebugFormat("Connected. Set Pending Vnc connection {0}:{1}", ipAddress, port);
@@ -429,22 +420,25 @@ namespace XenAdmin.ConsoleView
             }
             catch (Failure exn)
             {
-                if (exn.ErrorDescription[0] == Failure.HANDLE_INVALID)
+                switch (exn.ErrorDescription[0])
                 {
-                    // HANDLE_INVALID is fine -- the guest metrics are not there yet.
-                }
-                else if (exn.ErrorDescription[0] == Failure.SESSION_INVALID)
-                {
-                    // SESSION_INVALID is fine -- these will expire from time to time.
-                    // We need to invalidate the session though.
-                    lock (activeSessionLock)
+                    case Failure.HANDLE_INVALID:
+                        // HANDLE_INVALID is fine -- the guest metrics are not there yet.
+                        break;
+                    case Failure.SESSION_INVALID:
                     {
-                        activeSession = null;
+                        // SESSION_INVALID is fine -- these will expire from time to time.
+                        // We need to invalidate the session though.
+                        lock (activeSessionLock)
+                        {
+                            activeSession = null;
+                        }
+
+                        break;
                     }
-                }
-                else
-                {
-                    Log.Warn("Exception while polling VM for port " + port + ".", exn);
+                    default:
+                        Log.Warn("Exception while polling VM for port " + port + ".", exn);
+                        break;
                 }
             }
             catch (Exception e)
@@ -519,7 +513,7 @@ namespace XenAdmin.ConsoleView
             Program.AssertOnEventThread();
 
             //When switch to RDP from VNC, if RDP IP is empty, do not try to switch.
-            if (String.IsNullOrEmpty(rdpIP) && !UseVNC && RemoteConsole != null)
+            if (String.IsNullOrEmpty(RdpIp) && !UseVNC && RemoteConsole != null)
                 return;
 
             bool wasFocused = false;
@@ -539,7 +533,7 @@ namespace XenAdmin.ConsoleView
             // Reset
             haveTriedLoginWithoutPassword = false;
 
-            if (UseVNC || String.IsNullOrEmpty(rdpIP))
+            if (UseVNC || String.IsNullOrEmpty(RdpIp))
             {
                 this.AutoScroll = false;
                 this.AutoScrollMinSize = new Size(0, 0);
@@ -590,7 +584,7 @@ namespace XenAdmin.ConsoleView
 
         internal bool MustConnectRemoteDesktop()
         {
-            return (UseVNC || string.IsNullOrEmpty(rdpIP)) &&
+            return (UseVNC || string.IsNullOrEmpty(RdpIp)) &&
                 Source.HasGPUPassthrough() && Source.power_state == vm_power_state.Running;
         }
 
@@ -605,7 +599,7 @@ namespace XenAdmin.ConsoleView
             if (vncClient != null)
                 ThreadPool.QueueUserWorkItem(new WaitCallback(Connect), new KeyValuePair<VNCGraphicsClient, Exception>(vncClient, null));
             else if (rdpClient != null)
-                rdpClient.Connect(rdpIP);
+                rdpClient.Connect(RdpIp);
         }
 
         void ConnectionSuccess(object sender, EventArgs e)
@@ -710,7 +704,7 @@ namespace XenAdmin.ConsoleView
 
                     sourceIsPV = !value.IsHVM();
                     
-                    startPolling();
+                    StartPolling();
 
                     lock (hostedConsolesLock)
                     {
@@ -751,7 +745,7 @@ namespace XenAdmin.ConsoleView
             return UseVNC && UseSource;
         }
 
-        private void startPolling()
+        private void StartPolling()
         {
             //Disable the button first, but only if in text/default console (to allow user to return to the text console - ref. CA-70314)
             if (InDefaultConsole())
@@ -759,26 +753,19 @@ namespace XenAdmin.ConsoleView
                 parentVNCTabView.DisableToggleVNCButton();
             }
 
-            if (!parentVNCTabView.IsRDPControlEnabled())
-            {
-                if (InDefaultConsole())
-                {
-                    parentVNCTabView.DisableToggleVNCButton();
-                }
+            if (parentVNCTabView.IsRDPControlEnabled()) 
+                return;
 
-                //Start the polling again
-                if (Source != null && !Source.IsControlDomainZero(out _))
-                {
-                    if (!Source.IsHVM())
-                    {
-                        connectionPoller = new Timer(PollVNCPort, null, RETRY_SLEEP_TIME, RDP_POLL_INTERVAL);
-                    }
-                    else if (hasRDP)
-                    {
-                        connectionPoller = new Timer(PollRDPPort, null, RETRY_SLEEP_TIME, RDP_POLL_INTERVAL);
-                    }
-                }
+            if (InDefaultConsole())
+            {
+                parentVNCTabView.DisableToggleVNCButton();
             }
+
+            if (Source == null || Source.IsControlDomainZero(out _)) 
+                return;
+
+            //Start the polling again
+            connectionPoller = !Source.IsHVM() ? new Timer(PollVNCPort, null, RETRY_SLEEP_TIME, RDP_POLL_INTERVAL) : new Timer(PollRDPPort, null, RETRY_SLEEP_TIME, RDP_POLL_INTERVAL);
         }
 
         private void VM_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -820,7 +807,7 @@ namespace XenAdmin.ConsoleView
             else if (e.PropertyName == "domid")
             {
                 // Reboot / start / shutdown
-                Program.Invoke(this, startPolling);
+                Program.Invoke(this, StartPolling);
             }
 
             if (e.PropertyName == "power_state" || e.PropertyName == "VGPUs")
@@ -964,7 +951,7 @@ namespace XenAdmin.ConsoleView
                 }
                 else
                 {
-                    if (vncIP == null)
+                    if (VncIp == null)
                     {
                         Log.DebugFormat("vncIP is null. Abort VNC connection attempt");
                         OnVncConnectionAttemptCancelled();
@@ -1006,9 +993,9 @@ namespace XenAdmin.ConsoleView
                     }
                     if (s == null)
                     {
-                        Log.DebugFormat("Connecting to vncIP={0}, port={1}", this.vncIP, VNC_PORT);
-                        s = connectGuest(this.vncIP, VNC_PORT, sourceVM.Connection);
-                        Log.DebugFormat("Connected to vncIP={0}, port={1}", this.vncIP, VNC_PORT);
+                        Log.DebugFormat("Connecting to vncIP={0}, port={1}", this.VncIp, VNC_PORT);
+                        s = connectGuest(this.VncIp, VNC_PORT, sourceVM.Connection);
+                        Log.DebugFormat("Connected to vncIP={0}, port={1}", this.VncIp, VNC_PORT);
                     }
                     InvokeConnection(v, s, null);
 

@@ -348,7 +348,8 @@ namespace XenAPI
             var metrics = Connection.Resolve(this.guest_metrics);
             if (metrics == null)
                 return false;
-
+            // feature-ts is the feature flag indicating the toolstack
+            // can enable RDP remotely (by writing to control/ts)
             return 0 != IntKey(metrics.other, "feature-ts", 0);
         }
 
@@ -357,7 +358,7 @@ namespace XenAPI
             var vmMetrics = Connection.Resolve(this.guest_metrics);
             if (vmMetrics == null)
                 return false;
-
+            // data/ts indicates the VM has RDP enabled
             return 0 != IntKey(vmMetrics.other, "data-ts", 0);
         }
 
@@ -366,8 +367,23 @@ namespace XenAPI
             var metrics = Connection.Resolve(this.guest_metrics);
             if (metrics == null)
                 return false;
-
+            // feature-ts2 is the feature flag indicating that data/ts is valid
             return 0 != IntKey(metrics.other, "feature-ts2", 0);
+        }
+
+        public bool CanUseRDP()
+        {
+            var guestMetrics = Connection.Resolve(guest_metrics);
+            if (guestMetrics == null)
+                return false;
+
+            return IntKey(guestMetrics.other, "feature-ts2", 0) != 0 &&
+                   IntKey(guestMetrics.other, "feature-ts", 0) != 0 &&
+                   IntKey(guestMetrics.other, "data-ts", 0) != 0 &&
+                   // CA-322672: Can't connect using RDP if there are no networks.
+                   // The network object contains the IP info written by the xenvif
+                   // driver (which needs a 1st reboot to swap out the emulated network adapter)
+                   guestMetrics.networks.Count > 0;
         }
 
         /// <summary>Returns true if
