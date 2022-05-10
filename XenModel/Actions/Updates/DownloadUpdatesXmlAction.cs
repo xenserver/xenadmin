@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.IO;
 using System.Xml;
@@ -322,6 +323,7 @@ namespace XenAdmin.Actions
         {
             var xdoc = new XmlDocument();
             var checkForUpdatesUrl = XenAdminConfigManager.Provider.GetCustomUpdatesXmlLocation() ?? BrandManager.UpdatesUrl;
+            var authToken = XenAdminConfigManager.Provider.GetInternalStageAuthToken();
             var uri = new Uri(checkForUpdatesUrl);
 
             if (uri.IsFile)
@@ -330,12 +332,19 @@ namespace XenAdmin.Actions
             }
             else
             {
+                
                 var proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(Connection, false);
 
                 using (var webClient = new WebClient())
                 {
                     webClient.Proxy = proxy;
                     webClient.Headers.Add("User-Agent", _userAgent);
+                    if (!string.IsNullOrEmpty(authToken))
+                    {
+                        NameValueCollection myQueryStringCollection = new NameValueCollection();
+                        myQueryStringCollection.Add(XenAdminConfigManager.Provider.GetInternalStageAuthTokenName(), authToken);
+                        webClient.QueryString = myQueryStringCollection;
+                    }
 
                     using (var stream = new MemoryStream(webClient.DownloadData(uri)))
                         xdoc.Load(stream);
