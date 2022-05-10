@@ -31,12 +31,16 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Security.Cryptography.X509Certificates;
-using System.Net.Security;
+using System.Collections.Specialized;
 using System.IO;
+using System.Net;
+using System.Net.Security;
 using System.Net.Sockets;
 using System.Security.Authentication;
+using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using ThinCLI.Properties;
 
 
 namespace ThinCLI
@@ -49,26 +53,117 @@ namespace ThinCLI
         public int Port { get; set; } = 443;
         public int BlockSize { get; set; } = 65536;
         public bool Debug { get; set; }
+        public bool NoWarnNewCertificates { get; set; }
+        public bool NoWarnCertificates { get; set; }
         public List<string> EnteredParamValues { get; } = new List<string>();
     }
 
-    public static class Transport
+    public class Transport
     {
+        private readonly Config _conf;
+        private readonly object _certificateValidationLock = new object();
+
+        public Transport(Config conf)
+        {
+            _conf = conf;
+        }
+
         // The following method is invoked by the RemoteCertificateValidationDelegate.
-        private static bool ValidateServerCertificate(
+        private bool ValidateServerCertificate(
               object sender,
               X509Certificate certificate,
               X509Chain chain,
               SslPolicyErrors sslPolicyErrors)
         {
-            // Do allow this client to communicate with unauthenticated servers.
-            return true;
+            if (sslPolicyErrors == SslPolicyErrors.None)
+                return true;
+
+            lock (_certificateValidationLock)
+            {
+                var req = (SslStream)sender;
+
+                string trustEvaluation = Messages.CERTIFICATE_NOT_TRUSTED;
+                try
+                {
+                    var cert2 = new X509Certificate2(certificate);
+                    if (new X509Chain(true).Build(cert2) || cert2.Verify())
+                        trustEvaluation = Messages.CERTIFICATE_TRUSTED;
+                }
+                catch (CryptographicException)
+                {
+                    //ignore
+                }
+
+                var knownCertificates = Settings.GetKnownServers();
+
+                string fingerprint = GetReadableFingerPrint(certificate.GetCertHashString());
+
+                bool acceptCertificate;
+
+                if (knownCertificates.ContainsKey(_conf.Hostname))
+                {
+                    var oldFingerPrint = knownCertificates[_conf.Hostname];
+                    if (oldFingerPrint == fingerprint)
+                        return true;
+
+                    acceptCertificate = _conf.NoWarnCertificates || GetUserConsent(
+                        string.Format(Messages.CERTIFICATE_CHANGED, fingerprint, oldFingerPrint, trustEvaluation));
+                }
+                else
+                {
+                    acceptCertificate =_conf.NoWarnNewCertificates || GetUserConsent(
+                        string.Format(Messages.CERTIFICATE_FOUND, fingerprint, trustEvaluation));
+                }
+
+                if (acceptCertificate)
+                {
+                    knownCertificates[_conf.Hostname] = fingerprint;
+                    Settings.SetKnownServers(knownCertificates);
+                    Settings.TrySaveSettings(_conf);
+                }
+
+                return acceptCertificate;
+            }
+        }
+
+        private static string GetReadableFingerPrint(string fingerprint)
+        {
+            var readable = new List<char>();
+
+            for (int i = 0; i < fingerprint.Length; i++)
+            {
+                readable.Add(fingerprint[i]);
+
+                if (i % 2 != 0 && i != fingerprint.Length - 1)
+                    readable.Add(':');
+            }
+
+            return new string(readable.ToArray());
+        }
+
+        private bool GetUserConsent(string prompt)
+        {
+            Console.WriteLine(prompt);
+
+            do
+            {
+                var key = Console.ReadKey(true);
+                switch (key.KeyChar)
+                {
+                    case 'y':
+                    case 'Y':
+                        return true;
+                    case 'n':
+                    case 'N':
+                        return false;
+                }
+            } while (true);
         }
 
         /// <summary>
         /// Create an SSL stream that will close the client's stream.
         /// </summary>
-        public static Stream Connect(TcpClient client, int port)
+        public Stream Connect(TcpClient client, int port)
         {
             if (port != 443)
                 return client.GetStream();
@@ -81,11 +176,7 @@ namespace ThinCLI
             }
             catch (AuthenticationException ae)
             {
-                throw new ThinCliProtocolError("Authentication failed - closing the connection.", innerException: ae);
-            }
-            catch (Exception ex)
-            {
-                throw new ThinCliProtocolError("Exception during SSL auth - closing the connection.", innerException: ex);
+                throw new ThinCliProtocolError(ae.Message);
             }
         }
     }
@@ -125,7 +216,8 @@ namespace ThinCLI
 
         public static Stream DoRPC(TcpClient client, string method, Uri uri, Config conf, params string[] headers)
         {
-            Stream http = Transport.Connect(client, uri.Port);
+            var transport = new Transport(conf);
+            Stream http = transport.Connect(client, uri.Port);
 
             var startLine = $"{method} {uri.PathAndQuery} HTTP/1.0";
             writeLine(http, startLine);
@@ -233,7 +325,7 @@ namespace ThinCLI
 	    }
     }
 
-    public static class Messages
+    public static class Marshalling
     {
         private const string MAGIC_STRING = "XenSource thin CLI protocol";
         private const int CLI_PROTOCOL_MAJOR = 0;
@@ -414,8 +506,9 @@ namespace ThinCLI
         {
             try
             {
+                var transport = new Transport(conf);
                 using (var client = new TcpClient(conf.Hostname, conf.Port))
-                using (var stream = Transport.Connect(client, conf.Port))
+                using (var stream = transport.Connect(client, conf.Port))
                 {
                     if (stream == null)
                         throw new ThinCliProtocolError($"Connection to {conf.Hostname}:{conf.Port} failed.");
@@ -427,9 +520,9 @@ namespace ThinCLI
                     Interpreter(stream, conf);
                 }
             }
-            catch (SocketException se)
+            catch (SocketException)
             {
-                throw new ThinCliProtocolError($"Connection to {conf.Hostname}:{conf.Port} refused.", innerException: se);
+                throw new ThinCliProtocolError($"Connection to {conf.Hostname}:{conf.Port} refused.");
             }
         }
 

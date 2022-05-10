@@ -32,6 +32,7 @@
 using System;
 using System.Reflection;
 using System.Text;
+using ThinCLI.Properties;
 
 
 namespace ThinCLI
@@ -71,6 +72,14 @@ namespace ThinCLI
                     {
                         conf.Debug = true;
                     }
+                    else if (s.Equals("-no-warn-new-certificates"))
+                    {
+                        conf.NoWarnNewCertificates = true;
+                    }
+                    else if (s.Equals("-no-warn-certificates"))
+                    {
+                        conf.NoWarnCertificates = true;
+                    }
                     else if (s.Equals("-version"))
                     {
                         Console.WriteLine(Version.ToString());
@@ -97,6 +106,8 @@ namespace ThinCLI
                 }
             }
 
+            Settings.UpgradeFromPreviousVersion(conf);
+
             if (string.IsNullOrEmpty(conf.Hostname))
             {
                 Logger.Error("No hostname was specified.");
@@ -120,12 +131,12 @@ namespace ThinCLI
 
             try
             {
-                Messages.PerformCommand(command, conf);
+                Marshalling.PerformCommand(command, conf);
             }
             catch (ThinCliProtocolError tcpEx)
             {
                 Logger.Error(tcpEx.Message);
-                Logger.Debug(tcpEx.InnerException, conf);
+                Logger.Debug(tcpEx, conf);
                 Environment.Exit(tcpEx.ExitCode);
             }
             catch (Exception ex)
@@ -172,6 +183,11 @@ namespace ThinCLI
             Console.WriteLine("Error: " + x);
         }
 
+        internal static void Warn(string x)
+        {
+            Console.WriteLine("Warning: " + x);
+        }
+
         internal static void Info(string x)
         {
             Console.WriteLine(x);
@@ -180,8 +196,8 @@ namespace ThinCLI
 
     internal class ThinCliProtocolError : Exception
     {
-        public ThinCliProtocolError(string msg = null, int exitCode = 1, Exception innerException = null)
-            : base(msg, innerException)
+        public ThinCliProtocolError(string msg = null, int exitCode = 1)
+            : base(msg)
         {
             ExitCode = exitCode;
         }
