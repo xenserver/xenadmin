@@ -109,7 +109,7 @@ namespace XenAdmin.Actions.Updates
                     if (!string.IsNullOrEmpty(_authToken))
                     {
                         NameValueCollection myQueryStringCollection = new NameValueCollection();
-                        myQueryStringCollection.Add("burritoToken", _authToken);
+                        myQueryStringCollection.Add("InternalStageAuthToken", _authToken);
                         _client.QueryString = myQueryStringCollection;
                     }
                     _client.DownloadFileAsync(_address, _outputPathAndFileName);
