@@ -43,13 +43,13 @@ namespace ThinCLI
 {
     public class Config
     {
-        public string hostname = ""; // no default hostname
-        public string username = "root";
-        public string password = "";
-        public int port = 443;
-        public int block_size = 65536;
-        public bool debug = false;
-        public List<string> EnteredParamValues = new List<string>();
+        public string Hostname { get; set; } // no default hostname
+        public string Username { get; set; }
+        public string Password { get; set; } = string.Empty;
+        public int Port { get; set; } = 443;
+        public int BlockSize { get; set; } = 65536;
+        public bool Debug { get; set; }
+        public List<string> EnteredParamValues { get; } = new List<string>();
     }
 
     public static class Transport
@@ -83,7 +83,7 @@ namespace ThinCLI
             }
             catch (AuthenticationException)
             {
-                if (conf.debug)
+                if (conf.Debug)
                     throw;
                 Logger.Error("Authentication failed - closing the connection.");
                 client.Close();
@@ -91,7 +91,7 @@ namespace ThinCLI
             }
             catch
             {
-                if (conf.debug)
+                if (conf.Debug)
                     throw;
                 Logger.Error("Exception during SSL auth - closing the connection.");
                 client.Close();
@@ -163,7 +163,7 @@ namespace ThinCLI
                     }
 
                     Uri redirect = new Uri(url.Trim());
-                    conf.hostname = redirect.Host;
+                    conf.Hostname = redirect.Host;
                     http.Close();
                     http.Dispose();
                     return DoRPC(client, method, redirect, conf, headers);
@@ -291,7 +291,7 @@ namespace ThinCLI
                     MarshalTag(stream, Tag.Chunk);
                     Types.marshal_int32(stream, (uint)fi.Length);
 
-                    byte[] block = new byte[conf.block_size];
+                    byte[] block = new byte[conf.BlockSize];
                     while (true)
                     {
                         int n = fs.Read(block, 0, block.Length);
@@ -330,7 +330,7 @@ namespace ThinCLI
                             MarshalResponse(stream, Tag.Failed);
                             return;
                         }
-                        byte[] block = new byte[conf.block_size];
+                        byte[] block = new byte[conf.BlockSize];
                         while (true)
                         {
                             int n = fs.Read(block, 0, block.Length);
@@ -371,7 +371,7 @@ namespace ThinCLI
                             MarshalResponse(stream, Tag.Failed);
                             return;
                         }
-                        byte[] block = new byte[conf.block_size];
+                        byte[] block = new byte[conf.BlockSize];
                         while (true)
                         {
                             int n = http.Read(block, 0, block.Length);
@@ -399,7 +399,7 @@ namespace ThinCLI
             {
                 if (magic[i] != MAGIC_STRING[i])
                 {
-                    Logger.Error($"Failed to find a server on {conf.hostname}:{conf.port}");
+                    Logger.Error($"Failed to find a server on {conf.Hostname}:{conf.Port}");
                     Logger.Usage();
                     Environment.Exit(1);
                 }
@@ -414,7 +414,7 @@ namespace ThinCLI
 
             if (CLI_PROTOCOL_MAJOR != remoteMajor || CLI_PROTOCOL_MINOR != remoteMinor)
             {
-                Logger.Error($"Protocol version mismatch talking to server on {conf.hostname}:{conf.port}");
+                Logger.Error($"Protocol version mismatch talking to server on {conf.Hostname}:{conf.Port}");
                 Logger.Usage();
                 Environment.Exit(1);
             }
@@ -430,8 +430,8 @@ namespace ThinCLI
         public static void PerformCommand(string Body, Config conf)
         {
             string body = Body;
-            body += "username=" + conf.username + "\n";
-            body += "password=" + conf.password + "\n";
+            body += "username=" + conf.Username + "\n";
+            body += "password=" + conf.Password + "\n";
             if (body.Length != 0)
             {
                 body = body.Substring(0, body.Length - 1); // strip last "\n"
@@ -446,8 +446,8 @@ namespace ThinCLI
 
             try
             {
-                client = new TcpClient(conf.hostname, conf.port);
-                stream = Transport.Connect(client, conf, conf.port);
+                client = new TcpClient(conf.Hostname, conf.Port);
+                stream = Transport.Connect(client, conf, conf.Port);
 
                 if (stream == null)
                 {
@@ -464,12 +464,12 @@ namespace ThinCLI
             }
             catch (SocketException)
             {
-                Logger.Error($"Connection to {conf.hostname}:{conf.port} refused.");
+                Logger.Error($"Connection to {conf.Hostname}:{conf.Port} refused.");
                 Environment.Exit(1);
             }
             catch (Exception e)
             {
-                if (conf.debug)
+                if (conf.Debug)
                     throw;
                 Logger.Error("Caught exception: " + e.Message);
                 Environment.Exit(1);
@@ -637,8 +637,8 @@ namespace ThinCLI
                 string[] bits = path.Split('?');
                 UriBuilder uriBuilder = new UriBuilder();
                 uriBuilder.Scheme = "https";
-                uriBuilder.Host = conf.hostname;
-                uriBuilder.Port = conf.port;
+                uriBuilder.Host = conf.Hostname;
+                uriBuilder.Port = conf.Port;
                 uriBuilder.Path = bits[0];
                 if (bits.Length > 1)
                     uriBuilder.Query = bits[1];

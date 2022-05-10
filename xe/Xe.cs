@@ -54,23 +54,23 @@ namespace ThinCLI
                 {
                     if (s.Equals("-s"))
                     {
-                        conf.hostname = args[++i];
+                        conf.Hostname = args[++i];
                     }
                     else if (s.Equals("-u"))
                     {
-                        conf.username = args[++i];
+                        conf.Username = args[++i];
                     }
                     else if (s.Equals("-pw"))
                     {
-                        conf.password = args[++i];
+                        conf.Password = args[++i];
                     }
                     else if (s.Equals("-p"))
                     {
-                        conf.port = int.Parse(args[++i]);
+                        conf.Port = int.Parse(args[++i]);
                     }
                     else if (s.Equals("-debug"))
                     {
-                        conf.debug = true;
+                        conf.Debug = true;
                     }
                     else if (s.Equals("-version"))
                     {
@@ -98,9 +98,16 @@ namespace ThinCLI
                 }
             }
 
-            if (conf.hostname.Equals(""))
+            if (string.IsNullOrEmpty(conf.Hostname))
             {
                 Logger.Error("No hostname was specified.");
+                Logger.Usage();
+                Environment.Exit(1);
+            }
+
+            if (string.IsNullOrEmpty(conf.Username))
+            {
+                Logger.Error("No username was specified.");
                 Logger.Usage();
                 Environment.Exit(1);
             }
@@ -129,7 +136,7 @@ namespace ThinCLI
 
         internal static void Debug(string msg, Config conf)
         {
-            if (conf.debug)
+            if (conf.Debug)
                 Console.WriteLine("Debug: " + msg);
         }
 
