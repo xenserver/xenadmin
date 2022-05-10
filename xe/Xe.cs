@@ -45,7 +45,6 @@ namespace ThinCLI
             var conf = new Config();
 
             string body = "";
-            char[] eqsep = {'='};
 
             for (int i = 0; i < args.Length; i++)
             {
@@ -75,17 +74,17 @@ namespace ThinCLI
                     else if (s.Equals("-version"))
                     {
                         Console.WriteLine(Version.ToString());
-                        Environment.Exit(0);
+                        return;
                     }
                     else if (s.Equals("-help") || s.Equals("/?"))
                     {
                         Logger.Usage();
-                        Environment.Exit(0);
+                        return;
                     }
                     else
                     {
                         if (s.Contains("="))
-                            conf.EnteredParamValues.Add(s.Split(eqsep)[1]);
+                            conf.EnteredParamValues.Add(s.Split('=')[1]);
 
                         body += s + "\n";
                     }
@@ -112,7 +111,29 @@ namespace ThinCLI
                 Environment.Exit(1);
             }
 
-            Messages.PerformCommand(body, conf);
+            body += $"username={conf.Username}\n";
+            body += $"password={conf.Password}";//do not add a line break after the last string
+
+            var command = "POST /cli HTTP/1.0\r\n" +
+                          $"content-length: {Encoding.UTF8.GetBytes(body).Length}\r\n\r\n" +
+                          body;
+
+            try
+            {
+                Messages.PerformCommand(command, conf);
+            }
+            catch (ThinCliProtocolError tcpEx)
+            {
+                Logger.Error(tcpEx.Message);
+                Logger.Debug(tcpEx.InnerException, conf);
+                Environment.Exit(tcpEx.ExitCode);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex.Message);
+                Logger.Debug(ex, conf);
+                Environment.Exit(1);
+            }
         }
     }
 
@@ -140,6 +161,12 @@ namespace ThinCLI
                 Console.WriteLine("Debug: " + msg);
         }
 
+        internal static void Debug(Exception ex, Config conf)
+        {
+            if (conf.Debug && ex != null)
+                Console.WriteLine("Debug: " + ex.StackTrace);
+        }
+
         internal static void Error(string x)
         {
             Console.WriteLine("Error: " + x);
@@ -149,5 +176,16 @@ namespace ThinCLI
         {
             Console.WriteLine(x);
         }
+    }
+
+    internal class ThinCliProtocolError : Exception
+    {
+        public ThinCliProtocolError(string msg = null, int exitCode = 1, Exception innerException = null)
+            : base(msg, innerException)
+        {
+            ExitCode = exitCode;
+        }
+
+        public int ExitCode { get; }
     }
 }

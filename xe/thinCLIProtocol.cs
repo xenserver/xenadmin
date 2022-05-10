@@ -68,7 +68,7 @@ namespace ThinCLI
         /// <summary>
         /// Create an SSL stream that will close the client's stream.
         /// </summary>
-        public static Stream Connect(TcpClient client, Config conf, int port)
+        public static Stream Connect(TcpClient client, int port)
         {
             if (port != 443)
                 return client.GetStream();
@@ -76,26 +76,16 @@ namespace ThinCLI
             try
             {
                 var sslStream = new SslStream(client.GetStream(), false, ValidateServerCertificate, null);
-
                 sslStream.AuthenticateAsClient("", null, SslProtocols.Tls | SslProtocols.Tls11 | SslProtocols.Tls12, true);
-
                 return sslStream;
             }
-            catch (AuthenticationException)
+            catch (AuthenticationException ae)
             {
-                if (conf.Debug)
-                    throw;
-                Logger.Error("Authentication failed - closing the connection.");
-                client.Close();
-                return null;
+                throw new ThinCliProtocolError("Authentication failed - closing the connection.", innerException: ae);
             }
-            catch
+            catch (Exception ex)
             {
-                if (conf.Debug)
-                    throw;
-                Logger.Error("Exception during SSL auth - closing the connection.");
-                client.Close();
-                return null;
+                throw new ThinCliProtocolError("Exception during SSL auth - closing the connection.", innerException: ex);
             }
         }
     }
@@ -135,7 +125,7 @@ namespace ThinCLI
 
         public static Stream DoRPC(TcpClient client, string method, Uri uri, Config conf, params string[] headers)
         {
-            Stream http = Transport.Connect(client, conf, uri.Port);
+            Stream http = Transport.Connect(client, uri.Port);
 
             var startLine = $"{method} {uri.PathAndQuery} HTTP/1.0";
             writeLine(http, startLine);
@@ -349,6 +339,7 @@ namespace ThinCLI
             catch (Exception e)
             {
                 Logger.Error($"Received exception: {e.Message}");
+                Logger.Debug(e, conf);
                 MarshalResponse(stream, Tag.Failed);
             }
         }
@@ -398,11 +389,7 @@ namespace ThinCLI
             for (int i = 0; i < MAGIC_STRING.Length; i++)
             {
                 if (magic[i] != MAGIC_STRING[i])
-                {
-                    Logger.Error($"Failed to find a server on {conf.Hostname}:{conf.Port}");
-                    Logger.Usage();
-                    Environment.Exit(1);
-                }
+                    throw new ThinCliProtocolError($"Failed to find a server on {conf.Hostname}:{conf.Port}");
             }
 
             // Read the remote version numbers
@@ -413,11 +400,7 @@ namespace ThinCLI
             Logger.Debug($"Client expects version {CLI_PROTOCOL_MAJOR}.{CLI_PROTOCOL_MINOR}", conf);
 
             if (CLI_PROTOCOL_MAJOR != remoteMajor || CLI_PROTOCOL_MINOR != remoteMinor)
-            {
-                Logger.Error($"Protocol version mismatch talking to server on {conf.Hostname}:{conf.Port}");
-                Logger.Usage();
-                Environment.Exit(1);
-            }
+                throw new ThinCliProtocolError($"Protocol version mismatch talking to server on {conf.Hostname}:{conf.Port}");
 
             // Tell the server our version numbers
             foreach (var t in MAGIC_STRING)
@@ -427,66 +410,26 @@ namespace ThinCLI
             Types.marshal_int(stream, CLI_PROTOCOL_MINOR);
         }
 
-        public static void PerformCommand(string Body, Config conf)
+        public static void PerformCommand(string command, Config conf)
         {
-            string body = Body;
-            body += "username=" + conf.Username + "\n";
-            body += "password=" + conf.Password + "\n";
-            if (body.Length != 0)
-            {
-                body = body.Substring(0, body.Length - 1); // strip last "\n"
-            }
-
-            string header = "POST /cli HTTP/1.0\r\n";
-            string content_length = "content-length: " + Encoding.UTF8.GetBytes(body).Length + "\r\n";
-            string tosend = header + content_length + "\r\n" + body;
-
-            TcpClient client = null;
-            Stream stream = null;
-
             try
             {
-                client = new TcpClient(conf.Hostname, conf.Port);
-                stream = Transport.Connect(client, conf, conf.Port);
-
-                if (stream == null)
+                using (var client = new TcpClient(conf.Hostname, conf.Port))
+                using (var stream = Transport.Connect(client, conf.Port))
                 {
-                    // The SSL functions already tell us what happened
-                    Environment.Exit(1);
-                    return;
-                }
+                    if (stream == null)
+                        throw new ThinCliProtocolError($"Connection to {conf.Hostname}:{conf.Port} failed.");
 
-                byte[] message = Encoding.UTF8.GetBytes(tosend);
-                stream.Write(message, 0, message.Length);
-                stream.Flush();
-                VersionHandshake(stream, conf);
-                Interpreter(stream, conf);
-            }
-            catch (SocketException)
-            {
-                Logger.Error($"Connection to {conf.Hostname}:{conf.Port} refused.");
-                Environment.Exit(1);
-            }
-            catch (Exception e)
-            {
-                if (conf.Debug)
-                    throw;
-                Logger.Error("Caught exception: " + e.Message);
-                Environment.Exit(1);
-            }
-            finally
-            {
-                if (stream != null)
-                {
-                    stream.Close();
-                    stream.Dispose();
+                    byte[] message = Encoding.UTF8.GetBytes(command);
+                    stream.Write(message, 0, message.Length);
+                    stream.Flush();
+                    VersionHandshake(stream, conf);
+                    Interpreter(stream, conf);
                 }
-
-                if (client != null)
-                {
-                    client.Close();
-                    client.Dispose();
-                }
+            }
+            catch (SocketException se)
+            {
+                throw new ThinCliProtocolError($"Connection to {conf.Hostname}:{conf.Port} refused.", innerException: se);
             }
         }
 
@@ -545,28 +488,29 @@ namespace ThinCLI
                         {
                             case Tag.Print:
                                 msg = Types.unmarshal_string(stream);
-                                Logger.Debug("Read: Print: " + msg, conf);
+                                Logger.Debug("Read: Print: ", conf);
                                 Logger.Info(msg);
                                 break;
                             case Tag.PrintStderr:
                                 msg = Types.unmarshal_string(stream);
-                                Logger.Debug("Read: PrintStderr: " + msg, conf);
+                                Logger.Debug("Read: PrintStderr: ", conf);
                                 Logger.Info(msg); 
                                 break;
                             case Tag.Debug:
                                 msg = Types.unmarshal_string(stream);
-                                Logger.Debug("Read: Debug: " + msg, conf);
+                                Logger.Debug("Read: Debug: ", conf);
                                 Logger.Info(msg);
                                 break;
                             case Tag.Exit:
                                 int code = Types.unmarshal_int(stream);
                                 Logger.Debug("Read: Command Exit " + code, conf);
-                                Environment.Exit(code);
-                                break;
+                                if (code == 0)
+                                    return;//exit
+                                throw new ThinCliProtocolError($"Command Exit {code}", code);
                             case Tag.Error:
                                 Logger.Debug("Read: Command Error", conf);
-                                string err_code = Types.unmarshal_string(stream);
-                                Logger.Info("Error code: " + err_code);
+                                string errCode = Types.unmarshal_string(stream);
+                                Logger.Info("Error code: " + errCode);
                                 var paramList = new List<string>();
                                 int length = Types.unmarshal_int(stream);
                                 for (int i = 0; i < length; i++)
@@ -579,7 +523,7 @@ namespace ThinCLI
                             case Tag.Prompt:
                                 Logger.Debug("Read: Command Prompt", conf);
                                 string response = Console.ReadLine();
-                                Logger.Info("Read "+response);
+                                Logger.Info("Read " + response);
                                 /* NB, 4+4+4 here for the blob, chunk and string length, put in by the marshal_string
                                  function. A franken-marshal. */
                                 Types.marshal_int(stream, 4 + 4 + 4); // length
@@ -613,15 +557,11 @@ namespace ThinCLI
                                 HttpGet(stream, filename, uri, conf);
                                 break;
                             default:
-                                Logger.Error("Protocol failure: Reading Command: unexpected tag: " + t);
-                                Environment.Exit(1);
-                                break;
+                                throw new ThinCliProtocolError("Protocol failure: Reading Command: unexpected tag: " + t);
                         }
                         break;
                     default:
-                        Logger.Error("Protocol failure: Reading Message: unexpected tag: " + t);
-                        Environment.Exit(1);
-                        break;
+                        throw new ThinCliProtocolError("Protocol failure: Reading Message: unexpected tag: " + t);
                 }
             }
         }
