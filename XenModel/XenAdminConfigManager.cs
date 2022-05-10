@@ -65,5 +65,6 @@ namespace XenAdmin
         string GetXenCenterMetadata(bool isForXenCenter);
         string GetCustomUpdatesXmlLocation();
         string GetInternalStageAuthToken();
+        string GetInternalStageAuthTokenName();
     }
 }

@@ -109,7 +109,7 @@ namespace XenAdmin.Actions.Updates
                     if (!string.IsNullOrEmpty(_authToken))
                     {
                         NameValueCollection myQueryStringCollection = new NameValueCollection();
-                        myQueryStringCollection.Add("InternalStageAuthToken", _authToken);
+                        myQueryStringCollection.Add(XenAdminConfigManager.Provider.GetInternalStageAuthTokenName(), _authToken);
                         _client.QueryString = myQueryStringCollection;
                     }
                     _client.DownloadFileAsync(_address, _outputPathAndFileName);

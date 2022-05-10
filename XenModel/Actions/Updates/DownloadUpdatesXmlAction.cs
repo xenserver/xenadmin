@@ -342,7 +342,7 @@ namespace XenAdmin.Actions
                     if (!string.IsNullOrEmpty(authToken))
                     {
                         NameValueCollection myQueryStringCollection = new NameValueCollection();
-                        myQueryStringCollection.Add("InternalStageAuthToken", authToken);
+                        myQueryStringCollection.Add(XenAdminConfigManager.Provider.GetInternalStageAuthTokenName(), authToken);
                         webClient.QueryString = myQueryStringCollection;
                     }
 
