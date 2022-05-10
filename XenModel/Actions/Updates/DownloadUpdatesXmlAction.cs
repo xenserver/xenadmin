@@ -342,7 +342,7 @@ namespace XenAdmin.Actions
                     if (!string.IsNullOrEmpty(authToken))
                     {
                         NameValueCollection myQueryStringCollection = new NameValueCollection();
-                        myQueryStringCollection.Add("burritoToken", authToken);
+                        myQueryStringCollection.Add("InternalStageAuthToken", authToken);
                         webClient.QueryString = myQueryStringCollection;
                     }
 
