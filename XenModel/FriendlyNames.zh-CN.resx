@@ -1689,7 +1689,7 @@
     <value>VM 网络接口 QoS 失败</value>
   </data>
   <data name="Message.name-vm_checkpointed" xml:space="preserve">
-    <value>已创建虚拟机的检查点</value>
+    <value>已创建虚拟机的磁盘和内存的快照</value>
   </data>
   <data name="Message.name-vm_cloned" xml:space="preserve">
     <value>VM 已克隆</value>
@@ -1716,10 +1716,10 @@
     <value>VM 已关闭</value>
   </data>
   <data name="Message.name-vm_snapshot_reverted" xml:space="preserve">
-    <value>已还原虚拟机的快照</value>
+    <value>虚拟机已还原为快照</value>
   </data>
   <data name="Message.name-vm_snapshotted" xml:space="preserve">
-    <value>已创建虚拟机的快照</value>
+    <value>已创建虚拟机的磁盘的快照</value>
   </data>
   <data name="Message.name-vm_started" xml:space="preserve">
     <value>VM 已启动</value>
