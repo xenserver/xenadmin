@@ -823,18 +823,18 @@ namespace XenAdmin.TabPages
                 items.Add(downloadNewXenCenter);
             }
 
-            if (!string.IsNullOrEmpty(alert.WebPageLabel))
-            {
-                var fix = new ToolStripMenuItem(alert.FixLinkText) {ToolTipText = alert.WebPageLabel};
-                fix.Click += ToolStripMenuItemGoToWebPage_Click;
-                items.Add(fix);
-            }
-
             if (alert is ClientUpdateAlert)
             {
                 var download = new ToolStripMenuItem(Messages.UPDATES_DOWNLOAD_AND_INSTALL);
                 download.Click += ToolStripMenuItemDownloadInstall_Click;
                 items.Add(download);
+            }
+
+            if (!string.IsNullOrEmpty(alert.WebPageLabel))
+            {
+                var fix = new ToolStripMenuItem(alert.FixLinkText) {ToolTipText = alert.WebPageLabel};
+                fix.Click += ToolStripMenuItemGoToWebPage_Click;
+                items.Add(fix);
             }
 
             if (items.Count > 0)

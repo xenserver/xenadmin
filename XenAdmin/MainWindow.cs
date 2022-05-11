@@ -251,6 +251,7 @@ namespace XenAdmin
             xenCenterPluginsOnlineToolStripMenuItem.Text = string.Format(xenCenterPluginsOnlineToolStripMenuItem.Text, BrandManager.BrandConsole);
             aboutXenSourceAdminToolStripMenuItem.Text = string.Format(aboutXenSourceAdminToolStripMenuItem.Text, BrandManager.BrandConsole);
             templatesToolStripMenuItem1.Text = string.Format(templatesToolStripMenuItem1.Text, BrandManager.ProductBrand);
+            updateClientToolStripMenuItem.Text = string.Format(updateClientToolStripMenuItem.Text, BrandManager.BrandConsole);
 
             toolStripSeparator7.Visible = xenSourceOnTheWebToolStripMenuItem.Visible = xenCenterPluginsOnlineToolStripMenuItem.Visible = !HiddenFeatures.ToolStripMenuItemHidden;
             healthCheckToolStripMenuItem1.Visible = !HiddenFeatures.HealthCheckHidden && (Registry.GetBrandOverride() == "XenCenter" || BrandManager.BrandConsole == "XenCenter");
@@ -2669,8 +2670,7 @@ namespace XenAdmin
                     statusLabelUpdates.Text = string.Format(Messages.NOTIFICATIONS_SUBMODE_UPDATES_STATUS, updatesCount);
                     statusLabelUpdates.Visible = updatesCount > 0;
 
-                    updateAlert = Updates.UpdateAlerts.FirstOrDefault(update => update is ClientUpdateAlert) as ClientUpdateAlert;
-                    updateClientToolStripMenuItem.Visible = updateAlert != null;
+                    SetUpdateAlert();
 
                     if (updatesPage.Visible)
                     {
@@ -2682,11 +2682,15 @@ namespace XenAdmin
 
         private void UpdatesCheck_Completed(bool succeeded, string err)
         {
-            Program.Invoke(this, () =>
-            {
-                updateAlert = Updates.UpdateAlerts.FirstOrDefault(update => update is ClientUpdateAlert) as ClientUpdateAlert;
-                updateClientToolStripMenuItem.Visible = updateAlert != null;
-            });            
+            Program.Invoke(this, SetUpdateAlert);            
+        }
+
+        private void SetUpdateAlert()
+        {
+            updateAlert = Updates.UpdateAlerts.FirstOrDefault(update => update is ClientUpdateAlert) as ClientUpdateAlert;
+            if (updateAlert != null)
+                relNotesToolStripMenuItem.Text = string.Format(relNotesToolStripMenuItem.Text, updateAlert.NewVersion.Version);
+            updateClientToolStripMenuItem.Visible = updateAlert != null;
         }
 
         private void UpdatesCheck_Started()
@@ -3346,10 +3350,10 @@ namespace XenAdmin
             navigationPane.SwitchToNotificationsView(NotificationsSubMode.Events);
         }
 
-        private void dismissToolStripMenuItem_Click(object sender, EventArgs e)
+        private void relNotesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Program.Invoke(this, () => { updateClientToolStripMenuItem.Visible = false; });
-            updateAlert?.Dismiss();
+            if (updateAlert != null)
+                Program.OpenURL(updateAlert.WebPageLabel);
         }
 
         private void downloadInstallToolStripMenuItem_Click(object sender, EventArgs e)

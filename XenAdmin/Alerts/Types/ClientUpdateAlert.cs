@@ -47,8 +47,6 @@ namespace XenAdmin.Alerts
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private static int DISMISSED_XC_VERSIONS_LIMIT = 5;
-
         public readonly ClientVersion NewVersion;
 
         public ClientUpdateAlert(ClientVersion version)
@@ -60,21 +58,21 @@ namespace XenAdmin.Alerts
 
         public override AlertPriority Priority => AlertPriority.Priority5;
 
-        public override string WebPageLabel => InvisibleMessages.DOCS_URL + BrandManager.HelpPath;
+        public override string WebPageLabel => InvisibleMessages.RELEASE_NOTES_URL;
 
         public override string Name => NewVersion.Name;
 
         public override string Title => string.Format(Messages.ALERT_NEW_VERSION, NewVersion.Name);
 
-        public override string Description => string.Format(Messages.ALERT_NEW_VERSION_DETAILS,
-            NewVersion.Name, BrandManager.CompanyNameShort);
+        public override string Description => string.Format(Messages.ALERT_NEW_VERSION_DETAILS_CLIENT,
+            NewVersion.Name);
 
         public override Action FixLinkAction
         {
             get { return () => Program.OpenURL(WebPageLabel); }
         }
 
-        public override string FixLinkText => Messages.ALERT_NEW_VERSION_DOWNLOAD;
+        public override string FixLinkText => string.Format(Messages.ALERT_NEW_VERSION_DOWNLOAD_CLIENT, NewVersion.Version);
 
         public override string AppliesTo => BrandManager.BrandConsole;
 
@@ -82,23 +80,14 @@ namespace XenAdmin.Alerts
 
         public string Checksum { get; }
 
-        public override void Dismiss()
+        public override bool AllowedToDismiss()
         {
-            List<string> current = new List<string>(Properties.Settings.Default.LatestXenCenterSeen.Split(','));
-            if (current.Contains(NewVersion.VersionAndLang))
-                return;
-            if (current.Count >= DISMISSED_XC_VERSIONS_LIMIT)
-                current.RemoveRange(0, current.Count - DISMISSED_XC_VERSIONS_LIMIT + 1);
-            current.Add(NewVersion.VersionAndLang);
-            Properties.Settings.Default.LatestXenCenterSeen = string.Join(",", current.ToArray());
-            Settings.TrySaveSettings();
-            Updates.RemoveUpdate(this);
+            return false;
         }
 
-        public override bool IsDismissed()
+        public override void Dismiss()
         {
-            List<string> current = new List<string>(Properties.Settings.Default.LatestXenCenterSeen.Split(','));
-            return current.Contains(NewVersion.VersionAndLang);
+            //do not dismiss this alert
         }
 
         public override bool Equals(Alert other)

@@ -196,6 +196,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to https://docs.citrix.com/en-us/citrix-hypervisor/citrix-hypervisor-center/whats-new.
+        /// </summary>
+        public static string RELEASE_NOTES_URL {
+            get {
+                return ResourceManager.GetString("RELEASE_NOTES_URL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to https://www.citrix.com/products/citrix-hypervisor/get-started.html.
         /// </summary>
         public static string UPSELL_LEARNMOREURL_TRIAL {
