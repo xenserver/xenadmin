@@ -1924,8 +1924,14 @@ Note that if RBAC is enabled, only alerts which you have privileges to dismiss w
   <data name="ALERT_NEW_VERSION_DETAILS" xml:space="preserve">
     <value>{0} is now available. Download the new version from the {1} website.</value>
   </data>
+  <data name="ALERT_NEW_VERSION_DETAILS_CLIENT" xml:space="preserve">
+    <value>{0} is now available. Click Download and Install to proceed with the update.</value>
+  </data>
   <data name="ALERT_NEW_VERSION_DOWNLOAD" xml:space="preserve">
     <value>Go to Web Page</value>
+  </data>
+  <data name="ALERT_NEW_VERSION_DOWNLOAD_CLIENT" xml:space="preserve">
+    <value>v{0} Release Notes</value>
   </data>
   <data name="ALERT_SR_PHYSICAL_UTILISATION_SUB_TEXT" xml:space="preserve">
     <value>When SR physical utilization exceeds {0} for {1} min(s)</value>

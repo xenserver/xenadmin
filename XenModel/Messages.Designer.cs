@@ -5252,11 +5252,29 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} is now available. Click Download and Install to proceed with the update..
+        /// </summary>
+        public static string ALERT_NEW_VERSION_DETAILS_CLIENT {
+            get {
+                return ResourceManager.GetString("ALERT_NEW_VERSION_DETAILS_CLIENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Go to Web Page.
         /// </summary>
         public static string ALERT_NEW_VERSION_DOWNLOAD {
             get {
                 return ResourceManager.GetString("ALERT_NEW_VERSION_DOWNLOAD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to v{0} Release Notes.
+        /// </summary>
+        public static string ALERT_NEW_VERSION_DOWNLOAD_CLIENT {
+            get {
+                return ResourceManager.GetString("ALERT_NEW_VERSION_DOWNLOAD_CLIENT", resourceCulture);
             }
         }
         

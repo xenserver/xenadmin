@@ -162,6 +162,9 @@
   <data name="PV_GUESTS_CHECK_URL" xml:space="preserve">
     <value>https://docs.citrix.com/en-us/citrix-hypervisor/system-requirements/guest-os-support.html</value>
   </data>
+  <data name="RELEASE_NOTES_URL" xml:space="preserve">
+    <value>https://docs.citrix.com/en-us/citrix-hypervisor/citrix-hypervisor-center/whats-new</value>
+  </data>
   <data name="UPSELL_LEARNMOREURL_TRIAL" xml:space="preserve">
     <value>https://www.citrix.com/products/citrix-hypervisor/get-started.html</value>
   </data>
