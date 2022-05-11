@@ -300,9 +300,6 @@
   <data name="ACTION_DISABLE_IGMP_SNOOPING" xml:space="preserve">
     <value>禁用 IGMP 监听</value>
   </data>
-  <data name="ACTION_DISABLE_LIVE_PATCHING" xml:space="preserve">
-    <value>禁用实时修补</value>
-  </data>
   <data name="ACTION_DISABLE_PVS_READ_CACHING" xml:space="preserve">
     <value>禁用 PVS 加速器</value>
   </data>
@@ -326,9 +323,6 @@
   </data>
   <data name="ACTION_DISABLING_CHANGED_BLOCK_TRACKING" xml:space="preserve">
     <value>正在对选定 VM 禁用更改块跟踪</value>
-  </data>
-  <data name="ACTION_DISABLING_LIVE_PATCHING" xml:space="preserve">
-    <value>对“{0}”禁用实时修补</value>
   </data>
   <data name="ACTION_DISABLING_PVS_READ_CACHING" xml:space="preserve">
     <value>正在对选定 VM 禁用 PVS 加速器</value>
@@ -435,9 +429,6 @@
   <data name="ACTION_ENABLE_IGMP_SNOOPING" xml:space="preserve">
     <value>启用 IGMP 监听</value>
   </data>
-  <data name="ACTION_ENABLE_LIVE_PATCHING" xml:space="preserve">
-    <value>启用实时修补</value>
-  </data>
   <data name="ACTION_ENABLE_PVS_READ_CACHING" xml:space="preserve">
     <value>启用 PVS 加速器</value>
   </data>
@@ -463,9 +454,6 @@
     <value>无法启用指标“{0}”。
 
 这可能是因为数据源未生成任何数据。请先确保满足收集此指标的必备条件，然后再尝试将其启用。</value>
-  </data>
-  <data name="ACTION_ENABLING_LIVE_PATCHING" xml:space="preserve">
-    <value>对“{0}”启用实时修补</value>
   </data>
   <data name="ACTION_ENABLING_PVS_READ_CACHING" xml:space="preserve">
     <value>正在对选定 VM 启用 PVS 加速器</value>
@@ -2762,12 +2750,6 @@
   <data name="CHANGE_VMSS_POLICY" xml:space="preserve">
     <value>将 VM 分配至快照计划</value>
   </data>
-  <data name="CHANGED_MAIN_PASSWORD" xml:space="preserve">
-    <value>已更改 {0} 主密码</value>
-  </data>
-  <data name="CHANGED_MAIN_PASSWORD_LONG" xml:space="preserve">
-    <value>已更改用于会话还原的 {0} 主密码</value>
-  </data>
   <data name="CHANGED_SERVER_CD" xml:space="preserve">
     <value>服务器 CD 已更改</value>
   </data>
@@ -4748,6 +4730,33 @@
   <data name="DMC" xml:space="preserve">
     <value>动态内存控制</value>
   </data>
+  <data name="DMC_CHECK_ENABLED" xml:space="preserve">
+    <value>使用动态内存控制(DMC)检查 VM</value>
+  </data>
+  <data name="DMC_DISABLE" xml:space="preserve">
+    <value>关闭 VM 并禁用 DMC(&amp;D)</value>
+  </data>
+  <data name="DMC_DISABLE_ACTION_TITLE" xml:space="preserve">
+    <value>正在禁用动态内存控制...</value>
+  </data>
+  <data name="DMC_REMOVAL_LONG_ERROR" xml:space="preserve">
+    <value>
+您的系统具有使用 DMC 的 VM。在升级到 {0} 之前，必须重新配置其内存设置，因为在此版本中已删除对 DMC 的支持。
+
+如果您希望 {1} 重新配置 VM 的内存设置，请单击“关闭 VM 并禁用 DMC”。
+
+如果您希望手动重新配置 VM 的内存设置，请单击“取消”。</value>
+  </data>
+  <data name="DMC_REMOVAL_LONG_WARNING" xml:space="preserve">
+    <value>您的系统具有使用 DMC 的 VM。如果要升级到 {0}，必须重新配置其内存设置，因为在此版本中已删除对 DMC 的支持。
+
+如果您希望 {1} 重新配置 VM 的内存设置，请单击“关闭 VM 并禁用 DMC”。
+
+如果您希望手动重新配置 VM 的内存设置，请单击“取消”。</value>
+  </data>
+  <data name="DMC_REMOVAL_SHORT" xml:space="preserve">
+    <value>{0}: 已在 {1} 中删除了对动态内存控制(DMC)的支持。</value>
+  </data>
   <data name="DMC_UNAVAILABLE_LICENSE_RESTRICTION" xml:space="preserve">
     <value>由于服务器上存在许可证限制，因此，动态内存控制(DMC)不可用。</value>
   </data>
@@ -5058,13 +5067,13 @@
     <value>故障转移必备条件</value>
   </data>
   <data name="DR_WIZARD_PRECHECKPAGE_CONTINUE_DRYRUN" xml:space="preserve">
-    <value>单击“故障转移”以开始进行所选 vApp 和 VM 的恢复测试。</value>
+    <value>完成后，单击“故障转移”开始测试所选 vApp 和 VM 的恢复情况。</value>
   </data>
   <data name="DR_WIZARD_PRECHECKPAGE_CONTINUE_FAILBACK" xml:space="preserve">
-    <value>单击“故障恢复”以开始将所选 vApp 和 VM 恢复到主数据站点。</value>
+    <value>完成后，单击“故障恢复”开始将选定的 vApp 和 VM 恢复到您的主数据站点。</value>
   </data>
   <data name="DR_WIZARD_PRECHECKPAGE_CONTINUE_FAILOVER" xml:space="preserve">
-    <value>单击“故障转移”以开始恢复所选的 vApp 和 VM。</value>
+    <value>完成后，单击“故障转移”开始恢复选定的 vApp 和 VM。</value>
   </data>
   <data name="DR_WIZARD_PRECHECKPAGE_DESCRIPTION_FAILBACK" xml:space="preserve">
     <value>执行故障转移预检查是为了确保所选 vApp 和 VM 可以故障恢复到所选池。请采取相应措施解决所有问题。</value>
@@ -5092,15 +5101,6 @@
   </data>
   <data name="DR_WIZARD_PRECHECKPAGE_RESOLVE" xml:space="preserve">
     <value>解决</value>
-  </data>
-  <data name="DR_WIZARD_PRECHECKPAGE_STATUS_FAILURE" xml:space="preserve">
-    <value>已完成故障转移预检查: 发现 {0} 个问题</value>
-  </data>
-  <data name="DR_WIZARD_PRECHECKPAGE_STATUS_RUNNING" xml:space="preserve">
-    <value>正在运行故障转移预检查:</value>
-  </data>
-  <data name="DR_WIZARD_PRECHECKPAGE_STATUS_SUCCESS" xml:space="preserve">
-    <value>已完成故障转移预检查: 未发现问题</value>
   </data>
   <data name="DR_WIZARD_PRECHECKPAGE_TEXT" xml:space="preserve">
     <value>预检查</value>
@@ -5147,6 +5147,9 @@
   <data name="DR_WIZARD_PROBLEM_MISSING_SR_HELPMESSAGE" xml:space="preserve">
     <value>连接 SR</value>
   </data>
+  <data name="DR_WIZARD_PROBLEM_MISSING_SR_NO_INFO" xml:space="preserve">
+    <value>找不到缺少的 SR 信息</value>
+  </data>
   <data name="DR_WIZARD_PROBLEM_RUNNING_APPLIANCE" xml:space="preserve">
     <value>正在池“{0}”上运行</value>
   </data>
@@ -5159,6 +5162,21 @@
   <data name="DR_WIZARD_PROBLEM_RUNNING_VM_HELPMESSAGE" xml:space="preserve">
     <value>关闭 VM</value>
   </data>
+  <data name="DR_WIZARD_RECOVERPAGE_BLURB_DRYRUN" xml:space="preserve">
+    <value>正在进行故障转移测试。这可能需要一些时间。
+
+完成后，请单击“下一步”删除已故障转移的 vApp 和 VM 并查看摘要报告。</value>
+  </data>
+  <data name="DR_WIZARD_RECOVERPAGE_BLURB_FAILBACK" xml:space="preserve">
+    <value>正在进行故障恢复。这可能需要一些时间。
+
+完成后，请单击“下一步”查看摘要报告。</value>
+  </data>
+  <data name="DR_WIZARD_RECOVERPAGE_BLURB_FAILOVER" xml:space="preserve">
+    <value>正在进行 {0} 灾难恢复。这可能需要一些时间。
+
+完成后，请单击“下一步”查看摘要报告。</value>
+  </data>
   <data name="DR_WIZARD_RECOVERPAGE_COMPLETE_DRYRUN" xml:space="preserve">
     <value>针对池“{0}”的故障转移测试已完成。</value>
   </data>
@@ -5167,24 +5185,6 @@
   </data>
   <data name="DR_WIZARD_RECOVERPAGE_COMPLETE_FAILOVER" xml:space="preserve">
     <value>{0} 灾难恢复已完成。</value>
-  </data>
-  <data name="DR_WIZARD_RECOVERPAGE_CONTINUE_DRYRUN" xml:space="preserve">
-    <value>单击“下一步”删除已故障转移的 vApp 和 VM，并查看摘要报告。</value>
-  </data>
-  <data name="DR_WIZARD_RECOVERPAGE_CONTINUE_FAILBACK" xml:space="preserve">
-    <value>单击“下一步”以查看摘要报告。</value>
-  </data>
-  <data name="DR_WIZARD_RECOVERPAGE_CONTINUE_FAILOVER" xml:space="preserve">
-    <value>单击“下一步”以查看摘要报告。</value>
-  </data>
-  <data name="DR_WIZARD_RECOVERPAGE_IN_PROGRESS_DRYRUN" xml:space="preserve">
-    <value>正在进行故障转移测试。该过程需要一些时间。</value>
-  </data>
-  <data name="DR_WIZARD_RECOVERPAGE_IN_PROGRESS_FAILBACK" xml:space="preserve">
-    <value>正在进行故障恢复。此过程需要一段时间。</value>
-  </data>
-  <data name="DR_WIZARD_RECOVERPAGE_IN_PROGRESS_FAILOVER" xml:space="preserve">
-    <value>正在进行 {0} 灾难恢复。此过程需要一段时间。</value>
   </data>
   <data name="DR_WIZARD_RECOVERPAGE_OVERALL_PROGRESS" xml:space="preserve">
     <value>总体进度: 已完成 {0} 项任务(共 {1} 项)</value>
@@ -7544,7 +7544,8 @@
     <value>安装待定更新(&amp;U)...</value>
   </data>
   <data name="INSTALL_PENDING_UPDATES_DISABLED_REASON" xml:space="preserve">
-    <value>{0} 不能用于在运行 {1} {2} 的服务器上安装更新。请改为使用 {3} {2}。</value>
+    <value>{0} 不能用于在运行 {1} {2} 的服务器上安装更新。
+请改为对 {1} {2} 使用最新的可用 {3}。</value>
   </data>
   <data name="INSTALL_SERVER_CERTIFICATE_ACTION_LINK" xml:space="preserve">
     <value>安装证书...</value>
@@ -7933,9 +7934,6 @@ Premium 功能已启用</value>
   </data>
   <data name="LINK_STATUS" xml:space="preserve">
     <value>链接状态</value>
-  </data>
-  <data name="LIVE_PATCHING" xml:space="preserve">
-    <value>实时修补</value>
   </data>
   <data name="LIVE_PATCHING_FAILED_MULTI_HOST" xml:space="preserve">
     <value>以下服务器的实时修补失败:
@@ -8675,16 +8673,16 @@ SCSI ID: {2}
     <value>请弹出 CD</value>
   </data>
   <data name="MIGRATION_NOT_ALLOWED" xml:space="preserve">
-    <value>此时无法迁移该 VM</value>
+    <value>“{0}”当前可能不会迁移。请确保您已在其上安装了 {1}</value>
   </data>
   <data name="MIGRATION_NOT_ALLOWED_CPU_FEATURES" xml:space="preserve">
-    <value>此 VM 可能不迁移，因为目标主机不具备此 VM 当前正在使用的某些 CPU 功能</value>
+    <value>“{0}”可能不会迁移，因为目标主机不具备此 VM 当前正在使用的某些 CPU 功能</value>
   </data>
   <data name="MIGRATION_NOT_ALLOWED_NO_SHARED_STORAGE" xml:space="preserve">
-    <value>无法迁移该 VM；其没有位于共享存储上</value>
+    <value>“{0}”可能不会迁移，因为它不在共享存储上</value>
   </data>
   <data name="MIGRATION_NOT_ALLOWED_OUTSIDE_POOL" xml:space="preserve">
-    <value>VM 不能迁移至其所在池以外</value>
+    <value>“{0}”可能不会迁移到其池外部</value>
   </data>
   <data name="MIN" xml:space="preserve">
     <value>最小</value>
@@ -10637,6 +10635,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="PLAN_ACTION_FAILURE_NOT_ENOUGH_MEMORY" xml:space="preserve">
     <value>服务器“{0}”无法撤离，因为其他服务器上没有足够的可用内存以迁移此服务器中的所有 VM。请暂停或关闭某些 VM，然后按“重试”以恢复该过程。</value>
+  </data>
+  <data name="PLAN_ACTION_FAILURE_VM_LACKS_FEATURE" xml:space="preserve">
+    <value>无法撤离服务器“{0}”，因为 VM“{1}”缺少尝试的操作所需的功能。</value>
   </data>
   <data name="PLAN_ACTION_STATUS_INSTALLING_XENSERVER" xml:space="preserve">
     <value>正在“{1}”上安装 {0}...</value>
@@ -14034,7 +14035,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>运行状况检查已在 {0} {1} 中删除。如果要将池升级到此版本，必须先禁用运行状况检查。</value>
   </data>
   <data name="WARNING_PRE_CLOUD_VERSION_CONNECTION" xml:space="preserve">
-    <value>{0} 不建议对运行 {1} {2} 的服务器进行常规管理。请改为使用 {3} {2}。</value>
+    <value>不建议将 {0} 用于运行 {1} {2} 的服务器的常规管理。请改为对 {1} {2} 使用最新的可用 {3}。</value>
   </data>
   <data name="WEB_BROWSER_FAILED" xml:space="preserve">
     <value>找不到“{0}”。</value>

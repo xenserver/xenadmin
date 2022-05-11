@@ -215,7 +215,7 @@
     <value>1</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
-    <value>このウィザードを使用して、アップデートとサプリメンタル パックを {0} {1} にインストールすることはできません。代わりに {2} {1} を使用してください。</value>
+    <value>このウィザードを使用して、アップデートとサプリメンタル パックを {0} {1} にインストールすることはできません。代わりに {0} {1} で使用可能な最新の {2} を使用してください。</value>
   </data>
   <data name="&gt;&gt;label5.Name" xml:space="preserve">
     <value>label5</value>

@@ -1689,7 +1689,7 @@
     <value>VM ネットワーク インターフェイス QoS の失敗</value>
   </data>
   <data name="Message.name-vm_checkpointed" xml:space="preserve">
-    <value>仮想マシンのチェックポイントが作成されました</value>
+    <value>仮想マシンのディスクとメモリのスナップショットが作成されました</value>
   </data>
   <data name="Message.name-vm_cloned" xml:space="preserve">
     <value>VM の複製</value>
@@ -1716,10 +1716,10 @@
     <value>VM のシャットダウン</value>
   </data>
   <data name="Message.name-vm_snapshot_reverted" xml:space="preserve">
-    <value>仮想マシンのスナップショットが復元されました</value>
+    <value>仮想マシンはスナップショットに復元されました</value>
   </data>
   <data name="Message.name-vm_snapshotted" xml:space="preserve">
-    <value>仮想マシンのスナップショットが作成されました</value>
+    <value>仮想マシンのディスクのスナップショットが作成されました</value>
   </data>
   <data name="Message.name-vm_started" xml:space="preserve">
     <value>VM の起動</value>

@@ -375,6 +375,9 @@
   <data name="DUPLICATE_VM" xml:space="preserve">
     <value>无法还原此 VM，因为它将创建重复项</value>
   </data>
+  <data name="DYNAMIC_MEMORY_CONTROL_UNAVAILABLE" xml:space="preserve">
+    <value>VM 需要动态内存控制(DMC)，但 DMC 不可用</value>
+  </data>
   <data name="EVACUATE_NO_OTHER_HOSTS_FOR_MASTER" xml:space="preserve">
     <value>没有其他服务器可指定为协调器。请添加或启用其他一些服务器。</value>
   </data>

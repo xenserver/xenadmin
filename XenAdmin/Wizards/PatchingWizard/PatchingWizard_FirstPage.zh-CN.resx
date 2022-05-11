@@ -215,7 +215,7 @@
     <value>1</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
-    <value>不能使用此向导将更新或补充包安装到 {0} {1}。请改为使用 {2} {1}。</value>
+    <value>不能使用此向导安装 {0} {1} 的更新或补充包。请改为对 {0} {1} 使用最新的可用 {2}。</value>
   </data>
   <data name="&gt;&gt;label5.Name" xml:space="preserve">
     <value>label5</value>

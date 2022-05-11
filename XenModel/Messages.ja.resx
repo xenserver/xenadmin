@@ -300,9 +300,6 @@
   <data name="ACTION_DISABLE_IGMP_SNOOPING" xml:space="preserve">
     <value>IGMP スヌーピングの無効化</value>
   </data>
-  <data name="ACTION_DISABLE_LIVE_PATCHING" xml:space="preserve">
-    <value>ライブ パッチの無効化</value>
-  </data>
   <data name="ACTION_DISABLE_PVS_READ_CACHING" xml:space="preserve">
     <value>PVS アクセラレータを無効にする</value>
   </data>
@@ -326,9 +323,6 @@
   </data>
   <data name="ACTION_DISABLING_CHANGED_BLOCK_TRACKING" xml:space="preserve">
     <value>選択した VM の変更ブロック追跡の無効化</value>
-  </data>
-  <data name="ACTION_DISABLING_LIVE_PATCHING" xml:space="preserve">
-    <value>'{0}' のライブ パッチを無効にしています</value>
   </data>
   <data name="ACTION_DISABLING_PVS_READ_CACHING" xml:space="preserve">
     <value>選択した VM の PVS アクセラレータを無効にしています</value>
@@ -435,9 +429,6 @@
   <data name="ACTION_ENABLE_IGMP_SNOOPING" xml:space="preserve">
     <value>IGMP スヌーピングの有効化</value>
   </data>
-  <data name="ACTION_ENABLE_LIVE_PATCHING" xml:space="preserve">
-    <value>ライブ パッチの有効化</value>
-  </data>
   <data name="ACTION_ENABLE_PVS_READ_CACHING" xml:space="preserve">
     <value>PVS アクセラレータを有効にする</value>
   </data>
@@ -463,9 +454,6 @@
     <value>測定基準 "{0}" を有効にできませんでした。
 
 これは、データ ソースがデータを生成していないためです。再度有効にする前に、この測定基準を収集するための前提条件が満たされているかを確認する必要があります。</value>
-  </data>
-  <data name="ACTION_ENABLING_LIVE_PATCHING" xml:space="preserve">
-    <value>'{0}' のライブ パッチを有効にしています</value>
   </data>
   <data name="ACTION_ENABLING_PVS_READ_CACHING" xml:space="preserve">
     <value>選択した VM の PVS アクセラレータを有効にしています</value>
@@ -2766,12 +2754,6 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="CHANGE_VMSS_POLICY" xml:space="preserve">
     <value>スナップショット スケジュールへの VM の割り当て</value>
   </data>
-  <data name="CHANGED_MAIN_PASSWORD" xml:space="preserve">
-    <value>{0} のマスター パスワードが変更されました</value>
-  </data>
-  <data name="CHANGED_MAIN_PASSWORD_LONG" xml:space="preserve">
-    <value>セッションを復元するために {0} のメイン パスワードが変更されました</value>
-  </data>
   <data name="CHANGED_SERVER_CD" xml:space="preserve">
     <value>Server CD の変更</value>
   </data>
@@ -4753,6 +4735,33 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
   <data name="DMC" xml:space="preserve">
     <value>動的メモリ制御</value>
   </data>
+  <data name="DMC_CHECK_ENABLED" xml:space="preserve">
+    <value>動的メモリ制御 (DMC) を使用した VM の確認</value>
+  </data>
+  <data name="DMC_DISABLE" xml:space="preserve">
+    <value>VM をシャットダウンして DMC を無効にする(&amp;D)</value>
+  </data>
+  <data name="DMC_DISABLE_ACTION_TITLE" xml:space="preserve">
+    <value>動的メモリ制御を無効にする...</value>
+  </data>
+  <data name="DMC_REMOVAL_LONG_ERROR" xml:space="preserve">
+    <value>
+システムに DMC を使用した VM があります。このリリースでは DMC のサポートが削除されているため、{0} にアップグレードする前に、メモリ設定を再構成する必要があります。
+
+{1} で VM のメモリ設定を再構成する場合は、[VM をシャットダウンして DMC を無効にする] をクリックします。
+
+VM のメモリ設定を手動で再構成する場合は、[キャンセル] をクリックします。</value>
+  </data>
+  <data name="DMC_REMOVAL_LONG_WARNING" xml:space="preserve">
+    <value>システムに DMC を使用した VM があります。{0} にアップグレードする場合、このリリースでは DMC のサポートが削除されているため、メモリ設定を再構成する必要があります。
+
+{1} で VM のメモリ設定を再構成する場合は、[VM をシャットダウンして DMC を無効にする] をクリックします。
+
+VM のメモリ設定を手動で再構成する場合は、[キャンセル] をクリックします。</value>
+  </data>
+  <data name="DMC_REMOVAL_SHORT" xml:space="preserve">
+    <value>{0}: 動的メモリ制御 (DMC) は、{1} ではサポートされません。</value>
+  </data>
   <data name="DMC_UNAVAILABLE_LICENSE_RESTRICTION" xml:space="preserve">
     <value>サーバーのライセンス条件のため、動的メモリ制御 (DMC) は使用できません。</value>
   </data>
@@ -5063,13 +5072,13 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
     <value>フェイルオーバーの前提条件</value>
   </data>
   <data name="DR_WIZARD_PRECHECKPAGE_CONTINUE_DRYRUN" xml:space="preserve">
-    <value>[フェイルオーバー] をクリックすると、選択した vApp および VM のフェイルオーバー テストが開始されます。</value>
+    <value>完了したら、[フェイルオーバー] をクリックして、選択した vApp および VM のフェイルオーバー テストを開始します。</value>
   </data>
   <data name="DR_WIZARD_PRECHECKPAGE_CONTINUE_FAILBACK" xml:space="preserve">
-    <value>[フェイルバック] をクリックすると、選択した vApp および VM のプライマリ データ サイトへのフェイルバックが開始されます。</value>
+    <value>完了したら、[フェイルバック] をクリックして、選択した vApp および VM のプライマリ データ サイトへのフェイルバックを開始します。</value>
   </data>
   <data name="DR_WIZARD_PRECHECKPAGE_CONTINUE_FAILOVER" xml:space="preserve">
-    <value>[フェイルオーバー] をクリックすると、選択した vApp および VM の回復が開始されます。</value>
+    <value>完了したら、[フェイルオーバー] をクリックして、選択した vApp および VM の回復を開始します。</value>
   </data>
   <data name="DR_WIZARD_PRECHECKPAGE_DESCRIPTION_FAILBACK" xml:space="preserve">
     <value>選択した vApp や VM が正しくプールにフェイルバックされるように、事前チェックが実行されます。問題が見つかった場合は、適切な解決処置を行ってください。</value>
@@ -5097,15 +5106,6 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
   </data>
   <data name="DR_WIZARD_PRECHECKPAGE_RESOLVE" xml:space="preserve">
     <value>解決</value>
-  </data>
-  <data name="DR_WIZARD_PRECHECKPAGE_STATUS_FAILURE" xml:space="preserve">
-    <value>フェイルオーバーの事前チェックが完了しました。{0} 項目の問題が見つかりました。</value>
-  </data>
-  <data name="DR_WIZARD_PRECHECKPAGE_STATUS_RUNNING" xml:space="preserve">
-    <value>フェイルオーバーの事前チェックの実行:</value>
-  </data>
-  <data name="DR_WIZARD_PRECHECKPAGE_STATUS_SUCCESS" xml:space="preserve">
-    <value>フェイルオーバーの事前チェックが完了しました。問題は見つかりませんでした。</value>
   </data>
   <data name="DR_WIZARD_PRECHECKPAGE_TEXT" xml:space="preserve">
     <value>事前チェック</value>
@@ -5152,6 +5152,9 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
   <data name="DR_WIZARD_PROBLEM_MISSING_SR_HELPMESSAGE" xml:space="preserve">
     <value>SR の接続</value>
   </data>
+  <data name="DR_WIZARD_PROBLEM_MISSING_SR_NO_INFO" xml:space="preserve">
+    <value>存在しない SR 情報が見つかりません</value>
+  </data>
   <data name="DR_WIZARD_PROBLEM_RUNNING_APPLIANCE" xml:space="preserve">
     <value>プール '{0}' で実行中</value>
   </data>
@@ -5164,6 +5167,21 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
   <data name="DR_WIZARD_PROBLEM_RUNNING_VM_HELPMESSAGE" xml:space="preserve">
     <value>VM のシャットダウン</value>
   </data>
+  <data name="DR_WIZARD_RECOVERPAGE_BLURB_DRYRUN" xml:space="preserve">
+    <value>フェイルオーバー テストが進行中です。しばらくお待ちください。
+
+完了したら、[次へ] をクリックして、フェイルオーバーされた vApp と VM を削除し、結果レポートを表示します。</value>
+  </data>
+  <data name="DR_WIZARD_RECOVERPAGE_BLURB_FAILBACK" xml:space="preserve">
+    <value>フェイルバックが進行中です。しばらくお待ちください。
+
+完了したら、[次へ] をクリックして結果レポートを表示します。</value>
+  </data>
+  <data name="DR_WIZARD_RECOVERPAGE_BLURB_FAILOVER" xml:space="preserve">
+    <value>{0} 障害回復が進行中です。しばらくお待ちください。
+
+完了したら、[次へ] をクリックして結果レポートを表示します。</value>
+  </data>
   <data name="DR_WIZARD_RECOVERPAGE_COMPLETE_DRYRUN" xml:space="preserve">
     <value>プール '{0}' へのフェイルオーバー テストが完了しました。</value>
   </data>
@@ -5172,24 +5190,6 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
   </data>
   <data name="DR_WIZARD_RECOVERPAGE_COMPLETE_FAILOVER" xml:space="preserve">
     <value>{0} 障害回復が完了しました。</value>
-  </data>
-  <data name="DR_WIZARD_RECOVERPAGE_CONTINUE_DRYRUN" xml:space="preserve">
-    <value>フェイルオーバーされた vApp と VM を削除して結果レポートを表示するには、[次へ] をクリックします。</value>
-  </data>
-  <data name="DR_WIZARD_RECOVERPAGE_CONTINUE_FAILBACK" xml:space="preserve">
-    <value>結果レポートを表示するには、[次へ] をクリックします。</value>
-  </data>
-  <data name="DR_WIZARD_RECOVERPAGE_CONTINUE_FAILOVER" xml:space="preserve">
-    <value>結果レポートを表示するには、[次へ] をクリックします。</value>
-  </data>
-  <data name="DR_WIZARD_RECOVERPAGE_IN_PROGRESS_DRYRUN" xml:space="preserve">
-    <value>フェイルオーバー テストが進行中です。しばらくお待ちください。</value>
-  </data>
-  <data name="DR_WIZARD_RECOVERPAGE_IN_PROGRESS_FAILBACK" xml:space="preserve">
-    <value>フェイルバックが進行中です。しばらくお待ちください。</value>
-  </data>
-  <data name="DR_WIZARD_RECOVERPAGE_IN_PROGRESS_FAILOVER" xml:space="preserve">
-    <value>{0} 障害回復が進行中です。しばらくお待ちください。</value>
   </data>
   <data name="DR_WIZARD_RECOVERPAGE_OVERALL_PROGRESS" xml:space="preserve">
     <value>全体の進行状況: {0}/{1} タスクが完了</value>
@@ -7549,7 +7549,7 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
     <value>保留中のアップデートのインストール(&amp;U)...</value>
   </data>
   <data name="INSTALL_PENDING_UPDATES_DISABLED_REASON" xml:space="preserve">
-    <value>{0} は {1} {2} を実行しているサーバーへのアップデートのインストールに使用することはできません。代わりに {3} {2} を使用してください。</value>
+    <value>{0} は {1} {2} を実行しているサーバーへのアップデートのインストールに使用することはできません。代わりに {1} {2} で使用可能な最新の {3} を使用してください。</value>
   </data>
   <data name="INSTALL_SERVER_CERTIFICATE_ACTION_LINK" xml:space="preserve">
     <value>証明書のインストール...</value>
@@ -7938,9 +7938,6 @@ Standard 機能のみ有効です</value>
   </data>
   <data name="LINK_STATUS" xml:space="preserve">
     <value>接続状態</value>
-  </data>
-  <data name="LIVE_PATCHING" xml:space="preserve">
-    <value>ライブ パッチ</value>
   </data>
   <data name="LIVE_PATCHING_FAILED_MULTI_HOST" xml:space="preserve">
     <value>以下のサーバーのライブパッチに失敗しました。
@@ -8680,16 +8677,16 @@ SCSI ID: {2}
     <value>CD をイジェクトしてください</value>
   </data>
   <data name="MIGRATION_NOT_ALLOWED" xml:space="preserve">
-    <value>現在、この VM を移行することはできません</value>
+    <value>現在 '{0}' を移行することはできません。{1} がインストールされていることを確認してください。</value>
   </data>
   <data name="MIGRATION_NOT_ALLOWED_CPU_FEATURES" xml:space="preserve">
-    <value>VM で使用中の CPU 機能の一部が移行先のホストにないため、VM を移行することができません</value>
+    <value>VM で使用中の CPU 機能の一部が移行先のホストにないため、'{0}' を移行することができません</value>
   </data>
   <data name="MIGRATION_NOT_ALLOWED_NO_SHARED_STORAGE" xml:space="preserve">
-    <value>この VM は共有ストレージ上にないため、移行することはできません</value>
+    <value>'{0}' は共有ストレージ上にないため、移行することはできません</value>
   </data>
   <data name="MIGRATION_NOT_ALLOWED_OUTSIDE_POOL" xml:space="preserve">
-    <value>VM をプール外に移行することはできません</value>
+    <value>'{0}' をプール外に移行することはできません</value>
   </data>
   <data name="MIN" xml:space="preserve">
     <value>最小</value>
@@ -10638,6 +10635,9 @@ NFS ストレージ リポジトリを構成する場合は、NFS サーバー�
   </data>
   <data name="PLAN_ACTION_FAILURE_NOT_ENOUGH_MEMORY" xml:space="preserve">
     <value>このサーバーからすべての VM を移行するのに十分な空きメモリが他のサーバーになかったため、サーバー '{0}' を退避できませんでした。一部の VM を一時停止またはシャット ダウンしてから、[再試行] を押してプロセスを再開してください。</value>
+  </data>
+  <data name="PLAN_ACTION_FAILURE_VM_LACKS_FEATURE" xml:space="preserve">
+    <value>VM '{1}' には、試行された操作に必要な機能がないため、サーバー '{0}' を退避させることができませんでした。</value>
   </data>
   <data name="PLAN_ACTION_STATUS_INSTALLING_XENSERVER" xml:space="preserve">
     <value>'{1}' に {0} をインストールしています...</value>
@@ -14038,7 +14038,7 @@ VM のパフォーマンスを最適化するために、VCPU の数を物理 CP
     <value>{0} {1} のヘルス チェックは削除されました。プールをこのバージョンにアップグレードする場合は、最初にヘルス チェックを無効にする必要があります。</value>
   </data>
   <data name="WARNING_PRE_CLOUD_VERSION_CONNECTION" xml:space="preserve">
-    <value>{0} は、{1} {2} を実行しているサーバーの一般的な管理にはお勧めしません。代わりに {3} {2} を使用してください。</value>
+    <value>{0} は、{1} {2} を実行しているサーバーの一般的な管理にはお勧めしません。代わりに {1} {2} で使用可能な最新の {3} を使用してください。</value>
   </data>
   <data name="WEB_BROWSER_FAILED" xml:space="preserve">
     <value>'{0}' が見つかりません。</value>

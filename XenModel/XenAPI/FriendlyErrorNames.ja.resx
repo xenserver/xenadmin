@@ -375,6 +375,9 @@
   <data name="DUPLICATE_VM" xml:space="preserve">
     <value>重複が生じるため、この VM は復元できません。</value>
   </data>
+  <data name="DYNAMIC_MEMORY_CONTROL_UNAVAILABLE" xml:space="preserve">
+    <value>VM には動的メモリ制御 (DMC) が必要ですが、使用できません</value>
+  </data>
   <data name="EVACUATE_NO_OTHER_HOSTS_FOR_MASTER" xml:space="preserve">
     <value>使用可能なサーバーがないため、コーディネーターを選出できません。サーバーを追加するか有効にしてください。</value>
   </data>
