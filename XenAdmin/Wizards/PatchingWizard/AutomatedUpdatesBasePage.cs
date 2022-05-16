@@ -43,6 +43,7 @@ using System.Windows.Forms;
 using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Dialogs;
 using XenAdmin.Wizards.RollingUpgradeWizard.PlanActions;
+using Console = System.Console;
 
 
 namespace XenAdmin.Wizards.PatchingWizard
@@ -316,10 +317,18 @@ namespace XenAdmin.Wizards.PatchingWizard
                 stringBuilder.Append(sb);
             }
 
-            textBoxLog.Text = stringBuilder.ToString();
-            textBoxLog.SelectionStart = textBoxLog.Text.Length;
+            var newText = stringBuilder.ToString();
+            
             if (!_userMovedVerticalScrollbar)
+            {
+                textBoxLog.Text = newText;
+                textBoxLog.SelectionStart = textBoxLog.Text.Length;
                 textBoxLog.ScrollToCaret();
+            }
+            else
+            {
+                textBoxLog.SetTextWithoutScrolling(newText);
+            }
         }
 
         private void WorkerDoWork(object sender, DoWorkEventArgs doWorkEventArgs)

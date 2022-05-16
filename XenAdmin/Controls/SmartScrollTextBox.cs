@@ -46,8 +46,19 @@ namespace XenAdmin.Controls
     /// </summary>
     internal class SmartScrollTextBox : TextBox
     {
-        protected internal bool IsVerticalScrollBarAtBottom =>
-            string.IsNullOrEmpty(Text) || GetPositionFromCharIndex(Text.Length).Y < Height;
+        private bool _scrolledProgrammatically;
+
+        protected internal bool IsVerticalScrollBarAtBottom => GetPositionFromCharIndex(Text.Length - 1).Y < Height;
+
+        public void SetTextWithoutScrolling(string text)
+        {
+            var oldVerticalPosition = Win32.GetScrollBarPosition(Handle, Win32.ScrollBarConstants.SB_VERT);
+            Text = text;
+            Win32.SetScrollPos(Handle, (int)Win32.ScrollBarConstants.SB_VERT, oldVerticalPosition, true);
+
+            _scrolledProgrammatically = true;
+            Win32.PostMessageA(Handle, Win32.WM_VSCROLL, (int)Win32.ScrollBarCommands.SB_THUMBPOSITION + 0x10000 * oldVerticalPosition, 0);
+        }
 
         #region Custom Events
 
@@ -72,11 +83,11 @@ namespace XenAdmin.Controls
         /// </summary>
         public event ScrollChange OnScrollChange;
         #endregion
-
+        
         #region Control Overrides
         protected override void WndProc(ref Message m)
         {
-            if (OnScrollChange != null)
+            if (OnScrollChange != null && !_scrolledProgrammatically)
             {
                 int newPosition;
                 switch (m.Msg)
@@ -97,6 +108,12 @@ namespace XenAdmin.Controls
 
                 }
             }
+
+            if (_scrolledProgrammatically)
+            {
+                _scrolledProgrammatically = false;
+            }
+
             base.WndProc(ref m);
         }
 

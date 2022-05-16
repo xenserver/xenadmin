@@ -387,6 +387,9 @@ namespace XenCenterLib
         public static extern bool EnumUILanguages(EnumUILanguagesProc pUILanguageEnumProc,
            uint dwFlags, IntPtr lParam);
 
+        [DllImport("user32.dll")]
+        public static extern int SetScrollPos(IntPtr hWnd, int nBar, int nPos, bool bRedraw);
+
         #region Window scrolling functions
 
         /// <summary>
@@ -498,6 +501,10 @@ namespace XenCenterLib
         [return: MarshalAs(UnmanagedType.Bool)]
         [DllImport("user32.dll", SetLastError = true)]
         public static extern bool PostMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+        
+        [return: MarshalAs(UnmanagedType.Bool)]
+        [DllImport("user32.dll")] 
+        public static extern bool PostMessageA(IntPtr hWnd, int nBar, int wParam, int lParam);
 
         #region Disk space functions
 
