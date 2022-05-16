@@ -50,10 +50,9 @@ namespace XenAdminTests.UnitTests.AlertTests
                 new UpdateAlertClassUnitTestData
                 {
                     AppliesTo = BrandManager.BrandConsole,
-                    FixLinkText = "Go to Web Page",
+                    FixLinkText = "v6.0.2 Release Notes",
                     HelpID = "XenCenterUpdateAlert",
-                    Description = "xc is now available. Download the new version from the "
-                                  + BrandManager.CompanyNameShort + " website.",
+                    Description = "xc is now available. Click Download and Install to proceed with the update.",
                     HelpLinkText = "Help",
                     Title = "xc is now available",
                     Priority = "Priority5",
