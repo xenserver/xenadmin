@@ -60,6 +60,7 @@
     </Compile>
     <Compile Include="Properties\Settings.cs" />
     <Compile Include="thinCLIProtocol.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="xe.cs" />
   </ItemGroup>
   <ItemGroup>

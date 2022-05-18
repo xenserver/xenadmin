@@ -87,7 +87,7 @@ namespace ThinCLI
                     }
                     else if (s.Equals("-help") || s.Equals("/?"))
                     {
-                        Logger.Usage();
+                        Logger.PrintUsage();
                         return;
                     }
                     else
@@ -101,7 +101,7 @@ namespace ThinCLI
                 catch
                 {
                     Logger.Error("Failed to parse command-line arguments");
-                    Logger.Usage();
+                    Logger.PrintUsage();
                     Environment.Exit(1);
                 }
             }
@@ -111,14 +111,14 @@ namespace ThinCLI
             if (string.IsNullOrEmpty(conf.Hostname))
             {
                 Logger.Error("No hostname was specified.");
-                Logger.Usage();
+                Logger.PrintUsage();
                 Environment.Exit(1);
             }
 
             if (string.IsNullOrEmpty(conf.Username))
             {
                 Logger.Error("No username was specified.");
-                Logger.Usage();
+                Logger.PrintUsage();
                 Environment.Exit(1);
             }
 
@@ -145,52 +145,6 @@ namespace ThinCLI
                 Logger.Debug(ex, conf);
                 Environment.Exit(1);
             }
-        }
-    }
-
-    internal static class Logger
-    {
-        internal static void Usage()
-        {
-            var sb = new StringBuilder();
-            sb.AppendLine("Usage:");
-            sb.AppendLine("  xe -version").AppendLine();
-            sb.AppendLine("  xe -help").AppendLine();
-            sb.AppendLine("  xe -s <server> -u <username> -pw <password> [options] <command> <arguments>").AppendLine();
-            sb.AppendLine("Options:");
-            sb.AppendLine("  -p <port>");
-            sb.AppendLine("  -debug");
-            sb.AppendLine();
-            sb.AppendLine("For command help, use xe -s <server> -u <user> -pw <password> [options] help");
-
-            Console.WriteLine(sb);
-        }
-
-        internal static void Debug(string msg, Config conf)
-        {
-            if (conf.Debug)
-                Console.WriteLine("Debug: " + msg);
-        }
-
-        internal static void Debug(Exception ex, Config conf)
-        {
-            if (conf.Debug && ex != null)
-                Console.WriteLine("Debug: " + ex.StackTrace);
-        }
-
-        internal static void Error(string x)
-        {
-            Console.WriteLine("Error: " + x);
-        }
-
-        internal static void Warn(string x)
-        {
-            Console.WriteLine("Warning: " + x);
-        }
-
-        internal static void Info(string x)
-        {
-            Console.WriteLine(x);
         }
     }
 
