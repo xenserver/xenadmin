@@ -68,10 +68,10 @@ namespace ThinCLI
 
         // The following method is invoked by the RemoteCertificateValidationDelegate.
         private bool ValidateServerCertificate(
-              object sender,
-              X509Certificate certificate,
-              X509Chain chain,
-              SslPolicyErrors sslPolicyErrors)
+            object sender,
+            X509Certificate certificate,
+            X509Chain chain,
+            SslPolicyErrors sslPolicyErrors)
         {
             if (sslPolicyErrors == SslPolicyErrors.None)
                 return true;
@@ -107,7 +107,7 @@ namespace ThinCLI
                 }
                 else
                 {
-                    acceptCertificate =_conf.NoWarnNewCertificates || GetUserConsent(
+                    acceptCertificate = _conf.NoWarnNewCertificates || GetUserConsent(
                         string.Format(Messages.CERTIFICATE_FOUND, fingerprint, trustEvaluation));
                 }
 
@@ -179,10 +179,12 @@ namespace ThinCLI
 
     public static class Http
     {
-        private static string ReadLine(Stream stream){
-		    StringBuilder messageData = new StringBuilder();
-		    do {
-        	    int i = stream.ReadByte();
+        private static string ReadLine(Stream stream)
+        {
+            StringBuilder messageData = new StringBuilder();
+            do
+            {
+                int i = stream.ReadByte();
                 if (i == -1)
                 {
                     throw new EndOfStreamException();
@@ -193,22 +195,24 @@ namespace ThinCLI
                     messageData.Append(b);
                     if (b == '\n') break;
                 }
-		    } while (true);
+            } while (true);
 
             return messageData.ToString();
-	    }
+        }
 
-        private static void WriteLine(Stream stream, string line){
+        private static void WriteLine(Stream stream, string line)
+        {
             byte[] message = Encoding.UTF8.GetBytes($"{line}\r\n");
-		    stream.Write(message, 0, message.Length);
-		    stream.Flush();
-	    }
+            stream.Write(message, 0, message.Length);
+            stream.Flush();
+        }
 
-        private static int GetResultCode(string line){
-		    string[] bits = line.Split(' ');
-		    if (bits.Length < 2) return 0;
-		    return Int32.Parse(bits[1]);
-	    }
+        private static int GetResultCode(string line)
+        {
+            string[] bits = line.Split(' ');
+            if (bits.Length < 2) return 0;
+            return Int32.Parse(bits[1]);
+        }
 
         public static Stream DoRpc(TcpClient client, string method, Uri uri, Config conf, params string[] headers)
         {
@@ -259,6 +263,7 @@ namespace ThinCLI
                 if (response.Equals("\r\n") || response.Equals(""))
                     break;
             }
+
             // Stream should be positioned after the headers
             return http;
         }
@@ -266,18 +271,18 @@ namespace ThinCLI
 
     public static class Types
     {
-	    public static uint UnMarshalUint(Stream stream)
+        public static uint UnMarshalUint(Stream stream)
         {
-		    uint a = (uint)stream.ReadByte();
-		    uint b = (uint)stream.ReadByte();
-		    uint c = (uint)stream.ReadByte();
-		    uint d = (uint)stream.ReadByte();
-		    return (a << 0) | (b << 8) | (c << 16) | (d << 24);
-	    }
+            uint a = (uint)stream.ReadByte();
+            uint b = (uint)stream.ReadByte();
+            uint c = (uint)stream.ReadByte();
+            uint d = (uint)stream.ReadByte();
+            return (a << 0) | (b << 8) | (c << 16) | (d << 24);
+        }
 
         public static void MarshalUint(Stream stream, uint x)
         {
-		    uint mask = 0xff;
+            uint mask = 0xff;
             stream.WriteByte((byte)((x >> 0) & mask));
             stream.WriteByte((byte)((x >> 8) & mask));
             stream.WriteByte((byte)((x >> 16) & mask));
@@ -286,49 +291,49 @@ namespace ThinCLI
 
         public static int UnMarshalInt(Stream stream)
         {
-		    return (int)UnMarshalUint(stream);
-	    }
+            return (int)UnMarshalUint(stream);
+        }
 
         public static void MarshalInt(Stream stream, int x)
         {
-		    MarshalUint(stream, (uint)x);
-	    }
+            MarshalUint(stream, (uint)x);
+        }
 
         public static byte[] UnMarshalN(Stream stream, uint n)
         {
-		    byte[] buffer = new byte[n];
+            byte[] buffer = new byte[n];
             int toRead = (int)n;
-		    int offset = 0;
+            int offset = 0;
 
-		    while (toRead > 0)
+            while (toRead > 0)
             {
                 int nRead = stream.Read(buffer, offset, toRead);
                 offset = nRead;
                 toRead -= nRead;
             }
 
-		    return buffer;
-	    }
+            return buffer;
+        }
 
         public static string UnMarshalString(Stream stream)
         {
-		    uint length = UnMarshalUint(stream);
-		    byte[] buffer = UnMarshalN(stream, length);
-		    Decoder decoder = Encoding.UTF8.GetDecoder();
-		    char[] chars = new char[decoder.GetCharCount(buffer, 0, (int)length)];
-		    decoder.GetChars(buffer, 0, (int)length, chars, 0);
-		    return new string(chars);
-	    }
+            uint length = UnMarshalUint(stream);
+            byte[] buffer = UnMarshalN(stream, length);
+            Decoder decoder = Encoding.UTF8.GetDecoder();
+            char[] chars = new char[decoder.GetCharCount(buffer, 0, (int)length)];
+            decoder.GetChars(buffer, 0, (int)length, chars, 0);
+            return new string(chars);
+        }
 
         public static void MarshalString(Stream stream, string x)
         {
-		    MarshalInt(stream, x.Length);
-		    char[] c = x.ToCharArray();
-		    Encoder encoder = Encoding.UTF8.GetEncoder();
-		    byte[] bytes = new byte[encoder.GetByteCount(c, 0, c.Length, true)];
-		    encoder.GetBytes(c, 0, c.Length, bytes, 0, true);
-		    stream.Write(bytes, 0, bytes.Length);
-	    }
+            MarshalInt(stream, x.Length);
+            char[] c = x.ToCharArray();
+            Encoder encoder = Encoding.UTF8.GetEncoder();
+            byte[] bytes = new byte[encoder.GetByteCount(c, 0, c.Length, true)];
+            encoder.GetBytes(c, 0, c.Length, bytes, 0, true);
+            stream.Write(bytes, 0, bytes.Length);
+        }
     }
 
     public static class Marshalling
@@ -337,14 +342,28 @@ namespace ThinCLI
         /// Unique prefix string used to ensure we're talking to a thin CLI server
         /// </summary>
         private const string THIN_CLI_SERVER_PREFIX = "XenSource thin CLI protocol";
+
         private const int CLI_PROTOCOL_MAJOR = 0;
         private const int CLI_PROTOCOL_MINOR = 2;
 
         private enum Tag
         {
-            Print = 0, Load = 1, HttpGet = 12, HttpPut = 13, Prompt = 3, Exit = 4,
-            Error = 14, Ok = 5, Failed = 6, Chunk = 7, End = 8, Command = 9, Response = 10,
-            Blob = 11, Debug = 15, PrintStderr = 16
+            Print = 0,
+            Load = 1,
+            HttpGet = 12,
+            HttpPut = 13,
+            Prompt = 3,
+            Exit = 4,
+            Error = 14,
+            Ok = 5,
+            Failed = 6,
+            Chunk = 7,
+            End = 8,
+            Command = 9,
+            Response = 10,
+            Blob = 11,
+            Debug = 15,
+            PrintStderr = 16
         }
 
         private static Tag UnMarshalTag(Stream stream)
@@ -357,14 +376,14 @@ namespace ThinCLI
         {
             Types.MarshalInt(stream, (int)tag);
         }
-        
+
         private static void MarshalResponse(Stream stream, Tag t)
         {
             Types.MarshalInt(stream, 4 + 4);
             MarshalTag(stream, Tag.Response);
             MarshalTag(stream, t);
         }
-        
+
         private static void Load(Stream stream, string filename, Config conf)
         {
             try
@@ -393,6 +412,7 @@ namespace ThinCLI
                             MarshalTag(stream, Tag.End);
                             break;
                         }
+
                         stream.Write(block, 0, n);
                     }
                 }
@@ -421,6 +441,7 @@ namespace ThinCLI
                             MarshalResponse(stream, Tag.Failed);
                             return;
                         }
+
                         byte[] block = new byte[conf.BlockSize];
                         while (true)
                         {
@@ -428,6 +449,7 @@ namespace ThinCLI
                             if (n == 0) break;
                             http.Write(block, 0, n);
                         }
+
                         MarshalResponse(stream, Tag.Ok);
                     }
                 }
@@ -463,6 +485,7 @@ namespace ThinCLI
                             MarshalResponse(stream, Tag.Failed);
                             return;
                         }
+
                         byte[] block = new byte[conf.BlockSize];
                         while (true)
                         {
@@ -470,6 +493,7 @@ namespace ThinCLI
                             if (n == 0) break;
                             fs.Write(block, 0, n);
                         }
+
                         MarshalResponse(stream, Tag.Ok);
                     }
                 }
@@ -596,7 +620,7 @@ namespace ThinCLI
                             case Tag.PrintStderr:
                                 msg = Types.UnMarshalString(stream);
                                 Logger.Debug("Read: PrintStderr: ", conf);
-                                Logger.Info(msg); 
+                                Logger.Info(msg);
                                 break;
                             case Tag.Debug:
                                 msg = Types.UnMarshalString(stream);
@@ -607,7 +631,7 @@ namespace ThinCLI
                                 int code = Types.UnMarshalInt(stream);
                                 Logger.Debug("Read: Command Exit " + code, conf);
                                 if (code == 0)
-                                    return;//exit
+                                    return; //exit
                                 throw new ThinCliProtocolException($"Command Exit {code}", code);
                             case Tag.Error:
                                 Logger.Debug("Read: Command Error", conf);
@@ -620,6 +644,7 @@ namespace ThinCLI
                                     string param = Types.UnMarshalString(stream);
                                     paramList.Add(param);
                                 }
+
                                 Logger.Info("Error params: " + string.Join(", ", paramList));
                                 break;
                             case Tag.Prompt:
@@ -661,6 +686,7 @@ namespace ThinCLI
                             default:
                                 throw new ThinCliProtocolException("Protocol failure: Reading Command: unexpected tag: " + t);
                         }
+
                         break;
                     default:
                         throw new ThinCliProtocolException("Protocol failure: Reading Message: unexpected tag: " + t);
@@ -686,10 +712,8 @@ namespace ThinCLI
                     uriBuilder.Query = bits[1];
                 return uriBuilder.Uri;
             }
-            else
-            {
-                return new Uri(path);
-            }
+
+            return new Uri(path);
         }
     }
 }
