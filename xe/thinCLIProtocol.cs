@@ -177,9 +177,9 @@ namespace ThinCLI
         }
     }
 
-    public static class HTTP
+    public static class Http
     {
-        private static string readLine(Stream stream){
+        private static string ReadLine(Stream stream){
 		    StringBuilder messageData = new StringBuilder();
 		    do {
         	    int i = stream.ReadByte();
@@ -198,31 +198,31 @@ namespace ThinCLI
             return messageData.ToString();
 	    }
 
-        private static void writeLine(Stream stream, string line){
+        private static void WriteLine(Stream stream, string line){
             byte[] message = Encoding.UTF8.GetBytes($"{line}\r\n");
 		    stream.Write(message, 0, message.Length);
 		    stream.Flush();
 	    }
 
-        private static int getResultCode(string line){
+        private static int GetResultCode(string line){
 		    string[] bits = line.Split(' ');
 		    if (bits.Length < 2) return 0;
 		    return Int32.Parse(bits[1]);
 	    }
 
-        public static Stream DoRPC(TcpClient client, string method, Uri uri, Config conf, params string[] headers)
+        public static Stream DoRpc(TcpClient client, string method, Uri uri, Config conf, params string[] headers)
         {
             var transport = new Transport(conf);
             Stream http = transport.Connect(client, uri.Port);
 
             var startLine = $"{method} {uri.PathAndQuery} HTTP/1.0";
-            writeLine(http, startLine);
+            WriteLine(http, startLine);
             foreach (string h in headers)
-                writeLine(http, h);
-            writeLine(http, "");
+                WriteLine(http, h);
+            WriteLine(http, "");
 
-            var response = readLine(http);
-            int code = getResultCode(response);
+            var response = ReadLine(http);
+            int code = GetResultCode(response);
 
             switch (code)
             {
@@ -233,7 +233,7 @@ namespace ThinCLI
                     string url = "";
                     while (true)
                     {
-                        response = readLine(http);
+                        response = ReadLine(http);
                         if (response.StartsWith("Location: "))
                             url = response.Substring(10);
                         if (response.Equals("\r\n") || response.Equals(""))
@@ -244,7 +244,7 @@ namespace ThinCLI
                     conf.Hostname = redirect.Host;
                     http.Close();
                     http.Dispose();
-                    return DoRPC(client, method, redirect, conf, headers);
+                    return DoRpc(client, method, redirect, conf, headers);
 
                 default:
                     Logger.Error($"Received error code {code} from the server doing an HTTP {method}");
@@ -255,7 +255,7 @@ namespace ThinCLI
 
             while (true)
             {
-                response = readLine(http);
+                response = ReadLine(http);
                 if (response.Equals("\r\n") || response.Equals(""))
                     break;
             }
@@ -266,53 +266,63 @@ namespace ThinCLI
 
     public static class Types
     {
-	    public static uint unmarshal_int32(Stream stream){
+	    public static uint UnMarshalUint(Stream stream)
+        {
 		    uint a = (uint)stream.ReadByte();
 		    uint b = (uint)stream.ReadByte();
 		    uint c = (uint)stream.ReadByte();
 		    uint d = (uint)stream.ReadByte();
-		    //Console.WriteLine("a = " + a + " b = " + b + " c = " + c + " d = " + d);
 		    return (a << 0) | (b << 8) | (c << 16) | (d << 24);
 	    }
 
-        public static void marshal_int32(Stream stream, uint x){
+        public static void MarshalUint(Stream stream, uint x)
+        {
 		    uint mask = 0xff;
-		    stream.WriteByte((byte) ((x >> 0) & mask));
-		    stream.WriteByte((byte) ((x >> 8) & mask));
-		    stream.WriteByte((byte) ((x >> 16) & mask));
-		    stream.WriteByte((byte) ((x >> 24) & mask));
+            stream.WriteByte((byte)((x >> 0) & mask));
+            stream.WriteByte((byte)((x >> 8) & mask));
+            stream.WriteByte((byte)((x >> 16) & mask));
+            stream.WriteByte((byte)((x >> 24) & mask));
+        }
+
+        public static int UnMarshalInt(Stream stream)
+        {
+		    return (int)UnMarshalUint(stream);
 	    }
 
-        public static int unmarshal_int(Stream stream){
-		    return (int)unmarshal_int32(stream);
+        public static void MarshalInt(Stream stream, int x)
+        {
+		    MarshalUint(stream, (uint)x);
 	    }
 
-        public static void marshal_int(Stream stream, int x){
-		    marshal_int32(stream, (uint)x);
-	    }
-
-        public static byte[] unmarshal_n(Stream stream, uint n){
+        public static byte[] UnMarshalN(Stream stream, uint n)
+        {
 		    byte[] buffer = new byte[n];
-		    int toread = (int)n;
+            int toRead = (int)n;
 		    int offset = 0;
-		    while (toread > 0){
-			    int nread = stream.Read(buffer, offset, toread);
-			    offset= nread; toread -= nread;
-		    }
+
+		    while (toRead > 0)
+            {
+                int nRead = stream.Read(buffer, offset, toRead);
+                offset = nRead;
+                toRead -= nRead;
+            }
+
 		    return buffer;
 	    }
 
-        public static string unmarshal_string(Stream stream){
-		    uint length = unmarshal_int32(stream);
-		    byte[] buffer = unmarshal_n(stream, length);
+        public static string UnMarshalString(Stream stream)
+        {
+		    uint length = UnMarshalUint(stream);
+		    byte[] buffer = UnMarshalN(stream, length);
 		    Decoder decoder = Encoding.UTF8.GetDecoder();
 		    char[] chars = new char[decoder.GetCharCount(buffer, 0, (int)length)];
 		    decoder.GetChars(buffer, 0, (int)length, chars, 0);
 		    return new string(chars);
 	    }
 
-        public static void marshal_string(Stream stream, string x){
-		    marshal_int(stream, x.Length);
+        public static void MarshalString(Stream stream, string x)
+        {
+		    MarshalInt(stream, x.Length);
 		    char[] c = x.ToCharArray();
 		    Encoder encoder = Encoding.UTF8.GetEncoder();
 		    byte[] bytes = new byte[encoder.GetByteCount(c, 0, c.Length, true)];
@@ -333,24 +343,24 @@ namespace ThinCLI
         private enum Tag
         {
             Print = 0, Load = 1, HttpGet = 12, HttpPut = 13, Prompt = 3, Exit = 4,
-            Error = 14, OK = 5, Failed = 6, Chunk = 7, End = 8, Command = 9, Response = 10,
+            Error = 14, Ok = 5, Failed = 6, Chunk = 7, End = 8, Command = 9, Response = 10,
             Blob = 11, Debug = 15, PrintStderr = 16
         }
 
-        private static Tag UnmarshalTag(Stream stream)
+        private static Tag UnMarshalTag(Stream stream)
         {
-            int x = Types.unmarshal_int(stream);
+            int x = Types.UnMarshalInt(stream);
             return (Tag)x;
         }
 
         private static void MarshalTag(Stream stream, Tag tag)
         {
-            Types.marshal_int(stream, (int)tag);
+            Types.MarshalInt(stream, (int)tag);
         }
         
         private static void MarshalResponse(Stream stream, Tag t)
         {
-            Types.marshal_int(stream, 4 + 4);
+            Types.MarshalInt(stream, 4 + 4);
             MarshalTag(stream, Tag.Response);
             MarshalTag(stream, t);
         }
@@ -363,14 +373,14 @@ namespace ThinCLI
                 {
                     FileInfo fi = new FileInfo(filename);
                     // Immediately report our success in opening the file
-                    MarshalResponse(stream, Tag.OK);
+                    MarshalResponse(stream, Tag.Ok);
 
                     // The server doesn't like multiple chunks but this is fine for
                     // Zurich/Geneva imports
-                    Types.marshal_int(stream, 4 + 4 + 4);
+                    Types.MarshalInt(stream, 4 + 4 + 4);
                     MarshalTag(stream, Tag.Blob);
                     MarshalTag(stream, Tag.Chunk);
-                    Types.marshal_int32(stream, (uint)fi.Length);
+                    Types.MarshalUint(stream, (uint)fi.Length);
 
                     byte[] block = new byte[conf.BlockSize];
                     while (true)
@@ -378,7 +388,7 @@ namespace ThinCLI
                         int n = fs.Read(block, 0, block.Length);
                         if (n == 0)
                         {
-                            Types.marshal_int(stream, 4 + 4);
+                            Types.MarshalInt(stream, 4 + 4);
                             MarshalTag(stream, Tag.Blob);
                             MarshalTag(stream, Tag.End);
                             break;
@@ -404,7 +414,7 @@ namespace ThinCLI
                 using (FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read))
                 {
                     using (TcpClient client = new TcpClient(uri.Host, uri.Port))
-                    using (Stream http = HTTP.DoRPC(client, "PUT", uri, conf, $"Content-Length: {fs.Length}"))
+                    using (Stream http = Http.DoRpc(client, "PUT", uri, conf, $"Content-Length: {fs.Length}"))
                     {
                         if (http == null)
                         {
@@ -418,7 +428,7 @@ namespace ThinCLI
                             if (n == 0) break;
                             http.Write(block, 0, n);
                         }
-                        MarshalResponse(stream, Tag.OK);
+                        MarshalResponse(stream, Tag.Ok);
                     }
                 }
             }
@@ -445,7 +455,7 @@ namespace ThinCLI
                 using (FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write))
                 {
                     using (TcpClient client = new TcpClient(uri.Host, uri.Port))
-                    using (Stream http = HTTP.DoRPC(client, "GET", uri, conf))
+                    using (Stream http = Http.DoRpc(client, "GET", uri, conf))
                     {
                         if (http == null)
                         {
@@ -460,7 +470,7 @@ namespace ThinCLI
                             if (n == 0) break;
                             fs.Write(block, 0, n);
                         }
-                        MarshalResponse(stream, Tag.OK);
+                        MarshalResponse(stream, Tag.Ok);
                     }
                 }
             }
@@ -475,7 +485,7 @@ namespace ThinCLI
         private static void VersionHandshake(Stream stream, Config conf)
         {
             // Check for the initial prefix string
-            byte[] magic = Types.unmarshal_n(stream, (uint)THIN_CLI_SERVER_PREFIX.Length);
+            byte[] magic = Types.UnMarshalN(stream, (uint)THIN_CLI_SERVER_PREFIX.Length);
 
             for (int i = 0; i < THIN_CLI_SERVER_PREFIX.Length; i++)
             {
@@ -484,8 +494,8 @@ namespace ThinCLI
             }
 
             // Read the remote version numbers
-            int remoteMajor = Types.unmarshal_int(stream);
-            int remoteMinor = Types.unmarshal_int(stream);
+            int remoteMajor = Types.UnMarshalInt(stream);
+            int remoteMinor = Types.UnMarshalInt(stream);
 
             Logger.Debug($"Remote thin CLI protocol has version {remoteMajor}.{remoteMinor}", conf);
             Logger.Debug($"Client expects version {CLI_PROTOCOL_MAJOR}.{CLI_PROTOCOL_MINOR}", conf);
@@ -497,8 +507,8 @@ namespace ThinCLI
             foreach (var t in THIN_CLI_SERVER_PREFIX)
                 stream.WriteByte((byte)t);
 
-            Types.marshal_int(stream, CLI_PROTOCOL_MAJOR);
-            Types.marshal_int(stream, CLI_PROTOCOL_MINOR);
+            Types.MarshalInt(stream, CLI_PROTOCOL_MAJOR);
+            Types.MarshalInt(stream, CLI_PROTOCOL_MINOR);
         }
 
         public static void PerformCommand(string command, Config conf)
@@ -570,44 +580,44 @@ namespace ThinCLI
 
             while (true)
             {
-                Types.unmarshal_int32(stream); // total message length (unused here)	
-                Tag t = UnmarshalTag(stream);
+                Types.UnMarshalUint(stream); // total message length (unused here)	
+                Tag t = UnMarshalTag(stream);
                 switch (t)
                 {
                     case Tag.Command:
-                        t = UnmarshalTag(stream);
+                        t = UnMarshalTag(stream);
                         switch (t)
                         {
                             case Tag.Print:
-                                msg = Types.unmarshal_string(stream);
+                                msg = Types.UnMarshalString(stream);
                                 Logger.Debug("Read: Print: ", conf);
                                 Logger.Info(msg);
                                 break;
                             case Tag.PrintStderr:
-                                msg = Types.unmarshal_string(stream);
+                                msg = Types.UnMarshalString(stream);
                                 Logger.Debug("Read: PrintStderr: ", conf);
                                 Logger.Info(msg); 
                                 break;
                             case Tag.Debug:
-                                msg = Types.unmarshal_string(stream);
+                                msg = Types.UnMarshalString(stream);
                                 Logger.Debug("Read: Debug: ", conf);
                                 Logger.Info(msg);
                                 break;
                             case Tag.Exit:
-                                int code = Types.unmarshal_int(stream);
+                                int code = Types.UnMarshalInt(stream);
                                 Logger.Debug("Read: Command Exit " + code, conf);
                                 if (code == 0)
                                     return;//exit
                                 throw new ThinCliProtocolException($"Command Exit {code}", code);
                             case Tag.Error:
                                 Logger.Debug("Read: Command Error", conf);
-                                string errCode = Types.unmarshal_string(stream);
+                                string errCode = Types.UnMarshalString(stream);
                                 Logger.Info("Error code: " + errCode);
                                 var paramList = new List<string>();
-                                int length = Types.unmarshal_int(stream);
+                                int length = Types.UnMarshalInt(stream);
                                 for (int i = 0; i < length; i++)
                                 {
-                                    string param = Types.unmarshal_string(stream);
+                                    string param = Types.UnMarshalString(stream);
                                     paramList.Add(param);
                                 }
                                 Logger.Info("Error params: " + string.Join(", ", paramList));
@@ -616,34 +626,34 @@ namespace ThinCLI
                                 Logger.Debug("Read: Command Prompt", conf);
                                 string response = Console.ReadLine();
                                 Logger.Info("Read " + response);
-                                /* NB, 4+4+4 here for the blob, chunk and string length, put in by the marshal_string
+                                /* NB, 4+4+4 here for the blob, chunk and string length, put in by the MarshalString
                                  function. A franken-marshal. */
-                                Types.marshal_int(stream, 4 + 4 + 4); // length
+                                Types.MarshalInt(stream, 4 + 4 + 4); // length
                                 MarshalTag(stream, Tag.Blob);
                                 MarshalTag(stream, Tag.Chunk);
-                                Types.marshal_string(stream, response);
-                                Types.marshal_int(stream, 4 + 4); // length
+                                Types.MarshalString(stream, response);
+                                Types.MarshalInt(stream, 4 + 4); // length
                                 MarshalTag(stream, Tag.Blob);
                                 MarshalTag(stream, Tag.End);
                                 break;
                             case Tag.Load:
-                                filename = Types.unmarshal_string(stream);
+                                filename = Types.UnMarshalString(stream);
                                 CheckPermitFiles(filename, conf);
                                 Logger.Debug("Read: Load " + filename, conf);
                                 Load(stream, filename, conf);
                                 break;
                             case Tag.HttpPut:
-                                filename = Types.unmarshal_string(stream);
+                                filename = Types.UnMarshalString(stream);
                                 CheckPermitFiles(filename, conf);
-                                path = Types.unmarshal_string(stream);
+                                path = Types.UnMarshalString(stream);
                                 Uri uri = ParseUri(path, conf);
                                 Logger.Debug("Read: HttpPut " + filename + " -> " + uri, conf);
                                 HttpPut(stream, filename, uri, conf);
                                 break;
                             case Tag.HttpGet:
-                                filename = Types.unmarshal_string(stream);
+                                filename = Types.UnMarshalString(stream);
                                 CheckPermitFiles(filename, conf, true);
-                                path = Types.unmarshal_string(stream);
+                                path = Types.UnMarshalString(stream);
                                 uri = ParseUri(path, conf);
                                 Logger.Debug("Read: HttpGet " + filename + " -> " + uri, conf);
                                 HttpGet(stream, filename, uri, conf);
