@@ -117,7 +117,7 @@ namespace XenAdmin.Commands
         protected override bool CanRunCore()
         {
             Host targetHost = GetTargetNodeAncestorAsXenObjectOrGroupingTag<Host>();
-            if (targetHost == null || !targetHost.IsLive())
+            if (targetHost == null || !targetHost.IsLive()|| !targetHost.Connection.IsConnected)
                 return false;
 
             List<VM> draggedVMs = GetDraggedItemsAsXenObjects<VM>();

@@ -114,7 +114,7 @@ namespace XenAdmin.Commands
                 return false;
             }
 
-            if (!vm.SRs().ToList().All(sr => sr != null && !sr.HBALunPerVDI()))
+            if (!vm.SRs().All(sr => sr != null && !sr.HBALunPerVDI()))
             {
                 failureReason = Messages.MIGRATION_NOT_ALLOWED_USUPPORTED_SR;
                 return false;

@@ -46,7 +46,7 @@ namespace XenAdmin.Wizards.GenericPages
             _baseItemToFilterOn = itemToFilterOn;
         }
 
-        protected abstract bool FailureFoundFor(IXenObject xenObject, out string failureReason);
+        protected abstract bool FailureFoundFor(IXenObject itemToFilterOn, out string failureReason);
 
         public bool FailureFound(out string failureReason)
         {
