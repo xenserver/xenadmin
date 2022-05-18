@@ -52,7 +52,7 @@ namespace XenAdmin.Actions
         {
             List<Data_source> sources;
 
-            if (XenObject is VM vm && vm.allowed_operations.Contains(vm_operations.data_source_op))
+            if (XenObject is VM vm)
                 sources = VM.get_data_sources(Session, vm.opaque_ref);
             else if (XenObject is Host host)
                 sources = Host.get_data_sources(Session, host.opaque_ref);
@@ -106,7 +106,7 @@ namespace XenAdmin.Actions
                     Host.record_data_source(Session, Host.opaque_ref, _dataSource.name_label);
                     DataSources = Host.get_data_sources(Session, Host.opaque_ref);
                 }
-                else if (VM != null && VM.allowed_operations.Contains(vm_operations.data_source_op))
+                else if (VM != null)
                 {
                     VM.record_data_source(Session, VM.opaque_ref, _dataSource.name_label);
                     DataSources = VM.get_data_sources(Session, VM.opaque_ref);
