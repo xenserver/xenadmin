@@ -61,8 +61,8 @@ namespace ThinCLI
 
         internal static void Debug(Exception ex, Config conf)
         {
-            if (conf.Debug && ex != null)
-                Console.WriteLine("[DEBUG] " + ex.StackTrace);
+            if (ex != null)
+                Debug(ex.StackTrace, conf);
         }
 
         internal static void Error(string x)

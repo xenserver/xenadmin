@@ -37,7 +37,7 @@ using ThinCLI.Properties;
 
 namespace ThinCLI
 {
-    static class MainClass
+    internal static class MainClass
     {
         public static readonly Version Version = Assembly.GetExecutingAssembly().GetName().Version;
 
@@ -123,7 +123,7 @@ namespace ThinCLI
             }
 
             body += $"username={conf.Username}\n";
-            body += $"password={conf.Password}";//do not add a line break after the last string
+            body += $"password={conf.Password}"; //do not add a line break after the last string
 
             var command = "POST /cli HTTP/1.0\r\n" +
                           $"content-length: {Encoding.UTF8.GetBytes(body).Length}\r\n\r\n" +
@@ -133,7 +133,7 @@ namespace ThinCLI
             {
                 Marshalling.PerformCommand(command, conf);
             }
-            catch (ThinCliProtocolError tcpEx)
+            catch (ThinCliProtocolException tcpEx)
             {
                 Logger.Error(tcpEx.Message);
                 Logger.Debug(tcpEx, conf);
@@ -148,9 +148,9 @@ namespace ThinCLI
         }
     }
 
-    internal class ThinCliProtocolError : Exception
+    public class ThinCliProtocolException : Exception
     {
-        public ThinCliProtocolError(string msg = null, int exitCode = 1)
+        public ThinCliProtocolException(string msg = null, int exitCode = 1)
             : base(msg)
         {
             ExitCode = exitCode;

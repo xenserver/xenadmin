@@ -31,9 +31,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.IO;
-using System.Net;
 using System.Net.Security;
 using System.Net.Sockets;
 using System.Security.Authentication;
@@ -80,8 +78,6 @@ namespace ThinCLI
 
             lock (_certificateValidationLock)
             {
-                var req = (SslStream)sender;
-
                 string trustEvaluation = Messages.CERTIFICATE_NOT_TRUSTED;
                 try
                 {
@@ -91,7 +87,7 @@ namespace ThinCLI
                 }
                 catch (CryptographicException)
                 {
-                    //ignore
+                    Logger.Warn("Invalid server certificate.");
                 }
 
                 var knownCertificates = Settings.GetKnownServers();
@@ -176,7 +172,7 @@ namespace ThinCLI
             }
             catch (AuthenticationException ae)
             {
-                throw new ThinCliProtocolError(ae.Message);
+                throw new ThinCliProtocolException(ae.Message);
             }
         }
     }
@@ -327,7 +323,10 @@ namespace ThinCLI
 
     public static class Marshalling
     {
-        private const string MAGIC_STRING = "XenSource thin CLI protocol";
+        /// <summary>
+        /// Unique prefix string used to ensure we're talking to a thin CLI server
+        /// </summary>
+        private const string THIN_CLI_SERVER_PREFIX = "XenSource thin CLI protocol";
         private const int CLI_PROTOCOL_MAJOR = 0;
         private const int CLI_PROTOCOL_MINOR = 2;
 
@@ -441,7 +440,7 @@ namespace ThinCLI
             try
             {
                 if (File.Exists(filename))
-                    throw new Exception($"The file '{filename}' already exists");
+                    throw new ThinCliProtocolException($"The file '{filename}' already exists");
 
                 using (FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write))
                 {
@@ -475,13 +474,13 @@ namespace ThinCLI
 
         private static void VersionHandshake(Stream stream, Config conf)
         {
-            // Check for the initial magic string
-            byte[] magic = Types.unmarshal_n(stream, (uint)MAGIC_STRING.Length);
+            // Check for the initial prefix string
+            byte[] magic = Types.unmarshal_n(stream, (uint)THIN_CLI_SERVER_PREFIX.Length);
 
-            for (int i = 0; i < MAGIC_STRING.Length; i++)
+            for (int i = 0; i < THIN_CLI_SERVER_PREFIX.Length; i++)
             {
-                if (magic[i] != MAGIC_STRING[i])
-                    throw new ThinCliProtocolError($"Failed to find a server on {conf.Hostname}:{conf.Port}");
+                if (magic[i] != THIN_CLI_SERVER_PREFIX[i])
+                    throw new ThinCliProtocolException($"Failed to find a server on {conf.Hostname}:{conf.Port}");
             }
 
             // Read the remote version numbers
@@ -492,10 +491,10 @@ namespace ThinCLI
             Logger.Debug($"Client expects version {CLI_PROTOCOL_MAJOR}.{CLI_PROTOCOL_MINOR}", conf);
 
             if (CLI_PROTOCOL_MAJOR != remoteMajor || CLI_PROTOCOL_MINOR != remoteMinor)
-                throw new ThinCliProtocolError($"Protocol version mismatch talking to server on {conf.Hostname}:{conf.Port}");
+                throw new ThinCliProtocolException($"Protocol version mismatch talking to server on {conf.Hostname}:{conf.Port}");
 
             // Tell the server our version numbers
-            foreach (var t in MAGIC_STRING)
+            foreach (var t in THIN_CLI_SERVER_PREFIX)
                 stream.WriteByte((byte)t);
 
             Types.marshal_int(stream, CLI_PROTOCOL_MAJOR);
@@ -511,7 +510,7 @@ namespace ThinCLI
                 using (var stream = transport.Connect(client, conf.Port))
                 {
                     if (stream == null)
-                        throw new ThinCliProtocolError($"Connection to {conf.Hostname}:{conf.Port} failed.");
+                        throw new ThinCliProtocolException($"Connection to {conf.Hostname}:{conf.Port} failed.");
 
                     byte[] message = Encoding.UTF8.GetBytes(command);
                     stream.Write(message, 0, message.Length);
@@ -522,21 +521,21 @@ namespace ThinCLI
             }
             catch (SocketException)
             {
-                throw new ThinCliProtocolError($"Connection to {conf.Hostname}:{conf.Port} refused.");
+                throw new ThinCliProtocolException($"Connection to {conf.Hostname}:{conf.Port} refused.");
             }
         }
 
-        private static void CheckPermitFiles(String filename, Config conf, bool includeCurrentDir = false)
+        private static void CheckPermitFiles(string filename, Config conf, bool includeCurrentDir = false)
         {
-            string fullpath;
+            string fullPath;
 
             try
             {
-                fullpath = Path.GetFullPath(filename);
+                fullPath = Path.GetFullPath(filename);
             }
             catch (Exception ex)
             {
-                throw new Exception($"Failed to retrieve full path of file '{filename}', '{ex.Message}'");
+                throw new ThinCliProtocolException($"Failed to retrieve full path of file '{filename}', '{ex.Message}'");
             }
 
             if (includeCurrentDir)
@@ -546,9 +545,9 @@ namespace ThinCLI
             {
                 try
                 {
-                    String valueFullPath = Path.GetFullPath(value);
+                    var valueFullPath = Path.GetFullPath(value);
 
-                    if (fullpath.StartsWith(valueFullPath))
+                    if (fullPath.StartsWith(valueFullPath))
                     {
                         Logger.Debug("Passed permit files check", conf);
                         return;
@@ -560,7 +559,7 @@ namespace ThinCLI
                 }
             }
 
-            throw new Exception($"The file with name '{filename}' is not present at the command line.");
+            throw new ThinCliProtocolException($"The file with name '{filename}' is not present at the command line.");
         }
 
         private static void Interpreter(Stream stream, Config conf)
@@ -599,7 +598,7 @@ namespace ThinCLI
                                 Logger.Debug("Read: Command Exit " + code, conf);
                                 if (code == 0)
                                     return;//exit
-                                throw new ThinCliProtocolError($"Command Exit {code}", code);
+                                throw new ThinCliProtocolException($"Command Exit {code}", code);
                             case Tag.Error:
                                 Logger.Debug("Read: Command Error", conf);
                                 string errCode = Types.unmarshal_string(stream);
@@ -650,11 +649,11 @@ namespace ThinCLI
                                 HttpGet(stream, filename, uri, conf);
                                 break;
                             default:
-                                throw new ThinCliProtocolError("Protocol failure: Reading Command: unexpected tag: " + t);
+                                throw new ThinCliProtocolException("Protocol failure: Reading Command: unexpected tag: " + t);
                         }
                         break;
                     default:
-                        throw new ThinCliProtocolError("Protocol failure: Reading Message: unexpected tag: " + t);
+                        throw new ThinCliProtocolException("Protocol failure: Reading Message: unexpected tag: " + t);
                 }
             }
         }
