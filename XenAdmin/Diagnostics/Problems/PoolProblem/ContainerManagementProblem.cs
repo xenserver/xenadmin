@@ -36,41 +36,28 @@ using XenAPI;
 
 namespace XenAdmin.Diagnostics.Problems.PoolProblem
 {
-    class ContainerManagementProblem : ProblemWithMoreInfo
+    class ContainerManagementWarning : WarningWithMoreInfo
     {
         private readonly Pool _pool;
+        private readonly bool _isUpgrade;
 
-        public ContainerManagementProblem(Check check, Pool pool)
+        public ContainerManagementWarning(Check check, Pool pool, bool isUpgrade)
             : base(check)
         {
             _pool = pool;
-        }
-
-        public override string Description =>
-            string.Format(Messages.PROBLEM_CONTAINER_MANAGEMENT_DESCRIPTION, _pool,
-                string.Format(Messages.XENSERVER_8_2, BrandManager.ProductVersion82));
-
-        public override string Message => Messages.PROBLEM_CONTAINER_MANAGEMENT_HELP;
-    }
-
-    class ContainerManagementWarning : WarningWithMoreInfo
-    {
-        private readonly Pool pool;
-
-        public ContainerManagementWarning(Check check, Pool pool)
-            : base(check)
-        {
-            this.pool = pool;
+            _isUpgrade = isUpgrade;
         }
 
         public override string Title => Check.Description;
 
         public override string Description =>
-            string.Format(Messages.PROBLEM_CONTAINER_MANAGEMENT_DESCRIPTION, pool,
+            string.Format(Messages.PROBLEM_CONTAINER_MANAGEMENT_DESCRIPTION, _pool,
                 string.Format(Messages.XENSERVER_8_2, BrandManager.ProductVersion82));
 
         public override string Message =>
-            string.Format(Messages.PROBLEM_CONTAINER_MANAGEMENT_INFO,
-                string.Format(Messages.XENSERVER_8_2, BrandManager.ProductVersion82));
+            _isUpgrade
+                ? string.Format(Messages.PROBLEM_CONTAINER_MANAGEMENT_UPGRADE,
+                    string.Format(Messages.XENSERVER_8_2, BrandManager.ProductVersion82))
+                : Messages.PROBLEM_CONTAINER_MANAGEMENT_UPDATE;
     }
 }

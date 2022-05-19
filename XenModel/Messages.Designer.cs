@@ -9097,7 +9097,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Support for container management has been removed as of {0}. Please uninstall the Container Management supplemental pack because you will no longer be able to use it for managing Docker containers..
+        ///   Looks up a localized string similar to Support for container management has been removed as of {0}. You will no longer be able to use the Container Management supplemental pack for managing Docker containers..
         /// </summary>
         public static string CONTAINER_MANAGEMENT_REMOVAL_WARNING {
             get {
@@ -30911,20 +30911,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to First uninstall the Container Management supplemental pack because you will no longer be able to use it for managing Docker containers..
+        ///   Looks up a localized string similar to You will no longer be able to use the Container Management supplemental pack for managing Docker containers. The  update will not remove the supplemental pack from your system, but it may not be fully, if at all, functional..
         /// </summary>
-        public static string PROBLEM_CONTAINER_MANAGEMENT_HELP {
+        public static string PROBLEM_CONTAINER_MANAGEMENT_UPDATE {
             get {
-                return ResourceManager.GetString("PROBLEM_CONTAINER_MANAGEMENT_HELP", resourceCulture);
+                return ResourceManager.GetString("PROBLEM_CONTAINER_MANAGEMENT_UPDATE", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If you are upgrading to {0} and above, first uninstall the Container Management supplemental pack because you will no longer be able to use it for managing Docker containers..
+        ///   Looks up a localized string similar to If you are upgrading to {0} or above, you will no longer be able to use the Container Management supplemental pack for managing Docker containers. The upgrade will remove the supplemental pack from your system..
         /// </summary>
-        public static string PROBLEM_CONTAINER_MANAGEMENT_INFO {
+        public static string PROBLEM_CONTAINER_MANAGEMENT_UPGRADE {
             get {
-                return ResourceManager.GetString("PROBLEM_CONTAINER_MANAGEMENT_INFO", resourceCulture);
+                return ResourceManager.GetString("PROBLEM_CONTAINER_MANAGEMENT_UPGRADE", resourceCulture);
             }
         }
         
