@@ -10628,7 +10628,14 @@ Please reconnect the host and try again</value>
     <value>This pool has no shared storage</value>
   </data>
   <data name="POOL_HAS_PV_GUEST_WARNING" xml:space="preserve">
-    <value>{0}: Support for paravirtualized (PV) guests has been removed in {1}. Click Learn more to see the list of supported guest operating systems.</value>
+    <value>{0}: Support for paravirtualized (PV) guests has been removed in {1}.</value>
+  </data>
+  <data name="POOL_HAS_PV_GUEST_WARNING_DETAIL" xml:space="preserve">
+    <value>The following VMs are paravirtualized (PV):
+
+{0}
+
+Support for PV guests has been removed in {1}. Click Learn more to see the list of supported guest operating systems.</value>
   </data>
   <data name="POOL_IS_PARTIALLY_LICENSED" xml:space="preserve">
     <value>The pool is partially licensed</value>
