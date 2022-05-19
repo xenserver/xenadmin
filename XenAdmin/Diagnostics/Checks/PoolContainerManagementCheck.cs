@@ -78,7 +78,7 @@ namespace XenAdmin.Diagnostics.Checks
             if (_newVersion != null)
             {
                 if (_newVersion.Version.CompareTo(new Version(BrandManager.ProductVersion82)) >= 0)
-                    return new ContainerManagementProblem(this, _pool);
+                    return new ContainerManagementWarning(this, _pool, false);
                 return null;
             }
 
@@ -98,12 +98,11 @@ namespace XenAdmin.Diagnostics.Checks
 
             // we don't know the upgrade version, so add generic warning
             // (this is the case of the manual upgrade or when the rpu plugin doesn't have the function)
-            if (string.IsNullOrEmpty(upgradePlatformVersion))
-                return new ContainerManagementWarning(this, _pool);
-                
-            // we know they are upgrading to Stockholm or greater, so block them
-            if (Helpers.StockholmOrGreater(upgradePlatformVersion))
-                return new ContainerManagementProblem(this, _pool);
+            // also show the warning if we know they are upgrading to Stockholm or greater
+
+            if (string.IsNullOrEmpty(upgradePlatformVersion) ||
+                Helpers.StockholmOrGreater(upgradePlatformVersion))
+                return new ContainerManagementWarning(this, _pool, true);
 
             return null;
         }
