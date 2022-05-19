@@ -45,7 +45,6 @@
     <Compile Include="export.cs" />
     <Compile Include="io.cs" />
     <Compile Include="tar.cs" />
-    <Compile Include="thinCLIProtocol.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XXHash.cs" />
   </ItemGroup>
