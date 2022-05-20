@@ -112,6 +112,7 @@
     <Compile Include="UnitTests\HealthCheckAnalysisProgressTest.cs" />
     <Compile Include="UnitTests\NamesAndMessagesTests.cs" />
     <Compile Include="UnitTests\NaturalCompareTest.cs" />
+    <Compile Include="UnitTests\RpmVersionTests.cs" />
     <Compile Include="UnitTests\StreamUtilitiesTests.cs" />
     <Compile Include="UnitTests\SubnetworkMaskValidatorTest.cs" />
     <Compile Include="UnitTests\TimeUtilTests.cs" />

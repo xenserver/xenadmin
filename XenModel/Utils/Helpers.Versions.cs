@@ -29,88 +29,143 @@
  * SUCH DAMAGE.
  */
 
+using System;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using XenAdmin.Network;
 using XenAPI;
+using XenCenterLib;
+
 
 namespace XenAdmin.Core
 {
     public static partial class Helpers
     {
-        /// <summary>
-        /// Only log the unrecognised version message once (CA-11201).
-        /// </summary>
-        private static bool _unrecognisedVersionWarned = false;
-        /// <summary>
-        /// Numbers should have three parts, i.e. be in the form a.b.c, otherwise they won't be parsed.
-        /// </summary>
-        /// <param name="version1">May be null.</param>
-        /// <param name="version2">May be null.</param>
-        /// <returns></returns>
+        private static readonly Regex RpmVersionRegex = new Regex(@"^([0-9]+:)?([0-9a-zA-Z\.]+)(-[0-9a-zA-Z\.]+)?$");
+
+        public class RpmVersion
+        {
+            public int Epoch { get; private set; }
+            public List<int> Version { get; } = new List<int>();
+            public List<int> Release { get; } = new List<int>();
+
+            /// <summary>
+            /// The xapi RPMs have versions like 1:22.13.0.1.g2226c2e3a-1.1.g4e82970.xs8.
+            /// The parts g* referring to git commits and the last part xs8 referring to
+            /// the distro are ignored by the parser.
+            /// </summary>
+            public static RpmVersion Parse(string versionString)
+            {
+                if (string.IsNullOrEmpty(versionString))
+                    return null;
+
+                var match = RpmVersionRegex.Match(versionString);
+                if (!match.Success || match.Groups.Count < 4)
+                    return null;
+
+                var rpmVersion = new RpmVersion();
+
+                var epoch = match.Groups[1].Value.TrimEnd(':');
+                if (int.TryParse(epoch, out var epochRes))
+                    rpmVersion.Epoch = epochRes;
+
+                var version = match.Groups[2].Value.Split('.');
+                foreach (var v in version)
+                {
+                    if (int.TryParse(v, out var result))
+                        rpmVersion.Version.Add(result);
+                    else
+                        break;
+                }
+
+                var release = match.Groups[3].Value.TrimStart('-').Split('.');
+                foreach (var v in release)
+                {
+                    if (int.TryParse(v, out var result))
+                        rpmVersion.Release.Add(result);
+                    else
+                        break;
+                }
+
+                return rpmVersion;
+            }
+        }
+
+        /// <remarks>Unlike the .NET Framework's Version.CompareTo() method, this method
+        /// considers 1.2.0 and 1.2 as equal.</remarks>
         public static int ProductVersionCompare(string version1, string version2)
         {
-            // Assume version numbers are of form 'a.b.c'
-            int a1 = 99, b1 = 99, c1 = 99, a2 = 99, b2 = 99, c2 = 99;
+            var v1 = RpmVersion.Parse(version1);
+            var v2 = RpmVersion.Parse(version2);
 
-
-            string[] tokens = null;
-            if (version1 != null)
-                tokens = version1.Split('.');
-            if (tokens != null && tokens.Length == 3)
-            {
-                a1 = int.Parse(tokens[0]);
-                b1 = int.Parse(tokens[1]);
-                c1 = int.Parse(tokens[2]);
-            }
-            else
-            {
-                if (!_unrecognisedVersionWarned)
-                {
-                    log.DebugFormat("Unrecognised version format {0} - treating as developer version", version1);
-                    _unrecognisedVersionWarned = true;
-                }
-            }
-            tokens = null;
-            if (version2 != null)
-                tokens = version2.Split('.');
-            if (tokens != null && tokens.Length == 3)
-            {
-                a2 = int.Parse(tokens[0]);
-                b2 = int.Parse(tokens[1]);
-                c2 = int.Parse(tokens[2]);
-            }
-            else
-            {
-                if (!_unrecognisedVersionWarned)
-                {
-                    log.DebugFormat("Unrecognised version format {0} - treating as developer version", version2);
-                    _unrecognisedVersionWarned = true;
-                }
-            }
-
-            if (a2 > a1)
-            {
+            if (v1 == null && v2 == null)
+                return 0;
+            if (v1 == null)
                 return -1;
-            }
-            else if (a2 == a1)
+            if (v2 == null)
+                return 1;
+
+            int result = v1.Epoch.CompareTo(v2.Epoch);
+            if (result != 0)
+                return result;
+
+            int i = 0;
+            var min = Math.Min(v1.Version.Count, v2.Version.Count);
+
+            while (i < min)
             {
-                if (b2 > b1)
-                {
-                    return -1;
-                }
-                else if (b2 == b1)
-                {
-                    if (c2 > c1)
-                    {
-                        return -1;
-                    }
-                    else if (c1 == c2)
-                    {
-                        return 0;
-                    }
-                }
+                result = v1.Version[i].CompareTo(v2.Version[i]);
+                if (result != 0)
+                    return result;
+                i++;
             }
-            return 1;
+
+            while (i < v1.Version.Count)
+            {
+                result = v1.Version[i].CompareTo(0);
+                if (result != 0)
+                    return result;
+                i++;
+            }
+
+            while (i < v2.Version.Count)
+            {
+                result = 0.CompareTo(v2.Version[i]);
+                if (result != 0)
+                    return result;
+                i++;
+            }
+
+            i = 0;
+            min = Math.Min(v1.Release.Count, v2.Release.Count);
+
+            while (i < min)
+            {
+                result = v1.Release[i].CompareTo(v2.Release[i]);
+                if (result != 0)
+                    return result;
+                i++;
+            }
+
+            while (i < v1.Release.Count)
+            {
+                result = v1.Release[i].CompareTo(0);
+                if (result != 0)
+                    return result;
+                i++;
+            }
+
+            while (i < v2.Release.Count)
+            {
+                result = 0.CompareTo(v2.Release[i]);
+                if (result != 0)
+                    return result;
+                i++;
+            }
+
+            return result;
         }
+
 
         #region Versions
 
