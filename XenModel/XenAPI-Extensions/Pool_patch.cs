@@ -152,7 +152,7 @@ namespace XenAPI
                         continue;
 
                     // ignore hosts of different version
-                    if (Helpers.productVersionCompare(Helpers.HostProductVersion(otherHost),
+                    if (Helpers.ProductVersionCompare(Helpers.HostProductVersion(otherHost),
                             Helpers.HostProductVersion(host)) != 0)
                         continue;
 

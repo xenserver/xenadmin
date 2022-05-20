@@ -82,7 +82,7 @@ namespace XenAdmin.Commands
 
                     var homeHost = vm.Home();
 
-                    if (Helpers.productVersionCompare(Helpers.HostProductVersion(targetHost),
+                    if (Helpers.ProductVersionCompare(Helpers.HostProductVersion(targetHost),
                             Helpers.HostProductVersion(homeHost ?? Helpers.GetCoordinator(vm.Connection))) < 0)
                         return Messages.OLDER_THAN_CURRENT_SERVER;
 
@@ -169,7 +169,7 @@ namespace XenAdmin.Commands
                     return false;
                 }
 
-                if (Helpers.productVersionCompare(Helpers.HostProductVersion(targetHost), Helpers.HostProductVersion(homeHost)) < 0)
+                if (Helpers.ProductVersionCompare(Helpers.HostProductVersion(targetHost), Helpers.HostProductVersion(homeHost)) < 0)
                     return false;
 
                 if (VMOperationHostCommand.VmCpuIncompatibleWithHost(targetHost, vm))
