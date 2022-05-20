@@ -537,6 +537,12 @@ namespace XenAdmin.Core
             return coordinator == null || productVersionCompare(coordinator.GetXapiVersion(), "22.5.0") >= 0;
         }
 
+        public static bool XapiEqualOrGreater_22_19_0(IXenConnection conn)
+        {
+            var coordinator = GetCoordinator(conn);
+            return coordinator == null || productVersionCompare(coordinator.GetXapiVersion(), "22.19.0") >= 0;
+        }
+
         #endregion
 
         // CP-3435: Disable Check for Updates in Common Criteria Certification project

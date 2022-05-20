@@ -91,7 +91,6 @@
     <Compile Include="Actions\Host\ShutdownHostAction.cs" />
     <Compile Include="Actions\Host\UpdateIntegratedGpuPassthroughAction.cs" />
     <Compile Include="Actions\DummyAction.cs" />
-    <Compile Include="Actions\Message\DestroyMessageAction.cs" />
     <Compile Include="Actions\Host\HostBackupRestoreAction.cs" />
     <Compile Include="Actions\Host\SingleHostStatusAction.cs" />
     <Compile Include="Actions\MultipleAction.cs" />

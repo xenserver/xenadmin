@@ -218,6 +218,34 @@ namespace XenAPI
 
         /// <summary>
         /// 
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_messages">Messages to destroy</param>
+        public static void destroy_many(Session session, List<XenRef<Message>> _messages)
+        {
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.message_destroy_many(session.opaque_ref, _messages);
+            else
+                session.XmlRpcProxy.message_destroy_many(session.opaque_ref, _messages == null ? new string[] {} : Helper.RefListToStringArray(_messages)).parse();
+        }
+
+        /// <summary>
+        /// 
+        /// Experimental. First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_messages">Messages to destroy</param>
+        public static XenRef<Task> async_destroy_many(Session session, List<XenRef<Message>> _messages)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.async_message_destroy_many(session.opaque_ref, _messages);
+            else
+                return XenRef<Task>.Create(session.XmlRpcProxy.async_message_destroy_many(session.opaque_ref, _messages == null ? new string[] {} : Helper.RefListToStringArray(_messages)).parse());
+        }
+
+        /// <summary>
+        /// 
         /// First published in XenServer 5.0.
         /// </summary>
         /// <param name="session">The session</param>

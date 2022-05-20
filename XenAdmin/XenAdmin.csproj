@@ -92,7 +92,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actions\GUIActions\ExportResourceReportAction.cs" />
-    <Compile Include="Actions\GUIActions\DeleteAllAlertsAction.cs" />
+    <Compile Include="Actions\GUIActions\DismissAlertsAction.cs" />
     <Compile Include="Actions\GUIActions\ExternalPluginAction.cs" />
     <Compile Include="Actions\GUIActions\RestoreDismissedUpdatesAction.cs" />
     <Compile Include="Actions\GUIActions\MeddlingAction.cs" />

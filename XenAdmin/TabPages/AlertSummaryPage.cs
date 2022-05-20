@@ -603,16 +603,10 @@ namespace XenAdmin.TabPages
                     Rebuild(); // rebuild entire alert list to ensure filtering and sorting
                     break;
                 case CollectionChangeAction.Remove:
-
-                    var a = e.Element as Alert;
-                    if (a != null)
+                    if (e.Element is Alert a)
                         RemoveAlertRow(a);
-                    else
-                    {
-                        var range = e.Element as List<Alert>;
-                        if (range != null)
-                            Rebuild();
-                    }
+                    else if (e.Element is List<Alert>)
+                        Rebuild();
                     break;
             }
         }
@@ -678,7 +672,7 @@ namespace XenAdmin.TabPages
                 foreach (var alert in g.Alerts)
                     alert.Dismissing = true;
 
-                new DeleteAllAlertsAction(g.Alerts.ToList(), g.Connection).RunAsync();
+                new DismissAlertsAction(g.Alerts.ToList(), g.Connection).RunAsync();
             }
         }
 

@@ -44,6 +44,8 @@ namespace XenAdmin.Alerts
 {
     public class MessageAlert : Alert
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public readonly Message Message;
         public IXenObject XenObject;
 
@@ -430,7 +432,18 @@ namespace XenAdmin.Alerts
 
         public override void Dismiss()
         {
-            new DestroyMessageAction(Message).RunSync(Connection.Session);
+            try
+            {
+                Message.destroy(Connection.Session, Message.opaque_ref);
+            }
+            catch (Failure exn)
+            {
+                if (exn.ErrorDescription[0] != Failure.HANDLE_INVALID)
+                    throw;
+
+                log.Error(exn);
+            }
+
             RemoveAlert(this);
         }
 

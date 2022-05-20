@@ -12205,6 +12205,20 @@ namespace XenAPI
             Rpc("message.destroy", new JArray(session, _message ?? ""), serializer);
         }
 
+        public void message_destroy_many(string session, List<XenRef<Message>> _messages)
+        {
+            var converters = new List<JsonConverter> {new XenRefListConverter<Message>()};
+            var serializer = CreateSerializer(converters);
+            Rpc("message.destroy_many", new JArray(session, _messages == null ? new JArray() : JArray.FromObject(_messages, serializer)), serializer);
+        }
+
+        public XenRef<Task> async_message_destroy_many(string session, List<XenRef<Message>> _messages)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>(), new XenRefListConverter<Message>()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<XenRef<Task>>("Async.message.destroy_many", new JArray(session, _messages == null ? new JArray() : JArray.FromObject(_messages, serializer)), serializer);
+        }
+
         public Dictionary<XenRef<Message>, Message> message_get(string session, cls _cls, string _obj_uuid, DateTime _since)
         {
             var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<Message>(), new clsConverter(), new XenDateTimeConverter()};
