@@ -993,7 +993,17 @@ namespace XenAdmin.TabPages
                 return;
 
             if (host.software_version.ContainsKey("date"))
-                pdSectionVersion.AddEntry(Messages.SOFTWARE_VERSION_DATE, host.software_version["date"]);
+            {
+                if (Helpers.Post82X(host) && Helpers.XapiEqualOrGreater_22_19_0(host) && DateTime.TryParse(host.software_version["date"], out var softwareVersionDate) && softwareVersionDate != DateTime.MinValue)
+                {
+                    var dateTime = softwareVersionDate.ToLocalTime().ToShortDateString();
+                    pdSectionVersion.AddEntry(Messages.SOFTWARE_VERSION_DATE, dateTime, new PropertiesToolStripMenuItem(new DescriptionPropertiesCommand(Program.MainWindow, xenObject)));
+                }
+                else
+                {
+                    pdSectionVersion.AddEntry(Messages.SOFTWARE_VERSION_DATE, host.software_version["date"]);
+                }
+            }
             if (!Helpers.ElyOrGreater(host) && host.software_version.ContainsKey("build_number"))
                 pdSectionVersion.AddEntry(Messages.SOFTWARE_VERSION_BUILD_NUMBER, host.software_version["build_number"]);
             if (host.software_version.ContainsKey("product_version"))
@@ -1008,6 +1018,12 @@ namespace XenAdmin.TabPages
             }
             if (host.software_version.ContainsKey("dbv"))
                 pdSectionVersion.AddEntry("DBV", host.software_version["dbv"]);
+
+            if (Helpers.Post82X(host) && Helpers.XapiEqualOrGreater_22_19_0(host) && host.last_software_update != DateTime.MinValue)
+            {
+                var dateTime = host.last_software_update.ToLocalTime().ToShortDateString();
+                pdSectionVersion.AddEntry(Messages.SOFTWARE_VERSION_LAST_UPDATED, dateTime, new PropertiesToolStripMenuItem(new DescriptionPropertiesCommand(Program.MainWindow, xenObject)));
+            }
         }
 
         private void GenerateCPUBox()

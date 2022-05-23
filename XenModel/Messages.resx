@@ -12132,6 +12132,9 @@ Reverting to this snapshot will revert the VM back to the point in time that the
   <data name="SOFTWARE_VERSION_DATE" xml:space="preserve">
     <value>Build date</value>
   </data>
+  <data name="SOFTWARE_VERSION_LAST_UPDATED" xml:space="preserve">
+    <value>Last updated</value>
+  </data>
   <data name="SOFTWARE_VERSION_PRODUCT_VERSION" xml:space="preserve">
     <value>Version</value>
   </data>
