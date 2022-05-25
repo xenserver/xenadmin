@@ -336,10 +336,18 @@ namespace XenAdmin.Wizards.PatchingWizard
                 allsb.Append(sb);
             }
 
-            textBoxLog.Text = allsb.ToString();
-            textBoxLog.SelectionStart = textBoxLog.Text.Length;
+            var newText = allsb.ToString();
+
             if (!_userMovedVerticalScrollbar)
+            {
+                textBoxLog.Text = newText;
+                textBoxLog.SelectionStart = textBoxLog.Text.Length;
                 textBoxLog.ScrollToCaret();
+            }
+            else
+            {
+                textBoxLog.SetTextWithoutScrolling(newText);
+            }
         }
 
         private void WorkerDoWork(object sender, DoWorkEventArgs doWorkEventArgs)
