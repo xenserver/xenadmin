@@ -141,13 +141,13 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public override bool EnablePrevious()
         {
-            return _thisPageIsCompleted;
+            return ThisPageIsCompleted;
         }
 
         protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
             if (direction == PageLoadedDirection.Back)
-                _thisPageIsCompleted = false;
+                ThisPageIsCompleted = false;
         }
 
         #endregion
@@ -215,7 +215,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             var coordinator = Helpers.GetCoordinator(pool);
             var planActions = new List<PlanAction>();
 
-            var alertPatch = SelectedUpdateAlert == null ? null : SelectedUpdateAlert.Patch;
+            var alertPatch = SelectedUpdateAlert?.Patch;
 
             bool download = alertPatch != null && PatchFromDisk.Key == null &&
                             (!AllDownloadedPatches.ContainsKey(alertPatch) || !File.Exists(AllDownloadedPatches[alertPatch]));

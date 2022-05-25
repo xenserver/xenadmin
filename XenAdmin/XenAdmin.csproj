@@ -111,6 +111,9 @@
     <Compile Include="Alerts\Types\MessageAlert.cs" />
     <Compile Include="Alerts\Types\XenServerPatchAlert.cs" />
     <Compile Include="Alerts\Types\XenServerVersionAlert.cs" />
+    <Compile Include="Controls\SmartScrollTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Commands\CallHomeCommand.cs" />
     <Compile Include="Commands\ChangeControlDomainMemoryCommand.cs" />
     <Compile Include="Commands\DockerContainerCommand.cs" />

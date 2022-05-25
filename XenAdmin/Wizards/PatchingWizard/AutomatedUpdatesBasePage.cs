@@ -43,6 +43,7 @@ using System.Windows.Forms;
 using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Dialogs;
 using XenAdmin.Wizards.RollingUpgradeWizard.PlanActions;
+using Console = System.Console;
 
 
 namespace XenAdmin.Wizards.PatchingWizard
@@ -50,25 +51,25 @@ namespace XenAdmin.Wizards.PatchingWizard
     public enum Status { NotStarted, Started, Cancelled, Completed }
     public abstract partial class AutomatedUpdatesBasePage : XenTabPage
     {
-        protected static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private List<UpdateProgressBackgroundWorker> _backgroundWorkers = new List<UpdateProgressBackgroundWorker>();
+        private List<UpdateProgressBackgroundWorker> _failedWorkers = new List<UpdateProgressBackgroundWorker>();
+        private readonly List<HostUpdateMapping> _patchMappings = new List<HostUpdateMapping>();
 
-        protected bool _thisPageIsCompleted;
+        private bool _userMovedVerticalScrollbar;
+        private bool _cancelEnabled;
 
+        protected static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod()?.DeclaringType);
+        protected List<string> HostsThatWillRequireReboot = new List<string>();
+        protected Dictionary<string, List<string>> LivePatchAttempts = new Dictionary<string, List<string>>();
+        protected bool ThisPageIsCompleted;
+        protected bool IsSuccess => ThisPageIsCompleted && !_failedWorkers.Any();
+
+        public Dictionary<XenServerPatch, string> AllDownloadedPatches { get; } = new Dictionary<XenServerPatch, string>();
         public List<Problem> PrecheckProblemsActuallyResolved { private get; set; }
         public List<Pool> SelectedPools { private get; set; }
         public Status Status { get; private set; }
 
-        protected bool IsSuccess => _thisPageIsCompleted && !failedWorkers.Any();
-
-        private List<UpdateProgressBackgroundWorker> backgroundWorkers = new List<UpdateProgressBackgroundWorker>();
-        private List<UpdateProgressBackgroundWorker> failedWorkers = new List<UpdateProgressBackgroundWorker>();
-
-        private List<HostUpdateMapping> patchMappings = new List<HostUpdateMapping>();
-        protected List<string> hostsThatWillRequireReboot = new List<string>();
-        protected Dictionary<string, List<string>> livePatchAttempts = new Dictionary<string, List<string>>();
-        public Dictionary<XenServerPatch, string> AllDownloadedPatches = new Dictionary<XenServerPatch, string>();
-
-        public AutomatedUpdatesBasePage()
+        protected AutomatedUpdatesBasePage()
         {
             InitializeComponent();
             panel1.Visible = false;
@@ -82,10 +83,9 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public override bool EnableNext()
         {
-            return _thisPageIsCompleted;
+            return ThisPageIsCompleted;
         }
 
-        private bool _cancelEnabled = true;
         public override bool EnableCancel()
         {
             return _cancelEnabled;
@@ -93,13 +93,13 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public override void PageCancelled(ref bool cancel)
         {
-            if (_thisPageIsCompleted)
+            if (ThisPageIsCompleted)
                 return;
 
-            using (var dlog = new WarningDialog(ReconsiderCancellationMessage(),
+            using (var dialog = new WarningDialog(ReconsiderCancellationMessage(),
                 ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo){WindowTitle = Text})
             {
-                if (dlog.ShowDialog(this) != DialogResult.Yes)
+                if (dialog.ShowDialog(this) != DialogResult.Yes)
                 {
                     cancel = true;
                     return;
@@ -107,12 +107,12 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
 
             Status = Status.Cancelled;
-            backgroundWorkers.ForEach(bgw => bgw.CancelAsync());
+            _backgroundWorkers.ForEach(bgw => bgw.CancelAsync());
         }
 
         protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            if (_thisPageIsCompleted)
+            if (ThisPageIsCompleted)
                 return;
 
             panel1.Visible = false;
@@ -122,7 +122,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (!StartUpgradeWorkers())
             {
                 Status = Status.Completed;
-                _thisPageIsCompleted = true;
+                ThisPageIsCompleted = true;
                 UpdateStatusOnCompletion();
                 UpdateStatus();
                 OnPageUpdated();
@@ -157,18 +157,17 @@ namespace XenAdmin.Wizards.PatchingWizard
         protected virtual void DoAfterInitialPlanActions(UpdateProgressBackgroundWorker bgw, Host host, List<Host> hosts) { }
         #endregion
 
-        #region background workers
+        #region Backround workers
         private bool StartUpgradeWorkers()
         {
             //reset the background workers
-            backgroundWorkers = new List<UpdateProgressBackgroundWorker>();
-            failedWorkers = new List<UpdateProgressBackgroundWorker>();
-            bool atLeastOneWorkerStarted = false;
+            _backgroundWorkers = new List<UpdateProgressBackgroundWorker>();
+            _failedWorkers = new List<UpdateProgressBackgroundWorker>();
+            var atLeastOneWorkerStarted = false;
             
             foreach (var pool in SelectedPools)
             {
-                List<Host> applicableHosts;
-                var planActions = GenerateHostPlans(pool, out applicableHosts);
+                var planActions = GenerateHostPlans(pool, out _);
 
                 var finalActions = new List<PlanAction>();
 
@@ -203,96 +202,94 @@ namespace XenAdmin.Wizards.PatchingWizard
             bgw.DoWork += WorkerDoWork;
             bgw.ProgressChanged += WorkerProgressChanged;
             bgw.RunWorkerCompleted += WorkerCompleted;
-            backgroundWorkers.Add(bgw);
+            _backgroundWorkers.Add(bgw);
             bgw.RunWorkerAsync();
         }
 
         private void WorkerProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            var bgw = sender as UpdateProgressBackgroundWorker;
-            if (bgw == null)
+            if (!(sender is UpdateProgressBackgroundWorker bgw))
                 return;
 
-            if (!bgw.CancellationPending)
+            if (bgw.CancellationPending)
+                return;
+
+            if (e.UserState is PlanAction action)
             {
-                PlanAction action = (PlanAction)e.UserState;
-                if (action != null)
+                if (!action.IsComplete)
                 {
-                    if (!action.IsComplete)
+                    if (!bgw.InProgressActions.Contains(action))
+                        bgw.InProgressActions.Add(action);
+                }
+                else
+                {
+                    if (!bgw.DoneActions.Contains(action))
+                        bgw.DoneActions.Add(action);
+                    bgw.InProgressActions.Remove(action);
+
+                    if (action.Error == null)
                     {
-                        if (!bgw.InProgressActions.Contains(action))
-                            bgw.InProgressActions.Add(action);
+                        // remove the successful action from the cleanup actions (we are running the cleanup actions in case of failures or if the user cancelled the process, but we shouldn't re-run the actions that have already been run)
+                        bgw.CleanupActions.Remove(action);
                     }
                     else
                     {
-                        if (!bgw.DoneActions.Contains(action))
-                            bgw.DoneActions.Add(action);
-                        bgw.InProgressActions.Remove(action);
-
-                        if (action.Error == null)
-                        {
-                            // remove the successful action from the cleanup actions (we are running the cleanup actions in case of failures or if the user cancelled the process, but we shouldn't re-run the actions that have already been run)
-                            bgw.CleanupActions.Remove(action);
-                        }
-                        else
-                        {
-                            if (!failedWorkers.Contains(bgw))
-                                failedWorkers.Add(bgw);
-                        }
+                        if (!_failedWorkers.Contains(bgw))
+                            _failedWorkers.Add(bgw);
                     }
                 }
-
-                UpdateStatus();
             }
+
+            UpdateStatus();
         }
 
         private void UpdateStatus()
         {
-            var newVal = backgroundWorkers.Count > 0
-                ? backgroundWorkers.Sum(b => b.PercentComplete) / backgroundWorkers.Count
+            var newVal = _backgroundWorkers.Count > 0
+                ? _backgroundWorkers.Sum(b => b.PercentComplete) / _backgroundWorkers.Count
                 : 100;
 
             if (newVal < 0)
                 newVal = 0;
             else if (newVal > 100)
                 newVal = 100;
-            progressBar.Value = (int)newVal;
+            progressBar.Value = (int) newVal;
 
-            var allsb = new StringBuilder();
+            var stringBuilder = new StringBuilder();
 
-            foreach (var bgw in backgroundWorkers)
+            foreach (var bgw in _backgroundWorkers)
             {
-                int bgwErrorCount = 0;
-                int bgwCancellationCount = 0;
+                var bgwErrorCount = 0;
+                var bgwCancellationCount = 0;
                 var sb = new StringBuilder();
                 var errorSb = new StringBuilder();
 
                 if (!string.IsNullOrEmpty(bgw.Name))
-                    sb.AppendLine(string.Format("{0}:", bgw.Name));
+                    sb.AppendLine($"{bgw.Name}:");
 
                 foreach (var pa in bgw.DoneActions)
                 {
                     pa.ProgressHistory.ForEach(step => sb.AppendIndented(step).AppendLine());
 
-                    if (pa.Error != null)
+                    if (pa.Error == null) 
+                        continue;
+
+                    if (pa.Error is CancelledException)
                     {
-                        if (pa.Error is CancelledException)
-                        {
-                            bgwCancellationCount++;
-                            continue;
-                        }
-
-                        var innerEx = pa.Error.InnerException as Failure;
-                        errorSb.AppendLine(innerEx == null ? pa.Error.Message : innerEx.Message);
-
-                        if (pa.IsSkippable)
-                        {
-                            Debug.Assert(!string.IsNullOrEmpty(pa.Title));
-                            errorSb.AppendLine(string.Format(Messages.RPU_WIZARD_ERROR_SKIP_MSG, pa.Title)).AppendLine();
-                        }
-
-                        bgwErrorCount++;
+                        bgwCancellationCount++;
+                        continue;
                     }
+
+                    errorSb.AppendLine(!(pa.Error.InnerException is Failure innerEx) ? pa.Error.Message : innerEx.Message);
+
+                    if (pa.IsSkippable)
+                    {
+                        Debug.Assert(!string.IsNullOrEmpty(pa.Title));
+                        errorSb.AppendLine(string.Format(Messages.RPU_WIZARD_ERROR_SKIP_MSG, pa.Title))
+                            .AppendLine();
+                    }
+
+                    bgwErrorCount++;
                 }
 
                 foreach (var pa in bgw.InProgressActions)
@@ -317,18 +314,26 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
 
                 sb.AppendLine();
-                allsb.Append(sb);
+                stringBuilder.Append(sb);
             }
 
-            textBoxLog.Text = allsb.ToString();
-            textBoxLog.SelectionStart = textBoxLog.Text.Length;
-            textBoxLog.ScrollToCaret();
+            var newText = stringBuilder.ToString();
+            
+            if (!_userMovedVerticalScrollbar)
+            {
+                textBoxLog.Text = newText;
+                textBoxLog.SelectionStart = textBoxLog.Text.Length;
+                textBoxLog.ScrollToCaret();
+            }
+            else
+            {
+                textBoxLog.SetTextWithoutScrolling(newText);
+            }
         }
 
         private void WorkerDoWork(object sender, DoWorkEventArgs doWorkEventArgs)
         {
-            var bgw = sender as UpdateProgressBackgroundWorker;
-            if (bgw == null)
+            if (!(sender is UpdateProgressBackgroundWorker bgw))
                 return;
 
             PlanAction action = null;
@@ -376,12 +381,9 @@ namespace XenAdmin.Wizards.PatchingWizard
                     }
 
                     var restartHostPlanAction = (RestartHostPlanAction)hp.DelayedPlanActions.FirstOrDefault(a => a is RestartHostPlanAction);
-                    if (restartHostPlanAction != null)
+                    if (restartHostPlanAction != null && !restartHostPlanAction.SkipRestartHost(host))
                     {
-                        if (!restartHostPlanAction.SkipRestartHost(host))
-                        {
-                            hp.DelayedPlanActions.RemoveAll(a => a is RestartAgentPlanAction);
-                        }
+                        hp.DelayedPlanActions.RemoveAll(a => a is RestartAgentPlanAction);
                     }
 
                     // Step 4: DelayedActions
@@ -435,15 +437,13 @@ namespace XenAdmin.Wizards.PatchingWizard
                 labelError.Text = UserCancellationMessage();
                 pictureBox1.Image = Images.StaticImages.cancelled_action_16;
                 buttonRetry.Visible = buttonSkip.Visible = false;
-                _thisPageIsCompleted = true;
+                ThisPageIsCompleted = true;
                 _cancelEnabled = false;
             }
             else
             {
-                var bgw = sender as UpdateProgressBackgroundWorker;
                 var someWorkersCancelled = false;
-
-                if (bgw != null)
+                if (sender is UpdateProgressBackgroundWorker bgw)
                 {
                     var workerSucceeded = true;
 
@@ -469,7 +469,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
 
                 //if all finished
-                if (backgroundWorkers.All(w => !w.IsBusy))
+                if (_backgroundWorkers.All(w => !w.IsBusy))
                     UpdateStatusOnCompletion(someWorkersCancelled);
             }
 
@@ -482,15 +482,12 @@ namespace XenAdmin.Wizards.PatchingWizard
             Status = Status.Completed;
             panel1.Visible = true;
 
-            if (failedWorkers.Any())
+            if (_failedWorkers.Any())
             {
-                labelError.Text = FailureMessageOnCompletion(backgroundWorkers.Count > 1);
+                labelError.Text = FailureMessageOnCompletion(_backgroundWorkers.Count > 1);
                 pictureBox1.Image = Images.StaticImages._000_error_h32bit_16;
                 buttonRetry.Visible = true;
-                buttonSkip.Visible = false;
-
-                if (failedWorkers.Any(w => w.FirstFailedSkippableAction != null))
-                    buttonSkip.Visible = true;
+                buttonSkip.Visible = _failedWorkers.Any(w => w.FirstFailedSkippableAction != null);
             }
             else if (someWorkersCancelled)
             {
@@ -498,20 +495,20 @@ namespace XenAdmin.Wizards.PatchingWizard
                 pictureBox1.Image = Images.StaticImages.cancelled_action_16;
                 buttonRetry.Visible = buttonSkip.Visible = false;
             }
-            else if (backgroundWorkers.Any(w => WarningMessagePerPool(w.Pool) != null))
+            else if (_backgroundWorkers.Any(w => WarningMessagePerPool(w.Pool) != null))
             {
-                labelError.Text = WarningMessageOnCompletion(backgroundWorkers.Count > 1);
+                labelError.Text = WarningMessageOnCompletion(_backgroundWorkers.Count > 1);
                 pictureBox1.Image = Images.StaticImages._000_Alert2_h32bit_16;
                 buttonRetry.Visible = buttonSkip.Visible = false;
             }
             else
             {
-                labelError.Text = SuccessMessageOnCompletion(backgroundWorkers.Count > 1);
+                labelError.Text = SuccessMessageOnCompletion(_backgroundWorkers.Count > 1);
                 pictureBox1.Image = Images.StaticImages._000_Tick_h32bit_16;
                 buttonRetry.Visible = buttonSkip.Visible = false;
             }
 
-            _thisPageIsCompleted = true;
+            ThisPageIsCompleted = true;
             _cancelEnabled = false;
         }
 
@@ -520,24 +517,24 @@ namespace XenAdmin.Wizards.PatchingWizard
         private void RetryFailedActions()
         {
             panel1.Visible = false;
-            failedWorkers.ForEach(bgw => bgw.FirstFailedSkippableAction = null);
+            _failedWorkers.ForEach(bgw => bgw.FirstFailedSkippableAction = null);
 
-            var workers = new List<UpdateProgressBackgroundWorker>(failedWorkers);
-            failedWorkers.Clear();
+            var workers = new List<UpdateProgressBackgroundWorker>(_failedWorkers);
+            _failedWorkers.Clear();
 
             foreach (var failedWorker in workers)
             {
                 failedWorker.RunWorkerAsync();
             }
 
-            _thisPageIsCompleted = false;
+            ThisPageIsCompleted = false;
             _cancelEnabled = true;
             OnPageUpdated();
         }
 
         private void SkipFailedActions()
         {
-            var skippableWorkers = failedWorkers.Where(w => w.FirstFailedSkippableAction != null).ToList();
+            var skippableWorkers = _failedWorkers.Where(w => w.FirstFailedSkippableAction != null).ToList();
             var msg = string.Join(Environment.NewLine, skippableWorkers.Select(w => w.FirstFailedSkippableAction.Title));
 
             using (var dlg = new WarningDialog(string.Format(skippableWorkers.Count > 1 ? Messages.MESSAGEBOX_SKIP_RPU_STEPS : Messages.MESSAGEBOX_SKIP_RPU_STEP, msg),
@@ -552,15 +549,16 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             foreach (var worker in skippableWorkers)
             {
-                failedWorkers.Remove(worker);
+                _failedWorkers.Remove(worker);
                 worker.RunWorkerAsync();
             }
 
-            _thisPageIsCompleted = false;
+            ThisPageIsCompleted = false;
             _cancelEnabled = true;
             OnPageUpdated();
         }
 
+        #region Event handlers
         private void buttonRetry_Click(object sender, EventArgs e)
         {
             RetryFailedActions();
@@ -571,6 +569,16 @@ namespace XenAdmin.Wizards.PatchingWizard
             SkipFailedActions();
         }
 
+        private void TextBoxLog_OnScrollChange(int _, Orientation orientation)
+        {
+            if (orientation == Orientation.Vertical)
+            {
+                // if the user scrolls all the way to the bottom, we reset the status
+                _userMovedVerticalScrollbar = !textBoxLog.IsVerticalScrollBarAtBottom;
+            }
+        }
+        #endregion
+        
         protected HostPlan GetUpdatePlanActionsForHost(Host host, List<Host> hosts, List<XenServerPatch> minimalPatches,
             List<XenServerPatch> uploadedPatches, KeyValuePair<XenServerPatch, string> patchFromDisk, bool repatriateVms = true)
         {
@@ -594,12 +602,12 @@ namespace XenAdmin.Wizards.PatchingWizard
                 if (!uploadedPatches.Contains(patch))
                 {
                     planActionsPerHost.Add(new DownloadPatchPlanAction(host.Connection, patch, AllDownloadedPatches, patchFromDisk));
-                    planActionsPerHost.Add(new UploadPatchToCoordinatorPlanAction(this, host.Connection, patch, patchMappings, AllDownloadedPatches, patchFromDisk, true));
+                    planActionsPerHost.Add(new UploadPatchToCoordinatorPlanAction(this, host.Connection, patch, _patchMappings, AllDownloadedPatches, patchFromDisk, true));
                     uploadedPatches.Add(patch);
                 }
 
-                planActionsPerHost.Add(new PatchPrecheckOnHostPlanAction(host.Connection, patch, host, patchMappings, hostsThatWillRequireReboot, livePatchAttempts));
-                planActionsPerHost.Add(new ApplyXenServerPatchPlanAction(host, patch, patchMappings));
+                planActionsPerHost.Add(new PatchPrecheckOnHostPlanAction(host.Connection, patch, host, _patchMappings, HostsThatWillRequireReboot, LivePatchAttempts));
+                planActionsPerHost.Add(new ApplyXenServerPatchPlanAction(host, patch, _patchMappings));
 
                 var action = GetAfterApplyGuidanceAction(host, patch.after_apply_guidance);
                 if (action != null)
@@ -611,7 +619,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                         if (patch.after_apply_guidance == after_apply_guidance.restartXAPI && delayedActionsPerHost.Any(a => a is RestartHostPlanAction))
                         {
                             // replace the action with a host reboot action which will fall back to a toolstack restart if the reboot is not needed because the live patching succedeed
-                            action = new RestartHostPlanAction(host, host.GetRunningVMs(), true, true, hostsThatWillRequireReboot);
+                            action = new RestartHostPlanAction(host, host.GetRunningVMs(), true, true, HostsThatWillRequireReboot);
                         }
 
                         planActionsPerHost.Add(action);
@@ -633,7 +641,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 {
                     // add cleanup action for current patch at the end of the update sequence for the last host in the pool
                     var coordinator = Helpers.GetCoordinator(host.Connection);
-                    planActionsPerHost.Add(new RemoveUpdateFileFromCoordinatorPlanAction(coordinator, patchMappings, patch));
+                    planActionsPerHost.Add(new RemoveUpdateFileFromCoordinatorPlanAction(coordinator, _patchMappings, patch));
                 }
             }
 
@@ -654,7 +662,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             switch (guidance)
             {
                 case after_apply_guidance.restartHost:
-                    return new RestartHostPlanAction(host, host.GetRunningVMs(), true, false, hostsThatWillRequireReboot);
+                    return new RestartHostPlanAction(host, host.GetRunningVMs(), true, false, HostsThatWillRequireReboot);
                 case after_apply_guidance.restartXAPI:
                     return new RestartAgentPlanAction(host);
                 case after_apply_guidance.restartHVM:
@@ -675,9 +683,9 @@ namespace XenAdmin.Wizards.PatchingWizard
             var livePatchingFailedHosts = new List<Host>();
             foreach (var host in poolHosts)
             {
-                if (livePatchAttempts.ContainsKey(host.uuid) && host.updates_requiring_reboot != null && host.updates_requiring_reboot.Count > 0)
+                if (LivePatchAttempts.ContainsKey(host.uuid) && host.updates_requiring_reboot != null && host.updates_requiring_reboot.Count > 0)
                 {
-                    foreach (var updateUuid in livePatchAttempts[host.uuid])
+                    foreach (var updateUuid in LivePatchAttempts[host.uuid])
                     {
                         if (host.updates_requiring_reboot.Select(uRef => host.Connection.Resolve(uRef)).Any(u => u != null && u.uuid.Equals(updateUuid)))
                         {
