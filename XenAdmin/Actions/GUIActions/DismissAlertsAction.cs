@@ -58,13 +58,14 @@ namespace XenAdmin.Actions
 
         private static string GetActionTitle(IXenConnection connection, int alertCount)
         {
-            return connection == null
-                ? alertCount == 1
-                       ? Messages.ACTION_REMOVE_ALERTS_ON_CLIENT_TITLE_ONE
-                       : string.Format(Messages.ACTION_REMOVE_ALERTS_ON_CLIENT_TITLE, alertCount)
-                : alertCount == 1
-                       ? string.Format(Messages.ACTION_REMOVE_ALERTS_ON_CONNECTION_TITLE_ONE, Helpers.GetName(connection))
-                       : string.Format(Messages.ACTION_REMOVE_ALERTS_ON_CONNECTION_TITLE, alertCount, Helpers.GetName(connection));
+            if (connection == null)
+                return alertCount == 1
+                    ? Messages.ACTION_REMOVE_ALERTS_ON_CLIENT_TITLE_ONE
+                    : string.Format(Messages.ACTION_REMOVE_ALERTS_ON_CLIENT_TITLE, alertCount);
+
+            return alertCount == 1
+                ? string.Format(Messages.ACTION_REMOVE_ALERTS_ON_CONNECTION_TITLE_ONE, Helpers.GetName(connection))
+                : string.Format(Messages.ACTION_REMOVE_ALERTS_ON_CONNECTION_TITLE, alertCount, Helpers.GetName(connection));
         }
 
         protected override void Run()
@@ -92,15 +93,18 @@ namespace XenAdmin.Actions
                         }
                     }
 
+                    int midPoint = 0;
+                    if (_alerts.Count > 0)
+                        midPoint = 100 * msgAlerts.Count / _alerts.Count;
+
                     RelatedTask = Message.async_destroy_many(Session, msgRefs);
-                    PollToCompletion(0, 50);
+                    PollToCompletion(0, midPoint);
                     Alert.RemoveAlert(a => msgAlerts.Contains(a));
 
                     for (var i = 0; i < otherAlerts.Count; i++)
                     {
-                        Description = string.Format(Messages.ACTION_REMOVE_ALERTS_PROGRESS_DESCRIPTION, i, _alerts.Count);
                         _alerts[i].Dismiss();
-                        PercentComplete = 50 + i * 50 / otherAlerts.Count;
+                        PercentComplete = midPoint + i * (100 - midPoint) / otherAlerts.Count;
                     }
                 }
                 else
