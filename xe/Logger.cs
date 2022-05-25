@@ -46,7 +46,9 @@ namespace ThinCLI
             sb.AppendLine("  xe -s <server> -u <username> -pw <password> [options] <command> <arguments>").AppendLine();
             sb.AppendLine("Options:");
             sb.AppendLine("  -p <port>");
-            sb.AppendLine("  -debug");
+            sb.AppendLine("  -debug                     Show more detailed output and debug information");
+            sb.AppendLine("  -no-warn-new-certificates  Do not prompt if a new certificate has been detected");
+            sb.AppendLine("  -no-warn-certificates      Do not prompt if a certificate has changed");
             sb.AppendLine();
             sb.AppendLine("For command help, use xe -s <server> -u <user> -pw <password> [options] help");
 
