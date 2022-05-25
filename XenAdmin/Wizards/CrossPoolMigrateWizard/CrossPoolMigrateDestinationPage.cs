@@ -46,8 +46,8 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         private WizardMode wizardMode;
         // A 2-level cache to store the result of CrossPoolMigrateCanMigrateFilter.
         // Cache structure is like: <vm-ref, <host-ref, fault-reason>>.
-        private IDictionary<string, IDictionary<string, string>> migrateFilterCache = 
-            new Dictionary<string, IDictionary<string, string>>();
+        private readonly Dictionary<string, Dictionary<string, string>> migrateFilterCache = 
+            new Dictionary<string, Dictionary<string, string>>();
 
 
         public CrossPoolMigrateDestinationPage()
@@ -144,20 +144,20 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             return new DelayLoadingOptionComboBoxItem(xenItem, filters);
         }
 
-        protected override List<ReasoningFilter> CreateTargetServerFilterList(IEnableableXenObjectComboBoxItem selectedItem, List<string> vmOpaqueRefs)
+        protected override List<ReasoningFilter> CreateTargetServerFilterList(IXenObject xenObject, List<string> vmOpaqueRefs)
         {
             var filters = new List<ReasoningFilter>();
 
-            if(selectedItem != null && vmOpaqueRefs != null && selectedVMs != null)
+            if (xenObject != null && vmOpaqueRefs != null && selectedVMs != null)
             {
                 List<VM> vmList = new List<VM>();
                 foreach (string opaqueRef in vmOpaqueRefs)
                     vmList.Add(selectedVMs.Find(vm => vm.opaque_ref == opaqueRef));
 
-                filters.Add(new ResidentHostIsSameAsSelectionFilter(selectedItem.Item, vmList));
-                filters.Add(new WlbEnabledFilter(selectedItem.Item, vmList));
-                filters.Add(new CrossPoolMigrateCanMigrateFilter(selectedItem.Item, vmList, wizardMode, migrateFilterCache));
-            } 
+                filters.Add(new ResidentHostIsSameAsSelectionFilter(xenObject, vmList));
+                filters.Add(new WlbEnabledFilter(xenObject, vmList));
+                filters.Add(new CrossPoolMigrateCanMigrateFilter(xenObject, vmList, wizardMode, migrateFilterCache));
+            }
 
             return filters;
         }

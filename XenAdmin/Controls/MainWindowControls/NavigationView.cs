@@ -735,19 +735,18 @@ namespace XenAdmin.Controls.MainWindowControls
             }
 
             VirtualTreeNode targetToHighlight = null;
-            
             string statusBarText = null;
+
             foreach (DragDropCommand cmd in GetDragDropCommands(targetNode, e.Data))
             {
                 if (cmd.CanRun())
+                {
                     targetToHighlight = cmd.HighlightNode;
-
-                if (!string.IsNullOrEmpty(cmd.StatusBarText))
                     statusBarText = cmd.StatusBarText;
+                }
             }
 
-            if (DragDropCommandActivated != null)
-                DragDropCommandActivated(statusBarText);
+            DragDropCommandActivated?.Invoke(statusBarText);
 
             if (targetToHighlight != null)
             {

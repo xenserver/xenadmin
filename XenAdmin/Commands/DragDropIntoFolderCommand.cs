@@ -56,13 +56,7 @@ namespace XenAdmin.Commands
                 DraggedObjectsAreValid();
         }
 
-        public override VirtualTreeNode HighlightNode
-        {
-            get
-            {
-                return GetTargetNodeAncestor<Folder>();
-            }
-        }
+        public override VirtualTreeNode HighlightNode => GetTargetNodeAncestor<Folder>();
 
         private bool DraggedObjectsAreValid()
         {

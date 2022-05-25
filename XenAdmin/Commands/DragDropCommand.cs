@@ -114,24 +114,12 @@ namespace XenAdmin.Commands
         /// <summary>
         /// Gets the node that the mouse is over during the drag-drop operation.
         /// </summary>
-        protected VirtualTreeNode TargetNode
-        {
-            get
-            {
-                return _targetNode;
-            }
-        }
+        protected VirtualTreeNode TargetNode => _targetNode;
 
         /// <summary>
         /// Gets the node that should be highlighted during the drag-drop operation.
         /// </summary>
-        public virtual VirtualTreeNode HighlightNode
-        {
-            get
-            {
-                return _targetNode;
-            }
-        }
+        public virtual VirtualTreeNode HighlightNode => _targetNode;
 
         /// <summary>
         /// Gets the nearest ancestor of the target node that has a tag of the specified xen object or grouping tag type and returns that tag.
@@ -168,36 +156,18 @@ namespace XenAdmin.Commands
         /// <summary>
         /// Gets the dragged grid rows. Returns null if grid rows weren't dragged.
         /// </summary>
-        protected GridRowCollection DraggedGridRows
-        {
-            get
-            {
-                return _draggedGridRows;
-            }
-        }
+        protected GridRowCollection DraggedGridRows => _draggedGridRows;
 
         /// <summary>
         /// Gets the dragged tree nodes. Returns null if tree nodes weren't dragged.
         /// </summary>
-        protected ReadOnlyCollection<VirtualTreeNode> DraggedNodes
-        {
-            get
-            {
-                return _draggedNodes;
-            }
-        }
+        protected ReadOnlyCollection<VirtualTreeNode> DraggedNodes => _draggedNodes;
 
         /// <summary>
         /// Gets the status bar text tat should be displayed during the drag-drop operation. Returns null
         /// if no text should be displayed.
         /// </summary>
-        public virtual string StatusBarText
-        {
-            get
-            {
-                return null;
-            }
-        }
+        public virtual string StatusBarText => null;
 
         /// <summary>
         /// Gets the dragged items as Xen objects. If any items isn't a XenObject then an empty list is returned.

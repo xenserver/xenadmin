@@ -388,7 +388,7 @@ namespace XenAdmin.Wizards.GenericPages
             }
         }
         
-        private void PopulateDataGridView(IEnableableXenObjectComboBoxItem selectedItem)
+        private void PopulateDataGridView()
         {
             Program.AssertOnEventThread();
 
@@ -407,7 +407,6 @@ namespace XenAdmin.Wizards.GenericPages
                 {
                     var tb = new DataGridViewTextBoxCell {Value = kvp.Value.VmNameLabel, Tag = kvp.Key};
                     var cb = new DataGridViewEnableableComboBoxCell{FlatStyle = FlatStyle.Flat};
-                    var homeserverFilters = CreateTargetServerFilterList(selectedItem, new List<string> {kvp.Key});
 
                     if (target != null)
                     {
@@ -432,7 +431,8 @@ namespace XenAdmin.Wizards.GenericPages
 
                         foreach (var host in sortedHosts)
                         {
-                            var item = new DelayLoadingOptionComboBoxItem(host, homeserverFilters);
+                            var filters = CreateTargetServerFilterList(host, new List<string> {kvp.Key});
+                            var item = new DelayLoadingOptionComboBoxItem(host, filters);
                             cb.Items.Add(item);
                             item.ParentComboBox = cb;
                             item.PreferAsSelectedItem = m_selectedObject != null && m_selectedObject.opaque_ref == host.opaque_ref ||
@@ -630,8 +630,8 @@ namespace XenAdmin.Wizards.GenericPages
 			    try
 			    {
 			        Cursor.Current = Cursors.WaitCursor;
-			        ChosenItem = item == null ? null : item.Item;
-			        PopulateDataGridView(item);
+                    ChosenItem = item?.Item;
+                    PopulateDataGridView();
 			    }
 			    finally
 			    {
@@ -645,10 +645,10 @@ namespace XenAdmin.Wizards.GenericPages
         /// <summary>
         /// Create a set of filters for the homeserver combo box selection
         /// </summary>
-        /// <param name="item">selected item from the host combobox</param>
-        /// <param name="vmOpaqueRefs">OpaqRefs of VMs which need to apply those filters</param>
+        /// <param name="xenObject">XenObject behind the selected item from the host combobox</param>
+        /// <param name="vmOpaqueRefs">OpaqueRefs of VMs which need to apply those filters</param>
         /// <returns></returns>
-        protected virtual List<ReasoningFilter> CreateTargetServerFilterList(IEnableableXenObjectComboBoxItem item, List<string> vmOpaqueRefs)
+        protected virtual List<ReasoningFilter> CreateTargetServerFilterList(IXenObject xenObject, List<string> vmOpaqueRefs)
         {
             return new List<ReasoningFilter>();
         }

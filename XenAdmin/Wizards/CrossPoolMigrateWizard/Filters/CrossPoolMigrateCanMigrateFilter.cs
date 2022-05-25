@@ -43,67 +43,67 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private readonly WizardMode _wizardMode;
-        private string disableReason = string.Empty;
-        private readonly List<VM> preSelectedVMs;
-        private IDictionary<string, IDictionary<string, string>> cache;
-        private bool canceled = false;
-        private static readonly Object cacheLock = new Object();
+        private readonly List<VM> _preSelectedVMs;
+        private Dictionary<string, Dictionary<string, string>> _cache;
+        private bool _canceled;
+        private static readonly object _cacheLock = new object();
 
-        public CrossPoolMigrateCanMigrateFilter(IXenObject itemAddedToComboBox, List<VM> preSelectedVMs, WizardMode wizardMode, IDictionary<string, IDictionary<string, string>> cache = null)
-            : base(itemAddedToComboBox)
+        public CrossPoolMigrateCanMigrateFilter(IXenObject itemAddedToFilterOn, List<VM> preSelectedVMs, WizardMode wizardMode, Dictionary<string, Dictionary<string, string>> cache = null)
+            : base(itemAddedToFilterOn)
         {
             _wizardMode = wizardMode;
-            if (cache == null)
-                this.cache = new Dictionary<string, IDictionary<string, string>>();
-            else
-                this.cache = cache;
-
-            if (preSelectedVMs == null)
-                throw new ArgumentNullException("Pre-selected VMs are null");
-            this.preSelectedVMs = preSelectedVMs;
+            _cache = cache ?? new Dictionary<string, Dictionary<string, string>>();
+            _preSelectedVMs = preSelectedVMs ?? throw new ArgumentNullException(nameof(preSelectedVMs));
         }
 
         public override void Cancel()
         {
-            canceled = true;
+            _canceled = true;
         }
 
-        public override bool FailureFoundFor(IXenObject itemToFilterOn)
+        protected override bool FailureFoundFor(IXenObject itemToFilterOn, out string failureReason)
         {
-            Pool targetPool;
-            List<Host> targets = CollateHosts(itemToFilterOn, out targetPool);
+            //Rules:
+            //- if at least one VM cannot be migrated to the target itemToFilterOn, this method returns true
+            //- if the itemToFilterOn is a pool, the VM is considered migratable if it can be migrated
+            //  to at least one of the pool hosts
 
-            foreach (VM vm in preSelectedVMs)
+            failureReason = string.Empty;
+            List<Host> targets = CollateHosts(itemToFilterOn, out var targetPool);
+
+            foreach (VM vm in _preSelectedVMs)
             {
                 log.InfoFormat("Asserting can migrate VM {0} to {1}...", vm.Name(), itemToFilterOn);
-                bool vmIsMigratable = false;
+
+                //CA-220218: for intra-pool motion of halted VMs we do a move, so no need to assert we can migrate
+                Pool vmPool = Helpers.GetPoolOfOne(vm.Connection);
+                if (_wizardMode == WizardMode.Move && vmPool != null && targetPool != null && vmPool.opaque_ref == targetPool.opaque_ref)
+                    continue;
+
+                // obtain the cache data for a vm
+                Dictionary<string, string> vmCache;
+                lock (_cacheLock)
+                {
+                    if (!_cache.TryGetValue(vm.opaque_ref, out vmCache))
+                    {
+                        vmCache = new Dictionary<string, string>();
+                        _cache[vm.opaque_ref] = vmCache;
+                    }
+                }
+
                 foreach (Host host in targets)
                 {
-                    if (canceled)
+                    if (_canceled)
                         return false;
 
-                    // obtain the cache data for a vm
-                    IDictionary<string, string> vmCache;
-                    lock (cacheLock)
+                    if (vmCache.TryGetValue(host.opaque_ref, out var reason) && !string.IsNullOrEmpty(reason))
                     {
-                        if (!cache.ContainsKey(vm.opaque_ref))
-                        {
-                            cache.Add(vm.opaque_ref, new Dictionary<string, string>());
-                        }
-                        vmCache = cache[vm.opaque_ref];
+                        failureReason = reason;
+                        continue;
                     }
 
                     try
                     {
-                        //CA-220218: for intra-pool motion of halted VMs we do a move, so no need to assert we can migrate
-                        Pool vmPool = Helpers.GetPoolOfOne(vm.Connection);
-                        if (_wizardMode == WizardMode.Move && vmPool != null && targetPool != null && vmPool.opaque_ref == targetPool.opaque_ref)
-                        {
-                            // vm is migratable, no need to itearate through all the pool members
-                            vmIsMigratable = true; 
-                            break;
-                        }
-                        
                         //Skip the resident host as there's a filter for it and 
                         //if not then you could exclude intrapool migration
                         //CA-205799: do not offer the host the VM is currently on
@@ -111,40 +111,25 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
                         if (homeHost != null && homeHost.opaque_ref == host.opaque_ref)
                             continue;
 
-                        if (vmCache.ContainsKey(host.opaque_ref))
-                        {
-                            disableReason = vmCache[host.opaque_ref];
-                            if (string.IsNullOrEmpty(disableReason))
-                            {
-                                // vm is migratable to at least one host in the pool, no need to itearate through all the pool members
-                                vmIsMigratable = true;
-                                break;
-                            }
-                            continue;
-                        }
-
                         //if pool_migrate can be done, then we will allow it in the wizard, even if storage migration is not allowed (i.e. users can use the wizard to live-migrate a VM inside the pool)
                         if (_wizardMode == WizardMode.Migrate && vmPool != null && targetPool != null && vmPool.opaque_ref == targetPool.opaque_ref)
                         {
-                            var reason = VMOperationHostCommand.GetVmCannotBootOnHostReason(vm, host, vm.Connection.Session, vm_operations.pool_migrate);
-                            if (string.IsNullOrEmpty(reason))
-                            {
-                                lock (cacheLock)
-                                {
-                                    vmCache[host.opaque_ref] = reason;
-                                }
-                                // vm is migratable to at least one host in the pool, no need to itearate through all the pool members
-                                vmIsMigratable = true;
+                            failureReason = VMOperationHostCommand.GetVmCannotBootOnHostReason(vm, host, vm.Connection.Session, vm_operations.pool_migrate);
+
+                            if (string.IsNullOrEmpty(failureReason))
                                 break;
-                            }
+                            else
+                                continue;
                         }
 
                         //check if the destination host is older than the source host
                         var destinationVersion = Helpers.HostPlatformVersion(host);
                         var sourceVersion = Helpers.HostPlatformVersion(vm.Home() ?? Helpers.GetCoordinator(vmPool));
+
                         if (Helpers.productVersionCompare(destinationVersion, sourceVersion) < 0)
                         {
-                            throw new Failure(Messages.OLDER_THAN_CURRENT_SERVER);
+                            failureReason = Messages.OLDER_THAN_CURRENT_SERVER;
+                            continue;
                         }
 
                         if (Host.RestrictDMC(host) &&
@@ -155,7 +140,8 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
                              vm.memory_dynamic_min != vm.memory_dynamic_max ||
                              vm.memory_dynamic_max != vm.memory_static_max))
                         {
-                            throw new Failure(FriendlyErrorNames.DYNAMIC_MEMORY_CONTROL_UNAVAILABLE);
+                            failureReason = FriendlyErrorNames.DYNAMIC_MEMORY_CONTROL_UNAVAILABLE;
+                            continue;
                         }
 
                         PIF managementPif = host.Connection.Cache.PIFs.First(p => p.management);
@@ -168,57 +154,51 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
                         var targetNetwork = GetANetwork(host);
 
                         VM.assert_can_migrate(vm.Connection.Session,
-                                              vm.opaque_ref,
-                                              receiveMapping,
-                                              true,
-                                              GetVdiMap(vm, targetSrs),
-                                              vm.Connection == host.Connection ? new Dictionary<XenRef<VIF>, XenRef<XenAPI.Network>>() : GetVifMap(vm, targetNetwork),
-                                              new Dictionary<string, string>());
-                        lock (cacheLock)
-                        {
-                            vmCache[host.opaque_ref] = string.Empty;
-                        }
-                        // vm is migratable to at least one host in the pool, no need to itearate through all the pool members
-                        vmIsMigratable = true;
+                            vm.opaque_ref,
+                            receiveMapping,
+                            true,
+                            GetVdiMap(vm, targetSrs),
+                            vm.Connection == host.Connection ? new Dictionary<XenRef<VIF>, XenRef<XenAPI.Network>>() : GetVifMap(vm, targetNetwork),
+                            new Dictionary<string, string>());
+
                         break;
                     }
                     catch (Failure failure)
                     {
                         // CA-359124 VM is migratable if a snapshot has more VIFs than the VM. As long as the mapping takes this into account. 
-                        if (failure.ErrorDescription.Count > 0 && failure.ErrorDescription[0] == Failure.VIF_NOT_IN_MAP && SnapshotsContainExtraVIFs(vm))
-                        {
-                            vmIsMigratable = true;
+                        if (failure.ErrorDescription.Count > 0 && failure.ErrorDescription[0] == Failure.VIF_NOT_IN_MAP &&
+                            SnapshotsContainExtraVIFs(vm))
                             break;
-                        }
 
                         if (failure.ErrorDescription.Count > 0 && failure.ErrorDescription[0] == Failure.RBAC_PERMISSION_DENIED)
-                            disableReason = failure.Message.Split('\n')[0].TrimEnd('\r'); // we want the first line only
+                            failureReason = failure.Message.Split('\n')[0].TrimEnd('\r'); // we want the first line only
                         else if (failure.ErrorDescription.Count > 1 && failure.ErrorDescription[1].Contains(Failure.DYNAMIC_MEMORY_CONTROL_UNAVAILABLE))
-                            disableReason = FriendlyErrorNames.DYNAMIC_MEMORY_CONTROL_UNAVAILABLE;
+                            failureReason = FriendlyErrorNames.DYNAMIC_MEMORY_CONTROL_UNAVAILABLE;
                         else
-                            disableReason = failure.Message;
-
-                        lock (cacheLock)
-                        {
-                            vmCache[host.opaque_ref] = disableReason.Clone().ToString();
-                        }
+                            failureReason = failure.Message;
 
                         log.InfoFormat("VM {0} cannot be migrated to {1}. Reason: {2};", vm.Name(), host.Name(), failure.Message);
-
-                        vmIsMigratable = false;
                     }
                     catch (Exception e)
                     {
                         log.Error($"There was an error while asserting the VM {vm.Name()} can be migrated to {itemToFilterOn.Name()}:", e);
-                        disableReason = Messages.HOST_MENU_UNKNOWN_ERROR;
-                        vmIsMigratable = false;
+                        failureReason = Messages.HOST_MENU_UNKNOWN_ERROR;
+                    }
+                    finally
+                    {
+                        lock (_cacheLock)
+                        {
+                            if (!string.IsNullOrEmpty(failureReason))
+                                vmCache[host.opaque_ref] = failureReason;
+                        }
                     }
                 }
 
-                // if at least one VM is not migratable to the target pool, then there is no point checking the remaining VMs
-                if (!vmIsMigratable)
+                if (!string.IsNullOrEmpty(failureReason))
                     return true;
             }
+
+            failureReason = string.Empty;
             return false;
         }
 
@@ -252,11 +232,6 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
                 thePool = pool;
             }
             return target;
-        }
-
-        public override string Reason
-        {
-            get { return disableReason; }
         }
 
         private Dictionary<XenRef<VDI>, XenRef<SR>> GetVdiMap(VM vm, List<SR> targetSrs)

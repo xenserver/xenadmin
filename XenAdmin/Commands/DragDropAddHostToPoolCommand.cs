@@ -60,24 +60,21 @@ namespace XenAdmin.Commands
         {
             get
             {
-                if (CanRun())
-                {
-                    Pool targetPool = GetTargetNodeAncestorAsXenObjectOrGroupingTag<Pool>();
-                    List<Host> draggedHosts = GetDraggedItemsAsXenObjects<Host>();
+                Pool targetPool = GetTargetNodeAncestorAsXenObjectOrGroupingTag<Pool>();
+                List<Host> draggedHosts = GetDraggedItemsAsXenObjects<Host>();
 
-                    if (draggedHosts.Count > 0)
+                if (draggedHosts.Count > 0)
+                {
+                    foreach (Host draggedHost in draggedHosts)
                     {
-                        foreach (Host draggedHost in draggedHosts)
+                        PoolJoinRules.Reason reason = PoolJoinRules.CanJoinPool(draggedHost.Connection, targetPool.Connection, true, true, true, draggedHosts.Count);
+                        if (reason != PoolJoinRules.Reason.Allowed)
                         {
-                            PoolJoinRules.Reason reason = PoolJoinRules.CanJoinPool(draggedHost.Connection, targetPool.Connection, true, true, true, draggedHosts.Count);
-                            if (reason != PoolJoinRules.Reason.Allowed)
-                            {
-                                string reasonString = PoolJoinRules.ReasonMessage(reason);
-                                if (draggedHosts.Count == 1)
-                                    return reasonString;
-                                else
-                                    return string.Format("{0}: {1}", draggedHost, reasonString);
-                            }
+                            string reasonString = PoolJoinRules.ReasonMessage(reason);
+                            if (draggedHosts.Count == 1)
+                                return reasonString;
+                            else
+                                return string.Format("{0}: {1}", draggedHost, reasonString);
                         }
                     }
                 }
@@ -86,13 +83,7 @@ namespace XenAdmin.Commands
             }
         }
 
-        public override VirtualTreeNode HighlightNode
-        {
-            get
-            {
-                return CanRun() ? GetTargetNodeAncestor<Pool>() : null;
-            }
-        }
+        public override VirtualTreeNode HighlightNode => GetTargetNodeAncestor<Pool>();
 
         protected override void RunCore()
         {

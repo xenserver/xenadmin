@@ -51,9 +51,6 @@ namespace XenAdmin.Commands
         {
             get
             {
-                if (CanRun())
-                    return null;
-
                 var targetHost = GetTargetNodeAncestorAsXenObjectOrGroupingTag<Host>();
                 if (targetHost == null)
                     return null;
@@ -104,40 +101,34 @@ namespace XenAdmin.Commands
         protected override bool CanRunCore()
         {
             Host targetHost = GetTargetNodeAncestorAsXenObjectOrGroupingTag<Host>();
+            if (targetHost == null || !targetHost.IsLive() || !targetHost.Connection.IsConnected)
+                return false;
 
-            if (targetHost != null)
+            List<VM> draggedVMs = GetDraggedItemsAsXenObjects<VM>();
+            if (draggedVMs.Count <= 0)
+                return false;
+
+            foreach (VM vm in draggedVMs)
             {
-                List<VM> draggedVMs = GetDraggedItemsAsXenObjects<VM>();
+                if (vm == null || vm.is_a_template || vm.Locked || !(vm.power_state == vm_power_state.Halted || vm.power_state == vm_power_state.Suspended))
+                    return false;
 
-                if (draggedVMs.Count > 0)
-                {
-                    foreach (VM draggedVM in draggedVMs)
-                    {
-                        if (draggedVM == null || draggedVM.is_a_template || draggedVM.Locked || !(draggedVM.power_state == vm_power_state.Halted || draggedVM.power_state == vm_power_state.Suspended))
-                            return false;
+                var homeHost = vm.Home();
+                if (homeHost != null && homeHost == targetHost)
+                    return false;
 
-                        var draggedVMHome = draggedVM.Home();
-                        if (draggedVMHome != null && draggedVMHome == targetHost)
-                            return false;
+                if (vm.allowed_operations == null || !vm.allowed_operations.Contains(vm_operations.migrate_send))
+                    return false;
 
-                        if (!targetHost.Connection.IsConnected)
-                            return false;
+                if (Helpers.productVersionCompare(Helpers.HostProductVersion(targetHost), Helpers.HostProductVersion(homeHost ?? Helpers.GetCoordinator(vm.Connection))) < 0)
+                    return false;
 
-                        if (draggedVM.allowed_operations == null || !draggedVM.allowed_operations.Contains(vm_operations.migrate_send))
-                            return false;
-
-                        if (Helpers.productVersionCompare(Helpers.HostProductVersion(targetHost), Helpers.HostProductVersion(draggedVMHome ?? Helpers.GetCoordinator(draggedVM.Connection))) < 0)
-                            return false;
-
-                        if (VMOperationHostCommand.VmCpuIncompatibleWithHost(targetHost, draggedVM))
-                            return false;
-                    }
-
-                    return true;
-                }
+                if (VMOperationHostCommand.VmCpuIncompatibleWithHost(targetHost, vm))
+                    return false;
             }
 
-            return false;
+            return true;
+
         }
 
         protected override void RunCore()
@@ -178,12 +169,6 @@ namespace XenAdmin.Commands
             }
         }
 
-        public override VirtualTreeNode HighlightNode
-        {
-            get
-            {
-                return CanRun() ? GetTargetNodeAncestor<Host>() : null;
-            }
-        }
+        public override VirtualTreeNode HighlightNode => GetTargetNodeAncestor<Host>();
     }
 }

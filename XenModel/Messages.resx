@@ -8685,6 +8685,9 @@ Do you want to continue?</value>
   <data name="MIGRATION_NOT_ALLOWED_OUTSIDE_POOL" xml:space="preserve">
     <value>'{0}' may not migrate outside its pool</value>
   </data>
+  <data name="MIGRATION_NOT_ALLOWED_USUPPORTED_SR" xml:space="preserve">
+    <value>'{0}' may not migrate because it is on storage that doesn't support migration</value>
+  </data>
   <data name="MIN" xml:space="preserve">
     <value>Min</value>
   </data>

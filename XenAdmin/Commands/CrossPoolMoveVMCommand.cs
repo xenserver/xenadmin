@@ -80,7 +80,7 @@ namespace XenAdmin.Commands
             if (vm == null || vm.is_a_template || vm.Locked || vm.power_state == vm_power_state.Running)
                 return false;
 
-            return CrossPoolMigrateCommand.CanRun(vm, preSelectedHost);
+            return CrossPoolMigrateCommand.CanRun(vm, preSelectedHost, out _);
         }
 
         public static WizardMode GetWizardMode(SelectedItemCollection selection)
