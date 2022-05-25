@@ -31082,11 +31082,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}: Support for paravirtualized (PV) guests has been removed in {1}. Click Learn more to see the list of supported guest operating systems..
+        ///   Looks up a localized string similar to {0}: Support for paravirtualized (PV) guests has been removed in {1}..
         /// </summary>
         public static string POOL_HAS_PV_GUEST_WARNING {
             get {
                 return ResourceManager.GetString("POOL_HAS_PV_GUEST_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The following VMs are paravirtualized (PV):
+        ///
+        ///{0}
+        ///
+        ///Support for PV guests has been removed in {1}. Click Learn more to see the list of supported guest operating systems..
+        /// </summary>
+        public static string POOL_HAS_PV_GUEST_WARNING_DETAIL {
+            get {
+                return ResourceManager.GetString("POOL_HAS_PV_GUEST_WARNING_DETAIL", resourceCulture);
             }
         }
         

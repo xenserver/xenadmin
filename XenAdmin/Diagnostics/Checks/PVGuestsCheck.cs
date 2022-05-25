@@ -30,13 +30,14 @@
  */
 
 using System.Linq;
+using System.Collections.Generic;
 using XenAdmin.Core;
-using XenAPI;
+using XenAdmin.Diagnostics.Hotfixing;
 using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Diagnostics.Problems.PoolProblem;
-using System.Collections.Generic;
-using XenAdmin.Diagnostics.Hotfixing;
 using XenAdmin.Diagnostics.Problems.HostProblem;
+using XenAPI;
+
 
 namespace XenAdmin.Diagnostics.Checks
 {
@@ -45,6 +46,7 @@ namespace XenAdmin.Diagnostics.Checks
         private readonly Pool _pool;
         private readonly bool _manualUpgrade;
         private readonly Dictionary<string, string> _installMethodConfig;
+        private List<VM> _pvGuests = new List<VM>();
 
         public PVGuestsCheck(Host coordinator, bool manualUpgrade = false, Dictionary<string, string> installMethodConfig = null)
             : base(coordinator)
@@ -59,7 +61,11 @@ namespace XenAdmin.Diagnostics.Checks
             if (Helpers.YangtzeOrGreater(Host))
                 return false;
 
-            if (_pool == null || !_pool.Connection.Cache.VMs.Any(vm => vm.IsPvVm()))
+            if (_pool == null)
+                return false;
+
+            _pvGuests = _pool.Connection.Cache.VMs.Where(vm => vm.IsPvVm()).ToList();
+            if (_pvGuests.Count <= 0)
                 return false;
 
             return true;
@@ -82,13 +88,13 @@ namespace XenAdmin.Diagnostics.Checks
             // we don't know the upgrade version, so add warning
             // (this is the case of the manual upgrade or when the rpu plugin doesn't have the function)
             if (string.IsNullOrEmpty(upgradePlatformVersion))
-                return new PoolHasPVGuestWarningUrl(this, _pool);
+                return new PoolHasPVGuestWarningUrl(this, _pool, _pvGuests);
 
             if (Helpers.YangtzeOrGreater(upgradePlatformVersion))
-                return new PoolHasPVGuestProblem(this, _pool);
+                return new PoolHasPVGuestProblem(this, _pool, _pvGuests);
 
             if (Helpers.QuebecOrGreater(upgradePlatformVersion))
-                return new PoolHasPVGuestWarningUrl(this, _pool);
+                return new PoolHasPVGuestWarningUrl(this, _pool, _pvGuests);
 
             return null;
         }
