@@ -80,7 +80,7 @@ namespace XenAdmin.Actions
                             else
                                 Host.forget_data_source_archives(Session, host.opaque_ref, ds.DataSource.name_label);
                         }
-                        else if (_xenObject is VM vm && vm.allowed_operations.Contains(vm_operations.data_source_op))
+                        else if (_xenObject is VM vm)
                         {
                             if (ds.Enabled)
                                 VM.record_data_source(Session, vm.opaque_ref, ds.DataSource.name_label);

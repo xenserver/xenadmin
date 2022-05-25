@@ -191,18 +191,23 @@ namespace XenAdmin.Controls.CustomDataGraph
                     foreach (DataArchive a in Archives.Values)
                         a.ClearSets();
 
+                    LoadingInitialData = true;
+                    ArchivesUpdated?.Invoke();
+
                     try
                     {
-                        LoadingInitialData = true;
-                        ArchivesUpdated?.Invoke();
-
                         if (xenObject is Host h)
                             _dataSources = Host.get_data_sources(h.Connection.Session, h.opaque_ref);
-                        else if (xenObject is VM vm && vm.power_state == vm_power_state.Running &&
-                                 vm.allowed_operations.Contains(vm_operations.data_source_op))
+                        else if (xenObject is VM vm && vm.power_state == vm_power_state.Running)
                             _dataSources = VM.get_data_sources(vm.Connection.Session, vm.opaque_ref);
 
                         Get(ArchiveInterval.None, RrdsUri, RRD_Full_InspectCurrentNode, xenObject);
+                    }
+                    catch (Exception e)
+                    {
+                        //Get handles its own exception;
+                        //anything caught here is thrown by the get_data_sources operations
+                        log.Error($"Failed to retrieve data sources for '{xenObject.Name()}'", e);
                     }
                     finally
                     {
