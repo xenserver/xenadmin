@@ -126,7 +126,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
                         var destinationVersion = Helpers.HostPlatformVersion(host);
                         var sourceVersion = Helpers.HostPlatformVersion(vm.Home() ?? Helpers.GetCoordinator(vmPool));
 
-                        if (Helpers.productVersionCompare(destinationVersion, sourceVersion) < 0)
+                        if (Helpers.ProductVersionCompare(destinationVersion, sourceVersion) < 0)
                         {
                             failureReason = Messages.OLDER_THAN_CURRENT_SERVER;
                             continue;

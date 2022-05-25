@@ -30,22 +30,24 @@
  */
 
 using System.Collections.Generic;
+using System.Linq;
 using XenAdmin.Alerts;
 using XenAdmin.Network;
 using XenAdmin.Core;
+using XenAPI;
 
 
 namespace XenAdmin.Actions
 {
-    public class DeleteAllAlertsAction : AsyncAction
+    public class DismissAlertsAction : AsyncAction
     {
         private readonly List<Alert> _alerts;
 
-        public DeleteAllAlertsAction(List<Alert> alerts, IXenConnection connection = null)
+        public DismissAlertsAction(List<Alert> alerts, IXenConnection connection = null)
             : base(connection, GetActionTitle(connection, alerts.Count),
                 Messages.ACTION_REMOVE_ALERTS_DESCRIPTION)
         {
-            _alerts = new List<Alert>(alerts);
+            _alerts = alerts;
 
             if (connection != null)
             {
@@ -56,13 +58,14 @@ namespace XenAdmin.Actions
 
         private static string GetActionTitle(IXenConnection connection, int alertCount)
         {
-            return connection == null
-                ? alertCount == 1
-                       ? Messages.ACTION_REMOVE_ALERTS_ON_CLIENT_TITLE_ONE
-                       : string.Format(Messages.ACTION_REMOVE_ALERTS_ON_CLIENT_TITLE, alertCount)
-                : alertCount == 1
-                       ? string.Format(Messages.ACTION_REMOVE_ALERTS_ON_CONNECTION_TITLE_ONE, Helpers.GetName(connection))
-                       : string.Format(Messages.ACTION_REMOVE_ALERTS_ON_CONNECTION_TITLE, alertCount, Helpers.GetName(connection));
+            if (connection == null)
+                return alertCount == 1
+                    ? Messages.ACTION_REMOVE_ALERTS_ON_CLIENT_TITLE_ONE
+                    : string.Format(Messages.ACTION_REMOVE_ALERTS_ON_CLIENT_TITLE, alertCount);
+
+            return alertCount == 1
+                ? string.Format(Messages.ACTION_REMOVE_ALERTS_ON_CONNECTION_TITLE_ONE, Helpers.GetName(connection))
+                : string.Format(Messages.ACTION_REMOVE_ALERTS_ON_CONNECTION_TITLE, alertCount, Helpers.GetName(connection));
         }
 
         protected override void Run()
@@ -71,11 +74,47 @@ namespace XenAdmin.Actions
 
             try
             {
-                for (var i = 0; i < _alerts.Count; i++)
+                if (Connection != null && Helpers.XapiEqualOrGreater_22_19_0(Connection))
                 {
-                    Description = string.Format(Messages.ACTION_REMOVE_ALERTS_PROGRESS_DESCRIPTION, i, _alerts.Count);
-                    _alerts[i].Dismiss();
-                    PercentComplete = i * 100 / _alerts.Count;
+                    var msgRefs = new List<XenRef<Message>>();
+                    var msgAlerts = new List<MessageAlert>();
+                    var otherAlerts = new List<Alert>();
+
+                    foreach (var a in _alerts)
+                    {
+                        if (a is MessageAlert ma)
+                        {
+                            msgAlerts.Add(ma);
+                            msgRefs.Add(new XenRef<Message>(ma.Message.opaque_ref));
+                        }
+                        else
+                        {
+                            otherAlerts.Add(a);
+                        }
+                    }
+
+                    int midPoint = 0;
+                    if (_alerts.Count > 0)
+                        midPoint = 100 * msgAlerts.Count / _alerts.Count;
+
+                    RelatedTask = Message.async_destroy_many(Session, msgRefs);
+                    PollToCompletion(0, midPoint);
+                    Alert.RemoveAlert(a => msgAlerts.Contains(a));
+
+                    for (var i = 0; i < otherAlerts.Count; i++)
+                    {
+                        _alerts[i].Dismiss();
+                        PercentComplete = midPoint + i * (100 - midPoint) / otherAlerts.Count;
+                    }
+                }
+                else
+                {
+                    for (var i = 0; i < _alerts.Count; i++)
+                    {
+                        Description = string.Format(Messages.ACTION_REMOVE_ALERTS_PROGRESS_DESCRIPTION, i, _alerts.Count);
+                        _alerts[i].Dismiss();
+                        PercentComplete = i * 100 / _alerts.Count;
+                    }
                 }
             }
             finally

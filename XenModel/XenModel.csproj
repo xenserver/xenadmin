@@ -91,7 +91,6 @@
     <Compile Include="Actions\Host\ShutdownHostAction.cs" />
     <Compile Include="Actions\Host\UpdateIntegratedGpuPassthroughAction.cs" />
     <Compile Include="Actions\DummyAction.cs" />
-    <Compile Include="Actions\Message\DestroyMessageAction.cs" />
     <Compile Include="Actions\Host\HostBackupRestoreAction.cs" />
     <Compile Include="Actions\Host\SingleHostStatusAction.cs" />
     <Compile Include="Actions\MultipleAction.cs" />
@@ -181,6 +180,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>UnitStrings.resx</DependentUpon>
     </Compile>
+    <Compile Include="Utils\Helpers.Versions.cs" />
     <Compile Include="Utils\StringExtensions.cs" />
     <Compile Include="Utils\TimeSpanExtensions.cs" />
     <Compile Include="WLB\WlbPoolConfiguration.cs" />

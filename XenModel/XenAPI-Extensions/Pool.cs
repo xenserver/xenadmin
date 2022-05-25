@@ -224,7 +224,7 @@ namespace XenAPI
             {
                 if (hostWithSmallerVersion == null)
                     hostWithSmallerVersion = host;
-                else if (Helpers.productVersionCompare(hostWithSmallerVersion.ProductVersion(), host.ProductVersion()) > 0)
+                else if (Helpers.ProductVersionCompare(hostWithSmallerVersion.ProductVersion(), host.ProductVersion()) > 0)
                     hostWithSmallerVersion = host;
             }
             return hostWithSmallerVersion;

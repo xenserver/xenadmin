@@ -644,7 +644,7 @@ namespace XenAPI
 
         public string GetXapiVersion()
         {
-            return Get(software_version, "xapi");
+            return Get(software_version, "xapi_build") ?? Get(software_version, "xapi");
         }
 
         /// <summary>

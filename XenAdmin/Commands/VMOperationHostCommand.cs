@@ -116,7 +116,7 @@ namespace XenAdmin.Commands
                 return Messages.NO_HOME_SERVER;
 
             if (vm.power_state == vm_power_state.Running && residentHost != null
-                && Helpers.productVersionCompare(Helpers.HostProductVersion(host), Helpers.HostProductVersion(residentHost)) < 0)
+                && Helpers.ProductVersionCompare(Helpers.HostProductVersion(host), Helpers.HostProductVersion(residentHost)) < 0)
             {
                 // This will be a migrate menu if powerstate if running
                 return Messages.OLDER_THAN_CURRENT_SERVER;

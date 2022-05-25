@@ -6994,6 +6994,14 @@ namespace XenAPI
         Response<string>
         message_destroy(string session, string _message);
 
+        [XmlRpcMethod("message.destroy_many")]
+        Response<string> 
+        message_destroy_many(string session, string [] _messages);
+
+        [XmlRpcMethod("Async.message.destroy_many")]
+        Response<string>
+        async_message_destroy_many(string session, string [] _messages);
+
         [XmlRpcMethod("message.get")]
         Response<Object>
         message_get(string session, string _cls, string _obj_uuid, DateTime _since);

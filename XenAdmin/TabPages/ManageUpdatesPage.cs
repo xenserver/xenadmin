@@ -851,7 +851,7 @@ namespace XenAdmin.TabPages
                 alert.Dismissing = true;
 
             toolStripButtonRestoreDismissed.Enabled = false;
-            var action = new DeleteAllAlertsAction(filtered);
+            var action = new DismissAlertsAction(filtered);
             action.Completed += DeleteAllAlertsAction_Completed;
             action.RunAsync();
         }
