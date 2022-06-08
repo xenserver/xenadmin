@@ -40,6 +40,9 @@ namespace XenAdmin.Controls.MainWindowControls
 {
     class NotificationsView : FlickerFreeListBox
     {
+        private const int IMG_LEFT_MARGIN = 16;
+        private const int IMG_RIGHT_MARGIN = 8;
+
         [Browsable(true)]
         public event Action<NotificationsSubModeItem> NotificationsSubModeChanged;
 
@@ -54,9 +57,7 @@ namespace XenAdmin.Controls.MainWindowControls
             int total = 0;
             foreach (var item in Items)
             {
-                var subModeItem = item as NotificationsSubModeItem;
-
-                if (subModeItem != null)
+                if (item is NotificationsSubModeItem subModeItem)
                     total += subModeItem.UnreadEntries;
             }
             return total;
@@ -66,9 +67,7 @@ namespace XenAdmin.Controls.MainWindowControls
         {
             foreach (var item in Items)
             {
-                var subModeItem = item as NotificationsSubModeItem;
-
-                if (subModeItem != null && subModeItem.SubMode == subMode)
+                if (item is NotificationsSubModeItem subModeItem && subModeItem.SubMode == subMode)
                 {
                     subModeItem.UnreadEntries = entries;
                     break;
@@ -82,9 +81,7 @@ namespace XenAdmin.Controls.MainWindowControls
         {
             foreach (var item in Items)
             {
-                var subModeItem = item as NotificationsSubModeItem;
-               
-                if (subModeItem != null && subModeItem.SubMode == subMode)
+                if (item is NotificationsSubModeItem subModeItem && subModeItem.SubMode == subMode)
                 {
                     var lastSelected = SelectedItem;
                     SelectedItem = item;
@@ -101,12 +98,9 @@ namespace XenAdmin.Controls.MainWindowControls
         {
             base.OnDrawItem(e);
 
-            var item = Items[e.Index] as NotificationsSubModeItem;
-            if (item == null)
+            if (!(Items[e.Index] is NotificationsSubModeItem item))
                 return;
 
-            const int IMG_LEFT_MARGIN = 16;
-            const int IMG_RIGHT_MARGIN = 8;
             int itemHeight = e.Bounds.Height;
             int imgWidth = item.Image.Width;
             int imgHeight = item.Image.Height;
@@ -136,9 +130,7 @@ namespace XenAdmin.Controls.MainWindowControls
         {
             base.OnSelectedIndexChanged(e);
 
-            var item = Items[SelectedIndex] as NotificationsSubModeItem;
-
-            if (item != null && NotificationsSubModeChanged != null)
+            if (Items[SelectedIndex] is NotificationsSubModeItem item && NotificationsSubModeChanged != null)
                 NotificationsSubModeChanged(item);
         }
     }
@@ -149,9 +141,9 @@ namespace XenAdmin.Controls.MainWindowControls
     {
         public readonly NotificationsSubMode SubMode;
         
-        public NotificationsSubModeItem(NotificationsSubMode submode)
+        public NotificationsSubModeItem(NotificationsSubMode subMode)
         {
-            SubMode = submode;
+            SubMode = subMode;
         }
 
         /// <summary>
@@ -160,19 +152,13 @@ namespace XenAdmin.Controls.MainWindowControls
         /// </summary>
         public int UnreadEntries { get; set; }
 
-        public Image Image
-        {
-            get { return GetImage(SubMode, UnreadEntries); }
-        }
+        public Image Image => GetImage(SubMode, UnreadEntries);
 
-        public string Text
-        {
-            get { return GetText(SubMode, UnreadEntries); }
-        }
+        public string Text => GetText(SubMode, UnreadEntries);
 
-        public static Image GetImage(NotificationsSubMode submode, int unreadEntries)
+        public static Image GetImage(NotificationsSubMode subMode, int unreadEntries)
         {
-            switch (submode)
+            switch (subMode)
             {
                 case NotificationsSubMode.Alerts:
                     return Images.StaticImages._000_Alert2_h32bit_16;
@@ -185,9 +171,9 @@ namespace XenAdmin.Controls.MainWindowControls
             }
         }
 
-        public static string GetText(NotificationsSubMode submode, int unreadEntries)
+        public static string GetText(NotificationsSubMode subMode, int unreadEntries)
         {
-            switch (submode)
+            switch (subMode)
             {
                 case NotificationsSubMode.Alerts:
                     return unreadEntries == 0
@@ -196,12 +182,11 @@ namespace XenAdmin.Controls.MainWindowControls
                 case NotificationsSubMode.Events:
                     if (unreadEntries == 0)
                         return Messages.NOTIFICATIONS_SUBMODE_EVENTS_READ;
-                    else if (unreadEntries == 1)
+                    if (unreadEntries == 1)
                         return Messages.NOTIFICATIONS_SUBMODE_EVENTS_UNREAD_ONE;
-                    else
-                        return string.Format(Messages.NOTIFICATIONS_SUBMODE_EVENTS_UNREAD_MANY, unreadEntries);
+                    return string.Format(Messages.NOTIFICATIONS_SUBMODE_EVENTS_UNREAD_MANY, unreadEntries);
                 default:
-                    return "";
+                    return string.Empty;
             }
         }
     }
