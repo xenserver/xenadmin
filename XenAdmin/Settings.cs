@@ -682,11 +682,8 @@ namespace XenAdmin
             log.Info($"=== RemindChangePassword: {Properties.Settings.Default.RemindChangePassword}");
 
             if (!Helpers.CommonCriteriaCertificationRelease)
-            {
                 log.Info($"=== AllowXenCenterUpdates: {Properties.Settings.Default.AllowXenCenterUpdates}");
-                log.Info($"=== AllowXenServerUpdates: {Properties.Settings.Default.AllowXenServerUpdates}");
-            }
-            
+
             log.Info($"=== FillAreaUnderGraphs: {Properties.Settings.Default.FillAreaUnderGraphs}");
             log.Info($"=== RememberLastSelectedTab: {Properties.Settings.Default.RememberLastSelectedTab}");
 

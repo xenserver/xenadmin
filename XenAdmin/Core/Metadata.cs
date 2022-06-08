@@ -75,7 +75,6 @@ namespace XenAdmin.Core
         internal struct CFU
         {
             public bool AllowXenCenterUpdates;
-            public bool AllowXenServerUpdates;
         }
 
         internal struct Proxy
@@ -130,11 +129,7 @@ namespace XenAdmin.Core
                 },
                 Settings = new XenCenterSettings
                 {
-                    CFU = new CFU
-                    {
-                        AllowXenCenterUpdates = Properties.Settings.Default.AllowXenCenterUpdates,
-                        AllowXenServerUpdates = Properties.Settings.Default.AllowXenServerUpdates
-                    },
+                    CFU = new CFU {AllowXenCenterUpdates = Properties.Settings.Default.AllowXenCenterUpdates},
                     Proxy = new Proxy
                     {
                         UseProxy = (HTTPHelper.ProxyStyle) Properties.Settings.Default.ProxySetting == HTTPHelper.ProxyStyle.SpecifiedProxy,

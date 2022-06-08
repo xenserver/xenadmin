@@ -41,8 +41,7 @@ namespace XenAdmin.Dialogs.OptionsPages
         public UpdatesOptionsPage()
         {
             InitializeComponent();
-            UpdatesBlurb.Text = string.Format(UpdatesBlurb.Text, BrandManager.BrandConsole, BrandManager.ProductBrand);
-            AllowXenServerUpdatesCheckBox.Text = string.Format(AllowXenServerUpdatesCheckBox.Text, BrandManager.ProductBrand);
+            UpdatesBlurb.Text = string.Format(UpdatesBlurb.Text, BrandManager.BrandConsole);
             AllowXenCenterUpdatesCheckBox.Text = string.Format(AllowXenCenterUpdatesCheckBox.Text, BrandManager.BrandConsole);
         }
 
@@ -52,9 +51,6 @@ namespace XenAdmin.Dialogs.OptionsPages
         {
             // XenCenter updates
             AllowXenCenterUpdatesCheckBox.Checked = Properties.Settings.Default.AllowXenCenterUpdates;
-
-            // XenServer updates
-            AllowXenServerUpdatesCheckBox.Checked = Properties.Settings.Default.AllowXenServerUpdates;
         }
 
         public bool IsValidToSave()
@@ -72,16 +68,12 @@ namespace XenAdmin.Dialogs.OptionsPages
         public void Save()
         {
             bool checkXenCenterUpdates = AllowXenCenterUpdatesCheckBox.Checked != Properties.Settings.Default.AllowXenCenterUpdates;
-            bool checkVersionUpdates = AllowXenServerUpdatesCheckBox.Checked != Properties.Settings.Default.AllowXenServerUpdates;
 
             if (checkXenCenterUpdates)
+            {
                 Properties.Settings.Default.AllowXenCenterUpdates = AllowXenCenterUpdatesCheckBox.Checked;
-
-            if (checkVersionUpdates)
-                Properties.Settings.Default.AllowXenServerUpdates = AllowXenServerUpdatesCheckBox.Checked;
-
-            if(checkXenCenterUpdates || checkVersionUpdates)
                 Updates.CheckForUpdates(false, true);
+            }
         }
 
         #endregion

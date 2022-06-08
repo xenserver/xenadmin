@@ -94,13 +94,9 @@ namespace XenAdmin.Core
             if (Helpers.CommonCriteriaCertificationRelease)
                 return;
 
-            if (Properties.Settings.Default.AllowXenCenterUpdates ||
-                Properties.Settings.Default.AllowXenServerUpdates ||
-                force || forceRefresh)
+            if (Properties.Settings.Default.AllowXenCenterUpdates || force || forceRefresh)
             {
-                var action = CreateDownloadUpdatesXmlAction(
-                    Properties.Settings.Default.AllowXenCenterUpdates || force,
-                    Properties.Settings.Default.AllowXenServerUpdates || force);
+                var action = CreateDownloadUpdatesXmlAction(Properties.Settings.Default.AllowXenCenterUpdates || force);
 
                 action.Completed += actionCompleted;
 
