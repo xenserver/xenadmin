@@ -255,7 +255,7 @@ namespace XenAdmin
             toolStripSeparator7.Visible = xenSourceOnTheWebToolStripMenuItem.Visible = xenCenterPluginsOnlineToolStripMenuItem.Visible = !HiddenFeatures.ToolStripMenuItemHidden;
             healthCheckToolStripMenuItem1.Visible = !HiddenFeatures.HealthCheckHidden && (Registry.GetBrandOverride() == "XenCenter" || BrandManager.BrandConsole == "XenCenter");
 
-            statusLabelAlerts.Visible = statusLabelUpdates.Visible = statusLabelErrors.Visible = false;
+            statusLabelAlerts.Visible = statusLabelErrors.Visible = false;
         }
 
         private void RegisterEvents()
@@ -382,7 +382,7 @@ namespace XenAdmin
         {
             base.OnShown(e);
             TheTabControl.Visible = true;
-            alertPage.Visible = updatesPage.Visible = eventsPage.Visible = false;
+            alertPage.Visible = eventsPage.Visible = false;
             navigationPane.FocusTreeView();
         }
 
@@ -2542,9 +2542,6 @@ namespace XenAdmin
             if (alertPage.Visible)
                 return alertPage.HelpID;
 
-            if (updatesPage.Visible)
-                return updatesPage.HelpID;
-
             if (eventsPage.Visible)
                 return eventsPage.HelpID;
 
@@ -2629,22 +2626,7 @@ namespace XenAdmin
 
         private void Updates_CollectionChanged(CollectionChangeEventArgs e)
         {
-            Program.Invoke(this, () =>
-                {
-                    int updatesCount = Updates.UpdateAlerts.Count;
-                    navigationPane.UpdateNotificationsButton(NotificationsSubMode.Updates, updatesCount);
-
-                    statusLabelUpdates.Text = string.Format(Messages.NOTIFICATIONS_SUBMODE_UPDATES_STATUS, updatesCount);
-                    statusLabelUpdates.Visible = updatesCount > 0;
-
-                    SetUpdateAlert();
-
-                    if (updatesPage.Visible)
-                    {
-                        TitleLabel.Text = NotificationsSubModeItem.GetText(NotificationsSubMode.Updates, updatesCount);
-                        TitleIcon.Image = NotificationsSubModeItem.GetImage(NotificationsSubMode.Updates, updatesCount);
-                    }
-                });
+            Program.Invoke(this, SetUpdateAlert);
         }
 
         private void UpdatesCheck_Completed(bool succeeded, string err)
@@ -2928,24 +2910,13 @@ namespace XenAdmin
             switch (submodeItem.SubMode)
             {
                 case NotificationsSubMode.Alerts:
-                    if (updatesPage.Visible)
-                        updatesPage.HidePage();
                     if (eventsPage.Visible)
                         eventsPage.HidePage();
                     alertPage.ShowPage();
                     break;
-                case NotificationsSubMode.Updates:
-                    if (alertPage.Visible)
-                        alertPage.HidePage();
-                    if (eventsPage.Visible)
-                        eventsPage.HidePage();
-                    updatesPage.ShowPage();
-                    break;
                 case NotificationsSubMode.Events:
                     if (alertPage.Visible)
                         alertPage.HidePage();
-                    if (updatesPage.Visible)
-                        updatesPage.HidePage();
                     eventsPage.ShowPage();
                     break;
             } 
@@ -2970,8 +2941,6 @@ namespace XenAdmin
                 TheTabControl.Visible = true;
                 if (alertPage.Visible)
                     alertPage.HidePage();
-                if (updatesPage.Visible)
-                    updatesPage.HidePage();
                 if (eventsPage.Visible)
                     eventsPage.HidePage();
 
@@ -3302,11 +3271,6 @@ namespace XenAdmin
         private void statusLabelAlerts_Click(object sender, EventArgs e)
         {
             navigationPane.SwitchToNotificationsView(NotificationsSubMode.Alerts);
-        }
-
-        private void statusLabelUpdates_Click(object sender, EventArgs e)
-        {
-            navigationPane.SwitchToNotificationsView(NotificationsSubMode.Updates);
         }
 
         private void statusLabelErrors_Click(object sender, EventArgs e)

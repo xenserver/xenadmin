@@ -28959,33 +28959,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Updates.
-        /// </summary>
-        public static string NOTIFICATIONS_SUBMODE_UPDATES_READ {
-            get {
-                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_UPDATES_READ", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Updates: {0}.
-        /// </summary>
-        public static string NOTIFICATIONS_SUBMODE_UPDATES_STATUS {
-            get {
-                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_UPDATES_STATUS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Updates ({0}).
-        /// </summary>
-        public static string NOTIFICATIONS_SUBMODE_UPDATES_UNREAD {
-            get {
-                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_UPDATES_UNREAD", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Notifications ({0}).
         /// </summary>
         public static string NOTIFICATIONS_TOTAL {

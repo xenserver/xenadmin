@@ -10068,15 +10068,6 @@ Review these settings, then click Previous if you need to change anything. Other
   <data name="NOTIFICATIONS_SUBMODE_EVENTS_UNREAD_ONE" xml:space="preserve">
     <value>Events (1 error)</value>
   </data>
-  <data name="NOTIFICATIONS_SUBMODE_UPDATES_READ" xml:space="preserve">
-    <value>Updates</value>
-  </data>
-  <data name="NOTIFICATIONS_SUBMODE_UPDATES_STATUS" xml:space="preserve">
-    <value>Updates: {0}</value>
-  </data>
-  <data name="NOTIFICATIONS_SUBMODE_UPDATES_UNREAD" xml:space="preserve">
-    <value>Updates ({0})</value>
-  </data>
   <data name="NOTIFICATIONS_TOTAL" xml:space="preserve">
     <value>Notifications ({0})</value>
   </data>

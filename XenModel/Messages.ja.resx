@@ -10046,15 +10046,6 @@ NFS ストレージ リポジトリを構成する場合は、NFS サーバー�
   <data name="NOTIFICATIONS_SUBMODE_EVENTS_UNREAD_ONE" xml:space="preserve">
     <value>イベント (1 個のエラー)</value>
   </data>
-  <data name="NOTIFICATIONS_SUBMODE_UPDATES_READ" xml:space="preserve">
-    <value>アップデート</value>
-  </data>
-  <data name="NOTIFICATIONS_SUBMODE_UPDATES_STATUS" xml:space="preserve">
-    <value>アップデート: {0} 個</value>
-  </data>
-  <data name="NOTIFICATIONS_SUBMODE_UPDATES_UNREAD" xml:space="preserve">
-    <value>アップデート ({0})</value>
-  </data>
   <data name="NOTIFICATIONS_TOTAL" xml:space="preserve">
     <value>通知 ({0})</value>
   </data>

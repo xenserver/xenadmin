@@ -46,8 +46,6 @@ namespace XenAdmin.Controls.MainWindowControls
         public NotificationsView()
         {
             Items.Add(new NotificationsSubModeItem(NotificationsSubMode.Alerts));
-            if (!Helpers.CommonCriteriaCertificationRelease)
-                Items.Add(new NotificationsSubModeItem(NotificationsSubMode.Updates));
             Items.Add(new NotificationsSubModeItem(NotificationsSubMode.Events));
         }
 
@@ -145,7 +143,7 @@ namespace XenAdmin.Controls.MainWindowControls
         }
     }
 
-    public enum NotificationsSubMode { Alerts, Updates, Events }
+    public enum NotificationsSubMode { Alerts, Events }
 
     public class NotificationsSubModeItem
     {
@@ -178,8 +176,6 @@ namespace XenAdmin.Controls.MainWindowControls
             {
                 case NotificationsSubMode.Alerts:
                     return Images.StaticImages._000_Alert2_h32bit_16;
-                case NotificationsSubMode.Updates:
-                    return Images.StaticImages.notif_updates_16;
                 case NotificationsSubMode.Events:
                     return unreadEntries == 0
                                ? Images.StaticImages.notif_events_16
@@ -197,10 +193,6 @@ namespace XenAdmin.Controls.MainWindowControls
                     return unreadEntries == 0
                                ? Messages.NOTIFICATIONS_SUBMODE_ALERTS_READ
                                : string.Format(Messages.NOTIFICATIONS_SUBMODE_ALERTS_UNREAD, unreadEntries);
-                case NotificationsSubMode.Updates:
-                    return unreadEntries == 0
-                               ? Messages.NOTIFICATIONS_SUBMODE_UPDATES_READ
-                               : string.Format(Messages.NOTIFICATIONS_SUBMODE_UPDATES_UNREAD, unreadEntries);
                 case NotificationsSubMode.Events:
                     if (unreadEntries == 0)
                         return Messages.NOTIFICATIONS_SUBMODE_EVENTS_READ;
