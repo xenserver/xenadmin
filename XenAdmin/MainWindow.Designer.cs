@@ -284,6 +284,7 @@ namespace XenAdmin
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLabelErrors = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLabelAlerts = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripMenuItemCfu = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -1835,6 +1836,7 @@ namespace XenAdmin
             this.toolStripMenuItem15,
             this.viewApplicationLogToolStripMenuItem,
             this.toolStripMenuItem17,
+            this.toolStripMenuItemCfu,
             this.xenSourceOnTheWebToolStripMenuItem,
             this.xenCenterPluginsOnlineToolStripMenuItem,
             this.toolStripSeparator7,
@@ -2004,6 +2006,12 @@ namespace XenAdmin
             resources.ApplyResources(this.statusLabelAlerts, "statusLabelAlerts");
             this.statusLabelAlerts.VisitedLinkColor = System.Drawing.SystemColors.ControlDarkDark;
             this.statusLabelAlerts.Click += new System.EventHandler(this.statusLabelAlerts_Click);
+            // 
+            // toolStripMenuItemCfu
+            // 
+            this.toolStripMenuItemCfu.Name = "toolStripMenuItemCfu";
+            resources.ApplyResources(this.toolStripMenuItemCfu, "toolStripMenuItemCfu");
+            this.toolStripMenuItemCfu.Click += new System.EventHandler(this.toolStripMenuItemCfu_Click);
             // 
             // MainWindow
             // 
@@ -2288,6 +2296,7 @@ namespace XenAdmin
         private System.Windows.Forms.ToolStripMenuItem updateClientToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem relNotesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem downloadInstallToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemCfu;
     }
 
 }

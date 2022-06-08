@@ -2631,7 +2631,11 @@ namespace XenAdmin
 
         private void UpdatesCheck_Completed(bool succeeded, string err)
         {
-            Program.Invoke(this, SetUpdateAlert);            
+            Program.Invoke(this, () =>
+            {
+                toolStripMenuItemCfu.Enabled = true;
+                SetUpdateAlert();
+            });            
         }
 
         private void SetUpdateAlert()
@@ -2644,7 +2648,11 @@ namespace XenAdmin
 
         private void UpdatesCheck_Started()
         {
-            Program.Invoke(this, () => { updateClientToolStripMenuItem.Visible = false; });
+            Program.Invoke(this, () =>
+            {
+                updateClientToolStripMenuItem.Visible = false;
+                toolStripMenuItemCfu.Enabled = false;
+            });
         }
 
         private void CloseWhenActionsCanceled(object o)
@@ -3287,6 +3295,11 @@ namespace XenAdmin
         private void downloadInstallToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ClientUpdateAlert.DownloadAndInstallNewClient(updateAlert, this);
+        }
+
+        private void toolStripMenuItemCfu_Click(object sender, EventArgs e)
+        {
+            Updates.CheckForUpdates(true);
         }
     }
 }

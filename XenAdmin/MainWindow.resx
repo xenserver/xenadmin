@@ -2709,6 +2709,12 @@
   <data name="toolStripMenuItem17.Size" type="System.Drawing.Size, System.Drawing">
     <value>183, 6</value>
   </data>
+  <data name="toolStripMenuItemCfu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>186, 22</value>
+  </data>
+  <data name="toolStripMenuItemCfu.Text" xml:space="preserve">
+    <value>Check for &amp;Updates</value>
+  </data>
   <data name="xenSourceOnTheWebToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>186, 22</value>
   </data>
@@ -2845,7 +2851,7 @@
     <value>None</value>
   </data>
   <data name="statusLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>616, 22</value>
+    <value>647, 22</value>
   </data>
   <data name="statusLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -4088,6 +4094,12 @@
   </data>
   <data name="&gt;&gt;statusLabelAlerts.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemCfu.Name" xml:space="preserve">
+    <value>toolStripMenuItemCfu</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemCfu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainWindow</value>
