@@ -1,3 +1,5 @@
+using XenAdmin.Controls;
+
 namespace XenAdmin.Wizards.PatchingWizard
 {
     partial class AutomatedUpdatesBasePage
@@ -32,7 +34,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AutomatedUpdatesBasePage));
             this.labelTitle = new System.Windows.Forms.Label();
-            this.textBoxLog = new System.Windows.Forms.TextBox();
+            this.textBoxLog = new SmartScrollTextBox();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.labelError = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -56,6 +58,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             resources.ApplyResources(this.textBoxLog, "textBoxLog");
             this.textBoxLog.Name = "textBoxLog";
             this.textBoxLog.ReadOnly = true;
+            textBoxLog.OnScrollChange += TextBoxLog_OnScrollChange;
             // 
             // progressBar
             // 
@@ -126,7 +129,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         #endregion
 
         private System.Windows.Forms.Label labelTitle;
-        private System.Windows.Forms.TextBox textBoxLog;
+        private SmartScrollTextBox textBoxLog;
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.Label labelError;
         private System.Windows.Forms.PictureBox pictureBox1;
