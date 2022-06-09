@@ -44,6 +44,7 @@
     <String Id="XenServer_Update_File">更新文件</String>
     <String Id="XenServer_OEM_Update_File">OEM 更新文件</String>
     <String Id="XenCenter_Saved_Search">保存的搜索</String>
+	<String Id="XenCenter_Launch">Launch</String>
     <String Id="Required_For_Installation">此安装需要 Microsoft .NET Framework 4.8 或更高版本。请从 https://www.microsoft.com/net/download/framework 进行安装</String>
     <String Id="Readme">声明.TXT</String>
     <String Id="HealthCheckDescr">通过定期将数据从服务器上载到 Citrix Insight Services，实现对 Citrix Hypervisor 池的运行状况监视。</String>

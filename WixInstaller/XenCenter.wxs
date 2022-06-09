@@ -278,13 +278,14 @@
                 Value="LaunchApplication">WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 and NOT Installed
 			</Publish>
          </UI>
-        <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Launch $(var.BrandProduct)" />
+        <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="!(loc.XenCenter_Launch) $(var.BrandConsole)" />
         <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOX" Value="1" />
         <Property Id="WixShellExecTarget" Value="[#XenCenterEXE]" />
         <CustomAction Id="LaunchApplication" 
-            BinaryKey="WixCA" 
-            DllEntry="WixShellExec"
-            Impersonate="yes" />
+            FileKey="XenCenterEXE"
+            ExeCommand="/X"  
+            Impersonate="yes"
+            Return="asyncNoWait" />
 		<Icon Id="XenCenterICO" SourceFile="$(env.RepoRoot)\Branding\Images\AppIcon.ico" />
     </Product>
 </Wix>

@@ -44,6 +44,7 @@
     <String Id="XenServer_Update_File">アップデート ファイル</String>
     <String Id="XenServer_OEM_Update_File">OEM アップデート ファイル</String>
     <String Id="XenCenter_Saved_Search">保存済みの検索</String>
+	<String Id="XenCenter_Launch">Launch</String>
     <String Id="Required_For_Installation">このインストールには、Microsoft .NET Framework 4.8 以降が必要です。https://www.microsoft.com/net/download/framework からインストールしてください。</String>
     <String Id="Readme">README.TXT</String>
     <String Id="HealthCheckDescr">サーバーから Citrix Insight Services に定期的にデータをアップロードすることにより、Citrix Hypervisor プールのヘルス状態の監視を有効にします。</String>
