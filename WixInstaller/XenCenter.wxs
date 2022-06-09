@@ -271,13 +271,13 @@
             <Custom Action="ClearAllUsers" After="FindRelatedProducts">NOT Installed AND PERMACHINEINSTALL</Custom>
             <ExecuteAction Sequence="1102" />
         </InstallUISequence>
-         <UI>
+        <UI>
             <Publish Dialog="ExitDialog" 
                 Control="Finish" 
                 Event="DoAction" 
-                Value="LaunchApplication">WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 and NOT Installed
-			</Publish>
-         </UI>
+                Value="LaunchApplication">WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 AND NOT (WixUI_InstallMode="Remove")
+            </Publish>
+        </UI>
         <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="!(loc.XenCenter_Launch) $(var.BrandConsole)" />
         <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOX" Value="1" />
         <Property Id="WixShellExecTarget" Value="[#XenCenterEXE]" />
@@ -286,6 +286,6 @@
             ExeCommand="/X"  
             Impersonate="yes"
             Return="asyncNoWait" />
-		<Icon Id="XenCenterICO" SourceFile="$(env.RepoRoot)\Branding\Images\AppIcon.ico" />
+        <Icon Id="XenCenterICO" SourceFile="$(env.RepoRoot)\Branding\Images\AppIcon.ico" />
     </Product>
 </Wix>
