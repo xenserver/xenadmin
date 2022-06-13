@@ -5216,11 +5216,29 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} is now available. Click Download and Install to proceed with the update..
+        /// </summary>
+        public static string ALERT_NEW_VERSION_DETAILS_CLIENT {
+            get {
+                return ResourceManager.GetString("ALERT_NEW_VERSION_DETAILS_CLIENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Go to Web Page.
         /// </summary>
         public static string ALERT_NEW_VERSION_DOWNLOAD {
             get {
                 return ResourceManager.GetString("ALERT_NEW_VERSION_DOWNLOAD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to v{0} Release Notes.
+        /// </summary>
+        public static string ALERT_NEW_VERSION_DOWNLOAD_CLIENT {
+            get {
+                return ResourceManager.GetString("ALERT_NEW_VERSION_DOWNLOAD_CLIENT", resourceCulture);
             }
         }
         
@@ -13857,6 +13875,42 @@ namespace XenAdmin {
         public static string DOWNLOAD_AND_EXTRACT_ACTION_TITLE {
             get {
                 return ResourceManager.GetString("DOWNLOAD_AND_EXTRACT_ACTION_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Downloading {0} installer.
+        /// </summary>
+        public static string DOWNLOAD_CLIENT_INSTALLER_ACTION_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("DOWNLOAD_CLIENT_INSTALLER_ACTION_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Downloading {0} installer ({1} of {2})....
+        /// </summary>
+        public static string DOWNLOAD_CLIENT_INSTALLER_ACTION_PROGRESS_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("DOWNLOAD_CLIENT_INSTALLER_ACTION_PROGRESS_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download {0} installer.
+        /// </summary>
+        public static string DOWNLOAD_CLIENT_INSTALLER_ACTION_TITLE {
+            get {
+                return ResourceManager.GetString("DOWNLOAD_CLIENT_INSTALLER_ACTION_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The downloaded installer can no longer be found..
+        /// </summary>
+        public static string DOWNLOAD_CLIENT_INSTALLER_MSI_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("DOWNLOAD_CLIENT_INSTALLER_MSI_NOT_FOUND", resourceCulture);
             }
         }
         
@@ -37121,6 +37175,51 @@ namespace XenAdmin {
         public static string UNTIL_RESTART_X_AFTER_RESTART_Y {
             get {
                 return ResourceManager.GetString("UNTIL_RESTART_X_AFTER_RESTART_Y", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not validate the certificate associated with the downloaded installer..
+        /// </summary>
+        public static string UPDATE_CLIENT_FAILED_CERTIFICATE_CHECK {
+            get {
+                return ResourceManager.GetString("UPDATE_CLIENT_FAILED_CERTIFICATE_CHECK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred when launching the downloaded installer. Please see the logs for more information..
+        /// </summary>
+        public static string UPDATE_CLIENT_FAILED_INSTALLER_LAUNCH {
+            get {
+                return ResourceManager.GetString("UPDATE_CLIENT_FAILED_INSTALLER_LAUNCH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The checksum of the downloaded installer does not match the expected value..
+        /// </summary>
+        public static string UPDATE_CLIENT_INVALID_CHECKSUM {
+            get {
+                return ResourceManager.GetString("UPDATE_CLIENT_INVALID_CHECKSUM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid digital signature on msi..
+        /// </summary>
+        public static string UPDATE_CLIENT_INVALID_DIGITAL_CERTIFICATE {
+            get {
+                return ResourceManager.GetString("UPDATE_CLIENT_INVALID_DIGITAL_CERTIFICATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Validating the downloaded installer....
+        /// </summary>
+        public static string UPDATE_CLIENT_VALIDATING_INSTALLER {
+            get {
+                return ResourceManager.GetString("UPDATE_CLIENT_VALIDATING_INSTALLER", resourceCulture);
             }
         }
         

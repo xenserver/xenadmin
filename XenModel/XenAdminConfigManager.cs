@@ -64,5 +64,7 @@ namespace XenAdmin
         bool ShowHiddenVMs { get; }
         string GetXenCenterMetadata(bool isForXenCenter);
         string GetCustomUpdatesXmlLocation();
+        string GetInternalStageAuthToken();
+        string GetInternalStageAuthTokenName();
     }
 }

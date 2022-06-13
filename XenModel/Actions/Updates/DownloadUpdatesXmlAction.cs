@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.IO;
 using System.Xml;
@@ -104,30 +105,33 @@ namespace XenAdmin.Actions
             {
                 foreach (XmlNode version in versions.ChildNodes)
                 {
-                    string version_lang = "";
-                    string name = "";
+                    string versionLang = string.Empty;
+                    string name = string.Empty;
                     bool latest = false;
-                    bool latest_cr = false;
-                    string url = "";
-                    string timestamp = "";
+                    bool latestCr = false;
+                    string url = string.Empty;
+                    string timestamp = string.Empty;
+                    string checksum = string.Empty;
 
                     foreach (XmlAttribute attrib in version.Attributes)
                     {
                         if (attrib.Name == "value")
-                            version_lang = attrib.Value;
+                            versionLang = attrib.Value;
                         else if (attrib.Name == "name")
                             name = attrib.Value;
                         else if (attrib.Name == "latest")
                             latest = attrib.Value.ToUpperInvariant() == bool.TrueString.ToUpperInvariant();
                         else if (attrib.Name == "latestcr")
-                            latest_cr = attrib.Value.ToUpperInvariant() == bool.TrueString.ToUpperInvariant();
+                            latestCr = attrib.Value.ToUpperInvariant() == bool.TrueString.ToUpperInvariant();
                         else if (attrib.Name == "url")
                             url = attrib.Value;
                         else if (attrib.Name == "timestamp")
                             timestamp = attrib.Value;
+                        else if (attrib.Name == "checksum")
+                            checksum = attrib.Value;
                     }
 
-                    ClientVersions.Add(new ClientVersion(version_lang, name, latest, latest_cr, url, timestamp));
+                    ClientVersions.Add(new ClientVersion(versionLang, name, latest, latestCr, url, timestamp, checksum));
                 }
             }
         }
@@ -319,6 +323,7 @@ namespace XenAdmin.Actions
         {
             var xdoc = new XmlDocument();
             var checkForUpdatesUrl = XenAdminConfigManager.Provider.GetCustomUpdatesXmlLocation() ?? BrandManager.UpdatesUrl;
+            var authToken = XenAdminConfigManager.Provider.GetInternalStageAuthToken();
             var uri = new Uri(checkForUpdatesUrl);
 
             if (uri.IsFile)
@@ -327,12 +332,19 @@ namespace XenAdmin.Actions
             }
             else
             {
+                
                 var proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(Connection, false);
 
                 using (var webClient = new WebClient())
                 {
                     webClient.Proxy = proxy;
                     webClient.Headers.Add("User-Agent", _userAgent);
+                    if (!string.IsNullOrEmpty(authToken))
+                    {
+                        NameValueCollection myQueryStringCollection = new NameValueCollection();
+                        myQueryStringCollection.Add(XenAdminConfigManager.Provider.GetInternalStageAuthTokenName(), authToken);
+                        webClient.QueryString = myQueryStringCollection;
+                    }
 
                     using (var stream = new MemoryStream(webClient.DownloadData(uri)))
                         xdoc.Load(stream);

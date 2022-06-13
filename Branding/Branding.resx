@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -277,7 +277,7 @@
     <value>[Citrix VM Tools]</value>
   </data>
   <data name="UPDATES_URL" xml:space="preserve">
-    <value>https://updates.xensource.com/XenServer/updates.xml</value>
+    <value>[UPDATES_URL]</value>
   </data>
   <data name="VM_TOOLS" xml:space="preserve">
     <value>[Citrix VM Tools]</value>

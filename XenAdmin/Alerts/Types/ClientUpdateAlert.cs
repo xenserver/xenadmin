@@ -31,62 +31,63 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Windows.Forms;
+using XenAdmin.Actions;
+using XenAdmin.Actions.GUIActions;
+using XenAdmin.Actions.Updates;
 using XenAdmin.Core;
+using XenAdmin.Dialogs;
 
 
 namespace XenAdmin.Alerts
 {
     public class ClientUpdateAlert : Alert
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public readonly ClientVersion NewVersion;
 
         public ClientUpdateAlert(ClientVersion version)
         {
             NewVersion = version;
             _timestamp = NewVersion.TimeStamp;
+            Checksum = version.Checksum;
         }
 
         public override AlertPriority Priority => AlertPriority.Priority5;
 
-        public override string WebPageLabel => NewVersion.Url;
+        public override string WebPageLabel => InvisibleMessages.RELEASE_NOTES_URL;
 
         public override string Name => NewVersion.Name;
 
         public override string Title => string.Format(Messages.ALERT_NEW_VERSION, NewVersion.Name);
 
-        public override string Description => string.Format(Messages.ALERT_NEW_VERSION_DETAILS,
-            NewVersion.Name, BrandManager.CompanyNameShort);
+        public override string Description => string.Format(Messages.ALERT_NEW_VERSION_DETAILS_CLIENT,
+            NewVersion.Name);
 
         public override Action FixLinkAction
         {
-            get { return () => Program.OpenURL(NewVersion.Url); }
+            get { return () => Program.OpenURL(WebPageLabel); }
         }
 
-        public override string FixLinkText => Messages.ALERT_NEW_VERSION_DOWNLOAD;
+        public override string FixLinkText => string.Format(Messages.ALERT_NEW_VERSION_DOWNLOAD_CLIENT, NewVersion.Version);
 
         public override string AppliesTo => BrandManager.BrandConsole;
 
         public override string HelpID => "XenCenterUpdateAlert";
 
-        static int DISMISSED_XC_VERSIONS_LIMIT = 5;
+        public string Checksum { get; }
+
+        public override bool AllowedToDismiss()
+        {
+            return false;
+        }
 
         public override void Dismiss()
         {
-            List<string> current = new List<string>(Properties.Settings.Default.LatestXenCenterSeen.Split(','));
-            if (current.Contains(NewVersion.VersionAndLang))
-                return;
-            if (current.Count >= DISMISSED_XC_VERSIONS_LIMIT)
-                current.RemoveRange(0, current.Count - DISMISSED_XC_VERSIONS_LIMIT + 1);
-            current.Add(NewVersion.VersionAndLang);
-            Properties.Settings.Default.LatestXenCenterSeen = string.Join(",", current.ToArray());
-            Settings.TrySaveSettings();
-            Updates.RemoveUpdate(this);
-        }
-
-        public override bool IsDismissed()
-        {
-            List<string> current = new List<string>(Properties.Settings.Default.LatestXenCenterSeen.Split(','));
-            return current.Contains(NewVersion.VersionAndLang);
+            //do not dismiss this alert
         }
 
         public override bool Equals(Alert other)
@@ -95,6 +96,57 @@ namespace XenAdmin.Alerts
                 return NewVersion.VersionAndLang == clientAlert.NewVersion.VersionAndLang;
 
             return base.Equals(other);
+        }
+
+        public static void DownloadAndInstallNewClient(ClientUpdateAlert updateAlert, IWin32Window parent)
+        {
+            var outputPathAndFileName = Path.Combine(Path.GetTempPath(), $"{BrandManager.BrandConsoleNoSpace}.msi");
+
+            var downloadAndInstallClientAction = new DownloadAndUpdateClientAction(updateAlert.Name, new Uri(updateAlert.NewVersion.Url), outputPathAndFileName, updateAlert.Checksum);
+
+            using (var dlg = new ActionProgressDialog(downloadAndInstallClientAction, ProgressBarStyle.Continuous))
+            {
+                dlg.ShowCancel = true;
+                dlg.ShowDialog(parent);
+            }
+
+            if (!downloadAndInstallClientAction.Succeeded)
+                return;
+
+            bool currentTasks = false;
+            foreach (ActionBase a in ConnectionsManager.History)
+            {
+                if (a is MeddlingAction || a.IsCompleted)
+                    continue;
+
+                currentTasks = true;
+                break;
+            }
+
+            if (currentTasks)
+            {
+                if (new Dialogs.WarningDialogs.CloseXenCenterWarningDialog(true).ShowDialog(parent) != DialogResult.OK)
+                {
+                    downloadAndInstallClientAction.ReleaseInstaller();
+                    return;
+                }
+            }
+
+            try
+            {
+                Process.Start(outputPathAndFileName);
+                log.DebugFormat("Update {0} found and install started", updateAlert.Name);
+                downloadAndInstallClientAction.ReleaseInstaller();
+                Application.Exit();
+            }
+            catch (Exception e)
+            {
+                log.Error("Exception occurred when starting the installation process.", e);
+                downloadAndInstallClientAction.ReleaseInstaller(true);
+
+                using (var dlg = new ErrorDialog(Messages.UPDATE_CLIENT_FAILED_INSTALLER_LAUNCH))
+                    dlg.ShowDialog(parent);
+            }
         }
     }
 }

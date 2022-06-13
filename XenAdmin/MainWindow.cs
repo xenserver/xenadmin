@@ -61,7 +61,7 @@ using XenCenterLib;
 using System.Linq;
 using XenAdmin.Controls.GradientPanel;
 using XenAdmin.Help;
-
+using System.IO;
 
 namespace XenAdmin
 {
@@ -138,6 +138,8 @@ namespace XenAdmin
 
         private bool expandTreeNodesOnStartup;
         private int connectionsInProgressOnStartup;
+
+        private ClientUpdateAlert updateAlert;
 
         [DllImport("kernel32.dll", CharSet = CharSet.Auto)]
         static extern uint RegisterApplicationRestart(string pszCommandline, uint dwFlags);
@@ -240,12 +242,15 @@ namespace XenAdmin
             licenseTimer = new LicenseTimer(licenseManagerLauncher);
             GeneralPage.LicenseLauncher = licenseManagerLauncher;
 
+            updateClientToolStripMenuItem.Visible = false;
+
             xenSourceOnTheWebToolStripMenuItem.Text = string.Format(xenSourceOnTheWebToolStripMenuItem.Text,
                 BrandManager.ProductBrand);
             viewApplicationLogToolStripMenuItem.Text = string.Format(viewApplicationLogToolStripMenuItem.Text, BrandManager.BrandConsole);
             xenCenterPluginsOnlineToolStripMenuItem.Text = string.Format(xenCenterPluginsOnlineToolStripMenuItem.Text, BrandManager.BrandConsole);
             aboutXenSourceAdminToolStripMenuItem.Text = string.Format(aboutXenSourceAdminToolStripMenuItem.Text, BrandManager.BrandConsole);
             templatesToolStripMenuItem1.Text = string.Format(templatesToolStripMenuItem1.Text, BrandManager.ProductBrand);
+            updateClientToolStripMenuItem.Text = string.Format(updateClientToolStripMenuItem.Text, BrandManager.BrandConsole);
 
             toolStripSeparator7.Visible = xenSourceOnTheWebToolStripMenuItem.Visible = xenCenterPluginsOnlineToolStripMenuItem.Visible = !HiddenFeatures.ToolStripMenuItemHidden;
             healthCheckToolStripMenuItem1.Visible = !HiddenFeatures.HealthCheckHidden && (Registry.GetBrandOverride() == "XenCenter" || BrandManager.BrandConsole == "XenCenter");
@@ -259,6 +264,8 @@ namespace XenAdmin
             OtherConfigAndTagsWatcher.RegisterEventHandlers();
             Alert.RegisterAlertCollectionChanged(XenCenterAlerts_CollectionChanged);
             Updates.UpdateAlertCollectionChanged += Updates_CollectionChanged;
+            Updates.CheckForUpdatesStarted += UpdatesCheck_Started;
+            Updates.CheckForUpdatesCompleted += UpdatesCheck_Completed;
             ConnectionsManager.History.CollectionChanged += History_CollectionChanged;
             //ConnectionsManager.XenConnections.CollectionChanged is registered in OnShown
             Properties.Settings.Default.SettingChanging += Default_SettingChanging;
@@ -272,6 +279,8 @@ namespace XenAdmin
             OtherConfigAndTagsWatcher.DeregisterEventHandlers();
             Alert.DeregisterAlertCollectionChanged(XenCenterAlerts_CollectionChanged);
             Updates.UpdateAlertCollectionChanged -= Updates_CollectionChanged;
+            Updates.CheckForUpdatesStarted -= UpdatesCheck_Started;
+            Updates.CheckForUpdatesCompleted -= UpdatesCheck_Completed;
             ConnectionsManager.History.CollectionChanged -= History_CollectionChanged;
             ConnectionsManager.XenConnections.CollectionChanged -= XenConnection_CollectionChanged;
             Properties.Settings.Default.SettingChanging -= Default_SettingChanging;
@@ -1683,6 +1692,10 @@ namespace XenAdmin
                 }
 
                 // get insert index using the placeholder
+
+                if (!pluginMenuItemStartIndexes.ContainsKey(menu))
+                    continue;
+
                 int insertIndex = pluginMenuItemStartIndexes[menu];
 
                 bool itemAdded = false;
@@ -2624,12 +2637,32 @@ namespace XenAdmin
                     statusLabelUpdates.Text = string.Format(Messages.NOTIFICATIONS_SUBMODE_UPDATES_STATUS, updatesCount);
                     statusLabelUpdates.Visible = updatesCount > 0;
 
+                    SetUpdateAlert();
+
                     if (updatesPage.Visible)
                     {
                         TitleLabel.Text = NotificationsSubModeItem.GetText(NotificationsSubMode.Updates, updatesCount);
                         TitleIcon.Image = NotificationsSubModeItem.GetImage(NotificationsSubMode.Updates, updatesCount);
                     }
                 });
+        }
+
+        private void UpdatesCheck_Completed(bool succeeded, string err)
+        {
+            Program.Invoke(this, SetUpdateAlert);            
+        }
+
+        private void SetUpdateAlert()
+        {
+            updateAlert = Updates.UpdateAlerts.FirstOrDefault(update => update is ClientUpdateAlert) as ClientUpdateAlert;
+            if (updateAlert != null)
+                relNotesToolStripMenuItem.Text = string.Format(relNotesToolStripMenuItem.Text, updateAlert.NewVersion.Version);
+            updateClientToolStripMenuItem.Visible = updateAlert != null;
+        }
+
+        private void UpdatesCheck_Started()
+        {
+            Program.Invoke(this, () => { updateClientToolStripMenuItem.Visible = false; });
         }
 
         private void CloseWhenActionsCanceled(object o)
@@ -3279,6 +3312,17 @@ namespace XenAdmin
         private void statusLabelErrors_Click(object sender, EventArgs e)
         {
             navigationPane.SwitchToNotificationsView(NotificationsSubMode.Events);
+        }
+
+        private void relNotesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (updateAlert != null)
+                Program.OpenURL(updateAlert.WebPageLabel);
+        }
+
+        private void downloadInstallToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ClientUpdateAlert.DownloadAndInstallNewClient(updateAlert, this);
         }
     }
 }

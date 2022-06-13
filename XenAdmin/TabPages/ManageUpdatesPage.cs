@@ -823,6 +823,13 @@ namespace XenAdmin.TabPages
                 items.Add(downloadNewXenCenter);
             }
 
+            if (alert is ClientUpdateAlert)
+            {
+                var download = new ToolStripMenuItem(Messages.UPDATES_DOWNLOAD_AND_INSTALL);
+                download.Click += ToolStripMenuItemDownloadInstall_Click;
+                items.Add(download);
+            }
+
             if (!string.IsNullOrEmpty(alert.WebPageLabel))
             {
                 var fix = new ToolStripMenuItem(alert.FixLinkText) {ToolTipText = alert.WebPageLabel};
@@ -954,6 +961,16 @@ namespace XenAdmin.TabPages
                 var selectedAlerts = from DataGridViewRow row in dataGridViewUpdates.SelectedRows select row.Tag as Alert;
                 DismissUpdates(selectedAlerts.ToList());
             }
+        }
+
+        private void ToolStripMenuItemDownloadInstall_Click(object sender, EventArgs e)
+        {
+            DataGridViewRow clickedRow = FindAlertRow(sender as ToolStripMenuItem);
+
+            if (clickedRow == null || !(clickedRow.Tag is ClientUpdateAlert alert))
+                return;
+
+            ClientUpdateAlert.DownloadAndInstallNewClient(alert, Parent);
         }
 
         private void ToolStripMenuItemDismiss_Click(object sender, EventArgs e)

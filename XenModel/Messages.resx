@@ -1912,8 +1912,14 @@ Note that if RBAC is enabled, only alerts which you have privileges to dismiss w
   <data name="ALERT_NEW_VERSION_DETAILS" xml:space="preserve">
     <value>{0} is now available. Download the new version from the {1} website.</value>
   </data>
+  <data name="ALERT_NEW_VERSION_DETAILS_CLIENT" xml:space="preserve">
+    <value>{0} is now available. Click Download and Install to proceed with the update.</value>
+  </data>
   <data name="ALERT_NEW_VERSION_DOWNLOAD" xml:space="preserve">
     <value>Go to Web Page</value>
+  </data>
+  <data name="ALERT_NEW_VERSION_DOWNLOAD_CLIENT" xml:space="preserve">
+    <value>v{0} Release Notes</value>
   </data>
   <data name="ALERT_SR_PHYSICAL_UTILISATION_SUB_TEXT" xml:space="preserve">
     <value>When SR physical utilization exceeds {0} for {1} min(s)</value>
@@ -4898,6 +4904,18 @@ Click Cancel if you prefer to reconfigure your VMs' memory settings manually.</v
   </data>
   <data name="DOWNLOAD_AND_EXTRACT_ACTION_TITLE" xml:space="preserve">
     <value>Download and extract update {0}</value>
+  </data>
+  <data name="DOWNLOAD_CLIENT_INSTALLER_ACTION_DESCRIPTION" xml:space="preserve">
+    <value>Downloading {0} installer</value>
+  </data>
+  <data name="DOWNLOAD_CLIENT_INSTALLER_ACTION_PROGRESS_DESCRIPTION" xml:space="preserve">
+    <value>Downloading {0} installer ({1} of {2})...</value>
+  </data>
+  <data name="DOWNLOAD_CLIENT_INSTALLER_ACTION_TITLE" xml:space="preserve">
+    <value>Download {0} installer</value>
+  </data>
+  <data name="DOWNLOAD_CLIENT_INSTALLER_MSI_NOT_FOUND" xml:space="preserve">
+    <value>The downloaded installer can no longer be found.</value>
   </data>
   <data name="DOWNLOAD_ELLIPSES" xml:space="preserve">
     <value>Download...</value>
@@ -12841,6 +12859,21 @@ Verify that the file is a valid {2} export.</value>
   </data>
   <data name="UNTIL_RESTART_X_AFTER_RESTART_Y" xml:space="preserve">
     <value>Until next restart {0}; after restart {1}</value>
+  </data>
+  <data name="UPDATE_CLIENT_FAILED_CERTIFICATE_CHECK" xml:space="preserve">
+    <value>Could not validate the certificate associated with the downloaded installer.</value>
+  </data>
+  <data name="UPDATE_CLIENT_FAILED_INSTALLER_LAUNCH" xml:space="preserve">
+    <value>An error occurred when launching the downloaded installer. Please see the logs for more information.</value>
+  </data>
+  <data name="UPDATE_CLIENT_INVALID_CHECKSUM" xml:space="preserve">
+    <value>The checksum of the downloaded installer does not match the expected value.</value>
+  </data>
+  <data name="UPDATE_CLIENT_INVALID_DIGITAL_CERTIFICATE" xml:space="preserve">
+    <value>Invalid digital signature on msi.</value>
+  </data>
+  <data name="UPDATE_CLIENT_VALIDATING_INSTALLER" xml:space="preserve">
+    <value>Validating the downloaded installer...</value>
   </data>
   <data name="UPDATE_DISMISS_ALL_CONTINUE" xml:space="preserve">
     <value>You have applied filters to the list of update notifications. Do you want to dismiss all update notifications for every connected server, or only the update notifications you have chosen to view?
