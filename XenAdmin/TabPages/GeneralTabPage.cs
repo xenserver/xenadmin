@@ -992,18 +992,21 @@ namespace XenAdmin.TabPages
             if (host == null || host.software_version == null)
                 return;
 
+            var softwareVersionDate = DateTime.MinValue;
+            var unixMinDateTime = Util.GetUnixMinDateTime();
+
             if (host.software_version.ContainsKey("date"))
             {
-                if (Helpers.Post82X(host) && Helpers.XapiEqualOrGreater_22_19_0(host) && DateTime.TryParse(host.software_version["date"], out var softwareVersionDate) && softwareVersionDate != DateTime.MinValue)
-                {
-                    var dateTime = softwareVersionDate.ToLocalTime().ToShortDateString();
-                    pdSectionVersion.AddEntry(Messages.SOFTWARE_VERSION_DATE, dateTime, new PropertiesToolStripMenuItem(new DescriptionPropertiesCommand(Program.MainWindow, xenObject)));
-                }
-                else
-                {
-                    pdSectionVersion.AddEntry(Messages.SOFTWARE_VERSION_DATE, host.software_version["date"]);
-                }
+                string buildDate = host.software_version["date"];
+
+                if ((Util.TryParseIso8601DateTime(host.software_version["date"], out softwareVersionDate) ||
+                     Util.TryParseNonIso8601DateTime(host.software_version["date"], out softwareVersionDate)) &&
+                    softwareVersionDate > unixMinDateTime)
+                    buildDate = HelpersGUI.DateTimeToString(softwareVersionDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true);
+
+                pdSectionVersion.AddEntry(Messages.SOFTWARE_VERSION_DATE, buildDate);
             }
+
             if (!Helpers.ElyOrGreater(host) && host.software_version.ContainsKey("build_number"))
                 pdSectionVersion.AddEntry(Messages.SOFTWARE_VERSION_BUILD_NUMBER, host.software_version["build_number"]);
             if (host.software_version.ContainsKey("product_version"))
@@ -1019,11 +1022,10 @@ namespace XenAdmin.TabPages
             if (host.software_version.ContainsKey("dbv"))
                 pdSectionVersion.AddEntry("DBV", host.software_version["dbv"]);
 
-            if (Helpers.Post82X(host) && Helpers.XapiEqualOrGreater_22_19_0(host) && host.last_software_update != DateTime.MinValue)
-            {
-                var dateTime = host.last_software_update.ToLocalTime().ToShortDateString();
-                pdSectionVersion.AddEntry(Messages.SOFTWARE_VERSION_LAST_UPDATED, dateTime, new PropertiesToolStripMenuItem(new DescriptionPropertiesCommand(Program.MainWindow, xenObject)));
-            }
+            if (Helpers.Post82X(host) && Helpers.XapiEqualOrGreater_22_19_0(host) &&
+                host.last_software_update > softwareVersionDate && host.last_software_update > unixMinDateTime)
+                pdSectionVersion.AddEntry(Messages.SOFTWARE_VERSION_LAST_UPDATED,
+                    HelpersGUI.DateTimeToString(host.last_software_update.ToLocalTime(), Messages.DATEFORMAT_DMY, true));
         }
 
         private void GenerateCPUBox()
@@ -1600,11 +1602,10 @@ namespace XenAdmin.TabPages
             s.AddEntry(Messages.CONTAINER_IMAGE, dockerContainer.image.Length != 0 ? dockerContainer.image : Messages.NONE);
             s.AddEntry(Messages.CONTAINER, dockerContainer.container.Length != 0 ? dockerContainer.container : Messages.NONE);
             s.AddEntry(Messages.CONTAINER_COMMAND, dockerContainer.command.Length != 0 ? dockerContainer.command : Messages.NONE);
-            var ports = dockerContainer.PortList.Select(p => p.Description);
-            if (ports.Count() > 0)
-            {
+            var ports = dockerContainer.PortList.Select(p => p.Description).ToList();
+            if (ports.Count > 0)
                 s.AddEntry(Messages.CONTAINER_PORTS, string.Join(Environment.NewLine, ports));
-            }
+
             s.AddEntry(Messages.UUID, dockerContainer.uuid.Length != 0 ? dockerContainer.uuid : Messages.NONE);
         }
 
