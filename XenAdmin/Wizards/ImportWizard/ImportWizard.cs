@@ -404,7 +404,7 @@ namespace XenAdmin.Wizards.ImportWizard
                 m_pageXvaNetwork.SelectedAffinity = _selectedAffinity;
 
                 if (oldTargetConnection != _targetConnection ||
-                    oldSelectedAffinity != null && _selectedAffinity != null && oldSelectedAffinity.opaque_ref != _selectedAffinity.opaque_ref)
+                    oldSelectedAffinity?.opaque_ref != _selectedAffinity?.opaque_ref)
                     NotifyNextPagesOfChange(m_pageXvaStorage, m_pageXvaNetwork);
             }
             else if (type == typeof(StoragePickerPage))
