@@ -354,15 +354,27 @@ namespace XenAdmin
         public const long TicksBefore1970 = 621355968000000000;
 
         public static readonly string[] Iso8601DateFormats = {"yyyyMMddTHH:mm:ssZ", "yyyy-MM-ddTHH:mm:ssZ"};
+        public static readonly string[] NonIso8601DateFormats = { "yyyy-MM-dd" };
+
+        public static DateTime GetUnixMinDateTime()
+        {
+            return new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+        }
 
         public static long TicksToSecondsSince1970(long ticks)
         {
-            return (long)Math.Floor(new TimeSpan(ticks - (TicksBefore1970)).TotalSeconds);
+            return (long)Math.Floor(new TimeSpan(ticks - TicksBefore1970).TotalSeconds);
         }
 
         public static bool TryParseIso8601DateTime(string toParse, out DateTime result)
         {
             return DateTime.TryParseExact(toParse, Iso8601DateFormats, CultureInfo.InvariantCulture,
+                DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal, out result);
+        }
+
+        public static bool TryParseNonIso8601DateTime(string toParse, out DateTime result)
+        {
+            return DateTime.TryParseExact(toParse, NonIso8601DateFormats, CultureInfo.InvariantCulture,
                 DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal, out result);
         }
 
@@ -373,13 +385,13 @@ namespace XenAdmin
         
         public static double ToUnixTime(DateTime time)
         {
-            TimeSpan diff = time - new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            TimeSpan diff = time - GetUnixMinDateTime();
             return diff.TotalSeconds;
         }
 
         public static DateTime FromUnixTime(double time)
         {
-            DateTime bootTime = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+            DateTime bootTime = GetUnixMinDateTime();
             return bootTime.AddSeconds(time);
         }
 

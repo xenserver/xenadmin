@@ -9101,6 +9101,7 @@ namespace XenAPI
         public string [] editions;
         public string [] pending_guidances;
         public bool tls_verification_enabled;
+        public DateTime last_software_update;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]

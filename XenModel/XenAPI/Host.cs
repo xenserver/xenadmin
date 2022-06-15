@@ -114,7 +114,9 @@ namespace XenAPI
             List<XenRef<Certificate>> certificates,
             string[] editions,
             List<update_guidances> pending_guidances,
-            bool tls_verification_enabled)
+            bool tls_verification_enabled,
+            DateTime last_software_update
+        )
         {
             this.uuid = uuid;
             this.name_label = name_label;
@@ -179,6 +181,7 @@ namespace XenAPI
             this.editions = editions;
             this.pending_guidances = pending_guidances;
             this.tls_verification_enabled = tls_verification_enabled;
+            this.last_software_update = last_software_update;
         }
 
         /// <summary>
@@ -273,6 +276,7 @@ namespace XenAPI
             editions = record.editions;
             pending_guidances = record.pending_guidances;
             tls_verification_enabled = record.tls_verification_enabled;
+            last_software_update = record.last_software_update;
         }
 
         internal void UpdateFrom(Proxy_Host proxy)
@@ -340,6 +344,7 @@ namespace XenAPI
             editions = proxy.editions == null ? new string[] {} : (string [])proxy.editions;
             pending_guidances = proxy.pending_guidances == null ? null : Helper.StringArrayToEnumList<update_guidances>(proxy.pending_guidances);
             tls_verification_enabled = (bool)proxy.tls_verification_enabled;
+            last_software_update = proxy.last_software_update;
         }
 
         /// <summary>
@@ -476,6 +481,8 @@ namespace XenAPI
                 pending_guidances = Helper.StringArrayToEnumList<update_guidances>(Marshalling.ParseStringArray(table, "pending_guidances"));
             if (table.ContainsKey("tls_verification_enabled"))
                 tls_verification_enabled = Marshalling.ParseBool(table, "tls_verification_enabled");
+            if (table.ContainsKey("last_software_update"))
+                last_software_update = Marshalling.ParseDateTime(table, "last_software_update");
         }
 
         public Proxy_Host ToProxy()
@@ -544,6 +551,7 @@ namespace XenAPI
             result_.editions = editions;
             result_.pending_guidances = pending_guidances == null ? new string[] {} : Helper.ObjectListToStringArray(pending_guidances);
             result_.tls_verification_enabled = tls_verification_enabled;
+            result_.last_software_update = last_software_update;
             return result_;
         }
 
@@ -618,7 +626,8 @@ namespace XenAPI
                 Helper.AreEqual2(this._certificates, other._certificates) &&
                 Helper.AreEqual2(this._editions, other._editions) &&
                 Helper.AreEqual2(this._pending_guidances, other._pending_guidances) &&
-                Helper.AreEqual2(this._tls_verification_enabled, other._tls_verification_enabled);
+                Helper.AreEqual2(this._tls_verification_enabled, other._tls_verification_enabled) &&
+                Helper.AreEqual2(this._last_software_update, other.last_software_update);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Host server)
@@ -4890,5 +4899,23 @@ namespace XenAPI
             }
         }
         private bool _tls_verification_enabled = false;
+
+        /// <summary>
+        /// Date and time when the last software update was applied
+        /// </summary>
+        [JsonConverter(typeof(XenDateTimeConverter))]
+        public virtual DateTime last_software_update
+        {
+            get { return _last_software_update; }
+            set
+            {
+                if (!Helper.AreEqual(value, _last_software_update))
+                {
+                    _last_software_update = value;
+                    NotifyPropertyChanged("last_software_update");
+                }
+            }
+        }
+        private DateTime _last_software_update;
     }
 }

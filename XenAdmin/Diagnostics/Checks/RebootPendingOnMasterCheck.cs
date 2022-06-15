@@ -75,7 +75,7 @@ namespace XenAdmin.Diagnostics.Checks
                 if (bootTime == 0.0 || agentStart == 0.0)
                     return null; //fine
 
-                var hostRestartRequiredPatches = Host.AppliedPatches().Where(p => p.after_apply_guidance.Contains(after_apply_guidance.restartHost) && ((double)Util.ToUnixTime(p.AppliedOn(Host)) > agentStart));
+                var hostRestartRequiredPatches = Host.AppliedPatches().Where(p => p.after_apply_guidance.Contains(after_apply_guidance.restartHost) && Util.ToUnixTime(p.AppliedOn(Host)) > agentStart);
 
                 foreach (Pool_patch patch in hostRestartRequiredPatches)
                 {
@@ -88,7 +88,7 @@ namespace XenAdmin.Diagnostics.Checks
             }
 
             //check toolstack restart
-            var toolstackRestartRequiredPatches = Host.AppliedPatches().Where(p => p.after_apply_guidance.Contains(after_apply_guidance.restartXAPI) && ((double)Util.ToUnixTime(p.AppliedOn(Host)) > agentStart));
+            var toolstackRestartRequiredPatches = Host.AppliedPatches().Where(p => p.after_apply_guidance.Contains(after_apply_guidance.restartXAPI) && Util.ToUnixTime(p.AppliedOn(Host)) > agentStart);
             foreach (Pool_patch patch in toolstackRestartRequiredPatches)
             {
                 if (string.IsNullOrEmpty(UpdateUuid)) //automated mode

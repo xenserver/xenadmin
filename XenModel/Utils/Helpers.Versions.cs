@@ -434,6 +434,11 @@ namespace XenAdmin.Core
             return coordinator == null || ProductVersionCompare(coordinator.GetXapiVersion(), "22.19.0") >= 0;
         }
 
+        public static bool XapiEqualOrGreater_22_19_0(Host host)
+        {
+            return host == null || ProductVersionCompare(host.GetXapiVersion(), "22.19.0") >= 0;
+        }
+
         #endregion
     }
 }
