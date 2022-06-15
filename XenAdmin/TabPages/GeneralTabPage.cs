@@ -999,9 +999,9 @@ namespace XenAdmin.TabPages
             {
                 string buildDate = host.software_version["date"];
 
-                if ((Util.TryParseIso8601DateTime(host.software_version["date"], out softwareVersionDate) ||
-                     Util.TryParseNonIso8601DateTime(host.software_version["date"], out softwareVersionDate)) &&
-                    softwareVersionDate > unixMinDateTime)
+                if (Util.TryParseIso8601DateTime(host.software_version["date"], out softwareVersionDate) && softwareVersionDate > unixMinDateTime)
+                    buildDate = HelpersGUI.DateTimeToString(softwareVersionDate.ToLocalTime(), Messages.DATEFORMAT_DMY_HMS, true);
+                else if (Util.TryParseNonIso8601DateTime(host.software_version["date"], out softwareVersionDate) && softwareVersionDate > unixMinDateTime)
                     buildDate = HelpersGUI.DateTimeToString(softwareVersionDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true);
 
                 pdSectionVersion.AddEntry(Messages.SOFTWARE_VERSION_DATE, buildDate);
@@ -1009,6 +1009,7 @@ namespace XenAdmin.TabPages
 
             if (!Helpers.ElyOrGreater(host) && host.software_version.ContainsKey("build_number"))
                 pdSectionVersion.AddEntry(Messages.SOFTWARE_VERSION_BUILD_NUMBER, host.software_version["build_number"]);
+
             if (host.software_version.ContainsKey("product_version"))
             {
                 var hotfixEligibilityString = AdditionalVersionString(host);
@@ -1019,13 +1020,14 @@ namespace XenAdmin.TabPages
                         string.Format(Messages.MAINWINDOW_CONTEXT_REASON, host.ProductVersionText(), hotfixEligibilityString),
                         Color.Red);
             }
+
             if (host.software_version.ContainsKey("dbv"))
                 pdSectionVersion.AddEntry("DBV", host.software_version["dbv"]);
 
             if (Helpers.Post82X(host) && Helpers.XapiEqualOrGreater_22_19_0(host) &&
                 host.last_software_update > softwareVersionDate && host.last_software_update > unixMinDateTime)
                 pdSectionVersion.AddEntry(Messages.SOFTWARE_VERSION_LAST_UPDATED,
-                    HelpersGUI.DateTimeToString(host.last_software_update.ToLocalTime(), Messages.DATEFORMAT_DMY, true));
+                    HelpersGUI.DateTimeToString(host.last_software_update.ToLocalTime(), Messages.DATEFORMAT_DMY_HMS, true));
         }
 
         private void GenerateCPUBox()
