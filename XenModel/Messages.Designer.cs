@@ -33051,15 +33051,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Restore dismissed updates.
-        /// </summary>
-        public static string RESTORE_DISMISSED_UPDATES {
-            get {
-                return ResourceManager.GetString("RESTORE_DISMISSED_UPDATES", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Backup file loaded to server &apos;{0}&apos;. Refer to the &quot;{1} Administrator&apos;s Guide&quot; for instructions on how to complete the restore procedure..
         /// </summary>
         public static string RESTORE_FROM_BACKUP_FINALIZE {
@@ -33074,15 +33065,6 @@ namespace XenAdmin {
         public static string RESTORE_HOST {
             get {
                 return ResourceManager.GetString("RESTORE_HOST", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Restoring....
-        /// </summary>
-        public static string RESTORING {
-            get {
-                return ResourceManager.GetString("RESTORING", resourceCulture);
             }
         }
         

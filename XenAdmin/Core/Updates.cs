@@ -34,11 +34,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Alerts;
 using XenAdmin.Alerts.Types;
-using XenAdmin.Dialogs;
 using XenAdmin.Network;
 using XenAPI;
 
@@ -51,7 +49,6 @@ namespace XenAdmin.Core
 
         public static event Action<bool, string> CheckForUpdatesCompleted;
         public static event Action CheckForUpdatesStarted;
-        public static event Action RestoreDismissedUpdatesStarted;
         public static event Action<CollectionChangeEventArgs> UpdateAlertCollectionChanged;
 
         private static readonly object downloadedUpdatesLock = new object();
@@ -724,32 +721,6 @@ namespace XenAdmin.Core
             {
                 log.Error("Failed to refresh the updates", e);
             }
-        }
-
-        public static void RestoreDismissedUpdates()
-        {
-            var actions = new List<AsyncAction>();
-            foreach (IXenConnection connection in ConnectionsManager.XenConnectionsCopy)
-                actions.Add(new RestoreDismissedUpdatesAction(connection));
-
-            var action = new ParallelAction(Messages.RESTORE_DISMISSED_UPDATES, Messages.RESTORING, Messages.COMPLETED,
-                actions, suppressHistory: true, showSubActionsDetails: false);
-            action.Completed += action_Completed;
-
-            RestoreDismissedUpdatesStarted?.Invoke();
-
-            action.RunAsync();
-        }
-
-        private static void action_Completed(ActionBase action)
-        {
-            Program.Invoke(Program.MainWindow, () =>
-            {
-                Properties.Settings.Default.LatestXenCenterSeen = "";
-                Settings.TrySaveSettings();
-
-                CheckForUpdates(true);
-            });
         }
 
         private static XenServerPatchAlert FindPatchAlert(Predicate<XenServerPatch> predicate)

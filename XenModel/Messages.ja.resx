@@ -11436,17 +11436,11 @@ NFS ストレージ リポジトリを構成する場合は、NFS サーバー�
   <data name="RESOLVED_AS" xml:space="preserve">
     <value>{0} として解決されました</value>
   </data>
-  <data name="RESTORE_DISMISSED_UPDATES" xml:space="preserve">
-    <value>クリアされたアップデートを復元</value>
-  </data>
   <data name="RESTORE_FROM_BACKUP_FINALIZE" xml:space="preserve">
     <value>バックアップ ファイルがサーバー '{0}' にロードされました。復元手順については、『{1} 管理者ガイド』を参照してください。</value>
   </data>
   <data name="RESTORE_HOST" xml:space="preserve">
     <value>バックアップから復元...</value>
-  </data>
-  <data name="RESTORING" xml:space="preserve">
-    <value>復元しています...</value>
   </data>
   <data name="RESTORING_HOST" xml:space="preserve">
     <value>サーバー '{0}' を復元しています</value>
