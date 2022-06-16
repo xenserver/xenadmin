@@ -2716,9 +2716,6 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="CERTIFICATE_VERIFICATION_KEY" xml:space="preserve">
     <value>証明書の検証</value>
   </data>
-  <data name="CFU_STATUS_CHECK_DESCRIPTION" xml:space="preserve">
-    <value>アップデートをダウンロードする機能</value>
-  </data>
   <data name="CHANGE" xml:space="preserve">
     <value>変更...</value>
   </data>

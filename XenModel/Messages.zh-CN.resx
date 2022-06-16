@@ -2712,9 +2712,6 @@
   <data name="CERTIFICATE_VERIFICATION_KEY" xml:space="preserve">
     <value>证书验证</value>
   </data>
-  <data name="CFU_STATUS_CHECK_DESCRIPTION" xml:space="preserve">
-    <value>能够下载更新</value>
-  </data>
   <data name="CHANGE" xml:space="preserve">
     <value>更改...</value>
   </data>
