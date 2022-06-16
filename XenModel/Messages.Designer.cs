@@ -5827,11 +5827,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Download.
+        ///   Looks up a localized string similar to Checking for {0} updates.
         /// </summary>
-        public static string AVAILABLE_UPDATES_DOWNLOAD_TEXT {
+        public static string AVAILABLE_UPDATES_CHECKING {
             get {
-                return ResourceManager.GetString("AVAILABLE_UPDATES_DOWNLOAD_TEXT", resourceCulture);
+                return ResourceManager.GetString("AVAILABLE_UPDATES_CHECKING", resourceCulture);
             }
         }
         
@@ -5841,15 +5841,6 @@ namespace XenAdmin {
         public static string AVAILABLE_UPDATES_ERROR {
             get {
                 return ResourceManager.GetString("AVAILABLE_UPDATES_ERROR", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The following software updates for your system are available online..
-        /// </summary>
-        public static string AVAILABLE_UPDATES_FOUND {
-            get {
-                return ResourceManager.GetString("AVAILABLE_UPDATES_FOUND", resourceCulture);
             }
         }
         
@@ -5868,24 +5859,6 @@ namespace XenAdmin {
         public static string AVAILABLE_UPDATES_NETWORK_ERROR {
             get {
                 return ResourceManager.GetString("AVAILABLE_UPDATES_NETWORK_ERROR", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to No updates found..
-        /// </summary>
-        public static string AVAILABLE_UPDATES_NOT_FOUND {
-            get {
-                return ResourceManager.GetString("AVAILABLE_UPDATES_NOT_FOUND", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Searching for updates....
-        /// </summary>
-        public static string AVAILABLE_UPDATES_SEARCHING {
-            get {
-                return ResourceManager.GetString("AVAILABLE_UPDATES_SEARCHING", resourceCulture);
             }
         }
         

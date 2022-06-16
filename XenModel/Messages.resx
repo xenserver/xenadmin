@@ -2121,26 +2121,17 @@ Warning: you must ensure that the SR is not in use by any server not connected t
   <data name="AVAILABLE" xml:space="preserve">
     <value>available</value>
   </data>
-  <data name="AVAILABLE_UPDATES_DOWNLOAD_TEXT" xml:space="preserve">
-    <value>Download</value>
+  <data name="AVAILABLE_UPDATES_CHECKING" xml:space="preserve">
+    <value>Checking for {0} updates</value>
   </data>
   <data name="AVAILABLE_UPDATES_ERROR" xml:space="preserve">
     <value>An error occurred when searching for updates: {0}</value>
-  </data>
-  <data name="AVAILABLE_UPDATES_FOUND" xml:space="preserve">
-    <value>The following software updates for your system are available online.</value>
   </data>
   <data name="AVAILABLE_UPDATES_INTERNAL_ERROR" xml:space="preserve">
     <value>There was an internal error when searching for available updates. Please see the logs for more information.</value>
   </data>
   <data name="AVAILABLE_UPDATES_NETWORK_ERROR" xml:space="preserve">
     <value>There was a network error when searching for available updates. Please see the logs for more information.</value>
-  </data>
-  <data name="AVAILABLE_UPDATES_NOT_FOUND" xml:space="preserve">
-    <value>No updates found.</value>
-  </data>
-  <data name="AVAILABLE_UPDATES_SEARCHING" xml:space="preserve">
-    <value>Searching for updates...</value>
   </data>
   <data name="BACKINGUP_HOST" xml:space="preserve">
     <value>Backing up server '{0}'</value>

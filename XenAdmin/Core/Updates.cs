@@ -47,7 +47,7 @@ namespace XenAdmin.Core
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public static event Action<bool, string> CheckForUpdatesCompleted;
+        public static event Action CheckForUpdatesCompleted;
         public static event Action CheckForUpdatesStarted;
         public static event Action<CollectionChangeEventArgs> UpdateAlertCollectionChanged;
 
@@ -82,35 +82,25 @@ namespace XenAdmin.Core
 
         /// <summary>
         /// If AutomaticCheck is enabled it checks for updates regardless the
-        /// value of the parameter force. If AutomaticCheck is disabled it 
-        /// checks for all update types if force is true; forceRefresh causes 
-        /// the check for update action to run and refresh the Updates page
+        /// value of the parameter force. If AutomaticCheck is disabled it checks
+        /// for all update types if force is true (this normally means user requested).
         /// </summary>
-        public static void CheckForUpdates(bool force, bool forceRefresh = false)
+        public static void CheckForUpdates(bool force = false)
         {
             if (Helpers.CommonCriteriaCertificationRelease)
                 return;
 
-            if (Properties.Settings.Default.AllowXenCenterUpdates || force || forceRefresh)
+            if (Properties.Settings.Default.AllowXenCenterUpdates || force)
             {
-                var action = CreateDownloadUpdatesXmlAction(Properties.Settings.Default.AllowXenCenterUpdates || force);
+                string userAgent = $"{BrandManager.BrandConsole}/{BrandManager.XenCenterVersion}.{Program.Version.Revision} ({IntPtr.Size * 8}-bit)";
 
+                var action = new DownloadUpdatesXmlAction(Properties.Settings.Default.AllowXenCenterUpdates || force, false, false, userAgent);
                 action.Completed += actionCompleted;
 
-                if (CheckForUpdatesStarted != null)
-                    CheckForUpdatesStarted();
+                CheckForUpdatesStarted?.Invoke();
 
                 action.RunAsync();
             }
-        }
-
-        public static DownloadUpdatesXmlAction CreateDownloadUpdatesXmlAction(bool checkForXenCenter = false,
-            bool checkForServerVersion = false, bool checkForPatches = false)
-        {
-            string userAgent = string.Format("{0}/{1}.{2} ({3}-bit)", BrandManager.BrandConsole, BrandManager.XenCenterVersion, Program.Version.Revision.ToString(), IntPtr.Size * 8);
-
-            return new DownloadUpdatesXmlAction(checkForXenCenter, checkForServerVersion, checkForPatches,
-                userAgent);
         }
 
         private static void actionCompleted(ActionBase sender)
@@ -121,7 +111,6 @@ namespace XenAdmin.Core
                 return;
 
             bool succeeded = action.Succeeded;
-            string errorMessage = string.Empty;
 
             if (succeeded)
             {
@@ -132,26 +121,6 @@ namespace XenAdmin.Core
                     XenServerVersions = action.XenServerVersions;
                     XenServerPatches = action.XenServerPatches;
                 }
-            }
-            else
-            {
-                if (action.Exception != null)
-                {
-                    if (action.Exception is System.Net.Sockets.SocketException)
-                    {
-                        errorMessage = Messages.AVAILABLE_UPDATES_NETWORK_ERROR;
-                    }
-                    else
-                    {
-                        // Clean up and remove excess newlines, carriage returns, trailing nonsense
-                        string errorText = action.Exception.Message.Trim();
-                        errorText = System.Text.RegularExpressions.Regex.Replace(errorText, @"\r\n+", "");
-                        errorMessage = string.Format(Messages.AVAILABLE_UPDATES_ERROR, errorText);
-                    }
-                }
-
-                if (string.IsNullOrEmpty(errorMessage))
-                    errorMessage = Messages.AVAILABLE_UPDATES_INTERNAL_ERROR;
             }
 
             lock (updateAlertsLock)
@@ -173,7 +142,7 @@ namespace XenAdmin.Core
 
             UpdateAlertCollectionChanged?.Invoke(new CollectionChangeEventArgs(CollectionChangeAction.Refresh, UpdateAlerts));
 
-            CheckForUpdatesCompleted?.Invoke(succeeded, errorMessage);
+            CheckForUpdatesCompleted?.Invoke();
         }
 
         public static List<ClientUpdateAlert> NewClientUpdateAlerts(List<ClientVersion> clientVersions,

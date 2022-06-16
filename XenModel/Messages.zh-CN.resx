@@ -2115,26 +2115,17 @@
   <data name="AVAILABLE" xml:space="preserve">
     <value>可用</value>
   </data>
-  <data name="AVAILABLE_UPDATES_DOWNLOAD_TEXT" xml:space="preserve">
-    <value>下载</value>
+  <data name="AVAILABLE_UPDATES_CHECKING" xml:space="preserve">
+	  <value>正在搜索更新...</value>
   </data>
   <data name="AVAILABLE_UPDATES_ERROR" xml:space="preserve">
     <value>搜索更新时出错: {0}</value>
-  </data>
-  <data name="AVAILABLE_UPDATES_FOUND" xml:space="preserve">
-    <value>适用于您系统的以下软件更新在联机时可用。</value>
   </data>
   <data name="AVAILABLE_UPDATES_INTERNAL_ERROR" xml:space="preserve">
     <value>搜索可用更新时出现内部错误。有关详细信息，请参阅日志。</value>
   </data>
   <data name="AVAILABLE_UPDATES_NETWORK_ERROR" xml:space="preserve">
     <value>搜索可用更新时出现网络错误。有关详细信息，请参阅日志。</value>
-  </data>
-  <data name="AVAILABLE_UPDATES_NOT_FOUND" xml:space="preserve">
-    <value>未找到更新。</value>
-  </data>
-  <data name="AVAILABLE_UPDATES_SEARCHING" xml:space="preserve">
-    <value>正在搜索更新...</value>
   </data>
   <data name="BACKINGUP_HOST" xml:space="preserve">
     <value>正在备份服务器“{0}”</value>

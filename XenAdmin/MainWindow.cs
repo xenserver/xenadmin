@@ -638,7 +638,7 @@ namespace XenAdmin
                 CheckForUpdatesTimer.Interval = 1000 * 60 * 60 * 24; // 24 hours
                 CheckForUpdatesTimer.Tick += CheckForUpdatesTimer_Tick;
                 CheckForUpdatesTimer.Start();
-                Updates.CheckForUpdates(false);
+                Updates.CheckForUpdates();
             }
 
             if (!Program.RunInAutomatedTestMode && (Registry.GetBrandOverride() == "XenCenter" || BrandManager.BrandConsole == "XenCenter"))
@@ -654,7 +654,7 @@ namespace XenAdmin
 
         private void CheckForUpdatesTimer_Tick(object sender, EventArgs e)
         {
-            Updates.CheckForUpdates(false);
+            Updates.CheckForUpdates();
         }
 
         private void HealthCheckResultTimer_Tick(object sender, EventArgs e)
@@ -2627,7 +2627,7 @@ namespace XenAdmin
             Program.Invoke(this, SetUpdateAlert);
         }
 
-        private void UpdatesCheck_Completed(bool succeeded, string err)
+        private void UpdatesCheck_Completed()
         {
             Program.Invoke(this, () =>
             {

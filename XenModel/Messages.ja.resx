@@ -2119,26 +2119,17 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="AVAILABLE" xml:space="preserve">
     <value>使用可能</value>
   </data>
-  <data name="AVAILABLE_UPDATES_DOWNLOAD_TEXT" xml:space="preserve">
-    <value>ダウンロード</value>
+  <data name="AVAILABLE_UPDATES_CHECKING" xml:space="preserve">
+    <value>アップデートを検索しています...</value>
   </data>
   <data name="AVAILABLE_UPDATES_ERROR" xml:space="preserve">
     <value>アップデートの検索時にエラーが発生しました。{0}</value>
-  </data>
-  <data name="AVAILABLE_UPDATES_FOUND" xml:space="preserve">
-    <value>以下のソフトウェア アップデートをダウンロードできます。</value>
   </data>
   <data name="AVAILABLE_UPDATES_INTERNAL_ERROR" xml:space="preserve">
     <value>使用可能なアップデートの検索時に内部エラーが発生しました。詳しくはログを参照してください。</value>
   </data>
   <data name="AVAILABLE_UPDATES_NETWORK_ERROR" xml:space="preserve">
     <value>使用可能なアップデートの検索時にネットワーク エラーが発生しました。詳しくはログを参照してください。</value>
-  </data>
-  <data name="AVAILABLE_UPDATES_NOT_FOUND" xml:space="preserve">
-    <value>アップデートが見つかりません。</value>
-  </data>
-  <data name="AVAILABLE_UPDATES_SEARCHING" xml:space="preserve">
-    <value>アップデートを検索しています...</value>
   </data>
   <data name="BACKINGUP_HOST" xml:space="preserve">
     <value>サーバー '{0}' をバックアップしています</value>

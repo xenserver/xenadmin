@@ -57,17 +57,7 @@ namespace XenAdmin.Actions
         public List<XenServerVersion> XenServerVersions { get; } = new List<XenServerVersion>();
         public List<XenServerPatch> XenServerPatches { get; } = new List<XenServerPatch>();
 
-        public List<XenServerVersion> XenServerVersionsForAutoCheck
-        {
-            get
-            {
-                if(_checkForServerVersion)
-                {
-                    return XenServerVersions;
-                }
-                return new List<XenServerVersion>();
-            }
-        }
+        public List<XenServerVersion> XenServerVersionsForAutoCheck => _checkForServerVersion ? XenServerVersions : new List<XenServerVersion>();
 
         private readonly bool _checkForXenCenter;
         private readonly bool _checkForServerVersion;
@@ -75,7 +65,7 @@ namespace XenAdmin.Actions
         private readonly string _userAgent;
 
         public DownloadUpdatesXmlAction(bool checkForXenCenter, bool checkForServerVersion, bool checkForPatches, string userAgent)
-            : base(null, "_get_updates", "_get_updates", true)
+            : base(null, string.Empty, string.Empty, false)
         {
             Debug.Assert(!string.IsNullOrWhiteSpace(userAgent));
 
@@ -83,17 +73,41 @@ namespace XenAdmin.Actions
             _checkForServerVersion = checkForServerVersion;
             _checkForPatches = checkForPatches;
             _userAgent = userAgent;
+
+            Title = Description = string.Format(Messages.AVAILABLE_UPDATES_CHECKING, BrandManager.BrandConsole);
         }
 
         protected override void Run()
         {
-            this.Description = Messages.AVAILABLE_UPDATES_SEARCHING;
+            try
+            {
+                XmlDocument xdoc = FetchCheckForUpdatesXml();
 
-            XmlDocument xdoc = FetchCheckForUpdatesXml();
+                GetXenCenterVersions(xdoc);
+                GetXenServerPatches(xdoc);
+                GetXenServerVersions(xdoc);
 
-            GetXenCenterVersions(xdoc);
-            GetXenServerPatches(xdoc);
-            GetXenServerVersions(xdoc);
+                Description = Messages.COMPLETED;
+            }
+            catch (Exception e)
+            {
+                if (e is System.Net.Sockets.SocketException)
+                {
+                    Description = Messages.AVAILABLE_UPDATES_NETWORK_ERROR;
+                }
+                else if (!string.IsNullOrWhiteSpace(e.Message))
+                {
+                    string errorText = e.Message.Trim();
+                    errorText = System.Text.RegularExpressions.Regex.Replace(errorText, @"\r\n+", "");
+                    Description = string.Format(Messages.AVAILABLE_UPDATES_ERROR, errorText);
+                }
+                else
+                {
+                    Description = Messages.AVAILABLE_UPDATES_INTERNAL_ERROR;
+                }
+
+                throw;
+            }
         }
 
         private void GetXenCenterVersions(XmlDocument xdoc)

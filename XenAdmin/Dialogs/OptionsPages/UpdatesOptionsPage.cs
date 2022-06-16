@@ -67,12 +67,12 @@ namespace XenAdmin.Dialogs.OptionsPages
 
         public void Save()
         {
-            bool checkXenCenterUpdates = AllowXenCenterUpdatesCheckBox.Checked != Properties.Settings.Default.AllowXenCenterUpdates;
+            bool checkXenCenterUpdatesChanged = AllowXenCenterUpdatesCheckBox.Checked != Properties.Settings.Default.AllowXenCenterUpdates;
 
-            if (checkXenCenterUpdates)
+            if (checkXenCenterUpdatesChanged)
             {
                 Properties.Settings.Default.AllowXenCenterUpdates = AllowXenCenterUpdatesCheckBox.Checked;
-                Updates.CheckForUpdates(false, true);
+                Updates.CheckForUpdates();
             }
         }
 
