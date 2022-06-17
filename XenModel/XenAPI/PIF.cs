@@ -779,7 +779,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the ipv6_configuration_mode field of the given PIF.
-        /// Experimental. First published in XenServer 6.1.
+        /// First published in XenServer 6.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pif">The opaque_ref of the given pif</param>
@@ -793,7 +793,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the IPv6 field of the given PIF.
-        /// Experimental. First published in XenServer 6.1.
+        /// First published in XenServer 6.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pif">The opaque_ref of the given pif</param>
@@ -807,7 +807,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the ipv6_gateway field of the given PIF.
-        /// Experimental. First published in XenServer 6.1.
+        /// First published in XenServer 6.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pif">The opaque_ref of the given pif</param>
@@ -821,7 +821,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the primary_address_type field of the given PIF.
-        /// Experimental. First published in XenServer 6.1.
+        /// First published in XenServer 6.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pif">The opaque_ref of the given pif</param>
@@ -1087,7 +1087,7 @@ namespace XenAPI
 
         /// <summary>
         /// Reconfigure the IPv6 address settings for this interface
-        /// Experimental. First published in XenServer 6.1.
+        /// First published in XenServer 6.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pif">The opaque_ref of the given pif</param>
@@ -1105,7 +1105,7 @@ namespace XenAPI
 
         /// <summary>
         /// Reconfigure the IPv6 address settings for this interface
-        /// Experimental. First published in XenServer 6.1.
+        /// First published in XenServer 6.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pif">The opaque_ref of the given pif</param>
@@ -1123,7 +1123,7 @@ namespace XenAPI
 
         /// <summary>
         /// Change the primary address type used by this PIF
-        /// Experimental. First published in XenServer 6.1.
+        /// First published in XenServer 6.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pif">The opaque_ref of the given pif</param>
@@ -1138,7 +1138,7 @@ namespace XenAPI
 
         /// <summary>
         /// Change the primary address type used by this PIF
-        /// Experimental. First published in XenServer 6.1.
+        /// First published in XenServer 6.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pif">The opaque_ref of the given pif</param>
@@ -2020,7 +2020,7 @@ namespace XenAPI
         private List<XenRef<Bond>> _bond_master_of = new List<XenRef<Bond>>() {};
 
         /// <summary>
-        /// Indicates wich VLAN this interface receives untagged traffic from
+        /// Indicates which VLAN this interface receives untagged traffic from
         /// First published in XenServer 4.1.
         /// </summary>
         [JsonConverter(typeof(XenRefConverter<VLAN>))]
@@ -2152,7 +2152,7 @@ namespace XenAPI
 
         /// <summary>
         /// Sets if and how this interface gets an IPv6 address
-        /// Experimental. First published in XenServer 6.1.
+        /// First published in XenServer 6.1.
         /// </summary>
         [JsonConverter(typeof(ipv6_configuration_modeConverter))]
         public virtual ipv6_configuration_mode ipv6_configuration_mode
@@ -2171,7 +2171,7 @@ namespace XenAPI
 
         /// <summary>
         /// IPv6 address
-        /// Experimental. First published in XenServer 6.1.
+        /// First published in XenServer 6.1.
         /// </summary>
         public virtual string[] IPv6
         {
@@ -2189,7 +2189,7 @@ namespace XenAPI
 
         /// <summary>
         /// IPv6 gateway
-        /// Experimental. First published in XenServer 6.1.
+        /// First published in XenServer 6.1.
         /// </summary>
         public virtual string ipv6_gateway
         {
@@ -2207,7 +2207,7 @@ namespace XenAPI
 
         /// <summary>
         /// Which protocol should define the primary address of this interface
-        /// Experimental. First published in XenServer 6.1.
+        /// First published in XenServer 6.1.
         /// </summary>
         [JsonConverter(typeof(primary_address_typeConverter))]
         public virtual primary_address_type primary_address_type

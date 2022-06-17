@@ -1182,6 +1182,36 @@ namespace XenAPI
         /// <param name="session">The session</param>
         /// <param name="_host">The host to create/make the SR on</param>
         /// <param name="_device_config">The device config string that will be passed to backend SR driver</param>
+        public static string probe(Session session, string _host, Dictionary<string, string> _device_config)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.sr_probe(session.opaque_ref, _host, _device_config);
+            else
+                return session.XmlRpcProxy.sr_probe(session.opaque_ref, _host ?? "", Maps.convert_to_proxy_string_string(_device_config)).parse();
+        }
+
+        /// <summary>
+        /// Perform a backend-specific scan, using the given device_config.  If the device_config is complete, then this will return a list of the SRs present of this type on the device, if any.  If the device_config is partial, then a backend-specific scan will be performed, returning results that will guide the user in improving the device_config.
+        /// First published in XenServer 4.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The host to create/make the SR on</param>
+        /// <param name="_device_config">The device config string that will be passed to backend SR driver</param>
+        public static XenRef<Task> async_probe(Session session, string _host, Dictionary<string, string> _device_config)
+        {
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_sr_probe(session.opaque_ref, _host, _device_config);
+          else
+              return XenRef<Task>.Create(session.XmlRpcProxy.async_sr_probe(session.opaque_ref, _host ?? "", Maps.convert_to_proxy_string_string(_device_config)).parse());
+        }
+
+        /// <summary>
+        /// Perform a backend-specific scan, using the given device_config.  If the device_config is complete, then this will return a list of the SRs present of this type on the device, if any.  If the device_config is partial, then a backend-specific scan will be performed, returning results that will guide the user in improving the device_config.
+        /// First published in XenServer 4.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The host to create/make the SR on</param>
+        /// <param name="_device_config">The device config string that will be passed to backend SR driver</param>
         /// <param name="_type">The type of the SR; used to specify the SR backend driver to use</param>
         /// <param name="_sm_config">Storage backend specific configuration options</param>
         public static string probe(Session session, string _host, Dictionary<string, string> _device_config, string _type, Dictionary<string, string> _sm_config)
@@ -1211,7 +1241,7 @@ namespace XenAPI
 
         /// <summary>
         /// Perform a backend-specific scan, using the given device_config.  If the device_config is complete, then this will return a list of the SRs present of this type on the device, if any.  If the device_config is partial, then a backend-specific scan will be performed, returning results that will guide the user in improving the device_config.
-        /// Experimental. First published in XenServer 7.5.
+        /// First published in XenServer 7.6.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The host to create/make the SR on</param>
@@ -1228,7 +1258,7 @@ namespace XenAPI
 
         /// <summary>
         /// Perform a backend-specific scan, using the given device_config.  If the device_config is complete, then this will return a list of the SRs present of this type on the device, if any.  If the device_config is partial, then a backend-specific scan will be performed, returning results that will guide the user in improving the device_config.
-        /// Experimental. First published in XenServer 7.5.
+        /// First published in XenServer 7.6.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The host to create/make the SR on</param>

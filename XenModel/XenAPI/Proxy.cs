@@ -746,10 +746,6 @@ namespace XenAPI
         Response<string>
         pool_set_live_patching_disabled(string session, string _pool, bool _live_patching_disabled);
 
-        [XmlRpcMethod("pool.set_uefi_certificates")]
-        Response<string>
-        pool_set_uefi_certificates(string session, string _pool, string _uefi_certificates);
-
         [XmlRpcMethod("pool.set_is_psr_pending")]
         Response<string>
         pool_set_is_psr_pending(string session, string _pool, bool _is_psr_pending);
@@ -1217,6 +1213,14 @@ namespace XenAPI
         [XmlRpcMethod("Async.pool.disable_repository_proxy")]
         Response<string>
         async_pool_disable_repository_proxy(string session, string _pool);
+
+        [XmlRpcMethod("pool.set_uefi_certificates")]
+        Response<string>
+        pool_set_uefi_certificates(string session, string _pool, string _value);
+
+        [XmlRpcMethod("Async.pool.set_uefi_certificates")]
+        Response<string>
+        async_pool_set_uefi_certificates(string session, string _pool, string _value);
 
         [XmlRpcMethod("pool.get_all")]
         Response<string []>
@@ -3562,6 +3566,10 @@ namespace XenAPI
         Response<bool>
         host_get_tls_verification_enabled(string session, string _host);
 
+        [XmlRpcMethod("host.get_last_software_update")]
+        Response<DateTime>
+        host_get_last_software_update(string session, string _host);
+
         [XmlRpcMethod("host.set_name_label")]
         Response<string>
         host_set_name_label(string session, string _host, string _label);
@@ -3814,13 +3822,13 @@ namespace XenAPI
         Response<string>
         host_evacuate(string session, string _host);
 
-        [XmlRpcMethod("host.evacuate")]
-        Response<string>
-        host_evacuate(string session, string _host, string _network);
-
         [XmlRpcMethod("Async.host.evacuate")]
         Response<string>
         async_host_evacuate(string session, string _host);
+
+        [XmlRpcMethod("host.evacuate")]
+        Response<string>
+        host_evacuate(string session, string _host, string _network);
 
         [XmlRpcMethod("Async.host.evacuate")]
         Response<string>
@@ -4127,7 +4135,7 @@ namespace XenAPI
         host_emergency_reenable_tls_verification(string session);
 
         [XmlRpcMethod("host.apply_updates")]
-        Response<string>
+        Response<string []>
         host_apply_updates(string session, string _host, string _hash);
 
         [XmlRpcMethod("Async.host.apply_updates")]
@@ -5796,6 +5804,14 @@ namespace XenAPI
 
         [XmlRpcMethod("SR.probe")]
         Response<string>
+        sr_probe(string session, string _host, Object _device_config);
+
+        [XmlRpcMethod("Async.SR.probe")]
+        Response<string>
+        async_sr_probe(string session, string _host, Object _device_config);
+
+        [XmlRpcMethod("SR.probe")]
+        Response<string>
         sr_probe(string session, string _host, Object _device_config, string _type, Object _sm_config);
 
         [XmlRpcMethod("Async.SR.probe")]
@@ -6148,11 +6164,27 @@ namespace XenAPI
 
         [XmlRpcMethod("VDI.snapshot")]
         Response<string>
+        vdi_snapshot(string session, string _vdi);
+
+        [XmlRpcMethod("Async.VDI.snapshot")]
+        Response<string>
+        async_vdi_snapshot(string session, string _vdi);
+
+        [XmlRpcMethod("VDI.snapshot")]
+        Response<string>
         vdi_snapshot(string session, string _vdi, Object _driver_params);
 
         [XmlRpcMethod("Async.VDI.snapshot")]
         Response<string>
         async_vdi_snapshot(string session, string _vdi, Object _driver_params);
+
+        [XmlRpcMethod("VDI.clone")]
+        Response<string>
+        vdi_clone(string session, string _vdi);
+
+        [XmlRpcMethod("Async.VDI.clone")]
+        Response<string>
+        async_vdi_clone(string session, string _vdi);
 
         [XmlRpcMethod("VDI.clone")]
         Response<string>
@@ -6177,6 +6209,14 @@ namespace XenAPI
         [XmlRpcMethod("Async.VDI.resize_online")]
         Response<string>
         async_vdi_resize_online(string session, string _vdi, string _size);
+
+        [XmlRpcMethod("VDI.introduce")]
+        Response<string>
+        vdi_introduce(string session, string _uuid, string _name_label, string _name_description, string _sr, string _type, bool _sharable, bool _read_only, Object _other_config, string _location, Object _xenstore_data);
+
+        [XmlRpcMethod("Async.VDI.introduce")]
+        Response<string>
+        async_vdi_introduce(string session, string _uuid, string _name_label, string _name_description, string _sr, string _type, bool _sharable, bool _read_only, Object _other_config, string _location, Object _xenstore_data);
 
         [XmlRpcMethod("VDI.introduce")]
         Response<string>
@@ -6995,7 +7035,7 @@ namespace XenAPI
         message_destroy(string session, string _message);
 
         [XmlRpcMethod("message.destroy_many")]
-        Response<string> 
+        Response<string>
         message_destroy_many(string session, string [] _messages);
 
         [XmlRpcMethod("Async.message.destroy_many")]
@@ -8651,6 +8691,10 @@ namespace XenAPI
         Response<bool>
         repository_get_up_to_date(string session, string _repository);
 
+        [XmlRpcMethod("Repository.get_gpgkey_path")]
+        Response<string>
+        repository_get_gpgkey_path(string session, string _repository);
+
         [XmlRpcMethod("Repository.set_name_label")]
         Response<string>
         repository_set_name_label(string session, string _repository, string _label);
@@ -8661,11 +8705,11 @@ namespace XenAPI
 
         [XmlRpcMethod("Repository.introduce")]
         Response<string>
-        repository_introduce(string session, string _name_label, string _name_description, string _binary_url, string _source_url, bool _update);
+        repository_introduce(string session, string _name_label, string _name_description, string _binary_url, string _source_url, bool _update, string _gpgkey_path);
 
         [XmlRpcMethod("Async.Repository.introduce")]
         Response<string>
-        async_repository_introduce(string session, string _name_label, string _name_description, string _binary_url, string _source_url, bool _update);
+        async_repository_introduce(string session, string _name_label, string _name_description, string _binary_url, string _source_url, bool _update, string _gpgkey_path);
 
         [XmlRpcMethod("Repository.forget")]
         Response<string>
@@ -8674,6 +8718,14 @@ namespace XenAPI
         [XmlRpcMethod("Async.Repository.forget")]
         Response<string>
         async_repository_forget(string session, string _repository);
+
+        [XmlRpcMethod("Repository.set_gpgkey_path")]
+        Response<string>
+        repository_set_gpgkey_path(string session, string _repository, string _value);
+
+        [XmlRpcMethod("Async.Repository.set_gpgkey_path")]
+        Response<string>
+        async_repository_set_gpgkey_path(string session, string _repository, string _value);
 
         [XmlRpcMethod("Repository.get_all")]
         Response<string []>
@@ -9818,5 +9870,6 @@ namespace XenAPI
         public bool update;
         public string hash;
         public bool up_to_date;
+        public string gpgkey_path;
     }
 }

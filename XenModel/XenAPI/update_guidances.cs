@@ -41,6 +41,10 @@ namespace XenAPI
         /// </summary>
         reboot_host,
         /// <summary>
+        /// Indicates the updated host should reboot as soon as possible since one or more livepatch(es) failed to be applied.
+        /// </summary>
+        reboot_host_on_livepatch_failure,
+        /// <summary>
         /// Indicates the Toolstack running on the updated host should restart as soon as possible
         /// </summary>
         restart_toolstack,
@@ -67,6 +71,8 @@ namespace XenAPI
             {
                 case update_guidances.reboot_host:
                     return "reboot_host";
+                case update_guidances.reboot_host_on_livepatch_failure:
+                    return "reboot_host_on_livepatch_failure";
                 case update_guidances.restart_toolstack:
                     return "restart_toolstack";
                 case update_guidances.restart_device_model:

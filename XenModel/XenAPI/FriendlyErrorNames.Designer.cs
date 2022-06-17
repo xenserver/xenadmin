@@ -88,6 +88,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to apply a livepatch..
+        /// </summary>
+        public static string APPLY_LIVEPATCH_FAILED {
+            get {
+                return ResourceManager.GetString("APPLY_LIVEPATCH_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed to apply updates on a host..
         /// </summary>
         public static string APPLY_UPDATES_FAILED {
@@ -1632,6 +1641,15 @@ namespace XenAPI {
         public static string INVALID_FEATURE_STRING {
             get {
                 return ResourceManager.GetString("INVALID_FEATURE_STRING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The GPG public key file name in the repository is invalid..
+        /// </summary>
+        public static string INVALID_GPGKEY_PATH {
+            get {
+                return ResourceManager.GetString("INVALID_GPGKEY_PATH", resourceCulture);
             }
         }
         

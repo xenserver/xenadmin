@@ -42,7 +42,7 @@ namespace XenAPI
 {
     /// <summary>
     /// Repository for updates
-    /// First published in Unreleased.
+    /// First published in 1.301.0.
     /// </summary>
     public partial class Repository : XenObject<Repository>
     {
@@ -59,7 +59,8 @@ namespace XenAPI
             string source_url,
             bool update,
             string hash,
-            bool up_to_date)
+            bool up_to_date,
+            string gpgkey_path)
         {
             this.uuid = uuid;
             this.name_label = name_label;
@@ -69,6 +70,7 @@ namespace XenAPI
             this.update = update;
             this.hash = hash;
             this.up_to_date = up_to_date;
+            this.gpgkey_path = gpgkey_path;
         }
 
         /// <summary>
@@ -108,6 +110,7 @@ namespace XenAPI
             update = record.update;
             hash = record.hash;
             up_to_date = record.up_to_date;
+            gpgkey_path = record.gpgkey_path;
         }
 
         internal void UpdateFrom(Proxy_Repository proxy)
@@ -120,6 +123,7 @@ namespace XenAPI
             update = (bool)proxy.update;
             hash = proxy.hash == null ? null : proxy.hash;
             up_to_date = (bool)proxy.up_to_date;
+            gpgkey_path = proxy.gpgkey_path == null ? null : proxy.gpgkey_path;
         }
 
         /// <summary>
@@ -146,6 +150,8 @@ namespace XenAPI
                 hash = Marshalling.ParseString(table, "hash");
             if (table.ContainsKey("up_to_date"))
                 up_to_date = Marshalling.ParseBool(table, "up_to_date");
+            if (table.ContainsKey("gpgkey_path"))
+                gpgkey_path = Marshalling.ParseString(table, "gpgkey_path");
         }
 
         public Proxy_Repository ToProxy()
@@ -159,6 +165,7 @@ namespace XenAPI
             result_.update = update;
             result_.hash = hash ?? "";
             result_.up_to_date = up_to_date;
+            result_.gpgkey_path = gpgkey_path ?? "";
             return result_;
         }
 
@@ -176,7 +183,8 @@ namespace XenAPI
                 Helper.AreEqual2(this._source_url, other._source_url) &&
                 Helper.AreEqual2(this._update, other._update) &&
                 Helper.AreEqual2(this._hash, other._hash) &&
-                Helper.AreEqual2(this._up_to_date, other._up_to_date);
+                Helper.AreEqual2(this._up_to_date, other._up_to_date) &&
+                Helper.AreEqual2(this._gpgkey_path, other._gpgkey_path);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Repository server)
@@ -196,6 +204,10 @@ namespace XenAPI
                 {
                     Repository.set_name_description(session, opaqueRef, _name_description);
                 }
+                if (!Helper.AreEqual2(_gpgkey_path, server._gpgkey_path))
+                {
+                    Repository.set_gpgkey_path(session, opaqueRef, _gpgkey_path);
+                }
 
                 return null;
             }
@@ -203,7 +215,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get a record containing the current state of the given Repository.
-        /// First published in Unreleased.
+        /// First published in 1.301.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_repository">The opaque_ref of the given repository</param>
@@ -217,7 +229,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get a reference to the Repository instance with the specified UUID.
-        /// First published in Unreleased.
+        /// First published in 1.301.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_uuid">UUID of object to return</param>
@@ -231,7 +243,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get all the Repository instances with the given label.
-        /// First published in Unreleased.
+        /// First published in 1.301.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_label">label of object to return</param>
@@ -245,7 +257,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the uuid field of the given Repository.
-        /// First published in Unreleased.
+        /// First published in 1.301.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_repository">The opaque_ref of the given repository</param>
@@ -259,7 +271,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the name/label field of the given Repository.
-        /// First published in Unreleased.
+        /// First published in 1.301.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_repository">The opaque_ref of the given repository</param>
@@ -273,7 +285,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the name/description field of the given Repository.
-        /// First published in Unreleased.
+        /// First published in 1.301.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_repository">The opaque_ref of the given repository</param>
@@ -287,7 +299,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the binary_url field of the given Repository.
-        /// First published in Unreleased.
+        /// First published in 1.301.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_repository">The opaque_ref of the given repository</param>
@@ -301,7 +313,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the source_url field of the given Repository.
-        /// First published in Unreleased.
+        /// First published in 1.301.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_repository">The opaque_ref of the given repository</param>
@@ -315,7 +327,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the update field of the given Repository.
-        /// First published in Unreleased.
+        /// First published in 1.301.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_repository">The opaque_ref of the given repository</param>
@@ -329,7 +341,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the hash field of the given Repository.
-        /// First published in Unreleased.
+        /// First published in 1.301.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_repository">The opaque_ref of the given repository</param>
@@ -343,7 +355,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the up_to_date field of the given Repository.
-        /// First published in Unreleased.
+        /// First published in 1.301.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_repository">The opaque_ref of the given repository</param>
@@ -356,8 +368,22 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Get the gpgkey_path field of the given Repository.
+        /// Experimental. First published in 22.12.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_repository">The opaque_ref of the given repository</param>
+        public static string get_gpgkey_path(Session session, string _repository)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.repository_get_gpgkey_path(session.opaque_ref, _repository);
+            else
+                return session.XmlRpcProxy.repository_get_gpgkey_path(session.opaque_ref, _repository ?? "").parse();
+        }
+
+        /// <summary>
         /// Set the name/label field of the given Repository.
-        /// First published in Unreleased.
+        /// First published in 1.301.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_repository">The opaque_ref of the given repository</param>
@@ -372,7 +398,7 @@ namespace XenAPI
 
         /// <summary>
         /// Set the name/description field of the given Repository.
-        /// First published in Unreleased.
+        /// First published in 1.301.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_repository">The opaque_ref of the given repository</param>
@@ -387,7 +413,7 @@ namespace XenAPI
 
         /// <summary>
         /// Add the configuration for a new repository
-        /// First published in Unreleased.
+        /// First published in 1.301.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_name_label">The name of the repository</param>
@@ -395,17 +421,18 @@ namespace XenAPI
         /// <param name="_binary_url">Base URL of binary packages in this repository</param>
         /// <param name="_source_url">Base URL of source packages in this repository</param>
         /// <param name="_update">True if the repository is an update repository. This means that updateinfo.xml will be parsed</param>
-        public static XenRef<Repository> introduce(Session session, string _name_label, string _name_description, string _binary_url, string _source_url, bool _update)
+        /// <param name="_gpgkey_path">The GPG public key file name</param>
+        public static XenRef<Repository> introduce(Session session, string _name_label, string _name_description, string _binary_url, string _source_url, bool _update, string _gpgkey_path)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.repository_introduce(session.opaque_ref, _name_label, _name_description, _binary_url, _source_url, _update);
+                return session.JsonRpcClient.repository_introduce(session.opaque_ref, _name_label, _name_description, _binary_url, _source_url, _update, _gpgkey_path);
             else
-                return XenRef<Repository>.Create(session.XmlRpcProxy.repository_introduce(session.opaque_ref, _name_label ?? "", _name_description ?? "", _binary_url ?? "", _source_url ?? "", _update).parse());
+                return XenRef<Repository>.Create(session.XmlRpcProxy.repository_introduce(session.opaque_ref, _name_label ?? "", _name_description ?? "", _binary_url ?? "", _source_url ?? "", _update, _gpgkey_path ?? "").parse());
         }
 
         /// <summary>
         /// Add the configuration for a new repository
-        /// First published in Unreleased.
+        /// First published in 1.301.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_name_label">The name of the repository</param>
@@ -413,17 +440,18 @@ namespace XenAPI
         /// <param name="_binary_url">Base URL of binary packages in this repository</param>
         /// <param name="_source_url">Base URL of source packages in this repository</param>
         /// <param name="_update">True if the repository is an update repository. This means that updateinfo.xml will be parsed</param>
-        public static XenRef<Task> async_introduce(Session session, string _name_label, string _name_description, string _binary_url, string _source_url, bool _update)
+        /// <param name="_gpgkey_path">The GPG public key file name</param>
+        public static XenRef<Task> async_introduce(Session session, string _name_label, string _name_description, string _binary_url, string _source_url, bool _update, string _gpgkey_path)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_repository_introduce(session.opaque_ref, _name_label, _name_description, _binary_url, _source_url, _update);
+              return session.JsonRpcClient.async_repository_introduce(session.opaque_ref, _name_label, _name_description, _binary_url, _source_url, _update, _gpgkey_path);
           else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_repository_introduce(session.opaque_ref, _name_label ?? "", _name_description ?? "", _binary_url ?? "", _source_url ?? "", _update).parse());
+              return XenRef<Task>.Create(session.XmlRpcProxy.async_repository_introduce(session.opaque_ref, _name_label ?? "", _name_description ?? "", _binary_url ?? "", _source_url ?? "", _update, _gpgkey_path ?? "").parse());
         }
 
         /// <summary>
         /// Remove the repository record from the database
-        /// First published in Unreleased.
+        /// First published in 1.301.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_repository">The opaque_ref of the given repository</param>
@@ -437,7 +465,7 @@ namespace XenAPI
 
         /// <summary>
         /// Remove the repository record from the database
-        /// First published in Unreleased.
+        /// First published in 1.301.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_repository">The opaque_ref of the given repository</param>
@@ -450,8 +478,38 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Set the file name of the GPG public key of the repository
+        /// Experimental. First published in 22.12.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_repository">The opaque_ref of the given repository</param>
+        /// <param name="_value">The file name of the GPG public key of the repository</param>
+        public static void set_gpgkey_path(Session session, string _repository, string _value)
+        {
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.repository_set_gpgkey_path(session.opaque_ref, _repository, _value);
+            else
+                session.XmlRpcProxy.repository_set_gpgkey_path(session.opaque_ref, _repository ?? "", _value ?? "").parse();
+        }
+
+        /// <summary>
+        /// Set the file name of the GPG public key of the repository
+        /// Experimental. First published in 22.12.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_repository">The opaque_ref of the given repository</param>
+        /// <param name="_value">The file name of the GPG public key of the repository</param>
+        public static XenRef<Task> async_set_gpgkey_path(Session session, string _repository, string _value)
+        {
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_repository_set_gpgkey_path(session.opaque_ref, _repository, _value);
+          else
+              return XenRef<Task>.Create(session.XmlRpcProxy.async_repository_set_gpgkey_path(session.opaque_ref, _repository ?? "", _value ?? "").parse());
+        }
+
+        /// <summary>
         /// Return a list of all the Repositorys known to the system.
-        /// First published in Unreleased.
+        /// First published in 1.301.0.
         /// </summary>
         /// <param name="session">The session</param>
         public static List<XenRef<Repository>> get_all(Session session)
@@ -464,7 +522,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get all the Repository Records at once, in a single XML RPC call
-        /// First published in Unreleased.
+        /// First published in 1.301.0.
         /// </summary>
         /// <param name="session">The session</param>
         public static Dictionary<XenRef<Repository>, Repository> get_all_records(Session session)
@@ -610,5 +668,23 @@ namespace XenAPI
             }
         }
         private bool _up_to_date = false;
+
+        /// <summary>
+        /// The file name of the GPG public key of this repository
+        /// Experimental. First published in 22.12.0.
+        /// </summary>
+        public virtual string gpgkey_path
+        {
+            get { return _gpgkey_path; }
+            set
+            {
+                if (!Helper.AreEqual(value, _gpgkey_path))
+                {
+                    _gpgkey_path = value;
+                    NotifyPropertyChanged("gpgkey_path");
+                }
+            }
+        }
+        private string _gpgkey_path = "";
     }
 }

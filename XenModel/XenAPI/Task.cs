@@ -686,7 +686,7 @@ namespace XenAPI
 
         /// <summary>
         /// Set the task result
-        /// First published in Unreleased.
+        /// First published in 21.3.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_task">The opaque_ref of the given task</param>
@@ -701,7 +701,7 @@ namespace XenAPI
 
         /// <summary>
         /// Set the task error info
-        /// First published in Unreleased.
+        /// First published in 21.3.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_task">The opaque_ref of the given task</param>

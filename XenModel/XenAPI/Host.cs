@@ -115,8 +115,7 @@ namespace XenAPI
             string[] editions,
             List<update_guidances> pending_guidances,
             bool tls_verification_enabled,
-            DateTime last_software_update
-        )
+            DateTime last_software_update)
         {
             this.uuid = uuid;
             this.name_label = name_label;
@@ -627,7 +626,7 @@ namespace XenAPI
                 Helper.AreEqual2(this._editions, other._editions) &&
                 Helper.AreEqual2(this._pending_guidances, other._pending_guidances) &&
                 Helper.AreEqual2(this._tls_verification_enabled, other._tls_verification_enabled) &&
-                Helper.AreEqual2(this._last_software_update, other.last_software_update);
+                Helper.AreEqual2(this._last_software_update, other._last_software_update);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Host server)
@@ -1569,9 +1568,11 @@ namespace XenAPI
         /// <summary>
         /// Get the uefi_certificates field of the given host.
         /// First published in Citrix Hypervisor 8.1.
+        /// Deprecated since 22.16.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
+        [Deprecated("22.16.0")]
         public static string get_uefi_certificates(Session session, string _host)
         {
             if (session.JsonRpcClient != null)
@@ -1610,7 +1611,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the pending_guidances field of the given host.
-        /// First published in Unreleased.
+        /// First published in 1.303.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -1624,7 +1625,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the tls_verification_enabled field of the given host.
-        /// First published in Unreleased.
+        /// First published in 1.313.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -1634,6 +1635,20 @@ namespace XenAPI
                 return session.JsonRpcClient.host_get_tls_verification_enabled(session.opaque_ref, _host);
             else
                 return (bool)session.XmlRpcProxy.host_get_tls_verification_enabled(session.opaque_ref, _host ?? "").parse();
+        }
+
+        /// <summary>
+        /// Get the last_software_update field of the given host.
+        /// Experimental. First published in 22.20.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        public static DateTime get_last_software_update(Session session, string _host)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.host_get_last_software_update(session.opaque_ref, _host);
+            else
+                return session.XmlRpcProxy.host_get_last_software_update(session.opaque_ref, _host ?? "").parse();
         }
 
         /// <summary>
@@ -2559,7 +2574,21 @@ namespace XenAPI
             else
                 session.XmlRpcProxy.host_evacuate(session.opaque_ref, _host ?? "").parse();
         }
-        
+
+        /// <summary>
+        /// Migrate all VMs off of this host, where possible.
+        /// First published in XenServer 4.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        public static XenRef<Task> async_evacuate(Session session, string _host)
+        {
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_host_evacuate(session.opaque_ref, _host);
+          else
+              return XenRef<Task>.Create(session.XmlRpcProxy.async_host_evacuate(session.opaque_ref, _host ?? "").parse());
+        }
+
         /// <summary>
         /// Migrate all VMs off of this host, where possible.
         /// First published in XenServer 4.1.
@@ -2575,20 +2604,6 @@ namespace XenAPI
                 session.XmlRpcProxy.host_evacuate(session.opaque_ref, _host ?? "", _network ?? "").parse();
         }
 
-        /// <summary>
-        /// Migrate all VMs off of this host, where possible.
-        /// First published in XenServer 4.1.
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_host">The opaque_ref of the given host</param>
-        public static XenRef<Task> async_evacuate(Session session, string _host)
-        {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_host_evacuate(session.opaque_ref, _host);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_host_evacuate(session.opaque_ref, _host ?? "").parse());
-        }
-        
         /// <summary>
         /// Migrate all VMs off of this host, where possible.
         /// First published in XenServer 4.1.
@@ -2689,7 +2704,7 @@ namespace XenAPI
 
         /// <summary>
         /// Returns the management interface for the specified host
-        /// Experimental. First published in XenServer 6.1.
+        /// First published in XenServer 6.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -2703,7 +2718,7 @@ namespace XenAPI
 
         /// <summary>
         /// Returns the management interface for the specified host
-        /// Experimental. First published in XenServer 6.1.
+        /// First published in XenServer 6.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -3133,7 +3148,7 @@ namespace XenAPI
 
         /// <summary>
         /// Replace the internal self-signed host certficate with a new one.
-        /// First published in Unreleased.
+        /// First published in 1.307.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -3147,7 +3162,7 @@ namespace XenAPI
 
         /// <summary>
         /// Replace the internal self-signed host certficate with a new one.
-        /// First published in Unreleased.
+        /// First published in 1.307.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -3208,7 +3223,7 @@ namespace XenAPI
 
         /// <summary>
         /// Delete the current TLS server certificate and replace by a new, self-signed one. This should only be used with extreme care.
-        /// First published in Unreleased.
+        /// First published in 1.290.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -3222,7 +3237,7 @@ namespace XenAPI
 
         /// <summary>
         /// Delete the current TLS server certificate and replace by a new, self-signed one. This should only be used with extreme care.
-        /// First published in Unreleased.
+        /// First published in 1.290.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -3596,10 +3611,12 @@ namespace XenAPI
         /// <summary>
         /// Sets the UEFI certificates on a host
         /// First published in Citrix Hypervisor 8.1.
+        /// Deprecated since 22.16.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
         /// <param name="_value">The certificates to apply to a host</param>
+        [Deprecated("22.16.0")]
         public static void set_uefi_certificates(Session session, string _host, string _value)
         {
             if (session.JsonRpcClient != null)
@@ -3611,10 +3628,12 @@ namespace XenAPI
         /// <summary>
         /// Sets the UEFI certificates on a host
         /// First published in Citrix Hypervisor 8.1.
+        /// Deprecated since 22.16.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
         /// <param name="_value">The certificates to apply to a host</param>
+        [Deprecated("22.16.0")]
         public static XenRef<Task> async_set_uefi_certificates(Session session, string _host, string _value)
         {
           if (session.JsonRpcClient != null)
@@ -3625,7 +3644,7 @@ namespace XenAPI
 
         /// <summary>
         /// Sets xen's sched-gran on a host. See: https://xenbits.xen.org/docs/unstable/misc/xen-command-line.html#sched-gran-x86
-        /// Experimental. First published in Unreleased.
+        /// First published in 1.271.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -3640,7 +3659,7 @@ namespace XenAPI
 
         /// <summary>
         /// Sets xen's sched-gran on a host. See: https://xenbits.xen.org/docs/unstable/misc/xen-command-line.html#sched-gran-x86
-        /// Experimental. First published in Unreleased.
+        /// First published in 1.271.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -3655,7 +3674,7 @@ namespace XenAPI
 
         /// <summary>
         /// Gets xen's sched-gran on a host
-        /// Experimental. First published in Unreleased.
+        /// First published in 1.271.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -3669,7 +3688,7 @@ namespace XenAPI
 
         /// <summary>
         /// Gets xen's sched-gran on a host
-        /// Experimental. First published in Unreleased.
+        /// First published in 1.271.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -3683,7 +3702,7 @@ namespace XenAPI
 
         /// <summary>
         /// Disable TLS verification for this host only
-        /// First published in Unreleased.
+        /// First published in 1.290.0.
         /// </summary>
         /// <param name="session">The session</param>
         public static void emergency_disable_tls_verification(Session session)
@@ -3696,7 +3715,7 @@ namespace XenAPI
 
         /// <summary>
         /// Reenable TLS verification for this host only
-        /// First published in Unreleased.
+        /// First published in 1.298.0.
         /// </summary>
         /// <param name="session">The session</param>
         public static void emergency_reenable_tls_verification(Session session)
@@ -3709,22 +3728,22 @@ namespace XenAPI
 
         /// <summary>
         /// apply updates from current enabled repository on a host
-        /// First published in Unreleased.
+        /// First published in 1.301.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
         /// <param name="_hash">The hash of updateinfo to be applied which is returned by previous pool.sync_udpates</param>
-        public static void apply_updates(Session session, string _host, string _hash)
+        public static string[] apply_updates(Session session, string _host, string _hash)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.host_apply_updates(session.opaque_ref, _host, _hash);
+                return session.JsonRpcClient.host_apply_updates(session.opaque_ref, _host, _hash);
             else
-                session.XmlRpcProxy.host_apply_updates(session.opaque_ref, _host ?? "", _hash ?? "").parse();
+                return (string [])session.XmlRpcProxy.host_apply_updates(session.opaque_ref, _host ?? "", _hash ?? "").parse();
         }
 
         /// <summary>
         /// apply updates from current enabled repository on a host
-        /// First published in Unreleased.
+        /// First published in 1.301.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -4866,7 +4885,7 @@ namespace XenAPI
 
         /// <summary>
         /// The set of pending guidances after applying updates
-        /// First published in Unreleased.
+        /// First published in 1.303.0.
         /// </summary>
         public virtual List<update_guidances> pending_guidances
         {
@@ -4884,7 +4903,7 @@ namespace XenAPI
 
         /// <summary>
         /// True if this host has TLS verifcation enabled
-        /// First published in Unreleased.
+        /// First published in 1.313.0.
         /// </summary>
         public virtual bool tls_verification_enabled
         {
@@ -4902,6 +4921,7 @@ namespace XenAPI
 
         /// <summary>
         /// Date and time when the last software update was applied
+        /// Experimental. First published in 22.20.0.
         /// </summary>
         [JsonConverter(typeof(XenDateTimeConverter))]
         public virtual DateTime last_software_update
@@ -4916,6 +4936,6 @@ namespace XenAPI
                 }
             }
         }
-        private DateTime _last_software_update;
+        private DateTime _last_software_update = DateTime.ParseExact("19700101T00:00:00Z", "yyyyMMddTHH:mm:ssZ", CultureInfo.InvariantCulture);
     }
 }

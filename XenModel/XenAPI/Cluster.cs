@@ -42,6 +42,7 @@ namespace XenAPI
 {
     /// <summary>
     /// Cluster-wide Cluster metadata
+    /// First published in XenServer 7.6.
     /// </summary>
     public partial class Cluster : XenObject<Cluster>
     {
@@ -232,7 +233,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get a record containing the current state of the given Cluster.
-        /// Experimental. First published in XenServer 7.5.
+        /// First published in XenServer 7.6.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -246,7 +247,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get a reference to the Cluster instance with the specified UUID.
-        /// Experimental. First published in XenServer 7.5.
+        /// First published in XenServer 7.6.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_uuid">UUID of object to return</param>
@@ -260,7 +261,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the uuid field of the given Cluster.
-        /// Experimental. First published in XenServer 7.5.
+        /// First published in XenServer 7.6.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -274,7 +275,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the cluster_hosts field of the given Cluster.
-        /// Experimental. First published in XenServer 7.5.
+        /// First published in XenServer 7.6.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -288,7 +289,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the pending_forget field of the given Cluster.
-        /// Experimental. First published in XenServer 7.6.
+        /// First published in XenServer 7.6.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -302,7 +303,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the cluster_token field of the given Cluster.
-        /// Experimental. First published in XenServer 7.5.
+        /// First published in XenServer 7.6.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -316,7 +317,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the cluster_stack field of the given Cluster.
-        /// Experimental. First published in XenServer 7.5.
+        /// First published in XenServer 7.6.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -330,6 +331,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the allowed_operations field of the given Cluster.
+        /// First published in XenServer 7.6.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -343,6 +345,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the current_operations field of the given Cluster.
+        /// First published in XenServer 7.6.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -356,7 +359,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the pool_auto_join field of the given Cluster.
-        /// Experimental. First published in XenServer 7.5.
+        /// First published in XenServer 7.6.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -370,6 +373,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the token_timeout field of the given Cluster.
+        /// First published in XenServer 7.6.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -383,6 +387,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the token_timeout_coefficient field of the given Cluster.
+        /// First published in XenServer 7.6.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -396,7 +401,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the cluster_config field of the given Cluster.
-        /// Experimental. First published in XenServer 7.5.
+        /// First published in XenServer 7.6.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -410,7 +415,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the other_config field of the given Cluster.
-        /// Experimental. First published in XenServer 7.5.
+        /// First published in XenServer 7.6.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -424,7 +429,7 @@ namespace XenAPI
 
         /// <summary>
         /// Set the other_config field of the given Cluster.
-        /// Experimental. First published in XenServer 7.5.
+        /// First published in XenServer 7.6.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -439,7 +444,7 @@ namespace XenAPI
 
         /// <summary>
         /// Add the given key-value pair to the other_config field of the given Cluster.
-        /// Experimental. First published in XenServer 7.5.
+        /// First published in XenServer 7.6.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -455,7 +460,7 @@ namespace XenAPI
 
         /// <summary>
         /// Remove the given key and its corresponding value from the other_config field of the given Cluster.  If the key is not in that Map, then do nothing.
-        /// Experimental. First published in XenServer 7.5.
+        /// First published in XenServer 7.6.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -470,7 +475,7 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a Cluster object and one Cluster_host object as its first member
-        /// Experimental. First published in XenServer 7.5.
+        /// First published in XenServer 7.6.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pif">The PIF to connect the cluster's first cluster_host to</param>
@@ -488,7 +493,7 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a Cluster object and one Cluster_host object as its first member
-        /// Experimental. First published in XenServer 7.5.
+        /// First published in XenServer 7.6.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pif">The PIF to connect the cluster's first cluster_host to</param>
@@ -506,7 +511,7 @@ namespace XenAPI
 
         /// <summary>
         /// Destroys a Cluster object and the one remaining Cluster_host member
-        /// Experimental. First published in XenServer 7.5.
+        /// First published in XenServer 7.6.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -520,7 +525,7 @@ namespace XenAPI
 
         /// <summary>
         /// Destroys a Cluster object and the one remaining Cluster_host member
-        /// Experimental. First published in XenServer 7.5.
+        /// First published in XenServer 7.6.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -534,7 +539,7 @@ namespace XenAPI
 
         /// <summary>
         /// Returns the network used by the cluster for inter-host communication, i.e. the network shared by all cluster host PIFs
-        /// Experimental. First published in XenServer 7.5.
+        /// First published in XenServer 7.6.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -548,7 +553,7 @@ namespace XenAPI
 
         /// <summary>
         /// Returns the network used by the cluster for inter-host communication, i.e. the network shared by all cluster host PIFs
-        /// Experimental. First published in XenServer 7.5.
+        /// First published in XenServer 7.6.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -562,7 +567,7 @@ namespace XenAPI
 
         /// <summary>
         /// Attempt to create a Cluster from the entire pool
-        /// Experimental. First published in XenServer 7.5.
+        /// First published in XenServer 7.6.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_network">the single network on which corosync carries out its inter-host communications</param>
@@ -579,7 +584,7 @@ namespace XenAPI
 
         /// <summary>
         /// Attempt to create a Cluster from the entire pool
-        /// Experimental. First published in XenServer 7.5.
+        /// First published in XenServer 7.6.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_network">the single network on which corosync carries out its inter-host communications</param>
@@ -596,7 +601,7 @@ namespace XenAPI
 
         /// <summary>
         /// Attempt to force destroy the Cluster_host objects, and then destroy the Cluster.
-        /// Experimental. First published in XenServer 7.5.
+        /// First published in XenServer 7.6.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -610,7 +615,7 @@ namespace XenAPI
 
         /// <summary>
         /// Attempt to force destroy the Cluster_host objects, and then destroy the Cluster.
-        /// Experimental. First published in XenServer 7.5.
+        /// First published in XenServer 7.6.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -624,7 +629,7 @@ namespace XenAPI
 
         /// <summary>
         /// Attempt to destroy the Cluster_host objects for all hosts in the pool and then destroy the Cluster.
-        /// Experimental. First published in XenServer 7.5.
+        /// First published in XenServer 7.6.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -638,7 +643,7 @@ namespace XenAPI
 
         /// <summary>
         /// Attempt to destroy the Cluster_host objects for all hosts in the pool and then destroy the Cluster.
-        /// Experimental. First published in XenServer 7.5.
+        /// First published in XenServer 7.6.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -652,7 +657,7 @@ namespace XenAPI
 
         /// <summary>
         /// Resynchronise the cluster_host objects across the pool. Creates them where they need creating and then plugs them
-        /// Experimental. First published in XenServer 7.5.
+        /// First published in XenServer 7.6.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -666,7 +671,7 @@ namespace XenAPI
 
         /// <summary>
         /// Resynchronise the cluster_host objects across the pool. Creates them where they need creating and then plugs them
-        /// Experimental. First published in XenServer 7.5.
+        /// First published in XenServer 7.6.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -680,7 +685,7 @@ namespace XenAPI
 
         /// <summary>
         /// Return a list of all the Clusters known to the system.
-        /// Experimental. First published in XenServer 7.5.
+        /// First published in XenServer 7.6.
         /// </summary>
         /// <param name="session">The session</param>
         public static List<XenRef<Cluster>> get_all(Session session)
@@ -693,6 +698,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get all the Cluster Records at once, in a single XML RPC call
+        /// First published in XenServer 7.6.
         /// </summary>
         /// <param name="session">The session</param>
         public static Dictionary<XenRef<Cluster>, Cluster> get_all_records(Session session)
@@ -705,7 +711,6 @@ namespace XenAPI
 
         /// <summary>
         /// Unique identifier/object reference
-        /// Experimental. First published in XenServer 7.5.
         /// </summary>
         public virtual string uuid
         {
@@ -723,7 +728,6 @@ namespace XenAPI
 
         /// <summary>
         /// A list of the cluster_host objects associated with the Cluster
-        /// Experimental. First published in XenServer 7.5.
         /// </summary>
         [JsonConverter(typeof(XenRefListConverter<Cluster_host>))]
         public virtual List<XenRef<Cluster_host>> cluster_hosts
@@ -742,7 +746,6 @@ namespace XenAPI
 
         /// <summary>
         /// Internal field used by Host.destroy to store the IP of cluster members marked as permanently dead but not yet removed
-        /// Experimental. First published in XenServer 7.6.
         /// </summary>
         public virtual string[] pending_forget
         {
@@ -760,7 +763,6 @@ namespace XenAPI
 
         /// <summary>
         /// The secret key used by xapi-clusterd when it talks to itself on other hosts
-        /// Experimental. First published in XenServer 7.5.
         /// </summary>
         public virtual string cluster_token
         {
@@ -778,7 +780,6 @@ namespace XenAPI
 
         /// <summary>
         /// Simply the string 'corosync'. No other cluster stacks are currently supported
-        /// Experimental. First published in XenServer 7.5.
         /// </summary>
         public virtual string cluster_stack
         {
@@ -830,7 +831,6 @@ namespace XenAPI
 
         /// <summary>
         /// True if automatically joining new pool members to the cluster. This will be `true` in the first release
-        /// Experimental. First published in XenServer 7.5.
         /// </summary>
         public virtual bool pool_auto_join
         {
@@ -882,7 +882,6 @@ namespace XenAPI
 
         /// <summary>
         /// Contains read-only settings for the cluster, such as timeouts and other options. It can only be set at cluster create time
-        /// Experimental. First published in XenServer 7.5.
         /// </summary>
         [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> cluster_config
@@ -901,7 +900,6 @@ namespace XenAPI
 
         /// <summary>
         /// Additional configuration
-        /// Experimental. First published in XenServer 7.5.
         /// </summary>
         [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> other_config

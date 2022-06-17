@@ -2309,7 +2309,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the NVRAM field of the given VM.
-        /// Experimental. First published in Citrix Hypervisor 8.0.
+        /// First published in Citrix Hypervisor 8.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
@@ -2323,7 +2323,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the pending_guidances field of the given VM.
-        /// First published in Unreleased.
+        /// First published in 1.303.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
@@ -3633,7 +3633,7 @@ namespace XenAPI
 
         /// <summary>
         /// 
-        /// Experimental. First published in Citrix Hypervisor 8.0.
+        /// First published in Citrix Hypervisor 8.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
@@ -3648,7 +3648,7 @@ namespace XenAPI
 
         /// <summary>
         /// 
-        /// Experimental. First published in Citrix Hypervisor 8.0.
+        /// First published in Citrix Hypervisor 8.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
@@ -3664,7 +3664,7 @@ namespace XenAPI
 
         /// <summary>
         /// 
-        /// Experimental. First published in Citrix Hypervisor 8.0.
+        /// First published in Citrix Hypervisor 8.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
@@ -6791,7 +6791,7 @@ namespace XenAPI
 
         /// <summary>
         /// initial value for guest NVRAM (containing UEFI variables, etc). Cannot be changed while the VM is running
-        /// Experimental. First published in Citrix Hypervisor 8.0.
+        /// First published in Citrix Hypervisor 8.0.
         /// </summary>
         [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> NVRAM
@@ -6810,7 +6810,7 @@ namespace XenAPI
 
         /// <summary>
         /// The set of pending guidances after applying updates
-        /// First published in Unreleased.
+        /// First published in 1.303.0.
         /// </summary>
         public virtual List<update_guidances> pending_guidances
         {
