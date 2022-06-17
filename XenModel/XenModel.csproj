@@ -409,6 +409,7 @@
     <Compile Include="XenAPI\network_purpose.cs" />
     <Compile Include="XenAPI\Network_sriov.cs" />
     <Compile Include="XenAPI\PCI.cs" />
+    <Compile Include="XenAPI\persistence_backend.cs" />
     <Compile Include="XenAPI\PGPU.cs" />
     <Compile Include="XenAPI\pgpu_dom0_access.cs" />
     <Compile Include="XenAPI\pif_igmp_status.cs" />

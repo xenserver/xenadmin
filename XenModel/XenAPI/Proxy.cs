@@ -6794,22 +6794,6 @@ namespace XenAPI
         Response<string>
         vtpm_get_by_uuid(string session, string _uuid);
 
-        [XmlRpcMethod("VTPM.create")]
-        Response<string>
-        vtpm_create(string session, Proxy_VTPM _record);
-
-        [XmlRpcMethod("Async.VTPM.create")]
-        Response<string>
-        async_vtpm_create(string session, Proxy_VTPM _record);
-
-        [XmlRpcMethod("VTPM.destroy")]
-        Response<string>
-        vtpm_destroy(string session, string _vtpm);
-
-        [XmlRpcMethod("Async.VTPM.destroy")]
-        Response<string>
-        async_vtpm_destroy(string session, string _vtpm);
-
         [XmlRpcMethod("VTPM.get_uuid")]
         Response<string>
         vtpm_get_uuid(string session, string _vtpm);
@@ -6821,6 +6805,38 @@ namespace XenAPI
         [XmlRpcMethod("VTPM.get_backend")]
         Response<string>
         vtpm_get_backend(string session, string _vtpm);
+
+        [XmlRpcMethod("VTPM.get_persistence_backend")]
+        Response<string>
+        vtpm_get_persistence_backend(string session, string _vtpm);
+
+        [XmlRpcMethod("VTPM.get_is_unique")]
+        Response<bool>
+        vtpm_get_is_unique(string session, string _vtpm);
+
+        [XmlRpcMethod("VTPM.get_is_protected")]
+        Response<bool>
+        vtpm_get_is_protected(string session, string _vtpm);
+
+        [XmlRpcMethod("VTPM.create")]
+        Response<string>
+        vtpm_create(string session, string _vm, bool _is_unique);
+
+        [XmlRpcMethod("Async.VTPM.create")]
+        Response<string>
+        async_vtpm_create(string session, string _vm, bool _is_unique);
+
+        [XmlRpcMethod("VTPM.destroy")]
+        Response<string>
+        vtpm_destroy(string session, string _vtpm);
+
+        [XmlRpcMethod("Async.VTPM.destroy")]
+        Response<string>
+        async_vtpm_destroy(string session, string _vtpm);
+
+        [XmlRpcMethod("VTPM.get_all")]
+        Response<string []>
+        vtpm_get_all(string session);
 
         [XmlRpcMethod("VTPM.get_all_records")]
         Response<Object>
@@ -9527,6 +9543,9 @@ namespace XenAPI
         public string uuid;
         public string VM;
         public string backend;
+        public string persistence_backend;
+        public bool is_unique;
+        public bool is_protected;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
