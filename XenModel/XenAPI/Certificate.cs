@@ -228,7 +228,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the name field of the given Certificate.
-        /// First published in Unreleased.
+        /// First published in 1.294.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_certificate">The opaque_ref of the given certificate</param>
@@ -242,7 +242,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the type field of the given Certificate.
-        /// First published in Unreleased.
+        /// First published in 1.294.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_certificate">The opaque_ref of the given certificate</param>
@@ -355,7 +355,7 @@ namespace XenAPI
 
         /// <summary>
         /// The name of the certificate, only present on certificates of type 'ca'
-        /// First published in Unreleased.
+        /// First published in 1.294.0.
         /// </summary>
         public virtual string name
         {
@@ -373,7 +373,7 @@ namespace XenAPI
 
         /// <summary>
         /// The type of the certificate, either 'ca', 'host' or 'host_internal'
-        /// First published in Unreleased.
+        /// First published in 1.294.0.
         /// </summary>
         [JsonConverter(typeof(certificate_typeConverter))]
         public virtual certificate_type type

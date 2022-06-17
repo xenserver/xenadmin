@@ -534,13 +534,13 @@ namespace XenAPI
                 {
                     Pool.set_live_patching_disabled(session, opaqueRef, _live_patching_disabled);
                 }
-                if (!Helper.AreEqual2(_uefi_certificates, server._uefi_certificates))
-                {
-                    Pool.set_uefi_certificates(session, opaqueRef, _uefi_certificates);
-                }
                 if (!Helper.AreEqual2(_is_psr_pending, server._is_psr_pending))
                 {
                     Pool.set_is_psr_pending(session, opaqueRef, _is_psr_pending);
+                }
+                if (!Helper.AreEqual2(_uefi_certificates, server._uefi_certificates))
+                {
+                    Pool.set_uefi_certificates(session, opaqueRef, _uefi_certificates);
                 }
 
                 return null;
@@ -886,11 +886,11 @@ namespace XenAPI
         /// <summary>
         /// Get the wlb_verify_cert field of the given pool.
         /// First published in XenServer 5.5.
-        /// Deprecated since Unreleased.
+        /// Deprecated since 1.290.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
-        [Deprecated("Unreleased")]
+        [Deprecated("1.290.0")]
         public static bool get_wlb_verify_cert(Session session, string _pool)
         {
             if (session.JsonRpcClient != null)
@@ -1113,7 +1113,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the tls_verification_enabled field of the given pool.
-        /// First published in Unreleased.
+        /// First published in 1.290.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -1127,7 +1127,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the repositories field of the given pool.
-        /// First published in Unreleased.
+        /// First published in 1.301.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -1141,7 +1141,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the client_certificate_auth_enabled field of the given pool.
-        /// First published in Unreleased.
+        /// First published in 1.318.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -1155,7 +1155,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the client_certificate_auth_name field of the given pool.
-        /// First published in Unreleased.
+        /// First published in 1.318.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -1169,7 +1169,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the repository_proxy_url field of the given pool.
-        /// First published in Unreleased.
+        /// First published in 21.3.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -1183,7 +1183,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the repository_proxy_username field of the given pool.
-        /// First published in Unreleased.
+        /// First published in 21.3.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -1486,12 +1486,12 @@ namespace XenAPI
         /// <summary>
         /// Set the wlb_verify_cert field of the given pool.
         /// First published in XenServer 5.5.
-        /// Deprecated since Unreleased.
+        /// Deprecated since 1.290.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
         /// <param name="_wlb_verify_cert">New value to set</param>
-        [Deprecated("Unreleased")]
+        [Deprecated("1.290.0")]
         public static void set_wlb_verify_cert(Session session, string _pool, bool _wlb_verify_cert)
         {
             if (session.JsonRpcClient != null)
@@ -1528,21 +1528,6 @@ namespace XenAPI
                 session.JsonRpcClient.pool_set_live_patching_disabled(session.opaque_ref, _pool, _live_patching_disabled);
             else
                 session.XmlRpcProxy.pool_set_live_patching_disabled(session.opaque_ref, _pool ?? "", _live_patching_disabled).parse();
-        }
-
-        /// <summary>
-        /// Set the uefi_certificates field of the given pool.
-        /// First published in Citrix Hypervisor 8.1.
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_pool">The opaque_ref of the given pool</param>
-        /// <param name="_uefi_certificates">New value to set</param>
-        public static void set_uefi_certificates(Session session, string _pool, string _uefi_certificates)
-        {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.pool_set_uefi_certificates(session.opaque_ref, _pool, _uefi_certificates);
-            else
-                session.XmlRpcProxy.pool_set_uefi_certificates(session.opaque_ref, _pool ?? "", _uefi_certificates ?? "").parse();
         }
 
         /// <summary>
@@ -2296,12 +2281,12 @@ namespace XenAPI
         /// <summary>
         /// Install a TLS CA certificate, pool-wide.
         /// First published in XenServer 5.5.
-        /// Deprecated since Unreleased.
+        /// Deprecated since 1.290.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_name">A name to give the certificate</param>
         /// <param name="_cert">The certificate in PEM format</param>
-        [Deprecated("Unreleased")]
+        [Deprecated("1.290.0")]
         public static void certificate_install(Session session, string _name, string _cert)
         {
             if (session.JsonRpcClient != null)
@@ -2313,12 +2298,12 @@ namespace XenAPI
         /// <summary>
         /// Install a TLS CA certificate, pool-wide.
         /// First published in XenServer 5.5.
-        /// Deprecated since Unreleased.
+        /// Deprecated since 1.290.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_name">A name to give the certificate</param>
         /// <param name="_cert">The certificate in PEM format</param>
-        [Deprecated("Unreleased")]
+        [Deprecated("1.290.0")]
         public static XenRef<Task> async_certificate_install(Session session, string _name, string _cert)
         {
           if (session.JsonRpcClient != null)
@@ -2330,11 +2315,11 @@ namespace XenAPI
         /// <summary>
         /// Remove a pool-wide TLS CA certificate.
         /// First published in XenServer 5.5.
-        /// Deprecated since Unreleased.
+        /// Deprecated since 1.290.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_name">The certificate name</param>
-        [Deprecated("Unreleased")]
+        [Deprecated("1.290.0")]
         public static void certificate_uninstall(Session session, string _name)
         {
             if (session.JsonRpcClient != null)
@@ -2346,11 +2331,11 @@ namespace XenAPI
         /// <summary>
         /// Remove a pool-wide TLS CA certificate.
         /// First published in XenServer 5.5.
-        /// Deprecated since Unreleased.
+        /// Deprecated since 1.290.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_name">The certificate name</param>
-        [Deprecated("Unreleased")]
+        [Deprecated("1.290.0")]
         public static XenRef<Task> async_certificate_uninstall(Session session, string _name)
         {
           if (session.JsonRpcClient != null)
@@ -2362,10 +2347,10 @@ namespace XenAPI
         /// <summary>
         /// List the names of all installed TLS CA certificates.
         /// First published in XenServer 5.5.
-        /// Deprecated since Unreleased.
+        /// Deprecated since 1.290.0.
         /// </summary>
         /// <param name="session">The session</param>
-        [Deprecated("Unreleased")]
+        [Deprecated("1.290.0")]
         public static string[] certificate_list(Session session)
         {
             if (session.JsonRpcClient != null)
@@ -2377,10 +2362,10 @@ namespace XenAPI
         /// <summary>
         /// List the names of all installed TLS CA certificates.
         /// First published in XenServer 5.5.
-        /// Deprecated since Unreleased.
+        /// Deprecated since 1.290.0.
         /// </summary>
         /// <param name="session">The session</param>
-        [Deprecated("Unreleased")]
+        [Deprecated("1.290.0")]
         public static XenRef<Task> async_certificate_list(Session session)
         {
           if (session.JsonRpcClient != null)
@@ -2391,7 +2376,7 @@ namespace XenAPI
 
         /// <summary>
         /// Install a TLS CA certificate, pool-wide.
-        /// First published in Unreleased.
+        /// First published in 1.290.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_name">A name to give the certificate</param>
@@ -2406,7 +2391,7 @@ namespace XenAPI
 
         /// <summary>
         /// Install a TLS CA certificate, pool-wide.
-        /// First published in Unreleased.
+        /// First published in 1.290.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_name">A name to give the certificate</param>
@@ -2421,7 +2406,7 @@ namespace XenAPI
 
         /// <summary>
         /// Remove a pool-wide TLS CA certificate.
-        /// First published in Unreleased.
+        /// First published in 1.290.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_name">The certificate name</param>
@@ -2435,7 +2420,7 @@ namespace XenAPI
 
         /// <summary>
         /// Remove a pool-wide TLS CA certificate.
-        /// First published in Unreleased.
+        /// First published in 1.290.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_name">The certificate name</param>
@@ -2559,7 +2544,7 @@ namespace XenAPI
 
         /// <summary>
         /// Enable TLS server certificate verification
-        /// First published in Unreleased.
+        /// First published in 1.290.0.
         /// </summary>
         /// <param name="session">The session</param>
         public static void enable_tls_verification(Session session)
@@ -2995,7 +2980,7 @@ namespace XenAPI
 
         /// <summary>
         /// Set enabled set of repositories
-        /// First published in Unreleased.
+        /// First published in 1.301.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -3010,7 +2995,7 @@ namespace XenAPI
 
         /// <summary>
         /// Set enabled set of repositories
-        /// First published in Unreleased.
+        /// First published in 1.301.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -3025,7 +3010,7 @@ namespace XenAPI
 
         /// <summary>
         /// Add a repository to the enabled set
-        /// First published in Unreleased.
+        /// First published in 1.301.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -3040,7 +3025,7 @@ namespace XenAPI
 
         /// <summary>
         /// Add a repository to the enabled set
-        /// First published in Unreleased.
+        /// First published in 1.301.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -3055,7 +3040,7 @@ namespace XenAPI
 
         /// <summary>
         /// Remove a repository from the enabled set
-        /// First published in Unreleased.
+        /// First published in 1.301.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -3070,7 +3055,7 @@ namespace XenAPI
 
         /// <summary>
         /// Remove a repository from the enabled set
-        /// First published in Unreleased.
+        /// First published in 1.301.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -3085,7 +3070,7 @@ namespace XenAPI
 
         /// <summary>
         /// Sync with the enabled repository
-        /// First published in Unreleased.
+        /// First published in 1.329.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -3102,7 +3087,7 @@ namespace XenAPI
 
         /// <summary>
         /// Sync with the enabled repository
-        /// First published in Unreleased.
+        /// First published in 1.329.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -3119,7 +3104,7 @@ namespace XenAPI
 
         /// <summary>
         /// Check if the pool is ready to be updated. If not, report the reasons.
-        /// First published in Unreleased.
+        /// First published in 1.304.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -3134,7 +3119,7 @@ namespace XenAPI
 
         /// <summary>
         /// Check if the pool is ready to be updated. If not, report the reasons.
-        /// First published in Unreleased.
+        /// First published in 1.304.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -3149,7 +3134,7 @@ namespace XenAPI
 
         /// <summary>
         /// Enable client certificate authentication on the pool
-        /// First published in Unreleased.
+        /// First published in 1.318.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -3164,7 +3149,7 @@ namespace XenAPI
 
         /// <summary>
         /// Enable client certificate authentication on the pool
-        /// First published in Unreleased.
+        /// First published in 1.318.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -3179,7 +3164,7 @@ namespace XenAPI
 
         /// <summary>
         /// Disable client certificate authentication on the pool
-        /// First published in Unreleased.
+        /// First published in 1.318.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -3193,7 +3178,7 @@ namespace XenAPI
 
         /// <summary>
         /// Disable client certificate authentication on the pool
-        /// First published in Unreleased.
+        /// First published in 1.318.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -3207,7 +3192,7 @@ namespace XenAPI
 
         /// <summary>
         /// Configure proxy for RPM package repositories.
-        /// First published in Unreleased.
+        /// First published in 21.3.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -3224,7 +3209,7 @@ namespace XenAPI
 
         /// <summary>
         /// Configure proxy for RPM package repositories.
-        /// First published in Unreleased.
+        /// First published in 21.3.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -3241,7 +3226,7 @@ namespace XenAPI
 
         /// <summary>
         /// Disable the proxy for RPM package repositories.
-        /// First published in Unreleased.
+        /// First published in 21.4.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -3255,7 +3240,7 @@ namespace XenAPI
 
         /// <summary>
         /// Disable the proxy for RPM package repositories.
-        /// First published in Unreleased.
+        /// First published in 21.4.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -3265,6 +3250,36 @@ namespace XenAPI
               return session.JsonRpcClient.async_pool_disable_repository_proxy(session.opaque_ref, _pool);
           else
               return XenRef<Task>.Create(session.XmlRpcProxy.async_pool_disable_repository_proxy(session.opaque_ref, _pool ?? "").parse());
+        }
+
+        /// <summary>
+        /// Sets the UEFI certificates for a pool and all its hosts
+        /// First published in 22.16.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        /// <param name="_value">The certificates to apply to the pool and its hosts</param>
+        public static void set_uefi_certificates(Session session, string _pool, string _value)
+        {
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.pool_set_uefi_certificates(session.opaque_ref, _pool, _value);
+            else
+                session.XmlRpcProxy.pool_set_uefi_certificates(session.opaque_ref, _pool ?? "", _value ?? "").parse();
+        }
+
+        /// <summary>
+        /// Sets the UEFI certificates for a pool and all its hosts
+        /// First published in 22.16.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        /// <param name="_value">The certificates to apply to the pool and its hosts</param>
+        public static XenRef<Task> async_set_uefi_certificates(Session session, string _pool, string _value)
+        {
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_pool_set_uefi_certificates(session.opaque_ref, _pool, _value);
+          else
+              return XenRef<Task>.Create(session.XmlRpcProxy.async_pool_set_uefi_certificates(session.opaque_ref, _pool ?? "", _value ?? "").parse());
         }
 
         /// <summary>
@@ -3983,7 +3998,7 @@ namespace XenAPI
 
         /// <summary>
         /// True iff TLS certificate verification is enabled
-        /// First published in Unreleased.
+        /// First published in 1.290.0.
         /// </summary>
         public virtual bool tls_verification_enabled
         {
@@ -4001,7 +4016,7 @@ namespace XenAPI
 
         /// <summary>
         /// The set of currently enabled repositories
-        /// First published in Unreleased.
+        /// First published in 1.301.0.
         /// </summary>
         [JsonConverter(typeof(XenRefListConverter<Repository>))]
         public virtual List<XenRef<Repository>> repositories
@@ -4020,7 +4035,7 @@ namespace XenAPI
 
         /// <summary>
         /// True if authentication by TLS client certificates is enabled
-        /// First published in Unreleased.
+        /// First published in 1.318.0.
         /// </summary>
         public virtual bool client_certificate_auth_enabled
         {
@@ -4038,7 +4053,7 @@ namespace XenAPI
 
         /// <summary>
         /// The name (CN/SAN) that an incoming client certificate must have to allow authentication
-        /// First published in Unreleased.
+        /// First published in 1.318.0.
         /// </summary>
         public virtual string client_certificate_auth_name
         {
@@ -4056,7 +4071,7 @@ namespace XenAPI
 
         /// <summary>
         /// Url of the proxy used in syncing with the enabled repositories
-        /// First published in Unreleased.
+        /// First published in 21.3.0.
         /// </summary>
         public virtual string repository_proxy_url
         {
@@ -4074,7 +4089,7 @@ namespace XenAPI
 
         /// <summary>
         /// Username for the authentication of the proxy used in syncing with the enabled repositories
-        /// First published in Unreleased.
+        /// First published in 21.3.0.
         /// </summary>
         public virtual string repository_proxy_username
         {

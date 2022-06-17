@@ -1156,6 +1156,34 @@ namespace XenAPI
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
+        public static XenRef<VDI> snapshot(Session session, string _vdi)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_snapshot(session.opaque_ref, _vdi);
+            else
+                return XenRef<VDI>.Create(session.XmlRpcProxy.vdi_snapshot(session.opaque_ref, _vdi ?? "").parse());
+        }
+
+        /// <summary>
+        /// Take a read-only snapshot of the VDI, returning a reference to the snapshot. If any driver_params are specified then these are passed through to the storage-specific substrate driver that takes the snapshot. NB the snapshot lives in the same Storage Repository as its parent.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vdi">The opaque_ref of the given vdi</param>
+        public static XenRef<Task> async_snapshot(Session session, string _vdi)
+        {
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vdi_snapshot(session.opaque_ref, _vdi);
+          else
+              return XenRef<Task>.Create(session.XmlRpcProxy.async_vdi_snapshot(session.opaque_ref, _vdi ?? "").parse());
+        }
+
+        /// <summary>
+        /// Take a read-only snapshot of the VDI, returning a reference to the snapshot. If any driver_params are specified then these are passed through to the storage-specific substrate driver that takes the snapshot. NB the snapshot lives in the same Storage Repository as its parent.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vdi">The opaque_ref of the given vdi</param>
         /// <param name="_driver_params">Optional parameters that can be passed through to backend driver in order to specify storage-type-specific snapshot options First published in XenServer 4.1.</param>
         public static XenRef<VDI> snapshot(Session session, string _vdi, Dictionary<string, string> _driver_params)
         {
@@ -1178,6 +1206,34 @@ namespace XenAPI
               return session.JsonRpcClient.async_vdi_snapshot(session.opaque_ref, _vdi, _driver_params);
           else
               return XenRef<Task>.Create(session.XmlRpcProxy.async_vdi_snapshot(session.opaque_ref, _vdi ?? "", Maps.convert_to_proxy_string_string(_driver_params)).parse());
+        }
+
+        /// <summary>
+        /// Take an exact copy of the VDI and return a reference to the new disk. If any driver_params are specified then these are passed through to the storage-specific substrate driver that implements the clone operation. NB the clone lives in the same Storage Repository as its parent.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vdi">The opaque_ref of the given vdi</param>
+        public static XenRef<VDI> clone(Session session, string _vdi)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_clone(session.opaque_ref, _vdi);
+            else
+                return XenRef<VDI>.Create(session.XmlRpcProxy.vdi_clone(session.opaque_ref, _vdi ?? "").parse());
+        }
+
+        /// <summary>
+        /// Take an exact copy of the VDI and return a reference to the new disk. If any driver_params are specified then these are passed through to the storage-specific substrate driver that implements the clone operation. NB the clone lives in the same Storage Repository as its parent.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vdi">The opaque_ref of the given vdi</param>
+        public static XenRef<Task> async_clone(Session session, string _vdi)
+        {
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vdi_clone(session.opaque_ref, _vdi);
+          else
+              return XenRef<Task>.Create(session.XmlRpcProxy.async_vdi_clone(session.opaque_ref, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -1268,6 +1324,52 @@ namespace XenAPI
               return session.JsonRpcClient.async_vdi_resize_online(session.opaque_ref, _vdi, _size);
           else
               return XenRef<Task>.Create(session.XmlRpcProxy.async_vdi_resize_online(session.opaque_ref, _vdi ?? "", _size.ToString()).parse());
+        }
+
+        /// <summary>
+        /// Create a new VDI record in the database only
+        /// First published in XenServer 4.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_uuid">The uuid of the disk to introduce</param>
+        /// <param name="_name_label">The name of the disk record</param>
+        /// <param name="_name_description">The description of the disk record</param>
+        /// <param name="_sr">The SR that the VDI is in</param>
+        /// <param name="_type">The type of the VDI</param>
+        /// <param name="_sharable">true if this disk may be shared</param>
+        /// <param name="_read_only">true if this disk may ONLY be mounted read-only</param>
+        /// <param name="_other_config">additional configuration</param>
+        /// <param name="_location">location information</param>
+        /// <param name="_xenstore_data">Data to insert into xenstore</param>
+        public static XenRef<VDI> introduce(Session session, string _uuid, string _name_label, string _name_description, string _sr, vdi_type _type, bool _sharable, bool _read_only, Dictionary<string, string> _other_config, string _location, Dictionary<string, string> _xenstore_data)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_introduce(session.opaque_ref, _uuid, _name_label, _name_description, _sr, _type, _sharable, _read_only, _other_config, _location, _xenstore_data);
+            else
+                return XenRef<VDI>.Create(session.XmlRpcProxy.vdi_introduce(session.opaque_ref, _uuid ?? "", _name_label ?? "", _name_description ?? "", _sr ?? "", vdi_type_helper.ToString(_type), _sharable, _read_only, Maps.convert_to_proxy_string_string(_other_config), _location ?? "", Maps.convert_to_proxy_string_string(_xenstore_data)).parse());
+        }
+
+        /// <summary>
+        /// Create a new VDI record in the database only
+        /// First published in XenServer 4.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_uuid">The uuid of the disk to introduce</param>
+        /// <param name="_name_label">The name of the disk record</param>
+        /// <param name="_name_description">The description of the disk record</param>
+        /// <param name="_sr">The SR that the VDI is in</param>
+        /// <param name="_type">The type of the VDI</param>
+        /// <param name="_sharable">true if this disk may be shared</param>
+        /// <param name="_read_only">true if this disk may ONLY be mounted read-only</param>
+        /// <param name="_other_config">additional configuration</param>
+        /// <param name="_location">location information</param>
+        /// <param name="_xenstore_data">Data to insert into xenstore</param>
+        public static XenRef<Task> async_introduce(Session session, string _uuid, string _name_label, string _name_description, string _sr, vdi_type _type, bool _sharable, bool _read_only, Dictionary<string, string> _other_config, string _location, Dictionary<string, string> _xenstore_data)
+        {
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vdi_introduce(session.opaque_ref, _uuid, _name_label, _name_description, _sr, _type, _sharable, _read_only, _other_config, _location, _xenstore_data);
+          else
+              return XenRef<Task>.Create(session.XmlRpcProxy.async_vdi_introduce(session.opaque_ref, _uuid ?? "", _name_label ?? "", _name_description ?? "", _sr ?? "", vdi_type_helper.ToString(_type), _sharable, _read_only, Maps.convert_to_proxy_string_string(_other_config), _location ?? "", Maps.convert_to_proxy_string_string(_xenstore_data)).parse());
         }
 
         /// <summary>

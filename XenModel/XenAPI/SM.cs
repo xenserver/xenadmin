@@ -415,7 +415,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the capabilities field of the given SM.
-        /// First published in XenServer 4.0.
+        /// First published in XenServer 4.1.
         /// Deprecated since XenServer 6.2.
         /// </summary>
         /// <param name="session">The session</param>
@@ -713,6 +713,7 @@ namespace XenAPI
 
         /// <summary>
         /// capabilities of the SM plugin
+        /// First published in XenServer 4.1.
         /// </summary>
         public virtual string[] capabilities
         {

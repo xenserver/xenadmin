@@ -268,7 +268,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the is_internal field of the given role.
-        /// First published in Unreleased.
+        /// First published in 22.5.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_role">The opaque_ref of the given role</param>
@@ -433,7 +433,7 @@ namespace XenAPI
 
         /// <summary>
         /// Indicates whether the role is only to be assigned internally by xapi, or can be used by clients
-        /// First published in Unreleased.
+        /// First published in 22.5.0.
         /// </summary>
         public virtual bool is_internal
         {

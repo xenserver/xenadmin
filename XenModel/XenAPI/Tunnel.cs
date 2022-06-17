@@ -289,7 +289,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the protocol field of the given tunnel.
-        /// First published in Unreleased.
+        /// First published in 1.250.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_tunnel">The opaque_ref of the given tunnel</param>
@@ -395,7 +395,7 @@ namespace XenAPI
 
         /// <summary>
         /// Set the protocol field of the given tunnel.
-        /// First published in Unreleased.
+        /// First published in 1.250.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_tunnel">The opaque_ref of the given tunnel</param>
@@ -615,7 +615,7 @@ namespace XenAPI
 
         /// <summary>
         /// The protocol used for tunneling (either GRE or VxLAN)
-        /// First published in Unreleased.
+        /// First published in 1.250.0.
         /// </summary>
         [JsonConverter(typeof(tunnel_protocolConverter))]
         public virtual tunnel_protocol protocol

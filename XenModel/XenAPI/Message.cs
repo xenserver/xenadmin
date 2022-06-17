@@ -218,7 +218,7 @@ namespace XenAPI
 
         /// <summary>
         /// 
-        /// First published in Unreleased.
+        /// Experimental. First published in 22.19.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_messages">Messages to destroy</param>
@@ -232,16 +232,16 @@ namespace XenAPI
 
         /// <summary>
         /// 
-        /// Experimental. First published in Unreleased.
+        /// Experimental. First published in 22.19.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_messages">Messages to destroy</param>
         public static XenRef<Task> async_destroy_many(Session session, List<XenRef<Message>> _messages)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.async_message_destroy_many(session.opaque_ref, _messages);
-            else
-                return XenRef<Task>.Create(session.XmlRpcProxy.async_message_destroy_many(session.opaque_ref, _messages == null ? new string[] {} : Helper.RefListToStringArray(_messages)).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_message_destroy_many(session.opaque_ref, _messages);
+          else
+              return XenRef<Task>.Create(session.XmlRpcProxy.async_message_destroy_many(session.opaque_ref, _messages == null ? new string[] {} : Helper.RefListToStringArray(_messages)).parse());
         }
 
         /// <summary>

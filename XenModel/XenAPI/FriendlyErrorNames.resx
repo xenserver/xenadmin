@@ -126,6 +126,9 @@
   <data name="APPLY_GUIDANCE_FAILED" xml:space="preserve">
     <value>Failed to apply guidance on a host after updating.</value>
   </data>
+  <data name="APPLY_LIVEPATCH_FAILED" xml:space="preserve">
+    <value>Failed to apply a livepatch.</value>
+  </data>
   <data name="APPLY_UPDATES_FAILED" xml:space="preserve">
     <value>Failed to apply updates on a host.</value>
   </data>
@@ -641,6 +644,9 @@
   </data>
   <data name="INVALID_FEATURE_STRING" xml:space="preserve">
     <value>The given feature string is not valid.</value>
+  </data>
+  <data name="INVALID_GPGKEY_PATH" xml:space="preserve">
+    <value>The GPG public key file name in the repository is invalid.</value>
   </data>
   <data name="INVALID_IP_ADDRESS_SPECIFIED" xml:space="preserve">
     <value>A required parameter contained an invalid IP address</value>
