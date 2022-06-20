@@ -82,19 +82,20 @@ namespace XenAdmin.Core
 
         /// <summary>
         /// If AutomaticCheck is enabled it checks for updates regardless the
-        /// value of the parameter force. If AutomaticCheck is disabled it checks
-        /// for all update types if force is true (this normally means user requested).
+        /// value of the parameter userRequested. If AutomaticCheck is disabled it checks
+        /// for all update types if userRequested is true.
         /// </summary>
-        public static void CheckForUpdates(bool force = false)
+        public static void CheckForUpdates(bool userRequested = false)
         {
             if (Helpers.CommonCriteriaCertificationRelease)
                 return;
 
-            if (Properties.Settings.Default.AllowXenCenterUpdates || force)
+            if (Properties.Settings.Default.AllowXenCenterUpdates || userRequested)
             {
                 string userAgent = $"{BrandManager.BrandConsole}/{BrandManager.XenCenterVersion}.{Program.Version.Revision} ({IntPtr.Size * 8}-bit)";
 
-                var action = new DownloadUpdatesXmlAction(Properties.Settings.Default.AllowXenCenterUpdates || force, false, false, userAgent);
+                var action = new DownloadUpdatesXmlAction(Properties.Settings.Default.AllowXenCenterUpdates || userRequested,
+                    false, false, userAgent, !userRequested);
                 action.Completed += actionCompleted;
 
                 CheckForUpdatesStarted?.Invoke();

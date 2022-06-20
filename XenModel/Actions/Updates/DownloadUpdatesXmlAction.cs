@@ -64,8 +64,8 @@ namespace XenAdmin.Actions
         private readonly bool _checkForPatches;
         private readonly string _userAgent;
 
-        public DownloadUpdatesXmlAction(bool checkForXenCenter, bool checkForServerVersion, bool checkForPatches, string userAgent)
-            : base(null, string.Empty, string.Empty, false)
+        public DownloadUpdatesXmlAction(bool checkForXenCenter, bool checkForServerVersion, bool checkForPatches, string userAgent, bool suppressHistory)
+            : base(null, string.Empty, string.Empty, suppressHistory)
         {
             Debug.Assert(!string.IsNullOrWhiteSpace(userAgent));
 
@@ -105,6 +105,10 @@ namespace XenAdmin.Actions
                 {
                     Description = Messages.AVAILABLE_UPDATES_INTERNAL_ERROR;
                 }
+
+                //if we had originally wanted it to be hidden, make it visible now so the error is shown
+                if (SuppressHistory)
+                    SuppressHistory = false;
 
                 throw;
             }

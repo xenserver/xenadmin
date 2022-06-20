@@ -219,6 +219,7 @@ namespace XenAdmin.Actions
         private bool _isCompleted;
         private int _percentComplete;
         private Exception _exception;
+        private bool _suppressHistory;
 
         #region Events
         public event Action<ActionBase> Changed;
@@ -236,8 +237,19 @@ namespace XenAdmin.Actions
             _description = description;
             log.Debug(_description);
 
-            if (!suppressHistory)
-                NewAction?.Invoke(this);
+            SuppressHistory = suppressHistory;
+        }
+
+        protected bool SuppressHistory
+        {
+            get => _suppressHistory;
+            set
+            {
+                _suppressHistory = value;
+
+                if (!_suppressHistory)
+                    NewAction?.Invoke(this);
+            }
         }
 
         /// <remarks>

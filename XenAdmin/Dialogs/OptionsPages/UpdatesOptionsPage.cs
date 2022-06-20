@@ -72,7 +72,9 @@ namespace XenAdmin.Dialogs.OptionsPages
             if (checkXenCenterUpdatesChanged)
             {
                 Properties.Settings.Default.AllowXenCenterUpdates = AllowXenCenterUpdatesCheckBox.Checked;
-                Updates.CheckForUpdates();
+
+                if (Properties.Settings.Default.AllowXenCenterUpdates)
+                    Updates.CheckForUpdates(true);
             }
         }
 
