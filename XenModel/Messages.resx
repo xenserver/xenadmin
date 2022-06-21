@@ -1970,7 +1970,7 @@ Note that if RBAC is enabled, only alerts which you have privileges to dismiss w
     <value>&amp;Show internet proxy settings</value>
   </data>
   <data name="ALLOWED_UPDATES_DIALOG_MESSAGE" xml:space="preserve">
-    <value>Would you like {0} to periodically check the internet for new versions of {0} and {1}?</value>
+    <value>Would you like {0} to periodically check the internet for new versions of the application?</value>
   </data>
   <data name="ALREADY_ATTACHED_ELSEWHERE" xml:space="preserve">
     <value>The SR '{0}' is currently attached elsewhere. Do you want to attach it to '{1}'? 
@@ -2121,26 +2121,17 @@ Warning: you must ensure that the SR is not in use by any server not connected t
   <data name="AVAILABLE" xml:space="preserve">
     <value>available</value>
   </data>
-  <data name="AVAILABLE_UPDATES_DOWNLOAD_TEXT" xml:space="preserve">
-    <value>Download</value>
+  <data name="AVAILABLE_UPDATES_CHECKING" xml:space="preserve">
+    <value>Checking for {0} updates</value>
   </data>
   <data name="AVAILABLE_UPDATES_ERROR" xml:space="preserve">
     <value>An error occurred when searching for updates: {0}</value>
-  </data>
-  <data name="AVAILABLE_UPDATES_FOUND" xml:space="preserve">
-    <value>The following software updates for your system are available online.</value>
   </data>
   <data name="AVAILABLE_UPDATES_INTERNAL_ERROR" xml:space="preserve">
     <value>There was an internal error when searching for available updates. Please see the logs for more information.</value>
   </data>
   <data name="AVAILABLE_UPDATES_NETWORK_ERROR" xml:space="preserve">
     <value>There was a network error when searching for available updates. Please see the logs for more information.</value>
-  </data>
-  <data name="AVAILABLE_UPDATES_NOT_FOUND" xml:space="preserve">
-    <value>No updates found.</value>
-  </data>
-  <data name="AVAILABLE_UPDATES_SEARCHING" xml:space="preserve">
-    <value>Searching for updates...</value>
   </data>
   <data name="BACKINGUP_HOST" xml:space="preserve">
     <value>Backing up server '{0}'</value>
@@ -2717,9 +2708,6 @@ If you are upgrading to {0} {1} and above, it is recommended that you first inst
   </data>
   <data name="CERTIFICATE_VERIFICATION_KEY" xml:space="preserve">
     <value>Certificate Verification</value>
-  </data>
-  <data name="CFU_STATUS_CHECK_DESCRIPTION" xml:space="preserve">
-    <value>Ability to download updates</value>
   </data>
   <data name="CHANGE" xml:space="preserve">
     <value>Change...</value>
@@ -10068,15 +10056,6 @@ Review these settings, then click Previous if you need to change anything. Other
   <data name="NOTIFICATIONS_SUBMODE_EVENTS_UNREAD_ONE" xml:space="preserve">
     <value>Events (1 error)</value>
   </data>
-  <data name="NOTIFICATIONS_SUBMODE_UPDATES_READ" xml:space="preserve">
-    <value>Updates</value>
-  </data>
-  <data name="NOTIFICATIONS_SUBMODE_UPDATES_STATUS" xml:space="preserve">
-    <value>Updates: {0}</value>
-  </data>
-  <data name="NOTIFICATIONS_SUBMODE_UPDATES_UNREAD" xml:space="preserve">
-    <value>Updates ({0})</value>
-  </data>
   <data name="NOTIFICATIONS_TOTAL" xml:space="preserve">
     <value>Notifications ({0})</value>
   </data>
@@ -11477,17 +11456,11 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   <data name="RESOLVED_AS" xml:space="preserve">
     <value>Resolved as {0}</value>
   </data>
-  <data name="RESTORE_DISMISSED_UPDATES" xml:space="preserve">
-    <value>Restore dismissed updates</value>
-  </data>
   <data name="RESTORE_FROM_BACKUP_FINALIZE" xml:space="preserve">
     <value>Backup file loaded to server '{0}'. Refer to the "{1} Administrator's Guide" for instructions on how to complete the restore procedure.</value>
   </data>
   <data name="RESTORE_HOST" xml:space="preserve">
     <value>Restore From Backup...</value>
-  </data>
-  <data name="RESTORING" xml:space="preserve">
-    <value>Restoring...</value>
   </data>
   <data name="RESTORING_HOST" xml:space="preserve">
     <value>Restoring server '{0}'</value>

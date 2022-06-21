@@ -5387,7 +5387,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Would you like {0} to periodically check the internet for new versions of {0} and {1}?.
+        ///   Looks up a localized string similar to Would you like {0} to periodically check the internet for new versions of the application?.
         /// </summary>
         public static string ALLOWED_UPDATES_DIALOG_MESSAGE {
             get {
@@ -5827,11 +5827,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Download.
+        ///   Looks up a localized string similar to Checking for {0} updates.
         /// </summary>
-        public static string AVAILABLE_UPDATES_DOWNLOAD_TEXT {
+        public static string AVAILABLE_UPDATES_CHECKING {
             get {
-                return ResourceManager.GetString("AVAILABLE_UPDATES_DOWNLOAD_TEXT", resourceCulture);
+                return ResourceManager.GetString("AVAILABLE_UPDATES_CHECKING", resourceCulture);
             }
         }
         
@@ -5841,15 +5841,6 @@ namespace XenAdmin {
         public static string AVAILABLE_UPDATES_ERROR {
             get {
                 return ResourceManager.GetString("AVAILABLE_UPDATES_ERROR", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The following software updates for your system are available online..
-        /// </summary>
-        public static string AVAILABLE_UPDATES_FOUND {
-            get {
-                return ResourceManager.GetString("AVAILABLE_UPDATES_FOUND", resourceCulture);
             }
         }
         
@@ -5868,24 +5859,6 @@ namespace XenAdmin {
         public static string AVAILABLE_UPDATES_NETWORK_ERROR {
             get {
                 return ResourceManager.GetString("AVAILABLE_UPDATES_NETWORK_ERROR", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to No updates found..
-        /// </summary>
-        public static string AVAILABLE_UPDATES_NOT_FOUND {
-            get {
-                return ResourceManager.GetString("AVAILABLE_UPDATES_NOT_FOUND", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Searching for updates....
-        /// </summary>
-        public static string AVAILABLE_UPDATES_SEARCHING {
-            get {
-                return ResourceManager.GetString("AVAILABLE_UPDATES_SEARCHING", resourceCulture);
             }
         }
         
@@ -7518,15 +7491,6 @@ namespace XenAdmin {
         public static string CERTIFICATE_VERIFICATION_KEY {
             get {
                 return ResourceManager.GetString("CERTIFICATE_VERIFICATION_KEY", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Ability to download updates.
-        /// </summary>
-        public static string CFU_STATUS_CHECK_DESCRIPTION {
-            get {
-                return ResourceManager.GetString("CFU_STATUS_CHECK_DESCRIPTION", resourceCulture);
             }
         }
         
@@ -28959,33 +28923,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Updates.
-        /// </summary>
-        public static string NOTIFICATIONS_SUBMODE_UPDATES_READ {
-            get {
-                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_UPDATES_READ", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Updates: {0}.
-        /// </summary>
-        public static string NOTIFICATIONS_SUBMODE_UPDATES_STATUS {
-            get {
-                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_UPDATES_STATUS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Updates ({0}).
-        /// </summary>
-        public static string NOTIFICATIONS_SUBMODE_UPDATES_UNREAD {
-            get {
-                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_UPDATES_UNREAD", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Notifications ({0}).
         /// </summary>
         public static string NOTIFICATIONS_TOTAL {
@@ -33087,15 +33024,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Restore dismissed updates.
-        /// </summary>
-        public static string RESTORE_DISMISSED_UPDATES {
-            get {
-                return ResourceManager.GetString("RESTORE_DISMISSED_UPDATES", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Backup file loaded to server &apos;{0}&apos;. Refer to the &quot;{1} Administrator&apos;s Guide&quot; for instructions on how to complete the restore procedure..
         /// </summary>
         public static string RESTORE_FROM_BACKUP_FINALIZE {
@@ -33110,15 +33038,6 @@ namespace XenAdmin {
         public static string RESTORE_HOST {
             get {
                 return ResourceManager.GetString("RESTORE_HOST", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Restoring....
-        /// </summary>
-        public static string RESTORING {
-            get {
-                return ResourceManager.GetString("RESTORING", resourceCulture);
             }
         }
         

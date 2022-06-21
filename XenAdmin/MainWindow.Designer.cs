@@ -74,7 +74,6 @@ namespace XenAdmin
             this.TabPageDockerDetails = new System.Windows.Forms.TabPage();
             this.TabPageUSB = new System.Windows.Forms.TabPage();
             this.alertPage = new XenAdmin.TabPages.AlertSummaryPage();
-            this.updatesPage = new XenAdmin.TabPages.ManageUpdatesPage();
             this.eventsPage = new XenAdmin.TabPages.HistoryPage();
             this.TitleBackPanel = new XenAdmin.Controls.GradientPanel.VerticalGradientPanel();
             this.TitleIcon = new System.Windows.Forms.PictureBox();
@@ -284,8 +283,8 @@ namespace XenAdmin
             this.statusProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLabelErrors = new System.Windows.Forms.ToolStripStatusLabel();
-            this.statusLabelUpdates = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLabelAlerts = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripMenuItemCfu = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -320,7 +319,6 @@ namespace XenAdmin
             this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer1.Panel2.Controls.Add(this.TheTabControl);
             this.splitContainer1.Panel2.Controls.Add(this.alertPage);
-            this.splitContainer1.Panel2.Controls.Add(this.updatesPage);
             this.splitContainer1.Panel2.Controls.Add(this.eventsPage);
             this.splitContainer1.Panel2.Controls.Add(this.TitleBackPanel);
             resources.ApplyResources(this.splitContainer1.Panel2, "splitContainer1.Panel2");
@@ -527,12 +525,6 @@ namespace XenAdmin
             resources.ApplyResources(this.alertPage, "alertPage");
             this.alertPage.BackColor = System.Drawing.SystemColors.Window;
             this.alertPage.Name = "alertPage";
-            // 
-            // updatesPage
-            // 
-            resources.ApplyResources(this.updatesPage, "updatesPage");
-            this.updatesPage.BackColor = System.Drawing.SystemColors.Window;
-            this.updatesPage.Name = "updatesPage";
             // 
             // eventsPage
             // 
@@ -1844,6 +1836,7 @@ namespace XenAdmin
             this.toolStripMenuItem15,
             this.viewApplicationLogToolStripMenuItem,
             this.toolStripMenuItem17,
+            this.toolStripMenuItemCfu,
             this.xenSourceOnTheWebToolStripMenuItem,
             this.xenCenterPluginsOnlineToolStripMenuItem,
             this.toolStripSeparator7,
@@ -1971,7 +1964,6 @@ namespace XenAdmin
             this.statusProgressBar,
             this.statusLabel,
             this.statusLabelErrors,
-            this.statusLabelUpdates,
             this.statusLabelAlerts});
             this.StatusStrip.Name = "StatusStrip";
             this.StatusStrip.ShowItemToolTips = true;
@@ -2003,18 +1995,6 @@ namespace XenAdmin
             this.statusLabelErrors.VisitedLinkColor = System.Drawing.SystemColors.ControlDarkDark;
             this.statusLabelErrors.Click += new System.EventHandler(this.statusLabelErrors_Click);
             // 
-            // statusLabelUpdates
-            // 
-            this.statusLabelUpdates.ActiveLinkColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.statusLabelUpdates.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.statusLabelUpdates.IsLink = true;
-            this.statusLabelUpdates.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.statusLabelUpdates.LinkColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.statusLabelUpdates.Name = "statusLabelUpdates";
-            resources.ApplyResources(this.statusLabelUpdates, "statusLabelUpdates");
-            this.statusLabelUpdates.VisitedLinkColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.statusLabelUpdates.Click += new System.EventHandler(this.statusLabelUpdates_Click);
-            // 
             // statusLabelAlerts
             // 
             this.statusLabelAlerts.ActiveLinkColor = System.Drawing.SystemColors.ControlDarkDark;
@@ -2026,6 +2006,12 @@ namespace XenAdmin
             resources.ApplyResources(this.statusLabelAlerts, "statusLabelAlerts");
             this.statusLabelAlerts.VisitedLinkColor = System.Drawing.SystemColors.ControlDarkDark;
             this.statusLabelAlerts.Click += new System.EventHandler(this.statusLabelAlerts_Click);
+            // 
+            // toolStripMenuItemCfu
+            // 
+            this.toolStripMenuItemCfu.Name = "toolStripMenuItemCfu";
+            resources.ApplyResources(this.toolStripMenuItemCfu, "toolStripMenuItemCfu");
+            this.toolStripMenuItemCfu.Click += new System.EventHandler(this.toolStripMenuItemCfu_Click);
             // 
             // MainWindow
             // 
@@ -2269,7 +2255,6 @@ namespace XenAdmin
         private XenAdmin.Commands.CommandToolStripMenuItem restartToolstackToolStripMenuItem;
         private XenAdmin.Controls.MainWindowControls.NavigationPane navigationPane;
         private XenAdmin.TabPages.AlertSummaryPage alertPage;
-        private XenAdmin.TabPages.ManageUpdatesPage updatesPage;
         private XenAdmin.TabPages.HistoryPage eventsPage;
         private System.Windows.Forms.ToolStripMenuItem customTemplatesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem templatesToolStripMenuItem1;
@@ -2300,7 +2285,6 @@ namespace XenAdmin
         private XenAdmin.Commands.CommandToolStripMenuItem conversionToolStripMenuItem;
         private XenAdmin.Commands.CommandToolStripMenuItem toolStripMenuItemInstallCertificate;
         private System.Windows.Forms.ToolStripStatusLabel statusLabelAlerts;
-        private System.Windows.Forms.ToolStripStatusLabel statusLabelUpdates;
         private System.Windows.Forms.ToolStripStatusLabel statusLabelErrors;
         private XenAdmin.Commands.CommandToolStripMenuItem toolStripMenuItemRotateSecret;
         private XenAdmin.Commands.CommandToolStripMenuItem toolStripMenuItemHaConfigure;
@@ -2312,6 +2296,7 @@ namespace XenAdmin
         private System.Windows.Forms.ToolStripMenuItem updateClientToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem relNotesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem downloadInstallToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemCfu;
     }
 
 }

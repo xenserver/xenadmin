@@ -255,7 +255,7 @@ namespace XenAdmin
             toolStripSeparator7.Visible = xenSourceOnTheWebToolStripMenuItem.Visible = xenCenterPluginsOnlineToolStripMenuItem.Visible = !HiddenFeatures.ToolStripMenuItemHidden;
             healthCheckToolStripMenuItem1.Visible = !HiddenFeatures.HealthCheckHidden && (Registry.GetBrandOverride() == "XenCenter" || BrandManager.BrandConsole == "XenCenter");
 
-            statusLabelAlerts.Visible = statusLabelUpdates.Visible = statusLabelErrors.Visible = false;
+            statusLabelAlerts.Visible = statusLabelErrors.Visible = false;
         }
 
         private void RegisterEvents()
@@ -382,7 +382,7 @@ namespace XenAdmin
         {
             base.OnShown(e);
             TheTabControl.Visible = true;
-            alertPage.Visible = updatesPage.Visible = eventsPage.Visible = false;
+            alertPage.Visible = eventsPage.Visible = false;
             navigationPane.FocusTreeView();
         }
 
@@ -608,8 +608,7 @@ namespace XenAdmin
             if (!Program.RunInAutomatedTestMode && !Helpers.CommonCriteriaCertificationRelease)
             {
                 if (!Properties.Settings.Default.SeenAllowUpdatesDialog)
-                    using (var dlg = new NoIconDialog(string.Format(Messages.ALLOWED_UPDATES_DIALOG_MESSAGE,
-                            BrandManager.BrandConsole, BrandManager.ProductBrand),
+                    using (var dlg = new NoIconDialog(string.Format(Messages.ALLOWED_UPDATES_DIALOG_MESSAGE, BrandManager.BrandConsole),
                         ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
                     {
                         HelpButton = true,
@@ -621,7 +620,6 @@ namespace XenAdmin
                         var result = dlg.ShowDialog(this) == DialogResult.Yes;
 
                         Properties.Settings.Default.AllowXenCenterUpdates = result;
-                        Properties.Settings.Default.AllowXenServerUpdates = result;
                         Properties.Settings.Default.SeenAllowUpdatesDialog = true;
 
                         if (result && dlg.IsCheckBoxChecked)
@@ -640,7 +638,7 @@ namespace XenAdmin
                 CheckForUpdatesTimer.Interval = 1000 * 60 * 60 * 24; // 24 hours
                 CheckForUpdatesTimer.Tick += CheckForUpdatesTimer_Tick;
                 CheckForUpdatesTimer.Start();
-                Updates.CheckForUpdates(false);
+                Updates.CheckForUpdates();
             }
 
             if (!Program.RunInAutomatedTestMode && (Registry.GetBrandOverride() == "XenCenter" || BrandManager.BrandConsole == "XenCenter"))
@@ -656,7 +654,7 @@ namespace XenAdmin
 
         private void CheckForUpdatesTimer_Tick(object sender, EventArgs e)
         {
-            Updates.CheckForUpdates(false);
+            Updates.CheckForUpdates();
         }
 
         private void HealthCheckResultTimer_Tick(object sender, EventArgs e)
@@ -2542,9 +2540,6 @@ namespace XenAdmin
             if (alertPage.Visible)
                 return alertPage.HelpID;
 
-            if (updatesPage.Visible)
-                return updatesPage.HelpID;
-
             if (eventsPage.Visible)
                 return eventsPage.HelpID;
 
@@ -2629,27 +2624,16 @@ namespace XenAdmin
 
         private void Updates_CollectionChanged(CollectionChangeEventArgs e)
         {
-            Program.Invoke(this, () =>
-                {
-                    int updatesCount = Updates.UpdateAlerts.Count;
-                    navigationPane.UpdateNotificationsButton(NotificationsSubMode.Updates, updatesCount);
-
-                    statusLabelUpdates.Text = string.Format(Messages.NOTIFICATIONS_SUBMODE_UPDATES_STATUS, updatesCount);
-                    statusLabelUpdates.Visible = updatesCount > 0;
-
-                    SetUpdateAlert();
-
-                    if (updatesPage.Visible)
-                    {
-                        TitleLabel.Text = NotificationsSubModeItem.GetText(NotificationsSubMode.Updates, updatesCount);
-                        TitleIcon.Image = NotificationsSubModeItem.GetImage(NotificationsSubMode.Updates, updatesCount);
-                    }
-                });
+            Program.Invoke(this, SetUpdateAlert);
         }
 
-        private void UpdatesCheck_Completed(bool succeeded, string err)
+        private void UpdatesCheck_Completed()
         {
-            Program.Invoke(this, SetUpdateAlert);            
+            Program.Invoke(this, () =>
+            {
+                toolStripMenuItemCfu.Enabled = true;
+                SetUpdateAlert();
+            });            
         }
 
         private void SetUpdateAlert()
@@ -2662,7 +2646,11 @@ namespace XenAdmin
 
         private void UpdatesCheck_Started()
         {
-            Program.Invoke(this, () => { updateClientToolStripMenuItem.Visible = false; });
+            Program.Invoke(this, () =>
+            {
+                updateClientToolStripMenuItem.Visible = false;
+                toolStripMenuItemCfu.Enabled = false;
+            });
         }
 
         private void CloseWhenActionsCanceled(object o)
@@ -2928,24 +2916,13 @@ namespace XenAdmin
             switch (submodeItem.SubMode)
             {
                 case NotificationsSubMode.Alerts:
-                    if (updatesPage.Visible)
-                        updatesPage.HidePage();
                     if (eventsPage.Visible)
                         eventsPage.HidePage();
                     alertPage.ShowPage();
                     break;
-                case NotificationsSubMode.Updates:
-                    if (alertPage.Visible)
-                        alertPage.HidePage();
-                    if (eventsPage.Visible)
-                        eventsPage.HidePage();
-                    updatesPage.ShowPage();
-                    break;
                 case NotificationsSubMode.Events:
                     if (alertPage.Visible)
                         alertPage.HidePage();
-                    if (updatesPage.Visible)
-                        updatesPage.HidePage();
                     eventsPage.ShowPage();
                     break;
             } 
@@ -2970,8 +2947,6 @@ namespace XenAdmin
                 TheTabControl.Visible = true;
                 if (alertPage.Visible)
                     alertPage.HidePage();
-                if (updatesPage.Visible)
-                    updatesPage.HidePage();
                 if (eventsPage.Visible)
                     eventsPage.HidePage();
 
@@ -3304,11 +3279,6 @@ namespace XenAdmin
             navigationPane.SwitchToNotificationsView(NotificationsSubMode.Alerts);
         }
 
-        private void statusLabelUpdates_Click(object sender, EventArgs e)
-        {
-            navigationPane.SwitchToNotificationsView(NotificationsSubMode.Updates);
-        }
-
         private void statusLabelErrors_Click(object sender, EventArgs e)
         {
             navigationPane.SwitchToNotificationsView(NotificationsSubMode.Events);
@@ -3323,6 +3293,11 @@ namespace XenAdmin
         private void downloadInstallToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ClientUpdateAlert.DownloadAndInstallNewClient(updateAlert, this);
+        }
+
+        private void toolStripMenuItemCfu_Click(object sender, EventArgs e)
+        {
+            Updates.CheckForUpdates(true);
         }
     }
 }

@@ -843,7 +843,7 @@ namespace XenAdmin.TabPages
             Updates.CheckForUpdatesCompleted -= CheckForUpdatesCompleted;
         }
 
-        private void CheckForUpdatesCompleted(bool succeeded, string errorMessage)
+        private void CheckForUpdatesCompleted()
         {
             Updates.CheckHotfixEligibility();
         }

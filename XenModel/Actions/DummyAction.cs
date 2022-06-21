@@ -35,7 +35,7 @@ namespace XenAdmin.Actions
 {
     public class DummyAction : ActionBase
     {
-        private string _error;
+        private readonly string _error;
 
         public DummyAction(string title, string description, string error = null)
             : base(title, description, false)
