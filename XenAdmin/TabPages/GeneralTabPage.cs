@@ -1024,7 +1024,7 @@ namespace XenAdmin.TabPages
             if (host.software_version.ContainsKey("dbv"))
                 pdSectionVersion.AddEntry("DBV", host.software_version["dbv"]);
 
-            if (Helpers.Post82X(host) && Helpers.XapiEqualOrGreater_22_19_0(host) &&
+            if (Helpers.Post82X(host) && Helpers.XapiEqualOrGreater_22_20_0(host) &&
                 host.last_software_update > softwareVersionDate && host.last_software_update > unixMinDateTime)
                 pdSectionVersion.AddEntry(Messages.SOFTWARE_VERSION_LAST_UPDATED,
                     HelpersGUI.DateTimeToString(host.last_software_update.ToLocalTime(), Messages.DATEFORMAT_DMY_HMS, true));
