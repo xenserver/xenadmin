@@ -87,15 +87,23 @@ namespace XenAdmin.Wizards.ImportWizard
             set
             {
                 _selectedOvfEnvelope = value;
-                
+
                 vgpuSettings.Clear();
                 hardwarePlatformSettings.Clear();
                 vendorDeviceSettings.Clear();
 
                 if (_selectedOvfEnvelope == null)
                     return;
-                
-                foreach (var vsType in ((VirtualSystemCollection_Type)SelectedOvfEnvelope.Item).Content)
+
+                var vsColl = SelectedOvfEnvelope.Item as VirtualSystemCollection_Type;
+
+                if (vsColl == null && SelectedOvfEnvelope.Item is VirtualSystemCollection_Type)
+                    vsColl = new VirtualSystemCollection_Type {Content = new[] {SelectedOvfEnvelope.Item}};
+
+                if (vsColl == null)
+                    return;
+
+                foreach (var vsType in vsColl.Content)
                 {
                     var vhs = OVF.FindVirtualHardwareSectionByAffinity(SelectedOvfEnvelope, vsType.id, "xen");
                     var data = vhs.VirtualSystemOtherConfigurationData;
@@ -115,11 +123,11 @@ namespace XenAdmin.Wizards.ImportWizard
             }
         }
 
-        protected override string InstructionText { get { return Messages.IMPORT_WIZARD_DESTINATION_INSTRUCTIONS; } }
+        protected override string InstructionText => Messages.IMPORT_WIZARD_DESTINATION_INSTRUCTIONS;
 
-        protected override string TargetServerText { get { return Messages.IMPORT_WIZARD_DESTINATION_DESTINATION; } }
+        protected override string TargetServerText => Messages.IMPORT_WIZARD_DESTINATION_DESTINATION;
 
-        protected override string TargetServerSelectionIntroText { get { return Messages.IMPORT_WIZARD_DESTINATION_TABLE_INTRO; } }
+        protected override string TargetServerSelectionIntroText => Messages.IMPORT_WIZARD_DESTINATION_TABLE_INTRO;
 
         protected override void OnChosenItemChanged()
         {
@@ -149,7 +157,7 @@ namespace XenAdmin.Wizards.ImportWizard
             ShowWarning(string.Join("\n", warnings));
 
             if (ConnectionSelectionChanged != null)
-                ConnectionSelectionChanged(ChosenItem != null ? ChosenItem.Connection : null);
+                ConnectionSelectionChanged(ChosenItem?.Connection);
         }
 
         protected override DelayLoadingOptionComboBoxItem CreateDelayLoadingOptionComboBoxItem(IXenObject xenItem)
@@ -207,8 +215,7 @@ namespace XenAdmin.Wizards.ImportWizard
 
             foreach (var setting in vendorDeviceSettings)
             {
-                bool hasVendorDevice;
-                if (!bool.TryParse(setting.Value.Value, out hasVendorDevice))
+                if (!bool.TryParse(setting.Value.Value, out var hasVendorDevice))
                     continue;
                 
                 if (hasVendorDevice && dundeeOrNewerHosts.Length == 0)
