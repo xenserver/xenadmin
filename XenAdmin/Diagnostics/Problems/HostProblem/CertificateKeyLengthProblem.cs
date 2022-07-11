@@ -102,7 +102,7 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
             _host.Name(), Messages.CERTIFICATE_KEY_LENGTH_PROBLEM_DESCRIPTION);
 
         public override string Message => string.Format(Messages.CERTIFICATE_KEY_LENGTH_WARNING_MORE_INFO,
-            BrandManager.ProductBrand, BrandManager.ProductVersionPost82);
+            BrandManager.ProductBrand, BrandManager.ProductVersion83);
 
         protected override AsyncAction CreateAction(out bool cancelled)
         {

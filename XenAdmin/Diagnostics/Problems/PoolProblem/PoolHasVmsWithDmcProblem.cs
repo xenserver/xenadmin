@@ -60,11 +60,11 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
 
         public override string Description =>
             string.Format(Messages.DMC_REMOVAL_SHORT, _pool.Name(),
-                string.Format(Messages.STRING_SPACE_STRING, BrandManager.ProductBrand, BrandManager.ProductVersionPost82));
+                string.Format(Messages.STRING_SPACE_STRING, BrandManager.ProductBrand, BrandManager.ProductVersion83));
 
         public override string Message =>
             string.Format(Messages.DMC_REMOVAL_LONG_ERROR,
-                string.Format(Messages.STRING_SPACE_STRING, BrandManager.ProductBrand, BrandManager.ProductVersionPost82),
+                string.Format(Messages.STRING_SPACE_STRING, BrandManager.ProductBrand, BrandManager.ProductVersion83),
                 BrandManager.BrandConsole);
 
         protected override AsyncAction CreateAction(out bool cancelled)
@@ -118,7 +118,7 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
 
         public override string Message =>
             string.Format(Messages.DMC_REMOVAL_LONG_WARNING,
-                string.Format(Messages.STRING_SPACE_STRING, BrandManager.ProductBrand, BrandManager.ProductVersionPost82),
+                string.Format(Messages.STRING_SPACE_STRING, BrandManager.ProductBrand, BrandManager.ProductVersion83),
                 BrandManager.BrandConsole);
 
         protected override AsyncAction CreateAction(out bool cancelled)

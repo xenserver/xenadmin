@@ -56,7 +56,7 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
         }
 
         public override string Description =>
-            string.Format(Messages.PROBLEM_HEALTH_CHECK_SERVICE_DESCRIPTION, _pool, BrandManager.ProductBrand, BrandManager.ProductVersionPost82);
+            string.Format(Messages.PROBLEM_HEALTH_CHECK_SERVICE_DESCRIPTION, _pool, BrandManager.ProductBrand, BrandManager.ProductVersion83);
 
         public override string HelpMessage => Messages.PROBLEM_HEALTH_CHECK_HELP;
     }
@@ -72,10 +72,10 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
         }
 
         public override string Description =>
-            string.Format(Messages.PROBLEM_HEALTH_CHECK_SERVICE_DESCRIPTION, pool, BrandManager.ProductBrand, BrandManager.ProductVersionPost82);
+            string.Format(Messages.PROBLEM_HEALTH_CHECK_SERVICE_DESCRIPTION, pool, BrandManager.ProductBrand, BrandManager.ProductVersion83);
 
         public override string Message =>
-            string.Format(Messages.WARNING_HEALTH_CHECK_SERVICE_INFO, BrandManager.ProductBrand, BrandManager.ProductVersionPost82);
+            string.Format(Messages.WARNING_HEALTH_CHECK_SERVICE_INFO, BrandManager.ProductBrand, BrandManager.ProductVersion83);
 
         protected override AsyncAction CreateAction(out bool cancelled)
         {

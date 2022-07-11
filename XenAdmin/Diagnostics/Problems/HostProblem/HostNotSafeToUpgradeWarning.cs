@@ -46,7 +46,7 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
             : base(check)
         {
             _host = host;
-            var version = $"{BrandManager.ProductBrand} {BrandManager.ProductVersionPost82}";
+            var version = $"{BrandManager.ProductBrand} {BrandManager.ProductVersion83}";
             var newPartitionInfo = string.Format(Messages.NOT_SAFE_TO_UPGRADE_NEW_PARTITION_INFO, version);
 
             string detail;
@@ -93,7 +93,7 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
             : base(check)
         {
             _host = host;
-            var version = $"{BrandManager.ProductBrand} {BrandManager.ProductVersionPost82}";
+            var version = $"{BrandManager.ProductBrand} {BrandManager.ProductVersion83}";
             var newPartitionInfo = string.Format(Messages.NOT_SAFE_TO_UPGRADE_NEW_PARTITION_INFO, version);
             string detail;
 
