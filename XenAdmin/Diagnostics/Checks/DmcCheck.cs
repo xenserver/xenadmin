@@ -59,7 +59,7 @@ namespace XenAdmin.Diagnostics.Checks
 
         public override bool CanRun()
         {
-            return !Helpers.Post82X(_pool.Connection) && !Helpers.FeatureForbidden(_pool.Connection, Host.RestrictDMC);
+            return !Helpers.PlatformEqualOrGreater_3_3_0(_pool.Connection) && !Helpers.FeatureForbidden(_pool.Connection, Host.RestrictDMC);
         }
 
         protected override Problem RunCheck()
@@ -92,7 +92,7 @@ namespace XenAdmin.Diagnostics.Checks
             if (string.IsNullOrEmpty(upgradePlatformVersion))
                 return new PoolHasVmsWithDmcWarning(_control, this, _pool, vms);
                 
-            if (Helpers.Post82X(upgradePlatformVersion))
+            if (Helpers.PlatformEqualOrGreater_3_3_0(upgradePlatformVersion))
                 return new PoolHasVmsWithDmcProblem(_control, this, _pool, vms);
 
             return null;

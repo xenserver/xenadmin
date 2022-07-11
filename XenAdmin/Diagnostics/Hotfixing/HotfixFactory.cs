@@ -50,7 +50,7 @@ namespace XenAdmin.Diagnostics.Hotfixing
 
         public static Hotfix Hotfix(Host host)
         {
-            if (Helpers.StockholmOrGreater(host) && !Helpers.Post82X(host))
+            if (Helpers.StockholmOrGreater(host) && !Helpers.PlatformEqualOrGreater_3_3_0(host))
                 return Hotfix(HotfixableServerVersion.Stockholm);
             return null;
         }

@@ -51,7 +51,7 @@ namespace XenAdmin.Diagnostics.Checks
         {           
             _installMethodConfig = installMethodConfig;
         }
-        public override bool CanRun() => !Helpers.Post82X(Host);
+        public override bool CanRun() => !Helpers.PlatformEqualOrGreater_3_3_0(Host);
 
         protected override Problem RunHostCheck()
         {
@@ -69,7 +69,7 @@ namespace XenAdmin.Diagnostics.Checks
                 Host.TryGetUpgradeVersion(Host, _installMethodConfig, out var upgradePlatformVersion, out _);
 
                 // block the upgrade to a post-8.2.X version
-                if (Helpers.Post82X(upgradePlatformVersion))
+                if (Helpers.PlatformEqualOrGreater_3_3_0(upgradePlatformVersion))
                 {
                     switch (result.ToLowerInvariant())
                     {

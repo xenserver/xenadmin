@@ -166,7 +166,7 @@ namespace XenAdmin.Core
         }
 
 
-        #region Versions
+        #region Platform versions
 
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool DundeeOrGreater(IXenConnection conn)
@@ -366,23 +366,6 @@ namespace XenAdmin.Core
         }
 
         /// <param name="conn">May be null, in which case true is returned.</param>
-        public static bool Post82X(IXenConnection conn)
-        {
-            return conn == null || Post82X(GetCoordinator(conn));
-        }
-
-        /// <param name="host">May be null, in which case true is returned.</param>
-        public static bool Post82X(Host host)
-        {
-            return host == null || Post82X(HostPlatformVersion(host));
-        }
-
-        public static bool Post82X(string platformVersion)
-        {
-            return platformVersion != null && ProductVersionCompare(platformVersion, "3.2.50") >= 0;
-        }
-
-        /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool YangtzeOrGreater(IXenConnection conn)
         {
             return conn == null || YangtzeOrGreater(Helpers.GetCoordinator(conn));
@@ -399,6 +382,27 @@ namespace XenAdmin.Core
         {
             return platformVersion != null && ProductVersionCompare(platformVersion, "3.2.1") >= 0;
         }
+
+        /// <param name="conn">May be null, in which case true is returned.</param>
+        public static bool PlatformEqualOrGreater_3_3_0(IXenConnection conn)
+        {
+            return conn == null || PlatformEqualOrGreater_3_3_0(GetCoordinator(conn));
+        }
+
+        /// <param name="host">May be null, in which case true is returned.</param>
+        public static bool PlatformEqualOrGreater_3_3_0(Host host)
+        {
+            return host == null || PlatformEqualOrGreater_3_3_0(HostPlatformVersion(host));
+        }
+
+        public static bool PlatformEqualOrGreater_3_3_0(string platformVersion)
+        {
+            return platformVersion != null && ProductVersionCompare(platformVersion, "3.2.50") >= 0;
+        }
+
+        #endregion
+
+        #region Xapi versions
 
         public static bool XapiEqualOrGreater_1_290_0(IXenConnection conn)
         {

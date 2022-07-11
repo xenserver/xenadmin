@@ -1024,7 +1024,7 @@ namespace XenAdmin.TabPages
             if (host.software_version.ContainsKey("dbv"))
                 pdSectionVersion.AddEntry("DBV", host.software_version["dbv"]);
 
-            if (Helpers.Post82X(host) && Helpers.XapiEqualOrGreater_22_20_0(host) &&
+            if (Helpers.PlatformEqualOrGreater_3_3_0(host) && Helpers.XapiEqualOrGreater_22_20_0(host) &&
                 host.last_software_update > softwareVersionDate && host.last_software_update > unixMinDateTime)
                 pdSectionVersion.AddEntry(Messages.SOFTWARE_VERSION_LAST_UPDATED,
                     HelpersGUI.DateTimeToString(host.last_software_update.ToLocalTime(), Messages.DATEFORMAT_DMY_HMS, true));
@@ -1118,7 +1118,7 @@ namespace XenAdmin.TabPages
 
                     var thumbprint = string.Format(Messages.CERTIFICATE_THUMBPRINT_VALUE, certificate.fingerprint);
 
-                    if (!Helpers.Post82X(host) || !Helpers.XapiEqualOrGreater_1_290_0(host) || certificate.type == certificate_type.host)
+                    if (!Helpers.PlatformEqualOrGreater_3_3_0(host) || !Helpers.XapiEqualOrGreater_1_290_0(host) || certificate.type == certificate_type.host)
                         pdSectionCertificate.AddEntry(GetCertificateType(certificate.type), $"{validity}\n{thumbprint}",
                             new CommandToolStripMenuItem(new InstallCertificateCommand(Program.MainWindow, host), true),
                             new CommandToolStripMenuItem(new ResetCertificateCommand(Program.MainWindow, host), true));
@@ -1127,7 +1127,7 @@ namespace XenAdmin.TabPages
                 }
             }
 
-            if (xenObject is Pool pool && Helpers.Post82X(pool.Connection))
+            if (xenObject is Pool pool && Helpers.PlatformEqualOrGreater_3_3_0(pool.Connection))
             {
                 var certificates = pool.Connection.Cache.Certificates.Where(c => c != null && c.type == certificate_type.ca).OrderBy(c => c.name).ToList();
 
@@ -1189,7 +1189,7 @@ namespace XenAdmin.TabPages
                     s.AddEntry(FriendlyName("host.enabled"), Messages.YES, item);
                 }
 
-                if (Helpers.Post82X(host) && Helpers.XapiEqualOrGreater_1_290_0(host))
+                if (Helpers.PlatformEqualOrGreater_3_3_0(host) && Helpers.XapiEqualOrGreater_1_290_0(host))
                 {
                     var pool = Helpers.GetPoolOfOne(xenObject.Connection);
 
@@ -1335,7 +1335,7 @@ namespace XenAdmin.TabPages
                         : Helpers.GetFriendlyLicenseName(p));
                 s.AddEntry(Messages.NUMBER_OF_SOCKETS, p.CpuSockets().ToString());
 
-                if (Helpers.Post82X(p.Connection) && Helpers.XapiEqualOrGreater_1_290_0(p.Connection))
+                if (Helpers.PlatformEqualOrGreater_3_3_0(p.Connection) && Helpers.XapiEqualOrGreater_1_290_0(p.Connection))
                 {
                     if (p.tls_verification_enabled)
                     {
@@ -1790,7 +1790,7 @@ namespace XenAdmin.TabPages
                 Banner.LinkUri = new Uri(InvisibleMessages.DEPRECATION_URL);
                 Banner.Visible = true;
             }
-            else if (!Helpers.Post82X(xenObject.Connection))
+            else if (!Helpers.PlatformEqualOrGreater_3_3_0(xenObject.Connection))
             {
                 Banner.BannerType = DeprecationBanner.Type.Deprecation;
                 Banner.WarningMessage = string.Format(Messages.WARNING_PRE_CLOUD_VERSION_CONNECTION, BrandManager.BrandConsole, BrandManager.ProductBrand, BrandManager.ProductVersion821, BrandManager.LegacyConsole);
