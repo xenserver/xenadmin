@@ -14018,6 +14018,21 @@ Schedule:
   <data name="VOLUMES" xml:space="preserve">
     <value>Volumes</value>
   </data>
+  <data name="VTPM" xml:space="preserve">
+    <value>Trusted Platform Module</value>
+  </data>
+  <data name="VTPM_ATTACHED_MANY" xml:space="preserve">
+    <value>{0} vTPMs are attached to this VM.</value>
+  </data>
+  <data name="VTPM_ATTACHED_ONE" xml:space="preserve">
+    <value>A vTPM is attached to this VM.</value>
+  </data>
+  <data name="VTPM_PROTECTED" xml:space="preserve">
+    <value>Protected</value>
+  </data>
+  <data name="VTPM_UNIQUE" xml:space="preserve">
+    <value>Unique</value>
+  </data>
   <data name="WAITING" xml:space="preserve">
     <value>Waiting</value>
   </data>

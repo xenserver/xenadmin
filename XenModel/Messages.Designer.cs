@@ -40599,6 +40599,51 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Trusted Platform Module.
+        /// </summary>
+        public static string VTPM {
+            get {
+                return ResourceManager.GetString("VTPM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} vTPMs are attached to this VM..
+        /// </summary>
+        public static string VTPM_ATTACHED_MANY {
+            get {
+                return ResourceManager.GetString("VTPM_ATTACHED_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A vTPM is attached to this VM..
+        /// </summary>
+        public static string VTPM_ATTACHED_ONE {
+            get {
+                return ResourceManager.GetString("VTPM_ATTACHED_ONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Protected.
+        /// </summary>
+        public static string VTPM_PROTECTED {
+            get {
+                return ResourceManager.GetString("VTPM_PROTECTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unique.
+        /// </summary>
+        public static string VTPM_UNIQUE {
+            get {
+                return ResourceManager.GetString("VTPM_UNIQUE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Waiting.
         /// </summary>
         public static string WAITING {

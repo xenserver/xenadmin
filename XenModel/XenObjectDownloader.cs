@@ -156,7 +156,6 @@ namespace XenAdmin.Core
             {
                 case "session":
                 case "event":
-                case "vtpm":
                 case "user":
                 case "secret":
                     // We don't track events on these objects
