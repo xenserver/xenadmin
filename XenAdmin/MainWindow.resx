@@ -2311,130 +2311,139 @@
     <value>&amp;Server</value>
   </data>
   <data name="NewVmToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 22</value>
+    <value>264, 22</value>
   </data>
   <data name="NewVmToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;New VM...</value>
   </data>
   <data name="startShutdownToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 22</value>
+    <value>264, 22</value>
   </data>
   <data name="startShutdownToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Start/Shut down</value>
   </data>
   <data name="resumeOnToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 22</value>
+    <value>264, 22</value>
   </data>
   <data name="resumeOnToolStripMenuItem.Text" xml:space="preserve">
     <value>Res&amp;ume on Server</value>
   </data>
   <data name="relocateToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 22</value>
+    <value>264, 22</value>
   </data>
   <data name="relocateToolStripMenuItem.Text" xml:space="preserve">
     <value>M&amp;igrate to Server</value>
   </data>
   <data name="startOnHostToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 22</value>
+    <value>264, 22</value>
   </data>
   <data name="startOnHostToolStripMenuItem.Text" xml:space="preserve">
     <value>Start &amp;on Server</value>
   </data>
   <data name="toolStripSeparator20.Size" type="System.Drawing.Size, System.Drawing">
-    <value>239, 6</value>
+    <value>261, 6</value>
   </data>
   <data name="assignSnapshotScheduleToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 22</value>
+    <value>264, 22</value>
   </data>
   <data name="assignSnapshotScheduleToolStripMenuItem.Text" xml:space="preserve">
     <value>Assign to Snaps&amp;hot Schedule...</value>
   </data>
   <data name="assignToVirtualApplianceToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 22</value>
+    <value>264, 22</value>
   </data>
   <data name="assignToVirtualApplianceToolStripMenuItem.Text" xml:space="preserve">
     <value>Assign to &amp;vApp</value>
   </data>
   <data name="toolStripMenuItem9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>239, 6</value>
+    <value>261, 6</value>
   </data>
   <data name="copyVMtoSharedStorageMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 22</value>
+    <value>264, 22</value>
   </data>
   <data name="copyVMtoSharedStorageMenuItem.Text" xml:space="preserve">
     <value>&amp;Copy VM</value>
   </data>
   <data name="MoveVMToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 22</value>
+    <value>264, 22</value>
   </data>
   <data name="MoveVMToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Move VM</value>
   </data>
   <data name="snapshotToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 22</value>
+    <value>264, 22</value>
   </data>
   <data name="snapshotToolStripMenuItem.Text" xml:space="preserve">
     <value>Ta&amp;ke a Snapshot</value>
   </data>
   <data name="convertToTemplateToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 22</value>
+    <value>264, 22</value>
   </data>
   <data name="convertToTemplateToolStripMenuItem.Text" xml:space="preserve">
     <value>Convert to &amp;Template</value>
   </data>
   <data name="exportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 22</value>
+    <value>264, 22</value>
   </data>
   <data name="exportToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Export...</value>
   </data>
+  <data name="toolStripSeparator32.Size" type="System.Drawing.Size, System.Drawing">
+    <value>261, 6</value>
+  </data>
+  <data name="toolStripMenuItemVtpm.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="toolStripMenuItemVtpm.Text" xml:space="preserve">
+    <value>Trusted Plat&amp;form Module Manager...</value>
+  </data>
   <data name="disableCbtToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 22</value>
+    <value>264, 22</value>
   </data>
   <data name="disableCbtToolStripMenuItem.Text" xml:space="preserve">
     <value>D&amp;isable Changed Block Tracking</value>
   </data>
   <data name="enablePVSReadcachingToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 22</value>
+    <value>264, 22</value>
   </data>
   <data name="disablePVSReadcachingToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 22</value>
+    <value>264, 22</value>
   </data>
   <data name="toolStripMenuItem12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>239, 6</value>
+    <value>261, 6</value>
   </data>
   <data name="installToolsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 22</value>
+    <value>264, 22</value>
   </data>
   <data name="installToolsToolStripMenuItem.Text" xml:space="preserve">
     <value>installToolsToolStripMenuItem</value>
   </data>
   <data name="sendCtrlAltDelToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 22</value>
+    <value>264, 22</value>
   </data>
   <data name="sendCtrlAltDelToolStripMenuItem.Text" xml:space="preserve">
     <value>Send Ctrl+&amp;Alt+Del</value>
   </data>
   <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>239, 6</value>
+    <value>261, 6</value>
   </data>
   <data name="uninstallToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 22</value>
+    <value>264, 22</value>
   </data>
   <data name="uninstallToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Delete VM</value>
   </data>
   <data name="toolStripSeparator10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>239, 6</value>
+    <value>261, 6</value>
   </data>
   <data name="pluginItemsPlaceHolderToolStripMenuItem4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 22</value>
+    <value>264, 22</value>
   </data>
   <data name="pluginItemsPlaceHolderToolStripMenuItem4.Text" xml:space="preserve">
     <value>PluginItemsPlaceHolder</value>
   </data>
   <data name="VMPropertiesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 22</value>
+    <value>264, 22</value>
   </data>
   <data name="VMPropertiesToolStripMenuItem.Text" xml:space="preserve">
     <value>P&amp;roperties</value>
@@ -3651,6 +3660,18 @@
   <data name="&gt;&gt;exportToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
+  <data name="&gt;&gt;toolStripSeparator32.Name" xml:space="preserve">
+    <value>toolStripSeparator32</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator32.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemVtpm.Name" xml:space="preserve">
+    <value>toolStripMenuItemVtpm</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemVtpm.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripMenuItem, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
   <data name="&gt;&gt;disableCbtToolStripMenuItem.Name" xml:space="preserve">
     <value>disableCbtToolStripMenuItem</value>
   </data>
@@ -4017,6 +4038,12 @@
   <data name="&gt;&gt;toolStripMenuItem17.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;toolStripMenuItemCfu.Name" xml:space="preserve">
+    <value>toolStripMenuItemCfu</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemCfu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;xenSourceOnTheWebToolStripMenuItem.Name" xml:space="preserve">
     <value>xenSourceOnTheWebToolStripMenuItem</value>
   </data>
@@ -4094,12 +4121,6 @@
   </data>
   <data name="&gt;&gt;statusLabelAlerts.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemCfu.Name" xml:space="preserve">
-    <value>toolStripMenuItemCfu</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemCfu.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainWindow</value>
