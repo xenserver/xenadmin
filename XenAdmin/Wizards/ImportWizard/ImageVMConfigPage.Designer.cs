@@ -182,28 +182,8 @@
             // 
             // m_upDownMemory
             // 
-            this.m_upDownMemory.Increment = new decimal(new int[] {
-            256,
-            0,
-            0,
-            0});
             resources.ApplyResources(this.m_upDownMemory, "m_upDownMemory");
-            this.m_upDownMemory.Maximum = new decimal(new int[] {
-            16128,
-            0,
-            0,
-            0});
-            this.m_upDownMemory.Minimum = new decimal(new int[] {
-            256,
-            0,
-            0,
-            0});
             this.m_upDownMemory.Name = "m_upDownMemory";
-            this.m_upDownMemory.Value = new decimal(new int[] {
-            1024,
-            0,
-            0,
-            0});
             this.m_upDownMemory.ValueChanged += new System.EventHandler(this.m_upDownMemory_ValueChanged);
             // 
             // lblMemory

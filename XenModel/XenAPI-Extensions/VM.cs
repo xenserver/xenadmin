@@ -57,6 +57,7 @@ namespace XenAPI
         private const int DEFAULT_NUM_VIFS_ALLOWED = 7;
         private const int DEFAULT_NUM_VBDS_ALLOWED = 255;
         public const long DEFAULT_MEM_ALLOWED = 1 * Util.BINARY_TERA;
+        public const long DEFAULT_MEM_MIN_IMG_IMPORT = 256 * Util.BINARY_MEGA;
         public const int DEFAULT_CORES_PER_SOCKET = 1;
         public const long MAX_SOCKETS = 16;  // current hard limit in Xen: CA-198276
 

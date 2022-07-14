@@ -31,6 +31,7 @@
 
 using System;
 using XenAdmin.Controls;
+using XenAPI;
 using XenModel;
 
 namespace XenAdmin.Wizards.ImportWizard
@@ -46,6 +47,8 @@ namespace XenAdmin.Wizards.ImportWizard
 		public ImageVMConfigPage()
 		{
 			InitializeComponent();
+            m_upDownMemory.Minimum = m_upDownMemory.Increment = VM.DEFAULT_MEM_MIN_IMG_IMPORT;
+            m_upDownMemory.Maximum = VM.DEFAULT_MEM_ALLOWED;
             m_ctrlError.HideError();
 		}
 
