@@ -69,24 +69,12 @@ namespace XenAdmin.Wizards.GenericPages
             xenObject = toCopy.Item;
             failureReason = toCopy.FailureReason;
             Enabled = toCopy.Enabled;
-            PreferAsSelectedItem = toCopy.PreferAsSelectedItem;
         }
 
         /// <summary>
         /// Underlying Xen Object
         /// </summary>
         public IXenObject Item => xenObject;
-
-        /// <summary>
-        /// You would prefer this item to be the one that is selected
-        /// As the items are threaded they may exist and be disabled but required
-        /// as a selected item if they load successfully.
-        /// 
-        /// Use this in the event handler for the ReasonUpdated flag to find out
-        /// which item should be the selected one and thus which to 
-        /// set in the combo box
-        /// </summary>
-        public bool PreferAsSelectedItem { get; set; }
 
         /// <summary>
         /// Create a thread and fetch the reason
@@ -138,15 +126,6 @@ namespace XenAdmin.Wizards.GenericPages
             FailureReason = Messages.DELAY_LOADED_COMBO_BOX_ITEM_FAILURE_UNKNOWN;
         }
 
-        /// <summary>
-        /// Trigger event
-        /// </summary>
-        private void OnReasonChanged()
-        {
-            if (ReasonUpdated != null)
-                ReasonUpdated(this);
-        }
-
         public bool Enabled { get; private set; }
 
         /// <summary>
@@ -160,11 +139,12 @@ namespace XenAdmin.Wizards.GenericPages
             {
                 if (failureReason == value)
                     return;
+
                 failureReason = value;
 
-                Enabled = String.IsNullOrEmpty(failureReason);
+                Enabled = string.IsNullOrEmpty(failureReason);
 
-                OnReasonChanged();
+                ReasonUpdated?.Invoke(this);
             }
         }
 
@@ -177,7 +157,7 @@ namespace XenAdmin.Wizards.GenericPages
             if (string.IsNullOrEmpty(FailureReason))
                 return Item.Name();
 
-            return String.Format(Messages.DELAY_LOADED_COMBO_BOX_ITEM_FAILURE_REASON, Item.Name(), FailureReason);
+            return string.Format(Messages.DELAY_LOADED_COMBO_BOX_ITEM_FAILURE_REASON, Item.Name(), FailureReason);
         }
     }
 }

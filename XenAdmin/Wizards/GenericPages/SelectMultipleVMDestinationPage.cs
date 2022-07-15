@@ -57,6 +57,7 @@ namespace XenAdmin.Wizards.GenericPages
         private bool m_buttonNextEnabled;
         protected List<IXenConnection> ignoredConnections = new List<IXenConnection>();
         private readonly CollectionChangeEventHandler Host_CollectionChangedWithInvoke;
+        private string _preferredHomeRef;
 
         #region Nested classes
 
@@ -342,7 +343,7 @@ namespace XenAdmin.Wizards.GenericPages
 				}
 
 				if (item != null && m_selectedObject != null && item.Item.Connection == m_selectedObject.Connection)
-				    item.PreferAsSelectedItem = true;
+                    _preferredHomeRef = item.Item.opaque_ref;
 
 				xenConnection.ConnectionStateChanged -= xenConnection_ConnectionStateChanged;
 				xenConnection.ConnectionStateChanged += xenConnection_ConnectionStateChanged;
@@ -357,12 +358,10 @@ namespace XenAdmin.Wizards.GenericPages
 
         private bool MatchingWithXenRefObject(IEnableableXenObjectComboBoxItem item, object xenRef)
         {
-            XenRef<Host> hostRef = xenRef as XenRef<Host>;
-            if (hostRef != null)
+            if (xenRef is XenRef<Host> hostRef)
                 return hostRef.opaque_ref == item.Item.opaque_ref;
 
-            XenRef<Pool> poolRef = xenRef as XenRef<Pool>;
-            if (poolRef != null)
+            if (xenRef is XenRef<Pool> poolRef)
                 return poolRef.opaque_ref == item.Item.opaque_ref;
 
             return false;
@@ -372,22 +371,19 @@ namespace XenAdmin.Wizards.GenericPages
         {
             foreach (DataGridViewRow row in m_dataGridView.Rows)
             {
-                string sysId = (string)row.Cells[0].Tag;
-                if (m_vmMappings.ContainsKey(sysId))
-                {
-                    var mapping = m_vmMappings[sysId];
-                    var cbCell = row.Cells[m_colTarget.Index] as DataGridViewEnableableComboBoxCell;
-                    if (cbCell == null)
-                        return;
+                string sysId = (string)row.Cells[m_colVmName.Index].Tag;
 
-                    var list = cbCell.Items.OfType<IEnableableXenObjectComboBoxItem>().ToList();
-                    var item = list.FirstOrDefault(cbi => MatchingWithXenRefObject(cbi, mapping.XenRef));
+                if (m_vmMappings.TryGetValue(sysId, out var mapping) &&
+                    row.Cells[m_colTarget.Index] is DataGridViewEnableableComboBoxCell cbCell)
+                {
+                    var item = cbCell.Items.OfType<IEnableableXenObjectComboBoxItem>()
+                        .FirstOrDefault(cbi => MatchingWithXenRefObject(cbi, mapping.XenRef));
                     if (item != null)
                         cbCell.Value = item;
                 }
             }
         }
-        
+
         private void PopulateDataGridView()
         {
             Program.AssertOnEventThread();
@@ -421,8 +417,8 @@ namespace XenAdmin.Wizards.GenericPages
                                 cb.Items.Add(item);
 
                                 if ((m_selectedObject != null && m_selectedObject.opaque_ref == pool.opaque_ref) ||
-                                    (target.Item.opaque_ref == pool.opaque_ref))
-                                    cb.Value = item;
+                                    target.Item.opaque_ref == pool.opaque_ref)
+                                    _preferredHomeRef = item.Item.opaque_ref;
                             }
                         }
 
@@ -435,12 +431,15 @@ namespace XenAdmin.Wizards.GenericPages
                             var item = new DelayLoadingOptionComboBoxItem(host, filters);
                             cb.Items.Add(item);
                             item.ParentComboBox = cb;
-                            item.PreferAsSelectedItem = m_selectedObject != null && m_selectedObject.opaque_ref == host.opaque_ref ||
-                                                 target.Item.opaque_ref == host.opaque_ref || 
-                                                 sortedHosts.Count == 1;
+                            if (m_selectedObject != null && m_selectedObject.opaque_ref == host.opaque_ref ||
+                                target.Item.opaque_ref == host.opaque_ref)
+                                _preferredHomeRef = item.Item.opaque_ref;
                             item.ReasonUpdated += DelayLoadedGridComboBoxItem_ReasonChanged;
                             item.LoadAsync();
                         }
+
+                        if (cb.Items.Count == 1 && cb.Items[0] is DelayLoadingOptionComboBoxItem it)
+                            _preferredHomeRef = it.Item.opaque_ref;
                     }
 
                     SetComboBoxPreSelection(cb);
@@ -538,7 +537,7 @@ namespace XenAdmin.Wizards.GenericPages
                     m_comboBoxConnection.Items.Insert(index, tempItem);
                     m_comboBoxConnection.SelectedIndex = selectedIndex;
 
-                    if (tempItem.PreferAsSelectedItem)
+                    if (_preferredHomeRef == tempItem.Item.opaque_ref)
                         m_comboBoxConnection.SelectedItem = tempItem;
                 }
                 finally
@@ -567,7 +566,7 @@ namespace XenAdmin.Wizards.GenericPages
 	                    return;
 
                     cb.DataGridView.RefreshEdit();
-	                if (item.Enabled && item.PreferAsSelectedItem)
+                    if (item.Enabled && _preferredHomeRef == item.Item.opaque_ref)
 	                    cb.Value = item;
 	                else
 	                    cb.Value = selectedValue;
