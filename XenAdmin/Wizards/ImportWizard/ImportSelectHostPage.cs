@@ -133,7 +133,7 @@ namespace XenAdmin.Wizards.ImportWizard
         {
             var warnings = new List<string>();
 
-            if (ChosenItem != null)
+            if (SelectedTargetPool != null)
             {
                 if (!CheckDestinationSupportsVendorDevice())
                 {
@@ -157,7 +157,7 @@ namespace XenAdmin.Wizards.ImportWizard
             ShowWarning(string.Join("\n", warnings));
 
             if (ConnectionSelectionChanged != null)
-                ConnectionSelectionChanged(ChosenItem?.Connection);
+                ConnectionSelectionChanged(SelectedTargetPool?.Connection);
         }
 
         protected override DelayLoadingOptionComboBoxItem CreateDelayLoadingOptionComboBoxItem(IXenObject xenItem)
@@ -189,7 +189,7 @@ namespace XenAdmin.Wizards.ImportWizard
 
                 var types = m.Groups[1].Value.Split(';');
 
-                var gpuGroup = ChosenItem.Connection.Cache.GPU_groups.FirstOrDefault(g =>
+                var gpuGroup = SelectedTargetPool.Connection.Cache.GPU_groups.FirstOrDefault(g =>
                     g.GPU_types.Length == types.Length &&
                     g.GPU_types.Intersect(types).Count() == types.Length);
 
@@ -199,7 +199,7 @@ namespace XenAdmin.Wizards.ImportWizard
                 string vendorName = m.Groups[2].Value;
                 string modelName = m.Groups[3].Value;
 
-                var vgpuType = ChosenItem.Connection.Cache.VGPU_types.FirstOrDefault(v =>
+                var vgpuType = SelectedTargetPool.Connection.Cache.VGPU_types.FirstOrDefault(v =>
                     v.vendor_name == vendorName && v.model_name == modelName);
 
                 if (vgpuType == null)
@@ -211,7 +211,7 @@ namespace XenAdmin.Wizards.ImportWizard
 
         private bool CheckDestinationSupportsVendorDevice()
         {
-            var dundeeOrNewerHosts = Helpers.DundeeOrGreater(ChosenItem.Connection) ? ChosenItem.Connection.Cache.Hosts : new Host[] {};
+            var dundeeOrNewerHosts = Helpers.DundeeOrGreater(SelectedTargetPool.Connection) ? SelectedTargetPool.Connection.Cache.Hosts : new Host[] {};
 
             foreach (var setting in vendorDeviceSettings)
             {

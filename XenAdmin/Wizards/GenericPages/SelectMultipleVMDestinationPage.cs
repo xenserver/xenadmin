@@ -50,7 +50,7 @@ namespace XenAdmin.Wizards.GenericPages
 	internal abstract partial class SelectMultipleVMDestinationPage : XenTabPage
 	{
 		private Dictionary<string, VmMapping> m_vmMappings;
-		private IXenObject m_selectedObject;
+        public IXenObject SelectedTarget { get; set; }
 		private bool updatingDestinationCombobox;
         private bool restoreGridHomeServerSelection;
         private bool updatingHomeServerList;
@@ -121,13 +121,13 @@ namespace XenAdmin.Wizards.GenericPages
 	        m_colTarget.HeaderText = TargetColumnHeaderText;
 	    }
 
-	    private IXenObject _chosenItem;
-	    public IXenObject ChosenItem
+	    private IXenObject _selectedTargetPool;
+	    public IXenObject SelectedTargetPool
 	    {
-	        get { return _chosenItem; }
+	        get => _selectedTargetPool;
             protected set
             {
-                _chosenItem = value;
+                _selectedTargetPool = value;
                 OnChosenItemChanged();
             }
 	    }
@@ -181,7 +181,7 @@ namespace XenAdmin.Wizards.GenericPages
 
         protected override void PageLoadedCore(PageLoadedDirection direction)
 		{
-            ChosenItem = null;
+            SelectedTargetPool = null;
             restoreGridHomeServerSelection = direction == PageLoadedDirection.Back;
             PopulateComboBox();
 		}
@@ -192,7 +192,7 @@ namespace XenAdmin.Wizards.GenericPages
             CancelFilters();
             ClearComboBox();
             ClearDataGridView();
-            ChosenItem = null;
+            SelectedTargetPool = null;
         }
 
         protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
@@ -255,11 +255,6 @@ namespace XenAdmin.Wizards.GenericPages
 		}
 
 		#endregion
-
-	    public void SetDefaultTarget(IXenObject xenObject)
-		{
-			m_selectedObject = xenObject;
-		}
 
         protected abstract DelayLoadingOptionComboBoxItem CreateDelayLoadingOptionComboBoxItem(IXenObject xenItem);
 
@@ -341,7 +336,7 @@ namespace XenAdmin.Wizards.GenericPages
 			        pool.PropertyChanged += PropertyChanged;
 				}
 
-				if (item != null && m_selectedObject != null && item.Item.Connection == m_selectedObject.Connection)
+				if (item != null && SelectedTarget != null && item.Item.Connection == SelectedTarget.Connection)
                     _preferredHomeRef = item.Item.opaque_ref;
 
 				xenConnection.ConnectionStateChanged -= xenConnection_ConnectionStateChanged;
@@ -415,7 +410,7 @@ namespace XenAdmin.Wizards.GenericPages
                                 var item = new NoTargetServerPoolItem(pool);
                                 cb.Items.Add(item);
 
-                                if ((m_selectedObject != null && m_selectedObject.opaque_ref == pool.opaque_ref) ||
+                                if ((SelectedTarget != null && SelectedTarget.opaque_ref == pool.opaque_ref) ||
                                     target.Item.opaque_ref == pool.opaque_ref)
                                     _preferredHomeRef = item.Item.opaque_ref;
                             }
@@ -430,7 +425,7 @@ namespace XenAdmin.Wizards.GenericPages
                             var item = new DelayLoadingOptionComboBoxItem(host, filters);
                             cb.Items.Add(item);
                             item.ParentComboBox = cb;
-                            if (m_selectedObject != null && m_selectedObject.opaque_ref == host.opaque_ref ||
+                            if (SelectedTarget != null && SelectedTarget.opaque_ref == host.opaque_ref ||
                                 target.Item.opaque_ref == host.opaque_ref)
                                 _preferredHomeRef = item.Item.opaque_ref;
                             item.ReasonUpdated += DelayLoadedGridComboBoxItem_ReasonChanged;
@@ -612,9 +607,9 @@ namespace XenAdmin.Wizards.GenericPages
                 return;
 
             // when selecting a new destination pool, reset the target host selection
-            if (ChosenItem != null && !ChosenItem.Equals(m_comboBoxConnection.SelectedItem))
+            if (SelectedTargetPool != null && !SelectedTargetPool.Equals(m_comboBoxConnection.SelectedItem))
             {
-                SetDefaultTarget(null);
+                SelectedTarget = null;
             }
 
             //If the item is delay loading and them item is disabled, null the selection made 
@@ -624,7 +619,7 @@ namespace XenAdmin.Wizards.GenericPages
             {
                 m_comboBoxConnection.SelectedIndex = -1;
                 m_dataGridView.Rows.Clear();
-                ChosenItem = null;
+                SelectedTargetPool = null;
                 return;
             }
 
@@ -637,7 +632,7 @@ namespace XenAdmin.Wizards.GenericPages
 			    try
 			    {
 			        Cursor.Current = Cursors.WaitCursor;
-                    ChosenItem = item?.Item;
+                    SelectedTargetPool = item?.Item;
                     PopulateDataGridView();
 			    }
 			    finally
@@ -690,7 +685,7 @@ namespace XenAdmin.Wizards.GenericPages
             var cell = m_dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex];
             if (cell.Value is IEnableableXenObjectComboBoxItem value)
             {
-                SetDefaultTarget(value.Item);
+                SelectedTarget = value.Item;
             }
         }
 

@@ -212,7 +212,7 @@ namespace XenAdmin.Wizards.ImportWizard
                                 m_vmMappings.Add(sysId, new VmMapping(sysId) {VmNameLabel = FindVMName(_selectedOvfPackage.OvfEnvelope, sysId)});
 
                             m_pageHost.SelectedOvfEnvelope = _selectedOvfPackage.OvfEnvelope;
-                            m_pageHost.SetDefaultTarget(m_pageHost.ChosenItem ?? m_selectedObject);
+                            m_pageHost.SelectedTarget = m_pageHost.SelectedTargetPool ?? m_selectedObject;
                             m_pageHost.VmMappings = m_vmMappings;
                             m_pageStorage.SelectedOvfEnvelope = _selectedOvfPackage.OvfEnvelope;
                             lunPerVdiMappingPage.SelectedOvfEnvelope = _selectedOvfPackage.OvfEnvelope;
@@ -296,7 +296,7 @@ namespace XenAdmin.Wizards.ImportWizard
                     m_vmMappings.Add(sysId, newMapping);
 
                     m_pageHost.VmMappings = m_vmMappings;
-                    m_pageHost.SetDefaultTarget(m_pageHost.ChosenItem ?? m_selectedObject);
+                    m_pageHost.SelectedTarget = m_pageHost.SelectedTargetPool ?? m_selectedObject;
 
                     m_pageHost.SelectedOvfEnvelope = m_envelopeFromVhd;
                     m_pageStorage.SelectedOvfEnvelope = m_envelopeFromVhd;
@@ -309,7 +309,7 @@ namespace XenAdmin.Wizards.ImportWizard
             else if (type == typeof(ImportSelectHostPage))
             {
                 var oldTargetConnection = _targetConnection;
-                _targetConnection = m_pageHost.ChosenItem?.Connection;
+                _targetConnection = m_pageHost.SelectedTargetPool?.Connection;
                 var oldHostSelection = m_vmMappings.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.TargetName);
                 m_vmMappings = m_pageHost.VmMappings;
 

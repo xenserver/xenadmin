@@ -164,7 +164,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
         protected override bool PerformCheck()
         {
-            if (ChosenItem != null && (ChosenItem.Connection == null || !ChosenItem.Connection.IsConnected))
+            if (SelectedTargetPool != null && (SelectedTargetPool.Connection == null || !SelectedTargetPool.Connection.IsConnected))
             {
                 CrossPoolMigrateWizard.ShowWarningMessageBox(Messages.CPM_WIZARD_ERROR_TARGET_DISCONNECTED);
                 return false;
