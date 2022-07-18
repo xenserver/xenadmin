@@ -561,15 +561,18 @@ namespace XenAdmin.Wizards.GenericPages
 	        {
 	            try
 	            {
-	                var selectedValue = cb.Value;
 	                if (cb.DataGridView == null)
 	                    return;
 
+                    var selectedValue = cb.Value;
                     cb.DataGridView.RefreshEdit();
+
                     if (item.Enabled && _preferredHomeRef == item.Item.opaque_ref)
 	                    cb.Value = item;
 	                else
 	                    cb.Value = selectedValue;
+
+                    cb.DataGridView.Refresh();
 	                SetButtonNextEnabled(cb.Value is IEnableableComboBoxItem enableableComboBoxItem && enableableComboBoxItem.Enabled);
                 }
 	            finally
