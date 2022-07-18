@@ -205,7 +205,6 @@ namespace XenAdmin.Wizards.GenericPages
             }
 
             UnregisterHandlers();
-            SetDefaultTarget(ChosenItem);
             ClearComboBox();
         }
 
@@ -464,7 +463,7 @@ namespace XenAdmin.Wizards.GenericPages
             }
 		}
 
-	    private void SetComboBoxPreSelection(DataGridViewEnableableComboBoxCell cb)
+        private void SetComboBoxPreSelection(DataGridViewEnableableComboBoxCell cb)
 	    {
 	        if (cb.Value == null)
 	        {
@@ -612,6 +611,12 @@ namespace XenAdmin.Wizards.GenericPages
             if (updatingHomeServerList)
                 return;
 
+            // when selecting a new destination pool, reset the target host selection
+            if (ChosenItem != null && !ChosenItem.Equals(m_comboBoxConnection.SelectedItem))
+            {
+                SetDefaultTarget(null);
+            }
+
             //If the item is delay loading and them item is disabled, null the selection made 
             //and clear the table containing server data
             IEnableableXenObjectComboBoxItem item = m_comboBoxConnection.SelectedItem as IEnableableXenObjectComboBoxItem;
@@ -675,8 +680,22 @@ namespace XenAdmin.Wizards.GenericPages
                 SetButtonNextEnabled(true);
 		}
 
-		#endregion
-        
+        private void m_dataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+            {
+                return;
+            }
+
+            var cell = m_dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex];
+            if (cell.Value is IEnableableXenObjectComboBoxItem value)
+            {
+                SetDefaultTarget(value.Item);
+            }
+        }
+
+        #endregion
+
         private void UnregisterHandlers()
         {
             ConnectionsManager.XenConnections.CollectionChanged -= CollectionChanged;

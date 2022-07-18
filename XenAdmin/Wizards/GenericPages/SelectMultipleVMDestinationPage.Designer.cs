@@ -103,6 +103,7 @@
             this.m_dataGridView.Name = "m_dataGridView";
             this.m_dataGridView.RowHeadersVisible = false;
             this.m_dataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.m_dataGridView_CellClick);
+            this.m_dataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.m_dataGridView_CellValueChanged);
             this.m_dataGridView.CurrentCellDirtyStateChanged += new System.EventHandler(this.m_dataGridView_CurrentCellDirtyStateChanged);
             // 
             // m_colVmName
