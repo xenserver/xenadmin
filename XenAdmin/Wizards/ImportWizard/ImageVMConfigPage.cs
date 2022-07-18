@@ -47,9 +47,9 @@ namespace XenAdmin.Wizards.ImportWizard
 		public ImageVMConfigPage()
 		{
 			InitializeComponent();
-            m_upDownMemory.Minimum = m_upDownMemory.Increment = VM.DEFAULT_MEM_MIN_IMG_IMPORT;
-            m_upDownMemory.Maximum = VM.DEFAULT_MEM_ALLOWED;
-            m_ctrlError.HideError();
+            m_upDownMemory.Minimum = m_upDownMemory.Increment = (decimal)VM.DEFAULT_MEM_MIN_IMG_IMPORT / Util.BINARY_MEGA;
+            m_upDownMemory.Maximum = (decimal)VM.DEFAULT_MEM_ALLOWED / Util.BINARY_MEGA;
+			m_ctrlError.HideError();
 		}
 
 		#region Base class (XenTabPage) overrides
