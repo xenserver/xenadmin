@@ -494,17 +494,33 @@ namespace XenAPI
             return results;
         }
 
-        public virtual bool VdiCreationCanProceed(long vdiSize)
+        /// <summary>
+        /// Checks if the SR contains enough free space to accomodate the specified VDI size.
+        /// If checking a possibly thinly provisioned SR, provide a value for vdiPhysicalUtilization.
+        ///
+        /// CA-359965: physical_utlization is not actually telling us how much of the VDI is actively being used.
+        /// Any copy of VDIs to a thinly provisioned SR could fail.
+        /// </summary>
+        /// <param name="vdiSize">The size of the disk to check</param>
+        /// <param name="vdiPhysicalUtilization">The physical_utilization value of the VDI(s) to check</param>
+        /// <returns>true if the VDIs will fit in the SR</returns>
+        public virtual bool VdiCreationCanProceed(long vdiSize, long? vdiPhysicalUtilization = null)
         {
-            SM sm = GetSM();
+            var sm = GetSM();
 
-            bool vdiSizeUnlimited = sm != null && Array.IndexOf(sm.capabilities, "LARGE_VDI") != -1;
+            var vdiSizeUnlimited = sm != null && Array.IndexOf(sm.capabilities, "LARGE_VDI") != -1;
             if (!vdiSizeUnlimited && vdiSize > DISK_MAX_SIZE)
                 return false;
 
-            bool isThinlyProvisioned = sm != null && Array.IndexOf(sm.capabilities, "THIN_PROVISIONING") != -1;
+            var isThinlyProvisioned = sm != null && Array.IndexOf(sm.capabilities, "THIN_PROVISIONING") != -1;
+
             if (!isThinlyProvisioned && vdiSize > FreeSpace())
                 return false;
+
+            if (isThinlyProvisioned && vdiPhysicalUtilization != null)
+            {
+                return vdiPhysicalUtilization < FreeSpace();
+            }
 
             return true;
         }

@@ -132,7 +132,7 @@ namespace XenAdmin.Controls
                        !ExistingVDILocation() &&
                        (!TheSR.IsLocalSR() || existingVDIs.All(v => HomeHostCanSeeTargetSr(v, TheSR))) &&
                        TheSR.SupportsVdiCreate() &&
-                       !TheSR.IsDetached() && TheSR.VdiCreationCanProceed(DiskSize) &&
+                       !TheSR.IsDetached() && TheSR.VdiCreationCanProceed(DiskSize, DiskPhysicalUtilization) &&
                        TheSR.SupportsStorageMigration();
             }
         }
@@ -148,7 +148,7 @@ namespace XenAdmin.Controls
 
         protected override bool CanBeEnabled =>
             !TheSR.IsDetached() && TheSR.SupportsVdiCreate() &&
-            TheSR.VdiCreationCanProceed(DiskSize);
+            TheSR.VdiCreationCanProceed(DiskSize, DiskPhysicalUtilization);
 
         protected override string DisabledReason
         {   
@@ -172,7 +172,7 @@ namespace XenAdmin.Controls
 
         protected override bool CanBeEnabled =>
             !TheSR.IsDetached() && !ExistingVDILocation() &&
-            TheSR.SupportsVdiCreate() && TheSR.VdiCreationCanProceed(DiskSize);
+            TheSR.SupportsVdiCreate() && TheSR.VdiCreationCanProceed(DiskSize, DiskPhysicalUtilization);
 
         protected override string DisabledReason
         {   
@@ -196,7 +196,7 @@ namespace XenAdmin.Controls
         }
 
         protected override bool CanBeEnabled =>
-            TheSR.SupportsVdiCreate() && !TheSR.IsDetached() && TheSR.VdiCreationCanProceed(DiskSize);
+            TheSR.SupportsVdiCreate() && !TheSR.IsDetached() && TheSR.VdiCreationCanProceed(DiskSize, DiskPhysicalUtilization);
 
         protected override string DisabledReason
         {
@@ -220,7 +220,7 @@ namespace XenAdmin.Controls
         protected override bool CanBeEnabled =>
             TheSR.CanBeSeenFrom(Affinity) &&
             TheSR.SupportsVdiCreate() && !TheSR.IsBroken(false) && !TheSR.IsFull() &&
-            TheSR.VdiCreationCanProceed(DiskSize);
+            TheSR.VdiCreationCanProceed(DiskSize, DiskPhysicalUtilization);
 
         protected override string DisabledReason
         {
@@ -244,6 +244,7 @@ namespace XenAdmin.Controls
         public bool Show { get; private set; }
         protected readonly Host Affinity;
         protected long DiskSize { get; private set; }
+        protected long DiskPhysicalUtilization { get; private set; }
         protected readonly VDI[] existingVDIs;
 
         protected SrPickerItem(SR sr, Host aff, VDI[] vdis)
@@ -251,6 +252,7 @@ namespace XenAdmin.Controls
             existingVDIs = vdis ?? new VDI[0];
             TheSR = sr;
             Affinity = aff;
+            DiskPhysicalUtilization = existingVDIs.Sum(vdi => vdi.physical_utilisation);
             DiskSize = existingVDIs.Sum(vdi =>
                 sr.GetSRType(true) == SR.SRTypes.gfs2 ? vdi.physical_utilisation : vdi.virtual_size);
             Update();
