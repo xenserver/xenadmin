@@ -308,7 +308,7 @@ namespace XenAdmin.Controls.CustomDataGraph
             if (xo is VM vm)
             {
                 var vmHost = vm.Connection.Resolve(vm.resident_on) ?? Helpers.GetCoordinator(vm.Connection);
-                BuildUri(vmHost, "rrd_updates",
+                return BuildUri(vmHost, "rrd_updates",
                     $"session_id={escapedRef}&start={startTime}&cf=AVERAGE&interval={duration}&vm_uuid={vm.uuid}");
             }
 
