@@ -241,7 +241,7 @@
     <value>95, 75</value>
   </data>
   <data name="m_upDownCpuCount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 20</value>
+    <value>80, 20</value>
   </data>
   <data name="m_upDownCpuCount.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -301,7 +301,7 @@
     <value>95, 101</value>
   </data>
   <data name="m_upDownMemory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 20</value>
+    <value>80, 20</value>
   </data>
   <data name="m_upDownMemory.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -331,7 +331,7 @@
     <value>NoControl</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>160, 104</value>
+    <value>181, 104</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 13</value>
