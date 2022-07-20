@@ -310,7 +310,7 @@ namespace XenAdmin.Wizards.ImportWizard
             {
                 var oldTargetConnection = _targetConnection;
                 _targetConnection = m_pageHost.ChosenItem?.Connection;
-                var oldVmMappings = m_vmMappings;
+                var oldHostSelection = m_vmMappings.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.TargetName);
                 m_vmMappings = m_pageHost.VmMappings;
 
                 if (oldTargetConnection != _targetConnection)
@@ -329,7 +329,8 @@ namespace XenAdmin.Wizards.ImportWizard
                 m_pageOptions.Connection = _targetConnection;
                 m_pageBootOptions.Connection = _targetConnection;
 
-                if (oldTargetConnection != _targetConnection || oldVmMappings != m_vmMappings)
+                if (oldTargetConnection != _targetConnection ||
+                    oldHostSelection.Any(kvp=> !m_vmMappings.TryGetValue(kvp.Key, out var map) || map == null || map.TargetName != kvp.Value))
                     NotifyNextPagesOfChange(m_pageStorage, m_pageNetwork, m_pageOptions);
             }
             else if (type == typeof(ImportBootOptionPage))

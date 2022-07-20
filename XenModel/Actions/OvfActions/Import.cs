@@ -513,10 +513,8 @@ namespace XenAdmin.Actions.OvfActions
                 }
             }
 
-            ulong minimumMemory = 512 * Util.BINARY_MEGA; //default minimum
-
-            if (memorySize < minimumMemory)
-                memorySize = minimumMemory;
+            if (memorySize == 0)
+                memorySize = VM.DEFAULT_MEM_MIN_IMG_IMPORT;
             else if (memorySize > long.MaxValue)
                 memorySize = long.MaxValue;
 
