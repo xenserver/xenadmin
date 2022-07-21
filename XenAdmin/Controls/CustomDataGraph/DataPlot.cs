@@ -236,7 +236,7 @@ namespace XenAdmin.Controls.CustomDataGraph
         protected override void OnDrawToBuffer(PaintEventArgs paintEventArgs)
         {
             Program.AssertOnEventThread();
-
+            var originalClipRectangle = paintEventArgs.ClipRectangle;
             Rectangle SlightlySmaller = GraphRectangle(paintEventArgs.ClipRectangle);
             // Fill BG
             paintEventArgs.Graphics.FillRectangle(Palette.PaperBrush, SlightlySmaller);
@@ -374,7 +374,13 @@ namespace XenAdmin.Controls.CustomDataGraph
                         {
                             using (var shadowBrush = Palette.CreateBrush(set.Id))
                             {
+                                // CA-334613: Sharp turns in the graph can result in
+                                // the line being drawn outside of the box
+                                paintEventArgs.Graphics.SetClip(SlightlySmaller);
                                 LineRenderer.Render(paintEventArgs.Graphics, SlightlySmaller, DataPlotNav.XRange, set.CustomYRange ?? SelectedYRange, set.Selected ? thickPen : normalPen, shadowBrush, set.CurrentlyDisplayed, true);
+                                // CA-368958: Resetting the clip so that on the next
+                                // render we don't hide labels and title
+                                paintEventArgs.Graphics.SetClip(originalClipRectangle);
                             }
                         }
                     }
