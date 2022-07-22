@@ -661,13 +661,13 @@
     <value>3, 26</value>
   </data>
   <data name="UseIERadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>260, 17</value>
+    <value>267, 17</value>
   </data>
   <data name="UseIERadioButton.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="UseIERadioButton.Text" xml:space="preserve">
-    <value>Use proxy server settings from Internet &amp;Explorer</value>
+    <value>Use your &amp;operating system's proxy server settings</value>
   </data>
   <data name="&gt;&gt;UseIERadioButton.Name" xml:space="preserve">
     <value>UseIERadioButton</value>
