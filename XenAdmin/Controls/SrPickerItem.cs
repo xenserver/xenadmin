@@ -132,7 +132,8 @@ namespace XenAdmin.Controls
                        !ExistingVDILocation() &&
                        (!TheSR.IsLocalSR() || existingVDIs.All(v => HomeHostCanSeeTargetSr(v, TheSR))) &&
                        TheSR.SupportsVdiCreate() &&
-                       !TheSR.IsDetached() && TheSR.VdiCreationCanProceed(DiskSize, DiskPhysicalUtilization) &&
+                       !TheSR.IsDetached() && 
+                       TheSR.VdiCreationCanProceed(DiskSize, DiskPhysicalUtilization) &&
                        TheSR.SupportsStorageMigration();
             }
         }

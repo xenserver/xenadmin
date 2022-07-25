@@ -518,9 +518,7 @@ namespace XenAPI
                 return false;
 
             if (isThinlyProvisioned && vdiPhysicalUtilization != null)
-            {
                 return vdiPhysicalUtilization < FreeSpace();
-            }
 
             return true;
         }
