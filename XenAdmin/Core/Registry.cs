@@ -143,10 +143,14 @@ namespace XenAdmin.Core
         /// Reads a string value k under XENCENTER_LOCAL_KEYS, targeting the 32-bit
         /// registry view, and trying CurrentUser first and then LocalMachine
         /// </summary>
-        private static string ReadInstalledKey(string k)
+        private static string ReadInstalledKey(string k, RegistryView rView = RegistryView.Default)
         {
-            return ReadRegistryValue(RegistryHive.CurrentUser, XENCENTER_LOCAL_KEYS, k, RegistryView.Registry32) ??
-                   ReadRegistryValue(RegistryHive.LocalMachine, XENCENTER_LOCAL_KEYS, k, RegistryView.Registry32);
+            var val = ReadRegistryValue(RegistryHive.CurrentUser, XENCENTER_LOCAL_KEYS, k, rView);
+
+            if (string.IsNullOrEmpty(val))
+                val = ReadRegistryValue(RegistryHive.LocalMachine, XENCENTER_LOCAL_KEYS, k, rView);
+
+            return string.IsNullOrEmpty(val) ? null : val;
         }
 
         public static string HealthCheckIdentityTokenDomainName => ReadString(HEALTH_CHECK_IDENTITY_TOKEN_DOMAIN_NAME);
@@ -161,28 +165,25 @@ namespace XenAdmin.Core
 
         public static string HealthCheckProductKey => ReadString(HEALTH_CHECK_PRODUCT_KEY);
 
-        public static string HiddenFeatures => ReadInstalledKey(HIDDEN_FEATURES);
+        public static string HiddenFeatures => ReadInstalledKey(HIDDEN_FEATURES, RegistryView.Registry32);
 
-        public static string AdditionalFeatures => ReadInstalledKey(ADDITIONAL_FEATURES);
+        public static string AdditionalFeatures => ReadInstalledKey(ADDITIONAL_FEATURES, RegistryView.Registry32);
 
         public static string AuthTokenName => INTERNAL_STAGE_AUTH_TOKEN;
 
         public static string GetCustomUpdatesXmlLocation()
         {
-            return ReadRegistryValue(RegistryHive.CurrentUser, XENCENTER_LOCAL_KEYS, CUSTOM_UPDATES_XML_LOCATION) ??
-                   ReadRegistryValue(RegistryHive.LocalMachine, XENCENTER_LOCAL_KEYS, CUSTOM_UPDATES_XML_LOCATION);
+            return ReadInstalledKey(CUSTOM_UPDATES_XML_LOCATION);
         }
 
         public static string GetInternalStageAuthToken()
         {
-            return ReadRegistryValue(RegistryHive.CurrentUser, XENCENTER_LOCAL_KEYS, INTERNAL_STAGE_AUTH_TOKEN) ??
-                   ReadRegistryValue(RegistryHive.LocalMachine, XENCENTER_LOCAL_KEYS, INTERNAL_STAGE_AUTH_TOKEN);
+            return ReadInstalledKey(INTERNAL_STAGE_AUTH_TOKEN);
         }
 
         public static string GetBrandOverride()
         {
-            return ReadRegistryValue(RegistryHive.CurrentUser, XENCENTER_LOCAL_KEYS, BRAND_OVERRIDE) ??
-                   ReadRegistryValue(RegistryHive.LocalMachine, XENCENTER_LOCAL_KEYS, BRAND_OVERRIDE);
+            return ReadInstalledKey(BRAND_OVERRIDE);
         }
 
         public static string CustomHelpUrl => ReadString(HELP_URL_OVERRIDE);
