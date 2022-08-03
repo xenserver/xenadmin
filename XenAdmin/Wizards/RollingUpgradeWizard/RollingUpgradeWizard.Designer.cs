@@ -46,11 +46,11 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             // 
             resources.ApplyResources(this, "$this");
             this.Name = "RollingUpgradeWizard";
+            this.MaximizeBox = true;
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWizard)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.XSHelpButton)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion
