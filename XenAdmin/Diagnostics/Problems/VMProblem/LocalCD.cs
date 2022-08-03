@@ -43,7 +43,7 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
 
         public override string Description
         {
-            get { return string.Format(Messages.UPDATES_WIZARD_LOCAL_CD, ServerName, VM.Name().Ellipsise(25)); }
+            get { return string.Format(Messages.UPDATES_WIZARD_LOCAL_CD, ServerName, VM.Name()); }
         }
 
         protected override AsyncAction CreateAction(out bool cancelled)

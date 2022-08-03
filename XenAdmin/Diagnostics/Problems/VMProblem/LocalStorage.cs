@@ -42,7 +42,7 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
 
         public override string Description
         {
-            get { return string.Format(Messages.UPDATES_WIZARD_LOCAL_STORAGE, ServerName, VM.Name().Ellipsise(15)); }
+            get { return string.Format(Messages.UPDATES_WIZARD_LOCAL_STORAGE, ServerName, VM.Name()); }
         }
     }
 }
