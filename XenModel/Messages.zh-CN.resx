@@ -2115,17 +2115,26 @@
   <data name="AVAILABLE" xml:space="preserve">
     <value>可用</value>
   </data>
-  <data name="AVAILABLE_UPDATES_CHECKING" xml:space="preserve">
-	  <value>正在搜索更新...</value>
+  <data name="AVAILABLE_UPDATES_DOWNLOAD_TEXT" xml:space="preserve">
+    <value>下载</value>
   </data>
   <data name="AVAILABLE_UPDATES_ERROR" xml:space="preserve">
     <value>搜索更新时出错: {0}</value>
+  </data>
+  <data name="AVAILABLE_UPDATES_FOUND" xml:space="preserve">
+    <value>适用于您系统的以下软件更新在联机时可用。</value>
   </data>
   <data name="AVAILABLE_UPDATES_INTERNAL_ERROR" xml:space="preserve">
     <value>搜索可用更新时出现内部错误。有关详细信息，请参阅日志。</value>
   </data>
   <data name="AVAILABLE_UPDATES_NETWORK_ERROR" xml:space="preserve">
     <value>搜索可用更新时出现网络错误。有关详细信息，请参阅日志。</value>
+  </data>
+  <data name="AVAILABLE_UPDATES_NOT_FOUND" xml:space="preserve">
+    <value>未找到更新。</value>
+  </data>
+  <data name="AVAILABLE_UPDATES_SEARCHING" xml:space="preserve">
+    <value>正在搜索更新...</value>
   </data>
   <data name="BACKINGUP_HOST" xml:space="preserve">
     <value>正在备份服务器“{0}”</value>
@@ -2702,6 +2711,9 @@
   </data>
   <data name="CERTIFICATE_VERIFICATION_KEY" xml:space="preserve">
     <value>证书验证</value>
+  </data>
+  <data name="CFU_STATUS_CHECK_DESCRIPTION" xml:space="preserve">
+    <value>能够下载更新</value>
   </data>
   <data name="CHANGE" xml:space="preserve">
     <value>更改...</value>
@@ -8672,6 +8684,9 @@ SCSI ID: {2}
   <data name="MIGRATION_NOT_ALLOWED_OUTSIDE_POOL" xml:space="preserve">
     <value>“{0}”可能不会迁移到其池外部</value>
   </data>
+  <data name="MIGRATION_NOT_ALLOWED_USUPPORTED_SR" xml:space="preserve">
+    <value>“{0}”可能不会迁移，因为它位于不支持迁移的存储上</value>
+  </data>
   <data name="MIN" xml:space="preserve">
     <value>最小</value>
   </data>
@@ -10033,6 +10048,15 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="NOTIFICATIONS_SUBMODE_EVENTS_UNREAD_ONE" xml:space="preserve">
     <value>事件(1 个错误)</value>
+  </data>
+  <data name="NOTIFICATIONS_SUBMODE_UPDATES_READ" xml:space="preserve">
+    <value>更新</value>
+  </data>
+  <data name="NOTIFICATIONS_SUBMODE_UPDATES_STATUS" xml:space="preserve">
+    <value>更新: {0}</value>
+  </data>
+  <data name="NOTIFICATIONS_SUBMODE_UPDATES_UNREAD" xml:space="preserve">
+    <value>更新({0})</value>
   </data>
   <data name="NOTIFICATIONS_TOTAL" xml:space="preserve">
     <value>通知({0})</value>
@@ -11427,11 +11451,17 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="RESOLVED_AS" xml:space="preserve">
     <value>已解析为 {0}</value>
   </data>
+  <data name="RESTORE_DISMISSED_UPDATES" xml:space="preserve">
+    <value>还原消除的更新</value>
+  </data>
   <data name="RESTORE_FROM_BACKUP_FINALIZE" xml:space="preserve">
     <value>备份文件已加载到服务器“{0}”。有关如何完成还原过程的说明，请参阅《{1} 管理员指南》。</value>
   </data>
   <data name="RESTORE_HOST" xml:space="preserve">
     <value>从备份还原...</value>
+  </data>
+  <data name="RESTORING" xml:space="preserve">
+    <value>正在还原...</value>
   </data>
   <data name="RESTORING_HOST" xml:space="preserve">
     <value>正在还原服务器“{0}”</value>

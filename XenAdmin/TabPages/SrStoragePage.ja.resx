@@ -250,7 +250,7 @@
     <value>flowLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;toolTipContainerMove.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="RemoveButton.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>

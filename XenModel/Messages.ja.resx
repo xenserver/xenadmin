@@ -2119,17 +2119,26 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="AVAILABLE" xml:space="preserve">
     <value>使用可能</value>
   </data>
-  <data name="AVAILABLE_UPDATES_CHECKING" xml:space="preserve">
-    <value>アップデートを検索しています...</value>
+  <data name="AVAILABLE_UPDATES_DOWNLOAD_TEXT" xml:space="preserve">
+    <value>ダウンロード</value>
   </data>
   <data name="AVAILABLE_UPDATES_ERROR" xml:space="preserve">
     <value>アップデートの検索時にエラーが発生しました。{0}</value>
+  </data>
+  <data name="AVAILABLE_UPDATES_FOUND" xml:space="preserve">
+    <value>以下のソフトウェア アップデートをダウンロードできます。</value>
   </data>
   <data name="AVAILABLE_UPDATES_INTERNAL_ERROR" xml:space="preserve">
     <value>使用可能なアップデートの検索時に内部エラーが発生しました。詳しくはログを参照してください。</value>
   </data>
   <data name="AVAILABLE_UPDATES_NETWORK_ERROR" xml:space="preserve">
     <value>使用可能なアップデートの検索時にネットワーク エラーが発生しました。詳しくはログを参照してください。</value>
+  </data>
+  <data name="AVAILABLE_UPDATES_NOT_FOUND" xml:space="preserve">
+    <value>アップデートが見つかりません。</value>
+  </data>
+  <data name="AVAILABLE_UPDATES_SEARCHING" xml:space="preserve">
+    <value>アップデートを検索しています...</value>
   </data>
   <data name="BACKINGUP_HOST" xml:space="preserve">
     <value>サーバー '{0}' をバックアップしています</value>
@@ -2706,6 +2715,9 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   </data>
   <data name="CERTIFICATE_VERIFICATION_KEY" xml:space="preserve">
     <value>証明書の検証</value>
+  </data>
+  <data name="CFU_STATUS_CHECK_DESCRIPTION" xml:space="preserve">
+    <value>アップデートをダウンロードする機能</value>
   </data>
   <data name="CHANGE" xml:space="preserve">
     <value>変更...</value>
@@ -8676,6 +8688,9 @@ SCSI ID: {2}
   <data name="MIGRATION_NOT_ALLOWED_OUTSIDE_POOL" xml:space="preserve">
     <value>'{0}' をプール外に移行することはできません</value>
   </data>
+  <data name="MIGRATION_NOT_ALLOWED_USUPPORTED_SR" xml:space="preserve">
+    <value>'{0}' は、移行をサポートしていないストレージ上にあるため、移行することができません</value>
+  </data>
   <data name="MIN" xml:space="preserve">
     <value>最小</value>
   </data>
@@ -10033,6 +10048,15 @@ NFS ストレージ リポジトリを構成する場合は、NFS サーバー�
   </data>
   <data name="NOTIFICATIONS_SUBMODE_EVENTS_UNREAD_ONE" xml:space="preserve">
     <value>イベント (1 個のエラー)</value>
+  </data>
+  <data name="NOTIFICATIONS_SUBMODE_UPDATES_READ" xml:space="preserve">
+    <value>アップデート</value>
+  </data>
+  <data name="NOTIFICATIONS_SUBMODE_UPDATES_STATUS" xml:space="preserve">
+    <value>アップデート: {0} 個</value>
+  </data>
+  <data name="NOTIFICATIONS_SUBMODE_UPDATES_UNREAD" xml:space="preserve">
+    <value>アップデート ({0})</value>
   </data>
   <data name="NOTIFICATIONS_TOTAL" xml:space="preserve">
     <value>通知 ({0})</value>
@@ -11427,11 +11451,17 @@ NFS ストレージ リポジトリを構成する場合は、NFS サーバー�
   <data name="RESOLVED_AS" xml:space="preserve">
     <value>{0} として解決されました</value>
   </data>
+  <data name="RESTORE_DISMISSED_UPDATES" xml:space="preserve">
+    <value>クリアされたアップデートを復元</value>
+  </data>
   <data name="RESTORE_FROM_BACKUP_FINALIZE" xml:space="preserve">
     <value>バックアップ ファイルがサーバー '{0}' にロードされました。復元手順については、『{1} 管理者ガイド』を参照してください。</value>
   </data>
   <data name="RESTORE_HOST" xml:space="preserve">
     <value>バックアップから復元...</value>
+  </data>
+  <data name="RESTORING" xml:space="preserve">
+    <value>復元しています...</value>
   </data>
   <data name="RESTORING_HOST" xml:space="preserve">
     <value>サーバー '{0}' を復元しています</value>
