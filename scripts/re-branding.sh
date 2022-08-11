@@ -59,6 +59,7 @@ rebranding_global()
         -e "s#\[BRANDING_BUILD_NUMBER\]#${GLOBAL_BUILD_NUMBER}#g" \
         -e "s#\[XenServer\]#${BRANDING_SERVER}#g" \
         -e "s#\[XenCenter\]#${BRANDING_BRAND_CONSOLE}#g" \
+        -e "s#\[UPDATES_URL\]#${UPDATES_URL}#g" \
         $1
 }
 
