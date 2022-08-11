@@ -117,8 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="UPDATES_URL" xml:space="preserve">
+  <data name="LEGACY_UPDATES_URL" xml:space="preserve">
     <value>https://updates.xensource.com/XenServer/updates.xml</value>
+  </data>
+  <data name="UPDATES_URL" xml:space="preserve">
+    <value>[UPDATES_URL]</value>
   </data>
   <data name="PERF_ALERT_MAIL_DEFAULT_LANGUAGE" xml:space="preserve">
     <value>en-US</value>

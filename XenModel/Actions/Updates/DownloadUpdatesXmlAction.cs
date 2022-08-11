@@ -319,7 +319,11 @@ namespace XenAdmin.Actions
         protected virtual XmlDocument FetchCheckForUpdatesXml()
         {
             var xdoc = new XmlDocument();
-            var checkForUpdatesUrl = XenAdminConfigManager.Provider.GetCustomUpdatesXmlLocation() ?? BrandManager.UpdatesUrl;
+            
+            var checkForUpdatesUrl = XenAdminConfigManager.Provider.GetCustomUpdatesXmlLocation();
+            if (string.IsNullOrEmpty(checkForUpdatesUrl))
+                checkForUpdatesUrl = BrandManager.UpdatesUrl;
+            
             var uri = new Uri(checkForUpdatesUrl);
 
             if (uri.IsFile)
@@ -335,7 +339,36 @@ namespace XenAdmin.Actions
                     webClient.Proxy = proxy;
                     webClient.Headers.Add("User-Agent", _userAgent);
 
-                    using (var stream = new MemoryStream(webClient.DownloadData(uri)))
+                    byte[] responseBytes;
+
+                    try
+                    {
+                        responseBytes = webClient.DownloadData(uri);
+                    }
+                    catch (WebException wex)
+                    {
+                        if (checkForUpdatesUrl == BrandManager.UpdatesUrl)
+                        {
+                            checkForUpdatesUrl = BrandManager.LegacyUpdatesUrl;
+                            uri = new Uri(checkForUpdatesUrl);
+
+                            try
+                            {
+                                responseBytes = webClient.DownloadData(uri);
+                            }
+                            catch
+                            {
+                                //throw the original exception as at some point the legacy url may not be relevant
+                                throw wex;
+                            }
+                        }
+                        else
+                        {
+                            throw;
+                        }
+                    }
+
+                    using (var stream = new MemoryStream(responseBytes))
                         xdoc.Load(stream);
                 }
             }
