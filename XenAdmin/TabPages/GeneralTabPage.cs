@@ -558,38 +558,82 @@ namespace XenAdmin.TabPages
 
         private void generatePoolPatchesBox()
         {
-            Pool pool = xenObject as Pool;
-            if (pool == null)
+            if (!(xenObject is Pool pool))
                 return;
 
             PDSection s = pdSectionUpdates;
 
-            List<KeyValuePair<String, String>> messages = CheckPoolUpdate(pool);
+            var messages = CheckPoolUpdate(pool);
             if (messages.Count > 0)
             {
-                foreach (KeyValuePair<String, String> kvp in messages)
-                {
+                foreach (var kvp in messages)
                     s.AddEntry(kvp.Key, kvp.Value);
-                }
             }
+
             Host master = Helpers.GetMaster(xenObject.Connection);
             if (master == null)
                 return;
 
-            var poolAppPatches = poolAppliedPatches();
-            if (!string.IsNullOrEmpty(poolAppPatches))
+            var fullyApplied = new List<string>();
+            var partAppliedError = new List<string>();
+            var partApplied = new List<string>();
+
+            var cache = xenObject.Connection.Cache;
+            var allHostCount = xenObject.Connection.Cache.HostCount;
+
+            if (Helpers.ElyOrGreater(xenObject.Connection))
             {
-                s.AddEntry(FriendlyName("Pool_patch.fully_applied"), poolAppPatches);
+                foreach (var u in cache.Pool_updates)
+                {
+                    var entry = Helpers.UpdatesFriendlyNameAndVersion(u);
+                    var appliedHostCount = u.AppliedOnHosts().Count;
+
+                    if (appliedHostCount == allHostCount)
+                    {
+                        fullyApplied.Add(entry);
+                    }
+                    else if (appliedHostCount > 0)
+                    {
+                        if (u.EnforceHomogeneity())
+                            partAppliedError.Add(entry);
+                        else
+                            partApplied.Add(entry);
+                    }
+                }
+            }
+            else
+            {
+                foreach (var p in cache.Pool_patches)
+                {
+                    var entry = p.name_label;
+                    var appliedHostCount = p.host_patches.Count;
+
+                    if (appliedHostCount == allHostCount)
+                        fullyApplied.Add(entry);
+                    else if (appliedHostCount > 0)
+                        partAppliedError.Add(entry);
+                }
             }
 
-            var poolPartPatches = poolPartialPatches();
-            if (!string.IsNullOrEmpty(poolPartPatches))
+            if (fullyApplied.Count > 0)
             {
-                CommandToolStripMenuItem applypatch = new CommandToolStripMenuItem(
-                    new InstallNewUpdateCommand(Program.MainWindow), true);
-                var menuItems = new[] { applypatch };
+                fullyApplied.Sort(StringUtility.NaturalCompare);
+                s.AddEntry(FriendlyName("Pool_patch.fully_applied"), string.Join(Environment.NewLine, fullyApplied));
+            }
 
-                s.AddEntry(FriendlyName("Pool_patch.partially_applied"), poolPartPatches, menuItems, Color.Red);
+            if (partApplied.Count > 0)
+            {
+                var menuItems = new[] {new CommandToolStripMenuItem(new InstallNewUpdateCommand(Program.MainWindow), true)};
+                partApplied.Sort(StringUtility.NaturalCompare);
+                s.AddEntry(FriendlyName("Pool_patch.partially_applied"), string.Join(Environment.NewLine, partApplied), menuItems);
+            }
+
+            if (partAppliedError.Count > 0)
+            {
+                var menuItems = new[] {new CommandToolStripMenuItem(new InstallNewUpdateCommand(Program.MainWindow), true)};
+                partAppliedError.Sort(StringUtility.NaturalCompare);
+                s.AddEntry(string.Format(Messages.STRING_SPACE_STRING, FriendlyName("Pool_patch.partially_applied"), Messages.UPDATES_GENERAL_TAB_ENFORCE_HOMOGENEITY),
+                    string.Join(Environment.NewLine, partAppliedError), menuItems, Color.Red);
             }
         }
 
@@ -1720,59 +1764,6 @@ namespace XenAdmin.TabPages
             if (vm.IsUEFIEnabled())
                 return Messages.UEFI_BOOT;
             return Messages.BIOS_BOOT;
-        }
-
-        #endregion
-
-        #region Pool delegates
-
-        private string poolAppliedPatches()
-        {
-            return 
-                Helpers.ElyOrGreater(xenObject.Connection)
-                ? poolUpdateString(update => update.AppliedOnHosts().Count == xenObject.Connection.Cache.HostCount)
-                : poolPatchString(patch => patch.host_patches.Count == xenObject.Connection.Cache.HostCount);
-        }
-
-        private string poolPartialPatches()
-        {
-            return Helpers.ElyOrGreater(xenObject.Connection)
-                ? poolUpdateString(update =>
-                {
-                    var appliedOnHosts = update.AppliedOnHosts();
-                    return appliedOnHosts.Count > 0 && appliedOnHosts.Count != xenObject.Connection.Cache.HostCount;
-                })
-                : poolPatchString(patch => patch.host_patches.Count > 0 && patch.host_patches.Count != xenObject.Connection.Cache.HostCount);
-        }
-
-        private string poolPatchString(Predicate<Pool_patch> predicate)
-        {
-            Pool_patch[] patches = xenObject.Connection.Cache.Pool_patches;
-
-            List<String> output = new List<String>();
-
-            foreach (Pool_patch patch in patches)
-                if (predicate(patch))
-                    output.Add(patch.name_label);
-
-            output.Sort(StringUtility.NaturalCompare);
-
-            return string.Join(Environment.NewLine, output);
-        }
-
-        private string poolUpdateString(Predicate<Pool_update> predicate)
-        {
-            Pool_update[] updates = xenObject.Connection.Cache.Pool_updates;
-
-            List<String> output = new List<String>();
-
-            foreach (var update in updates)
-                if (predicate(update))
-                    output.Add(Helpers.UpdatesFriendlyNameAndVersion(update));
-
-            output.Sort(StringUtility.NaturalCompare);
-
-            return string.Join(Environment.NewLine, output);
         }
 
         #endregion

@@ -36956,6 +36956,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to (full application required).
+        /// </summary>
+        public static string UPDATES_GENERAL_TAB_ENFORCE_HOMOGENEITY {
+            get {
+                return ResourceManager.GetString("UPDATES_GENERAL_TAB_ENFORCE_HOMOGENEITY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Install Update.
         /// </summary>
         public static string UPDATES_WIZARD {
