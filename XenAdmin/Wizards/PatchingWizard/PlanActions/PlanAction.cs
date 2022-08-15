@@ -51,37 +51,29 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         private readonly Guid _actionId;
 
         private readonly object historyLock = new object();
-        private readonly Stack<string> _progressHistory = new Stack<string>();
+        private readonly Stack<PlanActionProgressStep> _progressHistory = new Stack<PlanActionProgressStep>();
 
-        public virtual string Title
-        {
-            get { return null; }
-        }
+        public virtual string Title => null;
 
-        public virtual bool IsSkippable
-        {
-            get { return false; }
-        }
+        public virtual bool IsSkippable => false;
 
         public virtual bool Skipping { private get; set; }
 
         protected virtual void DoOnSkip() { }
 
+        public DateTime Timestamp { get; private set; }
+
         public int PercentComplete
         {
-            get
-            {
-                return _percentComplete;
-            }
+            get => _percentComplete;
             protected set
             {
                 _percentComplete = value;
-                if (OnProgressChange != null)
-                    OnProgressChange(this);
+                OnProgressChange?.Invoke(this);
             }
         }
 
-        public List<string> ProgressHistory
+        public List<PlanActionProgressStep> ProgressHistory
         {
             get
             {
@@ -143,6 +135,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             finally
             {
                 _running = false;
+                Timestamp = DateTime.Now;
                 PercentComplete = 100;
             }
         }
@@ -152,7 +145,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             get
             {
                 lock (historyLock)
-                    return _progressHistory.Count > 0 ? _progressHistory.Peek() : string.Empty;
+                    return _progressHistory.Count > 0 ? _progressHistory.Peek().Description : string.Empty;
             }
         }
 
@@ -163,11 +156,12 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 if (_progressHistory.Count > 0)
                 {
                     var popped = _progressHistory.Pop();
-                    _progressHistory.Push(popped + Messages.PLAN_ACTION_DONE);
+                    var newItem = new PlanActionProgressStep(popped.Description + Messages.PLAN_ACTION_DONE, DateTime.Now);
+                    _progressHistory.Push(newItem);
                 }
 
                 if (step != null)
-                    _progressHistory.Push(step);
+                    _progressHistory.Push(new PlanActionProgressStep(step, DateTime.Now));
 
                 if (OnProgressChange != null)
                     OnProgressChange(this);
@@ -181,7 +175,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 if (_progressHistory.Count > 0)
                     _progressHistory.Pop();
 
-                _progressHistory.Push(step);
+                _progressHistory.Push(new PlanActionProgressStep(step, DateTime.Now));
 
                 if (OnProgressChange != null)
                     OnProgressChange(this);
@@ -262,6 +256,17 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         public virtual void Cancel()
         {
             Cancelling = true;
+        }
+
+        public class PlanActionProgressStep
+        {
+            public string Description { get; }
+            public DateTime Timestamp { get; }
+            public PlanActionProgressStep(string description, DateTime timestamp)
+            {
+                Description = description;
+                Timestamp = timestamp;
+            }
         }
     }
 }
