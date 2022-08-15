@@ -53,13 +53,7 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
         }
 
 
-        protected string ServerName
-        {
-            get
-            {
-                return residentOn != null ? Helpers.GetName(residentOn).Ellipsise(30) : Helpers.GetName(Helpers.GetPoolOfOne(VM.Connection)).Ellipsise(30);
-            }
-        }
+        protected string ServerName => residentOn != null ? Helpers.GetName(residentOn).Ellipsise(30) : Helpers.GetName(Helpers.GetPoolOfOne(VM.Connection)).Ellipsise(30);
 
         public override string HelpMessage
         {
@@ -74,10 +68,7 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
             }
         }
 
-        public sealed override string Title
-        {
-            get { return string.Format(Messages.PROBLEM_VMPROBLEM_TITLE, VM.uuid); }
-        }
+        public sealed override string Title => string.Format(Messages.PROBLEM_VMPROBLEM_TITLE, VM.uuid);
 
         protected AsyncAction SuspendVM()
         {
@@ -89,13 +80,7 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
             return new VMHardShutdown(VM);
         }
 
-        protected virtual bool CanSuspendVM
-        {
-            get
-            {
-                return VM.allowed_operations.Contains(vm_operations.suspend);
-            }
-        }
+        protected virtual bool CanSuspendVM => VM.allowed_operations.Contains(vm_operations.suspend);
 
         protected override AsyncAction CreateAction(out bool cancelled)
         {

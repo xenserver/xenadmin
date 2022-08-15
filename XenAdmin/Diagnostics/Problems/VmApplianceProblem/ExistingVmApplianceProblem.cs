@@ -52,18 +52,9 @@ namespace XenAdmin.Diagnostics.Problems.VmApplianceProblem
             this.vmsToDestroy = vmsToDestroy;
         }
 
-        public override string Description
-        {
-            get
-            {
-                return String.Format(Messages.DR_WIZARD_PROBLEM_EXISTING_APPLIANCE, Helpers.GetPoolOfOne(vmsToDestroy[0].Connection).Name()); 
-            } 
-        }
+        public override string Description => String.Format(Messages.DR_WIZARD_PROBLEM_EXISTING_APPLIANCE, Helpers.GetPoolOfOne(vmsToDestroy[0].Connection).Name());
 
-        public override string HelpMessage
-        {
-            get { return Messages.DR_WIZARD_PROBLEM_EXISTING_APPLIANCE_HELPMESSAGE; } 
-        }
+        public override string HelpMessage => Messages.DR_WIZARD_PROBLEM_EXISTING_APPLIANCE_HELPMESSAGE;
 
         protected override AsyncAction CreateAction(out bool cancelled)
         {

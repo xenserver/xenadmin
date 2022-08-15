@@ -41,10 +41,7 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
         public LocalCD(Check check, VM vm)
             : base(check, vm) { }
 
-        public override string Description
-        {
-            get { return string.Format(Messages.UPDATES_WIZARD_LOCAL_CD, ServerName, VM.Name()); }
-        }
+        public override string Description => string.Format(Messages.UPDATES_WIZARD_LOCAL_CD, ServerName, VM.Name());
 
         protected override AsyncAction CreateAction(out bool cancelled)
         {
@@ -60,10 +57,6 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
 
         }
 
-        public override string HelpMessage
-        {
-            get { return Messages.EJECT_CD; }
-        }
-
+        public override string HelpMessage => Messages.EJECT_CD;
     }
 }

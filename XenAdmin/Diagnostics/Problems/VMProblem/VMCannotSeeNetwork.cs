@@ -46,9 +46,6 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
             Network = network;
         }
 
-        public override string Description
-        {
-            get { return String.Format(Messages.UPDATES_WIZARD_CANNOT_SEE_NETWORK, ServerName, VM.Name(), Network.Name()); }
-        }
+        public override string Description => String.Format(Messages.UPDATES_WIZARD_CANNOT_SEE_NETWORK, ServerName, VM.Name(), Network.Name());
     }
 }

@@ -70,13 +70,6 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
             }
         }
 
-        public override string HelpMessage
-        {
-            get
-            {
-                return "";
-            }
-        }
-
+        public override string HelpMessage => "";
     }
 }

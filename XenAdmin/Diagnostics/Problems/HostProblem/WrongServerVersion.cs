@@ -50,17 +50,8 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
         {
         }
 
-        public override string Description
-        {
-            get 
-            {
-                return string.Format(Messages.UPDATE_FOR_DIFFERENT_XENSERVER_VERSION, ServerName);
-            }
-        }
+        public override string Description => string.Format(Messages.UPDATE_FOR_DIFFERENT_XENSERVER_VERSION, ServerName);
 
-        public override string HelpMessage
-        {
-            get { return string.Empty; }
-        }
+        public override string HelpMessage => string.Empty;
     }
 }

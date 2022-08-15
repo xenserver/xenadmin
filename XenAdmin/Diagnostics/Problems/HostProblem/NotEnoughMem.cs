@@ -51,10 +51,7 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
         {
         }
 
-        public override string Description
-        {
-            get { return string.Format(Messages.UPDATES_WIZARD_NO_MEMORY, ServerName); }
-        }
+        public override string Description => string.Format(Messages.UPDATES_WIZARD_NO_MEMORY, ServerName);
 
         protected override AsyncAction CreateAction(out bool cancelled)
         {
@@ -75,10 +72,7 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
             return null;
         }
 
-        public override string HelpMessage
-        {
-            get { return Messages.SUSPEND_VMS; }
-        }
+        public override string HelpMessage => Messages.SUSPEND_VMS;
 
         public override AsyncAction CreateUnwindChangesAction()
         {

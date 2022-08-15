@@ -44,17 +44,8 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
             this.requiredUpdates = requiredUpdates;
         }
 
-        public override string Description
-        {
-            get 
-            {
-                return string.Format(Messages.UPDATES_WIZARD_PRECHECK_FAILED_REQUIRED_UPDATE_MISSING, ServerName, requiredUpdates);
-            }
-        }
+        public override string Description => string.Format(Messages.UPDATES_WIZARD_PRECHECK_FAILED_REQUIRED_UPDATE_MISSING, ServerName, requiredUpdates);
 
-        public override string HelpMessage
-        {
-            get { return string.Empty; }
-        }
+        public override string HelpMessage => string.Empty;
     }
 }
