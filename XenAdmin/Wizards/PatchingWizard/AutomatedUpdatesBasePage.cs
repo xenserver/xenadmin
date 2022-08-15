@@ -43,7 +43,6 @@ using System.Windows.Forms;
 using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Dialogs;
 using XenAdmin.Wizards.RollingUpgradeWizard.PlanActions;
-using Console = System.Console;
 
 
 namespace XenAdmin.Wizards.PatchingWizard
@@ -268,11 +267,11 @@ namespace XenAdmin.Wizards.PatchingWizard
                 var errorSb = new StringBuilder();
 
                 if (!string.IsNullOrEmpty(bgw.Name))
-                    sb.AppendFormattedLine($"{bgw.Name}:", addTimestamp);
+                    sb.AppendLine($"{bgw.Name}:");
 
                 foreach (var pa in bgw.DoneActions)
                 {
-                    pa.ProgressHistory.ForEach(step => sb.AppendFormattedLine(step, addTimestamp, true));
+                    pa.ProgressHistory.ForEach(step => sb.AppendFormattedLine(value: step.Description, timestamp: step.Timestamp, showTimestamp: addTimestamp ,indent: true));
 
                     if (pa.Error == null)
                         continue;
@@ -282,12 +281,12 @@ namespace XenAdmin.Wizards.PatchingWizard
                         bgwCancellationCount++;
                         continue;
                     }
-                    errorSb.AppendFormattedLine(pa.Error.InnerException is Failure innerEx ? innerEx.Message : pa.Error.Message , addTimestamp, true);
+                    errorSb.AppendFormattedLine(pa.Error.InnerException is Failure innerEx ? innerEx.Message : pa.Error.Message , timestamp: pa.Timestamp, showTimestamp: addTimestamp, indent: true);
 
                     if (pa.IsSkippable)
                     {
                         Debug.Assert(!string.IsNullOrEmpty(pa.Title));
-                        errorSb.AppendFormattedLine(string.Format(Messages.RPU_WIZARD_ERROR_SKIP_MSG, pa.Title), addTimestamp, true, true);
+                        errorSb.AppendFormattedLine(string.Format(Messages.RPU_WIZARD_ERROR_SKIP_MSG, pa.Title), timestamp : pa.Timestamp, showTimestamp: addTimestamp, indent: true, addExtraLine: true);
                     }
 
                     bgwErrorCount++;
@@ -295,25 +294,25 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 foreach (var pa in bgw.InProgressActions)
                 {
-                    pa.ProgressHistory.ForEach(step => sb.AppendFormattedLine(step, addTimestamp, true));
+                    pa.ProgressHistory.ForEach(step => sb.AppendFormattedLine(value: step.Description, timestamp: step.Timestamp, showTimestamp: addTimestamp, indent: true));
                 }
 
                 sb.AppendLine();
 
                 if (bgwCancellationCount > 0)
                 {
-                    sb.AppendFormattedLine(UserCancellationMessage(), addTimestamp, indent: true);
+                    sb.AppendFormattedLine(UserCancellationMessage(), timestamp: DateTime.Now, showTimestamp: addTimestamp, indent: true);
                 }
                 else if (bgwErrorCount > 0)
                 {
-                    sb.AppendFormattedLine(FailureMessagePerPool(bgwErrorCount > 1), addTimestamp, true);
+                    sb.AppendFormattedLine(FailureMessagePerPool(bgwErrorCount > 1), timestamp: DateTime.Now, showTimestamp: addTimestamp, indent: true);
 
                     // we don't add formatting since errorSb has its own
-                    sb.Append(errorSb.ToString());
+                    sb.Append(errorSb);
                 }
                 else if (!bgw.IsBusy)
                 {
-                    sb.AppendFormattedLine(WarningMessagePerPool(bgw.Pool) ?? SuccessMessagePerPool(bgw.Pool), addTimestamp, true);
+                    sb.AppendFormattedLine(WarningMessagePerPool(bgw.Pool) ?? SuccessMessagePerPool(bgw.Pool), DateTime.Now, showTimestamp: addTimestamp, indent: true);
                 }
 
                 sb.AppendLine();

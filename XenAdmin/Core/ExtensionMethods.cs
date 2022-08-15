@@ -109,11 +109,12 @@ namespace XenAdmin.Core
         /// </summary>
         /// <param name="builder">The <see cref="StringBuilder"/> to which the modified value will be appended.</param>
         /// <param name="value">The value to format before appending.</param>
-        /// <param name="addTimestamp">true if each line should be prepended with a timestamp</param>
+        /// <param name="timestamp">The timestamp to prepend to each line. If null, no timestamp will be added.</param>
+        /// <param name="showTimestamp">Override for the timestamp. If set to false, no timestamp will be shown even if the value is null.</param>
         /// <param name="indent">true if each line should be prepended with indentation. Uses the default indentation defined in <see cref="ExtensionMethods"/>: <see cref="DEFAULT_STRING_INDENTATION"/></param>
         /// <param name="addExtraLine">true to append an extra line.</param>
         /// <returns>The input <see cref="StringBuilder"/> after the operation has been completed.</returns>
-        public static StringBuilder AppendFormattedLine(this StringBuilder builder, string value, bool addTimestamp = false, bool indent = false, bool addExtraLine = false)
+        public static StringBuilder AppendFormattedLine(this StringBuilder builder, string value, DateTime? timestamp, bool showTimestamp = true, bool indent = false, bool addExtraLine = false)
         {
             var formattedValue = value;
             if (!string.IsNullOrWhiteSpace(value))
@@ -122,9 +123,9 @@ namespace XenAdmin.Core
                 {
                     formattedValue = PrependIndentation(formattedValue);
                 }
-                if (addTimestamp)
+                if (timestamp != null && showTimestamp)
                 {
-                    formattedValue = PrependTimestamps(formattedValue);
+                    formattedValue = PrependTimestamps(formattedValue, (DateTime) timestamp);
                 }
             }
 
@@ -155,12 +156,12 @@ namespace XenAdmin.Core
         /// Prepend every line in the input value with a formatted string of <see cref="DateTime.Now"/>.
         /// </summary>
         /// <param name="value">The input value</param>
+        /// <param name="timestamp">The timestamp to show</param>
         /// <param name="localize">true to format the string with the user's locale</param>
         /// <returns>The input value with prepended timestamps/</returns>
-        public static string PrependTimestamps(string value, bool localize = true)
+        public static string PrependTimestamps(string value, DateTime timestamp, bool localize = true)
         {
-            var timestamp = DateTime.Now;
-            var timestampString = HelpersGUI.DateTimeToString(timestamp, Messages.DATEFORMAT_HMS, localize);
+            var timestampString = HelpersGUI.DateTimeToString(timestamp, Messages.DATEFORMAT_DM_HM, localize);
             // normalise all line endings before splitting
             var lines = value.Replace(Environment.NewLine, "\n").Split('\n');
             return string.Join(Environment.NewLine, lines.Select(line => $"{timestampString}> {line}"));
