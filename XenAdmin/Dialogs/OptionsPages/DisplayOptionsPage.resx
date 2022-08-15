@@ -160,7 +160,7 @@
     <value>0</value>
   </data>
   <data name="showTimestampsCheckBox.Text" xml:space="preserve">
-    <value>Show timestamps in the update logs</value>
+    <value>&amp;Show timestamps on the update and upgrade log consoles</value>
   </data>
   <data name="&gt;&gt;showTimestampsCheckBox.Name" xml:space="preserve">
     <value>showTimestampsCheckBox</value>
@@ -223,7 +223,7 @@
     <value>2</value>
   </data>
   <data name="updateLogOptionsDecentGroupBox.Text" xml:space="preserve">
-    <value>Update logs options</value>
+    <value>Log consoles options</value>
   </data>
   <data name="&gt;&gt;updateLogOptionsDecentGroupBox.Name" xml:space="preserve">
     <value>updateLogOptionsDecentGroupBox</value>
@@ -521,7 +521,7 @@
     <value>0</value>
   </data>
   <data name="checkBoxStoreTab.Text" xml:space="preserve">
-    <value>Remember the last selected Tab for a resource</value>
+    <value>&amp;Remember the last selected Tab for a resource</value>
   </data>
   <data name="&gt;&gt;checkBoxStoreTab.Name" xml:space="preserve">
     <value>checkBoxStoreTab</value>
