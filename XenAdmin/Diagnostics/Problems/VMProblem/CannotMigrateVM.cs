@@ -43,14 +43,14 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
         public enum CannotMigrateVMReason { Unknown, LicenseRestriction, CannotMigrateVm, CannotMigrateVmNoTools, CannotMigrateVmNoGpu, LacksFeatureSuspend, HasPCIAttached, OperationInProgress }
 
         public CannotMigrateVM(Check check, VM vm, CannotMigrateVMReason licenseRestriction = CannotMigrateVMReason.Unknown)
-            : base(check, vm) 
+            : base(check, vm)
         {
             this.reason = licenseRestriction;
         }
 
         public override string Description
         {
-            get 
+            get
             {
                 string descriptionFormat;
 
@@ -72,7 +72,7 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
                         descriptionFormat = Messages.UPDATES_WIZARD_CANNOT_MIGRATE_VM_SUSPEND_REASON;
                         break;
 
-                    case CannotMigrateVMReason.LicenseRestriction :
+                    case CannotMigrateVMReason.LicenseRestriction:
                         descriptionFormat = Messages.UPDATES_WIZARD_CANNOT_MIGRATE_VM_LICENSE_REASON;
                         break;
 
@@ -89,7 +89,7 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
                         break;
                 }
 
-                return String.Format(descriptionFormat, ServerName, VM.Name()); 
+                return String.Format(descriptionFormat, ServerName, VM.Name());
             }
         }
     }

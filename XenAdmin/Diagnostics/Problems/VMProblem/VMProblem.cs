@@ -100,7 +100,7 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
 
             Debug.Assert(VM.power_state == vm_power_state.Halted ||
                          VM.power_state == vm_power_state.Suspended, "Expected VM to be suspended or shut down!");
-            if(VM.power_state==vm_power_state.Halted)
+            if (VM.power_state == vm_power_state.Halted)
                 return new VMStartOnAction(VM, residentOn, VMOperationCommand.WarningDialogHAInvalidConfig, VMOperationCommand.StartDiagnosisForm);
             else
             {

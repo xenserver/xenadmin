@@ -82,7 +82,7 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
                 var vm = vmOnHost.Key;
 
                 // check if the vm is still in the cache and is halted
-                if (vm.Connection.Resolve(new XenRef<VM>(vm.opaque_ref)) == null || vm.power_state != vm_power_state.Halted) 
+                if (vm.Connection.Resolve(new XenRef<VM>(vm.opaque_ref)) == null || vm.power_state != vm_power_state.Halted)
                     continue;
 
                 var startOn = vm.Connection.Resolve(vmOnHost.Value);

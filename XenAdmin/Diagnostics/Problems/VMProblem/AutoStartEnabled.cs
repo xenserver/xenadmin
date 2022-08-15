@@ -57,7 +57,7 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
 
         private Action<Session> ActionDelegate(bool autostartValue)
         {
-            return delegate(Session session)
+            return delegate (Session session)
                        {
                            var vm = VM.Connection.Resolve(new XenRef<VM>(VM.opaque_ref));
                            var vmclone = (VM)vm.Clone();

@@ -76,14 +76,14 @@ namespace XenAdmin.Diagnostics.Problems.VmApplianceProblem
 
             //shut down appliance action
             AsyncAction shutDownAction = hardShutdown
-                                             ? (AsyncAction) new HardShutDownApplianceAction(VmAppliance)
+                                             ? (AsyncAction)new HardShutDownApplianceAction(VmAppliance)
                                              : new ShutDownApplianceAction(VmAppliance);
 
             if (!shutdown)
                 return shutDownAction;
 
             //shut down fate-sharing VMs
-            var actions = new List<AsyncAction> {shutDownAction};
+            var actions = new List<AsyncAction> { shutDownAction };
 
             foreach (var vm in fateSharingVms)
             {

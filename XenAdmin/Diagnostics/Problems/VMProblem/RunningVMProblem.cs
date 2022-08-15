@@ -39,7 +39,7 @@ using XenAPI;
 
 namespace XenAdmin.Diagnostics.Problems.VMProblem
 {
-    public class RunningVMProblem: VMProblem
+    public class RunningVMProblem : VMProblem
     {
         private readonly bool hardShutdown;
 

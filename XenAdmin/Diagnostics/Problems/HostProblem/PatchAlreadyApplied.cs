@@ -40,7 +40,7 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
     {
         private readonly Host _host;
 
-        public PatchAlreadyApplied(Check check,  Host host)
+        public PatchAlreadyApplied(Check check, Host host)
             : base(check)
         {
             _host = host;

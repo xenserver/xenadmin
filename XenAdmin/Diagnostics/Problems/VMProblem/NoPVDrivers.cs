@@ -37,7 +37,7 @@ using XenAPI;
 
 namespace XenAdmin.Diagnostics.Problems.VMProblem
 {
-    public class NoPVDrivers: VMProblem
+    public class NoPVDrivers : VMProblem
     {
         public NoPVDrivers(Check check, VM vm)
             : base(check, vm)

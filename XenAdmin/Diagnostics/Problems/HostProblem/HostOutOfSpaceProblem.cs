@@ -46,7 +46,7 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
         private readonly Pool_update update;
 
         public HostOutOfSpaceProblem(Check check, Host host, Pool_patch patch, DiskSpaceRequirements diskSpaceReq)
-            : base(check,  host)
+            : base(check, host)
         {
             this.patch = patch;
             this.diskSpaceReq = diskSpaceReq;
@@ -82,13 +82,13 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
 
                 switch (diskSpaceReq.Operation)
                 {
-                    case DiskSpaceRequirements.OperationTypes.install :
+                    case DiskSpaceRequirements.OperationTypes.install:
                         return string.Format(Messages.NOT_ENOUGH_SPACE_MESSAGE_INSTALL, ServerName, name);
-                    
-                    case DiskSpaceRequirements.OperationTypes.upload :
+
+                    case DiskSpaceRequirements.OperationTypes.upload:
                         return string.Format(Messages.NOT_ENOUGH_SPACE_MESSAGE_UPLOAD, ServerName, name);
-                    
-                    case DiskSpaceRequirements.OperationTypes.automatedUpdates :
+
+                    case DiskSpaceRequirements.OperationTypes.automatedUpdates:
                         return string.Format(Messages.NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE, ServerName);
 
                     case DiskSpaceRequirements.OperationTypes.automatedUpdatesUploadOne:
@@ -108,7 +108,7 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
 
             if (patch != null && diskSpaceReq.CanCleanup)
             {
-                Program.Invoke(Program.MainWindow, delegate()
+                Program.Invoke(Program.MainWindow, delegate ()
                 {
                     using (var dlg = new WarningDialog(diskSpaceReq.GetSpaceRequirementsMessage(),
                         new ThreeButtonDialog.TBDButton(Messages.YES, DialogResult.Yes, selected: true),
@@ -122,15 +122,15 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
                 });
             }
             else
-            { 
-                Program.Invoke(Program.MainWindow, delegate()
+            {
+                Program.Invoke(Program.MainWindow, delegate ()
                 {
                     using (var dlg = new WarningDialog(diskSpaceReq.GetSpaceRequirementsMessage()))
                         dlg.ShowDialog();
                 });
             }
             cancelled = action == null;
-            
+
             return action;
         }
 

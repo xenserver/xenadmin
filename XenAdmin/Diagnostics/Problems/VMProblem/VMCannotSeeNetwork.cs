@@ -40,8 +40,8 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
     {
         private readonly XenAPI.Network Network;
 
-        public VMCannotSeeNetwork(Check check,  VM vm, XenAPI.Network network)
-            : base(check,  vm)
+        public VMCannotSeeNetwork(Check check, VM vm, XenAPI.Network network)
+            : base(check, vm)
         {
             Network = network;
         }

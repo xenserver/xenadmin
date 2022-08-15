@@ -37,8 +37,8 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
 {
     class ToolsCD : LocalCD
     {
-        public ToolsCD(Check check,  VM vm)
-            : base(check,  vm)
+        public ToolsCD(Check check, VM vm)
+            : base(check, vm)
         {
         }
 
