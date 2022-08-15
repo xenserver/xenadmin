@@ -105,6 +105,7 @@ namespace XenAdmin.Core
 
         /// <summary>
         /// Add a new line to the input <see cref="StringBuilder"/>, with options to format the input value before it's appended.
+        /// timestamps and indentation will be ignored if the input value is an null or whitespace
         /// </summary>
         /// <param name="builder">The <see cref="StringBuilder"/> to which the modified value will be appended.</param>
         /// <param name="value">The value to format before appending.</param>
@@ -115,7 +116,7 @@ namespace XenAdmin.Core
         public static StringBuilder AppendFormattedLine(this StringBuilder builder, string value, bool addTimestamp = false, bool indent = false, bool addExtraLine = false)
         {
             var formattedValue = value;
-            if (!string.IsNullOrEmpty(value))
+            if (!string.IsNullOrWhiteSpace(value))
             {
                 if (indent)
                 {
