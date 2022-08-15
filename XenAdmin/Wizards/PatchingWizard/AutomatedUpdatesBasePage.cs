@@ -282,7 +282,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                         bgwCancellationCount++;
                         continue;
                     }
-                    errorSb.AppendFormattedLine(!(pa.Error.InnerException is Failure innerEx) ? pa.Error.Message : innerEx.Message, addTimestamp, true, true);
+                    errorSb.AppendFormattedLine(pa.Error.InnerException is Failure innerEx ? innerEx.Message : pa.Error.Message , addTimestamp, true);
 
                     if (pa.IsSkippable)
                     {
