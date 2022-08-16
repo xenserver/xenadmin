@@ -6,7 +6,7 @@
       "flat": "true"
     },
     {
-      "pattern": "xc-local-release/dotnet-packages/master/39/putty.exe",
+      "pattern": "@REMOTE_DOTNET@/putty.exe",
       "target": "xenadmin.git/packages/",
       "flat": "true"
     },
