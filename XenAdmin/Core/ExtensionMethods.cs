@@ -164,7 +164,7 @@ namespace XenAdmin.Core
             var timestampString = HelpersGUI.DateTimeToString(timestamp, Messages.DATEFORMAT_DM_HM, localize);
             // normalise all line endings before splitting
             var lines = value.Replace(Environment.NewLine, "\n").Split('\n');
-            return string.Join(Environment.NewLine, lines.Select(line => $"{timestampString}> {line}"));
+            return string.Join(Environment.NewLine, lines.Select(line => $"{timestampString} | {line}"));
         }
     }
 }
