@@ -162,7 +162,7 @@ namespace XenAdmin.Core
         /// <returns>The input value with prepended timestamps/</returns>
         public static string PrependTimestamps(string value, DateTime timestamp, bool localize = true)
         {
-            var timestampString = HelpersGUI.DateTimeToString(timestamp, Messages.DATEFORMAT_DM_HM, localize);
+            var timestampString = HelpersGUI.DateTimeToString(timestamp, Messages.DATEFORMAT_DM_HMS, localize);
             // normalise all line endings before splitting
             var lines = value.Replace(Environment.NewLine, "\n").Split('\n');
             return string.Join(Environment.NewLine, lines.Select(line => $"{timestampString} | {line}"));
