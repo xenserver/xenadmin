@@ -12966,6 +12966,9 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
   <data name="UPDATES_DOWNLOAD_REQUIRED_XENCENTER" xml:space="preserve">
     <value>Download {0}</value>
   </data>
+  <data name="UPDATES_GENERAL_TAB_ENFORCE_HOMOGENEITY" xml:space="preserve">
+    <value>(full application required)</value>
+  </data>
   <data name="UPDATES_WIZARD" xml:space="preserve">
     <value>Install Update</value>
   </data>
