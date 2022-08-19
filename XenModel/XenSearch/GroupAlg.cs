@@ -34,6 +34,7 @@ using System.Collections.Generic;
 using XenAdmin.Model;
 using XenAdmin.Network;
 using System.Collections;
+using System.Linq;
 using XenAPI;
 using XenAdmin.Core;
 using XenCenterLib;
@@ -108,11 +109,14 @@ namespace XenAdmin.XenSearch
             if (XenAdminConfigManager.Provider.ObjectIsHidden(o.opaque_ref))
                 return true;
 
-            if (o is VM)
+            if (o is VM vm)
             {
-                VM vm = o as VM;
-                if (vm.is_control_domain
-                    || !vm.Show(XenAdminConfigManager.Provider.ShowHiddenVMs))
+                if (vm.Connection.Cache.Hosts.Any(Host.RestrictVtpm) &&
+                    vm.is_a_template &&
+                    vm.platform.TryGetValue("vtpm", out var result) && result.ToLower() == "true")
+                    return true;
+
+                if (vm.is_control_domain || !vm.Show(XenAdminConfigManager.Provider.ShowHiddenVMs))
                     return true;
 
                 // Hide VMs on non-live hosts
@@ -120,9 +124,8 @@ namespace XenAdmin.XenSearch
                 if (host != null && !host.IsLive())
                     return true;
             }
-            else if (o is SR)
+            else if (o is SR sr)
             {
-                SR sr = o as SR;
                 if (!sr.Show(XenAdminConfigManager.Provider.ShowHiddenVMs) || sr.IsToolsSR())
                     return true;
 
@@ -131,16 +134,13 @@ namespace XenAdmin.XenSearch
                 if (host != null && !host.IsLive())
                     return true;
             }
-            else if (o is XenAPI.Network)
+            else if (o is XenAPI.Network network)
             {
-                XenAPI.Network network = o as XenAPI.Network;
-
                 return !network.Show(XenAdminConfigManager.Provider.ShowHiddenVMs);
             }
-            else if (o is Folder)
+            else if (o is Folder folder)
             {
                 // Hide the root folder
-                Folder folder = o as Folder;
                 return folder.IsRootFolder;
             }
 
