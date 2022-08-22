@@ -40,7 +40,7 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
         private readonly Failure Failure;
 
         public PrecheckFailed(Check check, Host host, Failure failure)
-            : base(check,  host)
+            : base(check, host)
         {
             Failure = failure;
         }

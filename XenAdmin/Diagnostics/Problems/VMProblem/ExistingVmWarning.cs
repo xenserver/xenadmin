@@ -52,5 +52,5 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
         public sealed override string Title => string.Format(Messages.PROBLEM_VMPROBLEM_TITLE, Helpers.GetName(Vm).Ellipsise(30));
 
         public override string Description => String.Format(Messages.DR_WIZARD_WARNING_EXISTING_VM, Helpers.GetPoolOfOne(Vm.Connection).Name());
-    }   
+    }
 }

@@ -39,8 +39,8 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
 {
     public class HostMaintenanceMode : HostProblem
     {
-        public HostMaintenanceMode(Check check,  Host host)
-            : base(check,  host)
+        public HostMaintenanceMode(Check check, Host host)
+            : base(check, host)
         {
         }
 

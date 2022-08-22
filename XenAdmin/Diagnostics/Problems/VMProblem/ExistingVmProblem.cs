@@ -42,7 +42,7 @@ using XenAdmin.Actions.DR;
 
 namespace XenAdmin.Diagnostics.Problems.VMProblem
 {
-    public class ExistingVmProblem: VMProblem
+    public class ExistingVmProblem : VMProblem
     {
         public ExistingVmProblem(Check check, VM vm)
             : base(check, vm)
@@ -60,7 +60,7 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
             DialogResult dialogResult;
             using (var dlg = new WarningDialog(string.Format(Messages.CONFIRM_DELETE_VM, VM.Name(), VM.Connection.Name),
                     ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
-                {WindowTitle = Messages.ACTION_SHUTDOWN_AND_DESTROY_VM_TITLE})
+            { WindowTitle = Messages.ACTION_SHUTDOWN_AND_DESTROY_VM_TITLE })
             {
                 dialogResult = dlg.ShowDialog();
             }

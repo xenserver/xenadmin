@@ -67,7 +67,7 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
                         action = ee.Action;
                     }
                 };
-                
+
                 propertiesDialog.ShowDialog(Program.MainWindow);
                 if (propertiesDialog.DialogResult != DialogResult.Yes || action == null)
                     cancelled = true;

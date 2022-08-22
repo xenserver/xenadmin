@@ -47,7 +47,7 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
         private List<VM> VmsToShutdown = new List<VM>();
 
         public NotEnoughMem(Check check, Host host)
-            : base(check,  host)
+            : base(check, host)
         {
         }
 
@@ -76,7 +76,7 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
 
         public override AsyncAction CreateUnwindChangesAction()
         {
-            return new ResumeAndStartVMsAction(Server.Connection, Server, VmsToSuspend, VmsToShutdown,VMOperationCommand.WarningDialogHAInvalidConfig,VMOperationCommand.StartDiagnosisForm);
+            return new ResumeAndStartVMsAction(Server.Connection, Server, VmsToSuspend, VmsToShutdown, VMOperationCommand.WarningDialogHAInvalidConfig, VMOperationCommand.StartDiagnosisForm);
         }
 
 
