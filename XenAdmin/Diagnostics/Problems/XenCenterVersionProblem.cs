@@ -45,30 +45,15 @@ namespace XenAdmin.Diagnostics.Problems
             _requiredXenCenterVersion = requiredXenCenterVersion;
         }
 
-        public override string Title
-        {
-            get { return Messages.PROBLEM_XENCENTER_VERSION_TITLE; }
-        }
+        public override string Title => Messages.PROBLEM_XENCENTER_VERSION_TITLE;
 
-        public override string Description
-        {
-            get { return string.Format(Messages.UPDATES_WIZARD_NEWER_XENCENTER_REQUIRED, _requiredXenCenterVersion.Version); }
-        }
+        public override string Description => string.Format(Messages.UPDATES_WIZARD_NEWER_XENCENTER_REQUIRED, _requiredXenCenterVersion.Version);
 
-        public override string HelpMessage
-        {
-            get { return LinkText; }
-        }
+        public override string HelpMessage => LinkText;
 
-        public override string LinkText
-        {
-            get { return Messages.PATCHING_WIZARD_WEBPAGE_CELL; }
-        }
+        public override string LinkText => Messages.PATCHING_WIZARD_WEBPAGE_CELL;
 
-        public override Uri UriToLaunch
-        {
-            get { return new Uri(_requiredXenCenterVersion.Url); }
-        }
+        public override Uri UriToLaunch => new Uri(_requiredXenCenterVersion.Url);
     }
 
     public class XenCenterVersionWarning : WarningWithInformationUrl
@@ -81,29 +66,14 @@ namespace XenAdmin.Diagnostics.Problems
             _requiredXenCenterVersion = requiredXenCenterVersion;
         }
 
-        public override string Title
-        {
-            get { return Messages.PROBLEM_XENCENTER_VERSION_TITLE; }
-        }
+        public override string Title => Messages.PROBLEM_XENCENTER_VERSION_TITLE;
 
-        public override string Description
-        {
-            get { return string.Format(Messages.UPDATES_WIZARD_NEWER_XENCENTER_WARNING, _requiredXenCenterVersion.Version); }
-        }
+        public override string Description => string.Format(Messages.UPDATES_WIZARD_NEWER_XENCENTER_WARNING, _requiredXenCenterVersion.Version);
 
-        public override string HelpMessage
-        {
-            get { return LinkText; }
-        }
+        public override string HelpMessage => LinkText;
 
-        public override string LinkText
-        {
-            get { return Messages.PATCHING_WIZARD_WEBPAGE_CELL; }
-        }
+        public override string LinkText => Messages.PATCHING_WIZARD_WEBPAGE_CELL;
 
-        public override Uri UriToLaunch
-        {
-            get { return new Uri(_requiredXenCenterVersion.Url); }
-        }
+        public override Uri UriToLaunch => new Uri(_requiredXenCenterVersion.Url);
     }
 }

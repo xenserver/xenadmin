@@ -47,22 +47,10 @@ namespace XenAdmin.Diagnostics.Problems.VmApplianceProblem
             this.vmAppliance = vmAppliance;
         }
 
-        protected VM_appliance VmAppliance
-        {
-            get
-            {
-                return vmAppliance.Connection.WaitForCache(new XenRef<VM_appliance>(vmAppliance.opaque_ref));
-            }
-        }
+        protected VM_appliance VmAppliance => vmAppliance.Connection.WaitForCache(new XenRef<VM_appliance>(vmAppliance.opaque_ref));
 
-        public sealed override string Title
-        {
-            get { return Helpers.GetName(VmAppliance).Ellipsise(30); }
-        }
+        public sealed override string Title => Helpers.GetName(VmAppliance).Ellipsise(30);
 
-        public override string Description
-        {
-            get { return String.Format(Messages.DR_WIZARD_WARNING_EXISTING_VM, Helpers.GetPoolOfOne(VmAppliance.Connection).Name()); } 
-        }
+        public override string Description => String.Format(Messages.DR_WIZARD_WARNING_EXISTING_VM, Helpers.GetPoolOfOne(VmAppliance.Connection).Name());
     }
 }

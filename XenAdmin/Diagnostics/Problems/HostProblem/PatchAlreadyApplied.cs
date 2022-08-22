@@ -46,19 +46,10 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
             _host = host;
         }
 
-        public override string Title
-        {
-            get { return string.Format(Messages.UPDATES_WIZARD_PATCH_ALREADY_APPLIED_TITLE, Helpers.GetName(_host).Ellipsise(30)); }
-        }
+        public override string Title => string.Format(Messages.UPDATES_WIZARD_PATCH_ALREADY_APPLIED_TITLE, Helpers.GetName(_host).Ellipsise(30));
 
-        public override string Description
-        {
-            get { return string.Format(Messages.UPDATES_WIZARD_PATCH_ALREADY_APPLIED, Helpers.GetName(_host).Ellipsise(30)); }
-        }
+        public override string Description => string.Format(Messages.UPDATES_WIZARD_PATCH_ALREADY_APPLIED, Helpers.GetName(_host).Ellipsise(30));
 
-        public override string HelpMessage
-        {
-            get { return string.Empty; }
-        }
+        public override string HelpMessage => string.Empty;
     }
 }

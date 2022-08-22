@@ -52,18 +52,9 @@ namespace XenAdmin.Diagnostics.Problems.VmApplianceProblem
             this.hardShutdown = hardShutdown;
         }
 
-        public override string Description
-        {
-            get
-            {
-                return String.Format(Messages.DR_WIZARD_PROBLEM_RUNNING_APPLIANCE, Helpers.GetPoolOfOne(VmAppliance.Connection).Name()); 
-            } 
-        }
+        public override string Description => String.Format(Messages.DR_WIZARD_PROBLEM_RUNNING_APPLIANCE, Helpers.GetPoolOfOne(VmAppliance.Connection).Name());
 
-        public override string HelpMessage
-        {
-            get { return Messages.DR_WIZARD_PROBLEM_RUNNING_APPLIANCE_HELPMESSAGE; } 
-        }
+        public override string HelpMessage => Messages.DR_WIZARD_PROBLEM_RUNNING_APPLIANCE_HELPMESSAGE;
 
         protected override AsyncAction CreateAction(out bool cancelled)
         {

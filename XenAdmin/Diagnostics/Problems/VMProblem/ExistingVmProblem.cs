@@ -49,18 +49,9 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
         {
         }
 
-        public override string Description
-        {
-            get
-            {
-                return String.Format(Messages.DR_WIZARD_PROBLEM_EXISTING_VM, Helpers.GetPoolOfOne(VM.Connection).Name()); 
-            } 
-        }
+        public override string Description => String.Format(Messages.DR_WIZARD_PROBLEM_EXISTING_VM, Helpers.GetPoolOfOne(VM.Connection).Name());
 
-        public override string HelpMessage
-        {
-            get { return Messages.DR_WIZARD_PROBLEM_EXISTING_VM_HELPMESSAGE; } 
-        }
+        public override string HelpMessage => Messages.DR_WIZARD_PROBLEM_EXISTING_VM_HELPMESSAGE;
 
         protected override AsyncAction CreateAction(out bool cancelled)
         {

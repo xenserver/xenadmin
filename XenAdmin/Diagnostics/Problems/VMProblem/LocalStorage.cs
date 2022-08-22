@@ -40,9 +40,6 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
         public LocalStorage(Check check, VM vm)
             : base(check, vm) { }
 
-        public override string Description
-        {
-            get { return string.Format(Messages.UPDATES_WIZARD_LOCAL_STORAGE, ServerName, VM.Name()); }
-        }
+        public override string Description => string.Format(Messages.UPDATES_WIZARD_LOCAL_STORAGE, ServerName, VM.Name());
     }
 }

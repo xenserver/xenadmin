@@ -44,15 +44,9 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
         public InvalidVCPUConfiguration(Check check, VM vm)
             : base(check, vm) { }
 
-        public override string Description
-        {
-            get { return String.Format(Messages.UPGRADEWIZARD_PROBLEM_INVALID_VCPU_SETTINGS, ServerName, VM.Name()); }
-        }
+        public override string Description => String.Format(Messages.UPGRADEWIZARD_PROBLEM_INVALID_VCPU_SETTINGS, ServerName, VM.Name());
 
-        public override string HelpMessage
-        {
-            get { return Messages.UPGRADEWIZARD_PROBLEM_INVALID_VCPU_SETTINGS_HELPMESSAGE; }
-        }
+        public override string HelpMessage => Messages.UPGRADEWIZARD_PROBLEM_INVALID_VCPU_SETTINGS_HELPMESSAGE;
 
         protected override AsyncAction CreateAction(out bool cancelled)
         {

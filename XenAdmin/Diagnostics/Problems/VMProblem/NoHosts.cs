@@ -42,9 +42,6 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
         {
         }
 
-        public override string Description
-        {
-            get { return string.Format(Messages.UPDATES_WIZARD_NO_HOSTS, ServerName, VM.Name()); }
-        }
+        public override string Description => string.Format(Messages.UPDATES_WIZARD_NO_HOSTS, ServerName, VM.Name());
     }
 }

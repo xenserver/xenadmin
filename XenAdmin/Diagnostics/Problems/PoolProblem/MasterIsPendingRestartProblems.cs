@@ -41,22 +41,14 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
             : base(check, pool)
         { }
 
-        public override string Description
-        {
-            get 
-            {
-                return string.Format(
-                    ((RestartHostOrToolstackPendingOnMasterCheck)Check).UpdateUuid != null
+        public override string Description =>
+            string.Format(
+                ((RestartHostOrToolstackPendingOnMasterCheck)Check).UpdateUuid != null
                     ? Messages.PROBLEM_MASTER_PENDING_RESTART_HOST_THIS_UPDATE
                     : Messages.PROBLEM_MASTER_PENDING_RESTART_HOST,
-                    Helpers.GetName(Pool).Ellipsise(30));
-            }
-        }
+                Helpers.GetName(Pool).Ellipsise(30));
 
-        public override string HelpMessage
-        {
-            get { return null; }
-        }
+        public override string HelpMessage => null;
     }
 
     class MasterIsPendingRestartToolstackProblem : PoolProblem
@@ -65,21 +57,13 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
             : base(check, pool)
         { }
 
-        public override string Description
-        {
-            get
-            {
-                return string.Format(
-                    ((RestartHostOrToolstackPendingOnMasterCheck)Check).UpdateUuid != null
+        public override string Description =>
+            string.Format(
+                ((RestartHostOrToolstackPendingOnMasterCheck)Check).UpdateUuid != null
                     ? Messages.PROBLEM_MASTER_PENDING_RESTART_TOOLSTACK_THIS_UPDATE
                     : Messages.PROBLEM_MASTER_PENDING_RESTART_TOOLSTACK,
-                    Helpers.GetName(Pool).Ellipsise(30));
-            }
-        }
+                Helpers.GetName(Pool).Ellipsise(30));
 
-        public override string HelpMessage
-        {
-            get { return null; }
-        }
+        public override string HelpMessage => null;
     }
 }

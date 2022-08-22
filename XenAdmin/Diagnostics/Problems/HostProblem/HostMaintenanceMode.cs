@@ -44,10 +44,7 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
         {
         }
 
-        public override string Description
-        {
-            get { return string.Format(Messages.UPDATES_WIZARD_HOST_MAINTENANCE_MODE, ServerName); }
-        }
+        public override string Description => string.Format(Messages.UPDATES_WIZARD_HOST_MAINTENANCE_MODE, ServerName);
 
         protected override AsyncAction CreateAction(out bool cancelled)
         {
@@ -56,10 +53,7 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
             return new EnableHostAction(Server, false, AddHostToPoolCommand.EnableNtolDialog);
         }
 
-        public override string HelpMessage
-        {
-            get { return Messages.ENABLE_PLAIN; }
-        }
+        public override string HelpMessage => Messages.ENABLE_PLAIN;
 
         public override AsyncAction CreateUnwindChangesAction()
         {

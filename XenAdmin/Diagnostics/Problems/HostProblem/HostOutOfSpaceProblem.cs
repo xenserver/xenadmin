@@ -134,18 +134,9 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
             return action;
         }
 
-        public override string HelpMessage
-        {
-            get { return diskSpaceReq.GetMessageForActionLink(); }
-        }
+        public override string HelpMessage => diskSpaceReq.GetMessageForActionLink();
 
-        public override bool IsFixable
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public override bool IsFixable => false;
 
         public override bool Equals(object obj)
         {
