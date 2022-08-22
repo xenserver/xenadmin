@@ -39,7 +39,7 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
     {
         public bool clusterEnabled;
         public bool gfs2;
-        
+
 
         public PoolHasGFS2SRProblem(Check check, Pool pool, bool clusteringEnabled, bool hasGfs2Sr)
             : base(check, pool)
@@ -70,13 +70,6 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
             }
         }
 
-        public override string HelpMessage
-        {
-            get
-            {
-                return "";
-            }
-        }
-
+        public override string HelpMessage => "";
     }
 }

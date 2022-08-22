@@ -37,14 +37,11 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
 {
     class ToolsCD : LocalCD
     {
-        public ToolsCD(Check check,  VM vm)
-            : base(check,  vm)
+        public ToolsCD(Check check, VM vm)
+            : base(check, vm)
         {
         }
 
-        public override string Description
-        {
-            get { return string.Format(Messages.UPDATES_WIZARD_TOOLS_CD, ServerName, VM.Name()); }
-        }
+        public override string Description => string.Format(Messages.UPDATES_WIZARD_TOOLS_CD, ServerName, VM.Name());
     }
 }

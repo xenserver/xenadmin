@@ -144,10 +144,10 @@ namespace XenAdmin.Diagnostics.Problems
                 return new List<AsyncAction>();
 
             var actions = from problem in problems
-                where problem.SolutionActionCompleted
-                let action = problem.CreateUnwindChangesAction()
-                where action != null && action.Connection != null && action.Connection.IsConnected
-                select action;
+                          where problem.SolutionActionCompleted
+                          let action = problem.CreateUnwindChangesAction()
+                          where action != null && action.Connection != null && action.Connection.IsConnected
+                          select action;
 
             return actions.ToList();
         }

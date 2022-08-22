@@ -50,15 +50,9 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
             this.srDeviceConfigList = srDeviceConfigList;
         }
 
-        private bool EmptySRDeviceConfigList
-        {
-            get { return srDeviceConfigList == null || srDeviceConfigList.Count == 0; }
-        }
+        private bool EmptySRDeviceConfigList => srDeviceConfigList == null || srDeviceConfigList.Count == 0;
 
-        public override string Title
-        {
-            get { return Check.Description; }
-        }
+        public override string Title => Check.Description;
 
         public override string Description
         {

@@ -30,6 +30,9 @@ namespace XenAdmin.Dialogs.OptionsPages
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DisplayOptionsPage));
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.updateLogOptionsDecentGroupBox = new XenAdmin.Controls.DecentGroupBox();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.showTimestampsCheckBox = new System.Windows.Forms.CheckBox();
             this.GraphTypeGroupBox = new XenAdmin.Controls.DecentGroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label5 = new XenAdmin.Controls.Common.AutoHeightLabel();
@@ -41,6 +44,8 @@ namespace XenAdmin.Dialogs.OptionsPages
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.checkBoxStoreTab = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel3.SuspendLayout();
+            this.updateLogOptionsDecentGroupBox.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
             this.GraphTypeGroupBox.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -52,9 +57,31 @@ namespace XenAdmin.Dialogs.OptionsPages
             // tableLayoutPanel3
             // 
             resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
+            this.tableLayoutPanel3.Controls.Add(this.updateLogOptionsDecentGroupBox, 0, 2);
             this.tableLayoutPanel3.Controls.Add(this.GraphTypeGroupBox, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.TabGroupBox, 0, 1);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            // 
+            // updateLogOptionsDecentGroupBox
+            // 
+            resources.ApplyResources(this.updateLogOptionsDecentGroupBox, "updateLogOptionsDecentGroupBox");
+            this.updateLogOptionsDecentGroupBox.Controls.Add(this.tableLayoutPanel4);
+            this.updateLogOptionsDecentGroupBox.Name = "updateLogOptionsDecentGroupBox";
+            this.updateLogOptionsDecentGroupBox.TabStop = false;
+            // 
+            // tableLayoutPanel4
+            // 
+            resources.ApplyResources(this.tableLayoutPanel4, "tableLayoutPanel4");
+            this.tableLayoutPanel4.Controls.Add(this.showTimestampsCheckBox, 0, 0);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            // 
+            // showTimestampsCheckBox
+            // 
+            resources.ApplyResources(this.showTimestampsCheckBox, "showTimestampsCheckBox");
+            this.showTimestampsCheckBox.Checked = true;
+            this.showTimestampsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.showTimestampsCheckBox.Name = "showTimestampsCheckBox";
+            this.showTimestampsCheckBox.UseVisualStyleBackColor = true;
             // 
             // GraphTypeGroupBox
             // 
@@ -135,6 +162,10 @@ namespace XenAdmin.Dialogs.OptionsPages
             this.Name = "DisplayOptionsPage";
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
+            this.updateLogOptionsDecentGroupBox.ResumeLayout(false);
+            this.updateLogOptionsDecentGroupBox.PerformLayout();
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
             this.GraphTypeGroupBox.ResumeLayout(false);
             this.GraphTypeGroupBox.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -163,5 +194,8 @@ namespace XenAdmin.Dialogs.OptionsPages
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.CheckBox checkBoxStoreTab;
+        private Controls.DecentGroupBox updateLogOptionsDecentGroupBox;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.CheckBox showTimestampsCheckBox;
     }
 }

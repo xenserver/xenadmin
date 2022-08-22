@@ -43,7 +43,6 @@ using System.Windows.Forms;
 using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Dialogs;
 using XenAdmin.Wizards.RollingUpgradeWizard.PlanActions;
-using Console = System.Console;
 
 
 namespace XenAdmin.Wizards.PatchingWizard
@@ -97,7 +96,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                 return;
 
             using (var dialog = new WarningDialog(ReconsiderCancellationMessage(),
-                ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo){WindowTitle = Text})
+                ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
+            { WindowTitle = Text })
             {
                 if (dialog.ShowDialog(this) != DialogResult.Yes)
                 {
@@ -164,7 +164,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             _backgroundWorkers = new List<UpdateProgressBackgroundWorker>();
             _failedWorkers = new List<UpdateProgressBackgroundWorker>();
             var atLeastOneWorkerStarted = false;
-            
+
             foreach (var pool in SelectedPools)
             {
                 var planActions = GenerateHostPlans(pool, out _);
@@ -253,9 +253,11 @@ namespace XenAdmin.Wizards.PatchingWizard
                 newVal = 0;
             else if (newVal > 100)
                 newVal = 100;
-            progressBar.Value = (int) newVal;
+            progressBar.Value = (int)newVal;
 
             var stringBuilder = new StringBuilder();
+
+            var addTimestamp = Properties.Settings.Default.ShowTimestampsInUpdatesLog;
 
             foreach (var bgw in _backgroundWorkers)
             {
@@ -269,9 +271,9 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 foreach (var pa in bgw.DoneActions)
                 {
-                    pa.ProgressHistory.ForEach(step => sb.AppendIndented(step).AppendLine());
+                    pa.ProgressHistory.ForEach(step => sb.AppendFormattedLine(value: step.Description, timestamp: step.Timestamp, showTimestamp: addTimestamp ,indent: true));
 
-                    if (pa.Error == null) 
+                    if (pa.Error == null)
                         continue;
 
                     if (pa.Error is CancelledException)
@@ -279,14 +281,12 @@ namespace XenAdmin.Wizards.PatchingWizard
                         bgwCancellationCount++;
                         continue;
                     }
-
-                    errorSb.AppendLine(!(pa.Error.InnerException is Failure innerEx) ? pa.Error.Message : innerEx.Message);
+                    errorSb.AppendFormattedLine(pa.Error.InnerException is Failure innerEx ? innerEx.Message : pa.Error.Message , timestamp: pa.Timestamp, showTimestamp: addTimestamp, indent: true);
 
                     if (pa.IsSkippable)
                     {
                         Debug.Assert(!string.IsNullOrEmpty(pa.Title));
-                        errorSb.AppendLine(string.Format(Messages.RPU_WIZARD_ERROR_SKIP_MSG, pa.Title))
-                            .AppendLine();
+                        errorSb.AppendFormattedLine(string.Format(Messages.RPU_WIZARD_ERROR_SKIP_MSG, pa.Title), timestamp : pa.Timestamp, showTimestamp: addTimestamp, indent: true, addExtraLine: true);
                     }
 
                     bgwErrorCount++;
@@ -294,23 +294,25 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 foreach (var pa in bgw.InProgressActions)
                 {
-                    pa.ProgressHistory.ForEach(step => sb.AppendIndented(step).AppendLine());
+                    pa.ProgressHistory.ForEach(step => sb.AppendFormattedLine(value: step.Description, timestamp: step.Timestamp, showTimestamp: addTimestamp, indent: true));
                 }
 
                 sb.AppendLine();
 
                 if (bgwCancellationCount > 0)
                 {
-                    sb.AppendIndented(UserCancellationMessage()).AppendLine();
+                    sb.AppendFormattedLine(UserCancellationMessage(), timestamp: DateTime.Now, showTimestamp: addTimestamp, indent: true);
                 }
                 else if (bgwErrorCount > 0)
                 {
-                    sb.AppendIndented(FailureMessagePerPool(bgwErrorCount > 1)).AppendLine();
-                    sb.AppendIndented(errorSb);
+                    sb.AppendFormattedLine(FailureMessagePerPool(bgwErrorCount > 1), timestamp: DateTime.Now, showTimestamp: addTimestamp, indent: true);
+
+                    // we don't add formatting since errorSb has its own
+                    sb.Append(errorSb);
                 }
                 else if (!bgw.IsBusy)
                 {
-                    sb.AppendIndented(WarningMessagePerPool(bgw.Pool) ?? SuccessMessagePerPool(bgw.Pool)).AppendLine();
+                    sb.AppendFormattedLine(WarningMessagePerPool(bgw.Pool) ?? SuccessMessagePerPool(bgw.Pool), DateTime.Now, showTimestamp: addTimestamp, indent: true);
                 }
 
                 sb.AppendLine();
@@ -318,7 +320,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
 
             var newText = stringBuilder.ToString();
-            
+
             if (!_userMovedVerticalScrollbar)
             {
                 textBoxLog.Text = newText;
@@ -361,7 +363,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                     // Step 2: UpdatesPlanActions  (priority update action)
                     bgw.ProgressIncrement = bgw.UpdatesActionsIncrement(hp);
-                    var planActions = hp.UpdatesPlanActions; 
+                    var planActions = hp.UpdatesPlanActions;
                     foreach (var a in planActions)
                     {
                         action = a;
@@ -539,7 +541,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             using (var dlg = new WarningDialog(string.Format(skippableWorkers.Count > 1 ? Messages.MESSAGEBOX_SKIP_RPU_STEPS : Messages.MESSAGEBOX_SKIP_RPU_STEP, msg),
                     ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
-                {WindowTitle = ParentForm != null ? ParentForm.Text : BrandManager.BrandConsole})
+            { WindowTitle = ParentForm != null ? ParentForm.Text : BrandManager.BrandConsole })
             {
                 if (dlg.ShowDialog(this) != DialogResult.Yes)
                     return;
@@ -578,7 +580,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
         #endregion
-        
+
         protected HostPlan GetUpdatePlanActionsForHost(Host host, List<Host> hosts, List<XenServerPatch> minimalPatches,
             List<XenServerPatch> uploadedPatches, KeyValuePair<XenServerPatch, string> patchFromDisk, bool repatriateVms = true)
         {
@@ -651,7 +653,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                                   ?? planActionsPerHost.FindLast(a => a is RestartHostPlanAction);
 
                 if (lastRestart != null)
-                    ((RestartHostPlanAction) lastRestart).EnableOnly = false;
+                    ((RestartHostPlanAction)lastRestart).EnableOnly = false;
             }
 
             return new HostPlan(host, null, planActionsPerHost, delayedActionsPerHost);

@@ -47,14 +47,11 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
         private List<VM> VmsToShutdown = new List<VM>();
 
         public NotEnoughMem(Check check, Host host)
-            : base(check,  host)
+            : base(check, host)
         {
         }
 
-        public override string Description
-        {
-            get { return string.Format(Messages.UPDATES_WIZARD_NO_MEMORY, ServerName); }
-        }
+        public override string Description => string.Format(Messages.UPDATES_WIZARD_NO_MEMORY, ServerName);
 
         protected override AsyncAction CreateAction(out bool cancelled)
         {
@@ -75,14 +72,11 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
             return null;
         }
 
-        public override string HelpMessage
-        {
-            get { return Messages.SUSPEND_VMS; }
-        }
+        public override string HelpMessage => Messages.SUSPEND_VMS;
 
         public override AsyncAction CreateUnwindChangesAction()
         {
-            return new ResumeAndStartVMsAction(Server.Connection, Server, VmsToSuspend, VmsToShutdown,VMOperationCommand.WarningDialogHAInvalidConfig,VMOperationCommand.StartDiagnosisForm);
+            return new ResumeAndStartVMsAction(Server.Connection, Server, VmsToSuspend, VmsToShutdown, VMOperationCommand.WarningDialogHAInvalidConfig, VMOperationCommand.StartDiagnosisForm);
         }
 
 

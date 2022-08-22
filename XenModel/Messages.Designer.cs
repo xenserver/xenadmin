@@ -11935,6 +11935,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to MMM d, hh:mm:ss.
+        /// </summary>
+        public static string DATEFORMAT_DM_HMS {
+            get {
+                return ResourceManager.GetString("DATEFORMAT_DM_HMS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to MMM d, yyyy.
         /// </summary>
         public static string DATEFORMAT_DMY {

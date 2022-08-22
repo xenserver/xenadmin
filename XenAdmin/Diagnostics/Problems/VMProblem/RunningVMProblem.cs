@@ -39,7 +39,7 @@ using XenAPI;
 
 namespace XenAdmin.Diagnostics.Problems.VMProblem
 {
-    public class RunningVMProblem: VMProblem
+    public class RunningVMProblem : VMProblem
     {
         private readonly bool hardShutdown;
 
@@ -49,18 +49,9 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
             this.hardShutdown = hardShutdown;
         }
 
-        public override string Description
-        {
-            get
-            {
-                return String.Format(Messages.DR_WIZARD_PROBLEM_RUNNING_VM, Helpers.GetPoolOfOne(VM.Connection).Name()); 
-            } 
-        }
+        public override string Description => String.Format(Messages.DR_WIZARD_PROBLEM_RUNNING_VM, Helpers.GetPoolOfOne(VM.Connection).Name());
 
-        public override string HelpMessage
-        {
-            get { return Messages.DR_WIZARD_PROBLEM_RUNNING_VM_HELPMESSAGE; } 
-        }
+        public override string HelpMessage => Messages.DR_WIZARD_PROBLEM_RUNNING_VM_HELPMESSAGE;
 
         protected override AsyncAction CreateAction(out bool cancelled)
         {
