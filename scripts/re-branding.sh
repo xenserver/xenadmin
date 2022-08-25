@@ -100,6 +100,7 @@ rebranding_global ${REPO}/XenAdmin/app.config
 rebranding_global ${REPO}/XenModel/BrandManager.cs
 RESX_rebranding "${REPO}/XenModel/Messages ${REPO}/XenModel/InvisibleMessages ${REPO}/XenModel/FriendlyNames ${REPO}/XenModel/XenAPI/FriendlyErrorNames"
 rebranding_global "${REPO}/XenModel/Utils/Helpers.cs"
+rebranding_global "${REPO}/Branding/Branding.resx"
 
 #XenOvfApi rebranding
 RESX_rebranding "${REPO}/XenOvfApi/Messages ${REPO}/XenOvfApi/Content"
