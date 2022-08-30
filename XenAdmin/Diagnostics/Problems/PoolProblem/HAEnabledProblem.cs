@@ -72,21 +72,9 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
             return pool != null ? new EnableHAAction(pool, null, HeartbeatSrs, FailuresToTolerate) : null;
         }
 
-        public override string Description
-        {
-            get 
-            {
-                return String.Format(Messages.UPDATES_WIZARD_HA_ON_DESCRIPTION, Pool);
-            }
-        }
+        public override string Description => String.Format(Messages.UPDATES_WIZARD_HA_ON_DESCRIPTION, Pool);
 
-        public override string HelpMessage
-        {
-            get
-            {
-                return Messages.TURN_HA_OFF;
-            }
-        }
+        public override string HelpMessage => Messages.TURN_HA_OFF;
     }
 
     class DrHAEnabledProblem : HAEnabledProblem
@@ -96,10 +84,7 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
         {
         }
 
-        public override string Description
-        {
-            get { return Messages.DR_WIZARD_PROBLEM_HA_ENABLED; }
-        }
+        public override string Description => Messages.DR_WIZARD_PROBLEM_HA_ENABLED;
     }
 
     class HAEnabledWarning : Warning
@@ -114,17 +99,8 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
             this.host = host;
         }
 
-        public override string Title
-        {
-            get { return Check.Description; }
-        }
+        public override string Title => Check.Description;
 
-        public override string Description
-        {
-            get
-            {
-                return string.Format(Messages.UPDATES_WIZARD_HA_ON_WARNING, host, pool);
-            }
-        }
+        public override string Description => string.Format(Messages.UPDATES_WIZARD_HA_ON_WARNING, host, pool);
     }
 }

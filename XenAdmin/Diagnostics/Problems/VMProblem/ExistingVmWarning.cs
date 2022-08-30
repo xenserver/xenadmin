@@ -47,22 +47,10 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
             _vm = vm;
         }
 
-        protected VM Vm
-        {
-            get
-            {
-                return _vm.Connection.WaitForCache(new XenRef<VM>(_vm.opaque_ref));
-            }
-        }
+        protected VM Vm => _vm.Connection.WaitForCache(new XenRef<VM>(_vm.opaque_ref));
 
-        public sealed override string Title
-        {
-            get { return string.Format(Messages.PROBLEM_VMPROBLEM_TITLE, Helpers.GetName(Vm).Ellipsise(30)); }
-        }
+        public sealed override string Title => string.Format(Messages.PROBLEM_VMPROBLEM_TITLE, Helpers.GetName(Vm).Ellipsise(30));
 
-        public override string Description
-        {
-            get { return String.Format(Messages.DR_WIZARD_WARNING_EXISTING_VM, Helpers.GetPoolOfOne(Vm.Connection).Name()); } 
-        }
-    }   
+        public override string Description => String.Format(Messages.DR_WIZARD_WARNING_EXISTING_VM, Helpers.GetPoolOfOne(Vm.Connection).Name());
+    }
 }

@@ -40,22 +40,13 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
         private readonly Failure Failure;
 
         public PrecheckFailed(Check check, Host host, Failure failure)
-            : base(check,  host)
+            : base(check, host)
         {
             Failure = failure;
         }
 
-        public override string Description
-        {
-            get { return string.Format(Messages.UPDATES_WIZARD_PRECHECK_FAILED, ServerName, Failure.Message); }
-        }
+        public override string Description => string.Format(Messages.UPDATES_WIZARD_PRECHECK_FAILED, ServerName, Failure.Message);
 
-        public override string HelpMessage
-        {
-            get
-            {
-                return string.Empty;
-            }
-        }
+        public override string HelpMessage => string.Empty;
     }
 }

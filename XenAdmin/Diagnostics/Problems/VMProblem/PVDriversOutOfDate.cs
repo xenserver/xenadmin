@@ -40,17 +40,8 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
         public PVDriversOutOfDate(Check check, VM vm)
             : base(check, vm) { }
 
-        public override string Description
-        {
-            get { return string.Format(Messages.UPDATES_WIZARD_OUT_OF_DATE_TOOLS, ServerName, VM.Name()); }
-        }
+        public override string Description => string.Format(Messages.UPDATES_WIZARD_OUT_OF_DATE_TOOLS, ServerName, VM.Name());
 
-        public override string HelpMessage
-        {
-            get
-            {
-                return Messages.INSTALL_XENSERVER_TOOLS;
-            }
-        }
+        public override string HelpMessage => Messages.INSTALL_XENSERVER_TOOLS;
     }
 }

@@ -42,15 +42,9 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
         {
         }
 
-        public override string Description
-        {
-            get { return string.Format(Messages.UPDATES_WIZARD_SERVER_SELECTION_PROBLEM, Pool); }
-        }
+        public override string Description => string.Format(Messages.UPDATES_WIZARD_SERVER_SELECTION_PROBLEM, Pool);
 
-        public override string HelpMessage
-        {
-            get { return null; }
-        }
+        public override string HelpMessage => null;
     }
 
     class MixedPoolServerSelectionWarning : Warning
@@ -63,17 +57,8 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
             this.pool = pool;
         }
 
-        public override string Title
-        {
-            get { return Check.Description; }
-        }
+        public override string Title => Check.Description;
 
-        public override string Description
-        {
-            get
-            {
-                return string.Format(Messages.UPDATES_WIZARD_MIXED_POOL_SERVER_SELECTION_WARNING, pool);
-            }
-        }
+        public override string Description => string.Format(Messages.UPDATES_WIZARD_MIXED_POOL_SERVER_SELECTION_WARNING, pool);
     }
 }

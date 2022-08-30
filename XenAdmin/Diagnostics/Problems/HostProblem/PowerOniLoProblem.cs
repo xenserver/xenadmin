@@ -50,7 +50,7 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
             cancelled = false;
             var mode = new KeyValuePair<Host, Host.PowerOnMode>(Server, new Host.PowerOnModeDisabled());
             return new SavePowerOnSettingsAction(Server.Connection,
-                new List<KeyValuePair<Host, Host.PowerOnMode>> {mode}, false);
+                new List<KeyValuePair<Host, Host.PowerOnMode>> { mode }, false);
         }
 
         public override string Description =>

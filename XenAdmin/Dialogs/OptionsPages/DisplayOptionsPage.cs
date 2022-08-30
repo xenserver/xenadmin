@@ -48,6 +48,7 @@ namespace XenAdmin.Dialogs.OptionsPages
             GraphAreasRadioButton.Checked = Properties.Settings.Default.FillAreaUnderGraphs;
             GraphLinesRadioButton.Checked = !Properties.Settings.Default.FillAreaUnderGraphs;
             checkBoxStoreTab.Checked = Properties.Settings.Default.RememberLastSelectedTab;
+            showTimestampsCheckBox.Checked = Properties.Settings.Default.ShowTimestampsInUpdatesLog;
         }
 
         #region IOptionsPage Members
@@ -61,6 +62,7 @@ namespace XenAdmin.Dialogs.OptionsPages
 
         public void ShowValidationMessages(Control control, string message)
         {
+            // no message
         }
 
         public void Save()
@@ -70,7 +72,9 @@ namespace XenAdmin.Dialogs.OptionsPages
  
             if (checkBoxStoreTab.Checked != Properties.Settings.Default.RememberLastSelectedTab)
                 Properties.Settings.Default.RememberLastSelectedTab = checkBoxStoreTab.Checked;
- 
+
+            if (showTimestampsCheckBox.Checked != Properties.Settings.Default.ShowTimestampsInUpdatesLog)
+                Properties.Settings.Default.ShowTimestampsInUpdatesLog = showTimestampsCheckBox.Checked;
         }
 
         #endregion

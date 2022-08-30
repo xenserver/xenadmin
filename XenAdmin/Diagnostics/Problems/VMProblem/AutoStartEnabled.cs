@@ -45,10 +45,7 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
             : base(check, vm)
         { }
 
-        public override string Description
-        {
-            get { return string.Format(Messages.AUTOSTART_ENABLED_CHECK_DESCRIPTION, ServerName, Helpers.GetName(VM).Ellipsise(30)); }
-        }
+        public override string Description => string.Format(Messages.AUTOSTART_ENABLED_CHECK_DESCRIPTION, ServerName, Helpers.GetName(VM).Ellipsise(30));
 
         protected override AsyncAction CreateAction(out bool cancelled)
         {
@@ -56,14 +53,11 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
             return new DelegatedAsyncAction(VM.Connection, Messages.ACTION_DISABLE_AUTOSTART_ON_VM, string.Format(Messages.ACTION_DISABLING_AUTOSTART_ON_VM, Helpers.GetName(VM)), null, ActionDelegate(false));
         }
 
-        public override string HelpMessage
-        {
-            get { return Messages.DISABLE_NOAMP; }
-        }
+        public override string HelpMessage => Messages.DISABLE_NOAMP;
 
         private Action<Session> ActionDelegate(bool autostartValue)
         {
-            return delegate(Session session)
+            return delegate (Session session)
                        {
                            var vm = VM.Connection.Resolve(new XenRef<VM>(VM.opaque_ref));
                            var vmclone = (VM)vm.Clone();

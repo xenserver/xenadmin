@@ -52,7 +52,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             ((System.ComponentModel.ISupportInitialize)(this.XSHelpButton)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
+            this.MaximizeBox = true;
         }
 
         #endregion

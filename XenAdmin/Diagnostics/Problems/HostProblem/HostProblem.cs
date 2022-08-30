@@ -38,7 +38,7 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
 {
     public abstract class HostProblem : Problem
     {
-        protected HostProblem(Check check,  Host server)
+        protected HostProblem(Check check, Host server)
             : base(check)
         {
             Server = server;

@@ -82,7 +82,7 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
                 var vm = vmOnHost.Key;
 
                 // check if the vm is still in the cache and is halted
-                if (vm.Connection.Resolve(new XenRef<VM>(vm.opaque_ref)) == null || vm.power_state != vm_power_state.Halted) 
+                if (vm.Connection.Resolve(new XenRef<VM>(vm.opaque_ref)) == null || vm.power_state != vm_power_state.Halted)
                     continue;
 
                 var startOn = vm.Connection.Resolve(vmOnHost.Value);
@@ -99,21 +99,9 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
             return null;
         }
 
-        public override string Description
-        {
-            get
-            {
-                return String.Format(Messages.UPGRADEWIZARD_PROBLEM_INCOMPATIBLE_CPUS, Pool);
-            }
-        }
+        public override string Description => String.Format(Messages.UPGRADEWIZARD_PROBLEM_INCOMPATIBLE_CPUS, Pool);
 
-        public override string HelpMessage
-        {
-            get
-            {
-                return Messages.UPGRADEWIZARD_PROBLEM_INCOMPATIBLE_CPUS_HELPMESSAGE;
-            }
-        }
+        public override string HelpMessage => Messages.UPGRADEWIZARD_PROBLEM_INCOMPATIBLE_CPUS_HELPMESSAGE;
     }
 
     class CPUCIncompatibilityWarning : Warning
@@ -128,17 +116,8 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
             this.host = host;
         }
 
-        public override string Title
-        {
-            get { return Check.Description; }
-        }
+        public override string Title => Check.Description;
 
-        public override string Description
-        {
-            get
-            {
-                return string.Format(Messages.UPGRADEWIZARD_WARNING_INCOMPATIBLE_CPUS, host, pool);
-            }
-        }
+        public override string Description => string.Format(Messages.UPGRADEWIZARD_WARNING_INCOMPATIBLE_CPUS, host, pool);
     }
 }

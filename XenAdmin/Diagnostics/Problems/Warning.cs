@@ -57,7 +57,7 @@ namespace XenAdmin.Diagnostics.Problems
         protected WarningWithMoreInfo(Check check) : base(check)
         {
         }
-        
+
         public override string HelpMessage => Messages.MORE_INFO;
 
         protected override Actions.AsyncAction CreateAction(out bool cancelled)
@@ -86,7 +86,7 @@ namespace XenAdmin.Diagnostics.Problems
         public virtual string LinkText => LinkData;
     }
 
- 
+
     public abstract class WarningWithInformationUrl : Warning
     {
         protected WarningWithInformationUrl(Check check) : base(check)

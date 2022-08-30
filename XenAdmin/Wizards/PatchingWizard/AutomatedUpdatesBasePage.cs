@@ -271,72 +271,74 @@ namespace XenAdmin.Wizards.PatchingWizard
                 newVal = 0;
             else if (newVal > 100)
                 newVal = 100;
-            progressBar.Value = (int) newVal;
+            progressBar.Value = (int)newVal;
 
-            var allsb = new StringBuilder();
+            var stringBuilder = new StringBuilder();
+
+            var addTimestamp = Properties.Settings.Default.ShowTimestampsInUpdatesLog;
 
             foreach (var bgw in backgroundWorkers)
             {
-                int bgwErrorCount = 0;
-                int bgwCancellationCount = 0;
+                var bgwErrorCount = 0;
+                var bgwCancellationCount = 0;
                 var sb = new StringBuilder();
                 var errorSb = new StringBuilder();
 
                 if (!string.IsNullOrEmpty(bgw.Name))
-                    sb.AppendLine(string.Format("{0}:", bgw.Name));
+                    sb.AppendLine($"{bgw.Name}:");
 
                 foreach (var pa in bgw.DoneActions)
                 {
-                    pa.ProgressHistory.ForEach(step => sb.AppendIndented(step).AppendLine());
+                    pa.ProgressHistory.ForEach(step => sb.AppendFormattedLine(value: step.Description, timestamp: step.Timestamp, showTimestamp: addTimestamp ,indent: true));
 
-                    if (pa.Error != null)
+                    if (pa.Error == null)
+                        continue;
+
+                    if (pa.Error is CancelledException)
                     {
-                        if (pa.Error is CancelledException)
-                        {
-                            bgwCancellationCount++;
-                            continue;
-                        }
-
-                        var innerEx = pa.Error.InnerException as Failure;
-                        errorSb.AppendLine(innerEx == null ? pa.Error.Message : innerEx.Message);
-
-                        if (pa.IsSkippable)
-                        {
-                            Debug.Assert(!string.IsNullOrEmpty(pa.Title));
-                            errorSb.AppendLine(string.Format(Messages.RPU_WIZARD_ERROR_SKIP_MSG, pa.Title))
-                                .AppendLine();
-                        }
-
-                        bgwErrorCount++;
+                        bgwCancellationCount++;
+                        continue;
                     }
+                    errorSb.AppendFormattedLine(pa.Error.InnerException is Failure innerEx ? innerEx.Message : pa.Error.Message , timestamp: pa.Timestamp, showTimestamp: addTimestamp, indent: true);
+
+
+                    if (pa.IsSkippable)
+                    {
+                        Debug.Assert(!string.IsNullOrEmpty(pa.Title));
+                        errorSb.AppendFormattedLine(string.Format(Messages.RPU_WIZARD_ERROR_SKIP_MSG, pa.Title), timestamp : pa.Timestamp, showTimestamp: addTimestamp, indent: true, addExtraLine: true);
+                    }
+
+                    bgwErrorCount++;
                 }
 
                 foreach (var pa in bgw.InProgressActions)
                 {
-                    pa.ProgressHistory.ForEach(step => sb.AppendIndented(step).AppendLine());
+                    pa.ProgressHistory.ForEach(step => sb.AppendFormattedLine(value: step.Description, timestamp: step.Timestamp, showTimestamp: addTimestamp, indent: true));
                 }
 
                 sb.AppendLine();
 
                 if (bgwCancellationCount > 0)
                 {
-                    sb.AppendIndented(UserCancellationMessage()).AppendLine();
+                    sb.AppendFormattedLine(UserCancellationMessage(), timestamp: DateTime.Now, showTimestamp: addTimestamp, indent: true);
                 }
                 else if (bgwErrorCount > 0)
                 {
-                    sb.AppendIndented(FailureMessagePerPool(bgwErrorCount > 1)).AppendLine();
-                    sb.AppendIndented(errorSb);
+                    sb.AppendFormattedLine(FailureMessagePerPool(bgwErrorCount > 1), timestamp: DateTime.Now, showTimestamp: addTimestamp, indent: true);
+
+                    // we don't add formatting since errorSb has its own
+                    sb.Append(errorSb);
                 }
                 else if (!bgw.IsBusy)
                 {
-                    sb.AppendIndented(WarningMessagePerPool(bgw.Pool) ?? SuccessMessagePerPool(bgw.Pool)).AppendLine();
+                    sb.AppendFormattedLine(WarningMessagePerPool(bgw.Pool) ?? SuccessMessagePerPool(bgw.Pool), DateTime.Now, showTimestamp: addTimestamp, indent: true);
                 }
 
                 sb.AppendLine();
-                allsb.Append(sb);
+                stringBuilder.Append(sb);
             }
 
-            var newText = allsb.ToString();
+            var newText = stringBuilder.ToString();
 
             if (!_userMovedVerticalScrollbar)
             {

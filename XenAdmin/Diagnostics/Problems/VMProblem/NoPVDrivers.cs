@@ -37,24 +37,16 @@ using XenAPI;
 
 namespace XenAdmin.Diagnostics.Problems.VMProblem
 {
-    public class NoPVDrivers: VMProblem
+    public class NoPVDrivers : VMProblem
     {
         public NoPVDrivers(Check check, VM vm)
             : base(check, vm)
         { }
 
-        public override string Description
-        {
-            get { return String.Format(Messages.UPDATES_WIZARD_NO_TOOLS, ServerName, VM.Name()); }
-        }
+        public override string Description => String.Format(Messages.UPDATES_WIZARD_NO_TOOLS, ServerName, VM.Name());
 
-        public override string HelpMessage
-        {
-            get
-            {
-                return Messages.INSTALL_XENSERVER_TOOLS;
-            }
-        }
+        public override string HelpMessage => Messages.INSTALL_XENSERVER_TOOLS;
+
         protected override AsyncAction CreateAction(out bool cancelled)
         {
             cancelled = false;
