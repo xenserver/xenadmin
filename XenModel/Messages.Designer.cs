@@ -8025,7 +8025,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Resetting the vTPM that is attached to a VM to its original state may result in deactivation of security features on the VM. Do you want to continue?.
+        ///   Looks up a localized string similar to Resetting the vTPM that is attached to a VM to its original state may result in the deactivation of some security features on the VM. Do you want to continue?.
         /// </summary>
         public static string COMMAND_RESET_VTPM_WARNING {
             get {
@@ -8043,7 +8043,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Trusted Plat&amp;form Module Manager....
+        ///   Looks up a localized string similar to Mana&amp;ge vTPMs....
         /// </summary>
         public static string COMMAND_VTPM_MENU {
             get {
@@ -40731,7 +40731,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Removing the vTPM may result in deactivation of security features on the VM and may even prevent it from starting. Do you want to continue?.
+        ///   Looks up a localized string similar to Removing the vTPM may result in the deactivation of some security features on the VM and prevent it from starting. Do you want to continue?.
         /// </summary>
         public static string VTPM_REMOVE_WARNING {
             get {

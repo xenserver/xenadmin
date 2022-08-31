@@ -108,7 +108,7 @@ namespace XenAdmin.Dialogs
 
         private void buttonReset_Click(object sender, EventArgs e)
         {
-            
+            //TODO:
         }
     }
 }

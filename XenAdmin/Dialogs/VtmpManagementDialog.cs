@@ -77,10 +77,12 @@ namespace XenAdmin.Dialogs
 
         private VtpmManagementPage CreateVtpmPage(VTPM vtpm)
         {
-            var page = new VtpmManagementPage(vtpm);
-            page.Parent = ContentPanel;
-            page.TabStop = true;
-            page.Dock = DockStyle.Fill;
+            var page = new VtpmManagementPage(vtpm)
+            {
+                Parent = ContentPanel,
+                TabStop = true,
+                Dock = DockStyle.Fill
+            };
             page.RemoveButtonClicked += Page_RemoveButtonClicked;
             return page;
         }
@@ -97,11 +99,11 @@ namespace XenAdmin.Dialogs
                 where page != null && _vm.VTPMs.All(t => t.opaque_ref != page.Vtpm.opaque_ref)
                 select page).ToList();
 
-            tabsToRemove.ForEach(t =>
+            foreach (var tab in tabsToRemove)
             {
-                verticalTabs.Items.Remove(t);
-                ContentPanel.Controls.Remove(t);
-            });
+                verticalTabs.Items.Remove(tab);
+                ContentPanel.Controls.Remove(tab);
+            }
 
             var newVtpmPages = new List<object>();
 
@@ -247,12 +249,10 @@ namespace XenAdmin.Dialogs
             Program.Invoke(this, RefreshTabs);
         }
 
-
         private void splitContainer_Panel1_Resize(object sender, EventArgs e)
         {
             ResizeVerticalTabs();
         }
-
 
         private void verticalTabs_DrawItem(object sender, DrawItemEventArgs e)
         {
@@ -299,18 +299,15 @@ namespace XenAdmin.Dialogs
                 RemoveVtpm(page.Vtpm);
         }
 
-
         private void Page_RemoveButtonClicked(VtpmManagementPage page)
         {
             RemoveVtpm(page.Vtpm);
         }
 
-
         private void addButton_Click(object sender, EventArgs e)
         {
             AddVtpm();
         }
-
 
         private void cancelButton_Click(object sender, EventArgs e)
         {

@@ -2892,13 +2892,13 @@ Do you want to assign these VMs to the schedule '{0}' instead?</value>
     <value>&amp;Collapse Children</value>
   </data>
   <data name="COMMAND_RESET_VTPM_WARNING" xml:space="preserve">
-    <value>Resetting the vTPM that is attached to a VM to its original state may result in deactivation of security features on the VM. Do you want to continue?</value>
+    <value>Resetting the vTPM that is attached to a VM to its original state may result in the deactivation of some security features on the VM. Do you want to continue?</value>
   </data>
   <data name="COMMAND_VTPM_DISABLED_NON_UEFI" xml:space="preserve">
     <value>TPM is supported only for VMs using the UEFI or UEFI secure boot modes.</value>
   </data>
   <data name="COMMAND_VTPM_MENU" xml:space="preserve">
-    <value>Trusted Plat&amp;form Module Manager...</value>
+    <value>Mana&amp;ge vTPMs...</value>
   </data>
   <data name="COMMON_CRITERIA_TEXT" xml:space="preserve">
     <value>{0}: for use with Common Criteria versions of {1} only</value>
@@ -14067,7 +14067,7 @@ Schedule:
     <value>Remove vTPM</value>
   </data>
   <data name="VTPM_REMOVE_WARNING" xml:space="preserve">
-    <value>Removing the vTPM may result in deactivation of security features on the VM and may even prevent it from starting. Do you want to continue?</value>
+    <value>Removing the vTPM may result in the deactivation of some security features on the VM and prevent it from starting. Do you want to continue?</value>
   </data>
   <data name="WAITING" xml:space="preserve">
     <value>Waiting</value>
