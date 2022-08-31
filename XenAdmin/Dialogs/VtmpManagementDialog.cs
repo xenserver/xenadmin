@@ -318,16 +318,6 @@ namespace XenAdmin.Dialogs
             Close();
         }
 
-        private void VtpmManagementDialog_HelpButtonClicked(object sender, CancelEventArgs e)
-        {
-            HelpManager.Launch("VtpmManagementDialog");
-        }
-
-        private void VtpmManagementDialog_HelpRequested(object sender, HelpEventArgs hlpevent)
-        {
-            HelpManager.Launch("VtpmManagementDialog");
-        }
-
         #endregion
     }
 }

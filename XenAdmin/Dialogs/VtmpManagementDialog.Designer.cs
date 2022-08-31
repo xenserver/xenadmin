@@ -124,8 +124,6 @@ namespace XenAdmin.Dialogs
             this.Controls.Add(this.BlurbLabel);
             this.Name = "VtpmManagementDialog";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
-            this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.VtpmManagementDialog_HelpButtonClicked);
-            this.HelpRequested += new System.Windows.Forms.HelpEventHandler(this.VtpmManagementDialog_HelpRequested);
             this.Controls.SetChildIndex(this.okButton, 0);
             this.Controls.SetChildIndex(this.cancelButton, 0);
             this.Controls.SetChildIndex(this.splitContainer, 0);

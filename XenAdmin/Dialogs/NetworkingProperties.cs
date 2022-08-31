@@ -629,16 +629,6 @@ namespace XenAdmin.Dialogs
             return (XenAPI.Network)((NetworkingPropertiesPage)verticalTabs.Items[0]).NetworkComboBox.SelectedItem;
         }
 
-        private void NetworkingProperties_HelpButtonClicked(object sender, CancelEventArgs e)
-        {
-            HelpManager.Launch("NetworkingProperties");
-        }
-
-        private void NetworkingProperties_HelpRequested(object sender, HelpEventArgs hlpevent)
-        {
-            HelpManager.Launch("NetworkingProperties");
-        }
-
         private void splitContainer_Panel1_Resize(object sender, EventArgs e)
         {
             ResizeVerticalTabs(verticalTabs.Items.Count);
