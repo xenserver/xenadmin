@@ -6438,32 +6438,11 @@ Note: Any custom color selections will remain unchanged</value>
   <data name="GROUP_ROLES" xml:space="preserve">
     <value>Group Roles</value>
   </data>
-  <data name="GUEFI_BOOT_MODE_EXPERIMENTAL_LABEL" xml:space="preserve">
-    <value>&amp;UEFI Boot (experimental)</value>
-  </data>
-  <data name="GUEFI_BOOT_MODE_EXPERIMENTAL_WARNING" xml:space="preserve">
-    <value>Guest UEFI boot is an experimental feature. You can create UEFI-enabled VMs on hosts that are in a production environment. However, UEFI-enabled VMs must not be used for production purposes. You may have to re-create the VMs when you upgrade the host to a newer version of {0}.</value>
-  </data>
-  <data name="GUEFI_BOOT_MODE_LABEL" xml:space="preserve">
-    <value>&amp;UEFI Boot</value>
-  </data>
   <data name="GUEFI_BOOT_MODE_UNSUPPORTED_WARNING" xml:space="preserve">
     <value>The UEFI boot mode is not supported with the selected template.</value>
   </data>
-  <data name="GUEFI_BOOT_MODES_EXPERIMENTAL_WARNING" xml:space="preserve">
-    <value>Guest UEFI boot and guest UEFI secure boot are experimental features. You can create UEFI-enabled VMs on hosts that are in a production environment. However, UEFI-enabled VMs must not be used for production purposes. You may have to re-create the VMs when you upgrade the host to a newer version of {0}.</value>
-  </data>
   <data name="GUEFI_BOOT_MODES_UNSUPPORTED_WARNING" xml:space="preserve">
     <value>The UEFI and UEFI secure boot modes are not supported with the selected template.</value>
-  </data>
-  <data name="GUEFI_SECURE_BOOT_MODE_EXPERIMENTAL_LABEL" xml:space="preserve">
-    <value>UEFI &amp;Secure Boot (experimental)</value>
-  </data>
-  <data name="GUEFI_SECURE_BOOT_MODE_LABEL" xml:space="preserve">
-    <value>UEFI &amp;Secure Boot</value>
-  </data>
-  <data name="GUEFI_SECUREBOOT_MODE_EXPERIMENTAL_WARNING" xml:space="preserve">
-    <value>Guest UEFI secure boot is an experimental feature. You can create VMs configured to use the UEFI secure boot mode on hosts that are in a production environment. However, these VMs must not be used for production purposes. You may have to re-create the VMs when you upgrade the host to a newer version of {0}.</value>
   </data>
   <data name="GUEFI_SECUREBOOT_MODE_UNSUPPORTED_WARNING" xml:space="preserve">
     <value>The UEFI secure boot mode is not supported with the selected template.</value>
