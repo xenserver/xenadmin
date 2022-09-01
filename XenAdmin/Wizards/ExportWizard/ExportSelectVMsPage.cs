@@ -184,7 +184,7 @@ namespace XenAdmin.Wizards.ExportWizard
 		
 		private bool IsVmExportable(VM vm)
 		{
-			if (!vm.is_a_real_vm())
+			if (!vm.IsRealVm())
 				return false;
 
 			if (!vm.Show(Properties.Settings.Default.ShowHiddenVMs))

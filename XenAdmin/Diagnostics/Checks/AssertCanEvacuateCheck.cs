@@ -93,7 +93,7 @@ namespace XenAdmin.Diagnostics.Checks
                     VMsWithProblems.Add(residentVM.opaque_ref);
                 }
 
-                if (restrictMigration && residentVM.is_a_real_vm() && !VMsWithProblems.Contains(residentVM.opaque_ref))
+                if (restrictMigration && residentVM.IsRealVm() && !VMsWithProblems.Contains(residentVM.opaque_ref))
                 {
                     problems.Add(new CannotMigrateVM(this, residentVM, CannotMigrateVM.CannotMigrateVMReason.LicenseRestriction));
                     VMsWithProblems.Add(residentVM.opaque_ref);

@@ -393,7 +393,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     foreach (var vmRef in server.resident_VMs)
                     {
                         var vm = server.Connection.Resolve(vmRef);
-                        if (vm != null && vm.is_a_real_vm() && predicate.Invoke(vm))
+                        if (vm != null && vm.IsRealVm() && predicate.Invoke(vm))
                             sb.AppendIndented(vm.Name()).AppendLine();
                     }
                 }

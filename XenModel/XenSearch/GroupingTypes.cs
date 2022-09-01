@@ -357,7 +357,7 @@ namespace XenAdmin.XenSearch
             // Special case: if the type is VM, and the object is not a real VM,
             // it's not a group. This is because snapshots are XMO<VM>s internally,
             // but we want to group them by the real VM they came from.
-            if (o is VM vm && !vm.is_a_real_vm())
+            if (o is VM vm && !vm.IsRealVm())
                 return false;
 
             // Otherwise this is a group

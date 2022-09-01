@@ -275,7 +275,7 @@ namespace XenAPI
 
         public bool IsPvVm()
         {
-            return is_a_real_vm() && !IsHVM() && !other_config.ContainsKey("pvcheckpass");
+            return IsRealVm() && !IsHVM() && !other_config.ContainsKey("pvcheckpass");
         }
 
         public bool IsUEFIEnabled()
@@ -1104,7 +1104,7 @@ namespace XenAPI
         {
             if (this.Connection != null)
             {
-                if (this.is_a_real_vm())
+                if (this.IsRealVm())
                 {
                     return base.NameWithLocation();
                 }
@@ -1221,7 +1221,7 @@ namespace XenAPI
         /// </summary>
         public bool HaCanProtect(bool showHiddenVMs)
         {
-            return is_a_real_vm() && Show(showHiddenVMs);
+            return IsRealVm() && Show(showHiddenVMs);
 
         }
 
@@ -1331,7 +1331,7 @@ namespace XenAPI
             return false;
         }
 
-        public bool is_a_real_vm()
+        public bool IsRealVm()
         {
             return !is_a_snapshot && !is_a_template && !is_control_domain;
         }
@@ -1373,7 +1373,7 @@ namespace XenAPI
 
         public bool IsConversionVM()
         {
-            return is_a_real_vm() && BoolKey(other_config, "conversionvm");
+            return IsRealVm() && BoolKey(other_config, "conversionvm");
         }
 
         public override string ToString()

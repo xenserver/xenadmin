@@ -77,7 +77,7 @@ namespace XenAdmin.Commands
                 if ((hostAncestor != null && hostAncestor.enabled && hostAncestor.IsLive() && selection[0].Connection.IsConnected)
                     || (poolAncestor != null && Helpers.PoolHasEnabledHosts(poolAncestor)))
                 {
-                    var vms = selection.FirstAsXenObject.Connection.Cache.VMs.Where(vm => vm.is_a_real_vm() && CanExportVm(vm) && vm.Show(Properties.Settings.Default.ShowHiddenVMs)).ToList();
+                    var vms = selection.FirstAsXenObject.Connection.Cache.VMs.Where(vm => vm.IsRealVm() && CanExportVm(vm) && vm.Show(Properties.Settings.Default.ShowHiddenVMs)).ToList();
                     if (vms.Count > 0)
                         return vms.Any(CanExportVm);
                 }
@@ -95,7 +95,7 @@ namespace XenAdmin.Commands
             if (item != null && item.Connection != null)
             {
                 var vms = item.Connection.Cache.VMs.Where(xvm =>
-                    xvm.is_a_real_vm() && CanExportVm(xvm) &&
+                    xvm.IsRealVm() && CanExportVm(xvm) &&
                     xvm.Show(Properties.Settings.Default.ShowHiddenVMs)).ToList();
 
                 if (vms.Count == 0)

@@ -302,12 +302,12 @@ namespace XenAdmin.XenSearch
 			property_types.Add(PropertyNames.in_any_appliance, typeof(bool));
             property_types.Add(PropertyNames.disks, typeof(VDI));
 
-            properties[PropertyNames.os_name] = o => o is VM vm && vm.is_a_real_vm() ? vm.GetOSName() : null;
-            properties[PropertyNames.power_state] = o => o is VM vm && vm.is_a_real_vm() ? (IComparable)vm.power_state : null;
-            properties[PropertyNames.vendor_device_state] = o => o is VM vm && vm.is_a_real_vm() ? (bool?)vm.WindowsUpdateCapable() : null;
-            properties[PropertyNames.virtualisation_status] = o => o is VM vm && vm.is_a_real_vm() ? (IComparable)vm.GetVirtualisationStatus(out _) : null;
-            properties[PropertyNames.start_time] = o => o is VM vm && vm.is_a_real_vm() ? (DateTime?)vm.GetStartTime() : null;
-            properties[PropertyNames.read_caching_enabled] = o => o is VM vm && vm.is_a_real_vm() ? (bool?)vm.ReadCachingEnabled() : null;
+            properties[PropertyNames.os_name] = o => o is VM vm && vm.IsRealVm() ? vm.GetOSName() : null;
+            properties[PropertyNames.power_state] = o => o is VM vm && vm.IsRealVm() ? (IComparable)vm.power_state : null;
+            properties[PropertyNames.vendor_device_state] = o => o is VM vm && vm.IsRealVm() ? (bool?)vm.WindowsUpdateCapable() : null;
+            properties[PropertyNames.virtualisation_status] = o => o is VM vm && vm.IsRealVm() ? (IComparable)vm.GetVirtualisationStatus(out _) : null;
+            properties[PropertyNames.start_time] = o => o is VM vm && vm.IsRealVm() ? (DateTime?)vm.GetStartTime() : null;
+            properties[PropertyNames.read_caching_enabled] = o => o is VM vm && vm.IsRealVm() ? (bool?)vm.ReadCachingEnabled() : null;
 
             properties[PropertyNames.label] = Helpers.GetName;
             properties[PropertyNames.pool] = o => o == null ? null : Helpers.GetPool(o.Connection);
@@ -329,7 +329,7 @@ namespace XenAdmin.XenSearch
 
             properties[PropertyNames.memory] = o =>
             {
-                if (o is VM vm && vm.is_a_real_vm() && vm.Connection != null)
+                if (o is VM vm && vm.IsRealVm() && vm.Connection != null)
                 {
                     var metrics = vm.Connection.Resolve(vm.metrics);
                     if (metrics != null)
@@ -340,7 +340,7 @@ namespace XenAdmin.XenSearch
 
             properties[PropertyNames.ha_restart_priority] = delegate(IXenObject o)
             {
-                if (o is VM vm && vm.is_a_real_vm())
+                if (o is VM vm && vm.IsRealVm())
                 {
                     Pool pool = Helpers.GetPool(vm.Connection);
                     if (pool != null && pool.ha_enabled)
@@ -359,7 +359,7 @@ namespace XenAdmin.XenSearch
                 if (o is VM_appliance app)
                     return app;
 
-                if (o is VM vm && vm.is_a_real_vm() && vm.Connection != null)
+                if (o is VM vm && vm.IsRealVm() && vm.Connection != null)
                     return vm.Connection.Resolve(vm.appliance);
 
                 return null;
@@ -369,7 +369,7 @@ namespace XenAdmin.XenSearch
 			{
 				if (o is VM_appliance)
 					return true;
-                if (o is VM vm && vm.is_a_real_vm() && vm.Connection != null)
+                if (o is VM vm && vm.IsRealVm() && vm.Connection != null)
                     return vm.Connection.Resolve(vm.appliance) != null;
                 return null;
             };
@@ -422,7 +422,7 @@ namespace XenAdmin.XenSearch
         private static IComparable UptimeProperty(IXenObject o)
         {
             if (o is VM vm)
-                return vm.is_a_real_vm() ? vm.RunningTime() : null;
+                return vm.IsRealVm() ? vm.RunningTime() : null;
 
             if (o is Host host)
                 return host.Uptime();
@@ -433,7 +433,7 @@ namespace XenAdmin.XenSearch
         private static IComparable CPUTextProperty(IXenObject o)
         {
             if (o is VM vm)
-                return vm.is_a_real_vm() && vm.power_state == vm_power_state.Running
+                return vm.IsRealVm() && vm.power_state == vm_power_state.Running
                     ? PropertyAccessorHelper.vmCpuUsageString(vm)
                     : null;
 
@@ -448,7 +448,7 @@ namespace XenAdmin.XenSearch
         private static IComparable CPUValueProperty(IXenObject o)
         {
             if (o is VM vm)
-                return vm.is_a_real_vm() && vm.power_state == vm_power_state.Running
+                return vm.IsRealVm() && vm.power_state == vm_power_state.Running
                     ? (IComparable)PropertyAccessorHelper.vmCpuUsageRank(vm)
                     : null;
 
@@ -464,7 +464,7 @@ namespace XenAdmin.XenSearch
         {
             if (o is VM vm)
             {
-                return vm.is_a_real_vm() &&
+                return vm.IsRealVm() &&
                        vm.power_state == vm_power_state.Running &&
                        vm.GetVirtualisationStatus(out _).HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED)
                     ? PropertyAccessorHelper.vmMemoryUsageString(vm)
@@ -486,7 +486,7 @@ namespace XenAdmin.XenSearch
         {
             if (o is VM vm)
             {
-                return vm.is_a_real_vm() &&
+                return vm.IsRealVm() &&
                        vm.power_state == vm_power_state.Running &&
                        vm.GetVirtualisationStatus(out _).HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED)
                     ? (IComparable)PropertyAccessorHelper.vmMemoryUsageRank(vm)
@@ -508,7 +508,7 @@ namespace XenAdmin.XenSearch
         {
                 if (o is VM vm)
                 {
-                    return vm.is_a_real_vm() &&
+                    return vm.IsRealVm() &&
                            vm.power_state == vm_power_state.Running &&
                            vm.GetVirtualisationStatus(out _).HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED)
                         ? (IComparable)PropertyAccessorHelper.vmMemoryUsageValue(vm)
@@ -530,7 +530,7 @@ namespace XenAdmin.XenSearch
         {
             if (o is VM vm)
             {
-                return vm.is_a_real_vm() &&
+                return vm.IsRealVm() &&
                        vm.power_state == vm_power_state.Running &&
                        vm.GetVirtualisationStatus(out _).HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED)
                     ? PropertyAccessorHelper.vmNetworkUsageString(vm)
@@ -548,7 +548,7 @@ namespace XenAdmin.XenSearch
         private static IComparable DiskTextProperty(IXenObject o)
         {
             return o is VM vm &&
-                   vm.is_a_real_vm() &&
+                   vm.IsRealVm() &&
                    vm.power_state == vm_power_state.Running &&
                    vm.GetVirtualisationStatus(out _).HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED)
                 ? PropertyAccessorHelper.vmDiskUsageString(vm)
@@ -670,7 +670,7 @@ namespace XenAdmin.XenSearch
 
             if (o is VM vm)
             {
-                if (vm.is_a_real_vm() && vm.Connection != null)
+                if (vm.IsRealVm() && vm.Connection != null)
                     foreach (VIF vif in vm.Connection.ResolveAll(vm.VIFs))
                     {
                         XenAPI.Network network = vm.Connection.Resolve(vif.network);
@@ -752,7 +752,7 @@ namespace XenAdmin.XenSearch
                 vms.Add(container.Parent);
             }
 
-            vms.RemoveAll(vm => !vm.is_a_real_vm());
+            vms.RemoveAll(vm => !vm.IsRealVm());
             return vms;
         }
 
@@ -815,7 +815,7 @@ namespace XenAdmin.XenSearch
 
             if (o is VM vm)
             {
-                if (vm.is_a_real_vm())
+                if (vm.IsRealVm())
                     foreach (VBD vbd in vm.Connection.ResolveAll(vm.VBDs))
                     {
                         VDI vdi = vbd.Connection.Resolve(vbd.VDI);
@@ -855,7 +855,7 @@ namespace XenAdmin.XenSearch
             }
             else if (o is VM vm)
             {
-                if (vm.is_a_real_vm())
+                if (vm.IsRealVm())
                     foreach (VBD vbd in vm.Connection.ResolveAll(vm.VBDs))
                     {
                         VDI vdi = vbd.Connection.Resolve(vbd.VDI);
@@ -875,7 +875,7 @@ namespace XenAdmin.XenSearch
 
             if (o is VM vm)
             {
-                if (!vm.is_a_real_vm())
+                if (!vm.IsRealVm())
                     return addresses;
 
                 VM_guest_metrics metrics = vm.Connection.Resolve(vm.guest_metrics);

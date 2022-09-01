@@ -776,7 +776,7 @@ namespace XenAdmin.Actions
                 if (Cancelling)
                     throw new CancelledException();
 
-                if (!vm.is_a_real_vm())
+                if (!vm.IsRealVm())
                 {
                     PercentComplete = Convert.ToInt32((++itemIndex) * baseIndex / itemCount);
                     continue;
