@@ -133,36 +133,6 @@ namespace XenAdmin.Wizards
             }
             
             ShowTemplateWarning();
-
-            // show the experimental message
-            ShowExperimentalWarning();
-        }
-        private void ShowExperimentalWarning()
-        {
-            var uefiExperimental = Helpers.FeatureForbidden(_connection, Host.UefiBootExperimental);
-            var uefiSecureExperimental = Helpers.FeatureForbidden(_connection, Host.UefiSecureBootExperimental);
-
-
-            radioButtonUEFIBoot.Text = uefiExperimental
-                ? Messages.GUEFI_BOOT_MODE_EXPERIMENTAL_LABEL
-                : Messages.GUEFI_BOOT_MODE_LABEL;
-            radioButtonUEFISecureBoot.Text = uefiSecureExperimental
-                ? Messages.GUEFI_SECURE_BOOT_MODE_EXPERIMENTAL_LABEL
-                : Messages.GUEFI_SECURE_BOOT_MODE_LABEL;
-
-            if ((uefiExperimental || uefiSecureExperimental) && (radioButtonUEFIBoot.Enabled || radioButtonUEFISecureBoot.Enabled))
-            {
-                imgExperimental.Visible = labelExperimental.Visible = radioButtonUEFIBoot.Enabled || radioButtonUEFISecureBoot.Enabled;
-                labelExperimental.Text = uefiExperimental && uefiSecureExperimental
-                    ? string.Format(Messages.GUEFI_BOOT_MODES_EXPERIMENTAL_WARNING, BrandManager.ProductBrand)
-                    : uefiExperimental
-                        ? string.Format(Messages.GUEFI_BOOT_MODE_EXPERIMENTAL_WARNING, BrandManager.ProductBrand)
-                        : string.Format(Messages.GUEFI_SECUREBOOT_MODE_EXPERIMENTAL_WARNING, BrandManager.ProductBrand);
-            }
-            else
-            {
-                imgExperimental.Visible = labelExperimental.Visible = false;
-            }
         }
 
         private void ShowTemplateWarning()

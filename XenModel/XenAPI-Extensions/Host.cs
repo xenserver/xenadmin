@@ -490,32 +490,12 @@ namespace XenAPI
             return FeatureDisabled(h, "guefi-secureboot");
         }
 
-        public static bool UefiBootExperimental(Host h)
-        {
-            return FeatureExperimental(h, "guefi");
-        }
-
-        public static bool UefiSecureBootExperimental(Host h)
-        {
-            return FeatureExperimental(h, "guefi-secureboot");
-        }
-
         public static bool FeatureDisabled(Host h, string featureName)
         {
             foreach (var feature in h.Connection.ResolveAll(h.features))
             {
                 if (feature.name_label.Equals(featureName, StringComparison.OrdinalIgnoreCase))
                     return !feature.enabled;
-            }
-            return false;
-        }
-
-        public static bool FeatureExperimental(Host h, string featureName)
-        {
-            foreach (var feature in h.Connection.ResolveAll(h.features))
-            {
-                if (feature.name_label.Equals(featureName, StringComparison.OrdinalIgnoreCase))
-                    return feature.enabled && feature.experimental;
             }
             return false;
         }
