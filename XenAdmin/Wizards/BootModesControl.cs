@@ -29,6 +29,7 @@
  * SUCH DAMAGE.
  */
 
+using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 using XenAdmin.Core;
@@ -40,6 +41,9 @@ namespace XenAdmin.Wizards
 {
     public partial class BootModesControl : UserControl
     {
+        private VM _templateVM;
+        private IXenConnection _connection;
+
         public BootModesControl()
         {
             InitializeComponent();
@@ -48,7 +52,7 @@ namespace XenAdmin.Wizards
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public VM TemplateVM
         {
-            get { return _templateVM; }
+            get => _templateVM;
             set
             {
                 if (_templateVM == value)
@@ -57,18 +61,18 @@ namespace XenAdmin.Wizards
                 _templateVM = value;
 
                 if (_templateVM != null)
-                {
                     _connection = _templateVM.Connection;
-                }
+
                 UpdateControls();
+                UpdateTpmControls();
             }
         }
-        private VM _templateVM;
+        
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public IXenConnection Connection
         {
-            get { return _connection; }
+            get => _connection;
             set
             {
                 if (_connection == value)
@@ -76,14 +80,22 @@ namespace XenAdmin.Wizards
 
                 _connection = value;
                 UpdateControls();
+                UpdateTpmControls();
             }
         }
-        private IXenConnection _connection;
 
-        public BootMode SelectedOption
-        {
-            get { return radioButtonUEFISecureBoot.Checked ? BootMode.UEFI_SECURE_BOOT : (radioButtonUEFIBoot.Checked ? BootMode.UEFI_BOOT : BootMode.BIOS_BOOT); }
-        }
+        public BootMode SelectedOption =>
+            radioButtonUEFISecureBoot.Checked
+                ? BootMode.UEFI_SECURE_BOOT
+                : radioButtonUEFIBoot.Checked
+                    ? BootMode.UEFI_BOOT
+                    : BootMode.BIOS_BOOT;
+
+        public bool AssignVtpm => !IsVtpmTemplate && checkBoxVtpm.Checked;
+
+        private bool IsVtpmTemplate => _templateVM != null && _templateVM.is_a_template &&
+                                       _templateVM.platform.TryGetValue("vtpm", out var result) &&
+                                       result.ToLower() == "true";
 
         public void CheckBIOSBootMode()
         {
@@ -115,12 +127,13 @@ namespace XenAdmin.Wizards
                     else
                         radioButtonUEFIBoot.Checked = true;
 
-                    if (!_templateVM.CanChangeBootMode())
+                    if (!_templateVM.CanChangeBootMode() || IsVtpmTemplate)
                         radioButtonBIOSBoot.Enabled = false;
                 }
                 else
                 {
                     radioButtonBIOSBoot.Checked = true;
+
                     if (!_templateVM.CanChangeBootMode())
                         radioButtonUEFIBoot.Enabled = radioButtonUEFISecureBoot.Enabled = false;
                 }
@@ -133,6 +146,34 @@ namespace XenAdmin.Wizards
             }
             
             ShowTemplateWarning();
+        }
+
+        private void UpdateTpmControls()
+        {
+            if (_templateVM != null)
+            {
+                var vtpmSupported = !Helpers.FeatureForbidden(_connection, Host.RestrictVtpm) &&
+                                    Helpers.XapiEqualOrGreater_vtpmtag(_connection) &&
+                                    (radioButtonUEFIBoot.Visible || radioButtonUEFISecureBoot.Visible) &&
+                                    (radioButtonUEFIBoot.Enabled || radioButtonUEFISecureBoot.Enabled);
+
+                groupBoxDevSecurity.Visible = vtpmSupported;
+                groupBoxDevSecurity.Enabled = vtpmSupported && !radioButtonBIOSBoot.Checked && !IsVtpmTemplate && _templateVM.VTPMs.Count < VM.MAX_ALLOWED_VTPMS;
+                checkBoxVtpm.Checked = vtpmSupported && !radioButtonBIOSBoot.Checked && IsVtpmTemplate && _templateVM.VTPMs.Count < VM.MAX_ALLOWED_VTPMS;
+
+                if (_templateVM.VTPMs.Count == VM.MAX_ALLOWED_VTPMS)
+                    labelTpm.Text = string.Format(Messages.VTPM_MAX_REACHED, VM.MAX_ALLOWED_VTPMS);
+                else if (radioButtonBIOSBoot.Checked)
+                    labelTpm.Text = Messages.COMMAND_VTPM_DISABLED_NON_UEFI;
+            }
+            else
+            {
+                groupBoxDevSecurity.Visible = false;
+                groupBoxDevSecurity.Enabled = false;
+                checkBoxVtpm.Checked = false;
+            }
+
+            labelTpm.Visible = imgTpm.Visible = groupBoxDevSecurity.Visible && !groupBoxDevSecurity.Enabled && !checkBoxVtpm.Checked;
         }
 
         private void ShowTemplateWarning()
@@ -171,6 +212,11 @@ namespace XenAdmin.Wizards
         {
             return Helpers.NaplesOrGreater(connection) && 
                    (!Helpers.FeatureForbidden(connection, Host.UefiBootDisabled) || !Helpers.FeatureForbidden(connection, Host.UefiSecureBootDisabled));
+        }
+
+        private void radioButtonBIOSBoot_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateTpmControls();
         }
     }
 }

@@ -70,33 +70,33 @@ namespace XenAdmin.Actions.VMActions
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private readonly string NameLabel;
-        private readonly string NameDescription;
-        private readonly InstallMethod InsMethod;
-        private readonly string PvArgs;
-        private readonly VDI Cd;
-        private readonly string Url;
-        private readonly BootMode BootMode;
-        private readonly Host HomeServer;
-        private readonly long VcpusMax;
-        private readonly long VcpusAtStartup;
-        private readonly long MemoryDynamicMin, MemoryDynamicMax, MemoryStaticMax;
-        private readonly List<DiskDescription> Disks;
-        private readonly List<VIF> Vifs;
-        private readonly bool StartAfter;
-        private readonly Host CopyBiosStringsFrom;
-        private readonly SR FullCopySR;
-        private readonly List<VGPU> vGpus;
-        private readonly long CoresPerSocket;
-        private readonly string cloudConfigDriveTemplateText;
-        private SR firstSR = null;
+        private readonly string _nameLabel;
+        private readonly string _nameDescription;
+        private readonly InstallMethod _installMethod;
+        private readonly string _pvArgs;
+        private readonly VDI _cd;
+        private readonly string _url;
+        private readonly BootMode _bootMode;
+        private readonly Host _homeServer;
+        private readonly long _vcpusMax;
+        private readonly long _vcpusAtStartup;
+        private readonly long _memoryDynamicMin, _memoryDynamicMax, _memoryStaticMax;
+        private readonly List<DiskDescription> _disks;
+        private readonly List<VIF> _vifs;
+        private readonly bool _startAfter;
+        private readonly Host _copyBiosStringsFrom;
+        private readonly SR _fullCopySr;
+        private readonly List<VGPU> _vgpus;
+        private readonly long _coresPerSocket;
+        private readonly string _cloudConfigDriveTemplateText;
+        private SR _firstSr;
 
         private Action<VMStartAbstractAction, Failure> _startDiagnosisForm;
         private Action<VM, bool> _warningDialogHAInvalidConfig;
 
-        private bool PointOfNoReturn;
-
-        private bool assignOrRemoveVgpu;
+        private bool _pointOfNoReturn;
+        private readonly bool _assignVtpm;
+        private readonly bool _assignOrRemoveVgpu;
 
         /// <summary>
         /// These are the RBAC dependencies that you always need to create a VM. Check CreateVMAction constructor for runtime dependent dependencies.
@@ -128,7 +128,9 @@ namespace XenAdmin.Actions.VMActions
             "vdi.copy",
             // Add networks
             "vif.create",
-            "vm.set_platform"
+            "vm.set_platform",
+            //assign vTPM
+            "vtpm.create"
         );
 
         public CreateVMAction(IXenConnection connection, VM template, Host copyBiosStringsFrom,
@@ -136,53 +138,54 @@ namespace XenAdmin.Actions.VMActions
             string pvArgs, VDI cd, string url, BootMode bootMode, Host homeServer, long vcpusMax, long vcpusAtStartup,
             long memoryDynamicMin, long memoryDynamicMax, long memoryStaticMax,
             List<DiskDescription> disks, SR fullCopySR, List<VIF> vifs, bool startAfter,
-            Action<VM, bool> warningDialogHAInvalidConfig,
+            bool assignVtpm, Action<VM, bool> warningDialogHAInvalidConfig,
             Action<VMStartAbstractAction, Failure> startDiagnosisForm,
             List<VGPU> vGpus, bool modifyVgpuSettings, long coresPerSocket, string cloudConfigDriveTemplateText)
             : base(connection, string.Format(Messages.CREATE_VM, name),
             string.Format(Messages.CREATE_VM_FROM_TEMPLATE, name, Helpers.GetName(template)))
         {
             Template = template;
-            CopyBiosStringsFrom = copyBiosStringsFrom;
-            FullCopySR = fullCopySR;
-            NameLabel = name;
-            NameDescription = description;
-            InsMethod = installMethod;
-            PvArgs = pvArgs;
-            Cd = cd;
-            Url = url;
-            BootMode = bootMode;
-            HomeServer = homeServer;
-            VcpusMax = vcpusMax;
-            VcpusAtStartup = vcpusAtStartup;
-            MemoryDynamicMin = memoryDynamicMin;
-            MemoryDynamicMax = memoryDynamicMax;
-            MemoryStaticMax = memoryStaticMax;
-            Disks = disks;
-            Vifs = vifs;
-            StartAfter = startAfter;
+            _copyBiosStringsFrom = copyBiosStringsFrom;
+            _fullCopySr = fullCopySR;
+            _nameLabel = name;
+            _nameDescription = description;
+            _installMethod = installMethod;
+            _pvArgs = pvArgs;
+            _cd = cd;
+            _url = url;
+            _bootMode = bootMode;
+            _homeServer = homeServer;
+            _vcpusMax = vcpusMax;
+            _vcpusAtStartup = vcpusAtStartup;
+            _memoryDynamicMin = memoryDynamicMin;
+            _memoryDynamicMax = memoryDynamicMax;
+            _memoryStaticMax = memoryStaticMax;
+            _disks = disks;
+            _vifs = vifs;
+            _assignVtpm = assignVtpm;
+            _startAfter = startAfter;
             _warningDialogHAInvalidConfig = warningDialogHAInvalidConfig;
             _startDiagnosisForm = startDiagnosisForm;
-            this.vGpus = vGpus;
-            CoresPerSocket = coresPerSocket;
-            this.cloudConfigDriveTemplateText = cloudConfigDriveTemplateText;
+            _vgpus = vGpus;
+            _coresPerSocket = coresPerSocket;
+            _cloudConfigDriveTemplateText = cloudConfigDriveTemplateText;
 
             Pool pool_of_one = Helpers.GetPoolOfOne(Connection);
-            if (HomeServer != null || pool_of_one != null) // otherwise we have no where to put the action
-                AppliesTo.Add(HomeServer != null ? HomeServer.opaque_ref : pool_of_one.opaque_ref);
+            if (_homeServer != null || pool_of_one != null) // otherwise we have no where to put the action
+                AppliesTo.Add(_homeServer != null ? _homeServer.opaque_ref : pool_of_one.opaque_ref);
 
-            assignOrRemoveVgpu = vGpus != null && vGpus.Count > 0 || modifyVgpuSettings && Helpers.GpuCapability(Connection);
+            _assignOrRemoveVgpu = vGpus != null && vGpus.Count > 0 || modifyVgpuSettings && Helpers.GpuCapability(Connection);
 
             #region RBAC Dependencies
 
-            if (StartAfter)
+            if (_startAfter)
                 ApiMethodsToRoleCheck.Add("vm.start");
             if (HomeServerChanged())
                 ApiMethodsToRoleCheck.Add("vm.set_affinity");
-            if (Template.memory_dynamic_min != MemoryDynamicMin || Template.memory_dynamic_max != MemoryDynamicMax || Template.memory_static_max != MemoryStaticMax)
+            if (Template.memory_dynamic_min != _memoryDynamicMin || Template.memory_dynamic_max != _memoryDynamicMax || Template.memory_static_max != _memoryStaticMax)
                 ApiMethodsToRoleCheck.Add("vm.set_memory_limits");
 
-            if (assignOrRemoveVgpu)
+            if (_assignOrRemoveVgpu)
             {
                 ApiMethodsToRoleCheck.Add("VGPU.destroy");
                 ApiMethodsToRoleCheck.Add("VGPU.create");
@@ -198,15 +201,15 @@ namespace XenAdmin.Actions.VMActions
 
         protected override void Run()
         {
-            if (FullCopySR != null)
+            if (_fullCopySr != null)
             {
-                Description = string.Format(Messages.COPYING_TEMPLATE, Helpers.GetName(Template), FullCopySR.Name());
-                RelatedTask = VM.async_copy(Session, Template.opaque_ref, Helpers.MakeHiddenName(NameLabel), FullCopySR.opaque_ref);
+                Description = string.Format(Messages.COPYING_TEMPLATE, Helpers.GetName(Template), _fullCopySr.Name());
+                RelatedTask = VM.async_copy(Session, Template.opaque_ref, Helpers.MakeHiddenName(_nameLabel), _fullCopySr.opaque_ref);
             }
             else
             {
                 Description = string.Format(Messages.CLONING_TEMPLATE, Helpers.GetName(Template));
-                RelatedTask = VM.async_clone(Session, Template.opaque_ref, Helpers.MakeHiddenName(NameLabel));
+                RelatedTask = VM.async_clone(Session, Template.opaque_ref, Helpers.MakeHiddenName(_nameLabel));
             }
 
             PollToCompletion(0, 10);
@@ -224,14 +227,15 @@ namespace XenAdmin.Actions.VMActions
             AddNetworks();
             XenAdminConfigManager.Provider.ShowObject(VM.opaque_ref);
             VM.IsBeingCreated = false;
-            PointOfNoReturn = true;
+            _pointOfNoReturn = true;
 
             if (Helpers.ContainerCapability(Connection))
                 CloudCreateConfigDrive();
            
+            AssignVtpm();
             AssignVgpu();
 
-            if (StartAfter)
+            if (_startAfter)
             {
                 Description = Messages.STARTING_VM;
                 var startAction = new VMStartAction(VM, _warningDialogHAInvalidConfig, _startDiagnosisForm);
@@ -269,16 +273,16 @@ namespace XenAdmin.Actions.VMActions
 
         private void CloudCreateConfigDrive()
         {
-            if (Template.CanHaveCloudConfigDrive() && !string.IsNullOrEmpty(cloudConfigDriveTemplateText))
+            if (Template.CanHaveCloudConfigDrive() && !string.IsNullOrEmpty(_cloudConfigDriveTemplateText))
             {
                 Description = Messages.CREATING_CLOUD_CONFIG_DRIVE; 
 
                 var parameters = new Dictionary<string, string>();
                 parameters.Add("vmuuid", VM.uuid);
-                parameters.Add("sruuid", firstSR.uuid);
-                parameters.Add("configuration", cloudConfigDriveTemplateText.Replace("\r\n", "\n"));
+                parameters.Add("sruuid", _firstSr.uuid);
+                parameters.Add("configuration", _cloudConfigDriveTemplateText.Replace("\r\n", "\n"));
 
-                var action = new RunPluginAction(Connection, HomeServer ?? Helpers.GetCoordinator(Connection),
+                var action = new RunPluginAction(Connection, _homeServer ?? Helpers.GetCoordinator(Connection),
                             "xscontainer",//plugin
                             "create_config_drive",//function
                             parameters,
@@ -289,12 +293,18 @@ namespace XenAdmin.Actions.VMActions
             }
         }
 
+        private void AssignVtpm()
+        {
+            if (_assignVtpm)
+                new NewVtpmAction(Connection, VM).RunSync(Session);
+        }
+
         private void AssignVgpu()
         {
-            if (assignOrRemoveVgpu)
+            if (_assignOrRemoveVgpu)
             {
                 var newvGpus = new List<VGPU>();
-                foreach (var vGpu in vGpus)
+                foreach (var vGpu in _vgpus)
                 {
                     newvGpus.Add(new VGPU
                     {
@@ -310,9 +320,9 @@ namespace XenAdmin.Actions.VMActions
 
         private void CopyBiosStrings()
         {
-            if (CopyBiosStringsFrom != null && Template.DefaultTemplate())
+            if (_copyBiosStringsFrom != null && Template.DefaultTemplate())
             {
-                VM.copy_bios_strings(Session, this.VM.opaque_ref, CopyBiosStringsFrom.opaque_ref);
+                VM.copy_bios_strings(Session, this.VM.opaque_ref, _copyBiosStringsFrom.opaque_ref);
             }
         }
 
@@ -326,52 +336,52 @@ namespace XenAdmin.Actions.VMActions
         private void SetVMParams()
         {
             Description = Messages.SETTING_VM_PROPERTIES;
-            XenAPI.VM.set_name_label(Session, VM.opaque_ref, NameLabel);
-            XenAPI.VM.set_name_description(Session, VM.opaque_ref, NameDescription);
-            ChangeVCPUSettingsAction vcpuAction = new ChangeVCPUSettingsAction(VM, VcpusMax, VcpusAtStartup);
+            XenAPI.VM.set_name_label(Session, VM.opaque_ref, _nameLabel);
+            XenAPI.VM.set_name_description(Session, VM.opaque_ref, _nameDescription);
+            ChangeVCPUSettingsAction vcpuAction = new ChangeVCPUSettingsAction(VM, _vcpusMax, _vcpusAtStartup);
             vcpuAction.RunSync(Session);
 
             // set cores-per-socket
             Dictionary<string, string> platform = VM.platform == null ?
                             new Dictionary<string, string>() :
                             new Dictionary<string, string>(VM.platform);
-            platform["cores-per-socket"] = CoresPerSocket.ToString();
+            platform["cores-per-socket"] = _coresPerSocket.ToString();
             VM.set_platform(Session, VM.opaque_ref, platform);
 
             // Check these values have changed before setting them, as they are RBAC protected
             if (HomeServerChanged())
-                XenAPI.VM.set_affinity(Session, VM.opaque_ref, HomeServer != null ? HomeServer.opaque_ref : Helper.NullOpaqueRef);
+                XenAPI.VM.set_affinity(Session, VM.opaque_ref, _homeServer != null ? _homeServer.opaque_ref : Helper.NullOpaqueRef);
 
-            if (Template.memory_dynamic_min != MemoryDynamicMin || Template.memory_dynamic_max != MemoryDynamicMax || Template.memory_static_max != MemoryStaticMax)
-                XenAPI.VM.set_memory_limits(Session, VM.opaque_ref, Template.memory_static_min, MemoryStaticMax, MemoryDynamicMin, MemoryDynamicMax);
+            if (Template.memory_dynamic_min != _memoryDynamicMin || Template.memory_dynamic_max != _memoryDynamicMax || Template.memory_static_max != _memoryStaticMax)
+                XenAPI.VM.set_memory_limits(Session, VM.opaque_ref, Template.memory_static_min, _memoryStaticMax, _memoryDynamicMin, _memoryDynamicMax);
         }
 
         private bool HomeServerChanged()
         {
-            if (HomeServer == null)
+            if (_homeServer == null)
             {
                 return Template.affinity.opaque_ref != Helper.NullOpaqueRef;
             }
-            return HomeServer.opaque_ref != Template.affinity.opaque_ref;
+            return _homeServer.opaque_ref != Template.affinity.opaque_ref;
         }
 
         private void SetVMBootParams()
         {
-            if (Template.IsHVM() && (Disks.Count == 0 || InsMethod == InstallMethod.Network)) // CA-46213
+            if (Template.IsHVM() && (_disks.Count == 0 || _installMethod == InstallMethod.Network)) // CA-46213
             {
                 // boot from network
                 Dictionary<string, string> hvm_params = VM.HVM_boot_params;
                 hvm_params["order"] = GetBootOrderNetworkFirst();
                 XenAPI.VM.set_HVM_boot_params(Session, VM.opaque_ref, hvm_params);
             }
-            else if (IsEli() && InsMethod == InstallMethod.Network)
+            else if (IsEli() && _installMethod == InstallMethod.Network)
             {
                 Dictionary<string, string> other_config = VM.other_config;
-                string normal_url = IsRhel() ? NormalizeRepoUrlForRHEL(Url) : Url;
+                string normal_url = IsRhel() ? NormalizeRepoUrlForRHEL(_url) : _url;
                 other_config["install-repository"] = normal_url;
                 XenAPI.VM.set_other_config(Session, VM.opaque_ref, other_config);
             }
-            else if (IsEli() && InsMethod == InstallMethod.CD)
+            else if (IsEli() && _installMethod == InstallMethod.CD)
             {
                 Dictionary<string, string> other_config = VM.other_config;
                 other_config["install-repository"] = "cdrom";
@@ -380,16 +390,16 @@ namespace XenAdmin.Actions.VMActions
 
             if (!Template.IsHVM())
             {
-                XenAPI.VM.set_PV_args(Session, VM.opaque_ref, PvArgs);
+                XenAPI.VM.set_PV_args(Session, VM.opaque_ref, _pvArgs);
             }
-            else if (BootMode != BootMode.NOT_AVAILABLE)
+            else if (_bootMode != BootMode.NOT_AVAILABLE)
             {
                 var hvm_params = VM.HVM_boot_params;
-                hvm_params["firmware"] = BootMode != BootMode.BIOS_BOOT ? "uefi" : "bios";
+                hvm_params["firmware"] = _bootMode != BootMode.BIOS_BOOT ? "uefi" : "bios";
                 XenAPI.VM.set_HVM_boot_params(Session, VM.opaque_ref, hvm_params);
 
                 var platform = VM.platform;
-                platform["secureboot"] = BootMode == BootMode.UEFI_SECURE_BOOT ? "true" : "false";
+                platform["secureboot"] = _bootMode == BootMode.UEFI_SECURE_BOOT ? "true" : "false";
                 XenAPI.VM.set_platform(Session, VM.opaque_ref, platform);
             }
         }
@@ -463,9 +473,9 @@ namespace XenAdmin.Actions.VMActions
                 PollToCompletion(65, 67);
             }
 
-            if (InsMethod == InstallMethod.CD && Cd != null) // obviously dont insert the empty cd
+            if (_installMethod == InstallMethod.CD && _cd != null) // obviously don't insert the empty cd
             {
-                RelatedTask = VBD.async_insert(Session, cd_drive.opaque_ref, Cd.opaque_ref);
+                RelatedTask = VBD.async_insert(Session, cd_drive.opaque_ref, _cd.opaque_ref);
                 PollToCompletion(67, 70);
             }
         }
@@ -477,7 +487,7 @@ namespace XenAdmin.Actions.VMActions
                 throw new Exception(Messages.NO_MORE_USERDEVICES);
             VBD vbd = new VBD
             {
-                bootable = InsMethod == InstallMethod.CD,
+                bootable = _installMethod == InstallMethod.CD,
                 empty = true,
                 unpluggable = true,
                 mode = vbd_mode.RO,
@@ -501,14 +511,14 @@ namespace XenAdmin.Actions.VMActions
             string suspendSr = null;
 
             double progress = 70;
-            double step = 20.0 / (double)Disks.Count;
-            foreach (DiskDescription disk in Disks)
+            double step = 20.0 / (double)_disks.Count;
+            foreach (DiskDescription disk in _disks)
             {
                 VBD vbd = GetDiskVBD(disk, vbds);
                 VDI vdi = null;
                 if (vbd != null)
                 {
-                    vdi = Connection.Resolve<VDI>(vbd.VDI);
+                    vdi = Connection.Resolve(vbd.VDI);
                 }
                 if (!DiskOk(disk, vbd))
                 {
@@ -530,7 +540,7 @@ namespace XenAdmin.Actions.VMActions
                 {
                     //use the first disk to set the VM.suspend_SR
                     SR vdiSR = Connection.Resolve(vdi.SR);
-                    this.firstSR = vdiSR;
+                    _firstSr = vdiSR;
                     if(vdiSR != null && !vdiSR.HBALunPerVDI())
                         suspendSr = vdi.SR;
                     firstDisk = false;
@@ -611,7 +621,7 @@ namespace XenAdmin.Actions.VMActions
             else
             {
                 vdi = CreateVdi(disk, progress, progress + 0.75 * step);
-                bootable = IsDeviceAtPositionZero(disk) && InsMethod != InstallMethod.CD;
+                bootable = IsDeviceAtPositionZero(disk) && _installMethod != InstallMethod.CD;
             }
 
             AddVMHint(vdi);
@@ -693,10 +703,10 @@ namespace XenAdmin.Actions.VMActions
             }
 
             // then we add the ones the user has specified
-            step = 5.0 / (double)Vifs.Count;
-            for (int i = 0; i < Vifs.Count; i++)
+            step = 5.0 / (double)_vifs.Count;
+            for (int i = 0; i < _vifs.Count; i++)
             {
-                vif = Vifs[i];
+                vif = _vifs[i];
                 List<string> devices = AllowedVIFs;
                 VIF new_vif = new VIF();
 
@@ -721,25 +731,13 @@ namespace XenAdmin.Actions.VMActions
             }
         }
 
-        private List<string> AllowedVBDs
-        {
-            get
-            {
-                return new List<String>(XenAPI.VM.get_allowed_VBD_devices(Session, VM.opaque_ref));
-            }
-        }
+        private List<string> AllowedVBDs => new List<String>(XenAPI.VM.get_allowed_VBD_devices(Session, VM.opaque_ref));
 
-        private List<string> AllowedVIFs
-        {
-            get
-            {
-                return new List<String>(XenAPI.VM.get_allowed_VIF_devices(Session, VM.opaque_ref));
-            }
-        }
+        private List<string> AllowedVIFs => new List<String>(XenAPI.VM.get_allowed_VIF_devices(Session, VM.opaque_ref));
 
         protected override void CleanOnError()
         {
-            if (VM != null && !PointOfNoReturn && Connection.IsConnected)
+            if (VM != null && !_pointOfNoReturn && Connection.IsConnected)
             {
                 try
                 {
@@ -762,15 +760,16 @@ namespace XenAdmin.Actions.VMActions
                 int i = order.IndexOf("n");
                 switch (i)
                 {
-                    case -1: return order.Insert(0, "n");
-                    case 0: return order;
-                    default: return order.Remove(i, 1).Insert(0, "n");
+                    case -1:
+                        return order.Insert(0, "n");
+                    case 0:
+                        return order;
+                    default:
+                        return order.Remove(i, 1).Insert(0, "n");
                 }
             }
-            else
-            {
-                return "ncd";
-            }
+
+            return "ncd";
         }
     }
     public class DiskDescription
