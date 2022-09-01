@@ -80,6 +80,8 @@ namespace XenAdmin.Wizards.ImportWizard
 		
         public BootMode SelectedBootMode => bootModesControl1.SelectedOption;
 
+        public bool AssignVtpm => bootModesControl1.AssignVtpm;
+
         public string BootParams
         {
             get

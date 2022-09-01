@@ -31,25 +31,12 @@ namespace XenAdmin.Wizards.NewVMWizard
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewVMWizard));
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWizard)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.XSHelpButton)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pictureBoxWizard
-            // 
-            resources.ApplyResources(this.pictureBoxWizard, "pictureBoxWizard");
-            this.pictureBoxWizard.Image = global::XenAdmin.Properties.Resources._000_CreateVM_h32bit_32;
-            // 
-            // XSHelpButton
-            // 
-            resources.ApplyResources(this.XSHelpButton, "XSHelpButton");
             // 
             // NewVMWizard
             // 
             resources.ApplyResources(this, "$this");
             this.Name = "NewVMWizard";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWizard)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.XSHelpButton)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
