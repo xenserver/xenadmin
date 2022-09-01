@@ -3544,7 +3544,7 @@ namespace XenAPI
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
         /// <param name="_host">The target host</param>
-        /// <param name="_options">Extra configuration operations</param>
+        /// <param name="_options">Extra configuration operations: force, live, copy, compress. Each is a boolean option, taking 'true' or 'false' as a value. Option 'compress' controls the use of stream compression during migration.</param>
         public static void pool_migrate(Session session, string _vm, string _host, Dictionary<string, string> _options)
         {
             if (session.JsonRpcClient != null)
@@ -3560,7 +3560,7 @@ namespace XenAPI
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
         /// <param name="_host">The target host</param>
-        /// <param name="_options">Extra configuration operations</param>
+        /// <param name="_options">Extra configuration operations: force, live, copy, compress. Each is a boolean option, taking 'true' or 'false' as a value. Option 'compress' controls the use of stream compression during migration.</param>
         public static XenRef<Task> async_pool_migrate(Session session, string _vm, string _host, Dictionary<string, string> _options)
         {
           if (session.JsonRpcClient != null)

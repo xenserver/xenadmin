@@ -553,8 +553,7 @@ namespace XenAdmin.Core
         /// </summary>
         public static bool FeatureForbidden(IXenObject iXenObject, Predicate<Host> restrictionTest)
         {
-            IXenConnection connection = (iXenObject == null ? null : iXenObject.Connection);
-            return FeatureForbidden(connection, restrictionTest);
+            return FeatureForbidden(iXenObject?.Connection, restrictionTest);
         }
 
         public static bool FeatureForbidden(IXenConnection xenConnection, Predicate<Host> restrictionTest)

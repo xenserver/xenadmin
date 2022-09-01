@@ -37,6 +37,7 @@ using XenAPI;
 using XenAdmin.Controls;
 using XenCenterLib;
 using System.Collections;
+using System.Linq;
 using XenAdmin.Core;
 
 
@@ -45,6 +46,7 @@ namespace XenAdmin.Wizards.NewVMWizard
     public partial class Page_Template : XenTabPage
     {
         private bool templatesLoaded;
+        private VM m_selectedTemplate;
 
         public Page_Template()
         {
@@ -80,20 +82,11 @@ namespace XenAdmin.Wizards.NewVMWizard
             }
         }
 
-        public override string Text
-        {
-            get { return Messages.NEWVMWIZARD_TEMPLATEPAGE_NAME; }
-        }
+        public override string Text => Messages.NEWVMWIZARD_TEMPLATEPAGE_NAME;
 
-        public override string PageTitle
-        {
-            get { return Messages.NEWVMWIZARD_TEMPLATEPAGE_TITLE; }
-        }
+        public override string PageTitle => Messages.NEWVMWIZARD_TEMPLATEPAGE_TITLE;
 
-        public override string HelpID
-        {
-            get { return "Template"; }
-        }
+        public override string HelpID => "Template";
 
         public override List<KeyValuePair<string, string>> PageSummary
         {
@@ -112,9 +105,8 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         #endregion
 
-        public bool CopyBiosStrings { get { return checkBoxCopyBiosStrings.Checked; } }
+        public bool CopyBiosStrings => checkBoxCopyBiosStrings.Checked;
 
-        private VM m_selectedTemplate;
         public VM SelectedTemplate
         {
             get
@@ -141,17 +133,21 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         private void AddRows()
         {
-            List<TemplatesGridViewItem> SelectedRows = new List<TemplatesGridViewItem>();
+            List<TemplatesGridViewItem> selectedRows = new List<TemplatesGridViewItem>();
+
             foreach (TemplatesGridViewItem item in TemplatesGridView.SelectedRows)
-            {
-                SelectedRows.Add(item);
-            }
+                selectedRows.Add(item);
 
             TemplatesGridView.SuspendLayout();
             TemplatesGridView.Rows.Clear();
+
             foreach (VM vm in Connection.Cache.VMs)
             {
                 if (!vm.is_a_template || !vm.Show(Properties.Settings.Default.ShowHiddenVMs))
+                    continue;
+
+                if (vm.Connection.Cache.Hosts.Any(Host.RestrictVtpm) &&
+                    vm.platform.TryGetValue("vtpm", out var result) && result.ToLower() == "true")
                     continue;
 
                 TemplatesGridView.Rows.Add(new TemplatesGridViewItem(vm));
@@ -159,7 +155,7 @@ namespace XenAdmin.Wizards.NewVMWizard
 
             foreach (TemplatesGridViewItem temp in TemplatesGridView.Rows)
             {
-                if (SelectedRows.Contains(temp))
+                if (selectedRows.Contains(temp))
                     temp.Selected = true;
             }
 
@@ -171,12 +167,9 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         private void RefreshRows()
         {
-
             var rows = new List<DataGridViewRow>();
             foreach (DataGridViewRow row in TemplatesGridView.Rows)
-            {
                 rows.Add(row);
-            }
 
             TemplatesGridView.Rows.Clear();
 
@@ -244,22 +237,25 @@ namespace XenAdmin.Wizards.NewVMWizard
         {
             public int Compare(object x, object y)
             {
-                TemplatesGridViewItem xItem = (TemplatesGridViewItem)x;
-                TemplatesGridViewItem yItem = (TemplatesGridViewItem)y;
+                var xItem = x as TemplatesGridViewItem;
+                var yItem = y as TemplatesGridViewItem;
 
-                int xScore = xItem.SortOrder;
-                int yScore = yItem.SortOrder;
+                if (xItem == null && yItem == null)
+                    return 0;
+                if (xItem == null)
+                    return -1;
+                if (yItem == null)
+                    return 1;
 
-                if (xScore != yScore)
-                    return (xScore - yScore);
-                else
-                {
-                    int result = StringUtility.NaturalCompare(xItem.Template.Name(), yItem.Template.Name());
-                    if (result != 0)
-                        return result;
-                    else
-                        return xItem.Template.opaque_ref.CompareTo(yItem.Template.opaque_ref);
-                }
+                int result = xItem.SortOrder - yItem.SortOrder;
+                if (result != 0)
+                    return result;
+                
+                result = StringUtility.NaturalCompare(xItem.Template.Name(), yItem.Template.Name());
+                if (result != 0)
+                    return result;
+                
+                return xItem.Template.opaque_ref.CompareTo(yItem.Template.opaque_ref);
             }
         }
 
@@ -276,20 +272,16 @@ namespace XenAdmin.Wizards.NewVMWizard
                 if (template.IsHidden())
                     SortOrder += (int)VM.VmTemplateType.Count;
 
-                var ImageCell = new DataGridViewImageCell(false)
-                                    {
-                                        ValueType = typeof(Image),
-                                        Value = typ.ToBitmap()
-                                    };
-                var TypeCell = new DataGridViewTextBoxCell { Value = typ.ToDisplayString() };
-                var NameCell = new DataGridViewTextBoxCell { Value = template.Name() };
+                var imageCell = new DataGridViewImageCell(false) {ValueType = typeof(Image), Value = typ.ToBitmap()};
+                var typeCell = new DataGridViewTextBoxCell {Value = typ.ToDisplayString()};
+                var nameCell = new DataGridViewTextBoxCell {Value = template.Name()};
 
-                Cells.AddRange(ImageCell, NameCell, TypeCell);
+                Cells.AddRange(imageCell, nameCell, typeCell);
             }
 
             public bool Equals(TemplatesGridViewItem other)
             {
-                return Template.Equals(other.Template);
+                return Template.Equals(other?.Template);
             }
         }
     }

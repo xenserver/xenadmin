@@ -62,6 +62,7 @@ namespace XenAPI
         public const long MAX_SOCKETS = 16;  // current hard limit in Xen: CA-198276
 
         private XmlDocument xdRecommendations = null;
+        public const int MAX_ALLOWED_VTPMS = 1;
 
         public int MaxVCPUsAllowed()
         {
@@ -1794,6 +1795,38 @@ namespace XenAPI
         public bool CanChangeBootMode()
         {
             return last_boot_CPU_flags == null || last_boot_CPU_flags.Count == 0;
+        }
+
+        public bool CanAddVtpm(out string cannotReason)
+        {
+            cannotReason = null;
+
+            if (VTPMs.Count >= VM.MAX_ALLOWED_VTPMS)
+            {
+                cannotReason = string.Format(Messages.VTPM_MAX_REACHED, VM.MAX_ALLOWED_VTPMS);
+                return false;
+            }
+            
+            if (power_state != vm_power_state.Halted)
+            {
+                cannotReason = Messages.VTPM_POWER_STATE_WRONG_ATTACH;
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool CanRemoveVtpm(out string cannotReason)
+        {
+            cannotReason = null;
+
+            if (power_state != vm_power_state.Halted)
+            {
+                cannotReason = Messages.VTPM_POWER_STATE_WRONG_REMOVE;
+                return false;
+            }
+
+            return true;
         }
     }
 

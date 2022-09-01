@@ -463,6 +463,11 @@ namespace XenAPI
             return BoolKeyPreferTrue(h.license_params, "restrict_corosync");
         }
 
+        public static bool RestrictVtpm(Host h)
+        {
+            return BoolKeyPreferTrue(h.license_params, "restrict_vtpm");
+        }
+
         #region Experimental Features
 
         public static bool CorosyncDisabled(Host h)

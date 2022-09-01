@@ -19,7 +19,7 @@ namespace XenAdmin {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Messages {
@@ -8021,6 +8021,33 @@ namespace XenAdmin {
         public static string COLLAPSE_CHILDREN {
             get {
                 return ResourceManager.GetString("COLLAPSE_CHILDREN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resetting the vTPM that is attached to a VM to its original state may result in the deactivation of some security features on the VM. Do you want to continue?.
+        /// </summary>
+        public static string COMMAND_RESET_VTPM_WARNING {
+            get {
+                return ResourceManager.GetString("COMMAND_RESET_VTPM_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TPM is supported only for VMs using the UEFI or UEFI secure boot modes..
+        /// </summary>
+        public static string COMMAND_VTPM_DISABLED_NON_UEFI {
+            get {
+                return ResourceManager.GetString("COMMAND_VTPM_DISABLED_NON_UEFI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mana&amp;ge vTPMs....
+        /// </summary>
+        public static string COMMAND_VTPM_MENU {
+            get {
+                return ResourceManager.GetString("COMMAND_VTPM_MENU", resourceCulture);
             }
         }
         
@@ -40595,6 +40622,120 @@ namespace XenAdmin {
         public static string VOLUMES {
             get {
                 return ResourceManager.GetString("VOLUMES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trusted Platform Module.
+        /// </summary>
+        public static string VTPM {
+            get {
+                return ResourceManager.GetString("VTPM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} vTPMs are attached to this VM..
+        /// </summary>
+        public static string VTPM_ATTACHED_MANY {
+            get {
+                return ResourceManager.GetString("VTPM_ATTACHED_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A vTPM is attached to this VM..
+        /// </summary>
+        public static string VTPM_ATTACHED_ONE {
+            get {
+                return ResourceManager.GetString("VTPM_ATTACHED_ONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The maximum number of vTPMs that can be attached to this VM is {0}..
+        /// </summary>
+        public static string VTPM_MAX_REACHED {
+            get {
+                return ResourceManager.GetString("VTPM_MAX_REACHED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are no vTPMs attached to this VM..
+        /// </summary>
+        public static string VTPM_NONE_ATTACHED {
+            get {
+                return ResourceManager.GetString("VTPM_NONE_ATTACHED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You need to shut down this VM before you can attach a new vTPM to it..
+        /// </summary>
+        public static string VTPM_POWER_STATE_WRONG_ATTACH {
+            get {
+                return ResourceManager.GetString("VTPM_POWER_STATE_WRONG_ATTACH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You need to shut down the VM before you can remove this vTPM..
+        /// </summary>
+        public static string VTPM_POWER_STATE_WRONG_REMOVE {
+            get {
+                return ResourceManager.GetString("VTPM_POWER_STATE_WRONG_REMOVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A {0} user does not have sufficient permissions to attach a vTPM to a VM. Please login using an account with one of the following roles:
+        ///
+        ///{1}.
+        /// </summary>
+        public static string VTPM_RBAC_RESTRICTION_CREATE {
+            get {
+                return ResourceManager.GetString("VTPM_RBAC_RESTRICTION_CREATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A {0} user does not have sufficient permissions to remove a vTPM from a VM. Please login using an account with one of the following roles:
+        ///
+        ///{1}.
+        /// </summary>
+        public static string VTPM_RBAC_RESTRICTION_REMOVE {
+            get {
+                return ResourceManager.GetString("VTPM_RBAC_RESTRICTION_REMOVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A {0} user does not have sufficient permissions to reset the vTPM that is attached to a VM to its original state. Please login using an account with one of the following roles:
+        ///
+        ///{1}.
+        /// </summary>
+        public static string VTPM_RBAC_RESTRICTION_RESET {
+            get {
+                return ResourceManager.GetString("VTPM_RBAC_RESTRICTION_RESET", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove vTPM.
+        /// </summary>
+        public static string VTPM_REMOVE {
+            get {
+                return ResourceManager.GetString("VTPM_REMOVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Removing the vTPM may result in the deactivation of some security features on the VM and prevent it from starting. Do you want to continue?.
+        /// </summary>
+        public static string VTPM_REMOVE_WARNING {
+            get {
+                return ResourceManager.GetString("VTPM_REMOVE_WARNING", resourceCulture);
             }
         }
         

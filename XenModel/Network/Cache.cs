@@ -101,6 +101,7 @@ namespace XenAdmin.Network
         private readonly ChangeableDictionary<XenRef<VM_appliance>, VM_appliance> _vm_appliance = new ChangeableDictionary<XenRef<VM_appliance>, VM_appliance>();
         private readonly ChangeableDictionary<XenRef<Crashdump>, Crashdump> _crashdump = new ChangeableDictionary<XenRef<Crashdump>, Crashdump>();
         private readonly ChangeableDictionary<XenRef<Certificate>, Certificate> _certificates = new ChangeableDictionary<XenRef<Certificate>, Certificate>();
+        private readonly ChangeableDictionary<XenRef<VTPM>, VTPM> _vtpms = new ChangeableDictionary<XenRef<VTPM>, VTPM>();
 
 #pragma warning restore 0414
 
@@ -199,6 +200,8 @@ namespace XenAdmin.Network
         public VIF[] VIFs => contents(_vif);
 
         public VM[] VMs => contents(_vm);
+
+        public VTPM[] VTPMs => contents(_vtpms);
 
 
         private static T[] contents<T>(ChangeableDictionary<XenRef<T>, T> d) where T : XenObject<T>

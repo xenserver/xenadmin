@@ -2891,6 +2891,15 @@ Do you want to assign these VMs to the schedule '{0}' instead?</value>
   <data name="COLLAPSE_CHILDREN" xml:space="preserve">
     <value>&amp;Collapse Children</value>
   </data>
+  <data name="COMMAND_RESET_VTPM_WARNING" xml:space="preserve">
+    <value>Resetting the vTPM that is attached to a VM to its original state may result in the deactivation of some security features on the VM. Do you want to continue?</value>
+  </data>
+  <data name="COMMAND_VTPM_DISABLED_NON_UEFI" xml:space="preserve">
+    <value>TPM is supported only for VMs using the UEFI or UEFI secure boot modes.</value>
+  </data>
+  <data name="COMMAND_VTPM_MENU" xml:space="preserve">
+    <value>Mana&amp;ge vTPMs...</value>
+  </data>
   <data name="COMMON_CRITERIA_TEXT" xml:space="preserve">
     <value>{0}: for use with Common Criteria versions of {1} only</value>
   </data>
@@ -14017,6 +14026,48 @@ Schedule:
   </data>
   <data name="VOLUMES" xml:space="preserve">
     <value>Volumes</value>
+  </data>
+  <data name="VTPM" xml:space="preserve">
+    <value>Trusted Platform Module</value>
+  </data>
+  <data name="VTPM_ATTACHED_MANY" xml:space="preserve">
+    <value>{0} vTPMs are attached to this VM.</value>
+  </data>
+  <data name="VTPM_ATTACHED_ONE" xml:space="preserve">
+    <value>A vTPM is attached to this VM.</value>
+  </data>
+  <data name="VTPM_MAX_REACHED" xml:space="preserve">
+    <value>The maximum number of vTPMs that can be attached to this VM is {0}.</value>
+  </data>
+  <data name="VTPM_NONE_ATTACHED" xml:space="preserve">
+    <value>There are no vTPMs attached to this VM.</value>
+  </data>
+  <data name="VTPM_POWER_STATE_WRONG_ATTACH" xml:space="preserve">
+    <value>You need to shut down this VM before you can attach a new vTPM to it.</value>
+  </data>
+  <data name="VTPM_POWER_STATE_WRONG_REMOVE" xml:space="preserve">
+    <value>You need to shut down the VM before you can remove this vTPM.</value>
+  </data>
+  <data name="VTPM_RBAC_RESTRICTION_CREATE" xml:space="preserve">
+    <value>A {0} user does not have sufficient permissions to attach a vTPM to a VM. Please login using an account with one of the following roles:
+
+{1}</value>
+  </data>
+  <data name="VTPM_RBAC_RESTRICTION_REMOVE" xml:space="preserve">
+    <value>A {0} user does not have sufficient permissions to remove a vTPM from a VM. Please login using an account with one of the following roles:
+
+{1}</value>
+  </data>
+  <data name="VTPM_RBAC_RESTRICTION_RESET" xml:space="preserve">
+    <value>A {0} user does not have sufficient permissions to reset the vTPM that is attached to a VM to its original state. Please login using an account with one of the following roles:
+
+{1}</value>
+  </data>
+  <data name="VTPM_REMOVE" xml:space="preserve">
+    <value>Remove vTPM</value>
+  </data>
+  <data name="VTPM_REMOVE_WARNING" xml:space="preserve">
+    <value>Removing the vTPM may result in the deactivation of some security features on the VM and prevent it from starting. Do you want to continue?</value>
   </data>
   <data name="WAITING" xml:space="preserve">
     <value>Waiting</value>
