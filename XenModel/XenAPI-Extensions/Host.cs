@@ -883,7 +883,7 @@ namespace XenAPI
         {
             var vms = from XenRef<VM> vmref in resident_VMs
                       let vm = Connection.Resolve(vmref)
-                      where vm != null && vm.is_a_real_vm() && !vm.IsHVM()
+                      where vm != null && vm.IsRealVm() && !vm.IsHVM()
                       select vmref;
 
             return vms.ToList();
@@ -893,7 +893,7 @@ namespace XenAPI
         {
             var vms = from XenRef<VM> vmref in resident_VMs
                       let vm = Connection.Resolve(vmref)
-                      where vm != null && vm.is_a_real_vm() && vm.IsHVM()
+                      where vm != null && vm.IsRealVm() && vm.IsHVM()
                       select vmref;
 
             return vms.ToList();
@@ -904,7 +904,7 @@ namespace XenAPI
         {
             var vms = from XenRef<VM> vmref in resident_VMs
                       let vm = Connection.Resolve(vmref)
-                      where vm != null && vm.is_a_real_vm()
+                      where vm != null && vm.IsRealVm()
                       select vmref;
 
             return vms.ToList();

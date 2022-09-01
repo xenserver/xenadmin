@@ -265,7 +265,7 @@ namespace XenAdmin.XenSearch
             if (o is Host)
                 return "30";
             VM vm = o as VM;
-            if (vm != null && vm.is_a_real_vm())
+            if (vm != null && vm.IsRealVm())
                 return "40";
             return o.GetType().ToString();
         }
