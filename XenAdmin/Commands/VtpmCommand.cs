@@ -57,6 +57,7 @@ namespace XenAdmin.Commands
         {
             return selection.Count == 1 &&
                    selection[0].XenObject is VM vm &&
+                   vm.IsRealVm() &&
                    !Helpers.FeatureForbidden(vm, Host.RestrictVtpm) &&
                    Helpers.XapiEqualOrGreater_vtpmtag(vm.Connection) &&
                    vm.IsUEFIEnabled();
