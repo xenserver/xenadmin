@@ -34,7 +34,7 @@
             this.m_buttonSelectAll = new System.Windows.Forms.Button();
             this.m_buttonClearAll = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.m_tlpWarning = new System.Windows.Forms.TableLayoutPanel();
+            this.m_tlpInfo = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.autoHeightLabel1 = new XenAdmin.Controls.Common.AutoHeightLabel();
             this.m_dataGridView = new System.Windows.Forms.DataGridView();
@@ -48,12 +48,17 @@
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.m_searchTextBox = new XenAdmin.Controls.SearchTextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this._tlpWarning = new System.Windows.Forms.TableLayoutPanel();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2.SuspendLayout();
-            this.m_tlpWarning.SuspendLayout();
+            this.m_tlpInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.m_dataGridView)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
+            this._tlpWarning.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // m_ctrlError
@@ -83,24 +88,25 @@
             // tableLayoutPanel2
             // 
             resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
-            this.tableLayoutPanel2.Controls.Add(this.m_ctrlError, 0, 5);
+            this.tableLayoutPanel2.Controls.Add(this.m_ctrlError, 0, 6);
             this.tableLayoutPanel2.Controls.Add(this.m_labelIntro, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.m_tlpWarning, 0, 6);
-            this.tableLayoutPanel2.Controls.Add(this.m_dataGridView, 0, 3);
-            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 0, 4);
-            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel4, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.m_tlpInfo, 0, 4);
+            this.tableLayoutPanel2.Controls.Add(this.m_dataGridView, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 0, 3);
+            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel4, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this._tlpWarning, 0, 5);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             // 
-            // m_tlpWarning
+            // m_tlpInfo
             // 
-            resources.ApplyResources(this.m_tlpWarning, "m_tlpWarning");
-            this.m_tlpWarning.Controls.Add(this.pictureBox1, 0, 0);
-            this.m_tlpWarning.Controls.Add(this.autoHeightLabel1, 1, 0);
-            this.m_tlpWarning.Name = "m_tlpWarning";
+            resources.ApplyResources(this.m_tlpInfo, "m_tlpInfo");
+            this.m_tlpInfo.Controls.Add(this.pictureBox1, 0, 0);
+            this.m_tlpInfo.Controls.Add(this.autoHeightLabel1, 1, 0);
+            this.m_tlpInfo.Name = "m_tlpInfo";
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::XenAdmin.Properties.Resources._000_WarningAlert_h32bit_32;
+            this.pictureBox1.Image = global::XenAdmin.Properties.Resources._000_Info3_h32bit_16;
             resources.ApplyResources(this.pictureBox1, "pictureBox1");
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.TabStop = false;
@@ -133,9 +139,9 @@
             this.m_dataGridView.RowHeadersVisible = false;
             this.m_dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.m_dataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.m_dataGridView_CellValueChanged);
-            this.m_dataGridView.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.m_dataGridView_SortCompare);
             this.m_dataGridView.CurrentCellDirtyStateChanged += new System.EventHandler(this.m_dataGridView_CurrentCellDirtyStateChanged);
             this.m_dataGridView.RowStateChanged += new System.Windows.Forms.DataGridViewRowStateChangedEventHandler(this.m_dataGridView_RowStateChanged);
+            this.m_dataGridView.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.m_dataGridView_SortCompare);
             // 
             // columnTick
             // 
@@ -198,6 +204,25 @@
             resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
             // 
+            // _tlpWarning
+            // 
+            resources.ApplyResources(this._tlpWarning, "_tlpWarning");
+            this._tlpWarning.Controls.Add(this.pictureBox2, 0, 0);
+            this._tlpWarning.Controls.Add(this.label1, 1, 0);
+            this._tlpWarning.Name = "_tlpWarning";
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::XenAdmin.Properties.Resources._000_Alert2_h32bit_16;
+            resources.ApplyResources(this.pictureBox2, "pictureBox2");
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.TabStop = false;
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
             // ExportSelectVMsPage
             // 
             resources.ApplyResources(this, "$this");
@@ -206,14 +231,17 @@
             this.Name = "ExportSelectVMsPage";
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            this.m_tlpWarning.ResumeLayout(false);
-            this.m_tlpWarning.PerformLayout();
+            this.m_tlpInfo.ResumeLayout(false);
+            this.m_tlpInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.m_dataGridView)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
+            this._tlpWarning.ResumeLayout(false);
+            this._tlpWarning.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -226,7 +254,7 @@
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
 		private System.Windows.Forms.Button m_buttonSelectAll;
 		private System.Windows.Forms.Button m_buttonClearAll;
-		private System.Windows.Forms.TableLayoutPanel m_tlpWarning;
+		private System.Windows.Forms.TableLayoutPanel m_tlpInfo;
 		private System.Windows.Forms.PictureBox pictureBox1;
 		private XenAdmin.Controls.Common.AutoHeightLabel autoHeightLabel1;
 		private System.Windows.Forms.DataGridView m_dataGridView;
@@ -240,5 +268,8 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn columnDesc;
 		private System.Windows.Forms.DataGridViewTextBoxColumn columnSize;
 		private System.Windows.Forms.DataGridViewTextBoxColumn columnVapp;
+        private System.Windows.Forms.TableLayoutPanel _tlpWarning;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Label label1;
     }
 }

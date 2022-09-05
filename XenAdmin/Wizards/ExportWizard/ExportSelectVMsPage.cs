@@ -66,7 +66,8 @@ namespace XenAdmin.Wizards.ExportWizard
 		public ExportSelectVMsPage()
 		{
 			InitializeComponent();
-			m_tlpWarning.Visible = false;
+            m_tlpInfo.Visible = false;
+            _tlpWarning.Visible = false;
             m_ctrlError.HideError();
 		}
 
@@ -301,7 +302,10 @@ namespace XenAdmin.Wizards.ExportWizard
 		private void EnableButtons()
 		{
 			var count = VMsToExport.Count;
-			m_tlpWarning.Visible = ExportAsXva && count > 1;
+            m_tlpInfo.Visible = ExportAsXva && count > 1;
+            _tlpWarning.Visible = !Helpers.FeatureForbidden(Connection, Host.RestrictVtpm) &&
+                                  Helpers.XapiEqualOrGreater_vtpmtag(Connection) &&
+                                  VMsToExport.Any(v => v.VTPMs.Count > 0);
             m_buttonNextEnabled = ExportAsXva ? count == 1 : count > 0;
 		    m_buttonClearAll.Enabled = count > 0;
 		    m_buttonSelectAll.Enabled = count < m_dataGridView.RowCount;
