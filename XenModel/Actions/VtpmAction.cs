@@ -41,7 +41,7 @@ namespace XenAdmin.Actions
         public VTPM Vtpm { get; private set; }
 
         public NewVtpmAction(IXenConnection connection, VM vm)
-            : base(connection, "", "", false)
+            : base(connection, string.Format(Messages.VTPM_ATTACH_TITLE, vm.Name()), Messages.VTPM_ATTACH_DESCRIPTION, false)
         {
             _vm = vm;
 
@@ -50,8 +50,9 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            var vtpmRef = VTPM.create(Session, _vm.opaque_ref, true);
+            var vtpmRef = VTPM.create(Session, _vm.opaque_ref, false);
             Vtpm = Connection.TryResolveWithTimeout(vtpmRef);
+            Description = Messages.COMPLETED;
         }
     }
 
@@ -59,8 +60,8 @@ namespace XenAdmin.Actions
     {
         private readonly VTPM _vtpm;
 
-        public RemoveVtpmAction(IXenConnection connection, VTPM vtpm)
-            : base(connection, "", "", false)
+        public RemoveVtpmAction(IXenConnection connection, VTPM vtpm, VM vm)
+            : base(connection, string.Format(Messages.VTPM_REMOVE_TITLE, vm.Name()), Messages.VTPM_REMOVE_DESCRIPTION, false)
         {
             _vtpm = vtpm;
 
@@ -70,6 +71,7 @@ namespace XenAdmin.Actions
         protected override void Run()
         {
             VTPM.destroy(Session, _vtpm.opaque_ref);
+            Description = Messages.COMPLETED;
         }
     }
 }

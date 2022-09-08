@@ -202,7 +202,7 @@ namespace XenAdmin.Dialogs
                 return;
             }
 
-            var action = new RemoveVtpmAction(vtpm.Connection, vtpm);
+            var action = new RemoveVtpmAction(vtpm.Connection, vtpm, _vm);
             using (var dlg = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
                 dlg.ShowDialog(this);
         }

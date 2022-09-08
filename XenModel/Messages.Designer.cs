@@ -40572,6 +40572,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Attaching vTPM....
+        /// </summary>
+        public static string VTPM_ATTACH_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("VTPM_ATTACH_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Attaching a new vTPM to VM &apos;{0}&apos;.
+        /// </summary>
+        public static string VTPM_ATTACH_TITLE {
+            get {
+                return ResourceManager.GetString("VTPM_ATTACH_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} vTPMs are attached to this VM..
         /// </summary>
         public static string VTPM_ATTACHED_MANY {
@@ -40664,6 +40682,24 @@ namespace XenAdmin {
         public static string VTPM_REMOVE {
             get {
                 return ResourceManager.GetString("VTPM_REMOVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Removing vTPM....
+        /// </summary>
+        public static string VTPM_REMOVE_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("VTPM_REMOVE_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Removing a vTPM from VM &apos;{0}&apos;.
+        /// </summary>
+        public static string VTPM_REMOVE_TITLE {
+            get {
+                return ResourceManager.GetString("VTPM_REMOVE_TITLE", resourceCulture);
             }
         }
         

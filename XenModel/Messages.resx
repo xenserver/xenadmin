@@ -14009,6 +14009,12 @@ Schedule:
   <data name="VTPM" xml:space="preserve">
     <value>Trusted Platform Module</value>
   </data>
+  <data name="VTPM_ATTACH_DESCRIPTION" xml:space="preserve">
+    <value>Attaching vTPM...</value>
+  </data>
+  <data name="VTPM_ATTACH_TITLE" xml:space="preserve">
+    <value>Attaching a new vTPM to VM '{0}'</value>
+  </data>
   <data name="VTPM_ATTACHED_MANY" xml:space="preserve">
     <value>{0} vTPMs are attached to this VM.</value>
   </data>
@@ -14044,6 +14050,12 @@ Schedule:
   </data>
   <data name="VTPM_REMOVE" xml:space="preserve">
     <value>Remove vTPM</value>
+  </data>
+  <data name="VTPM_REMOVE_DESCRIPTION" xml:space="preserve">
+    <value>Removing vTPM...</value>
+  </data>
+  <data name="VTPM_REMOVE_TITLE" xml:space="preserve">
+    <value>Removing a vTPM from VM '{0}'</value>
   </data>
   <data name="VTPM_REMOVE_WARNING" xml:space="preserve">
     <value>Removing the vTPM may result in the deactivation of some security features on the VM and prevent it from starting. Do you want to continue?</value>
