@@ -158,8 +158,10 @@ namespace XenAdmin.Wizards
                                     (radioButtonUEFIBoot.Enabled || radioButtonUEFISecureBoot.Enabled);
 
                 groupBoxDevSecurity.Visible = vtpmSupported;
-                groupBoxDevSecurity.Enabled = vtpmSupported && !radioButtonBIOSBoot.Checked && !IsVtpmTemplate && _templateVM.VTPMs.Count < VM.MAX_ALLOWED_VTPMS;
-                checkBoxVtpm.Checked = vtpmSupported && !radioButtonBIOSBoot.Checked && IsVtpmTemplate && _templateVM.VTPMs.Count < VM.MAX_ALLOWED_VTPMS;
+                groupBoxDevSecurity.Enabled = vtpmSupported && !radioButtonBIOSBoot.Checked && !IsVtpmTemplate &&
+                                              _templateVM.VTPMs.Count < VM.MAX_ALLOWED_VTPMS;
+                checkBoxVtpm.Checked = vtpmSupported && !radioButtonBIOSBoot.Checked && IsVtpmTemplate &&
+                                       _templateVM.VTPMs.Count < VM.MAX_ALLOWED_VTPMS;
 
                 if (_templateVM.VTPMs.Count == VM.MAX_ALLOWED_VTPMS)
                     labelTpm.Text = string.Format(Messages.VTPM_MAX_REACHED, VM.MAX_ALLOWED_VTPMS);
