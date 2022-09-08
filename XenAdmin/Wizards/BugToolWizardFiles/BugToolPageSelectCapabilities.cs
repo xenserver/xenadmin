@@ -151,7 +151,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             cancelled = true;
 
             // Need to unhook events on current actions, to stop them
-            // interfeering when they return in 20mins
+            // interfering when they return in 20mins
             foreach (GetSystemStatusCapabilities action in actions)
                 action.Completed -= Common_action_Completed;
         }
@@ -163,29 +163,32 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                 if (cancelled)
                     return;
 
-                GetSystemStatusCapabilities caps = sender as GetSystemStatusCapabilities;
-                if (caps == null)
+                if (!(sender is GetSystemStatusCapabilities action))
                     return;
 
-                hostCapabilities[caps.Host] = 
-                    caps.Succeeded ? parseXMLToList(caps) : null;
+                hostCapabilities[action.Host] = action.Succeeded ? ParseXmlToList(action.Result) : null;
 
                 if (hostCapabilities.Count >= _hostList.Count)
                 {
                     dialog.Close();
                     CombineCapabilitiesLists();
+                    BuildList();
                 }
             });
         }
 
-        private List<Capability> parseXMLToList(Actions.GetSystemStatusCapabilities action)
+        private static List<Capability> ParseXmlToList(string xml)
         {
             List<Capability> capabilities = new List<Capability>();
 
             XmlDocument doc = new XmlDocument();
-            doc.LoadXml(action.Result);
+            doc.LoadXml(xml);
+
             foreach (XmlNode node in doc.GetElementsByTagName("capability"))
             {
+                if (node.Attributes == null)
+                    continue;
+
                 Capability c = new Capability();
                 foreach (XmlAttribute a in node.Attributes)
                 {
@@ -195,17 +198,31 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                     if (name == "content-type")
                         c.ContentType = value == "text/plain" ? ContentType.text_plain : ContentType.application_data;
                     else if (name == "default-checked")
-                        c.DefaultChecked = value == "yes" ? true : false;
+                        c.DefaultChecked = value == "yes";
                     else if (name == "key")
                         c.Key = value;
                     else if (name == "max-size")
-                        c.MaxSize = Int64.Parse(value);
+                        c.MaxSize = long.Parse(value);
                     else if (name == "min-size")
-                        c.MinSize = Int64.Parse(value);
+                        c.MinSize = long.Parse(value);
                     else if (name == "pii")
-                        c.PII = value == "yes" ? PrivateInformationIncluded.yes :
-                            value == "no" ? PrivateInformationIncluded.no :
-                            value == "maybe" ? PrivateInformationIncluded.maybe : PrivateInformationIncluded.customized;
+                    {
+                        switch (value)
+                        {
+                            case "yes":
+                                c.PII = PrivateInformationIncluded.yes;
+                                break;
+                            case "no":
+                                c.PII = PrivateInformationIncluded.no;
+                                break;
+                            case "maybe":
+                                c.PII = PrivateInformationIncluded.maybe;
+                                break;
+                            default:
+                                c.PII = PrivateInformationIncluded.customized;
+                                break;
+                        }
+                    }
                 }
 
                 capabilities.Add(c);
@@ -218,18 +235,20 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
         {
             List<Capability> combination = null;
 
-            foreach (List<Capability> capabilities in hostCapabilities.Values)
+            foreach (var kvp in hostCapabilities)
             {
+                var host = kvp.Key;
+                var capabilities = kvp.Value;
+
                 if (capabilities == null)
                     continue;
 
-                if (combination == null)
-                {
-                    combination = capabilities;
-                    continue;
-                }
+                if (Helpers.FeatureForbidden(host, Host.RestrictVtpm))
+                    capabilities.RemoveAll(c => c.Key.ToLower() == "vtpm");
 
-                combination = Helpers.ListsCommonItems<Capability>(combination, capabilities);
+                combination = combination == null
+                    ? capabilities
+                    : combination.Intersect(capabilities).ToList();
             }
 
             if (combination == null || combination.Count <= 0)
@@ -242,37 +261,35 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             }
                 
             _capabilities = combination;
-
             _capabilities.Add(GetClientCapability());
-
-            Sort_capabilities();
-
-            buildList();
+            _capabilities.Sort(CapabilityComparer);
         }
 
-        private Capability GetClientCapability()
+        private static Capability GetClientCapability()
         {
-            Capability clientCap = new Capability();
-            clientCap.ContentType = ContentType.text_plain;
-            clientCap.DefaultChecked = true;
-            clientCap.Key = "client-logs";
-            clientCap.MaxSize = getLogSize();
-            clientCap.MinSize = clientCap.MaxSize;
-            clientCap.PII = PrivateInformationIncluded.yes;
+            var logSize = GetClientLogSize();
+
+            Capability clientCap = new Capability
+            {
+                ContentType = ContentType.text_plain,
+                DefaultChecked = true,
+                Key = "client-logs",
+                MaxSize = logSize,
+                MinSize = logSize,
+                PII = PrivateInformationIncluded.yes
+            };
 
             return clientCap;
         }
 
-        private void Sort_capabilities()
+        private int CapabilityComparer(Capability obj1, Capability obj2)
         {
-            _capabilities.Sort(new Comparison<Capability>(delegate(Capability obj1, Capability obj2)
-            {
-                int piicompare = obj1.PII.CompareTo(obj2.PII);
-                if (piicompare == 0)
-                    return StringUtility.NaturalCompare(obj1.ToString(), obj2.ToString());
-                else
-                    return piicompare;
-            }));
+            var result = obj1.PII.CompareTo(obj2.PII);
+            
+            if (result == 0)
+                result = obj1.CompareTo(obj2);
+            
+            return result;
         }
 
         private void OnCheckedCapabilitiesChanged()
@@ -285,7 +302,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             OnPageUpdated();
         }
 
-        private void buildList()
+        private void BuildList()
         {
             try
             {
@@ -306,7 +323,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             OnCheckedCapabilitiesChanged();
         }
 
-        private long getLogSize()
+        private static long GetClientLogSize()
         {
             String path = Program.GetLogFile();
             if (path != null)
@@ -467,27 +484,29 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                 {
                     case PrivateInformationIncluded.maybe:
                         cellImage.Value = Images.StaticImages.alert2_16;
+                        cellImage.ToolTipText = Messages.PII_MAYBE;
                         break;
                     case PrivateInformationIncluded.customized:
                         cellImage.Value = Images.StaticImages.alert3_16;
+                        cellImage.ToolTipText = Messages.PII_CUSTOMISED;
                         break;
                     case PrivateInformationIncluded.no:
                         cellImage.Value = Images.StaticImages.alert4_16;
+                        cellImage.ToolTipText = Messages.PII_NO;
                         break;
                     case PrivateInformationIncluded.yes:
                     default:
                         cellImage.Value = Images.StaticImages.alert1_16;
+                        cellImage.ToolTipText = Messages.PII_YES;
                         break;
                 }
-
-                cellImage.ToolTipText = Capability.PiiText;
             }
         }
     }
 
-    public enum ContentType { text_plain, application_data };
+    public enum ContentType { text_plain, application_data }
 
-    public enum PrivateInformationIncluded { yes, maybe, customized, no};
+    public enum PrivateInformationIncluded { yes, maybe, customized, no}
 
     public class Capability : IComparable<Capability>, IEquatable<Capability>
     {
@@ -504,33 +523,11 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
 
         public bool DefaultChecked
         {
-            get
-            {
-                return _defaultChecked;
-            }
+            get => _defaultChecked;
             set
             {
                 _defaultChecked = value;
                 Checked = value;
-            }
-        }
-
-        public string PiiText
-        {
-            get
-            {
-                switch (PII)
-                {
-                    case PrivateInformationIncluded.yes:
-                        return Messages.PII_YES;
-                    case PrivateInformationIncluded.maybe:
-                        return Messages.PII_MAYBE;
-                    case PrivateInformationIncluded.customized:
-                        return Messages.PII_CUSTOMISED;
-                    case PrivateInformationIncluded.no:
-                    default:
-                        return Messages.PII_NO;
-                }
             }
         }
 
@@ -569,12 +566,12 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
 
         public int CompareTo(Capability other)
         {
-            return StringUtility.NaturalCompare(this.Key, other.Key);
+            return StringUtility.NaturalCompare(Key, other?.Key);
         }
 
         public bool Equals(Capability other)
         {
-            return this.Key.Equals(other.Key);
+            return Key.Equals(other?.Key);
         }
     }
 }
