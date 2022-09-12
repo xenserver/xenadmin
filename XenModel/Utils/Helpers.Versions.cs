@@ -439,11 +439,10 @@ namespace XenAdmin.Core
             return host == null || ProductVersionCompare(host.GetXapiVersion(), "22.20.0") >= 0;
         }
 
-        public static bool XapiEqualOrGreater_vtpmtag(IXenConnection conn)
+        public static bool XapiEqualOrGreater_22_26_0(IXenConnection conn)
         {
-            //TODO: replace with correct tag
             var coordinator = GetCoordinator(conn);
-            return coordinator == null || ProductVersionCompare(coordinator.GetXapiVersion(), "22.23.0.66.g56cd7935e-next") >= 0;
+            return coordinator == null || ProductVersionCompare(coordinator.GetXapiVersion(), "22.26.0") >= 0;
         }
 
         #endregion

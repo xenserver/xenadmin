@@ -153,7 +153,7 @@ namespace XenAdmin.Wizards
             if (_templateVM != null)
             {
                 var vtpmSupported = !Helpers.FeatureForbidden(_connection, Host.RestrictVtpm) &&
-                                    Helpers.XapiEqualOrGreater_vtpmtag(_connection) &&
+                                    Helpers.XapiEqualOrGreater_22_26_0(_connection) &&
                                     (radioButtonUEFIBoot.Visible || radioButtonUEFISecureBoot.Visible) &&
                                     (radioButtonUEFIBoot.Enabled || radioButtonUEFISecureBoot.Enabled);
 

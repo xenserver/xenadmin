@@ -306,7 +306,7 @@ namespace XenAdmin.Wizards.ExportWizard
             var count = VMsToExport.Count;
             m_tlpInfo.Visible = ExportAsXva && count > 1;
             _tlpWarning.Visible = !Helpers.FeatureForbidden(Connection, Host.RestrictVtpm) &&
-                                  Helpers.XapiEqualOrGreater_vtpmtag(Connection) &&
+                                  Helpers.XapiEqualOrGreater_22_26_0(Connection) &&
                                   VMsToExport.Any(v => v.VTPMs.Count > 0);
             m_buttonNextEnabled = ExportAsXva ? count == 1 : count > 0;
             m_buttonClearAll.Enabled = count > 0;
