@@ -230,13 +230,13 @@ namespace XenAPI
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
             ha_enabled = (bool)proxy.ha_enabled;
             ha_configuration = proxy.ha_configuration == null ? null : Maps.convert_from_proxy_string_string(proxy.ha_configuration);
-            ha_statefiles = proxy.ha_statefiles == null ? new string[] {} : (string [])proxy.ha_statefiles;
+            ha_statefiles = proxy.ha_statefiles == null ? new string[] {} : (string[])proxy.ha_statefiles;
             ha_host_failures_to_tolerate = proxy.ha_host_failures_to_tolerate == null ? 0 : long.Parse(proxy.ha_host_failures_to_tolerate);
             ha_plan_exists_for = proxy.ha_plan_exists_for == null ? 0 : long.Parse(proxy.ha_plan_exists_for);
             ha_allow_overcommit = (bool)proxy.ha_allow_overcommit;
             ha_overcommitted = (bool)proxy.ha_overcommitted;
             blobs = proxy.blobs == null ? null : Maps.convert_from_proxy_string_XenRefBlob(proxy.blobs);
-            tags = proxy.tags == null ? new string[] {} : (string [])proxy.tags;
+            tags = proxy.tags == null ? new string[] {} : (string[])proxy.tags;
             gui_config = proxy.gui_config == null ? null : Maps.convert_from_proxy_string_string(proxy.gui_config);
             health_check_config = proxy.health_check_config == null ? null : Maps.convert_from_proxy_string_string(proxy.health_check_config);
             wlb_url = proxy.wlb_url == null ? null : proxy.wlb_url;
@@ -726,7 +726,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.pool_get_ha_statefiles(session.opaque_ref, _pool);
             else
-                return (string [])session.XmlRpcProxy.pool_get_ha_statefiles(session.opaque_ref, _pool ?? "").parse();
+                return (string[])session.XmlRpcProxy.pool_get_ha_statefiles(session.opaque_ref, _pool ?? "").parse();
         }
 
         /// <summary>
@@ -810,7 +810,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.pool_get_tags(session.opaque_ref, _pool);
             else
-                return (string [])session.XmlRpcProxy.pool_get_tags(session.opaque_ref, _pool ?? "").parse();
+                return (string[])session.XmlRpcProxy.pool_get_tags(session.opaque_ref, _pool ?? "").parse();
         }
 
         /// <summary>
@@ -2356,7 +2356,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.pool_certificate_list(session.opaque_ref);
             else
-                return (string [])session.XmlRpcProxy.pool_certificate_list(session.opaque_ref).parse();
+                return (string[])session.XmlRpcProxy.pool_certificate_list(session.opaque_ref).parse();
         }
 
         /// <summary>
@@ -2500,7 +2500,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.pool_crl_list(session.opaque_ref);
             else
-                return (string [])session.XmlRpcProxy.pool_crl_list(session.opaque_ref).parse();
+                return (string[])session.XmlRpcProxy.pool_crl_list(session.opaque_ref).parse();
         }
 
         /// <summary>
@@ -3109,12 +3109,12 @@ namespace XenAPI
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
         /// <param name="_requires_reboot">Assume that the update will require host reboots</param>
-        public static string[] check_update_readiness(Session session, string _pool, bool _requires_reboot)
+        public static string[][] check_update_readiness(Session session, string _pool, bool _requires_reboot)
         {
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.pool_check_update_readiness(session.opaque_ref, _pool, _requires_reboot);
             else
-                return (string [])session.XmlRpcProxy.pool_check_update_readiness(session.opaque_ref, _pool ?? "", _requires_reboot).parse();
+                return (string[][])session.XmlRpcProxy.pool_check_update_readiness(session.opaque_ref, _pool ?? "", _requires_reboot).parse();
         }
 
         /// <summary>

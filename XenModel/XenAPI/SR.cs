@@ -165,7 +165,7 @@ namespace XenAPI
             content_type = proxy.content_type == null ? null : proxy.content_type;
             shared = (bool)proxy.shared;
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
-            tags = proxy.tags == null ? new string[] {} : (string [])proxy.tags;
+            tags = proxy.tags == null ? new string[] {} : (string[])proxy.tags;
             sm_config = proxy.sm_config == null ? null : Maps.convert_from_proxy_string_string(proxy.sm_config);
             blobs = proxy.blobs == null ? null : Maps.convert_from_proxy_string_XenRefBlob(proxy.blobs);
             local_cache_enabled = (bool)proxy.local_cache_enabled;
@@ -572,7 +572,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.sr_get_tags(session.opaque_ref, _sr);
             else
-                return (string [])session.XmlRpcProxy.sr_get_tags(session.opaque_ref, _sr ?? "").parse();
+                return (string[])session.XmlRpcProxy.sr_get_tags(session.opaque_ref, _sr ?? "").parse();
         }
 
         /// <summary>
@@ -1144,7 +1144,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.sr_get_supported_types(session.opaque_ref);
             else
-                return (string [])session.XmlRpcProxy.sr_get_supported_types(session.opaque_ref).parse();
+                return (string[])session.XmlRpcProxy.sr_get_supported_types(session.opaque_ref).parse();
         }
 
         /// <summary>

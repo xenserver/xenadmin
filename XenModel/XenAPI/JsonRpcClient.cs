@@ -2020,11 +2020,11 @@ namespace XenAPI
             return Rpc<XenRef<Task>>("Async.pool.sync_updates", new JArray(session, _pool ?? "", _force, _token ?? "", _token_id ?? ""), serializer);
         }
 
-        public string[] pool_check_update_readiness(string session, string _pool, bool _requires_reboot)
+        public string[][] pool_check_update_readiness(string session, string _pool, bool _requires_reboot)
         {
             var converters = new List<JsonConverter> {};
             var serializer = CreateSerializer(converters);
-            return Rpc<string[]>("pool.check_update_readiness", new JArray(session, _pool ?? "", _requires_reboot), serializer);
+            return Rpc<string[][]>("pool.check_update_readiness", new JArray(session, _pool ?? "", _requires_reboot), serializer);
         }
 
         public XenRef<Task> async_pool_check_update_readiness(string session, string _pool, bool _requires_reboot)
@@ -7200,11 +7200,11 @@ namespace XenAPI
             Rpc("host.emergency_reenable_tls_verification", new JArray(session), serializer);
         }
 
-        public string[] host_apply_updates(string session, string _host, string _hash)
+        public string[][] host_apply_updates(string session, string _host, string _hash)
         {
             var converters = new List<JsonConverter> {};
             var serializer = CreateSerializer(converters);
-            return Rpc<string[]>("host.apply_updates", new JArray(session, _host ?? "", _hash ?? ""), serializer);
+            return Rpc<string[][]>("host.apply_updates", new JArray(session, _host ?? "", _hash ?? ""), serializer);
         }
 
         public XenRef<Task> async_host_apply_updates(string session, string _host, string _hash)

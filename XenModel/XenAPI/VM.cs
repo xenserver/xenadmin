@@ -409,7 +409,7 @@ namespace XenAPI
             snapshot_time = proxy.snapshot_time;
             transportable_snapshot_id = proxy.transportable_snapshot_id == null ? null : proxy.transportable_snapshot_id;
             blobs = proxy.blobs == null ? null : Maps.convert_from_proxy_string_XenRefBlob(proxy.blobs);
-            tags = proxy.tags == null ? new string[] {} : (string [])proxy.tags;
+            tags = proxy.tags == null ? new string[] {} : (string[])proxy.tags;
             blocked_operations = proxy.blocked_operations == null ? null : Maps.convert_from_proxy_vm_operations_string(proxy.blocked_operations);
             snapshot_info = proxy.snapshot_info == null ? null : Maps.convert_from_proxy_string_string(proxy.snapshot_info);
             snapshot_metadata = proxy.snapshot_metadata == null ? null : proxy.snapshot_metadata;
@@ -1964,7 +1964,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.vm_get_tags(session.opaque_ref, _vm);
             else
-                return (string [])session.XmlRpcProxy.vm_get_tags(session.opaque_ref, _vm ?? "").parse();
+                return (string[])session.XmlRpcProxy.vm_get_tags(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -4492,7 +4492,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.vm_get_allowed_vbd_devices(session.opaque_ref, _vm);
             else
-                return (string [])session.XmlRpcProxy.vm_get_allowed_vbd_devices(session.opaque_ref, _vm ?? "").parse();
+                return (string[])session.XmlRpcProxy.vm_get_allowed_vbd_devices(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -4506,7 +4506,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.vm_get_allowed_vif_devices(session.opaque_ref, _vm);
             else
-                return (string [])session.XmlRpcProxy.vm_get_allowed_vif_devices(session.opaque_ref, _vm ?? "").parse();
+                return (string[])session.XmlRpcProxy.vm_get_allowed_vif_devices(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>

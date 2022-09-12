@@ -104,7 +104,7 @@ namespace XenAPI
         internal void UpdateFrom(Proxy_PVS_server proxy)
         {
             uuid = proxy.uuid == null ? null : proxy.uuid;
-            addresses = proxy.addresses == null ? new string[] {} : (string [])proxy.addresses;
+            addresses = proxy.addresses == null ? new string[] {} : (string[])proxy.addresses;
             first_port = proxy.first_port == null ? 0 : long.Parse(proxy.first_port);
             last_port = proxy.last_port == null ? 0 : long.Parse(proxy.last_port);
             site = proxy.site == null ? null : XenRef<PVS_site>.Create(proxy.site);
@@ -221,7 +221,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.pvs_server_get_addresses(session.opaque_ref, _pvs_server);
             else
-                return (string [])session.XmlRpcProxy.pvs_server_get_addresses(session.opaque_ref, _pvs_server ?? "").parse();
+                return (string[])session.XmlRpcProxy.pvs_server_get_addresses(session.opaque_ref, _pvs_server ?? "").parse();
         }
 
         /// <summary>

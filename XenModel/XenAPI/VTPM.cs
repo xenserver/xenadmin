@@ -42,7 +42,7 @@ namespace XenAPI
 {
     /// <summary>
     /// A virtual TPM device
-    /// First published in XenServer 4.0.
+    /// First published in .
     /// </summary>
     public partial class VTPM : XenObject<VTPM>
     {
@@ -178,7 +178,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get a record containing the current state of the given VTPM.
-        /// First published in XenServer 4.0.
+        /// Experimental. First published in 22.26.0-next.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vtpm">The opaque_ref of the given vtpm</param>
@@ -192,7 +192,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get a reference to the VTPM instance with the specified UUID.
-        /// First published in XenServer 4.0.
+        /// Experimental. First published in 22.26.0-next.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_uuid">UUID of object to return</param>
@@ -248,7 +248,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the persistence_backend field of the given VTPM.
-        /// Experimental. First published in 22.23.0.66.g56cd7935e-next.
+        /// Experimental. First published in 22.26.0-next.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vtpm">The opaque_ref of the given vtpm</param>
@@ -262,7 +262,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the is_unique field of the given VTPM.
-        /// Experimental. First published in 22.23.0.66.g56cd7935e-next.
+        /// Experimental. First published in 22.26.0-next.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vtpm">The opaque_ref of the given vtpm</param>
@@ -276,7 +276,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the is_protected field of the given VTPM.
-        /// Experimental. First published in 22.23.0.66.g56cd7935e-next.
+        /// Experimental. First published in 22.26.0-next.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vtpm">The opaque_ref of the given vtpm</param>
@@ -290,7 +290,7 @@ namespace XenAPI
 
         /// <summary>
         /// Create a new VTPM instance, and return its handle.
-        /// First published in XenServer 4.0.
+        /// Experimental. First published in 22.26.0-next.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The VM reference the VTPM will be attached to</param>
@@ -305,7 +305,7 @@ namespace XenAPI
 
         /// <summary>
         /// Create a new VTPM instance, and return its handle.
-        /// First published in XenServer 4.0.
+        /// Experimental. First published in 22.26.0-next.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The VM reference the VTPM will be attached to</param>
@@ -320,7 +320,7 @@ namespace XenAPI
 
         /// <summary>
         /// Destroy the specified VTPM instance, along with its state.
-        /// First published in XenServer 4.0.
+        /// Experimental. First published in 22.26.0-next.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vtpm">The opaque_ref of the given vtpm</param>
@@ -334,7 +334,7 @@ namespace XenAPI
 
         /// <summary>
         /// Destroy the specified VTPM instance, along with its state.
-        /// First published in XenServer 4.0.
+        /// Experimental. First published in 22.26.0-next.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vtpm">The opaque_ref of the given vtpm</param>
@@ -348,7 +348,7 @@ namespace XenAPI
 
         /// <summary>
         /// Return a list of all the VTPMs known to the system.
-        /// First published in XenServer 4.0.
+        /// Experimental. First published in 22.26.0-next.
         /// </summary>
         /// <param name="session">The session</param>
         public static List<XenRef<VTPM>> get_all(Session session)
@@ -361,7 +361,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get all the VTPM Records at once, in a single XML RPC call
-        /// First published in XenServer 4.0.
+        /// First published in .
         /// </summary>
         /// <param name="session">The session</param>
         public static Dictionary<XenRef<VTPM>, VTPM> get_all_records(Session session)
@@ -374,6 +374,7 @@ namespace XenAPI
 
         /// <summary>
         /// Unique identifier/object reference
+        /// First published in XenServer 4.0.
         /// </summary>
         public virtual string uuid
         {
@@ -391,6 +392,7 @@ namespace XenAPI
 
         /// <summary>
         /// The virtual machine the TPM is attached to
+        /// First published in XenServer 4.0.
         /// </summary>
         [JsonConverter(typeof(XenRefConverter<VM>))]
         public virtual XenRef<VM> VM
@@ -409,6 +411,7 @@ namespace XenAPI
 
         /// <summary>
         /// The domain where the backend is located (unused)
+        /// First published in XenServer 4.0.
         /// </summary>
         [JsonConverter(typeof(XenRefConverter<VM>))]
         public virtual XenRef<VM> backend
@@ -427,7 +430,7 @@ namespace XenAPI
 
         /// <summary>
         /// The backend where the vTPM is persisted
-        /// Experimental. First published in 22.23.0.66.g56cd7935e-next.
+        /// Experimental. First published in 22.26.0-next.
         /// </summary>
         [JsonConverter(typeof(persistence_backendConverter))]
         public virtual persistence_backend persistence_backend
@@ -446,7 +449,7 @@ namespace XenAPI
 
         /// <summary>
         /// Whether the contents are never copied, satisfying the TPM spec
-        /// Experimental. First published in 22.23.0.66.g56cd7935e-next.
+        /// Experimental. First published in 22.26.0-next.
         /// </summary>
         public virtual bool is_unique
         {
@@ -464,7 +467,7 @@ namespace XenAPI
 
         /// <summary>
         /// Whether the contents of the VTPM are secured according to the TPM spec
-        /// Experimental. First published in 22.23.0.66.g56cd7935e-next.
+        /// Experimental. First published in 22.26.0-next.
         /// </summary>
         public virtual bool is_protected
         {
