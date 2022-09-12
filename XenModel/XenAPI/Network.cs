@@ -148,7 +148,7 @@ namespace XenAPI
             bridge = proxy.bridge == null ? null : proxy.bridge;
             managed = (bool)proxy.managed;
             blobs = proxy.blobs == null ? null : Maps.convert_from_proxy_string_XenRefBlob(proxy.blobs);
-            tags = proxy.tags == null ? new string[] {} : (string [])proxy.tags;
+            tags = proxy.tags == null ? new string[] {} : (string[])proxy.tags;
             default_locking_mode = proxy.default_locking_mode == null ? (network_default_locking_mode) 0 : (network_default_locking_mode)Helper.EnumParseDefault(typeof(network_default_locking_mode), (string)proxy.default_locking_mode);
             assigned_ips = proxy.assigned_ips == null ? null : Maps.convert_from_proxy_XenRefVIF_string(proxy.assigned_ips);
             purpose = proxy.purpose == null ? null : Helper.StringArrayToEnumList<network_purpose>(proxy.purpose);
@@ -556,7 +556,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.network_get_tags(session.opaque_ref, _network);
             else
-                return (string [])session.XmlRpcProxy.network_get_tags(session.opaque_ref, _network ?? "").parse();
+                return (string[])session.XmlRpcProxy.network_get_tags(session.opaque_ref, _network ?? "").parse();
         }
 
         /// <summary>

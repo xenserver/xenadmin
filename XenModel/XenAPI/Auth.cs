@@ -165,7 +165,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.auth_get_group_membership(session.opaque_ref, _subject_identifier);
             else
-                return (string [])session.XmlRpcProxy.auth_get_group_membership(session.opaque_ref, _subject_identifier ?? "").parse();
+                return (string[])session.XmlRpcProxy.auth_get_group_membership(session.opaque_ref, _subject_identifier ?? "").parse();
         }
     }
 }

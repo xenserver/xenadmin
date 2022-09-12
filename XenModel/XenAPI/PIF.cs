@@ -218,12 +218,12 @@ namespace XenAPI
             tunnel_access_PIF_of = proxy.tunnel_access_PIF_of == null ? null : XenRef<Tunnel>.Create(proxy.tunnel_access_PIF_of);
             tunnel_transport_PIF_of = proxy.tunnel_transport_PIF_of == null ? null : XenRef<Tunnel>.Create(proxy.tunnel_transport_PIF_of);
             ipv6_configuration_mode = proxy.ipv6_configuration_mode == null ? (ipv6_configuration_mode) 0 : (ipv6_configuration_mode)Helper.EnumParseDefault(typeof(ipv6_configuration_mode), (string)proxy.ipv6_configuration_mode);
-            IPv6 = proxy.IPv6 == null ? new string[] {} : (string [])proxy.IPv6;
+            IPv6 = proxy.IPv6 == null ? new string[] {} : (string[])proxy.IPv6;
             ipv6_gateway = proxy.ipv6_gateway == null ? null : proxy.ipv6_gateway;
             primary_address_type = proxy.primary_address_type == null ? (primary_address_type) 0 : (primary_address_type)Helper.EnumParseDefault(typeof(primary_address_type), (string)proxy.primary_address_type);
             managed = (bool)proxy.managed;
             properties = proxy.properties == null ? null : Maps.convert_from_proxy_string_string(proxy.properties);
-            capabilities = proxy.capabilities == null ? new string[] {} : (string [])proxy.capabilities;
+            capabilities = proxy.capabilities == null ? new string[] {} : (string[])proxy.capabilities;
             igmp_snooping_status = proxy.igmp_snooping_status == null ? (pif_igmp_status) 0 : (pif_igmp_status)Helper.EnumParseDefault(typeof(pif_igmp_status), (string)proxy.igmp_snooping_status);
             sriov_physical_PIF_of = proxy.sriov_physical_PIF_of == null ? null : XenRef<Network_sriov>.Create(proxy.sriov_physical_PIF_of);
             sriov_logical_PIF_of = proxy.sriov_logical_PIF_of == null ? null : XenRef<Network_sriov>.Create(proxy.sriov_logical_PIF_of);
@@ -802,7 +802,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.pif_get_ipv6(session.opaque_ref, _pif);
             else
-                return (string [])session.XmlRpcProxy.pif_get_ipv6(session.opaque_ref, _pif ?? "").parse();
+                return (string[])session.XmlRpcProxy.pif_get_ipv6(session.opaque_ref, _pif ?? "").parse();
         }
 
         /// <summary>
@@ -872,7 +872,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.pif_get_capabilities(session.opaque_ref, _pif);
             else
-                return (string [])session.XmlRpcProxy.pif_get_capabilities(session.opaque_ref, _pif ?? "").parse();
+                return (string[])session.XmlRpcProxy.pif_get_capabilities(session.opaque_ref, _pif ?? "").parse();
         }
 
         /// <summary>
