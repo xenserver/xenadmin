@@ -1641,7 +1641,7 @@ namespace XenAdmin.TabPages
         private void GenerateDeviceSecurityBox()
         {
             if (!(xenObject is VM vm) || Helpers.FeatureForbidden(vm, Host.RestrictVtpm) ||
-                !Helpers.XapiEqualOrGreater_vtpmtag(vm.Connection))
+                !Helpers.XapiEqualOrGreater_22_26_0(vm.Connection))
                 return;
 
             PDSection s = pdSectionDeviceSecurity;

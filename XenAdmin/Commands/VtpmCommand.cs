@@ -59,7 +59,7 @@ namespace XenAdmin.Commands
                    selection[0].XenObject is VM vm &&
                    vm.IsRealVm() &&
                    !Helpers.FeatureForbidden(vm, Host.RestrictVtpm) &&
-                   Helpers.XapiEqualOrGreater_vtpmtag(vm.Connection) &&
+                   Helpers.XapiEqualOrGreater_22_26_0(vm.Connection) &&
                    vm.IsUEFIEnabled();
         }
 
@@ -67,7 +67,7 @@ namespace XenAdmin.Commands
         {
             if (item is VM vm &&
                 !Helpers.FeatureForbidden(vm, Host.RestrictVtpm) &&
-                Helpers.XapiEqualOrGreater_vtpmtag(vm.Connection) &&
+                Helpers.XapiEqualOrGreater_22_26_0(vm.Connection) &&
                 !vm.IsUEFIEnabled())
                 return Messages.COMMAND_VTPM_DISABLED_NON_UEFI;
 

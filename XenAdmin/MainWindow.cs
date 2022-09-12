@@ -1780,7 +1780,7 @@ namespace XenAdmin
                 s.Connection.Cache.Pools.Any(p => !p.tls_verification_enabled));
 
             toolStripMenuItemVtpm.Available = SelectionManager.Selection.Any(s =>
-                s.Connection != null && Helpers.Post82X(s.Connection) && Helpers.XapiEqualOrGreater_vtpmtag(s.Connection) &&
+                s.Connection != null && Helpers.Post82X(s.Connection) && Helpers.XapiEqualOrGreater_22_26_0(s.Connection) &&
                 !s.Connection.Cache.Hosts.Any(Host.RestrictVtpm));
         }
 
