@@ -117,17 +117,128 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="&gt;&gt;tableLayoutPanelBootMode.Name" xml:space="preserve">
+    <value>tableLayoutPanelBootMode</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelBootMode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelBootMode.Parent" xml:space="preserve">
+    <value>groupBoxBootMode</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelBootMode.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tableLayoutPanelBootMode.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="radioButtonUEFISecureBoot" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonBIOSBoot" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonUEFIBoot" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="groupBoxBootMode.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="groupBoxBootMode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="groupBoxBootMode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>465, 98</value>
+  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="groupBoxBootMode.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="groupBoxBootMode.Text" xml:space="preserve">
+    <value>Boot Mode</value>
+  </data>
+  <data name="&gt;&gt;groupBoxBootMode.Name" xml:space="preserve">
+    <value>groupBoxBootMode</value>
+  </data>
+  <data name="&gt;&gt;groupBoxBootMode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBoxBootMode.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;groupBoxBootMode.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;radioButtonUEFISecureBoot.Name" xml:space="preserve">
+    <value>radioButtonUEFISecureBoot</value>
+  </data>
+  <data name="&gt;&gt;radioButtonUEFISecureBoot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;radioButtonUEFISecureBoot.Parent" xml:space="preserve">
+    <value>tableLayoutPanelBootMode</value>
+  </data>
+  <data name="&gt;&gt;radioButtonUEFISecureBoot.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;radioButtonBIOSBoot.Name" xml:space="preserve">
+    <value>radioButtonBIOSBoot</value>
+  </data>
+  <data name="&gt;&gt;radioButtonBIOSBoot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;radioButtonBIOSBoot.Parent" xml:space="preserve">
+    <value>tableLayoutPanelBootMode</value>
+  </data>
+  <data name="&gt;&gt;radioButtonBIOSBoot.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;radioButtonUEFIBoot.Name" xml:space="preserve">
+    <value>radioButtonUEFIBoot</value>
+  </data>
+  <data name="&gt;&gt;radioButtonUEFIBoot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;radioButtonUEFIBoot.Parent" xml:space="preserve">
+    <value>tableLayoutPanelBootMode</value>
+  </data>
+  <data name="&gt;&gt;radioButtonUEFIBoot.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="tableLayoutPanelBootMode.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="tableLayoutPanelBootMode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 16</value>
+  </data>
+  <data name="tableLayoutPanelBootMode.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 0, 3, 3</value>
+  </data>
+  <data name="tableLayoutPanelBootMode.RowCount" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="tableLayoutPanelBootMode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>459, 79</value>
+  </data>
+  <data name="tableLayoutPanelBootMode.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelBootMode.Name" xml:space="preserve">
+    <value>tableLayoutPanelBootMode</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelBootMode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelBootMode.Parent" xml:space="preserve">
+    <value>groupBoxBootMode</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelBootMode.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanelBootMode.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="radioButtonUEFISecureBoot" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonBIOSBoot" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonUEFIBoot" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
   <data name="radioButtonUEFISecureBoot.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="radioButtonUEFISecureBoot.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="radioButtonUEFISecureBoot.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 52</value>
+    <value>6, 49</value>
   </data>
   <data name="radioButtonUEFISecureBoot.Size" type="System.Drawing.Size, System.Drawing">
     <value>111, 17</value>
@@ -157,7 +268,7 @@
     <value>NoControl</value>
   </data>
   <data name="radioButtonBIOSBoot.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 6</value>
+    <value>6, 3</value>
   </data>
   <data name="radioButtonBIOSBoot.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 17</value>
@@ -187,7 +298,7 @@
     <value>NoControl</value>
   </data>
   <data name="radioButtonUEFIBoot.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 29</value>
+    <value>6, 26</value>
   </data>
   <data name="radioButtonUEFIBoot.Size" type="System.Drawing.Size, System.Drawing">
     <value>74, 17</value>
@@ -210,76 +321,16 @@
   <data name="&gt;&gt;radioButtonUEFIBoot.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="tableLayoutPanelBootMode.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="tableLayoutPanelBootMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 16</value>
-  </data>
-  <data name="tableLayoutPanelBootMode.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tableLayoutPanelBootMode.RowCount" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="tableLayoutPanelBootMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>459, 80</value>
-  </data>
-  <data name="tableLayoutPanelBootMode.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanelBootMode.Name" xml:space="preserve">
-    <value>tableLayoutPanelBootMode</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanelBootMode.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanelBootMode.Parent" xml:space="preserve">
-    <value>groupBoxBootMode</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanelBootMode.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tableLayoutPanelBootMode.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="radioButtonUEFISecureBoot" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonBIOSBoot" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonUEFIBoot" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
-  </data>
-  <data name="groupBoxBootMode.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="groupBoxBootMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="groupBoxBootMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>465, 99</value>
-  </data>
-  <data name="groupBoxBootMode.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="groupBoxBootMode.Text" xml:space="preserve">
-    <value>Boot Mode</value>
-  </data>
-  <data name="&gt;&gt;groupBoxBootMode.Name" xml:space="preserve">
-    <value>groupBoxBootMode</value>
-  </data>
-  <data name="&gt;&gt;groupBoxBootMode.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBoxBootMode.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;groupBoxBootMode.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="warningsTable.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="tableVtpmWarning.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="warningsTable.AutoSize" type="System.Boolean, mscorlib">
+  <data name="tableVtpmWarning.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="warningsTable.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+  <data name="tableVtpmWarning.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
-  <data name="warningsTable.ColumnCount" type="System.Int32, mscorlib">
+  <data name="tableVtpmWarning.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="labelTpm.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -289,16 +340,13 @@
     <value>True</value>
   </data>
   <data name="labelTpm.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 35</value>
-  </data>
-  <data name="labelTpm.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 10, 3, 0</value>
+    <value>25, 4</value>
   </data>
   <data name="labelTpm.Size" type="System.Drawing.Size, System.Drawing">
     <value>437, 13</value>
   </data>
   <data name="labelTpm.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;labelTpm.Name" xml:space="preserve">
     <value>labelTpm</value>
@@ -307,16 +355,13 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelTpm.Parent" xml:space="preserve">
-    <value>warningsTable</value>
+    <value>tableVtpmWarning</value>
   </data>
   <data name="&gt;&gt;labelTpm.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="imgTpm.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 32</value>
-  </data>
-  <data name="imgTpm.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 10, 3, 3</value>
+    <value>3, 3</value>
   </data>
   <data name="imgTpm.Size" type="System.Drawing.Size, System.Drawing">
     <value>16, 16</value>
@@ -331,10 +376,37 @@
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;imgTpm.Parent" xml:space="preserve">
-    <value>warningsTable</value>
+    <value>tableVtpmWarning</value>
   </data>
   <data name="&gt;&gt;imgTpm.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="tableVtpmWarning.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 197</value>
+  </data>
+  <data name="tableVtpmWarning.RowCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tableVtpmWarning.Size" type="System.Drawing.Size, System.Drawing">
+    <value>465, 22</value>
+  </data>
+  <data name="tableVtpmWarning.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;tableVtpmWarning.Name" xml:space="preserve">
+    <value>tableVtpmWarning</value>
+  </data>
+  <data name="&gt;&gt;tableVtpmWarning.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableVtpmWarning.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;tableVtpmWarning.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="tableVtpmWarning.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelTpm" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="imgTpm" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="labelUnsupported.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -364,10 +436,10 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelUnsupported.Parent" xml:space="preserve">
-    <value>warningsTable</value>
+    <value>tableBootModeWarning</value>
   </data>
   <data name="&gt;&gt;labelUnsupported.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="imgUnsupported.ErrorImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
@@ -394,40 +466,10 @@
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;imgUnsupported.Parent" xml:space="preserve">
-    <value>warningsTable</value>
+    <value>tableBootModeWarning</value>
   </data>
   <data name="&gt;&gt;imgUnsupported.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="warningsTable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 174</value>
-  </data>
-  <data name="warningsTable.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 10, 3, 3</value>
-  </data>
-  <data name="warningsTable.RowCount" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="warningsTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>465, 51</value>
-  </data>
-  <data name="warningsTable.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;warningsTable.Name" xml:space="preserve">
-    <value>warningsTable</value>
-  </data>
-  <data name="&gt;&gt;warningsTable.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;warningsTable.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;warningsTable.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="warningsTable.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelTpm" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="imgTpm" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelUnsupported" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="imgUnsupported" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>0</value>
   </data>
   <data name="checkBoxVtpm.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -436,13 +478,13 @@
     <value>9, 22</value>
   </data>
   <data name="checkBoxVtpm.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 17</value>
+    <value>175, 17</value>
   </data>
   <data name="checkBoxVtpm.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="checkBoxVtpm.Text" xml:space="preserve">
-    <value>Assign vTPM</value>
+    <value>&amp;Create and attach a new vTPM</value>
   </data>
   <data name="&gt;&gt;checkBoxVtpm.Name" xml:space="preserve">
     <value>checkBoxVtpm</value>
@@ -460,7 +502,7 @@
     <value>Fill</value>
   </data>
   <data name="groupBoxDevSecurity.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 115</value>
+    <value>3, 144</value>
   </data>
   <data name="groupBoxDevSecurity.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 10, 3, 3</value>
@@ -469,10 +511,10 @@
     <value>3, 6, 3, 3</value>
   </data>
   <data name="groupBoxDevSecurity.Size" type="System.Drawing.Size, System.Drawing">
-    <value>465, 46</value>
+    <value>465, 47</value>
   </data>
   <data name="groupBoxDevSecurity.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="groupBoxDevSecurity.Text" xml:space="preserve">
     <value>Device Security</value>
@@ -492,6 +534,45 @@
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
+  <data name="tableBootModeWarning.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tableBootModeWarning.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="tableBootModeWarning.ColumnCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="tableBootModeWarning.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="tableBootModeWarning.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 107</value>
+  </data>
+  <data name="tableBootModeWarning.RowCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tableBootModeWarning.Size" type="System.Drawing.Size, System.Drawing">
+    <value>465, 24</value>
+  </data>
+  <data name="tableBootModeWarning.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;tableBootModeWarning.Name" xml:space="preserve">
+    <value>tableBootModeWarning</value>
+  </data>
+  <data name="&gt;&gt;tableBootModeWarning.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableBootModeWarning.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;tableBootModeWarning.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="tableBootModeWarning.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="imgUnsupported" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelUnsupported" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -499,7 +580,7 @@
     <value>3, 3</value>
   </data>
   <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>471, 261</value>
@@ -520,7 +601,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="groupBoxBootMode" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="groupBoxDevSecurity" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="warningsTable" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="groupBoxBootMode" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="groupBoxDevSecurity" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tableVtpmWarning" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tableBootModeWarning" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,Absolute,30,AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

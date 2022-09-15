@@ -14024,6 +14024,12 @@ Schedule:
   <data name="VTPM_MAX_REACHED" xml:space="preserve">
     <value>The maximum number of vTPMs that can be attached to this VM is {0}.</value>
   </data>
+  <data name="VTPM_MAX_REACHED_CUSTOM_TEMPLATE_MANY" xml:space="preserve">
+    <value>The selected template has {0} vTPMs attached to it, which is the maximum number that can be attached to the VM.</value>
+  </data>
+  <data name="VTPM_MAX_REACHED_CUSTOM_TEMPLATE_ONE" xml:space="preserve">
+    <value>The selected template has 1 vTPM attached to it, which is the maximum number that can be attached to the VM.</value>
+  </data>
   <data name="VTPM_NONE_ATTACHED" xml:space="preserve">
     <value>There are no vTPMs attached to this VM.</value>
   </data>
