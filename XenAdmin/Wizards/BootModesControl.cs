@@ -158,24 +158,26 @@ namespace XenAdmin.Wizards
                                     (radioButtonUEFIBoot.Enabled || radioButtonUEFISecureBoot.Enabled);
 
                 groupBoxDevSecurity.Visible = vtpmSupported;
-                groupBoxDevSecurity.Enabled = vtpmSupported && !radioButtonBIOSBoot.Checked && !IsVtpmTemplate &&
-                                              _templateVM.VTPMs.Count < VM.MAX_ALLOWED_VTPMS;
+                checkBoxVtpm.Enabled = vtpmSupported && !radioButtonBIOSBoot.Checked && !IsVtpmTemplate &&
+                                       _templateVM.VTPMs.Count < VM.MAX_ALLOWED_VTPMS;
                 checkBoxVtpm.Checked = vtpmSupported && !radioButtonBIOSBoot.Checked && IsVtpmTemplate &&
                                        _templateVM.VTPMs.Count < VM.MAX_ALLOWED_VTPMS;
 
                 if (_templateVM.VTPMs.Count == VM.MAX_ALLOWED_VTPMS)
-                    labelTpm.Text = string.Format(Messages.VTPM_MAX_REACHED, VM.MAX_ALLOWED_VTPMS);
+                    labelTpm.Text = _templateVM.VTPMs.Count == 1
+                        ? string.Format(Messages.VTPM_MAX_REACHED_CUSTOM_TEMPLATE_ONE, VM.MAX_ALLOWED_VTPMS)
+                        : string.Format(Messages.VTPM_MAX_REACHED_CUSTOM_TEMPLATE_MANY, VM.MAX_ALLOWED_VTPMS);
                 else if (radioButtonBIOSBoot.Checked)
                     labelTpm.Text = Messages.COMMAND_VTPM_DISABLED_NON_UEFI;
             }
             else
             {
                 groupBoxDevSecurity.Visible = false;
-                groupBoxDevSecurity.Enabled = false;
+                checkBoxVtpm.Enabled = false;
                 checkBoxVtpm.Checked = false;
             }
 
-            labelTpm.Visible = imgTpm.Visible = groupBoxDevSecurity.Visible && !groupBoxDevSecurity.Enabled && !checkBoxVtpm.Checked;
+            labelTpm.Visible = imgTpm.Visible = groupBoxDevSecurity.Visible && !checkBoxVtpm.Enabled && !checkBoxVtpm.Checked;
         }
 
         private void ShowTemplateWarning()
