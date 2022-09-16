@@ -70,11 +70,11 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
                 if (dom0MemoryAfterUpgrade > 0)
                     return string.Format(Messages.HOST_MEMORY_POST_UPGRADE_DOM0_MEMORY_WARNING_LONG,
                         Helpers.GetName(host), Util.MemorySizeStringSuitableUnits(dom0MemoryAfterUpgrade, true));
-                
+
                 if (string.IsNullOrEmpty(upgradeProductVersion))
                     return string.Format(Messages.HOST_MEMORY_POST_UPGRADE_DEFAULT_WARNING_LONG,
                         BrandManager.ProductBrand, BrandManager.ProductVersion80, Helpers.GetName(host));
-                
+
                 return string.Format(Messages.HOST_MEMORY_POST_UPGRADE_VERSION_WARNING_LONG,
                     Helpers.GetName(host), BrandManager.ProductBrand, upgradeProductVersion);
             }

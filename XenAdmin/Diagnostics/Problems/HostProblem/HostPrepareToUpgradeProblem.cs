@@ -51,7 +51,7 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
         public override bool IsFixable => false;
 
         public override string Description => _shortMessage;
-       
+
         public override string HelpMessage => Messages.MORE_INFO;
 
         protected override Actions.AsyncAction CreateAction(out bool cancelled)

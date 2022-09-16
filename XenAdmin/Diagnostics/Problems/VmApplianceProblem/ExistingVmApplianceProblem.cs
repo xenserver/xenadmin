@@ -43,7 +43,7 @@ using XenAdmin.Actions.DR;
 
 namespace XenAdmin.Diagnostics.Problems.VmApplianceProblem
 {
-    public class ExistingVmApplianceProblem: VmApplianceProblem
+    public class ExistingVmApplianceProblem : VmApplianceProblem
     {
         private readonly List<VM> vmsToDestroy;
         public ExistingVmApplianceProblem(Check check, VM_appliance vmAppliance, List<VM> vmsToDestroy)
@@ -52,18 +52,9 @@ namespace XenAdmin.Diagnostics.Problems.VmApplianceProblem
             this.vmsToDestroy = vmsToDestroy;
         }
 
-        public override string Description
-        {
-            get
-            {
-                return String.Format(Messages.DR_WIZARD_PROBLEM_EXISTING_APPLIANCE, Helpers.GetPoolOfOne(vmsToDestroy[0].Connection).Name()); 
-            } 
-        }
+        public override string Description => String.Format(Messages.DR_WIZARD_PROBLEM_EXISTING_APPLIANCE, Helpers.GetPoolOfOne(vmsToDestroy[0].Connection).Name());
 
-        public override string HelpMessage
-        {
-            get { return Messages.DR_WIZARD_PROBLEM_EXISTING_APPLIANCE_HELPMESSAGE; } 
-        }
+        public override string HelpMessage => Messages.DR_WIZARD_PROBLEM_EXISTING_APPLIANCE_HELPMESSAGE;
 
         protected override AsyncAction CreateAction(out bool cancelled)
         {
@@ -73,7 +64,7 @@ namespace XenAdmin.Diagnostics.Problems.VmApplianceProblem
             DialogResult dialogResult;
             using (var dlg = new WarningDialog(string.Format(Messages.CONFIRM_DELETE_VMS, vmNames, vmsToDestroy[0].Connection.Name),
                     ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
-                {WindowTitle = Messages.ACTION_SHUTDOWN_AND_DESTROY_VMS_TITLE})
+            { WindowTitle = Messages.ACTION_SHUTDOWN_AND_DESTROY_VMS_TITLE })
             {
                 dialogResult = dlg.ShowDialog();
             }

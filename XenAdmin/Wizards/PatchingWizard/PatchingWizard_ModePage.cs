@@ -106,7 +106,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 foreach (var kvp in ManualTextInstructions)
                 {
                     sb.AppendFormat("{0}:", kvp.Key).AppendLine();
-                    sb.AppendIndented(kvp.Value).AppendLine();
+                    sb.AppendIndented(kvp.Value.ToString()).AppendLine();
                 }
                 textBoxLog.Text = sb.ToString();
             }

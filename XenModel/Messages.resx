@@ -4254,6 +4254,9 @@ For optimal performance and reliability during VM migration, ensure that the net
   <data name="DATEFORMAT_DM" xml:space="preserve">
     <value>MMM d</value>
   </data>
+  <data name="DATEFORMAT_DM_HMS" xml:space="preserve">
+    <value>MMM d, hh:mm:ss</value>
+  </data>
   <data name="DATEFORMAT_DMY" xml:space="preserve">
     <value>MMM d, yyyy</value>
   </data>
@@ -12950,6 +12953,9 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
   </data>
   <data name="UPDATES_DOWNLOAD_REQUIRED_XENCENTER" xml:space="preserve">
     <value>Download {0}</value>
+  </data>
+  <data name="UPDATES_GENERAL_TAB_ENFORCE_HOMOGENEITY" xml:space="preserve">
+    <value>(full application required)</value>
   </data>
   <data name="UPDATES_WIZARD" xml:space="preserve">
     <value>Install Update</value>

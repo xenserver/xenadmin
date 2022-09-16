@@ -42,10 +42,7 @@ namespace XenAdmin.Diagnostics.Problems.UtilityProblem
         {
         }
 
-        public override string Description
-        {
-            get { return Messages.UPGRADEWIZARD_PROBLEM_CFU_STATUS; }
-        }
+        public override string Description => Messages.UPGRADEWIZARD_PROBLEM_CFU_STATUS;
 
         protected override AsyncAction CreateAction(out bool cancelled)
         {
@@ -58,14 +55,8 @@ namespace XenAdmin.Diagnostics.Problems.UtilityProblem
 
         public override string HelpMessage => Messages.MORE_INFO;
 
-        public sealed override string Title
-        {
-            get { return string.Empty; }
-        }
+        public sealed override string Title => string.Empty;
 
-        public override bool IsFixable
-        {
-            get { return false; }
-        }
+        public override bool IsFixable => false;
     }
 }

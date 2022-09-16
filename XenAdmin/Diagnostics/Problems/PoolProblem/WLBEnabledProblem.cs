@@ -46,15 +46,9 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
         {
         }
 
-        public override string Description
-        {
-            get { return string.Format(Messages.CHECK_WLB_ENABLED, Pool); }
-        }
+        public override string Description => string.Format(Messages.CHECK_WLB_ENABLED, Pool);
 
-        public override string HelpMessage
-        {
-            get { return Messages.HELP_MESSAGE_DISABLE_WLB; }
-        }
+        public override string HelpMessage => Messages.HELP_MESSAGE_DISABLE_WLB;
 
         protected override AsyncAction CreateAction(out bool cancelled)
         {
@@ -87,17 +81,8 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
             this.host = host;
         }
 
-        public override string Title
-        {
-            get { return Check.Description; }
-        }
+        public override string Title => Check.Description;
 
-        public override string Description
-        {
-            get
-            {
-                return string.Format(Messages.UPDATES_WIZARD_WLB_ON_WARNING, host, pool);
-            }
-        }
+        public override string Description => string.Format(Messages.UPDATES_WIZARD_WLB_ON_WARNING, host, pool);
     }
 }

@@ -74,11 +74,11 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
                 using (var dlg = new ErrorDialog(Message,
                            new ThreeButtonDialog.TBDButton(Messages.DMC_DISABLE, DialogResult.OK, ThreeButtonDialog.ButtonType.ACCEPT),
                            new ThreeButtonDialog.TBDButton(Messages.CANCEL, DialogResult.Cancel, ThreeButtonDialog.ButtonType.CANCEL, true))
-                       {
-                           LinkText = Messages.LEARN_MORE,
-                           LinkData = InvisibleMessages.DMC_REMOVAL_URL,
-                           ShowLinkLabel = true
-                       })
+                {
+                    LinkText = Messages.LEARN_MORE,
+                    LinkData = InvisibleMessages.DMC_REMOVAL_URL,
+                    ShowLinkLabel = true
+                })
                 {
                     if (dlg.ShowDialog(Control) == DialogResult.OK)
                         DisableDmc();
@@ -128,11 +128,11 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
                 using (var dlg = new WarningDialog(Message,
                            new ThreeButtonDialog.TBDButton(Messages.DMC_DISABLE, DialogResult.OK, ThreeButtonDialog.ButtonType.ACCEPT),
                            new ThreeButtonDialog.TBDButton(Messages.CANCEL, DialogResult.Cancel, ThreeButtonDialog.ButtonType.CANCEL, true))
-                       {
-                           LinkText = Messages.LEARN_MORE,
-                           LinkData = InvisibleMessages.DMC_REMOVAL_URL,
-                           ShowLinkLabel = true
-                       })
+                {
+                    LinkText = Messages.LEARN_MORE,
+                    LinkData = InvisibleMessages.DMC_REMOVAL_URL,
+                    ShowLinkLabel = true
+                })
                 {
                     if (dlg.ShowDialog(Control) == DialogResult.OK)
                         DisableDmc();

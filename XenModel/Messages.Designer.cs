@@ -19,7 +19,7 @@ namespace XenAdmin {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Messages {
@@ -11958,6 +11958,15 @@ namespace XenAdmin {
         public static string DATEFORMAT_DM {
             get {
                 return ResourceManager.GetString("DATEFORMAT_DM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MMM d, hh:mm:ss.
+        /// </summary>
+        public static string DATEFORMAT_DM_HMS {
+            get {
+                return ResourceManager.GetString("DATEFORMAT_DM_HMS", resourceCulture);
             }
         }
         
@@ -37434,6 +37443,15 @@ namespace XenAdmin {
         public static string UPDATES_DOWNLOAD_REQUIRED_XENCENTER {
             get {
                 return ResourceManager.GetString("UPDATES_DOWNLOAD_REQUIRED_XENCENTER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (full application required).
+        /// </summary>
+        public static string UPDATES_GENERAL_TAB_ENFORCE_HOMOGENEITY {
+            get {
+                return ResourceManager.GetString("UPDATES_GENERAL_TAB_ENFORCE_HOMOGENEITY", resourceCulture);
             }
         }
         
