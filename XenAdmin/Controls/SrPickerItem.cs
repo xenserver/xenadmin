@@ -242,7 +242,7 @@ namespace XenAdmin.Controls
     public abstract class SrPickerItem : CustomTreeNode, IComparable<SrPickerItem>
     {
         public SR TheSR { get; }
-        public bool Show { get; private set; }
+        public bool Show { get; private set; } = true;
         protected readonly Host Affinity;
         protected long DiskSize { get; private set; }
         protected long DiskPhysicalUtilization { get; private set; }
@@ -263,11 +263,6 @@ namespace XenAdmin.Controls
 
         protected abstract bool CanBeEnabled { get; }
 
-        protected virtual void SetImage()
-        {
-            Image = Images.GetImage16For(TheSR);
-        }
-
         public void UpdateDiskSize(long diskSize)
         {
             DiskSize = diskSize;
@@ -277,24 +272,25 @@ namespace XenAdmin.Controls
         private void Update()
         {
             Text = TheSR.Name();
-            SetImage();
+            Image = Images.GetImage16For(TheSR);
 
             if (UnsupportedSR || !TheSR.SupportsVdiCreate() ||
                 !TheSR.Show(Properties.Settings.Default.ShowHiddenVMs))
+            {
+                Show = false;
                 return;
+            }
 
             if (CanBeEnabled)
             {
                 Description = string.Format(Messages.SRPICKER_DISK_FREE, Util.DiskSizeString(TheSR.FreeSpace(), 2),
                     Util.DiskSizeString(TheSR.physical_size, 2));
                 Enabled = true;
-                Show = true;
             }
             else
             {
                 Description = DisabledReason;
                 Enabled = false;
-                Show = true;
             }
         }
 
