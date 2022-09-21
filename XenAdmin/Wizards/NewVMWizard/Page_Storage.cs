@@ -203,7 +203,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             var sb = new StringBuilder();
 
             var suggestedSrVisible = suggestedSr != null && suggestedSr.CanBeSeenFrom(affinity);
-            var suggestedSrHasSpace = suggestedSr != null && suggestedSr.VdiCreationCanProceed(diskSize);
+            var suggestedSrHasSpace = suggestedSr != null && suggestedSr.CanFitDisks(diskSize);
 
             if (suggestedSrVisible && suggestedSrHasSpace)
                 return suggestedSr;
@@ -218,7 +218,7 @@ namespace XenAdmin.Wizards.NewVMWizard
 
             SR defaultSr = connection.Resolve(Helpers.GetPoolOfOne(connection).default_SR);
             var defaultSrVisible = defaultSr != null && defaultSr.CanBeSeenFrom(affinity);
-            var defaultSrHasSpace = defaultSr != null && defaultSr.VdiCreationCanProceed(diskSize);
+            var defaultSrHasSpace = defaultSr != null && defaultSr.CanFitDisks(diskSize);
 
             if (defaultSrVisible && defaultSrHasSpace)
             {
@@ -242,7 +242,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             foreach (SR sr in connection.Cache.SRs)
             {
                 if (sr.SupportsVdiCreate() && !sr.IsBroken(false) && !sr.IsFull() &&
-                    sr.CanBeSeenFrom(affinity) && sr.VdiCreationCanProceed(diskSize))
+                    sr.CanBeSeenFrom(affinity) && sr.CanFitDisks(diskSize))
                 {
                     if (suggestedSr != null || defaultSr != null)
                     {
@@ -299,14 +299,14 @@ namespace XenAdmin.Wizards.NewVMWizard
                         SR target = Connection.Resolve(row.Disk.SR);
 
                         if (_fullCopySR == null && row.SourceSR.Equals(target) &&
-                            target.VdiCreationCanProceed(fullCopySize))
+                            target.CanFitDisks(fullCopySize))
                             _fullCopySR = target;
 
                         if (!targetSRs.Contains(target))
                             targetSRs.Add(target);
                     }
 
-                    if (targetSRs.Count == 1 && targetSRs[0].VdiCreationCanProceed(fullCopySize))
+                    if (targetSRs.Count == 1 && targetSRs[0].CanFitDisks(fullCopySize))
                         _fullCopySR = targetSRs[0];
                 }
 
@@ -363,7 +363,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                     Util.DiskSizeString(sr.FreeSpace()),
                     Util.DiskSizeString(totalDiskSize[sr.opaque_ref]));
 
-                if (!sr.VdiCreationCanProceed(totalDiskInitialAllocation[sr.opaque_ref]))
+                if (!sr.CanFitDisks(totalDiskInitialAllocation[sr.opaque_ref]))
                     item.UpdateStatus(Images.StaticImages._000_error_h32bit_16, toolTip);
                 else if (sr.FreeSpace() < totalDiskInitialAllocation[sr.opaque_ref])
                     item.UpdateStatus(Images.StaticImages._000_Alert2_h32bit_16, toolTip);

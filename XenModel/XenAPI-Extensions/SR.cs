@@ -504,7 +504,7 @@ namespace XenAPI
         /// <param name="vdiSize">The size of the disk to check</param>
         /// <param name="vdiPhysicalUtilization">The physical_utilization value of the VDI(s) to check</param>
         /// <returns>true if the VDIs will fit in the SR</returns>
-        public virtual bool VdiCreationCanProceed(long vdiSize, long? vdiPhysicalUtilization = null)
+        public virtual bool CanFitDisks(long vdiSize, long? vdiPhysicalUtilization = null)
         {
             var sm = GetSM();
 
