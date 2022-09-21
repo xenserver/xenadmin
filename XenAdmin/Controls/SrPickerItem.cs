@@ -54,7 +54,7 @@ namespace XenAdmin.Controls
             }
         }
 
-        protected override bool UnsupportedSR => false;
+        protected override bool SupportsCurrentOperation => true;
     }
 
 
@@ -259,7 +259,7 @@ namespace XenAdmin.Controls
             Update();
         }
 
-        protected virtual bool UnsupportedSR => TheSR.HBALunPerVDI();
+        protected virtual bool SupportsCurrentOperation => !TheSR.HBALunPerVDI();
 
         protected abstract bool CanBeEnabled { get; }
 
@@ -274,7 +274,7 @@ namespace XenAdmin.Controls
             Text = TheSR.Name();
             Image = Images.GetImage16For(TheSR);
 
-            if (UnsupportedSR || !TheSR.SupportsVdiCreate() ||
+            if (!SupportsCurrentOperation || !TheSR.SupportsVdiCreate() ||
                 !TheSR.Show(Properties.Settings.Default.ShowHiddenVMs))
             {
                 Show = false;
