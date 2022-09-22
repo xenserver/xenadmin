@@ -349,7 +349,7 @@ namespace XenAPI
         public bool IsFull()
         {
             SRTypes t = GetSRType(false);
-            return t != SRTypes.dummy && t != SRTypes.ebs && FreeSpace() < XenAdmin.Util.BINARY_GIGA/2;
+            return t != SRTypes.dummy && t != SRTypes.ebs && FreeSpace() < Util.BINARY_GIGA/2;
         }
 
         public virtual long FreeSpace()
@@ -501,25 +501,52 @@ namespace XenAPI
         /// CA-359965: physical_utlization is not actually telling us how much of the VDI is actively being used.
         /// Any copy of VDIs to a thinly provisioned SR could fail.
         /// </summary>
-        /// <param name="vdiSize">The size of the disk to check</param>
-        /// <param name="vdiPhysicalUtilization">The physical_utilization value of the VDI(s) to check</param>
-        /// <returns>true if the VDIs will fit in the SR</returns>
-        public virtual bool CanFitDisks(long vdiSize, long? vdiPhysicalUtilization = null)
+        /// <param name="cannotFitReason">The reason why the disks cannot fit on the SR</param>
+        /// <param name="vdis">The disks to check</param>
+        public virtual bool CanFitDisks(out string cannotFitReason, VDI[] vdis)
         {
             var sm = GetSM();
 
             var vdiSizeUnlimited = sm != null && Array.IndexOf(sm.capabilities, "LARGE_VDI") != -1;
+            var vdiSize = vdis.Sum(vdi => vdi.virtual_size);
+
             if (!vdiSizeUnlimited && vdiSize > DISK_MAX_SIZE)
+            {
+                cannotFitReason = string.Format(Messages.SR_DISKSIZE_EXCEEDS_DISK_MAX_SIZE,
+                    Util.DiskSizeString(DISK_MAX_SIZE, 0));
                 return false;
+            }
+
+            if (IsFull())
+            {
+                cannotFitReason = Messages.SRPICKER_SR_FULL;
+                return false;
+            }
 
             var isThinlyProvisioned = sm != null && Array.IndexOf(sm.capabilities, "THIN_PROVISIONING") != -1;
+            var vdiPhysicalUtilization = vdis.Sum(vdi => vdi.physical_utilisation);
+            var sizeToConsider = isThinlyProvisioned ? vdiPhysicalUtilization : vdiSize;
 
-            if (!isThinlyProvisioned && vdiSize > FreeSpace())
+            if (sizeToConsider > physical_size)
+            {
+                cannotFitReason = string.Format(Messages.SR_PICKER_DISK_TOO_BIG,
+                    Util.DiskSizeString(sizeToConsider, 2),
+                    Util.DiskSizeString(physical_size, 2));
                 return false;
+            }
 
-            if (isThinlyProvisioned && vdiPhysicalUtilization != null)
-                return vdiPhysicalUtilization < FreeSpace();
+            var freeSpace = FreeSpace();
 
+            if (sizeToConsider > freeSpace)
+            {
+                cannotFitReason = string.Format(Messages.SR_PICKER_INSUFFICIENT_SPACE,
+                    Util.DiskSizeString(sizeToConsider, 2),
+                    Util.DiskSizeString(freeSpace, 2));
+
+                return false;
+            }
+
+            cannotFitReason = string.Empty;
             return true;
         }
 

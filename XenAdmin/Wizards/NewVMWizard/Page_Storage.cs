@@ -121,19 +121,19 @@ namespace XenAdmin.Wizards.NewVMWizard
                         mode = vbd_mode.RW
                     };
 
-                    var diskSize = long.Parse(diskNode.Attributes["size"].Value);
-                    SR srUuid = Connection.Cache.Find_By_Uuid<SR>(diskNode.Attributes["sr"].Value);
-                    SR sr = GetBestDiskStorage(Connection, diskSize, Affinity, srUuid, out Image icon, out string tooltip);
-
                     var disk = new VDI
                     {
                         name_label = string.Format(Messages.STRING_SPACE_STRING, SelectedName, device.userdevice),
                         name_description = Messages.NEWVMWIZARD_STORAGEPAGE_DISK_DESCRIPTION,
-                        virtual_size = diskSize,
+                        virtual_size = long.Parse(diskNode.Attributes["size"].Value),
                         type = (vdi_type)Enum.Parse(typeof(vdi_type), diskNode.Attributes["type"].Value),
-                        read_only = false,
-                        SR = new XenRef<SR>(sr != null ? sr.opaque_ref : Helper.NullOpaqueRef)
+                        read_only = false
                     };
+
+                    SR srUuid = Connection.Cache.Find_By_Uuid<SR>(diskNode.Attributes["sr"].Value);
+                    SR sr = GetBestDiskStorage(Connection, new[] { disk }, Affinity, srUuid, out Image icon,
+                        out string tooltip);
+                    disk.SR = new XenRef<SR>(sr != null ? sr.opaque_ref : Helper.NullOpaqueRef);
 
                     var row = new DiskGridRowItem(Connection, disk, device, DiskSource.FromDefaultTemplate);
                     row.UpdateStatus(icon, tooltip);
@@ -166,7 +166,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                         mode = vbd.mode
                     };
 
-                    SR sr = GetBestDiskStorage(Connection, vdi.virtual_size, Affinity, Connection.Resolve(vdi.SR),
+                    SR sr = GetBestDiskStorage(Connection, new[] { vdi }, Affinity, Connection.Resolve(vdi.SR),
                         out Image icon, out string tooltip);
 
                     var disk = new VDI
@@ -195,7 +195,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         /// suggestedSR then the pool's default SR, then other SRs.
         /// </summary>
         /// <returns>The SR if a suitable one is found, otherwise null</returns>
-        private SR GetBestDiskStorage(IXenConnection connection, long diskSize, Host affinity, SR suggestedSr,
+        private SR GetBestDiskStorage(IXenConnection connection, VDI[] vdis, Host affinity, SR suggestedSr,
             out Image icon, out string tooltip)
         {
             icon = Images.StaticImages._000_VirtualStorage_h32bit_16;
@@ -203,7 +203,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             var sb = new StringBuilder();
 
             var suggestedSrVisible = suggestedSr != null && suggestedSr.CanBeSeenFrom(affinity);
-            var suggestedSrHasSpace = suggestedSr != null && suggestedSr.CanFitDisks(diskSize);
+            var suggestedSrHasSpace = suggestedSr != null && suggestedSr.CanFitDisks(out _, vdis);
 
             if (suggestedSrVisible && suggestedSrHasSpace)
                 return suggestedSr;
@@ -218,7 +218,7 @@ namespace XenAdmin.Wizards.NewVMWizard
 
             SR defaultSr = connection.Resolve(Helpers.GetPoolOfOne(connection).default_SR);
             var defaultSrVisible = defaultSr != null && defaultSr.CanBeSeenFrom(affinity);
-            var defaultSrHasSpace = defaultSr != null && defaultSr.CanFitDisks(diskSize);
+            var defaultSrHasSpace = defaultSr != null && defaultSr.CanFitDisks(out _, vdis);
 
             if (defaultSrVisible && defaultSrHasSpace)
             {
@@ -241,8 +241,8 @@ namespace XenAdmin.Wizards.NewVMWizard
 
             foreach (SR sr in connection.Cache.SRs)
             {
-                if (sr.SupportsVdiCreate() && !sr.IsBroken(false) && !sr.IsFull() &&
-                    sr.CanBeSeenFrom(affinity) && sr.CanFitDisks(diskSize))
+                if (sr.SupportsVdiCreate() && !sr.IsBroken(false) &&
+                    sr.CanBeSeenFrom(affinity) && sr.CanFitDisks(out _, vdis))
                 {
                     if (suggestedSr != null || defaultSr != null)
                     {
@@ -287,9 +287,9 @@ namespace XenAdmin.Wizards.NewVMWizard
                 if (_canCreateFullCopy)
                 {
                     var targetSRs = new List<SR>();
-                    var fullCopySize = DisksGridView.Rows.Cast<DiskGridRowItem>()
+                    var disks = DisksGridView.Rows.Cast<DiskGridRowItem>()
                         .Where(r => !r.CanDelete && r.SourceSR != null && r.Disk != null)
-                        .Select(r => r.Disk).Sum(vdi => vdi.virtual_size);
+                        .Select(r => r.Disk).ToArray();
 
                     foreach (DiskGridRowItem row in DisksGridView.Rows)
                     {
@@ -299,14 +299,14 @@ namespace XenAdmin.Wizards.NewVMWizard
                         SR target = Connection.Resolve(row.Disk.SR);
 
                         if (_fullCopySR == null && row.SourceSR.Equals(target) &&
-                            target.CanFitDisks(fullCopySize))
+                            target.CanFitDisks(out _, disks))
                             _fullCopySR = target;
 
                         if (!targetSRs.Contains(target))
                             targetSRs.Add(target);
                     }
 
-                    if (targetSRs.Count == 1 && targetSRs[0].CanFitDisks(fullCopySize))
+                    if (targetSRs.Count == 1 && targetSRs[0].CanFitDisks(out _, disks))
                         _fullCopySR = targetSRs[0];
                 }
 
@@ -322,10 +322,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         private void UpdateStatusForEachDisk(bool pageLoad = false)
         {
             // total size of the new disks on each SR (calculated using vdi.virtual_size)
-            var totalDiskSize = new Dictionary<string, long>();
-
-            // total initial allocation of the new disks on each SR (calculated using vdi.InitialAllocation)
-            var totalDiskInitialAllocation = new Dictionary<string, long>();
+            var disksPerSr = new Dictionary<string, List<VDI>>();
 
             foreach (DiskGridRowItem item in DisksGridView.Rows)
             {
@@ -334,18 +331,13 @@ namespace XenAdmin.Wizards.NewVMWizard
                 if (sr == null) // no sr assigned
                     continue;
 
-                if(sr.HBALunPerVDI()) //No over commit in this case
+                if (sr.HBALunPerVDI()) //No over commit in this case
                     continue;
 
-                if (totalDiskSize.ContainsKey(sr.opaque_ref))
-                    totalDiskSize[sr.opaque_ref] += item.Disk.virtual_size;
+                if (disksPerSr.ContainsKey(sr.opaque_ref))
+                    disksPerSr[sr.opaque_ref].Add(item.Disk);
                 else
-                    totalDiskSize[sr.opaque_ref] = item.Disk.virtual_size;
-
-                if (totalDiskInitialAllocation.ContainsKey(sr.opaque_ref))
-                    totalDiskInitialAllocation[sr.opaque_ref] += item.Disk.virtual_size;
-                else
-                    totalDiskInitialAllocation[sr.opaque_ref] = item.Disk.virtual_size;
+                    disksPerSr[sr.opaque_ref] = new List<VDI> { item.Disk };
             }
 
             foreach (DiskGridRowItem item in DisksGridView.Rows)
@@ -358,16 +350,25 @@ namespace XenAdmin.Wizards.NewVMWizard
                 if (sr.HBALunPerVDI()) //No over commit in this case
                     continue;
 
-                var toolTip = string.Format(Messages.NEWVMWIZARD_STORAGEPAGE_SROVERCOMMIT,
-                    Helpers.GetName(sr),
-                    Util.DiskSizeString(sr.FreeSpace()),
-                    Util.DiskSizeString(totalDiskSize[sr.opaque_ref]));
-
-                if (!sr.CanFitDisks(totalDiskInitialAllocation[sr.opaque_ref]))
+                if (!sr.CanFitDisks(out var toolTip, disksPerSr[sr.opaque_ref].ToArray()))
+                {
                     item.UpdateStatus(Images.StaticImages._000_error_h32bit_16, toolTip);
-                else if (sr.FreeSpace() < totalDiskInitialAllocation[sr.opaque_ref])
-                    item.UpdateStatus(Images.StaticImages._000_Alert2_h32bit_16, toolTip);
-                else if (!pageLoad)
+                    continue;
+                }
+
+                var freeSpace = sr.FreeSpace();
+                var totalVirtualSize = disksPerSr[sr.opaque_ref].Sum(v => v.virtual_size);
+
+                if (freeSpace < totalVirtualSize)
+                {
+                    item.UpdateStatus(Images.StaticImages._000_Alert2_h32bit_16, string.Format(Messages.NEWVMWIZARD_STORAGEPAGE_SROVERCOMMIT,
+                        Helpers.GetName(sr),
+                        Util.DiskSizeString(sr.FreeSpace()),
+                        Util.DiskSizeString(totalVirtualSize)));
+                    continue;
+                }
+                
+                if (!pageLoad)
                     item.UpdateStatus(Images.StaticImages._000_VirtualStorage_h32bit_16, "");
             }
         }

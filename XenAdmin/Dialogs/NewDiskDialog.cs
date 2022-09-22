@@ -238,16 +238,17 @@ namespace XenAdmin.Dialogs
 
         public VDI NewDisk()
         {
-            VDI vdi = new VDI();
-            vdi.Connection = connection;
-            vdi.read_only = DiskTemplate != null ? DiskTemplate.read_only : false;
-            vdi.SR = new XenAPI.XenRef<XenAPI.SR>(SrListBox.SR);
-
-            vdi.virtual_size = diskSpinner1.SelectedSize;
-            vdi.name_label = NameTextBox.Text;
-            vdi.name_description = DescriptionTextBox.Text;
-            vdi.sharable = DiskTemplate != null ? DiskTemplate.sharable : false;
-            vdi.type = DiskTemplate != null ? DiskTemplate.type : vdi_type.user;
+            VDI vdi = new VDI
+            {
+                Connection = connection,
+                read_only = DiskTemplate?.read_only ?? false,
+                SR = SrListBox.SR == null ? new XenRef<SR>(Helper.NullOpaqueRef) : new XenRef<SR>(SrListBox.SR),
+                virtual_size = diskSpinner1.SelectedSize,
+                name_label = NameTextBox.Text,
+                name_description = DescriptionTextBox.Text,
+                sharable = DiskTemplate?.sharable ?? false,
+                type = DiskTemplate?.type ?? vdi_type.user
+            };
             vdi.SetVmHint(TheVM != null ? TheVM.uuid : "");
             return vdi;
         }
@@ -282,7 +283,7 @@ namespace XenAdmin.Dialogs
             // Ordering is important here, we want to show the most relevant message
             // The error should be shown only for size errors
 
-            SrListBox.UpdateDiskSize(diskSpinner1.SelectedSize);
+            SrListBox.UpdateDisks(NewDisk());
 
             if (!diskSpinner1.IsSizeValid)
             {

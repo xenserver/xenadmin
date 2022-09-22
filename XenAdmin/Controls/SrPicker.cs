@@ -194,13 +194,13 @@ namespace XenAdmin.Controls
             _ = SelectSR(selectedSr) || SelectDefaultSR() || SelectAnySR();
         }
 
-        public void UpdateDiskSize(long diskSize)
+        public void UpdateDisks(params VDI[] vdi)
         {
             Program.AssertOnEventThread();
             try
             {
                 foreach (SrPickerItem node in Items)
-                    node.UpdateDiskSize(diskSize);
+                    node.UpdateDisks(vdi);
             }
             finally
             {
