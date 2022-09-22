@@ -564,6 +564,11 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             return _name;
         }
 
+        public override int GetHashCode()
+        {
+            return Key == null ? 0 : Key.GetHashCode();
+        }
+
         public int CompareTo(Capability other)
         {
             return StringUtility.NaturalCompare(Key, other?.Key);
