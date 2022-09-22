@@ -37,27 +37,6 @@ using XenAPI;
 
 namespace XenAdmin.Controls
 {
-    public class SrPickerLunPerVDIItem : SrPickerVmItem
-    {
-        public SrPickerLunPerVDIItem(SR sr, Host aff, VDI[] vdis)
-            : base(sr, aff, vdis)
-        {
-        }
-
-        protected override bool CanBeEnabled
-        {
-            get
-            {
-                if(TheSR.HBALunPerVDI())
-                    return !TheSR.IsBroken(false) && TheSR.CanBeSeenFrom(Affinity);
-                return base.CanBeEnabled;
-            }
-        }
-
-        protected override bool SupportsCurrentOperation => true;
-    }
-
-
     public class SrPickerMigrateItem : SrPickerItem
     {
         public SrPickerMigrateItem(SR sr, Host aff, VDI[] vdis)
@@ -236,6 +215,28 @@ namespace XenAdmin.Controls
                 return base.DisabledReason;
             }
         }
+    }
+
+
+    public class SrPickerLunPerVDIItem : SrPickerVmItem
+    {
+        public SrPickerLunPerVDIItem(SR sr, Host aff, VDI[] vdis)
+            : base(sr, aff, vdis)
+        {
+        }
+
+        protected override bool CanBeEnabled
+        {
+            get
+            {
+                if (TheSR.HBALunPerVDI())
+                    return !TheSR.IsBroken(false) && TheSR.CanBeSeenFrom(Affinity);
+                
+                return base.CanBeEnabled;
+            }
+        }
+
+        protected override bool SupportsCurrentOperation => true;
     }
 
 
