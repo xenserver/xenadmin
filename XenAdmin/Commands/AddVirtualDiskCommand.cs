@@ -70,7 +70,7 @@ namespace XenAdmin.Commands
             {
                 if (vm.VBDs.Count < vm.MaxVBDsAllowed())
                 {
-                    new NewDiskDialog(vm.Connection, vm).ShowPerXenObject(vm, Program.MainWindow);
+                    new NewDiskDialog(vm.Connection, vm, vm.Home()).ShowPerXenObject(vm, Program.MainWindow);
                 }
                 else
                 {
