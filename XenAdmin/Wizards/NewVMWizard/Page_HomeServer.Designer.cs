@@ -36,7 +36,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             // 
             resources.ApplyResources(this.affinityPicker1, "affinityPicker1");
             this.affinityPicker1.Name = "affinityPicker1";
-            this.affinityPicker1.SelectedAffinityChanged += new System.EventHandler(this.affinityPicker1_SelectedAffinityChanged);
+            this.affinityPicker1.SelectedAffinityChanged += new System.Action(this.affinityPicker1_SelectedAffinityChanged);
             // 
             // Page_HomeServer
             // 

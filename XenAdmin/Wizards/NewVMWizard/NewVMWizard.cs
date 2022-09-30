@@ -269,7 +269,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             {
                 if (!page_4_HomeServer.DisableStep)
                 {
-                    m_affinity = page_4_HomeServer.SelectedHomeServer;
+                    m_affinity = page_4_HomeServer.Affinity;
                     page_6_Storage.Affinity = m_affinity;
                     page_CloudConfigParameters.Affinity = m_affinity;
                 }
