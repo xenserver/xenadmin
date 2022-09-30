@@ -12193,6 +12193,9 @@ Reverting to this snapshot will revert the VM back to the point in time that the
   <data name="SR_DETACHED" xml:space="preserve">
     <value>The SR is currently detached.</value>
   </data>
+  <data name="SR_DETACHED_FROM_HOST" xml:space="preserve">
+    <value>The SR is currently unplugged from {0}</value>
+  </data>
   <data name="SR_DISK_SPACE_ALLOCATION" xml:space="preserve">
     <value>Initial allocation: {0}
 Incremental allocation: {1}</value>

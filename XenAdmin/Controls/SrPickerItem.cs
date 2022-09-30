@@ -51,7 +51,7 @@ namespace XenAdmin.Controls
 
             if (TheSR.IsLocalSR())
             {
-                foreach (var vdi in existingVDIs)
+                foreach (var vdi in ExistingVDIs)
                 {
                     var homeHosts = new List<Host>();
 
@@ -84,7 +84,7 @@ namespace XenAdmin.Controls
             return SupportsStorageMigration(out cannotEnableReason) &&
                    SupportsVdiCreate(out cannotEnableReason) &&
                    !IsDetached(out cannotEnableReason) &&
-                   TheSR.CanFitDisks(out cannotEnableReason, existingVDIs);
+                   TheSR.CanFitDisks(out cannotEnableReason, ExistingVDIs);
         }
     }
 
@@ -100,7 +100,7 @@ namespace XenAdmin.Controls
         {
             return !IsDetached(out cannotEnableReason) &&
                    SupportsVdiCreate(out cannotEnableReason) &&
-                   TheSR.CanFitDisks(out cannotEnableReason, existingVDIs);
+                   TheSR.CanFitDisks(out cannotEnableReason, ExistingVDIs);
         }
     }
 
@@ -117,7 +117,7 @@ namespace XenAdmin.Controls
             return !IsDetached(out cannotEnableReason) &&
                    !IsCurrentLocation(out cannotEnableReason) &&
                    SupportsVdiCreate(out cannotEnableReason) &&
-                   TheSR.CanFitDisks(out cannotEnableReason, existingVDIs);
+                   TheSR.CanFitDisks(out cannotEnableReason, ExistingVDIs);
         }
     }
 
@@ -133,7 +133,7 @@ namespace XenAdmin.Controls
         {
             return SupportsVdiCreate(out cannotEnableReason) &&
                    !IsDetached(out cannotEnableReason) &&
-                   TheSR.CanFitDisks(out cannotEnableReason, existingVDIs);
+                   TheSR.CanFitDisks(out cannotEnableReason, ExistingVDIs);
         }
     }
 
@@ -150,7 +150,7 @@ namespace XenAdmin.Controls
             return CanBeSeenFromAffinity(out cannotEnableReason) &&
                    SupportsVdiCreate(out cannotEnableReason) &&
                    !IsBroken(out cannotEnableReason) &&
-                   TheSR.CanFitDisks(out cannotEnableReason, existingVDIs);
+                   TheSR.CanFitDisks(out cannotEnableReason, ExistingVDIs);
         }
     }
 
@@ -165,8 +165,8 @@ namespace XenAdmin.Controls
         protected override bool CanBeEnabled(out string cannotEnableReason)
         {
             if (TheSR.HBALunPerVDI())
-                return !IsBroken(out cannotEnableReason) &&
-                       CanBeSeenFromAffinity(out cannotEnableReason);
+                return CanBeSeenFromAffinity(out cannotEnableReason) &&
+                       !IsBroken(out cannotEnableReason);
 
             return base.CanBeEnabled(out cannotEnableReason);
         }
@@ -180,11 +180,11 @@ namespace XenAdmin.Controls
         public SR TheSR { get; }
         public bool Show { get; private set; } = true;
         protected readonly Host Affinity;
-        protected VDI[] existingVDIs { get; private set; }
+        protected VDI[] ExistingVDIs { get; private set; }
 
         protected SrPickerItem(SR sr, Host aff, VDI[] vdis)
         {
-            existingVDIs = vdis ?? new VDI[0];
+            ExistingVDIs = vdis ?? Array.Empty<VDI>();
             TheSR = sr;
             Affinity = aff;
             Update();
@@ -196,7 +196,7 @@ namespace XenAdmin.Controls
 
         public void UpdateDisks(params VDI[] disks)
         {
-            existingVDIs = disks;
+            ExistingVDIs = disks;
             Update();
         }
 
@@ -205,7 +205,7 @@ namespace XenAdmin.Controls
             Text = TheSR.Name();
             Image = Images.GetImage16For(TheSR);
 
-            if (!SupportsCurrentOperation || !TheSR.SupportsVdiCreate() ||
+            if (!SupportsCurrentOperation || !SupportsVdiCreate(out _) ||
                 !TheSR.Show(Properties.Settings.Default.ShowHiddenVMs))
             {
                 Show = false;
@@ -227,7 +227,7 @@ namespace XenAdmin.Controls
 
         protected bool IsCurrentLocation(out string cannotEnableReason)
         {
-            if (existingVDIs.Length > 0 && existingVDIs.All(vdi => vdi.SR.opaque_ref == TheSR.opaque_ref))
+            if (ExistingVDIs.Length > 0 && ExistingVDIs.All(vdi => vdi.SR.opaque_ref == TheSR.opaque_ref))
             {
                 cannotEnableReason = Messages.CURRENT_LOCATION;
                 return true;
@@ -287,23 +287,37 @@ namespace XenAdmin.Controls
 
         protected bool CanBeSeenFromAffinity(out string cannotEnableReason)
         {
-            if (Affinity == null && !TheSR.shared)
+            if (Affinity == null)
             {
+                if (TheSR.shared)
+                {
+                    cannotEnableReason = string.Empty;
+                    return true;
+                }
+
                 cannotEnableReason = Messages.SR_IS_LOCAL;
                 return false;
             }
 
-            if (!TheSR.CanBeSeenFrom(Affinity))
+            foreach (var pbdRef in TheSR.PBDs)
             {
-                cannotEnableReason = TheSR.Connection != null
-                    ? string.Format(Messages.SR_CANNOT_BE_SEEN,
-                        Affinity == null ? Helpers.GetName(TheSR.Connection) : Helpers.GetName(Affinity))
-                    : Messages.SR_DETACHED;
-                return false;
+                var pbd = TheSR.Connection.Resolve(pbdRef);
+                    
+                if (pbd.host.opaque_ref == Affinity.opaque_ref)
+                {
+                    if (pbd.currently_attached)
+                    {
+                        cannotEnableReason = string.Empty;
+                        return true;
+                    }
+
+                    cannotEnableReason = string.Format(Messages.SR_DETACHED_FROM_HOST, Helpers.GetName(Affinity));
+                    return false;
+                }
             }
 
-            cannotEnableReason = string.Empty;
-            return true;
+            cannotEnableReason = string.Format(Messages.SR_CANNOT_BE_SEEN, Helpers.GetName(Affinity));
+            return false;
         }
 
         public int CompareTo(SrPickerItem other)

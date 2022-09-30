@@ -704,23 +704,38 @@ namespace XenAdmin.TabPages
 
             PDSection s = pdSectionStatus;
 
-            bool broken = sr.IsBroken() || !sr.MultipathAOK();
-            bool detached = !sr.HasPBDs();
+            bool broken = false;
+            bool repairable = sr.HasPBDs();
+            var statusString = Messages.GENERAL_STATE_OK;
+            
+            if (sr.IsDetached())
+            {
+                broken = true;
+                statusString = Messages.DETACHED;
+            }
+            else if (sr.IsBroken())
+            {
+                broken = true;
+                statusString = Messages.GENERAL_SR_STATE_BROKEN;
+            }
+            else if (!sr.MultipathAOK())
+            {
+                broken = true;
+                statusString = Messages.GENERAL_MULTIPATH_FAILURE;
+            }
 
             var repairItem = new ToolStripMenuItem
             {
                 Text = Messages.GENERAL_SR_CONTEXT_REPAIR,
                 Image = Images.StaticImages._000_StorageBroken_h32bit_16
             };
-            repairItem.Click += delegate
-                {
-                    Program.MainWindow.ShowPerConnectionWizard(xenObject.Connection, new RepairSRDialog(sr));
-                };
+            repairItem.Click += (sender, args) =>
+                Program.MainWindow.ShowPerConnectionWizard(xenObject.Connection, new RepairSRDialog(sr));
 
-            if (broken && !detached)
-                s.AddEntry(FriendlyName("SR.state"), sr.StatusString(), repairItem);
+            if (broken && repairable)
+                s.AddEntry(FriendlyName("SR.state"), statusString, repairItem);
             else
-                s.AddEntry(FriendlyName("SR.state"), sr.StatusString());
+                s.AddEntry(FriendlyName("SR.state"), statusString);
 
             foreach (Host host in xenObject.Connection.Cache.Hosts)
             {
@@ -738,7 +753,7 @@ namespace XenAdmin.TabPages
                     if (!sr.shared)
                         continue;
 
-                    if (!detached)
+                    if (repairable)
                         s.AddEntry("  " + Helpers.GetName(host).Ellipsise(30),
                             Messages.REPAIR_SR_DIALOG_CONNECTION_MISSING, Color.Red, repairItem);
                     else
@@ -753,7 +768,7 @@ namespace XenAdmin.TabPages
 
                 if (!pbdToSR.currently_attached)
                 {
-                    if (!detached)
+                    if (repairable)
                         s.AddEntry(Helpers.GetName(host).Ellipsise(30), pbdToSR.StatusString(), Color.Red, repairItem);
                     else
                         s.AddEntry(Helpers.GetName(host).Ellipsise(30), pbdToSR.StatusString(), Color.Red);
