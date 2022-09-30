@@ -65,10 +65,6 @@ namespace XenAdmin.Dialogs
             SrListBox.PopulateAsync(SrPicker.SRPickerType.InstallFromTemplate, connection, null, sr, null);
         }
 
-        public NewDiskDialog(IXenConnection connection, VM vm)
-            : this(connection, vm, vm.Home())
-        { }
-
         public NewDiskDialog(IXenConnection connection, VM vm, Host affinity,
             SrPicker.SRPickerType pickerUsage = SrPicker.SRPickerType.VM, VDI diskTemplate = null,
             bool canResize = true, long minSize = 0, IEnumerable<VDI> vdiNamesInUse = null)
