@@ -8367,6 +8367,9 @@ This will permanently delete and reinitialize all local storage on the servers. 
   <data name="MAINWINDOW_TRIM_SR" xml:space="preserve">
     <value>Re&amp;claim freed space</value>
   </data>
+  <data name="MAINWINDOW_UPDATE_RELEASE" xml:space="preserve">
+    <value>v{0} &amp;Release Notes</value>
+  </data>
   <data name="MAINWINDOW_XVA_BLURB" xml:space="preserve">
     <value>XVA Files (*.xva)|*.xva|All Files (*.*)|*.*</value>
   </data>
