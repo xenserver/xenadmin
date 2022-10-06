@@ -2640,7 +2640,7 @@ namespace XenAdmin
         {
             updateAlert = Updates.UpdateAlerts.FirstOrDefault(update => update is ClientUpdateAlert) as ClientUpdateAlert;
             if (updateAlert != null)
-                relNotesToolStripMenuItem.Text = string.Format(relNotesToolStripMenuItem.Text, updateAlert.NewVersion.Version);
+                relNotesToolStripMenuItem.Text = string.Format(Messages.MAINWINDOW_UPDATE_RELEASE, updateAlert.NewVersion.Version);
             updateClientToolStripMenuItem.Visible = updateAlert != null;
         }
 
