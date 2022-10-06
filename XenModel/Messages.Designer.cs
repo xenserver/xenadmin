@@ -23114,6 +23114,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to v{0} &amp;Release Notes.
+        /// </summary>
+        public static string MAINWINDOW_UPDATE_RELEASE {
+            get {
+                return ResourceManager.GetString("MAINWINDOW_UPDATE_RELEASE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;Add....
         /// </summary>
         public static string MAINWINDOW_ADD_HOST {
