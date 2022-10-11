@@ -69,7 +69,9 @@ namespace XenAPI
             return Name();
         }
 
-        /// <returns>A friendly name for the SR.</returns>
+        /// <summary>
+        /// A friendly name for the SR.
+        /// </summary>
         public override string Name()
         {
             return I18N("name_label", name_label, true);
@@ -96,7 +98,9 @@ namespace XenAPI
             return I18N("name_label", name_label, false);
         }
 
-        /// <returns>A friendly description for the SR.</returns>
+        /// <summary>
+        /// A friendly description for the SR.
+        /// </summary>
         public override string Description()
         {
             return I18N("name_description", name_description, true);
@@ -192,8 +196,10 @@ namespace XenAPI
             }
         }
 
-        /// <returns>The name of the host to which this SR is attached, or null if the storage is shared
-        /// or unattached.</returns>
+        /// <summary>
+        /// Gets the name of the host to which this SR is attached, or null if the storage is shared
+        /// or unattached.
+        /// </summary>
         private string GetHostName()
         {
             if (Connection == null)
@@ -202,8 +208,9 @@ namespace XenAPI
             return host == null ? null : host.Name();
         }
 
-
-        /// <returns>The host to which the given SR belongs, or null if the SR is shared or completely disconnected.</returns>
+        /// <summary>
+        /// Gets the host to which the given SR belongs, or null if the SR is shared or completely disconnected.
+        /// </summary>
         public Host GetStorageHost()
         {
             if (shared || PBDs.Count != 1)
@@ -260,23 +267,6 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Internal helper function. True if all the PBDs for this SR are currently_attached.
-        /// </summary>
-        /// <returns></returns>
-        private bool AllPBDsAttached()
-        {
-            return Connection.ResolveAll(this.PBDs).All(pbd => pbd.currently_attached);
-        }
-
-        /// <summary>
-        /// Internal helper function. True if any of the PBDs for this SR is currently_attached.
-        /// </summary>
-        private bool AnyPBDAttached()
-        {
-            return Connection.ResolveAll(this.PBDs).Any(pbd => pbd.currently_attached);
-        }
-
-        /// <summary>
         /// Returns true if there are any Running or Suspended VMs attached to VDIs on this SR.
         /// </summary>
         public bool HasRunningVMs()
@@ -323,9 +313,7 @@ namespace XenAPI
         public virtual bool CanBeSeenFrom(Host host)
         {
             if (host == null)
-            {
-                return shared && Connection != null && !IsBroken(false) && AnyPBDAttached();
-            }
+                return shared && !IsBroken();
 
             foreach (PBD pbd in host.Connection.ResolveAll(PBDs))
                 if (pbd.currently_attached && pbd.host.opaque_ref == host.opaque_ref)
@@ -349,7 +337,7 @@ namespace XenAPI
         public bool IsFull()
         {
             SRTypes t = GetSRType(false);
-            return t != SRTypes.dummy && t != SRTypes.ebs && FreeSpace() < XenAdmin.Util.BINARY_GIGA/2;
+            return t != SRTypes.dummy && t != SRTypes.ebs && FreeSpace() < Util.BINARY_GIGA/2;
         }
 
         public virtual long FreeSpace()
@@ -357,10 +345,19 @@ namespace XenAPI
             return physical_size - physical_utilisation;
         }
 
+        /// <summary>
+        /// SR is detached when it has no PBDs or when all its PBDs are unplugged
+        /// </summary>
         public bool IsDetached()
         {
-            // SR is detached when it has no PBDs or when all its PBDs are unplugged
-            return !HasPBDs() || !AnyPBDAttached();
+            foreach (var pbdRef in PBDs)
+            {
+                var pbd = Connection.Resolve(pbdRef);
+                if (pbd != null && pbd.currently_attached)
+                    return false;
+            }
+
+            return true;
         }
 
         public bool HasPBDs()
@@ -402,40 +399,38 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// The SR is broken when it has the wrong number of PBDs, or (optionally) not all the PBDs are attached.
+        /// The SR is broken when it has the wrong number of PBDs, or (optionally) not
+        /// all the PBDs are attached. For standalone host or non-shared SR there should
+        /// be exactly one PBD, otherwise a PBD for each host.
         /// </summary>
         /// <param name="checkAttached">Whether to check that all the PBDs are attached</param>
-        /// <returns></returns>
-        public virtual bool IsBroken(bool checkAttached)
+        public virtual bool IsBroken(bool checkAttached = true)
         {
-            if (PBDs == null || PBDs.Count == 0 ||
-                checkAttached && !AllPBDsAttached())
-            {
+            if (PBDs.Count == 0)
                 return true;
-            }
-            Pool pool = Helpers.GetPoolOfOne(Connection);
-            if (pool == null || !shared)
+
+            if (Helpers.GetPoolOfOne(Connection) == null || !shared)
             {
                 if (PBDs.Count != 1)
-                {
-                    // There should be exactly one PBD, since this is a non-shared SR
                     return true;
-                }
             }
             else
             {
                 if (PBDs.Count != Connection.Cache.HostCount)
-                {
-                    // There isn't a PBD for each host
                     return true;
+            }
+
+            if (checkAttached)
+            {
+                foreach (var pbdRef in PBDs)
+                {
+                    var pbd = Connection?.Resolve(pbdRef);
+                    if (pbd == null || !pbd.currently_attached)
+                        return true;
                 }
             }
-            return false;
-        }
 
-        public bool IsBroken()
-        {
-            return IsBroken(true);
+            return false;
         }
 
         public static bool IsDefaultSr(SR sr)
@@ -494,18 +489,59 @@ namespace XenAPI
             return results;
         }
 
-        public virtual bool VdiCreationCanProceed(long vdiSize)
+        /// <summary>
+        /// Checks if the SR contains enough free space to accomodate the specified VDI size.
+        /// If checking a possibly thinly provisioned SR, provide a value for vdiPhysicalUtilization.
+        ///
+        /// CA-359965: physical_utlization is not actually telling us how much of the VDI is actively being used.
+        /// Any copy of VDIs to a thinly provisioned SR could fail.
+        /// </summary>
+        /// <param name="cannotFitReason">The reason why the disks cannot fit on the SR</param>
+        /// <param name="vdis">The disks to check</param>
+        public virtual bool CanFitDisks(out string cannotFitReason, VDI[] vdis)
         {
-            SM sm = GetSM();
+            var sm = GetSM();
 
-            bool vdiSizeUnlimited = sm != null && Array.IndexOf(sm.capabilities, "LARGE_VDI") != -1;
+            var vdiSizeUnlimited = sm != null && Array.IndexOf(sm.capabilities, "LARGE_VDI") != -1;
+            var vdiSize = vdis.Sum(vdi => vdi.virtual_size);
+
             if (!vdiSizeUnlimited && vdiSize > DISK_MAX_SIZE)
+            {
+                cannotFitReason = string.Format(Messages.SR_DISKSIZE_EXCEEDS_DISK_MAX_SIZE,
+                    Util.DiskSizeString(DISK_MAX_SIZE, 0));
                 return false;
+            }
 
-            bool isThinlyProvisioned = sm != null && Array.IndexOf(sm.capabilities, "THIN_PROVISIONING") != -1;
-            if (!isThinlyProvisioned && vdiSize > FreeSpace())
+            if (IsFull())
+            {
+                cannotFitReason = Messages.SRPICKER_SR_FULL;
                 return false;
+            }
 
+            var isThinlyProvisioned = sm != null && Array.IndexOf(sm.capabilities, "THIN_PROVISIONING") != -1;
+            var vdiPhysicalUtilization = vdis.Sum(vdi => vdi.physical_utilisation);
+            var sizeToConsider = isThinlyProvisioned ? vdiPhysicalUtilization : vdiSize;
+
+            if (sizeToConsider > physical_size)
+            {
+                cannotFitReason = string.Format(Messages.SR_PICKER_DISK_TOO_BIG,
+                    Util.DiskSizeString(sizeToConsider, 2),
+                    Util.DiskSizeString(physical_size, 2));
+                return false;
+            }
+
+            var freeSpace = FreeSpace();
+
+            if (sizeToConsider > freeSpace)
+            {
+                cannotFitReason = string.Format(Messages.SR_PICKER_INSUFFICIENT_SPACE,
+                    Util.DiskSizeString(sizeToConsider, 2),
+                    Util.DiskSizeString(freeSpace, 2));
+
+                return false;
+            }
+
+            cannotFitReason = string.Empty;
             return true;
         }
 
@@ -879,23 +915,6 @@ namespace XenAPI
                 Util.DiskSizeString(physical_utilisation),
                 Util.DiskSizeString(physical_size),
                 Util.DiskSizeString(virtual_allocation));
-        }
-
-        /// <summary>
-        /// A friendly string indicating whether the sr is detached/broken/multipath failing/needs upgrade/ok
-        /// </summary>
-        public String StatusString()
-        {
-            if (!HasPBDs())
-                return Messages.DETACHED;
-
-            if (IsDetached() || IsBroken())
-                return Messages.GENERAL_SR_STATE_BROKEN;
-
-            if (!MultipathAOK())
-                return Messages.GENERAL_MULTIPATH_FAILURE;
-
-            return Messages.GENERAL_STATE_OK;
         }
 
         /// <summary>
