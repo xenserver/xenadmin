@@ -133,7 +133,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 if (coordinator)
                 {
                     Connection.SuppressErrors = true;
-
+                    Connection.PreventResettingPasswordPrompt = true;
                     //
                     // Wait for a disconnection
                     //
@@ -158,6 +158,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             finally
             {
                 Connection.SuppressErrors = false;
+                Connection.PreventResettingPasswordPrompt = false;
             }
             return session;
         }

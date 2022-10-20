@@ -98,6 +98,20 @@ namespace XenAdmin.Network
             set => _suppressErrors = value;
         }
 
+        
+        private volatile bool _preventResettingPasswordPrompt;
+
+        /// <summary>
+        /// The password prompting function (<see cref="_promptForNewPassword"/>) is set to null when the connection is closed.
+        /// Set this value to true in order to prevent that from happening.
+        /// n.b.: remember to set the value back to false once it's not needed anymore
+        /// </summary>
+        public bool PreventResettingPasswordPrompt
+        {
+            get => _preventResettingPasswordPrompt;
+            set => _preventResettingPasswordPrompt = value;
+        }
+
         /// <summary>
         /// Indicates whether we are expecting the pool coordinator to change soon (e.g. when explicitly designating a new coordinator).
         /// </summary>
@@ -767,8 +781,13 @@ namespace XenAdmin.Network
             {
                 ClearCache();
             }
-
-            _promptForNewPassword = null;
+            if (!PreventResettingPasswordPrompt)
+            {
+                // CA-371356: Preventing the reset of the prompt allows
+                // for it to be shown when attempting to reconnect to a host
+                // whose password has changed since last login
+                _promptForNewPassword = null;
+            }
             OnConnectionClosed();
         }
 
