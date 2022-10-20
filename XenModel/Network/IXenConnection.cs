@@ -67,6 +67,7 @@ namespace XenAdmin.Network
         List<string> PoolMembers { get; set; }
         void LoadCache(Session session);
         bool SuppressErrors { get; set; }
+        bool PreventResettingPasswordPrompt { get;set; }
         bool MasterMayChange { get; set; }
         bool SaveDisconnected { get; set; }
         string HostnameWithPort { get; }
