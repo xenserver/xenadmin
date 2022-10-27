@@ -188,7 +188,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                 VmMappings = m_vmMappings,
                 Connection = selection.GetConnectionOfFirstItem()
             };
-            m_pageDestination.SetDefaultTarget(hostPreSelection);
+            m_pageDestination.SelectedTarget = hostPreSelection;
 
             m_pageStorage = new CrossPoolMigrateStoragePage(wizardMode);
             m_pageNetwork = new CrossPoolMigrateNetworkingPage(HasTemplatesOnly, wizardMode);
@@ -350,7 +350,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                 RemovePage(m_pageTransferNetwork);
                 RemovePage(m_pageTargetRbac);
                 m_vmMappings = m_pageDestination.VmMappings;
-                TargetConnection = m_pageDestination.ChosenItem?.Connection;
+                TargetConnection = m_pageDestination.SelectedTargetPool?.Connection;
                 m_pageStorage.TargetConnection = TargetConnection;
                 m_pageNetwork.TargetConnection = TargetConnection;
 
