@@ -59,11 +59,10 @@
                             <!-- XenCenter EXE -->
                             <File Id="XenCenterEXE" Source="$(env.RepoRoot)\XenAdmin\bin\Release\$(var.BrandConsoleNoSpace).exe" KeyPath="yes" />
                             <!-- other EXEs -->
-                            <File Id="XenCenterMainEXE" Source="$(env.RepoRoot)\XenAdmin\bin\Release\$(var.BrandConsoleNoSpace)Main.exe" />
                             <File Id="XeEXE" Source="$(env.RepoRoot)\xe\bin\Release\xe.exe" />
                             <File Id="xva_verifyEXE" Source="$(env.RepoRoot)\xva_verify\bin\Release\xva_verify.exe" />
                             <!-- config -->
-                            <File Id="XenCenterMainCONFIG" Source="$(env.RepoRoot)\XenAdmin\bin\Release\$(var.BrandConsoleNoSpace)Main.exe.config" />
+                            <File Id="XenCenterCONFIG" Source="$(env.RepoRoot)\XenAdmin\bin\Release\$(var.BrandConsoleNoSpace).exe.config" />
                             <!-- DLLs -->
                             <File Id="CommandLibDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\CommandLib.dll" />
                             <File Id="CookComputingDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\CookComputing.XmlRpcV2.dll" />
@@ -126,7 +125,7 @@
                         </Component>
                         <Directory Id="ja" Name="ja">
                             <Component Id="JaResources" Guid="$(var.JapaneseResxGuid)">
-                                <File Id="JaResourcesDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\ja\$(var.BrandConsoleNoSpace)Main.resources.dll" />
+                                <File Id="JaResourcesDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\ja\$(var.BrandConsoleNoSpace).resources.dll" />
                                 <File Id="JaXenModResourcesDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\ja\XenModel.resources.dll" />
                                 <File Id="JaMicRepVwrCmnResDLL" Source="$(env.RepoRoot)\XenAdmin\ReportViewer\Microsoft.ReportViewer.Common.resources.dll" />
                                 <File Id="JaMicRepVwrPrcObjResDLL" Source="$(env.RepoRoot)\XenAdmin\ReportViewer\Microsoft.ReportViewer.WinForms.resources.dll" />
@@ -135,7 +134,7 @@
                         </Directory>
                         <Directory Id="sc" Name="zh-CN">
                             <Component Id="ScResources" Guid="$(var.SimplifiedChineseResxGuid)">
-                                <File Id="ScResourcesDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\zh-CN\$(var.BrandConsoleNoSpace)Main.resources.dll" />
+                                <File Id="ScResourcesDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\zh-CN\$(var.BrandConsoleNoSpace).resources.dll" />
                                 <File Id="ScXenModResourcesDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\zh-CN\XenModel.resources.dll" />
                                 <File Id="ScMicRepVwrCmnResDLL" Source="$(env.RepoRoot)\XenAdmin\ReportViewer\Microsoft.ReportViewer.Common.resources.dll" />
                                 <File Id="ScMicRepVwrPrcObjResDLL" Source="$(env.RepoRoot)\XenAdmin\ReportViewer\Microsoft.ReportViewer.WinForms.resources.dll" />

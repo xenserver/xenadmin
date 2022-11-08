@@ -229,7 +229,7 @@
     <value>updateLogOptionsDecentGroupBox</value>
   </data>
   <data name="&gt;&gt;updateLogOptionsDecentGroupBox.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.DecentGroupBox, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.DecentGroupBox, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;updateLogOptionsDecentGroupBox.Parent" xml:space="preserve">
     <value>tableLayoutPanel3</value>
@@ -280,7 +280,7 @@
     <value>label5</value>
   </data>
   <data name="&gt;&gt;label5.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.Common.AutoHeightLabel, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.Common.AutoHeightLabel, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;label5.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -481,7 +481,7 @@
     <value>GraphTypeGroupBox</value>
   </data>
   <data name="&gt;&gt;GraphTypeGroupBox.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.DecentGroupBox, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.DecentGroupBox, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;GraphTypeGroupBox.Parent" xml:space="preserve">
     <value>tableLayoutPanel3</value>
@@ -589,7 +589,7 @@
     <value>TabGroupBox</value>
   </data>
   <data name="&gt;&gt;TabGroupBox.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.DecentGroupBox, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.DecentGroupBox, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;TabGroupBox.Parent" xml:space="preserve">
     <value>tableLayoutPanel3</value>

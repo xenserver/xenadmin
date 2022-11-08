@@ -61,7 +61,6 @@ using XenCenterLib;
 using System.Linq;
 using XenAdmin.Controls.GradientPanel;
 using XenAdmin.Help;
-using System.IO;
 
 namespace XenAdmin
 {
@@ -79,7 +78,7 @@ namespace XenAdmin
         /// <summary>
         /// The selected tab for the overview node.
         /// </summary>
-        private TabPage selectedOverviewTab = null;
+        private TabPage selectedOverviewTab;
 
         internal readonly PerformancePage PerformancePage = new PerformancePage();
         internal readonly GeneralTabPage GeneralPage = new GeneralTabPage();
@@ -105,22 +104,22 @@ namespace XenAdmin
         internal readonly DockerDetailsPage DockerDetailsPage = new DockerDetailsPage();
         internal readonly UsbPage UsbPage = new UsbPage();
 
-        private ActionBase statusBarAction = null;
+        private ActionBase statusBarAction;
 
-        private bool IgnoreTabChanges = false;
+        private bool IgnoreTabChanges;
 
         /// <summary>
         /// Helper boolean to only trigger Resize_End when window is really resized by dragging edges
         /// Without this Resize_End is triggered even when window is moved around and not resized
         /// </summary>
-        private bool mainWindowResized = false;
+        private bool mainWindowResized;
 
         private readonly Dictionary<IXenConnection, IList<Form>> activePoolWizards = new Dictionary<IXenConnection, IList<Form>>();
 
         /// <summary>
         /// The arguments passed in on the command line.
         /// </summary>
-        private string[] CommandLineParam = null;
+        private string[] CommandLineParam;
         private ArgType CommandLineArgType = ArgType.None;
 
         private static readonly System.Windows.Forms.Timer CheckForUpdatesTimer = new System.Windows.Forms.Timer();
@@ -144,9 +143,10 @@ namespace XenAdmin
         [DllImport("kernel32.dll", CharSet = CharSet.Auto)]
         static extern uint RegisterApplicationRestart(string pszCommandline, uint dwFlags);
 
+        public event Action CloseSplashRequested;
+
         public MainWindow(ArgType argType, string[] args)
         {
-            Program.MainWindow = this;
             licenseManagerLauncher = new LicenseManagerLauncher(Program.MainWindow);
             HealthCheckOverviewLauncher = new HealthCheckOverviewLauncher(Program.MainWindow);
             InvokeHelper.Initialize(this);
@@ -565,6 +565,16 @@ namespace XenAdmin
             statusLabel.Text = Helpers.FirstLine(message);
         }
 
+        public void CloseSplashScreen()
+        {
+            ThreadPool.QueueUserWorkItem(delegate
+            {
+                // Sleep a short time before closing the splash
+                Thread.Sleep(500);
+                Program.Invoke(Program.MainWindow, () => CloseSplashRequested?.Invoke());
+            });
+        }
+
         private void MainWindow_Shown(object sender, EventArgs e)
         {
             MainMenuBar.Location = new Point(0, 0);
@@ -598,12 +608,7 @@ namespace XenAdmin
                 }
             }
 
-            ThreadPool.QueueUserWorkItem(delegate
-            {
-                // Sleep a short time before closing the splash
-                Thread.Sleep(500);
-                Program.Invoke(Program.MainWindow, Program.CloseSplash);
-            });
+            CloseSplashScreen();
 
             if (!Program.RunInAutomatedTestMode && !Helpers.CommonCriteriaCertificationRelease)
             {

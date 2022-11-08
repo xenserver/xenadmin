@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>XenAdmin</RootNamespace>
-    <AssemblyName>[XenCenter_No_Space]Main</AssemblyName>
+    <AssemblyName>[XenCenter_No_Space]</AssemblyName>
     <ApplicationIcon>..\Branding\Images\AppIcon.ico</ApplicationIcon>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <PublishUrl>publish\</PublishUrl>
@@ -480,6 +480,12 @@
       <DependentUpon>WlbThresholdsPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Plugins\Features\ParentMenuItemFeature.cs" />
+    <Compile Include="SplashScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SplashScreen.Designer.cs">
+      <DependentUpon>SplashScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="TabPages\BaseTabPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -2138,6 +2144,15 @@
     <EmbeddedResource Include="SettingsPanels\Wlb\WlbThresholdsPage.resx">
       <SubType>Designer</SubType>
       <DependentUpon>WlbThresholdsPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SplashScreen.ja.resx">
+      <DependentUpon>SplashScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SplashScreen.resx">
+      <DependentUpon>SplashScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SplashScreen.zh-CN.resx">
+      <DependentUpon>SplashScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\AdPage.resx">
       <DependentUpon>AdPage.cs</DependentUpon>
@@ -6689,6 +6704,9 @@
     <None Include="Images\VMTemplate_h32bit_32.png" />
     <Content Include="Images\xcm.png" />
     <Content Include="Images\xcm_32x32.png" />
+    <None Include="..\Branding\Images\splash.bmp">
+      <Link>Images\splash.bmp</Link>
+    </None>
     <Content Include="TestResources\credits.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

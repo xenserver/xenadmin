@@ -169,10 +169,7 @@ namespace XenAdmin
                         return;
                     }
 
-                    // close the splash screen before opening the password dialog (the main window closes the
-                    // splash screen after this method is called, however, this cannot happen because the dialog
-                    // is launched modally blocking the UI thread and is additionally behind the splash screen)
-                    Program.CloseSplash();
+                    Program.MainWindow.CloseSplashScreen();
 
                     string password = null;
                     do

@@ -40,6 +40,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 using XenAdmin.Core;
@@ -61,8 +62,9 @@ namespace XenAdmin
         /// </summary>
         public static readonly string XenCenterUUID = Guid.NewGuid().ToString();
 
-        private static NamedPipes.Pipe pipe;
-        private const string PIPE_PATH_PATTERN = @"\\.\pipe\XenCenter-{0}-{1}-{2}";
+        private static NamedPipes.Pipe _pipe;
+        private static string _pipePath;
+        private const string PIPE_PATH_PATTERN = @"\\.\pipe\{0}-{1}";
 
         public static Font DefaultFont = FormFontFixer.DefaultFont;
         public static Font DefaultFontBold;
@@ -70,8 +72,7 @@ namespace XenAdmin
         public static Font DefaultFontItalic;
         public static Font DefaultFontHeader;
 
-        public static MainWindow MainWindow = null;
-
+        public static MainWindow MainWindow { get; private set; }
 
         public static CollectionChangeEventHandler ProgramInvokeHandler(CollectionChangeEventHandler handler)
         {
@@ -88,7 +89,6 @@ namespace XenAdmin
             };
         }
 
-
         /// <summary>
         /// The secure hash of the main password used to load the client session.
         /// If this is null then no prior session existed and the user should be prompted
@@ -104,7 +104,7 @@ namespace XenAdmin
 
         public static bool RunInAutomatedTestMode = false;
         public static string TestExceptionString;  // an exception passed back to the test framework
-        private static log4net.ILog log;
+        private static readonly log4net.ILog log;
 
         public static volatile bool Exiting;
 
@@ -133,6 +133,15 @@ namespace XenAdmin
         [STAThread]
         public static void Main(string[] args)
         {
+            string appGuid = ((GuidAttribute)Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(GuidAttribute), false).GetValue(0)).Value;
+            _pipePath = string.Format(PIPE_PATH_PATTERN, BrandManager.BrandConsoleNoSpace, appGuid);
+
+            if (NamedPipes.Pipe.ExistsPipe(_pipePath))
+            {
+                NamedPipes.Pipe.SendMessageToPipe(_pipePath, string.Join(" ", args));
+                return;
+            }
+
             Settings.Load();
 
             // Reset statics, because XenAdminTests likes to call Main() twice.
@@ -174,10 +183,7 @@ namespace XenAdmin
             LogSystemDetails();
             Settings.Log();
 
-            // Remove the '--wait' argument, which may have been passed to the splash screen
-            var sanitizedArgs = args.Where(ar => ar != "--wait").ToArray();
-
-            var firstArgType = ParseFileArgs(sanitizedArgs, out string[] tailArgs);
+            var firstArgType = ParseFileArgs(args, out string[] tailArgs);
 
             if (firstArgType == ArgType.Passwords)
             {
@@ -194,27 +200,20 @@ namespace XenAdmin
                 return;
             }
 
-            try
-            {
-                ConnectPipe();
-            }
-            catch (Win32Exception exn)
-            {
-                log.Error("Creating named pipe failed. Continuing to launch XenCenter.", exn);
-            }
+            ConnectPipe();
 
             Application.ApplicationExit -= Application_ApplicationExit;
             Application.ApplicationExit += Application_ApplicationExit;
 
-            MainWindow mainWindow = new MainWindow(firstArgType, tailArgs);
-            Application.Run(mainWindow);
+            MainWindow = new MainWindow(firstArgType, tailArgs);
+            Application.Run(new SplashScreenContext(MainWindow));
 
             log.Info("Application main thread exited");
         }
 
         private static ArgType ParseFileArgs(string[] args, out string[] tailArgs)
         {
-            tailArgs = new string[0];
+            tailArgs = Array.Empty<string>();
 
             if (args == null || args.Length < 2)
             {
@@ -259,84 +258,47 @@ namespace XenAdmin
         }
 
         /// <summary>
-        /// Connects to the XenCenter named pipe. If the pipe didn't already exist, a new thread is started
-        /// that listens for incoming data on the pipe (from new invocations of XenCenter) and deals
-        /// with the command line arguments of those instances. If the pipe does exist, a Win32Exception is thrown.
+        /// If the pipe doesn't already exist, it creates a new one and starts a thread
+        /// that listens for incoming data on the pipe (from new invocations of XenCenter)
+        /// and deals with the command line arguments of those instances.
         /// </summary>
-        /// <exception cref="Win32Exception">If creating the pipe failed for any reason.</exception>
         private static void ConnectPipe()
         {
-            string pipe_path = string.Format(PIPE_PATH_PATTERN, Process.GetCurrentProcess().SessionId, Environment.UserName, Assembly.GetExecutingAssembly().Location.Replace('\\', '-'));
+            _pipe = new NamedPipes.Pipe(_pipePath);
 
-            // Pipe path must be limited to 256 characters in length
-            if (pipe_path.Length > 256)
+            if (_pipe != null)
             {
-                pipe_path = pipe_path.Substring(0, 256);
+                _pipe.Read += pipe_Read;
+                _pipe.BeginRead();
             }
+        }
 
-            log.InfoFormat(@"Connecting to pipe '{0}'", pipe_path);
-            // Line below may throw Win32Exception
-            pipe = new NamedPipes.Pipe(pipe_path);
+        private static void pipe_Read(string message)
+        {
+            MainWindow m = MainWindow;
+            if (m == null || RunInAutomatedTestMode)
+                return;
 
-            log.InfoFormat(@"Successfully created pipe '{0}' - proceeding to launch XenCenter", pipe_path);
+            var bits = message.Split(' ').ToArray();
 
-            pipe.Read += delegate (object sender, NamedPipes.PipeReadEventArgs e)
+            var firstArgType = ParseFileArgs(bits, out string[] tailArgs);
+
+            if (firstArgType == ArgType.None)
+                return;
+
+            Invoke(m, delegate
             {
-                MainWindow m = MainWindow;
-                if (m == null || RunInAutomatedTestMode)
-                    return;
-
-                var bits = e.Message.Split(' ').Where(ar => ar != "--wait").ToArray();
-
-                var firstArgType = ParseFileArgs(bits, out string[] tailArgs);
-
-                if (firstArgType == ArgType.Passwords)
-                {
-                    log.ErrorFormat("Refusing to accept passwords request down pipe.  Use {0}Main.exe directly", BrandManager.BrandConsole.Replace(" ", ""));
-                    return;
-                }
-                if (firstArgType == ArgType.Connect)
-                {
-                    log.ErrorFormat("Connect not supported down pipe. Use {0}Main.exe directly", BrandManager.BrandConsole.Replace(" ", ""));
-                    return;
-                }
-                if (firstArgType == ArgType.None)
-                    return;
-
-                // The C++ splash screen passes its command line as a literal string.
-                // This means we will get an e.Message like
-                //      open "C:\Documents and Settings\foo.xva"
-                // INCLUDING the double quotes, thus we need to trim them
-
-                var argument = tailArgs[0];
-
-                if (argument.StartsWith("\""))
-                {
-                    var count = tailArgs.TakeWhile(t => !t.EndsWith("\"")).Count();
-                    if (count < tailArgs.Length)
-                        count++;
-                    argument = string.Join(" ", tailArgs.Take(count).ToArray());
-                }
-
-                argument = argument.Trim('"');
-
-                Invoke(m, delegate
-                {
-                    m.WindowState = FormWindowState.Normal;
-                    m.ProcessCommand(firstArgType, argument);
-                });
-            };
-
-            pipe.BeginRead();
-            // We created the pipe successfully - i.e. nobody was listening, so go ahead and start XenCenter
+                m.WindowState = FormWindowState.Normal;
+                m.ProcessCommand(firstArgType, tailArgs);
+            });
         }
 
         internal static void DisconnectPipe()
         {
-            if (pipe != null)
+            if (_pipe != null)
             {
                 log.Debug("Disconnecting from named pipe in Program.DisconnectPipe()");
-                ThreadPool.QueueUserWorkItem(state => pipe.Disconnect());
+                ThreadPool.QueueUserWorkItem(state => _pipe.EndRead());
             }
         }
 
@@ -803,22 +765,9 @@ namespace XenAdmin
         {
             return !Exiting && c != null && !c.Disposing && !c.IsDisposed && c.IsHandleCreated;
         }
+
         #endregion
 
-        private const string SplashWindowClass = "XenCenterSplash0001";
-
-        internal static void CloseSplash()
-        {
-            IntPtr hWnd = Win32.FindWindow(SplashWindowClass, null);
-
-            if (hWnd == IntPtr.Zero)
-                return;
-
-            if (!Win32.PostMessage(hWnd, Win32.WM_DESTROY, IntPtr.Zero, IntPtr.Zero))
-            {
-                log.Warn("PostMessage WM_DESTROY failed in CloseSplash()", new Win32Exception());
-            }
-        }
         public static void OpenURL(string url)
         {
             if (RunInAutomatedTestMode || string.IsNullOrEmpty(url))
@@ -845,6 +794,39 @@ namespace XenAdmin
         public static string VersionAndLanguage => $"{Version}.{CurrentLanguage}";
 
         public static CultureInfo CurrentCulture => Thread.CurrentThread.CurrentCulture;
+
+
+        private class SplashScreenContext : ApplicationContext
+        {
+            private readonly SplashScreen _splashScreen;
+            private readonly MainWindow _mainWindow;
+
+            public SplashScreenContext(MainWindow mainWindow)
+            {
+                _mainWindow = mainWindow;
+                _mainWindow.CloseSplashRequested += _mainWindow_CloseSplashRequested;
+                _mainWindow.FormClosed += mainWindow_FormClosed;
+
+                _splashScreen = new SplashScreen();
+                _splashScreen.ShowMainWindowRequested += _splashScreen_ShowMainWindowRequested;
+                _splashScreen.Show();
+            }
+
+            private void _splashScreen_ShowMainWindowRequested()
+            {
+                _mainWindow.Show();
+            }
+
+            private void _mainWindow_CloseSplashRequested()
+            {
+                _splashScreen.Close();
+            }
+
+            private void mainWindow_FormClosed(object s, FormClosedEventArgs args)
+            {
+                ExitThread();
+            }
+        }
     }
 
     public enum ArgType { Import, License, Restore, None, XenSearch, Passwords, Connect }
