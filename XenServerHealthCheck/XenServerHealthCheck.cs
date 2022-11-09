@@ -29,9 +29,11 @@
  * SUCH DAMAGE.
  */
 
+using System;
 using System.ServiceProcess;
 using System.Reflection;
 using System.IO;
+using XenAdmin.Core;
 
 namespace XenServerHealthCheck
 {
@@ -42,7 +44,13 @@ namespace XenServerHealthCheck
         /// </summary>
         static void Main()
         {
+            log4net.GlobalContext.Properties["HEALTHCHECK_LOG"] = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData),
+                BrandManager.CompanyNameShort,
+                "XenServerHealthCheck\\logs\\XenServerHealthCheck.log");
+            
             log4net.Config.XmlConfigurator.ConfigureAndWatch(new FileInfo(Assembly.GetCallingAssembly().Location + ".config"));
+
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[] 
 			{ 

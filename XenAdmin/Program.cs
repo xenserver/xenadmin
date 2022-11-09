@@ -119,6 +119,16 @@ namespace XenAdmin
                 LogApplicationStats();
             }, null, new TimeSpan(24, 0, 0), new TimeSpan(24, 0, 0));
 
+            var logFolder = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                BrandManager.CompanyNameShort,
+                BrandManager.BrandConsoleNoSpace,
+                "logs");
+            
+            log4net.GlobalContext.Properties["LOG_FILE"] = Path.Combine(logFolder, $"{BrandManager.BrandConsoleNoSpace}.log");
+            log4net.GlobalContext.Properties["AUDIT_TRAIL"] = Path.Combine(logFolder, $"{BrandManager.BrandConsoleNoSpace}-AuditTrail.log");
+            log4net.GlobalContext.Properties["NETWORK_TRACE"] = Path.Combine(logFolder, $"{BrandManager.BrandConsoleNoSpace}-NetworkTrace.log");
+
             log4net.Config.XmlConfigurator.ConfigureAndWatch(new FileInfo(Assembly.GetCallingAssembly().Location + ".config"));
             log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 

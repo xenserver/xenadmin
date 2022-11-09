@@ -62,7 +62,6 @@ do
   version_csharp ${assemblyInfo} && rebranding_global ${assemblyInfo}
 done
 
-rebranding_global ${REPO}/XenAdmin/app.config
 rebranding_global ${REPO}/XenAdmin/XenAdmin.csproj
 
 #XenModel
@@ -83,8 +82,5 @@ sed -b -i -e "s/@AUTOGEN_PRODUCT_GUID@/${PRODUCT_GUID}/g" \
 #XenAdminTests
 rebranding_global ${REPO}/XenAdminTests/TestResources/ContextMenuBuilderTestResults.xml
 rebranding_global ${REPO}/XenAdminTests/XenAdminTests.csproj
-
-#XenServerHealthCheck
-rebranding_global ${REPO}/XenServerHealthCheck/app.config
 
 set +u
