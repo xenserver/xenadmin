@@ -116,11 +116,8 @@ namespace XenAdmin
 
         private readonly Dictionary<IXenConnection, IList<Form>> activePoolWizards = new Dictionary<IXenConnection, IList<Form>>();
 
-        /// <summary>
-        /// The arguments passed in on the command line.
-        /// </summary>
-        private string[] CommandLineParam;
-        private ArgType CommandLineArgType = ArgType.None;
+        private string[] _commandLineArgs;
+        private bool _launched;
 
         private static readonly System.Windows.Forms.Timer CheckForUpdatesTimer = new System.Windows.Forms.Timer();
 
@@ -145,8 +142,9 @@ namespace XenAdmin
 
         public event Action CloseSplashRequested;
 
-        public MainWindow(ArgType argType, string[] args)
+        public MainWindow(string[] args)
         {
+            _commandLineArgs = args;
             licenseManagerLauncher = new LicenseManagerLauncher(Program.MainWindow);
             HealthCheckOverviewLauncher = new HealthCheckOverviewLauncher(Program.MainWindow);
             InvokeHelper.Initialize(this);
@@ -215,9 +213,6 @@ namespace XenAdmin
             TaskCollectionChangedWithInvoke = Program.ProgramInvokeHandler(MeddlingActionManager.TaskCollectionChanged);
 
             RegisterEvents();
-
-            CommandLineArgType = argType;
-            CommandLineParam = args;
 
             PluginManager = new PluginManager();
             PluginManager.PluginsChanged += pluginManager_PluginsChanged;
@@ -654,7 +649,7 @@ namespace XenAdmin
                 healthCheckResultTimer.Start();
             }
 
-            ProcessCommand(CommandLineArgType, CommandLineParam);
+            ProcessCommand(_commandLineArgs);
         }
 
         private void CheckForUpdatesTimer_Tick(object sender, EventArgs e)
@@ -716,64 +711,72 @@ namespace XenAdmin
                 ShowForm(typeof(AboutDialog));
         }
 
-        private bool Launched = false;
-        internal void ProcessCommand(ArgType argType, params string[] args)
+        #region Commnad line args processing
+
+        internal void ProcessCommand(params string[] args)
         {
-            switch (argType)
+            if (args != null && args.Length > 1)
             {
-                case ArgType.Import:
-                    log.DebugFormat("Importing VM export from {0}", args[0]);
-                    OpenGlobalImportWizard(args[0]);
-                    break;
-                case ArgType.License:
-                    log.DebugFormat("Installing license from {0}", args[0]);
-                    LaunchLicensePicker(args[0]);
-                    break;
-                case ArgType.Restore:
-                    log.DebugFormat("Restoring host backup from {0}", args[0]);
-                    new RestoreHostFromBackupCommand(this, null, args[0]).Run();
-                    break;
-                case ArgType.XenSearch:
-                    log.DebugFormat("Importing saved XenSearch from '{0}'", args[0]);
-                    new ImportSearchCommand(this, args[0]).Run();
-                    break;
-                case ArgType.Connect:
-                    log.DebugFormat("Connecting to server '{0}'", args[0]);
-
-                    var connection = new XenConnection
-                    {
-                        Hostname = args[0],
-                        Port = ConnectionsManager.DEFAULT_XEN_PORT,
-                        Username = args.Length > 1 ? args[1] : "",
-                        Password = args.Length > 2 ? args[2] : ""
-                    };
-
-                    if (ConnectionsManager.XenConnectionsContains(connection))
+                switch (args[0])
+                {
+                    case "import":
+                        log.DebugFormat("CLI: Importing VM export from {0}", args[1]);
+                        OpenGlobalImportWizard(args[1]);
                         break;
+                    case "license":
+                        log.DebugFormat("CLI: Installing license from {0}", args[1]);
+                        LaunchLicensePicker(args[1]);
+                        break;
+                    case "restore":
+                        log.DebugFormat("CLI: Restoring host backup from {0}", args[1]);
+                        new RestoreHostFromBackupCommand(this, null, args[1]).Run();
+                        break;
+                    case "search":
+                        log.DebugFormat("CLI: Importing saved XenSearch from '{0}'", args[1]);
+                        new ImportSearchCommand(this, args[1]).Run();
+                        break;
+                    case "connect":
+                        log.DebugFormat("CLI: Connecting to server '{0}'", args[1]);
 
-                    lock (ConnectionsManager.ConnectionsLock)
-                        ConnectionsManager.XenConnections.Add(connection);
+                        var connection = new XenConnection
+                        {
+                            Hostname = args[1],
+                            Port = ConnectionsManager.DEFAULT_XEN_PORT,
+                            Username = args.Length > 2 ? args[2] : "",
+                            Password = args.Length > 3 ? args[3] : ""
+                        };
 
-                    XenConnectionUI.BeginConnect(connection, true, null, false);
-                    break;
-                case ArgType.None:
-                    if (Launched)
-                    {
-                        // The user has launched the splash screen, but we're already running.
-                        // Draw their attention.
-                        HelpersGUI.BringFormToFront(this);
-                        Activate();
-                    }
-                    break;
-                case ArgType.Passwords:
-                    Trace.Assert(false);
-                    break;
+                        if (ConnectionsManager.XenConnectionsContains(connection))
+                            break;
+
+                        lock (ConnectionsManager.ConnectionsLock)
+                            ConnectionsManager.XenConnections.Add(connection);
+
+                        XenConnectionUI.BeginConnect(connection, true, null, false);
+                        break;
+                    default:
+                        log.Warn("CLI: Wrong syntax or unknown command line options.");
+                        break;
+                }
             }
-            Launched = true;
+
+            if (_launched)
+            {
+                // if already running, draw the user's attention
+                HelpersGUI.BringFormToFront(this);
+                Activate();
+            }
+
+            _launched = true;
         }
 
-        // Manages UI and network updates whenever hosts are added and removed
-        void XenConnection_CollectionChanged(object sender, CollectionChangeEventArgs e)
+        #endregion
+
+
+        /// <summary>
+        /// Manages UI and network updates whenever hosts are added and removed
+        /// </summary>
+        private void XenConnection_CollectionChanged(object sender, CollectionChangeEventArgs e)
         {
             if (Program.Exiting)
                 return;
@@ -781,8 +784,7 @@ namespace XenAdmin
             //Program.AssertOnEventThread();
             Program.BeginInvoke(Program.MainWindow, () => XenConnectionCollectionChanged(e));
         }
-
-
+        
         private readonly CollectionChangeEventHandler PoolCollectionChangedWithInvoke = null;
         private readonly CollectionChangeEventHandler MessageCollectionChangedWithInvoke = null;
         private readonly CollectionChangeEventHandler HostCollectionChangedWithInvoke = null;

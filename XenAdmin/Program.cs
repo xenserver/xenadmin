@@ -183,78 +183,15 @@ namespace XenAdmin
             LogSystemDetails();
             Settings.Log();
 
-            var firstArgType = ParseFileArgs(args, out string[] tailArgs);
-
-            if (firstArgType == ArgType.Passwords)
-            {
-                try
-                {
-                    PasswordsRequest.HandleRequest(tailArgs[0]);
-                }
-                catch (Exception exn)
-                {
-                    log.Fatal(exn, exn);
-                }
-
-                Application.Exit();
-                return;
-            }
-
             ConnectPipe();
 
             Application.ApplicationExit -= Application_ApplicationExit;
             Application.ApplicationExit += Application_ApplicationExit;
 
-            MainWindow = new MainWindow(firstArgType, tailArgs);
+            MainWindow = new MainWindow(args);
             Application.Run(new SplashScreenContext(MainWindow));
 
             log.Info("Application main thread exited");
-        }
-
-        private static ArgType ParseFileArgs(string[] args, out string[] tailArgs)
-        {
-            tailArgs = Array.Empty<string>();
-
-            if (args == null || args.Length < 2)
-            {
-                log.Warn("Too few args passed in via command line");
-                return ArgType.None;
-            }
-
-            var firstArgType = ArgType.None;
-
-            switch (args[0])
-            {
-                case "import":
-                    firstArgType = ArgType.Import;
-                    break;
-                case "license":
-                    firstArgType = ArgType.License;
-                    break;
-                case "restore":
-                    firstArgType = ArgType.Restore;
-                    break;
-                case "search":
-                    firstArgType = ArgType.XenSearch;
-                    break;
-                case "passwords":
-                    firstArgType = ArgType.Passwords;
-                    break;
-                case "connect":
-                    firstArgType = ArgType.Connect;
-                    break;
-                default:
-                    log.Warn("Wrong syntax or unknown command line options.");
-                    break;
-            }
-
-            if (firstArgType != ArgType.None)
-            {
-                log.InfoFormat("Command line option passed in: {0}", firstArgType.ToString());
-                tailArgs = args.Skip(1).ToArray();
-            }
-
-            return firstArgType;
         }
 
         /// <summary>
@@ -276,21 +213,15 @@ namespace XenAdmin
         private static void pipe_Read(string message)
         {
             MainWindow m = MainWindow;
-            if (m == null || RunInAutomatedTestMode)
-                return;
-
-            var bits = message.Split(' ').ToArray();
-
-            var firstArgType = ParseFileArgs(bits, out string[] tailArgs);
-
-            if (firstArgType == ArgType.None)
-                return;
-
-            Invoke(m, delegate
+            
+            if (m != null && !RunInAutomatedTestMode)
             {
-                m.WindowState = FormWindowState.Normal;
-                m.ProcessCommand(firstArgType, tailArgs);
-            });
+                Invoke(m, delegate
+                {
+                    m.WindowState = FormWindowState.Normal;
+                    m.ProcessCommand(message.Split(' ').ToArray());
+                });
+            }
         }
 
         internal static void DisconnectPipe()
@@ -828,6 +759,4 @@ namespace XenAdmin
             }
         }
     }
-
-    public enum ArgType { Import, License, Restore, None, XenSearch, Passwords, Connect }
 }

@@ -682,12 +682,6 @@
     <Compile Include="Dialogs\Network\UnknownCertificateDialog.Designer.cs">
       <DependentUpon>UnknownCertificateDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\PasswordsRequestDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\PasswordsRequestDialog.Designer.cs">
-      <DependentUpon>PasswordsRequestDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\VmSnapshotDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -711,7 +705,6 @@
     </Compile>
     <Compile Include="Images.cs" />
     <Compile Include="Network\SSL.cs" />
-    <Compile Include="PasswordsRequest.cs" />
     <Compile Include="Plugins\PluginDescriptor.cs" />
     <Compile Include="Plugins\PluginManager.cs" />
     <Compile Include="RDP\AxMSTSCLib.cs">
@@ -2039,10 +2032,6 @@
     <EmbeddedResource Include="Dialogs\Network\UnknownCertificateDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>UnknownCertificateDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\PasswordsRequestDialog.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>PasswordsRequestDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\VmSnapshotDialog.resx">
       <SubType>Designer</SubType>
@@ -5388,12 +5377,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\OptionsPages\UpdatesOptionsPage.zh-CN.resx">
       <DependentUpon>UpdatesOptionsPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\PasswordsRequestDialog.ja.resx">
-      <DependentUpon>PasswordsRequestDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\PasswordsRequestDialog.zh-CN.resx">
-      <DependentUpon>PasswordsRequestDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\PropertiesDialog.ja.resx">
       <DependentUpon>PropertiesDialog.cs</DependentUpon>
