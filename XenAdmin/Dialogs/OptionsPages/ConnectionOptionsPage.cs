@@ -257,7 +257,7 @@ namespace XenAdmin.Dialogs.OptionsPages
             if (timeout != Properties.Settings.Default.ConnectionTimeout)
                 Properties.Settings.Default.ConnectionTimeout = timeout;
 
-            Program.ReconfigureConnectionSettings();
+            Settings.ReconfigureProxyAuthenticationSettings();
 
             Core.HealthCheck.SendProxySettingsToHealthCheck();
         }              

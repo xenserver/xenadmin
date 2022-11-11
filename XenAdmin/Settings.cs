@@ -31,15 +31,17 @@
 
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
+using System.Linq;
+using System.Net;
 using System.Windows.Forms;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
 using XenAdmin.Dialogs.RestoreSession;
 using XenAdmin.Network;
-using System.Configuration;
-using System.IO;
+using XenAPI;
 using XenCenterLib;
-using System.Linq;
 
 
 namespace XenAdmin
@@ -47,6 +49,15 @@ namespace XenAdmin
     public static class Settings
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+        /// <summary>
+        /// Module for authenticating with proxy server using the Basic authentication scheme.
+        /// </summary>
+        private static IAuthenticationModule BasicAuthenticationModule;
+        /// <summary>
+        /// Module for authenticating with proxy server using the Digest authentication scheme.
+        /// </summary>
+        private static IAuthenticationModule DigestAuthenticationModule;
 
         /// <summary>
         /// Used in place of the username, to indicate that a record is for a VM's VNC connection, rather
@@ -67,6 +78,26 @@ namespace XenAdmin
         /// vm_uuid -> password.  The password may be null if it's been deleted.
         /// </summary>
         private static Dictionary<string, string> VNCPasswords = new Dictionary<string, string>();
+
+
+        static Settings()
+        {
+            // Store the Basic and Digest authentication modules, used for proxy server authentication, 
+            // for later use; this is needed because we cannot create new instances of them and it 
+            // saves us needing to create our own custom authentication modules.
+
+            var authModules = AuthenticationManager.RegisteredModules;
+            while (authModules.MoveNext())
+            {
+                if (!(authModules.Current is IAuthenticationModule module))
+                    continue;
+
+                if (module.AuthenticationType == "Basic")
+                    BasicAuthenticationModule = module;
+                else if (module.AuthenticationType == "Digest")
+                    DigestAuthenticationModule = module;
+            }
+        }
 
         /// <summary>
         /// MSDN info regarding the path to the user.config file is somewhat confusing.
@@ -701,10 +732,55 @@ namespace XenAdmin
             log.Info($"=== IgnoreOvfValidationWarnings: {Properties.Settings.Default.IgnoreOvfValidationWarnings}");
         }
 
+        public static void Load()
+        {
+            string appVersionString = Program.Version.ToString();
+            log.InfoFormat("Application version of current settings {0}", appVersionString);
+
+            try
+            {
+                if (Properties.Settings.Default.ApplicationVersion != appVersionString)
+                {
+                    log.Info("Upgrading settings...");
+                    Properties.Settings.Default.Upgrade();
+
+                    // if program's hash has changed (e.g. by upgrading to .NET 4.0), then Upgrade() doesn't import the previous application settings 
+                    // because it cannot locate a previous user.config file. In this case a new user.config file is created with the default settings.
+                    // We will try and find a config file from a previous installation and update the settings from it
+
+                    if (Properties.Settings.Default.ApplicationVersion == "" && Properties.Settings.Default.DoUpgrade)
+                        UpgradeFromPreviousInstallation();
+
+                    log.InfoFormat("Settings upgraded from '{0}' to '{1}'", Properties.Settings.Default.ApplicationVersion, appVersionString);
+                    Properties.Settings.Default.ApplicationVersion = appVersionString;
+                    TrySaveSettings();
+                }
+            }
+            catch (ConfigurationErrorsException ex)
+            {
+                log.Error("Could not load settings.", ex);
+                var msg = string.Format("{0}\n\n{1}", Messages.MESSAGEBOX_LOAD_CORRUPTED_TITLE,
+                                        string.Format(Messages.MESSAGEBOX_LOAD_CORRUPTED, GetUserConfigPath()));
+                using (var dlg = new ErrorDialog(msg)
+                {
+                    StartPosition = FormStartPosition.CenterScreen,
+                    //For reasons I do not fully comprehend at the moment, the runtime
+                    //overrides the above StartPosition with WindowsDefaultPosition if
+                    //ShowInTaskbar is false. However it's a good idea anyway to show it
+                    //in the taskbar since the main form is not launched at this point.
+                    ShowInTaskbar = true
+                })
+                {
+                    dlg.ShowDialog();
+                }
+                Application.Exit();
+            }
+        }
+
         /// <summary>
         /// Looks for a config file from a previous installation of the application and updates the settings from it.
         /// </summary>
-        public static void UpgradeFromPreviousInstallation()
+        private static void UpgradeFromPreviousInstallation()
         {
             try
             {
@@ -766,6 +842,35 @@ namespace XenAdmin
             {
                 log.Debug("Exception while updating settings.", ex);
             }
+        }
+
+        /// <summary>
+        /// Configures .NET's AuthenticationManager to only use the authentication module that is 
+        /// specified in the ProxyAuthenticationMethod setting. Also sets XenAPI's HTTP class to 
+        /// use the same authentication method.
+        /// </summary>
+        public static void ReconfigureProxyAuthenticationSettings()
+        {
+            var authModules = AuthenticationManager.RegisteredModules;
+            var modulesToUnregister = new List<IAuthenticationModule>();
+
+            while (authModules.MoveNext())
+            {
+                var module = (IAuthenticationModule)authModules.Current;
+                modulesToUnregister.Add(module);
+            }
+
+            foreach (var module in modulesToUnregister)
+                AuthenticationManager.Unregister(module);
+
+            var authSetting = (HTTP.ProxyAuthenticationMethod)Properties.Settings.Default.ProxyAuthenticationMethod;
+            if (authSetting == HTTP.ProxyAuthenticationMethod.Basic)
+                AuthenticationManager.Register(BasicAuthenticationModule);
+            else
+                AuthenticationManager.Register(DigestAuthenticationModule);
+
+            HTTP.CurrentProxyAuthenticationMethod = authSetting;
+            Session.Proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(null);
         }
     }
 }
