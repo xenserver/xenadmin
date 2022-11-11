@@ -98,7 +98,7 @@ namespace XenAdmin.Commands
                     ConnectionsManager.XenConnections.Add(connection);
                 }
 
-                Program.HideObject(opaque_ref);
+                XenAdminConfigManager.Provider.HideObject(opaque_ref);
 
                 var action = new EjectHostFromPoolAction(pool, host);
                 action.Completed += delegate
@@ -109,7 +109,7 @@ namespace XenAdmin.Commands
                     }
                     else
                     {
-                        Program.ShowObject(opaque_ref);
+                        XenAdminConfigManager.Provider.ShowObject(opaque_ref);
                         MainWindowCommandInterface.RemoveConnection(connection);
                     }
                 };

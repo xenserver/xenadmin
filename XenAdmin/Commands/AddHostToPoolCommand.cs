@@ -226,11 +226,11 @@ namespace XenAdmin.Commands
                             });
                         }
                     });
-                action.Completed += s => Program.ShowObject(opaque_ref);
+                action.Completed += s => XenAdminConfigManager.Provider.ShowObject(opaque_ref);
                 actions.Add(action);
 
                 // hide connection. If the action fails, re-show it.
-                Program.HideObject(opaque_ref);
+                XenAdminConfigManager.Provider.HideObject(opaque_ref);
             }
 
             RunMultipleActions(actions, string.Format(Messages.ADDING_SERVERS_TO_POOL, _pool.Name()), Messages.POOLCREATE_ADDING, Messages.POOLCREATE_ADDED, true);

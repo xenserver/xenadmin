@@ -50,6 +50,9 @@ namespace XenAdmin
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
+        private static readonly List<string> _hiddenObjects = new List<string>();
+        private static readonly object _hiddenObjectsLock = new object();
+
         public Func<List<Role>, IXenConnection, string, AsyncAction.SudoElevationResult> ElevatedSessionDelegate => GetElevatedSession;
 
         public int ConnectionTimeout => Properties.Settings.Default.ConnectionTimeout;
@@ -148,19 +151,26 @@ namespace XenAdmin
             return timeout ? XenAdmin.Properties.Settings.Default.HttpTimeout : 0;
         }
 
-        public void ShowObject(string newVMRef)
+        public void ShowObject(string opaqueRef)
         {
-            Program.ShowObject(newVMRef);
+            lock (_hiddenObjectsLock)
+                _hiddenObjects.Remove(opaqueRef);
+
+            Program.MainWindow?.RequestRefreshTreeView();
         }
 
-        public void HideObject(string newVMRef)
+        public void HideObject(string opaqueRef)
         {
-            Program.HideObject(newVMRef);
+            lock (_hiddenObjectsLock)
+                _hiddenObjects.Add(opaqueRef);
+
+            Program.MainWindow?.RequestRefreshTreeView();
         }
 
         public bool ObjectIsHidden(string opaqueRef)
         {
-            return Program.ObjectIsHidden(opaqueRef);
+            lock (_hiddenObjectsLock)
+                return _hiddenObjects.Contains(opaqueRef);
         }
 
         public string GetLogFile()

@@ -683,40 +683,6 @@ namespace XenAdmin
             return null;
         }
 
-        private static readonly List<string> HiddenObjects = new List<string>();
-
-        internal static void HideObject(string opaqueRef)
-        {
-            lock (HiddenObjects)
-            {
-                HiddenObjects.Add(opaqueRef);
-            }
-            if (MainWindow != null)
-            {
-                MainWindow.RequestRefreshTreeView();
-            }
-        }
-
-        internal static void ShowObject(string opaqueRef)
-        {
-            lock (HiddenObjects)
-            {
-                HiddenObjects.Remove(opaqueRef);
-            }
-            if (MainWindow != null)
-            {
-                MainWindow.RequestRefreshTreeView();
-            }
-        }
-
-        internal static bool ObjectIsHidden(string opaqueRef)
-        {
-            lock (HiddenObjects)
-            {
-                return HiddenObjects.Contains(opaqueRef);
-            }
-        }
-
         #region Invocations
 
         /// <summary>
