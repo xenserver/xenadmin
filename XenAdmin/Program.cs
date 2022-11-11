@@ -73,17 +73,6 @@ namespace XenAdmin
         private static NamedPipes.Pipe pipe;
         private const string PIPE_PATH_PATTERN = @"\\.\pipe\XenCenter-{0}-{1}-{2}";
 
-        /// <summary>
-        /// Color.Transparent on most platforms; SystemColors.Window when ClearType is enabled.
-        /// This is to work around a bug in TextRenderer.DrawText which causes text written to a double-buffer
-        /// using ClearType to anti-alias onto black rather than onto the background colour.  In this case,
-        /// we use Window, because by luck those labels are always on top of that colour on Vista and XP.
-        /// We indicate that we're writing to a buffer (rather than the screen) by setting Graphics.TextContrast
-        /// to 5 (the default is 4). This hack was needed because there's no easy way to add info to
-        /// a Graphics object. (CA-22938).
-        /// </summary>
-        public static Color TransparentUsually = Color.Transparent;
-
         public static Font DefaultFont = FormFontFixer.DefaultFont;
         public static Font DefaultFontBold;
         public static Font DefaultFontUnderline;
@@ -217,17 +206,6 @@ namespace XenAdmin
             Application.EnableVisualStyles();
 
             Application.SetCompatibleTextRenderingDefault(false);
-
-            try
-            {
-                if (SystemInformation.FontSmoothingType == 2) // ClearType
-                    TransparentUsually = SystemColors.Window;
-            }
-            catch (NotSupportedException)
-            {
-                // Leave TransparentUsually == Color.Transparent.  This is an old platform
-                // without FontSmoothingType support.
-            }
 
             // Force the current culture, to make the layout the same whatever the culture of the underlying OS (CA-46983).
             Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture = new CultureInfo(InvisibleMessages.LOCALE, false);
