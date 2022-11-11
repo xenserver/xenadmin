@@ -149,6 +149,10 @@ namespace XenAdmin
             HealthCheckOverviewLauncher = new HealthCheckOverviewLauncher(Program.MainWindow);
             InvokeHelper.Initialize(this);
 
+            ConnectionsManager.XenConnections.Clear();
+            ConnectionsManager.History.Clear();
+            Search.InitSearch();
+
             InitializeComponent();
             SetMenuItemStartIndexes();
             Icon = Properties.Resources.AppIcon;
@@ -2281,8 +2285,6 @@ namespace XenAdmin
                         form.Close();
                     }
 
-                    // Disconnect the named pipe
-                    Program.DisconnectPipe();
                     foreach (ActionBase a in ConnectionsManager.History)
                     {
                         if(!Program.RunInAutomatedTestMode)
@@ -2307,12 +2309,8 @@ namespace XenAdmin
                 return;
             }
 
-            // Disconnect the named pipe
-            Program.DisconnectPipe();
-
             Properties.Settings.Default.WindowSize = this.Size;
             Properties.Settings.Default.WindowLocation = this.Location;
-            Settings.SaveServerList(); //this calls Settings.TrySaveSettings()
             base.OnClosing(e);
         }
 
@@ -2675,7 +2673,7 @@ namespace XenAdmin
                 }
 
                 i++;
-                System.Threading.Thread.Sleep(500);
+                Thread.Sleep(500);
             }
         }
 

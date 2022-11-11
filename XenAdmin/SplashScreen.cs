@@ -38,6 +38,8 @@ namespace XenAdmin
     {
         public event Action ShowMainWindowRequested;
 
+        public volatile bool AllowToClose;
+
         public SplashScreen()
         {
             InitializeComponent();
@@ -52,6 +54,9 @@ namespace XenAdmin
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            if (!AllowToClose)
+                return;
+
             timer1.Stop();
             ShowMainWindowRequested?.Invoke();
         }

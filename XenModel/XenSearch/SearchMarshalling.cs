@@ -297,7 +297,7 @@ namespace XenAdmin.XenSearch
             document.XmlResolver = new BasicXMLResolver();
 
             document.AppendChild(document.CreateXmlDeclaration("1.0", Encoding.UTF8.WebName, null));
-            document.AppendChild(document.CreateDocumentType(Search.BrandedSearchKey, "-//" + Search.BrandedSearchKey.ToUpper() + "//DTD " + Search.BrandedSearchKey.ToUpper() + " 1//EN", Search.BrandedSearchKey + "-1.dtd", null));
+            document.AppendChild(document.CreateDocumentType(BrandManager.ExtensionSearch, "-//" + BrandManager.ExtensionSearch.ToUpper() + "//DTD " + BrandManager.ExtensionSearch.ToUpper() + " 1//EN", BrandManager.ExtensionSearch + "-1.dtd", null));
 
             XmlNode node = document.CreateElement("Searches");
             AddAttribute(document, node, "xmlns", xmlns);

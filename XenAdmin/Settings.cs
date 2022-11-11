@@ -388,21 +388,26 @@ namespace XenAdmin
                 }
             }
 
+            var needToSave = false;
             // avoid updating settings if they haven't changed
             if (customSshClient != Properties.Settings.Default.CustomSshConsole)
             {
                 Properties.Settings.Default.CustomSshConsole = customSshClient;
+                needToSave = true;
             }
             if (puttyLocation != null && !puttyLocation.Equals(Properties.Settings.Default.PuttyLocation))
             {
                 Properties.Settings.Default.PuttyLocation = puttyLocation;
+                needToSave = true;
             }
             if (openSshLocation != null && !openSshLocation.Equals(Properties.Settings.Default.OpenSSHLocation))
             {
                 Properties.Settings.Default.OpenSSHLocation = openSshLocation;
+                needToSave = true;
             }
 
-            TrySaveSettings();
+            if (needToSave)
+                TrySaveSettings();
         }
 
         private static void AddConnection(IXenConnection connection)
@@ -465,16 +470,17 @@ namespace XenAdmin
             {
                 Properties.Settings.Default.Save();
             }
-            catch (ConfigurationErrorsException ex)
+            catch (Exception ex)
             {
-                // Show a warning to the user and exit the application.
-                using (var dlg = new ErrorDialog(string.Format(Messages.MESSAGEBOX_SAVE_CORRUPTED, Settings.GetUserConfigPath()))
+                //catch all as ConfigurationErrorsException does not account for all errors that may happen
+                log.Error("Could not save settings. Exiting application.", ex);
+
+                using (var dlg = new ErrorDialog(string.Format(Messages.MESSAGEBOX_SAVE_CORRUPTED, GetUserConfigPath()))
                     {WindowTitle = Messages.MESSAGEBOX_SAVE_CORRUPTED_TITLE})
                 {
                     dlg.ShowDialog(Program.MainWindow);
                 }
 
-                log.Error("Could not save settings. Exiting application.", ex);
                 Application.Exit();
             }
 
@@ -734,43 +740,21 @@ namespace XenAdmin
             string appVersionString = Program.Version.ToString();
             log.InfoFormat("Application version of current settings {0}", appVersionString);
 
-            try
+            if (Properties.Settings.Default.ApplicationVersion != appVersionString)
             {
-                if (Properties.Settings.Default.ApplicationVersion != appVersionString)
-                {
-                    log.Info("Upgrading settings...");
-                    Properties.Settings.Default.Upgrade();
+                log.Info("Upgrading settings...");
+                Properties.Settings.Default.Upgrade();
 
-                    // if program's hash has changed (e.g. by upgrading to .NET 4.0), then Upgrade() doesn't import the previous application settings 
-                    // because it cannot locate a previous user.config file. In this case a new user.config file is created with the default settings.
-                    // We will try and find a config file from a previous installation and update the settings from it
+                // if program's hash has changed (e.g. by upgrading to .NET 4.0), then Upgrade() doesn't import the previous application settings 
+                // because it cannot locate a previous user.config file. In this case a new user.config file is created with the default settings.
+                // We will try and find a config file from a previous installation and update the settings from it
 
-                    if (Properties.Settings.Default.ApplicationVersion == "" && Properties.Settings.Default.DoUpgrade)
-                        UpgradeFromPreviousInstallation();
+                if (Properties.Settings.Default.ApplicationVersion == "" && Properties.Settings.Default.DoUpgrade)
+                    UpgradeFromPreviousInstallation();
 
-                    log.InfoFormat("Settings upgraded from '{0}' to '{1}'", Properties.Settings.Default.ApplicationVersion, appVersionString);
-                    Properties.Settings.Default.ApplicationVersion = appVersionString;
-                    TrySaveSettings();
-                }
-            }
-            catch (ConfigurationErrorsException ex)
-            {
-                log.Error("Could not load settings.", ex);
-                var msg = string.Format("{0}\n\n{1}", Messages.MESSAGEBOX_LOAD_CORRUPTED_TITLE,
-                                        string.Format(Messages.MESSAGEBOX_LOAD_CORRUPTED, GetUserConfigPath()));
-                using (var dlg = new ErrorDialog(msg)
-                {
-                    StartPosition = FormStartPosition.CenterScreen,
-                    //For reasons I do not fully comprehend at the moment, the runtime
-                    //overrides the above StartPosition with WindowsDefaultPosition if
-                    //ShowInTaskbar is false. However it's a good idea anyway to show it
-                    //in the taskbar since the main form is not launched at this point.
-                    ShowInTaskbar = true
-                })
-                {
-                    dlg.ShowDialog();
-                }
-                Application.Exit();
+                log.InfoFormat("Settings upgraded from '{0}' to '{1}'", Properties.Settings.Default.ApplicationVersion, appVersionString);
+                Properties.Settings.Default.ApplicationVersion = appVersionString;
+                TrySaveSettings();
             }
         }
 

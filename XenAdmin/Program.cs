@@ -30,7 +30,6 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.Diagnostics;
@@ -46,7 +45,6 @@ using System.Windows.Forms;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
 using XenAdmin.Network;
-using XenAdmin.XenSearch;
 using XenAPI;
 using XenCenterLib;
 
@@ -72,7 +70,7 @@ namespace XenAdmin
         public static Font DefaultFontItalic;
         public static Font DefaultFontHeader;
 
-        public static MainWindow MainWindow { get; private set; }
+        public static MainWindow MainWindow => SplashScreenContext.MainWindow;
 
         public static CollectionChangeEventHandler ProgramInvokeHandler(CollectionChangeEventHandler handler)
         {
@@ -142,23 +140,14 @@ namespace XenAdmin
                 return;
             }
 
-            Settings.Load();
-
-            // Reset statics, because XenAdminTests likes to call Main() twice.
-            TestExceptionString = null;
-            Exiting = false;
-            // Clear XenConnections and History so static classes like OtherConfigAndTagsWatcher 
-            // listening to changes still work when Main is called more than once.
-            ConnectionsManager.XenConnections.Clear();
-            ConnectionsManager.History.Clear();
-
-            Search.InitSearch(BrandManager.ExtensionSearch);
-            TreeSearch.InitSearch();
-
             AppDomain.CurrentDomain.UnhandledException -= CurrentDomain_UnhandledException;
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             Application.ThreadException -= Application_ThreadException;
             Application.ThreadException += Application_ThreadException;
+            Application.ApplicationExit -= Application_ApplicationExit;
+            Application.ApplicationExit += Application_ApplicationExit;
+
+            ConnectPipe();
 
             // We must NEVER request ProfessionalColors before we have called Application.EnableVisualStyles
             // as it may prevent the program from displayed as expected.
@@ -176,20 +165,10 @@ namespace XenAdmin
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
             Session.UserAgent = $"{BrandManager.BrandConsole} {Version}";
 
-            Settings.ReconfigureProxyAuthenticationSettings();
-            Settings.ConfigureExternalSshClientSettings();
-
             log.Info("Application started");
             LogSystemDetails();
-            Settings.Log();
 
-            ConnectPipe();
-
-            Application.ApplicationExit -= Application_ApplicationExit;
-            Application.ApplicationExit += Application_ApplicationExit;
-
-            MainWindow = new MainWindow(args);
-            Application.Run(new SplashScreenContext(MainWindow));
+            Application.Run(new SplashScreenContext(args));
 
             log.Info("Application main thread exited");
         }
@@ -224,7 +203,7 @@ namespace XenAdmin
             }
         }
 
-        internal static void DisconnectPipe()
+        private static void DisconnectPipe()
         {
             if (_pipe != null)
             {
@@ -240,29 +219,6 @@ namespace XenAdmin
             log.InfoFormat("OS version: {0}", Environment.OSVersion);
             log.InfoFormat("UI Culture: {0}", Thread.CurrentThread.CurrentUICulture.EnglishName);
             log.InfoFormat("Bitness: {0}-bit", IntPtr.Size * 8);
-        }
-
-        static void Application_ApplicationExit(object sender, EventArgs e)
-        {
-            Exiting = true;
-
-            LogApplicationStats();
-
-            Clip.UnregisterClipboardViewer();
-
-            try
-            {
-                // Lets save the connections first, so we can save their connected state
-                Settings.SaveServerList(); //this calls Settings.TrySaveSettings()
-            }
-            catch (Exception)
-            {
-                // Ignore here
-            }
-            // The application is about to exit - gracefully close connections to
-            // avoid a bunch of WinForms related race conditions...
-            foreach (IXenConnection conn in ConnectionsManager.XenConnectionsCopy)
-                conn.EndConnect(false, true);
         }
 
         private static void LogApplicationStats()
@@ -297,12 +253,50 @@ namespace XenAdmin
             log.InfoFormat("User processor time: {0}", p.UserProcessorTime.ToString());
         }
 
-        static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
+        private static void Application_ApplicationExit(object sender, EventArgs e)
+        {
+            Exiting = true;
+            try
+            {
+                Clip.UnregisterClipboardViewer();
+            }
+            catch (Exception ex)
+            {
+                log.Warn("Error while unregistering clipboard viewer on application exit", ex);
+            }
+
+            try
+            {
+                // Let's save the connections first, so we can save their connected state
+                Settings.SaveServerList(); //this calls Settings.TrySaveSettings()
+            }
+            catch (Exception ex)
+            {
+                log.Warn("Error while saving server list on application exit", ex);
+            }
+
+            try
+            {
+                // The application is about to exit - gracefully close connections to
+                // avoid a bunch of WinForms related race conditions...
+                foreach (IXenConnection conn in ConnectionsManager.XenConnectionsCopy)
+                    conn.EndConnect(false, true);
+            }
+            catch (Exception ex)
+            {
+                log.Warn("Error while ending connections on application exit", ex);
+            }
+
+            DisconnectPipe();
+            LogApplicationStats();
+        }
+
+        private static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
         {
             ProcessUnhandledException(e.Exception);
         }
 
-        static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             ProcessUnhandledException(e.ExceptionObject as Exception);
         }
@@ -725,38 +719,5 @@ namespace XenAdmin
         public static string VersionAndLanguage => $"{Version}.{CurrentLanguage}";
 
         public static CultureInfo CurrentCulture => Thread.CurrentThread.CurrentCulture;
-
-
-        private class SplashScreenContext : ApplicationContext
-        {
-            private readonly SplashScreen _splashScreen;
-            private readonly MainWindow _mainWindow;
-
-            public SplashScreenContext(MainWindow mainWindow)
-            {
-                _mainWindow = mainWindow;
-                _mainWindow.CloseSplashRequested += _mainWindow_CloseSplashRequested;
-                _mainWindow.FormClosed += mainWindow_FormClosed;
-
-                _splashScreen = new SplashScreen();
-                _splashScreen.ShowMainWindowRequested += _splashScreen_ShowMainWindowRequested;
-                _splashScreen.Show();
-            }
-
-            private void _splashScreen_ShowMainWindowRequested()
-            {
-                _mainWindow.Show();
-            }
-
-            private void _mainWindow_CloseSplashRequested()
-            {
-                _splashScreen.Close();
-            }
-
-            private void mainWindow_FormClosed(object s, FormClosedEventArgs args)
-            {
-                ExitThread();
-            }
-        }
     }
 }
