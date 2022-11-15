@@ -290,10 +290,10 @@ namespace XenAdmin.Dialogs
                 return;
             }
 
-            if (!SrListBox.ValidSelectionExists)//all SRs disabled
+            if (!SrListBox.ValidSelectionExists(out var invalidReason))//all SRs disabled
             {
                 OkButton.Enabled = false;
-                diskSpinner1.SetError(SrListBox.Items.Count > 0 ? Messages.NO_VALID_DISK_LOCATION : null);
+                diskSpinner1.SetError(invalidReason);
                 return;
             }
 
