@@ -240,11 +240,14 @@ namespace XenAdmin.Controls
 
     public abstract class SrPickerItem : CustomTreeNode, IComparable<SrPickerItem>
     {
+        private bool _scanning;
         public SR TheSR { get; }
-        public bool Show { get; private set; }
+        public bool Show { get; private set; } = true;
         protected readonly Host Affinity;
         protected long DiskSize { get; private set; }
         protected readonly VDI[] existingVDIs;
+
+        public event Action<SrPickerItem> ItemUpdated;
 
         protected SrPickerItem(SR sr, Host aff, VDI[] vdis)
         {
@@ -256,14 +259,19 @@ namespace XenAdmin.Controls
             Update();
         }
 
+        public bool Scanning
+        {
+            get => _scanning;
+            set
+            {
+                _scanning = value;
+                Update();
+            }
+        }
+
         protected virtual bool UnsupportedSR => TheSR.HBALunPerVDI();
 
         protected abstract bool CanBeEnabled { get; }
-
-        protected virtual void SetImage()
-        {
-            Image = Images.GetImage16For(TheSR);
-        }
 
         public void UpdateDiskSize(long diskSize)
         {
@@ -271,28 +279,36 @@ namespace XenAdmin.Controls
             Update();
         }
 
-        private void Update()
+        public void Update()
         {
             Text = TheSR.Name();
-            SetImage();
+            Image = Images.GetImage16For(TheSR);
 
             if (UnsupportedSR || !TheSR.SupportsVdiCreate() ||
                 !TheSR.Show(Properties.Settings.Default.ShowHiddenVMs))
+            {
+                Show = false;
                 return;
+            }
 
-            if (CanBeEnabled)
+            if (Scanning)
+            {
+                Description = Messages.SR_REFRESH_ACTION_TITLE_GENERIC;
+                Enabled = false;
+            }
+            else if (CanBeEnabled)
             {
                 Description = string.Format(Messages.SRPICKER_DISK_FREE, Util.DiskSizeString(TheSR.FreeSpace(), 2),
                     Util.DiskSizeString(TheSR.physical_size, 2));
                 Enabled = true;
-                Show = true;
             }
             else
             {
                 Description = DisabledReason;
                 Enabled = false;
-                Show = true;
             }
+
+            ItemUpdated?.Invoke(this);
         }
 
         protected bool ExistingVDILocation()

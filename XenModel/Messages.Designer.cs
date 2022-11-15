@@ -19,7 +19,7 @@ namespace XenAdmin {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Messages {
@@ -34837,11 +34837,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Scanning available SRs ....
+        ///   Looks up a localized string similar to Scanning....
         /// </summary>
-        public static string SR_REFRESH_ACTION_TITLE_MANY {
+        public static string SR_REFRESH_ACTION_TITLE_GENERIC {
             get {
-                return ResourceManager.GetString("SR_REFRESH_ACTION_TITLE_MANY", resourceCulture);
+                return ResourceManager.GetString("SR_REFRESH_ACTION_TITLE_GENERIC", resourceCulture);
             }
         }
         
