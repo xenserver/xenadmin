@@ -29,7 +29,7 @@ namespace XenAdmin.Dialogs
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewDiskDialog));
-            this.SrListBox = new XenAdmin.Controls.SrPicker();
+            this.srPicker = new XenAdmin.Controls.SrPicker();
             this.CloseButton = new System.Windows.Forms.Button();
             this.OkButton = new System.Windows.Forms.Button();
             this.NameTextBox = new System.Windows.Forms.TextBox();
@@ -44,19 +44,19 @@ namespace XenAdmin.Dialogs
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // SrListBox
+            // srPicker
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.SrListBox, 3);
-            resources.ApplyResources(this.SrListBox, "SrListBox");
-            this.SrListBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.SrListBox.Name = "SrListBox";
-            this.SrListBox.NodeIndent = 3;
-            this.SrListBox.RootAlwaysExpanded = false;
-            this.SrListBox.ShowCheckboxes = false;
-            this.SrListBox.ShowDescription = true;
-            this.SrListBox.ShowImages = true;
-            this.SrListBox.ShowRootLines = true;
-            this.SrListBox.SelectedIndexChanged += new System.EventHandler(this.srListBox_SelectedIndexChanged);
+            this.tableLayoutPanel1.SetColumnSpan(this.srPicker, 3);
+            resources.ApplyResources(this.srPicker, "srPicker");
+            this.srPicker.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.srPicker.Name = "srPicker";
+            this.srPicker.NodeIndent = 3;
+            this.srPicker.RootAlwaysExpanded = false;
+            this.srPicker.ShowCheckboxes = false;
+            this.srPicker.ShowDescription = true;
+            this.srPicker.ShowImages = true;
+            this.srPicker.ShowRootLines = true;
+            this.srPicker.SelectedIndexChanged += new System.EventHandler(this.srListBox_SelectedIndexChanged);
             // 
             // CloseButton
             // 
@@ -111,7 +111,7 @@ namespace XenAdmin.Dialogs
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.NameTextBox, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.DescriptionTextBox, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.SrListBox, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.srPicker, 1, 5);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.label4, 0, 5);
             this.tableLayoutPanel1.Controls.Add(this.label6, 0, 1);
@@ -157,7 +157,7 @@ namespace XenAdmin.Dialogs
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
-        private XenAdmin.Controls.SrPicker SrListBox;
+        private XenAdmin.Controls.SrPicker srPicker;
         private System.Windows.Forms.Button CloseButton;
         private System.Windows.Forms.Button OkButton;
         private System.Windows.Forms.TextBox NameTextBox;

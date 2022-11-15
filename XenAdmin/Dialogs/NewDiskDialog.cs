@@ -61,8 +61,8 @@ namespace XenAdmin.Dialogs
 
             NameTextBox.Text = GetDefaultVDIName();
             diskSpinner1.Populate();
+            srPicker.PopulateAsync(SrPicker.SRPickerType.InstallFromTemplate, connection, null, sr, new[] { NewDisk() });
             UpdateErrorsAndButtons();
-            SrListBox.PopulateAsync(SrPicker.SRPickerType.InstallFromTemplate, connection, null, sr, null);
         }
 
         public NewDiskDialog(IXenConnection connection, VM vm, Host affinity,
@@ -80,8 +80,8 @@ namespace XenAdmin.Dialogs
             {
                 NameTextBox.Text = GetDefaultVDIName();
                 diskSpinner1.Populate(minSize: minSize);
+                srPicker.PopulateAsync(pickerUsage, connection, affinity, null, new[] { NewDisk() });
                 UpdateErrorsAndButtons();
-                SrListBox.PopulateAsync(pickerUsage, connection, affinity, null, null);
             }
             else
             {
@@ -91,8 +91,8 @@ namespace XenAdmin.Dialogs
                 Text = Messages.EDIT_DISK;
                 OkButton.Text = Messages.OK;
                 diskSpinner1.Populate(DiskTemplate.virtual_size, minSize);
+                srPicker.PopulateAsync(pickerUsage, connection, affinity, connection.Resolve(DiskTemplate.SR), new[] { NewDisk() });
                 UpdateErrorsAndButtons();
-                SrListBox.PopulateAsync(pickerUsage, connection, affinity, connection.Resolve(DiskTemplate.SR), null);
             }
         }
 
@@ -119,7 +119,7 @@ namespace XenAdmin.Dialogs
 
         private void OkButton_Click(object sender, EventArgs e)
         {
-            if (SrListBox.SR == null || NameTextBox.Text == "" || !connection.IsConnected)
+            if (srPicker.SR == null || NameTextBox.Text == "" || !connection.IsConnected)
                 return;
 
             if (DontCreateVDI)
@@ -128,7 +128,7 @@ namespace XenAdmin.Dialogs
                 Close();
                 return;
             }
-            XenAPI.SR sr = SrListBox.SR;
+            XenAPI.SR sr = srPicker.SR;
             if (!sr.shared && TheVM != null && TheVM.HaPriorityIsRestart())
             {
                 DialogResult dialogResult;
@@ -238,7 +238,7 @@ namespace XenAdmin.Dialogs
             {
                 Connection = connection,
                 read_only = DiskTemplate?.read_only ?? false,
-                SR = SrListBox.SR == null ? new XenRef<SR>(Helper.NullOpaqueRef) : new XenRef<SR>(SrListBox.SR),
+                SR = srPicker.SR == null ? new XenRef<SR>(Helper.NullOpaqueRef) : new XenRef<SR>(srPicker.SR),
                 virtual_size = diskSpinner1.SelectedSize,
                 name_label = NameTextBox.Text,
                 name_description = DescriptionTextBox.Text,
@@ -271,6 +271,7 @@ namespace XenAdmin.Dialogs
 
         private void diskSpinner1_SelectedSizeChanged()
         {
+            srPicker.UpdateDisks(NewDisk());
             UpdateErrorsAndButtons();
         }
 
@@ -279,22 +280,20 @@ namespace XenAdmin.Dialogs
             // Ordering is important here, we want to show the most relevant message
             // The error should be shown only for size errors
 
-            SrListBox.UpdateDisks(NewDisk());
-
             if (!diskSpinner1.IsSizeValid)
             {
                 OkButton.Enabled = false;
                 return;
             }
 
-            if (!SrListBox.ValidSelectionExists)//all SRs disabled
+            if (!srPicker.ValidSelectionExists(out var invalidReason))//all SRs disabled
             {
                 OkButton.Enabled = false;
-                diskSpinner1.SetError(SrListBox.Items.Count > 0 ? Messages.NO_VALID_DISK_LOCATION : null);
+                diskSpinner1.SetError(invalidReason);
                 return;
             }
 
-            if (SrListBox.SR == null) //enabled SR exists but the user selects a disabled one
+            if (srPicker.SR == null) //enabled SR exists but the user selects a disabled one
             {
                 OkButton.Enabled = false;
                 diskSpinner1.SetError(null);
