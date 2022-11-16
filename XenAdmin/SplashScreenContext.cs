@@ -46,8 +46,6 @@ namespace XenAdmin
         private MainWindow _mainWindow;
         private readonly string[] _args;
 
-        public static MainWindow MainWindow { get; private set; }
-
         public SplashScreenContext(params string[] args)
         {
             _args = args;
@@ -95,7 +93,7 @@ namespace XenAdmin
         {
             if (_mainWindow == null)
             {
-                MainWindow = _mainWindow = new MainWindow(_args);
+                Program.MainWindow = _mainWindow = new MainWindow(_args);
                 _mainWindow.CloseSplashRequested += _mainWindow_CloseSplashRequested;
                 _mainWindow.FormClosed += mainWindow_FormClosed;
                 _mainWindow.Show();

@@ -81,7 +81,6 @@ namespace XenAdmin.Controls
                 // This is an old platform without FontSmoothingType support.
                 TransparentUsually = Color.Transparent;
             }
-
         }
 
         public FolderListItem(string path, AllowSearch allowSearch, bool changeButton)
@@ -97,7 +96,7 @@ namespace XenAdmin.Controls
 
         public Color ForeColor { get; set; } = SystemColors.ControlText;
 
-        private Font Font => Program.DefaultFont;
+        private static Font Font => Program.DefaultFont;
 
         public int MaxWidth { get; set; }
 

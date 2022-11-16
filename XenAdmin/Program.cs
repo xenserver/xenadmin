@@ -70,7 +70,7 @@ namespace XenAdmin
         public static Font DefaultFontItalic;
         public static Font DefaultFontHeader;
 
-        public static MainWindow MainWindow => SplashScreenContext.MainWindow;
+        public static MainWindow MainWindow;
 
         public static CollectionChangeEventHandler ProgramInvokeHandler(CollectionChangeEventHandler handler)
         {

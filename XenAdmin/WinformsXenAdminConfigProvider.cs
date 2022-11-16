@@ -48,10 +48,10 @@ namespace XenAdmin
 {
     public class WinformsXenAdminConfigProvider : IXenAdminConfigProvider
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private static readonly List<string> _hiddenObjects = new List<string>();
-        private static readonly object _hiddenObjectsLock = new object();
+        private static readonly List<string> HiddenObjects = new List<string>();
+        private static readonly object HiddenObjectsLock = new object();
 
         public Func<List<Role>, IXenConnection, string, AsyncAction.SudoElevationResult> ElevatedSessionDelegate => GetElevatedSession;
 
@@ -105,7 +105,7 @@ namespace XenAdmin
                             }
                             catch (Exception e)
                             {
-                                log.Warn("Could not unprotect internet proxy username.", e);
+                                Log.Warn("Could not unprotect internet proxy username.", e);
                             }
 
                             string password = "";
@@ -117,13 +117,13 @@ namespace XenAdmin
                             }
                             catch (Exception e)
                             {
-                                log.Warn("Could not unprotect internet proxy password.", e);
+                                Log.Warn("Could not unprotect internet proxy password.", e);
                             }
 
                             return new WebProxy(address, false, null, new NetworkCredential(username, password));
                         }
-                        else
-                            return new WebProxy(address, false);
+                        
+                        return new WebProxy(address, false);
 
                     case HTTPHelper.ProxyStyle.SystemProxy:
                         return WebRequest.GetSystemWebProxy();
@@ -134,7 +134,7 @@ namespace XenAdmin
             }
             catch (ConfigurationErrorsException e)
             {
-                log.Error("Error parsing 'ProxySetting' from settings - settings file deemed corrupt", e);
+                Log.Error("Error parsing 'ProxySetting' from settings - settings file deemed corrupt", e);
                 using (var dlg = new ErrorDialog(string.Format(Messages.MESSAGEBOX_LOAD_CORRUPTED, Settings.GetUserConfigPath()))
                     {WindowTitle = Messages.MESSAGEBOX_LOAD_CORRUPTED_TITLE})
                 {
@@ -148,29 +148,29 @@ namespace XenAdmin
 
         public int GetProxyTimeout(bool timeout)
         {
-            return timeout ? XenAdmin.Properties.Settings.Default.HttpTimeout : 0;
+            return timeout ? Properties.Settings.Default.HttpTimeout : 0;
         }
 
         public void ShowObject(string opaqueRef)
         {
-            lock (_hiddenObjectsLock)
-                _hiddenObjects.Remove(opaqueRef);
+            lock (HiddenObjectsLock)
+                HiddenObjects.Remove(opaqueRef);
 
             Program.MainWindow?.RequestRefreshTreeView();
         }
 
         public void HideObject(string opaqueRef)
         {
-            lock (_hiddenObjectsLock)
-                _hiddenObjects.Add(opaqueRef);
+            lock (HiddenObjectsLock)
+                HiddenObjects.Add(opaqueRef);
 
             Program.MainWindow?.RequestRefreshTreeView();
         }
 
         public bool ObjectIsHidden(string opaqueRef)
         {
-            lock (_hiddenObjectsLock)
-                return _hiddenObjects.Contains(opaqueRef);
+            lock (HiddenObjectsLock)
+                return HiddenObjects.Contains(opaqueRef);
         }
 
         public string GetLogFile()

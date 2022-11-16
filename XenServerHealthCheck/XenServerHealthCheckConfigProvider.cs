@@ -161,11 +161,11 @@ namespace XenServerHealthCheck
             return null;
         }
 
-        public void ShowObject(string newVMRef)
+        public void ShowObject(string opaqueRef)
         {
         }
 
-        public void HideObject(string newVMRef)
+        public void HideObject(string opaqueRef)
         {
         }
 

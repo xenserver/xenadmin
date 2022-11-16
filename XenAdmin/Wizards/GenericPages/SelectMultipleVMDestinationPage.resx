@@ -151,7 +151,7 @@
     <value>m_labelIntro</value>
   </data>
   <data name="&gt;&gt;m_labelIntro.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.Common.AutoHeightLabel, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.Common.AutoHeightLabel, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;m_labelIntro.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -205,7 +205,7 @@
     <value>m_comboBoxConnection</value>
   </data>
   <data name="&gt;&gt;m_comboBoxConnection.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.EnableableComboBox, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.EnableableComboBox, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;m_comboBoxConnection.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -427,12 +427,12 @@
     <value>m_colTarget</value>
   </data>
   <data name="&gt;&gt;m_colTarget.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.EnableableComboBoxColumn, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.EnableableComboBoxColumn, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>SelectMultipleVMDestinationPage</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.XenTabPage, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.XenTabPage, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

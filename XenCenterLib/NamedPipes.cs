@@ -240,7 +240,6 @@ namespace XenCenterLib
         private const string STOP_LISTENING_MSG = "stop-listening-on-pipe";
         private const uint PIPE_CALL_TIMEOUT = 30 * 1000; //30sec
 
-
         public class Pipe
         {
             private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
