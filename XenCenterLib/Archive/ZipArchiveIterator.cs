@@ -32,83 +32,49 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Ionic.Zip;
+using System.IO.Compression;
+
 
 namespace XenCenterLib.Archive
 {
-    public class DotNetZipZipIterator : ArchiveIterator
+    public class ZipArchiveIterator : ArchiveIterator
     {
-        private ZipFile zipFile;
-        private IEnumerator<ZipEntry> enumerator;
-        private ZipEntry zipEntry;
-        private bool disposed;
+        private ZipArchive _zipArchive;
+        private IEnumerator<ZipArchiveEntry> _enumerator;
+        private ZipArchiveEntry _currentEntry;
+        private int _currentPosition = -1;
+        private bool _disposed;
 
         /// <summary>
-        /// delegate params: long bytesTransferred, long totalBytesToTransfer
+        /// index of current file, total file count
         /// </summary>
-        public event Action<long, long> CurrentFileExtractProgressChanged;
-        public event Action CurrentFileExtractCompleted;
+        public event Action<int, int> CurrentFileExtracted;
 
-        public DotNetZipZipIterator()
+        public ZipArchiveIterator(Stream inputStream)
         {
-        }
-
-        public DotNetZipZipIterator(Stream inputStream)
-        {
-            Initialise(inputStream);
-            disposed = false;
-        }
-
-        void zipFile_ExtractProgress(object sender, ExtractProgressEventArgs e)
-        {
-            switch (e.EventType)
-            {
-                case ZipProgressEventType.Extracting_EntryBytesWritten:
-                    {
-                        var handler = CurrentFileExtractProgressChanged;
-                        handler?.Invoke(e.BytesTransferred, e.TotalBytesToTransfer);
-                    }
-                    break;
-                case ZipProgressEventType.Extracting_AfterExtractEntry:
-                    {
-                        var handler = CurrentFileExtractCompleted;
-                        handler?.Invoke();
-                    }
-                    break;
-            }
-        }
-
-        private void Initialise(Stream zipStream)
-        {
-            try
-            {
-                zipFile = ZipFile.Read(zipStream);
-            }
-            catch (ZipException e)
-            {
-                throw new ArgumentException("Cannot read input as a ZipFile", "zipStream", e);
-            }
-            
-            enumerator = zipFile.GetEnumerator();
-            zipFile.ExtractProgress += zipFile_ExtractProgress;
+            _zipArchive = new ZipArchive(inputStream, ZipArchiveMode.Read);
+            _enumerator = _zipArchive.Entries.GetEnumerator();
         }
 
         public override void SetBaseStream(Stream inputStream)
         {
-            Initialise(inputStream);
-            disposed = false;
+            _zipArchive = new ZipArchive(inputStream, ZipArchiveMode.Read);
+            _enumerator = _zipArchive.Entries.GetEnumerator();
+            _disposed = false;
+            _currentPosition = -1;
         }
 
-        ~DotNetZipZipIterator()
+        ~ZipArchiveIterator()
         {
             Dispose();
         }
 
         public override bool HasNext()
         {
-            if (enumerator != null && enumerator.MoveNext())
+            if (_enumerator != null && _enumerator.MoveNext())
             {
-                zipEntry = enumerator.Current;
+                _currentPosition++;
+                _currentEntry = _enumerator.Current;
                 return true;
             }
             return false;
@@ -116,34 +82,23 @@ namespace XenCenterLib.Archive
 
         public override string CurrentFileName()
         {
-            if (zipEntry == null)
-                return String.Empty;
-
-            return zipEntry.FileName;
+            return _currentEntry == null ? string.Empty : _currentEntry.FullName;
         }
 
         public override long CurrentFileSize()
         {
-            if (zipEntry == null)
-                return 0;
-
-            return zipEntry.UncompressedSize;
+            return _currentEntry?.Length ?? 0;
         }
 
         public override DateTime CurrentFileModificationTime()
         {
-            if (zipEntry == null)
-                return new DateTime();
-
-            return zipEntry.LastModified;
+            return _currentEntry == null ? new DateTime() : _currentEntry.LastWriteTime.DateTime;
         }
 
         public override bool IsDirectory()
         {
-            if (zipEntry == null)
-                return false;
-
-            return zipEntry.IsDirectory;
+            var attr = (FileAttributes)(_currentEntry.ExternalAttributes & 0xff);
+            return attr.HasFlag(FileAttributes.Directory);
         }
 
         public override void ExtractCurrentFile(Stream extractedFileContents, Action cancellingDelegate)
@@ -151,25 +106,21 @@ namespace XenCenterLib.Archive
             if (IsDirectory())
                 return;
 
-            zipEntry.Extract(extractedFileContents);
+            using (var entryStream = _currentEntry.Open())
+                StreamUtilities.BufferedStreamCopy(entryStream, extractedFileContents);
+
+            CurrentFileExtracted?.Invoke(_currentPosition, _zipArchive.Entries.Count);
         }
 
         protected override void Dispose(bool disposing)
         {
-            base.Dispose(disposing);
-            if(disposing)
+            if (disposing && !_disposed)
             {
-                if(!disposed)
-                {
-                    if (zipFile != null)
-                    {
-                        zipFile.ExtractProgress -= zipFile_ExtractProgress;
-                        zipFile.Dispose();
-                    }
-
-                    disposed = true;
-                }               
+                _zipArchive.Dispose();
+                _disposed = true;
             }
+
+            base.Dispose(disposing);
         }
     }
 }

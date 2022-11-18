@@ -38,7 +38,7 @@ using XenCenterLib.Compression;
 namespace XenAdminTests.CompressionTests
 {
     [Category(TestCategories.Unit)]
-    [TestFixture(typeof(DotNetZipGZipInputStream), typeof(DotNetZipGZipOutputStream))]
+    [TestFixture(typeof(GZipInputStream), typeof(GZipOutputStream))]
     public class ThirdPartyCompressionTests<TI, TO>
         where TI : CompressionStream, new()
         where TO : CompressionStream, new()
@@ -93,7 +93,7 @@ namespace XenAdminTests.CompressionTests
             Directory.Delete(basePath, true);
         }
 
-        private void DecompressAFile( string targetFileName, string compressedFileName)
+        private void DecompressAFile(string targetFileName, string compressedFileName)
         {
             using (FileStream ifs = File.OpenRead(compressedFileName))
             {

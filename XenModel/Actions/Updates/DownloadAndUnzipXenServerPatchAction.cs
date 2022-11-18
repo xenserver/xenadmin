@@ -186,17 +186,17 @@ namespace XenAdmin.Actions
         private void ExtractFile()
         {
             ArchiveIterator iterator = null;
-            DotNetZipZipIterator zipIterator =  null;
+            ZipArchiveIterator zipIterator =  null;
 
             try
             {
                 using (Stream stream = new FileStream(outputFileName, FileMode.Open, FileAccess.Read))
                 {
                     iterator = ArchiveFactory.Reader(ArchiveFactory.Type.Zip, stream);
-                    zipIterator = iterator as DotNetZipZipIterator;
+                    zipIterator = iterator as ZipArchiveIterator;
 
                     if (zipIterator != null)
-                        zipIterator.CurrentFileExtractProgressChanged += archiveIterator_CurrentFileExtractProgressChanged;
+                        zipIterator.CurrentFileExtracted += archiveIterator_CurrentFileExtracted;
 
                     while (iterator.HasNext())
                     {
@@ -232,7 +232,7 @@ namespace XenAdmin.Actions
             finally
             {
                 if (zipIterator != null)
-                    zipIterator.CurrentFileExtractProgressChanged -= archiveIterator_CurrentFileExtractProgressChanged;
+                    zipIterator.CurrentFileExtracted -= archiveIterator_CurrentFileExtracted;
 
                 if (iterator != null)
                     iterator.Dispose();
@@ -302,10 +302,11 @@ namespace XenAdmin.Actions
             MarkCompleted();
         }
 
-        void archiveIterator_CurrentFileExtractProgressChanged(long bytesTransferred, long totalBytesToTransfer)
+        private void archiveIterator_CurrentFileExtracted(int fileIndex, int totalFileCount)
         {
-            int pc = downloadUpdate ? 95 + (int)(5.0 * bytesTransferred / totalBytesToTransfer) : (int)(100.0 * bytesTransferred / totalBytesToTransfer);
-            PercentComplete = pc;
+            PercentComplete = downloadUpdate
+                ? 95 + (int)(5.0 * fileIndex / totalFileCount)
+                : (int)(100.0 * fileIndex / totalFileCount);
         }
 
         void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)

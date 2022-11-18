@@ -39,7 +39,7 @@ namespace XenAdminTests.CompressionTests
     [TestFixture, Category(TestCategories.Unit)]
     public class CompressionFactoryTests
     {
-        [TestCase(CompressionFactory.Type.Gz, ExpectedResult = typeof(DotNetZipGZipOutputStream))]
+        [TestCase(CompressionFactory.Type.Gz, ExpectedResult = typeof(GZipOutputStream))]
         [Test]
         public Type TestWriterGeneration(int archiveType)
         {
@@ -50,7 +50,7 @@ namespace XenAdminTests.CompressionTests
             }
         }
 
-        [TestCase(CompressionFactory.Type.Gz, ExpectedResult = typeof(DotNetZipGZipInputStream))]
+        [TestCase(CompressionFactory.Type.Gz, ExpectedResult = typeof(GZipInputStream))]
         [Test]
         public Type TestReaderGenerationWithFile(int archiveType)
         {

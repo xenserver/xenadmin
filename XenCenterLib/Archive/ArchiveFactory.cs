@@ -61,11 +61,11 @@ namespace XenCenterLib.Archive
         public static ArchiveIterator Reader(Type archiveType, Stream packagedData)
         {
             if (archiveType == Type.Tar)
-                return new SharpZipTarArchiveIterator(packagedData);
+                return new TarArchiveIterator(packagedData);
             if (archiveType == Type.TarGz)
-                return new SharpZipTarArchiveIterator(packagedData, CompressionFactory.Type.Gz);
+                return new TarArchiveIterator(packagedData, CompressionFactory.Type.Gz);
             if (archiveType == Type.Zip)
-                return new DotNetZipZipIterator(packagedData);
+                return new ZipArchiveIterator(packagedData);
 
             throw new NotSupportedException($"Type {archiveType} is not supported by ArchiveIterator");
         }
@@ -80,9 +80,9 @@ namespace XenCenterLib.Archive
         public static ArchiveWriter Writer(Type archiveType, Stream targetPackage)
         {
             if (archiveType == Type.Tar)
-                return new SharpZipTarArchiveWriter(targetPackage);
+                return new TarArchiveWriter(targetPackage);
             if (archiveType == Type.Zip)
-                return new DotNetZipZipWriter(targetPackage);
+                return new ZipArchiveWriter(targetPackage);
 
             throw new NotSupportedException($"Type {archiveType} is not supported by ArchiveWriter");
         }

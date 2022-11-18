@@ -39,8 +39,8 @@ namespace XenAdminTests.ArchiveTests
     [TestFixture, Category(TestCategories.Unit)]
     public class ArchiveFactoryTests
     {
-        [TestCase(ArchiveFactory.Type.Tar, ExpectedResult = typeof(SharpZipTarArchiveIterator))]
-        [TestCase(ArchiveFactory.Type.TarGz, ExpectedResult = typeof(SharpZipTarArchiveIterator))]
+        [TestCase(ArchiveFactory.Type.Tar, ExpectedResult = typeof(TarArchiveIterator))]
+        [TestCase(ArchiveFactory.Type.TarGz, ExpectedResult = typeof(TarArchiveIterator))]
         [Test]
         public Type TestReaderGeneration(int archiveType)
         {
@@ -52,8 +52,8 @@ namespace XenAdminTests.ArchiveTests
         }
 
 
-        [TestCase(ArchiveFactory.Type.Tar, ExpectedResult = typeof(SharpZipTarArchiveWriter))]
-        [TestCase(ArchiveFactory.Type.Zip, ExpectedResult = typeof(DotNetZipZipWriter))]
+        [TestCase(ArchiveFactory.Type.Tar, ExpectedResult = typeof(TarArchiveWriter))]
+        [TestCase(ArchiveFactory.Type.Zip, ExpectedResult = typeof(ZipArchiveWriter))]
         [Test]
         public Type TestWriterGeneration(int archiveType)
         {

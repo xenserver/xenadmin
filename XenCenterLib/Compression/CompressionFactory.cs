@@ -79,7 +79,7 @@ namespace XenCenterLib.Compression
         public static CompressionStream Reader(Type compressionType, Stream compressedDataSource)
         {
             if (compressionType == Type.Gz)
-                return new DotNetZipGZipInputStream(compressedDataSource);
+                return new GZipInputStream(compressedDataSource);
 
             throw new NotSupportedException(String.Format("Type: {0} is not supported by CompressionStream Reader", compressionType));
         }
@@ -94,7 +94,7 @@ namespace XenCenterLib.Compression
         public static CompressionStream Writer(Type compressionType, Stream compressedDataTarget)
         {
             if (compressionType == Type.Gz)
-                return new DotNetZipGZipOutputStream(compressedDataTarget);
+                return new GZipOutputStream(compressedDataTarget);
 
             throw new NotSupportedException(String.Format("Type: {0} is not supported by CompressionStream Writer", compressionType));
         }

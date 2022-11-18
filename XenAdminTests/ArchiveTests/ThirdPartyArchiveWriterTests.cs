@@ -38,8 +38,8 @@ using XenCenterLib.Archive;
 
 namespace XenAdminTests.ArchiveTests
 {
-    [TestFixture(typeof(SharpZipTarArchiveIterator), typeof(SharpZipTarArchiveWriter))]
-    [TestFixture(typeof(DotNetZipZipIterator), typeof(DotNetZipZipWriter))]
+    [TestFixture(typeof(TarArchiveIterator), typeof(TarArchiveWriter))]
+    [TestFixture(typeof(ZipArchiveIterator), typeof(ZipArchiveWriter))]
     [Category(TestCategories.Unit)]
     public class ThirdPartyArchiveWriterTest<TR, TW>
         where TR : ArchiveIterator, new()

@@ -43,7 +43,6 @@ and also some libraries which we do not store in the source tree:
 * Newtonsoft.Json.dll
 * DiscUtils.dll
 * ICSharpCode.SharpZipLib.dll
-* Ionic.Zip.dll
 * log4net.dll
 
 You can find the source code of these libraries (along with some patches) in
