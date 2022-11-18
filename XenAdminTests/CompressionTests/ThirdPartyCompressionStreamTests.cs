@@ -39,7 +39,6 @@ namespace XenAdminTests.CompressionTests
 {
     [Category(TestCategories.Unit)]
     [TestFixture(typeof(DotNetZipGZipInputStream), typeof(DotNetZipGZipOutputStream))]
-    [TestFixture(typeof(DotNetZipBZip2InputStream), typeof(DotNetZipBZip2OutputStream))]
     public class ThirdPartyCompressionTests<TI, TO>
         where TI : CompressionStream, new()
         where TO : CompressionStream, new()

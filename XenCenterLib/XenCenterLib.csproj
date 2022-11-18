@@ -62,7 +62,6 @@
     <Compile Include="Archive\TarSanitization.cs" />
     <Compile Include="Archive\ZipArchiveIterator.cs" />
     <Compile Include="Archive\ZipArchiveWriter.cs" />
-    <Compile Include="Compression\BZip2Streams.cs" />
     <Compile Include="Compression\CompressionFactory.cs" />
     <Compile Include="Compression\CompressionStream.cs" />
     <Compile Include="Compression\GZipStreams.cs" />

@@ -41,11 +41,10 @@ namespace XenAdminTests.ArchiveTests
     {
         [TestCase(ArchiveFactory.Type.Tar, ExpectedResult = typeof(SharpZipTarArchiveIterator))]
         [TestCase(ArchiveFactory.Type.TarGz, ExpectedResult = typeof(SharpZipTarArchiveIterator))]
-        [TestCase(ArchiveFactory.Type.TarBz2, ExpectedResult = typeof(SharpZipTarArchiveIterator))]
         [Test]
         public Type TestReaderGeneration(int archiveType)
         {
-            string target = TestUtils.GetTestResource("emptyfile.bz2");
+            string target = TestUtils.GetTestResource("emptyfile.gz");
 
             using (var ms = new MemoryStream(File.ReadAllBytes(target)))
             using (var iterator = ArchiveFactory.Reader((ArchiveFactory.Type)archiveType, ms))
@@ -66,7 +65,6 @@ namespace XenAdminTests.ArchiveTests
         }
 
         [TestCase(ArchiveFactory.Type.TarGz)]
-        [TestCase(ArchiveFactory.Type.TarBz2)]
         [Test]
         public void TestWriterGenerationUnsupported(int archiveType)
         {

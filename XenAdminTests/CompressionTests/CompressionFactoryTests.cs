@@ -40,7 +40,6 @@ namespace XenAdminTests.CompressionTests
     public class CompressionFactoryTests
     {
         [TestCase(CompressionFactory.Type.Gz, ExpectedResult = typeof(DotNetZipGZipOutputStream))]
-        [TestCase(CompressionFactory.Type.Bz2, ExpectedResult = typeof(DotNetZipBZip2OutputStream))]
         [Test]
         public Type TestWriterGeneration(int archiveType)
         {
@@ -52,37 +51,16 @@ namespace XenAdminTests.CompressionTests
         }
 
         [TestCase(CompressionFactory.Type.Gz, ExpectedResult = typeof(DotNetZipGZipInputStream))]
-        [TestCase(CompressionFactory.Type.Bz2, ExpectedResult = typeof(DotNetZipBZip2InputStream))]
         [Test]
         public Type TestReaderGenerationWithFile(int archiveType)
         {
-            string target = TestUtils.GetTestResource("emptyfile.bz2");
-            /*
-             * Note: Reading a bzip2 file in as a byte[] works for gzip as well as bzip2 stream 
-             * as the implementation of bzip2 must be initialised with a string containing a 
-             * header, EOF etc. whereas gzip doesn't mind so the following will work despite
-             * opening a gzip compression stream with a bzip2 data
-             */
+            string target = TestUtils.GetTestResource("emptyfile.gz");
+
             using (MemoryStream ms = new MemoryStream(File.ReadAllBytes(target)))
             {
                 using (var providedStream = CompressionFactory.Reader((CompressionFactory.Type)archiveType, ms))
                     return providedStream.GetType();
             }
-        }
-
-
-        [TestCase(CompressionFactory.Type.Bz2)]
-        [Description("Checks that a BZip2 stream without actual BZip2 data, header, data etc., will throw an exception")]
-        [Test]
-        public void TestReaderGenerationWithoutFile(int archiveType)
-        {
-            using (MemoryStream ms = new MemoryStream())
-                Assert.Throws(typeof(IOException), () =>
-                {
-                    using (CompressionFactory.Reader((CompressionFactory.Type)archiveType, ms))
-                    {
-                    }
-                });
         }
     }
 }

@@ -52,8 +52,6 @@ namespace XenCenterLib.Archive
         {
             if (compressionType == CompressionFactory.Type.Gz)
                 compressionStream = CompressionFactory.Reader(CompressionFactory.Type.Gz, compressedTarFile);
-            else if (compressionType == CompressionFactory.Type.Bz2)
-                compressionStream = CompressionFactory.Reader(CompressionFactory.Type.Bz2, compressedTarFile);
             else
                 throw new NotSupportedException($"Type {compressionType} is not supported by ArchiveIterator");
 

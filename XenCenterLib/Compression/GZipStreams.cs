@@ -35,7 +35,7 @@ using System.IO;
 namespace XenCenterLib.Compression
 {
     /// <summary>
-    /// A class that can compress a bzip2 data stream type
+    /// A class that can compress a gzip data stream type
     /// </summary>
     class DotNetZipGZipOutputStream : CompressionStream
     {
@@ -56,7 +56,7 @@ namespace XenCenterLib.Compression
     }
 
     /// <summary>
-    /// A class that can decompress a bzip2 data stream type
+    /// A class that can decompress a gzip data stream type
     /// </summary>
     class DotNetZipGZipInputStream : CompressionStream
     {

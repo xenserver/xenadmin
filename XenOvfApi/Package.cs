@@ -229,8 +229,6 @@ namespace XenOvf
 
             if (string.Compare(extension, ".gz", true) == 0)
                 _tarType = ArchiveFactory.Type.TarGz;
-            else if (string.Compare(extension, ".bz2", true) == 0)
-                _tarType = ArchiveFactory.Type.TarBz2;
         }
 
         public override string DescriptorFileName

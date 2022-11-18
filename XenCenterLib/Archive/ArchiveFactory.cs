@@ -47,7 +47,6 @@ namespace XenCenterLib.Archive
         {
             Tar,
             TarGz,
-            TarBz2,
             Zip
         }
 
@@ -65,8 +64,6 @@ namespace XenCenterLib.Archive
                 return new SharpZipTarArchiveIterator(packagedData);
             if (archiveType == Type.TarGz)
                 return new SharpZipTarArchiveIterator(packagedData, CompressionFactory.Type.Gz);
-            if (archiveType == Type.TarBz2)
-                return new SharpZipTarArchiveIterator(packagedData, CompressionFactory.Type.Bz2);
             if (archiveType == Type.Zip)
                 return new DotNetZipZipIterator(packagedData);
 
