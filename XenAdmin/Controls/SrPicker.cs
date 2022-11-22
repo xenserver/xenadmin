@@ -51,19 +51,20 @@ namespace XenAdmin.Controls
         private const int MAX_SCANS_PER_CONNECTION = 3;
         private readonly ChangeableList<SrRefreshAction> _refreshQueue = new ChangeableList<SrRefreshAction>();
         private SRPickerType _usage = SRPickerType.VM;
-        private VDI[] _existingVDIs;
+        private VDI[] _existingDisks;
         private IXenConnection _connection;
         private Host _affinity;
-        private SR defaultSR;
-        private readonly CollectionChangeEventHandler SR_CollectionChangedWithInvoke;
+        private SR _defaultSr;
+        private SR _preselectedSr;
+        private readonly CollectionChangeEventHandler _srCollectionChangedWithInvoke;
         private readonly object _lock = new object();
 
         #endregion
 
         public SrPicker()
         {
-            SR_CollectionChangedWithInvoke = Program.ProgramInvokeHandler(SR_CollectionChanged);
-            _refreshQueue.CollectionChanged += _refreshQueue_CollectionChanged;
+            _srCollectionChangedWithInvoke = Program.ProgramInvokeHandler(SR_CollectionChanged);
+            _refreshQueue.CollectionChanged += RefreshQueue_CollectionChanged;
         }
 
         #region Properties
@@ -104,12 +105,13 @@ namespace XenAdmin.Controls
         #endregion
 
         public void PopulateAsync(SRPickerType usage, IXenConnection connection, Host affinity,
-            SR preselectedSr, VDI[] existingVdis)
+            SR preselectedSr, VDI[] existingDisks)
         {
             _usage = usage;
             _connection = connection;
             _affinity = affinity;
-            _existingVDIs = existingVdis;
+            _existingDisks = existingDisks;
+            _preselectedSr = preselectedSr;
 
             if (_connection == null)
                 return;
@@ -117,17 +119,15 @@ namespace XenAdmin.Controls
             Pool pool = Helpers.GetPoolOfOne(_connection);
             if (pool != null)
             {
-                defaultSR = _connection.Resolve(pool.default_SR);
+                _defaultSr = _connection.Resolve(pool.default_SR);
                 pool.PropertyChanged -= pool_PropertyChanged;
                 pool.PropertyChanged += pool_PropertyChanged;
             }
 
-            _connection.Cache.RegisterCollectionChanged<SR>(SR_CollectionChangedWithInvoke);
+            _connection.Cache.RegisterCollectionChanged<SR>(_srCollectionChangedWithInvoke);
 
             foreach (var sr in _connection.Cache.SRs)
                 AddNewSr(sr);
-
-            _ = SelectSR(preselectedSr) || SelectDefaultSR() || SelectAnySR();
         }
 
         public void UpdateDiskSize(long diskSize)
@@ -139,7 +139,7 @@ namespace XenAdmin.Controls
 
         private void AddNewSr(SR sr)
         {
-            var item = SrPickerItem.Create(sr, _usage, _affinity, _existingVDIs);
+            var item = SrPickerItem.Create(sr, _usage, _affinity, _existingDisks);
             if (!item.Show)
                 return;
 
@@ -166,7 +166,7 @@ namespace XenAdmin.Controls
                 _refreshQueue.Add(srRefreshAction);
         }
 
-        private void _refreshQueue_CollectionChanged(object sender, CollectionChangeEventArgs e)
+        private void RefreshQueue_CollectionChanged(object sender, CollectionChangeEventArgs e)
         {
             lock (_lock)
             {
@@ -197,6 +197,22 @@ namespace XenAdmin.Controls
                     if (item is SrPickerItem it && it.TheSR.opaque_ref == action.SR.opaque_ref)
                     {
                         it.Scanning = false;
+
+                        if (_preselectedSr != null)
+                        {
+                            if (it.TheSR.opaque_ref == _preselectedSr.opaque_ref)
+                                SelectedItem = item;
+                        }
+                        else if (_defaultSr != null)
+                        {
+                            if (it.TheSR.opaque_ref == _defaultSr.opaque_ref)
+                                SelectedItem = item;
+                        }
+                        else if (SelectedItem == null)
+                        {
+                            SelectedItem = item;
+                        }
+
                         break;
                     }
                 }
@@ -331,55 +347,7 @@ namespace XenAdmin.Controls
                 sr.PropertyChanged -= sr_PropertyChanged;
             }
 
-            _connection.Cache.DeregisterCollectionChanged<SR>(SR_CollectionChangedWithInvoke);
-        }
-
-        private bool SelectDefaultSR()
-        {
-            if (defaultSR == null)
-                return false;
-
-            foreach (SrPickerItem item in Items)
-            {
-                if (item.TheSR != null && item.TheSR.opaque_ref == defaultSR.opaque_ref && item.Enabled)
-                {
-                    SelectedItem = item;
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        private bool SelectSR(SR sr)
-        {
-            if (sr == null)
-                return false;
-
-            foreach (SrPickerItem item in Items)
-            {
-                if (item.TheSR != null && item.TheSR.opaque_ref == sr.opaque_ref && item.Enabled)
-                {
-                    SelectedItem = item;
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        private bool SelectAnySR()
-        {
-            foreach (SrPickerItem item in Items)
-            {
-                if (item != null && item.Enabled)
-                {
-                    SelectedItem = item;
-                    return true;
-                }
-            }
-
-            return false;
+            _connection.Cache.DeregisterCollectionChanged<SR>(_srCollectionChangedWithInvoke);
         }
 
         protected override void Dispose(bool disposing)
