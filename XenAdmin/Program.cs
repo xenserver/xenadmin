@@ -30,7 +30,6 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.Diagnostics;
@@ -40,12 +39,12 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
 using XenAdmin.Network;
-using XenAdmin.XenSearch;
 using XenAPI;
 using XenCenterLib;
 
@@ -57,32 +56,13 @@ namespace XenAdmin
         public const int DEFAULT_WLB_PORT = 8012;
 
         /// <summary>
-        /// Module for authenticating with proxy server using the Basic authentication scheme.
-        /// </summary>
-        private static IAuthenticationModule BasicAuthenticationModule;
-        /// <summary>
-        /// Module for authenticating with proxy server using the Digest authentication scheme.
-        /// </summary>
-        private static IAuthenticationModule DigestAuthenticationModule;
-
-        /// <summary>
         /// A UUID for the current instance of XenCenter.  Used to identify our own task instances.
         /// </summary>
         public static readonly string XenCenterUUID = Guid.NewGuid().ToString();
 
-        private static NamedPipes.Pipe pipe;
-        private const string PIPE_PATH_PATTERN = @"\\.\pipe\XenCenter-{0}-{1}-{2}";
-
-        /// <summary>
-        /// Color.Transparent on most platforms; SystemColors.Window when ClearType is enabled.
-        /// This is to work around a bug in TextRenderer.DrawText which causes text written to a double-buffer
-        /// using ClearType to anti-alias onto black rather than onto the background colour.  In this case,
-        /// we use Window, because by luck those labels are always on top of that colour on Vista and XP.
-        /// We indicate that we're writing to a buffer (rather than the screen) by setting Graphics.TextContrast
-        /// to 5 (the default is 4). This hack was needed because there's no easy way to add info to
-        /// a Graphics object. (CA-22938).
-        /// </summary>
-        public static Color TransparentUsually = Color.Transparent;
+        private static NamedPipes.Pipe _pipe;
+        private static string _pipePath;
+        private const string PIPE_PATH_PATTERN = @"\\.\pipe\{0}-{1}";
 
         public static Font DefaultFont = FormFontFixer.DefaultFont;
         public static Font DefaultFontBold;
@@ -90,8 +70,7 @@ namespace XenAdmin
         public static Font DefaultFontItalic;
         public static Font DefaultFontHeader;
 
-        public static MainWindow MainWindow = null;
-
+        public static MainWindow MainWindow;
 
         public static CollectionChangeEventHandler ProgramInvokeHandler(CollectionChangeEventHandler handler)
         {
@@ -108,7 +87,6 @@ namespace XenAdmin
             };
         }
 
-
         /// <summary>
         /// The secure hash of the main password used to load the client session.
         /// If this is null then no prior session existed and the user should be prompted
@@ -124,7 +102,7 @@ namespace XenAdmin
 
         public static bool RunInAutomatedTestMode = false;
         public static string TestExceptionString;  // an exception passed back to the test framework
-        private static log4net.ILog log;
+        private static readonly log4net.ILog log;
 
         public static volatile bool Exiting;
 
@@ -138,7 +116,7 @@ namespace XenAdmin
             // Start timer to record resource usage every 24hrs
             dailyTimer = new System.Threading.Timer(delegate
             {
-                logApplicationStats();
+                LogApplicationStats();
             }, null, new TimeSpan(24, 0, 0), new TimeSpan(24, 0, 0));
 
             log4net.Config.XmlConfigurator.ConfigureAndWatch(new FileInfo(Assembly.GetCallingAssembly().Location + ".config"));
@@ -153,81 +131,28 @@ namespace XenAdmin
         [STAThread]
         public static void Main(string[] args)
         {
-            string appVersionString = Version.ToString();
-            log.InfoFormat("Application version of current settings {0}", appVersionString);
+            string appGuid = ((GuidAttribute)Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(GuidAttribute), false).GetValue(0)).Value;
+            _pipePath = string.Format(PIPE_PATH_PATTERN, BrandManager.BrandConsoleNoSpace, appGuid);
 
-            try
+            if (NamedPipes.Pipe.ExistsPipe(_pipePath))
             {
-                if (Properties.Settings.Default.ApplicationVersion != appVersionString)
-                {
-                    log.Info("Upgrading settings...");
-                    Properties.Settings.Default.Upgrade();
-
-                    // if program's hash has changed (e.g. by upgrading to .NET 4.0), then Upgrade() doesn't import the previous application settings 
-                    // because it cannot locate a previous user.config file. In this case a new user.config file is created with the default settings.
-                    // We will try and find a config file from a previous installation and update the settings from it
-
-                    if (Properties.Settings.Default.ApplicationVersion == "" && Properties.Settings.Default.DoUpgrade)
-                        Settings.UpgradeFromPreviousInstallation();
-
-                    log.InfoFormat("Settings upgraded from '{0}' to '{1}'", Properties.Settings.Default.ApplicationVersion, appVersionString);
-                    Properties.Settings.Default.ApplicationVersion = appVersionString;
-                    Settings.TrySaveSettings();
-                }
-            }
-            catch (ConfigurationErrorsException ex)
-            {
-                log.Error("Could not load settings.", ex);
-                var msg = string.Format("{0}\n\n{1}", Messages.MESSAGEBOX_LOAD_CORRUPTED_TITLE,
-                                        string.Format(Messages.MESSAGEBOX_LOAD_CORRUPTED, Settings.GetUserConfigPath()));
-                using (var dlg = new ErrorDialog(msg)
-                {
-                    StartPosition = FormStartPosition.CenterScreen,
-                    //For reasons I do not fully comprehend at the moment, the runtime
-                    //overrides the above StartPosition with WindowsDefaultPosition if
-                    //ShowInTaskbar is false. However it's a good idea anyway to show it
-                    //in the taskbar since the main form is not launched at this point.
-                    ShowInTaskbar = true
-                })
-                {
-                    dlg.ShowDialog();
-                }
-                Application.Exit();
+                NamedPipes.Pipe.SendMessageToPipe(_pipePath, string.Join(" ", args));
                 return;
             }
-
-            // Reset statics, because XenAdminTests likes to call Main() twice.
-            TestExceptionString = null;
-            Exiting = false;
-            // Clear XenConnections and History so static classes like OtherConfigAndTagsWatcher 
-            // listening to changes still work when Main is called more than once.
-            ConnectionsManager.XenConnections.Clear();
-            ConnectionsManager.History.Clear();
-
-            Search.InitSearch(BrandManager.ExtensionSearch);
-            TreeSearch.InitSearch();
 
             AppDomain.CurrentDomain.UnhandledException -= CurrentDomain_UnhandledException;
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             Application.ThreadException -= Application_ThreadException;
             Application.ThreadException += Application_ThreadException;
+            Application.ApplicationExit -= Application_ApplicationExit;
+            Application.ApplicationExit += Application_ApplicationExit;
+
+            ConnectPipe();
 
             // We must NEVER request ProfessionalColors before we have called Application.EnableVisualStyles
             // as it may prevent the program from displayed as expected.
             Application.EnableVisualStyles();
-
             Application.SetCompatibleTextRenderingDefault(false);
-
-            try
-            {
-                if (SystemInformation.FontSmoothingType == 2) // ClearType
-                    TransparentUsually = SystemColors.Window;
-            }
-            catch (NotSupportedException)
-            {
-                // Leave TransparentUsually == Color.Transparent.  This is an old platform
-                // without FontSmoothingType support.
-            }
 
             // Force the current culture, to make the layout the same whatever the culture of the underlying OS (CA-46983).
             Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture = new CultureInfo(InvisibleMessages.LOCALE, false);
@@ -239,181 +164,55 @@ namespace XenAdmin
             ServicePointManager.ServerCertificateValidationCallback = SSL.ValidateServerCertificate;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
             Session.UserAgent = $"{BrandManager.BrandConsole} {Version}";
-            RememberProxyAuthenticationModules();
-            ReconfigureConnectionSettings();
-            Settings.ConfigureExternalSshClientSettings();
 
             log.Info("Application started");
-            logSystemDetails();
-            Settings.Log();
+            LogSystemDetails();
 
-            // Remove the '--wait' argument, which may have been passed to the splash screen
-            var sanitizedArgs = args.Where(ar => ar != "--wait").ToArray();
-
-            var firstArgType = ParseFileArgs(sanitizedArgs, out string[] tailArgs);
-
-            if (firstArgType == ArgType.Passwords)
-            {
-                try
-                {
-                    PasswordsRequest.HandleRequest(tailArgs[0]);
-                }
-                catch (Exception exn)
-                {
-                    log.Fatal(exn, exn);
-                }
-
-                Application.Exit();
-                return;
-            }
-
-            try
-            {
-                ConnectPipe();
-            }
-            catch (Win32Exception exn)
-            {
-                log.Error("Creating named pipe failed. Continuing to launch XenCenter.", exn);
-            }
-
-            Application.ApplicationExit -= Application_ApplicationExit;
-            Application.ApplicationExit += Application_ApplicationExit;
-
-            MainWindow mainWindow = new MainWindow(firstArgType, tailArgs);
-            Application.Run(mainWindow);
+            Application.Run(new SplashScreenContext(args));
 
             log.Info("Application main thread exited");
         }
 
-        private static ArgType ParseFileArgs(string[] args, out string[] tailArgs)
-        {
-            tailArgs = new string[0];
-
-            if (args == null || args.Length < 2)
-            {
-                log.Warn("Too few args passed in via command line");
-                return ArgType.None;
-            }
-
-            var firstArgType = ArgType.None;
-
-            switch (args[0])
-            {
-                case "import":
-                    firstArgType = ArgType.Import;
-                    break;
-                case "license":
-                    firstArgType = ArgType.License;
-                    break;
-                case "restore":
-                    firstArgType = ArgType.Restore;
-                    break;
-                case "search":
-                    firstArgType = ArgType.XenSearch;
-                    break;
-                case "passwords":
-                    firstArgType = ArgType.Passwords;
-                    break;
-                case "connect":
-                    firstArgType = ArgType.Connect;
-                    break;
-                default:
-                    log.Warn("Wrong syntax or unknown command line options.");
-                    break;
-            }
-
-            if (firstArgType != ArgType.None)
-            {
-                log.InfoFormat("Command line option passed in: {0}", firstArgType.ToString());
-                tailArgs = args.Skip(1).ToArray();
-            }
-
-            return firstArgType;
-        }
-
         /// <summary>
-        /// Connects to the XenCenter named pipe. If the pipe didn't already exist, a new thread is started
-        /// that listens for incoming data on the pipe (from new invocations of XenCenter) and deals
-        /// with the command line arguments of those instances. If the pipe does exist, a Win32Exception is thrown.
+        /// If the pipe doesn't already exist, it creates a new one and starts a thread
+        /// that listens for incoming data on the pipe (from new invocations of XenCenter)
+        /// and deals with the command line arguments of those instances.
         /// </summary>
-        /// <exception cref="Win32Exception">If creating the pipe failed for any reason.</exception>
         private static void ConnectPipe()
         {
-            string pipe_path = string.Format(PIPE_PATH_PATTERN, Process.GetCurrentProcess().SessionId, Environment.UserName, Assembly.GetExecutingAssembly().Location.Replace('\\', '-'));
+            _pipe = new NamedPipes.Pipe(_pipePath);
 
-            // Pipe path must be limited to 256 characters in length
-            if (pipe_path.Length > 256)
+            if (_pipe != null)
             {
-                pipe_path = pipe_path.Substring(0, 256);
+                _pipe.Read += pipe_Read;
+                _pipe.BeginRead();
             }
+        }
 
-            log.InfoFormat(@"Connecting to pipe '{0}'", pipe_path);
-            // Line below may throw Win32Exception
-            pipe = new NamedPipes.Pipe(pipe_path);
-
-            log.InfoFormat(@"Successfully created pipe '{0}' - proceeding to launch XenCenter", pipe_path);
-
-            pipe.Read += delegate (object sender, NamedPipes.PipeReadEventArgs e)
+        private static void pipe_Read(string message)
+        {
+            MainWindow m = MainWindow;
+            
+            if (m != null && !RunInAutomatedTestMode)
             {
-                MainWindow m = MainWindow;
-                if (m == null || RunInAutomatedTestMode)
-                    return;
-
-                var bits = e.Message.Split(' ').Where(ar => ar != "--wait").ToArray();
-
-                var firstArgType = ParseFileArgs(bits, out string[] tailArgs);
-
-                if (firstArgType == ArgType.Passwords)
-                {
-                    log.ErrorFormat("Refusing to accept passwords request down pipe.  Use {0}Main.exe directly", BrandManager.BrandConsole.Replace(" ", ""));
-                    return;
-                }
-                if (firstArgType == ArgType.Connect)
-                {
-                    log.ErrorFormat("Connect not supported down pipe. Use {0}Main.exe directly", BrandManager.BrandConsole.Replace(" ", ""));
-                    return;
-                }
-                if (firstArgType == ArgType.None)
-                    return;
-
-                // The C++ splash screen passes its command line as a literal string.
-                // This means we will get an e.Message like
-                //      open "C:\Documents and Settings\foo.xva"
-                // INCLUDING the double quotes, thus we need to trim them
-
-                var argument = tailArgs[0];
-
-                if (argument.StartsWith("\""))
-                {
-                    var count = tailArgs.TakeWhile(t => !t.EndsWith("\"")).Count();
-                    if (count < tailArgs.Length)
-                        count++;
-                    argument = string.Join(" ", tailArgs.Take(count).ToArray());
-                }
-
-                argument = argument.Trim('"');
-
                 Invoke(m, delegate
                 {
                     m.WindowState = FormWindowState.Normal;
-                    m.ProcessCommand(firstArgType, argument);
+                    m.ProcessCommand(message.Split(' ').ToArray());
                 });
-            };
-
-            pipe.BeginRead();
-            // We created the pipe successfully - i.e. nobody was listening, so go ahead and start XenCenter
-        }
-
-        internal static void DisconnectPipe()
-        {
-            if (pipe != null)
-            {
-                log.Debug("Disconnecting from named pipe in Program.DisconnectPipe()");
-                ThreadPool.QueueUserWorkItem(state => pipe.Disconnect());
             }
         }
 
-        private static void logSystemDetails()
+        private static void DisconnectPipe()
+        {
+            if (_pipe != null)
+            {
+                log.Debug("Disconnecting from named pipe in Program.DisconnectPipe()");
+                ThreadPool.QueueUserWorkItem(state => _pipe.EndRead());
+            }
+        }
+
+        private static void LogSystemDetails()
         {
             log.InfoFormat("Version: {0}", Version);
             log.InfoFormat(".NET runtime version: {0}", Environment.Version.ToString(4));
@@ -422,30 +221,7 @@ namespace XenAdmin
             log.InfoFormat("Bitness: {0}-bit", IntPtr.Size * 8);
         }
 
-        static void Application_ApplicationExit(object sender, EventArgs e)
-        {
-            Exiting = true;
-
-            logApplicationStats();
-
-            Clip.UnregisterClipboardViewer();
-
-            try
-            {
-                // Lets save the connections first, so we can save their connected state
-                Settings.SaveServerList(); //this calls Settings.TrySaveSettings()
-            }
-            catch (Exception)
-            {
-                // Ignore here
-            }
-            // The application is about to exit - gracefully close connections to
-            // avoid a bunch of WinForms related race conditions...
-            foreach (IXenConnection conn in ConnectionsManager.XenConnectionsCopy)
-                conn.EndConnect(false, true);
-        }
-
-        private static void logApplicationStats()
+        private static void LogApplicationStats()
         {
             Process p = Process.GetCurrentProcess();
 
@@ -477,12 +253,50 @@ namespace XenAdmin
             log.InfoFormat("User processor time: {0}", p.UserProcessorTime.ToString());
         }
 
-        static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
+        private static void Application_ApplicationExit(object sender, EventArgs e)
+        {
+            Exiting = true;
+            try
+            {
+                Clip.UnregisterClipboardViewer();
+            }
+            catch (Exception ex)
+            {
+                log.Warn("Error while unregistering clipboard viewer on application exit", ex);
+            }
+
+            try
+            {
+                // Let's save the connections first, so we can save their connected state
+                Settings.SaveServerList(); //this calls Settings.TrySaveSettings()
+            }
+            catch (Exception ex)
+            {
+                log.Warn("Error while saving server list on application exit", ex);
+            }
+
+            try
+            {
+                // The application is about to exit - gracefully close connections to
+                // avoid a bunch of WinForms related race conditions...
+                foreach (IXenConnection conn in ConnectionsManager.XenConnectionsCopy)
+                    conn.EndConnect(false, true);
+            }
+            catch (Exception ex)
+            {
+                log.Warn("Error while ending connections on application exit", ex);
+            }
+
+            DisconnectPipe();
+            LogApplicationStats();
+        }
+
+        private static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
         {
             ProcessUnhandledException(e.Exception);
         }
 
-        static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             ProcessUnhandledException(e.ExceptionObject as Exception);
         }
@@ -501,8 +315,8 @@ namespace XenAdmin
                 {
                     log.Fatal("Fatal error");
                 }
-                logSystemDetails();
-                logApplicationStats();
+                LogSystemDetails();
+                LogApplicationStats();
 
                 if (RunInAutomatedTestMode)
                 {
@@ -705,40 +519,6 @@ namespace XenAdmin
             return null;
         }
 
-        private static readonly List<string> HiddenObjects = new List<string>();
-
-        internal static void HideObject(string opaqueRef)
-        {
-            lock (HiddenObjects)
-            {
-                HiddenObjects.Add(opaqueRef);
-            }
-            if (MainWindow != null)
-            {
-                MainWindow.RequestRefreshTreeView();
-            }
-        }
-
-        internal static void ShowObject(string opaqueRef)
-        {
-            lock (HiddenObjects)
-            {
-                HiddenObjects.Remove(opaqueRef);
-            }
-            if (MainWindow != null)
-            {
-                MainWindow.RequestRefreshTreeView();
-            }
-        }
-
-        internal static bool ObjectIsHidden(string opaqueRef)
-        {
-            lock (HiddenObjects)
-            {
-                return HiddenObjects.Contains(opaqueRef);
-            }
-        }
-
         #region Invocations
 
         /// <summary>
@@ -910,76 +690,8 @@ namespace XenAdmin
         {
             return !Exiting && c != null && !c.Disposing && !c.IsDisposed && c.IsHandleCreated;
         }
+
         #endregion
-
-        public static void ReconfigureConnectionSettings()
-        {
-            ReconfigureProxyAuthenticationSettings();
-            Session.Proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(null);
-        }
-
-        /// <summary>
-        /// Stores the Basic and Digest authentication modules, used for proxy server authentication, 
-        /// for later use; this is needed because we cannot create new instances of them and it 
-        /// saves us needing to create our own custom authentication modules.
-        /// </summary>
-        private static void RememberProxyAuthenticationModules()
-        {
-            var authModules = AuthenticationManager.RegisteredModules;
-            while (authModules.MoveNext())
-            {
-                if (!(authModules.Current is IAuthenticationModule module))
-                    continue;
-
-                if (module.AuthenticationType == "Basic")
-                    BasicAuthenticationModule = module;
-                else if (module.AuthenticationType == "Digest")
-                    DigestAuthenticationModule = module;
-            }
-        }
-
-        /// <summary>
-        /// Configures .NET's AuthenticationManager to only use the authentication module that is 
-        /// specified in the ProxyAuthenticationMethod setting. Also sets XenAPI's HTTP class to 
-        /// use the same authentication method.
-        /// </summary>
-        private static void ReconfigureProxyAuthenticationSettings()
-        {
-            var authModules = AuthenticationManager.RegisteredModules;
-            var modulesToUnregister = new List<IAuthenticationModule>();
-
-            while (authModules.MoveNext())
-            {
-                var module = (IAuthenticationModule)authModules.Current;
-                modulesToUnregister.Add(module);
-            }
-
-            foreach (var module in modulesToUnregister)
-                AuthenticationManager.Unregister(module);
-
-            var authSetting = (HTTP.ProxyAuthenticationMethod)Properties.Settings.Default.ProxyAuthenticationMethod;
-            if (authSetting == HTTP.ProxyAuthenticationMethod.Basic)
-                AuthenticationManager.Register(BasicAuthenticationModule);
-            else
-                AuthenticationManager.Register(DigestAuthenticationModule);
-
-            HTTP.CurrentProxyAuthenticationMethod = authSetting;
-        }
-
-        private const string SplashWindowClass = "XenCenterSplash0001";
-
-        internal static void CloseSplash()
-        {
-            IntPtr hWnd = Win32.FindWindow(SplashWindowClass, null);
-
-            if (hWnd == IntPtr.Zero)
-                return;
-
-            if (!Win32.PostMessage(hWnd, Win32.WM_DESTROY, IntPtr.Zero, IntPtr.Zero))
-            {
-                log.Warn("PostMessage WM_DESTROY failed in CloseSplash()", new Win32Exception());
-            }
-        }
 
         public static void OpenURL(string url)
         {
@@ -1008,6 +720,4 @@ namespace XenAdmin
 
         public static CultureInfo CurrentCulture => Thread.CurrentThread.CurrentCulture;
     }
-
-    public enum ArgType { Import, License, Restore, None, XenSearch, Passwords, Connect }
 }

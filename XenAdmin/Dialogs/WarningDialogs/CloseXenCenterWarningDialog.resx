@@ -338,7 +338,7 @@
     <value>dataGridViewActions</value>
   </data>
   <data name="&gt;&gt;dataGridViewActions.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.DataGridViewEx.DataGridViewEx, [XenCenter_No_Space]Main, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.DataGridViewEx.DataGridViewEx, [XenCenter_No_Space], Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dataGridViewActions.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -491,6 +491,6 @@
     <value>CloseXenCenterWarningDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>XenAdmin.Dialogs.XenDialogBase, [XenCenter_No_Space]Main, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Dialogs.XenDialogBase, [XenCenter_No_Space], Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

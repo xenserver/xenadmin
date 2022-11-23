@@ -55,8 +55,8 @@ namespace XenAdmin
         IWebProxy GetProxyFromSettings(IXenConnection connection);
         IWebProxy GetProxyFromSettings(IXenConnection connection, bool isForXenServer);
         int GetProxyTimeout(bool timeout);
-        void ShowObject(string newVMRef);
-        void HideObject(string newVMRef);
+        void ShowObject(string opaqueRef);
+        void HideObject(string opaqueRef);
         bool ObjectIsHidden(string opaqueRef);
         string GetLogFile();
         void UpdateServerHistory(string hostnameWithPort);

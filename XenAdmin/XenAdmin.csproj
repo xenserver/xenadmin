@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>XenAdmin</RootNamespace>
-    <AssemblyName>[XenCenter_No_Space]Main</AssemblyName>
+    <AssemblyName>[XenCenter_No_Space]</AssemblyName>
     <ApplicationIcon>..\Branding\Images\AppIcon.ico</ApplicationIcon>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <PublishUrl>publish\</PublishUrl>
@@ -480,6 +480,13 @@
       <DependentUpon>WlbThresholdsPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Plugins\Features\ParentMenuItemFeature.cs" />
+    <Compile Include="SplashScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SplashScreen.Designer.cs">
+      <DependentUpon>SplashScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SplashScreenContext.cs" />
     <Compile Include="TabPages\BaseTabPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -676,12 +683,6 @@
     <Compile Include="Dialogs\Network\UnknownCertificateDialog.Designer.cs">
       <DependentUpon>UnknownCertificateDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\PasswordsRequestDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\PasswordsRequestDialog.Designer.cs">
-      <DependentUpon>PasswordsRequestDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\VmSnapshotDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -705,7 +706,6 @@
     </Compile>
     <Compile Include="Images.cs" />
     <Compile Include="Network\SSL.cs" />
-    <Compile Include="PasswordsRequest.cs" />
     <Compile Include="Plugins\PluginDescriptor.cs" />
     <Compile Include="Plugins\PluginManager.cs" />
     <Compile Include="RDP\AxMSTSCLib.cs">
@@ -2034,10 +2034,6 @@
       <SubType>Designer</SubType>
       <DependentUpon>UnknownCertificateDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\PasswordsRequestDialog.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>PasswordsRequestDialog.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\VmSnapshotDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>VmSnapshotDialog.cs</DependentUpon>
@@ -2138,6 +2134,15 @@
     <EmbeddedResource Include="SettingsPanels\Wlb\WlbThresholdsPage.resx">
       <SubType>Designer</SubType>
       <DependentUpon>WlbThresholdsPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SplashScreen.ja.resx">
+      <DependentUpon>SplashScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SplashScreen.resx">
+      <DependentUpon>SplashScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SplashScreen.zh-CN.resx">
+      <DependentUpon>SplashScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\AdPage.resx">
       <DependentUpon>AdPage.cs</DependentUpon>
@@ -5374,12 +5379,6 @@
     <EmbeddedResource Include="Dialogs\OptionsPages\UpdatesOptionsPage.zh-CN.resx">
       <DependentUpon>UpdatesOptionsPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\PasswordsRequestDialog.ja.resx">
-      <DependentUpon>PasswordsRequestDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\PasswordsRequestDialog.zh-CN.resx">
-      <DependentUpon>PasswordsRequestDialog.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\PropertiesDialog.ja.resx">
       <DependentUpon>PropertiesDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -6689,6 +6688,9 @@
     <None Include="Images\VMTemplate_h32bit_32.png" />
     <Content Include="Images\xcm.png" />
     <Content Include="Images\xcm_32x32.png" />
+    <None Include="..\Branding\Images\splash.bmp">
+      <Link>Images\splash.bmp</Link>
+    </None>
     <Content Include="TestResources\credits.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

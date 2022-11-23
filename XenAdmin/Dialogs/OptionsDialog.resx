@@ -151,7 +151,7 @@
     <value>externalToolsOptionsPage1</value>
   </data>
   <data name="&gt;&gt;externalToolsOptionsPage1.Type" xml:space="preserve">
-    <value>XenAdmin.Dialogs.OptionsPages.ConnectionOptionsPage, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Dialogs.OptionsPages.ConnectionOptionsPage, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;externalToolsOptionsPage1.Parent" xml:space="preserve">
     <value>ContentPanel</value>
@@ -181,7 +181,7 @@
     <value>confirmationOptionsPage1</value>
   </data>
   <data name="&gt;&gt;confirmationOptionsPage1.Type" xml:space="preserve">
-    <value>XenAdmin.Dialogs.OptionsPages.ConfirmationOptionsPage, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Dialogs.OptionsPages.ConfirmationOptionsPage, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;confirmationOptionsPage1.Parent" xml:space="preserve">
     <value>ContentPanel</value>
@@ -211,7 +211,7 @@
     <value>pluginOptionsPage1</value>
   </data>
   <data name="&gt;&gt;pluginOptionsPage1.Type" xml:space="preserve">
-    <value>XenAdmin.Dialogs.OptionsPages.PluginOptionsPage, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Dialogs.OptionsPages.PluginOptionsPage, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;pluginOptionsPage1.Parent" xml:space="preserve">
     <value>ContentPanel</value>
@@ -244,7 +244,7 @@
     <value>saveAndRestoreOptionsPage1</value>
   </data>
   <data name="&gt;&gt;saveAndRestoreOptionsPage1.Type" xml:space="preserve">
-    <value>XenAdmin.Dialogs.OptionsPages.SaveAndRestoreOptionsPage, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Dialogs.OptionsPages.SaveAndRestoreOptionsPage, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;saveAndRestoreOptionsPage1.Parent" xml:space="preserve">
     <value>ContentPanel</value>
@@ -274,7 +274,7 @@
     <value>securityOptionsPage1</value>
   </data>
   <data name="&gt;&gt;securityOptionsPage1.Type" xml:space="preserve">
-    <value>XenAdmin.Dialogs.OptionsPages.SecurityOptionsPage, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Dialogs.OptionsPages.SecurityOptionsPage, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;securityOptionsPage1.Parent" xml:space="preserve">
     <value>ContentPanel</value>
@@ -304,7 +304,7 @@
     <value>updatesOptionsPage1</value>
   </data>
   <data name="&gt;&gt;updatesOptionsPage1.Type" xml:space="preserve">
-    <value>XenAdmin.Dialogs.OptionsPages.UpdatesOptionsPage, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Dialogs.OptionsPages.UpdatesOptionsPage, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;updatesOptionsPage1.Parent" xml:space="preserve">
     <value>ContentPanel</value>
@@ -334,7 +334,7 @@
     <value>graphsOptionsPage1</value>
   </data>
   <data name="&gt;&gt;graphsOptionsPage1.Type" xml:space="preserve">
-    <value>XenAdmin.Dialogs.OptionsPages.DisplayOptionsPage, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Dialogs.OptionsPages.DisplayOptionsPage, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;graphsOptionsPage1.Parent" xml:space="preserve">
     <value>ContentPanel</value>
@@ -367,7 +367,7 @@
     <value>consolesOptionsPage1</value>
   </data>
   <data name="&gt;&gt;consolesOptionsPage1.Type" xml:space="preserve">
-    <value>XenAdmin.Dialogs.OptionsPages.ConsolesOptionsPage, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Dialogs.OptionsPages.ConsolesOptionsPage, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;consolesOptionsPage1.Parent" xml:space="preserve">
     <value>ContentPanel</value>
@@ -400,7 +400,7 @@
     <value>connectionOptionsPage1</value>
   </data>
   <data name="&gt;&gt;connectionOptionsPage1.Type" xml:space="preserve">
-    <value>XenAdmin.Dialogs.OptionsPages.ConnectionOptionsPage, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Dialogs.OptionsPages.ConnectionOptionsPage, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;connectionOptionsPage1.Parent" xml:space="preserve">
     <value>ContentPanel</value>
@@ -439,7 +439,7 @@
     <value>verticalTabs</value>
   </data>
   <data name="&gt;&gt;verticalTabs.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.VerticalTabs, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.VerticalTabs, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;verticalTabs.Parent" xml:space="preserve">
     <value>splitContainer.Panel1</value>
@@ -556,6 +556,6 @@
     <value>OptionsDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>XenAdmin.Dialogs.VerticallyTabbedDialog, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Dialogs.VerticallyTabbedDialog, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

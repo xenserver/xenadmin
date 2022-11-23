@@ -50,7 +50,10 @@ foreach ($file in $files) {
 
     $result = Select-String -Path $file -Pattern 'Copyright (c) Citrix Systems, Inc.' -CaseSensitive -SimpleMatch
     if ($null -eq $result) {
-        $badFiles.Add($file) > $null
+        $result = Select-String -Path $file -Pattern 'Copyright (c) Cloud Software Group Holdings, Inc.' -CaseSensitive -SimpleMatch
+        if ($null -eq $result) {
+            $badFiles.Add($file) > $null
+        }
     }
 }
 

@@ -404,7 +404,7 @@
     <value>sshConsoleGroupBox</value>
   </data>
   <data name="&gt;&gt;sshConsoleGroupBox.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.DecentGroupBox, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.DecentGroupBox, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;sshConsoleGroupBox.Parent" xml:space="preserve">
     <value>externalToolsLayoutPanel</value>

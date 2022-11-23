@@ -657,7 +657,6 @@ namespace XenAdmin.XenSearch
         }
 
         private static Dictionary<String, Search> searches =new Dictionary<string, Search>();
-        public static string BrandedSearchKey { get; private set; }
         public static event Action SearchesChanged;
 
         private static void OnSearchesChanged()
@@ -679,10 +678,9 @@ namespace XenAdmin.XenSearch
             }
         }
 
-        public static void InitSearch(string brandedSearchKey)
+        public static void InitSearch()
         {
-            searches = new Dictionary<String, Search>();
-            BrandedSearchKey = brandedSearchKey;
+            searches = new Dictionary<string, Search>();
 
             InitDefaultSearches();
 
@@ -701,10 +699,7 @@ namespace XenAdmin.XenSearch
             SynchroniseSearches();
         }
 
-        private static string SearchPrefix
-        {
-            get { return BrandedSearchKey + ".Search-"; }
-        }
+        private static string SearchPrefix => BrandManager.ExtensionSearch + ".Search-";
 
         private static void SynchroniseSearches()
         {

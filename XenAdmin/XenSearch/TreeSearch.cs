@@ -35,19 +35,16 @@ namespace XenAdmin.XenSearch
 {
     internal class TreeSearch
     {
+        private static Search _defaultTreeSearch;
+
         public static Search DefaultTreeSearch
         {
             get
             {
-                return defaultTreeSearch;
+                if (_defaultTreeSearch == null)
+                    _defaultTreeSearch = SearchMarshalling.LoadSearch(Properties.Settings.Default.DefaultSearch);
+                return _defaultTreeSearch;
             }
-        }
-
-        private static Search defaultTreeSearch = null;
-
-        public static void InitSearch()
-        {
-            defaultTreeSearch = SearchMarshalling.LoadSearch(Properties.Settings.Default.DefaultSearch);
         }
 
         internal static Search SearchFor(IXenObject value)

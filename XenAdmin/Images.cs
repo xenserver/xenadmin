@@ -889,6 +889,7 @@ namespace XenAdmin
             public static Bitmap SpinningFrame5 = Properties.Resources.SpinningFrame5;
             public static Bitmap SpinningFrame6 = Properties.Resources.SpinningFrame6;
             public static Bitmap SpinningFrame7 = Properties.Resources.SpinningFrame7;
+            public static Bitmap splash = Properties.Resources.splash;
             public static Bitmap StoppedDC_16 = Properties.Resources.StoppedDC_16;
             public static Bitmap subscribe = Properties.Resources.subscribe;
             public static Bitmap suse_16x = Properties.Resources.suse_16x;
