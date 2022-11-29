@@ -12219,7 +12219,7 @@ Incremental allocation: {1}</value>
     <value>This SR contains running VMs.</value>
   </data>
   <data name="SR_IS_BROKEN" xml:space="preserve">
-    <value>This storage repository is broken</value>
+    <value>This SR is broken or not fully attached.</value>
   </data>
   <data name="SR_IS_LOCAL" xml:space="preserve">
     <value>VMs without a home server cannot have disks on local storage</value>

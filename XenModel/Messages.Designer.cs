@@ -35271,7 +35271,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This storage repository is broken.
+        ///   Looks up a localized string similar to This SR is broken or not fully attached..
         /// </summary>
         public static string SR_IS_BROKEN {
             get {

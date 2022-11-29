@@ -259,7 +259,7 @@ namespace XenAdmin.Controls
 
         protected bool IsBroken(out string cannotEnableReason)
         {
-            if (TheSR.IsBroken(false))
+            if (TheSR.IsBroken())
             {
                 cannotEnableReason = Messages.SR_IS_BROKEN;
                 return true;
