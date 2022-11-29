@@ -41,6 +41,7 @@ namespace XenAdmin.Dialogs
             this.label4 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.diskSpinner1 = new XenAdmin.Controls.DiskSpinner();
+            this.buttonRescan = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,6 +57,7 @@ namespace XenAdmin.Dialogs
             this.srPicker.ShowDescription = true;
             this.srPicker.ShowImages = true;
             this.srPicker.ShowRootLines = true;
+            this.srPicker.CanBeScannedChanged += new System.Action(this.srPicker_CanBeScannedChanged);
             this.srPicker.SelectedIndexChanged += new System.EventHandler(this.srListBox_SelectedIndexChanged);
             // 
             // CloseButton
@@ -117,6 +119,7 @@ namespace XenAdmin.Dialogs
             this.tableLayoutPanel1.Controls.Add(this.label6, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.OkButton, 2, 6);
             this.tableLayoutPanel1.Controls.Add(this.diskSpinner1, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.buttonRescan, 1, 6);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // label4
@@ -136,6 +139,13 @@ namespace XenAdmin.Dialogs
             this.tableLayoutPanel1.SetColumnSpan(this.diskSpinner1, 3);
             this.diskSpinner1.Name = "diskSpinner1";
             this.diskSpinner1.SelectedSizeChanged += new System.Action(this.diskSpinner1_SelectedSizeChanged);
+            // 
+            // buttonRescan
+            // 
+            resources.ApplyResources(this.buttonRescan, "buttonRescan");
+            this.buttonRescan.Name = "buttonRescan";
+            this.buttonRescan.UseVisualStyleBackColor = true;
+            this.buttonRescan.Click += new System.EventHandler(this.buttonRescan_Click);
             // 
             // NewDiskDialog
             // 
@@ -166,5 +176,6 @@ namespace XenAdmin.Dialogs
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label6;
         private Controls.DiskSpinner diskSpinner1;
+        private System.Windows.Forms.Button buttonRescan;
     }
 }

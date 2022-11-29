@@ -41,15 +41,15 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 {
     public partial class IntraPoolCopyPage : XenTabPage
     {
-        public readonly VM TheVM;
+        private bool _buttonNextEnabled;
 
         public IntraPoolCopyPage(List<VM> selectedVMs)
         {
-            this.TheVM = selectedVMs[0]; 
+            TheVM = selectedVMs[0]; 
             InitializeComponent();
         }
 
-        private bool _buttonNextEnabled;
+        public VM TheVM { get; }
 
         public bool CloneVM => !tableLayoutPanelSrPicker.Enabled || CloneRadioButton.Checked;
 
@@ -134,8 +134,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                 where vdi != null
                 select vdi).ToArray();
 
-            srPicker1.PopulateAsync(SrPicker.SRPickerType.Copy, TheVM.Connection,
-                TheVM.Home(), null, vdis);
+            srPicker1.Populate(SrPicker.SRPickerType.Copy, TheVM.Connection, TheVM.Home(), null, vdis);
         }
 
         public override bool EnableNext()
@@ -152,6 +151,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             if (!CrossPoolMigrateWizard.AllVMsAvailable(l))
                 cancel = true;
         }
+
         #endregion
 
         private void UpdateButtons()
@@ -166,9 +166,25 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             OnPageUpdated();
         }
 
+        private void EnableRescanButton()
+        {
+            buttonRescan.Enabled = tableLayoutPanelSrPicker.Enabled && srPicker1.CanBeScanned;
+        }
+
         private void srPicker1_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateButtons();
+        }
+
+        private void srPicker1_CanBeScannedChanged()
+        {
+            EnableRescanButton();
+            UpdateButtons();
+        }
+
+        private void buttonRescan_Click(object sender, EventArgs e)
+        {
+            srPicker1.ScanSRs();
         }
 
         private void NameTextBox_TextChanged(object sender, EventArgs e)
@@ -196,6 +212,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         private void CopyRadioButton_CheckedChanged(object sender, EventArgs e)
         {
             tableLayoutPanelSrPicker.Enabled = CopyRadioButton.Checked;
+            EnableRescanButton();
             // Since the radiobuttons aren't in the same panel, we have to do manual mutual exclusion
             CloneRadioButton.Checked = !CopyRadioButton.Checked;
             UpdateButtons();

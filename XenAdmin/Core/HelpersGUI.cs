@@ -322,11 +322,10 @@ namespace XenAdmin.Core
             {
                 if (!a.IsCompleted)
                 {
-                    if (a is SrAction && a.SR == sr)
+                    if (a is SrAction && a.SR.opaque_ref == sr.opaque_ref)
                         return true;
 
-                    EnableHAAction haAction = a as EnableHAAction;
-                    if (haAction != null && haAction.HeartbeatSRs.Contains(sr))
+                    if (a is EnableHAAction haAction && haAction.HeartbeatSRs.Contains(sr))
                         return true;
                 }
 
@@ -334,18 +333,19 @@ namespace XenAdmin.Core
             return false;
         }
 
-        public static bool BeingScanned(SR sr)
+        public static bool BeingScanned(SR sr, out SrRefreshAction scanAction)
         {
             foreach (ActionBase a in ConnectionsManager.History)
+            {
+                if (!a.IsCompleted && a is SrRefreshAction refreshAction && a.SR.opaque_ref == sr.opaque_ref)
                 {
-                    if (!a.IsCompleted)
-                    {
-                        if (a is SrRefreshAction && a.SR == sr)
-                            return true;
-                    }
+                    scanAction = refreshAction;
+                    return true;
                 }
-                return false;
-            
+            }
+
+            scanAction = null;
+            return false;
         }
 
         /// <summary>
