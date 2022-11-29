@@ -35,6 +35,7 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.toolTipContainer1 = new XenAdmin.Controls.ToolTipContainer();
+            this.buttonRescan = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.toolTipContainer1.SuspendLayout();
             this.SuspendLayout();
@@ -42,7 +43,15 @@
             // srPicker1
             // 
             resources.ApplyResources(this.srPicker1, "srPicker1");
+            this.srPicker1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.srPicker1.Name = "srPicker1";
+            this.srPicker1.NodeIndent = 3;
+            this.srPicker1.RootAlwaysExpanded = false;
+            this.srPicker1.ShowCheckboxes = false;
+            this.srPicker1.ShowDescription = true;
+            this.srPicker1.ShowImages = true;
+            this.srPicker1.ShowRootLines = true;
+            this.srPicker1.CanBeScannedChanged += new System.Action(this.srPicker1_CanBeScannedChanged);
             this.srPicker1.DoubleClickOnRow += new System.EventHandler(this.srPicker1_DoubleClickOnRow);
             this.srPicker1.SelectedIndexChanged += new System.EventHandler(this.srPicker1_SelectedIndexChanged);
             // 
@@ -79,12 +88,20 @@
             this.toolTipContainer1.Controls.Add(this.buttonMove);
             this.toolTipContainer1.Name = "toolTipContainer1";
             // 
+            // buttonRescan
+            // 
+            resources.ApplyResources(this.buttonRescan, "buttonRescan");
+            this.buttonRescan.Name = "buttonRescan";
+            this.buttonRescan.UseVisualStyleBackColor = true;
+            this.buttonRescan.Click += new System.EventHandler(this.buttonRescan_Click);
+            // 
             // MoveVMDialog
             // 
             this.AcceptButton = this.buttonMove;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.CancelButton = this.buttonCancel;
+            this.Controls.Add(this.buttonRescan);
             this.Controls.Add(this.toolTipContainer1);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.buttonCancel);
@@ -104,5 +121,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label label1;
         private XenAdmin.Controls.ToolTipContainer toolTipContainer1;
+        private System.Windows.Forms.Button buttonRescan;
     }
 }

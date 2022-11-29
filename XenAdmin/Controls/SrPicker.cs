@@ -29,6 +29,7 @@
  * SUCH DAMAGE.
  */
 
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -57,17 +58,31 @@ namespace XenAdmin.Controls
         private SR _defaultSr;
         private SR _preselectedSr;
         private readonly CollectionChangeEventHandler _srCollectionChangedWithInvoke;
-        private readonly object _lock = new object();
 
         #endregion
+
+        public event Action CanBeScannedChanged;
 
         public SrPicker()
         {
             _srCollectionChangedWithInvoke = Program.ProgramInvokeHandler(SR_CollectionChanged);
-            _refreshQueue.CollectionChanged += RefreshQueue_CollectionChanged;
         }
 
         #region Properties
+
+        public bool CanBeScanned
+        {
+            get
+            {
+                foreach (var item in Items)
+                {
+                    if (item is SrPickerItem it && !it.Scanning && !it.TheSR.IsDetached())
+                        return true;
+                }
+
+                return false;
+            }
+        }
 
         public override bool ShowCheckboxes => false;
 
@@ -79,34 +94,17 @@ namespace XenAdmin.Controls
 
         public SR SR => SelectedItem is SrPickerItem srpITem && srpITem.Enabled ? srpITem.TheSR : null;
 
-        public bool ValidSelectionExists(out string invalidReason)
-        {
-            invalidReason = string.Empty;
-            bool allScanning = true;
-
-            foreach (SrPickerItem item in Items)
-            {
-                if (item != null)
-                {
-                    if (item.Enabled)
-                        return true;
-
-                    if (!item.Scanning)
-                        allScanning = false;
-                }
-            }
-
-            if (!allScanning)
-                invalidReason = Messages.NO_VALID_DISK_LOCATION;
-
-            return false;
-        }
-
         #endregion
 
-        public void PopulateAsync(SRPickerType usage, IXenConnection connection, Host affinity,
+        public void Populate(SRPickerType usage, IXenConnection connection, Host affinity,
             SR preselectedSr, VDI[] existingDisks)
         {
+            foreach (var action in _refreshQueue)
+                action.Completed -= SrRefreshAction_Completed;
+
+            _refreshQueue.Clear();
+            ClearAllNodes();
+
             _usage = usage;
             _connection = connection;
             _affinity = affinity;
@@ -128,6 +126,25 @@ namespace XenAdmin.Controls
 
             foreach (var sr in _connection.Cache.SRs)
                 AddNewSr(sr);
+        }
+
+        public void ScanSRs()
+        {
+            foreach (var item in Items)
+            {
+                if (item is SrPickerItem it && !it.Scanning && !it.TheSR.IsDetached())
+                {
+                    it.Scanning = true;
+                    var srRefreshAction = new SrRefreshAction(it.TheSR);
+                    srRefreshAction.Completed += SrRefreshAction_Completed;
+
+                    _refreshQueue.Add(srRefreshAction);
+
+                    if (_refreshQueue.Count(a => a.StartedRunning && !a.IsCompleted) < MAX_SCANS_PER_CONNECTION)
+                        srRefreshAction.RunAsync();
+                }
+            }
+            OnCanBeScannedChanged();
         }
 
         public void UpdateDiskSize(long diskSize)
@@ -156,25 +173,19 @@ namespace XenAdmin.Controls
             sr.PropertyChanged += sr_PropertyChanged;
 
             item.ItemUpdated += Item_ItemUpdated;
-            item.Scanning = true;
+            if (HelpersGUI.BeingScanned(item.TheSR, out var scanAction))
+            {
+                item.Scanning = true;
+                scanAction.Completed += SrRefreshAction_Completed;
+                _refreshQueue.Add(scanAction);
+            }
             AddNode(item);
-
-            var srRefreshAction = new SrRefreshAction(item.TheSR, true);
-            srRefreshAction.Completed += SrRefreshAction_Completed;
-
-            lock (_lock)
-                _refreshQueue.Add(srRefreshAction);
+            OnCanBeScannedChanged();
         }
 
-        private void RefreshQueue_CollectionChanged(object sender, CollectionChangeEventArgs e)
+        private void OnCanBeScannedChanged()
         {
-            lock (_lock)
-            {
-                var srRefreshAction = _refreshQueue.FirstOrDefault(a => !a.StartedRunning && !a.IsCompleted);
-
-                if (srRefreshAction != null && _refreshQueue.Count(a => a.StartedRunning && !a.IsCompleted) < MAX_SCANS_PER_CONNECTION)
-                    srRefreshAction.RunAsync();
-            }
+            Program.Invoke(this, () => CanBeScannedChanged?.Invoke());
         }
 
         private void Item_ItemUpdated(SrPickerItem item)
@@ -187,16 +198,21 @@ namespace XenAdmin.Controls
             if (!(obj is SrRefreshAction action))
                 return;
 
-            lock (_lock)
-                _refreshQueue.Remove(action);
-
             Program.Invoke(this, () =>
             {
+                _refreshQueue.Remove(action);
+
+                var srRefreshAction = _refreshQueue.FirstOrDefault(a => !a.StartedRunning && !a.IsCompleted);
+
+                if (srRefreshAction != null && _refreshQueue.Count(a => a.StartedRunning && !a.IsCompleted) < MAX_SCANS_PER_CONNECTION)
+                    srRefreshAction.RunAsync();
+
                 foreach (var item in Items)
                 {
                     if (item is SrPickerItem it && it.TheSR.opaque_ref == action.SR.opaque_ref)
                     {
                         it.Scanning = false;
+                        OnCanBeScannedChanged();
 
                         if (_preselectedSr != null)
                         {
@@ -245,6 +261,7 @@ namespace XenAdmin.Controls
                         if (item is SrPickerItem it && !it.Scanning && it.TheSR.opaque_ref == pbd.SR.opaque_ref)
                         {
                             it.Update();
+                            OnCanBeScannedChanged();
                             break;
                         }
                     }
@@ -324,6 +341,8 @@ namespace XenAdmin.Controls
 
                     foreach (var item in itemsToRemove)
                         RemoveNode(item);
+
+                    OnCanBeScannedChanged();
                 });
             }
         }
@@ -354,15 +373,9 @@ namespace XenAdmin.Controls
         {
             if (disposing)
             {
-                lock (_lock)
-                {
-                    foreach (var action in _refreshQueue)
-                    {
-                        action.Completed -= SrRefreshAction_Completed;
-                        if (!action.IsCompleted)
-                            action.Cancel();
-                    }
-                }
+                foreach (var action in _refreshQueue)
+                    action.Completed -= SrRefreshAction_Completed;
+
                 UnregisterHandlers();
             }
 
