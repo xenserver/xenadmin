@@ -142,7 +142,7 @@
     <value>75, 23</value>
   </data>
   <data name="CloseButton.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="CloseButton.Text" xml:space="preserve">
     <value>Cancel</value>
@@ -406,7 +406,7 @@
     <value>75, 23</value>
   </data>
   <data name="OkButton.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="OkButton.Text" xml:space="preserve">
     <value>&amp;Add</value>
@@ -459,6 +459,33 @@
   <data name="&gt;&gt;diskSpinner1.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
+  <data name="buttonRescan.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="buttonRescan.Location" type="System.Drawing.Point, System.Drawing">
+    <value>79, 356</value>
+  </data>
+  <data name="buttonRescan.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="buttonRescan.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="buttonRescan.Text" xml:space="preserve">
+    <value>&amp;Rescan</value>
+  </data>
+  <data name="&gt;&gt;buttonRescan.Name" xml:space="preserve">
+    <value>buttonRescan</value>
+  </data>
+  <data name="&gt;&gt;buttonRescan.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonRescan.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;buttonRescan.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -490,7 +517,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="CloseButton" Row="6" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="label2" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="NameTextBox" Row="2" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="DescriptionTextBox" Row="3" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="SrListBox" Row="5" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="label3" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label4" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label6" Row="1" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="OkButton" Row="6" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="diskSpinner1" Row="4" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100,AutoSize,0,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100,AutoSize,0,Absolute,20,Absolute,20,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="CloseButton" Row="6" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="label2" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="NameTextBox" Row="2" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="DescriptionTextBox" Row="3" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="SrListBox" Row="5" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="label3" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label4" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label6" Row="1" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="OkButton" Row="6" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="diskSpinner1" Row="4" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="buttonRescan" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100,AutoSize,0,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100,AutoSize,0,Absolute,20,Absolute,20,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="SrListBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>

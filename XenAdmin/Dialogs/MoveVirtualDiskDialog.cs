@@ -65,9 +65,9 @@ namespace XenAdmin.Dialogs
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            
-            UpdateButtons();
-            srPicker1.PopulateAsync(SrPickerType, connection, null, null, _vdis.ToArray());
+
+            UpdateMoveButton();
+            srPicker1.Populate(SrPickerType, connection, null, null, _vdis.ToArray());
         }
 
         internal override string HelpName => "VDIMigrateDialog";
@@ -76,7 +76,7 @@ namespace XenAdmin.Dialogs
 
         protected virtual SrPicker.SRPickerType SrPickerType => SrPicker.SRPickerType.Move;
 
-        private void UpdateButtons()
+        private void UpdateMoveButton()
         {
             buttonMove.Enabled = srPicker1.SR != null;
         }
@@ -85,13 +85,24 @@ namespace XenAdmin.Dialogs
 
         private void srPicker1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            UpdateButtons();
+            UpdateMoveButton();
         }
 
         private void srPicker1_DoubleClickOnRow(object sender, EventArgs e)
         {
             if (buttonMove.Enabled)
                 buttonMove.PerformClick();
+        }
+
+        private void srPicker1_CanBeScannedChanged()
+        {
+            buttonRescan.Enabled = srPicker1.CanBeScanned;
+            UpdateMoveButton();
+        }
+
+        private void buttonRescan_Click(object sender, EventArgs e)
+        {
+            srPicker1.ScanSRs();
         }
 
         private void buttonMove_Click(object sender, EventArgs e)

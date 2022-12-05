@@ -61,8 +61,9 @@ namespace XenAdmin.Dialogs
 
             NameTextBox.Text = GetDefaultVDIName();
             diskSpinner1.Populate();
+            SrListBox.Populate(SrPicker.SRPickerType.InstallFromTemplate, connection, null, sr, null);
+            buttonRescan.Enabled = SrListBox.CanBeScanned;
             UpdateErrorsAndButtons();
-            SrListBox.PopulateAsync(SrPicker.SRPickerType.InstallFromTemplate, connection, null, sr, null);
         }
 
         public NewDiskDialog(IXenConnection connection, VM vm)
@@ -84,8 +85,9 @@ namespace XenAdmin.Dialogs
             {
                 NameTextBox.Text = GetDefaultVDIName();
                 diskSpinner1.Populate(minSize: minSize);
+                SrListBox.Populate(pickerUsage, connection, affinity, null, null);
+                buttonRescan.Enabled = SrListBox.CanBeScanned;
                 UpdateErrorsAndButtons();
-                SrListBox.PopulateAsync(pickerUsage, connection, affinity, null, null);
             }
             else
             {
@@ -95,8 +97,9 @@ namespace XenAdmin.Dialogs
                 Text = Messages.EDIT_DISK;
                 OkButton.Text = Messages.OK;
                 diskSpinner1.Populate(DiskTemplate.virtual_size, minSize);
+                SrListBox.Populate(pickerUsage, connection, affinity, connection.Resolve(DiskTemplate.SR), null);
+                buttonRescan.Enabled = SrListBox.CanBeScanned;
                 UpdateErrorsAndButtons();
-                SrListBox.PopulateAsync(pickerUsage, connection, affinity, connection.Resolve(DiskTemplate.SR), null);
             }
         }
 
@@ -119,6 +122,17 @@ namespace XenAdmin.Dialogs
         private void srListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateErrorsAndButtons();
+        }
+
+        private void srPicker_CanBeScannedChanged()
+        {
+            buttonRescan.Enabled = SrListBox.CanBeScanned;
+            UpdateErrorsAndButtons();
+        }
+
+        private void buttonRescan_Click(object sender, EventArgs e)
+        {
+            SrListBox.ScanSRs();
         }
 
         private void OkButton_Click(object sender, EventArgs e)
@@ -290,10 +304,28 @@ namespace XenAdmin.Dialogs
                 return;
             }
 
-            if (!SrListBox.ValidSelectionExists(out var invalidReason))//all SRs disabled
+            bool allDisabled = true;
+            bool anyScanning = false;
+
+            foreach (SrPickerItem item in SrListBox.Items)
+            {
+                if (item == null)
+                    continue;
+                
+                if (item.Enabled)
+                {
+                    allDisabled = false;
+                    break;
+                }
+
+                if (item.Scanning)
+                    anyScanning = true;
+            }
+
+            if (allDisabled)
             {
                 OkButton.Enabled = false;
-                diskSpinner1.SetError(invalidReason);
+                diskSpinner1.SetError(anyScanning ? null : Messages.NO_VALID_DISK_LOCATION);
                 return;
             }
 

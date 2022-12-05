@@ -59,8 +59,7 @@ namespace XenAdmin.Dialogs.VMDialogs
                 where vdi != null
                 select vdi).ToArray();
 
-            srPicker1.PopulateAsync(SrPicker.SRPickerType.Move, vm.Connection,
-                vm.Home(), null, vdis);
+            srPicker1.Populate(SrPicker.SRPickerType.Move, vm.Connection, vm.Home(), null, vdis);
         }
 
         private void EnableMoveButton()
@@ -76,11 +75,22 @@ namespace XenAdmin.Dialogs.VMDialogs
                 buttonMove.PerformClick();
         }
 
+        private void buttonRescan_Click(object sender, EventArgs e)
+        {
+            srPicker1.ScanSRs();
+        }
+
         private void buttonMove_Click(object sender, EventArgs e)
         {
             var action = new VMMoveAction(vm, srPicker1.SR, vm.GetStorageHost(false), vm.Name());
             action.RunAsync();
             Close();
+        }
+
+        private void srPicker1_CanBeScannedChanged()
+        {
+            buttonRescan.Enabled = srPicker1.CanBeScanned;
+            EnableMoveButton();
         }
 
         private void srPicker1_SelectedIndexChanged(object sender, EventArgs e)
