@@ -140,6 +140,8 @@ namespace XenAdmin
                 return;
             }
 
+            log.Info("Application started");
+
             AppDomain.CurrentDomain.UnhandledException -= CurrentDomain_UnhandledException;
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             Application.ThreadException -= Application_ThreadException;
@@ -165,12 +167,11 @@ namespace XenAdmin
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
             Session.UserAgent = $"{BrandManager.BrandConsole} {Version}";
 
-            log.Info("Application started");
             LogSystemDetails();
 
             Application.Run(new SplashScreenContext(args));
 
-            log.Info("Application main thread exited");
+            log.Info("Application main thread exited" + Environment.NewLine);
         }
 
         /// <summary>
