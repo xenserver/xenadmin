@@ -2289,11 +2289,8 @@ namespace XenAdmin
                     {
                         if(!Program.RunInAutomatedTestMode)
                         {
-                            if (a is AsyncAction)
-                            {
-                                AsyncAction aa = (AsyncAction) a;
-                                aa.PrepareForLogReloadAfterRestart();
-                            }
+                            if (a is AsyncAction asyncAction)
+                                asyncAction.PrepareForEventReloadAfterRestart();
 
                             if (!a.IsCompleted && a.CanCancel && !a.SafeToExit)
                                 a.Cancel();

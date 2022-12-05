@@ -169,27 +169,6 @@ namespace XenAPI
             }
         }
 
-        public static void RemoveXenCenterUUID(Session session, string task)
-        {
-            if (session == null || string.IsNullOrEmpty(task))
-                return;
-
-            try
-            {
-                remove_from_other_config(session, task, "XenCenterUUID");
-            }
-            catch (Failure f)
-            {
-                if (f.ErrorDescription.Count > 0 && f.ErrorDescription[0] == Failure.RBAC_PERMISSION_DENIED)
-                {
-                    // Read only user without task.other_config rights - just ignore this request
-                    return;
-                }
-
-                throw;
-            }
-        }
-
         public override string Name()
         {
             return name_label.Replace("Async.", "");
