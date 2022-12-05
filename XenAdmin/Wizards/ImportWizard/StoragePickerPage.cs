@@ -117,7 +117,7 @@ namespace XenAdmin.Wizards.ImportWizard
         public override void PopulatePage()
         {
             SetButtonNextEnabled(false);
-            m_srPicker.PopulateAsync(SrPicker.SRPickerType.VM, TargetConnection, TargetHost, null, null);
+            m_srPicker.Populate(SrPicker.SRPickerType.VM, TargetConnection, TargetHost, null, null);
             IsDirty = true;
         }
 
@@ -287,6 +287,17 @@ namespace XenAdmin.Wizards.ImportWizard
 			IsDirty = true;
 		}
 
-		#endregion
-	}
+        private void m_srPicker_CanBeScannedChanged()
+        {
+            buttonRescan.Enabled = m_srPicker.CanBeScanned;
+            SetButtonNextEnabled(m_srPicker.SR != null);
+        }
+
+        private void buttonRescan_Click(object sender, EventArgs e)
+        {
+            m_srPicker.ScanSRs();
+        }
+
+        #endregion
+    }
 }

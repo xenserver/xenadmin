@@ -181,22 +181,25 @@
     <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="tableLayoutPanelSrPicker.ColumnCount" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>2</value>
   </data>
-  <data name="srPicker1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+  <data name="srPicker1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="srPicker1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
+  <data name="srPicker1.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="srPicker1.ItemHeight" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
   <data name="srPicker1.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 18</value>
   </data>
-  <data name="srPicker1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 0, 3, 3</value>
-  </data>
   <data name="srPicker1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>430, 138</value>
+    <value>349, 138</value>
   </data>
   <data name="srPicker1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -205,7 +208,7 @@
     <value>srPicker1</value>
   </data>
   <data name="&gt;&gt;srPicker1.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.SrPicker, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.SrPicker, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;srPicker1.Parent" xml:space="preserve">
     <value>tableLayoutPanelSrPicker</value>
@@ -221,9 +224,6 @@
   </data>
   <data name="labelSrHint.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 0</value>
-  </data>
-  <data name="labelSrHint.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 0, 3, 3</value>
   </data>
   <data name="labelSrHint.Size" type="System.Drawing.Size, System.Drawing">
     <value>430, 15</value>
@@ -245,6 +245,30 @@
   </data>
   <data name="&gt;&gt;labelSrHint.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="buttonRescan.Location" type="System.Drawing.Point, System.Drawing">
+    <value>358, 18</value>
+  </data>
+  <data name="buttonRescan.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="buttonRescan.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="buttonRescan.Text" xml:space="preserve">
+    <value>&amp;Rescan</value>
+  </data>
+  <data name="&gt;&gt;buttonRescan.Name" xml:space="preserve">
+    <value>buttonRescan</value>
+  </data>
+  <data name="&gt;&gt;buttonRescan.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonRescan.Parent" xml:space="preserve">
+    <value>tableLayoutPanelSrPicker</value>
+  </data>
+  <data name="&gt;&gt;buttonRescan.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="tableLayoutPanelSrPicker.Location" type="System.Drawing.Point, System.Drawing">
     <value>25, 102</value>
@@ -271,7 +295,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanelSrPicker.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="srPicker1" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelSrHint" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="srPicker1" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelSrHint" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="buttonRescan" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="toolTipContainer1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -388,7 +412,7 @@
     <value>toolTipContainer1</value>
   </data>
   <data name="&gt;&gt;toolTipContainer1.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.ToolTipContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.ToolTipContainer, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;toolTipContainer1.Parent" xml:space="preserve">
     <value>groupBox1</value>
@@ -451,7 +475,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.DecentGroupBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.DecentGroupBox, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -619,6 +643,6 @@
     <value>IntraPoolCopyPage</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.XenTabPage, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

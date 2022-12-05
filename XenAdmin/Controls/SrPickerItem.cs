@@ -177,10 +177,13 @@ namespace XenAdmin.Controls
 
     public abstract class SrPickerItem : CustomTreeNode, IComparable<SrPickerItem>
     {
+        private bool _scanning;
         public SR TheSR { get; }
         public bool Show { get; private set; } = true;
         protected readonly Host Affinity;
         protected VDI[] ExistingVDIs { get; private set; }
+
+        public event Action<SrPickerItem> ItemUpdated;
 
         protected SrPickerItem(SR sr, Host aff, VDI[] vdis)
         {
@@ -188,6 +191,16 @@ namespace XenAdmin.Controls
             TheSR = sr;
             Affinity = aff;
             Update();
+        }
+
+        public bool Scanning
+        {
+            get => _scanning;
+            set
+            {
+                _scanning = value;
+                Update();
+            }
         }
 
         protected virtual bool SupportsCurrentOperation => !TheSR.HBALunPerVDI();
@@ -200,7 +213,7 @@ namespace XenAdmin.Controls
             Update();
         }
 
-        private void Update()
+        public void Update()
         {
             Text = TheSR.Name();
             Image = Images.GetImage16For(TheSR);
@@ -212,7 +225,12 @@ namespace XenAdmin.Controls
                 return;
             }
 
-            if (CanBeEnabled(out var cannotEnableReason))
+            if (Scanning)
+            {
+                Description = Messages.SR_REFRESH_ACTION_TITLE_GENERIC;
+                Enabled = false;
+            }
+            else if (CanBeEnabled(out var cannotEnableReason))
             {
                 Description = string.Format(Messages.SRPICKER_DISK_FREE, Util.DiskSizeString(TheSR.FreeSpace(), 2),
                     Util.DiskSizeString(TheSR.physical_size, 2));
@@ -223,6 +241,8 @@ namespace XenAdmin.Controls
                 Description = cannotEnableReason;
                 Enabled = false;
             }
+
+            ItemUpdated?.Invoke(this);
         }
 
         protected bool IsCurrentLocation(out string cannotEnableReason)
@@ -239,7 +259,7 @@ namespace XenAdmin.Controls
 
         protected bool IsBroken(out string cannotEnableReason)
         {
-            if (TheSR.IsBroken(false))
+            if (TheSR.IsBroken())
             {
                 cannotEnableReason = Messages.SR_IS_BROKEN;
                 return true;

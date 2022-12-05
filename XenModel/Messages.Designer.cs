@@ -23114,15 +23114,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to v{0} &amp;Release Notes.
-        /// </summary>
-        public static string MAINWINDOW_UPDATE_RELEASE {
-            get {
-                return ResourceManager.GetString("MAINWINDOW_UPDATE_RELEASE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to &amp;Add....
         /// </summary>
         public static string MAINWINDOW_ADD_HOST {
@@ -24095,6 +24086,15 @@ namespace XenAdmin {
         public static string MAINWINDOW_TRIM_SR {
             get {
                 return ResourceManager.GetString("MAINWINDOW_TRIM_SR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to v{0} &amp;Release Notes.
+        /// </summary>
+        public static string MAINWINDOW_UPDATE_RELEASE {
+            get {
+                return ResourceManager.GetString("MAINWINDOW_UPDATE_RELEASE", resourceCulture);
             }
         }
         
@@ -35271,7 +35271,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This storage repository is broken.
+        ///   Looks up a localized string similar to This SR is broken or not fully attached..
         /// </summary>
         public static string SR_IS_BROKEN {
             get {
@@ -35345,11 +35345,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Scanning available SRs ....
+        ///   Looks up a localized string similar to Scanning....
         /// </summary>
-        public static string SR_REFRESH_ACTION_TITLE_MANY {
+        public static string SR_REFRESH_ACTION_TITLE_GENERIC {
             get {
-                return ResourceManager.GetString("SR_REFRESH_ACTION_TITLE_MANY", resourceCulture);
+                return ResourceManager.GetString("SR_REFRESH_ACTION_TITLE_GENERIC", resourceCulture);
             }
         }
         

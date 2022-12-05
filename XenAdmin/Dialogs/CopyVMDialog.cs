@@ -99,13 +99,17 @@ namespace XenAdmin.Dialogs
                 where vdi != null
                 select vdi).ToArray();
 
-            srPicker1.PopulateAsync(SrPicker.SRPickerType.Copy, _vm.Connection,
-                _vm.Home(), null, vdis);
+            srPicker1.Populate(SrPicker.SRPickerType.Copy, _vm.Connection, _vm.Home(), null, vdis);
         }
 
         private void EnableMoveButton()
         {
             MoveButton.Enabled = NameTextBox.Text.Trim().Length > 0 && srPicker1.SR != null;
+        }
+
+        private void EnableRescanButton()
+        {
+            buttonRescan.Enabled = tableLayoutPanelSrPicker.Enabled && srPicker1.CanBeScanned;
         }
 
         private static string GetDefaultCopyName(VM vmToCopy)
@@ -117,6 +121,12 @@ namespace XenAdmin.Dialogs
 
         #region Control event handlers
 
+        private void srPicker1_CanBeScannedChanged()
+        {
+            EnableRescanButton();
+            EnableMoveButton();
+        }
+
         private void srPicker1_SelectedIndexChanged(object sender, EventArgs e)
         {
             EnableMoveButton();
@@ -125,6 +135,11 @@ namespace XenAdmin.Dialogs
         private void NameTextBox_TextChanged(object sender, EventArgs e)
         {
             EnableMoveButton();
+        }
+
+        private void buttonRescan_Click(object sender, EventArgs e)
+        {
+            srPicker1.ScanSRs();
         }
 
         private void CloseButton_Click(object sender, EventArgs e)
@@ -153,6 +168,7 @@ namespace XenAdmin.Dialogs
         private void CopyRadioButton_CheckedChanged(object sender, EventArgs e)
         {
             tableLayoutPanelSrPicker.Enabled = CopyRadioButton.Checked;
+            EnableRescanButton();
             // Since the radiobuttons aren't in the same panel, we have to do manual mutual exclusion
             CloneRadioButton.Checked = !CopyRadioButton.Checked;
         }

@@ -36,6 +36,7 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.labelBlurb = new System.Windows.Forms.Label();
+            this.buttonRescan = new System.Windows.Forms.Button();
             this.toolTipContainer2.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
@@ -61,19 +62,28 @@
             // 
             // srPicker1
             // 
+            this.tableLayoutPanel2.SetColumnSpan(this.srPicker1, 3);
             resources.ApplyResources(this.srPicker1, "srPicker1");
-            this.tableLayoutPanel2.SetColumnSpan(this.srPicker1, 2);
+            this.srPicker1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.srPicker1.Name = "srPicker1";
-            this.srPicker1.SelectedIndexChanged += new System.EventHandler(this.srPicker1_SelectedIndexChanged);
+            this.srPicker1.NodeIndent = 3;
+            this.srPicker1.RootAlwaysExpanded = false;
+            this.srPicker1.ShowCheckboxes = false;
+            this.srPicker1.ShowDescription = true;
+            this.srPicker1.ShowImages = true;
+            this.srPicker1.ShowRootLines = true;
+            this.srPicker1.CanBeScannedChanged += new System.Action(this.srPicker1_CanBeScannedChanged);
             this.srPicker1.DoubleClickOnRow += new System.EventHandler(this.srPicker1_DoubleClickOnRow);
+            this.srPicker1.SelectedIndexChanged += new System.EventHandler(this.srPicker1_SelectedIndexChanged);
             // 
             // tableLayoutPanel2
             // 
             resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
-            this.tableLayoutPanel2.Controls.Add(this.toolTipContainer2, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.buttonCancel, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.buttonCancel, 2, 2);
             this.tableLayoutPanel2.Controls.Add(this.srPicker1, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.labelBlurb, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.toolTipContainer2, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.buttonRescan, 0, 2);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             // 
             // buttonCancel
@@ -87,8 +97,15 @@
             // labelBlurb
             // 
             resources.ApplyResources(this.labelBlurb, "labelBlurb");
-            this.tableLayoutPanel2.SetColumnSpan(this.labelBlurb, 2);
+            this.tableLayoutPanel2.SetColumnSpan(this.labelBlurb, 3);
             this.labelBlurb.Name = "labelBlurb";
+            // 
+            // buttonRescan
+            // 
+            resources.ApplyResources(this.buttonRescan, "buttonRescan");
+            this.buttonRescan.Name = "buttonRescan";
+            this.buttonRescan.UseVisualStyleBackColor = true;
+            this.buttonRescan.Click += new System.EventHandler(this.buttonRescan_Click);
             // 
             // MoveVirtualDiskDialog
             // 
@@ -115,5 +132,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Label labelBlurb;
         private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.Button buttonRescan;
     }
 }

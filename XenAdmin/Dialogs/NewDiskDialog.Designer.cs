@@ -29,7 +29,7 @@ namespace XenAdmin.Dialogs
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewDiskDialog));
-            this.SrListBox = new XenAdmin.Controls.SrPicker();
+            this.srPicker = new XenAdmin.Controls.SrPicker();
             this.CloseButton = new System.Windows.Forms.Button();
             this.OkButton = new System.Windows.Forms.Button();
             this.NameTextBox = new System.Windows.Forms.TextBox();
@@ -41,22 +41,24 @@ namespace XenAdmin.Dialogs
             this.label4 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.diskSpinner1 = new XenAdmin.Controls.DiskSpinner();
+            this.buttonRescan = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // SrListBox
+            // srPicker
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.SrListBox, 3);
-            resources.ApplyResources(this.SrListBox, "SrListBox");
-            this.SrListBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.SrListBox.Name = "SrListBox";
-            this.SrListBox.NodeIndent = 3;
-            this.SrListBox.RootAlwaysExpanded = false;
-            this.SrListBox.ShowCheckboxes = false;
-            this.SrListBox.ShowDescription = true;
-            this.SrListBox.ShowImages = true;
-            this.SrListBox.ShowRootLines = true;
-            this.SrListBox.SelectedIndexChanged += new System.EventHandler(this.srListBox_SelectedIndexChanged);
+            this.tableLayoutPanel1.SetColumnSpan(this.srPicker, 3);
+            resources.ApplyResources(this.srPicker, "srPicker");
+            this.srPicker.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.srPicker.Name = "srPicker";
+            this.srPicker.NodeIndent = 3;
+            this.srPicker.RootAlwaysExpanded = false;
+            this.srPicker.ShowCheckboxes = false;
+            this.srPicker.ShowDescription = true;
+            this.srPicker.ShowImages = true;
+            this.srPicker.ShowRootLines = true;
+            this.srPicker.CanBeScannedChanged += new System.Action(this.srPicker_CanBeScannedChanged);
+            this.srPicker.SelectedIndexChanged += new System.EventHandler(this.srListBox_SelectedIndexChanged);
             // 
             // CloseButton
             // 
@@ -111,12 +113,13 @@ namespace XenAdmin.Dialogs
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.NameTextBox, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.DescriptionTextBox, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.SrListBox, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.srPicker, 1, 5);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.label4, 0, 5);
             this.tableLayoutPanel1.Controls.Add(this.label6, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.OkButton, 2, 6);
             this.tableLayoutPanel1.Controls.Add(this.diskSpinner1, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.buttonRescan, 1, 6);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // label4
@@ -136,6 +139,13 @@ namespace XenAdmin.Dialogs
             this.tableLayoutPanel1.SetColumnSpan(this.diskSpinner1, 3);
             this.diskSpinner1.Name = "diskSpinner1";
             this.diskSpinner1.SelectedSizeChanged += new System.Action(this.diskSpinner1_SelectedSizeChanged);
+            // 
+            // buttonRescan
+            // 
+            resources.ApplyResources(this.buttonRescan, "buttonRescan");
+            this.buttonRescan.Name = "buttonRescan";
+            this.buttonRescan.UseVisualStyleBackColor = true;
+            this.buttonRescan.Click += new System.EventHandler(this.buttonRescan_Click);
             // 
             // NewDiskDialog
             // 
@@ -157,7 +167,7 @@ namespace XenAdmin.Dialogs
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
-        private XenAdmin.Controls.SrPicker SrListBox;
+        private XenAdmin.Controls.SrPicker srPicker;
         private System.Windows.Forms.Button CloseButton;
         private System.Windows.Forms.Button OkButton;
         private System.Windows.Forms.TextBox NameTextBox;
@@ -166,5 +176,6 @@ namespace XenAdmin.Dialogs
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label6;
         private Controls.DiskSpinner diskSpinner1;
+        private System.Windows.Forms.Button buttonRescan;
     }
 }
