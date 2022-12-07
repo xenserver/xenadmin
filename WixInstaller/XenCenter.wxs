@@ -75,9 +75,9 @@
                             <File Id="DiscUtils" Source="$(env.RepoRoot)\XenAdmin\bin\Release\DiscUtils.dll" />
                             <File Id="XenOvf" Source="$(env.RepoRoot)\XenAdmin\bin\Release\XenOvf.dll" />
                             <!-- Homepage -->
-                            <File Id="XenCenterHomePage" Source="$(env.RepoRoot)\XenAdmin\bin\Release\HomePage.mht" />
-                            <File Id="XenCenterJaHomePage" Source="$(env.RepoRoot)\XenAdmin\bin\Release\HomePage.ja.mht" />
-                            <File Id="XenCenterScHomePage" Source="$(env.RepoRoot)\XenAdmin\bin\Release\HomePage.zh-CN.mht" />
+                            <File Id="XenCenterHomePage" Source="$(env.RepoRoot)\XenAdmin\bin\Release\HomePage.html" />
+                            <File Id="XenCenterJaHomePage" Source="$(env.RepoRoot)\XenAdmin\bin\Release\HomePage.ja.html" />
+                            <File Id="XenCenterScHomePage" Source="$(env.RepoRoot)\XenAdmin\bin\Release\HomePage.zh-CN.html" />
                             <!-- Icons -->
                             <File Id="XenCenterIcon" Source="$(env.RepoRoot)\Branding\Images\AppIcon.ico" />
                             <File Id="XvaIcon" Source="$(env.RepoRoot)\Branding\Images\file_vm.ico" />

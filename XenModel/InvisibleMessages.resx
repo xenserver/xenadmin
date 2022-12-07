@@ -133,7 +133,7 @@
     <value>https://www.citrix.com/products/citrix-hypervisor</value>
   </data>
   <data name="HOMEPAGE_FILENAME" xml:space="preserve">
-    <value>HomePage.mht</value>
+    <value>HomePage.html</value>
   </data>
   <data name="ISL_DEPRECATION_URL" xml:space="preserve">
     <value>http://support.citrix.com/article/CTX141433</value>

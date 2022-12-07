@@ -43,40 +43,40 @@ namespace XenAdmin.TabPages
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private const string XCNS = "XenCenter://";
-        bool initializing = true;
+        private readonly bool _initializing = true;
 
         public HomePage()
         {
             InitializeComponent();
 
+            string path = string.Empty;
             try
             {
-                var location = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), InvisibleMessages.HOMEPAGE_FILENAME);
-                webBrowser.Navigate(location);
+                path = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), InvisibleMessages.HOMEPAGE_FILENAME);
+                webBrowser.Navigate(path);
             }
             catch (Exception ex)
             {
-                log.Error(string.Format("Failed to load the HomePage. Url = {0}", Location), ex);
+                log.Error($"Failed to load the HomePage. Url = {path}", ex);
             }
 
-            initializing = false;
+            _initializing = false;
         }
 
         private void webBrowser_Navigating(object sender, WebBrowserNavigatingEventArgs e)
         {
-            if (initializing)
+            if (_initializing)
                 return;
 
             e.Cancel = true;
 
             string url = e.Url.OriginalString;
 
-            // this is not abstracted away as long as we have only a very limited number of functionalities:
-            if (url != null && url.StartsWith(XCNS, StringComparison.InvariantCultureIgnoreCase))
+            if (url.StartsWith(XCNS, StringComparison.InvariantCultureIgnoreCase))
             {
                 if (url.Contains("HelpContents"))
                 {
-                    XenAdmin.Help.HelpManager.Launch(null);
+                    HelpManager.Launch(null);
                 }
                 else if (url.Contains("AddServer"))
                 {

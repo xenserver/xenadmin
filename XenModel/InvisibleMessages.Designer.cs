@@ -106,7 +106,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to HomePage.mht.
+        ///   Looks up a localized string similar to HomePage.html.
         /// </summary>
         public static string HOMEPAGE_FILENAME {
             get {

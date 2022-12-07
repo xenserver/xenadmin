@@ -35,6 +35,7 @@ namespace XenAdmin.TabPages
             // webBrowser
             // 
             resources.ApplyResources(this.webBrowser, "webBrowser");
+            this.webBrowser.IsWebBrowserContextMenuEnabled = false;
             this.webBrowser.Name = "webBrowser";
             this.webBrowser.Navigating += new System.Windows.Forms.WebBrowserNavigatingEventHandler(this.webBrowser_Navigating);
             // 
