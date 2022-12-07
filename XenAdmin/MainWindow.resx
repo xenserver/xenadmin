@@ -135,7 +135,7 @@
     <value>0, 0</value>
   </data>
   <data name="navigationPane.Size" type="System.Drawing.Size, System.Drawing">
-    <value>243, 619</value>
+    <value>243, 647</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="navigationPane.TabIndex" type="System.Int32, mscorlib">
@@ -187,7 +187,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="TabPageHome.Size" type="System.Drawing.Size, System.Drawing">
-    <value>753, 563</value>
+    <value>753, 591</value>
   </data>
   <data name="TabPageHome.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -274,7 +274,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="TabPageConsole.Size" type="System.Drawing.Size, System.Drawing">
-    <value>753, 563</value>
+    <value>753, 591</value>
   </data>
   <data name="TabPageConsole.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -388,7 +388,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="TabPageSR.Size" type="System.Drawing.Size, System.Drawing">
-    <value>753, 563</value>
+    <value>753, 591</value>
   </data>
   <data name="TabPageSR.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -889,7 +889,7 @@
     <value>0, 0</value>
   </data>
   <data name="TheTabControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>761, 589</value>
+    <value>761, 617</value>
   </data>
   <data name="TheTabControl.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -919,7 +919,7 @@
     <value>12, 12, 12, 12</value>
   </data>
   <data name="alertPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>761, 589</value>
+    <value>761, 617</value>
   </data>
   <data name="alertPage.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -949,7 +949,7 @@
     <value>12, 12, 12, 12</value>
   </data>
   <data name="eventsPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>761, 589</value>
+    <value>761, 617</value>
   </data>
   <data name="eventsPage.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1204,7 +1204,7 @@
     <value>100</value>
   </data>
   <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1008, 619</value>
+    <value>1008, 647</value>
   </data>
   <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
     <value>243</value>
@@ -2869,7 +2869,7 @@
     <value>toolStripStatusLabel1</value>
   </data>
   <data name="StatusStrip.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 674</value>
+    <value>0, 702</value>
   </data>
   <data name="StatusStrip.Size" type="System.Drawing.Size, System.Drawing">
     <value>1008, 27</value>
@@ -2902,10 +2902,10 @@
     <value>96, 96</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1008, 701</value>
+    <value>1008, 729</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>1024, 678</value>
+    <value>1024, 768</value>
   </data>
   <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>No</value>
@@ -4017,6 +4017,12 @@
   <data name="&gt;&gt;toolStripMenuItem17.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;toolStripMenuItemCfu.Name" xml:space="preserve">
+    <value>toolStripMenuItemCfu</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemCfu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;xenSourceOnTheWebToolStripMenuItem.Name" xml:space="preserve">
     <value>xenSourceOnTheWebToolStripMenuItem</value>
   </data>
@@ -4094,12 +4100,6 @@
   </data>
   <data name="&gt;&gt;statusLabelAlerts.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemCfu.Name" xml:space="preserve">
-    <value>toolStripMenuItemCfu</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemCfu.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainWindow</value>

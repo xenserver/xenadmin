@@ -268,6 +268,7 @@ namespace XenAdmin
             this.toolStripMenuItem15 = new System.Windows.Forms.ToolStripSeparator();
             this.viewApplicationLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem17 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItemCfu = new System.Windows.Forms.ToolStripMenuItem();
             this.xenSourceOnTheWebToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.xenCenterPluginsOnlineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
@@ -284,7 +285,6 @@ namespace XenAdmin
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLabelErrors = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLabelAlerts = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripMenuItemCfu = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -1874,6 +1874,12 @@ namespace XenAdmin
             this.toolStripMenuItem17.Name = "toolStripMenuItem17";
             resources.ApplyResources(this.toolStripMenuItem17, "toolStripMenuItem17");
             // 
+            // toolStripMenuItemCfu
+            // 
+            this.toolStripMenuItemCfu.Name = "toolStripMenuItemCfu";
+            resources.ApplyResources(this.toolStripMenuItemCfu, "toolStripMenuItemCfu");
+            this.toolStripMenuItemCfu.Click += new System.EventHandler(this.toolStripMenuItemCfu_Click);
+            // 
             // xenSourceOnTheWebToolStripMenuItem
             // 
             this.xenSourceOnTheWebToolStripMenuItem.Name = "xenSourceOnTheWebToolStripMenuItem";
@@ -2006,12 +2012,6 @@ namespace XenAdmin
             resources.ApplyResources(this.statusLabelAlerts, "statusLabelAlerts");
             this.statusLabelAlerts.VisitedLinkColor = System.Drawing.SystemColors.ControlDarkDark;
             this.statusLabelAlerts.Click += new System.EventHandler(this.statusLabelAlerts_Click);
-            // 
-            // toolStripMenuItemCfu
-            // 
-            this.toolStripMenuItemCfu.Name = "toolStripMenuItemCfu";
-            resources.ApplyResources(this.toolStripMenuItemCfu, "toolStripMenuItemCfu");
-            this.toolStripMenuItemCfu.Click += new System.EventHandler(this.toolStripMenuItemCfu_Click);
             // 
             // MainWindow
             // 
