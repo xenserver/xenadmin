@@ -768,7 +768,7 @@ namespace XenAdmin
             public static Bitmap _075_WarningRound_h32bit_16 = Properties.Resources._075_WarningRound_h32bit_16;
             public static Bitmap _112_LeftArrowLong_Blue_24x24_72 = Properties.Resources._112_LeftArrowLong_Blue_24x24_72;
             public static Bitmap _112_RightArrowLong_Blue_24x24_72 = Properties.Resources._112_RightArrowLong_Blue_24x24_72;
-            public static Bitmap about_box_graphic_423x79 = Properties.Resources.about_box_graphic_423x79;
+            public static Bitmap about_box_graphic = Properties.Resources.about_box_graphic;
             public static Bitmap ajax_loader = Properties.Resources.ajax_loader;
             public static Bitmap alert1_16 = Properties.Resources.alert1_16;
             public static Bitmap alert2_16 = Properties.Resources.alert2_16;
