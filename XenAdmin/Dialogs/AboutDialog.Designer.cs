@@ -111,7 +111,7 @@ namespace XenAdmin.Dialogs
             // pictureBox1
             // 
             resources.ApplyResources(this.pictureBox1, "pictureBox1");
-            this.pictureBox1.Image = global::XenAdmin.Properties.Resources.about_box_graphic_423x79;
+            this.pictureBox1.Image = global::XenAdmin.Properties.Resources.about_box_graphic;
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.TabStop = false;
             // 

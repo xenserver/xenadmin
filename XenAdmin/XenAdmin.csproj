@@ -2884,6 +2884,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\Branding\Images\about_box_graphic.png">
+      <Link>Images\about_box_graphic.png</Link>
+    </Content>
     <Content Include="..\Branding\Images\AppIcon.ico" />
     <Compile Include="Actions\GUIActions\MeddlingActionManager.cs" />
     <Compile Include="Alerts\AlertExtensions.cs" />
@@ -4260,9 +4263,6 @@
     <None Include="Images\ascending_triangle.png" />
     <None Include="Images\contracted_triangle.png" />
     <None Include="Images\expanded_triangle.png" />
-    <None Include="..\Branding\Images\about_box_graphic_423x79.png">
-      <Link>Images\about_box_graphic_423x79.png</Link>
-    </None>
     <None Include="Images\000_ToolBar_USB_Icon_up.png" />
     <None Include="Images\000_SwitcherBackground.png" />
     <None Include="Images\000_ToolBar_Pref_Icon_dis.png" />
@@ -4358,6 +4358,15 @@
     <None Include="Images\000_AddIPAddress_h32bit_16.png" />
     <None Include="Images\000_ConfigureIPAddresses_h32bit_16.png" />
     <None Include="Images\000_Abort_gray_h32bit_16.png" />
+    <Content Include="..\Branding\Images\splash.png">
+      <Link>Images\splash.png</Link>
+    </Content>
+    <Content Include="..\Branding\Images\xcm.png">
+      <Link>Images\xcm.png</Link>
+    </Content>
+    <Content Include="..\Branding\Images\xcm_32x32.png">
+      <Link>Images\xcm_32x32.png</Link>
+    </Content>
     <Content Include="Images\000_AddSite_h32bit_16.png" />
     <Content Include="Images\000_FilterDates_h32bit_16.png" />
     <Content Include="Images\000_FilterServer_h32bit_16.png" />
@@ -6735,11 +6744,6 @@
       <DependentUpon>WorkloadReports.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Images\VMTemplate_h32bit_32.png" />
-    <Content Include="Images\xcm.png" />
-    <Content Include="Images\xcm_32x32.png" />
-    <None Include="..\Branding\Images\splash.bmp">
-      <Link>Images\splash.bmp</Link>
-    </None>
     <Content Include="TestResources\credits.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

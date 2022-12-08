@@ -77,7 +77,7 @@ namespace XenAdmin.TabPages
             {
                 log.Error($"Failed to load the HomePage for {Program.CurrentLanguage}", ex);
             }
-            
+
             _initializing = false;
         }
 
