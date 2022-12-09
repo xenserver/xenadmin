@@ -2810,15 +2810,12 @@
     </EmbeddedResource>
     <None Include="..\Branding\HomePage.html">
       <Link>HomePage.html</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="..\Branding\HomePage.ja.html">
       <Link>HomePage.ja.html</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="..\Branding\HomePage.zh-CN.html">
       <Link>HomePage.zh-CN.html</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="app.config">
       <SubType>Designer</SubType>

@@ -42,24 +42,42 @@ namespace XenAdmin.TabPages
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private const string XCNS = "XenCenter://";
-        private readonly bool _initializing = true;
+        private bool _initializing;
+        private readonly string _html;
 
         public HomePage()
         {
             InitializeComponent();
 
-            string path = string.Empty;
+            switch (Program.CurrentLanguage)
+            {
+                case "ja":
+                    _html = Properties.Resources.HomePage_ja;
+                    break;
+                case "zh":
+                    _html = Properties.Resources.HomePage_zh_CN;
+                    break;
+                default:
+                    _html = Properties.Resources.HomePage;
+                    break;
+            }
+
+            Load();
+        }
+
+        private void Load()
+        {
+            _initializing = true;
+
             try
             {
-                path = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), InvisibleMessages.HOMEPAGE_FILENAME);
-                webBrowser.Navigate(path);
+                webBrowser.DocumentText = _html;
             }
             catch (Exception ex)
             {
-                log.Error($"Failed to load the HomePage. Url = {path}", ex);
+                log.Error($"Failed to load the HomePage for {Program.CurrentLanguage}", ex);
             }
-
+            
             _initializing = false;
         }
 
@@ -72,7 +90,7 @@ namespace XenAdmin.TabPages
 
             string url = e.Url.OriginalString;
 
-            if (url.StartsWith(XCNS, StringComparison.InvariantCultureIgnoreCase))
+            if (url.StartsWith("XenCenter://", StringComparison.InvariantCultureIgnoreCase))
             {
                 if (url.Contains("HelpContents"))
                 {
