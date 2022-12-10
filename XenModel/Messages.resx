@@ -2904,7 +2904,9 @@ Do you want to assign these VMs to the schedule '{0}' instead?</value>
     <value>Mana&amp;ge vTPMs...</value>
   </data>
   <data name="COMMON_CRITERIA_TEXT" xml:space="preserve">
-    <value>{0}: for use with Common Criteria versions of {1} only</value>
+    <value>
+(For use with Common Criteria versions of {0} only).
+</value>
   </data>
   <data name="COMPLETED" xml:space="preserve">
     <value>Completed</value>
@@ -3792,9 +3794,6 @@ This action cannot be undone. Are you sure you want to continue?</value>
   </data>
   <data name="COPYING_TEMPLATE" xml:space="preserve">
     <value>Copying template '{0}' to SR '{1}'</value>
-  </data>
-  <data name="COPYRIGHT" xml:space="preserve">
-    <value>Copyright © {0} All rights reserved.</value>
   </data>
   <data name="COULD_NOT_OPEN_URL" xml:space="preserve">
     <value>Could not open URL '{0}'</value>
@@ -13553,7 +13552,7 @@ To optimize VM performance, you should reduce the number of VCPUs to less than o
     <value>Version</value>
   </data>
   <data name="VERSION_NUMBER" xml:space="preserve">
-    <value>{0} version {1} (build {2}) {3}-bit</value>
+    <value>{0} version {1} (build {2}) {3}-bit.</value>
   </data>
   <data name="VGPU_DESCRIPTION" xml:space="preserve">
     <value>{0} virtual GPU ({1} per GPU)</value>

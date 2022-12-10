@@ -276,6 +276,9 @@
   <data name="SR.name_label-xenserver-tools" xml:space="preserve">
     <value>[Citrix VM Tools]</value>
   </data>
+  <data name="TRADEMARKS" xml:space="preserve">
+    <value>Cloud Software Group is a trademark of Cloud Software Group Holdings, Inc., and XenServer, XenCenter, Xen, the Xen logo, Citrix Hypervisor are trademarks and/or registered trademarks of Citrix Systems, Inc. in the United States and other countries. XenServer(tm) High Availability is powered by everRun(tm), a registered trademark of Stratus Technologies Bermuda Limited.</value>
+  </data>
   <data name="UPDATES_URL" xml:space="preserve">
     <value>[UPDATES_URL]</value>
   </data>
