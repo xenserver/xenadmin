@@ -88,6 +88,8 @@ namespace XenAdmin.Core
 
         public static readonly string ProductVersionText = Get("PRODUCT_VERSION_TEXT");
 
+        public static readonly string Trademarks = Get("TRADEMARKS");
+
         public static readonly string UpdatesUrl = Get("UPDATES_URL");
 
         public static readonly string VmTools = Get("VM_TOOLS");

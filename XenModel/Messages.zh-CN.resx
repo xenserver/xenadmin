@@ -3787,9 +3787,6 @@
   <data name="COPYING_TEMPLATE" xml:space="preserve">
     <value>正在将模板“{0}”复制到 SR“{1}”</value>
   </data>
-  <data name="COPYRIGHT" xml:space="preserve">
-    <value>版权所有 © {0} 保留所有权利。</value>
-  </data>
   <data name="COULD_NOT_OPEN_URL" xml:space="preserve">
     <value>无法打开 URL {0}</value>
   </data>

@@ -8061,7 +8061,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}: for use with Common Criteria versions of {1} only.
+        ///(For use with Common Criteria versions of {0} only).
         /// </summary>
         public static string COMMON_CRITERIA_TEXT {
             get {
@@ -10591,15 +10591,6 @@ namespace XenAdmin {
         public static string COPYING_TEMPLATE {
             get {
                 return ResourceManager.GetString("COPYING_TEMPLATE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Copyright © {0} All rights reserved..
-        /// </summary>
-        public static string COPYRIGHT {
-            get {
-                return ResourceManager.GetString("COPYRIGHT", resourceCulture);
             }
         }
         
@@ -39221,7 +39212,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} version {1} (build {2}) {3}-bit.
+        ///   Looks up a localized string similar to {0} version {1} (build {2}) {3}-bit..
         /// </summary>
         public static string VERSION_NUMBER {
             get {
