@@ -298,7 +298,7 @@ namespace XenAdmin.Actions.OvfActions
 
                     // the compressed file will be replaced by the uncompressed, hence we need
                     // to use it with its disk extension (vmdk, vhd, etc.)
-                    if (ext.ToLower().EndsWith(".gz") || ext.ToLower().EndsWith(".bz2"))
+                    if (ext.ToLower().EndsWith(".gz"))
                     {
                         sourcefile = Path.Combine(pathToOvf, "unc_" + Path.GetFileNameWithoutExtension(filename));
                         ext = Path.GetExtension(sourcefile);

@@ -3431,7 +3431,7 @@ namespace XenOvf
         /// <summary>
         /// Find the filename for the given RASD.  
         /// The RASD must Resource Type: 17, 19, 21 and be a hard disk image.
-        /// The file may be compressed (gzip/bzip2)
+        /// The file may be compressed (gzip)
         /// </summary>
         public static string FindRasdFileName(EnvelopeType ovfEnv, RASD_Type rasd, out CompressionFactory.Type? compression)
         {
@@ -3479,12 +3479,6 @@ namespace XenOvf
                     if (filer.compression.ToLower().Equals("gzip"))
                     {
                         compression = CompressionFactory.Type.Gz;
-                        return filer.href;
-                    }
-
-                    if (filer.compression.ToLower().Equals("bzip2"))
-                    {
-                        compression = CompressionFactory.Type.Bz2;
                         return filer.href;
                     }
 

@@ -69,7 +69,6 @@
                             <File Id="NewtonsoftJsonDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\Newtonsoft.Json.CH.dll" />
                             <File Id="log4netDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\log4net.dll" />
                             <File Id="SharpZipLibDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\ICSharpCode.SharpZipLib.dll" />
-                            <File Id="IonicZipDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\Ionic.Zip.dll" />
                             <File Id="MSTSCLibDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\MSTSCLib.dll" />
                             <File Id="XenCenterLibDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\CoreUtilsLib.dll" />
                             <File Id="XenModelDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\XenModel.dll" />
