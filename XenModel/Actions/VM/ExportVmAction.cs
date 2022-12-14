@@ -110,7 +110,7 @@ namespace XenAdmin.Actions
             log.DebugFormat("Exporting {0} to {1}", VM.Name(), _filename);
 
             // The DownloadFile call will block, so we need a separate thread to poll for task status.
-            Thread taskThread = new Thread(progressPoll);
+            Thread taskThread = new Thread(ProgressPoll);
             taskThread.Name = "Progress polling thread for ExportVmAction for " + VM.Name().Ellipsise(20);
             taskThread.IsBackground = true;
             taskThread.Start();
@@ -156,7 +156,7 @@ namespace XenAdmin.Actions
                 int i = 0;
                 long filesize = new FileInfo(tmpFile).Length / 50; //Div by 50 to save doing the * 50 in the callback
 
-                Export.verifyCallback callback = size =>
+                void Callback(uint size)
                     {
                         read += size;
                         i++;
@@ -168,7 +168,7 @@ namespace XenAdmin.Actions
                             PercentComplete = 50 + (int)(read / filesize);
                             i = 0;
                         }
-                    };
+                    }
 
                 try
                 {
@@ -178,7 +178,7 @@ namespace XenAdmin.Actions
                         this.Description = Messages.ACTION_EXPORT_VERIFY;
 
                         export = new Export();
-                        export.verify(fs, null, () => Cancelling, callback);
+                        export.verify(fs, null, () => Cancelling, Callback);
                     }
                 }
                 catch (Exception e)
@@ -246,8 +246,6 @@ namespace XenAdmin.Actions
             }
         }
 
-
-
         private void HttpGet(string filename, Uri uri)
         {
             using (FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write))
@@ -259,7 +257,7 @@ namespace XenAdmin.Actions
             }
         }
 
-        private void progressPoll()
+        private void ProgressPoll()
         {
             try
             {

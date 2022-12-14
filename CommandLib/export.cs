@@ -73,12 +73,19 @@ namespace CommandLib
 
         private readonly XXHash64 _xxHash = new XXHash64();
 
-        public static bool verbose_debugging = false;
+        private readonly bool _quiet;
 
-        private static void debug(string x)
+        public Export(bool quiet = false)
         {
-            if (verbose_debugging)
-                Console.WriteLine(x);
+            _quiet = quiet;
+        }
+
+        private void Debug(string x)
+        {
+            if (_quiet)
+                return;
+
+            Console.WriteLine(x);
         }
 
         private string checksum_sha1(byte[] data)
@@ -108,7 +115,7 @@ namespace CommandLib
             return hex(_xxHash.ComputeHash(data));
         }
 
-        private static Hashtable parse_checksum_table(string checksum_xml)
+        private Hashtable parse_checksum_table(string checksum_xml)
         {
             Hashtable table = new Hashtable();
 
@@ -130,14 +137,14 @@ namespace CommandLib
                         value = v.Value;
                 }
 
-                debug(String.Format("adding {0} = {1}", name, value));
+                Debug(String.Format("adding {0} = {1}", name, value));
                 table.Add(name, value);
             }
 
             return table;
         }
 
-        private static void compare_tables(Hashtable recomputed, Hashtable original)
+        private void compare_tables(Hashtable recomputed, Hashtable original)
         {
             foreach (DictionaryEntry x in recomputed)
             {
@@ -149,7 +156,7 @@ namespace CommandLib
                 }
                 else
                 {
-                    debug(String.Format("{0} hash OK", (string)x.Key));
+                    Debug(String.Format("{0} hash OK", (string)x.Key));
                 }
             }
         }
@@ -162,20 +169,16 @@ namespace CommandLib
             return new string(chars);
         }
 
-        public delegate void verifyCallback(uint read);
-
-        public delegate bool cancellingCallback();
-
         /// <summary>
         /// 'input' is the source of the export data, if 'output' is not null then
         /// a perfect copy should be echoed there. 
         /// </summary>
-        public void verify(Stream input, Stream output, cancellingCallback cancelling)
+        public void verify(Stream input, Stream output, Func<bool> cancelling)
         {
             verify(input, output, cancelling, null);
         }
 
-        private Header nextHeader(Stream input, Stream output, verifyCallback callback)
+        private Header nextHeader(Stream input, Stream output, Action<uint> callback)
         {
             // Interperate the next bytes from the stream as a Tar header
             byte[] bytes = nextData(input, output, callback, Header.length);
@@ -194,7 +197,7 @@ namespace CommandLib
             return new Header(bytes);
         }
 
-        private byte[] nextData(Stream input, Stream output, verifyCallback callback, uint size)
+        private byte[] nextData(Stream input, Stream output, Action<uint> callback, uint size)
         {
             // Returns the next given number of bytes from the input
             byte[] bytes = IO.unmarshal_n(input, size);
@@ -203,7 +206,7 @@ namespace CommandLib
             return bytes;
         }
 
-        public void verify(Stream input, Stream output, cancellingCallback cancelling, verifyCallback callback)
+        public void verify(Stream input, Stream output, Func<bool> cancelling, Action<uint> callback)
         {
             Hashtable recomputed_checksums = new Hashtable();
             Hashtable original_checksums = null;
@@ -213,13 +216,13 @@ namespace CommandLib
                 while (!cancelling())
                 {
                     Header header_data = nextHeader(input, output, callback);
-                    debug(header_data.ToString());
+                    Debug(header_data.ToString());
 
                     byte[] bytes_data = nextData(input, output, callback, header_data.file_size);
 
                     if (header_data.file_name.Equals("ova.xml"))
                     {
-                        debug("Skipping ova.xml");
+                        Debug("Skipping ova.xml");
                     }
                     else if (header_data.file_name.EndsWith("checksum.xml"))
                     {
@@ -238,7 +241,7 @@ namespace CommandLib
                         if (!csum.Equals(csum_compare))
                             throw new BlockChecksumFailed(header_data.file_name, csum, csum_compare);
 
-                        debug(String.Format(" has checksum: {0}", csum));
+                        Debug(String.Format(" has checksum: {0}", csum));
                         recomputed_checksums.Add(header_data.file_name, csum);
 
                         nextData(input, output, callback, header_checksum.paddingLength()); // Eat the padding for the checksum file
@@ -249,7 +252,7 @@ namespace CommandLib
             }
             catch (EndOfArchive)
             {
-                debug("EOF");
+                Debug("EOF");
                 if (original_checksums != null)
                     compare_tables(recomputed_checksums, original_checksums);
             }

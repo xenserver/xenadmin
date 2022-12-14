@@ -32,6 +32,7 @@
 using System;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
 using System.Text;
 using CommandLib;
 
@@ -41,30 +42,34 @@ namespace xva_verify
     {
         public static void Main(string[] args)
         {
-            Export.verbose_debugging = true;
-            if (args.Length < 1 || args.Length > 2)
+            if (args.Length < 1 || args.Length > 3)
             {
                 var sb = new StringBuilder();
                 sb.AppendLine();
                 sb.AppendLine("Usage").AppendLine();
-                sb.AppendLine("  xva_verify <archive> [<copy>]").AppendLine();
+                sb.AppendLine("  xva_verify <archive> [<copy> -q]").AppendLine();
                 sb.AppendLine("where").AppendLine();
                 sb.AppendLine("  <archive>  The name of the archive file to verify. Use '-' to read from stdin.");
-                sb.AppendLine("  <copy>     If specified, a copy of the archive file is created with this name.").AppendLine();
+                sb.AppendLine("  <copy>     If specified, a copy of the archive file is created with this name.");
+                sb.AppendLine("  -q         If specified, it switches off verbose debugging.");
+                sb.AppendLine();
 
                 Console.WriteLine(sb.ToString());
                 Environment.Exit(1);
             }
 
+            bool quiet = args.Contains("-q");
+            var fileArgs = args.Where(a => a != "-q").ToArray();
+
             try
             {
-                string filename = args[0];
+                string filename = fileArgs[0];
 
                 Stream g = null;
-                if (args.Length == 2)
-                    g = new FileStream(args[1], FileMode.Create);
+                if (fileArgs.Length > 1)
+                    g = new FileStream(fileArgs[1], FileMode.Create);
 
-                Stream f = args[0].Equals("-")
+                Stream f = fileArgs[0].Equals("-")
                     ? Console.OpenStandardInput()
                     : new FileStream(filename, FileMode.Open, FileAccess.Read);
 
@@ -88,7 +93,7 @@ namespace xva_verify
                     }
                 }
 
-                new Export().verify(f, g, () => false);
+                new Export(quiet).verify(f, g, () => false);
             }
             catch(UnauthorizedAccessException)
             {
