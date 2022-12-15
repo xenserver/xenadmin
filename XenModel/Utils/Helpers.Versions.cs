@@ -366,23 +366,6 @@ namespace XenAdmin.Core
         }
 
         /// <param name="conn">May be null, in which case true is returned.</param>
-        public static bool Post82X(IXenConnection conn)
-        {
-            return conn == null || Post82X(GetCoordinator(conn));
-        }
-
-        /// <param name="host">May be null, in which case true is returned.</param>
-        public static bool Post82X(Host host)
-        {
-            return host == null || Post82X(HostPlatformVersion(host));
-        }
-
-        public static bool Post82X(string platformVersion)
-        {
-            return platformVersion != null && ProductVersionCompare(platformVersion, "3.2.50") >= 0;
-        }
-
-        /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool YangtzeOrGreater(IXenConnection conn)
         {
             return conn == null || YangtzeOrGreater(Helpers.GetCoordinator(conn));
@@ -398,6 +381,23 @@ namespace XenAdmin.Core
         public static bool YangtzeOrGreater(string platformVersion)
         {
             return platformVersion != null && ProductVersionCompare(platformVersion, "3.2.1") >= 0;
+        }
+
+        /// <param name="conn">May be null, in which case true is returned.</param>
+        public static bool Post82X(IXenConnection conn)
+        {
+            return conn == null || Post82X(GetCoordinator(conn));
+        }
+
+        /// <param name="host">May be null, in which case true is returned.</param>
+        public static bool Post82X(Host host)
+        {
+            return host == null || Post82X(HostPlatformVersion(host));
+        }
+
+        public static bool Post82X(string platformVersion)
+        {
+            return platformVersion != null && ProductVersionCompare(platformVersion, "3.2.50") >= 0;
         }
 
         public static bool XapiEqualOrGreater_1_290_0(IXenConnection conn)
@@ -437,6 +437,12 @@ namespace XenAdmin.Core
         public static bool XapiEqualOrGreater_22_20_0(Host host)
         {
             return host == null || ProductVersionCompare(host.GetXapiVersion(), "22.20.0") >= 0;
+        }
+
+        public static bool XapiEqualOrGreater_22_33_0(IXenConnection conn)
+        {
+            var coordinator = GetCoordinator(conn);
+            return coordinator == null || ProductVersionCompare(coordinator.GetXapiVersion(), "22.33.0") >= 0;
         }
 
         #endregion

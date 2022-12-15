@@ -15250,5 +15250,19 @@ namespace XenAPI
             var serializer = CreateSerializer(converters);
             return Rpc<Dictionary<XenRef<Repository>, Repository>>("Repository.get_all_records", new JArray(session), serializer);
         }
+
+        public bool pool_get_migration_compression(string session, string _pool)
+        {
+            var converters = new List<JsonConverter> { };
+            var serializer = CreateSerializer(converters);
+            return Rpc<bool>("pool.get_migration_compression", new JArray(session, _pool ?? ""), serializer);
+        }
+
+        public void pool_set_migration_compression(string session, string _pool, bool _migration_compression)
+        {
+            var converters = new List<JsonConverter> { };
+            var serializer = CreateSerializer(converters);
+            Rpc("pool.set_migration_compression", new JArray(session, _pool ?? "", _migration_compression), serializer);
+        }
     }
 }

@@ -81,6 +81,7 @@ namespace XenAdmin.Dialogs
         private NetworkOptionsEditPage NetworkOptionsEditPage;
         private ClusteringEditPage ClusteringEditPage;
         private SrReadCachingEditPage SrReadCachingEditPage;
+        private PoolAdvancedEditPage _poolAdvancedEditPage;
         #endregion
 
         private IXenObject xenObject, xenObjectBefore, xenObjectCopy;
@@ -217,6 +218,9 @@ namespace XenAdmin.Dialogs
                 if (is_pool_or_standalone && !Helpers.FeatureForbidden(xenObject.Connection, Host.RestrictCorosync))
                     ShowTab(ClusteringEditPage = new ClusteringEditPage());
 
+                if (is_pool && Helpers.Post82X(xenObject.Connection) && Helpers.XapiEqualOrGreater_22_33_0(xenObject.Connection))
+                    ShowTab(_poolAdvancedEditPage = new PoolAdvancedEditPage());
+
                 if (is_network)
                     ShowTab(editNetworkPage = new EditNetworkPage());
 
@@ -282,43 +286,39 @@ namespace XenAdmin.Dialogs
                 if (is_sr && ((SR)xenObjectCopy).SupportsReadCaching() && !Helpers.FeatureForbidden(xenObjectCopy, Host.RestrictReadCaching))
                     ShowTab(SrReadCachingEditPage = new SrReadCachingEditPage());
 
-                //
-                // Now add one tab per VBD (for VDIs only)
-                //
-
-                if (!is_vdi)
-                    return;
-
-                ShowTab(vdiSizeLocation = new VDISizeLocationPage());
-
-                VDI vdi = xenObjectCopy as VDI;
-
-                List<VBDEditPage> vbdEditPages = new List<VBDEditPage>();
-
-                foreach (VBD vbd in vdi.Connection.ResolveAll(vdi.VBDs))
+                if (is_vdi)
                 {
-                    VBDEditPage editPage = new VBDEditPage();
+                    ShowTab(vdiSizeLocation = new VDISizeLocationPage());
 
-                    editPage.SetXenObjects(null, vbd);
-                    vbdEditPages.Add(editPage);
-                    ShowTab(editPage);
-                }
+                    VDI vdi = xenObjectCopy as VDI;
 
-                if (vbdEditPages.Count <= 0)
-                    return;
+                    List<VBDEditPage> vbdEditPages = new List<VBDEditPage>();
 
-                using (var dialog = new ActionProgressDialog(
-                    new DelegatedAsyncAction(vdi.Connection, Messages.DEVICE_POSITION_SCANNING,
-                        Messages.DEVICE_POSITION_SCANNING, Messages.DEVICE_POSITION_SCANNED,
-                        delegate(Session session)
-                        {
-                            foreach (VBDEditPage page in vbdEditPages)
-                                page.UpdateDevicePositions(session);
-                        }),
-                    ProgressBarStyle.Continuous))
-                {
-                    dialog.ShowCancel = true;
-                    dialog.ShowDialog(Program.MainWindow);
+                    foreach (VBD vbd in vdi.Connection.ResolveAll(vdi.VBDs))
+                    {
+                        VBDEditPage editPage = new VBDEditPage();
+
+                        editPage.SetXenObjects(null, vbd);
+                        vbdEditPages.Add(editPage);
+                        ShowTab(editPage);
+                    }
+
+                    if (vbdEditPages.Count <= 0)
+                        return;
+
+                    using (var dialog = new ActionProgressDialog(
+                               new DelegatedAsyncAction(vdi.Connection, Messages.DEVICE_POSITION_SCANNING,
+                                   Messages.DEVICE_POSITION_SCANNING, Messages.DEVICE_POSITION_SCANNED,
+                                   delegate(Session session)
+                                   {
+                                       foreach (VBDEditPage page in vbdEditPages)
+                                           page.UpdateDevicePositions(session);
+                                   }),
+                               ProgressBarStyle.Continuous))
+                    {
+                        dialog.ShowCancel = true;
+                        dialog.ShowDialog(Program.MainWindow);
+                    }
                 }
             }
             finally

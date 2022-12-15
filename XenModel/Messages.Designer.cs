@@ -997,6 +997,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enabling VM memory and vGPU data compression during VM live migration on &apos;{0}&apos;.
+        /// </summary>
+        public static string ACTION_ENABLE_MIGRATION_COMPRESSION {
+            get {
+                return ResourceManager.GetString("ACTION_ENABLE_MIGRATION_COMPRESSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enable PVS-Accelerator.
         /// </summary>
         public static string ACTION_ENABLE_PVS_READ_CACHING {
@@ -13051,6 +13060,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Don&apos;t compress VMs during migration.
+        /// </summary>
+        public static string DISABLED_MIGRATION_COMPRESSION {
+            get {
+                return ResourceManager.GetString("DISABLED_MIGRATION_COMPRESSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Snapshot schedule &apos;{0}&apos; disabled..
         /// </summary>
         public static string DISABLED_VMSS {
@@ -15489,6 +15507,15 @@ namespace XenAdmin {
         public static string ENABLED_CLUSTERING_ON_POOL {
             get {
                 return ResourceManager.GetString("ENABLED_CLUSTERING_ON_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Compress VMs during migration.
+        /// </summary>
+        public static string ENABLED_MIGRATION_COMPRESSION {
+            get {
+                return ResourceManager.GetString("ENABLED_MIGRATION_COMPRESSION", resourceCulture);
             }
         }
         

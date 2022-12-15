@@ -429,6 +429,9 @@
   <data name="ACTION_ENABLE_IGMP_SNOOPING" xml:space="preserve">
     <value>Enable IGMP snooping</value>
   </data>
+  <data name="ACTION_ENABLE_MIGRATION_COMPRESSION" xml:space="preserve">
+    <value>Enabling VM memory and vGPU data compression during VM live migration on '{0}'</value>
+  </data>
   <data name="ACTION_ENABLE_PVS_READ_CACHING" xml:space="preserve">
     <value>Enable PVS-Accelerator</value>
   </data>
@@ -4623,6 +4626,9 @@ Plugging in untrustworthy USB devices to your computer may put your computer at 
   <data name="DISABLED_CLUSTERING_ON_POOL" xml:space="preserve">
     <value>Disabled clustering on {0}.</value>
   </data>
+  <data name="DISABLED_MIGRATION_COMPRESSION" xml:space="preserve">
+    <value>Don't compress VMs during migration</value>
+  </data>
   <data name="DISABLED_VMSS" xml:space="preserve">
     <value>Snapshot schedule '{0}' disabled.</value>
   </data>
@@ -5456,6 +5462,9 @@ Would you like to eject these ISOs before continuing?</value>
   </data>
   <data name="ENABLED_CLUSTERING_ON_POOL" xml:space="preserve">
     <value>Enabled clustering on {0}.</value>
+  </data>
+  <data name="ENABLED_MIGRATION_COMPRESSION" xml:space="preserve">
+    <value>Compress VMs during migration</value>
   </data>
   <data name="ENABLED_VMSS" xml:space="preserve">
     <value>Snapshot schedule '{0}' enabled.</value>
