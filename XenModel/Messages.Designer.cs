@@ -106,7 +106,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Change email options.
+        ///   Looks up a localized string similar to Change email notifications.
         /// </summary>
         public static string ACTION_CHANGE_EMAIL_OPTIONS {
             get {
@@ -313,7 +313,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Changing email options for &apos;{0}&apos;....
+        ///   Looks up a localized string similar to Changing email notifications for &apos;{0}&apos;....
         /// </summary>
         public static string ACTION_CHANGING_EMAIL_OPTIONS_FOR {
             get {
@@ -4726,7 +4726,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Advanced Options.
+        ///   Looks up a localized string similar to Advanced.
         /// </summary>
         public static string ADVANCED_OPTIONS {
             get {
@@ -9160,7 +9160,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Proxy and timeout options.
+        ///   Looks up a localized string similar to Proxy and timeout.
         /// </summary>
         public static string CONNECTION_DESC {
             get {
@@ -9340,7 +9340,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Keyboard shortcuts and scaling options.
+        ///   Looks up a localized string similar to Keyboard shortcuts and scaling.
         /// </summary>
         public static string CONSOLE_DESC {
             get {
@@ -15311,7 +15311,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Email Options.
+        ///   Looks up a localized string similar to Email Notifications.
         /// </summary>
         public static string EMAIL_OPTIONS {
             get {
@@ -16777,24 +16777,6 @@ namespace XenAdmin {
         public static string EXPORT_SECURITY_PAGE_FILETYPES {
             get {
                 return ResourceManager.GetString("EXPORT_SECURITY_PAGE_FILETYPES", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Security.
-        /// </summary>
-        public static string EXPORT_SECURITY_PAGE_TEXT {
-            get {
-                return ResourceManager.GetString("EXPORT_SECURITY_PAGE_TEXT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Select security options.
-        /// </summary>
-        public static string EXPORT_SECURITY_PAGE_TITLE {
-            get {
-                return ResourceManager.GetString("EXPORT_SECURITY_PAGE_TITLE", resourceCulture);
             }
         }
         
@@ -25553,7 +25535,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Network Options.
+        ///   Looks up a localized string similar to Network.
         /// </summary>
         public static string NETWORK_OPTIONS {
             get {
@@ -31750,15 +31732,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Provisioning Options.
-        /// </summary>
-        public static string PROVISIONING_OPTIONS {
-            get {
-                return ResourceManager.GetString("PROVISIONING_OPTIONS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Provisioning Type.
         /// </summary>
         public static string PROVISIONING_TYPE {
@@ -33981,7 +33954,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Certificate options.
+        ///   Looks up a localized string similar to Certificates and pool secrets.
         /// </summary>
         public static string SECURITY_DESC {
             get {
