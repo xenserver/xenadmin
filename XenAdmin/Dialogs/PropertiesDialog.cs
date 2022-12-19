@@ -347,16 +347,24 @@ namespace XenAdmin.Dialogs
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            if (!ValidToSave)
+            var changedPageExists = false;
+
+            foreach (IEditPage editPage in verticalTabs.Items)
             {
-                // Keep dialog open and allow user to correct the error as
-                // indicated by the balloon tooltip.
-                DialogResult = DialogResult.None;
-                return;
+                if (!editPage.ValidToSave)
+                {
+                    SelectPage(editPage);
+
+                    editPage.ShowLocalValidationMessages();
+                    DialogResult = DialogResult.None;
+                    return;
+                }
+
+                if (editPage.HasChanged)
+                    changedPageExists = true;
             }
 
-            // Have any of the fields in the tab pages changed?
-            if (!HasChanged)
+            if (!changedPageExists)
             {
                 Close();
                 return;
@@ -411,51 +419,10 @@ namespace XenAdmin.Dialogs
             Program.Invoke(Program.MainWindow.GeneralPage, Program.MainWindow.GeneralPage.UpdateButtons);
         }
 
-        /*
-         * Iterates through all of the tab pages checking for changes and
-         * return the status.
-         */
-        private bool HasChanged
-        {
-            get
-            {
-                foreach (IEditPage editPage in verticalTabs.Items)
-                    if (editPage.HasChanged)
-                        return true;
-
-                return false;
-            }
-        }
-
-        /*
-         * Iterate through all tab pages looking for local validation errors.  If
-         * we encounter a local validation error on a TabPage, then make the TabPage
-         * the selected, and have the inner control show one or more balloon tips.  Keep
-         * the dialog open.
-         */
-        private bool ValidToSave
-        {
-            get
-            {
-                foreach (IEditPage editPage in verticalTabs.Items)
-                    if (!editPage.ValidToSave)
-                    {
-                        SelectPage(editPage);
-
-                        // Show local validation balloon message for this tab page.
-                        editPage.ShowLocalValidationMessages();
-
-                        return false;
-                    }
-
-                return true;
-            }
-        }
-
-        /* 
-         * Iterates through all of the tab pages, saving changes to their cloned XenObjects,
-         * and accumulating and returning their Actions for further processing.
-         */
+        /// <summary>
+        /// Iterates through all of the tab pages, saving changes to their cloned XenObjects,
+        /// and accumulating and returning their Actions for further processing.
+        /// </summary>
         private List<AsyncAction> SaveSettings()
         {
             List<AsyncAction> actions = new List<AsyncAction>();
