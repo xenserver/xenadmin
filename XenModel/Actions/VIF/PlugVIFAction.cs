@@ -29,25 +29,31 @@
  * SUCH DAMAGE.
  */
 
+using XenAPI;
+
 namespace XenAdmin.Actions
 {
-    public class PlugVIFAction : PureAsyncAction
+    public class PlugVIFAction : AsyncAction
     {
-        private XenAPI.VIF _vif;
-        public PlugVIFAction(XenAPI.VIF vif)
+        private readonly VIF _vif;
+
+        public PlugVIFAction(VIF vif)
             : base(vif.Connection, string.Format(Messages.ACTION_VIF_PLUG_TITLE, vif.Connection.Resolve(vif.VM).Name()))
         {
             VM = vif.Connection.Resolve(vif.VM);
             _vif = vif;
+
+            if (VM.power_state == vm_power_state.Running)
+                ApiMethodsToRoleCheck.AddRange("VIF.get_allowed_operations", "VIF.plug");
         }
 
         protected override void Run()
         {
             Description = Messages.ACTION_VIF_PLUGGING;
-            if (VM.power_state == XenAPI.vm_power_state.Running
-             && XenAPI.VIF.get_allowed_operations(Session, _vif.opaque_ref).Contains(XenAPI.vif_operations.plug))
+            if (VM.power_state == vm_power_state.Running &&
+                VIF.get_allowed_operations(Session, _vif.opaque_ref).Contains(vif_operations.plug))
             {
-                XenAPI.VIF.plug(Session, _vif.opaque_ref);
+                VIF.plug(Session, _vif.opaque_ref);
             }
             Description = Messages.ACTION_VIF_PLUGGED;
         }

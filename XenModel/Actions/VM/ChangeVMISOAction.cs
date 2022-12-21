@@ -39,7 +39,7 @@ namespace XenAdmin.Actions
     /// <summary>
     /// Change the ISO image attached to a VBD in a VM
     /// </summary>
-    public class ChangeVMISOAction : PureAsyncAction
+    public class ChangeVMISOAction : AsyncAction
     {
         private readonly VBD cdrom;
         private readonly VDI vdi;
@@ -51,17 +51,21 @@ namespace XenAdmin.Actions
         /// <param name="vm"></param>
         /// <param name="vdi">May be null, indicating that the CD should be ejected (i.e. set to empty).</param>
         /// <param name="cdrom">Must not be null.</param>
-        public ChangeVMISOAction(IXenConnection connection, VM vm,
-            VDI vdi, VBD cdrom)
-            : base(connection, vdi == null ? String.Format(Messages.ISO_UNLOADING, vm.Name()) :
-            String.Format(Messages.ISO_LOADING, vdi.Name(), vm.Name()))
+        public ChangeVMISOAction(IXenConnection connection, VM vm, VDI vdi, VBD cdrom)
+            : base(connection, "")
         {
-            this.VM = vm;
+            VM = vm ?? throw new ArgumentNullException(nameof(vm));
             this.vdi = vdi;
-            this.cdrom = cdrom;
+            this.cdrom = cdrom ?? throw new ArgumentNullException(nameof(cdrom));
 
-            System.Diagnostics.Trace.Assert(this.cdrom != null, "ChangeVMISOAction ctor: cdrom vbd must not be null");
-            System.Diagnostics.Trace.Assert(this.VM != null, "ChangeVMISOAction ctor: VM must not be null");
+            Title = vdi == null
+                ? string.Format(Messages.ISO_UNLOADING, vm.Name())
+                : string.Format(Messages.ISO_LOADING, vdi.Name(), vm.Name());
+
+            if (!cdrom.empty)
+                ApiMethodsToRoleCheck.Add("VBD.async_eject");
+            if (vdi != null)
+                ApiMethodsToRoleCheck.Add("VBD.async_insert");
         }
 
         protected override void Run()
@@ -79,13 +83,11 @@ namespace XenAdmin.Actions
             {
                 RelatedTask = VBD.async_insert(Session, cdrom.opaque_ref, vdi.opaque_ref);
                 PollToCompletion(wasEmpty ? 50 : 0, 100);
-                Description = String.Format(Messages.ISO_LOADED,
-                    vdi.Name(), VM.Name());
+                Description = string.Format(Messages.ISO_LOADED, vdi.Name(), VM.Name());
             }
             else
             {
-                Description = String.Format(Messages.ISO_UNLOADED,
-                    VM.Name());
+                Description = string.Format(Messages.ISO_UNLOADED, VM.Name());
             }
         }
     }

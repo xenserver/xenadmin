@@ -35,12 +35,12 @@ namespace XenAdmin.Actions
 {
     public class CreateDiskAction : SaveChangesAction
     {
-        public CreateDiskAction(IXenObject obj) : base(obj)
+        public CreateDiskAction(IXenObject obj)
+            : base(obj, false)
         {
-            VDI disk = obj as VDI;
-            if (disk != null)
+            if (obj is VDI disk)
                 Title = string.Format(Messages.ACTION_VDI_CREATING_TITLE, disk.Name(),
-                                      disk.Connection.Resolve<SR>(disk.SR).NameWithoutHost());
+                    disk.Connection.Resolve(disk.SR).NameWithoutHost());
             Description = Messages.ACTION_VDI_CREATING;
         }
 

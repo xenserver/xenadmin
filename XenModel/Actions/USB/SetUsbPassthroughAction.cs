@@ -29,21 +29,22 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using XenAPI;
 
 namespace XenAdmin.Actions
 {
-    public class SetUsbPassthroughAction : PureAsyncAction
+    public class SetUsbPassthroughAction : AsyncAction
     {
-        private PUSB _pusb;
-        private bool _passthroughEnabled;
+        private readonly PUSB _pusb;
+        private readonly bool _passthroughEnabled;
 
         public SetUsbPassthroughAction (PUSB pusb, bool passthroughEnabled) :
-            base(pusb.Connection, String.Format(passthroughEnabled ? Messages.ACTION_USB_PASSTHROUGH_ENABLING : Messages.ACTION_USB_PASSTHROUGH_DISABLING, pusb.Name()))
+            base(pusb.Connection, "")
         {
             _pusb = pusb;
             _passthroughEnabled = passthroughEnabled;
+            Title = string.Format(passthroughEnabled ? Messages.ACTION_USB_PASSTHROUGH_ENABLING : Messages.ACTION_USB_PASSTHROUGH_DISABLING, pusb.Name());
+            ApiMethodsToRoleCheck.Add("PUSB.set_passthrough_enabled");
         }
 
         protected override void Run()

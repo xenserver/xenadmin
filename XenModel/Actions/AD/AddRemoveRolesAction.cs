@@ -38,11 +38,12 @@ using XenAPI;
 
 namespace XenAdmin.Actions
 {
-    public class AddRemoveRolesAction : PureAsyncAction
+    public class AddRemoveRolesAction : AsyncAction
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private readonly List<Role> _newRoles;
+        private readonly List<Role> _toAdd;
+        private readonly List<Role> _toRemove;
         private readonly Subject subject;
 
         public AddRemoveRolesAction(IXenConnection connection, Subject subject, List<Role> newRoles)
@@ -57,34 +58,39 @@ namespace XenAdmin.Actions
             else
                 Host = Helpers.GetCoordinator(connection);
 
-            _newRoles = newRoles;
             this.subject = subject;
-        }
 
-        protected override void Run()
-        {
             var serverRoles = Connection.Cache.Roles
                 .Where(r => (!Helpers.Post82X(Connection) || !Helpers.XapiEqualOrGreater_22_5_0(Connection) || !r.is_internal) && r.subroles.Count > 0)
                 .ToList();
 
-            var toAdd = serverRoles.Where(role => _newRoles.Contains(role) &&
-                                                  !subject.roles.Contains(new XenRef<Role>(role.opaque_ref))).ToList();
+            _toAdd = serverRoles.Where(role => newRoles.Contains(role) &&
+                                               !subject.roles.Contains(new XenRef<Role>(role.opaque_ref))).ToList();
 
-            var toRemove = serverRoles.Where(role => !_newRoles.Contains(role) &&
-                                                     subject.roles.Contains(new XenRef<Role>(role.opaque_ref))).ToList();
+            _toRemove = serverRoles.Where(role => !newRoles.Contains(role) &&
+                                                  subject.roles.Contains(new XenRef<Role>(role.opaque_ref))).ToList();
 
-            int count = toAdd.Count + toRemove.Count;
+            if (_toAdd.Count > 0)
+                ApiMethodsToRoleCheck.Add("subject.add_to_roles");
+
+            if (_toRemove.Count > 0)
+                ApiMethodsToRoleCheck.Add("subject.remove_from_roles");
+        }
+
+        protected override void Run()
+        {
+            int count = _toAdd.Count + _toRemove.Count;
             int done = 0;
             var subj = subject.DisplayName ?? subject.SubjectName ?? subject.subject_identifier;
 
-            foreach (Role r in toAdd)
+            foreach (Role r in _toAdd)
             {
                 log.DebugFormat("Adding role {0} to subject '{1}'.", r.FriendlyName(), subj);
                 Subject.add_to_roles(Session, subject.opaque_ref, r.opaque_ref);
                 PercentComplete = 100 * ++done / count;
             }
 
-            foreach (Role r in toRemove)
+            foreach (Role r in _toRemove)
             {
                 log.DebugFormat("Removing role {0} from subject '{1}'.", r.FriendlyName(), subj);
                 Subject.remove_from_roles(Session, subject.opaque_ref, r.opaque_ref);

@@ -29,25 +29,24 @@
  * SUCH DAMAGE.
  */
 
-using XenAPI;
-using XenAdmin.Core;
-using System;
 using System.IO.Pipes;
 using System.Linq;
 using System.Text;
 using System.ServiceProcess;
+using XenAdmin.Core;
 using XenAdmin.Model;
 using XenAdmin.Network;
+using XenAPI;
 using XenCenterLib;
 
 namespace XenAdmin.Actions
 {
-    public abstract class TransferDataToHealthCheckAction : PureAsyncAction
+    public abstract class TransferDataToHealthCheckAction : AsyncAction
     {
         protected const char SEPARATOR = '\x202f'; // narrow non-breaking space.
         private const string HEALTHCHECKSERVICENAME = "XenServerHealthCheck";
 
-        public TransferDataToHealthCheckAction(IXenConnection connection, string title, string description, bool suppressHistory) 
+        protected TransferDataToHealthCheckAction(IXenConnection connection, string title, string description, bool suppressHistory) 
             : base(connection, title, description, suppressHistory)
         {
         }
@@ -107,8 +106,8 @@ namespace XenAdmin.Actions
     {
         private readonly Pool pool;
         HealthCheckSettings healthCheckSettings;
-        string username;
-        string password;
+        private readonly string username;
+        private readonly string password;
 
         public TransferHealthCheckSettingsAction(Pool pool, HealthCheckSettings healthCheckSettings, string username, string password, bool suppressHistory)
             : base(pool.Connection, Messages.ACTION_TRANSFER_HEALTHCHECK_SETTINGS, string.Format(Messages.ACTION_TRANSFER_HEALTHCHECK_SETTINGS, pool.Name()), suppressHistory)
@@ -129,8 +128,8 @@ namespace XenAdmin.Actions
                 return null; // do not send empty/null username or password (when the Health Check is enabled), as they will be ignored 
 
             var credential = healthCheckSettings.Status == HealthCheckStatus.Enabled
-                ? String.Join(SEPARATOR.ToString(), host.address, username, password)
-                : String.Join(SEPARATOR.ToString(), host.address);
+                ? string.Join(SEPARATOR.ToString(), host.address, username, password)
+                : string.Join(SEPARATOR.ToString(), host.address);
             return EncryptionUtils.ProtectForLocalMachine(credential);
         }
     }

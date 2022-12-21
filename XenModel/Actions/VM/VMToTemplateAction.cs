@@ -34,23 +34,24 @@ using XenAPI;
 
 namespace XenAdmin.Actions.VMActions
 {
-    public class VMToTemplateAction : PureAsyncAction
+    public class VMToTemplateAction : AsyncAction
     {
 
         public VMToTemplateAction(VM vm)
             : base(vm.Connection, string.Format(Messages.ACTION_VM_TEMPLATIZING_TITLE, vm.Name()))
         {
-            this.Description = Messages.ACTION_PREPARING;
-            this.VM = vm;
-            this.Host = vm.Home();
-            this.Pool = Core.Helpers.GetPool(vm.Connection);
+            Description = Messages.ACTION_PREPARING;
+            VM = vm;
+            Host = vm.Home();
+            Pool = Core.Helpers.GetPool(vm.Connection);
+            ApiMethodsToRoleCheck.Add("VM.set_is_a_template");
         }
 
         protected override void Run()
         {
-            this.Description = Messages.ACTION_VM_TEMPLATIZING;
-            XenAPI.VM.set_is_a_template(Session, VM.opaque_ref, true);
-            this.Description = Messages.ACTION_VM_TEMPLATIZED;
+            Description = Messages.ACTION_VM_TEMPLATIZING;
+            VM.set_is_a_template(Session, VM.opaque_ref, true);
+            Description = Messages.ACTION_VM_TEMPLATIZED;
         }
     }
 }

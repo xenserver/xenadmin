@@ -37,7 +37,7 @@ using XenAPI;
 
 namespace XenAdmin.Actions
 {
-    public class SaveHealthCheckSettingsAction : PureAsyncAction
+    public class SaveHealthCheckSettingsAction : AsyncAction
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -57,6 +57,14 @@ namespace XenAdmin.Actions
             this.diagnosticToken = diagnosticToken;
             this.username = healthCheckSettings.Status == HealthCheckStatus.Enabled ? userName : null;
             this.password = healthCheckSettings.Status == HealthCheckStatus.Enabled ? passWord : null;
+
+            ApiMethodsToRoleCheck.AddRange(
+                "pool.set_health_check_config",
+                "Secret.get_by_uuid",
+                "Secret.get_uuid",
+                "Secret.create",
+                "Secret.destroy",
+                "Secret.set_value");
         }
         
         protected override void Run()
@@ -77,7 +85,7 @@ namespace XenAdmin.Actions
             Pool.set_health_check_config(Session, pool.opaque_ref, newConfig);
         }
 
-        public static void SetSecretInfo(Session session, Dictionary<string, string> config, string infoKey, string infoValue)
+        private static void SetSecretInfo(Session session, Dictionary<string, string> config, string infoKey, string infoValue)
         {
             if (string.IsNullOrEmpty(infoKey))
                 return;

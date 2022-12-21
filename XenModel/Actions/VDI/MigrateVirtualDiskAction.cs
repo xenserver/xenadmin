@@ -39,15 +39,18 @@ namespace XenAdmin.Actions
     /// <summary>
     /// Live migrate a VDI
     /// </summary>
-    public class MigrateVirtualDiskAction : PureAsyncAction
+    public class MigrateVirtualDiskAction : AsyncAction
     {
         private readonly VDI vdi;
 
         public MigrateVirtualDiskAction(IXenConnection connection, VDI vdi, SR sr)
-            : base(connection, string.Format(Messages.ACTION_MOVING_VDI_TO_SR, Helpers.GetName(vdi), Helpers.GetName(connection.Resolve(vdi.SR)), Helpers.GetName(sr)))
+            : base(connection, "")
         {
             this.vdi = vdi;
             SR = sr;
+            Title = string.Format(Messages.ACTION_MOVING_VDI_TO_SR,
+                Helpers.GetName(vdi), Helpers.GetName(connection.Resolve(vdi.SR)), Helpers.GetName(sr));
+            ApiMethodsToRoleCheck.Add("VDI.async_pool_migrate");
         }
 
         protected override void Run()

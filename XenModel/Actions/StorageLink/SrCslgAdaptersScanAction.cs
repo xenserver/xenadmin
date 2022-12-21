@@ -38,11 +38,12 @@ using XenAdmin.StorageLinkAPI;
 
 namespace XenAdmin.Actions
 {
-    public class SrCslgAdaptersScanAction : PureAsyncAction
+    public class SrCslgAdaptersScanAction : AsyncAction
     {
         public SrCslgAdaptersScanAction(IXenConnection connection)
             : base(connection, Messages.SCANNING_ADAPTERS, Messages.SCANNING_ADAPTERS)
         {
+            ApiMethodsToRoleCheck.Add("SR.async_probe");
         }
 
         protected override void Run()
@@ -54,9 +55,8 @@ namespace XenAdmin.Actions
             Description = Messages.COMPLETED;
         }
 
-        private IEnumerable<StorageLinkAdapterBoston> ParseStorageSystemsXmlBoston()
+        public IEnumerable<StorageLinkAdapterBoston> GetAdapters()
         {
-
             var output = new List<StorageLinkAdapterBoston>();
             var doc = new XmlDocument();
             doc.LoadXml(Util.GetContentsOfValueNode(Result));
@@ -75,11 +75,6 @@ namespace XenAdmin.Actions
                 output.Add(new StorageLinkAdapterBoston(id, name, description, type, replicationtype, versionmajor, versionminor));
             }
             return output;
-        }
-
-        public IEnumerable<StorageLinkAdapterBoston> GetAdapters()
-        {
-            return ParseStorageSystemsXmlBoston();
         }
     }
 }

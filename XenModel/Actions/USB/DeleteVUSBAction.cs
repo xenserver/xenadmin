@@ -29,27 +29,30 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using XenAPI;
 
 namespace XenAdmin.Actions
 {
-    public class DeleteVUSBAction : PureAsyncAction
+    public class DeleteVUSBAction : AsyncAction
     {
-        private VUSB _vusb;
+        private readonly VUSB _vusb;
 
-        public DeleteVUSBAction(VUSB vusb, VM vm) : 
-            base(vusb.Connection, String.Format(Messages.ACTION_VUSB_DELETING, vusb.Name(), vm.Name()))
+        public DeleteVUSBAction(VUSB vusb, VM vm)
+            : base(vusb.Connection, string.Format(Messages.ACTION_VUSB_DELETING, vusb.Name(), vm.Name()))
         {
             _vusb = vusb;
+            ApiMethodsToRoleCheck.AddRange(
+                "VUSB.get_allowed_operations",
+                "VUSB.async_unplug",
+                "VUSB.async_destroy");
         }
 
         protected override void Run()
         {
             try
             {
-                if ((_vusb.currently_attached) &&
-                    XenAPI.VUSB.get_allowed_operations(Session, _vusb.opaque_ref).Contains(XenAPI.vusb_operations.unplug))
+                if (_vusb.currently_attached &&
+                    VUSB.get_allowed_operations(Session, _vusb.opaque_ref).Contains(vusb_operations.unplug))
                 {
                     RelatedTask = VUSB.async_unplug(Session, _vusb.opaque_ref);
                     PollToCompletion(0, 50);

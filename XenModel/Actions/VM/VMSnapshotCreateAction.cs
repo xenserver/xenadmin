@@ -64,17 +64,17 @@ namespace XenAdmin.Actions
             switch (type)
             {
                 case SnapshotType.QUIESCED_DISK:
-                    ApiMethodsToRoleCheck.Add("vm.snapshot_with_quiesce");
+                    ApiMethodsToRoleCheck.Add("vm.async_snapshot_with_quiesce");
                     break;
                 case SnapshotType.DISK_AND_MEMORY:
-                    ApiMethodsToRoleCheck.Add("vm.checkpoint");
+                    ApiMethodsToRoleCheck.Add("vm.async_checkpoint");
                     break;
                 case SnapshotType.DISK:
-                    ApiMethodsToRoleCheck.Add("vm.snapshot");
+                    ApiMethodsToRoleCheck.Add("vm.async_snapshot");
                     break;
             }
 
-            ApiMethodsToRoleCheck.Add("vm.set_name_description", "vm.create_new_blob");
+            ApiMethodsToRoleCheck.AddRange("vm.set_name_description", "vm.create_new_blob");
         }
 
         protected override void Run()

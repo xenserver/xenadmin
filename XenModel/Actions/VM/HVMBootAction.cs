@@ -34,37 +34,49 @@ using XenAPI;
 
 namespace XenAdmin.Actions
 {
-    public class HVMBootAction : PureAsyncAction
+    public class HVMBootAction : AsyncAction
     {
         public HVMBootAction(VM vm)
             : base(vm.Connection, string.Format(Messages.STARTING_IN_RECOVERY_MODE_TITLE, vm.Name()))
         {
             VM = vm;
+            ApiMethodsToRoleCheck.AddRange("VM.set_HVM_boot_params", "VM.set_HVM_boot_policy", "VM.start");
         }
 
-        private VM vmCopy;
         protected override void Run()
         {
             Description = Messages.STARTING_IN_RECOVERY_MODE;
             string oldPolicy = VM.HVM_boot_policy; 
             string oldOrder  = VM.GetBootOrder();
 
-            vmCopy = (VM)VM.Clone();
+            var vmCopy = (VM)VM.Clone();
             vmCopy.HVM_boot_policy = "BIOS order";
             vmCopy.SetBootOrder("DN");
 
-            VM.Locked = true;
-            vmCopy.SaveChanges(Session);
-            VM.Locked = false;
+            try
+            {
+                VM.Locked = true;
+                vmCopy.SaveChanges(Session);
+            }
+            finally
+            {
+                VM.Locked = false;
+            }
 
-            XenAPI.VM.start(Session, VM.opaque_ref, false, false);
+            VM.start(Session, VM.opaque_ref, false, false);
 
             vmCopy.HVM_boot_policy = oldPolicy;
             vmCopy.SetBootOrder(oldOrder);
 
-            VM.Locked = true;
-            vmCopy.SaveChanges(Session);
-            VM.Locked = false;
+            try
+            {
+                VM.Locked = true;
+                vmCopy.SaveChanges(Session);
+            }
+            finally
+            {
+                VM.Locked = false;
+            }
 
             Description = Messages.STARTED_IN_RECOVERY_MODE;
         }

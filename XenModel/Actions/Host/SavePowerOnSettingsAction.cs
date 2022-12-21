@@ -39,7 +39,7 @@ using XenAdmin.Wlb;
 
 namespace XenAdmin.Actions
 {
-    public class SavePowerOnSettingsAction : PureAsyncAction
+    public class SavePowerOnSettingsAction : AsyncAction
     {
         private readonly List<KeyValuePair<Host, Host.PowerOnMode>> hostModes;
 
@@ -47,6 +47,28 @@ namespace XenAdmin.Actions
             : base(connection, Messages.ACTION_CHANGE_POWER_ON, Messages.ACTION_CHANGING_POWER_ON, suppressHistory)
         {
             this.hostModes = hostModes;
+
+            foreach (var kvp in hostModes)
+            {
+                var mode = kvp.Value.ToString();
+                var config = kvp.Value.Config;
+
+                if (mode == "iLO" && Helpers.StockholmOrGreater(Connection))
+                    continue;
+
+                if ((mode == "DRAC" || mode == "iLO" || mode != "wake-on-lan" && mode != "") &&
+                    config.ContainsKey("power_on_password_secret"))
+                {
+                    ApiMethodsToRoleCheck.AddRange(
+                        "Secret.create",
+                        "Secret.get_uuid",
+                        "Secret.get_by_uuid", 
+                        "Secret.destroy");
+                    break;
+                }
+            }
+
+            ApiMethodsToRoleCheck.Add("host.set_power_on_mode");
         }
 
         protected override void Run()
@@ -59,9 +81,7 @@ namespace XenAdmin.Actions
         {
             var newMode = mode.ToString();
             var config = mode.Config;
-            string secretuuid = "";
 
-            
             if (newMode == "iLO" && Helpers.StockholmOrGreater(Connection))
             {
                 //the UI should have already prevented us from getting here, but be defensive
@@ -69,6 +89,7 @@ namespace XenAdmin.Actions
                 config = new Dictionary<string, string>();
             }
 
+            string secretuuid = "";
             try
             {
                 if (newMode == "DRAC" || newMode == "iLO" || newMode != "wake-on-lan" && newMode != "")

@@ -370,22 +370,11 @@ namespace XenAdmin.Dialogs
             // Add a save changes on the beginning of the actions to enact the alterations that were just changes to the xenObjectCopy.
             // Must come first because some pages' SaveChanges() rely on modifying the object via the xenObjectCopy before their actions are run.
 
-            if(xenObjectBefore is VMSS)
-            {
-                XenAPI.VMSS VMSSObj = xenObjectBefore as XenAPI.VMSS;
-                if (VMSSObj.type == vmss_type.snapshot_with_quiesce)
-                {
-                    actions.Insert(0, new SaveChangesAction(xenObjectCopy, xenObjectBefore, true));
-                }
-                else
-                {
-                    actions.Insert(actions.Count, new SaveChangesAction(xenObjectCopy, xenObjectBefore, true));
-                }
-            }
-            else
-            {
-                actions.Insert(0, new SaveChangesAction(xenObjectCopy, xenObjectBefore, true)); 
-            }
+            int index = 0;
+            if (xenObjectBefore is VMSS vmss && vmss.type != vmss_type.snapshot_with_quiesce)
+                index = actions.Count;
+
+            actions.Insert(index, new SaveChangesAction(xenObjectCopy, true, xenObjectBefore));
 
             var objName = Helpers.GetName(xenObject).Ellipsise(50);
             _action = new MultipleAction(
@@ -402,12 +391,14 @@ namespace XenAdmin.Dialogs
 
             if (_startAction)
             {
+                xenObject.Locked = true;
                 _action.RunAsync();
             }
         }
 
         private void action_Completed(ActionBase sender)
         {
+            xenObject.Locked = false;
             Program.Invoke(Program.MainWindow.GeneralPage, Program.MainWindow.GeneralPage.UpdateButtons);
         }
 

@@ -33,15 +33,20 @@ using XenAPI;
 
 namespace XenAdmin.Actions
 {
-    public class SetSslLegacyAction: PureAsyncAction
+    public class SetSslLegacyAction: AsyncAction
     {
         bool legacyMode;
 
         public SetSslLegacyAction(Pool pool, bool legacyMode)
             : base(pool.Connection, Messages.SETTING_SECURITY_SETTINGS)
         {
-            this.Pool = pool;
+            Pool = pool;
             this.legacyMode = legacyMode;
+
+            if (legacyMode)
+                ApiMethodsToRoleCheck.Add("pool.async_enable_ssl_legacy");
+            else
+                ApiMethodsToRoleCheck.Add("pool.async_disable_ssl_legacy");
         }
 
         protected override void Run()
@@ -49,9 +54,9 @@ namespace XenAdmin.Actions
             Pool.Connection.ExpectDisruption = true;
 
             if (legacyMode)
-                RelatedTask = Pool.async_enable_ssl_legacy(this.Session, Pool.opaque_ref);
+                RelatedTask = Pool.async_enable_ssl_legacy(Session, Pool.opaque_ref);
             else
-                RelatedTask = Pool.async_disable_ssl_legacy(this.Session, Pool.opaque_ref);
+                RelatedTask = Pool.async_disable_ssl_legacy(Session, Pool.opaque_ref);
             PollToCompletion();
         }
 

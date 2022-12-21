@@ -37,20 +37,22 @@ using XenAPI;
 
 namespace XenAdmin.Actions
 {
-    public class AssignVMsToVMApplianceAction : PureAsyncAction
+    public class AssignVMsToVMApplianceAction : AsyncAction
     {
-        private VM_appliance _vmAppliance;
-        private List<XenRef<VM>> _selectedVMs;
+        private readonly VM_appliance _vmAppliance;
+        private readonly List<XenRef<VM>> _selectedVMs;
 
         public AssignVMsToVMApplianceAction(VM_appliance vmAppliance, List<XenRef<VM>> selectedVMs, bool suppressHistory)
-            : base(vmAppliance.Connection, selectedVMs.Count == 1 ?
-            string.Format(Messages.ASSIGN_VM_TO_VAPP, vmAppliance.Connection.Resolve(selectedVMs[0]), vmAppliance.Name())
-            : string.Format(Messages.ASSIGN_VMS_TO_VAPP, vmAppliance.Name()), suppressHistory)
+            : base(vmAppliance.Connection, "", suppressHistory)
         {
             _vmAppliance = vmAppliance;
             _selectedVMs = selectedVMs;
             Pool = Helpers.GetPool(vmAppliance.Connection);
-
+            Title = selectedVMs.Count == 1
+                ? string.Format(Messages.ASSIGN_VM_TO_VAPP, vmAppliance.Connection.Resolve(selectedVMs[0]), vmAppliance.Name())
+                : string.Format(Messages.ASSIGN_VMS_TO_VAPP, vmAppliance.Name());
+            
+            ApiMethodsToRoleCheck.Add("VM.set_appliance");
         }
 
         protected override void Run()
@@ -72,18 +74,19 @@ namespace XenAdmin.Actions
         }
     }
 
-    public class RemoveVMsFromVMApplianceAction : PureAsyncAction
+    public class RemoveVMsFromVMApplianceAction : AsyncAction
     {
-        private List<XenRef<VM>> _selectedVMs;
+        private readonly List<XenRef<VM>> _selectedVMs;
 
         public RemoveVMsFromVMApplianceAction(VM_appliance vmAppliance, List<XenRef<VM>> selectedVMs)
-            : base(vmAppliance.Connection, selectedVMs.Count == 1 ?
-            string.Format(Messages.REMOVE_VM_FROM_APPLIANCE, vmAppliance.Connection.Resolve(selectedVMs[0]), vmAppliance.Name())
-            : string.Format(Messages.REMOVE_VMS_FROM_APPLIANCE, vmAppliance.Name()))
+            : base(vmAppliance.Connection, "")
         {
             _selectedVMs = selectedVMs;
             Pool = Helpers.GetPool(vmAppliance.Connection);
-
+            Title = selectedVMs.Count == 1
+                ? string.Format(Messages.REMOVE_VM_FROM_APPLIANCE, vmAppliance.Connection.Resolve(selectedVMs[0]), vmAppliance.Name())
+                : string.Format(Messages.REMOVE_VMS_FROM_APPLIANCE, vmAppliance.Name());
+            ApiMethodsToRoleCheck.Add("VM.set_appliance");
         }
 
         protected override void Run()

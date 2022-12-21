@@ -34,20 +34,21 @@ using XenAPI;
 
 namespace XenAdmin.Actions
 {
-    public class GetSystemStatusCapabilities : PureAsyncAction
+    public class GetSystemStatusCapabilities : AsyncAction
     {
         public GetSystemStatusCapabilities(Host host)
             : base(host.Connection, string.Format(Messages.ACTION_GET_SYSTEM_STATUS_CAPABILITIES_ON, host.Name()),
             null, true)
         {
             Host = host;
+            ApiMethodsToRoleCheck.Add("host.get_system_status_capabilities");
         }
 
         protected override void Run()
         {
-            this.Description = Messages.ACTION_GET_SYSTEM_STATUS_CAPABILITIES;
-            Result = XenAPI.Host.get_system_status_capabilities(Session, Host.opaque_ref);
-            this.Description = Messages.ACTION_GET_SYSTEM_STATUS_CAPABILITIES_DONE;
+            Description = Messages.ACTION_GET_SYSTEM_STATUS_CAPABILITIES;
+            Result = Host.get_system_status_capabilities(Session, Host.opaque_ref);
+            Description = Messages.ACTION_GET_SYSTEM_STATUS_CAPABILITIES_DONE;
         }
     }
 }

@@ -45,8 +45,7 @@ namespace XenAdmin.Actions
             VM = vm;
             this.vifDescriptor = vifDescriptor;
 
-            ApiMethodsToRoleCheck.AddRange(DeleteVIFAction.XmlRpcMethods);
-            ApiMethodsToRoleCheck.AddRange(CreateVIFAction.XmlRpcMethods);
+            ApiMethodsToRoleCheck.AddRange("VIF.unplug", "VIF.destroy", "VIF.async_create", "VIF.plug");
         }
 
         public bool RebootRequired { get; private set; }

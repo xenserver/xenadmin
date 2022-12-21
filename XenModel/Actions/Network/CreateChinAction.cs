@@ -29,6 +29,8 @@
  * SUCH DAMAGE.
  */
 
+using System.Collections.Generic;
+using System.Linq;
 using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;
@@ -36,30 +38,30 @@ using XenAPI;
 
 namespace XenAdmin.Actions
 {
-    public class CreateChinAction : PureAsyncAction
+    public class CreateChinAction : AsyncAction
     {
-        XenAPI.Network newNetwork;
-        XenAPI.Network theInterface;
+        private readonly XenAPI.Network _newNetwork;
+        private readonly List<PIF> _transportPIFs;
 
         public CreateChinAction(IXenConnection connection, XenAPI.Network newNetwork, XenAPI.Network theInterface)
             : base(connection,
                 string.Format(Messages.NETWORK_ACTION_CREATING_NETWORK_TITLE, newNetwork.Name(), Helpers.GetName(connection)))
         {
-            this.newNetwork = newNetwork;
-            this.theInterface = theInterface;
+            _newNetwork = newNetwork;
+            _transportPIFs = Connection.ResolveAll(theInterface.PIFs).Where(p => p != null && p.IsManagementInterface(true)).ToList();
+
+            ApiMethodsToRoleCheck.Add("Network.create");
+
+            if (_transportPIFs.Count > 0)
+                ApiMethodsToRoleCheck.Add("Tunnel.create");
         }
 
         protected override void Run()
         {
-            // Create the new network
-            XenRef<XenAPI.Network> networkRef = XenAPI.Network.create(Session, newNetwork);
+            XenRef<XenAPI.Network> networkRef = XenAPI.Network.create(Session, _newNetwork);
 
-            // Create a tunnel on each transport PIF
-            foreach (PIF pif in Connection.ResolveAll(theInterface.PIFs))
-            {
-                if (pif.IsManagementInterface(true))
-                    Tunnel.create(Session, pif.opaque_ref, networkRef);
-            }
+            foreach (PIF pif in _transportPIFs)
+                Tunnel.create(Session, pif.opaque_ref, networkRef);
         }
     }
 }

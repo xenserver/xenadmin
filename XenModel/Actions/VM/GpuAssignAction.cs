@@ -35,7 +35,7 @@ using XenAPI;
 
 namespace XenAdmin.Actions
 {
-    public class GpuAssignAction : PureAsyncAction
+    public class GpuAssignAction : AsyncAction
     {
         private readonly VM vm;
         private readonly List<VGPU> vGpus;
@@ -45,6 +45,7 @@ namespace XenAdmin.Actions
         {
             this.vm = vm;
             this.vGpus = vGpus;
+            ApiMethodsToRoleCheck.AddRange("VGPU.destroy", "VGPU.async_create");
         }
 
         protected override void Run()

@@ -29,7 +29,6 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Collections.Generic;
 using XenAdmin.Core;
 using XenAPI;
@@ -37,14 +36,14 @@ using XenAPI;
 
 namespace XenAdmin.Actions
 {
-    public class SrReattachAction : PureAsyncAction
+    public class SrReattachAction : AsyncAction
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private readonly SR sr;
-        private readonly String name;
-        private readonly String description;
-        private readonly Dictionary<String, String> dconf;
+        private readonly string name;
+        private readonly string description;
+        private readonly Dictionary<string, string> dconf;
 
         /// <summary>
         /// RBAC dependencies needed to reattach SR.
@@ -54,15 +53,14 @@ namespace XenAdmin.Actions
                                                                                  "pbd.async_create",
                                                                                  "pbd.async_plug");
 
-        public SrReattachAction(SR sr,
-            String name, String description, Dictionary<String, String> dconf)
-            : base(sr.Connection,
-            string.Format(Messages.ACTION_SR_ATTACHING_TITLE, name, Helpers.GetName(sr.Connection)))
+        public SrReattachAction(SR sr, string name, string description, Dictionary<string, string> dconf)
+            : base(sr.Connection, string.Format(Messages.ACTION_SR_ATTACHING_TITLE, name, Helpers.GetName(sr.Connection)))
         {
             this.sr = sr;
             this.name = name;
             this.description = description;
             this.dconf = dconf;
+            ApiMethodsToRoleCheck.AddRange(StaticRBACDependencies);
         }
 
         protected override void Run()
@@ -85,22 +83,22 @@ namespace XenAdmin.Actions
             {
                 // Create the PBD
                 log.DebugFormat("Creating PBD for host {0}", host.Name());
-                this.Description = String.Format(Messages.ACTION_SR_REPAIR_CREATE_PBD, Helpers.GetName(host));
+                Description = string.Format(Messages.ACTION_SR_REPAIR_CREATE_PBD, Helpers.GetName(host));
                 pbdTemplate.host = new XenRef<Host>(host.opaque_ref);
-                RelatedTask = PBD.async_create(this.Session, pbdTemplate);
+                RelatedTask = PBD.async_create(Session, pbdTemplate);
                 PollToCompletion(PercentComplete, PercentComplete + delta);
-                XenRef<PBD> pbdRef = new XenRef<PBD>(this.Result);
+                XenRef<PBD> pbdRef = new XenRef<PBD>(Result);
 
                 // Now plug the PBD
                 log.DebugFormat("Plugging PBD for host {0}", host.Name());
-                this.Description = String.Format(Messages.ACTION_SR_REPAIR_PLUGGING_PBD, Helpers.GetName(host));
-                RelatedTask = PBD.async_plug(this.Session, pbdRef);
+                Description = string.Format(Messages.ACTION_SR_REPAIR_PLUGGING_PBD, Helpers.GetName(host));
+                RelatedTask = PBD.async_plug(Session, pbdRef);
                 PollToCompletion(PercentComplete, PercentComplete + delta);
             }
 
             // Update the name and description of the SR
-            XenAPI.SR.set_name_label(Session, sr.opaque_ref, name);
-            XenAPI.SR.set_name_description(Session, sr.opaque_ref, description);
+            SR.set_name_label(Session, sr.opaque_ref, name);
+            SR.set_name_description(Session, sr.opaque_ref, description);
 
             Description = Messages.ACTION_SR_ATTACH_SUCCESSFUL;
         }

@@ -35,7 +35,7 @@ using XenAPI;
 
 namespace XenAdmin.Actions.HostActions
 {
-    public class VMsWhichCanBeMigratedAction : PureAsyncAction
+    public class VMsWhichCanBeMigratedAction : AsyncAction
     {
         private List<string> VmsRefsNotMigratable = new List<string>();
         public List<VM> MigratableVms = new List<VM>();
@@ -44,12 +44,13 @@ namespace XenAdmin.Actions.HostActions
             : base(connection, "vms which prevent evacuation", true)
         {
             Host = host;
+            ApiMethodsToRoleCheck.Add("host.get_vms_which_prevent_evacuation");
         }
 
         protected override void Run()
         {
             Session session = Host.Connection.DuplicateSession();
-            Dictionary<XenRef<XenAPI.VM>, string[]> dict = XenAPI.Host.get_vms_which_prevent_evacuation(session, Host.opaque_ref);
+            Dictionary<XenRef<XenAPI.VM>, string[]> dict = Host.get_vms_which_prevent_evacuation(session, Host.opaque_ref);
 
             foreach (KeyValuePair<XenRef<VM>, string[]> pair in dict)
             {

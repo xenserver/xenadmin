@@ -34,7 +34,7 @@ using XenAPI;
 
 namespace XenAdmin.Actions
 {
-    public class GetServerLocalTimeAction : PureAsyncAction
+    public class GetServerLocalTimeAction : AsyncAction
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Host _host;
@@ -45,6 +45,7 @@ namespace XenAdmin.Actions
             : base(host.Connection, "", true)
         {
             _host = host;
+            ApiMethodsToRoleCheck.Add("host.get_server_localtime");
         }
 
         protected override void Run()

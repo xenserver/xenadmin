@@ -37,7 +37,7 @@ using XenAPI;
 
 namespace XenAdmin.Actions
 {
-    public class SetVMStartupOptionsAction : PureAsyncAction
+    public class SetVMStartupOptionsAction : AsyncAction
     {
         private readonly Dictionary<VM, VMStartupOptions> settings = new Dictionary<VM, VMStartupOptions>();
         private readonly Pool pool;
@@ -49,9 +49,11 @@ namespace XenAdmin.Actions
             System.Diagnostics.Trace.Assert(settings != null);
 
             this.settings = settings;
-            this.pool = Helpers.GetPoolOfOne(this.Connection);
-            if (this.pool == null)
+            pool = Helpers.GetPoolOfOne(Connection);
+            if (pool == null)
                 throw new Failure(Failure.INTERNAL_ERROR, string.Format(Messages.POOL_GONE, BrandManager.BrandConsole));
+
+            ApiMethodsToRoleCheck.AddRange("VM.set_order", "VM.set_start_delay", "Pool.async_sync_database");
         }
 
         protected override void Run()
@@ -61,8 +63,8 @@ namespace XenAdmin.Actions
             {
                 Description = string.Format(Messages.SETTING_VM_STARTUP_OPTIONS_ON_X, Helpers.GetName(vm));
 
-                VM.set_order(this.Session, vm.opaque_ref, settings[vm].Order);
-                VM.set_start_delay(this.Session, vm.opaque_ref, settings[vm].StartDelay);
+                VM.set_order(Session, vm.opaque_ref, settings[vm].Order);
+                VM.set_start_delay(Session, vm.opaque_ref, settings[vm].StartDelay);
 
                 PercentComplete = (int)(++i * (60.0 / settings.Count));
                 if (Cancelling)
@@ -70,7 +72,7 @@ namespace XenAdmin.Actions
             }
 
             // Sync database to ensure new settings are saved to all hosts
-            RelatedTask = XenAPI.Pool.async_sync_database(this.Session);
+            RelatedTask = Pool.async_sync_database(Session);
             PollToCompletion(60, 100);
 
             Description = Messages.COMPLETED;

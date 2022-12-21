@@ -38,7 +38,7 @@ using XenAPI;
 
 namespace XenAdmin.Actions
 {
-    public class EnableHAAction : PureAsyncAction
+    public class EnableHAAction : AsyncAction
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -56,6 +56,13 @@ namespace XenAdmin.Actions
             this.startupOptions = startupOptions;
             this.heartbeatSRs = heartbeatSRs.ToArray();
             this.failuresToTolerate = failuresToTolerate;
+
+            ApiMethodsToRoleCheck.AddRange(
+                "VM.set_ha_restart_priority",
+                "VM.set_order",
+                "VM.set_start_delay",
+                "pool.set_ha_host_failures_to_tolerate",
+                "pool.async_enable_ha");
         }
 
         public List<SR> HeartbeatSRs
@@ -72,24 +79,22 @@ namespace XenAdmin.Actions
                 // First set any VM restart priorities supplied
                 foreach (VM vm in startupOptions.Keys)
                 {
-                    // Set new VM restart priority and ha_always_run
                     log.DebugFormat("Setting HA priority on {0} to {1}", vm.Name(), startupOptions[vm].HaRestartPriority);
-                    XenAPI.VM.SetHaRestartPriority(this.Session, vm, (VM.HA_Restart_Priority)startupOptions[vm].HaRestartPriority);
+                    VM.SetHaRestartPriority(Session, vm, (VM.HA_Restart_Priority)startupOptions[vm].HaRestartPriority);
 
-                    // Set new VM order and start_delay
                     log.DebugFormat("Setting start order on {0} to {1}", vm.Name(), startupOptions[vm].Order);
-                    XenAPI.VM.set_order(this.Session, vm.opaque_ref, startupOptions[vm].Order);
+                    VM.set_order(Session, vm.opaque_ref, startupOptions[vm].Order);
 
                     log.DebugFormat("Setting start order on {0} to {1}", vm.Name(), startupOptions[vm].StartDelay);
-                    XenAPI.VM.set_start_delay(this.Session, vm.opaque_ref, startupOptions[vm].StartDelay);
+                    VM.set_start_delay(Session, vm.opaque_ref, startupOptions[vm].StartDelay);
 
-                    this.PercentComplete = (int)(++i * increment);
+                    PercentComplete = (int)(++i * increment);
                 }
             }
-            this.PercentComplete = 10;
+            PercentComplete = 10;
 
             log.DebugFormat("Setting ha_host_failures_to_tolerate to {0}", failuresToTolerate);
-            XenAPI.Pool.set_ha_host_failures_to_tolerate(this.Session, Pool.opaque_ref, failuresToTolerate);
+            Pool.set_ha_host_failures_to_tolerate(Session, Pool.opaque_ref, failuresToTolerate);
 
             var refs = heartbeatSRs.Select(sr => new XenRef<SR>(sr.opaque_ref)).ToList();
 
@@ -97,7 +102,7 @@ namespace XenAdmin.Actions
             {
                 log.Debug("Enabling HA for pool " + Pool.Name());
                 // NB the line below also performs a pool db sync
-                RelatedTask = XenAPI.Pool.async_enable_ha(this.Session, refs, new Dictionary<string, string>());
+                RelatedTask = Pool.async_enable_ha(Session, refs, new Dictionary<string, string>());
                 PollToCompletion(15, 100);
                 log.Debug("Success enabling HA on pool " + Pool.Name());
             }
@@ -113,7 +118,7 @@ namespace XenAdmin.Actions
                 throw;
             }
 
-            this.Description = Messages.COMPLETED;
+            Description = Messages.COMPLETED;
         }
     }
 }

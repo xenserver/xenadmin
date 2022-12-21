@@ -68,11 +68,6 @@ namespace XenAdmin.Commands
         {
         }
 
-        private AsyncAction GetAction(VM vm, List<VBD> deleteDisks, List<VM> deleteSnapshots)
-        {
-            return new VMDestroyAction(vm, deleteDisks, deleteSnapshots);
-        }
-
         protected sealed override void RunCore(SelectedItemCollection selection)
         {
             ConfirmVMDeleteDialog dialog = new ConfirmVMDeleteDialog(selection.AsXenObjects<VM>());
@@ -91,7 +86,7 @@ namespace XenAdmin.Commands
                 foreach (VM vm in selection.AsXenObjects<VM>(CanRun))
                 {
                     var snapshotsToDelete = dialog.DeleteSnapshots.FindAll(x => x.Connection.Resolve(x.snapshot_of) == vm);
-                    actions.Add(GetAction(vm, dialog.DeleteDisks, snapshotsToDelete));
+                    actions.Add(new VMDestroyAction(vm, dialog.DeleteDisks, snapshotsToDelete));
                 }
                 RunMultipleActions(actions, Messages.ACTION_VMS_DESTROYING_TITLE, Messages.ACTION_VM_DESTROYING, Messages.ACTION_VM_DESTROYED, true);
 

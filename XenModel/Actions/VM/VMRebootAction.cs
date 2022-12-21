@@ -35,16 +35,18 @@ using XenAdmin.Core;
 
 namespace XenAdmin.Actions.VMActions
 {
-    public abstract class VMRebootAction : PureAsyncAction
+    public abstract class VMRebootAction : AsyncAction
     {
-
-        public VMRebootAction(VM vm)
-            : base(vm.Connection, string.Format(Messages.ACTION_VM_REBOOTING_ON_TITLE, vm.Name(), vm.Home() == null ? Helpers.GetName(vm.Connection) : vm.Home().Name()))
+        protected VMRebootAction(VM vm)
+            : base(vm.Connection, "")
         {
-            this.Description = Messages.ACTION_PREPARING;
-            this.VM = vm;
-            this.Host = vm.Home();
-            this.Pool = Core.Helpers.GetPool(vm.Connection);
+            Description = Messages.ACTION_PREPARING;
+            VM = vm;
+            Host = vm.Home();
+            Pool = Helpers.GetPool(vm.Connection);
+            Title = string.Format(Messages.ACTION_VM_REBOOTING_ON_TITLE,
+                vm.Name(),
+                vm.Home() == null ? Helpers.GetName(vm.Connection) : vm.Home().Name());
         }
     }
 
@@ -53,14 +55,15 @@ namespace XenAdmin.Actions.VMActions
         public VMCleanReboot(VM vm)
             : base(vm)
         {
+            ApiMethodsToRoleCheck.Add("VM.async_clean_reboot");
         }
 
         protected override void Run()
         {
-            this.Description = Messages.ACTION_VM_REBOOTING;
-            RelatedTask = XenAPI.VM.async_clean_reboot(Session, VM.opaque_ref);
+            Description = Messages.ACTION_VM_REBOOTING;
+            RelatedTask = VM.async_clean_reboot(Session, VM.opaque_ref);
             PollToCompletion();
-            this.Description = Messages.ACTION_VM_REBOOTED;
+            Description = Messages.ACTION_VM_REBOOTED;
         }
     }
 
@@ -69,14 +72,15 @@ namespace XenAdmin.Actions.VMActions
         public VMHardReboot(VM vm)
             : base(vm)
         {
+            ApiMethodsToRoleCheck.Add("VM.async_hard_reboot");
         }
 
         protected override void Run()
         {
-            this.Description = Messages.ACTION_VM_REBOOTING;
-            RelatedTask = XenAPI.VM.async_hard_reboot(Session, VM.opaque_ref);
+            Description = Messages.ACTION_VM_REBOOTING;
+            RelatedTask = VM.async_hard_reboot(Session, VM.opaque_ref);
             PollToCompletion();
-            this.Description = Messages.ACTION_VM_REBOOTED;
+            Description = Messages.ACTION_VM_REBOOTED;
         }
     }
 }

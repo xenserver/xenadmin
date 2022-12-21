@@ -29,27 +29,27 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using XenAPI;
 
 
 namespace XenAdmin.Actions
 {
-    public class VDIDisableCbtAction : PureAsyncAction
+    public class VDIDisableCbtAction : AsyncAction
     {
-        private VDI vdi;
+        private readonly VDI vdi;
 
         public VDIDisableCbtAction(VM vm, VDI vdi)
-            : base(vm.Connection, String.Format(Messages.ACTION_DISABLE_CHANGED_BLOCK_TRACKING_FOR, vm.Name()))
+            : base(vm.Connection, string.Format(Messages.ACTION_DISABLE_CHANGED_BLOCK_TRACKING_FOR, vm.Name()))
         {
             VM = vm;
             this.vdi = vdi;
             Description = Messages.WAITING;
+            ApiMethodsToRoleCheck.Add("VDI.async_disable_cbt");
         }
 
         protected override void Run()
         {
-            Description = String.Format(Messages.ACTION_DISABLE_CHANGED_BLOCK_TRACKING_FOR, VM.Name());
+            Description = string.Format(Messages.ACTION_DISABLE_CHANGED_BLOCK_TRACKING_FOR, VM.Name());
             RelatedTask = VDI.async_disable_cbt(Session, vdi.opaque_ref);
             PollToCompletion();
             Description = Messages.DISABLED;

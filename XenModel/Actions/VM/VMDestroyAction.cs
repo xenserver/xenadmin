@@ -31,34 +31,44 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using XenAPI;
 using XenAdmin.Core;
 
 
 namespace XenAdmin.Actions.VMActions
 {
-    public class VMDestroyAction : PureAsyncAction
+    public class VMDestroyAction : AsyncAction
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private List<VBD> _deleteDisks;
-        private List<VM> _deleteSnapshots;
+        private readonly List<VBD> _disksToDelete;
+        private List<VM> _snapshotsToDelete;
 
-        public VMDestroyAction(VM vm, List<VBD> deleteDisks, List<VM> deleteSnapshots)
-            : base(vm.Connection, String.Format(Messages.ACTION_VM_DESTROYING_TITLE, vm.Name(), vm.Home() == null ? Helpers.GetName(vm.Connection) : Helpers.GetName(vm.Home())))
+        public VMDestroyAction(VM vm, List<VBD> disksToDelete, List<VM> snapshotsToDelete)
+            : base(vm.Connection, "")
         {
             VM = vm;
             Host = vm.Home();
             Pool = Helpers.GetPoolOfOne(vm.Connection);
-            _deleteDisks = deleteDisks;
-            _deleteSnapshots = deleteSnapshots;
+            _disksToDelete = disksToDelete;
+            _snapshotsToDelete = snapshotsToDelete;
+
+            Title = string.Format(Messages.ACTION_VM_DESTROYING_TITLE,
+                vm.Name(),
+                vm.Home() == null ? Helpers.GetName(vm.Connection) : Helpers.GetName(vm.Home()));
+
+            ApiMethodsToRoleCheck.AddRange("VM.destroy", "VDI.destroy");
+
+            if (_snapshotsToDelete.Any(s => s.power_state == vm_power_state.Suspended))
+                ApiMethodsToRoleCheck.Add("VM.hard_shutdown");
         }
 
 
         protected override void Run()
         {
             Description = Messages.ACTION_VM_DESTROYING;
-            DestroyVM(Session, VM, _deleteDisks, _deleteSnapshots);
+            DestroyVM(Session, VM, _disksToDelete, _snapshotsToDelete);
             Description = Messages.ACTION_VM_DESTROYED;
         }
 
@@ -68,11 +78,11 @@ namespace XenAdmin.Actions.VMActions
         }
 
 
-        private static void DestroyVM(Session session, VM vm, List<VBD> deleteDisks, IEnumerable<VM> deleteSnapshots)
+        private static void DestroyVM(Session session, VM vm, List<VBD> disksToDelete, IEnumerable<VM> snapshotsToDelete)
         {
             var caught = new List<Exception>();
 
-            foreach (VM snapshot in deleteSnapshots)
+            foreach (VM snapshot in snapshotsToDelete)
             {
                 VM snap = snapshot;
                 try
@@ -96,7 +106,7 @@ namespace XenAdmin.Actions.VMActions
                 if (vbd == null)
                     continue;
 
-                if (deleteDisks.Contains(vbd))
+                if (disksToDelete.Contains(vbd))
                 {
                     if(vbd.Connection.Resolve(vbd.VDI)!=null)
                         vdiRefs.Add(vbd.VDI);

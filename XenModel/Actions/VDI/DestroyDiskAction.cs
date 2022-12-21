@@ -50,11 +50,7 @@ namespace XenAdmin.Actions
             Disk = disk;
             Disk.Locked = true;
 
-            #region RBAC Dependencies
-            ApiMethodsToRoleCheck.Add("vbd.unplug");
-            ApiMethodsToRoleCheck.Add("vbd.destroy");
-            ApiMethodsToRoleCheck.Add("vdi.destroy");
-            #endregion
+            ApiMethodsToRoleCheck.AddRange("vbd.unplug", "vbd.destroy", "vdi.destroy");
 
             SR = Connection.Resolve(Disk.SR);
 

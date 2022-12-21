@@ -36,7 +36,7 @@ using XenAPI;
 
 namespace XenAdmin.Actions
 {
-    public abstract class VMEnlightenmentAction : PureAsyncAction
+    public abstract class VMEnlightenmentAction : AsyncAction
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -47,6 +47,7 @@ namespace XenAdmin.Actions
         {
             VM = vm;
             this.action = action;
+            ApiMethodsToRoleCheck.Add("host.call_plugin");
         }
 
         protected override void Run()
@@ -69,7 +70,7 @@ namespace XenAdmin.Actions
     public class EnableVMEnlightenmentAction : VMEnlightenmentAction
     {
         public EnableVMEnlightenmentAction(VM vm, bool suppressHistory)
-            : base(vm, "register", String.Format(Messages.ACTION_ENABLE_VM_ENLIGHTENMENT_TITLE, vm.Name()), 
+            : base(vm, "register", string.Format(Messages.ACTION_ENABLE_VM_ENLIGHTENMENT_TITLE, vm.Name()), 
                 Messages.ACTION_ENABLE_VM_ENLIGHTENMENT_DESCRIPTION, suppressHistory)
         { }
     }
@@ -77,7 +78,7 @@ namespace XenAdmin.Actions
     public class DisableVMEnlightenmentAction : VMEnlightenmentAction
     {
         public DisableVMEnlightenmentAction(VM vm, bool suppressHistory)
-            : base(vm, "deregister", String.Format(Messages.ACTION_DISABLE_VM_ENLIGHTENMENT_TITLE, vm.Name()), 
+            : base(vm, "deregister", string.Format(Messages.ACTION_DISABLE_VM_ENLIGHTENMENT_TITLE, vm.Name()), 
                 Messages.ACTION_DISABLE_VM_ENLIGHTENMENT_DESCRIPTION, suppressHistory)
         { }
     }

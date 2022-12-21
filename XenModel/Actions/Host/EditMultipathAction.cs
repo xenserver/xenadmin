@@ -37,11 +37,11 @@ using XenAPI;
 
 namespace XenAdmin.Actions
 {
-    public class EditMultipathAction : PureAsyncAction
+    public class EditMultipathAction : AsyncAction
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private const String DEFAULT_MULTIPATH_HANDLE = "dmp";
+        private const string DEFAULT_MULTIPATH_HANDLE = "dmp";
 
         private readonly Host host;
         private readonly bool multipath;
@@ -51,6 +51,22 @@ namespace XenAdmin.Actions
         {
             this.host = host;
             this.multipath = multipath;
+            ApiMethodsToRoleCheck.AddRange("PBD.plug", "PBD.unplug");
+
+            if (Helpers.KolkataOrGreater(host))
+            {
+                ApiMethodsToRoleCheck.Add("host.set_multipathing");
+            }
+            else
+            {
+                ApiMethodsToRoleCheck.Add("host.add_to_other_config", Host.MULTIPATH);
+                ApiMethodsToRoleCheck.Add("host.remove_from_other_config", Host.MULTIPATH);
+            }
+
+            ApiMethodsToRoleCheck.Add("host.remove_from_other_config", Host.MULTIPATH_HANDLE);
+
+            if (multipath)
+                ApiMethodsToRoleCheck.Add("host.add_to_other_config", Host.MULTIPATH_HANDLE);
         }
 
         protected override void Run()
