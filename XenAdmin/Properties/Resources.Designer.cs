@@ -2261,12 +2261,90 @@ namespace XenAdmin.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+        ///&lt;html&gt;
+        ///
+        ///&lt;head&gt;
+        ///  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=ISO-8859-1&quot;&gt;
+        ///  &lt;title&gt;XenServer&lt;/title&gt;
+        ///  &lt;style&gt;
+        ////* -----------------------------------------------------------------------
+        /// File encoded as ISO-8859-1
+        /// Blueprint CSS Framework 1.0.1
+        /// http://blueprintcss.org
+        ///
+        /// * Copyright (c) 2007-Present. See src/LICENSE for more info.
+        ///
+        /// number of columns:24
+        /// column width:30
+        /// gutter width:10
+        /// total wi [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string HomePage {
+            get {
+                return ResourceManager.GetString("HomePage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap homepage_bullet {
             get {
                 object obj = ResourceManager.GetObject("homepage_bullet", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+        ///&lt;html&gt;
+        ///
+        ///&lt;head&gt;
+        ///  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;
+        ///  &lt;title&gt;XenServer&lt;/title&gt;
+        ///  &lt;style&gt;
+        ////* -----------------------------------------------------------------------
+        /// File encoded as ISO-8859-1
+        /// Blueprint CSS Framework 1.0.1
+        /// http://blueprintcss.org
+        ///
+        /// * Copyright (c) 2007-Present. See src/LICENSE for more info.
+        ///
+        /// number of columns:24
+        /// column width:30
+        /// gutter width:10
+        /// total width:9 [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string HomePage_ja {
+            get {
+                return ResourceManager.GetString("HomePage_ja", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+        ///&lt;html&gt;
+        ///
+        ///&lt;head&gt;
+        ///  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;
+        ///  &lt;title&gt;XenServer&lt;/title&gt;
+        ///  &lt;style&gt;
+        ////* -----------------------------------------------------------------------
+        /// File encoded as ISO-8859-1
+        /// Blueprint CSS Framework 1.0.1
+        /// http://blueprintcss.org
+        ///
+        /// * Copyright (c) 2007-Present. See src/LICENSE for more info.
+        ///
+        /// number of columns:24
+        /// column width:30
+        /// gutter width:10
+        /// total width:9 [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string HomePage_zh_CN {
+            get {
+                return ResourceManager.GetString("HomePage_zh_CN", resourceCulture);
             }
         }
         
