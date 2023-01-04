@@ -45,6 +45,9 @@ namespace XenCenterLib.Archive
         private const long bufferSize = 32 * 1024;
         private bool disposed;
 
+        /// <summary>
+        /// Parameterless constructor needed by tests
+        /// </summary>
         public TarArchiveWriter()
         {
         }

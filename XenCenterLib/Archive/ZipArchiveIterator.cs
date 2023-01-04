@@ -50,6 +50,13 @@ namespace XenCenterLib.Archive
         /// </summary>
         public event Action<int, int> CurrentFileExtracted;
 
+        /// <summary>
+        /// Parameterless constructor needed by tests
+        /// </summary>
+        public ZipArchiveIterator()
+        {
+        }
+
         public ZipArchiveIterator(Stream inputStream)
         {
             _zipArchive = new ZipArchive(inputStream, ZipArchiveMode.Read);
@@ -97,8 +104,15 @@ namespace XenCenterLib.Archive
 
         public override bool IsDirectory()
         {
-            var attr = (FileAttributes)(_currentEntry.ExternalAttributes & 0xff);
-            return attr.HasFlag(FileAttributes.Directory);
+            if (_currentEntry.ExternalAttributes != 0)
+            {
+                var attr = (FileAttributes)(_currentEntry.ExternalAttributes & 0xff);
+                return attr.HasFlag(FileAttributes.Directory);
+            }
+
+            var name = CurrentFileName();
+            return !string.IsNullOrEmpty(name) &&
+                   (name[name.Length - 1] == '/' || name[name.Length - 1] == '\\');
         }
 
         public override void ExtractCurrentFile(Stream extractedFileContents, Action cancellingDelegate)

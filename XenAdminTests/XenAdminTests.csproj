@@ -133,6 +133,9 @@
     <Compile Include="XenOvf\FileDigestTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="TestResources\emptyfile.gz">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="TestResources\PluginResources\PowerShellTest.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

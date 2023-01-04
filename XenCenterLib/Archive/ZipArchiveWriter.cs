@@ -41,6 +41,13 @@ namespace XenCenterLib.Archive
         private ZipArchive _zipArchive;
         private bool _disposed;
 
+        /// <summary>
+        /// Parameterless constructor needed by tests
+        /// </summary>
+        public ZipArchiveWriter()
+        {
+        }
+
         public ZipArchiveWriter(Stream outputStream)
         {
             _zipArchive = new ZipArchive(outputStream, ZipArchiveMode.Create);

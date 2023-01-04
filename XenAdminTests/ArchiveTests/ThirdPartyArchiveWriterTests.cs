@@ -45,12 +45,12 @@ namespace XenAdminTests.ArchiveTests
         where TR : ArchiveIterator, new()
         where TW : ArchiveWriter, new()
     {
-        private string tempPath;
+        private string _tempPath;
 
         [SetUp]
         public void TestSetUp()
         {
-            tempPath = CreateTempFolder();
+            _tempPath = CreateTempFolder();
         }
 
         [TearDown]
@@ -58,7 +58,7 @@ namespace XenAdminTests.ArchiveTests
         {
             try
             {
-                Directory.Delete(tempPath, true);
+                Directory.Delete(_tempPath, true);
             }
             catch
             {
@@ -69,7 +69,7 @@ namespace XenAdminTests.ArchiveTests
         [Test]
         public void CreateAnArchiveAndRereadWhenPossible()
         {
-            string tarFileName = Path.Combine(tempPath, Path.GetRandomFileName());
+            string tarFileName = Path.Combine(_tempPath, Path.GetRandomFileName());
             CheckWriteArchive(tarFileName);
             CheckReadArchive(tarFileName);
         }
@@ -86,12 +86,15 @@ namespace XenAdminTests.ArchiveTests
                 reader.SetBaseStream(fs);
                 while (reader.HasNext())
                 {
-                    if (reader.IsDirectory() && expectedDirs.Contains(reader.CurrentFileName()))
-                        expectedDirs.Remove(reader.CurrentFileName());
+                    var isDirectory = reader.IsDirectory();
+                    var name = reader.CurrentFileName();
 
-                    if (!reader.IsDirectory() && expectedFiles.Contains(reader.CurrentFileName()))
+                    if (isDirectory && expectedDirs.Contains(name))
+                        expectedDirs.Remove(name);
+
+                    if (!isDirectory && expectedFiles.Contains(name))
                     {
-                        expectedFiles.Remove(reader.CurrentFileName());
+                        expectedFiles.Remove(name);
                         using (MemoryStream ms = new MemoryStream())
                         {
                             reader.ExtractCurrentFile(ms, null);
