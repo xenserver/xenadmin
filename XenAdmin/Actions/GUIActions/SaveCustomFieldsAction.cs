@@ -55,10 +55,10 @@ namespace XenAdmin.Actions
                 string key = CustomFieldsManager.GetCustomFieldKey(customField.Definition);
                 string value = customField.ValueAsInvariantString;
 
-                ApiMethodsToRoleCheck.Add($"{name}.remove_from_other_config", key);
+                ApiMethodsToRoleCheck.AddWithKey($"{name}.remove_from_other_config", key);
 
                 if (!string.IsNullOrEmpty(value))
-                    ApiMethodsToRoleCheck.Add($"{name}.add_to_other_config", key);
+                    ApiMethodsToRoleCheck.AddWithKey($"{name}.add_to_other_config", key);
             }
         }
 

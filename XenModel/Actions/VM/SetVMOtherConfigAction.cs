@@ -45,8 +45,8 @@ namespace XenAdmin.Actions.VMActions
             VM = vm;
             Key = key;
             Val = val;
-            ApiMethodsToRoleCheck.Add("VM.remove_from_other_config", Key);
-            ApiMethodsToRoleCheck.Add("VM.add_to_other_config", Key);
+            ApiMethodsToRoleCheck.AddWithKey("VM.remove_from_other_config", Key);
+            ApiMethodsToRoleCheck.AddWithKey("VM.add_to_other_config", Key);
         }
 
         protected override void Run()

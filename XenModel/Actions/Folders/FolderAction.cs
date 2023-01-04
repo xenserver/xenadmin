@@ -80,8 +80,8 @@ namespace XenAdmin.Actions
         {
             if (connection != null)
             {
-                ApiMethodsToRoleCheck.Add("pool.remove_from_other_config", Folders.EMPTY_FOLDERS);
-                ApiMethodsToRoleCheck.Add("pool.add_to_other_config", Folders.EMPTY_FOLDERS);
+                ApiMethodsToRoleCheck.AddWithKey("pool.remove_from_other_config", Folders.EMPTY_FOLDERS);
+                ApiMethodsToRoleCheck.AddWithKey("pool.add_to_other_config", Folders.EMPTY_FOLDERS);
             }
         }
         
@@ -432,9 +432,9 @@ namespace XenAdmin.Actions
             this.folder = folder;
             if (obj.GetType() != typeof(Folder))
             {
-                ApiMethodsToRoleCheck.Add(obj.GetType().Name.ToLowerInvariant() + ".remove_from_other_config",
+                ApiMethodsToRoleCheck.AddWithKey(obj.GetType().Name.ToLowerInvariant() + ".remove_from_other_config",
                     Folders.FOLDER);
-                ApiMethodsToRoleCheck.Add(obj.GetType().Name.ToLowerInvariant() + ".add_to_other_config",
+                ApiMethodsToRoleCheck.AddWithKey(obj.GetType().Name.ToLowerInvariant() + ".add_to_other_config",
                     Folders.FOLDER);
             }
 
@@ -474,9 +474,9 @@ namespace XenAdmin.Actions
             objs.Add(obj);
             if (obj.GetType() != typeof(Folder))
             {
-                ApiMethodsToRoleCheck.Add(obj.GetType().Name.ToLowerInvariant() + ".remove_from_other_config",
+                ApiMethodsToRoleCheck.AddWithKey(obj.GetType().Name.ToLowerInvariant() + ".remove_from_other_config",
                     Folders.FOLDER);
-                ApiMethodsToRoleCheck.Add(obj.GetType().Name.ToLowerInvariant() + ".add_to_other_config",
+                ApiMethodsToRoleCheck.AddWithKey(obj.GetType().Name.ToLowerInvariant() + ".add_to_other_config",
                     Folders.FOLDER);
             }
 

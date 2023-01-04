@@ -60,9 +60,9 @@ namespace XenAdmin.Actions
 
             if (newFolder != xenObjectCopy.Path)
             {
-                ApiMethodsToRoleCheck.Add(type + ".remove_from_other_config", Folders.FOLDER);
+                ApiMethodsToRoleCheck.AddWithKey(type + ".remove_from_other_config", Folders.FOLDER);
                 if (!String.IsNullOrEmpty(newFolder))
-                    ApiMethodsToRoleCheck.Add(type + ".add_to_other_config", Folders.FOLDER);
+                    ApiMethodsToRoleCheck.AddWithKey(type + ".add_to_other_config", Folders.FOLDER);
                 // TODO: Full RBAC for folders
             }
             foreach (string tag in oldTags)

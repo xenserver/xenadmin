@@ -49,17 +49,17 @@ namespace XenAdmin.Actions
             pool = Helpers.GetPoolOfOne(connection);
             Description = string.Format(Messages.ACTION_CHANGING_EMAIL_OPTIONS_FOR, pool);
 
-            ApiMethodsToRoleCheck.Add("pool.remove_from_other_config", PerfmonOptionsDefinition.MAIL_DESTINATION_KEY_NAME);
-            ApiMethodsToRoleCheck.Add("pool.remove_from_other_config", PerfmonOptionsDefinition.SMTP_MAILHUB_KEY_NAME);
-            ApiMethodsToRoleCheck.Add("pool.remove_from_other_config", PerfmonOptionsDefinition.MAIL_LANGUAGE_KEY_NAME);
+            ApiMethodsToRoleCheck.AddWithKey("pool.remove_from_other_config", PerfmonOptionsDefinition.MAIL_DESTINATION_KEY_NAME);
+            ApiMethodsToRoleCheck.AddWithKey("pool.remove_from_other_config", PerfmonOptionsDefinition.SMTP_MAILHUB_KEY_NAME);
+            ApiMethodsToRoleCheck.AddWithKey("pool.remove_from_other_config", PerfmonOptionsDefinition.MAIL_LANGUAGE_KEY_NAME);
 
             if (perfmonOptions != null)
             {
-                ApiMethodsToRoleCheck.Add("pool.add_to_other_config", PerfmonOptionsDefinition.MAIL_DESTINATION_KEY_NAME));
-                ApiMethodsToRoleCheck.Add("pool.add_to_other_config", PerfmonOptionsDefinition.SMTP_MAILHUB_KEY_NAME);
+                ApiMethodsToRoleCheck.AddWithKey("pool.add_to_other_config", PerfmonOptionsDefinition.MAIL_DESTINATION_KEY_NAME);
+                ApiMethodsToRoleCheck.AddWithKey("pool.add_to_other_config", PerfmonOptionsDefinition.SMTP_MAILHUB_KEY_NAME);
                 
                 if (perfmonOptions.MailLanguageCode != null)
-                    ApiMethodsToRoleCheck.Add("pool.add_to_other_config", PerfmonOptionsDefinition.MAIL_LANGUAGE_KEY_NAME);
+                    ApiMethodsToRoleCheck.AddWithKey("pool.add_to_other_config", PerfmonOptionsDefinition.MAIL_LANGUAGE_KEY_NAME);
             }
         }
 

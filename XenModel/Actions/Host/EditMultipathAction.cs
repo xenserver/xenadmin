@@ -59,14 +59,14 @@ namespace XenAdmin.Actions
             }
             else
             {
-                ApiMethodsToRoleCheck.Add("host.add_to_other_config", Host.MULTIPATH);
-                ApiMethodsToRoleCheck.Add("host.remove_from_other_config", Host.MULTIPATH);
+                ApiMethodsToRoleCheck.AddWithKey("host.add_to_other_config", Host.MULTIPATH);
+                ApiMethodsToRoleCheck.AddWithKey("host.remove_from_other_config", Host.MULTIPATH);
             }
 
-            ApiMethodsToRoleCheck.Add("host.remove_from_other_config", Host.MULTIPATH_HANDLE);
+            ApiMethodsToRoleCheck.AddWithKey("host.remove_from_other_config", Host.MULTIPATH_HANDLE);
 
             if (multipath)
-                ApiMethodsToRoleCheck.Add("host.add_to_other_config", Host.MULTIPATH_HANDLE);
+                ApiMethodsToRoleCheck.AddWithKey("host.add_to_other_config", Host.MULTIPATH_HANDLE);
         }
 
         protected override void Run()
