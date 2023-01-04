@@ -44,6 +44,13 @@ namespace XenCenterLib.Archive
         private TarEntry tarEntry;
         private bool disposed;
 
+        /// <summary>
+        /// Parameterless constructor needed by tests
+        /// </summary>
+        public TarArchiveIterator()
+        {
+        }
+
         public TarArchiveIterator(Stream compressedTarFile, CompressionFactory.Type compressionType)
         {
             if (compressionType == CompressionFactory.Type.Gz)

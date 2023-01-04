@@ -39,6 +39,13 @@ namespace XenCenterLib.Compression
     /// </summary>
     class GZipOutputStream : CompressionStream
     {
+        /// <summary>
+        /// Parameterless constructor needed by tests
+        /// </summary>
+        public GZipOutputStream()
+        {
+        }
+
         public GZipOutputStream(Stream outputStream)
         {
             zipStream = new GZipStream(outputStream, CompressionMode.Compress);
@@ -55,6 +62,13 @@ namespace XenCenterLib.Compression
     /// </summary>
     class GZipInputStream : CompressionStream
     {
+        /// <summary>
+        /// Parameterless constructor needed by tests
+        /// </summary>
+        public GZipInputStream()
+        {
+        }
+
         public GZipInputStream(Stream inputStream)
         {
             zipStream = new GZipStream(inputStream, CompressionMode.Decompress);
