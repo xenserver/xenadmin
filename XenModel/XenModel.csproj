@@ -63,6 +63,9 @@
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Actions\ActionBase.cs" />
+    <Compile Include="Actions\CustomFields\AddCustomFieldAction.cs" />
+    <Compile Include="Actions\CustomFields\RemoveCustomFieldAction.cs" />
+    <Compile Include="Actions\CustomFields\SaveCustomFieldsAction.cs" />
     <Compile Include="Actions\HealthCheck\DisableHealthCheckAction.cs" />
     <Compile Include="Actions\CancellingAction.cs" />
     <Compile Include="Actions\DockerContainer\DockerContainerLifetimeAction.cs" />

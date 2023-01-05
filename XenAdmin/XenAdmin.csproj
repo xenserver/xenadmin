@@ -2868,7 +2868,6 @@
     <Compile Include="Commands\DestroyHostCommand.cs" />
     <Compile Include="Commands\MigrateVirtualDiskCommand.cs" />
     <Compile Include="Actions\GUIActions\GeneralEditPageAction.cs" />
-    <Compile Include="Actions\GUIActions\SaveCustomFieldsAction.cs" />
     <Compile Include="Commands\Controls\CommandButton.cs">
       <SubType>Component</SubType>
     </Compile>

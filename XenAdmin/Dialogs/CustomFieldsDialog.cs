@@ -30,10 +30,9 @@
 
 using System;
 using System.Windows.Forms;
+using XenAdmin.Actions;
 using XenAdmin.CustomFields;
 using XenAdmin.Network;
-using XenAPI;
-using XenAdmin.Actions;
 
 
 namespace XenAdmin.Dialogs
@@ -74,21 +73,11 @@ namespace XenAdmin.Dialogs
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            NewCustomFieldDialog dialog = new NewCustomFieldDialog(connection);
-            if (dialog.ShowDialog() != DialogResult.OK)
-                return;
-
-            CustomFieldDefinition definition = dialog.Definition;
-
-            DelegatedAsyncAction action = new DelegatedAsyncAction(connection,
-                String.Format(Messages.ADD_CUSTOM_FIELD, definition.Name),
-                String.Format(Messages.ADDING_CUSTOM_FIELD, definition.Name),
-                String.Format(Messages.ADDED_CUSTOM_FIELD, definition.Name),
-                delegate(Session session)
-                {
-                    CustomFieldsManager.AddCustomField(session, connection, definition);
-                });
-            action.RunAsync();
+            using (var dialog = new NewCustomFieldDialog(connection))
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                    new AddCustomFieldAction(connection, dialog.Definition).RunAsync();
+            }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -117,15 +106,8 @@ namespace XenAdmin.Dialogs
             int selIdx = lbCustomFields.SelectedIndex;
 
             lbCustomFields.Items.RemoveAt(selIdx);
-            DelegatedAsyncAction action = new DelegatedAsyncAction(connection,
-                String.Format(Messages.DELETE_CUSTOM_FIELD, name),
-                String.Format(Messages.DELETING_CUSTOM_FIELD, name),
-                String.Format(Messages.DELETED_CUSTOM_FIELD, name),
-                delegate(Session session)
-                {
-                    CustomFieldsManager.RemoveCustomField(session, connection, customFieldDefinition);
-                });
-            action.RunAsync();
+
+            new RemoveCustomFieldAction(connection, customFieldDefinition).RunAsync();
         }
 
         private void lbCustomFields_SelectedIndexChanged(object sender, EventArgs e)
