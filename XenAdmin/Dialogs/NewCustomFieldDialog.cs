@@ -29,6 +29,7 @@
  */
 
 using System;
+using System.Linq;
 using XenAdmin.CustomFields;
 using XenAdmin.Network;
 
@@ -41,36 +42,32 @@ namespace XenAdmin.Dialogs
         {
             InitializeComponent();
 
-            okButton.Enabled = !string.IsNullOrEmpty(NameTextBox.Text);
-            TypeComboBox.SelectedIndex = 0;
+            comboBoxType.SelectedIndex = 0;
+            UpdateControls();
         }
 
-        public CustomFieldDefinition Definition
+        public CustomFieldDefinition Definition =>
+            new CustomFieldDefinition(textBoxName.Text.Trim(), (CustomFieldDefinition.Types)comboBoxType.SelectedIndex);
+
+        private void UpdateControls()
         {
-            get
+            if (string.IsNullOrWhiteSpace(textBoxName.Text))
             {
-                return new CustomFieldDefinition(NameTextBox.Text.Trim(), 
-                    (CustomFieldDefinition.Types)TypeComboBox.SelectedIndex);
+                okButton.Enabled = false;
+                labelDuplicate.Visible = false;
+                return;
             }
+
+            var existingCustomFields = CustomFieldsManager.GetCustomFields(connection);
+            var isDuplicate = existingCustomFields.Any(f => f.Name.Trim() == textBoxName.Text.Trim());
+
+            okButton.Enabled = !isDuplicate;
+            labelDuplicate.Visible = isDuplicate;
         }
 
         private void NameTextBox_TextChanged(object sender, EventArgs e)
         {
-            okButton.Enabled = EnableOKButton();
-            DuplicateWarning.Visible = IsDuplicate();
-        }
-
-        private bool IsDuplicate()
-        {
-            foreach (CustomFieldDefinition customFieldDefinition in CustomFieldsManager.GetCustomFields(connection))
-                if (customFieldDefinition.Name.Trim() == Definition.Name.Trim())
-                    return true;
-            return false;
-        }
-
-        private bool EnableOKButton()
-        {
-            return !string.IsNullOrEmpty(NameTextBox.Text.Trim()) && !IsDuplicate();
+            UpdateControls();
         }
     }
 }
