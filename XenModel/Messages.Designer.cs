@@ -23984,7 +23984,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This will delete &apos;{0}&apos; permanently, destroying all data associated with it. Continue?.
+        ///   Looks up a localized string similar to This will delete &apos;{0}&apos; permanently, making it unavailable to all resources in the pool and destroying all data associated with it. Do you want to continue?.
         /// </summary>
         public static string MESSAGEBOX_DELETE_CUSTOM_FIELD {
             get {

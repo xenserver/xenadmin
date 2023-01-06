@@ -8334,7 +8334,7 @@ This will permanently delete and reinitialize all local storage on the servers. 
     <value>Deactivate Virtual Disk</value>
   </data>
   <data name="MESSAGEBOX_DELETE_CUSTOM_FIELD" xml:space="preserve">
-    <value>This will delete '{0}' permanently, destroying all data associated with it. Continue?</value>
+    <value>This will delete '{0}' permanently, making it unavailable to all resources in the pool and destroying all data associated with it. Do you want to continue?</value>
   </data>
   <data name="MESSAGEBOX_DELETE_ISO" xml:space="preserve">
     <value>This will delete {0} permanently, destroying the data on it. Continue?</value>

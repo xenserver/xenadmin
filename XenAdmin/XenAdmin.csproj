@@ -1146,12 +1146,6 @@
     <Compile Include="Dialogs\AddServerDialog.Designer.cs">
       <DependentUpon>AddServerDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\CustomFieldsDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\CustomFieldsDialog.Designer.cs">
-      <DependentUpon>CustomFieldsDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\NewCustomFieldDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2557,10 +2551,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\AttachDiskDialog.resx">
       <DependentUpon>AttachDiskDialog.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\CustomFieldsDialog.resx">
-      <DependentUpon>CustomFieldsDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\CopyVMDialog.resx">
@@ -5191,12 +5181,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\CopyVMDialog.zh-CN.resx">
       <DependentUpon>CopyVMDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\CustomFieldsDialog.ja.resx">
-      <DependentUpon>CustomFieldsDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\CustomFieldsDialog.zh-CN.resx">
-      <DependentUpon>CustomFieldsDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\DateFilterDialog.ja.resx">
       <DependentUpon>DateFilterDialog.cs</DependentUpon>
