@@ -239,7 +239,7 @@ namespace XenAdmin.Diagnostics.Checks
                     return new ConflictingUpdatePresent(this, param2, Host);
 
                 case "UPDATE_PRECHECK_FAILED_PREREQUISITE_MISSING":
-                    return new PrerequisiteUpdateMissing(this, param2, Host);
+                    return new PrerequisiteUpdateMissing(this, param3, Host);
 
                 case "PATCH_PRECHECK_FAILED_WRONG_SERVER_VERSION":
                     return new WrongServerVersion(this, param3, Host);
