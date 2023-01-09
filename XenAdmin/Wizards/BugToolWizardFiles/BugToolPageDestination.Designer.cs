@@ -30,10 +30,6 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BugToolPageDestination));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.usernameLabel = new System.Windows.Forms.Label();
-            this.passwordLabel = new System.Windows.Forms.Label();
-            this.passwordTextBox = new System.Windows.Forms.TextBox();
-            this.usernameTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.labelName = new System.Windows.Forms.Label();
             this.m_textBoxName = new System.Windows.Forms.TextBox();
@@ -41,21 +37,12 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             this.m_textBoxLocation = new System.Windows.Forms.TextBox();
             this.BrowseButton = new System.Windows.Forms.Button();
             this.m_ctrlError = new XenAdmin.Controls.Common.PasswordFailure();
-            this.uploadCheckBox = new System.Windows.Forms.CheckBox();
-            this.caseNumberLabel = new System.Windows.Forms.Label();
-            this.caseNumberTextBox = new System.Windows.Forms.TextBox();
-            this.optionalLabel = new System.Windows.Forms.Label();
-            this.enterCredentialsLinkLabel = new System.Windows.Forms.LinkLabel();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.usernameLabel, 0, 6);
-            this.tableLayoutPanel1.Controls.Add(this.passwordLabel, 0, 7);
-            this.tableLayoutPanel1.Controls.Add(this.passwordTextBox, 1, 7);
-            this.tableLayoutPanel1.Controls.Add(this.usernameTextBox, 1, 6);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.labelName, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.m_textBoxName, 1, 1);
@@ -63,35 +50,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             this.tableLayoutPanel1.Controls.Add(this.m_textBoxLocation, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.BrowseButton, 3, 2);
             this.tableLayoutPanel1.Controls.Add(this.m_ctrlError, 0, 9);
-            this.tableLayoutPanel1.Controls.Add(this.uploadCheckBox, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.caseNumberLabel, 0, 8);
-            this.tableLayoutPanel1.Controls.Add(this.caseNumberTextBox, 1, 8);
-            this.tableLayoutPanel1.Controls.Add(this.optionalLabel, 2, 8);
-            this.tableLayoutPanel1.Controls.Add(this.enterCredentialsLinkLabel, 0, 5);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            // 
-            // usernameLabel
-            // 
-            resources.ApplyResources(this.usernameLabel, "usernameLabel");
-            this.usernameLabel.Name = "usernameLabel";
-            // 
-            // passwordLabel
-            // 
-            resources.ApplyResources(this.passwordLabel, "passwordLabel");
-            this.passwordLabel.Name = "passwordLabel";
-            // 
-            // passwordTextBox
-            // 
-            resources.ApplyResources(this.passwordTextBox, "passwordTextBox");
-            this.passwordTextBox.Name = "passwordTextBox";
-            this.passwordTextBox.UseSystemPasswordChar = true;
-            this.passwordTextBox.TextChanged += new System.EventHandler(this.credentials_TextChanged);
-            // 
-            // usernameTextBox
-            // 
-            resources.ApplyResources(this.usernameTextBox, "usernameTextBox");
-            this.usernameTextBox.Name = "usernameTextBox";
-            this.usernameTextBox.TextChanged += new System.EventHandler(this.credentials_TextChanged);
             // 
             // label2
             // 
@@ -136,38 +95,6 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             this.tableLayoutPanel1.SetColumnSpan(this.m_ctrlError, 4);
             this.m_ctrlError.Name = "m_ctrlError";
             // 
-            // uploadCheckBox
-            // 
-            resources.ApplyResources(this.uploadCheckBox, "uploadCheckBox");
-            this.tableLayoutPanel1.SetColumnSpan(this.uploadCheckBox, 4);
-            this.uploadCheckBox.Name = "uploadCheckBox";
-            this.uploadCheckBox.UseVisualStyleBackColor = true;
-            this.uploadCheckBox.CheckedChanged += new System.EventHandler(this.uploadCheckBox_CheckedChanged);
-            // 
-            // caseNumberLabel
-            // 
-            resources.ApplyResources(this.caseNumberLabel, "caseNumberLabel");
-            this.caseNumberLabel.Name = "caseNumberLabel";
-            // 
-            // caseNumberTextBox
-            // 
-            resources.ApplyResources(this.caseNumberTextBox, "caseNumberTextBox");
-            this.caseNumberTextBox.Name = "caseNumberTextBox";
-            this.caseNumberTextBox.TextChanged += new System.EventHandler(this.caseNumberLabelTextBox_TextChanged);
-            // 
-            // optionalLabel
-            // 
-            resources.ApplyResources(this.optionalLabel, "optionalLabel");
-            this.optionalLabel.Name = "optionalLabel";
-            // 
-            // enterCredentialsLinkLabel
-            // 
-            resources.ApplyResources(this.enterCredentialsLinkLabel, "enterCredentialsLinkLabel");
-            this.tableLayoutPanel1.SetColumnSpan(this.enterCredentialsLinkLabel, 4);
-            this.enterCredentialsLinkLabel.Name = "enterCredentialsLinkLabel";
-            this.enterCredentialsLinkLabel.TabStop = true;
-            this.enterCredentialsLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.enterCredentialsLinkLabel_LinkClicked);
-            // 
             // BugToolPageDestination
             // 
             this.Controls.Add(this.tableLayoutPanel1);
@@ -186,18 +113,9 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label labelName;
         private System.Windows.Forms.TextBox m_textBoxName;
-        private XenAdmin.Controls.Common.PasswordFailure m_ctrlError;
-        private System.Windows.Forms.CheckBox uploadCheckBox;
-        private System.Windows.Forms.Label usernameLabel;
-        private System.Windows.Forms.Label passwordLabel;
-        private System.Windows.Forms.TextBox passwordTextBox;
-        private System.Windows.Forms.TextBox usernameTextBox;
         private System.Windows.Forms.Label labelFileLocation;
         private System.Windows.Forms.TextBox m_textBoxLocation;
         private System.Windows.Forms.Button BrowseButton;
-        private System.Windows.Forms.Label caseNumberLabel;
-        private System.Windows.Forms.TextBox caseNumberTextBox;
-        private System.Windows.Forms.Label optionalLabel;
-        private System.Windows.Forms.LinkLabel enterCredentialsLinkLabel;
+        private Controls.Common.PasswordFailure m_ctrlError;
     }
 }
