@@ -123,9 +123,10 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             // Check we can write to the destination file - otherwise we only find out at the 
             // end of the ZipStatusReportAction, and the downloaded server files are lost,
             // and the user will have to run the wizard again.
+            FileStream stream = null;
             try
             {
-                using (File.OpenWrite(path)) { }
+                stream = File.OpenWrite(path);
             }
             catch (Exception exn)
             {
@@ -135,6 +136,10 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
 
                 cancel = true;
                 return;
+            }
+            finally
+            {
+                stream?.Dispose();
             }
 
             // Save away the output directory for next time
