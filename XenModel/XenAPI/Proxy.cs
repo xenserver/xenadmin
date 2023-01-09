@@ -8864,6 +8864,7 @@ namespace XenAPI
         public string client_certificate_auth_name;
         public string repository_proxy_url;
         public string repository_proxy_username;
+        public bool migration_compression;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]

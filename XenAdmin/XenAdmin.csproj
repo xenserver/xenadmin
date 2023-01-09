@@ -425,6 +425,12 @@
     <Compile Include="SettingsPanels\NetworkOptionsEditPage.Designer.cs">
       <DependentUpon>NetworkOptionsEditPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="SettingsPanels\PoolAdvancedEditPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SettingsPanels\PoolAdvancedEditPage.Designer.cs">
+      <DependentUpon>PoolAdvancedEditPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="SettingsPanels\SecurityEditPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -2062,6 +2068,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\NetworkOptionsEditPage.zh-CN.resx">
       <DependentUpon>NetworkOptionsEditPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsPanels\PoolAdvancedEditPage.ja.resx">
+      <DependentUpon>PoolAdvancedEditPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsPanels\PoolAdvancedEditPage.resx">
+      <DependentUpon>PoolAdvancedEditPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsPanels\PoolAdvancedEditPage.zh-CN.resx">
+      <DependentUpon>PoolAdvancedEditPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\SecurityEditPage.ja.resx">
       <DependentUpon>SecurityEditPage.cs</DependentUpon>

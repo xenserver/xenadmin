@@ -121,10 +121,6 @@
   <data name="ContentPanel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ContentPanel.AutoScroll" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="ContentPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -136,7 +132,7 @@
     <value>10, 49, 10, 10</value>
   </data>
   <data name="ContentPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>651, 509</value>
+    <value>627, 504</value>
   </data>
   <data name="&gt;&gt;ContentPanel.Name" xml:space="preserve">
     <value>ContentPanel</value>
@@ -151,13 +147,13 @@
     <value>1</value>
   </data>
   <data name="verticalTabs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 511</value>
+    <value>230, 506</value>
   </data>
   <data name="&gt;&gt;verticalTabs.Name" xml:space="preserve">
     <value>verticalTabs</value>
   </data>
   <data name="&gt;&gt;verticalTabs.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.VerticalTabs, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.VerticalTabs, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;verticalTabs.Parent" xml:space="preserve">
     <value>splitContainer.Panel1</value>
@@ -166,7 +162,7 @@
     <value>0</value>
   </data>
   <data name="cancelButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>800, 529</value>
+    <value>800, 524</value>
   </data>
   <data name="&gt;&gt;cancelButton.Name" xml:space="preserve">
     <value>cancelButton</value>
@@ -181,7 +177,7 @@
     <value>1</value>
   </data>
   <data name="okButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>720, 529</value>
+    <value>720, 524</value>
   </data>
   <data name="&gt;&gt;okButton.Name" xml:space="preserve">
     <value>okButton</value>
@@ -220,10 +216,11 @@
     <value>1</value>
   </data>
   <data name="splitContainer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>863, 511</value>
+    <value>863, 506</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="splitContainer.SplitterDistance" type="System.Int32, mscorlib">
-    <value>206</value>
+    <value>230</value>
   </data>
   <data name="&gt;&gt;splitContainer.Name" xml:space="preserve">
     <value>splitContainer</value>
@@ -238,13 +235,13 @@
     <value>0</value>
   </data>
   <data name="blueBorder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>653, 511</value>
+    <value>629, 506</value>
   </data>
   <data name="&gt;&gt;blueBorder.Name" xml:space="preserve">
     <value>blueBorder</value>
   </data>
   <data name="&gt;&gt;blueBorder.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.BlueBorderPanel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;blueBorder.Parent" xml:space="preserve">
     <value>splitContainer.Panel2</value>
@@ -259,7 +256,7 @@
     <value>96, 96</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>884, 566</value>
+    <value>884, 561</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8pt</value>
@@ -271,6 +268,6 @@
     <value>PropertiesDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>XenAdmin.Dialogs.VerticallyTabbedDialog, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Dialogs.VerticallyTabbedDialog, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

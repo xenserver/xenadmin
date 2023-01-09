@@ -133,7 +133,7 @@
     <value>Change disk size</value>
   </data>
   <data name="ACTION_CHANGE_EMAIL_OPTIONS" xml:space="preserve">
-    <value>Change email options</value>
+    <value>Change email notifications</value>
   </data>
   <data name="ACTION_CHANGE_HOME_SERVER" xml:space="preserve">
     <value>Change home server</value>
@@ -202,7 +202,7 @@
     <value>Changing disk size for '{0}'...</value>
   </data>
   <data name="ACTION_CHANGING_EMAIL_OPTIONS_FOR" xml:space="preserve">
-    <value>Changing email options for '{0}'...</value>
+    <value>Changing email notifications for '{0}'...</value>
   </data>
   <data name="ACTION_CHANGING_HOME_SERVER_FOR" xml:space="preserve">
     <value>Changing home server for '{0}'...</value>
@@ -428,6 +428,9 @@
   </data>
   <data name="ACTION_ENABLE_IGMP_SNOOPING" xml:space="preserve">
     <value>Enable IGMP snooping</value>
+  </data>
+  <data name="ACTION_ENABLE_MIGRATION_COMPRESSION" xml:space="preserve">
+    <value>Enabling VM memory and vGPU data compression during VM live migration on '{0}'</value>
   </data>
   <data name="ACTION_ENABLE_PVS_READ_CACHING" xml:space="preserve">
     <value>Enable PVS-Accelerator</value>
@@ -1738,7 +1741,7 @@ It is strongly recommended that you Cancel and apply the latest version of the p
     <value>{0} can no longer authenticate with the existing credentials for this server. Enter new credentials to proceed.</value>
   </data>
   <data name="ADVANCED_OPTIONS" xml:space="preserve">
-    <value>Advanced Options</value>
+    <value>Advanced</value>
   </data>
   <data name="AFFINITY_PICKER_DYNAMIC_NOT_SHARED_SR" xml:space="preserve">
     <value>&amp;Don't assign this VM a home server. The VM will be started on any server with the necessary resources. (Shared storage required).</value>
@@ -3310,7 +3313,7 @@ Would you like to carry out the operation at this time?</value>
     <value>Disconnected from {0}</value>
   </data>
   <data name="CONNECTION_DESC" xml:space="preserve">
-    <value>Proxy and timeout options</value>
+    <value>Proxy and timeout</value>
   </data>
   <data name="CONNECTION_EXISTS" xml:space="preserve">
     <value>Connection Failed: A connection to {0} already exists</value>
@@ -3370,7 +3373,7 @@ Would you like to carry out the operation at this time?</value>
     <value>Console</value>
   </data>
   <data name="CONSOLE_DESC" xml:space="preserve">
-    <value>Keyboard shortcuts and scaling options</value>
+    <value>Keyboard shortcuts and scaling</value>
   </data>
   <data name="CONSOLE_HOST" xml:space="preserve">
     <value>{0} server console</value>
@@ -4623,6 +4626,9 @@ Plugging in untrustworthy USB devices to your computer may put your computer at 
   <data name="DISABLED_CLUSTERING_ON_POOL" xml:space="preserve">
     <value>Disabled clustering on {0}.</value>
   </data>
+  <data name="DISABLED_MIGRATION_COMPRESSION" xml:space="preserve">
+    <value>Don't compress VMs during migration</value>
+  </data>
   <data name="DISABLED_VMSS" xml:space="preserve">
     <value>Snapshot schedule '{0}' disabled.</value>
   </data>
@@ -5390,7 +5396,7 @@ Would you like to eject these ISOs before continuing?</value>
     <value>Configure email notification for policy alerts</value>
   </data>
   <data name="EMAIL_OPTIONS" xml:space="preserve">
-    <value>Email Options</value>
+    <value>Email Notifications</value>
   </data>
   <data name="EMPTY" xml:space="preserve">
     <value>&lt;empty&gt;</value>
@@ -5456,6 +5462,9 @@ Would you like to eject these ISOs before continuing?</value>
   </data>
   <data name="ENABLED_CLUSTERING_ON_POOL" xml:space="preserve">
     <value>Enabled clustering on {0}.</value>
+  </data>
+  <data name="ENABLED_MIGRATION_COMPRESSION" xml:space="preserve">
+    <value>Compress VMs during migration</value>
   </data>
   <data name="ENABLED_VMSS" xml:space="preserve">
     <value>Snapshot schedule '{0}' enabled.</value>
@@ -5877,12 +5886,6 @@ Would you like to eject these ISOs before continuing?</value>
   </data>
   <data name="EXPORT_SECURITY_PAGE_FILETYPES" xml:space="preserve">
     <value>Personal Certificate Files (*.pfx) |*.pfx</value>
-  </data>
-  <data name="EXPORT_SECURITY_PAGE_TEXT" xml:space="preserve">
-    <value>Security</value>
-  </data>
-  <data name="EXPORT_SECURITY_PAGE_TITLE" xml:space="preserve">
-    <value>Select security options</value>
   </data>
   <data name="EXPORT_SELECTVMS_PAGE_ERROR_TARGET_SPACE_NOT_ENOUGH" xml:space="preserve">
     <value>Target destination has only {0} of free space and you need at least {1} to export the selected VMs.</value>
@@ -8874,7 +8877,7 @@ To ensure system stability, it is strongly recommended that you use multipathing
     <value>Network {0}</value>
   </data>
   <data name="NETWORK_OPTIONS" xml:space="preserve">
-    <value>Network Options</value>
+    <value>Network</value>
   </data>
   <data name="NETWORK_RECONFIG_CONNECTION_LOST" xml:space="preserve">
     <value>The connection to the server was lost. No changes have been made.</value>
@@ -11007,9 +11010,6 @@ Click Previous if you need to go back and specify a different network location o
   <data name="PROVISIONING" xml:space="preserve">
     <value>Provisioning</value>
   </data>
-  <data name="PROVISIONING_OPTIONS" xml:space="preserve">
-    <value>Provisioning Options</value>
-  </data>
   <data name="PROVISIONING_TYPE" xml:space="preserve">
     <value>Provisioning Type</value>
   </data>
@@ -11778,7 +11778,7 @@ The coordinator must be upgraded first, so if you skip the coordinator, the roll
     <value>Security Checks</value>
   </data>
   <data name="SECURITY_DESC" xml:space="preserve">
-    <value>Certificate options</value>
+    <value>Certificates and pool secrets</value>
   </data>
   <data name="SECURITY_GROUPS" xml:space="preserve">
     <value>Security Groups</value>
