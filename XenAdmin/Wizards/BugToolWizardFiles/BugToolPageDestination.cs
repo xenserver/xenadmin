@@ -31,23 +31,19 @@
 using System;
 using System.IO;
 using System.Windows.Forms;
-using XenAdmin.Actions;
 using XenAdmin.Controls;
 using XenAdmin.Controls.Common;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
 using XenCenterLib;
 using XenModel;
-using Registry = XenAdmin.Core.Registry;
 
 
 namespace XenAdmin.Wizards.BugToolWizardFiles
 {
     public partial class BugToolPageDestination : XenTabPage
     {
-        private bool m_buttonNextEnabled;
-
-        private const int TokenExpiration = 86400; // 24 hours
+        private bool _buttonNextEnabled;
 
         public BugToolPageDestination()
         {
@@ -62,7 +58,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
 
         public override bool EnableNext()
         {
-            return m_buttonNextEnabled;
+            return _buttonNextEnabled;
         }
 
         protected override void PageLoadedCore(PageLoadedDirection direction)
@@ -70,9 +66,10 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             if (direction != PageLoadedDirection.Forward)
                 return;
 
-            m_textBoxName.Text = string.Format("{0}{1}.zip", Messages.BUGTOOL_FILE_PREFIX, HelpersGUI.DateTimeToString(DateTime.Now, "yyyy-MM-dd-HH-mm-ss", false));
+            m_textBoxName.Text =
+                $"{Messages.BUGTOOL_FILE_PREFIX}{HelpersGUI.DateTimeToString(DateTime.Now, "yyyy-MM-dd-HH-mm-ss", false)}.zip";
 
-            string initialDirectory = Properties.Settings.Default.ServerStatusPath;
+            var initialDirectory = Properties.Settings.Default.ServerStatusPath;
             
             try
             {
@@ -104,11 +101,9 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                 return;
             }
 
-            string path = OutputFile;
-
-            if (File.Exists(path)) //confirm ok to overwrite
+            if (File.Exists(OutputFile)) //confirm ok to overwrite
             {
-                using (var dlg = new WarningDialog(string.Format(Messages.FILE_X_EXISTS_OVERWRITE, path),
+                using (var dlg = new WarningDialog(string.Format(Messages.FILE_X_EXISTS_OVERWRITE, OutputFile),
                     ThreeButtonDialog.ButtonOK,
                     new ThreeButtonDialog.TBDButton(Messages.CANCEL, DialogResult.Cancel, selected: true)))
                 {
@@ -126,16 +121,14 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             FileStream stream = null;
             try
             {
-                stream = File.OpenWrite(path);
+                stream = File.OpenWrite(OutputFile);
             }
             catch (Exception exn)
             {
-                // Failure
-                using (var dlg = new ErrorDialog(string.Format(Messages.COULD_NOT_WRITE_FILE, path, exn.Message)))
+                using (var dlg = new ErrorDialog(string.Format(Messages.COULD_NOT_WRITE_FILE, OutputFile, exn.Message)))
                     dlg.ShowDialog(this);
 
                 cancel = true;
-                return;
             }
             finally
             {
@@ -161,14 +154,14 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                 if (!name.EndsWith(".zip"))
                     name = string.Concat(name, ".zip");
 
-                return string.Format(@"{0}\{1}", folder, name);
+                return $@"{folder}\{name}";
             }
         }
 
         private bool PerformCheck(params CheckDelegate[] checks)
         {
-            bool success = m_ctrlError.PerformCheck(checks);
-            m_buttonNextEnabled = success;
+            var success = m_ctrlError.PerformCheck(checks);
+            _buttonNextEnabled = success;
             OnPageUpdated();
             return success;
         }
@@ -180,27 +173,27 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             var name = m_textBoxName.Text.Trim();
             var folder = m_textBoxLocation.Text.Trim();
 
-            if (String.IsNullOrEmpty(name))
+            if (string.IsNullOrEmpty(name))
                 return false;
 
-            if (!PathValidator.IsFileNameValid(name, out string invalidNameMsg))
+            if (!PathValidator.IsFileNameValid(name, out var invalidNameMsg))
             {
                 error = $"{Messages.BUGTOOL_PAGE_DESTINATION_INVALID_NAME} {invalidNameMsg}";
                 return false;
             }
 
-            if (String.IsNullOrEmpty(folder))
+            if (string.IsNullOrEmpty(folder))
                 return false;
 
-            string path = String.Format("{0}\\{1}", folder, name);
+            var path = $"{folder}\\{name}";
 
-            if (!PathValidator.IsPathValid(path, out string invalidPathMsg))
+            if (PathValidator.IsPathValid(path, out var invalidPathMsg))
             {
-                error = $"{Messages.BUGTOOL_PAGE_DESTINATION_INVALID_FOLDER} {invalidPathMsg}";
-                return false;
+                return true;
             }
 
-            return true;
+            error = $"{Messages.BUGTOOL_PAGE_DESTINATION_INVALID_FOLDER} {invalidPathMsg}";
+            return false;
         }
 
         private bool CheckDestinationFolderExists(out string error)
@@ -229,14 +222,14 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
 
         private void BrowseButton_Click(object sender, EventArgs e)
         {
-            using (var dlog = new FolderBrowserDialog
+            using (var dialog = new FolderBrowserDialog
             {
                 SelectedPath = m_textBoxLocation.Text.Trim(),
                 Description = Messages.FOLDER_BROWSER_BUG_TOOL
             })
             {
-                if (dlog.ShowDialog() == DialogResult.OK)
-                    m_textBoxLocation.Text = dlog.SelectedPath;
+                if (dialog.ShowDialog() == DialogResult.OK)
+                    m_textBoxLocation.Text = dialog.SelectedPath;
             }
         }
 
