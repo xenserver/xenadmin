@@ -143,7 +143,7 @@ namespace XenAPI
             VCPUs_CPU = proxy.VCPUs_CPU == null ? null : Maps.convert_from_proxy_long_long(proxy.VCPUs_CPU);
             VCPUs_params = proxy.VCPUs_params == null ? null : Maps.convert_from_proxy_string_string(proxy.VCPUs_params);
             VCPUs_flags = proxy.VCPUs_flags == null ? null : Maps.convert_from_proxy_long_string_array(proxy.VCPUs_flags);
-            state = proxy.state == null ? new string[] {} : (string [])proxy.state;
+            state = proxy.state == null ? new string[] {} : (string[])proxy.state;
             start_time = proxy.start_time;
             install_time = proxy.install_time;
             last_updated = proxy.last_updated;
@@ -398,7 +398,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.vm_metrics_get_state(session.opaque_ref, _vm_metrics);
             else
-                return (string [])session.XmlRpcProxy.vm_metrics_get_state(session.opaque_ref, _vm_metrics ?? "").parse();
+                return (string[])session.XmlRpcProxy.vm_metrics_get_state(session.opaque_ref, _vm_metrics ?? "").parse();
         }
 
         /// <summary>

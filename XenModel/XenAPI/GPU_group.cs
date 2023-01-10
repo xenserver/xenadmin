@@ -123,7 +123,7 @@ namespace XenAPI
             name_description = proxy.name_description == null ? null : proxy.name_description;
             PGPUs = proxy.PGPUs == null ? null : XenRef<PGPU>.Create(proxy.PGPUs);
             VGPUs = proxy.VGPUs == null ? null : XenRef<VGPU>.Create(proxy.VGPUs);
-            GPU_types = proxy.GPU_types == null ? new string[] {} : (string [])proxy.GPU_types;
+            GPU_types = proxy.GPU_types == null ? new string[] {} : (string[])proxy.GPU_types;
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
             allocation_algorithm = proxy.allocation_algorithm == null ? (allocation_algorithm) 0 : (allocation_algorithm)Helper.EnumParseDefault(typeof(allocation_algorithm), (string)proxy.allocation_algorithm);
             supported_VGPU_types = proxy.supported_VGPU_types == null ? null : XenRef<VGPU_type>.Create(proxy.supported_VGPU_types);
@@ -348,7 +348,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.gpu_group_get_gpu_types(session.opaque_ref, _gpu_group);
             else
-                return (string [])session.XmlRpcProxy.gpu_group_get_gpu_types(session.opaque_ref, _gpu_group ?? "").parse();
+                return (string[])session.XmlRpcProxy.gpu_group_get_gpu_types(session.opaque_ref, _gpu_group ?? "").parse();
         }
 
         /// <summary>

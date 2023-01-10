@@ -207,6 +207,8 @@ namespace XenAdmin
             this.snapshotToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.convertToTemplateToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.exportToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
+            this.toolStripSeparator32 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItemVtpm = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.disableCbtToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.enablePVSReadcachingToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.disablePVSReadcachingToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
@@ -1377,6 +1379,8 @@ namespace XenAdmin
             this.snapshotToolStripMenuItem,
             this.convertToTemplateToolStripMenuItem,
             this.exportToolStripMenuItem,
+            this.toolStripSeparator32,
+            this.toolStripMenuItemVtpm,
             this.disableCbtToolStripMenuItem,
             this.enablePVSReadcachingToolStripMenuItem,
             this.disablePVSReadcachingToolStripMenuItem,
@@ -1467,6 +1471,17 @@ namespace XenAdmin
             this.exportToolStripMenuItem.Command = new XenAdmin.Commands.ExportCommand();
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
             resources.ApplyResources(this.exportToolStripMenuItem, "exportToolStripMenuItem");
+            // 
+            // toolStripSeparator32
+            // 
+            this.toolStripSeparator32.Name = "toolStripSeparator32";
+            resources.ApplyResources(this.toolStripSeparator32, "toolStripSeparator32");
+            // 
+            // toolStripMenuItemVtpm
+            // 
+            this.toolStripMenuItemVtpm.Command = new XenAdmin.Commands.VtpmCommand();
+            this.toolStripMenuItemVtpm.Name = "toolStripMenuItemVtpm";
+            resources.ApplyResources(this.toolStripMenuItemVtpm, "toolStripMenuItemVtpm");
             // 
             // disableCbtToolStripMenuItem
             // 
@@ -2297,6 +2312,8 @@ namespace XenAdmin
         private System.Windows.Forms.ToolStripMenuItem relNotesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem downloadInstallToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemCfu;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator32;
+        private XenAdmin.Commands.CommandToolStripMenuItem toolStripMenuItemVtpm;
     }
 
 }

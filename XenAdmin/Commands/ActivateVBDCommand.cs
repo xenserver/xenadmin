@@ -86,7 +86,7 @@ namespace XenAdmin.Commands
         {
             VM vm = vbd.Connection.Resolve<VM>(vbd.VM);
             VDI vdi = vbd.Connection.Resolve<VDI>(vbd.VDI);
-            if (vm == null || !vm.is_a_real_vm() || vdi == null)
+            if (vm == null || !vm.IsRealVm() || vdi == null)
                 return false;
             if (vm.power_state != vm_power_state.Running)
                 return false;
@@ -114,7 +114,7 @@ namespace XenAdmin.Commands
             if (vm.is_a_template)
                 return Messages.CANNOT_ACTIVATE_TEMPLATE_DISK;
             
-            if (!vm.is_a_real_vm())
+            if (!vm.IsRealVm())
                 return base.GetCantRunReasonCore(item);
 
             SR sr = vdi.Connection.Resolve<SR>(vdi.SR);

@@ -63,7 +63,7 @@ namespace XenAPI
 
                 foreach (var otherVm in vmsNotInCurApp)
                 {
-                    if (otherVm.is_a_real_vm() && otherVm.power_state != vm_power_state.Halted && otherVm.SRs().Intersect(thisVm.SRs()).FirstOrDefault() != null && !fateSharingVms.Contains(otherVm))
+                    if (otherVm.IsRealVm() && otherVm.power_state != vm_power_state.Halted && otherVm.SRs().Intersect(thisVm.SRs()).FirstOrDefault() != null && !fateSharingVms.Contains(otherVm))
                         fateSharingVms.Add(otherVm);
                 }
             }

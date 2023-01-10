@@ -62,6 +62,7 @@ namespace XenAPI
         public const long MAX_SOCKETS = 16;  // current hard limit in Xen: CA-198276
 
         private XmlDocument xdRecommendations = null;
+        public const int MAX_ALLOWED_VTPMS = 1;
 
         public int MaxVCPUsAllowed()
         {
@@ -274,7 +275,7 @@ namespace XenAPI
 
         public bool IsPvVm()
         {
-            return is_a_real_vm() && !IsHVM() && !other_config.ContainsKey("pvcheckpass");
+            return IsRealVm() && !IsHVM() && !other_config.ContainsKey("pvcheckpass");
         }
 
         public bool IsUEFIEnabled()
@@ -1103,7 +1104,7 @@ namespace XenAPI
         {
             if (this.Connection != null)
             {
-                if (this.is_a_real_vm())
+                if (this.IsRealVm())
                 {
                     return base.NameWithLocation();
                 }
@@ -1220,7 +1221,7 @@ namespace XenAPI
         /// </summary>
         public bool HaCanProtect(bool showHiddenVMs)
         {
-            return is_a_real_vm() && Show(showHiddenVMs);
+            return IsRealVm() && Show(showHiddenVMs);
 
         }
 
@@ -1330,7 +1331,7 @@ namespace XenAPI
             return false;
         }
 
-        public bool is_a_real_vm()
+        public bool IsRealVm()
         {
             return !is_a_snapshot && !is_a_template && !is_control_domain;
         }
@@ -1372,7 +1373,7 @@ namespace XenAPI
 
         public bool IsConversionVM()
         {
-            return is_a_real_vm() && BoolKey(other_config, "conversionvm");
+            return IsRealVm() && BoolKey(other_config, "conversionvm");
         }
 
         public override string ToString()
@@ -1794,6 +1795,38 @@ namespace XenAPI
         public bool CanChangeBootMode()
         {
             return last_boot_CPU_flags == null || last_boot_CPU_flags.Count == 0;
+        }
+
+        public bool CanAddVtpm(out string cannotReason)
+        {
+            cannotReason = null;
+
+            if (VTPMs.Count >= VM.MAX_ALLOWED_VTPMS)
+            {
+                cannotReason = string.Format(Messages.VTPM_MAX_REACHED, VM.MAX_ALLOWED_VTPMS);
+                return false;
+            }
+            
+            if (power_state != vm_power_state.Halted)
+            {
+                cannotReason = Messages.VTPM_POWER_STATE_WRONG_ATTACH;
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool CanRemoveVtpm(out string cannotReason)
+        {
+            cannotReason = null;
+
+            if (power_state != vm_power_state.Halted)
+            {
+                cannotReason = Messages.VTPM_POWER_STATE_WRONG_REMOVE;
+                return false;
+            }
+
+            return true;
         }
     }
 

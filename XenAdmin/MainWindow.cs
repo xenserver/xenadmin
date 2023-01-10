@@ -1780,13 +1780,19 @@ namespace XenAdmin
             conversionToolStripMenuItem.Available = conn != null && conn.Cache.VMs.Any(v => v.IsConversionVM());
             installToolsToolStripMenuItem.Available = SelectionManager.Selection.Any(v => !Helpers.StockholmOrGreater(v.Connection));
             toolStripMenuItemInstallCertificate.Available = Helpers.StockholmOrGreater(conn);
+            
             toolStripMenuItemRotateSecret.Available = SelectionManager.Selection.Any(s =>
                 s.Connection != null && Helpers.StockholmOrGreater(s.Connection) &&
                 !s.Connection.Cache.Hosts.Any(Host.RestrictPoolSecretRotation));
+            
             toolStripMenuItemEnableTls.Available = SelectionManager.Selection.Any(s =>
                 s.Connection != null && Helpers.Post82X(s.Connection) && Helpers.XapiEqualOrGreater_1_290_0(s.Connection) &&
                 !s.Connection.Cache.Hosts.Any(Host.RestrictCertificateVerification) &&
                 s.Connection.Cache.Pools.Any(p => !p.tls_verification_enabled));
+
+            toolStripMenuItemVtpm.Available = SelectionManager.Selection.Any(s =>
+                s.Connection != null && Helpers.Post82X(s.Connection) && Helpers.XapiEqualOrGreater_22_26_0(s.Connection) &&
+                !s.Connection.Cache.Hosts.Any(Host.RestrictVtpm));
         }
 
         private void xenSourceOnTheWebToolStripMenuItem_Click(object sender, EventArgs e)

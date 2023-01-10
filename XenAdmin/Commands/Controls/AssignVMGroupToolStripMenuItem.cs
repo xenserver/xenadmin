@@ -276,7 +276,7 @@ namespace XenAdmin.Commands
 
             public bool CanRun(VM vm)
             {
-                return vm != null && vm.is_a_real_vm() && !vm.Locked && VMGroup<T>.FeaturePossible(vm.Connection) &&
+                return vm != null && vm.IsRealVm() && !vm.Locked && VMGroup<T>.FeaturePossible(vm.Connection) &&
                        !Helpers.FeatureForbidden(vm.Connection, VMGroup<T>.FeatureRestricted);
             }
             protected override bool CanRunCore(SelectedItemCollection selection)

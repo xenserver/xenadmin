@@ -430,6 +430,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to vTPM&apos;s root CAs and other related debug information.
+        /// </summary>
+        public static string Description_host_system_status_vtpm {
+            get {
+                return ResourceManager.GetString("Description-host.system_status-vtpm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Logs and status information from the WLB server monitoring this pool..
         /// </summary>
         public static string Description_host_system_status_wlb {
@@ -1290,6 +1299,15 @@ namespace XenAdmin {
         public static string Label_host_system_status_vncterm {
             get {
                 return ResourceManager.GetString("Label-host.system_status-vncterm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to vTPM.
+        /// </summary>
+        public static string Label_host_system_status_vtpm {
+            get {
+                return ResourceManager.GetString("Label-host.system_status-vtpm", resourceCulture);
             }
         }
         

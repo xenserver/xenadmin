@@ -1934,6 +1934,9 @@ Authorized Roles: {1}</value>
   <data name="UPDATE_APPLY_FAILED" xml:space="preserve">
     <value>The update failed to apply. View logs for more details.</value>
   </data>
+  <data name="UPDATE_GUIDANCE_CHANGED" xml:space="preserve">
+    <value>Guidance for the update has changed</value>
+  </data>
   <data name="UPDATE_IS_APPLIED" xml:space="preserve">
     <value>The specified update has been applied and cannot be destroyed.</value>
   </data>
@@ -2341,6 +2344,9 @@ Authorized Roles: {1}</value>
   </data>
   <data name="VM_UNSAFE_BOOT" xml:space="preserve">
     <value>You attempted an operation on VM {0} that was judged to be unsafe by the server. This can happen if the VM would run on a CPU that has a potentially incompatible set of feature flags to those the VM requires. If you want to override this warning then use the &apos;force&apos; option.</value>
+  </data>
+  <data name="VTPM_MAX_AMOUNT_REACHED" xml:space="preserve">
+    <value>The VM cannot be associated with more VTPMs.</value>
   </data>
   <data name="WLB_AUTHENTICATION_FAILED" xml:space="preserve">
     <value>WLB rejected our configured authentication details.</value>

@@ -209,7 +209,7 @@ namespace XenAPI
             snapshot_of = proxy.snapshot_of == null ? null : XenRef<VDI>.Create(proxy.snapshot_of);
             snapshots = proxy.snapshots == null ? null : XenRef<VDI>.Create(proxy.snapshots);
             snapshot_time = proxy.snapshot_time;
-            tags = proxy.tags == null ? new string[] {} : (string [])proxy.tags;
+            tags = proxy.tags == null ? new string[] {} : (string[])proxy.tags;
             allow_caching = (bool)proxy.allow_caching;
             on_boot = proxy.on_boot == null ? (on_boot) 0 : (on_boot)Helper.EnumParseDefault(typeof(on_boot), (string)proxy.on_boot);
             metadata_of_pool = proxy.metadata_of_pool == null ? null : XenRef<Pool>.Create(proxy.metadata_of_pool);
@@ -880,7 +880,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.vdi_get_tags(session.opaque_ref, _vdi);
             else
-                return (string [])session.XmlRpcProxy.vdi_get_tags(session.opaque_ref, _vdi ?? "").parse();
+                return (string[])session.XmlRpcProxy.vdi_get_tags(session.opaque_ref, _vdi ?? "").parse();
         }
 
         /// <summary>

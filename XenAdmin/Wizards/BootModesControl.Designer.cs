@@ -36,16 +36,23 @@ namespace XenAdmin.Wizards
             this.radioButtonUEFISecureBoot = new System.Windows.Forms.RadioButton();
             this.radioButtonBIOSBoot = new System.Windows.Forms.RadioButton();
             this.radioButtonUEFIBoot = new System.Windows.Forms.RadioButton();
-            this.warningsTable = new System.Windows.Forms.TableLayoutPanel();
-            this.imgExperimental = new System.Windows.Forms.PictureBox();
-            this.labelExperimental = new System.Windows.Forms.Label();
-            this.imgUnsupported = new System.Windows.Forms.PictureBox();
+            this.tableVtpmWarning = new System.Windows.Forms.TableLayoutPanel();
+            this.labelTpm = new System.Windows.Forms.Label();
+            this.imgTpm = new System.Windows.Forms.PictureBox();
             this.labelUnsupported = new System.Windows.Forms.Label();
+            this.imgUnsupported = new System.Windows.Forms.PictureBox();
+            this.groupBoxDevSecurity = new System.Windows.Forms.GroupBox();
+            this.checkBoxVtpm = new System.Windows.Forms.CheckBox();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableBootModeWarning = new System.Windows.Forms.TableLayoutPanel();
             this.groupBoxBootMode.SuspendLayout();
             this.tableLayoutPanelBootMode.SuspendLayout();
-            this.warningsTable.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imgExperimental)).BeginInit();
+            this.tableVtpmWarning.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imgTpm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgUnsupported)).BeginInit();
+            this.groupBoxDevSecurity.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.tableBootModeWarning.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxBootMode
@@ -74,6 +81,7 @@ namespace XenAdmin.Wizards
             resources.ApplyResources(this.radioButtonBIOSBoot, "radioButtonBIOSBoot");
             this.radioButtonBIOSBoot.Name = "radioButtonBIOSBoot";
             this.radioButtonBIOSBoot.UseVisualStyleBackColor = true;
+            this.radioButtonBIOSBoot.CheckedChanged += new System.EventHandler(this.radioButtonBIOSBoot_CheckedChanged);
             // 
             // radioButtonUEFIBoot
             // 
@@ -81,26 +89,29 @@ namespace XenAdmin.Wizards
             this.radioButtonUEFIBoot.Name = "radioButtonUEFIBoot";
             this.radioButtonUEFIBoot.UseVisualStyleBackColor = true;
             // 
-            // warningsTable
+            // tableVtpmWarning
             // 
-            resources.ApplyResources(this.warningsTable, "warningsTable");
-            this.warningsTable.Controls.Add(this.labelUnsupported, 1, 0);
-            this.warningsTable.Controls.Add(this.imgExperimental, 0, 1);
-            this.warningsTable.Controls.Add(this.labelExperimental, 1, 1);
-            this.warningsTable.Controls.Add(this.imgUnsupported, 0, 0);
-            this.warningsTable.Name = "warningsTable";
+            resources.ApplyResources(this.tableVtpmWarning, "tableVtpmWarning");
+            this.tableVtpmWarning.Controls.Add(this.labelTpm, 1, 0);
+            this.tableVtpmWarning.Controls.Add(this.imgTpm, 0, 0);
+            this.tableVtpmWarning.Name = "tableVtpmWarning";
             // 
-            // imgExperimental
+            // labelTpm
             // 
-            this.imgExperimental.Image = global::XenAdmin.Properties.Resources._000_Alert2_h32bit_16;
-            resources.ApplyResources(this.imgExperimental, "imgExperimental");
-            this.imgExperimental.Name = "imgExperimental";
-            this.imgExperimental.TabStop = false;
+            resources.ApplyResources(this.labelTpm, "labelTpm");
+            this.labelTpm.Name = "labelTpm";
             // 
-            // labelExperimental
+            // imgTpm
             // 
-            resources.ApplyResources(this.labelExperimental, "labelExperimental");
-            this.labelExperimental.Name = "labelExperimental";
+            this.imgTpm.Image = global::XenAdmin.Properties.Resources._000_Info3_h32bit_16;
+            resources.ApplyResources(this.imgTpm, "imgTpm");
+            this.imgTpm.Name = "imgTpm";
+            this.imgTpm.TabStop = false;
+            // 
+            // labelUnsupported
+            // 
+            resources.ApplyResources(this.labelUnsupported, "labelUnsupported");
+            this.labelUnsupported.Name = "labelUnsupported";
             // 
             // imgUnsupported
             // 
@@ -109,29 +120,57 @@ namespace XenAdmin.Wizards
             this.imgUnsupported.Name = "imgUnsupported";
             this.imgUnsupported.TabStop = false;
             // 
-            // labelUnsupported
+            // groupBoxDevSecurity
             // 
-            resources.ApplyResources(this.labelUnsupported, "labelUnsupported");
-            this.labelUnsupported.Name = "labelUnsupported";
+            this.groupBoxDevSecurity.Controls.Add(this.checkBoxVtpm);
+            resources.ApplyResources(this.groupBoxDevSecurity, "groupBoxDevSecurity");
+            this.groupBoxDevSecurity.Name = "groupBoxDevSecurity";
+            this.groupBoxDevSecurity.TabStop = false;
+            // 
+            // checkBoxVtpm
+            // 
+            resources.ApplyResources(this.checkBoxVtpm, "checkBoxVtpm");
+            this.checkBoxVtpm.Name = "checkBoxVtpm";
+            this.checkBoxVtpm.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel1
+            // 
+            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.groupBoxBootMode, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.groupBoxDevSecurity, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.tableVtpmWarning, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.tableBootModeWarning, 0, 1);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
+            // tableBootModeWarning
+            // 
+            resources.ApplyResources(this.tableBootModeWarning, "tableBootModeWarning");
+            this.tableBootModeWarning.Controls.Add(this.imgUnsupported, 0, 0);
+            this.tableBootModeWarning.Controls.Add(this.labelUnsupported, 1, 0);
+            this.tableBootModeWarning.Name = "tableBootModeWarning";
             // 
             // BootModesControl
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.Controls.Add(this.warningsTable);
-            this.Controls.Add(this.groupBoxBootMode);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.DoubleBuffered = true;
             this.Name = "BootModesControl";
             this.groupBoxBootMode.ResumeLayout(false);
             this.tableLayoutPanelBootMode.ResumeLayout(false);
             this.tableLayoutPanelBootMode.PerformLayout();
-            this.warningsTable.ResumeLayout(false);
-            this.warningsTable.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imgExperimental)).EndInit();
+            this.tableVtpmWarning.ResumeLayout(false);
+            this.tableVtpmWarning.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imgTpm)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgUnsupported)).EndInit();
+            this.groupBoxDevSecurity.ResumeLayout(false);
+            this.groupBoxDevSecurity.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
+            this.tableBootModeWarning.ResumeLayout(false);
+            this.tableBootModeWarning.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -142,10 +181,14 @@ namespace XenAdmin.Wizards
         private System.Windows.Forms.RadioButton radioButtonUEFISecureBoot;
         private System.Windows.Forms.RadioButton radioButtonBIOSBoot;
         private System.Windows.Forms.RadioButton radioButtonUEFIBoot;
-        private System.Windows.Forms.TableLayoutPanel warningsTable;
-        private System.Windows.Forms.PictureBox imgExperimental;
-        private System.Windows.Forms.Label labelExperimental;
+        private System.Windows.Forms.TableLayoutPanel tableVtpmWarning;
         private System.Windows.Forms.PictureBox imgUnsupported;
         private System.Windows.Forms.Label labelUnsupported;
+        private System.Windows.Forms.GroupBox groupBoxDevSecurity;
+        private System.Windows.Forms.CheckBox checkBoxVtpm;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Label labelTpm;
+        private System.Windows.Forms.PictureBox imgTpm;
+        private System.Windows.Forms.TableLayoutPanel tableBootModeWarning;
     }
 }

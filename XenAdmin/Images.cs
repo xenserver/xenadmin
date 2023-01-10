@@ -598,6 +598,7 @@ namespace XenAdmin
             // the following are generated from Resources using:
             // cat Resources.Designer.cs | grep 'internal static System.Drawing.Bitmap' | sed "s/ {//g" | awk -F"Bitmap " '{print"public static Bitmap " $2 " = Properties.Resources." $2 ";"}'
             public static Bitmap _000_Abort_h32bit_16 = Properties.Resources._000_Abort_h32bit_16;
+            public static Bitmap _000_Abort_gray_h32bit_16 = Properties.Resources._000_Abort_gray_h32bit_16;
             public static Bitmap _000_AddApplicationServer_h32bit_16 = Properties.Resources._000_AddApplicationServer_h32bit_16;
             public static Bitmap _000_AddApplicationServer_h32bit_24 = Properties.Resources._000_AddApplicationServer_h32bit_24;
             public static Bitmap _000_AddIPAddress_h32bit_16 = Properties.Resources._000_AddIPAddress_h32bit_16;
@@ -896,6 +897,7 @@ namespace XenAdmin
             public static Bitmap tools_notinstalled_16x = Properties.Resources.tools_notinstalled_16x;
             public static Bitmap tools_outofdate_16x = Properties.Resources.tools_outofdate_16x;
             public static Bitmap tools_uptodate_16x = Properties.Resources.tools_uptodate_16x;
+            public static Bitmap tpm = Properties.Resources.tpm;
             public static Bitmap tree_minus = Properties.Resources.tree_minus;
             public static Bitmap tree_plus = Properties.Resources.tree_plus;
             public static Bitmap tshadowdown = Properties.Resources.tshadowdown;

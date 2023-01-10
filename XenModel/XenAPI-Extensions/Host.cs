@@ -463,6 +463,11 @@ namespace XenAPI
             return BoolKeyPreferTrue(h.license_params, "restrict_corosync");
         }
 
+        public static bool RestrictVtpm(Host h)
+        {
+            return BoolKeyPreferTrue(h.license_params, "restrict_vtpm");
+        }
+
         #region Experimental Features
 
         public static bool CorosyncDisabled(Host h)
@@ -485,32 +490,12 @@ namespace XenAPI
             return FeatureDisabled(h, "guefi-secureboot");
         }
 
-        public static bool UefiBootExperimental(Host h)
-        {
-            return FeatureExperimental(h, "guefi");
-        }
-
-        public static bool UefiSecureBootExperimental(Host h)
-        {
-            return FeatureExperimental(h, "guefi-secureboot");
-        }
-
         public static bool FeatureDisabled(Host h, string featureName)
         {
             foreach (var feature in h.Connection.ResolveAll(h.features))
             {
                 if (feature.name_label.Equals(featureName, StringComparison.OrdinalIgnoreCase))
                     return !feature.enabled;
-            }
-            return false;
-        }
-
-        public static bool FeatureExperimental(Host h, string featureName)
-        {
-            foreach (var feature in h.Connection.ResolveAll(h.features))
-            {
-                if (feature.name_label.Equals(featureName, StringComparison.OrdinalIgnoreCase))
-                    return feature.enabled && feature.experimental;
             }
             return false;
         }
@@ -878,7 +863,7 @@ namespace XenAPI
         {
             var vms = from XenRef<VM> vmref in resident_VMs
                       let vm = Connection.Resolve(vmref)
-                      where vm != null && vm.is_a_real_vm() && !vm.IsHVM()
+                      where vm != null && vm.IsRealVm() && !vm.IsHVM()
                       select vmref;
 
             return vms.ToList();
@@ -888,7 +873,7 @@ namespace XenAPI
         {
             var vms = from XenRef<VM> vmref in resident_VMs
                       let vm = Connection.Resolve(vmref)
-                      where vm != null && vm.is_a_real_vm() && vm.IsHVM()
+                      where vm != null && vm.IsRealVm() && vm.IsHVM()
                       select vmref;
 
             return vms.ToList();
@@ -899,7 +884,7 @@ namespace XenAPI
         {
             var vms = from XenRef<VM> vmref in resident_VMs
                       let vm = Connection.Resolve(vmref)
-                      where vm != null && vm.is_a_real_vm()
+                      where vm != null && vm.IsRealVm()
                       select vmref;
 
             return vms.ToList();

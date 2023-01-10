@@ -115,7 +115,7 @@ namespace XenAdmin.Wizards.GenericPages
                 dataGridView1.Rows.Clear();
                 foreach (var vm in Pool.Connection.Cache.VMs)
                 {
-                    if (searchTextBox1.Matches(vm.Name()) && vm.is_a_real_vm() && vm.Show(Properties.Settings.Default.ShowHiddenVMs))
+                    if (searchTextBox1.Matches(vm.Name()) && vm.IsRealVm() && vm.Show(Properties.Settings.Default.ShowHiddenVMs))
 						dataGridView1.Rows.Add(new VMDataGridViewRow(SelectedVMs.Contains(vm), vm));
                 }
 
@@ -227,7 +227,7 @@ namespace XenAdmin.Wizards.GenericPages
                 foreach (var vm in Pool.Connection.Cache.VMs)
                 {
                     int index = 0;
-                    if (vm.is_a_real_vm() && vm.Show(Properties.Settings.Default.ShowHiddenVMs))
+                    if (vm.IsRealVm() && vm.Show(Properties.Settings.Default.ShowHiddenVMs))
                     {
                         bool selected = group != null && VMGroup<T>.GroupToVMs(group).Contains(new XenRef<VM>(vm.opaque_ref));
 						index = dataGridView1.Rows.Add(new VMDataGridViewRow(selected, vm));

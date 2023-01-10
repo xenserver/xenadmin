@@ -111,6 +111,7 @@
     <Compile Include="Alerts\Types\MessageAlert.cs" />
     <Compile Include="Alerts\Types\XenServerPatchAlert.cs" />
     <Compile Include="Alerts\Types\XenServerVersionAlert.cs" />
+    <Compile Include="Commands\VtpmCommand.cs" />
     <Compile Include="Controls\SmartScrollTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -302,6 +303,18 @@
     </Compile>
     <Compile Include="Dialogs\InstallCertificateDialog.Designer.cs">
       <DependentUpon>InstallCertificateDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\VtpmManagementPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dialogs\VtpmManagementPage.Designer.cs">
+      <DependentUpon>VtpmManagementPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\VtmpManagementDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\VtmpManagementDialog.Designer.cs">
+      <DependentUpon>VtmpManagementDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\OptionsPages\ConfirmationOptionsPage.cs">
       <SubType>UserControl</SubType>
@@ -1808,6 +1821,28 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\InstallCertificateDialog.zh-CN.resx">
       <DependentUpon>InstallCertificateDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\VtpmManagementPage.ja.resx">
+      <DependentUpon>VtpmManagementPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\VtpmManagementPage.resx">
+      <DependentUpon>VtpmManagementPage.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\VtpmManagementPage.zh-CN.resx">
+      <DependentUpon>VtpmManagementPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\VtmpManagementDialog.ja.resx">
+      <DependentUpon>VtmpManagementDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\VtmpManagementDialog.resx">
+      <DependentUpon>VtmpManagementDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\VtmpManagementDialog.zh-CN.resx">
+      <DependentUpon>VtmpManagementDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\OptionsPages\ConfirmationOptionsPage.ja.resx">
       <DependentUpon>ConfirmationOptionsPage.cs</DependentUpon>
@@ -4322,6 +4357,7 @@
     <None Include="Images\000_error_h32bit_32.png" />
     <None Include="Images\000_AddIPAddress_h32bit_16.png" />
     <None Include="Images\000_ConfigureIPAddresses_h32bit_16.png" />
+    <None Include="Images\000_Abort_gray_h32bit_16.png" />
     <Content Include="Images\000_AddSite_h32bit_16.png" />
     <Content Include="Images\000_FilterDates_h32bit_16.png" />
     <Content Include="Images\000_FilterServer_h32bit_16.png" />
@@ -4572,6 +4608,7 @@
     <Content Include="Images\tools_uptodate_16x.png" />
     <None Include="Images\tree_plus.png" />
     <None Include="Images\tree_minus.png" />
+    <None Include="Images\tpm.png" />
     <Content Include="Images\tshadowdown.png" />
     <Content Include="Images\tshadowdownleft.png" />
     <Content Include="Images\tshadowdownright.png" />

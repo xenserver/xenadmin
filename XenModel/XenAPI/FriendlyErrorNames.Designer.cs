@@ -5484,6 +5484,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Guidance for the update has changed.
+        /// </summary>
+        public static string UPDATE_GUIDANCE_CHANGED {
+            get {
+                return ResourceManager.GetString("UPDATE_GUIDANCE_CHANGED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The specified update has been applied and cannot be destroyed..
         /// </summary>
         public static string UPDATE_IS_APPLIED {
@@ -6722,6 +6731,15 @@ namespace XenAPI {
         public static string VMSS_HAS_VM {
             get {
                 return ResourceManager.GetString("VMSS_HAS_VM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The VM cannot be associated with more VTPMs..
+        /// </summary>
+        public static string VTPM_MAX_AMOUNT_REACHED {
+            get {
+                return ResourceManager.GetString("VTPM_MAX_AMOUNT_REACHED", resourceCulture);
             }
         }
         

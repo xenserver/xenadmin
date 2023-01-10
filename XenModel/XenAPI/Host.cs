@@ -293,10 +293,10 @@ namespace XenAPI
             enabled = (bool)proxy.enabled;
             software_version = proxy.software_version == null ? null : Maps.convert_from_proxy_string_string(proxy.software_version);
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
-            capabilities = proxy.capabilities == null ? new string[] {} : (string [])proxy.capabilities;
+            capabilities = proxy.capabilities == null ? new string[] {} : (string[])proxy.capabilities;
             cpu_configuration = proxy.cpu_configuration == null ? null : Maps.convert_from_proxy_string_string(proxy.cpu_configuration);
             sched_policy = proxy.sched_policy == null ? null : proxy.sched_policy;
-            supported_bootloaders = proxy.supported_bootloaders == null ? new string[] {} : (string [])proxy.supported_bootloaders;
+            supported_bootloaders = proxy.supported_bootloaders == null ? new string[] {} : (string[])proxy.supported_bootloaders;
             resident_VMs = proxy.resident_VMs == null ? null : XenRef<VM>.Create(proxy.resident_VMs);
             logging = proxy.logging == null ? null : Maps.convert_from_proxy_string_string(proxy.logging);
             PIFs = proxy.PIFs == null ? null : XenRef<PIF>.Create(proxy.PIFs);
@@ -312,10 +312,10 @@ namespace XenAPI
             address = proxy.address == null ? null : proxy.address;
             metrics = proxy.metrics == null ? null : XenRef<Host_metrics>.Create(proxy.metrics);
             license_params = proxy.license_params == null ? null : Maps.convert_from_proxy_string_string(proxy.license_params);
-            ha_statefiles = proxy.ha_statefiles == null ? new string[] {} : (string [])proxy.ha_statefiles;
-            ha_network_peers = proxy.ha_network_peers == null ? new string[] {} : (string [])proxy.ha_network_peers;
+            ha_statefiles = proxy.ha_statefiles == null ? new string[] {} : (string[])proxy.ha_statefiles;
+            ha_network_peers = proxy.ha_network_peers == null ? new string[] {} : (string[])proxy.ha_network_peers;
             blobs = proxy.blobs == null ? null : Maps.convert_from_proxy_string_XenRefBlob(proxy.blobs);
-            tags = proxy.tags == null ? new string[] {} : (string [])proxy.tags;
+            tags = proxy.tags == null ? new string[] {} : (string[])proxy.tags;
             external_auth_type = proxy.external_auth_type == null ? null : proxy.external_auth_type;
             external_auth_service_name = proxy.external_auth_service_name == null ? null : proxy.external_auth_service_name;
             external_auth_configuration = proxy.external_auth_configuration == null ? null : Maps.convert_from_proxy_string_string(proxy.external_auth_configuration);
@@ -340,7 +340,7 @@ namespace XenAPI
             multipathing = (bool)proxy.multipathing;
             uefi_certificates = proxy.uefi_certificates == null ? null : proxy.uefi_certificates;
             certificates = proxy.certificates == null ? null : XenRef<Certificate>.Create(proxy.certificates);
-            editions = proxy.editions == null ? new string[] {} : (string [])proxy.editions;
+            editions = proxy.editions == null ? new string[] {} : (string[])proxy.editions;
             pending_guidances = proxy.pending_guidances == null ? null : Helper.StringArrayToEnumList<update_guidances>(proxy.pending_guidances);
             tls_verification_enabled = (bool)proxy.tls_verification_enabled;
             last_software_update = proxy.last_software_update;
@@ -942,7 +942,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.host_get_capabilities(session.opaque_ref, _host);
             else
-                return (string [])session.XmlRpcProxy.host_get_capabilities(session.opaque_ref, _host ?? "").parse();
+                return (string[])session.XmlRpcProxy.host_get_capabilities(session.opaque_ref, _host ?? "").parse();
         }
 
         /// <summary>
@@ -984,7 +984,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.host_get_supported_bootloaders(session.opaque_ref, _host);
             else
-                return (string [])session.XmlRpcProxy.host_get_supported_bootloaders(session.opaque_ref, _host ?? "").parse();
+                return (string[])session.XmlRpcProxy.host_get_supported_bootloaders(session.opaque_ref, _host ?? "").parse();
         }
 
         /// <summary>
@@ -1210,7 +1210,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.host_get_ha_statefiles(session.opaque_ref, _host);
             else
-                return (string [])session.XmlRpcProxy.host_get_ha_statefiles(session.opaque_ref, _host ?? "").parse();
+                return (string[])session.XmlRpcProxy.host_get_ha_statefiles(session.opaque_ref, _host ?? "").parse();
         }
 
         /// <summary>
@@ -1224,7 +1224,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.host_get_ha_network_peers(session.opaque_ref, _host);
             else
-                return (string [])session.XmlRpcProxy.host_get_ha_network_peers(session.opaque_ref, _host ?? "").parse();
+                return (string[])session.XmlRpcProxy.host_get_ha_network_peers(session.opaque_ref, _host ?? "").parse();
         }
 
         /// <summary>
@@ -1252,7 +1252,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.host_get_tags(session.opaque_ref, _host);
             else
-                return (string [])session.XmlRpcProxy.host_get_tags(session.opaque_ref, _host ?? "").parse();
+                return (string[])session.XmlRpcProxy.host_get_tags(session.opaque_ref, _host ?? "").parse();
         }
 
         /// <summary>
@@ -1606,7 +1606,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.host_get_editions(session.opaque_ref, _host);
             else
-                return (string [])session.XmlRpcProxy.host_get_editions(session.opaque_ref, _host ?? "").parse();
+                return (string[])session.XmlRpcProxy.host_get_editions(session.opaque_ref, _host ?? "").parse();
         }
 
         /// <summary>
@@ -2253,7 +2253,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.host_list_methods(session.opaque_ref);
             else
-                return (string [])session.XmlRpcProxy.host_list_methods(session.opaque_ref).parse();
+                return (string[])session.XmlRpcProxy.host_list_methods(session.opaque_ref).parse();
         }
 
         /// <summary>
@@ -3733,12 +3733,12 @@ namespace XenAPI
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
         /// <param name="_hash">The hash of updateinfo to be applied which is returned by previous pool.sync_udpates</param>
-        public static string[] apply_updates(Session session, string _host, string _hash)
+        public static string[][] apply_updates(Session session, string _host, string _hash)
         {
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.host_apply_updates(session.opaque_ref, _host, _hash);
             else
-                return (string [])session.XmlRpcProxy.host_apply_updates(session.opaque_ref, _host ?? "", _hash ?? "").parse();
+                return (string[][])session.XmlRpcProxy.host_apply_updates(session.opaque_ref, _host ?? "", _hash ?? "").parse();
         }
 
         /// <summary>

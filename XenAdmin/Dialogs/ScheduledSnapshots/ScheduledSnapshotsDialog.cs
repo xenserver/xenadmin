@@ -133,7 +133,7 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             private void RefreshRow()
             {
                 PolicyName = Policy.Name();
-                PolicyVmCount = Policy.VMs.FindAll(vm => Policy.Connection.Resolve(vm).is_a_real_vm()).Count;
+                PolicyVmCount = Policy.VMs.FindAll(vm => Policy.Connection.Resolve(vm).IsRealVm()).Count;
                 PolicyStatus = Policy.enabled ? Messages.ENABLED : Messages.DISABLED;
 
                 //the policy is in server's local time zone
@@ -178,7 +178,7 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
 
             foreach (var vm in pool.Connection.Cache.VMs)
             {
-                if (vm.is_a_real_vm() && vm.Show(Properties.Settings.Default.ShowHiddenVMs))
+                if (vm.IsRealVm() && vm.Show(Properties.Settings.Default.ShowHiddenVMs))
                 {
                     realVMs++;
                     if (vm.Connection.Resolve(vm.snapshot_schedule) != null)

@@ -77,6 +77,8 @@ namespace XenAdmin.TabPages
             this.panelGeneral = new System.Windows.Forms.Panel();
             this.pdSectionGeneral = new XenAdmin.Controls.PDSection();
             this.tableLayoutPanelButtons = new System.Windows.Forms.TableLayoutPanel();
+            this.panel1DeviceSecurity = new System.Windows.Forms.Panel();
+            this.pdSectionDeviceSecurity = new XenAdmin.Controls.PDSection();
             this.pageContainerPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panelReadCaching.SuspendLayout();
@@ -100,6 +102,7 @@ namespace XenAdmin.TabPages
             this.panelCertificate.SuspendLayout();
             this.panelGeneral.SuspendLayout();
             this.tableLayoutPanelButtons.SuspendLayout();
+            this.panel1DeviceSecurity.SuspendLayout();
             this.SuspendLayout();
             // 
             // pageContainerPanel
@@ -133,6 +136,7 @@ namespace XenAdmin.TabPages
             // 
             resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Controls.Add(this.panelReadCaching);
+            this.panel2.Controls.Add(this.panel1DeviceSecurity);
             this.panel2.Controls.Add(this.panelDockerInfo);
             this.panel2.Controls.Add(this.panelDockerVersion);
             this.panel2.Controls.Add(this.panelStorageLinkSystemCapabilities);
@@ -423,6 +427,19 @@ namespace XenAdmin.TabPages
             this.tableLayoutPanelButtons.Controls.Add(this.linkLabelExpand, 4, 0);
             this.tableLayoutPanelButtons.Name = "tableLayoutPanelButtons";
             // 
+            // panel1DeviceSecurity
+            // 
+            resources.ApplyResources(this.panel1DeviceSecurity, "panel1DeviceSecurity");
+            this.panel1DeviceSecurity.Controls.Add(this.pdSectionDeviceSecurity);
+            this.panel1DeviceSecurity.Name = "panel1DeviceSecurity";
+            // 
+            // pdSectionDeviceSecurity
+            // 
+            this.pdSectionDeviceSecurity.BackColor = System.Drawing.Color.Gainsboro;
+            resources.ApplyResources(this.pdSectionDeviceSecurity, "pdSectionDeviceSecurity");
+            this.pdSectionDeviceSecurity.Name = "pdSectionDeviceSecurity";
+            this.pdSectionDeviceSecurity.ShowCellToolTips = false;
+            // 
             // GeneralTabPage
             // 
             resources.ApplyResources(this, "$this");
@@ -455,6 +472,7 @@ namespace XenAdmin.TabPages
             this.panelGeneral.ResumeLayout(false);
             this.tableLayoutPanelButtons.ResumeLayout(false);
             this.tableLayoutPanelButtons.PerformLayout();
+            this.panel1DeviceSecurity.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -507,5 +525,7 @@ namespace XenAdmin.TabPages
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelButtons;
         private System.Windows.Forms.Panel panelCertificate;
         private Controls.PDSection pdSectionCertificate;
+        private System.Windows.Forms.Panel panel1DeviceSecurity;
+        private Controls.PDSection pdSectionDeviceSecurity;
     }
 }

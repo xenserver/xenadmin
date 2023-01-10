@@ -240,6 +240,9 @@
   <data name="Description-host.system_status-vncterm" xml:space="preserve">
     <value>Crash dumps files from the VNCTerm daemon</value>
   </data>
+  <data name="Description-host.system_status-vtpm" xml:space="preserve">
+    <value>vTPM's root CAs and other related debug information</value>
+  </data>
   <data name="Description-host.system_status-wlb" xml:space="preserve">
     <value>Logs and status information from the WLB server monitoring this pool.</value>
   </data>
@@ -527,6 +530,9 @@
   </data>
   <data name="Label-host.system_status-vncterm" xml:space="preserve">
     <value>VNCTerm crash dumps</value>
+  </data>
+  <data name="Label-host.system_status-vtpm" xml:space="preserve">
+    <value>vTPM</value>
   </data>
   <data name="Label-host.system_status-wlb" xml:space="preserve">
     <value>Workload Balancing status</value>

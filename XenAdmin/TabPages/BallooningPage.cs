@@ -126,7 +126,7 @@ namespace XenAdmin.TabPages
 
         private bool VMWanted(VM vm, Host host)
         {
-            return vm.is_a_real_vm() && vm.Show(Properties.Settings.Default.ShowHiddenVMs) && vm.Home() == host;
+            return vm.IsRealVm() && vm.Show(Properties.Settings.Default.ShowHiddenVMs) && vm.Home() == host;
         }
 
         private readonly CollectionChangeEventHandler VM_CollectionChangedWithInvoke;
@@ -261,7 +261,7 @@ namespace XenAdmin.TabPages
         {
             // Only observe real VMs (but templates come through here too because
             // they change into real VMs during VM creation).
-            if (!((VM)sender).is_a_real_vm())
+            if (!((VM)sender).IsRealVm())
                 return;
 
             // These are used by MainWindow.VMHome() to determine which host the VM belongs to

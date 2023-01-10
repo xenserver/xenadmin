@@ -536,7 +536,7 @@ namespace XenAdmin.Dialogs
             }
         }
 
-        private void PropertiesDialog_Moved(object sender, EventArgs e)
+        private void PropertiesDialog_Move(object sender, EventArgs e)
         {
             HideToolTips();
         }

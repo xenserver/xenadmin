@@ -174,7 +174,7 @@ namespace XenAPI
             runtime_properties = proxy.runtime_properties == null ? null : Maps.convert_from_proxy_string_string(proxy.runtime_properties);
             qos_algorithm_type = proxy.qos_algorithm_type == null ? null : proxy.qos_algorithm_type;
             qos_algorithm_params = proxy.qos_algorithm_params == null ? null : Maps.convert_from_proxy_string_string(proxy.qos_algorithm_params);
-            qos_supported_algorithms = proxy.qos_supported_algorithms == null ? new string[] {} : (string [])proxy.qos_supported_algorithms;
+            qos_supported_algorithms = proxy.qos_supported_algorithms == null ? new string[] {} : (string[])proxy.qos_supported_algorithms;
             metrics = proxy.metrics == null ? null : XenRef<VBD_metrics>.Create(proxy.metrics);
         }
 
@@ -714,7 +714,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.vbd_get_qos_supported_algorithms(session.opaque_ref, _vbd);
             else
-                return (string [])session.XmlRpcProxy.vbd_get_qos_supported_algorithms(session.opaque_ref, _vbd ?? "").parse();
+                return (string[])session.XmlRpcProxy.vbd_get_qos_supported_algorithms(session.opaque_ref, _vbd ?? "").parse();
         }
 
         /// <summary>

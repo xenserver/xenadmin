@@ -63,11 +63,9 @@ namespace XenAdmin.Dialogs
             TabTitle.Font = titleFont;
         }
 
-        public VerticalTabs.IVerticalTab[] Tabs =>
-            verticalTabs.Items.Cast<VerticalTabs.IVerticalTab>().ToArray();
+        public VerticalTabs.IVerticalTab[] Tabs => verticalTabs.Items.Cast<VerticalTabs.IVerticalTab>().ToArray();
 
-        public VerticalTabs.IVerticalTab SelectedTab =>
-            verticalTabs.SelectedItem as VerticalTabs.IVerticalTab;
+        public VerticalTabs.IVerticalTab SelectedTab => verticalTabs.SelectedItem as VerticalTabs.IVerticalTab;
 
         protected void SelectPage(VerticalTabs.IVerticalTab page)
         {
@@ -79,34 +77,27 @@ namespace XenAdmin.Dialogs
 
         private void verticalTabs_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ListBox listBox = sender as ListBox;
-            if (sender == null)
-                return;
+            if (sender is ListBox listBox &&
+                listBox.SelectedItem is VerticalTabs.IVerticalTab editPage &&
+                editPage is Control control)
+            {
+                TabImage.Image = editPage.Image;
+                TabTitle.Text = GetTabTitle(editPage);
 
-            VerticalTabs.IVerticalTab editPage = listBox.SelectedItem as VerticalTabs.IVerticalTab;
-            if (editPage == null)
-                return;
+                control.Show();
+                control.BringToFront();
 
-            Control control = editPage as Control;
-            if (control == null)
-                return;
-
-            TabImage.Image = editPage.Image;
-            TabTitle.Text = GetTabTitle(editPage);
-
-            control.Show();
-            control.BringToFront();
-
-            foreach(Control other in ContentPanel.Controls)
-                if (other != control)
+                foreach (Control other in ContentPanel.Controls)
                 {
-                    other.Hide();
+                    if (other != control)
+                        other.Hide();
                 }
+            }
         }
 
         protected virtual string GetTabTitle(VerticalTabs.IVerticalTab verticalTab)
         {
-            return verticalTab != null ? verticalTab.Text : String.Empty;
+            return verticalTab != null ? verticalTab.Text : string.Empty;
         }
 
         /// <summary>
@@ -119,8 +110,7 @@ namespace XenAdmin.Dialogs
             if (!DesignMode)
                 return;
 
-            VerticalTabs.IVerticalTab verticalTab = e.Control as VerticalTabs.IVerticalTab;
-            if (verticalTab == null)
+            if (!(e.Control is VerticalTabs.IVerticalTab verticalTab))
                 return;
 
             foreach (VerticalTabs.IVerticalTab vt in verticalTabs.Items)
@@ -138,8 +128,7 @@ namespace XenAdmin.Dialogs
             if (!DesignMode)
                 return;
 
-            VerticalTabs.IVerticalTab verticalTab = e.Control as VerticalTabs.IVerticalTab;
-            if (verticalTab == null)
+            if (!(e.Control is VerticalTabs.IVerticalTab verticalTab))
                 return;
 
             verticalTabs.Items.Remove(verticalTab);

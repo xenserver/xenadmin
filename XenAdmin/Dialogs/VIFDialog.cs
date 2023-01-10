@@ -308,7 +308,7 @@ namespace XenAdmin.Dialogs
                     foreach (VIF vif in xenConnection.Cache.VIFs)
                     {
                         var vm = xenConnection.Resolve(vif.VM);
-                        if (vif != ExistingVif && vif.MAC == SelectedMac && vm != null && vm.is_a_real_vm())
+                        if (vif != ExistingVif && vif.MAC == SelectedMac && vm != null && vm.IsRealVm())
                         {
                             using (var dlg = new WarningDialog(string.Format(Messages.PROBLEM_MAC_ADDRESS_IS_DUPLICATE, SelectedMac, vm.NameWithLocation()),
                                 ThreeButtonDialog.ButtonYes,

@@ -76,6 +76,7 @@ namespace XenAdmin.Dialogs
             resources.ApplyResources(this, "$this");
             this.Name = "PropertiesDialog";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.PropertiesDialog_FormClosed);
+            this.Move += new System.EventHandler(this.PropertiesDialog_Move);
             this.splitContainer.Panel1.ResumeLayout(false);
             this.splitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();

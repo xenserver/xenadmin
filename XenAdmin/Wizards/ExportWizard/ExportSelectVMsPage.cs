@@ -45,67 +45,68 @@ using XenCenterLib;
 
 namespace XenAdmin.Wizards.ExportWizard
 {
-	/// <summary>
-	/// Class representing the page of the ExportAppliance wizard where the user specifies
-	/// the VMs to be included in the exported appliance
-	/// </summary>
-	internal partial class ExportSelectVMsPage : XenTabPage
-	{
-		#region Nested classes
+    /// <summary>
+    /// Class representing the page of the ExportAppliance wizard where the user specifies
+    /// the VMs to be included in the exported appliance
+    /// </summary>
+    internal partial class ExportSelectVMsPage : XenTabPage
+    {
+        #region Nested classes
 
-		private static class NativeMethods
-		{
-			[DllImport("Kernel32", SetLastError = true, CharSet = CharSet.Unicode)]
-			internal static extern bool GetDiskFreeSpaceEx(string lpszPath, ref long lpFreeBytesAvailable, ref long lpTotalNumberOfBytes, ref long lpTotalNumberOfFreeBytes);
-		}
+        private static class NativeMethods
+        {
+            [DllImport("Kernel32", SetLastError = true, CharSet = CharSet.Unicode)]
+            internal static extern bool GetDiskFreeSpaceEx(string lpszPath, ref long lpFreeBytesAvailable, ref long lpTotalNumberOfBytes, ref long lpTotalNumberOfFreeBytes);
+        }
 
-		#endregion
+        #endregion
 
         private bool m_buttonNextEnabled;
 
-		public ExportSelectVMsPage()
-		{
-			InitializeComponent();
-			m_tlpWarning.Visible = false;
+        public ExportSelectVMsPage()
+        {
+            InitializeComponent();
+            m_tlpInfo.Visible = false;
+            _tlpWarning.Visible = false;
             m_ctrlError.HideError();
-		}
+        }
 
-		#region Accessors
+        #region Accessors
 
-		/// <summary>
-		/// Gets a list of the VMs that will be included in the exported appliance
-		/// </summary>
+        /// <summary>
+        /// Gets a list of the VMs that will be included in the exported appliance
+        /// </summary>
         public List<VM> VMsToExport { get; } = new List<VM>();
 
-		public string ApplianceDirectory { get; set; }
+        public string ApplianceDirectory { get; set; }
 
-		/// <summary>
-		/// The items selected on the main window treeview when the wizard was launched.
-		/// These determine the VMs selected by default.
-		/// </summary>
-		public SelectedItemCollection SelectedItems { private get; set; }
+        /// <summary>
+        /// The items selected on the main window treeview when the wizard was launched.
+        /// These determine the VMs selected by default.
+        /// </summary>
+        public SelectedItemCollection SelectedItems { private get; set; }
 
-		public bool ExportAsXva { private get; set; }
+        public bool ExportAsXva { private get; set; }
 
-		#endregion
+        #endregion
 
-		#region Base class (XenTabPage) overrides
+        #region Base class (XenTabPage) overrides
 
-		/// <summary>
-		/// Gets the page's title (headline)
-		/// </summary>
-		public override string PageTitle => ExportAsXva
+        /// <summary>
+        /// Gets the page's title (headline)
+        /// </summary>
+        public override string PageTitle => ExportAsXva
             ? Messages.EXPORT_SELECTVMS_PAGE_TITLE_XVA
             : Messages.EXPORT_SELECTVMS_PAGE_TITLE_OVF;
 
-		/// <summary>
-		/// Gets the page's label in the (left hand side) wizard progress panel
-		/// </summary>
-		public override string Text => Messages.EXPORT_SELECTVMS_PAGE_TEXT;
+        /// <summary>
+        /// Gets the page's label in the (left hand side) wizard progress panel
+        /// </summary>
+        public override string Text => Messages.EXPORT_SELECTVMS_PAGE_TEXT;
 
-		/// <summary>
-		/// Gets the value by which the help files section for this page is identified
-		/// </summary>
+        /// <summary>
+        /// Gets the value by which the help files section for this page is identified
+        /// </summary>
         public override string HelpID => ExportAsXva ? "SelectVMsXva" : "SelectVMsOvf";
 
         protected override bool ImplementsIsDirty()
@@ -114,62 +115,64 @@ namespace XenAdmin.Wizards.ExportWizard
         }
 
         protected override void PageLoadedCore(PageLoadedDirection direction)
-		{
+        {
             m_ctrlError.HideError();
-			EnableButtons();
-		}
+            EnableButtons();
+        }
 
         protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
-		{
-			if (direction == PageLoadedDirection.Forward && IsDirty)
-					cancel = !PerformCheck(CheckDiskSizeForTransfer, CheckSpaceRequirements);
-		}
+        {
+            if (direction == PageLoadedDirection.Forward && IsDirty)
+                cancel = !PerformCheck(CheckDiskSizeForTransfer, CheckSpaceRequirements);
+        }
 
         public override void PopulatePage()
-		{
-			var pool = Helpers.GetPoolOfOne(Connection);
+        {
+            var pool = Helpers.GetPoolOfOne(Connection);
             label2.Text = string.Format(Helpers.IsPool(pool.Connection) ? Messages.VMS_IN_POOL : Messages.VMS_IN_SERVER,
-                                                pool.Name().Ellipsise(60));
-			VMsToExport.Clear();
+                pool.Name().Ellipsise(60));
+            VMsToExport.Clear();
 
-			try
-			{
-				m_dataGridView.SuspendLayout();
-				m_dataGridView.Rows.Clear();
+            try
+            {
+                m_dataGridView.SuspendLayout();
+                m_dataGridView.Rows.Clear();
 
-				var applianceVMs = new List<XenRef<VM>>();
+                var applianceVMs = new List<XenRef<VM>>();
                 if (SelectedItems != null && SelectedItems.FirstIs<VM_appliance>())
-					applianceVMs.AddRange(((VM_appliance)SelectedItems.FirstAsXenObject).VMs);
+                    applianceVMs.AddRange(((VM_appliance)SelectedItems.FirstAsXenObject).VMs);
 
-				foreach (var vm in Connection.Cache.VMs.Where(vm => IsVmExportable(vm) && MatchesSearchText(vm)))
-				{
-					VM curVm = vm;//closure below
-					bool selected = SelectedItems != null
-					                && (SelectedItems.AsXenObjects().Contains(vm) || applianceVMs.FirstOrDefault(xenref => xenref.opaque_ref == curVm.opaque_ref) != null);
+                foreach (var vm in Connection.Cache.VMs.Where(vm => IsVmExportable(vm) && MatchesSearchText(vm)))
+                {
+                    VM curVm = vm; //closure below
+                    bool selected = SelectedItems != null
+                                    && (SelectedItems.AsXenObjects().Contains(vm) || applianceVMs.FirstOrDefault(xenref => xenref.opaque_ref == curVm.opaque_ref) != null);
 
-					m_dataGridView.Rows.Add(GetDataGridViewRow(vm, selected));
+                    m_dataGridView.Rows.Add(GetDataGridViewRow(vm, selected));
 
-					if (selected)
-						VMsToExport.Add(vm);
-				}
-				m_dataGridView.Sort(columnTick, ListSortDirection.Descending);
-			}
-			finally
-			{
-				m_dataGridView.ResumeLayout();
-			}
-			UpdateCounterLabel();
-			EnableButtons();
-		}
+                    if (selected)
+                        VMsToExport.Add(vm);
+                }
+
+                m_dataGridView.Sort(columnTick, ListSortDirection.Descending);
+            }
+            finally
+            {
+                m_dataGridView.ResumeLayout();
+            }
+
+            UpdateCounterLabel();
+            EnableButtons();
+        }
 
         public override bool EnableNext()
         {
             return m_buttonNextEnabled;
         }
 
-		#endregion
+        #endregion
 
-		#region Private methods
+        #region Private methods
 
         /// <summary>
         /// Performs certain checks on the page's input data and shows/hides an error accordingly
@@ -181,44 +184,44 @@ namespace XenAdmin.Wizards.ExportWizard
             OnPageUpdated();
             return m_buttonNextEnabled;
         }
-		
-		private bool IsVmExportable(VM vm)
-		{
-			if (!vm.is_a_real_vm())
-				return false;
 
-			if (!vm.Show(Properties.Settings.Default.ShowHiddenVMs))
-				return false;
+        private bool IsVmExportable(VM vm)
+        {
+            if (!vm.IsRealVm())
+                return false;
 
-			if (vm.power_state != vm_power_state.Halted && vm.power_state != vm_power_state.Suspended)
-				return false;
+            if (!vm.Show(Properties.Settings.Default.ShowHiddenVMs))
+                return false;
 
-			if (vm.Locked)
-				return false;
+            if (vm.power_state != vm_power_state.Halted && vm.power_state != vm_power_state.Suspended)
+                return false;
 
-			return vm.allowed_operations != null && vm.allowed_operations.Contains(vm_operations.export);
-		}
+            if (vm.Locked)
+                return false;
 
-		private bool MatchesSearchText(VM vm)
-		{
-			return m_searchTextBox.Matches(vm.Name());
-		}
+            return vm.allowed_operations != null && vm.allowed_operations.Contains(vm_operations.export);
+        }
 
-		private DataGridViewRow GetDataGridViewRow(VM vm, bool selected)
-		{
-			var row = new DataGridViewRow {Tag = vm};
-			var vmAppliance = Connection.Resolve(vm.appliance);
+        private bool MatchesSearchText(VM vm)
+        {
+            return m_searchTextBox.Matches(vm.Name());
+        }
+
+        private DataGridViewRow GetDataGridViewRow(VM vm, bool selected)
+        {
+            var row = new DataGridViewRow {Tag = vm};
+            var vmAppliance = Connection.Resolve(vm.appliance);
             long totalVmSize = GetTotalVmSize(vm);
-			row.Cells.AddRange(new DataGridViewCell[]
-			                   	{
-			                   		new DataGridViewCheckBoxCell {Value = selected},
-			                   		new DataGridViewTextBoxCell {Value = vm.Name()},
-			                   		new DataGridViewTextBoxCell {Value = vm.Description()},
-			                   		new DataGridViewTextBoxCell {Value = Util.DiskSizeString(totalVmSize), Tag = totalVmSize},
-			                   		new DataGridViewTextBoxCell {Value = vmAppliance == null ? Messages.NONE : vmAppliance.Name()}
-			                   	});
-			return row;
-		}
+            row.Cells.AddRange(new DataGridViewCell[]
+            {
+                new DataGridViewCheckBoxCell {Value = selected},
+                new DataGridViewTextBoxCell {Value = vm.Name()},
+                new DataGridViewTextBoxCell {Value = vm.Description()},
+                new DataGridViewTextBoxCell {Value = Util.DiskSizeString(totalVmSize), Tag = totalVmSize},
+                new DataGridViewTextBoxCell {Value = vmAppliance == null ? Messages.NONE : vmAppliance.Name()}
+            });
+            return row;
+        }
 
         private long GetTotalVmSize(VM vm)
         {
@@ -243,165 +246,168 @@ namespace XenAdmin.Wizards.ExportWizard
             return virtualSize;
         }
 
-	    private bool CheckSpaceRequirements(out string errorMsg)
-		{
-			errorMsg = string.Empty;
-			long spaceNeeded = 0;
+        private bool CheckSpaceRequirements(out string errorMsg)
+        {
+            errorMsg = string.Empty;
+            long spaceNeeded = 0;
 
-			foreach (DataGridViewRow row in m_dataGridView.Rows)
-			{
-				if ((bool)row.Cells[0].Value)
-					spaceNeeded += (long)row.Cells[3].Tag;
-			}
+            foreach (DataGridViewRow row in m_dataGridView.Rows)
+            {
+                if ((bool)row.Cells[0].Value)
+                    spaceNeeded += (long)row.Cells[3].Tag;
+            }
 
-			long availableSpace = GetFreeSpace(ApplianceDirectory);
-			if (spaceNeeded > availableSpace)
-			{
-			    errorMsg = String.Format(Messages.EXPORT_SELECTVMS_PAGE_ERROR_TARGET_SPACE_NOT_ENOUGH, Util.DiskSizeString(availableSpace), Util.DiskSizeString(spaceNeeded));
+            long availableSpace = GetFreeSpace(ApplianceDirectory);
+            if (spaceNeeded > availableSpace)
+            {
+                errorMsg = String.Format(Messages.EXPORT_SELECTVMS_PAGE_ERROR_TARGET_SPACE_NOT_ENOUGH, Util.DiskSizeString(availableSpace), Util.DiskSizeString(spaceNeeded));
 
-				return false;
-			}
+                return false;
+            }
 
-			return true;
-		}
+            return true;
+        }
 
-	    private bool CheckDiskSizeForTransfer(out string errorMsg)
-	    {
-	        errorMsg = string.Empty;
-	        var maxDiskSizeString = Util.DiskSizeString(SR.DISK_MAX_SIZE, 0);
+        private bool CheckDiskSizeForTransfer(out string errorMsg)
+        {
+            errorMsg = string.Empty;
+            var maxDiskSizeString = Util.DiskSizeString(SR.DISK_MAX_SIZE, 0);
 
-	        foreach (VM vm in VMsToExport)
-	        {
-	            if (!ExportAsXva && GetTotalVmSize(vm) > SR.DISK_MAX_SIZE)
-	            {
+            foreach (VM vm in VMsToExport)
+            {
+                if (!ExportAsXva && GetTotalVmSize(vm) > SR.DISK_MAX_SIZE)
+                {
                     errorMsg = string.Format(Messages.EXPORT_ERROR_EXCEEDS_MAX_SIZE_VDI_OVA_OVF, maxDiskSizeString);
-	                return false;
-	            }
-	        }
+                    return false;
+                }
+            }
 
-	        return true;
-	    }
+            return true;
+        }
 
-		//TODO: improve method
-		private long GetFreeSpace(string drivename)
-		{
-			if (!drivename.EndsWith(@"\"))
-				drivename += @"\";
+        //TODO: improve method
+        private long GetFreeSpace(string drivename)
+        {
+            if (!drivename.EndsWith(@"\"))
+                drivename += @"\";
 
-			long space = 0;
-			long lpTotalNumberOfBytes = 0;
-			long lpTotalNumberOfFreeBytes = 0;
+            long space = 0;
+            long lpTotalNumberOfBytes = 0;
+            long lpTotalNumberOfFreeBytes = 0;
 
-			if (NativeMethods.GetDiskFreeSpaceEx(drivename, ref space, ref lpTotalNumberOfBytes, ref lpTotalNumberOfFreeBytes))
-				return space;
+            if (NativeMethods.GetDiskFreeSpaceEx(drivename, ref space, ref lpTotalNumberOfBytes, ref lpTotalNumberOfFreeBytes))
+                return space;
 
-			return -1;
-		}
+            return -1;
+        }
 
-		private void EnableButtons()
-		{
-			var count = VMsToExport.Count;
-			m_tlpWarning.Visible = ExportAsXva && count > 1;
+        private void EnableButtons()
+        {
+            var count = VMsToExport.Count;
+            m_tlpInfo.Visible = ExportAsXva && count > 1;
+            _tlpWarning.Visible = !Helpers.FeatureForbidden(Connection, Host.RestrictVtpm) &&
+                                  Helpers.XapiEqualOrGreater_22_26_0(Connection) &&
+                                  VMsToExport.Any(v => v.VTPMs.Count > 0);
             m_buttonNextEnabled = ExportAsXva ? count == 1 : count > 0;
-		    m_buttonClearAll.Enabled = count > 0;
-		    m_buttonSelectAll.Enabled = count < m_dataGridView.RowCount;
+            m_buttonClearAll.Enabled = count > 0;
+            m_buttonSelectAll.Enabled = count < m_dataGridView.RowCount;
             OnPageUpdated();
-		}
+        }
 
-		private void UpdateCounterLabel()
-		{
-			var count = VMsToExport.Count;
-			m_labelCounter.Text = count == 1 ? Messages.ONE_VM_SELECTED : string.Format(Messages.MOREONE_VM_SELECTED, count);
-		}
+        private void UpdateCounterLabel()
+        {
+            var count = VMsToExport.Count;
+            m_labelCounter.Text = count == 1 ? Messages.ONE_VM_SELECTED : string.Format(Messages.MOREONE_VM_SELECTED, count);
+        }
 
-		#endregion
+        #endregion
 
-		#region Control event handlers
+        #region Control event handlers
 
-		private void m_buttonSelectAll_Click(object sender, EventArgs e)
-		{
-			foreach (DataGridViewRow dataGridViewRow in m_dataGridView.Rows)
-			{
-				dataGridViewRow.Cells[0].Value = true;
+        private void m_buttonSelectAll_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow dataGridViewRow in m_dataGridView.Rows)
+            {
+                dataGridViewRow.Cells[0].Value = true;
 
                 if (dataGridViewRow.Tag is VM vm && !VMsToExport.Contains(vm))
-					VMsToExport.Add(vm);
-			}
-		}
+                    VMsToExport.Add(vm);
+            }
+        }
 
-		private void m_buttonClearAll_Click(object sender, EventArgs e)
-		{
-			//clear all visible ones
+        private void m_buttonClearAll_Click(object sender, EventArgs e)
+        {
+            //clear all visible ones
 
-			foreach (DataGridViewRow dataGridViewRow in m_dataGridView.Rows)
-			{
-				dataGridViewRow.Cells[0].Value = false;
+            foreach (DataGridViewRow dataGridViewRow in m_dataGridView.Rows)
+            {
+                dataGridViewRow.Cells[0].Value = false;
 
                 if (dataGridViewRow.Tag is VM vm)
-					VMsToExport.Remove(vm);
-			}
-		}
+                    VMsToExport.Remove(vm);
+            }
+        }
 
-		private void m_searchTextBox_TextChanged(object sender, EventArgs e)
-		{
-			try
-			{
-				var sortedColumn = m_dataGridView.SortedColumn;
-				var sortOrder = m_dataGridView.SortOrder;
+        private void m_searchTextBox_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                var sortedColumn = m_dataGridView.SortedColumn;
+                var sortOrder = m_dataGridView.SortOrder;
 
-				m_dataGridView.SuspendLayout();
-				m_dataGridView.Rows.Clear();
+                m_dataGridView.SuspendLayout();
+                m_dataGridView.Rows.Clear();
 
-				foreach (var vm in Connection.Cache.VMs.Where(IsVmExportable))
-				{
-					if (MatchesSearchText(vm))
-						m_dataGridView.Rows.Add(GetDataGridViewRow(vm, VMsToExport.Contains(vm)));
-				}
+                foreach (var vm in Connection.Cache.VMs.Where(IsVmExportable))
+                {
+                    if (MatchesSearchText(vm))
+                        m_dataGridView.Rows.Add(GetDataGridViewRow(vm, VMsToExport.Contains(vm)));
+                }
 
-				if (sortOrder != SortOrder.None && sortedColumn != null)
-					m_dataGridView.Sort(sortedColumn, (sortOrder == SortOrder.Ascending) ? ListSortDirection.Ascending : ListSortDirection.Descending);
-			}
-			finally
-			{
-				m_dataGridView.ResumeLayout();
-			}
-		}
+                if (sortOrder != SortOrder.None && sortedColumn != null)
+                    m_dataGridView.Sort(sortedColumn, (sortOrder == SortOrder.Ascending) ? ListSortDirection.Ascending : ListSortDirection.Descending);
+            }
+            finally
+            {
+                m_dataGridView.ResumeLayout();
+            }
+        }
 
-		private void m_dataGridView_CurrentCellDirtyStateChanged(object sender, EventArgs e)
-		{
-			if (m_dataGridView.IsCurrentCellDirty)
-				m_dataGridView.CommitEdit(DataGridViewDataErrorContexts.Commit);
-		}
+        private void m_dataGridView_CurrentCellDirtyStateChanged(object sender, EventArgs e)
+        {
+            if (m_dataGridView.IsCurrentCellDirty)
+                m_dataGridView.CommitEdit(DataGridViewDataErrorContexts.Commit);
+        }
 
-		private void m_dataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-		{
-			if (e.ColumnIndex != 0 || e.RowIndex < 0 || e.RowIndex >= m_dataGridView.RowCount)
-				return;
+        private void m_dataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex != 0 || e.RowIndex < 0 || e.RowIndex >= m_dataGridView.RowCount)
+                return;
 
-			var row = m_dataGridView.Rows[e.RowIndex];
+            var row = m_dataGridView.Rows[e.RowIndex];
 
             if (row.Tag is VM vm)
-			{
-				if ((bool)row.Cells[0].Value)
-				{
-					if (!VMsToExport.Contains(vm))
-						VMsToExport.Add(vm);
-				}
-				else
-					VMsToExport.Remove(vm);
-			}
+            {
+                if ((bool)row.Cells[0].Value)
+                {
+                    if (!VMsToExport.Contains(vm))
+                        VMsToExport.Add(vm);
+                }
+                else
+                    VMsToExport.Remove(vm);
+            }
 
             m_ctrlError.HideError();
-			UpdateCounterLabel();
-			IsDirty = true;
-			EnableButtons();
-		}	
+            UpdateCounterLabel();
+            IsDirty = true;
+            EnableButtons();
+        }
 
-		private void m_dataGridView_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e)
-		{
-			if ((e.Row.State & DataGridViewElementStates.Selected) != 0)
-				e.Row.Selected = false;
-		}
+        private void m_dataGridView_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e)
+        {
+            if ((e.Row.State & DataGridViewElementStates.Selected) != 0)
+                e.Row.Selected = false;
+        }
 
         private void m_dataGridView_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
         {
@@ -411,7 +417,7 @@ namespace XenAdmin.Wizards.ExportWizard
                 e.Handled = true;
             }
         }
-        
+
         #endregion
-	}
+    }
 }

@@ -917,6 +917,7 @@ namespace XenAdmin.Commands
                 items.AddIfEnabled(new AssignGroupToolStripMenuItem<VM_appliance>(mainWindow, selection, true));
                 items.AddSeparator();
 
+                items.AddIfEnabled(new VtpmCommand(mainWindow, selection));
                 items.AddIfEnabled(new InstallToolsCommand(mainWindow, selection));
                 items.AddSeparator();
 

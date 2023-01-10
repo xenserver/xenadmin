@@ -900,7 +900,7 @@ namespace XenAPI
                     try
                     {
                         string k = key.ToString();
-                        string [] v = table[key];
+                        string[] v = table[key];
                         result[k] = v;
                     }
                     catch
@@ -1268,7 +1268,7 @@ namespace XenAPI
                     try
                     {
                         string k = key ?? "";
-                        string [] v = table[key];
+                        string[] v = table[key];
                         result[k] = v;
                     }
                     catch
@@ -1360,7 +1360,7 @@ namespace XenAPI
                     try
                     {
                         string k = key ?? "";
-                        string [] v = table[key];
+                        string[] v = table[key];
                         result[k] = v;
                     }
                     catch
