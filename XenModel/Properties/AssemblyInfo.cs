@@ -59,7 +59,7 @@ using XenAdmin.Properties;
     "[XenCenter_No_Space]",
     "[Vendor Legal]",
     "[Vendor]",
-    "[XenServer product]",
+    "[XenServerProduct]",
     "[XenServer version]",
     "[Updates url]",
     "[Guest Tools]",

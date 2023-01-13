@@ -1110,7 +1110,7 @@ namespace XenAdmin
         {
             var brand = host.ProductBrand();
             return brand == BrandManager.ProductBrand || brand == BrandManager.LegacyProduct ||
-                   BrandManager.ProductBrand == "[XenServer product]";
+                   BrandManager.ProductBrand == "[XenServerProduct]";
         }
 
         /// <summary>

@@ -42,7 +42,7 @@ rebranding_global()
     sed -b -i -e "s#\[Vendor Legal\]#${BRANDING_COMPANY_NAME_LEGAL}#g" \
         -e "s#\[Vendor\]#${BRANDING_COMPANY_NAME_SHORT}#g" \
         -e "s#\[Guest Tools\]#${BRANDING_PV_TOOLS}#g" \
-        -e "s#\[XenServer product\]#${BRANDING_PRODUCT_BRAND}#g" \
+        -e "s#\[XenServerProduct\]#${BRANDING_PRODUCT_BRAND}#g" \
         -e "s#\[XenServer version\]#${BRANDING_PRODUCT_VERSION_TEXT}#g" \
         -e "s#\[XenServer host\]#${BRANDING_SERVER}#g" \
         -e "s#\[XenCenter\]#${BRANDING_BRAND_CONSOLE}#g" \

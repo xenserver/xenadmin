@@ -31,7 +31,7 @@
 
 using System.Reflection;
 
-[assembly: AssemblyCompany("[Vendor]")]
+[assembly: AssemblyCompany("[XenServerProduct]")]
 [assembly: AssemblyCopyright("Copyright © [Vendor Legal]")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
