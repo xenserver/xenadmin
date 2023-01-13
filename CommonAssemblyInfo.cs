@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems, Inc. 
+﻿/* Copyright (c) Cloud Software Group Holdings, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -30,20 +30,10 @@
  */
 
 using System.Reflection;
-using System.Runtime.InteropServices;
 
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-[assembly: AssemblyTitle("XenCenterOVF")]
-[assembly: AssemblyDescription("[Citrix] [XenCenter] OVF API")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyProduct("[XenCenter]")]
-
-// Setting ComVisible to false makes the types in this assembly not visible 
-// to COM components.  If you need to access a type in this assembly from 
-// COM, set the ComVisible attribute to true on that type.
-[assembly: ComVisible(false)]
-
-// The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("512b2576-76f3-43fb-831c-2f3e180aa450")]
+[assembly: AssemblyCompany("[Citrix]")]
+[assembly: AssemblyCopyright("Copyright © [BRANDING_COMPANY_NAME_LEGAL]")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+[assembly: AssemblyVersion("0.0.0.0")]
+[assembly: AssemblyFileVersion("0000")]
