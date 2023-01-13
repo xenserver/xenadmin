@@ -55,11 +55,15 @@ rebranding_global()
         $1
 }
 
+version_csharp "${REPO}/CommonAssemblyInfo.cs"
+rebranding_global "${REPO}/CommonAssemblyInfo.cs"
+
 #AssemblyInfo rebranding
-for projectName in CommandLib xe XenAdmin XenAdminTests XenCenterLib XenModel XenOvfApi XenServerHealthCheck xva_verify
+for projectDir in CFUValidator CommandLib xe XenAdmin XenAdminTests XenCenterLib XenModel XenOvfApi XenServerHealthCheck xva_verify
 do
-  assemblyInfo="${REPO}/${projectName}/Properties/AssemblyInfo.cs"
-  version_csharp ${assemblyInfo} && rebranding_global ${assemblyInfo}
+  assemblyInfo="${REPO}/${projectDir}/Properties/AssemblyInfo.cs"
+  version_csharp ${assemblyInfo}
+  rebranding_global ${assemblyInfo}
 done
 
 rebranding_global ${REPO}/XenAdmin/XenAdmin.csproj

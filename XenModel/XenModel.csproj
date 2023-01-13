@@ -59,6 +59,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\CommonAssemblyInfo.cs">
+      <Link>Properties\CommonAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Actions\ActionBase.cs" />
     <Compile Include="Actions\HealthCheck\HealthCheckAuthenticationAction.cs" />
     <Compile Include="Actions\HealthCheck\SaveHealthCheckSettingsAction.cs" />
