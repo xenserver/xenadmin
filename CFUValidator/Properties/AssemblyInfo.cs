@@ -36,7 +36,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("CFUValidator")]
-[assembly: AssemblyDescription("Utility for testing [XenServer product] update packages")]
+[assembly: AssemblyDescription("Utility for testing [XenServerProduct] update packages")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyProduct("[XenCenter]")]
 

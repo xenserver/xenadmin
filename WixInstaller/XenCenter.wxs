@@ -40,7 +40,7 @@
         <Media Id="1" Cabinet="XenCenter.cab" EmbedCab="yes" />
         <Directory Id="TARGETDIR" Name="SourceDir">
             <Directory Id="ProgramFilesFolder">
-                <Directory Id="Citrix" Name="$(var.CompanyNameShort)">
+                <Directory Id="XenServer" Name="$(var.BrandProduct)">
                     <Directory Id="INSTALLDIR" ShortName="$(var.BrandConsoleShort)" Name="$(var.BrandConsoleNoSpace)">
                         <Component Id="ReportViewer" Guid="$(var.ReportViewerGuid)">
                             <File Id="MicRepVwrCmnDLL" Source="$(env.RepoRoot)\XenAdmin\ReportViewer\Microsoft.ReportViewer.Common.dll" />
@@ -162,20 +162,20 @@
                 </Directory>
             </Directory>
             <Directory Id="ProgramMenuFolder">
-                <Directory Id="ApplicationProgramsFolder" Name="$(var.CompanyNameShort)" />
+                <Directory Id="ApplicationProgramsFolder" Name="$(var.BrandProduct)" />
             </Directory>
             <Directory Id="DesktopFolder" Name="Desktop">
                 <Component Id="ProgramFilesShortcut" Guid="63b44222-b5e8-4ab1-8f68-baed79abbf36">
                     <Condition>INSTALLSHORTCUT</Condition>
                     <Shortcut Id="ApplicationDesktopShortcut" Name="$(var.BrandConsole)" Target="[INSTALLDIR]$(var.BrandConsoleNoSpace).exe" WorkingDirectory="INSTALLDIR"/>
                     <RemoveFolder Id="DesktopFolder" On="uninstall"/>
-                    <RegistryValue Root="HKCU" Key="Software\$(var.CompanyNameShort)\$(var.BrandConsoleNoSpace)" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+                    <RegistryValue Root="HKCU" Key="Software\$(var.BrandProduct)\$(var.BrandConsoleNoSpace)" Name="installed" Type="integer" Value="1" KeyPath="yes" />
                 </Component>
             </Directory>
         </Directory>
         <DirectoryRef Id="TARGETDIR">
             <Component Id="RegistryEntries" Guid="$(var.RegEntriesGuid)">
-                <RegistryKey Root="HKMU" Key="Software\$(var.CompanyNameShort)\$(var.BrandConsoleNoSpace)">
+                <RegistryKey Root="HKMU" Key="Software\$(var.BrandProduct)\$(var.BrandConsoleNoSpace)">
                     <RegistryValue Type="string" Name="InstallDir" Value="[INSTALLDIR]" />
                     <?if "$(var.HiddenFeatures)" != ""?>
                         <RegistryValue Type="string" Name="HiddenFeatures" Value="$(var.HiddenFeatures)" />
@@ -190,7 +190,7 @@
             <Component Id="ApplicationShortcut" Guid="$(var.AppShortcutGuid)">
                 <Shortcut Id="startmenuXenCenter" ShortName="$(var.BrandConsoleShort)" Name="$(var.BrandConsole)" Target="[INSTALLDIR]$(var.BrandConsoleNoSpace).exe" WorkingDirectory="INSTALLDIR" Icon="XenCenterICO" />
                 <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall" />
-                <RegistryValue Root="HKCU" Key="Software\$(var.CompanyNameShort)\$(var.BrandConsoleNoSpace)" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+                <RegistryValue Root="HKCU" Key="Software\$(var.BrandProduct)\$(var.BrandConsoleNoSpace)" Name="installed" Type="integer" Value="1" KeyPath="yes" />
             </Component>
         </DirectoryRef>
 
@@ -228,7 +228,7 @@
             <![CDATA[Installed OR (WIXNETFX4RELEASEINSTALLED >= "#528040")]]>
         </Condition>
         <Property Id="PERMACHINEINSTALL">
-            <RegistrySearch Id="InstallRegistry" Type="raw" Root="HKLM" Key="Software\$(var.CompanyNameShort)\$(var.BrandConsoleNoSpace)" Name="InstallDir" />
+            <RegistrySearch Id="InstallRegistry" Type="raw" Root="HKLM" Key="Software\$(var.BrandProduct)\$(var.BrandConsoleNoSpace)" Name="InstallDir" />
         </Property>
         <Property Id="REINSTALLMODE" Value="amus" />
         <Property Id="INSTALLSHORTCUT" />
