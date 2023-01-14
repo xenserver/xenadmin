@@ -375,6 +375,84 @@
   <data name="Label-host.edition" xml:space="preserve">
     <value>License</value>
   </data>
+  <data name="Label-host.edition-basic" xml:space="preserve">
+    <value>{0} Basic Edition</value>
+  </data>
+  <data name="Label-host.edition-desktop" xml:space="preserve">
+    <value>Citrix Virtual Apps and Desktops</value>
+  </data>
+  <data name="Label-host.edition-desktop-cloud" xml:space="preserve">
+    <value>Citrix Virtual Apps and Desktops Citrix Cloud</value>
+  </data>
+  <data name="Label-host.edition-desktop-plus" xml:space="preserve">
+    <value>Citrix Virtual Apps and Desktops Premium</value>
+  </data>
+  <data name="Label-host.edition-enterprise-per-socket" xml:space="preserve">
+    <value>{0} Premium Per-Socket</value>
+  </data>
+  <data name="Label-host.edition-enterprise-per-user" xml:space="preserve">
+    <value>{0} Premium Per-User</value>
+  </data>
+  <data name="Label-host.edition-express" xml:space="preserve">
+    <value>{0} Express</value>
+  </data>
+  <data name="Label-host.edition-legacy-basic" xml:space="preserve">
+    <value>{0} Basic Edition</value>
+  </data>
+  <data name="Label-host.edition-legacy-desktop" xml:space="preserve">
+    <value>XenApp/XenDesktop</value>
+  </data>
+  <data name="Label-host.edition-legacy-desktop-cloud" xml:space="preserve">
+    <value>XenApp/XenDesktop Citrix Cloud</value>
+  </data>
+  <data name="Label-host.edition-legacy-desktop-plus" xml:space="preserve">
+    <value>XenApp/XenDesktop Platinum</value>
+  </data>
+  <data name="Label-host.edition-legacy-enterprise-per-socket" xml:space="preserve">
+    <value>{0} Enterprise Per-Socket</value>
+  </data>
+  <data name="Label-host.edition-legacy-enterprise-per-user" xml:space="preserve">
+    <value>{0} Enterprise Per-User</value>
+  </data>
+  <data name="Label-host.edition-legacy-free" xml:space="preserve">
+    <value>{0}</value>
+  </data>
+  <data name="Label-host.edition-legacy-per-socket" xml:space="preserve">
+    <value>{0} Per-Socket</value>
+  </data>
+  <data name="Label-host.edition-legacy-premium" xml:space="preserve">
+    <value>{0} Ultimate Edition</value>
+  </data>
+  <data name="Label-host.edition-legacy-standard" xml:space="preserve">
+    <value>{0} Standard Edition</value>
+  </data>
+  <data name="Label-host.edition-legacy-standard-per-socket" xml:space="preserve">
+    <value>{0} Standard Per-Socket</value>
+  </data>
+  <data name="Label-host.edition-legacy-xendesktop" xml:space="preserve">
+    <value>{0} for XenDesktop</value>
+  </data>
+  <data name="Label-host.edition-per-socket" xml:space="preserve">
+    <value>{0} Per-Socket</value>
+  </data>
+  <data name="Label-host.edition-premium" xml:space="preserve">
+    <value>{0} Ultimate Edition</value>
+  </data>
+  <data name="Label-host.edition-premium-per-socket" xml:space="preserve">
+    <value>{0} Premium Per-Socket</value>
+  </data>
+  <data name="Label-host.edition-premium-per-user" xml:space="preserve">
+    <value>{0} Premium Per-User</value>
+  </data>
+  <data name="Label-host.edition-standard" xml:space="preserve">
+    <value>{0} Standard Edition</value>
+  </data>
+  <data name="Label-host.edition-standard-per-socket" xml:space="preserve">
+    <value>{0} Standard Per-Socket</value>
+  </data>
+  <data name="Label-host.edition-xendesktop" xml:space="preserve">
+    <value>{0} for Citrix Virtual Desktops</value>
+  </data>
   <data name="Label-host.enabled" xml:space="preserve">
     <value>Enabled</value>
   </data>
@@ -602,6 +680,9 @@
   </data>
   <data name="Label-host.VMMemory" xml:space="preserve">
     <value>VMs</value>
+  </data>
+  <data name="Label-host.XenMemory" xml:space="preserve">
+    <value>{0}</value>
   </data>
   <data name="Label-performance.avg_cpu" xml:space="preserve">
     <value>Average CPU</value>
@@ -1892,6 +1973,9 @@
   <data name="SR.name_description-local-storage-host" xml:space="preserve">
     <value>Local storage on {0}</value>
   </data>
+  <data name="SR.name_description-xenserver-tools" xml:space="preserve">
+    <value>{0} ISOs</value>
+  </data>
   <data name="SR.name_label-ebs" xml:space="preserve">
     <value>EBS</value>
   </data>
@@ -1915,6 +1999,9 @@
   </data>
   <data name="SR.name_label-local-storage-host" xml:space="preserve">
     <value>Local storage on {0}</value>
+  </data>
+  <data name="SR.name_label-xenserver-tools" xml:space="preserve">
+    <value>{0}</value>
   </data>
   <data name="VM.TemplateDescription-Demo Linux VM" xml:space="preserve">
     <value>This template can be used to create a Linux VM with a built-in Linux distribution for testing and demonstration purposes. It is not recommended for production use.</value>
