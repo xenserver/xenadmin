@@ -96,6 +96,8 @@ namespace XenAdmin.Core
 
         public static readonly string XenCenterVersion = Get("XENCENTER_VERSION");
 
+        public static readonly string XenHost = Get("XEN_HOST");
+
 
         /// <summary>
         /// Returns null if no match is found.

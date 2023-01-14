@@ -524,7 +524,11 @@ namespace XenAdmin.Core
 
             string legacy = NaplesOrGreater(host) ? "" : "legacy-";
             string name = FriendlyNameManager.GetFriendlyName("Label-host.edition-" + legacy + host.edition);
-            return name ?? Messages.UNKNOWN;
+
+            if (string.IsNullOrEmpty(name))
+                return Messages.UNKNOWN;
+
+            return name.Contains("{0}") ? string.Format(name, BrandManager.ProductBrand) : name;
         }
 
         /// <summary>

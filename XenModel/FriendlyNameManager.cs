@@ -29,6 +29,7 @@
  * SUCH DAMAGE.
  */
 
+using System;
 using System.Diagnostics;
 using System.Globalization;
 
@@ -45,11 +46,20 @@ namespace XenAdmin.Core
         /// </summary>
         public static string GetFriendlyName(string s)
         {
-            var result = FriendlyNames.GetString(s) ?? BrandManager.Get(s);
+            var result = FriendlyNames.GetString(s);
 #if DEBUG
-			Debug.Assert(result != null, $"{s} doesn't exist in FriendlyNames");
+            Debug.Assert(result != null, $"{s} doesn't exist in FriendlyNames");
 #endif
-            return result;
+            switch (s)
+            {
+                case "Label-host.XenMemory":
+                    return string.Format(result, BrandManager.XenHost);
+                case "SR.name_label-xenserver-tools":
+                case "SR.name_description-xenserver-tools":
+                    return string.Format(result, BrandManager.VmTools);
+                default:
+                    return result;
+            }
         }
 
         /// <summary>
