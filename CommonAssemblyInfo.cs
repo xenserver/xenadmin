@@ -37,3 +37,10 @@ using System.Reflection;
 [assembly: AssemblyCulture("")]
 [assembly: AssemblyVersion("0.0.0.0")]
 [assembly: AssemblyFileVersion("0000")]
+
+/*
+ * .NET Framework 4.8 docs: All components of the version must be integers greater
+ * than or equal to 0. Metadata restricts the major, minor, build, and revision
+ * components for an assembly to a maximum value of UInt16.MaxValue - 1.
+ * If a component exceeds this value, a compilation error occurs.
+ */

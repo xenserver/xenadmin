@@ -52,9 +52,8 @@ namespace XenAdmin.Help
             {
                 HelpUrl = InvisibleMessages.DOCS_URL + BrandManager.HelpPath;
 
-                HelpQuery = string.Format(InvisibleMessages.HELP_URL_QUERY,
-                    $"{BrandManager.XenCenterVersion}.{Program.Version.Revision}".Replace('.', '_'),
-                    BrandManager.BrandConsole);
+                HelpQuery = string.Format(InvisibleMessages.HELP_URL_QUERY, 
+                    $"{Program.Version}".Replace('.', '_'), BrandManager.BrandConsole);
             }
         }
 

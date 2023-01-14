@@ -63,7 +63,6 @@ using XenAdmin.Properties;
     "[XenServer version]",
     "[Updates url]",
     "[Guest Tools]",
-    "0.0.0",
     "[XenServer host]")]
 
 namespace XenAdmin.Properties
@@ -80,7 +79,6 @@ namespace XenAdmin.Properties
             string productVersionText,
             string updatesUrl,
             string vmTools,
-            string xenCenterVersion,
             string xenHost)
         {
             BrandConsole = brandConsole;
@@ -91,7 +89,6 @@ namespace XenAdmin.Properties
             ProductVersionText = productVersionText;
             UpdatesUrl = updatesUrl;
             VmTools = vmTools;
-            XenCenterVersion = xenCenterVersion;
             XenHost = xenHost;
         }
 
@@ -103,7 +100,6 @@ namespace XenAdmin.Properties
         public string ProductVersionText { get; }
         public string VmTools { get; }
         public string UpdatesUrl { get; }
-        public string XenCenterVersion { get; }
         public string XenHost { get; }
     }
 }
