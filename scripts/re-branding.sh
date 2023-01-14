@@ -39,18 +39,16 @@ version_csharp()
 
 rebranding_global()
 {
-    sed -b -i -e "s#\[BRANDING_COMPANY_NAME_LEGAL\]#${BRANDING_COMPANY_NAME_LEGAL}#g" \
-        -e "s#\[Citrix\]#${BRANDING_COMPANY_NAME_SHORT}#g" \
-        -e "s#\[Citrix XenServer\]#${BRANDING_COMPANY_AND_PRODUCT}#g" \
-        -e "s#\[Citrix VM Tools\]#${BRANDING_PV_TOOLS}#g" \
+    sed -b -i -e "s#\[Vendor Legal\]#${BRANDING_COMPANY_NAME_LEGAL}#g" \
+        -e "s#\[Vendor\]#${BRANDING_COMPANY_NAME_SHORT}#g" \
+        -e "s#\[Guest Tools\]#${BRANDING_PV_TOOLS}#g" \
         -e "s#\[XenServer product\]#${BRANDING_PRODUCT_BRAND}#g" \
-        -e "s#\[BRANDING_PRODUCT_VERSION\]#${BRANDING_XC_PRODUCT_VERSION}#g" \
-        -e "s#\[BRANDING_PRODUCT_VERSION_TEXT\]#${BRANDING_PRODUCT_VERSION_TEXT}#g" \
-        -e "s#\[XenServer\]#${BRANDING_SERVER}#g" \
+        -e "s#\[XenServer version\]#${BRANDING_PRODUCT_VERSION_TEXT}#g" \
+        -e "s#\[XenServer host\]#${BRANDING_SERVER}#g" \
         -e "s#\[XenCenter\]#${BRANDING_BRAND_CONSOLE}#g" \
         -e "s#\[XenCenter_No_Space\]#${BRANDING_BRAND_CONSOLE_NO_SPACE}#g" \
         -e "s#xencenter\/current-release\/#${BRANDING_HELP_PATH}#g" \
-        -e "s#\[UPDATES_URL\]#${UPDATES_URL}#g" \
+        -e "s#\[Updates url\]#${UPDATES_URL}#g" \
         $1
 }
 

@@ -40,7 +40,7 @@ using XenAdmin.Properties;
 // associated with an assembly.
 
 [assembly: AssemblyTitle("XenModel")]
-[assembly: AssemblyDescription("[Citrix] [XenCenter]")]
+[assembly: AssemblyDescription("[XenCenter] library")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyProduct("[XenCenter]")]
 
@@ -57,14 +57,14 @@ using XenAdmin.Properties;
 [assembly: CustomBranding(
     "[XenCenter]",
     "[XenCenter_No_Space]",
-    "[BRANDING_COMPANY_NAME_LEGAL]",
-    "[Citrix]",
+    "[Vendor Legal]",
+    "[Vendor]",
     "[XenServer product]",
-    "[BRANDING_PRODUCT_VERSION_TEXT]",
-    "[UPDATES_URL]",
-    "[Citrix VM Tools]",
+    "[XenServer version]",
+    "[Updates url]",
+    "[Guest Tools]",
     "0.0.0",
-    "[XenServer]")]
+    "[XenServer host]")]
 
 namespace XenAdmin.Properties
 {

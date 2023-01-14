@@ -31,8 +31,8 @@
 
 using System.Reflection;
 
-[assembly: AssemblyCompany("[Citrix]")]
-[assembly: AssemblyCopyright("Copyright © [BRANDING_COMPANY_NAME_LEGAL]")]
+[assembly: AssemblyCompany("[Vendor]")]
+[assembly: AssemblyCopyright("Copyright © [Vendor Legal]")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: AssemblyVersion("0.0.0.0")]
