@@ -117,20 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BRAND_CONSOLE" xml:space="preserve">
-    <value>[XenCenter]</value>
-  </data>
-  <data name="BRAND_CONSOLE_NO_SPACE" xml:space="preserve">
-    <value>[XenCenter_No_Space]</value>
-  </data>
   <data name="CIS" xml:space="preserve">
     <value>Citrix Insight Services</value>
-  </data>
-  <data name="COMPANY_NAME_LEGAL" xml:space="preserve">
-    <value>[BRANDING_COMPANY_NAME_LEGAL]</value>
-  </data>
-  <data name="COMPANY_NAME_SHORT" xml:space="preserve">
-    <value>[Citrix]</value>
   </data>
   <data name="EXTENSION_BACKUP" xml:space="preserve">
     <value>xbk</value>
@@ -152,12 +140,6 @@
   </data>
   <data name="PERF_ALERT_MAIL_DEFAULT_LANGUAGE" xml:space="preserve">
     <value>en-US</value>
-  </data>
-  <data name="PRODUCT_BRAND" xml:space="preserve">
-    <value>[XenServer product]</value>
-  </data>
-  <data name="PRODUCT_BRAND_WITH_COMPANY" xml:space="preserve">
-    <value>[Citrix XenServer]</value>
   </data>
   <data name="PRODUCT_VERSION_5_6" xml:space="preserve">
     <value>5.6</value>
@@ -183,25 +165,8 @@
   <data name="PRODUCT_VERSION_8_2_1" xml:space="preserve">
     <value>8.2.1</value>
   </data>
-  <data name="PRODUCT_VERSION_POST_8_2" xml:space="preserve">
-    <value>[BRANDING_PRODUCT_VERSION_TEXT]</value>
-  </data>
-  <data name="PRODUCT_VERSION_TEXT" xml:space="preserve">
-    <value>[BRANDING_PRODUCT_VERSION_TEXT]</value>
-  </data>
   <data name="TRADEMARKS" xml:space="preserve">
     <value>Cloud Software Group is a trademark of Cloud Software Group Holdings, Inc., and XenServer, XenCenter, Xen, the Xen logo, Citrix Hypervisor are trademarks and/or registered trademarks of Citrix Systems, Inc. in the United States and other countries. XenServer(tm) High Availability is powered by everRun(tm), a registered trademark of Stratus Technologies Bermuda Limited.</value>
   </data>
-  <data name="UPDATES_URL" xml:space="preserve">
-    <value>[UPDATES_URL]</value>
-  </data>
-  <data name="VM_TOOLS" xml:space="preserve">
-    <value>[Citrix VM Tools]</value>
-  </data>
-  <data name="XENCENTER_VERSION" xml:space="preserve">
-    <value>0.0.0</value>
-  </data>
-  <data name="XEN_HOST" xml:space="preserve">
-    <value>[XenServer]</value>
-  </data>
+
 </root>

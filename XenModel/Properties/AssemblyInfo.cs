@@ -29,9 +29,11 @@
  * SUCH DAMAGE.
  */
 
+using System;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using XenAdmin.Properties;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
@@ -51,3 +53,57 @@ using System.Runtime.InteropServices;
 [assembly: Guid("e80f8412-2075-4c6b-bf10-c94576b26de4")]
 
 [assembly: InternalsVisibleTo("XenAdminTests")]
+
+[assembly: CustomBranding(
+    "[XenCenter]",
+    "[XenCenter_No_Space]",
+    "[BRANDING_COMPANY_NAME_LEGAL]",
+    "[Citrix]",
+    "[XenServer product]",
+    "[BRANDING_PRODUCT_VERSION_TEXT]",
+    "[UPDATES_URL]",
+    "[Citrix VM Tools]",
+    "0.0.0",
+    "[XenServer]")]
+
+namespace XenAdmin.Properties
+{
+    [AttributeUsage(AttributeTargets.Assembly)]
+    public class CustomBrandingAttribute : Attribute
+    {
+        public CustomBrandingAttribute(
+            string brandConsole,
+            string brandConsoleNoSpace,
+            string companyNameLegal,
+            string companyNameShort,
+            string productBrand,
+            string productVersionText,
+            string updatesUrl,
+            string vmTools,
+            string xenCenterVersion,
+            string xenHost)
+        {
+            BrandConsole = brandConsole;
+            BrandConsoleNoSpace = brandConsoleNoSpace;
+            CompanyNameLegal = companyNameLegal;
+            CompanyNameShort = companyNameShort;
+            ProductBrand = productBrand;
+            ProductVersionText = productVersionText;
+            UpdatesUrl = updatesUrl;
+            VmTools = vmTools;
+            XenCenterVersion = xenCenterVersion;
+            XenHost = xenHost;
+        }
+
+        public string BrandConsole { get; }
+        public string BrandConsoleNoSpace { get; }
+        public string CompanyNameLegal { get; }
+        public string CompanyNameShort { get; }
+        public string ProductBrand { get; }
+        public string ProductVersionText { get; }
+        public string VmTools { get; }
+        public string UpdatesUrl { get; }
+        public string XenCenterVersion { get; }
+        public string XenHost { get; }
+    }
+}
