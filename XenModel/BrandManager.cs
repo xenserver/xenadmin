@@ -30,7 +30,9 @@
  */
 
 using System.Diagnostics;
+using System.Reflection;
 using System.Resources;
+using XenAdmin.Properties;
 
 
 namespace XenAdmin.Core
@@ -39,16 +41,34 @@ namespace XenAdmin.Core
     {
         private static readonly ResourceManager Branding = new ResourceManager("XenAdmin.Branding", typeof(BrandManager).Assembly);
 
+        static BrandManager()
+        {
+            var assembly = Assembly.GetExecutingAssembly();
 
-        public static readonly string BrandConsole = Get("BRAND_CONSOLE");
+            var customBranding = (CustomBrandingAttribute)assembly.GetCustomAttribute(typeof(CustomBrandingAttribute));
 
-        public static readonly string BrandConsoleNoSpace = Get("BRAND_CONSOLE_NO_SPACE");
+            BrandConsole = customBranding.BrandConsole;
+            BrandConsoleNoSpace = customBranding.BrandConsoleNoSpace;
+            CompanyNameShort = customBranding.CompanyNameShort;
+            CompanyNameLegal = customBranding.CompanyNameLegal;
+            ProductBrand = customBranding.ProductBrand;
+            ProductVersionPost82 = customBranding.ProductVersionText;
+            UpdatesUrl = customBranding.UpdatesUrl;
+            VmTools = customBranding.VmTools;
+            XenCenterVersion = customBranding.XenCenterVersion;
+            XenHost = customBranding.XenHost;
+        }
+
+
+        public static readonly string BrandConsole;
+
+        public static readonly string BrandConsoleNoSpace;
 
         public static readonly string Cis = Get("CIS");
 
-        public static readonly string CompanyNameLegal = Get("COMPANY_NAME_LEGAL");
+        public static readonly string CompanyNameLegal;
 
-        public static readonly string CompanyNameShort = Get("COMPANY_NAME_SHORT");
+        public static readonly string CompanyNameShort;
 
         public static readonly string ExtensionBackup = Get("EXTENSION_BACKUP");
 
@@ -64,9 +84,7 @@ namespace XenAdmin.Core
 
         public static readonly string PerfAlertMailDefaultLanguage = Get("PERF_ALERT_MAIL_DEFAULT_LANGUAGE");
 
-        public static readonly string ProductBrand = Get("PRODUCT_BRAND");
-
-        public static readonly string ProductBrandWithCompany = Get("PRODUCT_BRAND_WITH_COMPANY");
+        public static readonly string ProductBrand;
 
         public static readonly string ProductVersion56 = Get("PRODUCT_VERSION_5_6");
 
@@ -84,19 +102,17 @@ namespace XenAdmin.Core
 
         public static readonly string ProductVersion821 = Get("PRODUCT_VERSION_8_2_1");
 
-        public static readonly string ProductVersionPost82 = Get("PRODUCT_VERSION_POST_8_2");
-
-        public static readonly string ProductVersionText = Get("PRODUCT_VERSION_TEXT");
+        public static readonly string ProductVersionPost82;
 
         public static readonly string Trademarks = Get("TRADEMARKS");
 
-        public static readonly string UpdatesUrl = Get("UPDATES_URL");
+        public static readonly string UpdatesUrl;
 
-        public static readonly string VmTools = Get("VM_TOOLS");
+        public static readonly string VmTools;
 
-        public static readonly string XenCenterVersion = Get("XENCENTER_VERSION");
+        public static readonly string XenCenterVersion;
 
-        public static readonly string XenHost = Get("XEN_HOST");
+        public static readonly string XenHost;
 
 
         /// <summary>
@@ -106,7 +122,7 @@ namespace XenAdmin.Core
         {
             var result = Branding.GetString(s);
 #if DEBUG
-			Debug.Assert(result != null, $"{s} doesn't exist in Branding");
+            Debug.Assert(result != null, $"{s} doesn't exist in Branding");
 #endif
             return result;
         }

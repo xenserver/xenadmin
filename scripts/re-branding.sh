@@ -44,7 +44,6 @@ rebranding_global()
         -e "s#\[Citrix XenServer\]#${BRANDING_COMPANY_AND_PRODUCT}#g" \
         -e "s#\[Citrix VM Tools\]#${BRANDING_PV_TOOLS}#g" \
         -e "s#\[XenServer product\]#${BRANDING_PRODUCT_BRAND}#g" \
-        -e "s#0\.0\.0#${BRANDING_XC_PRODUCT_VERSION}#g" \
         -e "s#\[BRANDING_PRODUCT_VERSION\]#${BRANDING_XC_PRODUCT_VERSION}#g" \
         -e "s#\[BRANDING_PRODUCT_VERSION_TEXT\]#${BRANDING_PRODUCT_VERSION_TEXT}#g" \
         -e "s#\[XenServer\]#${BRANDING_SERVER}#g" \
@@ -67,9 +66,6 @@ do
 done
 
 rebranding_global ${REPO}/XenAdmin/XenAdmin.csproj
-
-#XenModel
-rebranding_global ${REPO}/Branding/Branding.resx
 
 PRODUCT_GUID=$(uuidgen | tr [a-z] [A-Z] | tr -d [:space:])
 
