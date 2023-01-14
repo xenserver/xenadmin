@@ -36,7 +36,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("xe")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Utility for calling the [XenServer product] CLI remotely")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyProduct("[XenCenter]")]
 

@@ -37,7 +37,7 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyTitle("xva_verify")]
 [assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyConfiguration("[XenServer product] utility for verifying XVA files")]
 [assembly: AssemblyProduct("[XenCenter]")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
