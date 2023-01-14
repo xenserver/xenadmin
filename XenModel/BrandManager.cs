@@ -55,7 +55,6 @@ namespace XenAdmin.Core
             ProductVersionPost82 = customBranding.ProductVersionText;
             UpdatesUrl = customBranding.UpdatesUrl;
             VmTools = customBranding.VmTools;
-            XenCenterVersion = customBranding.XenCenterVersion;
             XenHost = customBranding.XenHost;
         }
 
@@ -109,8 +108,6 @@ namespace XenAdmin.Core
         public static readonly string UpdatesUrl;
 
         public static readonly string VmTools;
-
-        public static readonly string XenCenterVersion;
 
         public static readonly string XenHost;
 
