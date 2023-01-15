@@ -132,9 +132,6 @@
   <data name="HELP_PATH" xml:space="preserve">
     <value>xencenter/current-release/</value>
   </data>
-  <data name="LEGACY_CONSOLE" xml:space="preserve">
-    <value>XenCenter</value>
-  </data>
   <data name="LEGACY_PRODUCT" xml:space="preserve">
     <value>XenServer</value>
   </data>

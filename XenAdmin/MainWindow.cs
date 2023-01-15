@@ -1009,7 +1009,7 @@ namespace XenAdmin
                     Program.Invoke(Program.MainWindow, delegate
                     {
                         var msg = string.Format(Messages.GUI_NOT_COMPATIBLE, BrandManager.BrandConsole,
-                            BrandManager.ProductVersion821, Helpers.GetName(coordinator), BrandManager.LegacyConsole);
+                            BrandManager.ProductVersion821, Helpers.GetName(coordinator));
                         var url = InvisibleMessages.OUT_OF_DATE_WEBSITE;
                         var title = string.Format(Messages.CONNECTION_REFUSED_TITLE, Helpers.GetName(coordinator).Ellipsise(80));
                         var error = $"{msg}\n{url}";

@@ -6455,7 +6455,7 @@ Note: Any custom color selections will remain unchanged</value>
   <data name="GUI_NOT_COMPATIBLE" xml:space="preserve">
     <value>This version of {0} can only connect to {1} and greater versions. It cannot connect to {2}.
 
-You can get a compatible version of {3} from the following location:</value>
+You can get a compatible version of {0} from the following location:</value>
   </data>
   <data name="GUI_OUT_OF_DATE" xml:space="preserve">
     <value>This version of {0} is out of date and cannot connect to {1}.
@@ -7544,8 +7544,8 @@ This might result in failure to migrate VMs to this server during the RPU or to 
     <value>Install pending &amp;updates...</value>
   </data>
   <data name="INSTALL_PENDING_UPDATES_DISABLED_REASON" xml:space="preserve">
-    <value>{0} cannot be used for installing updates on servers running {1}.
-Please use latest available {2} for {1} instead.</value>
+    <value>{0} {1} cannot be used for installing updates on servers running {2}.
+Please use latest available {0} for {2} instead.</value>
   </data>
   <data name="INSTALL_SERVER_CERTIFICATE_ACTION_LINK" xml:space="preserve">
     <value>Install certificate...</value>
@@ -14117,7 +14117,7 @@ Schedule:
     <value>Health Check has been removed in {0} {1}. If you are going to upgrade the pool to this version, you must disable Health Check first.</value>
   </data>
   <data name="WARNING_PRE_CLOUD_VERSION_CONNECTION" xml:space="preserve">
-    <value>{0} is not recommended for general management of servers running {1}. Please use latest available {2} for {1} instead.</value>
+    <value>{0} {1} is not recommended for general management of servers running {2}. Please use latest available {0} for {2} instead.</value>
   </data>
   <data name="WEB_BROWSER_FAILED" xml:space="preserve">
     <value>Cannot find '{0}'.</value>

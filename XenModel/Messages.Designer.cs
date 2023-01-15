@@ -18468,7 +18468,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to This version of {0} can only connect to {1} and greater versions. It cannot connect to {2}.
         ///
-        ///You can get a compatible version of {3} from the following location:.
+        ///You can get a compatible version of {0} from the following location:.
         /// </summary>
         public static string GUI_NOT_COMPATIBLE {
             get {
@@ -21650,8 +21650,8 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} cannot be used for installing updates on servers running {1}.
-        ///Please use latest available {2} for {1} instead..
+        ///   Looks up a localized string similar to {0} {1} cannot be used for installing updates on servers running {2}.
+        ///Please use latest available {0} for {2} instead..
         /// </summary>
         public static string INSTALL_PENDING_UPDATES_DISABLED_REASON {
             get {
@@ -40875,7 +40875,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} is not recommended for general management of servers running {1}. Please use latest available {2} for {1} instead..
+        ///   Looks up a localized string similar to {0} {1} is not recommended for general management of servers running {2}. Please use latest available {0} for {2} instead..
         /// </summary>
         public static string WARNING_PRE_CLOUD_VERSION_CONNECTION {
             get {
