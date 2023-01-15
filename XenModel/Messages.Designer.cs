@@ -13933,7 +13933,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} is now available. Download the latest at the {1} website..
+        ///   Looks up a localized string similar to {0} is now available. Download the latest at the {1} downloads website..
         /// </summary>
         public static string DOWNLOAD_LATEST_XS_BODY {
             get {

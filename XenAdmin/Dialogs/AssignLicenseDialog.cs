@@ -108,10 +108,10 @@ namespace XenAdmin.Dialogs
                 enterprisePerSocketRadioButton.Text = string.Format(Messages.LICENSE_EDITION_ENTERPRISE_PERSOCKET, 
                     BrandManager.ProductBrand, xos.Sum(x => x.Connection.Cache.Hosts.Sum(h => h.CpuSockets()))); 
                 enterprisePerUserRadioButton.Text = string.Format(Messages.LICENSE_EDITION_ENTERPRISE_PERUSER, BrandManager.ProductBrand);
-                desktopPlusRadioButton.Text = string.Format(Messages.LICENSE_EDITION_DESKTOP_PLUS, BrandManager.CompanyNameShort);
-                desktopRadioButton.Text = string.Format(Messages.LICENSE_EDITION_DESKTOP, BrandManager.CompanyNameShort);
+                desktopPlusRadioButton.Text = string.Format(Messages.LICENSE_EDITION_DESKTOP_PLUS, BrandManager.CompanyNameLegacy);
+                desktopRadioButton.Text = string.Format(Messages.LICENSE_EDITION_DESKTOP, BrandManager.CompanyNameLegacy);
                 desktopCloudRadioButton.Visible = true;
-                desktopCloudRadioButton.Text = string.Format(Messages.LICENSE_EDITION_DESKTOP_CLOUD, BrandManager.CompanyNameShort);
+                desktopCloudRadioButton.Text = string.Format(Messages.LICENSE_EDITION_DESKTOP_CLOUD, BrandManager.CompanyNameLegacy);
                 standardPerSocketRadioButton.Text = string.Format(Messages.LICENSE_EDITION_STANDARD_PERSOCKET,
                     BrandManager.ProductBrand, xos.Sum(x => x.Connection.Cache.Hosts.Sum(h => h.CpuSockets())));
             }
@@ -127,7 +127,7 @@ namespace XenAdmin.Dialogs
                 desktopRadioButton.Text = Messages.LICENSE_EDITION_DESKTOP_LEGACY;
                 desktopCloudRadioButton.Visible = xos.TrueForAll(x => Helpers.JuraOrGreater(x.Connection) || Helpers.HavanaOrGreater(x.Connection));
                 desktopCloudRadioButton.Text = string.Format(Messages.LICENSE_EDITION_DESKTOP_CLOUD_LEGACY,
-                    BrandManager.CompanyNameShort);
+                    BrandManager.CompanyNameLegacy);
                 standardPerSocketRadioButton.Text = string.Format(Messages.LICENSE_EDITION_STANDARD_PERSOCKET_LEGACY,
                     BrandManager.ProductBrand, xos.Sum(x => x.Connection.Cache.Hosts.Sum(h => h.CpuSockets())));
             }

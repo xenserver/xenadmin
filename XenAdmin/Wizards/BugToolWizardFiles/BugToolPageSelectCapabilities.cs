@@ -62,7 +62,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
         public BugToolPageSelectCapabilities()
         {
             InitializeComponent();
-            linkLabel1.Text = string.Format(linkLabel1.Text, BrandManager.CompanyNameShort);
+            linkLabel1.Text = string.Format(linkLabel1.Text, BrandManager.Cis);
             linkLabel1.Visible = !HiddenFeatures.LinkLabelHidden;
         }
 

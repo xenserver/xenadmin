@@ -757,7 +757,7 @@ namespace XenAdmin.Wizards.ImportWizard
                 var format = Helpers.GetPool(connection) != null
                     ? Messages.NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_POOL
                     : Messages.NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_SERVER;
-                ShowInformationMessage(string.Format(format, BrandManager.CompanyNameShort));
+                ShowInformationMessage(string.Format(format, BrandManager.CompanyNameLegacy));
             }
             else
                 HideInformationMessage();
