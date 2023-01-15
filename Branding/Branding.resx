@@ -133,7 +133,7 @@
     <value>xencenter/current-release/</value>
   </data>
   <data name="LEGACY_PRODUCT" xml:space="preserve">
-    <value>XenServer</value>
+    <value>Citrix Hypervisor</value>
   </data>
   <data name="PERF_ALERT_MAIL_DEFAULT_LANGUAGE" xml:space="preserve">
     <value>en-US</value>
