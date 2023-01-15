@@ -86,7 +86,7 @@ namespace XenAdmin.Diagnostics.Checks
             //update case
             if (_newVersion != null)
             {
-                if (_newVersion.Version.CompareTo(new Version(BrandManager.ProductVersion82)) >= 0)
+                if (_newVersion.Version.CompareTo(new Version(BrandManager.ProductVersion82Short)) >= 0)
                     return new LegacySslProblem(this, _pool);
                 return null;
             }

@@ -2020,7 +2020,7 @@ namespace XenAdmin.Network
     public class ServerNotSupported : DisconnectionException
     {
         public override string Message => string.Format(Messages.SERVER_TOO_OLD,
-            BrandManager.BrandConsole, BrandManager.ProductBrand, BrandManager.ProductVersion70);
+            BrandManager.BrandConsole, BrandManager.ProductVersion70);
     }
 
     public class ConnectionExists : DisconnectionException

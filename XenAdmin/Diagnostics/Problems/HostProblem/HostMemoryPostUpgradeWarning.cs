@@ -73,7 +73,7 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
 
                 if (string.IsNullOrEmpty(upgradeProductVersion))
                     return string.Format(Messages.HOST_MEMORY_POST_UPGRADE_DEFAULT_WARNING_LONG,
-                        BrandManager.ProductBrand, BrandManager.ProductVersion80, Helpers.GetName(host));
+                        BrandManager.ProductVersion80, Helpers.GetName(host));
 
                 return string.Format(Messages.HOST_MEMORY_POST_UPGRADE_VERSION_WARNING_LONG,
                     Helpers.GetName(host), BrandManager.ProductBrand, upgradeProductVersion);
