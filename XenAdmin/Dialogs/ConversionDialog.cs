@@ -177,7 +177,7 @@ namespace XenAdmin.Dialogs
             get
             {
                 var version = Program.Version;
-                return version.ToString() == "0.0.0.0" ? version : new Version(BrandManager.ProductVersion70);
+                return version.ToString() == "0.0.0.0" ? version : new Version(BrandManager.ProductVersion70Short);
             }
         }
 
@@ -300,7 +300,7 @@ namespace XenAdmin.Dialogs
                         statusLabel.Text = string.Format(Messages.CONVERSION_VERSION_INCOMPATIBILITY, BrandManager.BrandConsole);
                         statusLinkLabel.Reset(Messages.MORE_INFO, () =>
                         {
-                            using (var dlog = new NoIconDialog(string.Format(Messages.CONVERSION_VERSION_INCOMPATIBILITY_INFO, BrandManager.ProductVersion70, BrandManager.ProductBrand)))
+                            using (var dlog = new NoIconDialog(string.Format(Messages.CONVERSION_VERSION_INCOMPATIBILITY_INFO, ConversionVpxMinimumSupportedVersion, BrandManager.ProductBrand)))
                             {
                                 dlog.ShowDialog(this);
                             }

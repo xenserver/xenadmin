@@ -50,12 +50,10 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
         public override string LinkText => Messages.LEARN_MORE;
 
         public override string Description =>
-            string.Format(Messages.PROBLEM_VSWITCH_CONTROLLER_DESCRIPTION, _pool,
-                string.Format(Messages.STRING_SPACE_STRING, BrandManager.ProductBrand, BrandManager.ProductVersion82));
+            string.Format(Messages.PROBLEM_VSWITCH_CONTROLLER_DESCRIPTION, _pool, BrandManager.ProductVersion82);
 
         public override string Message =>
-            string.Format(Messages.PROBLEM_VSWITCH_CONTROLLER_INFO_ERROR,
-                string.Format(Messages.STRING_SPACE_STRING, BrandManager.ProductBrand, BrandManager.ProductVersion82));
+            string.Format(Messages.PROBLEM_VSWITCH_CONTROLLER_INFO_ERROR, BrandManager.ProductVersion82);
     }
 
     class VSwitchControllerWarning : WarningWithMoreInfo
@@ -72,11 +70,9 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
         public override string LinkText => Messages.LEARN_MORE;
 
         public override string Description =>
-            string.Format(Messages.PROBLEM_VSWITCH_CONTROLLER_DESCRIPTION, pool,
-                string.Format(Messages.STRING_SPACE_STRING, BrandManager.ProductBrand, BrandManager.ProductVersion82));
+            string.Format(Messages.PROBLEM_VSWITCH_CONTROLLER_DESCRIPTION, pool, BrandManager.ProductVersion82);
 
         public override string Message =>
-            string.Format(Messages.PROBLEM_VSWITCH_CONTROLLER_INFO_WARNING,
-                string.Format(Messages.STRING_SPACE_STRING, BrandManager.ProductBrand, BrandManager.ProductVersion82));
+            string.Format(Messages.PROBLEM_VSWITCH_CONTROLLER_INFO_WARNING, BrandManager.ProductVersion82);
     }
 }

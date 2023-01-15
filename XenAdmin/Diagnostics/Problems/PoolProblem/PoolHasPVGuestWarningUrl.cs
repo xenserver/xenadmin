@@ -52,15 +52,14 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
         public override string Title => Check.Description;
 
         public override string Description =>
-            string.Format(Messages.POOL_HAS_PV_GUEST_WARNING, _pool.Name(),
-                string.Format(Messages.STRING_SPACE_STRING, BrandManager.ProductBrand, BrandManager.ProductVersion81));
+            string.Format(Messages.POOL_HAS_PV_GUEST_WARNING, _pool.Name(), BrandManager.ProductVersion81);
 
         public override string HelpMessage => Messages.MORE_INFO;
 
         public override string Message =>
             string.Format(Messages.POOL_HAS_PV_GUEST_WARNING_DETAIL,
                 string.Join(", ", _pvGuests.Select(g => g.Name())),
-                string.Format(Messages.STRING_SPACE_STRING, BrandManager.ProductBrand, BrandManager.ProductVersion81));
+                BrandManager.ProductVersion81);
 
         public override string LinkText => Messages.LEARN_MORE;
         public override string LinkData => InvisibleMessages.PV_GUESTS_CHECK_URL;
@@ -82,15 +81,14 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
         public override string Title => Check.Description;
 
         public override string Description =>
-            string.Format(Messages.POOL_HAS_PV_GUEST_WARNING, _pool.Name(),
-                string.Format(Messages.STRING_SPACE_STRING, BrandManager.ProductBrand, BrandManager.ProductVersion81));
+            string.Format(Messages.POOL_HAS_PV_GUEST_WARNING, _pool.Name(), BrandManager.ProductVersion81);
 
         public override string HelpMessage => Messages.MORE_INFO;
 
         public override string Message =>
             string.Format(Messages.POOL_HAS_PV_GUEST_WARNING_DETAIL,
                 string.Join(", ", _pvGuests.Select(g => g.Name())),
-                string.Format(Messages.STRING_SPACE_STRING, BrandManager.ProductBrand, BrandManager.ProductVersion81));
+                BrandManager.ProductVersion81);
 
         public override string LinkText => Messages.LEARN_MORE;
         public override string LinkData => InvisibleMessages.PV_GUESTS_CHECK_URL;

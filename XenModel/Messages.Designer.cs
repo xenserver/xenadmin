@@ -18466,9 +18466,9 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This version of {0} can only connect to {1} {2} and greater versions. It cannot connect to {3}.
+        ///   Looks up a localized string similar to This version of {0} can only connect to {1} and greater versions. It cannot connect to {2}.
         ///
-        ///You can get a compatible version of {4} from the following location:.
+        ///You can get a compatible version of {3} from the following location:.
         /// </summary>
         public static string GUI_NOT_COMPATIBLE {
             get {
@@ -19787,7 +19787,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If you are upgrading to {0} {1} and above, the Control Domain memory on {2} will be increased. 
+        ///   Looks up a localized string similar to If you are upgrading to {0} and above, the Control Domain memory on {1} will be increased. 
         ///
         ///This might result in failure to migrate VMs to this server during the RPU or to accommodate after the upgrade all the VMs that are currently residing on this server..
         /// </summary>
@@ -21650,8 +21650,8 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} cannot be used for installing updates on servers running {1} {2}.
-        ///Please use latest available {3} for {1} {2} instead..
+        ///   Looks up a localized string similar to {0} cannot be used for installing updates on servers running {1}.
+        ///Please use latest available {2} for {1} instead..
         /// </summary>
         public static string INSTALL_PENDING_UPDATES_DISABLED_REASON {
             get {
@@ -34179,7 +34179,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This version of {0} supports {1} {2} onwards..
+        ///   Looks up a localized string similar to This version of {0} supports {1} onwards..
         /// </summary>
         public static string SERVER_TOO_OLD {
             get {
@@ -36178,7 +36178,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This pool contains servers earlier than {0} {1}. Please use an earlier version of {2} to manage this pool..
+        ///   Looks up a localized string similar to This pool contains servers earlier than {0}. Please use an earlier version of {1} to manage this pool..
         /// </summary>
         public static string SUPPORTER_TOO_OLD {
             get {
@@ -40875,7 +40875,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} is not recommended for general management of servers running {1} {2}. Please use latest available {3} for {1} {2} instead..
+        ///   Looks up a localized string similar to {0} is not recommended for general management of servers running {1}. Please use latest available {2} for {1} instead..
         /// </summary>
         public static string WARNING_PRE_CLOUD_VERSION_CONNECTION {
             get {

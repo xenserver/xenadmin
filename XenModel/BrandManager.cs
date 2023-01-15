@@ -91,13 +91,17 @@ namespace XenAdmin.Core
 
         public static readonly string ProductVersion70 = Get("PRODUCT_VERSION_7_0");
 
-        public static readonly string ProductVersion712 = Get("PRODUCT_VERSION_7_1_2");
+        public static readonly string ProductVersion70Short = Get("PRODUCT_VERSION_7_0_SHORT");
+
+        public static readonly string ProductVersion712Short = Get("PRODUCT_VERSION_7_1_2_SHORT");
 
         public static readonly string ProductVersion80 = Get("PRODUCT_VERSION_8_0");
 
         public static readonly string ProductVersion81 = Get("PRODUCT_VERSION_8_1");
 
         public static readonly string ProductVersion82 = Get("PRODUCT_VERSION_8_2");
+
+        public static readonly string ProductVersion82Short = Get("PRODUCT_VERSION_8_2_SHORT");
 
         public static readonly string ProductVersion821 = Get("PRODUCT_VERSION_8_2_1");
 

@@ -459,7 +459,7 @@ namespace XenAdmin.TabPages
             if (Helpers.QuebecOrGreater(xenObject.Connection) &&
                 vms.Any(vm => vm.SupportsBallooning() && vm.memory_dynamic_min != vm.memory_static_max))
             {
-                Banner.AppliesToVersion = string.Format(Messages.STRING_SPACE_STRING, BrandManager.ProductBrand, BrandManager.ProductVersion81);
+                Banner.AppliesToVersion = BrandManager.ProductVersion81;
                 Banner.BannerType = DeprecationBanner.Type.Deprecation;
                 Banner.FeatureName = Messages.DMC;
                 Banner.Visible = !HiddenFeatures.LinkLabelHidden;
