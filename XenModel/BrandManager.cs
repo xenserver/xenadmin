@@ -79,8 +79,6 @@ namespace XenAdmin.Core
 
         public static readonly string LegacyProduct = Get("LEGACY_PRODUCT");
 
-        public static readonly string LegacyConsole = Get("LEGACY_CONSOLE");
-
         public static readonly string PerfAlertMailDefaultLanguage = Get("PERF_ALERT_MAIL_DEFAULT_LANGUAGE");
 
         public static readonly string ProductBrand;
