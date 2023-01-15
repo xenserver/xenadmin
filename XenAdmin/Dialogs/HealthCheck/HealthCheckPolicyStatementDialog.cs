@@ -42,7 +42,7 @@ namespace XenAdmin.Dialogs
             string cis_policy = Messages.HEALTH_CHECK_CIS_POLICY_URL;
             string citrix_policy = Messages.HEALTH_CHECK_CITRIX_POLICY_URL;
             policyStatementTextBox.Text = string.Format(Messages.HEALTH_CHECK_PRIVACY_POLICY,
-                BrandManager.Cis, cis_policy, BrandManager.CompanyNameShort, citrix_policy);
+                BrandManager.Cis, cis_policy, BrandManager.CompanyNameLegacy, citrix_policy);
             policyStatementTextBox.Links.Add(policyStatementTextBox.Text.IndexOf(cis_policy), cis_policy.Length, cis_policy);
             policyStatementTextBox.Links.Add(policyStatementTextBox.Text.IndexOf(citrix_policy), citrix_policy.Length, citrix_policy);
         }

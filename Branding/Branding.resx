@@ -120,6 +120,9 @@
   <data name="CIS" xml:space="preserve">
     <value>Citrix Insight Services</value>
   </data>
+  <data name="COMPANY_NAME_LEGACY" xml:space="preserve">
+    <value>Citrix</value>
+  </data>
   <data name="EXTENSION_BACKUP" xml:space="preserve">
     <value>xbk</value>
   </data>

@@ -40,7 +40,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         public RollingUpgradeWizardFirstPage()
         {
             InitializeComponent();
-            label7.Text = string.Format(label7.Text, BrandManager.CompanyNameShort, BrandManager.ProductBrand);
+            label7.Text = string.Format(label7.Text, BrandManager.ProductBrand);
         }
 
         public override string Text => Messages.BEFORE_YOU_START;

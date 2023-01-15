@@ -4926,7 +4926,7 @@ Click Cancel if you prefer to reconfigure your VMs' memory settings manually.</v
     <value>Download...</value>
   </data>
   <data name="DOWNLOAD_LATEST_XS_BODY" xml:space="preserve">
-    <value>{0} is now available. Download the latest at the {1} website.</value>
+    <value>{0} is now available. Download the latest at the {1} downloads website.</value>
   </data>
   <data name="DOWNLOADING_PATCH_FROM" xml:space="preserve">
     <value>Downloading update from '{0}' ({1} of {2})...</value>
