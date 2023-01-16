@@ -68,7 +68,7 @@ rebranding_global ${REPO}/XenAdmin/XenAdmin.csproj
 PRODUCT_GUID=$(uuidgen | tr [a-z] [A-Z] | tr -d [:space:])
 
 sed -b -i -e "s/@AUTOGEN_PRODUCT_GUID@/${PRODUCT_GUID}/g" \
-          -e "s/@PRODUCT_VERSION@/${BRANDING_XC_PRODUCT_VERSION}/g" \
+          -e "s/@PRODUCT_VERSION@/${BRANDING_XC_PRODUCT_VERSION_INSTALLER}/g" \
           -e "s/@COMPANY_NAME_LEGAL@/${BRANDING_COMPANY_NAME_LEGAL}/g" \
           -e "s/@COMPANY_NAME_SHORT@/${BRANDING_COMPANY_NAME_SHORT}/g" \
           -e "s/@BRAND_CONSOLE@/${BRANDING_BRAND_CONSOLE}/g" \
