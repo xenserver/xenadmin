@@ -47,8 +47,8 @@
     <String Id="XenCenter_Launch">Launch</String>
     <String Id="Required_For_Installation">此安装需要 Microsoft .NET Framework 4.8 或更高版本。请从 https://www.microsoft.com/net/download/framework 进行安装</String>
     <String Id="Readme">声明.TXT</String>
-    <String Id="HealthCheckDescr">通过定期将数据从服务器上载到 Citrix Insight Services，实现对 Citrix Hypervisor 池的运行状况监视。</String>
-    <String Id="HealthCheckDescrShort">启用对 Citrix Hypervisor 池的运行状况的监视。</String>
+    <String Id="HealthCheckDescr">通过定期将数据从服务器上载到 Citrix Insight Services，实现对 XenServer 池的运行状况监视。</String>
+    <String Id="HealthCheckDescrShort">启用对 XenServer 池的运行状况的监视。</String>
     <String Id="JapaneseTitle">语言包: 日语</String>
     <String Id="JapaneseDescr">日语资源文件</String>
     <String Id="SimplifiedChineseTitle">语言包: 简体中文</String>
