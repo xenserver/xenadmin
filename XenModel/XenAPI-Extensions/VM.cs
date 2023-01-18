@@ -278,24 +278,6 @@ namespace XenAPI
             return IsRealVm() && !IsHVM() && !other_config.ContainsKey("pvcheckpass");
         }
 
-        public bool IsUEFIEnabled()
-        {
-            if (!IsHVM())
-                return false;
-
-            var firmware = Get(HVM_boot_params, "firmware");
-            return !string.IsNullOrEmpty(firmware) && firmware.Trim().ToLower() == "uefi";
-        }
-
-        public bool IsSecureBootEnabled()
-        {
-            if (!IsUEFIEnabled())
-                return false;
-
-            var secureboot = Get(platform, "secureboot");
-            return !string.IsNullOrEmpty(secureboot) && secureboot.Trim().ToLower() == "true";
-        }
-
         public int GetVcpuWeight()
         {
             if (VCPUs_params != null && VCPUs_params.ContainsKey("weight"))
@@ -449,14 +431,25 @@ namespace XenAPI
             return true;
         }
 
-        #region Supported Boot Mode Recommendations
+        #region Boot Mode
 
-        public bool CanSupportUEFIBoot()
+        public bool IsDefaultBootModeUefi()
+        {
+            var firmware = Get(HVM_boot_params, "firmware")?.Trim().ToLower();
+            return firmware == "uefi";
+        }
+
+        public string GetSecureBootMode()
+        {
+            return Get(platform, "secureboot")?.Trim().ToLower();
+        }
+
+        public bool SupportsUefiBoot()
         {
             return GetRecommendationByField("supports-uefi") == "yes";
         }
 
-        public bool CanSupportUEFISecureBoot()
+        public bool SupportsSecureUefiBoot()
         {
             return GetRecommendationByField("supports-secure-boot") == "yes";
         }
@@ -1850,4 +1843,23 @@ namespace XenAPI
         }
     }
 
+    public enum VmBootMode { Bios, Uefi, SecureUefi }
+
+    public static class BootModeExtensions
+    {
+        public static string StringOf(this VmBootMode mode)
+        {
+            switch (mode)
+            {
+                case VmBootMode.Bios:
+                    return Messages.BIOS_BOOT;
+                case VmBootMode.Uefi:
+                    return Messages.UEFI_BOOT;
+                case VmBootMode.SecureUefi:
+                    return Messages.UEFI_SECURE_BOOT;
+                default:
+                    return Messages.UNAVAILABLE;
+            }
+        }
+    }
 }
