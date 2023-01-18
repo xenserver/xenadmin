@@ -39,7 +39,6 @@ using XenAdmin.Core;
 using XenCenterLib;
 using System.Windows.Forms;
 using System.Drawing;
-using BootMode = XenAdmin.Actions.VMActions.BootMode;
 
 namespace XenAdmin.Wizards.NewVMWizard
 {
@@ -60,9 +59,7 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         public bool AssignVtpm => bootModesControl1.AssignVtpm;
 
-        public BootMode SelectedBootMode => SelectedTemplate.IsHVM()
-            ? bootModesControl1.SelectedOption
-            : BootMode.NOT_AVAILABLE;
+        public VmBootMode SelectedBootMode => bootModesControl1.SelectedBootMode;
 
         public InstallMethod SelectedInstallMethod
         {

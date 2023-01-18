@@ -47,26 +47,6 @@ namespace XenAdmin.Actions.VMActions
         Network
     }
 
-    public enum BootMode { BIOS_BOOT, UEFI_BOOT, UEFI_SECURE_BOOT, NOT_AVAILABLE }
-
-    public static class EnumExt
-    {
-        public static string StringOf(this BootMode x)
-        {
-            switch (x)
-            {
-                case BootMode.BIOS_BOOT:
-                    return Messages.BIOS_BOOT;
-                case BootMode.UEFI_BOOT:
-                    return Messages.UEFI_BOOT;
-                case BootMode.UEFI_SECURE_BOOT:
-                    return Messages.UEFI_SECURE_BOOT;
-                default:
-                    return Messages.UNAVAILABLE;
-            }
-        }
-    }
-
     public class CreateVMAction : AsyncAction
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -77,7 +57,7 @@ namespace XenAdmin.Actions.VMActions
         private readonly string _pvArgs;
         private readonly VDI _cd;
         private readonly string _url;
-        private readonly BootMode _bootMode;
+        private readonly VmBootMode _bootMode;
         private readonly Host _homeServer;
         private readonly long _vcpusMax;
         private readonly long _vcpusAtStartup;
@@ -136,7 +116,7 @@ namespace XenAdmin.Actions.VMActions
 
         public CreateVMAction(IXenConnection connection, VM template, Host copyBiosStringsFrom,
             string name, string description, InstallMethod installMethod,
-            string pvArgs, VDI cd, string url, BootMode bootMode, Host homeServer, long vcpusMax, long vcpusAtStartup,
+            string pvArgs, VDI cd, string url, VmBootMode bootMode, Host homeServer, long vcpusMax, long vcpusAtStartup,
             long memoryDynamicMin, long memoryDynamicMax, long memoryStaticMax,
             List<DiskDescription> disks, SR fullCopySR, List<VIF> vifs, bool startAfter,
             bool assignVtpm, Action<VM, bool> warningDialogHAInvalidConfig,
@@ -393,14 +373,14 @@ namespace XenAdmin.Actions.VMActions
             {
                 VM.set_PV_args(Session, VM.opaque_ref, _pvArgs);
             }
-            else if (_bootMode != BootMode.NOT_AVAILABLE)
+            else
             {
-                var hvm_params = VM.HVM_boot_params;
-                hvm_params["firmware"] = _bootMode != BootMode.BIOS_BOOT ? "uefi" : "bios";
-                VM.set_HVM_boot_params(Session, VM.opaque_ref, hvm_params);
+                var hvmParams = VM.HVM_boot_params;
+                hvmParams["firmware"] = _bootMode == VmBootMode.Bios ? "bios" : "uefi";
+                VM.set_HVM_boot_params(Session, VM.opaque_ref, hvmParams);
 
                 var platform = VM.platform;
-                platform["secureboot"] = _bootMode == BootMode.UEFI_SECURE_BOOT ? "true" : "false";
+                platform["secureboot"] = _bootMode == VmBootMode.SecureUefi ? "true" : "false";
                 VM.set_platform(Session, VM.opaque_ref, platform);
             }
         }

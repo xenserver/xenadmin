@@ -6063,15 +6063,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The BIOS boot mode is not supported with the selected template..
-        /// </summary>
-        public static string BIOS_BOOT_MODE_UNSUPPORTED_WARNING {
-            get {
-                return ResourceManager.GetString("BIOS_BOOT_MODE_UNSUPPORTED_WARNING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to BIOS strings copied.
         /// </summary>
         public static string BIOS_STRINGS_COPIED {
@@ -6280,6 +6271,15 @@ namespace XenAdmin {
         public static string BOOT_MODE {
             get {
                 return ResourceManager.GetString("BOOT_MODE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not supported with the selected template.
+        /// </summary>
+        public static string BOOT_MODE_UNSUPPORTED_WARNING {
+            get {
+                return ResourceManager.GetString("BOOT_MODE_UNSUPPORTED_WARNING", resourceCulture);
             }
         }
         
@@ -18439,29 +18439,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The UEFI boot mode is not supported with the selected template..
+        ///   Looks up a localized string similar to UEFI certificates are missing from your system.
         /// </summary>
-        public static string GUEFI_BOOT_MODE_UNSUPPORTED_WARNING {
+        public static string GUEFI_SECUREBOOT_MODE_MISSING_CERTIFICATES {
             get {
-                return ResourceManager.GetString("GUEFI_BOOT_MODE_UNSUPPORTED_WARNING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The UEFI and UEFI secure boot modes are not supported with the selected template..
-        /// </summary>
-        public static string GUEFI_BOOT_MODES_UNSUPPORTED_WARNING {
-            get {
-                return ResourceManager.GetString("GUEFI_BOOT_MODES_UNSUPPORTED_WARNING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The UEFI secure boot mode is not supported with the selected template..
-        /// </summary>
-        public static string GUEFI_SECUREBOOT_MODE_UNSUPPORTED_WARNING {
-            get {
-                return ResourceManager.GetString("GUEFI_SECUREBOOT_MODE_UNSUPPORTED_WARNING", resourceCulture);
+                return ResourceManager.GetString("GUEFI_SECUREBOOT_MODE_MISSING_CERTIFICATES", resourceCulture);
             }
         }
         
