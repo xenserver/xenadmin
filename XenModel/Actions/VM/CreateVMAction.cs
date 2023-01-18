@@ -31,10 +31,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Xml;
+using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;
-using XenAdmin.Core;
-using System.Xml;
 
 
 namespace XenAdmin.Actions.VMActions
@@ -322,7 +323,7 @@ namespace XenAdmin.Actions.VMActions
         {
             if (_copyBiosStringsFrom != null && Template.DefaultTemplate())
             {
-                VM.copy_bios_strings(Session, this.VM.opaque_ref, _copyBiosStringsFrom.opaque_ref);
+                VM.copy_bios_strings(Session, VM.opaque_ref, _copyBiosStringsFrom.opaque_ref);
             }
         }
 
@@ -336,8 +337,8 @@ namespace XenAdmin.Actions.VMActions
         private void SetVMParams()
         {
             Description = Messages.SETTING_VM_PROPERTIES;
-            XenAPI.VM.set_name_label(Session, VM.opaque_ref, _nameLabel);
-            XenAPI.VM.set_name_description(Session, VM.opaque_ref, _nameDescription);
+            VM.set_name_label(Session, VM.opaque_ref, _nameLabel);
+            VM.set_name_description(Session, VM.opaque_ref, _nameDescription);
             ChangeVCPUSettingsAction vcpuAction = new ChangeVCPUSettingsAction(VM, _vcpusMax, _vcpusAtStartup);
             vcpuAction.RunSync(Session);
 
@@ -350,10 +351,10 @@ namespace XenAdmin.Actions.VMActions
 
             // Check these values have changed before setting them, as they are RBAC protected
             if (HomeServerChanged())
-                XenAPI.VM.set_affinity(Session, VM.opaque_ref, _homeServer != null ? _homeServer.opaque_ref : Helper.NullOpaqueRef);
+                VM.set_affinity(Session, VM.opaque_ref, _homeServer != null ? _homeServer.opaque_ref : Helper.NullOpaqueRef);
 
             if (Template.memory_dynamic_min != _memoryDynamicMin || Template.memory_dynamic_max != _memoryDynamicMax || Template.memory_static_max != _memoryStaticMax)
-                XenAPI.VM.set_memory_limits(Session, VM.opaque_ref, Template.memory_static_min, _memoryStaticMax, _memoryDynamicMin, _memoryDynamicMax);
+                VM.set_memory_limits(Session, VM.opaque_ref, Template.memory_static_min, _memoryStaticMax, _memoryDynamicMin, _memoryDynamicMax);
         }
 
         private bool HomeServerChanged()
@@ -372,35 +373,35 @@ namespace XenAdmin.Actions.VMActions
                 // boot from network
                 Dictionary<string, string> hvm_params = VM.HVM_boot_params;
                 hvm_params["order"] = GetBootOrderNetworkFirst();
-                XenAPI.VM.set_HVM_boot_params(Session, VM.opaque_ref, hvm_params);
+                VM.set_HVM_boot_params(Session, VM.opaque_ref, hvm_params);
             }
             else if (IsEli() && _installMethod == InstallMethod.Network)
             {
                 Dictionary<string, string> other_config = VM.other_config;
                 string normal_url = IsRhel() ? NormalizeRepoUrlForRHEL(_url) : _url;
                 other_config["install-repository"] = normal_url;
-                XenAPI.VM.set_other_config(Session, VM.opaque_ref, other_config);
+                VM.set_other_config(Session, VM.opaque_ref, other_config);
             }
             else if (IsEli() && _installMethod == InstallMethod.CD)
             {
                 Dictionary<string, string> other_config = VM.other_config;
                 other_config["install-repository"] = "cdrom";
-                XenAPI.VM.set_other_config(Session, VM.opaque_ref, other_config);
+                VM.set_other_config(Session, VM.opaque_ref, other_config);
             }
 
             if (!Template.IsHVM())
             {
-                XenAPI.VM.set_PV_args(Session, VM.opaque_ref, _pvArgs);
+                VM.set_PV_args(Session, VM.opaque_ref, _pvArgs);
             }
             else if (_bootMode != BootMode.NOT_AVAILABLE)
             {
                 var hvm_params = VM.HVM_boot_params;
                 hvm_params["firmware"] = _bootMode != BootMode.BIOS_BOOT ? "uefi" : "bios";
-                XenAPI.VM.set_HVM_boot_params(Session, VM.opaque_ref, hvm_params);
+                VM.set_HVM_boot_params(Session, VM.opaque_ref, hvm_params);
 
                 var platform = VM.platform;
                 platform["secureboot"] = _bootMode == BootMode.UEFI_SECURE_BOOT ? "true" : "false";
-                XenAPI.VM.set_platform(Session, VM.opaque_ref, platform);
+                VM.set_platform(Session, VM.opaque_ref, platform);
             }
         }
 
@@ -425,7 +426,7 @@ namespace XenAdmin.Actions.VMActions
         {
             Description = Messages.PROVISIONING_VM;
             RewriteProvisionXML();
-            RelatedTask = XenAPI.VM.async_provision(Session, VM.opaque_ref);
+            RelatedTask = VM.async_provision(Session, VM.opaque_ref);
 
             PollToCompletion(10, 60);
         }
@@ -440,13 +441,13 @@ namespace XenAdmin.Actions.VMActions
             // set the new vm's provision xml: remove "disks" entry, as we are going to explicitly create all the disks
             Dictionary<string, string> other_config = VM.other_config;
             other_config.Remove("disks");
-            XenAPI.VM.set_other_config(Session, VM.opaque_ref, other_config);
+            VM.set_other_config(Session, VM.opaque_ref, other_config);
         }
 
         private void AddCdDrive()
         {
             if (Helpers.CustomWithNoDVD(Template))
-                return; // we have skipped the install media page because we are a cutom template with no cd drive - the user doesnt want a cd drive
+                return; // we have skipped the install media page because we are a custom template with no cd drive - the user doesnt want a cd drive
 
             Description = Messages.CREATE_CD_DRIVE;
             VBD cd_drive = null;
@@ -482,9 +483,10 @@ namespace XenAdmin.Actions.VMActions
 
         private VBD CreateCdDrive()
         {
-            List<string> devices = AllowedVBDs;
-            if (devices.Count == 0)
+            var devices = VM.get_allowed_VBD_devices(Session, VM.opaque_ref);
+            if (devices.Length == 0)
                 throw new Exception(Messages.NO_MORE_USERDEVICES);
+
             VBD vbd = new VBD
             {
                 bootable = _installMethod == InstallMethod.CD,
@@ -511,7 +513,7 @@ namespace XenAdmin.Actions.VMActions
             string suspendSr = null;
 
             double progress = 70;
-            double step = 20.0 / (double)_disks.Count;
+            double step = 20.0 / _disks.Count;
             foreach (DiskDescription disk in _disks)
             {
                 VBD vbd = GetDiskVBD(disk, vbds);
@@ -576,17 +578,16 @@ namespace XenAdmin.Actions.VMActions
         {
             string old_vdi_ref = vbd.VDI.opaque_ref;
 
-            RelatedTask = XenAPI.VDI.async_copy(Session, vbd.VDI.opaque_ref, disk.Disk.SR.opaque_ref);
+            RelatedTask = VDI.async_copy(Session, vbd.VDI.opaque_ref, disk.Disk.SR.opaque_ref);
             PollToCompletion(progress, progress + 0.25 * step);
             AddVMHint(Connection.WaitForCache(new XenRef<VDI>(Result)));
 
-
             VDI new_vdi = Connection.Resolve(new XenRef<VDI>(Result));
 
-            RelatedTask = XenAPI.VBD.async_destroy(Session, vbd.opaque_ref);
+            RelatedTask = VBD.async_destroy(Session, vbd.opaque_ref);
             PollToCompletion(progress + 0.25 * step, progress + 0.5 * step);
 
-            RelatedTask = XenAPI.VDI.async_destroy(Session, old_vdi_ref);
+            RelatedTask = VDI.async_destroy(Session, old_vdi_ref);
             PollToCompletion(progress + 0.5 * step, progress + 0.75 * step);
 
             CreateVbd(disk, new_vdi, progress + 0.75 * step, progress + step, IsDeviceAtPositionZero(disk));
@@ -648,7 +649,7 @@ namespace XenAdmin.Actions.VMActions
             vdi.virtual_size = disk.Disk.virtual_size;
             vdi.sm_config = disk.Disk.sm_config;
 
-            RelatedTask = XenAPI.VDI.async_create(Session, vdi);
+            RelatedTask = VDI.async_create(Session, vdi);
             PollToCompletion(progress1, progress2);
             return Connection.WaitForCache(new XenRef<VDI>(Result));
         }
@@ -667,9 +668,10 @@ namespace XenAdmin.Actions.VMActions
         /// <param name="bootable">Set VBD.bootable to this value - see comments above</param>
         private void CreateVbd(DiskDescription disk, VDI vdi, double progress1, double progress2, bool bootable)
         {
-            List<string> devices = AllowedVBDs;
-            if (devices.Count == 0)
+            var devices = VM.get_allowed_VBD_devices(Session, VM.opaque_ref);
+            if (devices.Length == 0)
                 throw new Exception(Messages.NO_MORE_USERDEVICES);
+
             VBD vbd = new VBD();
             vbd.SetIsOwner(true);
             vbd.bootable = bootable;
@@ -692,37 +694,38 @@ namespace XenAdmin.Actions.VMActions
             double progress = 90;
             VIF vif;
             List<VIF> existingTemplateVifs = Connection.ResolveAll(VM.VIFs);
-            double step = 5.0 / (double)existingTemplateVifs.Count;
+            double step = 5.0 / existingTemplateVifs.Count;
             for (int i = 0; i < existingTemplateVifs.Count; i++)
             {
                 vif = existingTemplateVifs[i];
-                RelatedTask = XenAPI.VIF.async_destroy(Session, vif.opaque_ref);
+                RelatedTask = VIF.async_destroy(Session, vif.opaque_ref);
 
                 PollToCompletion(progress, progress + step);
                 progress += step;
             }
 
             // then we add the ones the user has specified
-            step = 5.0 / (double)_vifs.Count;
+            step = 5.0 / _vifs.Count;
             for (int i = 0; i < _vifs.Count; i++)
             {
                 vif = _vifs[i];
-                List<string> devices = AllowedVIFs;
-                VIF new_vif = new VIF();
+                var devices = VM.get_allowed_VIF_devices(Session, VM.opaque_ref);
 
-                if (devices.Count < 1)
+                if (devices.Length < 1)
                 {
                     // If we have assigned more VIFs than we have space for then don't try to create them
                     log.Warn("Tried to create more VIFs than the server allows. Ignoring remaining vifs");
                     return;
                 }
+
+                VIF new_vif = new VIF();
                 new_vif.device = devices.Contains(vif.device) ? vif.device : devices[0];
                 new_vif.MAC = vif.MAC;
                 new_vif.network = vif.network;
                 new_vif.VM = new XenRef<VM>(VM.opaque_ref);
                 new_vif.qos_algorithm_type = vif.qos_algorithm_type;
                 new_vif.qos_algorithm_params = vif.qos_algorithm_params;
-                RelatedTask = XenAPI.VIF.async_create(Session, new_vif);
+                RelatedTask = VIF.async_create(Session, new_vif);
 
                 PollToCompletion(progress, progress + step);
                 progress += step;
@@ -730,10 +733,6 @@ namespace XenAdmin.Actions.VMActions
                 Connection.WaitForCache(new XenRef<VIF>(Result));
             }
         }
-
-        private List<string> AllowedVBDs => new List<String>(XenAPI.VM.get_allowed_VBD_devices(Session, VM.opaque_ref));
-
-        private List<string> AllowedVIFs => new List<String>(XenAPI.VM.get_allowed_VIF_devices(Session, VM.opaque_ref));
 
         protected override void CleanOnError()
         {
