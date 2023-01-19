@@ -45,7 +45,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.labelBlurb = new System.Windows.Forms.Label();
+            this.linkLabelBlurb = new System.Windows.Forms.LinkLabel();
             this.labelError = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.dataGridViewEx1 = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
@@ -60,16 +60,16 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.labelBlurb, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.linkLabelBlurb, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.labelError, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.progressBar1, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.dataGridViewEx1, 0, 1);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
-            // labelBlurb
+            // linkLabelBlurb
             // 
-            resources.ApplyResources(this.labelBlurb, "labelBlurb");
-            this.labelBlurb.Name = "labelBlurb";
+            resources.ApplyResources(this.linkLabelBlurb, "linkLabelBlurb");
+            this.linkLabelBlurb.Name = "linkLabelBlurb";
             // 
             // labelError
             // 
@@ -153,7 +153,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label labelError;
         private System.Windows.Forms.ProgressBar progressBar1;
-        private System.Windows.Forms.Label labelBlurb;
+        private System.Windows.Forms.LinkLabel linkLabelBlurb;
         private Controls.DataGridViewEx.DataGridViewEx dataGridViewEx1;
         private System.Windows.Forms.DataGridViewImageColumn columnHostImage;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnHost;

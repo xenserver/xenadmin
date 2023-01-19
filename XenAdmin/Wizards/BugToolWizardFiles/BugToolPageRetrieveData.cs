@@ -50,7 +50,9 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
         public BugToolPageRetrieveData()
         {
             InitializeComponent();
-            labelBlurb.Text = string.Format(labelBlurb.Text, BrandManager.BrandConsole);
+            linkLabelBlurb.Text = string.Format(linkLabelBlurb.Text, BrandManager.BrandConsole, BrandManager.Cis);
+            var cisTextLength = BrandManager.Cis.Length;
+            linkLabelBlurb.LinkArea = new LinkArea(linkLabelBlurb.Text.Length - cisTextLength - 1, cisTextLength);
         }
 
         #region XenTabPage overrides

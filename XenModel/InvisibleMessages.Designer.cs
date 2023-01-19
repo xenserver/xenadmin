@@ -61,6 +61,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to https://cis.citrix.com.
+        /// </summary>
+        public static string CIS_URL {
+            get {
+                return ResourceManager.GetString("CIS_URL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to http://docs.citrix.com/en-us/citrix-hypervisor/whats-new/removed-features.html.
         /// </summary>
         public static string DEPRECATION_URL {
