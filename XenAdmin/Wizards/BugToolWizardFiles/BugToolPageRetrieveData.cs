@@ -30,17 +30,13 @@
 
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Controls;
 using XenAdmin.Dialogs;
 using XenAPI;
-using XenAdmin.Actions;
-using XenAdmin.Controls.DataGridViewEx;
 using XenAdmin.Core;
-using XenAdmin.Network;
 using XenAdmin.Wizards.BugToolWizardFiles.StatusReportRows;
 
 
@@ -287,78 +283,5 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
 
             return folder;
         }
-
-        #region Nested classes
-
-        private class ClientSideDataRow : StatusReportRow
-        {
-            private readonly List<Host> hosts;
-            private readonly bool includeClientLogs;
-            private StatusReportClientSideAction _action;
-
-            public ClientSideDataRow(List<Host> hosts, bool includeClientLogs)
-            {
-                this.hosts = hosts;
-                this.includeClientLogs = includeClientLogs;
-                cellHostImg.Value = Images.StaticImages._000_GetServerReport_h32bit_16;
-                cellHost.Value = includeClientLogs
-                    ? string.Format(Messages.BUGTOOL_CLIENT_LOGS_META, BrandManager.BrandConsole)
-                    : string.Format(Messages.BUGTOOL_CLIENT_META, BrandManager.BrandConsole);
-            }
-
-            public override StatusReportAction Action => _action;
-
-            protected override void CreateAction(string path, string time)
-            {
-                _action = new StatusReportClientSideAction(hosts, includeClientLogs, path, time);
-            }
-        }
-
-        private class HostStatusRow : StatusReportRow
-        {
-            private readonly long size;
-            private readonly List<string> capabilityKeys;
-            private readonly Host Host;
-            private SingleHostStatusAction _action;
-
-            public HostStatusRow(Host host, long size, List<string> capabilityKeys)
-            {
-                Host = host;
-                this.size = size;
-                this.capabilityKeys = capabilityKeys;
-                cellHostImg.Value = Images.GetImage16For(Host);
-                cellHost.Value = Host.Name();
-            }
-
-            public IXenConnection Connection => Host.Connection;
-
-            public override StatusReportAction Action => _action;
-
-            protected override void CreateAction(string path, string time)
-            {
-                _action = new SingleHostStatusAction(Host, size, capabilityKeys, path, time);
-            }
-
-            protected override string GetStatus(out Image img)
-            {
-                img = null;
-                if (_action == null)
-                    return Messages.BUGTOOL_REPORTSTATUS_QUEUED;
-
-                switch (_action.Status)
-                {
-                    case ReportStatus.downloading:
-                        return string.Format(Messages.BUGTOOL_REPORTSTATUS_DOWNLOADING,
-                            Util.MemorySizeStringSuitableUnits(_action.DataTransferred, false));
-
-                    default:
-                        return base.GetStatus(out img);
-                }
-               
-            }
-        }
-
-        #endregion
     }
-
 }
