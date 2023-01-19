@@ -966,7 +966,7 @@ This could be because the data source is not generating any data. Ensure the pre
     <value>No data was compiled. Press previous to select new items or servers and try again.</value>
   </data>
   <data name="ACTION_SYSTEM_STATUS_SUCCESSFUL" xml:space="preserve">
-    <value>Finished compiling status report</value>
+    <value>Finished compiling status report. It has been saved in the destination selected in the previous step.</value>
   </data>
   <data name="ACTION_SYSTEM_STATUS_SUCCESSFUL_PARTIAL" xml:space="preserve">
     <value>Finished compiling status report (with errors). A partial status report was compiled.</value>

@@ -2601,7 +2601,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Finished compiling status report.
+        ///   Looks up a localized string similar to Finished compiling status report. It has been saved in the destination selected in the previous step..
         /// </summary>
         public static string ACTION_SYSTEM_STATUS_SUCCESSFUL {
             get {
