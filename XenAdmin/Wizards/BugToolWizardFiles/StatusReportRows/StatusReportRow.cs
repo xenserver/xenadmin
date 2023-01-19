@@ -39,6 +39,8 @@ namespace XenAdmin.Wizards.BugToolWizardFiles.StatusReportRows
 {
     internal abstract class StatusReportRow : DataGridViewRow
     {
+        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         protected readonly DataGridViewExImageCell cellHostImg = new DataGridViewExImageCell();
         protected readonly DataGridViewTextBoxCell cellHost = new DataGridViewTextBoxCell();
         private readonly DataGridViewTextBoxCell cellStatus = new DataGridViewTextBoxCell();
@@ -63,6 +65,20 @@ namespace XenAdmin.Wizards.BugToolWizardFiles.StatusReportRows
 
         public void CancelAction()
         {
+            if (Action == null)
+            {
+                CreateAction(null, null);
+                if (Action != null)
+                {
+                    Action.Changed += Action_Changed;
+                    Action.Completed += Action_Completed;
+                    CancelAction();
+                }
+                else
+                {
+                    Log.Debug("Could not instantiate the requested action.");
+                }
+            }
             if (Action != null && !Action.IsCompleted)
                 Action.Cancel();
         }

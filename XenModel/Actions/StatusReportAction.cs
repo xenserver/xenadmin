@@ -55,6 +55,12 @@ namespace XenAdmin.Actions
             this.timeString = timeString;
             Status = ReportStatus.queued;
         }
+
+        public new void Cancel()
+        {
+            base.Cancel();
+            Status = ReportStatus.cancelled;
+        }
     }
 
     public class StatusReportClientSideAction : StatusReportAction
