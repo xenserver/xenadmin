@@ -1,4 +1,4 @@
-namespace XenAdmin.Wizards
+namespace XenAdmin.Wizards.BugToolWizardFiles
 {
     partial class BugToolWizard
     {

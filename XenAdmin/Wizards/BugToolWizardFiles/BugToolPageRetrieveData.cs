@@ -45,6 +45,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
     public partial class BugToolPageRetrieveData : XenTabPage
     {
         private const int MAX_DOWNLOADS_PER_CONNECTION = 3;
+        public string OutputFile { get; set; }
 
         public BugToolPageRetrieveData()
         {

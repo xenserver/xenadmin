@@ -32,15 +32,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using XenAdmin.Actions;
 using XenAdmin.Controls;
 using XenAdmin.Core;
-using XenAPI;
-using XenAdmin.Wizards.BugToolWizardFiles;
 using XenAdmin.Dialogs;
-using XenAdmin.Actions;
 using XenAdmin.Wizards.GenericPages;
+using XenAPI;
 
-namespace XenAdmin.Wizards
+namespace XenAdmin.Wizards.BugToolWizardFiles
 {
     public partial class BugToolWizard : XenWizardBase
     {
@@ -65,39 +64,19 @@ namespace XenAdmin.Wizards
             bugToolPageSelectHosts1 = new GenericSelectHostsPage();
             bugToolPageSelectCapabilities1 = new BugToolPageSelectCapabilities();
             rbacWarningPage = new RBACWarningPage();
-            bugToolPageRetrieveData = new BugToolPageRetrieveData();
+
             bugToolPageDestination1 = new BugToolPageDestination();
+            bugToolPageRetrieveData = new BugToolPageRetrieveData();
 
             AddPage(bugToolPageSelectHosts1);
             AddPage(bugToolPageSelectCapabilities1);
-            AddPage(bugToolPageRetrieveData);
+
             AddPage(bugToolPageDestination1);
+            AddPage(bugToolPageRetrieveData);
         }
 
         protected override void FinishWizard()
         {
-            AsyncAction action;
-            if (bugToolPageDestination1.Upload)
-            {
-                // The MultipleAction is only used as a wrapper, we will suppress its history and expose the sub-actions in the history
-                List<AsyncAction> subActions = new List<AsyncAction>();
-                ZipStatusReportAction zipAction = new ZipStatusReportAction(bugToolPageRetrieveData.OutputFolder, bugToolPageDestination1.OutputFile,false);
-                subActions.Add(zipAction);
-                UploadServerStatusReportAction uploadAction = new UploadServerStatusReportAction(bugToolPageDestination1.OutputFile,// tmp folder
-                                                                                           bugToolPageDestination1.UploadToken,// upload token
-                                                                                           bugToolPageDestination1.CaseNumber,// case id
-                                                                                           Registry.HealthCheckUploadDomainName,// domain name
-                                                                                           false); // suppressHistory
-                subActions.Add(uploadAction);
-                action = new MultipleAction(null, Messages.BUGTOOL_SAVING, Messages.BUGTOOL_SAVING, Messages.COMPLETED, subActions,true);
-            }
-            else
-            {
-                action = new ZipStatusReportAction(bugToolPageRetrieveData.OutputFolder, bugToolPageDestination1.OutputFile, false);
-            }
-
-            action.RunAsync();
-
             log.Debug("Cleaning up crash dump logs on server");
             var capabilities = bugToolPageSelectCapabilities1.CheckedCapabilities;
             foreach (Capability c in capabilities)
@@ -111,7 +90,7 @@ namespace XenAdmin.Wizards
                     DialogResult result;
                     using (var dlg = new NoIconDialog(Messages.REMOVE_CRASHDUMP_QUESTION,
                                 ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
-                        {WindowTitle = Messages.REMOVE_CRASHDUMP_FILES})
+                    { WindowTitle = Messages.REMOVE_CRASHDUMP_FILES })
                     {
                         result = dlg.ShowDialog(this);
                     }
@@ -144,13 +123,17 @@ namespace XenAdmin.Wizards
                 if (selectedHostsConnections.Any(Helpers.ConnectionRequiresRbac))
                 {
                     rbacWarningPage.SetPermissionChecks(selectedHostsConnections,
-                        new WizardRbacCheck(Messages.RBAC_GET_SYSTEM_STATUS_BLOCKED, SingleHostStatusAction.StaticRBACDependencies) {Blocking = true});
+                        new WizardRbacCheck(Messages.RBAC_GET_SYSTEM_STATUS_BLOCKED, SingleHostStatusAction.StaticRBACDependencies) { Blocking = true });
                     AddAfterPage(bugToolPageSelectHosts1, rbacWarningPage);
                 }
             }
             else if (prevPageType == typeof(BugToolPageSelectCapabilities))
             {
                 bugToolPageRetrieveData.CapabilityList = bugToolPageSelectCapabilities1.CheckedCapabilities;
+            }
+            else if (prevPageType == typeof(BugToolPageDestination))
+            {
+                bugToolPageRetrieveData.OutputFile = bugToolPageDestination1.OutputFile;
             }
         }
 
