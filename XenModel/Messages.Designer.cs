@@ -1629,6 +1629,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Packaging system status failed.
+        /// </summary>
+        public static string ACTION_PACKAGE_STATUS_REPORT_FAILED {
+            get {
+                return ResourceManager.GetString("ACTION_PACKAGE_STATUS_REPORT_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Packaging system status cancelled.
+        /// </summary>
+        public static string ACTION_PACKAGE_STAUS_REPORT_CANCELLED {
+            get {
+                return ResourceManager.GetString("ACTION_PACKAGE_STAUS_REPORT_CANCELLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pausing.
         /// </summary>
         public static string ACTION_PAUSE_CONTAINER_DESCRIPTION {
@@ -6361,6 +6379,15 @@ namespace XenAdmin {
         public static string BUGTOOL_FILE_PREFIX {
             get {
                 return ResourceManager.GetString("BUGTOOL_FILE_PREFIX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Packaging report to selected destination.
+        /// </summary>
+        public static string BUGTOOL_PACKAGE_STATUS_REPORT {
+            get {
+                return ResourceManager.GetString("BUGTOOL_PACKAGE_STATUS_REPORT", resourceCulture);
             }
         }
         

@@ -48,8 +48,8 @@ namespace XenAdmin.Actions
         public ReportStatus Status { get; protected set; }
         public Exception Error { get; protected set; }
 
-        protected StatusReportAction(IXenConnection connection, string title, string filePath, string timeString)
-            :base(connection, title, true)
+        protected StatusReportAction(IXenConnection connection, string title, string filePath, string timeString, bool suppressHistory = true)
+            : base(connection, title, suppressHistory)
         {
             this.filePath = filePath;
             this.timeString = timeString;

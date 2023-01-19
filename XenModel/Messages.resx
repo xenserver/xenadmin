@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -640,6 +640,12 @@ This could be because the data source is not generating any data. Ensure the pre
   </data>
   <data name="ACTION_MULTIPLE_DR_TASK_CREATE_TITLE" xml:space="preserve">
     <value>Prepare Storage Repositories</value>
+  </data>
+  <data name="ACTION_PACKAGE_STATUS_REPORT_FAILED" xml:space="preserve">
+    <value>Packaging system status failed</value>
+  </data>
+  <data name="ACTION_PACKAGE_STAUS_REPORT_CANCELLED" xml:space="preserve">
+    <value>Packaging system status cancelled</value>
   </data>
   <data name="ACTION_PAUSE_CONTAINER_DESCRIPTION" xml:space="preserve">
     <value>Pausing</value>
@@ -2322,6 +2328,9 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
   </data>
   <data name="BUGTOOL_FILE_PREFIX" xml:space="preserve">
     <value>status-report-</value>
+  </data>
+  <data name="BUGTOOL_PACKAGE_STATUS_REPORT" xml:space="preserve">
+    <value>Packaging report to selected destination</value>
   </data>
   <data name="BUGTOOL_PAGE_CAPABILITIES_PAGETITLE" xml:space="preserve">
     <value>Select the data you want to include in your report</value>

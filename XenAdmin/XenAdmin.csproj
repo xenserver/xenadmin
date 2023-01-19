@@ -796,6 +796,7 @@
     </Compile>
     <Compile Include="Wizards\BugToolWizardFiles\StatusReportRows\ClientSideDataRow.cs" />
     <Compile Include="Wizards\BugToolWizardFiles\StatusReportRows\HostStatusRow.cs" />
+    <Compile Include="Wizards\BugToolWizardFiles\StatusReportRows\PackageStatusReportRow.cs" />
     <Compile Include="Wizards\BugToolWizardFiles\StatusReportRows\StatusReportRow.cs" />
     <Compile Include="Wizards\ConversionWizard\ConversionWizard.cs">
       <SubType>Form</SubType>
