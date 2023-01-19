@@ -1,3 +1,5 @@
+using XenAdmin.Wizards.BugToolWizardFiles.StatusReportRows;
+
 namespace XenAdmin.Wizards.BugToolWizardFiles
 {
     partial class BugToolPageRetrieveData
