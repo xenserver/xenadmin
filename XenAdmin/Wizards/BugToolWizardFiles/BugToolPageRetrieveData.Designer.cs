@@ -70,6 +70,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             // 
             resources.ApplyResources(this.linkLabelBlurb, "linkLabelBlurb");
             this.linkLabelBlurb.Name = "linkLabelBlurb";
+            this.linkLabelBlurb.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelBlurb_LinkClicked);
             // 
             // labelError
             // 

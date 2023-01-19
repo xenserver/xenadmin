@@ -30,6 +30,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -44,6 +45,8 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
 {
     public partial class BugToolPageRetrieveData : XenTabPage
     {
+        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private const int MAX_DOWNLOADS_PER_CONNECTION = 3;
         public string OutputFile { get; set; }
 
@@ -380,6 +383,20 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             Directory.CreateDirectory(folder);
 
             return folder;
+        }
+
+        private void linkLabelBlurb_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                Process.Start(InvisibleMessages.CIS_URL);
+            }
+            catch (Exception exception)
+            {
+                Log.Error($"Error while opening {InvisibleMessages.CIS_URL}.", exception);
+                using (var dlg = new ErrorDialog(string.Format(Messages.COULD_NOT_OPEN_URL, InvisibleMessages.CIS_URL)))
+                    dlg.ShowDialog(Program.MainWindow);
+            }
         }
     }
 }
