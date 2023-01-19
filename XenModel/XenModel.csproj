@@ -83,6 +83,7 @@
     <Compile Include="Actions\GPU\VgpuConfigurationAction.cs" />
     <Compile Include="Actions\Host\ApplyLicenseEditionAction.cs" />
     <Compile Include="Actions\Host\ChangeControlDomainMemoryAction.cs" />
+    <Compile Include="Actions\Host\IDataTransferStatusReportAction.cs" />
     <Compile Include="Actions\Host\InstallCertificateAction.cs" />
     <Compile Include="Actions\Host\DestroyHostAction.cs" />
     <Compile Include="Actions\Host\EnableHostAction.cs" />

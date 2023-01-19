@@ -6547,11 +6547,38 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Downloading.
+        /// </summary>
+        public static string BUGTOOL_REPORTSTATUS_DOWNLOADING_NO_DATA {
+            get {
+                return ResourceManager.GetString("BUGTOOL_REPORTSTATUS_DOWNLOADING_NO_DATA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed - Please see logs for details.
         /// </summary>
         public static string BUGTOOL_REPORTSTATUS_FAILED {
             get {
                 return ResourceManager.GetString("BUGTOOL_REPORTSTATUS_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Packaging - {0}.
+        /// </summary>
+        public static string BUGTOOL_REPORTSTATUS_PACKAGING {
+            get {
+                return ResourceManager.GetString("BUGTOOL_REPORTSTATUS_PACKAGING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Packaging.
+        /// </summary>
+        public static string BUGTOOL_REPORTSTATUS_PACKAGING_NO_DATA {
+            get {
+                return ResourceManager.GetString("BUGTOOL_REPORTSTATUS_PACKAGING_NO_DATA", resourceCulture);
             }
         }
         

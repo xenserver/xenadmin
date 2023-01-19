@@ -29,37 +29,10 @@
  * SUCH DAMAGE.
  */
 
-using System.Collections.Generic;
-using System.Drawing;
-using XenAdmin.Actions;
-using XenAdmin.Network;
-using XenAPI;
-
-namespace XenAdmin.Wizards.BugToolWizardFiles.StatusReportRows
+namespace XenAdmin.Actions
 {
-    internal class HostStatusRow : StatusReportRow
+    public interface IDataTransferStatusReportAction
     {
-        private readonly long size;
-        private readonly List<string> capabilityKeys;
-        private readonly Host Host;
-        private SingleHostStatusAction _action;
-
-        public HostStatusRow(Host host, long size, List<string> capabilityKeys)
-        {
-            Host = host;
-            this.size = size;
-            this.capabilityKeys = capabilityKeys;
-            cellHostImg.Value = Images.GetImage16For(Host);
-            cellHost.Value = Host.Name();
-        }
-
-        public IXenConnection Connection => Host.Connection;
-
-        public override StatusReportAction Action => _action;
-
-        protected override void CreateAction(string path, string time)
-        {
-            _action = new SingleHostStatusAction(Host, size, capabilityKeys, path, time);
-        }
+        long DataTransferred { get; }
     }
 }

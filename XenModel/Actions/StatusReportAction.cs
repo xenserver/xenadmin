@@ -38,7 +38,7 @@ using XenAPI;
 
 namespace XenAdmin.Actions
 {
-    public enum ReportStatus { queued, compiling, downloading, succeeded, failed, cancelled }
+    public enum ReportStatus { queued, compiling, downloading, packaging, succeeded, failed, cancelled }
 
     public abstract class StatusReportAction : AsyncAction
     {

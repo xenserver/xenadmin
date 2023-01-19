@@ -157,6 +157,21 @@ namespace XenAdmin.Wizards.BugToolWizardFiles.StatusReportRows
                 case ReportStatus.queued:
                     return Messages.BUGTOOL_REPORTSTATUS_QUEUED;
 
+                case ReportStatus.downloading:
+                    if (Action is IDataTransferStatusReportAction actionDownloading)
+                    {
+                        return string.Format(Messages.BUGTOOL_REPORTSTATUS_DOWNLOADING,
+                                            Util.MemorySizeStringSuitableUnits(actionDownloading.DataTransferred, false));
+                    }
+                    return Messages.BUGTOOL_REPORTSTATUS_DOWNLOADING_NO_DATA;
+
+                case ReportStatus.packaging:
+                    if (Action is IDataTransferStatusReportAction actionPackaging)
+                    {
+                        return string.Format(Messages.BUGTOOL_REPORTSTATUS_PACKAGING,
+                            Util.MemorySizeStringSuitableUnits(actionPackaging.DataTransferred, false));
+                    }
+                    return Messages.BUGTOOL_REPORTSTATUS_PACKAGING_NO_DATA;
                 default:
                     return string.Empty;
             }
