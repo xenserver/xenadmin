@@ -101,7 +101,7 @@ namespace XenAdmin.TabPages
             if (XenAdminConfigManager.Provider.ObjectIsHidden(vm.opaque_ref))
                 return false;
 
-            return vm.is_a_real_vm() && vm.Show(Properties.Settings.Default.ShowHiddenVMs) && !vm.IsBeingCreated;
+            return vm.IsRealVm() && vm.Show(Properties.Settings.Default.ShowHiddenVMs) && !vm.IsBeingCreated;
         }
 
         private static bool VmIsJustAdded(VM vm)
@@ -138,7 +138,7 @@ namespace XenAdmin.TabPages
                 foreach (var vm in Connection.Cache.VMs)
                 {
                     // Add all real VMs and templates that begin with __gui__ (because this may be a new VM)
-                    var addVm = vm.is_a_real_vm() || VmIsJustAdded(vm) || vm.IsBeingCreated;
+                    var addVm = vm.IsRealVm() || VmIsJustAdded(vm) || vm.IsBeingCreated;
 
                     if (!addVm)
                         continue;

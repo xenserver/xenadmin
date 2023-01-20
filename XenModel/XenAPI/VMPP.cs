@@ -167,7 +167,7 @@ namespace XenAPI
             VMs = proxy.VMs == null ? null : XenRef<VM>.Create(proxy.VMs);
             is_alarm_enabled = (bool)proxy.is_alarm_enabled;
             alarm_config = proxy.alarm_config == null ? null : Maps.convert_from_proxy_string_string(proxy.alarm_config);
-            recent_alerts = proxy.recent_alerts == null ? new string[] {} : (string [])proxy.recent_alerts;
+            recent_alerts = proxy.recent_alerts == null ? new string[] {} : (string[])proxy.recent_alerts;
         }
 
         /// <summary>
@@ -716,7 +716,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.vmpp_get_recent_alerts(session.opaque_ref, _vmpp);
             else
-                return (string [])session.XmlRpcProxy.vmpp_get_recent_alerts(session.opaque_ref, _vmpp ?? "").parse();
+                return (string[])session.XmlRpcProxy.vmpp_get_recent_alerts(session.opaque_ref, _vmpp ?? "").parse();
         }
 
         /// <summary>
@@ -819,7 +819,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.vmpp_get_alerts(session.opaque_ref, _vmpp, _hours_from_now);
             else
-                return (string [])session.XmlRpcProxy.vmpp_get_alerts(session.opaque_ref, _vmpp ?? "", _hours_from_now.ToString()).parse();
+                return (string[])session.XmlRpcProxy.vmpp_get_alerts(session.opaque_ref, _vmpp ?? "", _hours_from_now.ToString()).parse();
         }
 
         /// <summary>

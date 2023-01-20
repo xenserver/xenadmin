@@ -244,25 +244,6 @@ namespace XenAdmin.Core
         }
 
         /// <summary>
-        /// 
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="lst1">Must not be null.</param>
-        /// <param name="lst2">Must not be null.</param>
-        /// <returns></returns>
-        public static List<T> ListsCommonItems<T>(List<T> lst1, List<T> lst2)
-        {
-            List<T> common = new List<T>();
-            foreach (T item1 in lst1)
-                if (lst2.Contains(item1) && !common.Contains(item1))
-                    common.Add(item1);
-            foreach (T item2 in lst2)
-                if (lst1.Contains(item2) && !common.Contains(item2))
-                    common.Add(item2);
-            return common;
-        }
-
-        /// <summary>
         /// Determines if two arrays have the same elements in the same order.
         /// Elements may be null.
         /// Uses Object.Equals() when comparing (pairs of non-null) elements.
@@ -553,8 +534,7 @@ namespace XenAdmin.Core
         /// </summary>
         public static bool FeatureForbidden(IXenObject iXenObject, Predicate<Host> restrictionTest)
         {
-            IXenConnection connection = (iXenObject == null ? null : iXenObject.Connection);
-            return FeatureForbidden(connection, restrictionTest);
+            return FeatureForbidden(iXenObject?.Connection, restrictionTest);
         }
 
         public static bool FeatureForbidden(IXenConnection xenConnection, Predicate<Host> restrictionTest)

@@ -139,11 +139,11 @@ namespace XenAPI
             version = proxy.version == null ? null : proxy.version;
             required_api_version = proxy.required_api_version == null ? null : proxy.required_api_version;
             configuration = proxy.configuration == null ? null : Maps.convert_from_proxy_string_string(proxy.configuration);
-            capabilities = proxy.capabilities == null ? new string[] {} : (string [])proxy.capabilities;
+            capabilities = proxy.capabilities == null ? new string[] {} : (string[])proxy.capabilities;
             features = proxy.features == null ? null : Maps.convert_from_proxy_string_long(proxy.features);
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
             driver_filename = proxy.driver_filename == null ? null : proxy.driver_filename;
-            required_cluster_stack = proxy.required_cluster_stack == null ? new string[] {} : (string [])proxy.required_cluster_stack;
+            required_cluster_stack = proxy.required_cluster_stack == null ? new string[] {} : (string[])proxy.required_cluster_stack;
         }
 
         /// <summary>
@@ -426,7 +426,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.sm_get_capabilities(session.opaque_ref, _sm);
             else
-                return (string [])session.XmlRpcProxy.sm_get_capabilities(session.opaque_ref, _sm ?? "").parse();
+                return (string[])session.XmlRpcProxy.sm_get_capabilities(session.opaque_ref, _sm ?? "").parse();
         }
 
         /// <summary>
@@ -482,7 +482,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.sm_get_required_cluster_stack(session.opaque_ref, _sm);
             else
-                return (string [])session.XmlRpcProxy.sm_get_required_cluster_stack(session.opaque_ref, _sm ?? "").parse();
+                return (string[])session.XmlRpcProxy.sm_get_required_cluster_stack(session.opaque_ref, _sm ?? "").parse();
         }
 
         /// <summary>

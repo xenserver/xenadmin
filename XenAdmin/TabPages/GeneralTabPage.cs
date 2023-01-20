@@ -428,6 +428,7 @@ namespace XenAdmin.TabPages
                 GenerateVCPUsBox();
                 GenerateDockerInfoBox();
                 GenerateReadCachingBox();
+                GenerateDeviceSecurityBox();
             }
 
             // hide all the sections which haven't been populated, those that have make sure are visible
@@ -1696,6 +1697,22 @@ namespace XenAdmin.TabPages
                 var reason = vm.ReadCachingDisabledReason();
                 if (reason != null)
                     s.AddEntry(FriendlyName("VM.read_caching_reason"), reason);
+            }
+        }
+
+        private void GenerateDeviceSecurityBox()
+        {
+            if (!(xenObject is VM vm) || Helpers.FeatureForbidden(vm, Host.RestrictVtpm) ||
+                !Helpers.XapiEqualOrGreater_22_26_0(vm.Connection))
+                return;
+
+            PDSection s = pdSectionDeviceSecurity;
+
+            if (vm.VTPMs.Count > 0)
+            {
+                s.AddEntry(Messages.VTPM,
+                    vm.VTPMs.Count == 1 ? Messages.VTPM_ATTACHED_ONE : string.Format(Messages.VTPM_ATTACHED_MANY, vm.VTPMs.Count),
+                    new CommandToolStripMenuItem(new VtpmCommand(Program.MainWindow, vm), true));
             }
         }
 

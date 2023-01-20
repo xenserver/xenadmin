@@ -48,7 +48,7 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
         public CPUIncompatibilityProblem(Check check, Pool pool)
             : base(check, pool)
         {
-            foreach (var vm in pool.Connection.Cache.VMs.Where(vm => vm.is_a_real_vm() && vm.power_state != vm_power_state.Halted))
+            foreach (var vm in pool.Connection.Cache.VMs.Where(vm => vm.IsRealVm() && vm.power_state != vm_power_state.Halted))
             {
                 vmsOnHosts.Add(vm, vm.resident_on);
             }

@@ -123,11 +123,11 @@ namespace XenAPI
         session_get_auth_user_name(string session, string _session);
 
         [XmlRpcMethod("session.get_rbac_permissions")]
-        Response<string []>
+        Response<string[]>
         session_get_rbac_permissions(string session, string _session);
 
         [XmlRpcMethod("session.get_tasks")]
-        Response<string []>
+        Response<string[]>
         session_get_tasks(string session, string _session);
 
         [XmlRpcMethod("session.get_parent")]
@@ -191,7 +191,7 @@ namespace XenAPI
         session_local_logout(string session);
 
         [XmlRpcMethod("session.get_all_subject_identifiers")]
-        Response<string []>
+        Response<string[]>
         session_get_all_subject_identifiers(string session);
 
         [XmlRpcMethod("Async.session.get_all_subject_identifiers")]
@@ -219,7 +219,7 @@ namespace XenAPI
         auth_get_subject_information_from_identifier(string session, string _subject_identifier);
 
         [XmlRpcMethod("auth.get_group_membership")]
-        Response<string []>
+        Response<string[]>
         auth_get_group_membership(string session, string _subject_identifier);
 
         [XmlRpcMethod("auth.get_all_records")]
@@ -263,7 +263,7 @@ namespace XenAPI
         subject_get_other_config(string session, string _subject);
 
         [XmlRpcMethod("subject.get_roles")]
-        Response<string []>
+        Response<string[]>
         subject_get_roles(string session, string _subject);
 
         [XmlRpcMethod("subject.add_to_roles")]
@@ -275,11 +275,11 @@ namespace XenAPI
         subject_remove_from_roles(string session, string _subject, string _role);
 
         [XmlRpcMethod("subject.get_permissions_name_label")]
-        Response<string []>
+        Response<string[]>
         subject_get_permissions_name_label(string session, string _subject);
 
         [XmlRpcMethod("subject.get_all")]
-        Response<string []>
+        Response<string[]>
         subject_get_all(string session);
 
         [XmlRpcMethod("subject.get_all_records")]
@@ -295,7 +295,7 @@ namespace XenAPI
         role_get_by_uuid(string session, string _uuid);
 
         [XmlRpcMethod("role.get_by_name_label")]
-        Response<string []>
+        Response<string[]>
         role_get_by_name_label(string session, string _label);
 
         [XmlRpcMethod("role.get_uuid")]
@@ -311,7 +311,7 @@ namespace XenAPI
         role_get_name_description(string session, string _role);
 
         [XmlRpcMethod("role.get_subroles")]
-        Response<string []>
+        Response<string[]>
         role_get_subroles(string session, string _role);
 
         [XmlRpcMethod("role.get_is_internal")]
@@ -319,23 +319,23 @@ namespace XenAPI
         role_get_is_internal(string session, string _role);
 
         [XmlRpcMethod("role.get_permissions")]
-        Response<string []>
+        Response<string[]>
         role_get_permissions(string session, string _role);
 
         [XmlRpcMethod("role.get_permissions_name_label")]
-        Response<string []>
+        Response<string[]>
         role_get_permissions_name_label(string session, string _role);
 
         [XmlRpcMethod("role.get_by_permission")]
-        Response<string []>
+        Response<string[]>
         role_get_by_permission(string session, string _role);
 
         [XmlRpcMethod("role.get_by_permission_name_label")]
-        Response<string []>
+        Response<string[]>
         role_get_by_permission_name_label(string session, string _label);
 
         [XmlRpcMethod("role.get_all")]
-        Response<string []>
+        Response<string[]>
         role_get_all(string session);
 
         [XmlRpcMethod("role.get_all_records")]
@@ -351,7 +351,7 @@ namespace XenAPI
         task_get_by_uuid(string session, string _uuid);
 
         [XmlRpcMethod("task.get_by_name_label")]
-        Response<string []>
+        Response<string[]>
         task_get_by_name_label(string session, string _label);
 
         [XmlRpcMethod("task.get_uuid")]
@@ -367,7 +367,7 @@ namespace XenAPI
         task_get_name_description(string session, string _task);
 
         [XmlRpcMethod("task.get_allowed_operations")]
-        Response<string []>
+        Response<string[]>
         task_get_allowed_operations(string session, string _task);
 
         [XmlRpcMethod("task.get_current_operations")]
@@ -403,7 +403,7 @@ namespace XenAPI
         task_get_result(string session, string _task);
 
         [XmlRpcMethod("task.get_error_info")]
-        Response<string []>
+        Response<string[]>
         task_get_error_info(string session, string _task);
 
         [XmlRpcMethod("task.get_other_config")]
@@ -415,7 +415,7 @@ namespace XenAPI
         task_get_subtask_of(string session, string _task);
 
         [XmlRpcMethod("task.get_subtasks")]
-        Response<string []>
+        Response<string[]>
         task_get_subtasks(string session, string _task);
 
         [XmlRpcMethod("task.get_backtrace")]
@@ -464,10 +464,10 @@ namespace XenAPI
 
         [XmlRpcMethod("task.set_error_info")]
         Response<string>
-        task_set_error_info(string session, string _task, string [] _value);
+        task_set_error_info(string session, string _task, string[] _value);
 
         [XmlRpcMethod("task.get_all")]
-        Response<string []>
+        Response<string[]>
         task_get_all(string session);
 
         [XmlRpcMethod("task.get_all_records")]
@@ -523,7 +523,7 @@ namespace XenAPI
         pool_get_ha_configuration(string session, string _pool);
 
         [XmlRpcMethod("pool.get_ha_statefiles")]
-        Response<string []>
+        Response<string[]>
         pool_get_ha_statefiles(string session, string _pool);
 
         [XmlRpcMethod("pool.get_ha_host_failures_to_tolerate")]
@@ -547,7 +547,7 @@ namespace XenAPI
         pool_get_blobs(string session, string _pool);
 
         [XmlRpcMethod("pool.get_tags")]
-        Response<string []>
+        Response<string[]>
         pool_get_tags(string session, string _pool);
 
         [XmlRpcMethod("pool.get_gui_config")]
@@ -591,7 +591,7 @@ namespace XenAPI
         pool_get_restrictions(string session, string _pool);
 
         [XmlRpcMethod("pool.get_metadata_VDIs")]
-        Response<string []>
+        Response<string[]>
         pool_get_metadata_vdis(string session, string _pool);
 
         [XmlRpcMethod("pool.get_ha_cluster_stack")]
@@ -599,7 +599,7 @@ namespace XenAPI
         pool_get_ha_cluster_stack(string session, string _pool);
 
         [XmlRpcMethod("pool.get_allowed_operations")]
-        Response<string []>
+        Response<string[]>
         pool_get_allowed_operations(string session, string _pool);
 
         [XmlRpcMethod("pool.get_current_operations")]
@@ -639,7 +639,7 @@ namespace XenAPI
         pool_get_tls_verification_enabled(string session, string _pool);
 
         [XmlRpcMethod("pool.get_repositories")]
-        Response<string []>
+        Response<string[]>
         pool_get_repositories(string session, string _pool);
 
         [XmlRpcMethod("pool.get_client_certificate_auth_enabled")]
@@ -696,7 +696,7 @@ namespace XenAPI
 
         [XmlRpcMethod("pool.set_tags")]
         Response<string>
-        pool_set_tags(string session, string _pool, string [] _tags);
+        pool_set_tags(string session, string _pool, string[] _tags);
 
         [XmlRpcMethod("pool.add_tags")]
         Response<string>
@@ -783,7 +783,7 @@ namespace XenAPI
         pool_emergency_reset_master(string session, string _master_address);
 
         [XmlRpcMethod("pool.recover_slaves")]
-        Response<string []>
+        Response<string[]>
         pool_recover_slaves(string session);
 
         [XmlRpcMethod("Async.pool.recover_slaves")]
@@ -791,7 +791,7 @@ namespace XenAPI
         async_pool_recover_slaves(string session);
 
         [XmlRpcMethod("pool.create_VLAN")]
-        Response<string []>
+        Response<string[]>
         pool_create_vlan(string session, string _device, string _network, string _vlan);
 
         [XmlRpcMethod("Async.pool.create_VLAN")]
@@ -807,7 +807,7 @@ namespace XenAPI
         async_pool_management_reconfigure(string session, string _network);
 
         [XmlRpcMethod("pool.create_VLAN_from_PIF")]
-        Response<string []>
+        Response<string[]>
         pool_create_vlan_from_pif(string session, string _pif, string _network, string _vlan);
 
         [XmlRpcMethod("Async.pool.create_VLAN_from_PIF")]
@@ -816,11 +816,11 @@ namespace XenAPI
 
         [XmlRpcMethod("pool.enable_ha")]
         Response<string>
-        pool_enable_ha(string session, string [] _heartbeat_srs, Object _configuration);
+        pool_enable_ha(string session, string[] _heartbeat_srs, Object _configuration);
 
         [XmlRpcMethod("Async.pool.enable_ha")]
         Response<string>
-        async_pool_enable_ha(string session, string [] _heartbeat_srs, Object _configuration);
+        async_pool_enable_ha(string session, string[] _heartbeat_srs, Object _configuration);
 
         [XmlRpcMethod("pool.disable_ha")]
         Response<string>
@@ -864,7 +864,7 @@ namespace XenAPI
 
         [XmlRpcMethod("pool.ha_compute_vm_failover_plan")]
         Response<Object>
-        pool_ha_compute_vm_failover_plan(string session, string [] _failed_hosts, string [] _failed_vms);
+        pool_ha_compute_vm_failover_plan(string session, string[] _failed_hosts, string[] _failed_vms);
 
         [XmlRpcMethod("pool.set_ha_host_failures_to_tolerate")]
         Response<string>
@@ -967,7 +967,7 @@ namespace XenAPI
         async_pool_certificate_uninstall(string session, string _name);
 
         [XmlRpcMethod("pool.certificate_list")]
-        Response<string []>
+        Response<string[]>
         pool_certificate_list(string session);
 
         [XmlRpcMethod("Async.pool.certificate_list")]
@@ -1007,7 +1007,7 @@ namespace XenAPI
         async_pool_crl_uninstall(string session, string _name);
 
         [XmlRpcMethod("pool.crl_list")]
-        Response<string []>
+        Response<string[]>
         pool_crl_list(string session);
 
         [XmlRpcMethod("Async.pool.crl_list")]
@@ -1144,11 +1144,11 @@ namespace XenAPI
 
         [XmlRpcMethod("pool.set_repositories")]
         Response<string>
-        pool_set_repositories(string session, string _pool, string [] _value);
+        pool_set_repositories(string session, string _pool, string[] _value);
 
         [XmlRpcMethod("Async.pool.set_repositories")]
         Response<string>
-        async_pool_set_repositories(string session, string _pool, string [] _value);
+        async_pool_set_repositories(string session, string _pool, string[] _value);
 
         [XmlRpcMethod("pool.add_repository")]
         Response<string>
@@ -1175,7 +1175,7 @@ namespace XenAPI
         async_pool_sync_updates(string session, string _pool, bool _force, string _token, string _token_id);
 
         [XmlRpcMethod("pool.check_update_readiness")]
-        Response<string []>
+        Response<string[][]>
         pool_check_update_readiness(string session, string _pool, bool _requires_reboot);
 
         [XmlRpcMethod("Async.pool.check_update_readiness")]
@@ -1223,7 +1223,7 @@ namespace XenAPI
         async_pool_set_uefi_certificates(string session, string _pool, string _value);
 
         [XmlRpcMethod("pool.get_all")]
-        Response<string []>
+        Response<string[]>
         pool_get_all(string session);
 
         [XmlRpcMethod("pool.get_all_records")]
@@ -1239,7 +1239,7 @@ namespace XenAPI
         pool_patch_get_by_uuid(string session, string _uuid);
 
         [XmlRpcMethod("pool_patch.get_by_name_label")]
-        Response<string []>
+        Response<string[]>
         pool_patch_get_by_name_label(string session, string _label);
 
         [XmlRpcMethod("pool_patch.get_uuid")]
@@ -1267,11 +1267,11 @@ namespace XenAPI
         pool_patch_get_pool_applied(string session, string _pool_patch);
 
         [XmlRpcMethod("pool_patch.get_host_patches")]
-        Response<string []>
+        Response<string[]>
         pool_patch_get_host_patches(string session, string _pool_patch);
 
         [XmlRpcMethod("pool_patch.get_after_apply_guidance")]
-        Response<string []>
+        Response<string[]>
         pool_patch_get_after_apply_guidance(string session, string _pool_patch);
 
         [XmlRpcMethod("pool_patch.get_pool_update")]
@@ -1351,7 +1351,7 @@ namespace XenAPI
         async_pool_patch_clean_on_host(string session, string _pool_patch, string _host);
 
         [XmlRpcMethod("pool_patch.get_all")]
-        Response<string []>
+        Response<string[]>
         pool_patch_get_all(string session);
 
         [XmlRpcMethod("pool_patch.get_all_records")]
@@ -1367,7 +1367,7 @@ namespace XenAPI
         pool_update_get_by_uuid(string session, string _uuid);
 
         [XmlRpcMethod("pool_update.get_by_name_label")]
-        Response<string []>
+        Response<string[]>
         pool_update_get_by_name_label(string session, string _label);
 
         [XmlRpcMethod("pool_update.get_uuid")]
@@ -1395,7 +1395,7 @@ namespace XenAPI
         pool_update_get_key(string session, string _pool_update);
 
         [XmlRpcMethod("pool_update.get_after_apply_guidance")]
-        Response<string []>
+        Response<string[]>
         pool_update_get_after_apply_guidance(string session, string _pool_update);
 
         [XmlRpcMethod("pool_update.get_vdi")]
@@ -1403,7 +1403,7 @@ namespace XenAPI
         pool_update_get_vdi(string session, string _pool_update);
 
         [XmlRpcMethod("pool_update.get_hosts")]
-        Response<string []>
+        Response<string[]>
         pool_update_get_hosts(string session, string _pool_update);
 
         [XmlRpcMethod("pool_update.get_other_config")]
@@ -1475,7 +1475,7 @@ namespace XenAPI
         async_pool_update_destroy(string session, string _pool_update);
 
         [XmlRpcMethod("pool_update.get_all")]
-        Response<string []>
+        Response<string[]>
         pool_update_get_all(string session);
 
         [XmlRpcMethod("pool_update.get_all_records")]
@@ -1507,7 +1507,7 @@ namespace XenAPI
         async_vm_destroy(string session, string _vm);
 
         [XmlRpcMethod("VM.get_by_name_label")]
-        Response<string []>
+        Response<string[]>
         vm_get_by_name_label(string session, string _label);
 
         [XmlRpcMethod("VM.get_uuid")]
@@ -1515,7 +1515,7 @@ namespace XenAPI
         vm_get_uuid(string session, string _vm);
 
         [XmlRpcMethod("VM.get_allowed_operations")]
-        Response<string []>
+        Response<string[]>
         vm_get_allowed_operations(string session, string _vm);
 
         [XmlRpcMethod("VM.get_current_operations")]
@@ -1611,27 +1611,27 @@ namespace XenAPI
         vm_get_actions_after_crash(string session, string _vm);
 
         [XmlRpcMethod("VM.get_consoles")]
-        Response<string []>
+        Response<string[]>
         vm_get_consoles(string session, string _vm);
 
         [XmlRpcMethod("VM.get_VIFs")]
-        Response<string []>
+        Response<string[]>
         vm_get_vifs(string session, string _vm);
 
         [XmlRpcMethod("VM.get_VBDs")]
-        Response<string []>
+        Response<string[]>
         vm_get_vbds(string session, string _vm);
 
         [XmlRpcMethod("VM.get_VUSBs")]
-        Response<string []>
+        Response<string[]>
         vm_get_vusbs(string session, string _vm);
 
         [XmlRpcMethod("VM.get_crash_dumps")]
-        Response<string []>
+        Response<string[]>
         vm_get_crash_dumps(string session, string _vm);
 
         [XmlRpcMethod("VM.get_VTPMs")]
-        Response<string []>
+        Response<string[]>
         vm_get_vtpms(string session, string _vm);
 
         [XmlRpcMethod("VM.get_PV_bootloader")]
@@ -1735,7 +1735,7 @@ namespace XenAPI
         vm_get_snapshot_of(string session, string _vm);
 
         [XmlRpcMethod("VM.get_snapshots")]
-        Response<string []>
+        Response<string[]>
         vm_get_snapshots(string session, string _vm);
 
         [XmlRpcMethod("VM.get_snapshot_time")]
@@ -1751,7 +1751,7 @@ namespace XenAPI
         vm_get_blobs(string session, string _vm);
 
         [XmlRpcMethod("VM.get_tags")]
-        Response<string []>
+        Response<string[]>
         vm_get_tags(string session, string _vm);
 
         [XmlRpcMethod("VM.get_blocked_operations")]
@@ -1771,7 +1771,7 @@ namespace XenAPI
         vm_get_parent(string session, string _vm);
 
         [XmlRpcMethod("VM.get_children")]
-        Response<string []>
+        Response<string[]>
         vm_get_children(string session, string _vm);
 
         [XmlRpcMethod("VM.get_bios_strings")]
@@ -1811,11 +1811,11 @@ namespace XenAPI
         vm_get_order(string session, string _vm);
 
         [XmlRpcMethod("VM.get_VGPUs")]
-        Response<string []>
+        Response<string[]>
         vm_get_vgpus(string session, string _vm);
 
         [XmlRpcMethod("VM.get_attached_PCIs")]
-        Response<string []>
+        Response<string[]>
         vm_get_attached_pcis(string session, string _vm);
 
         [XmlRpcMethod("VM.get_suspend_SR")]
@@ -1855,7 +1855,7 @@ namespace XenAPI
         vm_get_nvram(string session, string _vm);
 
         [XmlRpcMethod("VM.get_pending_guidances")]
-        Response<string []>
+        Response<string[]>
         vm_get_pending_guidances(string session, string _vm);
 
         [XmlRpcMethod("VM.set_name_label")]
@@ -1980,7 +1980,7 @@ namespace XenAPI
 
         [XmlRpcMethod("VM.set_tags")]
         Response<string>
-        vm_set_tags(string session, string _vm, string [] _tags);
+        vm_set_tags(string session, string _vm, string[] _tags);
 
         [XmlRpcMethod("VM.add_tags")]
         Response<string>
@@ -2020,11 +2020,11 @@ namespace XenAPI
 
         [XmlRpcMethod("VM.snapshot")]
         Response<string>
-        vm_snapshot(string session, string _vm, string _new_name, string [] _ignore_vdis);
+        vm_snapshot(string session, string _vm, string _new_name, string[] _ignore_vdis);
 
         [XmlRpcMethod("Async.VM.snapshot")]
         Response<string>
-        async_vm_snapshot(string session, string _vm, string _new_name, string [] _ignore_vdis);
+        async_vm_snapshot(string session, string _vm, string _new_name, string[] _ignore_vdis);
 
         [XmlRpcMethod("VM.snapshot_with_quiesce")]
         Response<string>
@@ -2415,15 +2415,15 @@ namespace XenAPI
         async_vm_update_allowed_operations(string session, string _vm);
 
         [XmlRpcMethod("VM.get_allowed_VBD_devices")]
-        Response<string []>
+        Response<string[]>
         vm_get_allowed_vbd_devices(string session, string _vm);
 
         [XmlRpcMethod("VM.get_allowed_VIF_devices")]
-        Response<string []>
+        Response<string[]>
         vm_get_allowed_vif_devices(string session, string _vm);
 
         [XmlRpcMethod("VM.get_possible_hosts")]
-        Response<string []>
+        Response<string[]>
         vm_get_possible_hosts(string session, string _vm);
 
         [XmlRpcMethod("Async.VM.get_possible_hosts")]
@@ -2535,7 +2535,7 @@ namespace XenAPI
         async_vm_assert_can_be_recovered(string session, string _vm, string _session_to);
 
         [XmlRpcMethod("VM.get_SRs_required_for_recovery")]
-        Response<string []>
+        Response<string[]>
         vm_get_srs_required_for_recovery(string session, string _vm, string _session_to);
 
         [XmlRpcMethod("Async.VM.get_SRs_required_for_recovery")]
@@ -2591,7 +2591,7 @@ namespace XenAPI
         async_vm_set_has_vendor_device(string session, string _vm, bool _value);
 
         [XmlRpcMethod("VM.import")]
-        Response<string []>
+        Response<string[]>
         vm_import(string session, string _url, string _sr, bool _full_restore, bool _force);
 
         [XmlRpcMethod("Async.VM.import")]
@@ -2615,7 +2615,7 @@ namespace XenAPI
         vm_set_hvm_boot_policy(string session, string _vm, string _value);
 
         [XmlRpcMethod("VM.get_all")]
-        Response<string []>
+        Response<string[]>
         vm_get_all(string session);
 
         [XmlRpcMethod("VM.get_all_records")]
@@ -2659,7 +2659,7 @@ namespace XenAPI
         vm_metrics_get_vcpus_flags(string session, string _vm_metrics);
 
         [XmlRpcMethod("VM_metrics.get_state")]
-        Response<string []>
+        Response<string[]>
         vm_metrics_get_state(string session, string _vm_metrics);
 
         [XmlRpcMethod("VM_metrics.get_start_time")]
@@ -2707,7 +2707,7 @@ namespace XenAPI
         vm_metrics_remove_from_other_config(string session, string _vm_metrics, string _key);
 
         [XmlRpcMethod("VM_metrics.get_all")]
-        Response<string []>
+        Response<string[]>
         vm_metrics_get_all(string session);
 
         [XmlRpcMethod("VM_metrics.get_all_records")]
@@ -2791,7 +2791,7 @@ namespace XenAPI
         vm_guest_metrics_remove_from_other_config(string session, string _vm_guest_metrics, string _key);
 
         [XmlRpcMethod("VM_guest_metrics.get_all")]
-        Response<string []>
+        Response<string[]>
         vm_guest_metrics_get_all(string session);
 
         [XmlRpcMethod("VM_guest_metrics.get_all_records")]
@@ -2823,7 +2823,7 @@ namespace XenAPI
         async_vmpp_destroy(string session, string _vmpp);
 
         [XmlRpcMethod("VMPP.get_by_name_label")]
-        Response<string []>
+        Response<string[]>
         vmpp_get_by_name_label(string session, string _label);
 
         [XmlRpcMethod("VMPP.get_uuid")]
@@ -2891,7 +2891,7 @@ namespace XenAPI
         vmpp_get_archive_last_run_time(string session, string _vmpp);
 
         [XmlRpcMethod("VMPP.get_VMs")]
-        Response<string []>
+        Response<string[]>
         vmpp_get_vms(string session, string _vmpp);
 
         [XmlRpcMethod("VMPP.get_is_alarm_enabled")]
@@ -2903,7 +2903,7 @@ namespace XenAPI
         vmpp_get_alarm_config(string session, string _vmpp);
 
         [XmlRpcMethod("VMPP.get_recent_alerts")]
-        Response<string []>
+        Response<string[]>
         vmpp_get_recent_alerts(string session, string _vmpp);
 
         [XmlRpcMethod("VMPP.set_name_label")]
@@ -2931,7 +2931,7 @@ namespace XenAPI
         vmpp_archive_now(string session, string _snapshot);
 
         [XmlRpcMethod("VMPP.get_alerts")]
-        Response<string []>
+        Response<string[]>
         vmpp_get_alerts(string session, string _vmpp, string _hours_from_now);
 
         [XmlRpcMethod("VMPP.set_backup_retention_value")]
@@ -3011,7 +3011,7 @@ namespace XenAPI
         vmpp_set_archive_last_run_time(string session, string _vmpp, DateTime _value);
 
         [XmlRpcMethod("VMPP.get_all")]
-        Response<string []>
+        Response<string[]>
         vmpp_get_all(string session);
 
         [XmlRpcMethod("VMPP.get_all_records")]
@@ -3043,7 +3043,7 @@ namespace XenAPI
         async_vmss_destroy(string session, string _vmss);
 
         [XmlRpcMethod("VMSS.get_by_name_label")]
-        Response<string []>
+        Response<string[]>
         vmss_get_by_name_label(string session, string _label);
 
         [XmlRpcMethod("VMSS.get_uuid")]
@@ -3083,7 +3083,7 @@ namespace XenAPI
         vmss_get_last_run_time(string session, string _vmss);
 
         [XmlRpcMethod("VMSS.get_VMs")]
-        Response<string []>
+        Response<string[]>
         vmss_get_vms(string session, string _vmss);
 
         [XmlRpcMethod("VMSS.set_name_label")]
@@ -3131,7 +3131,7 @@ namespace XenAPI
         vmss_set_type(string session, string _vmss, string _value);
 
         [XmlRpcMethod("VMSS.get_all")]
-        Response<string []>
+        Response<string[]>
         vmss_get_all(string session);
 
         [XmlRpcMethod("VMSS.get_all_records")]
@@ -3163,7 +3163,7 @@ namespace XenAPI
         async_vm_appliance_destroy(string session, string _vm_appliance);
 
         [XmlRpcMethod("VM_appliance.get_by_name_label")]
-        Response<string []>
+        Response<string[]>
         vm_appliance_get_by_name_label(string session, string _label);
 
         [XmlRpcMethod("VM_appliance.get_uuid")]
@@ -3179,7 +3179,7 @@ namespace XenAPI
         vm_appliance_get_name_description(string session, string _vm_appliance);
 
         [XmlRpcMethod("VM_appliance.get_allowed_operations")]
-        Response<string []>
+        Response<string[]>
         vm_appliance_get_allowed_operations(string session, string _vm_appliance);
 
         [XmlRpcMethod("VM_appliance.get_current_operations")]
@@ -3187,7 +3187,7 @@ namespace XenAPI
         vm_appliance_get_current_operations(string session, string _vm_appliance);
 
         [XmlRpcMethod("VM_appliance.get_VMs")]
-        Response<string []>
+        Response<string[]>
         vm_appliance_get_vms(string session, string _vm_appliance);
 
         [XmlRpcMethod("VM_appliance.set_name_label")]
@@ -3239,7 +3239,7 @@ namespace XenAPI
         async_vm_appliance_assert_can_be_recovered(string session, string _vm_appliance, string _session_to);
 
         [XmlRpcMethod("VM_appliance.get_SRs_required_for_recovery")]
-        Response<string []>
+        Response<string[]>
         vm_appliance_get_srs_required_for_recovery(string session, string _vm_appliance, string _session_to);
 
         [XmlRpcMethod("Async.VM_appliance.get_SRs_required_for_recovery")]
@@ -3255,7 +3255,7 @@ namespace XenAPI
         async_vm_appliance_recover(string session, string _vm_appliance, string _session_to, bool _force);
 
         [XmlRpcMethod("VM_appliance.get_all")]
-        Response<string []>
+        Response<string[]>
         vm_appliance_get_all(string session);
 
         [XmlRpcMethod("VM_appliance.get_all_records")]
@@ -3275,16 +3275,16 @@ namespace XenAPI
         dr_task_get_uuid(string session, string _dr_task);
 
         [XmlRpcMethod("DR_task.get_introduced_SRs")]
-        Response<string []>
+        Response<string[]>
         dr_task_get_introduced_srs(string session, string _dr_task);
 
         [XmlRpcMethod("DR_task.create")]
         Response<string>
-        dr_task_create(string session, string _type, Object _device_config, string [] _whitelist);
+        dr_task_create(string session, string _type, Object _device_config, string[] _whitelist);
 
         [XmlRpcMethod("Async.DR_task.create")]
         Response<string>
-        async_dr_task_create(string session, string _type, Object _device_config, string [] _whitelist);
+        async_dr_task_create(string session, string _type, Object _device_config, string[] _whitelist);
 
         [XmlRpcMethod("DR_task.destroy")]
         Response<string>
@@ -3295,7 +3295,7 @@ namespace XenAPI
         async_dr_task_destroy(string session, string _dr_task);
 
         [XmlRpcMethod("DR_task.get_all")]
-        Response<string []>
+        Response<string[]>
         dr_task_get_all(string session);
 
         [XmlRpcMethod("DR_task.get_all_records")]
@@ -3311,7 +3311,7 @@ namespace XenAPI
         host_get_by_uuid(string session, string _uuid);
 
         [XmlRpcMethod("host.get_by_name_label")]
-        Response<string []>
+        Response<string[]>
         host_get_by_name_label(string session, string _label);
 
         [XmlRpcMethod("host.get_uuid")]
@@ -3331,7 +3331,7 @@ namespace XenAPI
         host_get_memory_overhead(string session, string _host);
 
         [XmlRpcMethod("host.get_allowed_operations")]
-        Response<string []>
+        Response<string[]>
         host_get_allowed_operations(string session, string _host);
 
         [XmlRpcMethod("host.get_current_operations")]
@@ -3367,7 +3367,7 @@ namespace XenAPI
         host_get_other_config(string session, string _host);
 
         [XmlRpcMethod("host.get_capabilities")]
-        Response<string []>
+        Response<string[]>
         host_get_capabilities(string session, string _host);
 
         [XmlRpcMethod("host.get_cpu_configuration")]
@@ -3379,11 +3379,11 @@ namespace XenAPI
         host_get_sched_policy(string session, string _host);
 
         [XmlRpcMethod("host.get_supported_bootloaders")]
-        Response<string []>
+        Response<string[]>
         host_get_supported_bootloaders(string session, string _host);
 
         [XmlRpcMethod("host.get_resident_VMs")]
-        Response<string []>
+        Response<string[]>
         host_get_resident_vms(string session, string _host);
 
         [XmlRpcMethod("host.get_logging")]
@@ -3391,7 +3391,7 @@ namespace XenAPI
         host_get_logging(string session, string _host);
 
         [XmlRpcMethod("host.get_PIFs")]
-        Response<string []>
+        Response<string[]>
         host_get_pifs(string session, string _host);
 
         [XmlRpcMethod("host.get_suspend_image_sr")]
@@ -3403,23 +3403,23 @@ namespace XenAPI
         host_get_crash_dump_sr(string session, string _host);
 
         [XmlRpcMethod("host.get_crashdumps")]
-        Response<string []>
+        Response<string[]>
         host_get_crashdumps(string session, string _host);
 
         [XmlRpcMethod("host.get_patches")]
-        Response<string []>
+        Response<string[]>
         host_get_patches(string session, string _host);
 
         [XmlRpcMethod("host.get_updates")]
-        Response<string []>
+        Response<string[]>
         host_get_updates(string session, string _host);
 
         [XmlRpcMethod("host.get_PBDs")]
-        Response<string []>
+        Response<string[]>
         host_get_pbds(string session, string _host);
 
         [XmlRpcMethod("host.get_host_CPUs")]
-        Response<string []>
+        Response<string[]>
         host_get_host_cpus(string session, string _host);
 
         [XmlRpcMethod("host.get_cpu_info")]
@@ -3443,11 +3443,11 @@ namespace XenAPI
         host_get_license_params(string session, string _host);
 
         [XmlRpcMethod("host.get_ha_statefiles")]
-        Response<string []>
+        Response<string[]>
         host_get_ha_statefiles(string session, string _host);
 
         [XmlRpcMethod("host.get_ha_network_peers")]
-        Response<string []>
+        Response<string[]>
         host_get_ha_network_peers(string session, string _host);
 
         [XmlRpcMethod("host.get_blobs")]
@@ -3455,7 +3455,7 @@ namespace XenAPI
         host_get_blobs(string session, string _host);
 
         [XmlRpcMethod("host.get_tags")]
-        Response<string []>
+        Response<string[]>
         host_get_tags(string session, string _host);
 
         [XmlRpcMethod("host.get_external_auth_type")]
@@ -3499,15 +3499,15 @@ namespace XenAPI
         host_get_chipset_info(string session, string _host);
 
         [XmlRpcMethod("host.get_PCIs")]
-        Response<string []>
+        Response<string[]>
         host_get_pcis(string session, string _host);
 
         [XmlRpcMethod("host.get_PGPUs")]
-        Response<string []>
+        Response<string[]>
         host_get_pgpus(string session, string _host);
 
         [XmlRpcMethod("host.get_PUSBs")]
-        Response<string []>
+        Response<string[]>
         host_get_pusbs(string session, string _host);
 
         [XmlRpcMethod("host.get_ssl_legacy")]
@@ -3523,7 +3523,7 @@ namespace XenAPI
         host_get_display(string session, string _host);
 
         [XmlRpcMethod("host.get_virtual_hardware_platform_versions")]
-        Response<string []>
+        Response<string[]>
         host_get_virtual_hardware_platform_versions(string session, string _host);
 
         [XmlRpcMethod("host.get_control_domain")]
@@ -3531,11 +3531,11 @@ namespace XenAPI
         host_get_control_domain(string session, string _host);
 
         [XmlRpcMethod("host.get_updates_requiring_reboot")]
-        Response<string []>
+        Response<string[]>
         host_get_updates_requiring_reboot(string session, string _host);
 
         [XmlRpcMethod("host.get_features")]
-        Response<string []>
+        Response<string[]>
         host_get_features(string session, string _host);
 
         [XmlRpcMethod("host.get_iscsi_iqn")]
@@ -3551,15 +3551,15 @@ namespace XenAPI
         host_get_uefi_certificates(string session, string _host);
 
         [XmlRpcMethod("host.get_certificates")]
-        Response<string []>
+        Response<string[]>
         host_get_certificates(string session, string _host);
 
         [XmlRpcMethod("host.get_editions")]
-        Response<string []>
+        Response<string[]>
         host_get_editions(string session, string _host);
 
         [XmlRpcMethod("host.get_pending_guidances")]
-        Response<string []>
+        Response<string[]>
         host_get_pending_guidances(string session, string _host);
 
         [XmlRpcMethod("host.get_tls_verification_enabled")]
@@ -3620,7 +3620,7 @@ namespace XenAPI
 
         [XmlRpcMethod("host.set_tags")]
         Response<string>
-        host_set_tags(string session, string _host, string [] _tags);
+        host_set_tags(string session, string _host, string[] _tags);
 
         [XmlRpcMethod("host.add_tags")]
         Response<string>
@@ -3731,7 +3731,7 @@ namespace XenAPI
         async_host_bugreport_upload(string session, string _host, string _url, Object _options);
 
         [XmlRpcMethod("host.list_methods")]
-        Response<string []>
+        Response<string[]>
         host_list_methods(string session);
 
         [XmlRpcMethod("host.license_apply")]
@@ -3811,7 +3811,7 @@ namespace XenAPI
         async_host_get_vms_which_prevent_evacuation(string session, string _host);
 
         [XmlRpcMethod("host.get_uncooperative_resident_VMs")]
-        Response<string []>
+        Response<string[]>
         host_get_uncooperative_resident_vms(string session, string _host);
 
         [XmlRpcMethod("Async.host.get_uncooperative_resident_VMs")]
@@ -4135,7 +4135,7 @@ namespace XenAPI
         host_emergency_reenable_tls_verification(string session);
 
         [XmlRpcMethod("host.apply_updates")]
-        Response<string []>
+        Response<string[][]>
         host_apply_updates(string session, string _host, string _hash);
 
         [XmlRpcMethod("Async.host.apply_updates")]
@@ -4143,7 +4143,7 @@ namespace XenAPI
         async_host_apply_updates(string session, string _host, string _hash);
 
         [XmlRpcMethod("host.get_all")]
-        Response<string []>
+        Response<string[]>
         host_get_all(string session);
 
         [XmlRpcMethod("host.get_all_records")]
@@ -4207,7 +4207,7 @@ namespace XenAPI
         async_host_crashdump_upload(string session, string _host_crashdump, string _url, Object _options);
 
         [XmlRpcMethod("host_crashdump.get_all")]
-        Response<string []>
+        Response<string[]>
         host_crashdump_get_all(string session);
 
         [XmlRpcMethod("host_crashdump.get_all_records")]
@@ -4223,7 +4223,7 @@ namespace XenAPI
         host_patch_get_by_uuid(string session, string _uuid);
 
         [XmlRpcMethod("host_patch.get_by_name_label")]
-        Response<string []>
+        Response<string[]>
         host_patch_get_by_name_label(string session, string _label);
 
         [XmlRpcMethod("host_patch.get_uuid")]
@@ -4295,7 +4295,7 @@ namespace XenAPI
         async_host_patch_apply(string session, string _host_patch);
 
         [XmlRpcMethod("host_patch.get_all")]
-        Response<string []>
+        Response<string[]>
         host_patch_get_all(string session);
 
         [XmlRpcMethod("host_patch.get_all_records")]
@@ -4347,7 +4347,7 @@ namespace XenAPI
         host_metrics_remove_from_other_config(string session, string _host_metrics, string _key);
 
         [XmlRpcMethod("host_metrics.get_all")]
-        Response<string []>
+        Response<string[]>
         host_metrics_get_all(string session);
 
         [XmlRpcMethod("host_metrics.get_all_records")]
@@ -4427,7 +4427,7 @@ namespace XenAPI
         host_cpu_remove_from_other_config(string session, string _host_cpu, string _key);
 
         [XmlRpcMethod("host_cpu.get_all")]
-        Response<string []>
+        Response<string[]>
         host_cpu_get_all(string session);
 
         [XmlRpcMethod("host_cpu.get_all_records")]
@@ -4459,7 +4459,7 @@ namespace XenAPI
         async_network_destroy(string session, string _network);
 
         [XmlRpcMethod("network.get_by_name_label")]
-        Response<string []>
+        Response<string[]>
         network_get_by_name_label(string session, string _label);
 
         [XmlRpcMethod("network.get_uuid")]
@@ -4475,7 +4475,7 @@ namespace XenAPI
         network_get_name_description(string session, string _network);
 
         [XmlRpcMethod("network.get_allowed_operations")]
-        Response<string []>
+        Response<string[]>
         network_get_allowed_operations(string session, string _network);
 
         [XmlRpcMethod("network.get_current_operations")]
@@ -4483,11 +4483,11 @@ namespace XenAPI
         network_get_current_operations(string session, string _network);
 
         [XmlRpcMethod("network.get_VIFs")]
-        Response<string []>
+        Response<string[]>
         network_get_vifs(string session, string _network);
 
         [XmlRpcMethod("network.get_PIFs")]
-        Response<string []>
+        Response<string[]>
         network_get_pifs(string session, string _network);
 
         [XmlRpcMethod("network.get_MTU")]
@@ -4511,7 +4511,7 @@ namespace XenAPI
         network_get_blobs(string session, string _network);
 
         [XmlRpcMethod("network.get_tags")]
-        Response<string []>
+        Response<string[]>
         network_get_tags(string session, string _network);
 
         [XmlRpcMethod("network.get_default_locking_mode")]
@@ -4523,7 +4523,7 @@ namespace XenAPI
         network_get_assigned_ips(string session, string _network);
 
         [XmlRpcMethod("network.get_purpose")]
-        Response<string []>
+        Response<string[]>
         network_get_purpose(string session, string _network);
 
         [XmlRpcMethod("network.set_name_label")]
@@ -4552,7 +4552,7 @@ namespace XenAPI
 
         [XmlRpcMethod("network.set_tags")]
         Response<string>
-        network_set_tags(string session, string _network, string [] _tags);
+        network_set_tags(string session, string _network, string[] _tags);
 
         [XmlRpcMethod("network.add_tags")]
         Response<string>
@@ -4603,7 +4603,7 @@ namespace XenAPI
         async_network_remove_purpose(string session, string _network, string _value);
 
         [XmlRpcMethod("network.get_all")]
-        Response<string []>
+        Response<string[]>
         network_get_all(string session);
 
         [XmlRpcMethod("network.get_all_records")]
@@ -4639,7 +4639,7 @@ namespace XenAPI
         vif_get_uuid(string session, string _vif);
 
         [XmlRpcMethod("VIF.get_allowed_operations")]
-        Response<string []>
+        Response<string[]>
         vif_get_allowed_operations(string session, string _vif);
 
         [XmlRpcMethod("VIF.get_current_operations")]
@@ -4695,7 +4695,7 @@ namespace XenAPI
         vif_get_qos_algorithm_params(string session, string _vif);
 
         [XmlRpcMethod("VIF.get_qos_supported_algorithms")]
-        Response<string []>
+        Response<string[]>
         vif_get_qos_supported_algorithms(string session, string _vif);
 
         [XmlRpcMethod("VIF.get_metrics")]
@@ -4711,11 +4711,11 @@ namespace XenAPI
         vif_get_locking_mode(string session, string _vif);
 
         [XmlRpcMethod("VIF.get_ipv4_allowed")]
-        Response<string []>
+        Response<string[]>
         vif_get_ipv4_allowed(string session, string _vif);
 
         [XmlRpcMethod("VIF.get_ipv6_allowed")]
-        Response<string []>
+        Response<string[]>
         vif_get_ipv6_allowed(string session, string _vif);
 
         [XmlRpcMethod("VIF.get_ipv4_configuration_mode")]
@@ -4723,7 +4723,7 @@ namespace XenAPI
         vif_get_ipv4_configuration_mode(string session, string _vif);
 
         [XmlRpcMethod("VIF.get_ipv4_addresses")]
-        Response<string []>
+        Response<string[]>
         vif_get_ipv4_addresses(string session, string _vif);
 
         [XmlRpcMethod("VIF.get_ipv4_gateway")]
@@ -4735,7 +4735,7 @@ namespace XenAPI
         vif_get_ipv6_configuration_mode(string session, string _vif);
 
         [XmlRpcMethod("VIF.get_ipv6_addresses")]
-        Response<string []>
+        Response<string[]>
         vif_get_ipv6_addresses(string session, string _vif);
 
         [XmlRpcMethod("VIF.get_ipv6_gateway")]
@@ -4812,11 +4812,11 @@ namespace XenAPI
 
         [XmlRpcMethod("VIF.set_ipv4_allowed")]
         Response<string>
-        vif_set_ipv4_allowed(string session, string _vif, string [] _value);
+        vif_set_ipv4_allowed(string session, string _vif, string[] _value);
 
         [XmlRpcMethod("Async.VIF.set_ipv4_allowed")]
         Response<string>
-        async_vif_set_ipv4_allowed(string session, string _vif, string [] _value);
+        async_vif_set_ipv4_allowed(string session, string _vif, string[] _value);
 
         [XmlRpcMethod("VIF.add_ipv4_allowed")]
         Response<string>
@@ -4836,11 +4836,11 @@ namespace XenAPI
 
         [XmlRpcMethod("VIF.set_ipv6_allowed")]
         Response<string>
-        vif_set_ipv6_allowed(string session, string _vif, string [] _value);
+        vif_set_ipv6_allowed(string session, string _vif, string[] _value);
 
         [XmlRpcMethod("Async.VIF.set_ipv6_allowed")]
         Response<string>
-        async_vif_set_ipv6_allowed(string session, string _vif, string [] _value);
+        async_vif_set_ipv6_allowed(string session, string _vif, string[] _value);
 
         [XmlRpcMethod("VIF.add_ipv6_allowed")]
         Response<string>
@@ -4875,7 +4875,7 @@ namespace XenAPI
         async_vif_configure_ipv6(string session, string _vif, string _mode, string _address, string _gateway);
 
         [XmlRpcMethod("VIF.get_all")]
-        Response<string []>
+        Response<string[]>
         vif_get_all(string session);
 
         [XmlRpcMethod("VIF.get_all_records")]
@@ -4923,7 +4923,7 @@ namespace XenAPI
         vif_metrics_remove_from_other_config(string session, string _vif_metrics, string _key);
 
         [XmlRpcMethod("VIF_metrics.get_all")]
-        Response<string []>
+        Response<string[]>
         vif_metrics_get_all(string session);
 
         [XmlRpcMethod("VIF_metrics.get_all_records")]
@@ -5003,7 +5003,7 @@ namespace XenAPI
         pif_get_bond_slave_of(string session, string _pif);
 
         [XmlRpcMethod("PIF.get_bond_master_of")]
-        Response<string []>
+        Response<string[]>
         pif_get_bond_master_of(string session, string _pif);
 
         [XmlRpcMethod("PIF.get_VLAN_master_of")]
@@ -5011,7 +5011,7 @@ namespace XenAPI
         pif_get_vlan_master_of(string session, string _pif);
 
         [XmlRpcMethod("PIF.get_VLAN_slave_of")]
-        Response<string []>
+        Response<string[]>
         pif_get_vlan_slave_of(string session, string _pif);
 
         [XmlRpcMethod("PIF.get_management")]
@@ -5027,11 +5027,11 @@ namespace XenAPI
         pif_get_disallow_unplug(string session, string _pif);
 
         [XmlRpcMethod("PIF.get_tunnel_access_PIF_of")]
-        Response<string []>
+        Response<string[]>
         pif_get_tunnel_access_pif_of(string session, string _pif);
 
         [XmlRpcMethod("PIF.get_tunnel_transport_PIF_of")]
-        Response<string []>
+        Response<string[]>
         pif_get_tunnel_transport_pif_of(string session, string _pif);
 
         [XmlRpcMethod("PIF.get_ipv6_configuration_mode")]
@@ -5039,7 +5039,7 @@ namespace XenAPI
         pif_get_ipv6_configuration_mode(string session, string _pif);
 
         [XmlRpcMethod("PIF.get_IPv6")]
-        Response<string []>
+        Response<string[]>
         pif_get_ipv6(string session, string _pif);
 
         [XmlRpcMethod("PIF.get_ipv6_gateway")]
@@ -5059,7 +5059,7 @@ namespace XenAPI
         pif_get_properties(string session, string _pif);
 
         [XmlRpcMethod("PIF.get_capabilities")]
-        Response<string []>
+        Response<string[]>
         pif_get_capabilities(string session, string _pif);
 
         [XmlRpcMethod("PIF.get_igmp_snooping_status")]
@@ -5067,11 +5067,11 @@ namespace XenAPI
         pif_get_igmp_snooping_status(string session, string _pif);
 
         [XmlRpcMethod("PIF.get_sriov_physical_PIF_of")]
-        Response<string []>
+        Response<string[]>
         pif_get_sriov_physical_pif_of(string session, string _pif);
 
         [XmlRpcMethod("PIF.get_sriov_logical_PIF_of")]
-        Response<string []>
+        Response<string[]>
         pif_get_sriov_logical_pif_of(string session, string _pif);
 
         [XmlRpcMethod("PIF.get_PCI")]
@@ -5196,27 +5196,27 @@ namespace XenAPI
 
         [XmlRpcMethod("PIF.db_introduce")]
         Response<string>
-        pif_db_introduce(string session, string _device, string _network, string _host, string _mac, string _mtu, string _vlan, bool _physical, string _ip_configuration_mode, string _ip, string _netmask, string _gateway, string _dns, string _bond_slave_of, string _vlan_master_of, bool _management, Object _other_config, bool _disallow_unplug, string _ipv6_configuration_mode, string [] _ipv6, string _ipv6_gateway, string _primary_address_type);
+        pif_db_introduce(string session, string _device, string _network, string _host, string _mac, string _mtu, string _vlan, bool _physical, string _ip_configuration_mode, string _ip, string _netmask, string _gateway, string _dns, string _bond_slave_of, string _vlan_master_of, bool _management, Object _other_config, bool _disallow_unplug, string _ipv6_configuration_mode, string[] _ipv6, string _ipv6_gateway, string _primary_address_type);
 
         [XmlRpcMethod("Async.PIF.db_introduce")]
         Response<string>
-        async_pif_db_introduce(string session, string _device, string _network, string _host, string _mac, string _mtu, string _vlan, bool _physical, string _ip_configuration_mode, string _ip, string _netmask, string _gateway, string _dns, string _bond_slave_of, string _vlan_master_of, bool _management, Object _other_config, bool _disallow_unplug, string _ipv6_configuration_mode, string [] _ipv6, string _ipv6_gateway, string _primary_address_type);
+        async_pif_db_introduce(string session, string _device, string _network, string _host, string _mac, string _mtu, string _vlan, bool _physical, string _ip_configuration_mode, string _ip, string _netmask, string _gateway, string _dns, string _bond_slave_of, string _vlan_master_of, bool _management, Object _other_config, bool _disallow_unplug, string _ipv6_configuration_mode, string[] _ipv6, string _ipv6_gateway, string _primary_address_type);
 
         [XmlRpcMethod("PIF.db_introduce")]
         Response<string>
-        pif_db_introduce(string session, string _device, string _network, string _host, string _mac, string _mtu, string _vlan, bool _physical, string _ip_configuration_mode, string _ip, string _netmask, string _gateway, string _dns, string _bond_slave_of, string _vlan_master_of, bool _management, Object _other_config, bool _disallow_unplug, string _ipv6_configuration_mode, string [] _ipv6, string _ipv6_gateway, string _primary_address_type, bool _managed);
+        pif_db_introduce(string session, string _device, string _network, string _host, string _mac, string _mtu, string _vlan, bool _physical, string _ip_configuration_mode, string _ip, string _netmask, string _gateway, string _dns, string _bond_slave_of, string _vlan_master_of, bool _management, Object _other_config, bool _disallow_unplug, string _ipv6_configuration_mode, string[] _ipv6, string _ipv6_gateway, string _primary_address_type, bool _managed);
 
         [XmlRpcMethod("Async.PIF.db_introduce")]
         Response<string>
-        async_pif_db_introduce(string session, string _device, string _network, string _host, string _mac, string _mtu, string _vlan, bool _physical, string _ip_configuration_mode, string _ip, string _netmask, string _gateway, string _dns, string _bond_slave_of, string _vlan_master_of, bool _management, Object _other_config, bool _disallow_unplug, string _ipv6_configuration_mode, string [] _ipv6, string _ipv6_gateway, string _primary_address_type, bool _managed);
+        async_pif_db_introduce(string session, string _device, string _network, string _host, string _mac, string _mtu, string _vlan, bool _physical, string _ip_configuration_mode, string _ip, string _netmask, string _gateway, string _dns, string _bond_slave_of, string _vlan_master_of, bool _management, Object _other_config, bool _disallow_unplug, string _ipv6_configuration_mode, string[] _ipv6, string _ipv6_gateway, string _primary_address_type, bool _managed);
 
         [XmlRpcMethod("PIF.db_introduce")]
         Response<string>
-        pif_db_introduce(string session, string _device, string _network, string _host, string _mac, string _mtu, string _vlan, bool _physical, string _ip_configuration_mode, string _ip, string _netmask, string _gateway, string _dns, string _bond_slave_of, string _vlan_master_of, bool _management, Object _other_config, bool _disallow_unplug, string _ipv6_configuration_mode, string [] _ipv6, string _ipv6_gateway, string _primary_address_type, bool _managed, Object _properties);
+        pif_db_introduce(string session, string _device, string _network, string _host, string _mac, string _mtu, string _vlan, bool _physical, string _ip_configuration_mode, string _ip, string _netmask, string _gateway, string _dns, string _bond_slave_of, string _vlan_master_of, bool _management, Object _other_config, bool _disallow_unplug, string _ipv6_configuration_mode, string[] _ipv6, string _ipv6_gateway, string _primary_address_type, bool _managed, Object _properties);
 
         [XmlRpcMethod("Async.PIF.db_introduce")]
         Response<string>
-        async_pif_db_introduce(string session, string _device, string _network, string _host, string _mac, string _mtu, string _vlan, bool _physical, string _ip_configuration_mode, string _ip, string _netmask, string _gateway, string _dns, string _bond_slave_of, string _vlan_master_of, bool _management, Object _other_config, bool _disallow_unplug, string _ipv6_configuration_mode, string [] _ipv6, string _ipv6_gateway, string _primary_address_type, bool _managed, Object _properties);
+        async_pif_db_introduce(string session, string _device, string _network, string _host, string _mac, string _mtu, string _vlan, bool _physical, string _ip_configuration_mode, string _ip, string _netmask, string _gateway, string _dns, string _bond_slave_of, string _vlan_master_of, bool _management, Object _other_config, bool _disallow_unplug, string _ipv6_configuration_mode, string[] _ipv6, string _ipv6_gateway, string _primary_address_type, bool _managed, Object _properties);
 
         [XmlRpcMethod("PIF.db_forget")]
         Response<string>
@@ -5235,7 +5235,7 @@ namespace XenAPI
         async_pif_set_property(string session, string _pif, string _name, string _value);
 
         [XmlRpcMethod("PIF.get_all")]
-        Response<string []>
+        Response<string[]>
         pif_get_all(string session);
 
         [XmlRpcMethod("PIF.get_all_records")]
@@ -5315,7 +5315,7 @@ namespace XenAPI
         pif_metrics_remove_from_other_config(string session, string _pif_metrics, string _key);
 
         [XmlRpcMethod("PIF_metrics.get_all")]
-        Response<string []>
+        Response<string[]>
         pif_metrics_get_all(string session);
 
         [XmlRpcMethod("PIF_metrics.get_all_records")]
@@ -5339,7 +5339,7 @@ namespace XenAPI
         bond_get_master(string session, string _bond);
 
         [XmlRpcMethod("Bond.get_slaves")]
-        Response<string []>
+        Response<string[]>
         bond_get_slaves(string session, string _bond);
 
         [XmlRpcMethod("Bond.get_other_config")]
@@ -5380,27 +5380,27 @@ namespace XenAPI
 
         [XmlRpcMethod("Bond.create")]
         Response<string>
-        bond_create(string session, string _network, string [] _members, string _mac);
+        bond_create(string session, string _network, string[] _members, string _mac);
 
         [XmlRpcMethod("Async.Bond.create")]
         Response<string>
-        async_bond_create(string session, string _network, string [] _members, string _mac);
+        async_bond_create(string session, string _network, string[] _members, string _mac);
 
         [XmlRpcMethod("Bond.create")]
         Response<string>
-        bond_create(string session, string _network, string [] _members, string _mac, string _mode);
+        bond_create(string session, string _network, string[] _members, string _mac, string _mode);
 
         [XmlRpcMethod("Async.Bond.create")]
         Response<string>
-        async_bond_create(string session, string _network, string [] _members, string _mac, string _mode);
+        async_bond_create(string session, string _network, string[] _members, string _mac, string _mode);
 
         [XmlRpcMethod("Bond.create")]
         Response<string>
-        bond_create(string session, string _network, string [] _members, string _mac, string _mode, Object _properties);
+        bond_create(string session, string _network, string[] _members, string _mac, string _mode, Object _properties);
 
         [XmlRpcMethod("Async.Bond.create")]
         Response<string>
-        async_bond_create(string session, string _network, string [] _members, string _mac, string _mode, Object _properties);
+        async_bond_create(string session, string _network, string[] _members, string _mac, string _mode, Object _properties);
 
         [XmlRpcMethod("Bond.destroy")]
         Response<string>
@@ -5427,7 +5427,7 @@ namespace XenAPI
         async_bond_set_property(string session, string _bond, string _name, string _value);
 
         [XmlRpcMethod("Bond.get_all")]
-        Response<string []>
+        Response<string[]>
         bond_get_all(string session);
 
         [XmlRpcMethod("Bond.get_all_records")]
@@ -5491,7 +5491,7 @@ namespace XenAPI
         async_vlan_destroy(string session, string _vlan);
 
         [XmlRpcMethod("VLAN.get_all")]
-        Response<string []>
+        Response<string[]>
         vlan_get_all(string session);
 
         [XmlRpcMethod("VLAN.get_all_records")]
@@ -5507,7 +5507,7 @@ namespace XenAPI
         sm_get_by_uuid(string session, string _uuid);
 
         [XmlRpcMethod("SM.get_by_name_label")]
-        Response<string []>
+        Response<string[]>
         sm_get_by_name_label(string session, string _label);
 
         [XmlRpcMethod("SM.get_uuid")]
@@ -5547,7 +5547,7 @@ namespace XenAPI
         sm_get_configuration(string session, string _sm);
 
         [XmlRpcMethod("SM.get_capabilities")]
-        Response<string []>
+        Response<string[]>
         sm_get_capabilities(string session, string _sm);
 
         [XmlRpcMethod("SM.get_features")]
@@ -5563,7 +5563,7 @@ namespace XenAPI
         sm_get_driver_filename(string session, string _sm);
 
         [XmlRpcMethod("SM.get_required_cluster_stack")]
-        Response<string []>
+        Response<string[]>
         sm_get_required_cluster_stack(string session, string _sm);
 
         [XmlRpcMethod("SM.set_other_config")]
@@ -5579,7 +5579,7 @@ namespace XenAPI
         sm_remove_from_other_config(string session, string _sm, string _key);
 
         [XmlRpcMethod("SM.get_all")]
-        Response<string []>
+        Response<string[]>
         sm_get_all(string session);
 
         [XmlRpcMethod("SM.get_all_records")]
@@ -5595,7 +5595,7 @@ namespace XenAPI
         sr_get_by_uuid(string session, string _uuid);
 
         [XmlRpcMethod("SR.get_by_name_label")]
-        Response<string []>
+        Response<string[]>
         sr_get_by_name_label(string session, string _label);
 
         [XmlRpcMethod("SR.get_uuid")]
@@ -5611,7 +5611,7 @@ namespace XenAPI
         sr_get_name_description(string session, string _sr);
 
         [XmlRpcMethod("SR.get_allowed_operations")]
-        Response<string []>
+        Response<string[]>
         sr_get_allowed_operations(string session, string _sr);
 
         [XmlRpcMethod("SR.get_current_operations")]
@@ -5619,11 +5619,11 @@ namespace XenAPI
         sr_get_current_operations(string session, string _sr);
 
         [XmlRpcMethod("SR.get_VDIs")]
-        Response<string []>
+        Response<string[]>
         sr_get_vdis(string session, string _sr);
 
         [XmlRpcMethod("SR.get_PBDs")]
-        Response<string []>
+        Response<string[]>
         sr_get_pbds(string session, string _sr);
 
         [XmlRpcMethod("SR.get_virtual_allocation")]
@@ -5655,7 +5655,7 @@ namespace XenAPI
         sr_get_other_config(string session, string _sr);
 
         [XmlRpcMethod("SR.get_tags")]
-        Response<string []>
+        Response<string[]>
         sr_get_tags(string session, string _sr);
 
         [XmlRpcMethod("SR.get_sm_config")]
@@ -5696,7 +5696,7 @@ namespace XenAPI
 
         [XmlRpcMethod("SR.set_tags")]
         Response<string>
-        sr_set_tags(string session, string _sr, string [] _tags);
+        sr_set_tags(string session, string _sr, string[] _tags);
 
         [XmlRpcMethod("SR.add_tags")]
         Response<string>
@@ -5791,7 +5791,7 @@ namespace XenAPI
         async_sr_update(string session, string _sr);
 
         [XmlRpcMethod("SR.get_supported_types")]
-        Response<string []>
+        Response<string[]>
         sr_get_supported_types(string session);
 
         [XmlRpcMethod("SR.scan")]
@@ -5919,7 +5919,7 @@ namespace XenAPI
         sr_forget_data_source_archives(string session, string _sr, string _data_source);
 
         [XmlRpcMethod("SR.get_all")]
-        Response<string []>
+        Response<string[]>
         sr_get_all(string session);
 
         [XmlRpcMethod("SR.get_all_records")]
@@ -5983,7 +5983,7 @@ namespace XenAPI
         async_vdi_destroy(string session, string _vdi);
 
         [XmlRpcMethod("VDI.get_by_name_label")]
-        Response<string []>
+        Response<string[]>
         vdi_get_by_name_label(string session, string _label);
 
         [XmlRpcMethod("VDI.get_uuid")]
@@ -5999,7 +5999,7 @@ namespace XenAPI
         vdi_get_name_description(string session, string _vdi);
 
         [XmlRpcMethod("VDI.get_allowed_operations")]
-        Response<string []>
+        Response<string[]>
         vdi_get_allowed_operations(string session, string _vdi);
 
         [XmlRpcMethod("VDI.get_current_operations")]
@@ -6011,11 +6011,11 @@ namespace XenAPI
         vdi_get_sr(string session, string _vdi);
 
         [XmlRpcMethod("VDI.get_VBDs")]
-        Response<string []>
+        Response<string[]>
         vdi_get_vbds(string session, string _vdi);
 
         [XmlRpcMethod("VDI.get_crash_dumps")]
-        Response<string []>
+        Response<string[]>
         vdi_get_crash_dumps(string session, string _vdi);
 
         [XmlRpcMethod("VDI.get_virtual_size")]
@@ -6079,7 +6079,7 @@ namespace XenAPI
         vdi_get_snapshot_of(string session, string _vdi);
 
         [XmlRpcMethod("VDI.get_snapshots")]
-        Response<string []>
+        Response<string[]>
         vdi_get_snapshots(string session, string _vdi);
 
         [XmlRpcMethod("VDI.get_snapshot_time")]
@@ -6087,7 +6087,7 @@ namespace XenAPI
         vdi_get_snapshot_time(string session, string _vdi);
 
         [XmlRpcMethod("VDI.get_tags")]
-        Response<string []>
+        Response<string[]>
         vdi_get_tags(string session, string _vdi);
 
         [XmlRpcMethod("VDI.get_allow_caching")]
@@ -6152,7 +6152,7 @@ namespace XenAPI
 
         [XmlRpcMethod("VDI.set_tags")]
         Response<string>
-        vdi_set_tags(string session, string _vdi, string [] _tags);
+        vdi_set_tags(string session, string _vdi, string[] _tags);
 
         [XmlRpcMethod("VDI.add_tags")]
         Response<string>
@@ -6367,7 +6367,7 @@ namespace XenAPI
         vdi_get_nbd_info(string session, string _vdi);
 
         [XmlRpcMethod("VDI.get_all")]
-        Response<string []>
+        Response<string[]>
         vdi_get_all(string session);
 
         [XmlRpcMethod("VDI.get_all_records")]
@@ -6403,7 +6403,7 @@ namespace XenAPI
         vbd_get_uuid(string session, string _vbd);
 
         [XmlRpcMethod("VBD.get_allowed_operations")]
-        Response<string []>
+        Response<string[]>
         vbd_get_allowed_operations(string session, string _vbd);
 
         [XmlRpcMethod("VBD.get_current_operations")]
@@ -6479,7 +6479,7 @@ namespace XenAPI
         vbd_get_qos_algorithm_params(string session, string _vbd);
 
         [XmlRpcMethod("VBD.get_qos_supported_algorithms")]
-        Response<string []>
+        Response<string[]>
         vbd_get_qos_supported_algorithms(string session, string _vbd);
 
         [XmlRpcMethod("VBD.get_metrics")]
@@ -6587,7 +6587,7 @@ namespace XenAPI
         async_vbd_set_mode(string session, string _vbd, string _value);
 
         [XmlRpcMethod("VBD.get_all")]
-        Response<string []>
+        Response<string[]>
         vbd_get_all(string session);
 
         [XmlRpcMethod("VBD.get_all_records")]
@@ -6635,7 +6635,7 @@ namespace XenAPI
         vbd_metrics_remove_from_other_config(string session, string _vbd_metrics, string _key);
 
         [XmlRpcMethod("VBD_metrics.get_all")]
-        Response<string []>
+        Response<string[]>
         vbd_metrics_get_all(string session);
 
         [XmlRpcMethod("VBD_metrics.get_all_records")]
@@ -6727,7 +6727,7 @@ namespace XenAPI
         async_pbd_set_device_config(string session, string _pbd, Object _value);
 
         [XmlRpcMethod("PBD.get_all")]
-        Response<string []>
+        Response<string[]>
         pbd_get_all(string session);
 
         [XmlRpcMethod("PBD.get_all_records")]
@@ -6779,7 +6779,7 @@ namespace XenAPI
         async_crashdump_destroy(string session, string _crashdump);
 
         [XmlRpcMethod("crashdump.get_all")]
-        Response<string []>
+        Response<string[]>
         crashdump_get_all(string session);
 
         [XmlRpcMethod("crashdump.get_all_records")]
@@ -6794,22 +6794,6 @@ namespace XenAPI
         Response<string>
         vtpm_get_by_uuid(string session, string _uuid);
 
-        [XmlRpcMethod("VTPM.create")]
-        Response<string>
-        vtpm_create(string session, Proxy_VTPM _record);
-
-        [XmlRpcMethod("Async.VTPM.create")]
-        Response<string>
-        async_vtpm_create(string session, Proxy_VTPM _record);
-
-        [XmlRpcMethod("VTPM.destroy")]
-        Response<string>
-        vtpm_destroy(string session, string _vtpm);
-
-        [XmlRpcMethod("Async.VTPM.destroy")]
-        Response<string>
-        async_vtpm_destroy(string session, string _vtpm);
-
         [XmlRpcMethod("VTPM.get_uuid")]
         Response<string>
         vtpm_get_uuid(string session, string _vtpm);
@@ -6821,6 +6805,38 @@ namespace XenAPI
         [XmlRpcMethod("VTPM.get_backend")]
         Response<string>
         vtpm_get_backend(string session, string _vtpm);
+
+        [XmlRpcMethod("VTPM.get_persistence_backend")]
+        Response<string>
+        vtpm_get_persistence_backend(string session, string _vtpm);
+
+        [XmlRpcMethod("VTPM.get_is_unique")]
+        Response<bool>
+        vtpm_get_is_unique(string session, string _vtpm);
+
+        [XmlRpcMethod("VTPM.get_is_protected")]
+        Response<bool>
+        vtpm_get_is_protected(string session, string _vtpm);
+
+        [XmlRpcMethod("VTPM.create")]
+        Response<string>
+        vtpm_create(string session, string _vm, bool _is_unique);
+
+        [XmlRpcMethod("Async.VTPM.create")]
+        Response<string>
+        async_vtpm_create(string session, string _vm, bool _is_unique);
+
+        [XmlRpcMethod("VTPM.destroy")]
+        Response<string>
+        vtpm_destroy(string session, string _vtpm);
+
+        [XmlRpcMethod("Async.VTPM.destroy")]
+        Response<string>
+        async_vtpm_destroy(string session, string _vtpm);
+
+        [XmlRpcMethod("VTPM.get_all")]
+        Response<string[]>
+        vtpm_get_all(string session);
 
         [XmlRpcMethod("VTPM.get_all_records")]
         Response<Object>
@@ -6883,7 +6899,7 @@ namespace XenAPI
         console_remove_from_other_config(string session, string _console, string _key);
 
         [XmlRpcMethod("console.get_all")]
-        Response<string []>
+        Response<string[]>
         console_get_all(string session);
 
         [XmlRpcMethod("console.get_all_records")]
@@ -6963,7 +6979,7 @@ namespace XenAPI
         blob_get_by_uuid(string session, string _uuid);
 
         [XmlRpcMethod("blob.get_by_name_label")]
-        Response<string []>
+        Response<string[]>
         blob_get_by_name_label(string session, string _label);
 
         [XmlRpcMethod("blob.get_uuid")]
@@ -7019,7 +7035,7 @@ namespace XenAPI
         blob_destroy(string session, string _blob);
 
         [XmlRpcMethod("blob.get_all")]
-        Response<string []>
+        Response<string[]>
         blob_get_all(string session);
 
         [XmlRpcMethod("blob.get_all_records")]
@@ -7036,18 +7052,18 @@ namespace XenAPI
 
         [XmlRpcMethod("message.destroy_many")]
         Response<string>
-        message_destroy_many(string session, string [] _messages);
+        message_destroy_many(string session, string[] _messages);
 
         [XmlRpcMethod("Async.message.destroy_many")]
         Response<string>
-        async_message_destroy_many(string session, string [] _messages);
+        async_message_destroy_many(string session, string[] _messages);
 
         [XmlRpcMethod("message.get")]
         Response<Object>
         message_get(string session, string _cls, string _obj_uuid, DateTime _since);
 
         [XmlRpcMethod("message.get_all")]
-        Response<string []>
+        Response<string[]>
         message_get_all(string session);
 
         [XmlRpcMethod("message.get_since")]
@@ -7124,7 +7140,7 @@ namespace XenAPI
         secret_remove_from_other_config(string session, string _secret, string _key);
 
         [XmlRpcMethod("secret.get_all")]
-        Response<string []>
+        Response<string[]>
         secret_get_all(string session);
 
         [XmlRpcMethod("secret.get_all_records")]
@@ -7216,7 +7232,7 @@ namespace XenAPI
         async_tunnel_destroy(string session, string _tunnel);
 
         [XmlRpcMethod("tunnel.get_all")]
-        Response<string []>
+        Response<string[]>
         tunnel_get_all(string session);
 
         [XmlRpcMethod("tunnel.get_all_records")]
@@ -7276,7 +7292,7 @@ namespace XenAPI
         async_network_sriov_get_remaining_capacity(string session, string _network_sriov);
 
         [XmlRpcMethod("network_sriov.get_all")]
-        Response<string []>
+        Response<string[]>
         network_sriov_get_all(string session);
 
         [XmlRpcMethod("network_sriov.get_all_records")]
@@ -7316,7 +7332,7 @@ namespace XenAPI
         pci_get_pci_id(string session, string _pci);
 
         [XmlRpcMethod("PCI.get_dependencies")]
-        Response<string []>
+        Response<string[]>
         pci_get_dependencies(string session, string _pci);
 
         [XmlRpcMethod("PCI.get_other_config")]
@@ -7348,7 +7364,7 @@ namespace XenAPI
         pci_remove_from_other_config(string session, string _pci, string _key);
 
         [XmlRpcMethod("PCI.get_all")]
-        Response<string []>
+        Response<string[]>
         pci_get_all(string session);
 
         [XmlRpcMethod("PCI.get_all_records")]
@@ -7384,15 +7400,15 @@ namespace XenAPI
         pgpu_get_other_config(string session, string _pgpu);
 
         [XmlRpcMethod("PGPU.get_supported_VGPU_types")]
-        Response<string []>
+        Response<string[]>
         pgpu_get_supported_vgpu_types(string session, string _pgpu);
 
         [XmlRpcMethod("PGPU.get_enabled_VGPU_types")]
-        Response<string []>
+        Response<string[]>
         pgpu_get_enabled_vgpu_types(string session, string _pgpu);
 
         [XmlRpcMethod("PGPU.get_resident_VGPUs")]
-        Response<string []>
+        Response<string[]>
         pgpu_get_resident_vgpus(string session, string _pgpu);
 
         [XmlRpcMethod("PGPU.get_supported_VGPU_max_capacities")]
@@ -7441,11 +7457,11 @@ namespace XenAPI
 
         [XmlRpcMethod("PGPU.set_enabled_VGPU_types")]
         Response<string>
-        pgpu_set_enabled_vgpu_types(string session, string _pgpu, string [] _value);
+        pgpu_set_enabled_vgpu_types(string session, string _pgpu, string[] _value);
 
         [XmlRpcMethod("Async.PGPU.set_enabled_VGPU_types")]
         Response<string>
-        async_pgpu_set_enabled_vgpu_types(string session, string _pgpu, string [] _value);
+        async_pgpu_set_enabled_vgpu_types(string session, string _pgpu, string[] _value);
 
         [XmlRpcMethod("PGPU.set_GPU_group")]
         Response<string>
@@ -7480,7 +7496,7 @@ namespace XenAPI
         async_pgpu_disable_dom0_access(string session, string _pgpu);
 
         [XmlRpcMethod("PGPU.get_all")]
-        Response<string []>
+        Response<string[]>
         pgpu_get_all(string session);
 
         [XmlRpcMethod("PGPU.get_all_records")]
@@ -7496,7 +7512,7 @@ namespace XenAPI
         gpu_group_get_by_uuid(string session, string _uuid);
 
         [XmlRpcMethod("GPU_group.get_by_name_label")]
-        Response<string []>
+        Response<string[]>
         gpu_group_get_by_name_label(string session, string _label);
 
         [XmlRpcMethod("GPU_group.get_uuid")]
@@ -7512,15 +7528,15 @@ namespace XenAPI
         gpu_group_get_name_description(string session, string _gpu_group);
 
         [XmlRpcMethod("GPU_group.get_PGPUs")]
-        Response<string []>
+        Response<string[]>
         gpu_group_get_pgpus(string session, string _gpu_group);
 
         [XmlRpcMethod("GPU_group.get_VGPUs")]
-        Response<string []>
+        Response<string[]>
         gpu_group_get_vgpus(string session, string _gpu_group);
 
         [XmlRpcMethod("GPU_group.get_GPU_types")]
-        Response<string []>
+        Response<string[]>
         gpu_group_get_gpu_types(string session, string _gpu_group);
 
         [XmlRpcMethod("GPU_group.get_other_config")]
@@ -7532,11 +7548,11 @@ namespace XenAPI
         gpu_group_get_allocation_algorithm(string session, string _gpu_group);
 
         [XmlRpcMethod("GPU_group.get_supported_VGPU_types")]
-        Response<string []>
+        Response<string[]>
         gpu_group_get_supported_vgpu_types(string session, string _gpu_group);
 
         [XmlRpcMethod("GPU_group.get_enabled_VGPU_types")]
-        Response<string []>
+        Response<string[]>
         gpu_group_get_enabled_vgpu_types(string session, string _gpu_group);
 
         [XmlRpcMethod("GPU_group.set_name_label")]
@@ -7588,7 +7604,7 @@ namespace XenAPI
         async_gpu_group_get_remaining_capacity(string session, string _gpu_group, string _vgpu_type);
 
         [XmlRpcMethod("GPU_group.get_all")]
-        Response<string []>
+        Response<string[]>
         gpu_group_get_all(string session);
 
         [XmlRpcMethod("GPU_group.get_all_records")]
@@ -7692,7 +7708,7 @@ namespace XenAPI
         async_vgpu_destroy(string session, string _vgpu);
 
         [XmlRpcMethod("VGPU.get_all")]
-        Response<string []>
+        Response<string[]>
         vgpu_get_all(string session);
 
         [XmlRpcMethod("VGPU.get_all_records")]
@@ -7736,23 +7752,23 @@ namespace XenAPI
         vgpu_type_get_max_resolution_y(string session, string _vgpu_type);
 
         [XmlRpcMethod("VGPU_type.get_supported_on_PGPUs")]
-        Response<string []>
+        Response<string[]>
         vgpu_type_get_supported_on_pgpus(string session, string _vgpu_type);
 
         [XmlRpcMethod("VGPU_type.get_enabled_on_PGPUs")]
-        Response<string []>
+        Response<string[]>
         vgpu_type_get_enabled_on_pgpus(string session, string _vgpu_type);
 
         [XmlRpcMethod("VGPU_type.get_VGPUs")]
-        Response<string []>
+        Response<string[]>
         vgpu_type_get_vgpus(string session, string _vgpu_type);
 
         [XmlRpcMethod("VGPU_type.get_supported_on_GPU_groups")]
-        Response<string []>
+        Response<string[]>
         vgpu_type_get_supported_on_gpu_groups(string session, string _vgpu_type);
 
         [XmlRpcMethod("VGPU_type.get_enabled_on_GPU_groups")]
-        Response<string []>
+        Response<string[]>
         vgpu_type_get_enabled_on_gpu_groups(string session, string _vgpu_type);
 
         [XmlRpcMethod("VGPU_type.get_implementation")]
@@ -7768,11 +7784,11 @@ namespace XenAPI
         vgpu_type_get_experimental(string session, string _vgpu_type);
 
         [XmlRpcMethod("VGPU_type.get_compatible_types_in_vm")]
-        Response<string []>
+        Response<string[]>
         vgpu_type_get_compatible_types_in_vm(string session, string _vgpu_type);
 
         [XmlRpcMethod("VGPU_type.get_all")]
-        Response<string []>
+        Response<string[]>
         vgpu_type_get_all(string session);
 
         [XmlRpcMethod("VGPU_type.get_all_records")]
@@ -7788,7 +7804,7 @@ namespace XenAPI
         pvs_site_get_by_uuid(string session, string _uuid);
 
         [XmlRpcMethod("PVS_site.get_by_name_label")]
-        Response<string []>
+        Response<string[]>
         pvs_site_get_by_name_label(string session, string _label);
 
         [XmlRpcMethod("PVS_site.get_uuid")]
@@ -7808,15 +7824,15 @@ namespace XenAPI
         pvs_site_get_pvs_uuid(string session, string _pvs_site);
 
         [XmlRpcMethod("PVS_site.get_cache_storage")]
-        Response<string []>
+        Response<string[]>
         pvs_site_get_cache_storage(string session, string _pvs_site);
 
         [XmlRpcMethod("PVS_site.get_servers")]
-        Response<string []>
+        Response<string[]>
         pvs_site_get_servers(string session, string _pvs_site);
 
         [XmlRpcMethod("PVS_site.get_proxies")]
-        Response<string []>
+        Response<string[]>
         pvs_site_get_proxies(string session, string _pvs_site);
 
         [XmlRpcMethod("PVS_site.set_name_label")]
@@ -7852,7 +7868,7 @@ namespace XenAPI
         async_pvs_site_set_pvs_uuid(string session, string _pvs_site, string _value);
 
         [XmlRpcMethod("PVS_site.get_all")]
-        Response<string []>
+        Response<string[]>
         pvs_site_get_all(string session);
 
         [XmlRpcMethod("PVS_site.get_all_records")]
@@ -7872,7 +7888,7 @@ namespace XenAPI
         pvs_server_get_uuid(string session, string _pvs_server);
 
         [XmlRpcMethod("PVS_server.get_addresses")]
-        Response<string []>
+        Response<string[]>
         pvs_server_get_addresses(string session, string _pvs_server);
 
         [XmlRpcMethod("PVS_server.get_first_port")]
@@ -7889,11 +7905,11 @@ namespace XenAPI
 
         [XmlRpcMethod("PVS_server.introduce")]
         Response<string>
-        pvs_server_introduce(string session, string [] _addresses, string _first_port, string _last_port, string _site);
+        pvs_server_introduce(string session, string[] _addresses, string _first_port, string _last_port, string _site);
 
         [XmlRpcMethod("Async.PVS_server.introduce")]
         Response<string>
-        async_pvs_server_introduce(string session, string [] _addresses, string _first_port, string _last_port, string _site);
+        async_pvs_server_introduce(string session, string[] _addresses, string _first_port, string _last_port, string _site);
 
         [XmlRpcMethod("PVS_server.forget")]
         Response<string>
@@ -7904,7 +7920,7 @@ namespace XenAPI
         async_pvs_server_forget(string session, string _pvs_server);
 
         [XmlRpcMethod("PVS_server.get_all")]
-        Response<string []>
+        Response<string[]>
         pvs_server_get_all(string session);
 
         [XmlRpcMethod("PVS_server.get_all_records")]
@@ -7956,7 +7972,7 @@ namespace XenAPI
         async_pvs_proxy_destroy(string session, string _pvs_proxy);
 
         [XmlRpcMethod("PVS_proxy.get_all")]
-        Response<string []>
+        Response<string[]>
         pvs_proxy_get_all(string session);
 
         [XmlRpcMethod("PVS_proxy.get_all_records")]
@@ -8012,7 +8028,7 @@ namespace XenAPI
         pvs_cache_storage_get_vdi(string session, string _pvs_cache_storage);
 
         [XmlRpcMethod("PVS_cache_storage.get_all")]
-        Response<string []>
+        Response<string[]>
         pvs_cache_storage_get_all(string session);
 
         [XmlRpcMethod("PVS_cache_storage.get_all_records")]
@@ -8028,7 +8044,7 @@ namespace XenAPI
         feature_get_by_uuid(string session, string _uuid);
 
         [XmlRpcMethod("Feature.get_by_name_label")]
-        Response<string []>
+        Response<string[]>
         feature_get_by_name_label(string session, string _label);
 
         [XmlRpcMethod("Feature.get_uuid")]
@@ -8060,7 +8076,7 @@ namespace XenAPI
         feature_get_host(string session, string _feature);
 
         [XmlRpcMethod("Feature.get_all")]
-        Response<string []>
+        Response<string[]>
         feature_get_all(string session);
 
         [XmlRpcMethod("Feature.get_all_records")]
@@ -8108,7 +8124,7 @@ namespace XenAPI
         async_sdn_controller_forget(string session, string _sdn_controller);
 
         [XmlRpcMethod("SDN_controller.get_all")]
-        Response<string []>
+        Response<string[]>
         sdn_controller_get_all(string session);
 
         [XmlRpcMethod("SDN_controller.get_all_records")]
@@ -8212,7 +8228,7 @@ namespace XenAPI
         async_pusb_set_passthrough_enabled(string session, string _pusb, bool _value);
 
         [XmlRpcMethod("PUSB.get_all")]
-        Response<string []>
+        Response<string[]>
         pusb_get_all(string session);
 
         [XmlRpcMethod("PUSB.get_all_records")]
@@ -8228,7 +8244,7 @@ namespace XenAPI
         usb_group_get_by_uuid(string session, string _uuid);
 
         [XmlRpcMethod("USB_group.get_by_name_label")]
-        Response<string []>
+        Response<string[]>
         usb_group_get_by_name_label(string session, string _label);
 
         [XmlRpcMethod("USB_group.get_uuid")]
@@ -8244,11 +8260,11 @@ namespace XenAPI
         usb_group_get_name_description(string session, string _usb_group);
 
         [XmlRpcMethod("USB_group.get_PUSBs")]
-        Response<string []>
+        Response<string[]>
         usb_group_get_pusbs(string session, string _usb_group);
 
         [XmlRpcMethod("USB_group.get_VUSBs")]
-        Response<string []>
+        Response<string[]>
         usb_group_get_vusbs(string session, string _usb_group);
 
         [XmlRpcMethod("USB_group.get_other_config")]
@@ -8292,7 +8308,7 @@ namespace XenAPI
         async_usb_group_destroy(string session, string _usb_group);
 
         [XmlRpcMethod("USB_group.get_all")]
-        Response<string []>
+        Response<string[]>
         usb_group_get_all(string session);
 
         [XmlRpcMethod("USB_group.get_all_records")]
@@ -8312,7 +8328,7 @@ namespace XenAPI
         vusb_get_uuid(string session, string _vusb);
 
         [XmlRpcMethod("VUSB.get_allowed_operations")]
-        Response<string []>
+        Response<string[]>
         vusb_get_allowed_operations(string session, string _vusb);
 
         [XmlRpcMethod("VUSB.get_current_operations")]
@@ -8372,7 +8388,7 @@ namespace XenAPI
         async_vusb_destroy(string session, string _vusb);
 
         [XmlRpcMethod("VUSB.get_all")]
-        Response<string []>
+        Response<string[]>
         vusb_get_all(string session);
 
         [XmlRpcMethod("VUSB.get_all_records")]
@@ -8392,11 +8408,11 @@ namespace XenAPI
         cluster_get_uuid(string session, string _cluster);
 
         [XmlRpcMethod("Cluster.get_cluster_hosts")]
-        Response<string []>
+        Response<string[]>
         cluster_get_cluster_hosts(string session, string _cluster);
 
         [XmlRpcMethod("Cluster.get_pending_forget")]
-        Response<string []>
+        Response<string[]>
         cluster_get_pending_forget(string session, string _cluster);
 
         [XmlRpcMethod("Cluster.get_cluster_token")]
@@ -8408,7 +8424,7 @@ namespace XenAPI
         cluster_get_cluster_stack(string session, string _cluster);
 
         [XmlRpcMethod("Cluster.get_allowed_operations")]
-        Response<string []>
+        Response<string[]>
         cluster_get_allowed_operations(string session, string _cluster);
 
         [XmlRpcMethod("Cluster.get_current_operations")]
@@ -8504,7 +8520,7 @@ namespace XenAPI
         async_cluster_pool_resync(string session, string _cluster);
 
         [XmlRpcMethod("Cluster.get_all")]
-        Response<string []>
+        Response<string[]>
         cluster_get_all(string session);
 
         [XmlRpcMethod("Cluster.get_all_records")]
@@ -8544,7 +8560,7 @@ namespace XenAPI
         cluster_host_get_joined(string session, string _cluster_host);
 
         [XmlRpcMethod("Cluster_host.get_allowed_operations")]
-        Response<string []>
+        Response<string[]>
         cluster_host_get_allowed_operations(string session, string _cluster_host);
 
         [XmlRpcMethod("Cluster_host.get_current_operations")]
@@ -8596,7 +8612,7 @@ namespace XenAPI
         async_cluster_host_disable(string session, string _cluster_host);
 
         [XmlRpcMethod("Cluster_host.get_all")]
-        Response<string []>
+        Response<string[]>
         cluster_host_get_all(string session);
 
         [XmlRpcMethod("Cluster_host.get_all_records")]
@@ -8640,7 +8656,7 @@ namespace XenAPI
         certificate_get_fingerprint(string session, string _certificate);
 
         [XmlRpcMethod("Certificate.get_all")]
-        Response<string []>
+        Response<string[]>
         certificate_get_all(string session);
 
         [XmlRpcMethod("Certificate.get_all_records")]
@@ -8656,7 +8672,7 @@ namespace XenAPI
         repository_get_by_uuid(string session, string _uuid);
 
         [XmlRpcMethod("Repository.get_by_name_label")]
-        Response<string []>
+        Response<string[]>
         repository_get_by_name_label(string session, string _label);
 
         [XmlRpcMethod("Repository.get_uuid")]
@@ -8728,7 +8744,7 @@ namespace XenAPI
         async_repository_set_gpgkey_path(string session, string _repository, string _value);
 
         [XmlRpcMethod("Repository.get_all")]
-        Response<string []>
+        Response<string[]>
         repository_get_all(string session);
 
         [XmlRpcMethod("Repository.get_all_records")]
@@ -8764,8 +8780,8 @@ namespace XenAPI
         public DateTime validation_time;
         public string auth_user_sid;
         public string auth_user_name;
-        public string [] rbac_permissions;
-        public string [] tasks;
+        public string[] rbac_permissions;
+        public string[] tasks;
         public string parent;
         public string originator;
         public bool client_certificate;
@@ -8782,7 +8798,7 @@ namespace XenAPI
         public string uuid;
         public string subject_identifier;
         public Object other_config;
-        public string [] roles;
+        public string[] roles;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -8791,7 +8807,7 @@ namespace XenAPI
         public string uuid;
         public string name_label;
         public string name_description;
-        public string [] subroles;
+        public string[] subroles;
         public bool is_internal;
     }
 
@@ -8801,7 +8817,7 @@ namespace XenAPI
         public string uuid;
         public string name_label;
         public string name_description;
-        public string [] allowed_operations;
+        public string[] allowed_operations;
         public Object current_operations;
         public DateTime created;
         public DateTime finished;
@@ -8810,10 +8826,10 @@ namespace XenAPI
         public double progress;
         public string type;
         public string result;
-        public string [] error_info;
+        public string[] error_info;
         public Object other_config;
         public string subtask_of;
-        public string [] subtasks;
+        public string[] subtasks;
         public string backtrace;
     }
 
@@ -8830,13 +8846,13 @@ namespace XenAPI
         public Object other_config;
         public bool ha_enabled;
         public Object ha_configuration;
-        public string [] ha_statefiles;
+        public string[] ha_statefiles;
         public string ha_host_failures_to_tolerate;
         public string ha_plan_exists_for;
         public bool ha_allow_overcommit;
         public bool ha_overcommitted;
         public Object blobs;
-        public string [] tags;
+        public string[] tags;
         public Object gui_config;
         public Object health_check_config;
         public string wlb_url;
@@ -8847,9 +8863,9 @@ namespace XenAPI
         public string redo_log_vdi;
         public string vswitch_controller;
         public Object restrictions;
-        public string [] metadata_VDIs;
+        public string[] metadata_VDIs;
         public string ha_cluster_stack;
-        public string [] allowed_operations;
+        public string[] allowed_operations;
         public Object current_operations;
         public Object guest_agent_config;
         public Object cpu_info;
@@ -8859,7 +8875,7 @@ namespace XenAPI
         public string uefi_certificates;
         public bool is_psr_pending;
         public bool tls_verification_enabled;
-        public string [] repositories;
+        public string[] repositories;
         public bool client_certificate_auth_enabled;
         public string client_certificate_auth_name;
         public string repository_proxy_url;
@@ -8876,8 +8892,8 @@ namespace XenAPI
         public string version;
         public string size;
         public bool pool_applied;
-        public string [] host_patches;
-        public string [] after_apply_guidance;
+        public string[] host_patches;
+        public string[] after_apply_guidance;
         public string pool_update;
         public Object other_config;
     }
@@ -8891,9 +8907,9 @@ namespace XenAPI
         public string version;
         public string installation_size;
         public string key;
-        public string [] after_apply_guidance;
+        public string[] after_apply_guidance;
         public string vdi;
-        public string [] hosts;
+        public string[] hosts;
         public Object other_config;
         public bool enforce_homogeneity;
     }
@@ -8902,7 +8918,7 @@ namespace XenAPI
     public class Proxy_VM
     {
         public string uuid;
-        public string [] allowed_operations;
+        public string[] allowed_operations;
         public Object current_operations;
         public string name_label;
         public string name_description;
@@ -8926,12 +8942,12 @@ namespace XenAPI
         public string actions_after_shutdown;
         public string actions_after_reboot;
         public string actions_after_crash;
-        public string [] consoles;
-        public string [] VIFs;
-        public string [] VBDs;
-        public string [] VUSBs;
-        public string [] crash_dumps;
-        public string [] VTPMs;
+        public string[] consoles;
+        public string[] VIFs;
+        public string[] VBDs;
+        public string[] VUSBs;
+        public string[] crash_dumps;
+        public string[] VTPMs;
         public string PV_bootloader;
         public string PV_kernel;
         public string PV_ramdisk;
@@ -8957,16 +8973,16 @@ namespace XenAPI
         public string ha_restart_priority;
         public bool is_a_snapshot;
         public string snapshot_of;
-        public string [] snapshots;
+        public string[] snapshots;
         public DateTime snapshot_time;
         public string transportable_snapshot_id;
         public Object blobs;
-        public string [] tags;
+        public string[] tags;
         public Object blocked_operations;
         public Object snapshot_info;
         public string snapshot_metadata;
         public string parent;
-        public string [] children;
+        public string[] children;
         public Object bios_strings;
         public string protection_policy;
         public bool is_snapshot_from_vmpp;
@@ -8976,8 +8992,8 @@ namespace XenAPI
         public string start_delay;
         public string shutdown_delay;
         public string order;
-        public string [] VGPUs;
-        public string [] attached_PCIs;
+        public string[] VGPUs;
+        public string[] attached_PCIs;
         public string suspend_SR;
         public string version;
         public string generation_id;
@@ -8987,7 +9003,7 @@ namespace XenAPI
         public string reference_label;
         public string domain_type;
         public Object NVRAM;
-        public string [] pending_guidances;
+        public string[] pending_guidances;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -9000,7 +9016,7 @@ namespace XenAPI
         public Object VCPUs_CPU;
         public Object VCPUs_params;
         public Object VCPUs_flags;
-        public string [] state;
+        public string[] state;
         public DateTime start_time;
         public DateTime install_time;
         public DateTime last_updated;
@@ -9049,10 +9065,10 @@ namespace XenAPI
         public Object archive_schedule;
         public bool is_archive_running;
         public DateTime archive_last_run_time;
-        public string [] VMs;
+        public string[] VMs;
         public bool is_alarm_enabled;
         public Object alarm_config;
-        public string [] recent_alerts;
+        public string[] recent_alerts;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -9067,7 +9083,7 @@ namespace XenAPI
         public string frequency;
         public Object schedule;
         public DateTime last_run_time;
-        public string [] VMs;
+        public string[] VMs;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -9076,16 +9092,16 @@ namespace XenAPI
         public string uuid;
         public string name_label;
         public string name_description;
-        public string [] allowed_operations;
+        public string[] allowed_operations;
         public Object current_operations;
-        public string [] VMs;
+        public string[] VMs;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
     public class Proxy_DR_task
     {
         public string uuid;
-        public string [] introduced_SRs;
+        public string[] introduced_SRs;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -9095,7 +9111,7 @@ namespace XenAPI
         public string name_label;
         public string name_description;
         public string memory_overhead;
-        public string [] allowed_operations;
+        public string[] allowed_operations;
         public Object current_operations;
         public string API_version_major;
         public string API_version_minor;
@@ -9104,29 +9120,29 @@ namespace XenAPI
         public bool enabled;
         public Object software_version;
         public Object other_config;
-        public string [] capabilities;
+        public string[] capabilities;
         public Object cpu_configuration;
         public string sched_policy;
-        public string [] supported_bootloaders;
-        public string [] resident_VMs;
+        public string[] supported_bootloaders;
+        public string[] resident_VMs;
         public Object logging;
-        public string [] PIFs;
+        public string[] PIFs;
         public string suspend_image_sr;
         public string crash_dump_sr;
-        public string [] crashdumps;
-        public string [] patches;
-        public string [] updates;
-        public string [] PBDs;
-        public string [] host_CPUs;
+        public string[] crashdumps;
+        public string[] patches;
+        public string[] updates;
+        public string[] PBDs;
+        public string[] host_CPUs;
         public Object cpu_info;
         public string hostname;
         public string address;
         public string metrics;
         public Object license_params;
-        public string [] ha_statefiles;
-        public string [] ha_network_peers;
+        public string[] ha_statefiles;
+        public string[] ha_network_peers;
         public Object blobs;
-        public string [] tags;
+        public string[] tags;
         public string external_auth_type;
         public string external_auth_service_name;
         public Object external_auth_configuration;
@@ -9137,22 +9153,22 @@ namespace XenAPI
         public Object power_on_config;
         public string local_cache_sr;
         public Object chipset_info;
-        public string [] PCIs;
-        public string [] PGPUs;
-        public string [] PUSBs;
+        public string[] PCIs;
+        public string[] PGPUs;
+        public string[] PUSBs;
         public bool ssl_legacy;
         public Object guest_VCPUs_params;
         public string display;
-        public string [] virtual_hardware_platform_versions;
+        public string[] virtual_hardware_platform_versions;
         public string control_domain;
-        public string [] updates_requiring_reboot;
-        public string [] features;
+        public string[] updates_requiring_reboot;
+        public string[] features;
         public string iscsi_iqn;
         public bool multipathing;
         public string uefi_certificates;
-        public string [] certificates;
-        public string [] editions;
-        public string [] pending_guidances;
+        public string[] certificates;
+        public string[] editions;
+        public string[] pending_guidances;
         public bool tls_verification_enabled;
         public DateTime last_software_update;
     }
@@ -9217,26 +9233,26 @@ namespace XenAPI
         public string uuid;
         public string name_label;
         public string name_description;
-        public string [] allowed_operations;
+        public string[] allowed_operations;
         public Object current_operations;
-        public string [] VIFs;
-        public string [] PIFs;
+        public string[] VIFs;
+        public string[] PIFs;
         public string MTU;
         public Object other_config;
         public string bridge;
         public bool managed;
         public Object blobs;
-        public string [] tags;
+        public string[] tags;
         public string default_locking_mode;
         public Object assigned_ips;
-        public string [] purpose;
+        public string[] purpose;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
     public class Proxy_VIF
     {
         public string uuid;
-        public string [] allowed_operations;
+        public string[] allowed_operations;
         public Object current_operations;
         public string device;
         public string network;
@@ -9250,17 +9266,17 @@ namespace XenAPI
         public Object runtime_properties;
         public string qos_algorithm_type;
         public Object qos_algorithm_params;
-        public string [] qos_supported_algorithms;
+        public string[] qos_supported_algorithms;
         public string metrics;
         public bool MAC_autogenerated;
         public string locking_mode;
-        public string [] ipv4_allowed;
-        public string [] ipv6_allowed;
+        public string[] ipv4_allowed;
+        public string[] ipv6_allowed;
         public string ipv4_configuration_mode;
-        public string [] ipv4_addresses;
+        public string[] ipv4_addresses;
         public string ipv4_gateway;
         public string ipv6_configuration_mode;
-        public string [] ipv6_addresses;
+        public string[] ipv6_addresses;
         public string ipv6_gateway;
     }
 
@@ -9293,24 +9309,24 @@ namespace XenAPI
         public string gateway;
         public string DNS;
         public string bond_slave_of;
-        public string [] bond_master_of;
+        public string[] bond_master_of;
         public string VLAN_master_of;
-        public string [] VLAN_slave_of;
+        public string[] VLAN_slave_of;
         public bool management;
         public Object other_config;
         public bool disallow_unplug;
-        public string [] tunnel_access_PIF_of;
-        public string [] tunnel_transport_PIF_of;
+        public string[] tunnel_access_PIF_of;
+        public string[] tunnel_transport_PIF_of;
         public string ipv6_configuration_mode;
-        public string [] IPv6;
+        public string[] IPv6;
         public string ipv6_gateway;
         public string primary_address_type;
         public bool managed;
         public Object properties;
-        public string [] capabilities;
+        public string[] capabilities;
         public string igmp_snooping_status;
-        public string [] sriov_physical_PIF_of;
-        public string [] sriov_logical_PIF_of;
+        public string[] sriov_physical_PIF_of;
+        public string[] sriov_logical_PIF_of;
         public string PCI;
     }
 
@@ -9337,7 +9353,7 @@ namespace XenAPI
     {
         public string uuid;
         public string master;
-        public string [] slaves;
+        public string[] slaves;
         public Object other_config;
         public string primary_slave;
         public string mode;
@@ -9368,11 +9384,11 @@ namespace XenAPI
         public string version;
         public string required_api_version;
         public Object configuration;
-        public string [] capabilities;
+        public string[] capabilities;
         public Object features;
         public Object other_config;
         public string driver_filename;
-        public string [] required_cluster_stack;
+        public string[] required_cluster_stack;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -9381,10 +9397,10 @@ namespace XenAPI
         public string uuid;
         public string name_label;
         public string name_description;
-        public string [] allowed_operations;
+        public string[] allowed_operations;
         public Object current_operations;
-        public string [] VDIs;
-        public string [] PBDs;
+        public string[] VDIs;
+        public string[] PBDs;
         public string virtual_allocation;
         public string physical_utilisation;
         public string physical_size;
@@ -9392,7 +9408,7 @@ namespace XenAPI
         public string content_type;
         public bool shared;
         public Object other_config;
-        public string [] tags;
+        public string[] tags;
         public Object sm_config;
         public Object blobs;
         public bool local_cache_enabled;
@@ -9434,11 +9450,11 @@ namespace XenAPI
         public string uuid;
         public string name_label;
         public string name_description;
-        public string [] allowed_operations;
+        public string[] allowed_operations;
         public Object current_operations;
         public string SR;
-        public string [] VBDs;
-        public string [] crash_dumps;
+        public string[] VBDs;
+        public string[] crash_dumps;
         public string virtual_size;
         public string physical_utilisation;
         public string type;
@@ -9454,9 +9470,9 @@ namespace XenAPI
         public Object sm_config;
         public bool is_a_snapshot;
         public string snapshot_of;
-        public string [] snapshots;
+        public string[] snapshots;
         public DateTime snapshot_time;
-        public string [] tags;
+        public string[] tags;
         public bool allow_caching;
         public string on_boot;
         public string metadata_of_pool;
@@ -9469,7 +9485,7 @@ namespace XenAPI
     public class Proxy_VBD
     {
         public string uuid;
-        public string [] allowed_operations;
+        public string[] allowed_operations;
         public Object current_operations;
         public string VM;
         public string VDI;
@@ -9488,7 +9504,7 @@ namespace XenAPI
         public Object runtime_properties;
         public string qos_algorithm_type;
         public Object qos_algorithm_params;
-        public string [] qos_supported_algorithms;
+        public string[] qos_supported_algorithms;
         public string metrics;
     }
 
@@ -9528,6 +9544,9 @@ namespace XenAPI
         public string uuid;
         public string VM;
         public string backend;
+        public string persistence_backend;
+        public bool is_unique;
+        public bool is_protected;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -9624,7 +9643,7 @@ namespace XenAPI
         public string device_name;
         public string host;
         public string pci_id;
-        public string [] dependencies;
+        public string[] dependencies;
         public Object other_config;
         public string subsystem_vendor_name;
         public string subsystem_device_name;
@@ -9639,9 +9658,9 @@ namespace XenAPI
         public string GPU_group;
         public string host;
         public Object other_config;
-        public string [] supported_VGPU_types;
-        public string [] enabled_VGPU_types;
-        public string [] resident_VGPUs;
+        public string[] supported_VGPU_types;
+        public string[] enabled_VGPU_types;
+        public string[] resident_VGPUs;
         public Object supported_VGPU_max_capacities;
         public string dom0_access;
         public bool is_system_display_device;
@@ -9654,13 +9673,13 @@ namespace XenAPI
         public string uuid;
         public string name_label;
         public string name_description;
-        public string [] PGPUs;
-        public string [] VGPUs;
-        public string [] GPU_types;
+        public string[] PGPUs;
+        public string[] VGPUs;
+        public string[] GPU_types;
         public Object other_config;
         public string allocation_algorithm;
-        public string [] supported_VGPU_types;
-        public string [] enabled_VGPU_types;
+        public string[] supported_VGPU_types;
+        public string[] enabled_VGPU_types;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -9690,15 +9709,15 @@ namespace XenAPI
         public string max_heads;
         public string max_resolution_x;
         public string max_resolution_y;
-        public string [] supported_on_PGPUs;
-        public string [] enabled_on_PGPUs;
-        public string [] VGPUs;
-        public string [] supported_on_GPU_groups;
-        public string [] enabled_on_GPU_groups;
+        public string[] supported_on_PGPUs;
+        public string[] enabled_on_PGPUs;
+        public string[] VGPUs;
+        public string[] supported_on_GPU_groups;
+        public string[] enabled_on_GPU_groups;
         public string implementation;
         public string identifier;
         public bool experimental;
-        public string [] compatible_types_in_vm;
+        public string[] compatible_types_in_vm;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -9708,16 +9727,16 @@ namespace XenAPI
         public string name_label;
         public string name_description;
         public string PVS_uuid;
-        public string [] cache_storage;
-        public string [] servers;
-        public string [] proxies;
+        public string[] cache_storage;
+        public string[] servers;
+        public string[] proxies;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
     public class Proxy_PVS_server
     {
         public string uuid;
-        public string [] addresses;
+        public string[] addresses;
         public string first_port;
         public string last_port;
         public string site;
@@ -9800,8 +9819,8 @@ namespace XenAPI
         public string uuid;
         public string name_label;
         public string name_description;
-        public string [] PUSBs;
-        public string [] VUSBs;
+        public string[] PUSBs;
+        public string[] VUSBs;
         public Object other_config;
     }
 
@@ -9809,7 +9828,7 @@ namespace XenAPI
     public class Proxy_VUSB
     {
         public string uuid;
-        public string [] allowed_operations;
+        public string[] allowed_operations;
         public Object current_operations;
         public string VM;
         public string USB_group;
@@ -9821,11 +9840,11 @@ namespace XenAPI
     public class Proxy_Cluster
     {
         public string uuid;
-        public string [] cluster_hosts;
-        public string [] pending_forget;
+        public string[] cluster_hosts;
+        public string[] pending_forget;
         public string cluster_token;
         public string cluster_stack;
-        public string [] allowed_operations;
+        public string[] allowed_operations;
         public Object current_operations;
         public bool pool_auto_join;
         public double token_timeout;
@@ -9843,7 +9862,7 @@ namespace XenAPI
         public bool enabled;
         public string PIF;
         public bool joined;
-        public string [] allowed_operations;
+        public string[] allowed_operations;
         public Object current_operations;
         public Object other_config;
     }

@@ -8034,6 +8034,33 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Resetting the vTPM that is attached to a VM to its original state may result in the deactivation of some security features on the VM. Do you want to continue?.
+        /// </summary>
+        public static string COMMAND_RESET_VTPM_WARNING {
+            get {
+                return ResourceManager.GetString("COMMAND_RESET_VTPM_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TPM is supported only for VMs using the UEFI or UEFI secure boot modes..
+        /// </summary>
+        public static string COMMAND_VTPM_DISABLED_NON_UEFI {
+            get {
+                return ResourceManager.GetString("COMMAND_VTPM_DISABLED_NON_UEFI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mana&amp;ge vTPMs....
+        /// </summary>
+        public static string COMMAND_VTPM_MENU {
+            get {
+                return ResourceManager.GetString("COMMAND_VTPM_MENU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0}: for use with Common Criteria versions of {1} only.
         /// </summary>
         public static string COMMON_CRITERIA_TEXT {
@@ -18421,33 +18448,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;UEFI Boot (experimental).
-        /// </summary>
-        public static string GUEFI_BOOT_MODE_EXPERIMENTAL_LABEL {
-            get {
-                return ResourceManager.GetString("GUEFI_BOOT_MODE_EXPERIMENTAL_LABEL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Guest UEFI boot is an experimental feature. You can create UEFI-enabled VMs on hosts that are in a production environment. However, UEFI-enabled VMs must not be used for production purposes. You may have to re-create the VMs when you upgrade the host to a newer version of {0}..
-        /// </summary>
-        public static string GUEFI_BOOT_MODE_EXPERIMENTAL_WARNING {
-            get {
-                return ResourceManager.GetString("GUEFI_BOOT_MODE_EXPERIMENTAL_WARNING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &amp;UEFI Boot.
-        /// </summary>
-        public static string GUEFI_BOOT_MODE_LABEL {
-            get {
-                return ResourceManager.GetString("GUEFI_BOOT_MODE_LABEL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The UEFI boot mode is not supported with the selected template..
         /// </summary>
         public static string GUEFI_BOOT_MODE_UNSUPPORTED_WARNING {
@@ -18457,47 +18457,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Guest UEFI boot and guest UEFI secure boot are experimental features. You can create UEFI-enabled VMs on hosts that are in a production environment. However, UEFI-enabled VMs must not be used for production purposes. You may have to re-create the VMs when you upgrade the host to a newer version of {0}..
-        /// </summary>
-        public static string GUEFI_BOOT_MODES_EXPERIMENTAL_WARNING {
-            get {
-                return ResourceManager.GetString("GUEFI_BOOT_MODES_EXPERIMENTAL_WARNING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The UEFI and UEFI secure boot modes are not supported with the selected template..
         /// </summary>
         public static string GUEFI_BOOT_MODES_UNSUPPORTED_WARNING {
             get {
                 return ResourceManager.GetString("GUEFI_BOOT_MODES_UNSUPPORTED_WARNING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to UEFI &amp;Secure Boot (experimental).
-        /// </summary>
-        public static string GUEFI_SECURE_BOOT_MODE_EXPERIMENTAL_LABEL {
-            get {
-                return ResourceManager.GetString("GUEFI_SECURE_BOOT_MODE_EXPERIMENTAL_LABEL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to UEFI &amp;Secure Boot.
-        /// </summary>
-        public static string GUEFI_SECURE_BOOT_MODE_LABEL {
-            get {
-                return ResourceManager.GetString("GUEFI_SECURE_BOOT_MODE_LABEL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Guest UEFI secure boot is an experimental feature. You can create VMs configured to use the UEFI secure boot mode on hosts that are in a production environment. However, these VMs must not be used for production purposes. You may have to re-create the VMs when you upgrade the host to a newer version of {0}..
-        /// </summary>
-        public static string GUEFI_SECUREBOOT_MODE_EXPERIMENTAL_WARNING {
-            get {
-                return ResourceManager.GetString("GUEFI_SECUREBOOT_MODE_EXPERIMENTAL_WARNING", resourceCulture);
             }
         }
         
@@ -40631,6 +40595,174 @@ namespace XenAdmin {
         public static string VOLUMES {
             get {
                 return ResourceManager.GetString("VOLUMES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trusted Platform Module.
+        /// </summary>
+        public static string VTPM {
+            get {
+                return ResourceManager.GetString("VTPM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Attaching vTPM....
+        /// </summary>
+        public static string VTPM_ATTACH_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("VTPM_ATTACH_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Attaching a new vTPM to VM &apos;{0}&apos;.
+        /// </summary>
+        public static string VTPM_ATTACH_TITLE {
+            get {
+                return ResourceManager.GetString("VTPM_ATTACH_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} vTPMs are attached to this VM..
+        /// </summary>
+        public static string VTPM_ATTACHED_MANY {
+            get {
+                return ResourceManager.GetString("VTPM_ATTACHED_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A vTPM is attached to this VM..
+        /// </summary>
+        public static string VTPM_ATTACHED_ONE {
+            get {
+                return ResourceManager.GetString("VTPM_ATTACHED_ONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The maximum number of vTPMs that can be attached to this VM is {0}..
+        /// </summary>
+        public static string VTPM_MAX_REACHED {
+            get {
+                return ResourceManager.GetString("VTPM_MAX_REACHED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The selected template has {0} vTPMs attached to it, which is the maximum number that can be attached to the VM..
+        /// </summary>
+        public static string VTPM_MAX_REACHED_CUSTOM_TEMPLATE_MANY {
+            get {
+                return ResourceManager.GetString("VTPM_MAX_REACHED_CUSTOM_TEMPLATE_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The selected template has 1 vTPM attached to it, which is the maximum number that can be attached to the VM..
+        /// </summary>
+        public static string VTPM_MAX_REACHED_CUSTOM_TEMPLATE_ONE {
+            get {
+                return ResourceManager.GetString("VTPM_MAX_REACHED_CUSTOM_TEMPLATE_ONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are no vTPMs attached to this VM..
+        /// </summary>
+        public static string VTPM_NONE_ATTACHED {
+            get {
+                return ResourceManager.GetString("VTPM_NONE_ATTACHED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You need to shut down this VM before you can attach a new vTPM to it..
+        /// </summary>
+        public static string VTPM_POWER_STATE_WRONG_ATTACH {
+            get {
+                return ResourceManager.GetString("VTPM_POWER_STATE_WRONG_ATTACH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You need to shut down the VM before you can remove this vTPM..
+        /// </summary>
+        public static string VTPM_POWER_STATE_WRONG_REMOVE {
+            get {
+                return ResourceManager.GetString("VTPM_POWER_STATE_WRONG_REMOVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A {0} user does not have sufficient permissions to attach a vTPM to a VM. Please login using an account with one of the following roles:
+        ///
+        ///{1}.
+        /// </summary>
+        public static string VTPM_RBAC_RESTRICTION_CREATE {
+            get {
+                return ResourceManager.GetString("VTPM_RBAC_RESTRICTION_CREATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A {0} user does not have sufficient permissions to remove a vTPM from a VM. Please login using an account with one of the following roles:
+        ///
+        ///{1}.
+        /// </summary>
+        public static string VTPM_RBAC_RESTRICTION_REMOVE {
+            get {
+                return ResourceManager.GetString("VTPM_RBAC_RESTRICTION_REMOVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A {0} user does not have sufficient permissions to reset the vTPM that is attached to a VM to its original state. Please login using an account with one of the following roles:
+        ///
+        ///{1}.
+        /// </summary>
+        public static string VTPM_RBAC_RESTRICTION_RESET {
+            get {
+                return ResourceManager.GetString("VTPM_RBAC_RESTRICTION_RESET", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove vTPM.
+        /// </summary>
+        public static string VTPM_REMOVE {
+            get {
+                return ResourceManager.GetString("VTPM_REMOVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Removing vTPM....
+        /// </summary>
+        public static string VTPM_REMOVE_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("VTPM_REMOVE_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Removing a vTPM from VM &apos;{0}&apos;.
+        /// </summary>
+        public static string VTPM_REMOVE_TITLE {
+            get {
+                return ResourceManager.GetString("VTPM_REMOVE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Removing the vTPM may result in the deactivation of some security features on the VM and prevent it from starting. Do you want to continue?.
+        /// </summary>
+        public static string VTPM_REMOVE_WARNING {
+            get {
+                return ResourceManager.GetString("VTPM_REMOVE_WARNING", resourceCulture);
             }
         }
         

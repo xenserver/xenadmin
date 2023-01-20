@@ -112,8 +112,6 @@ namespace XenAdmin.Dialogs
             this.Controls.Add(this.linkLabelTellMeMore);
             this.Controls.Add(this.BlurbLabel);
             this.Name = "NetworkingProperties";
-            this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.NetworkingProperties_HelpButtonClicked);
-            this.HelpRequested += new System.Windows.Forms.HelpEventHandler(this.NetworkingProperties_HelpRequested);
             this.Controls.SetChildIndex(this.okButton, 0);
             this.Controls.SetChildIndex(this.cancelButton, 0);
             this.Controls.SetChildIndex(this.splitContainer, 0);

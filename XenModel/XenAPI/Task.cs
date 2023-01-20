@@ -151,7 +151,7 @@ namespace XenAPI
             progress = Convert.ToDouble(proxy.progress);
             type = proxy.type == null ? null : proxy.type;
             result = proxy.result == null ? null : proxy.result;
-            error_info = proxy.error_info == null ? new string[] {} : (string [])proxy.error_info;
+            error_info = proxy.error_info == null ? new string[] {} : (string[])proxy.error_info;
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
             subtask_of = proxy.subtask_of == null ? null : XenRef<Task>.Create(proxy.subtask_of);
             subtasks = proxy.subtasks == null ? null : XenRef<Task>.Create(proxy.subtasks);
@@ -492,7 +492,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.task_get_error_info(session.opaque_ref, _task);
             else
-                return (string [])session.XmlRpcProxy.task_get_error_info(session.opaque_ref, _task ?? "").parse();
+                return (string[])session.XmlRpcProxy.task_get_error_info(session.opaque_ref, _task ?? "").parse();
         }
 
         /// <summary>

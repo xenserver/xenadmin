@@ -305,7 +305,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.role_get_permissions_name_label(session.opaque_ref, _role);
             else
-                return (string [])session.XmlRpcProxy.role_get_permissions_name_label(session.opaque_ref, _role ?? "").parse();
+                return (string[])session.XmlRpcProxy.role_get_permissions_name_label(session.opaque_ref, _role ?? "").parse();
         }
 
         /// <summary>

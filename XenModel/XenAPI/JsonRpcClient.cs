@@ -2020,11 +2020,11 @@ namespace XenAPI
             return Rpc<XenRef<Task>>("Async.pool.sync_updates", new JArray(session, _pool ?? "", _force, _token ?? "", _token_id ?? ""), serializer);
         }
 
-        public string[] pool_check_update_readiness(string session, string _pool, bool _requires_reboot)
+        public string[][] pool_check_update_readiness(string session, string _pool, bool _requires_reboot)
         {
             var converters = new List<JsonConverter> {};
             var serializer = CreateSerializer(converters);
-            return Rpc<string[]>("pool.check_update_readiness", new JArray(session, _pool ?? "", _requires_reboot), serializer);
+            return Rpc<string[][]>("pool.check_update_readiness", new JArray(session, _pool ?? "", _requires_reboot), serializer);
         }
 
         public XenRef<Task> async_pool_check_update_readiness(string session, string _pool, bool _requires_reboot)
@@ -7200,11 +7200,11 @@ namespace XenAPI
             Rpc("host.emergency_reenable_tls_verification", new JArray(session), serializer);
         }
 
-        public string[] host_apply_updates(string session, string _host, string _hash)
+        public string[][] host_apply_updates(string session, string _host, string _hash)
         {
             var converters = new List<JsonConverter> {};
             var serializer = CreateSerializer(converters);
-            return Rpc<string[]>("host.apply_updates", new JArray(session, _host ?? "", _hash ?? ""), serializer);
+            return Rpc<string[][]>("host.apply_updates", new JArray(session, _host ?? "", _hash ?? ""), serializer);
         }
 
         public XenRef<Task> async_host_apply_updates(string session, string _host, string _hash)
@@ -11855,34 +11855,6 @@ namespace XenAPI
             return Rpc<XenRef<VTPM>>("VTPM.get_by_uuid", new JArray(session, _uuid ?? ""), serializer);
         }
 
-        public XenRef<VTPM> vtpm_create(string session, VTPM _record)
-        {
-            var converters = new List<JsonConverter> {new XenRefConverter<VTPM>()};
-            var serializer = CreateSerializer(converters);
-            return Rpc<XenRef<VTPM>>("VTPM.create", new JArray(session, _record.ToJObject()), serializer);
-        }
-
-        public XenRef<Task> async_vtpm_create(string session, VTPM _record)
-        {
-            var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
-            var serializer = CreateSerializer(converters);
-            return Rpc<XenRef<Task>>("Async.VTPM.create", new JArray(session, _record.ToJObject()), serializer);
-        }
-
-        public void vtpm_destroy(string session, string _vtpm)
-        {
-            var converters = new List<JsonConverter> {};
-            var serializer = CreateSerializer(converters);
-            Rpc("VTPM.destroy", new JArray(session, _vtpm ?? ""), serializer);
-        }
-
-        public XenRef<Task> async_vtpm_destroy(string session, string _vtpm)
-        {
-            var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
-            var serializer = CreateSerializer(converters);
-            return Rpc<XenRef<Task>>("Async.VTPM.destroy", new JArray(session, _vtpm ?? ""), serializer);
-        }
-
         public string vtpm_get_uuid(string session, string _vtpm)
         {
             var converters = new List<JsonConverter> {};
@@ -11902,6 +11874,62 @@ namespace XenAPI
             var converters = new List<JsonConverter> {new XenRefConverter<VM>()};
             var serializer = CreateSerializer(converters);
             return Rpc<XenRef<VM>>("VTPM.get_backend", new JArray(session, _vtpm ?? ""), serializer);
+        }
+
+        public persistence_backend vtpm_get_persistence_backend(string session, string _vtpm)
+        {
+            var converters = new List<JsonConverter> {new persistence_backendConverter()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<persistence_backend>("VTPM.get_persistence_backend", new JArray(session, _vtpm ?? ""), serializer);
+        }
+
+        public bool vtpm_get_is_unique(string session, string _vtpm)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            return Rpc<bool>("VTPM.get_is_unique", new JArray(session, _vtpm ?? ""), serializer);
+        }
+
+        public bool vtpm_get_is_protected(string session, string _vtpm)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            return Rpc<bool>("VTPM.get_is_protected", new JArray(session, _vtpm ?? ""), serializer);
+        }
+
+        public XenRef<VTPM> vtpm_create(string session, string _vm, bool _is_unique)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<VTPM>(), new XenRefConverter<VM>()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<XenRef<VTPM>>("VTPM.create", new JArray(session, _vm ?? "", _is_unique), serializer);
+        }
+
+        public XenRef<Task> async_vtpm_create(string session, string _vm, bool _is_unique)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>(), new XenRefConverter<VM>()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<XenRef<Task>>("Async.VTPM.create", new JArray(session, _vm ?? "", _is_unique), serializer);
+        }
+
+        public void vtpm_destroy(string session, string _vtpm)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            Rpc("VTPM.destroy", new JArray(session, _vtpm ?? ""), serializer);
+        }
+
+        public XenRef<Task> async_vtpm_destroy(string session, string _vtpm)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<XenRef<Task>>("Async.VTPM.destroy", new JArray(session, _vtpm ?? ""), serializer);
+        }
+
+        public List<XenRef<VTPM>> vtpm_get_all(string session)
+        {
+            var converters = new List<JsonConverter> {new XenRefListConverter<VTPM>()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<List<XenRef<VTPM>>>("VTPM.get_all", new JArray(session), serializer);
         }
 
         public Dictionary<XenRef<VTPM>, VTPM> vtpm_get_all_records(string session)

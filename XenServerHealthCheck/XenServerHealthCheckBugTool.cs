@@ -124,7 +124,7 @@ namespace XenServerHealthCheck
                     continue;
                 }
 
-                combination = Helpers.ListsCommonItems<string>(combination, capabilities);
+                combination = combination.Intersect(capabilities).ToList();
             }
 
             if (combination == null || combination.Count <= 0)

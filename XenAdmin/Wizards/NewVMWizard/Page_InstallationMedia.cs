@@ -58,6 +58,8 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         public Host Affinity { private get; set; }
 
+        public bool AssignVtpm => bootModesControl1.AssignVtpm;
+
         public BootMode SelectedBootMode => SelectedTemplate.IsHVM()
             ? bootModesControl1.SelectedOption
             : BootMode.NOT_AVAILABLE;

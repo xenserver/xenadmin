@@ -126,7 +126,7 @@ namespace XenAPI
         {
             uuid = proxy.uuid == null ? null : proxy.uuid;
             cluster_hosts = proxy.cluster_hosts == null ? null : XenRef<Cluster_host>.Create(proxy.cluster_hosts);
-            pending_forget = proxy.pending_forget == null ? new string[] {} : (string [])proxy.pending_forget;
+            pending_forget = proxy.pending_forget == null ? new string[] {} : (string[])proxy.pending_forget;
             cluster_token = proxy.cluster_token == null ? null : proxy.cluster_token;
             cluster_stack = proxy.cluster_stack == null ? null : proxy.cluster_stack;
             allowed_operations = proxy.allowed_operations == null ? null : Helper.StringArrayToEnumList<cluster_operation>(proxy.allowed_operations);
@@ -298,7 +298,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.cluster_get_pending_forget(session.opaque_ref, _cluster);
             else
-                return (string [])session.XmlRpcProxy.cluster_get_pending_forget(session.opaque_ref, _cluster ?? "").parse();
+                return (string[])session.XmlRpcProxy.cluster_get_pending_forget(session.opaque_ref, _cluster ?? "").parse();
         }
 
         /// <summary>

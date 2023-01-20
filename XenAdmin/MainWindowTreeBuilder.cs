@@ -39,6 +39,7 @@ using XenAPI;
 using XenAdmin.XenSearch;
 using XenAdmin.Core;
 using System.Drawing;
+using System.Linq;
 
 
 namespace XenAdmin
@@ -396,8 +397,13 @@ namespace XenAdmin
 
             private VirtualTreeNode AddVMNode(VM vm)
             {
+                if (vm.Connection.Cache.Hosts.Any(Host.RestrictVtpm) &&
+                    vm.is_a_template &&
+                    vm.platform.TryGetValue("vtpm", out var result) && result.ToLower() == "true")
+                    return null;
+
                 bool hidden = vm.IsHidden();
-                string name = hidden ? String.Format(Messages.X_HIDDEN, vm.Name()) : vm.Name();
+                string name = hidden ? string.Format(Messages.X_HIDDEN, vm.Name()) : vm.Name();
 
                 return AddNode(name, Images.GetIconFor(vm), hidden, vm);
             }

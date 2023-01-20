@@ -2894,6 +2894,15 @@ Do you want to assign these VMs to the schedule '{0}' instead?</value>
   <data name="COLLAPSE_CHILDREN" xml:space="preserve">
     <value>&amp;Collapse Children</value>
   </data>
+  <data name="COMMAND_RESET_VTPM_WARNING" xml:space="preserve">
+    <value>Resetting the vTPM that is attached to a VM to its original state may result in the deactivation of some security features on the VM. Do you want to continue?</value>
+  </data>
+  <data name="COMMAND_VTPM_DISABLED_NON_UEFI" xml:space="preserve">
+    <value>TPM is supported only for VMs using the UEFI or UEFI secure boot modes.</value>
+  </data>
+  <data name="COMMAND_VTPM_MENU" xml:space="preserve">
+    <value>Mana&amp;ge vTPMs...</value>
+  </data>
   <data name="COMMON_CRITERIA_TEXT" xml:space="preserve">
     <value>{0}: for use with Common Criteria versions of {1} only</value>
   </data>
@@ -6435,32 +6444,11 @@ Note: Any custom color selections will remain unchanged</value>
   <data name="GROUP_ROLES" xml:space="preserve">
     <value>Group Roles</value>
   </data>
-  <data name="GUEFI_BOOT_MODE_EXPERIMENTAL_LABEL" xml:space="preserve">
-    <value>&amp;UEFI Boot (experimental)</value>
-  </data>
-  <data name="GUEFI_BOOT_MODE_EXPERIMENTAL_WARNING" xml:space="preserve">
-    <value>Guest UEFI boot is an experimental feature. You can create UEFI-enabled VMs on hosts that are in a production environment. However, UEFI-enabled VMs must not be used for production purposes. You may have to re-create the VMs when you upgrade the host to a newer version of {0}.</value>
-  </data>
-  <data name="GUEFI_BOOT_MODE_LABEL" xml:space="preserve">
-    <value>&amp;UEFI Boot</value>
-  </data>
   <data name="GUEFI_BOOT_MODE_UNSUPPORTED_WARNING" xml:space="preserve">
     <value>The UEFI boot mode is not supported with the selected template.</value>
   </data>
-  <data name="GUEFI_BOOT_MODES_EXPERIMENTAL_WARNING" xml:space="preserve">
-    <value>Guest UEFI boot and guest UEFI secure boot are experimental features. You can create UEFI-enabled VMs on hosts that are in a production environment. However, UEFI-enabled VMs must not be used for production purposes. You may have to re-create the VMs when you upgrade the host to a newer version of {0}.</value>
-  </data>
   <data name="GUEFI_BOOT_MODES_UNSUPPORTED_WARNING" xml:space="preserve">
     <value>The UEFI and UEFI secure boot modes are not supported with the selected template.</value>
-  </data>
-  <data name="GUEFI_SECURE_BOOT_MODE_EXPERIMENTAL_LABEL" xml:space="preserve">
-    <value>UEFI &amp;Secure Boot (experimental)</value>
-  </data>
-  <data name="GUEFI_SECURE_BOOT_MODE_LABEL" xml:space="preserve">
-    <value>UEFI &amp;Secure Boot</value>
-  </data>
-  <data name="GUEFI_SECUREBOOT_MODE_EXPERIMENTAL_WARNING" xml:space="preserve">
-    <value>Guest UEFI secure boot is an experimental feature. You can create VMs configured to use the UEFI secure boot mode on hosts that are in a production environment. However, these VMs must not be used for production purposes. You may have to re-create the VMs when you upgrade the host to a newer version of {0}.</value>
   </data>
   <data name="GUEFI_SECUREBOOT_MODE_UNSUPPORTED_WARNING" xml:space="preserve">
     <value>The UEFI secure boot mode is not supported with the selected template.</value>
@@ -14029,6 +14017,66 @@ Schedule:
   </data>
   <data name="VOLUMES" xml:space="preserve">
     <value>Volumes</value>
+  </data>
+  <data name="VTPM" xml:space="preserve">
+    <value>Trusted Platform Module</value>
+  </data>
+  <data name="VTPM_ATTACH_DESCRIPTION" xml:space="preserve">
+    <value>Attaching vTPM...</value>
+  </data>
+  <data name="VTPM_ATTACH_TITLE" xml:space="preserve">
+    <value>Attaching a new vTPM to VM '{0}'</value>
+  </data>
+  <data name="VTPM_ATTACHED_MANY" xml:space="preserve">
+    <value>{0} vTPMs are attached to this VM.</value>
+  </data>
+  <data name="VTPM_ATTACHED_ONE" xml:space="preserve">
+    <value>A vTPM is attached to this VM.</value>
+  </data>
+  <data name="VTPM_MAX_REACHED" xml:space="preserve">
+    <value>The maximum number of vTPMs that can be attached to this VM is {0}.</value>
+  </data>
+  <data name="VTPM_MAX_REACHED_CUSTOM_TEMPLATE_MANY" xml:space="preserve">
+    <value>The selected template has {0} vTPMs attached to it, which is the maximum number that can be attached to the VM.</value>
+  </data>
+  <data name="VTPM_MAX_REACHED_CUSTOM_TEMPLATE_ONE" xml:space="preserve">
+    <value>The selected template has 1 vTPM attached to it, which is the maximum number that can be attached to the VM.</value>
+  </data>
+  <data name="VTPM_NONE_ATTACHED" xml:space="preserve">
+    <value>There are no vTPMs attached to this VM.</value>
+  </data>
+  <data name="VTPM_POWER_STATE_WRONG_ATTACH" xml:space="preserve">
+    <value>You need to shut down this VM before you can attach a new vTPM to it.</value>
+  </data>
+  <data name="VTPM_POWER_STATE_WRONG_REMOVE" xml:space="preserve">
+    <value>You need to shut down the VM before you can remove this vTPM.</value>
+  </data>
+  <data name="VTPM_RBAC_RESTRICTION_CREATE" xml:space="preserve">
+    <value>A {0} user does not have sufficient permissions to attach a vTPM to a VM. Please login using an account with one of the following roles:
+
+{1}</value>
+  </data>
+  <data name="VTPM_RBAC_RESTRICTION_REMOVE" xml:space="preserve">
+    <value>A {0} user does not have sufficient permissions to remove a vTPM from a VM. Please login using an account with one of the following roles:
+
+{1}</value>
+  </data>
+  <data name="VTPM_RBAC_RESTRICTION_RESET" xml:space="preserve">
+    <value>A {0} user does not have sufficient permissions to reset the vTPM that is attached to a VM to its original state. Please login using an account with one of the following roles:
+
+{1}</value>
+  </data>
+  <data name="VTPM_REMOVE" xml:space="preserve">
+    <value>Remove vTPM</value>
+  </data>
+  <data name="VTPM_REMOVE_DESCRIPTION" xml:space="preserve">
+    <value>Removing vTPM...</value>
+  </data>
+  <data name="VTPM_REMOVE_TITLE" xml:space="preserve">
+    <value>Removing a vTPM from VM '{0}'</value>
+  </data>
+  <data name="VTPM_REMOVE_WARNING" xml:space="preserve">
+    <value>Removing the vTPM may result in the deactivation of some security features on the VM and prevent it from starting. Do you want to continue?</value>
   </data>
   <data name="WAITING" xml:space="preserve">
     <value>Waiting</value>

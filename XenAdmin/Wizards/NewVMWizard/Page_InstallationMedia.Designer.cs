@@ -118,8 +118,8 @@ namespace XenAdmin.Wizards.NewVMWizard
             // panelInstallationMethod
             // 
             resources.ApplyResources(this.panelInstallationMethod, "panelInstallationMethod");
-            this.panelInstallationMethod.Controls.Add(this.bootModesControl1, 0, 7);
-            this.panelInstallationMethod.Controls.Add(this.PvBootBox, 0, 6);
+            this.panelInstallationMethod.Controls.Add(this.bootModesControl1, 0, 6);
+            this.panelInstallationMethod.Controls.Add(this.PvBootBox, 0, 5);
             this.panelInstallationMethod.Controls.Add(this.CdRadioButton, 0, 1);
             this.panelInstallationMethod.Controls.Add(this.UrlRadioButton, 0, 3);
             this.panelInstallationMethod.Controls.Add(this.label1, 0, 0);
