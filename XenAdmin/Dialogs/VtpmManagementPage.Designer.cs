@@ -43,6 +43,8 @@ namespace XenAdmin.Dialogs
             this.labelUniqueKey = new System.Windows.Forms.Label();
             this.toolTipContainerRemove = new XenAdmin.Controls.ToolTipContainer();
             this.buttonRemove = new System.Windows.Forms.Button();
+            this.labelProtectedInfo = new System.Windows.Forms.Label();
+            this.labelUniqueInfo = new System.Windows.Forms.Label();
             this.tableLayoutPanelBody.SuspendLayout();
             this.groupBoxProperties.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -77,9 +79,11 @@ namespace XenAdmin.Dialogs
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
             this.tableLayoutPanel1.Controls.Add(this.labelProtectedKey, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.labelUniqueValue, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.labelProtectedValue, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.labelUniqueKey, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.labelProtectedInfo, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.labelUniqueKey, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.labelUniqueValue, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.labelUniqueInfo, 1, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // labelProtectedKey
@@ -117,6 +121,16 @@ namespace XenAdmin.Dialogs
             this.buttonRemove.UseVisualStyleBackColor = true;
             this.buttonRemove.Click += new System.EventHandler(this.buttonRemove_Click);
             // 
+            // labelProtectedInfo
+            // 
+            resources.ApplyResources(this.labelProtectedInfo, "labelProtectedInfo");
+            this.labelProtectedInfo.Name = "labelProtectedInfo";
+            // 
+            // labelUniqueInfo
+            // 
+            resources.ApplyResources(this.labelUniqueInfo, "labelUniqueInfo");
+            this.labelUniqueInfo.Name = "labelUniqueInfo";
+            // 
             // VtpmManagementPage
             // 
             this.BackColor = System.Drawing.Color.Transparent;
@@ -144,5 +158,7 @@ namespace XenAdmin.Dialogs
         private System.Windows.Forms.Label labelProtectedValue;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private Controls.ToolTipContainer toolTipContainerRemove;
+        private System.Windows.Forms.Label labelProtectedInfo;
+        private System.Windows.Forms.Label labelUniqueInfo;
     }
 }
