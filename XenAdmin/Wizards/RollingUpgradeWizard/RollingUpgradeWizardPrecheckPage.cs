@@ -53,19 +53,19 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
         private void AddEventHandlersToCoordinators()
         {
-            foreach (Host coordinator in SelectedCoordinators)
+            foreach (var c in SelectedCoordinators.Select(c => c.Connection))
             {
-                coordinator.Connection.ConnectionStateChanged += connection_ConnectionChanged;
-                coordinator.Connection.CachePopulated += connection_CachePopulated;
+                c.ConnectionStateChanged += connection_ConnectionChanged;
+                c.CachePopulated += connection_CachePopulated;
             }
         }
 
         private void RemoveEventHandlersToCoordinators()
         {
-            foreach (Host coordinator in SelectedCoordinators)
+            foreach (var c in SelectedCoordinators.Select(c => c.Connection))
             {
-                coordinator.Connection.ConnectionStateChanged -= connection_ConnectionChanged;
-                coordinator.Connection.CachePopulated -= connection_CachePopulated;
+                c.ConnectionStateChanged -= connection_ConnectionChanged;
+                c.CachePopulated -= connection_CachePopulated;
             }
         }
 
@@ -89,16 +89,15 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             var selectedCoordinators = new List<Host>(SelectedCoordinators);
             RemoveEventHandlersToCoordinators();
             SelectedServers.Clear();
-            foreach (Host selectedCoordinator in selectedCoordinators)
+            foreach (var selectedCoordinator in selectedCoordinators)
             {
-                Host coordinator = selectedCoordinator;
-                if (coordinator != null)
+                if (selectedCoordinator != null)
                 {
-                    Pool pool = Helpers.GetPoolOfOne(coordinator.Connection);
+                    var pool = Helpers.GetPoolOfOne(selectedCoordinator.Connection);
                     if (pool != null)
                         SelectedServers.AddRange(pool.HostsToUpgrade());
                     else
-                        SelectedServers.Add(coordinator);
+                        SelectedServers.Add(selectedCoordinator);
                 }
             }
             AddEventHandlersToCoordinators();
@@ -119,26 +118,11 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             RemoveEventHandlersToCoordinators();
         }
 
-        public override string PageTitle
-        {
-            get
-            {
-                return Messages.UPGRADE_PRECHECKS_TITLE;
-            }
-        }
+        public override string PageTitle => Messages.UPGRADE_PRECHECKS_TITLE;
 
-        public override string Text
-        {
-            get
-            {
-                return Messages.UPGRADE_PRECHECKS_TEXT;
-            }
-        }
+        public override string Text => Messages.UPGRADE_PRECHECKS_TEXT;
 
-        public override string HelpID
-        {
-            get { return "Upgradeprechecks"; }
-        }
+        public override string HelpID => "Upgradeprechecks";
 
         public override string NextText(bool isLastPage)
         {
@@ -149,11 +133,10 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         {
             var groups = new List<CheckGroup>();
 
-            List<Host> hostsToUpgrade = new List<Host>();
-            List<Host> hostsToUpgradeOrUpdate = new List<Host>();
-            foreach (var pool in SelectedPools)
+            var hostsToUpgrade = new List<Host>();
+            var hostsToUpgradeOrUpdate = new List<Host>();
+            foreach (var poolHostsToUpgrade in SelectedPools.Select(pool => pool.HostsToUpgrade()))
             {
-                var poolHostsToUpgrade = pool.HostsToUpgrade();
                 hostsToUpgrade.AddRange(poolHostsToUpgrade);
                 hostsToUpgradeOrUpdate.AddRange(poolHostsToUpgrade);
             }
@@ -169,7 +152,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
             //HostMaintenanceModeCheck checks - for hosts that will be upgraded or updated
             var livenessChecks = new List<Check>();
-            foreach (Host host in hostsToUpgradeOrUpdate)
+            foreach (var host in hostsToUpgradeOrUpdate)
                 livenessChecks.Add(new HostLivenessCheck(host, hostsToUpgrade.Contains(host)));
             groups.Add(new CheckGroup(Messages.CHECKING_HOST_LIVENESS_STATUS, livenessChecks));
 
