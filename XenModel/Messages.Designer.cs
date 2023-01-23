@@ -7620,6 +7620,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Checking deprecated storage repositories.
+        /// </summary>
+        public static string CHECKING_DEPRECATED_SRS {
+            get {
+                return ResourceManager.GetString("CHECKING_DEPRECATED_SRS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Checking for pending restart.
         /// </summary>
         public static string CHECKING_FOR_PENDING_RESTART {
@@ -12651,6 +12660,15 @@ namespace XenAdmin {
         public static string DELETING_VMSS {
             get {
                 return ResourceManager.GetString("DELETING_VMSS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SR deprecation check.
+        /// </summary>
+        public static string DEPRECATED_SRS_CHECK {
+            get {
+                return ResourceManager.GetString("DEPRECATED_SRS_CHECK", resourceCulture);
             }
         }
         
@@ -30774,6 +30792,15 @@ namespace XenAdmin {
         public static string POOL_GONE {
             get {
                 return ResourceManager.GetString("POOL_GONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: Support for Software FCoE SRs has been deprecated.
+        /// </summary>
+        public static string POOL_HAS_DEPRECATED_FCOE_WARNING {
+            get {
+                return ResourceManager.GetString("POOL_HAS_DEPRECATED_FCOE_WARNING", resourceCulture);
             }
         }
         

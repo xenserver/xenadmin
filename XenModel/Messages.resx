@@ -2756,6 +2756,9 @@ Do you want to assign these VMs to the schedule '{0}' instead?</value>
   <data name="CHECKING_CLUSTERING_STATUS" xml:space="preserve">
     <value>Checking clustering status</value>
   </data>
+  <data name="CHECKING_DEPRECATED_SRS" xml:space="preserve">
+    <value>Checking deprecated storage repositories</value>
+  </data>
   <data name="CHECKING_FOR_PENDING_RESTART" xml:space="preserve">
     <value>Checking for pending restart</value>
   </data>
@@ -4490,6 +4493,9 @@ This will also delete subfolders.</value>
   </data>
   <data name="DELETING_VMSS" xml:space="preserve">
     <value>Deleting snapshot schedule '{0}'</value>
+  </data>
+  <data name="DEPRECATED_SRS_CHECK" xml:space="preserve">
+    <value>SR deprecation check</value>
   </data>
   <data name="DESCRIPTION" xml:space="preserve">
     <value>Description</value>
@@ -10685,6 +10691,9 @@ Please reconnect the host and try again</value>
   </data>
   <data name="POOL_GONE" xml:space="preserve">
     <value>Could not find the pool in {0}'s cache.</value>
+  </data>
+  <data name="POOL_HAS_DEPRECATED_FCOE_WARNING" xml:space="preserve">
+    <value>{0}: Support for Software FCoE SRs has been deprecated</value>
   </data>
   <data name="POOL_HAS_MIXED_LICENSES" xml:space="preserve">
     <value>This pool has hosts with different types of license.</value>

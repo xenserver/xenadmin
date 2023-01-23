@@ -284,6 +284,15 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             if (gfs2Checks.Count > 0) 
                 groups.Add(new CheckGroup(Messages.CHECKING_CLUSTERING_STATUS, gfs2Checks));
 
+            //Deprecated SRs checks 
+            var deprecatedSRsChecks = (from Host host in SelectedCoordinators
+                let check = new PoolHasDeprecatedSrsCheck(host)
+                where check.CanRun()
+                select check as Check).ToList();
+
+            if (deprecatedSRsChecks.Count > 0)
+                groups.Add(new CheckGroup(Messages.CHECKING_DEPRECATED_SRS, deprecatedSRsChecks));
+
             return groups;
         }
 
