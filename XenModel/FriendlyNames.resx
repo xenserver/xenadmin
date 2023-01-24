@@ -150,9 +150,6 @@
   <data name="Description-host.system_status-control-slice" xml:space="preserve">
     <value>Information and statistics about the system's control groups</value>
   </data>
-  <data name="Description-host.system_status-CVSM" xml:space="preserve">
-    <value>The configuration settings of {0} Storagelink</value>
-  </data>
   <data name="Description-host.system_status-device-model" xml:space="preserve">
     <value>Device emulation logs</value>
   </data>
@@ -518,9 +515,6 @@
   </data>
   <data name="Label-host.system_status-control-slice" xml:space="preserve">
     <value>Control group statistics</value>
-  </data>
-  <data name="Label-host.system_status-CVSM" xml:space="preserve">
-    <value>{0} StorageLink configuration</value>
   </data>
   <data name="Label-host.system_status-device-model" xml:space="preserve">
     <value>Device model</value>

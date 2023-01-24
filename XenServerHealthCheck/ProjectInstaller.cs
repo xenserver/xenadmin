@@ -42,7 +42,7 @@ namespace XenServerHealthCheck
         public ProjectInstaller()
         {
             InitializeComponent();
-            var name = $"{BrandManager.CompanyNameShort} {BrandManager.ProductBrand} Health Check";
+            var name = $"{BrandManager.ProductBrand} Health Check";
             XenServerHealthCheckInstaller.Description = name;
             XenServerHealthCheckInstaller.DisplayName = name;
         }

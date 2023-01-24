@@ -123,6 +123,9 @@
   <data name="COMPANY_NAME_LEGACY" xml:space="preserve">
     <value>Citrix</value>
   </data>
+  <data name="COPYRIGHT" xml:space="preserve">
+    <value>Copyright &#xA9; 2007-2023 Cloud Software Group, Inc. All Rights Reserved.</value>
+  </data>
   <data name="EXTENSION_BACKUP" xml:space="preserve">
     <value>xbk</value>
   </data>
@@ -172,7 +175,7 @@
     <value>8.2</value>
   </data>
   <data name="TRADEMARKS" xml:space="preserve">
-    <value>Cloud Software Group is a trademark of Cloud Software Group Holdings, Inc., and XenServer, XenCenter, Xen, the Xen logo, Citrix Hypervisor are trademarks and/or registered trademarks of Citrix Systems, Inc. in the United States and other countries. XenServer(tm) High Availability is powered by everRun(tm), a registered trademark of Stratus Technologies Bermuda Limited.</value>
+    <value>XenServer, Xen, the Xen logo, Citrix, Citrix Hypervisor, Citrix Cloud, Citrix Virtual Apps and Desktops, Citrix Virtual Desktops, XenApp and XenDesktop, XenDesktop, are either registered trademarks or trademarks of Cloud Software Group, Inc., and/or its subsidiaries in the United States and/or other countries. XenServer High Availability is powered by everRun, a registered trademark of Stratus Technologies Bermuda Limited.</value>
   </data>
 
 </root>
