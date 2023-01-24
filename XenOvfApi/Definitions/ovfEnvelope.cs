@@ -1,5 +1,4 @@
-﻿/* Copyright (c) Citrix Systems, Inc. 
- * All rights reserved. 
+﻿/* Copyright (c) Cloud Software Group, Inc. 
  * 
  * Redistribution and use in source and binary forms, 
  * with or without modification, are permitted provided 
@@ -1369,7 +1368,7 @@ namespace XenOvf.Definitions
         }
 
 
-        #region IComparable Members (ADDED By Citrix Systems, Inc.)
+        #region IComparable Members (ADDED By Cloud Software Group, Inc.)
 
         public int CompareTo(object obj)
         {
