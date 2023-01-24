@@ -2601,6 +2601,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Packaging of the status report was unsuccessful and the output file failed to generate. Please try again..
+        /// </summary>
+        public static string ACTION_SYSTEM_STATUS_PACKAGING_FAILED {
+            get {
+                return ResourceManager.GetString("ACTION_SYSTEM_STATUS_PACKAGING_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Finished compiling status report. It has been saved in the destination selected in the previous step..
         /// </summary>
         public static string ACTION_SYSTEM_STATUS_SUCCESSFUL {

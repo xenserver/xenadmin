@@ -65,8 +65,8 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
 
         public override bool EnableNext()
         {
-            var allCompleted = AllActionsCompleted(out bool successExists, out _);
-            return allCompleted && successExists;
+            var allCompleted = AllActionsCompleted(out var successExists, out _, out var packageStatusReportFailed, considerDownloadReportRow: _packagedReport);
+            return allCompleted && successExists && !packageStatusReportFailed;
         }
 
         protected override void PageLoadedCore(PageLoadedDirection direction)
@@ -77,6 +77,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
 
         protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
+            _packagedReport = false;
             if (direction == PageLoadedDirection.Forward)
                 return;
 
@@ -94,47 +95,90 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
         public List<Host> SelectedHosts { private get; set; }
         public List<Capability> CapabilityList { private get; set; }
         public string OutputFolder { get; private set; }
+        private bool _packagedReport;
         #endregion
 
-        private bool AllActionsCompleted(out bool successExists, out bool failureExists)
+        /// <summary>
+        /// Check if all actions attached to the rows in the DataGridView have been run (successfully or otherwise).
+        /// </summary>
+        /// <param name="successExists">True if at least one row actions has <see cref="StatusReportRow.IsSuccessful"/> set to True</param>
+        /// <param name="failureExists">True if at least one row actions has failed</param>
+        /// <param name="packageStatusReportFailed">True if the packaging status report action has failed</param>
+        /// <param name="considerDownloadReportRow">If true, <see cref="PackageStatusReportRow"/> actions will contribute to the check.
+        /// If false, <see cref="PackageStatusReportRow"/> will be ignored and the method will ignore their state.</param>
+        /// <returns>True if all actions are in a successful state.</returns>
+        private bool AllActionsCompleted(out bool successExists, out bool failureExists, out bool packageStatusReportFailed, bool considerDownloadReportRow = false)
         {
             var allComplete = true;
             successExists = false;
             failureExists = false;
+            packageStatusReportFailed = false;
 
             foreach (var row in dataGridViewEx1.Rows)
             {
                 var srRow = (StatusReportRow)row;
 
-                if (!srRow.IsCompleted)
+                if (!considerDownloadReportRow && srRow is PackageStatusReportRow)
                 {
-                    allComplete = false;
-
-                    if (CanRunRowAction(srRow))
-                        RunRowAction(srRow);
-
                     continue;
                 }
 
-                if (srRow.IsSuccessful)
+                if (!srRow.IsCompleted)
+                {
+                    allComplete = false;
+                }
+                else if (srRow.IsSuccessful)
+                {
                     successExists = true;
-                else
+                }
+                else if (srRow is PackageStatusReportRow)
+                {
+                    packageStatusReportFailed = true;
                     failureExists = true;
+                }
+                else
+                {
+                    failureExists = true;
+                }
             }
             return allComplete;
         }
 
+        /// <summary>
+        /// Run all non-completed actions that are still queued, if they can be run.
+        /// Heuristic is based on the result of <see cref="CanRunRowAction"/>.
+        /// </summary>
+        /// <param name="considerDownloadReportRow">Needs to be set to true if you want to also actions queued under <see cref="PackageStatusReportRow"/> rows</param>
+        private void RunQueuedActions(bool considerDownloadReportRow = false)
+        {
+            foreach (var row in dataGridViewEx1.Rows)
+            {
+                var srRow = (StatusReportRow)row;
+
+                if (!considerDownloadReportRow && srRow is PackageStatusReportRow)
+                {
+                    continue;
+                }
+
+                if (!srRow.IsCompleted && CanRunRowAction(srRow))
+                {
+                    RegisterRowEvents(srRow);
+                    RunRowAction(srRow);
+                }
+            }
+        }
+
         private void CancelActions(ref bool cancel)
         {
-            var allCompleted = AllActionsCompleted(out _, out _);
+            var allCompleted = AllActionsCompleted(out _, out _, out _, considerDownloadReportRow: true);
             if (allCompleted)
                 return;
 
-            using (var dlog = new WarningDialog(Messages.BUGTOOL_PAGE_RETRIEVEDATA_CONFIRM_CANCEL,
+            using (var warningDialog = new WarningDialog(Messages.BUGTOOL_PAGE_RETRIEVEDATA_CONFIRM_CANCEL,
                 ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
                 {WindowTitle = Messages.BUGTOOL_PAGE_RETRIEVEDATA_PAGE_TITLE})
             {
-                if (dlog.ShowDialog(this) != DialogResult.Yes)
+                if (warningDialog.ShowDialog(this) != DialogResult.Yes)
                 {
                     cancel = true;
                     return;
@@ -160,6 +204,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                 progressBar1.Value = 0;
                 dataGridViewEx1.SuspendLayout();
                 dataGridViewEx1.Rows.Clear();
+                OutputFolder = CreateOutputFolder();
 
                 var capabilityKeys = new List<string>();
                 long size = 0;
@@ -177,8 +222,12 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                 if (includeClientLogs || SelectedHosts.Count > 0)
                     rowList.Add(new ClientSideDataRow(SelectedHosts, includeClientLogs));
 
-                foreach (Host host in SelectedHosts)
+                foreach (var host in SelectedHosts)
+                {
                     rowList.Add(new HostStatusRow(host, size, capabilityKeys));
+                }
+
+                rowList.Add(new PackageStatusReportRow(OutputFile));
 
                 dataGridViewEx1.Rows.AddRange(rowList.ToArray());
             }
@@ -187,14 +236,23 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                 dataGridViewEx1.ResumeLayout();
             }
 
-            OutputFolder = CreateOutputFolder();
-
             foreach (var r in dataGridViewEx1.Rows)
             {
                 var row = r as StatusReportRow;
 
-                if (CanRunRowAction(row))
+                if (!CanRunRowAction(row))
+                {
+                    continue;
+                }
+
+                RegisterRowEvents(row);
+
+                // PackageStatusReportRow must be run at the very end in a synchronous manner.
+                // this is handled within the RowStatusCompleted method
+                if (!(row is PackageStatusReportRow))
+                {
                     RunRowAction(row);
+                }
             }
 
             OnPageUpdated();
@@ -206,6 +264,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                 return false;
 
             return row is ClientSideDataRow ||
+                   row is PackageStatusReportRow ||
                    row is HostStatusRow hostRow &&
                    dataGridViewEx1.Rows.Cast<StatusReportRow>().Count(r =>
                        r is HostStatusRow hsr && hsr.Connection == hostRow.Connection &&
@@ -214,8 +273,24 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
 
         private void RunRowAction(StatusReportRow row)
         {
-            RegisterRowEvents(row);
             row.RunAction(OutputFolder, DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss"));
+        }
+
+        private void RunPackageStatusReportAction(bool successExists)
+        {
+            var lastRow = (StatusReportRow)dataGridViewEx1.Rows[dataGridViewEx1.Rows.Count - 1];
+
+            if (!successExists)
+            {
+                // no part of the report was generated, we don't need to
+                // start the packaging action at all
+                lastRow.CancelAction();
+            }
+            else
+            {
+                RunRowAction(lastRow);
+            }
+            _packagedReport = true;
         }
 
         private void Row_RowStatusChanged(StatusReportRow row)
@@ -229,16 +304,36 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             DeRegisterRowEvents(row);
             UpdateTotalPercentComplete();
 
-            var allCompleted = AllActionsCompleted(out bool successExists, out bool failureExists);
+            var allCompleted = AllActionsCompleted(out var successExists, out var failureExists, out var downloadReportFailed, considerDownloadReportRow: _packagedReport);
 
-            if (allCompleted)
+            if (allCompleted && !_packagedReport)
             {
-                if (!successExists)
+                RunPackageStatusReportAction(successExists);
+            }
+            else if (allCompleted)
+            {
+                if (downloadReportFailed)
+                {
+                    labelError.Text = Messages.ACTION_SYSTEM_STATUS_PACKAGING_FAILED;
+                }
+                else if (!successExists)
+                {
                     labelError.Text = Messages.ACTION_SYSTEM_STATUS_FAILED;
+                }
                 else if (!failureExists)
+                {
                     labelError.Text = Messages.ACTION_SYSTEM_STATUS_SUCCESSFUL;
+                }
                 else
+                {
                     labelError.Text = Messages.ACTION_SYSTEM_STATUS_SUCCESSFUL_PARTIAL;
+                }
+                
+                _packagedReport = false;
+            }
+            else
+            {
+                RunQueuedActions(_packagedReport);
             }
 
             OnPageUpdated();
