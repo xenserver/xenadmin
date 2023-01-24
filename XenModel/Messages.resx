@@ -3413,6 +3413,9 @@ Would you like to carry out the operation at this time?</value>
   <data name="CONTAINER_CREATED" xml:space="preserve">
     <value>Created</value>
   </data>
+  <data name="CONTAINER_FCOE_DEPRECATION_WARNING" xml:space="preserve">
+    <value>Support for software FCoE storage repositories has been deprecated as of {0}.</value>
+  </data>
   <data name="CONTAINER_GENERAL_TAB_TITLE" xml:space="preserve">
     <value>Container General Properties</value>
   </data>
@@ -12039,6 +12042,9 @@ Reverting to this snapshot will revert the VM back to the point in time that the
   </data>
   <data name="SNAPSHOTTING" xml:space="preserve">
     <value>Creating a snapshot...</value>
+  </data>
+  <data name="SOFTWARE_FCOE_STORAGE_REPOSITORIES" xml:space="preserve">
+    <value>Software FCoE storage repositories</value>
   </data>
   <data name="SOFTWARE_VERSION_BUILD_NUMBER" xml:space="preserve">
     <value>Build number</value>

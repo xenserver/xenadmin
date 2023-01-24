@@ -9459,6 +9459,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Support for software FCoE storage repositories has been deprecated as of {0}..
+        /// </summary>
+        public static string CONTAINER_FCOE_DEPRECATION_WARNING {
+            get {
+                return ResourceManager.GetString("CONTAINER_FCOE_DEPRECATION_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Container General Properties.
         /// </summary>
         public static string CONTAINER_GENERAL_TAB_TITLE {
@@ -34729,6 +34738,15 @@ namespace XenAdmin {
         public static string SNAPSHOTTING {
             get {
                 return ResourceManager.GetString("SNAPSHOTTING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Software FCoE storage repositories.
+        /// </summary>
+        public static string SOFTWARE_FCOE_STORAGE_REPOSITORIES {
+            get {
+                return ResourceManager.GetString("SOFTWARE_FCOE_STORAGE_REPOSITORIES", resourceCulture);
             }
         }
         
