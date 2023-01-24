@@ -1,5 +1,4 @@
-# Copyright (c) Citrix Systems, Inc.
-# All rights reserved.
+# Copyright (c) Cloud Software Group, Inc. 
 #
 # Redistribution and use in source and binary forms,
 # with or without modification, are permitted provided
@@ -48,12 +47,9 @@ foreach ($file in $files) {
         Write-Host "Copyright check on $file"
     }
 
-    $result = Select-String -Path $file -Pattern 'Copyright (c) Citrix Systems, Inc.' -CaseSensitive -SimpleMatch
-    if ($null -eq $result) {
-        $result = Select-String -Path $file -Pattern 'Copyright (c) 2007-2023 Cloud Software Group, Inc.' -CaseSensitive -SimpleMatch
+    $result = Select-String -Path $file -Pattern 'Copyright (c) Cloud Software Group, Inc.' -CaseSensitive -SimpleMatch
         if ($null -eq $result) {
             $badFiles.Add($file) > $null
-        }
     }
 }
 
