@@ -57,7 +57,6 @@ using XenAdmin.Properties;
 [assembly: CustomBranding(
     "[XenCenter]",
     "[XenCenter_No_Space]",
-    "[Vendor Legal]",
     "[Vendor]",
     "[XenServerProduct]",
     "[XenServer version]",
@@ -73,7 +72,6 @@ namespace XenAdmin.Properties
         public CustomBrandingAttribute(
             string brandConsole,
             string brandConsoleNoSpace,
-            string companyNameLegal,
             string companyNameShort,
             string productBrand,
             string productVersionText,
@@ -83,7 +81,6 @@ namespace XenAdmin.Properties
         {
             BrandConsole = brandConsole;
             BrandConsoleNoSpace = brandConsoleNoSpace;
-            CompanyNameLegal = companyNameLegal;
             CompanyNameShort = companyNameShort;
             ProductBrand = productBrand;
             ProductVersionText = productVersionText;
@@ -94,7 +91,6 @@ namespace XenAdmin.Properties
 
         public string BrandConsole { get; }
         public string BrandConsoleNoSpace { get; }
-        public string CompanyNameLegal { get; }
         public string CompanyNameShort { get; }
         public string ProductBrand { get; }
         public string ProductVersionText { get; }

@@ -50,7 +50,6 @@ namespace XenAdmin.Core
             BrandConsole = customBranding.BrandConsole;
             BrandConsoleNoSpace = customBranding.BrandConsoleNoSpace;
             CompanyNameShort = customBranding.CompanyNameShort;
-            CompanyNameLegal = customBranding.CompanyNameLegal;
             ProductBrand = customBranding.ProductBrand;
             ProductVersionPost82 = customBranding.ProductVersionText;
             UpdatesUrl = customBranding.UpdatesUrl;
@@ -67,9 +66,9 @@ namespace XenAdmin.Core
 
         public static readonly string CompanyNameLegacy = Get("COMPANY_NAME_LEGACY");
 
-        public static readonly string CompanyNameLegal;
-
         public static readonly string CompanyNameShort;
+
+        public static readonly string Copyright = Get("COPYRIGHT");
 
         public static readonly string ExtensionBackup = Get("EXTENSION_BACKUP");
 

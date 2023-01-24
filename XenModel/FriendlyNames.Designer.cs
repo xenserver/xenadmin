@@ -160,15 +160,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The configuration settings of {0} Storagelink.
-        /// </summary>
-        public static string Description_host_system_status_CVSM {
-            get {
-                return ResourceManager.GetString("Description-host.system_status-CVSM", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Device emulation logs.
         /// </summary>
         public static string Description_host_system_status_device_model {
@@ -1263,15 +1254,6 @@ namespace XenAdmin {
         public static string Label_host_system_status_control_slice {
             get {
                 return ResourceManager.GetString("Label-host.system_status-control-slice", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} StorageLink configuration.
-        /// </summary>
-        public static string Label_host_system_status_CVSM {
-            get {
-                return ResourceManager.GetString("Label-host.system_status-CVSM", resourceCulture);
             }
         }
         

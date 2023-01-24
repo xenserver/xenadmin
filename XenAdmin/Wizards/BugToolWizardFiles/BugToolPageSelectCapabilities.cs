@@ -225,6 +225,11 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                     }
                 }
 
+                // deprecated; we don't connect to those versions any more; the key
+                // though still lingers on in the capabilities, hence we should skip it
+                if (c.Key == "CVSM")
+                    continue;
+
                 capabilities.Add(c);
             }
 
@@ -545,11 +550,6 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                     _name = _key;
                 else if (_key == "client-logs")
                     _name = string.Format(_name, BrandManager.BrandConsole);
-                else if (_key == "CVSM")
-                {
-                    _name = string.Format(_name, BrandManager.CompanyNameShort);
-                    _description = string.Format(_description, BrandManager.CompanyNameShort);
-                }
             }
         }
 

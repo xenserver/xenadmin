@@ -52,7 +52,7 @@ namespace XenAdmin.Dialogs
             if (Helpers.CommonCriteriaCertificationRelease)
                 VersionLabel.Text += string.Format(Messages.COMMON_CRITERIA_TEXT, BrandManager.ProductBrand);
 
-            label2.Text = string.Format(label2.Text, BrandManager.CompanyNameLegal);
+            label2.Text = BrandManager.Copyright;
             label2.Visible = !HiddenFeatures.CopyrightHidden;
 
             licenseDetailsLabel.Text = string.Format(licenseDetailsLabel.Text, BrandManager.ProductBrand);

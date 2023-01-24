@@ -2604,7 +2604,7 @@ End Function
         <CanGrow>true</CanGrow>
         <Left>0.125in</Left>
         <Height>0.2125in</Height>
-        <Value>=String.Format(Code.GetLabel("LBL_FOOTER_LEFT"), Code.GetLabel("LBL_HOST_HEALTH_HISTORY"), Code.GetDateFromOffset(Parameters!Start.Value), Code.GetDateFromOffset(Parameters!End.Value)) + " | Citrix Systems, Inc."</Value>
+        <Value>=String.Format(Code.GetLabel("LBL_FOOTER_LEFT"), Code.GetLabel("LBL_HOST_HEALTH_HISTORY"), Code.GetDateFromOffset(Parameters!Start.Value), Code.GetDateFromOffset(Parameters!End.Value)) + " | Cloud Software Group, Inc."</Value>
       </Textbox>
     </ReportItems>
     <Height>0.375in</Height>
