@@ -19,7 +19,7 @@ namespace XenAdmin {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Messages {
@@ -106,7 +106,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Change email options.
+        ///   Looks up a localized string similar to Change email notifications.
         /// </summary>
         public static string ACTION_CHANGE_EMAIL_OPTIONS {
             get {
@@ -313,7 +313,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Changing email options for &apos;{0}&apos;....
+        ///   Looks up a localized string similar to Changing email notifications for &apos;{0}&apos;....
         /// </summary>
         public static string ACTION_CHANGING_EMAIL_OPTIONS_FOR {
             get {
@@ -993,6 +993,15 @@ namespace XenAdmin {
         public static string ACTION_ENABLE_IGMP_SNOOPING {
             get {
                 return ResourceManager.GetString("ACTION_ENABLE_IGMP_SNOOPING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enabling VM memory and vGPU data compression during VM live migration on &apos;{0}&apos;.
+        /// </summary>
+        public static string ACTION_ENABLE_MIGRATION_COMPRESSION {
+            get {
+                return ResourceManager.GetString("ACTION_ENABLE_MIGRATION_COMPRESSION", resourceCulture);
             }
         }
         
@@ -4717,7 +4726,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Advanced Options.
+        ///   Looks up a localized string similar to Advanced.
         /// </summary>
         public static string ADVANCED_OPTIONS {
             get {
@@ -9178,7 +9187,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Proxy and timeout options.
+        ///   Looks up a localized string similar to Proxy and timeout.
         /// </summary>
         public static string CONNECTION_DESC {
             get {
@@ -9358,7 +9367,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Keyboard shortcuts and scaling options.
+        ///   Looks up a localized string similar to Keyboard shortcuts and scaling.
         /// </summary>
         public static string CONSOLE_DESC {
             get {
@@ -13078,6 +13087,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Don&apos;t compress VMs during migration.
+        /// </summary>
+        public static string DISABLED_MIGRATION_COMPRESSION {
+            get {
+                return ResourceManager.GetString("DISABLED_MIGRATION_COMPRESSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Snapshot schedule &apos;{0}&apos; disabled..
         /// </summary>
         public static string DISABLED_VMSS {
@@ -15320,7 +15338,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Email Options.
+        ///   Looks up a localized string similar to Email Notifications.
         /// </summary>
         public static string EMAIL_OPTIONS {
             get {
@@ -15516,6 +15534,15 @@ namespace XenAdmin {
         public static string ENABLED_CLUSTERING_ON_POOL {
             get {
                 return ResourceManager.GetString("ENABLED_CLUSTERING_ON_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Compress VMs during migration.
+        /// </summary>
+        public static string ENABLED_MIGRATION_COMPRESSION {
+            get {
+                return ResourceManager.GetString("ENABLED_MIGRATION_COMPRESSION", resourceCulture);
             }
         }
         
@@ -16777,24 +16804,6 @@ namespace XenAdmin {
         public static string EXPORT_SECURITY_PAGE_FILETYPES {
             get {
                 return ResourceManager.GetString("EXPORT_SECURITY_PAGE_FILETYPES", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Security.
-        /// </summary>
-        public static string EXPORT_SECURITY_PAGE_TEXT {
-            get {
-                return ResourceManager.GetString("EXPORT_SECURITY_PAGE_TEXT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Select security options.
-        /// </summary>
-        public static string EXPORT_SECURITY_PAGE_TITLE {
-            get {
-                return ResourceManager.GetString("EXPORT_SECURITY_PAGE_TITLE", resourceCulture);
             }
         }
         
@@ -24054,6 +24063,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to v{0} &amp;Release Notes.
+        /// </summary>
+        public static string MAINWINDOW_UPDATE_RELEASE {
+            get {
+                return ResourceManager.GetString("MAINWINDOW_UPDATE_RELEASE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to XVA Files (*.xva)|*.xva|All Files (*.*)|*.*.
         /// </summary>
         public static string MAINWINDOW_XVA_BLURB {
@@ -25481,7 +25499,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Network Options.
+        ///   Looks up a localized string similar to Network.
         /// </summary>
         public static string NETWORK_OPTIONS {
             get {
@@ -31678,15 +31696,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Provisioning Options.
-        /// </summary>
-        public static string PROVISIONING_OPTIONS {
-            get {
-                return ResourceManager.GetString("PROVISIONING_OPTIONS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Provisioning Type.
         /// </summary>
         public static string PROVISIONING_TYPE {
@@ -33909,7 +33918,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Certificate options.
+        ///   Looks up a localized string similar to Certificates and pool secrets.
         /// </summary>
         public static string SECURITY_DESC {
             get {
@@ -35162,6 +35171,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The SR is currently unplugged from {0}.
+        /// </summary>
+        public static string SR_DETACHED_FROM_HOST {
+            get {
+                return ResourceManager.GetString("SR_DETACHED_FROM_HOST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Initial allocation: {0}
         ///Incremental allocation: {1}.
         /// </summary>
@@ -35217,7 +35235,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This storage repository is broken.
+        ///   Looks up a localized string similar to This SR is broken or not fully attached..
         /// </summary>
         public static string SR_IS_BROKEN {
             get {
@@ -35291,11 +35309,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Scanning available SRs ....
+        ///   Looks up a localized string similar to Scanning....
         /// </summary>
-        public static string SR_REFRESH_ACTION_TITLE_MANY {
+        public static string SR_REFRESH_ACTION_TITLE_GENERIC {
             get {
-                return ResourceManager.GetString("SR_REFRESH_ACTION_TITLE_MANY", resourceCulture);
+                return ResourceManager.GetString("SR_REFRESH_ACTION_TITLE_GENERIC", resourceCulture);
             }
         }
         

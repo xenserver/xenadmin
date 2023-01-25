@@ -619,7 +619,7 @@
     <value>dropDownButtonShow</value>
   </data>
   <data name="&gt;&gt;dropDownButtonShow.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.DropDownButton, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.DropDownButton, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dropDownButtonShow.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
@@ -730,7 +730,7 @@
     <value>searchTextBox</value>
   </data>
   <data name="&gt;&gt;searchTextBox.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.SearchTextBox, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.SearchTextBox, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;searchTextBox.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
@@ -811,6 +811,6 @@
     <value>GraphDetailsDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>XenAdmin.Dialogs.XenDialogBase, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Dialogs.XenDialogBase, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

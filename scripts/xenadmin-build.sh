@@ -81,14 +81,14 @@ cd ${REPO} && "${MSBUILD}" ${SWITCHES} XenAdmin.sln
 SIGN_BAT="${REPO}/scripts/sign.bat"
 
 if [ -f "${SIGN_BAT}" ] ; then
-  for file in ${BRANDING_BRAND_CONSOLE_NO_SPACE}Main.exe CommandLib.dll MSTSCLib.dll CoreUtilsLib.dll XenModel.dll XenOvf.dll
+  for file in ${BRANDING_BRAND_CONSOLE_NO_SPACE}.exe CommandLib.dll MSTSCLib.dll CoreUtilsLib.dll XenModel.dll XenOvf.dll
   do
     cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} ${file} "${BRANDING_BRAND_CONSOLE}"
   done
 
   for locale in ja zh-CN
   do
-    for file in ${BRANDING_BRAND_CONSOLE_NO_SPACE}Main.resources.dll  XenModel.resources.dll  XenOvf.resources.dll
+    for file in ${BRANDING_BRAND_CONSOLE_NO_SPACE}.resources.dll  XenModel.resources.dll  XenOvf.resources.dll
     do
       cd ${REPO}/XenAdmin/bin/Release/${locale} && ${SIGN_BAT} ${file} "${BRANDING_BRAND_CONSOLE}"
     done
@@ -108,7 +108,6 @@ if [ -f "${SIGN_BAT}" ] ; then
   cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} log4net.dll "Log4Net"
   cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} ICSharpCode.SharpZipLib.dll "SharpZipLib"
   cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} DiscUtils.dll "DiscUtils"
-  cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} Ionic.Zip.dll "OSS"
 
   cd ${REPO}/XenServerHealthCheck/bin/Release && ${SIGN_BAT} XenServerHealthCheck.exe "${BRANDING_BRAND_CONSOLE}"
 else
@@ -116,7 +115,7 @@ else
 fi
 
 #copy files (signed accordingly) in XenServerHealthService folder
-cp ${REPO}/XenAdmin/bin/Release/{CommandLib.dll,CoreUtilsLib.dll,XenModel.dll,CookComputing.XmlRpcV2.dll,Newtonsoft.Json.CH.dll,log4net.dll,ICSharpCode.SharpZipLib.dll,Ionic.Zip.dll} \
+cp ${REPO}/XenAdmin/bin/Release/{CommandLib.dll,CoreUtilsLib.dll,XenModel.dll,CookComputing.XmlRpcV2.dll,Newtonsoft.Json.CH.dll,log4net.dll,ICSharpCode.SharpZipLib.dll} \
   ${REPO}/XenServerHealthCheck/bin/Release
 
 #prepare wix
@@ -208,12 +207,12 @@ cd ${REPO}/XenAdminTests/bin/ && zip -r ${OUTPUT_DIR}/XenAdminTests.zip Release
 cd ${REPO}/XenAdmin/TestResources && zip -r ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE_NO_SPACE}TestResources.zip *
 
 #include cfu validator binary in output directory
-cd ${REPO}/CFUValidator/bin/Release && zip ${OUTPUT_DIR}/CFUValidator.zip ./{*.dll,CFUValidator.exe,${BRANDING_BRAND_CONSOLE_NO_SPACE}Main.exe}
+cd ${REPO}/CFUValidator/bin/Release && zip ${OUTPUT_DIR}/CFUValidator.zip ./{*.dll,CFUValidator.exe,${BRANDING_BRAND_CONSOLE_NO_SPACE}.exe}
 
 #now package the pdbs
 cp ${REPO}/packages/*.pdb ${OUTPUT_DIR}
 
-cp ${REPO}/XenAdmin/bin/Release/{CommandLib.pdb,${BRANDING_BRAND_CONSOLE_NO_SPACE}.pdb,CoreUtilsLib.pdb,${BRANDING_BRAND_CONSOLE_NO_SPACE}Main.pdb,XenModel.pdb,XenOvf.pdb} \
+cp ${REPO}/XenAdmin/bin/Release/{CommandLib.pdb,${BRANDING_BRAND_CONSOLE_NO_SPACE}.pdb,CoreUtilsLib.pdb,${BRANDING_BRAND_CONSOLE_NO_SPACE}.pdb,XenModel.pdb,XenOvf.pdb} \
    ${REPO}/xe/bin/Release/xe.pdb \
    ${REPO}/xva_verify/bin/Release/xva_verify.pdb \
    ${REPO}/XenServerHealthCheck/bin/Release/XenServerHealthCheck.pdb \

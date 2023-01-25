@@ -12,8 +12,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandLib", "CommandLib\Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xva_verify", "xva_verify\xva_verify.csproj", "{2A70D7E7-EAB2-4C36-B3F4-85B79D2384B5}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "splash", "splash\splash.vcxproj", "{AFB19C9D-DD63-478B-A4A3-8452CBD0B9AB}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XenAdminTests", "XenAdminTests\XenAdminTests.csproj", "{21B9482C-D255-40D5-ABA7-C8F00F99547C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XenCenterLib", "XenCenterLib\XenCenterLib.csproj", "{9861DFA1-B41F-432D-A43F-226257DEBBB9}"
@@ -74,15 +72,6 @@ Global
 		{2A70D7E7-EAB2-4C36-B3F4-85B79D2384B5}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{2A70D7E7-EAB2-4C36-B3F4-85B79D2384B5}.Release|Win32.ActiveCfg = Release|Any CPU
 		{2A70D7E7-EAB2-4C36-B3F4-85B79D2384B5}.Release|Win32.Build.0 = Release|Any CPU
-		{AFB19C9D-DD63-478B-A4A3-8452CBD0B9AB}.Debug|Any CPU.ActiveCfg = Debug|Win32
-		{AFB19C9D-DD63-478B-A4A3-8452CBD0B9AB}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
-		{AFB19C9D-DD63-478B-A4A3-8452CBD0B9AB}.Debug|Mixed Platforms.Build.0 = Debug|Win32
-		{AFB19C9D-DD63-478B-A4A3-8452CBD0B9AB}.Debug|Win32.ActiveCfg = Debug|Win32
-		{AFB19C9D-DD63-478B-A4A3-8452CBD0B9AB}.Release|Any CPU.ActiveCfg = Release|Win32
-		{AFB19C9D-DD63-478B-A4A3-8452CBD0B9AB}.Release|Mixed Platforms.ActiveCfg = Release|Win32
-		{AFB19C9D-DD63-478B-A4A3-8452CBD0B9AB}.Release|Mixed Platforms.Build.0 = Release|Win32
-		{AFB19C9D-DD63-478B-A4A3-8452CBD0B9AB}.Release|Win32.ActiveCfg = Release|Win32
-		{AFB19C9D-DD63-478B-A4A3-8452CBD0B9AB}.Release|Win32.Build.0 = Release|Win32
 		{21B9482C-D255-40D5-ABA7-C8F00F99547C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{21B9482C-D255-40D5-ABA7-C8F00F99547C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21B9482C-D255-40D5-ABA7-C8F00F99547C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU

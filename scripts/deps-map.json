@@ -26,11 +26,6 @@
       "flat": "true"
     },
     {
-      "pattern": "@REMOTE_DOTNET@/dotnet48/Ionic.Zip.dll",
-      "target": "xenadmin.git/packages/",
-      "flat": "true"
-    },
-    {
       "pattern": "@REMOTE_DOTNET@/dotnet48/log4net.dll",
       "target": "xenadmin.git/packages/",
       "flat": "true"

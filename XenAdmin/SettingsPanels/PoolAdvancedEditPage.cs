@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems, Inc. 
+﻿/* Copyright (c) Cloud Software Group Holdings, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -29,45 +29,61 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Drawing;
 using System.Windows.Forms;
-using XenAdmin.Core;
+using XenAdmin.Actions;
+using XenAPI;
 
-
-namespace XenAdmin.Dialogs
+namespace XenAdmin.SettingsPanels
 {
-    /// <summary>
-    /// The result from ShowDialog() will be DialogResult.OK for "Give Passwords This Time", DialogResult.Yes
-    /// for "Give Passwords Always", or DialogResult.Cancel.
-    /// </summary>
-    public partial class PasswordsRequestDialog : XenDialogBase
+    public partial class PoolAdvancedEditPage : UserControl, IEditPage
     {
-        public PasswordsRequestDialog()
+        private Pool _pool;
+
+        public PoolAdvancedEditPage()
         {
             InitializeComponent();
-            label1.Text = string.Format(label1.Text, BrandManager.BrandConsole);
-            bool requirePass = Properties.Settings.Default.RequirePass;
-            OKAlwaysButton.Enabled = !requirePass;
-            tableLayoutPanel2.Visible = requirePass;
+            Text = Messages.ADVANCED_OPTIONS;
         }
 
-        protected override void OnLoad(EventArgs e)
+        public string SubText => checkBoxCompression.Checked ? Messages.ENABLED_MIGRATION_COMPRESSION : Messages.DISABLED_MIGRATION_COMPRESSION;
+
+        public Image Image => Images.StaticImages._002_Configure_h32bit_16;
+
+        public bool HasChanged => checkBoxCompression.Checked != _pool.migration_compression;
+
+        public bool ValidToSave => true;
+
+        public void SetXenObjects(IXenObject orig, IXenObject clone)
         {
-            base.OnLoad(e);
-            Text = BrandManager.BrandConsole;
+            if (clone is Pool pool)
+            {
+                _pool = pool;
+                checkBoxCompression.Checked = pool.migration_compression;
+            }
         }
 
-        public string Application
+        public AsyncAction SaveSettings()
         {
-            set => ApplicationLabel.Text = value;
+            var msg = string.Format(Messages.ACTION_ENABLE_MIGRATION_COMPRESSION, _pool.Name());
+            
+            return new DelegatedAsyncAction(_pool.Connection, msg, msg, null,
+                delegate (Session session) { Pool.set_migration_compression(session, _pool.opaque_ref,checkBoxCompression.Checked); },
+                true,
+                "pool.set_migration_compression"
+            );
         }
 
-        private void PasswordsRequestDialog_Load(object sender, EventArgs e)
+        public void ShowLocalValidationMessages()
         {
-            Screen s = Screen.FromControl(this);
-            Location = new Point((s.Bounds.Width - Width) / 2, (s.Bounds.Height - Height) / 2);
+        }
+
+        public void HideLocalValidationMessages()
+        {
+        }
+
+        public void Cleanup()
+        {
         }
     }
 }
-

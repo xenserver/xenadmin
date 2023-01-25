@@ -37,7 +37,7 @@ using ICSharpCode.SharpZipLib.Tar;
 
 namespace XenCenterLib.Archive
 {
-    public class SharpZipTarArchiveWriter : ArchiveWriter
+    public class TarArchiveWriter : ArchiveWriter
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -45,11 +45,14 @@ namespace XenCenterLib.Archive
         private const long bufferSize = 32 * 1024;
         private bool disposed;
 
-        public SharpZipTarArchiveWriter()
+        /// <summary>
+        /// Parameterless constructor needed by tests
+        /// </summary>
+        public TarArchiveWriter()
         {
         }
 
-        public SharpZipTarArchiveWriter(Stream outputStream)
+        public TarArchiveWriter(Stream outputStream)
         {
             tar = new TarOutputStream(outputStream);
             disposed = false;

@@ -29,22 +29,24 @@
  * SUCH DAMAGE.
  */
 
-using Ionic.Zlib;
 using System.IO;
+using System.IO.Compression;
 
 namespace XenCenterLib.Compression
 {
     /// <summary>
-    /// A class that can compress a bzip2 data stream type
+    /// A class that can compress a gzip data stream type
     /// </summary>
-    class DotNetZipGZipOutputStream : CompressionStream
+    class GZipOutputStream : CompressionStream
     {
-        public DotNetZipGZipOutputStream()
+        /// <summary>
+        /// Parameterless constructor needed by tests
+        /// </summary>
+        public GZipOutputStream()
         {
-            
         }
 
-        public DotNetZipGZipOutputStream(Stream outputStream)
+        public GZipOutputStream(Stream outputStream)
         {
             zipStream = new GZipStream(outputStream, CompressionMode.Compress);
         }
@@ -56,16 +58,18 @@ namespace XenCenterLib.Compression
     }
 
     /// <summary>
-    /// A class that can decompress a bzip2 data stream type
+    /// A class that can decompress a gzip data stream type
     /// </summary>
-    class DotNetZipGZipInputStream : CompressionStream
+    class GZipInputStream : CompressionStream
     {
-        public DotNetZipGZipInputStream()
+        /// <summary>
+        /// Parameterless constructor needed by tests
+        /// </summary>
+        public GZipInputStream()
         {
-            
         }
 
-        public DotNetZipGZipInputStream(Stream inputStream)
+        public GZipInputStream(Stream inputStream)
         {
             zipStream = new GZipStream(inputStream, CompressionMode.Decompress);
         }

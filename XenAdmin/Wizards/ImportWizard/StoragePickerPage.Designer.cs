@@ -32,6 +32,7 @@
             this.m_srPicker = new XenAdmin.Controls.SrPicker();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.labelSrHint = new System.Windows.Forms.Label();
+            this.buttonRescan = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,6 +47,7 @@
             this.m_srPicker.ShowDescription = true;
             this.m_srPicker.ShowImages = true;
             this.m_srPicker.ShowRootLines = true;
+            this.m_srPicker.CanBeScannedChanged += new System.Action(this.m_srPicker_CanBeScannedChanged);
             this.m_srPicker.SelectedIndexChanged += new System.EventHandler(this.m_srPicker_SelectedIndexChanged);
             // 
             // tableLayoutPanel1
@@ -53,12 +55,20 @@
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
             this.tableLayoutPanel1.Controls.Add(this.labelSrHint, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.m_srPicker, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.buttonRescan, 0, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // labelSrHint
             // 
             resources.ApplyResources(this.labelSrHint, "labelSrHint");
             this.labelSrHint.Name = "labelSrHint";
+            // 
+            // buttonRescan
+            // 
+            resources.ApplyResources(this.buttonRescan, "buttonRescan");
+            this.buttonRescan.Name = "buttonRescan";
+            this.buttonRescan.UseVisualStyleBackColor = true;
+            this.buttonRescan.Click += new System.EventHandler(this.buttonRescan_Click);
             // 
             // StoragePickerPage
             // 
@@ -77,5 +87,6 @@
         private XenAdmin.Controls.SrPicker m_srPicker;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label labelSrHint;
-	}
+        private System.Windows.Forms.Button buttonRescan;
+    }
 }

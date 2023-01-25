@@ -322,7 +322,7 @@
     <value>tTipRemoveButton</value>
   </data>
   <data name="&gt;&gt;tTipRemoveButton.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.ToolTipContainer, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.ToolTipContainer, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;tTipRemoveButton.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
@@ -379,7 +379,7 @@
     <value>tTipLogoutButton</value>
   </data>
   <data name="&gt;&gt;tTipLogoutButton.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.ToolTipContainer, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.ToolTipContainer, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;tTipLogoutButton.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
@@ -436,7 +436,7 @@
     <value>tTipChangeRole</value>
   </data>
   <data name="&gt;&gt;tTipChangeRole.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.ToolTipContainer, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.ToolTipContainer, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;tTipChangeRole.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
@@ -826,6 +826,6 @@
     <value>AdPage</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>XenAdmin.TabPages.BaseTabPage, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.TabPages.BaseTabPage, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

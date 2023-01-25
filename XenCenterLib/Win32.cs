@@ -565,82 +565,9 @@ namespace XenCenterLib
         [DllImport("user32.dll")]
         public static extern int ReleaseDC(IntPtr hwnd, IntPtr hdc);
 
-        // pinvoke.net
-        [DllImport("psapi.dll")]
-        public static extern uint GetModuleFileNameEx(IntPtr hProcess, IntPtr hModule, [Out] StringBuilder lpBaseName, [In] [MarshalAs(UnmanagedType.U4)] int nSize);
-
-        /*
-         * ToolHelpHandle and related methods are based upon
-         * http://blogs.msdn.com/jasonz/archive/2007/05/11/code-sample-is-your-process-using-the-silverlight-clr.aspx
-         * and http://www.csharpfriends.com/Forums/ShowPost.aspx?PostID=27395.
-         */
-
-        public class ToolHelpHandle : SafeHandleZeroOrMinusOneIsInvalid
-        {
-            private ToolHelpHandle() : base(true)
-            {
-            }
-
-            [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
-            override protected bool ReleaseHandle()
-            {
-                return CloseHandle(handle);
-            }
-        }
-
-        [DllImport("kernel32.dll", SetLastError = true)]
-        static public extern bool CloseHandle(IntPtr hHandle);
-
-        [DllImport("kernel32.dll")]
-        static public extern bool Process32First(ToolHelpHandle hSnapshot, ref PROCESSENTRY32 lppe);
-
-        [DllImport("kernel32.dll")]
-        static public extern bool Process32Next(ToolHelpHandle hSnapshot, ref PROCESSENTRY32 lppe);
-
-        [DllImport("kernel32.dll", SetLastError = true)]
-        static public extern ToolHelpHandle CreateToolhelp32Snapshot(SnapshotFlags dwFlags, uint th32ProcessID);
-
-        [Flags]
-        public enum SnapshotFlags : uint
-        {
-            HeapList = 0x00000001,
-            Process = 0x00000002,
-            Thread = 0x00000004,
-            Module = 0x00000008,
-            Module32 = 0x00000010,
-            Inherit = 0x80000000,
-            All = 0x0000001F
-        }
-
-        [StructLayoutAttribute(LayoutKind.Sequential)]
-        public struct PROCESSENTRY32
-        {
-            public uint dwSize;
-            public uint cntUsage;
-            public uint th32ProcessID;
-            public IntPtr th32DefaultHeapID;
-            public uint th32ModuleID;
-            public uint cntThreads;
-            public uint th32ParentProcessID;
-            public int pcPriClassBase;
-            public uint dwFlags;
-
-            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 260)]
-            public string szExeFile;
-        }
-
-        [Flags]
-        public enum TOKEN_ACCESS : uint
-        {
-            TOKEN_QUERY = 0x0008
-        };
-
-        [DllImport("advapi32.dll", SetLastError = true)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool OpenProcessToken(IntPtr ProcessHandle, TOKEN_ACCESS DesiredAccess, out IntPtr TokenHandle);
-
         [DllImport("kernel32.dll", SetLastError = true)]
         public extern static bool QueryPerformanceCounter(out long x);
+
         [DllImport("kernel32.dll", SetLastError = true)]
         public extern static bool QueryPerformanceFrequency(out long x);
 

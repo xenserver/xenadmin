@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>XenAdmin</RootNamespace>
-    <AssemblyName>[XenCenter_No_Space]Main</AssemblyName>
+    <AssemblyName>[XenCenter_No_Space]</AssemblyName>
     <ApplicationIcon>..\Branding\Images\AppIcon.ico</ApplicationIcon>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <PublishUrl>publish\</PublishUrl>
@@ -62,7 +62,7 @@
     <Reference Include="DiscUtils, Version=0.11.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\DiscUtils.dll</HintPath>
     </Reference>
-    <Reference Include="log4net, Version=2.0.12.0, Culture=neutral, PublicKeyToken=d247b8b0ac7959e9, processorArchitecture=MSIL">
+    <Reference Include="log4net, Version=2.0.15.0, Culture=neutral, PublicKeyToken=d247b8b0ac7959e9, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ReportViewer.WinForms, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -438,6 +438,12 @@
     <Compile Include="SettingsPanels\NetworkOptionsEditPage.Designer.cs">
       <DependentUpon>NetworkOptionsEditPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="SettingsPanels\PoolAdvancedEditPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SettingsPanels\PoolAdvancedEditPage.Designer.cs">
+      <DependentUpon>PoolAdvancedEditPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="SettingsPanels\SecurityEditPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -493,6 +499,13 @@
       <DependentUpon>WlbThresholdsPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Plugins\Features\ParentMenuItemFeature.cs" />
+    <Compile Include="SplashScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SplashScreen.Designer.cs">
+      <DependentUpon>SplashScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SplashScreenContext.cs" />
     <Compile Include="TabPages\BaseTabPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -689,12 +702,6 @@
     <Compile Include="Dialogs\Network\UnknownCertificateDialog.Designer.cs">
       <DependentUpon>UnknownCertificateDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\PasswordsRequestDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\PasswordsRequestDialog.Designer.cs">
-      <DependentUpon>PasswordsRequestDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\VmSnapshotDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -718,7 +725,6 @@
     </Compile>
     <Compile Include="Images.cs" />
     <Compile Include="Network\SSL.cs" />
-    <Compile Include="PasswordsRequest.cs" />
     <Compile Include="Plugins\PluginDescriptor.cs" />
     <Compile Include="Plugins\PluginManager.cs" />
     <Compile Include="RDP\AxMSTSCLib.cs">
@@ -2069,10 +2075,6 @@
       <SubType>Designer</SubType>
       <DependentUpon>UnknownCertificateDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\PasswordsRequestDialog.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>PasswordsRequestDialog.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\VmSnapshotDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>VmSnapshotDialog.cs</DependentUpon>
@@ -2101,6 +2103,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\NetworkOptionsEditPage.zh-CN.resx">
       <DependentUpon>NetworkOptionsEditPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsPanels\PoolAdvancedEditPage.ja.resx">
+      <DependentUpon>PoolAdvancedEditPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsPanels\PoolAdvancedEditPage.resx">
+      <DependentUpon>PoolAdvancedEditPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsPanels\PoolAdvancedEditPage.zh-CN.resx">
+      <DependentUpon>PoolAdvancedEditPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\SecurityEditPage.ja.resx">
       <DependentUpon>SecurityEditPage.cs</DependentUpon>
@@ -2173,6 +2184,15 @@
     <EmbeddedResource Include="SettingsPanels\Wlb\WlbThresholdsPage.resx">
       <SubType>Designer</SubType>
       <DependentUpon>WlbThresholdsPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SplashScreen.ja.resx">
+      <DependentUpon>SplashScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SplashScreen.resx">
+      <DependentUpon>SplashScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SplashScreen.zh-CN.resx">
+      <DependentUpon>SplashScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\AdPage.resx">
       <DependentUpon>AdPage.cs</DependentUpon>
@@ -2838,17 +2858,14 @@
       <DependentUpon>XenWizardBase.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <None Include="..\Branding\HomePage.ja.mht">
-      <Link>HomePage.ja.mht</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Include="..\Branding\HomePage.html">
+      <Link>HomePage.html</Link>
     </None>
-    <None Include="..\Branding\HomePage.mht">
-      <Link>HomePage.mht</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Include="..\Branding\HomePage.ja.html">
+      <Link>HomePage.ja.html</Link>
     </None>
-    <None Include="..\Branding\HomePage.zh-CN.mht">
-      <Link>HomePage.zh-CN.mht</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Include="..\Branding\HomePage.zh-CN.html">
+      <Link>HomePage.zh-CN.html</Link>
     </None>
     <None Include="app.config">
       <SubType>Designer</SubType>
@@ -5411,12 +5428,6 @@
     <EmbeddedResource Include="Dialogs\OptionsPages\UpdatesOptionsPage.zh-CN.resx">
       <DependentUpon>UpdatesOptionsPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\PasswordsRequestDialog.ja.resx">
-      <DependentUpon>PasswordsRequestDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\PasswordsRequestDialog.zh-CN.resx">
-      <DependentUpon>PasswordsRequestDialog.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\PropertiesDialog.ja.resx">
       <DependentUpon>PropertiesDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -6726,6 +6737,9 @@
     <None Include="Images\VMTemplate_h32bit_32.png" />
     <Content Include="Images\xcm.png" />
     <Content Include="Images\xcm_32x32.png" />
+    <None Include="..\Branding\Images\splash.bmp">
+      <Link>Images\splash.bmp</Link>
+    </None>
     <Content Include="TestResources\credits.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

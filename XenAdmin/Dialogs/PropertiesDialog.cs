@@ -81,6 +81,7 @@ namespace XenAdmin.Dialogs
         private NetworkOptionsEditPage NetworkOptionsEditPage;
         private ClusteringEditPage ClusteringEditPage;
         private SrReadCachingEditPage SrReadCachingEditPage;
+        private PoolAdvancedEditPage _poolAdvancedEditPage;
         #endregion
 
         private IXenObject xenObject, xenObjectBefore, xenObjectCopy;
@@ -217,6 +218,9 @@ namespace XenAdmin.Dialogs
                 if (is_pool_or_standalone && !Helpers.FeatureForbidden(xenObject.Connection, Host.RestrictCorosync))
                     ShowTab(ClusteringEditPage = new ClusteringEditPage());
 
+                if (is_pool && Helpers.Post82X(xenObject.Connection) && Helpers.XapiEqualOrGreater_22_33_0(xenObject.Connection))
+                    ShowTab(_poolAdvancedEditPage = new PoolAdvancedEditPage());
+
                 if (is_network)
                     ShowTab(editNetworkPage = new EditNetworkPage());
 
@@ -282,43 +286,39 @@ namespace XenAdmin.Dialogs
                 if (is_sr && ((SR)xenObjectCopy).SupportsReadCaching() && !Helpers.FeatureForbidden(xenObjectCopy, Host.RestrictReadCaching))
                     ShowTab(SrReadCachingEditPage = new SrReadCachingEditPage());
 
-                //
-                // Now add one tab per VBD (for VDIs only)
-                //
-
-                if (!is_vdi)
-                    return;
-
-                ShowTab(vdiSizeLocation = new VDISizeLocationPage());
-
-                VDI vdi = xenObjectCopy as VDI;
-
-                List<VBDEditPage> vbdEditPages = new List<VBDEditPage>();
-
-                foreach (VBD vbd in vdi.Connection.ResolveAll(vdi.VBDs))
+                if (is_vdi)
                 {
-                    VBDEditPage editPage = new VBDEditPage();
+                    ShowTab(vdiSizeLocation = new VDISizeLocationPage());
 
-                    editPage.SetXenObjects(null, vbd);
-                    vbdEditPages.Add(editPage);
-                    ShowTab(editPage);
-                }
+                    VDI vdi = xenObjectCopy as VDI;
 
-                if (vbdEditPages.Count <= 0)
-                    return;
+                    List<VBDEditPage> vbdEditPages = new List<VBDEditPage>();
 
-                using (var dialog = new ActionProgressDialog(
-                    new DelegatedAsyncAction(vdi.Connection, Messages.DEVICE_POSITION_SCANNING,
-                        Messages.DEVICE_POSITION_SCANNING, Messages.DEVICE_POSITION_SCANNED,
-                        delegate(Session session)
-                        {
-                            foreach (VBDEditPage page in vbdEditPages)
-                                page.UpdateDevicePositions(session);
-                        }),
-                    ProgressBarStyle.Continuous))
-                {
-                    dialog.ShowCancel = true;
-                    dialog.ShowDialog(Program.MainWindow);
+                    foreach (VBD vbd in vdi.Connection.ResolveAll(vdi.VBDs))
+                    {
+                        VBDEditPage editPage = new VBDEditPage();
+
+                        editPage.SetXenObjects(null, vbd);
+                        vbdEditPages.Add(editPage);
+                        ShowTab(editPage);
+                    }
+
+                    if (vbdEditPages.Count <= 0)
+                        return;
+
+                    using (var dialog = new ActionProgressDialog(
+                               new DelegatedAsyncAction(vdi.Connection, Messages.DEVICE_POSITION_SCANNING,
+                                   Messages.DEVICE_POSITION_SCANNING, Messages.DEVICE_POSITION_SCANNED,
+                                   delegate(Session session)
+                                   {
+                                       foreach (VBDEditPage page in vbdEditPages)
+                                           page.UpdateDevicePositions(session);
+                                   }),
+                               ProgressBarStyle.Continuous))
+                    {
+                        dialog.ShowCancel = true;
+                        dialog.ShowDialog(Program.MainWindow);
+                    }
                 }
             }
             finally
@@ -347,16 +347,24 @@ namespace XenAdmin.Dialogs
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            if (!ValidToSave)
+            var changedPageExists = false;
+
+            foreach (IEditPage editPage in verticalTabs.Items)
             {
-                // Keep dialog open and allow user to correct the error as
-                // indicated by the balloon tooltip.
-                DialogResult = DialogResult.None;
-                return;
+                if (!editPage.ValidToSave)
+                {
+                    SelectPage(editPage);
+
+                    editPage.ShowLocalValidationMessages();
+                    DialogResult = DialogResult.None;
+                    return;
+                }
+
+                if (editPage.HasChanged)
+                    changedPageExists = true;
             }
 
-            // Have any of the fields in the tab pages changed?
-            if (!HasChanged)
+            if (!changedPageExists)
             {
                 Close();
                 return;
@@ -411,51 +419,10 @@ namespace XenAdmin.Dialogs
             Program.Invoke(Program.MainWindow.GeneralPage, Program.MainWindow.GeneralPage.UpdateButtons);
         }
 
-        /*
-         * Iterates through all of the tab pages checking for changes and
-         * return the status.
-         */
-        private bool HasChanged
-        {
-            get
-            {
-                foreach (IEditPage editPage in verticalTabs.Items)
-                    if (editPage.HasChanged)
-                        return true;
-
-                return false;
-            }
-        }
-
-        /*
-         * Iterate through all tab pages looking for local validation errors.  If
-         * we encounter a local validation error on a TabPage, then make the TabPage
-         * the selected, and have the inner control show one or more balloon tips.  Keep
-         * the dialog open.
-         */
-        private bool ValidToSave
-        {
-            get
-            {
-                foreach (IEditPage editPage in verticalTabs.Items)
-                    if (!editPage.ValidToSave)
-                    {
-                        SelectPage(editPage);
-
-                        // Show local validation balloon message for this tab page.
-                        editPage.ShowLocalValidationMessages();
-
-                        return false;
-                    }
-
-                return true;
-            }
-        }
-
-        /* 
-         * Iterates through all of the tab pages, saving changes to their cloned XenObjects,
-         * and accumulating and returning their Actions for further processing.
-         */
+        /// <summary>
+        /// Iterates through all of the tab pages, saving changes to their cloned XenObjects,
+        /// and accumulating and returning their Actions for further processing.
+        /// </summary>
         private List<AsyncAction> SaveSettings()
         {
             List<AsyncAction> actions = new List<AsyncAction>();

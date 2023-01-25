@@ -199,7 +199,7 @@
     <value>deprecationBanner1</value>
   </data>
   <data name="&gt;&gt;deprecationBanner1.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.DeprecationBanner, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.DeprecationBanner, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;deprecationBanner1.Parent" xml:space="preserve">
     <value>tableLayoutPanelBanner</value>
@@ -298,7 +298,7 @@
     <value>gradientPanel1</value>
   </data>
   <data name="&gt;&gt;gradientPanel1.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.GradientPanel.HorizontalGradientPanel, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.GradientPanel.HorizontalGradientPanel, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;gradientPanel1.Parent" xml:space="preserve">
     <value>$this</value>

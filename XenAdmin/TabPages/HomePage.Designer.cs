@@ -34,8 +34,12 @@ namespace XenAdmin.TabPages
             // 
             // webBrowser
             // 
+            this.webBrowser.AllowWebBrowserDrop = false;
             resources.ApplyResources(this.webBrowser, "webBrowser");
+            this.webBrowser.IsWebBrowserContextMenuEnabled = false;
             this.webBrowser.Name = "webBrowser";
+            this.webBrowser.ScriptErrorsSuppressed = true;
+            this.webBrowser.WebBrowserShortcutsEnabled = false;
             this.webBrowser.Navigating += new System.Windows.Forms.WebBrowserNavigatingEventHandler(this.webBrowser_Navigating);
             // 
             // HomePage
@@ -43,7 +47,6 @@ namespace XenAdmin.TabPages
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.webBrowser);
             resources.ApplyResources(this, "$this");
-            this.Name = "HomePage";
             this.ResumeLayout(false);
 
         }

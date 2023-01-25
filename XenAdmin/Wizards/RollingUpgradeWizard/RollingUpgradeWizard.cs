@@ -75,7 +75,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         protected override void FinishWizard()
         {
             var brokenSRs = RollingUpgradeWizardSelectPool.SelectedCoordinators
-                .Any(coordinator => coordinator != null && coordinator.Connection.Cache.SRs.Any(sr => sr.IsBroken(true)));
+                .Any(coordinator => coordinator != null && coordinator.Connection.Cache.SRs.Any(sr => sr.IsBroken()));
             if(brokenSRs)
             {
                 using (var dlg = new WarningDialog(Messages.BROKEN_SRS_AFTER_UPGRADE))

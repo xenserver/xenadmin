@@ -44,6 +44,7 @@
             this.labelRubric = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.buttonRescan = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanelSrPicker.SuspendLayout();
@@ -89,17 +90,27 @@
             resources.ApplyResources(this.tableLayoutPanelSrPicker, "tableLayoutPanelSrPicker");
             this.tableLayoutPanelSrPicker.Controls.Add(this.srPicker1, 0, 1);
             this.tableLayoutPanelSrPicker.Controls.Add(this.labelSrHint, 0, 0);
+            this.tableLayoutPanelSrPicker.Controls.Add(this.buttonRescan, 1, 1);
             this.tableLayoutPanelSrPicker.Name = "tableLayoutPanelSrPicker";
             // 
             // srPicker1
             // 
             resources.ApplyResources(this.srPicker1, "srPicker1");
+            this.srPicker1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.srPicker1.Name = "srPicker1";
+            this.srPicker1.NodeIndent = 3;
+            this.srPicker1.RootAlwaysExpanded = false;
+            this.srPicker1.ShowCheckboxes = false;
+            this.srPicker1.ShowDescription = true;
+            this.srPicker1.ShowImages = true;
+            this.srPicker1.ShowRootLines = true;
+            this.srPicker1.CanBeScannedChanged += new System.Action(this.srPicker1_CanBeScannedChanged);
             this.srPicker1.SelectedIndexChanged += new System.EventHandler(this.srPicker1_SelectedIndexChanged);
             // 
             // labelSrHint
             // 
             resources.ApplyResources(this.labelSrHint, "labelSrHint");
+            this.tableLayoutPanelSrPicker.SetColumnSpan(this.labelSrHint, 2);
             this.labelSrHint.Name = "labelSrHint";
             // 
             // toolTipContainer1
@@ -153,6 +164,13 @@
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
             // 
+            // buttonRescan
+            // 
+            resources.ApplyResources(this.buttonRescan, "buttonRescan");
+            this.buttonRescan.Name = "buttonRescan";
+            this.buttonRescan.UseVisualStyleBackColor = true;
+            this.buttonRescan.Click += new System.EventHandler(this.buttonRescan_Click);
+            // 
             // IntraPoolCopyPage
             // 
             resources.ApplyResources(this, "$this");
@@ -189,6 +207,7 @@
         private System.Windows.Forms.TextBox NameTextBox;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelSrPicker;
         private System.Windows.Forms.Label labelSrHint;
+        private System.Windows.Forms.Button buttonRescan;
     }
 }
 

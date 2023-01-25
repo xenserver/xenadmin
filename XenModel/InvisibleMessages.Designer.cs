@@ -106,15 +106,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to HomePage.mht.
-        /// </summary>
-        public static string HOMEPAGE_FILENAME {
-            get {
-                return ResourceManager.GetString("HOMEPAGE_FILENAME", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to http://support.citrix.com/article/CTX141433.
         /// </summary>
         public static string ISL_DEPRECATION_URL {

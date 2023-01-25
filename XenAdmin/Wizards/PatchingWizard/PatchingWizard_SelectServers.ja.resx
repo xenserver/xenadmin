@@ -220,7 +220,7 @@
     <value>dataGridViewHosts</value>
   </data>
   <data name="&gt;&gt;dataGridViewHosts.Type" xml:space="preserve">
-    <value>XenAdmin.Wizards.PatchingWizard.PatchingWizard_SelectServers+PatchingHostsDataGridView, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Wizards.PatchingWizard.PatchingWizard_SelectServers+PatchingHostsDataGridView, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dataGridViewHosts.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -355,6 +355,6 @@
     <value>PatchingWizard_SelectServers</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.XenTabPage, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.XenTabPage, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

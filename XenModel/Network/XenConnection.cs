@@ -47,9 +47,9 @@ using XenAdmin.ServerDBs;
 
 
 namespace XenAdmin.Network
-{   
+{
     [DebuggerDisplay("IXenConnection :{HostnameWithPort}")]
-    public class XenConnection : IXenConnection,IXmlSerializable
+    public class XenConnection : IXenConnection, IXmlSerializable
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -96,6 +96,20 @@ namespace XenAdmin.Network
         {
             get => _suppressErrors;
             set => _suppressErrors = value;
+        }
+
+
+        private volatile bool _preventResettingPasswordPrompt;
+
+        /// <summary>
+        /// The password prompting function (<see cref="_promptForNewPassword"/>) is set to null when the connection is closed.
+        /// Set this value to true in order to prevent that from happening.
+        /// n.b.: remember to set the value back to false once it's not needed anymore
+        /// </summary>
+        public bool PreventResettingPasswordPrompt
+        {
+            get => _preventResettingPasswordPrompt;
+            set => _preventResettingPasswordPrompt = value;
         }
 
         /// <summary>
@@ -186,14 +200,14 @@ namespace XenAdmin.Network
                                                      now.ToString("o", CultureInfo.InvariantCulture),
                                                      (now.Subtract(value)).ToString("o", CultureInfo.InvariantCulture));
 
-                       if (m_startTime.Ticks == 0)//log it the first time it is detected
+                        if (m_startTime.Ticks == 0)//log it the first time it is detected
                         {
                             m_startTime = now;
                             log.Info(debugMsg);
                         }
 
                         //then log every 5mins
-                       int currDebug = (int)((now - m_startTime).TotalSeconds) / 300;
+                        int currDebug = (int)((now - m_startTime).TotalSeconds) / 300;
                         if (currDebug > m_lastDebug)
                         {
                             m_lastDebug = currDebug;
@@ -461,9 +475,9 @@ namespace XenAdmin.Network
                                 }
                                 break;
                             case Failure.HOST_IS_SLAVE:
-                                // we know it is a supporter so there there is no need to try and connect again, we need to connect to the coordinator
+                            // we know it is a supporter so there there is no need to try and connect again, we need to connect to the coordinator
                             case Failure.RBAC_PERMISSION_DENIED:
-                                // No point retrying this, the user needs the read only role at least to log in
+                            // No point retrying this, the user needs the read only role at least to log in
                             case Failure.HOST_UNKNOWN_TO_MASTER:
                                 // Will never succeed, CA-74718
                                 throw;
@@ -584,7 +598,7 @@ namespace XenAdmin.Network
 
             //InvokeHelper.Synchronizer is used for synchronizing the cache update. Must not be null at this point. It can be initialized through InvokeHelper.Initialize()
             Trace.Assert(InvokeHelper.Synchronizer != null);
-            
+
             InvokeHelper.AssertOnEventThread();
 
             if (initiateCoordinatorSearch)
@@ -767,8 +781,13 @@ namespace XenAdmin.Network
             {
                 ClearCache();
             }
-
-            _promptForNewPassword = null;
+            if (!PreventResettingPasswordPrompt)
+            {
+                // CA-371356: Preventing the reset of the prompt allows
+                // for it to be shown when attempting to reconnect to a host
+                // whose password has changed since last login
+                _promptForNewPassword = null;
+            }
             OnConnectionClosed();
         }
 
@@ -1063,7 +1082,7 @@ namespace XenAdmin.Network
 
             if (events.Count > 0)
             {
-                InvokeHelper.Invoke(delegate()
+                InvokeHelper.Invoke(delegate ()
                 {
                     try
                     {
@@ -1151,7 +1170,7 @@ namespace XenAdmin.Network
             }
         }
 
-        private readonly string eventNextConnectionGroupName = Guid.NewGuid().ToString(); 
+        private readonly string eventNextConnectionGroupName = Guid.NewGuid().ToString();
 
         /// <summary>
         /// The main method for a connection to a XenServer. This method runs until the connection is lost, and
@@ -1218,8 +1237,8 @@ namespace XenAdmin.Network
                             log.DebugFormat("Exception (disruption is expected) in XenObjectDownloader.GetEvents: {0}", exn.GetType().Name);
 
                             // ignoring some exceptions when disruption is expected
-                            if (exn is XmlRpcIllFormedXmlException || 
-                                exn is System.IO.IOException || 
+                            if (exn is XmlRpcIllFormedXmlException ||
+                                exn is System.IO.IOException ||
                                 (exn is WebException && ((exn as WebException).Status == WebExceptionStatus.KeepAliveFailure || (exn as WebException).Status == WebExceptionStatus.ConnectFailure)))
                             {
                                 if (!eventsExceptionLogged)
@@ -1278,7 +1297,7 @@ namespace XenAdmin.Network
                             task.Connected = true;
 
                             string poolName = pool.Name();
-                            
+
                             FriendlyName = !string.IsNullOrEmpty(poolName)
                                 ? poolName
                                 : !string.IsNullOrEmpty(coordinator.Name())
@@ -1440,7 +1459,7 @@ namespace XenAdmin.Network
                     {
                         // Create a new log message to say the connection attempt failed
                         string title = string.Format(Messages.CONNECTION_FAILED_TITLE, HostnameWithPort);
-                        var action =  new DummyAction(title, reason, reason);
+                        var action = new DummyAction(title, reason, reason);
                         SetPoolAndHostInAction(action, pool, PoolOpaqueRef);
                         action.Run();
                     }
@@ -1592,7 +1611,7 @@ namespace XenAdmin.Network
 
             string title = string.Format(Messages.CONNECTION_LOST_NOTICE_TITLE,
                                          LastConnectionFullName);
-            var action =  new DummyAction(title, description, description);
+            var action = new DummyAction(title, description, description);
             SetPoolAndHostInAction(action, pool, poolopaqueref);
             action.Run();
             OnConnectionLost();
@@ -1662,13 +1681,13 @@ namespace XenAdmin.Network
         {
             if (PoolMemberRemaining())
                 StartReconnectCoordinatorTimer(SEARCH_NEXT_SUPPORTER_TIMEOUT_MS);
-           else
-                OnConnectionResult(false, reason, error); 
+            else
+                OnConnectionResult(false, reason, error);
         }
 
         private void StartReconnectCoordinatorTimer(int timeout)
         {
-            OnConnectionMessageChanged(string.Format(Messages.CONNECTION_WILL_RETRY_SUPPORTER, LastConnectionFullName.Ellipsise(25) , timeout / 1000));
+            OnConnectionMessageChanged(string.Format(Messages.CONNECTION_WILL_RETRY_SUPPORTER, LastConnectionFullName.Ellipsise(25), timeout / 1000));
             ReconnectionTimer =
                 new System.Threading.Timer((TimerCallback)ReconnectCoordinatorTimer, null,
                                            timeout, Timeout.Infinite);
@@ -1699,7 +1718,7 @@ namespace XenAdmin.Network
             log.DebugFormat("Reconnecting to server {0}...", Hostname);
             if (!XenAdminConfigManager.Provider.Exiting)
             {
-                InvokeHelper.Invoke(delegate()
+                InvokeHelper.Invoke(delegate ()
                 {
                     /*ConnectionResult += new EventHandler<ConnectionResultEventArgs>(XenConnection_ConnectionResult);
                     CachePopulated += new EventHandler<EventArgs>(XenConnection_CachePopulated);*/
@@ -1735,7 +1754,7 @@ namespace XenAdmin.Network
             // Add an informational entry to the log
             string title = string.Format(Messages.CONNECTION_FINDING_COORDINATOR_TITLE, LastConnectionFullName);
             string descr = string.Format(Messages.CONNECTION_FINDING_COORDINATOR_DESCRIPTION, LastConnectionFullName, Hostname);
-            var action =  new DummyAction(title, descr);
+            var action = new DummyAction(title, descr);
             SetPoolAndHostInAction(action, null, PoolOpaqueRef);
             action.Run();
             log.DebugFormat("Looking for coordinator for {0} on {1}...", LastConnectionFullName, Hostname);
@@ -1820,7 +1839,7 @@ namespace XenAdmin.Network
         {
             // Using BeginInvoke here means that the XenObjectsUpdated event gets fired after any
             // CollectionChanged events fired by ChangeableDictionary during Cache.UpdateFrom.
-            InvokeHelper.BeginInvoke(delegate()
+            InvokeHelper.BeginInvoke(delegate ()
             {
                 if (XenObjectsUpdated != null)
                     XenObjectsUpdated(this, null);
@@ -1949,7 +1968,7 @@ namespace XenAdmin.Network
 
         public void WriteXml(System.Xml.XmlWriter writer)
         {
-            writer.WriteElementString("Hostname",Hostname);
+            writer.WriteElementString("Hostname", Hostname);
         }
 
         #endregion
@@ -1968,7 +1987,7 @@ namespace XenAdmin.Network
         private bool disposed;
         protected virtual void Dispose(bool disposing)
         {
-            if(!disposed)
+            if (!disposed)
             {
                 if (disposing)
                 {

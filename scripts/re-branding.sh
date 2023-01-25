@@ -30,15 +30,6 @@ GLOBAL_BUILD_NUMBER=$1
 
 REPO="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
 
-version_cpp()
-{
-  num=$(echo "${BRANDING_XC_PRODUCT_VERSION}.${GLOBAL_BUILD_NUMBER}" | sed 's/\./, /g')
-  sed -b -i -e "s/1,0,0,1/${num}/g" \
-      -e "s/1, 0, 0, 1/${num}/g" \
-      -e "s/@BUILD_NUMBER@/${GLOBAL_BUILD_NUMBER}/g" \
-      $1
-}
-
 version_csharp()
 {
   sed -b -i -e "s/0\.0\.0\.0/${BRANDING_XC_PRODUCT_VERSION}.${GLOBAL_BUILD_NUMBER}/g" \
@@ -64,12 +55,6 @@ rebranding_global()
         $1
 }
 
-#splace rebranding
-for file in splash.rc main.cpp splash.vcproj splash.vcxproj  util.cpp
-do
-  version_cpp "${REPO}/splash/${file}" && rebranding_global "${REPO}/splash/${file}"
-done
-
 #AssemblyInfo rebranding
 for projectName in CommandLib xe XenAdmin XenAdminTests XenCenterLib XenModel XenOvfApi XenServerHealthCheck xva_verify
 do
@@ -77,7 +62,6 @@ do
   version_csharp ${assemblyInfo} && rebranding_global ${assemblyInfo}
 done
 
-rebranding_global ${REPO}/XenAdmin/app.config
 rebranding_global ${REPO}/XenAdmin/XenAdmin.csproj
 
 #XenModel
@@ -98,8 +82,5 @@ sed -b -i -e "s/@AUTOGEN_PRODUCT_GUID@/${PRODUCT_GUID}/g" \
 #XenAdminTests
 rebranding_global ${REPO}/XenAdminTests/TestResources/ContextMenuBuilderTestResults.xml
 rebranding_global ${REPO}/XenAdminTests/XenAdminTests.csproj
-
-#XenServerHealthCheck
-rebranding_global ${REPO}/XenServerHealthCheck/app.config
 
 set +u

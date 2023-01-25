@@ -135,11 +135,8 @@
   <data name="srPicker1.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 18</value>
   </data>
-  <data name="srPicker1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 0, 3, 3</value>
-  </data>
   <data name="srPicker1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>335, 107</value>
+    <value>318, 129</value>
   </data>
   <data name="srPicker1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -148,7 +145,7 @@
     <value>srPicker1</value>
   </data>
   <data name="&gt;&gt;srPicker1.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.SrPicker, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.SrPicker, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;srPicker1.Parent" xml:space="preserve">
     <value>tableLayoutPanelSrPicker</value>
@@ -163,7 +160,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="CloseButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>312, 320</value>
+    <value>364, 342</value>
   </data>
   <data name="CloseButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -193,7 +190,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="MoveButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>231, 320</value>
+    <value>283, 342</value>
   </data>
   <data name="MoveButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -256,7 +253,7 @@
     <value>79, 12</value>
   </data>
   <data name="NameTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>308, 23</value>
+    <value>369, 23</value>
   </data>
   <data name="NameTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -346,7 +343,7 @@
     <value>79, 38</value>
   </data>
   <data name="DescriptionTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>308, 23</value>
+    <value>369, 23</value>
   </data>
   <data name="DescriptionTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -399,6 +396,9 @@
   <data name="FastCloneDescription.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
+  <data name="FastCloneDescription.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="FastCloneDescription.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
@@ -406,13 +406,10 @@
     <value>NoControl</value>
   </data>
   <data name="FastCloneDescription.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 20</value>
-  </data>
-  <data name="FastCloneDescription.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 0, 3, 0</value>
+    <value>13, 22</value>
   </data>
   <data name="FastCloneDescription.Size" type="System.Drawing.Size, System.Drawing">
-    <value>344, 31</value>
+    <value>370, 15</value>
   </data>
   <data name="FastCloneDescription.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -439,7 +436,7 @@
     <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="tableLayoutPanelSrPicker.ColumnCount" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="labelSrHint.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -453,11 +450,8 @@
   <data name="labelSrHint.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 0</value>
   </data>
-  <data name="labelSrHint.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 0, 3, 3</value>
-  </data>
   <data name="labelSrHint.Size" type="System.Drawing.Size, System.Drawing">
-    <value>335, 15</value>
+    <value>399, 15</value>
   </data>
   <data name="labelSrHint.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -477,6 +471,33 @@
   <data name="&gt;&gt;labelSrHint.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="buttonRescan.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="buttonRescan.Location" type="System.Drawing.Point, System.Drawing">
+    <value>327, 18</value>
+  </data>
+  <data name="buttonRescan.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="buttonRescan.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="buttonRescan.Text" xml:space="preserve">
+    <value>&amp;Rescan</value>
+  </data>
+  <data name="&gt;&gt;buttonRescan.Name" xml:space="preserve">
+    <value>buttonRescan</value>
+  </data>
+  <data name="&gt;&gt;buttonRescan.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonRescan.Parent" xml:space="preserve">
+    <value>tableLayoutPanelSrPicker</value>
+  </data>
+  <data name="&gt;&gt;buttonRescan.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="tableLayoutPanelSrPicker.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
@@ -487,7 +508,7 @@
     <value>2</value>
   </data>
   <data name="tableLayoutPanelSrPicker.Size" type="System.Drawing.Size, System.Drawing">
-    <value>341, 128</value>
+    <value>405, 150</value>
   </data>
   <data name="tableLayoutPanelSrPicker.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -505,7 +526,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanelSrPicker.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="srPicker1" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelSrHint" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="srPicker1" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelSrHint" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="buttonRescan" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,Percent,100,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="toolTipContainer1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -520,7 +541,7 @@
     <value>0, 0</value>
   </data>
   <data name="FastClonePanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>360, 52</value>
+    <value>421, 52</value>
   </data>
   <data name="FastClonePanel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -544,7 +565,7 @@
     <value>9, 19</value>
   </data>
   <data name="toolTipContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>360, 52</value>
+    <value>421, 52</value>
   </data>
   <data name="toolTipContainer1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -553,7 +574,7 @@
     <value>toolTipContainer1</value>
   </data>
   <data name="&gt;&gt;toolTipContainer1.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.ToolTipContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.ToolTipContainer, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;toolTipContainer1.Parent" xml:space="preserve">
     <value>groupBox1</value>
@@ -571,7 +592,7 @@
     <value>3, 10, 3, 10</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 236</value>
+    <value>436, 258</value>
   </data>
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -583,7 +604,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.DecentGroupBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.DecentGroupBox, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -598,13 +619,13 @@
     <value>96, 96</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>403, 359</value>
+    <value>464, 381</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8pt</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>419, 398</value>
+    <value>480, 420</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Copy Virtual Machine</value>
@@ -613,6 +634,6 @@
     <value>CopyVMDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>XenAdmin.Dialogs.XenDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Dialogs.XenDialogBase, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

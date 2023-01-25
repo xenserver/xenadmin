@@ -44,8 +44,7 @@ namespace XenCenterLib.Compression
         /// </summary>
         public enum Type
         {
-            Gz,
-            Bz2
+            Gz
         }
 
         public static string StringOf(this Type t)
@@ -54,8 +53,6 @@ namespace XenCenterLib.Compression
             {
                 case Type.Gz:
                     return "Gzip";
-                case Type.Bz2:
-                    return "BZip2";
                 default:
                     throw new ArgumentOutOfRangeException(nameof(t), t, null);
             }
@@ -67,8 +64,6 @@ namespace XenCenterLib.Compression
             {
                 case Type.Gz:
                     return ".gz";
-                case Type.Bz2:
-                    return ".bz2";
                 default:
                     throw new ArgumentOutOfRangeException(nameof(t), t, null);
             }
@@ -84,10 +79,7 @@ namespace XenCenterLib.Compression
         public static CompressionStream Reader(Type compressionType, Stream compressedDataSource)
         {
             if (compressionType == Type.Gz)
-                return new DotNetZipGZipInputStream(compressedDataSource);
-
-            if (compressionType == Type.Bz2)
-                return new DotNetZipBZip2InputStream(compressedDataSource);
+                return new GZipInputStream(compressedDataSource);
 
             throw new NotSupportedException(String.Format("Type: {0} is not supported by CompressionStream Reader", compressionType));
         }
@@ -102,10 +94,7 @@ namespace XenCenterLib.Compression
         public static CompressionStream Writer(Type compressionType, Stream compressedDataTarget)
         {
             if (compressionType == Type.Gz)
-                return new DotNetZipGZipOutputStream(compressedDataTarget);
-
-            if (compressionType == Type.Bz2)
-                return new DotNetZipBZip2OutputStream(compressedDataTarget);
+                return new GZipOutputStream(compressedDataTarget);
 
             throw new NotSupportedException(String.Format("Type: {0} is not supported by CompressionStream Writer", compressionType));
         }

@@ -1,4 +1,4 @@
-/* Copyright (c) Citrix Systems, Inc. 
+﻿/* Copyright (c) Cloud Software Group Holdings, Inc.
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -29,14 +29,36 @@
  * SUCH DAMAGE.
  */
 
-#ifndef UTIL_H
-#define UTIL_H
+using System;
+using System.Windows.Forms;
 
-#include <iostream>
-#include <sstream>
+namespace XenAdmin
+{
+    public partial class SplashScreen : Form
+    {
+        public event Action ShowMainWindowRequested;
 
-using namespace std;
+        public volatile bool AllowToClose;
 
-void ErrorExit(wostringstream& logStream, const LPTSTR lpszFunction, bool showDialog);
+        public SplashScreen()
+        {
+            InitializeComponent();
+            pictureBox1.Image = Images.StaticImages.splash;
+        }
 
-#endif
+        protected override void OnShown(EventArgs e)
+        {
+            base.OnShown(e);
+            timer1.Start();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (!AllowToClose)
+                return;
+
+            timer1.Stop();
+            ShowMainWindowRequested?.Invoke();
+        }
+    }
+}

@@ -109,6 +109,7 @@ namespace XenAdmin.Controls
             this.ReasonColumn});
             resources.ApplyResources(this.ServersGridView, "ServersGridView");
             this.ServersGridView.Name = "ServersGridView";
+            this.ServersGridView.SelectionChanged += new System.EventHandler(this.ServersGridView_SelectionChanged);
             this.ServersGridView.VisibleChanged += new System.EventHandler(this.ServersGridView_VisibleChanged);
             // 
             // ImageColumn

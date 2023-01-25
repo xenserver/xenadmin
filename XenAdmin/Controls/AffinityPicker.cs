@@ -48,6 +48,7 @@ namespace XenAdmin.Controls
         private IXenConnection Connection;
         private Host SrHost;
         private Host Affinity;
+        private bool selectedOnVisibleChanged;
 
         /// <summary>
         /// Should always be true if the AffinityPicker is used to create a VM.
@@ -56,9 +57,7 @@ namespace XenAdmin.Controls
         /// </summary>
         internal bool AutoSelectAffinity = true;
 
-        public event EventHandler SelectedAffinityChanged = new EventHandler(OnSelectedAffinityChanged);
-
-        private static void OnSelectedAffinityChanged(object obj, EventArgs e) { }
+        public event Action SelectedAffinityChanged;
 
         public AffinityPicker()
         {
@@ -72,9 +71,9 @@ namespace XenAdmin.Controls
             SrHost = srhost;
             tableLayoutPanelWlbWarning.Visible = Helpers.WlbEnabledAndConfigured(connection);
             LoadServers();
-            _UpdateControl();
+            UpdateControl();
             SelectRadioButtons();
-            SelectedAffinityChanged(SelectedAffinity, new EventArgs());
+            SelectedAffinityChanged?.Invoke();
         }
 
         private void LoadServers()
@@ -88,16 +87,6 @@ namespace XenAdmin.Controls
         }
 
         private void UpdateControl()
-        {
-            _UpdateControl();
-
-            SelectedAffinityChanged(SelectedAffinity, new EventArgs());
-        }
-
-        /// <summary>
-        /// does not fire selected affinity changed event
-        /// </summary>
-        private void _UpdateControl()
         {
             if (Connection == null)
                 return;
@@ -126,25 +115,15 @@ namespace XenAdmin.Controls
             }
         }
 
-        public Host SelectedAffinity
-        {
-            get
-            {
-                return DynamicRadioButton.Checked ? null : SelectedServer();
-            }
-        }
-
+        public Host SelectedAffinity => DynamicRadioButton.Checked ? null : SelectedServer();
 
 
         private Host SelectedServer()
         {
-            if (ServersGridView.SelectedRows.Count == 0)
-                return null;
+            if (ServersGridView.SelectedRows.Count > 0)
+                return ((ServerGridRow)ServersGridView.SelectedRows[0]).Server;
 
-            Host h = ((ServerGridRow)ServersGridView.SelectedRows[0]).Server;
-            if (h == null)
-                return null;
-            return h;
+            return null;
         }
 
         private bool SelectServer(Host host)
@@ -173,7 +152,6 @@ namespace XenAdmin.Controls
 
         private bool SelectSomething()
         {
-            //Now decide if we want to select anything.
             bool selected = false;
 
             if (Affinity != null)
@@ -181,9 +159,6 @@ namespace XenAdmin.Controls
 
             if (!selected && SrHost != null)
                 selected = SelectServer(SrHost);
-
-            /* if (!selected)
-                 selected = SelectAnyServer();*/
 
             return selected;
         }
@@ -193,17 +168,14 @@ namespace XenAdmin.Controls
             return SelectedAffinity != null || DynamicRadioButton.Checked;
         }
 
-        private void affinityListBox_SelectedValueChanged(object sender, EventArgs e)
-        {
-            UpdateControl();
-        }
-
         // we dont need to bother firing events if the other radio button gets checked or unchecked
         private void StaticRadioButton_CheckedChanged(object sender, EventArgs e)
         {
             if (StaticRadioButton.Checked && SelectedServer() == null)
                 SelectSomething();
+
             UpdateControl();
+            SelectedAffinityChanged?.Invoke();
 
             if (StaticRadioButton.Checked)
                 ServersGridView.Select();
@@ -217,8 +189,6 @@ namespace XenAdmin.Controls
                 ServersGridView.Select();
         }
 
-        bool selectedOnVisibleChanged = false;
-
         private void ServersGridView_VisibleChanged(object sender, EventArgs e)
         {
             if (!selectedOnVisibleChanged)
@@ -226,6 +196,12 @@ namespace XenAdmin.Controls
                 selectedOnVisibleChanged = true;
                 SelectSomething();//CA-213728
             }
+        }
+
+        private void ServersGridView_SelectionChanged(object sender, EventArgs e)
+        {
+            UpdateControl();
+            SelectedAffinityChanged?.Invoke();
         }
     }
 

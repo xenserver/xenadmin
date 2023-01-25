@@ -142,23 +142,24 @@ namespace XenAdmin.Actions
         /// A call here just before exit will mean that the task will get picked 
         /// up as a meddling action on restart of xencenter, and thus reappear in the EventsTab.
         /// </summary>
-        public void PrepareForLogReloadAfterRestart()
+        public void PrepareForEventReloadAfterRestart()
         {
             try
             {
-                Task.RemoveXenCenterUUID(Session, RelatedTask.opaque_ref);
+                if (Session != null && !string.IsNullOrEmpty(RelatedTask?.opaque_ref))
+                    Task.remove_from_other_config(Session, RelatedTask.opaque_ref, "XenCenterUUID");
             }
-            catch(KeyNotFoundException)
+            catch (Failure f)
             {
-                log.Debug("Removing XenCenterUUID failed - KeyNotFound");
+                // Read only user without task.other_config rights - just ignore this request
+                if (f.ErrorDescription.Count > 0 && f.ErrorDescription[0] == Failure.RBAC_PERMISSION_DENIED)
+                    return;
+
+                log.Debug($"Removing XenCenterUUID failed: {f.Message}");
             }
-            catch(NullReferenceException)
+            catch (Exception e)
             {
-                log.Debug("Removing XenCenterUUID failed - NullReference");
-            }
-            catch (WebException)
-            {
-                log.Debug("Removing XenCenterUUID failed - Could not connect through http");
+                log.Debug("Removing XenCenterUUID failed", e);
             }
         }
 

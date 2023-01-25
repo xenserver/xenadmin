@@ -95,7 +95,8 @@ namespace XenAPI
             bool client_certificate_auth_enabled,
             string client_certificate_auth_name,
             string repository_proxy_url,
-            string repository_proxy_username)
+            string repository_proxy_username,
+            bool migration_compression)
         {
             this.uuid = uuid;
             this.name_label = name_label;
@@ -141,6 +142,7 @@ namespace XenAPI
             this.client_certificate_auth_name = client_certificate_auth_name;
             this.repository_proxy_url = repository_proxy_url;
             this.repository_proxy_username = repository_proxy_username;
+            this.migration_compression = migration_compression;
         }
 
         /// <summary>
@@ -216,6 +218,7 @@ namespace XenAPI
             client_certificate_auth_name = record.client_certificate_auth_name;
             repository_proxy_url = record.repository_proxy_url;
             repository_proxy_username = record.repository_proxy_username;
+            migration_compression = record.migration_compression;
         }
 
         internal void UpdateFrom(Proxy_Pool proxy)
@@ -230,13 +233,13 @@ namespace XenAPI
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
             ha_enabled = (bool)proxy.ha_enabled;
             ha_configuration = proxy.ha_configuration == null ? null : Maps.convert_from_proxy_string_string(proxy.ha_configuration);
-            ha_statefiles = proxy.ha_statefiles == null ? new string[] {} : (string[])proxy.ha_statefiles;
+            ha_statefiles = proxy.ha_statefiles == null ? new string[] {} : (string [])proxy.ha_statefiles;
             ha_host_failures_to_tolerate = proxy.ha_host_failures_to_tolerate == null ? 0 : long.Parse(proxy.ha_host_failures_to_tolerate);
             ha_plan_exists_for = proxy.ha_plan_exists_for == null ? 0 : long.Parse(proxy.ha_plan_exists_for);
             ha_allow_overcommit = (bool)proxy.ha_allow_overcommit;
             ha_overcommitted = (bool)proxy.ha_overcommitted;
             blobs = proxy.blobs == null ? null : Maps.convert_from_proxy_string_XenRefBlob(proxy.blobs);
-            tags = proxy.tags == null ? new string[] {} : (string[])proxy.tags;
+            tags = proxy.tags == null ? new string[] {} : (string [])proxy.tags;
             gui_config = proxy.gui_config == null ? null : Maps.convert_from_proxy_string_string(proxy.gui_config);
             health_check_config = proxy.health_check_config == null ? null : Maps.convert_from_proxy_string_string(proxy.health_check_config);
             wlb_url = proxy.wlb_url == null ? null : proxy.wlb_url;
@@ -264,6 +267,7 @@ namespace XenAPI
             client_certificate_auth_name = proxy.client_certificate_auth_name == null ? null : proxy.client_certificate_auth_name;
             repository_proxy_url = proxy.repository_proxy_url == null ? null : proxy.repository_proxy_url;
             repository_proxy_username = proxy.repository_proxy_username == null ? null : proxy.repository_proxy_username;
+            migration_compression = (bool)proxy.migration_compression;
         }
 
         /// <summary>
@@ -362,6 +366,8 @@ namespace XenAPI
                 repository_proxy_url = Marshalling.ParseString(table, "repository_proxy_url");
             if (table.ContainsKey("repository_proxy_username"))
                 repository_proxy_username = Marshalling.ParseString(table, "repository_proxy_username");
+            if (table.ContainsKey("migration_compression"))
+                migration_compression = Marshalling.ParseBool(table, "migration_compression");
         }
 
         public Proxy_Pool ToProxy()
@@ -411,6 +417,7 @@ namespace XenAPI
             result_.client_certificate_auth_name = client_certificate_auth_name ?? "";
             result_.repository_proxy_url = repository_proxy_url ?? "";
             result_.repository_proxy_username = repository_proxy_username ?? "";
+            result_.migration_compression = migration_compression;
             return result_;
         }
 
@@ -425,48 +432,49 @@ namespace XenAPI
                 return false;
 
             return Helper.AreEqual2(this._uuid, other._uuid) &&
-                Helper.AreEqual2(this._name_label, other._name_label) &&
-                Helper.AreEqual2(this._name_description, other._name_description) &&
-                Helper.AreEqual2(this._master, other._master) &&
-                Helper.AreEqual2(this._default_SR, other._default_SR) &&
-                Helper.AreEqual2(this._suspend_image_SR, other._suspend_image_SR) &&
-                Helper.AreEqual2(this._crash_dump_SR, other._crash_dump_SR) &&
-                Helper.AreEqual2(this._other_config, other._other_config) &&
-                Helper.AreEqual2(this._ha_enabled, other._ha_enabled) &&
-                Helper.AreEqual2(this._ha_configuration, other._ha_configuration) &&
-                Helper.AreEqual2(this._ha_statefiles, other._ha_statefiles) &&
-                Helper.AreEqual2(this._ha_host_failures_to_tolerate, other._ha_host_failures_to_tolerate) &&
-                Helper.AreEqual2(this._ha_plan_exists_for, other._ha_plan_exists_for) &&
-                Helper.AreEqual2(this._ha_allow_overcommit, other._ha_allow_overcommit) &&
-                Helper.AreEqual2(this._ha_overcommitted, other._ha_overcommitted) &&
-                Helper.AreEqual2(this._blobs, other._blobs) &&
-                Helper.AreEqual2(this._tags, other._tags) &&
-                Helper.AreEqual2(this._gui_config, other._gui_config) &&
-                Helper.AreEqual2(this._health_check_config, other._health_check_config) &&
-                Helper.AreEqual2(this._wlb_url, other._wlb_url) &&
-                Helper.AreEqual2(this._wlb_username, other._wlb_username) &&
-                Helper.AreEqual2(this._wlb_enabled, other._wlb_enabled) &&
-                Helper.AreEqual2(this._wlb_verify_cert, other._wlb_verify_cert) &&
-                Helper.AreEqual2(this._redo_log_enabled, other._redo_log_enabled) &&
-                Helper.AreEqual2(this._redo_log_vdi, other._redo_log_vdi) &&
-                Helper.AreEqual2(this._vswitch_controller, other._vswitch_controller) &&
-                Helper.AreEqual2(this._restrictions, other._restrictions) &&
-                Helper.AreEqual2(this._metadata_VDIs, other._metadata_VDIs) &&
-                Helper.AreEqual2(this._ha_cluster_stack, other._ha_cluster_stack) &&
-                Helper.AreEqual2(this._allowed_operations, other._allowed_operations) &&
-                Helper.AreEqual2(this._guest_agent_config, other._guest_agent_config) &&
-                Helper.AreEqual2(this._cpu_info, other._cpu_info) &&
-                Helper.AreEqual2(this._policy_no_vendor_device, other._policy_no_vendor_device) &&
-                Helper.AreEqual2(this._live_patching_disabled, other._live_patching_disabled) &&
-                Helper.AreEqual2(this._igmp_snooping_enabled, other._igmp_snooping_enabled) &&
-                Helper.AreEqual2(this._uefi_certificates, other._uefi_certificates) &&
-                Helper.AreEqual2(this._is_psr_pending, other._is_psr_pending) &&
-                Helper.AreEqual2(this._tls_verification_enabled, other._tls_verification_enabled) &&
-                Helper.AreEqual2(this._repositories, other._repositories) &&
-                Helper.AreEqual2(this._client_certificate_auth_enabled, other._client_certificate_auth_enabled) &&
-                Helper.AreEqual2(this._client_certificate_auth_name, other._client_certificate_auth_name) &&
-                Helper.AreEqual2(this._repository_proxy_url, other._repository_proxy_url) &&
-                Helper.AreEqual2(this._repository_proxy_username, other._repository_proxy_username);
+                   Helper.AreEqual2(this._name_label, other._name_label) &&
+                   Helper.AreEqual2(this._name_description, other._name_description) &&
+                   Helper.AreEqual2(this._master, other._master) &&
+                   Helper.AreEqual2(this._default_SR, other._default_SR) &&
+                   Helper.AreEqual2(this._suspend_image_SR, other._suspend_image_SR) &&
+                   Helper.AreEqual2(this._crash_dump_SR, other._crash_dump_SR) &&
+                   Helper.AreEqual2(this._other_config, other._other_config) &&
+                   Helper.AreEqual2(this._ha_enabled, other._ha_enabled) &&
+                   Helper.AreEqual2(this._ha_configuration, other._ha_configuration) &&
+                   Helper.AreEqual2(this._ha_statefiles, other._ha_statefiles) &&
+                   Helper.AreEqual2(this._ha_host_failures_to_tolerate, other._ha_host_failures_to_tolerate) &&
+                   Helper.AreEqual2(this._ha_plan_exists_for, other._ha_plan_exists_for) &&
+                   Helper.AreEqual2(this._ha_allow_overcommit, other._ha_allow_overcommit) &&
+                   Helper.AreEqual2(this._ha_overcommitted, other._ha_overcommitted) &&
+                   Helper.AreEqual2(this._blobs, other._blobs) &&
+                   Helper.AreEqual2(this._tags, other._tags) &&
+                   Helper.AreEqual2(this._gui_config, other._gui_config) &&
+                   Helper.AreEqual2(this._health_check_config, other._health_check_config) &&
+                   Helper.AreEqual2(this._wlb_url, other._wlb_url) &&
+                   Helper.AreEqual2(this._wlb_username, other._wlb_username) &&
+                   Helper.AreEqual2(this._wlb_enabled, other._wlb_enabled) &&
+                   Helper.AreEqual2(this._wlb_verify_cert, other._wlb_verify_cert) &&
+                   Helper.AreEqual2(this._redo_log_enabled, other._redo_log_enabled) &&
+                   Helper.AreEqual2(this._redo_log_vdi, other._redo_log_vdi) &&
+                   Helper.AreEqual2(this._vswitch_controller, other._vswitch_controller) &&
+                   Helper.AreEqual2(this._restrictions, other._restrictions) &&
+                   Helper.AreEqual2(this._metadata_VDIs, other._metadata_VDIs) &&
+                   Helper.AreEqual2(this._ha_cluster_stack, other._ha_cluster_stack) &&
+                   Helper.AreEqual2(this._allowed_operations, other._allowed_operations) &&
+                   Helper.AreEqual2(this._guest_agent_config, other._guest_agent_config) &&
+                   Helper.AreEqual2(this._cpu_info, other._cpu_info) &&
+                   Helper.AreEqual2(this._policy_no_vendor_device, other._policy_no_vendor_device) &&
+                   Helper.AreEqual2(this._live_patching_disabled, other._live_patching_disabled) &&
+                   Helper.AreEqual2(this._igmp_snooping_enabled, other._igmp_snooping_enabled) &&
+                   Helper.AreEqual2(this._uefi_certificates, other._uefi_certificates) &&
+                   Helper.AreEqual2(this._is_psr_pending, other._is_psr_pending) &&
+                   Helper.AreEqual2(this._tls_verification_enabled, other._tls_verification_enabled) &&
+                   Helper.AreEqual2(this._repositories, other._repositories) &&
+                   Helper.AreEqual2(this._client_certificate_auth_enabled, other._client_certificate_auth_enabled) &&
+                   Helper.AreEqual2(this._client_certificate_auth_name, other._client_certificate_auth_name) &&
+                   Helper.AreEqual2(this._repository_proxy_url, other._repository_proxy_url) &&
+                   Helper.AreEqual2(this._repository_proxy_username, other._repository_proxy_username) &&
+                   Helper.AreEqual2(this._migration_compression, other._migration_compression);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Pool server)
@@ -538,6 +546,12 @@ namespace XenAPI
                 {
                     Pool.set_is_psr_pending(session, opaqueRef, _is_psr_pending);
                 }
+
+                if (!Helper.AreEqual2(_migration_compression, server._migration_compression))
+                {
+                    Pool.set_migration_compression(session, opaqueRef, _migration_compression);
+                }
+
                 if (!Helper.AreEqual2(_uefi_certificates, server._uefi_certificates))
                 {
                     Pool.set_uefi_certificates(session, opaqueRef, _uefi_certificates);
@@ -726,7 +740,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.pool_get_ha_statefiles(session.opaque_ref, _pool);
             else
-                return (string[])session.XmlRpcProxy.pool_get_ha_statefiles(session.opaque_ref, _pool ?? "").parse();
+                return (string [])session.XmlRpcProxy.pool_get_ha_statefiles(session.opaque_ref, _pool ?? "").parse();
         }
 
         /// <summary>
@@ -810,7 +824,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.pool_get_tags(session.opaque_ref, _pool);
             else
-                return (string[])session.XmlRpcProxy.pool_get_tags(session.opaque_ref, _pool ?? "").parse();
+                return (string [])session.XmlRpcProxy.pool_get_tags(session.opaque_ref, _pool ?? "").parse();
         }
 
         /// <summary>
@@ -1196,6 +1210,17 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Get the migration_compression field of the given pool.
+        /// Experimental. First published in 22.33.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        public static bool get_migration_compression(Session session, string _pool)
+        {
+            return session.JsonRpcClient.pool_get_migration_compression(session.opaque_ref, _pool);
+        }
+
+        /// <summary>
         /// Set the name_label field of the given pool.
         /// First published in XenServer 4.0.
         /// </summary>
@@ -1546,14 +1571,26 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Instruct host to join a new pool
-        /// First published in XenServer 4.0.
+        /// Set the migration_compression field of the given pool.
+        /// Experimental. First published in 22.33.0.
         /// </summary>
         /// <param name="session">The session</param>
-        /// <param name="_master_address">The hostname of the master of the pool to join</param>
-        /// <param name="_master_username">The username of the master (for initial authentication)</param>
-        /// <param name="_master_password">The password for the master (for initial authentication)</param>
-        public static void join(Session session, string _master_address, string _master_username, string _master_password)
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        /// <param name="_migration_compression">New value to set</param>
+        public static void set_migration_compression(Session session, string _pool, bool _migration_compression)
+        {
+            session.JsonRpcClient.pool_set_migration_compression(session.opaque_ref, _pool, _migration_compression);
+        }
+
+        /// <summary>
+    /// Instruct host to join a new pool
+    /// First published in XenServer 4.0.
+    /// </summary>
+    /// <param name="session">The session</param>
+    /// <param name="_master_address">The hostname of the master of the pool to join</param>
+    /// <param name="_master_username">The username of the master (for initial authentication)</param>
+    /// <param name="_master_password">The password for the master (for initial authentication)</param>
+    public static void join(Session session, string _master_address, string _master_username, string _master_password)
         {
             if (session.JsonRpcClient != null)
                 session.JsonRpcClient.pool_join(session.opaque_ref, _master_address, _master_username, _master_password);
@@ -2356,7 +2393,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.pool_certificate_list(session.opaque_ref);
             else
-                return (string[])session.XmlRpcProxy.pool_certificate_list(session.opaque_ref).parse();
+                return (string [])session.XmlRpcProxy.pool_certificate_list(session.opaque_ref).parse();
         }
 
         /// <summary>
@@ -2500,7 +2537,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.pool_crl_list(session.opaque_ref);
             else
-                return (string[])session.XmlRpcProxy.pool_crl_list(session.opaque_ref).parse();
+                return (string [])session.XmlRpcProxy.pool_crl_list(session.opaque_ref).parse();
         }
 
         /// <summary>
@@ -4104,5 +4141,24 @@ namespace XenAPI
             }
         }
         private string _repository_proxy_username = "";
+
+        /// <summary>
+        /// Default behaviour during migration, True if stream compression should be used
+        /// Experimental. First published in 22.33.0.
+        /// </summary>
+        public virtual bool migration_compression
+        {
+            get { return _migration_compression; }
+            set
+            {
+                if (!Helper.AreEqual(value, _migration_compression))
+                {
+                    _migration_compression = value;
+                    NotifyPropertyChanged("migration_compression");
+                }
+            }
+        }
+
+        private bool _migration_compression = false;
     }
 }

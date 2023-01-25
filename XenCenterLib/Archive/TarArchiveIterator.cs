@@ -37,23 +37,24 @@ using XenCenterLib.Compression;
 namespace XenCenterLib.Archive
 {
 
-    public class SharpZipTarArchiveIterator : ArchiveIterator
+    public class TarArchiveIterator : ArchiveIterator
     {
         private TarInputStream tarStream;
         private CompressionStream compressionStream;
         private TarEntry tarEntry;
         private bool disposed;
 
-        public SharpZipTarArchiveIterator()
+        /// <summary>
+        /// Parameterless constructor needed by tests
+        /// </summary>
+        public TarArchiveIterator()
         {
         }
 
-        public SharpZipTarArchiveIterator(Stream compressedTarFile, CompressionFactory.Type compressionType)
+        public TarArchiveIterator(Stream compressedTarFile, CompressionFactory.Type compressionType)
         {
             if (compressionType == CompressionFactory.Type.Gz)
                 compressionStream = CompressionFactory.Reader(CompressionFactory.Type.Gz, compressedTarFile);
-            else if (compressionType == CompressionFactory.Type.Bz2)
-                compressionStream = CompressionFactory.Reader(CompressionFactory.Type.Bz2, compressedTarFile);
             else
                 throw new NotSupportedException($"Type {compressionType} is not supported by ArchiveIterator");
 
@@ -61,7 +62,7 @@ namespace XenCenterLib.Archive
             disposed = false;
         }
 
-        public SharpZipTarArchiveIterator(Stream tarFile)
+        public TarArchiveIterator(Stream tarFile)
         {
             tarStream = new TarInputStream(tarFile);
             disposed = false;
@@ -73,7 +74,7 @@ namespace XenCenterLib.Archive
             disposed = false;
         }
 
-        ~SharpZipTarArchiveIterator()
+        ~TarArchiveIterator()
         {
             Dispose();
         }

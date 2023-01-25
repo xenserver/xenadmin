@@ -429,7 +429,12 @@ namespace XenAdmin.TabPages
             {
                 buttonRescan.Enabled = false;
             }
-            else if (HelpersGUI.BeingScanned(sr))
+            else if (sr.IsDetached())
+            {
+                buttonRescan.Enabled = false;
+                toolTipContainerRescan.SetToolTip(Messages.SR_DETACHED);
+            }
+            else if (HelpersGUI.BeingScanned(sr, out _))
             {
                 buttonRescan.Enabled = false;
                 toolTipContainerRescan.SetToolTip(Messages.SCAN_IN_PROGRESS_TOOLTIP);

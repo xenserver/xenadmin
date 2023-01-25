@@ -29,6 +29,7 @@
  * SUCH DAMAGE.
  */
 
+using System;
 using System.Collections.Generic;
 using XenAdmin.Actions.VMActions;
 using XenAPI;
@@ -49,31 +50,18 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         #region XenTabPage overrides
 
-        public override string Text
-        {
-            get { return Messages.NEWVMWIZARD_HOMESERVERPAGE_NAME; }
-        }
+        public override string Text => Messages.NEWVMWIZARD_HOMESERVERPAGE_NAME;
 
-        public override string PageTitle
-        {
-            get { return Messages.NEWVMWIZARD_HOMESERVERPAGE_TITLE; }
-        }
+        public override string PageTitle => Messages.NEWVMWIZARD_HOMESERVERPAGE_TITLE;
 
-        public override string HelpID
-        {
-            get { return "HomeServer"; }
-        }
+        public override string HelpID => "HomeServer";
 
-        public override List<KeyValuePair<string, string>> PageSummary
-        {
-            get
+        public override List<KeyValuePair<string, string>> PageSummary =>
+            new List<KeyValuePair<string, string>>
             {
-                List<KeyValuePair<string, string>> sum = new List<KeyValuePair<string, string>>();
-                sum.Add(new KeyValuePair<string, string>(Messages.NEWVMWIZARD_HOMESERVERPAGE_HOMESERVER,
-                                                         Affinity != null ? Affinity.Name() : Messages.NEWVMWIZARD_HOMESERVER_NONE));
-                return sum;
-            }
-        }
+                new KeyValuePair<string, string>(Messages.NEWVMWIZARD_HOMESERVERPAGE_HOMESERVER,
+                    Affinity != null ? Affinity.Name() : Messages.NEWVMWIZARD_HOMESERVER_NONE)
+            };
 
         public override bool EnableNext()
         {
@@ -122,17 +110,16 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         #region Accessors
 
-        public Host SelectedHomeServer { get { return affinityPicker1.SelectedAffinity; } }
-
-        public Host Affinity { private get; set; }
+        public Host Affinity { get; set; }
         public VM SelectedTemplate { private get; set; }
         public InstallMethod SelectedInstallMethod { private get; set; }
         public VDI SelectedCD { private get; set; }
 
         #endregion
 
-        private void affinityPicker1_SelectedAffinityChanged(object sender, System.EventArgs e)
+        private void affinityPicker1_SelectedAffinityChanged()
         {
+            Affinity = affinityPicker1.SelectedAffinity;
             OnPageUpdated();
         }
     }

@@ -37,27 +37,6 @@ using XenAPI;
 
 namespace XenAdmin.Controls
 {
-    public class SrPickerLunPerVDIItem : SrPickerVmItem
-    {
-        public SrPickerLunPerVDIItem(SR sr, Host aff, VDI[] vdis)
-            : base(sr, aff, vdis)
-        {
-        }
-
-        protected override bool CanBeEnabled
-        {
-            get
-            {
-                if(TheSR.HBALunPerVDI())
-                    return !TheSR.IsBroken(false) && TheSR.CanBeSeenFrom(Affinity);
-                return base.CanBeEnabled;
-            }
-        }
-
-        protected override bool UnsupportedSR => false;
-    }
-
-
     public class SrPickerMigrateItem : SrPickerItem
     {
         public SrPickerMigrateItem(SR sr, Host aff, VDI[] vdis)
@@ -65,76 +44,47 @@ namespace XenAdmin.Controls
         {
         }
 
-        /// <summary>
-        /// We can move VDIs to a local SR only if the VDI is attached to VMs
-        /// that have a home server that can see the SR
-        /// </summary>
-        private static bool HomeHostCanSeeTargetSr(VDI vdi, SR targetSr)
+        protected override bool CanBeEnabled(out string cannotEnableReason)
         {
-            var vms = vdi.GetVMs();
-            var homeHosts = (from VM vm in vms
-                let host = vm.Home()
-                where host != null
-                select host).ToList();
+            if (IsCurrentLocation(out cannotEnableReason))
+                return false;
 
-            return homeHosts.Count > 0 && homeHosts.All(targetSr.CanBeSeenFrom);
-        }
-
-        protected override string DisabledReason
-        {
-            get
+            if (TheSR.IsLocalSR())
             {
-                if (ExistingVDILocation())
-                    return Messages.CURRENT_LOCATION;
-
-                if (TheSR.IsLocalSR())
+                foreach (var vdi in ExistingVDIs)
                 {
-                    foreach (var vdi in existingVDIs)
-                    {
-                        var homeHosts = new List<Host>();
-                        var vms = vdi.GetVMs();
-                        foreach (var vm in vms)
-                        {
-                            var homeHost = vm.Home();
-                            if (homeHost != null)
-                            {
-                                homeHosts.Add(homeHost);
+                    var homeHosts = new List<Host>();
 
-                                if (!TheSR.CanBeSeenFrom(homeHost))
-                                    return vm.power_state == vm_power_state.Running
-                                        ? Messages.SRPICKER_ERROR_LOCAL_SR_MUST_BE_RESIDENT_HOSTS
-                                        : string.Format(Messages.SR_CANNOT_BE_SEEN, Helpers.GetName(homeHost));
+                    var vms = vdi.GetVMs();
+                    foreach (var vm in vms)
+                    {
+                        var homeHost = vm.Home();
+                        if (homeHost != null)
+                        {
+                            homeHosts.Add(homeHost);
+
+                            if (!TheSR.CanBeSeenFrom(homeHost))
+                            {
+                                cannotEnableReason = vm.power_state == vm_power_state.Running
+                                    ? Messages.SRPICKER_ERROR_LOCAL_SR_MUST_BE_RESIDENT_HOSTS
+                                    : string.Format(Messages.SR_CANNOT_BE_SEEN, Helpers.GetName(homeHost));
+                                return false;
                             }
                         }
+                    }
 
-                        if (homeHosts.Count == 0)
-                            return Messages.SR_IS_LOCAL;
+                    if (homeHosts.Count == 0)
+                    {
+                        cannotEnableReason = Messages.SR_IS_LOCAL;
+                        return false;
                     }
                 }
-
-                if (!TheSR.CanBeSeenFrom(Affinity))
-                    return TheSR.Connection != null
-                        ? string.Format(Messages.SR_CANNOT_BE_SEEN, Affinity == null ? Helpers.GetName(TheSR.Connection) : Helpers.GetName(Affinity))
-                        : Messages.SR_DETACHED;
-
-                if (!TheSR.SupportsStorageMigration())
-                    return Messages.UNSUPPORTED_SR_TYPE;
-
-                return base.DisabledReason;
             }
-        }
 
-        protected override bool CanBeEnabled
-        {
-            get
-            {
-                return existingVDIs.Length > 0 &&
-                       !ExistingVDILocation() &&
-                       (!TheSR.IsLocalSR() || existingVDIs.All(v => HomeHostCanSeeTargetSr(v, TheSR))) &&
-                       TheSR.SupportsVdiCreate() &&
-                       !TheSR.IsDetached() && TheSR.VdiCreationCanProceed(DiskSize) &&
-                       TheSR.SupportsStorageMigration();
-            }
+            return SupportsStorageMigration(out cannotEnableReason) &&
+                   SupportsVdiCreate(out cannotEnableReason) &&
+                   !IsDetached(out cannotEnableReason) &&
+                   TheSR.CanFitDisks(out cannotEnableReason, ExistingVDIs);
         }
     }
 
@@ -146,19 +96,11 @@ namespace XenAdmin.Controls
         {
         }
 
-        protected override bool CanBeEnabled =>
-            !TheSR.IsDetached() && TheSR.SupportsVdiCreate() &&
-            TheSR.VdiCreationCanProceed(DiskSize);
-
-        protected override string DisabledReason
-        {   
-	        get 
-	        {
-                if (TheSR.IsDetached())
-                    return Messages.SR_DETACHED;
-                
-                return base.DisabledReason;
-	        }
+        protected override bool CanBeEnabled(out string cannotEnableReason)
+        {
+            return !IsDetached(out cannotEnableReason) &&
+                   SupportsVdiCreate(out cannotEnableReason) &&
+                   TheSR.CanFitDisks(out cannotEnableReason, ExistingVDIs);
         }
     }
 
@@ -170,20 +112,12 @@ namespace XenAdmin.Controls
         {
         }
 
-        protected override bool CanBeEnabled =>
-            !TheSR.IsDetached() && !ExistingVDILocation() &&
-            TheSR.SupportsVdiCreate() && TheSR.VdiCreationCanProceed(DiskSize);
-
-        protected override string DisabledReason
-        {   
-            get
-            {
-                if (TheSR.IsDetached())
-                    return Messages.SR_DETACHED;
-                if (ExistingVDILocation())
-                    return Messages.CURRENT_LOCATION;
-                return base.DisabledReason;
-            }
+        protected override bool CanBeEnabled(out string cannotEnableReason)
+        {
+            return !IsDetached(out cannotEnableReason) &&
+                   !IsCurrentLocation(out cannotEnableReason) &&
+                   SupportsVdiCreate(out cannotEnableReason) &&
+                   TheSR.CanFitDisks(out cannotEnableReason, ExistingVDIs);
         }
     }
 
@@ -195,17 +129,11 @@ namespace XenAdmin.Controls
         {
         }
 
-        protected override bool CanBeEnabled =>
-            TheSR.SupportsVdiCreate() && !TheSR.IsDetached() && TheSR.VdiCreationCanProceed(DiskSize);
-
-        protected override string DisabledReason
+        protected override bool CanBeEnabled(out string cannotEnableReason)
         {
-            get
-            {
-                if (TheSR.IsDetached())
-                    return Messages.SR_DETACHED;
-                return base.DisabledReason;
-            }
+            return SupportsVdiCreate(out cannotEnableReason) &&
+                   !IsDetached(out cannotEnableReason) &&
+                   TheSR.CanFitDisks(out cannotEnableReason, ExistingVDIs);
         }
     }
 
@@ -217,108 +145,199 @@ namespace XenAdmin.Controls
         {
         }
 
-        protected override bool CanBeEnabled =>
-            TheSR.CanBeSeenFrom(Affinity) &&
-            TheSR.SupportsVdiCreate() && !TheSR.IsBroken(false) && !TheSR.IsFull() &&
-            TheSR.VdiCreationCanProceed(DiskSize);
-
-        protected override string DisabledReason
+        protected override bool CanBeEnabled(out string cannotEnableReason)
         {
-            get
-            {
-                if (Affinity == null && !TheSR.shared)
-                    return Messages.SR_IS_LOCAL;
-                if (!TheSR.CanBeSeenFrom(Affinity))
-                    return TheSR.Connection != null
-                        ? string.Format(Messages.SR_CANNOT_BE_SEEN, Affinity == null ? Helpers.GetName(TheSR.Connection) : Helpers.GetName(Affinity))
-                        : Messages.SR_DETACHED;
-                return base.DisabledReason;
-            }
+            return CanBeSeenFromAffinity(out cannotEnableReason) &&
+                   SupportsVdiCreate(out cannotEnableReason) &&
+                   !IsBroken(out cannotEnableReason) &&
+                   TheSR.CanFitDisks(out cannotEnableReason, ExistingVDIs);
         }
+    }
+
+
+    public class SrPickerLunPerVDIItem : SrPickerVmItem
+    {
+        public SrPickerLunPerVDIItem(SR sr, Host aff, VDI[] vdis)
+            : base(sr, aff, vdis)
+        {
+        }
+
+        protected override bool CanBeEnabled(out string cannotEnableReason)
+        {
+            if (TheSR.HBALunPerVDI())
+                return CanBeSeenFromAffinity(out cannotEnableReason) &&
+                       !IsBroken(out cannotEnableReason);
+
+            return base.CanBeEnabled(out cannotEnableReason);
+        }
+
+        protected override bool SupportsCurrentOperation => true;
     }
 
 
     public abstract class SrPickerItem : CustomTreeNode, IComparable<SrPickerItem>
     {
+        private bool _scanning;
         public SR TheSR { get; }
-        public bool Show { get; private set; }
+        public bool Show { get; private set; } = true;
         protected readonly Host Affinity;
-        protected long DiskSize { get; private set; }
-        protected readonly VDI[] existingVDIs;
+        protected VDI[] ExistingVDIs { get; private set; }
+
+        public event Action<SrPickerItem> ItemUpdated;
 
         protected SrPickerItem(SR sr, Host aff, VDI[] vdis)
         {
-            existingVDIs = vdis ?? new VDI[0];
+            ExistingVDIs = vdis ?? Array.Empty<VDI>();
             TheSR = sr;
             Affinity = aff;
-            DiskSize = existingVDIs.Sum(vdi =>
-                sr.GetSRType(true) == SR.SRTypes.gfs2 ? vdi.physical_utilisation : vdi.virtual_size);
             Update();
         }
 
-        protected virtual bool UnsupportedSR => TheSR.HBALunPerVDI();
-
-        protected abstract bool CanBeEnabled { get; }
-
-        protected virtual void SetImage()
+        public bool Scanning
         {
-            Image = Images.GetImage16For(TheSR);
+            get => _scanning;
+            set
+            {
+                _scanning = value;
+                Update();
+            }
         }
 
-        public void UpdateDiskSize(long diskSize)
+        protected virtual bool SupportsCurrentOperation => !TheSR.HBALunPerVDI();
+
+        protected abstract bool CanBeEnabled(out string cannotEnableReason);
+
+        public void UpdateDisks(params VDI[] disks)
         {
-            DiskSize = diskSize;
+            ExistingVDIs = disks;
             Update();
         }
 
-        private void Update()
+        public void Update()
         {
             Text = TheSR.Name();
-            SetImage();
+            Image = Images.GetImage16For(TheSR);
 
-            if (UnsupportedSR || !TheSR.SupportsVdiCreate() ||
+            if (!SupportsCurrentOperation || !SupportsVdiCreate(out _) ||
                 !TheSR.Show(Properties.Settings.Default.ShowHiddenVMs))
+            {
+                Show = false;
                 return;
+            }
 
-            if (CanBeEnabled)
+            if (Scanning)
+            {
+                Description = Messages.SR_REFRESH_ACTION_TITLE_GENERIC;
+                Enabled = false;
+            }
+            else if (CanBeEnabled(out var cannotEnableReason))
             {
                 Description = string.Format(Messages.SRPICKER_DISK_FREE, Util.DiskSizeString(TheSR.FreeSpace(), 2),
                     Util.DiskSizeString(TheSR.physical_size, 2));
                 Enabled = true;
-                Show = true;
             }
             else
             {
-                Description = DisabledReason;
+                Description = cannotEnableReason;
                 Enabled = false;
-                Show = true;
             }
+
+            ItemUpdated?.Invoke(this);
         }
 
-        protected bool ExistingVDILocation()
+        protected bool IsCurrentLocation(out string cannotEnableReason)
         {
-            return existingVDIs.Length > 0 && existingVDIs.All(vdi => vdi.SR.opaque_ref == TheSR.opaque_ref);
-        }
-
-        protected virtual string DisabledReason
-        {
-            get
+            if (ExistingVDIs.Length > 0 && ExistingVDIs.All(vdi => vdi.SR.opaque_ref == TheSR.opaque_ref))
             {
-                if (TheSR.IsBroken(false))
-                    return Messages.SR_IS_BROKEN;
-                if (TheSR.IsFull())
-                    return Messages.SRPICKER_SR_FULL;
-                if (DiskSize > TheSR.physical_size)
-                    return string.Format(Messages.SR_PICKER_DISK_TOO_BIG, Util.DiskSizeString(DiskSize, 2),
-                                         Util.DiskSizeString(TheSR.physical_size, 2));
-                if (DiskSize > TheSR.FreeSpace())
-                    return string.Format(Messages.SR_PICKER_INSUFFICIENT_SPACE, Util.DiskSizeString(DiskSize, 2),
-                                         Util.DiskSizeString(TheSR.FreeSpace(), 2));
-                if (DiskSize > SR.DISK_MAX_SIZE)
-                    return string.Format(Messages.SR_DISKSIZE_EXCEEDS_DISK_MAX_SIZE,
-                        Util.DiskSizeString(SR.DISK_MAX_SIZE, 0));
-                return "";
+                cannotEnableReason = Messages.CURRENT_LOCATION;
+                return true;
             }
+
+            cannotEnableReason = string.Empty;
+            return false;
+        }
+
+        protected bool IsBroken(out string cannotEnableReason)
+        {
+            if (TheSR.IsBroken())
+            {
+                cannotEnableReason = Messages.SR_IS_BROKEN;
+                return true;
+            }
+
+            cannotEnableReason = string.Empty;
+            return false;
+        }
+
+        protected bool IsDetached(out string cannotEnableReason)
+        {
+            if (TheSR.IsDetached())
+            {
+                cannotEnableReason = Messages.SR_DETACHED;
+                return true;
+            }
+
+            cannotEnableReason = string.Empty;
+            return false;
+        }
+
+        protected bool SupportsVdiCreate(out string cannotEnableReason)
+        {
+            if (TheSR.SupportsVdiCreate())
+            {
+                cannotEnableReason = string.Empty;
+                return true;
+            }
+
+            cannotEnableReason = Messages.STORAGE_READ_ONLY;
+            return false;
+        }
+
+        protected bool SupportsStorageMigration(out string cannotEnableReason)
+        {
+            if (TheSR.SupportsStorageMigration())
+            {
+                cannotEnableReason = string.Empty;
+                return true;
+            }
+
+            cannotEnableReason = Messages.UNSUPPORTED_SR_TYPE;
+            return false;
+        }
+
+        protected bool CanBeSeenFromAffinity(out string cannotEnableReason)
+        {
+            if (Affinity == null)
+            {
+                if (TheSR.shared)
+                {
+                    cannotEnableReason = string.Empty;
+                    return true;
+                }
+
+                cannotEnableReason = Messages.SR_IS_LOCAL;
+                return false;
+            }
+
+            foreach (var pbdRef in TheSR.PBDs)
+            {
+                var pbd = TheSR.Connection.Resolve(pbdRef);
+                    
+                if (pbd.host.opaque_ref == Affinity.opaque_ref)
+                {
+                    if (pbd.currently_attached)
+                    {
+                        cannotEnableReason = string.Empty;
+                        return true;
+                    }
+
+                    cannotEnableReason = string.Format(Messages.SR_DETACHED_FROM_HOST, Helpers.GetName(Affinity));
+                    return false;
+                }
+            }
+
+            cannotEnableReason = string.Format(Messages.SR_CANNOT_BE_SEEN, Helpers.GetName(Affinity));
+            return false;
         }
 
         public int CompareTo(SrPickerItem other)

@@ -129,7 +129,7 @@
         </xs:attribute>
         <xs:attribute name="compression" type="xs:string" default="" use="optional">
             <xs:annotation>
-                <xs:documentation>Compression type (gzip, bzip2, or none if empty or not
+                <xs:documentation>Compression type (gzip, or none if empty or not
                     specified)</xs:documentation>
             </xs:annotation>
         </xs:attribute>

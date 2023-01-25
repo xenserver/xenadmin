@@ -43,7 +43,6 @@
                     <File Id="HealthCheck_CookComputing.XmlRpcV2.dll" Name="CookComputing.XmlRpcV2.dll" Source="$(env.RepoRoot)\XenServerHealthCheck\bin\Release\CookComputing.XmlRpcV2.dll" />
                     <File Id="HealthCheck_NewtonsoftJsonDLL" Source="$(env.RepoRoot)\XenServerHealthCheck\bin\Release\Newtonsoft.Json.CH.dll" />
                     <File Id="HealthCheck_ICSharpCode.SharpZipLib.dll" Name="ICSharpCode.SharpZipLib.dll" Source="$(env.RepoRoot)\XenServerHealthCheck\bin\Release\ICSharpCode.SharpZipLib.dll" />
-                    <File Id="HealthCheck_Ionic.Zip.dll" Name="Ionic.Zip.dll" Source="$(env.RepoRoot)\XenServerHealthCheck\bin\Release\Ionic.Zip.dll" />
                     <File Id="HealthCheck_log4net.dll" Name="log4net.dll" Source="$(env.RepoRoot)\XenServerHealthCheck\bin\Release\log4net.dll" />
                     <File Id="HealthCheck_CoreUtilsLib.dll" Name="CoreUtilsLib.dll" Source="$(env.RepoRoot)\XenServerHealthCheck\bin\Release\CoreUtilsLib.dll" />
                     <File Id="HealthCheck_XenModel.dll" Name="XenModel.dll" Source="$(env.RepoRoot)\XenServerHealthCheck\bin\Release\XenModel.dll" />

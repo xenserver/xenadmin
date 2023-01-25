@@ -71,11 +71,9 @@ namespace XenOvf
 
                     if (file.compression.ToLower() == "gzip")
                         method = CompressionFactory.Type.Gz;
-                    else if (file.compression.ToLower() == "bzip2")
-                        method = CompressionFactory.Type.Bz2;
                     else
                     {
-                        log.ErrorFormat("File {0} uses unsupported method {1}. Must be Gzip or BZip2. Skipping.",
+                        log.ErrorFormat("File {0} uses unsupported method {1}. Must be Gzip. Skipping.",
                             file.href, file.compression);
                         continue;
                     }

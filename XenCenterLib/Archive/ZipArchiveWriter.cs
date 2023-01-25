@@ -31,72 +31,65 @@
 
 using System;
 using System.IO;
-using System.Text;
-using Ionic.Zip;
+using System.IO.Compression;
+
 
 namespace XenCenterLib.Archive
 {
-    class DotNetZipZipWriter : ArchiveWriter
+    internal class ZipArchiveWriter : ArchiveWriter
     {
-        private ZipOutputStream zip;
-        private bool disposed;
+        private ZipArchive _zipArchive;
+        private bool _disposed;
 
-        public DotNetZipZipWriter(Stream outputStream)
+        /// <summary>
+        /// Parameterless constructor needed by tests
+        /// </summary>
+        public ZipArchiveWriter()
         {
-            zip = new ZipOutputStream( outputStream ) {EnableZip64 = Zip64Option.AsNecessary};
-            disposed = false;
         }
 
-        public DotNetZipZipWriter()
+        public ZipArchiveWriter(Stream outputStream)
         {
+            _zipArchive = new ZipArchive(outputStream, ZipArchiveMode.Create);
         }
 
         public override void SetBaseStream(Stream outputStream)
         {
-            zip = new ZipOutputStream(outputStream);
-            disposed = false;
+            _zipArchive = new ZipArchive(outputStream, ZipArchiveMode.Create);
+            _disposed = false;
         }
 
         public override void AddDirectory(string directoryName, DateTime modificationTime)
         {
-            StringBuilder sb = new StringBuilder(directoryName);
-
             //Need to add a trailing front-slash to add a directory
             if (!directoryName.EndsWith("/"))
-                sb.Append("/");
+                directoryName += "/";
 
-            ZipEntry entry = zip.PutNextEntry(sb.ToString());
-            entry.ModifiedTime = modificationTime;
+            var entry = _zipArchive.CreateEntry(directoryName);
+            entry.LastWriteTime = modificationTime;
         }
 
-        public override void Add(Stream filetoAdd, string fileName, DateTime modificationTime, Action cancellingDelegate)
+        public override void Add(Stream fileToAdd, string fileName, DateTime modificationTime, Action cancellingDelegate)
         {
-            ZipEntry entry = zip.PutNextEntry(fileName);
-            entry.ModifiedTime = modificationTime;
+            var entry = _zipArchive.CreateEntry(fileName);
+            entry.LastWriteTime = modificationTime;
 
             //You have to do this because if using a memory stream the pointer will be at the end it
             //it's just been read and this will cause nothing to be written out
-            filetoAdd.Position = 0;
+            fileToAdd.Position = 0;
 
-            StreamUtilities.BufferedStreamCopy( filetoAdd, zip );
-            zip.Flush();
+            using (var entryStream = entry.Open())
+                StreamUtilities.BufferedStreamCopy(fileToAdd, entryStream);
         }
 
         protected override void Dispose(bool disposing)
         {
-
-            if( !disposed )
+            if (disposing && !_disposed)
             {
-                if (disposing)
-                {
-                    if( zip != null )
-                    {
-                        zip.Flush();
-                        zip.Dispose();  
-                    }
-                    disposed = true;
-                }
+                _zipArchive?.Dispose();
+                _disposed = true;
             }
+
             base.Dispose(disposing);
         }
     }
