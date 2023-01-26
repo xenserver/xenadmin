@@ -76,18 +76,16 @@ namespace XenAdmin.Actions
     public class RemoveVMsFromPolicyAction : AsyncAction
     {
         private readonly List<XenRef<VM>> _selectedVMs;
-        private readonly VMSS _policy;
 
         public RemoveVMsFromPolicyAction(VMSS policy, List<XenRef<VM>> selectedVMs)
-            : base(policy.Connection, 
-            selectedVMs.Count == 1 ?
-            string.Format(Messages.REMOVE_VM_FROM_VMSS, policy.Connection.Resolve(selectedVMs[0]), policy.Name()) :
-            string.Format(Messages.REMOVE_VMS_FROM_VMSS, policy.Name()))
+            : base(policy.Connection, "")
         {
-            _policy = policy;
             _selectedVMs = selectedVMs;
             Pool = Helpers.GetPool(policy.Connection);
             ApiMethodsToRoleCheck.Add("VM.set_snapshot_schedule");
+            Title = selectedVMs.Count == 1
+                ? string.Format(Messages.REMOVE_VM_FROM_VMSS, policy.Connection.Resolve(selectedVMs[0]), policy.Name())
+                : string.Format(Messages.REMOVE_VMS_FROM_VMSS, policy.Name());
         }
 
         protected override void Run()

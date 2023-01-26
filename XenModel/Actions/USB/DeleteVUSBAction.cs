@@ -41,10 +41,15 @@ namespace XenAdmin.Actions
             : base(vusb.Connection, string.Format(Messages.ACTION_VUSB_DELETING, vusb.Name(), vm.Name()))
         {
             _vusb = vusb;
-            ApiMethodsToRoleCheck.AddRange(
-                "VUSB.get_allowed_operations",
-                "VUSB.async_unplug",
-                "VUSB.async_destroy");
+
+            if (_vusb != null && _vusb.currently_attached)
+            {
+                ApiMethodsToRoleCheck.AddRange(
+                    "VBD.get_allowed_operations",
+                    "VBD.async_unplug");
+            }
+
+            ApiMethodsToRoleCheck.Add("VUSB.async_destroy");
         }
 
         protected override void Run()

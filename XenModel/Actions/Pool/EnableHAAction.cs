@@ -57,10 +57,15 @@ namespace XenAdmin.Actions
             this.heartbeatSRs = heartbeatSRs.ToArray();
             this.failuresToTolerate = failuresToTolerate;
 
+            if (startupOptions != null)
+            {
+                ApiMethodsToRoleCheck.AddRange(
+                    "VM.set_ha_restart_priority",
+                    "VM.set_order",
+                    "VM.set_start_delay");
+            }
+
             ApiMethodsToRoleCheck.AddRange(
-                "VM.set_ha_restart_priority",
-                "VM.set_order",
-                "VM.set_start_delay",
                 "pool.set_ha_host_failures_to_tolerate",
                 "pool.async_enable_ha");
         }

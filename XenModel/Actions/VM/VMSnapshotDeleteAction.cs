@@ -29,35 +29,46 @@
  * SUCH DAMAGE.
  */
 
+using System.Collections.Generic;
+using System.Linq;
 using XenAdmin.Actions.VMActions;
 using XenAPI;
 
 
 namespace XenAdmin.Actions
 {
-    public class VMSnapshotDeleteAction : AsyncAction
+    public class VMSnapshotDeleteAction : VMDestroyAction
     {
-
-        private VM m_Snapshot;
         public VMSnapshotDeleteAction(VM snapshot)
-            : base(snapshot.Connection, string.Format(Messages.ACTION_VM_DELETE_SNAPSHOT_TITLE, snapshot.Name()))
+            : base(snapshot, GetDisksToDelete(snapshot), new List<VM>())
         {
-            VM = Connection.Resolve(snapshot.snapshot_of);
-            m_Snapshot = snapshot;
+            // the value of VM should be the snapshot and not the parent VM;
+            // first, because it makes sense to set VM to the actual object
+            // handled by the action; second and more important, because Run()
+            // calls base.Run() which would result to deleting the parent VM;
+            // note that the VM setter has already code that set AppliesTo to
+            // the parent VM for snapshots
+            VM = snapshot;
 
-            if (m_Snapshot.power_state == vm_power_state.Suspended)
+            Title = string.Format(Messages.ACTION_VM_DELETE_SNAPSHOT_TITLE, VM.Name());
+            Description = string.Format(Messages.ACTION_VM_DELETE_SNAPSHOT_TITLE, VM.Name());
+
+            if (VM.power_state == vm_power_state.Suspended)
                 ApiMethodsToRoleCheck.Add("VM.hard_shutdown");
+        }
+
+        private static List<VBD> GetDisksToDelete(VM snapshot)
+        {
+            return snapshot.Connection.ResolveAll(snapshot.VBDs).FindAll(x => x.GetIsOwner()).ToList();
         }
 
         protected override void Run()
         {
-            Description = string.Format(Messages.ACTION_VM_DELETE_SNAPSHOT_TITLE, m_Snapshot.Name());
-            if (m_Snapshot.power_state == vm_power_state.Suspended)
-            {
-                VM.hard_shutdown(Session, m_Snapshot.opaque_ref);
-            }
-            VMDestroyAction.DestroyVM(Session, m_Snapshot, true);
-            Description = string.Format(Messages.SNAPSHOT_DELETED, m_Snapshot.Name());
+            if (VM.power_state == vm_power_state.Suspended)
+                VM.hard_shutdown(Session, VM.opaque_ref);
+
+            base.Run();
+            Description = string.Format(Messages.SNAPSHOT_DELETED, VM.Name());
         }
     }
 }

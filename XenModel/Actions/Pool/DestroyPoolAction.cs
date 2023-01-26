@@ -38,7 +38,6 @@ namespace XenAdmin.Actions
         public DestroyPoolAction(Pool pool)
             : base(pool.Connection, string.Format(Messages.DESTROYING_POOL, pool.Name()))
         {
-            System.Diagnostics.Trace.Assert(pool != null);
             Pool = pool;
             Description = Messages.WAITING;
 

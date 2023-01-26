@@ -47,8 +47,14 @@ namespace XenAdmin.Actions
             m_VCPUs_at_startup = VCPUs_at_startup;
 
             if (VM.power_state == vm_power_state.Running)
-                ApiMethodsToRoleCheck.Add("VM.set_VCPUs_number_live");
-            ApiMethodsToRoleCheck.AddRange("VM.set_VCPUs_at_startup", "VM.set_VCPUs_max");
+            {
+                if (VM.VCPUs_at_startup <= m_VCPUs_at_startup)
+                    ApiMethodsToRoleCheck.Add("VM.set_VCPUs_number_live");
+            }
+            else
+            {
+                ApiMethodsToRoleCheck.AddRange("VM.set_VCPUs_at_startup", "VM.set_VCPUs_max");
+            }
         }
 
         protected override void Run()

@@ -68,10 +68,14 @@ namespace XenAdmin.Actions
                 }
             }
 
-            ApiMethodsToRoleCheck.AddRange(
-                "VBD.get_allowed_operations",
-                "VBD.async_unplug",
-                "VBD.async_destroy");
+            if (vbd != null && vbd.currently_attached)
+            {
+                ApiMethodsToRoleCheck.AddRange(
+                    "VBD.get_allowed_operations",
+                    "VBD.async_unplug");
+            }
+
+            ApiMethodsToRoleCheck.Add("VBD.async_destroy");
         }
 
         protected override void Run()

@@ -58,6 +58,8 @@ namespace XenAdmin.Actions.VMActions
                 vm.Name(),
                 vm.Home() == null ? Helpers.GetName(vm.Connection) : Helpers.GetName(vm.Home()));
 
+            Description = Messages.ACTION_VM_DESTROYING;
+
             ApiMethodsToRoleCheck.AddRange("VM.destroy", "VDI.destroy");
 
             if (_snapshotsToDelete.Any(s => s.power_state == vm_power_state.Suspended))
@@ -67,7 +69,6 @@ namespace XenAdmin.Actions.VMActions
 
         protected override void Run()
         {
-            Description = Messages.ACTION_VM_DESTROYING;
             DestroyVM(Session, VM, _disksToDelete, _snapshotsToDelete);
             Description = Messages.ACTION_VM_DESTROYED;
         }
