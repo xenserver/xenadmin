@@ -60,7 +60,7 @@ namespace XenAdmin.Actions
             bool wasEnabled = Host.enabled;
             this.Description = string.Format(Messages.ACTION_HOST_SHUTTING_DOWN, Helpers.GetName(Host));
 
-            MaybeReduceNtolBeforeOp(HostActionKind.Shutdown);
+            MaybeReduceNtolBeforeOp();
             ShutdownVMs(false);
             try
             {
