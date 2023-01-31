@@ -37,7 +37,7 @@ using XenAdmin.Model;
 
 namespace XenAdmin.Actions
 {
-    public abstract class DockerContainerLifetimeAction : PureAsyncAction
+    public abstract class DockerContainerLifetimeAction : AsyncAction
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -51,9 +51,8 @@ namespace XenAdmin.Actions
             this.endDescription = endDescription;
             this.dockerContainer = dockerContainer;
             this.action = action;
+            ApiMethodsToRoleCheck.Add("host.call_plugin");
         }
-
-        public static RbacMethodList StaticRBACDependencies = new RbacMethodList("Host.call_plugin");
 
         protected override void Run()
         {

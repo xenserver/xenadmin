@@ -37,7 +37,7 @@ using XenAdmin.Network;
 
 namespace XenAdmin.Actions
 {
-    public class DisableAdAction : PureAsyncAction
+    public class DisableAdAction : AsyncAction
     {
         public static readonly string KEY_USER = "user";
         public static readonly string KEY_PASS = "pass";
@@ -54,6 +54,8 @@ namespace XenAdmin.Actions
                 Pool = Helpers.GetPool(Connection);
             else
                 Host = Helpers.GetCoordinator(Connection);
+
+            ApiMethodsToRoleCheck.Add("pool.disable_external_auth");
         }
 
         protected override void Run()

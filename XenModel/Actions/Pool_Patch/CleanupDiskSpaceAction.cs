@@ -29,14 +29,13 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Collections.Generic;
 using XenAPI;
 
 
 namespace XenAdmin.Actions
 {
-    public class CleanupDiskSpaceAction : PureAsyncAction
+    public class CleanupDiskSpaceAction : AsyncAction
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -47,11 +46,12 @@ namespace XenAdmin.Actions
         {
             Host = host;
             this.excludedPatch = excludedPatch;
+            ApiMethodsToRoleCheck.Add("host.call_plugin");
         }
 
         protected override void Run()
         {
-            Description = String.Format(Messages.ACTION_CLEANUP_DISK_SPACE_DESCRIPTION, Host.Name());
+            Description = string.Format(Messages.ACTION_CLEANUP_DISK_SPACE_DESCRIPTION, Host.Name());
             try
             {
                 var args = new Dictionary<string, string>();
@@ -60,7 +60,7 @@ namespace XenAdmin.Actions
 
                 Result = Host.call_plugin(Session, Host.opaque_ref, "disk-space", "cleanup_disk_space", args);
                 if (Result.ToLower() == "true")
-                    Description = String.Format(Messages.ACTION_CLEANUP_DISK_SPACE_SUCCESS, Host.Name());
+                    Description = string.Format(Messages.ACTION_CLEANUP_DISK_SPACE_SUCCESS, Host.Name());
             }
             catch (Failure failure)
             {

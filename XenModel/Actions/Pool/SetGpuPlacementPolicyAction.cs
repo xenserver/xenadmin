@@ -33,7 +33,7 @@ using XenAPI;
 
 namespace XenAdmin.Actions
 {
-    public class SetGpuPlacementPolicyAction : PureAsyncAction
+    public class SetGpuPlacementPolicyAction : AsyncAction
     {
         private allocation_algorithm allocationAlgorithm;
 
@@ -42,6 +42,7 @@ namespace XenAdmin.Actions
             Messages.SET_GPU_PLACEMENT_POLICY_ACTION_DESCRIPTION, true)
         {
             this.allocationAlgorithm = allocationAlgorithm;
+            ApiMethodsToRoleCheck.Add("GPU_group.set_allocation_algorithm");
         }
 
         protected override void Run()

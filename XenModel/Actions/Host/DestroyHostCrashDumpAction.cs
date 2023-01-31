@@ -36,7 +36,7 @@ using XenAPI;
 
 namespace XenAdmin.Actions
 {
-    public class DestroyHostCrashDumpAction : PureAsyncAction
+    public class DestroyHostCrashDumpAction : AsyncAction
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -44,6 +44,7 @@ namespace XenAdmin.Actions
             : base(host.Connection, string.Format(Messages.HOST_REMOVING_CRASHDUMPS_TITLE, host.Name()))
         {
             Host = host;
+            ApiMethodsToRoleCheck.Add("Host_crashdump.destroy");
         }
 
         protected override void Run()

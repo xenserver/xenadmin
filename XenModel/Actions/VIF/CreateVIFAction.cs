@@ -36,7 +36,7 @@ namespace XenAdmin.Actions
 {
     public class CreateVIFAction : AsyncAction
     {
-        private VIF _vifDescriptor;
+        private readonly VIF _vifDescriptor;
 
         public CreateVIFAction(VM vm, VIF vifDescriptor, bool suppressHistory = false)
             : base(vm.Connection, string.Format(Messages.ACTION_VIF_CREATING_TITLE, vm.Name()), suppressHistory)
@@ -44,14 +44,11 @@ namespace XenAdmin.Actions
             _vifDescriptor = vifDescriptor;
             VM = vm;
 
-            foreach (var method in XmlRpcMethods)
-                ApiMethodsToRoleCheck.Add(method);
-        }
+            ApiMethodsToRoleCheck.Add("VIF.async_create");
 
-        /// <summary>
-        /// A List of XML RPC methods used by this class
-        /// </summary>
-        public static readonly string[] XmlRpcMethods = {"Async_VIF.create", "VIF.plug"};
+            if (VM.power_state == vm_power_state.Running)
+                ApiMethodsToRoleCheck.AddRange("VIF.get_allowed_operations", "VIF.plug");
+        }
 
         public bool RebootRequired { get; private set; }
 

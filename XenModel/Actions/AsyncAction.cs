@@ -30,8 +30,6 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Net;
 using System.Threading;
 using System.Xml;
 using XenAdmin.Core;
@@ -44,8 +42,6 @@ namespace XenAdmin.Actions
     public abstract class AsyncAction : CancellingAction
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
-        private readonly Func<List<Role>, IXenConnection, string, SudoElevationResult> getElevatedSession = XenAdminConfigManager.Provider.ElevatedSessionDelegate;
 
         private string _result;
 
@@ -438,7 +434,7 @@ namespace XenAdmin.Actions
             }
 
             log.Debug("Subject not authorized to complete action, showing sudo dialog");
-            var result = getElevatedSession(allowedRoles, Connection, Title);
+            var result = XenAdminConfigManager.Provider.ElevatedSessionDelegate(allowedRoles, Connection, Title);
             if (result == null)
             {
                 log.Debug("User cancelled sudo dialog, cancelling action");

@@ -38,19 +38,23 @@ using XenAPI;
 
 namespace XenAdmin.Actions
 {
-    public class CreateSriovAction : PureAsyncAction
+    public class CreateSriovAction : AsyncAction
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         XenAPI.Network newNetwork;
         private List<PIF> selectedPifs;
 
-        public CreateSriovAction(IXenConnection connection, XenAPI.Network newNetwork, List<XenAPI.PIF> pifs)
+        public CreateSriovAction(IXenConnection connection, XenAPI.Network newNetwork, List<PIF> pifs)
             : base(connection,
                 string.Format(Messages.NETWORK_ACTION_CREATING_NETWORK_TITLE, newNetwork.Name(), Helpers.GetName(connection)))
         {
             this.newNetwork = newNetwork;
-            this.selectedPifs = pifs;
+            selectedPifs = pifs;
+
+            ApiMethodsToRoleCheck.AddRange("Network.create", "Network_sriov.async_create");
+            //omitted Network.destroy as it's only called in case of an error
+            //and failure is inconsequential
         }
 
         protected override void Run()
@@ -62,7 +66,7 @@ namespace XenAdmin.Actions
 
             foreach (PIF thePif in selectedPifs)
             {
-                Host host = thePif.Connection.Resolve<XenAPI.Host>(thePif.host);
+                Host host = thePif.Connection.Resolve(thePif.host);
                 if (host == null)
                     continue;
 
@@ -96,9 +100,9 @@ namespace XenAdmin.Actions
                     lo += inc;
                 }
             }
-            catch(Exception)
+            catch (Exception)
             {
-                if(lo == 0)
+                if (lo == 0)
                     DestroyNetwork(networkRef);
                 throw;
             }

@@ -37,11 +37,11 @@ using XenAdmin.Core;
 
 namespace XenAdmin.Actions
 {
-    public class AssignVMsToPolicyAction : PureAsyncAction
+    public class AssignVMsToPolicyAction : AsyncAction
     {
 
-        private VMSS _policy;
-        private List<XenRef<VM>> _selectedVMs;
+        private readonly VMSS _policy;
+        private readonly List<XenRef<VM>> _selectedVMs;
 
         public AssignVMsToPolicyAction(VMSS policy, List<XenRef<VM>> selectedVMs, bool suppressHistory)
             : base(policy.Connection, Messages.ASSIGN_VMSS_POLICY_NOAMP, suppressHistory)
@@ -49,6 +49,7 @@ namespace XenAdmin.Actions
             _policy = policy;
             _selectedVMs = selectedVMs;
             Pool = Helpers.GetPool(policy.Connection);
+            ApiMethodsToRoleCheck.Add("VM.set_snapshot_schedule");
         }
 
         protected override void Run()
@@ -72,29 +73,27 @@ namespace XenAdmin.Actions
         }
     }
 
-    public class RemoveVMsFromPolicyAction : PureAsyncAction
+    public class RemoveVMsFromPolicyAction : AsyncAction
     {
-        private List<XenRef<VM>> _selectedVMs;
-        private VMSS _policy;
+        private readonly List<XenRef<VM>> _selectedVMs;
 
         public RemoveVMsFromPolicyAction(VMSS policy, List<XenRef<VM>> selectedVMs)
-            : base(policy.Connection, 
-            selectedVMs.Count == 1 ?
-            string.Format(Messages.REMOVE_VM_FROM_VMSS, policy.Connection.Resolve(selectedVMs[0]), policy.Name()) :
-            string.Format(Messages.REMOVE_VMS_FROM_VMSS, policy.Name()))
+            : base(policy.Connection, "")
         {
-            _policy = policy;
             _selectedVMs = selectedVMs;
             Pool = Helpers.GetPool(policy.Connection);
+            ApiMethodsToRoleCheck.Add("VM.set_snapshot_schedule");
+            Title = selectedVMs.Count == 1
+                ? string.Format(Messages.REMOVE_VM_FROM_VMSS, policy.Connection.Resolve(selectedVMs[0]), policy.Name())
+                : string.Format(Messages.REMOVE_VMS_FROM_VMSS, policy.Name());
         }
 
         protected override void Run()
         {
             Description = Messages.REMOVING_VMS_FROM_VMSS;
 
-            foreach (var xenRef in _selectedVMs)
-                VM.set_snapshot_schedule(Session, xenRef, null);
-                
+            foreach (var vmRef in _selectedVMs)
+                VM.set_snapshot_schedule(Session, vmRef, null);
 
             Description = Messages.REMOVED_VMS_FROM_VMSS;
         }

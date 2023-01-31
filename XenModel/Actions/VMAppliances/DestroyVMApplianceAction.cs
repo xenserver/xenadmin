@@ -38,14 +38,16 @@ using XenAPI;
 
 namespace XenAdmin.Actions
 {
-    public class DestroyVMApplianceAction : PureAsyncAction
+    public class DestroyVMApplianceAction : AsyncAction
     {
-        private List<VM_appliance> _selectedToDelete;
+        private readonly List<VM_appliance> _selectedToDelete;
+        
         public DestroyVMApplianceAction(IXenConnection connection, List<VM_appliance> deleteVMAppliances)
             : base(connection, Messages.DELETE_VM_APPLIANCES)
         {
             _selectedToDelete = deleteVMAppliances;
             Pool = Helpers.GetPool(connection);
+            ApiMethodsToRoleCheck.AddRange("VM.set_appliance", "VM_appliance.destroy");
         }
 
         protected override void Run()
@@ -64,7 +66,7 @@ namespace XenAdmin.Actions
                 catch (Exception e)
                 {
                     if (!e.Message.StartsWith("Object has been deleted"))
-                        throw e;
+                        throw;
                 }
             }
             Description = Messages.DELETED_VM_APPLIANCES;

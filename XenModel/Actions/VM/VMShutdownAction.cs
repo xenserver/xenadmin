@@ -35,15 +35,15 @@ using XenAdmin.Core;
 
 namespace XenAdmin.Actions.VMActions
 {
-    public abstract class VMShutdownAction : PureAsyncAction
+    public abstract class VMShutdownAction : AsyncAction
     {
         protected VMShutdownAction(VM vm,string title)
             : base(vm.Connection, title)
         {
-            this.Description = Messages.ACTION_PREPARING;
-            this.VM = vm;
-            this.Host = vm.Home();
-            this.Pool = Core.Helpers.GetPool(vm.Connection);
+            Description = Messages.ACTION_PREPARING;
+            VM = vm;
+            Host = vm.Home();
+            Pool = Helpers.GetPool(vm.Connection);
         }
     }
 
@@ -52,15 +52,16 @@ namespace XenAdmin.Actions.VMActions
         public VMCleanShutdown(VM vm)
             : base(vm, string.Format(Messages.ACTION_VM_SHUTTING_DOWN_ON_TITLE, vm.Name(), vm.Home() == null ? Helpers.GetName(vm.Connection) : vm.Home().Name()))
         {
+            ApiMethodsToRoleCheck.Add("VM.async_clean_shutdown");
         }
 
         protected override void Run()
         {
-            this.Description = Messages.ACTION_VM_SHUTTING_DOWN;
+            Description = Messages.ACTION_VM_SHUTTING_DOWN;
 
             RelatedTask = VM.async_clean_shutdown(Session, VM.opaque_ref);
             PollToCompletion();
-            this.Description = Messages.ACTION_VM_SHUT_DOWN;
+            Description = Messages.ACTION_VM_SHUT_DOWN;
         }
     }
 
@@ -69,16 +70,35 @@ namespace XenAdmin.Actions.VMActions
         public VMHardShutdown(VM vm)
             : base(vm, string.Format(Messages.ACTION_VM_SHUTTING_DOWN_ON_TITLE, vm.Name(), vm.Home() == null ? Helpers.GetName(vm.Connection) : vm.Home().Name()))
         {
+            ApiMethodsToRoleCheck.Add("VM.async_hard_shutdown");
         }
 
         protected override void Run()
         {
-            this.Description = Messages.ACTION_VM_SHUTTING_DOWN;
+            Description = Messages.ACTION_VM_SHUTTING_DOWN;
 
             RelatedTask = VM.async_hard_shutdown(Session, VM.opaque_ref);
             PollToCompletion();
 
-            this.Description = Messages.ACTION_VM_SHUT_DOWN;
+            Description = Messages.ACTION_VM_SHUT_DOWN;
+        }
+    }
+
+    public class VMSuspendAction : VMShutdownAction
+    {
+        public VMSuspendAction(VM vm)
+            : base(vm, string.Format(Messages.ACTION_VM_SUSPENDING_TITLE, vm.Name()))
+        {
+            VM = vm;
+            ApiMethodsToRoleCheck.Add("VM.async_suspend");
+        }
+
+        protected override void Run()
+        {
+            Description = Messages.ACTION_VM_SUSPENDING;
+            RelatedTask = VM.async_suspend(Session, VM.opaque_ref);
+            PollToCompletion();
+            Description = Messages.ACTION_VM_SUSPENDED;
         }
     }
 }

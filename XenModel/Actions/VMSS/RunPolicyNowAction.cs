@@ -35,14 +35,16 @@ using XenAdmin.Core;
 
 namespace XenAdmin.Actions
 {
-    public class RunPolicyNowAction : PureAsyncAction
+    public class RunPolicyNowAction : AsyncAction
     {
-        private VMSS _policy;
+        private readonly VMSS _policy;
+
         public RunPolicyNowAction(VMSS policy)
             : base(policy.Connection, string.Format(Messages.RUN_POLICY, policy.Name()))
         {
             _policy = policy;
             Pool = Helpers.GetPool(policy.Connection);
+            ApiMethodsToRoleCheck.Add("VMSS.snapshot_now");
         }
 
         protected override void Run()

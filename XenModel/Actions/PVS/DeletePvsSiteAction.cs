@@ -34,7 +34,7 @@ using XenAPI;
 
 namespace XenAdmin.Actions
 {
-    public class DeletePvsSiteAction : PureAsyncAction
+    public class DeletePvsSiteAction : AsyncAction
     {
         private readonly PVS_site pvsSite;
 
@@ -42,8 +42,8 @@ namespace XenAdmin.Actions
             : base(pvsSite.Connection, string.Format(Messages.ACTION_DELETE_PVS_SITE_TITLE, pvsSite.Name().Ellipsise(50)),
                     Messages.ACTION_DELETE_PVS_SITE_DESCRIPTION, false)
         {
-            System.Diagnostics.Trace.Assert(pvsSite != null);
             this.pvsSite = pvsSite;
+            ApiMethodsToRoleCheck.AddRange("PVS_server.async_forget", "PVS_site.async_forget");
         }
         
         protected override void Run()

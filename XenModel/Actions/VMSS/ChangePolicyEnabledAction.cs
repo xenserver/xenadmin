@@ -35,14 +35,16 @@ using XenAdmin.Core;
 
 namespace XenAdmin.Actions
 {
-    public class ChangePolicyEnabledAction : PureAsyncAction
+    public class ChangePolicyEnabledAction : AsyncAction
     {
-        private VMSS _policy;
+        private readonly VMSS _policy;
+
         public ChangePolicyEnabledAction(VMSS policy)
             : base(policy.Connection, string.Format(Messages.CHANGE_POLICY_STATUS, policy.Name()))
         {
             _policy = policy;
             Pool = Helpers.GetPool(_policy.Connection);
+            ApiMethodsToRoleCheck.Add("VMSS.set_enabled");
         }
 
         protected override void Run()

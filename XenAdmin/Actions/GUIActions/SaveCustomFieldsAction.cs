@@ -29,7 +29,6 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Collections.Generic;
 using XenAdmin.CustomFields;
 using XenAPI;
@@ -38,7 +37,7 @@ using XenAdmin.Core;
 
 namespace XenAdmin.Actions
 {
-    public class SaveCustomFieldsAction : PureAsyncAction
+    public class SaveCustomFieldsAction : AsyncAction
     {
         private readonly IXenObject xenObject;
         private readonly List<CustomField> customFields;
@@ -49,7 +48,18 @@ namespace XenAdmin.Actions
             this.xenObject = xenObject;
             this.customFields = customFields;
 
-            string type = xenObject.GetType().Name.ToLowerInvariant();
+            var name = xenObject.GetType().Name;
+
+            foreach (CustomField customField in customFields)
+            {
+                string key = CustomFieldsManager.GetCustomFieldKey(customField.Definition);
+                string value = customField.ValueAsInvariantString;
+
+                ApiMethodsToRoleCheck.AddWithKey($"{name}.remove_from_other_config", key);
+
+                if (!string.IsNullOrEmpty(value))
+                    ApiMethodsToRoleCheck.AddWithKey($"{name}.add_to_other_config", key);
+            }
         }
 
         protected override void Run()
@@ -59,7 +69,7 @@ namespace XenAdmin.Actions
                 string key = CustomFieldsManager.GetCustomFieldKey(customField.Definition);
                 string value = customField.ValueAsInvariantString;
 
-                if (String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                     Helpers.RemoveFromOtherConfig(Session, xenObject, key);
                 else
                     Helpers.SetOtherConfig(Session, xenObject, key, value);

@@ -29,61 +29,75 @@
  * SUCH DAMAGE.
  */
 
-using System;
+using System.Collections.Generic;
 using XenAdmin.Core;
 using XenAPI;
-using System.Collections.Generic;
 
 
 namespace XenAdmin.Actions
 {
     public enum SrActionKind { SetAsDefault, Detach, Forget, Destroy, UnplugAndDestroyPBDs };
 
-    public class SrAction : PureAsyncAction
+    public class SrAction : AsyncAction
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private readonly SrActionKind kind;
-        private readonly Dictionary<string, string> parameters;
 
         public SrAction(SrActionKind kind, SR sr)
             : base(sr.Connection, GetTitle(kind, sr))
         {
             this.kind = kind;
-            this.SR = sr;
+            SR = sr;
             Pool pool = Helpers.GetPoolOfOne(sr.Connection);
             if (pool != null)
                 Pool = pool;
             Host host = sr.GetStorageHost();
             if (host != null)
                 Host = host;
+
+            switch (kind)
+            {
+                case SrActionKind.Detach:
+                    ApiMethodsToRoleCheck.Add("PBD.async_unplug");
+                    break;
+                case SrActionKind.Destroy:
+                    ApiMethodsToRoleCheck.Add("SR.async_destroy");
+                    break;
+                case SrActionKind.Forget:
+                    ApiMethodsToRoleCheck.Add("SR.async_forget");
+                    break;
+                case SrActionKind.SetAsDefault:
+                    ApiMethodsToRoleCheck.AddRange(
+                        "pool.set_crash_dump_SR",
+                        "pool.set_default_SR",
+                        "pool.set_suspend_image_SR");
+                    break;
+                case SrActionKind.UnplugAndDestroyPBDs:
+                    ApiMethodsToRoleCheck.AddRange("PBD.async_unplug", "SR.async_destroy");
+                break;
+            }
         }
 
-        public SrAction(SrActionKind kind, SR sr, Dictionary<string, string> parameters)
-            : this(kind, sr)
-        {
-            this.parameters = parameters;
-        }
-
-        private static String GetTitle(SrActionKind kind, SR sr)
+        private static string GetTitle(SrActionKind kind, SR sr)
         {
             switch (kind)
             {
                 case SrActionKind.SetAsDefault:
-                    return String.Format(Messages.ACTION_SR_SETTING_DEFAULT,
+                    return string.Format(Messages.ACTION_SR_SETTING_DEFAULT,
                         sr.Name(), Helpers.GetName(sr.Connection));
 
                 case SrActionKind.Detach:
                 case SrActionKind.UnplugAndDestroyPBDs:
-                    return String.Format(Messages.ACTION_SR_DETACHING,
+                    return string.Format(Messages.ACTION_SR_DETACHING,
                         sr.Name(), Helpers.GetName(sr.Connection));
 
                 case SrActionKind.Destroy:
-                    return String.Format(Messages.ACTION_SR_DESTROYING,
+                    return string.Format(Messages.ACTION_SR_DESTROYING,
                         sr.Name(), Helpers.GetName(sr.Connection));
 
                 case SrActionKind.Forget:
-                    return String.Format(Messages.ACTION_SR_FORGETTING,
+                    return string.Format(Messages.ACTION_SR_FORGETTING,
                         sr.Name(), Helpers.GetName(sr.Connection));
             }
 
@@ -104,7 +118,7 @@ namespace XenAdmin.Actions
                     break;
 
                 case SrActionKind.Destroy:
-                    RelatedTask = XenAPI.SR.async_destroy(Session, SR.opaque_ref);
+                    RelatedTask = SR.async_destroy(Session, SR.opaque_ref);
                     PollToCompletion(50, 100);
                     Description = Messages.ACTION_SR_DESTROY_SUCCESSFUL;
                     break;
@@ -117,21 +131,23 @@ namespace XenAdmin.Actions
                         break;
                     }
                         
-                    RelatedTask = XenAPI.SR.async_forget(Session, SR.opaque_ref);
+                    RelatedTask = SR.async_forget(Session, SR.opaque_ref);
                     PollToCompletion();
                     Description = string.Format(Messages.SR_FORGOTTEN_0, SR.NameWithoutHost());
                     break;
 
                 case SrActionKind.SetAsDefault:
-                    XenRef<SR> r = new XenRef<SR>(SR);
+                    XenRef<SR> srRef = new XenRef<SR>(SR);
                     Pool = Helpers.GetPoolOfOne(Connection);
-                    Description = string.Format(Messages.ACTION_SR_SETTING_DEFAULT, SR, Pool);
-                    Pool poolCopy = (Pool)Pool.Clone();
+
                     if (Pool != null)
                     {
-                        poolCopy.crash_dump_SR = r;
-                        poolCopy.default_SR = r;
-                        poolCopy.suspend_image_SR = r;
+                        Description = string.Format(Messages.ACTION_SR_SETTING_DEFAULT, SR, Pool);
+                        Pool poolCopy = (Pool)Pool.Clone();
+                        poolCopy.crash_dump_SR = srRef;
+                        poolCopy.default_SR = srRef;
+                        poolCopy.suspend_image_SR = srRef;
+
                         try
                         {
                             Pool.Locked = true;

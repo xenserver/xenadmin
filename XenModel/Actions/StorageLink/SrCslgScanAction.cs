@@ -42,28 +42,25 @@ namespace XenAdmin.Actions
     /// <summary>
     /// Used for scanning for CSLG servers
     /// </summary>
-    public abstract class SrCslgScanAction : PureAsyncAction
+    public abstract class SrCslgScanAction : AsyncAction
     {
         private readonly string _hostname;
         private readonly string _username;
         private readonly string _passwordSecret;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SrCslgScanAction"/> class.
-        /// </summary>
-        /// <param name="connection">The connection.</param>
-        /// <param name="hostname">The hostname.</param>
-        /// <param name="username">The username.</param>
-        /// <param name="passwordSecret">The password secret.</param>
         protected SrCslgScanAction(IXenConnection connection, string hostname, string username, string passwordSecret)
             : base(connection, string.Format(Messages.ACTION_SR_SCAN_NAME_CSLG, hostname), string.Format(Messages.ACTION_SR_SCAN_NAME_CSLG, hostname), true)
         {
-            Util.ThrowIfStringParameterNullOrEmpty(hostname, "hostname");
-            Util.ThrowIfStringParameterNullOrEmpty(username, "username");
-
-            _hostname = hostname;
-            _username = username;
+            _hostname = hostname ?? throw new ArgumentNullException(nameof(hostname));
+            _username = username ?? throw new ArgumentNullException(nameof(username));
             _passwordSecret = passwordSecret;
+
+            ApiMethodsToRoleCheck.AddRange(
+                "SR.async_probe",
+                "Secret.create",
+                "Secret.get_by_uuid",
+                "Secret.get_uuid",
+                "Secret.destroy");
         }
 
         protected void RunProbe(Dictionary<string, string> dconf)
@@ -75,7 +72,7 @@ namespace XenAdmin.Actions
             dconf["password_secret"] = newPasswordSecret;
             try
             {
-                RelatedTask = XenAPI.SR.async_probe(Session, Helpers.GetCoordinator(Connection).opaque_ref, dconf, XenAPI.SR.SRTypes.cslg.ToString(), new Dictionary<String, String>());
+                RelatedTask = SR.async_probe(Session, Helpers.GetCoordinator(Connection).opaque_ref, dconf, SR.SRTypes.cslg.ToString(), new Dictionary<string, string>());
                 PollToCompletion();
             }
             finally
@@ -89,16 +86,14 @@ namespace XenAdmin.Actions
             }
         }
 
-
-
         protected Dictionary<string, string> GetAuthenticationDeviceConfig()
         {
-            Dictionary<String, String> dconf = new Dictionary<String, String>();
-            dconf.Add("target", _hostname);
-            dconf.Add("username", _username);
-            dconf.Add("password_secret", _passwordSecret);
-
-            return dconf;
+            return new Dictionary<string, string>
+            {
+                { "target", _hostname },
+                { "username", _username },
+                { "password_secret", _passwordSecret }
+            };
         }
 
         protected string GetXmlNodeInnerText(XmlNode node, string xPath)
@@ -136,8 +131,5 @@ namespace XenAdmin.Actions
 
             return output;
         }
-
-
-
     }
 }

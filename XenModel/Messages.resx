@@ -6688,9 +6688,6 @@ Reduce protection levels, or bring more servers online to increase the maximum s
   <data name="HA_RESTART_PRIORITY" xml:space="preserve">
     <value>HA restart priority</value>
   </data>
-  <data name="HA_SAVE_SETTINGS_FAILED_DEAD_HOSTS" xml:space="preserve">
-    <value>Your changes to HA settings for pool '{0}' may not take effect because not all servers in the pool are reachable. Ensure that all servers in the pool are reachable and then apply the changes again.</value>
-  </data>
   <data name="HA_SCANNING_SRS" xml:space="preserve">
     <value>Scanning for HA heartbeat SRs on {0}</value>
   </data>
@@ -11704,9 +11701,6 @@ The coordinator must be upgraded first, so if you skip the coordinator, the roll
   </data>
   <data name="SAVE_SEARCH" xml:space="preserve">
     <value>Save Search '{0}'</value>
-  </data>
-  <data name="SAVECHANGES_LOCKED" xml:space="preserve">
-    <value>Instance is already locked</value>
   </data>
   <data name="SAVING_FILE_X" xml:space="preserve">
     <value>Saving file {0}</value>

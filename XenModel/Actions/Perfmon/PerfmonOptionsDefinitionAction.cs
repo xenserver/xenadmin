@@ -37,7 +37,7 @@ using XenAPI;
 
 namespace XenAdmin.Actions
 {
-    public class PerfmonOptionsDefinitionAction : PureAsyncAction
+    public class PerfmonOptionsDefinitionAction : AsyncAction
     {
         private readonly Pool pool;
         private readonly PerfmonOptionsDefinition perfmonOptions;
@@ -47,7 +47,20 @@ namespace XenAdmin.Actions
         {
             this.perfmonOptions = perfmonOptions;
             pool = Helpers.GetPoolOfOne(connection);
-            this.Description = string.Format(Messages.ACTION_CHANGING_EMAIL_OPTIONS_FOR, pool);
+            Description = string.Format(Messages.ACTION_CHANGING_EMAIL_OPTIONS_FOR, pool);
+
+            ApiMethodsToRoleCheck.AddWithKey("pool.remove_from_other_config", PerfmonOptionsDefinition.MAIL_DESTINATION_KEY_NAME);
+            ApiMethodsToRoleCheck.AddWithKey("pool.remove_from_other_config", PerfmonOptionsDefinition.SMTP_MAILHUB_KEY_NAME);
+            ApiMethodsToRoleCheck.AddWithKey("pool.remove_from_other_config", PerfmonOptionsDefinition.MAIL_LANGUAGE_KEY_NAME);
+
+            if (perfmonOptions != null)
+            {
+                ApiMethodsToRoleCheck.AddWithKey("pool.add_to_other_config", PerfmonOptionsDefinition.MAIL_DESTINATION_KEY_NAME);
+                ApiMethodsToRoleCheck.AddWithKey("pool.add_to_other_config", PerfmonOptionsDefinition.SMTP_MAILHUB_KEY_NAME);
+                
+                if (perfmonOptions.MailLanguageCode != null)
+                    ApiMethodsToRoleCheck.AddWithKey("pool.add_to_other_config", PerfmonOptionsDefinition.MAIL_LANGUAGE_KEY_NAME);
+            }
         }
 
         protected override void Run()
@@ -55,19 +68,20 @@ namespace XenAdmin.Actions
             if (pool == null)
                 return;
 
-            if (perfmonOptions == null)
-            {
-                Helpers.RemoveFromOtherConfig(Session, pool, PerfmonOptionsDefinition.MAIL_DESTINATION_KEY_NAME);
-                Helpers.RemoveFromOtherConfig(Session, pool, PerfmonOptionsDefinition.SMTP_MAILHUB_KEY_NAME);
-                Helpers.RemoveFromOtherConfig(Session, pool, PerfmonOptionsDefinition.MAIL_LANGUAGE_KEY_NAME);
-            }
-            else
-            {
-                Helpers.SetOtherConfig(Session, pool, PerfmonOptionsDefinition.MAIL_DESTINATION_KEY_NAME, perfmonOptions.MailDestination);
-                Helpers.SetOtherConfig(Session, pool, PerfmonOptionsDefinition.SMTP_MAILHUB_KEY_NAME, perfmonOptions.MailHub);
-                if(null != perfmonOptions.MailLanguageCode)
-                    Helpers.SetOtherConfig(Session, pool, PerfmonOptionsDefinition.MAIL_LANGUAGE_KEY_NAME, perfmonOptions.MailLanguageCode);
-            }
+            Pool.remove_from_other_config(Session, pool.opaque_ref, PerfmonOptionsDefinition.MAIL_DESTINATION_KEY_NAME);
+
+            if (perfmonOptions != null)
+                Pool.add_to_other_config(Session, pool.opaque_ref, PerfmonOptionsDefinition.MAIL_DESTINATION_KEY_NAME, perfmonOptions.MailDestination);
+
+            Pool.remove_from_other_config(Session, pool.opaque_ref, PerfmonOptionsDefinition.SMTP_MAILHUB_KEY_NAME);
+            
+            if (perfmonOptions != null)
+                Pool.add_to_other_config(Session, pool.opaque_ref, PerfmonOptionsDefinition.SMTP_MAILHUB_KEY_NAME, perfmonOptions.MailHub);
+
+            Pool.remove_from_other_config(Session, pool.opaque_ref, PerfmonOptionsDefinition.MAIL_LANGUAGE_KEY_NAME);
+
+            if (perfmonOptions?.MailLanguageCode != null)
+                Pool.add_to_other_config(Session, pool.opaque_ref, PerfmonOptionsDefinition.MAIL_LANGUAGE_KEY_NAME, perfmonOptions.MailLanguageCode);
         }
     }
 }

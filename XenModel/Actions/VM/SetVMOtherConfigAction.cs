@@ -34,7 +34,7 @@ using XenAPI;
 
 namespace XenAdmin.Actions.VMActions
 {
-    public class SetVMOtherConfigAction : PureAsyncAction
+    public class SetVMOtherConfigAction : AsyncAction
     {
         private string Key;
         private string Val;
@@ -45,12 +45,14 @@ namespace XenAdmin.Actions.VMActions
             VM = vm;
             Key = key;
             Val = val;
+            ApiMethodsToRoleCheck.AddWithKey("VM.remove_from_other_config", Key);
+            ApiMethodsToRoleCheck.AddWithKey("VM.add_to_other_config", Key);
         }
 
         protected override void Run()
         {
-            XenAPI.VM.remove_from_other_config(Session, VM.opaque_ref, Key);
-            XenAPI.VM.add_to_other_config(Session, VM.opaque_ref, Key, Val);
+            VM.remove_from_other_config(Session, VM.opaque_ref, Key);
+            VM.add_to_other_config(Session, VM.opaque_ref, Key, Val);
         }
     }
 }

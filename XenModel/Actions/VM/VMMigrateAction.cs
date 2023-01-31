@@ -36,7 +36,7 @@ using XenAdmin.Core;
 
 namespace XenAdmin.Actions.VMActions
 {
-    public class VMMigrateAction : PureAsyncAction
+    public class VMMigrateAction : AsyncAction
     {
 
         public VMMigrateAction(VM vm, Host destinationHost)
@@ -51,6 +51,8 @@ namespace XenAdmin.Actions.VMActions
             Title = residentOn == null
                 ? string.Format(Messages.ACTION_VM_MIGRATING_NON_RESIDENT, vm.NameWithLocation(), Host.NameWithLocation())
                 : string.Format(Messages.ACTION_VM_MIGRATING_RESIDENT, vm.Name(), residentOn.NameWithLocation(), Host.NameWithLocation());
+
+            ApiMethodsToRoleCheck.Add("VM.async_live_migrate");
         }
 
         protected override void Run()

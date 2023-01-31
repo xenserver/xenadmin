@@ -289,9 +289,7 @@
     <Compile Include="Actions\Pool\EjectHostFromPoolAction.cs" />
     <Compile Include="Actions\Pool\EnableHAAction.cs" />
     <Compile Include="Actions\Pool\GetHeartbeatSRsAction.cs" />
-    <Compile Include="Actions\Pool\SyncDatabaseAction.cs" />
     <Compile Include="Actions\Pool_Patch\RemovePatchAction.cs" />
-    <Compile Include="Actions\PureAsyncAction.cs" />
     <Compile Include="Actions\SaveChangesAction.cs" />
     <Compile Include="Actions\SR\ISCSIPopulateIQNsAction.cs" />
     <Compile Include="Actions\SR\ISCSIPopulateLunsAction.cs" />
@@ -336,7 +334,6 @@
     <Compile Include="Actions\VM\VMShutdownAction.cs" />
     <Compile Include="Actions\VM\VMSnapshotDeleteAction.cs" />
     <Compile Include="Actions\VM\VMSnapshotRevertAction.cs" />
-    <Compile Include="Actions\VM\VMSuspendAction.cs" />
     <Compile Include="Actions\VM\VMToTemplateAction.cs" />
     <Compile Include="Actions\WLB\DisableWLBAction.cs" />
     <Compile Include="Actions\WLB\EnableWLBAction.cs" />
@@ -465,7 +462,6 @@
     <Compile Include="XenServerProxy\IInvocationHandler.cs" />
     <Compile Include="XenServerProxy\InterfaceLister.cs" />
     <Compile Include="XenServerProxy\ProxyMethodInfo.cs" />
-    <Compile Include="XenServerProxy\RbacCollectorProxy.cs" />
     <Compile Include="XenServerProxy\SimpleProxyMethodParser.cs" />
     <Compile Include="Utils\Helpers.cs" />
     <Compile Include="I18NException.cs" />

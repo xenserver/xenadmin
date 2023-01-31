@@ -37,7 +37,7 @@ using XenAPI;
 
 namespace XenAdmin.Actions.VMActions
 {
-    public class VMCrossPoolMigrateAction : PureAsyncAction
+    public class VMCrossPoolMigrateAction : AsyncAction
     {
         private readonly VmMapping mapping;
         private readonly XenAPI.Network transferNetwork;
@@ -61,6 +61,7 @@ namespace XenAdmin.Actions.VMActions
             this.mapping = mapping;
             this.transferNetwork = transferNetwork;
             this.copy = copy;
+            ApiMethodsToRoleCheck.AddRange(StaticRBACDependencies);
         }
 
         public static RbacMethodList StaticRBACDependencies

@@ -35,7 +35,7 @@ using XenAPI;
 
 namespace XenAdmin.Actions
 {
-    public class UpdateIntegratedGpuPassthroughAction : PureAsyncAction
+    public class UpdateIntegratedGpuPassthroughAction : AsyncAction
     {
         private bool enable;
 
@@ -44,11 +44,16 @@ namespace XenAdmin.Actions
         {
             Host = host;
             enable = enableOnNextReboot;
+
+            if (enable)
+                ApiMethodsToRoleCheck.AddRange("Host.async_enable_display", "PGPU.async_enable_dom0_access");
+            else
+                ApiMethodsToRoleCheck.AddRange("Host.async_disable_display", "PGPU.async_disable_dom0_access");
         }
 
         protected override void Run()
         {
-            this.Description = Messages.UPDATING_PROPERTIES;
+            Description = Messages.UPDATING_PROPERTIES;
 
             RelatedTask = enable 
                 ? Host.async_enable_display(Session, Host.opaque_ref) 

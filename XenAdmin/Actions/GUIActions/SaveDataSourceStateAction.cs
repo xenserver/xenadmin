@@ -38,22 +38,11 @@ using XenAPI;
 
 namespace XenAdmin.Actions
 {
-    public class SaveDataSourceStateAction : PureAsyncAction
+    public class SaveDataSourceStateAction : AsyncAction
     {
         private readonly List<DataSourceItem> _dataSourceItems;
         private readonly List<DesignedGraph> _graphs;
         private readonly IXenObject _xenObject;
-
-        private Pool GetPool()
-        {
-            return Helpers.GetPoolOfOne(Connection);
-        }
-
-        private Dictionary<string, string> GetGuiConfig()
-        {
-            Pool pool = GetPool();
-            return pool != null ? Helpers.GetGuiConfig(pool) : null;
-        }
 
         public SaveDataSourceStateAction(IXenConnection connection, IXenObject xmo, List<DataSourceItem> items, List<DesignedGraph> graphs)
             : base(connection, Messages.ACTION_SAVE_DATASOURCES, Messages.ACTION_SAVING_DATASOURCES, true)
@@ -61,11 +50,19 @@ namespace XenAdmin.Actions
             _dataSourceItems = items;
             _xenObject = xmo;
             _graphs = graphs;
+
+            if (xmo is Host)
+                ApiMethodsToRoleCheck.AddRange("host.record_data_source", "host.forget_data_source_archives");
+            else if (xmo is VM)
+                ApiMethodsToRoleCheck.AddRange("VM.record_data_source", "VM.forget_data_source_archives");
+
+            ApiMethodsToRoleCheck.Add("pool.set_gui_config");
         }
 
         protected override void Run()
         {
-            Dictionary<string, string> guiConfig = GetGuiConfig();
+            Pool pool = Helpers.GetPoolOfOne(Connection);
+            var guiConfig = pool?.gui_config;
 
             if (_dataSourceItems != null)
             {
@@ -111,7 +108,7 @@ namespace XenAdmin.Actions
             {
                 foreach (string key in guiConfig.Keys)
                 {
-                    bool isMatch = (Palette.LayoutKey.IsMatch(key) || Palette.GraphNameKey.IsMatch(key));
+                    bool isMatch = Palette.LayoutKey.IsMatch(key) || Palette.GraphNameKey.IsMatch(key);
                     if (isMatch && key.Contains(uuid))
                         continue;
                     newGuiConfig.Add(key, guiConfig[key]);
@@ -138,7 +135,8 @@ namespace XenAdmin.Actions
                 }
             }
 
-            Pool.set_gui_config(Session, GetPool().opaque_ref, newGuiConfig);
+            if (pool != null)
+                Pool.set_gui_config(Session, pool.opaque_ref, newGuiConfig);
         }
     }
 }

@@ -310,8 +310,6 @@ namespace XenAdmin.Actions
             }
         }
 
-        protected bool SuppressProgressReport { get; set; }
-
         protected void Tick(int percent, string description)
         {
             if (_percentComplete != percent || _description != description)
@@ -383,8 +381,7 @@ namespace XenAdmin.Actions
 
         protected void OnChanged()
         {
-            if (!SuppressProgressReport)
-                Changed?.Invoke(this);
+            Changed?.Invoke(this);
         }
 
         protected virtual void OnCompleted()

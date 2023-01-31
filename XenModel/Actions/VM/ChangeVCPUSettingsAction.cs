@@ -34,45 +34,55 @@ using XenAPI;
 
 namespace XenAdmin.Actions
 {
-    public class ChangeVCPUSettingsAction : PureAsyncAction
+    public class ChangeVCPUSettingsAction : AsyncAction
     {
-        private long m_VCPUs_max;
-        private long m_VCPUs_at_startup;
-        private VM m_VM;
+        private readonly long m_VCPUs_max;
+        private readonly long m_VCPUs_at_startup;
+
         public ChangeVCPUSettingsAction(VM vm, long VCPUs_max, long VCPUs_at_startup)
             : base(vm.Connection, "", true)
         {
-            m_VM = vm;
+            VM = vm;
             m_VCPUs_max = VCPUs_max;
             m_VCPUs_at_startup = VCPUs_at_startup;
+
+            if (VM.power_state == vm_power_state.Running)
+            {
+                if (VM.VCPUs_at_startup <= m_VCPUs_at_startup)
+                    ApiMethodsToRoleCheck.Add("VM.set_VCPUs_number_live");
+            }
+            else
+            {
+                ApiMethodsToRoleCheck.AddRange("VM.set_VCPUs_at_startup", "VM.set_VCPUs_max");
+            }
         }
 
         protected override void Run()
         {
             // get the VM from the cache again, to check its vCPU fields before trying to change them
-            m_VM = Connection.Resolve(new XenRef<VM>(m_VM.opaque_ref));
-            if (m_VM == null) // VM has disappeared
+            VM = Connection.Resolve(new XenRef<VM>(VM.opaque_ref));
+            if (VM == null) // VM has disappeared
                 return;
 
-            if (m_VM.power_state == vm_power_state.Running) // if the VM is running, we can only change the vCPUs number, not the max.
+            if (VM.power_state == vm_power_state.Running) // if the VM is running, we can only change the vCPUs number, not the max.
             {
-                if (m_VM.VCPUs_at_startup > m_VCPUs_at_startup) // reducing VCPU_at_startup is not allowed for live VMs
+                if (VM.VCPUs_at_startup > m_VCPUs_at_startup) // reducing VCPU_at_startup is not allowed for live VMs
                 {
-                    throw new Exception(string.Format(Messages.VM_VCPU_CANNOT_UNPLUG_LIVE, m_VM.VCPUs_at_startup));
+                    throw new Exception(string.Format(Messages.VM_VCPU_CANNOT_UNPLUG_LIVE, VM.VCPUs_at_startup));
                 }
-                VM.set_VCPUs_number_live(Session, m_VM.opaque_ref, m_VCPUs_at_startup);
+                VM.set_VCPUs_number_live(Session, VM.opaque_ref, m_VCPUs_at_startup);
                 return;
             }
 
-            if (m_VM.VCPUs_at_startup > m_VCPUs_at_startup) // reducing VCPUs_at_startup: we need to change this value first, and then the VCPUs_max
+            if (VM.VCPUs_at_startup > m_VCPUs_at_startup) // reducing VCPUs_at_startup: we need to change this value first, and then the VCPUs_max
             {
-                VM.set_VCPUs_at_startup(Session, m_VM.opaque_ref, m_VCPUs_at_startup);
-                VM.set_VCPUs_max(Session, m_VM.opaque_ref, m_VCPUs_max);
+                VM.set_VCPUs_at_startup(Session, VM.opaque_ref, m_VCPUs_at_startup);
+                VM.set_VCPUs_max(Session, VM.opaque_ref, m_VCPUs_max);
             }
             else // increasing VCPUs_at_startup: we need to change the VCPUs_max first
             {
-                VM.set_VCPUs_max(Session, m_VM.opaque_ref, m_VCPUs_max);
-                VM.set_VCPUs_at_startup(Session, m_VM.opaque_ref, m_VCPUs_at_startup);
+                VM.set_VCPUs_max(Session, VM.opaque_ref, m_VCPUs_max);
+                VM.set_VCPUs_at_startup(Session, VM.opaque_ref, m_VCPUs_at_startup);
             }
         }
     }

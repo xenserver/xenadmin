@@ -19124,15 +19124,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your changes to HA settings for pool &apos;{0}&apos; may not take effect because not all servers in the pool are reachable. Ensure that all servers in the pool are reachable and then apply the changes again..
-        /// </summary>
-        public static string HA_SAVE_SETTINGS_FAILED_DEAD_HOSTS {
-            get {
-                return ResourceManager.GetString("HA_SAVE_SETTINGS_FAILED_DEAD_HOSTS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Scanning for HA heartbeat SRs on {0}.
         /// </summary>
         public static string HA_SCANNING_SRS {
@@ -33734,15 +33725,6 @@ namespace XenAdmin {
         public static string SAVE_SEARCH {
             get {
                 return ResourceManager.GetString("SAVE_SEARCH", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Instance is already locked.
-        /// </summary>
-        public static string SAVECHANGES_LOCKED {
-            get {
-                return ResourceManager.GetString("SAVECHANGES_LOCKED", resourceCulture);
             }
         }
         

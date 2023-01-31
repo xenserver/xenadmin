@@ -37,7 +37,7 @@ using XenAPI;
 
 namespace XenAdmin.Actions
 {
-    public class RunPluginAction : PureAsyncAction
+    public class RunPluginAction : AsyncAction
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -61,12 +61,13 @@ namespace XenAdmin.Actions
             Plugin = plugin;
             Function = function;
             Args = args;
+            ApiMethodsToRoleCheck.Add("Host.call_plugin");
         }
 
         protected override void Run()
         {
             Description = string.Format(Messages.PLUGIN_CALLING, Plugin);
-            Result = XenAPI.Host.call_plugin(Session, Host.opaque_ref, Plugin, Function, Args);
+            Result = Host.call_plugin(Session, Host.opaque_ref, Plugin, Function, Args);
 
             if (Result == "True")
             {

@@ -33,25 +33,27 @@ using XenAPI;
 
 namespace XenAdmin.Actions
 {
-    public class DestroyPoolAction: PureAsyncAction
+    public class DestroyPoolAction: AsyncAction
     {
-        public DestroyPoolAction(XenAPI.Pool pool)
+        public DestroyPoolAction(Pool pool)
             : base(pool.Connection, string.Format(Messages.DESTROYING_POOL, pool.Name()))
         {
-            System.Diagnostics.Trace.Assert(pool != null);
             Pool = pool;
-            this.Description = Messages.WAITING;
+            Description = Messages.WAITING;
+
+            ApiMethodsToRoleCheck.AddRange("pool.set_name_label", "pool.set_name_description");
         }
 
         protected override void Run()
         {
-            this.Description = Messages.POOLCREATE_DESTROYING;
-            if (Connection.Cache.HostCount != 1)
+            Description = Messages.POOLCREATE_DESTROYING;
+
+            if (Connection.Cache.HostCount > 1)
                 throw new Failure(Failure.INTERNAL_ERROR, Messages.POOLCREATE_MULTIHOST);  // We should not have any UI to reach here, and must not be allowed to proceed
-            XenAPI.Pool.set_name_label(Session, Pool.opaque_ref, "");
-            XenAPI.Pool.set_name_description(Session, Pool.opaque_ref, "");
-            this.Description = Messages.POOLCREATE_DESTROYED;
+
+            Pool.set_name_label(Session, Pool.opaque_ref, "");
+            Pool.set_name_description(Session, Pool.opaque_ref, "");
+            Description = Messages.POOLCREATE_DESTROYED;
         }
-        
     }
 }

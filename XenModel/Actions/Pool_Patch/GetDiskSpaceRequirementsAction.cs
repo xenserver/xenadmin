@@ -31,7 +31,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text;
 using XenAdmin.Core;
 using XenAPI;
@@ -39,14 +38,14 @@ using XenAPI;
 
 namespace XenAdmin.Actions
 {
-    public class GetDiskSpaceRequirementsAction : PureAsyncAction
+    public class GetDiskSpaceRequirementsAction : AsyncAction
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private readonly string updateName;
         private readonly long updateSize;
         private readonly Pool_patch currentPatch;
-        private readonly Actions.DiskSpaceRequirements.OperationTypes operation = Actions.DiskSpaceRequirements.OperationTypes.upload;
+        private readonly DiskSpaceRequirements.OperationTypes operation = DiskSpaceRequirements.OperationTypes.upload;
 
         public DiskSpaceRequirements DiskSpaceRequirements { get; private set; }
 
@@ -60,16 +59,9 @@ namespace XenAdmin.Actions
         }
 
         /// <summary>
-        /// This constructor is used to calculate the disk space requirements for uploading a single update file
-        /// </summary>
-        public GetDiskSpaceRequirementsAction(Host host, string path, bool suppressHistory)
-            : this(host, FileName(path), FileSize(path), suppressHistory)
-        { }
-
-        /// <summary>
         /// This constructor is used to calculate the disk space when the required space is known only
         /// </summary>
-        public GetDiskSpaceRequirementsAction(Host host, long size, bool suppressHistory, XenAdmin.Actions.DiskSpaceRequirements.OperationTypes operation)
+        public GetDiskSpaceRequirementsAction(Host host, long size, bool suppressHistory, DiskSpaceRequirements.OperationTypes operation)
             : this(host, null, size, suppressHistory)
         {
             this.operation = operation;
@@ -84,23 +76,12 @@ namespace XenAdmin.Actions
             Host = host;
             this.updateName = updateName;
             updateSize = size; 
-        }
-
-        private static long FileSize(string path)
-        {
-            FileInfo fileInfo = new FileInfo(path);
-            return fileInfo.Length;
-        }
-
-        private static string FileName(string path)
-        {
-            FileInfo fileInfo = new FileInfo(path);
-            return fileInfo.Name;
+            ApiMethodsToRoleCheck.Add("host.call_plugin");
         }
 
         protected override void Run()
         {
-            Description = String.Format(Messages.ACTION_GET_DISK_SPACE_REQUIREMENTS_DESCRIPTION, Host.Name());
+            Description = string.Format(Messages.ACTION_GET_DISK_SPACE_REQUIREMENTS_DESCRIPTION, Host.Name());
 
             string result;
 
@@ -110,8 +91,7 @@ namespace XenAdmin.Actions
             {
                 try
                 {
-                    var args = new Dictionary<string, string>();
-                    args.Add("size", updateSize.ToString());
+                    var args = new Dictionary<string, string> { { "size", updateSize.ToString() } };
 
                     result = Host.call_plugin(Session, Host.opaque_ref, "disk-space", "get_required_space", args);
                     requiredDiskSpace = Convert.ToInt64(result);

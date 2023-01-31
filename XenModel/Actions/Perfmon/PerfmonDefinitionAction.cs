@@ -54,9 +54,9 @@ namespace XenAdmin.Actions
             this.perfmonDefinitions = perfmonDefinitions;
 
             string type = xo.GetType().Name.ToLowerInvariant();
-            ApiMethodsToRoleCheck.Add(type + ".remove_from_other_config", PerfmonDefinition.PERFMON_KEY_NAME);
+            ApiMethodsToRoleCheck.AddWithKey(type + ".remove_from_other_config", PerfmonDefinition.PERFMON_KEY_NAME);
             if (perfmonDefinitions != null && perfmonDefinitions.Count != 0)
-                ApiMethodsToRoleCheck.Add(type + ".add_to_other_config", PerfmonDefinition.PERFMON_KEY_NAME);
+                ApiMethodsToRoleCheck.AddWithKey(type + ".add_to_other_config", PerfmonDefinition.PERFMON_KEY_NAME);
         }
 
         protected override void Run()
