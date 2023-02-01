@@ -169,7 +169,7 @@
     <value>NoControl</value>
   </data>
   <data name="SaveButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>345, 433</value>
+    <value>496, 433</value>
   </data>
   <data name="SaveButton.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -208,7 +208,7 @@
     <value>NoControl</value>
   </data>
   <data name="CloseButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>426, 433</value>
+    <value>577, 433</value>
   </data>
   <data name="CloseButton.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -244,7 +244,7 @@
     <value>51, 3</value>
   </data>
   <data name="GraphNameTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>450, 23</value>
+    <value>601, 23</value>
   </data>
   <data name="GraphNameTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -337,7 +337,7 @@
     <value>3, 3, 3, 6</value>
   </data>
   <data name="dataGridView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>498, 290</value>
+    <value>649, 290</value>
   </data>
   <data name="dataGridView.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -442,7 +442,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>160, 121</value>
+    <value>235, 121</value>
   </data>
   <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
@@ -490,7 +490,7 @@
     <value>3, 0, 3, 15</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>498, 15</value>
+    <value>649, 15</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -535,7 +535,7 @@
     <value>1</value>
   </data>
   <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>504, 29</value>
+    <value>655, 29</value>
   </data>
   <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -565,7 +565,7 @@
     <value>3, 107</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>498, 290</value>
+    <value>649, 290</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -703,7 +703,7 @@
     <value>6</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>504, 461</value>
+    <value>655, 461</value>
   </data>
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -730,7 +730,7 @@
     <value>3, 72</value>
   </data>
   <data name="searchTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>498, 29</value>
+    <value>649, 29</value>
   </data>
   <data name="searchTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -757,7 +757,7 @@
     <value>96, 96</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>524, 481</value>
+    <value>675, 481</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
