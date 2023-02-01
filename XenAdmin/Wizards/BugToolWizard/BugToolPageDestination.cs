@@ -101,9 +101,11 @@ namespace XenAdmin.Wizards.BugToolWizard
                 return;
             }
 
-            if (File.Exists(OutputFile)) //confirm ok to overwrite
+            string path = OutputFile;
+
+            if (File.Exists(path)) //confirm ok to overwrite
             {
-                using (var dlg = new WarningDialog(string.Format(Messages.FILE_X_EXISTS_OVERWRITE, OutputFile),
+                using (var dlg = new WarningDialog(string.Format(Messages.FILE_X_EXISTS_OVERWRITE, path),
                     ThreeButtonDialog.ButtonOK,
                     new ThreeButtonDialog.TBDButton(Messages.CANCEL, DialogResult.Cancel, selected: true)))
                 {
@@ -121,14 +123,15 @@ namespace XenAdmin.Wizards.BugToolWizard
             FileStream stream = null;
             try
             {
-                stream = File.OpenWrite(OutputFile);
+                stream = File.OpenWrite(path);
             }
             catch (Exception exn)
             {
-                using (var dlg = new ErrorDialog(string.Format(Messages.COULD_NOT_WRITE_FILE, OutputFile, exn.Message)))
+                using (var dlg = new ErrorDialog(string.Format(Messages.COULD_NOT_WRITE_FILE, path, exn.Message)))
                     dlg.ShowDialog(this);
 
                 cancel = true;
+                return;
             }
             finally
             {
@@ -187,13 +190,13 @@ namespace XenAdmin.Wizards.BugToolWizard
 
             var path = $"{folder}\\{name}";
 
-            if (PathValidator.IsPathValid(path, out var invalidPathMsg))
+            if (!PathValidator.IsPathValid(path, out var invalidPathMsg))
             {
-                return true;
+                error = $"{Messages.BUGTOOL_PAGE_DESTINATION_INVALID_FOLDER} {invalidPathMsg}";
+                return false;
             }
 
-            error = $"{Messages.BUGTOOL_PAGE_DESTINATION_INVALID_FOLDER} {invalidPathMsg}";
-            return false;
+            return true;
         }
 
         private bool CheckDestinationFolderExists(out string error)

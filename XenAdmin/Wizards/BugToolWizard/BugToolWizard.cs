@@ -45,46 +45,43 @@ namespace XenAdmin.Wizards.BugToolWizard
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private readonly GenericSelectHostsPage bugToolPageSelectHosts1;
-        private readonly BugToolPageSelectCapabilities bugToolPageSelectCapabilities1;
-        private readonly RBACWarningPage rbacWarningPage;
-        private readonly BugToolPageRetrieveData bugToolPageRetrieveData;
-        private readonly BugToolPageDestination bugToolPageDestination1;
+        private readonly GenericSelectHostsPage _bugToolPageSelectHosts;
+        private readonly BugToolPageSelectCapabilities _bugToolPageSelectCapabilities;
+        private readonly RBACWarningPage _rbacWarningPage;
+        private readonly BugToolPageRetrieveData _bugToolPageRetrieveData;
+        private readonly BugToolPageDestination _bugToolPageDestination;
 
         public BugToolWizard(params IXenObject[] selectedObjects)
-            : this()
-        {
-            bugToolPageSelectHosts1.SelectHosts(new List<IXenObject>(selectedObjects));
-        }
-
-        public BugToolWizard()
         {
             InitializeComponent();
 
-            bugToolPageSelectHosts1 = new GenericSelectHostsPage();
-            bugToolPageSelectCapabilities1 = new BugToolPageSelectCapabilities();
-            rbacWarningPage = new RBACWarningPage();
+            _bugToolPageSelectHosts = new GenericSelectHostsPage();
+            _bugToolPageSelectCapabilities = new BugToolPageSelectCapabilities();
+            _rbacWarningPage = new RBACWarningPage();
+            _bugToolPageDestination = new BugToolPageDestination();
+            _bugToolPageRetrieveData = new BugToolPageRetrieveData();
 
-            bugToolPageDestination1 = new BugToolPageDestination();
-            bugToolPageRetrieveData = new BugToolPageRetrieveData();
+            AddPages(_bugToolPageSelectHosts,
+                _bugToolPageSelectCapabilities,
+                _bugToolPageDestination,
+                _bugToolPageRetrieveData);
 
-            AddPage(bugToolPageSelectHosts1);
-            AddPage(bugToolPageSelectCapabilities1);
-
-            AddPage(bugToolPageDestination1);
-            AddPage(bugToolPageRetrieveData);
+            _bugToolPageSelectHosts.SelectHosts(new List<IXenObject>(selectedObjects));
         }
 
         protected override void FinishWizard()
         {
             log.Debug("Cleaning up crash dump logs on server");
-            var capabilities = bugToolPageSelectCapabilities1.CheckedCapabilities;
+            var capabilities = _bugToolPageSelectCapabilities.CheckedCapabilities;
+
             foreach (Capability c in capabilities)
             {
                 if (c.Key == "host-crashdump-dumps" && c.Checked)
                 {
-                    var hostList = bugToolPageSelectHosts1.SelectedHosts;
-                    if (!hostList.Any(h => h.HasCrashDumps()))
+                    var hostList = _bugToolPageSelectHosts.SelectedHosts;
+                    
+                    var crashedHosts = hostList.Where(h => h.HasCrashDumps()).ToList();
+                    if (crashedHosts.Count == 0)
                         break;
 
                     DialogResult result;
@@ -94,15 +91,11 @@ namespace XenAdmin.Wizards.BugToolWizard
                     {
                         result = dlg.ShowDialog(this);
                     }
+
                     if (result == DialogResult.Yes)
                     {
-                        foreach (Host host in hostList)
-                        {
-                            if (host != null && host.HasCrashDumps())
-                            {
-                                new Actions.DestroyHostCrashDumpAction(host).RunAsync();
-                            }
-                        }
+                        foreach (Host host in crashedHosts)
+                            new DestroyHostCrashDumpAction(host).RunAsync();
                     }
                     break;
                 }
@@ -116,24 +109,24 @@ namespace XenAdmin.Wizards.BugToolWizard
             var prevPageType = senderPage.GetType();
             if (prevPageType == typeof(GenericSelectHostsPage))
             {
-                bugToolPageRetrieveData.SelectedHosts = bugToolPageSelectHosts1.SelectedHosts;
+                _bugToolPageRetrieveData.SelectedHosts = _bugToolPageSelectHosts.SelectedHosts;
 
-                var selectedHostsConnections = bugToolPageSelectHosts1.SelectedHosts.Select(host => host.Connection).ToList();
+                var selectedHostsConnections = _bugToolPageSelectHosts.SelectedHosts.Select(host => host.Connection).ToList();
 
                 if (selectedHostsConnections.Any(Helpers.ConnectionRequiresRbac))
                 {
-                    rbacWarningPage.SetPermissionChecks(selectedHostsConnections,
+                    _rbacWarningPage.SetPermissionChecks(selectedHostsConnections,
                         new WizardRbacCheck(Messages.RBAC_GET_SYSTEM_STATUS_BLOCKED, SingleHostStatusAction.StaticRBACDependencies) { Blocking = true });
-                    AddAfterPage(bugToolPageSelectHosts1, rbacWarningPage);
+                    AddAfterPage(_bugToolPageSelectHosts, _rbacWarningPage);
                 }
             }
             else if (prevPageType == typeof(BugToolPageSelectCapabilities))
             {
-                bugToolPageRetrieveData.CapabilityList = bugToolPageSelectCapabilities1.CheckedCapabilities;
+                _bugToolPageRetrieveData.CapabilityList = _bugToolPageSelectCapabilities.CheckedCapabilities;
             }
             else if (prevPageType == typeof(BugToolPageDestination))
             {
-                bugToolPageRetrieveData.OutputFile = bugToolPageDestination1.OutputFile;
+                _bugToolPageRetrieveData.OutputFile = _bugToolPageDestination.OutputFile;
             }
         }
 
@@ -141,8 +134,8 @@ namespace XenAdmin.Wizards.BugToolWizard
         {
             if (senderPage.GetType() == typeof(GenericSelectHostsPage))
             {
-                var hostList = bugToolPageSelectHosts1.SelectedHosts;
-                return bugToolPageSelectCapabilities1.GetCommonCapabilities(hostList);
+                var hostList = _bugToolPageSelectHosts.SelectedHosts;
+                return _bugToolPageSelectCapabilities.GetCommonCapabilities(hostList);
             }
 
             return true;
