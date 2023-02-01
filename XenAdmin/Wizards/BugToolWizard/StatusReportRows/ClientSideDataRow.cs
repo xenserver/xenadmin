@@ -34,7 +34,7 @@ using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAPI;
 
-namespace XenAdmin.Wizards.BugToolWizardFiles.StatusReportRows
+namespace XenAdmin.Wizards.BugToolWizard.StatusReportRows
 {
     internal class ClientSideDataRow : StatusReportRow
     {

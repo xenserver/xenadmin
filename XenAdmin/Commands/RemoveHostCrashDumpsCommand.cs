@@ -32,7 +32,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Dialogs;
-using XenAdmin.Wizards.BugToolWizardFiles;
+using XenAdmin.Wizards.BugToolWizard;
 using XenAPI;
 
 

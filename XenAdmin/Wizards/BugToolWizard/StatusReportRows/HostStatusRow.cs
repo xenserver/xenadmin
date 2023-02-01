@@ -34,7 +34,7 @@ using XenAdmin.Actions;
 using XenAdmin.Network;
 using XenAPI;
 
-namespace XenAdmin.Wizards.BugToolWizardFiles.StatusReportRows
+namespace XenAdmin.Wizards.BugToolWizard.StatusReportRows
 {
     internal class HostStatusRow : StatusReportRow
     {

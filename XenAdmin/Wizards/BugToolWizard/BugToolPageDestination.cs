@@ -39,7 +39,7 @@ using XenCenterLib;
 using XenModel;
 
 
-namespace XenAdmin.Wizards.BugToolWizardFiles
+namespace XenAdmin.Wizards.BugToolWizard
 {
     public partial class BugToolPageDestination : XenTabPage
     {

@@ -38,10 +38,10 @@ using XenAdmin.Controls;
 using XenAdmin.Dialogs;
 using XenAPI;
 using XenAdmin.Core;
-using XenAdmin.Wizards.BugToolWizardFiles.StatusReportRows;
+using XenAdmin.Wizards.BugToolWizard.StatusReportRows;
 
 
-namespace XenAdmin.Wizards.BugToolWizardFiles
+namespace XenAdmin.Wizards.BugToolWizard
 {
     public partial class BugToolPageRetrieveData : XenTabPage
     {

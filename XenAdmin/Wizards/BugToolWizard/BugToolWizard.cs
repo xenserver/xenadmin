@@ -39,7 +39,7 @@ using XenAdmin.Dialogs;
 using XenAdmin.Wizards.GenericPages;
 using XenAPI;
 
-namespace XenAdmin.Wizards.BugToolWizardFiles
+namespace XenAdmin.Wizards.BugToolWizard
 {
     public partial class BugToolWizard : XenWizardBase
     {

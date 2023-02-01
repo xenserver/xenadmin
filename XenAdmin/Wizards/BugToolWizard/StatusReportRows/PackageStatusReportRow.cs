@@ -31,7 +31,7 @@
 
 using XenAdmin.Actions;
 
-namespace XenAdmin.Wizards.BugToolWizardFiles.StatusReportRows
+namespace XenAdmin.Wizards.BugToolWizard.StatusReportRows
 {
     internal class PackageStatusReportRow : StatusReportRow
     {

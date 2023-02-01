@@ -1,6 +1,4 @@
-using XenAdmin.Wizards.BugToolWizardFiles.StatusReportRows;
-
-namespace XenAdmin.Wizards.BugToolWizardFiles
+namespace XenAdmin.Wizards.BugToolWizard
 {
     partial class BugToolPageRetrieveData
     {
@@ -19,7 +17,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             {
                 foreach (var r in dataGridViewEx1.Rows)
                 {
-                    if (r is StatusReportRow row)
+                    if (r is XenAdmin.Wizards.BugToolWizard.StatusReportRows.StatusReportRow row)
                     {
                         row.DeRegisterEvents();
                         DeRegisterRowEvents(row);

@@ -1,4 +1,4 @@
-namespace XenAdmin.Wizards.BugToolWizardFiles
+namespace XenAdmin.Wizards.BugToolWizard
 {
     partial class BugToolPageDestination
     {

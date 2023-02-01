@@ -44,7 +44,7 @@ using XenAdmin.Dialogs;
 using XenCenterLib;
 
 
-namespace XenAdmin.Wizards.BugToolWizardFiles
+namespace XenAdmin.Wizards.BugToolWizard
 {
     public partial class BugToolPageSelectCapabilities : XenTabPage
     {

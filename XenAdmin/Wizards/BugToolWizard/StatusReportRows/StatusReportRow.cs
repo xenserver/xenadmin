@@ -35,7 +35,7 @@ using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Controls.DataGridViewEx;
 
-namespace XenAdmin.Wizards.BugToolWizardFiles.StatusReportRows
+namespace XenAdmin.Wizards.BugToolWizard.StatusReportRows
 {
     internal abstract class StatusReportRow : DataGridViewRow
     {
