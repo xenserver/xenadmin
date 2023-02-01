@@ -402,6 +402,7 @@ namespace XenAdmin.Dialogs
             private readonly DataGridViewTextBoxCell _datasourceCell = new DataGridViewTextBoxCell();
             private readonly DataGridViewTextBoxCell _typeCell = new DataGridViewTextBoxCell();
             private readonly DataGridViewTextBoxCell _enabledCell = new DataGridViewTextBoxCell();
+            private readonly DataGridViewTextBoxCell _nameDescription = new DataGridViewTextBoxCell();
             private readonly DataGridViewTextBoxCell _colourCell = new DataGridViewTextBoxCell();
 
             public DataSourceGridViewRow(DataSourceItem dataSourceItem, bool displayOnGraph)
@@ -412,8 +413,10 @@ namespace XenAdmin.Dialogs
                 _datasourceCell.Value = Dsi.ToString();
                 _typeCell.Value = Dsi.Category.ToStringI18N();
                 _enabledCell.Value = Dsi.Enabled.ToYesNoStringI18n();
+                _nameDescription.Value = Dsi.DataSource.name_description;
                 _colourCell.Value = Dsi.Color;
-                Cells.AddRange(_checkBoxCell, _datasourceCell, _typeCell, _enabledCell, _colourCell);
+
+                Cells.AddRange(_checkBoxCell, _datasourceCell, _typeCell, _enabledCell, _nameDescription, _colourCell);
 
                 if (Dsi.Hidden)
                     base.DefaultCellStyle = new DataGridViewCellStyle

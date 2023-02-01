@@ -303,6 +303,15 @@
   <data name="ColumnEnabled.Width" type="System.Int32, mscorlib">
     <value>74</value>
   </data>
+  <metadata name="Description.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="Description.HeaderText" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Description.Width" type="System.Int32, mscorlib">
+    <value>92</value>
+  </data>
   <metadata name="ColumnColour.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -765,6 +774,18 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Graph Details</value>
   </data>
+  <data name="&gt;&gt;toolStripMenuItemHidden.Name" xml:space="preserve">
+    <value>toolStripMenuItemHidden</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemHidden.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemDisabled.Name" xml:space="preserve">
+    <value>toolStripMenuItemDisabled</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemDisabled.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;ColumnDisplayOnGraph.Name" xml:space="preserve">
     <value>ColumnDisplayOnGraph</value>
   </data>
@@ -789,23 +810,17 @@
   <data name="&gt;&gt;ColumnEnabled.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;Description.Name" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="&gt;&gt;Description.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;ColumnColour.Name" xml:space="preserve">
     <value>ColumnColour</value>
   </data>
   <data name="&gt;&gt;ColumnColour.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemHidden.Name" xml:space="preserve">
-    <value>toolStripMenuItemHidden</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemHidden.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemDisabled.Name" xml:space="preserve">
-    <value>toolStripMenuItemDisabled</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemDisabled.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>GraphDetailsDialog</value>
