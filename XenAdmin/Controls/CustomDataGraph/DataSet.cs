@@ -62,11 +62,7 @@ namespace XenAdmin.Controls.CustomDataGraph
         public DataSet(IXenObject xo, bool hide, string datasourceName, List<Data_source> datasources)
         {
             XenObject = xo;
-            Hide = datasourceName == "xapi_open_fds" ||
-                   datasourceName == "pool_task_count" ||
-                   datasourceName == "pool_session_count" ||
-                   datasourceName == "memory" ||
-                   datasourceName == "memory_total_kib" || hide;
+            Hide = datasourceName == "memory" || datasourceName == "memory_total_kib" || hide;
 
             DataSourceName = datasourceName;
 
