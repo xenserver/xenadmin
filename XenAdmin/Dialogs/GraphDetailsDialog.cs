@@ -40,16 +40,15 @@ using XenAdmin.Controls.CustomDataGraph;
 using XenAdmin.Core;
 using XenCenterLib;
 
-
 namespace XenAdmin.Dialogs
 {
     public partial class GraphDetailsDialog : XenDialogBase
     {
-        private const int ColorSquareSize = 12;
+        private const int COLOR_SQUARE_SIZE = 12;
 
-        private readonly DesignedGraph designedGraph;
-        private readonly GraphList graphList;
-        private readonly bool isNew;
+        private readonly DesignedGraph _designedGraph;
+        private readonly GraphList _graphList;
+        private readonly bool _isNew;
         private bool _updating;
         private List<DataSourceItem> _dataSourceItems = new List<DataSourceItem>();
 
@@ -59,53 +58,41 @@ namespace XenAdmin.Dialogs
             InitializeComponent();
             tableLayoutPanel1.Visible = false;
 
-            this.graphList = graphList;
+            _graphList = graphList;
 
             if (designedGraph == null)
             {
-                isNew = true;
-                this.designedGraph = new DesignedGraph();
-                // Generate an unique suggested name for the graph
-                this.designedGraph.DisplayName = Helpers.MakeUniqueName(Messages.GRAPH_NAME, graphList.DisplayNames);
+                _isNew = true;
+                _designedGraph = new DesignedGraph
+                {
+                    // Generate an unique suggested name for the graph
+                    DisplayName = Helpers.MakeUniqueName(Messages.GRAPH_NAME, graphList.DisplayNames)
+                };
                 base.Text = Messages.GRAPHS_NEW_TITLE;
             }
             else
             {
-                this.designedGraph = new DesignedGraph(designedGraph);
-                base.Text = string.Format(Messages.GRAPHS_EDIT_TITLE, this.designedGraph.DisplayName);
+                _designedGraph = new DesignedGraph(designedGraph);
+                base.Text = string.Format(Messages.GRAPHS_EDIT_TITLE, _designedGraph.DisplayName);
             }
 
             ActiveControl = GraphNameTextBox;
-            GraphNameTextBox.Text = this.designedGraph.DisplayName;
+            GraphNameTextBox.Text = _designedGraph.DisplayName;
             EnableControlsAfterCheckChanged();
             EnableControlsAfterSelectionChanged();
         }
 
         private void LoadDataSources()
         {
-            if (graphList.XenObject == null)
+            if (_graphList.XenObject == null)
                 return;
 
             tableLayoutPanel1.Visible = true;
             searchTextBox.Enabled = false;
 
-            var action = new GetDataSourcesAction(graphList.XenObject);
+            var action = new GetDataSourcesAction(_graphList.XenObject);
             action.Completed += getDataSourcesAction_Completed;
             action.RunAsync();
-        }
-
-        private void getDataSourcesAction_Completed(ActionBase sender)
-        {
-            if (!(sender is GetDataSourcesAction action))
-                return;
-
-            Program.Invoke(this, () =>
-            {
-                tableLayoutPanel1.Visible = false;
-                _dataSourceItems = DataSourceItemList.BuildList(action.XenObject, action.DataSources);
-                PopulateDataGridView();
-                searchTextBox.Enabled = true;
-            });
         }
 
         private void PopulateDataGridView()
@@ -118,7 +105,7 @@ namespace XenAdmin.Dialogs
 
                 var rowList = new List<DataSourceGridViewRow>();
 
-                foreach (DataSourceItem dataSourceItem in _dataSourceItems)
+                foreach (var dataSourceItem in _dataSourceItems)
                 {
                     if (!toolStripMenuItemHidden.Checked && dataSourceItem.Hidden)
                         continue;
@@ -129,7 +116,7 @@ namespace XenAdmin.Dialogs
                     if (!searchTextBox.Matches(dataSourceItem.ToString()))
                         continue;
 
-                    bool displayOnGraph = designedGraph.DataSourceItems.Contains(dataSourceItem);
+                    var displayOnGraph = _designedGraph.DataSourceItems.Contains(dataSourceItem);
                     rowList.Add(new DataSourceGridViewRow(dataSourceItem, displayOnGraph));
                 }
 
@@ -151,7 +138,7 @@ namespace XenAdmin.Dialogs
 
         private void EnableControlsAfterCheckChanged()
         {
-            int checkedRowCount = dataGridView.Rows.Cast<DataSourceGridViewRow>().Count(row => row.IsChecked);
+            var checkedRowCount = dataGridView.Rows.Cast<DataSourceGridViewRow>().Count(row => row.IsChecked);
             buttonClearAll.Enabled = checkedRowCount > 0;
             SaveButton.Enabled = checkedRowCount > 0;
         }
@@ -175,7 +162,7 @@ namespace XenAdmin.Dialogs
                         continue;
 
                     dsRow.ClearCheck();
-                    designedGraph.DataSourceItems.Remove(dsRow.Dsi);
+                    _designedGraph.DataSourceItems.Remove(dsRow.Dsi);
                 }
             }
             finally
@@ -184,9 +171,9 @@ namespace XenAdmin.Dialogs
             }
         }
 
-        private void EnableDatasource()
+        private void EnableDataSource()
         {
-            if (graphList.XenObject?.Connection == null || dataGridView.SelectedRows.Count != 1)
+            if (_graphList.XenObject?.Connection == null || dataGridView.SelectedRows.Count != 1)
                 return;
 
             if (!(dataGridView.SelectedRows[0] is DataSourceGridViewRow row))
@@ -197,7 +184,7 @@ namespace XenAdmin.Dialogs
                 return;
 
             buttonEnable.Enabled = false;
-            var action = new EnableDataSourceAction(graphList.XenObject, dataSource, row.Dsi.ToString());
+            var action = new EnableDataSourceAction(_graphList.XenObject, dataSource, row.Dsi.ToString());
 
             using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee)
             {
@@ -220,18 +207,32 @@ namespace XenAdmin.Dialogs
 
         #region Event handlers
 
+        private void getDataSourcesAction_Completed(ActionBase sender)
+        {
+            if (!(sender is GetDataSourcesAction action))
+                return;
+
+            Program.Invoke(this, () =>
+            {
+                tableLayoutPanel1.Visible = false;
+                _dataSourceItems = DataSourceItemList.BuildList(action.XenObject, action.DataSources);
+                PopulateDataGridView();
+                searchTextBox.Enabled = true;
+            });
+        }
+
         private void datasourcesGridView_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             if (e.ColumnIndex == ColumnColour.Index && 0 <= e.RowIndex && e.RowIndex <= dataGridView.RowCount -1)
             {   
-                Rectangle rect = dataGridView.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true);
+                var rect = dataGridView.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true);
                 e.PaintBackground(rect, true);
 
                 rect.X += 3;
                 rect.Y += 5;
                 
-                rect.Width = ColorSquareSize;
-                rect.Height = ColorSquareSize;
+                rect.Width = COLOR_SQUARE_SIZE;
+                rect.Height = COLOR_SQUARE_SIZE;
 
                 using (var brush = new SolidBrush((Color)e.Value))
                     e.Graphics.FillRectangle(brush, rect);
@@ -250,8 +251,7 @@ namespace XenAdmin.Dialogs
             if (e.RowIndex < 0 || e.RowIndex > dataGridView.RowCount - 1)
                 return;
 
-            var row = dataGridView.Rows[e.RowIndex] as DataSourceGridViewRow;
-            if (row == null)
+            if (!(dataGridView.Rows[e.RowIndex] is DataSourceGridViewRow row))
                 return;
 
             if (e.ColumnIndex == ColumnDisplayOnGraph.Index)
@@ -259,12 +259,12 @@ namespace XenAdmin.Dialogs
                 if (row.IsChecked)
                 {
                     row.ClearCheck();
-                    designedGraph.DataSourceItems.Remove(row.Dsi);
+                    _designedGraph.DataSourceItems.Remove(row.Dsi);
                 }
                 else
                 {
                     row.Check();
-                    designedGraph.DataSourceItems.Add(row.Dsi);
+                    _designedGraph.DataSourceItems.Add(row.Dsi);
                 }
 
                 EnableControlsAfterCheckChanged();
@@ -273,7 +273,7 @@ namespace XenAdmin.Dialogs
             {
                 using (var cd = new ColorDialog
                 {
-                    Color = row.Colour,
+                    Color = row.Color,
                     AllowFullOpen = true,
                     AnyColor = true,
                     FullOpen = true,
@@ -281,7 +281,7 @@ namespace XenAdmin.Dialogs
                 })
                 {
                     if (cd.ShowDialog() == DialogResult.OK)
-                        row.Colour = cd.Color;
+                        row.Color = cd.Color;
                 }
             }
         }
@@ -362,21 +362,20 @@ namespace XenAdmin.Dialogs
         
         private void buttonEnable_Click(object sender, EventArgs e)
         {
-            EnableDatasource();
+            EnableDataSource();
         }
-
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            if (graphList.XenObject == null)
+            if (_graphList.XenObject == null)
                 return;
 
-            designedGraph.DisplayName = GraphNameTextBox.Text;
+            _designedGraph.DisplayName = GraphNameTextBox.Text;
             
-            if (isNew)
-                graphList.AddGraph(designedGraph);
+            if (_isNew)
+                _graphList.AddGraph(_designedGraph);
             else
-                graphList.ReplaceGraphAt(graphList.SelectedGraphIndex, designedGraph);
+                _graphList.ReplaceGraphAt(_graphList.SelectedGraphIndex, _designedGraph);
 
             var dataSourceItems = new List<DataSourceItem>();
             foreach (DataGridViewRow row in dataGridView.Rows)
@@ -385,10 +384,10 @@ namespace XenAdmin.Dialogs
                     continue;
 
                 if (dsRow.Dsi.ColorChanged)
-                    Palette.SetCustomColor(Palette.GetUuid(dsRow.Dsi.DataSource.name_label, graphList.XenObject), dsRow.Dsi.Color);
+                    Palette.SetCustomColor(Palette.GetUuid(dsRow.Dsi.DataSource.name_label, _graphList.XenObject), dsRow.Dsi.Color);
                 dataSourceItems.Add(dsRow.Dsi);
             }
-            graphList.SaveGraphs(dataSourceItems);
+            _graphList.SaveGraphs(dataSourceItems);
         }
 
         #endregion
@@ -396,30 +395,30 @@ namespace XenAdmin.Dialogs
 
         #region Nested classes
 
-        private class DataSourceGridViewRow : DataGridViewRow
+        private sealed class DataSourceGridViewRow : DataGridViewRow
         {
             private readonly DataGridViewCheckBoxCell _checkBoxCell = new DataGridViewCheckBoxCell();
-            private readonly DataGridViewTextBoxCell _datasourceCell = new DataGridViewTextBoxCell();
+            private readonly DataGridViewTextBoxCell _dataSourceCell = new DataGridViewTextBoxCell();
             private readonly DataGridViewTextBoxCell _typeCell = new DataGridViewTextBoxCell();
             private readonly DataGridViewTextBoxCell _enabledCell = new DataGridViewTextBoxCell();
             private readonly DataGridViewTextBoxCell _nameDescription = new DataGridViewTextBoxCell();
-            private readonly DataGridViewTextBoxCell _colourCell = new DataGridViewTextBoxCell();
+            private readonly DataGridViewTextBoxCell _colorCell = new DataGridViewTextBoxCell();
 
             public DataSourceGridViewRow(DataSourceItem dataSourceItem, bool displayOnGraph)
             {
                 Dsi = dataSourceItem;
 
                 _checkBoxCell.Value = displayOnGraph;
-                _datasourceCell.Value = Dsi.ToString();
+                _dataSourceCell.Value = Dsi.ToString();
                 _typeCell.Value = Dsi.Category.ToStringI18N();
                 _enabledCell.Value = Dsi.Enabled.ToYesNoStringI18n();
                 _nameDescription.Value = Dsi.DataSource.name_description;
-                _colourCell.Value = Dsi.Color;
+                _colorCell.Value = Dsi.Color;
 
-                Cells.AddRange(_checkBoxCell, _datasourceCell, _typeCell, _enabledCell, _nameDescription, _colourCell);
+                Cells.AddRange(_checkBoxCell, _dataSourceCell, _typeCell, _enabledCell, _nameDescription, _colorCell);
 
                 if (Dsi.Hidden)
-                    base.DefaultCellStyle = new DataGridViewCellStyle
+                    DefaultCellStyle = new DataGridViewCellStyle
                     {
                         ForeColor = SystemColors.GrayText,
                         SelectionForeColor = SystemColors.GrayText,
@@ -429,14 +428,14 @@ namespace XenAdmin.Dialogs
 
             internal DataSourceItem Dsi { get; }
 
-            internal Color Colour
+            internal Color Color
             {
-                get => (Color)_colourCell.Value;
+                get => (Color)_colorCell.Value;
                 set
                 {
                     Dsi.ColorChanged = Dsi.Color != value;
                     Dsi.Color = value;
-                    _colourCell.Value = value;
+                    _colorCell.Value = value;
                 }
             }
 
@@ -471,14 +470,13 @@ namespace XenAdmin.Dialogs
                 if (index == _checkBoxCell.ColumnIndex)
                     return -IsChecked.CompareTo(other.IsChecked);
 
-                if (_checkBoxCell.ColumnIndex < index && index < _colourCell.ColumnIndex)
+                if (_checkBoxCell.ColumnIndex < index && index < _colorCell.ColumnIndex)
                     return StringUtility.NaturalCompare(Cells[index].Value.ToString(),
                         other.Cells[index].Value.ToString());
 
                 return 0;
             }
         }
-
 
         #endregion
     }
