@@ -122,133 +122,7 @@
     <value>4</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
-  <data name="usernameLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Left</value>
-  </data>
-  <data name="usernameLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="usernameLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
-  <data name="usernameLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>30, 189</value>
-  </data>
-  <data name="usernameLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>30, 5, 3, 5</value>
-  </data>
-  <data name="usernameLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 13</value>
-  </data>
-  <data name="usernameLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="usernameLabel.Text" xml:space="preserve">
-    <value>用户名(&amp;S):</value>
-  </data>
-  <data name="usernameLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;usernameLabel.Name" xml:space="preserve">
-    <value>usernameLabel</value>
-  </data>
-  <data name="&gt;&gt;usernameLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;usernameLabel.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;usernameLabel.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="passwordLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Left</value>
-  </data>
-  <data name="passwordLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="passwordLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="passwordLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>30, 219</value>
-  </data>
-  <data name="passwordLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>30, 5, 3, 5</value>
-  </data>
-  <data name="passwordLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 13</value>
-  </data>
-  <data name="passwordLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="passwordLabel.Text" xml:space="preserve">
-    <value>密码(&amp;A):</value>
-  </data>
-  <data name="passwordLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;passwordLabel.Name" xml:space="preserve">
-    <value>passwordLabel</value>
-  </data>
-  <data name="&gt;&gt;passwordLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;passwordLabel.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;passwordLabel.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="passwordTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>108, 216</value>
-  </data>
-  <data name="passwordTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 5, 3, 5</value>
-  </data>
-  <data name="passwordTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>246, 20</value>
-  </data>
-  <data name="passwordTextBox.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;passwordTextBox.Name" xml:space="preserve">
-    <value>passwordTextBox</value>
-  </data>
-  <data name="&gt;&gt;passwordTextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;passwordTextBox.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;passwordTextBox.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="usernameTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>108, 186</value>
-  </data>
-  <data name="usernameTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 5, 3, 5</value>
-  </data>
-  <data name="usernameTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>246, 20</value>
-  </data>
-  <data name="usernameTextBox.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;usernameTextBox.Name" xml:space="preserve">
-    <value>usernameTextBox</value>
-  </data>
-  <data name="&gt;&gt;usernameTextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;usernameTextBox.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;usernameTextBox.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -260,9 +134,6 @@
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 0</value>
-  </data>
-  <data name="label2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 12</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>563, 25</value>
@@ -297,9 +168,6 @@
   <data name="labelName.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 31</value>
   </data>
-  <data name="labelName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 5</value>
-  </data>
   <data name="labelName.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 13</value>
   </data>
@@ -321,14 +189,8 @@
   <data name="&gt;&gt;labelName.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="m_textBoxName.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
   <data name="m_textBoxName.Location" type="System.Drawing.Point, System.Drawing">
     <value>108, 28</value>
-  </data>
-  <data name="m_textBoxName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 5</value>
   </data>
   <data name="m_textBoxName.Size" type="System.Drawing.Size, System.Drawing">
     <value>377, 20</value>
@@ -360,9 +222,6 @@
   <data name="labelFileLocation.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 62</value>
   </data>
-  <data name="labelFileLocation.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 5, 3, 5</value>
-  </data>
   <data name="labelFileLocation.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 13</value>
   </data>
@@ -387,14 +246,8 @@
   <data name="&gt;&gt;labelFileLocation.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="m_textBoxLocation.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
   <data name="m_textBoxLocation.Location" type="System.Drawing.Point, System.Drawing">
     <value>108, 58</value>
-  </data>
-  <data name="m_textBoxLocation.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 5, 3, 5</value>
   </data>
   <data name="m_textBoxLocation.Size" type="System.Drawing.Size, System.Drawing">
     <value>377, 20</value>
@@ -419,9 +272,6 @@
   </data>
   <data name="BrowseButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>491, 57</value>
-  </data>
-  <data name="BrowseButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 4, 3, 5</value>
   </data>
   <data name="BrowseButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -479,171 +329,6 @@
   </data>
   <data name="&gt;&gt;m_ctrlError.ZOrder" xml:space="preserve">
     <value>10</value>
-  </data>
-  <data name="uploadCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="uploadCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="uploadCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 105</value>
-  </data>
-  <data name="uploadCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 20, 3, 6</value>
-  </data>
-  <data name="uploadCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>451, 17</value>
-  </data>
-  <data name="uploadCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="uploadCheckBox.Text" xml:space="preserve">
-    <value>将状态报告上载到 {0}(&amp;U)</value>
-  </data>
-  <data name="&gt;&gt;uploadCheckBox.Name" xml:space="preserve">
-    <value>uploadCheckBox</value>
-  </data>
-  <data name="&gt;&gt;uploadCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;uploadCheckBox.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;uploadCheckBox.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="caseNumberLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Left</value>
-  </data>
-  <data name="caseNumberLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="caseNumberLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="caseNumberLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>30, 249</value>
-  </data>
-  <data name="caseNumberLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>30, 5, 3, 5</value>
-  </data>
-  <data name="caseNumberLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 13</value>
-  </data>
-  <data name="caseNumberLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="caseNumberLabel.Text" xml:space="preserve">
-    <value>案例号(&amp;C):</value>
-  </data>
-  <data name="&gt;&gt;caseNumberLabel.Name" xml:space="preserve">
-    <value>caseNumberLabel</value>
-  </data>
-  <data name="&gt;&gt;caseNumberLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;caseNumberLabel.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;caseNumberLabel.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="caseNumberTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>108, 246</value>
-  </data>
-  <data name="caseNumberTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 5, 3, 5</value>
-  </data>
-  <data name="caseNumberTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>246, 20</value>
-  </data>
-  <data name="caseNumberTextBox.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="&gt;&gt;caseNumberTextBox.Name" xml:space="preserve">
-    <value>caseNumberTextBox</value>
-  </data>
-  <data name="&gt;&gt;caseNumberTextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;caseNumberTextBox.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;caseNumberTextBox.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
-  <data name="optionalLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Left</value>
-  </data>
-  <data name="optionalLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="optionalLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="optionalLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>360, 249</value>
-  </data>
-  <data name="optionalLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 5, 3, 5</value>
-  </data>
-  <data name="optionalLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 13</value>
-  </data>
-  <data name="optionalLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="optionalLabel.Text" xml:space="preserve">
-    <value>(可选)</value>
-  </data>
-  <data name="&gt;&gt;optionalLabel.Name" xml:space="preserve">
-    <value>optionalLabel</value>
-  </data>
-  <data name="&gt;&gt;optionalLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;optionalLabel.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;optionalLabel.ZOrder" xml:space="preserve">
-    <value>14</value>
-  </data>
-  <data name="enterCredentialsLinkLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="enterCredentialsLinkLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="enterCredentialsLinkLabel.LinkArea" type="System.Windows.Forms.LinkArea, System.Windows.Forms">
-    <value>0, 0</value>
-  </data>
-  <data name="enterCredentialsLinkLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>30, 128</value>
-  </data>
-  <data name="enterCredentialsLinkLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>30, 0, 3, 0</value>
-  </data>
-  <data name="enterCredentialsLinkLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 13</value>
-  </data>
-  <data name="enterCredentialsLinkLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="enterCredentialsLinkLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;enterCredentialsLinkLabel.Name" xml:space="preserve">
-    <value>enterCredentialsLinkLabel</value>
-  </data>
-  <data name="&gt;&gt;enterCredentialsLinkLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;enterCredentialsLinkLabel.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;enterCredentialsLinkLabel.ZOrder" xml:space="preserve">
-    <value>15</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>

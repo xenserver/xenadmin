@@ -157,13 +157,13 @@
     <value>424, 318</value>
   </data>
   <data name="dataGridViewItems.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;dataGridViewItems.Name" xml:space="preserve">
     <value>dataGridViewItems</value>
   </data>
   <data name="&gt;&gt;dataGridViewItems.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.DataGridViewEx.DataGridViewEx, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.DataGridViewEx.DataGridViewEx, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dataGridViewItems.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -178,7 +178,7 @@
     <value>75, 23</value>
   </data>
   <data name="SelectButton.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>1</value>
   </data>
   <data name="SelectButton.Text" xml:space="preserve">
     <value>&amp;Select All</value>
@@ -202,7 +202,7 @@
     <value>75, 23</value>
   </data>
   <data name="ClearButton.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>2</value>
   </data>
   <data name="ClearButton.Text" xml:space="preserve">
     <value>&amp;Clear All</value>
@@ -232,7 +232,7 @@
     <value>430, 353</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -270,11 +270,11 @@
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 0</value>
   </data>
-  <data name="label1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 24</value>
+  <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 0, 3, 24</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>618, 50</value>
+    <value>618, 26</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -346,7 +346,7 @@
     <value>0, 13</value>
   </data>
   <data name="DescriptionValue.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;DescriptionValue.Name" xml:space="preserve">
     <value>DescriptionValue</value>
@@ -376,7 +376,7 @@
     <value>31, 13</value>
   </data>
   <data name="SizeLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="SizeLabel.Text" xml:space="preserve">
     <value>Size</value>
@@ -409,7 +409,7 @@
     <value>0, 13</value>
   </data>
   <data name="SizeValue.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;SizeValue.Name" xml:space="preserve">
     <value>SizeValue</value>
@@ -439,7 +439,7 @@
     <value>68, 13</value>
   </data>
   <data name="TotalSizeLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>4</value>
   </data>
   <data name="TotalSizeLabel.Text" xml:space="preserve">
     <value>Total Size:</value>
@@ -472,7 +472,7 @@
     <value>0, 13</value>
   </data>
   <data name="TotalSizeValue.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>5</value>
   </data>
   <data name="TotalSizeValue.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopRight</value>
@@ -502,7 +502,7 @@
     <value>182, 353</value>
   </data>
   <data name="tableLayoutPanel4.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel4.Name" xml:space="preserve">
     <value>tableLayoutPanel4</value>
@@ -535,7 +535,7 @@
     <value>624, 422</value>
   </data>
   <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel3.Name" xml:space="preserve">
     <value>tableLayoutPanel3</value>
@@ -559,7 +559,7 @@
     <value>110, 13</value>
   </data>
   <data name="linkLabel1.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>3</value>
   </data>
   <data name="linkLabel1.Text" xml:space="preserve">
     <value>{0} Privacy Statement</value>
@@ -604,6 +604,6 @@
     <value>BugToolPageSelectCapabilities</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.XenTabPage, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

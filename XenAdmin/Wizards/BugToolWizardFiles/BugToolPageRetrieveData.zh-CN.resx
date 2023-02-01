@@ -167,12 +167,6 @@
   <data name="labelError.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 402</value>
   </data>
-  <data name="labelError.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="labelError.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
   <data name="labelError.Size" type="System.Drawing.Size, System.Drawing">
     <value>677, 15</value>
   </data>
@@ -193,9 +187,6 @@
   </data>
   <data name="&gt;&gt;labelError.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="progressBar1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
   </data>
   <data name="progressBar1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>

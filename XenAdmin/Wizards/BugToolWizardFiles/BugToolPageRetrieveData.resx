@@ -139,7 +139,7 @@
     <value>677, 52</value>
   </data>
   <data name="linkLabelBlurb.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="linkLabelBlurb.Text" xml:space="preserve">
     <value>{0} is now collecting your status report. This consists of a report from each of your designated servers and your {0} logs if specified in the previous step.
@@ -168,19 +168,13 @@ The completed report will be saved in the destination selected in the previous s
     <value>NoControl</value>
   </data>
   <data name="labelError.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 402</value>
-  </data>
-  <data name="labelError.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="labelError.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
+    <value>3, 407</value>
   </data>
   <data name="labelError.Size" type="System.Drawing.Size, System.Drawing">
-    <value>677, 15</value>
+    <value>677, 13</value>
   </data>
   <data name="labelError.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="labelError.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -197,8 +191,8 @@ The completed report will be saved in the destination selected in the previous s
   <data name="&gt;&gt;labelError.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="progressBar1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="progressBar1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left, Right</value>
   </data>
   <data name="progressBar1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -210,7 +204,7 @@ The completed report will be saved in the destination selected in the previous s
     <value>677, 16</value>
   </data>
   <data name="progressBar1.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;progressBar1.Name" xml:space="preserve">
     <value>progressBar1</value>
@@ -301,10 +295,10 @@ The completed report will be saved in the destination selected in the previous s
     <value>3, 10, 3, 10</value>
   </data>
   <data name="dataGridViewEx1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>677, 327</value>
+    <value>677, 335</value>
   </data>
   <data name="dataGridViewEx1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;dataGridViewEx1.Name" xml:space="preserve">
     <value>dataGridViewEx1</value>
