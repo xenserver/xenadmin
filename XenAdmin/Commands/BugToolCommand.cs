@@ -29,7 +29,6 @@
  */
 
 using XenAdmin.Network;
-using XenAdmin.Wizards;
 using XenAdmin.Wizards.BugToolWizardFiles;
 using XenAPI;
 
