@@ -34,30 +34,32 @@ using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAPI;
 
-namespace XenAdmin.Wizards.BugToolWizard.StatusReportRows
+namespace XenAdmin.Wizards.BugToolWizard
 {
-    internal class ClientSideDataRow : StatusReportRow
+    partial class BugToolPageRetrieveData
     {
-        private readonly List<Host> hosts;
-        private readonly bool includeClientLogs;
-        private StatusReportClientSideAction _action;
-
-        public ClientSideDataRow(List<Host> hosts, bool includeClientLogs)
+        private class ClientSideDataRow : StatusReportRow
         {
-            this.hosts = hosts;
-            this.includeClientLogs = includeClientLogs;
-            cellHostImg.Value = Images.StaticImages._000_GetServerReport_h32bit_16;
-            cellHost.Value = includeClientLogs
-                ? string.Format(Messages.BUGTOOL_CLIENT_LOGS_META, BrandManager.BrandConsole)
-                : string.Format(Messages.BUGTOOL_CLIENT_META, BrandManager.BrandConsole);
-        }
+            private readonly List<Host> hosts;
+            private readonly bool includeClientLogs;
+            private StatusReportClientSideAction _action;
 
-        public override StatusReportAction Action => _action;
+            public ClientSideDataRow(List<Host> hosts, bool includeClientLogs)
+            {
+                this.hosts = hosts;
+                this.includeClientLogs = includeClientLogs;
+                cellHostImg.Value = Images.StaticImages._000_GetServerReport_h32bit_16;
+                cellHost.Value = includeClientLogs
+                    ? string.Format(Messages.BUGTOOL_CLIENT_LOGS_META, BrandManager.BrandConsole)
+                    : string.Format(Messages.BUGTOOL_CLIENT_META, BrandManager.BrandConsole);
+            }
 
-        protected override void CreateAction(string path, string time)
-        {
-            _action = new StatusReportClientSideAction(hosts, includeClientLogs, path, time);
+            public override StatusReportAction Action => _action;
+
+            protected override void CreateAction(string path, string time)
+            {
+                _action = new StatusReportClientSideAction(hosts, includeClientLogs, path, time);
+            }
         }
     }
-
 }

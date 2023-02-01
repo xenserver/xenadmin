@@ -794,10 +794,18 @@
     <Compile Include="Dialogs\InstallCertificateDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Wizards\BugToolWizard\StatusReportRows\ClientSideDataRow.cs" />
-    <Compile Include="Wizards\BugToolWizard\StatusReportRows\HostStatusRow.cs" />
-    <Compile Include="Wizards\BugToolWizard\StatusReportRows\PackageStatusReportRow.cs" />
-    <Compile Include="Wizards\BugToolWizard\StatusReportRows\StatusReportRow.cs" />
+    <Compile Include="Wizards\BugToolWizard\StatusReportRows\ClientSideDataRow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Wizards\BugToolWizard\StatusReportRows\HostStatusRow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Wizards\BugToolWizard\StatusReportRows\PackageStatusReportRow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Wizards\BugToolWizard\StatusReportRows\StatusReportRow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Wizards\ConversionWizard\ConversionWizard.cs">
       <SubType>Form</SubType>
     </Compile>

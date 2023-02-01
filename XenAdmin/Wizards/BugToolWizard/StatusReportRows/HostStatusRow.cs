@@ -34,31 +34,34 @@ using XenAdmin.Actions;
 using XenAdmin.Network;
 using XenAPI;
 
-namespace XenAdmin.Wizards.BugToolWizard.StatusReportRows
+namespace XenAdmin.Wizards.BugToolWizard
 {
-    internal class HostStatusRow : StatusReportRow
+    partial class BugToolPageRetrieveData
     {
-        private readonly long size;
-        private readonly List<string> capabilityKeys;
-        private readonly Host Host;
-        private SingleHostStatusAction _action;
-
-        public HostStatusRow(Host host, long size, List<string> capabilityKeys)
+        private class HostStatusRow : StatusReportRow
         {
-            Host = host;
-            this.size = size;
-            this.capabilityKeys = capabilityKeys;
-            cellHostImg.Value = Images.GetImage16For(Host);
-            cellHost.Value = Host.Name();
-        }
+            private readonly long size;
+            private readonly List<string> capabilityKeys;
+            private readonly Host Host;
+            private SingleHostStatusAction _action;
 
-        public IXenConnection Connection => Host.Connection;
+            public HostStatusRow(Host host, long size, List<string> capabilityKeys)
+            {
+                Host = host;
+                this.size = size;
+                this.capabilityKeys = capabilityKeys;
+                cellHostImg.Value = Images.GetImage16For(Host);
+                cellHost.Value = Host.Name();
+            }
 
-        public override StatusReportAction Action => _action;
+            public IXenConnection Connection => Host.Connection;
 
-        protected override void CreateAction(string path, string time)
-        {
-            _action = new SingleHostStatusAction(Host, size, capabilityKeys, path, time);
+            public override StatusReportAction Action => _action;
+
+            protected override void CreateAction(string path, string time)
+            {
+                _action = new SingleHostStatusAction(Host, size, capabilityKeys, path, time);
+            }
         }
     }
 }

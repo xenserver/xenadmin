@@ -31,24 +31,27 @@
 
 using XenAdmin.Actions;
 
-namespace XenAdmin.Wizards.BugToolWizard.StatusReportRows
+namespace XenAdmin.Wizards.BugToolWizard
 {
-    internal class PackageStatusReportRow : StatusReportRow
+    partial class BugToolPageRetrieveData
     {
-        public override StatusReportAction Action => _action;
-        private ZipStatusReportAction _action;
-        private string OutputFile { get; }
-
-        public PackageStatusReportRow(string outputFile)
+        private class PackageStatusReportRow : StatusReportRow
         {
-            OutputFile = outputFile;
-            cellHostImg.Value = Images.StaticImages._000_GetServerReport_h32bit_16;
-            cellHost.Value = Messages.BUGTOOL_PACKAGE_STATUS_REPORT;
-        }
+            public override StatusReportAction Action => _action;
+            private ZipStatusReportAction _action;
+            private string OutputFile { get; }
 
-        protected override void CreateAction(string path, string time)
-        {
-            _action = new ZipStatusReportAction(path, OutputFile,  time);
+            public PackageStatusReportRow(string outputFile)
+            {
+                OutputFile = outputFile;
+                cellHostImg.Value = Images.StaticImages._000_GetServerReport_h32bit_16;
+                cellHost.Value = Messages.BUGTOOL_PACKAGE_STATUS_REPORT;
+            }
+
+            protected override void CreateAction(string path, string time)
+            {
+                _action = new ZipStatusReportAction(path, OutputFile, time);
+            }
         }
     }
 }

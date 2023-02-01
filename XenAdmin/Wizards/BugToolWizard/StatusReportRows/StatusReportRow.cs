@@ -35,129 +35,131 @@ using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Controls.DataGridViewEx;
 
-namespace XenAdmin.Wizards.BugToolWizard.StatusReportRows
+namespace XenAdmin.Wizards.BugToolWizard
 {
-    internal abstract class StatusReportRow : DataGridViewRow
+    partial class BugToolPageRetrieveData
     {
-        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
-        protected readonly DataGridViewExImageCell cellHostImg = new DataGridViewExImageCell();
-        protected readonly DataGridViewTextBoxCell cellHost = new DataGridViewTextBoxCell();
-        private readonly DataGridViewTextBoxCell cellStatus = new DataGridViewTextBoxCell();
-        private readonly DataGridViewExImageCell cellResultImg = new DataGridViewExImageCell();
-
-        public event Action<StatusReportRow> RowStatusChanged;
-        public event Action<StatusReportRow> RowStatusCompleted;
-
-        protected StatusReportRow()
+        private abstract class StatusReportRow : DataGridViewRow
         {
-            Cells.AddRange(cellHostImg, cellHost, cellStatus, cellResultImg);
-            cellResultImg.Value = new Bitmap(1, 1);
-            UpdateCells(0);
-        }
+            private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public abstract StatusReportAction Action { get; }
-        public int PercentComplete { get; private set; }
+            protected readonly DataGridViewExImageCell cellHostImg = new DataGridViewExImageCell();
+            protected readonly DataGridViewTextBoxCell cellHost = new DataGridViewTextBoxCell();
+            private readonly DataGridViewTextBoxCell cellStatus = new DataGridViewTextBoxCell();
+            private readonly DataGridViewExImageCell cellResultImg = new DataGridViewExImageCell();
 
-        public bool IsCompleted => Action != null && Action.IsCompleted;
+            public event Action<StatusReportRow> RowStatusChanged;
+            public event Action<StatusReportRow> RowStatusCompleted;
 
-        public bool IsSuccessful => Action != null && Action.IsCompleted && Action.Status == ReportStatus.succeeded;
-
-        public void CancelAction()
-        {
-            if (Action == null)
+            protected StatusReportRow()
             {
-                CreateAction(null, null);
-                if (Action != null)
-                {
-                    Action.Changed += Action_Changed;
-                    Action.Completed += Action_Completed;
-                    CancelAction();
-                }
-                else
-                {
-                    Log.Debug("Could not instantiate the requested action.");
-                }
+                Cells.AddRange(cellHostImg, cellHost, cellStatus, cellResultImg);
+                cellResultImg.Value = new Bitmap(1, 1);
+                UpdateCells(0);
             }
-            if (Action != null && !Action.IsCompleted)
-                Action.Cancel();
-        }
 
-        public void RunAction(string path, string time)
-        {
-            CreateAction(path, time);
-            Action.Changed += Action_Changed;
-            Action.Completed += Action_Completed;
-            Action.RunAsync();
-        }
+            public abstract StatusReportAction Action { get; }
+            public int PercentComplete { get; private set; }
 
-        public void DeRegisterEvents()
-        {
-            if (Action == null)
-                return;
+            public bool IsCompleted => Action != null && Action.IsCompleted;
 
-            Action.Changed -= Action_Changed;
-            Action.Completed -= Action_Completed;
-        }
+            public bool IsSuccessful => Action != null && Action.IsCompleted && Action.Status == ReportStatus.succeeded;
 
-        private void Action_Changed(ActionBase action)
-        {
-            Program.Invoke(DataGridView, () =>
+            public void CancelAction()
             {
-                UpdateCells(action.PercentComplete);
-                RowStatusChanged?.Invoke(this);
-            });
-        }
+                if (Action == null)
+                {
+                    CreateAction(null, null);
+                    if (Action != null)
+                    {
+                        Action.Changed += Action_Changed;
+                        Action.Completed += Action_Completed;
+                        CancelAction();
+                    }
+                    else
+                    {
+                        Log.Debug("Could not instantiate the requested action.");
+                    }
+                }
+                if (Action != null && !Action.IsCompleted)
+                    Action.Cancel();
+            }
 
-        private void Action_Completed(ActionBase action)
-        {
-            DeRegisterEvents();
-
-            Program.Invoke(DataGridView, () =>
+            public void RunAction(string path, string time)
             {
-                UpdateCells(100);
-                RowStatusCompleted?.Invoke(this);
-            });
-        }
+                CreateAction(path, time);
+                Action.Changed += Action_Changed;
+                Action.Completed += Action_Completed;
+                Action.RunAsync();
+            }
 
-        protected abstract void CreateAction(string path, string time);
-
-        private void UpdateCells(int percentComplete)
-        {
-            cellStatus.Value = GetStatus(out Image statusImage);
-            PercentComplete = percentComplete;
-
-            if (statusImage != null)
-                cellResultImg.Value = statusImage;
-        }
-
-        protected virtual string GetStatus(out Image img)
-        {
-            img = null;
-            if (Action == null)
-                return Messages.BUGTOOL_REPORTSTATUS_QUEUED;
-
-            switch (Action.Status)
+            public void DeRegisterEvents()
             {
-                case ReportStatus.compiling:
+                if (Action == null)
+                    return;
+
+                Action.Changed -= Action_Changed;
+                Action.Completed -= Action_Completed;
+            }
+
+            private void Action_Changed(ActionBase action)
+            {
+                Program.Invoke(DataGridView, () =>
+                {
+                    UpdateCells(action.PercentComplete);
+                    RowStatusChanged?.Invoke(this);
+                });
+            }
+
+            private void Action_Completed(ActionBase action)
+            {
+                DeRegisterEvents();
+
+                Program.Invoke(DataGridView, () =>
+                {
+                    UpdateCells(100);
+                    RowStatusCompleted?.Invoke(this);
+                });
+            }
+
+            protected abstract void CreateAction(string path, string time);
+
+            private void UpdateCells(int percentComplete)
+            {
+                cellStatus.Value = GetStatus(out Image statusImage);
+                PercentComplete = percentComplete;
+
+                if (statusImage != null)
+                    cellResultImg.Value = statusImage;
+            }
+
+            protected virtual string GetStatus(out Image img)
+            {
+                img = null;
+                if (Action == null)
+                    return Messages.BUGTOOL_REPORTSTATUS_QUEUED;
+
+                switch (Action.Status)
+                {
+                    case ReportStatus.compiling:
                     return Messages.BUGTOOL_REPORTSTATUS_COMPILING;
 
-                case ReportStatus.succeeded:
+                    case ReportStatus.succeeded:
                     img = Images.StaticImages._000_Tick_h32bit_16;
                     return Messages.COMPLETED;
 
-                case ReportStatus.failed:
+                    case ReportStatus.failed:
                     img = Images.StaticImages._000_Abort_h32bit_16;
                     return Messages.BUGTOOL_REPORTSTATUS_FAILED;
 
-                case ReportStatus.cancelled:
+                    case ReportStatus.cancelled:
                     img = Images.StaticImages.cancelled_action_16;
                     return Messages.BUGTOOL_REPORTSTATUS_CANCELLED;
 
-                case ReportStatus.queued:
+                    case ReportStatus.queued:
                     return Messages.BUGTOOL_REPORTSTATUS_QUEUED;
 
-                case ReportStatus.downloading:
+                    case ReportStatus.downloading:
                     if (Action is IDataTransferStatusReportAction actionDownloading)
                     {
                         return string.Format(Messages.BUGTOOL_REPORTSTATUS_DOWNLOADING,
@@ -165,15 +167,16 @@ namespace XenAdmin.Wizards.BugToolWizard.StatusReportRows
                     }
                     return Messages.BUGTOOL_REPORTSTATUS_DOWNLOADING_NO_DATA;
 
-                case ReportStatus.packaging:
+                    case ReportStatus.packaging:
                     if (Action is IDataTransferStatusReportAction actionPackaging)
                     {
                         return string.Format(Messages.BUGTOOL_REPORTSTATUS_PACKAGING,
                             Util.MemorySizeStringSuitableUnits(actionPackaging.DataTransferred, false));
                     }
                     return Messages.BUGTOOL_REPORTSTATUS_PACKAGING_NO_DATA;
-                default:
+                    default:
                     return string.Empty;
+                }
             }
         }
     }

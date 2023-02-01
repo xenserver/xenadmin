@@ -17,7 +17,7 @@ namespace XenAdmin.Wizards.BugToolWizard
             {
                 foreach (var r in dataGridViewEx1.Rows)
                 {
-                    if (r is XenAdmin.Wizards.BugToolWizard.StatusReportRows.StatusReportRow row)
+                    if (r is StatusReportRow row)
                     {
                         row.DeRegisterEvents();
                         DeRegisterRowEvents(row);
