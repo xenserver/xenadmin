@@ -1004,18 +1004,6 @@ This could be because the data source is not generating any data. Ensure the pre
   <data name="ACTION_UPDATE_INTEGRATED_GPU_PASSTHROUGH_TITLE" xml:space="preserve">
     <value>Updating integrated GPU pass-through on '{0}'</value>
   </data>
-  <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT" xml:space="preserve">
-    <value>Upload server status report to {0}</value>
-  </data>
-  <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT_FAILED" xml:space="preserve">
-    <value>Failed to upload the status report.</value>
-  </data>
-  <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT_PERCENTAGE" xml:space="preserve">
-    <value>Uploading report to {0} ({1} of {2})</value>
-  </data>
-  <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT_PROGRESS" xml:space="preserve">
-    <value>Uploading report to {0}</value>
-  </data>
   <data name="ACTION_UPLOADPATCHTOCOORDINATORPLANACTION_FAILED" xml:space="preserve">
     <value>Upload error. The patch was uploaded, but it cannot be found on the host.</value>
   </data>
@@ -12406,9 +12394,6 @@ You may need to reboot your server(s) to enable SR-IOV network.</value>
   </data>
   <data name="STATUS_FILTER_QUEUED" xml:space="preserve">
     <value>Queued</value>
-  </data>
-  <data name="STATUS_REPORT_ENTER_CREDENTIALS_MESSAGE" xml:space="preserve">
-    <value>Enter your MyCitrix credentials (see {0}). These credentials will only be used to authenticate with {1} once and will not be stored on this machine or on your server.</value>
   </data>
   <data name="STATUS_REPORT_ZIP_FAILED" xml:space="preserve">
     <value>There was an error while packaging the server status report. Only a partial report may be available</value>

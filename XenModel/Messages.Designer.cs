@@ -2718,42 +2718,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upload server status report to {0}.
-        /// </summary>
-        public static string ACTION_UPLOAD_SERVER_STATUS_REPORT {
-            get {
-                return ResourceManager.GetString("ACTION_UPLOAD_SERVER_STATUS_REPORT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Failed to upload the status report..
-        /// </summary>
-        public static string ACTION_UPLOAD_SERVER_STATUS_REPORT_FAILED {
-            get {
-                return ResourceManager.GetString("ACTION_UPLOAD_SERVER_STATUS_REPORT_FAILED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Uploading report to {0} ({1} of {2}).
-        /// </summary>
-        public static string ACTION_UPLOAD_SERVER_STATUS_REPORT_PERCENTAGE {
-            get {
-                return ResourceManager.GetString("ACTION_UPLOAD_SERVER_STATUS_REPORT_PERCENTAGE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Uploading report to {0}.
-        /// </summary>
-        public static string ACTION_UPLOAD_SERVER_STATUS_REPORT_PROGRESS {
-            get {
-                return ResourceManager.GetString("ACTION_UPLOAD_SERVER_STATUS_REPORT_PROGRESS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Upload error. The patch was uploaded, but it cannot be found on the host..
         /// </summary>
         public static string ACTION_UPLOADPATCHTOCOORDINATORPLANACTION_FAILED {
@@ -35820,15 +35784,6 @@ namespace XenAdmin {
         public static string STATUS_FILTER_QUEUED {
             get {
                 return ResourceManager.GetString("STATUS_FILTER_QUEUED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enter your MyCitrix credentials (see {0}). These credentials will only be used to authenticate with {1} once and will not be stored on this machine or on your server..
-        /// </summary>
-        public static string STATUS_REPORT_ENTER_CREDENTIALS_MESSAGE {
-            get {
-                return ResourceManager.GetString("STATUS_REPORT_ENTER_CREDENTIALS_MESSAGE", resourceCulture);
             }
         }
         
