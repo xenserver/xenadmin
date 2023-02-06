@@ -4551,6 +4551,7 @@
     <None Include="..\Branding\Images\RightArrow.png">
       <Link>Images\RightArrow.png</Link>
     </None>
+    <Content Include="Images\save_to_disk.png" />
     <Content Include="Images\scilinux_16x.png" />
     <None Include="Images\server_32.png" />
     <None Include="Images\server_up_32.png" />

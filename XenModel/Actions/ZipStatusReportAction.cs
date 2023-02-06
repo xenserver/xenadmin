@@ -149,7 +149,7 @@ namespace XenAdmin.Actions
             {
                 CleanupFiles(true);
                 log.Info("Packaging system status cancelled");
-                Tick(100, Messages.ACTION_PACKAGE_STAUS_REPORT_CANCELLED);
+                Tick(100, Messages.ACTION_SAVE_STATUS_REPORT_CANCELLED);
                 Status = ReportStatus.cancelled;
                 throw;
             }
@@ -158,25 +158,25 @@ namespace XenAdmin.Actions
                 try
                 {
                     log.Error("Failed to package sanitized server status report: ", exn);
-                    log.Debug("Attempting to package raw downloaded server files.");
+                    log.Info("Attempting to package raw downloaded server files.");
                     ZipToOutputFile(_inputTempFolder, CheckCancellation);
                 }
-                catch(CancelledException)
+                catch (CancelledException)
                 {
-                    log.Info("Packaging system status cancelled");
-                    Tick(100, Messages.ACTION_PACKAGE_STAUS_REPORT_CANCELLED);
+                    log.Info("Packaging raw downloaded server cancelled");
+                    Tick(100, Messages.ACTION_SAVE_STATUS_REPORT_CANCELLED);
                     Status = ReportStatus.cancelled;
                     CleanupFiles(true);
                     throw;
                 }
-                catch(Exception exception)
+                catch (Exception exception)
                 {
                     log.Error("Failed to package raw downloaded server files.", exception);
                 }
 
-                Tick(100, Messages.ACTION_PACKAGE_STATUS_REPORT_FAILED);
+                Tick(100, Messages.ACTION_SAVE_STATUS_REPORT_FAILED);
                 Status = ReportStatus.failed;
-                throw new Exception(Messages.STATUS_REPORT_ZIP_FAILED);
+                throw new Exception(Messages.ACTION_SAVE_STATUS_REPORT_FAILED_PARTIAL);
             }
 
             Tick(100, Messages.COMPLETED);

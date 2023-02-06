@@ -44,8 +44,8 @@ namespace XenAdmin.Wizards.BugToolWizard
             public PackageStatusReportRow(string outputFile)
             {
                 OutputFile = outputFile;
-                cellHostImg.Value = Images.StaticImages._000_GetServerReport_h32bit_16;
-                cellHost.Value = Messages.BUGTOOL_PACKAGE_STATUS_REPORT;
+                cellHostImg.Value = Images.StaticImages.save_to_disk;
+                cellHost.Value = Messages.BUGTOOL_SAVE_STATUS_REPORT;
             }
 
             protected override void CreateAction(string path, string time)

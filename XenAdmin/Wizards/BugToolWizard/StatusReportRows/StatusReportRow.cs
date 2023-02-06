@@ -170,10 +170,10 @@ namespace XenAdmin.Wizards.BugToolWizard
                     case ReportStatus.packaging:
                     if (Action is IDataTransferStatusReportAction actionPackaging)
                     {
-                        return string.Format(Messages.BUGTOOL_REPORTSTATUS_PACKAGING,
+                        return string.Format(Messages.BUGTOOL_REPORTSTATUS_SAVING,
                             Util.MemorySizeStringSuitableUnits(actionPackaging.DataTransferred, false));
                     }
-                    return Messages.BUGTOOL_REPORTSTATUS_PACKAGING_NO_DATA;
+                    return Messages.BUGTOOL_REPORTSTATUS_SAVING_NO_DATA;
                     default:
                     return string.Empty;
                 }

@@ -1629,24 +1629,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Packaging system status failed.
-        /// </summary>
-        public static string ACTION_PACKAGE_STATUS_REPORT_FAILED {
-            get {
-                return ResourceManager.GetString("ACTION_PACKAGE_STATUS_REPORT_FAILED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Packaging system status cancelled.
-        /// </summary>
-        public static string ACTION_PACKAGE_STAUS_REPORT_CANCELLED {
-            get {
-                return ResourceManager.GetString("ACTION_PACKAGE_STAUS_REPORT_CANCELLED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Pausing.
         /// </summary>
         public static string ACTION_PAUSE_CONTAINER_DESCRIPTION {
@@ -1985,6 +1967,33 @@ namespace XenAdmin {
         public static string ACTION_SAVE_SETTINGS {
             get {
                 return ResourceManager.GetString("ACTION_SAVE_SETTINGS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving system status canceled.
+        /// </summary>
+        public static string ACTION_SAVE_STATUS_REPORT_CANCELLED {
+            get {
+                return ResourceManager.GetString("ACTION_SAVE_STATUS_REPORT_CANCELLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving system status failed.
+        /// </summary>
+        public static string ACTION_SAVE_STATUS_REPORT_FAILED {
+            get {
+                return ResourceManager.GetString("ACTION_SAVE_STATUS_REPORT_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There was an error while saving the server status report. Only a partial report may be available.
+        /// </summary>
+        public static string ACTION_SAVE_STATUS_REPORT_FAILED_PARTIAL {
+            get {
+                return ResourceManager.GetString("ACTION_SAVE_STATUS_REPORT_FAILED_PARTIAL", resourceCulture);
             }
         }
         
@@ -2565,6 +2574,33 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No data was compiled. Press previous to select new items or servers and try again..
+        /// </summary>
+        public static string ACTION_SYSTEM_STATUS_COMPILE_FAILED {
+            get {
+                return ResourceManager.GetString("ACTION_SYSTEM_STATUS_COMPILE_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Finished compiling status report (with errors). A partial status report was saved..
+        /// </summary>
+        public static string ACTION_SYSTEM_STATUS_COMPILE_PARTIAL {
+            get {
+                return ResourceManager.GetString("ACTION_SYSTEM_STATUS_COMPILE_PARTIAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status report was compiled and saved successfully..
+        /// </summary>
+        public static string ACTION_SYSTEM_STATUS_COMPILE_SUCCESSFUL {
+            get {
+                return ResourceManager.GetString("ACTION_SYSTEM_STATUS_COMPILE_SUCCESSFUL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Compiling status report for {0}.
         /// </summary>
         public static string ACTION_SYSTEM_STATUS_COMPILING {
@@ -2592,38 +2628,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No data was compiled. Press previous to select new items or servers and try again..
+        ///   Looks up a localized string similar to Failed to save the status report to specified location. Please try again..
         /// </summary>
-        public static string ACTION_SYSTEM_STATUS_FAILED {
+        public static string ACTION_SYSTEM_STATUS_SAVE_FAILED {
             get {
-                return ResourceManager.GetString("ACTION_SYSTEM_STATUS_FAILED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Packaging of the status report was unsuccessful and the output file failed to generate. Please try again..
-        /// </summary>
-        public static string ACTION_SYSTEM_STATUS_PACKAGING_FAILED {
-            get {
-                return ResourceManager.GetString("ACTION_SYSTEM_STATUS_PACKAGING_FAILED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Finished compiling status report. It has been saved in the destination selected in the previous step..
-        /// </summary>
-        public static string ACTION_SYSTEM_STATUS_SUCCESSFUL {
-            get {
-                return ResourceManager.GetString("ACTION_SYSTEM_STATUS_SUCCESSFUL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Finished compiling status report (with errors). A partial status report was compiled..
-        /// </summary>
-        public static string ACTION_SYSTEM_STATUS_SUCCESSFUL_PARTIAL {
-            get {
-                return ResourceManager.GetString("ACTION_SYSTEM_STATUS_SUCCESSFUL_PARTIAL", resourceCulture);
+                return ResourceManager.GetString("ACTION_SYSTEM_STATUS_SAVE_FAILED", resourceCulture);
             }
         }
         
@@ -6356,15 +6365,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Packaging report to selected destination.
-        /// </summary>
-        public static string BUGTOOL_PACKAGE_STATUS_REPORT {
-            get {
-                return ResourceManager.GetString("BUGTOOL_PACKAGE_STATUS_REPORT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Select the data you want to include in your report.
         /// </summary>
         public static string BUGTOOL_PAGE_CAPABILITIES_PAGETITLE {
@@ -6529,29 +6529,38 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Packaging - {0}.
-        /// </summary>
-        public static string BUGTOOL_REPORTSTATUS_PACKAGING {
-            get {
-                return ResourceManager.GetString("BUGTOOL_REPORTSTATUS_PACKAGING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Packaging.
-        /// </summary>
-        public static string BUGTOOL_REPORTSTATUS_PACKAGING_NO_DATA {
-            get {
-                return ResourceManager.GetString("BUGTOOL_REPORTSTATUS_PACKAGING_NO_DATA", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Queued.
         /// </summary>
         public static string BUGTOOL_REPORTSTATUS_QUEUED {
             get {
                 return ResourceManager.GetString("BUGTOOL_REPORTSTATUS_QUEUED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving - {0}.
+        /// </summary>
+        public static string BUGTOOL_REPORTSTATUS_SAVING {
+            get {
+                return ResourceManager.GetString("BUGTOOL_REPORTSTATUS_SAVING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving.
+        /// </summary>
+        public static string BUGTOOL_REPORTSTATUS_SAVING_NO_DATA {
+            get {
+                return ResourceManager.GetString("BUGTOOL_REPORTSTATUS_SAVING_NO_DATA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving report to selected destination.
+        /// </summary>
+        public static string BUGTOOL_SAVE_STATUS_REPORT {
+            get {
+                return ResourceManager.GetString("BUGTOOL_SAVE_STATUS_REPORT", resourceCulture);
             }
         }
         
@@ -35784,15 +35793,6 @@ namespace XenAdmin {
         public static string STATUS_FILTER_QUEUED {
             get {
                 return ResourceManager.GetString("STATUS_FILTER_QUEUED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to There was an error while packaging the server status report. Only a partial report may be available.
-        /// </summary>
-        public static string STATUS_REPORT_ZIP_FAILED {
-            get {
-                return ResourceManager.GetString("STATUS_REPORT_ZIP_FAILED", resourceCulture);
             }
         }
         

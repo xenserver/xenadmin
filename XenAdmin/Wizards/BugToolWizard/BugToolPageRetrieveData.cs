@@ -306,7 +306,7 @@ namespace XenAdmin.Wizards.BugToolWizard
             DeRegisterRowEvents(row);
             UpdateTotalPercentComplete();
 
-            var allCompleted = AllActionsCompleted(out var successExists, out var failureExists, out var downloadReportFailed, considerDownloadReportRow: _packagedReport);
+            var allCompleted = AllActionsCompleted(out var successExists, out var failureExists, out var packageStatusReportFailed, considerDownloadReportRow: _packagedReport);
 
             if (allCompleted && !_packagedReport)
             {
@@ -314,21 +314,21 @@ namespace XenAdmin.Wizards.BugToolWizard
             }
             else if (allCompleted)
             {
-                if (downloadReportFailed)
+                if (packageStatusReportFailed)
                 {
-                    labelError.Text = Messages.ACTION_SYSTEM_STATUS_PACKAGING_FAILED;
+                    labelError.Text = Messages.ACTION_SYSTEM_STATUS_SAVE_FAILED;
                 }
                 else if (!successExists)
                 {
-                    labelError.Text = Messages.ACTION_SYSTEM_STATUS_FAILED;
+                    labelError.Text = Messages.ACTION_SYSTEM_STATUS_COMPILE_FAILED;
                 }
                 else if (!failureExists)
                 {
-                    labelError.Text = Messages.ACTION_SYSTEM_STATUS_SUCCESSFUL;
+                    labelError.Text = Messages.ACTION_SYSTEM_STATUS_COMPILE_SUCCESSFUL;
                 }
                 else
                 {
-                    labelError.Text = Messages.ACTION_SYSTEM_STATUS_SUCCESSFUL_PARTIAL;
+                    labelError.Text = Messages.ACTION_SYSTEM_STATUS_COMPILE_PARTIAL;
                 }
                 
                 _packagedReport = false;
