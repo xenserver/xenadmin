@@ -52,9 +52,9 @@ namespace XenAdmin.Wizards.BugToolWizard
         public BugToolPageRetrieveData()
         {
             InitializeComponent();
-            linkLabelBlurb.Text = string.Format(linkLabelBlurb.Text, BrandManager.BrandConsole, BrandManager.Cis);
-            var cisTextLength = BrandManager.Cis.Length;
-            linkLabelBlurb.LinkArea = new LinkArea(linkLabelBlurb.Text.Length - cisTextLength - 1, cisTextLength);
+            labelBlurb.Text = string.Format(labelBlurb.Text, BrandManager.BrandConsole);
+            labelBlurbCis.Text = string.Format(labelBlurbCis.Text, BrandManager.Cis);
+            linkLabelBlurb.Text = InvisibleMessages.CIS_URL;
         }
 
         #region XenTabPage overrides

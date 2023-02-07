@@ -119,54 +119,19 @@
   </resheader>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="linkLabelBlurb.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="linkLabelBlurb.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="linkLabelBlurb.LinkArea" type="System.Windows.Forms.LinkArea, System.Windows.Forms">
-    <value>0, 0</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="linkLabelBlurb.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 0</value>
-  </data>
-  <data name="linkLabelBlurb.Size" type="System.Drawing.Size, System.Drawing">
-    <value>677, 52</value>
-  </data>
-  <data name="linkLabelBlurb.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="linkLabelBlurb.Text" xml:space="preserve">
-    <value>{0} is now collecting your status report. This consists of a report from each of your designated servers and your {0} logs if specified in the previous step.
-
-The completed report will be saved in the destination selected in the previous step. You can then upload it to {1}.</value>
-  </data>
-  <data name="&gt;&gt;linkLabelBlurb.Name" xml:space="preserve">
-    <value>linkLabelBlurb</value>
-  </data>
-  <data name="&gt;&gt;linkLabelBlurb.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;linkLabelBlurb.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;linkLabelBlurb.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="labelError.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="labelError.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
   <data name="labelError.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="labelError.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 407</value>
   </data>
@@ -174,7 +139,7 @@ The completed report will be saved in the destination selected in the previous s
     <value>677, 13</value>
   </data>
   <data name="labelError.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="labelError.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -189,7 +154,7 @@ The completed report will be saved in the destination selected in the previous s
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;labelError.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="progressBar1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Left, Right</value>
@@ -204,7 +169,7 @@ The completed report will be saved in the destination selected in the previous s
     <value>677, 16</value>
   </data>
   <data name="progressBar1.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;progressBar1.Name" xml:space="preserve">
     <value>progressBar1</value>
@@ -216,7 +181,7 @@ The completed report will be saved in the destination selected in the previous s
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;progressBar1.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <metadata name="columnHostImage.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -289,16 +254,16 @@ The completed report will be saved in the destination selected in the previous s
     <value>Fill</value>
   </data>
   <data name="dataGridViewEx1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 62</value>
+    <value>3, 61</value>
   </data>
   <data name="dataGridViewEx1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 10, 3, 10</value>
   </data>
   <data name="dataGridViewEx1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>677, 335</value>
+    <value>677, 336</value>
   </data>
   <data name="dataGridViewEx1.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;dataGridViewEx1.Name" xml:space="preserve">
     <value>dataGridViewEx1</value>
@@ -310,7 +275,100 @@ The completed report will be saved in the destination selected in the previous s
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;dataGridViewEx1.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="labelBlurb.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelBlurb.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="labelBlurb.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="labelBlurb.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 0, 3, 5</value>
+  </data>
+  <data name="labelBlurb.Size" type="System.Drawing.Size, System.Drawing">
+    <value>677, 26</value>
+  </data>
+  <data name="labelBlurb.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="labelBlurb.Text" xml:space="preserve">
+    <value>{0} is now collecting your status report. This consists of a report from each of your designated servers and your {0} logs if specified in the previous step. The completed report will be saved in the destination selected in the previous step.</value>
+  </data>
+  <data name="&gt;&gt;labelBlurb.Name" xml:space="preserve">
+    <value>labelBlurb</value>
+  </data>
+  <data name="&gt;&gt;labelBlurb.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelBlurb.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;labelBlurb.ZOrder" xml:space="preserve">
     <value>3</value>
+  </data>
+  <data name="linkLabelBlurb.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="linkLabelBlurb.Location" type="System.Drawing.Point, System.Drawing">
+    <value>229, 31</value>
+  </data>
+  <data name="linkLabelBlurb.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 3, 0</value>
+  </data>
+  <data name="linkLabelBlurb.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 13</value>
+  </data>
+  <data name="linkLabelBlurb.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="linkLabelBlurb.Text" xml:space="preserve">
+    <value>linkLabel1</value>
+  </data>
+  <data name="&gt;&gt;linkLabelBlurb.Name" xml:space="preserve">
+    <value>linkLabelBlurb</value>
+  </data>
+  <data name="&gt;&gt;linkLabelBlurb.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;linkLabelBlurb.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;linkLabelBlurb.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="labelBlurbCis.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelBlurbCis.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 31</value>
+  </data>
+  <data name="labelBlurbCis.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 0, 0, 0</value>
+  </data>
+  <data name="labelBlurbCis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>226, 13</value>
+  </data>
+  <data name="labelBlurbCis.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="labelBlurbCis.Text" xml:space="preserve">
+    <value>You can upload the completed report to {0} at:</value>
+  </data>
+  <data name="&gt;&gt;labelBlurbCis.Name" xml:space="preserve">
+    <value>labelBlurbCis</value>
+  </data>
+  <data name="&gt;&gt;labelBlurbCis.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelBlurbCis.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;labelBlurbCis.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -322,7 +380,7 @@ The completed report will be saved in the destination selected in the previous s
     <value>0, 0, 0, 0</value>
   </data>
   <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>683, 442</value>
@@ -343,7 +401,7 @@ The completed report will be saved in the destination selected in the previous s
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="linkLabelBlurb" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelError" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="progressBar1" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="dataGridViewEx1" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,Percent,100,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelError" Row="3" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="progressBar1" Row="4" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="dataGridViewEx1" Row="2" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="labelBlurb" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="linkLabelBlurb" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelBlurbCis" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,Absolute,20,Percent,100,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
