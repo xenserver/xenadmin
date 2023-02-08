@@ -43,19 +43,15 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
     internal class PoolHasFCoESrWarning : WarningWithMoreInfo
     {
         private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod()?.DeclaringType);
-
-        private readonly bool _hasFCoESr;
-
         private readonly Pool _pool;
 
         public override string HelpMessage => "Details...";
         public override string Message => string.Empty;
         public override string Title => string.Empty;
-        public override string Description => _hasFCoESr ? string.Format(Messages.POOL_HAS_DEPRECATED_FCOE_WARNING, _pool) : null;
+        public override string Description => string.Format(Messages.POOL_HAS_DEPRECATED_FCOE_WARNING, _pool);
 
-        public PoolHasFCoESrWarning(Check check, Pool pool, bool hasFCoESr) : base(check)
+        public PoolHasFCoESrWarning(Check check, Pool pool) : base(check)
         {
-            _hasFCoESr = hasFCoESr;
             _pool = pool;
         }
 

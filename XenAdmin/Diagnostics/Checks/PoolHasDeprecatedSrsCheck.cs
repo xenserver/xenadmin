@@ -46,13 +46,11 @@ namespace XenAdmin.Diagnostics.Checks
         {
         }
 
-        public override bool CanRun() => !Helpers.Post82X(Host.Connection);
+        public override bool CanRun() => Host.Connection.Cache.SRs.Any(sr => sr.GetSRType(true) == SR.SRTypes.lvmofcoe);
 
         protected override Problem RunHostCheck()
         {
-            var hasFCoESr = Host.Connection.Cache.SRs.Any(sr => sr.GetSRType(true) == SR.SRTypes.lvmofcoe);
-            return !hasFCoESr ? null : new PoolHasFCoESrWarning(this, Helpers.GetPoolOfOne(Host.Connection), true);
+            return new PoolHasFCoESrWarning(this, Helpers.GetPoolOfOne(Host.Connection));
         }
-
     }
 }
