@@ -97,6 +97,8 @@ namespace XenAdmin.Controls.CustomDataGraph
                     CustomYRange = new DataRange(1, 0, 1, Unit.MegaHertz, RangeScaleMode.Auto);
                     break;
                 case "requests/s":
+                case "hits/s":
+                case "misses/s":
                 case "err/s":
                     CustomYRange = new DataRange(1, 0, 1, Unit.CountsPerSecond, RangeScaleMode.Auto);
                     break;
