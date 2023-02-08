@@ -30,6 +30,7 @@
  */
 
 using System.Collections.Generic;
+using System.Drawing;
 using XenAdmin.Actions;
 using XenAdmin.Network;
 using XenAPI;
@@ -61,6 +62,29 @@ namespace XenAdmin.Wizards.BugToolWizard
             protected override void CreateAction(string path, string time)
             {
                 _action = new SingleHostStatusAction(_host, _size, _capabilityKeys, path, time);
+            }
+
+            protected override string GetStatus(out Image img)
+            {
+                img = null;
+                if (_action == null)
+                    return Messages.BUGTOOL_REPORTSTATUS_QUEUED;
+
+                switch (_action.Status)
+                {
+                    case ReportStatus.inProgress:
+                        if (_action is IDataTransferStatusReportAction actionDownloading)
+                        {
+                            return string.Format(Messages.BUGTOOL_REPORTSTATUS_DOWNLOADING,
+                                Util.MemorySizeStringSuitableUnits(actionDownloading.DataTransferred, false));
+                        }
+
+                        return Messages.BUGTOOL_REPORTSTATUS_DOWNLOADING_NO_DATA;
+
+                    default:
+                        return base.GetStatus(out img);
+                }
+
             }
         }
     }

@@ -29,6 +29,7 @@
  * SUCH DAMAGE.
  */
 
+using System.Drawing;
 using XenAdmin.Actions;
 
 namespace XenAdmin.Wizards.BugToolWizard
@@ -51,6 +52,29 @@ namespace XenAdmin.Wizards.BugToolWizard
             protected override void CreateAction(string path, string time)
             {
                 _action = new ZipStatusReportAction(path, OutputFile, time);
+            }
+
+            protected override string GetStatus(out Image img)
+            {
+                img = null;
+                if (_action == null)
+                    return Messages.BUGTOOL_REPORTSTATUS_QUEUED;
+
+                switch (_action.Status)
+                {
+                    case ReportStatus.inProgress:
+                        if (_action is IDataTransferStatusReportAction actionPackaging)
+                        {
+                            return string.Format(Messages.BUGTOOL_REPORTSTATUS_SAVING,
+                                Util.MemorySizeStringSuitableUnits(actionPackaging.DataTransferred, false));
+                        }
+
+                        return Messages.BUGTOOL_REPORTSTATUS_SAVING_NO_DATA;
+
+                    default:
+                        return base.GetStatus(out img);
+                }
+
             }
         }
     }

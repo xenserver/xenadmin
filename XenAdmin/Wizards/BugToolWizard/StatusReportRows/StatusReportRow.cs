@@ -141,41 +141,26 @@ namespace XenAdmin.Wizards.BugToolWizard
 
                 switch (Action.Status)
                 {
-                    case ReportStatus.compiling:
-                    return Messages.BUGTOOL_REPORTSTATUS_COMPILING;
+                    case ReportStatus.inProgress:
+                        return Messages.BUGTOOL_REPORTSTATUS_COMPILING;
 
                     case ReportStatus.succeeded:
-                    img = Images.StaticImages._000_Tick_h32bit_16;
-                    return Messages.COMPLETED;
+                        img = Images.StaticImages._000_Tick_h32bit_16;
+                        return Messages.COMPLETED;
 
                     case ReportStatus.failed:
-                    img = Images.StaticImages._000_Abort_h32bit_16;
-                    return Messages.BUGTOOL_REPORTSTATUS_FAILED;
+                        img = Images.StaticImages._000_Abort_h32bit_16;
+                        return Messages.BUGTOOL_REPORTSTATUS_FAILED;
 
                     case ReportStatus.cancelled:
-                    img = Images.StaticImages.cancelled_action_16;
-                    return Messages.BUGTOOL_REPORTSTATUS_CANCELLED;
+                        img = Images.StaticImages.cancelled_action_16;
+                        return Messages.BUGTOOL_REPORTSTATUS_CANCELLED;
 
                     case ReportStatus.queued:
-                    return Messages.BUGTOOL_REPORTSTATUS_QUEUED;
+                        return Messages.BUGTOOL_REPORTSTATUS_QUEUED;
 
-                    case ReportStatus.downloading:
-                    if (Action is IDataTransferStatusReportAction actionDownloading)
-                    {
-                        return string.Format(Messages.BUGTOOL_REPORTSTATUS_DOWNLOADING,
-                                            Util.MemorySizeStringSuitableUnits(actionDownloading.DataTransferred, false));
-                    }
-                    return Messages.BUGTOOL_REPORTSTATUS_DOWNLOADING_NO_DATA;
-
-                    case ReportStatus.packaging:
-                    if (Action is IDataTransferStatusReportAction actionPackaging)
-                    {
-                        return string.Format(Messages.BUGTOOL_REPORTSTATUS_SAVING,
-                            Util.MemorySizeStringSuitableUnits(actionPackaging.DataTransferred, false));
-                    }
-                    return Messages.BUGTOOL_REPORTSTATUS_SAVING_NO_DATA;
                     default:
-                    return string.Empty;
+                        return string.Empty;
                 }
             }
         }
