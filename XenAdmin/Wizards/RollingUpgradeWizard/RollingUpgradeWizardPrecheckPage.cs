@@ -135,8 +135,9 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
             var hostsToUpgrade = new List<Host>();
             var hostsToUpgradeOrUpdate = new List<Host>();
-            foreach (var poolHostsToUpgrade in SelectedPools.Select(pool => pool.HostsToUpgrade()))
+            foreach (var pool in SelectedPools)
             {
+                var poolHostsToUpgrade = pool.HostsToUpgrade();
                 hostsToUpgrade.AddRange(poolHostsToUpgrade);
                 hostsToUpgradeOrUpdate.AddRange(poolHostsToUpgrade);
             }

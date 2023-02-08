@@ -2757,7 +2757,7 @@ Do you want to assign these VMs to the schedule '{0}' instead?</value>
     <value>Checking clustering status</value>
   </data>
   <data name="CHECKING_DEPRECATED_SRS" xml:space="preserve">
-    <value>Checking deprecated storage repositories</value>
+    <value>Checking for deprecated storage repositories</value>
   </data>
   <data name="CHECKING_FOR_PENDING_RESTART" xml:space="preserve">
     <value>Checking for pending restart</value>
@@ -3412,9 +3412,6 @@ Would you like to carry out the operation at this time?</value>
   </data>
   <data name="CONTAINER_CREATED" xml:space="preserve">
     <value>Created</value>
-  </data>
-  <data name="CONTAINER_FCOE_DEPRECATION_WARNING" xml:space="preserve">
-    <value>Support for software FCoE storage repositories has been deprecated as of {0}.</value>
   </data>
   <data name="CONTAINER_GENERAL_TAB_TITLE" xml:space="preserve">
     <value>Container General Properties</value>
@@ -5996,6 +5993,9 @@ Would you like to eject these ISOs before continuing?</value>
   </data>
   <data name="FAST_CLONE_UNAVAILABLE" xml:space="preserve">
     <value>Fast clone is not supported by this storage type</value>
+  </data>
+  <data name="FCOE_DEPRECATION_WARNING" xml:space="preserve">
+    <value>Support for Software FCoE storage repositories has been deprecated as of {0}.</value>
   </data>
   <data name="FEATURE_DISABLED" xml:space="preserve">
     <value>'{0}' feature is disabled due to license restrictions on the server.</value>

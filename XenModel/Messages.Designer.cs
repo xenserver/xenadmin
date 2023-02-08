@@ -7620,7 +7620,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Checking deprecated storage repositories.
+        ///   Looks up a localized string similar to Checking for deprecated storage repositories.
         /// </summary>
         public static string CHECKING_DEPRECATED_SRS {
             get {
@@ -9455,15 +9455,6 @@ namespace XenAdmin {
         public static string CONTAINER_CREATED {
             get {
                 return ResourceManager.GetString("CONTAINER_CREATED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Support for software FCoE storage repositories has been deprecated as of {0}..
-        /// </summary>
-        public static string CONTAINER_FCOE_DEPRECATION_WARNING {
-            get {
-                return ResourceManager.GetString("CONTAINER_FCOE_DEPRECATION_WARNING", resourceCulture);
             }
         }
         
@@ -17103,6 +17094,15 @@ namespace XenAdmin {
         public static string FAST_CLONE_UNAVAILABLE {
             get {
                 return ResourceManager.GetString("FAST_CLONE_UNAVAILABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Support for Software FCoE storage repositories has been deprecated as of {0}..
+        /// </summary>
+        public static string FCOE_DEPRECATION_WARNING {
+            get {
+                return ResourceManager.GetString("FCOE_DEPRECATION_WARNING", resourceCulture);
             }
         }
         

@@ -1891,7 +1891,7 @@ namespace XenAdmin.TabPages
             {
                 Banner.BannerType = DeprecationBanner.Type.Deprecation;
                 Banner.WarningMessage = string.Format(
-                    Messages.CONTAINER_FCOE_DEPRECATION_WARNING, string.Format(Messages.STRING_SPACE_STRING, BrandManager.ProductBrand, BrandManager.ProductVersionPost82));
+                    Messages.FCOE_DEPRECATION_WARNING, string.Format(Messages.STRING_SPACE_STRING, BrandManager.ProductBrand, BrandManager.ProductVersionPost82));
                 Banner.LinkText = Messages.PATCHING_WIZARD_WEBPAGE_CELL;
                 Banner.LinkUri = new Uri(InvisibleMessages.FCOE_SR_DEPRECATION_URL);
                 Banner.Visible = true;

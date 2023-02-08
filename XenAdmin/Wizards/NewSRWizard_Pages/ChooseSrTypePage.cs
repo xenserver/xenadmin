@@ -81,7 +81,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
             else if (srWizardType is SrWizardType_Fcoe)
             {
                 deprecationBanner.AppliesToVersion = string.Format(Messages.STRING_SPACE_STRING,
-                    BrandManager.LegacyProduct, BrandManager.ProductVersionPost82);
+                    BrandManager.ProductBrand, BrandManager.ProductVersionPost82);
                 deprecationBanner.BannerType = DeprecationBanner.Type.Deprecation;
                 deprecationBanner.FeatureName = Messages.SOFTWARE_FCOE_STORAGE_REPOSITORIES;
                 deprecationBanner.LinkUri = new Uri(InvisibleMessages.FCOE_SR_DEPRECATION_URL);
