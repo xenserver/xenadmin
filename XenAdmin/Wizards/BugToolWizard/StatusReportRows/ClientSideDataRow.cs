@@ -40,14 +40,14 @@ namespace XenAdmin.Wizards.BugToolWizard
     {
         private class ClientSideDataRow : StatusReportRow
         {
-            private readonly List<Host> hosts;
-            private readonly bool includeClientLogs;
+            private readonly List<Host> _hosts;
+            private readonly bool _includeClientLogs;
             private StatusReportClientSideAction _action;
 
             public ClientSideDataRow(List<Host> hosts, bool includeClientLogs)
             {
-                this.hosts = hosts;
-                this.includeClientLogs = includeClientLogs;
+                _hosts = hosts;
+                _includeClientLogs = includeClientLogs;
                 cellHostImg.Value = Images.StaticImages._000_GetServerReport_h32bit_16;
                 cellHost.Value = includeClientLogs
                     ? string.Format(Messages.BUGTOOL_CLIENT_LOGS_META, BrandManager.BrandConsole)
@@ -58,7 +58,7 @@ namespace XenAdmin.Wizards.BugToolWizard
 
             protected override void CreateAction(string path, string time)
             {
-                _action = new StatusReportClientSideAction(hosts, includeClientLogs, path, time);
+                _action = new StatusReportClientSideAction(_hosts, _includeClientLogs, path, time);
             }
         }
     }

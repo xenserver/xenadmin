@@ -40,27 +40,27 @@ namespace XenAdmin.Wizards.BugToolWizard
     {
         private class HostStatusRow : StatusReportRow
         {
-            private readonly long size;
-            private readonly List<string> capabilityKeys;
-            private readonly Host Host;
+            private readonly long _size;
+            private readonly List<string> _capabilityKeys;
+            private readonly Host _host;
             private SingleHostStatusAction _action;
 
             public HostStatusRow(Host host, long size, List<string> capabilityKeys)
             {
-                Host = host;
-                this.size = size;
-                this.capabilityKeys = capabilityKeys;
-                cellHostImg.Value = Images.GetImage16For(Host);
-                cellHost.Value = Host.Name();
+                _host = host;
+                _size = size;
+                _capabilityKeys = capabilityKeys;
+                cellHostImg.Value = Images.GetImage16For(_host);
+                cellHost.Value = _host.Name();
             }
 
-            public IXenConnection Connection => Host.Connection;
+            public IXenConnection Connection => _host.Connection;
 
             public override StatusReportAction Action => _action;
 
             protected override void CreateAction(string path, string time)
             {
-                _action = new SingleHostStatusAction(Host, size, capabilityKeys, path, time);
+                _action = new SingleHostStatusAction(_host, _size, _capabilityKeys, path, time);
             }
         }
     }
