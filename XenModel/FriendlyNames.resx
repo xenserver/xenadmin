@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -942,6 +942,9 @@
   <data name="Label-performance.xenbr_tx_errors" xml:space="preserve">
     <value>{0} Send Errors</value>
   </data>
+  <data name="Label-pool.ha_enabled" xml:space="preserve">
+    <value>Pool HA enabled</value>
+  </data>
   <data name="Label-Pool_patch.applied" xml:space="preserve">
     <value>Applied</value>
   </data>
@@ -956,9 +959,6 @@
   </data>
   <data name="Label-Pool_patch.required-updates" xml:space="preserve">
     <value>Required Updates</value>
-  </data>
-  <data name="Label-pool.ha_enabled" xml:space="preserve">
-    <value>Pool HA enabled</value>
   </data>
   <data name="Label-pvsaccelerator" xml:space="preserve">
     <value>PVS-Accelerator</value>
