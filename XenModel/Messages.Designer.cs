@@ -2565,7 +2565,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Getting system status canceled.
+        ///   Looks up a localized string similar to Canceled.
         /// </summary>
         public static string ACTION_SYSTEM_STATUS_CANCELLED {
             get {

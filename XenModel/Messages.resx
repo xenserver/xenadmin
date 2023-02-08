@@ -954,7 +954,7 @@ This could be because the data source is not generating any data. Ensure the pre
     <value>Stopping Docker Container '{0}'</value>
   </data>
   <data name="ACTION_SYSTEM_STATUS_CANCELLED" xml:space="preserve">
-    <value>Getting system status canceled</value>
+    <value>Canceled</value>
   </data>
   <data name="ACTION_SYSTEM_STATUS_COMPILING" xml:space="preserve">
     <value>Compiling status report for {0}</value>

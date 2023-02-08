@@ -74,13 +74,13 @@ namespace XenAdmin.Wizards.BugToolWizard
                     {
                         Action.Changed += Action_Changed;
                         Action.Completed += Action_Completed;
-                        CancelAction();
                     }
                     else
                     {
                         Log.Debug("Could not instantiate the requested action.");
                     }
                 }
+
                 if (Action != null && !Action.IsCompleted)
                     Action.Cancel();
             }
