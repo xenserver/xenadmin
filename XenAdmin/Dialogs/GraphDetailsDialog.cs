@@ -399,9 +399,9 @@ namespace XenAdmin.Dialogs
         {
             private readonly DataGridViewCheckBoxCell _checkBoxCell = new DataGridViewCheckBoxCell();
             private readonly DataGridViewTextBoxCell _dataSourceCell = new DataGridViewTextBoxCell();
+            private readonly DataGridViewTextBoxCell _nameDescription = new DataGridViewTextBoxCell();
             private readonly DataGridViewTextBoxCell _typeCell = new DataGridViewTextBoxCell();
             private readonly DataGridViewTextBoxCell _enabledCell = new DataGridViewTextBoxCell();
-            private readonly DataGridViewTextBoxCell _nameDescription = new DataGridViewTextBoxCell();
             private readonly DataGridViewTextBoxCell _colorCell = new DataGridViewTextBoxCell();
 
             public DataSourceGridViewRow(DataSourceItem dataSourceItem, bool displayOnGraph)
@@ -410,12 +410,12 @@ namespace XenAdmin.Dialogs
 
                 _checkBoxCell.Value = displayOnGraph;
                 _dataSourceCell.Value = Dsi.ToString();
+                _nameDescription.Value = Dsi.DataSource.name_description;
                 _typeCell.Value = Dsi.Category.ToStringI18N();
                 _enabledCell.Value = Dsi.Enabled.ToYesNoStringI18n();
-                _nameDescription.Value = Dsi.DataSource.name_description;
                 _colorCell.Value = Dsi.Color;
 
-                Cells.AddRange(_checkBoxCell, _dataSourceCell, _typeCell, _enabledCell, _nameDescription, _colorCell);
+                Cells.AddRange(_checkBoxCell, _dataSourceCell, _nameDescription, _typeCell, _enabledCell, _colorCell);
 
                 if (Dsi.Hidden)
                     DefaultCellStyle = new DataGridViewCellStyle

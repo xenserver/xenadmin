@@ -53,9 +53,9 @@
             this.buttonEnable = new System.Windows.Forms.Button();
             this.ColumnDisplayOnGraph = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnEnabled = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnColour = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -106,9 +106,9 @@
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnDisplayOnGraph,
             this.ColumnName,
+            this.Description,
             this.ColumnType,
             this.ColumnEnabled,
-            this.Description,
             this.ColumnColour});
             resources.ApplyResources(this.dataGridView, "dataGridView");
             this.dataGridView.MultiSelect = false;
@@ -255,6 +255,13 @@
             this.ColumnName.Name = "ColumnName";
             this.ColumnName.ReadOnly = true;
             // 
+            // Description
+            // 
+            this.Description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            resources.ApplyResources(this.Description, "Description");
+            this.Description.Name = "Description";
+            this.Description.ReadOnly = true;
+            // 
             // ColumnType
             // 
             this.ColumnType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
@@ -267,12 +274,6 @@
             resources.ApplyResources(this.ColumnEnabled, "ColumnEnabled");
             this.ColumnEnabled.Name = "ColumnEnabled";
             this.ColumnEnabled.ReadOnly = true;
-            // 
-            // Description
-            // 
-            resources.ApplyResources(this.Description, "Description");
-            this.Description.Name = "Description";
-            this.Description.ReadOnly = true;
             // 
             // ColumnColour
             // 
@@ -331,9 +332,9 @@
         private System.Windows.Forms.Button buttonClearAll;
         private System.Windows.Forms.DataGridViewCheckBoxColumn ColumnDisplayOnGraph;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Description;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnType;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnEnabled;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Description;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnColour;
     }
 }
