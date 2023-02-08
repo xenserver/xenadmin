@@ -45,9 +45,11 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
         private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod()?.DeclaringType);
         private readonly Pool _pool;
 
-        public override string HelpMessage => "Details...";
+        public override string Title => Check.Description;
+        public override string HelpMessage => Messages.MORE_INFO;
+        public override string LinkText => Messages.LEARN_MORE;
+        public override string LinkData => InvisibleMessages.PV_GUESTS_CHECK_URL;
         public override string Message => string.Empty;
-        public override string Title => string.Empty;
         public override string Description => string.Format(Messages.POOL_HAS_DEPRECATED_FCOE_WARNING, _pool);
 
         public PoolHasFCoESrWarning(Check check, Pool pool) : base(check)
