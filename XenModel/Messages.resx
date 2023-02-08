@@ -2383,10 +2383,7 @@ This will cancel compilation of the status report.</value>
     <value>Failed - Please see logs for details</value>
   </data>
   <data name="BUGTOOL_REPORTSTATUS_SAVING" xml:space="preserve">
-    <value>Saving - {0}</value>
-  </data>
-  <data name="BUGTOOL_REPORTSTATUS_SAVING_NO_DATA" xml:space="preserve">
-    <value>Saving</value>
+    <value>Saving - {0}%</value>
   </data>
   <data name="BUGTOOL_REPORTSTATUS_QUEUED" xml:space="preserve">
     <value>Queued</value>

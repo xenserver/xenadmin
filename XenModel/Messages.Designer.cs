@@ -6538,20 +6538,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Saving - {0}.
+        ///   Looks up a localized string similar to Saving - {0}%.
         /// </summary>
         public static string BUGTOOL_REPORTSTATUS_SAVING {
             get {
                 return ResourceManager.GetString("BUGTOOL_REPORTSTATUS_SAVING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Saving.
-        /// </summary>
-        public static string BUGTOOL_REPORTSTATUS_SAVING_NO_DATA {
-            get {
-                return ResourceManager.GetString("BUGTOOL_REPORTSTATUS_SAVING_NO_DATA", resourceCulture);
             }
         }
         

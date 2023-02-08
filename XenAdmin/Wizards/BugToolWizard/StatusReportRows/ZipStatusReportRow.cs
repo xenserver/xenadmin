@@ -63,13 +63,7 @@ namespace XenAdmin.Wizards.BugToolWizard
                 switch (_action.Status)
                 {
                     case ReportStatus.inProgress:
-                        if (_action is IDataTransferStatusReportAction actionPackaging)
-                        {
-                            return string.Format(Messages.BUGTOOL_REPORTSTATUS_SAVING,
-                                Util.MemorySizeStringSuitableUnits(actionPackaging.DataTransferred, false));
-                        }
-
-                        return Messages.BUGTOOL_REPORTSTATUS_SAVING_NO_DATA;
+                        return string.Format(Messages.BUGTOOL_REPORTSTATUS_SAVING, _action.PercentComplete);
 
                     default:
                         return base.GetStatus(out img);

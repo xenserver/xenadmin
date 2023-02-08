@@ -35,10 +35,8 @@ using XenCenterLib.Archive;
 
 namespace XenAdmin.Actions
 {
-    public class ZipStatusReportAction : StatusReportAction, IDataTransferStatusReportAction
+    public class ZipStatusReportAction : StatusReportAction
     {
-        public long DataTransferred { get; private set; }
-
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
@@ -65,7 +63,7 @@ namespace XenAdmin.Actions
         /// <param name="timeString">Time string used when running action as <see cref="StatusReportAction"/>. Can be omitted otherwise.</param>
         /// <param name="suppressHistory">Whether to suppress history in the Events TabPage</param>
         public ZipStatusReportAction(string tempFolder, string destFile, string timeString = null, bool suppressHistory = true)
-            : base(null, Messages.BUGTOOL_SAVING, Messages.BUGTOOL_SAVING, timeString, suppressHistory)
+            : base(null, Messages.BUGTOOL_SAVING, destFile, timeString, suppressHistory)
         {
             _inputTempFolder = tempFolder;
             _destFile = destFile;
@@ -131,7 +129,6 @@ namespace XenAdmin.Actions
                     }
 
                     bytesExtracted += new FileInfo(inputFile).Length;
-                    DataTransferred += bytesExtracted;
                     File.Delete(inputFile);
                     PercentComplete = (int)(50.0 * bytesExtracted / bytesToExtract);
                     CheckCancellation();

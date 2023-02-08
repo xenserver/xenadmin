@@ -73,7 +73,7 @@ namespace XenAdmin.Wizards.BugToolWizard
                 switch (_action.Status)
                 {
                     case ReportStatus.inProgress:
-                        if (_action is IDataTransferStatusReportAction actionDownloading)
+                        if (_action is SingleHostStatusReportAction actionDownloading)
                         {
                             return string.Format(Messages.BUGTOOL_REPORTSTATUS_DOWNLOADING,
                                 Util.MemorySizeStringSuitableUnits(actionDownloading.DataTransferred, false));
