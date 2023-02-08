@@ -794,13 +794,13 @@
     <Compile Include="Dialogs\InstallCertificateDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Wizards\BugToolWizard\StatusReportRows\ClientSideDataRow.cs">
+    <Compile Include="Wizards\BugToolWizard\StatusReportRows\ClientSideStatusReportRow.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Wizards\BugToolWizard\StatusReportRows\HostStatusRow.cs">
+    <Compile Include="Wizards\BugToolWizard\StatusReportRows\SingleHostStatusReportRow.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Wizards\BugToolWizard\StatusReportRows\PackageStatusReportRow.cs">
+    <Compile Include="Wizards\BugToolWizard\StatusReportRows\ZipStatusReportRow.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Wizards\BugToolWizard\StatusReportRows\StatusReportRow.cs">

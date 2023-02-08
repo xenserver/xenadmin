@@ -38,13 +38,13 @@ namespace XenAdmin.Wizards.BugToolWizard
 {
     partial class BugToolPageRetrieveData
     {
-        private class ClientSideDataRow : StatusReportRow
+        private class ClientSideStatusReportRow : StatusReportRow
         {
             private readonly List<Host> _hosts;
             private readonly bool _includeClientLogs;
-            private StatusReportClientSideAction _action;
+            private ClientSideStatusReportAction _action;
 
-            public ClientSideDataRow(List<Host> hosts, bool includeClientLogs)
+            public ClientSideStatusReportRow(List<Host> hosts, bool includeClientLogs)
             {
                 _hosts = hosts;
                 _includeClientLogs = includeClientLogs;
@@ -58,7 +58,7 @@ namespace XenAdmin.Wizards.BugToolWizard
 
             protected override void CreateAction(string path, string time)
             {
-                _action = new StatusReportClientSideAction(_hosts, _includeClientLogs, path, time);
+                _action = new ClientSideStatusReportAction(_hosts, _includeClientLogs, path, time);
             }
         }
     }

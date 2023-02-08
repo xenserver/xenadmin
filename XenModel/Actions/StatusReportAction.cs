@@ -63,14 +63,14 @@ namespace XenAdmin.Actions
         }
     }
 
-    public class StatusReportClientSideAction : StatusReportAction
+    public class ClientSideStatusReportAction : StatusReportAction
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private readonly List<Host> hosts;
         private readonly bool includeClientLogs;
 
-        public StatusReportClientSideAction(List<Host> hosts, bool includeClientLogs, string filePath, string timeString)
+        public ClientSideStatusReportAction(List<Host> hosts, bool includeClientLogs, string filePath, string timeString)
             : base(null,
                 includeClientLogs
                     ? string.Format(Messages.BUGTOOL_CLIENT_ACTION_LOGS_META, BrandManager.BrandConsole)

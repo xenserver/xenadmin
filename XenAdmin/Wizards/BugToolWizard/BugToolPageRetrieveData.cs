@@ -120,7 +120,7 @@ namespace XenAdmin.Wizards.BugToolWizard
             {
                 var srRow = (StatusReportRow)row;
 
-                if (!considerDownloadReportRow && srRow is PackageStatusReportRow)
+                if (!considerDownloadReportRow && srRow is ZipStatusReportRow)
                 {
                     continue;
                 }
@@ -133,7 +133,7 @@ namespace XenAdmin.Wizards.BugToolWizard
                 {
                     successExists = true;
                 }
-                else if (srRow is PackageStatusReportRow)
+                else if (srRow is ZipStatusReportRow)
                 {
                     packageStatusReportFailed = true;
                     failureExists = true;
@@ -157,7 +157,7 @@ namespace XenAdmin.Wizards.BugToolWizard
             {
                 var srRow = (StatusReportRow)row;
 
-                if (!considerDownloadReportRow && srRow is PackageStatusReportRow)
+                if (!considerDownloadReportRow && srRow is ZipStatusReportRow)
                 {
                     continue;
                 }
@@ -222,14 +222,14 @@ namespace XenAdmin.Wizards.BugToolWizard
 
                 var includeClientLogs = capabilityKeys.Contains("client-logs");
                 if (includeClientLogs || SelectedHosts.Count > 0)
-                    rowList.Add(new ClientSideDataRow(SelectedHosts, includeClientLogs));
+                    rowList.Add(new ClientSideStatusReportRow(SelectedHosts, includeClientLogs));
 
                 foreach (var host in SelectedHosts)
                 {
-                    rowList.Add(new HostStatusRow(host, size, capabilityKeys));
+                    rowList.Add(new SingleHostStatusReportRow(host, size, capabilityKeys));
                 }
 
-                rowList.Add(new PackageStatusReportRow(OutputFile));
+                rowList.Add(new ZipStatusReportRow(OutputFile));
 
                 dataGridViewEx1.Rows.AddRange(rowList.ToArray());
             }
@@ -251,7 +251,7 @@ namespace XenAdmin.Wizards.BugToolWizard
 
                 // PackageStatusReportRow must be run at the very end in a synchronous manner.
                 // this is handled within the RowStatusCompleted method
-                if (!(row is PackageStatusReportRow))
+                if (!(row is ZipStatusReportRow))
                 {
                     RunRowAction(row);
                 }
@@ -265,11 +265,11 @@ namespace XenAdmin.Wizards.BugToolWizard
             if (row.Action != null)
                 return false;
 
-            return row is ClientSideDataRow ||
-                   row is PackageStatusReportRow ||
-                   row is HostStatusRow hostRow &&
+            return row is ClientSideStatusReportRow ||
+                   row is ZipStatusReportRow ||
+                   row is SingleHostStatusReportRow hostRow &&
                    dataGridViewEx1.Rows.Cast<StatusReportRow>().Count(r =>
-                       r is HostStatusRow hsr && hsr.Connection == hostRow.Connection &&
+                       r is SingleHostStatusReportRow hsr && hsr.Connection == hostRow.Connection &&
                        hsr.Action != null && !hsr.IsCompleted) < MAX_DOWNLOADS_PER_CONNECTION;
         }
 

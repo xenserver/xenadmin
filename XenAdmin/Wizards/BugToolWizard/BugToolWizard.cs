@@ -116,7 +116,7 @@ namespace XenAdmin.Wizards.BugToolWizard
                 if (selectedHostsConnections.Any(Helpers.ConnectionRequiresRbac))
                 {
                     _rbacWarningPage.SetPermissionChecks(selectedHostsConnections,
-                        new WizardRbacCheck(Messages.RBAC_GET_SYSTEM_STATUS_BLOCKED, SingleHostStatusAction.StaticRBACDependencies) { Blocking = true });
+                        new WizardRbacCheck(Messages.RBAC_GET_SYSTEM_STATUS_BLOCKED, SingleHostStatusReportAction.StaticRBACDependencies) { Blocking = true });
                     AddAfterPage(_bugToolPageSelectHosts, _rbacWarningPage);
                 }
             }

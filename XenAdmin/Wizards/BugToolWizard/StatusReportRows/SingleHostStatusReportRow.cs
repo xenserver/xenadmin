@@ -29,29 +29,39 @@
  * SUCH DAMAGE.
  */
 
+using System.Collections.Generic;
 using System.Drawing;
 using XenAdmin.Actions;
+using XenAdmin.Network;
+using XenAPI;
 
 namespace XenAdmin.Wizards.BugToolWizard
 {
     partial class BugToolPageRetrieveData
     {
-        private class PackageStatusReportRow : StatusReportRow
+        private class SingleHostStatusReportRow : StatusReportRow
         {
-            public override StatusReportAction Action => _action;
-            private ZipStatusReportAction _action;
-            private string OutputFile { get; }
+            private readonly long _size;
+            private readonly List<string> _capabilityKeys;
+            private readonly Host _host;
+            private SingleHostStatusReportAction _action;
 
-            public PackageStatusReportRow(string outputFile)
+            public SingleHostStatusReportRow(Host host, long size, List<string> capabilityKeys)
             {
-                OutputFile = outputFile;
-                cellHostImg.Value = Images.StaticImages.save_to_disk;
-                cellHost.Value = Messages.BUGTOOL_SAVE_STATUS_REPORT;
+                _host = host;
+                _size = size;
+                _capabilityKeys = capabilityKeys;
+                cellHostImg.Value = Images.GetImage16For(_host);
+                cellHost.Value = _host.Name();
             }
+
+            public IXenConnection Connection => _host.Connection;
+
+            public override StatusReportAction Action => _action;
 
             protected override void CreateAction(string path, string time)
             {
-                _action = new ZipStatusReportAction(path, OutputFile, time);
+                _action = new SingleHostStatusReportAction(_host, _size, _capabilityKeys, path, time);
             }
 
             protected override string GetStatus(out Image img)
@@ -63,13 +73,13 @@ namespace XenAdmin.Wizards.BugToolWizard
                 switch (_action.Status)
                 {
                     case ReportStatus.inProgress:
-                        if (_action is IDataTransferStatusReportAction actionPackaging)
+                        if (_action is IDataTransferStatusReportAction actionDownloading)
                         {
-                            return string.Format(Messages.BUGTOOL_REPORTSTATUS_SAVING,
-                                Util.MemorySizeStringSuitableUnits(actionPackaging.DataTransferred, false));
+                            return string.Format(Messages.BUGTOOL_REPORTSTATUS_DOWNLOADING,
+                                Util.MemorySizeStringSuitableUnits(actionDownloading.DataTransferred, false));
                         }
 
-                        return Messages.BUGTOOL_REPORTSTATUS_SAVING_NO_DATA;
+                        return Messages.BUGTOOL_REPORTSTATUS_DOWNLOADING_NO_DATA;
 
                     default:
                         return base.GetStatus(out img);

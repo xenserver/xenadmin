@@ -38,7 +38,7 @@ using XenCenterLib.Archive;
 
 namespace XenAdmin.Actions
 {
-    public class SingleHostStatusAction :  StatusReportAction, IDataTransferStatusReportAction
+    public class SingleHostStatusReportAction :  StatusReportAction, IDataTransferStatusReportAction
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         
@@ -47,7 +47,7 @@ namespace XenAdmin.Actions
         private readonly long size;
         private readonly string[] RBAC_FAIL_STRINGS = {"HTTP", "403", "Forbidden"};
         
-        public SingleHostStatusAction(Host host, long size, List<string> capabilityKeys, string path, string time)
+        public SingleHostStatusReportAction(Host host, long size, List<string> capabilityKeys, string path, string time)
             : base(host.Connection, string.Format(Messages.ACTION_SYSTEM_STATUS_COMPILING, Helpers.GetName(host)), path, time)
         {
             this.host = host;
