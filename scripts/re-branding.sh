@@ -1,6 +1,6 @@
 #!/bin/bash
-#Copyright (c) Citrix Systems, Inc.
-#All rights reserved.
+
+# Copyright (c) Cloud Software Group, Inc. 
 #
 #Redistribution and use in source and binary forms, with or without modification,
 #are permitted provided that the following conditions are met:
@@ -39,38 +39,36 @@ version_csharp()
 
 rebranding_global()
 {
-    sed -b -i -e "s#\[BRANDING_COMPANY_NAME_LEGAL\]#${BRANDING_COMPANY_NAME_LEGAL}#g" \
-        -e "s#\[Citrix\]#${BRANDING_COMPANY_NAME_SHORT}#g" \
-        -e "s#\[Citrix XenServer\]#${BRANDING_COMPANY_AND_PRODUCT}#g" \
-        -e "s#\[Citrix VM Tools\]#${BRANDING_PV_TOOLS}#g" \
-        -e "s#\[XenServer product\]#${BRANDING_PRODUCT_BRAND}#g" \
-        -e "s#0\.0\.0#${BRANDING_XC_PRODUCT_VERSION}#g" \
-        -e "s#\[BRANDING_PRODUCT_VERSION\]#${BRANDING_XC_PRODUCT_VERSION}#g" \
-        -e "s#\[BRANDING_PRODUCT_VERSION_TEXT\]#${BRANDING_PRODUCT_VERSION_TEXT}#g" \
-        -e "s#\[XenServer\]#${BRANDING_SERVER}#g" \
+    sed -b -i -e "s#\[Vendor Legal\]#${BRANDING_COMPANY_NAME_LEGAL}#g" \
+        -e "s#\[Vendor\]#${BRANDING_COMPANY_NAME_SHORT}#g" \
+        -e "s#\[Guest Tools\]#${BRANDING_PV_TOOLS}#g" \
+        -e "s#\[XenServerProduct\]#${BRANDING_PRODUCT_BRAND}#g" \
+        -e "s#\[XenServer version\]#${BRANDING_PRODUCT_VERSION_TEXT}#g" \
+        -e "s#\[XenServer host\]#${BRANDING_SERVER}#g" \
         -e "s#\[XenCenter\]#${BRANDING_BRAND_CONSOLE}#g" \
         -e "s#\[XenCenter_No_Space\]#${BRANDING_BRAND_CONSOLE_NO_SPACE}#g" \
         -e "s#xencenter\/current-release\/#${BRANDING_HELP_PATH}#g" \
-        -e "s#\[UPDATES_URL\]#${UPDATES_URL}#g" \
+        -e "s#\[Updates url\]#${UPDATES_URL}#g" \
         $1
 }
 
+version_csharp "${REPO}/CommonAssemblyInfo.cs"
+rebranding_global "${REPO}/CommonAssemblyInfo.cs"
+
 #AssemblyInfo rebranding
-for projectName in CommandLib xe XenAdmin XenAdminTests XenCenterLib XenModel XenOvfApi XenServerHealthCheck xva_verify
+for projectDir in CFUValidator CommandLib xe XenAdmin XenAdminTests XenCenterLib XenModel XenOvfApi XenServerHealthCheck xva_verify
 do
-  assemblyInfo="${REPO}/${projectName}/Properties/AssemblyInfo.cs"
-  version_csharp ${assemblyInfo} && rebranding_global ${assemblyInfo}
+  assemblyInfo="${REPO}/${projectDir}/Properties/AssemblyInfo.cs"
+  version_csharp ${assemblyInfo}
+  rebranding_global ${assemblyInfo}
 done
 
 rebranding_global ${REPO}/XenAdmin/XenAdmin.csproj
 
-#XenModel
-rebranding_global ${REPO}/Branding/Branding.resx
-
 PRODUCT_GUID=$(uuidgen | tr [a-z] [A-Z] | tr -d [:space:])
 
 sed -b -i -e "s/@AUTOGEN_PRODUCT_GUID@/${PRODUCT_GUID}/g" \
-          -e "s/@PRODUCT_VERSION@/${BRANDING_XC_PRODUCT_VERSION}/g" \
+          -e "s/@PRODUCT_VERSION@/${BRANDING_XC_PRODUCT_VERSION_INSTALLER}/g" \
           -e "s/@COMPANY_NAME_LEGAL@/${BRANDING_COMPANY_NAME_LEGAL}/g" \
           -e "s/@COMPANY_NAME_SHORT@/${BRANDING_COMPANY_NAME_SHORT}/g" \
           -e "s/@BRAND_CONSOLE@/${BRANDING_BRAND_CONSOLE}/g" \

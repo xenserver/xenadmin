@@ -1,5 +1,4 @@
-﻿/* Copyright (c) Citrix Systems, Inc. 
- * All rights reserved. 
+﻿/* Copyright (c) Cloud Software Group, Inc. 
  * 
  * Redistribution and use in source and binary forms, 
  * with or without modification, are permitted provided 
@@ -122,7 +121,7 @@ namespace XenServerHealthCheck
             }
         }
 
-        private static readonly string HEALTH_CHECK_LOCAL_KEYS = @"SOFTWARE\"+ BrandManager.CompanyNameShort +@"\XenHealthCheck";
+        private static readonly string HEALTH_CHECK_LOCAL_KEYS = $"SOFTWARE\\{BrandManager.ProductBrand}\\XenHealthCheck";
         private const string HEALTH_CHECK_UPLOAD_DOMAIN_NAME = "HealthCheckUploadDomainName";
         private const string HEALTH_CHECK_TIME_INTERVAL = "HealthCheckTimeIntervalInMinutes";
         

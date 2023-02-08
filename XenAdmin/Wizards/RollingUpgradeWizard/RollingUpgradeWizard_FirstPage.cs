@@ -1,5 +1,4 @@
-﻿/* Copyright (c) Citrix Systems, Inc. 
- * All rights reserved. 
+﻿/* Copyright (c) Cloud Software Group, Inc. 
  * 
  * Redistribution and use in source and binary forms, 
  * with or without modification, are permitted provided 
@@ -40,7 +39,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         public RollingUpgradeWizardFirstPage()
         {
             InitializeComponent();
-            label7.Text = string.Format(label7.Text, BrandManager.CompanyNameShort, BrandManager.ProductBrand);
+            label7.Text = string.Format(label7.Text, BrandManager.ProductBrand);
         }
 
         public override string Text => Messages.BEFORE_YOU_START;

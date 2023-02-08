@@ -253,7 +253,7 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
     <value>5</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>{0}、{1}、{2}、{3}、{4}、Xen、Xen 徽标、XenMotion 是 {5} 在美国及其他国家/地区的商标和/或注册商标。</value>
+    <value>copyright</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
@@ -325,7 +325,7 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
     <value>4</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>版权所有</value>
+    <value>trademarks</value>
   </data>
   <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>

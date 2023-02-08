@@ -1,5 +1,4 @@
-﻿/* Copyright (c) Citrix Systems, Inc. 
- * All rights reserved. 
+﻿/* Copyright (c) Cloud Software Group, Inc. 
  * 
  * Redistribution and use in source and binary forms, 
  * with or without modification, are permitted provided 
@@ -92,7 +91,7 @@ namespace XenAdmin.Core
 
             if (Properties.Settings.Default.AllowXenCenterUpdates || userRequested)
             {
-                string userAgent = $"{BrandManager.BrandConsole}/{BrandManager.XenCenterVersion}.{Program.Version.Revision} ({IntPtr.Size * 8}-bit)";
+                string userAgent = $"{BrandManager.BrandConsole}/{Program.Version} ({IntPtr.Size * 8}-bit)";
 
                 var action = new DownloadUpdatesXmlAction(Properties.Settings.Default.AllowXenCenterUpdates || userRequested,
                     false, false, userAgent, !userRequested);

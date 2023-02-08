@@ -1,5 +1,4 @@
-﻿/* Copyright (c) Citrix Systems, Inc. 
- * All rights reserved. 
+﻿/* Copyright (c) Cloud Software Group, Inc. 
  * 
  * Redistribution and use in source and binary forms, 
  * with or without modification, are permitted provided 
@@ -40,20 +39,19 @@ namespace XenAdmin.Dialogs
 {
     public partial class AboutDialog : XenDialogBase
     {
-        private static LegalNoticesDialog TheLegalDialog = null;
+        private LegalNoticesDialog _theLegalDialog;
 
         public AboutDialog()
         {
             InitializeComponent();
 
-            var revision = Program.Version.Revision;
-            string buildText = Helpers.CommonCriteriaCertificationRelease
-                ? string.Format(Messages.COMMON_CRITERIA_TEXT, revision, BrandManager.ProductBrand)
-                : revision.ToString();
-
             VersionLabel.Text = string.Format(Messages.VERSION_NUMBER, BrandManager.BrandConsole,
-                BrandManager.XenCenterVersion, buildText, IntPtr.Size * 8);
-            label2.Text = string.Format(Messages.COPYRIGHT, BrandManager.CompanyNameLegal);
+                Program.VersionText, Program.Version.Revision, IntPtr.Size * 8);
+
+            if (Helpers.CommonCriteriaCertificationRelease)
+                VersionLabel.Text += string.Format(Messages.COMMON_CRITERIA_TEXT, BrandManager.ProductBrand);
+
+            label2.Text = BrandManager.Copyright;
             label2.Visible = !HiddenFeatures.CopyrightHidden;
 
             licenseDetailsLabel.Text = string.Format(licenseDetailsLabel.Text, BrandManager.ProductBrand);
@@ -75,20 +73,19 @@ namespace XenAdmin.Dialogs
         private void OkButton_Click(object sender, EventArgs e)
         {
             Close();
-            TheLegalDialog = null;
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (TheLegalDialog == null || TheLegalDialog.IsDisposed)
+            if (_theLegalDialog == null || _theLegalDialog.IsDisposed)
             {
-                TheLegalDialog = new LegalNoticesDialog();
-                TheLegalDialog.Show(this);
+                _theLegalDialog = new LegalNoticesDialog();
+                _theLegalDialog.Show(this);
             }
             else
             {
-                TheLegalDialog.BringToFront();
-                TheLegalDialog.Focus();
+                _theLegalDialog.BringToFront();
+                _theLegalDialog.Focus();
             }
         }
 
@@ -115,6 +112,12 @@ namespace XenAdmin.Dialogs
                 Properties.Settings.Default.ShowAboutDialog = showAgainCheckBox.Checked;
                 Settings.TrySaveSettings();
             }
+        }
+
+        private void AboutDialog_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            _theLegalDialog?.Dispose();
+            _theLegalDialog = null;
         }
     }
 }

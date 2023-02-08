@@ -1,5 +1,4 @@
-﻿/* Copyright (c) Citrix Systems, Inc. 
- * All rights reserved. 
+﻿/* Copyright (c) Cloud Software Group, Inc. 
  * 
  * Redistribution and use in source and binary forms, 
  * with or without modification, are permitted provided 
@@ -36,13 +35,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("CFUValidator")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Utility for testing [XenServerProduct] update packages")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("[Citrix]")]
 [assembly: AssemblyProduct("[XenCenter]")]
-[assembly: AssemblyCopyright("Copyright © [BRANDING_COMPANY_NAME_LEGAL]")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
@@ -51,16 +46,3 @@ using System.Runtime.InteropServices;
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("1fc53fff-32d6-4775-a913-203c3410d388")]
-
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Build and Revision Numbers 
-// by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]

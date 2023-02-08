@@ -1,5 +1,4 @@
-﻿/* Copyright (c) Citrix Systems, Inc. 
- * All rights reserved. 
+﻿/* Copyright (c) Cloud Software Group, Inc. 
  * 
  * Redistribution and use in source and binary forms, 
  * with or without modification, are permitted provided 
@@ -112,7 +111,7 @@ namespace XenAdminTests.CodeTests
             var assembly = FindAssemblyByNameRecursively(tc.AssemblyName);
             Assert.NotNull($"Assembly {tc.AssemblyName} was not found.");
 
-            var excludeFromCheck = new[] {"XenAdmin.Help.HelpManager", "XenAdmin.Branding", "DotNetVnc.KeyMap"};
+            var excludeFromCheck = new[] {"XenAdmin.Help.HelpManager", "DotNetVnc.KeyMap"};
             var missing = new List<string>();
             var extra = new List<string>();
 

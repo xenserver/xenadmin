@@ -1,5 +1,4 @@
-﻿/* Copyright (c) Citrix Systems, Inc. 
- * All rights reserved. 
+﻿/* Copyright (c) Cloud Software Group, Inc. 
  * 
  * Redistribution and use in source and binary forms, 
  * with or without modification, are permitted provided 
@@ -2020,7 +2019,7 @@ namespace XenAdmin.Network
     public class ServerNotSupported : DisconnectionException
     {
         public override string Message => string.Format(Messages.SERVER_TOO_OLD,
-            BrandManager.BrandConsole, BrandManager.ProductBrand, BrandManager.ProductVersion70);
+            BrandManager.BrandConsole, BrandManager.ProductVersion70);
     }
 
     public class ConnectionExists : DisconnectionException

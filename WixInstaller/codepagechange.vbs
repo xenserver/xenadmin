@@ -4,7 +4,7 @@
 '  CC      PPPPP   MM M MM             Manager
 '   CCCCC  PP      MM   MM
 '
-' Copyright 1990-2009 Citrix Systems, Inc.  All rights reserved.
+' Copyright (c) Cloud Software Group, Inc. 
 '
 ' This file changes codepages; product code; package codes for  appropriate languages.
 ' arguments <language> , <projectName>

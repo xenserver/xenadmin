@@ -59,6 +59,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\CommonAssemblyInfo.cs">
+      <Link>Properties\CommonAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Actions\ActionBase.cs" />
     <Compile Include="Actions\HealthCheck\HealthCheckAuthenticationAction.cs" />
     <Compile Include="Actions\HealthCheck\SaveHealthCheckSettingsAction.cs" />
@@ -581,9 +584,15 @@
     <Compile Include="XenAPI\XenRef.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="..\Branding\Branding.ja.resx">
+      <Link>Branding.ja.resx</Link>
+    </EmbeddedResource>
     <EmbeddedResource Include="..\Branding\Branding.resx">
       <Link>Branding.resx</Link>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Branding\Branding.zh-CN.resx">
+      <Link>Branding.zh-CN.resx</Link>
     </EmbeddedResource>
     <EmbeddedResource Include="FriendlyNames.resx">
       <SubType>Designer</SubType>

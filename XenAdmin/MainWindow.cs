@@ -1,5 +1,4 @@
-﻿/* Copyright (c) Citrix Systems, Inc. 
- * All rights reserved. 
+﻿/* Copyright (c) Cloud Software Group, Inc. 
  * 
  * Redistribution and use in source and binary forms, 
  * with or without modification, are permitted provided 
@@ -945,7 +944,7 @@ namespace XenAdmin
                 Program.Invoke(Program.MainWindow, () =>
                 {
                     var title = string.Format(Messages.CONNECTION_REFUSED_TITLE, Helpers.GetName(coordinator).Ellipsise(80));
-                    var msg = string.Format(Messages.SUPPORTER_TOO_OLD, BrandManager.ProductBrand, BrandManager.ProductVersion70, BrandManager.BrandConsole);
+                    var msg = string.Format(Messages.SUPPORTER_TOO_OLD, BrandManager.ProductVersion70, BrandManager.BrandConsole);
 
                     new DummyAction(title, "", msg).Run();
 
@@ -1009,8 +1008,7 @@ namespace XenAdmin
                     Program.Invoke(Program.MainWindow, delegate
                     {
                         var msg = string.Format(Messages.GUI_NOT_COMPATIBLE, BrandManager.BrandConsole,
-                            BrandManager.ProductBrand, BrandManager.ProductVersion821,
-                            Helpers.GetName(coordinator), BrandManager.LegacyConsole);
+                            BrandManager.ProductVersion821, Helpers.GetName(coordinator));
                         var url = InvisibleMessages.OUT_OF_DATE_WEBSITE;
                         var title = string.Format(Messages.CONNECTION_REFUSED_TITLE, Helpers.GetName(coordinator).Ellipsise(80));
                         var error = $"{msg}\n{url}";
@@ -1110,7 +1108,7 @@ namespace XenAdmin
         {
             var brand = host.ProductBrand();
             return brand == BrandManager.ProductBrand || brand == BrandManager.LegacyProduct ||
-                   BrandManager.ProductBrand == "[XenServer product]";
+                   BrandManager.ProductBrand == "[XenServerProduct]";
         }
 
         /// <summary>

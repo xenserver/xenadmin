@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
- Copyright (c) Citrix Systems, Inc.
- All rights reserved.
+ Copyright (c) Cloud Software Group, Inc. 
 
  Redistribution and use in source and binary forms,
  with or without modification, are permitted provided
@@ -35,7 +34,7 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
     <?include branding.wxi ?>
     <Fragment>
-        <DirectoryRef Id='Citrix'>
+        <DirectoryRef Id='XenServer'>
             <Directory Id="HEALTHCHECKSERVICEDIR" Name="XenServerHealthCheckService">
                 <Component Id="XenServerHealthCheck" Guid="$(var.HealthCheckGuid)">
                     <File Id="HealthCheck_XenServerHealthCheck.exe" Name="XenServerHealthCheck.exe" KeyPath="yes" Source="$(env.RepoRoot)\XenServerHealthCheck\bin\Release\XenServerHealthCheck.exe" />

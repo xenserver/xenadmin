@@ -126,6 +126,5 @@ XenApp
 XenAppliance
 XenCenter
 XenDesktop
-XenMotion
 XenServer
 XVA

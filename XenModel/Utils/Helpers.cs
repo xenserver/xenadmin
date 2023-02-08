@@ -1,5 +1,4 @@
-﻿/* Copyright (c) Citrix Systems, Inc. 
- * All rights reserved. 
+﻿/* Copyright (c) Cloud Software Group, Inc. 
  * 
  * Redistribution and use in source and binary forms, 
  * with or without modification, are permitted provided 
@@ -524,7 +523,11 @@ namespace XenAdmin.Core
 
             string legacy = NaplesOrGreater(host) ? "" : "legacy-";
             string name = FriendlyNameManager.GetFriendlyName("Label-host.edition-" + legacy + host.edition);
-            return name ?? Messages.UNKNOWN;
+
+            if (string.IsNullOrEmpty(name))
+                return Messages.UNKNOWN;
+
+            return name.Contains("{0}") ? string.Format(name, BrandManager.ProductBrand) : name;
         }
 
         /// <summary>

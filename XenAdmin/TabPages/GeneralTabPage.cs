@@ -1,5 +1,4 @@
-﻿/* Copyright (c) Citrix Systems, Inc. 
- * All rights reserved. 
+﻿/* Copyright (c) Cloud Software Group, Inc. 
  * 
  * Redistribution and use in source and binary forms, 
  * with or without modification, are permitted provided 
@@ -1863,8 +1862,7 @@ namespace XenAdmin.TabPages
             if (xenObject is DockerContainer && !Helpers.ContainerCapability(xenObject.Connection))
             {
                 Banner.BannerType = DeprecationBanner.Type.Removal;
-                Banner.WarningMessage = string.Format(Messages.CONTAINER_MANAGEMENT_REMOVAL_WARNING,
-                    string.Format(Messages.STRING_SPACE_STRING, BrandManager.ProductBrand, BrandManager.ProductVersion82));
+                Banner.WarningMessage = string.Format(Messages.CONTAINER_MANAGEMENT_REMOVAL_WARNING, BrandManager.ProductVersion82);
                 Banner.LinkText = Messages.DETAILS;
                 Banner.LinkUri = new Uri(InvisibleMessages.DEPRECATION_URL);
                 Banner.Visible = true;
@@ -1872,7 +1870,7 @@ namespace XenAdmin.TabPages
             else if (!Helpers.Post82X(xenObject.Connection))
             {
                 Banner.BannerType = DeprecationBanner.Type.Deprecation;
-                Banner.WarningMessage = string.Format(Messages.WARNING_PRE_CLOUD_VERSION_CONNECTION, BrandManager.BrandConsole, BrandManager.ProductBrand, BrandManager.ProductVersion821, BrandManager.LegacyConsole);
+                Banner.WarningMessage = string.Format(Messages.WARNING_PRE_CLOUD_VERSION_CONNECTION, BrandManager.BrandConsole, Program.VersionText, BrandManager.ProductVersion821);
                 Banner.LinkText = Messages.PATCHING_WIZARD_WEBPAGE_CELL;
                 Banner.LinkUri = new Uri(InvisibleMessages.OUT_OF_DATE_WEBSITE);
                 Banner.Visible = true;

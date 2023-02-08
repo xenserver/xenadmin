@@ -1,5 +1,4 @@
-/* Copyright (c) Citrix Systems, Inc. 
- * All rights reserved. 
+/* Copyright (c) Cloud Software Group, Inc. 
  * 
  * Redistribution and use in source and binary forms, 
  * with or without modification, are permitted provided 
@@ -337,11 +336,11 @@ namespace XenAdmin.Dialogs
                     if (XenObject.Connection.Cache.Hosts.All(h => h.EnterpriseFeaturesEnabled()))
                         return Messages.LICENSE_SUPPORT_AND_ENTERPRISE_FEATURES_ENABLED;
                     if (XenObject.Connection.Cache.Hosts.All(h => h.DesktopPlusFeaturesEnabled()))
-                        return string.Format(Messages.LICENSE_SUPPORT_AND_DESKTOP_PLUS_FEATURES_ENABLED, BrandManager.CompanyNameShort);
+                        return string.Format(Messages.LICENSE_SUPPORT_AND_DESKTOP_PLUS_FEATURES_ENABLED, BrandManager.CompanyNameLegacy);
                     if (XenObject.Connection.Cache.Hosts.All(h => h.DesktopFeaturesEnabled()))
-                        return string.Format(Messages.LICENSE_SUPPORT_AND_DESKTOP_FEATURES_ENABLED, BrandManager.CompanyNameShort);
+                        return string.Format(Messages.LICENSE_SUPPORT_AND_DESKTOP_FEATURES_ENABLED, BrandManager.CompanyNameLegacy);
                     if (XenObject.Connection.Cache.Hosts.All(h => h.DesktopCloudFeaturesEnabled()))
-                        return string.Format(Messages.LICENSE_SUPPORT_AND_DESKTOP_CLOUD_FEATURES_ENABLED, BrandManager.CompanyNameShort);
+                        return string.Format(Messages.LICENSE_SUPPORT_AND_DESKTOP_CLOUD_FEATURES_ENABLED, BrandManager.CompanyNameLegacy);
                     if (XenObject.Connection.Cache.Hosts.All(h => h.PremiumFeaturesEnabled()))
                         return Messages.LICENSE_SUPPORT_AND_PREMIUM_FEATURES_ENABLED;
                     if (XenObject.Connection.Cache.Hosts.All(h => h.StandardFeaturesEnabled()))

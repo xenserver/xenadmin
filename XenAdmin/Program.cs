@@ -1,5 +1,4 @@
-﻿/* Copyright (c) Citrix Systems, Inc. 
- * All rights reserved. 
+﻿/* Copyright (c) Cloud Software Group, Inc. 
  * 
  * Redistribution and use in source and binary forms, 
  * with or without modification, are permitted provided 
@@ -106,7 +105,9 @@ namespace XenAdmin
 
         public static volatile bool Exiting;
 
-        public static readonly string AssemblyDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        public static readonly string AssemblyDir;
+        public static readonly Version Version;
+        public static readonly string VersionText;
 
         private static readonly System.Threading.Timer dailyTimer;
 
@@ -119,9 +120,14 @@ namespace XenAdmin
                 LogApplicationStats();
             }, null, new TimeSpan(24, 0, 0), new TimeSpan(24, 0, 0));
 
+            var assembly = Assembly.GetExecutingAssembly();
+            AssemblyDir = Path.GetDirectoryName(assembly.Location);
+            Version = assembly.GetName().Version;
+            VersionText = $"{Version.Major}.{Version.Minor}.{Version.Build}";
+
             var logFolder = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                BrandManager.CompanyNameShort,
+                BrandManager.ProductBrand,
                 BrandManager.BrandConsoleNoSpace,
                 "logs");
             
@@ -722,8 +728,6 @@ namespace XenAdmin
         /// If true action threads will close themselves instantly...
         /// </summary>
         public static bool ForcedExiting = false;
-
-        public static Version Version => Assembly.GetExecutingAssembly().GetName().Version;
 
         public static string CurrentLanguage => Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
 

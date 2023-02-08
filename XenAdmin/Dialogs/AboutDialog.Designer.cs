@@ -55,19 +55,19 @@ namespace XenAdmin.Dialogs
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
             this.tableLayoutPanel1.BackColor = System.Drawing.Color.White;
-            this.tableLayoutPanel1.Controls.Add(this.LicenseDetailsTextBox, 0, 5);
-            this.tableLayoutPanel1.Controls.Add(this.OkButton, 1, 6);
-            this.tableLayoutPanel1.Controls.Add(this.linkLabel1, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.licenseDetailsLabel, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.VersionLabel, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.showAgainCheckBox, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.LicenseDetailsTextBox, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.linkLabel1, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.label2, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.licenseDetailsLabel, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.VersionLabel, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.showAgainCheckBox, 1, 6);
+            this.tableLayoutPanel1.Controls.Add(this.OkButton, 1, 7);
+            this.tableLayoutPanel1.Controls.Add(this.pictureBox1, 0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // LicenseDetailsTextBox
             // 
             this.LicenseDetailsTextBox.BackColor = System.Drawing.SystemColors.Window;
-            this.tableLayoutPanel1.SetColumnSpan(this.LicenseDetailsTextBox, 2);
             this.LicenseDetailsTextBox.Cursor = System.Windows.Forms.Cursors.Default;
             resources.ApplyResources(this.LicenseDetailsTextBox, "LicenseDetailsTextBox");
             this.LicenseDetailsTextBox.Name = "LicenseDetailsTextBox";
@@ -84,21 +84,18 @@ namespace XenAdmin.Dialogs
             // 
             resources.ApplyResources(this.label2, "label2");
             this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.tableLayoutPanel1.SetColumnSpan(this.label2, 2);
             this.label2.Name = "label2";
             // 
             // licenseDetailsLabel
             // 
             resources.ApplyResources(this.licenseDetailsLabel, "licenseDetailsLabel");
             this.licenseDetailsLabel.BackColor = System.Drawing.Color.Transparent;
-            this.tableLayoutPanel1.SetColumnSpan(this.licenseDetailsLabel, 2);
             this.licenseDetailsLabel.Name = "licenseDetailsLabel";
             // 
             // VersionLabel
             // 
             resources.ApplyResources(this.VersionLabel, "VersionLabel");
             this.VersionLabel.BackColor = System.Drawing.Color.Transparent;
-            this.tableLayoutPanel1.SetColumnSpan(this.VersionLabel, 2);
             this.VersionLabel.Name = "VersionLabel";
             // 
             // showAgainCheckBox
@@ -110,8 +107,9 @@ namespace XenAdmin.Dialogs
             // 
             // pictureBox1
             // 
+            this.tableLayoutPanel1.SetColumnSpan(this.pictureBox1, 3);
             resources.ApplyResources(this.pictureBox1, "pictureBox1");
-            this.pictureBox1.Image = global::XenAdmin.Properties.Resources.about_box_graphic_423x79;
+            this.pictureBox1.Image = global::XenAdmin.Properties.Resources.about_box_graphic;
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.TabStop = false;
             // 
@@ -123,9 +121,9 @@ namespace XenAdmin.Dialogs
             this.BackColor = System.Drawing.Color.White;
             this.CancelButton = this.OkButton;
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.pictureBox1);
             this.HelpButton = false;
             this.Name = "AboutDialog";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AboutDialog_FormClosed);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

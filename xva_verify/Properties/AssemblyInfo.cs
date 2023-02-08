@@ -1,5 +1,4 @@
-﻿/* Copyright (c) Citrix Systems, Inc. 
- * All rights reserved. 
+﻿/* Copyright (c) Cloud Software Group, Inc. 
  * 
  * Redistribution and use in source and binary forms, 
  * with or without modification, are permitted provided 
@@ -37,12 +36,8 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyTitle("xva_verify")]
 [assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("[Citrix]")]
+[assembly: AssemblyConfiguration("[XenServerProduct] utility for verifying XVA files")]
 [assembly: AssemblyProduct("[XenCenter]")]
-[assembly: AssemblyCopyright("Copyright © [BRANDING_COMPANY_NAME_LEGAL]")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
@@ -51,13 +46,3 @@ using System.Runtime.InteropServices;
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("e54b82ae-a69e-4650-b715-bd63ae2343f2")]
-
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-[assembly: AssemblyVersion("0.0.0.0")]
-[assembly: AssemblyFileVersion("0000")]
