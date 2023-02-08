@@ -956,6 +956,15 @@ This could be because the data source is not generating any data. Ensure the pre
   <data name="ACTION_SYSTEM_STATUS_CANCELLED" xml:space="preserve">
     <value>Canceled</value>
   </data>
+  <data name="ACTION_SYSTEM_STATUS_COMPILE_FAILED" xml:space="preserve">
+    <value>No data was compiled. Press previous to select new items or servers and try again.</value>
+  </data>
+  <data name="ACTION_SYSTEM_STATUS_COMPILE_PARTIAL" xml:space="preserve">
+    <value>Finished compiling status report (with errors). A partial status report was saved.</value>
+  </data>
+  <data name="ACTION_SYSTEM_STATUS_COMPILE_SUCCESSFUL" xml:space="preserve">
+    <value>Status report was compiled and saved successfully.</value>
+  </data>
   <data name="ACTION_SYSTEM_STATUS_COMPILING" xml:space="preserve">
     <value>Compiling status report for {0}</value>
   </data>
@@ -964,15 +973,6 @@ This could be because the data source is not generating any data. Ensure the pre
   </data>
   <data name="ACTION_SYSTEM_STATUS_DISK_FULL" xml:space="preserve">
     <value>Getting system status failed: disk full</value>
-  </data>
-  <data name="ACTION_SYSTEM_STATUS_COMPILE_FAILED" xml:space="preserve">
-    <value>No data was compiled. Press previous to select new items or servers and try again.</value>
-  </data>
-  <data name="ACTION_SYSTEM_STATUS_COMPILE_SUCCESSFUL" xml:space="preserve">
-    <value>Status report was compiled and saved successfully.</value>
-  </data>
-  <data name="ACTION_SYSTEM_STATUS_COMPILE_PARTIAL" xml:space="preserve">
-    <value>Finished compiling status report (with errors). A partial status report was saved.</value>
   </data>
   <data name="ACTION_SYSTEM_STATUS_SAVE_FAILED" xml:space="preserve">
     <value>Failed to save the status report to specified location. Please try again.</value>
@@ -2323,9 +2323,6 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
   <data name="BUGTOOL_FILE_PREFIX" xml:space="preserve">
     <value>status-report-</value>
   </data>
-  <data name="BUGTOOL_SAVE_STATUS_REPORT" xml:space="preserve">
-    <value>Saving report to selected destination</value>
-  </data>
   <data name="BUGTOOL_PAGE_CAPABILITIES_PAGETITLE" xml:space="preserve">
     <value>Select the data you want to include in your report</value>
   </data>
@@ -2382,11 +2379,14 @@ This will cancel compilation of the status report.</value>
   <data name="BUGTOOL_REPORTSTATUS_FAILED" xml:space="preserve">
     <value>Failed - Please see logs for details</value>
   </data>
+  <data name="BUGTOOL_REPORTSTATUS_QUEUED" xml:space="preserve">
+    <value>Queued</value>
+  </data>
   <data name="BUGTOOL_REPORTSTATUS_SAVING" xml:space="preserve">
     <value>Saving - {0}%</value>
   </data>
-  <data name="BUGTOOL_REPORTSTATUS_QUEUED" xml:space="preserve">
-    <value>Queued</value>
+  <data name="BUGTOOL_SAVE_STATUS_REPORT" xml:space="preserve">
+    <value>Saving report to selected destination</value>
   </data>
   <data name="BUGTOOL_SAVING" xml:space="preserve">
     <value>Saving server status report</value>
