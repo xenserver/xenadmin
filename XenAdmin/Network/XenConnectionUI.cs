@@ -1,5 +1,4 @@
-﻿/* Copyright (c) Citrix Systems, Inc. 
- * All rights reserved. 
+﻿/* Copyright (c) Cloud Software Group, Inc. 
  * 
  * Redistribution and use in source and binary forms, 
  * with or without modification, are permitted provided 
@@ -269,8 +268,8 @@ namespace XenAdmin.Network
             else if (error is ServerNotSupported)
             {
                 // Server version is too old for this version of XenCenter
-                AddError(owner, connection, string.Format(Messages.SERVER_TOO_OLD,
-                        BrandManager.BrandConsole, BrandManager.ProductBrand, BrandManager.ProductVersion70),
+                AddError(owner, connection,
+                    string.Format(Messages.SERVER_TOO_OLD, BrandManager.BrandConsole, BrandManager.ProductVersion70),
                     string.Format(Messages.SERVER_TOO_OLD_SOLUTION, BrandManager.BrandConsole));
             }
             else

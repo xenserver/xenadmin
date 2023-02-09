@@ -209,13 +209,13 @@
     <value>5, 5, 5, 5</value>
   </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>570, 38</value>
+    <value>549, 38</value>
   </data>
   <data name="label5.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
-    <value>You cannot use this wizard to install updates or supplemental packs to {0} {1}. Please use latest available {2} for {0} {1} instead.</value>
+    <value>You cannot use this wizard to install updates or supplemental packs to {0}. Please use latest available {1} for {0} instead.</value>
   </data>
   <data name="&gt;&gt;label5.Name" xml:space="preserve">
     <value>label5</value>

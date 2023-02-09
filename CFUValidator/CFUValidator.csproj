@@ -60,6 +60,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\CommonAssemblyInfo.cs">
+      <Link>Properties\CommonAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="CFUValidator.cs" />
     <Compile Include="CommandLineOptions\CommandLineArgument.cs" />
     <Compile Include="CommandLineOptions\CFUCommandLineOptionManager.cs" />

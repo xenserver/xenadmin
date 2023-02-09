@@ -1,5 +1,4 @@
-﻿/* Copyright (c) Citrix Systems, Inc. 
- * All rights reserved. 
+﻿/* Copyright (c) Cloud Software Group, Inc. 
  * 
  * Redistribution and use in source and binary forms, 
  * with or without modification, are permitted provided 
@@ -51,7 +50,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
         public NewPolicySnapshotTypePage()
         {
             InitializeComponent();
-            label6.Text = string.Format(label6.Text, BrandManager.ProductBrand, BrandManager.ProductVersion81);
+            label6.Text = string.Format(label6.Text, BrandManager.ProductVersion81);
             labelWarning.Text = string.Format(labelWarning.Text, BrandManager.VmTools);
         }
 

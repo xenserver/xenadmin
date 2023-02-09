@@ -1,5 +1,4 @@
-﻿/* Copyright (c) Citrix Systems, Inc. 
- * All rights reserved. 
+﻿/* Copyright (c) Cloud Software Group, Inc.  
  * 
  * Redistribution and use in source and binary forms, 
  * with or without modification, are permitted provided 
@@ -46,7 +45,7 @@ namespace XenServerHealthCheck
         {
             log4net.GlobalContext.Properties["HEALTHCHECK_LOG"] = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData),
-                BrandManager.CompanyNameShort,
+                BrandManager.ProductBrand,
                 "XenServerHealthCheck\\logs\\XenServerHealthCheck.log");
             
             log4net.Config.XmlConfigurator.ConfigureAndWatch(new FileInfo(Assembly.GetCallingAssembly().Location + ".config"));

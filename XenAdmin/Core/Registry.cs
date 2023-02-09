@@ -1,5 +1,4 @@
-﻿/* Copyright (c) Citrix Systems, Inc. 
- * All rights reserved. 
+﻿/* Copyright (c) Cloud Software Group, Inc. 
  * 
  * Redistribution and use in source and binary forms, 
  * with or without modification, are permitted provided 
@@ -195,7 +194,7 @@ namespace XenAdmin.Core
         private const string FORCE_SYSTEM_FONTS = "ForceSystemFonts";
         private const string DISABLE_PLUGINS = "DisablePlugins";
         private const string DONT_SUDO = "DontSudo";
-        private static readonly string XENCENTER_LOCAL_KEYS = @"SOFTWARE\" + BrandManager.CompanyNameShort + @"\" + BrandManager.BrandConsoleNoSpace;
+        private static readonly string XENCENTER_LOCAL_KEYS = $"SOFTWARE\\{BrandManager.ProductBrand}\\{BrandManager.BrandConsoleNoSpace}";
         private const string PSExecutionPolicyKey = @"Software\Microsoft\PowerShell\1\ShellIds\Microsoft.PowerShell";
         private const string PSExecutionPolicyName = "ExecutionPolicy";
         private const string PowerShellKey = @"Software\Microsoft\PowerShell\1";

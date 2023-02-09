@@ -1,5 +1,4 @@
-﻿/* Copyright (c) Citrix Systems, Inc. 
- * All rights reserved. 
+﻿/* Copyright (c) Cloud Software Group, Inc. 
  * 
  * Redistribution and use in source and binary forms, 
  * with or without modification, are permitted provided 
@@ -52,9 +51,8 @@ namespace XenAdmin.Help
             {
                 HelpUrl = InvisibleMessages.DOCS_URL + BrandManager.HelpPath;
 
-                HelpQuery = string.Format(InvisibleMessages.HELP_URL_QUERY,
-                    $"{BrandManager.XenCenterVersion}.{Program.Version.Revision}".Replace('.', '_'),
-                    BrandManager.BrandConsole);
+                HelpQuery = string.Format(InvisibleMessages.HELP_URL_QUERY, 
+                    $"{Program.Version}".Replace('.', '_'), BrandManager.BrandConsole);
             }
         }
 

@@ -1,5 +1,4 @@
-﻿/* Copyright (c) Citrix Systems, Inc. 
- * All rights reserved. 
+﻿/* Copyright (c) Cloud Software Group, Inc. 
  * 
  * Redistribution and use in source and binary forms, 
  * with or without modification, are permitted provided 
@@ -86,7 +85,7 @@ namespace XenAdmin.Diagnostics.Checks
             //update case
             if (_newVersion != null)
             {
-                if (_newVersion.Version.CompareTo(new Version(BrandManager.ProductVersion82)) >= 0)
+                if (_newVersion.Version.CompareTo(new Version(BrandManager.ProductVersion82Short)) >= 0)
                     return new LegacySslProblem(this, _pool);
                 return null;
             }

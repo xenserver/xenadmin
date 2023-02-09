@@ -1,5 +1,4 @@
-/* Copyright (c) Citrix Systems, Inc. 
- * All rights reserved. 
+/* Copyright (c) Cloud Software Group, Inc. 
  * 
  * Redistribution and use in source and binary forms, 
  * with or without modification, are permitted provided 
@@ -62,7 +61,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
         public BugToolPageSelectCapabilities()
         {
             InitializeComponent();
-            linkLabel1.Text = string.Format(linkLabel1.Text, BrandManager.CompanyNameShort);
+            linkLabel1.Text = string.Format(linkLabel1.Text, BrandManager.Cis);
             linkLabel1.Visible = !HiddenFeatures.LinkLabelHidden;
         }
 
@@ -224,6 +223,11 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                         }
                     }
                 }
+
+                // deprecated; we don't connect to those versions any more; the key
+                // though still lingers on in the capabilities, hence we should skip it
+                if (c.Key == "CVSM")
+                    continue;
 
                 capabilities.Add(c);
             }
@@ -545,11 +549,6 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                     _name = _key;
                 else if (_key == "client-logs")
                     _name = string.Format(_name, BrandManager.BrandConsole);
-                else if (_key == "CVSM")
-                {
-                    _name = string.Format(_name, BrandManager.CompanyNameShort);
-                    _description = string.Format(_description, BrandManager.CompanyNameShort);
-                }
             }
         }
 

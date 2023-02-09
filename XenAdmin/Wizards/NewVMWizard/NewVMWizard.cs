@@ -1,5 +1,4 @@
-﻿/* Copyright (c) Citrix Systems, Inc. 
- * All rights reserved. 
+﻿/* Copyright (c) Cloud Software Group, Inc. 
  * 
  * Redistribution and use in source and binary forms, 
  * with or without modification, are permitted provided 
@@ -299,7 +298,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                 var format = Helpers.GetPool(connection) != null
                     ? Messages.NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_POOL
                     : Messages.NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_SERVER;
-                ShowInformationMessage(string.Format(format, BrandManager.CompanyNameShort));
+                ShowInformationMessage(string.Format(format, BrandManager.CompanyNameLegacy));
             }
             else
                 HideInformationMessage();

@@ -1,5 +1,4 @@
-﻿/* Copyright (c) Citrix Systems, Inc. 
- * All rights reserved. 
+﻿/* Copyright (c) Cloud Software Group, Inc. 
  * 
  * Redistribution and use in source and binary forms, 
  * with or without modification, are permitted provided 
@@ -40,8 +39,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         public PatchingWizard_FirstPage()
         {
             InitializeComponent();
-            label5.Text = string.Format(label5.Text, BrandManager.ProductBrand,
-                BrandManager.ProductVersion821, BrandManager.LegacyConsole);
+            label5.Text = string.Format(label5.Text, BrandManager.ProductVersion821, BrandManager.BrandConsole);
             label9.Text = string.Format(label9.Text, BrandManager.BrandConsole);
             label5.Visible = ConnectionsManager.XenConnectionsCopy.Any(c => c.IsConnected && !Helpers.Post82X(c));
         }

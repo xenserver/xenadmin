@@ -1,5 +1,4 @@
-/* Copyright (c) Citrix Systems, Inc. 
- * All rights reserved. 
+/* Copyright (c) Cloud Software Group, Inc. 
  * 
  * Redistribution and use in source and binary forms, 
  * with or without modification, are permitted provided 
@@ -40,9 +39,8 @@ namespace XenAdmin.Dialogs
         public LegalNoticesDialog()
         {
             InitializeComponent();
-            label1.Text = string.Format(label1.Text, BrandManager.CompanyNameShort, BrandManager.ProductBrand,
-                BrandManager.BrandConsole, BrandManager.LegacyProduct, BrandManager.LegacyConsole, BrandManager.CompanyNameLegal);
-            label2.Text = string.Format(Messages.COPYRIGHT, BrandManager.CompanyNameLegal);
+            label1.Text = BrandManager.Copyright;
+            label2.Text = BrandManager.Trademarks;
             label1.Visible = label2.Visible = !HiddenFeatures.CopyrightHidden;
         }
 

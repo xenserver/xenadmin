@@ -2904,7 +2904,9 @@ Do you want to assign these VMs to the schedule '{0}' instead?</value>
     <value>Mana&amp;ge vTPMs...</value>
   </data>
   <data name="COMMON_CRITERIA_TEXT" xml:space="preserve">
-    <value>{0}: for use with Common Criteria versions of {1} only</value>
+    <value>
+(For use with Common Criteria versions of {0} only).
+</value>
   </data>
   <data name="COMPLETED" xml:space="preserve">
     <value>Completed</value>
@@ -3792,9 +3794,6 @@ This action cannot be undone. Are you sure you want to continue?</value>
   </data>
   <data name="COPYING_TEMPLATE" xml:space="preserve">
     <value>Copying template '{0}' to SR '{1}'</value>
-  </data>
-  <data name="COPYRIGHT" xml:space="preserve">
-    <value>Copyright © {0} All rights reserved.</value>
   </data>
   <data name="COULD_NOT_OPEN_URL" xml:space="preserve">
     <value>Could not open URL '{0}'</value>
@@ -4927,7 +4926,7 @@ Click Cancel if you prefer to reconfigure your VMs' memory settings manually.</v
     <value>Download...</value>
   </data>
   <data name="DOWNLOAD_LATEST_XS_BODY" xml:space="preserve">
-    <value>{0} is now available. Download the latest at the {1} website.</value>
+    <value>{0} is now available. Download the latest at the {1} downloads website.</value>
   </data>
   <data name="DOWNLOADING_PATCH_FROM" xml:space="preserve">
     <value>Downloading update from '{0}' ({1} of {2})...</value>
@@ -6454,9 +6453,9 @@ Note: Any custom color selections will remain unchanged</value>
     <value>The UEFI secure boot mode is not supported with the selected template.</value>
   </data>
   <data name="GUI_NOT_COMPATIBLE" xml:space="preserve">
-    <value>This version of {0} can only connect to {1} {2} and greater versions. It cannot connect to {3}.
+    <value>This version of {0} can only connect to {1} and greater versions. It cannot connect to {2}.
 
-You can get a compatible version of {4} from the following location:</value>
+You can get a compatible version of {0} from the following location:</value>
   </data>
   <data name="GUI_OUT_OF_DATE" xml:space="preserve">
     <value>This version of {0} is out of date and cannot connect to {1}.
@@ -6915,7 +6914,7 @@ Click Configure HA to enable HA for this pool and allow your virtual machines to
     <value>Local and Remote ({0})</value>
   </data>
   <data name="HOST_MEMORY_POST_UPGRADE_DEFAULT_WARNING_LONG" xml:space="preserve">
-    <value>If you are upgrading to {0} {1} and above, the Control Domain memory on {2} will be increased. 
+    <value>If you are upgrading to {0} and above, the Control Domain memory on {1} will be increased. 
 
 This might result in failure to migrate VMs to this server during the RPU or to accommodate after the upgrade all the VMs that are currently residing on this server.</value>
   </data>
@@ -7542,8 +7541,8 @@ This might result in failure to migrate VMs to this server during the RPU or to 
     <value>Install pending &amp;updates...</value>
   </data>
   <data name="INSTALL_PENDING_UPDATES_DISABLED_REASON" xml:space="preserve">
-    <value>{0} cannot be used for installing updates on servers running {1} {2}.
-Please use latest available {3} for {1} {2} instead.</value>
+    <value>{0} {1} cannot be used for installing updates on servers running {2}.
+Please use latest available {0} for {2} instead.</value>
   </data>
   <data name="INSTALL_SERVER_CERTIFICATE_ACTION_LINK" xml:space="preserve">
     <value>Install certificate...</value>
@@ -11850,7 +11849,7 @@ The coordinator must be upgraded first, so if you skip the coordinator, the roll
     <value>The current time on the pool coordinator is: {0}</value>
   </data>
   <data name="SERVER_TOO_OLD" xml:space="preserve">
-    <value>This version of {0} supports {1} {2} onwards.</value>
+    <value>This version of {0} supports {1} onwards.</value>
   </data>
   <data name="SERVER_TOO_OLD_SOLUTION" xml:space="preserve">
     <value>Use an earlier version of {0} to manage this server.</value>
@@ -12523,7 +12522,7 @@ Refer to the "{2} Administrator's Guide" for instructions on how to manually ins
 Do you want to connect to the pool coordinator '{1}'?</value>
   </data>
   <data name="SUPPORTER_TOO_OLD" xml:space="preserve">
-    <value>This pool contains servers earlier than {0} {1}. Please use an earlier version of {2} to manage this pool.</value>
+    <value>This pool contains servers earlier than {0}. Please use an earlier version of {1} to manage this pool.</value>
   </data>
   <data name="SUSPEND" xml:space="preserve">
     <value>Suspend</value>
@@ -13547,7 +13546,7 @@ To optimize VM performance, you should reduce the number of VCPUs to less than o
     <value>Version</value>
   </data>
   <data name="VERSION_NUMBER" xml:space="preserve">
-    <value>{0} version {1} (build {2}) {3}-bit</value>
+    <value>{0} version {1} (build {2}) {3}-bit.</value>
   </data>
   <data name="VGPU_DESCRIPTION" xml:space="preserve">
     <value>{0} virtual GPU ({1} per GPU)</value>
@@ -14112,7 +14111,7 @@ Schedule:
     <value>Health Check has been removed in {0} {1}. If you are going to upgrade the pool to this version, you must disable Health Check first.</value>
   </data>
   <data name="WARNING_PRE_CLOUD_VERSION_CONNECTION" xml:space="preserve">
-    <value>{0} is not recommended for general management of servers running {1} {2}. Please use latest available {3} for {1} {2} instead.</value>
+    <value>{0} {1} is not recommended for general management of servers running {2}. Please use latest available {0} for {2} instead.</value>
   </data>
   <data name="WEB_BROWSER_FAILED" xml:space="preserve">
     <value>Cannot find '{0}'.</value>

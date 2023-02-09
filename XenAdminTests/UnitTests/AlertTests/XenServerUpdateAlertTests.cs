@@ -1,5 +1,4 @@
-/* Copyright (c) Citrix Systems, Inc. 
- * All rights reserved. 
+/* Copyright (c) Cloud Software Group, Inc. 
  * 
  * Redistribution and use in source and binary forms, 
  * with or without modification, are permitted provided 
@@ -65,7 +64,7 @@ namespace XenAdminTests.UnitTests.AlertTests
                 AppliesTo = "HostAName, HostBName, ConnAName, ConnBName",
                 FixLinkText = "Go to Web Page",
                 HelpID = "XenServerUpdateAlert",
-                Description = "name is now available. Download the latest at the " + BrandManager.CompanyNameShort + " website.",
+                Description = "name is now available. Download the latest at the " + BrandManager.ProductBrand + " downloads website.",
                 HelpLinkText = "Help",
                 Title = "name is now available",
                 Priority = "Priority5"
@@ -89,7 +88,7 @@ namespace XenAdminTests.UnitTests.AlertTests
                 AppliesTo = "HostAName, HostBName",
                 FixLinkText = "Go to Web Page",
                 HelpID = "XenServerUpdateAlert",
-                Description = "name is now available. Download the latest at the " + BrandManager.CompanyNameShort + " website.",
+                Description = "name is now available. Download the latest at the " + BrandManager.ProductBrand + " downloads website.",
                 HelpLinkText = "Help",
                 Title = "name is now available",
                 Priority = "Priority5"
@@ -114,7 +113,7 @@ namespace XenAdminTests.UnitTests.AlertTests
                 AppliesTo = "ConnAName, ConnBName",
                 FixLinkText = "Go to Web Page",
                 HelpID = "XenServerUpdateAlert",
-                Description = "name is now available. Download the latest at the " + BrandManager.CompanyNameShort + " website.",
+                Description = "name is now available. Download the latest at the " + BrandManager.ProductBrand + " downloads website.",
                 HelpLinkText = "Help",
                 Title = "name is now available",
                 Priority = "Priority5"
@@ -137,7 +136,7 @@ namespace XenAdminTests.UnitTests.AlertTests
                 AppliesTo = string.Empty,
                 FixLinkText = "Go to Web Page",
                 HelpID = "XenServerUpdateAlert",
-                Description = "name is now available. Download the latest at the " + BrandManager.CompanyNameShort + " website.",
+                Description = "name is now available. Download the latest at the " + BrandManager.ProductBrand + " downloads website.",
                 HelpLinkText = "Help",
                 Title = "name is now available",
                 Priority = "Priority5"

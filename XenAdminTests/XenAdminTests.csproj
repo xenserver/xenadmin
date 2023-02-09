@@ -60,6 +60,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\CommonAssemblyInfo.cs">
+      <Link>Properties\CommonAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="ArchiveTests\ArchiveFactoryTests.cs" />
     <Compile Include="ArchiveTests\ArchiveIteratorTests.cs" />
     <Compile Include="ArchiveTests\ArchiveWriterTests.cs" />

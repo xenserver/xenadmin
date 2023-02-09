@@ -1,5 +1,4 @@
-﻿/* Copyright (c) Citrix Systems, Inc. 
- * All rights reserved. 
+﻿/* Copyright (c) Cloud Software Group, Inc. 
  * 
  * Redistribution and use in source and binary forms, 
  * with or without modification, are permitted provided 
@@ -42,8 +41,9 @@ namespace XenServerHealthCheck
         public ProjectInstaller()
         {
             InitializeComponent();
-            XenServerHealthCheckInstaller.Description = BrandManager.ProductBrandWithCompany + " Health Check";
-            XenServerHealthCheckInstaller.DisplayName = BrandManager.ProductBrandWithCompany + " Health Check";
+            var name = $"{BrandManager.ProductBrand} Health Check";
+            XenServerHealthCheckInstaller.Description = name;
+            XenServerHealthCheckInstaller.DisplayName = name;
         }
 
         private void XenServerHealthCheckInstaller_AfterInstall(object sender, InstallEventArgs e)

@@ -1,5 +1,4 @@
-﻿/* Copyright (c) Citrix Systems, Inc. 
- * All rights reserved. 
+﻿/* Copyright (c) Cloud Software Group, Inc. 
  * 
  * Redistribution and use in source and binary forms, 
  * with or without modification, are permitted provided 
@@ -104,8 +103,7 @@ namespace XenAdmin.TabPages
         {
             if (sr != null && SR.IsIslOrIslLegacy(sr))
             {
-                Banner.AppliesToVersion = string.Format(Messages.STRING_SPACE_STRING,
-                    BrandManager.LegacyProduct, BrandManager.ProductVersion65);
+                Banner.AppliesToVersion = BrandManager.ProductVersion65;
                 Banner.BannerType = DeprecationBanner.Type.Removal;
                 Banner.FeatureName = Messages.ISL_SR;
                 Banner.LinkUri = new Uri(InvisibleMessages.ISL_DEPRECATION_URL);

@@ -1,5 +1,4 @@
-﻿/* Copyright (c) Citrix Systems, Inc. 
- * All rights reserved. 
+﻿/* Copyright (c) Cloud Software Group, Inc. 
  * 
  * Redistribution and use in source and binary forms, 
  * with or without modification, are permitted provided 
@@ -58,7 +57,7 @@ namespace XenAdmin.Alerts
         public override string Title => string.Format(Messages.DOWLOAD_LATEST_XS_TITLE, Version.Name);
 
         public override string Description => string.Format(Messages.DOWNLOAD_LATEST_XS_BODY,
-            Version.Name, BrandManager.CompanyNameShort);
+            Version.Name, BrandManager.ProductBrand);
 
         public override string FixLinkText => Messages.ALERT_NEW_VERSION_DOWNLOAD;
 

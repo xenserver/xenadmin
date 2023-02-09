@@ -1,5 +1,4 @@
-﻿/* Copyright (c) Citrix Systems, Inc. 
- * All rights reserved. 
+﻿/* Copyright (c) Cloud Software Group, Inc. 
  * 
  * Redistribution and use in source and binary forms, 
  * with or without modification, are permitted provided 
@@ -52,7 +51,7 @@ namespace XenAdmin.SettingsPanels
         {
             InitializeComponent();
 
-            CPSOptimizationRadioButton.Text = string.Format(CPSOptimizationRadioButton.Text, BrandManager.CompanyNameShort);
+            CPSOptimizationRadioButton.Text = string.Format(CPSOptimizationRadioButton.Text, BrandManager.CompanyNameLegacy);
             Text = Messages.ADVANCED_OPTIONS;
 
             m_invalidParamToolTip = new ToolTip

@@ -1,5 +1,4 @@
-﻿/* Copyright (c) Citrix Systems, Inc. 
- * All rights reserved. 
+﻿/* Copyright (c) Cloud Software Group, Inc. 
  * 
  * Redistribution and use in source and binary forms, 
  * with or without modification, are permitted provided 
@@ -46,7 +45,7 @@ namespace XenAdmin.Dialogs
         public LicenseManager(LicenseManagerController lmcontroller)
         {
             InitializeComponent();
-            downloadLicenseServerLink.Text = string.Format(downloadLicenseServerLink.Text, BrandManager.CompanyNameShort);
+            downloadLicenseServerLink.Text = string.Format(downloadLicenseServerLink.Text, BrandManager.CompanyNameLegacy);
             checkableDataGridView.StatusImageColumn = statusImageColumn;
             SetupControllers(lmcontroller);
         }
