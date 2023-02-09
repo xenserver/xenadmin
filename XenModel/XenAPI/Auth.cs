@@ -1,4 +1,5 @@
-/* Copyright (c) Cloud Software Group, Inc.
+/*
+ * Copyright (c) Cloud Software Group, Inc.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -62,15 +63,6 @@ namespace XenAPI
             UpdateFrom(table);
         }
 
-        /// <summary>
-        /// Creates a new Auth from a Proxy_Auth.
-        /// </summary>
-        /// <param name="proxy"></param>
-        public Auth(Proxy_Auth proxy)
-        {
-            UpdateFrom(proxy);
-        }
-
         #endregion
 
         /// <summary>
@@ -78,10 +70,6 @@ namespace XenAPI
         /// the corresponding field of a given Auth.
         /// </summary>
         public override void UpdateFrom(Auth record)
-        {
-        }
-
-        internal void UpdateFrom(Proxy_Auth proxy)
         {
         }
 
@@ -93,12 +81,6 @@ namespace XenAPI
         /// <param name="table"></param>
         public void UpdateFrom(Hashtable table)
         {
-        }
-
-        public Proxy_Auth ToProxy()
-        {
-            Proxy_Auth result_ = new Proxy_Auth();
-            return result_;
         }
 
         public bool DeepEquals(Auth other)
@@ -132,10 +114,7 @@ namespace XenAPI
         /// <param name="_subject_name">The human-readable subject_name, such as a username or a groupname</param>
         public static string get_subject_identifier(Session session, string _subject_name)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.auth_get_subject_identifier(session.opaque_ref, _subject_name);
-            else
-                return session.XmlRpcProxy.auth_get_subject_identifier(session.opaque_ref, _subject_name ?? "").parse();
+            return session.JsonRpcClient.auth_get_subject_identifier(session.opaque_ref, _subject_name);
         }
 
         /// <summary>
@@ -146,10 +125,7 @@ namespace XenAPI
         /// <param name="_subject_identifier">A string containing the subject_identifier, unique in the external directory service</param>
         public static Dictionary<string, string> get_subject_information_from_identifier(Session session, string _subject_identifier)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.auth_get_subject_information_from_identifier(session.opaque_ref, _subject_identifier);
-            else
-                return Maps.convert_from_proxy_string_string(session.XmlRpcProxy.auth_get_subject_information_from_identifier(session.opaque_ref, _subject_identifier ?? "").parse());
+            return session.JsonRpcClient.auth_get_subject_information_from_identifier(session.opaque_ref, _subject_identifier);
         }
 
         /// <summary>
@@ -160,10 +136,7 @@ namespace XenAPI
         /// <param name="_subject_identifier">A string containing the subject_identifier, unique in the external directory service</param>
         public static string[] get_group_membership(Session session, string _subject_identifier)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.auth_get_group_membership(session.opaque_ref, _subject_identifier);
-            else
-                return (string[])session.XmlRpcProxy.auth_get_group_membership(session.opaque_ref, _subject_identifier ?? "").parse();
+            return session.JsonRpcClient.auth_get_group_membership(session.opaque_ref, _subject_identifier);
         }
     }
 }

@@ -1,4 +1,5 @@
-/* Copyright (c) Cloud Software Group, Inc.
+/*
+ * Copyright (c) Cloud Software Group, Inc.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -73,15 +74,6 @@ namespace XenAPI
             UpdateFrom(table);
         }
 
-        /// <summary>
-        /// Creates a new Crashdump from a Proxy_Crashdump.
-        /// </summary>
-        /// <param name="proxy"></param>
-        public Crashdump(Proxy_Crashdump proxy)
-        {
-            UpdateFrom(proxy);
-        }
-
         #endregion
 
         /// <summary>
@@ -94,14 +86,6 @@ namespace XenAPI
             VM = record.VM;
             VDI = record.VDI;
             other_config = record.other_config;
-        }
-
-        internal void UpdateFrom(Proxy_Crashdump proxy)
-        {
-            uuid = proxy.uuid == null ? null : proxy.uuid;
-            VM = proxy.VM == null ? null : XenRef<VM>.Create(proxy.VM);
-            VDI = proxy.VDI == null ? null : XenRef<VDI>.Create(proxy.VDI);
-            other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
         }
 
         /// <summary>
@@ -120,16 +104,6 @@ namespace XenAPI
                 VDI = Marshalling.ParseRef<VDI>(table, "VDI");
             if (table.ContainsKey("other_config"))
                 other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
-        }
-
-        public Proxy_Crashdump ToProxy()
-        {
-            Proxy_Crashdump result_ = new Proxy_Crashdump();
-            result_.uuid = uuid ?? "";
-            result_.VM = VM ?? "";
-            result_.VDI = VDI ?? "";
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            return result_;
         }
 
         public bool DeepEquals(Crashdump other)
@@ -173,10 +147,7 @@ namespace XenAPI
         [Deprecated("XenServer 7.3")]
         public static Crashdump get_record(Session session, string _crashdump)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.crashdump_get_record(session.opaque_ref, _crashdump);
-            else
-                return new Crashdump(session.XmlRpcProxy.crashdump_get_record(session.opaque_ref, _crashdump ?? "").parse());
+            return session.JsonRpcClient.crashdump_get_record(session.opaque_ref, _crashdump);
         }
 
         /// <summary>
@@ -189,10 +160,7 @@ namespace XenAPI
         [Deprecated("XenServer 7.3")]
         public static XenRef<Crashdump> get_by_uuid(Session session, string _uuid)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.crashdump_get_by_uuid(session.opaque_ref, _uuid);
-            else
-                return XenRef<Crashdump>.Create(session.XmlRpcProxy.crashdump_get_by_uuid(session.opaque_ref, _uuid ?? "").parse());
+            return session.JsonRpcClient.crashdump_get_by_uuid(session.opaque_ref, _uuid);
         }
 
         /// <summary>
@@ -203,10 +171,7 @@ namespace XenAPI
         /// <param name="_crashdump">The opaque_ref of the given crashdump</param>
         public static string get_uuid(Session session, string _crashdump)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.crashdump_get_uuid(session.opaque_ref, _crashdump);
-            else
-                return session.XmlRpcProxy.crashdump_get_uuid(session.opaque_ref, _crashdump ?? "").parse();
+            return session.JsonRpcClient.crashdump_get_uuid(session.opaque_ref, _crashdump);
         }
 
         /// <summary>
@@ -217,10 +182,7 @@ namespace XenAPI
         /// <param name="_crashdump">The opaque_ref of the given crashdump</param>
         public static XenRef<VM> get_VM(Session session, string _crashdump)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.crashdump_get_vm(session.opaque_ref, _crashdump);
-            else
-                return XenRef<VM>.Create(session.XmlRpcProxy.crashdump_get_vm(session.opaque_ref, _crashdump ?? "").parse());
+            return session.JsonRpcClient.crashdump_get_vm(session.opaque_ref, _crashdump);
         }
 
         /// <summary>
@@ -231,10 +193,7 @@ namespace XenAPI
         /// <param name="_crashdump">The opaque_ref of the given crashdump</param>
         public static XenRef<VDI> get_VDI(Session session, string _crashdump)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.crashdump_get_vdi(session.opaque_ref, _crashdump);
-            else
-                return XenRef<VDI>.Create(session.XmlRpcProxy.crashdump_get_vdi(session.opaque_ref, _crashdump ?? "").parse());
+            return session.JsonRpcClient.crashdump_get_vdi(session.opaque_ref, _crashdump);
         }
 
         /// <summary>
@@ -245,10 +204,7 @@ namespace XenAPI
         /// <param name="_crashdump">The opaque_ref of the given crashdump</param>
         public static Dictionary<string, string> get_other_config(Session session, string _crashdump)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.crashdump_get_other_config(session.opaque_ref, _crashdump);
-            else
-                return Maps.convert_from_proxy_string_string(session.XmlRpcProxy.crashdump_get_other_config(session.opaque_ref, _crashdump ?? "").parse());
+            return session.JsonRpcClient.crashdump_get_other_config(session.opaque_ref, _crashdump);
         }
 
         /// <summary>
@@ -260,10 +216,7 @@ namespace XenAPI
         /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _crashdump, Dictionary<string, string> _other_config)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.crashdump_set_other_config(session.opaque_ref, _crashdump, _other_config);
-            else
-                session.XmlRpcProxy.crashdump_set_other_config(session.opaque_ref, _crashdump ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
+            session.JsonRpcClient.crashdump_set_other_config(session.opaque_ref, _crashdump, _other_config);
         }
 
         /// <summary>
@@ -276,10 +229,7 @@ namespace XenAPI
         /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _crashdump, string _key, string _value)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.crashdump_add_to_other_config(session.opaque_ref, _crashdump, _key, _value);
-            else
-                session.XmlRpcProxy.crashdump_add_to_other_config(session.opaque_ref, _crashdump ?? "", _key ?? "", _value ?? "").parse();
+            session.JsonRpcClient.crashdump_add_to_other_config(session.opaque_ref, _crashdump, _key, _value);
         }
 
         /// <summary>
@@ -291,10 +241,7 @@ namespace XenAPI
         /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _crashdump, string _key)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.crashdump_remove_from_other_config(session.opaque_ref, _crashdump, _key);
-            else
-                session.XmlRpcProxy.crashdump_remove_from_other_config(session.opaque_ref, _crashdump ?? "", _key ?? "").parse();
+            session.JsonRpcClient.crashdump_remove_from_other_config(session.opaque_ref, _crashdump, _key);
         }
 
         /// <summary>
@@ -305,10 +252,7 @@ namespace XenAPI
         /// <param name="_crashdump">The opaque_ref of the given crashdump</param>
         public static void destroy(Session session, string _crashdump)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.crashdump_destroy(session.opaque_ref, _crashdump);
-            else
-                session.XmlRpcProxy.crashdump_destroy(session.opaque_ref, _crashdump ?? "").parse();
+            session.JsonRpcClient.crashdump_destroy(session.opaque_ref, _crashdump);
         }
 
         /// <summary>
@@ -319,10 +263,7 @@ namespace XenAPI
         /// <param name="_crashdump">The opaque_ref of the given crashdump</param>
         public static XenRef<Task> async_destroy(Session session, string _crashdump)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_crashdump_destroy(session.opaque_ref, _crashdump);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_crashdump_destroy(session.opaque_ref, _crashdump ?? "").parse());
+          return session.JsonRpcClient.async_crashdump_destroy(session.opaque_ref, _crashdump);
         }
 
         /// <summary>
@@ -334,10 +275,7 @@ namespace XenAPI
         [Deprecated("XenServer 7.3")]
         public static List<XenRef<Crashdump>> get_all(Session session)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.crashdump_get_all(session.opaque_ref);
-            else
-                return XenRef<Crashdump>.Create(session.XmlRpcProxy.crashdump_get_all(session.opaque_ref).parse());
+            return session.JsonRpcClient.crashdump_get_all(session.opaque_ref);
         }
 
         /// <summary>
@@ -347,10 +285,7 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static Dictionary<XenRef<Crashdump>, Crashdump> get_all_records(Session session)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.crashdump_get_all_records(session.opaque_ref);
-            else
-                return XenRef<Crashdump>.Create<Proxy_Crashdump>(session.XmlRpcProxy.crashdump_get_all_records(session.opaque_ref).parse());
+            return session.JsonRpcClient.crashdump_get_all_records(session.opaque_ref);
         }
 
         /// <summary>

@@ -400,6 +400,7 @@
     <Compile Include="XenAPI\network_default_locking_mode.cs" />
     <Compile Include="XenAPI\network_purpose.cs" />
     <Compile Include="XenAPI\Network_sriov.cs" />
+    <Compile Include="XenAPI\on_softreboot_behavior.cs" />
     <Compile Include="XenAPI\PCI.cs" />
     <Compile Include="XenAPI\persistence_backend.cs" />
     <Compile Include="XenAPI\PGPU.cs" />
@@ -527,7 +528,6 @@
     <Compile Include="XenAPI\PIF_metrics.cs" />
     <Compile Include="XenAPI\Pool.cs" />
     <Compile Include="XenAPI\Pool_patch.cs" />
-    <Compile Include="XenAPI\Proxy.cs" />
     <Compile Include="XenAPI\Relation.cs" />
     <Compile Include="XenAPI\Response.cs" />
     <Compile Include="XenAPI\Role.cs" />

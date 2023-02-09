@@ -1,4 +1,5 @@
-/* Copyright (c) Cloud Software Group, Inc.
+/*
+ * Copyright (c) Cloud Software Group, Inc.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -29,8 +30,6 @@
 using System;
 using System.Collections.Generic;
 
-using CookComputing.XmlRpc;
-
 namespace XenAPI
 {
     public static class ResponseTypes
@@ -42,9 +41,9 @@ namespace XenAPI
     public struct Response<ValType>
     {
         public string Status;
-        [XmlRpcMissingMapping(MappingAction.Ignore)]
+        
         public ValType Value;
-        [XmlRpcMissingMapping(MappingAction.Ignore)]
+        
         public string[] ErrorDescription;
 
         public Response(ValType Value)

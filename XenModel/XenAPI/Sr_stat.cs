@@ -1,4 +1,5 @@
-/* Copyright (c) Cloud Software Group, Inc.
+/*
+ * Copyright (c) Cloud Software Group, Inc.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -79,15 +80,6 @@ namespace XenAPI
             UpdateFrom(table);
         }
 
-        /// <summary>
-        /// Creates a new Sr_stat from a Proxy_Sr_stat.
-        /// </summary>
-        /// <param name="proxy"></param>
-        public Sr_stat(Proxy_Sr_stat proxy)
-        {
-            UpdateFrom(proxy);
-        }
-
         #endregion
 
         /// <summary>
@@ -103,17 +95,6 @@ namespace XenAPI
             total_space = record.total_space;
             clustered = record.clustered;
             health = record.health;
-        }
-
-        internal void UpdateFrom(Proxy_Sr_stat proxy)
-        {
-            uuid = proxy.uuid == null ? null : proxy.uuid;
-            name_label = proxy.name_label == null ? null : proxy.name_label;
-            name_description = proxy.name_description == null ? null : proxy.name_description;
-            free_space = proxy.free_space == null ? 0 : long.Parse(proxy.free_space);
-            total_space = proxy.total_space == null ? 0 : long.Parse(proxy.total_space);
-            clustered = (bool)proxy.clustered;
-            health = proxy.health == null ? (sr_health) 0 : (sr_health)Helper.EnumParseDefault(typeof(sr_health), (string)proxy.health);
         }
 
         /// <summary>
@@ -138,19 +119,6 @@ namespace XenAPI
                 clustered = Marshalling.ParseBool(table, "clustered");
             if (table.ContainsKey("health"))
                 health = (sr_health)Helper.EnumParseDefault(typeof(sr_health), Marshalling.ParseString(table, "health"));
-        }
-
-        public Proxy_Sr_stat ToProxy()
-        {
-            Proxy_Sr_stat result_ = new Proxy_Sr_stat();
-            result_.uuid = uuid;
-            result_.name_label = name_label ?? "";
-            result_.name_description = name_description ?? "";
-            result_.free_space = free_space.ToString();
-            result_.total_space = total_space.ToString();
-            result_.clustered = clustered;
-            result_.health = sr_health_helper.ToString(health);
-            return result_;
         }
 
         public bool DeepEquals(Sr_stat other)

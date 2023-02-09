@@ -1,4 +1,5 @@
-/* Copyright (c) Cloud Software Group, Inc.
+/*
+ * Copyright (c) Cloud Software Group, Inc.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -109,15 +110,6 @@ namespace XenAPI
             UpdateFrom(table);
         }
 
-        /// <summary>
-        /// Creates a new VBD from a Proxy_VBD.
-        /// </summary>
-        /// <param name="proxy"></param>
-        public VBD(Proxy_VBD proxy)
-        {
-            UpdateFrom(proxy);
-        }
-
         #endregion
 
         /// <summary>
@@ -148,32 +140,6 @@ namespace XenAPI
             qos_algorithm_params = record.qos_algorithm_params;
             qos_supported_algorithms = record.qos_supported_algorithms;
             metrics = record.metrics;
-        }
-
-        internal void UpdateFrom(Proxy_VBD proxy)
-        {
-            uuid = proxy.uuid == null ? null : proxy.uuid;
-            allowed_operations = proxy.allowed_operations == null ? null : Helper.StringArrayToEnumList<vbd_operations>(proxy.allowed_operations);
-            current_operations = proxy.current_operations == null ? null : Maps.convert_from_proxy_string_vbd_operations(proxy.current_operations);
-            VM = proxy.VM == null ? null : XenRef<VM>.Create(proxy.VM);
-            VDI = proxy.VDI == null ? null : XenRef<VDI>.Create(proxy.VDI);
-            device = proxy.device == null ? null : proxy.device;
-            userdevice = proxy.userdevice == null ? null : proxy.userdevice;
-            bootable = (bool)proxy.bootable;
-            mode = proxy.mode == null ? (vbd_mode) 0 : (vbd_mode)Helper.EnumParseDefault(typeof(vbd_mode), (string)proxy.mode);
-            type = proxy.type == null ? (vbd_type) 0 : (vbd_type)Helper.EnumParseDefault(typeof(vbd_type), (string)proxy.type);
-            unpluggable = (bool)proxy.unpluggable;
-            storage_lock = (bool)proxy.storage_lock;
-            empty = (bool)proxy.empty;
-            other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
-            currently_attached = (bool)proxy.currently_attached;
-            status_code = proxy.status_code == null ? 0 : long.Parse(proxy.status_code);
-            status_detail = proxy.status_detail == null ? null : proxy.status_detail;
-            runtime_properties = proxy.runtime_properties == null ? null : Maps.convert_from_proxy_string_string(proxy.runtime_properties);
-            qos_algorithm_type = proxy.qos_algorithm_type == null ? null : proxy.qos_algorithm_type;
-            qos_algorithm_params = proxy.qos_algorithm_params == null ? null : Maps.convert_from_proxy_string_string(proxy.qos_algorithm_params);
-            qos_supported_algorithms = proxy.qos_supported_algorithms == null ? new string[] {} : (string[])proxy.qos_supported_algorithms;
-            metrics = proxy.metrics == null ? null : XenRef<VBD_metrics>.Create(proxy.metrics);
         }
 
         /// <summary>
@@ -228,34 +194,6 @@ namespace XenAPI
                 qos_supported_algorithms = Marshalling.ParseStringArray(table, "qos_supported_algorithms");
             if (table.ContainsKey("metrics"))
                 metrics = Marshalling.ParseRef<VBD_metrics>(table, "metrics");
-        }
-
-        public Proxy_VBD ToProxy()
-        {
-            Proxy_VBD result_ = new Proxy_VBD();
-            result_.uuid = uuid ?? "";
-            result_.allowed_operations = allowed_operations == null ? new string[] {} : Helper.ObjectListToStringArray(allowed_operations);
-            result_.current_operations = Maps.convert_to_proxy_string_vbd_operations(current_operations);
-            result_.VM = VM ?? "";
-            result_.VDI = VDI ?? "";
-            result_.device = device ?? "";
-            result_.userdevice = userdevice ?? "";
-            result_.bootable = bootable;
-            result_.mode = vbd_mode_helper.ToString(mode);
-            result_.type = vbd_type_helper.ToString(type);
-            result_.unpluggable = unpluggable;
-            result_.storage_lock = storage_lock;
-            result_.empty = empty;
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            result_.currently_attached = currently_attached;
-            result_.status_code = status_code.ToString();
-            result_.status_detail = status_detail ?? "";
-            result_.runtime_properties = Maps.convert_to_proxy_string_string(runtime_properties);
-            result_.qos_algorithm_type = qos_algorithm_type ?? "";
-            result_.qos_algorithm_params = Maps.convert_to_proxy_string_string(qos_algorithm_params);
-            result_.qos_supported_algorithms = qos_supported_algorithms;
-            result_.metrics = metrics ?? "";
-            return result_;
         }
 
         public bool DeepEquals(VBD other, bool ignoreCurrentOperations)
@@ -345,10 +283,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static VBD get_record(Session session, string _vbd)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vbd_get_record(session.opaque_ref, _vbd);
-            else
-                return new VBD(session.XmlRpcProxy.vbd_get_record(session.opaque_ref, _vbd ?? "").parse());
+            return session.JsonRpcClient.vbd_get_record(session.opaque_ref, _vbd);
         }
 
         /// <summary>
@@ -359,10 +294,7 @@ namespace XenAPI
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<VBD> get_by_uuid(Session session, string _uuid)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vbd_get_by_uuid(session.opaque_ref, _uuid);
-            else
-                return XenRef<VBD>.Create(session.XmlRpcProxy.vbd_get_by_uuid(session.opaque_ref, _uuid ?? "").parse());
+            return session.JsonRpcClient.vbd_get_by_uuid(session.opaque_ref, _uuid);
         }
 
         /// <summary>
@@ -373,10 +305,7 @@ namespace XenAPI
         /// <param name="_record">All constructor arguments</param>
         public static XenRef<VBD> create(Session session, VBD _record)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vbd_create(session.opaque_ref, _record);
-            else
-                return XenRef<VBD>.Create(session.XmlRpcProxy.vbd_create(session.opaque_ref, _record.ToProxy()).parse());
+            return session.JsonRpcClient.vbd_create(session.opaque_ref, _record);
         }
 
         /// <summary>
@@ -387,10 +316,7 @@ namespace XenAPI
         /// <param name="_record">All constructor arguments</param>
         public static XenRef<Task> async_create(Session session, VBD _record)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vbd_create(session.opaque_ref, _record);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_vbd_create(session.opaque_ref, _record.ToProxy()).parse());
+          return session.JsonRpcClient.async_vbd_create(session.opaque_ref, _record);
         }
 
         /// <summary>
@@ -401,10 +327,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static void destroy(Session session, string _vbd)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vbd_destroy(session.opaque_ref, _vbd);
-            else
-                session.XmlRpcProxy.vbd_destroy(session.opaque_ref, _vbd ?? "").parse();
+            session.JsonRpcClient.vbd_destroy(session.opaque_ref, _vbd);
         }
 
         /// <summary>
@@ -415,10 +338,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static XenRef<Task> async_destroy(Session session, string _vbd)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vbd_destroy(session.opaque_ref, _vbd);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_vbd_destroy(session.opaque_ref, _vbd ?? "").parse());
+          return session.JsonRpcClient.async_vbd_destroy(session.opaque_ref, _vbd);
         }
 
         /// <summary>
@@ -429,10 +349,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static string get_uuid(Session session, string _vbd)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vbd_get_uuid(session.opaque_ref, _vbd);
-            else
-                return session.XmlRpcProxy.vbd_get_uuid(session.opaque_ref, _vbd ?? "").parse();
+            return session.JsonRpcClient.vbd_get_uuid(session.opaque_ref, _vbd);
         }
 
         /// <summary>
@@ -443,10 +360,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static List<vbd_operations> get_allowed_operations(Session session, string _vbd)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vbd_get_allowed_operations(session.opaque_ref, _vbd);
-            else
-                return Helper.StringArrayToEnumList<vbd_operations>(session.XmlRpcProxy.vbd_get_allowed_operations(session.opaque_ref, _vbd ?? "").parse());
+            return session.JsonRpcClient.vbd_get_allowed_operations(session.opaque_ref, _vbd);
         }
 
         /// <summary>
@@ -457,10 +371,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static Dictionary<string, vbd_operations> get_current_operations(Session session, string _vbd)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vbd_get_current_operations(session.opaque_ref, _vbd);
-            else
-                return Maps.convert_from_proxy_string_vbd_operations(session.XmlRpcProxy.vbd_get_current_operations(session.opaque_ref, _vbd ?? "").parse());
+            return session.JsonRpcClient.vbd_get_current_operations(session.opaque_ref, _vbd);
         }
 
         /// <summary>
@@ -471,10 +382,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static XenRef<VM> get_VM(Session session, string _vbd)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vbd_get_vm(session.opaque_ref, _vbd);
-            else
-                return XenRef<VM>.Create(session.XmlRpcProxy.vbd_get_vm(session.opaque_ref, _vbd ?? "").parse());
+            return session.JsonRpcClient.vbd_get_vm(session.opaque_ref, _vbd);
         }
 
         /// <summary>
@@ -485,10 +393,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static XenRef<VDI> get_VDI(Session session, string _vbd)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vbd_get_vdi(session.opaque_ref, _vbd);
-            else
-                return XenRef<VDI>.Create(session.XmlRpcProxy.vbd_get_vdi(session.opaque_ref, _vbd ?? "").parse());
+            return session.JsonRpcClient.vbd_get_vdi(session.opaque_ref, _vbd);
         }
 
         /// <summary>
@@ -499,10 +404,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static string get_device(Session session, string _vbd)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vbd_get_device(session.opaque_ref, _vbd);
-            else
-                return session.XmlRpcProxy.vbd_get_device(session.opaque_ref, _vbd ?? "").parse();
+            return session.JsonRpcClient.vbd_get_device(session.opaque_ref, _vbd);
         }
 
         /// <summary>
@@ -513,10 +415,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static string get_userdevice(Session session, string _vbd)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vbd_get_userdevice(session.opaque_ref, _vbd);
-            else
-                return session.XmlRpcProxy.vbd_get_userdevice(session.opaque_ref, _vbd ?? "").parse();
+            return session.JsonRpcClient.vbd_get_userdevice(session.opaque_ref, _vbd);
         }
 
         /// <summary>
@@ -527,10 +426,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static bool get_bootable(Session session, string _vbd)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vbd_get_bootable(session.opaque_ref, _vbd);
-            else
-                return (bool)session.XmlRpcProxy.vbd_get_bootable(session.opaque_ref, _vbd ?? "").parse();
+            return session.JsonRpcClient.vbd_get_bootable(session.opaque_ref, _vbd);
         }
 
         /// <summary>
@@ -541,10 +437,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static vbd_mode get_mode(Session session, string _vbd)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vbd_get_mode(session.opaque_ref, _vbd);
-            else
-                return (vbd_mode)Helper.EnumParseDefault(typeof(vbd_mode), (string)session.XmlRpcProxy.vbd_get_mode(session.opaque_ref, _vbd ?? "").parse());
+            return session.JsonRpcClient.vbd_get_mode(session.opaque_ref, _vbd);
         }
 
         /// <summary>
@@ -555,10 +448,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static vbd_type get_type(Session session, string _vbd)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vbd_get_type(session.opaque_ref, _vbd);
-            else
-                return (vbd_type)Helper.EnumParseDefault(typeof(vbd_type), (string)session.XmlRpcProxy.vbd_get_type(session.opaque_ref, _vbd ?? "").parse());
+            return session.JsonRpcClient.vbd_get_type(session.opaque_ref, _vbd);
         }
 
         /// <summary>
@@ -569,10 +459,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static bool get_unpluggable(Session session, string _vbd)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vbd_get_unpluggable(session.opaque_ref, _vbd);
-            else
-                return (bool)session.XmlRpcProxy.vbd_get_unpluggable(session.opaque_ref, _vbd ?? "").parse();
+            return session.JsonRpcClient.vbd_get_unpluggable(session.opaque_ref, _vbd);
         }
 
         /// <summary>
@@ -583,10 +470,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static bool get_storage_lock(Session session, string _vbd)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vbd_get_storage_lock(session.opaque_ref, _vbd);
-            else
-                return (bool)session.XmlRpcProxy.vbd_get_storage_lock(session.opaque_ref, _vbd ?? "").parse();
+            return session.JsonRpcClient.vbd_get_storage_lock(session.opaque_ref, _vbd);
         }
 
         /// <summary>
@@ -597,10 +481,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static bool get_empty(Session session, string _vbd)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vbd_get_empty(session.opaque_ref, _vbd);
-            else
-                return (bool)session.XmlRpcProxy.vbd_get_empty(session.opaque_ref, _vbd ?? "").parse();
+            return session.JsonRpcClient.vbd_get_empty(session.opaque_ref, _vbd);
         }
 
         /// <summary>
@@ -611,10 +492,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static Dictionary<string, string> get_other_config(Session session, string _vbd)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vbd_get_other_config(session.opaque_ref, _vbd);
-            else
-                return Maps.convert_from_proxy_string_string(session.XmlRpcProxy.vbd_get_other_config(session.opaque_ref, _vbd ?? "").parse());
+            return session.JsonRpcClient.vbd_get_other_config(session.opaque_ref, _vbd);
         }
 
         /// <summary>
@@ -625,10 +503,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static bool get_currently_attached(Session session, string _vbd)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vbd_get_currently_attached(session.opaque_ref, _vbd);
-            else
-                return (bool)session.XmlRpcProxy.vbd_get_currently_attached(session.opaque_ref, _vbd ?? "").parse();
+            return session.JsonRpcClient.vbd_get_currently_attached(session.opaque_ref, _vbd);
         }
 
         /// <summary>
@@ -639,10 +514,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static long get_status_code(Session session, string _vbd)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vbd_get_status_code(session.opaque_ref, _vbd);
-            else
-                return long.Parse(session.XmlRpcProxy.vbd_get_status_code(session.opaque_ref, _vbd ?? "").parse());
+            return session.JsonRpcClient.vbd_get_status_code(session.opaque_ref, _vbd);
         }
 
         /// <summary>
@@ -653,10 +525,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static string get_status_detail(Session session, string _vbd)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vbd_get_status_detail(session.opaque_ref, _vbd);
-            else
-                return session.XmlRpcProxy.vbd_get_status_detail(session.opaque_ref, _vbd ?? "").parse();
+            return session.JsonRpcClient.vbd_get_status_detail(session.opaque_ref, _vbd);
         }
 
         /// <summary>
@@ -667,10 +536,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static Dictionary<string, string> get_runtime_properties(Session session, string _vbd)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vbd_get_runtime_properties(session.opaque_ref, _vbd);
-            else
-                return Maps.convert_from_proxy_string_string(session.XmlRpcProxy.vbd_get_runtime_properties(session.opaque_ref, _vbd ?? "").parse());
+            return session.JsonRpcClient.vbd_get_runtime_properties(session.opaque_ref, _vbd);
         }
 
         /// <summary>
@@ -681,10 +547,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static string get_qos_algorithm_type(Session session, string _vbd)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vbd_get_qos_algorithm_type(session.opaque_ref, _vbd);
-            else
-                return session.XmlRpcProxy.vbd_get_qos_algorithm_type(session.opaque_ref, _vbd ?? "").parse();
+            return session.JsonRpcClient.vbd_get_qos_algorithm_type(session.opaque_ref, _vbd);
         }
 
         /// <summary>
@@ -695,10 +558,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static Dictionary<string, string> get_qos_algorithm_params(Session session, string _vbd)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vbd_get_qos_algorithm_params(session.opaque_ref, _vbd);
-            else
-                return Maps.convert_from_proxy_string_string(session.XmlRpcProxy.vbd_get_qos_algorithm_params(session.opaque_ref, _vbd ?? "").parse());
+            return session.JsonRpcClient.vbd_get_qos_algorithm_params(session.opaque_ref, _vbd);
         }
 
         /// <summary>
@@ -709,24 +569,20 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static string[] get_qos_supported_algorithms(Session session, string _vbd)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vbd_get_qos_supported_algorithms(session.opaque_ref, _vbd);
-            else
-                return (string[])session.XmlRpcProxy.vbd_get_qos_supported_algorithms(session.opaque_ref, _vbd ?? "").parse();
+            return session.JsonRpcClient.vbd_get_qos_supported_algorithms(session.opaque_ref, _vbd);
         }
 
         /// <summary>
         /// Get the metrics field of the given VBD.
         /// First published in XenServer 4.0.
+        /// Deprecated since XenServer 6.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
+        [Deprecated("XenServer 6.1")]
         public static XenRef<VBD_metrics> get_metrics(Session session, string _vbd)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vbd_get_metrics(session.opaque_ref, _vbd);
-            else
-                return XenRef<VBD_metrics>.Create(session.XmlRpcProxy.vbd_get_metrics(session.opaque_ref, _vbd ?? "").parse());
+            return session.JsonRpcClient.vbd_get_metrics(session.opaque_ref, _vbd);
         }
 
         /// <summary>
@@ -738,10 +594,7 @@ namespace XenAPI
         /// <param name="_userdevice">New value to set</param>
         public static void set_userdevice(Session session, string _vbd, string _userdevice)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vbd_set_userdevice(session.opaque_ref, _vbd, _userdevice);
-            else
-                session.XmlRpcProxy.vbd_set_userdevice(session.opaque_ref, _vbd ?? "", _userdevice ?? "").parse();
+            session.JsonRpcClient.vbd_set_userdevice(session.opaque_ref, _vbd, _userdevice);
         }
 
         /// <summary>
@@ -753,10 +606,7 @@ namespace XenAPI
         /// <param name="_bootable">New value to set</param>
         public static void set_bootable(Session session, string _vbd, bool _bootable)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vbd_set_bootable(session.opaque_ref, _vbd, _bootable);
-            else
-                session.XmlRpcProxy.vbd_set_bootable(session.opaque_ref, _vbd ?? "", _bootable).parse();
+            session.JsonRpcClient.vbd_set_bootable(session.opaque_ref, _vbd, _bootable);
         }
 
         /// <summary>
@@ -768,10 +618,7 @@ namespace XenAPI
         /// <param name="_type">New value to set</param>
         public static void set_type(Session session, string _vbd, vbd_type _type)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vbd_set_type(session.opaque_ref, _vbd, _type);
-            else
-                session.XmlRpcProxy.vbd_set_type(session.opaque_ref, _vbd ?? "", vbd_type_helper.ToString(_type)).parse();
+            session.JsonRpcClient.vbd_set_type(session.opaque_ref, _vbd, _type);
         }
 
         /// <summary>
@@ -783,10 +630,7 @@ namespace XenAPI
         /// <param name="_unpluggable">New value to set</param>
         public static void set_unpluggable(Session session, string _vbd, bool _unpluggable)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vbd_set_unpluggable(session.opaque_ref, _vbd, _unpluggable);
-            else
-                session.XmlRpcProxy.vbd_set_unpluggable(session.opaque_ref, _vbd ?? "", _unpluggable).parse();
+            session.JsonRpcClient.vbd_set_unpluggable(session.opaque_ref, _vbd, _unpluggable);
         }
 
         /// <summary>
@@ -798,10 +642,7 @@ namespace XenAPI
         /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _vbd, Dictionary<string, string> _other_config)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vbd_set_other_config(session.opaque_ref, _vbd, _other_config);
-            else
-                session.XmlRpcProxy.vbd_set_other_config(session.opaque_ref, _vbd ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
+            session.JsonRpcClient.vbd_set_other_config(session.opaque_ref, _vbd, _other_config);
         }
 
         /// <summary>
@@ -814,10 +655,7 @@ namespace XenAPI
         /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _vbd, string _key, string _value)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vbd_add_to_other_config(session.opaque_ref, _vbd, _key, _value);
-            else
-                session.XmlRpcProxy.vbd_add_to_other_config(session.opaque_ref, _vbd ?? "", _key ?? "", _value ?? "").parse();
+            session.JsonRpcClient.vbd_add_to_other_config(session.opaque_ref, _vbd, _key, _value);
         }
 
         /// <summary>
@@ -829,10 +667,7 @@ namespace XenAPI
         /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _vbd, string _key)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vbd_remove_from_other_config(session.opaque_ref, _vbd, _key);
-            else
-                session.XmlRpcProxy.vbd_remove_from_other_config(session.opaque_ref, _vbd ?? "", _key ?? "").parse();
+            session.JsonRpcClient.vbd_remove_from_other_config(session.opaque_ref, _vbd, _key);
         }
 
         /// <summary>
@@ -844,10 +679,7 @@ namespace XenAPI
         /// <param name="_algorithm_type">New value to set</param>
         public static void set_qos_algorithm_type(Session session, string _vbd, string _algorithm_type)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vbd_set_qos_algorithm_type(session.opaque_ref, _vbd, _algorithm_type);
-            else
-                session.XmlRpcProxy.vbd_set_qos_algorithm_type(session.opaque_ref, _vbd ?? "", _algorithm_type ?? "").parse();
+            session.JsonRpcClient.vbd_set_qos_algorithm_type(session.opaque_ref, _vbd, _algorithm_type);
         }
 
         /// <summary>
@@ -859,10 +691,7 @@ namespace XenAPI
         /// <param name="_algorithm_params">New value to set</param>
         public static void set_qos_algorithm_params(Session session, string _vbd, Dictionary<string, string> _algorithm_params)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vbd_set_qos_algorithm_params(session.opaque_ref, _vbd, _algorithm_params);
-            else
-                session.XmlRpcProxy.vbd_set_qos_algorithm_params(session.opaque_ref, _vbd ?? "", Maps.convert_to_proxy_string_string(_algorithm_params)).parse();
+            session.JsonRpcClient.vbd_set_qos_algorithm_params(session.opaque_ref, _vbd, _algorithm_params);
         }
 
         /// <summary>
@@ -875,10 +704,7 @@ namespace XenAPI
         /// <param name="_value">Value to add</param>
         public static void add_to_qos_algorithm_params(Session session, string _vbd, string _key, string _value)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vbd_add_to_qos_algorithm_params(session.opaque_ref, _vbd, _key, _value);
-            else
-                session.XmlRpcProxy.vbd_add_to_qos_algorithm_params(session.opaque_ref, _vbd ?? "", _key ?? "", _value ?? "").parse();
+            session.JsonRpcClient.vbd_add_to_qos_algorithm_params(session.opaque_ref, _vbd, _key, _value);
         }
 
         /// <summary>
@@ -890,10 +716,7 @@ namespace XenAPI
         /// <param name="_key">Key to remove</param>
         public static void remove_from_qos_algorithm_params(Session session, string _vbd, string _key)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vbd_remove_from_qos_algorithm_params(session.opaque_ref, _vbd, _key);
-            else
-                session.XmlRpcProxy.vbd_remove_from_qos_algorithm_params(session.opaque_ref, _vbd ?? "", _key ?? "").parse();
+            session.JsonRpcClient.vbd_remove_from_qos_algorithm_params(session.opaque_ref, _vbd, _key);
         }
 
         /// <summary>
@@ -904,10 +727,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static void eject(Session session, string _vbd)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vbd_eject(session.opaque_ref, _vbd);
-            else
-                session.XmlRpcProxy.vbd_eject(session.opaque_ref, _vbd ?? "").parse();
+            session.JsonRpcClient.vbd_eject(session.opaque_ref, _vbd);
         }
 
         /// <summary>
@@ -918,10 +738,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static XenRef<Task> async_eject(Session session, string _vbd)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vbd_eject(session.opaque_ref, _vbd);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_vbd_eject(session.opaque_ref, _vbd ?? "").parse());
+          return session.JsonRpcClient.async_vbd_eject(session.opaque_ref, _vbd);
         }
 
         /// <summary>
@@ -933,10 +750,7 @@ namespace XenAPI
         /// <param name="_vdi">The new VDI to 'insert'</param>
         public static void insert(Session session, string _vbd, string _vdi)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vbd_insert(session.opaque_ref, _vbd, _vdi);
-            else
-                session.XmlRpcProxy.vbd_insert(session.opaque_ref, _vbd ?? "", _vdi ?? "").parse();
+            session.JsonRpcClient.vbd_insert(session.opaque_ref, _vbd, _vdi);
         }
 
         /// <summary>
@@ -948,10 +762,7 @@ namespace XenAPI
         /// <param name="_vdi">The new VDI to 'insert'</param>
         public static XenRef<Task> async_insert(Session session, string _vbd, string _vdi)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vbd_insert(session.opaque_ref, _vbd, _vdi);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_vbd_insert(session.opaque_ref, _vbd ?? "", _vdi ?? "").parse());
+          return session.JsonRpcClient.async_vbd_insert(session.opaque_ref, _vbd, _vdi);
         }
 
         /// <summary>
@@ -962,10 +773,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static void plug(Session session, string _vbd)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vbd_plug(session.opaque_ref, _vbd);
-            else
-                session.XmlRpcProxy.vbd_plug(session.opaque_ref, _vbd ?? "").parse();
+            session.JsonRpcClient.vbd_plug(session.opaque_ref, _vbd);
         }
 
         /// <summary>
@@ -976,10 +784,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static XenRef<Task> async_plug(Session session, string _vbd)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vbd_plug(session.opaque_ref, _vbd);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_vbd_plug(session.opaque_ref, _vbd ?? "").parse());
+          return session.JsonRpcClient.async_vbd_plug(session.opaque_ref, _vbd);
         }
 
         /// <summary>
@@ -990,10 +795,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static void unplug(Session session, string _vbd)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vbd_unplug(session.opaque_ref, _vbd);
-            else
-                session.XmlRpcProxy.vbd_unplug(session.opaque_ref, _vbd ?? "").parse();
+            session.JsonRpcClient.vbd_unplug(session.opaque_ref, _vbd);
         }
 
         /// <summary>
@@ -1004,10 +806,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static XenRef<Task> async_unplug(Session session, string _vbd)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vbd_unplug(session.opaque_ref, _vbd);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_vbd_unplug(session.opaque_ref, _vbd ?? "").parse());
+          return session.JsonRpcClient.async_vbd_unplug(session.opaque_ref, _vbd);
         }
 
         /// <summary>
@@ -1018,10 +817,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static void unplug_force(Session session, string _vbd)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vbd_unplug_force(session.opaque_ref, _vbd);
-            else
-                session.XmlRpcProxy.vbd_unplug_force(session.opaque_ref, _vbd ?? "").parse();
+            session.JsonRpcClient.vbd_unplug_force(session.opaque_ref, _vbd);
         }
 
         /// <summary>
@@ -1032,10 +828,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static XenRef<Task> async_unplug_force(Session session, string _vbd)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vbd_unplug_force(session.opaque_ref, _vbd);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_vbd_unplug_force(session.opaque_ref, _vbd ?? "").parse());
+          return session.JsonRpcClient.async_vbd_unplug_force(session.opaque_ref, _vbd);
         }
 
         /// <summary>
@@ -1046,10 +839,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static void assert_attachable(Session session, string _vbd)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vbd_assert_attachable(session.opaque_ref, _vbd);
-            else
-                session.XmlRpcProxy.vbd_assert_attachable(session.opaque_ref, _vbd ?? "").parse();
+            session.JsonRpcClient.vbd_assert_attachable(session.opaque_ref, _vbd);
         }
 
         /// <summary>
@@ -1060,10 +850,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static XenRef<Task> async_assert_attachable(Session session, string _vbd)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vbd_assert_attachable(session.opaque_ref, _vbd);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_vbd_assert_attachable(session.opaque_ref, _vbd ?? "").parse());
+          return session.JsonRpcClient.async_vbd_assert_attachable(session.opaque_ref, _vbd);
         }
 
         /// <summary>
@@ -1075,10 +862,7 @@ namespace XenAPI
         /// <param name="_value">New value to set</param>
         public static void set_mode(Session session, string _vbd, vbd_mode _value)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vbd_set_mode(session.opaque_ref, _vbd, _value);
-            else
-                session.XmlRpcProxy.vbd_set_mode(session.opaque_ref, _vbd ?? "", vbd_mode_helper.ToString(_value)).parse();
+            session.JsonRpcClient.vbd_set_mode(session.opaque_ref, _vbd, _value);
         }
 
         /// <summary>
@@ -1090,10 +874,7 @@ namespace XenAPI
         /// <param name="_value">New value to set</param>
         public static XenRef<Task> async_set_mode(Session session, string _vbd, vbd_mode _value)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vbd_set_mode(session.opaque_ref, _vbd, _value);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_vbd_set_mode(session.opaque_ref, _vbd ?? "", vbd_mode_helper.ToString(_value)).parse());
+          return session.JsonRpcClient.async_vbd_set_mode(session.opaque_ref, _vbd, _value);
         }
 
         /// <summary>
@@ -1103,10 +884,7 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static List<XenRef<VBD>> get_all(Session session)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vbd_get_all(session.opaque_ref);
-            else
-                return XenRef<VBD>.Create(session.XmlRpcProxy.vbd_get_all(session.opaque_ref).parse());
+            return session.JsonRpcClient.vbd_get_all(session.opaque_ref);
         }
 
         /// <summary>
@@ -1116,10 +894,7 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static Dictionary<XenRef<VBD>, VBD> get_all_records(Session session)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vbd_get_all_records(session.opaque_ref);
-            else
-                return XenRef<VBD>.Create<Proxy_VBD>(session.XmlRpcProxy.vbd_get_all_records(session.opaque_ref).parse());
+            return session.JsonRpcClient.vbd_get_all_records(session.opaque_ref);
         }
 
         /// <summary>
@@ -1503,6 +1278,6 @@ namespace XenAPI
                 }
             }
         }
-        private XenRef<VBD_metrics> _metrics = new XenRef<VBD_metrics>(Helper.NullOpaqueRef);
+        private XenRef<VBD_metrics> _metrics = new XenRef<VBD_metrics>("OpaqueRef:NULL");
     }
 }

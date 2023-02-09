@@ -1,4 +1,5 @@
-/* Copyright (c) Cloud Software Group, Inc.
+/*
+ * Copyright (c) Cloud Software Group, Inc.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -49,50 +50,50 @@ namespace XenAPI
         {
             Dictionary<Type, Relation[]> relations = new Dictionary<Type, Relation[]>();
 
-            relations.Add(typeof(Proxy_Pool), new Relation[] {
+            relations.Add(typeof(Pool), new Relation[] {
                 new Relation("metadata_VDIs", "VDI", "metadata_of_pool"),
             });
 
-            relations.Add(typeof(Proxy_SR), new Relation[] {
+            relations.Add(typeof(SR), new Relation[] {
                 new Relation("VDIs", "VDI", "SR"),
                 new Relation("PBDs", "PBD", "SR"),
             });
 
-            relations.Add(typeof(Proxy_GPU_group), new Relation[] {
+            relations.Add(typeof(GPU_group), new Relation[] {
                 new Relation("VGPUs", "VGPU", "GPU_group"),
                 new Relation("PGPUs", "PGPU", "GPU_group"),
             });
 
-            relations.Add(typeof(Proxy_USB_group), new Relation[] {
+            relations.Add(typeof(USB_group), new Relation[] {
                 new Relation("VUSBs", "VUSB", "USB_group"),
                 new Relation("PUSBs", "PUSB", "USB_group"),
             });
 
-            relations.Add(typeof(Proxy_Subject), new Relation[] {
+            relations.Add(typeof(Subject), new Relation[] {
                 new Relation("roles", "subject", "roles"),
             });
 
-            relations.Add(typeof(Proxy_Cluster), new Relation[] {
+            relations.Add(typeof(Cluster), new Relation[] {
                 new Relation("cluster_hosts", "Cluster_host", "cluster"),
             });
 
-            relations.Add(typeof(Proxy_Bond), new Relation[] {
+            relations.Add(typeof(Bond), new Relation[] {
                 new Relation("slaves", "PIF", "bond_slave_of"),
             });
 
-            relations.Add(typeof(Proxy_Role), new Relation[] {
+            relations.Add(typeof(Role), new Relation[] {
                 new Relation("subroles", "role", "subroles"),
             });
 
-            relations.Add(typeof(Proxy_Pool_patch), new Relation[] {
+            relations.Add(typeof(Pool_patch), new Relation[] {
                 new Relation("host_patches", "host_patch", "pool_patch"),
             });
 
-            relations.Add(typeof(Proxy_VM_appliance), new Relation[] {
+            relations.Add(typeof(VM_appliance), new Relation[] {
                 new Relation("VMs", "VM", "appliance"),
             });
 
-            relations.Add(typeof(Proxy_PIF), new Relation[] {
+            relations.Add(typeof(PIF), new Relation[] {
                 new Relation("sriov_logical_PIF_of", "network_sriov", "logical_PIF"),
                 new Relation("sriov_physical_PIF_of", "network_sriov", "physical_PIF"),
                 new Relation("tunnel_transport_PIF_of", "tunnel", "transport_PIF"),
@@ -101,30 +102,30 @@ namespace XenAPI
                 new Relation("bond_master_of", "Bond", "master"),
             });
 
-            relations.Add(typeof(Proxy_PVS_site), new Relation[] {
+            relations.Add(typeof(PVS_site), new Relation[] {
                 new Relation("cache_storage", "PVS_cache_storage", "site"),
                 new Relation("proxies", "PVS_proxy", "site"),
                 new Relation("servers", "PVS_server", "site"),
             });
 
-            relations.Add(typeof(Proxy_DR_task), new Relation[] {
+            relations.Add(typeof(DR_task), new Relation[] {
                 new Relation("introduced_SRs", "SR", "introduced_by"),
             });
 
-            relations.Add(typeof(Proxy_Network), new Relation[] {
+            relations.Add(typeof(Network), new Relation[] {
                 new Relation("PIFs", "PIF", "network"),
                 new Relation("VIFs", "VIF", "network"),
             });
 
-            relations.Add(typeof(Proxy_Task), new Relation[] {
+            relations.Add(typeof(Task), new Relation[] {
                 new Relation("subtasks", "task", "subtask_of"),
             });
 
-            relations.Add(typeof(Proxy_PGPU), new Relation[] {
+            relations.Add(typeof(PGPU), new Relation[] {
                 new Relation("resident_VGPUs", "VGPU", "resident_on"),
             });
 
-            relations.Add(typeof(Proxy_VGPU_type), new Relation[] {
+            relations.Add(typeof(VGPU_type), new Relation[] {
                 new Relation("enabled_on_GPU_groups", "GPU_group", "enabled_VGPU_types"),
                 new Relation("supported_on_GPU_groups", "GPU_group", "supported_VGPU_types"),
                 new Relation("enabled_on_PGPUs", "PGPU", "enabled_VGPU_types"),
@@ -132,17 +133,17 @@ namespace XenAPI
                 new Relation("VGPUs", "VGPU", "type"),
             });
 
-            relations.Add(typeof(Proxy_VDI), new Relation[] {
+            relations.Add(typeof(VDI), new Relation[] {
                 new Relation("crash_dumps", "crashdump", "VDI"),
                 new Relation("VBDs", "VBD", "VDI"),
                 new Relation("snapshots", "VDI", "snapshot_of"),
             });
 
-            relations.Add(typeof(Proxy_VMPP), new Relation[] {
+            relations.Add(typeof(VMPP), new Relation[] {
                 new Relation("VMs", "VM", "protection_policy"),
             });
 
-            relations.Add(typeof(Proxy_VM), new Relation[] {
+            relations.Add(typeof(VM), new Relation[] {
                 new Relation("VUSBs", "VUSB", "VM"),
                 new Relation("VGPUs", "VGPU", "VM"),
                 new Relation("consoles", "console", "VM"),
@@ -154,11 +155,11 @@ namespace XenAPI
                 new Relation("snapshots", "VM", "snapshot_of"),
             });
 
-            relations.Add(typeof(Proxy_Pool_update), new Relation[] {
+            relations.Add(typeof(Pool_update), new Relation[] {
                 new Relation("hosts", "host", "updates"),
             });
 
-            relations.Add(typeof(Proxy_Host), new Relation[] {
+            relations.Add(typeof(Host), new Relation[] {
                 new Relation("certificates", "Certificate", "host"),
                 new Relation("features", "Feature", "host"),
                 new Relation("PUSBs", "PUSB", "host"),
@@ -172,7 +173,7 @@ namespace XenAPI
                 new Relation("PBDs", "PBD", "host"),
             });
 
-            relations.Add(typeof(Proxy_VMSS), new Relation[] {
+            relations.Add(typeof(VMSS), new Relation[] {
                 new Relation("VMs", "VM", "snapshot_schedule"),
             });
 

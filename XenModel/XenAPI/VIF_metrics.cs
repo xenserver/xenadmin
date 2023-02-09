@@ -1,4 +1,5 @@
-/* Copyright (c) Cloud Software Group, Inc.
+/*
+ * Copyright (c) Cloud Software Group, Inc.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -75,15 +76,6 @@ namespace XenAPI
             UpdateFrom(table);
         }
 
-        /// <summary>
-        /// Creates a new VIF_metrics from a Proxy_VIF_metrics.
-        /// </summary>
-        /// <param name="proxy"></param>
-        public VIF_metrics(Proxy_VIF_metrics proxy)
-        {
-            UpdateFrom(proxy);
-        }
-
         #endregion
 
         /// <summary>
@@ -97,15 +89,6 @@ namespace XenAPI
             io_write_kbs = record.io_write_kbs;
             last_updated = record.last_updated;
             other_config = record.other_config;
-        }
-
-        internal void UpdateFrom(Proxy_VIF_metrics proxy)
-        {
-            uuid = proxy.uuid == null ? null : proxy.uuid;
-            io_read_kbs = Convert.ToDouble(proxy.io_read_kbs);
-            io_write_kbs = Convert.ToDouble(proxy.io_write_kbs);
-            last_updated = proxy.last_updated;
-            other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
         }
 
         /// <summary>
@@ -126,17 +109,6 @@ namespace XenAPI
                 last_updated = Marshalling.ParseDateTime(table, "last_updated");
             if (table.ContainsKey("other_config"))
                 other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
-        }
-
-        public Proxy_VIF_metrics ToProxy()
-        {
-            Proxy_VIF_metrics result_ = new Proxy_VIF_metrics();
-            result_.uuid = uuid ?? "";
-            result_.io_read_kbs = io_read_kbs;
-            result_.io_write_kbs = io_write_kbs;
-            result_.last_updated = last_updated;
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            return result_;
         }
 
         public bool DeepEquals(VIF_metrics other)
@@ -174,29 +146,27 @@ namespace XenAPI
         /// <summary>
         /// Get a record containing the current state of the given VIF_metrics.
         /// First published in XenServer 4.0.
+        /// Deprecated since XenServer 6.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vif_metrics">The opaque_ref of the given vif_metrics</param>
+        [Deprecated("XenServer 6.1")]
         public static VIF_metrics get_record(Session session, string _vif_metrics)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vif_metrics_get_record(session.opaque_ref, _vif_metrics);
-            else
-                return new VIF_metrics(session.XmlRpcProxy.vif_metrics_get_record(session.opaque_ref, _vif_metrics ?? "").parse());
+            return session.JsonRpcClient.vif_metrics_get_record(session.opaque_ref, _vif_metrics);
         }
 
         /// <summary>
         /// Get a reference to the VIF_metrics instance with the specified UUID.
         /// First published in XenServer 4.0.
+        /// Deprecated since XenServer 6.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_uuid">UUID of object to return</param>
+        [Deprecated("XenServer 6.1")]
         public static XenRef<VIF_metrics> get_by_uuid(Session session, string _uuid)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vif_metrics_get_by_uuid(session.opaque_ref, _uuid);
-            else
-                return XenRef<VIF_metrics>.Create(session.XmlRpcProxy.vif_metrics_get_by_uuid(session.opaque_ref, _uuid ?? "").parse());
+            return session.JsonRpcClient.vif_metrics_get_by_uuid(session.opaque_ref, _uuid);
         }
 
         /// <summary>
@@ -207,38 +177,33 @@ namespace XenAPI
         /// <param name="_vif_metrics">The opaque_ref of the given vif_metrics</param>
         public static string get_uuid(Session session, string _vif_metrics)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vif_metrics_get_uuid(session.opaque_ref, _vif_metrics);
-            else
-                return session.XmlRpcProxy.vif_metrics_get_uuid(session.opaque_ref, _vif_metrics ?? "").parse();
+            return session.JsonRpcClient.vif_metrics_get_uuid(session.opaque_ref, _vif_metrics);
         }
 
         /// <summary>
         /// Get the io/read_kbs field of the given VIF_metrics.
         /// First published in XenServer 4.0.
+        /// Deprecated since XenServer 6.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vif_metrics">The opaque_ref of the given vif_metrics</param>
+        [Deprecated("XenServer 6.1")]
         public static double get_io_read_kbs(Session session, string _vif_metrics)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vif_metrics_get_io_read_kbs(session.opaque_ref, _vif_metrics);
-            else
-                return Convert.ToDouble(session.XmlRpcProxy.vif_metrics_get_io_read_kbs(session.opaque_ref, _vif_metrics ?? "").parse());
+            return session.JsonRpcClient.vif_metrics_get_io_read_kbs(session.opaque_ref, _vif_metrics);
         }
 
         /// <summary>
         /// Get the io/write_kbs field of the given VIF_metrics.
         /// First published in XenServer 4.0.
+        /// Deprecated since XenServer 6.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vif_metrics">The opaque_ref of the given vif_metrics</param>
+        [Deprecated("XenServer 6.1")]
         public static double get_io_write_kbs(Session session, string _vif_metrics)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vif_metrics_get_io_write_kbs(session.opaque_ref, _vif_metrics);
-            else
-                return Convert.ToDouble(session.XmlRpcProxy.vif_metrics_get_io_write_kbs(session.opaque_ref, _vif_metrics ?? "").parse());
+            return session.JsonRpcClient.vif_metrics_get_io_write_kbs(session.opaque_ref, _vif_metrics);
         }
 
         /// <summary>
@@ -249,10 +214,7 @@ namespace XenAPI
         /// <param name="_vif_metrics">The opaque_ref of the given vif_metrics</param>
         public static DateTime get_last_updated(Session session, string _vif_metrics)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vif_metrics_get_last_updated(session.opaque_ref, _vif_metrics);
-            else
-                return session.XmlRpcProxy.vif_metrics_get_last_updated(session.opaque_ref, _vif_metrics ?? "").parse();
+            return session.JsonRpcClient.vif_metrics_get_last_updated(session.opaque_ref, _vif_metrics);
         }
 
         /// <summary>
@@ -263,10 +225,7 @@ namespace XenAPI
         /// <param name="_vif_metrics">The opaque_ref of the given vif_metrics</param>
         public static Dictionary<string, string> get_other_config(Session session, string _vif_metrics)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vif_metrics_get_other_config(session.opaque_ref, _vif_metrics);
-            else
-                return Maps.convert_from_proxy_string_string(session.XmlRpcProxy.vif_metrics_get_other_config(session.opaque_ref, _vif_metrics ?? "").parse());
+            return session.JsonRpcClient.vif_metrics_get_other_config(session.opaque_ref, _vif_metrics);
         }
 
         /// <summary>
@@ -278,10 +237,7 @@ namespace XenAPI
         /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _vif_metrics, Dictionary<string, string> _other_config)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vif_metrics_set_other_config(session.opaque_ref, _vif_metrics, _other_config);
-            else
-                session.XmlRpcProxy.vif_metrics_set_other_config(session.opaque_ref, _vif_metrics ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
+            session.JsonRpcClient.vif_metrics_set_other_config(session.opaque_ref, _vif_metrics, _other_config);
         }
 
         /// <summary>
@@ -294,10 +250,7 @@ namespace XenAPI
         /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _vif_metrics, string _key, string _value)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vif_metrics_add_to_other_config(session.opaque_ref, _vif_metrics, _key, _value);
-            else
-                session.XmlRpcProxy.vif_metrics_add_to_other_config(session.opaque_ref, _vif_metrics ?? "", _key ?? "", _value ?? "").parse();
+            session.JsonRpcClient.vif_metrics_add_to_other_config(session.opaque_ref, _vif_metrics, _key, _value);
         }
 
         /// <summary>
@@ -309,23 +262,19 @@ namespace XenAPI
         /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _vif_metrics, string _key)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vif_metrics_remove_from_other_config(session.opaque_ref, _vif_metrics, _key);
-            else
-                session.XmlRpcProxy.vif_metrics_remove_from_other_config(session.opaque_ref, _vif_metrics ?? "", _key ?? "").parse();
+            session.JsonRpcClient.vif_metrics_remove_from_other_config(session.opaque_ref, _vif_metrics, _key);
         }
 
         /// <summary>
         /// Return a list of all the VIF_metrics instances known to the system.
         /// First published in XenServer 4.0.
+        /// Deprecated since XenServer 6.1.
         /// </summary>
         /// <param name="session">The session</param>
+        [Deprecated("XenServer 6.1")]
         public static List<XenRef<VIF_metrics>> get_all(Session session)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vif_metrics_get_all(session.opaque_ref);
-            else
-                return XenRef<VIF_metrics>.Create(session.XmlRpcProxy.vif_metrics_get_all(session.opaque_ref).parse());
+            return session.JsonRpcClient.vif_metrics_get_all(session.opaque_ref);
         }
 
         /// <summary>
@@ -335,10 +284,7 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static Dictionary<XenRef<VIF_metrics>, VIF_metrics> get_all_records(Session session)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vif_metrics_get_all_records(session.opaque_ref);
-            else
-                return XenRef<VIF_metrics>.Create<Proxy_VIF_metrics>(session.XmlRpcProxy.vif_metrics_get_all_records(session.opaque_ref).parse());
+            return session.JsonRpcClient.vif_metrics_get_all_records(session.opaque_ref);
         }
 
         /// <summary>
@@ -373,7 +319,7 @@ namespace XenAPI
                 }
             }
         }
-        private double _io_read_kbs;
+        private double _io_read_kbs = 0.000;
 
         /// <summary>
         /// Write bandwidth (KiB/s)
@@ -390,7 +336,7 @@ namespace XenAPI
                 }
             }
         }
-        private double _io_write_kbs;
+        private double _io_write_kbs = 0.000;
 
         /// <summary>
         /// Time at which this information was last updated

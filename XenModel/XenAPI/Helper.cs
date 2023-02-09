@@ -1,4 +1,5 @@
-/* Copyright (c) Cloud Software Group, Inc.
+/*
+ * Copyright (c) Cloud Software Group, Inc.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -255,16 +256,6 @@ namespace XenAPI
                 catch (ArgumentException)
                 {
                 }
-            }
-            return result;
-        }
-
-        internal static List<Message> Proxy_MessageArrayToMessageList(Proxy_Message[] input)
-        {
-            List<Message> result = new List<Message>();
-            foreach (Proxy_Message pm in input)
-            {
-                result.Add(new Message(pm));
             }
             return result;
         }

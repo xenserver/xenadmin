@@ -1,4 +1,5 @@
-/* Copyright (c) Cloud Software Group, Inc.
+/*
+ * Copyright (c) Cloud Software Group, Inc.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -79,15 +80,6 @@ namespace XenAPI
             UpdateFrom(table);
         }
 
-        /// <summary>
-        /// Creates a new Feature from a Proxy_Feature.
-        /// </summary>
-        /// <param name="proxy"></param>
-        public Feature(Proxy_Feature proxy)
-        {
-            UpdateFrom(proxy);
-        }
-
         #endregion
 
         /// <summary>
@@ -103,17 +95,6 @@ namespace XenAPI
             experimental = record.experimental;
             version = record.version;
             host = record.host;
-        }
-
-        internal void UpdateFrom(Proxy_Feature proxy)
-        {
-            uuid = proxy.uuid == null ? null : proxy.uuid;
-            name_label = proxy.name_label == null ? null : proxy.name_label;
-            name_description = proxy.name_description == null ? null : proxy.name_description;
-            enabled = (bool)proxy.enabled;
-            experimental = (bool)proxy.experimental;
-            version = proxy.version == null ? null : proxy.version;
-            host = proxy.host == null ? null : XenRef<Host>.Create(proxy.host);
         }
 
         /// <summary>
@@ -138,19 +119,6 @@ namespace XenAPI
                 version = Marshalling.ParseString(table, "version");
             if (table.ContainsKey("host"))
                 host = Marshalling.ParseRef<Host>(table, "host");
-        }
-
-        public Proxy_Feature ToProxy()
-        {
-            Proxy_Feature result_ = new Proxy_Feature();
-            result_.uuid = uuid ?? "";
-            result_.name_label = name_label ?? "";
-            result_.name_description = name_description ?? "";
-            result_.enabled = enabled;
-            result_.experimental = experimental;
-            result_.version = version ?? "";
-            result_.host = host ?? "";
-            return result_;
         }
 
         public bool DeepEquals(Feature other)
@@ -190,10 +158,7 @@ namespace XenAPI
         /// <param name="_feature">The opaque_ref of the given feature</param>
         public static Feature get_record(Session session, string _feature)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.feature_get_record(session.opaque_ref, _feature);
-            else
-                return new Feature(session.XmlRpcProxy.feature_get_record(session.opaque_ref, _feature ?? "").parse());
+            return session.JsonRpcClient.feature_get_record(session.opaque_ref, _feature);
         }
 
         /// <summary>
@@ -204,10 +169,7 @@ namespace XenAPI
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<Feature> get_by_uuid(Session session, string _uuid)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.feature_get_by_uuid(session.opaque_ref, _uuid);
-            else
-                return XenRef<Feature>.Create(session.XmlRpcProxy.feature_get_by_uuid(session.opaque_ref, _uuid ?? "").parse());
+            return session.JsonRpcClient.feature_get_by_uuid(session.opaque_ref, _uuid);
         }
 
         /// <summary>
@@ -218,10 +180,7 @@ namespace XenAPI
         /// <param name="_label">label of object to return</param>
         public static List<XenRef<Feature>> get_by_name_label(Session session, string _label)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.feature_get_by_name_label(session.opaque_ref, _label);
-            else
-                return XenRef<Feature>.Create(session.XmlRpcProxy.feature_get_by_name_label(session.opaque_ref, _label ?? "").parse());
+            return session.JsonRpcClient.feature_get_by_name_label(session.opaque_ref, _label);
         }
 
         /// <summary>
@@ -232,10 +191,7 @@ namespace XenAPI
         /// <param name="_feature">The opaque_ref of the given feature</param>
         public static string get_uuid(Session session, string _feature)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.feature_get_uuid(session.opaque_ref, _feature);
-            else
-                return session.XmlRpcProxy.feature_get_uuid(session.opaque_ref, _feature ?? "").parse();
+            return session.JsonRpcClient.feature_get_uuid(session.opaque_ref, _feature);
         }
 
         /// <summary>
@@ -246,10 +202,7 @@ namespace XenAPI
         /// <param name="_feature">The opaque_ref of the given feature</param>
         public static string get_name_label(Session session, string _feature)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.feature_get_name_label(session.opaque_ref, _feature);
-            else
-                return session.XmlRpcProxy.feature_get_name_label(session.opaque_ref, _feature ?? "").parse();
+            return session.JsonRpcClient.feature_get_name_label(session.opaque_ref, _feature);
         }
 
         /// <summary>
@@ -260,10 +213,7 @@ namespace XenAPI
         /// <param name="_feature">The opaque_ref of the given feature</param>
         public static string get_name_description(Session session, string _feature)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.feature_get_name_description(session.opaque_ref, _feature);
-            else
-                return session.XmlRpcProxy.feature_get_name_description(session.opaque_ref, _feature ?? "").parse();
+            return session.JsonRpcClient.feature_get_name_description(session.opaque_ref, _feature);
         }
 
         /// <summary>
@@ -274,10 +224,7 @@ namespace XenAPI
         /// <param name="_feature">The opaque_ref of the given feature</param>
         public static bool get_enabled(Session session, string _feature)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.feature_get_enabled(session.opaque_ref, _feature);
-            else
-                return (bool)session.XmlRpcProxy.feature_get_enabled(session.opaque_ref, _feature ?? "").parse();
+            return session.JsonRpcClient.feature_get_enabled(session.opaque_ref, _feature);
         }
 
         /// <summary>
@@ -288,10 +235,7 @@ namespace XenAPI
         /// <param name="_feature">The opaque_ref of the given feature</param>
         public static bool get_experimental(Session session, string _feature)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.feature_get_experimental(session.opaque_ref, _feature);
-            else
-                return (bool)session.XmlRpcProxy.feature_get_experimental(session.opaque_ref, _feature ?? "").parse();
+            return session.JsonRpcClient.feature_get_experimental(session.opaque_ref, _feature);
         }
 
         /// <summary>
@@ -302,10 +246,7 @@ namespace XenAPI
         /// <param name="_feature">The opaque_ref of the given feature</param>
         public static string get_version(Session session, string _feature)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.feature_get_version(session.opaque_ref, _feature);
-            else
-                return session.XmlRpcProxy.feature_get_version(session.opaque_ref, _feature ?? "").parse();
+            return session.JsonRpcClient.feature_get_version(session.opaque_ref, _feature);
         }
 
         /// <summary>
@@ -316,10 +257,7 @@ namespace XenAPI
         /// <param name="_feature">The opaque_ref of the given feature</param>
         public static XenRef<Host> get_host(Session session, string _feature)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.feature_get_host(session.opaque_ref, _feature);
-            else
-                return XenRef<Host>.Create(session.XmlRpcProxy.feature_get_host(session.opaque_ref, _feature ?? "").parse());
+            return session.JsonRpcClient.feature_get_host(session.opaque_ref, _feature);
         }
 
         /// <summary>
@@ -329,10 +267,7 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static List<XenRef<Feature>> get_all(Session session)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.feature_get_all(session.opaque_ref);
-            else
-                return XenRef<Feature>.Create(session.XmlRpcProxy.feature_get_all(session.opaque_ref).parse());
+            return session.JsonRpcClient.feature_get_all(session.opaque_ref);
         }
 
         /// <summary>
@@ -342,10 +277,7 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static Dictionary<XenRef<Feature>, Feature> get_all_records(Session session)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.feature_get_all_records(session.opaque_ref);
-            else
-                return XenRef<Feature>.Create<Proxy_Feature>(session.XmlRpcProxy.feature_get_all_records(session.opaque_ref).parse());
+            return session.JsonRpcClient.feature_get_all_records(session.opaque_ref);
         }
 
         /// <summary>

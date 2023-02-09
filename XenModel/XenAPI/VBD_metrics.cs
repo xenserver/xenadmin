@@ -1,4 +1,5 @@
-/* Copyright (c) Cloud Software Group, Inc.
+/*
+ * Copyright (c) Cloud Software Group, Inc.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -75,15 +76,6 @@ namespace XenAPI
             UpdateFrom(table);
         }
 
-        /// <summary>
-        /// Creates a new VBD_metrics from a Proxy_VBD_metrics.
-        /// </summary>
-        /// <param name="proxy"></param>
-        public VBD_metrics(Proxy_VBD_metrics proxy)
-        {
-            UpdateFrom(proxy);
-        }
-
         #endregion
 
         /// <summary>
@@ -97,15 +89,6 @@ namespace XenAPI
             io_write_kbs = record.io_write_kbs;
             last_updated = record.last_updated;
             other_config = record.other_config;
-        }
-
-        internal void UpdateFrom(Proxy_VBD_metrics proxy)
-        {
-            uuid = proxy.uuid == null ? null : proxy.uuid;
-            io_read_kbs = Convert.ToDouble(proxy.io_read_kbs);
-            io_write_kbs = Convert.ToDouble(proxy.io_write_kbs);
-            last_updated = proxy.last_updated;
-            other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
         }
 
         /// <summary>
@@ -126,17 +109,6 @@ namespace XenAPI
                 last_updated = Marshalling.ParseDateTime(table, "last_updated");
             if (table.ContainsKey("other_config"))
                 other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
-        }
-
-        public Proxy_VBD_metrics ToProxy()
-        {
-            Proxy_VBD_metrics result_ = new Proxy_VBD_metrics();
-            result_.uuid = uuid ?? "";
-            result_.io_read_kbs = io_read_kbs;
-            result_.io_write_kbs = io_write_kbs;
-            result_.last_updated = last_updated;
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            return result_;
         }
 
         public bool DeepEquals(VBD_metrics other)
@@ -174,29 +146,27 @@ namespace XenAPI
         /// <summary>
         /// Get a record containing the current state of the given VBD_metrics.
         /// First published in XenServer 4.0.
+        /// Deprecated since XenServer 6.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vbd_metrics">The opaque_ref of the given vbd_metrics</param>
+        [Deprecated("XenServer 6.1")]
         public static VBD_metrics get_record(Session session, string _vbd_metrics)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vbd_metrics_get_record(session.opaque_ref, _vbd_metrics);
-            else
-                return new VBD_metrics(session.XmlRpcProxy.vbd_metrics_get_record(session.opaque_ref, _vbd_metrics ?? "").parse());
+            return session.JsonRpcClient.vbd_metrics_get_record(session.opaque_ref, _vbd_metrics);
         }
 
         /// <summary>
         /// Get a reference to the VBD_metrics instance with the specified UUID.
         /// First published in XenServer 4.0.
+        /// Deprecated since XenServer 6.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_uuid">UUID of object to return</param>
+        [Deprecated("XenServer 6.1")]
         public static XenRef<VBD_metrics> get_by_uuid(Session session, string _uuid)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vbd_metrics_get_by_uuid(session.opaque_ref, _uuid);
-            else
-                return XenRef<VBD_metrics>.Create(session.XmlRpcProxy.vbd_metrics_get_by_uuid(session.opaque_ref, _uuid ?? "").parse());
+            return session.JsonRpcClient.vbd_metrics_get_by_uuid(session.opaque_ref, _uuid);
         }
 
         /// <summary>
@@ -207,125 +177,114 @@ namespace XenAPI
         /// <param name="_vbd_metrics">The opaque_ref of the given vbd_metrics</param>
         public static string get_uuid(Session session, string _vbd_metrics)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vbd_metrics_get_uuid(session.opaque_ref, _vbd_metrics);
-            else
-                return session.XmlRpcProxy.vbd_metrics_get_uuid(session.opaque_ref, _vbd_metrics ?? "").parse();
+            return session.JsonRpcClient.vbd_metrics_get_uuid(session.opaque_ref, _vbd_metrics);
         }
 
         /// <summary>
         /// Get the io/read_kbs field of the given VBD_metrics.
         /// First published in XenServer 4.0.
+        /// Deprecated since XenServer 6.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vbd_metrics">The opaque_ref of the given vbd_metrics</param>
+        [Deprecated("XenServer 6.1")]
         public static double get_io_read_kbs(Session session, string _vbd_metrics)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vbd_metrics_get_io_read_kbs(session.opaque_ref, _vbd_metrics);
-            else
-                return Convert.ToDouble(session.XmlRpcProxy.vbd_metrics_get_io_read_kbs(session.opaque_ref, _vbd_metrics ?? "").parse());
+            return session.JsonRpcClient.vbd_metrics_get_io_read_kbs(session.opaque_ref, _vbd_metrics);
         }
 
         /// <summary>
         /// Get the io/write_kbs field of the given VBD_metrics.
         /// First published in XenServer 4.0.
+        /// Deprecated since XenServer 6.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vbd_metrics">The opaque_ref of the given vbd_metrics</param>
+        [Deprecated("XenServer 6.1")]
         public static double get_io_write_kbs(Session session, string _vbd_metrics)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vbd_metrics_get_io_write_kbs(session.opaque_ref, _vbd_metrics);
-            else
-                return Convert.ToDouble(session.XmlRpcProxy.vbd_metrics_get_io_write_kbs(session.opaque_ref, _vbd_metrics ?? "").parse());
+            return session.JsonRpcClient.vbd_metrics_get_io_write_kbs(session.opaque_ref, _vbd_metrics);
         }
 
         /// <summary>
         /// Get the last_updated field of the given VBD_metrics.
         /// First published in XenServer 4.0.
+        /// Deprecated since XenServer 6.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vbd_metrics">The opaque_ref of the given vbd_metrics</param>
+        [Deprecated("XenServer 6.1")]
         public static DateTime get_last_updated(Session session, string _vbd_metrics)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vbd_metrics_get_last_updated(session.opaque_ref, _vbd_metrics);
-            else
-                return session.XmlRpcProxy.vbd_metrics_get_last_updated(session.opaque_ref, _vbd_metrics ?? "").parse();
+            return session.JsonRpcClient.vbd_metrics_get_last_updated(session.opaque_ref, _vbd_metrics);
         }
 
         /// <summary>
         /// Get the other_config field of the given VBD_metrics.
         /// First published in XenServer 5.0.
+        /// Deprecated since XenServer 6.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vbd_metrics">The opaque_ref of the given vbd_metrics</param>
+        [Deprecated("XenServer 6.1")]
         public static Dictionary<string, string> get_other_config(Session session, string _vbd_metrics)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vbd_metrics_get_other_config(session.opaque_ref, _vbd_metrics);
-            else
-                return Maps.convert_from_proxy_string_string(session.XmlRpcProxy.vbd_metrics_get_other_config(session.opaque_ref, _vbd_metrics ?? "").parse());
+            return session.JsonRpcClient.vbd_metrics_get_other_config(session.opaque_ref, _vbd_metrics);
         }
 
         /// <summary>
         /// Set the other_config field of the given VBD_metrics.
         /// First published in XenServer 5.0.
+        /// Deprecated since XenServer 6.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vbd_metrics">The opaque_ref of the given vbd_metrics</param>
         /// <param name="_other_config">New value to set</param>
+        [Deprecated("XenServer 6.1")]
         public static void set_other_config(Session session, string _vbd_metrics, Dictionary<string, string> _other_config)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vbd_metrics_set_other_config(session.opaque_ref, _vbd_metrics, _other_config);
-            else
-                session.XmlRpcProxy.vbd_metrics_set_other_config(session.opaque_ref, _vbd_metrics ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
+            session.JsonRpcClient.vbd_metrics_set_other_config(session.opaque_ref, _vbd_metrics, _other_config);
         }
 
         /// <summary>
         /// Add the given key-value pair to the other_config field of the given VBD_metrics.
         /// First published in XenServer 5.0.
+        /// Deprecated since XenServer 6.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vbd_metrics">The opaque_ref of the given vbd_metrics</param>
         /// <param name="_key">Key to add</param>
         /// <param name="_value">Value to add</param>
+        [Deprecated("XenServer 6.1")]
         public static void add_to_other_config(Session session, string _vbd_metrics, string _key, string _value)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vbd_metrics_add_to_other_config(session.opaque_ref, _vbd_metrics, _key, _value);
-            else
-                session.XmlRpcProxy.vbd_metrics_add_to_other_config(session.opaque_ref, _vbd_metrics ?? "", _key ?? "", _value ?? "").parse();
+            session.JsonRpcClient.vbd_metrics_add_to_other_config(session.opaque_ref, _vbd_metrics, _key, _value);
         }
 
         /// <summary>
         /// Remove the given key and its corresponding value from the other_config field of the given VBD_metrics.  If the key is not in that Map, then do nothing.
         /// First published in XenServer 5.0.
+        /// Deprecated since XenServer 6.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vbd_metrics">The opaque_ref of the given vbd_metrics</param>
         /// <param name="_key">Key to remove</param>
+        [Deprecated("XenServer 6.1")]
         public static void remove_from_other_config(Session session, string _vbd_metrics, string _key)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vbd_metrics_remove_from_other_config(session.opaque_ref, _vbd_metrics, _key);
-            else
-                session.XmlRpcProxy.vbd_metrics_remove_from_other_config(session.opaque_ref, _vbd_metrics ?? "", _key ?? "").parse();
+            session.JsonRpcClient.vbd_metrics_remove_from_other_config(session.opaque_ref, _vbd_metrics, _key);
         }
 
         /// <summary>
         /// Return a list of all the VBD_metrics instances known to the system.
         /// First published in XenServer 4.0.
+        /// Deprecated since XenServer 6.1.
         /// </summary>
         /// <param name="session">The session</param>
+        [Deprecated("XenServer 6.1")]
         public static List<XenRef<VBD_metrics>> get_all(Session session)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vbd_metrics_get_all(session.opaque_ref);
-            else
-                return XenRef<VBD_metrics>.Create(session.XmlRpcProxy.vbd_metrics_get_all(session.opaque_ref).parse());
+            return session.JsonRpcClient.vbd_metrics_get_all(session.opaque_ref);
         }
 
         /// <summary>
@@ -335,10 +294,7 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static Dictionary<XenRef<VBD_metrics>, VBD_metrics> get_all_records(Session session)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vbd_metrics_get_all_records(session.opaque_ref);
-            else
-                return XenRef<VBD_metrics>.Create<Proxy_VBD_metrics>(session.XmlRpcProxy.vbd_metrics_get_all_records(session.opaque_ref).parse());
+            return session.JsonRpcClient.vbd_metrics_get_all_records(session.opaque_ref);
         }
 
         /// <summary>
@@ -373,7 +329,7 @@ namespace XenAPI
                 }
             }
         }
-        private double _io_read_kbs;
+        private double _io_read_kbs = 0.000;
 
         /// <summary>
         /// Write bandwidth (KiB/s)
@@ -390,7 +346,7 @@ namespace XenAPI
                 }
             }
         }
-        private double _io_write_kbs;
+        private double _io_write_kbs = 0.000;
 
         /// <summary>
         /// Time at which this information was last updated
@@ -408,7 +364,7 @@ namespace XenAPI
                 }
             }
         }
-        private DateTime _last_updated;
+        private DateTime _last_updated = DateTime.ParseExact("19700101T00:00:00Z", "yyyyMMddTHH:mm:ssZ", CultureInfo.InvariantCulture);
 
         /// <summary>
         /// additional configuration

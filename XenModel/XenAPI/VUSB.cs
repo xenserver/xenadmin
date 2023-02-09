@@ -1,4 +1,5 @@
-/* Copyright (c) Cloud Software Group, Inc.
+/*
+ * Copyright (c) Cloud Software Group, Inc.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -79,15 +80,6 @@ namespace XenAPI
             UpdateFrom(table);
         }
 
-        /// <summary>
-        /// Creates a new VUSB from a Proxy_VUSB.
-        /// </summary>
-        /// <param name="proxy"></param>
-        public VUSB(Proxy_VUSB proxy)
-        {
-            UpdateFrom(proxy);
-        }
-
         #endregion
 
         /// <summary>
@@ -103,17 +95,6 @@ namespace XenAPI
             USB_group = record.USB_group;
             other_config = record.other_config;
             currently_attached = record.currently_attached;
-        }
-
-        internal void UpdateFrom(Proxy_VUSB proxy)
-        {
-            uuid = proxy.uuid == null ? null : proxy.uuid;
-            allowed_operations = proxy.allowed_operations == null ? null : Helper.StringArrayToEnumList<vusb_operations>(proxy.allowed_operations);
-            current_operations = proxy.current_operations == null ? null : Maps.convert_from_proxy_string_vusb_operations(proxy.current_operations);
-            VM = proxy.VM == null ? null : XenRef<VM>.Create(proxy.VM);
-            USB_group = proxy.USB_group == null ? null : XenRef<USB_group>.Create(proxy.USB_group);
-            other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
-            currently_attached = (bool)proxy.currently_attached;
         }
 
         /// <summary>
@@ -138,19 +119,6 @@ namespace XenAPI
                 other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
             if (table.ContainsKey("currently_attached"))
                 currently_attached = Marshalling.ParseBool(table, "currently_attached");
-        }
-
-        public Proxy_VUSB ToProxy()
-        {
-            Proxy_VUSB result_ = new Proxy_VUSB();
-            result_.uuid = uuid ?? "";
-            result_.allowed_operations = allowed_operations == null ? new string[] {} : Helper.ObjectListToStringArray(allowed_operations);
-            result_.current_operations = Maps.convert_to_proxy_string_vusb_operations(current_operations);
-            result_.VM = VM ?? "";
-            result_.USB_group = USB_group ?? "";
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            result_.currently_attached = currently_attached;
-            return result_;
         }
 
         public bool DeepEquals(VUSB other, bool ignoreCurrentOperations)
@@ -197,10 +165,7 @@ namespace XenAPI
         /// <param name="_vusb">The opaque_ref of the given vusb</param>
         public static VUSB get_record(Session session, string _vusb)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vusb_get_record(session.opaque_ref, _vusb);
-            else
-                return new VUSB(session.XmlRpcProxy.vusb_get_record(session.opaque_ref, _vusb ?? "").parse());
+            return session.JsonRpcClient.vusb_get_record(session.opaque_ref, _vusb);
         }
 
         /// <summary>
@@ -211,10 +176,7 @@ namespace XenAPI
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<VUSB> get_by_uuid(Session session, string _uuid)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vusb_get_by_uuid(session.opaque_ref, _uuid);
-            else
-                return XenRef<VUSB>.Create(session.XmlRpcProxy.vusb_get_by_uuid(session.opaque_ref, _uuid ?? "").parse());
+            return session.JsonRpcClient.vusb_get_by_uuid(session.opaque_ref, _uuid);
         }
 
         /// <summary>
@@ -225,10 +187,7 @@ namespace XenAPI
         /// <param name="_vusb">The opaque_ref of the given vusb</param>
         public static string get_uuid(Session session, string _vusb)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vusb_get_uuid(session.opaque_ref, _vusb);
-            else
-                return session.XmlRpcProxy.vusb_get_uuid(session.opaque_ref, _vusb ?? "").parse();
+            return session.JsonRpcClient.vusb_get_uuid(session.opaque_ref, _vusb);
         }
 
         /// <summary>
@@ -239,10 +198,7 @@ namespace XenAPI
         /// <param name="_vusb">The opaque_ref of the given vusb</param>
         public static List<vusb_operations> get_allowed_operations(Session session, string _vusb)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vusb_get_allowed_operations(session.opaque_ref, _vusb);
-            else
-                return Helper.StringArrayToEnumList<vusb_operations>(session.XmlRpcProxy.vusb_get_allowed_operations(session.opaque_ref, _vusb ?? "").parse());
+            return session.JsonRpcClient.vusb_get_allowed_operations(session.opaque_ref, _vusb);
         }
 
         /// <summary>
@@ -253,10 +209,7 @@ namespace XenAPI
         /// <param name="_vusb">The opaque_ref of the given vusb</param>
         public static Dictionary<string, vusb_operations> get_current_operations(Session session, string _vusb)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vusb_get_current_operations(session.opaque_ref, _vusb);
-            else
-                return Maps.convert_from_proxy_string_vusb_operations(session.XmlRpcProxy.vusb_get_current_operations(session.opaque_ref, _vusb ?? "").parse());
+            return session.JsonRpcClient.vusb_get_current_operations(session.opaque_ref, _vusb);
         }
 
         /// <summary>
@@ -267,10 +220,7 @@ namespace XenAPI
         /// <param name="_vusb">The opaque_ref of the given vusb</param>
         public static XenRef<VM> get_VM(Session session, string _vusb)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vusb_get_vm(session.opaque_ref, _vusb);
-            else
-                return XenRef<VM>.Create(session.XmlRpcProxy.vusb_get_vm(session.opaque_ref, _vusb ?? "").parse());
+            return session.JsonRpcClient.vusb_get_vm(session.opaque_ref, _vusb);
         }
 
         /// <summary>
@@ -281,10 +231,7 @@ namespace XenAPI
         /// <param name="_vusb">The opaque_ref of the given vusb</param>
         public static XenRef<USB_group> get_USB_group(Session session, string _vusb)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vusb_get_usb_group(session.opaque_ref, _vusb);
-            else
-                return XenRef<USB_group>.Create(session.XmlRpcProxy.vusb_get_usb_group(session.opaque_ref, _vusb ?? "").parse());
+            return session.JsonRpcClient.vusb_get_usb_group(session.opaque_ref, _vusb);
         }
 
         /// <summary>
@@ -295,10 +242,7 @@ namespace XenAPI
         /// <param name="_vusb">The opaque_ref of the given vusb</param>
         public static Dictionary<string, string> get_other_config(Session session, string _vusb)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vusb_get_other_config(session.opaque_ref, _vusb);
-            else
-                return Maps.convert_from_proxy_string_string(session.XmlRpcProxy.vusb_get_other_config(session.opaque_ref, _vusb ?? "").parse());
+            return session.JsonRpcClient.vusb_get_other_config(session.opaque_ref, _vusb);
         }
 
         /// <summary>
@@ -309,10 +253,7 @@ namespace XenAPI
         /// <param name="_vusb">The opaque_ref of the given vusb</param>
         public static bool get_currently_attached(Session session, string _vusb)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vusb_get_currently_attached(session.opaque_ref, _vusb);
-            else
-                return (bool)session.XmlRpcProxy.vusb_get_currently_attached(session.opaque_ref, _vusb ?? "").parse();
+            return session.JsonRpcClient.vusb_get_currently_attached(session.opaque_ref, _vusb);
         }
 
         /// <summary>
@@ -324,10 +265,7 @@ namespace XenAPI
         /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _vusb, Dictionary<string, string> _other_config)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vusb_set_other_config(session.opaque_ref, _vusb, _other_config);
-            else
-                session.XmlRpcProxy.vusb_set_other_config(session.opaque_ref, _vusb ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
+            session.JsonRpcClient.vusb_set_other_config(session.opaque_ref, _vusb, _other_config);
         }
 
         /// <summary>
@@ -340,10 +278,7 @@ namespace XenAPI
         /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _vusb, string _key, string _value)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vusb_add_to_other_config(session.opaque_ref, _vusb, _key, _value);
-            else
-                session.XmlRpcProxy.vusb_add_to_other_config(session.opaque_ref, _vusb ?? "", _key ?? "", _value ?? "").parse();
+            session.JsonRpcClient.vusb_add_to_other_config(session.opaque_ref, _vusb, _key, _value);
         }
 
         /// <summary>
@@ -355,10 +290,7 @@ namespace XenAPI
         /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _vusb, string _key)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vusb_remove_from_other_config(session.opaque_ref, _vusb, _key);
-            else
-                session.XmlRpcProxy.vusb_remove_from_other_config(session.opaque_ref, _vusb ?? "", _key ?? "").parse();
+            session.JsonRpcClient.vusb_remove_from_other_config(session.opaque_ref, _vusb, _key);
         }
 
         /// <summary>
@@ -371,10 +303,7 @@ namespace XenAPI
         /// <param name="_other_config"></param>
         public static XenRef<VUSB> create(Session session, string _vm, string _usb_group, Dictionary<string, string> _other_config)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vusb_create(session.opaque_ref, _vm, _usb_group, _other_config);
-            else
-                return XenRef<VUSB>.Create(session.XmlRpcProxy.vusb_create(session.opaque_ref, _vm ?? "", _usb_group ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse());
+            return session.JsonRpcClient.vusb_create(session.opaque_ref, _vm, _usb_group, _other_config);
         }
 
         /// <summary>
@@ -387,10 +316,7 @@ namespace XenAPI
         /// <param name="_other_config"></param>
         public static XenRef<Task> async_create(Session session, string _vm, string _usb_group, Dictionary<string, string> _other_config)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vusb_create(session.opaque_ref, _vm, _usb_group, _other_config);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_vusb_create(session.opaque_ref, _vm ?? "", _usb_group ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse());
+          return session.JsonRpcClient.async_vusb_create(session.opaque_ref, _vm, _usb_group, _other_config);
         }
 
         /// <summary>
@@ -401,10 +327,7 @@ namespace XenAPI
         /// <param name="_vusb">The opaque_ref of the given vusb</param>
         public static void unplug(Session session, string _vusb)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vusb_unplug(session.opaque_ref, _vusb);
-            else
-                session.XmlRpcProxy.vusb_unplug(session.opaque_ref, _vusb ?? "").parse();
+            session.JsonRpcClient.vusb_unplug(session.opaque_ref, _vusb);
         }
 
         /// <summary>
@@ -415,10 +338,7 @@ namespace XenAPI
         /// <param name="_vusb">The opaque_ref of the given vusb</param>
         public static XenRef<Task> async_unplug(Session session, string _vusb)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vusb_unplug(session.opaque_ref, _vusb);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_vusb_unplug(session.opaque_ref, _vusb ?? "").parse());
+          return session.JsonRpcClient.async_vusb_unplug(session.opaque_ref, _vusb);
         }
 
         /// <summary>
@@ -429,10 +349,7 @@ namespace XenAPI
         /// <param name="_vusb">The opaque_ref of the given vusb</param>
         public static void destroy(Session session, string _vusb)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vusb_destroy(session.opaque_ref, _vusb);
-            else
-                session.XmlRpcProxy.vusb_destroy(session.opaque_ref, _vusb ?? "").parse();
+            session.JsonRpcClient.vusb_destroy(session.opaque_ref, _vusb);
         }
 
         /// <summary>
@@ -443,10 +360,7 @@ namespace XenAPI
         /// <param name="_vusb">The opaque_ref of the given vusb</param>
         public static XenRef<Task> async_destroy(Session session, string _vusb)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vusb_destroy(session.opaque_ref, _vusb);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_vusb_destroy(session.opaque_ref, _vusb ?? "").parse());
+          return session.JsonRpcClient.async_vusb_destroy(session.opaque_ref, _vusb);
         }
 
         /// <summary>
@@ -456,10 +370,7 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static List<XenRef<VUSB>> get_all(Session session)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vusb_get_all(session.opaque_ref);
-            else
-                return XenRef<VUSB>.Create(session.XmlRpcProxy.vusb_get_all(session.opaque_ref).parse());
+            return session.JsonRpcClient.vusb_get_all(session.opaque_ref);
         }
 
         /// <summary>
@@ -469,10 +380,7 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static Dictionary<XenRef<VUSB>, VUSB> get_all_records(Session session)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vusb_get_all_records(session.opaque_ref);
-            else
-                return XenRef<VUSB>.Create<Proxy_VUSB>(session.XmlRpcProxy.vusb_get_all_records(session.opaque_ref).parse());
+            return session.JsonRpcClient.vusb_get_all_records(session.opaque_ref);
         }
 
         /// <summary>

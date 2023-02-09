@@ -1,4 +1,5 @@
-/* Copyright (c) Cloud Software Group, Inc.
+/*
+ * Copyright (c) Cloud Software Group, Inc.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -28,9 +29,7 @@
 
 using System;
 using System.Collections.Generic;
-using CookComputing.XmlRpc;
 using Newtonsoft.Json;
-
 
 namespace XenAPI
 {
@@ -41,109 +40,59 @@ namespace XenAPI
         {
         }
 
-        internal Event(Proxy_Event proxy)
-        {
-            UpdateFrom(proxy);
-        }
-
-        internal void UpdateFrom(Proxy_Event proxy)
-        {
-            id = long.Parse(proxy.id);
-        }
-
         public override void UpdateFrom(Event update)
         {
             id = update.id;
         }
 
-        internal Proxy_Event ToProxy()
-        {
-            Proxy_Event result = new Proxy_Event();
-            result.id = id.ToString();
-            return result;
-        }
-
         public override string SaveChanges(Session session, string opaqueRef, Event serverObject)
         {
-            Event server = serverObject;
             if (opaqueRef == null)
             {
-                Proxy_Event p = this.ToProxy();
                 throw new InvalidOperationException("There is no constructor available for this type; you cannot directly create one on the server.");
             }
-            else
-            {
-                if (!_id.Equals(server._id))
-                {
-                    Event.set_id(session, opaqueRef, _id);
-                }
+            
+            Event server = serverObject;
 
-                return null;
-            }
+            if (!_id.Equals(server._id))
+                set_id(session, opaqueRef, _id);
+
+            return null;
         }
 
         public static Event get_record(Session session, string _event)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.event_get_record(session.opaque_ref, _event);
-            else
-                return new Event(session.XmlRpcProxy.event_get_record(session.opaque_ref, _event ?? "").parse());
+            return session.JsonRpcClient.event_get_record(session.opaque_ref, _event);
         }
 
         public static string get_by_uuid(Session session, string _uuid)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.event_get_by_uuid(session.opaque_ref, _uuid);
-            else
-                return session.XmlRpcProxy.event_get_by_uuid(session.opaque_ref, _uuid ?? "").parse();
+            return session.JsonRpcClient.event_get_by_uuid(session.opaque_ref, _uuid);
         }
 
         public static long get_id(Session session, string _event)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.event_get_id(session.opaque_ref, _event);
-            else
-                return long.Parse(session.XmlRpcProxy.event_get_id(session.opaque_ref, _event ?? "").parse());
+            return session.JsonRpcClient.event_get_id(session.opaque_ref, _event);
         }
 
         public static void set_id(Session session, string _event, long _id)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.event_set_id(session.opaque_ref, _event, _id);
-            else
-                session.XmlRpcProxy.event_set_id(session.opaque_ref, _event ?? "", _id.ToString()).parse();
+            session.JsonRpcClient.event_set_id(session.opaque_ref, _event, _id);
         }
 
         public static void register(Session session, string[] _classes)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.event_register(session.opaque_ref, _classes);
-            else
-                session.XmlRpcProxy.event_register(session.opaque_ref, _classes).parse();
+            session.JsonRpcClient.event_register(session.opaque_ref, _classes);
         }
 
         public static void unregister(Session session, string[] _classes)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.event_unregister(session.opaque_ref, _classes);
-            else
-                session.XmlRpcProxy.event_unregister(session.opaque_ref, _classes).parse();
-        }
-
-        public static Proxy_Event[] next(Session session)
-        {
-            if (session.JsonRpcClient != null)
-                throw new NotImplementedException();
-            else
-                return session.XmlRpcProxy.event_next(session.opaque_ref).parse();
+            session.JsonRpcClient.event_unregister(session.opaque_ref, _classes);
         }
 
         public static IEventCollection from(Session session, string[] _classes, string _token, double _timeout)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.event_from(session.opaque_ref, _classes, _token, _timeout);
-            else
-                return session.XmlRpcProxy.event_from(session.opaque_ref, _classes, _token, _timeout).parse();
+            return session.JsonRpcClient.event_from(session.opaque_ref, _classes, _token, _timeout);
         }
 
         private long _id;
@@ -162,32 +111,20 @@ namespace XenAPI
 
         public string timestamp;
 
-        [XmlRpcMember("class")]
         public string class_;
 
         public string operation;
 
-        [XmlRpcMember("ref")]
         public string opaqueRef;
 
-        [XmlRpcMember("snapshot")]
         public object snapshot;
     }
 
 
-    [XmlRpcMissingMapping(MappingAction.Ignore)]
     public class EventBatch : IEventCollection
     {
         public Event[] events;
         public Dictionary<string, int> valid_ref_counts;
-        public string token;
-    }
-
-    [XmlRpcMissingMapping(MappingAction.Ignore)]
-    public class Events : IEventCollection
-    {
-        public Proxy_Event[] events;
-        public Object valid_ref_counts;
         public string token;
     }
 

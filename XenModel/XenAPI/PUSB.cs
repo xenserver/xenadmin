@@ -1,4 +1,5 @@
-/* Copyright (c) Cloud Software Group, Inc.
+/*
+ * Copyright (c) Cloud Software Group, Inc.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -93,15 +94,6 @@ namespace XenAPI
             UpdateFrom(table);
         }
 
-        /// <summary>
-        /// Creates a new PUSB from a Proxy_PUSB.
-        /// </summary>
-        /// <param name="proxy"></param>
-        public PUSB(Proxy_PUSB proxy)
-        {
-            UpdateFrom(proxy);
-        }
-
         #endregion
 
         /// <summary>
@@ -124,24 +116,6 @@ namespace XenAPI
             passthrough_enabled = record.passthrough_enabled;
             other_config = record.other_config;
             speed = record.speed;
-        }
-
-        internal void UpdateFrom(Proxy_PUSB proxy)
-        {
-            uuid = proxy.uuid == null ? null : proxy.uuid;
-            USB_group = proxy.USB_group == null ? null : XenRef<USB_group>.Create(proxy.USB_group);
-            host = proxy.host == null ? null : XenRef<Host>.Create(proxy.host);
-            path = proxy.path == null ? null : proxy.path;
-            vendor_id = proxy.vendor_id == null ? null : proxy.vendor_id;
-            vendor_desc = proxy.vendor_desc == null ? null : proxy.vendor_desc;
-            product_id = proxy.product_id == null ? null : proxy.product_id;
-            product_desc = proxy.product_desc == null ? null : proxy.product_desc;
-            serial = proxy.serial == null ? null : proxy.serial;
-            version = proxy.version == null ? null : proxy.version;
-            description = proxy.description == null ? null : proxy.description;
-            passthrough_enabled = (bool)proxy.passthrough_enabled;
-            other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
-            speed = Convert.ToDouble(proxy.speed);
         }
 
         /// <summary>
@@ -180,26 +154,6 @@ namespace XenAPI
                 other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
             if (table.ContainsKey("speed"))
                 speed = Marshalling.ParseDouble(table, "speed");
-        }
-
-        public Proxy_PUSB ToProxy()
-        {
-            Proxy_PUSB result_ = new Proxy_PUSB();
-            result_.uuid = uuid ?? "";
-            result_.USB_group = USB_group ?? "";
-            result_.host = host ?? "";
-            result_.path = path ?? "";
-            result_.vendor_id = vendor_id ?? "";
-            result_.vendor_desc = vendor_desc ?? "";
-            result_.product_id = product_id ?? "";
-            result_.product_desc = product_desc ?? "";
-            result_.serial = serial ?? "";
-            result_.version = version ?? "";
-            result_.description = description ?? "";
-            result_.passthrough_enabled = passthrough_enabled;
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            result_.speed = speed;
-            return result_;
         }
 
         public bool DeepEquals(PUSB other)
@@ -251,10 +205,7 @@ namespace XenAPI
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
         public static PUSB get_record(Session session, string _pusb)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pusb_get_record(session.opaque_ref, _pusb);
-            else
-                return new PUSB(session.XmlRpcProxy.pusb_get_record(session.opaque_ref, _pusb ?? "").parse());
+            return session.JsonRpcClient.pusb_get_record(session.opaque_ref, _pusb);
         }
 
         /// <summary>
@@ -265,10 +216,7 @@ namespace XenAPI
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<PUSB> get_by_uuid(Session session, string _uuid)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pusb_get_by_uuid(session.opaque_ref, _uuid);
-            else
-                return XenRef<PUSB>.Create(session.XmlRpcProxy.pusb_get_by_uuid(session.opaque_ref, _uuid ?? "").parse());
+            return session.JsonRpcClient.pusb_get_by_uuid(session.opaque_ref, _uuid);
         }
 
         /// <summary>
@@ -279,10 +227,7 @@ namespace XenAPI
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
         public static string get_uuid(Session session, string _pusb)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pusb_get_uuid(session.opaque_ref, _pusb);
-            else
-                return session.XmlRpcProxy.pusb_get_uuid(session.opaque_ref, _pusb ?? "").parse();
+            return session.JsonRpcClient.pusb_get_uuid(session.opaque_ref, _pusb);
         }
 
         /// <summary>
@@ -293,10 +238,7 @@ namespace XenAPI
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
         public static XenRef<USB_group> get_USB_group(Session session, string _pusb)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pusb_get_usb_group(session.opaque_ref, _pusb);
-            else
-                return XenRef<USB_group>.Create(session.XmlRpcProxy.pusb_get_usb_group(session.opaque_ref, _pusb ?? "").parse());
+            return session.JsonRpcClient.pusb_get_usb_group(session.opaque_ref, _pusb);
         }
 
         /// <summary>
@@ -307,10 +249,7 @@ namespace XenAPI
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
         public static XenRef<Host> get_host(Session session, string _pusb)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pusb_get_host(session.opaque_ref, _pusb);
-            else
-                return XenRef<Host>.Create(session.XmlRpcProxy.pusb_get_host(session.opaque_ref, _pusb ?? "").parse());
+            return session.JsonRpcClient.pusb_get_host(session.opaque_ref, _pusb);
         }
 
         /// <summary>
@@ -321,10 +260,7 @@ namespace XenAPI
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
         public static string get_path(Session session, string _pusb)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pusb_get_path(session.opaque_ref, _pusb);
-            else
-                return session.XmlRpcProxy.pusb_get_path(session.opaque_ref, _pusb ?? "").parse();
+            return session.JsonRpcClient.pusb_get_path(session.opaque_ref, _pusb);
         }
 
         /// <summary>
@@ -335,10 +271,7 @@ namespace XenAPI
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
         public static string get_vendor_id(Session session, string _pusb)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pusb_get_vendor_id(session.opaque_ref, _pusb);
-            else
-                return session.XmlRpcProxy.pusb_get_vendor_id(session.opaque_ref, _pusb ?? "").parse();
+            return session.JsonRpcClient.pusb_get_vendor_id(session.opaque_ref, _pusb);
         }
 
         /// <summary>
@@ -349,10 +282,7 @@ namespace XenAPI
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
         public static string get_vendor_desc(Session session, string _pusb)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pusb_get_vendor_desc(session.opaque_ref, _pusb);
-            else
-                return session.XmlRpcProxy.pusb_get_vendor_desc(session.opaque_ref, _pusb ?? "").parse();
+            return session.JsonRpcClient.pusb_get_vendor_desc(session.opaque_ref, _pusb);
         }
 
         /// <summary>
@@ -363,10 +293,7 @@ namespace XenAPI
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
         public static string get_product_id(Session session, string _pusb)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pusb_get_product_id(session.opaque_ref, _pusb);
-            else
-                return session.XmlRpcProxy.pusb_get_product_id(session.opaque_ref, _pusb ?? "").parse();
+            return session.JsonRpcClient.pusb_get_product_id(session.opaque_ref, _pusb);
         }
 
         /// <summary>
@@ -377,10 +304,7 @@ namespace XenAPI
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
         public static string get_product_desc(Session session, string _pusb)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pusb_get_product_desc(session.opaque_ref, _pusb);
-            else
-                return session.XmlRpcProxy.pusb_get_product_desc(session.opaque_ref, _pusb ?? "").parse();
+            return session.JsonRpcClient.pusb_get_product_desc(session.opaque_ref, _pusb);
         }
 
         /// <summary>
@@ -391,10 +315,7 @@ namespace XenAPI
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
         public static string get_serial(Session session, string _pusb)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pusb_get_serial(session.opaque_ref, _pusb);
-            else
-                return session.XmlRpcProxy.pusb_get_serial(session.opaque_ref, _pusb ?? "").parse();
+            return session.JsonRpcClient.pusb_get_serial(session.opaque_ref, _pusb);
         }
 
         /// <summary>
@@ -405,10 +326,7 @@ namespace XenAPI
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
         public static string get_version(Session session, string _pusb)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pusb_get_version(session.opaque_ref, _pusb);
-            else
-                return session.XmlRpcProxy.pusb_get_version(session.opaque_ref, _pusb ?? "").parse();
+            return session.JsonRpcClient.pusb_get_version(session.opaque_ref, _pusb);
         }
 
         /// <summary>
@@ -419,10 +337,7 @@ namespace XenAPI
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
         public static string get_description(Session session, string _pusb)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pusb_get_description(session.opaque_ref, _pusb);
-            else
-                return session.XmlRpcProxy.pusb_get_description(session.opaque_ref, _pusb ?? "").parse();
+            return session.JsonRpcClient.pusb_get_description(session.opaque_ref, _pusb);
         }
 
         /// <summary>
@@ -433,10 +348,7 @@ namespace XenAPI
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
         public static bool get_passthrough_enabled(Session session, string _pusb)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pusb_get_passthrough_enabled(session.opaque_ref, _pusb);
-            else
-                return (bool)session.XmlRpcProxy.pusb_get_passthrough_enabled(session.opaque_ref, _pusb ?? "").parse();
+            return session.JsonRpcClient.pusb_get_passthrough_enabled(session.opaque_ref, _pusb);
         }
 
         /// <summary>
@@ -447,10 +359,7 @@ namespace XenAPI
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
         public static Dictionary<string, string> get_other_config(Session session, string _pusb)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pusb_get_other_config(session.opaque_ref, _pusb);
-            else
-                return Maps.convert_from_proxy_string_string(session.XmlRpcProxy.pusb_get_other_config(session.opaque_ref, _pusb ?? "").parse());
+            return session.JsonRpcClient.pusb_get_other_config(session.opaque_ref, _pusb);
         }
 
         /// <summary>
@@ -461,10 +370,7 @@ namespace XenAPI
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
         public static double get_speed(Session session, string _pusb)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pusb_get_speed(session.opaque_ref, _pusb);
-            else
-                return Convert.ToDouble(session.XmlRpcProxy.pusb_get_speed(session.opaque_ref, _pusb ?? "").parse());
+            return session.JsonRpcClient.pusb_get_speed(session.opaque_ref, _pusb);
         }
 
         /// <summary>
@@ -476,10 +382,7 @@ namespace XenAPI
         /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _pusb, Dictionary<string, string> _other_config)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.pusb_set_other_config(session.opaque_ref, _pusb, _other_config);
-            else
-                session.XmlRpcProxy.pusb_set_other_config(session.opaque_ref, _pusb ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
+            session.JsonRpcClient.pusb_set_other_config(session.opaque_ref, _pusb, _other_config);
         }
 
         /// <summary>
@@ -492,10 +395,7 @@ namespace XenAPI
         /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _pusb, string _key, string _value)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.pusb_add_to_other_config(session.opaque_ref, _pusb, _key, _value);
-            else
-                session.XmlRpcProxy.pusb_add_to_other_config(session.opaque_ref, _pusb ?? "", _key ?? "", _value ?? "").parse();
+            session.JsonRpcClient.pusb_add_to_other_config(session.opaque_ref, _pusb, _key, _value);
         }
 
         /// <summary>
@@ -507,10 +407,7 @@ namespace XenAPI
         /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _pusb, string _key)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.pusb_remove_from_other_config(session.opaque_ref, _pusb, _key);
-            else
-                session.XmlRpcProxy.pusb_remove_from_other_config(session.opaque_ref, _pusb ?? "", _key ?? "").parse();
+            session.JsonRpcClient.pusb_remove_from_other_config(session.opaque_ref, _pusb, _key);
         }
 
         /// <summary>
@@ -521,10 +418,7 @@ namespace XenAPI
         /// <param name="_host">The host</param>
         public static void scan(Session session, string _host)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.pusb_scan(session.opaque_ref, _host);
-            else
-                session.XmlRpcProxy.pusb_scan(session.opaque_ref, _host ?? "").parse();
+            session.JsonRpcClient.pusb_scan(session.opaque_ref, _host);
         }
 
         /// <summary>
@@ -535,10 +429,7 @@ namespace XenAPI
         /// <param name="_host">The host</param>
         public static XenRef<Task> async_scan(Session session, string _host)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_pusb_scan(session.opaque_ref, _host);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_pusb_scan(session.opaque_ref, _host ?? "").parse());
+          return session.JsonRpcClient.async_pusb_scan(session.opaque_ref, _host);
         }
 
         /// <summary>
@@ -550,10 +441,7 @@ namespace XenAPI
         /// <param name="_value">passthrough is enabled when true and disabled with false</param>
         public static void set_passthrough_enabled(Session session, string _pusb, bool _value)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.pusb_set_passthrough_enabled(session.opaque_ref, _pusb, _value);
-            else
-                session.XmlRpcProxy.pusb_set_passthrough_enabled(session.opaque_ref, _pusb ?? "", _value).parse();
+            session.JsonRpcClient.pusb_set_passthrough_enabled(session.opaque_ref, _pusb, _value);
         }
 
         /// <summary>
@@ -565,10 +453,7 @@ namespace XenAPI
         /// <param name="_value">passthrough is enabled when true and disabled with false</param>
         public static XenRef<Task> async_set_passthrough_enabled(Session session, string _pusb, bool _value)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_pusb_set_passthrough_enabled(session.opaque_ref, _pusb, _value);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_pusb_set_passthrough_enabled(session.opaque_ref, _pusb ?? "", _value).parse());
+          return session.JsonRpcClient.async_pusb_set_passthrough_enabled(session.opaque_ref, _pusb, _value);
         }
 
         /// <summary>
@@ -578,10 +463,7 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static List<XenRef<PUSB>> get_all(Session session)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pusb_get_all(session.opaque_ref);
-            else
-                return XenRef<PUSB>.Create(session.XmlRpcProxy.pusb_get_all(session.opaque_ref).parse());
+            return session.JsonRpcClient.pusb_get_all(session.opaque_ref);
         }
 
         /// <summary>
@@ -591,10 +473,7 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static Dictionary<XenRef<PUSB>, PUSB> get_all_records(Session session)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pusb_get_all_records(session.opaque_ref);
-            else
-                return XenRef<PUSB>.Create<Proxy_PUSB>(session.XmlRpcProxy.pusb_get_all_records(session.opaque_ref).parse());
+            return session.JsonRpcClient.pusb_get_all_records(session.opaque_ref);
         }
 
         /// <summary>

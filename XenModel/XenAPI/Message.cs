@@ -1,4 +1,5 @@
-/* Copyright (c) Cloud Software Group, Inc.
+/*
+ * Copyright (c) Cloud Software Group, Inc.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -79,15 +80,6 @@ namespace XenAPI
             UpdateFrom(table);
         }
 
-        /// <summary>
-        /// Creates a new Message from a Proxy_Message.
-        /// </summary>
-        /// <param name="proxy"></param>
-        public Message(Proxy_Message proxy)
-        {
-            UpdateFrom(proxy);
-        }
-
         #endregion
 
         /// <summary>
@@ -103,17 +95,6 @@ namespace XenAPI
             obj_uuid = record.obj_uuid;
             timestamp = record.timestamp;
             body = record.body;
-        }
-
-        internal void UpdateFrom(Proxy_Message proxy)
-        {
-            uuid = proxy.uuid == null ? null : proxy.uuid;
-            name = proxy.name == null ? null : proxy.name;
-            priority = proxy.priority == null ? 0 : long.Parse(proxy.priority);
-            cls = proxy.cls == null ? (cls) 0 : (cls)Helper.EnumParseDefault(typeof(cls), (string)proxy.cls);
-            obj_uuid = proxy.obj_uuid == null ? null : proxy.obj_uuid;
-            timestamp = proxy.timestamp;
-            body = proxy.body == null ? null : proxy.body;
         }
 
         /// <summary>
@@ -138,19 +119,6 @@ namespace XenAPI
                 timestamp = Marshalling.ParseDateTime(table, "timestamp");
             if (table.ContainsKey("body"))
                 body = Marshalling.ParseString(table, "body");
-        }
-
-        public Proxy_Message ToProxy()
-        {
-            Proxy_Message result_ = new Proxy_Message();
-            result_.uuid = uuid ?? "";
-            result_.name = name ?? "";
-            result_.priority = priority.ToString();
-            result_.cls = cls_helper.ToString(cls);
-            result_.obj_uuid = obj_uuid ?? "";
-            result_.timestamp = timestamp;
-            result_.body = body ?? "";
-            return result_;
         }
 
         public bool DeepEquals(Message other)
@@ -194,10 +162,7 @@ namespace XenAPI
         /// <param name="_body">The body of the message</param>
         public static XenRef<Message> create(Session session, string _name, long _priority, cls _cls, string _obj_uuid, string _body)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.message_create(session.opaque_ref, _name, _priority, _cls, _obj_uuid, _body);
-            else
-                return XenRef<Message>.Create(session.XmlRpcProxy.message_create(session.opaque_ref, _name ?? "", _priority.ToString(), cls_helper.ToString(_cls), _obj_uuid ?? "", _body ?? "").parse());
+            return session.JsonRpcClient.message_create(session.opaque_ref, _name, _priority, _cls, _obj_uuid, _body);
         }
 
         /// <summary>
@@ -208,10 +173,7 @@ namespace XenAPI
         /// <param name="_message">The opaque_ref of the given message</param>
         public static void destroy(Session session, string _message)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.message_destroy(session.opaque_ref, _message);
-            else
-                session.XmlRpcProxy.message_destroy(session.opaque_ref, _message ?? "").parse();
+            session.JsonRpcClient.message_destroy(session.opaque_ref, _message);
         }
 
         /// <summary>
@@ -222,10 +184,7 @@ namespace XenAPI
         /// <param name="_messages">Messages to destroy</param>
         public static void destroy_many(Session session, List<XenRef<Message>> _messages)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.message_destroy_many(session.opaque_ref, _messages);
-            else
-                session.XmlRpcProxy.message_destroy_many(session.opaque_ref, _messages == null ? new string[] {} : Helper.RefListToStringArray(_messages)).parse();
+            session.JsonRpcClient.message_destroy_many(session.opaque_ref, _messages);
         }
 
         /// <summary>
@@ -236,10 +195,7 @@ namespace XenAPI
         /// <param name="_messages">Messages to destroy</param>
         public static XenRef<Task> async_destroy_many(Session session, List<XenRef<Message>> _messages)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_message_destroy_many(session.opaque_ref, _messages);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_message_destroy_many(session.opaque_ref, _messages == null ? new string[] {} : Helper.RefListToStringArray(_messages)).parse());
+          return session.JsonRpcClient.async_message_destroy_many(session.opaque_ref, _messages);
         }
 
         /// <summary>
@@ -252,10 +208,7 @@ namespace XenAPI
         /// <param name="_since">The cutoff time</param>
         public static Dictionary<XenRef<Message>, Message> get(Session session, cls _cls, string _obj_uuid, DateTime _since)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.message_get(session.opaque_ref, _cls, _obj_uuid, _since);
-            else
-                return XenRef<Message>.Create<Proxy_Message>(session.XmlRpcProxy.message_get(session.opaque_ref, cls_helper.ToString(_cls), _obj_uuid ?? "", _since).parse());
+            return session.JsonRpcClient.message_get(session.opaque_ref, _cls, _obj_uuid, _since);
         }
 
         /// <summary>
@@ -265,10 +218,7 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static List<XenRef<Message>> get_all(Session session)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.message_get_all(session.opaque_ref);
-            else
-                return XenRef<Message>.Create(session.XmlRpcProxy.message_get_all(session.opaque_ref).parse());
+            return session.JsonRpcClient.message_get_all(session.opaque_ref);
         }
 
         /// <summary>
@@ -279,10 +229,7 @@ namespace XenAPI
         /// <param name="_since">The cutoff time</param>
         public static Dictionary<XenRef<Message>, Message> get_since(Session session, DateTime _since)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.message_get_since(session.opaque_ref, _since);
-            else
-                return XenRef<Message>.Create<Proxy_Message>(session.XmlRpcProxy.message_get_since(session.opaque_ref, _since).parse());
+            return session.JsonRpcClient.message_get_since(session.opaque_ref, _since);
         }
 
         /// <summary>
@@ -293,10 +240,7 @@ namespace XenAPI
         /// <param name="_message">The opaque_ref of the given message</param>
         public static Message get_record(Session session, string _message)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.message_get_record(session.opaque_ref, _message);
-            else
-                return new Message(session.XmlRpcProxy.message_get_record(session.opaque_ref, _message ?? "").parse());
+            return session.JsonRpcClient.message_get_record(session.opaque_ref, _message);
         }
 
         /// <summary>
@@ -307,10 +251,7 @@ namespace XenAPI
         /// <param name="_uuid">The uuid of the message</param>
         public static XenRef<Message> get_by_uuid(Session session, string _uuid)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.message_get_by_uuid(session.opaque_ref, _uuid);
-            else
-                return XenRef<Message>.Create(session.XmlRpcProxy.message_get_by_uuid(session.opaque_ref, _uuid ?? "").parse());
+            return session.JsonRpcClient.message_get_by_uuid(session.opaque_ref, _uuid);
         }
 
         /// <summary>
@@ -320,10 +261,7 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static Dictionary<XenRef<Message>, Message> get_all_records(Session session)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.message_get_all_records(session.opaque_ref);
-            else
-                return XenRef<Message>.Create<Proxy_Message>(session.XmlRpcProxy.message_get_all_records(session.opaque_ref).parse());
+            return session.JsonRpcClient.message_get_all_records(session.opaque_ref);
         }
 
         /// <summary>
