@@ -35,7 +35,6 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using XenAdmin.Actions;
 using XenAdmin.Actions.OvfActions;
-using XenAdmin.Actions.VMActions;
 using XenAdmin.Commands;
 using XenAdmin.Controls;
 using XenAdmin.Core;

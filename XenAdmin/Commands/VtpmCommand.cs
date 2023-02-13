@@ -59,7 +59,7 @@ namespace XenAdmin.Commands
                    vm.IsRealVm() &&
                    !Helpers.FeatureForbidden(vm, Host.RestrictVtpm) &&
                    Helpers.XapiEqualOrGreater_22_26_0(vm.Connection) &&
-                   vm.IsUEFIEnabled();
+                   vm.IsHVM() && vm.IsDefaultBootModeUefi();
         }
 
         protected override string GetCantRunReasonCore(IXenObject item)
@@ -67,7 +67,7 @@ namespace XenAdmin.Commands
             if (item is VM vm &&
                 !Helpers.FeatureForbidden(vm, Host.RestrictVtpm) &&
                 Helpers.XapiEqualOrGreater_22_26_0(vm.Connection) &&
-                !vm.IsUEFIEnabled())
+                !(vm.IsHVM() && vm.IsDefaultBootModeUefi()))
                 return Messages.COMMAND_VTPM_DISABLED_NON_UEFI;
 
             return base.GetCantRunReasonCore(item);

@@ -940,8 +940,28 @@ namespace XenAdmin.TabPages
             {
                 s.AddEntry(FriendlyName("VM.BootOrder"), HVMBootOrder(vm),
                     new PropertiesToolStripMenuItem(new VmEditStartupOptionsCommand(Program.MainWindow, vm)));
+
                 if (Helpers.NaplesOrGreater(vm.Connection))
-                    s.AddEntry(FriendlyName("VM.BootMode"), HVMBootMode(vm));
+                {
+                    //see XSI-1362 for an explanation of this logic
+                    if (vm.IsHVM() && vm.IsDefaultBootModeUefi())
+                    {
+                        var secureBoot = vm.GetSecureBootMode();
+                        var pool = Helpers.GetPoolOfOne(vm.Connection);
+                        var poolHasCertificates = !string.IsNullOrEmpty(pool?.uefi_certificates);
+
+                        if (secureBoot == "true" && !poolHasCertificates)
+                            s.AddEntry(FriendlyName("VM.BootMode"), string.Format(Messages.CUSTOM_FIELD_NAME_AND_TYPE, Messages.UEFI_SECURE_BOOT, Messages.GUEFI_SECUREBOOT_MODE_MISSING_CERTIFICATES), Color.Red);
+                        else if (secureBoot == "true" || secureBoot == "auto" && poolHasCertificates)
+                            s.AddEntry(FriendlyName("VM.BootMode"), Messages.UEFI_SECURE_BOOT);
+                        else
+                            s.AddEntry(FriendlyName("VM.BootMode"), Messages.UEFI_BOOT);
+                    }
+                    else
+                    {
+                        s.AddEntry(FriendlyName("VM.BootMode"), Messages.BIOS_BOOT);
+                    }
+                }
             }
             else
             {
@@ -1887,15 +1907,6 @@ namespace XenAdmin.TabPages
         {
             var order = vm.GetBootOrder().ToUpper().Union(new[] { 'D', 'C', 'N' });
             return string.Join("\n", order.Select(c => new BootDevice(c).ToString()).ToArray());
-        }
-
-        private static string HVMBootMode(VM vm)
-        {
-            if (vm.IsSecureBootEnabled())
-                return Messages.UEFI_SECURE_BOOT;
-            if (vm.IsUEFIEnabled())
-                return Messages.UEFI_BOOT;
-            return Messages.BIOS_BOOT;
         }
 
         #endregion

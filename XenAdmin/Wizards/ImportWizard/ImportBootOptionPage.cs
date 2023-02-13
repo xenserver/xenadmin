@@ -29,7 +29,7 @@
  */
 
 using XenAdmin.Controls;
-using XenAdmin.Actions.VMActions;
+using XenAPI;
 
 namespace XenAdmin.Wizards.ImportWizard
 {
@@ -77,7 +77,7 @@ namespace XenAdmin.Wizards.ImportWizard
 
         #region Accessors
 		
-        public BootMode SelectedBootMode => bootModesControl1.SelectedOption;
+        public VmBootMode SelectedBootMode => bootModesControl1.SelectedBootMode;
 
         public bool AssignVtpm => bootModesControl1.AssignVtpm;
 
@@ -87,8 +87,8 @@ namespace XenAdmin.Wizards.ImportWizard
             {
                 switch (SelectedBootMode)
                 {
-                    case BootMode.UEFI_BOOT:
-                    case BootMode.UEFI_SECURE_BOOT:
+                    case VmBootMode.Uefi:
+                    case VmBootMode.SecureUefi:
                         return "firmware=uefi;";
                     default:
                         return string.Empty;
@@ -102,7 +102,7 @@ namespace XenAdmin.Wizards.ImportWizard
             {
                 switch (SelectedBootMode)
                 {
-                    case BootMode.UEFI_SECURE_BOOT:
+                    case VmBootMode.SecureUefi:
                         return "secureboot=true;";
                     default:
                         return string.Empty;
