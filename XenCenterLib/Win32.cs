@@ -31,10 +31,8 @@
 using System;
 using System.IO;
 using System.Reflection;
-using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
 using System.Text;
-using Microsoft.Win32.SafeHandles;
 
 namespace XenCenterLib
 {

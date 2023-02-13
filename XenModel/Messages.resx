@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -755,6 +755,15 @@ This could be because the data source is not generating any data. Ensure the pre
   <data name="ACTION_SAVE_SETTINGS" xml:space="preserve">
     <value>Save settings for '{0}'...</value>
   </data>
+  <data name="ACTION_SAVE_STATUS_REPORT_CANCELLED" xml:space="preserve">
+    <value>Saving system status canceled</value>
+  </data>
+  <data name="ACTION_SAVE_STATUS_REPORT_FAILED" xml:space="preserve">
+    <value>Saving system status failed</value>
+  </data>
+  <data name="ACTION_SAVE_STATUS_REPORT_FAILED_PARTIAL" xml:space="preserve">
+    <value>There was an error while saving the server status report. Only a partial report may be available</value>
+  </data>
   <data name="ACTION_SAVING_ALERTS_FOR" xml:space="preserve">
     <value>Saving alerts for '{0}'...</value>
   </data>
@@ -945,7 +954,16 @@ This could be because the data source is not generating any data. Ensure the pre
     <value>Stopping Docker Container '{0}'</value>
   </data>
   <data name="ACTION_SYSTEM_STATUS_CANCELLED" xml:space="preserve">
-    <value>Getting system status canceled</value>
+    <value>Canceled</value>
+  </data>
+  <data name="ACTION_SYSTEM_STATUS_COMPILE_FAILED" xml:space="preserve">
+    <value>No data was compiled. Press previous to select new items or servers and try again.</value>
+  </data>
+  <data name="ACTION_SYSTEM_STATUS_COMPILE_PARTIAL" xml:space="preserve">
+    <value>Finished compiling status report (with errors). A partial status report was saved.</value>
+  </data>
+  <data name="ACTION_SYSTEM_STATUS_COMPILE_SUCCESSFUL" xml:space="preserve">
+    <value>Status report was compiled and saved successfully.</value>
   </data>
   <data name="ACTION_SYSTEM_STATUS_COMPILING" xml:space="preserve">
     <value>Compiling status report for {0}</value>
@@ -956,14 +974,8 @@ This could be because the data source is not generating any data. Ensure the pre
   <data name="ACTION_SYSTEM_STATUS_DISK_FULL" xml:space="preserve">
     <value>Getting system status failed: disk full</value>
   </data>
-  <data name="ACTION_SYSTEM_STATUS_FAILED" xml:space="preserve">
-    <value>No data was compiled. Press previous to select new items or servers and try again.</value>
-  </data>
-  <data name="ACTION_SYSTEM_STATUS_SUCCESSFUL" xml:space="preserve">
-    <value>Finished compiling status report</value>
-  </data>
-  <data name="ACTION_SYSTEM_STATUS_SUCCESSFUL_PARTIAL" xml:space="preserve">
-    <value>Finished compiling status report (with errors). A partial status report was compiled.</value>
+  <data name="ACTION_SYSTEM_STATUS_SAVE_FAILED" xml:space="preserve">
+    <value>Failed to save the status report to specified location. Please try again.</value>
   </data>
   <data name="ACTION_SYSTEM_STATUS_TITLE" xml:space="preserve">
     <value>Getting system status information</value>
@@ -994,18 +1006,6 @@ This could be because the data source is not generating any data. Ensure the pre
   </data>
   <data name="ACTION_UPDATE_INTEGRATED_GPU_PASSTHROUGH_TITLE" xml:space="preserve">
     <value>Updating integrated GPU pass-through on '{0}'</value>
-  </data>
-  <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT" xml:space="preserve">
-    <value>Upload server status report to {0}</value>
-  </data>
-  <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT_FAILED" xml:space="preserve">
-    <value>Failed to upload the status report.</value>
-  </data>
-  <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT_PERCENTAGE" xml:space="preserve">
-    <value>Uploading report to {0} ({1} of {2})</value>
-  </data>
-  <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT_PROGRESS" xml:space="preserve">
-    <value>Uploading report to {0}</value>
   </data>
   <data name="ACTION_UPLOADPATCHTOCOORDINATORPLANACTION_FAILED" xml:space="preserve">
     <value>Upload error. The patch was uploaded, but it cannot be found on the host.</value>
@@ -2373,11 +2373,20 @@ This will cancel compilation of the status report.</value>
   <data name="BUGTOOL_REPORTSTATUS_DOWNLOADING" xml:space="preserve">
     <value>Downloading - {0}</value>
   </data>
+  <data name="BUGTOOL_REPORTSTATUS_DOWNLOADING_NO_DATA" xml:space="preserve">
+    <value>Downloading</value>
+  </data>
   <data name="BUGTOOL_REPORTSTATUS_FAILED" xml:space="preserve">
     <value>Failed - Please see logs for details</value>
   </data>
   <data name="BUGTOOL_REPORTSTATUS_QUEUED" xml:space="preserve">
     <value>Queued</value>
+  </data>
+  <data name="BUGTOOL_REPORTSTATUS_SAVING" xml:space="preserve">
+    <value>Saving - {0}%</value>
+  </data>
+  <data name="BUGTOOL_SAVE_STATUS_REPORT" xml:space="preserve">
+    <value>Saving report to selected destination</value>
   </data>
   <data name="BUGTOOL_SAVING" xml:space="preserve">
     <value>Saving server status report</value>
@@ -12385,12 +12394,6 @@ You may need to reboot your server(s) to enable SR-IOV network.</value>
   </data>
   <data name="STATUS_FILTER_QUEUED" xml:space="preserve">
     <value>Queued</value>
-  </data>
-  <data name="STATUS_REPORT_ENTER_CREDENTIALS_MESSAGE" xml:space="preserve">
-    <value>Enter your MyCitrix credentials (see {0}). These credentials will only be used to authenticate with {1} once and will not be stored on this machine or on your server.</value>
-  </data>
-  <data name="STATUS_REPORT_ZIP_FAILED" xml:space="preserve">
-    <value>There was an error while packaging the server status report. Only a partial report may be available</value>
   </data>
   <data name="STOPPED" xml:space="preserve">
     <value>Stopped</value>

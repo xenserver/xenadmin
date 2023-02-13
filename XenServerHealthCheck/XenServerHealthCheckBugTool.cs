@@ -176,7 +176,7 @@ namespace XenServerHealthCheck
                         p.Name()));
                 }
 
-                var statAction = new SingleHostStatusAction(host, 0, reportIncluded, filepath, timestring + "-" + ++i);
+                var statAction = new SingleHostStatusReportAction(host, 0, reportIncluded, filepath, timestring + "-" + ++i);
                 statAction.RunSync(session);
             }
 

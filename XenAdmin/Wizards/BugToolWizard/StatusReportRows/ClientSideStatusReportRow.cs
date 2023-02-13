@@ -28,45 +28,37 @@
  * SUCH DAMAGE.
  */
 
-using XenAdmin.Network;
-using XenAdmin.Wizards.BugToolWizard;
+using System.Collections.Generic;
+using XenAdmin.Actions;
+using XenAdmin.Core;
 using XenAPI;
 
-namespace XenAdmin.Commands
+namespace XenAdmin.Wizards.BugToolWizard
 {
-    internal class BugToolCommand : Command
+    partial class BugToolPageRetrieveData
     {
-        /// <summary>
-        /// Initializes a new instance of this Command. The parameter-less constructor is required if 
-        /// this Command is to be attached to a ToolStrip menu item or button. It should not be used in any other scenario.
-        /// </summary>
-        public BugToolCommand()
+        private class ClientSideStatusReportRow : StatusReportRow
         {
-        }
+            private readonly List<Host> _hosts;
+            private readonly bool _includeClientLogs;
+            private ClientSideStatusReportAction _action;
 
-        public BugToolCommand(IMainWindow mainWindow)
-            : base(mainWindow)
-        {
-        }
-
-        protected override void RunCore(SelectedItemCollection selection)
-        {
-            if (selection != null && selection.AllItemsAre<IXenObject>(x => x is Host || x is Pool))
-                MainWindowCommandInterface.ShowForm(typeof(BugToolWizard), selection.AsXenObjects<IXenObject>().ToArray());
-            else
-                MainWindowCommandInterface.ShowForm(typeof(BugToolWizard));
-        }
-
-        protected override bool CanRunCore(SelectedItemCollection selection)
-        {
-            foreach (IXenConnection xenConnection in ConnectionsManager.XenConnectionsCopy)
+            public ClientSideStatusReportRow(List<Host> hosts, bool includeClientLogs)
             {
-                if (xenConnection.IsConnected)
-                {
-                    return true;
-                }
+                _hosts = hosts;
+                _includeClientLogs = includeClientLogs;
+                cellHostImg.Value = Images.StaticImages._000_GetServerReport_h32bit_16;
+                cellHost.Value = includeClientLogs
+                    ? string.Format(Messages.BUGTOOL_CLIENT_LOGS_META, BrandManager.BrandConsole)
+                    : string.Format(Messages.BUGTOOL_CLIENT_META, BrandManager.BrandConsole);
             }
-            return false;
+
+            public override StatusReportAction Action => _action;
+
+            protected override void CreateAction(string path, string time)
+            {
+                _action = new ClientSideStatusReportAction(_hosts, _includeClientLogs, path, time);
+            }
         }
     }
 }

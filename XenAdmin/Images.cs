@@ -865,6 +865,7 @@ namespace XenAdmin
             public static Bitmap RightArrow = Properties.Resources.RightArrow;
             public static Bitmap LeftArrow = Properties.Resources.LeftArrow;
             public static Bitmap RunningDC_16 = Properties.Resources.RunningDC_16;
+            public static Bitmap save_to_disk = Properties.Resources.save_to_disk;
             public static Bitmap saved_searches_16 = Properties.Resources.saved_searches_16;
             public static Bitmap saved_searches_24 = Properties.Resources.saved_searches_24;
             public static Bitmap scilinux_16x = Properties.Resources.scilinux_16x;

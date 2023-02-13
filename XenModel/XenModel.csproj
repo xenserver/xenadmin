@@ -69,7 +69,6 @@
     <Compile Include="Actions\HealthCheck\TransferProxySettingsAction.cs" />
     <Compile Include="Actions\HealthCheck\GetHealthCheckAnalysisResultAction.cs" />
     <Compile Include="Actions\HealthCheck\TransferXenCenterMetadataAction.cs" />
-    <Compile Include="Actions\HealthCheck\UploadServerStatusReportAction.cs" />
     <Compile Include="Actions\HealthCheck\XenServerHealthCheckUpload.cs" />
     <Compile Include="Actions\CancellingAction.cs" />
     <Compile Include="Actions\DockerContainer\DockerContainerLifetimeAction.cs" />

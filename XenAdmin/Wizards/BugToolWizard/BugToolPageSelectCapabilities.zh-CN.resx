@@ -134,13 +134,13 @@
     <value>True</value>
   </metadata>
   <data name="columnItem.HeaderText" xml:space="preserve">
-    <value>レポート項目</value>
+    <value>报告内容项目</value>
   </data>
   <metadata name="columnImage.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="columnImage.HeaderText" xml:space="preserve">
-    <value>機密保護レベル</value>
+    <value>机密性等级</value>
   </data>
   <data name="columnImage.MinimumWidth" type="System.Int32, mscorlib">
     <value>20</value>
@@ -175,13 +175,13 @@
     <value>271, 327</value>
   </data>
   <data name="SelectButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 23</value>
+    <value>75, 23</value>
   </data>
   <data name="SelectButton.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="SelectButton.Text" xml:space="preserve">
-    <value>すべて選択(&amp;S)</value>
+    <value>全选(&amp;S)</value>
   </data>
   <data name="&gt;&gt;SelectButton.Name" xml:space="preserve">
     <value>SelectButton</value>
@@ -199,13 +199,13 @@
     <value>352, 327</value>
   </data>
   <data name="ClearButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 23</value>
+    <value>95, 23</value>
   </data>
   <data name="ClearButton.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="ClearButton.Text" xml:space="preserve">
-    <value>すべてクリア(&amp;C)</value>
+    <value>全部清除(&amp;C)</value>
   </data>
   <data name="&gt;&gt;ClearButton.Name" xml:space="preserve">
     <value>ClearButton</value>
@@ -229,7 +229,7 @@
     <value>2</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>503, 369</value>
+    <value>430, 353</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -270,9 +270,6 @@
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 0</value>
   </data>
-  <data name="label1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 24</value>
-  </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>618, 50</value>
   </data>
@@ -280,7 +277,7 @@
     <value>0</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>状態レポートに追加する項目を選択します。各項目を選択すると、サイズおよび詳細を確認できます。</value>
+    <value>选择要包含在状态报告中的项目。您可以看到报告的大小，以及项目列表右侧有关各项目的特定详细信息。</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
@@ -304,19 +301,19 @@
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
   <data name="DescriptionLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
+    <value>3, 29</value>
   </data>
   <data name="DescriptionLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
   <data name="DescriptionLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 17</value>
+    <value>71, 13</value>
   </data>
   <data name="DescriptionLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="DescriptionLabel.Text" xml:space="preserve">
-    <value>説明</value>
+    <value>说明</value>
   </data>
   <data name="&gt;&gt;DescriptionLabel.Name" xml:space="preserve">
     <value>DescriptionLabel</value>
@@ -337,13 +334,13 @@
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="DescriptionValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 68</value>
+    <value>15, 48</value>
   </data>
   <data name="DescriptionValue.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>15, 3, 3, 3</value>
   </data>
   <data name="DescriptionValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 16</value>
+    <value>0, 13</value>
   </data>
   <data name="DescriptionValue.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -367,19 +364,19 @@
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
   <data name="SizeLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 90</value>
+    <value>3, 67</value>
   </data>
   <data name="SizeLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
   <data name="SizeLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>27, 17</value>
+    <value>31, 13</value>
   </data>
   <data name="SizeLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="SizeLabel.Text" xml:space="preserve">
-    <value>サイズ</value>
+    <value>大小</value>
   </data>
   <data name="&gt;&gt;SizeLabel.Name" xml:space="preserve">
     <value>SizeLabel</value>
@@ -400,13 +397,13 @@
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="SizeValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 113</value>
+    <value>15, 86</value>
   </data>
   <data name="SizeValue.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>15, 3, 3, 3</value>
   </data>
   <data name="SizeValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 16</value>
+    <value>0, 13</value>
   </data>
   <data name="SizeValue.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -430,19 +427,19 @@
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
   <data name="TotalSizeLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 323</value>
+    <value>3, 334</value>
   </data>
   <data name="TotalSizeLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
   <data name="TotalSizeLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 17</value>
+    <value>68, 13</value>
   </data>
   <data name="TotalSizeLabel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="TotalSizeLabel.Text" xml:space="preserve">
-    <value>合計サイズ:</value>
+    <value>总大小:</value>
   </data>
   <data name="&gt;&gt;TotalSizeLabel.Name" xml:space="preserve">
     <value>TotalSizeLabel</value>
@@ -463,13 +460,13 @@
     <value>True</value>
   </data>
   <data name="TotalSizeValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>109, 323</value>
+    <value>251, 334</value>
   </data>
   <data name="TotalSizeValue.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
   <data name="TotalSizeValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 15</value>
+    <value>0, 13</value>
   </data>
   <data name="TotalSizeValue.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -499,7 +496,7 @@
     <value>5</value>
   </data>
   <data name="tableLayoutPanel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>112, 366</value>
+    <value>254, 369</value>
   </data>
   <data name="tableLayoutPanel4.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -562,7 +559,7 @@
     <value>5</value>
   </data>
   <data name="linkLabel1.Text" xml:space="preserve">
-    <value>{0} 個人情報保護ポリシー</value>
+    <value>{0} 隐私声明</value>
   </data>
   <data name="&gt;&gt;linkLabel1.Name" xml:space="preserve">
     <value>linkLabel1</value>

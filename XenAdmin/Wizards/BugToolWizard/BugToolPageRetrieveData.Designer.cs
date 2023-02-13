@@ -1,4 +1,4 @@
-namespace XenAdmin.Wizards.BugToolWizardFiles
+namespace XenAdmin.Wizards.BugToolWizard
 {
     partial class BugToolPageRetrieveData
     {
@@ -43,7 +43,6 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.labelBlurb = new System.Windows.Forms.Label();
             this.labelError = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.dataGridViewEx1 = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
@@ -51,6 +50,9 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             this.columnHost = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnHostStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnResultImage = new System.Windows.Forms.DataGridViewImageColumn();
+            this.labelBlurb = new System.Windows.Forms.Label();
+            this.linkLabelBlurb = new System.Windows.Forms.LinkLabel();
+            this.labelBlurbCis = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEx1)).BeginInit();
             this.SuspendLayout();
@@ -58,25 +60,24 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.labelError, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.progressBar1, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.dataGridViewEx1, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.labelBlurb, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.labelError, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.progressBar1, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.dataGridViewEx1, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.linkLabelBlurb, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.labelBlurbCis, 0, 1);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            // 
-            // labelBlurb
-            // 
-            resources.ApplyResources(this.labelBlurb, "labelBlurb");
-            this.labelBlurb.Name = "labelBlurb";
             // 
             // labelError
             // 
             resources.ApplyResources(this.labelError, "labelError");
+            this.tableLayoutPanel1.SetColumnSpan(this.labelError, 2);
             this.labelError.Name = "labelError";
             // 
             // progressBar1
             // 
             resources.ApplyResources(this.progressBar1, "progressBar1");
+            this.tableLayoutPanel1.SetColumnSpan(this.progressBar1, 2);
             this.progressBar1.Name = "progressBar1";
             // 
             // dataGridViewEx1
@@ -90,6 +91,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             this.columnHost,
             this.columnHostStatus,
             this.columnResultImage});
+            this.tableLayoutPanel1.SetColumnSpan(this.dataGridViewEx1, 2);
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -133,6 +135,24 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             resources.ApplyResources(this.columnResultImage, "columnResultImage");
             this.columnResultImage.Name = "columnResultImage";
             // 
+            // labelBlurb
+            // 
+            resources.ApplyResources(this.labelBlurb, "labelBlurb");
+            this.tableLayoutPanel1.SetColumnSpan(this.labelBlurb, 2);
+            this.labelBlurb.Name = "labelBlurb";
+            // 
+            // linkLabelBlurb
+            // 
+            resources.ApplyResources(this.linkLabelBlurb, "linkLabelBlurb");
+            this.linkLabelBlurb.Name = "linkLabelBlurb";
+            this.linkLabelBlurb.TabStop = true;
+            this.linkLabelBlurb.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelBlurb_LinkClicked);
+            // 
+            // labelBlurbCis
+            // 
+            resources.ApplyResources(this.labelBlurbCis, "labelBlurbCis");
+            this.labelBlurbCis.Name = "labelBlurbCis";
+            // 
             // BugToolPageRetrieveData
             // 
             this.Controls.Add(this.tableLayoutPanel1);
@@ -151,11 +171,13 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label labelError;
         private System.Windows.Forms.ProgressBar progressBar1;
-        private System.Windows.Forms.Label labelBlurb;
         private Controls.DataGridViewEx.DataGridViewEx dataGridViewEx1;
         private System.Windows.Forms.DataGridViewImageColumn columnHostImage;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnHost;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnHostStatus;
         private System.Windows.Forms.DataGridViewImageColumn columnResultImage;
+        private System.Windows.Forms.Label labelBlurb;
+        private System.Windows.Forms.LinkLabel linkLabelBlurb;
+        private System.Windows.Forms.Label labelBlurbCis;
     }
 }

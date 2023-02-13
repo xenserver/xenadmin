@@ -38,7 +38,7 @@ using XenAPI;
 
 namespace XenAdmin.Actions
 {
-    public enum ReportStatus { queued, compiling, downloading, succeeded, failed, cancelled }
+    public enum ReportStatus { queued, inProgress, succeeded, failed, cancelled }
 
     public abstract class StatusReportAction : AsyncAction
     {
@@ -48,23 +48,29 @@ namespace XenAdmin.Actions
         public ReportStatus Status { get; protected set; }
         public Exception Error { get; protected set; }
 
-        protected StatusReportAction(IXenConnection connection, string title, string filePath, string timeString)
-            :base(connection, title, true)
+        protected StatusReportAction(IXenConnection connection, string title, string filePath, string timeString, bool suppressHistory = true)
+            : base(connection, title, suppressHistory)
         {
             this.filePath = filePath;
             this.timeString = timeString;
             Status = ReportStatus.queued;
         }
+
+        public new void Cancel()
+        {
+            base.Cancel();
+            Status = ReportStatus.cancelled;
+        }
     }
 
-    public class StatusReportClientSideAction : StatusReportAction
+    public class ClientSideStatusReportAction : StatusReportAction
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private readonly List<Host> hosts;
         private readonly bool includeClientLogs;
 
-        public StatusReportClientSideAction(List<Host> hosts, bool includeClientLogs, string filePath, string timeString)
+        public ClientSideStatusReportAction(List<Host> hosts, bool includeClientLogs, string filePath, string timeString)
             : base(null,
                 includeClientLogs
                     ? string.Format(Messages.BUGTOOL_CLIENT_ACTION_LOGS_META, BrandManager.BrandConsole)
@@ -79,7 +85,7 @@ namespace XenAdmin.Actions
         {
             try
             {
-                Status = ReportStatus.compiling;
+                Status = ReportStatus.inProgress;
                 CopyClientLogs();
                 CompileCoordinatorSupporterInfo();
                 CompileClientMetadata();

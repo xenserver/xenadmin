@@ -32,6 +32,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Dialogs;
+using XenAdmin.Wizards.BugToolWizard;
 using XenAPI;
 
 
@@ -74,7 +75,7 @@ namespace XenAdmin.Commands
                 if (result == DialogResult.OK)
                     new DestroyHostCrashDumpAction(host).RunAsync();
                 else if (result == DialogResult.Ignore)
-                    new Wizards.BugToolWizard(host).Show();
+                    new BugToolWizard(host).Show();
             }
         }
 

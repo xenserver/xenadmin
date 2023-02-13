@@ -31,28 +31,23 @@
 using System;
 using System.IO;
 using System.Windows.Forms;
-using XenAdmin.Actions;
 using XenAdmin.Controls;
 using XenAdmin.Controls.Common;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
 using XenCenterLib;
 using XenModel;
-using Registry = XenAdmin.Core.Registry;
 
 
-namespace XenAdmin.Wizards.BugToolWizardFiles
+namespace XenAdmin.Wizards.BugToolWizard
 {
     public partial class BugToolPageDestination : XenTabPage
     {
-        private bool m_buttonNextEnabled;
-
-        private const int TokenExpiration = 86400; // 24 hours
+        private bool _buttonNextEnabled;
 
         public BugToolPageDestination()
         {
             InitializeComponent();
-            uploadCheckBox.Text = string.Format(uploadCheckBox.Text, BrandManager.Cis);
         }
 
         public override string Text => Messages.BUGTOOL_PAGE_DESTINATION_TEXT;
@@ -63,7 +58,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
 
         public override bool EnableNext()
         {
-            return m_buttonNextEnabled;
+            return _buttonNextEnabled;
         }
 
         protected override void PageLoadedCore(PageLoadedDirection direction)
@@ -71,9 +66,10 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             if (direction != PageLoadedDirection.Forward)
                 return;
 
-            m_textBoxName.Text = string.Format("{0}{1}.zip", Messages.BUGTOOL_FILE_PREFIX, HelpersGUI.DateTimeToString(DateTime.Now, "yyyy-MM-dd-HH-mm-ss", false));
+            m_textBoxName.Text =
+                $"{Messages.BUGTOOL_FILE_PREFIX}{HelpersGUI.DateTimeToString(DateTime.Now, "yyyy-MM-dd-HH-mm-ss", false)}.zip";
 
-            string initialDirectory = Properties.Settings.Default.ServerStatusPath;
+            var initialDirectory = Properties.Settings.Default.ServerStatusPath;
             
             try
             {
@@ -91,16 +87,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             else
                 m_textBoxLocation.Text = initialDirectory;
 
-            string enterCredentialsMessage = string.Format(Messages.STATUS_REPORT_ENTER_CREDENTIALS_MESSAGE,
-                Messages.MY_CITRIX_CREDENTIALS_URL, BrandManager.Cis);
-            enterCredentialsLinkLabel.Text = enterCredentialsMessage;
-            enterCredentialsLinkLabel.LinkArea = new LinkArea(enterCredentialsMessage.IndexOf(Messages.MY_CITRIX_CREDENTIALS_URL), Messages.MY_CITRIX_CREDENTIALS_URL.Length);
-
-            usernameTextBox.Visible = usernameLabel.Visible = passwordLabel.Visible = passwordTextBox.Visible =
-                caseNumberLabel.Visible = caseNumberTextBox.Visible = optionalLabel.Visible =
-                enterCredentialsLinkLabel.Visible = uploadCheckBox.Visible = !HiddenFeatures.UploadOptionHidden;
-
-            PerformCheck(CheckPathValid, CheckCredentialsEntered);
+            PerformCheck(CheckPathValid);
         }
 
         protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
@@ -108,7 +95,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             if (direction != PageLoadedDirection.Forward)
                 return;
 
-            if (!PerformCheck(CheckPathValid, CheckDestinationFolderExists, CheckCredentialsEntered, CheckUploadAuthentication))
+            if (!PerformCheck(CheckPathValid, CheckDestinationFolderExists))
             {
                 cancel = true;
                 return;
@@ -133,18 +120,22 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             // Check we can write to the destination file - otherwise we only find out at the 
             // end of the ZipStatusReportAction, and the downloaded server files are lost,
             // and the user will have to run the wizard again.
+            FileStream stream = null;
             try
             {
-                using (File.OpenWrite(path)) { }
+                stream = File.OpenWrite(path);
             }
             catch (Exception exn)
             {
-                // Failure
                 using (var dlg = new ErrorDialog(string.Format(Messages.COULD_NOT_WRITE_FILE, path, exn.Message)))
                     dlg.ShowDialog(this);
 
                 cancel = true;
                 return;
+            }
+            finally
+            {
+                stream?.Dispose();
             }
 
             // Save away the output directory for next time
@@ -166,32 +157,14 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                 if (!name.EndsWith(".zip"))
                     name = string.Concat(name, ".zip");
 
-                return string.Format(@"{0}\{1}", folder, name);
-            }
-        }
-
-        public bool Upload
-        {
-            get
-            {
-                return uploadCheckBox.Checked;
-            }
-        }
-
-        public string UploadToken { get; private set; }
-
-        public string CaseNumber
-        {
-            get
-            {
-                return caseNumberTextBox.Text.Trim();
+                return $@"{folder}\{name}";
             }
         }
 
         private bool PerformCheck(params CheckDelegate[] checks)
         {
-            bool success = m_ctrlError.PerformCheck(checks);
-            m_buttonNextEnabled = success;
+            var success = m_ctrlError.PerformCheck(checks);
+            _buttonNextEnabled = success;
             OnPageUpdated();
             return success;
         }
@@ -203,21 +176,21 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             var name = m_textBoxName.Text.Trim();
             var folder = m_textBoxLocation.Text.Trim();
 
-            if (String.IsNullOrEmpty(name))
+            if (string.IsNullOrEmpty(name))
                 return false;
 
-            if (!PathValidator.IsFileNameValid(name, out string invalidNameMsg))
+            if (!PathValidator.IsFileNameValid(name, out var invalidNameMsg))
             {
                 error = $"{Messages.BUGTOOL_PAGE_DESTINATION_INVALID_NAME} {invalidNameMsg}";
                 return false;
             }
 
-            if (String.IsNullOrEmpty(folder))
+            if (string.IsNullOrEmpty(folder))
                 return false;
 
-            string path = String.Format("{0}\\{1}", folder, name);
+            var path = $"{folder}\\{name}";
 
-            if (!PathValidator.IsPathValid(path, out string invalidPathMsg))
+            if (!PathValidator.IsPathValid(path, out var invalidPathMsg))
             {
                 error = $"{Messages.BUGTOOL_PAGE_DESTINATION_INVALID_FOLDER} {invalidPathMsg}";
                 return false;
@@ -238,109 +211,29 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             return false;
         }
 
-        private bool CheckCredentialsEntered(out string error)
-        {
-            error = string.Empty;
-
-            if (!uploadCheckBox.Checked)
-                return true;
-
-            if (string.IsNullOrEmpty(usernameTextBox.Text.Trim()) || string.IsNullOrEmpty(passwordTextBox.Text))
-                return false;
-
-            return true;
-        }
-
-        private bool CheckUploadAuthentication(out string error)
-        {
-            error = string.Empty;
-
-            if (!uploadCheckBox.Checked)
-                return true;
-            
-            if (string.IsNullOrEmpty(usernameTextBox.Text.Trim()) || string.IsNullOrEmpty(passwordTextBox.Text))
-                return false;
-
-            var action = new HealthCheckAuthenticationAction(usernameTextBox.Text.Trim(), passwordTextBox.Text.Trim(),
-                Registry.HealthCheckIdentityTokenDomainName, Registry.HealthCheckUploadGrantTokenDomainName,
-                Registry.HealthCheckUploadTokenDomainName, Registry.HealthCheckDiagnosticDomainName, Registry.HealthCheckProductKey, 
-                TokenExpiration, false, false);
-
-            using (var dlg = new ActionProgressDialog(action, ProgressBarStyle.Blocks))
-                dlg.ShowDialog(Parent);
-
-            if (!action.Succeeded)
-            {
-                error = action.Exception != null ? action.Exception.Message : Messages.ERROR_UNKNOWN;
-                UploadToken = null;
-                return false;
-            }
-           
-            UploadToken = action.UploadToken;  // current upload token
-            return !string.IsNullOrEmpty(UploadToken);
-        }
-
-        private bool CheckCaseNumberValid(out string error)
-        {
-            error = string.Empty;
-
-            if (!uploadCheckBox.Checked || string.IsNullOrEmpty(caseNumberTextBox.Text.Trim()))
-                return true;
-
-            ulong val;
-            if (ulong.TryParse(caseNumberTextBox.Text.Trim(), out val) && val > 0 && val < 1000000000)
-                return true;
-
-            error = Messages.BUGTOOL_PAGE_DESTINATION_INVALID_CASE_NO;
-            return false;
-        }
-
         #region Control event handlers
 
         private void m_textBoxName_TextChanged(object sender, EventArgs e)
         {
-            PerformCheck(CheckPathValid, CheckCaseNumberValid, CheckCredentialsEntered);
+            PerformCheck(CheckPathValid);
         }
 
         private void m_textBoxLocation_TextChanged(object sender, EventArgs e)
         {
-            PerformCheck(CheckPathValid, CheckCaseNumberValid, CheckCredentialsEntered);
+            PerformCheck(CheckPathValid);
         }
 
         private void BrowseButton_Click(object sender, EventArgs e)
         {
-            using (var dlog = new FolderBrowserDialog
+            using (var dialog = new FolderBrowserDialog
             {
                 SelectedPath = m_textBoxLocation.Text.Trim(),
                 Description = Messages.FOLDER_BROWSER_BUG_TOOL
             })
             {
-                if (dlog.ShowDialog() == DialogResult.OK)
-                    m_textBoxLocation.Text = dlog.SelectedPath;
+                if (dialog.ShowDialog() == DialogResult.OK)
+                    m_textBoxLocation.Text = dialog.SelectedPath;
             }
-        }
-
-        private void uploadCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            PerformCheck(CheckPathValid, CheckCaseNumberValid, CheckCredentialsEntered);
-        }
-
-        private void credentials_TextChanged(object sender, EventArgs e)
-        {
-            uploadCheckBox.Checked = true;
-            PerformCheck(CheckPathValid, CheckCaseNumberValid, CheckCredentialsEntered);
-        }
-        
-        private void caseNumberLabelTextBox_TextChanged(object sender, EventArgs e)
-        {
-            uploadCheckBox.Checked = true;
-            PerformCheck(CheckPathValid, CheckCaseNumberValid, CheckCredentialsEntered);
-        }
-
-        private void enterCredentialsLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            this.enterCredentialsLinkLabel.LinkVisited = true;
-            Program.OpenURL(Messages.MY_CITRIX_CREDENTIALS_URL);
         }
 
         #endregion

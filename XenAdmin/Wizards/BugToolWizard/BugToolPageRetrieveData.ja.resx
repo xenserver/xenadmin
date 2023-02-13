@@ -139,9 +139,9 @@
     <value>1</value>
   </data>
   <data name="labelBlurb.Text" xml:space="preserve">
-    <value>{0} 正在收集您的状态报告。如果在上一步中指定了此报告，它将包含您的每个指定服务器的报告和 {0} 日志。
+    <value>{0} で状態レポートを生成しています。このレポートは、選択した各サーバーおよび {0} のログ (前の手順で指定した場合) から情報を収集して作成されます。
 
-要收集新的状态报告或更改报告中包含的项目，请按上一步按钮。返回到此步骤时将收集新的报告。</value>
+新しい状態レポートを作成したり、レポートに追加する項目を変更したりする場合は、[前へ] をクリックします。このページに戻ると、新しいレポートが生成されます。</value>
   </data>
   <data name="&gt;&gt;labelBlurb.Name" xml:space="preserve">
     <value>labelBlurb</value>
@@ -167,12 +167,6 @@
   <data name="labelError.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 402</value>
   </data>
-  <data name="labelError.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="labelError.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
   <data name="labelError.Size" type="System.Drawing.Size, System.Drawing">
     <value>677, 15</value>
   </data>
@@ -193,9 +187,6 @@
   </data>
   <data name="&gt;&gt;labelError.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="progressBar1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
   </data>
   <data name="progressBar1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>

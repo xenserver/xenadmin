@@ -35,7 +35,6 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Text;
-using XenAdmin.Core;
 using XenAPI;
 
 namespace XenAdmin.Alerts
