@@ -991,7 +991,7 @@
     <value>Agent Memory Usage</value>
   </data>
   <data name="Label-performance.xapi_open_fds" xml:space="preserve">
-    <value>Number of open file descriptors</value>
+    <value>Agent open file descriptors</value>
   </data>
   <data name="Label-performance.xapi_rx" xml:space="preserve">
     <value>&lt;Internal&gt; Network {0} Receive</value>

@@ -2680,7 +2680,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Number of open file descriptors.
+        ///   Looks up a localized string similar to Agent open file descriptors.
         /// </summary>
         public static string Label_performance_xapi_open_fds {
             get {

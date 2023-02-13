@@ -61,11 +61,7 @@ namespace XenAdmin.Controls.CustomDataGraph
         public DataSet(IXenObject xo, bool hide, string datasourceName, List<Data_source> datasources)
         {
             XenObject = xo;
-            Hide = datasourceName == "xapi_open_fds" ||
-                   datasourceName == "pool_task_count" ||
-                   datasourceName == "pool_session_count" ||
-                   datasourceName == "memory" ||
-                   datasourceName == "memory_total_kib" || hide;
+            Hide = datasourceName == "memory" || datasourceName == "memory_total_kib" || hide;
 
             DataSourceName = datasourceName;
 
@@ -100,6 +96,8 @@ namespace XenAdmin.Controls.CustomDataGraph
                     CustomYRange = new DataRange(1, 0, 1, Unit.MegaHertz, RangeScaleMode.Auto);
                     break;
                 case "requests/s":
+                case "hits/s":
+                case "misses/s":
                 case "err/s":
                     CustomYRange = new DataRange(1, 0, 1, Unit.CountsPerSecond, RangeScaleMode.Auto);
                     break;

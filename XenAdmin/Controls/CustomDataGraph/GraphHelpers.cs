@@ -178,7 +178,7 @@ namespace XenAdmin.Controls.CustomDataGraph
 
             foreach (Data_source dataSource in dataSources)
             {
-                if (dataSource.name_label == "memory_total_kib" || dataSource.name_label == "memory" || dataSource.name_label == "xapi_open_fds" || dataSource.name_label == "pool_task_count" || dataSource.name_label == "pool_session_count")
+                if (dataSource.name_label == "memory_total_kib" || dataSource.name_label == "memory")
                     continue;
 
                 string friendlyName;

@@ -37,11 +37,6 @@
             this.CloseButton = new System.Windows.Forms.Button();
             this.GraphNameTextBox = new System.Windows.Forms.TextBox();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.ColumnDisplayOnGraph = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnEnabled = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnColour = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBoxProgress = new System.Windows.Forms.PictureBox();
             this.labelProgress = new System.Windows.Forms.Label();
@@ -56,6 +51,12 @@
             this.toolStripMenuItemDisabled = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonClearAll = new System.Windows.Forms.Button();
             this.buttonEnable = new System.Windows.Forms.Button();
+            this.ColumnDisplayOnGraph = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnEnabled = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnColour = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProgress)).BeginInit();
@@ -105,6 +106,7 @@
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnDisplayOnGraph,
             this.ColumnName,
+            this.Description,
             this.ColumnType,
             this.ColumnEnabled,
             this.ColumnColour});
@@ -123,48 +125,6 @@
             this.dataGridView.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.datasourcesGridView_CellPainting);
             this.dataGridView.SelectionChanged += new System.EventHandler(this.dataGridView_SelectionChanged);
             this.dataGridView.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.dataGridView_SortCompare);
-            // 
-            // ColumnDisplayOnGraph
-            // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.NullValue = false;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            this.ColumnDisplayOnGraph.DefaultCellStyle = dataGridViewCellStyle1;
-            resources.ApplyResources(this.ColumnDisplayOnGraph, "ColumnDisplayOnGraph");
-            this.ColumnDisplayOnGraph.Name = "ColumnDisplayOnGraph";
-            this.ColumnDisplayOnGraph.ReadOnly = true;
-            this.ColumnDisplayOnGraph.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ColumnDisplayOnGraph.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // ColumnName
-            // 
-            this.ColumnName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            resources.ApplyResources(this.ColumnName, "ColumnName");
-            this.ColumnName.Name = "ColumnName";
-            this.ColumnName.ReadOnly = true;
-            // 
-            // ColumnType
-            // 
-            this.ColumnType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            resources.ApplyResources(this.ColumnType, "ColumnType");
-            this.ColumnType.Name = "ColumnType";
-            this.ColumnType.ReadOnly = true;
-            // 
-            // ColumnEnabled
-            // 
-            resources.ApplyResources(this.ColumnEnabled, "ColumnEnabled");
-            this.ColumnEnabled.Name = "ColumnEnabled";
-            this.ColumnEnabled.ReadOnly = true;
-            // 
-            // ColumnColour
-            // 
-            this.ColumnColour.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            resources.ApplyResources(this.ColumnColour, "ColumnColour");
-            this.ColumnColour.Name = "ColumnColour";
-            this.ColumnColour.ReadOnly = true;
-            this.ColumnColour.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ColumnColour.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // tableLayoutPanel1
             // 
@@ -275,6 +235,55 @@
             this.buttonEnable.UseVisualStyleBackColor = true;
             this.buttonEnable.Click += new System.EventHandler(this.buttonEnable_Click);
             // 
+            // ColumnDisplayOnGraph
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.NullValue = false;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            this.ColumnDisplayOnGraph.DefaultCellStyle = dataGridViewCellStyle1;
+            resources.ApplyResources(this.ColumnDisplayOnGraph, "ColumnDisplayOnGraph");
+            this.ColumnDisplayOnGraph.Name = "ColumnDisplayOnGraph";
+            this.ColumnDisplayOnGraph.ReadOnly = true;
+            this.ColumnDisplayOnGraph.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ColumnDisplayOnGraph.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // ColumnName
+            // 
+            this.ColumnName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            resources.ApplyResources(this.ColumnName, "ColumnName");
+            this.ColumnName.Name = "ColumnName";
+            this.ColumnName.ReadOnly = true;
+            // 
+            // Description
+            // 
+            this.Description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            resources.ApplyResources(this.Description, "Description");
+            this.Description.Name = "Description";
+            this.Description.ReadOnly = true;
+            // 
+            // ColumnType
+            // 
+            this.ColumnType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.ColumnType, "ColumnType");
+            this.ColumnType.Name = "ColumnType";
+            this.ColumnType.ReadOnly = true;
+            // 
+            // ColumnEnabled
+            // 
+            resources.ApplyResources(this.ColumnEnabled, "ColumnEnabled");
+            this.ColumnEnabled.Name = "ColumnEnabled";
+            this.ColumnEnabled.ReadOnly = true;
+            // 
+            // ColumnColour
+            // 
+            this.ColumnColour.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            resources.ApplyResources(this.ColumnColour, "ColumnColour");
+            this.ColumnColour.Name = "ColumnColour";
+            this.ColumnColour.ReadOnly = true;
+            this.ColumnColour.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ColumnColour.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
             // GraphDetailsDialog
             // 
             this.AcceptButton = this.SaveButton;
@@ -323,6 +332,7 @@
         private System.Windows.Forms.Button buttonClearAll;
         private System.Windows.Forms.DataGridViewCheckBoxColumn ColumnDisplayOnGraph;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Description;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnType;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnEnabled;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnColour;
