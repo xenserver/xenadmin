@@ -287,7 +287,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
             //Deprecated SRs checks 
             var deprecatedSRsChecks = (from Host host in SelectedCoordinators
-                let check = new PoolHasDeprecatedSrsCheck(host)
+                let check = new PoolHasDeprecatedSrsCheck(host, InstallMethodConfig, ManualUpgrade)
                 where check.CanRun()
                 select check as Check).ToList();
 

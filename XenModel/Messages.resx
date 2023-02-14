@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -10696,7 +10696,7 @@ Please reconnect the host and try again</value>
     <value>Could not find the pool in {0}'s cache.</value>
   </data>
   <data name="POOL_HAS_DEPRECATED_FCOE_WARNING" xml:space="preserve">
-    <value>{0}: Support for Software FCoE SRs has been deprecated</value>
+    <value>{0}: Support for Software FCoE SRs has been deprecated in {1}</value>
   </data>
   <data name="POOL_HAS_MIXED_LICENSES" xml:space="preserve">
     <value>This pool has hosts with different types of license.</value>
@@ -10743,6 +10743,9 @@ Support for PV guests has been removed in {1}. Click Learn more to see the list 
   </data>
   <data name="POOL_LICENSE" xml:space="preserve">
     <value>Pool License</value>
+  </data>
+  <data name="POOL_MAY_HAVE_DEPRECATED_FCOE_WARNING" xml:space="preserve">
+    <value>{0}: If you are upgrading to {1}, support for Software FCoE SRs has been deprecated</value>
   </data>
   <data name="POOL_NAME_EMPTY" xml:space="preserve">
     <value>Pool name cannot be empty</value>

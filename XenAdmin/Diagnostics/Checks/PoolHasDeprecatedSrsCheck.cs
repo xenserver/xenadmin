@@ -29,6 +29,7 @@
  * SUCH DAMAGE.
  */
 
+using System.Collections.Generic;
 using System.Linq;
 using XenAdmin.Core;
 using XenAPI;
@@ -39,18 +40,35 @@ namespace XenAdmin.Diagnostics.Checks
 {
     internal class PoolHasDeprecatedSrsCheck : HostPostLivenessCheck
     {
+        private readonly Dictionary<string, string> _installMethodConfig;
+        private readonly bool _manualUpgrade;
+
         public override string Description => string.Format(Messages.DEPRECATED_SRS_CHECK, Helpers.GetPoolOfOne(Host.Connection));
 
-        public PoolHasDeprecatedSrsCheck(Host host)
+        public PoolHasDeprecatedSrsCheck(Host host, Dictionary<string, string> installMethodConfig, bool manualUpgrade)
             : base(host)
         {
+            _installMethodConfig = installMethodConfig;
+            _manualUpgrade = manualUpgrade;
         }
 
         public override bool CanRun() => Host.Connection.Cache.SRs.Any(sr => sr.GetSRType(true) == SR.SRTypes.lvmofcoe);
 
         protected override Problem RunHostCheck()
         {
-            return new PoolHasFCoESrWarning(this, Helpers.GetPoolOfOne(Host.Connection));
+            string upgradePlatformVersion = null;
+            var upgradingToVersionWithDeprecation = false;
+            if (_installMethodConfig != null)
+            {
+                Host.TryGetUpgradeVersion(Host, _installMethodConfig, out upgradePlatformVersion, out _);
+            }
+
+            if (!_manualUpgrade && !string.IsNullOrEmpty(upgradePlatformVersion))
+            {
+                upgradingToVersionWithDeprecation = Helpers.Post82X(upgradePlatformVersion);
+            }
+            
+            return new PoolHasFCoESrWarning(this, Helpers.GetPoolOfOne(Host.Connection), upgradingToVersionWithDeprecation);
         }
     }
 }

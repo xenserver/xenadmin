@@ -30805,7 +30805,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}: Support for Software FCoE SRs has been deprecated.
+        ///   Looks up a localized string similar to {0}: Support for Software FCoE SRs has been deprecated in {1}.
         /// </summary>
         public static string POOL_HAS_DEPRECATED_FCOE_WARNING {
             get {
@@ -30940,6 +30940,15 @@ namespace XenAdmin {
         public static string POOL_LICENSE {
             get {
                 return ResourceManager.GetString("POOL_LICENSE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: If you are upgrading to {1}, support for Software FCoE SRs has been deprecated.
+        /// </summary>
+        public static string POOL_MAY_HAVE_DEPRECATED_FCOE_WARNING {
+            get {
+                return ResourceManager.GetString("POOL_MAY_HAVE_DEPRECATED_FCOE_WARNING", resourceCulture);
             }
         }
         
