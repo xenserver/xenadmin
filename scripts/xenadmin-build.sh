@@ -108,14 +108,9 @@ if [ -f "${SIGN_BAT}" ] ; then
   cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} ICSharpCode.SharpZipLib.dll "SharpZipLib"
   cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} DiscUtils.dll "DiscUtils"
 
-  cd ${REPO}/XenServerHealthCheck/bin/Release && ${SIGN_BAT} XenServerHealthCheck.exe "${BRANDING_BRAND_CONSOLE}"
 else
   echo "Sign script does not exist; skip signing binaries"
 fi
-
-#copy files (signed accordingly) in XenServerHealthService folder
-cp ${REPO}/XenAdmin/bin/Release/{CommandLib.dll,CoreUtilsLib.dll,XenModel.dll,CookComputing.XmlRpcV2.dll,Newtonsoft.Json.CH.dll,log4net.dll,ICSharpCode.SharpZipLib.dll} \
-  ${REPO}/XenServerHealthCheck/bin/Release
 
 #prepare wix
 
@@ -214,7 +209,6 @@ cp ${REPO}/packages/*.pdb ${OUTPUT_DIR}
 cp ${REPO}/XenAdmin/bin/Release/{CommandLib.pdb,${BRANDING_BRAND_CONSOLE_NO_SPACE}.pdb,CoreUtilsLib.pdb,${BRANDING_BRAND_CONSOLE_NO_SPACE}.pdb,XenModel.pdb,XenOvf.pdb} \
    ${REPO}/xe/bin/Release/xe.pdb \
    ${REPO}/xva_verify/bin/Release/xva_verify.pdb \
-   ${REPO}/XenServerHealthCheck/bin/Release/XenServerHealthCheck.pdb \
    ${OUTPUT_DIR}
 
 cd ${OUTPUT_DIR} && zip -r -m  ${BRANDING_BRAND_CONSOLE_NO_SPACE}.Symbols.zip *.pdb

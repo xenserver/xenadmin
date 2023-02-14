@@ -46,7 +46,6 @@
   <?define AppShortcutGuid="6B875059-26BC-4fa7-ACB7-0B9A4E4665CA"?>
   <?define ReadmeGuid="47427a60-4064-4fdb-878d-04309a0fd9ce"?>
   <?define UpdateFilesGuid="1cfbf607-cc80-4bf8-b2fc-37e69c872316"?>
-  <?define HealthCheckGuid="{9D686BFC-B4FD-435F-AC74-0ACE29425095}"?>
   <?define DummyGuid="98945751-78CD-421F-9478-352AF41F496C"?>
   <?define HiddenFeatures=""?>
   <?define AdditionalFeatures=""?>
