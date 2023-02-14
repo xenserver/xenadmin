@@ -219,14 +219,14 @@ msi_checksum=($msi_checksum_with_file_name)
 
 sha256sum ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE_NO_SPACE}-source.zip > ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE_NO_SPACE}-source.zip.checksum
 
-echo "INFO: Generating CHCUpdates.xml"
+echo "INFO: Generating XCUpdates.xml"
 
 # UPDATE_URL points at the updates XML, we need to point to the MSI
-msi_url="${UPDATES_URL/CHCUpdates.xml/$BRANDING_BRAND_CONSOLE_NO_SPACE.msi}"
+msi_url="${UPDATES_URL/XCUpdates.xml/$BRANDING_BRAND_CONSOLE_NO_SPACE.msi}"
 
 output_xml="<?xml version=\"1.0\" ?>
 <patchdata>
-    <chcversions>
+    <versions>
         <version
             latest=\"true\"
             latestcr=\"true\"
@@ -236,13 +236,13 @@ output_xml="<?xml version=\"1.0\" ?>
             checksum=\"${msi_checksum}\"
             value=\"${BRANDING_XC_PRODUCT_VERSION}.${1}\"
         />	
-    </chcversions>
+    </versions>
 </patchdata>"
 
-echo $output_xml > ${OUTPUT_DIR}/CHCUpdates.xml
+echo $output_xml > ${OUTPUT_DIR}/XCUpdates.xml
 
-echo "INFO: Generating stage-test-CHCUpdates.xml. URL is a placeholder value"
+echo "INFO: Generating stage-test-XCUpdates.xml. URL is a placeholder value"
 
-echo "${output_xml/"url=\"${msi_url}\""/"url=\"@DEV_MSI_URL_PLACEHOLDER@\""}" > ${OUTPUT_DIR}/stage-test-CHCUpdates.xml
+echo "${output_xml/"url=\"${msi_url}\""/"url=\"@DEV_MSI_URL_PLACEHOLDER@\""}" > ${OUTPUT_DIR}/stage-test-XCUpdates.xml
 
 set +u
