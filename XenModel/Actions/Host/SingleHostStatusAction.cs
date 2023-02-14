@@ -84,7 +84,11 @@ namespace XenAdmin.Actions
             log.DebugFormat("Getting system status for {0} on {1}", entries_string, hostname);
 
             if (Session == null)
-                throw new Exception(Messages.CONNECTION_IO_EXCEPTION);
+            {
+                Status = ReportStatus.failed;
+                Error = new Exception(Messages.CONNECTION_IO_EXCEPTION);
+                throw Error;
+            }
 
             try
             {
