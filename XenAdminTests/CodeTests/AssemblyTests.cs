@@ -71,7 +71,6 @@ namespace XenAdminTests.CodeTests
             {
                 yield return new TestDataClass {AssemblyName = MainAssemblyName};
                 yield return new TestDataClass {AssemblyName = "XenOvf"};
-                yield return new TestDataClass {AssemblyName = "XenServerHealthCheck"};
             }
         }
 
