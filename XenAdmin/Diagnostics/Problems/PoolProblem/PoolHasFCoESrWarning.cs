@@ -1,6 +1,5 @@
-﻿/* Copyright (c) Citrix Systems, Inc. 
- * All rights reserved. 
- * 
+﻿/* Copyright (c) Cloud Software Group, Inc. 
+ *
  * Redistribution and use in source and binary forms, 
  * with or without modification, are permitted provided 
  * that the following conditions are met: 
@@ -57,7 +56,7 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
             _pool,
             BrandManager.ProductVersionPost82
         );
-
+        
         public PoolHasFCoESrWarning(Check check, Pool pool, bool upgradingToVersionWithDeprecation) : base(check)
         {
             _pool = pool;
