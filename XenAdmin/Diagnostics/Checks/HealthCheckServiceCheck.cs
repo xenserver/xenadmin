@@ -32,8 +32,8 @@ using System.Collections.Generic;
 using XenAdmin.Core;
 using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Diagnostics.Problems.PoolProblem;
-using XenAdmin.Model;
 using XenAPI;
+
 
 namespace XenAdmin.Diagnostics.Checks
 {
@@ -54,7 +54,7 @@ namespace XenAdmin.Diagnostics.Checks
             if (Helpers.Post82X(Pool.Connection))
                 return false;
 
-            return Pool.HealthCheckStatus() == HealthCheckStatus.Enabled;
+            return Pool.GetHealthCheckStatus() == Pool.HealthCheckStatus.Enabled;
         }
 
         protected override Problem RunCheck()

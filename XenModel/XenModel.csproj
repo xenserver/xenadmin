@@ -63,13 +63,7 @@
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Actions\ActionBase.cs" />
-    <Compile Include="Actions\HealthCheck\HealthCheckAuthenticationAction.cs" />
-    <Compile Include="Actions\HealthCheck\SaveHealthCheckSettingsAction.cs" />
-    <Compile Include="Actions\HealthCheck\TransferHealthCheckSettingAction.cs" />
-    <Compile Include="Actions\HealthCheck\TransferProxySettingsAction.cs" />
-    <Compile Include="Actions\HealthCheck\GetHealthCheckAnalysisResultAction.cs" />
-    <Compile Include="Actions\HealthCheck\TransferXenCenterMetadataAction.cs" />
-    <Compile Include="Actions\HealthCheck\XenServerHealthCheckUpload.cs" />
+    <Compile Include="Actions\HealthCheck\DisableHealthCheckAction.cs" />
     <Compile Include="Actions\CancellingAction.cs" />
     <Compile Include="Actions\DockerContainer\DockerContainerLifetimeAction.cs" />
     <Compile Include="Actions\DockerContainer\RunContainerPluginAction.cs" />
@@ -202,7 +196,6 @@
     <Compile Include="DockerContainer.cs" />
     <Compile Include="Folders.cs" />
     <Compile Include="FriendlyNameManager.cs" />
-    <Compile Include="HealthCheckSettings.cs" />
     <Compile Include="InvokeHelper.cs" />
     <Compile Include="Mappings\VmMapping.cs" />
     <Compile Include="Messages.Designer.cs">

@@ -253,7 +253,6 @@ namespace XenAdmin
             this.templatePropertiesToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bugToolToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
-            this.healthCheckToolStripMenuItem1 = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
             this.LicenseManagerMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
@@ -1763,7 +1762,6 @@ namespace XenAdmin
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.bugToolToolStripMenuItem,
-            this.healthCheckToolStripMenuItem1,
             this.toolStripSeparator14,
             this.LicenseManagerMenuItem,
             this.toolStripSeparator13,
@@ -1780,12 +1778,6 @@ namespace XenAdmin
             this.bugToolToolStripMenuItem.Command = new XenAdmin.Commands.BugToolCommand();
             this.bugToolToolStripMenuItem.Name = "bugToolToolStripMenuItem";
             resources.ApplyResources(this.bugToolToolStripMenuItem, "bugToolToolStripMenuItem");
-            // 
-            // healthCheckToolStripMenuItem1
-            // 
-            this.healthCheckToolStripMenuItem1.Command = new XenAdmin.Commands.HealthCheckCommand();
-            this.healthCheckToolStripMenuItem1.Name = "healthCheckToolStripMenuItem1";
-            resources.ApplyResources(this.healthCheckToolStripMenuItem1, "healthCheckToolStripMenuItem1");
             // 
             // toolStripSeparator14
             // 
@@ -2283,7 +2275,6 @@ namespace XenAdmin
         private XenAdmin.Commands.CommandToolStripButton pauseContainerToolStripButton;
         private XenAdmin.Commands.CommandToolStripButton resumeContainerToolStripButton;
         private XenAdmin.Commands.CommandToolStripButton restartContainerToolStripButton;
-        private XenAdmin.Commands.CommandToolStripMenuItem healthCheckToolStripMenuItem1;
         private XenAdmin.Commands.AssignGroupToolStripMenuItemVMSS assignSnapshotScheduleToolStripMenuItem;
         private XenAdmin.Commands.CommandToolStripMenuItem VMSnapshotScheduleToolStripMenuItem;
         private System.Windows.Forms.TabPage TabPageADUpsell;

@@ -218,9 +218,9 @@ namespace XenAdmin
 
         public PluginManager PluginManager;
 
-        public string GetXenCenterMetadata(bool isForXenCenter)
+        public string GetXenCenterMetadata()
         {
-            return Metadata.Generate(PluginManager, isForXenCenter);
+            return Metadata.Generate(PluginManager);
         }
 
         public string GetCustomUpdatesXmlLocation()

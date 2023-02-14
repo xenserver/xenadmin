@@ -28,25 +28,27 @@
  * SUCH DAMAGE.
  */
 
-using XenCenterLib;
-using XenAdmin.Model;
+using System.Collections.Generic;
+using XenAPI;
+
 
 namespace XenAdmin.Actions
 {
-    public class TransferXenCenterMetadataAction : TransferDataToHealthCheckAction
+    public class DisableHealthCheckAction : AsyncAction
     {
-        private readonly string metadata;
-
-        public TransferXenCenterMetadataAction(string metadata, bool suppressHistory)
-            : base(null, Messages.ACTION_TRANSFER_HEALTHCHECK_SETTINGS, Messages.ACTION_TRANSFER_HEALTHCHECK_SETTINGS, suppressHistory)
+        public DisableHealthCheckAction(Pool pool)
+            : base(pool.Connection, Messages.ACTION_DISABLE_HEALTH_CHECK_TITLE, "", false)
         {
-            this.metadata = metadata;
+            Pool = pool;
+            ApiMethodsToRoleCheck.Add("pool.set_health_check_config");
+            Description = string.Format(Messages.ACTION_DISABLE_HEALTH_CHECK_DESCRIPTION, pool.Name());
         }
 
-        protected override string GetMessageToBeSent()
+        protected override void Run()
         {
-            return string.Join(SEPARATOR.ToString(), HealthCheckSettings.XENCENTER_METADATA,
-                EncryptionUtils.ProtectForLocalMachine(metadata));
+            Pool.set_health_check_config(Session, Pool.opaque_ref, new Dictionary<string, string>());
+            Connection.WaitFor(() => Pool.GetHealthCheckStatus() != Pool.HealthCheckStatus.Enabled, null);
         }
     }
 }
+

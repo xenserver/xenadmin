@@ -126,9 +126,6 @@ namespace XenAdmin
         private readonly LicenseManagerLauncher licenseManagerLauncher;
         private readonly LicenseTimer licenseTimer;
 
-        public readonly HealthCheckOverviewLauncher HealthCheckOverviewLauncher;
-        private readonly System.Windows.Forms.Timer healthCheckResultTimer = new System.Windows.Forms.Timer();
-
         private Dictionary<ToolStripMenuItem, int> pluginMenuItemStartIndexes = new Dictionary<ToolStripMenuItem, int>();
 
         private bool expandTreeNodesOnStartup;
@@ -145,7 +142,6 @@ namespace XenAdmin
         {
             _commandLineArgs = args;
             licenseManagerLauncher = new LicenseManagerLauncher(Program.MainWindow);
-            HealthCheckOverviewLauncher = new HealthCheckOverviewLauncher(Program.MainWindow);
             InvokeHelper.Initialize(this);
 
             ConnectionsManager.XenConnections.Clear();
@@ -251,7 +247,6 @@ namespace XenAdmin
             updateClientToolStripMenuItem.Text = string.Format(updateClientToolStripMenuItem.Text, BrandManager.BrandConsole);
 
             toolStripSeparator7.Visible = xenSourceOnTheWebToolStripMenuItem.Visible = xenCenterPluginsOnlineToolStripMenuItem.Visible = !HiddenFeatures.ToolStripMenuItemHidden;
-            healthCheckToolStripMenuItem1.Visible = !HiddenFeatures.HealthCheckHidden && (Registry.GetBrandOverride() == "XenCenter" || BrandManager.BrandConsole == "XenCenter");
 
             statusLabelAlerts.Visible = statusLabelErrors.Visible = false;
         }
@@ -587,8 +582,6 @@ namespace XenAdmin
             
             //no need to catch ConfigurationErrorsException as the settings have already been loaded
             Settings.RestoreSession();
-            if (Registry.GetBrandOverride() == "XenCenter" || BrandManager.BrandConsole == "XenCenter")
-                HealthCheck.SendProxySettingsToHealthCheck();
 
             // if there are fewer than 30 connections, then expand the tree nodes.
             expandTreeNodesOnStartup = ConnectionsManager.XenConnectionsCopy.Count < 30;
@@ -644,25 +637,12 @@ namespace XenAdmin
                 Updates.CheckForUpdates();
             }
 
-            if (!Program.RunInAutomatedTestMode && (Registry.GetBrandOverride() == "XenCenter" || BrandManager.BrandConsole == "XenCenter"))
-            {
-                // start healthCheckResult thread
-                healthCheckResultTimer.Interval = 1000 * 60 * 60; // 1 hour
-                healthCheckResultTimer.Tick += HealthCheckResultTimer_Tick;
-                healthCheckResultTimer.Start();
-            }
-
             ProcessCommand(_commandLineArgs);
         }
 
         private void CheckForUpdatesTimer_Tick(object sender, EventArgs e)
         {
             Updates.CheckForUpdates();
-        }
-
-        private void HealthCheckResultTimer_Tick(object sender, EventArgs e)
-        {
-            HealthCheck.CheckForAnalysisResults();
         }
 
         private void LoadTasksAsMeddlingActions(IXenConnection connection)
@@ -1045,18 +1025,27 @@ namespace XenAdmin
             if(licenseTimer != null)
                 licenseTimer.CheckActiveServerLicense(connection, false);
 
-            if (Registry.GetBrandOverride() == "XenCenter" || BrandManager.BrandConsole == "XenCenter")
+            if ((Registry.GetBrandOverride() == "XenCenter" || BrandManager.BrandConsole == "XenCenter") &&
+                !Helpers.Post82X(connection))
             {
-                if (Properties.Settings.Default.ShowHealthCheckEnrollmentReminder)
-                    ThreadPool.QueueUserWorkItem(CheckHealthCheckEnrollment, connection);
-                ThreadPool.QueueUserWorkItem(HealthCheck.CheckForAnalysisResults, connection);
-                ThreadPool.QueueUserWorkItem(InformHealthCheckEnrollment, connection);
+                Pool pool = Helpers.GetPoolOfOne(connection);
+                if (pool != null && pool.GetHealthCheckStatus() == Pool.HealthCheckStatus.Enabled)
+                {
+                    Program.BeginInvoke(Program.MainWindow, () =>
+                    {
+                        using (var dlg = new WarningDialog(string.Format(Messages.PROBLEM_HEALTH_CHECK_ON_CONNECTION, pool.Name()),
+                                   new ThreeButtonDialog.TBDButton(Messages.PROBLEM_HEALTH_CHECK_HELP, DialogResult.Yes),
+                                   new ThreeButtonDialog.TBDButton(Messages.CANCEL, DialogResult.No)))
+                        {
+                            if (dlg.ShowDialog() == DialogResult.Yes)
+                                new DisableHealthCheckAction(pool).RunAsync();
+                        }
+                    });
+                }
             }
 
             Updates.RefreshUpdateAlerts(Updates.UpdateType.ServerPatches | Updates.UpdateType.ServerVersion);
             Updates.CheckHotfixEligibility(connection);
-            if (Registry.GetBrandOverride() == "XenCenter" || BrandManager.BrandConsole == "XenCenter")
-                HealthCheck.SendMetadataToHealthCheck();
             RequestRefreshTreeView();
 
             CheckTlsVerification(connection);
@@ -1085,23 +1074,6 @@ namespace XenAdmin
                             cmd.Run();
                 }
             });
-        }
-
-        private void CheckHealthCheckEnrollment(object connection)
-        {
-            if (HealthCheckOverviewLauncher != null && !HiddenFeatures.HealthCheckHidden)
-                HealthCheckOverviewLauncher.CheckHealthCheckEnrollment((IXenConnection) connection);
-        }
-
-        private void InformHealthCheckEnrollment(object connection)
-        {
-            Pool pool = Helpers.GetPoolOfOne((IXenConnection)connection);
-            if (pool == null)
-                return;
-            var newHealthCheckSSettings = pool.HealthCheckSettings();
-            new TransferHealthCheckSettingsAction(pool, newHealthCheckSSettings,
-                newHealthCheckSSettings.GetSecretInfo(pool.Connection, HealthCheckSettings.UPLOAD_CREDENTIAL_USER_SECRET),
-                newHealthCheckSSettings.GetSecretInfo(pool.Connection, HealthCheckSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET), true).RunAsync();
         }
 
         private static bool SameProductBrand(Host host)
