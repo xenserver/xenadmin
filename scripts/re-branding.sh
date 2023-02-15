@@ -80,7 +80,7 @@ do
 done
 
 #AssemblyInfo rebranding
-for projectName in CommandLib xe XenAdmin XenAdminTests XenCenterLib XenModel XenOvfApi XenServerHealthCheck xva_verify
+for projectName in CommandLib xe XenAdmin XenAdminTests XenCenterLib XenModel XenOvfApi xva_verify
 do
   assemblyInfo="${REPO}/${projectName}/Properties/AssemblyInfo.cs"
   version_csharp ${assemblyInfo} && rebranding_global ${assemblyInfo}
@@ -120,8 +120,5 @@ sed -b -i -e "s/@AUTOGEN_PRODUCT_GUID@/${PRODUCT_GUID}/g" \
 rebranding_global ${REPO}/XenAdminTests/TestResources/ContextMenuBuilderTestResults.xml
 rebranding_global ${REPO}/XenAdminTests/app.config
 rebranding_global ${REPO}/XenAdminTests/XenAdminTests.csproj
-
-#XenServerHealthCheck
-rebranding_global ${REPO}/XenServerHealthCheck/app.config
 
 set +u

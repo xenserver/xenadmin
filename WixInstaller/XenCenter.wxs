@@ -241,7 +241,6 @@
                 <ComponentRef Id="ScResources" />
             </Feature>
         </Feature>
-        <FeatureGroupRef Id="BrandedFeatures" />
 
         <UIRef Id="$(var.BrandInstallerUI)" />
         <UIRef Id="WixUI_ErrorProgressText" />
