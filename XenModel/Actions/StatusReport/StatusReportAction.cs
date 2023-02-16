@@ -29,45 +29,27 @@
  * SUCH DAMAGE.
  */
 
+using System;
 using XenAdmin.Network;
-using XenAdmin.Wizards.BugToolWizard;
-using XenAPI;
 
-namespace XenAdmin.Commands
+namespace XenAdmin.Actions
 {
-    internal class BugToolCommand : Command
+    public enum ReportStatus { queued, inProgress, succeeded, failed, cancelled }
+
+    public abstract class StatusReportAction : AsyncAction
     {
-        /// <summary>
-        /// Initializes a new instance of this Command. The parameter-less constructor is required if 
-        /// this Command is to be attached to a ToolStrip menu item or button. It should not be used in any other scenario.
-        /// </summary>
-        public BugToolCommand()
-        {
-        }
+        protected readonly string filePath;
+        protected readonly string timeString;
 
-        public BugToolCommand(IMainWindow mainWindow)
-            : base(mainWindow)
-        {
-        }
+        public ReportStatus Status { get; protected set; }
+        public Exception Error { get; protected set; }
 
-        protected override void ExecuteCore(SelectedItemCollection selection)
+        protected StatusReportAction(IXenConnection connection, string title, string filePath, string timeString, bool suppressHistory = true)
+            :base(connection, title, suppressHistory)
         {
-            if (selection != null && selection.AllItemsAre<IXenObject>(x => x is Host || x is Pool))
-                MainWindowCommandInterface.ShowForm(typeof(BugToolWizard), selection.AsXenObjects<IXenObject>().ToArray());
-            else
-                MainWindowCommandInterface.ShowForm(typeof(BugToolWizard));
-        }
-
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
-        {
-            foreach (IXenConnection xenConnection in ConnectionsManager.XenConnectionsCopy)
-            {
-                if (xenConnection.IsConnected)
-                {
-                    return true;
-                }
-            }
-            return false;
+            this.filePath = filePath;
+            this.timeString = timeString;
+            Status = ReportStatus.queued;
         }
     }
 }

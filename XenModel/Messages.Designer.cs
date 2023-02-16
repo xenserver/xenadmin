@@ -1933,6 +1933,33 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Saving system status canceled.
+        /// </summary>
+        public static string ACTION_SAVE_STATUS_REPORT_CANCELLED {
+            get {
+                return ResourceManager.GetString("ACTION_SAVE_STATUS_REPORT_CANCELLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving system status failed.
+        /// </summary>
+        public static string ACTION_SAVE_STATUS_REPORT_FAILED {
+            get {
+                return ResourceManager.GetString("ACTION_SAVE_STATUS_REPORT_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There was an error while saving the server status report. Only a partial report may be available.
+        /// </summary>
+        public static string ACTION_SAVE_STATUS_REPORT_FAILED_PARTIAL {
+            get {
+                return ResourceManager.GetString("ACTION_SAVE_STATUS_REPORT_FAILED_PARTIAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Saving alerts for &apos;{0}&apos;....
         /// </summary>
         public static string ACTION_SAVING_ALERTS_FOR {
@@ -2491,11 +2518,38 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Getting system status canceled.
+        ///   Looks up a localized string similar to Canceled.
         /// </summary>
         public static string ACTION_SYSTEM_STATUS_CANCELLED {
             get {
                 return ResourceManager.GetString("ACTION_SYSTEM_STATUS_CANCELLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No data was compiled. Press previous to select new items or servers and try again..
+        /// </summary>
+        public static string ACTION_SYSTEM_STATUS_COMPILE_FAILED {
+            get {
+                return ResourceManager.GetString("ACTION_SYSTEM_STATUS_COMPILE_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Finished compiling status report (with errors). A partial status report was saved..
+        /// </summary>
+        public static string ACTION_SYSTEM_STATUS_COMPILE_PARTIAL {
+            get {
+                return ResourceManager.GetString("ACTION_SYSTEM_STATUS_COMPILE_PARTIAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status report was compiled and saved successfully..
+        /// </summary>
+        public static string ACTION_SYSTEM_STATUS_COMPILE_SUCCESSFUL {
+            get {
+                return ResourceManager.GetString("ACTION_SYSTEM_STATUS_COMPILE_SUCCESSFUL", resourceCulture);
             }
         }
         
@@ -2527,29 +2581,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No data was compiled. Press previous to select new items or servers and try again..
+        ///   Looks up a localized string similar to Failed to save the status report to specified location. Please try again..
         /// </summary>
-        public static string ACTION_SYSTEM_STATUS_FAILED {
+        public static string ACTION_SYSTEM_STATUS_SAVE_FAILED {
             get {
-                return ResourceManager.GetString("ACTION_SYSTEM_STATUS_FAILED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Finished compiling status report.
-        /// </summary>
-        public static string ACTION_SYSTEM_STATUS_SUCCESSFUL {
-            get {
-                return ResourceManager.GetString("ACTION_SYSTEM_STATUS_SUCCESSFUL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Finished compiling status report (with errors). A partial status report was compiled..
-        /// </summary>
-        public static string ACTION_SYSTEM_STATUS_SUCCESSFUL_PARTIAL {
-            get {
-                return ResourceManager.GetString("ACTION_SYSTEM_STATUS_SUCCESSFUL_PARTIAL", resourceCulture);
+                return ResourceManager.GetString("ACTION_SYSTEM_STATUS_SAVE_FAILED", resourceCulture);
             }
         }
         
@@ -2640,42 +2676,6 @@ namespace XenAdmin {
         public static string ACTION_UPDATE_INTEGRATED_GPU_PASSTHROUGH_TITLE {
             get {
                 return ResourceManager.GetString("ACTION_UPDATE_INTEGRATED_GPU_PASSTHROUGH_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Upload server status report to [Citrix] Insight Services.
-        /// </summary>
-        public static string ACTION_UPLOAD_SERVER_STATUS_REPORT {
-            get {
-                return ResourceManager.GetString("ACTION_UPLOAD_SERVER_STATUS_REPORT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Failed to upload the status report..
-        /// </summary>
-        public static string ACTION_UPLOAD_SERVER_STATUS_REPORT_FAILED {
-            get {
-                return ResourceManager.GetString("ACTION_UPLOAD_SERVER_STATUS_REPORT_FAILED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Uploading report to [Citrix] Insight Services ({0} of {1}).
-        /// </summary>
-        public static string ACTION_UPLOAD_SERVER_STATUS_REPORT_PERCENTAGE {
-            get {
-                return ResourceManager.GetString("ACTION_UPLOAD_SERVER_STATUS_REPORT_PERCENTAGE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Uploading report to [Citrix] Insight Services.
-        /// </summary>
-        public static string ACTION_UPLOAD_SERVER_STATUS_REPORT_PROGRESS {
-            get {
-                return ResourceManager.GetString("ACTION_UPLOAD_SERVER_STATUS_REPORT_PROGRESS", resourceCulture);
             }
         }
         
@@ -5878,7 +5878,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Can’t create this bond while HA is enabled
+        ///   Looks up a localized string similar to Can&apos;t create this bond while HA is enabled
         ///
         ///A management interface exists on one of the selected NICs. Moving the management interface to the bond could result in HA network heartbeat failure, so this action is not allowed while HA is on.
         ///
@@ -5944,7 +5944,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Can’t delete this bond while HA is enabled
+        ///   Looks up a localized string similar to Can&apos;t delete this bond while HA is enabled
         ///
         ///A management interface exists on one of the bonded NICs. Deleting the  bond could result in HA network heartbeat failure, so this action is not allowed while HA is on.
         ///
@@ -6272,6 +6272,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Downloading.
+        /// </summary>
+        public static string BUGTOOL_REPORTSTATUS_DOWNLOADING_NO_DATA {
+            get {
+                return ResourceManager.GetString("BUGTOOL_REPORTSTATUS_DOWNLOADING_NO_DATA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed - Please see logs for details.
         /// </summary>
         public static string BUGTOOL_REPORTSTATUS_FAILED {
@@ -6286,6 +6295,24 @@ namespace XenAdmin {
         public static string BUGTOOL_REPORTSTATUS_QUEUED {
             get {
                 return ResourceManager.GetString("BUGTOOL_REPORTSTATUS_QUEUED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving - {0}%.
+        /// </summary>
+        public static string BUGTOOL_REPORTSTATUS_SAVING {
+            get {
+                return ResourceManager.GetString("BUGTOOL_REPORTSTATUS_SAVING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving report to selected destination.
+        /// </summary>
+        public static string BUGTOOL_SAVE_STATUS_REPORT {
+            get {
+                return ResourceManager.GetString("BUGTOOL_SAVE_STATUS_REPORT", resourceCulture);
             }
         }
         
@@ -13447,7 +13474,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select the vApps and individual VMs you want to fail back and specify the required power state for them after they have been recovered to pool ‘{0}’..
+        ///   Looks up a localized string similar to Select the vApps and individual VMs you want to fail back and specify the required power state for them after they have been recovered to pool &apos;{0}&apos;..
         /// </summary>
         public static string DR_WIZARD_APPLIANCESPAGE_DESCRIPTION_FAILBACK {
             get {
@@ -13672,7 +13699,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This wizard will take you through the steps needed to perform a test failover of your critical vApps and VMs. The vApps and VMs you select will be recovered to pool ‘{0}’ on the DR site but will not be started up..
+        ///   Looks up a localized string similar to This wizard will take you through the steps needed to perform a test failover of your critical vApps and VMs. The vApps and VMs you select will be recovered to pool &apos;{0}&apos; on the DR site but will not be started up..
         /// </summary>
         public static string DR_WIZARD_FIRSTPAGE_DRYRUN_LINE1 {
             get {
@@ -13732,7 +13759,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Before failback can take place, storage mirroring – remote replication of your VM data – must be halted..
+        ///   Looks up a localized string similar to Before failback can take place, storage mirroring - remote replication of your VM data - must be halted..
         /// </summary>
         public static string DR_WIZARD_FIRSTPAGE_FAILBACK_LINE4 {
             get {
@@ -13771,7 +13798,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Before failover can take place, storage mirroring – remote replication of your VM data – must be halted..
+        ///   Looks up a localized string similar to Before failover can take place, storage mirroring - remote replication of your VM data - must be halted..
         /// </summary>
         public static string DR_WIZARD_FIRSTPAGE_FAILOVER_LINE4 {
             get {
@@ -22209,7 +22236,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Live patching failed for server ‘{0}’. To complete the patch installation, please put the server into maintenance mode and reboot it..
+        ///   Looks up a localized string similar to Live patching failed for server &apos;{0}&apos;. To complete the patch installation, please put the server into maintenance mode and reboot it..
         /// </summary>
         public static string LIVE_PATCHING_FAILED_ONE_HOST {
             get {
@@ -26153,9 +26180,9 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to [XenServer] hosts support Software based Fibre Channel over Ethernet using supported Converged Network Adapters (CNAs) which support FCoE in this way.
         ///
-        ///All configuration required to expose a LUN to the host must be completed manually, including configuring your FCoE fabric, and allocating LUN(s) to your CNA’s public world wide name (PWWN). 
+        ///All configuration required to expose a LUN to the host must be completed manually, including configuring your FCoE fabric, and allocating LUN(s) to your CNA&apos;s public world wide name (PWWN). 
         ///
-        ///Once this configuration has been carried out, this wizard will walk you through discovering and mounting a LUN available to the hosts CNA’s as a SCSI device. The SC [rest of string was truncated]&quot;;.
+        ///Once this configuration has been carried out, this wizard will walk you through discovering and mounting a LUN available to the hosts CNA&apos;s as a SCSI device. The SC [rest of string was truncated]&quot;;.
         /// </summary>
         public static string NEWSR_LVMOFCOE_BLURB {
             get {
@@ -31358,6 +31385,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A {0} user cannot download system status reports. Log in as a different user with sufficient privileges and try again..
+        /// </summary>
+        public static string RBAC_GET_SYSTEM_STATUS_BLOCKED {
+            get {
+                return ResourceManager.GetString("RBAC_GET_SYSTEM_STATUS_BLOCKED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Your current role is &apos;{1}&apos;.
         ///
         ///To configure HA settings, switch to an account with one of the following roles: 
@@ -32632,7 +32668,7 @@ namespace XenAdmin {
         ///    
         ///1. Insert the [XenServer] installation CD-ROM in the server’s CD/DVD drive or set up a PXE network boot.
         ///2. Click the Reboot Now button below to reboot the server and begin the installation.
-        ///3. Go to the server’s console and follow the on-screen instructions to install the upgrade.
+        ///3. Go to the server&apos;s console and follow the on-screen instructions to install the upgrade.
         ///
         ///To skip this server and continue to the next server in the pool, click Skip This Server. Note that running a pool with servers on different versions of [X [rest of string was truncated]&quot;;.
         /// </summary>
@@ -35061,24 +35097,6 @@ namespace XenAdmin {
         public static string STATUS_FILTER_QUEUED {
             get {
                 return ResourceManager.GetString("STATUS_FILTER_QUEUED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enter your MyCitrix credentials (see {0}). These credentials will only be used to authenticate with [Citrix] Insight Services once and will not be stored on this machine or on your server..
-        /// </summary>
-        public static string STATUS_REPORT_ENTER_CREDENTIALS_MESSAGE {
-            get {
-                return ResourceManager.GetString("STATUS_REPORT_ENTER_CREDENTIALS_MESSAGE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to There was an error while packaging the server status report. Only a partial report may be available.
-        /// </summary>
-        public static string STATUS_REPORT_ZIP_FAILED {
-            get {
-                return ResourceManager.GetString("STATUS_REPORT_ZIP_FAILED", resourceCulture);
             }
         }
         
@@ -37773,7 +37791,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your server license to enable StorageLink™ Technology. StorageLink allows the server to leverage all the power of your existing storage hardware and offload storage operations automatically. This allows for high performance and space efficient storage provisioning, cloning, and snapshot capabilities to be handled in hardware using your storage hardware&apos;s native features..
+        ///   Looks up a localized string similar to Upgrade your server license to enable StorageLink(tm) Technology. StorageLink allows the server to leverage all the power of your existing storage hardware and offload storage operations automatically. This allows for high performance and space efficient storage provisioning, cloning, and snapshot capabilities to be handled in hardware using your storage hardware&apos;s native features..
         /// </summary>
         public static string UPSELL_BLURB_ENHANCEDSR {
             get {
@@ -37856,7 +37874,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your server license to enable Dynamic Workload Balancing. Dynamic Workload Balancing continually profiles your virtual machines’ and servers&apos; performance and will intelligently rebalance and optimally place new workloads to ensure the best use of physical server resources in your resource pool..
+        ///   Looks up a localized string similar to Upgrade your server license to enable Dynamic Workload Balancing. Dynamic Workload Balancing continually profiles your virtual machines&apos; and servers&apos; performance and will intelligently rebalance and optimally place new workloads to ensure the best use of physical server resources in your resource pool..
         /// </summary>
         public static string UPSELL_BLURB_WLB {
             get {

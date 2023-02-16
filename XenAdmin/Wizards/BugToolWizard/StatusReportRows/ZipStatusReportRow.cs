@@ -29,45 +29,47 @@
  * SUCH DAMAGE.
  */
 
-using XenAdmin.Network;
-using XenAdmin.Wizards.BugToolWizard;
-using XenAPI;
+using System.Drawing;
+using XenAdmin.Actions;
 
-namespace XenAdmin.Commands
+namespace XenAdmin.Wizards.BugToolWizard
 {
-    internal class BugToolCommand : Command
+    partial class BugToolPageRetrieveData
     {
-        /// <summary>
-        /// Initializes a new instance of this Command. The parameter-less constructor is required if 
-        /// this Command is to be attached to a ToolStrip menu item or button. It should not be used in any other scenario.
-        /// </summary>
-        public BugToolCommand()
+        private class ZipStatusReportRow : StatusReportRow
         {
-        }
+            public override StatusReportAction Action => _action;
+            private ZipStatusReportAction _action;
+            private string OutputFile { get; }
 
-        public BugToolCommand(IMainWindow mainWindow)
-            : base(mainWindow)
-        {
-        }
-
-        protected override void ExecuteCore(SelectedItemCollection selection)
-        {
-            if (selection != null && selection.AllItemsAre<IXenObject>(x => x is Host || x is Pool))
-                MainWindowCommandInterface.ShowForm(typeof(BugToolWizard), selection.AsXenObjects<IXenObject>().ToArray());
-            else
-                MainWindowCommandInterface.ShowForm(typeof(BugToolWizard));
-        }
-
-        protected override bool CanExecuteCore(SelectedItemCollection selection)
-        {
-            foreach (IXenConnection xenConnection in ConnectionsManager.XenConnectionsCopy)
+            public ZipStatusReportRow(string outputFile)
             {
-                if (xenConnection.IsConnected)
-                {
-                    return true;
-                }
+                OutputFile = outputFile;
+                cellHostImg.Value = Images.StaticImages.save_to_disk;
+                cellHost.Value = Messages.BUGTOOL_SAVE_STATUS_REPORT;
             }
-            return false;
+
+            protected override void CreateAction(string path, string time)
+            {
+                _action = new ZipStatusReportAction(path, OutputFile, time);
+            }
+
+            protected override string GetStatus(out Image img)
+            {
+                img = null;
+                if (_action == null)
+                    return Messages.BUGTOOL_REPORTSTATUS_QUEUED;
+
+                switch (_action.Status)
+                {
+                    case ReportStatus.inProgress:
+                        return string.Format(Messages.BUGTOOL_REPORTSTATUS_SAVING, _action.PercentComplete);
+
+                    default:
+                        return base.GetStatus(out img);
+                }
+
+            }
         }
     }
 }

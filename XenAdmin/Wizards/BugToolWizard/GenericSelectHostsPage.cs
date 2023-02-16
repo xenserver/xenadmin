@@ -40,7 +40,7 @@ using XenAPI;
 using XenAdmin.Commands;
 
 
-namespace XenAdmin.Wizards.BugToolWizardFiles
+namespace XenAdmin.Wizards.BugToolWizard
 {
     public partial class GenericSelectHostsPage : XenTabPage
     {

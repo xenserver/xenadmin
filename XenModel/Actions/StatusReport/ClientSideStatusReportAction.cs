@@ -34,38 +34,18 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
 using XenAdmin.Core;
-using XenAdmin.Network;
 using XenAPI;
 
 namespace XenAdmin.Actions
 {
-    public enum ReportStatus { queued, compiling, downloading, succeeded, failed, cancelled }
-
-    public abstract class StatusReportAction : AsyncAction
-    {
-        protected readonly string filePath;
-        protected readonly string timeString;
-
-        public ReportStatus Status { get; protected set; }
-        public Exception Error { get; protected set; }
-
-        protected StatusReportAction(IXenConnection connection, string title, string filePath, string timeString)
-            :base(connection, title, true)
-        {
-            this.filePath = filePath;
-            this.timeString = timeString;
-            Status = ReportStatus.queued;
-        }
-    }
-
-    public class StatusReportClientSideAction : StatusReportAction
+    public class ClientSideStatusReportAction : StatusReportAction
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private readonly List<Host> hosts;
         private readonly bool includeClientLogs;
 
-        public StatusReportClientSideAction(List<Host> hosts, bool includeClientLogs, string filePath, string timeString)
+        public ClientSideStatusReportAction(List<Host> hosts, bool includeClientLogs, string filePath, string timeString)
             : base(null,
                 includeClientLogs ? Messages.BUGTOOL_CLIENT_ACTION_LOGS_META : Messages.BUGTOOL_CLIENT_ACTION_META,
                 filePath, timeString)
@@ -78,7 +58,7 @@ namespace XenAdmin.Actions
         {
             try
             {
-                Status = ReportStatus.compiling;
+                Status = ReportStatus.inProgress;
                 CopyClientLogs();
                 CompileMasterSlaveInfo();
                 CompileClientMetadata();

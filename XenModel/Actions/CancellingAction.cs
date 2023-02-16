@@ -228,7 +228,7 @@ namespace XenAdmin.Actions
         /// 2. Will return if Cancelling = true
         /// 3. Runs RecomputeCanCancel() on a bg thread, then if CanCancel == true, sets Cancelling to true and runs Cancel_()
         /// </summary>
-        public override sealed void Cancel()
+        public sealed override void Cancel()
         {
             log.Debug("Cancel() was called. Attempting to cancel action");
 

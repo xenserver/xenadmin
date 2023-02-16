@@ -39,7 +39,7 @@ using XenCenterLib.Archive;
 
 namespace XenAdmin.Actions
 {
-    public class SingleHostStatusAction :  StatusReportAction
+    public class SingleHostStatusReportAction :  StatusReportAction
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         
@@ -48,7 +48,7 @@ namespace XenAdmin.Actions
         private readonly long size;
         private readonly string[] RBAC_FAIL_STRINGS = {"HTTP", "403", "Forbidden"};
 
-    public SingleHostStatusAction(Host host, long size, List<string> capabilityKeys, string path, string time)
+        public SingleHostStatusReportAction(Host host, long size, List<string> capabilityKeys, string path, string time)
             : base(host.Connection, string.Format(Messages.ACTION_SYSTEM_STATUS_COMPILING, Helpers.GetName(host)), path, time)
         {
             this.host = host;
@@ -56,12 +56,23 @@ namespace XenAdmin.Actions
             this.size = size;
         }
 
-        public long DataTransferred;
+        public static RbacMethodList StaticRBACDependencies
+        {
+            get
+            {
+                var list = new RbacMethodList("HTTP/get_system_status");
+                list.AddRange(Role.CommonSessionApiList);
+                list.AddRange(Role.CommonTaskApiList);
+                return list;
+            }
+        }
+
+        public long DataTransferred { get; private set; }
 
         protected override void Run()
         {
             Description = string.Format(Messages.ACTION_SYSTEM_STATUS_COMPILING, Helpers.GetName(host));
-            Status = ReportStatus.compiling;
+            Status = ReportStatus.inProgress;
 
             string hostname = Helpers.GetName(host);
             hostname = TarSanitization.SanitizeTarPathMember(hostname);
@@ -75,7 +86,11 @@ namespace XenAdmin.Actions
             log.DebugFormat("Getting system status for {0} on {1}", entries_string, hostname);
 
             if (Session == null)
-                throw new Exception(Messages.CONNECTION_IO_EXCEPTION);
+            {
+                Status = ReportStatus.failed;
+                Error = new Exception(Messages.CONNECTION_IO_EXCEPTION);
+                throw Error;
+            }
 
             try
             {
@@ -131,7 +146,7 @@ namespace XenAdmin.Actions
 
         private void dataRxDelegate(long rxd)
         {
-            Status = ReportStatus.downloading;
+            Status = ReportStatus.inProgress;
             DataTransferred = rxd;
 
             if (Cancelling)

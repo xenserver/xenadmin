@@ -741,6 +741,15 @@
   <data name="ACTION_SAVE_SETTINGS" xml:space="preserve">
     <value>Save settings for '{0}'...</value>
   </data>
+  <data name="ACTION_SAVE_STATUS_REPORT_CANCELLED" xml:space="preserve">
+    <value>Saving system status canceled</value>
+  </data>
+  <data name="ACTION_SAVE_STATUS_REPORT_FAILED" xml:space="preserve">
+    <value>Saving system status failed</value>
+  </data>
+  <data name="ACTION_SAVE_STATUS_REPORT_FAILED_PARTIAL" xml:space="preserve">
+    <value>There was an error while saving the server status report. Only a partial report may be available</value>
+  </data>
   <data name="ACTION_SAVING_ALERTS_FOR" xml:space="preserve">
     <value>Saving alerts for '{0}'...</value>
   </data>
@@ -928,7 +937,16 @@
     <value>Stopping Docker Container '{0}'</value>
   </data>
   <data name="ACTION_SYSTEM_STATUS_CANCELLED" xml:space="preserve">
-    <value>Getting system status canceled</value>
+    <value>Canceled</value>
+  </data>
+  <data name="ACTION_SYSTEM_STATUS_COMPILE_FAILED" xml:space="preserve">
+    <value>No data was compiled. Press previous to select new items or servers and try again.</value>
+  </data>
+  <data name="ACTION_SYSTEM_STATUS_COMPILE_PARTIAL" xml:space="preserve">
+    <value>Finished compiling status report (with errors). A partial status report was saved.</value>
+  </data>
+  <data name="ACTION_SYSTEM_STATUS_COMPILE_SUCCESSFUL" xml:space="preserve">
+    <value>Status report was compiled and saved successfully.</value>
   </data>
   <data name="ACTION_SYSTEM_STATUS_COMPILING" xml:space="preserve">
     <value>Compiling status report for {0}</value>
@@ -939,14 +957,8 @@
   <data name="ACTION_SYSTEM_STATUS_DISK_FULL" xml:space="preserve">
     <value>Getting system status failed: disk full</value>
   </data>
-  <data name="ACTION_SYSTEM_STATUS_FAILED" xml:space="preserve">
-    <value>No data was compiled. Press previous to select new items or servers and try again.</value>
-  </data>
-  <data name="ACTION_SYSTEM_STATUS_SUCCESSFUL" xml:space="preserve">
-    <value>Finished compiling status report</value>
-  </data>
-  <data name="ACTION_SYSTEM_STATUS_SUCCESSFUL_PARTIAL" xml:space="preserve">
-    <value>Finished compiling status report (with errors). A partial status report was compiled.</value>
+  <data name="ACTION_SYSTEM_STATUS_SAVE_FAILED" xml:space="preserve">
+    <value>Failed to save the status report to specified location. Please try again.</value>
   </data>
   <data name="ACTION_SYSTEM_STATUS_TITLE" xml:space="preserve">
     <value>Getting system status information</value>
@@ -980,18 +992,6 @@
   </data>
   <data name="ACTION_UPLOADPATCHTOMASTERPLANACTION_FAILED" xml:space="preserve">
     <value>Upload error. The patch was uploaded, but it cannot be found on the host.</value>
-  </data>
-  <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT" xml:space="preserve">
-    <value>Upload server status report to [Citrix] Insight Services</value>
-  </data>
-  <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT_FAILED" xml:space="preserve">
-    <value>Failed to upload the status report.</value>
-  </data>
-  <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT_PERCENTAGE" xml:space="preserve">
-    <value>Uploading report to [Citrix] Insight Services ({0} of {1})</value>
-  </data>
-  <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT_PROGRESS" xml:space="preserve">
-    <value>Uploading report to [Citrix] Insight Services</value>
   </data>
   <data name="ACTION_USB_PASSTHROUGH_DISABLED" xml:space="preserve">
     <value>USB pass-through disabled</value>
@@ -2137,7 +2137,7 @@ This is a potentially dangerous operation and is not allowed.</value>
     <value>&amp;Create bond anyway</value>
   </data>
   <data name="BOND_CREATE_HA_ENABLED" xml:space="preserve">
-    <value>Can’t create this bond while HA is enabled
+    <value>Can't create this bond while HA is enabled
 
 A management interface exists on one of the selected NICs. Moving the management interface to the bond could result in HA network heartbeat failure, so this action is not allowed while HA is on.
 
@@ -2167,7 +2167,7 @@ Both types of interface cannot be added to the same bond. Choose different bond 
     <value>&amp;Delete bond anyway</value>
   </data>
   <data name="BOND_DELETE_HA_ENABLED" xml:space="preserve">
-    <value>Can’t delete this bond while HA is enabled
+    <value>Can't delete this bond while HA is enabled
 
 A management interface exists on one of the bonded NICs. Deleting the  bond could result in HA network heartbeat failure, so this action is not allowed while HA is on.
 
@@ -2290,11 +2290,20 @@ This will cancel compilation of the status report.</value>
   <data name="BUGTOOL_REPORTSTATUS_DOWNLOADING" xml:space="preserve">
     <value>Downloading - {0}</value>
   </data>
+  <data name="BUGTOOL_REPORTSTATUS_DOWNLOADING_NO_DATA" xml:space="preserve">
+    <value>Downloading</value>
+  </data>
   <data name="BUGTOOL_REPORTSTATUS_FAILED" xml:space="preserve">
     <value>Failed - Please see logs for details</value>
   </data>
   <data name="BUGTOOL_REPORTSTATUS_QUEUED" xml:space="preserve">
     <value>Queued</value>
+  </data>
+  <data name="BUGTOOL_REPORTSTATUS_SAVING" xml:space="preserve">
+    <value>Saving - {0}%</value>
+  </data>
+  <data name="BUGTOOL_SAVE_STATUS_REPORT" xml:space="preserve">
+    <value>Saving report to selected destination</value>
   </data>
   <data name="BUGTOOL_SAVING" xml:space="preserve">
     <value>Saving server status report</value>
@@ -4760,7 +4769,7 @@ Eject the CD and try again.</value>
     <value>Current pool</value>
   </data>
   <data name="DR_WIZARD_APPLIANCESPAGE_DESCRIPTION_FAILBACK" xml:space="preserve">
-    <value>Select the vApps and individual VMs you want to fail back and specify the required power state for them after they have been recovered to pool ‘{0}’.</value>
+    <value>Select the vApps and individual VMs you want to fail back and specify the required power state for them after they have been recovered to pool '{0}'.</value>
   </data>
   <data name="DR_WIZARD_APPLIANCESPAGE_DESCRIPTION_FAILOVER" xml:space="preserve">
     <value>Select the vApps and individual VMs you want to recover and specify the required power state for them after they have been recovered.</value>
@@ -4838,7 +4847,7 @@ Eject the CD and try again.</value>
     <value>Disaster Recovery - Failover to pool '{0}'</value>
   </data>
   <data name="DR_WIZARD_FIRSTPAGE_DRYRUN_LINE1" xml:space="preserve">
-    <value>This wizard will take you through the steps needed to perform a test failover of your critical vApps and VMs. The vApps and VMs you select will be recovered to pool ‘{0}’ on the DR site but will not be started up.</value>
+    <value>This wizard will take you through the steps needed to perform a test failover of your critical vApps and VMs. The vApps and VMs you select will be recovered to pool '{0}' on the DR site but will not be started up.</value>
   </data>
   <data name="DR_WIZARD_FIRSTPAGE_DRYRUN_LINE2" xml:space="preserve">
     <value>Configuration information for the vApps and VMs to be failed over will be retrieved from remote storage mirrors. Before test failover begins, the wizard will run a number of checks to ensure that the selected vApps and VMs can be recovered to your DR site.</value>
@@ -4862,7 +4871,7 @@ Eject the CD and try again.</value>
 *  Which vApps and VMs you want to fail back.</value>
   </data>
   <data name="DR_WIZARD_FIRSTPAGE_FAILBACK_LINE4" xml:space="preserve">
-    <value>Before failback can take place, storage mirroring – remote replication of your VM data – must be halted.</value>
+    <value>Before failback can take place, storage mirroring - remote replication of your VM data - must be halted.</value>
   </data>
   <data name="DR_WIZARD_FIRSTPAGE_FAILOVER_LINE1" xml:space="preserve">
     <value>This wizard will take you through the steps needed to fail over your critical vApps and VMs in the event of a site/datacenter failure at your primary data site.</value>
@@ -4877,7 +4886,7 @@ Eject the CD and try again.</value>
 *  Which vApps and VMs you want to fail over to the DR site.</value>
   </data>
   <data name="DR_WIZARD_FIRSTPAGE_FAILOVER_LINE4" xml:space="preserve">
-    <value>Before failover can take place, storage mirroring – remote replication of your VM data – must be halted.</value>
+    <value>Before failover can take place, storage mirroring - remote replication of your VM data - must be halted.</value>
   </data>
   <data name="DR_WIZARD_FIRSTPAGE_TEXT" xml:space="preserve">
     <value>Before You Start</value>
@@ -7718,7 +7727,7 @@ Standard features only</value>
 To complete the patch installation, please put the servers into maintenance mode and reboot them.</value>
   </data>
   <data name="LIVE_PATCHING_FAILED_ONE_HOST" xml:space="preserve">
-    <value>Live patching failed for server ‘{0}’. To complete the patch installation, please put the server into maintenance mode and reboot it.</value>
+    <value>Live patching failed for server '{0}'. To complete the patch installation, please put the server into maintenance mode and reboot it.</value>
   </data>
   <data name="LOCAL_SRS" xml:space="preserve">
     <value>Local Storage Repositories</value>
@@ -8927,9 +8936,9 @@ When you configure a SMB storage repository, you simply provide the host name or
   <data name="NEWSR_LVMOFCOE_BLURB" xml:space="preserve">
     <value>[XenServer] hosts support Software based Fibre Channel over Ethernet using supported Converged Network Adapters (CNAs) which support FCoE in this way.
 
-All configuration required to expose a LUN to the host must be completed manually, including configuring your FCoE fabric, and allocating LUN(s) to your CNA’s public world wide name (PWWN). 
+All configuration required to expose a LUN to the host must be completed manually, including configuring your FCoE fabric, and allocating LUN(s) to your CNA's public world wide name (PWWN). 
 
-Once this configuration has been carried out, this wizard will walk you through discovering and mounting a LUN available to the hosts CNA’s as a SCSI device. The SCSI device can then be used to access the LUN as if it were a locally attached SCSI device.</value>
+Once this configuration has been carried out, this wizard will walk you through discovering and mounting a LUN available to the hosts CNA's as a SCSI device. The SCSI device can then be used to access the LUN as if it were a locally attached SCSI device.</value>
   </data>
   <data name="NEWSR_LVMOFCOE_DESCRIPTION" xml:space="preserve">
     <value>Software FCoE SR [{0} - {1}]</value>
@@ -10877,6 +10886,9 @@ To access this console switch to an account with the following role:
   <data name="RBAC_DR_WIZARD_MESSAGE" xml:space="preserve">
     <value>User {0} does not have sufficient permissions to run a Disaster Recovery wizard. Login as a different user with sufficient privileges and try again.</value>
   </data>
+  <data name="RBAC_GET_SYSTEM_STATUS_BLOCKED" xml:space="preserve">
+    <value>A {0} user cannot download system status reports. Log in as a different user with sufficient privileges and try again.</value>
+  </data>
   <data name="RBAC_HA_CONFIGURE_WARNING" xml:space="preserve">
     <value>Your current role is '{1}'.
 
@@ -11321,7 +11333,7 @@ Check the boot order in the server and reboot again.</value>
     
 1. Insert the [XenServer] installation CD-ROM in the server’s CD/DVD drive or set up a PXE network boot.
 2. Click the Reboot Now button below to reboot the server and begin the installation.
-3. Go to the server’s console and follow the on-screen instructions to install the upgrade.
+3. Go to the server's console and follow the on-screen instructions to install the upgrade.
 
 To skip this server and continue to the next server in the pool, click Skip This Server. Note that running a pool with servers on different versions of [XenServer] is not supported, and so any servers that are not upgraded during this rolling pool upgrade should be upgraded as soon as possible afterwards.
 
@@ -12138,12 +12150,6 @@ The upper limit: SR size / {2}</value>
   </data>
   <data name="STATUS_FILTER_QUEUED" xml:space="preserve">
     <value>Queued</value>
-  </data>
-  <data name="STATUS_REPORT_ENTER_CREDENTIALS_MESSAGE" xml:space="preserve">
-    <value>Enter your MyCitrix credentials (see {0}). These credentials will only be used to authenticate with [Citrix] Insight Services once and will not be stored on this machine or on your server.</value>
-  </data>
-  <data name="STATUS_REPORT_ZIP_FAILED" xml:space="preserve">
-    <value>There was an error while packaging the server status report. Only a partial report may be available</value>
   </data>
   <data name="STOPPED" xml:space="preserve">
     <value>Stopped</value>
@@ -13054,7 +13060,7 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
     <value>Upgrade your server license to enable Disaster Recovery. The Disaster Recovery feature allows you to recover your critical VMs and vApps at your DR site in the event of a disaster at your primary production site.</value>
   </data>
   <data name="UPSELL_BLURB_ENHANCEDSR" xml:space="preserve">
-    <value>Upgrade your server license to enable StorageLink™ Technology. StorageLink allows the server to leverage all the power of your existing storage hardware and offload storage operations automatically. This allows for high performance and space efficient storage provisioning, cloning, and snapshot capabilities to be handled in hardware using your storage hardware's native features.</value>
+    <value>Upgrade your server license to enable StorageLink(tm) Technology. StorageLink allows the server to leverage all the power of your existing storage hardware and offload storage operations automatically. This allows for high performance and space efficient storage provisioning, cloning, and snapshot capabilities to be handled in hardware using your storage hardware's native features.</value>
   </data>
   <data name="UPSELL_BLURB_GPU" xml:space="preserve">
     <value>Upgrade your server license to enable GPU pass-through. The GPU pass-through feature allows you to assign a dedicated graphics processing unit to a VM for higher graphics performance.</value>
@@ -13083,7 +13089,7 @@ To start a [XenServer] trial, click the button below.</value>
     <value>Upgrade your server license to enable vApps. The vApps feature allows you to place your VMs into groups, allowing them to be started or stopped as a unit, and also allowing them to be easily recovered at your DR site in the event of a disaster at your primary production site.</value>
   </data>
   <data name="UPSELL_BLURB_WLB" xml:space="preserve">
-    <value>Upgrade your server license to enable Dynamic Workload Balancing. Dynamic Workload Balancing continually profiles your virtual machines’ and servers' performance and will intelligently rebalance and optimally place new workloads to ensure the best use of physical server resources in your resource pool.</value>
+    <value>Upgrade your server license to enable Dynamic Workload Balancing. Dynamic Workload Balancing continually profiles your virtual machines' and servers' performance and will intelligently rebalance and optimally place new workloads to ensure the best use of physical server resources in your resource pool.</value>
   </data>
   <data name="UPTIME" xml:space="preserve">
     <value>Uptime</value>

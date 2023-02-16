@@ -771,6 +771,18 @@
     <Compile Include="Dialogs\InstallCertificateDialog.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Wizards\BugToolWizard\StatusReportRows\ClientSideStatusReportRow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Wizards\BugToolWizard\StatusReportRows\SingleHostStatusReportRow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Wizards\BugToolWizard\StatusReportRows\StatusReportRow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Wizards\BugToolWizard\StatusReportRows\ZipStatusReportRow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Wizards\ConversionWizard\ConversionWizard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1412,22 +1424,22 @@
       <DependentUpon>VMAdvancedEditPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Wizards\WizardProgressEventArgs.cs" />
-    <Compile Include="Wizards\BugToolWizardFiles\BugToolPageDestination.cs">
+    <Compile Include="Wizards\BugToolWizard\BugToolPageDestination.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Wizards\BugToolWizardFiles\BugToolPageDestination.Designer.cs">
+    <Compile Include="Wizards\BugToolWizard\BugToolPageDestination.Designer.cs">
       <DependentUpon>BugToolPageDestination.cs</DependentUpon>
     </Compile>
-    <Compile Include="Wizards\BugToolWizardFiles\BugToolPageRetrieveData.cs">
+    <Compile Include="Wizards\BugToolWizard\BugToolPageRetrieveData.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Wizards\BugToolWizardFiles\BugToolPageRetrieveData.Designer.cs">
+    <Compile Include="Wizards\BugToolWizard\BugToolPageRetrieveData.Designer.cs">
       <DependentUpon>BugToolPageRetrieveData.cs</DependentUpon>
     </Compile>
-    <Compile Include="Wizards\BugToolWizardFiles\BugToolPageSelectCapabilities.cs">
+    <Compile Include="Wizards\BugToolWizard\BugToolPageSelectCapabilities.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Wizards\BugToolWizardFiles\BugToolPageSelectCapabilities.Designer.cs">
+    <Compile Include="Wizards\BugToolWizard\BugToolPageSelectCapabilities.Designer.cs">
       <DependentUpon>BugToolPageSelectCapabilities.cs</DependentUpon>
     </Compile>
     <Compile Include="Wizards\HAWizard.cs">
@@ -1452,16 +1464,16 @@
     <Compile Include="Diagnostics\Problems\HostProblem\NotEnoughMem.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\PrecheckFailed.cs" />
     <Compile Include="Diagnostics\Problems\Problem.cs" />
-    <Compile Include="Wizards\BugToolWizardFiles\GenericSelectHostsPage.cs">
+    <Compile Include="Wizards\BugToolWizard\GenericSelectHostsPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Wizards\BugToolWizardFiles\GenericSelectHostsPage.Designer.cs">
+    <Compile Include="Wizards\BugToolWizard\GenericSelectHostsPage.Designer.cs">
       <DependentUpon>GenericSelectHostsPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Wizards\BugToolWizardFiles\BugToolWizard.cs">
+    <Compile Include="Wizards\BugToolWizard\BugToolWizard.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Wizards\BugToolWizardFiles\BugToolWizard.Designer.cs">
+    <Compile Include="Wizards\BugToolWizard\BugToolWizard.Designer.cs">
       <DependentUpon>BugToolWizard.cs</DependentUpon>
     </Compile>
     <Compile Include="ConsoleView\VNCGraphicsClient.cs">
@@ -2667,15 +2679,15 @@
       <DependentUpon>PerfmonAlertEditPage.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\BugToolWizardFiles\BugToolPageDestination.resx">
+    <EmbeddedResource Include="Wizards\BugToolWizard\BugToolPageDestination.resx">
       <SubType>Designer</SubType>
       <DependentUpon>BugToolPageDestination.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\BugToolWizardFiles\BugToolPageRetrieveData.resx">
+    <EmbeddedResource Include="Wizards\BugToolWizard\BugToolPageRetrieveData.resx">
       <SubType>Designer</SubType>
       <DependentUpon>BugToolPageRetrieveData.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\BugToolWizardFiles\BugToolPageSelectCapabilities.resx">
+    <EmbeddedResource Include="Wizards\BugToolWizard\BugToolPageSelectCapabilities.resx">
       <DependentUpon>BugToolPageSelectCapabilities.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -2683,11 +2695,11 @@
       <DependentUpon>HAWizard.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\BugToolWizardFiles\GenericSelectHostsPage.resx">
+    <EmbeddedResource Include="Wizards\BugToolWizard\GenericSelectHostsPage.resx">
       <DependentUpon>GenericSelectHostsPage.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\BugToolWizardFiles\BugToolWizard.resx">
+    <EmbeddedResource Include="Wizards\BugToolWizard\BugToolWizard.resx">
       <DependentUpon>BugToolWizard.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -4480,6 +4492,7 @@
     <None Include="Images\server_up_16.png" />
     <None Include="Images\saved_searches_24.png" />
     <None Include="Images\RunningDC_16.png" />
+    <None Include="Images\save_to_disk.png" />
     <Content Include="Images\scilinux_16x.png" />
     <None Include="Images\server_32.png" />
     <None Include="Images\server_up_32.png" />
@@ -5950,28 +5963,28 @@
     <EmbeddedResource Include="Wizards\BallooningWizard_Pages\MemorySettings.zh-CN.resx">
       <DependentUpon>MemorySettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\BugToolWizardFiles\BugToolPageDestination.ja.resx">
+    <EmbeddedResource Include="Wizards\BugToolWizard\BugToolPageDestination.ja.resx">
       <DependentUpon>BugToolPageDestination.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\BugToolWizardFiles\BugToolPageDestination.zh-CN.resx">
+    <EmbeddedResource Include="Wizards\BugToolWizard\BugToolPageDestination.zh-CN.resx">
       <DependentUpon>BugToolPageDestination.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\BugToolWizardFiles\BugToolPageRetrieveData.ja.resx">
+    <EmbeddedResource Include="Wizards\BugToolWizard\BugToolPageRetrieveData.ja.resx">
       <DependentUpon>BugToolPageRetrieveData.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\BugToolWizardFiles\BugToolPageRetrieveData.zh-CN.resx">
+    <EmbeddedResource Include="Wizards\BugToolWizard\BugToolPageRetrieveData.zh-CN.resx">
       <DependentUpon>BugToolPageRetrieveData.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\BugToolWizardFiles\BugToolPageSelectCapabilities.ja.resx">
+    <EmbeddedResource Include="Wizards\BugToolWizard\BugToolPageSelectCapabilities.ja.resx">
       <DependentUpon>BugToolPageSelectCapabilities.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\BugToolWizardFiles\BugToolPageSelectCapabilities.zh-CN.resx">
+    <EmbeddedResource Include="Wizards\BugToolWizard\BugToolPageSelectCapabilities.zh-CN.resx">
       <DependentUpon>BugToolPageSelectCapabilities.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\BugToolWizardFiles\BugToolWizard.ja.resx">
+    <EmbeddedResource Include="Wizards\BugToolWizard\BugToolWizard.ja.resx">
       <DependentUpon>BugToolWizard.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\BugToolWizardFiles\BugToolWizard.zh-CN.resx">
+    <EmbeddedResource Include="Wizards\BugToolWizard\BugToolWizard.zh-CN.resx">
       <DependentUpon>BugToolWizard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\CrossPoolMigrateWizard\CrossPoolMigrateFinishPage.ja.resx">
@@ -6083,10 +6096,10 @@
     <EmbeddedResource Include="Wizards\ExportWizard\ExportSelectVMsPage.zh-CN.resx">
       <DependentUpon>ExportSelectVMsPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\BugToolWizardFiles\GenericSelectHostsPage.ja.resx">
+    <EmbeddedResource Include="Wizards\BugToolWizard\GenericSelectHostsPage.ja.resx">
       <DependentUpon>GenericSelectHostsPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\BugToolWizardFiles\GenericSelectHostsPage.zh-CN.resx">
+    <EmbeddedResource Include="Wizards\BugToolWizard\GenericSelectHostsPage.zh-CN.resx">
       <DependentUpon>GenericSelectHostsPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\GenericPages\LunPerVdiMappingPage.ja.resx">

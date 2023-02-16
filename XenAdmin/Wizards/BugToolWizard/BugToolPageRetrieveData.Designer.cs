@@ -1,4 +1,4 @@
-namespace XenAdmin.Wizards.BugToolWizardFiles
+namespace XenAdmin.Wizards.BugToolWizard
 {
     partial class BugToolPageRetrieveData
     {
@@ -51,6 +51,8 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             this.columnHost = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnHostStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnResultImage = new System.Windows.Forms.DataGridViewImageColumn();
+            this.label1 = new System.Windows.Forms.Label();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEx1)).BeginInit();
             this.SuspendLayout();
@@ -59,23 +61,28 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
             this.tableLayoutPanel1.Controls.Add(this.labelBlurb, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.labelError, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.progressBar1, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.dataGridViewEx1, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.labelError, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.progressBar1, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.dataGridViewEx1, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.linkLabel1, 1, 1);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // labelBlurb
             // 
             resources.ApplyResources(this.labelBlurb, "labelBlurb");
+            this.tableLayoutPanel1.SetColumnSpan(this.labelBlurb, 2);
             this.labelBlurb.Name = "labelBlurb";
             // 
             // labelError
             // 
             resources.ApplyResources(this.labelError, "labelError");
+            this.tableLayoutPanel1.SetColumnSpan(this.labelError, 2);
             this.labelError.Name = "labelError";
             // 
             // progressBar1
             // 
+            this.tableLayoutPanel1.SetColumnSpan(this.progressBar1, 2);
             resources.ApplyResources(this.progressBar1, "progressBar1");
             this.progressBar1.Name = "progressBar1";
             // 
@@ -90,6 +97,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             this.columnHost,
             this.columnHostStatus,
             this.columnResultImage});
+            this.tableLayoutPanel1.SetColumnSpan(this.dataGridViewEx1, 2);
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -133,6 +141,18 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             resources.ApplyResources(this.columnResultImage, "columnResultImage");
             this.columnResultImage.Name = "columnResultImage";
             // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
+            // linkLabel1
+            // 
+            resources.ApplyResources(this.linkLabel1, "linkLabel1");
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
             // BugToolPageRetrieveData
             // 
             this.Controls.Add(this.tableLayoutPanel1);
@@ -157,5 +177,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
         private System.Windows.Forms.DataGridViewTextBoxColumn columnHost;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnHostStatus;
         private System.Windows.Forms.DataGridViewImageColumn columnResultImage;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }
