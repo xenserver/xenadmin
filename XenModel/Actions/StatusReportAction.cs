@@ -142,7 +142,7 @@ namespace XenAdmin.Actions
 
         private void CompileClientMetadata()
         {
-            var metadata = XenAdminConfigManager.Provider.GetXenCenterMetadata(true);
+            var metadata = XenAdminConfigManager.Provider.GetXenCenterMetadata();
             string metadataDestination = string.Format("{0}\\{1}-Metadata.json", filePath, timeString);
             WriteExtraInfoToFile(new List<string> { metadata }, metadataDestination);
         }

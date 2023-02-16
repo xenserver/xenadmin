@@ -175,10 +175,6 @@
       <Project>{2D78AC6C-B867-484A-A447-3C6FC8B8EAF7}</Project>
       <Name>XenOvfApi</Name>
     </ProjectReference>
-    <ProjectReference Include="..\XenServerHealthCheck\XenServerHealthCheck.csproj">
-      <Project>{deb3208d-1153-407c-8c99-0d8899be25a5}</Project>
-      <Name>XenServerHealthCheck</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="WizardTests\Patching\" />

@@ -33,7 +33,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using XenAdmin.Core;
-using XenAdmin.Model;
 
 namespace XenAPI
 {
@@ -112,6 +111,7 @@ namespace XenAPI
         private const string FORBID_RPU_FOR_HCI = "hci-forbid-rpu";
         private const string FAULT_TOLERANCE_LIMIT_FOR_HCI = "hci-limit-fault-tolerance";
         private const string FORBID_UPDATE_AUTO_RESTARTS = "hci-forbid-update-auto-restart";
+        public const string HEALTH_CHECK_ENROLLMENT = "Enrollment";
 
         public bool RollingUpgrade()
         {
@@ -255,9 +255,20 @@ namespace XenAPI
 
         #region Health Check settings
 
-        public HealthCheckSettings HealthCheckSettings()
+        public enum HealthCheckStatus
         {
-            return new HealthCheckSettings(health_check_config);
+            Disabled, Enabled, Undefined
+        }
+
+        public HealthCheckStatus GetHealthCheckStatus()
+        {
+            if (health_check_config == null || !health_check_config.ContainsKey(HEALTH_CHECK_ENROLLMENT))
+                return HealthCheckStatus.Undefined;
+
+            if (health_check_config[HEALTH_CHECK_ENROLLMENT] == "true")
+                return HealthCheckStatus.Enabled;
+
+            return HealthCheckStatus.Disabled;
         }
 
         #endregion

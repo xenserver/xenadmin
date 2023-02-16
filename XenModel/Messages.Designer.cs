@@ -601,6 +601,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disabling Health Check for &apos;{0}&apos;....
+        /// </summary>
+        public static string ACTION_DISABLE_HEALTH_CHECK_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("ACTION_DISABLE_HEALTH_CHECK_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disable Health Check.
+        /// </summary>
+        public static string ACTION_DISABLE_HEALTH_CHECK_TITLE {
+            get {
+                return ResourceManager.GetString("ACTION_DISABLE_HEALTH_CHECK_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disable IGMP snooping.
         /// </summary>
         public static string ACTION_DISABLE_IGMP_SNOOPING {
@@ -1249,33 +1267,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Get Health Check analysis result from [Citrix] Insight Services.
-        /// </summary>
-        public static string ACTION_GET_HEALTH_CHECK_RESULT {
-            get {
-                return ResourceManager.GetString("ACTION_GET_HEALTH_CHECK_RESULT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Failed to get the analysis result.
-        /// </summary>
-        public static string ACTION_GET_HEALTH_CHECK_RESULT_FAILED {
-            get {
-                return ResourceManager.GetString("ACTION_GET_HEALTH_CHECK_RESULT_FAILED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Getting the analysis result.
-        /// </summary>
-        public static string ACTION_GET_HEALTH_CHECK_RESULT_PROGRESS {
-            get {
-                return ResourceManager.GetString("ACTION_GET_HEALTH_CHECK_RESULT_PROGRESS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Action completed. {0} VDIs found..
         /// </summary>
         public static string ACTION_GET_METADATA_VDIS_DONE {
@@ -1353,24 +1344,6 @@ namespace XenAdmin {
         public static string ACTION_HA_UNPROTECT_VM_TITLE {
             get {
                 return ResourceManager.GetString("ACTION_HA_UNPROTECT_VM_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Authentication with [Citrix] Insight Services.
-        /// </summary>
-        public static string ACTION_HEALTHCHECK_AUTHENTICATION {
-            get {
-                return ResourceManager.GetString("ACTION_HEALTHCHECK_AUTHENTICATION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Authenticating with [Citrix] Insight Services.
-        /// </summary>
-        public static string ACTION_HEALTHCHECK_AUTHENTICATION_PROGRESS {
-            get {
-                return ResourceManager.GetString("ACTION_HEALTHCHECK_AUTHENTICATION_PROGRESS", resourceCulture);
             }
         }
         
@@ -1951,15 +1924,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Save Health Check settings.
-        /// </summary>
-        public static string ACTION_SAVE_HEALTHCHECK_SETTINGS {
-            get {
-                return ResourceManager.GetString("ACTION_SAVE_HEALTHCHECK_SETTINGS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Save settings for &apos;{0}&apos;....
         /// </summary>
         public static string ACTION_SAVE_SETTINGS {
@@ -2001,15 +1965,6 @@ namespace XenAdmin {
         public static string ACTION_SAVING_FOLDER_TAGS_FOR {
             get {
                 return ResourceManager.GetString("ACTION_SAVING_FOLDER_TAGS_FOR", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Saving Health Check settings for &apos;{0}&apos;....
-        /// </summary>
-        public static string ACTION_SAVING_HEALTHCHECK_SETTINGS {
-            get {
-                return ResourceManager.GetString("ACTION_SAVING_HEALTHCHECK_SETTINGS", resourceCulture);
             }
         }
         
@@ -2676,15 +2631,6 @@ namespace XenAdmin {
         public static string ACTION_TOOLSTACK_RESTARTING_ON {
             get {
                 return ResourceManager.GetString("ACTION_TOOLSTACK_RESTARTING_ON", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Transfer Health Check settings.
-        /// </summary>
-        public static string ACTION_TRANSFER_HEALTHCHECK_SETTINGS {
-            get {
-                return ResourceManager.GetString("ACTION_TRANSFER_HEALTHCHECK_SETTINGS", resourceCulture);
             }
         }
         
@@ -8128,24 +8074,6 @@ namespace XenAdmin {
         public static string CONFIRM_DISABLE_CBT_VMS_TITLE {
             get {
                 return ResourceManager.GetString("CONFIRM_DISABLE_CBT_VMS_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to disable Health Check on the selected pool?.
-        /// </summary>
-        public static string CONFIRM_DISABLE_HEALTH_CHECK_POOL {
-            get {
-                return ResourceManager.GetString("CONFIRM_DISABLE_HEALTH_CHECK_POOL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to disable Health Check on the selected server?.
-        /// </summary>
-        public static string CONFIRM_DISABLE_HEALTH_CHECK_SERVER {
-            get {
-                return ResourceManager.GetString("CONFIRM_DISABLE_HEALTH_CHECK_SERVER", resourceCulture);
             }
         }
         
@@ -18855,204 +18783,6 @@ namespace XenAdmin {
         public static string HAWIZARD_ASSIGNPRIORITIESPAGE_TITLE {
             get {
                 return ResourceManager.GetString("HAWIZARD_ASSIGNPRIORITIESPAGE_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to HealthCheck.
-        /// </summary>
-        public static string HEALTH_CHECK {
-            get {
-                return ResourceManager.GetString("HEALTH_CHECK", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Authentication with [Citrix] Insight Services failed. See the application log files for more information..
-        /// </summary>
-        public static string HEALTH_CHECK_AUTHENTICATION_FAILED {
-            get {
-                return ResourceManager.GetString("HEALTH_CHECK_AUTHENTICATION_FAILED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Invalid user name or password. Please try again..
-        /// </summary>
-        public static string HEALTH_CHECK_AUTHENTICATION_INVALID_CREDENTIALS {
-            get {
-                return ResourceManager.GetString("HEALTH_CHECK_AUTHENTICATION_INVALID_CREDENTIALS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to https://cis.citrix.com/legal/.
-        /// </summary>
-        public static string HEALTH_CHECK_CIS_POLICY_URL {
-            get {
-                return ResourceManager.GetString("HEALTH_CHECK_CIS_POLICY_URL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to http://www.citrix.com/about/legal/privacy.html.
-        /// </summary>
-        public static string HEALTH_CHECK_CITRIX_POLICY_URL {
-            get {
-                return ResourceManager.GetString("HEALTH_CHECK_CITRIX_POLICY_URL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The information that Health Check uploads to [Citrix] Insight Services will be used for troubleshooting and diagnostics support purposes, as well as to improve the quality, reliability, and performance of our products subject to the [Citrix] Insight Services Policy at {0} and [Citrix] Privacy Policy at {1}..
-        /// </summary>
-        public static string HEALTH_CHECK_PRIVACY_POLICY {
-            get {
-                return ResourceManager.GetString("HEALTH_CHECK_PRIVACY_POLICY", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to This user is not authorized to access this server..
-        /// </summary>
-        public static string HEALTH_CHECK_USER_HAS_NO_PERMISSION_TO_CONNECT {
-            get {
-                return ResourceManager.GetString("HEALTH_CHECK_USER_HAS_NO_PERMISSION_TO_CONNECT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to This user is not authorized to perform Health Check operations..
-        /// </summary>
-        public static string HEALTH_CHECK_USER_NOT_AUTHORIZED {
-            get {
-                return ResourceManager.GetString("HEALTH_CHECK_USER_NOT_AUTHORIZED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Authentication with [Citrix] Insight Services is required in order to enable this feature. [XenCenter] detected a previous successful authentication for one of other connected pools. You can choose to re-use it or authenticate again..
-        /// </summary>
-        public static string HEALTHCHECK_AUTHENTICATION_RUBRIC_EXISTING_TOKEN {
-            get {
-                return ResourceManager.GetString("HEALTHCHECK_AUTHENTICATION_RUBRIC_EXISTING_TOKEN", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Authentication with [Citrix] Insight Services is required in order to enable this feature. Please register by providing MyCitrix credentials (see {0}). These credentials will only be used to obtain an upload token and will not be stored on this machine or on your server..
-        /// </summary>
-        public static string HEALTHCHECK_AUTHENTICATION_RUBRIC_NO_TOKEN {
-            get {
-                return ResourceManager.GetString("HEALTHCHECK_AUTHENTICATION_RUBRIC_NO_TOKEN", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Only {0} users can enroll into, configure, or disable Health Check, or upload a report and request a report analysis.
-        /// </summary>
-        public static string HEALTHCHECK_CANNOT_ALTER_SETTINGS {
-            get {
-                return ResourceManager.GetString("HEALTHCHECK_CANNOT_ALTER_SETTINGS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to OK, Enable Health Check.
-        /// </summary>
-        public static string HEALTHCHECK_ENROLLMENT_CONFIRMATION_BUTTON_LABEL {
-            get {
-                return ResourceManager.GetString("HEALTHCHECK_ENROLLMENT_CONFIRMATION_BUTTON_LABEL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Health Check Enrollment - {0}.
-        /// </summary>
-        public static string HEALTHCHECK_ENROLLMENT_TITLE {
-            get {
-                return ResourceManager.GetString("HEALTHCHECK_ENROLLMENT_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Request an additional upload now.
-        /// </summary>
-        public static string HEALTHCHECK_ON_DEMAND_REQUEST {
-            get {
-                return ResourceManager.GetString("HEALTHCHECK_ON_DEMAND_REQUEST", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Additional upload requested at {0}.
-        /// </summary>
-        public static string HEALTHCHECK_ON_DEMAND_REQUESTED_AT {
-            get {
-                return ResourceManager.GetString("HEALTHCHECK_ON_DEMAND_REQUESTED_AT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Upload a Health Check report every {0} weeks on {1} starting at {2}.
-        /// </summary>
-        public static string HEALTHCHECK_SCHEDULE_DESCRIPTION {
-            get {
-                return ResourceManager.GetString("HEALTHCHECK_SCHEDULE_DESCRIPTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} issues detected.
-        /// </summary>
-        public static string HEALTHCHECK_STATUS_ISSUES_FOUND {
-            get {
-                return ResourceManager.GetString("HEALTHCHECK_STATUS_ISSUES_FOUND", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to No issues detected.
-        /// </summary>
-        public static string HEALTHCHECK_STATUS_NO_ISSUES_FOUND {
-            get {
-                return ResourceManager.GetString("HEALTHCHECK_STATUS_NO_ISSUES_FOUND", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to No report uploaded yet.
-        /// </summary>
-        public static string HEALTHCHECK_STATUS_NO_UPLOAD_YET {
-            get {
-                return ResourceManager.GetString("HEALTHCHECK_STATUS_NO_UPLOAD_YET", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Analysis not yet available.
-        /// </summary>
-        public static string HEALTHCHECK_STATUS_NOT_AVAILABLE_YET {
-            get {
-                return ResourceManager.GetString("HEALTHCHECK_STATUS_NOT_AVAILABLE_YET", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Health Check not enabled.
-        /// </summary>
-        public static string HEALTHCHECK_STATUS_NOT_ENROLLED {
-            get {
-                return ResourceManager.GetString("HEALTHCHECK_STATUS_NOT_ENROLLED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 1 issue detected.
-        /// </summary>
-        public static string HEALTHCHECK_STATUS_ONE_ISSUE_FOUND {
-            get {
-                return ResourceManager.GetString("HEALTHCHECK_STATUS_ONE_ISSUE_FOUND", resourceCulture);
             }
         }
         
@@ -30934,6 +30664,25 @@ namespace XenAdmin {
         public static string PROBLEM_CONTAINER_MANAGEMENT_UPGRADE {
             get {
                 return ResourceManager.GetString("PROBLEM_CONTAINER_MANAGEMENT_UPGRADE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disable Health Check.
+        /// </summary>
+        public static string PROBLEM_HEALTH_CHECK_HELP {
+            get {
+                return ResourceManager.GetString("PROBLEM_HEALTH_CHECK_HELP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Health Check has been removed, but &apos;{0}&apos; is still enrolled to it.
+        ///{1} will disable Health Check and clear the enrollment before you can proceed to manage your system..
+        /// </summary>
+        public static string PROBLEM_HEALTH_CHECK_ON_CONNECTION {
+            get {
+                return ResourceManager.GetString("PROBLEM_HEALTH_CHECK_ON_CONNECTION", resourceCulture);
             }
         }
         

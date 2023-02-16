@@ -106,7 +106,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             if (direction != PageLoadedDirection.Forward)
                 return;
 
-            if (!PerformCheck(CheckPathValid, CheckDestinationFolderExists, CheckCredentialsEntered, CheckUploadAuthentication))
+            if (!PerformCheck(CheckPathValid, CheckDestinationFolderExists, CheckCredentialsEntered))
             {
                 cancel = true;
                 return;
@@ -247,35 +247,6 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                 return false;
 
             return true;
-        }
-
-        private bool CheckUploadAuthentication(out string error)
-        {
-            error = string.Empty;
-
-            if (!uploadCheckBox.Checked)
-                return true;
-            
-            if (string.IsNullOrEmpty(usernameTextBox.Text.Trim()) || string.IsNullOrEmpty(passwordTextBox.Text))
-                return false;
-
-            var action = new HealthCheckAuthenticationAction(usernameTextBox.Text.Trim(), passwordTextBox.Text.Trim(),
-                Registry.HealthCheckIdentityTokenDomainName, Registry.HealthCheckUploadGrantTokenDomainName,
-                Registry.HealthCheckUploadTokenDomainName, Registry.HealthCheckDiagnosticDomainName, Registry.HealthCheckProductKey, 
-                TokenExpiration, false, false);
-
-            using (var dlg = new ActionProgressDialog(action, ProgressBarStyle.Blocks))
-                dlg.ShowDialog(Parent);
-
-            if (!action.Succeeded)
-            {
-                error = action.Exception != null ? action.Exception.Message : Messages.ERROR_UNKNOWN;
-                UploadToken = null;
-                return false;
-            }
-           
-            UploadToken = action.UploadToken;  // current upload token
-            return !string.IsNullOrEmpty(UploadToken);
         }
 
         private bool CheckCaseNumberValid(out string error)

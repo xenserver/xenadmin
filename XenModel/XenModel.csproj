@@ -60,14 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actions\Action.cs" />
-    <Compile Include="Actions\HealthCheck\HealthCheckAuthenticationAction.cs" />
-    <Compile Include="Actions\HealthCheck\SaveHealthCheckSettingsAction.cs" />
-    <Compile Include="Actions\HealthCheck\TransferHealthCheckSettingAction.cs" />
-    <Compile Include="Actions\HealthCheck\TransferProxySettingsAction.cs" />
-    <Compile Include="Actions\HealthCheck\GetHealthCheckAnalysisResultAction.cs" />
-    <Compile Include="Actions\HealthCheck\TransferXenCenterMetadataAction.cs" />
-    <Compile Include="Actions\HealthCheck\UploadServerStatusReportAction.cs" />
-    <Compile Include="Actions\HealthCheck\XenServerHealthCheckUpload.cs" />
+    <Compile Include="Actions\HealthCheck\DisableHealthCheckAction.cs" />
     <Compile Include="Actions\CancellingAction.cs" />
     <Compile Include="Actions\DockerContainer\DockerContainerLifetimeAction.cs" />
     <Compile Include="Actions\DockerContainer\ExecuteContainerPluginAction.cs" />
@@ -186,7 +179,6 @@
       <DependentUpon>FriendlyNames.resx</DependentUpon>
     </Compile>
     <Compile Include="FriendlyNameManager.cs" />
-    <Compile Include="HealthCheckSettings.cs" />
     <Compile Include="InvokeHelper.cs" />
     <Compile Include="Mappings\VmMapping.cs" />
     <Compile Include="Messages.Designer.cs">

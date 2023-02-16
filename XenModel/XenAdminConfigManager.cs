@@ -60,7 +60,7 @@ namespace XenAdmin
         void UpdateServerHistory(string hostnameWithPort);
         void SaveSettingsIfRequired();
         bool ShowHiddenVMs { get; }
-        string GetXenCenterMetadata(bool isForXenCenter);
+        string GetXenCenterMetadata();
         string GetCustomUpdatesXmlLocation();
         string GetCustomFileServicePrefix();
     }

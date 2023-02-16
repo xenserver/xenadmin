@@ -303,6 +303,12 @@
   <data name="ACTION_DISABLE_CHANGED_BLOCK_TRACKING_FOR" xml:space="preserve">
     <value>Disabling Changed Block Tracking for VM '{0}'</value>
   </data>
+  <data name="ACTION_DISABLE_HEALTH_CHECK_DESCRIPTION" xml:space="preserve">
+    <value>Disabling Health Check for '{0}'...</value>
+  </data>
+  <data name="ACTION_DISABLE_HEALTH_CHECK_TITLE" xml:space="preserve">
+    <value>Disable Health Check</value>
+  </data>
   <data name="ACTION_DISABLE_IGMP_SNOOPING" xml:space="preserve">
     <value>Disable IGMP snooping</value>
   </data>
@@ -516,15 +522,6 @@
   <data name="ACTION_GET_DISK_SPACE_REQUIREMENTS_TITLE" xml:space="preserve">
     <value>Get space requirements</value>
   </data>
-  <data name="ACTION_GET_HEALTH_CHECK_RESULT" xml:space="preserve">
-    <value>Get Health Check analysis result from [Citrix] Insight Services</value>
-  </data>
-  <data name="ACTION_GET_HEALTH_CHECK_RESULT_FAILED" xml:space="preserve">
-    <value>Failed to get the analysis result</value>
-  </data>
-  <data name="ACTION_GET_HEALTH_CHECK_RESULT_PROGRESS" xml:space="preserve">
-    <value>Getting the analysis result</value>
-  </data>
   <data name="ACTION_GET_METADATA_VDIS_DONE" xml:space="preserve">
     <value>Action completed. {0} VDIs found.</value>
   </data>
@@ -548,12 +545,6 @@
   </data>
   <data name="ACTION_HA_UNPROTECT_VM_TITLE" xml:space="preserve">
     <value>Setting HA restart priority on '{0}' to '{1}'</value>
-  </data>
-  <data name="ACTION_HEALTHCHECK_AUTHENTICATION" xml:space="preserve">
-    <value>Authentication with [Citrix] Insight Services</value>
-  </data>
-  <data name="ACTION_HEALTHCHECK_AUTHENTICATION_PROGRESS" xml:space="preserve">
-    <value>Authenticating with [Citrix] Insight Services</value>
   </data>
   <data name="ACTION_HOSTS_REBOOTED" xml:space="preserve">
     <value>Servers rebooted</value>
@@ -747,9 +738,6 @@
   <data name="ACTION_SAVE_FOLDER_TAGS" xml:space="preserve">
     <value>Save folder and tags</value>
   </data>
-  <data name="ACTION_SAVE_HEALTHCHECK_SETTINGS" xml:space="preserve">
-    <value>Save Health Check settings</value>
-  </data>
   <data name="ACTION_SAVE_SETTINGS" xml:space="preserve">
     <value>Save settings for '{0}'...</value>
   </data>
@@ -764,9 +752,6 @@
   </data>
   <data name="ACTION_SAVING_FOLDER_TAGS_FOR" xml:space="preserve">
     <value>Saving folder and tags for '{0}'...</value>
-  </data>
-  <data name="ACTION_SAVING_HEALTHCHECK_SETTINGS" xml:space="preserve">
-    <value>Saving Health Check settings for '{0}'...</value>
   </data>
   <data name="ACTION_SAVING_SETTINGS_FOR" xml:space="preserve">
     <value>Saving settings for '{0}'...</value>
@@ -989,9 +974,6 @@
   </data>
   <data name="ACTION_TOOLSTACK_RESTART_ON" xml:space="preserve">
     <value>Restart toolstack on '{0}'</value>
-  </data>
-  <data name="ACTION_TRANSFER_HEALTHCHECK_SETTINGS" xml:space="preserve">
-    <value>Transfer Health Check settings</value>
   </data>
   <data name="ACTION_UPDATE_INTEGRATED_GPU_PASSTHROUGH_TITLE" xml:space="preserve">
     <value>Updating integrated GPU pass-through on '{0}'</value>
@@ -2949,12 +2931,6 @@ This action is final and unrecoverable.</value>
   </data>
   <data name="CONFIRM_DISABLE_CBT_VM_TITLE" xml:space="preserve">
     <value>Disable Changed Block Tracking on VM "{0}"</value>
-  </data>
-  <data name="CONFIRM_DISABLE_HEALTH_CHECK_POOL" xml:space="preserve">
-    <value>Are you sure you want to disable Health Check on the selected pool?</value>
-  </data>
-  <data name="CONFIRM_DISABLE_HEALTH_CHECK_SERVER" xml:space="preserve">
-    <value>Are you sure you want to disable Health Check on the selected server?</value>
   </data>
   <data name="CONFIRM_EXPORT_FAT" xml:space="preserve">
     <value>The export file may be larger than your filesystem limit.
@@ -6584,69 +6560,6 @@ Click Configure HA to alter the settings displayed below.</value>
   </data>
   <data name="HA_WIZARD_FINISH_PAGE_TITLE" xml:space="preserve">
     <value>Review configuration and activate HA</value>
-  </data>
-  <data name="HEALTHCHECK_AUTHENTICATION_RUBRIC_EXISTING_TOKEN" xml:space="preserve">
-    <value>Authentication with [Citrix] Insight Services is required in order to enable this feature. [XenCenter] detected a previous successful authentication for one of other connected pools. You can choose to re-use it or authenticate again.</value>
-  </data>
-  <data name="HEALTHCHECK_AUTHENTICATION_RUBRIC_NO_TOKEN" xml:space="preserve">
-    <value>Authentication with [Citrix] Insight Services is required in order to enable this feature. Please register by providing MyCitrix credentials (see {0}). These credentials will only be used to obtain an upload token and will not be stored on this machine or on your server.</value>
-  </data>
-  <data name="HEALTHCHECK_ENROLLMENT_CONFIRMATION_BUTTON_LABEL" xml:space="preserve">
-    <value>OK, Enable Health Check</value>
-  </data>
-  <data name="HEALTHCHECK_ENROLLMENT_TITLE" xml:space="preserve">
-    <value>Health Check Enrollment - {0}</value>
-  </data>
-  <data name="HEALTHCHECK_ON_DEMAND_REQUEST" xml:space="preserve">
-    <value>Request an additional upload now</value>
-  </data>
-  <data name="HEALTHCHECK_ON_DEMAND_REQUESTED_AT" xml:space="preserve">
-    <value>Additional upload requested at {0}</value>
-  </data>
-  <data name="HEALTHCHECK_SCHEDULE_DESCRIPTION" xml:space="preserve">
-    <value>Upload a Health Check report every {0} weeks on {1} starting at {2}</value>
-  </data>
-  <data name="HEALTHCHECK_STATUS_ISSUES_FOUND" xml:space="preserve">
-    <value>{0} issues detected</value>
-  </data>
-  <data name="HEALTHCHECK_STATUS_NOT_AVAILABLE_YET" xml:space="preserve">
-    <value>Analysis not yet available</value>
-  </data>
-  <data name="HEALTHCHECK_STATUS_NOT_ENROLLED" xml:space="preserve">
-    <value>Health Check not enabled</value>
-  </data>
-  <data name="HEALTHCHECK_STATUS_NO_ISSUES_FOUND" xml:space="preserve">
-    <value>No issues detected</value>
-  </data>
-  <data name="HEALTHCHECK_STATUS_NO_UPLOAD_YET" xml:space="preserve">
-    <value>No report uploaded yet</value>
-  </data>
-  <data name="HEALTHCHECK_STATUS_ONE_ISSUE_FOUND" xml:space="preserve">
-    <value>1 issue detected</value>
-  </data>
-  <data name="HEALTH_CHECK" xml:space="preserve">
-    <value>HealthCheck</value>
-  </data>
-  <data name="HEALTH_CHECK_AUTHENTICATION_FAILED" xml:space="preserve">
-    <value>Authentication with [Citrix] Insight Services failed. See the application log files for more information.</value>
-  </data>
-  <data name="HEALTH_CHECK_AUTHENTICATION_INVALID_CREDENTIALS" xml:space="preserve">
-    <value>Invalid user name or password. Please try again.</value>
-  </data>
-  <data name="HEALTH_CHECK_CIS_POLICY_URL" xml:space="preserve">
-    <value>https://cis.citrix.com/legal/</value>
-  </data>
-  <data name="HEALTH_CHECK_CITRIX_POLICY_URL" xml:space="preserve">
-    <value>http://www.citrix.com/about/legal/privacy.html</value>
-  </data>
-  <data name="HEALTH_CHECK_PRIVACY_POLICY" xml:space="preserve">
-    <value>The information that Health Check uploads to [Citrix] Insight Services will be used for troubleshooting and diagnostics support purposes, as well as to improve the quality, reliability, and performance of our products subject to the [Citrix] Insight Services Policy at {0} and [Citrix] Privacy Policy at {1}.</value>
-  </data>
-  <data name="HEALTH_CHECK_USER_HAS_NO_PERMISSION_TO_CONNECT" xml:space="preserve">
-    <value>This user is not authorized to access this server.</value>
-  </data>
-  <data name="HEALTH_CHECK_USER_NOT_AUTHORIZED" xml:space="preserve">
-    <value>This user is not authorized to perform Health Check operations.</value>
   </data>
   <data name="HEARTBEATING_STATUS" xml:space="preserve">
     <value>Heartbeating status</value>
@@ -10724,6 +10637,13 @@ Support for PV guests has been removed in {1}. Click Learn more to see the list 
   <data name="PROBLEM_CONTAINER_MANAGEMENT_UPGRADE" xml:space="preserve">
     <value>If you are upgrading to {0} or above, you will no longer be able to use the Container Management supplemental pack for managing Docker containers. The upgrade will remove the supplemental pack from your system.</value>
   </data>
+  <data name="PROBLEM_HEALTH_CHECK_HELP" xml:space="preserve">
+    <value>Disable Health Check</value>
+  </data>
+  <data name="PROBLEM_HEALTH_CHECK_ON_CONNECTION" xml:space="preserve">
+    <value>Health Check has been removed, but '{0}' is still enrolled to it.
+{1} will disable Health Check and clear the enrollment before you can proceed to manage your system.</value>
+  </data>
   <data name="PROBLEM_HOSTPROBLEM_TITLE" xml:space="preserve">
     <value>Server '{0}'</value>
   </data>
@@ -14677,8 +14597,5 @@ Any disk in your VM's DVD drive will be ejected when installing [Citrix VM Tools
   </data>
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>You are here</value>
-  </data>
-  <data name="HEALTHCHECK_CANNOT_ALTER_SETTINGS" xml:space="preserve">
-    <value>Only {0} users can enroll into, configure, or disable Health Check, or upload a report and request a report analysis</value>
   </data>
 </root>

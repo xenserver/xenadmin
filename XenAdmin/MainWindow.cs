@@ -134,9 +134,6 @@ namespace XenAdmin
         private readonly LicenseManagerLauncher licenseManagerLauncher;
         private readonly LicenseTimer licenseTimer;
 
-        public readonly HealthCheckOverviewLauncher HealthCheckOverviewLauncher;
-        private readonly System.Windows.Forms.Timer healthCheckResultTimer = new System.Windows.Forms.Timer();
-
         private Dictionary<ToolStripMenuItem, int> pluginMenuItemStartIndexes = new Dictionary<ToolStripMenuItem, int>();
 
         private bool expandTreeNodesOnStartup;
@@ -149,7 +146,6 @@ namespace XenAdmin
         {
             Program.MainWindow = this;
             licenseManagerLauncher = new LicenseManagerLauncher(Program.MainWindow);
-            HealthCheckOverviewLauncher = new HealthCheckOverviewLauncher(Program.MainWindow);
             InvokeHelper.Initialize(this);
 
             InitializeComponent();
@@ -244,7 +240,6 @@ namespace XenAdmin
             GeneralPage.LicenseLauncher = licenseManagerLauncher;
 
             toolStripSeparator7.Visible = xenSourceOnTheWebToolStripMenuItem.Visible = xenCenterPluginsOnlineToolStripMenuItem.Visible = !HiddenFeatures.ToolStripMenuItemHidden;
-            healthCheckToolStripMenuItem1.Visible = !HiddenFeatures.HealthCheckHidden;
 
             statusLabelAlerts.Visible = statusLabelUpdates.Visible = statusLabelErrors.Visible = false;
         }
@@ -562,7 +557,6 @@ namespace XenAdmin
             try
             {
                 Settings.RestoreSession();
-                HealthCheck.SendProxySettingsToHealthCheck();
             }
             catch (ConfigurationErrorsException ex)
             {
@@ -615,25 +609,12 @@ namespace XenAdmin
                 Updates.CheckForUpdates(false);
             }
 
-            if (!Program.RunInAutomatedTestMode)
-            {
-                // start healthCheckResult thread
-                healthCheckResultTimer.Interval = 1000 * 60 * 60; // 1 hour
-                healthCheckResultTimer.Tick += HealthCheckResultTimer_Tick;
-                healthCheckResultTimer.Start();
-            }
-
             ProcessCommand(CommandLineArgType, CommandLineParam);
         }
 
         private void CheckForUpdatesTimer_Tick(object sender, EventArgs e)
         {
             Updates.CheckForUpdates(false);
-        }
-
-        private void HealthCheckResultTimer_Tick(object sender, EventArgs e)
-        {
-            HealthCheck.CheckForAnalysisResults();
         }
 
         private void LoadTasksAsMeddlingActions(IXenConnection connection)
@@ -983,33 +964,28 @@ namespace XenAdmin
             if(licenseTimer != null)
                 licenseTimer.CheckActiveServerLicense(connection, false);
 
-            if (Properties.Settings.Default.ShowHealthCheckEnrollmentReminder)
-                ThreadPool.QueueUserWorkItem(CheckHealthCheckEnrollment, connection);
-            ThreadPool.QueueUserWorkItem(HealthCheck.CheckForAnalysisResults, connection);
-            ThreadPool.QueueUserWorkItem(InformHealthCheckEnrollment, connection);
+            if (BrandManager.BRAND_CONSOLE == "[XenCenter]" || BrandManager.BRAND_CONSOLE == "XenCenter")
+            {
+                Pool pool = Helpers.GetPoolOfOne(connection);
+                if (pool != null && pool.GetHealthCheckStatus() == Pool.HealthCheckStatus.Enabled)
+                {
+                    Program.BeginInvoke(Program.MainWindow, () =>
+                    {
+                        using (var dlg = new InformationDialog(
+                                   string.Format(Messages.PROBLEM_HEALTH_CHECK_ON_CONNECTION, pool.Name(), BrandManager.BRAND_CONSOLE),
+                                   ThreeButtonDialog.ButtonOK))
+                        {
+                            if (dlg.ShowDialog(this) == DialogResult.OK)
+                                new DisableHealthCheckAction(pool).RunAsync();
+                        }
+                    });
+                }
+            }
 
             Updates.RefreshUpdateAlerts(Updates.UpdateType.ServerPatches | Updates.UpdateType.ServerVersion);
             Updates.CheckHotfixEligibility(connection);
 
-            HealthCheck.SendMetadataToHealthCheck();
             RequestRefreshTreeView();
-        }
-
-        private void CheckHealthCheckEnrollment(object connection)
-        {
-            if (HealthCheckOverviewLauncher != null && !HiddenFeatures.HealthCheckHidden)
-                HealthCheckOverviewLauncher.CheckHealthCheckEnrollment((IXenConnection) connection);
-        }
-
-        private void InformHealthCheckEnrollment(object connection)
-        {
-            Pool pool = Helpers.GetPoolOfOne((IXenConnection)connection);
-            if (pool == null)
-                return;
-            var newHealthCheckSSettings = pool.HealthCheckSettings();
-            new TransferHealthCheckSettingsAction(pool, newHealthCheckSSettings,
-                newHealthCheckSSettings.GetSecretInfo(pool.Connection, HealthCheckSettings.UPLOAD_CREDENTIAL_USER_SECRET),
-                newHealthCheckSSettings.GetSecretInfo(pool.Connection, HealthCheckSettings.UPLOAD_CREDENTIAL_PASSWORD_SECRET), true).RunAsync();
         }
 
         private static bool SameProductBrand(Host host)

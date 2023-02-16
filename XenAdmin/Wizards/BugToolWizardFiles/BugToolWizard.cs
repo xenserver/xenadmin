@@ -81,12 +81,6 @@ namespace XenAdmin.Wizards
                 List<AsyncAction> subActions = new List<AsyncAction>();
                 ZipStatusReportAction zipAction = new ZipStatusReportAction(bugToolPageRetrieveData.OutputFolder, bugToolPageDestination1.OutputFile,false);
                 subActions.Add(zipAction);
-                UploadServerStatusReportAction uploadAction = new UploadServerStatusReportAction(bugToolPageDestination1.OutputFile,// tmp folder
-                                                                                           bugToolPageDestination1.UploadToken,// upload token
-                                                                                           bugToolPageDestination1.CaseNumber,// case id
-                                                                                           Registry.HealthCheckUploadDomainName,// domain name
-                                                                                           false); // suppressHistory
-                subActions.Add(uploadAction);
                 action = new MultipleAction(null, Messages.BUGTOOL_SAVING, Messages.BUGTOOL_SAVING, Messages.COMPLETED, subActions,true);
             }
             else

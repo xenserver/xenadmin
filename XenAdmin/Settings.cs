@@ -375,8 +375,6 @@ namespace XenAdmin
                 log.Error("Could not save settings. Exiting application.", ex);
                 Application.Exit();
             }
-
-            HealthCheck.SendMetadataToHealthCheck();
         }
 
         private static void EncryptServerList()
