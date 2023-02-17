@@ -100,7 +100,7 @@ namespace XenAdmin.Actions
                             outFilename = Path.GetRandomFileName();
                         string outputDir = Path.Combine(_extractTempDir, Path.GetFileName(outFilename));
 
-                        string sanitizedTar = Path.GetRandomFileName();
+                        string sanitizedTar = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
                         TarSanitization.SanitizeTarForWindows(inputFile, sanitizedTar, CheckCancellation);
 
                         using (FileStream fs = File.OpenRead(sanitizedTar))
