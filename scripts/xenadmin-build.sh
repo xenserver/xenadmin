@@ -85,14 +85,6 @@ if [ -f "${SIGN_BAT}" ] ; then
     cd ${REPO}/XenAdmin/bin/Release && ${SIGN_BAT} ${file} "${BRANDING_BRAND_CONSOLE}"
   done
 
-  for locale in ja zh-CN
-  do
-    for file in ${BRANDING_BRAND_CONSOLE_NO_SPACE}.resources.dll  XenModel.resources.dll  XenOvf.resources.dll
-    do
-      cd ${REPO}/XenAdmin/bin/Release/${locale} && ${SIGN_BAT} ${file} "${BRANDING_BRAND_CONSOLE}"
-    done
-  done
-
   cd ${REPO}/XenAdmin/bin/Release   && ${SIGN_BAT} ${BRANDING_BRAND_CONSOLE_NO_SPACE}.exe "${BRANDING_BRAND_CONSOLE}"
   cd ${REPO}/xe/bin/Release         && ${SIGN_BAT} xe.exe "${BRANDING_BRAND_CONSOLE}"
   cd ${REPO}/xva_verify/bin/Release && ${SIGN_BAT} xva_verify.exe "${BRANDING_BRAND_CONSOLE}"
@@ -151,7 +143,7 @@ fi
 
 #for each locale create an msi containing all resources
 
-for locale in en-us ja-jp zh-cn
+for locale in en-us
 do
   if [ "${locale}" = "en-us" ] ; then
     name=${BRANDING_BRAND_CONSOLE_NO_SPACE}
@@ -174,14 +166,6 @@ done
 
 cd ${WIX} && cp ${BRANDING_BRAND_CONSOLE_NO_SPACE}.msi ${BRANDING_BRAND_CONSOLE_NO_SPACE}.zh-tw.msi
 cd ${WIX} && cscript CodePageChange.vbs ZH-TW ${BRANDING_BRAND_CONSOLE_NO_SPACE}.zh-tw.msi
-
-#create localised mst files and then embed them into the combined msi
-
-for locale in ja-jp zh-cn zh-tw ; do
-  cd ${WIX} && \
-    wscript msidiff.js ${BRANDING_BRAND_CONSOLE_NO_SPACE}.msi ${BRANDING_BRAND_CONSOLE_NO_SPACE}.${locale}.msi ${locale}.mst && \
-    wscript WiSubStg.vbs ${BRANDING_BRAND_CONSOLE_NO_SPACE}.msi ${locale}.mst $(locale_id ${locale} | tr -d [:space:])
-done
 
 #copy and sign the combined installer
 
