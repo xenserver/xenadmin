@@ -1025,19 +1025,18 @@ namespace XenAdmin
             if(licenseTimer != null)
                 licenseTimer.CheckActiveServerLicense(connection, false);
 
-            if ((Registry.GetBrandOverride() == "XenCenter" || BrandManager.BrandConsole == "XenCenter") &&
-                !Helpers.Post82X(connection))
+            if (BrandManager.BrandConsole == "[XenCenter]" || BrandManager.BrandConsole == "XenCenter")
             {
                 Pool pool = Helpers.GetPoolOfOne(connection);
                 if (pool != null && pool.GetHealthCheckStatus() == Pool.HealthCheckStatus.Enabled)
                 {
                     Program.BeginInvoke(Program.MainWindow, () =>
                     {
-                        using (var dlg = new WarningDialog(string.Format(Messages.PROBLEM_HEALTH_CHECK_ON_CONNECTION, pool.Name()),
-                                   new ThreeButtonDialog.TBDButton(Messages.PROBLEM_HEALTH_CHECK_HELP, DialogResult.Yes),
-                                   new ThreeButtonDialog.TBDButton(Messages.CANCEL, DialogResult.No)))
+                        using (var dlg = new InformationDialog(
+                                   string.Format(Messages.PROBLEM_HEALTH_CHECK_ON_CONNECTION, pool.Name(), BrandManager.BrandConsole),
+                                   ThreeButtonDialog.ButtonOK))
                         {
-                            if (dlg.ShowDialog() == DialogResult.Yes)
+                            if (dlg.ShowDialog() == DialogResult.OK)
                                 new DisableHealthCheckAction(pool).RunAsync();
                         }
                     });

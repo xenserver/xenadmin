@@ -31189,8 +31189,8 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Health Check has been removed, but &apos;{0}&apos; is enrolled to it.
-        ///Please click Disable Health Check to clear the enrollment before proceeding..
+        ///   Looks up a localized string similar to Health Check has been removed, but &apos;{0}&apos; is still enrolled to it.
+        ///{1} will disable Health Check and clear the enrollment before you can proceed to manage your system..
         /// </summary>
         public static string PROBLEM_HEALTH_CHECK_ON_CONNECTION {
             get {

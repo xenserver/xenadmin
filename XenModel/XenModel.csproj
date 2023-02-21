@@ -116,7 +116,8 @@
     <Compile Include="Actions\PVS\DeletePvsSiteAction.cs" />
     <Compile Include="Actions\PVS\PvsProxyCreateAction.cs" />
     <Compile Include="Actions\PVS\PvsProxyDestroyAction.cs" />
-    <Compile Include="Actions\StatusReportAction.cs" />
+    <Compile Include="Actions\StatusReport\ClientSideStatusReportAction.cs" />
+    <Compile Include="Actions\StatusReport\StatusReportAction.cs" />
     <Compile Include="Actions\SupplementalPack\InstallSupplementalPackAction.cs" />
     <Compile Include="Actions\SupplementalPack\UploadSupplementalPackAction.cs" />
     <Compile Include="Actions\Pool_Patch\ApplyPatchAction.cs" />
@@ -163,7 +164,7 @@
     <Compile Include="Actions\WLB\WlbEvacuateRecommendationsAction.cs" />
     <Compile Include="Actions\WLB\WlbRetrieveVmRecommendationsAction.cs" />
     <Compile Include="Actions\XCM\ActivateConversionVpxAction.cs" />
-    <Compile Include="Actions\ZipStatusReportAction.cs" />
+    <Compile Include="Actions\StatusReport\ZipStatusReportAction.cs" />
     <Compile Include="Alerts\Types\Alert.cs" />
     <Compile Include="BrandManager.cs" />
     <Compile Include="SshConsole.cs" />

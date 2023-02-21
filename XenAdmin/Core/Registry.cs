@@ -168,11 +168,6 @@ namespace XenAdmin.Core
             return ReadInstalledKey(INTERNAL_STAGE_AUTH_TOKEN);
         }
 
-        public static string GetBrandOverride()
-        {
-            return ReadInstalledKey(BRAND_OVERRIDE);
-        }
-
         public static string CustomHelpUrl => ReadString(HELP_URL_OVERRIDE);
 
         private const string SSL_CERTIFICATES_CHANGED_ONLY = "CHANGED";
@@ -191,7 +186,6 @@ namespace XenAdmin.Core
         private const string ADDITIONAL_FEATURES = "AdditionalFeatures";
         private const string CUSTOM_UPDATES_XML_LOCATION = "CheckForUpdatesXmlLocationOverride";
         private const string INTERNAL_STAGE_AUTH_TOKEN = "InternalStageAuthToken";
-        private const string BRAND_OVERRIDE = "BrandOverride";
         private const string HELP_URL_OVERRIDE = "HelpUrlOverride";
     }
 

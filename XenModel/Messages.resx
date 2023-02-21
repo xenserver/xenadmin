@@ -10828,8 +10828,8 @@ If this value does not correspond to a server within the selected resource pool 
     <value>Disable Health Check</value>
   </data>
   <data name="PROBLEM_HEALTH_CHECK_ON_CONNECTION" xml:space="preserve">
-    <value>Health Check has been removed, but '{0}' is enrolled to it.
-Please click Disable Health Check to clear the enrollment before proceeding.</value>
+    <value>Health Check has been removed, but '{0}' is still enrolled to it.
+{1} will disable Health Check and clear the enrollment before you can proceed to manage your system.</value>
   </data>
   <data name="PROBLEM_HEALTH_CHECK_SERVICE_DESCRIPTION" xml:space="preserve">
     <value>{0}: Health Check has been removed.</value>
