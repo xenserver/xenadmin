@@ -379,7 +379,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                 if (dialog.ShowDialog() != DialogResult.OK)
                     return;
 
-                DisksGridView.Rows.Add(new DiskGridRowItem(Connection, dialog.NewDisk(), dialog.NewDevice(), DiskSource.New));
+                DisksGridView.Rows.Add(new DiskGridRowItem(Connection, dialog.Disk, dialog.Device, DiskSource.New));
                 UpdateStatusForEachDisk();
                 UpdateEnablement();
             }
@@ -409,7 +409,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                 if (dialog.ShowDialog(ParentForm) != DialogResult.OK)
                     return;
 
-                selectedItem.Disk = dialog.NewDisk();
+                selectedItem.Disk = dialog.Disk;
                 selectedItem.UpdateDetails();
                 UpdateStatusForEachDisk();
                 UpdateEnablement();
