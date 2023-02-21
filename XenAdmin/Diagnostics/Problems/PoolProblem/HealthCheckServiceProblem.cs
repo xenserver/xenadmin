@@ -30,7 +30,6 @@
 
 using System.Windows.Forms;
 using XenAdmin.Actions;
-using XenAdmin.Core;
 using XenAdmin.Diagnostics.Checks;
 using XenAdmin.Dialogs;
 using XenAPI;
@@ -51,11 +50,10 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
         protected override AsyncAction CreateAction(out bool cancelled)
         {
             cancelled = false;
-            return DisableHealthCheckAction.Create(_pool);
+            return new DisableHealthCheckAction(_pool);
         }
 
-        public override string Description =>
-            string.Format(Messages.PROBLEM_HEALTH_CHECK_SERVICE_DESCRIPTION, _pool, BrandManager.ProductBrand, BrandManager.ProductVersionPost82);
+        public override string Description => string.Format(Messages.PROBLEM_HEALTH_CHECK_SERVICE_DESCRIPTION, _pool);
 
         public override string HelpMessage => Messages.PROBLEM_HEALTH_CHECK_HELP;
     }
@@ -70,11 +68,9 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
             this.pool = pool;
         }
 
-        public override string Description =>
-            string.Format(Messages.PROBLEM_HEALTH_CHECK_SERVICE_DESCRIPTION, pool, BrandManager.ProductBrand, BrandManager.ProductVersionPost82);
+        public override string Description => string.Format(Messages.PROBLEM_HEALTH_CHECK_SERVICE_DESCRIPTION, pool);
 
-        public override string Message =>
-            string.Format(Messages.WARNING_HEALTH_CHECK_SERVICE_INFO, BrandManager.ProductBrand, BrandManager.ProductVersionPost82);
+        public override string Message => string.Format(Messages.WARNING_HEALTH_CHECK_SERVICE_INFO);
 
         protected override AsyncAction CreateAction(out bool cancelled)
         {
@@ -86,7 +82,7 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
                     new ThreeButtonDialog.TBDButton(Messages.CANCEL, DialogResult.No)))
                 {
                     if (dlg.ShowDialog() == DialogResult.Yes)
-                        action = DisableHealthCheckAction.Create(pool);
+                        action = new DisableHealthCheckAction(pool);
                 }
             });
             cancelled = action == null;

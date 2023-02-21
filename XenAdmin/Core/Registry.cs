@@ -152,18 +152,6 @@ namespace XenAdmin.Core
             return string.IsNullOrEmpty(val) ? null : val;
         }
 
-        public static string HealthCheckIdentityTokenDomainName => ReadString(HEALTH_CHECK_IDENTITY_TOKEN_DOMAIN_NAME);
-
-        public static string HealthCheckUploadTokenDomainName => ReadString(HEALTH_CHECK_UPLOAD_TOKEN_DOMAIN_NAME);
-
-        public static string HealthCheckUploadGrantTokenDomainName => ReadString(HEALTH_CHECK_UPLOAD_GRANT_TOKEN_DOMAIN_NAME);
-
-        public static string HealthCheckUploadDomainName => ReadString(HEALTH_CHECK_UPLOAD_DOMAIN_NAME);
-
-        public static string HealthCheckDiagnosticDomainName => ReadString(HEALTH_CHECK_DIAGNOSTIC_DOMAIN_NAME);
-
-        public static string HealthCheckProductKey => ReadString(HEALTH_CHECK_PRODUCT_KEY);
-
         public static string HiddenFeatures => ReadInstalledKey(HIDDEN_FEATURES, RegistryView.Registry32);
 
         public static string AdditionalFeatures => ReadInstalledKey(ADDITIONAL_FEATURES, RegistryView.Registry32);
@@ -180,11 +168,6 @@ namespace XenAdmin.Core
             return ReadInstalledKey(INTERNAL_STAGE_AUTH_TOKEN);
         }
 
-        public static string GetBrandOverride()
-        {
-            return ReadInstalledKey(BRAND_OVERRIDE);
-        }
-
         public static string CustomHelpUrl => ReadString(HELP_URL_OVERRIDE);
 
         private const string SSL_CERTIFICATES_CHANGED_ONLY = "CHANGED";
@@ -199,17 +182,10 @@ namespace XenAdmin.Core
         private const string PSExecutionPolicyName = "ExecutionPolicy";
         private const string PowerShellKey = @"Software\Microsoft\PowerShell\1";
         private const string PowerShellStamp = "Install";
-        private const string HEALTH_CHECK_IDENTITY_TOKEN_DOMAIN_NAME = "HealthCheckIdentityTokenDomainName";
-        private const string HEALTH_CHECK_UPLOAD_TOKEN_DOMAIN_NAME = "HealthCheckUploadTokenDomainName";
-        private const string HEALTH_CHECK_UPLOAD_GRANT_TOKEN_DOMAIN_NAME = "HealthCheckUploadGrantTokenDomainName";
-        private const string HEALTH_CHECK_UPLOAD_DOMAIN_NAME = "HealthCheckUploadDomainName";
-        private const string HEALTH_CHECK_DIAGNOSTIC_DOMAIN_NAME = "HealthCheckDiagnosticDomainName";
-        private const string HEALTH_CHECK_PRODUCT_KEY = "HealthCheckProductKey";
         private const string HIDDEN_FEATURES = "HiddenFeatures";
         private const string ADDITIONAL_FEATURES = "AdditionalFeatures";
         private const string CUSTOM_UPDATES_XML_LOCATION = "CheckForUpdatesXmlLocationOverride";
         private const string INTERNAL_STAGE_AUTH_TOKEN = "InternalStageAuthToken";
-        private const string BRAND_OVERRIDE = "BrandOverride";
         private const string HELP_URL_OVERRIDE = "HelpUrlOverride";
     }
 

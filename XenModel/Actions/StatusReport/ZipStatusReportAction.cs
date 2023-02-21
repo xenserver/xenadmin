@@ -236,6 +236,5 @@ namespace XenAdmin.Actions
         protected override void CancelRelatedTask()
         {
         }
-
     }
 }

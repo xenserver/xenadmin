@@ -257,8 +257,6 @@ namespace XenAdmin.Dialogs.OptionsPages
                 Properties.Settings.Default.ConnectionTimeout = timeout;
 
             Settings.ReconfigureProxyAuthenticationSettings();
-
-            Core.HealthCheck.SendProxySettingsToHealthCheck();
         }              
 
         #endregion

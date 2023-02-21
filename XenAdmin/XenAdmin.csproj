@@ -118,7 +118,6 @@
     <Compile Include="Controls\SmartScrollTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Commands\CallHomeCommand.cs" />
     <Compile Include="Commands\ChangeControlDomainMemoryCommand.cs" />
     <Compile Include="Commands\DockerContainerCommand.cs" />
     <Compile Include="Commands\Controls\PoolRemoveServerToolStripMenuItem.cs">
@@ -230,7 +229,6 @@
     <Compile Include="Controls\UpsellPage.designer.cs">
       <DependentUpon>UpsellPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Core\HealthCheck.cs" />
     <Compile Include="Core\HiddenFeatures.cs" />
     <Compile Include="Core\Metadata.cs" />
     <Compile Include="Diagnostics\Checks\AssertCanEvacuateCheck.cs" />
@@ -361,26 +359,7 @@
     <Compile Include="Dialogs\ControlDomainMemoryDialog.Designer.cs">
       <DependentUpon>ControlDomainMemoryDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\HealthCheck\HealthCheckOverviewLauncher.cs" />
     <Compile Include="Dialogs\ExportVMDialog.cs">
-    </Compile>
-    <Compile Include="Dialogs\HealthCheck\HealthCheckOverviewDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\HealthCheck\HealthCheckOverviewDialog.Designer.cs">
-      <DependentUpon>HealthCheckOverviewDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\HealthCheck\HealthCheckPolicyStatementDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\HealthCheck\HealthCheckPolicyStatementDialog.Designer.cs">
-      <DependentUpon>HealthCheckPolicyStatementDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\HealthCheck\HealthCheckSettingsDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\HealthCheck\HealthCheckSettingsDialog.designer.cs">
-      <DependentUpon>HealthCheckSettingsDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\OptionsPages\SaveAndRestoreOptionsPage.cs">
       <SubType>UserControl</SubType>
@@ -1916,33 +1895,6 @@
     <EmbeddedResource Include="Dialogs\PvsSiteDialog.zh-CN.resx">
       <DependentUpon>PvsSiteDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\HealthCheck\HealthCheckOverviewDialog.ja.resx">
-      <DependentUpon>HealthCheckOverviewDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\HealthCheck\HealthCheckOverviewDialog.resx">
-      <DependentUpon>HealthCheckOverviewDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\HealthCheck\HealthCheckOverviewDialog.zh-CN.resx">
-      <DependentUpon>HealthCheckOverviewDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\HealthCheck\HealthCheckPolicyStatementDialog.ja.resx">
-      <DependentUpon>HealthCheckPolicyStatementDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\HealthCheck\HealthCheckPolicyStatementDialog.resx">
-      <DependentUpon>HealthCheckPolicyStatementDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\HealthCheck\HealthCheckPolicyStatementDialog.zh-CN.resx">
-      <DependentUpon>HealthCheckPolicyStatementDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\HealthCheck\HealthCheckSettingsDialog.ja.resx">
-      <DependentUpon>HealthCheckSettingsDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\HealthCheck\HealthCheckSettingsDialog.resx">
-      <DependentUpon>HealthCheckSettingsDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\HealthCheck\HealthCheckSettingsDialog.zh-CN.resx">
-      <DependentUpon>HealthCheckSettingsDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\OptionsPages\SaveAndRestoreOptionsPage.ja.resx">
       <DependentUpon>SaveAndRestoreOptionsPage.cs</DependentUpon>

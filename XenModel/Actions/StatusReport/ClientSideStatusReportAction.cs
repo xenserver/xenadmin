@@ -33,36 +33,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
 using XenAdmin.Core;
-using XenAdmin.Network;
 using XenAPI;
 
 namespace XenAdmin.Actions
 {
-    public enum ReportStatus { queued, inProgress, succeeded, failed, cancelled }
-
-    public abstract class StatusReportAction : AsyncAction
-    {
-        protected readonly string filePath;
-        protected readonly string timeString;
-
-        public ReportStatus Status { get; protected set; }
-        public Exception Error { get; protected set; }
-
-        protected StatusReportAction(IXenConnection connection, string title, string filePath, string timeString, bool suppressHistory = true)
-            : base(connection, title, suppressHistory)
-        {
-            this.filePath = filePath;
-            this.timeString = timeString;
-            Status = ReportStatus.queued;
-        }
-
-        public new void Cancel()
-        {
-            base.Cancel();
-            Status = ReportStatus.cancelled;
-        }
-    }
-
     public class ClientSideStatusReportAction : StatusReportAction
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -149,7 +123,7 @@ namespace XenAdmin.Actions
 
         private void CompileClientMetadata()
         {
-            var metadata = XenAdminConfigManager.Provider.GetXenCenterMetadata(true);
+            var metadata = XenAdminConfigManager.Provider.GetXenCenterMetadata();
             string metadataDestination = string.Format("{0}\\{1}-Metadata.json", filePath, timeString);
             WriteExtraInfoToFile(new List<string> { metadata }, metadataDestination);
         }

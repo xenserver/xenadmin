@@ -2625,12 +2625,6 @@
   <data name="bugToolToolStripMenuItem.Text" xml:space="preserve">
     <value>Server &amp;Status Report...</value>
   </data>
-  <data name="healthCheckToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 22</value>
-  </data>
-  <data name="healthCheckToolStripMenuItem1.Text" xml:space="preserve">
-    <value>&amp;Health Check...</value>
-  </data>
   <data name="toolStripSeparator14.Size" type="System.Drawing.Size, System.Drawing">
     <value>192, 6</value>
   </data>
@@ -3670,7 +3664,7 @@
     <value>toolStripMenuItemVtpm</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemVtpm.Type" xml:space="preserve">
-    <value>XenAdmin.Commands.CommandToolStripMenuItem, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Commands.CommandToolStripMenuItem, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;disableCbtToolStripMenuItem.Name" xml:space="preserve">
     <value>disableCbtToolStripMenuItem</value>
@@ -3934,12 +3928,6 @@
     <value>bugToolToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;bugToolToolStripMenuItem.Type" xml:space="preserve">
-    <value>XenAdmin.Commands.CommandToolStripMenuItem, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;healthCheckToolStripMenuItem1.Name" xml:space="preserve">
-    <value>healthCheckToolStripMenuItem1</value>
-  </data>
-  <data name="&gt;&gt;healthCheckToolStripMenuItem1.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator14.Name" xml:space="preserve">

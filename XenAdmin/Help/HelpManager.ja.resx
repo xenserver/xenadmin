@@ -504,12 +504,6 @@
   <data name="HAWizard" xml:space="preserve">
     <value>pools-ha-enable</value>
   </data>
-  <data name="HealthCheckOverviewDialog" xml:space="preserve">
-    <value>health-check</value>
-  </data>
-  <data name="HealthCheckSettingsDialog" xml:space="preserve">
-    <value>health-check</value>
-  </data>
   <data name="HotfixEligibilityAlert" xml:space="preserve">
     <value>updates-about</value>
   </data>

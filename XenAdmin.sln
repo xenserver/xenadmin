@@ -22,8 +22,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XenOvfApi", "XenOvfApi\XenO
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CFUValidator", "CFUValidator\CFUValidator.csproj", "{39308480-78C3-40B4-924D-06914F343ACD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XenServerHealthCheck", "XenServerHealthCheck\XenServerHealthCheck.csproj", "{DEB3208D-1153-407C-8C99-0D8899BE25A5}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xe", "xe\Xe.csproj", "{727E885D-14BE-40F0-9D0B-3853D44D3984}"
 EndProject
 Global
@@ -122,16 +120,6 @@ Global
 		{39308480-78C3-40B4-924D-06914F343ACD}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{39308480-78C3-40B4-924D-06914F343ACD}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{39308480-78C3-40B4-924D-06914F343ACD}.Release|Win32.ActiveCfg = Release|Any CPU
-		{DEB3208D-1153-407C-8C99-0D8899BE25A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DEB3208D-1153-407C-8C99-0D8899BE25A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DEB3208D-1153-407C-8C99-0D8899BE25A5}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{DEB3208D-1153-407C-8C99-0D8899BE25A5}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{DEB3208D-1153-407C-8C99-0D8899BE25A5}.Debug|Win32.ActiveCfg = Debug|Any CPU
-		{DEB3208D-1153-407C-8C99-0D8899BE25A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DEB3208D-1153-407C-8C99-0D8899BE25A5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DEB3208D-1153-407C-8C99-0D8899BE25A5}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{DEB3208D-1153-407C-8C99-0D8899BE25A5}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{DEB3208D-1153-407C-8C99-0D8899BE25A5}.Release|Win32.ActiveCfg = Release|Any CPU
 		{727E885D-14BE-40F0-9D0B-3853D44D3984}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{727E885D-14BE-40F0-9D0B-3853D44D3984}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{727E885D-14BE-40F0-9D0B-3853D44D3984}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU

@@ -28,32 +28,33 @@
  * SUCH DAMAGE.
  */
 
-using System.ComponentModel;
-using System.Configuration.Install;
-using XenAdmin.Core;
+using System;
+using XenAdmin.Network;
 
-
-namespace XenServerHealthCheck
+namespace XenAdmin.Actions
 {
-    [RunInstaller(true)]
-    public partial class ProjectInstaller : Installer
+    public enum ReportStatus { queued, inProgress, succeeded, failed, cancelled }
+
+    public abstract class StatusReportAction : AsyncAction
     {
-        public ProjectInstaller()
+        protected readonly string filePath;
+        protected readonly string timeString;
+
+        public ReportStatus Status { get; protected set; }
+        public Exception Error { get; protected set; }
+
+        protected StatusReportAction(IXenConnection connection, string title, string filePath, string timeString, bool suppressHistory = true)
+            : base(connection, title, suppressHistory)
         {
-            InitializeComponent();
-            var name = $"{BrandManager.ProductBrand} Health Check";
-            XenServerHealthCheckInstaller.Description = name;
-            XenServerHealthCheckInstaller.DisplayName = name;
+            this.filePath = filePath;
+            this.timeString = timeString;
+            Status = ReportStatus.queued;
         }
 
-        private void XenServerHealthCheckInstaller_AfterInstall(object sender, InstallEventArgs e)
+        public new void Cancel()
         {
-
-        }
-
-        private void XenServerHealthCheckProcessInstaller_AfterInstall(object sender, InstallEventArgs e)
-        {
-
+            base.Cancel();
+            Status = ReportStatus.cancelled;
         }
     }
 }
