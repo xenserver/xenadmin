@@ -42,7 +42,6 @@ using XenAdmin.Dialogs;
 using XenCenterLib;
 using System.Windows.Forms;
 using System.Drawing;
-using BootMode = XenAdmin.Actions.VMActions.BootMode;
 
 namespace XenAdmin.Wizards.NewVMWizard
 {
@@ -161,7 +160,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             UpdateEnablement();
         }
 
-        public BootMode SelectedBootMode { get { return IsSelectedTemplateHVM ? bootModesControl1.SelectedOption : BootMode.NOT_AVAILABLE; } }
+        public VmBootMode SelectedBootMode => bootModesControl1.SelectedBootMode;
 
         private bool IsBootFromNetworkCustomTemplate(bool userTemplate)
         {

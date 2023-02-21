@@ -2139,9 +2139,6 @@ This is a potentially dangerous operation and is not allowed.</value>
   <data name="BIOS_BOOT" xml:space="preserve">
     <value>BIOS Boot</value>
   </data>
-  <data name="BIOS_BOOT_MODE_UNSUPPORTED_WARNING" xml:space="preserve">
-    <value>The BIOS boot mode is not supported with the selected template.</value>
-  </data>
   <data name="BIOS_STRINGS_COPIED" xml:space="preserve">
     <value>BIOS strings copied</value>
   </data>
@@ -2236,6 +2233,9 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
   </data>
   <data name="BOOT_MODE" xml:space="preserve">
     <value>Boot Mode</value>
+  </data>
+  <data name="BOOT_MODE_UNSUPPORTED_WARNING" xml:space="preserve">
+    <value>Not supported with the selected template</value>
   </data>
   <data name="BROKEN_SRS_AFTER_UPGRADE" xml:space="preserve">
     <value>There are broken SRs after the upgrade. To solve this problem you should reattach the SRs.</value>
@@ -6265,9 +6265,6 @@ Note: Any custom color selections will remain unchanged</value>
   <data name="GUEFI_BOOT_MODES_EXPERIMENTAL_WARNING" xml:space="preserve">
     <value>Guest UEFI boot and guest UEFI secure boot are experimental features. You can create UEFI-enabled VMs on hosts that are in a production environment. However, UEFI-enabled VMs must not be used for production purposes. You may have to re-create the VMs when you upgrade the host to a newer version of [XenServer].</value>
   </data>
-  <data name="GUEFI_BOOT_MODES_UNSUPPORTED_WARNING" xml:space="preserve">
-    <value>The UEFI and UEFI secure boot modes are not supported with the selected template.</value>
-  </data>
   <data name="GUEFI_BOOT_MODE_EXPERIMENTAL_LABEL" xml:space="preserve">
     <value>&amp;UEFI Boot (experimental)</value>
   </data>
@@ -6277,14 +6274,11 @@ Note: Any custom color selections will remain unchanged</value>
   <data name="GUEFI_BOOT_MODE_LABEL" xml:space="preserve">
     <value>&amp;UEFI Boot</value>
   </data>
-  <data name="GUEFI_BOOT_MODE_UNSUPPORTED_WARNING" xml:space="preserve">
-    <value>The UEFI boot mode is not supported with the selected template.</value>
-  </data>
   <data name="GUEFI_SECUREBOOT_MODE_EXPERIMENTAL_WARNING" xml:space="preserve">
     <value>Guest UEFI secure boot is an experimental feature. You can create VMs configured to use the UEFI secure boot mode on hosts that are in a production environment. However, these VMs must not be used for production purposes. You may have to re-create the VMs when you upgrade the host to a newer version of [XenServer].</value>
   </data>
-  <data name="GUEFI_SECUREBOOT_MODE_UNSUPPORTED_WARNING" xml:space="preserve">
-    <value>The UEFI secure boot mode is not supported with the selected template.</value>
+  <data name="GUEFI_SECUREBOOT_MODE_MISSING_CERTIFICATES" xml:space="preserve">
+    <value>UEFI certificates are missing from your system</value>
   </data>
   <data name="GUEFI_SECURE_BOOT_MODE_EXPERIMENTAL_LABEL" xml:space="preserve">
     <value>UEFI &amp;Secure Boot (experimental)</value>
