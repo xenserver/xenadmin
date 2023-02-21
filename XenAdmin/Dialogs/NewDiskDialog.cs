@@ -105,6 +105,10 @@ namespace XenAdmin.Dialogs
 
         #endregion
 
+        public VDI Disk { get; private set; }
+
+        public VBD Device { get; private set; }
+
         public bool DontCreateVDI { get; set; }
 
         internal override string HelpName => DiskTemplate == null ? "NewDiskDialog" : "EditNewDiskDialog";
@@ -140,6 +144,9 @@ namespace XenAdmin.Dialogs
             if (SrListBox.SR == null || NameTextBox.Text == "" || !connection.IsConnected)
                 return;
 
+            Disk = NewDisk();
+            Device = NewDevice();
+
             if (DontCreateVDI)
             {
                 DialogResult = DialogResult.OK;
@@ -160,9 +167,6 @@ namespace XenAdmin.Dialogs
                 new HAUnprotectVMAction(TheVM).RunExternal(TheVM.Connection.Session);
             }
 
-            VDI vdi = NewDisk();
-
-
             if (TheVM != null)
             {
                 var alreadyHasBootableDisk = HasBootableDisk(TheVM);
@@ -179,17 +183,17 @@ namespace XenAdmin.Dialogs
                             throw new Exception(FriendlyErrorNames.VBDS_MAX_ALLOWED);
                         }
                         string ud = uds[0];
-                        string vdiref = VDI.create(session, vdi);
-                        XenAPI.VBD vbd = NewDevice();
-                        vbd.VDI = new XenAPI.XenRef<XenAPI.VDI>(vdiref);
-                        vbd.VM = new XenAPI.XenRef<XenAPI.VM>(TheVM);
+                        string vdiref = VDI.create(session, Disk);
+                        
+                        Device.VDI = new XenAPI.XenRef<XenAPI.VDI>(vdiref);
+                        Device.VM = new XenAPI.XenRef<XenAPI.VM>(TheVM);
 
                         // CA-44959: only make bootable if there aren't other bootable VBDs.
-                        vbd.bootable = ud == "0" && !alreadyHasBootableDisk;
-                        vbd.userdevice = ud;
+                        Device.bootable = ud == "0" && !alreadyHasBootableDisk;
+                        Device.userdevice = ud;
 
                         // Now try to plug the VBD.
-                        var plugAction = new VbdSaveAndPlugAction(TheVM, vbd, vdi.Name(), session, false);
+                        var plugAction = new VbdSaveAndPlugAction(TheVM, Device, Disk.Name(), session, false);
                         plugAction.ShowUserInstruction += PlugAction_ShowUserInstruction;
                         plugAction.RunAsync();
                     });
@@ -202,7 +206,7 @@ namespace XenAdmin.Dialogs
             }
             else
             {
-                CreateDiskAction action = new CreateDiskAction(vdi);
+                CreateDiskAction action = new CreateDiskAction(Disk);
                 using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
                     dialog.ShowDialog();
                 if (!action.Succeeded)
@@ -250,12 +254,12 @@ namespace XenAdmin.Dialogs
             return false;
         }
 
-        public VDI NewDisk()
+        private VDI NewDisk()
         {
             VDI vdi = new VDI();
             vdi.Connection = connection;
             vdi.read_only = DiskTemplate != null ? DiskTemplate.read_only : false;
-            vdi.SR = new XenAPI.XenRef<XenAPI.SR>(SrListBox.SR);
+            vdi.SR = new XenRef<SR>(SrListBox.SR);
 
             vdi.virtual_size = diskSpinner1.SelectedSize;
             vdi.name_label = NameTextBox.Text;
@@ -266,7 +270,7 @@ namespace XenAdmin.Dialogs
             return vdi;
         }
 
-        public VBD NewDevice()
+        private VBD NewDevice()
         {
 
             VBD vbd = new VBD();
