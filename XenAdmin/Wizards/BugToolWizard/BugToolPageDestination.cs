@@ -43,6 +43,9 @@ namespace XenAdmin.Wizards.BugToolWizard
 {
     public partial class BugToolPageDestination : XenTabPage
     {
+        private static readonly log4net.ILog Log =
+            log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod()?.DeclaringType);
+
         private bool _buttonNextEnabled;
 
         public BugToolPageDestination()
@@ -70,7 +73,7 @@ namespace XenAdmin.Wizards.BugToolWizard
                 $"{Messages.BUGTOOL_FILE_PREFIX}{HelpersGUI.DateTimeToString(DateTime.Now, "yyyy-MM-dd-HH-mm-ss", false)}.zip";
 
             var initialDirectory = Properties.Settings.Default.ServerStatusPath;
-            
+
             try
             {
                 //previous versions were storing the zip file name rather than the directory; check if this is the case
@@ -106,8 +109,8 @@ namespace XenAdmin.Wizards.BugToolWizard
             if (File.Exists(path)) //confirm ok to overwrite
             {
                 using (var dlg = new WarningDialog(string.Format(Messages.FILE_X_EXISTS_OVERWRITE, path),
-                    ThreeButtonDialog.ButtonOK,
-                    new ThreeButtonDialog.TBDButton(Messages.CANCEL, DialogResult.Cancel, selected: true)))
+                           ThreeButtonDialog.ButtonOK,
+                           new ThreeButtonDialog.TBDButton(Messages.CANCEL, DialogResult.Cancel, selected: true)))
                 {
                     if (dlg.ShowDialog(this) != DialogResult.OK)
                     {
@@ -136,6 +139,14 @@ namespace XenAdmin.Wizards.BugToolWizard
             finally
             {
                 stream?.Dispose();
+                try
+                {
+                    File.Delete(path);
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex);
+                }
             }
 
             // Save away the output directory for next time
