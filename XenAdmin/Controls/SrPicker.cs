@@ -178,7 +178,27 @@ namespace XenAdmin.Controls
                 scanAction.Completed += SrRefreshAction_Completed;
                 _refreshQueue.Add(scanAction);
             }
+            
             AddNode(item);
+
+            if (!item.Scanning)
+            {
+                if (_preselectedSr != null)
+                {
+                    if (item.TheSR.opaque_ref == _preselectedSr.opaque_ref)
+                        SelectedItem = item;
+                }
+                else if (_defaultSr != null)
+                {
+                    if (item.TheSR.opaque_ref == _defaultSr.opaque_ref)
+                        SelectedItem = item;
+                }
+                else if (SelectedItem == null)
+                {
+                    SelectedItem = item;
+                }
+            }
+
             OnCanBeScannedChanged();
         }
 
