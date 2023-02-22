@@ -43,7 +43,7 @@ namespace XenAdmin.Actions
 {
     public class DownloadUpdatesXmlAction : AsyncAction
     {
-        private const string ClientVersionsNode = "chcversions";
+        private const string ClientVersionsNode = "versions";
         private const string XenServerVersionsNode = "serverversions";
         private const string PatchesNode = "patches";
         private const string ConflictingPatchesNode = "conflictingpatches";
