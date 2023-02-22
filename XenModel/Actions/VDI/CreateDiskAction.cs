@@ -28,25 +28,82 @@
  * SUCH DAMAGE.
  */
 
+using System;
 using XenAPI;
 
 namespace XenAdmin.Actions
 {
-    public class CreateDiskAction : SaveChangesAction
+    public class CreateDiskAction : AsyncAction
     {
-        public CreateDiskAction(IXenObject obj)
-            : base(obj, false)
+        private readonly VDI _disk;
+        private readonly VBD _device;
+
+        public CreateDiskAction(VDI disk)
+            : base(disk.Connection, "", "")
         {
-            if (obj is VDI disk)
-                Title = string.Format(Messages.ACTION_VDI_CREATING_TITLE, disk.Name(),
-                    disk.Connection.Resolve(disk.SR).NameWithoutHost());
+            _disk = disk;
+
+            Title = string.Format(Messages.ACTION_VDI_CREATING_TITLE, disk.Name(),
+                disk.Connection.Resolve(disk.SR).NameWithoutHost());
             Description = Messages.ACTION_VDI_CREATING;
+        }
+
+        public CreateDiskAction(VDI disk, VBD device, VM vm)
+            : this(disk)
+        {
+            _device = device;
+            VM = vm;
         }
 
         protected override void Run()
         {
-            base.Run();
+            if (_device == null)
+            {
+                new SaveChangesAction(_disk, true).RunSync(Session);
+            }
+            else
+            {
+                // CA-44959: only make the disk bootable if there aren't any other bootable VBDs.
+                var alreadyHasBootableDisk = HasBootableDisk();
+
+                // Get legitimate unused user device numbers
+                string[] uds = VM.get_allowed_VBD_devices(Session, VM.opaque_ref);
+                if (uds.Length == 0)
+                    throw new Exception(FriendlyErrorNames.VBDS_MAX_ALLOWED);
+
+                string ud = uds[0];
+                string vdiRef = VDI.create(Session, _disk);
+
+                _device.VDI = new XenRef<VDI>(vdiRef);
+                _device.VM = new XenRef<VM>(VM);
+                _device.bootable = ud == "0" && !alreadyHasBootableDisk;
+                _device.userdevice = ud;
+            }
+
             Description = Messages.ACTION_VDI_CREATED;
+        }
+
+        private bool HasBootableDisk()
+        {
+            foreach (XenRef<VBD> vbdRef in VM.VBDs)
+            {
+                var vbd = Connection.Resolve(vbdRef);
+
+                if (vbd != null && !vbd.IsCDROM() && !vbd.IsFloppyDrive() && vbd.bootable)
+                {
+                    VDI vdi = Connection.Resolve(vbd.VDI);
+
+                    if (vdi != null)
+                    {
+                        SR sr = Connection.Resolve(vdi.SR);
+                        if (sr != null && sr.IsToolsSR())
+                            continue;
+                    }
+
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
