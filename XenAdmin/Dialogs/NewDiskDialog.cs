@@ -148,68 +148,43 @@ namespace XenAdmin.Dialogs
                 Close();
                 return;
             }
-            XenAPI.SR sr = srPicker.SR;
+
+            SR sr = srPicker.SR;
+
             if (!sr.shared && TheVM != null && TheVM.HaPriorityIsRestart())
             {
-                DialogResult dialogResult;
                 using (var dlg = new WarningDialog(Messages.NEW_SR_DIALOG_ATTACH_NON_SHARED_DISK_HA,
                                 ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo))
                 {
-                    dialogResult = dlg.ShowDialog(Program.MainWindow);
+                    if (dlg.ShowDialog(this) != DialogResult.Yes)
+                        return;
                 }
-                if (dialogResult != DialogResult.Yes)
-                    return;
+
                 new HAUnprotectVMAction(TheVM).RunSync(TheVM.Connection.Session);
             }
 
-            VDI vdi = NewDisk();
-
-
             if (TheVM != null)
             {
-                var alreadyHasBootableDisk = HasBootableDisk(TheVM);
-
-                var action = new DelegatedAsyncAction(connection,
-                    string.Format(Messages.ACTION_DISK_ADDING_TITLE, NameTextBox.Text, sr.NameWithoutHost()),
-                    Messages.ACTION_DISK_ADDING, Messages.ACTION_DISK_ADDED,
-                    delegate(Session session)
-                    {
-                        // Get legitimate unused userdevice numbers
-                        string[] uds = VM.get_allowed_VBD_devices(session, TheVM.opaque_ref);
-                        if (uds.Length == 0)
-                        {
-                            throw new Exception(FriendlyErrorNames.VBDS_MAX_ALLOWED);
-                        }
-                        string ud = uds[0];
-                        string vdiref = VDI.create(session, Disk);
-
-                        Device.VDI = new XenRef<VDI>(vdiref);
-                        Device.VM = new XenRef<VM>(TheVM);
-
-                        // CA-44959: only make bootable if there aren't other bootable VBDs.
-                        Device.bootable = ud == "0" && !alreadyHasBootableDisk;
-                        Device.userdevice = ud;
-
-                        // Now try to plug the VBD.
-                        var plugAction = new VbdSaveAndPlugAction(TheVM, Device, Disk.Name(), session, false);
-                        plugAction.ShowUserInstruction += PlugAction_ShowUserInstruction;
-                        plugAction.RunAsync();
-                    });
-
-                action.VM = TheVM;
+                var action = new CreateDiskAction(Disk, Device, TheVM);
                 using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Blocks))
                     dialog.ShowDialog();
                 if (!action.Succeeded)
                     return;
+
+                // Now try to plug the VBD.
+                var plugAction = new VbdSaveAndPlugAction(TheVM, Device, Disk.Name(), TheVM.Connection.Session, false);
+                plugAction.ShowUserInstruction += PlugAction_ShowUserInstruction;
+                plugAction.RunAsync();
             }
             else
             {
-                CreateDiskAction action = new CreateDiskAction(Disk);
+                var action = new CreateDiskAction(Disk);
                 using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
                     dialog.ShowDialog();
                 if (!action.Succeeded)
                     return;
             }
+
             DialogResult = DialogResult.OK;
             Close();
         }
@@ -224,32 +199,6 @@ namespace XenAdmin.Dialogs
                         dlg.ShowDialog(Program.MainWindow);
                 }
             });
-        }
-
-        private static bool HasBootableDisk(VM vm)
-        {
-            var c = vm.Connection;
-            foreach (XenRef<VBD> vbdRef in vm.VBDs)
-            {
-                var vbd = c.Resolve(vbdRef);
-
-                if (vbd != null && !vbd.IsCDROM() && !vbd.IsFloppyDrive() && vbd.bootable)
-                {
-                    VDI vdi = c.Resolve(vbd.VDI);
-
-                    if (vdi != null)
-                    {
-                        SR sr = c.Resolve(vdi.SR);
-                        if (sr != null && sr.IsToolsSR())
-                        {
-                            continue;
-                        }
-                    }
-
-                    return true;
-                }
-            }
-            return false;
         }
 
         private VDI NewDisk()

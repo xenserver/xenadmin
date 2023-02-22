@@ -736,33 +736,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Added disk.
-        /// </summary>
-        public static string ACTION_DISK_ADDED {
-            get {
-                return ResourceManager.GetString("ACTION_DISK_ADDED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Adding disk.
-        /// </summary>
-        public static string ACTION_DISK_ADDING {
-            get {
-                return ResourceManager.GetString("ACTION_DISK_ADDING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Creating disk &apos;{0}&apos; on SR &apos;{1}&apos;.
-        /// </summary>
-        public static string ACTION_DISK_ADDING_TITLE {
-            get {
-                return ResourceManager.GetString("ACTION_DISK_ADDING_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Attaching disk to VM &apos;{0}&apos;....
         /// </summary>
         public static string ACTION_DISK_ATTACHING {

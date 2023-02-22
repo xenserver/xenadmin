@@ -342,15 +342,6 @@
   <data name="ACTION_DISK_ACTIVATING_TITLE" xml:space="preserve">
     <value>Activating disk '{0}' on VM '{1}'...</value>
   </data>
-  <data name="ACTION_DISK_ADDED" xml:space="preserve">
-    <value>Added disk</value>
-  </data>
-  <data name="ACTION_DISK_ADDING" xml:space="preserve">
-    <value>Adding disk</value>
-  </data>
-  <data name="ACTION_DISK_ADDING_TITLE" xml:space="preserve">
-    <value>Creating disk '{0}' on SR '{1}'</value>
-  </data>
   <data name="ACTION_DISK_ATTACHING" xml:space="preserve">
     <value>Attaching disk to VM '{0}'...</value>
   </data>
