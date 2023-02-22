@@ -45,9 +45,9 @@ namespace XenAdmin.Dialogs
     {
         #region Private fields
 
-        private readonly VM TheVM;
-        private VDI DiskTemplate;
-        private readonly IEnumerable<VDI> _VDINamesInUse = new List<VDI>();
+        private readonly VM _vm;
+        private readonly VDI _diskTemplate;
+        private readonly IEnumerable<VDI> _vdiNamesInUse = new List<VDI>();
 
         #endregion
 
@@ -72,8 +72,8 @@ namespace XenAdmin.Dialogs
         {
             InitializeComponent();
 
-            TheVM = vm;
-            _VDINamesInUse = vdiNamesInUse ?? new List<VDI>();
+            _vm = vm;
+            _vdiNamesInUse = vdiNamesInUse ?? new List<VDI>();
             diskSpinner1.CanResize = canResize;
 
             if (diskTemplate == null)
@@ -86,13 +86,13 @@ namespace XenAdmin.Dialogs
             }
             else
             {
-                DiskTemplate = diskTemplate;
-                NameTextBox.Text = DiskTemplate.Name();
-                DescriptionTextBox.Text = DiskTemplate.Description();
+                _diskTemplate = diskTemplate;
+                NameTextBox.Text = _diskTemplate.Name();
+                DescriptionTextBox.Text = _diskTemplate.Description();
                 Text = Messages.EDIT_DISK;
                 OkButton.Text = Messages.OK;
-                diskSpinner1.Populate(DiskTemplate.virtual_size, minSize);
-                srPicker.Populate(pickerUsage, connection, affinity, connection.Resolve(DiskTemplate.SR), new[] { NewDisk() });
+                diskSpinner1.Populate(_diskTemplate.virtual_size, minSize);
+                srPicker.Populate(pickerUsage, connection, affinity, connection.Resolve(_diskTemplate.SR), new[] { NewDisk() });
                 buttonRescan.Enabled = srPicker.CanBeScanned;
                 UpdateErrorsAndButtons();
             }
@@ -106,12 +106,12 @@ namespace XenAdmin.Dialogs
 
         public bool DontCreateVDI { get; set; }
 
-        internal override string HelpName => DiskTemplate == null ? "NewDiskDialog" : "EditNewDiskDialog";
+        internal override string HelpName => _diskTemplate == null ? "NewDiskDialog" : "EditNewDiskDialog";
 
         private string GetDefaultVDIName()
         {
             List<string> usedNames = new List<string>();
-            foreach (VDI v in connection.Cache.VDIs.Concat(_VDINamesInUse))
+            foreach (VDI v in connection.Cache.VDIs.Concat(_vdiNamesInUse))
             {
                 usedNames.Add(v.Name());
             }
@@ -151,7 +151,7 @@ namespace XenAdmin.Dialogs
 
             SR sr = srPicker.SR;
 
-            if (!sr.shared && TheVM != null && TheVM.HaPriorityIsRestart())
+            if (!sr.shared && _vm != null && _vm.HaPriorityIsRestart())
             {
                 using (var dlg = new WarningDialog(Messages.NEW_SR_DIALOG_ATTACH_NON_SHARED_DISK_HA,
                                 ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo))
@@ -160,19 +160,19 @@ namespace XenAdmin.Dialogs
                         return;
                 }
 
-                new HAUnprotectVMAction(TheVM).RunSync(TheVM.Connection.Session);
+                new HAUnprotectVMAction(_vm).RunSync(_vm.Connection.Session);
             }
 
-            if (TheVM != null)
+            if (_vm != null)
             {
-                var action = new CreateDiskAction(Disk, Device, TheVM);
+                var action = new CreateDiskAction(Disk, Device, _vm);
                 using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Blocks))
                     dialog.ShowDialog();
                 if (!action.Succeeded)
                     return;
 
                 // Now try to plug the VBD.
-                var plugAction = new VbdSaveAndPlugAction(TheVM, Device, Disk.Name(), TheVM.Connection.Session, false);
+                var plugAction = new VbdSaveAndPlugAction(_vm, Device, Disk.Name(), _vm.Connection.Session, false);
                 plugAction.ShowUserInstruction += PlugAction_ShowUserInstruction;
                 plugAction.RunAsync();
             }
@@ -206,15 +206,15 @@ namespace XenAdmin.Dialogs
             VDI vdi = new VDI
             {
                 Connection = connection,
-                read_only = DiskTemplate?.read_only ?? false,
+                read_only = _diskTemplate?.read_only ?? false,
                 SR = srPicker.SR == null ? new XenRef<SR>(Helper.NullOpaqueRef) : new XenRef<SR>(srPicker.SR),
                 virtual_size = diskSpinner1.SelectedSize,
                 name_label = NameTextBox.Text,
                 name_description = DescriptionTextBox.Text,
-                sharable = DiskTemplate?.sharable ?? false,
-                type = DiskTemplate?.type ?? vdi_type.user
+                sharable = _diskTemplate?.sharable ?? false,
+                type = _diskTemplate?.type ?? vdi_type.user
             };
-            vdi.SetVmHint(TheVM != null ? TheVM.uuid : "");
+            vdi.SetVmHint(_vm != null ? _vm.uuid : "");
             return vdi;
         }
 
