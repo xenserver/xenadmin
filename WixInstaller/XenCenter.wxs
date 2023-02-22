@@ -117,24 +117,6 @@
                         <Component Id="UpdateFiles" Guid="$(var.UpdateFilesGuid)">
                             <File Id="hotfixStockholm" Source="$(env.RepoRoot)\Branding\Hotfixes\RPU005.iso" />
                         </Component>
-                        <Directory Id="ja" Name="ja">
-                            <Component Id="JaResources" Guid="$(var.JapaneseResxGuid)">
-                                <File Id="JaResourcesDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\ja\$(var.BrandConsoleNoSpace).resources.dll" />
-                                <File Id="JaXenModResourcesDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\ja\XenModel.resources.dll" />
-                                <File Id="JaMicRepVwrCmnResDLL" Source="$(env.RepoRoot)\XenAdmin\ReportViewer\Microsoft.ReportViewer.Common.resources.dll" />
-                                <File Id="JaMicRepVwrPrcObjResDLL" Source="$(env.RepoRoot)\XenAdmin\ReportViewer\Microsoft.ReportViewer.WinForms.resources.dll" />
-                                <File Id="JaXOResourcesDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\ja\XenOvf.resources.dll" />
-                            </Component>
-                        </Directory>
-                        <Directory Id="sc" Name="zh-CN">
-                            <Component Id="ScResources" Guid="$(var.SimplifiedChineseResxGuid)">
-                                <File Id="ScResourcesDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\zh-CN\$(var.BrandConsoleNoSpace).resources.dll" />
-                                <File Id="ScXenModResourcesDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\zh-CN\XenModel.resources.dll" />
-                                <File Id="ScMicRepVwrCmnResDLL" Source="$(env.RepoRoot)\XenAdmin\ReportViewer\Microsoft.ReportViewer.Common.resources.dll" />
-                                <File Id="ScMicRepVwrPrcObjResDLL" Source="$(env.RepoRoot)\XenAdmin\ReportViewer\Microsoft.ReportViewer.WinForms.resources.dll" />
-                                <File Id="ScXOResourcesDLL" Source="$(env.RepoRoot)\XenAdmin\bin\Release\zh-CN\XenOvf.resources.dll" />
-                            </Component>
-                        </Directory>
                         <Directory Id="EXTERNALTOOLS" ShortName="External" Name="External Tools">
                             <Component Id="ExternalToolsComponent" Guid="$(var.ExtToolsGuid)">
                                 <File Id="XENSERVERLINUXFIXUP" Source="$(env.RepoRoot)\_scratch\External Tools\xenserver-linuxfixup-disk.iso" />
@@ -203,16 +185,6 @@
             <ComponentRef Id="ApplicationShortcut" />
             <ComponentRef Id="ProgramFilesShortcut" />
             <ComponentGroupRef Id="BrandedComponents" />
-
-
-            <Feature Id="LangJapanese" Title="!(loc.JapaneseTitle)" Description="!(loc.JapaneseDescr)" Display="expand"
-                Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="allow" >
-                <ComponentRef Id="JaResources" />
-            </Feature>
-            <Feature Id="LangSimplifiedChinese" Title="!(loc.SimplifiedChineseTitle)" Description="!(loc.SimplifiedChineseDescr)"
-                Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="allow" >
-                <ComponentRef Id="ScResources" />
-            </Feature>
         </Feature>
 
         <UIRef Id="$(var.BrandInstallerUI)" />

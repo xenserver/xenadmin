@@ -46,8 +46,4 @@
     <String Id="XenCenter_Launch">Launch</String>
     <String Id="Required_For_Installation">Microsoft .NET Framework 4.8 or later is required for this installation. Please install it from: https://www.microsoft.com/net/download/framework</String>
     <String Id="Readme">README.TXT</String>
-    <String Id="JapaneseTitle">Language Pack: Japanese</String>
-    <String Id="JapaneseDescr">Japanese resource files</String>
-    <String Id="SimplifiedChineseTitle">Language Pack: Simplified Chinese</String>
-    <String Id="SimplifiedChineseDescr">Simplified Chinese resource files</String>
 </WixLocalization>
