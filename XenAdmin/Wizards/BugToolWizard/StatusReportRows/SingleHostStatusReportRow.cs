@@ -50,7 +50,7 @@ namespace XenAdmin.Wizards.BugToolWizard
                 _host = host;
                 _size = size;
                 _capabilityKeys = capabilityKeys;
-                cellHostImg.Value = Images.GetImage16For(_host);
+                cellHostImg.Value = Images.StaticImages._000_Server_h32bit_16;
                 cellHost.Value = _host.Name();
             }
 
