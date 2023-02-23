@@ -165,6 +165,7 @@ namespace XenAdmin.Dialogs
 
             if (_vm != null)
             {
+                //note that this action alters the Device
                 var action = new CreateDiskAction(Disk, Device, _vm);
                 using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Blocks))
                     dialog.ShowDialog();
