@@ -53,6 +53,8 @@ namespace XenAdmin.Actions
         {
             _device = device;
             VM = vm;
+
+            ApiMethodsToRoleCheck.AddRange("VM.get_allowed_VBD_devices", "VDI.create");
         }
 
         protected override void Run()
