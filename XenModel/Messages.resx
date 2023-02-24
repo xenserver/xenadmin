@@ -7337,7 +7337,7 @@ This might result in failure to migrate VMs to this server during the RPU or to 
     <value>Select the storage repository for the imported template.</value>
   </data>
   <data name="IMPORT_WIZARD_UNCOMPRESSING" xml:space="preserve">
-    <value>Uncompressing file {0}, please wait...</value>
+    <value>Uncompressing file {0} ({1} done)...</value>
   </data>
   <data name="IMPORT_WIZARD_VM_SELECTION_INTRODUCTION" xml:space="preserve">
     <value>&amp;Virtual network interfaces in imported VMs:</value>

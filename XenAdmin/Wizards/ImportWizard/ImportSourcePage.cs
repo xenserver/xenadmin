@@ -532,7 +532,8 @@ namespace XenAdmin.Wizards.ImportWizard
                     _filesToDownload.Enqueue(file);
 
                     LongProcessWrapper(() => _webClient.DownloadFileAsync(_uri, downloadedPath, file),
-                        string.Format(Messages.IMPORT_WIZARD_DOWNLOADING, Path.GetFileName(downloadedPath).Ellipsise(50)));
+                        string.Format(Messages.IMPORT_WIZARD_DOWNLOADING, Path.GetFileName(downloadedPath).Ellipsise(50)),
+                        ProgressBarStyle.Blocks);
                     return m_textBoxFile.Text == downloadedPath;
                 }
                 return false;
@@ -555,7 +556,8 @@ namespace XenAdmin.Wizards.ImportWizard
                 if (dlog.ShowDialog(this) == DialogResult.Yes)
                 {
                     LongProcessWrapper(() => _unzipWorker.RunWorkerAsync(),
-                        string.Format(Messages.IMPORT_WIZARD_UNCOMPRESSING, Path.GetFileName(_unzipFileIn).Ellipsise(50)));
+                        string.Format(Messages.IMPORT_WIZARD_UNCOMPRESSING, Path.GetFileName(_unzipFileIn).Ellipsise(50), Util.DiskSizeString(0)),
+                        ProgressBarStyle.Marquee);
                     return m_textBoxFile.Text == _unzipFileOut;
                 }
 
@@ -563,7 +565,7 @@ namespace XenAdmin.Wizards.ImportWizard
             }
         }
 
-        private void LongProcessWrapper(Action process, string processMessage)
+        private void LongProcessWrapper(Action process, string processMessage, ProgressBarStyle style)
         {
             m_textBoxFile.Enabled = false;
             m_buttonBrowse.Enabled = false;
@@ -575,6 +577,7 @@ namespace XenAdmin.Wizards.ImportWizard
             labelProgress.Visible = true;
             progressBar1.Visible = true;
             progressBar1.Value = 0;
+            progressBar1.Style = style;
 
             longProcessInProgress = true;
             process.Invoke();
@@ -617,9 +620,6 @@ namespace XenAdmin.Wizards.ImportWizard
 
         private void _unzipWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            FileInfo info = new FileInfo(_unzipFileIn);
-            long length = info.Length;
-
             using (Stream inStream = File.Open(_unzipFileIn, FileMode.Open, FileAccess.ReadWrite, FileShare.None))
             using (Stream outStream = File.Open(_unzipFileOut, FileMode.Create, FileAccess.ReadWrite, FileShare.None))
             {
@@ -630,18 +630,15 @@ namespace XenAdmin.Wizards.ImportWizard
                         byte[] buffer = new byte[4 * 1024];
 
                         int bytesRead;
+                        ulong totalBytesRead = 0;
+
                         while ((bytesRead = bzis.Read(buffer, 0, buffer.Length)) > 0)
                         {
+                            totalBytesRead += (ulong)bytesRead;
                             outStream.Write(buffer, 0, bytesRead);
 
-                            int percentage = (int)Math.Floor((double)bzis.Position * 100 / length);
-
-                            if (percentage < 0)
-                                _unzipWorker.ReportProgress(0);
-                            else if (percentage > 100)
-                                _unzipWorker.ReportProgress(100);
-                            else
-                                _unzipWorker.ReportProgress(percentage);
+                            if (totalBytesRead % (128 * Util.BINARY_MEGA) == 0)
+                                _unzipWorker.ReportProgress(0, totalBytesRead);
 
                             if (_unzipWorker.CancellationPending)
                             {
@@ -667,7 +664,8 @@ namespace XenAdmin.Wizards.ImportWizard
 
         private void _unzipWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            progressBar1.Value = e.ProgressPercentage;
+            labelProgress.Text = string.Format(Messages.IMPORT_WIZARD_UNCOMPRESSING,
+                Path.GetFileName(_unzipFileIn).Ellipsise(50), Util.DiskSizeString((ulong)e.UserState));
         }
 
         private void _unzipWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
