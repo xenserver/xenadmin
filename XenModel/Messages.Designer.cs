@@ -21031,7 +21031,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Uncompressing file {0}, please wait....
+        ///   Looks up a localized string similar to Uncompressing file {0} ({1} done)....
         /// </summary>
         public static string IMPORT_WIZARD_UNCOMPRESSING {
             get {
