@@ -193,6 +193,8 @@ namespace DotNetVnc
 
         private const int RIGHT_SHIFT_SCAN = 54;
         private const int NUM_LOCK_SCAN = 69;
+        private const int HANJA_SCAN = 0xf1;
+        private const int HANGEUL_SCAN = 0xf2;
 
         private static int HookCallback(int nCode, int wParam, KBDLLHOOKSTRUCT* lParam)
         {
@@ -223,6 +225,16 @@ namespace DotNetVnc
                     case RIGHT_SHIFT_SCAN:
                     case NUM_LOCK_SCAN:
                        break;
+                    /* QEMU expects "QNum" scancodes on the wire and these
+                     * are different for the Hanja and Hangeul keys. Update
+                     * accordingly.
+                     */
+                    case HANJA_SCAN:
+                        scanCode = 0x71;
+                        break;
+                    case HANGEUL_SCAN:
+                        scanCode = 0x72;
+                        break;
                     default:
                         /* 128 is added to scanCode to differentiate
                          * an extended key. Scan code for all extended keys
