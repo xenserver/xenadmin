@@ -10695,8 +10695,11 @@ Please reconnect the host and try again</value>
   <data name="POOL_GONE" xml:space="preserve">
     <value>Could not find the pool in {0}'s cache.</value>
   </data>
-  <data name="POOL_HAS_DEPRECATED_FCOE_WARNING" xml:space="preserve">
+  <data name="POOL_HAS_DEPRECATED_FCOE_SHORT" xml:space="preserve">
     <value>{0}: Support for Software FCoE SRs has been deprecated in {1}</value>
+  </data>
+  <data name="POOL_HAS_DEPRECATED_FCOE_WARNING" xml:space="preserve">
+    <value>Support for Software FCoE SRs has been deprecated in {0} and will be removed in a future release. It is recommended that you move your VMs to a different type of storage and remove Software FCoE SRs from your systems as soon as possible.</value>
   </data>
   <data name="POOL_HAS_MIXED_LICENSES" xml:space="preserve">
     <value>This pool has hosts with different types of license.</value>
@@ -10745,7 +10748,7 @@ Support for PV guests has been removed in {1}. Click Learn more to see the list 
     <value>Pool License</value>
   </data>
   <data name="POOL_MAY_HAVE_DEPRECATED_FCOE_WARNING" xml:space="preserve">
-    <value>{0}: If you are upgrading to {1}, support for Software FCoE SRs has been deprecated</value>
+    <value>Support for Software FCoE SRs has been deprecated in {0} and will be removed in a future release. If you are upgrading to this version, it is recommended that you move your VMs to a different type of storage and remove Software FCoE SRs from your system as soon as possible.</value>
   </data>
   <data name="POOL_NAME_EMPTY" xml:space="preserve">
     <value>Pool name cannot be empty</value>

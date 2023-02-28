@@ -31,9 +31,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using XenAdmin.Core;
-using XenAPI;
+using XenAdmin.Diagnostics.Hotfixing;
 using XenAdmin.Diagnostics.Problems;
+using XenAdmin.Diagnostics.Problems.HostProblem;
 using XenAdmin.Diagnostics.Problems.PoolProblem;
+using XenAPI;
 
 namespace XenAdmin.Diagnostics.Checks
 {
@@ -55,19 +57,25 @@ namespace XenAdmin.Diagnostics.Checks
 
         protected override Problem RunHostCheck()
         {
-            string upgradePlatformVersion = null;
-            var upgradingToVersionWithDeprecation = false;
-            if (_installMethodConfig != null)
+            if (!_manualUpgrade)
             {
-                Host.TryGetUpgradeVersion(Host, _installMethodConfig, out upgradePlatformVersion, out _);
+                var hotfix = HotfixFactory.Hotfix(Host);
+                if (hotfix != null && hotfix.ShouldBeAppliedTo(Host))
+                    return new HostDoesNotHaveHotfixWarning(this, Host);
             }
 
-            if (!_manualUpgrade && !string.IsNullOrEmpty(upgradePlatformVersion))
-            {
-                upgradingToVersionWithDeprecation = Helpers.Post82X(upgradePlatformVersion);
-            }
-            
-            return new PoolHasFCoESrWarning(this, Helpers.GetPoolOfOne(Host.Connection), upgradingToVersionWithDeprecation);
+            string upgradePlatformVersion = null;
+
+            if (_installMethodConfig != null)
+                Host.TryGetUpgradeVersion(Host, _installMethodConfig, out upgradePlatformVersion, out _);
+
+            if (string.IsNullOrEmpty(upgradePlatformVersion))
+                return new PoolHasFCoESrWarning(this, Helpers.GetPoolOfOne(Host.Connection), false);
+
+            if (Helpers.Post82X(upgradePlatformVersion))
+                return new PoolHasFCoESrWarning(this, Helpers.GetPoolOfOne(Host.Connection), true);
+
+            return null;
         }
     }
 }

@@ -28,13 +28,8 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Diagnostics;
-using System.Reflection;
-using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAdmin.Diagnostics.Checks;
-using XenAdmin.Dialogs;
 using XenAPI;
 
 
@@ -42,44 +37,26 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
 {
     internal class PoolHasFCoESrWarning : WarningWithMoreInfo
     {
-        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod()?.DeclaringType);
         private readonly Pool _pool;
         private readonly bool _upgradingToVersionWithDeprecation;
 
-        public override string Title => Check.Description;
-        public override string HelpMessage => Messages.MORE_INFO;
+        public override string Title => Description;
         public override string LinkText => Messages.LEARN_MORE;
-        public override string LinkData => InvisibleMessages.PV_GUESTS_CHECK_URL;
-        public override string Message => string.Empty;
+        public override string LinkData => InvisibleMessages.FCOE_SR_DEPRECATION_URL;
 
-        public override string Description => string.Format(_upgradingToVersionWithDeprecation ? Messages.POOL_HAS_DEPRECATED_FCOE_WARNING : Messages.POOL_MAY_HAVE_DEPRECATED_FCOE_WARNING,
-            _pool,
-            BrandManager.ProductVersionPost82
-        );
-        
-        public PoolHasFCoESrWarning(Check check, Pool pool, bool upgradingToVersionWithDeprecation) : base(check)
+        public override string Message => string.Format(_upgradingToVersionWithDeprecation
+                ? Messages.POOL_HAS_DEPRECATED_FCOE_WARNING
+                : Messages.POOL_MAY_HAVE_DEPRECATED_FCOE_WARNING,
+            BrandManager.ProductVersionPost82);
+
+        public override string Description => string.Format(Messages.POOL_HAS_DEPRECATED_FCOE_SHORT,
+            _pool, BrandManager.ProductVersionPost82);
+
+        public PoolHasFCoESrWarning(Check check, Pool pool, bool upgradingToVersionWithDeprecation)
+            : base(check)
         {
             _pool = pool;
             _upgradingToVersionWithDeprecation = upgradingToVersionWithDeprecation;
-        }
-
-        protected override AsyncAction CreateAction(out bool cancelled)
-        {
-            try
-            {
-                Process.Start(InvisibleMessages.FCOE_SR_DEPRECATION_URL);
-            }
-            catch(Exception e)
-            {
-                Log.Error($"Error while attempting to open {InvisibleMessages.FCOE_SR_DEPRECATION_URL}.", e);
-                using (var dlg = new WarningDialog(string.Format(Messages.COULD_NOT_OPEN_URL, InvisibleMessages.FCOE_SR_DEPRECATION_URL)))
-                {
-                    dlg.Show();
-                }
-            }
-            
-            cancelled = true;
-            return null;
         }
     }
 }

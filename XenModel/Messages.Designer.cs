@@ -30807,6 +30807,15 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to {0}: Support for Software FCoE SRs has been deprecated in {1}.
         /// </summary>
+        public static string POOL_HAS_DEPRECATED_FCOE_SHORT {
+            get {
+                return ResourceManager.GetString("POOL_HAS_DEPRECATED_FCOE_SHORT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Support for Software FCoE SRs has been deprecated in {0} and will be removed in a future release. It is recommended that you move your VMs to a different type of storage and remove Software FCoE SRs from your systems as soon as possible..
+        /// </summary>
         public static string POOL_HAS_DEPRECATED_FCOE_WARNING {
             get {
                 return ResourceManager.GetString("POOL_HAS_DEPRECATED_FCOE_WARNING", resourceCulture);
@@ -30944,7 +30953,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}: If you are upgrading to {1}, support for Software FCoE SRs has been deprecated.
+        ///   Looks up a localized string similar to Support for Software FCoE SRs has been deprecated in {0} and will be removed in a future release. If you are upgrading to this version, it is recommended that you move your VMs to a different type of storage and remove Software FCoE SRs from your system as soon as possible..
         /// </summary>
         public static string POOL_MAY_HAVE_DEPRECATED_FCOE_WARNING {
             get {
