@@ -46,13 +46,16 @@ namespace XenAdmin.Actions
         {
             _definition = definition;
 
-            ApiMethodsToRoleCheck.AddRange("pool.add_to_gui_config", "pool.remove_from_gui_config",
-                "pool.remove_from_other_config",
-                "host.remove_from_other_config",
-                "VM.remove_from_other_config",
-                "SR.remove_from_other_config",
-                "VDI.remove_from_other_config",
-                "Network.remove_from_other_config");
+            string key = CustomFieldsManager.GetCustomFieldKey(definition);
+
+            ApiMethodsToRoleCheck.AddWithKey("pool.add_to_gui_config", CustomFieldsManager.CUSTOM_FIELD_BASE_KEY);
+            ApiMethodsToRoleCheck.AddWithKey("pool.remove_from_gui_config", CustomFieldsManager.CUSTOM_FIELD_BASE_KEY);
+            ApiMethodsToRoleCheck.AddWithKey("pool.remove_from_other_config", key);
+            ApiMethodsToRoleCheck.AddWithKey("host.remove_from_other_config", key);
+            ApiMethodsToRoleCheck.AddWithKey("VM.remove_from_other_config", key);
+            ApiMethodsToRoleCheck.AddWithKey("SR.remove_from_other_config", key);
+            ApiMethodsToRoleCheck.AddWithKey("VDI.remove_from_other_config", key);
+            ApiMethodsToRoleCheck.AddWithKey("Network.remove_from_other_config", key);
         }
 
         protected override void Run()

@@ -45,7 +45,9 @@ namespace XenAdmin.Actions
                 string.Format(Messages.ADDING_CUSTOM_FIELD, definition.Name), false)
         {
             _definition = definition;
-            ApiMethodsToRoleCheck.AddRange("pool.add_to_gui_config", "pool.remove_from_gui_config");
+
+            ApiMethodsToRoleCheck.AddWithKey("pool.add_to_gui_config", CustomFieldsManager.CUSTOM_FIELD_BASE_KEY);
+            ApiMethodsToRoleCheck.AddWithKey("pool.remove_from_gui_config", CustomFieldsManager.CUSTOM_FIELD_BASE_KEY);
         }
 
         protected override void Run()
