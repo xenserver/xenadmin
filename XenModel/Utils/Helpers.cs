@@ -1846,5 +1846,16 @@ namespace XenAdmin.Core
                     orderby network.Key
                     select network.Value.Split(new[] { "\n", "%n" }, StringSplitOptions.RemoveEmptyEntries)).SelectMany(x => x).Distinct().ToList();
         }
+
+        public static bool ConnectionRequiresRbac(IXenConnection connection)
+        {
+            if (connection?.Session == null)
+                throw new NullReferenceException("RBAC check was given a null connection");
+
+            if (connection.Session.IsLocalSuperuser)
+                return false;
+
+            return GetMaster(connection).external_auth_type != Auth.AUTH_TYPE_NONE;
+        }
     }
 }

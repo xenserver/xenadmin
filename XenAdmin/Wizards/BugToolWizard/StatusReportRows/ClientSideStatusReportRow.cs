@@ -29,48 +29,34 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Collections.Generic;
-using System.Net;
 using XenAdmin.Actions;
-using XenAdmin.Network;
 using XenAPI;
 
-namespace XenAdmin
+namespace XenAdmin.Wizards.BugToolWizard
 {
-    public static class XenAdminConfigManager
+    partial class BugToolPageRetrieveData
     {
-        public static IXenAdminConfigProvider Provider { get; set; }
-    }
+        private class ClientSideStatusReportRow : StatusReportRow
+        {
+            private readonly List<Host> _hosts;
+            private readonly bool _includeClientLogs;
+            private ClientSideStatusReportAction _action;
 
-    public interface IXenAdminConfigProvider : IConfigProvider
-    {
-        Func<List<Role>, IXenConnection, string, AsyncAction.SudoElevationResult> ElevatedSessionDelegate { get; }
-        int ConnectionTimeout { get; }
-        Session CreateActionSession(Session session, IXenConnection connection);
-        bool Exiting { get; }
-        bool ForcedExiting { get; }
-        string XenCenterUUID { get; }
-        bool DontSudo { get; }
-        int GetProxyTimeout(bool timeout);
-        void ShowObject(string newVMRef);
-        void HideObject(string newVMRef);
-        bool ObjectIsHidden(string opaqueRef);
-        string GetLogFile();
-        void UpdateServerHistory(string hostnameWithPort);
-        void SaveSettingsIfRequired();
-        bool ShowHiddenVMs { get; }
-        string GetXenCenterMetadata();
-        string GetCustomUpdatesXmlLocation();
-        string GetCustomFileServicePrefix();
-    }
+            public ClientSideStatusReportRow(List<Host> hosts, bool includeClientLogs)
+            {
+                _hosts = hosts;
+                _includeClientLogs = includeClientLogs;
+                cellHostImg.Value = Images.StaticImages._000_GetServerReport_h32bit_16;
+                cellHost.Value = includeClientLogs ? Messages.BUGTOOL_CLIENT_LOGS_META : Messages.BUGTOOL_CLIENT_META;
+            }
 
-    public interface IConfigProvider
-    {
-        string FileServiceUsername { get; }
-        string FileServiceClientId { get; }
-        string GetCustomTokenUrl();
-        IWebProxy GetProxyFromSettings(IXenConnection connection);
-        IWebProxy GetProxyFromSettings(IXenConnection connection, bool isForXenServer);
+            public override StatusReportAction Action => _action;
+
+            protected override void CreateAction(string path, string time)
+            {
+                _action = new ClientSideStatusReportAction(_hosts, _includeClientLogs, path, time);
+            }
+        }
     }
 }

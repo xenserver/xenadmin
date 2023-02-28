@@ -601,6 +601,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disabling Health Check for &apos;{0}&apos;....
+        /// </summary>
+        public static string ACTION_DISABLE_HEALTH_CHECK_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("ACTION_DISABLE_HEALTH_CHECK_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disable Health Check.
+        /// </summary>
+        public static string ACTION_DISABLE_HEALTH_CHECK_TITLE {
+            get {
+                return ResourceManager.GetString("ACTION_DISABLE_HEALTH_CHECK_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disable IGMP snooping.
         /// </summary>
         public static string ACTION_DISABLE_IGMP_SNOOPING {
@@ -1249,33 +1267,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Get Health Check analysis result from [Citrix] Insight Services.
-        /// </summary>
-        public static string ACTION_GET_HEALTH_CHECK_RESULT {
-            get {
-                return ResourceManager.GetString("ACTION_GET_HEALTH_CHECK_RESULT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Failed to get the analysis result.
-        /// </summary>
-        public static string ACTION_GET_HEALTH_CHECK_RESULT_FAILED {
-            get {
-                return ResourceManager.GetString("ACTION_GET_HEALTH_CHECK_RESULT_FAILED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Getting the analysis result.
-        /// </summary>
-        public static string ACTION_GET_HEALTH_CHECK_RESULT_PROGRESS {
-            get {
-                return ResourceManager.GetString("ACTION_GET_HEALTH_CHECK_RESULT_PROGRESS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Action completed. {0} VDIs found..
         /// </summary>
         public static string ACTION_GET_METADATA_VDIS_DONE {
@@ -1353,24 +1344,6 @@ namespace XenAdmin {
         public static string ACTION_HA_UNPROTECT_VM_TITLE {
             get {
                 return ResourceManager.GetString("ACTION_HA_UNPROTECT_VM_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Authentication with [Citrix] Insight Services.
-        /// </summary>
-        public static string ACTION_HEALTHCHECK_AUTHENTICATION {
-            get {
-                return ResourceManager.GetString("ACTION_HEALTHCHECK_AUTHENTICATION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Authenticating with [Citrix] Insight Services.
-        /// </summary>
-        public static string ACTION_HEALTHCHECK_AUTHENTICATION_PROGRESS {
-            get {
-                return ResourceManager.GetString("ACTION_HEALTHCHECK_AUTHENTICATION_PROGRESS", resourceCulture);
             }
         }
         
@@ -1951,20 +1924,38 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Save Health Check settings.
-        /// </summary>
-        public static string ACTION_SAVE_HEALTHCHECK_SETTINGS {
-            get {
-                return ResourceManager.GetString("ACTION_SAVE_HEALTHCHECK_SETTINGS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Save settings for &apos;{0}&apos;....
         /// </summary>
         public static string ACTION_SAVE_SETTINGS {
             get {
                 return ResourceManager.GetString("ACTION_SAVE_SETTINGS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving system status canceled.
+        /// </summary>
+        public static string ACTION_SAVE_STATUS_REPORT_CANCELLED {
+            get {
+                return ResourceManager.GetString("ACTION_SAVE_STATUS_REPORT_CANCELLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving system status failed.
+        /// </summary>
+        public static string ACTION_SAVE_STATUS_REPORT_FAILED {
+            get {
+                return ResourceManager.GetString("ACTION_SAVE_STATUS_REPORT_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There was an error while saving the server status report. Only a partial report may be available.
+        /// </summary>
+        public static string ACTION_SAVE_STATUS_REPORT_FAILED_PARTIAL {
+            get {
+                return ResourceManager.GetString("ACTION_SAVE_STATUS_REPORT_FAILED_PARTIAL", resourceCulture);
             }
         }
         
@@ -2001,15 +1992,6 @@ namespace XenAdmin {
         public static string ACTION_SAVING_FOLDER_TAGS_FOR {
             get {
                 return ResourceManager.GetString("ACTION_SAVING_FOLDER_TAGS_FOR", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Saving Health Check settings for &apos;{0}&apos;....
-        /// </summary>
-        public static string ACTION_SAVING_HEALTHCHECK_SETTINGS {
-            get {
-                return ResourceManager.GetString("ACTION_SAVING_HEALTHCHECK_SETTINGS", resourceCulture);
             }
         }
         
@@ -2536,11 +2518,38 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Getting system status canceled.
+        ///   Looks up a localized string similar to Canceled.
         /// </summary>
         public static string ACTION_SYSTEM_STATUS_CANCELLED {
             get {
                 return ResourceManager.GetString("ACTION_SYSTEM_STATUS_CANCELLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No data was compiled. Press previous to select new items or servers and try again..
+        /// </summary>
+        public static string ACTION_SYSTEM_STATUS_COMPILE_FAILED {
+            get {
+                return ResourceManager.GetString("ACTION_SYSTEM_STATUS_COMPILE_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Finished compiling status report (with errors). A partial status report was saved..
+        /// </summary>
+        public static string ACTION_SYSTEM_STATUS_COMPILE_PARTIAL {
+            get {
+                return ResourceManager.GetString("ACTION_SYSTEM_STATUS_COMPILE_PARTIAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status report was compiled and saved successfully..
+        /// </summary>
+        public static string ACTION_SYSTEM_STATUS_COMPILE_SUCCESSFUL {
+            get {
+                return ResourceManager.GetString("ACTION_SYSTEM_STATUS_COMPILE_SUCCESSFUL", resourceCulture);
             }
         }
         
@@ -2572,29 +2581,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No data was compiled. Press previous to select new items or servers and try again..
+        ///   Looks up a localized string similar to Failed to save the status report to specified location. Please try again..
         /// </summary>
-        public static string ACTION_SYSTEM_STATUS_FAILED {
+        public static string ACTION_SYSTEM_STATUS_SAVE_FAILED {
             get {
-                return ResourceManager.GetString("ACTION_SYSTEM_STATUS_FAILED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Finished compiling status report.
-        /// </summary>
-        public static string ACTION_SYSTEM_STATUS_SUCCESSFUL {
-            get {
-                return ResourceManager.GetString("ACTION_SYSTEM_STATUS_SUCCESSFUL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Finished compiling status report (with errors). A partial status report was compiled..
-        /// </summary>
-        public static string ACTION_SYSTEM_STATUS_SUCCESSFUL_PARTIAL {
-            get {
-                return ResourceManager.GetString("ACTION_SYSTEM_STATUS_SUCCESSFUL_PARTIAL", resourceCulture);
+                return ResourceManager.GetString("ACTION_SYSTEM_STATUS_SAVE_FAILED", resourceCulture);
             }
         }
         
@@ -2680,56 +2671,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Transfer Health Check settings.
-        /// </summary>
-        public static string ACTION_TRANSFER_HEALTHCHECK_SETTINGS {
-            get {
-                return ResourceManager.GetString("ACTION_TRANSFER_HEALTHCHECK_SETTINGS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Updating integrated GPU pass-through on &apos;{0}&apos;.
         /// </summary>
         public static string ACTION_UPDATE_INTEGRATED_GPU_PASSTHROUGH_TITLE {
             get {
                 return ResourceManager.GetString("ACTION_UPDATE_INTEGRATED_GPU_PASSTHROUGH_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Upload server status report to [Citrix] Insight Services.
-        /// </summary>
-        public static string ACTION_UPLOAD_SERVER_STATUS_REPORT {
-            get {
-                return ResourceManager.GetString("ACTION_UPLOAD_SERVER_STATUS_REPORT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Failed to upload the status report..
-        /// </summary>
-        public static string ACTION_UPLOAD_SERVER_STATUS_REPORT_FAILED {
-            get {
-                return ResourceManager.GetString("ACTION_UPLOAD_SERVER_STATUS_REPORT_FAILED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Uploading report to [Citrix] Insight Services ({0} of {1}).
-        /// </summary>
-        public static string ACTION_UPLOAD_SERVER_STATUS_REPORT_PERCENTAGE {
-            get {
-                return ResourceManager.GetString("ACTION_UPLOAD_SERVER_STATUS_REPORT_PERCENTAGE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Uploading report to [Citrix] Insight Services.
-        /// </summary>
-        public static string ACTION_UPLOAD_SERVER_STATUS_REPORT_PROGRESS {
-            get {
-                return ResourceManager.GetString("ACTION_UPLOAD_SERVER_STATUS_REPORT_PROGRESS", resourceCulture);
             }
         }
         
@@ -5923,7 +5869,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Can’t create this bond while HA is enabled
+        ///   Looks up a localized string similar to Can&apos;t create this bond while HA is enabled
         ///
         ///A management interface exists on one of the selected NICs. Moving the management interface to the bond could result in HA network heartbeat failure, so this action is not allowed while HA is on.
         ///
@@ -5989,7 +5935,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Can’t delete this bond while HA is enabled
+        ///   Looks up a localized string similar to Can&apos;t delete this bond while HA is enabled
         ///
         ///A management interface exists on one of the bonded NICs. Deleting the  bond could result in HA network heartbeat failure, so this action is not allowed while HA is on.
         ///
@@ -6326,6 +6272,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Downloading.
+        /// </summary>
+        public static string BUGTOOL_REPORTSTATUS_DOWNLOADING_NO_DATA {
+            get {
+                return ResourceManager.GetString("BUGTOOL_REPORTSTATUS_DOWNLOADING_NO_DATA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed - Please see logs for details.
         /// </summary>
         public static string BUGTOOL_REPORTSTATUS_FAILED {
@@ -6340,6 +6295,24 @@ namespace XenAdmin {
         public static string BUGTOOL_REPORTSTATUS_QUEUED {
             get {
                 return ResourceManager.GetString("BUGTOOL_REPORTSTATUS_QUEUED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving - {0}%.
+        /// </summary>
+        public static string BUGTOOL_REPORTSTATUS_SAVING {
+            get {
+                return ResourceManager.GetString("BUGTOOL_REPORTSTATUS_SAVING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving report to selected destination.
+        /// </summary>
+        public static string BUGTOOL_SAVE_STATUS_REPORT {
+            get {
+                return ResourceManager.GetString("BUGTOOL_SAVE_STATUS_REPORT", resourceCulture);
             }
         }
         
@@ -8128,24 +8101,6 @@ namespace XenAdmin {
         public static string CONFIRM_DISABLE_CBT_VMS_TITLE {
             get {
                 return ResourceManager.GetString("CONFIRM_DISABLE_CBT_VMS_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to disable Health Check on the selected pool?.
-        /// </summary>
-        public static string CONFIRM_DISABLE_HEALTH_CHECK_POOL {
-            get {
-                return ResourceManager.GetString("CONFIRM_DISABLE_HEALTH_CHECK_POOL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to disable Health Check on the selected server?.
-        /// </summary>
-        public static string CONFIRM_DISABLE_HEALTH_CHECK_SERVER {
-            get {
-                return ResourceManager.GetString("CONFIRM_DISABLE_HEALTH_CHECK_SERVER", resourceCulture);
             }
         }
         
@@ -13519,7 +13474,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select the vApps and individual VMs you want to fail back and specify the required power state for them after they have been recovered to pool ‘{0}’..
+        ///   Looks up a localized string similar to Select the vApps and individual VMs you want to fail back and specify the required power state for them after they have been recovered to pool &apos;{0}&apos;..
         /// </summary>
         public static string DR_WIZARD_APPLIANCESPAGE_DESCRIPTION_FAILBACK {
             get {
@@ -13744,7 +13699,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This wizard will take you through the steps needed to perform a test failover of your critical vApps and VMs. The vApps and VMs you select will be recovered to pool ‘{0}’ on the DR site but will not be started up..
+        ///   Looks up a localized string similar to This wizard will take you through the steps needed to perform a test failover of your critical vApps and VMs. The vApps and VMs you select will be recovered to pool &apos;{0}&apos; on the DR site but will not be started up..
         /// </summary>
         public static string DR_WIZARD_FIRSTPAGE_DRYRUN_LINE1 {
             get {
@@ -13804,7 +13759,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Before failback can take place, storage mirroring – remote replication of your VM data – must be halted..
+        ///   Looks up a localized string similar to Before failback can take place, storage mirroring - remote replication of your VM data - must be halted..
         /// </summary>
         public static string DR_WIZARD_FIRSTPAGE_FAILBACK_LINE4 {
             get {
@@ -13843,7 +13798,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Before failover can take place, storage mirroring – remote replication of your VM data – must be halted..
+        ///   Looks up a localized string similar to Before failover can take place, storage mirroring - remote replication of your VM data - must be halted..
         /// </summary>
         public static string DR_WIZARD_FIRSTPAGE_FAILOVER_LINE4 {
             get {
@@ -18841,204 +18796,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to HealthCheck.
-        /// </summary>
-        public static string HEALTH_CHECK {
-            get {
-                return ResourceManager.GetString("HEALTH_CHECK", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Authentication with [Citrix] Insight Services failed. See the application log files for more information..
-        /// </summary>
-        public static string HEALTH_CHECK_AUTHENTICATION_FAILED {
-            get {
-                return ResourceManager.GetString("HEALTH_CHECK_AUTHENTICATION_FAILED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Invalid user name or password. Please try again..
-        /// </summary>
-        public static string HEALTH_CHECK_AUTHENTICATION_INVALID_CREDENTIALS {
-            get {
-                return ResourceManager.GetString("HEALTH_CHECK_AUTHENTICATION_INVALID_CREDENTIALS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to https://cis.citrix.com/legal/.
-        /// </summary>
-        public static string HEALTH_CHECK_CIS_POLICY_URL {
-            get {
-                return ResourceManager.GetString("HEALTH_CHECK_CIS_POLICY_URL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to http://www.citrix.com/about/legal/privacy.html.
-        /// </summary>
-        public static string HEALTH_CHECK_CITRIX_POLICY_URL {
-            get {
-                return ResourceManager.GetString("HEALTH_CHECK_CITRIX_POLICY_URL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The information that Health Check uploads to [Citrix] Insight Services will be used for troubleshooting and diagnostics support purposes, as well as to improve the quality, reliability, and performance of our products subject to the [Citrix] Insight Services Policy at {0} and [Citrix] Privacy Policy at {1}..
-        /// </summary>
-        public static string HEALTH_CHECK_PRIVACY_POLICY {
-            get {
-                return ResourceManager.GetString("HEALTH_CHECK_PRIVACY_POLICY", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to This user is not authorized to access this server..
-        /// </summary>
-        public static string HEALTH_CHECK_USER_HAS_NO_PERMISSION_TO_CONNECT {
-            get {
-                return ResourceManager.GetString("HEALTH_CHECK_USER_HAS_NO_PERMISSION_TO_CONNECT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to This user is not authorized to perform Health Check operations..
-        /// </summary>
-        public static string HEALTH_CHECK_USER_NOT_AUTHORIZED {
-            get {
-                return ResourceManager.GetString("HEALTH_CHECK_USER_NOT_AUTHORIZED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Authentication with [Citrix] Insight Services is required in order to enable this feature. [XenCenter] detected a previous successful authentication for one of other connected pools. You can choose to re-use it or authenticate again..
-        /// </summary>
-        public static string HEALTHCHECK_AUTHENTICATION_RUBRIC_EXISTING_TOKEN {
-            get {
-                return ResourceManager.GetString("HEALTHCHECK_AUTHENTICATION_RUBRIC_EXISTING_TOKEN", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Authentication with [Citrix] Insight Services is required in order to enable this feature. Please register by providing MyCitrix credentials (see {0}). These credentials will only be used to obtain an upload token and will not be stored on this machine or on your server..
-        /// </summary>
-        public static string HEALTHCHECK_AUTHENTICATION_RUBRIC_NO_TOKEN {
-            get {
-                return ResourceManager.GetString("HEALTHCHECK_AUTHENTICATION_RUBRIC_NO_TOKEN", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Only {0} users can enroll into, configure, or disable Health Check, or upload a report and request a report analysis.
-        /// </summary>
-        public static string HEALTHCHECK_CANNOT_ALTER_SETTINGS {
-            get {
-                return ResourceManager.GetString("HEALTHCHECK_CANNOT_ALTER_SETTINGS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to OK, Enable Health Check.
-        /// </summary>
-        public static string HEALTHCHECK_ENROLLMENT_CONFIRMATION_BUTTON_LABEL {
-            get {
-                return ResourceManager.GetString("HEALTHCHECK_ENROLLMENT_CONFIRMATION_BUTTON_LABEL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Health Check Enrollment - {0}.
-        /// </summary>
-        public static string HEALTHCHECK_ENROLLMENT_TITLE {
-            get {
-                return ResourceManager.GetString("HEALTHCHECK_ENROLLMENT_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Request an additional upload now.
-        /// </summary>
-        public static string HEALTHCHECK_ON_DEMAND_REQUEST {
-            get {
-                return ResourceManager.GetString("HEALTHCHECK_ON_DEMAND_REQUEST", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Additional upload requested at {0}.
-        /// </summary>
-        public static string HEALTHCHECK_ON_DEMAND_REQUESTED_AT {
-            get {
-                return ResourceManager.GetString("HEALTHCHECK_ON_DEMAND_REQUESTED_AT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Upload a Health Check report every {0} weeks on {1} starting at {2}.
-        /// </summary>
-        public static string HEALTHCHECK_SCHEDULE_DESCRIPTION {
-            get {
-                return ResourceManager.GetString("HEALTHCHECK_SCHEDULE_DESCRIPTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} issues detected.
-        /// </summary>
-        public static string HEALTHCHECK_STATUS_ISSUES_FOUND {
-            get {
-                return ResourceManager.GetString("HEALTHCHECK_STATUS_ISSUES_FOUND", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to No issues detected.
-        /// </summary>
-        public static string HEALTHCHECK_STATUS_NO_ISSUES_FOUND {
-            get {
-                return ResourceManager.GetString("HEALTHCHECK_STATUS_NO_ISSUES_FOUND", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to No report uploaded yet.
-        /// </summary>
-        public static string HEALTHCHECK_STATUS_NO_UPLOAD_YET {
-            get {
-                return ResourceManager.GetString("HEALTHCHECK_STATUS_NO_UPLOAD_YET", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Analysis not yet available.
-        /// </summary>
-        public static string HEALTHCHECK_STATUS_NOT_AVAILABLE_YET {
-            get {
-                return ResourceManager.GetString("HEALTHCHECK_STATUS_NOT_AVAILABLE_YET", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Health Check not enabled.
-        /// </summary>
-        public static string HEALTHCHECK_STATUS_NOT_ENROLLED {
-            get {
-                return ResourceManager.GetString("HEALTHCHECK_STATUS_NOT_ENROLLED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 1 issue detected.
-        /// </summary>
-        public static string HEALTHCHECK_STATUS_ONE_ISSUE_FOUND {
-            get {
-                return ResourceManager.GetString("HEALTHCHECK_STATUS_ONE_ISSUE_FOUND", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Heartbeating status.
         /// </summary>
         public static string HEARTBEATING_STATUS {
@@ -22461,7 +22218,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Live patching failed for server ‘{0}’. To complete the patch installation, please put the server into maintenance mode and reboot it..
+        ///   Looks up a localized string similar to Live patching failed for server &apos;{0}&apos;. To complete the patch installation, please put the server into maintenance mode and reboot it..
         /// </summary>
         public static string LIVE_PATCHING_FAILED_ONE_HOST {
             get {
@@ -26405,9 +26162,9 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to [XenServer] hosts support Software based Fibre Channel over Ethernet using supported Converged Network Adapters (CNAs) which support FCoE in this way.
         ///
-        ///All configuration required to expose a LUN to the host must be completed manually, including configuring your FCoE fabric, and allocating LUN(s) to your CNA’s public world wide name (PWWN). 
+        ///All configuration required to expose a LUN to the host must be completed manually, including configuring your FCoE fabric, and allocating LUN(s) to your CNA&apos;s public world wide name (PWWN). 
         ///
-        ///Once this configuration has been carried out, this wizard will walk you through discovering and mounting a LUN available to the hosts CNA’s as a SCSI device. The SC [rest of string was truncated]&quot;;.
+        ///Once this configuration has been carried out, this wizard will walk you through discovering and mounting a LUN available to the hosts CNA&apos;s as a SCSI device. The SC [rest of string was truncated]&quot;;.
         /// </summary>
         public static string NEWSR_LVMOFCOE_BLURB {
             get {
@@ -30920,6 +30677,25 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disable Health Check.
+        /// </summary>
+        public static string PROBLEM_HEALTH_CHECK_HELP {
+            get {
+                return ResourceManager.GetString("PROBLEM_HEALTH_CHECK_HELP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Health Check has been removed, but &apos;{0}&apos; is still enrolled to it.
+        ///{1} will disable Health Check and clear the enrollment before you can proceed to manage your system..
+        /// </summary>
+        public static string PROBLEM_HEALTH_CHECK_ON_CONNECTION {
+            get {
+                return ResourceManager.GetString("PROBLEM_HEALTH_CHECK_ON_CONNECTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Server &apos;{0}&apos;.
         /// </summary>
         public static string PROBLEM_HOSTPROBLEM_TITLE {
@@ -31587,6 +31363,15 @@ namespace XenAdmin {
         public static string RBAC_DR_WIZARD_MESSAGE {
             get {
                 return ResourceManager.GetString("RBAC_DR_WIZARD_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A {0} user cannot download system status reports. Log in as a different user with sufficient privileges and try again..
+        /// </summary>
+        public static string RBAC_GET_SYSTEM_STATUS_BLOCKED {
+            get {
+                return ResourceManager.GetString("RBAC_GET_SYSTEM_STATUS_BLOCKED", resourceCulture);
             }
         }
         
@@ -32865,7 +32650,7 @@ namespace XenAdmin {
         ///    
         ///1. Insert the [XenServer] installation CD-ROM in the server’s CD/DVD drive or set up a PXE network boot.
         ///2. Click the Reboot Now button below to reboot the server and begin the installation.
-        ///3. Go to the server’s console and follow the on-screen instructions to install the upgrade.
+        ///3. Go to the server&apos;s console and follow the on-screen instructions to install the upgrade.
         ///
         ///To skip this server and continue to the next server in the pool, click Skip This Server. Note that running a pool with servers on different versions of [X [rest of string was truncated]&quot;;.
         /// </summary>
@@ -35294,24 +35079,6 @@ namespace XenAdmin {
         public static string STATUS_FILTER_QUEUED {
             get {
                 return ResourceManager.GetString("STATUS_FILTER_QUEUED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enter your MyCitrix credentials (see {0}). These credentials will only be used to authenticate with [Citrix] Insight Services once and will not be stored on this machine or on your server..
-        /// </summary>
-        public static string STATUS_REPORT_ENTER_CREDENTIALS_MESSAGE {
-            get {
-                return ResourceManager.GetString("STATUS_REPORT_ENTER_CREDENTIALS_MESSAGE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to There was an error while packaging the server status report. Only a partial report may be available.
-        /// </summary>
-        public static string STATUS_REPORT_ZIP_FAILED {
-            get {
-                return ResourceManager.GetString("STATUS_REPORT_ZIP_FAILED", resourceCulture);
             }
         }
         
@@ -38006,7 +37773,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your server license to enable StorageLink™ Technology. StorageLink allows the server to leverage all the power of your existing storage hardware and offload storage operations automatically. This allows for high performance and space efficient storage provisioning, cloning, and snapshot capabilities to be handled in hardware using your storage hardware&apos;s native features..
+        ///   Looks up a localized string similar to Upgrade your server license to enable StorageLink(tm) Technology. StorageLink allows the server to leverage all the power of your existing storage hardware and offload storage operations automatically. This allows for high performance and space efficient storage provisioning, cloning, and snapshot capabilities to be handled in hardware using your storage hardware&apos;s native features..
         /// </summary>
         public static string UPSELL_BLURB_ENHANCEDSR {
             get {
@@ -38089,7 +37856,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your server license to enable Dynamic Workload Balancing. Dynamic Workload Balancing continually profiles your virtual machines’ and servers&apos; performance and will intelligently rebalance and optimally place new workloads to ensure the best use of physical server resources in your resource pool..
+        ///   Looks up a localized string similar to Upgrade your server license to enable Dynamic Workload Balancing. Dynamic Workload Balancing continually profiles your virtual machines&apos; and servers&apos; performance and will intelligently rebalance and optimally place new workloads to ensure the best use of physical server resources in your resource pool..
         /// </summary>
         public static string UPSELL_BLURB_WLB {
             get {

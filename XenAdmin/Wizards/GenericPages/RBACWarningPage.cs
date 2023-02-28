@@ -70,6 +70,17 @@ namespace XenAdmin.Wizards.GenericPages
         
         public override string PageTitle { get { return Messages.RBAC_WARNING_PAGE_TEXT_TITLE; } }
 
+        /// <summary>
+        /// Clears the existing permission checks and adds the ones specified.
+        /// </summary>
+        public void SetPermissionChecks(IEnumerable<IXenConnection> connectionsToCheck, params WizardPermissionCheck[] checks)
+        {
+            ClearPermissionChecks();
+
+            foreach (var connection in connectionsToCheck)
+                AddPermissionChecks(connection, checks);
+        }
+
         public void AddPermissionChecks(IXenConnection connection, params WizardPermissionCheck[] permissionChecks)
         {
             if (!checksPerConnectionDict.ContainsKey(connection))

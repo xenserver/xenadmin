@@ -29,48 +29,26 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Collections.Generic;
-using System.Net;
-using XenAdmin.Actions;
-using XenAdmin.Network;
 using XenAPI;
 
-namespace XenAdmin
+
+namespace XenAdmin.Actions
 {
-    public static class XenAdminConfigManager
+    public class DisableHealthCheckAction : AsyncAction
     {
-        public static IXenAdminConfigProvider Provider { get; set; }
-    }
+        public DisableHealthCheckAction(Pool pool)
+            : base(pool.Connection, Messages.ACTION_DISABLE_HEALTH_CHECK_TITLE, "", false)
+        {
+            Pool = pool;
+            ApiMethodsToRoleCheck.Add("pool.set_health_check_config");
+            Description = string.Format(Messages.ACTION_DISABLE_HEALTH_CHECK_DESCRIPTION, pool.Name());
+        }
 
-    public interface IXenAdminConfigProvider : IConfigProvider
-    {
-        Func<List<Role>, IXenConnection, string, AsyncAction.SudoElevationResult> ElevatedSessionDelegate { get; }
-        int ConnectionTimeout { get; }
-        Session CreateActionSession(Session session, IXenConnection connection);
-        bool Exiting { get; }
-        bool ForcedExiting { get; }
-        string XenCenterUUID { get; }
-        bool DontSudo { get; }
-        int GetProxyTimeout(bool timeout);
-        void ShowObject(string newVMRef);
-        void HideObject(string newVMRef);
-        bool ObjectIsHidden(string opaqueRef);
-        string GetLogFile();
-        void UpdateServerHistory(string hostnameWithPort);
-        void SaveSettingsIfRequired();
-        bool ShowHiddenVMs { get; }
-        string GetXenCenterMetadata();
-        string GetCustomUpdatesXmlLocation();
-        string GetCustomFileServicePrefix();
-    }
-
-    public interface IConfigProvider
-    {
-        string FileServiceUsername { get; }
-        string FileServiceClientId { get; }
-        string GetCustomTokenUrl();
-        IWebProxy GetProxyFromSettings(IXenConnection connection);
-        IWebProxy GetProxyFromSettings(IXenConnection connection, bool isForXenServer);
+        protected override void Run()
+        {
+            Pool.set_health_check_config(Session, Pool.opaque_ref, new Dictionary<string, string>());
+            Connection.WaitFor(() => Pool.GetHealthCheckStatus() != Pool.HealthCheckStatus.Enabled, null);
+        }
     }
 }

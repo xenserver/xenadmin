@@ -112,7 +112,7 @@ namespace XenAdminTests.CodeTests
         [Test]
         [Description("Checks that if there are user-scoped settings in an assembly, these have roaming=true")]
         public void TestUserSettingsAreRoaming(
-            [Values("XenCenterMain", "XenOvf", "XenServerHealthCheck")] string assemblyName)
+            [Values("XenCenterMain", "XenOvf")] string assemblyName)
         {
             var assembly = FindAssemblyByNameRecursively(assemblyName);
             Assert.NotNull($"Assembly {assemblyName} was not found.");

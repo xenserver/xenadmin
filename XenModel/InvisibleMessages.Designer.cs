@@ -61,6 +61,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to https://cis.citrix.com.
+        /// </summary>
+        public static string CIS_URL {
+            get {
+                return ResourceManager.GetString("CIS_URL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to https://support.citrix.com/xencenterclientiddownload.
         /// </summary>
         public static string CLIENT_ID_URL {

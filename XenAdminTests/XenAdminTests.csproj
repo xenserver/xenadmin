@@ -73,7 +73,6 @@
     <Compile Include="Controls\DecentGroupBoxTests.cs" />
     <Compile Include="Controls\Folders\FolderListItemTests.cs" />
     <Compile Include="Controls\LongStringComboBoxTest.cs" />
-    <Compile Include="HealthCheckTests\CredentialTests.cs" />
     <Compile Include="LicensingTests\LicenceTimerTests.cs" />
     <Compile Include="LicensingTests\ProductColumnComparerTests.cs" />
     <Compile Include="MainWindowWrapper\MockMainWindow.cs" />
@@ -108,7 +107,6 @@
     <Compile Include="UnitTests\CPUMaskingTest.cs" />
     <Compile Include="UnitTests\EmailAddressValidatorTests.cs" />
     <Compile Include="UnitTests\ExceptionSerializationTest.cs" />
-    <Compile Include="UnitTests\HealthCheckAnalysisProgressTest.cs" />
     <Compile Include="UnitTests\NamesAndMessagesTests.cs" />
     <Compile Include="UnitTests\NaturalCompareTest.cs" />
     <Compile Include="UnitTests\StreamUtilitiesTests.cs" />
@@ -176,10 +174,6 @@
     <ProjectReference Include="..\XenOvfApi\XenOvfApi.csproj">
       <Project>{2D78AC6C-B867-484A-A447-3C6FC8B8EAF7}</Project>
       <Name>XenOvfApi</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\XenServerHealthCheck\XenServerHealthCheck.csproj">
-      <Project>{deb3208d-1153-407c-8c99-0d8899be25a5}</Project>
-      <Name>XenServerHealthCheck</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -30,47 +30,26 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Net;
-using XenAdmin.Actions;
 using XenAdmin.Network;
-using XenAPI;
 
-namespace XenAdmin
+namespace XenAdmin.Actions
 {
-    public static class XenAdminConfigManager
-    {
-        public static IXenAdminConfigProvider Provider { get; set; }
-    }
+    public enum ReportStatus { queued, inProgress, succeeded, failed, cancelled }
 
-    public interface IXenAdminConfigProvider : IConfigProvider
+    public abstract class StatusReportAction : AsyncAction
     {
-        Func<List<Role>, IXenConnection, string, AsyncAction.SudoElevationResult> ElevatedSessionDelegate { get; }
-        int ConnectionTimeout { get; }
-        Session CreateActionSession(Session session, IXenConnection connection);
-        bool Exiting { get; }
-        bool ForcedExiting { get; }
-        string XenCenterUUID { get; }
-        bool DontSudo { get; }
-        int GetProxyTimeout(bool timeout);
-        void ShowObject(string newVMRef);
-        void HideObject(string newVMRef);
-        bool ObjectIsHidden(string opaqueRef);
-        string GetLogFile();
-        void UpdateServerHistory(string hostnameWithPort);
-        void SaveSettingsIfRequired();
-        bool ShowHiddenVMs { get; }
-        string GetXenCenterMetadata();
-        string GetCustomUpdatesXmlLocation();
-        string GetCustomFileServicePrefix();
-    }
+        protected readonly string filePath;
+        protected readonly string timeString;
 
-    public interface IConfigProvider
-    {
-        string FileServiceUsername { get; }
-        string FileServiceClientId { get; }
-        string GetCustomTokenUrl();
-        IWebProxy GetProxyFromSettings(IXenConnection connection);
-        IWebProxy GetProxyFromSettings(IXenConnection connection, bool isForXenServer);
+        public ReportStatus Status { get; protected set; }
+        public Exception Error { get; protected set; }
+
+        protected StatusReportAction(IXenConnection connection, string title, string filePath, string timeString, bool suppressHistory = true)
+            :base(connection, title, suppressHistory)
+        {
+            this.filePath = filePath;
+            this.timeString = timeString;
+            Status = ReportStatus.queued;
+        }
     }
 }

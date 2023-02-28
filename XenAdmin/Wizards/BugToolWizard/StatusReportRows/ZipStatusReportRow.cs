@@ -29,48 +29,47 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Net;
+using System.Drawing;
 using XenAdmin.Actions;
-using XenAdmin.Network;
-using XenAPI;
 
-namespace XenAdmin
+namespace XenAdmin.Wizards.BugToolWizard
 {
-    public static class XenAdminConfigManager
+    partial class BugToolPageRetrieveData
     {
-        public static IXenAdminConfigProvider Provider { get; set; }
-    }
+        private class ZipStatusReportRow : StatusReportRow
+        {
+            public override StatusReportAction Action => _action;
+            private ZipStatusReportAction _action;
+            private string OutputFile { get; }
 
-    public interface IXenAdminConfigProvider : IConfigProvider
-    {
-        Func<List<Role>, IXenConnection, string, AsyncAction.SudoElevationResult> ElevatedSessionDelegate { get; }
-        int ConnectionTimeout { get; }
-        Session CreateActionSession(Session session, IXenConnection connection);
-        bool Exiting { get; }
-        bool ForcedExiting { get; }
-        string XenCenterUUID { get; }
-        bool DontSudo { get; }
-        int GetProxyTimeout(bool timeout);
-        void ShowObject(string newVMRef);
-        void HideObject(string newVMRef);
-        bool ObjectIsHidden(string opaqueRef);
-        string GetLogFile();
-        void UpdateServerHistory(string hostnameWithPort);
-        void SaveSettingsIfRequired();
-        bool ShowHiddenVMs { get; }
-        string GetXenCenterMetadata();
-        string GetCustomUpdatesXmlLocation();
-        string GetCustomFileServicePrefix();
-    }
+            public ZipStatusReportRow(string outputFile)
+            {
+                OutputFile = outputFile;
+                cellHostImg.Value = Images.StaticImages.save_to_disk;
+                cellHost.Value = Messages.BUGTOOL_SAVE_STATUS_REPORT;
+            }
 
-    public interface IConfigProvider
-    {
-        string FileServiceUsername { get; }
-        string FileServiceClientId { get; }
-        string GetCustomTokenUrl();
-        IWebProxy GetProxyFromSettings(IXenConnection connection);
-        IWebProxy GetProxyFromSettings(IXenConnection connection, bool isForXenServer);
+            protected override void CreateAction(string path, string time)
+            {
+                _action = new ZipStatusReportAction(path, OutputFile, time);
+            }
+
+            protected override string GetStatus(out Image img)
+            {
+                img = null;
+                if (_action == null)
+                    return Messages.BUGTOOL_REPORTSTATUS_QUEUED;
+
+                switch (_action.Status)
+                {
+                    case ReportStatus.inProgress:
+                        return string.Format(Messages.BUGTOOL_REPORTSTATUS_SAVING, _action.PercentComplete);
+
+                    default:
+                        return base.GetStatus(out img);
+                }
+
+            }
+        }
     }
 }
