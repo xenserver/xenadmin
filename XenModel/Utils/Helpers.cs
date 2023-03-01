@@ -609,21 +609,6 @@ namespace XenAdmin.Core
             return o.Get("gui_config") as Dictionary<String, String>;
         }
 
-        public static void SetGuiConfig(Session session, IXenObject o, String key, String value)
-        {
-            //Program.AssertOffEventThread();
-
-            o.Do("remove_from_gui_config", session, o.opaque_ref, key);
-            o.Do("add_to_gui_config", session, o.opaque_ref, key, value);
-        }
-
-        public static void RemoveFromGuiConfig(Session session, IXenObject o, string key)
-        {
-            //Program.AssertOffEventThread();
-
-            o.Do("remove_from_gui_config", session, o.opaque_ref, key);
-        }
-
         #endregion
 
         public enum DataSourceCategory

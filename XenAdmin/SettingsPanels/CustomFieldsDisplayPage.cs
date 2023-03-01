@@ -32,6 +32,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 using XenAdmin.Actions;
@@ -44,12 +45,21 @@ namespace XenAdmin.SettingsPanels
 {
     public partial class CustomFieldsDisplayPage : UserControl, IEditPage
     {
-        private readonly Dictionary<CustomFieldDefinition, KeyValuePair<Label, Control>> controls = new Dictionary<CustomFieldDefinition, KeyValuePair<Label, Control>>();
+        /// <summary>
+        /// This is not ideal, but we need something in the last row of the tableLayoutPanel
+        /// that fills all the way to the bottom of the page; if we leave the controls in the
+        /// last row, they align vertically in its middle because they don't have vertical
+        /// anchoring (because they have different heights and it's a pain to get the vertical
+        /// alignment right by fiddling with the margins)
+        /// </summary>
+        private readonly Panel _panelDummy;
+        private IXenObject _xenObject;
+        private readonly List<CustomFieldRow> _fieldRows = new List<CustomFieldRow>();
 
         public CustomFieldsDisplayPage()
         {
             InitializeComponent();
-
+            _panelDummy = new Panel { Size = new Size(0, 0), Margin = new Padding(0) };
             Text = Messages.CUSTOM_FIELDS;
         }
 
@@ -57,39 +67,35 @@ namespace XenAdmin.SettingsPanels
 
         public AsyncAction SaveSettings()
         {
-            List<CustomField> customFields = new List<CustomField>();
+            var customFields = new List<CustomField>();
 
-            foreach (KeyValuePair<CustomFieldDefinition, KeyValuePair<Label, Control>> kvp in controls)
+            foreach (var row in _fieldRows)
             {
-                object currentValue = CustomFieldsManager.GetCustomFieldValue(xenObject, kvp.Key);
-                object newValue = GetValue(kvp.Key, kvp.Value.Value);
+                object currentValue = CustomFieldsManager.GetCustomFieldValue(_xenObject, row.CustomFieldDefinition);
+                object newValue = row.GetValue();
 
                 if (currentValue == null && newValue == null)
                     continue;
 
-                customFields.Add(new CustomField(kvp.Key, newValue));
+                customFields.Add(new CustomField(row.CustomFieldDefinition, newValue));
             }
 
-            return new SaveCustomFieldsAction(xenObject, customFields, true);
+            return new SaveCustomFieldsAction(_xenObject, customFields, true);
         }
 
-        private IXenObject xenObject;
         public void SetXenObjects(IXenObject orig, IXenObject clone)
         {
             CustomFieldsManager.CustomFieldsChanged -= CustomFields_CustomFieldsChanged;
-            xenObject = clone;
+            _xenObject = clone;
 
-            if (xenObject != null)
+            if (_xenObject != null)
             {
                 CustomFieldsManager.CustomFieldsChanged += CustomFields_CustomFieldsChanged;
                 Rebuild(true);
             }
         }
 
-        public bool ValidToSave
-        {
-            get { return true; }
-        }
+        public bool ValidToSave => true;
 
         public void ShowLocalValidationMessages()
         {
@@ -107,10 +113,10 @@ namespace XenAdmin.SettingsPanels
         {
             get
             {
-                foreach (KeyValuePair<CustomFieldDefinition, KeyValuePair<Label, Control>> kvp in controls)
+                foreach (var row in _fieldRows)
                 {
-                    Object currentValue = CustomFieldsManager.GetCustomFieldValue(xenObject, kvp.Key);
-                    Object newValue = GetValue(kvp.Key, kvp.Value.Value);
+                    object currentValue = CustomFieldsManager.GetCustomFieldValue(_xenObject, row.CustomFieldDefinition);
+                    object newValue = row.GetValue();
 
                     if (currentValue == null && newValue == null)
                         continue;
@@ -132,26 +138,26 @@ namespace XenAdmin.SettingsPanels
 
         #region IVerticalTab Members
 
-        public String SubText
+        public string SubText
         {
             get
             {
-                List<String> fields = new List<String>();
+                List<string> fields = new List<string>();
 
-                foreach (KeyValuePair<CustomFieldDefinition, KeyValuePair<Label, Control>> kvp in controls)
+                foreach (var row in _fieldRows)
                 {
-                    Object newValue = GetValue(kvp.Key, kvp.Value.Value);
+                    object newValue = row.GetValue();
 
-                    if (newValue == null || newValue.ToString() == String.Empty)
+                    if (newValue == null || newValue.ToString() == string.Empty)
                         continue;
 
-                    fields.Add(kvp.Key.Name + Messages.GENERAL_PAGE_KVP_SEPARATOR + newValue);
+                    fields.Add(row.CustomFieldDefinition.Name + Messages.GENERAL_PAGE_KVP_SEPARATOR + newValue);
                 }
 
                 if (fields.Count == 0)
                     return Messages.NONE;
 
-                return string.Join(", ", fields.ToArray());
+                return string.Join(", ", fields);
             }
         }
 
@@ -164,192 +170,262 @@ namespace XenAdmin.SettingsPanels
             Rebuild(false);
         }
 
-        private Object GetValue(CustomFieldDefinition definition, Control control)
+        private void Rebuild(bool resetValues)
         {
-            switch (definition.Type)
-            {
-                case CustomFieldDefinition.Types.Date:
-                    {
-                        DateTimePicker dateControl = (DateTimePicker)control;
-                        if (!dateControl.Checked)
-                            return null;
-                        DateTimePicker timeControl = (DateTimePicker)dateControl.Tag;
-                        DateTime date = dateControl.Value;
-                        DateTime time = timeControl.Value;
-
-                        return new DateTime(date.Year, date.Month, date.Day, time.Hour, time.Minute, time.Second);
-                    }
-
-                case CustomFieldDefinition.Types.String:
-                    TextBox textBox = control as TextBox;
-                    if (textBox == null)
-                        return null;
-
-                    string text = textBox.Text;
-                    return (text == "" ? null : text);
-
-                default:
-                    throw new InvalidEnumArgumentException();
-            }
-        }
-
-        private void SetValue(CustomFieldDefinition definition, Control control, Object value)
-        {
-            switch (definition.Type)
-            {
-                case CustomFieldDefinition.Types.Date:
-                    {
-                        DateTimePicker dateControl = (DateTimePicker)control;
-                        DateTimePicker timeControl = (DateTimePicker)dateControl.Tag;
-
-                        if (value != null)
-                        {
-                            dateControl.Checked = true;
-                            dateControl.Value = (DateTime)value;
-                            timeControl.Value = (DateTime)value;
-                        }
-                        else
-                            dateControl.Checked = false;
-                    }
-                    break;
-
-                case CustomFieldDefinition.Types.String:
-                    TextBox textBox = control as TextBox;
-                    if (textBox == null)
-                        return;
-
-                    textBox.Text = (String)value;
-                    break;
-            }
-        }
-
-        private void Rebuild(bool revertValues)
-        {
-            CustomFieldDefinition[] customFieldDefinitions = CustomFieldsManager.GetCustomFields(xenObject.Connection).ToArray();
+            var customFieldDefinitions = CustomFieldsManager.GetCustomFields(_xenObject.Connection).ToArray();
 
             tableLayoutPanel.SuspendLayout();
+            tableLayoutPanel.Controls.Remove(_panelDummy);
 
             // Add new custom fields
-            foreach (CustomFieldDefinition customFieldDefinition in customFieldDefinitions)
+            foreach (var definition in customFieldDefinitions)
             {
-                Object value = CustomFieldsManager.GetCustomFieldValue(xenObject, customFieldDefinition);
+                object value = CustomFieldsManager.GetCustomFieldValue(_xenObject, definition);
+                var row = _fieldRows.FirstOrDefault(r => r.CustomFieldDefinition.Equals(definition));
 
-                if (!controls.ContainsKey(customFieldDefinition))
+                if (row == null)
                 {
-                    // Create the display label
-                    Label lblKey = new Label();
-                    lblKey.Text = customFieldDefinition.Name.EscapeAmpersands();
-                    lblKey.Margin = new Padding(3, 7, 3, 3);
-                    lblKey.Font = Program.DefaultFont;
-                    lblKey.Width = (int)tableLayoutPanel.ColumnStyles[0].Width;
-                    lblKey.AutoEllipsis = true;
-                    lblKey.AutoSize = false;
+                    row = new CustomFieldRow(definition, value);
+                    row.DeleteCustomFieldClicked += DeleteCustomFieldClicked_Click;
 
-                    tableLayoutPanel.Controls.Add(lblKey);
+                    _fieldRows.Add(row);
+                    tableLayoutPanel.Controls.AddRange(row.Controls);
 
-                    // Create value field
-                    Control control;
-
-                    switch (customFieldDefinition.Type)
-                    {
-                        case CustomFieldDefinition.Types.String:
-                            TextBox textBox = new TextBox();
-                            textBox.Text = (String)value;
-
-                            tableLayoutPanel.Controls.Add(textBox);
-                            tableLayoutPanel.SetColumnSpan(textBox, 2);
-                            textBox.Dock = DockStyle.Fill;
-                            control = textBox;
-                            break;
-
-                        case CustomFieldDefinition.Types.Date:
-                            DateTimePicker date = new DateTimePicker();
-                            date.MinDate = DateTime.MinValue;
-                            date.MaxDate = DateTime.MaxValue;
-                            date.Dock = DockStyle.Fill;
-                            date.MinimumSize = new Size(0, 24);
-                            date.ShowCheckBox = true;
-                            date.Format = DateTimePickerFormat.Long;
-                            if (value != null)
-                            {
-                                date.Value = (DateTime)value;
-                                date.Checked = true;
-                            }
-                            else
-                                date.Checked = false;
-                            tableLayoutPanel.Controls.Add(date);
-
-                            DateTimePicker time = new DateTimePicker();
-                            time.MinDate = DateTime.MinValue;
-                            time.MaxDate = DateTime.MaxValue;
-                            time.Dock = DockStyle.Fill;
-                            time.MinimumSize = new Size(0, 24);
-                            time.Format = DateTimePickerFormat.Time;
-                            time.ShowUpDown = true;
-                            if (value != null)
-                            {
-                                time.Value = (DateTime)value;
-                                time.Enabled = true;
-                            }
-                            else
-                                time.Enabled = false;
-                            tableLayoutPanel.Controls.Add(time);
-                            // Tag so we can remove this control later
-                            date.Tag = time;
-                            date.ValueChanged += delegate(Object sender, EventArgs e)
-                            {
-                                time.Enabled = date.Checked;
-                            };
-
-                            control = date;
-                            break;
-
-                        default:
-                            throw new InvalidEnumArgumentException();
-                    }
-
-                    controls[customFieldDefinition] = new KeyValuePair<Label, Control>(lblKey, control);
+                    if (1 < row.Controls.Length && row.Controls.Length < tableLayoutPanel.ColumnCount)
+                        tableLayoutPanel.SetColumnSpan(row.Controls[1], 2); //this is the textbox
                 }
-                else if (revertValues)
+                else if (resetValues)
                 {
-                    KeyValuePair<Label, Control> kvp = controls[customFieldDefinition];
-
-                    SetValue(customFieldDefinition, kvp.Value, value);
+                    row.SetValue(value);
                 }
             }
 
-            // Remove old ones
-            CustomFieldDefinition[] definitions = new CustomFieldDefinition[controls.Keys.Count];
-            controls.Keys.CopyTo(definitions, 0);
+            tableLayoutPanel.Controls.Add(_panelDummy);
 
-            foreach (CustomFieldDefinition definition in definitions)
+            var extraRows = _fieldRows.Where(r => !customFieldDefinitions.Contains(r.CustomFieldDefinition)).ToList();
+
+            foreach (var row in extraRows)
             {
-                if (Array.IndexOf<CustomFieldDefinition>(customFieldDefinitions, definition) > -1)
-                    continue;
+                row.DeleteCustomFieldClicked -= DeleteCustomFieldClicked_Click;
+                _fieldRows.Remove(row);
 
-                KeyValuePair<Label, Control> kvp = controls[definition];
-
-                tableLayoutPanel.Controls.Remove(kvp.Value);
-                tableLayoutPanel.Controls.Remove(kvp.Key);
-
-                DateTimePicker timeControl = kvp.Value.Tag as DateTimePicker;
-                if (timeControl != null)
+                foreach (var control in row.Controls)
                 {
-                    tableLayoutPanel.Controls.Remove(timeControl);
+                    tableLayoutPanel.Controls.Remove(control);
+                    control.Dispose();
                 }
-
-                controls.Remove(definition);
-
-                kvp.Key.Dispose();
-                kvp.Value.Dispose();
             }
 
             tableLayoutPanel.ResumeLayout();
         }
 
-        private void buttonEditCustomFields_Click(object sender, EventArgs e)
+        private void buttonNewCustomField_Click(object sender, EventArgs e)
         {
-            new CustomFieldsDialog(xenObject.Connection).ShowDialog(this);
+            using (var dialog = new NewCustomFieldDialog(_xenObject.Connection))
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                    new AddCustomFieldAction(_xenObject.Connection, dialog.Definition).RunAsync();
+            }
+        }
+
+        private void DeleteCustomFieldClicked_Click(CustomFieldRow row)
+        {
+            string name = row.CustomFieldDefinition.Name.Ellipsise(50);
+
+            if (!Program.RunInAutomatedTestMode)
+            {
+                using (var dialog = new WarningDialog(string.Format(Messages.MESSAGEBOX_DELETE_CUSTOM_FIELD, name),
+                           ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo))
+                {
+                    if (dialog.ShowDialog(Program.MainWindow) != DialogResult.Yes)
+                        return;
+                }
+            }
+
+            if (_xenObject.Connection != null && _xenObject.Connection.IsConnected)
+            {
+                new RemoveCustomFieldAction(_xenObject.Connection, row.CustomFieldDefinition).RunAsync();
+            }
+            else if (!Program.RunInAutomatedTestMode)
+            {
+                using (var dlg = new ErrorDialog(Messages.DISCONNECTED_BEFORE_ACTION_STARTED))
+                    dlg.ShowDialog(this);
+            }
+        }
+
+
+        private class CustomFieldRow
+        {
+            private readonly TextBox _textBox;
+            private readonly DateTimePicker _datePicker;
+            private readonly DateTimePicker _timePicker;
+
+            public event Action<CustomFieldRow> DeleteCustomFieldClicked;
+
+            public CustomFieldRow(CustomFieldDefinition definition, object value)
+            {
+                CustomFieldDefinition = definition;
+
+                var controls = new List<Control>();
+
+                var label = CreateNewLabel(definition);
+                controls.Add(label);
+
+                switch (definition.Type)
+                {
+                    case CustomFieldDefinition.Types.String:
+                        _textBox = CreateNewTextBox(value as string);
+                        controls.Add(_textBox);
+                        break;
+
+                    case CustomFieldDefinition.Types.Date:
+                        _datePicker = CreateNewDatePicker(value as DateTime?);
+                        _timePicker = CreateNewTimePicker(value as DateTime?);
+                        controls.Add(_datePicker);
+                        controls.Add(_timePicker);
+                        break;
+                    default:
+                        throw new InvalidEnumArgumentException(nameof(definition));
+                }
+
+                var deleteButton = CreateNewDeleteButton();
+                controls.Add(deleteButton);
+                Controls = controls.ToArray();
+
+                UpdateDateTImePickerState();
+            }
+
+            public CustomFieldDefinition CustomFieldDefinition { get; }
+
+            public Control[] Controls { get; }
+
+            public object GetValue()
+            {
+                if (_textBox != null && !string.IsNullOrEmpty(_textBox.Text))
+                    return _textBox.Text;
+
+                if (_datePicker != null && _timePicker != null && _datePicker.Checked)
+                {
+                    DateTime date = _datePicker.Value;
+                    DateTime time = _timePicker.Value;
+                    return new DateTime(date.Year, date.Month, date.Day, time.Hour, time.Minute, time.Second);
+                }
+
+                return null;
+            }
+
+            public void SetValue(object value)
+            {
+                if (_textBox != null)
+                {
+                    _textBox.Text = value as string;
+                    return;
+                }
+
+                if (_datePicker != null && _timePicker != null)
+                {
+                    if (value != null)
+                    {
+                        _datePicker.Checked = true;
+                        _datePicker.Value = (DateTime)value;
+                        _timePicker.Value = (DateTime)value;
+                    }
+                    else
+                    {
+                        _datePicker.Checked = false;
+                    }
+                }
+            }
+
+            private Label CreateNewLabel(CustomFieldDefinition customFieldDefinition)
+            {
+                return new Label
+                {
+                    Anchor = AnchorStyles.Left | AnchorStyles.Right,
+                    Text = customFieldDefinition.Name.EscapeAmpersands().Ellipsise(25),
+                    Font = Program.DefaultFont,
+                    AutoSize = true,
+                    AutoEllipsis = false
+                };
+            }
+
+            private TextBox CreateNewTextBox(string text)
+            {
+                return new TextBox
+                {
+                    Anchor = AnchorStyles.Left | AnchorStyles.Right,
+                    Text = text ?? string.Empty
+                };
+            }
+
+            private DateTimePicker CreateNewDatePicker(DateTime? value)
+            {
+                var date = new DateTimePicker
+                {
+                    Anchor = AnchorStyles.Left | AnchorStyles.Right,
+                    MinDate = DateTime.MinValue,
+                    MaxDate = DateTime.MaxValue,
+                    ShowCheckBox = true,
+                    Format = DateTimePickerFormat.Long,
+                    Checked = value.HasValue
+                };
+
+                if (value.HasValue)
+                    date.Value = (DateTime)value;
+
+                date.ValueChanged += Date_ValueChanged;
+                return date;
+            }
+
+            private DateTimePicker CreateNewTimePicker(DateTime? value)
+            {
+                var time = new DateTimePicker
+                {
+                    Anchor = AnchorStyles.Left | AnchorStyles.Right,
+                    MinDate = DateTime.MinValue,
+                    MaxDate = DateTime.MaxValue,
+                    Format = DateTimePickerFormat.Time,
+                    ShowUpDown = true,
+                    Enabled = value.HasValue
+                };
+
+                if (value.HasValue)
+                    time.Value = (DateTime)value;
+
+                return time;
+            }
+
+            private Button CreateNewDeleteButton()
+            {
+                var buttonDelete = new Button
+                {
+                    Anchor = AnchorStyles.Left,
+                    BackColor = Color.Transparent,
+                    FlatStyle = FlatStyle.Flat,
+                    Image = Images.StaticImages._000_Abort_h32bit_16,
+                    Size = new Size(22, 22),
+                    Text = string.Empty,
+                };
+                buttonDelete.FlatAppearance.BorderSize = 0;
+                buttonDelete.Click += buttonDelete_Click;
+                return buttonDelete;
+            }
+
+            private void UpdateDateTImePickerState()
+            {
+                if (_datePicker != null && _timePicker != null)
+                    _timePicker.Enabled = _datePicker.Checked;
+            }
+
+            private void Date_ValueChanged(object sender, EventArgs e)
+            {
+                UpdateDateTImePickerState();
+            }
+
+            private void buttonDelete_Click(object sender, EventArgs e)
+            {
+                DeleteCustomFieldClicked?.Invoke(this);
+            }
         }
     }
 }

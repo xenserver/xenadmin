@@ -1,4 +1,4 @@
-/* Copyright (c) Cloud Software Group, Inc. 
+﻿/* Copyright (c) Cloud Software Group, Inc.
  * 
  * Redistribution and use in source and binary forms, 
  * with or without modification, are permitted provided 
@@ -28,46 +28,32 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Linq;
 using XenAdmin.CustomFields;
 using XenAdmin.Network;
 
-namespace XenAdmin.Dialogs
+namespace XenAdmin.Actions
 {
-    public partial class NewCustomFieldDialog : XenDialogBase
+    /// <summary>
+    /// Adds a new custom field definition in the pool.
+    /// </summary>
+    public class AddCustomFieldAction : AsyncAction
     {
-        public NewCustomFieldDialog(IXenConnection conn)
-            :base(conn)
-        {
-            InitializeComponent();
+        private readonly CustomFieldDefinition _definition;
 
-            comboBoxType.SelectedIndex = 0;
-            UpdateControls();
+        public AddCustomFieldAction(IXenConnection connection, CustomFieldDefinition definition)
+            : base(connection, string.Format(Messages.ADD_CUSTOM_FIELD, definition.Name),
+                string.Format(Messages.ADDING_CUSTOM_FIELD, definition.Name), false)
+        {
+            _definition = definition;
+
+            ApiMethodsToRoleCheck.AddWithKey("pool.add_to_gui_config", CustomFieldsManager.CUSTOM_FIELD_BASE_KEY);
+            ApiMethodsToRoleCheck.AddWithKey("pool.remove_from_gui_config", CustomFieldsManager.CUSTOM_FIELD_BASE_KEY);
         }
 
-        public CustomFieldDefinition Definition =>
-            new CustomFieldDefinition(textBoxName.Text.Trim(), (CustomFieldDefinition.Types)comboBoxType.SelectedIndex);
-
-        private void UpdateControls()
+        protected override void Run()
         {
-            if (string.IsNullOrWhiteSpace(textBoxName.Text))
-            {
-                okButton.Enabled = false;
-                labelDuplicate.Visible = false;
-                return;
-            }
-
-            var existingCustomFields = CustomFieldsManager.GetCustomFields(connection);
-            var isDuplicate = existingCustomFields.Any(f => f.Name.Trim() == textBoxName.Text.Trim());
-
-            okButton.Enabled = !isDuplicate;
-            labelDuplicate.Visible = isDuplicate;
-        }
-
-        private void NameTextBox_TextChanged(object sender, EventArgs e)
-        {
-            UpdateControls();
+            CustomFieldsManager.AddCustomField(Session, Connection, _definition);
+            Description = string.Format(Messages.ADDED_CUSTOM_FIELD, _definition.Name);
         }
     }
 }

@@ -46,14 +46,14 @@ namespace XenAdmin.CustomFields
     ///     "XenCenter.CustomFields.foo1" value
     ///     "XenCenter.CustomFields.foo2" value
     /// </summary>
-    public class CustomFieldsManager
+    public static class CustomFieldsManager
     {
         #region These functions deal with caching the list of custom fields
 
         private static readonly CustomFieldsCache customFieldsCache = new CustomFieldsCache();
         private const String CUSTOM_FIELD_DELIM = ".";
         public const String CUSTOM_FIELD_BASE_KEY = "XenCenter.CustomFields";
-
+        
         public const String CUSTOM_FIELD = "CustomField:";
 
         public static event Action CustomFieldsChanged;
@@ -109,15 +109,52 @@ namespace XenAdmin.CustomFields
         public static void RemoveCustomField(Session session, IXenConnection connection, CustomFieldDefinition definition)
         {
             List<CustomFieldDefinition> customFields = customFieldsCache.GetCustomFields(connection);
+
             if (customFields.Remove(definition))
             {
                 SaveCustomFields(session, connection, customFields);
 
-                // Remove from all Objects
-                RemoveCustomFieldsFrom(session, connection.Cache.VMs, definition);
-                RemoveCustomFieldsFrom(session, connection.Cache.Hosts, definition);
-                RemoveCustomFieldsFrom(session, connection.Cache.Pools, definition);
-                RemoveCustomFieldsFrom(session, connection.Cache.SRs, definition);
+                // theoretically any object type with other_config may have a custom field set,
+                // but the object types more likely to have one are those shown on the treeview,
+                // i.e. pools, hosts, VMs (including snapshots and templates), SRs, VDIs, and networks
+
+                string customFieldKey = GetCustomFieldKey(definition);
+
+                foreach (var pool in connection.Cache.Pools)
+                {
+                    if (pool.other_config.ContainsKey(customFieldKey))
+                        Pool.remove_from_other_config(session, pool.opaque_ref, customFieldKey);
+                }
+
+                foreach (var host in connection.Cache.Hosts)
+                {
+                    if (host.other_config.ContainsKey(customFieldKey))
+                        Host.remove_from_other_config(session, host.opaque_ref, customFieldKey);
+                }
+
+                foreach (var vm in connection.Cache.VMs)
+                {
+                    if (vm.other_config.ContainsKey(customFieldKey))
+                        VM.remove_from_other_config(session, vm.opaque_ref, customFieldKey);
+                }
+
+                foreach (var sr in connection.Cache.SRs)
+                {
+                    if (sr.other_config.ContainsKey(customFieldKey))
+                        SR.remove_from_other_config(session, sr.opaque_ref, customFieldKey);
+                }
+
+                foreach (var vdi in connection.Cache.VDIs)
+                {
+                    if (vdi.other_config.ContainsKey(customFieldKey))
+                        VDI.remove_from_other_config(session, vdi.opaque_ref, customFieldKey);
+                }
+
+                foreach (var network in connection.Cache.Networks)
+                {
+                    if (network.other_config.ContainsKey(customFieldKey))
+                        XenAPI.Network.remove_from_other_config(session, network.opaque_ref, customFieldKey);
+                }
             }
         }
 
@@ -155,25 +192,14 @@ namespace XenAdmin.CustomFields
             return CUSTOM_FIELD_BASE_KEY + CUSTOM_FIELD_DELIM + customFieldDefinition.Name;
         }
 
-        private static void RemoveCustomFieldsFrom(Session session, IEnumerable<IXenObject> os, CustomFieldDefinition customFieldDefinition)
-        {
-            InvokeHelper.AssertOffEventThread();
-
-            string customFieldKey = GetCustomFieldKey(customFieldDefinition);
-
-            foreach (IXenObject o in os)
-            {
-                Helpers.RemoveFromOtherConfig(session, o, customFieldKey);
-            }
-        }
-
         private static void SaveCustomFields(Session session, IXenConnection connection, List<CustomFieldDefinition> customFields)
         {
             Pool pool = Helpers.GetPoolOfOne(connection);
             if (pool != null)
             {
-                String customFieldXML = GetCustomFieldDefinitionXML(customFields);
-                Helpers.SetGuiConfig(session, pool, CUSTOM_FIELD_BASE_KEY, customFieldXML);
+                string customFieldXML = GetCustomFieldDefinitionXML(customFields);
+                Pool.remove_from_gui_config(session, pool.opaque_ref, CUSTOM_FIELD_BASE_KEY);
+                Pool.add_to_gui_config(session, pool.opaque_ref, CUSTOM_FIELD_BASE_KEY, customFieldXML);
             }
         }
 

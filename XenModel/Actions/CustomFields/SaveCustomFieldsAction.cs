@@ -36,6 +36,9 @@ using XenAdmin.Core;
 
 namespace XenAdmin.Actions
 {
+    /// <summary>
+    /// Sets custom field values on a given API object.
+    /// </summary>
     public class SaveCustomFieldsAction : AsyncAction
     {
         private readonly IXenObject xenObject;

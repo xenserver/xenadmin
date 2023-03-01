@@ -34,7 +34,7 @@ namespace XenAdmin.SettingsPanels
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomFieldsDisplayPage));
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.buttonEditCustomFields = new System.Windows.Forms.Button();
+            this.buttonNewtCustomField = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
@@ -43,22 +43,21 @@ namespace XenAdmin.SettingsPanels
             // tableLayoutPanel
             // 
             resources.ApplyResources(this.tableLayoutPanel, "tableLayoutPanel");
-            this.tableLayoutPanel.MaximumSize = new System.Drawing.Size(480, 999999);
-            this.tableLayoutPanel.MinimumSize = new System.Drawing.Size(480, 190);
             this.tableLayoutPanel.Name = "tableLayoutPanel";
             // 
-            // buttonEditCustomFields
+            // buttonNewtCustomField
             // 
-            resources.ApplyResources(this.buttonEditCustomFields, "buttonEditCustomFields");
-            this.buttonEditCustomFields.Name = "buttonEditCustomFields";
-            this.buttonEditCustomFields.UseVisualStyleBackColor = true;
-            this.buttonEditCustomFields.Click += new System.EventHandler(this.buttonEditCustomFields_Click);
+            resources.ApplyResources(this.buttonNewtCustomField, "buttonNewtCustomField");
+            this.buttonNewtCustomField.Image = global::XenAdmin.Properties.Resources.more_16;
+            this.buttonNewtCustomField.Name = "buttonNewtCustomField";
+            this.buttonNewtCustomField.UseVisualStyleBackColor = true;
+            this.buttonNewtCustomField.Click += new System.EventHandler(this.buttonNewCustomField_Click);
             // 
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.buttonEditCustomFields, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.buttonNewtCustomField, 0, 1);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // label1
@@ -79,13 +78,14 @@ namespace XenAdmin.SettingsPanels
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
-        private System.Windows.Forms.Button buttonEditCustomFields;
+        private System.Windows.Forms.Button buttonNewtCustomField;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label label1;
     }
