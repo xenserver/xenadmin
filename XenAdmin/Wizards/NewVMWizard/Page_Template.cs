@@ -161,7 +161,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             TemplatesGridView.ResumeLayout();
             RowsChanged();
 
-            TemplatesGridView.Sort(new Sorter());
+            TemplatesGridView.Sort(new TemplateSorter());
         }
 
         private void RefreshRows()
@@ -232,7 +232,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             }
         }
 
-        private class Sorter : IComparer
+        private class TemplateSorter : IComparer
         {
             public int Compare(object x, object y)
             {
@@ -249,8 +249,9 @@ namespace XenAdmin.Wizards.NewVMWizard
                 int result = xItem.SortOrder - yItem.SortOrder;
                 if (result != 0)
                     return result;
-                
-                result = StringUtility.NaturalCompare(xItem.Template.Name(), yItem.Template.Name());
+
+                //reverse alphabetical order so most recent version appears first
+                result = -StringUtility.NaturalCompare(xItem.Template.Name(), yItem.Template.Name());
                 if (result != 0)
                     return result;
                 
@@ -291,7 +292,10 @@ namespace XenAdmin.Wizards.NewVMWizard
         {
             switch (templateType)
             {
+                case VM.VmTemplateType.Custom:
+                    return Messages.NEWVMWIZARD_TEMPLATEPAGE_CUSTOM;
                 case VM.VmTemplateType.Windows:
+                case VM.VmTemplateType.WindowsServer:
                 case VM.VmTemplateType.LegacyWindows:
                     return Messages.NEWVMWIZARD_TEMPLATEPAGE_WINDOWS;
                 case VM.VmTemplateType.Centos:
@@ -344,6 +348,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                     return Images.StaticImages._000_UserTemplate_h32bit_16;
                 case VM.VmTemplateType.Windows:
                 case VM.VmTemplateType.LegacyWindows:
+                case VM.VmTemplateType.WindowsServer:
                     return Images.StaticImages.windows_h32bit_16;
                 case VM.VmTemplateType.Centos:
                     return Images.StaticImages.centos_16x;
