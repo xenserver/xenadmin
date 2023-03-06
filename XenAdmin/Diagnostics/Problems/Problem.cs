@@ -93,7 +93,7 @@ namespace XenAdmin.Diagnostics.Problems
             return null;
         }
 
-        public int CompareTo(Problem other)
+        public virtual int CompareTo(Problem other)
         {
             if (other == null)
                 return 1;

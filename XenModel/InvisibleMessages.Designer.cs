@@ -97,6 +97,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to https://docs.citrix.com/en-us/citrix-hypervisor/CH-0011.html.
+        /// </summary>
+        public static string FCOE_SR_DEPRECATION_URL {
+            get {
+                return ResourceManager.GetString("FCOE_SR_DEPRECATION_URL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ?utm_campaign={0}&amp;utm_medium=ui_link&amp;utm_source={1}.
         /// </summary>
         public static string HELP_URL_QUERY {

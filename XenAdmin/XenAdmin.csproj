@@ -236,6 +236,7 @@
     <Compile Include="Diagnostics\Checks\AutomatedUpdatesLicenseCheck.cs" />
     <Compile Include="Diagnostics\Checks\DiskSpaceForBatchUpdatesCheck.cs" />
     <Compile Include="Diagnostics\Checks\HealthCheckServiceCheck.cs" />
+    <Compile Include="Diagnostics\Checks\PoolHasDeprecatedSrsCheck.cs" />
     <Compile Include="Diagnostics\Checks\PowerOniLoCheck.cs" />
     <Compile Include="Diagnostics\Checks\PoolLegacySslCheck.cs" />
     <Compile Include="Diagnostics\Checks\PrepareToUpgradeCheck.cs" />
@@ -254,6 +255,7 @@
     <Compile Include="Diagnostics\Problems\HostProblem\PowerOniLoProblem.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\HealthCheckServiceProblem.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\LegacySslProblem.cs" />
+    <Compile Include="Diagnostics\Problems\PoolProblem\PoolHasFCoESrWarning.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\PoolHasVmsWithDmcProblem.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\PoolHasPVGuestWarningUrl.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\HostMemoryPostUpgradeWarning.cs" />

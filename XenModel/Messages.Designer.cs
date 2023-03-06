@@ -7593,6 +7593,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Checking for deprecated storage repositories.
+        /// </summary>
+        public static string CHECKING_DEPRECATED_SRS {
+            get {
+                return ResourceManager.GetString("CHECKING_DEPRECATED_SRS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Checking for pending restart.
         /// </summary>
         public static string CHECKING_FOR_PENDING_RESTART {
@@ -12628,6 +12637,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SR deprecation check.
+        /// </summary>
+        public static string DEPRECATED_SRS_CHECK {
+            get {
+                return ResourceManager.GetString("DEPRECATED_SRS_CHECK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Description.
         /// </summary>
         public static string DESCRIPTION {
@@ -17049,6 +17067,15 @@ namespace XenAdmin {
         public static string FAST_CLONE_UNAVAILABLE {
             get {
                 return ResourceManager.GetString("FAST_CLONE_UNAVAILABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Support for Software FCoE storage repositories has been deprecated as of {0}..
+        /// </summary>
+        public static string FCOE_DEPRECATION_WARNING {
+            get {
+                return ResourceManager.GetString("FCOE_DEPRECATION_WARNING", resourceCulture);
             }
         }
         
@@ -30751,6 +30778,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0}: Support for Software FCoE SRs has been deprecated in {1}.
+        /// </summary>
+        public static string POOL_HAS_DEPRECATED_FCOE_SHORT {
+            get {
+                return ResourceManager.GetString("POOL_HAS_DEPRECATED_FCOE_SHORT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Support for Software FCoE SRs has been deprecated in {0} and will be removed in a future release. It is recommended that you move your VMs to a different type of storage and remove Software FCoE SRs from your systems as soon as possible..
+        /// </summary>
+        public static string POOL_HAS_DEPRECATED_FCOE_WARNING {
+            get {
+                return ResourceManager.GetString("POOL_HAS_DEPRECATED_FCOE_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This pool has hosts with different types of license..
         /// </summary>
         public static string POOL_HAS_MIXED_LICENSES {
@@ -30877,6 +30922,15 @@ namespace XenAdmin {
         public static string POOL_LICENSE {
             get {
                 return ResourceManager.GetString("POOL_LICENSE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Support for Software FCoE SRs has been deprecated in {0} and will be removed in a future release. If you are upgrading to this version, it is recommended that you move your VMs to a different type of storage and remove Software FCoE SRs from your system as soon as possible..
+        /// </summary>
+        public static string POOL_MAY_HAVE_DEPRECATED_FCOE_WARNING {
+            get {
+                return ResourceManager.GetString("POOL_MAY_HAVE_DEPRECATED_FCOE_WARNING", resourceCulture);
             }
         }
         
@@ -34675,6 +34729,15 @@ namespace XenAdmin {
         public static string SNAPSHOTTING {
             get {
                 return ResourceManager.GetString("SNAPSHOTTING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Software FCoE storage repositories.
+        /// </summary>
+        public static string SOFTWARE_FCOE_STORAGE_REPOSITORIES {
+            get {
+                return ResourceManager.GetString("SOFTWARE_FCOE_STORAGE_REPOSITORIES", resourceCulture);
             }
         }
         

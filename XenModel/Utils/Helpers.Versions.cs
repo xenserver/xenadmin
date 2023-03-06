@@ -170,7 +170,7 @@ namespace XenAdmin.Core
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool DundeeOrGreater(IXenConnection conn)
         {
-            return conn == null || DundeeOrGreater(Helpers.GetCoordinator(conn));
+            return conn == null || DundeeOrGreater(GetCoordinator(conn));
         }
 
         /// Dundee is ver. 2.0.0
@@ -192,7 +192,7 @@ namespace XenAdmin.Core
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool ElyOrGreater(IXenConnection conn)
         {
-            return conn == null || ElyOrGreater(Helpers.GetCoordinator(conn));
+            return conn == null || ElyOrGreater(GetCoordinator(conn));
         }
 
         /// Ely is ver. 2.1.1
@@ -208,7 +208,7 @@ namespace XenAdmin.Core
 
         public static bool HavanaOrGreater(IXenConnection conn)
         {
-            return conn == null || HavanaOrGreater(Helpers.GetCoordinator(conn));
+            return conn == null || HavanaOrGreater(GetCoordinator(conn));
         }
 
         /// As Havana platform version is same with Ely and Honolulu, so use product version here
@@ -228,7 +228,7 @@ namespace XenAdmin.Core
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool FalconOrGreater(IXenConnection conn)
         {
-            return conn == null || FalconOrGreater(Helpers.GetCoordinator(conn));
+            return conn == null || FalconOrGreater(GetCoordinator(conn));
         }
 
         /// Falcon is ver. 2.3.0
@@ -245,7 +245,7 @@ namespace XenAdmin.Core
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool InvernessOrGreater(IXenConnection conn)
         {
-            return conn == null || InvernessOrGreater(Helpers.GetCoordinator(conn));
+            return conn == null || InvernessOrGreater(GetCoordinator(conn));
         }
 
         /// Inverness is ver. 2.4.0
@@ -262,7 +262,7 @@ namespace XenAdmin.Core
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool JuraOrGreater(IXenConnection conn)
         {
-            return conn == null || JuraOrGreater(Helpers.GetCoordinator(conn));
+            return conn == null || JuraOrGreater(GetCoordinator(conn));
         }
 
         /// Jura is ver. 2.5.0
@@ -279,7 +279,7 @@ namespace XenAdmin.Core
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool KolkataOrGreater(IXenConnection conn)
         {
-            return conn == null || KolkataOrGreater(Helpers.GetCoordinator(conn));
+            return conn == null || KolkataOrGreater(GetCoordinator(conn));
         }
 
         /// Kolkata platform version is 2.6.0
@@ -296,7 +296,7 @@ namespace XenAdmin.Core
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool LimaOrGreater(IXenConnection conn)
         {
-            return conn == null || LimaOrGreater(Helpers.GetCoordinator(conn));
+            return conn == null || LimaOrGreater(GetCoordinator(conn));
         }
 
         /// Lima platform version is 2.7.0
@@ -349,7 +349,7 @@ namespace XenAdmin.Core
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool StockholmOrGreater(IXenConnection conn)
         {
-            return conn == null || StockholmOrGreater(Helpers.GetCoordinator(conn));
+            return conn == null || StockholmOrGreater(GetCoordinator(conn));
         }
 
         /// <param name="host">May be null, in which case true is returned.</param>
@@ -367,7 +367,7 @@ namespace XenAdmin.Core
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool YangtzeOrGreater(IXenConnection conn)
         {
-            return conn == null || YangtzeOrGreater(Helpers.GetCoordinator(conn));
+            return conn == null || YangtzeOrGreater(GetCoordinator(conn));
         }
 
         /// <param name="host">May be null, in which case true is returned.</param>

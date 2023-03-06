@@ -83,6 +83,16 @@ namespace XenAdmin.Diagnostics.Problems
         public override string Title => Check.Description;
         public virtual string LinkData => null;
         public virtual string LinkText => LinkData;
+
+        public override int CompareTo(Problem other)
+        {
+            if (!(other is WarningWithMoreInfo warning))
+                return 1;
+
+            var result = string.Compare(Message, warning.Message);
+
+            return result == 0 ? base.CompareTo(other) : result;
+        }
     }
 
 

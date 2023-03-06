@@ -68,9 +68,9 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
 
         }
 
-        private void SetupDeprecationBanner(bool visible)
+        private void SetupDeprecationBanner(SrWizardType srWizardType)
         {
-            if(visible)
+            if (srWizardType is SrWizardType_Cslg)
             {
                 deprecationBanner.AppliesToVersion = BrandManager.ProductVersion65;
                 deprecationBanner.BannerType = DeprecationBanner.Type.Removal;
@@ -78,8 +78,19 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
                 deprecationBanner.LinkUri = new Uri(InvisibleMessages.ISL_DEPRECATION_URL);
                 deprecationBanner.Visible = !HiddenFeatures.LinkLabelHidden;
             }
+            else if (srWizardType is SrWizardType_Fcoe)
+            {
+                deprecationBanner.AppliesToVersion = string.Format(Messages.STRING_SPACE_STRING,
+                    BrandManager.ProductBrand, BrandManager.ProductVersionPost82);
+                deprecationBanner.BannerType = DeprecationBanner.Type.Deprecation;
+                deprecationBanner.FeatureName = Messages.SOFTWARE_FCOE_STORAGE_REPOSITORIES;
+                deprecationBanner.LinkUri = new Uri(InvisibleMessages.FCOE_SR_DEPRECATION_URL);
+                deprecationBanner.Visible = !HiddenFeatures.LinkLabelHidden;
+            }
             else
+            {
                 deprecationBanner.Visible = false;
+            }
         }
 
         #region XenTabPage overrides
@@ -249,9 +260,9 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
                 foreach (RadioButton rb in _radioButtons)
                     rb.Checked = rb == radioButton;
 
-                SrWizardType frontend = (SrWizardType)radioButton.Tag;
+                var frontend = (SrWizardType)radioButton.Tag;
 
-                SetupDeprecationBanner(frontend is SrWizardType_Cslg);
+                SetupDeprecationBanner(frontend);
 
                 if (frontend.IsEnhancedSR && Helpers.FeatureForbidden(Connection, Host.RestrictStorageChoices))
                 {
