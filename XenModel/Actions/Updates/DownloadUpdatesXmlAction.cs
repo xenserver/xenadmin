@@ -30,14 +30,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Linq;
 using System.IO;
 using System.Xml;
 using XenAdmin.Core;
 using System.Diagnostics;
 using System.Net;
-
 
 namespace XenAdmin.Actions
 {
@@ -349,19 +347,17 @@ namespace XenAdmin.Actions
             }
             else
             {
-                
+                if (!string.IsNullOrEmpty(authToken))
+                {
+                    uri = new Uri(checkForUpdatesUrl + "?" + authToken);
+                }
+
                 var proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(Connection, false);
 
                 using (var webClient = new WebClient())
                 {
                     webClient.Proxy = proxy;
                     webClient.Headers.Add("User-Agent", _userAgent);
-                    if (!string.IsNullOrEmpty(authToken))
-                    {
-                        NameValueCollection myQueryStringCollection = new NameValueCollection();
-                        myQueryStringCollection.Add(XenAdminConfigManager.Provider.GetInternalStageAuthTokenName(), authToken);
-                        webClient.QueryString = myQueryStringCollection;
-                    }
 
                     using (var stream = new MemoryStream(webClient.DownloadData(uri)))
                         xdoc.Load(stream);

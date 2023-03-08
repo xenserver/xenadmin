@@ -29,7 +29,6 @@
  */
 
 using System;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -74,6 +73,10 @@ namespace XenAdmin.Actions.Updates
             _outputPathAndFileName = outputFileName;
             _checksum = checksum;
             _authToken = XenAdminConfigManager.Provider.GetInternalStageAuthToken();
+            if (!string.IsNullOrEmpty(_authToken))
+            {
+                _address = new Uri(uri.AbsoluteUri + "?" + _authToken);
+            }
         }
 
         private void DownloadFile()
@@ -105,12 +108,6 @@ namespace XenAdmin.Actions.Updates
                     //start the download
                     _updateDownloadState = DownloadState.InProgress;
 
-                    if (!string.IsNullOrEmpty(_authToken))
-                    {
-                        NameValueCollection myQueryStringCollection = new NameValueCollection();
-                        myQueryStringCollection.Add(XenAdminConfigManager.Provider.GetInternalStageAuthTokenName(), _authToken);
-                        _client.QueryString = myQueryStringCollection;
-                    }
                     _client.DownloadFileAsync(_address, _outputPathAndFileName);
 
                     bool updateDownloadCancelling = false;
@@ -240,16 +237,36 @@ namespace XenAdmin.Actions.Updates
 
             // Check if calculatedChecksum matches what is in chcupdates.xml
             if (!_checksum.Equals(calculatedChecksum, StringComparison.InvariantCultureIgnoreCase))
-                throw new Exception(Messages.UPDATE_CLIENT_INVALID_CHECKSUM );
+                throw new Exception(Messages.UPDATE_CLIENT_INVALID_CHECKSUM);
 
-            bool valid;
+            bool valid = false;
+
             try
             {
-                // Check digital signature of .msi
-                using (var basicSigner = X509Certificate.CreateFromSignedFile(_outputPathAndFileName))
+                log.InfoFormat("Validating certificate chain");
+                
+                var cert = new X509Certificate2(File.ReadAllBytes(_outputPathAndFileName)); // Read certificate from msi
+
+                X509Chain chain = new X509Chain();
+                chain.ChainPolicy.VerificationTime = cert.NotBefore; // Makes the validation time the time cert was signed not the time it was being validated i.e. now
+                valid = chain.Build(cert);
+
+                log.InfoFormat("Chain building status: {0}", valid);
+
+                if (!valid)
                 {
-                    using (var cert = new X509Certificate2(basicSigner))
-                        valid = cert.Verify();
+                    log.ErrorFormat("Chain Information");
+                    foreach (X509ChainStatus chainStatus in chain.ChainStatus)
+                    {
+                        log.ErrorFormat("Chain error: {0} {1}", chainStatus.Status, chainStatus.StatusInformation);
+                        log.ErrorFormat("Chain revocation flag: {0}", chain.ChainPolicy.RevocationFlag);
+                        log.ErrorFormat("Chain revocation mode: {0}", chain.ChainPolicy.RevocationMode);
+                        log.ErrorFormat("Chain verification flag: {0}", chain.ChainPolicy.VerificationFlags);
+                        log.ErrorFormat("Chain verification time: {0}", chain.ChainPolicy.VerificationTime);
+                        log.ErrorFormat("Chain status length: {0}", chain.ChainStatus.Length);
+                        log.ErrorFormat("Chain application policy count: {0}", chain.ChainPolicy.ApplicationPolicy.Count);
+                        log.ErrorFormat("Chain certificate policy count: {0} {1}", chain.ChainPolicy.CertificatePolicy.Count, Environment.NewLine);
+                    }                    
                 }
             }
             catch (Exception e)
