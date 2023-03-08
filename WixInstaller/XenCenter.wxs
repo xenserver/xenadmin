@@ -35,7 +35,7 @@
      xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
     <?include branding.wxi ?>
     <Product Id="$(var.ProductCode)" Name="$(var.BrandConsole)" Language="$(env.WixLangId)" Version="$(var.ProductVersion)" Manufacturer="$(var.CompanyNameLegal)" UpgradeCode="$(var.UpgradeCode)">
-        <Package Languages="1033,1041,2052,1028" Description="$(var.BrandConsole)" Comments="none." InstallerVersion="200" Compressed="yes" />
+        <Package Languages="1033" Description="$(var.BrandConsole)" Comments="none." InstallerVersion="200" Compressed="yes" />
         <Media Id="1" Cabinet="XenCenter.cab" EmbedCab="yes" />
         <Directory Id="TARGETDIR" Name="SourceDir">
             <Directory Id="ProgramFilesFolder">
