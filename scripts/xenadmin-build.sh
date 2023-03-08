@@ -164,9 +164,6 @@ do
   cp ${WIX}/out${name}/${name}.msi ${WIX}
 done
 
-cd ${WIX} && cp ${BRANDING_BRAND_CONSOLE_NO_SPACE}.msi ${BRANDING_BRAND_CONSOLE_NO_SPACE}.zh-tw.msi
-cd ${WIX} && cscript CodePageChange.vbs ZH-TW ${BRANDING_BRAND_CONSOLE_NO_SPACE}.zh-tw.msi
-
 #copy and sign the combined installer
 
 if [ -f "${SIGN_BAT}" ] ; then
