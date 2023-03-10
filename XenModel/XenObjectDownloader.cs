@@ -92,58 +92,34 @@ namespace XenAdmin.Core
         /// </param>
         public static void GetEvents(Session session, LockFreeQueue<ObjectChange> eventQueue, HTTP.FuncBool cancelled, ref string token)
         {
-            Proxy_Event[] proxyEvents = {};
             Event[] events = {};
             try
             {
                 var classes = new [] { "*" }; // classes that we are interested in receiving events from
                 var eventResult = Event.from(session, classes, token, EVENT_FROM_TIMEOUT);
 
-                if (session.JsonRpcClient != null)
-                {
-                    var batch = (EventBatch)eventResult;
-                    events = batch.events;
-                    token = batch.token;
-                }
-                else
-                {
-                    var evts = (Events)eventResult;
-                    proxyEvents = evts.events;
-                    token = evts.token;
-                }
+                var batch = (EventBatch)eventResult;
+                events = batch.events;
+                token = batch.token;
             }
             catch (WebException e)
             {
                 // Catch timeout, and turn it into an EventFromBlockedException so we can recognise it later (CA-33145)
                 if (e.Status == WebExceptionStatus.Timeout)
                     throw new EventFromBlockedException();
-                else
-                    throw;
+
+                throw;
             }
 
             if (cancelled())
                 return;
 
-            //We want to do the marshalling on this background thread so as not to block the gui thread
-            if (session.JsonRpcClient != null)
+            foreach (Event evt in events)
             {
-                foreach (Event evt in events)
-                {
-                    var objectChange = ProcessEvent(evt.class_, evt.operation, evt.opaqueRef, evt.snapshot, false);
+                var objectChange = ProcessEvent(evt.class_, evt.operation, evt.opaqueRef, evt.snapshot, false);
 
-                    if (objectChange != null)
-                        eventQueue.Enqueue(objectChange);
-                }
-            }
-            else
-            {
-                foreach (Proxy_Event proxyEvent in proxyEvents)
-                {
-                    var objectChange = ProcessEvent(proxyEvent.class_, proxyEvent.operation, proxyEvent.opaqueRef, proxyEvent.snapshot, true);
-
-                    if (objectChange != null)
-                        eventQueue.Enqueue(objectChange);
-                }
+                if (objectChange != null)
+                    eventQueue.Enqueue(objectChange);
             }
         }
         

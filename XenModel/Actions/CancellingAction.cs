@@ -29,13 +29,12 @@
  */
 
 using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Reflection;
 using System.Threading;
 using XenAdmin.Network;
 using XenAPI;
-using System.Collections.Generic;
-using System.Net;
-using CookComputing.XmlRpc;
-using System.Reflection;
 
 namespace XenAdmin.Actions
 {
@@ -401,18 +400,6 @@ namespace XenAdmin.Actions
                     {
                         throw exn.InnerException;
                     }
-                }
-                catch (XmlRpcNullParameterException xmlExcept)
-                {
-                    log.Error($"XmlRpcNullParameterException in DoWithSessionRetry, retry {retries}.", xmlExcept);
-                    throw new Exception(Messages.INVALID_SESSION);
-                }
-                catch (XmlRpcIllFormedXmlException xmlRpcIllFormedXmlException)
-                {
-                    log.Error($"XmlRpcIllFormedXmlException in DoWithSessionRetry, retry {retries}.", xmlRpcIllFormedXmlException);
-
-                    if (!Connection.ExpectDisruption || retries <= 0)
-                        throw;
                 }
                 catch (WebException we)
                 {

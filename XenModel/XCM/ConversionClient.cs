@@ -49,25 +49,12 @@ namespace XenAdmin.XCM
 
             _conversionProxy = XmlRpcProxyGen.Create<IConversionProxy>();
             _conversionProxy.Url = string.Format(useSsl ? "https://{0}" : "http://{0}", vpxIp);
-
-            if (session.JsonRpcClient != null)
-            {
-                _conversionProxy.Timeout = session.JsonRpcClient.Timeout;
-                _conversionProxy.NonStandard = XmlRpcNonStandard.All;
-                _conversionProxy.UseIndentation = false;
-                _conversionProxy.UserAgent = session.JsonRpcClient.UserAgent;
-                _conversionProxy.KeepAlive = session.JsonRpcClient.KeepAlive;
-                _conversionProxy.Proxy = session.JsonRpcClient.WebProxy;
-            }
-            else
-            {
-                _conversionProxy.Timeout = session.XmlRpcProxy.Timeout;
-                _conversionProxy.NonStandard = session.XmlRpcProxy.NonStandard;
-                _conversionProxy.UseIndentation = session.XmlRpcProxy.UseIndentation;
-                _conversionProxy.UserAgent = session.XmlRpcProxy.UserAgent;
-                _conversionProxy.KeepAlive = session.XmlRpcProxy.KeepAlive;
-                _conversionProxy.Proxy = session.XmlRpcProxy.Proxy;
-            }
+            _conversionProxy.Timeout = session.JsonRpcClient.Timeout;
+            _conversionProxy.NonStandard = XmlRpcNonStandard.All;
+            _conversionProxy.UseIndentation = false;
+            _conversionProxy.UserAgent = session.JsonRpcClient.UserAgent;
+            _conversionProxy.KeepAlive = session.JsonRpcClient.KeepAlive;
+            _conversionProxy.Proxy = session.JsonRpcClient.WebProxy;
         }
 
         private ServiceCredentials ServiceCredentials => new ServiceCredentials {Username = _credential.UserName, Password = _credential.Password};

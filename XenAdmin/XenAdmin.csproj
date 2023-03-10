@@ -3201,8 +3201,6 @@
     <Compile Include="ConsoleView\RdpClient.cs">
     </Compile>
     <Compile Include="PowerManagment.cs" />
-    <Compile Include="ServerDBs\XenAdminSimulatorWebProxy.cs" />
-    <Compile Include="ServerDBs\XenAdminSimulatorWebStream.cs" />
     <Compile Include="SettingsPanels\GpuEditPage.cs">
       <SubType>UserControl</SubType>
     </Compile>

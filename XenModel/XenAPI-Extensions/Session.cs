@@ -28,10 +28,6 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.IO;
-using System.Text;
-using CookComputing.XmlRpc;
 using Newtonsoft.Json.Linq;
 using XenAdmin;
 using XenAdmin.Network;
@@ -45,33 +41,10 @@ namespace XenAPI
 
         public bool IsElevatedSession = false;
 
-        private Session(int timeout, IXenConnection connection, string url)
-            :this(timeout, url)
-        {
-            Connection = connection;
-            XmlRpcProxy.RequestEvent += LogRequest;
-#if DEBUG
-            XmlRpcProxy.ResponseEvent += LogResponse;
-#endif
-        }
-
-        public Session(Proxy proxy, IXenConnection connection)
-        {
-            Connection = connection;
-            XmlRpcProxy = proxy;
-        }
-
         public Session(int timeout, IXenConnection connection, string host, int port)
-            : this(timeout, connection, GetUrl(host, port))
+            : this(timeout, GetUrl(host, port))
         {
-        }
-
-        public Session(Session session, Proxy proxy, IXenConnection connection)
-            : this(proxy, connection)
-        {
-            opaque_ref = session.opaque_ref;
-            APIVersion = session.APIVersion;
-            CopyADFromSession(session);
+            Connection = connection;
         }
 
         /// <summary>
@@ -83,18 +56,7 @@ namespace XenAPI
             : this(session, timeout)
         {
             Connection = connection;
-
-            if (session.JsonRpcClient != null)
-            {
-                JsonRpcClient.RequestEvent += LogJsonRequest;
-            }
-            else if (session.XmlRpcProxy != null)
-            {
-                XmlRpcProxy.RequestEvent += LogRequest;
-#if DEBUG
-                XmlRpcProxy.ResponseEvent += LogResponse;
-#endif
-            }
+            JsonRpcClient.RequestEvent += LogJsonRequest;
         }
 
         /// <summary>
@@ -144,67 +106,6 @@ namespace XenAPI
             else
                 log.InfoFormat("Invoking JSON-RPC method '{0}'", methodName);
 #endif
-        }
-
-        private void LogRequest(object o, XmlRpcRequestEventArgs args)
-        {
-            string xml = DumpStream(args.RequestStream, String.Empty);
-
-            // Find the method name within the XML
-            string methodName = "";
-            int methodNameStart = xml.IndexOf("<methodName>");
-            if (methodNameStart >= 0)
-            {
-                methodNameStart += 12; // skip past "<methodName>"
-                int methodNameEnd = xml.IndexOf('<', methodNameStart);
-                if (methodNameEnd > methodNameStart)
-                    methodName = xml.Substring(methodNameStart, methodNameEnd - methodNameStart);
-            }
-
-            // do not log while downloading objects
-            // also exclude calls occurring frequently; we don't need to know about them;
-            // only log the full XML at Debug level because it may have sensitive data in: CA-80174
-
-            if (CanLogCall(methodName))
-            {
-#if DEBUG
-                log.DebugFormat("Invoking XML-RPC method {0}: {1}", methodName, xml);
-#else
-                log.DebugFormat("Invoking XML-RPC method {0}", methodName);
-#endif
-            }
-            else
-            {
-                log.InfoFormat("Invoking XML-RPC method {0}", methodName);
-            }
-        }
-
-#if DEBUG
-        private void LogResponse(object o, XmlRpcResponseEventArgs args)
-        {
-            if(log.IsDebugEnabled)
-                log.DebugFormat(DumpStream(args.ResponseStream, "XML-RPC response: "));
-        }
-#endif
-
-        private string DumpStream(Stream s, string header)
-        {
-            try
-            {
-                StringBuilder stringBuilder = new StringBuilder(header);
-                using (TextReader r = new StreamReader(s))
-                {
-                    string l;
-                    while ((l = r.ReadLine()) != null)
-                        stringBuilder.Append(l);
-                }
-                return stringBuilder.ToString();   
-            }
-            catch(OutOfMemoryException ex)
-            {
-                log.DebugFormat("Session ran out of memory while trying to log the XML response stream: {0}", ex.Message);
-                return String.Empty;
-            }
         }
 
         /// <summary>

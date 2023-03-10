@@ -59,7 +59,7 @@ namespace XenAdminTests
         private readonly Dictionary<string, Mock<IXenConnection>> connections = new Dictionary<string, Mock<IXenConnection>>();
         private readonly Dictionary<string, Mock<ICache>> caches = new Dictionary<string, Mock<ICache>>();
         private readonly Dictionary<string, List<Mock>> xenObjects = new Dictionary<string, List<Mock>>();
-        private readonly Dictionary<string, Mock<Proxy>> proxies = new Dictionary<string, Mock<Proxy>>();
+        private readonly Dictionary<string, Mock<JsonRpcClient>> clients = new Dictionary<string, Mock<JsonRpcClient>>();
         private readonly Dictionary<string, Mock<Session>> sessions = new Dictionary<string, Mock<Session>>();
         private readonly Mock<IXenAdminConfigProvider> config = new Mock<IXenAdminConfigProvider>();
 
@@ -107,9 +107,9 @@ namespace XenAdminTests
         /// </summary>
         /// <param name="connectionId"></param>
         /// <returns></returns>
-        public Mock<Proxy> MockProxyFor(string connectionId)
+        public Mock<JsonRpcClient> MockProxyFor(string connectionId)
         {
-            return proxies[connectionId];
+            return clients[connectionId];
         }
 
         /// <summary>
@@ -146,8 +146,8 @@ namespace XenAdminTests
             connections.Add(connectionId, new Mock<IXenConnection>());
             xenObjects.Add(connectionId, new List<Mock>());
             caches.Add(connectionId, new Mock<ICache>());
-            proxies.Add(connectionId, new Mock<Proxy>());
-            sessions.Add(connectionId, new Mock<Session>(proxies[connectionId].Object, connections[connectionId].Object));
+            clients.Add(connectionId, new Mock<JsonRpcClient>());
+            sessions.Add(connectionId, new Mock<Session>(clients[connectionId].Object, connections[connectionId].Object));
 
             connections[connectionId].Setup(c => c.Session).Returns(sessions[connectionId].Object);
             connections[connectionId].Setup(c => c.DuplicateSession()).Returns(sessions[connectionId].Object);
@@ -265,7 +265,7 @@ namespace XenAdminTests
         {
             connections[connectionId].VerifyAll();
             caches[connectionId].VerifyAll();
-            proxies[connectionId].VerifyAll();
+            clients[connectionId].VerifyAll();
             sessions[connectionId].VerifyAll();
             xenObjects[connectionId].ForEach(m=>m.VerifyAll());
             config.VerifyAll();
@@ -281,7 +281,7 @@ namespace XenAdminTests
                     connections.Clear();
                     caches.Clear();
                     xenObjects.Clear();
-                    proxies.Clear();
+                    clients.Clear();
                     sessions.Clear();
                     XenAdminConfigManager.Provider = new WinformsXenAdminConfigProvider(); //Bit hacky but stops subsequent UI tests from failing
                 }

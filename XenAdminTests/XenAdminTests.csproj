@@ -117,7 +117,6 @@
     <Compile Include="UnitTests\StreamUtilitiesTests.cs" />
     <Compile Include="UnitTests\SubnetworkMaskValidatorTest.cs" />
     <Compile Include="UnitTests\TimeUtilTests.cs" />
-    <Compile Include="UnitTests\TokenizerTest.cs" />
     <Compile Include="UnitTests\UpdateManagerTests.cs" />
     <Compile Include="UnitTests\RegexTests.cs" />
     <Compile Include="UnitTests\EncryptionUtilTests.cs" />

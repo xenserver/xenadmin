@@ -34,7 +34,6 @@ using System.Globalization;
 using System.Net;
 using System.Reflection;
 using System.Threading;
-using CookComputing.XmlRpc;
 using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAPI;
@@ -42,7 +41,6 @@ using XenCenterLib;
 using System.Diagnostics;
 using System.Linq;
 using System.Xml.Serialization;
-using XenAdmin.ServerDBs;
 
 
 namespace XenAdmin.Network
@@ -50,7 +48,7 @@ namespace XenAdmin.Network
     [DebuggerDisplay("IXenConnection :{HostnameWithPort}")]
     public class XenConnection : IXenConnection, IXmlSerializable
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         public string Hostname { get; set; }
         public int Port { get; set; }
@@ -278,8 +276,8 @@ namespace XenAdmin.Network
             Port = ConnectionsManager.DEFAULT_XEN_PORT;
             Username = "root";
             SaveDisconnected = false;
-            ExpectPasswordIsCorrect = true;
-            cacheUpdateTimer = new System.Threading.Timer(cacheUpdater);
+            ExpectPasswordIsCorrect = true; 
+            cacheUpdateTimer = new Timer(cacheUpdater);
         }
 
         /// <summary>
@@ -291,7 +289,7 @@ namespace XenAdmin.Network
         public Session Connect(string user, string password)
         {
             heartbeat = new Heartbeat(this, XenAdminConfigManager.Provider.ConnectionTimeout);
-            Session session = SessionFactory.CreateSession(this, Hostname, Port);
+            Session session = new Session(Session.STANDARD_TIMEOUT, this, Hostname, Port);
 
             try
             {
@@ -399,7 +397,7 @@ namespace XenAdmin.Network
             Session s = Session;
             if (s == null)
                 throw new DisconnectionException();
-            return SessionFactory.DuplicateSession(s, this, timeout);
+            return new Session(s, this, timeout); 
         }
 
         /// <summary>
@@ -438,7 +436,7 @@ namespace XenAdmin.Network
                 // For elevated session we use the elevated username and password passed into this function, 
                 // as the connection's Username and Password are not updated.
 
-                Session session = SessionFactory.CreateSession(this, hostname, port);
+                Session session = new Session(Session.STANDARD_TIMEOUT, this, hostname, port);
                 if (isElevated)
                     session.IsElevatedSession = true;
                 try
@@ -877,11 +875,7 @@ namespace XenAdmin.Network
 
         private string GetReason(Exception error)
         {
-            if (error is CookComputing.XmlRpc.XmlRpcServerException)
-            {
-                return string.Format(Messages.SERVER_FAILURE, error.Message);
-            }
-            else if (error is ArgumentException)
+            if (error is ArgumentException)
             {
                 // This happens if the server API is incompatible with our bindings.  This should
                 // never happen in production, but will happen during development if a field
@@ -1159,12 +1153,9 @@ namespace XenAdmin.Network
 
         private const int DEFAULT_MAX_SESSION_LOGIN_ATTEMPTS = 3;
 
-        private bool IsSimulatorConnection
+        public static bool IsSimulatorConnection(string url)
         {
-            get
-            {
-                return DbProxy.IsSimulatorUrl(this.Hostname);
-            }
+            return url.EndsWith(".db") || url.EndsWith(".xml") || url.EndsWith(".tmp");
         }
 
         private readonly string eventNextConnectionGroupName = Guid.NewGuid().ToString();
@@ -1234,8 +1225,7 @@ namespace XenAdmin.Network
                             log.DebugFormat("Exception (disruption is expected) in XenObjectDownloader.GetEvents: {0}", exn.GetType().Name);
 
                             // ignoring some exceptions when disruption is expected
-                            if (exn is XmlRpcIllFormedXmlException ||
-                                exn is System.IO.IOException ||
+                            if (exn is System.IO.IOException ||
                                 (exn is WebException && ((exn as WebException).Status == WebExceptionStatus.KeepAliveFailure || (exn as WebException).Status == WebExceptionStatus.ConnectFailure)))
                             {
                                 if (!eventsExceptionLogged)
@@ -1353,16 +1343,6 @@ namespace XenAdmin.Network
                 }
             }
             catch (WebException e)
-            {
-                error = e;
-                log.Debug(e.Message);
-            }
-            catch (XmlRpcFaultException e)
-            {
-                error = e;
-                log.Debug(e.Message);
-            }
-            catch (XmlRpcException e)
             {
                 error = e;
                 log.Debug(e.Message);
@@ -1637,10 +1617,10 @@ namespace XenAdmin.Network
         {
             get
             {
-                if (EventNextBlocked || IsSimulatorConnection)
+                if (EventNextBlocked || IsSimulatorConnection(Hostname))
                     return RECONNECT_SHORT_TIMEOUT_MS;
-                else
-                    return RECONNECT_HOST_TIMEOUT_MS;
+                
+                return RECONNECT_HOST_TIMEOUT_MS;
             }
         }
 
