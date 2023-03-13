@@ -319,7 +319,7 @@ namespace XenAdmin.Actions.OvfActions
                 {
                     vhdDisk = VirtualDisk.OpenDisk(sourcefile, FileAccess.Read);
                     virtualSize = vhdDisk.Capacity;
-                    dataStream = File.OpenRead(filePath);
+                    dataStream = File.OpenRead(sourcefile);
                     dataLength = dataStream.Length;
                     format = "&format=vhd";
                 }
