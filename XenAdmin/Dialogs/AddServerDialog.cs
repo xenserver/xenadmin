@@ -30,7 +30,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -59,27 +58,14 @@ namespace XenAdmin.Dialogs
             _changedPass = changedPass;
 
             InitializeComponent();
-
             PopulateXenServerHosts();
+
             if (connection != null)
             {
                 ServerNameComboBox.Text = connection.HostnameWithPort;
                 UsernameTextBox.Text = connection.Username;
                 PasswordTextBox.Text = connection.Password ?? "";
             }
-
-            // we have an inner table layout panel due to the group box. Align the columns by examining lables sizes
-            Label[] labels = { UsernameLabel, PasswordLabel, ServerNameLabel };
-            int biggest = 0;
-            foreach (Label l in labels)
-            {
-                if (l.Width > biggest)
-                    biggest = l.Width;
-            }
-            // set the minimum size of one label from each table which will make sure the columns line up
-            UsernameLabel.MinimumSize = new Size(biggest, UsernameLabel.Height);
-            ServerNameLabel.MinimumSize = new Size(biggest, ServerNameLabel.Height);
-
         }
 
         private void PopulateXenServerHosts()
@@ -179,7 +165,7 @@ namespace XenAdmin.Dialogs
             {
                 foreach (string h in multipleHosts)
                 {
-                    ConnectToServer(null, h, ConnectionsManager.DEFAULT_XEN_PORT, username, password, comboBoxClouds.SelectedItem != null ? comboBoxClouds.SelectedItem.ToString() : string.Empty);
+                    ConnectToServer(null, h, ConnectionsManager.DEFAULT_XEN_PORT, username, password, string.Empty);
                 }
             }
             else
@@ -192,7 +178,7 @@ namespace XenAdmin.Dialogs
                     hostname = hostnameAndPort;
                     port = ConnectionsManager.DEFAULT_XEN_PORT;
                 }
-                ConnectToServer(connection, hostname, port, username, password, comboBoxClouds.SelectedItem != null ? comboBoxClouds.SelectedItem.ToString() : string.Empty);
+                ConnectToServer(connection, hostname, port, username, password, string.Empty);
             }
 
             Close();

@@ -41,15 +41,12 @@ namespace XenAdmin.Dialogs
             this.tableLayoutPanelCreds = new System.Windows.Forms.TableLayoutPanel();
             this.labelError = new System.Windows.Forms.Label();
             this.pictureBoxError = new System.Windows.Forms.PictureBox();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.comboBoxClouds = new System.Windows.Forms.ComboBox();
             this.labelInstructions = new System.Windows.Forms.Label();
             this.tableLayoutPanelType = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanelCreds.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxError)).BeginInit();
-            this.flowLayoutPanel1.SuspendLayout();
             this.tableLayoutPanelType.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -63,9 +60,9 @@ namespace XenAdmin.Dialogs
             // 
             // CancelButton2
             // 
-            resources.ApplyResources(this.CancelButton2, "CancelButton2");
             this.CancelButton2.CausesValidation = false;
             this.CancelButton2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            resources.ApplyResources(this.CancelButton2, "CancelButton2");
             this.CancelButton2.Name = "CancelButton2";
             this.CancelButton2.UseVisualStyleBackColor = true;
             this.CancelButton2.Click += new System.EventHandler(this.CancelButton2_Click);
@@ -140,22 +137,6 @@ namespace XenAdmin.Dialogs
             this.pictureBoxError.Name = "pictureBoxError";
             this.pictureBoxError.TabStop = false;
             // 
-            // flowLayoutPanel1
-            // 
-            resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
-            this.tableLayoutPanelType.SetColumnSpan(this.flowLayoutPanel1, 3);
-            this.flowLayoutPanel1.Controls.Add(this.CancelButton2);
-            this.flowLayoutPanel1.Controls.Add(this.AddButton);
-            this.flowLayoutPanel1.Controls.Add(this.comboBoxClouds);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            // 
-            // comboBoxClouds
-            // 
-            this.comboBoxClouds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            resources.ApplyResources(this.comboBoxClouds, "comboBoxClouds");
-            this.comboBoxClouds.FormattingEnabled = true;
-            this.comboBoxClouds.Name = "comboBoxClouds";
-            // 
             // labelInstructions
             // 
             resources.ApplyResources(this.labelInstructions, "labelInstructions");
@@ -165,11 +146,12 @@ namespace XenAdmin.Dialogs
             // tableLayoutPanelType
             // 
             resources.ApplyResources(this.tableLayoutPanelType, "tableLayoutPanelType");
+            this.tableLayoutPanelType.Controls.Add(this.ServerNameLabel, 0, 2);
             this.tableLayoutPanelType.Controls.Add(this.ServerNameComboBox, 1, 2);
             this.tableLayoutPanelType.Controls.Add(this.groupBox1, 0, 3);
-            this.tableLayoutPanelType.Controls.Add(this.ServerNameLabel, 0, 2);
             this.tableLayoutPanelType.Controls.Add(this.labelInstructions, 0, 0);
-            this.tableLayoutPanelType.Controls.Add(this.flowLayoutPanel1, 0, 4);
+            this.tableLayoutPanelType.Controls.Add(this.CancelButton2, 2, 4);
+            this.tableLayoutPanelType.Controls.Add(this.AddButton, 1, 4);
             this.tableLayoutPanelType.Name = "tableLayoutPanelType";
             // 
             // tableLayoutPanel2
@@ -192,7 +174,6 @@ namespace XenAdmin.Dialogs
             this.tableLayoutPanelCreds.ResumeLayout(false);
             this.tableLayoutPanelCreds.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxError)).EndInit();
-            this.flowLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanelType.ResumeLayout(false);
             this.tableLayoutPanelType.PerformLayout();
             this.ResumeLayout(false);
@@ -202,23 +183,20 @@ namespace XenAdmin.Dialogs
 
         #endregion
 
-        protected System.Windows.Forms.Label ServerNameLabel;
-        protected System.Windows.Forms.Label UsernameLabel;
-        protected System.Windows.Forms.Label PasswordLabel;
-        protected System.Windows.Forms.TextBox UsernameTextBox;
-        protected System.Windows.Forms.TextBox PasswordTextBox;
-        protected System.Windows.Forms.ComboBox ServerNameComboBox;
-        protected System.Windows.Forms.Button CancelButton2;
-        protected System.Windows.Forms.Button AddButton;
-        protected System.Windows.Forms.GroupBox groupBox1;
-        protected System.Windows.Forms.TableLayoutPanel tableLayoutPanelCreds;
-        protected System.Windows.Forms.PictureBox pictureBoxError;
-        protected System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        protected System.Windows.Forms.Label labelError;
-        protected System.Windows.Forms.Label labelInstructions;
+        private System.Windows.Forms.Label UsernameLabel;
+        private System.Windows.Forms.Label PasswordLabel;
+        private System.Windows.Forms.Button CancelButton2;
+        private System.Windows.Forms.Button AddButton;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelCreds;
+        private System.Windows.Forms.PictureBox pictureBoxError;
+        private System.Windows.Forms.Label labelError;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        protected System.Windows.Forms.RadioButton XenServerRadioButton;
-        protected System.Windows.Forms.TableLayoutPanel tableLayoutPanelType;
-        private System.Windows.Forms.ComboBox comboBoxClouds;
+        private System.Windows.Forms.Label ServerNameLabel;
+        private System.Windows.Forms.TextBox UsernameTextBox;
+        private System.Windows.Forms.TextBox PasswordTextBox;
+        private System.Windows.Forms.ComboBox ServerNameComboBox;
+        private System.Windows.Forms.Label labelInstructions;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelType;
     }
 }
