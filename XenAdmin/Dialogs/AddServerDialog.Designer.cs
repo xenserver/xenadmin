@@ -100,7 +100,7 @@ namespace XenAdmin.Dialogs
             // 
             resources.ApplyResources(this.ServerNameComboBox, "ServerNameComboBox");
             this.ServerNameComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.ServerNameComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.ServerNameComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.tableLayoutPanelType.SetColumnSpan(this.ServerNameComboBox, 2);
             this.ServerNameComboBox.Name = "ServerNameComboBox";
             this.ServerNameComboBox.TextChanged += new System.EventHandler(this.TextFields_TextChanged);

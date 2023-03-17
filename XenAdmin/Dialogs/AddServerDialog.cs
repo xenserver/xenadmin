@@ -31,6 +31,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using XenAdmin.Core;
@@ -58,7 +59,10 @@ namespace XenAdmin.Dialogs
             _changedPass = changedPass;
 
             InitializeComponent();
-            PopulateXenServerHosts();
+
+            var history = Settings.GetServerHistory().ToArray();
+            Array.Sort(history, StringUtility.NaturalCompare);
+            ServerNameComboBox.Items.AddRange(history.Where(s => s != null).Cast<object>().ToArray());
 
             if (connection != null)
             {
@@ -66,25 +70,6 @@ namespace XenAdmin.Dialogs
                 UsernameTextBox.Text = connection.Username;
                 PasswordTextBox.Text = connection.Password ?? "";
             }
-        }
-
-        private void PopulateXenServerHosts()
-        {
-            AutoCompleteStringCollection history = Settings.GetServerHistory();
-
-            string[] historyArray = new string[history.Count];
-            history.CopyTo(historyArray, 0);
-            Array.Sort(historyArray, StringUtility.NaturalCompare);
-            foreach (string serverName in historyArray)
-            {
-                if (serverName != null)
-                    ServerNameComboBox.Items.Add(serverName);
-            }
-
-            // Use a clone as the auto-complete source because of CA-38715
-            AutoCompleteStringCollection historyClone = new AutoCompleteStringCollection();
-            historyClone.AddRange(historyArray);
-            ServerNameComboBox.AutoCompleteCustomSource = historyClone;
         }
 
         private void OnCachePopulated(IXenConnection conn)

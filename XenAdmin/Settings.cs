@@ -560,23 +560,24 @@ namespace XenAdmin
             return Properties.Settings.Default.RequirePass && Program.MainPassword != null ? EncryptionUtils.EncryptString(entryStr, Program.MainPassword) : EncryptionUtils.Protect(entryStr);
         }
 
-        public static AutoCompleteStringCollection GetServerHistory()
+        public static string[] GetServerHistory()
         {
             if (Properties.Settings.Default.ServerHistory == null)
-                Properties.Settings.Default.ServerHistory = new AutoCompleteStringCollection();
+                Properties.Settings.Default.ServerHistory = Array.Empty<string>();
 
             return Properties.Settings.Default.ServerHistory;
         }
 
         public static void UpdateServerHistory(string hostnameWithPort)
         {
-            AutoCompleteStringCollection history = GetServerHistory();
+            var history = new List<string>(GetServerHistory());
+
             if (!history.Contains(hostnameWithPort))
             {
                 while (history.Count >= 20)
                     history.RemoveAt(0);
                 history.Add(hostnameWithPort);
-                Properties.Settings.Default.ServerHistory = history;
+                Properties.Settings.Default.ServerHistory = history.ToArray();
                 TrySaveSettings();
             }
         }

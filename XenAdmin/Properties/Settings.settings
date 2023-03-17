@@ -5,7 +5,7 @@
     <Setting Name="ToolbarsEnabled" Roaming="true" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="ServerHistory" Roaming="true" Type="System.Windows.Forms.AutoCompleteStringCollection" Scope="User">
+    <Setting Name="ServerHistory" Roaming="true" Type="System.String[]" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="SaveSession" Roaming="true" Type="System.Boolean" Scope="User">
