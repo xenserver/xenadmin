@@ -36,7 +36,6 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using XenAdmin.Core;
 using XenAdmin.Network;
-using XenAdmin.TestResources;
 using XenCenterLib;
 
 namespace XenAdmin.Dialogs
@@ -216,36 +215,6 @@ namespace XenAdmin.Dialogs
         private bool OKButtonEnabled()
         {
             return ServerNameComboBox.Text.Trim().Length > 0 && UsernameTextBox.Text.Trim().Length > 0;
-        }
-
-        private void CancelButton2_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Control || e.Alt)
-            {
-                switch (e.KeyCode)
-                {
-                    case Keys.D1:
-                        Launch(TestResource.Resource.InterestingProduction);
-                        break;
-                    case Keys.D2:
-                        Launch(TestResource.Resource.InterestingDevelopment);
-                        break;
-                    case Keys.D3:
-                        Launch(TestResource.Resource.InterestingXenApp);
-                        break;
-                    case Keys.D4:
-                        Launch(TestResource.Resource.Credits);
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-
-        private void Launch(TestResource.Resource r)
-        {
-            ServerNameComboBox.Text = TestResource.Location(r);
-            AddButton_Click(this, null);
         }
 
         /// <summary>

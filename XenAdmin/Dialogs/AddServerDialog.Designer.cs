@@ -66,7 +66,6 @@ namespace XenAdmin.Dialogs
             this.CancelButton2.Name = "CancelButton2";
             this.CancelButton2.UseVisualStyleBackColor = true;
             this.CancelButton2.Click += new System.EventHandler(this.CancelButton2_Click);
-            this.CancelButton2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CancelButton2_KeyDown);
             // 
             // ServerNameLabel
             // 

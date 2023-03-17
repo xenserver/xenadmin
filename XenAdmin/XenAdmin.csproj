@@ -4107,7 +4107,6 @@
     <Compile Include="TabPages\WlbPage.Designer.cs">
       <DependentUpon>WlbPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="TestResources\TestResource.cs" />
     <Compile Include="UpdateManager.cs" />
     <Compile Include="UpdateManager.DelayCalculator.cs">
       <SubType>Code</SubType>
@@ -6697,19 +6696,7 @@
       <DependentUpon>WorkloadReports.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Images\VMTemplate_h32bit_32.png" />
-    <Content Include="TestResources\credits.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="TestResources\console.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestResources\interesting-development.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestResources\interesting-production.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestResources\interesting-xenapp.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="..\Branding\Images\wizard_background.png">
