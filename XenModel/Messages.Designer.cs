@@ -40449,39 +40449,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A {0} user does not have sufficient permissions to attach a vTPM to a VM. Please login using an account with one of the following roles:
-        ///
-        ///{1}.
-        /// </summary>
-        public static string VTPM_RBAC_RESTRICTION_CREATE {
-            get {
-                return ResourceManager.GetString("VTPM_RBAC_RESTRICTION_CREATE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to A {0} user does not have sufficient permissions to remove a vTPM from a VM. Please login using an account with one of the following roles:
-        ///
-        ///{1}.
-        /// </summary>
-        public static string VTPM_RBAC_RESTRICTION_REMOVE {
-            get {
-                return ResourceManager.GetString("VTPM_RBAC_RESTRICTION_REMOVE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to A {0} user does not have sufficient permissions to reset the vTPM that is attached to a VM to its original state. Please login using an account with one of the following roles:
-        ///
-        ///{1}.
-        /// </summary>
-        public static string VTPM_RBAC_RESTRICTION_RESET {
-            get {
-                return ResourceManager.GetString("VTPM_RBAC_RESTRICTION_RESET", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Remove vTPM.
         /// </summary>
         public static string VTPM_REMOVE {
