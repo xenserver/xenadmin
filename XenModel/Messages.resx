@@ -13970,21 +13970,6 @@ Schedule:
   <data name="VTPM_POWER_STATE_WRONG_REMOVE" xml:space="preserve">
     <value>You need to shut down the VM before you can remove this vTPM.</value>
   </data>
-  <data name="VTPM_RBAC_RESTRICTION_CREATE" xml:space="preserve">
-    <value>A {0} user does not have sufficient permissions to attach a vTPM to a VM. Please login using an account with one of the following roles:
-
-{1}</value>
-  </data>
-  <data name="VTPM_RBAC_RESTRICTION_REMOVE" xml:space="preserve">
-    <value>A {0} user does not have sufficient permissions to remove a vTPM from a VM. Please login using an account with one of the following roles:
-
-{1}</value>
-  </data>
-  <data name="VTPM_RBAC_RESTRICTION_RESET" xml:space="preserve">
-    <value>A {0} user does not have sufficient permissions to reset the vTPM that is attached to a VM to its original state. Please login using an account with one of the following roles:
-
-{1}</value>
-  </data>
   <data name="VTPM_REMOVE" xml:space="preserve">
     <value>Remove vTPM</value>
   </data>
