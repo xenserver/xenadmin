@@ -155,21 +155,6 @@ namespace XenAdmin.Dialogs
 
         private void AddVtpm()
         {
-            if (!_vm.Connection.Session.IsLocalSuperuser && !Registry.DontSudo &&
-                _vm.Connection.Session.Roles.All(r => r.name_label != Role.MR_ROLE_VM_ADMIN))
-            {
-                var currentRoles = _vm.Connection.Session.Roles;
-                currentRoles.Sort();
-
-                var msg = string.Format(Messages.VTPM_RBAC_RESTRICTION_CREATE, currentRoles[0].FriendlyName(),
-                    Role.FriendlyName(Role.MR_ROLE_VM_ADMIN));
-
-                using (var dlg = new ErrorDialog(msg))
-                    dlg.ShowDialog(Parent);
-
-                return;
-            }
-
             var action = new NewVtpmAction(_vm.Connection, _vm);
             using (var dlg = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
                 dlg.ShowDialog(this);
@@ -183,21 +168,6 @@ namespace XenAdmin.Dialogs
             {
                 if (dlg.ShowDialog() != DialogResult.Yes)
                     return;
-            }
-
-            if (!_vm.Connection.Session.IsLocalSuperuser && !Registry.DontSudo &&
-                _vm.Connection.Session.Roles.All(r => r.name_label != Role.MR_ROLE_VM_ADMIN))
-            {
-                var currentRoles = _vm.Connection.Session.Roles;
-                currentRoles.Sort();
-
-                var msg = string.Format(Messages.VTPM_RBAC_RESTRICTION_REMOVE, currentRoles[0].FriendlyName(),
-                    Role.FriendlyName(Role.MR_ROLE_VM_ADMIN));
-
-                using (var dlg = new ErrorDialog(msg))
-                    dlg.ShowDialog(Parent);
-
-                return;
             }
 
             var action = new RemoveVtpmAction(vtpm.Connection, vtpm, _vm);
