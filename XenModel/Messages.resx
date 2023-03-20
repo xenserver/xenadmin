@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -7299,6 +7299,12 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   </data>
   <data name="IMPORT_WIZARD_ALL_ON_SAME_SR_RADIO" xml:space="preserve">
     <value>Place &amp;all imported virtual disks on this target SR:</value>
+  </data>
+  <data name="IMPORT_WIZARD_CPUS_COUNT_MISMATCH_HOST" xml:space="preserve">
+    <value>The imported appliance requires a minimum of {0} virtual CPUs, while the number of physical CPUs in the selected host is {1}. This VM cannot be started on the selected pool.</value>
+  </data>
+  <data name="IMPORT_WIZARD_CPUS_COUNT_MISMATCH_POOL" xml:space="preserve">
+    <value>The imported appliance requires a minimum of {0} virtual CPUs, while the maximum number of physical CPUs in the pool is {1}. This VM cannot be started on the selected pool.</value>
   </data>
   <data name="IMPORT_WIZARD_DESTINATION_DESTINATION" xml:space="preserve">
     <value>&amp;Import to:</value>

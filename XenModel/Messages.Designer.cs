@@ -20923,6 +20923,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The imported appliance requires a minimum of {0} virtual CPUs, while the number of physical CPUs in the selected host is {1}. This VM cannot be started on the selected pool..
+        /// </summary>
+        public static string IMPORT_WIZARD_CPUS_COUNT_MISMATCH_HOST {
+            get {
+                return ResourceManager.GetString("IMPORT_WIZARD_CPUS_COUNT_MISMATCH_HOST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The imported appliance requires a minimum of {0} virtual CPUs, while the maximum number of physical CPUs in the pool is {1}. This VM cannot be started on the selected pool..
+        /// </summary>
+        public static string IMPORT_WIZARD_CPUS_COUNT_MISMATCH_POOL {
+            get {
+                return ResourceManager.GetString("IMPORT_WIZARD_CPUS_COUNT_MISMATCH_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;Import to:.
         /// </summary>
         public static string IMPORT_WIZARD_DESTINATION_DESTINATION {

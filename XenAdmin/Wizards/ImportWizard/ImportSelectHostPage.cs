@@ -31,6 +31,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using XenAdmin.Actions.OvfActions;
 using XenAdmin.Core;
@@ -40,6 +41,7 @@ using XenAdmin.Wizards.ImportWizard.Filters;
 using XenAPI;
 using XenOvf;
 using XenOvf.Definitions;
+using static XenAdmin.ServerDBs.Db;
 
 
 namespace XenAdmin.Wizards.ImportWizard
@@ -50,7 +52,7 @@ namespace XenAdmin.Wizards.ImportWizard
         private List<Xen_ConfigurationSettingData_Type> vgpuSettings = new List<Xen_ConfigurationSettingData_Type>();
         private List<Xen_ConfigurationSettingData_Type> hardwarePlatformSettings = new List<Xen_ConfigurationSettingData_Type>();
         private List<Xen_ConfigurationSettingData_Type> vendorDeviceSettings = new List<Xen_ConfigurationSettingData_Type>();
-
+        private int? _ovfMaxVCpusCount;
         public event Action<IXenConnection> ConnectionSelectionChanged;
 
         public ImportSelectHostPage()
@@ -108,6 +110,17 @@ namespace XenAdmin.Wizards.ImportWizard
                     var data = vhs.VirtualSystemOtherConfigurationData;
                     if (data == null)
                         continue;
+                    
+                    foreach (var rasdType in vhs.Item)
+                    {
+                        if (rasdType.ResourceType.Value == 3 &&
+                            int.TryParse(rasdType.VirtualQuantity.Value.ToString(), out var vCpusCount) &&
+                            (_ovfMaxVCpusCount == null || _ovfMaxVCpusCount < vCpusCount)
+                            )
+                        {
+                            _ovfMaxVCpusCount = vCpusCount;
+                        }
+                    }
 
                     foreach (var s in data)
                     {
@@ -151,12 +164,14 @@ namespace XenAdmin.Wizards.ImportWizard
                     else if (VmMappings.Count > 1)
                         warnings.Add(Messages.IMPORT_VM_WITH_VGPU_WARNING_MANY);
                 }
+
+                if (!CheckDestinationHasEnoughPhysicalCpus(out var warningMessage))
+                    warnings.Add(warningMessage);
             }
 
             ShowWarning(string.Join("\n", warnings));
 
-            if (ConnectionSelectionChanged != null)
-                ConnectionSelectionChanged(SelectedTargetPool?.Connection);
+            ConnectionSelectionChanged?.Invoke(SelectedTargetPool?.Connection);
         }
 
         protected override DelayLoadingOptionComboBoxItem CreateDelayLoadingOptionComboBoxItem(IXenObject xenItem)
@@ -206,6 +221,65 @@ namespace XenAdmin.Wizards.ImportWizard
             }
 
             return true;
+        }
+
+        private bool CheckDestinationHasEnoughPhysicalCpus(out string warningMessage)
+        {
+            warningMessage = string.Empty;
+            
+            if (_ovfMaxVCpusCount == null)
+                return true;
+
+            var selectedTarget = SelectedTarget ?? SelectedTargetPool;
+            var physicalCpusCount = GetPhysicalCpus(selectedTarget);
+
+            if (physicalCpusCount < 0)
+                return true;
+
+            if (selectedTarget is Pool)
+                warningMessage = string.Format(Messages.IMPORT_WIZARD_CPUS_COUNT_MISMATCH_POOL, _ovfMaxVCpusCount, physicalCpusCount);
+            else if (selectedTarget is Host)
+                warningMessage = string.Format(Messages.IMPORT_WIZARD_CPUS_COUNT_MISMATCH_HOST, _ovfMaxVCpusCount, physicalCpusCount);
+            else
+                return true;
+
+            return false;
+        }
+
+        /// <summary>
+        /// Returns the number of physical CPUs on the specified <paramref name="xenObject"/> (<see cref="Host"/> or <see cref="Pool"/>) or -1 if the value cannot be determined.
+        /// </summary>
+        /// <param name="xenObject">The XenObject for which to determine the number of physical CPUs.</param>
+        /// <returns>The number of physical CPUs on the specified <paramref name="xenObject"/> or -1 if the value cannot be determined.</returns>
+        private int GetPhysicalCpus(IXenObject xenObject)
+        {
+            var physicalCpusCount = -1;
+
+            switch (xenObject)
+            {
+                case Host host:
+                {
+                    var hostCpuCount = host.CpuCount();
+                    if(hostCpuCount > 0)
+                        physicalCpusCount = hostCpuCount;
+                    break;
+                }
+                case Pool pool:
+                {
+                    var hosts = pool.Connection.Cache.Hosts;
+                    var maxCpuCounts = hosts
+                        .Select(h => h.CpuCount())
+                        .ToList();
+                    if (maxCpuCounts.Count > 0)
+                    {
+                        physicalCpusCount = maxCpuCounts.Max();
+                    }
+
+                    break;
+                }
+            }
+
+            return physicalCpusCount;
         }
 
         private bool CheckDestinationSupportsVendorDevice()

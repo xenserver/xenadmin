@@ -87,8 +87,22 @@ namespace XenAdmin.Commands
                 appsToStart.Add(firstVm.Connection.Resolve(firstVm.appliance));
             }
 
+            if (appsToStart.Count == 0)
+            {
+                return;
+            }
+
+            var maxVCpusCount = appsToStart.First()
+                .Connection
+                .ResolveAll(appsToStart.SelectMany(app => app.VMs))
+                .Select(vm => vm.VCPUs_at_startup)
+                .Max();
+
             foreach (var app in appsToStart)
+            {
+                
                 (new StartApplianceAction(app, false)).RunAsync();
+            }
         }
 
         private bool CanStartAppliance(VM_appliance app)
