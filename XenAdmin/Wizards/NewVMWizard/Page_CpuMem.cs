@@ -57,6 +57,8 @@ namespace XenAdmin.Wizards.NewVMWizard
         private bool _initializing = true;
         private bool _isVCpuHotplugSupported;
         private int _minVCpus;
+        private long _prevVCpusMax;
+        public VM SelectedTemplate { private get; set; }
 
         // Please note that the comboBoxVCPUs control can represent two different VM properties, depending whether the VM supports vCPU hotplug or not: 
         // When vCPU hotplug is not supported, comboBoxVCPUs represents the initial number of vCPUs (VCPUs_at_startup). In this case we will also set the VM property VCPUs_max to the same value.
@@ -73,9 +75,24 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         public override string HelpID => "CPU&Memory";
 
+        public double SelectedMemoryDynamicMin => spinnerDynMin.Value;
+
+        public double SelectedMemoryDynamicMax => _memoryMode == MemoryMode.JustMemory ? spinnerDynMin.Value : spinnerDynMax.Value;
+
+        public double SelectedMemoryStaticMax =>
+            _memoryMode == MemoryMode.JustMemory ? spinnerDynMin.Value :
+            _memoryMode == MemoryMode.MinimumAndMaximum ? spinnerDynMax.Value :
+            spinnerStatMax.Value;
+
+        public long SelectedVCpusMax => (long)comboBoxVCPUs.SelectedItem;
+
+        public long SelectedVCpusAtStartup => _isVCpuHotplugSupported ? (long)comboBoxInitialVCPUs.SelectedItem : (long)comboBoxVCPUs.SelectedItem;
+
+        public long SelectedCoresPerSocket => comboBoxTopology.CoresPerSocket;
+
         protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            if (SelectedTemplate ==  _template)
+            if (SelectedTemplate == _template)
                 return;
 
             _initializing = true;
@@ -113,7 +130,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             _isVCpuHotplugSupported = _template.SupportsVcpuHotplug();
             _minVCpus = _template.MinVCPUs();
 
-            _prevVcpUsMax = _template.VCPUs_max;  // we use variable in RefreshCurrentVCPUs for checking if VcpusAtStartup and VcpusMax were equal before VcpusMax changed
+            _prevVCpusMax = _template.VCPUs_max;  // we use variable in RefreshCurrentVCPUs for checking if VcpusAtStartup and VcpusMax were equal before VcpusMax changed
 
             label5.Text = GetRubric();
 
@@ -182,8 +199,6 @@ namespace XenAdmin.Wizards.NewVMWizard
             return sb.ToString();
         }
 
-        public VM SelectedTemplate { private get; set; }
-
         // Return the larger of the template's MaxMemAllowed and the template's static max,
         // to avoid crashes in the spinners (CA-40041).
         private long MaxMemAllowed
@@ -207,7 +222,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         private void SetSpinnerLimitsAndIncrement()
         {
             spinnerDynMin.Increment = spinnerDynMax.Increment = spinnerStatMax.Increment = VMMemoryControlsEdit.CalcIncrement(_template.memory_static_max, spinnerDynMin.Units);
-            
+
             var maxMemAllowed = MaxMemAllowed;
             double min = _template.memory_static_min;
             if (_memoryMode == MemoryMode.JustMemory)
@@ -240,21 +255,6 @@ namespace XenAdmin.Wizards.NewVMWizard
             spinnerDynMax.Enabled = false;
             spinnerStatMax.Enabled = false;
         }
-
-        public double SelectedMemoryDynamicMin => spinnerDynMin.Value;
-
-        public double SelectedMemoryDynamicMax => _memoryMode == MemoryMode.JustMemory ? spinnerDynMin.Value : spinnerDynMax.Value;
-
-        public double SelectedMemoryStaticMax =>
-            _memoryMode == MemoryMode.JustMemory ? spinnerDynMin.Value :
-            _memoryMode == MemoryMode.MinimumAndMaximum ? spinnerDynMax.Value :
-            spinnerStatMax.Value;
-
-        public long SelectedVCpusMax => (long)comboBoxVCPUs.SelectedItem;
-
-        public long SelectedVCpusAtStartup => _isVCpuHotplugSupported ? (long)comboBoxInitialVCPUs.SelectedItem : (long)comboBoxVCPUs.SelectedItem;
-
-        public long SelectedCoresPerSocket => comboBoxTopology.CoresPerSocket;
 
         public override List<KeyValuePair<string, string>> PageSummary
         {
@@ -387,7 +387,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             SetSpinnerLimitsAndIncrement();
             ValuesUpdated();
         }
-        
+
         private void ValidateVCpuSettings()
         {
             if (comboBoxVCPUs.SelectedItem != null && SelectedVCpusMax < _minVCpus)
@@ -417,8 +417,6 @@ namespace XenAdmin.Wizards.NewVMWizard
                 labelInvalidVCPUWarning.Text = VM.ValidVCPUConfiguration((long)comboBoxVCPUs.SelectedItem, comboBoxTopology.CoresPerSocket);
         }
 
-        private long _prevVcpUsMax;
-
         private void RefreshCurrentVcpUs()
         {
             // refresh comboBoxInitialVCPUs if it's visible and populated
@@ -432,11 +430,11 @@ namespace XenAdmin.Wizards.NewVMWizard
 
                 if (SelectedVCpusMax < SelectedVCpusAtStartup)
                     newValue = SelectedVCpusMax;
-                else if (SelectedVCpusAtStartup == _prevVcpUsMax && SelectedVCpusMax != _prevVcpUsMax)
+                else if (SelectedVCpusAtStartup == _prevVCpusMax && SelectedVCpusMax != _prevVCpusMax)
                     newValue = SelectedVCpusMax;
 
                 PopulateVcpUsAtStartup(SelectedVCpusMax, newValue);
-                _prevVcpUsMax = SelectedVCpusMax;
+                _prevVCpusMax = SelectedVCpusMax;
             }
         }
 
