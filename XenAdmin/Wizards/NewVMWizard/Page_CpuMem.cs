@@ -151,7 +151,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         {
             comboBox.BeginUpdate();
             comboBox.Items.Clear();
-            for (long i = min; i <= max; ++i)
+            for (var i = min; i <= max; ++i)
             {
                 if (i == currentValue || isValid(i))
                     comboBox.Items.Add(i);
@@ -174,7 +174,7 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         private string GetRubric()
         {
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
             sb.Append(Messages.NEWVMWIZARD_CPUMEMPAGE_RUBRIC);
             // add hotplug text
             if (_isVcpuHotplugSupported)
@@ -190,15 +190,15 @@ namespace XenAdmin.Wizards.NewVMWizard
         {
             get
             {
-                long msm = _template.memory_static_max;
-                long mma = _template.MaxMemAllowed();
+                var msm = _template.memory_static_max;
+                var mma = _template.MaxMemAllowed();
                 return (msm > mma ? msm : mma);
             }
         }
 
         private void FreeSpinnerLimits()
         {
-            long maxMemAllowed = MaxMemAllowed;
+            var maxMemAllowed = MaxMemAllowed;
             spinnerDynMin.SetRange(0, maxMemAllowed);
             spinnerDynMax.SetRange(0, maxMemAllowed);
             spinnerStatMax.SetRange(0, maxMemAllowed);
@@ -208,7 +208,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         {
             spinnerDynMin.Increment = spinnerDynMax.Increment = spinnerStatMax.Increment = VMMemoryControlsEdit.CalcIncrement(_template.memory_static_max, spinnerDynMin.Units);
             
-            long maxMemAllowed = MaxMemAllowed;
+            var maxMemAllowed = MaxMemAllowed;
             double min = _template.memory_static_min;
             if (_memoryMode == MemoryMode.JustMemory)
             {
@@ -216,10 +216,10 @@ namespace XenAdmin.Wizards.NewVMWizard
                 ShowMemoryMinMaxInformation(labelDynMinInfo, min, maxMemAllowed);
                 return;
             }
-            long min2 = (long)(SelectedMemoryStaticMax * _memoryRatio);
+            var min2 = (long)(SelectedMemoryStaticMax * _memoryRatio);
             if (min < min2)
                 min = min2;
-            double max = SelectedMemoryDynamicMax;
+            var max = SelectedMemoryDynamicMax;
             if (max < min)
                 max = min;
             spinnerDynMin.SetRange(min, max);
@@ -260,7 +260,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         {
             get
             {
-                List<KeyValuePair<string, string>> sum = new List<KeyValuePair<string, string>>();
+                var sum = new List<KeyValuePair<string, string>>();
 
                 if (_isVcpuHotplugSupported)
                 {
@@ -300,17 +300,17 @@ namespace XenAdmin.Wizards.NewVMWizard
             Host maxMemFreeHost = null;
             Host maxVcpusHost = null;
 
-            foreach (Host host in Connection.Cache.Hosts)
+            foreach (var host in Connection.Cache.Hosts)
             {
                 long hostCpus = 0;
 
-                foreach (Host_cpu cpu in Connection.Cache.Host_cpus)
+                foreach (var cpu in Connection.Cache.Host_cpus)
                 {
                     if (cpu.host.opaque_ref.Equals(host.opaque_ref))
                         hostCpus++;
                 }
 
-                Host_metrics metrics = Connection.Resolve(host.metrics);
+                var metrics = Connection.Resolve(host.metrics);
 
                 if (hostCpus > maxVcpus)
                 {
@@ -328,7 +328,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                 // plus however much we can squeeze down the existing VMs. This assumes
                 // that the overhead won't increase when we create the new VM, so it
                 // has false negatives.
-                long memoryFree = host.memory_available_calc();
+                var memoryFree = host.memory_available_calc();
 
                 if (metrics != null && memoryFree > maxMemFree)
                 {
