@@ -330,7 +330,7 @@ namespace XenAdmin.Actions.OvfActions
                         return null;
                     }
 
-                    dataStream = File.OpenRead(filePath);
+                    dataStream = File.OpenRead(sourcefile);
                     dataLength = virtualSize = dataStream.Length;
                 }
                 else if (VirtualDisk.SupportedDiskFormats.Any(f => ext.ToLower().EndsWith(f.ToLower())))
