@@ -223,17 +223,21 @@ namespace XenAdmin.Wizards.ImportWizard
             return true;
         }
 
+        public bool ApplianceCanBeStarted => _ovfMaxVCpusCount == null ||
+                                             GetPhysicalCpus(SelectedTarget ?? SelectedTargetPool) < 0 ||
+                                             GetPhysicalCpus(SelectedTarget ?? SelectedTargetPool) >= _ovfMaxVCpusCount;
+
         private bool CheckDestinationHasEnoughPhysicalCpus(out string warningMessage)
         {
             warningMessage = string.Empty;
             
-            if (_ovfMaxVCpusCount == null)
+            if (ApplianceCanBeStarted)
                 return true;
 
             var selectedTarget = SelectedTarget ?? SelectedTargetPool;
             var physicalCpusCount = GetPhysicalCpus(selectedTarget);
 
-            if (physicalCpusCount < 0)
+            if (physicalCpusCount < 0 || physicalCpusCount >= _ovfMaxVCpusCount)
                 return true;
 
             if (selectedTarget is Pool)

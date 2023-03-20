@@ -20923,7 +20923,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The imported appliance requires a minimum of {0} virtual CPUs, while the number of physical CPUs in the selected host is {1}. This VM cannot be started on the selected pool..
+        ///   Looks up a localized string similar to The imported appliance requires a minimum of {0} virtual CPUs, while the number of physical CPUs in the selected host is {1}. You will not be able to start the appliance on the selected pool..
         /// </summary>
         public static string IMPORT_WIZARD_CPUS_COUNT_MISMATCH_HOST {
             get {
@@ -20932,7 +20932,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The imported appliance requires a minimum of {0} virtual CPUs, while the maximum number of physical CPUs in the pool is {1}. This VM cannot be started on the selected pool..
+        ///   Looks up a localized string similar to The imported appliance requires a minimum of {0} virtual CPUs, while the maximum number of physical CPUs in the pool is {1}. You will not be able to start the appliance on the selected pool..
         /// </summary>
         public static string IMPORT_WIZARD_CPUS_COUNT_MISMATCH_POOL {
             get {

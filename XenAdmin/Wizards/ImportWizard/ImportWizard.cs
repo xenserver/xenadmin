@@ -310,7 +310,7 @@ namespace XenAdmin.Wizards.ImportWizard
                 _targetConnection = m_pageHost.SelectedTargetPool?.Connection;
                 var oldHostSelection = m_vmMappings.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.TargetName);
                 m_vmMappings = m_pageHost.VmMappings;
-
+                m_pageFinish.CanStartVmsAutomatically = m_pageHost.ApplianceCanBeStarted;
                 if (oldTargetConnection != _targetConnection)
                 {
                     RemovePage(m_pageRbac);
@@ -329,7 +329,7 @@ namespace XenAdmin.Wizards.ImportWizard
 
                 if (oldTargetConnection != _targetConnection ||
                     oldHostSelection.Any(kvp=> !m_vmMappings.TryGetValue(kvp.Key, out var map) || map == null || map.TargetName != kvp.Value))
-                    NotifyNextPagesOfChange(m_pageStorage, m_pageNetwork, m_pageOptions);
+                    NotifyNextPagesOfChange(m_pageStorage, m_pageNetwork, m_pageOptions, m_pageFinish);
             }
             else if (type == typeof(ImportBootOptionPage))
             {

@@ -87,10 +87,25 @@ namespace XenAdmin.Wizards.ImportWizard
 
         public Func<IEnumerable<KeyValuePair<string, string>>> SummaryRetriever { private get; set; }
 
+        private bool _canStartVmsAutomatically = true;
+        public bool CanStartVmsAutomatically
+        {
+            get => _canStartVmsAutomatically;
+            set
+            {
+                m_checkBoxStartVms.Enabled = value;
+                if (!value)
+                {
+                    m_checkBoxStartVms.Checked = false;
+                }
+                _canStartVmsAutomatically = value;
+            }
+        }
+
         /// <summary>
 		/// Do the action described after the import/export has finished?
 		/// </summary>
-		public bool StartVmsAutomatically => m_checkBoxStartVms.Visible && m_checkBoxStartVms.Checked;
+		public bool StartVmsAutomatically => CanStartVmsAutomatically && m_checkBoxStartVms.Visible && m_checkBoxStartVms.Checked;
 
         public bool ShowStartVmsGroupBox
         {
