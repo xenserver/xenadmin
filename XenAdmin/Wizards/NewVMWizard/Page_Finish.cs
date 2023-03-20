@@ -81,11 +81,11 @@ namespace XenAdmin.Wizards.NewVMWizard
         {
             SummaryGridView.Rows.Clear();
             
-            if (SummaryRetreiver == null)
+            if (SummaryRetriever == null)
                 return;
 
-            var entries = SummaryRetreiver.Invoke();
-            foreach (KeyValuePair<string, string> pair in entries)
+            var entries = SummaryRetriever.Invoke();
+            foreach (var pair in entries)
                 SummaryGridView.Rows.Add(pair.Key, pair.Value);
         }
 
@@ -95,6 +95,6 @@ namespace XenAdmin.Wizards.NewVMWizard
                 AutoStartCheckBox.Select();
         }
 
-        public Func<IEnumerable<KeyValuePair<string, string>>> SummaryRetreiver { private get; set; }
+        public Func<IEnumerable<KeyValuePair<string, string>>> SummaryRetriever { private get; set; }
     }
 }
