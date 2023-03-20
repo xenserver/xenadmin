@@ -54,7 +54,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         private MemoryMode _memoryMode = MemoryMode.JustMemory;
 
         private double _memoryRatio = 0.0;  // the permitted ratio of dynamic_min / static_max
-        private bool _initialising = true;
+        private bool _initializing = true;
         private bool _isVcpuHotplugSupported;
         private int _minVcpUs;
 
@@ -78,7 +78,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             if (SelectedTemplate ==  _template)
                 return;
 
-            _initialising = true;
+            _initializing = true;
 
             _template = SelectedTemplate;
             if (_template.SupportsBallooning() && !Helpers.FeatureForbidden(_template, Host.RestrictDMC))
@@ -123,7 +123,7 @@ namespace XenAdmin.Wizards.NewVMWizard
 
             ValuesUpdated();
 
-            _initialising = false;
+            _initializing = false;
         }
 
         public override void SelectDefaultControl()
@@ -381,7 +381,7 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         private void memory_ValueChanged(object sender, EventArgs e)
         {
-            if (_initialising)
+            if (_initializing)
                 return;
 
             SetSpinnerLimitsAndIncrement();
