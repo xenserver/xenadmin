@@ -52,7 +52,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         private readonly Page_Name page_2_Name;
         private readonly Page_InstallationMedia page_3_InstallationMedia;
         private readonly Page_HomeServer page_4_HomeServer;
-        private readonly Page_CpuMem page_5_CpuMem;
+        private readonly PageCpuMem page_5_CpuMem;
         private readonly Page_Storage page_6_Storage;
         private readonly Page_Networking page_7_Networking;
         private readonly Page_Finish page_8_Finish;
@@ -77,7 +77,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             page_2_Name = new Page_Name();
             page_3_InstallationMedia = new Page_InstallationMedia();
             page_4_HomeServer = new Page_HomeServer();
-            page_5_CpuMem = new Page_CpuMem();
+            page_5_CpuMem = new PageCpuMem();
             page_6_Storage = new Page_Storage();
             page_7_Networking = new Page_Networking();
             page_8_Finish = new Page_Finish();
@@ -161,8 +161,8 @@ namespace XenAdmin.Wizards.NewVMWizard
                                         page_3_InstallationMedia.SelectedUrl,
                                         page_3_InstallationMedia.SelectedBootMode,
                                         m_affinity,
-                                        page_5_CpuMem.SelectedVcpusMax,
-                                        page_5_CpuMem.SelectedVcpusAtStartup,
+                                        page_5_CpuMem.SelectedVCpusMax,
+                                        page_5_CpuMem.SelectedVCpusAtStartup,
                                         (long)page_5_CpuMem.SelectedMemoryDynamicMin,
                                         (long)page_5_CpuMem.SelectedMemoryDynamicMax,
                                         (long)page_5_CpuMem.SelectedMemoryStaticMax,

@@ -39,7 +39,7 @@ using XenAPI;
 
 namespace XenAdmin.Wizards.NewVMWizard
 {
-    public partial class PageCpuMem : XenTabPage
+    public partial class Page_CpuMem : XenTabPage
     {
         private VM _template;
 
@@ -64,7 +64,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         // When vCPU hotplug is not supported, comboBoxVCPUs represents the initial number of vCPUs (VCPUs_at_startup). In this case we will also set the VM property VCPUs_max to the same value.
         // When vCPU hotplug is supported, comboBoxVCPUs represents the maximum number of vCPUs (VCPUs_max). And the initial number of vCPUs is represented in comboBoxInitialVCPUs (which is only visible in this case) 
 
-        public PageCpuMem()
+        public Page_CpuMem()
         {
             InitializeComponent();
         }
@@ -158,10 +158,10 @@ namespace XenAdmin.Wizards.NewVMWizard
             labelInitialVCPUs.Visible = comboBoxInitialVCPUs.Visible = _isVCpuHotplugSupported;
 
             comboBoxTopology.Populate(_template.VCPUs_at_startup, _template.VCPUs_max, _template.GetCoresPerSocket(), _template.MaxCoresPerSocket());
-            PopulateVcpUs(_template.MaxVCPUsAllowed(), _isVCpuHotplugSupported ? _template.VCPUs_max : _template.VCPUs_at_startup);
+            PopulateVCpus(_template.MaxVCPUsAllowed(), _isVCpuHotplugSupported ? _template.VCPUs_max : _template.VCPUs_at_startup);
 
             if (_isVCpuHotplugSupported)
-                PopulateVcpUsAtStartup(_template.VCPUs_max, _template.VCPUs_at_startup);
+                PopulateVCpusAtStartup(_template.VCPUs_max, _template.VCPUs_at_startup);
         }
 
         private void PopulateVCpuComboBox(ComboBox comboBox, long min, long max, long currentValue, Predicate<long> isValid)
@@ -179,12 +179,12 @@ namespace XenAdmin.Wizards.NewVMWizard
             comboBox.EndUpdate();
         }
 
-        private void PopulateVcpUs(long maxVcpUs, long currentVcpUs)
+        private void PopulateVCpus(long maxVCpus, long currentVCpus)
         {
-            PopulateVCpuComboBox(comboBoxVCPUs, 1, maxVcpUs, currentVcpUs, i => comboBoxTopology.IsValidVCPU(i));
+            PopulateVCpuComboBox(comboBoxVCPUs, 1, maxVCpus, currentVCpus, i => comboBoxTopology.IsValidVCPU(i));
         }
 
-        private void PopulateVcpUsAtStartup(long max, long currentValue)
+        private void PopulateVCpusAtStartup(long max, long currentValue)
         {
             PopulateVCpuComboBox(comboBoxInitialVCPUs, 1, max, currentValue, i => true);
         }
@@ -376,7 +376,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             comboBoxTopology.Update((long)comboBoxVCPUs.SelectedItem);
             ValuesUpdated();
             ValidateVCpuSettings();
-            RefreshCurrentVcpUs();
+            RefreshCurrentVCpus();
         }
 
         private void memory_ValueChanged(object sender, EventArgs e)
@@ -417,7 +417,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                 labelInvalidVCPUWarning.Text = VM.ValidVCPUConfiguration((long)comboBoxVCPUs.SelectedItem, comboBoxTopology.CoresPerSocket);
         }
 
-        private void RefreshCurrentVcpUs()
+        private void RefreshCurrentVCpus()
         {
             // refresh comboBoxInitialVCPUs if it's visible and populated
             if (comboBoxInitialVCPUs.Visible && comboBoxInitialVCPUs.Items.Count > 0)
@@ -433,7 +433,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                 else if (SelectedVCpusAtStartup == _prevVCpusMax && SelectedVCpusMax != _prevVCpusMax)
                     newValue = SelectedVCpusMax;
 
-                PopulateVcpUsAtStartup(SelectedVCpusMax, newValue);
+                PopulateVCpusAtStartup(SelectedVCpusMax, newValue);
                 _prevVCpusMax = SelectedVCpusMax;
             }
         }
