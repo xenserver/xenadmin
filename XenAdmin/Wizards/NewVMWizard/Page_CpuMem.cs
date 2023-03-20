@@ -66,20 +66,11 @@ namespace XenAdmin.Wizards.NewVMWizard
             InitializeComponent();
         }
 
-        public override string Text
-        {
-            get { return Messages.NEWVMWIZARD_CPUMEMPAGE_NAME; }
-        }
+        public override string Text => Messages.NEWVMWIZARD_CPUMEMPAGE_NAME;
 
-        public override string PageTitle
-        {
-            get { return Messages.NEWVMWIZARD_CPUMEMPAGE_TITLE; }
-        }
+        public override string PageTitle => Messages.NEWVMWIZARD_CPUMEMPAGE_TITLE;
 
-        public override string HelpID
-        {
-            get { return "CPU&Memory"; }
-        }
+        public override string HelpID => "CPU&Memory";
 
         protected override void PageLoadedCore(PageLoadedDirection direction)
         {
@@ -249,56 +240,20 @@ namespace XenAdmin.Wizards.NewVMWizard
             spinnerStatMax.Enabled = false;
         }
 
-        public double SelectedMemoryDynamicMin
-        {
-            get
-            {
-                return spinnerDynMin.Value;
-            }
-        }
+        public double SelectedMemoryDynamicMin => spinnerDynMin.Value;
 
-        public double SelectedMemoryDynamicMax
-        {
-            get
-            {
-                return memoryMode == MemoryMode.JustMemory ? spinnerDynMin.Value : spinnerDynMax.Value;
-            }
-        }
+        public double SelectedMemoryDynamicMax => memoryMode == MemoryMode.JustMemory ? spinnerDynMin.Value : spinnerDynMax.Value;
 
-        public double SelectedMemoryStaticMax
-        {
-            get
-            {
-                return
-                    memoryMode == MemoryMode.JustMemory ? spinnerDynMin.Value :
-                    memoryMode == MemoryMode.MinimumAndMaximum ? spinnerDynMax.Value :
-                    spinnerStatMax.Value;
-            }
-        }
+        public double SelectedMemoryStaticMax =>
+            memoryMode == MemoryMode.JustMemory ? spinnerDynMin.Value :
+            memoryMode == MemoryMode.MinimumAndMaximum ? spinnerDynMax.Value :
+            spinnerStatMax.Value;
 
-        public long SelectedVcpusMax
-        {
-            get
-            {
-                return (long)comboBoxVCPUs.SelectedItem;
-            }
-        }
+        public long SelectedVcpusMax => (long)comboBoxVCPUs.SelectedItem;
 
-        public long SelectedVcpusAtStartup
-        {
-            get
-            {
-                return isVcpuHotplugSupported ? (long)comboBoxInitialVCPUs.SelectedItem : (long)comboBoxVCPUs.SelectedItem;
-            }
-        }
+        public long SelectedVcpusAtStartup => isVcpuHotplugSupported ? (long)comboBoxInitialVCPUs.SelectedItem : (long)comboBoxVCPUs.SelectedItem;
 
-        public long SelectedCoresPerSocket
-        {
-            get
-            {
-                return comboBoxTopology.CoresPerSocket;
-            }
-        }
+        public long SelectedCoresPerSocket => comboBoxTopology.CoresPerSocket;
 
         public override List<KeyValuePair<string, string>> PageSummary
         {
