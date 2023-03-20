@@ -44,16 +44,17 @@ namespace XenAdmin.Wizards.NewVMWizard
         private VM _template;
 
         // number of spinners to show
-        enum MemoryMode
+        private enum MemoryMode
         {
             JustMemory = 1,
             MinimumAndMaximum = 2,
             MinimumMaximumAndStaticMax = 3
         }
-        MemoryMode _memoryMode = MemoryMode.JustMemory;
 
-        double _memoryRatio = 0.0;  // the permitted ratio of dynamic_min / static_max
-        bool _initialising = true;
+        private MemoryMode _memoryMode = MemoryMode.JustMemory;
+
+        private double _memoryRatio = 0.0;  // the permitted ratio of dynamic_min / static_max
+        private bool _initialising = true;
         private bool _isVcpuHotplugSupported;
         private int _minVcpUs;
 
