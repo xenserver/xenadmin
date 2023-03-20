@@ -26981,10 +26981,7 @@ namespace XenAdmin {
         
         /// <summary>
         ///   Looks up a localized string similar to The number of vCPUs given to the new VM is greater than the number of physical CPUs on any server in the pool.
-        ///
-        ///Server &apos;{0}&apos; has {1} physical CPUs.
-        ///
-        ///Performance of this VM will be greatly reduced if it is started with this many vCPUs..
+        ///You will not be able to start the VM with this configuration..
         /// </summary>
         public static string NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN {
             get {

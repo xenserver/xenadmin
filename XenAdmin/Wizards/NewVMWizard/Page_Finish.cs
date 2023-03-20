@@ -71,6 +71,27 @@ namespace XenAdmin.Wizards.NewVMWizard
             }
         }
 
+        private bool _canStartImmediately = true;
+
+        public bool CanStartImmediately
+        {
+            get => _canStartImmediately;
+            set
+            {
+                if (!value)
+                {
+                    AutoStartCheckBox.Checked = false;
+                    AutoStartCheckBox.Enabled = false;
+                }
+                else
+                {
+                    AutoStartCheckBox.Enabled = true;
+                }
+
+                _canStartImmediately = value;
+            }
+        }
+
         protected override void PageLoadedCore(PageLoadedDirection direction)
         {
             SummaryGridView.Rows.Clear();
@@ -85,7 +106,8 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         public override void SelectDefaultControl()
         {
-            AutoStartCheckBox.Select();
+            if(CanStartImmediately)
+                AutoStartCheckBox.Select();
         }
 
         public Func<IEnumerable<KeyValuePair<string, string>>> SummaryRetreiver { private get; set; }

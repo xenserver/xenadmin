@@ -9405,10 +9405,7 @@ You will not be able to start this VM without freeing some space on one of the s
   </data>
   <data name="NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN" xml:space="preserve">
     <value>The number of vCPUs given to the new VM is greater than the number of physical CPUs on any server in the pool.
-
-Server '{0}' has {1} physical CPUs.
-
-Performance of this VM will be greatly reduced if it is started with this many vCPUs.</value>
+You will not be able to start the VM with this configuration.</value>
   </data>
   <data name="NEWVMWIZARD_FINISHPAGE" xml:space="preserve">
     <value>All the necessary information has been collected and the wizard is ready to provision the new virtual machine using the settings shown below.

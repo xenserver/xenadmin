@@ -57,6 +57,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         private bool _initializing = true;
         private bool _isVCpuHotplugSupported;
         private int _minVCpus;
+        private long _maxVCpus;
         private long _prevVCpusMax;
         public VM SelectedTemplate { private get; set; }
 
@@ -78,6 +79,8 @@ namespace XenAdmin.Wizards.NewVMWizard
         public double SelectedMemoryDynamicMin => spinnerDynMin.Value;
 
         public double SelectedMemoryDynamicMax => _memoryMode == MemoryMode.JustMemory ? spinnerDynMin.Value : spinnerDynMax.Value;
+
+        public bool CanStartVM => _maxVCpus > 0 && SelectedVCpusMax <= _maxVCpus;
 
         public double SelectedMemoryStaticMax =>
             _memoryMode == MemoryMode.JustMemory ? spinnerDynMin.Value :
@@ -295,11 +298,10 @@ namespace XenAdmin.Wizards.NewVMWizard
         {
             long maxMemTotal = 0;
             long maxMemFree = 0;
-            long maxVcpus = 0;
             Host maxMemTotalHost = null;
             Host maxMemFreeHost = null;
             Host maxVcpusHost = null;
-
+            _maxVCpus = 0;
             foreach (var host in Connection.Cache.Hosts)
             {
                 long hostCpus = 0;
@@ -312,9 +314,9 @@ namespace XenAdmin.Wizards.NewVMWizard
 
                 var metrics = Connection.Resolve(host.metrics);
 
-                if (hostCpus > maxVcpus)
+                if (hostCpus > _maxVCpus)
                 {
-                    maxVcpus = hostCpus;
+                    _maxVCpus = hostCpus;
                     maxVcpusHost = host;
                 }
 
@@ -347,10 +349,10 @@ namespace XenAdmin.Wizards.NewVMWizard
                 ErrorPanel.Visible = true;
                 ErrorLabel.Text = string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN2, Helpers.GetName(maxMemFreeHost).Ellipsise(50), Util.MemorySizeStringSuitableUnits(maxMemFree, false));
             }
-            else if (maxVcpusHost != null && SelectedVCpusMax > maxVcpus)
+            else if (maxVcpusHost != null && SelectedVCpusMax > _maxVCpus)
             {
                 ErrorPanel.Visible = true;
-                ErrorLabel.Text = string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN, Helpers.GetName(maxVcpusHost).Ellipsise(50), maxVcpus);
+                ErrorLabel.Text = string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN, Helpers.GetName(maxVcpusHost).Ellipsise(50), _maxVCpus);
             }
             else
             {

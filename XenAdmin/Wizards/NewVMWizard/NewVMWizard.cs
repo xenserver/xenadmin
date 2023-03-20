@@ -52,7 +52,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         private readonly Page_Name page_2_Name;
         private readonly Page_InstallationMedia page_3_InstallationMedia;
         private readonly Page_HomeServer page_4_HomeServer;
-        private readonly PageCpuMem page_5_CpuMem;
+        private readonly Page_CpuMem page_5_CpuMem;
         private readonly Page_Storage page_6_Storage;
         private readonly Page_Networking page_7_Networking;
         private readonly Page_Finish page_8_Finish;
@@ -77,7 +77,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             page_2_Name = new Page_Name();
             page_3_InstallationMedia = new Page_InstallationMedia();
             page_4_HomeServer = new Page_HomeServer();
-            page_5_CpuMem = new PageCpuMem();
+            page_5_CpuMem = new Page_CpuMem();
             page_6_Storage = new Page_Storage();
             page_7_Networking = new Page_Networking();
             page_8_Finish = new Page_Finish();
@@ -283,6 +283,10 @@ namespace XenAdmin.Wizards.NewVMWizard
                     page_6b_LunPerVdi.DisksToMap = page_6_Storage.SelectedDisks;
                     AddAfterPage(page_6_Storage, page_6b_LunPerVdi);
                 }
+            }
+            else if (prevPageType == typeof(Page_CpuMem))
+            {
+                page_8_Finish.CanStartImmediately = page_5_CpuMem.CanStartVM;
             }
         }
 
