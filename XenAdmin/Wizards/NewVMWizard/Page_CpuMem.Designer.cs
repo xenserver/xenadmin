@@ -1,6 +1,6 @@
 namespace XenAdmin.Wizards.NewVMWizard
 {
-    partial class Page_CpuMem
+    partial class PageCpuMem
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,7 +28,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Page_CpuMem));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PageCpuMem));
             this.labelVCPUs = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -227,7 +227,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.ErrorPanel);
-            this.Name = "Page_CpuMem";
+            this.Name = "PageCpuMem";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ErrorPanel.ResumeLayout(false);
             this.ErrorPanel.PerformLayout();

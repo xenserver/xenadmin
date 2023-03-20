@@ -826,7 +826,7 @@
     <value>515, 367</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>Page_CpuMem</value>
+    <value>PageCpuMem</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
