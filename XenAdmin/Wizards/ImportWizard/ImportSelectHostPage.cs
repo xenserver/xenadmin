@@ -31,7 +31,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using XenAdmin.Actions.OvfActions;
 using XenAdmin.Core;
@@ -41,7 +40,6 @@ using XenAdmin.Wizards.ImportWizard.Filters;
 using XenAPI;
 using XenOvf;
 using XenOvf.Definitions;
-using static XenAdmin.ServerDBs.Db;
 
 
 namespace XenAdmin.Wizards.ImportWizard
