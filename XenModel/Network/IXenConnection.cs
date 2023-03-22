@@ -85,7 +85,6 @@ namespace XenAdmin.Network
         Session Session { get; }
         event EventHandler<EventArgs> TimeSkewUpdated;
         string UriScheme { get; }
-        string Version { get; set; }
         event EventHandler<EventArgs> XenObjectsUpdated;
         NetworkCredential NetworkCredential { get; set; }
 

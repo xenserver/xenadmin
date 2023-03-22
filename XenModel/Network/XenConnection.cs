@@ -238,8 +238,6 @@ namespace XenAdmin.Network
             }
         }
 
-        public string Version { get; set; }
-
         public string Name
         {
             get
@@ -445,7 +443,7 @@ namespace XenAdmin.Network
                     session.IsElevatedSession = true;
                 try
                 {
-                    session.login_with_password(uname, pwd, !string.IsNullOrEmpty(Version) ? Version : Helper.APIVersionString(API_Version.LATEST), Session.UserAgent);
+                    session.login_with_password(uname, pwd, Helper.APIVersionString(API_Version.LATEST), Session.UserAgent);
                     NetworkCredential = new NetworkCredential(uname, pwd);
                     return session;
                 }
