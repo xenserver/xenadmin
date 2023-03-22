@@ -7270,6 +7270,9 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   <data name="IMPORT_VM_CONFIGURE_STORAGE" xml:space="preserve">
     <value>Configure storage for the new VM</value>
   </data>
+  <data name="IMPORT_VM_CPUS_COUNT_UNTRUSTED_WARNING" xml:space="preserve">
+    <value>The appliance contains {0} VM(s) with more than {1} vCPUs. Only trusted VMs are supported with this configuration.</value>
+  </data>
   <data name="IMPORT_VM_FROM" xml:space="preserve">
     <value>Import VM from...</value>
   </data>

@@ -51,11 +51,14 @@ namespace XenAdmin.Wizards.ImportWizard
         private List<Xen_ConfigurationSettingData_Type> hardwarePlatformSettings = new List<Xen_ConfigurationSettingData_Type>();
         private List<Xen_ConfigurationSettingData_Type> vendorDeviceSettings = new List<Xen_ConfigurationSettingData_Type>();
         private int? _ovfMaxVCpusCount;
+        private readonly List<long> _ovfVCpusCount;
         public event Action<IXenConnection> ConnectionSelectionChanged;
 
         public ImportSelectHostPage()
         {
             InitializeText();
+            ShowWarning(null);
+            _ovfVCpusCount = new List<long>();
         }
 
         #region XenTabPage overrides
@@ -108,15 +111,19 @@ namespace XenAdmin.Wizards.ImportWizard
                     var data = vhs.VirtualSystemOtherConfigurationData;
                     if (data == null)
                         continue;
-                    
+
+                    _ovfVCpusCount.Clear();
                     foreach (var rasdType in vhs.Item)
                     {
                         if (rasdType.ResourceType.Value == 3 &&
-                            int.TryParse(rasdType.VirtualQuantity.Value.ToString(), out var vCpusCount) &&
-                            (_ovfMaxVCpusCount == null || _ovfMaxVCpusCount < vCpusCount)
-                            )
+                            int.TryParse(rasdType.VirtualQuantity.Value.ToString(), out var vCpusCount))
                         {
-                            _ovfMaxVCpusCount = vCpusCount;
+                            _ovfVCpusCount.Add(vCpusCount);
+                            if (_ovfMaxVCpusCount == null || _ovfMaxVCpusCount < vCpusCount)
+                            {
+                                _ovfMaxVCpusCount = vCpusCount;
+                            }
+                            
                         }
                     }
 
@@ -163,11 +170,17 @@ namespace XenAdmin.Wizards.ImportWizard
                         warnings.Add(Messages.IMPORT_VM_WITH_VGPU_WARNING_MANY);
                 }
 
+                var ovfCountsAboveLimit = _ovfVCpusCount.Count(vCpusCount => vCpusCount > VM.MAX_VCPUS_FOR_NON_TRUSTED_VMS);
+                if (ovfCountsAboveLimit > 0)
+                {
+                    warnings.Add(string.Format(Messages.IMPORT_VM_CPUS_COUNT_UNTRUSTED_WARNING, ovfCountsAboveLimit, VM.MAX_VCPUS_FOR_NON_TRUSTED_VMS));
+                }
+
                 if (!CheckDestinationHasEnoughPhysicalCpus(out var warningMessage))
                     warnings.Add(warningMessage);
             }
 
-            ShowWarning(string.Join("\n", warnings));
+            ShowWarning(string.Join("\n\n", warnings));
 
             ConnectionSelectionChanged?.Invoke(SelectedTargetPool?.Connection);
         }

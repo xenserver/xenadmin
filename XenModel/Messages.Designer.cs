@@ -20833,6 +20833,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The appliance contains {0} VM(s) with more than {1} vCPUs. Only trusted VMs are supported with this configuration..
+        /// </summary>
+        public static string IMPORT_VM_CPUS_COUNT_UNTRUSTED_WARNING {
+            get {
+                return ResourceManager.GetString("IMPORT_VM_CPUS_COUNT_UNTRUSTED_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Import VM from....
         /// </summary>
         public static string IMPORT_VM_FROM {

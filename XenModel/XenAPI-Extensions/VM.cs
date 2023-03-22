@@ -59,6 +59,8 @@ namespace XenAPI
         public const long DEFAULT_MEM_MIN_IMG_IMPORT = 256 * Util.BINARY_MEGA;
         public const int DEFAULT_CORES_PER_SOCKET = 1;
         public const long MAX_SOCKETS = 16;  // current hard limit in Xen: CA-198276
+        // CP-41825: > 32 vCPUs is only supported for trusted VMs
+        public const long MAX_VCPUS_FOR_NON_TRUSTED_VMS = 32; 
 
         private XmlDocument xdRecommendations = null;
         public const int MAX_ALLOWED_VTPMS = 1;
