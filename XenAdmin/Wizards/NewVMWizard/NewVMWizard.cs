@@ -131,7 +131,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             }
             #endregion
 
-            page_8_Finish.SummaryRetreiver = GetSummary;
+            page_8_Finish.SummaryRetriever = GetSummary;
 
             AddPages(page_1_Template, page_2_Name, page_3_InstallationMedia, page_4_HomeServer,
                      page_5_CpuMem, page_6_Storage, page_7_Networking, page_8_Finish);
@@ -286,7 +286,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             }
             else if (prevPageType == typeof(Page_CpuMem))
             {
-                page_8_Finish.CanStartImmediately = page_5_CpuMem.CanStartVM;
+                page_8_Finish.CanStartImmediately = page_5_CpuMem.CanStartVm;
             }
         }
 

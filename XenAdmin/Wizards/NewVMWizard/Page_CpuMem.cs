@@ -80,7 +80,7 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         public double SelectedMemoryDynamicMax => _memoryMode == MemoryMode.JustMemory ? spinnerDynMin.Value : spinnerDynMax.Value;
 
-        public bool CanStartVM => _maxVCpus > 0 && SelectedVCpusMax <= _maxVCpus;
+        public bool CanStartVm => _maxVCpus > 0 && SelectedVCpusMax <= _maxVCpus;
 
         public double SelectedMemoryStaticMax =>
             _memoryMode == MemoryMode.JustMemory ? spinnerDynMin.Value :
