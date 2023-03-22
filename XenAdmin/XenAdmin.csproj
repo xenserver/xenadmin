@@ -4064,7 +4064,6 @@
     <Compile Include="Commands\SelectionManager.cs" />
     <Compile Include="Commands\Command.cs">
     </Compile>
-    <Compile Include="Network\AddServerTask.cs" />
     <Compile Include="Plugins\UI\TabPageCredentialsDialog.cs">
       <SubType>Form</SubType>
     </Compile>
