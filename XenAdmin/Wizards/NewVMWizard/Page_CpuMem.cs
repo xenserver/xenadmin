@@ -354,6 +354,11 @@ namespace XenAdmin.Wizards.NewVMWizard
                 ErrorPanel.Visible = true;
                 ErrorLabel.Text = string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN, Helpers.GetName(maxVcpusHost).Ellipsise(50), _maxVCpus);
             }
+            else if (SelectedVCpusMax > VM.MAX_VCPUS_FOR_NON_TRUSTED_VMS)
+            {
+                ErrorPanel.Visible = true;
+                ErrorLabel.Text = string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_VCPUS_TRUSTED_VM_WARN, VM.MAX_VCPUS_FOR_NON_TRUSTED_VMS);
+            }
             else
             {
                 ErrorPanel.Visible = false;

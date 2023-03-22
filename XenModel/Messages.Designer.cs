@@ -26989,6 +26989,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You have selected more than {0} vCPUs for the new VM. This configuration is only supported for trusted VMs..
+        /// </summary>
+        public static string NEWVMWIZARD_CPUMEMPAGE_VCPUS_TRUSTED_VM_WARN {
+            get {
+                return ResourceManager.GetString("NEWVMWIZARD_CPUMEMPAGE_VCPUS_TRUSTED_VM_WARN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The number of vCPUs given to the new VM is greater than the number of physical CPUs on any server in the pool.
         ///You will not be able to start the VM with this configuration..
         /// </summary>

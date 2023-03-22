@@ -9406,6 +9406,9 @@ You will not be able to start this VM without freeing some space on one of the s
   <data name="NEWVMWIZARD_CPUMEMPAGE_VCPUS" xml:space="preserve">
     <value>vCPUs</value>
   </data>
+  <data name="NEWVMWIZARD_CPUMEMPAGE_VCPUS_TRUSTED_VM_WARN" xml:space="preserve">
+    <value>You have selected more than {0} vCPUs for the new VM. This configuration is only supported for trusted VMs.</value>
+  </data>
   <data name="NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN" xml:space="preserve">
     <value>The number of vCPUs given to the new VM is greater than the number of physical CPUs on any server in the pool.
 You will not be able to start the VM with this configuration.</value>
