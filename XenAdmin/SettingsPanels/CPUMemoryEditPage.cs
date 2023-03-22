@@ -31,6 +31,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -527,14 +528,27 @@ namespace XenAdmin.SettingsPanels
         {
             if (vm == null || !comboBoxVCPUs.Enabled)
                 return;
-            Host selectedAffinity = vm.Home();
-            if (selectedAffinity == null && vm.Connection.Cache.Hosts.Length == 1)
-                selectedAffinity = vm.Connection.Cache.Hosts[0];
+            var homeHost = vm.Home();
+            var maxPhysicalCpus = vm.Connection.Cache.Hosts.Select(h => h.host_CPUs.Count).Max();
+            var homeHostPhysicalCpus = homeHost?.host_CPUs.Count;
 
-            if (selectedAffinity != null && comboBoxVCPUs.SelectedItem != null && selectedAffinity.host_CPUs.Count < SelectedVcpusMax)
+
+            if (comboBoxVCPUs.SelectedItem != null && maxPhysicalCpus < SelectedVcpusMax)
             {
-                VCPUWarningLabel.Text = Messages.VM_CPUMEMPAGE_VCPU_WARNING;
-                VCPUWarningLabel.Visible = true;
+                if (homeHostPhysicalCpus != null && homeHostPhysicalCpus < SelectedVcpusMax && maxPhysicalCpus >= SelectedVcpusMax)
+                {
+                    VCPUWarningLabel.Text = Messages.VM_CPUMEMPAGE_VCPU_HOME_HOST_WARNING;
+                    VCPUWarningLabel.Visible = true;
+                }
+                else if (maxPhysicalCpus < SelectedVcpusMax)
+                {
+                    VCPUWarningLabel.Text = Messages.VM_CPUMEMPAGE_VCPU_WARNING;
+                    VCPUWarningLabel.Visible = true;
+                }
+                else
+                {
+                    VCPUWarningLabel.Visible = false;
+                }
             }
             else if (comboBoxVCPUs.SelectedItem != null && SelectedVcpusMax < minVCPUs)
             {
