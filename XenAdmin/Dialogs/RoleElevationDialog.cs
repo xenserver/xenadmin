@@ -62,7 +62,7 @@ namespace XenAdmin.Dialogs
         {
             InitializeComponent();
             UserDetails ud = session.CurrentUserDetails;
-            labelCurrentUserValue.Text = ud.UserDisplayName ?? ud.UserName ?? Messages.UNKNOWN_AD_USER;
+            labelCurrentUserValue.Text = ud?.UserDisplayName ?? ud?.UserName ?? Messages.UNKNOWN_AD_USER;
             labelCurrentRoleValue.Text = Role.FriendlyCSVRoleList(session.Roles);
             authorizedRoles.Sort((r1, r2) => r2.CompareTo(r1));
             labelRequiredRoleValue.Text = Role.FriendlyCSVRoleList(authorizedRoles);

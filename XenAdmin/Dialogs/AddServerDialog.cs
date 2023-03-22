@@ -29,6 +29,7 @@
  */
 
 using System;
+using System.IO;
 using System.Linq;
 using XenAdmin.Core;
 using XenAdmin.Network;
@@ -146,19 +147,12 @@ namespace XenAdmin.Dialogs
                 conn = connection;
 
             foreach (var server in servers)
-            {
-                StringUtility.ParseHostnamePort(server, out var hostname, out var port);
-
-                if (port == 0)
-                    port = ConnectionsManager.DEFAULT_XEN_PORT;
-
-                ConnectToServer(conn, hostname, port, username, password);
-            }
+                ConnectToServer(conn, server, username, password);
 
             Close();
         }
 
-        private void ConnectToServer(IXenConnection conn, string hostname, int port, string username, string password)
+        private void ConnectToServer(IXenConnection conn, string server, string username, string password)
         {
             if (conn == null)
             {
@@ -170,14 +164,27 @@ namespace XenAdmin.Dialogs
                 conn.EndConnect(); // in case we're already connected
             }
 
-            conn.Hostname = hostname;
-            conn.Port = port;
             conn.Username = username;
             conn.Password = password;
             conn.ExpectPasswordIsCorrect = false;
 
-            if (!_changedPass)
+            if (File.Exists(server))
+            {
+                conn.Hostname = server;
+                conn.Port = ConnectionsManager.DEFAULT_XEN_PORT;
+                XenConnectionUI.ConnectToXapiDatabase(conn, this);
+            }
+            else if (!_changedPass)
+            {
+                StringUtility.ParseHostnamePort(server, out var hostname, out var port);
+
+                if (port == 0)
+                    port = ConnectionsManager.DEFAULT_XEN_PORT;
+                
+                conn.Hostname = hostname;
+                conn.Port = port;
                 XenConnectionUI.BeginConnect(conn, true, Owner, false);
+            }
         }
 
         private void conn_CachePopulated(IXenConnection conn)

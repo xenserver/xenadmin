@@ -62,9 +62,7 @@ namespace XenAdmin.Network
         Session DuplicateSession(int timeout);
         void EndConnect(bool resetState = true, bool exiting = false);
         void Interrupt();
-        Session Connect(string user, string password);
         List<string> PoolMembers { get; set; }
-        void LoadCache(Session session);
         bool SuppressErrors { get; set; }
         bool PreventResettingPasswordPrompt { get;set; }
         bool CoordinatorMayChange { get; set; }
@@ -83,7 +81,6 @@ namespace XenAdmin.Network
         void WaitFor(Func<bool> predicate, Func<bool> cancelling);
         TimeSpan ServerTimeOffset { get; set; }
         Session Session { get; }
-        event EventHandler<EventArgs> TimeSkewUpdated;
         string UriScheme { get; }
         event EventHandler<EventArgs> XenObjectsUpdated;
         NetworkCredential NetworkCredential { get; set; }

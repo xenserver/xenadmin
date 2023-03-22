@@ -163,7 +163,7 @@ namespace XenAPI
             //Sort roles from highest to lowest
             roles.Sort((r1, r2) => r2.CompareTo(r1));
             //Take the highest role
-            return roles[0].FriendlyName();
+            return roles.Count > 0 ? roles[0].FriendlyName() : Messages.UNKNOWN_AD_USER;
         }
     }
 }

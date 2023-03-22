@@ -44,6 +44,18 @@ namespace XenAdmin.Network
     {
         public static Dictionary<IXenConnection, ConnectingToServerDialog> connectionDialogs = new Dictionary<IXenConnection, ConnectingToServerDialog>();
 
+        public static void ConnectToXapiDatabase(IXenConnection conn, Form owner)
+        {
+            try
+            {
+                ((XenConnection)conn).LoadFromDatabaseFile(conn.Hostname);
+            }
+            catch (ConnectionExists e)
+            {
+                ShowConnectingDialogError(owner, conn, e);
+            }
+        }
+
         /// <summary>
         /// Start connecting to a server
         /// </summary>
@@ -254,7 +266,7 @@ namespace XenAdmin.Network
 
                 if (!Program.RunInAutomatedTestMode)
                 {
-                    using (var dlg = new InformationDialog(c.GetDialogMessage(connection)))
+                    using (var dlg = new InformationDialog(c.GetDialogMessage()))
                         dlg.ShowDialog(owner);
                 }
             }

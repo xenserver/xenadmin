@@ -532,6 +532,7 @@
     <Compile Include="XenAPI\XenObject.cs" />
     <Compile Include="XenObjectDownloader.cs" />
     <Compile Include="XenAPI\XenRef.cs" />
+    <Compile Include="Db.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="..\Branding\Branding.ja.resx">
