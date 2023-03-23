@@ -792,6 +792,9 @@
   <data name="Label-performance.pool_session_count" xml:space="preserve">
     <value>Number of sessions</value>
   </data>
+  <data name="Label-performance.pool_session_creation_rate" xml:space="preserve">
+    <value>Session creation rate</value>
+  </data>
   <data name="Label-performance.pool_task_count" xml:space="preserve">
     <value>Number of tasks</value>
   </data>
