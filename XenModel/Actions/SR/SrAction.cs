@@ -35,139 +35,80 @@ using XenAPI;
 
 namespace XenAdmin.Actions
 {
-    public enum SrActionKind { SetAsDefault, Detach, Forget, Destroy, UnplugAndDestroyPBDs };
-
-    public class SrAction : AsyncAction
+    public interface ISrAction
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+    }
 
-        private readonly SrActionKind kind;
 
-        public SrAction(SrActionKind kind, SR sr)
-            : base(sr.Connection, GetTitle(kind, sr))
+    public class SetSrAsDefaultAction : AsyncAction, ISrAction
+    {
+        public SetSrAsDefaultAction(SR sr)
+            : base(sr.Connection, string.Format(Messages.ACTION_SR_SETTING_DEFAULT, sr.Name(), Helpers.GetName(sr.Connection)))
         {
-            this.kind = kind;
             SR = sr;
-            Pool pool = Helpers.GetPoolOfOne(sr.Connection);
-            if (pool != null)
-                Pool = pool;
-            Host host = sr.GetStorageHost();
-            if (host != null)
-                Host = host;
-
-            switch (kind)
-            {
-                case SrActionKind.Detach:
-                    ApiMethodsToRoleCheck.Add("PBD.async_unplug");
-                    break;
-                case SrActionKind.Destroy:
-                    ApiMethodsToRoleCheck.Add("SR.async_destroy");
-                    break;
-                case SrActionKind.Forget:
-                    ApiMethodsToRoleCheck.Add("SR.async_forget");
-                    break;
-                case SrActionKind.SetAsDefault:
-                    ApiMethodsToRoleCheck.AddRange(
-                        "pool.set_crash_dump_SR",
-                        "pool.set_default_SR",
-                        "pool.set_suspend_image_SR");
-                    break;
-                case SrActionKind.UnplugAndDestroyPBDs:
-                    ApiMethodsToRoleCheck.AddRange("PBD.async_unplug", "SR.async_destroy");
-                break;
-            }
-        }
-
-        private static string GetTitle(SrActionKind kind, SR sr)
-        {
-            switch (kind)
-            {
-                case SrActionKind.SetAsDefault:
-                    return string.Format(Messages.ACTION_SR_SETTING_DEFAULT,
-                        sr.Name(), Helpers.GetName(sr.Connection));
-
-                case SrActionKind.Detach:
-                case SrActionKind.UnplugAndDestroyPBDs:
-                    return string.Format(Messages.ACTION_SR_DETACHING,
-                        sr.Name(), Helpers.GetName(sr.Connection));
-
-                case SrActionKind.Destroy:
-                    return string.Format(Messages.ACTION_SR_DESTROYING,
-                        sr.Name(), Helpers.GetName(sr.Connection));
-
-                case SrActionKind.Forget:
-                    return string.Format(Messages.ACTION_SR_FORGETTING,
-                        sr.Name(), Helpers.GetName(sr.Connection));
-            }
-
-            return "";
+            Host = sr.GetStorageHost();
+            ApiMethodsToRoleCheck.AddRange(
+                "pool.set_crash_dump_SR",
+                "pool.set_default_SR",
+                "pool.set_suspend_image_SR");
         }
 
         protected override void Run()
         {
-            log.DebugFormat("Running SrActionKind.{0}", kind.ToString());
+            XenRef<SR> srRef = new XenRef<SR>(SR);
+            Pool = Helpers.GetPoolOfOne(Connection);
 
-            int inc = SR.PBDs.Count > 0 ? 100 / (SR.PBDs.Count * 2) : 0;
-
-            switch (kind)
+            if (Pool != null)
             {
-                case SrActionKind.Detach:
-                    UnplugPBDs(ref inc);
-                    Description = string.Format(Messages.ACTION_SR_DETACH_SUCCESSFUL, SR.NameWithoutHost());
-                    break;
+                Description = string.Format(Messages.ACTION_SR_SETTING_DEFAULT, SR, Pool);
+                Pool poolCopy = (Pool)Pool.Clone();
+                poolCopy.crash_dump_SR = srRef;
+                poolCopy.default_SR = srRef;
+                poolCopy.suspend_image_SR = srRef;
 
-                case SrActionKind.Destroy:
-                    RelatedTask = SR.async_destroy(Session, SR.opaque_ref);
-                    PollToCompletion(50, 100);
-                    Description = Messages.ACTION_SR_DESTROY_SUCCESSFUL;
-                    break;
-
-                case SrActionKind.Forget:
-                    Description = string.Format(Messages.FORGETTING_SR_0, SR.NameWithoutHost());
-                    if (!SR.allowed_operations.Contains(storage_operations.forget))
-                    {
-                        Description = Messages.ERROR_DIALOG_FORGET_SR_TITLE;
-                        break;
-                    }
-                        
-                    RelatedTask = SR.async_forget(Session, SR.opaque_ref);
-                    PollToCompletion();
-                    Description = string.Format(Messages.SR_FORGOTTEN_0, SR.NameWithoutHost());
-                    break;
-
-                case SrActionKind.SetAsDefault:
-                    XenRef<SR> srRef = new XenRef<SR>(SR);
-                    Pool = Helpers.GetPoolOfOne(Connection);
-
-                    if (Pool != null)
-                    {
-                        Description = string.Format(Messages.ACTION_SR_SETTING_DEFAULT, SR, Pool);
-                        Pool poolCopy = (Pool)Pool.Clone();
-                        poolCopy.crash_dump_SR = srRef;
-                        poolCopy.default_SR = srRef;
-                        poolCopy.suspend_image_SR = srRef;
-
-                        try
-                        {
-                            Pool.Locked = true;
-                            poolCopy.SaveChanges(Session);
-                        }
-                        finally
-                        {
-                            Pool.Locked = false;
-                        }
-                    }
-
-                    Description = Messages.ACTION_SR_SET_DEFAULT_SUCCESSFUL;
-                    break;
-
-                case SrActionKind.UnplugAndDestroyPBDs:
-                    UnplugPBDs(ref inc);
-                    DestroyPBDs(ref inc);
-                    Description = string.Format(Messages.ACTION_SR_DETACH_SUCCESSFUL, SR.NameWithoutHost());
-                    break;
-
+                try
+                {
+                    Pool.Locked = true;
+                    poolCopy.SaveChanges(Session);
+                }
+                finally
+                {
+                    Pool.Locked = false;
+                }
             }
+
+            Description = Messages.ACTION_SR_SET_DEFAULT_SUCCESSFUL;
+        }
+    }
+
+ 
+    public class DetachSrAction : AsyncAction, ISrAction
+    {
+        private readonly bool _destroyPbds;
+
+        public DetachSrAction(SR sr, bool destroyPbds = false)
+            : base(sr.Connection, string.Format(Messages.ACTION_SR_DETACHING, sr.Name(), Helpers.GetName(sr.Connection)))
+        {
+            _destroyPbds = destroyPbds;
+
+            SR = sr;
+            Host = sr.GetStorageHost();
+            
+            ApiMethodsToRoleCheck.Add("PBD.async_unplug");
+            if (_destroyPbds)
+                ApiMethodsToRoleCheck.Add("PBD.async_destroy");
+        }
+
+        protected override void Run()
+        {
+            int inc = SR.PBDs.Count > 0 ? 100 / (SR.PBDs.Count * 2) : 0;
+            
+            UnplugPBDs(ref inc);
+
+            if (_destroyPbds)
+                DestroyPBDs(ref inc);
+
+            Description = string.Format(Messages.ACTION_SR_DETACH_SUCCESSFUL, SR.NameWithoutHost());
         }
 
         private void UnplugPBDs(ref int inc)
@@ -222,6 +163,51 @@ namespace XenAdmin.Actions
                 RelatedTask = PBD.async_destroy(Session, pbd.opaque_ref);
                 PollToCompletion(PercentComplete, PercentComplete + inc);
             }
+        }
+    }
+
+
+    public class ForgetSrAction : AsyncAction, ISrAction
+    {
+        public ForgetSrAction(SR sr)
+            : base(sr.Connection, string.Format(Messages.ACTION_SR_FORGETTING, sr.Name(), Helpers.GetName(sr.Connection)))
+        {
+            SR = sr;
+            Host = sr.GetStorageHost();
+            ApiMethodsToRoleCheck.Add("SR.async_forget");
+        }
+
+        protected override void Run()
+        {
+            Description = string.Format(Messages.FORGETTING_SR_0, SR.NameWithoutHost());
+            if (!SR.allowed_operations.Contains(storage_operations.forget))
+            {
+                Description = Messages.ERROR_DIALOG_FORGET_SR_TITLE;
+                return;
+            }
+
+            RelatedTask = SR.async_forget(Session, SR.opaque_ref);
+            PollToCompletion();
+            Description = string.Format(Messages.SR_FORGOTTEN_0, SR.NameWithoutHost());
+        }
+    }
+
+
+    public class DestroySrAction : AsyncAction, ISrAction
+    {
+        public DestroySrAction(SR sr)
+            : base(sr.Connection, string.Format(Messages.ACTION_SR_DESTROYING, sr.Name(), Helpers.GetName(sr.Connection)))
+        {
+            SR = sr;
+            Host = sr.GetStorageHost();
+            ApiMethodsToRoleCheck.Add("SR.async_destroy");
+        }
+
+        protected override void Run()
+        {
+            RelatedTask = SR.async_destroy(Session, SR.opaque_ref);
+            PollToCompletion(50, 100);
+            Description = Messages.ACTION_SR_DESTROY_SUCCESSFUL;
         }
     }
 }

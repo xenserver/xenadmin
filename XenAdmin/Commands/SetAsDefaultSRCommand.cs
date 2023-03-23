@@ -62,7 +62,7 @@ namespace XenAdmin.Commands
 
         protected override void RunCore(SelectedItemCollection selection)
         {
-            new SrAction(SrActionKind.SetAsDefault, (SR)selection[0].XenObject).RunAsync();
+            new SetSrAsDefaultAction((SR)selection[0].XenObject).RunAsync();
         }
 
         protected override bool CanRunCore(SelectedItemCollection selection)

@@ -71,7 +71,7 @@ namespace XenAdmin.Commands
             List<AsyncAction> actions = new List<AsyncAction>();
             foreach (SR sr in selection.AsXenObjects<SR>(CanRun))
             {
-                actions.Add(new SrAction(SrActionKind.Destroy, sr));
+                actions.Add(new DestroySrAction(sr));
             }
             RunMultipleActions(actions, Messages.ACTION_SRS_DESTROYING, string.Empty, string.Empty, true);
         }

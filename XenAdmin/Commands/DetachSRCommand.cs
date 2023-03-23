@@ -65,7 +65,7 @@ namespace XenAdmin.Commands
             List<AsyncAction> actions = new List<AsyncAction>();
             foreach (SR sr in selection.AsXenObjects<SR>(CanRun))
             {
-                actions.Add(new SrAction(SrActionKind.Detach, sr));
+                actions.Add(new DetachSrAction(sr));
             }
             RunMultipleActions(actions, Messages.ACTION_SRS_DETACHING, Messages.ACTION_SRS_DETACHING, Messages.ACTION_SRS_DETACH_SUCCESSFUL, true);
         }

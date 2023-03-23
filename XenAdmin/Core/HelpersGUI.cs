@@ -321,7 +321,7 @@ namespace XenAdmin.Core
             {
                 if (!a.IsCompleted)
                 {
-                    if (a is SrAction && a.SR.opaque_ref == sr.opaque_ref)
+                    if (a is ISrAction && a.SR.opaque_ref == sr.opaque_ref)
                         return true;
 
                     if (a is EnableHAAction haAction && haAction.HeartbeatSRs.Contains(sr))

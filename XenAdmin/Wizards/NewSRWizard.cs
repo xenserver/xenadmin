@@ -475,7 +475,7 @@ namespace XenAdmin.Wizards
             if (!FinalAction.Succeeded && FinalAction is SrReattachAction && _srToReattach.HasPBDs())
             {
                 // reattach failed. Ensure PBDs are now unplugged and destroyed.
-                using (var dialog = new ActionProgressDialog(new SrAction(SrActionKind.UnplugAndDestroyPBDs, _srToReattach), progressBarStyle))
+                using (var dialog = new ActionProgressDialog(new DetachSrAction(_srToReattach, true), progressBarStyle))
                 {
                     dialog.ShowCancel = false;
                     dialog.ShowDialog();

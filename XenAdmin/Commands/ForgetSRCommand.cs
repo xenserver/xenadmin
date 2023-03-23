@@ -65,7 +65,7 @@ namespace XenAdmin.Commands
             List<AsyncAction> actions = new List<AsyncAction>();
             foreach (SR sr in selection.AsXenObjects<SR>(CanRun))
             {
-                actions.Add(new SrAction(SrActionKind.Forget, sr));
+                actions.Add(new ForgetSrAction(sr));
             }
             RunMultipleActions(actions, Messages.ACTION_SRS_FORGETTING, Messages.FORGETTING_SRS, Messages.SRS_FORGOTTEN, true);
         }

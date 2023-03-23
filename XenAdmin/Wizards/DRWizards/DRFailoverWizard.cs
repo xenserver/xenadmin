@@ -258,7 +258,7 @@ namespace XenAdmin.Wizards.DRWizards
             List<AsyncAction> actions = new List<AsyncAction>();
             foreach (SR sr in srs)
             {
-                actions.Add(new SrAction(SrActionKind.Forget, sr));
+                actions.Add(new ForgetSrAction(sr));
             }
 
             if (actions.Count == 0)
