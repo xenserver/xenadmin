@@ -555,6 +555,11 @@ namespace XenAdmin.SettingsPanels
                 VCPUWarningLabel.Text = string.Format(Messages.VM_CPUMEMPAGE_VCPU_MIN_WARNING, minVCPUs);
                 VCPUWarningLabel.Visible = true;
             }
+            else if (comboBoxVCPUs.SelectedItem != null && SelectedVcpusMax > VM.MAX_VCPUS_FOR_NON_TRUSTED_VMS)
+            {
+                VCPUWarningLabel.Text = string.Format(Messages.VM_CPUMEMPAGE_VCPU_TRUSTED_WARNING, VM.MAX_VCPUS_FOR_NON_TRUSTED_VMS);
+                VCPUWarningLabel.Visible = true;
+            }
             else
             {
                 VCPUWarningLabel.Visible = false;

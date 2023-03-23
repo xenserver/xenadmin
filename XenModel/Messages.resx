@@ -13593,6 +13593,9 @@ To optimize VM performance, you should reduce the number of VCPUs to less than o
   <data name="VM_CPUMEMPAGE_VCPU_MIN_WARNING" xml:space="preserve">
     <value>It is recommended to allocate at least {0} vCPUs for this VM</value>
   </data>
+  <data name="VM_CPUMEMPAGE_VCPU_TRUSTED_WARNING" xml:space="preserve">
+    <value>You have selected more than {0} vCPUs for the new VM. This configuration is only supported for trusted VMs.</value>
+  </data>
   <data name="VM_CPUMEMPAGE_VCPU_WARNING" xml:space="preserve">
     <value>There are no hosts with enough physical CPUs to start the VM</value>
   </data>
