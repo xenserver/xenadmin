@@ -101,16 +101,7 @@ namespace XenAdmin.TabPages
 
         private void SetupDeprecationBanner()
         {
-            if (sr != null && SR.IsIslOrIslLegacy(sr))
-            {
-                Banner.AppliesToVersion = BrandManager.ProductVersion65;
-                Banner.BannerType = DeprecationBanner.Type.Removal;
-                Banner.FeatureName = Messages.ISL_SR;
-                Banner.LinkUri = new Uri(InvisibleMessages.ISL_DEPRECATION_URL);
-                Banner.Visible = !HiddenFeatures.LinkLabelHidden;
-            }
-            else
-                Banner.Visible = false;
+            Banner.Visible = false;
         }
 
         public SR SR

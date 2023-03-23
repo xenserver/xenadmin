@@ -21816,15 +21816,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to StorageLink technology.
-        /// </summary>
-        public static string ISL_SR {
-            get {
-                return ResourceManager.GetString("ISL_SR", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Loaded ISO &apos;{0}&apos; into the DVD Drive on VM {1}.
         /// </summary>
         public static string ISO_LOADED {
@@ -26263,168 +26254,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select the storage system adapter.
-        /// </summary>
-        public static string NEWSR_CSLG_ADAPTER_PAGE_TITLE {
-            get {
-                return ResourceManager.GetString("NEWSR_CSLG_ADAPTER_PAGE_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Auto.
-        /// </summary>
-        public static string NEWSR_CSLG_AUTO {
-            get {
-                return ResourceManager.GetString("NEWSR_CSLG_AUTO", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to StorageLink technology is used to connect to any of the leading storage architectures and protocols, including DAS, NAS, SAN, iSCSI and Fibre Channel..
-        /// </summary>
-        public static string NEWSR_CSLG_BLURB {
-            get {
-                return ResourceManager.GetString("NEWSR_CSLG_BLURB", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Deduplication.
-        /// </summary>
-        public static string NEWSR_CSLG_DEDUPLICATION {
-            get {
-                return ResourceManager.GetString("NEWSR_CSLG_DEDUPLICATION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Default.
-        /// </summary>
-        public static string NEWSR_CSLG_DEFAULT_PROVISIONING {
-            get {
-                return ResourceManager.GetString("NEWSR_CSLG_DEFAULT_PROVISIONING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Fibre Channel.
-        /// </summary>
-        public static string NEWSR_CSLG_FC {
-            get {
-                return ResourceManager.GetString("NEWSR_CSLG_FC", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to iSCSI.
-        /// </summary>
-        public static string NEWSR_CSLG_ISCSI {
-            get {
-                return ResourceManager.GetString("NEWSR_CSLG_ISCSI", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to None.
-        /// </summary>
-        public static string NEWSR_CSLG_NONE {
-            get {
-                return ResourceManager.GetString("NEWSR_CSLG_NONE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Select the storage system for your storage repository.
-        /// </summary>
-        public static string NEWSR_CSLG_PAGE_TITLE {
-            get {
-                return ResourceManager.GetString("NEWSR_CSLG_PAGE_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Select the storage repository settings for use with the provisioning of new storage volumes.
-        /// </summary>
-        public static string NEWSR_CSLG_SETTINGS_PAGE_TITLE {
-            get {
-                return ResourceManager.GetString("NEWSR_CSLG_SETTINGS_PAGE_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Thick.
-        /// </summary>
-        public static string NEWSR_CSLG_THICK_PROVISIONING {
-            get {
-                return ResourceManager.GetString("NEWSR_CSLG_THICK_PROVISIONING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Thin.
-        /// </summary>
-        public static string NEWSR_CSLG_THIN_PROVISIONING {
-            get {
-                return ResourceManager.GetString("NEWSR_CSLG_THIN_PROVISIONING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to StorageLink technology.
-        /// </summary>
-        public static string NEWSR_CSLG_TYPE_NAME {
-            get {
-                return ResourceManager.GetString("NEWSR_CSLG_TYPE_NAME", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Dell EqualLogic is a scalable form of high performance network attached storage, which supports the addition of capacity without downtime. You can use Dell EqualLogic shared storage to support {0} features such as Live Migration and High Availability..
-        /// </summary>
-        public static string NEWSR_EQUAL_LOGIC_BLURB {
-            get {
-                return ResourceManager.GetString("NEWSR_EQUAL_LOGIC_BLURB", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Dell EqualLogic SR [{0} ({1})].
-        /// </summary>
-        public static string NEWSR_EQUAL_LOGIC_DESCRIPTION {
-            get {
-                return ResourceManager.GetString("NEWSR_EQUAL_LOGIC_DESCRIPTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Dell EqualLogic filer &amp;address:.
-        /// </summary>
-        public static string NEWSR_EQUAL_LOGIC_FILER_ADDRESS {
-            get {
-                return ResourceManager.GetString("NEWSR_EQUAL_LOGIC_FILER_ADDRESS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to EqualLogic Filer Details.
-        /// </summary>
-        public static string NEWSR_EQUAL_LOGIC_FILER_DETAILS_TEXT {
-            get {
-                return ResourceManager.GetString("NEWSR_EQUAL_LOGIC_FILER_DETAILS_TEXT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enter the Dell EqualLogic filer details.
-        /// </summary>
-        public static string NEWSR_EQUAL_LOGIC_FILER_PAGE_TITLE {
-            get {
-                return ResourceManager.GetString("NEWSR_EQUAL_LOGIC_FILER_PAGE_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Software FCoE virtual disk storage.
         /// </summary>
         public static string NEWSR_FCOE_DEFAULT_NAME {
@@ -26712,64 +26541,6 @@ namespace XenAdmin {
         public static string NEWSR_NAMEPAGE_TITLE {
             get {
                 return ResourceManager.GetString("NEWSR_NAMEPAGE_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to If you have access to a Network Appliance (NetApp) filer with sufficient disk space, running a version of Data ONTAP 7G (version 7.2 or greater), you can configure a custom NetApp Storage Repository. 
-        ///
-        ///The driver uses the XAPI interface to the filer to create a group of FlexVols which correspond to an SR. VDIs are created as virtual LUNs on the filer, and attached to the host using an iSCSI data path. 
-        ///
-        ///VM cloning uses the snapshot and clone capabilities of the filer to provide high performance and to e [rest of string was truncated]&quot;;.
-        /// </summary>
-        public static string NEWSR_NETAPP_BLURB {
-            get {
-                return ResourceManager.GetString("NEWSR_NETAPP_BLURB", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to This aggregate does not support FAS deduplication.
-        /// </summary>
-        public static string NEWSR_NETAPP_DEDUP_UNAVAILABLE {
-            get {
-                return ResourceManager.GetString("NEWSR_NETAPP_DEDUP_UNAVAILABLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to NetApp SR [{0} ({1})].
-        /// </summary>
-        public static string NEWSR_NETAPP_DESCRIPTION {
-            get {
-                return ResourceManager.GetString("NEWSR_NETAPP_DESCRIPTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to NetApp filer &amp;address:.
-        /// </summary>
-        public static string NEWSR_NETAPP_FILER_ADDRESS {
-            get {
-                return ResourceManager.GetString("NEWSR_NETAPP_FILER_ADDRESS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to NetApp Filer Details.
-        /// </summary>
-        public static string NEWSR_NETAPP_FILER_DETAILS_TEXT {
-            get {
-                return ResourceManager.GetString("NEWSR_NETAPP_FILER_DETAILS_TEXT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enter the NetApp filer details.
-        /// </summary>
-        public static string NEWSR_NETAPP_FILER_PAGE_TITLE {
-            get {
-                return ResourceManager.GetString("NEWSR_NETAPP_FILER_PAGE_TITLE", resourceCulture);
             }
         }
         
@@ -33575,15 +33346,6 @@ namespace XenAdmin {
         public static string SCAN_IN_PROGRESS_TOOLTIP {
             get {
                 return ResourceManager.GetString("SCAN_IN_PROGRESS_TOOLTIP", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Scanning adapters.
-        /// </summary>
-        public static string SCANNING_ADAPTERS {
-            get {
-                return ResourceManager.GetString("SCANNING_ADAPTERS", resourceCulture);
             }
         }
         

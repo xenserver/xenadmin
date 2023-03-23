@@ -124,15 +124,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://support.citrix.com/article/CTX141433.
-        /// </summary>
-        public static string ISL_DEPRECATION_URL {
-            get {
-                return ResourceManager.GetString("ISL_DEPRECATION_URL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to https://store.citrix.com/dr_product/citrix-hypervisor-subscription.
         /// </summary>
         public static string LICENSE_EXPIRY_WEBPAGE {

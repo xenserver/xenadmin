@@ -36,7 +36,6 @@
             this.deprecationBanner = new XenAdmin.Controls.DeprecationBanner();
             this.selectedStoreTypeLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.radioButtonCslg = new System.Windows.Forms.RadioButton();
             this.labelISOlibrary = new System.Windows.Forms.Label();
             this.radioButtonCifsIso = new System.Windows.Forms.RadioButton();
             this.radioButtonNfsIso = new System.Windows.Forms.RadioButton();
@@ -83,6 +82,7 @@
             // deprecationBanner
             // 
             resources.ApplyResources(this.deprecationBanner, "deprecationBanner");
+            this.deprecationBanner.BackColor = System.Drawing.Color.LemonChiffon;
             this.deprecationBanner.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.deprecationBanner.Name = "deprecationBanner";
             // 
@@ -94,10 +94,9 @@
             // tableLayoutPanel3
             // 
             resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
-            this.tableLayoutPanel3.Controls.Add(this.radioButtonCslg, 1, 8);
-            this.tableLayoutPanel3.Controls.Add(this.labelISOlibrary, 0, 9);
-            this.tableLayoutPanel3.Controls.Add(this.radioButtonCifsIso, 1, 10);
-            this.tableLayoutPanel3.Controls.Add(this.radioButtonNfsIso, 1, 11);
+            this.tableLayoutPanel3.Controls.Add(this.labelISOlibrary, 0, 8);
+            this.tableLayoutPanel3.Controls.Add(this.radioButtonCifsIso, 1, 9);
+            this.tableLayoutPanel3.Controls.Add(this.radioButtonNfsIso, 1, 10);
             this.tableLayoutPanel3.Controls.Add(this.radioButtonIscsi, 1, 2);
             this.tableLayoutPanel3.Controls.Add(this.radioButtonFibreChannel, 1, 3);
             this.tableLayoutPanel3.Controls.Add(this.radioButtonFcoe, 1, 4);
@@ -107,15 +106,6 @@
             this.tableLayoutPanel3.Controls.Add(this.labelFileBasedStorage, 1, 5);
             this.tableLayoutPanel3.Controls.Add(this.labelBlockBasedStorage, 1, 1);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            // 
-            // radioButtonCslg
-            // 
-            resources.ApplyResources(this.radioButtonCslg, "radioButtonCslg");
-            this.radioButtonCslg.BackColor = System.Drawing.Color.Transparent;
-            this.radioButtonCslg.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.radioButtonCslg.Name = "radioButtonCslg";
-            this.radioButtonCslg.UseVisualStyleBackColor = false;
-            this.radioButtonCslg.CheckedChanged += new System.EventHandler(this.RadioButton_CheckedChanged);
             // 
             // labelISOlibrary
             // 
@@ -228,7 +218,6 @@
         private System.Windows.Forms.RadioButton radioButtonNfsIso;
         private System.Windows.Forms.RadioButton radioButtonCifsIso;
         private System.Windows.Forms.RadioButton radioButtonFibreChannel;
-        private System.Windows.Forms.RadioButton radioButtonCslg;
         private XenAdmin.Controls.UpsellPage upsellPage1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
