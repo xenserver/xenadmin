@@ -2086,6 +2086,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Session creation rate.
+        /// </summary>
+        public static string Label_performance_pool_session_creation_rate {
+            get {
+                return ResourceManager.GetString("Label-performance.pool_session_creation_rate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Number of tasks.
         /// </summary>
         public static string Label_performance_pool_task_count {
