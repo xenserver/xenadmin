@@ -147,9 +147,6 @@
   <data name="PRODUCT_VERSION_5_6" xml:space="preserve">
     <value>XenServer 5.6</value>
   </data>
-  <data name="PRODUCT_VERSION_6_5" xml:space="preserve">
-    <value>XenServer 6.5</value>
-  </data>
   <data name="PRODUCT_VERSION_7_0" xml:space="preserve">
     <value>XenServer 7.0</value>
   </data>

@@ -7599,9 +7599,6 @@ SR UUID: {1}</value>
   <data name="ISCSI_SHOULD_NO_BE_CREATED" xml:space="preserve">
     <value>SHOULD NEVER BE CREATED</value>
   </data>
-  <data name="ISL_SR" xml:space="preserve">
-    <value>StorageLink technology</value>
-  </data>
   <data name="ISO_LOADED" xml:space="preserve">
     <value>Loaded ISO '{0}' into the DVD Drive on VM {1}</value>
   </data>
@@ -9148,60 +9145,6 @@ When you configure a SMB storage repository, you simply provide the host name or
   <data name="NEWSR_CIFS_TYPE_NAME" xml:space="preserve">
     <value>SMB</value>
   </data>
-  <data name="NEWSR_CSLG_ADAPTER_PAGE_TITLE" xml:space="preserve">
-    <value>Select the storage system adapter</value>
-  </data>
-  <data name="NEWSR_CSLG_AUTO" xml:space="preserve">
-    <value>Auto</value>
-  </data>
-  <data name="NEWSR_CSLG_BLURB" xml:space="preserve">
-    <value>StorageLink technology is used to connect to any of the leading storage architectures and protocols, including DAS, NAS, SAN, iSCSI and Fibre Channel.</value>
-  </data>
-  <data name="NEWSR_CSLG_DEDUPLICATION" xml:space="preserve">
-    <value>Deduplication</value>
-  </data>
-  <data name="NEWSR_CSLG_DEFAULT_PROVISIONING" xml:space="preserve">
-    <value>Default</value>
-  </data>
-  <data name="NEWSR_CSLG_FC" xml:space="preserve">
-    <value>Fibre Channel</value>
-  </data>
-  <data name="NEWSR_CSLG_ISCSI" xml:space="preserve">
-    <value>iSCSI</value>
-  </data>
-  <data name="NEWSR_CSLG_NONE" xml:space="preserve">
-    <value>None</value>
-  </data>
-  <data name="NEWSR_CSLG_PAGE_TITLE" xml:space="preserve">
-    <value>Select the storage system for your storage repository</value>
-  </data>
-  <data name="NEWSR_CSLG_SETTINGS_PAGE_TITLE" xml:space="preserve">
-    <value>Select the storage repository settings for use with the provisioning of new storage volumes</value>
-  </data>
-  <data name="NEWSR_CSLG_THICK_PROVISIONING" xml:space="preserve">
-    <value>Thick</value>
-  </data>
-  <data name="NEWSR_CSLG_THIN_PROVISIONING" xml:space="preserve">
-    <value>Thin</value>
-  </data>
-  <data name="NEWSR_CSLG_TYPE_NAME" xml:space="preserve">
-    <value>StorageLink technology</value>
-  </data>
-  <data name="NEWSR_EQUAL_LOGIC_BLURB" xml:space="preserve">
-    <value>Dell EqualLogic is a scalable form of high performance network attached storage, which supports the addition of capacity without downtime. You can use Dell EqualLogic shared storage to support {0} features such as Live Migration and High Availability.</value>
-  </data>
-  <data name="NEWSR_EQUAL_LOGIC_DESCRIPTION" xml:space="preserve">
-    <value>Dell EqualLogic SR [{0} ({1})]</value>
-  </data>
-  <data name="NEWSR_EQUAL_LOGIC_FILER_ADDRESS" xml:space="preserve">
-    <value>Dell EqualLogic filer &amp;address:</value>
-  </data>
-  <data name="NEWSR_EQUAL_LOGIC_FILER_DETAILS_TEXT" xml:space="preserve">
-    <value>EqualLogic Filer Details</value>
-  </data>
-  <data name="NEWSR_EQUAL_LOGIC_FILER_PAGE_TITLE" xml:space="preserve">
-    <value>Enter the Dell EqualLogic filer details</value>
-  </data>
   <data name="NEWSR_FCOE_DEFAULT_NAME" xml:space="preserve">
     <value>Software FCoE virtual disk storage</value>
   </data>
@@ -9306,28 +9249,6 @@ Do you want to reattach the SR?</value>
   </data>
   <data name="NEWSR_NAMEPAGE_TITLE" xml:space="preserve">
     <value>What do you want to call this Storage Repository?</value>
-  </data>
-  <data name="NEWSR_NETAPP_BLURB" xml:space="preserve">
-    <value>If you have access to a Network Appliance (NetApp) filer with sufficient disk space, running a version of Data ONTAP 7G (version 7.2 or greater), you can configure a custom NetApp Storage Repository. 
-
-The driver uses the XAPI interface to the filer to create a group of FlexVols which correspond to an SR. VDIs are created as virtual LUNs on the filer, and attached to the host using an iSCSI data path. 
-
-VM cloning uses the snapshot and clone capabilities of the filer to provide high performance and to ensure compatibility with existing ONTAP filer management tools.</value>
-  </data>
-  <data name="NEWSR_NETAPP_DEDUP_UNAVAILABLE" xml:space="preserve">
-    <value>This aggregate does not support FAS deduplication</value>
-  </data>
-  <data name="NEWSR_NETAPP_DESCRIPTION" xml:space="preserve">
-    <value>NetApp SR [{0} ({1})]</value>
-  </data>
-  <data name="NEWSR_NETAPP_FILER_ADDRESS" xml:space="preserve">
-    <value>NetApp filer &amp;address:</value>
-  </data>
-  <data name="NEWSR_NETAPP_FILER_DETAILS_TEXT" xml:space="preserve">
-    <value>NetApp Filer Details</value>
-  </data>
-  <data name="NEWSR_NETAPP_FILER_PAGE_TITLE" xml:space="preserve">
-    <value>Enter the NetApp filer details</value>
   </data>
   <data name="NEWSR_NFS_ISO_BLURB" xml:space="preserve">
     <value>Select this option if you have a library of VM installation ISO images available as a NFS share that you want to attach to your host or pool.</value>
@@ -11653,9 +11574,6 @@ The coordinator must be upgraded first, so if you skip the coordinator, the roll
   </data>
   <data name="SCAN_IN_PROGRESS_TOOLTIP" xml:space="preserve">
     <value>This SR already has a scan in progress</value>
-  </data>
-  <data name="SCANNING_ADAPTERS" xml:space="preserve">
-    <value>Scanning adapters</value>
   </data>
   <data name="SCANNING_VMS" xml:space="preserve">
     <value>Scanning VMs...</value>

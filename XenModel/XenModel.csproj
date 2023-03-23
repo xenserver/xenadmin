@@ -127,7 +127,6 @@
     <Compile Include="Actions\Pool_Patch\UploadPatchAction.cs" />
     <Compile Include="Actions\ProduceConsumerQueue.cs" />
     <Compile Include="Actions\SR\SrTrimAction.cs" />
-    <Compile Include="Actions\StorageLink\SrCslgAdaptersScanAction.cs" />
     <Compile Include="Actions\Updates\DownloadAndUnzipXenServerPatchAction.cs" />
     <Compile Include="Actions\Updates\DownloadAndUpdateClientAction.cs" />
     <Compile Include="Actions\Updates\DownloadUpdatesXmlAction.cs" />
@@ -246,7 +245,6 @@
     <Compile Include="ServerDBs\SimulatorWebStream.cs" />
     <Compile Include="ServerDBs\StatusReportXmlDocReader.cs" />
     <Compile Include="ServerDBs\TypeCache.cs" />
-    <Compile Include="StorageLinkAPI\StorageLinkAdapterBoston.cs" />
     <Compile Include="Tags.cs" />
     <Compile Include="WLB\RetrieveWlbConfigurationAction.cs" />
     <Compile Include="WLB\WlbHostEvacuationRecommendation.cs" />
@@ -299,10 +297,7 @@
     <Compile Include="Actions\SR\SrRefreshAction.cs" />
     <Compile Include="Actions\SR\SrRepairAction.cs" />
     <Compile Include="Actions\SR\SrScanAction.cs" />
-    <Compile Include="Actions\StorageLink\SrCreateAction.cs" />
-    <Compile Include="Actions\StorageLink\SrCslgScanAction.cs" />
-    <Compile Include="Actions\StorageLink\SrCslgStoragePoolScanAction.cs" />
-    <Compile Include="Actions\StorageLink\SrCslgStorageSystemScanAction.cs" />
+    <Compile Include="Actions\SR\SrCreateAction.cs" />
     <Compile Include="Actions\VDI\DestroyDiskAction.cs" />
     <Compile Include="Actions\VDI\DetachVirtualDiskAction.cs" />
     <Compile Include="Actions\VDI\MoveVirtualDiskAction.cs" />
@@ -471,9 +466,6 @@
     <Compile Include="Utils\PrettyTimeSpan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RbacMethod.cs" />
-    <Compile Include="StorageLinkAPI\CowleyLegacy\StorageLinkCredentials.cs" />
-    <Compile Include="StorageLinkAPI\CowleyLegacy\StorageLinkEnums.cs" />
-    <Compile Include="StorageLinkAPI\CowleyLegacy\StorageLinkPool.cs" />
     <Compile Include="Utils\Util.cs" />
     <Compile Include="XenAPI-Extensions\Auth.cs" />
     <Compile Include="XenAPI-Extensions\BadServerResponse.cs" />

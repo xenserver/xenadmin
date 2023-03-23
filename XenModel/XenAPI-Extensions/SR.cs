@@ -48,8 +48,8 @@ namespace XenAPI
         /// </summary>
         public enum SRTypes
         {
-            local, ext, lvmoiscsi, iso, nfs, lvm, netapp, udev, lvmofc,
-            lvmohba, egenera, egeneracd, dummy, unknown, equal, cslg, shm,
+            local, ext, lvmoiscsi, iso, nfs, lvm, udev, lvmofc,
+            lvmohba, egenera, egeneracd, dummy, unknown, shm,
             iscsi,
             ebs, rawhba,
             smb, lvmofcoe, gfs2,
@@ -245,10 +245,7 @@ namespace XenAPI
             return type == SRTypes.iso
                 || type == SRTypes.lvmoiscsi
                 || type == SRTypes.nfs
-                || type == SRTypes.equal
-                || type == SRTypes.netapp
                 || type == SRTypes.lvmohba
-                || type == SRTypes.cslg
                 || type == SRTypes.smb
                 || type == SRTypes.lvmofcoe
                 || type == SRTypes.gfs2;
@@ -877,32 +874,35 @@ namespace XenAPI
 
         public string Target()
         {
-            SR sr = Connection.Resolve(new XenRef<SR>(this.opaque_ref));
+            SR sr = Connection.Resolve(new XenRef<SR>(opaque_ref));
             if (sr == null)
-                return String.Empty;
+                return string.Empty;
 
             foreach (PBD pbd in sr.Connection.ResolveAll(sr.PBDs))
             {
-                SRTypes type = sr.GetSRType(false);
-                if ((type == SR.SRTypes.netapp || type == SR.SRTypes.lvmoiscsi || type == SR.SRTypes.equal) && pbd.device_config.ContainsKey("target")) // netapp or iscsi
+                SRTypes srType = sr.GetSRType(false);
+                
+                if (srType == SRTypes.lvmoiscsi && pbd.device_config.ContainsKey("target")) //iscsi
                 {
                     return pbd.device_config["target"];
                 }
-                else if (type == SR.SRTypes.iso && pbd.device_config.ContainsKey("location")) // cifs or nfs iso
+                
+                if (srType == SRTypes.iso && pbd.device_config.ContainsKey("location")) // cifs or nfs iso
                 {
-                    String target = Helpers.HostnameFromLocation(pbd.device_config["location"]); // has form //ip_address/path
-                    if (String.IsNullOrEmpty(target))
+                    string target = Helpers.HostnameFromLocation(pbd.device_config["location"]); // has form //ip_address/path
+                    if (string.IsNullOrEmpty(target))
                         continue;
 
                     return target;
                 }
-                else if (type == SR.SRTypes.nfs && pbd.device_config.ContainsKey("server"))
+                
+                if (srType == SRTypes.nfs && pbd.device_config.ContainsKey("server"))
                 {
                     return pbd.device_config["server"];
                 }
             }
 
-            return String.Empty;
+            return string.Empty;
         }
 
         /// <summary>
@@ -947,15 +947,6 @@ namespace XenAPI
             {
                 return false;
             }
-        }
-
-        /// <summary>
-        /// Is an iSL type or legacy iSl adapter type
-        /// </summary>
-        public static bool IsIslOrIslLegacy(SR sr)
-        {
-            SRTypes currentType = sr.GetSRType(true);
-            return currentType == SRTypes.cslg || currentType == SRTypes.equal || currentType == SRTypes.netapp;
         }
 
         /// <summary>

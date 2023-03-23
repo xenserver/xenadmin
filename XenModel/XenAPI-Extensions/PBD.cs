@@ -159,24 +159,5 @@ namespace XenAPI
 
             return Messages.CONNECTED;
         }
-
-        public StorageLinkCredentials GetStorageLinkCredentials()
-        {
-            var deviceConfig = new Dictionary<string, string>(device_config);
-            
-            SR sr = Connection.Resolve<SR>(SR);
-            
-            if (sr != null && sr.type == "cslg")
-            {
-                string host, username, passwordSecret;
-
-                deviceConfig.TryGetValue("target", out host);
-                deviceConfig.TryGetValue("username", out username);
-                deviceConfig.TryGetValue("password_secret", out passwordSecret);
-
-                return new StorageLinkCredentials(Connection, host, username, null, passwordSecret);
-            }
-            return null;
-        }
     }
 }

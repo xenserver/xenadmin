@@ -136,19 +136,19 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="upsellPage1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 51</value>
+    <value>3, 38</value>
   </data>
   <data name="upsellPage1.Size" type="System.Drawing.Size, System.Drawing">
     <value>91, 67</value>
   </data>
   <data name="upsellPage1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;upsellPage1.Name" xml:space="preserve">
     <value>upsellPage1</value>
   </data>
   <data name="&gt;&gt;upsellPage1.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.UpsellPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.UpsellPage, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;upsellPage1.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
@@ -166,16 +166,16 @@
     <value>NoControl</value>
   </data>
   <data name="SRBlurb.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 167</value>
+    <value>3, 154</value>
   </data>
   <data name="SRBlurb.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 0</value>
   </data>
   <data name="SRBlurb.Size" type="System.Drawing.Size, System.Drawing">
-    <value>292, 163</value>
+    <value>292, 176</value>
   </data>
   <data name="SRBlurb.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="SRBlurb.Text" xml:space="preserve">
     <value>autoHeightLabel1</value>
@@ -184,7 +184,7 @@
     <value>SRBlurb</value>
   </data>
   <data name="&gt;&gt;SRBlurb.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.Common.AutoHeightLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.Common.AutoHeightLabel, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;SRBlurb.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
@@ -211,10 +211,10 @@
     <value>5, 5, 5, 5</value>
   </data>
   <data name="deprecationBanner.Size" type="System.Drawing.Size, System.Drawing">
-    <value>288, 38</value>
+    <value>288, 25</value>
   </data>
   <data name="deprecationBanner.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>0</value>
   </data>
   <data name="deprecationBanner.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -223,7 +223,7 @@
     <value>deprecationBanner</value>
   </data>
   <data name="&gt;&gt;deprecationBanner.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.DeprecationBanner, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.DeprecationBanner, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;deprecationBanner.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
@@ -241,7 +241,7 @@
     <value>NoControl</value>
   </data>
   <data name="selectedStoreTypeLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 137</value>
+    <value>3, 124</value>
   </data>
   <data name="selectedStoreTypeLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 16, 3, 14</value>
@@ -250,7 +250,7 @@
     <value>122, 13</value>
   </data>
   <data name="selectedStoreTypeLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="selectedStoreTypeLabel.Text" xml:space="preserve">
     <value>selectedStoreTypeLabel</value>
@@ -280,7 +280,7 @@
     <value>298, 330</value>
   </data>
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
-    <value>36</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel2.Name" xml:space="preserve">
     <value>tableLayoutPanel2</value>
@@ -300,42 +300,6 @@
   <data name="tableLayoutPanel3.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="radioButtonCslg.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="radioButtonCslg.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="radioButtonCslg.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="radioButtonCslg.Location" type="System.Drawing.Point, System.Drawing">
-    <value>26, 219</value>
-  </data>
-  <data name="radioButtonCslg.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>15, 3, 3, 3</value>
-  </data>
-  <data name="radioButtonCslg.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 19</value>
-  </data>
-  <data name="radioButtonCslg.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="radioButtonCslg.Text" xml:space="preserve">
-    <value>S&amp;torageLink technology</value>
-  </data>
-  <data name="&gt;&gt;radioButtonCslg.Name" xml:space="preserve">
-    <value>radioButtonCslg</value>
-  </data>
-  <data name="&gt;&gt;radioButtonCslg.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;radioButtonCslg.Parent" xml:space="preserve">
-    <value>tableLayoutPanel3</value>
-  </data>
-  <data name="&gt;&gt;radioButtonCslg.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="labelISOlibrary.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -346,7 +310,7 @@
     <value>NoControl</value>
   </data>
   <data name="labelISOlibrary.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 257</value>
+    <value>3, 232</value>
   </data>
   <data name="labelISOlibrary.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 16, 3, 10</value>
@@ -355,7 +319,7 @@
     <value>65, 15</value>
   </data>
   <data name="labelISOlibrary.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+    <value>8</value>
   </data>
   <data name="labelISOlibrary.Text" xml:space="preserve">
     <value>ISO library</value>
@@ -370,7 +334,7 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;labelISOlibrary.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="radioButtonCifsIso.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -382,7 +346,7 @@
     <value>NoControl</value>
   </data>
   <data name="radioButtonCifsIso.Location" type="System.Drawing.Point, System.Drawing">
-    <value>26, 285</value>
+    <value>26, 260</value>
   </data>
   <data name="radioButtonCifsIso.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>15, 3, 3, 3</value>
@@ -391,7 +355,7 @@
     <value>201, 19</value>
   </data>
   <data name="radioButtonCifsIso.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
+    <value>9</value>
   </data>
   <data name="radioButtonCifsIso.Text" xml:space="preserve">
     <value>&amp;Windows File Sharing (SMB/CIFS)</value>
@@ -406,7 +370,7 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;radioButtonCifsIso.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="radioButtonNfsIso.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -418,7 +382,7 @@
     <value>NoControl</value>
   </data>
   <data name="radioButtonNfsIso.Location" type="System.Drawing.Point, System.Drawing">
-    <value>26, 310</value>
+    <value>26, 285</value>
   </data>
   <data name="radioButtonNfsIso.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>15, 3, 3, 3</value>
@@ -427,7 +391,7 @@
     <value>67, 19</value>
   </data>
   <data name="radioButtonNfsIso.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
+    <value>10</value>
   </data>
   <data name="radioButtonNfsIso.Text" xml:space="preserve">
     <value>NFS &amp;ISO</value>
@@ -442,7 +406,7 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;radioButtonNfsIso.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="radioButtonIscsi.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -463,7 +427,7 @@
     <value>51, 19</value>
   </data>
   <data name="radioButtonIscsi.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>2</value>
   </data>
   <data name="radioButtonIscsi.Text" xml:space="preserve">
     <value>i&amp;SCSI</value>
@@ -478,7 +442,7 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;radioButtonIscsi.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="radioButtonFibreChannel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -499,7 +463,7 @@
     <value>103, 19</value>
   </data>
   <data name="radioButtonFibreChannel.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>3</value>
   </data>
   <data name="radioButtonFibreChannel.Text" xml:space="preserve">
     <value>Hardware &amp;HBA</value>
@@ -514,7 +478,7 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;radioButtonFibreChannel.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="radioButtonFcoe.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -535,7 +499,7 @@
     <value>101, 19</value>
   </data>
   <data name="radioButtonFcoe.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>4</value>
   </data>
   <data name="radioButtonFcoe.Text" xml:space="preserve">
     <value>Software FCo&amp;E</value>
@@ -550,7 +514,7 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;radioButtonFcoe.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="radioButtonNfs.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -571,7 +535,7 @@
     <value>46, 19</value>
   </data>
   <data name="radioButtonNfs.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>6</value>
   </data>
   <data name="radioButtonNfs.Text" xml:space="preserve">
     <value>N&amp;FS</value>
@@ -586,7 +550,7 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;radioButtonNfs.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="radioButtonCifs.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -604,10 +568,10 @@
     <value>15, 3, 3, 3</value>
   </data>
   <data name="radioButtonCifs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 19</value>
+    <value>49, 19</value>
   </data>
   <data name="radioButtonCifs.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+    <value>7</value>
   </data>
   <data name="radioButtonCifs.Text" xml:space="preserve">
     <value>S&amp;MB</value>
@@ -622,7 +586,7 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;radioButtonCifs.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="labelVirtualDiskStorage.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -643,7 +607,7 @@
     <value>114, 15</value>
   </data>
   <data name="labelVirtualDiskStorage.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>0</value>
   </data>
   <data name="labelVirtualDiskStorage.Text" xml:space="preserve">
     <value>Virtual disk storage</value>
@@ -658,7 +622,7 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;labelVirtualDiskStorage.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="labelFileBasedStorage.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -679,7 +643,7 @@
     <value>106, 15</value>
   </data>
   <data name="labelFileBasedStorage.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
+    <value>5</value>
   </data>
   <data name="labelFileBasedStorage.Text" xml:space="preserve">
     <value>File based storage</value>
@@ -697,7 +661,7 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;labelFileBasedStorage.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="labelBlockBasedStorage.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -718,7 +682,7 @@
     <value>118, 15</value>
   </data>
   <data name="labelBlockBasedStorage.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
+    <value>1</value>
   </data>
   <data name="labelBlockBasedStorage.Text" xml:space="preserve">
     <value>Block based storage</value>
@@ -736,19 +700,19 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;labelBlockBasedStorage.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>10</value>
   </data>
   <data name="tableLayoutPanel3.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
   <data name="tableLayoutPanel3.RowCount" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>11</value>
   </data>
   <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
     <value>230, 330</value>
   </data>
   <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
-    <value>37</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel3.Name" xml:space="preserve">
     <value>tableLayoutPanel3</value>
@@ -763,7 +727,7 @@
     <value>1</value>
   </data>
   <data name="tableLayoutPanel3.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="radioButtonCslg" Row="8" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelISOlibrary" Row="9" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="radioButtonCifsIso" Row="10" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonNfsIso" Row="11" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonIscsi" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonFibreChannel" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonFcoe" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonNfs" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonCifs" Row="7" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelVirtualDiskStorage" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="labelFileBasedStorage" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelBlockBasedStorage" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,5,Percent,95" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelISOlibrary" Row="8" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="radioButtonCifsIso" Row="9" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonNfsIso" Row="10" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonIscsi" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonFibreChannel" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonFcoe" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonNfs" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonCifs" Row="7" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelVirtualDiskStorage" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="labelFileBasedStorage" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelBlockBasedStorage" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,5,Percent,95" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -778,7 +742,7 @@
     <value>540, 336</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
-    <value>34</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -808,6 +772,6 @@
     <value>ChooseSrTypePage</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.XenTabPage, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

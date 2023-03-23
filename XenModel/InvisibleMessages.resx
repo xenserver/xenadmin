@@ -138,9 +138,6 @@
   <data name="HOMEPAGE" xml:space="preserve">
     <value>https://www.citrix.com/products/citrix-hypervisor</value>
   </data>
-  <data name="ISL_DEPRECATION_URL" xml:space="preserve">
-    <value>http://support.citrix.com/article/CTX141433</value>
-  </data>
   <data name="LICENSE_EXPIRY_WEBPAGE" xml:space="preserve">
     <value>https://store.citrix.com/dr_product/citrix-hypervisor-subscription</value>
   </data>

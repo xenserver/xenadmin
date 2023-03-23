@@ -53,18 +53,12 @@ namespace XenAdmin.Wizards
         private readonly NewSrWizardNamePage xenTabPageSrName;
         private readonly CIFS_ISO xenTabPageCifsIso;
         private readonly CifsFrontend xenTabPageCifs;
-        private readonly CSLG xenTabPageCslg;
         private readonly VHDoNFS xenTabPageVhdoNFS;
         private readonly NFS_ISO xenTabPageNfsIso;
-        private readonly NetApp xenTabPageNetApp;
-        private readonly EqualLogic xentabPageEqualLogic;
         private readonly LVMoISCSI xenTabPageLvmoIscsi;
         private readonly LVMoHBA xenTabPageLvmoHba;
         private readonly LVMoFCoE xenTabPageLvmoFcoe;
         private readonly LVMoHBASummary xenTabPageLvmoHbaSummary;
-        private readonly CslgSettings xenTabPageCslgSettings;
-        private readonly CslgLocation xenTabPageCslgLocation;
-        private readonly FilerDetails xenTabPageFilerDetails;
         private readonly ChooseSrTypePage xenTabPageChooseSrType;
         private readonly ChooseSrProvisioningPage xenTabPageChooseSrProv;
         private readonly RBACWarningPage xenTabPageRbacWarning;
@@ -104,18 +98,12 @@ namespace XenAdmin.Wizards
             xenTabPageSrName = new NewSrWizardNamePage();
             xenTabPageCifsIso = new CIFS_ISO();
             xenTabPageCifs = new CifsFrontend();
-            xenTabPageCslg = new CSLG();
             xenTabPageVhdoNFS = new VHDoNFS();
             xenTabPageNfsIso = new NFS_ISO();
-            xenTabPageNetApp = new NetApp();
-            xentabPageEqualLogic = new EqualLogic();
             xenTabPageLvmoIscsi = new LVMoISCSI();
             xenTabPageLvmoHba = new LVMoHBA();
             xenTabPageLvmoFcoe = new LVMoFCoE();
             xenTabPageLvmoHbaSummary = new LVMoHBASummary();
-            xenTabPageCslgSettings = new CslgSettings();
-            xenTabPageCslgLocation = new CslgLocation();
-            xenTabPageFilerDetails = new FilerDetails();
             xenTabPageChooseSrType = new ChooseSrTypePage();
             xenTabPageChooseSrProv = new ChooseSrProvisioningPage();
             xenTabPageRbacWarning = new RBACWarningPage((srToReattach == null && !disasterRecoveryTask)
@@ -235,7 +223,6 @@ namespace XenAdmin.Wizards
 
             if (runPrechecks)
             {
-
                 if (m_srWizardType is SrWizardType_Fcoe)
                 {
                     xenTabPageLvmoFcoe.SrType = showProvisioningPage && xenTabPageChooseSrProv.IsGfs2 ? SR.SRTypes.gfs2 : SR.SRTypes.lvmofcoe;
@@ -245,11 +232,6 @@ namespace XenAdmin.Wizards
                 {
                     xenTabPageLvmoHba.SrType = showProvisioningPage && xenTabPageChooseSrProv.IsGfs2 ? SR.SRTypes.gfs2 : SR.SRTypes.lvmohba;
                     return SetFCDevicesOnLVMoHBAPage(xenTabPageLvmoHba);
-                }
-                if (m_srWizardType is SrWizardType_Cslg || m_srWizardType is SrWizardType_NetApp || m_srWizardType is SrWizardType_EqualLogic)
-                {
-                    xenTabPageCslg.SrWizardType = m_srWizardType;
-                    return xenTabPageCslg.PerformStorageSystemScan();
                 }
             }
 			
@@ -303,26 +285,6 @@ namespace XenAdmin.Wizards
                     AddPage(xenTabPageLvmoFcoe);
                     AddPage(xenTabPageLvmoHbaSummary);
                 }
-                else if (m_srWizardType is SrWizardType_Cslg)
-                {
-                    AddPage(xenTabPageCslg);
-                    AddPages(xenTabPageCslgLocation, xenTabPageCslgSettings);
-                }
-                else if (m_srWizardType is SrWizardType_NetApp || m_srWizardType is SrWizardType_EqualLogic)
-                {
-                    AddPages(xenTabPageCslg, xenTabPageFilerDetails);
-
-                    if (m_srWizardType is SrWizardType_NetApp)
-                    {
-                        xenTabPageFilerDetails.IsNetApp = true;
-                        AddPage(xenTabPageNetApp);
-                    }
-                    else if (m_srWizardType is SrWizardType_EqualLogic)
-                    {
-                        xenTabPageFilerDetails.IsNetApp = false;
-                        AddPage(xentabPageEqualLogic);
-                    }
-                }
                 else if (m_srWizardType is SrWizardType_CifsIso)
                     AddPage(xenTabPageCifsIso);
                 else if (m_srWizardType is SrWizardType_Cifs)
@@ -349,8 +311,6 @@ namespace XenAdmin.Wizards
                     xenTabPageLvmoIscsi.SrWizardType = m_srWizardType;
                 else if (m_srWizardType is SrWizardType_Hba)
                     xenTabPageLvmoHba.SrWizardType = m_srWizardType;
-                else if (m_srWizardType is SrWizardType_Cslg || m_srWizardType is SrWizardType_NetApp || m_srWizardType is SrWizardType_EqualLogic)
-                    xenTabPageCslg.SrWizardType = m_srWizardType;
                 else if (m_srWizardType is SrWizardType_CifsIso)
                     xenTabPageCifsIso.SrWizardType = m_srWizardType;
                 else if (m_srWizardType is SrWizardType_NfsIso)
@@ -397,65 +357,6 @@ namespace XenAdmin.Wizards
                 m_srWizardType.UUID = xenTabPageVhdoNFS.UUID;
                 m_srWizardType.DeviceConfig = xenTabPageVhdoNFS.DeviceConfig;
                 SetCustomDescription(m_srWizardType, xenTabPageVhdoNFS.SrDescription);
-            }
-            else if (senderPagetype == typeof(CSLG))
-            {
-                xenTabPageCslgLocation.SelectedStorageAdapter = xenTabPageCslg.SelectedStorageAdapter;
-                xenTabPageCslgSettings.SelectedStorageAdapter = xenTabPageCslg.SelectedStorageAdapter;
-                NotifyNextPagesOfChange(xenTabPageCslgLocation, xenTabPageCslgSettings);
-
-                foreach (var entry in xenTabPageCslg.DeviceConfigParts)
-                    m_srWizardType.DeviceConfig[entry.Key] = entry.Value;
-            }
-            else if (senderPagetype == typeof(CslgLocation))
-            {
-                xenTabPageCslgSettings.StorageLinkCredentials = xenTabPageCslgLocation.StorageLinkCredentials;
-                xenTabPageCslgSettings.SystemStorage = xenTabPageCslgLocation.SystemStorage;
-                xenTabPageCslgSettings.StoragePools = xenTabPageCslgLocation.StoragePools;
-
-                foreach (var entry in xenTabPageCslgLocation.DeviceConfigParts)
-                    m_srWizardType.DeviceConfig[entry.Key] = entry.Value;
-                NotifyNextPagesOfChange(xenTabPageCslgSettings);
-            }
-            else if (senderPagetype == typeof(CslgSettings))
-            {
-                foreach (var entry in xenTabPageCslgSettings.DeviceConfigParts)
-                    m_srWizardType.DeviceConfig[entry.Key] = entry.Value;
-                SetCustomDescription(m_srWizardType, xenTabPageCslgSettings.SrDescription);
-            }
-            else if (senderPagetype == typeof(FilerDetails))
-            {
-                #region
-                foreach (var entry in xenTabPageFilerDetails.DeviceConfigParts)
-                    m_srWizardType.DeviceConfig[entry.Key] = entry.Value;
-
-                if (xenTabPageFilerDetails.IsNetApp)
-                {
-                    xenTabPageNetApp.SrScanAction = xenTabPageFilerDetails.SrScanAction;
-                    xenTabPageNetApp.SrWizardType = m_srWizardType;
-                    NotifyNextPagesOfChange(xenTabPageNetApp);
-                }
-                else
-                {
-                    xentabPageEqualLogic.SrScanAction = xenTabPageFilerDetails.SrScanAction;
-                    xentabPageEqualLogic.SrWizardType = m_srWizardType;
-                    NotifyNextPagesOfChange(xentabPageEqualLogic);
-                }
-                #endregion
-            }
-            else if (senderPagetype == typeof(NetApp))
-            {
-                m_srWizardType.UUID = xenTabPageNetApp.UUID;
-                foreach (var entry in xenTabPageNetApp.DeviceConfigParts)
-                    m_srWizardType.DeviceConfig[entry.Key] = entry.Value;
-                SetCustomDescription(m_srWizardType, xenTabPageNetApp.SrDescription);
-            }
-            else if (senderPagetype == typeof(EqualLogic))
-            {
-                m_srWizardType.UUID = xentabPageEqualLogic.UUID;
-                foreach (var entry in xentabPageEqualLogic.DeviceConfigParts)
-                    m_srWizardType.DeviceConfig[entry.Key] = entry.Value;
-                SetCustomDescription(m_srWizardType, xentabPageEqualLogic.SrDescription);
             }
         }
 
@@ -778,9 +679,6 @@ namespace XenAdmin.Wizards
                 if (_rbac)
                     return;
             }
-
-            if (_srToReattach.type == "cslg" && xenTabPageCslg.SelectedStorageAdapter != null)
-                NextStep();
         }
 
         protected override string WizardPaneHelpID()

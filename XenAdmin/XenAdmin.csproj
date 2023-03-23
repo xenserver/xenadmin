@@ -861,12 +861,6 @@
     <Compile Include="Wizards\NewSRWizard_Pages\Frontends\CIFSFrontend.Designer.cs">
       <DependentUpon>CIFSFrontend.cs</DependentUpon>
     </Compile>
-    <Compile Include="Wizards\NewSRWizard_Pages\Frontends\CSLG.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Wizards\NewSRWizard_Pages\Frontends\CSLG.Designer.cs">
-      <DependentUpon>CSLG.cs</DependentUpon>
-    </Compile>
     <Compile Include="Wizards\NewSRWizard_Pages\Frontends\LVMoFCoE.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -960,23 +954,11 @@
     <Compile Include="Wizards\NewSRWizard_Pages\Frontends\CIFS_ISO.Designer.cs">
       <DependentUpon>CIFS_ISO.cs</DependentUpon>
     </Compile>
-    <Compile Include="Wizards\NewSRWizard_Pages\Frontends\EqualLogic.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Wizards\NewSRWizard_Pages\Frontends\EqualLogic.Designer.cs">
-      <DependentUpon>EqualLogic.cs</DependentUpon>
-    </Compile>
     <Compile Include="Wizards\NewSRWizard_Pages\Frontends\LVMoISCSI.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Wizards\NewSRWizard_Pages\Frontends\LVMoISCSI.Designer.cs">
       <DependentUpon>LVMoISCSI.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Wizards\NewSRWizard_Pages\Frontends\NetApp.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Wizards\NewSRWizard_Pages\Frontends\NetApp.Designer.cs">
-      <DependentUpon>NetApp.cs</DependentUpon>
     </Compile>
     <Compile Include="Wizards\NewSRWizard_Pages\Frontends\NFS_ISO.cs">
       <SubType>UserControl</SubType>
@@ -2425,21 +2407,9 @@
       <SubType>Designer</SubType>
       <DependentUpon>CIFS_ISO.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\CSLG.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>CSLG.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\EqualLogic.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>EqualLogic.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\LVMoISCSI.resx">
       <SubType>Designer</SubType>
       <DependentUpon>LVMoISCSI.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\NetApp.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>NetApp.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\NFS_ISO.resx">
       <SubType>Designer</SubType>
@@ -3873,24 +3843,6 @@
       <DependentUpon>LVMoHBASummary.cs</DependentUpon>
     </Compile>
     <Compile Include="Wizards\NewSRWizard_Pages\SrWizardType.cs" />
-    <Compile Include="Wizards\NewSRWizard_Pages\Frontends\FilerDetails.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Wizards\NewSRWizard_Pages\Frontends\FilerDetails.Designer.cs">
-      <DependentUpon>FilerDetails.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Wizards\NewSRWizard_Pages\Frontends\CslgSettings.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Wizards\NewSRWizard_Pages\Frontends\CslgSettings.Designer.cs">
-      <DependentUpon>CslgSettings.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Wizards\NewSRWizard_Pages\Frontends\CslgLocation.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Wizards\NewSRWizard_Pages\Frontends\CslgLocation.Designer.cs">
-      <DependentUpon>CslgLocation.cs</DependentUpon>
-    </Compile>
     <Compile Include="Wizards\NewSRWizard_Pages\NewSrWizardNamePage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -6311,39 +6263,6 @@
     <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\CIFS_ISO.zh-CN.resx">
       <DependentUpon>CIFS_ISO.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\FilerDetails.ja.resx">
-      <DependentUpon>FilerDetails.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\FilerDetails.resx">
-      <DependentUpon>FilerDetails.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\FilerDetails.zh-CN.resx">
-      <DependentUpon>FilerDetails.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\CslgSettings.ja.resx">
-      <DependentUpon>CslgSettings.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\CslgSettings.resx">
-      <DependentUpon>CslgSettings.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\CslgSettings.zh-CN.resx">
-      <DependentUpon>CslgSettings.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\CSLG.ja.resx">
-      <DependentUpon>CSLG.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\CSLG.zh-CN.resx">
-      <DependentUpon>CSLG.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\EqualLogic.ja.resx">
-      <DependentUpon>EqualLogic.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\EqualLogic.zh-CN.resx">
-      <DependentUpon>EqualLogic.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\LVMoHBA.ja.resx">
       <DependentUpon>LVMoHBA.cs</DependentUpon>
     </EmbeddedResource>
@@ -6365,27 +6284,11 @@
     <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\LVMoISCSI.zh-CN.resx">
       <DependentUpon>LVMoISCSI.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\NetApp.ja.resx">
-      <DependentUpon>NetApp.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\NetApp.zh-CN.resx">
-      <DependentUpon>NetApp.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\NFS_ISO.ja.resx">
       <DependentUpon>NFS_ISO.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\NFS_ISO.zh-CN.resx">
       <DependentUpon>NFS_ISO.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\CslgLocation.ja.resx">
-      <DependentUpon>CslgLocation.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\CslgLocation.resx">
-      <DependentUpon>CslgLocation.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\CslgLocation.zh-CN.resx">
-      <DependentUpon>CslgLocation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\VHDoNFS.ja.resx">
       <DependentUpon>VHDoNFS.cs</DependentUpon>
