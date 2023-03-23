@@ -471,7 +471,7 @@ namespace XenAdmin
 
             actionChanged(action);
 
-            if (action is SrAction)
+            if (action is ISrAction)
                 Program.Invoke(this, UpdateToolbars);
         }
 

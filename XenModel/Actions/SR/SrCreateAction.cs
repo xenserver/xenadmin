@@ -210,7 +210,7 @@ namespace XenAdmin.Actions
                     throw new Failure(Failure.HANDLE_INVALID, "SR", Result);
 
                 // Set this SR to be the default
-                new SrAction(SrActionKind.SetAsDefault, new_sr).RunSync(Session);
+                new SetSrAsDefaultAction(new_sr).RunSync(Session);
             }
 
             Description = Messages.ACTION_SR_CREATE_SUCCESSFUL;
