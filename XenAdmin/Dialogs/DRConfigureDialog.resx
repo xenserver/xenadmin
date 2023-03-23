@@ -496,10 +496,10 @@
     <value>NoControl</value>
   </data>
   <data name="pictureBoxInfo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 7</value>
+    <value>3, 15</value>
   </data>
   <data name="pictureBoxInfo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 32</value>
+    <value>16, 16</value>
   </data>
   <data name="pictureBoxInfo.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>

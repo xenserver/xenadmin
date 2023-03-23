@@ -154,6 +154,7 @@
 			// pictureBoxInfo
 			// 
 			resources.ApplyResources(this.pictureBoxInfo, "pictureBoxInfo");
+            this.pictureBoxInfo.Image = global::XenAdmin.Properties.Resources._000_Info3_h32bit_16;
 			this.pictureBoxInfo.Name = "pictureBoxInfo";
 			this.pictureBoxInfo.TabStop = false;
 			// 
