@@ -370,28 +370,28 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="tableLayoutPanelCreds.ColumnCount" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="labelError.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="labelError.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="labelError.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
   </data>
   <data name="labelError.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="labelError.Location" type="System.Drawing.Point, System.Drawing">
-    <value>72, 58</value>
+    <value>94, 61</value>
   </data>
   <data name="labelError.Size" type="System.Drawing.Size, System.Drawing">
-    <value>293, 22</value>
+    <value>57, 15</value>
   </data>
   <data name="labelError.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
   <data name="labelError.Text" xml:space="preserve">
-    <value>label1</value>
+    <value>labelError</value>
   </data>
   <data name="labelError.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -415,7 +415,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="pictureBoxError.Location" type="System.Drawing.Point, System.Drawing">
-    <value>50, 61</value>
+    <value>72, 61</value>
   </data>
   <data name="pictureBoxError.Size" type="System.Drawing.Size, System.Drawing">
     <value>16, 16</value>
@@ -472,7 +472,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanelCreds.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="UsernameLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="PasswordLabel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="PasswordTextBox" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="UsernameTextBox" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelError" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="pictureBoxError" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="UsernameLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="PasswordLabel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="PasswordTextBox" Row="1" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="UsernameTextBox" Row="0" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="labelError" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="pictureBoxError" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="groupBox1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>

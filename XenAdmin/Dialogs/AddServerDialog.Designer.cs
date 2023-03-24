@@ -85,12 +85,14 @@ namespace XenAdmin.Dialogs
             // UsernameTextBox
             // 
             resources.ApplyResources(this.UsernameTextBox, "UsernameTextBox");
+            this.tableLayoutPanelCreds.SetColumnSpan(this.UsernameTextBox, 2);
             this.UsernameTextBox.Name = "UsernameTextBox";
             this.UsernameTextBox.TextChanged += new System.EventHandler(this.TextFields_TextChanged);
             // 
             // PasswordTextBox
             // 
             resources.ApplyResources(this.PasswordTextBox, "PasswordTextBox");
+            this.tableLayoutPanelCreds.SetColumnSpan(this.PasswordTextBox, 2);
             this.PasswordTextBox.Name = "PasswordTextBox";
             this.PasswordTextBox.UseSystemPasswordChar = true;
             this.PasswordTextBox.TextChanged += new System.EventHandler(this.TextFields_TextChanged);
@@ -119,8 +121,8 @@ namespace XenAdmin.Dialogs
             this.tableLayoutPanelCreds.Controls.Add(this.PasswordLabel, 0, 1);
             this.tableLayoutPanelCreds.Controls.Add(this.PasswordTextBox, 1, 1);
             this.tableLayoutPanelCreds.Controls.Add(this.UsernameTextBox, 1, 0);
-            this.tableLayoutPanelCreds.Controls.Add(this.labelError, 1, 2);
-            this.tableLayoutPanelCreds.Controls.Add(this.pictureBoxError, 0, 2);
+            this.tableLayoutPanelCreds.Controls.Add(this.labelError, 2, 2);
+            this.tableLayoutPanelCreds.Controls.Add(this.pictureBoxError, 1, 2);
             this.tableLayoutPanelCreds.Name = "tableLayoutPanelCreds";
             // 
             // labelError

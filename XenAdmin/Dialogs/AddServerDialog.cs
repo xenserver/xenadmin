@@ -29,14 +29,9 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
-using System.Windows.Forms;
 using XenAdmin.Core;
 using XenAdmin.Network;
-using XenAPI;
 using XenCenterLib;
 
 namespace XenAdmin.Dialogs
