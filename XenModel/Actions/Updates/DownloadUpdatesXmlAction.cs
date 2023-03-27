@@ -29,6 +29,7 @@
  */
 
 using System;
+using System.Web;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
@@ -43,6 +44,8 @@ namespace XenAdmin.Actions
 {
     public class DownloadUpdatesXmlAction : AsyncAction
     {
+        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod()?.DeclaringType);
+
         private const string ClientVersionsNode = "versions";
         private const string XenServerVersionsNode = "serverversions";
         private const string PatchesNode = "patches";
@@ -338,14 +341,17 @@ namespace XenAdmin.Actions
 
         protected virtual XmlDocument FetchCheckForUpdatesXml()
         {
-            var xdoc = new XmlDocument();
+            var checkForUpdatesXml = new XmlDocument();
             var checkForUpdatesUrl = XenAdminConfigManager.Provider.GetCustomUpdatesXmlLocation() ?? BrandManager.UpdatesUrl;
             var authToken = XenAdminConfigManager.Provider.GetInternalStageAuthToken();
-            var uri = new Uri(checkForUpdatesUrl);
+            var uriBuilder = new UriBuilder(checkForUpdatesUrl);
 
+            uriBuilder.Query = AddAuthTokenToQueryString(authToken, uriBuilder.Query);
+
+            var uri = uriBuilder.Uri;
             if (uri.IsFile)
             {
-                xdoc.Load(checkForUpdatesUrl);
+                checkForUpdatesXml.Load(checkForUpdatesUrl);
             }
             else
             {
@@ -356,20 +362,53 @@ namespace XenAdmin.Actions
                 {
                     webClient.Proxy = proxy;
                     webClient.Headers.Add("User-Agent", _userAgent);
-                    if (!string.IsNullOrEmpty(authToken))
-                    {
-                        NameValueCollection myQueryStringCollection = new NameValueCollection();
-                        myQueryStringCollection.Add(XenAdminConfigManager.Provider.GetInternalStageAuthTokenName(), authToken);
-                        webClient.QueryString = myQueryStringCollection;
-                    }
-
                     using (var stream = new MemoryStream(webClient.DownloadData(uri)))
-                        xdoc.Load(stream);
+                        checkForUpdatesXml.Load(stream);
                 }
             }
 
-            return xdoc;
+            return checkForUpdatesXml;
         }
 
+        /// <summary>
+        /// Adds the specified authentication token to the existing query string and returns
+        /// the modified query string.
+        /// </summary>
+        /// <param name="authToken">The authentication token to add to the query string.</param>
+        /// <param name="existingQueryString">The existing query string to add the token to.</param>
+        /// <returns>The modified query string.</returns>
+        private static string AddAuthTokenToQueryString(string authToken, string existingQueryString)
+        {
+            var queryString = existingQueryString;
+            if (string.IsNullOrEmpty(authToken))
+            {
+                return queryString;
+            }
+
+            try
+            {
+                var query = new NameValueCollection();
+                if (!string.IsNullOrEmpty(existingQueryString))
+                {
+                    query.Add(HttpUtility.ParseQueryString(existingQueryString));
+                }
+
+                var tokenQueryString = HttpUtility.ParseQueryString(authToken);
+
+                query.Add(tokenQueryString);
+
+                queryString = string.Join("&",
+                    query.AllKeys
+                        .Where(key => key != null)
+                        .Select(key => $"{key}={query[key]}")
+                );
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+
+            return queryString;
+        }
     }
 }
