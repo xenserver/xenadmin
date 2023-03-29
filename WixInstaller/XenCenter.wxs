@@ -184,7 +184,6 @@
             <ComponentRef Id="RegistryEntries" />
             <ComponentRef Id="ApplicationShortcut" />
             <ComponentRef Id="ProgramFilesShortcut" />
-            <ComponentGroupRef Id="BrandedComponents" />
         </Feature>
 
         <UIRef Id="$(var.BrandInstallerUI)" />

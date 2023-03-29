@@ -155,11 +155,11 @@ do
   mkdir -p obj${name} out${name}
 
   WixLangId=$(locale_id ${locale} | tr -d [:space:]) RepoRoot=$(cygpath -w ${REPO}) \
-    ${CANDLE} -ext WiXNetFxExtension -ext WixUtilExtension -out obj${name}/ ${BRANDING_BRAND_CONSOLE_NO_SPACE}.wxs branding.wxs
+    ${CANDLE} -ext WiXNetFxExtension -ext WixUtilExtension -out obj${name}/ ${BRANDING_BRAND_CONSOLE_NO_SPACE}.wxs
 
   ${LIGHT} -sval -ext WiXNetFxExtension -ext WixUtilExtension -out out${name}/${name}.msi \
           -loc wixlib/wixui_${locale}.wxl -loc ${locale}.wxl \
-          obj${name}/${BRANDING_BRAND_CONSOLE_NO_SPACE}.wixobj obj${name}/branding.wixobj lib/WixUI_InstallDir.wixlib
+          obj${name}/${BRANDING_BRAND_CONSOLE_NO_SPACE}.wixobj lib/WixUI_InstallDir.wixlib
 
   cp ${WIX}/out${name}/${name}.msi ${WIX}
 done
