@@ -51,8 +51,6 @@ namespace XenAdmin
 {
     public static class Program
     {
-        public const int DEFAULT_WLB_PORT = 8012;
-
         /// <summary>
         /// A UUID for the current instance of XenCenter.  Used to identify our own task instances.
         /// </summary>

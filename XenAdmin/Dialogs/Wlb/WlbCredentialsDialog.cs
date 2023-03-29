@@ -43,6 +43,8 @@ namespace XenAdmin.Dialogs.Wlb
     public partial class WlbCredentialsDialog : XenDialogBase
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+        private const int DEFAULT_WLB_PORT = 8012;
         private Pool _pool;
 
         public WlbCredentialsDialog(Pool pool)
@@ -61,19 +63,14 @@ namespace XenAdmin.Dialogs.Wlb
 
         private void PopulateControls()
         {
-            string hostname;
-            int port;
+            StringUtility.ParseHostnamePort(_pool.wlb_url, out var hostname, out var port);
+            
+            if (port == 0)
+                port = DEFAULT_WLB_PORT;
 
-            if (!StringUtility.TryParseHostname(_pool.wlb_url, Program.DEFAULT_WLB_PORT, out hostname, out port))
-            {
-                hostname = _pool.wlb_url;
-                port = Program.DEFAULT_WLB_PORT;
-            }
-
-            textboxWlbUrl.Text = hostname ?? "";
-            textboxWLBPort.Text = port.ToString() ?? "";
-            textboxWlbUserName.Text = _pool.wlb_username ?? "";
-
+            textboxWlbUrl.Text = hostname;
+            textboxWLBPort.Text = port.ToString();
+            textboxWlbUserName.Text = _pool.wlb_username;
         }
 
         private void SetControlState()

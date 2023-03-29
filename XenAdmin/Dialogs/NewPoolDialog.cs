@@ -426,9 +426,14 @@ namespace XenAdmin.Dialogs
 
         private void buttonAddNewServer_Click(object sender, EventArgs e)
         {
-            IXenConnection newConnection = new XenConnection();
+            var dialog = new AddServerDialog(null, false);
+            dialog.CachePopulated += Dialog_CachePopulated;
+            dialog.Show(this);
+        }
+
+        private void Dialog_CachePopulated(IXenConnection newConnection)
+        {
             newConnections.Add(newConnection);
-            new AddServerTask(this, newConnection, null).Start();
         }
 
         private void comboBoxServers_SelectedIndexChanged(object sender, EventArgs e)

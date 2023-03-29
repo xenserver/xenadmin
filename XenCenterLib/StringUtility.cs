@@ -39,35 +39,23 @@ namespace XenCenterLib
     public static class StringUtility
     {
         /// <summary>
-        /// Parses strings of the form "hostname:port" 
+        /// Parses server strings of the form "hostname:port" 
         /// </summary>
-        /// <param name="s"></param>
-        /// <param name="hostname"></param>
-        /// <param name="port"></param>
-        /// <returns></returns>
-        public static bool TryParseHostname(string s, int defaultPort, out string hostname, out int port)
+        public static void ParseHostnamePort(string server, out string hostname, out int port)
         {
-            try
-            {
-                int i = s.IndexOf(':');
-                if (i != -1)
-                {
-                    hostname = s.Substring(0, i).Trim();
-                    port = int.Parse(s.Substring(i + 1).Trim());
-                }
-                else
-                {
-                    hostname = s;
-                    port = defaultPort; // Program.DEFAULT_XEN_PORT;
-                }
-                return true;
-            }
-            catch (Exception)
-            {
-                hostname = null;
-                port = 0;
-                return false;
-            }
+            hostname = server;
+            port = 0;
+
+            if (string.IsNullOrWhiteSpace(server))
+                return;
+
+            var parts = server.Split(new[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
+
+            if (parts.Length > 0)
+                hostname = parts[0].Trim();
+
+            if (parts.Length > 1)
+                int.TryParse(parts[1].Trim(), out port);
         }
 
         public static int NaturalCompare(string s1, string s2)

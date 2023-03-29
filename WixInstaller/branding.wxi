@@ -37,7 +37,6 @@
   <?define UpgradeCode="{EA0EF50F-5CC6-452B-B09F-3F5EC564899D}"?>
   <?define ReportViewerGuid="D01090B9-1988-4ab4-B48A-D0B6161FAA48"?>
   <?define MainExeGuid="64FEF765-7593-4612-8D4D-EE81CF704DEB"?>
-  <?define TestResourcesGuid="FA8D4F56-A94A-467c-9E6B-F3DC26F95B1E"?>
   <?define ExtToolsGuid="D5FC0252-C97B-46e7-9633-A6B68EDB6654"?>
   <?define SchemasFilesGuid="E2186CD8-5064-4414-8AD7-E4495B6A3204"?>
   <?define RegEntriesGuid="193BAE1F-F2AE-4451-94DC-4B105DB5179C"?>
