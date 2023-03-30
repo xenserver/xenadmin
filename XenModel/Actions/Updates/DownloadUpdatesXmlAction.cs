@@ -343,10 +343,7 @@ namespace XenAdmin.Actions
         {
             var checkForUpdatesXml = new XmlDocument();
             var checkForUpdatesUrl = XenAdminConfigManager.Provider.GetCustomUpdatesXmlLocation() ?? BrandManager.UpdatesUrl;
-            var authToken = XenAdminConfigManager.Provider.GetInternalStageAuthToken();
             var uriBuilder = new UriBuilder(checkForUpdatesUrl);
-
-            uriBuilder.Query = AddAuthTokenToQueryString(authToken, uriBuilder.Query);
 
             var uri = uriBuilder.Uri;
             if (uri.IsFile)
@@ -355,7 +352,9 @@ namespace XenAdmin.Actions
             }
             else
             {
-                
+                var authToken = XenAdminConfigManager.Provider.GetInternalStageAuthToken();
+                uriBuilder.Query = AddAuthTokenToQueryString(authToken, uriBuilder.Query);
+
                 var proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(Connection, false);
 
                 using (var webClient = new WebClient())
