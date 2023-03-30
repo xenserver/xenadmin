@@ -398,7 +398,7 @@ namespace XenAdmin.Actions
 
                 queryString = string.Join("&",
                     query.AllKeys
-                        .Where(key => key != null)
+                        .Where(key => !string.IsNullOrWhiteSpace(key))
                         .Select(key => $"{key}={query[key]}")
                 );
             }
