@@ -29,8 +29,6 @@
  */
 
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Xml;
 
@@ -493,46 +491,6 @@ namespace XenAdmin
         }
 
         /// <summary>
-        /// Loads the specified non-generic IEnumerable into a generic List&lt;T&gt;.
-        /// </summary>
-        /// <typeparam name="T">The type to convert each element to</typeparam>
-        /// <param name="input">The input non-generic IEnumerable.</param>
-        /// <returns>Generic List&lt;T&gt;</returns>
-        public static List<T> PopulateList<T>(IEnumerable input)
-        {
-            ThrowIfParameterNull(input, "input");
-            List<T> output = new List<T>();
-            foreach (T t in input)
-            {
-                output.Add(t);
-            }
-            return output;
-        }
-
-        /// <summary>
-        /// Gets a List that represents the specified IEnumerable. If the input isn't a List then one gets created by passing the input into
-        /// List's constructor. If the input is already a List then it is returned directly.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="input">The input.</param>
-        /// <returns>A list for the specified enumerable</returns>
-        public static List<T> GetList<T>(IEnumerable<T> input)
-        {
-            if (input == null)
-            {
-                return null;
-            }
-
-            var list = input as List<T>;
-
-            if (list != null)
-            {
-                return list;
-            }
-            return new List<T>(input);
-        }
-
-        /// <summary>
         /// Matches 1-65535 inclusive.
         /// </summary>
         /// <param name="s">The string to be parsed</param>
@@ -546,39 +504,5 @@ namespace XenAdmin
 
             return 0 < port && port <= 65535;
         }
-
-        public static string GetXmlNodeInnerText(XmlNode node, string xPath)
-        {
-            ThrowIfParameterNull(node, "node");
-            ThrowIfStringParameterNullOrEmpty(xPath, "xPath");
-
-            XmlNodeList nodes = node.SelectNodes(xPath);
-
-            if (nodes == null || nodes.Count == 0)
-            {
-                throw new InvalidOperationException("Node not found: " + xPath);
-            }
-
-            return nodes[0].InnerText;
-        }
-
-        /// <summary>
-        /// Get the first node with name 'value' and returns its innerText. Used for getting results of CGSL async actions.
-        /// </summary>
-        /// <param name="xml">The XML.</param>
-        /// <returns>The contents of the first node with name 'value'.</returns>
-        public static string GetContentsOfValueNode(string xml)
-        {
-            ThrowIfStringParameterNullOrEmpty(xml, "xml");
-
-            var doc = new XmlDocument();
-            doc.LoadXml(xml);
-
-            // If we've got this from an async task result, then it will be wrapped
-            // in a <value> element.
-            var nodes = doc.GetElementsByTagName("value");
-            return nodes.Count > 0 ? nodes[0].InnerText : null;
-        }
-
     }
 }

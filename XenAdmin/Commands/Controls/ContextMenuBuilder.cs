@@ -90,27 +90,6 @@ namespace XenAdmin.Commands
         }
 
         /// <summary>
-        /// Shows the context menu for the specified xen object at the current mouse location.
-        /// </summary>
-        /// <param name="xenObject">The xen object for which the context menu is required.</param>
-        public void Show(IXenObject xenObject)
-        {
-            Show(xenObject, Form.MousePosition);
-        }
-
-        /// <summary>
-        /// Shows the context menu for the specified xen object at the specified location.
-        /// </summary>
-        /// <param name="xenObject">The xen object for which the context menu is required.</param>
-        /// <param name="point">The location of the context menu.</param>
-        public void Show(IXenObject xenObject, Point point)
-        {
-            ContextMenuStrip menu = new ContextMenuStrip();
-            menu.Items.AddRange(Build(xenObject));
-            menu.Show(point);
-        }
-
-        /// <summary>
         /// Builds the context menu for the specified XenObject.
         /// </summary>
         /// <param name="xenObject">The xen object for which the context menu items are required.</param>
