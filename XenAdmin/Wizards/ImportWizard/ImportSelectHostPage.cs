@@ -55,7 +55,7 @@ namespace XenAdmin.Wizards.ImportWizard
 
         public ImportSelectHostPage()
         {
-            ShowWarning(null);
+            InitializeText();
         }
 
         #region XenTabPage overrides
@@ -63,12 +63,12 @@ namespace XenAdmin.Wizards.ImportWizard
         /// <summary>
         /// Gets the page's title (headline)
         /// </summary>
-        public override string PageTitle { get { return Messages.IMPORT_SELECT_HOST_PAGE_TITLE; } }
+        public override string PageTitle => Messages.IMPORT_SELECT_HOST_PAGE_TITLE;
 
-		/// <summary>
-		/// Gets the page's label in the (left hand side) wizard progress panel
-		/// </summary>
-		public override string Text { get { return Messages.NEWSR_LOCATION; } }
+        /// <summary>
+        /// Gets the page's label in the (left hand side) wizard progress panel
+        /// </summary>
+        public override string Text => Messages.NEWSR_LOCATION;
 
         protected override bool ImplementsIsDirty()
         {
@@ -124,7 +124,7 @@ namespace XenAdmin.Wizards.ImportWizard
 
         protected override string InstructionText => Messages.IMPORT_WIZARD_DESTINATION_INSTRUCTIONS;
 
-        protected override string TargetServerText => Messages.IMPORT_WIZARD_DESTINATION_DESTINATION;
+        protected override string TargetPoolText => Messages.IMPORT_WIZARD_DESTINATION_DESTINATION;
 
         protected override string TargetServerSelectionIntroText => Messages.IMPORT_WIZARD_DESTINATION_TABLE_INTRO;
 

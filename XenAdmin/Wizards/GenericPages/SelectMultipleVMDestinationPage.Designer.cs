@@ -36,7 +36,7 @@
             this.m_labelIntro = new XenAdmin.Controls.Common.AutoHeightLabel();
             this.label1 = new System.Windows.Forms.Label();
             this.m_comboBoxConnection = new XenAdmin.Controls.EnableableComboBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.label2 = new XenAdmin.Controls.Common.AutoHeightLabel();
             this.m_dataGridView = new System.Windows.Forms.DataGridView();
             this.m_colVmName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.m_colTarget = new XenAdmin.Controls.EnableableComboBoxColumn();
@@ -159,14 +159,14 @@
 
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
 		private XenAdmin.Controls.Common.AutoHeightLabel m_labelIntro;
-		private System.Windows.Forms.Label label2;
+		private XenAdmin.Controls.Common.AutoHeightLabel label2;
         private System.Windows.Forms.DataGridView m_dataGridView;
 		private System.Windows.Forms.Label label1;
         private XenAdmin.Controls.EnableableComboBox m_comboBoxConnection;
-        private System.Windows.Forms.DataGridViewTextBoxColumn m_colVmName;
-        private  XenAdmin.Controls.EnableableComboBoxColumn m_colTarget;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelWarning;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label labelWarning;
+        private System.Windows.Forms.DataGridViewTextBoxColumn m_colVmName;
+        private Controls.EnableableComboBoxColumn m_colTarget;
     }
 }
