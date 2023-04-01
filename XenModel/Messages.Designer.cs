@@ -10716,7 +10716,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select the pool or standalone server where you want to copy the selected VMs to..
+        ///   Looks up a localized string similar to Select the pool or standalone server where you want to copy the selected VM(s) to..
         /// </summary>
         public static string CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY {
             get {
@@ -10725,16 +10725,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select the pool or standalone server where you want to copy the selected VM to..
-        /// </summary>
-        public static string CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_SINGLE {
-            get {
-                return ResourceManager.GetString("CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_SINGLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Select the pool or standalone server where you want to copy the selected templates to..
+        ///   Looks up a localized string similar to Select the pool or standalone server where you want to copy the selected template(s) to..
         /// </summary>
         public static string CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_TEMPLATE {
             get {
@@ -10743,16 +10734,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select the pool or standalone server where you want to copy the selected template to..
-        /// </summary>
-        public static string CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_TEMPLATE_SINGLE {
-            get {
-                return ResourceManager.GetString("CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_TEMPLATE_SINGLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Select the pool or standalone server where you want to migrate the selected VMs to..
+        ///   Looks up a localized string similar to Select the pool or standalone server where you want to migrate the selected VM(s) to..
         /// </summary>
         public static string CPM_WIZARD_DESTINATION_INSTRUCTIONS_MIGRATE {
             get {
@@ -10761,29 +10743,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select the pool or standalone server where you want to migrate the selected VM to..
-        /// </summary>
-        public static string CPM_WIZARD_DESTINATION_INSTRUCTIONS_MIGRATE_SINGLE {
-            get {
-                return ResourceManager.GetString("CPM_WIZARD_DESTINATION_INSTRUCTIONS_MIGRATE_SINGLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Select the pool or standalone server where you want to move the selected VMs to..
+        ///   Looks up a localized string similar to Select the pool or standalone server where you want to move the selected VM(s) to..
         /// </summary>
         public static string CPM_WIZARD_DESTINATION_INSTRUCTIONS_MOVE {
             get {
                 return ResourceManager.GetString("CPM_WIZARD_DESTINATION_INSTRUCTIONS_MOVE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Select the pool or standalone server where you want to move the selected VM to..
-        /// </summary>
-        public static string CPM_WIZARD_DESTINATION_INSTRUCTIONS_MOVE_SINGLE {
-            get {
-                return ResourceManager.GetString("CPM_WIZARD_DESTINATION_INSTRUCTIONS_MOVE_SINGLE", resourceCulture);
             }
         }
         
@@ -10797,16 +10761,34 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Optionally, assign the VM(s) a &amp;home server in the destination pool:.
+        ///   Looks up a localized string similar to If you want to copy the disks of a VM to local storage, specify the server below..
         /// </summary>
-        public static string CPM_WIZARD_DESTINATION_TABLE_INTRO {
+        public static string CPM_WIZARD_DESTINATION_TABLE_INTRO_COPY {
             get {
-                return ResourceManager.GetString("CPM_WIZARD_DESTINATION_TABLE_INTRO", resourceCulture);
+                return ResourceManager.GetString("CPM_WIZARD_DESTINATION_TABLE_INTRO_COPY", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Optionally, assign the template(s) a &amp;home server in the destination pool:.
+        ///   Looks up a localized string similar to If you want to migrate the disks of a VM to local storage, specify the server below..
+        /// </summary>
+        public static string CPM_WIZARD_DESTINATION_TABLE_INTRO_MIGRATE {
+            get {
+                return ResourceManager.GetString("CPM_WIZARD_DESTINATION_TABLE_INTRO_MIGRATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you want to move the disks of a VM to local storage, specify the server below..
+        /// </summary>
+        public static string CPM_WIZARD_DESTINATION_TABLE_INTRO_MOVE {
+            get {
+                return ResourceManager.GetString("CPM_WIZARD_DESTINATION_TABLE_INTRO_MOVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you want to place the disks of a template on local storage, specify the server below..
         /// </summary>
         public static string CPM_WIZARD_DESTINATION_TABLE_INTRO_TEMPLATES {
             get {
@@ -13755,7 +13737,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Don&apos;t assign a home server.
+        ///   Looks up a localized string similar to None selected.
         /// </summary>
         public static string DONT_SELECT_TARGET_SERVER {
             get {
@@ -20941,7 +20923,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;Import VM(s) to:.
+        ///   Looks up a localized string similar to &amp;Import to:.
         /// </summary>
         public static string IMPORT_WIZARD_DESTINATION_DESTINATION {
             get {
@@ -20950,7 +20932,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Choose the pool or standalone server where you want to place the VM(s). If required, you can also specify a Home Server within the selected pool for each imported VM..
+        ///   Looks up a localized string similar to Choose the pool or standalone server where you want to import the VM(s)..
         /// </summary>
         public static string IMPORT_WIZARD_DESTINATION_INSTRUCTIONS {
             get {
@@ -20959,7 +20941,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;Assign imported VM(s) to a home server:.
+        ///   Looks up a localized string similar to If you want to place the disks of a VM on local storage, specify the server below..
         /// </summary>
         public static string IMPORT_WIZARD_DESTINATION_TABLE_INTRO {
             get {

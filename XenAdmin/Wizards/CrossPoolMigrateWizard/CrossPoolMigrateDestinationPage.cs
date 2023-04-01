@@ -42,17 +42,12 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
     internal class CrossPoolMigrateDestinationPage : SelectMultipleVMDestinationPage
     {
         private List<VM> selectedVMs;
-        private WizardMode wizardMode;
+        private readonly WizardMode wizardMode = WizardMode.Migrate;
+
         // A 2-level cache to store the result of CrossPoolMigrateCanMigrateFilter.
         // Cache structure is like: <vm-ref, <host-ref, fault-reason>>.
         private readonly Dictionary<string, Dictionary<string, string>> migrateFilterCache = 
             new Dictionary<string, Dictionary<string, string>>();
-
-
-        public CrossPoolMigrateDestinationPage()
-            : this(null, WizardMode.Migrate, null)
-        {
-        }
 
         public CrossPoolMigrateDestinationPage(List<VM> selectedVMs, WizardMode wizardMode, List<IXenConnection> ignoredConnections)
         {
@@ -90,47 +85,38 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             get
             {
                 if (TemplatesOnly)
-                {
-                    if (selectedVMs != null && selectedVMs.Count == 1)
-                    {
-                        return Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_TEMPLATE_SINGLE;
-                    }
-                    else
-                    {
-                        return Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_TEMPLATE;
-                    }
-                }
-                else
-                {
-                    if (selectedVMs != null && selectedVMs.Count == 1)
-                    {
-                        if (wizardMode == WizardMode.Copy)
-                            return Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_SINGLE;
+                    return Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_TEMPLATE;
 
-                        if (wizardMode == WizardMode.Move)
-                            return Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS_MOVE_SINGLE;
+                if (wizardMode == WizardMode.Copy)
+                    return Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY;
 
-                        return Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS_MIGRATE_SINGLE;
-                    }
+                if (wizardMode == WizardMode.Move)
+                    return Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS_MOVE;
 
-                    if (wizardMode == WizardMode.Copy)
-                        return Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY;
-
-                    if (wizardMode == WizardMode.Move)
-                        return Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS_MOVE;
-
-                    return Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS_MIGRATE;
-                    
-                }
+                return Messages.CPM_WIZARD_DESTINATION_INSTRUCTIONS_MIGRATE;
             }
         }
 
-        protected override string TargetServerText => Messages.CPM_WIZARD_DESTINATION_DESTINATION;
+        protected override string TargetPoolText => Messages.CPM_WIZARD_DESTINATION_DESTINATION;
 
-        protected override string TargetServerSelectionIntroText =>
-            TemplatesOnly
-                ? Messages.CPM_WIZARD_DESTINATION_TABLE_INTRO_TEMPLATES
-                : Messages.CPM_WIZARD_DESTINATION_TABLE_INTRO;
+        protected override string TargetServerSelectionIntroText
+        {
+            get
+            {
+                if (TemplatesOnly)
+                    return Messages.CPM_WIZARD_DESTINATION_TABLE_INTRO_TEMPLATES;
+
+                if (wizardMode == WizardMode.Copy)
+                    return Messages.CPM_WIZARD_DESTINATION_TABLE_INTRO_COPY;
+
+                if (wizardMode == WizardMode.Move)
+                    return Messages.CPM_WIZARD_DESTINATION_TABLE_INTRO_MOVE;
+
+                return Messages.CPM_WIZARD_DESTINATION_TABLE_INTRO_MIGRATE;
+            }
+        }
+
+        protected override string VmColumnHeaderText => TemplatesOnly ? Messages.TEMPLATE : Messages.VM;
 
         protected override DelayLoadingOptionComboBoxItem CreateDelayLoadingOptionComboBoxItem(IXenObject xenItem)
         {
@@ -178,9 +164,5 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
             return true;
         }
-
-        protected override string VmColumnHeaderText => TemplatesOnly ? Messages.TEMPLATE : Messages.VM;
-
-        protected override string TargetColumnHeaderText => Messages.HOME_SERVER;
     }
 }

@@ -169,13 +169,13 @@
     <value>3, 30</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>81, 13</value>
+    <value>60, 13</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>&amp;Import VM(s) to:</value>
+    <value>&amp;Destination</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
@@ -193,10 +193,10 @@
     <value>Left, Right</value>
   </data>
   <data name="m_comboBoxConnection.Location" type="System.Drawing.Point, System.Drawing">
-    <value>90, 26</value>
+    <value>69, 26</value>
   </data>
   <data name="m_comboBoxConnection.Size" type="System.Drawing.Size, System.Drawing">
-    <value>525, 21</value>
+    <value>546, 21</value>
   </data>
   <data name="m_comboBoxConnection.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -216,6 +216,9 @@
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="label2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
   <data name="label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -223,22 +226,22 @@
     <value>3, 60</value>
   </data>
   <data name="label2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 10, 3, 0</value>
+    <value>3, 10, 3, 3</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 13</value>
+    <value>612, 13</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>&amp;Assign imported VM(s) to a home server:</value>
+    <value>Placeholder text</value>
   </data>
   <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>
   </data>
   <data name="&gt;&gt;label2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>XenAdmin.Controls.Common.AutoHeightLabel, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;label2.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -259,19 +262,19 @@
     <value>True</value>
   </metadata>
   <data name="m_colTarget.HeaderText" xml:space="preserve">
-    <value>Home Server</value>
+    <value>Server</value>
   </data>
   <data name="m_dataGridView.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
   <data name="m_dataGridView.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 76</value>
+    <value>3, 79</value>
   </data>
   <data name="m_dataGridView.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 10</value>
   </data>
   <data name="m_dataGridView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>612, 216</value>
+    <value>612, 213</value>
   </data>
   <data name="m_dataGridView.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>

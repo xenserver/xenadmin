@@ -57,6 +57,7 @@ namespace XenAdmin.Wizards.GenericPages
         protected List<IXenConnection> ignoredConnections = new List<IXenConnection>();
         private readonly CollectionChangeEventHandler Host_CollectionChangedWithInvoke;
         private string _preferredHomeRef;
+        private IXenObject _selectedTargetPool;
 
         #region Nested classes
 
@@ -75,10 +76,7 @@ namespace XenAdmin.Wizards.GenericPages
                 new AddHostCommand(Program.MainWindow, parent).Run();
             }
 
-            public bool Enabled
-            {
-                get { return true; }
-            }
+            public bool Enabled => true;
         }
 
         private class NoTargetServerPoolItem : IEnableableXenObjectComboBoxItem
@@ -105,7 +103,6 @@ namespace XenAdmin.Wizards.GenericPages
         protected SelectMultipleVMDestinationPage()
         {
             InitializeComponent();
-            InitializeText();
             Host_CollectionChangedWithInvoke = Program.ProgramInvokeHandler(CollectionChanged);
             ConnectionsManager.XenConnections.CollectionChanged += CollectionChanged;
             ShowWarning(null);
@@ -114,17 +111,15 @@ namespace XenAdmin.Wizards.GenericPages
         protected void InitializeText()
         {
             m_labelIntro.Text = InstructionText;
-            label1.Text = TargetServerText;
+            label1.Text = TargetPoolText;
             label2.Text = TargetServerSelectionIntroText;
             m_colVmName.HeaderText = VmColumnHeaderText;
-            m_colTarget.HeaderText = TargetColumnHeaderText;
         }
 
-        private IXenObject _selectedTargetPool;
         public IXenObject SelectedTargetPool
         {
             get => _selectedTargetPool;
-            protected set
+            private set
             {
                 _selectedTargetPool = value;
                 OnChosenItemChanged();
@@ -137,25 +132,11 @@ namespace XenAdmin.Wizards.GenericPages
         protected abstract string InstructionText { get; }
 
         /// <summary>
-        /// Text demarking what the label for the target server drop down should be
+        /// Text specifying the label for the target pool or standalone server drop down
         /// </summary>
-	    protected abstract string TargetServerText { get; }
+        protected abstract string TargetPoolText { get; }
 
-        protected virtual string VmColumnHeaderText
-        {
-            get
-            {
-                return m_colVmName.HeaderText;
-            }
-        }
-
-        protected virtual string TargetColumnHeaderText
-        {
-            get
-            {
-                return m_colTarget.HeaderText;
-            }
-        }
+        protected virtual string VmColumnHeaderText => Messages.VM;
 
         /// <summary>
         /// Text above the table containing a list of VMs and concomitant home server
@@ -600,6 +581,7 @@ namespace XenAdmin.Wizards.GenericPages
         #endregion
 
         #region Control event handlers
+
         private void m_comboBoxConnection_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (updatingHomeServerList)

@@ -3837,37 +3837,31 @@ This action cannot be undone. Are you sure you want to continue?</value>
     <value>&amp;Destination:</value>
   </data>
   <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY" xml:space="preserve">
-    <value>Select the pool or standalone server where you want to copy the selected VMs to.</value>
-  </data>
-  <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_SINGLE" xml:space="preserve">
-    <value>Select the pool or standalone server where you want to copy the selected VM to.</value>
+    <value>Select the pool or standalone server where you want to copy the selected VM(s) to.</value>
   </data>
   <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_TEMPLATE" xml:space="preserve">
-    <value>Select the pool or standalone server where you want to copy the selected templates to.</value>
-  </data>
-  <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_COPY_TEMPLATE_SINGLE" xml:space="preserve">
-    <value>Select the pool or standalone server where you want to copy the selected template to.</value>
+    <value>Select the pool or standalone server where you want to copy the selected template(s) to.</value>
   </data>
   <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_MIGRATE" xml:space="preserve">
-    <value>Select the pool or standalone server where you want to migrate the selected VMs to.</value>
-  </data>
-  <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_MIGRATE_SINGLE" xml:space="preserve">
-    <value>Select the pool or standalone server where you want to migrate the selected VM to.</value>
+    <value>Select the pool or standalone server where you want to migrate the selected VM(s) to.</value>
   </data>
   <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_MOVE" xml:space="preserve">
-    <value>Select the pool or standalone server where you want to move the selected VMs to.</value>
-  </data>
-  <data name="CPM_WIZARD_DESTINATION_INSTRUCTIONS_MOVE_SINGLE" xml:space="preserve">
-    <value>Select the pool or standalone server where you want to move the selected VM to.</value>
+    <value>Select the pool or standalone server where you want to move the selected VM(s) to.</value>
   </data>
   <data name="CPM_WIZARD_DESTINATION_TAB_TITLE" xml:space="preserve">
     <value>Destination Pool</value>
   </data>
-  <data name="CPM_WIZARD_DESTINATION_TABLE_INTRO" xml:space="preserve">
-    <value>Optionally, assign the VM(s) a &amp;home server in the destination pool:</value>
+  <data name="CPM_WIZARD_DESTINATION_TABLE_INTRO_COPY" xml:space="preserve">
+    <value>If you want to copy the disks of a VM to local storage, specify the server below.</value>
+  </data>
+  <data name="CPM_WIZARD_DESTINATION_TABLE_INTRO_MIGRATE" xml:space="preserve">
+    <value>If you want to migrate the disks of a VM to local storage, specify the server below.</value>
+  </data>
+  <data name="CPM_WIZARD_DESTINATION_TABLE_INTRO_MOVE" xml:space="preserve">
+    <value>If you want to move the disks of a VM to local storage, specify the server below.</value>
   </data>
   <data name="CPM_WIZARD_DESTINATION_TABLE_INTRO_TEMPLATES" xml:space="preserve">
-    <value>Optionally, assign the template(s) a &amp;home server in the destination pool:</value>
+    <value>If you want to place the disks of a template on local storage, specify the server below.</value>
   </data>
   <data name="CPM_WIZARD_DESTINATION_TITLE" xml:space="preserve">
     <value>Select the destination pool or standalone server</value>
@@ -4866,7 +4860,7 @@ Click Cancel if you prefer to reconfigure your VMs' memory settings manually.</v
     <value>does not use</value>
   </data>
   <data name="DONT_SELECT_TARGET_SERVER" xml:space="preserve">
-    <value>Don't assign a home server</value>
+    <value>None selected</value>
   </data>
   <data name="DOWLOAD_LATEST_XS_TITLE" xml:space="preserve">
     <value>{0} is now available</value>
@@ -7307,13 +7301,13 @@ This might result in failure to migrate VMs to this server during the RPU or to 
     <value>Place &amp;all imported virtual disks on this target SR:</value>
   </data>
   <data name="IMPORT_WIZARD_DESTINATION_DESTINATION" xml:space="preserve">
-    <value>&amp;Import VM(s) to:</value>
+    <value>&amp;Import to:</value>
   </data>
   <data name="IMPORT_WIZARD_DESTINATION_INSTRUCTIONS" xml:space="preserve">
-    <value>Choose the pool or standalone server where you want to place the VM(s). If required, you can also specify a Home Server within the selected pool for each imported VM.</value>
+    <value>Choose the pool or standalone server where you want to import the VM(s).</value>
   </data>
   <data name="IMPORT_WIZARD_DESTINATION_TABLE_INTRO" xml:space="preserve">
-    <value>&amp;Assign imported VM(s) to a home server:</value>
+    <value>If you want to place the disks of a VM on local storage, specify the server below.</value>
   </data>
   <data name="IMPORT_WIZARD_DOWNLOADING" xml:space="preserve">
     <value>Downloading file {0}, please wait...</value>
