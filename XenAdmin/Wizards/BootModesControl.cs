@@ -129,7 +129,7 @@ namespace XenAdmin.Wizards
                 return;
             }
 
-            imgUefi.Visible = labelUefi.Visible = true;
+            imgUefi.Visible = labelUefi.Visible = radioButtonUEFIBoot.Visible;
             labelUefi.Text = text;
         }
 
@@ -141,7 +141,7 @@ namespace XenAdmin.Wizards
                 return;
             }
 
-            imgSecureUefi.Visible = labelSecureUefi.Visible = true;
+            imgSecureUefi.Visible = labelSecureUefi.Visible = radioButtonUEFISecureBoot.Visible;
             labelSecureUefi.Text = text;
             imgSecureUefi.Image = isInfo ? Images.StaticImages._000_Info3_h32bit_16 : Images.StaticImages._000_Alert2_h32bit_16;
         }
@@ -183,9 +183,12 @@ namespace XenAdmin.Wizards
                 var secureBoot = _templateVM.GetSecureBootMode();
 
                 if (secureBoot == "true" || secureBoot == "auto" && _poolHasCertificates)
-                    radioButtonUEFISecureBoot.Checked = true;
+                    radioButtonUEFISecureBoot.Checked = radioButtonUEFISecureBoot.Visible;
                 else
-                    radioButtonUEFIBoot.Checked = true;
+                    radioButtonUEFIBoot.Checked = radioButtonUEFIBoot.Visible;
+
+                if (!radioButtonUEFISecureBoot.Checked && !radioButtonUEFIBoot.Checked && radioButtonBIOSBoot.Enabled)
+                    radioButtonBIOSBoot.Checked = true;
 
                 if (radioButtonUEFISecureBoot.Enabled && radioButtonUEFISecureBoot.Checked && !_poolHasCertificates)
                     UpdateSecureUefiWarning(Messages.GUEFI_SECUREBOOT_MODE_MISSING_CERTIFICATES, false);
