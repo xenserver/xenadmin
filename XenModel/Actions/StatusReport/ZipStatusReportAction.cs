@@ -72,6 +72,7 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
+            Status = ReportStatus.inProgress;
             do
             {
                 _extractTempDir = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
