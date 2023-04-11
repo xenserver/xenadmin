@@ -167,13 +167,18 @@ namespace XenAdmin.Core
 
         #region Versions
 
+        /// <summary>
+        /// Dundee platform version is 2.0.0
+        /// </summary>
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool DundeeOrGreater(IXenConnection conn)
         {
             return conn == null || DundeeOrGreater(GetCoordinator(conn));
         }
 
-        /// Dundee is ver. 2.0.0
+        /// <summary>
+        /// Dundee platform version is 2.0.0
+        /// </summary>
         /// <param name="host">May be null, in which case true is returned.</param>
         public static bool DundeeOrGreater(Host host)
         {
@@ -189,13 +194,18 @@ namespace XenAdmin.Core
             return conn == null || conn.Session == null || conn.Session.APIVersion >= API_Version.API_2_6;
         }
 
+        /// <summary>
+        /// Ely platform version is 2.1.1
+        /// </summary>
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool ElyOrGreater(IXenConnection conn)
         {
             return conn == null || ElyOrGreater(GetCoordinator(conn));
         }
 
-        /// Ely is ver. 2.1.1
+        /// <summary>
+        /// Ely platform version is 2.1.1
+        /// </summary>
         /// <param name="host">May be null, in which case true is returned.</param>
         public static bool ElyOrGreater(Host host)
         {
@@ -206,12 +216,18 @@ namespace XenAdmin.Core
             return platformVersion != null && ProductVersionCompare(platformVersion, "2.1.1") >= 0;
         }
 
+        /// <summary>
+        /// Havana platform version is 2.1.1 (same as Ely and Honolulu), so use product version here
+        /// </summary>
+        /// <param name="host">May be null, in which case true is returned.</param>
         public static bool HavanaOrGreater(IXenConnection conn)
         {
             return conn == null || HavanaOrGreater(GetCoordinator(conn));
         }
 
-        /// As Havana platform version is same with Ely and Honolulu, so use product version here
+        /// <summary>
+        /// Havana platform version is 2.1.1 (same as Ely and Honolulu), so use product version here
+        /// </summary>
         /// <param name="host">May be null, in which case true is returned.</param>
         public static bool HavanaOrGreater(Host host)
         {
@@ -225,13 +241,18 @@ namespace XenAdmin.Core
                 ProductVersionCompare(productVersion, BrandManager.ProductVersion712Short) >= 0;
         }
 
+        /// <summary>
+        /// Falcon platform version is 2.3.0
+        /// </summary>
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool FalconOrGreater(IXenConnection conn)
         {
             return conn == null || FalconOrGreater(GetCoordinator(conn));
         }
 
-        /// Falcon is ver. 2.3.0
+        /// <summary>
+        /// Falcon platform version is 2.3.0
+        /// </summary>
         /// <param name="host">May be null, in which case true is returned.</param>
         public static bool FalconOrGreater(Host host)
         {
@@ -242,13 +263,18 @@ namespace XenAdmin.Core
             return platformVersion != null && ProductVersionCompare(platformVersion, "2.2.50") >= 0;
         }
 
+        /// <summary>
+        /// Inverness platform version is 2.4.0
+        /// </summary>
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool InvernessOrGreater(IXenConnection conn)
         {
             return conn == null || InvernessOrGreater(GetCoordinator(conn));
         }
 
-        /// Inverness is ver. 2.4.0
+        /// <summary>
+        /// Inverness platform version is 2.4.0
+        /// </summary>
         /// <param name="host">May be null, in which case true is returned.</param>
         public static bool InvernessOrGreater(Host host)
         {
@@ -259,13 +285,18 @@ namespace XenAdmin.Core
             return platformVersion != null && ProductVersionCompare(platformVersion, "2.3.50") >= 0;
         }
 
+        /// <summary>
+        /// Jura platform version is 2.5.0
+        /// </summary>
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool JuraOrGreater(IXenConnection conn)
         {
             return conn == null || JuraOrGreater(GetCoordinator(conn));
         }
 
-        /// Jura is ver. 2.5.0
+        /// <summary>
+        /// Jura platform version is 2.5.0
+        /// </summary>
         /// <param name="host">May be null, in which case true is returned.</param>
         public static bool JuraOrGreater(Host host)
         {
@@ -276,13 +307,18 @@ namespace XenAdmin.Core
             return platformVersion != null && ProductVersionCompare(platformVersion, "2.4.50") >= 0;
         }
 
+        /// <summary>
+        /// Kolkata platform version is 2.6.0
+        /// </summary>
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool KolkataOrGreater(IXenConnection conn)
         {
             return conn == null || KolkataOrGreater(GetCoordinator(conn));
         }
 
+        /// <summary>
         /// Kolkata platform version is 2.6.0
+        /// </summary>
         /// <param name="host">May be null, in which case true is returned.</param>
         public static bool KolkataOrGreater(Host host)
         {
@@ -293,13 +329,18 @@ namespace XenAdmin.Core
             return platformVersion != null && ProductVersionCompare(platformVersion, "2.5.50") >= 0;
         }
 
+        /// <summary>
+        /// Lima platform version is 2.7.0
+        /// </summary>
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool LimaOrGreater(IXenConnection conn)
         {
             return conn == null || LimaOrGreater(GetCoordinator(conn));
         }
 
+        /// <summary>
         /// Lima platform version is 2.7.0
+        /// </summary>
         /// <param name="host">May be null, in which case true is returned.</param>
         public static bool LimaOrGreater(Host host)
         {
@@ -310,91 +351,132 @@ namespace XenAdmin.Core
             return platformVersion != null && ProductVersionCompare(platformVersion, "2.6.50") >= 0;
         }
 
+        /// <summary>
+        /// Naples platform version is 3.0.0
+        /// </summary>
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool NaplesOrGreater(IXenConnection conn)
         {
             return conn == null || NaplesOrGreater(GetCoordinator(conn));
         }
 
-        /// Naples is ver. 3.0.0
+        /// <summary>
+        /// Naples platform version is 3.0.0
+        /// </summary>
         /// <param name="host">May be null, in which case true is returned.</param>
         public static bool NaplesOrGreater(Host host)
         {
             return host == null || NaplesOrGreater(HostPlatformVersion(host));
         }
 
+        /// <summary>
+        /// Naples platform version is 3.0.0
+        /// </summary>
         public static bool NaplesOrGreater(string platformVersion)
         {
             return platformVersion != null && ProductVersionCompare(platformVersion, "2.9.50") >= 0;
         }
 
+        /// <summary>
+        /// Quebec platform version is 3.1.0
+        /// </summary>
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool QuebecOrGreater(IXenConnection conn)
         {
             return conn == null || QuebecOrGreater(GetCoordinator(conn));
         }
 
+        /// <summary>
         /// Quebec platform version is 3.1.0
+        /// </summary>
         /// <param name="host">May be null, in which case true is returned.</param>
         public static bool QuebecOrGreater(Host host)
         {
             return host == null || QuebecOrGreater(HostPlatformVersion(host));
         }
 
+        /// <summary>
+        /// Quebec platform version is 3.1.0
+        /// </summary>
         public static bool QuebecOrGreater(string platformVersion)
         {
             return platformVersion != null && ProductVersionCompare(platformVersion, "3.0.50") >= 0;
         }
 
+        /// <summary>
+        /// Stockholm is ver. 3.2.0
+        /// </summary>
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool StockholmOrGreater(IXenConnection conn)
         {
             return conn == null || StockholmOrGreater(GetCoordinator(conn));
         }
 
+        /// <summary>
+        /// Stockholm is ver. 3.2.0
+        /// </summary>
         /// <param name="host">May be null, in which case true is returned.</param>
         public static bool StockholmOrGreater(Host host)
         {
             return host == null || StockholmOrGreater(HostPlatformVersion(host));
         }
 
+        /// <summary>
         /// Stockholm is ver. 3.2.0
+        /// </summary>
         public static bool StockholmOrGreater(string platformVersion)
         {
             return platformVersion != null && ProductVersionCompare(platformVersion, "3.1.50") >= 0;
         }
 
+        /// <summary>
+        /// Yangtze platform version is 3.2.1
+        /// </summary>
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool YangtzeOrGreater(IXenConnection conn)
         {
             return conn == null || YangtzeOrGreater(GetCoordinator(conn));
         }
 
+        /// <summary>
+        /// Yangtze platform version is 3.2.1
+        /// </summary>
         /// <param name="host">May be null, in which case true is returned.</param>
         public static bool YangtzeOrGreater(Host host)
         {
             return host == null || YangtzeOrGreater(HostPlatformVersion(host));
         }
 
-        /// Yangtze is ver. 3.2.1
+        /// <summary>
+        /// Yangtze platform version is 3.2.1
+        /// </summary>
         public static bool YangtzeOrGreater(string platformVersion)
         {
             return platformVersion != null && ProductVersionCompare(platformVersion, "3.2.1") >= 0;
         }
 
+        /// <summary>
+        /// Cloud public preview platform version is 3.3.0
+        /// </summary>
         /// <param name="conn">May be null, in which case true is returned.</param>
-        public static bool Post82X(IXenConnection conn)
+        public static bool CloudOrGreater(IXenConnection conn)
         {
-            return conn == null || Post82X(GetCoordinator(conn));
+            return conn == null || CloudOrGreater(GetCoordinator(conn));
         }
 
+        /// <summary>
+        /// Cloud public preview platform version is 3.3.0
+        /// </summary>
         /// <param name="host">May be null, in which case true is returned.</param>
-        public static bool Post82X(Host host)
+        public static bool CloudOrGreater(Host host)
         {
-            return host == null || Post82X(HostPlatformVersion(host));
+            return host == null || CloudOrGreater(HostPlatformVersion(host));
         }
 
-        public static bool Post82X(string platformVersion)
+        /// <summary>
+        /// Cloud public preview platform version is 3.3.0
+        /// </summary>
+        public static bool CloudOrGreater(string platformVersion)
         {
             return platformVersion != null && ProductVersionCompare(platformVersion, "3.2.50") >= 0;
         }

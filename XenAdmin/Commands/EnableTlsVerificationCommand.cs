@@ -100,7 +100,7 @@ namespace XenAdmin.Commands
                 return false;
 
             var conn = selection.GetConnectionOfAllItems();
-            if (conn == null || !Helpers.Post82X(conn) ||
+            if (conn == null || !Helpers.CloudOrGreater(conn) ||
                 !Helpers.XapiEqualOrGreater_1_290_0(conn) ||
                 conn.Cache.Hosts.Any(Host.RestrictCertificateVerification))
                 return false;

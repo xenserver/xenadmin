@@ -77,7 +77,7 @@ namespace XenAdmin.Diagnostics.Checks
             if (string.IsNullOrEmpty(upgradePlatformVersion))
                 return new CertificateKeyLengthWarningUrl(this, Host);
 
-            if (Helpers.Post82X(upgradePlatformVersion))
+            if (Helpers.CloudOrGreater(upgradePlatformVersion))
                 return new CertificateKeyLengthProblem(this, Host);
 
             return null;

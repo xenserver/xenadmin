@@ -41,7 +41,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             InitializeComponent();
             label5.Text = string.Format(label5.Text, BrandManager.ProductVersion821, BrandManager.BrandConsole);
             label9.Text = string.Format(label9.Text, BrandManager.BrandConsole);
-            label5.Visible = ConnectionsManager.XenConnectionsCopy.Any(c => c.IsConnected && !Helpers.Post82X(c));
+            label5.Visible = ConnectionsManager.XenConnectionsCopy.Any(c => c.IsConnected && !Helpers.CloudOrGreater(c));
         }
 
         public override string Text => Messages.BEFORE_YOU_START;

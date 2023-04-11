@@ -237,7 +237,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             tooltipText = null;
 
-            if (!Helpers.Post82X(host))
+            if (!Helpers.CloudOrGreater(host))
             {
                 tooltipText = string.Format(Messages.PATCHINGWIZARD_SELECTSERVERPAGE_VERSION_UNSUPPORTED, BrandManager.BrandConsole);
                 return false;
