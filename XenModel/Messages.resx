@@ -13873,6 +13873,12 @@ Schedule:
   <data name="VTPM_NONE_ATTACHED" xml:space="preserve">
     <value>There are no vTPMs attached to this VM.</value>
   </data>
+  <data name="VTPM_OPERATION_DISALLOWED_ADD" xml:space="preserve">
+    <value>Attaching a new vTPM to this VM is currently not allowed.</value>
+  </data>
+  <data name="VTPM_OPERATION_DISALLOWED_REMOVE" xml:space="preserve">
+    <value>Removing this vTPM from the VM is currently not allowed.</value>
+  </data>
   <data name="VTPM_POWER_STATE_WRONG_ATTACH" xml:space="preserve">
     <value>You need to shut down this VM before you can attach a new vTPM to it.</value>
   </data>

@@ -81,9 +81,7 @@ namespace XenAdmin.Dialogs
 
         private void UpdateButtons()
         {
-            var vm = Vtpm.Connection.Resolve(Vtpm.VM);
-            string cannotReason = null;
-            buttonRemove.Enabled = vm!= null && vm.CanRemoveVtpm(out cannotReason);
+            buttonRemove.Enabled = CanRemoveVtpm(out string cannotReason);
 
             if (buttonRemove.Enabled)
                 toolTipContainerRemove.RemoveAll();
@@ -91,13 +89,33 @@ namespace XenAdmin.Dialogs
                 toolTipContainerRemove.SetToolTip(cannotReason);
         }
 
+        private bool CanRemoveVtpm(out string cannotReason)
+        {
+            cannotReason = null;
+
+            if (Helpers.XapiEqualOrGreater_23_10_0(Vtpm.Connection))
+            {
+                if (Vtpm.allowed_operations.Contains(vtpm_operations.destroy))
+                    return true;
+
+                cannotReason = Messages.VTPM_OPERATION_DISALLOWED_REMOVE;
+                return false;
+            }
+
+            var vm = Vtpm.Connection.Resolve(Vtpm.VM);
+            return vm != null && vm.CanRemoveVtpm(out cannotReason);
+        }
+
         private void Vtpm_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (!(sender is VTPM))
+            if (!(sender is VTPM vtpm))
                 return;
 
             if (e.PropertyName == "is_protected" || e.PropertyName == "is_unique")
                 Program.Invoke(this, UpdateProperties);
+
+            if (e.PropertyName == "allowed_operations" && Helpers.XapiEqualOrGreater_23_10_0(vtpm.Connection))
+                Program.Invoke(this, UpdateButtons);
         }
 
         private void buttonRemove_Click(object sender, EventArgs e)

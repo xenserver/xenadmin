@@ -450,6 +450,12 @@ namespace XenAdmin.Core
             return coordinator == null || ProductVersionCompare(coordinator.GetXapiVersion(), "22.33.0") >= 0;
         }
 
+        public static bool XapiEqualOrGreater_23_10_0(IXenConnection conn)
+        {
+            var coordinator = GetCoordinator(conn);
+            return coordinator == null || ProductVersionCompare(coordinator.GetXapiVersion(), "23.10.0") >= 0;
+        }
+
         #endregion
     }
 }

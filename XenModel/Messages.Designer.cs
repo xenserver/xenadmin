@@ -40166,6 +40166,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Attaching a new vTPM to this VM is currently not allowed..
+        /// </summary>
+        public static string VTPM_OPERATION_DISALLOWED_ADD {
+            get {
+                return ResourceManager.GetString("VTPM_OPERATION_DISALLOWED_ADD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Removing this vTPM from the VM is currently not allowed..
+        /// </summary>
+        public static string VTPM_OPERATION_DISALLOWED_REMOVE {
+            get {
+                return ResourceManager.GetString("VTPM_OPERATION_DISALLOWED_REMOVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You need to shut down this VM before you can attach a new vTPM to it..
         /// </summary>
         public static string VTPM_POWER_STATE_WRONG_ATTACH {

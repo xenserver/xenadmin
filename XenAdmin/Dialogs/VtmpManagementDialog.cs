@@ -175,6 +175,22 @@ namespace XenAdmin.Dialogs
                 dlg.ShowDialog(this);
         }
 
+        private bool CanRemoveVtpm(VTPM vtpm, out string cannotReason)
+        {
+            cannotReason = null;
+
+            if (Helpers.XapiEqualOrGreater_23_10_0(vtpm.Connection))
+            {
+                if (vtpm.allowed_operations.Contains(vtpm_operations.destroy))
+                    return true;
+
+                cannotReason = Messages.VTPM_OPERATION_DISALLOWED_REMOVE;
+                return false;
+            }
+
+            return _vm.CanRemoveVtpm(out cannotReason);
+        }
+
         private void ResizeVerticalTabs()
         {
             int maxHeight = splitContainer.Panel1.Height - toolTipContainerAdd.Height;
@@ -182,12 +198,12 @@ namespace XenAdmin.Dialogs
             toolTipContainerAdd.Top = verticalTabs.Top + verticalTabs.Height;
         }
 
-        private void ShowTooltip(Point location)
+        private void ShowTooltip(VtpmManagementPage page, Point location)
         {
             if (!_toolTipVisible)
             {
                 Cursor = Cursors.Hand;
-                var msg = _vm.CanRemoveVtpm(out var cannotReason) ? Messages.VTPM_REMOVE : cannotReason;
+                var msg = CanRemoveVtpm(page.Vtpm, out var cannotReason) ? Messages.VTPM_REMOVE : cannotReason;
 
                 if (!string.IsNullOrEmpty(cannotReason))
                 {
@@ -231,7 +247,7 @@ namespace XenAdmin.Dialogs
             if (!(verticalTabs.Items[pageIndex] is VtpmManagementPage page))
                 return;
 
-            var deleteIcon = _vm.CanRemoveVtpm(out _) ? Images.StaticImages._000_Abort_h32bit_16 : Images.StaticImages._000_Abort_gray_h32bit_16;
+            var deleteIcon = CanRemoveVtpm(page.Vtpm, out _) ? Images.StaticImages._000_Abort_h32bit_16 : Images.StaticImages._000_Abort_gray_h32bit_16;
 
             page.DeleteIconBounds = new Rectangle(e.Bounds.Right - deleteIcon.Width - (32 - deleteIcon.Width) / 2,
                 e.Bounds.Y + (32 - deleteIcon.Height) / 2, deleteIcon.Width, deleteIcon.Height);
@@ -249,7 +265,7 @@ namespace XenAdmin.Dialogs
                 return;
 
             if (page.DeleteIconBounds.Contains(e.Location))
-                ShowTooltip(e.Location);
+                ShowTooltip(page, e.Location);
             else
                 HideTooltip();
         }
@@ -263,7 +279,7 @@ namespace XenAdmin.Dialogs
             if (!(verticalTabs.Items[pageIndex] is VtpmManagementPage page))
                 return;
 
-            if (page.DeleteIconBounds.Contains(e.Location) && _vm.CanRemoveVtpm(out _))
+            if (page.DeleteIconBounds.Contains(e.Location) && CanRemoveVtpm(page.Vtpm, out _))
                 RemoveVtpm(page.Vtpm);
         }
 

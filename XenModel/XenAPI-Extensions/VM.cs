@@ -1797,9 +1797,18 @@ namespace XenAPI
         {
             cannotReason = null;
 
-            if (VTPMs.Count >= VM.MAX_ALLOWED_VTPMS)
+            if (Helpers.XapiEqualOrGreater_23_10_0(Connection))
             {
-                cannotReason = string.Format(Messages.VTPM_MAX_REACHED, VM.MAX_ALLOWED_VTPMS);
+                if (allowed_operations.Contains(vm_operations.create_vtpm))
+                    return true;
+
+                cannotReason = Messages.VTPM_OPERATION_DISALLOWED_ADD;
+                return false;
+            }
+
+            if (VTPMs.Count >= MAX_ALLOWED_VTPMS)
+            {
+                cannotReason = string.Format(Messages.VTPM_MAX_REACHED, MAX_ALLOWED_VTPMS);
                 return false;
             }
             
