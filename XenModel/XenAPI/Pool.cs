@@ -95,8 +95,12 @@ namespace XenAPI
             string client_certificate_auth_name,
             string repository_proxy_url,
             string repository_proxy_username,
+            XenRef<Secret> repository_proxy_password,
             bool migration_compression,
-            bool coordinator_bias)
+            bool coordinator_bias,
+            XenRef<Secret> telemetry_uuid,
+            telemetry_frequency telemetry_frequency,
+            DateTime telemetry_next_collection)
         {
             this.uuid = uuid;
             this.name_label = name_label;
@@ -142,8 +146,12 @@ namespace XenAPI
             this.client_certificate_auth_name = client_certificate_auth_name;
             this.repository_proxy_url = repository_proxy_url;
             this.repository_proxy_username = repository_proxy_username;
+            this.repository_proxy_password = repository_proxy_password;
             this.migration_compression = migration_compression;
             this.coordinator_bias = coordinator_bias;
+            this.telemetry_uuid = telemetry_uuid;
+            this.telemetry_frequency = telemetry_frequency;
+            this.telemetry_next_collection = telemetry_next_collection;
         }
 
         /// <summary>
@@ -210,8 +218,12 @@ namespace XenAPI
             client_certificate_auth_name = record.client_certificate_auth_name;
             repository_proxy_url = record.repository_proxy_url;
             repository_proxy_username = record.repository_proxy_username;
+            repository_proxy_password = record.repository_proxy_password;
             migration_compression = record.migration_compression;
             coordinator_bias = record.coordinator_bias;
+            telemetry_uuid = record.telemetry_uuid;
+            telemetry_frequency = record.telemetry_frequency;
+            telemetry_next_collection = record.telemetry_next_collection;
         }
 
         /// <summary>
@@ -310,10 +322,18 @@ namespace XenAPI
                 repository_proxy_url = Marshalling.ParseString(table, "repository_proxy_url");
             if (table.ContainsKey("repository_proxy_username"))
                 repository_proxy_username = Marshalling.ParseString(table, "repository_proxy_username");
+            if (table.ContainsKey("repository_proxy_password"))
+                repository_proxy_password = Marshalling.ParseRef<Secret>(table, "repository_proxy_password");
             if (table.ContainsKey("migration_compression"))
                 migration_compression = Marshalling.ParseBool(table, "migration_compression");
             if (table.ContainsKey("coordinator_bias"))
                 coordinator_bias = Marshalling.ParseBool(table, "coordinator_bias");
+            if (table.ContainsKey("telemetry_uuid"))
+                telemetry_uuid = Marshalling.ParseRef<Secret>(table, "telemetry_uuid");
+            if (table.ContainsKey("telemetry_frequency"))
+                telemetry_frequency = (telemetry_frequency)Helper.EnumParseDefault(typeof(telemetry_frequency), Marshalling.ParseString(table, "telemetry_frequency"));
+            if (table.ContainsKey("telemetry_next_collection"))
+                telemetry_next_collection = Marshalling.ParseDateTime(table, "telemetry_next_collection");
         }
 
         public bool DeepEquals(Pool other, bool ignoreCurrentOperations)
@@ -369,8 +389,12 @@ namespace XenAPI
                 Helper.AreEqual2(this._client_certificate_auth_name, other._client_certificate_auth_name) &&
                 Helper.AreEqual2(this._repository_proxy_url, other._repository_proxy_url) &&
                 Helper.AreEqual2(this._repository_proxy_username, other._repository_proxy_username) &&
+                Helper.AreEqual2(this._repository_proxy_password, other._repository_proxy_password) &&
                 Helper.AreEqual2(this._migration_compression, other._migration_compression) &&
-                Helper.AreEqual2(this._coordinator_bias, other._coordinator_bias);
+                Helper.AreEqual2(this._coordinator_bias, other._coordinator_bias) &&
+                Helper.AreEqual2(this._telemetry_uuid, other._telemetry_uuid) &&
+                Helper.AreEqual2(this._telemetry_frequency, other._telemetry_frequency) &&
+                Helper.AreEqual2(this._telemetry_next_collection, other._telemetry_next_collection);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Pool server)
@@ -970,6 +994,17 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Get the repository_proxy_password field of the given pool.
+        /// First published in 21.3.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        public static XenRef<Secret> get_repository_proxy_password(Session session, string _pool)
+        {
+            return session.JsonRpcClient.pool_get_repository_proxy_password(session.opaque_ref, _pool);
+        }
+
+        /// <summary>
         /// Get the migration_compression field of the given pool.
         /// Experimental. First published in 22.33.0.
         /// </summary>
@@ -989,6 +1024,39 @@ namespace XenAPI
         public static bool get_coordinator_bias(Session session, string _pool)
         {
             return session.JsonRpcClient.pool_get_coordinator_bias(session.opaque_ref, _pool);
+        }
+
+        /// <summary>
+        /// Get the telemetry_uuid field of the given pool.
+        /// Experimental. First published in 23.9.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        public static XenRef<Secret> get_telemetry_uuid(Session session, string _pool)
+        {
+            return session.JsonRpcClient.pool_get_telemetry_uuid(session.opaque_ref, _pool);
+        }
+
+        /// <summary>
+        /// Get the telemetry_frequency field of the given pool.
+        /// Experimental. First published in 23.9.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        public static telemetry_frequency get_telemetry_frequency(Session session, string _pool)
+        {
+            return session.JsonRpcClient.pool_get_telemetry_frequency(session.opaque_ref, _pool);
+        }
+
+        /// <summary>
+        /// Get the telemetry_next_collection field of the given pool.
+        /// Experimental. First published in 23.9.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        public static DateTime get_telemetry_next_collection(Session session, string _pool)
+        {
+            return session.JsonRpcClient.pool_get_telemetry_next_collection(session.opaque_ref, _pool);
         }
 
         /// <summary>
@@ -2708,6 +2776,52 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Set the timestamp for the next telemetry data collection.
+        /// Experimental. First published in 23.9.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        /// <param name="_value">The earliest timestamp (in UTC) when the next round of telemetry collection can be carried out.</param>
+        public static void set_telemetry_next_collection(Session session, string _pool, DateTime _value)
+        {
+            session.JsonRpcClient.pool_set_telemetry_next_collection(session.opaque_ref, _pool, _value);
+        }
+
+        /// <summary>
+        /// Set the timestamp for the next telemetry data collection.
+        /// Experimental. First published in 23.9.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        /// <param name="_value">The earliest timestamp (in UTC) when the next round of telemetry collection can be carried out.</param>
+        public static XenRef<Task> async_set_telemetry_next_collection(Session session, string _pool, DateTime _value)
+        {
+          return session.JsonRpcClient.async_pool_set_telemetry_next_collection(session.opaque_ref, _pool, _value);
+        }
+
+        /// <summary>
+        /// Assign a new UUID to telemetry data.
+        /// Experimental. First published in 23.9.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        public static void reset_telemetry_uuid(Session session, string _pool)
+        {
+            session.JsonRpcClient.pool_reset_telemetry_uuid(session.opaque_ref, _pool);
+        }
+
+        /// <summary>
+        /// Assign a new UUID to telemetry data.
+        /// Experimental. First published in 23.9.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        public static XenRef<Task> async_reset_telemetry_uuid(Session session, string _pool)
+        {
+          return session.JsonRpcClient.async_pool_reset_telemetry_uuid(session.opaque_ref, _pool);
+        }
+
+        /// <summary>
         /// Return a list of all the pools known to the system.
         /// First published in XenServer 4.0.
         /// </summary>
@@ -3525,6 +3639,25 @@ namespace XenAPI
         private string _repository_proxy_username = "";
 
         /// <summary>
+        /// Password for the authentication of the proxy used in syncing with the enabled repositories
+        /// First published in 21.3.0.
+        /// </summary>
+        [JsonConverter(typeof(XenRefConverter<Secret>))]
+        public virtual XenRef<Secret> repository_proxy_password
+        {
+            get { return _repository_proxy_password; }
+            set
+            {
+                if (!Helper.AreEqual(value, _repository_proxy_password))
+                {
+                    _repository_proxy_password = value;
+                    NotifyPropertyChanged("repository_proxy_password");
+                }
+            }
+        }
+        private XenRef<Secret> _repository_proxy_password = new XenRef<Secret>("OpaqueRef:NULL");
+
+        /// <summary>
         /// Default behaviour during migration, True if stream compression should be used
         /// Experimental. First published in 22.33.0.
         /// </summary>
@@ -3558,5 +3691,62 @@ namespace XenAPI
             }
         }
         private bool _coordinator_bias = true;
+
+        /// <summary>
+        /// The UUID of the pool for identification of telemetry data
+        /// Experimental. First published in 23.9.0.
+        /// </summary>
+        [JsonConverter(typeof(XenRefConverter<Secret>))]
+        public virtual XenRef<Secret> telemetry_uuid
+        {
+            get { return _telemetry_uuid; }
+            set
+            {
+                if (!Helper.AreEqual(value, _telemetry_uuid))
+                {
+                    _telemetry_uuid = value;
+                    NotifyPropertyChanged("telemetry_uuid");
+                }
+            }
+        }
+        private XenRef<Secret> _telemetry_uuid = new XenRef<Secret>("OpaqueRef:NULL");
+
+        /// <summary>
+        /// How often the telemetry collection will be carried out
+        /// Experimental. First published in 23.9.0.
+        /// </summary>
+        [JsonConverter(typeof(telemetry_frequencyConverter))]
+        public virtual telemetry_frequency telemetry_frequency
+        {
+            get { return _telemetry_frequency; }
+            set
+            {
+                if (!Helper.AreEqual(value, _telemetry_frequency))
+                {
+                    _telemetry_frequency = value;
+                    NotifyPropertyChanged("telemetry_frequency");
+                }
+            }
+        }
+        private telemetry_frequency _telemetry_frequency = telemetry_frequency.weekly;
+
+        /// <summary>
+        /// The earliest timestamp (in UTC) when the next round of telemetry collection can be carried out
+        /// Experimental. First published in 23.9.0.
+        /// </summary>
+        [JsonConverter(typeof(XenDateTimeConverter))]
+        public virtual DateTime telemetry_next_collection
+        {
+            get { return _telemetry_next_collection; }
+            set
+            {
+                if (!Helper.AreEqual(value, _telemetry_next_collection))
+                {
+                    _telemetry_next_collection = value;
+                    NotifyPropertyChanged("telemetry_next_collection");
+                }
+            }
+        }
+        private DateTime _telemetry_next_collection = DateTime.ParseExact("19700101T00:00:00Z", "yyyyMMddTHH:mm:ssZ", CultureInfo.InvariantCulture);
     }
 }

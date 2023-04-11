@@ -32,35 +32,27 @@ using Newtonsoft.Json;
 
 namespace XenAPI
 {
-    [JsonConverter(typeof(domain_typeConverter))]
-    public enum domain_type
+    [JsonConverter(typeof(telemetry_frequencyConverter))]
+    public enum telemetry_frequency
     {
         /// <summary>
-        /// HVM; Fully Virtualised
+        /// Run telemetry task daily
         /// </summary>
-        hvm,
+        daily,
         /// <summary>
-        /// PV: Paravirtualised
+        /// Run telemetry task weekly
         /// </summary>
-        pv,
+        weekly,
         /// <summary>
-        /// PV inside a PVH container
+        /// Run telemetry task monthly
         /// </summary>
-        pv_in_pvh,
-        /// <summary>
-        /// PVH
-        /// </summary>
-        pvh,
-        /// <summary>
-        /// Not specified or unknown domain type
-        /// </summary>
-        unspecified,
+        monthly,
         unknown
     }
 
-    public static class domain_type_helper
+    public static class telemetry_frequency_helper
     {
-        public static string ToString(domain_type x)
+        public static string ToString(telemetry_frequency x)
         {
             return x.StringOf();
         }
@@ -68,31 +60,27 @@ namespace XenAPI
 
     public static partial class EnumExt
     {
-        public static string StringOf(this domain_type x)
+        public static string StringOf(this telemetry_frequency x)
         {
             switch (x)
             {
-                case domain_type.hvm:
-                    return "hvm";
-                case domain_type.pv:
-                    return "pv";
-                case domain_type.pv_in_pvh:
-                    return "pv_in_pvh";
-                case domain_type.pvh:
-                    return "pvh";
-                case domain_type.unspecified:
-                    return "unspecified";
+                case telemetry_frequency.daily:
+                    return "daily";
+                case telemetry_frequency.weekly:
+                    return "weekly";
+                case telemetry_frequency.monthly:
+                    return "monthly";
                 default:
                     return "unknown";
             }
         }
     }
 
-    internal class domain_typeConverter : XenEnumConverter
+    internal class telemetry_frequencyConverter : XenEnumConverter
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            writer.WriteValue(((domain_type)value).StringOf());
+            writer.WriteValue(((telemetry_frequency)value).StringOf());
         }
     }
 }

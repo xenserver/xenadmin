@@ -52,6 +52,8 @@ namespace XenAPI
         }
 
         public VTPM(string uuid,
+            List<vtpm_operations> allowed_operations,
+            Dictionary<string, vtpm_operations> current_operations,
             XenRef<VM> VM,
             XenRef<VM> backend,
             persistence_backend persistence_backend,
@@ -59,6 +61,8 @@ namespace XenAPI
             bool is_protected)
         {
             this.uuid = uuid;
+            this.allowed_operations = allowed_operations;
+            this.current_operations = current_operations;
             this.VM = VM;
             this.backend = backend;
             this.persistence_backend = persistence_backend;
@@ -87,6 +91,8 @@ namespace XenAPI
         public override void UpdateFrom(VTPM record)
         {
             uuid = record.uuid;
+            allowed_operations = record.allowed_operations;
+            current_operations = record.current_operations;
             VM = record.VM;
             backend = record.backend;
             persistence_backend = record.persistence_backend;
@@ -104,6 +110,10 @@ namespace XenAPI
         {
             if (table.ContainsKey("uuid"))
                 uuid = Marshalling.ParseString(table, "uuid");
+            if (table.ContainsKey("allowed_operations"))
+                allowed_operations = Helper.StringArrayToEnumList<vtpm_operations>(Marshalling.ParseStringArray(table, "allowed_operations"));
+            if (table.ContainsKey("current_operations"))
+                current_operations = Maps.convert_from_proxy_string_vtpm_operations(Marshalling.ParseHashTable(table, "current_operations"));
             if (table.ContainsKey("VM"))
                 VM = Marshalling.ParseRef<VM>(table, "VM");
             if (table.ContainsKey("backend"))
@@ -116,14 +126,18 @@ namespace XenAPI
                 is_protected = Marshalling.ParseBool(table, "is_protected");
         }
 
-        public bool DeepEquals(VTPM other)
+        public bool DeepEquals(VTPM other, bool ignoreCurrentOperations)
         {
             if (ReferenceEquals(null, other))
                 return false;
             if (ReferenceEquals(this, other))
                 return true;
 
+            if (!ignoreCurrentOperations && !Helper.AreEqual2(this.current_operations, other.current_operations))
+                return false;
+
             return Helper.AreEqual2(this._uuid, other._uuid) &&
+                Helper.AreEqual2(this._allowed_operations, other._allowed_operations) &&
                 Helper.AreEqual2(this._VM, other._VM) &&
                 Helper.AreEqual2(this._backend, other._backend) &&
                 Helper.AreEqual2(this._persistence_backend, other._persistence_backend) &&
@@ -175,6 +189,28 @@ namespace XenAPI
         public static string get_uuid(Session session, string _vtpm)
         {
             return session.JsonRpcClient.vtpm_get_uuid(session.opaque_ref, _vtpm);
+        }
+
+        /// <summary>
+        /// Get the allowed_operations field of the given VTPM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vtpm">The opaque_ref of the given vtpm</param>
+        public static List<vtpm_operations> get_allowed_operations(Session session, string _vtpm)
+        {
+            return session.JsonRpcClient.vtpm_get_allowed_operations(session.opaque_ref, _vtpm);
+        }
+
+        /// <summary>
+        /// Get the current_operations field of the given VTPM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vtpm">The opaque_ref of the given vtpm</param>
+        public static Dictionary<string, vtpm_operations> get_current_operations(Session session, string _vtpm)
+        {
+            return session.JsonRpcClient.vtpm_get_current_operations(session.opaque_ref, _vtpm);
         }
 
         /// <summary>
@@ -315,6 +351,42 @@ namespace XenAPI
             }
         }
         private string _uuid = "";
+
+        /// <summary>
+        /// list of the operations allowed in this state. This list is advisory only and the server state may have changed by the time this field is read by a client.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        public virtual List<vtpm_operations> allowed_operations
+        {
+            get { return _allowed_operations; }
+            set
+            {
+                if (!Helper.AreEqual(value, _allowed_operations))
+                {
+                    _allowed_operations = value;
+                    NotifyPropertyChanged("allowed_operations");
+                }
+            }
+        }
+        private List<vtpm_operations> _allowed_operations = new List<vtpm_operations>() {};
+
+        /// <summary>
+        /// links each of the running tasks using this object (by reference) to a current_operation enum which describes the nature of the task.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        public virtual Dictionary<string, vtpm_operations> current_operations
+        {
+            get { return _current_operations; }
+            set
+            {
+                if (!Helper.AreEqual(value, _current_operations))
+                {
+                    _current_operations = value;
+                    NotifyPropertyChanged("current_operations");
+                }
+            }
+        }
+        private Dictionary<string, vtpm_operations> _current_operations = new Dictionary<string, vtpm_operations>() {};
 
         /// <summary>
         /// The virtual machine the TPM is attached to
