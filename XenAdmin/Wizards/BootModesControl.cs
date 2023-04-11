@@ -144,7 +144,8 @@ namespace XenAdmin.Wizards
             UpdateSecureUefiWarning(null);
 
             radioButtonUEFIBoot.Visible = !Helpers.FeatureForbidden(_connection, Host.UefiBootDisabled);
-            radioButtonUEFISecureBoot.Visible = !Helpers.FeatureForbidden(_connection, Host.UefiSecureBootDisabled);
+            radioButtonUEFISecureBoot.Visible = !Helpers.FeatureForbidden(_connection, Host.UefiBootDisabled) &&
+                                                !Helpers.FeatureForbidden(_connection, Host.UefiSecureBootDisabled);
 
             if (_templateVM == null)
             {
@@ -226,8 +227,8 @@ namespace XenAdmin.Wizards
 
         public static bool ShowBootModeOptions(IXenConnection connection)
         {
-            return Helpers.NaplesOrGreater(connection) && 
-                   (!Helpers.FeatureForbidden(connection, Host.UefiBootDisabled) || !Helpers.FeatureForbidden(connection, Host.UefiSecureBootDisabled));
+            //check only UEFI as UEFI Secure boot depends on it
+            return Helpers.NaplesOrGreater(connection) && !Helpers.FeatureForbidden(connection, Host.UefiBootDisabled);
         }
 
         private void radioButtonUEFISecureBoot_CheckedChanged(object sender, EventArgs e)
