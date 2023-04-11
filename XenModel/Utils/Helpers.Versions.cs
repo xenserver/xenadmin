@@ -189,11 +189,6 @@ namespace XenAdmin.Core
             return platformVersion != null && ProductVersionCompare(platformVersion, "2.0.0") >= 0;
         }
 
-        public static bool DundeePlusOrGreater(IXenConnection conn)
-        {
-            return conn == null || conn.Session == null || conn.Session.APIVersion >= API_Version.API_2_6;
-        }
-
         /// <summary>
         /// Ely platform version is 2.1.1
         /// </summary>
@@ -480,6 +475,36 @@ namespace XenAdmin.Core
         {
             return platformVersion != null && ProductVersionCompare(platformVersion, "3.2.50") >= 0;
         }
+
+        /// <summary>
+        /// Nile platform version is 3.4.0
+        /// </summary>
+        /// <param name="conn">May be null, in which case true is returned.</param>
+        public static bool NileOrGreater(IXenConnection conn)
+        {
+            return conn == null || NileOrGreater(GetCoordinator(conn));
+        }
+
+        /// <summary>
+        /// Nile platform version is 3.4.0
+        /// </summary>
+        /// <param name="host">May be null, in which case true is returned.</param>
+        public static bool NileOrGreater(Host host)
+        {
+            return host == null || NileOrGreater(HostPlatformVersion(host));
+        }
+
+        /// <summary>
+        /// Nile platform version is 3.4.0
+        /// </summary>
+        public static bool NileOrGreater(string platformVersion)
+        {
+            return platformVersion != null && ProductVersionCompare(platformVersion, "3.3.50") >= 0;
+        }
+
+        #endregion
+
+        #region Xapi RPM Versions
 
         public static bool XapiEqualOrGreater_1_290_0(IXenConnection conn)
         {
