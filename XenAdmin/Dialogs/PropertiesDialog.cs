@@ -217,7 +217,7 @@ namespace XenAdmin.Dialogs
                 if (is_pool_or_standalone && !Helpers.FeatureForbidden(xenObject.Connection, Host.RestrictCorosync))
                     ShowTab(ClusteringEditPage = new ClusteringEditPage());
 
-                if (is_pool && Helpers.Post82X(xenObject.Connection) && Helpers.XapiEqualOrGreater_22_33_0(xenObject.Connection))
+                if (is_pool && Helpers.CloudOrGreater(xenObject.Connection) && Helpers.XapiEqualOrGreater_22_33_0(xenObject.Connection))
                     ShowTab(_poolAdvancedEditPage = new PoolAdvancedEditPage());
 
                 if (is_network)

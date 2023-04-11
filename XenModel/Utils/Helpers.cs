@@ -1459,7 +1459,7 @@ namespace XenAdmin.Core
 
         public static bool PvsCacheCapability(IXenConnection connection)
         {
-            if (Post82X(connection))
+            if (CloudOrGreater(connection))
                 return true;
 
             var coordinator = GetCoordinator(connection);
