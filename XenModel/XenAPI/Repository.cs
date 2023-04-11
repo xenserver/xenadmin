@@ -288,9 +288,11 @@ namespace XenAPI
         /// <summary>
         /// Get the up_to_date field of the given Repository.
         /// First published in 1.301.0.
+        /// Deprecated since 23.12.0-next.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_repository">The opaque_ref of the given repository</param>
+        [Deprecated("23.12.0-next")]
         public static bool get_up_to_date(Session session, string _repository)
         {
             return session.JsonRpcClient.repository_get_up_to_date(session.opaque_ref, _repository);

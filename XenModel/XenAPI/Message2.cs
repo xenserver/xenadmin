@@ -34,6 +34,7 @@ namespace XenAPI
     {
         public enum MessageType
         {
+            PERIODIC_UPDATE_SYNC_FAILED,
             UPDATES_FEATURE_EXPIRED,
             UPDATES_FEATURE_EXPIRING_WARNING,
             UPDATES_FEATURE_EXPIRING_MAJOR,
@@ -144,6 +145,8 @@ namespace XenAPI
             {
                 switch (this.name)
                 {
+                    case "PERIODIC_UPDATE_SYNC_FAILED":
+                        return MessageType.PERIODIC_UPDATE_SYNC_FAILED;
                     case "UPDATES_FEATURE_EXPIRED":
                         return MessageType.UPDATES_FEATURE_EXPIRED;
                     case "UPDATES_FEATURE_EXPIRING_WARNING":
