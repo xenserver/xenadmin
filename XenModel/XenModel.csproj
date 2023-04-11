@@ -361,6 +361,7 @@
     <Compile Include="XenAPI\ipv6_configuration_mode.cs" />
     <Compile Include="XenAPI\JsonRpc.cs" />
     <Compile Include="XenAPI\JsonRpcClient.cs" />
+    <Compile Include="XenAPI\latest_synced_updates_applied_state.cs" />
     <Compile Include="XenAPI\livepatch_status.cs" />
     <Compile Include="XenAPI\LVHD.cs">
       <SubType>Code</SubType>
@@ -397,6 +398,7 @@
     <Compile Include="XenAPI\tunnel_protocol.cs" />
     <Compile Include="XenAPI\update_after_apply_guidance.cs" />
     <Compile Include="XenAPI\update_guidances.cs" />
+    <Compile Include="XenAPI\update_sync_frequency.cs" />
     <Compile Include="XenAPI\USB_group.cs" />
     <Compile Include="XenAPI\Vdi_nbd_server_info.cs" />
     <Compile Include="XenAPI\VGPU.cs" />

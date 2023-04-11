@@ -1717,6 +1717,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid day of the week chosen for weekly update sync..
+        /// </summary>
+        public static string INVALID_UPDATE_SYNC_DAY {
+            get {
+                return ResourceManager.GetString("INVALID_UPDATE_SYNC_DAY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The updateinfo.xml is invalid..
         /// </summary>
         public static string INVALID_UPDATEINFO_XML {
@@ -5583,11 +5592,11 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A call to pool.sync_updates is required before this operation..
+        ///   Looks up a localized string similar to Requires recommended guidance after applying updates..
         /// </summary>
-        public static string UPDATES_REQUIRE_SYNC {
+        public static string UPDATES_REQUIRE_RECOMMENDED_GUIDANCE {
             get {
-                return ResourceManager.GetString("UPDATES_REQUIRE_SYNC", resourceCulture);
+                return ResourceManager.GetString("UPDATES_REQUIRE_RECOMMENDED_GUIDANCE", resourceCulture);
             }
         }
         

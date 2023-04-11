@@ -672,6 +672,9 @@
   <data name="INVALID_UPDATEINFO_XML" xml:space="preserve">
     <value>The updateinfo.xml is invalid.</value>
   </data>
+  <data name="INVALID_UPDATE_SYNC_DAY" xml:space="preserve">
+    <value>Invalid day of the week chosen for weekly update sync.</value>
+  </data>
   <data name="INVALID_VALUE" xml:space="preserve">
     <value>The value &apos;{1}&apos; is invalid for field &apos;{0}&apos;.</value>
   </data>
@@ -1922,8 +1925,8 @@ Authorized Roles: {1}</value>
   <data name="UPDATEINFO_HASH_MISMATCH" xml:space="preserve">
     <value>The hash of updateinfo doesn&apos;t match with current one. There may be newer available updates.</value>
   </data>
-  <data name="UPDATES_REQUIRE_SYNC" xml:space="preserve">
-    <value>A call to pool.sync_updates is required before this operation.</value>
+  <data name="UPDATES_REQUIRE_RECOMMENDED_GUIDANCE" xml:space="preserve">
+    <value>Requires recommended guidance after applying updates.</value>
   </data>
   <data name="UPDATE_ALREADY_APPLIED" xml:space="preserve">
     <value>This update has already been applied.</value>
@@ -2444,4 +2447,4 @@ Authorized Roles: {1}</value>
   <data name="XMLRPC_UNMARSHAL_FAILURE" xml:space="preserve">
     <value>The server failed to unmarshal the XMLRPC message; it was expecting one element and received something else.</value>
   </data>
-</root>
+</root>
