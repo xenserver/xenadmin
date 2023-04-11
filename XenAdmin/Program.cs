@@ -58,7 +58,7 @@ namespace XenAdmin
 
         private static NamedPipes.Pipe _pipe;
         private static string _pipePath;
-        private const string PIPE_PATH_PATTERN = @"\\.\pipe\{0}-{1}";
+        private const string PIPE_PATH_PATTERN = @"\\.\pipe\{0}-{1}-{2}-{3}";
 
         public static Font DefaultFont = FormFontFixer.DefaultFont;
         public static Font DefaultFontBold;
@@ -145,7 +145,7 @@ namespace XenAdmin
         public static void Main(string[] args)
         {
             string appGuid = ((GuidAttribute)Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(GuidAttribute), false).GetValue(0)).Value;
-            _pipePath = string.Format(PIPE_PATH_PATTERN, BrandManager.BrandConsoleNoSpace, appGuid);
+            _pipePath = string.Format(PIPE_PATH_PATTERN, BrandManager.BrandConsoleNoSpace, Process.GetCurrentProcess().SessionId, Environment.UserName, appGuid);
 
             if (NamedPipes.Pipe.ExistsPipe(_pipePath))
             {
