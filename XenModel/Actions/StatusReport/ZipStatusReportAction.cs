@@ -63,8 +63,8 @@ namespace XenAdmin.Actions
         /// <param name="destFile">The target file to store the compressed result</param>
         /// <param name="timeString">Time string used when running action as <see cref="StatusReportAction"/>. Can be omitted otherwise.</param>
         /// <param name="suppressHistory">Whether to suppress history in the Events TabPage</param>
-        public ZipStatusReportAction(string tempFolder, string destFile, string timeString = null, bool suppressHistory =true)
-            : base(null, Messages.BUGTOOL_SAVING, Messages.BUGTOOL_SAVING, timeString, suppressHistory)
+        public ZipStatusReportAction(string tempFolder, string destFile, string timeString = null, bool suppressHistory = true)
+            : base(null, Messages.BUGTOOL_SAVING, destFile, timeString, suppressHistory)
         {
             _inputTempFolder = tempFolder;
             _destFile = destFile;
