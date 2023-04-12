@@ -1,4 +1,5 @@
-/* Copyright (c) Cloud Software Group, Inc.
+/*
+ * Copyright (c) Cloud Software Group, Inc.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -430,7 +431,6 @@ namespace XenAPI
             Socket socket =
                 new Socket(addressFamily, SocketType.Stream, ProtocolType.Tcp);
             socket.NoDelay = nodelay;
-            //socket.ReceiveBufferSize = 64 * 1024;
             socket.ReceiveTimeout = timeoutMs;
             socket.SendTimeout = timeoutMs;
             socket.Connect(uri.Host, uri.Port);

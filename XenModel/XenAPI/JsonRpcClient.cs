@@ -1,4 +1,5 @@
-/* Copyright (c) Cloud Software Group, Inc.
+/*
+ * Copyright (c) Cloud Software Group, Inc.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -1115,6 +1116,20 @@ namespace XenAPI
             return Rpc<string>("pool.get_repository_proxy_username", new JArray(session, _pool ?? ""), serializer);
         }
 
+        public bool pool_get_migration_compression(string session, string _pool)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            return Rpc<bool>("pool.get_migration_compression", new JArray(session, _pool ?? ""), serializer);
+        }
+
+        public bool pool_get_coordinator_bias(string session, string _pool)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            return Rpc<bool>("pool.get_coordinator_bias", new JArray(session, _pool ?? ""), serializer);
+        }
+
         public void pool_set_name_label(string session, string _pool, string _name_label)
         {
             var converters = new List<JsonConverter> {};
@@ -1274,6 +1289,20 @@ namespace XenAPI
             var converters = new List<JsonConverter> {};
             var serializer = CreateSerializer(converters);
             Rpc("pool.set_is_psr_pending", new JArray(session, _pool ?? "", _is_psr_pending), serializer);
+        }
+
+        public void pool_set_migration_compression(string session, string _pool, bool _migration_compression)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            Rpc("pool.set_migration_compression", new JArray(session, _pool ?? "", _migration_compression), serializer);
+        }
+
+        public void pool_set_coordinator_bias(string session, string _pool, bool _coordinator_bias)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            Rpc("pool.set_coordinator_bias", new JArray(session, _pool ?? "", _coordinator_bias), serializer);
         }
 
         public void pool_join(string session, string _master_address, string _master_username, string _master_password)
@@ -2102,6 +2131,20 @@ namespace XenAPI
             return Rpc<XenRef<Task>>("Async.pool.set_uefi_certificates", new JArray(session, _pool ?? "", _value ?? ""), serializer);
         }
 
+        public void pool_set_https_only(string session, string _pool, bool _value)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            Rpc("pool.set_https_only", new JArray(session, _pool ?? "", _value), serializer);
+        }
+
+        public XenRef<Task> async_pool_set_https_only(string session, string _pool, bool _value)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<XenRef<Task>>("Async.pool.set_https_only", new JArray(session, _pool ?? "", _value), serializer);
+        }
+
         public List<XenRef<Pool>> pool_get_all(string session)
         {
             var converters = new List<JsonConverter> {new XenRefListConverter<Pool>()};
@@ -2760,6 +2803,13 @@ namespace XenAPI
             return Rpc<long>("VM.get_VCPUs_at_startup", new JArray(session, _vm ?? ""), serializer);
         }
 
+        public on_softreboot_behavior vm_get_actions_after_softreboot(string session, string _vm)
+        {
+            var converters = new List<JsonConverter> {new on_softreboot_behaviorConverter()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<on_softreboot_behavior>("VM.get_actions_after_softreboot", new JArray(session, _vm ?? ""), serializer);
+        }
+
         public on_normal_exit vm_get_actions_after_shutdown(string session, string _vm)
         {
             var converters = new List<JsonConverter> {new on_normal_exitConverter()};
@@ -3269,6 +3319,13 @@ namespace XenAPI
             var converters = new List<JsonConverter> {};
             var serializer = CreateSerializer(converters);
             Rpc("VM.remove_from_VCPUs_params", new JArray(session, _vm ?? "", _key ?? ""), serializer);
+        }
+
+        public void vm_set_actions_after_softreboot(string session, string _vm, on_softreboot_behavior _after_softreboot)
+        {
+            var converters = new List<JsonConverter> {new on_softreboot_behaviorConverter()};
+            var serializer = CreateSerializer(converters);
+            Rpc("VM.set_actions_after_softreboot", new JArray(session, _vm ?? "", _after_softreboot.StringOf()), serializer);
         }
 
         public void vm_set_actions_after_shutdown(string session, string _vm, on_normal_exit _after_shutdown)
@@ -6211,6 +6268,13 @@ namespace XenAPI
             return Rpc<DateTime>("host.get_last_software_update", new JArray(session, _host ?? ""), serializer);
         }
 
+        public bool host_get_https_only(string session, string _host)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            return Rpc<bool>("host.get_https_only", new JArray(session, _host ?? ""), serializer);
+        }
+
         public void host_set_name_label(string session, string _host, string _label)
         {
             var converters = new List<JsonConverter> {};
@@ -7210,6 +7274,20 @@ namespace XenAPI
             var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
             var serializer = CreateSerializer(converters);
             return Rpc<XenRef<Task>>("Async.host.apply_updates", new JArray(session, _host ?? "", _hash ?? ""), serializer);
+        }
+
+        public void host_set_https_only(string session, string _host, bool _value)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            Rpc("host.set_https_only", new JArray(session, _host ?? "", _value), serializer);
+        }
+
+        public XenRef<Task> async_host_set_https_only(string session, string _host, bool _value)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<XenRef<Task>>("Async.host.set_https_only", new JArray(session, _host ?? "", _value), serializer);
         }
 
         public List<XenRef<Host>> host_get_all(string session)
@@ -15275,20 +15353,6 @@ namespace XenAPI
             var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<Repository>()};
             var serializer = CreateSerializer(converters);
             return Rpc<Dictionary<XenRef<Repository>, Repository>>("Repository.get_all_records", new JArray(session), serializer);
-        }
-
-        public bool pool_get_migration_compression(string session, string _pool)
-        {
-            var converters = new List<JsonConverter> { };
-            var serializer = CreateSerializer(converters);
-            return Rpc<bool>("pool.get_migration_compression", new JArray(session, _pool ?? ""), serializer);
-        }
-
-        public void pool_set_migration_compression(string session, string _pool, bool _migration_compression)
-        {
-            var converters = new List<JsonConverter> { };
-            var serializer = CreateSerializer(converters);
-            Rpc("pool.set_migration_compression", new JArray(session, _pool ?? "", _migration_compression), serializer);
         }
     }
 }

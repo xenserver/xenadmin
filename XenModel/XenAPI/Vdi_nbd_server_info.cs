@@ -1,4 +1,5 @@
-/* Copyright (c) Cloud Software Group, Inc.
+/*
+ * Copyright (c) Cloud Software Group, Inc.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -75,15 +76,6 @@ namespace XenAPI
             UpdateFrom(table);
         }
 
-        /// <summary>
-        /// Creates a new Vdi_nbd_server_info from a Proxy_Vdi_nbd_server_info.
-        /// </summary>
-        /// <param name="proxy"></param>
-        public Vdi_nbd_server_info(Proxy_Vdi_nbd_server_info proxy)
-        {
-            UpdateFrom(proxy);
-        }
-
         #endregion
 
         /// <summary>
@@ -97,15 +89,6 @@ namespace XenAPI
             port = record.port;
             cert = record.cert;
             subject = record.subject;
-        }
-
-        internal void UpdateFrom(Proxy_Vdi_nbd_server_info proxy)
-        {
-            exportname = proxy.exportname == null ? null : proxy.exportname;
-            address = proxy.address == null ? null : proxy.address;
-            port = proxy.port == null ? 0 : long.Parse(proxy.port);
-            cert = proxy.cert == null ? null : proxy.cert;
-            subject = proxy.subject == null ? null : proxy.subject;
         }
 
         /// <summary>
@@ -126,17 +109,6 @@ namespace XenAPI
                 cert = Marshalling.ParseString(table, "cert");
             if (table.ContainsKey("subject"))
                 subject = Marshalling.ParseString(table, "subject");
-        }
-
-        public Proxy_Vdi_nbd_server_info ToProxy()
-        {
-            Proxy_Vdi_nbd_server_info result_ = new Proxy_Vdi_nbd_server_info();
-            result_.exportname = exportname ?? "";
-            result_.address = address ?? "";
-            result_.port = port.ToString();
-            result_.cert = cert ?? "";
-            result_.subject = subject ?? "";
-            return result_;
         }
 
         public bool DeepEquals(Vdi_nbd_server_info other)

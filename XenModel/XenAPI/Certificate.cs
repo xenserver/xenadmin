@@ -1,4 +1,5 @@
-/* Copyright (c) Cloud Software Group, Inc.
+/*
+ * Copyright (c) Cloud Software Group, Inc.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -79,15 +80,6 @@ namespace XenAPI
             UpdateFrom(table);
         }
 
-        /// <summary>
-        /// Creates a new Certificate from a Proxy_Certificate.
-        /// </summary>
-        /// <param name="proxy"></param>
-        public Certificate(Proxy_Certificate proxy)
-        {
-            UpdateFrom(proxy);
-        }
-
         #endregion
 
         /// <summary>
@@ -103,17 +95,6 @@ namespace XenAPI
             not_before = record.not_before;
             not_after = record.not_after;
             fingerprint = record.fingerprint;
-        }
-
-        internal void UpdateFrom(Proxy_Certificate proxy)
-        {
-            uuid = proxy.uuid == null ? null : proxy.uuid;
-            name = proxy.name == null ? null : proxy.name;
-            type = proxy.type == null ? (certificate_type) 0 : (certificate_type)Helper.EnumParseDefault(typeof(certificate_type), (string)proxy.type);
-            host = proxy.host == null ? null : XenRef<Host>.Create(proxy.host);
-            not_before = proxy.not_before;
-            not_after = proxy.not_after;
-            fingerprint = proxy.fingerprint == null ? null : proxy.fingerprint;
         }
 
         /// <summary>
@@ -138,19 +119,6 @@ namespace XenAPI
                 not_after = Marshalling.ParseDateTime(table, "not_after");
             if (table.ContainsKey("fingerprint"))
                 fingerprint = Marshalling.ParseString(table, "fingerprint");
-        }
-
-        public Proxy_Certificate ToProxy()
-        {
-            Proxy_Certificate result_ = new Proxy_Certificate();
-            result_.uuid = uuid ?? "";
-            result_.name = name ?? "";
-            result_.type = certificate_type_helper.ToString(type);
-            result_.host = host ?? "";
-            result_.not_before = not_before;
-            result_.not_after = not_after;
-            result_.fingerprint = fingerprint ?? "";
-            return result_;
         }
 
         public bool DeepEquals(Certificate other)
@@ -190,10 +158,7 @@ namespace XenAPI
         /// <param name="_certificate">The opaque_ref of the given certificate</param>
         public static Certificate get_record(Session session, string _certificate)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.certificate_get_record(session.opaque_ref, _certificate);
-            else
-                return new Certificate(session.XmlRpcProxy.certificate_get_record(session.opaque_ref, _certificate ?? "").parse());
+            return session.JsonRpcClient.certificate_get_record(session.opaque_ref, _certificate);
         }
 
         /// <summary>
@@ -204,10 +169,7 @@ namespace XenAPI
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<Certificate> get_by_uuid(Session session, string _uuid)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.certificate_get_by_uuid(session.opaque_ref, _uuid);
-            else
-                return XenRef<Certificate>.Create(session.XmlRpcProxy.certificate_get_by_uuid(session.opaque_ref, _uuid ?? "").parse());
+            return session.JsonRpcClient.certificate_get_by_uuid(session.opaque_ref, _uuid);
         }
 
         /// <summary>
@@ -218,10 +180,7 @@ namespace XenAPI
         /// <param name="_certificate">The opaque_ref of the given certificate</param>
         public static string get_uuid(Session session, string _certificate)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.certificate_get_uuid(session.opaque_ref, _certificate);
-            else
-                return session.XmlRpcProxy.certificate_get_uuid(session.opaque_ref, _certificate ?? "").parse();
+            return session.JsonRpcClient.certificate_get_uuid(session.opaque_ref, _certificate);
         }
 
         /// <summary>
@@ -232,10 +191,7 @@ namespace XenAPI
         /// <param name="_certificate">The opaque_ref of the given certificate</param>
         public static string get_name(Session session, string _certificate)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.certificate_get_name(session.opaque_ref, _certificate);
-            else
-                return session.XmlRpcProxy.certificate_get_name(session.opaque_ref, _certificate ?? "").parse();
+            return session.JsonRpcClient.certificate_get_name(session.opaque_ref, _certificate);
         }
 
         /// <summary>
@@ -246,10 +202,7 @@ namespace XenAPI
         /// <param name="_certificate">The opaque_ref of the given certificate</param>
         public static certificate_type get_type(Session session, string _certificate)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.certificate_get_type(session.opaque_ref, _certificate);
-            else
-                return (certificate_type)Helper.EnumParseDefault(typeof(certificate_type), (string)session.XmlRpcProxy.certificate_get_type(session.opaque_ref, _certificate ?? "").parse());
+            return session.JsonRpcClient.certificate_get_type(session.opaque_ref, _certificate);
         }
 
         /// <summary>
@@ -260,10 +213,7 @@ namespace XenAPI
         /// <param name="_certificate">The opaque_ref of the given certificate</param>
         public static XenRef<Host> get_host(Session session, string _certificate)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.certificate_get_host(session.opaque_ref, _certificate);
-            else
-                return XenRef<Host>.Create(session.XmlRpcProxy.certificate_get_host(session.opaque_ref, _certificate ?? "").parse());
+            return session.JsonRpcClient.certificate_get_host(session.opaque_ref, _certificate);
         }
 
         /// <summary>
@@ -274,10 +224,7 @@ namespace XenAPI
         /// <param name="_certificate">The opaque_ref of the given certificate</param>
         public static DateTime get_not_before(Session session, string _certificate)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.certificate_get_not_before(session.opaque_ref, _certificate);
-            else
-                return session.XmlRpcProxy.certificate_get_not_before(session.opaque_ref, _certificate ?? "").parse();
+            return session.JsonRpcClient.certificate_get_not_before(session.opaque_ref, _certificate);
         }
 
         /// <summary>
@@ -288,10 +235,7 @@ namespace XenAPI
         /// <param name="_certificate">The opaque_ref of the given certificate</param>
         public static DateTime get_not_after(Session session, string _certificate)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.certificate_get_not_after(session.opaque_ref, _certificate);
-            else
-                return session.XmlRpcProxy.certificate_get_not_after(session.opaque_ref, _certificate ?? "").parse();
+            return session.JsonRpcClient.certificate_get_not_after(session.opaque_ref, _certificate);
         }
 
         /// <summary>
@@ -302,10 +246,7 @@ namespace XenAPI
         /// <param name="_certificate">The opaque_ref of the given certificate</param>
         public static string get_fingerprint(Session session, string _certificate)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.certificate_get_fingerprint(session.opaque_ref, _certificate);
-            else
-                return session.XmlRpcProxy.certificate_get_fingerprint(session.opaque_ref, _certificate ?? "").parse();
+            return session.JsonRpcClient.certificate_get_fingerprint(session.opaque_ref, _certificate);
         }
 
         /// <summary>
@@ -315,10 +256,7 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static List<XenRef<Certificate>> get_all(Session session)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.certificate_get_all(session.opaque_ref);
-            else
-                return XenRef<Certificate>.Create(session.XmlRpcProxy.certificate_get_all(session.opaque_ref).parse());
+            return session.JsonRpcClient.certificate_get_all(session.opaque_ref);
         }
 
         /// <summary>
@@ -328,10 +266,7 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static Dictionary<XenRef<Certificate>, Certificate> get_all_records(Session session)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.certificate_get_all_records(session.opaque_ref);
-            else
-                return XenRef<Certificate>.Create<Proxy_Certificate>(session.XmlRpcProxy.certificate_get_all_records(session.opaque_ref).parse());
+            return session.JsonRpcClient.certificate_get_all_records(session.opaque_ref);
         }
 
         /// <summary>

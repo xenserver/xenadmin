@@ -211,40 +211,9 @@
     <Compile Include="Network\Heartbeat.cs" />
     <Compile Include="Network\HTTPHelper.cs" />
     <Compile Include="Network\ConnectionsManager.cs" />
-    <Compile Include="Network\SessionFactory.cs" />
     <Compile Include="Network\XenConnection.cs" />
     <Compile Include="OtherConfigWatcher.cs" />
     <Compile Include="PoolJoinRules.cs" />
-    <Compile Include="ServerDBs\Db.cs" />
-    <Compile Include="ServerDBs\Db.Dictionaries.cs" />
-    <Compile Include="ServerDBs\DbProxy.cs" />
-    <Compile Include="ServerDBs\DbProxyInvokingEventArgs.cs" />
-    <Compile Include="ServerDBs\FakeAPI\ActivationKeyParser.cs" />
-    <Compile Include="ServerDBs\FakeAPI\fakeAuth.cs" />
-    <Compile Include="ServerDBs\FakeAPI\fakeEvent.cs" />
-    <Compile Include="ServerDBs\FakeAPI\fakeHost.cs" />
-    <Compile Include="ServerDBs\FakeAPI\fakeHost_Patch.cs" />
-    <Compile Include="ServerDBs\FakeAPI\fakeNetwork.cs" />
-    <Compile Include="ServerDBs\FakeAPI\fakePBD.cs" />
-    <Compile Include="ServerDBs\FakeAPI\fakePool.cs" />
-    <Compile Include="ServerDBs\FakeAPI\fakePool_Patch.cs" />
-    <Compile Include="ServerDBs\FakeAPI\fakeSecret.cs" />
-    <Compile Include="ServerDBs\FakeAPI\fakeSession.cs" />
-    <Compile Include="ServerDBs\FakeAPI\fakeSR.cs" />
-    <Compile Include="ServerDBs\FakeAPI\fakeTask.cs" />
-    <Compile Include="ServerDBs\FakeAPI\fakeUnknown.cs" />
-    <Compile Include="ServerDBs\FakeAPI\fakeVBD.cs" />
-    <Compile Include="ServerDBs\FakeAPI\fakeVDI.cs" />
-    <Compile Include="ServerDBs\FakeAPI\fakeVIF.cs" />
-    <Compile Include="ServerDBs\FakeAPI\fakeVM.cs" />
-    <Compile Include="ServerDBs\FakeAPI\fakeXenObject.cs" />
-    <Compile Include="ServerDBs\HighLoadEventGenerator.cs" />
-    <Compile Include="ServerDBs\Parser.cs" />
-    <Compile Include="ServerDBs\ProxyMethodNameParser.cs" />
-    <Compile Include="ServerDBs\SimulatorWebProxy.cs" />
-    <Compile Include="ServerDBs\SimulatorWebStream.cs" />
-    <Compile Include="ServerDBs\StatusReportXmlDocReader.cs" />
-    <Compile Include="ServerDBs\TypeCache.cs" />
     <Compile Include="Tags.cs" />
     <Compile Include="WLB\RetrieveWlbConfigurationAction.cs" />
     <Compile Include="WLB\WlbHostEvacuationRecommendation.cs" />
@@ -258,7 +227,6 @@
     <Compile Include="Actions\AsyncAction.cs" />
     <Compile Include="Actions\DelegatedAsyncAction.cs" />
     <Compile Include="Actions\GetDataSourcesAction.cs" />
-    <Compile Include="Actions\Host\ActivationProxy.cs" />
     <Compile Include="Actions\Host\ApplyLicenseAction.cs" />
     <Compile Include="Actions\Host\ChangeHostPasswordAction.cs" />
     <Compile Include="Actions\Host\DestroyHostCrashDumpAction.cs" />
@@ -400,6 +368,7 @@
     <Compile Include="XenAPI\network_default_locking_mode.cs" />
     <Compile Include="XenAPI\network_purpose.cs" />
     <Compile Include="XenAPI\Network_sriov.cs" />
+    <Compile Include="XenAPI\on_softreboot_behavior.cs" />
     <Compile Include="XenAPI\PCI.cs" />
     <Compile Include="XenAPI\persistence_backend.cs" />
     <Compile Include="XenAPI\PGPU.cs" />
@@ -452,11 +421,6 @@
     <Compile Include="XenSearch\SearchMarshalling.cs" />
     <Compile Include="XenSearch\Sort.cs" />
     <Compile Include="XenServerPlugins.cs" />
-    <Compile Include="XenServerProxy\ClassGenerator.cs" />
-    <Compile Include="XenServerProxy\IInvocationHandler.cs" />
-    <Compile Include="XenServerProxy\InterfaceLister.cs" />
-    <Compile Include="XenServerProxy\ProxyMethodInfo.cs" />
-    <Compile Include="XenServerProxy\SimpleProxyMethodParser.cs" />
     <Compile Include="Utils\Helpers.cs" />
     <Compile Include="I18NException.cs" />
     <Compile Include="Network\ICache.cs" />
@@ -527,9 +491,7 @@
     <Compile Include="XenAPI\PIF_metrics.cs" />
     <Compile Include="XenAPI\Pool.cs" />
     <Compile Include="XenAPI\Pool_patch.cs" />
-    <Compile Include="XenAPI\Proxy.cs" />
     <Compile Include="XenAPI\Relation.cs" />
-    <Compile Include="XenAPI\Response.cs" />
     <Compile Include="XenAPI\Role.cs" />
     <Compile Include="XenAPI\Secret.cs" />
     <Compile Include="XenAPI\Session.cs" />
@@ -570,6 +532,7 @@
     <Compile Include="XenAPI\XenObject.cs" />
     <Compile Include="XenObjectDownloader.cs" />
     <Compile Include="XenAPI\XenRef.cs" />
+    <Compile Include="Db.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="..\Branding\Branding.ja.resx">

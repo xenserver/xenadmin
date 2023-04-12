@@ -1,4 +1,5 @@
-/* Copyright (c) Cloud Software Group, Inc.
+/*
+ * Copyright (c) Cloud Software Group, Inc.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -87,15 +88,6 @@ namespace XenAPI
             UpdateFrom(table);
         }
 
-        /// <summary>
-        /// Creates a new Pool_update from a Proxy_Pool_update.
-        /// </summary>
-        /// <param name="proxy"></param>
-        public Pool_update(Proxy_Pool_update proxy)
-        {
-            UpdateFrom(proxy);
-        }
-
         #endregion
 
         /// <summary>
@@ -115,21 +107,6 @@ namespace XenAPI
             hosts = record.hosts;
             other_config = record.other_config;
             enforce_homogeneity = record.enforce_homogeneity;
-        }
-
-        internal void UpdateFrom(Proxy_Pool_update proxy)
-        {
-            uuid = proxy.uuid == null ? null : proxy.uuid;
-            name_label = proxy.name_label == null ? null : proxy.name_label;
-            name_description = proxy.name_description == null ? null : proxy.name_description;
-            version = proxy.version == null ? null : proxy.version;
-            installation_size = proxy.installation_size == null ? 0 : long.Parse(proxy.installation_size);
-            key = proxy.key == null ? null : proxy.key;
-            after_apply_guidance = proxy.after_apply_guidance == null ? null : Helper.StringArrayToEnumList<update_after_apply_guidance>(proxy.after_apply_guidance);
-            vdi = proxy.vdi == null ? null : XenRef<VDI>.Create(proxy.vdi);
-            hosts = proxy.hosts == null ? null : XenRef<Host>.Create(proxy.hosts);
-            other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
-            enforce_homogeneity = (bool)proxy.enforce_homogeneity;
         }
 
         /// <summary>
@@ -162,23 +139,6 @@ namespace XenAPI
                 other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
             if (table.ContainsKey("enforce_homogeneity"))
                 enforce_homogeneity = Marshalling.ParseBool(table, "enforce_homogeneity");
-        }
-
-        public Proxy_Pool_update ToProxy()
-        {
-            Proxy_Pool_update result_ = new Proxy_Pool_update();
-            result_.uuid = uuid ?? "";
-            result_.name_label = name_label ?? "";
-            result_.name_description = name_description ?? "";
-            result_.version = version ?? "";
-            result_.installation_size = installation_size.ToString();
-            result_.key = key ?? "";
-            result_.after_apply_guidance = after_apply_guidance == null ? new string[] {} : Helper.ObjectListToStringArray(after_apply_guidance);
-            result_.vdi = vdi ?? "";
-            result_.hosts = hosts == null ? new string[] {} : Helper.RefListToStringArray(hosts);
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            result_.enforce_homogeneity = enforce_homogeneity;
-            return result_;
         }
 
         public bool DeepEquals(Pool_update other)
@@ -227,10 +187,7 @@ namespace XenAPI
         /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
         public static Pool_update get_record(Session session, string _pool_update)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pool_update_get_record(session.opaque_ref, _pool_update);
-            else
-                return new Pool_update(session.XmlRpcProxy.pool_update_get_record(session.opaque_ref, _pool_update ?? "").parse());
+            return session.JsonRpcClient.pool_update_get_record(session.opaque_ref, _pool_update);
         }
 
         /// <summary>
@@ -241,10 +198,7 @@ namespace XenAPI
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<Pool_update> get_by_uuid(Session session, string _uuid)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pool_update_get_by_uuid(session.opaque_ref, _uuid);
-            else
-                return XenRef<Pool_update>.Create(session.XmlRpcProxy.pool_update_get_by_uuid(session.opaque_ref, _uuid ?? "").parse());
+            return session.JsonRpcClient.pool_update_get_by_uuid(session.opaque_ref, _uuid);
         }
 
         /// <summary>
@@ -255,10 +209,7 @@ namespace XenAPI
         /// <param name="_label">label of object to return</param>
         public static List<XenRef<Pool_update>> get_by_name_label(Session session, string _label)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pool_update_get_by_name_label(session.opaque_ref, _label);
-            else
-                return XenRef<Pool_update>.Create(session.XmlRpcProxy.pool_update_get_by_name_label(session.opaque_ref, _label ?? "").parse());
+            return session.JsonRpcClient.pool_update_get_by_name_label(session.opaque_ref, _label);
         }
 
         /// <summary>
@@ -269,10 +220,7 @@ namespace XenAPI
         /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
         public static string get_uuid(Session session, string _pool_update)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pool_update_get_uuid(session.opaque_ref, _pool_update);
-            else
-                return session.XmlRpcProxy.pool_update_get_uuid(session.opaque_ref, _pool_update ?? "").parse();
+            return session.JsonRpcClient.pool_update_get_uuid(session.opaque_ref, _pool_update);
         }
 
         /// <summary>
@@ -283,10 +231,7 @@ namespace XenAPI
         /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
         public static string get_name_label(Session session, string _pool_update)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pool_update_get_name_label(session.opaque_ref, _pool_update);
-            else
-                return session.XmlRpcProxy.pool_update_get_name_label(session.opaque_ref, _pool_update ?? "").parse();
+            return session.JsonRpcClient.pool_update_get_name_label(session.opaque_ref, _pool_update);
         }
 
         /// <summary>
@@ -297,10 +242,7 @@ namespace XenAPI
         /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
         public static string get_name_description(Session session, string _pool_update)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pool_update_get_name_description(session.opaque_ref, _pool_update);
-            else
-                return session.XmlRpcProxy.pool_update_get_name_description(session.opaque_ref, _pool_update ?? "").parse();
+            return session.JsonRpcClient.pool_update_get_name_description(session.opaque_ref, _pool_update);
         }
 
         /// <summary>
@@ -311,10 +253,7 @@ namespace XenAPI
         /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
         public static string get_version(Session session, string _pool_update)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pool_update_get_version(session.opaque_ref, _pool_update);
-            else
-                return session.XmlRpcProxy.pool_update_get_version(session.opaque_ref, _pool_update ?? "").parse();
+            return session.JsonRpcClient.pool_update_get_version(session.opaque_ref, _pool_update);
         }
 
         /// <summary>
@@ -325,10 +264,7 @@ namespace XenAPI
         /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
         public static long get_installation_size(Session session, string _pool_update)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pool_update_get_installation_size(session.opaque_ref, _pool_update);
-            else
-                return long.Parse(session.XmlRpcProxy.pool_update_get_installation_size(session.opaque_ref, _pool_update ?? "").parse());
+            return session.JsonRpcClient.pool_update_get_installation_size(session.opaque_ref, _pool_update);
         }
 
         /// <summary>
@@ -339,10 +275,7 @@ namespace XenAPI
         /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
         public static string get_key(Session session, string _pool_update)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pool_update_get_key(session.opaque_ref, _pool_update);
-            else
-                return session.XmlRpcProxy.pool_update_get_key(session.opaque_ref, _pool_update ?? "").parse();
+            return session.JsonRpcClient.pool_update_get_key(session.opaque_ref, _pool_update);
         }
 
         /// <summary>
@@ -353,10 +286,7 @@ namespace XenAPI
         /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
         public static List<update_after_apply_guidance> get_after_apply_guidance(Session session, string _pool_update)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pool_update_get_after_apply_guidance(session.opaque_ref, _pool_update);
-            else
-                return Helper.StringArrayToEnumList<update_after_apply_guidance>(session.XmlRpcProxy.pool_update_get_after_apply_guidance(session.opaque_ref, _pool_update ?? "").parse());
+            return session.JsonRpcClient.pool_update_get_after_apply_guidance(session.opaque_ref, _pool_update);
         }
 
         /// <summary>
@@ -367,10 +297,7 @@ namespace XenAPI
         /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
         public static XenRef<VDI> get_vdi(Session session, string _pool_update)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pool_update_get_vdi(session.opaque_ref, _pool_update);
-            else
-                return XenRef<VDI>.Create(session.XmlRpcProxy.pool_update_get_vdi(session.opaque_ref, _pool_update ?? "").parse());
+            return session.JsonRpcClient.pool_update_get_vdi(session.opaque_ref, _pool_update);
         }
 
         /// <summary>
@@ -381,10 +308,7 @@ namespace XenAPI
         /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
         public static List<XenRef<Host>> get_hosts(Session session, string _pool_update)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pool_update_get_hosts(session.opaque_ref, _pool_update);
-            else
-                return XenRef<Host>.Create(session.XmlRpcProxy.pool_update_get_hosts(session.opaque_ref, _pool_update ?? "").parse());
+            return session.JsonRpcClient.pool_update_get_hosts(session.opaque_ref, _pool_update);
         }
 
         /// <summary>
@@ -395,10 +319,7 @@ namespace XenAPI
         /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
         public static Dictionary<string, string> get_other_config(Session session, string _pool_update)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pool_update_get_other_config(session.opaque_ref, _pool_update);
-            else
-                return Maps.convert_from_proxy_string_string(session.XmlRpcProxy.pool_update_get_other_config(session.opaque_ref, _pool_update ?? "").parse());
+            return session.JsonRpcClient.pool_update_get_other_config(session.opaque_ref, _pool_update);
         }
 
         /// <summary>
@@ -409,10 +330,7 @@ namespace XenAPI
         /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
         public static bool get_enforce_homogeneity(Session session, string _pool_update)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pool_update_get_enforce_homogeneity(session.opaque_ref, _pool_update);
-            else
-                return (bool)session.XmlRpcProxy.pool_update_get_enforce_homogeneity(session.opaque_ref, _pool_update ?? "").parse();
+            return session.JsonRpcClient.pool_update_get_enforce_homogeneity(session.opaque_ref, _pool_update);
         }
 
         /// <summary>
@@ -424,10 +342,7 @@ namespace XenAPI
         /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _pool_update, Dictionary<string, string> _other_config)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.pool_update_set_other_config(session.opaque_ref, _pool_update, _other_config);
-            else
-                session.XmlRpcProxy.pool_update_set_other_config(session.opaque_ref, _pool_update ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
+            session.JsonRpcClient.pool_update_set_other_config(session.opaque_ref, _pool_update, _other_config);
         }
 
         /// <summary>
@@ -440,10 +355,7 @@ namespace XenAPI
         /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _pool_update, string _key, string _value)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.pool_update_add_to_other_config(session.opaque_ref, _pool_update, _key, _value);
-            else
-                session.XmlRpcProxy.pool_update_add_to_other_config(session.opaque_ref, _pool_update ?? "", _key ?? "", _value ?? "").parse();
+            session.JsonRpcClient.pool_update_add_to_other_config(session.opaque_ref, _pool_update, _key, _value);
         }
 
         /// <summary>
@@ -455,10 +367,7 @@ namespace XenAPI
         /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _pool_update, string _key)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.pool_update_remove_from_other_config(session.opaque_ref, _pool_update, _key);
-            else
-                session.XmlRpcProxy.pool_update_remove_from_other_config(session.opaque_ref, _pool_update ?? "", _key ?? "").parse();
+            session.JsonRpcClient.pool_update_remove_from_other_config(session.opaque_ref, _pool_update, _key);
         }
 
         /// <summary>
@@ -469,10 +378,7 @@ namespace XenAPI
         /// <param name="_vdi">The VDI which contains a software update.</param>
         public static XenRef<Pool_update> introduce(Session session, string _vdi)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pool_update_introduce(session.opaque_ref, _vdi);
-            else
-                return XenRef<Pool_update>.Create(session.XmlRpcProxy.pool_update_introduce(session.opaque_ref, _vdi ?? "").parse());
+            return session.JsonRpcClient.pool_update_introduce(session.opaque_ref, _vdi);
         }
 
         /// <summary>
@@ -483,10 +389,7 @@ namespace XenAPI
         /// <param name="_vdi">The VDI which contains a software update.</param>
         public static XenRef<Task> async_introduce(Session session, string _vdi)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_pool_update_introduce(session.opaque_ref, _vdi);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_pool_update_introduce(session.opaque_ref, _vdi ?? "").parse());
+          return session.JsonRpcClient.async_pool_update_introduce(session.opaque_ref, _vdi);
         }
 
         /// <summary>
@@ -498,10 +401,7 @@ namespace XenAPI
         /// <param name="_host">The host to run the prechecks on.</param>
         public static livepatch_status precheck(Session session, string _pool_update, string _host)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pool_update_precheck(session.opaque_ref, _pool_update, _host);
-            else
-                return (livepatch_status)Helper.EnumParseDefault(typeof(livepatch_status), (string)session.XmlRpcProxy.pool_update_precheck(session.opaque_ref, _pool_update ?? "", _host ?? "").parse());
+            return session.JsonRpcClient.pool_update_precheck(session.opaque_ref, _pool_update, _host);
         }
 
         /// <summary>
@@ -513,10 +413,7 @@ namespace XenAPI
         /// <param name="_host">The host to run the prechecks on.</param>
         public static XenRef<Task> async_precheck(Session session, string _pool_update, string _host)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_pool_update_precheck(session.opaque_ref, _pool_update, _host);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_pool_update_precheck(session.opaque_ref, _pool_update ?? "", _host ?? "").parse());
+          return session.JsonRpcClient.async_pool_update_precheck(session.opaque_ref, _pool_update, _host);
         }
 
         /// <summary>
@@ -528,10 +425,7 @@ namespace XenAPI
         /// <param name="_host">The host to apply the update to.</param>
         public static void apply(Session session, string _pool_update, string _host)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.pool_update_apply(session.opaque_ref, _pool_update, _host);
-            else
-                session.XmlRpcProxy.pool_update_apply(session.opaque_ref, _pool_update ?? "", _host ?? "").parse();
+            session.JsonRpcClient.pool_update_apply(session.opaque_ref, _pool_update, _host);
         }
 
         /// <summary>
@@ -543,10 +437,7 @@ namespace XenAPI
         /// <param name="_host">The host to apply the update to.</param>
         public static XenRef<Task> async_apply(Session session, string _pool_update, string _host)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_pool_update_apply(session.opaque_ref, _pool_update, _host);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_pool_update_apply(session.opaque_ref, _pool_update ?? "", _host ?? "").parse());
+          return session.JsonRpcClient.async_pool_update_apply(session.opaque_ref, _pool_update, _host);
         }
 
         /// <summary>
@@ -557,10 +448,7 @@ namespace XenAPI
         /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
         public static void pool_apply(Session session, string _pool_update)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.pool_update_pool_apply(session.opaque_ref, _pool_update);
-            else
-                session.XmlRpcProxy.pool_update_pool_apply(session.opaque_ref, _pool_update ?? "").parse();
+            session.JsonRpcClient.pool_update_pool_apply(session.opaque_ref, _pool_update);
         }
 
         /// <summary>
@@ -571,10 +459,7 @@ namespace XenAPI
         /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
         public static XenRef<Task> async_pool_apply(Session session, string _pool_update)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_pool_update_pool_apply(session.opaque_ref, _pool_update);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_pool_update_pool_apply(session.opaque_ref, _pool_update ?? "").parse());
+          return session.JsonRpcClient.async_pool_update_pool_apply(session.opaque_ref, _pool_update);
         }
 
         /// <summary>
@@ -585,10 +470,7 @@ namespace XenAPI
         /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
         public static void pool_clean(Session session, string _pool_update)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.pool_update_pool_clean(session.opaque_ref, _pool_update);
-            else
-                session.XmlRpcProxy.pool_update_pool_clean(session.opaque_ref, _pool_update ?? "").parse();
+            session.JsonRpcClient.pool_update_pool_clean(session.opaque_ref, _pool_update);
         }
 
         /// <summary>
@@ -599,10 +481,7 @@ namespace XenAPI
         /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
         public static XenRef<Task> async_pool_clean(Session session, string _pool_update)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_pool_update_pool_clean(session.opaque_ref, _pool_update);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_pool_update_pool_clean(session.opaque_ref, _pool_update ?? "").parse());
+          return session.JsonRpcClient.async_pool_update_pool_clean(session.opaque_ref, _pool_update);
         }
 
         /// <summary>
@@ -613,10 +492,7 @@ namespace XenAPI
         /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
         public static void destroy(Session session, string _pool_update)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.pool_update_destroy(session.opaque_ref, _pool_update);
-            else
-                session.XmlRpcProxy.pool_update_destroy(session.opaque_ref, _pool_update ?? "").parse();
+            session.JsonRpcClient.pool_update_destroy(session.opaque_ref, _pool_update);
         }
 
         /// <summary>
@@ -627,10 +503,7 @@ namespace XenAPI
         /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
         public static XenRef<Task> async_destroy(Session session, string _pool_update)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_pool_update_destroy(session.opaque_ref, _pool_update);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_pool_update_destroy(session.opaque_ref, _pool_update ?? "").parse());
+          return session.JsonRpcClient.async_pool_update_destroy(session.opaque_ref, _pool_update);
         }
 
         /// <summary>
@@ -640,10 +513,7 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static List<XenRef<Pool_update>> get_all(Session session)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pool_update_get_all(session.opaque_ref);
-            else
-                return XenRef<Pool_update>.Create(session.XmlRpcProxy.pool_update_get_all(session.opaque_ref).parse());
+            return session.JsonRpcClient.pool_update_get_all(session.opaque_ref);
         }
 
         /// <summary>
@@ -653,10 +523,7 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static Dictionary<XenRef<Pool_update>, Pool_update> get_all_records(Session session)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pool_update_get_all_records(session.opaque_ref);
-            else
-                return XenRef<Pool_update>.Create<Proxy_Pool_update>(session.XmlRpcProxy.pool_update_get_all_records(session.opaque_ref).parse());
+            return session.JsonRpcClient.pool_update_get_all_records(session.opaque_ref);
         }
 
         /// <summary>

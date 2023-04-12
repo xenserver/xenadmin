@@ -1,4 +1,5 @@
-/* Copyright (c) Cloud Software Group, Inc.
+/*
+ * Copyright (c) Cloud Software Group, Inc.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -73,15 +74,6 @@ namespace XenAPI
             UpdateFrom(table);
         }
 
-        /// <summary>
-        /// Creates a new Subject from a Proxy_Subject.
-        /// </summary>
-        /// <param name="proxy"></param>
-        public Subject(Proxy_Subject proxy)
-        {
-            UpdateFrom(proxy);
-        }
-
         #endregion
 
         /// <summary>
@@ -94,14 +86,6 @@ namespace XenAPI
             subject_identifier = record.subject_identifier;
             other_config = record.other_config;
             roles = record.roles;
-        }
-
-        internal void UpdateFrom(Proxy_Subject proxy)
-        {
-            uuid = proxy.uuid == null ? null : proxy.uuid;
-            subject_identifier = proxy.subject_identifier == null ? null : proxy.subject_identifier;
-            other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
-            roles = proxy.roles == null ? null : XenRef<Role>.Create(proxy.roles);
         }
 
         /// <summary>
@@ -120,16 +104,6 @@ namespace XenAPI
                 other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
             if (table.ContainsKey("roles"))
                 roles = Marshalling.ParseSetRef<Role>(table, "roles");
-        }
-
-        public Proxy_Subject ToProxy()
-        {
-            Proxy_Subject result_ = new Proxy_Subject();
-            result_.uuid = uuid ?? "";
-            result_.subject_identifier = subject_identifier ?? "";
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            result_.roles = roles == null ? new string[] {} : Helper.RefListToStringArray(roles);
-            return result_;
         }
 
         public bool DeepEquals(Subject other)
@@ -166,10 +140,7 @@ namespace XenAPI
         /// <param name="_subject">The opaque_ref of the given subject</param>
         public static Subject get_record(Session session, string _subject)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.subject_get_record(session.opaque_ref, _subject);
-            else
-                return new Subject(session.XmlRpcProxy.subject_get_record(session.opaque_ref, _subject ?? "").parse());
+            return session.JsonRpcClient.subject_get_record(session.opaque_ref, _subject);
         }
 
         /// <summary>
@@ -180,10 +151,7 @@ namespace XenAPI
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<Subject> get_by_uuid(Session session, string _uuid)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.subject_get_by_uuid(session.opaque_ref, _uuid);
-            else
-                return XenRef<Subject>.Create(session.XmlRpcProxy.subject_get_by_uuid(session.opaque_ref, _uuid ?? "").parse());
+            return session.JsonRpcClient.subject_get_by_uuid(session.opaque_ref, _uuid);
         }
 
         /// <summary>
@@ -194,10 +162,7 @@ namespace XenAPI
         /// <param name="_record">All constructor arguments</param>
         public static XenRef<Subject> create(Session session, Subject _record)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.subject_create(session.opaque_ref, _record);
-            else
-                return XenRef<Subject>.Create(session.XmlRpcProxy.subject_create(session.opaque_ref, _record.ToProxy()).parse());
+            return session.JsonRpcClient.subject_create(session.opaque_ref, _record);
         }
 
         /// <summary>
@@ -208,10 +173,7 @@ namespace XenAPI
         /// <param name="_record">All constructor arguments</param>
         public static XenRef<Task> async_create(Session session, Subject _record)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_subject_create(session.opaque_ref, _record);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_subject_create(session.opaque_ref, _record.ToProxy()).parse());
+          return session.JsonRpcClient.async_subject_create(session.opaque_ref, _record);
         }
 
         /// <summary>
@@ -222,10 +184,7 @@ namespace XenAPI
         /// <param name="_subject">The opaque_ref of the given subject</param>
         public static void destroy(Session session, string _subject)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.subject_destroy(session.opaque_ref, _subject);
-            else
-                session.XmlRpcProxy.subject_destroy(session.opaque_ref, _subject ?? "").parse();
+            session.JsonRpcClient.subject_destroy(session.opaque_ref, _subject);
         }
 
         /// <summary>
@@ -236,10 +195,7 @@ namespace XenAPI
         /// <param name="_subject">The opaque_ref of the given subject</param>
         public static XenRef<Task> async_destroy(Session session, string _subject)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_subject_destroy(session.opaque_ref, _subject);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_subject_destroy(session.opaque_ref, _subject ?? "").parse());
+          return session.JsonRpcClient.async_subject_destroy(session.opaque_ref, _subject);
         }
 
         /// <summary>
@@ -250,10 +206,7 @@ namespace XenAPI
         /// <param name="_subject">The opaque_ref of the given subject</param>
         public static string get_uuid(Session session, string _subject)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.subject_get_uuid(session.opaque_ref, _subject);
-            else
-                return session.XmlRpcProxy.subject_get_uuid(session.opaque_ref, _subject ?? "").parse();
+            return session.JsonRpcClient.subject_get_uuid(session.opaque_ref, _subject);
         }
 
         /// <summary>
@@ -264,10 +217,7 @@ namespace XenAPI
         /// <param name="_subject">The opaque_ref of the given subject</param>
         public static string get_subject_identifier(Session session, string _subject)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.subject_get_subject_identifier(session.opaque_ref, _subject);
-            else
-                return session.XmlRpcProxy.subject_get_subject_identifier(session.opaque_ref, _subject ?? "").parse();
+            return session.JsonRpcClient.subject_get_subject_identifier(session.opaque_ref, _subject);
         }
 
         /// <summary>
@@ -278,10 +228,7 @@ namespace XenAPI
         /// <param name="_subject">The opaque_ref of the given subject</param>
         public static Dictionary<string, string> get_other_config(Session session, string _subject)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.subject_get_other_config(session.opaque_ref, _subject);
-            else
-                return Maps.convert_from_proxy_string_string(session.XmlRpcProxy.subject_get_other_config(session.opaque_ref, _subject ?? "").parse());
+            return session.JsonRpcClient.subject_get_other_config(session.opaque_ref, _subject);
         }
 
         /// <summary>
@@ -292,10 +239,7 @@ namespace XenAPI
         /// <param name="_subject">The opaque_ref of the given subject</param>
         public static List<XenRef<Role>> get_roles(Session session, string _subject)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.subject_get_roles(session.opaque_ref, _subject);
-            else
-                return XenRef<Role>.Create(session.XmlRpcProxy.subject_get_roles(session.opaque_ref, _subject ?? "").parse());
+            return session.JsonRpcClient.subject_get_roles(session.opaque_ref, _subject);
         }
 
         /// <summary>
@@ -307,10 +251,7 @@ namespace XenAPI
         /// <param name="_role">The unique role reference</param>
         public static void add_to_roles(Session session, string _subject, string _role)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.subject_add_to_roles(session.opaque_ref, _subject, _role);
-            else
-                session.XmlRpcProxy.subject_add_to_roles(session.opaque_ref, _subject ?? "", _role ?? "").parse();
+            session.JsonRpcClient.subject_add_to_roles(session.opaque_ref, _subject, _role);
         }
 
         /// <summary>
@@ -322,10 +263,7 @@ namespace XenAPI
         /// <param name="_role">The unique role reference in the subject's roles field</param>
         public static void remove_from_roles(Session session, string _subject, string _role)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.subject_remove_from_roles(session.opaque_ref, _subject, _role);
-            else
-                session.XmlRpcProxy.subject_remove_from_roles(session.opaque_ref, _subject ?? "", _role ?? "").parse();
+            session.JsonRpcClient.subject_remove_from_roles(session.opaque_ref, _subject, _role);
         }
 
         /// <summary>
@@ -336,10 +274,7 @@ namespace XenAPI
         /// <param name="_subject">The opaque_ref of the given subject</param>
         public static string[] get_permissions_name_label(Session session, string _subject)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.subject_get_permissions_name_label(session.opaque_ref, _subject);
-            else
-                return (string[])session.XmlRpcProxy.subject_get_permissions_name_label(session.opaque_ref, _subject ?? "").parse();
+            return session.JsonRpcClient.subject_get_permissions_name_label(session.opaque_ref, _subject);
         }
 
         /// <summary>
@@ -349,10 +284,7 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static List<XenRef<Subject>> get_all(Session session)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.subject_get_all(session.opaque_ref);
-            else
-                return XenRef<Subject>.Create(session.XmlRpcProxy.subject_get_all(session.opaque_ref).parse());
+            return session.JsonRpcClient.subject_get_all(session.opaque_ref);
         }
 
         /// <summary>
@@ -362,10 +294,7 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static Dictionary<XenRef<Subject>, Subject> get_all_records(Session session)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.subject_get_all_records(session.opaque_ref);
-            else
-                return XenRef<Subject>.Create<Proxy_Subject>(session.XmlRpcProxy.subject_get_all_records(session.opaque_ref).parse());
+            return session.JsonRpcClient.subject_get_all_records(session.opaque_ref);
         }
 
         /// <summary>

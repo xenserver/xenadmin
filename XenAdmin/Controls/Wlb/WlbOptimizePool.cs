@@ -39,6 +39,7 @@ using XenAPI;
 using XenAdmin.Actions;
 using XenAdmin.Actions.Wlb;
 using XenAdmin.Commands;
+using XenAdmin.Network;
 
 
 namespace XenAdmin.Controls.Wlb
@@ -526,7 +527,7 @@ namespace XenAdmin.Controls.Wlb
         {
             Program.AssertOnEventThread();
 
-            if(_xenObject == null)
+            if (_xenObject == null || _xenObject.Connection is XenConnection conn && conn.IsSimulatedConnection)
                 return;
 
             if (Helpers.WlbEnabled(_xenObject.Connection))

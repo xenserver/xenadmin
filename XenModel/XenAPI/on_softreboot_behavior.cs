@@ -32,23 +32,31 @@ using Newtonsoft.Json;
 
 namespace XenAPI
 {
-    [JsonConverter(typeof(vmpp_backup_typeConverter))]
-    public enum vmpp_backup_type
+    [JsonConverter(typeof(on_softreboot_behaviorConverter))]
+    public enum on_softreboot_behavior
     {
         /// <summary>
-        /// The backup is a snapshot
+        /// perform soft-reboot
         /// </summary>
-        snapshot,
+        soft_reboot,
         /// <summary>
-        /// The backup is a checkpoint
+        /// destroy the VM state
         /// </summary>
-        checkpoint,
+        destroy,
+        /// <summary>
+        /// restart the VM
+        /// </summary>
+        restart,
+        /// <summary>
+        /// leave the VM paused
+        /// </summary>
+        preserve,
         unknown
     }
 
-    public static class vmpp_backup_type_helper
+    public static class on_softreboot_behavior_helper
     {
-        public static string ToString(vmpp_backup_type x)
+        public static string ToString(on_softreboot_behavior x)
         {
             return x.StringOf();
         }
@@ -56,25 +64,29 @@ namespace XenAPI
 
     public static partial class EnumExt
     {
-        public static string StringOf(this vmpp_backup_type x)
+        public static string StringOf(this on_softreboot_behavior x)
         {
             switch (x)
             {
-                case vmpp_backup_type.snapshot:
-                    return "snapshot";
-                case vmpp_backup_type.checkpoint:
-                    return "checkpoint";
+                case on_softreboot_behavior.soft_reboot:
+                    return "soft_reboot";
+                case on_softreboot_behavior.destroy:
+                    return "destroy";
+                case on_softreboot_behavior.restart:
+                    return "restart";
+                case on_softreboot_behavior.preserve:
+                    return "preserve";
                 default:
                     return "unknown";
             }
         }
     }
 
-    internal class vmpp_backup_typeConverter : XenEnumConverter
+    internal class on_softreboot_behaviorConverter : XenEnumConverter
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            writer.WriteValue(((vmpp_backup_type)value).StringOf());
+            writer.WriteValue(((on_softreboot_behavior)value).StringOf());
         }
     }
 }

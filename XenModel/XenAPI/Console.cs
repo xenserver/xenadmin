@@ -1,4 +1,5 @@
-/* Copyright (c) Cloud Software Group, Inc.
+/*
+ * Copyright (c) Cloud Software Group, Inc.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -75,15 +76,6 @@ namespace XenAPI
             UpdateFrom(table);
         }
 
-        /// <summary>
-        /// Creates a new Console from a Proxy_Console.
-        /// </summary>
-        /// <param name="proxy"></param>
-        public Console(Proxy_Console proxy)
-        {
-            UpdateFrom(proxy);
-        }
-
         #endregion
 
         /// <summary>
@@ -97,15 +89,6 @@ namespace XenAPI
             location = record.location;
             VM = record.VM;
             other_config = record.other_config;
-        }
-
-        internal void UpdateFrom(Proxy_Console proxy)
-        {
-            uuid = proxy.uuid == null ? null : proxy.uuid;
-            protocol = proxy.protocol == null ? (console_protocol) 0 : (console_protocol)Helper.EnumParseDefault(typeof(console_protocol), (string)proxy.protocol);
-            location = proxy.location == null ? null : proxy.location;
-            VM = proxy.VM == null ? null : XenRef<VM>.Create(proxy.VM);
-            other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
         }
 
         /// <summary>
@@ -126,17 +109,6 @@ namespace XenAPI
                 VM = Marshalling.ParseRef<VM>(table, "VM");
             if (table.ContainsKey("other_config"))
                 other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
-        }
-
-        public Proxy_Console ToProxy()
-        {
-            Proxy_Console result_ = new Proxy_Console();
-            result_.uuid = uuid ?? "";
-            result_.protocol = console_protocol_helper.ToString(protocol);
-            result_.location = location ?? "";
-            result_.VM = VM ?? "";
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            return result_;
         }
 
         public bool DeepEquals(Console other)
@@ -179,10 +151,7 @@ namespace XenAPI
         /// <param name="_console">The opaque_ref of the given console</param>
         public static Console get_record(Session session, string _console)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.console_get_record(session.opaque_ref, _console);
-            else
-                return new Console(session.XmlRpcProxy.console_get_record(session.opaque_ref, _console ?? "").parse());
+            return session.JsonRpcClient.console_get_record(session.opaque_ref, _console);
         }
 
         /// <summary>
@@ -193,10 +162,7 @@ namespace XenAPI
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<Console> get_by_uuid(Session session, string _uuid)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.console_get_by_uuid(session.opaque_ref, _uuid);
-            else
-                return XenRef<Console>.Create(session.XmlRpcProxy.console_get_by_uuid(session.opaque_ref, _uuid ?? "").parse());
+            return session.JsonRpcClient.console_get_by_uuid(session.opaque_ref, _uuid);
         }
 
         /// <summary>
@@ -207,10 +173,7 @@ namespace XenAPI
         /// <param name="_record">All constructor arguments</param>
         public static XenRef<Console> create(Session session, Console _record)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.console_create(session.opaque_ref, _record);
-            else
-                return XenRef<Console>.Create(session.XmlRpcProxy.console_create(session.opaque_ref, _record.ToProxy()).parse());
+            return session.JsonRpcClient.console_create(session.opaque_ref, _record);
         }
 
         /// <summary>
@@ -221,10 +184,7 @@ namespace XenAPI
         /// <param name="_record">All constructor arguments</param>
         public static XenRef<Task> async_create(Session session, Console _record)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_console_create(session.opaque_ref, _record);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_console_create(session.opaque_ref, _record.ToProxy()).parse());
+          return session.JsonRpcClient.async_console_create(session.opaque_ref, _record);
         }
 
         /// <summary>
@@ -235,10 +195,7 @@ namespace XenAPI
         /// <param name="_console">The opaque_ref of the given console</param>
         public static void destroy(Session session, string _console)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.console_destroy(session.opaque_ref, _console);
-            else
-                session.XmlRpcProxy.console_destroy(session.opaque_ref, _console ?? "").parse();
+            session.JsonRpcClient.console_destroy(session.opaque_ref, _console);
         }
 
         /// <summary>
@@ -249,10 +206,7 @@ namespace XenAPI
         /// <param name="_console">The opaque_ref of the given console</param>
         public static XenRef<Task> async_destroy(Session session, string _console)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_console_destroy(session.opaque_ref, _console);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_console_destroy(session.opaque_ref, _console ?? "").parse());
+          return session.JsonRpcClient.async_console_destroy(session.opaque_ref, _console);
         }
 
         /// <summary>
@@ -263,10 +217,7 @@ namespace XenAPI
         /// <param name="_console">The opaque_ref of the given console</param>
         public static string get_uuid(Session session, string _console)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.console_get_uuid(session.opaque_ref, _console);
-            else
-                return session.XmlRpcProxy.console_get_uuid(session.opaque_ref, _console ?? "").parse();
+            return session.JsonRpcClient.console_get_uuid(session.opaque_ref, _console);
         }
 
         /// <summary>
@@ -277,10 +228,7 @@ namespace XenAPI
         /// <param name="_console">The opaque_ref of the given console</param>
         public static console_protocol get_protocol(Session session, string _console)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.console_get_protocol(session.opaque_ref, _console);
-            else
-                return (console_protocol)Helper.EnumParseDefault(typeof(console_protocol), (string)session.XmlRpcProxy.console_get_protocol(session.opaque_ref, _console ?? "").parse());
+            return session.JsonRpcClient.console_get_protocol(session.opaque_ref, _console);
         }
 
         /// <summary>
@@ -291,10 +239,7 @@ namespace XenAPI
         /// <param name="_console">The opaque_ref of the given console</param>
         public static string get_location(Session session, string _console)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.console_get_location(session.opaque_ref, _console);
-            else
-                return session.XmlRpcProxy.console_get_location(session.opaque_ref, _console ?? "").parse();
+            return session.JsonRpcClient.console_get_location(session.opaque_ref, _console);
         }
 
         /// <summary>
@@ -305,10 +250,7 @@ namespace XenAPI
         /// <param name="_console">The opaque_ref of the given console</param>
         public static XenRef<VM> get_VM(Session session, string _console)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.console_get_vm(session.opaque_ref, _console);
-            else
-                return XenRef<VM>.Create(session.XmlRpcProxy.console_get_vm(session.opaque_ref, _console ?? "").parse());
+            return session.JsonRpcClient.console_get_vm(session.opaque_ref, _console);
         }
 
         /// <summary>
@@ -319,10 +261,7 @@ namespace XenAPI
         /// <param name="_console">The opaque_ref of the given console</param>
         public static Dictionary<string, string> get_other_config(Session session, string _console)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.console_get_other_config(session.opaque_ref, _console);
-            else
-                return Maps.convert_from_proxy_string_string(session.XmlRpcProxy.console_get_other_config(session.opaque_ref, _console ?? "").parse());
+            return session.JsonRpcClient.console_get_other_config(session.opaque_ref, _console);
         }
 
         /// <summary>
@@ -334,10 +273,7 @@ namespace XenAPI
         /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _console, Dictionary<string, string> _other_config)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.console_set_other_config(session.opaque_ref, _console, _other_config);
-            else
-                session.XmlRpcProxy.console_set_other_config(session.opaque_ref, _console ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
+            session.JsonRpcClient.console_set_other_config(session.opaque_ref, _console, _other_config);
         }
 
         /// <summary>
@@ -350,10 +286,7 @@ namespace XenAPI
         /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _console, string _key, string _value)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.console_add_to_other_config(session.opaque_ref, _console, _key, _value);
-            else
-                session.XmlRpcProxy.console_add_to_other_config(session.opaque_ref, _console ?? "", _key ?? "", _value ?? "").parse();
+            session.JsonRpcClient.console_add_to_other_config(session.opaque_ref, _console, _key, _value);
         }
 
         /// <summary>
@@ -365,10 +298,7 @@ namespace XenAPI
         /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _console, string _key)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.console_remove_from_other_config(session.opaque_ref, _console, _key);
-            else
-                session.XmlRpcProxy.console_remove_from_other_config(session.opaque_ref, _console ?? "", _key ?? "").parse();
+            session.JsonRpcClient.console_remove_from_other_config(session.opaque_ref, _console, _key);
         }
 
         /// <summary>
@@ -378,10 +308,7 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static List<XenRef<Console>> get_all(Session session)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.console_get_all(session.opaque_ref);
-            else
-                return XenRef<Console>.Create(session.XmlRpcProxy.console_get_all(session.opaque_ref).parse());
+            return session.JsonRpcClient.console_get_all(session.opaque_ref);
         }
 
         /// <summary>
@@ -391,10 +318,7 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static Dictionary<XenRef<Console>, Console> get_all_records(Session session)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.console_get_all_records(session.opaque_ref);
-            else
-                return XenRef<Console>.Create<Proxy_Console>(session.XmlRpcProxy.console_get_all_records(session.opaque_ref).parse());
+            return session.JsonRpcClient.console_get_all_records(session.opaque_ref);
         }
 
         /// <summary>

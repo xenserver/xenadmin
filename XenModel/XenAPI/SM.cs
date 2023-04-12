@@ -1,4 +1,5 @@
-/* Copyright (c) Cloud Software Group, Inc.
+/*
+ * Copyright (c) Cloud Software Group, Inc.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -93,15 +94,6 @@ namespace XenAPI
             UpdateFrom(table);
         }
 
-        /// <summary>
-        /// Creates a new SM from a Proxy_SM.
-        /// </summary>
-        /// <param name="proxy"></param>
-        public SM(Proxy_SM proxy)
-        {
-            UpdateFrom(proxy);
-        }
-
         #endregion
 
         /// <summary>
@@ -124,24 +116,6 @@ namespace XenAPI
             other_config = record.other_config;
             driver_filename = record.driver_filename;
             required_cluster_stack = record.required_cluster_stack;
-        }
-
-        internal void UpdateFrom(Proxy_SM proxy)
-        {
-            uuid = proxy.uuid == null ? null : proxy.uuid;
-            name_label = proxy.name_label == null ? null : proxy.name_label;
-            name_description = proxy.name_description == null ? null : proxy.name_description;
-            type = proxy.type == null ? null : proxy.type;
-            vendor = proxy.vendor == null ? null : proxy.vendor;
-            copyright = proxy.copyright == null ? null : proxy.copyright;
-            version = proxy.version == null ? null : proxy.version;
-            required_api_version = proxy.required_api_version == null ? null : proxy.required_api_version;
-            configuration = proxy.configuration == null ? null : Maps.convert_from_proxy_string_string(proxy.configuration);
-            capabilities = proxy.capabilities == null ? new string[] {} : (string[])proxy.capabilities;
-            features = proxy.features == null ? null : Maps.convert_from_proxy_string_long(proxy.features);
-            other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
-            driver_filename = proxy.driver_filename == null ? null : proxy.driver_filename;
-            required_cluster_stack = proxy.required_cluster_stack == null ? new string[] {} : (string[])proxy.required_cluster_stack;
         }
 
         /// <summary>
@@ -180,26 +154,6 @@ namespace XenAPI
                 driver_filename = Marshalling.ParseString(table, "driver_filename");
             if (table.ContainsKey("required_cluster_stack"))
                 required_cluster_stack = Marshalling.ParseStringArray(table, "required_cluster_stack");
-        }
-
-        public Proxy_SM ToProxy()
-        {
-            Proxy_SM result_ = new Proxy_SM();
-            result_.uuid = uuid ?? "";
-            result_.name_label = name_label ?? "";
-            result_.name_description = name_description ?? "";
-            result_.type = type ?? "";
-            result_.vendor = vendor ?? "";
-            result_.copyright = copyright ?? "";
-            result_.version = version ?? "";
-            result_.required_api_version = required_api_version ?? "";
-            result_.configuration = Maps.convert_to_proxy_string_string(configuration);
-            result_.capabilities = capabilities;
-            result_.features = Maps.convert_to_proxy_string_long(features);
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            result_.driver_filename = driver_filename ?? "";
-            result_.required_cluster_stack = required_cluster_stack;
-            return result_;
         }
 
         public bool DeepEquals(SM other)
@@ -251,10 +205,7 @@ namespace XenAPI
         /// <param name="_sm">The opaque_ref of the given sm</param>
         public static SM get_record(Session session, string _sm)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.sm_get_record(session.opaque_ref, _sm);
-            else
-                return new SM(session.XmlRpcProxy.sm_get_record(session.opaque_ref, _sm ?? "").parse());
+            return session.JsonRpcClient.sm_get_record(session.opaque_ref, _sm);
         }
 
         /// <summary>
@@ -265,10 +216,7 @@ namespace XenAPI
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<SM> get_by_uuid(Session session, string _uuid)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.sm_get_by_uuid(session.opaque_ref, _uuid);
-            else
-                return XenRef<SM>.Create(session.XmlRpcProxy.sm_get_by_uuid(session.opaque_ref, _uuid ?? "").parse());
+            return session.JsonRpcClient.sm_get_by_uuid(session.opaque_ref, _uuid);
         }
 
         /// <summary>
@@ -279,10 +227,7 @@ namespace XenAPI
         /// <param name="_label">label of object to return</param>
         public static List<XenRef<SM>> get_by_name_label(Session session, string _label)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.sm_get_by_name_label(session.opaque_ref, _label);
-            else
-                return XenRef<SM>.Create(session.XmlRpcProxy.sm_get_by_name_label(session.opaque_ref, _label ?? "").parse());
+            return session.JsonRpcClient.sm_get_by_name_label(session.opaque_ref, _label);
         }
 
         /// <summary>
@@ -293,10 +238,7 @@ namespace XenAPI
         /// <param name="_sm">The opaque_ref of the given sm</param>
         public static string get_uuid(Session session, string _sm)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.sm_get_uuid(session.opaque_ref, _sm);
-            else
-                return session.XmlRpcProxy.sm_get_uuid(session.opaque_ref, _sm ?? "").parse();
+            return session.JsonRpcClient.sm_get_uuid(session.opaque_ref, _sm);
         }
 
         /// <summary>
@@ -307,10 +249,7 @@ namespace XenAPI
         /// <param name="_sm">The opaque_ref of the given sm</param>
         public static string get_name_label(Session session, string _sm)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.sm_get_name_label(session.opaque_ref, _sm);
-            else
-                return session.XmlRpcProxy.sm_get_name_label(session.opaque_ref, _sm ?? "").parse();
+            return session.JsonRpcClient.sm_get_name_label(session.opaque_ref, _sm);
         }
 
         /// <summary>
@@ -321,10 +260,7 @@ namespace XenAPI
         /// <param name="_sm">The opaque_ref of the given sm</param>
         public static string get_name_description(Session session, string _sm)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.sm_get_name_description(session.opaque_ref, _sm);
-            else
-                return session.XmlRpcProxy.sm_get_name_description(session.opaque_ref, _sm ?? "").parse();
+            return session.JsonRpcClient.sm_get_name_description(session.opaque_ref, _sm);
         }
 
         /// <summary>
@@ -335,10 +271,7 @@ namespace XenAPI
         /// <param name="_sm">The opaque_ref of the given sm</param>
         public static string get_type(Session session, string _sm)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.sm_get_type(session.opaque_ref, _sm);
-            else
-                return session.XmlRpcProxy.sm_get_type(session.opaque_ref, _sm ?? "").parse();
+            return session.JsonRpcClient.sm_get_type(session.opaque_ref, _sm);
         }
 
         /// <summary>
@@ -349,10 +282,7 @@ namespace XenAPI
         /// <param name="_sm">The opaque_ref of the given sm</param>
         public static string get_vendor(Session session, string _sm)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.sm_get_vendor(session.opaque_ref, _sm);
-            else
-                return session.XmlRpcProxy.sm_get_vendor(session.opaque_ref, _sm ?? "").parse();
+            return session.JsonRpcClient.sm_get_vendor(session.opaque_ref, _sm);
         }
 
         /// <summary>
@@ -363,10 +293,7 @@ namespace XenAPI
         /// <param name="_sm">The opaque_ref of the given sm</param>
         public static string get_copyright(Session session, string _sm)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.sm_get_copyright(session.opaque_ref, _sm);
-            else
-                return session.XmlRpcProxy.sm_get_copyright(session.opaque_ref, _sm ?? "").parse();
+            return session.JsonRpcClient.sm_get_copyright(session.opaque_ref, _sm);
         }
 
         /// <summary>
@@ -377,10 +304,7 @@ namespace XenAPI
         /// <param name="_sm">The opaque_ref of the given sm</param>
         public static string get_version(Session session, string _sm)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.sm_get_version(session.opaque_ref, _sm);
-            else
-                return session.XmlRpcProxy.sm_get_version(session.opaque_ref, _sm ?? "").parse();
+            return session.JsonRpcClient.sm_get_version(session.opaque_ref, _sm);
         }
 
         /// <summary>
@@ -391,10 +315,7 @@ namespace XenAPI
         /// <param name="_sm">The opaque_ref of the given sm</param>
         public static string get_required_api_version(Session session, string _sm)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.sm_get_required_api_version(session.opaque_ref, _sm);
-            else
-                return session.XmlRpcProxy.sm_get_required_api_version(session.opaque_ref, _sm ?? "").parse();
+            return session.JsonRpcClient.sm_get_required_api_version(session.opaque_ref, _sm);
         }
 
         /// <summary>
@@ -405,10 +326,7 @@ namespace XenAPI
         /// <param name="_sm">The opaque_ref of the given sm</param>
         public static Dictionary<string, string> get_configuration(Session session, string _sm)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.sm_get_configuration(session.opaque_ref, _sm);
-            else
-                return Maps.convert_from_proxy_string_string(session.XmlRpcProxy.sm_get_configuration(session.opaque_ref, _sm ?? "").parse());
+            return session.JsonRpcClient.sm_get_configuration(session.opaque_ref, _sm);
         }
 
         /// <summary>
@@ -421,10 +339,7 @@ namespace XenAPI
         [Deprecated("XenServer 6.2")]
         public static string[] get_capabilities(Session session, string _sm)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.sm_get_capabilities(session.opaque_ref, _sm);
-            else
-                return (string[])session.XmlRpcProxy.sm_get_capabilities(session.opaque_ref, _sm ?? "").parse();
+            return session.JsonRpcClient.sm_get_capabilities(session.opaque_ref, _sm);
         }
 
         /// <summary>
@@ -435,10 +350,7 @@ namespace XenAPI
         /// <param name="_sm">The opaque_ref of the given sm</param>
         public static Dictionary<string, long> get_features(Session session, string _sm)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.sm_get_features(session.opaque_ref, _sm);
-            else
-                return Maps.convert_from_proxy_string_long(session.XmlRpcProxy.sm_get_features(session.opaque_ref, _sm ?? "").parse());
+            return session.JsonRpcClient.sm_get_features(session.opaque_ref, _sm);
         }
 
         /// <summary>
@@ -449,10 +361,7 @@ namespace XenAPI
         /// <param name="_sm">The opaque_ref of the given sm</param>
         public static Dictionary<string, string> get_other_config(Session session, string _sm)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.sm_get_other_config(session.opaque_ref, _sm);
-            else
-                return Maps.convert_from_proxy_string_string(session.XmlRpcProxy.sm_get_other_config(session.opaque_ref, _sm ?? "").parse());
+            return session.JsonRpcClient.sm_get_other_config(session.opaque_ref, _sm);
         }
 
         /// <summary>
@@ -463,10 +372,7 @@ namespace XenAPI
         /// <param name="_sm">The opaque_ref of the given sm</param>
         public static string get_driver_filename(Session session, string _sm)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.sm_get_driver_filename(session.opaque_ref, _sm);
-            else
-                return session.XmlRpcProxy.sm_get_driver_filename(session.opaque_ref, _sm ?? "").parse();
+            return session.JsonRpcClient.sm_get_driver_filename(session.opaque_ref, _sm);
         }
 
         /// <summary>
@@ -477,10 +383,7 @@ namespace XenAPI
         /// <param name="_sm">The opaque_ref of the given sm</param>
         public static string[] get_required_cluster_stack(Session session, string _sm)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.sm_get_required_cluster_stack(session.opaque_ref, _sm);
-            else
-                return (string[])session.XmlRpcProxy.sm_get_required_cluster_stack(session.opaque_ref, _sm ?? "").parse();
+            return session.JsonRpcClient.sm_get_required_cluster_stack(session.opaque_ref, _sm);
         }
 
         /// <summary>
@@ -492,10 +395,7 @@ namespace XenAPI
         /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _sm, Dictionary<string, string> _other_config)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.sm_set_other_config(session.opaque_ref, _sm, _other_config);
-            else
-                session.XmlRpcProxy.sm_set_other_config(session.opaque_ref, _sm ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
+            session.JsonRpcClient.sm_set_other_config(session.opaque_ref, _sm, _other_config);
         }
 
         /// <summary>
@@ -508,10 +408,7 @@ namespace XenAPI
         /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _sm, string _key, string _value)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.sm_add_to_other_config(session.opaque_ref, _sm, _key, _value);
-            else
-                session.XmlRpcProxy.sm_add_to_other_config(session.opaque_ref, _sm ?? "", _key ?? "", _value ?? "").parse();
+            session.JsonRpcClient.sm_add_to_other_config(session.opaque_ref, _sm, _key, _value);
         }
 
         /// <summary>
@@ -523,10 +420,7 @@ namespace XenAPI
         /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _sm, string _key)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.sm_remove_from_other_config(session.opaque_ref, _sm, _key);
-            else
-                session.XmlRpcProxy.sm_remove_from_other_config(session.opaque_ref, _sm ?? "", _key ?? "").parse();
+            session.JsonRpcClient.sm_remove_from_other_config(session.opaque_ref, _sm, _key);
         }
 
         /// <summary>
@@ -536,10 +430,7 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static List<XenRef<SM>> get_all(Session session)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.sm_get_all(session.opaque_ref);
-            else
-                return XenRef<SM>.Create(session.XmlRpcProxy.sm_get_all(session.opaque_ref).parse());
+            return session.JsonRpcClient.sm_get_all(session.opaque_ref);
         }
 
         /// <summary>
@@ -549,10 +440,7 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static Dictionary<XenRef<SM>, SM> get_all_records(Session session)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.sm_get_all_records(session.opaque_ref);
-            else
-                return XenRef<SM>.Create<Proxy_SM>(session.XmlRpcProxy.sm_get_all_records(session.opaque_ref).parse());
+            return session.JsonRpcClient.sm_get_all_records(session.opaque_ref);
         }
 
         /// <summary>

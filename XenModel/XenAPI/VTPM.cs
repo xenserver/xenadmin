@@ -1,4 +1,5 @@
-/* Copyright (c) Cloud Software Group, Inc.
+/*
+ * Copyright (c) Cloud Software Group, Inc.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -77,15 +78,6 @@ namespace XenAPI
             UpdateFrom(table);
         }
 
-        /// <summary>
-        /// Creates a new VTPM from a Proxy_VTPM.
-        /// </summary>
-        /// <param name="proxy"></param>
-        public VTPM(Proxy_VTPM proxy)
-        {
-            UpdateFrom(proxy);
-        }
-
         #endregion
 
         /// <summary>
@@ -100,16 +92,6 @@ namespace XenAPI
             persistence_backend = record.persistence_backend;
             is_unique = record.is_unique;
             is_protected = record.is_protected;
-        }
-
-        internal void UpdateFrom(Proxy_VTPM proxy)
-        {
-            uuid = proxy.uuid == null ? null : proxy.uuid;
-            VM = proxy.VM == null ? null : XenRef<VM>.Create(proxy.VM);
-            backend = proxy.backend == null ? null : XenRef<VM>.Create(proxy.backend);
-            persistence_backend = proxy.persistence_backend == null ? (persistence_backend) 0 : (persistence_backend)Helper.EnumParseDefault(typeof(persistence_backend), (string)proxy.persistence_backend);
-            is_unique = (bool)proxy.is_unique;
-            is_protected = (bool)proxy.is_protected;
         }
 
         /// <summary>
@@ -132,18 +114,6 @@ namespace XenAPI
                 is_unique = Marshalling.ParseBool(table, "is_unique");
             if (table.ContainsKey("is_protected"))
                 is_protected = Marshalling.ParseBool(table, "is_protected");
-        }
-
-        public Proxy_VTPM ToProxy()
-        {
-            Proxy_VTPM result_ = new Proxy_VTPM();
-            result_.uuid = uuid ?? "";
-            result_.VM = VM ?? "";
-            result_.backend = backend ?? "";
-            result_.persistence_backend = persistence_backend_helper.ToString(persistence_backend);
-            result_.is_unique = is_unique;
-            result_.is_protected = is_protected;
-            return result_;
         }
 
         public bool DeepEquals(VTPM other)
@@ -176,30 +146,24 @@ namespace XenAPI
 
         /// <summary>
         /// Get a record containing the current state of the given VTPM.
-        /// Experimental. First published in 22.26.0-next.
+        /// Experimental. First published in 22.26.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vtpm">The opaque_ref of the given vtpm</param>
         public static VTPM get_record(Session session, string _vtpm)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vtpm_get_record(session.opaque_ref, _vtpm);
-            else
-                return new VTPM(session.XmlRpcProxy.vtpm_get_record(session.opaque_ref, _vtpm ?? "").parse());
+            return session.JsonRpcClient.vtpm_get_record(session.opaque_ref, _vtpm);
         }
 
         /// <summary>
         /// Get a reference to the VTPM instance with the specified UUID.
-        /// Experimental. First published in 22.26.0-next.
+        /// Experimental. First published in 22.26.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<VTPM> get_by_uuid(Session session, string _uuid)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vtpm_get_by_uuid(session.opaque_ref, _uuid);
-            else
-                return XenRef<VTPM>.Create(session.XmlRpcProxy.vtpm_get_by_uuid(session.opaque_ref, _uuid ?? "").parse());
+            return session.JsonRpcClient.vtpm_get_by_uuid(session.opaque_ref, _uuid);
         }
 
         /// <summary>
@@ -210,10 +174,7 @@ namespace XenAPI
         /// <param name="_vtpm">The opaque_ref of the given vtpm</param>
         public static string get_uuid(Session session, string _vtpm)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vtpm_get_uuid(session.opaque_ref, _vtpm);
-            else
-                return session.XmlRpcProxy.vtpm_get_uuid(session.opaque_ref, _vtpm ?? "").parse();
+            return session.JsonRpcClient.vtpm_get_uuid(session.opaque_ref, _vtpm);
         }
 
         /// <summary>
@@ -224,10 +185,7 @@ namespace XenAPI
         /// <param name="_vtpm">The opaque_ref of the given vtpm</param>
         public static XenRef<VM> get_VM(Session session, string _vtpm)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vtpm_get_vm(session.opaque_ref, _vtpm);
-            else
-                return XenRef<VM>.Create(session.XmlRpcProxy.vtpm_get_vm(session.opaque_ref, _vtpm ?? "").parse());
+            return session.JsonRpcClient.vtpm_get_vm(session.opaque_ref, _vtpm);
         }
 
         /// <summary>
@@ -238,123 +196,96 @@ namespace XenAPI
         /// <param name="_vtpm">The opaque_ref of the given vtpm</param>
         public static XenRef<VM> get_backend(Session session, string _vtpm)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vtpm_get_backend(session.opaque_ref, _vtpm);
-            else
-                return XenRef<VM>.Create(session.XmlRpcProxy.vtpm_get_backend(session.opaque_ref, _vtpm ?? "").parse());
+            return session.JsonRpcClient.vtpm_get_backend(session.opaque_ref, _vtpm);
         }
 
         /// <summary>
         /// Get the persistence_backend field of the given VTPM.
-        /// Experimental. First published in 22.26.0-next.
+        /// Experimental. First published in 22.26.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vtpm">The opaque_ref of the given vtpm</param>
         public static persistence_backend get_persistence_backend(Session session, string _vtpm)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vtpm_get_persistence_backend(session.opaque_ref, _vtpm);
-            else
-                return (persistence_backend)Helper.EnumParseDefault(typeof(persistence_backend), (string)session.XmlRpcProxy.vtpm_get_persistence_backend(session.opaque_ref, _vtpm ?? "").parse());
+            return session.JsonRpcClient.vtpm_get_persistence_backend(session.opaque_ref, _vtpm);
         }
 
         /// <summary>
         /// Get the is_unique field of the given VTPM.
-        /// Experimental. First published in 22.26.0-next.
+        /// Experimental. First published in 22.26.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vtpm">The opaque_ref of the given vtpm</param>
         public static bool get_is_unique(Session session, string _vtpm)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vtpm_get_is_unique(session.opaque_ref, _vtpm);
-            else
-                return (bool)session.XmlRpcProxy.vtpm_get_is_unique(session.opaque_ref, _vtpm ?? "").parse();
+            return session.JsonRpcClient.vtpm_get_is_unique(session.opaque_ref, _vtpm);
         }
 
         /// <summary>
         /// Get the is_protected field of the given VTPM.
-        /// Experimental. First published in 22.26.0-next.
+        /// Experimental. First published in 22.26.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vtpm">The opaque_ref of the given vtpm</param>
         public static bool get_is_protected(Session session, string _vtpm)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vtpm_get_is_protected(session.opaque_ref, _vtpm);
-            else
-                return (bool)session.XmlRpcProxy.vtpm_get_is_protected(session.opaque_ref, _vtpm ?? "").parse();
+            return session.JsonRpcClient.vtpm_get_is_protected(session.opaque_ref, _vtpm);
         }
 
         /// <summary>
         /// Create a new VTPM instance, and return its handle.
-        /// Experimental. First published in 22.26.0-next.
+        /// Experimental. First published in 22.26.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The VM reference the VTPM will be attached to</param>
         /// <param name="_is_unique">Whether the VTPM must be unique</param>
         public static XenRef<VTPM> create(Session session, string _vm, bool _is_unique)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vtpm_create(session.opaque_ref, _vm, _is_unique);
-            else
-                return XenRef<VTPM>.Create(session.XmlRpcProxy.vtpm_create(session.opaque_ref, _vm ?? "", _is_unique).parse());
+            return session.JsonRpcClient.vtpm_create(session.opaque_ref, _vm, _is_unique);
         }
 
         /// <summary>
         /// Create a new VTPM instance, and return its handle.
-        /// Experimental. First published in 22.26.0-next.
+        /// Experimental. First published in 22.26.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The VM reference the VTPM will be attached to</param>
         /// <param name="_is_unique">Whether the VTPM must be unique</param>
         public static XenRef<Task> async_create(Session session, string _vm, bool _is_unique)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vtpm_create(session.opaque_ref, _vm, _is_unique);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_vtpm_create(session.opaque_ref, _vm ?? "", _is_unique).parse());
+          return session.JsonRpcClient.async_vtpm_create(session.opaque_ref, _vm, _is_unique);
         }
 
         /// <summary>
         /// Destroy the specified VTPM instance, along with its state.
-        /// Experimental. First published in 22.26.0-next.
+        /// Experimental. First published in 22.26.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vtpm">The opaque_ref of the given vtpm</param>
         public static void destroy(Session session, string _vtpm)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vtpm_destroy(session.opaque_ref, _vtpm);
-            else
-                session.XmlRpcProxy.vtpm_destroy(session.opaque_ref, _vtpm ?? "").parse();
+            session.JsonRpcClient.vtpm_destroy(session.opaque_ref, _vtpm);
         }
 
         /// <summary>
         /// Destroy the specified VTPM instance, along with its state.
-        /// Experimental. First published in 22.26.0-next.
+        /// Experimental. First published in 22.26.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vtpm">The opaque_ref of the given vtpm</param>
         public static XenRef<Task> async_destroy(Session session, string _vtpm)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vtpm_destroy(session.opaque_ref, _vtpm);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_vtpm_destroy(session.opaque_ref, _vtpm ?? "").parse());
+          return session.JsonRpcClient.async_vtpm_destroy(session.opaque_ref, _vtpm);
         }
 
         /// <summary>
         /// Return a list of all the VTPMs known to the system.
-        /// Experimental. First published in 22.26.0-next.
+        /// Experimental. First published in 22.26.0.
         /// </summary>
         /// <param name="session">The session</param>
         public static List<XenRef<VTPM>> get_all(Session session)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vtpm_get_all(session.opaque_ref);
-            else
-                return XenRef<VTPM>.Create(session.XmlRpcProxy.vtpm_get_all(session.opaque_ref).parse());
+            return session.JsonRpcClient.vtpm_get_all(session.opaque_ref);
         }
 
         /// <summary>
@@ -364,10 +295,7 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static Dictionary<XenRef<VTPM>, VTPM> get_all_records(Session session)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vtpm_get_all_records(session.opaque_ref);
-            else
-                return XenRef<VTPM>.Create<Proxy_VTPM>(session.XmlRpcProxy.vtpm_get_all_records(session.opaque_ref).parse());
+            return session.JsonRpcClient.vtpm_get_all_records(session.opaque_ref);
         }
 
         /// <summary>
@@ -428,7 +356,7 @@ namespace XenAPI
 
         /// <summary>
         /// The backend where the vTPM is persisted
-        /// Experimental. First published in 22.26.0-next.
+        /// Experimental. First published in 22.26.0.
         /// </summary>
         [JsonConverter(typeof(persistence_backendConverter))]
         public virtual persistence_backend persistence_backend
@@ -447,7 +375,7 @@ namespace XenAPI
 
         /// <summary>
         /// Whether the contents are never copied, satisfying the TPM spec
-        /// Experimental. First published in 22.26.0-next.
+        /// Experimental. First published in 22.26.0.
         /// </summary>
         public virtual bool is_unique
         {
@@ -465,7 +393,7 @@ namespace XenAPI
 
         /// <summary>
         /// Whether the contents of the VTPM are secured according to the TPM spec
-        /// Experimental. First published in 22.26.0-next.
+        /// Experimental. First published in 22.26.0.
         /// </summary>
         public virtual bool is_protected
         {

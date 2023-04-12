@@ -11656,9 +11656,6 @@ The coordinator must be upgraded first, so if you skip the coordinator, the roll
   <data name="SERVER_COLON" xml:space="preserve">
     <value>Server:</value>
   </data>
-  <data name="SERVER_FAILURE" xml:space="preserve">
-    <value>Server failure: {0}</value>
-  </data>
   <data name="SERVER_LABLE" xml:space="preserve">
     <value>&amp;Server:</value>
   </data>

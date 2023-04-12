@@ -1,4 +1,5 @@
-/* Copyright (c) Cloud Software Group, Inc.
+/*
+ * Copyright (c) Cloud Software Group, Inc.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -83,15 +84,6 @@ namespace XenAPI
             UpdateFrom(table);
         }
 
-        /// <summary>
-        /// Creates a new Repository from a Proxy_Repository.
-        /// </summary>
-        /// <param name="proxy"></param>
-        public Repository(Proxy_Repository proxy)
-        {
-            UpdateFrom(proxy);
-        }
-
         #endregion
 
         /// <summary>
@@ -109,19 +101,6 @@ namespace XenAPI
             hash = record.hash;
             up_to_date = record.up_to_date;
             gpgkey_path = record.gpgkey_path;
-        }
-
-        internal void UpdateFrom(Proxy_Repository proxy)
-        {
-            uuid = proxy.uuid == null ? null : proxy.uuid;
-            name_label = proxy.name_label == null ? null : proxy.name_label;
-            name_description = proxy.name_description == null ? null : proxy.name_description;
-            binary_url = proxy.binary_url == null ? null : proxy.binary_url;
-            source_url = proxy.source_url == null ? null : proxy.source_url;
-            update = (bool)proxy.update;
-            hash = proxy.hash == null ? null : proxy.hash;
-            up_to_date = (bool)proxy.up_to_date;
-            gpgkey_path = proxy.gpgkey_path == null ? null : proxy.gpgkey_path;
         }
 
         /// <summary>
@@ -150,21 +129,6 @@ namespace XenAPI
                 up_to_date = Marshalling.ParseBool(table, "up_to_date");
             if (table.ContainsKey("gpgkey_path"))
                 gpgkey_path = Marshalling.ParseString(table, "gpgkey_path");
-        }
-
-        public Proxy_Repository ToProxy()
-        {
-            Proxy_Repository result_ = new Proxy_Repository();
-            result_.uuid = uuid ?? "";
-            result_.name_label = name_label ?? "";
-            result_.name_description = name_description ?? "";
-            result_.binary_url = binary_url ?? "";
-            result_.source_url = source_url ?? "";
-            result_.update = update;
-            result_.hash = hash ?? "";
-            result_.up_to_date = up_to_date;
-            result_.gpgkey_path = gpgkey_path ?? "";
-            return result_;
         }
 
         public bool DeepEquals(Repository other)
@@ -219,10 +183,7 @@ namespace XenAPI
         /// <param name="_repository">The opaque_ref of the given repository</param>
         public static Repository get_record(Session session, string _repository)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.repository_get_record(session.opaque_ref, _repository);
-            else
-                return new Repository(session.XmlRpcProxy.repository_get_record(session.opaque_ref, _repository ?? "").parse());
+            return session.JsonRpcClient.repository_get_record(session.opaque_ref, _repository);
         }
 
         /// <summary>
@@ -233,10 +194,7 @@ namespace XenAPI
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<Repository> get_by_uuid(Session session, string _uuid)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.repository_get_by_uuid(session.opaque_ref, _uuid);
-            else
-                return XenRef<Repository>.Create(session.XmlRpcProxy.repository_get_by_uuid(session.opaque_ref, _uuid ?? "").parse());
+            return session.JsonRpcClient.repository_get_by_uuid(session.opaque_ref, _uuid);
         }
 
         /// <summary>
@@ -247,10 +205,7 @@ namespace XenAPI
         /// <param name="_label">label of object to return</param>
         public static List<XenRef<Repository>> get_by_name_label(Session session, string _label)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.repository_get_by_name_label(session.opaque_ref, _label);
-            else
-                return XenRef<Repository>.Create(session.XmlRpcProxy.repository_get_by_name_label(session.opaque_ref, _label ?? "").parse());
+            return session.JsonRpcClient.repository_get_by_name_label(session.opaque_ref, _label);
         }
 
         /// <summary>
@@ -261,10 +216,7 @@ namespace XenAPI
         /// <param name="_repository">The opaque_ref of the given repository</param>
         public static string get_uuid(Session session, string _repository)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.repository_get_uuid(session.opaque_ref, _repository);
-            else
-                return session.XmlRpcProxy.repository_get_uuid(session.opaque_ref, _repository ?? "").parse();
+            return session.JsonRpcClient.repository_get_uuid(session.opaque_ref, _repository);
         }
 
         /// <summary>
@@ -275,10 +227,7 @@ namespace XenAPI
         /// <param name="_repository">The opaque_ref of the given repository</param>
         public static string get_name_label(Session session, string _repository)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.repository_get_name_label(session.opaque_ref, _repository);
-            else
-                return session.XmlRpcProxy.repository_get_name_label(session.opaque_ref, _repository ?? "").parse();
+            return session.JsonRpcClient.repository_get_name_label(session.opaque_ref, _repository);
         }
 
         /// <summary>
@@ -289,10 +238,7 @@ namespace XenAPI
         /// <param name="_repository">The opaque_ref of the given repository</param>
         public static string get_name_description(Session session, string _repository)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.repository_get_name_description(session.opaque_ref, _repository);
-            else
-                return session.XmlRpcProxy.repository_get_name_description(session.opaque_ref, _repository ?? "").parse();
+            return session.JsonRpcClient.repository_get_name_description(session.opaque_ref, _repository);
         }
 
         /// <summary>
@@ -303,10 +249,7 @@ namespace XenAPI
         /// <param name="_repository">The opaque_ref of the given repository</param>
         public static string get_binary_url(Session session, string _repository)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.repository_get_binary_url(session.opaque_ref, _repository);
-            else
-                return session.XmlRpcProxy.repository_get_binary_url(session.opaque_ref, _repository ?? "").parse();
+            return session.JsonRpcClient.repository_get_binary_url(session.opaque_ref, _repository);
         }
 
         /// <summary>
@@ -317,10 +260,7 @@ namespace XenAPI
         /// <param name="_repository">The opaque_ref of the given repository</param>
         public static string get_source_url(Session session, string _repository)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.repository_get_source_url(session.opaque_ref, _repository);
-            else
-                return session.XmlRpcProxy.repository_get_source_url(session.opaque_ref, _repository ?? "").parse();
+            return session.JsonRpcClient.repository_get_source_url(session.opaque_ref, _repository);
         }
 
         /// <summary>
@@ -331,10 +271,7 @@ namespace XenAPI
         /// <param name="_repository">The opaque_ref of the given repository</param>
         public static bool get_update(Session session, string _repository)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.repository_get_update(session.opaque_ref, _repository);
-            else
-                return (bool)session.XmlRpcProxy.repository_get_update(session.opaque_ref, _repository ?? "").parse();
+            return session.JsonRpcClient.repository_get_update(session.opaque_ref, _repository);
         }
 
         /// <summary>
@@ -345,10 +282,7 @@ namespace XenAPI
         /// <param name="_repository">The opaque_ref of the given repository</param>
         public static string get_hash(Session session, string _repository)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.repository_get_hash(session.opaque_ref, _repository);
-            else
-                return session.XmlRpcProxy.repository_get_hash(session.opaque_ref, _repository ?? "").parse();
+            return session.JsonRpcClient.repository_get_hash(session.opaque_ref, _repository);
         }
 
         /// <summary>
@@ -359,10 +293,7 @@ namespace XenAPI
         /// <param name="_repository">The opaque_ref of the given repository</param>
         public static bool get_up_to_date(Session session, string _repository)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.repository_get_up_to_date(session.opaque_ref, _repository);
-            else
-                return (bool)session.XmlRpcProxy.repository_get_up_to_date(session.opaque_ref, _repository ?? "").parse();
+            return session.JsonRpcClient.repository_get_up_to_date(session.opaque_ref, _repository);
         }
 
         /// <summary>
@@ -373,10 +304,7 @@ namespace XenAPI
         /// <param name="_repository">The opaque_ref of the given repository</param>
         public static string get_gpgkey_path(Session session, string _repository)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.repository_get_gpgkey_path(session.opaque_ref, _repository);
-            else
-                return session.XmlRpcProxy.repository_get_gpgkey_path(session.opaque_ref, _repository ?? "").parse();
+            return session.JsonRpcClient.repository_get_gpgkey_path(session.opaque_ref, _repository);
         }
 
         /// <summary>
@@ -388,10 +316,7 @@ namespace XenAPI
         /// <param name="_label">New value to set</param>
         public static void set_name_label(Session session, string _repository, string _label)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.repository_set_name_label(session.opaque_ref, _repository, _label);
-            else
-                session.XmlRpcProxy.repository_set_name_label(session.opaque_ref, _repository ?? "", _label ?? "").parse();
+            session.JsonRpcClient.repository_set_name_label(session.opaque_ref, _repository, _label);
         }
 
         /// <summary>
@@ -403,10 +328,7 @@ namespace XenAPI
         /// <param name="_description">New value to set</param>
         public static void set_name_description(Session session, string _repository, string _description)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.repository_set_name_description(session.opaque_ref, _repository, _description);
-            else
-                session.XmlRpcProxy.repository_set_name_description(session.opaque_ref, _repository ?? "", _description ?? "").parse();
+            session.JsonRpcClient.repository_set_name_description(session.opaque_ref, _repository, _description);
         }
 
         /// <summary>
@@ -422,10 +344,7 @@ namespace XenAPI
         /// <param name="_gpgkey_path">The GPG public key file name</param>
         public static XenRef<Repository> introduce(Session session, string _name_label, string _name_description, string _binary_url, string _source_url, bool _update, string _gpgkey_path)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.repository_introduce(session.opaque_ref, _name_label, _name_description, _binary_url, _source_url, _update, _gpgkey_path);
-            else
-                return XenRef<Repository>.Create(session.XmlRpcProxy.repository_introduce(session.opaque_ref, _name_label ?? "", _name_description ?? "", _binary_url ?? "", _source_url ?? "", _update, _gpgkey_path ?? "").parse());
+            return session.JsonRpcClient.repository_introduce(session.opaque_ref, _name_label, _name_description, _binary_url, _source_url, _update, _gpgkey_path);
         }
 
         /// <summary>
@@ -441,10 +360,7 @@ namespace XenAPI
         /// <param name="_gpgkey_path">The GPG public key file name</param>
         public static XenRef<Task> async_introduce(Session session, string _name_label, string _name_description, string _binary_url, string _source_url, bool _update, string _gpgkey_path)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_repository_introduce(session.opaque_ref, _name_label, _name_description, _binary_url, _source_url, _update, _gpgkey_path);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_repository_introduce(session.opaque_ref, _name_label ?? "", _name_description ?? "", _binary_url ?? "", _source_url ?? "", _update, _gpgkey_path ?? "").parse());
+          return session.JsonRpcClient.async_repository_introduce(session.opaque_ref, _name_label, _name_description, _binary_url, _source_url, _update, _gpgkey_path);
         }
 
         /// <summary>
@@ -455,10 +371,7 @@ namespace XenAPI
         /// <param name="_repository">The opaque_ref of the given repository</param>
         public static void forget(Session session, string _repository)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.repository_forget(session.opaque_ref, _repository);
-            else
-                session.XmlRpcProxy.repository_forget(session.opaque_ref, _repository ?? "").parse();
+            session.JsonRpcClient.repository_forget(session.opaque_ref, _repository);
         }
 
         /// <summary>
@@ -469,10 +382,7 @@ namespace XenAPI
         /// <param name="_repository">The opaque_ref of the given repository</param>
         public static XenRef<Task> async_forget(Session session, string _repository)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_repository_forget(session.opaque_ref, _repository);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_repository_forget(session.opaque_ref, _repository ?? "").parse());
+          return session.JsonRpcClient.async_repository_forget(session.opaque_ref, _repository);
         }
 
         /// <summary>
@@ -484,10 +394,7 @@ namespace XenAPI
         /// <param name="_value">The file name of the GPG public key of the repository</param>
         public static void set_gpgkey_path(Session session, string _repository, string _value)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.repository_set_gpgkey_path(session.opaque_ref, _repository, _value);
-            else
-                session.XmlRpcProxy.repository_set_gpgkey_path(session.opaque_ref, _repository ?? "", _value ?? "").parse();
+            session.JsonRpcClient.repository_set_gpgkey_path(session.opaque_ref, _repository, _value);
         }
 
         /// <summary>
@@ -499,10 +406,7 @@ namespace XenAPI
         /// <param name="_value">The file name of the GPG public key of the repository</param>
         public static XenRef<Task> async_set_gpgkey_path(Session session, string _repository, string _value)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_repository_set_gpgkey_path(session.opaque_ref, _repository, _value);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_repository_set_gpgkey_path(session.opaque_ref, _repository ?? "", _value ?? "").parse());
+          return session.JsonRpcClient.async_repository_set_gpgkey_path(session.opaque_ref, _repository, _value);
         }
 
         /// <summary>
@@ -512,10 +416,7 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static List<XenRef<Repository>> get_all(Session session)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.repository_get_all(session.opaque_ref);
-            else
-                return XenRef<Repository>.Create(session.XmlRpcProxy.repository_get_all(session.opaque_ref).parse());
+            return session.JsonRpcClient.repository_get_all(session.opaque_ref);
         }
 
         /// <summary>
@@ -525,10 +426,7 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static Dictionary<XenRef<Repository>, Repository> get_all_records(Session session)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.repository_get_all_records(session.opaque_ref);
-            else
-                return XenRef<Repository>.Create<Proxy_Repository>(session.XmlRpcProxy.repository_get_all_records(session.opaque_ref).parse());
+            return session.JsonRpcClient.repository_get_all_records(session.opaque_ref);
         }
 
         /// <summary>

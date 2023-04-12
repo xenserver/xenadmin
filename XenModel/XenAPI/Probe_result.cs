@@ -1,4 +1,5 @@
-/* Copyright (c) Cloud Software Group, Inc.
+/*
+ * Copyright (c) Cloud Software Group, Inc.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -73,15 +74,6 @@ namespace XenAPI
             UpdateFrom(table);
         }
 
-        /// <summary>
-        /// Creates a new Probe_result from a Proxy_Probe_result.
-        /// </summary>
-        /// <param name="proxy"></param>
-        public Probe_result(Proxy_Probe_result proxy)
-        {
-            UpdateFrom(proxy);
-        }
-
         #endregion
 
         /// <summary>
@@ -94,14 +86,6 @@ namespace XenAPI
             complete = record.complete;
             sr = record.sr;
             extra_info = record.extra_info;
-        }
-
-        internal void UpdateFrom(Proxy_Probe_result proxy)
-        {
-            configuration = proxy.configuration == null ? null : Maps.convert_from_proxy_string_string(proxy.configuration);
-            complete = (bool)proxy.complete;
-            sr = proxy.sr == null ? null : new Sr_stat(proxy.sr);
-            extra_info = proxy.extra_info == null ? null : Maps.convert_from_proxy_string_string(proxy.extra_info);
         }
 
         /// <summary>
@@ -120,16 +104,6 @@ namespace XenAPI
                 sr = (Sr_stat)Marshalling.convertStruct(typeof(Sr_stat), Marshalling.ParseHashTable(table, "sr"));;
             if (table.ContainsKey("extra_info"))
                 extra_info = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "extra_info"));
-        }
-
-        public Proxy_Probe_result ToProxy()
-        {
-            Proxy_Probe_result result_ = new Proxy_Probe_result();
-            result_.configuration = Maps.convert_to_proxy_string_string(configuration);
-            result_.complete = complete;
-            result_.sr = sr == null ? null : sr.ToProxy();
-            result_.extra_info = Maps.convert_to_proxy_string_string(extra_info);
-            return result_;
         }
 
         public bool DeepEquals(Probe_result other)

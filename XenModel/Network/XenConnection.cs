@@ -34,15 +34,15 @@ using System.Globalization;
 using System.Net;
 using System.Reflection;
 using System.Threading;
-using CookComputing.XmlRpc;
 using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAPI;
 using XenCenterLib;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Xml;
 using System.Xml.Serialization;
-using XenAdmin.ServerDBs;
 
 
 namespace XenAdmin.Network
@@ -50,7 +50,7 @@ namespace XenAdmin.Network
     [DebuggerDisplay("IXenConnection :{HostnameWithPort}")]
     public class XenConnection : IXenConnection, IXmlSerializable
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         public string Hostname { get; set; }
         public int Port { get; set; }
@@ -73,13 +73,20 @@ namespace XenAdmin.Network
         /// </summary>
         public bool fromDialog = false;
 
+        private volatile bool _expectedDisruption;
+        private volatile bool _suppressErrors;
+        private volatile bool _preventResettingPasswordPrompt;
+        private volatile bool _coordinatorMayChange;
+
         /// <summary>
         /// Whether we're expecting network disruption, say because we're reconfiguring the network at this time.  In that case, we ignore
         /// keepalive failures, and expect task polling to be disrupted.
         /// </summary>
-        private volatile bool _expectedDisruption = false;
-
-        public bool ExpectDisruption { get { return _expectedDisruption; } set { _expectedDisruption = value; } }
+        public bool ExpectDisruption
+        {
+            get => _expectedDisruption;
+            set => _expectedDisruption = value;
+        }
 
         /// <summary>
         /// If we are 'expecting' this connection's Password property to contain the correct password
@@ -90,15 +97,11 @@ namespace XenAdmin.Network
         /// <summary>
         /// Used by the patch wizard, suppress any errors coming from reconnect attempts
         /// </summary>
-        private volatile bool _suppressErrors;
         public bool SuppressErrors
         {
             get => _suppressErrors;
             set => _suppressErrors = value;
         }
-
-
-        private volatile bool _preventResettingPasswordPrompt;
 
         /// <summary>
         /// The password prompting function (<see cref="_promptForNewPassword"/>) is set to null when the connection is closed.
@@ -114,9 +117,11 @@ namespace XenAdmin.Network
         /// <summary>
         /// Indicates whether we are expecting the pool coordinator to change soon (e.g. when explicitly designating a new coordinator).
         /// </summary>
-        private volatile bool _coordinatorMayChange = false;
-
-        public bool CoordinatorMayChange { get { return _coordinatorMayChange; } set { _coordinatorMayChange = value; } }
+        public bool CoordinatorMayChange
+        {
+            get => _coordinatorMayChange;
+            set => _coordinatorMayChange = value;
+        }
 
         /// <summary>
         /// Set when we detect that Event.next() has become blocked and we need to reset the connection. See CA-33145.
@@ -134,11 +139,15 @@ namespace XenAdmin.Network
         private string CoordinatorIPAddress = "";
 
         /// <summary>
-        /// The lock that must be taken around connectTask and monitor.
+        /// The lock that must be taken around connectTask and heartbeat.
         /// </summary>
         private readonly object connectTaskLock = new object();
         private ConnectTask connectTask = null;
-        private Heartbeat heartbeat = null;
+
+        /// <summary>
+        /// This is the metrics monitor. Has to be accessed within the connectTaskLock.
+        /// </summary>
+        private Heartbeat heartbeat;
 
         /// <summary>
         /// Whether we are trying to automatically connect to the new coordinator. Set in HandleConnectionLost.
@@ -168,7 +177,7 @@ namespace XenAdmin.Network
 
         private DateTime m_startTime = DateTime.MinValue;
         private int m_lastDebug;
-        private TimeSpan ServerTimeOffset_ = TimeSpan.Zero;
+        private TimeSpan _serverTimeOffset = TimeSpan.Zero;
         private object ServerTimeOffsetLock = new object();
         /// <summary>
         /// The offset between the clock at the client and the clock at the server.  server time + ServerTimeOffset = client time.
@@ -181,15 +190,14 @@ namespace XenAdmin.Network
             {
                 lock (ServerTimeOffsetLock)
                 {
-                    return ServerTimeOffset_;
+                    return _serverTimeOffset;
                 }
             }
-
             set
             {
                 lock (ServerTimeOffsetLock)
                 {
-                    TimeSpan diff = ServerTimeOffset_ - value;
+                    TimeSpan diff = _serverTimeOffset - value;
 
                     if (diff.TotalSeconds < -1 || 1 < diff.TotalSeconds)
                     {
@@ -214,11 +222,8 @@ namespace XenAdmin.Network
                         }
                     }
 
-                    ServerTimeOffset_ = value;
+                    _serverTimeOffset = value;
                 }
-
-                if (TimeSkewUpdated != null)
-                    TimeSkewUpdated(this, EventArgs.Empty);
             }
         }
 
@@ -252,8 +257,7 @@ namespace XenAdmin.Network
         /// <summary>
         /// The cache of XenAPI objects for this connection.
         /// </summary>
-        private readonly ICache _cache = new Cache();
-        public ICache Cache { get { return _cache; } }
+        public ICache Cache { get; } = new Cache();
 
         private readonly LockFreeQueue<ObjectChange> eventQueue = new LockFreeQueue<ObjectChange>();
         private readonly System.Threading.Timer cacheUpdateTimer;
@@ -261,11 +265,19 @@ namespace XenAdmin.Network
         /// <summary>
         /// Whether the cache for this connection has been populated.
         /// </summary>
-        private bool cacheIsPopulated = false;
         public bool CacheIsPopulated
         {
-            get { return cacheIsPopulated; }
+            get => _cacheIsPopulated;
+            private set
+            {
+                _cacheIsPopulated = value;
+
+                if (_cacheIsPopulated)
+                    CachePopulated?.Invoke(this);
+            }
         }
+
+        private bool _cacheIsPopulated;
 
         private bool cacheUpdaterRunning = false;
         private bool updatesWaiting = false;
@@ -278,60 +290,11 @@ namespace XenAdmin.Network
             Port = ConnectionsManager.DEFAULT_XEN_PORT;
             Username = "root";
             SaveDisconnected = false;
-            ExpectPasswordIsCorrect = true;
-            cacheUpdateTimer = new System.Threading.Timer(cacheUpdater);
+            ExpectPasswordIsCorrect = true; 
+            cacheUpdateTimer = new Timer(cacheUpdater);
         }
 
-        /// <summary>
-        /// For use by unit tests only.
-        /// </summary>
-        /// <param name="user"></param>
-        /// <param name="password"></param>
-        /// <returns></returns>
-        public Session Connect(string user, string password)
-        {
-            heartbeat = new Heartbeat(this, XenAdminConfigManager.Provider.ConnectionTimeout);
-            Session session = SessionFactory.CreateSession(this, Hostname, Port);
-
-            try
-            {
-                session.login_with_password(user, password, Helper.APIVersionString(API_Version.LATEST), Session.UserAgent);
-
-                // this is required so connection.IsConnected returns true in the unit tests.
-                connectTask = new ConnectTask("test", 0);
-                connectTask.Connected = true;
-                connectTask.Session = session;
-
-                return session;
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-
-        }
-
-        /// <summary>
-        /// Used by unit tests only.
-        /// </summary>
-        /// <param name="session">The session.</param>
-        public void LoadCache(Session session)
-        {
-            this.Cache.Clear();
-
-            cacheIsPopulated = false;
-
-            string token = "";
-            XenObjectDownloader.GetAllObjects(session, eventQueue, () => false, ref token);
-            List<ObjectChange> events = new List<ObjectChange>();
-
-            while (eventQueue.NotEmpty)
-                events.Add(eventQueue.Dequeue());
-
-            this.Cache.UpdateFrom(this, events);
-            cacheIsPopulated = true;
-
-        }
+        #region Events
 
         /// <summary>
         /// Fired just before the cache is cleared (i.e. the cache is still populated).
@@ -353,8 +316,48 @@ namespace XenAdmin.Network
         /// </summary>
         public event EventHandler<EventArgs> XenObjectsUpdated;
 
+        #endregion
+
+        public void LoadFromDatabaseFile(string databaseFile)
+        {
+            IsSimulatedConnection = true;
+
+            var foundConn = ConnectionsManager.XenConnections.Cast<XenConnection>().FirstOrDefault(c =>
+                    c.Hostname == databaseFile && c.CoordinatorIPAddress == CoordinatorIPAddress);
+            if (foundConn != null && foundConn.IsConnected)
+                throw new ConnectionExists(this);
+
+            var document = new XmlDocument();
+            using (var sr = new StreamReader(databaseFile))
+                document.LoadXml(sr.ReadToEnd());
+
+            var db = new Db(document);
+            var events = db.Tables.SelectMany(t => t.Rows).Select(r => r.ObjectChange).ToList();
+
+            var session = new Session(Session.STANDARD_TIMEOUT, this, Path.GetFileName(Hostname), Port);
+            connectTask = new ConnectTask(Hostname, Port) { Connected = true, Session = session };
+
+            OnBeforeMajorChange(false);
+            Cache.Clear();
+            CacheIsPopulated = false;
+            OnAfterMajorChange(false);
+
+            OnBeforeMajorChange(false);
+            Cache.UpdateFrom(this, events);
+            OnAfterMajorChange(false);
+            CacheIsPopulated = true;
+
+            var pool = Cache.Pools[0];
+            CoordinatorIPAddress = Cache.Hosts.FirstOrDefault(h => h.opaque_ref == pool.master)?.address;
+            
+            HandleSuccessfulConnection(connectTask, pool);
+            MarkConnectActionComplete();
+            OnXenObjectsUpdated();
+        }
+
         public NetworkCredential NetworkCredential { get; set; }
-        public event EventHandler<EventArgs> TimeSkewUpdated;
+
+        public bool IsSimulatedConnection { get; private set; }
 
         public bool IsConnected
         {
@@ -399,7 +402,7 @@ namespace XenAdmin.Network
             Session s = Session;
             if (s == null)
                 throw new DisconnectionException();
-            return SessionFactory.DuplicateSession(s, this, timeout);
+            return new Session(s, this, timeout); 
         }
 
         /// <summary>
@@ -438,7 +441,7 @@ namespace XenAdmin.Network
                 // For elevated session we use the elevated username and password passed into this function, 
                 // as the connection's Username and Password are not updated.
 
-                Session session = SessionFactory.CreateSession(this, hostname, port);
+                Session session = new Session(Session.STANDARD_TIMEOUT, this, hostname, port);
                 if (isElevated)
                     session.IsElevatedSession = true;
                 try
@@ -610,6 +613,8 @@ namespace XenAdmin.Network
 
             lock (connectTaskLock)
             {
+                //if connectTask != null a connection is already in progress
+
                 if (connectTask == null)
                 {
                     ClearEventQueue();
@@ -617,16 +622,15 @@ namespace XenAdmin.Network
                     Cache.Clear();
                     OnAfterMajorChange(false);
                     connectTask = new ConnectTask(Hostname, Port);
-                    StopMonitor();
+
+                    heartbeat?.Stop();
+                    heartbeat = null;
                     heartbeat = new Heartbeat(this, XenAdminConfigManager.Provider.ConnectionTimeout);
+
                     Thread t = new Thread(ConnectWorkerThread);
                     t.Name = "Connection to " + Hostname;
                     t.IsBackground = true;
                     t.Start(connectTask);
-                }
-                else
-                {
-                    // a connection is already in progress
                 }
             }
         }
@@ -747,7 +751,9 @@ namespace XenAdmin.Network
 
             lock (connectTaskLock)
             {
-                StopMonitor();
+                heartbeat?.Stop();
+                heartbeat = null;
+
                 if (task != null)
                 {
                     task.Cancelled = true;
@@ -761,6 +767,7 @@ namespace XenAdmin.Network
             }
 
             MarkConnectActionComplete();
+            log.Info($"Connection to {Hostname} is ended.");
 
             // Save list of addresses of current hosts in pool
             List<string> members = new List<string>();
@@ -863,25 +870,9 @@ namespace XenAdmin.Network
             Cache.Clear();
         }
 
-        private void OnCachePopulated()
-        {
-            lock (connectTaskLock)
-            {
-                if (heartbeat != null)
-                    heartbeat.Start();
-            }
-
-            CachePopulated?.Invoke(this);
-            MarkConnectActionComplete();
-        }
-
         private string GetReason(Exception error)
         {
-            if (error is CookComputing.XmlRpc.XmlRpcServerException)
-            {
-                return string.Format(Messages.SERVER_FAILURE, error.Message);
-            }
-            else if (error is ArgumentException)
+            if (error is ArgumentException)
             {
                 // This happens if the server API is incompatible with our bindings.  This should
                 // never happen in production, but will happen during development if a field
@@ -936,8 +927,16 @@ namespace XenAdmin.Network
             }
         }
 
-        private void HandleSuccessfulConnection(string taskHostname, int task_port)
+        private void HandleSuccessfulConnection(ConnectTask task, Pool pool)
         {
+            // Remove any other (disconnected) entries for this server from the tree
+
+            var existingConnections = ConnectionsManager.XenConnections.Where(c =>
+                c.Hostname.Equals(task.Hostname) && !c.IsConnected).ToList();
+
+            foreach (var conn in existingConnections)
+                ConnectionsManager.ClearCacheAndRemoveConnection(conn);
+
             // add server name to history (if it's not already there)
             XenAdminConfigManager.Provider.UpdateServerHistory(HostnameWithPort);
 
@@ -951,18 +950,20 @@ namespace XenAdmin.Network
                 InvokeHelper.Invoke(XenAdminConfigManager.Provider.SaveSettingsIfRequired);
             }
 
-            log.InfoFormat("Connected to {0} ({1}:{2})", FriendlyName, taskHostname, task_port);
-            string name = string.IsNullOrEmpty(FriendlyName) || FriendlyName == taskHostname
-                              ? taskHostname
-                              : string.Format("{0} ({1})", FriendlyName, taskHostname);
+            string name = string.IsNullOrEmpty(FriendlyName) || FriendlyName == task.Hostname
+                              ? task.Hostname
+                              : string.Format("{0} ({1})", FriendlyName, task.Hostname);
             string title = string.Format(Messages.CONNECTING_NOTICE_TITLE, name);
             string msg = string.Format(Messages.CONNECTING_NOTICE_TEXT, name);
-            log.Info($"Connecting to {name} in progress.");
 
             ConnectAction = new DummyAction(title, msg);
+            SetPoolAndHostInAction(ConnectAction, pool, PoolOpaqueRef);
 
             ExpectPasswordIsCorrect = true;
             OnConnectionResult(true, null, null);
+
+            log.InfoFormat("Completed connection phase for pool {0} ({1}:{2}, {3}).",
+                FriendlyName, task.Hostname, task.Port, PoolOpaqueRef);
         }
 
         /// <summary>
@@ -978,13 +979,6 @@ namespace XenAdmin.Network
                 return false;
             }
             return true;
-        }
-
-        private void HandleConnectionTermination()
-        {
-            // clean up action so we dont stay open forever
-            if (ConnectAction != null)
-                ConnectAction.IsCompleted = true;
         }
 
         private readonly object PromptLock = new object();
@@ -1072,6 +1066,7 @@ namespace XenAdmin.Network
             // on the GUI thread to be included in this set of
             // updates, otherwise we might hose the gui thread
             // during an event storm (ie deleting 1000 vms)
+
             List<ObjectChange> events = new List<ObjectChange>();
 
             while (eventQueue.NotEmpty)
@@ -1079,43 +1074,24 @@ namespace XenAdmin.Network
 
             if (events.Count > 0)
             {
-                InvokeHelper.Invoke(delegate ()
+                InvokeHelper.Invoke(() =>
                 {
-                    try
-                    {
-                        OnBeforeMajorChange(false);
-                        bool fire = Cache.UpdateFrom(this, events);
-                        OnAfterMajorChange(false);
+                    OnBeforeMajorChange(false);
+                    bool fire = Cache.UpdateFrom(this, events);
+                    OnAfterMajorChange(false);
 
-                        if (fire)
-                            OnXenObjectsUpdated();
-                    }
-                    catch (Exception e)
-                    {
-                        log.Error("Exception updating cache.", e);
-#if DEBUG
-                        if (System.Diagnostics.Debugger.IsAttached)
-                            throw;
-#endif
-                    }
-
+                    if (fire)
+                        OnXenObjectsUpdated();
                 });
 
-                if (!cacheIsPopulated)
+                if (!CacheIsPopulated)
                 {
-                    cacheIsPopulated = true;
-                    try
-                    {
-                        OnCachePopulated();
-                    }
-                    catch (Exception e)
-                    {
-                        log.Error("Exception calling OnCachePopulated.", e);
-#if DEBUG
-                        if (System.Diagnostics.Debugger.IsAttached)
-                            throw;
-#endif
-                    }
+                    lock (connectTaskLock)
+                        heartbeat?.Start();
+
+                    CacheIsPopulated = true;
+                    MarkConnectActionComplete();
+                    log.Info($"Connection to {Hostname} successful.");
                 }
             }
         }
@@ -1129,7 +1105,6 @@ namespace XenAdmin.Network
             {
                 string title = string.Format(Messages.CONNECTION_OK_NOTICE_TITLE, Hostname);
                 string msg = string.Format(Messages.CONNECTION_OK_NOTICE_TEXT, Hostname);
-                log.Info($"Connection to {Hostname} successful.");
                 ConnectAction.Title = title;
                 ConnectAction.Description = msg;
 
@@ -1144,28 +1119,7 @@ namespace XenAdmin.Network
             }
         }
 
-        /// <summary>
-        /// Stops this connection's XenMetricsMonitor thread.
-        /// Expects to be locked under connectTaskLock.
-        /// </summary>
-        private void StopMonitor()
-        {
-            if (heartbeat != null)
-            {
-                heartbeat.Stop();
-                heartbeat = null;
-            }
-        }
-
         private const int DEFAULT_MAX_SESSION_LOGIN_ATTEMPTS = 3;
-
-        private bool IsSimulatorConnection
-        {
-            get
-            {
-                return DbProxy.IsSimulatorUrl(this.Hostname);
-            }
-        }
 
         private readonly string eventNextConnectionGroupName = Guid.NewGuid().ToString();
 
@@ -1195,7 +1149,7 @@ namespace XenAdmin.Network
                 Session eventNextSession = DuplicateSession(EVENT_NEXT_TIMEOUT);
                 eventNextSession.ConnectionGroupName = eventNextConnectionGroupName; // this will force the eventNextSession onto its own set of TCP streams (see CA-108676)
 
-                cacheIsPopulated = false;
+                CacheIsPopulated = false;
                 session.CacheWarming = true;
 
                 string token = "";
@@ -1216,14 +1170,18 @@ namespace XenAdmin.Network
                             OnConnectionMessageChanged(string.Format(Messages.LABEL_SYNC, this.Hostname));
                         }
 
+                        log.Debug("Cache is warming. Starting XenObjectDownloader.GetAllObjects");
                         XenObjectDownloader.GetAllObjects(session, eventQueue, task.GetCancelled, ref token);
+                        log.Debug("Cache is warming. XenObjectDownloader.GetAllObjects finished successfully");
                         session.CacheWarming = false;
                     }
                     else
                     {
                         try
                         {
+                            log.Debug("Starting XenObjectDownloader.GetEvents");
                             XenObjectDownloader.GetEvents(eventNextSession, eventQueue, task.GetCancelled, ref token);
+                            log.Debug("Starting XenObjectDownloader.GetEvents finished successfully");
                             eventsExceptionLogged = false;
                         }
                         catch (Exception exn)
@@ -1234,9 +1192,8 @@ namespace XenAdmin.Network
                             log.DebugFormat("Exception (disruption is expected) in XenObjectDownloader.GetEvents: {0}", exn.GetType().Name);
 
                             // ignoring some exceptions when disruption is expected
-                            if (exn is XmlRpcIllFormedXmlException ||
-                                exn is System.IO.IOException ||
-                                (exn is WebException && ((exn as WebException).Status == WebExceptionStatus.KeepAliveFailure || (exn as WebException).Status == WebExceptionStatus.ConnectFailure)))
+                            if (exn is IOException ||
+                                (exn is WebException webEx && (webEx.Status == WebExceptionStatus.KeepAliveFailure || webEx.Status == WebExceptionStatus.ConnectFailure)))
                             {
                                 if (!eventsExceptionLogged)
                                 {
@@ -1279,16 +1236,10 @@ namespace XenAdmin.Network
                                 bool sameCoordinator = CoordinatorIPAddress == connection.CoordinatorIPAddress;
 
                                 if (sameRef && sameCoordinator)
-                                {
                                     throw new ConnectionExists(connection);
-                                }
-                                else
-                                {
-                                    // CA-15633: XenCenter does not allow connection to host 
-                                    //           on which backup is restored.
 
-                                    throw new BadRestoreDetected(connection);
-                                }
+                                // CA-15633: XenCenter does not allow connection to host on which backup is restored.
+                                throw new BadRestoreDetected(connection);
                             }
 
                             task.Connected = true;
@@ -1302,39 +1253,10 @@ namespace XenAdmin.Network
                                     : task.Hostname;
                         } // ConnectionsLock
 
-                        // Remove any other (disconnected) entries for this server from the tree
-                        List<IXenConnection> existingConnections = new List<IXenConnection>();
-                        foreach (IXenConnection connection in ConnectionsManager.XenConnections)
-                        {
-                            if (connection.Hostname.Equals(task.Hostname) && !connection.IsConnected)
-                            {
-                                existingConnections.Add(connection);
-                            }
-                        }
-                        foreach (IXenConnection connection in existingConnections)
-                        {
-                            ConnectionsManager.ClearCacheAndRemoveConnection(connection);
-                        }
-
-
                         log.DebugFormat("Getting server time for pool {0} ({1})...", FriendlyName, PoolOpaqueRef);
                         SetServerTimeOffset(session, pool.master.opaque_ref);
 
-                        // add server name to history (if it's not already there)
-                        XenAdminConfigManager.Provider.UpdateServerHistory(HostnameWithPort);
-
-                        HandleSuccessfulConnection(task.Hostname, task.Port);
-
-                        try
-                        {
-                            SetPoolAndHostInAction(ConnectAction, pool, PoolOpaqueRef);
-                        }
-                        catch (Exception e)
-                        {
-                            log.Error(e, e);
-                        }
-
-                        log.DebugFormat("Completed connection phase for pool {0} ({1}).", FriendlyName, PoolOpaqueRef);
+                        HandleSuccessfulConnection(task, pool);
                     }
 
                     EventsPending();
@@ -1353,16 +1275,6 @@ namespace XenAdmin.Network
                 }
             }
             catch (WebException e)
-            {
-                error = e;
-                log.Debug(e.Message);
-            }
-            catch (XmlRpcFaultException e)
-            {
-                error = e;
-                log.Debug(e.Message);
-            }
-            catch (XmlRpcException e)
             {
                 error = e;
                 log.Debug(e.Message);
@@ -1418,7 +1330,10 @@ namespace XenAdmin.Network
                 ClearEventQueue();
 
                 connectTask = null;
-                HandleConnectionTermination();
+
+                // clean up action so we don't stay open forever
+                if (ConnectAction != null)
+                    ConnectAction.IsCompleted = true;
 
                 if (error is ServerNotSupported)
                 {
@@ -1637,10 +1552,10 @@ namespace XenAdmin.Network
         {
             get
             {
-                if (EventNextBlocked || IsSimulatorConnection)
+                if (EventNextBlocked || IsSimulatedConnection)
                     return RECONNECT_SHORT_TIMEOUT_MS;
-                else
-                    return RECONNECT_HOST_TIMEOUT_MS;
+                
+                return RECONNECT_HOST_TIMEOUT_MS;
             }
         }
 
@@ -1982,6 +1897,7 @@ namespace XenAdmin.Network
         }
 
         private bool disposed;
+
         protected virtual void Dispose(bool disposing)
         {
             if (!disposed)
@@ -2000,7 +1916,7 @@ namespace XenAdmin.Network
                     BeforeMajorChange = null;
                     AfterMajorChange = null;
                     XenObjectsUpdated = null;
-                    TimeSkewUpdated = null;
+
                     if (ReconnectionTimer != null)
                         ReconnectionTimer.Dispose();
                     if (cacheUpdateTimer != null)
@@ -2022,35 +1938,39 @@ namespace XenAdmin.Network
 
     public class ConnectionExists : DisconnectionException
     {
-        public IXenConnection connection;
+        protected readonly IXenConnection Connection;
 
         public ConnectionExists(IXenConnection connection)
         {
-            this.connection = connection;
+            Connection = connection;
         }
 
         public override string Message
         {
             get
             {
-                if (connection != null)
-                    return string.Format(Messages.CONNECTION_EXISTS, connection.Hostname);
-                else
+                if (Connection == null)
                     return Messages.CONNECTION_EXISTS_NULL;
+
+                return string.Format(Messages.CONNECTION_EXISTS, Connection.Hostname);
+
             }
         }
 
-        public virtual string GetDialogMessage(IXenConnection _this)
+        public virtual string GetDialogMessage()
         {
-            Pool p = Helpers.GetPool(connection);
-            if (p == null)
-                return String.Format(Messages.ALREADY_CONNECTED, _this.Hostname);
+            if (Connection == null)
+                return Messages.CONNECTION_EXISTS_NULL;
 
-            return String.Format(Messages.SUPPORTER_ALREADY_CONNECTED, _this.Hostname, p.Name());
+            Pool p = Helpers.GetPool(Connection);
+            if (p == null)
+                return string.Format(Messages.ALREADY_CONNECTED, Connection.Hostname);
+
+            return string.Format(Messages.SUPPORTER_ALREADY_CONNECTED, Connection.Hostname, p.Name());
         }
     }
 
-    class BadRestoreDetected : ConnectionExists
+    internal class BadRestoreDetected : ConnectionExists
     {
         public BadRestoreDetected(IXenConnection xc)
             : base(xc)
@@ -2061,11 +1981,14 @@ namespace XenAdmin.Network
         {
             get
             {
-                return String.Format(Messages.BAD_RESTORE_DETECTED, connection.Name);
+                if (Connection == null)
+                    return Messages.CONNECTION_EXISTS_NULL;
+
+                return string.Format(Messages.BAD_RESTORE_DETECTED, Connection.Name);
             }
         }
 
-        public override string GetDialogMessage(IXenConnection _this)
+        public override string GetDialogMessage()
         {
             return Message;
         }

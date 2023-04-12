@@ -1,4 +1,5 @@
-/* Copyright (c) Cloud Software Group, Inc.
+/*
+ * Copyright (c) Cloud Software Group, Inc.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -81,15 +82,6 @@ namespace XenAPI
             UpdateFrom(table);
         }
 
-        /// <summary>
-        /// Creates a new Data_source from a Proxy_Data_source.
-        /// </summary>
-        /// <param name="proxy"></param>
-        public Data_source(Proxy_Data_source proxy)
-        {
-            UpdateFrom(proxy);
-        }
-
         #endregion
 
         /// <summary>
@@ -106,18 +98,6 @@ namespace XenAPI
             min = record.min;
             max = record.max;
             value = record.value;
-        }
-
-        internal void UpdateFrom(Proxy_Data_source proxy)
-        {
-            name_label = proxy.name_label == null ? null : proxy.name_label;
-            name_description = proxy.name_description == null ? null : proxy.name_description;
-            enabled = (bool)proxy.enabled;
-            standard = (bool)proxy.standard;
-            units = proxy.units == null ? null : proxy.units;
-            min = Convert.ToDouble(proxy.min);
-            max = Convert.ToDouble(proxy.max);
-            value = Convert.ToDouble(proxy.value);
         }
 
         /// <summary>
@@ -144,20 +124,6 @@ namespace XenAPI
                 max = Marshalling.ParseDouble(table, "max");
             if (table.ContainsKey("value"))
                 value = Marshalling.ParseDouble(table, "value");
-        }
-
-        public Proxy_Data_source ToProxy()
-        {
-            Proxy_Data_source result_ = new Proxy_Data_source();
-            result_.name_label = name_label ?? "";
-            result_.name_description = name_description ?? "";
-            result_.enabled = enabled;
-            result_.standard = standard;
-            result_.units = units ?? "";
-            result_.min = min;
-            result_.max = max;
-            result_.value = value;
-            return result_;
         }
 
         public bool DeepEquals(Data_source other)

@@ -39,7 +39,6 @@ using XenAdmin.Core;
 using XenAdmin.Dialogs;
 using XenAdmin.Network;
 using XenAdmin.Plugins;
-using XenAdmin.ServerDBs;
 using XenAPI;
 using XenCenterLib;
 
@@ -58,7 +57,7 @@ namespace XenAdmin
 
         public Session CreateActionSession(Session session, IXenConnection connection)
         {
-            return SessionFactory.DuplicateSession(session, connection, ConnectionTimeout);
+            return new Session(session, connection, ConnectionTimeout);
         }
 
         public bool Exiting => Program.Exiting;
@@ -78,10 +77,7 @@ namespace XenAdmin
         {
             try
             {
-                if (connection != null && connection.Session != null && connection.Session.opaque_ref == "dummy")
-                    return new XenAdminSimulatorWebProxy(DbProxy.proxys[connection]);
-
-                switch ((HTTPHelper.ProxyStyle)XenAdmin.Properties.Settings.Default.ProxySetting)
+                switch ((HTTPHelper.ProxyStyle)Properties.Settings.Default.ProxySetting)
                 {
                     case HTTPHelper.ProxyStyle.SpecifiedProxy:
                         if (isForXenServer && Properties.Settings.Default.BypassProxyForServers)

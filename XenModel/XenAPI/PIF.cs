@@ -1,4 +1,5 @@
-/* Copyright (c) Cloud Software Group, Inc.
+/*
+ * Copyright (c) Cloud Software Group, Inc.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -135,15 +136,6 @@ namespace XenAPI
             UpdateFrom(table);
         }
 
-        /// <summary>
-        /// Creates a new PIF from a Proxy_PIF.
-        /// </summary>
-        /// <param name="proxy"></param>
-        public PIF(Proxy_PIF proxy)
-        {
-            UpdateFrom(proxy);
-        }
-
         #endregion
 
         /// <summary>
@@ -187,45 +179,6 @@ namespace XenAPI
             sriov_physical_PIF_of = record.sriov_physical_PIF_of;
             sriov_logical_PIF_of = record.sriov_logical_PIF_of;
             PCI = record.PCI;
-        }
-
-        internal void UpdateFrom(Proxy_PIF proxy)
-        {
-            uuid = proxy.uuid == null ? null : proxy.uuid;
-            device = proxy.device == null ? null : proxy.device;
-            network = proxy.network == null ? null : XenRef<Network>.Create(proxy.network);
-            host = proxy.host == null ? null : XenRef<Host>.Create(proxy.host);
-            MAC = proxy.MAC == null ? null : proxy.MAC;
-            MTU = proxy.MTU == null ? 0 : long.Parse(proxy.MTU);
-            VLAN = proxy.VLAN == null ? 0 : long.Parse(proxy.VLAN);
-            metrics = proxy.metrics == null ? null : XenRef<PIF_metrics>.Create(proxy.metrics);
-            physical = (bool)proxy.physical;
-            currently_attached = (bool)proxy.currently_attached;
-            ip_configuration_mode = proxy.ip_configuration_mode == null ? (ip_configuration_mode) 0 : (ip_configuration_mode)Helper.EnumParseDefault(typeof(ip_configuration_mode), (string)proxy.ip_configuration_mode);
-            IP = proxy.IP == null ? null : proxy.IP;
-            netmask = proxy.netmask == null ? null : proxy.netmask;
-            gateway = proxy.gateway == null ? null : proxy.gateway;
-            DNS = proxy.DNS == null ? null : proxy.DNS;
-            bond_slave_of = proxy.bond_slave_of == null ? null : XenRef<Bond>.Create(proxy.bond_slave_of);
-            bond_master_of = proxy.bond_master_of == null ? null : XenRef<Bond>.Create(proxy.bond_master_of);
-            VLAN_master_of = proxy.VLAN_master_of == null ? null : XenRef<VLAN>.Create(proxy.VLAN_master_of);
-            VLAN_slave_of = proxy.VLAN_slave_of == null ? null : XenRef<VLAN>.Create(proxy.VLAN_slave_of);
-            management = (bool)proxy.management;
-            other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
-            disallow_unplug = (bool)proxy.disallow_unplug;
-            tunnel_access_PIF_of = proxy.tunnel_access_PIF_of == null ? null : XenRef<Tunnel>.Create(proxy.tunnel_access_PIF_of);
-            tunnel_transport_PIF_of = proxy.tunnel_transport_PIF_of == null ? null : XenRef<Tunnel>.Create(proxy.tunnel_transport_PIF_of);
-            ipv6_configuration_mode = proxy.ipv6_configuration_mode == null ? (ipv6_configuration_mode) 0 : (ipv6_configuration_mode)Helper.EnumParseDefault(typeof(ipv6_configuration_mode), (string)proxy.ipv6_configuration_mode);
-            IPv6 = proxy.IPv6 == null ? new string[] {} : (string[])proxy.IPv6;
-            ipv6_gateway = proxy.ipv6_gateway == null ? null : proxy.ipv6_gateway;
-            primary_address_type = proxy.primary_address_type == null ? (primary_address_type) 0 : (primary_address_type)Helper.EnumParseDefault(typeof(primary_address_type), (string)proxy.primary_address_type);
-            managed = (bool)proxy.managed;
-            properties = proxy.properties == null ? null : Maps.convert_from_proxy_string_string(proxy.properties);
-            capabilities = proxy.capabilities == null ? new string[] {} : (string[])proxy.capabilities;
-            igmp_snooping_status = proxy.igmp_snooping_status == null ? (pif_igmp_status) 0 : (pif_igmp_status)Helper.EnumParseDefault(typeof(pif_igmp_status), (string)proxy.igmp_snooping_status);
-            sriov_physical_PIF_of = proxy.sriov_physical_PIF_of == null ? null : XenRef<Network_sriov>.Create(proxy.sriov_physical_PIF_of);
-            sriov_logical_PIF_of = proxy.sriov_logical_PIF_of == null ? null : XenRef<Network_sriov>.Create(proxy.sriov_logical_PIF_of);
-            PCI = proxy.PCI == null ? null : XenRef<PCI>.Create(proxy.PCI);
         }
 
         /// <summary>
@@ -308,47 +261,6 @@ namespace XenAPI
                 PCI = Marshalling.ParseRef<PCI>(table, "PCI");
         }
 
-        public Proxy_PIF ToProxy()
-        {
-            Proxy_PIF result_ = new Proxy_PIF();
-            result_.uuid = uuid ?? "";
-            result_.device = device ?? "";
-            result_.network = network ?? "";
-            result_.host = host ?? "";
-            result_.MAC = MAC ?? "";
-            result_.MTU = MTU.ToString();
-            result_.VLAN = VLAN.ToString();
-            result_.metrics = metrics ?? "";
-            result_.physical = physical;
-            result_.currently_attached = currently_attached;
-            result_.ip_configuration_mode = ip_configuration_mode_helper.ToString(ip_configuration_mode);
-            result_.IP = IP ?? "";
-            result_.netmask = netmask ?? "";
-            result_.gateway = gateway ?? "";
-            result_.DNS = DNS ?? "";
-            result_.bond_slave_of = bond_slave_of ?? "";
-            result_.bond_master_of = bond_master_of == null ? new string[] {} : Helper.RefListToStringArray(bond_master_of);
-            result_.VLAN_master_of = VLAN_master_of ?? "";
-            result_.VLAN_slave_of = VLAN_slave_of == null ? new string[] {} : Helper.RefListToStringArray(VLAN_slave_of);
-            result_.management = management;
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            result_.disallow_unplug = disallow_unplug;
-            result_.tunnel_access_PIF_of = tunnel_access_PIF_of == null ? new string[] {} : Helper.RefListToStringArray(tunnel_access_PIF_of);
-            result_.tunnel_transport_PIF_of = tunnel_transport_PIF_of == null ? new string[] {} : Helper.RefListToStringArray(tunnel_transport_PIF_of);
-            result_.ipv6_configuration_mode = ipv6_configuration_mode_helper.ToString(ipv6_configuration_mode);
-            result_.IPv6 = IPv6;
-            result_.ipv6_gateway = ipv6_gateway ?? "";
-            result_.primary_address_type = primary_address_type_helper.ToString(primary_address_type);
-            result_.managed = managed;
-            result_.properties = Maps.convert_to_proxy_string_string(properties);
-            result_.capabilities = capabilities;
-            result_.igmp_snooping_status = pif_igmp_status_helper.ToString(igmp_snooping_status);
-            result_.sriov_physical_PIF_of = sriov_physical_PIF_of == null ? new string[] {} : Helper.RefListToStringArray(sriov_physical_PIF_of);
-            result_.sriov_logical_PIF_of = sriov_logical_PIF_of == null ? new string[] {} : Helper.RefListToStringArray(sriov_logical_PIF_of);
-            result_.PCI = PCI ?? "";
-            return result_;
-        }
-
         public bool DeepEquals(PIF other)
         {
             if (ReferenceEquals(null, other))
@@ -419,10 +331,7 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static PIF get_record(Session session, string _pif)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_get_record(session.opaque_ref, _pif);
-            else
-                return new PIF(session.XmlRpcProxy.pif_get_record(session.opaque_ref, _pif ?? "").parse());
+            return session.JsonRpcClient.pif_get_record(session.opaque_ref, _pif);
         }
 
         /// <summary>
@@ -433,10 +342,7 @@ namespace XenAPI
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<PIF> get_by_uuid(Session session, string _uuid)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_get_by_uuid(session.opaque_ref, _uuid);
-            else
-                return XenRef<PIF>.Create(session.XmlRpcProxy.pif_get_by_uuid(session.opaque_ref, _uuid ?? "").parse());
+            return session.JsonRpcClient.pif_get_by_uuid(session.opaque_ref, _uuid);
         }
 
         /// <summary>
@@ -447,10 +353,7 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static string get_uuid(Session session, string _pif)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_get_uuid(session.opaque_ref, _pif);
-            else
-                return session.XmlRpcProxy.pif_get_uuid(session.opaque_ref, _pif ?? "").parse();
+            return session.JsonRpcClient.pif_get_uuid(session.opaque_ref, _pif);
         }
 
         /// <summary>
@@ -461,10 +364,7 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static string get_device(Session session, string _pif)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_get_device(session.opaque_ref, _pif);
-            else
-                return session.XmlRpcProxy.pif_get_device(session.opaque_ref, _pif ?? "").parse();
+            return session.JsonRpcClient.pif_get_device(session.opaque_ref, _pif);
         }
 
         /// <summary>
@@ -475,10 +375,7 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static XenRef<Network> get_network(Session session, string _pif)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_get_network(session.opaque_ref, _pif);
-            else
-                return XenRef<Network>.Create(session.XmlRpcProxy.pif_get_network(session.opaque_ref, _pif ?? "").parse());
+            return session.JsonRpcClient.pif_get_network(session.opaque_ref, _pif);
         }
 
         /// <summary>
@@ -489,10 +386,7 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static XenRef<Host> get_host(Session session, string _pif)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_get_host(session.opaque_ref, _pif);
-            else
-                return XenRef<Host>.Create(session.XmlRpcProxy.pif_get_host(session.opaque_ref, _pif ?? "").parse());
+            return session.JsonRpcClient.pif_get_host(session.opaque_ref, _pif);
         }
 
         /// <summary>
@@ -503,10 +397,7 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static string get_MAC(Session session, string _pif)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_get_mac(session.opaque_ref, _pif);
-            else
-                return session.XmlRpcProxy.pif_get_mac(session.opaque_ref, _pif ?? "").parse();
+            return session.JsonRpcClient.pif_get_mac(session.opaque_ref, _pif);
         }
 
         /// <summary>
@@ -517,10 +408,7 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static long get_MTU(Session session, string _pif)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_get_mtu(session.opaque_ref, _pif);
-            else
-                return long.Parse(session.XmlRpcProxy.pif_get_mtu(session.opaque_ref, _pif ?? "").parse());
+            return session.JsonRpcClient.pif_get_mtu(session.opaque_ref, _pif);
         }
 
         /// <summary>
@@ -531,10 +419,7 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static long get_VLAN(Session session, string _pif)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_get_vlan(session.opaque_ref, _pif);
-            else
-                return long.Parse(session.XmlRpcProxy.pif_get_vlan(session.opaque_ref, _pif ?? "").parse());
+            return session.JsonRpcClient.pif_get_vlan(session.opaque_ref, _pif);
         }
 
         /// <summary>
@@ -545,10 +430,7 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static XenRef<PIF_metrics> get_metrics(Session session, string _pif)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_get_metrics(session.opaque_ref, _pif);
-            else
-                return XenRef<PIF_metrics>.Create(session.XmlRpcProxy.pif_get_metrics(session.opaque_ref, _pif ?? "").parse());
+            return session.JsonRpcClient.pif_get_metrics(session.opaque_ref, _pif);
         }
 
         /// <summary>
@@ -559,10 +441,7 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static bool get_physical(Session session, string _pif)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_get_physical(session.opaque_ref, _pif);
-            else
-                return (bool)session.XmlRpcProxy.pif_get_physical(session.opaque_ref, _pif ?? "").parse();
+            return session.JsonRpcClient.pif_get_physical(session.opaque_ref, _pif);
         }
 
         /// <summary>
@@ -573,10 +452,7 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static bool get_currently_attached(Session session, string _pif)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_get_currently_attached(session.opaque_ref, _pif);
-            else
-                return (bool)session.XmlRpcProxy.pif_get_currently_attached(session.opaque_ref, _pif ?? "").parse();
+            return session.JsonRpcClient.pif_get_currently_attached(session.opaque_ref, _pif);
         }
 
         /// <summary>
@@ -587,10 +463,7 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static ip_configuration_mode get_ip_configuration_mode(Session session, string _pif)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_get_ip_configuration_mode(session.opaque_ref, _pif);
-            else
-                return (ip_configuration_mode)Helper.EnumParseDefault(typeof(ip_configuration_mode), (string)session.XmlRpcProxy.pif_get_ip_configuration_mode(session.opaque_ref, _pif ?? "").parse());
+            return session.JsonRpcClient.pif_get_ip_configuration_mode(session.opaque_ref, _pif);
         }
 
         /// <summary>
@@ -601,10 +474,7 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static string get_IP(Session session, string _pif)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_get_ip(session.opaque_ref, _pif);
-            else
-                return session.XmlRpcProxy.pif_get_ip(session.opaque_ref, _pif ?? "").parse();
+            return session.JsonRpcClient.pif_get_ip(session.opaque_ref, _pif);
         }
 
         /// <summary>
@@ -615,10 +485,7 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static string get_netmask(Session session, string _pif)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_get_netmask(session.opaque_ref, _pif);
-            else
-                return session.XmlRpcProxy.pif_get_netmask(session.opaque_ref, _pif ?? "").parse();
+            return session.JsonRpcClient.pif_get_netmask(session.opaque_ref, _pif);
         }
 
         /// <summary>
@@ -629,10 +496,7 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static string get_gateway(Session session, string _pif)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_get_gateway(session.opaque_ref, _pif);
-            else
-                return session.XmlRpcProxy.pif_get_gateway(session.opaque_ref, _pif ?? "").parse();
+            return session.JsonRpcClient.pif_get_gateway(session.opaque_ref, _pif);
         }
 
         /// <summary>
@@ -643,10 +507,7 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static string get_DNS(Session session, string _pif)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_get_dns(session.opaque_ref, _pif);
-            else
-                return session.XmlRpcProxy.pif_get_dns(session.opaque_ref, _pif ?? "").parse();
+            return session.JsonRpcClient.pif_get_dns(session.opaque_ref, _pif);
         }
 
         /// <summary>
@@ -657,10 +518,7 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static XenRef<Bond> get_bond_slave_of(Session session, string _pif)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_get_bond_slave_of(session.opaque_ref, _pif);
-            else
-                return XenRef<Bond>.Create(session.XmlRpcProxy.pif_get_bond_slave_of(session.opaque_ref, _pif ?? "").parse());
+            return session.JsonRpcClient.pif_get_bond_slave_of(session.opaque_ref, _pif);
         }
 
         /// <summary>
@@ -671,10 +529,7 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static List<XenRef<Bond>> get_bond_master_of(Session session, string _pif)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_get_bond_master_of(session.opaque_ref, _pif);
-            else
-                return XenRef<Bond>.Create(session.XmlRpcProxy.pif_get_bond_master_of(session.opaque_ref, _pif ?? "").parse());
+            return session.JsonRpcClient.pif_get_bond_master_of(session.opaque_ref, _pif);
         }
 
         /// <summary>
@@ -685,10 +540,7 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static XenRef<VLAN> get_VLAN_master_of(Session session, string _pif)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_get_vlan_master_of(session.opaque_ref, _pif);
-            else
-                return XenRef<VLAN>.Create(session.XmlRpcProxy.pif_get_vlan_master_of(session.opaque_ref, _pif ?? "").parse());
+            return session.JsonRpcClient.pif_get_vlan_master_of(session.opaque_ref, _pif);
         }
 
         /// <summary>
@@ -699,10 +551,7 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static List<XenRef<VLAN>> get_VLAN_slave_of(Session session, string _pif)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_get_vlan_slave_of(session.opaque_ref, _pif);
-            else
-                return XenRef<VLAN>.Create(session.XmlRpcProxy.pif_get_vlan_slave_of(session.opaque_ref, _pif ?? "").parse());
+            return session.JsonRpcClient.pif_get_vlan_slave_of(session.opaque_ref, _pif);
         }
 
         /// <summary>
@@ -713,10 +562,7 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static bool get_management(Session session, string _pif)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_get_management(session.opaque_ref, _pif);
-            else
-                return (bool)session.XmlRpcProxy.pif_get_management(session.opaque_ref, _pif ?? "").parse();
+            return session.JsonRpcClient.pif_get_management(session.opaque_ref, _pif);
         }
 
         /// <summary>
@@ -727,10 +573,7 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static Dictionary<string, string> get_other_config(Session session, string _pif)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_get_other_config(session.opaque_ref, _pif);
-            else
-                return Maps.convert_from_proxy_string_string(session.XmlRpcProxy.pif_get_other_config(session.opaque_ref, _pif ?? "").parse());
+            return session.JsonRpcClient.pif_get_other_config(session.opaque_ref, _pif);
         }
 
         /// <summary>
@@ -741,10 +584,7 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static bool get_disallow_unplug(Session session, string _pif)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_get_disallow_unplug(session.opaque_ref, _pif);
-            else
-                return (bool)session.XmlRpcProxy.pif_get_disallow_unplug(session.opaque_ref, _pif ?? "").parse();
+            return session.JsonRpcClient.pif_get_disallow_unplug(session.opaque_ref, _pif);
         }
 
         /// <summary>
@@ -755,10 +595,7 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static List<XenRef<Tunnel>> get_tunnel_access_PIF_of(Session session, string _pif)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_get_tunnel_access_pif_of(session.opaque_ref, _pif);
-            else
-                return XenRef<Tunnel>.Create(session.XmlRpcProxy.pif_get_tunnel_access_pif_of(session.opaque_ref, _pif ?? "").parse());
+            return session.JsonRpcClient.pif_get_tunnel_access_pif_of(session.opaque_ref, _pif);
         }
 
         /// <summary>
@@ -769,10 +606,7 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static List<XenRef<Tunnel>> get_tunnel_transport_PIF_of(Session session, string _pif)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_get_tunnel_transport_pif_of(session.opaque_ref, _pif);
-            else
-                return XenRef<Tunnel>.Create(session.XmlRpcProxy.pif_get_tunnel_transport_pif_of(session.opaque_ref, _pif ?? "").parse());
+            return session.JsonRpcClient.pif_get_tunnel_transport_pif_of(session.opaque_ref, _pif);
         }
 
         /// <summary>
@@ -783,10 +617,7 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static ipv6_configuration_mode get_ipv6_configuration_mode(Session session, string _pif)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_get_ipv6_configuration_mode(session.opaque_ref, _pif);
-            else
-                return (ipv6_configuration_mode)Helper.EnumParseDefault(typeof(ipv6_configuration_mode), (string)session.XmlRpcProxy.pif_get_ipv6_configuration_mode(session.opaque_ref, _pif ?? "").parse());
+            return session.JsonRpcClient.pif_get_ipv6_configuration_mode(session.opaque_ref, _pif);
         }
 
         /// <summary>
@@ -797,10 +628,7 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static string[] get_IPv6(Session session, string _pif)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_get_ipv6(session.opaque_ref, _pif);
-            else
-                return (string[])session.XmlRpcProxy.pif_get_ipv6(session.opaque_ref, _pif ?? "").parse();
+            return session.JsonRpcClient.pif_get_ipv6(session.opaque_ref, _pif);
         }
 
         /// <summary>
@@ -811,10 +639,7 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static string get_ipv6_gateway(Session session, string _pif)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_get_ipv6_gateway(session.opaque_ref, _pif);
-            else
-                return session.XmlRpcProxy.pif_get_ipv6_gateway(session.opaque_ref, _pif ?? "").parse();
+            return session.JsonRpcClient.pif_get_ipv6_gateway(session.opaque_ref, _pif);
         }
 
         /// <summary>
@@ -825,10 +650,7 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static primary_address_type get_primary_address_type(Session session, string _pif)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_get_primary_address_type(session.opaque_ref, _pif);
-            else
-                return (primary_address_type)Helper.EnumParseDefault(typeof(primary_address_type), (string)session.XmlRpcProxy.pif_get_primary_address_type(session.opaque_ref, _pif ?? "").parse());
+            return session.JsonRpcClient.pif_get_primary_address_type(session.opaque_ref, _pif);
         }
 
         /// <summary>
@@ -839,10 +661,7 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static bool get_managed(Session session, string _pif)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_get_managed(session.opaque_ref, _pif);
-            else
-                return (bool)session.XmlRpcProxy.pif_get_managed(session.opaque_ref, _pif ?? "").parse();
+            return session.JsonRpcClient.pif_get_managed(session.opaque_ref, _pif);
         }
 
         /// <summary>
@@ -853,10 +672,7 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static Dictionary<string, string> get_properties(Session session, string _pif)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_get_properties(session.opaque_ref, _pif);
-            else
-                return Maps.convert_from_proxy_string_string(session.XmlRpcProxy.pif_get_properties(session.opaque_ref, _pif ?? "").parse());
+            return session.JsonRpcClient.pif_get_properties(session.opaque_ref, _pif);
         }
 
         /// <summary>
@@ -867,10 +683,7 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static string[] get_capabilities(Session session, string _pif)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_get_capabilities(session.opaque_ref, _pif);
-            else
-                return (string[])session.XmlRpcProxy.pif_get_capabilities(session.opaque_ref, _pif ?? "").parse();
+            return session.JsonRpcClient.pif_get_capabilities(session.opaque_ref, _pif);
         }
 
         /// <summary>
@@ -881,10 +694,7 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static pif_igmp_status get_igmp_snooping_status(Session session, string _pif)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_get_igmp_snooping_status(session.opaque_ref, _pif);
-            else
-                return (pif_igmp_status)Helper.EnumParseDefault(typeof(pif_igmp_status), (string)session.XmlRpcProxy.pif_get_igmp_snooping_status(session.opaque_ref, _pif ?? "").parse());
+            return session.JsonRpcClient.pif_get_igmp_snooping_status(session.opaque_ref, _pif);
         }
 
         /// <summary>
@@ -895,10 +705,7 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static List<XenRef<Network_sriov>> get_sriov_physical_PIF_of(Session session, string _pif)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_get_sriov_physical_pif_of(session.opaque_ref, _pif);
-            else
-                return XenRef<Network_sriov>.Create(session.XmlRpcProxy.pif_get_sriov_physical_pif_of(session.opaque_ref, _pif ?? "").parse());
+            return session.JsonRpcClient.pif_get_sriov_physical_pif_of(session.opaque_ref, _pif);
         }
 
         /// <summary>
@@ -909,10 +716,7 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static List<XenRef<Network_sriov>> get_sriov_logical_PIF_of(Session session, string _pif)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_get_sriov_logical_pif_of(session.opaque_ref, _pif);
-            else
-                return XenRef<Network_sriov>.Create(session.XmlRpcProxy.pif_get_sriov_logical_pif_of(session.opaque_ref, _pif ?? "").parse());
+            return session.JsonRpcClient.pif_get_sriov_logical_pif_of(session.opaque_ref, _pif);
         }
 
         /// <summary>
@@ -923,10 +727,7 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static XenRef<PCI> get_PCI(Session session, string _pif)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_get_pci(session.opaque_ref, _pif);
-            else
-                return XenRef<PCI>.Create(session.XmlRpcProxy.pif_get_pci(session.opaque_ref, _pif ?? "").parse());
+            return session.JsonRpcClient.pif_get_pci(session.opaque_ref, _pif);
         }
 
         /// <summary>
@@ -938,10 +739,7 @@ namespace XenAPI
         /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _pif, Dictionary<string, string> _other_config)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.pif_set_other_config(session.opaque_ref, _pif, _other_config);
-            else
-                session.XmlRpcProxy.pif_set_other_config(session.opaque_ref, _pif ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
+            session.JsonRpcClient.pif_set_other_config(session.opaque_ref, _pif, _other_config);
         }
 
         /// <summary>
@@ -954,10 +752,7 @@ namespace XenAPI
         /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _pif, string _key, string _value)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.pif_add_to_other_config(session.opaque_ref, _pif, _key, _value);
-            else
-                session.XmlRpcProxy.pif_add_to_other_config(session.opaque_ref, _pif ?? "", _key ?? "", _value ?? "").parse();
+            session.JsonRpcClient.pif_add_to_other_config(session.opaque_ref, _pif, _key, _value);
         }
 
         /// <summary>
@@ -969,10 +764,7 @@ namespace XenAPI
         /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _pif, string _key)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.pif_remove_from_other_config(session.opaque_ref, _pif, _key);
-            else
-                session.XmlRpcProxy.pif_remove_from_other_config(session.opaque_ref, _pif ?? "", _key ?? "").parse();
+            session.JsonRpcClient.pif_remove_from_other_config(session.opaque_ref, _pif, _key);
         }
 
         /// <summary>
@@ -988,10 +780,7 @@ namespace XenAPI
         [Deprecated("XenServer 4.1")]
         public static XenRef<PIF> create_VLAN(Session session, string _device, string _network, string _host, long _vlan)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_create_vlan(session.opaque_ref, _device, _network, _host, _vlan);
-            else
-                return XenRef<PIF>.Create(session.XmlRpcProxy.pif_create_vlan(session.opaque_ref, _device ?? "", _network ?? "", _host ?? "", _vlan.ToString()).parse());
+            return session.JsonRpcClient.pif_create_vlan(session.opaque_ref, _device, _network, _host, _vlan);
         }
 
         /// <summary>
@@ -1007,10 +796,7 @@ namespace XenAPI
         [Deprecated("XenServer 4.1")]
         public static XenRef<Task> async_create_VLAN(Session session, string _device, string _network, string _host, long _vlan)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_pif_create_vlan(session.opaque_ref, _device, _network, _host, _vlan);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_pif_create_vlan(session.opaque_ref, _device ?? "", _network ?? "", _host ?? "", _vlan.ToString()).parse());
+          return session.JsonRpcClient.async_pif_create_vlan(session.opaque_ref, _device, _network, _host, _vlan);
         }
 
         /// <summary>
@@ -1023,10 +809,7 @@ namespace XenAPI
         [Deprecated("XenServer 4.1")]
         public static void destroy(Session session, string _pif)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.pif_destroy(session.opaque_ref, _pif);
-            else
-                session.XmlRpcProxy.pif_destroy(session.opaque_ref, _pif ?? "").parse();
+            session.JsonRpcClient.pif_destroy(session.opaque_ref, _pif);
         }
 
         /// <summary>
@@ -1039,10 +822,7 @@ namespace XenAPI
         [Deprecated("XenServer 4.1")]
         public static XenRef<Task> async_destroy(Session session, string _pif)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_pif_destroy(session.opaque_ref, _pif);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_pif_destroy(session.opaque_ref, _pif ?? "").parse());
+          return session.JsonRpcClient.async_pif_destroy(session.opaque_ref, _pif);
         }
 
         /// <summary>
@@ -1058,10 +838,7 @@ namespace XenAPI
         /// <param name="_dns">the new DNS settings</param>
         public static void reconfigure_ip(Session session, string _pif, ip_configuration_mode _mode, string _ip, string _netmask, string _gateway, string _dns)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.pif_reconfigure_ip(session.opaque_ref, _pif, _mode, _ip, _netmask, _gateway, _dns);
-            else
-                session.XmlRpcProxy.pif_reconfigure_ip(session.opaque_ref, _pif ?? "", ip_configuration_mode_helper.ToString(_mode), _ip ?? "", _netmask ?? "", _gateway ?? "", _dns ?? "").parse();
+            session.JsonRpcClient.pif_reconfigure_ip(session.opaque_ref, _pif, _mode, _ip, _netmask, _gateway, _dns);
         }
 
         /// <summary>
@@ -1077,10 +854,7 @@ namespace XenAPI
         /// <param name="_dns">the new DNS settings</param>
         public static XenRef<Task> async_reconfigure_ip(Session session, string _pif, ip_configuration_mode _mode, string _ip, string _netmask, string _gateway, string _dns)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_pif_reconfigure_ip(session.opaque_ref, _pif, _mode, _ip, _netmask, _gateway, _dns);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_pif_reconfigure_ip(session.opaque_ref, _pif ?? "", ip_configuration_mode_helper.ToString(_mode), _ip ?? "", _netmask ?? "", _gateway ?? "", _dns ?? "").parse());
+          return session.JsonRpcClient.async_pif_reconfigure_ip(session.opaque_ref, _pif, _mode, _ip, _netmask, _gateway, _dns);
         }
 
         /// <summary>
@@ -1095,10 +869,7 @@ namespace XenAPI
         /// <param name="_dns">the new DNS settings</param>
         public static void reconfigure_ipv6(Session session, string _pif, ipv6_configuration_mode _mode, string _ipv6, string _gateway, string _dns)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.pif_reconfigure_ipv6(session.opaque_ref, _pif, _mode, _ipv6, _gateway, _dns);
-            else
-                session.XmlRpcProxy.pif_reconfigure_ipv6(session.opaque_ref, _pif ?? "", ipv6_configuration_mode_helper.ToString(_mode), _ipv6 ?? "", _gateway ?? "", _dns ?? "").parse();
+            session.JsonRpcClient.pif_reconfigure_ipv6(session.opaque_ref, _pif, _mode, _ipv6, _gateway, _dns);
         }
 
         /// <summary>
@@ -1113,10 +884,7 @@ namespace XenAPI
         /// <param name="_dns">the new DNS settings</param>
         public static XenRef<Task> async_reconfigure_ipv6(Session session, string _pif, ipv6_configuration_mode _mode, string _ipv6, string _gateway, string _dns)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_pif_reconfigure_ipv6(session.opaque_ref, _pif, _mode, _ipv6, _gateway, _dns);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_pif_reconfigure_ipv6(session.opaque_ref, _pif ?? "", ipv6_configuration_mode_helper.ToString(_mode), _ipv6 ?? "", _gateway ?? "", _dns ?? "").parse());
+          return session.JsonRpcClient.async_pif_reconfigure_ipv6(session.opaque_ref, _pif, _mode, _ipv6, _gateway, _dns);
         }
 
         /// <summary>
@@ -1128,10 +896,7 @@ namespace XenAPI
         /// <param name="_primary_address_type">Whether to prefer IPv4 or IPv6 connections</param>
         public static void set_primary_address_type(Session session, string _pif, primary_address_type _primary_address_type)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.pif_set_primary_address_type(session.opaque_ref, _pif, _primary_address_type);
-            else
-                session.XmlRpcProxy.pif_set_primary_address_type(session.opaque_ref, _pif ?? "", primary_address_type_helper.ToString(_primary_address_type)).parse();
+            session.JsonRpcClient.pif_set_primary_address_type(session.opaque_ref, _pif, _primary_address_type);
         }
 
         /// <summary>
@@ -1143,10 +908,7 @@ namespace XenAPI
         /// <param name="_primary_address_type">Whether to prefer IPv4 or IPv6 connections</param>
         public static XenRef<Task> async_set_primary_address_type(Session session, string _pif, primary_address_type _primary_address_type)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_pif_set_primary_address_type(session.opaque_ref, _pif, _primary_address_type);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_pif_set_primary_address_type(session.opaque_ref, _pif ?? "", primary_address_type_helper.ToString(_primary_address_type)).parse());
+          return session.JsonRpcClient.async_pif_set_primary_address_type(session.opaque_ref, _pif, _primary_address_type);
         }
 
         /// <summary>
@@ -1157,10 +919,7 @@ namespace XenAPI
         /// <param name="_host">The host on which to scan</param>
         public static void scan(Session session, string _host)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.pif_scan(session.opaque_ref, _host);
-            else
-                session.XmlRpcProxy.pif_scan(session.opaque_ref, _host ?? "").parse();
+            session.JsonRpcClient.pif_scan(session.opaque_ref, _host);
         }
 
         /// <summary>
@@ -1171,10 +930,7 @@ namespace XenAPI
         /// <param name="_host">The host on which to scan</param>
         public static XenRef<Task> async_scan(Session session, string _host)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_pif_scan(session.opaque_ref, _host);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_pif_scan(session.opaque_ref, _host ?? "").parse());
+          return session.JsonRpcClient.async_pif_scan(session.opaque_ref, _host);
         }
 
         /// <summary>
@@ -1187,10 +943,7 @@ namespace XenAPI
         /// <param name="_device">The device name to use for the interface</param>
         public static XenRef<PIF> introduce(Session session, string _host, string _mac, string _device)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_introduce(session.opaque_ref, _host, _mac, _device);
-            else
-                return XenRef<PIF>.Create(session.XmlRpcProxy.pif_introduce(session.opaque_ref, _host ?? "", _mac ?? "", _device ?? "").parse());
+            return session.JsonRpcClient.pif_introduce(session.opaque_ref, _host, _mac, _device);
         }
 
         /// <summary>
@@ -1203,10 +956,7 @@ namespace XenAPI
         /// <param name="_device">The device name to use for the interface</param>
         public static XenRef<Task> async_introduce(Session session, string _host, string _mac, string _device)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_pif_introduce(session.opaque_ref, _host, _mac, _device);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_pif_introduce(session.opaque_ref, _host ?? "", _mac ?? "", _device ?? "").parse());
+          return session.JsonRpcClient.async_pif_introduce(session.opaque_ref, _host, _mac, _device);
         }
 
         /// <summary>
@@ -1220,10 +970,7 @@ namespace XenAPI
         /// <param name="_managed">Indicates whether the interface is managed by xapi (defaults to "true") First published in XenServer 6.2 SP1.</param>
         public static XenRef<PIF> introduce(Session session, string _host, string _mac, string _device, bool _managed)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_introduce(session.opaque_ref, _host, _mac, _device, _managed);
-            else
-                return XenRef<PIF>.Create(session.XmlRpcProxy.pif_introduce(session.opaque_ref, _host ?? "", _mac ?? "", _device ?? "", _managed).parse());
+            return session.JsonRpcClient.pif_introduce(session.opaque_ref, _host, _mac, _device, _managed);
         }
 
         /// <summary>
@@ -1237,10 +984,7 @@ namespace XenAPI
         /// <param name="_managed">Indicates whether the interface is managed by xapi (defaults to "true") First published in XenServer 6.2 SP1.</param>
         public static XenRef<Task> async_introduce(Session session, string _host, string _mac, string _device, bool _managed)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_pif_introduce(session.opaque_ref, _host, _mac, _device, _managed);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_pif_introduce(session.opaque_ref, _host ?? "", _mac ?? "", _device ?? "", _managed).parse());
+          return session.JsonRpcClient.async_pif_introduce(session.opaque_ref, _host, _mac, _device, _managed);
         }
 
         /// <summary>
@@ -1251,10 +995,7 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static void forget(Session session, string _pif)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.pif_forget(session.opaque_ref, _pif);
-            else
-                session.XmlRpcProxy.pif_forget(session.opaque_ref, _pif ?? "").parse();
+            session.JsonRpcClient.pif_forget(session.opaque_ref, _pif);
         }
 
         /// <summary>
@@ -1265,10 +1006,7 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static XenRef<Task> async_forget(Session session, string _pif)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_pif_forget(session.opaque_ref, _pif);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_pif_forget(session.opaque_ref, _pif ?? "").parse());
+          return session.JsonRpcClient.async_pif_forget(session.opaque_ref, _pif);
         }
 
         /// <summary>
@@ -1279,10 +1017,7 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static void unplug(Session session, string _pif)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.pif_unplug(session.opaque_ref, _pif);
-            else
-                session.XmlRpcProxy.pif_unplug(session.opaque_ref, _pif ?? "").parse();
+            session.JsonRpcClient.pif_unplug(session.opaque_ref, _pif);
         }
 
         /// <summary>
@@ -1293,10 +1028,7 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static XenRef<Task> async_unplug(Session session, string _pif)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_pif_unplug(session.opaque_ref, _pif);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_pif_unplug(session.opaque_ref, _pif ?? "").parse());
+          return session.JsonRpcClient.async_pif_unplug(session.opaque_ref, _pif);
         }
 
         /// <summary>
@@ -1308,10 +1040,7 @@ namespace XenAPI
         /// <param name="_value">New value to set</param>
         public static void set_disallow_unplug(Session session, string _pif, bool _value)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.pif_set_disallow_unplug(session.opaque_ref, _pif, _value);
-            else
-                session.XmlRpcProxy.pif_set_disallow_unplug(session.opaque_ref, _pif ?? "", _value).parse();
+            session.JsonRpcClient.pif_set_disallow_unplug(session.opaque_ref, _pif, _value);
         }
 
         /// <summary>
@@ -1323,10 +1052,7 @@ namespace XenAPI
         /// <param name="_value">New value to set</param>
         public static XenRef<Task> async_set_disallow_unplug(Session session, string _pif, bool _value)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_pif_set_disallow_unplug(session.opaque_ref, _pif, _value);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_pif_set_disallow_unplug(session.opaque_ref, _pif ?? "", _value).parse());
+          return session.JsonRpcClient.async_pif_set_disallow_unplug(session.opaque_ref, _pif, _value);
         }
 
         /// <summary>
@@ -1337,10 +1063,7 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static void plug(Session session, string _pif)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.pif_plug(session.opaque_ref, _pif);
-            else
-                session.XmlRpcProxy.pif_plug(session.opaque_ref, _pif ?? "").parse();
+            session.JsonRpcClient.pif_plug(session.opaque_ref, _pif);
         }
 
         /// <summary>
@@ -1351,10 +1074,7 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static XenRef<Task> async_plug(Session session, string _pif)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_pif_plug(session.opaque_ref, _pif);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_pif_plug(session.opaque_ref, _pif ?? "").parse());
+          return session.JsonRpcClient.async_pif_plug(session.opaque_ref, _pif);
         }
 
         /// <summary>
@@ -1381,10 +1101,7 @@ namespace XenAPI
         /// <param name="_disallow_unplug"></param>
         public static XenRef<PIF> db_introduce(Session session, string _device, string _network, string _host, string _mac, long _mtu, long _vlan, bool _physical, ip_configuration_mode _ip_configuration_mode, string _ip, string _netmask, string _gateway, string _dns, string _bond_slave_of, string _vlan_master_of, bool _management, Dictionary<string, string> _other_config, bool _disallow_unplug)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_db_introduce(session.opaque_ref, _device, _network, _host, _mac, _mtu, _vlan, _physical, _ip_configuration_mode, _ip, _netmask, _gateway, _dns, _bond_slave_of, _vlan_master_of, _management, _other_config, _disallow_unplug);
-            else
-                return XenRef<PIF>.Create(session.XmlRpcProxy.pif_db_introduce(session.opaque_ref, _device ?? "", _network ?? "", _host ?? "", _mac ?? "", _mtu.ToString(), _vlan.ToString(), _physical, ip_configuration_mode_helper.ToString(_ip_configuration_mode), _ip ?? "", _netmask ?? "", _gateway ?? "", _dns ?? "", _bond_slave_of ?? "", _vlan_master_of ?? "", _management, Maps.convert_to_proxy_string_string(_other_config), _disallow_unplug).parse());
+            return session.JsonRpcClient.pif_db_introduce(session.opaque_ref, _device, _network, _host, _mac, _mtu, _vlan, _physical, _ip_configuration_mode, _ip, _netmask, _gateway, _dns, _bond_slave_of, _vlan_master_of, _management, _other_config, _disallow_unplug);
         }
 
         /// <summary>
@@ -1411,10 +1128,7 @@ namespace XenAPI
         /// <param name="_disallow_unplug"></param>
         public static XenRef<Task> async_db_introduce(Session session, string _device, string _network, string _host, string _mac, long _mtu, long _vlan, bool _physical, ip_configuration_mode _ip_configuration_mode, string _ip, string _netmask, string _gateway, string _dns, string _bond_slave_of, string _vlan_master_of, bool _management, Dictionary<string, string> _other_config, bool _disallow_unplug)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_pif_db_introduce(session.opaque_ref, _device, _network, _host, _mac, _mtu, _vlan, _physical, _ip_configuration_mode, _ip, _netmask, _gateway, _dns, _bond_slave_of, _vlan_master_of, _management, _other_config, _disallow_unplug);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_pif_db_introduce(session.opaque_ref, _device ?? "", _network ?? "", _host ?? "", _mac ?? "", _mtu.ToString(), _vlan.ToString(), _physical, ip_configuration_mode_helper.ToString(_ip_configuration_mode), _ip ?? "", _netmask ?? "", _gateway ?? "", _dns ?? "", _bond_slave_of ?? "", _vlan_master_of ?? "", _management, Maps.convert_to_proxy_string_string(_other_config), _disallow_unplug).parse());
+          return session.JsonRpcClient.async_pif_db_introduce(session.opaque_ref, _device, _network, _host, _mac, _mtu, _vlan, _physical, _ip_configuration_mode, _ip, _netmask, _gateway, _dns, _bond_slave_of, _vlan_master_of, _management, _other_config, _disallow_unplug);
         }
 
         /// <summary>
@@ -1445,10 +1159,7 @@ namespace XenAPI
         /// <param name="_primary_address_type"> First published in XenServer 6.0.</param>
         public static XenRef<PIF> db_introduce(Session session, string _device, string _network, string _host, string _mac, long _mtu, long _vlan, bool _physical, ip_configuration_mode _ip_configuration_mode, string _ip, string _netmask, string _gateway, string _dns, string _bond_slave_of, string _vlan_master_of, bool _management, Dictionary<string, string> _other_config, bool _disallow_unplug, ipv6_configuration_mode _ipv6_configuration_mode, string[] _ipv6, string _ipv6_gateway, primary_address_type _primary_address_type)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_db_introduce(session.opaque_ref, _device, _network, _host, _mac, _mtu, _vlan, _physical, _ip_configuration_mode, _ip, _netmask, _gateway, _dns, _bond_slave_of, _vlan_master_of, _management, _other_config, _disallow_unplug, _ipv6_configuration_mode, _ipv6, _ipv6_gateway, _primary_address_type);
-            else
-                return XenRef<PIF>.Create(session.XmlRpcProxy.pif_db_introduce(session.opaque_ref, _device ?? "", _network ?? "", _host ?? "", _mac ?? "", _mtu.ToString(), _vlan.ToString(), _physical, ip_configuration_mode_helper.ToString(_ip_configuration_mode), _ip ?? "", _netmask ?? "", _gateway ?? "", _dns ?? "", _bond_slave_of ?? "", _vlan_master_of ?? "", _management, Maps.convert_to_proxy_string_string(_other_config), _disallow_unplug, ipv6_configuration_mode_helper.ToString(_ipv6_configuration_mode), _ipv6, _ipv6_gateway ?? "", primary_address_type_helper.ToString(_primary_address_type)).parse());
+            return session.JsonRpcClient.pif_db_introduce(session.opaque_ref, _device, _network, _host, _mac, _mtu, _vlan, _physical, _ip_configuration_mode, _ip, _netmask, _gateway, _dns, _bond_slave_of, _vlan_master_of, _management, _other_config, _disallow_unplug, _ipv6_configuration_mode, _ipv6, _ipv6_gateway, _primary_address_type);
         }
 
         /// <summary>
@@ -1479,10 +1190,7 @@ namespace XenAPI
         /// <param name="_primary_address_type"> First published in XenServer 6.0.</param>
         public static XenRef<Task> async_db_introduce(Session session, string _device, string _network, string _host, string _mac, long _mtu, long _vlan, bool _physical, ip_configuration_mode _ip_configuration_mode, string _ip, string _netmask, string _gateway, string _dns, string _bond_slave_of, string _vlan_master_of, bool _management, Dictionary<string, string> _other_config, bool _disallow_unplug, ipv6_configuration_mode _ipv6_configuration_mode, string[] _ipv6, string _ipv6_gateway, primary_address_type _primary_address_type)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_pif_db_introduce(session.opaque_ref, _device, _network, _host, _mac, _mtu, _vlan, _physical, _ip_configuration_mode, _ip, _netmask, _gateway, _dns, _bond_slave_of, _vlan_master_of, _management, _other_config, _disallow_unplug, _ipv6_configuration_mode, _ipv6, _ipv6_gateway, _primary_address_type);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_pif_db_introduce(session.opaque_ref, _device ?? "", _network ?? "", _host ?? "", _mac ?? "", _mtu.ToString(), _vlan.ToString(), _physical, ip_configuration_mode_helper.ToString(_ip_configuration_mode), _ip ?? "", _netmask ?? "", _gateway ?? "", _dns ?? "", _bond_slave_of ?? "", _vlan_master_of ?? "", _management, Maps.convert_to_proxy_string_string(_other_config), _disallow_unplug, ipv6_configuration_mode_helper.ToString(_ipv6_configuration_mode), _ipv6, _ipv6_gateway ?? "", primary_address_type_helper.ToString(_primary_address_type)).parse());
+          return session.JsonRpcClient.async_pif_db_introduce(session.opaque_ref, _device, _network, _host, _mac, _mtu, _vlan, _physical, _ip_configuration_mode, _ip, _netmask, _gateway, _dns, _bond_slave_of, _vlan_master_of, _management, _other_config, _disallow_unplug, _ipv6_configuration_mode, _ipv6, _ipv6_gateway, _primary_address_type);
         }
 
         /// <summary>
@@ -1514,10 +1222,7 @@ namespace XenAPI
         /// <param name="_managed"> First published in XenServer 6.2 SP1.</param>
         public static XenRef<PIF> db_introduce(Session session, string _device, string _network, string _host, string _mac, long _mtu, long _vlan, bool _physical, ip_configuration_mode _ip_configuration_mode, string _ip, string _netmask, string _gateway, string _dns, string _bond_slave_of, string _vlan_master_of, bool _management, Dictionary<string, string> _other_config, bool _disallow_unplug, ipv6_configuration_mode _ipv6_configuration_mode, string[] _ipv6, string _ipv6_gateway, primary_address_type _primary_address_type, bool _managed)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_db_introduce(session.opaque_ref, _device, _network, _host, _mac, _mtu, _vlan, _physical, _ip_configuration_mode, _ip, _netmask, _gateway, _dns, _bond_slave_of, _vlan_master_of, _management, _other_config, _disallow_unplug, _ipv6_configuration_mode, _ipv6, _ipv6_gateway, _primary_address_type, _managed);
-            else
-                return XenRef<PIF>.Create(session.XmlRpcProxy.pif_db_introduce(session.opaque_ref, _device ?? "", _network ?? "", _host ?? "", _mac ?? "", _mtu.ToString(), _vlan.ToString(), _physical, ip_configuration_mode_helper.ToString(_ip_configuration_mode), _ip ?? "", _netmask ?? "", _gateway ?? "", _dns ?? "", _bond_slave_of ?? "", _vlan_master_of ?? "", _management, Maps.convert_to_proxy_string_string(_other_config), _disallow_unplug, ipv6_configuration_mode_helper.ToString(_ipv6_configuration_mode), _ipv6, _ipv6_gateway ?? "", primary_address_type_helper.ToString(_primary_address_type), _managed).parse());
+            return session.JsonRpcClient.pif_db_introduce(session.opaque_ref, _device, _network, _host, _mac, _mtu, _vlan, _physical, _ip_configuration_mode, _ip, _netmask, _gateway, _dns, _bond_slave_of, _vlan_master_of, _management, _other_config, _disallow_unplug, _ipv6_configuration_mode, _ipv6, _ipv6_gateway, _primary_address_type, _managed);
         }
 
         /// <summary>
@@ -1549,10 +1254,7 @@ namespace XenAPI
         /// <param name="_managed"> First published in XenServer 6.2 SP1.</param>
         public static XenRef<Task> async_db_introduce(Session session, string _device, string _network, string _host, string _mac, long _mtu, long _vlan, bool _physical, ip_configuration_mode _ip_configuration_mode, string _ip, string _netmask, string _gateway, string _dns, string _bond_slave_of, string _vlan_master_of, bool _management, Dictionary<string, string> _other_config, bool _disallow_unplug, ipv6_configuration_mode _ipv6_configuration_mode, string[] _ipv6, string _ipv6_gateway, primary_address_type _primary_address_type, bool _managed)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_pif_db_introduce(session.opaque_ref, _device, _network, _host, _mac, _mtu, _vlan, _physical, _ip_configuration_mode, _ip, _netmask, _gateway, _dns, _bond_slave_of, _vlan_master_of, _management, _other_config, _disallow_unplug, _ipv6_configuration_mode, _ipv6, _ipv6_gateway, _primary_address_type, _managed);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_pif_db_introduce(session.opaque_ref, _device ?? "", _network ?? "", _host ?? "", _mac ?? "", _mtu.ToString(), _vlan.ToString(), _physical, ip_configuration_mode_helper.ToString(_ip_configuration_mode), _ip ?? "", _netmask ?? "", _gateway ?? "", _dns ?? "", _bond_slave_of ?? "", _vlan_master_of ?? "", _management, Maps.convert_to_proxy_string_string(_other_config), _disallow_unplug, ipv6_configuration_mode_helper.ToString(_ipv6_configuration_mode), _ipv6, _ipv6_gateway ?? "", primary_address_type_helper.ToString(_primary_address_type), _managed).parse());
+          return session.JsonRpcClient.async_pif_db_introduce(session.opaque_ref, _device, _network, _host, _mac, _mtu, _vlan, _physical, _ip_configuration_mode, _ip, _netmask, _gateway, _dns, _bond_slave_of, _vlan_master_of, _management, _other_config, _disallow_unplug, _ipv6_configuration_mode, _ipv6, _ipv6_gateway, _primary_address_type, _managed);
         }
 
         /// <summary>
@@ -1585,10 +1287,7 @@ namespace XenAPI
         /// <param name="_properties"> First published in XenServer 6.5.</param>
         public static XenRef<PIF> db_introduce(Session session, string _device, string _network, string _host, string _mac, long _mtu, long _vlan, bool _physical, ip_configuration_mode _ip_configuration_mode, string _ip, string _netmask, string _gateway, string _dns, string _bond_slave_of, string _vlan_master_of, bool _management, Dictionary<string, string> _other_config, bool _disallow_unplug, ipv6_configuration_mode _ipv6_configuration_mode, string[] _ipv6, string _ipv6_gateway, primary_address_type _primary_address_type, bool _managed, Dictionary<string, string> _properties)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_db_introduce(session.opaque_ref, _device, _network, _host, _mac, _mtu, _vlan, _physical, _ip_configuration_mode, _ip, _netmask, _gateway, _dns, _bond_slave_of, _vlan_master_of, _management, _other_config, _disallow_unplug, _ipv6_configuration_mode, _ipv6, _ipv6_gateway, _primary_address_type, _managed, _properties);
-            else
-                return XenRef<PIF>.Create(session.XmlRpcProxy.pif_db_introduce(session.opaque_ref, _device ?? "", _network ?? "", _host ?? "", _mac ?? "", _mtu.ToString(), _vlan.ToString(), _physical, ip_configuration_mode_helper.ToString(_ip_configuration_mode), _ip ?? "", _netmask ?? "", _gateway ?? "", _dns ?? "", _bond_slave_of ?? "", _vlan_master_of ?? "", _management, Maps.convert_to_proxy_string_string(_other_config), _disallow_unplug, ipv6_configuration_mode_helper.ToString(_ipv6_configuration_mode), _ipv6, _ipv6_gateway ?? "", primary_address_type_helper.ToString(_primary_address_type), _managed, Maps.convert_to_proxy_string_string(_properties)).parse());
+            return session.JsonRpcClient.pif_db_introduce(session.opaque_ref, _device, _network, _host, _mac, _mtu, _vlan, _physical, _ip_configuration_mode, _ip, _netmask, _gateway, _dns, _bond_slave_of, _vlan_master_of, _management, _other_config, _disallow_unplug, _ipv6_configuration_mode, _ipv6, _ipv6_gateway, _primary_address_type, _managed, _properties);
         }
 
         /// <summary>
@@ -1621,10 +1320,7 @@ namespace XenAPI
         /// <param name="_properties"> First published in XenServer 6.5.</param>
         public static XenRef<Task> async_db_introduce(Session session, string _device, string _network, string _host, string _mac, long _mtu, long _vlan, bool _physical, ip_configuration_mode _ip_configuration_mode, string _ip, string _netmask, string _gateway, string _dns, string _bond_slave_of, string _vlan_master_of, bool _management, Dictionary<string, string> _other_config, bool _disallow_unplug, ipv6_configuration_mode _ipv6_configuration_mode, string[] _ipv6, string _ipv6_gateway, primary_address_type _primary_address_type, bool _managed, Dictionary<string, string> _properties)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_pif_db_introduce(session.opaque_ref, _device, _network, _host, _mac, _mtu, _vlan, _physical, _ip_configuration_mode, _ip, _netmask, _gateway, _dns, _bond_slave_of, _vlan_master_of, _management, _other_config, _disallow_unplug, _ipv6_configuration_mode, _ipv6, _ipv6_gateway, _primary_address_type, _managed, _properties);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_pif_db_introduce(session.opaque_ref, _device ?? "", _network ?? "", _host ?? "", _mac ?? "", _mtu.ToString(), _vlan.ToString(), _physical, ip_configuration_mode_helper.ToString(_ip_configuration_mode), _ip ?? "", _netmask ?? "", _gateway ?? "", _dns ?? "", _bond_slave_of ?? "", _vlan_master_of ?? "", _management, Maps.convert_to_proxy_string_string(_other_config), _disallow_unplug, ipv6_configuration_mode_helper.ToString(_ipv6_configuration_mode), _ipv6, _ipv6_gateway ?? "", primary_address_type_helper.ToString(_primary_address_type), _managed, Maps.convert_to_proxy_string_string(_properties)).parse());
+          return session.JsonRpcClient.async_pif_db_introduce(session.opaque_ref, _device, _network, _host, _mac, _mtu, _vlan, _physical, _ip_configuration_mode, _ip, _netmask, _gateway, _dns, _bond_slave_of, _vlan_master_of, _management, _other_config, _disallow_unplug, _ipv6_configuration_mode, _ipv6, _ipv6_gateway, _primary_address_type, _managed, _properties);
         }
 
         /// <summary>
@@ -1635,10 +1331,7 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static void db_forget(Session session, string _pif)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.pif_db_forget(session.opaque_ref, _pif);
-            else
-                session.XmlRpcProxy.pif_db_forget(session.opaque_ref, _pif ?? "").parse();
+            session.JsonRpcClient.pif_db_forget(session.opaque_ref, _pif);
         }
 
         /// <summary>
@@ -1649,10 +1342,7 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static XenRef<Task> async_db_forget(Session session, string _pif)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_pif_db_forget(session.opaque_ref, _pif);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_pif_db_forget(session.opaque_ref, _pif ?? "").parse());
+          return session.JsonRpcClient.async_pif_db_forget(session.opaque_ref, _pif);
         }
 
         /// <summary>
@@ -1665,10 +1355,7 @@ namespace XenAPI
         /// <param name="_value">The property value</param>
         public static void set_property(Session session, string _pif, string _name, string _value)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.pif_set_property(session.opaque_ref, _pif, _name, _value);
-            else
-                session.XmlRpcProxy.pif_set_property(session.opaque_ref, _pif ?? "", _name ?? "", _value ?? "").parse();
+            session.JsonRpcClient.pif_set_property(session.opaque_ref, _pif, _name, _value);
         }
 
         /// <summary>
@@ -1681,10 +1368,7 @@ namespace XenAPI
         /// <param name="_value">The property value</param>
         public static XenRef<Task> async_set_property(Session session, string _pif, string _name, string _value)
         {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_pif_set_property(session.opaque_ref, _pif, _name, _value);
-          else
-              return XenRef<Task>.Create(session.XmlRpcProxy.async_pif_set_property(session.opaque_ref, _pif ?? "", _name ?? "", _value ?? "").parse());
+          return session.JsonRpcClient.async_pif_set_property(session.opaque_ref, _pif, _name, _value);
         }
 
         /// <summary>
@@ -1694,10 +1378,7 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static List<XenRef<PIF>> get_all(Session session)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_get_all(session.opaque_ref);
-            else
-                return XenRef<PIF>.Create(session.XmlRpcProxy.pif_get_all(session.opaque_ref).parse());
+            return session.JsonRpcClient.pif_get_all(session.opaque_ref);
         }
 
         /// <summary>
@@ -1707,10 +1388,7 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static Dictionary<XenRef<PIF>, PIF> get_all_records(Session session)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_get_all_records(session.opaque_ref);
-            else
-                return XenRef<PIF>.Create<Proxy_PIF>(session.XmlRpcProxy.pif_get_all_records(session.opaque_ref).parse());
+            return session.JsonRpcClient.pif_get_all_records(session.opaque_ref);
         }
 
         /// <summary>

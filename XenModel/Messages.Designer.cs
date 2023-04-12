@@ -33593,15 +33593,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Server failure: {0}.
-        /// </summary>
-        public static string SERVER_FAILURE {
-            get {
-                return ResourceManager.GetString("SERVER_FAILURE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to &amp;Server:.
         /// </summary>
         public static string SERVER_LABLE {

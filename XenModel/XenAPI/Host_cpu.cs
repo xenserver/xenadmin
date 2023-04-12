@@ -1,4 +1,5 @@
-/* Copyright (c) Cloud Software Group, Inc.
+/*
+ * Copyright (c) Cloud Software Group, Inc.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -91,15 +92,6 @@ namespace XenAPI
             UpdateFrom(table);
         }
 
-        /// <summary>
-        /// Creates a new Host_cpu from a Proxy_Host_cpu.
-        /// </summary>
-        /// <param name="proxy"></param>
-        public Host_cpu(Proxy_Host_cpu proxy)
-        {
-            UpdateFrom(proxy);
-        }
-
         #endregion
 
         /// <summary>
@@ -121,23 +113,6 @@ namespace XenAPI
             features = record.features;
             utilisation = record.utilisation;
             other_config = record.other_config;
-        }
-
-        internal void UpdateFrom(Proxy_Host_cpu proxy)
-        {
-            uuid = proxy.uuid == null ? null : proxy.uuid;
-            host = proxy.host == null ? null : XenRef<Host>.Create(proxy.host);
-            number = proxy.number == null ? 0 : long.Parse(proxy.number);
-            vendor = proxy.vendor == null ? null : proxy.vendor;
-            speed = proxy.speed == null ? 0 : long.Parse(proxy.speed);
-            modelname = proxy.modelname == null ? null : proxy.modelname;
-            family = proxy.family == null ? 0 : long.Parse(proxy.family);
-            model = proxy.model == null ? 0 : long.Parse(proxy.model);
-            stepping = proxy.stepping == null ? null : proxy.stepping;
-            flags = proxy.flags == null ? null : proxy.flags;
-            features = proxy.features == null ? null : proxy.features;
-            utilisation = Convert.ToDouble(proxy.utilisation);
-            other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
         }
 
         /// <summary>
@@ -174,25 +149,6 @@ namespace XenAPI
                 utilisation = Marshalling.ParseDouble(table, "utilisation");
             if (table.ContainsKey("other_config"))
                 other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
-        }
-
-        public Proxy_Host_cpu ToProxy()
-        {
-            Proxy_Host_cpu result_ = new Proxy_Host_cpu();
-            result_.uuid = uuid ?? "";
-            result_.host = host ?? "";
-            result_.number = number.ToString();
-            result_.vendor = vendor ?? "";
-            result_.speed = speed.ToString();
-            result_.modelname = modelname ?? "";
-            result_.family = family.ToString();
-            result_.model = model.ToString();
-            result_.stepping = stepping ?? "";
-            result_.flags = flags ?? "";
-            result_.features = features ?? "";
-            result_.utilisation = utilisation;
-            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            return result_;
         }
 
         public bool DeepEquals(Host_cpu other)
@@ -245,10 +201,7 @@ namespace XenAPI
         [Deprecated("XenServer 5.6")]
         public static Host_cpu get_record(Session session, string _host_cpu)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.host_cpu_get_record(session.opaque_ref, _host_cpu);
-            else
-                return new Host_cpu(session.XmlRpcProxy.host_cpu_get_record(session.opaque_ref, _host_cpu ?? "").parse());
+            return session.JsonRpcClient.host_cpu_get_record(session.opaque_ref, _host_cpu);
         }
 
         /// <summary>
@@ -261,10 +214,7 @@ namespace XenAPI
         [Deprecated("XenServer 5.6")]
         public static XenRef<Host_cpu> get_by_uuid(Session session, string _uuid)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.host_cpu_get_by_uuid(session.opaque_ref, _uuid);
-            else
-                return XenRef<Host_cpu>.Create(session.XmlRpcProxy.host_cpu_get_by_uuid(session.opaque_ref, _uuid ?? "").parse());
+            return session.JsonRpcClient.host_cpu_get_by_uuid(session.opaque_ref, _uuid);
         }
 
         /// <summary>
@@ -275,10 +225,7 @@ namespace XenAPI
         /// <param name="_host_cpu">The opaque_ref of the given host_cpu</param>
         public static string get_uuid(Session session, string _host_cpu)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.host_cpu_get_uuid(session.opaque_ref, _host_cpu);
-            else
-                return session.XmlRpcProxy.host_cpu_get_uuid(session.opaque_ref, _host_cpu ?? "").parse();
+            return session.JsonRpcClient.host_cpu_get_uuid(session.opaque_ref, _host_cpu);
         }
 
         /// <summary>
@@ -289,10 +236,7 @@ namespace XenAPI
         /// <param name="_host_cpu">The opaque_ref of the given host_cpu</param>
         public static XenRef<Host> get_host(Session session, string _host_cpu)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.host_cpu_get_host(session.opaque_ref, _host_cpu);
-            else
-                return XenRef<Host>.Create(session.XmlRpcProxy.host_cpu_get_host(session.opaque_ref, _host_cpu ?? "").parse());
+            return session.JsonRpcClient.host_cpu_get_host(session.opaque_ref, _host_cpu);
         }
 
         /// <summary>
@@ -303,10 +247,7 @@ namespace XenAPI
         /// <param name="_host_cpu">The opaque_ref of the given host_cpu</param>
         public static long get_number(Session session, string _host_cpu)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.host_cpu_get_number(session.opaque_ref, _host_cpu);
-            else
-                return long.Parse(session.XmlRpcProxy.host_cpu_get_number(session.opaque_ref, _host_cpu ?? "").parse());
+            return session.JsonRpcClient.host_cpu_get_number(session.opaque_ref, _host_cpu);
         }
 
         /// <summary>
@@ -317,10 +258,7 @@ namespace XenAPI
         /// <param name="_host_cpu">The opaque_ref of the given host_cpu</param>
         public static string get_vendor(Session session, string _host_cpu)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.host_cpu_get_vendor(session.opaque_ref, _host_cpu);
-            else
-                return session.XmlRpcProxy.host_cpu_get_vendor(session.opaque_ref, _host_cpu ?? "").parse();
+            return session.JsonRpcClient.host_cpu_get_vendor(session.opaque_ref, _host_cpu);
         }
 
         /// <summary>
@@ -331,10 +269,7 @@ namespace XenAPI
         /// <param name="_host_cpu">The opaque_ref of the given host_cpu</param>
         public static long get_speed(Session session, string _host_cpu)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.host_cpu_get_speed(session.opaque_ref, _host_cpu);
-            else
-                return long.Parse(session.XmlRpcProxy.host_cpu_get_speed(session.opaque_ref, _host_cpu ?? "").parse());
+            return session.JsonRpcClient.host_cpu_get_speed(session.opaque_ref, _host_cpu);
         }
 
         /// <summary>
@@ -345,10 +280,7 @@ namespace XenAPI
         /// <param name="_host_cpu">The opaque_ref of the given host_cpu</param>
         public static string get_modelname(Session session, string _host_cpu)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.host_cpu_get_modelname(session.opaque_ref, _host_cpu);
-            else
-                return session.XmlRpcProxy.host_cpu_get_modelname(session.opaque_ref, _host_cpu ?? "").parse();
+            return session.JsonRpcClient.host_cpu_get_modelname(session.opaque_ref, _host_cpu);
         }
 
         /// <summary>
@@ -359,10 +291,7 @@ namespace XenAPI
         /// <param name="_host_cpu">The opaque_ref of the given host_cpu</param>
         public static long get_family(Session session, string _host_cpu)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.host_cpu_get_family(session.opaque_ref, _host_cpu);
-            else
-                return long.Parse(session.XmlRpcProxy.host_cpu_get_family(session.opaque_ref, _host_cpu ?? "").parse());
+            return session.JsonRpcClient.host_cpu_get_family(session.opaque_ref, _host_cpu);
         }
 
         /// <summary>
@@ -373,10 +302,7 @@ namespace XenAPI
         /// <param name="_host_cpu">The opaque_ref of the given host_cpu</param>
         public static long get_model(Session session, string _host_cpu)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.host_cpu_get_model(session.opaque_ref, _host_cpu);
-            else
-                return long.Parse(session.XmlRpcProxy.host_cpu_get_model(session.opaque_ref, _host_cpu ?? "").parse());
+            return session.JsonRpcClient.host_cpu_get_model(session.opaque_ref, _host_cpu);
         }
 
         /// <summary>
@@ -387,10 +313,7 @@ namespace XenAPI
         /// <param name="_host_cpu">The opaque_ref of the given host_cpu</param>
         public static string get_stepping(Session session, string _host_cpu)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.host_cpu_get_stepping(session.opaque_ref, _host_cpu);
-            else
-                return session.XmlRpcProxy.host_cpu_get_stepping(session.opaque_ref, _host_cpu ?? "").parse();
+            return session.JsonRpcClient.host_cpu_get_stepping(session.opaque_ref, _host_cpu);
         }
 
         /// <summary>
@@ -401,10 +324,7 @@ namespace XenAPI
         /// <param name="_host_cpu">The opaque_ref of the given host_cpu</param>
         public static string get_flags(Session session, string _host_cpu)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.host_cpu_get_flags(session.opaque_ref, _host_cpu);
-            else
-                return session.XmlRpcProxy.host_cpu_get_flags(session.opaque_ref, _host_cpu ?? "").parse();
+            return session.JsonRpcClient.host_cpu_get_flags(session.opaque_ref, _host_cpu);
         }
 
         /// <summary>
@@ -415,10 +335,7 @@ namespace XenAPI
         /// <param name="_host_cpu">The opaque_ref of the given host_cpu</param>
         public static string get_features(Session session, string _host_cpu)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.host_cpu_get_features(session.opaque_ref, _host_cpu);
-            else
-                return session.XmlRpcProxy.host_cpu_get_features(session.opaque_ref, _host_cpu ?? "").parse();
+            return session.JsonRpcClient.host_cpu_get_features(session.opaque_ref, _host_cpu);
         }
 
         /// <summary>
@@ -429,10 +346,7 @@ namespace XenAPI
         /// <param name="_host_cpu">The opaque_ref of the given host_cpu</param>
         public static double get_utilisation(Session session, string _host_cpu)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.host_cpu_get_utilisation(session.opaque_ref, _host_cpu);
-            else
-                return Convert.ToDouble(session.XmlRpcProxy.host_cpu_get_utilisation(session.opaque_ref, _host_cpu ?? "").parse());
+            return session.JsonRpcClient.host_cpu_get_utilisation(session.opaque_ref, _host_cpu);
         }
 
         /// <summary>
@@ -443,10 +357,7 @@ namespace XenAPI
         /// <param name="_host_cpu">The opaque_ref of the given host_cpu</param>
         public static Dictionary<string, string> get_other_config(Session session, string _host_cpu)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.host_cpu_get_other_config(session.opaque_ref, _host_cpu);
-            else
-                return Maps.convert_from_proxy_string_string(session.XmlRpcProxy.host_cpu_get_other_config(session.opaque_ref, _host_cpu ?? "").parse());
+            return session.JsonRpcClient.host_cpu_get_other_config(session.opaque_ref, _host_cpu);
         }
 
         /// <summary>
@@ -458,10 +369,7 @@ namespace XenAPI
         /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _host_cpu, Dictionary<string, string> _other_config)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.host_cpu_set_other_config(session.opaque_ref, _host_cpu, _other_config);
-            else
-                session.XmlRpcProxy.host_cpu_set_other_config(session.opaque_ref, _host_cpu ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
+            session.JsonRpcClient.host_cpu_set_other_config(session.opaque_ref, _host_cpu, _other_config);
         }
 
         /// <summary>
@@ -474,10 +382,7 @@ namespace XenAPI
         /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _host_cpu, string _key, string _value)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.host_cpu_add_to_other_config(session.opaque_ref, _host_cpu, _key, _value);
-            else
-                session.XmlRpcProxy.host_cpu_add_to_other_config(session.opaque_ref, _host_cpu ?? "", _key ?? "", _value ?? "").parse();
+            session.JsonRpcClient.host_cpu_add_to_other_config(session.opaque_ref, _host_cpu, _key, _value);
         }
 
         /// <summary>
@@ -489,10 +394,7 @@ namespace XenAPI
         /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _host_cpu, string _key)
         {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.host_cpu_remove_from_other_config(session.opaque_ref, _host_cpu, _key);
-            else
-                session.XmlRpcProxy.host_cpu_remove_from_other_config(session.opaque_ref, _host_cpu ?? "", _key ?? "").parse();
+            session.JsonRpcClient.host_cpu_remove_from_other_config(session.opaque_ref, _host_cpu, _key);
         }
 
         /// <summary>
@@ -504,10 +406,7 @@ namespace XenAPI
         [Deprecated("XenServer 5.6")]
         public static List<XenRef<Host_cpu>> get_all(Session session)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.host_cpu_get_all(session.opaque_ref);
-            else
-                return XenRef<Host_cpu>.Create(session.XmlRpcProxy.host_cpu_get_all(session.opaque_ref).parse());
+            return session.JsonRpcClient.host_cpu_get_all(session.opaque_ref);
         }
 
         /// <summary>
@@ -517,10 +416,7 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static Dictionary<XenRef<Host_cpu>, Host_cpu> get_all_records(Session session)
         {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.host_cpu_get_all_records(session.opaque_ref);
-            else
-                return XenRef<Host_cpu>.Create<Proxy_Host_cpu>(session.XmlRpcProxy.host_cpu_get_all_records(session.opaque_ref).parse());
+            return session.JsonRpcClient.host_cpu_get_all_records(session.opaque_ref);
         }
 
         /// <summary>
