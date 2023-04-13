@@ -1570,7 +1570,7 @@ namespace XenAdmin.Core
                 queryString = string.Join("&",
                     query.AllKeys
                         .Where(key => !string.IsNullOrWhiteSpace(key))
-                        .Select(key => $"{key}={query[key]}")
+                        .Select(key => $"{key}={HttpUtility.UrlEncode(query[key])}")
                 );
             }
             catch (Exception ex)
