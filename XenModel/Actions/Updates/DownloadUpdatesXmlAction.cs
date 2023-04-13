@@ -36,6 +36,7 @@ using System.Xml;
 using XenAdmin.Core;
 using System.Diagnostics;
 using System.Net;
+using System.Net.Cache;
 
 
 namespace XenAdmin.Actions
@@ -356,6 +357,8 @@ namespace XenAdmin.Actions
 
                 using (var webClient = new WebClient())
                 {
+                    webClient.CachePolicy = new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore);
+
                     webClient.Proxy = proxy;
                     webClient.Headers.Add("User-Agent", _userAgent);
                     using (var stream = new MemoryStream(webClient.DownloadData(uriBuilder.Uri)))

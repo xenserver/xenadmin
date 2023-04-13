@@ -33,6 +33,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Cache;
 using System.Net.NetworkInformation;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
@@ -84,6 +85,7 @@ namespace XenAdmin.Actions.Updates
             _client = new WebClient();
             _client.DownloadProgressChanged += client_DownloadProgressChanged;
             _client.DownloadFileCompleted += client_DownloadFileCompleted;
+            _client.CachePolicy = new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore);
 
             // register event handler to detect changes in network connectivity
             NetworkChange.NetworkAvailabilityChanged += NetworkAvailabilityChanged;
