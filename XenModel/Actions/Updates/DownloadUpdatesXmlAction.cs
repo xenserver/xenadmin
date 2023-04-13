@@ -358,7 +358,7 @@ namespace XenAdmin.Actions
                 {
                     webClient.Proxy = proxy;
                     webClient.Headers.Add("User-Agent", _userAgent);
-                    using (var stream = new MemoryStream(webClient.DownloadData(uri)))
+                    using (var stream = new MemoryStream(webClient.DownloadData(uriBuilder.Uri)))
                         checkForUpdatesXml.Load(stream);
                 }
             }
