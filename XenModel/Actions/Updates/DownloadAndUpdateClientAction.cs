@@ -29,14 +29,15 @@
  */
 
 using System;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Cache;
 using System.Net.NetworkInformation;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
+using XenAdmin.Core;
 using XenCenterLib;
 
 namespace XenAdmin.Actions.Updates
@@ -84,6 +85,7 @@ namespace XenAdmin.Actions.Updates
             _client = new WebClient();
             _client.DownloadProgressChanged += client_DownloadProgressChanged;
             _client.DownloadFileCompleted += client_DownloadFileCompleted;
+            _client.CachePolicy = new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore);
 
             // register event handler to detect changes in network connectivity
             NetworkChange.NetworkAvailabilityChanged += NetworkAvailabilityChanged;
@@ -105,13 +107,17 @@ namespace XenAdmin.Actions.Updates
                     //start the download
                     _updateDownloadState = DownloadState.InProgress;
 
+                    var uriBuilder = new UriBuilder(_address);
+
                     if (!string.IsNullOrEmpty(_authToken))
                     {
-                        NameValueCollection myQueryStringCollection = new NameValueCollection();
-                        myQueryStringCollection.Add(XenAdminConfigManager.Provider.GetInternalStageAuthTokenName(), _authToken);
-                        _client.QueryString = myQueryStringCollection;
+                        var uri = uriBuilder.Uri;
+                        if (!uri.IsFile)
+                        {
+                            uriBuilder.Query = Helpers.AddAuthTokenToQueryString(_authToken, uriBuilder.Query);
+                        }
                     }
-                    _client.DownloadFileAsync(_address, _outputPathAndFileName);
+                    _client.DownloadFileAsync(uriBuilder.Uri, _outputPathAndFileName);
 
                     bool updateDownloadCancelling = false;
 

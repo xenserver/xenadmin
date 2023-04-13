@@ -30,19 +30,20 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Linq;
 using System.IO;
 using System.Xml;
 using XenAdmin.Core;
 using System.Diagnostics;
 using System.Net;
+using System.Net.Cache;
 
 
 namespace XenAdmin.Actions
 {
     public class DownloadUpdatesXmlAction : AsyncAction
     {
+
         private const string ClientVersionsNode = "versions";
         private const string XenServerVersionsNode = "serverversions";
         private const string PatchesNode = "patches";
@@ -338,38 +339,34 @@ namespace XenAdmin.Actions
 
         protected virtual XmlDocument FetchCheckForUpdatesXml()
         {
-            var xdoc = new XmlDocument();
+            var checkForUpdatesXml = new XmlDocument();
             var checkForUpdatesUrl = XenAdminConfigManager.Provider.GetCustomUpdatesXmlLocation() ?? BrandManager.UpdatesUrl;
-            var authToken = XenAdminConfigManager.Provider.GetInternalStageAuthToken();
-            var uri = new Uri(checkForUpdatesUrl);
+            var uriBuilder = new UriBuilder(checkForUpdatesUrl);
 
+            var uri = uriBuilder.Uri;
             if (uri.IsFile)
             {
-                xdoc.Load(checkForUpdatesUrl);
+                checkForUpdatesXml.Load(checkForUpdatesUrl);
             }
             else
             {
-                
+                var authToken = XenAdminConfigManager.Provider.GetInternalStageAuthToken();
+                uriBuilder.Query = Helpers.AddAuthTokenToQueryString(authToken, uriBuilder.Query);
+
                 var proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(Connection, false);
 
                 using (var webClient = new WebClient())
                 {
+                    webClient.CachePolicy = new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore);
+
                     webClient.Proxy = proxy;
                     webClient.Headers.Add("User-Agent", _userAgent);
-                    if (!string.IsNullOrEmpty(authToken))
-                    {
-                        NameValueCollection myQueryStringCollection = new NameValueCollection();
-                        myQueryStringCollection.Add(XenAdminConfigManager.Provider.GetInternalStageAuthTokenName(), authToken);
-                        webClient.QueryString = myQueryStringCollection;
-                    }
-
-                    using (var stream = new MemoryStream(webClient.DownloadData(uri)))
-                        xdoc.Load(stream);
+                    using (var stream = new MemoryStream(webClient.DownloadData(uriBuilder.Uri)))
+                        checkForUpdatesXml.Load(stream);
                 }
             }
 
-            return xdoc;
+            return checkForUpdatesXml;
         }
-
     }
 }

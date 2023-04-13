@@ -156,8 +156,6 @@ namespace XenAdmin.Core
 
         public static string AdditionalFeatures => ReadInstalledKey(ADDITIONAL_FEATURES, RegistryView.Registry32);
 
-        public static string AuthTokenName => INTERNAL_STAGE_AUTH_TOKEN;
-
         public static string GetCustomUpdatesXmlLocation()
         {
             return ReadInstalledKey(CUSTOM_UPDATES_XML_LOCATION);

@@ -30,12 +30,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Web;
 using System.Xml;
 using XenAdmin.Network;
 using XenAPI;
@@ -1536,6 +1538,47 @@ namespace XenAdmin.Core
                 return false;
 
             return GetCoordinator(connection).external_auth_type != Auth.AUTH_TYPE_NONE;
+        }
+
+        /// <summary>
+        /// Adds the specified authentication token to the existing query string and returns
+        /// the modified query string.
+        /// </summary>
+        /// <param name="authToken">The authentication token to add to the query string.</param>
+        /// <param name="existingQueryString">The existing query string to add the token to.</param>
+        /// <returns>The modified query string.</returns>
+        public static string AddAuthTokenToQueryString(string authToken, string existingQueryString)
+        {
+            var queryString = existingQueryString;
+            if (string.IsNullOrEmpty(authToken))
+            {
+                return queryString;
+            }
+
+            try
+            {
+                var query = new NameValueCollection();
+                if (!string.IsNullOrEmpty(existingQueryString))
+                {
+                    query.Add(HttpUtility.ParseQueryString(existingQueryString));
+                }
+
+                var tokenQueryString = HttpUtility.ParseQueryString(authToken);
+
+                query.Add(tokenQueryString);
+
+                queryString = string.Join("&",
+                    query.AllKeys
+                        .Where(key => !string.IsNullOrWhiteSpace(key))
+                        .Select(key => $"{key}={HttpUtility.UrlEncode(query[key])}")
+                );
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+            }
+
+            return queryString;
         }
     }
 }
