@@ -557,7 +557,7 @@ namespace XenAdmin.SettingsPanels
             }
             else if (comboBoxVCPUs.SelectedItem != null && SelectedVcpusMax > VM.MAX_VCPUS_FOR_NON_TRUSTED_VMS)
             {
-                VCPUWarningLabel.Text = string.Format(Messages.VM_CPUMEMPAGE_VCPU_TRUSTED_WARNING, VM.MAX_VCPUS_FOR_NON_TRUSTED_VMS);
+                VCPUWarningLabel.Text = string.Format(Messages.VM_CPUMEMPAGE_VCPU_TRUSTED_WARNING, VM.MAX_VCPUS_FOR_NON_TRUSTED_VMS, BrandManager.ProductBrand);
                 VCPUWarningLabel.Visible = true;
             }
             else

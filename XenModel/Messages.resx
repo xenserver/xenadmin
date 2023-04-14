@@ -7271,7 +7271,7 @@ This might result in failure to migrate VMs to this server during the RPU or to 
     <value>Configure storage for the new VM</value>
   </data>
   <data name="IMPORT_VM_CPUS_COUNT_UNTRUSTED_WARNING" xml:space="preserve">
-    <value>The appliance contains {0} VM(s) with more than {1} vCPUs. Only trusted VMs are supported with this configuration.</value>
+    <value>The appliance contains {0} VM(s) with more than {1} vCPUs. Where a VM may be running actively hostile privileged code {2} recommends that the vCPU limit is set to {1} to prevent impact on system availability.</value>
   </data>
   <data name="IMPORT_VM_FROM" xml:space="preserve">
     <value>Import VM from...</value>
@@ -9407,7 +9407,7 @@ You will not be able to start this VM without freeing some space on one of the s
     <value>vCPUs</value>
   </data>
   <data name="NEWVMWIZARD_CPUMEMPAGE_VCPUS_TRUSTED_VM_WARN" xml:space="preserve">
-    <value>You have selected more than {0} vCPUs for the new VM. This configuration is only supported for trusted VMs.</value>
+    <value>You have selected more than {0} vCPUs for the new VM. Where a VM may be running actively hostile privileged code {1} recommends that the vCPU limit is set to {0} to prevent impact on system availability.</value>
   </data>
   <data name="NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN" xml:space="preserve">
     <value>The number of vCPUs given to the new VM is greater than the number of physical CPUs on any server in the pool.
@@ -13594,7 +13594,7 @@ To optimize VM performance, you should reduce the number of VCPUs to less than o
     <value>It is recommended to allocate at least {0} vCPUs for this VM</value>
   </data>
   <data name="VM_CPUMEMPAGE_VCPU_TRUSTED_WARNING" xml:space="preserve">
-    <value>You have selected more than {0} vCPUs for the new VM. This configuration is only supported for trusted VMs.</value>
+    <value>You have selected more than {0} vCPUs for the new VM. Where a VM may be running actively hostile privileged code {1} recommends that the vCPU limit is set to {0} to prevent impact on system availability.</value>
   </data>
   <data name="VM_CPUMEMPAGE_VCPU_WARNING" xml:space="preserve">
     <value>There are no hosts with enough physical CPUs to start the VM</value>

@@ -340,7 +340,7 @@
     <value>comboBoxTopology</value>
   </data>
   <data name="&gt;&gt;comboBoxTopology.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.CPUTopologyComboBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.CPUTopologyComboBox, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;comboBoxTopology.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -370,7 +370,7 @@
     <value>spinnerStatMax</value>
   </data>
   <data name="&gt;&gt;spinnerStatMax.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.Ballooning.MemorySpinner, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.Ballooning.MemorySpinner, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;spinnerStatMax.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -400,7 +400,7 @@
     <value>spinnerDynMax</value>
   </data>
   <data name="&gt;&gt;spinnerDynMax.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.Ballooning.MemorySpinner, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.Ballooning.MemorySpinner, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;spinnerDynMax.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -487,7 +487,7 @@
     <value>spinnerDynMin</value>
   </data>
   <data name="&gt;&gt;spinnerDynMin.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.Ballooning.MemorySpinner, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.Ballooning.MemorySpinner, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;spinnerDynMin.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -829,6 +829,6 @@
     <value>Page_CpuMem</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.XenTabPage, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

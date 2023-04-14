@@ -20833,7 +20833,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The appliance contains {0} VM(s) with more than {1} vCPUs. Only trusted VMs are supported with this configuration..
+        ///   Looks up a localized string similar to The appliance contains {0} VM(s) with more than {1} vCPUs. Where a VM may be running actively hostile privileged code {2} recommends that the vCPU limit is set to {1} to prevent impact on system availability..
         /// </summary>
         public static string IMPORT_VM_CPUS_COUNT_UNTRUSTED_WARNING {
             get {
@@ -26989,7 +26989,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You have selected more than {0} vCPUs for the new VM. This configuration is only supported for trusted VMs..
+        ///   Looks up a localized string similar to You have selected more than {0} vCPUs for the new VM. Where a VM may be running actively hostile privileged code {1} recommends that the vCPU limit is set to {0} to prevent impact on system availability..
         /// </summary>
         public static string NEWVMWIZARD_CPUMEMPAGE_VCPUS_TRUSTED_VM_WARN {
             get {
@@ -39352,7 +39352,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You have selected more than {0} vCPUs for the new VM. This configuration is only supported for trusted VMs..
+        ///   Looks up a localized string similar to You have selected more than {0} vCPUs for the new VM. Where a VM may be running actively hostile privileged code {1} recommends that the vCPU limit is set to {0} to prevent impact on system availability..
         /// </summary>
         public static string VM_CPUMEMPAGE_VCPU_TRUSTED_WARNING {
             get {

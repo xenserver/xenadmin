@@ -173,7 +173,7 @@ namespace XenAdmin.Wizards.ImportWizard
                 var ovfCountsAboveLimit = _ovfVCpusCount.Count(vCpusCount => vCpusCount > VM.MAX_VCPUS_FOR_NON_TRUSTED_VMS);
                 if (ovfCountsAboveLimit > 0)
                 {
-                    warnings.Add(string.Format(Messages.IMPORT_VM_CPUS_COUNT_UNTRUSTED_WARNING, ovfCountsAboveLimit, VM.MAX_VCPUS_FOR_NON_TRUSTED_VMS));
+                    warnings.Add(string.Format(Messages.IMPORT_VM_CPUS_COUNT_UNTRUSTED_WARNING, ovfCountsAboveLimit, VM.MAX_VCPUS_FOR_NON_TRUSTED_VMS, BrandManager.ProductBrand));
                 }
 
                 if (!CheckDestinationHasEnoughPhysicalCpus(out var warningMessage))
