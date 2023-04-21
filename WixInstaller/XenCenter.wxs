@@ -238,7 +238,7 @@
             <Publish Dialog="ExitDialog" 
                 Control="Finish" 
                 Event="DoAction" 
-                Value="LaunchApplication">WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 AND NOT (WixUI_InstallMode="Remove")
+                Value="LaunchApplication">WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 AND NOT (WixUI_InstallMode="Remove") AND XS_WixUIRMPressedOk="0"
             </Publish>
         </UI>
         <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="!(loc.XenCenter_Launch) $(var.BrandConsole)" />

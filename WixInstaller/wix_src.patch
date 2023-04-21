@@ -1005,12 +1005,29 @@ diff -ru wixlib/ExitDialog.wxl wixlib/ExitDialog.wxl
 -                <Control Id="OptionalText" Type="Text" X="135" Y="110" Width="220" Height="80" Transparent="yes" NoPrefix="yes" Hidden="yes" Text="[WIXUI_EXITDIALOGOPTIONALTEXT]">
 -                    <Condition Action="show">WIXUI_EXITDIALOGOPTIONALTEXT AND NOT Installed</Condition>
 +                    <Control Id="OptionalText" Type="Text" X="135" Y="110" Width="220" Height="80" Transparent="yes" NoPrefix="yes" Hidden="yes" Text="[WIXUI_EXITDIALOGOPTIONALTEXT]">
-+                    <Condition Action="show">WIXUI_EXITDIALOGOPTIONALTEXT AND NOT (WixUI_InstallMode="Remove")</Condition>
++                    <Condition Action="show">WIXUI_EXITDIALOGOPTIONALTEXT AND NOT (WixUI_InstallMode="Remove") AND XS_WixUIRMPressedOk="0"</Condition>
                  </Control>
 -                <Control Id="OptionalCheckBox" Type="CheckBox" X="135" Y="190" Width="220" Height="40" Hidden="yes" Property="WIXUI_EXITDIALOGOPTIONALCHECKBOX" CheckBoxValue="1" Text="[WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT]">
 -                    <Condition Action="show">WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT AND NOT Installed</Condition>
 +                <Control Id="OptionalCheckBox" Type="CheckBox" X="135" Y="190" Width="220" Height="40" Hidden="yes" Property="WIXUI_EXITDIALOGOPTIONALCHECKBOX" CheckBoxValue="1"  Text="[WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT]">
-+                    <Condition Action="show">WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT AND NOT (WixUI_InstallMode="Remove")</Condition>
++                    <Condition Action="show">WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT AND NOT (WixUI_InstallMode="Remove") AND XS_WixUIRMPressedOk="0"</Condition>
                  </Control>
              </Dialog>
  
+diff --git wixlib/MsiRMFilesInUse.wxs wixlib/MsiRMFilesInUse.wxs
+--- wixlib/MsiRMFilesInUse.wxs
++++ wixlib/MsiRMFilesInUse.wxs
+@@ -6,10 +6,13 @@
+     <Fragment>
+         <UI>
+             <Property Id="WixUIRMOption" Value="UseRM" />
++            <!-- XS_WixUIRMPressedOk is a custom property. This can be checked to ensure that users did not proceed after using this dialog.-->
++            <Property Id="XS_WixUIRMPressedOk" Value="0" />
+             <Dialog Id="MsiRMFilesInUse" Width="370" Height="270" Title="!(loc.MsiRMFilesInUse_Title)" KeepModeless="yes">
+                 <Control Id="OK" Type="PushButton" X="240" Y="243" Width="56" Height="17" Default="yes" Text="!(loc.WixUIOK)">
+                     <Publish Event="EndDialog" Value="Return">1</Publish>
+                     <Publish Event="RMShutdownAndRestart" Value="0">WixUIRMOption~="UseRM"</Publish>
++                    <Publish Property="XS_WixUIRMPressedOk" Value="1">1</Publish>
+                 </Control>
+                 <Control Id="Cancel" Type="PushButton" X="304" Y="243" Width="56" Height="17" Cancel="yes" Text="!(loc.WixUICancel)">
+                     <Publish Event="EndDialog" Value="Exit">1</Publish>
