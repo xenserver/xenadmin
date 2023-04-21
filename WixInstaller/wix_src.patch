@@ -998,14 +998,7 @@ diff -ru wixlib/WixUI_zh-CN.wxl wixlib/WixUI_zh-CN.wxl
 diff -ru wixlib/ExitDialog.wxl wixlib/ExitDialog.wxl
 --- wixlib/ExitDialog.wxs	2019-09-15 07:13:54.000000000 +0100
 +++ wixlib/ExitDialog.wxs	2022-06-09 15:28:09.123686200 +0100
-@@ -13,11 +13,11 @@
-                 <Control Id="BottomLine" Type="Line" X="0" Y="234" Width="370" Height="0" />
-                 <Control Id="Description" Type="Text" X="135" Y="70" Width="220" Height="40" Transparent="yes" NoPrefix="yes" Text="!(loc.ExitDialogDescription)" />
-                 <Control Id="Title" Type="Text" X="135" Y="20" Width="220" Height="60" Transparent="yes" NoPrefix="yes" Text="!(loc.ExitDialogTitle)" />
--                <Control Id="OptionalText" Type="Text" X="135" Y="110" Width="220" Height="80" Transparent="yes" NoPrefix="yes" Hidden="yes" Text="[WIXUI_EXITDIALOGOPTIONALTEXT]">
--                    <Condition Action="show">WIXUI_EXITDIALOGOPTIONALTEXT AND NOT Installed</Condition>
-+                    <Control Id="OptionalText" Type="Text" X="135" Y="110" Width="220" Height="80" Transparent="yes" NoPrefix="yes" Hidden="yes" Text="[WIXUI_EXITDIALOGOPTIONALTEXT]">
-+                    <Condition Action="show">WIXUI_EXITDIALOGOPTIONALTEXT AND NOT (WixUI_InstallMode="Remove") AND XS_WixUIRMPressedOk="0"</Condition>
+@@ -18,5 +18,5 @@
                  </Control>
 -                <Control Id="OptionalCheckBox" Type="CheckBox" X="135" Y="190" Width="220" Height="40" Hidden="yes" Property="WIXUI_EXITDIALOGOPTIONALCHECKBOX" CheckBoxValue="1" Text="[WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT]">
 -                    <Condition Action="show">WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT AND NOT Installed</Condition>
@@ -1013,7 +1006,6 @@ diff -ru wixlib/ExitDialog.wxl wixlib/ExitDialog.wxl
 +                    <Condition Action="show">WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT AND NOT (WixUI_InstallMode="Remove") AND XS_WixUIRMPressedOk="0"</Condition>
                  </Control>
              </Dialog>
- 
 diff --git wixlib/MsiRMFilesInUse.wxs wixlib/MsiRMFilesInUse.wxs
 --- wixlib/MsiRMFilesInUse.wxs
 +++ wixlib/MsiRMFilesInUse.wxs
