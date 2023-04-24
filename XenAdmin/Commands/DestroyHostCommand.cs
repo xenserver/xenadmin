@@ -32,7 +32,6 @@ using System.Collections.Generic;
 using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAPI;
-using System.Linq;
 
 namespace XenAdmin.Commands
 {
@@ -57,6 +56,7 @@ namespace XenAdmin.Commands
         protected override void RunCore(SelectedItemCollection selection)
         {
             List<AsyncAction> actions = new List<AsyncAction>();
+
             foreach (Host host in selection.AsXenObjects<Host>())
             {
                 Pool pool = Helpers.GetPool(host.Connection);
@@ -79,10 +79,13 @@ namespace XenAdmin.Commands
 
         protected override bool CanRunCore(SelectedItemCollection selection)
         {
-            if (!selection.AllItemsAre<Host>() || selection.Count > 1)
-                return false;
-            
-            return CanRun(selection.AsXenObjects<Host>().FirstOrDefault());
+            foreach (var selectedItem in selection)
+            {
+                if (!(selectedItem.XenObject is Host host) || !CanRun(host))
+                    return false;
+            }
+
+            return true;
         }
 
         public override string ContextMenuText => Messages.DESTROY_HOST_CONTEXT_MENU_ITEM_TEXT;
@@ -94,17 +97,35 @@ namespace XenAdmin.Commands
             get
             {
                 SelectedItemCollection selection = GetSelection();
-                if (selection.Count > 0)
+
+                if (selection.Count == 1)
                 {
                     Host host = (Host)selection[0].XenObject;
-                    
                     return string.Format(Messages.CONFIRM_DESTROY_HOST, host.Name());
                 }
+                
+                if (selection.Count > 1)
+                    return Messages.CONFIRM_DESTROY_HOST_MANY;
+
                 return null;
             }
         }
 
-        protected override string ConfirmationDialogTitle => Messages.CONFIRM_DESTROY_HOST_TITLE;
+        protected override string ConfirmationDialogTitle
+        {
+            get
+            {
+                SelectedItemCollection selection = GetSelection();
+                
+                if (selection.Count == 1)
+                    return Messages.CONFIRM_DESTROY_HOST_TITLE;
+
+                if (selection.Count > 1)
+                    return Messages.CONFIRM_DESTROY_HOST_TITLE_MANY;
+
+                return null;
+            }
+        }
 
         protected override string ConfirmationDialogYesButtonLabel => Messages.CONFIRM_DESTROY_HOST_YES_BUTTON_LABEL;
 

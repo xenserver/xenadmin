@@ -8438,7 +8438,7 @@ namespace XenAdmin {
         ///   Looks up a localized string similar to Are you sure you want to destroy &apos;{0}&apos;?
         ///
         ///You should only need to destroy a server if it has physically failed.
-        ///Destroying this server will permanently remove it from the pool along with its local SRs, DVD drives and removable storage. The server will need to be reinstalled before it can be used again.
+        ///Destroying a server will permanently remove it from the pool along with its local SRs, DVD drives and removable storage. The server will need to be reinstalled before it can be used again.
         ///
         ///This action is final and unrecoverable..
         /// </summary>
@@ -8449,11 +8449,34 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to destroy the selected servers?
+        ///
+        ///You should only need to destroy servers if they have physically failed.
+        ///Destroying servers will permanently remove them from the pool along with their local SRs, DVD drives and removable storage. The servers will need to be reinstalled before they can be used again.
+        ///
+        ///This action is final and unrecoverable..
+        /// </summary>
+        public static string CONFIRM_DESTROY_HOST_MANY {
+            get {
+                return ResourceManager.GetString("CONFIRM_DESTROY_HOST_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Destroy Server.
         /// </summary>
         public static string CONFIRM_DESTROY_HOST_TITLE {
             get {
                 return ResourceManager.GetString("CONFIRM_DESTROY_HOST_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Destroy Multiple Servers.
+        /// </summary>
+        public static string CONFIRM_DESTROY_HOST_TITLE_MANY {
+            get {
+                return ResourceManager.GetString("CONFIRM_DESTROY_HOST_TITLE_MANY", resourceCulture);
             }
         }
         
