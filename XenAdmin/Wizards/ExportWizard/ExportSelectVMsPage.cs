@@ -304,9 +304,24 @@ namespace XenAdmin.Wizards.ExportWizard
         {
             var count = VMsToExport.Count;
             m_tlpInfo.Visible = ExportAsXva && count > 1;
-            _tlpWarning.Visible = !Helpers.FeatureForbidden(Connection, Host.RestrictVtpm) &&
-                                  Helpers.XapiEqualOrGreater_22_26_0(Connection) &&
-                                  VMsToExport.Any(v => v.VTPMs.Count > 0);
+
+            if (Helpers.FeatureForbidden(Connection, Host.RestrictVtpm) ||
+                !Helpers.XapiEqualOrGreater_22_26_0(Connection) ||
+                !VMsToExport.Any(v => v.VTPMs.Count > 0))
+            {
+                _tlpWarning.Visible = false;
+            }
+            else if (Helpers.XapiEqualOrGreater_23_9_0(Connection))
+            {
+                labelWarning.Text = Messages.VTPM_EXPORT_UNSUPPORTED_FOR_OVF;
+                _tlpWarning.Visible = !ExportAsXva;
+            }
+            else
+            {
+                labelWarning.Text = Messages.VTPM_EXPORT_UNSUPPORTED_FOR_ALL;
+                _tlpWarning.Visible = true;
+            }
+
             m_buttonNextEnabled = ExportAsXva ? count == 1 : count > 0;
             m_buttonClearAll.Enabled = count > 0;
             m_buttonSelectAll.Enabled = count < m_dataGridView.RowCount;
