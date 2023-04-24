@@ -30,6 +30,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Windows.Forms;
 using XenAPI;
 using XenAdmin.Actions;
@@ -45,6 +46,8 @@ namespace XenAdmin.Commands
     /// </summary>
     internal class NewTemplateFromSnapshotCommand : Command
     {
+        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod()?.DeclaringType);
+
         /// <summary>
         /// Initializes a new instance of this Command. The parameter-less constructor is required in the derived
         /// class if it is to be attached to a ToolStrip menu item or button. It should not be used in any other scenario.
@@ -92,11 +95,22 @@ namespace XenAdmin.Commands
 
         void action_Completed(ActionBase sender)
         {
-            AsyncAction action = (AsyncAction)sender;
-            var vm = action.Connection.Resolve(new XenRef<VM>(action.Result));
+            var action = (AsyncAction)sender;
+            VM vm = null;
+            try
+            {
+                vm = action.Connection.Resolve(new XenRef<VM>(action.Result));
+            }
+            catch (CancelledException)
+            {
+                Log.Info("User cancelled RBAC check when creating new template from snapshot.");
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
             if (vm != null)
                 new SetVMOtherConfigAction(vm.Connection, vm, "instant", "true").RunAsync();
-
         }
 
         protected override bool CanRunCore(SelectedItemCollection selection)
