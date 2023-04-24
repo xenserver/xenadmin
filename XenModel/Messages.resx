@@ -3053,12 +3053,23 @@ This will also delete its VMs.</value>
     <value>Are you sure you want to destroy '{0}'?
 
 You should only need to destroy a server if it has physically failed.
-Destroying this server will permanently remove it from the pool along with its local SRs, DVD drives and removable storage. The server will need to be reinstalled before it can be used again.
+Destroying a server will permanently remove it from the pool along with its local SRs, DVD drives and removable storage. The server will need to be reinstalled before it can be used again.
+
+This action is final and unrecoverable.</value>
+  </data>
+  <data name="CONFIRM_DESTROY_HOST_MANY" xml:space="preserve">
+    <value>Are you sure you want to destroy the selected servers?
+
+You should only need to destroy servers if they have physically failed.
+Destroying servers will permanently remove them from the pool along with their local SRs, DVD drives and removable storage. The servers will need to be reinstalled before they can be used again.
 
 This action is final and unrecoverable.</value>
   </data>
   <data name="CONFIRM_DESTROY_HOST_TITLE" xml:space="preserve">
     <value>Destroy Server</value>
+  </data>
+  <data name="CONFIRM_DESTROY_HOST_TITLE_MANY" xml:space="preserve">
+    <value>Destroy Multiple Servers</value>
   </data>
   <data name="CONFIRM_DESTROY_HOST_YES_BUTTON_LABEL" xml:space="preserve">
     <value>&amp;Yes, Destroy</value>
