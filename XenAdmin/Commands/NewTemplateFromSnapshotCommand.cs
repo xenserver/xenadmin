@@ -68,15 +68,16 @@ namespace XenAdmin.Commands
 
         protected override void RunCore(SelectedItemCollection selection)
         {
-            VM snapshot = (VM)selection[0].XenObject;
+            var snapshot = (VM)selection[0].XenObject;
 
             // Generate list of all taken VM/snapshot/template names
-            List<string> takenNames = new List<VM>(snapshot.Connection.Cache.VMs).ConvertAll(v => v.Name());
+            var takenNames = new List<VM>(snapshot.Connection.Cache.VMs).ConvertAll(v => v.Name());
 
             // Generate a unique suggested name for the new template
-            string defaultName = Helpers.MakeUniqueName(String.Format(Messages.TEMPLATE_FROM_SNAPSHOT_DEFAULT_NAME, snapshot.Name()), takenNames);
+            var defaultName = Helpers.MakeUniqueName(string.Format(Messages.TEMPLATE_FROM_SNAPSHOT_DEFAULT_NAME, snapshot.Name()), takenNames);
 
-            using (var dialog = new InputPromptDialog {
+            using (var dialog = new InputPromptDialog
+            {
                 Text = Messages.SAVE_AS_TEMPLATE,
                 PromptText = Messages.NEW_TEMPLATE_PROMPT,
                 InputText = defaultName,
@@ -85,15 +86,14 @@ namespace XenAdmin.Commands
             {
                 if (dialog.ShowDialog(Parent) == DialogResult.OK)
                 {
-                    // TODO: work out what the new description should be
-                    var action = new VMCloneAction(snapshot, dialog.InputText, "");
+                    var action = new VMCloneAction(snapshot, dialog.InputText, string.Format(Messages.TEMPLATE_FROM_SNAPSHOT_DEFAULT_DESCRIPTION, BrandManager.BrandConsole, snapshot.Name()));
                     action.Completed += action_Completed;
                     action.RunAsync();
                 }
             }
         }
 
-        void action_Completed(ActionBase sender)
+        private static void action_Completed(ActionBase sender)
         {
             var action = (AsyncAction)sender;
             VM vm = null;
@@ -118,12 +118,6 @@ namespace XenAdmin.Commands
             return selection.ContainsOneItemOfType<VM>() && selection.AtLeastOneXenObjectCan<VM>(v => v.is_a_snapshot);
         }
 
-        public override string MenuText
-        {
-            get
-            {
-                return Messages.CREATE_TEMPLATE_FROM_SNAPSHOT_MENU_ITEM;
-            }
-        }
+        public override string MenuText => Messages.CREATE_TEMPLATE_FROM_SNAPSHOT_MENU_ITEM;
     }
 }
