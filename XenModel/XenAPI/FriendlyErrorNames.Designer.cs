@@ -19,7 +19,7 @@ namespace XenAPI {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class FriendlyErrorNames {
@@ -1969,7 +1969,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The dynamic memory range violates constraint static_min &lt;= dynamic_min = dynamic_max = static_max..
+        ///   Looks up a localized string similar to The dynamic memory range violates constraint static_min = dynamic_min = dynamic_max = static_max..
         /// </summary>
         public static string MEMORY_CONSTRAINT_VIOLATION_MAXPIN {
             get {
@@ -5372,6 +5372,15 @@ namespace XenAPI {
         public static string TASK_CANCELLED {
             get {
                 return ResourceManager.GetString("TASK_CANCELLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The next scheduled telemetry data collection is too far into the future. Pick a timestamp within two telemetry intervals starting from now..
+        /// </summary>
+        public static string TELEMETRY_NEXT_COLLECTION_TOO_LATE {
+            get {
+                return ResourceManager.GetString("TELEMETRY_NEXT_COLLECTION_TOO_LATE", resourceCulture);
             }
         }
         

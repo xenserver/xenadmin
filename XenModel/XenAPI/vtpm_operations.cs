@@ -32,35 +32,19 @@ using Newtonsoft.Json;
 
 namespace XenAPI
 {
-    [JsonConverter(typeof(domain_typeConverter))]
-    public enum domain_type
+    [JsonConverter(typeof(vtpm_operationsConverter))]
+    public enum vtpm_operations
     {
         /// <summary>
-        /// HVM; Fully Virtualised
+        /// Destroy a VTPM
         /// </summary>
-        hvm,
-        /// <summary>
-        /// PV: Paravirtualised
-        /// </summary>
-        pv,
-        /// <summary>
-        /// PV inside a PVH container
-        /// </summary>
-        pv_in_pvh,
-        /// <summary>
-        /// PVH
-        /// </summary>
-        pvh,
-        /// <summary>
-        /// Not specified or unknown domain type
-        /// </summary>
-        unspecified,
+        destroy,
         unknown
     }
 
-    public static class domain_type_helper
+    public static class vtpm_operations_helper
     {
-        public static string ToString(domain_type x)
+        public static string ToString(vtpm_operations x)
         {
             return x.StringOf();
         }
@@ -68,31 +52,23 @@ namespace XenAPI
 
     public static partial class EnumExt
     {
-        public static string StringOf(this domain_type x)
+        public static string StringOf(this vtpm_operations x)
         {
             switch (x)
             {
-                case domain_type.hvm:
-                    return "hvm";
-                case domain_type.pv:
-                    return "pv";
-                case domain_type.pv_in_pvh:
-                    return "pv_in_pvh";
-                case domain_type.pvh:
-                    return "pvh";
-                case domain_type.unspecified:
-                    return "unspecified";
+                case vtpm_operations.destroy:
+                    return "destroy";
                 default:
                     return "unknown";
             }
         }
     }
 
-    internal class domain_typeConverter : XenEnumConverter
+    internal class vtpm_operationsConverter : XenEnumConverter
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            writer.WriteValue(((domain_type)value).StringOf());
+            writer.WriteValue(((vtpm_operations)value).StringOf());
         }
     }
 }

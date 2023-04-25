@@ -680,6 +680,52 @@ using System.Collections.Generic;
         }
 
 
+        internal static Dictionary<string, vtpm_operations> convert_from_proxy_string_vtpm_operations(Object o)
+        {
+            Hashtable table = (Hashtable)o;
+            Dictionary<string, vtpm_operations> result = new Dictionary<string, vtpm_operations>();
+            if (table != null)
+            {
+                foreach (string key in table.Keys)
+                {
+                    try
+                    {
+                        string k = key;
+                        vtpm_operations v = table[key] == null ? (vtpm_operations) 0 : (vtpm_operations)Helper.EnumParseDefault(typeof(vtpm_operations), (string)table[key]);
+                        result[k] = v;
+                    }
+                    catch
+                    {
+                       // continue
+                    }
+                }
+            }
+            return result;
+        }
+
+        internal static Hashtable convert_to_proxy_string_vtpm_operations(Dictionary<string, vtpm_operations> table)
+        {
+            var result = new Hashtable();
+            if (table != null)
+            {
+                foreach (string key in table.Keys)
+                {
+                    try
+                    {
+                        string k = key ?? "";
+                        string v = vtpm_operations_helper.ToString(table[key]);
+                        result[k] = v;
+                    }
+                    catch
+                    {
+                        // continue
+                    }
+                }
+            }
+            return result;
+        }
+
+
         internal static Dictionary<string, vusb_operations> convert_from_proxy_string_vusb_operations(Object o)
         {
             Hashtable table = (Hashtable)o;

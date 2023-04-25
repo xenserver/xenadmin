@@ -275,8 +275,13 @@ namespace XenAdmin.Actions.VMActions
 
         private void AssignVtpm()
         {
-            if (_assignVtpm)
-                new NewVtpmAction(Connection, VM).RunSync(Session);
+            if (!_assignVtpm)
+                return;
+
+            if (Helpers.XapiEqualOrGreater_23_10_0(Connection) && !VM.allowed_operations.Contains(vm_operations.create_vtpm))
+                return;
+
+            new NewVtpmAction(Connection, VM).RunSync(Session);
         }
 
         private void AssignVgpu()

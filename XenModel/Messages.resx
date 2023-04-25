@@ -13861,6 +13861,12 @@ Schedule:
   <data name="VTPM_ATTACHED_ONE" xml:space="preserve">
     <value>A vTPM is attached to this VM.</value>
   </data>
+  <data name="VTPM_EXPORT_UNSUPPORTED_FOR_ALL" xml:space="preserve">
+    <value>Your selection includes VMs with attached vTPMs. If you export and re-import these VMs, the vTPM data will not be preserved. Some of the VMs' security features may be deactivated and the VMs may not start.</value>
+  </data>
+  <data name="VTPM_EXPORT_UNSUPPORTED_FOR_OVF" xml:space="preserve">
+    <value>VMs with attached vTPMs can only be exported in XVA format. If you export and re-import these VMs, the vTPM data will not be preserved. Some of the VMs' security features may be deactivated and the VMs may not start.</value>
+  </data>
   <data name="VTPM_MAX_REACHED" xml:space="preserve">
     <value>The maximum number of vTPMs that can be attached to this VM is {0}.</value>
   </data>
@@ -13872,6 +13878,12 @@ Schedule:
   </data>
   <data name="VTPM_NONE_ATTACHED" xml:space="preserve">
     <value>There are no vTPMs attached to this VM.</value>
+  </data>
+  <data name="VTPM_OPERATION_DISALLOWED_ADD" xml:space="preserve">
+    <value>Attaching a new vTPM to this VM is currently not allowed.</value>
+  </data>
+  <data name="VTPM_OPERATION_DISALLOWED_REMOVE" xml:space="preserve">
+    <value>Removing this vTPM from the VM is currently not allowed.</value>
   </data>
   <data name="VTPM_POWER_STATE_WRONG_ATTACH" xml:space="preserve">
     <value>You need to shut down this VM before you can attach a new vTPM to it.</value>

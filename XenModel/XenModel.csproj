@@ -391,6 +391,7 @@
     <Compile Include="XenAPI\sriov_configuration_mode.cs" />
     <Compile Include="XenAPI\sr_health.cs" />
     <Compile Include="XenAPI\Sr_stat.cs" />
+    <Compile Include="XenAPI\telemetry_frequency.cs" />
     <Compile Include="XenAPI\tristate_type.cs" />
     <Compile Include="XenAPI\tunnel_protocol.cs" />
     <Compile Include="XenAPI\update_after_apply_guidance.cs" />
@@ -408,6 +409,7 @@
     <Compile Include="XenAPI\vmss_type.cs" />
     <Compile Include="XenAPI\VM_appliance.cs" />
     <Compile Include="XenAPI\vm_appliance_operation.cs" />
+    <Compile Include="XenAPI\vtpm_operations.cs" />
     <Compile Include="XenAPI\VUSB.cs" />
     <Compile Include="XenAPI\vusb_operations.cs" />
     <Compile Include="XenSearch\Common.cs" />

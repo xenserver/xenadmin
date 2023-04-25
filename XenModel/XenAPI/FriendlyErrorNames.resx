@@ -748,7 +748,7 @@
     <value>The dynamic memory range does not satisfy the following constraint.</value>
   </data>
   <data name="MEMORY_CONSTRAINT_VIOLATION_MAXPIN" xml:space="preserve">
-    <value>The dynamic memory range violates constraint static_min &lt;= dynamic_min = dynamic_max = static_max.</value>
+    <value>The dynamic memory range violates constraint static_min = dynamic_min = dynamic_max = static_max.</value>
   </data>
   <data name="MEMORY_CONSTRAINT_VIOLATION_ORDER" xml:space="preserve">
     <value>The dynamic memory range violates constraint static_min &lt;= dynamic_min &lt;= dynamic_max &lt;= static_max.</value>
@@ -1891,6 +1891,9 @@ Authorized Roles: {1}</value>
   </data>
   <data name="TASK_CANCELLED" xml:space="preserve">
     <value>The request was asynchronously canceled.</value>
+  </data>
+  <data name="TELEMETRY_NEXT_COLLECTION_TOO_LATE" xml:space="preserve">
+    <value>The next scheduled telemetry data collection is too far into the future. Pick a timestamp within two telemetry intervals starting from now.</value>
   </data>
   <data name="TLS_CONNECTION_FAILED" xml:space="preserve">
     <value>Cannot contact the other host using TLS on the specified address and port</value>

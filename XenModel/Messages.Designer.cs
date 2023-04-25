@@ -40130,6 +40130,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your selection includes VMs with attached vTPMs. If you export and re-import these VMs, the vTPM data will not be preserved. Some of the VMs&apos; security features may be deactivated and the VMs may not start..
+        /// </summary>
+        public static string VTPM_EXPORT_UNSUPPORTED_FOR_ALL {
+            get {
+                return ResourceManager.GetString("VTPM_EXPORT_UNSUPPORTED_FOR_ALL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VMs with attached vTPMs can only be exported in XVA format. If you export and re-import these VMs, the vTPM data will not be preserved. Some of the VMs&apos; security features may be deactivated and the VMs may not start..
+        /// </summary>
+        public static string VTPM_EXPORT_UNSUPPORTED_FOR_OVF {
+            get {
+                return ResourceManager.GetString("VTPM_EXPORT_UNSUPPORTED_FOR_OVF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The maximum number of vTPMs that can be attached to this VM is {0}..
         /// </summary>
         public static string VTPM_MAX_REACHED {
@@ -40162,6 +40180,24 @@ namespace XenAdmin {
         public static string VTPM_NONE_ATTACHED {
             get {
                 return ResourceManager.GetString("VTPM_NONE_ATTACHED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Attaching a new vTPM to this VM is currently not allowed..
+        /// </summary>
+        public static string VTPM_OPERATION_DISALLOWED_ADD {
+            get {
+                return ResourceManager.GetString("VTPM_OPERATION_DISALLOWED_ADD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Removing this vTPM from the VM is currently not allowed..
+        /// </summary>
+        public static string VTPM_OPERATION_DISALLOWED_REMOVE {
+            get {
+                return ResourceManager.GetString("VTPM_OPERATION_DISALLOWED_REMOVE", resourceCulture);
             }
         }
         

@@ -50,7 +50,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this._tlpWarning = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelWarning = new System.Windows.Forms.Label();
             this.tableLayoutPanel2.SuspendLayout();
             this.m_tlpInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -208,7 +208,7 @@
             // 
             resources.ApplyResources(this._tlpWarning, "_tlpWarning");
             this._tlpWarning.Controls.Add(this.pictureBox2, 0, 0);
-            this._tlpWarning.Controls.Add(this.label1, 1, 0);
+            this._tlpWarning.Controls.Add(this.labelWarning, 1, 0);
             this._tlpWarning.Name = "_tlpWarning";
             // 
             // pictureBox2
@@ -218,10 +218,10 @@
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.TabStop = false;
             // 
-            // label1
+            // labelWarning
             // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
+            resources.ApplyResources(this.labelWarning, "labelWarning");
+            this.labelWarning.Name = "labelWarning";
             // 
             // ExportSelectVMsPage
             // 
@@ -270,6 +270,6 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn columnVapp;
         private System.Windows.Forms.TableLayoutPanel _tlpWarning;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelWarning;
     }
 }

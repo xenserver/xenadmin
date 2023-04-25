@@ -148,7 +148,7 @@
     <value>m_ctrlError</value>
   </data>
   <data name="&gt;&gt;m_ctrlError.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.Common.PasswordFailure, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.Common.PasswordFailure, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;m_ctrlError.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
@@ -185,7 +185,7 @@ Note that only VMs that are currently shut down or suspended are listed here.</v
     <value>m_labelIntro</value>
   </data>
   <data name="&gt;&gt;m_labelIntro.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.Common.AutoHeightLabel, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.Common.AutoHeightLabel, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;m_labelIntro.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
@@ -311,7 +311,7 @@ Note that only VMs that are currently shut down or suspended are listed here.</v
     <value>autoHeightLabel1</value>
   </data>
   <data name="&gt;&gt;autoHeightLabel1.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.Common.AutoHeightLabel, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.Common.AutoHeightLabel, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;autoHeightLabel1.Parent" xml:space="preserve">
     <value>m_tlpInfo</value>
@@ -323,7 +323,7 @@ Note that only VMs that are currently shut down or suspended are listed here.</v
     <value>Fill</value>
   </data>
   <data name="m_tlpInfo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 295</value>
+    <value>3, 299</value>
   </data>
   <data name="m_tlpInfo.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
@@ -392,7 +392,7 @@ Note that only VMs that are currently shut down or suspended are listed here.</v
     <value>6, 3, 6, 3</value>
   </data>
   <data name="m_dataGridView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>567, 180</value>
+    <value>567, 184</value>
   </data>
   <data name="m_dataGridView.TabIndex" type="System.Int32, mscorlib">
     <value>102</value>
@@ -452,7 +452,7 @@ Note that only VMs that are currently shut down or suspended are listed here.</v
     <value>Fill</value>
   </data>
   <data name="tableLayoutPanel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 260</value>
+    <value>3, 264</value>
   </data>
   <data name="tableLayoutPanel3.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
@@ -500,7 +500,7 @@ Note that only VMs that are currently shut down or suspended are listed here.</v
     <value>m_searchTextBox</value>
   </data>
   <data name="&gt;&gt;m_searchTextBox.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.SearchTextBox, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.SearchTextBox, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;m_searchTextBox.Parent" xml:space="preserve">
     <value>tableLayoutPanel4</value>
@@ -598,47 +598,47 @@ Note that only VMs that are currently shut down or suspended are listed here.</v
   <data name="&gt;&gt;pictureBox2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+  <data name="labelWarning.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="label1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="labelWarning.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="labelWarning.Location" type="System.Drawing.Point, System.Drawing">
     <value>25, 0</value>
   </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>545, 26</value>
+  <data name="labelWarning.Size" type="System.Drawing.Size, System.Drawing">
+    <value>545, 22</value>
   </data>
-  <data name="label1.TabIndex" type="System.Int32, mscorlib">
+  <data name="labelWarning.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>Exporting VMs with attached vTPMs is not supported. If you export and re-import these VMs, some of their security features may be deactivated and the VMs may not start.</value>
+  <data name="labelWarning.Text" xml:space="preserve">
+    <value>labelWarning</value>
   </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
-    <value>label1</value>
+  <data name="&gt;&gt;labelWarning.Name" xml:space="preserve">
+    <value>labelWarning</value>
   </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelWarning.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelWarning.Parent" xml:space="preserve">
     <value>_tlpWarning</value>
   </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelWarning.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="_tlpWarning.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
   <data name="_tlpWarning.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 327</value>
+    <value>3, 331</value>
   </data>
   <data name="_tlpWarning.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="_tlpWarning.Size" type="System.Drawing.Size, System.Drawing">
-    <value>573, 26</value>
+    <value>573, 22</value>
   </data>
   <data name="_tlpWarning.TabIndex" type="System.Int32, mscorlib">
     <value>105</value>
@@ -656,7 +656,7 @@ Note that only VMs that are currently shut down or suspended are listed here.</v
     <value>6</value>
   </data>
   <data name="_tlpWarning.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="pictureBox2" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="pictureBox2" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelWarning" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="tableLayoutPanel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -731,6 +731,6 @@ Note that only VMs that are currently shut down or suspended are listed here.</v
     <value>ExportSelectVMsPage</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.XenTabPage, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.XenTabPage, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

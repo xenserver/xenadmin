@@ -1116,6 +1116,13 @@ namespace XenAPI
             return Rpc<string>("pool.get_repository_proxy_username", new JArray(session, _pool ?? ""), serializer);
         }
 
+        public XenRef<Secret> pool_get_repository_proxy_password(string session, string _pool)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Secret>()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<XenRef<Secret>>("pool.get_repository_proxy_password", new JArray(session, _pool ?? ""), serializer);
+        }
+
         public bool pool_get_migration_compression(string session, string _pool)
         {
             var converters = new List<JsonConverter> {};
@@ -1128,6 +1135,27 @@ namespace XenAPI
             var converters = new List<JsonConverter> {};
             var serializer = CreateSerializer(converters);
             return Rpc<bool>("pool.get_coordinator_bias", new JArray(session, _pool ?? ""), serializer);
+        }
+
+        public XenRef<Secret> pool_get_telemetry_uuid(string session, string _pool)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Secret>()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<XenRef<Secret>>("pool.get_telemetry_uuid", new JArray(session, _pool ?? ""), serializer);
+        }
+
+        public telemetry_frequency pool_get_telemetry_frequency(string session, string _pool)
+        {
+            var converters = new List<JsonConverter> {new telemetry_frequencyConverter()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<telemetry_frequency>("pool.get_telemetry_frequency", new JArray(session, _pool ?? ""), serializer);
+        }
+
+        public DateTime pool_get_telemetry_next_collection(string session, string _pool)
+        {
+            var converters = new List<JsonConverter> {new XenDateTimeConverter()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<DateTime>("pool.get_telemetry_next_collection", new JArray(session, _pool ?? ""), serializer);
         }
 
         public void pool_set_name_label(string session, string _pool, string _name_label)
@@ -2143,6 +2171,34 @@ namespace XenAPI
             var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
             var serializer = CreateSerializer(converters);
             return Rpc<XenRef<Task>>("Async.pool.set_https_only", new JArray(session, _pool ?? "", _value), serializer);
+        }
+
+        public void pool_set_telemetry_next_collection(string session, string _pool, DateTime _value)
+        {
+            var converters = new List<JsonConverter> {new XenDateTimeConverter()};
+            var serializer = CreateSerializer(converters);
+            Rpc("pool.set_telemetry_next_collection", new JArray(session, _pool ?? "", _value), serializer);
+        }
+
+        public XenRef<Task> async_pool_set_telemetry_next_collection(string session, string _pool, DateTime _value)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>(), new XenDateTimeConverter()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<XenRef<Task>>("Async.pool.set_telemetry_next_collection", new JArray(session, _pool ?? "", _value), serializer);
+        }
+
+        public void pool_reset_telemetry_uuid(string session, string _pool)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            Rpc("pool.reset_telemetry_uuid", new JArray(session, _pool ?? ""), serializer);
+        }
+
+        public XenRef<Task> async_pool_reset_telemetry_uuid(string session, string _pool)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<XenRef<Task>>("Async.pool.reset_telemetry_uuid", new JArray(session, _pool ?? ""), serializer);
         }
 
         public List<XenRef<Pool>> pool_get_all(string session)
@@ -11936,6 +11992,20 @@ namespace XenAPI
             var converters = new List<JsonConverter> {};
             var serializer = CreateSerializer(converters);
             return Rpc<string>("VTPM.get_uuid", new JArray(session, _vtpm ?? ""), serializer);
+        }
+
+        public List<vtpm_operations> vtpm_get_allowed_operations(string session, string _vtpm)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            return Rpc<List<vtpm_operations>>("VTPM.get_allowed_operations", new JArray(session, _vtpm ?? ""), serializer);
+        }
+
+        public Dictionary<string, vtpm_operations> vtpm_get_current_operations(string session, string _vtpm)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = CreateSerializer(converters);
+            return Rpc<Dictionary<string, vtpm_operations>>("VTPM.get_current_operations", new JArray(session, _vtpm ?? ""), serializer);
         }
 
         public XenRef<VM> vtpm_get_vm(string session, string _vtpm)
