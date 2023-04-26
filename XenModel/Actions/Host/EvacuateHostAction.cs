@@ -132,7 +132,7 @@ namespace XenAdmin.Actions
                                         {
                                             try
                                             {
-                                                RelatedTask = XenAPI.VM.async_live_migrate(Session, rec.Vm.opaque_ref, toHost.opaque_ref);
+                                                RelatedTask = VM.async_pool_migrate(Session, rec.Vm.opaque_ref, toHost.opaque_ref, new Dictionary<string, string> { ["live"] = "true" });
                                                 PollToCompletion(start, start + each);
                                                 start += each;
                                                 break;

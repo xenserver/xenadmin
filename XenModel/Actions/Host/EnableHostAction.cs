@@ -79,21 +79,21 @@ namespace XenAdmin.Actions
 
                     foreach (VM vm in migratedVMs)
                     {
-                        RelatedTask = XenAPI.VM.async_live_migrate(Session, vm.opaque_ref, Host.opaque_ref);
+                        RelatedTask = VM.async_pool_migrate(Session, vm.opaque_ref, Host.opaque_ref, new Dictionary<string, string> { ["live"] = "true" });
                         PollToCompletion(start, start + each);
                         start += each;
                     }
 
                     foreach (VM vm in haltedVMs)
                     {
-                        RelatedTask = XenAPI.VM.async_start_on(Session, vm.opaque_ref, Host.opaque_ref, false, false);
+                        RelatedTask = VM.async_start_on(Session, vm.opaque_ref, Host.opaque_ref, false, false);
                         PollToCompletion(start, start + each);
                         start += each;
                     }
 
                     foreach (VM vm in suspendedVMs)
                     {
-                        RelatedTask = XenAPI.VM.async_resume_on(Session, vm.opaque_ref, Host.opaque_ref, false, false);
+                        RelatedTask = VM.async_resume_on(Session, vm.opaque_ref, Host.opaque_ref, false, false);
                         PollToCompletion(start, start + each);
                         start += each;
                     }

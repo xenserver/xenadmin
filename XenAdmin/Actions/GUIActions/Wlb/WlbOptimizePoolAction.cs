@@ -36,9 +36,8 @@ using XenAdmin.Core;
 using XenAdmin.Wlb;
 using XenAdmin.Dialogs;
 using XenAPI;
-using XenAdmin.Actions.VMActions;
-
 using XenAdmin.Actions.HostActions;
+using XenAdmin.Actions.VMActions;
 
 namespace XenAdmin.Actions.Wlb
 {
@@ -360,7 +359,7 @@ namespace XenAdmin.Actions.Wlb
         /// <param name="recommendationId">recommendation id</param>
         private static void DoAction(AsyncAction action, VM vm, Host host, int start, int end, int recommendationId)
         {
-            action.RelatedTask = XenAPI.VM.async_live_migrate(action.Session, vm.opaque_ref, host.opaque_ref);
+            action.RelatedTask = VM.async_pool_migrate(action.Session, vm.opaque_ref, host.opaque_ref, new Dictionary<string, string> { ["live"] = "true" });
 
             if (recommendationId != 0)
             {
