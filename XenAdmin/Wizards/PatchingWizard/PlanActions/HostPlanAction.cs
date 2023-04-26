@@ -164,8 +164,8 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                         log.DebugFormat("Migrating VM '{0}' back to Host '{1}'", vm.Name(), hostObj.Name());
 
                         PollTaskForResultAndDestroy(Connection, ref session,
-                            VM.async_live_migrate(session, vm.opaque_ref, HostXenRef.opaque_ref),
-                            (vmNumber * 100) / vmCount, ((vmNumber + 1) * 100) / vmCount);
+                            VM.async_pool_migrate(session, vm.opaque_ref, HostXenRef.opaque_ref, new Dictionary<string, string> { ["live"] = "true" }),
+                            vmNumber * 100 / vmCount, (vmNumber + 1) * 100 / vmCount);
 
                         vmNumber++;
                     }

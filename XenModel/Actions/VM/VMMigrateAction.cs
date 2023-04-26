@@ -29,6 +29,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using XenAPI;
 using XenAdmin.Core;
 
@@ -51,12 +52,13 @@ namespace XenAdmin.Actions.VMActions
                 ? string.Format(Messages.ACTION_VM_MIGRATING_NON_RESIDENT, vm.NameWithLocation(), Host.NameWithLocation())
                 : string.Format(Messages.ACTION_VM_MIGRATING_RESIDENT, vm.Name(), residentOn.NameWithLocation(), Host.NameWithLocation());
 
-            ApiMethodsToRoleCheck.Add("VM.async_live_migrate");
+            ApiMethodsToRoleCheck.Add("VM.async_pool_migrate");
         }
 
         protected override void Run()
         {
-            RelatedTask = VM.async_live_migrate(Session, VM.opaque_ref, Host.opaque_ref);
+            RelatedTask = VM.async_pool_migrate(Session, VM.opaque_ref, Host.opaque_ref, new Dictionary<string, string> { ["live"] = "true" });
+
             try
             {
                 PollToCompletion();

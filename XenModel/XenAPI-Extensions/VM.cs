@@ -998,13 +998,6 @@ namespace XenAPI
             return Util.TryParseIso8601DateTime(importDate, out var result) ? result : DateTime.MinValue;
         }
 
-        public static XenRef<Task> async_live_migrate(Session session, string _vm, string _host)
-        {
-            Dictionary<string, string> options = new Dictionary<string, string>();
-            options["live"] = "true";
-            return XenAPI.VM.async_pool_migrate(session, _vm, _host, options);
-        }
-
         public String GetOSName()
         {
             VM_guest_metrics guestMetrics = Connection.Resolve(guest_metrics);
