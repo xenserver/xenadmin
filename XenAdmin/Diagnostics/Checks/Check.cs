@@ -60,7 +60,7 @@ namespace XenAdmin.Diagnostics.Checks
         }
 
         public abstract string Description { get; }
-        public abstract IXenObject XenObject { get; }
+        public abstract IList<IXenObject> XenObjects { get; }
 
         public virtual string SuccessfulCheckDescription =>
             string.IsNullOrEmpty(Description)
@@ -73,7 +73,6 @@ namespace XenAdmin.Diagnostics.Checks
         }
     }
 
-
     public abstract class PoolCheck : Check
     {
         protected PoolCheck(Pool pool)
@@ -83,7 +82,7 @@ namespace XenAdmin.Diagnostics.Checks
 
         protected Pool Pool { get; }
 
-        public sealed override IXenObject XenObject => Pool;
+        public sealed override IList<IXenObject> XenObjects => new IXenObject[] { Pool };
 
         public override string SuccessfulCheckDescription =>
             string.IsNullOrEmpty(Description)
@@ -102,7 +101,7 @@ namespace XenAdmin.Diagnostics.Checks
 
         protected Host Host { get; }
 
-        public sealed override IXenObject XenObject => Host;
+        public sealed override IList<IXenObject> XenObjects => new IXenObject[] { Host };
 
         public override string SuccessfulCheckDescription =>
             string.IsNullOrEmpty(Description)
