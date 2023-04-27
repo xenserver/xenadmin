@@ -242,7 +242,7 @@ namespace XenAdmin.Dialogs
                 vbd.unpluggable = true;
 
                 // Try to hot plug the VBD.
-                var action = new VbdSaveAndPlugAction(TheVM, vbd, TheVDI.Name(), null, false);
+                var action = new VbdCreateAndPlugAction(TheVM, vbd, TheVDI.Name(), false);
                 action.ShowUserInstruction += Action_ShowUserInstruction;
                 action.RunAsync();
             });
