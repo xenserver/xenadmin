@@ -226,8 +226,10 @@ namespace XenAdmin.Wizards.PatchingWizard
                     // this host is no longer live -> remove all previous problems regarding this host
                     Problem curProblem = problem;
                     ProblemsResolvedPreCheck.RemoveAll(p =>
-                        p.Check != null && p.Check.XenObject != null && curProblem.Check != null &&
-                        p.Check.XenObject.Equals(curProblem.Check.XenObject));
+                        p.Check?.XenObjects != null && p.Check.XenObjects.Count > 0 &&
+                        curProblem.Check?.XenObjects != null && curProblem.Check.XenObjects.Count > 0 &&
+                        p.Check.XenObjects.SequenceEqual(curProblem.Check.XenObjects)
+                    );
                 }
 
                 if (ProblemsResolvedPreCheck.Contains(problem))

@@ -28,6 +28,7 @@
  * SUCH DAMAGE.
  */
 
+using System.Collections.Generic;
 using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Core;
 using XenAPI;
@@ -36,7 +37,7 @@ namespace XenAdmin.Diagnostics.Checks
 {
     public class ClientVersionCheck : Check
     {
-        private XenServerVersion _newServerVersion;
+        private readonly XenServerVersion _newServerVersion;
 
         public ClientVersionCheck(XenServerVersion newServerVersion)
         {
@@ -56,6 +57,6 @@ namespace XenAdmin.Diagnostics.Checks
 
         public override string Description => string.Format(Messages.XENCENTER_VERSION_CHECK_DESCRIPTION, BrandManager.BrandConsole);
 
-        public override IXenObject XenObject => null;
+        public override IList<IXenObject> XenObjects => null;
     }
 }
