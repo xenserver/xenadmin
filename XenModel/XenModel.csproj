@@ -138,7 +138,7 @@
     <Compile Include="Actions\USB\DeleteVUSBAction.cs" />
     <Compile Include="Actions\USB\SetUsbPassthroughAction.cs" />
     <Compile Include="Actions\VBD\VbdEditAction.cs" />
-    <Compile Include="Actions\VBD\VbdSaveAndPlugAction.cs" />
+    <Compile Include="Actions\VBD\VbdCreateAndPlugAction.cs" />
     <Compile Include="Actions\DR\VdiOpenDatabaseAction.cs" />
     <Compile Include="Actions\VDI\CreateDiskAction.cs" />
     <Compile Include="Actions\VDI\MigrateVirtualDiskAction.cs" />
