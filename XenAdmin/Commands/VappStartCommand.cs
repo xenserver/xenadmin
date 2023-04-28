@@ -91,17 +91,10 @@ namespace XenAdmin.Commands
             {
                 return;
             }
-
-            var maxVCpusCount = appsToStart.First()
-                .Connection
-                .ResolveAll(appsToStart.SelectMany(app => app.VMs))
-                .Select(vm => vm.VCPUs_at_startup)
-                .Max();
-
+            
             foreach (var app in appsToStart)
             {
-                
-                (new StartApplianceAction(app, false)).RunAsync();
+                new StartApplianceAction(app, false).RunAsync();
             }
         }
 
