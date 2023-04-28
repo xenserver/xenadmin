@@ -94,7 +94,7 @@ namespace XenAdmin.Dialogs
             {
                 Exception delegateException = null;
                 log.Debug("Testing logging in with the new credentials");
-                DelegatedAsyncAction loginAction = new DelegatedAsyncAction(connection, 
+                var loginAction = new DelegatedAsyncAction(connection, 
                     Messages.AUTHORIZING_USER, 
                     Messages.CREDENTIALS_CHECKING, 
                     Messages.CREDENTIALS_CHECK_COMPLETE, 
@@ -108,7 +108,7 @@ namespace XenAdmin.Dialogs
                     {
                         delegateException = ex;
                     }
-                });
+                }, true);
 
                 using (var dlg = new ActionProgressDialog(loginAction, ProgressBarStyle.Marquee) {ShowTryAgainMessage = false})
                     dlg.ShowDialog(this);
