@@ -60,6 +60,12 @@ namespace XenAdmin.Wizards.PatchingWizard
         private AsyncAction resolvePrechecksAction;
         private List<DataGridViewRow> allRows = new List<DataGridViewRow>();
 
+        /// <summary>
+        /// Dictionary that contains checks that whose state we want to preserve across check runs.
+        /// You should only interact with it using the <see cref="GetPermanentCheck"/> method.
+        /// </summary>
+        private readonly Dictionary<string, Check> _permanentChecks = new Dictionary<string, Check>();
+
         private bool _isRecheckQueued;
         public Dictionary<Pool_update, Dictionary<Host, SR>> SrUploadedUpdates = new Dictionary<Pool_update, Dictionary<Host, SR>>();
 
@@ -429,6 +435,29 @@ namespace XenAdmin.Wizards.PatchingWizard
             groups.Add(new CheckGroup(Messages.CHECKING_FOR_PENDING_RESTART, restartChecks));
 
             return groups;
+        }
+
+
+        /// <summary>
+        /// Returns a permanent <see cref="Check"/> with the given name and default object if it exists in the <see cref="Dictionary{TKey,TValue}"/> of permanent <see cref="Check"/>s;
+        /// otherwise, adds the default object to the dictionary and returns it.
+        /// <br /><br />
+        /// Use it to fetch <see cref="Check"/> instances that you want to re-use across check runs. This is especially useful when the conditions for the <see cref="Check"/>'s <see cref="Problem"/>s are not stored in the xenObjects, but are a property of the check itself. For instance, if you rely on the use of <see cref="Check.Completed"/>.
+        /// <br /><br />
+        /// If your  <see cref="Check"/> has custom properties, ensure they're considered in the Equals and GetHashCode overrides, and that the same is done for any <see cref="Problem"/>s it returns. By default, only the list of <see cref="IXenObject"/>s associated with the <see cref="Check"/> and <see cref="Problem"/> is checked for updates.
+         /// </summary>
+        /// <param name="name">A unique identifier for the check</param>
+        /// <param name="defaultObject">The default <see cref="Check"/>  to return if the named <see cref="Check"/> is not found in the <see cref="Dictionary{TKey,TValue}"/>.</param>
+        /// <returns></returns>
+        protected Check GetPermanentCheck(string name, Check defaultObject)
+        {
+            if (!_permanentChecks.TryGetValue(name, out var checkValue) || 
+                !checkValue.Equals(defaultObject))
+            {
+                _permanentChecks[name] = defaultObject;
+            }
+
+            return _permanentChecks[name];
         }
 
         protected virtual List<CheckGroup> GenerateChecks(Pool_update update)

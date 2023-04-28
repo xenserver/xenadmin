@@ -45,6 +45,8 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 {
     public partial class RollingUpgradeWizardPrecheckPage : PatchingWizard_PrecheckPage
     {
+        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod()?.DeclaringType);
+
         public RollingUpgradeWizardPrecheckPage()
         {
             InitializeComponent();
@@ -252,6 +254,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             var haChecks = (from Host server in SelectedCoordinators
                 select new HAOffCheck(server) as Check).ToList();
 
+
             if (haChecks.Count > 0) 
                 groups.Add(new CheckGroup(Messages.CHECKING_HA_STATUS, haChecks));
 
@@ -293,6 +296,27 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
             if (deprecatedSRsChecks.Count > 0)
                 groups.Add(new CheckGroup(Messages.CHECKING_DEPRECATED_SRS, deprecatedSRsChecks));
+
+
+            // EUA check
+            if (InstallMethodConfig != null && InstallMethodConfig.TryGetValue("url", out var uriText))
+            {
+                Uri targetUri = null;
+                try
+                {
+                    targetUri = new Uri(uriText);
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex);
+                }
+
+                var euaCheck = GetPermanentCheck("EUA", new UpgradeRequiresEua(hostsToUpgrade, targetUri));
+
+                var euaChecks = new List<Check> { euaCheck };
+
+                groups.Add(new CheckGroup(Messages.ACCEPT_EUA_CHECK_GROUP_NAME, euaChecks));
+            }
 
             return groups;
         }
