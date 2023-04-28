@@ -117,6 +117,24 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ACCEPT_EUA_CANNOT_FETCH" xml:space="preserve">
+    <value>{0} encountered an issue while trying to fetch the EUA. Ensure that the selected source URI is valid and that all the pool coordinators can access its contents.</value>
+  </data>
+  <data name="ACCEPT_EUA_CHECK_DESCRIPTION" xml:space="preserve">
+    <value>Checking for the presence of an EUA</value>
+  </data>
+  <data name="ACCEPT_EUA_CHECK_GROUP_NAME" xml:space="preserve">
+    <value>Looking for an EUA to be accepted</value>
+  </data>
+  <data name="ACCEPT_EUA_MORE_THAN_ONE_FOUND" xml:space="preserve">
+    <value>More than one EUA was fetched. Please ensure you have read all of them before accepting.</value>
+  </data>
+  <data name="ACCEPT_EUA_PROBLEM_DESCRIPTION" xml:space="preserve">
+    <value>You must accept the End User Agreement (EUA)</value>
+  </data>
+  <data name="ACCEPT_EUA_PROBLEM_HELP_MESSAGE" xml:space="preserve">
+    <value>See EUA...</value>
+  </data>
   <data name="ACTION_ACTIVATING_MULTIPLE_VDIS_STATUS" xml:space="preserve">
     <value>Activating virtual disks...</value>
   </data>
