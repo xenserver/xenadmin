@@ -61,6 +61,60 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} encountered an issue while trying to fetch the EUA. Ensure that the selected source URI is valid and that all the pool coordinators can access its contents..
+        /// </summary>
+        public static string ACCEPT_EUA_CANNOT_FETCH {
+            get {
+                return ResourceManager.GetString("ACCEPT_EUA_CANNOT_FETCH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checking for the presence of an EUA.
+        /// </summary>
+        public static string ACCEPT_EUA_CHECK_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("ACCEPT_EUA_CHECK_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Looking for an EUA to be accepted.
+        /// </summary>
+        public static string ACCEPT_EUA_CHECK_GROUP_NAME {
+            get {
+                return ResourceManager.GetString("ACCEPT_EUA_CHECK_GROUP_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to More than one EUA was fetched. Please ensure you have read all of them before accepting..
+        /// </summary>
+        public static string ACCEPT_EUA_MORE_THAN_ONE_FOUND {
+            get {
+                return ResourceManager.GetString("ACCEPT_EUA_MORE_THAN_ONE_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must accept the End User Agreement (EUA).
+        /// </summary>
+        public static string ACCEPT_EUA_PROBLEM_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("ACCEPT_EUA_PROBLEM_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to See EUA....
+        /// </summary>
+        public static string ACCEPT_EUA_PROBLEM_HELP_MESSAGE {
+            get {
+                return ResourceManager.GetString("ACCEPT_EUA_PROBLEM_HELP_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Activating virtual disks....
         /// </summary>
         public static string ACTION_ACTIVATING_MULTIPLE_VDIS_STATUS {
