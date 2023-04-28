@@ -25791,7 +25791,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter a &amp;name for new template:.
+        ///   Looks up a localized string similar to Enter a &amp;name for the new template:.
         /// </summary>
         public static string NEW_TEMPLATE_PROMPT {
             get {

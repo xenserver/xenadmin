@@ -8989,7 +8989,7 @@ It is strongly recommended that you Cancel and apply the latest version of the p
     <value>Edit tags...</value>
   </data>
   <data name="NEW_TEMPLATE_PROMPT" xml:space="preserve">
-    <value>Enter a &amp;name for new template:</value>
+    <value>Enter a &amp;name for the new template:</value>
   </data>
   <data name="NEW_UPDATE_AVAILABLE" xml:space="preserve">
     <value>New Update Available - {0}</value>
