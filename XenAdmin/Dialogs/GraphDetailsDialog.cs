@@ -208,7 +208,7 @@ namespace XenAdmin.Dialogs
 
         private void getDataSourcesAction_Completed(ActionBase sender)
         {
-            if (!(sender is GetDataSourcesAction action))
+            if (!(sender is GetDataSourcesAction action) || !action.Succeeded)
                 return;
 
             Program.Invoke(this, () =>

@@ -95,20 +95,10 @@ namespace XenAdmin.Commands
 
         private static void action_Completed(ActionBase sender)
         {
-            var action = (AsyncAction)sender;
-            VM vm = null;
-            try
-            {
-                vm = action.Connection.Resolve(new XenRef<VM>(action.Result));
-            }
-            catch (CancelledException)
-            {
-                Log.Info("User cancelled RBAC check when creating new template from snapshot.");
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex);
-            }
+            if (!sender.Succeeded || !(sender is AsyncAction action))
+                return;
+
+            var vm = action.Connection.Resolve(new XenRef<VM>(action.Result));
             if (vm != null)
                 new SetVMOtherConfigAction(vm.Connection, vm, "instant", "true").RunAsync();
         }

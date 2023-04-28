@@ -142,12 +142,9 @@ namespace XenAdmin.Commands
 
         private void RestoreAction_Completed(ActionBase sender)
         {
-            HostBackupRestoreAction action = (HostBackupRestoreAction)sender;
-            
-            if (!action.Succeeded)
+            if (!(sender is HostBackupRestoreAction action) || !action.Succeeded)
             {
-                // Do nothing - failure will be reflected in the logs tab.
-                return;
+               return;
             }
 
             MainWindowCommandInterface.Invoke(delegate

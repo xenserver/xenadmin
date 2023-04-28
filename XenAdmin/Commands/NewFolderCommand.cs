@@ -136,11 +136,9 @@ namespace XenAdmin.Commands
         {
             sender.Completed -= Action_Completed;
 
-            var action = sender as CreateFolderAction;
-            if (action != null && action.Succeeded)
+            if (sender is CreateFolderAction action && action.Succeeded)
             {
-                if (FoldersCreated != null)
-                    FoldersCreated(action.NewPaths);
+                FoldersCreated?.Invoke(action.NewPaths);
 
                 Program.MainWindow.TrySelectNewNode(delegate(object o)
                 {

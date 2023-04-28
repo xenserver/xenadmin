@@ -491,19 +491,15 @@ namespace XenAdmin.Wizards.DRWizards
             Thread.Sleep(1000);
             Program.Invoke(Program.MainWindow, RefreshRechecks);
 
-            var drTaskCreateAction = sender as DrTaskCreateAction;
-            if (drTaskCreateAction != null && drTaskCreateAction.Succeeded)
+            if (sender is DrTaskCreateAction drTaskCreateAction && drTaskCreateAction.Succeeded)
             {
-                if (NewDrTaskIntroduced != null)
-                    NewDrTaskIntroduced(drTaskCreateAction.Result);
+                NewDrTaskIntroduced?.Invoke(drTaskCreateAction.Result);
                 return;
             }
 
-            var srIntroduceAction = sender as SrIntroduceAction;
-            if (srIntroduceAction != null && srIntroduceAction.Succeeded)
+            if (sender is SrIntroduceAction srIntroduceAction && srIntroduceAction.Succeeded)
             {
-                if (SrIntroduced != null)
-                    SrIntroduced(new XenRef<SR>(srIntroduceAction.Result));
+                SrIntroduced?.Invoke(new XenRef<SR>(srIntroduceAction.Result));
             }
         }
 
