@@ -100,6 +100,7 @@ namespace XenAdmin.Controls.CustomDataGraph
                 case "misses/s":
                 case "err/s":
                 case "sessions/s":
+                case "reads/s":
                     CustomYRange = new DataRange(1, 0, 1, Unit.CountsPerSecond, RangeScaleMode.Auto);
                     break;
                 case "s/s":
