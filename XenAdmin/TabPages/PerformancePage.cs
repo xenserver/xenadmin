@@ -416,7 +416,7 @@ namespace XenAdmin.TabPages
 
         private void SaveGraphs(ActionBase sender)
         {
-            if (!(sender is GetDataSourcesAction action) || !action.Succeeded)
+            if (!(sender is GetDataSourcesAction action))
                 return;
 
             Program.Invoke(Program.MainWindow, () =>

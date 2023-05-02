@@ -594,7 +594,7 @@ namespace XenAdmin.Controls.Wlb
         /// </summary>
         protected void OptRecRetrieveAction_Completed(ActionBase sender)
         {
-            if (!(sender is WlbRetrieveRecommendationsAction asyncAction) || !action.IsCompleted)
+            if (!(sender is WlbRetrieveRecommendationsAction asyncAction))
                 return;
 
             asyncAction.Completed -= OptRecRetrieveAction_Completed;
