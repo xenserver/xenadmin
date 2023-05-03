@@ -30,9 +30,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
-using System.Net;
 using System.Threading;
 using System.Xml;
 using XenAPI;
@@ -91,7 +91,7 @@ namespace XenAdmin.Controls.CustomDataGraph
         private long _stepSize;
         private long _currentTime;
         private int _valueCount;
-        private string _lastNode = "";
+        private string _lastNode = string.Empty;
 
         public IXenObject XenObject { get; }
 
@@ -262,12 +262,9 @@ namespace XenAdmin.Controls.CustomDataGraph
                     }
                 }
             }
-            catch (WebException)
-            {
-            }
             catch (Exception e)
             {
-                Log.Debug($"ArchiveMaintainer: Get updates for {(xenObject is Host ? "Host" : "VM")}: {(xenObject != null ? xenObject.opaque_ref : Helper.NullOpaqueRef)} Failed.", e);
+                Log.Warn($"Get updates for {(xenObject is Host ? "Host" : "VM")}: {(xenObject != null ? xenObject.opaque_ref : Helper.NullOpaqueRef)} Failed.", e);
             }
         }
 
@@ -283,20 +280,23 @@ namespace XenAdmin.Controls.CustomDataGraph
             var startTime = TimeFromInterval(interval);
             var duration = ToSeconds(interval);
 
-            if (xo is Host host)
+            switch (xo)
             {
-                return BuildUri(host, "rrd_updates",
-                    $"session_id={escapedRef}&start={startTime}&cf=AVERAGE&interval={duration}&host=true");
+                case Host host:
+                    return BuildUri(host, "rrd_updates",
+                        $"session_id={escapedRef}&start={startTime}&cf=AVERAGE&interval={duration}&host=true");
+                case VM vm:
+                {
+                    var vmHost = vm.Connection.Resolve(vm.resident_on) ?? Helpers.GetCoordinator(vm.Connection);
+                    return BuildUri(vmHost, "rrd_updates",
+                        $"session_id={escapedRef}&start={startTime}&cf=AVERAGE&interval={duration}&vm_uuid={vm.uuid}");
+                }
+                default:
+                    const string issue = "ArchiveMaintainer.UpdateUri was given an invalid XenObject. Only Hosts and VMs are supported.";
+                    Log.Warn(issue);
+                    Debug.Assert(false, issue);
+                    return null;
             }
-
-            if (xo is VM vm)
-            {
-                var vmHost = vm.Connection.Resolve(vm.resident_on) ?? Helpers.GetCoordinator(vm.Connection);
-                return BuildUri(vmHost, "rrd_updates",
-                    $"session_id={escapedRef}&start={startTime}&cf=AVERAGE&interval={duration}&vm_uuid={vm.uuid}");
-            }
-
-            return null;
         }
 
         private static Uri RrdsUri(ArchiveInterval interval, IXenObject xo)
@@ -307,16 +307,21 @@ namespace XenAdmin.Controls.CustomDataGraph
 
             var escapedRef = Uri.EscapeDataString(sessionRef);
 
-            if (xo is Host host)
-                return BuildUri(host, "host_rrds", $"session_id={escapedRef}");
-
-            if (xo is VM vm)
+            switch (xo)
             {
-                var vmHost = vm.Connection.Resolve(vm.resident_on) ?? Helpers.GetCoordinator(vm.Connection);
-                return BuildUri(vmHost, "vm_rrds", $"session_id={escapedRef}&uuid={vm.uuid}");
+                case Host host:
+                    return BuildUri(host, "host_rrds", $"session_id={escapedRef}");
+                case VM vm:
+                {
+                    var vmHost = vm.Connection.Resolve(vm.resident_on) ?? Helpers.GetCoordinator(vm.Connection);
+                    return BuildUri(vmHost, "vm_rrds", $"session_id={escapedRef}&uuid={vm.uuid}");
+                }
+                default:
+                    const string issue = "ArchiveMaintainer.UpdateUri was given an invalid XenObject. Only Hosts and VMs are supported.";
+                    Log.Warn(issue);
+                    Debug.Assert(false, issue);
+                    return null;
             }
-
-            return null;
         }
 
         private static Uri BuildUri(Host host, string path, string query)
@@ -338,85 +343,99 @@ namespace XenAdmin.Controls.CustomDataGraph
 
         private void RRD_Full_InspectCurrentNode(XmlReader reader, IXenObject xmo)
         {
-            if (reader.NodeType == XmlNodeType.Element)
+            switch (reader.NodeType)
             {
-                _lastNode = reader.Name;
-                if (_lastNode == "row")
+                case XmlNodeType.Element:
                 {
-                    _currentTime += _currentInterval * _stepSize * TICKS_IN_ONE_SECOND;
-                    _valueCount = 0;
-                }
-            }
-
-            if (reader.NodeType == XmlNodeType.EndElement)
-            {
-                _lastNode = reader.Name;
-                if (_lastNode == "rra")
-                {
-                    if (_bailOut)
+                    _lastNode = reader.Name;
+                    if (_lastNode == "row")
                     {
-                        _bailOut = false;
-                        return;
+                        _currentTime += _currentInterval * _stepSize * TICKS_IN_ONE_SECOND;
+                        _valueCount = 0;
                     }
 
-                    var i = GetArchiveIntervalFromFiveSecs(_currentInterval);
-                    if (i != ArchiveInterval.None)
-                        Archives[i].CopyLoad(_setsAdded, _dataSources);
+                    break;
+                }
+                case XmlNodeType.EndElement:
+                {
+                    _lastNode = reader.Name;
+                    if (_lastNode == "rra")
+                    {
+                        if (_bailOut)
+                        {
+                            _bailOut = false;
+                            return;
+                        }
 
-                    foreach (var set in _setsAdded)
-                        set.Points.Clear();
-                    _bailOut = false;
+                        var i = GetArchiveIntervalFromFiveSecs(_currentInterval);
+                        if (i != ArchiveInterval.None)
+                            Archives[i].CopyLoad(_setsAdded, _dataSources);
+
+                        foreach (var set in _setsAdded)
+                            set.Points.Clear();
+                        _bailOut = false;
+                    }
+
+                    break;
                 }
             }
 
             if (reader.NodeType != XmlNodeType.Text)
                 return;
 
-            if (_lastNode == "name")
+            switch (_lastNode)
             {
-                var str = reader.ReadContentAsString();
-                _setsAdded.Add(new DataSet(xmo, false, str, _dataSources));
-            }
-            else if (_lastNode == "step")
-            {
-                var str = reader.ReadContentAsString();
-                _stepSize = long.Parse(str, CultureInfo.InvariantCulture);
-            }
-            else if (_lastNode == "lastupdate")
-            {
-                var str = reader.ReadContentAsString();
-                _endTime = long.Parse(str, CultureInfo.InvariantCulture);
-            }
-            else if (_lastNode == "pdp_per_row")
-            {
-                var str = reader.ReadContentAsString();
-                _currentInterval = long.Parse(str, CultureInfo.InvariantCulture);
+                case "name":
+                {
+                    var str = reader.ReadContentAsString();
+                    _setsAdded.Add(new DataSet(xmo, false, str, _dataSources));
+                    break;
+                }
+                case "step":
+                {
+                    var str = reader.ReadContentAsString();
+                    _stepSize = long.Parse(str, CultureInfo.InvariantCulture);
+                    break;
+                }
+                case "lastupdate":
+                {
+                    var str = reader.ReadContentAsString();
+                    _endTime = long.Parse(str, CultureInfo.InvariantCulture);
+                    break;
+                }
+                case "pdp_per_row":
+                {
+                    var str = reader.ReadContentAsString();
+                    _currentInterval = long.Parse(str, CultureInfo.InvariantCulture);
 
-                var modInterval = _endTime % (_stepSize * _currentInterval);
-                long stepCount = _currentInterval == 1 ? FIVE_SECONDS_IN_TEN_MINUTES // 120 * 5 seconds in 10 minutes
-                    : _currentInterval == 12 ? MINUTES_IN_TWO_HOURS // 120 minutes in 2 hours
-                    : _currentInterval == 720 ? HOURS_IN_ONE_WEEK // 168 hours in a week
-                    : DAYS_IN_ONE_YEAR; // 366 days in a year
+                    var modInterval = _endTime % (_stepSize * _currentInterval);
+                    long stepCount = _currentInterval == 1 ? FIVE_SECONDS_IN_TEN_MINUTES // 120 * 5 seconds in 10 minutes
+                        : _currentInterval == 12 ? MINUTES_IN_TWO_HOURS // 120 minutes in 2 hours
+                        : _currentInterval == 720 ? HOURS_IN_ONE_WEEK // 168 hours in a week
+                        : DAYS_IN_ONE_YEAR; // 366 days in a year
 
-                _currentTime =
-                    new DateTime((((_endTime - modInterval) - (_stepSize * _currentInterval * stepCount)) *
-                                  TimeSpan.TicksPerSecond) + Util.TicksBefore1970).ToLocalTime().Ticks;
-            }
-            else if (_lastNode == "cf")
-            {
-                var str = reader.ReadContentAsString();
-                if (str != "AVERAGE")
-                    _bailOut = true;
-            }
-            else if (_lastNode == "v")
-            {
-                if (_bailOut || _setsAdded.Count <= _valueCount)
+                    _currentTime =
+                        new DateTime((((_endTime - modInterval) - (_stepSize * _currentInterval * stepCount)) *
+                                      TimeSpan.TicksPerSecond) + Util.TicksBefore1970).ToLocalTime().Ticks;
+                    break;
+                }
+                case "cf":
+                {
+                    var str = reader.ReadContentAsString();
+                    if (str != "AVERAGE")
+                        _bailOut = true;
+                    break;
+                }
+                case "v" when _bailOut || _setsAdded.Count <= _valueCount:
                     return;
-
-                var set = _setsAdded[_valueCount];
-                var str = reader.ReadContentAsString();
-                set.AddPoint(str, _currentTime, _setsAdded, _dataSources);
-                _valueCount++;
+                case "v":
+                {
+                    var set = _setsAdded[_valueCount];
+                    var str = reader.ReadContentAsString();
+                    set.AddPoint(str, _currentTime, _setsAdded, _dataSources);
+                    _valueCount++;
+                    break;
+                }
             }
         }
 
