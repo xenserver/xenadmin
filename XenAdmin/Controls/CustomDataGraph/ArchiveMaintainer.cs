@@ -489,11 +489,6 @@ namespace XenAdmin.Controls.CustomDataGraph
 
         public void Stop()
         {
-            _cancellationTokenSource.Cancel();
-        }
-
-        public void Pause()
-        {
            _cancellationTokenSource.Cancel();
         }
 

@@ -70,7 +70,7 @@ namespace XenAdmin.TabPages
             base.Text = Messages.PERFORMANCE_TAB_TITLE;
             UpdateMoveButtons();
         }
-
+         
         public override string HelpID => "TabPagePerformance";
 
         /// <summary> 
@@ -81,16 +81,16 @@ namespace XenAdmin.TabPages
         {
             if (_disposed)
                 return;
-            
-            ArchiveMaintainer.Stop();
+
+            _archiveMaintainers.ForEach(a =>
+            {
+                a.Stop();
+                a.ArchivesUpdated -= ArchiveMaintainer_ArchivesUpdated;
+            });
 
             if (disposing)
             {
-                ArchiveMaintainer.ArchivesUpdated -= ArchiveMaintainer_ArchivesUpdated;
-
-                if (components != null)
-                    components.Dispose();
-
+                components?.Dispose();
                 _disposed = true;
             }
             base.Dispose(disposing);
@@ -185,7 +185,7 @@ namespace XenAdmin.TabPages
                     _archiveMaintainers.Where(a => !a.XenObject.Equals(value)).ToList().ForEach(a =>
                     {
                         a.ArchivesUpdated -= ArchiveMaintainer_ArchivesUpdated;
-                        a.Pause();
+                        a.Stop();
                     });
                     var existingArchive = _archiveMaintainers.FirstOrDefault(a => a.XenObject.Equals(value));
                     if (existingArchive == null)
@@ -335,7 +335,10 @@ namespace XenAdmin.TabPages
             DeregEvents();
 
             if (ArchiveMaintainer != null)
-                ArchiveMaintainer.Pause();
+            {
+                ArchiveMaintainer.ArchivesUpdated -= ArchiveMaintainer_ArchivesUpdated;
+                ArchiveMaintainer.Stop();
+            }
         }
 
         private void ArchiveMaintainer_ArchivesUpdated()
