@@ -75,7 +75,7 @@ namespace XenAdmin.Controls.CustomDataGraph
         private const int SLEEP_TIME = 5000;
 
         private static readonly log4net.ILog Log =
-            log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+            log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod()?.DeclaringType);
 
         internal event Action ArchivesUpdated;
 
@@ -84,7 +84,7 @@ namespace XenAdmin.Controls.CustomDataGraph
 
         private readonly object _updateMonitor = new object();
         private readonly object _waitUpdates = new object();
-        private Thread _updaterThread;
+        private readonly Thread _updaterThread;
         private bool _runThread;
         private bool _threadRunning;
         private List<DataSet> _setsAdded;
