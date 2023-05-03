@@ -52,41 +52,7 @@ namespace XenAdmin.Controls.CustomDataGraph
 
     public class ArchiveMaintainer
     {
-        private const long TICKS_IN_ONE_SECOND = 10000000;
-        private const long TICKS_IN_FIVE_SECONDS = 50000000;
-        private const long TICKS_IN_ONE_MINUTE = 600000000;
-        internal const long TICKS_IN_TEN_MINUTES = 6000000000;
-        private const long TICKS_IN_ONE_HOUR = 36000000000;
-        internal const long TICKS_IN_TWO_HOURS = 72000000000;
-        private const long TICKS_IN_ONE_DAY = 864000000000;
-        internal const long TICKS_IN_SEVEN_DAYS = 6048000000000;
-        internal const long TICKS_IN_ONE_YEAR = 316224000000000;
-
-        private const int FIVE_SECONDS_IN_TEN_MINUTES = 120;
-        private const int MINUTES_IN_TWO_HOURS = 120;
-        private const int HOURS_IN_ONE_WEEK = 168;
-        private const int DAYS_IN_ONE_YEAR = 366;
-
-        private const int SLEEP_TIME = 5000;
-
-        private static readonly log4net.ILog Log =
-            log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod()?.DeclaringType);
-
-        internal event Action ArchivesUpdated;
-
-        internal readonly Dictionary<ArchiveInterval, DataArchive> Archives = new Dictionary<ArchiveInterval, DataArchive>();
-
-        private CancellationTokenSource _cancellationTokenSource;
-        private List<DataSet> _setsAdded;
-        private List<Data_source> _dataSources = new List<Data_source>();
-
-        private long _endTime;
-        private bool _bailOut;
-        private long _currentInterval;
-        private long _stepSize;
-        private long _currentTime;
-        private int _valueCount;
-        private string _lastNode = string.Empty;
+        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod()?.DeclaringType);
 
         public IXenObject XenObject { get; }
 
@@ -95,13 +61,41 @@ namespace XenAdmin.Controls.CustomDataGraph
         public DateTime LastOneHourCollection = DateTime.MinValue;
         public DateTime LastOneDayCollection = DateTime.MinValue;
 
+        public DateTime GraphNow => DateTime.Now - (ClientServerOffset + TimeSpan.FromSeconds(15));
+        public TimeSpan ClientServerOffset => XenObject?.Connection.ServerTimeOffset ?? TimeSpan.Zero;
         public bool LoadingInitialData;
 
+        internal const long TICKS_IN_ONE_SECOND = 10000000;
+        internal const long TICKS_IN_FIVE_SECONDS = 50000000;
+        internal const long TICKS_IN_ONE_MINUTE = 600000000;
+        internal const long TICKS_IN_TEN_MINUTES = 6000000000;
+        internal const long TICKS_IN_ONE_HOUR = 36000000000;
+        internal const long TICKS_IN_TWO_HOURS = 72000000000;
+        internal const long TICKS_IN_ONE_DAY = 864000000000;
+        internal const long TICKS_IN_SEVEN_DAYS = 6048000000000;
+        internal const long TICKS_IN_ONE_YEAR = 316224000000000;
+
+        internal const int FIVE_SECONDS_IN_TEN_MINUTES = 120;
+        internal const int MINUTES_IN_TWO_HOURS = 120;
+        internal const int HOURS_IN_ONE_WEEK = 168;
+        internal const int DAYS_IN_ONE_YEAR = 366;
+
+        internal event Action ArchivesUpdated;
+        internal readonly Dictionary<ArchiveInterval, DataArchive> Archives = new Dictionary<ArchiveInterval, DataArchive>();
+
+        private const int SLEEP_TIME = 5000;
+
+        private CancellationTokenSource _cancellationTokenSource;
+        private List<DataSet> _setsAdded;
+        private List<Data_source> _dataSources = new List<Data_source>();
         private DateTime ServerNow => DateTime.UtcNow.Subtract(ClientServerOffset);
-
-        public DateTime GraphNow => DateTime.Now - (ClientServerOffset + TimeSpan.FromSeconds(15));
-
-        public TimeSpan ClientServerOffset => XenObject?.Connection.ServerTimeOffset ?? TimeSpan.Zero;
+        private long _endTime;
+        private bool _bailOut;
+        private long _currentInterval;
+        private long _stepSize;
+        private long _currentTime;
+        private int _valueCount;
+        private string _lastNode = string.Empty;
 
         public ArchiveMaintainer(IXenObject xenObject)
         {
