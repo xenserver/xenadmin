@@ -77,45 +77,18 @@ namespace XenAdmin.Controls.CustomDataGraph
         private static readonly log4net.ILog Log =
             log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        /// <summary>
-        /// Fired (on a background thread) when new performance data are received from the server
-        /// </summary>
         internal event Action ArchivesUpdated;
 
         internal readonly Dictionary<ArchiveInterval, DataArchive> Archives =
             new Dictionary<ArchiveInterval, DataArchive>();
 
-        /// <summary>
-        /// for pausing the retrieval of updates
-        /// call Monitor.PulseAll(UpdateMonitor) on resume
-        /// </summary>
         private readonly object _updateMonitor = new object();
-
-        /// <summary>
-        /// for waiting between updates
-        /// the Monitor has a timeout too so we either wait for 'SleepTime' or a pulseall on WaitUpdates
-        /// </summary>
         private readonly object _waitUpdates = new object();
-
         private Thread _updaterThread;
-
-        /// <summary>
-        ///  if true UpdaterThread will keep looping
-        /// </summary>
         private bool _runThread;
-
-        /// <summary>
-        /// Whether the thread is started or not
-        /// </summary>
         private bool _threadRunning;
-
-        /// <summary>
-        /// collection for holding updates whil
-        /// </summary>
         private List<DataSet> _setsAdded;
-
         private List<Data_source> _dataSources = new List<Data_source>();
-
         private IXenObject _xenObject;
 
         private long _endTime;
@@ -299,6 +272,7 @@ namespace XenAdmin.Controls.CustomDataGraph
         }
 
         #region Uri generators
+
         private Uri UpdateUri(ArchiveInterval interval, IXenObject xo)
         {
             var sessionRef = xo?.Connection?.Session?.opaque_ref;
@@ -357,10 +331,10 @@ namespace XenAdmin.Controls.CustomDataGraph
             };
             return builder.Uri;
         }
+
         #endregion
 
         #region Data fetcher methods
-
 
         private void RRD_Full_InspectCurrentNode(XmlReader reader, IXenObject xmo)
         {
@@ -501,11 +475,10 @@ namespace XenAdmin.Controls.CustomDataGraph
             }
         }
 
-
         #endregion
 
         #region Actions
-        
+
         public void Start()
         {
             if (_threadRunning)
@@ -522,7 +495,7 @@ namespace XenAdmin.Controls.CustomDataGraph
                     Monitor.PulseAll(_waitUpdates);
             }
         }
-        
+
         public void Stop()
         {
             _threadRunning = false;
@@ -533,7 +506,7 @@ namespace XenAdmin.Controls.CustomDataGraph
             lock (_updateMonitor)
                 Monitor.PulseAll(_updateMonitor);
         }
-        
+
         public void Pause()
         {
             _threadRunning = false; // stop updating
@@ -544,7 +517,6 @@ namespace XenAdmin.Controls.CustomDataGraph
         #endregion
 
         #region Public static methods
-
 
         public static long ToTicks(ArchiveInterval interval)
         {
@@ -560,7 +532,6 @@ namespace XenAdmin.Controls.CustomDataGraph
                     return TICKS_IN_ONE_DAY;
             }
         }
-
 
         #endregion
 
@@ -596,8 +567,24 @@ namespace XenAdmin.Controls.CustomDataGraph
             return 0;
         }
 
-        #endregion
+        private static ArchiveInterval GetArchiveIntervalFromFiveSecs(long v)
+        {
+            switch (v)
+            {
+                case 1:
+                    return ArchiveInterval.FiveSecond;
+                case 12:
+                    return ArchiveInterval.OneMinute;
+                case 720:
+                    return ArchiveInterval.OneHour;
+                case 17280:
+                    return ArchiveInterval.OneDay;
+                default:
+                    return ArchiveInterval.None;
+            }
+        }
 
+        #endregion
 
         public static ArchiveInterval NextArchiveDown(ArchiveInterval current)
         {
