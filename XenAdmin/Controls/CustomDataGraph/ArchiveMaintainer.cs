@@ -533,6 +533,24 @@ namespace XenAdmin.Controls.CustomDataGraph
             }
         }
 
+
+        public static ArchiveInterval NextArchiveDown(ArchiveInterval current)
+        {
+            switch (current)
+            {
+                case ArchiveInterval.FiveSecond:
+                    return ArchiveInterval.None;
+                case ArchiveInterval.OneMinute:
+                    return ArchiveInterval.FiveSecond;
+                case ArchiveInterval.OneHour:
+                    return ArchiveInterval.OneMinute;
+                case ArchiveInterval.OneDay:
+                    return ArchiveInterval.OneHour;
+                default:
+                    return ArchiveInterval.None;
+            }
+        }
+
         #endregion
 
         #region Helpers
@@ -586,21 +604,5 @@ namespace XenAdmin.Controls.CustomDataGraph
 
         #endregion
 
-        public static ArchiveInterval NextArchiveDown(ArchiveInterval current)
-        {
-            switch (current)
-            {
-                case ArchiveInterval.FiveSecond:
-                    return ArchiveInterval.None;
-                case ArchiveInterval.OneMinute:
-                    return ArchiveInterval.FiveSecond;
-                case ArchiveInterval.OneHour:
-                    return ArchiveInterval.OneMinute;
-                case ArchiveInterval.OneDay:
-                    return ArchiveInterval.OneHour;
-                default:
-                    return ArchiveInterval.None;
-            }
-        }
     }
 }
