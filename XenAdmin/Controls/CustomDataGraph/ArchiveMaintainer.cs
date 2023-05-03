@@ -82,14 +82,9 @@ namespace XenAdmin.Controls.CustomDataGraph
         internal readonly Dictionary<ArchiveInterval, DataArchive> Archives =
             new Dictionary<ArchiveInterval, DataArchive>();
 
-        private readonly object _updateMonitor = new object();
-        private readonly object _waitUpdates = new object();
-        private readonly Thread _updaterThread;
-        private bool _runThread;
-        private bool _threadRunning;
+        private CancellationTokenSource _cancellationTokenSource;
         private List<DataSet> _setsAdded;
         private List<Data_source> _dataSources = new List<Data_source>();
-        private IXenObject _xenObject;
 
         private long _endTime;
         private bool _bailOut;
@@ -99,19 +94,7 @@ namespace XenAdmin.Controls.CustomDataGraph
         private int _valueCount;
         private string _lastNode = "";
 
-        public IXenObject XenObject
-        {
-            private get { return _xenObject; }
-            set
-            {
-                Program.AssertOnEventThread();
-
-                var oldReference = _xenObject == null ? "" : _xenObject.opaque_ref;
-                _xenObject = value;
-                var newReference = _xenObject == null ? "" : _xenObject.opaque_ref;
-                FirstTime = FirstTime || newReference != oldReference;
-            }
-        }
+        public IXenObject XenObject { get; }
 
         public DateTime LastFiveSecondCollection = DateTime.MinValue;
         public DateTime LastOneMinuteCollection = DateTime.MinValue;
@@ -127,7 +110,7 @@ namespace XenAdmin.Controls.CustomDataGraph
 
         public TimeSpan ClientServerOffset => XenObject?.Connection.ServerTimeOffset ?? TimeSpan.Zero;
 
-        public ArchiveMaintainer()
+        public ArchiveMaintainer(IXenObject xenObject)
         {
             Archives.Add(ArchiveInterval.FiveSecond, new DataArchive(FIVE_SECONDS_IN_TEN_MINUTES + 4));
             Archives.Add(ArchiveInterval.OneMinute, new DataArchive(MINUTES_IN_TWO_HOURS));
@@ -135,22 +118,22 @@ namespace XenAdmin.Controls.CustomDataGraph
             Archives.Add(ArchiveInterval.OneDay, new DataArchive(DAYS_IN_ONE_YEAR));
             Archives.Add(ArchiveInterval.None, new DataArchive(0));
 
-            _updaterThread = new Thread(Update) { Name = "Archive Maintainer", IsBackground = true };
+            XenObject = xenObject;
         }
 
-        private void Update()
+        private void Update(object _)
         {
-            while (_runThread)
+            var firstTime = true;
+            while (!_cancellationTokenSource.Token.IsCancellationRequested)
             {
                 var xenObject = XenObject;
 
                 var serverWas =
                     ServerNow; // get time before updating so we don't miss any 5 second updates if getting the past data
-
-                if (FirstTime)
+                if (firstTime)
                 {
                     // Restrict to at most 24 hours data if necessary
-                    if (Helpers.FeatureForbidden(_xenObject, XenAPI.Host.RestrictPerformanceGraphs))
+                    if (Helpers.FeatureForbidden(XenObject, XenAPI.Host.RestrictPerformanceGraphs))
                     {
                         Archives[ArchiveInterval.OneHour].MaxPoints = 24;
                         Archives[ArchiveInterval.OneDay].MaxPoints = 0;
@@ -166,6 +149,11 @@ namespace XenAdmin.Controls.CustomDataGraph
                     foreach (var a in Archives.Values)
                         a.ClearSets();
 
+                    
+                    if (_cancellationTokenSource.Token.IsCancellationRequested)
+                    {
+                        break;
+                    }
                     LoadingInitialData = true;
                     ArchivesUpdated?.Invoke();
 
@@ -176,7 +164,7 @@ namespace XenAdmin.Controls.CustomDataGraph
                         else if (xenObject is VM vm && vm.power_state == vm_power_state.Running)
                             _dataSources = VM.get_data_sources(vm.Connection.Session, vm.opaque_ref);
 
-                        Get(ArchiveInterval.None, RrdsUri, RRD_Full_InspectCurrentNode, xenObject);
+                        Get(ArchiveInterval.None, RrdsUri, RRD_Full_InspectCurrentNode, xenObject, _cancellationTokenSource.Token);
                     }
                     catch (Exception e)
                     {
@@ -184,62 +172,75 @@ namespace XenAdmin.Controls.CustomDataGraph
                         //anything caught here is thrown by the get_data_sources operations
                         Log.Error($"Failed to retrieve data sources for '{xenObject.Name()}'", e);
                     }
-                    finally
+
+                    if (_cancellationTokenSource.Token.IsCancellationRequested)
                     {
-                        LoadingInitialData = false;
-                        ArchivesUpdated?.Invoke();
+                        break;
                     }
+                    ArchivesUpdated?.Invoke();
+                    LoadingInitialData = false;
 
                     LastFiveSecondCollection = serverWas;
                     LastOneMinuteCollection = serverWas;
                     LastOneHourCollection = serverWas;
                     LastOneDayCollection = serverWas;
-                    FirstTime = false;
+                    firstTime = false;
                 }
 
                 if (serverWas - LastFiveSecondCollection > FiveSeconds)
                 {
-                    Get(ArchiveInterval.FiveSecond, UpdateUri, RRD_Update_InspectCurrentNode, xenObject);
+                    Get(ArchiveInterval.FiveSecond, UpdateUri, RRD_Update_InspectCurrentNode, xenObject, _cancellationTokenSource.Token);
+                    if (_cancellationTokenSource.Token.IsCancellationRequested)
+                    {
+                        break;
+                    }
                     LastFiveSecondCollection = serverWas;
                     Archives[ArchiveInterval.FiveSecond].Load(_setsAdded);
                 }
 
                 if (serverWas - LastOneMinuteCollection > OneMinute)
                 {
-                    Get(ArchiveInterval.OneMinute, UpdateUri, RRD_Update_InspectCurrentNode, xenObject);
+                    Get(ArchiveInterval.OneMinute, UpdateUri, RRD_Update_InspectCurrentNode, xenObject, _cancellationTokenSource.Token);
+                    if (_cancellationTokenSource.Token.IsCancellationRequested)
+                    {
+                        break;
+                    }
                     LastOneMinuteCollection = serverWas;
                     Archives[ArchiveInterval.OneMinute].Load(_setsAdded);
                 }
 
                 if (serverWas - LastOneHourCollection > OneHour)
                 {
-                    Get(ArchiveInterval.OneHour, UpdateUri, RRD_Update_InspectCurrentNode, xenObject);
+                    Get(ArchiveInterval.OneHour, UpdateUri, RRD_Update_InspectCurrentNode, xenObject, _cancellationTokenSource.Token);
+                    if (_cancellationTokenSource.Token.IsCancellationRequested)
+                    {
+                        break;
+                    }
                     LastOneHourCollection = serverWas;
                     Archives[ArchiveInterval.OneHour].Load(_setsAdded);
                 }
 
                 if (serverWas - LastOneDayCollection > OneDay)
                 {
-                    Get(ArchiveInterval.OneDay, UpdateUri, RRD_Update_InspectCurrentNode, xenObject);
+                    Get(ArchiveInterval.OneDay, UpdateUri, RRD_Update_InspectCurrentNode, xenObject, _cancellationTokenSource.Token);
+                    if (_cancellationTokenSource.Token.IsCancellationRequested)
+                    {
+                        break;
+                    }
                     LastOneDayCollection = serverWas;
                     Archives[ArchiveInterval.OneDay].Load(_setsAdded);
                 }
-
-                lock (_waitUpdates)
+                if (_cancellationTokenSource.Token.IsCancellationRequested)
                 {
-                    Monitor.Wait(_waitUpdates, SLEEP_TIME);
+                    break;
                 }
-
-                lock (_updateMonitor)
-                {
-                    if (!_threadRunning)
-                        Monitor.Wait(_updateMonitor);
-                }
+                ArchivesUpdated?.Invoke();
+                Thread.Sleep(SLEEP_TIME);
             }
         }
 
         private void Get(ArchiveInterval interval, Func<ArchiveInterval, IXenObject, Uri> uriBuilder,
-            Action<XmlReader, IXenObject> readerMethod, IXenObject xenObject)
+            Action<XmlReader, IXenObject> readerMethod, IXenObject xenObject, CancellationToken token)
         {
             try
             {
@@ -252,7 +253,7 @@ namespace XenAdmin.Controls.CustomDataGraph
                     using (var reader = XmlReader.Create(stream))
                     {
                         _setsAdded = new List<DataSet>();
-                        while (reader.Read())
+                        while (reader.Read() && !token.IsCancellationRequested)
                         {
                             readerMethod(reader, xenObject);
                         }
@@ -481,37 +482,18 @@ namespace XenAdmin.Controls.CustomDataGraph
 
         public void Start()
         {
-            if (_threadRunning)
-                return; // if we are already running dont start twice!
-            _threadRunning = true;
-            _runThread = true; // keep looping
-            if ((_updaterThread.ThreadState & ThreadState.Unstarted) > 0)
-                _updaterThread.Start(); // if we have never been started
-            else
-            {
-                lock (_updateMonitor)
-                    Monitor.PulseAll(_updateMonitor);
-                lock (_waitUpdates)
-                    Monitor.PulseAll(_waitUpdates);
-            }
+            _cancellationTokenSource = new CancellationTokenSource();
+            ThreadPool.QueueUserWorkItem(Update);
         }
 
         public void Stop()
         {
-            _threadRunning = false;
-            _runThread = false; // exit loop
-            // make sure we clear all Monitor.Waits so we can exit
-            lock (_waitUpdates)
-                Monitor.PulseAll(_waitUpdates);
-            lock (_updateMonitor)
-                Monitor.PulseAll(_updateMonitor);
+            _cancellationTokenSource.Cancel();
         }
 
         public void Pause()
         {
-            _threadRunning = false; // stop updating
-            lock (_waitUpdates) // clear the first Monitor.Wait so we pause the thread instantly.
-                Monitor.PulseAll(_waitUpdates);
+           _cancellationTokenSource.Cancel();
         }
 
         #endregion
@@ -532,7 +514,6 @@ namespace XenAdmin.Controls.CustomDataGraph
                     return TICKS_IN_ONE_DAY;
             }
         }
-
 
         public static ArchiveInterval NextArchiveDown(ArchiveInterval current)
         {

@@ -32,6 +32,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using XenAPI;
 using XenAdmin.Core;
@@ -48,18 +49,19 @@ namespace XenAdmin.TabPages
         private IXenObject _xenObject;
         private bool _disposed;
         private readonly CollectionChangeEventHandler Message_CollectionChangedWithInvoke;
-        private readonly ArchiveMaintainer ArchiveMaintainer = new ArchiveMaintainer();
 
+        private ArchiveMaintainer ArchiveMaintainer =>
+            _archiveMaintainers.FirstOrDefault(a => a.XenObject.Equals(XenObject));
+
+        private readonly List<ArchiveMaintainer> _archiveMaintainers;
         public PerformancePage()
         {
             InitializeComponent();
-
-            ArchiveMaintainer.ArchivesUpdated += ArchiveMaintainer_ArchivesUpdated;
+            _archiveMaintainers = new List<ArchiveMaintainer>();
             Message_CollectionChangedWithInvoke = Program.ProgramInvokeHandler(Message_CollectionChanged);
-            GraphList.ArchiveMaintainer = ArchiveMaintainer;
             GraphList.SelectedGraphChanged += GraphList_SelectedGraphChanged;
             GraphList.MouseDown += GraphList_MouseDown;
-            DataPlotNav.ArchiveMaintainer = ArchiveMaintainer;
+
             this.DataEventList.SetPlotNav(this.DataPlotNav);
             SetStyle(ControlStyles.ResizeRedraw, true);
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
@@ -164,6 +166,7 @@ namespace XenAdmin.TabPages
             UpdateAllButtons();
         }
 
+
         public IXenObject XenObject
         {
             private get
@@ -172,20 +175,34 @@ namespace XenAdmin.TabPages
             }
             set
             {
-                ArchiveMaintainer.Pause();
-                DataEventList.Clear();
-
-                DeregEvents();
-                _xenObject = value;
-                RegEvents();
-
-                ArchiveMaintainer.XenObject = value;
-
-                if (_xenObject != null)
+                lock (_archiveMaintainers)
                 {
-                    GraphList.LoadGraphs(XenObject);
-                    LoadEvents();
-                    ArchiveMaintainer.Start(); 
+                    DataEventList.Clear();
+                    DeregEvents();
+                    _xenObject = value;
+                    RegEvents();
+
+                    _archiveMaintainers.Where(a => !a.XenObject.Equals(value)).ToList().ForEach(a =>
+                    {
+                        a.ArchivesUpdated -= ArchiveMaintainer_ArchivesUpdated;
+                        a.Pause();
+                    });
+                    var existingArchive = _archiveMaintainers.FirstOrDefault(a => a.XenObject.Equals(value));
+                    if (existingArchive == null)
+                    {
+                        existingArchive = new ArchiveMaintainer(value);
+                        _archiveMaintainers.Add(existingArchive);
+                    }
+                    existingArchive.ArchivesUpdated += ArchiveMaintainer_ArchivesUpdated;
+                    GraphList.ArchiveMaintainer = existingArchive;
+                    DataPlotNav.ArchiveMaintainer = existingArchive;
+
+                    if (_xenObject != null)
+                    {
+                        GraphList.LoadGraphs(XenObject);
+                        LoadEvents();
+                        existingArchive.Start(); 
+                    }
                 }
                 RefreshAll();
             }
