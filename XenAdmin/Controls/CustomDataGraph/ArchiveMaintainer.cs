@@ -543,6 +543,8 @@ namespace XenAdmin.Controls.CustomDataGraph
             }
         }
 
+        #region Actions
+
         /// <summary>
         /// run this to start or resume getting updates
         /// </summary>
@@ -586,6 +588,9 @@ namespace XenAdmin.Controls.CustomDataGraph
             lock (_waitUpdates) // clear the first Monitor.Wait so we pause the thread instantly.
                 Monitor.PulseAll(_waitUpdates);
         }
+
+        #endregion
+
 
         public static ArchiveInterval NextArchiveDown(ArchiveInterval current)
         {
