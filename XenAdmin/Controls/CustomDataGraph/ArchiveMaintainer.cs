@@ -127,10 +127,10 @@ namespace XenAdmin.Controls.CustomDataGraph
             {
                 Program.AssertOnEventThread();
 
-                var oldref = _xenObject == null ? "" : _xenObject.opaque_ref;
+                var oldReference = _xenObject == null ? "" : _xenObject.opaque_ref;
                 _xenObject = value;
-                var newref = _xenObject == null ? "" : _xenObject.opaque_ref;
-                FirstTime = FirstTime || newref != oldref;
+                var newReference = _xenObject == null ? "" : _xenObject.opaque_ref;
+                FirstTime = FirstTime || newReference != oldReference;
             }
         }
 
@@ -267,9 +267,9 @@ namespace XenAdmin.Controls.CustomDataGraph
                 if (uri == null)
                     return;
 
-                using (var httpstream = HTTPHelper.GET(uri, xenObject.Connection, true))
+                using (var stream = HTTPHelper.GET(uri, xenObject.Connection, true))
                 {
-                    using (var reader = XmlReader.Create(httpstream))
+                    using (var reader = XmlReader.Create(stream))
                     {
                         _setsAdded = new List<DataSet>();
                         while (reader.Read())
