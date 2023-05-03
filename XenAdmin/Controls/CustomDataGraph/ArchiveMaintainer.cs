@@ -52,7 +52,8 @@ namespace XenAdmin.Controls.CustomDataGraph
 
     public class ArchiveMaintainer
     {
-        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod()?.DeclaringType);
+        private static readonly log4net.ILog Log =
+            log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod()?.DeclaringType);
 
         public IXenObject XenObject { get; }
 
@@ -81,7 +82,9 @@ namespace XenAdmin.Controls.CustomDataGraph
         internal const int DAYS_IN_ONE_YEAR = 366;
 
         internal event Action ArchivesUpdated;
-        internal readonly Dictionary<ArchiveInterval, DataArchive> Archives = new Dictionary<ArchiveInterval, DataArchive>();
+
+        internal readonly Dictionary<ArchiveInterval, DataArchive> Archives =
+            new Dictionary<ArchiveInterval, DataArchive>();
 
         private const int SLEEP_TIME = 5000;
 
@@ -117,44 +120,52 @@ namespace XenAdmin.Controls.CustomDataGraph
             {
                 if (serverWas - LastFiveSecondCollection > TimeSpan.FromSeconds(5))
                 {
-                    Get(ArchiveInterval.FiveSecond, UpdateUri, RRD_Update_InspectCurrentNode, XenObject, _cancellationTokenSource.Token);
+                    Get(ArchiveInterval.FiveSecond, UpdateUri, RRD_Update_InspectCurrentNode, XenObject,
+                        _cancellationTokenSource.Token);
                     if (_cancellationTokenSource.Token.IsCancellationRequested)
                     {
                         break;
                     }
+
                     LastFiveSecondCollection = serverWas;
                     Archives[ArchiveInterval.FiveSecond].Load(_setsAdded);
                 }
 
                 if (serverWas - LastOneMinuteCollection > TimeSpan.FromMinutes(1))
                 {
-                    Get(ArchiveInterval.OneMinute, UpdateUri, RRD_Update_InspectCurrentNode, XenObject, _cancellationTokenSource.Token);
+                    Get(ArchiveInterval.OneMinute, UpdateUri, RRD_Update_InspectCurrentNode, XenObject,
+                        _cancellationTokenSource.Token);
                     if (_cancellationTokenSource.Token.IsCancellationRequested)
                     {
                         break;
                     }
+
                     LastOneMinuteCollection = serverWas;
                     Archives[ArchiveInterval.OneMinute].Load(_setsAdded);
                 }
 
                 if (serverWas - LastOneHourCollection > TimeSpan.FromHours(1))
                 {
-                    Get(ArchiveInterval.OneHour, UpdateUri, RRD_Update_InspectCurrentNode, XenObject, _cancellationTokenSource.Token);
+                    Get(ArchiveInterval.OneHour, UpdateUri, RRD_Update_InspectCurrentNode, XenObject,
+                        _cancellationTokenSource.Token);
                     if (_cancellationTokenSource.Token.IsCancellationRequested)
                     {
                         break;
                     }
+
                     LastOneHourCollection = serverWas;
                     Archives[ArchiveInterval.OneHour].Load(_setsAdded);
                 }
 
                 if (serverWas - LastOneDayCollection > TimeSpan.FromDays(1))
                 {
-                    Get(ArchiveInterval.OneDay, UpdateUri, RRD_Update_InspectCurrentNode, XenObject, _cancellationTokenSource.Token);
+                    Get(ArchiveInterval.OneDay, UpdateUri, RRD_Update_InspectCurrentNode, XenObject,
+                        _cancellationTokenSource.Token);
                     if (_cancellationTokenSource.Token.IsCancellationRequested)
                     {
                         break;
                     }
+
                     LastOneDayCollection = serverWas;
                     Archives[ArchiveInterval.OneDay].Load(_setsAdded);
                 }
@@ -163,6 +174,7 @@ namespace XenAdmin.Controls.CustomDataGraph
                 {
                     break;
                 }
+
                 ArchivesUpdated?.Invoke();
                 Thread.Sleep(SLEEP_TIME);
             }
@@ -191,6 +203,7 @@ namespace XenAdmin.Controls.CustomDataGraph
             {
                 return;
             }
+
             LoadingInitialData = true;
             ArchivesUpdated?.Invoke();
 
@@ -205,11 +218,14 @@ namespace XenAdmin.Controls.CustomDataGraph
                         _dataSources = VM.get_data_sources(vm.Connection.Session, vm.opaque_ref);
                         break;
                 }
+
                 if (_cancellationTokenSource.Token.IsCancellationRequested)
                 {
                     return;
                 }
-                Get(ArchiveInterval.None, RrdsUri, RRD_Full_InspectCurrentNode, XenObject, _cancellationTokenSource.Token);
+
+                Get(ArchiveInterval.None, RrdsUri, RRD_Full_InspectCurrentNode, XenObject,
+                    _cancellationTokenSource.Token);
             }
             catch (Exception e)
             {
@@ -221,6 +237,7 @@ namespace XenAdmin.Controls.CustomDataGraph
             {
                 return;
             }
+
             ArchivesUpdated?.Invoke();
             LoadingInitialData = false;
 
@@ -253,7 +270,9 @@ namespace XenAdmin.Controls.CustomDataGraph
             }
             catch (Exception e)
             {
-                Log.Warn($"Get updates for {(xenObject is Host ? "Host" : "VM")}: {(xenObject != null ? xenObject.opaque_ref : Helper.NullOpaqueRef)} Failed.", e);
+                Log.Warn(
+                    $"Get updates for {(xenObject is Host ? "Host" : "VM")}: {(xenObject != null ? xenObject.opaque_ref : Helper.NullOpaqueRef)} Failed.",
+                    e);
             }
         }
 
@@ -281,7 +300,8 @@ namespace XenAdmin.Controls.CustomDataGraph
                         $"session_id={escapedRef}&start={startTime}&cf=AVERAGE&interval={duration}&vm_uuid={vm.uuid}");
                 }
                 default:
-                    const string issue = "ArchiveMaintainer.UpdateUri was given an invalid XenObject. Only Hosts and VMs are supported.";
+                    const string issue =
+                        "ArchiveMaintainer.UpdateUri was given an invalid XenObject. Only Hosts and VMs are supported.";
                     Log.Warn(issue);
                     Debug.Assert(false, issue);
                     return null;
@@ -306,7 +326,8 @@ namespace XenAdmin.Controls.CustomDataGraph
                     return BuildUri(vmHost, "vm_rrds", $"session_id={escapedRef}&uuid={vm.uuid}");
                 }
                 default:
-                    const string issue = "ArchiveMaintainer.UpdateUri was given an invalid XenObject. Only Hosts and VMs are supported.";
+                    const string issue =
+                        "ArchiveMaintainer.UpdateUri was given an invalid XenObject. Only Hosts and VMs are supported.";
                     Log.Warn(issue);
                     Debug.Assert(false, issue);
                     return null;
@@ -398,10 +419,13 @@ namespace XenAdmin.Controls.CustomDataGraph
                     _currentInterval = long.Parse(str, CultureInfo.InvariantCulture);
 
                     var modInterval = _endTime % (_stepSize * _currentInterval);
-                    long stepCount = _currentInterval == 1 ? FIVE_SECONDS_IN_TEN_MINUTES // 120 * 5 seconds in 10 minutes
-                        : _currentInterval == 12 ? MINUTES_IN_TWO_HOURS // 120 minutes in 2 hours
-                        : _currentInterval == 720 ? HOURS_IN_ONE_WEEK // 168 hours in a week
-                        : DAYS_IN_ONE_YEAR; // 366 days in a year
+                    long stepCount = _currentInterval == 1
+                        ? FIVE_SECONDS_IN_TEN_MINUTES // 120 * 5 seconds in 10 minutes
+                        : _currentInterval == 12
+                            ? MINUTES_IN_TWO_HOURS // 120 minutes in 2 hours
+                            : _currentInterval == 720
+                                ? HOURS_IN_ONE_WEEK // 168 hours in a week
+                                : DAYS_IN_ONE_YEAR; // 366 days in a year
 
                     _currentTime =
                         new DateTime((((_endTime - modInterval) - (_stepSize * _currentInterval * stepCount)) *
@@ -495,7 +519,7 @@ namespace XenAdmin.Controls.CustomDataGraph
 
         public void Stop()
         {
-           _cancellationTokenSource.Cancel();
+            _cancellationTokenSource.Cancel();
         }
 
         #endregion
@@ -586,6 +610,5 @@ namespace XenAdmin.Controls.CustomDataGraph
         }
 
         #endregion
-
     }
 }
