@@ -67,11 +67,6 @@ namespace XenAdmin.Controls.CustomDataGraph
         private const int HOURS_IN_ONE_WEEK = 168;
         private const int DAYS_IN_ONE_YEAR = 366;
 
-        private static readonly TimeSpan FiveSeconds = TimeSpan.FromSeconds(5);
-        private static readonly TimeSpan OneMinute = TimeSpan.FromMinutes(1);
-        private static readonly TimeSpan OneHour = TimeSpan.FromHours(1);
-        private static readonly TimeSpan OneDay = TimeSpan.FromDays(1);
-
         private const int SLEEP_TIME = 5000;
 
         private static readonly log4net.ILog Log =
@@ -126,7 +121,7 @@ namespace XenAdmin.Controls.CustomDataGraph
 
             while (!_cancellationTokenSource.Token.IsCancellationRequested)
             {
-                if (serverWas - LastFiveSecondCollection > FiveSeconds)
+                if (serverWas - LastFiveSecondCollection > TimeSpan.FromSeconds(5))
                 {
                     Get(ArchiveInterval.FiveSecond, UpdateUri, RRD_Update_InspectCurrentNode, XenObject, _cancellationTokenSource.Token);
                     if (_cancellationTokenSource.Token.IsCancellationRequested)
@@ -137,7 +132,7 @@ namespace XenAdmin.Controls.CustomDataGraph
                     Archives[ArchiveInterval.FiveSecond].Load(_setsAdded);
                 }
 
-                if (serverWas - LastOneMinuteCollection > OneMinute)
+                if (serverWas - LastOneMinuteCollection > TimeSpan.FromMinutes(1))
                 {
                     Get(ArchiveInterval.OneMinute, UpdateUri, RRD_Update_InspectCurrentNode, XenObject, _cancellationTokenSource.Token);
                     if (_cancellationTokenSource.Token.IsCancellationRequested)
@@ -148,7 +143,7 @@ namespace XenAdmin.Controls.CustomDataGraph
                     Archives[ArchiveInterval.OneMinute].Load(_setsAdded);
                 }
 
-                if (serverWas - LastOneHourCollection > OneHour)
+                if (serverWas - LastOneHourCollection > TimeSpan.FromHours(1))
                 {
                     Get(ArchiveInterval.OneHour, UpdateUri, RRD_Update_InspectCurrentNode, XenObject, _cancellationTokenSource.Token);
                     if (_cancellationTokenSource.Token.IsCancellationRequested)
@@ -159,7 +154,7 @@ namespace XenAdmin.Controls.CustomDataGraph
                     Archives[ArchiveInterval.OneHour].Load(_setsAdded);
                 }
 
-                if (serverWas - LastOneDayCollection > OneDay)
+                if (serverWas - LastOneDayCollection > TimeSpan.FromDays(1))
                 {
                     Get(ArchiveInterval.OneDay, UpdateUri, RRD_Update_InspectCurrentNode, XenObject, _cancellationTokenSource.Token);
                     if (_cancellationTokenSource.Token.IsCancellationRequested)
