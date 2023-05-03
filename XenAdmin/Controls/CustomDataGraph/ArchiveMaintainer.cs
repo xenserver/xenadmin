@@ -127,9 +127,9 @@ namespace XenAdmin.Controls.CustomDataGraph
             {
                 Program.AssertOnEventThread();
 
-                string oldref = _xenObject == null ? "" : _xenObject.opaque_ref;
+                var oldref = _xenObject == null ? "" : _xenObject.opaque_ref;
                 _xenObject = value;
-                string newref = _xenObject == null ? "" : _xenObject.opaque_ref;
+                var newref = _xenObject == null ? "" : _xenObject.opaque_ref;
                 FirstTime = FirstTime || newref != oldref;
             }
         }
@@ -167,9 +167,9 @@ namespace XenAdmin.Controls.CustomDataGraph
         {
             while (_runThread)
             {
-                IXenObject xenObject = XenObject;
+                var xenObject = XenObject;
 
-                DateTime serverWas = ServerNow; // get time before updating so we don't miss any 5 second updates if getting the past data
+                var serverWas = ServerNow; // get time before updating so we don't miss any 5 second updates if getting the past data
 
                 if (FirstTime)
                 {
@@ -187,7 +187,7 @@ namespace XenAdmin.Controls.CustomDataGraph
 
                     _dataSources.Clear();
 
-                    foreach (DataArchive a in Archives.Values)
+                    foreach (var a in Archives.Values)
                         a.ClearSets();
 
                     LoadingInitialData = true;
@@ -267,9 +267,9 @@ namespace XenAdmin.Controls.CustomDataGraph
                 if (uri == null)
                     return;
 
-                using (Stream httpstream = HTTPHelper.GET(uri, xenObject.Connection, true))
+                using (var httpstream = HTTPHelper.GET(uri, xenObject.Connection, true))
                 {
-                    using (XmlReader reader = XmlReader.Create(httpstream))
+                    using (var reader = XmlReader.Create(httpstream))
                     {
                         _setsAdded = new List<DataSet>();
                         while (reader.Read())
@@ -336,7 +336,7 @@ namespace XenAdmin.Controls.CustomDataGraph
 
         private static Uri BuildUri(Host host, string path, string query)
         {
-            UriBuilder builder = new UriBuilder
+            var builder = new UriBuilder
             {
                 Scheme = host.Connection.UriScheme,
                 Host = host.address,
@@ -431,11 +431,11 @@ namespace XenAdmin.Controls.CustomDataGraph
                         return;
                     }
 
-                    ArchiveInterval i = GetArchiveIntervalFromFiveSecs(_currentInterval);
+                    var i = GetArchiveIntervalFromFiveSecs(_currentInterval);
                     if (i != ArchiveInterval.None)
                         Archives[i].CopyLoad(_setsAdded, _dataSources);
 
-                    foreach (DataSet set in _setsAdded)
+                    foreach (var set in _setsAdded)
                         set.Points.Clear();
                     _bailOut = false;
                 }
@@ -446,25 +446,25 @@ namespace XenAdmin.Controls.CustomDataGraph
 
             if (_lastNode == "name")
             {
-                string str = reader.ReadContentAsString();
+                var str = reader.ReadContentAsString();
                 _setsAdded.Add(new DataSet(xmo, false, str, _dataSources));
             }
             else if (_lastNode == "step")
             {
-                string str = reader.ReadContentAsString();
+                var str = reader.ReadContentAsString();
                 _stepSize = long.Parse(str, CultureInfo.InvariantCulture);
             }
             else if (_lastNode == "lastupdate")
             {
-                string str = reader.ReadContentAsString();
+                var str = reader.ReadContentAsString();
                 _endTime = long.Parse(str, CultureInfo.InvariantCulture);
             }
             else if (_lastNode == "pdp_per_row")
             {
-                string str = reader.ReadContentAsString();
+                var str = reader.ReadContentAsString();
                 _currentInterval = long.Parse(str, CultureInfo.InvariantCulture);
 
-                long modInterval = _endTime % (_stepSize * _currentInterval);
+                var modInterval = _endTime % (_stepSize * _currentInterval);
                 long stepCount = _currentInterval == 1 ? FIVE_SECONDS_IN_TEN_MINUTES // 120 * 5 seconds in 10 minutes
                                : _currentInterval == 12 ? MINUTES_IN_TWO_HOURS   // 120 minutes in 2 hours
                                : _currentInterval == 720 ? HOURS_IN_ONE_WEEK     // 168 hours in a week
@@ -474,7 +474,7 @@ namespace XenAdmin.Controls.CustomDataGraph
             }
             else if (_lastNode == "cf")
             {
-                string str = reader.ReadContentAsString();
+                var str = reader.ReadContentAsString();
                 if (str != "AVERAGE")
                     _bailOut = true;
             }
@@ -483,8 +483,8 @@ namespace XenAdmin.Controls.CustomDataGraph
                 if (_bailOut || _setsAdded.Count <= _valueCount)
                     return;
 
-                DataSet set = _setsAdded[_valueCount];
-                string str = reader.ReadContentAsString();
+                var set = _setsAdded[_valueCount];
+                var str = reader.ReadContentAsString();
                 set.AddPoint(str, _currentTime, _setsAdded, _dataSources);
                 _valueCount++;
             }
@@ -503,21 +503,21 @@ namespace XenAdmin.Controls.CustomDataGraph
             if (reader.NodeType != XmlNodeType.Text) return;
             if (_lastNode == "entry")
             {
-                string str = reader.ReadContentAsString();
+                var str = reader.ReadContentAsString();
                 DataSet set = null;
 
-                if (DataSet.ParseId(str, out string objType, out string objUuid, out string dataSourceName))
+                if (DataSet.ParseId(str, out var objType, out var objUuid, out var dataSourceName))
                 {
                     if (objType == "host")
                     {
-                        Host host = xo.Connection.Cache.Hosts.FirstOrDefault(h => h.uuid == objUuid);
+                        var host = xo.Connection.Cache.Hosts.FirstOrDefault(h => h.uuid == objUuid);
                         if (host != null)
                             set = new DataSet(host, (xo as Host)?.uuid != objUuid, dataSourceName, _dataSources);
                     }
 
                     if (objType == "vm")
                     {
-                        VM vm = xo.Connection.Cache.VMs.FirstOrDefault(v => v.uuid == objUuid);
+                        var vm = xo.Connection.Cache.VMs.FirstOrDefault(v => v.uuid == objUuid);
                         if (vm != null)
                             set = new DataSet(vm, (xo as VM)?.uuid != objUuid, dataSourceName, _dataSources);
                     }
@@ -530,14 +530,14 @@ namespace XenAdmin.Controls.CustomDataGraph
             }
             else if (_lastNode == "t")
             {
-                string str = reader.ReadContentAsString();
+                var str = reader.ReadContentAsString();
                 _currentTime = new DateTime((Convert.ToInt64(str) * TimeSpan.TicksPerSecond) + Util.TicksBefore1970).ToLocalTime().Ticks;
             }
             else if (_lastNode == "v")
             {
                 if (_setsAdded.Count <= _valueCount) return;
-                DataSet set = _setsAdded[_valueCount];
-                string str = reader.ReadContentAsString();
+                var set = _setsAdded[_valueCount];
+                var str = reader.ReadContentAsString();
                 set.AddPoint(str, _currentTime, _setsAdded, _dataSources);
                 _valueCount++;
             }
