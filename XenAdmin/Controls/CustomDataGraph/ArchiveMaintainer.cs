@@ -126,9 +126,6 @@ namespace XenAdmin.Controls.CustomDataGraph
         private int _valueCount;
         private string _lastNode = "";
 
-        /// <summary>
-        /// Gui Thread
-        /// </summary>
         public IXenObject XenObject
         {
             private get { return _xenObject; }
@@ -168,10 +165,6 @@ namespace XenAdmin.Controls.CustomDataGraph
             _updaterThread = new Thread(Update) { Name = "Archive Maintainer", IsBackground = true };
         }
 
-        /// <summary>
-        /// Call me, async update graph data set
-        /// UpdaterThread Thread
-        /// </summary>
         private void Update()
         {
             while (_runThread)
@@ -305,6 +298,7 @@ namespace XenAdmin.Controls.CustomDataGraph
             }
         }
 
+        #region Uri generators
         private Uri UpdateUri(ArchiveInterval interval, IXenObject xo)
         {
             var sessionRef = xo?.Connection?.Session?.opaque_ref;
@@ -363,68 +357,10 @@ namespace XenAdmin.Controls.CustomDataGraph
             };
             return builder.Uri;
         }
+        #endregion
 
-        public static long ToTicks(ArchiveInterval interval)
-        {
-            switch (interval)
-            {
-                case ArchiveInterval.FiveSecond:
-                    return TICKS_IN_FIVE_SECONDS;
-                case ArchiveInterval.OneMinute:
-                    return TICKS_IN_ONE_MINUTE;
-                case ArchiveInterval.OneHour:
-                    return TICKS_IN_ONE_HOUR;
-                default:
-                    return TICKS_IN_ONE_DAY;
-            }
-        }
+        #region Data fetcher methods
 
-        private static long ToSeconds(ArchiveInterval interval)
-        {
-            return ToTicks(interval) / TimeSpan.TicksPerSecond;
-        }
-
-        private long TimeFromInterval(ArchiveInterval interval)
-        {
-            switch (interval)
-            {
-                case ArchiveInterval.FiveSecond:
-                    if (LastFiveSecondCollection != DateTime.MinValue)
-                        return Util.TicksToSecondsSince1970(LastFiveSecondCollection.Ticks - TICKS_IN_FIVE_SECONDS);
-                    break;
-                case ArchiveInterval.OneMinute:
-                    if (LastOneMinuteCollection != DateTime.MinValue)
-                        return Util.TicksToSecondsSince1970(LastOneMinuteCollection.Ticks - TICKS_IN_ONE_MINUTE);
-                    break;
-                case ArchiveInterval.OneHour:
-                    if (LastOneHourCollection != DateTime.MinValue)
-                        return Util.TicksToSecondsSince1970(LastOneHourCollection.Ticks - TICKS_IN_ONE_HOUR);
-                    break;
-                case ArchiveInterval.OneDay:
-                    if (LastOneDayCollection != DateTime.MinValue)
-                        return Util.TicksToSecondsSince1970(LastOneDayCollection.Ticks - TICKS_IN_ONE_DAY);
-                    break;
-            }
-
-            return 0;
-        }
-
-        private static ArchiveInterval GetArchiveIntervalFromFiveSecs(long v)
-        {
-            switch (v)
-            {
-                case 1:
-                    return ArchiveInterval.FiveSecond;
-                case 12:
-                    return ArchiveInterval.OneMinute;
-                case 720:
-                    return ArchiveInterval.OneHour;
-                case 17280:
-                    return ArchiveInterval.OneDay;
-                default:
-                    return ArchiveInterval.None;
-            }
-        }
 
         private void RRD_Full_InspectCurrentNode(XmlReader reader, IXenObject xmo)
         {
@@ -565,11 +501,11 @@ namespace XenAdmin.Controls.CustomDataGraph
             }
         }
 
-        #region Actions
 
-        /// <summary>
-        /// run this to start or resume getting updates
-        /// </summary>
+        #endregion
+
+        #region Actions
+        
         public void Start()
         {
             if (_threadRunning)
@@ -586,10 +522,7 @@ namespace XenAdmin.Controls.CustomDataGraph
                     Monitor.PulseAll(_waitUpdates);
             }
         }
-
-        /// <summary>
-        /// for clean-up on exit only
-        /// </summary>
+        
         public void Stop()
         {
             _threadRunning = false;
@@ -600,15 +533,67 @@ namespace XenAdmin.Controls.CustomDataGraph
             lock (_updateMonitor)
                 Monitor.PulseAll(_updateMonitor);
         }
-
-        /// <summary>
-        /// for stoping getting updates when switching away from perfomance panel
-        /// </summary>
+        
         public void Pause()
         {
             _threadRunning = false; // stop updating
             lock (_waitUpdates) // clear the first Monitor.Wait so we pause the thread instantly.
                 Monitor.PulseAll(_waitUpdates);
+        }
+
+        #endregion
+
+        #region Public static methods
+
+
+        public static long ToTicks(ArchiveInterval interval)
+        {
+            switch (interval)
+            {
+                case ArchiveInterval.FiveSecond:
+                    return TICKS_IN_FIVE_SECONDS;
+                case ArchiveInterval.OneMinute:
+                    return TICKS_IN_ONE_MINUTE;
+                case ArchiveInterval.OneHour:
+                    return TICKS_IN_ONE_HOUR;
+                default:
+                    return TICKS_IN_ONE_DAY;
+            }
+        }
+
+
+        #endregion
+
+        #region Helpers
+
+        private static long ToSeconds(ArchiveInterval interval)
+        {
+            return ToTicks(interval) / TimeSpan.TicksPerSecond;
+        }
+
+        private long TimeFromInterval(ArchiveInterval interval)
+        {
+            switch (interval)
+            {
+                case ArchiveInterval.FiveSecond:
+                    if (LastFiveSecondCollection != DateTime.MinValue)
+                        return Util.TicksToSecondsSince1970(LastFiveSecondCollection.Ticks - TICKS_IN_FIVE_SECONDS);
+                    break;
+                case ArchiveInterval.OneMinute:
+                    if (LastOneMinuteCollection != DateTime.MinValue)
+                        return Util.TicksToSecondsSince1970(LastOneMinuteCollection.Ticks - TICKS_IN_ONE_MINUTE);
+                    break;
+                case ArchiveInterval.OneHour:
+                    if (LastOneHourCollection != DateTime.MinValue)
+                        return Util.TicksToSecondsSince1970(LastOneHourCollection.Ticks - TICKS_IN_ONE_HOUR);
+                    break;
+                case ArchiveInterval.OneDay:
+                    if (LastOneDayCollection != DateTime.MinValue)
+                        return Util.TicksToSecondsSince1970(LastOneDayCollection.Ticks - TICKS_IN_ONE_DAY);
+                    break;
+            }
+
+            return 0;
         }
 
         #endregion
