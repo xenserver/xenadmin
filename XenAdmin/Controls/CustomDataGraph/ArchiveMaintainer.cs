@@ -123,73 +123,14 @@ namespace XenAdmin.Controls.CustomDataGraph
 
         private void Update(object _)
         {
-            var firstTime = true;
+            var serverWas = ServerNow;
+            InitialLoad(serverWas);
+
             while (!_cancellationTokenSource.Token.IsCancellationRequested)
             {
-                var xenObject = XenObject;
-
-                var serverWas =
-                    ServerNow; // get time before updating so we don't miss any 5 second updates if getting the past data
-                if (firstTime)
-                {
-                    // Restrict to at most 24 hours data if necessary
-                    if (Helpers.FeatureForbidden(XenObject, XenAPI.Host.RestrictPerformanceGraphs))
-                    {
-                        Archives[ArchiveInterval.OneHour].MaxPoints = 24;
-                        Archives[ArchiveInterval.OneDay].MaxPoints = 0;
-                    }
-                    else
-                    {
-                        Archives[ArchiveInterval.OneHour].MaxPoints = HOURS_IN_ONE_WEEK;
-                        Archives[ArchiveInterval.OneDay].MaxPoints = DAYS_IN_ONE_YEAR;
-                    }
-
-                    _dataSources.Clear();
-
-                    foreach (var a in Archives.Values)
-                        a.ClearSets();
-
-                    
-                    if (_cancellationTokenSource.Token.IsCancellationRequested)
-                    {
-                        break;
-                    }
-                    LoadingInitialData = true;
-                    ArchivesUpdated?.Invoke();
-
-                    try
-                    {
-                        if (xenObject is Host h)
-                            _dataSources = Host.get_data_sources(h.Connection.Session, h.opaque_ref);
-                        else if (xenObject is VM vm && vm.power_state == vm_power_state.Running)
-                            _dataSources = VM.get_data_sources(vm.Connection.Session, vm.opaque_ref);
-
-                        Get(ArchiveInterval.None, RrdsUri, RRD_Full_InspectCurrentNode, xenObject, _cancellationTokenSource.Token);
-                    }
-                    catch (Exception e)
-                    {
-                        //Get handles its own exception;
-                        //anything caught here is thrown by the get_data_sources operations
-                        Log.Error($"Failed to retrieve data sources for '{xenObject.Name()}'", e);
-                    }
-
-                    if (_cancellationTokenSource.Token.IsCancellationRequested)
-                    {
-                        break;
-                    }
-                    ArchivesUpdated?.Invoke();
-                    LoadingInitialData = false;
-
-                    LastFiveSecondCollection = serverWas;
-                    LastOneMinuteCollection = serverWas;
-                    LastOneHourCollection = serverWas;
-                    LastOneDayCollection = serverWas;
-                    firstTime = false;
-                }
-
                 if (serverWas - LastFiveSecondCollection > FiveSeconds)
                 {
-                    Get(ArchiveInterval.FiveSecond, UpdateUri, RRD_Update_InspectCurrentNode, xenObject, _cancellationTokenSource.Token);
+                    Get(ArchiveInterval.FiveSecond, UpdateUri, RRD_Update_InspectCurrentNode, XenObject, _cancellationTokenSource.Token);
                     if (_cancellationTokenSource.Token.IsCancellationRequested)
                     {
                         break;
@@ -200,7 +141,7 @@ namespace XenAdmin.Controls.CustomDataGraph
 
                 if (serverWas - LastOneMinuteCollection > OneMinute)
                 {
-                    Get(ArchiveInterval.OneMinute, UpdateUri, RRD_Update_InspectCurrentNode, xenObject, _cancellationTokenSource.Token);
+                    Get(ArchiveInterval.OneMinute, UpdateUri, RRD_Update_InspectCurrentNode, XenObject, _cancellationTokenSource.Token);
                     if (_cancellationTokenSource.Token.IsCancellationRequested)
                     {
                         break;
@@ -211,7 +152,7 @@ namespace XenAdmin.Controls.CustomDataGraph
 
                 if (serverWas - LastOneHourCollection > OneHour)
                 {
-                    Get(ArchiveInterval.OneHour, UpdateUri, RRD_Update_InspectCurrentNode, xenObject, _cancellationTokenSource.Token);
+                    Get(ArchiveInterval.OneHour, UpdateUri, RRD_Update_InspectCurrentNode, XenObject, _cancellationTokenSource.Token);
                     if (_cancellationTokenSource.Token.IsCancellationRequested)
                     {
                         break;
@@ -222,7 +163,7 @@ namespace XenAdmin.Controls.CustomDataGraph
 
                 if (serverWas - LastOneDayCollection > OneDay)
                 {
-                    Get(ArchiveInterval.OneDay, UpdateUri, RRD_Update_InspectCurrentNode, xenObject, _cancellationTokenSource.Token);
+                    Get(ArchiveInterval.OneDay, UpdateUri, RRD_Update_InspectCurrentNode, XenObject, _cancellationTokenSource.Token);
                     if (_cancellationTokenSource.Token.IsCancellationRequested)
                     {
                         break;
@@ -230,6 +171,7 @@ namespace XenAdmin.Controls.CustomDataGraph
                     LastOneDayCollection = serverWas;
                     Archives[ArchiveInterval.OneDay].Load(_setsAdded);
                 }
+
                 if (_cancellationTokenSource.Token.IsCancellationRequested)
                 {
                     break;
@@ -237,6 +179,68 @@ namespace XenAdmin.Controls.CustomDataGraph
                 ArchivesUpdated?.Invoke();
                 Thread.Sleep(SLEEP_TIME);
             }
+        }
+
+        private void InitialLoad(DateTime initialServerTime)
+        {
+            // Restrict to at most 24 hours data if necessary
+            if (Helpers.FeatureForbidden(XenObject, Host.RestrictPerformanceGraphs))
+            {
+                Archives[ArchiveInterval.OneHour].MaxPoints = 24;
+                Archives[ArchiveInterval.OneDay].MaxPoints = 0;
+            }
+            else
+            {
+                Archives[ArchiveInterval.OneHour].MaxPoints = HOURS_IN_ONE_WEEK;
+                Archives[ArchiveInterval.OneDay].MaxPoints = DAYS_IN_ONE_YEAR;
+            }
+
+            _dataSources.Clear();
+
+            foreach (var a in Archives.Values)
+                a.ClearSets();
+
+            if (_cancellationTokenSource.Token.IsCancellationRequested)
+            {
+                return;
+            }
+            LoadingInitialData = true;
+            ArchivesUpdated?.Invoke();
+
+            try
+            {
+                switch (XenObject)
+                {
+                    case Host h:
+                        _dataSources = Host.get_data_sources(h.Connection.Session, h.opaque_ref);
+                        break;
+                    case VM vm when vm.power_state == vm_power_state.Running:
+                        _dataSources = VM.get_data_sources(vm.Connection.Session, vm.opaque_ref);
+                        break;
+                }
+                if (_cancellationTokenSource.Token.IsCancellationRequested)
+                {
+                    return;
+                }
+                Get(ArchiveInterval.None, RrdsUri, RRD_Full_InspectCurrentNode, XenObject, _cancellationTokenSource.Token);
+            }
+            catch (Exception e)
+            {
+                //Get handles its own exception; Anything caught here is thrown by the get_data_sources operations
+                Log.Error($"Failed to retrieve data sources for '{XenObject.Name()}'", e);
+            }
+
+            if (_cancellationTokenSource.Token.IsCancellationRequested)
+            {
+                return;
+            }
+            ArchivesUpdated?.Invoke();
+            LoadingInitialData = false;
+
+            LastFiveSecondCollection = initialServerTime;
+            LastOneMinuteCollection = initialServerTime;
+            LastOneHourCollection = initialServerTime;
+            LastOneDayCollection = initialServerTime;
         }
 
         private void Get(ArchiveInterval interval, Func<ArchiveInterval, IXenObject, Uri> uriBuilder,
@@ -265,10 +269,7 @@ namespace XenAdmin.Controls.CustomDataGraph
             }
             catch (Exception e)
             {
-                Log.Debug(
-                    string.Format("ArchiveMaintainer: Get updates for {0}: {1} Failed.",
-                        xenObject is Host ? "Host" : "VM",
-                        xenObject != null ? xenObject.opaque_ref : Helper.NullOpaqueRef), e);
+                Log.Debug($"ArchiveMaintainer: Get updates for {(xenObject is Host ? "Host" : "VM")}: {(xenObject != null ? xenObject.opaque_ref : Helper.NullOpaqueRef)} Failed.", e);
             }
         }
 
