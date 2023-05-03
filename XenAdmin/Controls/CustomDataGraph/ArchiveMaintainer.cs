@@ -42,7 +42,14 @@ using XenAdmin.Core;
 namespace XenAdmin.Controls.CustomDataGraph
 {
     [Flags]
-    public enum ArchiveInterval { None = 0, FiveSecond = 1, OneMinute = 2, OneHour = 4, OneDay = 8 }
+    public enum ArchiveInterval
+    {
+        None = 0,
+        FiveSecond = 1,
+        OneMinute = 2,
+        OneHour = 4,
+        OneDay = 8
+    }
 
     public class ArchiveMaintainer
     {
@@ -69,20 +76,23 @@ namespace XenAdmin.Controls.CustomDataGraph
 
         private const int SLEEP_TIME = 5000;
 
-        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly log4net.ILog Log =
+            log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
         /// Fired (on a background thread) when new performance data are received from the server
         /// </summary>
         internal event Action ArchivesUpdated;
 
-        internal readonly Dictionary<ArchiveInterval, DataArchive> Archives = new Dictionary<ArchiveInterval, DataArchive>();
+        internal readonly Dictionary<ArchiveInterval, DataArchive> Archives =
+            new Dictionary<ArchiveInterval, DataArchive>();
 
         /// <summary>
         /// for pausing the retrieval of updates
         /// call Monitor.PulseAll(UpdateMonitor) on resume
         /// </summary>
         private readonly object _updateMonitor = new object();
+
         /// <summary>
         /// for waiting between updates
         /// the Monitor has a timeout too so we either wait for 'SleepTime' or a pulseall on WaitUpdates
@@ -95,6 +105,7 @@ namespace XenAdmin.Controls.CustomDataGraph
         ///  if true UpdaterThread will keep looping
         /// </summary>
         private bool _runThread;
+
         /// <summary>
         /// Whether the thread is started or not
         /// </summary>
@@ -156,7 +167,7 @@ namespace XenAdmin.Controls.CustomDataGraph
             Archives.Add(ArchiveInterval.OneDay, new DataArchive(DAYS_IN_ONE_YEAR));
             Archives.Add(ArchiveInterval.None, new DataArchive(0));
 
-            _updaterThread = new Thread(Update) {Name = "Archive Maintainer", IsBackground = true};
+            _updaterThread = new Thread(Update) { Name = "Archive Maintainer", IsBackground = true };
         }
 
         /// <summary>
@@ -169,7 +180,8 @@ namespace XenAdmin.Controls.CustomDataGraph
             {
                 var xenObject = XenObject;
 
-                var serverWas = ServerNow; // get time before updating so we don't miss any 5 second updates if getting the past data
+                var serverWas =
+                    ServerNow; // get time before updating so we don't miss any 5 second updates if getting the past data
 
                 if (FirstTime)
                 {
@@ -227,18 +239,21 @@ namespace XenAdmin.Controls.CustomDataGraph
                     LastFiveSecondCollection = serverWas;
                     Archives[ArchiveInterval.FiveSecond].Load(_setsAdded);
                 }
+
                 if (serverWas - LastOneMinuteCollection > OneMinute)
                 {
                     Get(ArchiveInterval.OneMinute, UpdateUri, RRD_Update_InspectCurrentNode, xenObject);
                     LastOneMinuteCollection = serverWas;
                     Archives[ArchiveInterval.OneMinute].Load(_setsAdded);
                 }
+
                 if (serverWas - LastOneHourCollection > OneHour)
                 {
                     Get(ArchiveInterval.OneHour, UpdateUri, RRD_Update_InspectCurrentNode, xenObject);
                     LastOneHourCollection = serverWas;
                     Archives[ArchiveInterval.OneHour].Load(_setsAdded);
                 }
+
                 if (serverWas - LastOneDayCollection > OneDay)
                 {
                     Get(ArchiveInterval.OneDay, UpdateUri, RRD_Update_InspectCurrentNode, xenObject);
@@ -250,6 +265,7 @@ namespace XenAdmin.Controls.CustomDataGraph
                 {
                     Monitor.Wait(_waitUpdates, SLEEP_TIME);
                 }
+
                 lock (_updateMonitor)
                 {
                     if (!_threadRunning)
@@ -284,7 +300,10 @@ namespace XenAdmin.Controls.CustomDataGraph
             }
             catch (Exception e)
             {
-                Log.Debug(string.Format("ArchiveMaintainer: Get updates for {0}: {1} Failed.", xenObject is Host ? "Host" : "VM", xenObject != null ? xenObject.opaque_ref : Helper.NullOpaqueRef), e);
+                Log.Debug(
+                    string.Format("ArchiveMaintainer: Get updates for {0}: {1} Failed.",
+                        xenObject is Host ? "Host" : "VM",
+                        xenObject != null ? xenObject.opaque_ref : Helper.NullOpaqueRef), e);
             }
         }
 
@@ -321,7 +340,7 @@ namespace XenAdmin.Controls.CustomDataGraph
                 return null;
 
             var escapedRef = Uri.EscapeDataString(sessionRef);
-            
+
             if (xo is Host host)
                 return BuildUri(host, "host_rrds", $"session_id={escapedRef}");
 
@@ -388,6 +407,7 @@ namespace XenAdmin.Controls.CustomDataGraph
                         return Util.TicksToSecondsSince1970(LastOneDayCollection.Ticks - TICKS_IN_ONE_DAY);
                     break;
             }
+
             return 0;
         }
 
@@ -466,11 +486,13 @@ namespace XenAdmin.Controls.CustomDataGraph
 
                 var modInterval = _endTime % (_stepSize * _currentInterval);
                 long stepCount = _currentInterval == 1 ? FIVE_SECONDS_IN_TEN_MINUTES // 120 * 5 seconds in 10 minutes
-                               : _currentInterval == 12 ? MINUTES_IN_TWO_HOURS   // 120 minutes in 2 hours
-                               : _currentInterval == 720 ? HOURS_IN_ONE_WEEK     // 168 hours in a week
-                               : DAYS_IN_ONE_YEAR;                              // 366 days in a year
+                    : _currentInterval == 12 ? MINUTES_IN_TWO_HOURS // 120 minutes in 2 hours
+                    : _currentInterval == 720 ? HOURS_IN_ONE_WEEK // 168 hours in a week
+                    : DAYS_IN_ONE_YEAR; // 366 days in a year
 
-                _currentTime = new DateTime((((_endTime - modInterval) - (_stepSize * _currentInterval * stepCount)) * TimeSpan.TicksPerSecond) + Util.TicksBefore1970).ToLocalTime().Ticks;
+                _currentTime =
+                    new DateTime((((_endTime - modInterval) - (_stepSize * _currentInterval * stepCount)) *
+                                  TimeSpan.TicksPerSecond) + Util.TicksBefore1970).ToLocalTime().Ticks;
             }
             else if (_lastNode == "cf")
             {
@@ -500,6 +522,7 @@ namespace XenAdmin.Controls.CustomDataGraph
                     _valueCount = 0;
                 }
             }
+
             if (reader.NodeType != XmlNodeType.Text) return;
             if (_lastNode == "entry")
             {
@@ -531,7 +554,8 @@ namespace XenAdmin.Controls.CustomDataGraph
             else if (_lastNode == "t")
             {
                 var str = reader.ReadContentAsString();
-                _currentTime = new DateTime((Convert.ToInt64(str) * TimeSpan.TicksPerSecond) + Util.TicksBefore1970).ToLocalTime().Ticks;
+                _currentTime = new DateTime((Convert.ToInt64(str) * TimeSpan.TicksPerSecond) + Util.TicksBefore1970)
+                    .ToLocalTime().Ticks;
             }
             else if (_lastNode == "v")
             {
@@ -551,7 +575,7 @@ namespace XenAdmin.Controls.CustomDataGraph
         public void Start()
         {
             if (_threadRunning)
-                return;  // if we are already running dont start twice!
+                return; // if we are already running dont start twice!
             _threadRunning = true;
             _runThread = true; // keep looping
             if ((_updaterThread.ThreadState & ThreadState.Unstarted) > 0)
