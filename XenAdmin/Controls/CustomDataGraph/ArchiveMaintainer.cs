@@ -121,7 +121,7 @@ namespace XenAdmin.Controls.CustomDataGraph
             XenObject = xenObject;
         }
 
-        private void Update(object _)
+        private void StartUpdateLoop(object _)
         {
             var serverWas = ServerNow;
             InitialLoad(serverWas);
@@ -484,7 +484,7 @@ namespace XenAdmin.Controls.CustomDataGraph
         public void Start()
         {
             _cancellationTokenSource = new CancellationTokenSource();
-            ThreadPool.QueueUserWorkItem(Update);
+            ThreadPool.QueueUserWorkItem(StartUpdateLoop);
         }
 
         public void Stop()
