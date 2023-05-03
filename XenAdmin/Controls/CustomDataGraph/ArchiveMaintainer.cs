@@ -31,7 +31,6 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading;
@@ -55,7 +54,6 @@ namespace XenAdmin.Controls.CustomDataGraph
     {
         private const long TICKS_IN_ONE_SECOND = 10000000;
         private const long TICKS_IN_FIVE_SECONDS = 50000000;
-        internal const long TICKS_IN_TEN_SECONDS = 100000000;
         private const long TICKS_IN_ONE_MINUTE = 600000000;
         internal const long TICKS_IN_TEN_MINUTES = 6000000000;
         private const long TICKS_IN_ONE_HOUR = 36000000000;
