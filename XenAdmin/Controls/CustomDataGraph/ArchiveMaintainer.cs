@@ -46,30 +46,30 @@ namespace XenAdmin.Controls.CustomDataGraph
 
     public class ArchiveMaintainer
     {
-        private const long TicksInOneSecond = 10000000;
-        private const long TicksInFiveSeconds = 50000000;
-        internal const long TicksInTenSeconds = 100000000;
-        private const long TicksInOneMinute = 600000000;
-        internal const long TicksInTenMinutes = 6000000000;
-        private const long TicksInOneHour = 36000000000;
-        internal const long TicksInTwoHours = 72000000000;
-        private const long TicksInOneDay = 864000000000;
-        internal const long TicksInSevenDays = 6048000000000;
-        internal const long TicksInOneYear = 316224000000000;
+        private const long TICKS_IN_ONE_SECOND = 10000000;
+        private const long TICKS_IN_FIVE_SECONDS = 50000000;
+        internal const long TICKS_IN_TEN_SECONDS = 100000000;
+        private const long TICKS_IN_ONE_MINUTE = 600000000;
+        internal const long TICKS_IN_TEN_MINUTES = 6000000000;
+        private const long TICKS_IN_ONE_HOUR = 36000000000;
+        internal const long TICKS_IN_TWO_HOURS = 72000000000;
+        private const long TICKS_IN_ONE_DAY = 864000000000;
+        internal const long TICKS_IN_SEVEN_DAYS = 6048000000000;
+        internal const long TICKS_IN_ONE_YEAR = 316224000000000;
 
-        private const int FiveSecondsInTenMinutes = 120;
-        private const int MinutesInTwoHours = 120;
-        private const int HoursInOneWeek = 168;
-        private const int DaysInOneYear = 366;
+        private const int FIVE_SECONDS_IN_TEN_MINUTES = 120;
+        private const int MINUTES_IN_TWO_HOURS = 120;
+        private const int HOURS_IN_ONE_WEEK = 168;
+        private const int DAYS_IN_ONE_YEAR = 366;
 
         private static readonly TimeSpan FiveSeconds = TimeSpan.FromSeconds(5);
         private static readonly TimeSpan OneMinute = TimeSpan.FromMinutes(1);
         private static readonly TimeSpan OneHour = TimeSpan.FromHours(1);
         private static readonly TimeSpan OneDay = TimeSpan.FromDays(1);
 
-        private const int SleepTime = 5000;
+        private const int SLEEP_TIME = 5000;
 
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
         /// Fired (on a background thread) when new performance data are received from the server
@@ -82,40 +82,40 @@ namespace XenAdmin.Controls.CustomDataGraph
         /// for pausing the retrieval of updates
         /// call Monitor.PulseAll(UpdateMonitor) on resume
         /// </summary>
-        private readonly object UpdateMonitor = new object();
+        private readonly object _updateMonitor = new object();
         /// <summary>
         /// for waiting between updates
         /// the Monitor has a timeout too so we either wait for 'SleepTime' or a pulseall on WaitUpdates
         /// </summary>
-        private readonly object WaitUpdates = new object();
+        private readonly object _waitUpdates = new object();
 
-        private Thread UpdaterThread;
+        private Thread _updaterThread;
 
         /// <summary>
         ///  if true UpdaterThread will keep looping
         /// </summary>
-        private bool RunThread;
+        private bool _runThread;
         /// <summary>
         /// Whether the thread is started or not
         /// </summary>
-        private bool ThreadRunning;
+        private bool _threadRunning;
 
         /// <summary>
         /// collection for holding updates whil
         /// </summary>
-        private List<DataSet> SetsAdded;
+        private List<DataSet> _setsAdded;
 
         private List<Data_source> _dataSources = new List<Data_source>();
 
         private IXenObject _xenObject;
 
-        private long EndTime;
-        private bool BailOut;
-        private long CurrentInterval;
-        private long StepSize;
-        private long CurrentTime;
-        private int ValueCount;
-        private string LastNode = "";
+        private long _endTime;
+        private bool _bailOut;
+        private long _currentInterval;
+        private long _stepSize;
+        private long _currentTime;
+        private int _valueCount;
+        private string _lastNode = "";
 
         /// <summary>
         /// Gui Thread
@@ -150,13 +150,13 @@ namespace XenAdmin.Controls.CustomDataGraph
 
         public ArchiveMaintainer()
         {
-            Archives.Add(ArchiveInterval.FiveSecond, new DataArchive(FiveSecondsInTenMinutes + 4));
-            Archives.Add(ArchiveInterval.OneMinute, new DataArchive(MinutesInTwoHours));
-            Archives.Add(ArchiveInterval.OneHour, new DataArchive(HoursInOneWeek));
-            Archives.Add(ArchiveInterval.OneDay, new DataArchive(DaysInOneYear));
+            Archives.Add(ArchiveInterval.FiveSecond, new DataArchive(FIVE_SECONDS_IN_TEN_MINUTES + 4));
+            Archives.Add(ArchiveInterval.OneMinute, new DataArchive(MINUTES_IN_TWO_HOURS));
+            Archives.Add(ArchiveInterval.OneHour, new DataArchive(HOURS_IN_ONE_WEEK));
+            Archives.Add(ArchiveInterval.OneDay, new DataArchive(DAYS_IN_ONE_YEAR));
             Archives.Add(ArchiveInterval.None, new DataArchive(0));
 
-            UpdaterThread = new Thread(Update) {Name = "Archive Maintainer", IsBackground = true};
+            _updaterThread = new Thread(Update) {Name = "Archive Maintainer", IsBackground = true};
         }
 
         /// <summary>
@@ -165,7 +165,7 @@ namespace XenAdmin.Controls.CustomDataGraph
         /// </summary>
         private void Update()
         {
-            while (RunThread)
+            while (_runThread)
             {
                 IXenObject xenObject = XenObject;
 
@@ -181,8 +181,8 @@ namespace XenAdmin.Controls.CustomDataGraph
                     }
                     else
                     {
-                        Archives[ArchiveInterval.OneHour].MaxPoints = HoursInOneWeek;
-                        Archives[ArchiveInterval.OneDay].MaxPoints = DaysInOneYear;
+                        Archives[ArchiveInterval.OneHour].MaxPoints = HOURS_IN_ONE_WEEK;
+                        Archives[ArchiveInterval.OneDay].MaxPoints = DAYS_IN_ONE_YEAR;
                     }
 
                     _dataSources.Clear();
@@ -206,7 +206,7 @@ namespace XenAdmin.Controls.CustomDataGraph
                     {
                         //Get handles its own exception;
                         //anything caught here is thrown by the get_data_sources operations
-                        log.Error($"Failed to retrieve data sources for '{xenObject.Name()}'", e);
+                        Log.Error($"Failed to retrieve data sources for '{xenObject.Name()}'", e);
                     }
                     finally
                     {
@@ -225,41 +225,41 @@ namespace XenAdmin.Controls.CustomDataGraph
                 {
                     Get(ArchiveInterval.FiveSecond, UpdateUri, RRD_Update_InspectCurrentNode, xenObject);
                     LastFiveSecondCollection = serverWas;
-                    Archives[ArchiveInterval.FiveSecond].Load(SetsAdded);
+                    Archives[ArchiveInterval.FiveSecond].Load(_setsAdded);
                 }
                 if (serverWas - LastOneMinuteCollection > OneMinute)
                 {
                     Get(ArchiveInterval.OneMinute, UpdateUri, RRD_Update_InspectCurrentNode, xenObject);
                     LastOneMinuteCollection = serverWas;
-                    Archives[ArchiveInterval.OneMinute].Load(SetsAdded);
+                    Archives[ArchiveInterval.OneMinute].Load(_setsAdded);
                 }
                 if (serverWas - LastOneHourCollection > OneHour)
                 {
                     Get(ArchiveInterval.OneHour, UpdateUri, RRD_Update_InspectCurrentNode, xenObject);
                     LastOneHourCollection = serverWas;
-                    Archives[ArchiveInterval.OneHour].Load(SetsAdded);
+                    Archives[ArchiveInterval.OneHour].Load(_setsAdded);
                 }
                 if (serverWas - LastOneDayCollection > OneDay)
                 {
                     Get(ArchiveInterval.OneDay, UpdateUri, RRD_Update_InspectCurrentNode, xenObject);
                     LastOneDayCollection = serverWas;
-                    Archives[ArchiveInterval.OneDay].Load(SetsAdded);
+                    Archives[ArchiveInterval.OneDay].Load(_setsAdded);
                 }
 
-                lock (WaitUpdates)
+                lock (_waitUpdates)
                 {
-                    Monitor.Wait(WaitUpdates, SleepTime);
+                    Monitor.Wait(_waitUpdates, SLEEP_TIME);
                 }
-                lock (UpdateMonitor)
+                lock (_updateMonitor)
                 {
-                    if (!ThreadRunning)
-                        Monitor.Wait(UpdateMonitor);
+                    if (!_threadRunning)
+                        Monitor.Wait(_updateMonitor);
                 }
             }
         }
 
         private void Get(ArchiveInterval interval, Func<ArchiveInterval, IXenObject, Uri> uriBuilder,
-            Action<XmlReader, IXenObject>Reader, IXenObject xenObject)
+            Action<XmlReader, IXenObject> readerMethod, IXenObject xenObject)
         {
             try
             {
@@ -271,10 +271,10 @@ namespace XenAdmin.Controls.CustomDataGraph
                 {
                     using (XmlReader reader = XmlReader.Create(httpstream))
                     {
-                        SetsAdded = new List<DataSet>();
+                        _setsAdded = new List<DataSet>();
                         while (reader.Read())
                         {
-                            Reader(reader, xenObject);
+                            readerMethod(reader, xenObject);
                         }
                     }
                 }
@@ -284,7 +284,7 @@ namespace XenAdmin.Controls.CustomDataGraph
             }
             catch (Exception e)
             {
-                log.Debug(string.Format("ArchiveMaintainer: Get updates for {0}: {1} Failed.", xenObject is Host ? "Host" : "VM", xenObject != null ? xenObject.opaque_ref : Helper.NullOpaqueRef), e);
+                Log.Debug(string.Format("ArchiveMaintainer: Get updates for {0}: {1} Failed.", xenObject is Host ? "Host" : "VM", xenObject != null ? xenObject.opaque_ref : Helper.NullOpaqueRef), e);
             }
         }
 
@@ -352,13 +352,13 @@ namespace XenAdmin.Controls.CustomDataGraph
             switch (interval)
             {
                 case ArchiveInterval.FiveSecond:
-                    return TicksInFiveSeconds;
+                    return TICKS_IN_FIVE_SECONDS;
                 case ArchiveInterval.OneMinute:
-                    return TicksInOneMinute;
+                    return TICKS_IN_ONE_MINUTE;
                 case ArchiveInterval.OneHour:
-                    return TicksInOneHour;
+                    return TICKS_IN_ONE_HOUR;
                 default:
-                    return TicksInOneDay;
+                    return TICKS_IN_ONE_DAY;
             }
         }
 
@@ -373,19 +373,19 @@ namespace XenAdmin.Controls.CustomDataGraph
             {
                 case ArchiveInterval.FiveSecond:
                     if (LastFiveSecondCollection != DateTime.MinValue)
-                        return Util.TicksToSecondsSince1970(LastFiveSecondCollection.Ticks - TicksInFiveSeconds);
+                        return Util.TicksToSecondsSince1970(LastFiveSecondCollection.Ticks - TICKS_IN_FIVE_SECONDS);
                     break;
                 case ArchiveInterval.OneMinute:
                     if (LastOneMinuteCollection != DateTime.MinValue)
-                        return Util.TicksToSecondsSince1970(LastOneMinuteCollection.Ticks - TicksInOneMinute);
+                        return Util.TicksToSecondsSince1970(LastOneMinuteCollection.Ticks - TICKS_IN_ONE_MINUTE);
                     break;
                 case ArchiveInterval.OneHour:
                     if (LastOneHourCollection != DateTime.MinValue)
-                        return Util.TicksToSecondsSince1970(LastOneHourCollection.Ticks - TicksInOneHour);
+                        return Util.TicksToSecondsSince1970(LastOneHourCollection.Ticks - TICKS_IN_ONE_HOUR);
                     break;
                 case ArchiveInterval.OneDay:
                     if (LastOneDayCollection != DateTime.MinValue)
-                        return Util.TicksToSecondsSince1970(LastOneDayCollection.Ticks - TicksInOneDay);
+                        return Util.TicksToSecondsSince1970(LastOneDayCollection.Ticks - TICKS_IN_ONE_DAY);
                     break;
             }
             return 0;
@@ -412,81 +412,81 @@ namespace XenAdmin.Controls.CustomDataGraph
         {
             if (reader.NodeType == XmlNodeType.Element)
             {
-                LastNode = reader.Name;
-                if (LastNode == "row")
+                _lastNode = reader.Name;
+                if (_lastNode == "row")
                 {
-                    CurrentTime += CurrentInterval * StepSize * TicksInOneSecond;
-                    ValueCount = 0;
+                    _currentTime += _currentInterval * _stepSize * TICKS_IN_ONE_SECOND;
+                    _valueCount = 0;
                 }
             }
 
             if (reader.NodeType == XmlNodeType.EndElement)
             {
-                LastNode = reader.Name;
-                if (LastNode == "rra")
+                _lastNode = reader.Name;
+                if (_lastNode == "rra")
                 {
-                    if (BailOut)
+                    if (_bailOut)
                     {
-                        BailOut = false;
+                        _bailOut = false;
                         return;
                     }
 
-                    ArchiveInterval i = GetArchiveIntervalFromFiveSecs(CurrentInterval);
+                    ArchiveInterval i = GetArchiveIntervalFromFiveSecs(_currentInterval);
                     if (i != ArchiveInterval.None)
-                        Archives[i].CopyLoad(SetsAdded, _dataSources);
+                        Archives[i].CopyLoad(_setsAdded, _dataSources);
 
-                    foreach (DataSet set in SetsAdded)
+                    foreach (DataSet set in _setsAdded)
                         set.Points.Clear();
-                    BailOut = false;
+                    _bailOut = false;
                 }
             }
 
             if (reader.NodeType != XmlNodeType.Text)
                 return;
 
-            if (LastNode == "name")
+            if (_lastNode == "name")
             {
                 string str = reader.ReadContentAsString();
-                SetsAdded.Add(new DataSet(xmo, false, str, _dataSources));
+                _setsAdded.Add(new DataSet(xmo, false, str, _dataSources));
             }
-            else if (LastNode == "step")
+            else if (_lastNode == "step")
             {
                 string str = reader.ReadContentAsString();
-                StepSize = long.Parse(str, CultureInfo.InvariantCulture);
+                _stepSize = long.Parse(str, CultureInfo.InvariantCulture);
             }
-            else if (LastNode == "lastupdate")
+            else if (_lastNode == "lastupdate")
             {
                 string str = reader.ReadContentAsString();
-                EndTime = long.Parse(str, CultureInfo.InvariantCulture);
+                _endTime = long.Parse(str, CultureInfo.InvariantCulture);
             }
-            else if (LastNode == "pdp_per_row")
+            else if (_lastNode == "pdp_per_row")
             {
                 string str = reader.ReadContentAsString();
-                CurrentInterval = long.Parse(str, CultureInfo.InvariantCulture);
+                _currentInterval = long.Parse(str, CultureInfo.InvariantCulture);
 
-                long modInterval = EndTime % (StepSize * CurrentInterval);
-                long stepCount = CurrentInterval == 1 ? FiveSecondsInTenMinutes // 120 * 5 seconds in 10 minutes
-                               : CurrentInterval == 12 ? MinutesInTwoHours   // 120 minutes in 2 hours
-                               : CurrentInterval == 720 ? HoursInOneWeek     // 168 hours in a week
-                               : DaysInOneYear;                              // 366 days in a year
+                long modInterval = _endTime % (_stepSize * _currentInterval);
+                long stepCount = _currentInterval == 1 ? FIVE_SECONDS_IN_TEN_MINUTES // 120 * 5 seconds in 10 minutes
+                               : _currentInterval == 12 ? MINUTES_IN_TWO_HOURS   // 120 minutes in 2 hours
+                               : _currentInterval == 720 ? HOURS_IN_ONE_WEEK     // 168 hours in a week
+                               : DAYS_IN_ONE_YEAR;                              // 366 days in a year
 
-                CurrentTime = new DateTime((((EndTime - modInterval) - (StepSize * CurrentInterval * stepCount)) * TimeSpan.TicksPerSecond) + Util.TicksBefore1970).ToLocalTime().Ticks;
+                _currentTime = new DateTime((((_endTime - modInterval) - (_stepSize * _currentInterval * stepCount)) * TimeSpan.TicksPerSecond) + Util.TicksBefore1970).ToLocalTime().Ticks;
             }
-            else if (LastNode == "cf")
+            else if (_lastNode == "cf")
             {
                 string str = reader.ReadContentAsString();
                 if (str != "AVERAGE")
-                    BailOut = true;
+                    _bailOut = true;
             }
-            else if (LastNode == "v")
+            else if (_lastNode == "v")
             {
-                if (BailOut || SetsAdded.Count <= ValueCount)
+                if (_bailOut || _setsAdded.Count <= _valueCount)
                     return;
 
-                DataSet set = SetsAdded[ValueCount];
+                DataSet set = _setsAdded[_valueCount];
                 string str = reader.ReadContentAsString();
-                set.AddPoint(str, CurrentTime, SetsAdded, _dataSources);
-                ValueCount++;
+                set.AddPoint(str, _currentTime, _setsAdded, _dataSources);
+                _valueCount++;
             }
         }
 
@@ -494,14 +494,14 @@ namespace XenAdmin.Controls.CustomDataGraph
         {
             if (reader.NodeType == XmlNodeType.Element)
             {
-                LastNode = reader.Name;
-                if (LastNode == "row")
+                _lastNode = reader.Name;
+                if (_lastNode == "row")
                 {
-                    ValueCount = 0;
+                    _valueCount = 0;
                 }
             }
             if (reader.NodeType != XmlNodeType.Text) return;
-            if (LastNode == "entry")
+            if (_lastNode == "entry")
             {
                 string str = reader.ReadContentAsString();
                 DataSet set = null;
@@ -526,20 +526,20 @@ namespace XenAdmin.Controls.CustomDataGraph
                 if (set == null)
                     set = new DataSet(null, true, str, _dataSources);
 
-                SetsAdded.Add(set);
+                _setsAdded.Add(set);
             }
-            else if (LastNode == "t")
+            else if (_lastNode == "t")
             {
                 string str = reader.ReadContentAsString();
-                CurrentTime = new DateTime((Convert.ToInt64(str) * TimeSpan.TicksPerSecond) + Util.TicksBefore1970).ToLocalTime().Ticks;
+                _currentTime = new DateTime((Convert.ToInt64(str) * TimeSpan.TicksPerSecond) + Util.TicksBefore1970).ToLocalTime().Ticks;
             }
-            else if (LastNode == "v")
+            else if (_lastNode == "v")
             {
-                if (SetsAdded.Count <= ValueCount) return;
-                DataSet set = SetsAdded[ValueCount];
+                if (_setsAdded.Count <= _valueCount) return;
+                DataSet set = _setsAdded[_valueCount];
                 string str = reader.ReadContentAsString();
-                set.AddPoint(str, CurrentTime, SetsAdded, _dataSources);
-                ValueCount++;
+                set.AddPoint(str, _currentTime, _setsAdded, _dataSources);
+                _valueCount++;
             }
         }
 
@@ -548,18 +548,18 @@ namespace XenAdmin.Controls.CustomDataGraph
         /// </summary>
         public void Start()
         {
-            if (ThreadRunning)
+            if (_threadRunning)
                 return;  // if we are already running dont start twice!
-            ThreadRunning = true;
-            RunThread = true; // keep looping
-            if ((UpdaterThread.ThreadState & ThreadState.Unstarted) > 0)
-                UpdaterThread.Start(); // if we have never been started
+            _threadRunning = true;
+            _runThread = true; // keep looping
+            if ((_updaterThread.ThreadState & ThreadState.Unstarted) > 0)
+                _updaterThread.Start(); // if we have never been started
             else
             {
-                lock (UpdateMonitor)
-                    Monitor.PulseAll(UpdateMonitor);
-                lock (WaitUpdates)
-                    Monitor.PulseAll(WaitUpdates);
+                lock (_updateMonitor)
+                    Monitor.PulseAll(_updateMonitor);
+                lock (_waitUpdates)
+                    Monitor.PulseAll(_waitUpdates);
             }
         }
 
@@ -568,13 +568,13 @@ namespace XenAdmin.Controls.CustomDataGraph
         /// </summary>
         public void Stop()
         {
-            ThreadRunning = false;
-            RunThread = false; // exit loop
+            _threadRunning = false;
+            _runThread = false; // exit loop
             // make sure we clear all Monitor.Waits so we can exit
-            lock (WaitUpdates)
-                Monitor.PulseAll(WaitUpdates);
-            lock (UpdateMonitor)
-                Monitor.PulseAll(UpdateMonitor);
+            lock (_waitUpdates)
+                Monitor.PulseAll(_waitUpdates);
+            lock (_updateMonitor)
+                Monitor.PulseAll(_updateMonitor);
         }
 
         /// <summary>
@@ -582,9 +582,9 @@ namespace XenAdmin.Controls.CustomDataGraph
         /// </summary>
         public void Pause()
         {
-            ThreadRunning = false; // stop updating
-            lock (WaitUpdates) // clear the first Monitor.Wait so we pause the thread instantly.
-                Monitor.PulseAll(WaitUpdates);
+            _threadRunning = false; // stop updating
+            lock (_waitUpdates) // clear the first Monitor.Wait so we pause the thread instantly.
+                Monitor.PulseAll(_waitUpdates);
         }
 
         public static ArchiveInterval NextArchiveDown(ArchiveInterval current)
