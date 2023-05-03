@@ -79,8 +79,7 @@ namespace XenAdmin.Controls.CustomDataGraph
 
         internal event Action ArchivesUpdated;
 
-        internal readonly Dictionary<ArchiveInterval, DataArchive> Archives =
-            new Dictionary<ArchiveInterval, DataArchive>();
+        internal readonly Dictionary<ArchiveInterval, DataArchive> Archives = new Dictionary<ArchiveInterval, DataArchive>();
 
         private CancellationTokenSource _cancellationTokenSource;
         private List<DataSet> _setsAdded;
@@ -101,7 +100,6 @@ namespace XenAdmin.Controls.CustomDataGraph
         public DateTime LastOneHourCollection = DateTime.MinValue;
         public DateTime LastOneDayCollection = DateTime.MinValue;
 
-        public bool FirstTime = true;
         public bool LoadingInitialData;
 
         private DateTime ServerNow => DateTime.UtcNow.Subtract(ClientServerOffset);
