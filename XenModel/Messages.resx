@@ -4572,9 +4572,6 @@ Plugging in untrustworthy USB devices to your computer may put your computer at 
   <data name="DISPLAY_DETAILS" xml:space="preserve">
     <value>Display options</value>
   </data>
-  <data name="DMC" xml:space="preserve">
-    <value>Dynamic Memory Control</value>
-  </data>
   <data name="DMC_UNAVAILABLE_LICENSE_RESTRICTION" xml:space="preserve">
     <value>The Dynamic Memory Control (DMC) is not available due to license restrictions on the server.</value>
   </data>
