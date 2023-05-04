@@ -12916,15 +12916,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dynamic Memory Control.
-        /// </summary>
-        public static string DMC {
-            get {
-                return ResourceManager.GetString("DMC", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The Dynamic Memory Control (DMC) is not available due to license restrictions on the server..
         /// </summary>
         public static string DMC_UNAVAILABLE_LICENSE_RESTRICTION {

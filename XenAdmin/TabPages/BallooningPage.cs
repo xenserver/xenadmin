@@ -391,7 +391,7 @@ namespace XenAdmin.TabPages
             pageContainerPanel.ResumeLayout();
             ReLayout();
 
-            SetupDeprecationBanner();
+            Banner.Visible = false;
         }
 
         private void ReLayout()
@@ -452,22 +452,6 @@ namespace XenAdmin.TabPages
         private void SetRowWidth(Control row)
         {
             row.Width = pageContainerPanel.Width - pageContainerPanel.Padding.Left - 25;  // It won't drop below row.MinimumSize.Width though
-        }
-
-        private void SetupDeprecationBanner()
-        {
-            if (Helpers.QuebecOrGreater(xenObject.Connection) &&
-                vms.Any(vm => vm.has_ballooning() && vm.memory_dynamic_min != vm.memory_static_max))
-            {
-                Banner.AppliesToVersion = string.Format(Messages.XENSERVER_8_1, BrandManager.ProductVersion81);
-                Banner.BannerType = DeprecationBanner.Type.Deprecation;
-                Banner.FeatureName = Messages.DMC;
-                Banner.Visible = !HiddenFeatures.LinkLabelHidden;
-            }
-            else
-            {
-                Banner.Visible = false;
-            }
         }
     }
 }
