@@ -154,8 +154,7 @@ namespace XenAdmin.SettingsPanels
 
         private void action_Completed(ActionBase sender)
         {
-            var action = (AsyncAction) sender;
-            if (!action.Succeeded)
+            if (!(sender is AsyncAction action) || !action.Succeeded)
                 commonNetwork = null;
 
             Program.Invoke(ParentForm, delegate

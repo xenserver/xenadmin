@@ -208,13 +208,9 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
         {
             sender.Completed -= action_Completed;
 
-            var action = sender as GetServerLocalTimeAction;
-            if (action == null)
+            if (!(sender is GetServerLocalTimeAction action) || !action.Succeeded)
                 return;
-
-            if (!action.Succeeded)
-                return;
-
+            
             Program.Invoke(Program.MainWindow, () =>
             {
                 try

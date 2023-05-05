@@ -594,40 +594,36 @@ namespace XenAdmin.Controls.Wlb
         /// </summary>
         protected void OptRecRetrieveAction_Completed(ActionBase sender)
         {
-            AsyncAction action = (AsyncAction)sender;
-            if (action.IsCompleted)
+            if (!(sender is WlbRetrieveRecommendationsAction asyncAction))
+                return;
+
+            asyncAction.Completed -= OptRecRetrieveAction_Completed;
+
+            _recommendations = asyncAction.Recommendations;
+
+            if (_recommendations != null && IsGoodRecommendation(_recommendations) && _xenObject.Connection == asyncAction.Connection)
             {
-                action.Completed -= OptRecRetrieveAction_Completed;
-
-                if (action is WlbRetrieveRecommendationsAction thisAction)
+                Program.Invoke(this, delegate ()
                 {
-                    _recommendations = thisAction.Recommendations;
-                    
-                    if (_recommendations != null && IsGoodRecommendation(_recommendations) && _xenObject.Connection == action.Connection)
-                    {
-                        Program.Invoke(this, delegate()
-                        {
-                            PopulateData(_recommendations);
+                    PopulateData(_recommendations);
 
-                            // In case optimizePoolListView is empty
-                            if (optimizePoolListView.Items.Count == 0)
-                            {
-                                statusLabel.Text = Messages.WLB_OPT_POOL_NO_RECOMMENDATION;
-                                EnableControls(true, false);
-                            }
-                            else
-                                EnableControls(false, true);
-                        });
+                    // In case optimizePoolListView is empty
+                    if (optimizePoolListView.Items.Count == 0)
+                    {
+                        statusLabel.Text = Messages.WLB_OPT_POOL_NO_RECOMMENDATION;
+                        EnableControls(true, false);
                     }
                     else
-                    {
-                        Program.Invoke(this, delegate()
-                        {
-                            statusLabel.Text = Messages.WLB_OPT_POOL_NO_RECOMMENDATION;
-                            EnableControls(true, false);
-                        });
-                    }
-                }
+                        EnableControls(false, true);
+                });
+            }
+            else
+            {
+                Program.Invoke(this, delegate ()
+                {
+                    statusLabel.Text = Messages.WLB_OPT_POOL_NO_RECOMMENDATION;
+                    EnableControls(true, false);
+                });
             }
         }
 

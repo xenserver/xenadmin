@@ -140,8 +140,7 @@ namespace XenAdmin.TabPages
 
         private void action_Changed(ActionBase sender)
         {
-            var asyncAction = sender as AsyncAction;
-            if (asyncAction != null)
+            if (sender is AsyncAction asyncAction)
                 asyncAction.RecomputeCanCancel();
 
             Program.Invoke(Program.MainWindow, () =>

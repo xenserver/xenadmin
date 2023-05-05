@@ -30,6 +30,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Windows.Forms;
 using XenAPI;
 using XenAdmin.Actions;
@@ -45,6 +46,8 @@ namespace XenAdmin.Commands
     /// </summary>
     internal class NewTemplateFromSnapshotCommand : Command
     {
+        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod()?.DeclaringType);
+
         /// <summary>
         /// Initializes a new instance of this Command. The parameter-less constructor is required in the derived
         /// class if it is to be attached to a ToolStrip menu item or button. It should not be used in any other scenario.
@@ -65,15 +68,16 @@ namespace XenAdmin.Commands
 
         protected override void RunCore(SelectedItemCollection selection)
         {
-            VM snapshot = (VM)selection[0].XenObject;
+            var snapshot = (VM)selection[0].XenObject;
 
             // Generate list of all taken VM/snapshot/template names
-            List<string> takenNames = new List<VM>(snapshot.Connection.Cache.VMs).ConvertAll(v => v.Name());
+            var takenNames = new List<VM>(snapshot.Connection.Cache.VMs).ConvertAll(v => v.Name());
 
             // Generate a unique suggested name for the new template
-            string defaultName = Helpers.MakeUniqueName(String.Format(Messages.TEMPLATE_FROM_SNAPSHOT_DEFAULT_NAME, snapshot.Name()), takenNames);
+            var defaultName = Helpers.MakeUniqueName(string.Format(Messages.TEMPLATE_FROM_SNAPSHOT_DEFAULT_NAME, snapshot.Name()), takenNames);
 
-            using (var dialog = new InputPromptDialog {
+            using (var dialog = new InputPromptDialog
+            {
                 Text = Messages.SAVE_AS_TEMPLATE,
                 PromptText = Messages.NEW_TEMPLATE_PROMPT,
                 InputText = defaultName,
@@ -82,21 +86,21 @@ namespace XenAdmin.Commands
             {
                 if (dialog.ShowDialog(Parent) == DialogResult.OK)
                 {
-                    // TODO: work out what the new description should be
-                    var action = new VMCloneAction(snapshot, dialog.InputText, "");
+                    var action = new VMCloneAction(snapshot, dialog.InputText, string.Format(Messages.TEMPLATE_FROM_SNAPSHOT_DEFAULT_DESCRIPTION, BrandManager.BrandConsole, snapshot.Name()));
                     action.Completed += action_Completed;
                     action.RunAsync();
                 }
             }
         }
 
-        void action_Completed(ActionBase sender)
+        private static void action_Completed(ActionBase sender)
         {
-            AsyncAction action = (AsyncAction)sender;
+            if (!sender.Succeeded || !(sender is AsyncAction action))
+                return;
+
             var vm = action.Connection.Resolve(new XenRef<VM>(action.Result));
             if (vm != null)
                 new SetVMOtherConfigAction(vm.Connection, vm, "instant", "true").RunAsync();
-
         }
 
         protected override bool CanRunCore(SelectedItemCollection selection)
@@ -104,12 +108,6 @@ namespace XenAdmin.Commands
             return selection.ContainsOneItemOfType<VM>() && selection.AtLeastOneXenObjectCan<VM>(v => v.is_a_snapshot);
         }
 
-        public override string MenuText
-        {
-            get
-            {
-                return Messages.CREATE_TEMPLATE_FROM_SNAPSHOT_MENU_ITEM;
-            }
-        }
+        public override string MenuText => Messages.CREATE_TEMPLATE_FROM_SNAPSHOT_MENU_ITEM;
     }
 }

@@ -214,43 +214,41 @@ namespace XenAdmin.TabPages
 
         protected void action_Completed(ActionBase sender)
         {
-            // This seems to be called off the event thread
-            AsyncAction action = (AsyncAction)sender;
-            if (action.IsCompleted)
+            if (!(sender is AsyncAction action) || !action.IsCompleted)
+                return;
+
+            action.Completed -= action_Completed;
+            if (action is EnableWLBAction || action is RetrieveWlbConfigurationAction || action is DisableWLBAction)
             {
-                action.Completed -= action_Completed;
-                if (action is EnableWLBAction || action is RetrieveWlbConfigurationAction || action is DisableWLBAction)
+                if (action is EnableWLBAction)
                 {
-                    if (action is EnableWLBAction)
+                    EnableWLBAction thisAction = (EnableWLBAction)action;
+                    _wlbPoolConfiguration = new WlbPoolConfiguration(thisAction.WlbConfiguration);
+                }
+                else if (action is RetrieveWlbConfigurationAction)
+                {
+                    RetrieveWlbConfigurationAction thisAction = (RetrieveWlbConfigurationAction)action;
+                    if (thisAction.Succeeded)
                     {
-                        EnableWLBAction thisAction = (EnableWLBAction)action;
                         _wlbPoolConfiguration = new WlbPoolConfiguration(thisAction.WlbConfiguration);
                     }
-                    else if (action is RetrieveWlbConfigurationAction)
+                    else
                     {
-                        RetrieveWlbConfigurationAction thisAction = (RetrieveWlbConfigurationAction)action;
-                        if (thisAction.Succeeded)
-                        {
-                            _wlbPoolConfiguration = new WlbPoolConfiguration(thisAction.WlbConfiguration);
-                        }
-                        else
-                        {
-                            //_statusError = thisAction.Exception.Message;
-                            _wlbPoolConfiguration = null;
-                        }
+                        //_statusError = thisAction.Exception.Message;
+                        _wlbPoolConfiguration = null;
                     }
-                    else if (action is DisableWLBAction)
-                    {
-                    }
-
-                    Program.Invoke(Program.MainWindow, delegate()
-                    {
-                        if (_pool != null && _pool.Connection == action.Connection)
-                        {
-                            RefreshControls();
-                        }
-                    });
                 }
+                else if (action is DisableWLBAction)
+                {
+                }
+
+                Program.Invoke(Program.MainWindow, delegate()
+                {
+                    if (_pool != null && _pool.Connection == action.Connection)
+                    {
+                        RefreshControls();
+                    }
+                });
             }
         }
 

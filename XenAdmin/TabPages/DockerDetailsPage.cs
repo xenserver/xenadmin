@@ -99,8 +99,7 @@ namespace XenAdmin.TabPages
 
         private void action_Completed(ActionBase sender)
         {
-            var action = sender as RunContainerPluginAction;
-            if (action == null || action.Container != container)
+            if (!(sender is RunContainerPluginAction action) || action.Container != container)
                 return;
             Program.Invoke(Program.MainWindow, () =>
             {
