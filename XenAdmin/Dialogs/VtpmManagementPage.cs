@@ -93,7 +93,7 @@ namespace XenAdmin.Dialogs
         {
             cannotReason = null;
 
-            if (Helpers.XapiEqualOrGreater_23_10_0(Vtpm.Connection))
+            if (Helpers.XapiEqualOrGreater_23_11_0(Vtpm.Connection))
             {
                 if (Vtpm.allowed_operations.Contains(vtpm_operations.destroy))
                     return true;
@@ -114,7 +114,7 @@ namespace XenAdmin.Dialogs
             if (e.PropertyName == "is_protected" || e.PropertyName == "is_unique")
                 Program.Invoke(this, UpdateProperties);
 
-            if (e.PropertyName == "allowed_operations" && Helpers.XapiEqualOrGreater_23_10_0(vtpm.Connection))
+            if (e.PropertyName == "allowed_operations" && Helpers.XapiEqualOrGreater_23_11_0(vtpm.Connection))
                 Program.Invoke(this, UpdateButtons);
         }
 

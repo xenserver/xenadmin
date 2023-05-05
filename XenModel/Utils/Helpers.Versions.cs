@@ -456,10 +456,10 @@ namespace XenAdmin.Core
             return coordinator == null || ProductVersionCompare(coordinator.GetXapiVersion(), "23.9.0") >= 0;
         }
 
-        public static bool XapiEqualOrGreater_23_10_0(IXenConnection conn)
+        public static bool XapiEqualOrGreater_23_11_0(IXenConnection conn)
         {
             var coordinator = GetCoordinator(conn);
-            return coordinator == null || ProductVersionCompare(coordinator.GetXapiVersion(), "23.10.0") >= 0;
+            return coordinator == null || ProductVersionCompare(coordinator.GetXapiVersion(), "23.11.0") >= 0;
         }
 
         #endregion
