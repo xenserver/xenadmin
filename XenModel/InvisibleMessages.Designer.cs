@@ -79,15 +79,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://docs.citrix.com/en-us/citrix-hypervisor/CH-0005.html.
-        /// </summary>
-        public static string DMC_REMOVAL_URL {
-            get {
-                return ResourceManager.GetString("DMC_REMOVAL_URL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to http://docs.citrix.com/en-us/.
         /// </summary>
         public static string DOCS_URL {
