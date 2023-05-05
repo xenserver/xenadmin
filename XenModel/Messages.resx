@@ -4715,36 +4715,6 @@ Plugging in untrustworthy USB devices to your computer may put your computer at 
   <data name="DISPLAY_DETAILS" xml:space="preserve">
     <value>Display options</value>
   </data>
-  <data name="DMC" xml:space="preserve">
-    <value>Dynamic Memory Control</value>
-  </data>
-  <data name="DMC_CHECK_ENABLED" xml:space="preserve">
-    <value>Checking for VMs using Dynamic Memory Control (DMC)</value>
-  </data>
-  <data name="DMC_DISABLE" xml:space="preserve">
-    <value>Shut Down VMs and &amp;Disable DMC</value>
-  </data>
-  <data name="DMC_DISABLE_ACTION_TITLE" xml:space="preserve">
-    <value>Disabling Dynamic Memory Control...</value>
-  </data>
-  <data name="DMC_REMOVAL_LONG_ERROR" xml:space="preserve">
-    <value>
-Your system has VMs that use DMC. Their memory settings must be reconfigured before you can upgrade to {0} because support for DMC has been removed in this release.
-
-Click Shut Down VMs and Disable DMC if you want {1} to reconfigure your VMs' memory settings.
-
-Click Cancel if you prefer to reconfigure your VMs' memory settings manually.</value>
-  </data>
-  <data name="DMC_REMOVAL_LONG_WARNING" xml:space="preserve">
-    <value>Your system has VMs that use DMC. If you are upgrading to {0}, their memory settings must be reconfigured because support for DMC has been removed in this release.
-
-Click Shut Down VMs and Disable DMC if you want {1} to reconfigure your VMs' memory settings.
-
-Click Cancel if you prefer to reconfigure your VMs' memory settings manually.</value>
-  </data>
-  <data name="DMC_REMOVAL_SHORT" xml:space="preserve">
-    <value>{0}: Support for Dynamic Memory Control (DMC) has been removed in {1}.</value>
-  </data>
   <data name="DMC_UNAVAILABLE_LICENSE_RESTRICTION" xml:space="preserve">
     <value>The Dynamic Memory Control (DMC) is not available due to license restrictions on the server.</value>
   </data>

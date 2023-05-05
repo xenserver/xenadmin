@@ -230,15 +230,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             if (iloChecks.Count > 0)
                 groups.Add(new CheckGroup(Messages.CHECKING_POWER_ON_MODE_GROUP, iloChecks));
 
-            //Checking DMC
-            var dmcChecks = (from Pool pool in SelectedPools
-                let check = new DmcCheck(this, pool, InstallMethodConfig, ManualUpgrade)
-                where check.CanRun()
-                select check as Check).ToList();
-
-            if (dmcChecks.Count > 0)
-                groups.Add(new CheckGroup(Messages.DMC_CHECK_ENABLED, dmcChecks));
-
             //Checking PV guests - for hosts that have any PV guests and warn the user before the upgrade.
             var pvChecks = (from Host server in SelectedCoordinators
                 let check = new PVGuestsCheck(server, ManualUpgrade, InstallMethodConfig)

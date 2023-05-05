@@ -120,9 +120,6 @@
   <data name="DEPRECATION_URL" xml:space="preserve">
     <value>http://docs.citrix.com/zh-cn/citrix-hypervisor/whats-new/removed-features.html</value>
   </data>
-  <data name="DMC_REMOVAL_URL" xml:space="preserve">
-    <value>https://docs.citrix.com/zh-cn/citrix-hypervisor/CH-0005.html</value>
-  </data>
   <data name="DOCS_URL" xml:space="preserve">
     <value>http://docs.citrix.com/zh-cn/</value>
   </data>
