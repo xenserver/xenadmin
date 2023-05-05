@@ -179,7 +179,7 @@ namespace XenAdmin.Dialogs
         {
             cannotReason = null;
 
-            if (Helpers.XapiEqualOrGreater_23_10_0(vtpm.Connection))
+            if (Helpers.XapiEqualOrGreater_23_11_0(vtpm.Connection))
             {
                 if (vtpm.allowed_operations.Contains(vtpm_operations.destroy))
                     return true;

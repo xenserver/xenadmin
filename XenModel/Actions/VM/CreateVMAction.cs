@@ -278,7 +278,7 @@ namespace XenAdmin.Actions.VMActions
             if (!_assignVtpm)
                 return;
 
-            if (Helpers.XapiEqualOrGreater_23_10_0(Connection) && !VM.allowed_operations.Contains(vm_operations.create_vtpm))
+            if (Helpers.XapiEqualOrGreater_23_11_0(Connection) && !VM.allowed_operations.Contains(vm_operations.create_vtpm))
                 return;
 
             new NewVtpmAction(Connection, VM).RunSync(Session);

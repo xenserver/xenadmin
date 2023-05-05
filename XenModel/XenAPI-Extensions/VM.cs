@@ -1790,7 +1790,7 @@ namespace XenAPI
         {
             cannotReason = null;
 
-            if (Helpers.XapiEqualOrGreater_23_10_0(Connection))
+            if (Helpers.XapiEqualOrGreater_23_11_0(Connection))
             {
                 if (allowed_operations.Contains(vm_operations.create_vtpm))
                     return true;
