@@ -20932,7 +20932,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The imported appliance requires a minimum of {0} virtual CPUs, while the number of physical CPUs in the selected host is {1}. You will not be able to start the appliance on the selected pool..
+        ///   Looks up a localized string similar to The imported appliance requires a minimum of {0} virtual CPUs, while the number of physical CPUs in the selected server is {1}. You will not be able to start the appliance on the selected server..
         /// </summary>
         public static string IMPORT_WIZARD_CPUS_COUNT_MISMATCH_HOST {
             get {
@@ -26985,15 +26985,6 @@ namespace XenAdmin {
         public static string NEWVMWIZARD_CPUMEMPAGE_VCPUS {
             get {
                 return ResourceManager.GetString("NEWVMWIZARD_CPUMEMPAGE_VCPUS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You have selected more than {0} vCPUs for the new VM. Where a VM may be running actively hostile privileged code {1} recommends that the vCPU limit is set to {0} to prevent impact on system availability..
-        /// </summary>
-        public static string NEWVMWIZARD_CPUMEMPAGE_VCPUS_TRUSTED_VM_WARN {
-            get {
-                return ResourceManager.GetString("NEWVMWIZARD_CPUMEMPAGE_VCPUS_TRUSTED_VM_WARN", resourceCulture);
             }
         }
         
@@ -38650,6 +38641,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You have selected more than {0} vCPUs for the new VM. Where a VM may be running actively hostile privileged code {1} recommends that the vCPU limit is set to {0} to prevent impact on system availability..
+        /// </summary>
+        public static string VCPUS_UNTRUSTED_VM_WARNING {
+            get {
+                return ResourceManager.GetString("VCPUS_UNTRUSTED_VM_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to VDI.
         /// </summary>
         public static string VDI {
@@ -39334,7 +39334,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The host for this VM is does not have enough physical CPUs to start the VM. The VM will start on another host.
+        ///   Looks up a localized string similar to The VM&apos;s home server does not have enough physical CPUs to start the VM. The VM will start on another server.
         /// </summary>
         public static string VM_CPUMEMPAGE_VCPU_HOME_HOST_WARNING {
             get {
@@ -39352,16 +39352,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You have selected more than {0} vCPUs for the new VM. Where a VM may be running actively hostile privileged code {1} recommends that the vCPU limit is set to {0} to prevent impact on system availability..
-        /// </summary>
-        public static string VM_CPUMEMPAGE_VCPU_TRUSTED_WARNING {
-            get {
-                return ResourceManager.GetString("VM_CPUMEMPAGE_VCPU_TRUSTED_WARNING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to There are no hosts with enough physical CPUs to start the VM.
+        ///   Looks up a localized string similar to There are no servers with enough physical CPUs to start the VM.
         /// </summary>
         public static string VM_CPUMEMPAGE_VCPU_WARNING {
             get {

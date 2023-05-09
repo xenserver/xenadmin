@@ -34,6 +34,7 @@ namespace XenAdmin.SettingsPanels
             this.lblSliderLowest = new System.Windows.Forms.Label();
             this.lblPriority = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.initialVCPUWarningLabel = new System.Windows.Forms.Label();
             this.comboBoxInitialVCPUs = new System.Windows.Forms.ComboBox();
             this.labelInitialVCPUs = new System.Windows.Forms.Label();
             this.labelInvalidVCPUWarning = new System.Windows.Forms.Label();
@@ -51,7 +52,6 @@ namespace XenAdmin.SettingsPanels
             this.VCPUWarningLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBoxVCPUs = new System.Windows.Forms.ComboBox();
-            this.initialVCPUWarningLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudMemory)).BeginInit();
@@ -100,6 +100,13 @@ namespace XenAdmin.SettingsPanels
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.comboBoxVCPUs, 1, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
+            // initialVCPUWarningLabel
+            // 
+            resources.ApplyResources(this.initialVCPUWarningLabel, "initialVCPUWarningLabel");
+            this.tableLayoutPanel1.SetColumnSpan(this.initialVCPUWarningLabel, 2);
+            this.initialVCPUWarningLabel.ForeColor = System.Drawing.Color.Red;
+            this.initialVCPUWarningLabel.Name = "initialVCPUWarningLabel";
             // 
             // comboBoxInitialVCPUs
             // 
@@ -233,13 +240,6 @@ namespace XenAdmin.SettingsPanels
             resources.ApplyResources(this.comboBoxVCPUs, "comboBoxVCPUs");
             this.comboBoxVCPUs.Name = "comboBoxVCPUs";
             this.comboBoxVCPUs.SelectedIndexChanged += new System.EventHandler(this.comboBoxVCPUs_SelectedIndexChanged);
-            // 
-            // initialVCPUWarningLabel
-            // 
-            resources.ApplyResources(this.initialVCPUWarningLabel, "initialVCPUWarningLabel");
-            this.tableLayoutPanel1.SetColumnSpan(this.initialVCPUWarningLabel, 2);
-            this.initialVCPUWarningLabel.ForeColor = System.Drawing.Color.Red;
-            this.initialVCPUWarningLabel.Name = "initialVCPUWarningLabel";
             // 
             // CPUMemoryEditPage
             // 

@@ -373,7 +373,7 @@
     <value>comboBoxTopology</value>
   </data>
   <data name="&gt;&gt;comboBoxTopology.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.CPUTopologyComboBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.CPUTopologyComboBox, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;comboBoxTopology.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -571,7 +571,7 @@
     <value>transparentTrackBar1</value>
   </data>
   <data name="&gt;&gt;transparentTrackBar1.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.TransparentTrackBar, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.TransparentTrackBar, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;transparentTrackBar1.Parent" xml:space="preserve">
     <value>panel1</value>
@@ -737,9 +737,6 @@
   </data>
   <data name="VCPUWarningLabel.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
-  </data>
-  <data name="VCPUWarningLabel.Text" xml:space="preserve">
-    <value>You cannot start VMs with more vCPUs than there are physical CPUs on any host in the pool</value>
   </data>
   <data name="VCPUWarningLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>

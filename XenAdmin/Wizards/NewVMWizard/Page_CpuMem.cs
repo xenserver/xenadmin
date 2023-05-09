@@ -357,7 +357,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             else if (SelectedVCpusMax > VM.MAX_VCPUS_FOR_NON_TRUSTED_VMS)
             {
                 ErrorPanel.Visible = true;
-                ErrorLabel.Text = string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_VCPUS_TRUSTED_VM_WARN, VM.MAX_VCPUS_FOR_NON_TRUSTED_VMS, BrandManager.ProductBrand);
+                ErrorLabel.Text = string.Format(Messages.VCPUS_UNTRUSTED_VM_WARNING, VM.MAX_VCPUS_FOR_NON_TRUSTED_VMS, BrandManager.ProductBrand);
             }
             else
             {
