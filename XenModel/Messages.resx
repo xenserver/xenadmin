@@ -9378,18 +9378,10 @@ When you configure an NFS storage repository, you simply provide the host name o
     <value>(min = {0}, max = {1})</value>
   </data>
   <data name="NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN1" xml:space="preserve">
-    <value>The amount of memory allocated to the new VM is greater than the amount of physical memory on any server in the pool.
-
-Server '{0}' has {1} of physical memory in total.
-
-You will not be able to start this VM without increasing the amount of physical memory on one of the servers in the pool.</value>
+    <value>The amount of memory allocated to the new VM is greater than the amount of physical memory on any server in the pool ({0}).</value>
   </data>
   <data name="NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN2" xml:space="preserve">
-    <value>The amount of memory allocated to the new VM is greater than the amount of physical memory available on any server in the pool.
-
-Server '{0}' has {1} of physical memory available.
-
-You will not be able to start this VM without freeing some space on one of the servers.</value>
+    <value>The amount of memory allocated to the new VM is greater than the amount of physical memory available on any server in the pool ({0}).</value>
   </data>
   <data name="NEWVMWIZARD_CPUMEMPAGE_NAME" xml:space="preserve">
     <value>CPU &amp;&amp; Memory</value>
@@ -9410,8 +9402,7 @@ You will not be able to start this VM without freeing some space on one of the s
     <value>You have selected more than {0} vCPUs for the new VM. Where a VM may be running actively hostile privileged code {1} recommends that the vCPU limit is set to {0} to prevent impact on system availability.</value>
   </data>
   <data name="NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN" xml:space="preserve">
-    <value>The number of vCPUs given to the new VM is greater than the number of physical CPUs on any server in the pool.
-You will not be able to start the VM with this configuration.</value>
+    <value>The number of vCPUs given to the new VM is greater than the number of physical CPUs on any server in the pool ({0}). You will not be able to start the VM.</value>
   </data>
   <data name="NEWVMWIZARD_FINISHPAGE" xml:space="preserve">
     <value>All the necessary information has been collected and the wizard is ready to provision the new virtual machine using the settings shown below.

@@ -341,13 +341,11 @@ namespace XenAdmin.Wizards.NewVMWizard
 
             if (maxMemTotalHost != null && SelectedMemoryDynamicMin > maxMemTotal)
             {
-                ShowMemoryWarning(string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN1, Helpers.GetName(maxMemTotalHost).Ellipsise(50), Util.MemorySizeStringSuitableUnits(maxMemTotal, false)));
+                ShowMemoryWarning(string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN1, Util.MemorySizeStringSuitableUnits(maxMemTotal, false)));
             }
             else if (maxMemFreeHost != null && SelectedMemoryDynamicMin > maxMemFree)
             {
-                ShowMemoryWarning(string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN2,
-                    Helpers.GetName(maxMemFreeHost).Ellipsise(50),
-                    Util.MemorySizeStringSuitableUnits(maxMemFree, false)));
+                ShowMemoryWarning(string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN2, Util.MemorySizeStringSuitableUnits(maxMemFree, false)));
             }
             else
             {
@@ -356,7 +354,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             
             if (maxVcpusHost != null && SelectedVCpusMax > _maxVCpus)
             {
-                ShowCpuWarning(string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN, Helpers.GetName(maxVcpusHost).Ellipsise(50), _maxVCpus));
+                ShowCpuWarning(string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN, _maxVCpus));
             }
             else if (SelectedVCpusMax > VM.MAX_VCPUS_FOR_NON_TRUSTED_VMS)
             {

@@ -26918,11 +26918,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The amount of memory allocated to the new VM is greater than the amount of physical memory on any server in the pool.
-        ///
-        ///Server &apos;{0}&apos; has {1} of physical memory in total.
-        ///
-        ///You will not be able to start this VM without increasing the amount of physical memory on one of the servers in the pool..
+        ///   Looks up a localized string similar to The amount of memory allocated to the new VM is greater than the amount of physical memory on any server in the pool ({0})..
         /// </summary>
         public static string NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN1 {
             get {
@@ -26931,11 +26927,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The amount of memory allocated to the new VM is greater than the amount of physical memory available on any server in the pool.
-        ///
-        ///Server &apos;{0}&apos; has {1} of physical memory available.
-        ///
-        ///You will not be able to start this VM without freeing some space on one of the servers..
+        ///   Looks up a localized string similar to The amount of memory allocated to the new VM is greater than the amount of physical memory available on any server in the pool ({0})..
         /// </summary>
         public static string NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN2 {
             get {
@@ -26989,8 +26981,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The number of vCPUs given to the new VM is greater than the number of physical CPUs on any server in the pool.
-        ///You will not be able to start the VM with this configuration..
+        ///   Looks up a localized string similar to The number of vCPUs given to the new VM is greater than the number of physical CPUs on any server in the pool ({0}). You will not be able to start the VM..
         /// </summary>
         public static string NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN {
             get {
