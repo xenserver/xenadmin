@@ -58,6 +58,8 @@ namespace XenAdmin.Wizards.NewVMWizard
         private bool _isVCpuHotplugSupported;
         private int _minVCpus;
         private long _maxVCpus;
+        private long _maxMemTotal;
+        private long _maxMemFree;
         private long _prevVCpusMax;
         public VM SelectedTemplate { private get; set; }
 
@@ -80,7 +82,7 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         public double SelectedMemoryDynamicMax => _memoryMode == MemoryMode.JustMemory ? spinnerDynMin.Value : spinnerDynMax.Value;
 
-        public bool CanStartVm => _maxVCpus > 0 && SelectedVCpusMax <= _maxVCpus;
+        public bool CanStartVm => _maxVCpus > 0 && SelectedVCpusMax <= _maxVCpus && _maxMemFree > 0 && SelectedMemoryDynamicMin <= _maxMemFree && _maxMemTotal > 0 && SelectedMemoryDynamicMin <= _maxMemTotal;
 
         public double SelectedMemoryStaticMax =>
             _memoryMode == MemoryMode.JustMemory ? spinnerDynMin.Value :
@@ -296,12 +298,12 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         private void CheckForError()
         {
-            long maxMemTotal = 0;
-            long maxMemFree = 0;
             Host maxMemTotalHost = null;
             Host maxMemFreeHost = null;
             Host maxVcpusHost = null;
             _maxVCpus = 0;
+            _maxMemTotal = 0;
+            _maxMemFree = 0;
             foreach (var host in Connection.Cache.Hosts)
             {
                 long hostCpus = 0;
@@ -320,9 +322,9 @@ namespace XenAdmin.Wizards.NewVMWizard
                     maxVcpusHost = host;
                 }
 
-                if (metrics != null && metrics.memory_total > maxMemTotal)
+                if (metrics != null && metrics.memory_total > _maxMemTotal)
                 {
-                    maxMemTotal = metrics.memory_total;
+                    _maxMemTotal = metrics.memory_total;
                     maxMemTotalHost = host;
                 }
 
@@ -332,20 +334,20 @@ namespace XenAdmin.Wizards.NewVMWizard
                 // has false negatives.
                 var memoryFree = host.memory_available_calc();
 
-                if (metrics != null && memoryFree > maxMemFree)
+                if (metrics != null && memoryFree > _maxMemFree)
                 {
-                    maxMemFree = memoryFree;
+                    _maxMemFree = memoryFree;
                     maxMemFreeHost = host;
                 }
             }
 
-            if (maxMemTotalHost != null && SelectedMemoryDynamicMin > maxMemTotal)
+            if (maxMemTotalHost != null && SelectedMemoryDynamicMin > _maxMemTotal)
             {
-                ShowMemoryWarning(string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN1, Util.MemorySizeStringSuitableUnits(maxMemTotal, false)));
+                ShowMemoryWarning(string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN1, Util.MemorySizeStringSuitableUnits(_maxMemTotal, false)));
             }
-            else if (maxMemFreeHost != null && SelectedMemoryDynamicMin > maxMemFree)
+            else if (maxMemFreeHost != null && SelectedMemoryDynamicMin > _maxMemFree)
             {
-                ShowMemoryWarning(string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN2, Util.MemorySizeStringSuitableUnits(maxMemFree, false)));
+                ShowMemoryWarning(string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN2, Util.MemorySizeStringSuitableUnits(_maxMemFree, false)));
             }
             else
             {
