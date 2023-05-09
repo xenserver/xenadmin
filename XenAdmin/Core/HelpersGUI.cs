@@ -82,10 +82,11 @@ namespace XenAdmin.Core
         /// <param name="f">The form to be brought to the front.</param>
         public static void BringFormToFront(Form f)
         {
+            if (f == null)
+                return;
+
             if (f.WindowState == FormWindowState.Minimized)
-            {
                 f.WindowState = FormWindowState.Normal;
-            }
 
             f.BringToFront();
             f.Activate();
