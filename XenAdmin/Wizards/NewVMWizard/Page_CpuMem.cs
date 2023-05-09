@@ -341,28 +341,46 @@ namespace XenAdmin.Wizards.NewVMWizard
 
             if (maxMemTotalHost != null && SelectedMemoryDynamicMin > maxMemTotal)
             {
-                ErrorPanel.Visible = true;
-                ErrorLabel.Text = string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN1, Helpers.GetName(maxMemTotalHost).Ellipsise(50), Util.MemorySizeStringSuitableUnits(maxMemTotal, false));
+                ShowMemoryWarning(string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN1, Helpers.GetName(maxMemTotalHost).Ellipsise(50), Util.MemorySizeStringSuitableUnits(maxMemTotal, false)));
             }
             else if (maxMemFreeHost != null && SelectedMemoryDynamicMin > maxMemFree)
             {
-                ErrorPanel.Visible = true;
-                ErrorLabel.Text = string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN2, Helpers.GetName(maxMemFreeHost).Ellipsise(50), Util.MemorySizeStringSuitableUnits(maxMemFree, false));
-            }
-            else if (maxVcpusHost != null && SelectedVCpusMax > _maxVCpus)
-            {
-                ErrorPanel.Visible = true;
-                ErrorLabel.Text = string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN, Helpers.GetName(maxVcpusHost).Ellipsise(50), _maxVCpus);
-            }
-            else if (SelectedVCpusMax > VM.MAX_VCPUS_FOR_NON_TRUSTED_VMS)
-            {
-                ErrorPanel.Visible = true;
-                ErrorLabel.Text = string.Format(Messages.VCPUS_UNTRUSTED_VM_WARNING, VM.MAX_VCPUS_FOR_NON_TRUSTED_VMS, BrandManager.ProductBrand);
+                ShowMemoryWarning(string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN2,
+                    Helpers.GetName(maxMemFreeHost).Ellipsise(50),
+                    Util.MemorySizeStringSuitableUnits(maxMemFree, false)));
             }
             else
             {
-                ErrorPanel.Visible = false;
+                ShowMemoryWarning();
             }
+            
+            if (maxVcpusHost != null && SelectedVCpusMax > _maxVCpus)
+            {
+                ShowCpuWarning(string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN, Helpers.GetName(maxVcpusHost).Ellipsise(50), _maxVCpus));
+            }
+            else if (SelectedVCpusMax > VM.MAX_VCPUS_FOR_NON_TRUSTED_VMS)
+            {
+                ShowCpuWarning(string.Format(Messages.VCPUS_UNTRUSTED_VM_WARNING, VM.MAX_VCPUS_FOR_NON_TRUSTED_VMS, BrandManager.ProductBrand));
+            }
+            else
+            {
+                ShowCpuWarning();
+            }
+        }
+
+        private void ShowMemoryWarning(string text = null)
+        {
+            var show = !string.IsNullOrEmpty(text);
+
+            memoryWarningLabel.Text = show ? text : null;
+            memoryPictureBox.Visible = memoryWarningLabel.Visible = show;
+        }
+
+        private void ShowCpuWarning(string text = null)
+        {
+            var show = !string.IsNullOrEmpty(text);
+            cpuWarningLabel.Text = show ? text : null;
+            cpuWarningPictureBox.Visible = cpuWarningLabel.Visible = show;
         }
 
         private void ShowMemoryMinMaxInformation(Label label, double min, double max)
