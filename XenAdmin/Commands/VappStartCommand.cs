@@ -87,11 +87,6 @@ namespace XenAdmin.Commands
                 appsToStart.Add(firstVm.Connection.Resolve(firstVm.appliance));
             }
 
-            if (appsToStart.Count == 0)
-            {
-                return;
-            }
-            
             foreach (var app in appsToStart)
             {
                 new StartApplianceAction(app, false).RunAsync();
