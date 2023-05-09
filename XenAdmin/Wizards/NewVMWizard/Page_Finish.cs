@@ -61,20 +61,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         public bool CanStartImmediately
         {
             get => _canStartImmediately;
-            set
-            {
-                if (!value)
-                {
-                    AutoStartCheckBox.Checked = false;
-                    AutoStartCheckBox.Enabled = false;
-                }
-                else
-                {
-                    AutoStartCheckBox.Enabled = true;
-                }
-
-                _canStartImmediately = value;
-            }
+            set => _canStartImmediately = AutoStartCheckBox.Checked = AutoStartCheckBox.Enabled = value;
         }
 
         protected override void PageLoadedCore(PageLoadedDirection direction)
