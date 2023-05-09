@@ -31,7 +31,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Page_CpuMem));
             this.labelVCPUs = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.warningPictureBox = new System.Windows.Forms.PictureBox();
             this.ErrorLabel = new System.Windows.Forms.Label();
             this.ErrorPanel = new System.Windows.Forms.Panel();
             this.spinnerDynMin = new XenAdmin.Controls.Ballooning.MemorySpinner();
@@ -52,7 +52,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             this.labelDynMinInfo = new System.Windows.Forms.Label();
             this.labelDynMaxInfo = new System.Windows.Forms.Label();
             this.labelStatMaxInfo = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.warningPictureBox)).BeginInit();
             this.ErrorPanel.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -68,12 +68,12 @@ namespace XenAdmin.Wizards.NewVMWizard
             this.tableLayoutPanel1.SetColumnSpan(this.label5, 4);
             this.label5.Name = "label5";
             // 
-            // pictureBox1
+            // warningPictureBox
             // 
-            this.pictureBox1.Image = global::XenAdmin.Properties.Resources._000_Alert2_h32bit_16;
-            resources.ApplyResources(this.pictureBox1, "pictureBox1");
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.TabStop = false;
+            this.warningPictureBox.Image = global::XenAdmin.Properties.Resources._000_Alert2_h32bit_16;
+            resources.ApplyResources(this.warningPictureBox, "warningPictureBox");
+            this.warningPictureBox.Name = "warningPictureBox";
+            this.warningPictureBox.TabStop = false;
             // 
             // ErrorLabel
             // 
@@ -83,7 +83,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             // ErrorPanel
             // 
             this.ErrorPanel.Controls.Add(this.ErrorLabel);
-            this.ErrorPanel.Controls.Add(this.pictureBox1);
+            this.ErrorPanel.Controls.Add(this.warningPictureBox);
             resources.ApplyResources(this.ErrorPanel, "ErrorPanel");
             this.ErrorPanel.Name = "ErrorPanel";
             // 
@@ -228,9 +228,8 @@ namespace XenAdmin.Wizards.NewVMWizard
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.ErrorPanel);
             this.Name = "Page_CpuMem";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.warningPictureBox)).EndInit();
             this.ErrorPanel.ResumeLayout(false);
-            this.ErrorPanel.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
@@ -241,7 +240,7 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         private System.Windows.Forms.Label labelVCPUs;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox warningPictureBox;
         private System.Windows.Forms.Label ErrorLabel;
         private System.Windows.Forms.Panel ErrorPanel;
         private XenAdmin.Controls.Ballooning.MemorySpinner spinnerDynMin;
