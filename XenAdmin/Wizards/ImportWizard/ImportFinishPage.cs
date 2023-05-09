@@ -91,15 +91,7 @@ namespace XenAdmin.Wizards.ImportWizard
         public bool CanStartVmsAutomatically
         {
             get => _canStartVmsAutomatically;
-            set
-            {
-                m_checkBoxStartVms.Enabled = value;
-                if (!value)
-                {
-                    m_checkBoxStartVms.Checked = false;
-                }
-                _canStartVmsAutomatically = value;
-            }
+            set => _canStartVmsAutomatically = m_checkBoxStartVms.Enabled = m_checkBoxStartVms.Checked = value;
         }
 
         /// <summary>
