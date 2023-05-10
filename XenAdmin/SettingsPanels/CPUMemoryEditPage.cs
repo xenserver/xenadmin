@@ -356,7 +356,7 @@ namespace XenAdmin.SettingsPanels
                 var topologyWarning = VM.ValidVCPUConfiguration((long)comboBoxVCPUs.SelectedItem, comboBoxTopology.CoresPerSocket);
                 if (!string.IsNullOrEmpty(topologyWarning))
                 {
-                    warnings.Add(topologyWarning);
+                    warnings.Add($"{topologyWarning}.");
                 }
             }
             ShowTopologyWarnings(warnings);

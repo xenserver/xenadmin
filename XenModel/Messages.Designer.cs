@@ -39334,7 +39334,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The VM&apos;s home server does not have enough physical CPUs to start the VM. The VM will start on another server.
+        ///   Looks up a localized string similar to The VM&apos;s home server does not have enough physical CPUs to start the VM. The VM will start on another server..
         /// </summary>
         public static string VM_CPUMEMPAGE_VCPU_HOME_HOST_WARNING {
             get {
@@ -39343,7 +39343,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to It is recommended to allocate at least {0} vCPUs for this VM.
+        ///   Looks up a localized string similar to It is recommended to allocate at least {0} vCPUs for this VM..
         /// </summary>
         public static string VM_CPUMEMPAGE_VCPU_MIN_WARNING {
             get {
@@ -39352,7 +39352,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There are no servers with enough physical CPUs to start the VM.
+        ///   Looks up a localized string similar to There are no servers with enough physical CPUs to start the VM..
         /// </summary>
         public static string VM_CPUMEMPAGE_VCPU_WARNING {
             get {

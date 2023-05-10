@@ -13582,13 +13582,13 @@ To optimize VM performance, you should reduce the number of VCPUs to less than o
     <value>If the initial number of vCPUs is set lower than the maximum number, more vCPUs can be added to the virtual machine while it is running. </value>
   </data>
   <data name="VM_CPUMEMPAGE_VCPU_HOME_HOST_WARNING" xml:space="preserve">
-    <value>The VM's home server does not have enough physical CPUs to start the VM. The VM will start on another server</value>
+    <value>The VM's home server does not have enough physical CPUs to start the VM. The VM will start on another server.</value>
   </data>
   <data name="VM_CPUMEMPAGE_VCPU_MIN_WARNING" xml:space="preserve">
-    <value>It is recommended to allocate at least {0} vCPUs for this VM</value>
+    <value>It is recommended to allocate at least {0} vCPUs for this VM.</value>
   </data>
   <data name="VM_CPUMEMPAGE_VCPU_WARNING" xml:space="preserve">
-    <value>There are no servers with enough physical CPUs to start the VM</value>
+    <value>There are no servers with enough physical CPUs to start the VM.</value>
   </data>
   <data name="VM_CPUMEMPAGE_VCPUS_LABEL" xml:space="preserve">
     <value>&amp;Number of vCPUs:</value>
