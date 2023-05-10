@@ -6404,7 +6404,7 @@ Note: Any custom color selections will remain unchanged</value>
     <value>UEFI certificates are missing from your system</value>
   </data>
   <data name="GUI_NOT_COMPATIBLE" xml:space="preserve">
-    <value>This version of {0} can only connect to {1} and greater versions. It cannot connect to {2}.
+    <value>This version of {0} can only connect to {1}, and {2} or greater versions. It cannot connect to {3}.
 
 You can get a compatible version of {0} from the following location:</value>
   </data>
@@ -11662,7 +11662,7 @@ The coordinator must be upgraded first, so if you skip the coordinator, the roll
     <value>The current time on the pool coordinator is: {0}</value>
   </data>
   <data name="SERVER_TOO_OLD" xml:space="preserve">
-    <value>This version of {0} supports {1} onwards.</value>
+    <value>This version of {0} can only connect to {1}, and {2} or greater versions.</value>
   </data>
   <data name="SERVER_TOO_OLD_SOLUTION" xml:space="preserve">
     <value>Use an earlier version of {0} to manage this server.</value>
@@ -13919,9 +13919,6 @@ Schedule:
   </data>
   <data name="WARNING_HEALTH_CHECK_SERVICE_INFO" xml:space="preserve">
     <value>Health Check has been removed. You must disable Health Check first.</value>
-  </data>
-  <data name="WARNING_PRE_CLOUD_VERSION_CONNECTION" xml:space="preserve">
-    <value>{0} {1} is not recommended for general management of servers running {2}. Please use latest available {0} for {2} instead.</value>
   </data>
   <data name="WEB_BROWSER_FAILED" xml:space="preserve">
     <value>Cannot find '{0}'.</value>

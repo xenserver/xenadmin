@@ -1142,7 +1142,7 @@ namespace XenAdmin.Network
                 // Save the session so we can log it out later
                 task.Session = session;
 
-                if (session.APIVersion < API_Version.API_2_5)
+                if (session.APIVersion < API_Version.API_2_6)
                     throw new ServerNotSupported();
 
                 // Event.next uses a different session with a shorter timeout: see CA-33145.
@@ -1932,8 +1932,8 @@ namespace XenAdmin.Network
 
     public class ServerNotSupported : DisconnectionException
     {
-        public override string Message => string.Format(Messages.SERVER_TOO_OLD,
-            BrandManager.BrandConsole, BrandManager.ProductVersion70);
+        public override string Message => string.Format(Messages.SERVER_TOO_OLD, BrandManager.BrandConsole,
+            BrandManager.ProductVersion712, BrandManager.ProductVersion80);
     }
 
     public class ConnectionExists : DisconnectionException
