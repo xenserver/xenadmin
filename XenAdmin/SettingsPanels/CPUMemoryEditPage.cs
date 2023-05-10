@@ -49,7 +49,7 @@ namespace XenAdmin.SettingsPanels
         private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private VM _vm;
-        bool _showMemory = false;       // If this VM has DMC, we don't show the memory controls on this page.
+        private bool _showMemory = false;       // If this VM has DMC, we don't show the memory controls on this page.
 
         private bool _validToSave = true;
         private decimal _origMemory;
@@ -129,7 +129,7 @@ namespace XenAdmin.SettingsPanels
 
         public Image Image => Images.StaticImages._000_CPU_h32bit_16;
 
-        void nudMemory_LostFocus(object sender, EventArgs e)
+        private void nudMemory_LostFocus(object sender, EventArgs e)
         {
             ValidateNud(nudMemory, (decimal)_vm.memory_static_max / Util.BINARY_MEGA);
         }
@@ -145,7 +145,7 @@ namespace XenAdmin.SettingsPanels
             nud.Text = nud.Value.ToString();
         }
 
-        void nudMemory_TextChanged(object sender, EventArgs e)
+        private void nudMemory_TextChanged(object sender, EventArgs e)
         {
             decimal val;
             if (decimal.TryParse(nudMemory.Text, out val))
