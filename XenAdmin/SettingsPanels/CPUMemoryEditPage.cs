@@ -69,26 +69,7 @@ namespace XenAdmin.SettingsPanels
 
         private ChangeMemorySettingsAction _memoryAction;
 
-        public bool ValidToSave
-        {
-            get
-            {
-                if (!_validToSave)
-                    return false;
-
-                // Also confirm whether the user wants to save memory changes.
-                // If not, don't close the properties dialog.
-                if (HasMemoryChanged)
-                {
-                    var mem = Convert.ToInt64(nudMemory.Value * Util.BINARY_MEGA);
-                    _memoryAction = ConfirmAndCalcActions(mem);
-                    if (_memoryAction == null)
-                        return false;
-                }
-
-                return true;
-            }
-        }
+     
 
         private ChangeMemorySettingsAction ConfirmAndCalcActions(long mem)
         {
@@ -142,15 +123,7 @@ namespace XenAdmin.SettingsPanels
         }
 
 
-        /// <summary>
-        /// Must be a VM.
-        /// </summary>
-        public void SetXenObjects(IXenObject orig, IXenObject clone)
-        {
-            _vm = (VM)clone;
-            _showMemory = Helpers.FeatureForbidden(_vm, Host.RestrictDMC);
-            Repopulate();
-        }
+     
 
         public void Repopulate()
         {
@@ -319,8 +292,6 @@ namespace XenAdmin.SettingsPanels
             return sb.ToString();
         }
 
-        public bool HasChanged => HasVCpuChanged || HasMemoryChanged || HasTopologyChanged ||
-                                  HasVCpusAtStartupChanged || HasVCpuWeightChanged;
 
         private bool HasMemoryChanged => _origMemory != nudMemory.Value;
 
@@ -339,54 +310,6 @@ namespace XenAdmin.SettingsPanels
             ? (long)comboBoxInitialVCPUs.SelectedItem
             : (long)comboBoxVCPUs.SelectedItem;
 
-        public AsyncAction SaveSettings()
-        {
-            var actions = new List<AsyncAction>();
-
-            if (HasVCpuWeightChanged)
-            {
-                _vm.SetVcpuWeight(Convert.ToInt32(_currentVCpuWeight));
-            }
-
-            if (HasVCpuChanged || HasVCpusAtStartupChanged)
-            {
-                actions.Add(new ChangeVCPUSettingsAction(_vm, SelectedVCpusMax, SelectedVCpusAtStartup));
-            }
-
-            if (HasTopologyChanged)
-            {
-                _vm.SetCoresPerSocket(comboBoxTopology.CoresPerSocket);
-            }
-
-            if (HasMemoryChanged)
-            {
-                actions.Add(_memoryAction); // Calculated in ValidToSave
-            }
-
-            if (actions.Count == 0)
-                return null;
-            else if (actions.Count == 1)
-                return actions[0];
-            else
-            {
-                var multipleAction = new MultipleAction(_vm.Connection, "", "", "", actions, true);
-                return multipleAction;
-            }
-        }
-
-        /** Show local validation balloon tooltips */
-        public void ShowLocalValidationMessages()
-        {
-        }
-
-        public void HideLocalValidationMessages()
-        {
-        }
-
-        /** Unregister listeners, dispose balloon tooltips, etc. */
-        public void Cleanup()
-        {
-        }
 
         private void ShowMemError(bool showAlways, bool testValue)
         {
@@ -499,6 +422,96 @@ namespace XenAdmin.SettingsPanels
             _showMemory
                 ? string.Format(Messages.CPU_AND_MEMORY_SUB, SelectedVCpusAtStartup, nudMemory.Value)
                 : string.Format(Messages.CPU_SUB, SelectedVCpusAtStartup);
+
+        #region IEditPage
+
+        public AsyncAction SaveSettings()
+        {
+            var actions = new List<AsyncAction>();
+
+            if (HasVCpuWeightChanged)
+            {
+                _vm.SetVcpuWeight(Convert.ToInt32(_currentVCpuWeight));
+            }
+
+            if (HasVCpuChanged || HasVCpusAtStartupChanged)
+            {
+                actions.Add(new ChangeVCPUSettingsAction(_vm, SelectedVCpusMax, SelectedVCpusAtStartup));
+            }
+
+            if (HasTopologyChanged)
+            {
+                _vm.SetCoresPerSocket(comboBoxTopology.CoresPerSocket);
+            }
+
+            if (HasMemoryChanged)
+            {
+                actions.Add(_memoryAction); // Calculated in ValidToSave
+            }
+
+            switch (actions.Count)
+            {
+                case 0:
+                    return null;
+                case 1:
+                    return actions[0];
+                default:
+                {
+                    var multipleAction = new MultipleAction(_vm.Connection, "", "", "", actions, true);
+                    return multipleAction;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Must be a VM.
+        /// </summary>
+        public void SetXenObjects(IXenObject orig, IXenObject clone)
+        {
+            _vm = (VM)clone;
+            _showMemory = Helpers.FeatureForbidden(_vm, Host.RestrictDMC);
+            Repopulate();
+        }
+
+        public bool ValidToSave
+        {
+            get
+            {
+                if (!_validToSave)
+                    return false;
+
+                // Also confirm whether the user wants to save memory changes.
+                // If not, don't close the properties dialog.
+                if (HasMemoryChanged)
+                {
+                    var mem = Convert.ToInt64(nudMemory.Value * Util.BINARY_MEGA);
+                    _memoryAction = ConfirmAndCalcActions(mem);
+                    if (_memoryAction == null)
+                        return false;
+                }
+
+                return true;
+            }
+        }
+
+        /** Show local validation balloon tooltips */
+        public void ShowLocalValidationMessages()
+        {
+        }
+
+        public void HideLocalValidationMessages()
+        {
+        }
+
+        /** Unregister listeners, dispose balloon tooltips, etc. */
+        public void Cleanup()
+        {
+        }
+
+        public bool HasChanged => HasVCpuChanged || HasMemoryChanged || HasTopologyChanged ||
+                                  HasVCpusAtStartupChanged || HasVCpuWeightChanged;
+
+        #endregion
 
 
         #region Events
