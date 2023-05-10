@@ -47,7 +47,7 @@ namespace XenAdmin.SettingsPanels
     public partial class CpuMemoryEditPage : UserControl, IEditPage
     {
         private static readonly log4net.ILog Log =
-            log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+            log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod()?.DeclaringType);
 
         private VM _vm;
         private bool _showMemory; // If this VM has DMC, we don't show the memory controls on this page.
@@ -131,11 +131,6 @@ namespace XenAdmin.SettingsPanels
 
         public Image Image => Images.StaticImages._000_CPU_h32bit_16;
 
-        private void nudMemory_LostFocus(object sender, EventArgs e)
-        {
-            ValidateNud(nudMemory, (decimal)_vm.memory_static_max / Util.BINARY_MEGA);
-        }
-
         private void ValidateNud(NumericUpDown nud, decimal defaultValue)
         {
             if (!string.IsNullOrEmpty(nud.Text.Trim()))
@@ -146,27 +141,6 @@ namespace XenAdmin.SettingsPanels
             nud.Text = nud.Value.ToString(CultureInfo.InvariantCulture);
         }
 
-        private void nudMemory_TextChanged(object sender, EventArgs e)
-        {
-            if (decimal.TryParse(nudMemory.Text, out var val))
-            {
-                if (val >= nudMemory.Minimum && val <= nudMemory.Maximum)
-                    nudMemory_ValueChanged(null, null);
-                else if (val > nudMemory.Maximum)
-                    ShowMemError(true, false);
-                else
-                    ShowMemError(false, false);
-            }
-
-            _validToSave = nudMemory.Text != "";
-        }
-
-        private void tbPriority_Scroll(object sender, EventArgs e)
-        {
-            _currentVCpuWeight = Convert.ToDecimal(Math.Pow(4.0d, Convert.ToDouble(transparentTrackBar1.Value)));
-            if (transparentTrackBar1.Value == transparentTrackBar1.Max)
-                _currentVCpuWeight--;
-        }
 
         /// <summary>
         /// Must be a VM.
@@ -414,57 +388,6 @@ namespace XenAdmin.SettingsPanels
         {
         }
 
-        /// <summary>
-        /// Shows the warning dialog about vCPUs > pCPUs.
-        /// </summary>
-        private void lblVCpuWarning_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            if (_vm == null)
-            {
-                System.Diagnostics.Trace.Assert(false, "Selected object should be a vm");
-                return;
-            }
-
-            using (var dialog = new WarningDialog(Messages.VCPUS_MORE_THAN_PCPUS)
-                   {
-                       ShowCheckbox = true,
-                       CheckboxCaption = Messages.DO_NOT_SHOW_THIS_MESSAGE
-                   })
-            {
-                dialog.ShowDialog(this);
-
-                if (dialog.IsCheckBoxChecked)
-                {
-                    // User clicked 'ignore': set flag in VM.
-                    Log.DebugFormat("Setting IgnoreExcessiveVcpus flag to true for VM {0}", _vm.Name());
-
-                    var copyVm = (VM)_vm.Clone();
-                    copyVm.SetIgnoreExcessiveVcpus(true);
-
-                    try
-                    {
-                        _vm.Locked = true;
-                        copyVm.SaveChanges(_vm.Connection.Session);
-                    }
-                    finally
-                    {
-                        _vm.Locked = false;
-                    }
-                }
-                else if (Program.MainWindow.SelectObjectInTree(_vm))
-                {
-                    Program.MainWindow.SwitchToTab(MainWindow.Tab.General);
-                }
-            }
-
-            Refresh();
-        }
-
-        private void nudMemory_ValueChanged(object sender, EventArgs e)
-        {
-            ShowMemError(false, true);
-        }
-
         private void ShowMemError(bool showAlways, bool testValue)
         {
             if (_vm == null || !_showMemory)
@@ -486,14 +409,6 @@ namespace XenAdmin.SettingsPanels
                     MemWarningLabel.Visible = false;
                 }
             }
-        }
-
-        private void comboBoxVCPUs_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ValidateVCpuSettings();
-            comboBoxTopology.Update((long)comboBoxVCPUs.SelectedItem);
-            ValidateTopologySettings();
-            RefreshCurrentVCpus();
         }
 
         private void ValidateVCpuSettings()
@@ -585,6 +500,9 @@ namespace XenAdmin.SettingsPanels
                 ? string.Format(Messages.CPU_AND_MEMORY_SUB, SelectedVCpusAtStartup, nudMemory.Value)
                 : string.Format(Messages.CPU_SUB, SelectedVCpusAtStartup);
 
+
+        #region Events
+
         private void comboBoxTopology_SelectedIndexChanged(object sender, EventArgs e)
         {
             ValidateTopologySettings();
@@ -594,5 +512,93 @@ namespace XenAdmin.SettingsPanels
         {
             ValidateVCpuSettings();
         }
+
+        private void comboBoxVCPUs_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ValidateVCpuSettings();
+            comboBoxTopology.Update((long)comboBoxVCPUs.SelectedItem);
+            ValidateTopologySettings();
+            RefreshCurrentVCpus();
+        }
+
+        /// <summary>
+        /// Shows the warning dialog about vCPUs > pCPUs.
+        /// </summary>
+        private void lblVCpuWarning_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (_vm == null)
+            {
+                System.Diagnostics.Trace.Assert(false, "Selected object should be a vm");
+                return;
+            }
+
+            using (var dialog = new WarningDialog(Messages.VCPUS_MORE_THAN_PCPUS)
+                   {
+                       ShowCheckbox = true,
+                       CheckboxCaption = Messages.DO_NOT_SHOW_THIS_MESSAGE
+                   })
+            {
+                dialog.ShowDialog(this);
+
+                if (dialog.IsCheckBoxChecked)
+                {
+                    // User clicked 'ignore': set flag in VM.
+                    Log.DebugFormat("Setting IgnoreExcessiveVcpus flag to true for VM {0}", _vm.Name());
+
+                    var copyVm = (VM)_vm.Clone();
+                    copyVm.SetIgnoreExcessiveVcpus(true);
+
+                    try
+                    {
+                        _vm.Locked = true;
+                        copyVm.SaveChanges(_vm.Connection.Session);
+                    }
+                    finally
+                    {
+                        _vm.Locked = false;
+                    }
+                }
+                else if (Program.MainWindow.SelectObjectInTree(_vm))
+                {
+                    Program.MainWindow.SwitchToTab(MainWindow.Tab.General);
+                }
+            }
+
+            Refresh();
+        }
+
+        private void nudMemory_ValueChanged(object sender, EventArgs e)
+        {
+            ShowMemError(false, true);
+        }
+
+        private void nudMemory_LostFocus(object sender, EventArgs e)
+        {
+            ValidateNud(nudMemory, (decimal)_vm.memory_static_max / Util.BINARY_MEGA);
+        }
+
+        private void nudMemory_TextChanged(object sender, EventArgs e)
+        {
+            if (decimal.TryParse(nudMemory.Text, out var val))
+            {
+                if (val >= nudMemory.Minimum && val <= nudMemory.Maximum)
+                    nudMemory_ValueChanged(null, null);
+                else if (val > nudMemory.Maximum)
+                    ShowMemError(true, false);
+                else
+                    ShowMemError(false, false);
+            }
+
+            _validToSave = nudMemory.Text != "";
+        }
+
+        private void tbPriority_Scroll(object sender, EventArgs e)
+        {
+            _currentVCpuWeight = Convert.ToDecimal(Math.Pow(4.0d, Convert.ToDouble(transparentTrackBar1.Value)));
+            if (transparentTrackBar1.Value == transparentTrackBar1.Max)
+                _currentVCpuWeight--;
+        }
+
+        #endregion
     }
 }
