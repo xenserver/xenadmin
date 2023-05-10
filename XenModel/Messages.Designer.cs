@@ -18329,7 +18329,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This version of {0} can only connect to {1} and greater versions. It cannot connect to {2}.
+        ///   Looks up a localized string similar to This version of {0} can only connect to {1}, and {2} or greater versions. It cannot connect to {3}.
         ///
         ///You can get a compatible version of {0} from the following location:.
         /// </summary>
@@ -33616,7 +33616,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This version of {0} supports {1} onwards..
+        ///   Looks up a localized string similar to This version of {0} can only connect to {1}, and {2} or greater versions..
         /// </summary>
         public static string SERVER_TOO_OLD {
             get {
@@ -40311,15 +40311,6 @@ namespace XenAdmin {
         public static string WARNING_HEALTH_CHECK_SERVICE_INFO {
             get {
                 return ResourceManager.GetString("WARNING_HEALTH_CHECK_SERVICE_INFO", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} {1} is not recommended for general management of servers running {2}. Please use latest available {0} for {2} instead..
-        /// </summary>
-        public static string WARNING_PRE_CLOUD_VERSION_CONNECTION {
-            get {
-                return ResourceManager.GetString("WARNING_PRE_CLOUD_VERSION_CONNECTION", resourceCulture);
             }
         }
         

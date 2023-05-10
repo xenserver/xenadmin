@@ -206,12 +206,9 @@ namespace XenAdmin.Core
         {
             if (host == null)
                 return true;
-            string productVersion = HostProductVersion(host);
-            return
-                productVersion != null &&
-                ElyOrGreater(host) &&
-                !FalconOrGreater(host) &&
-                ProductVersionCompare(productVersion, BrandManager.ProductVersion712Short) >= 0;
+
+            return ElyOrGreater(host) &&
+                   ProductVersionCompare(HostProductVersion(host), BrandManager.ProductVersion712Short) >= 0;
         }
 
         /// <summary>

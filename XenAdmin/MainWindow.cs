@@ -924,7 +924,7 @@ namespace XenAdmin
                 Program.Invoke(Program.MainWindow, () =>
                 {
                     var title = string.Format(Messages.CONNECTION_REFUSED_TITLE, Helpers.GetName(coordinator).Ellipsise(80));
-                    var msg = string.Format(Messages.SUPPORTER_TOO_OLD, BrandManager.ProductVersion70, BrandManager.BrandConsole);
+                    var msg = string.Format(Messages.SUPPORTER_TOO_OLD, BrandManager.ProductVersion712, BrandManager.BrandConsole);
 
                     new DummyAction(title, "", msg).Run();
 
@@ -947,14 +947,14 @@ namespace XenAdmin
             // xencenter_max should always equal the current version of XenCenter. This ensures that even if they are
             // not required to upgrade, we at least warn them.  // else if (server_max > current_version)
 
-            int server_min = coordinator.XenCenterMin();
-            int server_max = coordinator.XenCenterMax();
+            int serverMin = coordinator.XenCenterMin();
+            int serverMax = coordinator.XenCenterMax();
 
-            if (server_min > 0 && server_max > 0)
+            if (serverMin > 0 && serverMax > 0)
             {
-                int current_version = (int)API_Version.LATEST;
+                int currentVersion = (int)API_Version.LATEST;
 
-                if (server_min > current_version)
+                if (serverMin > currentVersion)
                 {
                     connection.EndConnect();
 
@@ -979,16 +979,17 @@ namespace XenAdmin
                     return;
                 }
 
-                // Allow connection only to Yangtze and cloud released versions
-                //
-                if (!Helpers.YangtzeOrGreater(coordinator))
+                // Allow connection only to Havana and Naples or greater versions
+
+                if (!Helpers.HavanaOrGreater(coordinator) ||
+                    Helpers.FalconOrGreater(coordinator) && !Helpers.NaplesOrGreater(coordinator))
                 {
                     connection.EndConnect();
 
                     Program.Invoke(Program.MainWindow, delegate
                     {
-                        var msg = string.Format(Messages.GUI_NOT_COMPATIBLE, BrandManager.BrandConsole,
-                            BrandManager.ProductVersion821, Helpers.GetName(coordinator));
+                        var msg = string.Format(Messages.GUI_NOT_COMPATIBLE, BrandManager.BrandConsole, BrandManager.ProductVersion712,
+                            BrandManager.ProductVersion80, Helpers.GetName(coordinator));
                         var url = InvisibleMessages.OUT_OF_DATE_WEBSITE;
                         var title = string.Format(Messages.CONNECTION_REFUSED_TITLE, Helpers.GetName(coordinator).Ellipsise(80));
                         var error = $"{msg}\n{url}";
@@ -1007,7 +1008,7 @@ namespace XenAdmin
                     return;
                 }
                 
-                if (server_max > current_version)
+                if (serverMax > currentVersion)
                     Alert.AddAlert(new GuiOldAlert());
 
                 LoadTasksAsMeddlingActions(connection);

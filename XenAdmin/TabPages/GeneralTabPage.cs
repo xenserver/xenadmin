@@ -1896,14 +1896,6 @@ namespace XenAdmin.TabPages
                 Banner.LinkUri = new Uri(InvisibleMessages.FCOE_SR_DEPRECATION_URL);
                 Banner.Visible = true;
             }
-            else if (!Helpers.CloudOrGreater(xenObject.Connection))
-            {
-                Banner.BannerType = DeprecationBanner.Type.Deprecation;
-                Banner.WarningMessage = string.Format(Messages.WARNING_PRE_CLOUD_VERSION_CONNECTION, BrandManager.BrandConsole, Program.VersionText, BrandManager.ProductVersion821);
-                Banner.LinkText = Messages.PATCHING_WIZARD_WEBPAGE_CELL;
-                Banner.LinkUri = new Uri(InvisibleMessages.OUT_OF_DATE_WEBSITE);
-                Banner.Visible = true;
-            }
             else
             {
                 Banner.Visible = false;
