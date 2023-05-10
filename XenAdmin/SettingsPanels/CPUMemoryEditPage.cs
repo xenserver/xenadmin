@@ -331,11 +331,11 @@ namespace XenAdmin.SettingsPanels
                     warnings.Add(Messages.VM_CPUMEMPAGE_VCPU_WARNING);
                 }
             }
-            else if (comboBoxVCPUs.SelectedItem != null && SelectedVCpusMax < _minVCpus)
+            if (comboBoxVCPUs.SelectedItem != null && SelectedVCpusMax < _minVCpus)
             {
                 warnings.Add(string.Format(Messages.VM_CPUMEMPAGE_VCPU_MIN_WARNING, _minVCpus));
             }
-            else if (comboBoxVCPUs.SelectedItem != null && SelectedVCpusMax > VM.MAX_VCPUS_FOR_NON_TRUSTED_VMS)
+            if (comboBoxVCPUs.SelectedItem != null && SelectedVCpusMax > VM.MAX_VCPUS_FOR_NON_TRUSTED_VMS)
             {
                 warnings.Add(string.Format(Messages.VCPUS_UNTRUSTED_VM_WARNING, VM.MAX_VCPUS_FOR_NON_TRUSTED_VMS, BrandManager.ProductBrand));
             }
