@@ -414,6 +414,12 @@
     <Compile Include="SettingsPanels\ClusteringEditPage.Designer.cs">
       <DependentUpon>ClusteringEditPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="SettingsPanels\LivePatchingEditPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SettingsPanels\LivePatchingEditPage.Designer.cs">
+      <DependentUpon>LivePatchingEditPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="SettingsPanels\NetworkOptionsEditPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -2037,6 +2043,15 @@
     <EmbeddedResource Include="SettingsPanels\EditNetworkPage.resx">
       <DependentUpon>EditNetworkPage.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsPanels\LivePatchingEditPage.ja.resx">
+      <DependentUpon>LivePatchingEditPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsPanels\LivePatchingEditPage.resx">
+      <DependentUpon>LivePatchingEditPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsPanels\LivePatchingEditPage.zh-CN.resx">
+      <DependentUpon>LivePatchingEditPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\NetworkOptionsEditPage.ja.resx">
       <DependentUpon>NetworkOptionsEditPage.cs</DependentUpon>

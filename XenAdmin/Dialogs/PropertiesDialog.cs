@@ -76,6 +76,7 @@ namespace XenAdmin.Dialogs
         private VMEnlightenmentEditPage VMEnlightenmentEditPage;
         private Page_CloudConfigParameters CloudConfigParametersPage;
         private SecurityEditPage SecurityEditPage;
+        private LivePatchingEditPage LivePatchingEditPage;
         private USBEditPage usbEditPage;
         private NetworkOptionsEditPage NetworkOptionsEditPage;
         private ClusteringEditPage ClusteringEditPage;
@@ -210,6 +211,9 @@ namespace XenAdmin.Dialogs
 
                 if (is_pool_or_standalone && !Helpers.FeatureForbidden(xenObject.Connection, Host.RestrictSslLegacySwitch) && !Helpers.StockholmOrGreater(connection))
                     ShowTab(SecurityEditPage = new SecurityEditPage());
+
+                if (is_pool_or_standalone && !Helpers.FeatureForbidden(xenObject.Connection, Host.RestrictLivePatching) && !Helpers.CloudOrGreater(connection))
+                    ShowTab(LivePatchingEditPage = new LivePatchingEditPage());
 
                 if (is_pool_or_standalone && !Helpers.FeatureForbidden(xenObject.Connection, Host.RestrictIGMPSnooping) && Helpers.GetCoordinator(pool).vSwitchNetworkBackend())
                     ShowTab(NetworkOptionsEditPage = new NetworkOptionsEditPage());
