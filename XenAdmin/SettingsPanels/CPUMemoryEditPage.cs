@@ -46,9 +46,6 @@ namespace XenAdmin.SettingsPanels
 {
     public partial class CpuMemoryEditPage : UserControl, IEditPage
     {
-        private static readonly log4net.ILog Log =
-            log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod()?.DeclaringType);
-
         private VM _vm;
         private bool _showMemory; // If this VM has DMC, we don't show the memory controls on this page.
         private bool _validToSave = true;
@@ -171,30 +168,6 @@ namespace XenAdmin.SettingsPanels
                 nudMemory.Minimum = min;
                 nudMemory.Maximum = max;
                 nudMemory.Text = (nudMemory.Value = value).ToString(CultureInfo.InvariantCulture);
-            }
-
-            var currentHost = Helpers.GetCoordinator(_vm.Connection);
-            if (currentHost != null)
-            {
-                // Show the performance warning about vCPUs > pCPUs.
-                // Don't show if the VM isn't running, since we don't know which server it will
-                // run on (and so can't count the number of pCPUs).
-                if (vm.power_state == vm_power_state.Running
-                    && vm.VCPUs_at_startup > currentHost.host_CPUs.Count
-                    && !vm.GetIgnoreExcessiveVcpus())
-                {
-                    lblVcpuWarning.Visible = true;
-                    tableLayoutPanel1.RowStyles[1].SizeType = SizeType.Absolute;
-                    tableLayoutPanel1.RowStyles[1].Height = 30;
-                }
-                else
-                {
-                    lblVcpuWarning.Visible = false;
-                }
-            }
-            else
-            {
-                lblVcpuWarning.Visible = false;
             }
 
             _isVCpuHotplugSupported = vm.SupportsVcpuHotplug();
@@ -528,52 +501,6 @@ namespace XenAdmin.SettingsPanels
             comboBoxTopology.Update((long)comboBoxVCPUs.SelectedItem);
             ValidateTopologySettings();
             RefreshCurrentVCpus();
-        }
-
-        /// <summary>
-        /// Shows the warning dialog about vCPUs > pCPUs.
-        /// </summary>
-        private void lblVCpuWarning_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            if (_vm == null)
-            {
-                System.Diagnostics.Trace.Assert(false, "Selected object should be a vm");
-                return;
-            }
-
-            using (var dialog = new WarningDialog(Messages.VCPUS_MORE_THAN_PCPUS)
-            {
-                ShowCheckbox = true,
-                CheckboxCaption = Messages.DO_NOT_SHOW_THIS_MESSAGE
-            })
-            {
-                dialog.ShowDialog(this);
-
-                if (dialog.IsCheckBoxChecked)
-                {
-                    // User clicked 'ignore': set flag in VM.
-                    Log.DebugFormat("Setting IgnoreExcessiveVcpus flag to true for VM {0}", _vm.Name());
-
-                    var copyVm = (VM)_vm.Clone();
-                    copyVm.SetIgnoreExcessiveVcpus(true);
-
-                    try
-                    {
-                        _vm.Locked = true;
-                        copyVm.SaveChanges(_vm.Connection.Session);
-                    }
-                    finally
-                    {
-                        _vm.Locked = false;
-                    }
-                }
-                else if (Program.MainWindow.SelectObjectInTree(_vm))
-                {
-                    Program.MainWindow.SwitchToTab(MainWindow.Tab.General);
-                }
-            }
-
-            Refresh();
         }
 
         private void nudMemory_ValueChanged(object sender, EventArgs e)

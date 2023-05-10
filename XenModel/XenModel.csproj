@@ -169,6 +169,11 @@
     <Compile Include="Actions\StatusReport\ZipStatusReportAction.cs" />
     <Compile Include="Alerts\Types\Alert.cs" />
     <Compile Include="BrandManager.cs" />
+    <Compile Include="Messages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.resx</DependentUpon>
+    </Compile>
     <Compile Include="SshConsole.cs" />
     <Compile Include="FriendlyNames.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -201,11 +206,6 @@
     <Compile Include="FriendlyNameManager.cs" />
     <Compile Include="InvokeHelper.cs" />
     <Compile Include="Mappings\VmMapping.cs" />
-    <Compile Include="Messages.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Messages.resx</DependentUpon>
-    </Compile>
     <Compile Include="Network\Cache.cs" />
     <Compile Include="Network\ConnectTask.cs" />
     <Compile Include="Network\Heartbeat.cs" />

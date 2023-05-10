@@ -13348,11 +13348,6 @@ To start a {0} trial, click the button below.</value>
   <data name="VCPU_ONLY_WHEN_HALTED" xml:space="preserve">
     <value>The vCPUs can only be changed when the VM is shut down.</value>
   </data>
-  <data name="VCPUS_MORE_THAN_PCPUS" xml:space="preserve">
-    <value>The number of VCPUs is greater than the number of physical CPUs on the host server. This will significantly reduce VM performance.
-
-To optimize VM performance, you should reduce the number of VCPUs to less than or equal to the number of physical CPUs.</value>
-  </data>
   <data name="VDI" xml:space="preserve">
     <value>VDI</value>
   </data>

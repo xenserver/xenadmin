@@ -43,19 +43,18 @@ namespace XenAdmin.SettingsPanels
             this.topologyPictureBox = new System.Windows.Forms.PictureBox();
             this.comboBoxInitialVCPUs = new System.Windows.Forms.ComboBox();
             this.labelInitialVCPUs = new System.Windows.Forms.Label();
-            this.comboBoxTopology = new XenAdmin.Controls.CPUTopologyComboBox();
             this.labelTopology = new System.Windows.Forms.Label();
             this.MemWarningLabel = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblMB = new System.Windows.Forms.Label();
             this.nudMemory = new System.Windows.Forms.NumericUpDown();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.transparentTrackBar1 = new XenAdmin.Controls.TransparentTrackBar();
             this.lblVCPUs = new System.Windows.Forms.Label();
-            this.lblVcpuWarning = new System.Windows.Forms.LinkLabel();
             this.lblMemory = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBoxVCPUs = new System.Windows.Forms.ComboBox();
+            this.comboBoxTopology = new XenAdmin.Controls.CPUTopologyComboBox();
+            this.transparentTrackBar1 = new XenAdmin.Controls.TransparentTrackBar();
             this.tableLayoutPanel1.SuspendLayout();
             this.warningsTableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cpuWarningPictureBox)).BeginInit();
@@ -101,7 +100,6 @@ namespace XenAdmin.SettingsPanels
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 9);
             this.tableLayoutPanel1.Controls.Add(this.lblPriority, 0, 8);
             this.tableLayoutPanel1.Controls.Add(this.lblVCPUs, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.lblVcpuWarning, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.lblMemory, 0, 10);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.comboBoxVCPUs, 1, 2);
@@ -168,15 +166,6 @@ namespace XenAdmin.SettingsPanels
             resources.ApplyResources(this.labelInitialVCPUs, "labelInitialVCPUs");
             this.labelInitialVCPUs.Name = "labelInitialVCPUs";
             // 
-            // comboBoxTopology
-            // 
-            this.tableLayoutPanel1.SetColumnSpan(this.comboBoxTopology, 3);
-            this.comboBoxTopology.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            resources.ApplyResources(this.comboBoxTopology, "comboBoxTopology");
-            this.comboBoxTopology.FormattingEnabled = true;
-            this.comboBoxTopology.Name = "comboBoxTopology";
-            this.comboBoxTopology.SelectedIndexChanged += new System.EventHandler(this.comboBoxTopology_SelectedIndexChanged);
-            // 
             // labelTopology
             // 
             resources.ApplyResources(this.labelTopology, "labelTopology");
@@ -233,26 +222,10 @@ namespace XenAdmin.SettingsPanels
             this.panel1.Controls.Add(this.transparentTrackBar1);
             this.panel1.Name = "panel1";
             // 
-            // transparentTrackBar1
-            // 
-            resources.ApplyResources(this.transparentTrackBar1, "transparentTrackBar1");
-            this.transparentTrackBar1.BackColor = System.Drawing.Color.Transparent;
-            this.transparentTrackBar1.Name = "transparentTrackBar1";
-            this.transparentTrackBar1.TabStop = false;
-            // 
             // lblVCPUs
             // 
             resources.ApplyResources(this.lblVCPUs, "lblVCPUs");
             this.lblVCPUs.Name = "lblVCPUs";
-            // 
-            // lblVcpuWarning
-            // 
-            resources.ApplyResources(this.lblVcpuWarning, "lblVcpuWarning");
-            this.tableLayoutPanel1.SetColumnSpan(this.lblVcpuWarning, 4);
-            this.lblVcpuWarning.LinkColor = System.Drawing.SystemColors.ActiveCaption;
-            this.lblVcpuWarning.Name = "lblVcpuWarning";
-            this.lblVcpuWarning.TabStop = true;
-            this.lblVcpuWarning.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblVCpuWarning_LinkClicked);
             // 
             // lblMemory
             // 
@@ -272,6 +245,22 @@ namespace XenAdmin.SettingsPanels
             resources.ApplyResources(this.comboBoxVCPUs, "comboBoxVCPUs");
             this.comboBoxVCPUs.Name = "comboBoxVCPUs";
             this.comboBoxVCPUs.SelectedIndexChanged += new System.EventHandler(this.comboBoxVCPUs_SelectedIndexChanged);
+            // 
+            // comboBoxTopology
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.comboBoxTopology, 3);
+            this.comboBoxTopology.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            resources.ApplyResources(this.comboBoxTopology, "comboBoxTopology");
+            this.comboBoxTopology.FormattingEnabled = true;
+            this.comboBoxTopology.Name = "comboBoxTopology";
+            this.comboBoxTopology.SelectedIndexChanged += new System.EventHandler(this.comboBoxTopology_SelectedIndexChanged);
+            // 
+            // transparentTrackBar1
+            // 
+            resources.ApplyResources(this.transparentTrackBar1, "transparentTrackBar1");
+            this.transparentTrackBar1.BackColor = System.Drawing.Color.Transparent;
+            this.transparentTrackBar1.Name = "transparentTrackBar1";
+            this.transparentTrackBar1.TabStop = false;
             // 
             // CpuMemoryEditPage
             // 
@@ -310,7 +299,6 @@ namespace XenAdmin.SettingsPanels
         private System.Windows.Forms.Label lblPriority;
         private System.Windows.Forms.Label lblVCPUs;
         private System.Windows.Forms.Label lblMemory;
-        private System.Windows.Forms.LinkLabel lblVcpuWarning;
         private XenAdmin.Controls.TransparentTrackBar transparentTrackBar1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label MemWarningLabel;

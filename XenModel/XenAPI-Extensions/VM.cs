@@ -479,16 +479,6 @@ namespace XenAPI
             other_config = SetDictionaryKey(other_config, "auto_poweron", value.ToString().ToLower());
         }
 
-        public bool GetIgnoreExcessiveVcpus()
-        {
-            return BoolKey(other_config, "ignore_excessive_vcpus");
-        }
-
-        public void SetIgnoreExcessiveVcpus(bool value)
-        {
-            other_config = SetDictionaryKey(other_config, "ignore_excessive_vcpus", value.ToString().ToLower());
-        }
-
         public string IsOnSharedStorage()
         {
             foreach (XenRef<VBD> vbdRef in VBDs)

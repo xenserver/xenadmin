@@ -439,7 +439,7 @@
     <value>Top</value>
   </data>
   <data name="warningsTableLayoutPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 282</value>
+    <value>0, 263</value>
   </data>
   <data name="warningsTableLayoutPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 3, 0, 3</value>
@@ -469,7 +469,7 @@
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="cpuWarningPictureBox" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cpuWarningLabel" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="memoryWarningLabel" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="topologyWarningLabel" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="memoryPictureBox" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="topologyPictureBox" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,30,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="comboBoxInitialVCPUs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>129, 117</value>
+    <value>129, 98</value>
   </data>
   <data name="comboBoxInitialVCPUs.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 21</value>
@@ -499,7 +499,7 @@
     <value>NoControl</value>
   </data>
   <data name="labelInitialVCPUs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 117</value>
+    <value>3, 98</value>
   </data>
   <data name="labelInitialVCPUs.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
@@ -532,7 +532,7 @@
     <value>Tahoma, 8pt</value>
   </data>
   <data name="comboBoxTopology.Location" type="System.Drawing.Point, System.Drawing">
-    <value>129, 90</value>
+    <value>129, 71</value>
   </data>
   <data name="comboBoxTopology.Size" type="System.Drawing.Size, System.Drawing">
     <value>250, 21</value>
@@ -562,7 +562,7 @@
     <value>NoControl</value>
   </data>
   <data name="labelTopology.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 90</value>
+    <value>3, 71</value>
   </data>
   <data name="labelTopology.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
@@ -601,7 +601,7 @@
     <value>NoControl</value>
   </data>
   <data name="MemWarningLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>230, 253</value>
+    <value>230, 234</value>
   </data>
   <data name="MemWarningLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>267, 26</value>
@@ -700,7 +700,7 @@
     <value>Fill</value>
   </data>
   <data name="panel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>126, 256</value>
+    <value>126, 237</value>
   </data>
   <data name="panel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 3, 0, 3</value>
@@ -751,7 +751,7 @@
     <value>3</value>
   </data>
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 187</value>
+    <value>3, 168</value>
   </data>
   <data name="panel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 24</value>
@@ -787,7 +787,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblVCPUs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 63</value>
+    <value>3, 44</value>
   </data>
   <data name="lblVCPUs.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
@@ -816,42 +816,6 @@
   <data name="&gt;&gt;lblVCPUs.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="lblVcpuWarning.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblVcpuWarning.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblVcpuWarning.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 41</value>
-  </data>
-  <data name="lblVcpuWarning.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 0, 3, 6</value>
-  </data>
-  <data name="lblVcpuWarning.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 13</value>
-  </data>
-  <data name="lblVcpuWarning.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="lblVcpuWarning.Text" xml:space="preserve">
-    <value>How can I improve VM performance?</value>
-  </data>
-  <data name="lblVcpuWarning.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;lblVcpuWarning.Name" xml:space="preserve">
-    <value>lblVcpuWarning</value>
-  </data>
-  <data name="&gt;&gt;lblVcpuWarning.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblVcpuWarning.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;lblVcpuWarning.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
   <data name="lblMemory.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -862,7 +826,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblMemory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 256</value>
+    <value>3, 237</value>
   </data>
   <data name="lblMemory.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
@@ -889,7 +853,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;lblMemory.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>10</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -925,10 +889,10 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>11</value>
   </data>
   <data name="comboBoxVCPUs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>129, 63</value>
+    <value>129, 44</value>
   </data>
   <data name="comboBoxVCPUs.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 21</value>
@@ -946,7 +910,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;comboBoxVCPUs.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>12</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -979,13 +943,13 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="warningsTableLayoutPanel" Row="12" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="comboBoxInitialVCPUs" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelInitialVCPUs" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="comboBoxTopology" Row="4" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="labelTopology" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="MemWarningLabel" Row="10" RowSpan="2" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="panel2" Row="10" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="panel1" Row="9" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="lblPriority" Row="8" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="lblVCPUs" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblVcpuWarning" Row="1" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="lblMemory" Row="10" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="comboBoxVCPUs" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,Absolute,45,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,20,AutoSize,0,Absolute,20,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,100,Percent,50,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="warningsTableLayoutPanel" Row="12" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="comboBoxInitialVCPUs" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelInitialVCPUs" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="comboBoxTopology" Row="4" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="labelTopology" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="MemWarningLabel" Row="10" RowSpan="2" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="panel2" Row="10" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="panel1" Row="9" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="lblPriority" Row="8" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="lblVCPUs" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblMemory" Row="10" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="comboBoxVCPUs" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,Absolute,45,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,20,AutoSize,0,Absolute,20,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,100,Percent,50,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="lblPriority.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lblPriority.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 161</value>
+    <value>3, 142</value>
   </data>
   <data name="lblPriority.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 10, 0, 0</value>
