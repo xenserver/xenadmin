@@ -216,7 +216,7 @@ namespace XenAdmin.SettingsPanels
                 // Show the performance warning about vCPUs > pCPUs.
                 // Don't show if the VM isn't running, since we don't know which server it will
                 // run on (and so can't count the number of pCPUs).
-                if ( vm.power_state == vm_power_state.Running
+                if (vm.power_state == vm_power_state.Running
                     && vm.VCPUs_at_startup > currentHost.host_CPUs.Count
                     && !vm.GetIgnoreExcessiveVcpus())
                 {
@@ -249,7 +249,7 @@ namespace XenAdmin.SettingsPanels
             _currentVCpuWeight = Convert.ToDecimal(vm.GetVcpuWeight());
 
             InitializeVCpuControls();
-            
+
             _validToSave = true;
         }
 
@@ -262,7 +262,7 @@ namespace XenAdmin.SettingsPanels
             labelInitialVCPUs.Text = _vm.power_state == vm_power_state.Halted
                 ? Messages.VM_CPUMEMPAGE_INITIAL_VCPUS_LABEL
                 : Messages.VM_CPUMEMPAGE_CURRENT_VCPUS_LABEL;
-            
+
             labelInitialVCPUs.Visible = comboBoxInitialVCPUs.Visible = _isVCpuHotplugSupported;
             comboBoxInitialVCPUs.Enabled = _isVCpuHotplugSupported &&
                                            (_vm.power_state == vm_power_state.Halted ||
@@ -368,8 +368,8 @@ namespace XenAdmin.SettingsPanels
             {
                 _vm.SetCoresPerSocket(comboBoxTopology.CoresPerSocket);
             }
-			
-			if (HasMemoryChanged)
+
+            if (HasMemoryChanged)
             {
                 actions.Add(_memoryAction);  // Calculated in ValidToSave
             }
@@ -542,7 +542,7 @@ namespace XenAdmin.SettingsPanels
                 // If VcpusAtStartup and VcpusMax are equal, and VcpusMax is changed, then VcpusAtStartup is changed to match
                 // But if the numbers are unequal, and VcpusMax is changed but is still higher than VcpusAtStartup, then VcpusAtStartup is unchanged
                 var newValue = SelectedVCpusAtStartup;
-               
+
                 if (SelectedVCpusMax < SelectedVCpusAtStartup)
                     newValue = SelectedVCpusMax;
                 else if (SelectedVCpusAtStartup == _prevVCpusMax && SelectedVCpusMax != _prevVCpusMax)
