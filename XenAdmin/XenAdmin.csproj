@@ -3146,7 +3146,6 @@
     <Compile Include="Dialogs\LicenseManager\SelectionVerifiers\HaOnVerifier.cs" />
     <Compile Include="Dialogs\LicenseManager\SelectionVerifiers\LicenseSelectionVerifier.cs" />
     <Compile Include="Dialogs\LicenseManager\SelectionVerifiers\NotLiveVerifier.cs" />
-    <Compile Include="Dialogs\LicenseManager\SelectionVerifiers\OlderServerVerifier.cs" />
     <Compile Include="Dialogs\LicenseManager\SelectionVerifiers\SelectionVerifierFactory.cs" />
     <Compile Include="Dialogs\LicenseManager\SummaryPanelDecorators\LicenseManagerSummaryComponent.cs" />
     <Compile Include="Dialogs\LicenseManager\LicenseStatus.cs" />

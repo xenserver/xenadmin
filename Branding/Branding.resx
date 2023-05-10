@@ -144,9 +144,6 @@
   <data name="PERF_ALERT_MAIL_DEFAULT_LANGUAGE" xml:space="preserve">
     <value>en-US</value>
   </data>
-  <data name="PRODUCT_VERSION_5_6" xml:space="preserve">
-    <value>XenServer 5.6</value>
-  </data>
   <data name="PRODUCT_VERSION_7_0" xml:space="preserve">
     <value>XenServer 7.0</value>
   </data>
