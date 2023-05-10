@@ -295,6 +295,20 @@ namespace XenAdmin.SettingsPanels
             }
         }
 
+        private void ShowCpuWarnings(IReadOnlyCollection<string> warnings)
+        {
+            var show = warnings.Count > 0;
+            cpuWarningLabel.Text = show ? string.Join(Environment.NewLine, warnings) : null;
+            cpuWarningPictureBox.Visible = cpuWarningLabel.Visible = show;
+        }
+
+        private void ShowTopologyWarnings(IReadOnlyCollection<string> warnings)
+        {
+            var show = warnings.Count > 0;
+            topologyWarningLabel.Text = show ? string.Join(Environment.NewLine, warnings) : null;
+            topologyPictureBox.Visible = topologyWarningLabel.Visible = show;
+        }
+
         private void ValidateVCpuSettings()
         {
             if (_vm == null || !comboBoxVCPUs.Enabled)
@@ -303,57 +317,49 @@ namespace XenAdmin.SettingsPanels
             var maxPhysicalCpus = _vm.Connection.Cache.Hosts.Select(h => h.host_CPUs.Count).Max();
             var homeHostPhysicalCpus = homeHost?.host_CPUs.Count;
 
+            var warnings = new List<string>();
 
             if (comboBoxVCPUs.SelectedItem != null && maxPhysicalCpus < SelectedVCpusMax)
             {
                 if (homeHostPhysicalCpus != null && homeHostPhysicalCpus < SelectedVCpusMax &&
                     maxPhysicalCpus >= SelectedVCpusMax)
                 {
-                    VCPUWarningLabel.Text = Messages.VM_CPUMEMPAGE_VCPU_HOME_HOST_WARNING;
-                    VCPUWarningLabel.Visible = true;
+                    warnings.Add(Messages.VM_CPUMEMPAGE_VCPU_HOME_HOST_WARNING);
                 }
                 else if (maxPhysicalCpus < SelectedVCpusMax)
                 {
-                    VCPUWarningLabel.Text = Messages.VM_CPUMEMPAGE_VCPU_WARNING;
-                    VCPUWarningLabel.Visible = true;
-                }
-                else
-                {
-                    VCPUWarningLabel.Visible = false;
+                    warnings.Add(Messages.VM_CPUMEMPAGE_VCPU_WARNING);
                 }
             }
             else if (comboBoxVCPUs.SelectedItem != null && SelectedVCpusMax < _minVCpus)
             {
-                VCPUWarningLabel.Text = string.Format(Messages.VM_CPUMEMPAGE_VCPU_MIN_WARNING, _minVCpus);
-                VCPUWarningLabel.Visible = true;
+                warnings.Add(string.Format(Messages.VM_CPUMEMPAGE_VCPU_MIN_WARNING, _minVCpus));
             }
             else if (comboBoxVCPUs.SelectedItem != null && SelectedVCpusMax > VM.MAX_VCPUS_FOR_NON_TRUSTED_VMS)
             {
-                VCPUWarningLabel.Text = string.Format(Messages.VCPUS_UNTRUSTED_VM_WARNING,
-                    VM.MAX_VCPUS_FOR_NON_TRUSTED_VMS, BrandManager.ProductBrand);
-                VCPUWarningLabel.Visible = true;
-            }
-            else
-            {
-                VCPUWarningLabel.Visible = false;
+                warnings.Add(string.Format(Messages.VCPUS_UNTRUSTED_VM_WARNING, VM.MAX_VCPUS_FOR_NON_TRUSTED_VMS, BrandManager.ProductBrand));
             }
 
             if (comboBoxInitialVCPUs.SelectedItem != null && SelectedVCpusAtStartup < _minVCpus)
             {
-                initialVCPUWarningLabel.Text = string.Format(Messages.VM_CPUMEMPAGE_VCPU_MIN_WARNING, _minVCpus);
-                initialVCPUWarningLabel.Visible = true;
+                warnings.Add(string.Format(Messages.VM_CPUMEMPAGE_VCPU_MIN_WARNING, _minVCpus));
             }
-            else
-            {
-                initialVCPUWarningLabel.Visible = false;
-            }
+
+            ShowCpuWarnings(warnings);
         }
 
         private void ValidateTopologySettings()
         {
+            var warnings = new List<string>();
             if (comboBoxVCPUs.SelectedItem != null)
-                labelInvalidVCPUWarning.Text =
-                    VM.ValidVCPUConfiguration((long)comboBoxVCPUs.SelectedItem, comboBoxTopology.CoresPerSocket);
+            {
+                var topologyWarning = VM.ValidVCPUConfiguration((long)comboBoxVCPUs.SelectedItem, comboBoxTopology.CoresPerSocket);
+                if (!string.IsNullOrEmpty(topologyWarning))
+                {
+                    warnings.Add(topologyWarning);
+                }
+            }
+            ShowTopologyWarnings(warnings);
         }
 
         private void ValidateNud(NumericUpDown nud, decimal defaultValue)

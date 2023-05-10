@@ -228,44 +228,248 @@
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="initialVCPUWarningLabel.AutoSize" type="System.Boolean, mscorlib">
+  <data name="warningsTableLayoutPanel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="initialVCPUWarningLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="warningsTableLayoutPanel.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
-  <data name="initialVCPUWarningLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="warningsTableLayoutPanel.ColumnCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="cpuWarningPictureBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="initialVCPUWarningLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>185, 133</value>
+  <data name="cpuWarningPictureBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 3</value>
   </data>
-  <data name="initialVCPUWarningLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>312, 27</value>
+  <data name="cpuWarningPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 3, 0, 3</value>
   </data>
-  <data name="initialVCPUWarningLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
+  <data name="cpuWarningPictureBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 16</value>
   </data>
-  <data name="initialVCPUWarningLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
+  <data name="cpuWarningPictureBox.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>CenterImage</value>
   </data>
-  <data name="initialVCPUWarningLabel.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;initialVCPUWarningLabel.Name" xml:space="preserve">
-    <value>initialVCPUWarningLabel</value>
-  </data>
-  <data name="&gt;&gt;initialVCPUWarningLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;initialVCPUWarningLabel.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;initialVCPUWarningLabel.ZOrder" xml:space="preserve">
+  <data name="cpuWarningPictureBox.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
+  <data name="cpuWarningPictureBox.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;cpuWarningPictureBox.Name" xml:space="preserve">
+    <value>cpuWarningPictureBox</value>
+  </data>
+  <data name="&gt;&gt;cpuWarningPictureBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cpuWarningPictureBox.Parent" xml:space="preserve">
+    <value>warningsTableLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;cpuWarningPictureBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="cpuWarningLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cpuWarningLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cpuWarningLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>30, 3</value>
+  </data>
+  <data name="cpuWarningLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 3, 0, 3</value>
+  </data>
+  <data name="cpuWarningLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>0, 13</value>
+  </data>
+  <data name="cpuWarningLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="cpuWarningLabel.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;cpuWarningLabel.Name" xml:space="preserve">
+    <value>cpuWarningLabel</value>
+  </data>
+  <data name="&gt;&gt;cpuWarningLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cpuWarningLabel.Parent" xml:space="preserve">
+    <value>warningsTableLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;cpuWarningLabel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="memoryWarningLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="memoryWarningLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="memoryWarningLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>30, 25</value>
+  </data>
+  <data name="memoryWarningLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 3, 0, 3</value>
+  </data>
+  <data name="memoryWarningLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>0, 13</value>
+  </data>
+  <data name="memoryWarningLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="memoryWarningLabel.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;memoryWarningLabel.Name" xml:space="preserve">
+    <value>memoryWarningLabel</value>
+  </data>
+  <data name="&gt;&gt;memoryWarningLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;memoryWarningLabel.Parent" xml:space="preserve">
+    <value>warningsTableLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;memoryWarningLabel.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="topologyWarningLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="topologyWarningLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="topologyWarningLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>30, 47</value>
+  </data>
+  <data name="topologyWarningLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 3, 0, 3</value>
+  </data>
+  <data name="topologyWarningLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>0, 13</value>
+  </data>
+  <data name="topologyWarningLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="topologyWarningLabel.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;topologyWarningLabel.Name" xml:space="preserve">
+    <value>topologyWarningLabel</value>
+  </data>
+  <data name="&gt;&gt;topologyWarningLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;topologyWarningLabel.Parent" xml:space="preserve">
+    <value>warningsTableLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;topologyWarningLabel.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="memoryPictureBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="memoryPictureBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 25</value>
+  </data>
+  <data name="memoryPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 3, 0, 3</value>
+  </data>
+  <data name="memoryPictureBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 16</value>
+  </data>
+  <data name="memoryPictureBox.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>CenterImage</value>
+  </data>
+  <data name="memoryPictureBox.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="memoryPictureBox.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;memoryPictureBox.Name" xml:space="preserve">
+    <value>memoryPictureBox</value>
+  </data>
+  <data name="&gt;&gt;memoryPictureBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;memoryPictureBox.Parent" xml:space="preserve">
+    <value>warningsTableLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;memoryPictureBox.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="topologyPictureBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="topologyPictureBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 47</value>
+  </data>
+  <data name="topologyPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 3, 0, 3</value>
+  </data>
+  <data name="topologyPictureBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 14</value>
+  </data>
+  <data name="topologyPictureBox.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>CenterImage</value>
+  </data>
+  <data name="topologyPictureBox.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="topologyPictureBox.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;topologyPictureBox.Name" xml:space="preserve">
+    <value>topologyPictureBox</value>
+  </data>
+  <data name="&gt;&gt;topologyPictureBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;topologyPictureBox.Parent" xml:space="preserve">
+    <value>warningsTableLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;topologyPictureBox.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="warningsTableLayoutPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="warningsTableLayoutPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 282</value>
+  </data>
+  <data name="warningsTableLayoutPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 3, 0, 3</value>
+  </data>
+  <data name="warningsTableLayoutPanel.RowCount" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="warningsTableLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>500, 64</value>
+  </data>
+  <data name="warningsTableLayoutPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="&gt;&gt;warningsTableLayoutPanel.Name" xml:space="preserve">
+    <value>warningsTableLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;warningsTableLayoutPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;warningsTableLayoutPanel.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;warningsTableLayoutPanel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="warningsTableLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="cpuWarningPictureBox" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cpuWarningLabel" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="memoryWarningLabel" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="topologyWarningLabel" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="memoryPictureBox" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="topologyPictureBox" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,30,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
   <data name="comboBoxInitialVCPUs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>129, 136</value>
+    <value>129, 117</value>
   </data>
   <data name="comboBoxInitialVCPUs.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 21</value>
@@ -295,7 +499,7 @@
     <value>NoControl</value>
   </data>
   <data name="labelInitialVCPUs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 136</value>
+    <value>3, 117</value>
   </data>
   <data name="labelInitialVCPUs.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
@@ -324,39 +528,6 @@
   <data name="&gt;&gt;labelInitialVCPUs.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="labelInvalidVCPUWarning.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labelInvalidVCPUWarning.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="labelInvalidVCPUWarning.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="labelInvalidVCPUWarning.Location" type="System.Drawing.Point, System.Drawing">
-    <value>129, 114</value>
-  </data>
-  <data name="labelInvalidVCPUWarning.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 0, 3, 6</value>
-  </data>
-  <data name="labelInvalidVCPUWarning.Size" type="System.Drawing.Size, System.Drawing">
-    <value>368, 13</value>
-  </data>
-  <data name="labelInvalidVCPUWarning.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;labelInvalidVCPUWarning.Name" xml:space="preserve">
-    <value>labelInvalidVCPUWarning</value>
-  </data>
-  <data name="&gt;&gt;labelInvalidVCPUWarning.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelInvalidVCPUWarning.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;labelInvalidVCPUWarning.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
   <data name="comboBoxTopology.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8pt</value>
   </data>
@@ -379,7 +550,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;comboBoxTopology.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="labelTopology.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -418,7 +589,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;labelTopology.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="MemWarningLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -430,7 +601,7 @@
     <value>NoControl</value>
   </data>
   <data name="MemWarningLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>230, 272</value>
+    <value>230, 253</value>
   </data>
   <data name="MemWarningLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>267, 26</value>
@@ -457,7 +628,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;MemWarningLabel.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="panel2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -529,7 +700,7 @@
     <value>Fill</value>
   </data>
   <data name="panel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>126, 275</value>
+    <value>126, 256</value>
   </data>
   <data name="panel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 3, 0, 3</value>
@@ -550,7 +721,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;panel2.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="panel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -580,7 +751,7 @@
     <value>3</value>
   </data>
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 206</value>
+    <value>3, 187</value>
   </data>
   <data name="panel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 24</value>
@@ -604,7 +775,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="lblVCPUs.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -643,7 +814,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;lblVCPUs.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="lblVcpuWarning.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -679,7 +850,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;lblVcpuWarning.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>10</value>
   </data>
   <data name="lblMemory.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -691,7 +862,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblMemory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 275</value>
+    <value>3, 256</value>
   </data>
   <data name="lblMemory.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
@@ -718,43 +889,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;lblMemory.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="VCPUWarningLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="VCPUWarningLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="VCPUWarningLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="VCPUWarningLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>185, 60</value>
-  </data>
-  <data name="VCPUWarningLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>312, 27</value>
-  </data>
-  <data name="VCPUWarningLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="VCPUWarningLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="VCPUWarningLabel.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;VCPUWarningLabel.Name" xml:space="preserve">
-    <value>VCPUWarningLabel</value>
-  </data>
-  <data name="&gt;&gt;VCPUWarningLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;VCPUWarningLabel.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;VCPUWarningLabel.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>11</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -790,7 +925,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>12</value>
   </data>
   <data name="comboBoxVCPUs.Location" type="System.Drawing.Point, System.Drawing">
     <value>129, 63</value>
@@ -811,7 +946,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;comboBoxVCPUs.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>13</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -844,13 +979,13 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="initialVCPUWarningLabel" Row="6" RowSpan="1" Column="2" ColumnSpan="2" /&gt;&lt;Control Name="comboBoxInitialVCPUs" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelInitialVCPUs" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelInvalidVCPUWarning" Row="5" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="comboBoxTopology" Row="4" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="labelTopology" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="MemWarningLabel" Row="10" RowSpan="2" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="panel2" Row="10" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="panel1" Row="9" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="lblPriority" Row="8" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="lblVCPUs" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblVcpuWarning" Row="1" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="lblMemory" Row="10" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="VCPUWarningLabel" Row="2" RowSpan="2" Column="2" ColumnSpan="2" /&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="comboBoxVCPUs" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,Absolute,45,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,20,AutoSize,0,Absolute,20,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,100,Percent,50,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="warningsTableLayoutPanel" Row="12" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="comboBoxInitialVCPUs" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelInitialVCPUs" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="comboBoxTopology" Row="4" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="labelTopology" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="MemWarningLabel" Row="10" RowSpan="2" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="panel2" Row="10" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="panel1" Row="9" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="lblPriority" Row="8" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="lblVCPUs" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblVcpuWarning" Row="1" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="lblMemory" Row="10" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="comboBoxVCPUs" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,Absolute,45,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,20,AutoSize,0,Absolute,20,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,100,Percent,50,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="lblPriority.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lblPriority.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 180</value>
+    <value>3, 161</value>
   </data>
   <data name="lblPriority.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 10, 0, 0</value>
@@ -877,7 +1012,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;lblPriority.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
