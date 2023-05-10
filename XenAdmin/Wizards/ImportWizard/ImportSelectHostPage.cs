@@ -210,7 +210,7 @@ namespace XenAdmin.Wizards.ImportWizard
 
         private bool CheckDestinationSupportsVendorDevice()
         {
-            var dundeeOrNewerHosts = Helpers.DundeeOrGreater(SelectedTargetPool.Connection) ? SelectedTargetPool.Connection.Cache.Hosts : new Host[] {};
+            var dundeeOrNewerHosts = SelectedTargetPool.Connection.Cache.Hosts;
 
             foreach (var setting in vendorDeviceSettings)
             {

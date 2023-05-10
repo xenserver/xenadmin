@@ -77,7 +77,7 @@ namespace XenAdmin.Diagnostics.Checks
             {
                 foreach (var host2 in pool.Connection.Cache.Hosts.Where(h => h.uuid != host1.uuid))
                 {
-                    if (!PoolJoinRules.CompatibleCPUs(host1, host2, false))
+                    if (!PoolJoinRules.CompatibleCPUs(host1, host2))
                         return true;
                 }
             }

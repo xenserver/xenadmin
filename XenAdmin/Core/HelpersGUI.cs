@@ -481,7 +481,7 @@ namespace XenAdmin.Core
 
         public static bool GetPermissionForCpuFeatureLevelling(List<Host> hosts, Pool pool)
         {
-            if (hosts == null || pool == null || !Helpers.DundeeOrGreater(pool.Connection))
+            if (hosts == null || pool == null)
                 return true;
 
             List<Host> hostsWithFewerFeatures = hosts.Where(host => PoolJoinRules.HostHasFewerFeatures(host, pool)).ToList();

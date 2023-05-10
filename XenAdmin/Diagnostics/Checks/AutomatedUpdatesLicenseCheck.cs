@@ -48,7 +48,7 @@ namespace XenAdmin.Diagnostics.Checks
 
         protected override Problem RunHostCheck()
         {
-            if (_pool != null && _pool.Connection.Cache.Hosts.Any(h => Helpers.DundeeOrGreater(h) && Host.RestrictBatchHotfixApply(h)))
+            if (_pool != null && _pool.Connection.Cache.Hosts.Any(Host.RestrictBatchHotfixApply))
                 return new NotLicensedForAutomatedUpdatesWarning(this, _pool);
 
             return null;

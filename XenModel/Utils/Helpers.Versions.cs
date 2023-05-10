@@ -168,28 +168,6 @@ namespace XenAdmin.Core
         #region Versions
 
         /// <summary>
-        /// Dundee platform version is 2.0.0
-        /// </summary>
-        /// <param name="conn">May be null, in which case true is returned.</param>
-        public static bool DundeeOrGreater(IXenConnection conn)
-        {
-            return conn == null || DundeeOrGreater(GetCoordinator(conn));
-        }
-
-        /// <summary>
-        /// Dundee platform version is 2.0.0
-        /// </summary>
-        /// <param name="host">May be null, in which case true is returned.</param>
-        public static bool DundeeOrGreater(Host host)
-        {
-            if (host == null)
-                return true;
-
-            string platformVersion = HostPlatformVersion(host);
-            return platformVersion != null && ProductVersionCompare(platformVersion, "2.0.0") >= 0;
-        }
-
-        /// <summary>
         /// Ely platform version is 2.1.1
         /// </summary>
         /// <param name="conn">May be null, in which case true is returned.</param>

@@ -415,9 +415,7 @@ namespace XenAPI
         /// </summary>
         public static bool RestrictSslLegacySwitch(Host h)
         {
-            return Helpers.DundeeOrGreater(h)
-                    ? BoolKey(h.license_params, "restrict_ssl_legacy_switch")
-                    : BoolKeyPreferTrue(h.license_params, "restrict_ssl_legacy_switch");
+            return BoolKey(h.license_params, "restrict_ssl_legacy_switch");
         }
 
         public static bool RestrictLivePatching(Host h)

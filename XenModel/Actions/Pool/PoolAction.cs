@@ -40,22 +40,19 @@ namespace XenAdmin.Actions
     public abstract class PoolAbstractAction : AsyncAction
     {
         protected Func<Host, AdUserAndPassword> GetAdCredentials;
-        protected Func<HostAbstractAction, Pool, long, long, bool> AcceptNTolChanges;
         protected Action<List<LicenseFailure>, string> DoOnLicensingFailure;
 
         protected PoolAbstractAction(IXenConnection connection, string title, Func<Host, AdUserAndPassword> getAdCredentials,
-            Func<HostAbstractAction, Pool, long, long, bool> acceptNTolChanges, Action<List<LicenseFailure>, string> doOnLicensingFailure)
+            Action<List<LicenseFailure>, string> doOnLicensingFailure)
             : base(connection, title)
         {
-            this.GetAdCredentials = getAdCredentials;
-            this.AcceptNTolChanges = acceptNTolChanges;
-            this.DoOnLicensingFailure = doOnLicensingFailure;
+            GetAdCredentials = getAdCredentials;
+            DoOnLicensingFailure = doOnLicensingFailure;
         }
 
         protected void ClearAllDelegates()
         {
             GetAdCredentials = null;
-            AcceptNTolChanges = null;
             DoOnLicensingFailure = null;
         }
 
@@ -68,51 +65,6 @@ namespace XenAdmin.Actions
             AsyncAction action = new ApplyLicenseEditionAction(hostsToRelicense.ConvertAll(h=>h as IXenObject), Host.GetEdition(poolCoordinator.edition), poolCoordinator.license_server["address"], poolCoordinator.license_server["port"], 
                 doOnLicensingFailure);
             action.RunSync(null);
-        }
-
-        /// <summary>
-        /// Mask the CPUs of any supporters that need masking to join the pool
-        /// </summary>
-        /// <returns>Whether any CPUs were masked</returns>
-        protected static bool FixCpus(Pool pool, List<Host> hostsToCpuMask, Func<HostAbstractAction, Pool, long, long, bool> acceptNTolChanges)
-        {
-            if (hostsToCpuMask.Count == 0)
-                return false;
-
-            Host poolCoordinator = Helpers.GetCoordinator(pool);
-            List<RebootHostAction> rebootActions = new List<RebootHostAction>();
-
-            // Mask the CPUs, and reboot the hosts (simultaneously, as they must all be on separate connections)
-            foreach (Host host in hostsToCpuMask)
-            {
-                // No CPU masking is needed for Dundee or greater hosts 
-                if (Helpers.DundeeOrGreater(host))
-                {
-                    System.Diagnostics.Trace.Assert(false, "No CPU masking should be done for Dundee or greater hosts");
-                    continue;
-                }
-
-                Host.set_cpu_features(host.Connection.Session, host.opaque_ref, poolCoordinator.cpu_info["features"]);
-                RebootHostAction action = new RebootHostAction(host, acceptNTolChanges);
-                rebootActions.Add(action);
-                action.RunAsync();
-            }
-
-            // Wait for all the actions to finish, checking every ten seconds
-            while (true)
-            {
-                bool done = true;
-                foreach (RebootHostAction action in rebootActions)
-                {
-                    if (!action.IsCompleted)
-                        done = false;
-                }
-                if (done)
-                    break;
-                System.Threading.Thread.Sleep(10000);
-            }
-
-            return true;
         }
 
         /// <summary>

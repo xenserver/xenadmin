@@ -6944,15 +6944,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot move this virtual disk because it is attached to a VM that is not running..
-        /// </summary>
-        public static string CANNOT_MIGRATE_VDI_NON_RUNNING_VM {
-            get {
-                return ResourceManager.GetString("CANNOT_MIGRATE_VDI_NON_RUNNING_VM", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to This virtual disk has CBT enabled. It cannot be moved to another storage repository..
         /// </summary>
         public static string CANNOT_MOVE_CBT_ENABLED_VDI {
@@ -29425,15 +29416,6 @@ namespace XenAdmin {
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_APPLY_UPDATES_MIXED {
             get {
                 return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_APPLY_UPDATES_MIXED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Automated updates are not supported on this {0} version.
-        /// </summary>
-        public static string PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_HOST_VERSION {
-            get {
-                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_HOST_VERSION", resourceCulture);
             }
         }
         

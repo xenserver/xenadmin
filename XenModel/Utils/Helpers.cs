@@ -222,7 +222,7 @@ namespace XenAdmin.Core
 
         public static bool CrossPoolMigrationRestrictedWithWlb(IXenConnection conn)
         {
-            return WlbEnabledAndConfigured(conn) && !DundeeOrGreater(conn);
+            return false;
         }
 
 

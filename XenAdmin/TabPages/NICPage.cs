@@ -170,7 +170,7 @@ namespace XenAdmin.TabPages
                     }
 
                     //show the FCoE column for Dundee or higher hosts only
-                    ColumnFCoECapable.Visible = Helpers.DundeeOrGreater(host);
+                    ColumnFCoECapable.Visible = true;
 
                     //show the SR-IOV column for Kolkata or higher hosts only
                     ColumnSriovCapable.Visible = Helpers.KolkataOrGreater(host);
