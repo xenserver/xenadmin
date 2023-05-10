@@ -212,7 +212,7 @@ namespace XenAdmin.SettingsPanels
             this.lblVcpuWarning.LinkColor = System.Drawing.SystemColors.ActiveCaption;
             this.lblVcpuWarning.Name = "lblVcpuWarning";
             this.lblVcpuWarning.TabStop = true;
-            this.lblVcpuWarning.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblVcpuWarning_LinkClicked);
+            this.lblVcpuWarning.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblVCpuWarning_LinkClicked);
             // 
             // lblMemory
             // 
