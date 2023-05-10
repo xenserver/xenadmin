@@ -83,8 +83,6 @@ namespace XenAdmin.Core
 
         public static readonly string ProductBrand;
 
-        public static readonly string ProductVersion56 = Get("PRODUCT_VERSION_5_6");
-
         public static readonly string ProductVersion70 = Get("PRODUCT_VERSION_7_0");
 
         public static readonly string ProductVersion70Short = Get("PRODUCT_VERSION_7_0_SHORT");

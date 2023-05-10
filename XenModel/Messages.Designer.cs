@@ -22235,15 +22235,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to When licensing servers earlier than {0}, you must select one server at a time..
-        /// </summary>
-        public static string LICENSE_NO_MULTISELECT_LICENSE {
-            get {
-                return ResourceManager.GetString("LICENSE_NO_MULTISELECT_LICENSE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Not eligible for support.
         /// </summary>
         public static string LICENSE_NOT_ELIGIBLE_FOR_SUPPORT {

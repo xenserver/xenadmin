@@ -7736,9 +7736,6 @@ SR UUID: {1}</value>
   <data name="LICENSE_NO_MULTISELECT_ACTIVATE" xml:space="preserve">
     <value>Servers must be selected one at a time when activating Express {0}.</value>
   </data>
-  <data name="LICENSE_NO_MULTISELECT_LICENSE" xml:space="preserve">
-    <value>When licensing servers earlier than {0}, you must select one server at a time.</value>
-  </data>
   <data name="LICENSE_NOT_ELIGIBLE_FOR_SUPPORT" xml:space="preserve">
     <value>Not eligible for support</value>
   </data>

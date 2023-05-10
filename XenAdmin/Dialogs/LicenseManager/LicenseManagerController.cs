@@ -272,12 +272,8 @@ namespace XenAdmin.Dialogs
                 return;
             }
                 
-            //Assign Button
-            verifier = VerifierFactory.Verifier(SelectionVerifierFactory.Option.OldServer, lRows);
             View.DrawAssignButtonAsDisabled(verifier.Status == LicenseSelectionVerifier.VerificationStatus.Error);
-
-            //Release Button
-            View.DrawReleaseButtonAsDisabled(!lRows.Any(r=>r.IsUsingLicenseServer || r.CurrentLicenseState == LicenseStatus.HostState.PartiallyLicensed));
+            View.DrawReleaseButtonAsDisabled(!lRows.Any(r => r.IsUsingLicenseServer || r.CurrentLicenseState == LicenseStatus.HostState.PartiallyLicensed));
         }
 
         private void DisableAllButtons()
