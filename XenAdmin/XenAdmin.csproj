@@ -1372,11 +1372,11 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="SettingsPanels\BootDevice.cs" />
-    <Compile Include="SettingsPanels\CPUMemoryEditPage.cs">
+    <Compile Include="SettingsPanels\CpuMemoryEditPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="SettingsPanels\CPUMemoryEditPage.Designer.cs">
-      <DependentUpon>CPUMemoryEditPage.cs</DependentUpon>
+    <Compile Include="SettingsPanels\CpuMemoryEditPage.Designer.cs">
+      <DependentUpon>CpuMemoryEditPage.cs</DependentUpon>
     </Compile>
     <Compile Include="SettingsPanels\GeneralEditPage.cs">
       <SubType>UserControl</SubType>
@@ -2621,8 +2621,8 @@
       <DependentUpon>VMHAEditPage.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="SettingsPanels\CPUMemoryEditPage.resx">
-      <DependentUpon>CPUMemoryEditPage.cs</DependentUpon>
+    <EmbeddedResource Include="SettingsPanels\CpuMemoryEditPage.resx">
+      <DependentUpon>CpuMemoryEditPage.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\GeneralEditPage.resx">
@@ -5603,12 +5603,12 @@
     <EmbeddedResource Include="SettingsPanels\BootOptionsEditPage.zh-CN.resx">
       <DependentUpon>BootOptionsEditPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SettingsPanels\CPUMemoryEditPage.ja.resx">
-      <DependentUpon>CPUMemoryEditPage.cs</DependentUpon>
+    <EmbeddedResource Include="SettingsPanels\CpuMemoryEditPage.ja.resx">
+      <DependentUpon>CpuMemoryEditPage.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="SettingsPanels\CPUMemoryEditPage.zh-CN.resx">
-      <DependentUpon>CPUMemoryEditPage.cs</DependentUpon>
+    <EmbeddedResource Include="SettingsPanels\CpuMemoryEditPage.zh-CN.resx">
+      <DependentUpon>CpuMemoryEditPage.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\CustomFieldsDisplayPage.ja.resx">
