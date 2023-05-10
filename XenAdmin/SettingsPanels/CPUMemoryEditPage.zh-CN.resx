@@ -898,7 +898,7 @@
     <value>500, 500</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>CPUMemoryEditPage</value>
+    <value>CpuMemoryEditPage</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

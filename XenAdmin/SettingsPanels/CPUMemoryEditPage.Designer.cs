@@ -1,6 +1,6 @@
 namespace XenAdmin.SettingsPanels
 {
-    partial class CPUMemoryEditPage
+    partial class CpuMemoryEditPage
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,7 +28,7 @@ namespace XenAdmin.SettingsPanels
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CPUMemoryEditPage));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CpuMemoryEditPage));
             this.lblSliderHighest = new System.Windows.Forms.Label();
             this.lblSliderNormal = new System.Windows.Forms.Label();
             this.lblSliderLowest = new System.Windows.Forms.Label();
@@ -249,7 +249,7 @@ namespace XenAdmin.SettingsPanels
             this.Controls.Add(this.tableLayoutPanel1);
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Name = "CPUMemoryEditPage";
+            this.Name = "CpuMemoryEditPage";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.panel2.ResumeLayout(false);
