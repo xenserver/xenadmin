@@ -306,6 +306,9 @@
   <data name="ACTION_DISABLE_IGMP_SNOOPING" xml:space="preserve">
     <value>Disable IGMP snooping</value>
   </data>
+  <data name="ACTION_DISABLE_LIVE_PATCHING" xml:space="preserve">
+    <value>Disable live patching</value>
+  </data>
   <data name="ACTION_DISABLE_PVS_READ_CACHING" xml:space="preserve">
     <value>Disable PVS-Accelerator</value>
   </data>
@@ -329,6 +332,9 @@
   </data>
   <data name="ACTION_DISABLING_CHANGED_BLOCK_TRACKING" xml:space="preserve">
     <value>Disabling Changed Block Tracking for selected VMs</value>
+  </data>
+  <data name="ACTION_DISABLING_LIVE_PATCHING" xml:space="preserve">
+    <value>Disabling live patching for '{0}'</value>
   </data>
   <data name="ACTION_DISABLING_PVS_READ_CACHING" xml:space="preserve">
     <value>Disabling PVS-Accelerator for selected VMs</value>
@@ -426,6 +432,9 @@
   <data name="ACTION_ENABLE_IGMP_SNOOPING" xml:space="preserve">
     <value>Enable IGMP snooping</value>
   </data>
+  <data name="ACTION_ENABLE_LIVE_PATCHING" xml:space="preserve">
+    <value>Enable live patching</value>
+  </data>
   <data name="ACTION_ENABLE_MIGRATION_COMPRESSION" xml:space="preserve">
     <value>Enabling VM memory and vGPU data compression during VM live migration on '{0}'</value>
   </data>
@@ -454,6 +463,9 @@
     <value>Could not enable metric "{0}".
 
 This could be because the data source is not generating any data. Ensure the prerequisites for collecting this metric are met before attempting to enable it.</value>
+  </data>
+  <data name="ACTION_ENABLING_LIVE_PATCHING" xml:space="preserve">
+    <value>Enabling live patching for '{0}'</value>
   </data>
   <data name="ACTION_ENABLING_PVS_READ_CACHING" xml:space="preserve">
     <value>Enabling PVS-Accelerator for selected VMs</value>
@@ -7813,6 +7825,9 @@ Standard features only</value>
   </data>
   <data name="LINK_STATUS" xml:space="preserve">
     <value>Link Status</value>
+  </data>
+  <data name="LIVE_PATCHING" xml:space="preserve">
+    <value>Live Patching</value>
   </data>
   <data name="LIVE_PATCHING_FAILED_MULTI_HOST" xml:space="preserve">
     <value>Live patching failed for the following servers:
