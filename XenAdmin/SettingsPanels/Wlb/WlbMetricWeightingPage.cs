@@ -81,23 +81,20 @@ namespace XenAdmin.SettingsPanels
         private void InitializeControls()
         {
             _loading = true;
-            trackbarCPUPriority.Value = GetSafeTrackbarValue(trackbarCPUPriority, _poolConfiguration.VmCpuUtilizationWeightHigh / TRACKBAR_INTERVAL);
-            trackbarMemoryPriority.Value = GetSafeTrackbarValue(trackbarMemoryPriority, _poolConfiguration.VmMemoryWeightHigh / TRACKBAR_INTERVAL);
-            trackbarNetReadPriority.Value = GetSafeTrackbarValue(trackbarNetReadPriority, _poolConfiguration.VmNetworkReadWeightHigh / TRACKBAR_INTERVAL);
-            trackbarNetWritePriority.Value = GetSafeTrackbarValue(trackbarNetWritePriority, _poolConfiguration.VmNetworkWriteWeightHigh / TRACKBAR_INTERVAL);
-            trackbarDiskReadPriority.Value = GetSafeTrackbarValue(trackbarDiskReadPriority, _poolConfiguration.VmDiskReadWeightHigh / TRACKBAR_INTERVAL);
-            trackbarDiskWritePriority.Value = GetSafeTrackbarValue(trackbarDiskWritePriority, _poolConfiguration.VmDiskWriteWeightHigh / TRACKBAR_INTERVAL);
-            // CA-194940:
-            // Host disk read/write threshold and weight settings work since Dundee.
-            // For previous XenServer, hide the host disk read/write settings.
-            if (!Helpers.DundeeOrGreater(_connection))
+
+            try
             {
-                trackbarDiskReadPriority.Visible = false;
-                trackbarDiskWritePriority.Visible = false;
-                label10.Visible = false;
-                label11.Visible = false;
+                trackbarCPUPriority.Value = GetSafeTrackbarValue(trackbarCPUPriority, _poolConfiguration.VmCpuUtilizationWeightHigh / TRACKBAR_INTERVAL);
+                trackbarMemoryPriority.Value = GetSafeTrackbarValue(trackbarMemoryPriority, _poolConfiguration.VmMemoryWeightHigh / TRACKBAR_INTERVAL);
+                trackbarNetReadPriority.Value = GetSafeTrackbarValue(trackbarNetReadPriority, _poolConfiguration.VmNetworkReadWeightHigh / TRACKBAR_INTERVAL);
+                trackbarNetWritePriority.Value = GetSafeTrackbarValue(trackbarNetWritePriority, _poolConfiguration.VmNetworkWriteWeightHigh / TRACKBAR_INTERVAL);
+                trackbarDiskReadPriority.Value = GetSafeTrackbarValue(trackbarDiskReadPriority, _poolConfiguration.VmDiskReadWeightHigh / TRACKBAR_INTERVAL);
+                trackbarDiskWritePriority.Value = GetSafeTrackbarValue(trackbarDiskWritePriority, _poolConfiguration.VmDiskWriteWeightHigh / TRACKBAR_INTERVAL);
             }
-            _loading = false; ;
+            finally
+            {
+                _loading = false;
+            }
         }
 
         private void trackbarValueChanged(object sender, EventArgs e)

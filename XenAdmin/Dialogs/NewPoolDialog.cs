@@ -163,7 +163,7 @@ namespace XenAdmin.Dialogs
                 // Are there any hosts which are forbidden from masking their CPUs for licensing reasons?
                 // If so, we need to show upsell.
                 if (null != supporters.Find(host =>
-                    !PoolJoinRules.CompatibleCPUs(host, coordinator, false) &&
+                    !PoolJoinRules.CompatibleCPUs(host, coordinator) &&
                     Helpers.FeatureForbidden(host, Host.RestrictCpuMasking) &&
                     !PoolJoinRules.FreeHostPaidCoordinator(host, coordinator, false)))  // in this case we can upgrade the license and then mask the CPU
                 {
@@ -189,7 +189,7 @@ namespace XenAdmin.Dialogs
                         }
                     }
 
-                    var hosts2 = supporters.FindAll(host => !PoolJoinRules.CompatibleCPUs(host, coordinator, false));
+                    var hosts2 = supporters.FindAll(host => !PoolJoinRules.CompatibleCPUs(host, coordinator));
                     if (hosts2.Count > 0)
                     {
                         string msg = string.Format(hosts2.Count == 1
@@ -233,7 +233,6 @@ namespace XenAdmin.Dialogs
                 );
 
                 new CreatePoolAction(coordinator, supporters, poolName, poolDescription, AddHostToPoolCommand.GetAdPrompt,
-                    AddHostToPoolCommand.NtolDialog,
                     (licenseFailures, exceptionMessage) =>
                     {
                         if (licenseFailures.Count > 0)

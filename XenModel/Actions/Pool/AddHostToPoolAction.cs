@@ -40,24 +40,22 @@ namespace XenAdmin.Actions
     public class AddHostToPoolAction : PoolAbstractAction
     {
         private readonly List<Host> _hostsToRelicense;
-        private readonly List<Host> _hostsToCpuMask;
         private readonly List<Host> _hostsToAdConfigure;
 
         public AddHostToPoolAction(Pool poolToJoin, Host joiningHost, Func<Host, AdUserAndPassword> getAdCredentials,
-            Func<HostAbstractAction, Pool, long, long, bool> acceptNTolChanges, Action<List<LicenseFailure>, string> doOnLicensingFailure)
+            Action<List<LicenseFailure>, string> doOnLicensingFailure)
             : base(joiningHost.Connection, string.Format(Messages.ADDING_SERVER_TO_POOL, joiningHost.Name(), poolToJoin.Name()),
-            getAdCredentials, acceptNTolChanges, doOnLicensingFailure)
+            getAdCredentials, doOnLicensingFailure)
         {
             this.Pool = poolToJoin;
             this.Host = joiningHost;
             Host coordinator = Helpers.GetCoordinator(poolToJoin);
             _hostsToRelicense = new List<Host>();
-            _hostsToCpuMask = new List<Host>();
+
             _hostsToAdConfigure = new List<Host>();
             if (PoolJoinRules.FreeHostPaidCoordinator(joiningHost, coordinator, false))
                 _hostsToRelicense.Add(joiningHost);
-            if (!PoolJoinRules.CompatibleCPUs(joiningHost, coordinator, false))
-                _hostsToCpuMask.Add(joiningHost);
+
             if (!PoolJoinRules.CompatibleAdConfig(joiningHost, coordinator, false))
                 _hostsToAdConfigure.Add(joiningHost);
             this.Description = Messages.WAITING;
@@ -76,7 +74,6 @@ namespace XenAdmin.Actions
             ApiMethodsToRoleCheck.Add("pool.remove_tags");
             ApiMethodsToRoleCheck.Add("pool.set_wlb_enabled");
             ApiMethodsToRoleCheck.Add("pool.set_wlb_verify_cert");
-
             ApiMethodsToRoleCheck.Add("pool.join");
         }
 
@@ -88,9 +85,6 @@ namespace XenAdmin.Actions
             {
                 FixLicensing(Pool, _hostsToRelicense, DoOnLicensingFailure);
                 FixAd(Pool, _hostsToAdConfigure, GetAdCredentials);
-                bool fixedCpus = FixCpus(Pool, _hostsToCpuMask, AcceptNTolChanges);
-                if (fixedCpus)
-                    Session = NewSession();  // We've rebooted the server, so we need to grab the new session
 
                 var coordinator = Pool.Connection.TryResolveWithTimeout(Pool.master);
                 var address = coordinator != null ? coordinator.address : Pool.Connection.Hostname;

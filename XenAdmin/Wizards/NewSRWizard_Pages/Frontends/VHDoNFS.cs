@@ -85,7 +85,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                 listBoxNfsSRs.SetMustSelectUUID(SrWizardType.UUID);
 
             //Setting visibility of NFS Version controls
-            nfsVersionLabel.Visible = nfsVersionSelectorTableLayoutPanel.Visible = Helpers.DundeeOrGreater(Connection);
+            nfsVersionLabel.Visible = nfsVersionSelectorTableLayoutPanel.Visible = true;
         }
 
         public override void SelectDefaultControl()
@@ -136,22 +136,20 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         {
             NfsScanButton.Enabled = false;
 
-            // Perform an SR.probe to see if there is already an SR present
-            Dictionary<String, String> dconf = new Dictionary<String, String>();
-            string[] fullpath = NfsServerPathTextBox.Text.Trim().Split(new char[] { ':' });
-            dconf[SERVER] = fullpath[0];
-            if (fullpath.Length > 1)
-            {
-                dconf[SERVERPATH] = fullpath[1];
-            }
-            dconf[OPTIONS] = serverOptionsTextBox.Text;
-
             Host coordinator = Helpers.GetCoordinator(Connection);
             if (coordinator == null)
                 return;
 
-            if (Helpers.DundeeOrGreater(Connection))
-                dconf[PROBEVERSION] = string.Empty; //this needs to be passed to the API in order to get back the NFS versions supported
+            // Perform an SR.probe to see if there is already an SR present
+            var dconf = new Dictionary<string, string>();
+            string[] fullpath = NfsServerPathTextBox.Text.Trim().Split(':');
+            dconf[SERVER] = fullpath[0];
+
+            if (fullpath.Length > 1)
+                dconf[SERVERPATH] = fullpath[1];
+
+            dconf[OPTIONS] = serverOptionsTextBox.Text;
+            dconf[PROBEVERSION] = string.Empty; //this needs to be passed to the API in order to get back the NFS versions supported
 
             // Start probe
             SrProbeAction action = new SrProbeAction(Connection, coordinator, SR.SRTypes.nfs, dconf);

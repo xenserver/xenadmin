@@ -66,7 +66,7 @@ namespace XenAdmin.Commands
                 {
                     foreach (Host draggedHost in draggedHosts)
                     {
-                        PoolJoinRules.Reason reason = PoolJoinRules.CanJoinPool(draggedHost.Connection, targetPool.Connection, true, true, true, draggedHosts.Count);
+                        PoolJoinRules.Reason reason = PoolJoinRules.CanJoinPool(draggedHost.Connection, targetPool.Connection, true, true, draggedHosts.Count);
                         if (reason != PoolJoinRules.Reason.Allowed)
                         {
                             string reasonString = PoolJoinRules.ReasonMessage(reason);

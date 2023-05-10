@@ -237,7 +237,7 @@ namespace XenAdmin.Diagnostics.Checks
             var gm = vm.Connection.Resolve(vm.guest_metrics);
             var status = vm.GetVirtualisationStatus(out _);
 
-            if (Helpers.DundeeOrGreater(vm.Connection) && vm.IsWindows())
+            if (vm.IsWindows())
             {
                 if (gm != null && !gm.PV_drivers_detected)
                 {

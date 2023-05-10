@@ -40,7 +40,7 @@ namespace XenAdmin.Actions
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private readonly List<Host> _supporters, _hostsToRelicense, _hostsToCpuMask, _hostsToAdConfigure;
+        private readonly List<Host> _supporters, _hostsToRelicense, _hostsToAdConfigure;
         private readonly string _name;
         private readonly string _description;
 
@@ -51,20 +51,18 @@ namespace XenAdmin.Actions
         /// <param name="supporters"></param>
         /// <param name="name"></param>
         /// <param name="description"></param>
-        /// <param name="acceptNTolChanges"></param>
         /// <param name="doOnLicensingFailure"></param>
         /// <param name="getAdCredentials"></param>
         public CreatePoolAction(Host coordinator, List<Host> supporters, string name, string description, Func<Host, AdUserAndPassword> getAdCredentials,
-            Func<HostAbstractAction, Pool, long, long, bool> acceptNTolChanges, Action<List<LicenseFailure>, string> doOnLicensingFailure)
+            Action<List<LicenseFailure>, string> doOnLicensingFailure)
             : base(coordinator.Connection, string.Format(Messages.CREATING_NAMED_POOL_WITH_COORDINATOR, name, coordinator.Name()),
-            getAdCredentials, acceptNTolChanges, doOnLicensingFailure)
+            getAdCredentials, doOnLicensingFailure)
         {
             System.Diagnostics.Trace.Assert(coordinator != null);
 
             this.Host = coordinator;
             this._supporters = supporters;
             _hostsToRelicense = supporters.FindAll(h => PoolJoinRules.FreeHostPaidCoordinator(h, coordinator, false));
-            _hostsToCpuMask = supporters.FindAll(h => !PoolJoinRules.CompatibleCPUs(h, coordinator, false));
             _hostsToAdConfigure = supporters.FindAll(h => !PoolJoinRules.CompatibleAdConfig(h, coordinator, false));
             this._name = name;
             this._description = description;
@@ -111,7 +109,6 @@ namespace XenAdmin.Actions
 
             FixLicensing(coordinator_pool, _hostsToRelicense, DoOnLicensingFailure);
             FixAd(coordinator_pool, _hostsToAdConfigure, GetAdCredentials);
-            FixCpus(coordinator_pool, _hostsToCpuMask, AcceptNTolChanges);
 
             XenAPI.Pool.set_name_label(Session, coordinator_pool.opaque_ref, _name);
             XenAPI.Pool.set_name_description(Session, coordinator_pool.opaque_ref, _description);

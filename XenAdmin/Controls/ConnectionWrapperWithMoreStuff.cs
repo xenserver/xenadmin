@@ -112,7 +112,7 @@ namespace XenAdmin.Controls
 
         internal void Refresh()
         {
-            reason = PoolJoinRules.CanJoinPool(Connection, coordinatorConnection, true, true, true);
+            reason = PoolJoinRules.CanJoinPool(Connection, coordinatorConnection, true, true);
             this.Description = PoolJoinRules.ReasonMessage(reason);
             this.Enabled = (reason == PoolJoinRules.Reason.Allowed);
             this.CheckedIfdisabled = (reason == PoolJoinRules.Reason.WillBeCoordinator);

@@ -198,13 +198,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 : Updates.GetMinimalPatches(host.Connection);
             if (minimalPatches == null) //version not supported or too new to have automated updates available
             {
-                var versionSupportsAutomatedUpdates = WizardMode == WizardMode.NewVersion
-                     ? Helpers.DundeeOrGreater(host)
-                     : Helpers.DundeeOrGreater(host.Connection);
-
-                tooltipText = versionSupportsAutomatedUpdates
-                    ? Messages.PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_UP_TO_DATE
-                    : string.Format(Messages.PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_HOST_VERSION, BrandManager.ProductBrand);
+                tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_UP_TO_DATE;
                 return false;
             }
 

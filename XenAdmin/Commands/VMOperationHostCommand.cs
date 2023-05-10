@@ -169,17 +169,6 @@ namespace XenAdmin.Commands
 
         public static bool VmCpuIncompatibleWithHost(Host targetHost, VM vm)
         {
-            // check the CPU compatibility for Dundee and higher hosts
-            if (!Helpers.DundeeOrGreater(targetHost))
-                return false;
-
-            Host home = vm.Home();
-            if (home != null && !Helpers.DundeeOrGreater(home))
-                return false;
-
-            if (home == null && !Helpers.DundeeOrGreater(vm.Connection))
-                return false;
-
             // only for running or suspended VMs
             if (vm.power_state != vm_power_state.Running && vm.power_state != vm_power_state.Suspended)
                 return false;

@@ -2518,9 +2518,6 @@ This will cancel compilation of the status report.</value>
   <data name="CANNOT_FIND_SR_WIZARD_TYPE" xml:space="preserve">
     <value>You cannot configure an SR of type '{0}' using {1}.</value>
   </data>
-  <data name="CANNOT_MIGRATE_VDI_NON_RUNNING_VM" xml:space="preserve">
-    <value>Cannot move this virtual disk because it is attached to a VM that is not running.</value>
-  </data>
   <data name="CANNOT_MOVE_CBT_ENABLED_VDI" xml:space="preserve">
     <value>This virtual disk has CBT enabled. It cannot be moved to another storage repository.</value>
   </data>
@@ -10225,9 +10222,6 @@ This will cancel the update process and may leave your system in an unstable sta
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_APPLY_UPDATES_MIXED" xml:space="preserve">
     <value>Also apply all released &amp;updates on the new version (only on pools licensed for automated updates)</value>
-  </data>
-  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_HOST_VERSION" xml:space="preserve">
-    <value>Automated updates are not supported on this {0} version</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_PARTIALLY_UPGRADED" xml:space="preserve">
     <value>Automated updates are not supported on partially upgraded {0} pools</value>

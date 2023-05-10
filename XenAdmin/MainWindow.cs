@@ -916,7 +916,7 @@ namespace XenAdmin
             var supporters = connection.Cache.Hosts.Where(h => h.opaque_ref != coordinator.opaque_ref);
             foreach (var supporter in supporters)
             {
-                if (Helpers.DundeeOrGreater(supporter))
+                if (Helpers.HavanaOrGreater(supporter))
                     continue;
 
                 connection.EndConnect();
