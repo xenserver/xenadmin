@@ -9401,8 +9401,11 @@ When you configure an NFS storage repository, you simply provide the host name o
   <data name="VCPUS_UNTRUSTED_VM_WARNING" xml:space="preserve">
     <value>You have selected more than {0} vCPUs for the new VM. Where a VM may be running actively hostile privileged code {1} recommends that the vCPU limit is set to {0} to prevent impact on system availability.</value>
   </data>
-  <data name="NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN" xml:space="preserve">
-    <value>The number of vCPUs given to the new VM is greater than the number of physical CPUs on any server in the pool ({0}). You will not be able to start the VM.</value>
+  <data name="NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN_STANDALONE_HOST" xml:space="preserve">
+    <value>You have specified {0} vCPUs, but the server you have selected only has {1} physical CPUs. You will not be able to start the VM.</value>
+  </data>
+  <data name="NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN_POOL" xml:space="preserve">
+    <value>You have specified {0} vCPUs, but none of the pool servers have more than {1} physical CPUs. You will not be able to start the VM.</value>
   </data>
   <data name="NEWVMWIZARD_FINISHPAGE" xml:space="preserve">
     <value>All the necessary information has been collected and the wizard is ready to provision the new virtual machine using the settings shown below.

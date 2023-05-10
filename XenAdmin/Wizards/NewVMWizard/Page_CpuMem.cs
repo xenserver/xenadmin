@@ -356,7 +356,16 @@ namespace XenAdmin.Wizards.NewVMWizard
             
             if (maxVcpusHost != null && SelectedVCpusMax > _maxVCpus)
             {
-                ShowCpuWarning(string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN, _maxVCpus));
+                var isStandAloneHost = Helpers.GetPool(maxVcpusHost.Connection) == null;
+                if (isStandAloneHost)
+                {
+                    ShowCpuWarning(string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN_STANDALONE_HOST, SelectedVCpusMax, _maxVCpus));
+                }
+                else
+                {
+                    ShowCpuWarning(string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN_POOL, SelectedVCpusMax, _maxVCpus));
+                }
+                
             }
             else if (SelectedVCpusMax > VM.MAX_VCPUS_FOR_NON_TRUSTED_VMS)
             {

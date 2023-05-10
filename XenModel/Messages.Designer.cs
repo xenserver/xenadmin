@@ -26981,11 +26981,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The number of vCPUs given to the new VM is greater than the number of physical CPUs on any server in the pool ({0}). You will not be able to start the VM..
+        ///   Looks up a localized string similar to You have specified {0} vCPUs, but none of the pool servers have more than {1} physical CPUs. You will not be able to start the VM..
         /// </summary>
-        public static string NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN {
+        public static string NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN_POOL {
             get {
-                return ResourceManager.GetString("NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN", resourceCulture);
+                return ResourceManager.GetString("NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have specified {0} vCPUs, but the server you have selected only has {1} physical CPUs. You will not be able to start the VM..
+        /// </summary>
+        public static string NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN_STANDALONE_HOST {
+            get {
+                return ResourceManager.GetString("NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN_STANDALONE_HOST", resourceCulture);
             }
         }
         
