@@ -2703,6 +2703,9 @@ If you are upgrading to {0} {1} and above, it is recommended that you first inst
   <data name="CERTIFICATE_VERIFICATION_KEY" xml:space="preserve">
     <value>Certificate Verification</value>
   </data>
+  <data name="CFU_STATUS_CHECK_DESCRIPTION" xml:space="preserve">
+    <value>Ability to download updates</value>
+  </data>
   <data name="CHANGE" xml:space="preserve">
     <value>Change...</value>
   </data>

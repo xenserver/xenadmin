@@ -239,6 +239,7 @@
     <Compile Include="Core\Metadata.cs" />
     <Compile Include="Diagnostics\Checks\AssertCanEvacuateCheck.cs" />
     <Compile Include="Diagnostics\Checks\AssertCanEvacuateUpgradeCheck.cs" />
+    <Compile Include="Diagnostics\Checks\CfuAvailabilityCheck.cs" />
     <Compile Include="Diagnostics\Checks\AutomatedUpdatesLicenseCheck.cs" />
     <Compile Include="Diagnostics\Checks\DiskSpaceForBatchUpdatesCheck.cs" />
     <Compile Include="Diagnostics\Checks\HealthCheckServiceCheck.cs" />
