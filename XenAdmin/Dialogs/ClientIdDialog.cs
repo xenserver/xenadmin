@@ -28,78 +28,43 @@
  * SUCH DAMAGE.
  */
 
-using System.Drawing;
+
+using System;
 using System.Windows.Forms;
-using XenAdmin.Controls;
-using XenAdmin.Core;
 using XenCenterLib;
 
-
-namespace XenAdmin.Dialogs.OptionsPages
+namespace XenAdmin.Dialogs
 {
-    public partial class UpdatesOptionsPage : UserControl, IOptionsPage
+    public partial class ClientIdDialog : XenDialogBase
     {
-        public UpdatesOptionsPage()
+        public ClientIdDialog()
         {
             InitializeComponent();
-            UpdatesBlurb.Text = string.Format(UpdatesBlurb.Text, BrandManager.BrandConsole);
-            AllowXenCenterUpdatesCheckBox.Text = string.Format(AllowXenCenterUpdatesCheckBox.Text, BrandManager.BrandConsole);
         }
 
-        #region IOptionsPage Members
+        internal override string HelpName => "ClientIdDialog";
 
-        public void Build()
+        protected override void OnShown(EventArgs e)
         {
-            // XenCenter updates
-            AllowXenCenterUpdatesCheckBox.Checked = Properties.Settings.Default.AllowXenCenterUpdates;
-
-            clientIdControl1.Build();
+            base.OnShown(e);
+            clientIdControl1.Build(true);
         }
 
-        public bool IsValidToSave(out Control control, out string invalidReason)
+        private void buttonOk_Click(object sender, EventArgs e)
         {
-            return clientIdControl1.IsValidToSave(out control, out invalidReason);
-        }
+            if (!clientIdControl1.IsValidToSave(out Control control, out string invalidReason, false))
+            {
+                clientIdControl1.ShowValidationMessages(control, invalidReason);
+                return;
+            }
 
-        public void ShowValidationMessages(Control control, string message)
-        {
-            clientIdControl1.ShowValidationMessages(control, message);
-        }
-
-        public void HideValidationMessages()
-        {
-        }
-
-        public void Save()
-        {
             if (!string.IsNullOrEmpty(clientIdControl1.FileServiceUsername))
                 Properties.Settings.Default.FileServiceUsername = EncryptionUtils.Protect(clientIdControl1.FileServiceUsername);
 
             if (!string.IsNullOrEmpty(clientIdControl1.FileServiceClientId))
                 Properties.Settings.Default.FileServiceClientId = EncryptionUtils.Protect(clientIdControl1.FileServiceClientId);
 
-
-            bool checkXenCenterUpdatesChanged = AllowXenCenterUpdatesCheckBox.Checked != Properties.Settings.Default.AllowXenCenterUpdates;
-
-            if (checkXenCenterUpdatesChanged)
-            {
-                Properties.Settings.Default.AllowXenCenterUpdates = AllowXenCenterUpdatesCheckBox.Checked;
-
-                if (Properties.Settings.Default.AllowXenCenterUpdates)
-                    Updates.CheckForUpdates(true);
-            }
+            DialogResult = DialogResult.OK;
         }
-
-        #endregion
-
-        #region IVerticalTab Members
-
-        public override string Text => Messages.UPDATES;
-
-        public string SubText => string.Format(Messages.UPDATES_DESC, BrandManager.ProductBrand, BrandManager.BrandConsole);
-
-        public Image Image => Images.StaticImages._000_Patch_h32bit_16;
-
-        #endregion
     }
 }

@@ -45,7 +45,9 @@ namespace CFUValidator.CommandLineOptions
             new CommandLineArgument(OptionUsage.Url, 'u', "URL of CFU XML. Cannot be used with -f flag."),
             new CommandLineArgument(OptionUsage.File, 'f', "Path to CFU XML file. Cannot be used with -u flag."),
             new CommandLineArgument(OptionUsage.ServerVersion, 's', "Server version to test, eg. 6.0.2."),
-            new CommandLineArgument(OptionUsage.Hotfix, 'p', "Space delimited list of patches/hotfixes to test, e.g. XS602E001.")
+            new CommandLineArgument(OptionUsage.Hotfix, 'p', "Space delimited list of patches/hotfixes to test, e.g. XS602E001."),
+            new CommandLineArgument(OptionUsage.Username, 'n', "Username for downloading hotfixes, e.g. john123."),
+            new CommandLineArgument(OptionUsage.ClientId, 'k', "ClientId to use for downloading hotfixes (alphanumeric string).")
         };
 
         public CommandLineParser(string[] args)

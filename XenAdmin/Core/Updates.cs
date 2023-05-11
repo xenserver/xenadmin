@@ -59,6 +59,12 @@ namespace XenAdmin.Core
         private static readonly object updateAlertsLock = new object();
         private static readonly List<Alert> updateAlerts = new List<Alert>();
 
+        public static bool CheckCanDownloadUpdates()
+        {
+            return !string.IsNullOrEmpty(Properties.Settings.Default.FileServiceUsername) &&
+                   !string.IsNullOrEmpty(Properties.Settings.Default.FileServiceClientId);
+        }
+
         /// <summary>
         /// Locks and creates a new list of the update alerts
         /// </summary>

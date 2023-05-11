@@ -13733,6 +13733,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Authenticating your {0} account....
+        /// </summary>
+        public static string DOWNLOAD_AND_EXTRACT_ACTION_AUTHENTICATING_DESC {
+            get {
+                return ResourceManager.GetString("DOWNLOAD_AND_EXTRACT_ACTION_AUTHENTICATING_DESC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Download canceled.
         /// </summary>
         public static string DOWNLOAD_AND_EXTRACT_ACTION_DOWNLOAD_CANCELLED_DESC {
@@ -17198,6 +17207,105 @@ namespace XenAdmin {
         public static string FILER_PARAM_INVALID_CHAR {
             get {
                 return ResourceManager.GetString("FILER_PARAM_INVALID_CHAR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not authenticate your [Citrix] account..
+        /// </summary>
+        public static string FILESERVICE_AUTHENTICATE_ERROR {
+            get {
+                return ResourceManager.GetString("FILESERVICE_AUTHENTICATE_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Client ID file (*.json)|*.json.
+        /// </summary>
+        public static string FILESERVICE_CLIENTID_FILETYPE {
+            get {
+                return ResourceManager.GetString("FILESERVICE_CLIENTID_FILETYPE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A Client ID has been specified..
+        /// </summary>
+        public static string FILESERVICE_CLIENTID_FOUND {
+            get {
+                return ResourceManager.GetString("FILESERVICE_CLIENTID_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid or corrupt Client ID file..
+        /// </summary>
+        public static string FILESERVICE_CLIENTID_INVALID_FILE {
+            get {
+                return ResourceManager.GetString("FILESERVICE_CLIENTID_INVALID_FILE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A Client ID has not been specified..
+        /// </summary>
+        public static string FILESERVICE_CLIENTID_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("FILESERVICE_CLIENTID_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Client ID file..
+        /// </summary>
+        public static string FILESERVICE_CLIENTID_TITLE {
+            get {
+                return ResourceManager.GetString("FILESERVICE_CLIENTID_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Received a bad request..
+        /// </summary>
+        public static string FILESERVICE_ERROR_400 {
+            get {
+                return ResourceManager.GetString("FILESERVICE_ERROR_400", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ensure the Client ID you have specified is valid and has not been revoked..
+        /// </summary>
+        public static string FILESERVICE_ERROR_401 {
+            get {
+                return ResourceManager.GetString("FILESERVICE_ERROR_401", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your current subscription is insufficient for downloading this update..
+        /// </summary>
+        public static string FILESERVICE_ERROR_403 {
+            get {
+                return ResourceManager.GetString("FILESERVICE_ERROR_403", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not download the update. The file was not found..
+        /// </summary>
+        public static string FILESERVICE_ERROR_404 {
+            get {
+                return ResourceManager.GetString("FILESERVICE_ERROR_404", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The authentication server has encountered a situation it doesn&apos;t know how to handle..
+        /// </summary>
+        public static string FILESERVICE_ERROR_500 {
+            get {
+                return ResourceManager.GetString("FILESERVICE_ERROR_500", resourceCulture);
             }
         }
         
@@ -28818,25 +28926,6 @@ namespace XenAdmin {
         public static string PATCH_NEEDS_NEW_XENCENTER {
             get {
                 return ResourceManager.GetString("PATCH_NEEDS_NEW_XENCENTER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Not found.
-        /// </summary>
-        public static string PATCH_NOT_FOUND {
-            get {
-                return ResourceManager.GetString("PATCH_NOT_FOUND", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0}
-        ///File not found.
-        /// </summary>
-        public static string PATCH_NOT_FOUND_EXPANDED_DESCRIPTION {
-            get {
-                return ResourceManager.GetString("PATCH_NOT_FOUND_EXPANDED_DESCRIPTION", resourceCulture);
             }
         }
         

@@ -148,7 +148,7 @@
     <value>3, 0, 3, 12</value>
   </data>
   <data name="UpdatesBlurb.Size" type="System.Drawing.Size, System.Drawing">
-    <value>441, 26</value>
+    <value>583, 26</value>
   </data>
   <data name="UpdatesBlurb.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -204,6 +204,66 @@
   <data name="&gt;&gt;AllowXenCenterUpdatesCheckBox.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="groupBoxClientId.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="groupBoxClientId.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="clientIdControl1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="clientIdControl1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 22</value>
+  </data>
+  <data name="clientIdControl1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 6, 6, 3</value>
+  </data>
+  <data name="clientIdControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>577, 139</value>
+  </data>
+  <data name="clientIdControl1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;clientIdControl1.Name" xml:space="preserve">
+    <value>clientIdControl1</value>
+  </data>
+  <data name="&gt;&gt;clientIdControl1.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.ClientIdControl, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;clientIdControl1.Parent" xml:space="preserve">
+    <value>groupBoxClientId</value>
+  </data>
+  <data name="&gt;&gt;clientIdControl1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="groupBoxClientId.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="groupBoxClientId.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 64</value>
+  </data>
+  <data name="groupBoxClientId.Size" type="System.Drawing.Size, System.Drawing">
+    <value>583, 180</value>
+  </data>
+  <data name="groupBoxClientId.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="groupBoxClientId.Text" xml:space="preserve">
+    <value>Client ID</value>
+  </data>
+  <data name="&gt;&gt;groupBoxClientId.Name" xml:space="preserve">
+    <value>groupBoxClientId</value>
+  </data>
+  <data name="&gt;&gt;groupBoxClientId.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBoxClientId.Parent" xml:space="preserve">
+    <value>UpdatesTableLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;groupBoxClientId.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="UpdatesTableLayoutPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -214,10 +274,10 @@
     <value>0, 0</value>
   </data>
   <data name="UpdatesTableLayoutPanel.RowCount" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="UpdatesTableLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>447, 225</value>
+    <value>589, 412</value>
   </data>
   <data name="UpdatesTableLayoutPanel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -235,7 +295,7 @@
     <value>0</value>
   </data>
   <data name="UpdatesTableLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="UpdatesBlurb" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="AllowXenCenterUpdatesCheckBox" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Percent,100,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="UpdatesBlurb" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="AllowXenCenterUpdatesCheckBox" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="groupBoxClientId" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -244,7 +304,7 @@
     <value>96, 96</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>447, 225</value>
+    <value>589, 412</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>UpdatesOptionsPage</value>

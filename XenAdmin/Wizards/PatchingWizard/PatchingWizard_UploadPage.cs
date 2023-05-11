@@ -31,6 +31,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using XenAdmin.Actions.Updates;
 using XenAdmin.Core;
 using XenAPI;
 using XenAdmin.Alerts;
@@ -147,6 +148,8 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             if (direction == PageLoadedDirection.Back)
                 ThisPageIsCompleted = false;
+            else
+                TokenManager.InvalidateToken(XenAdminConfigManager.Provider);
         }
 
         #endregion

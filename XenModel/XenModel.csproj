@@ -132,6 +132,7 @@
     <Compile Include="Actions\Updates\DownloadAndUpdateClientAction.cs" />
     <Compile Include="Actions\Updates\DownloadUpdatesXmlAction.cs" />
     <Compile Include="Actions\Updates\ClientVersion.cs" />
+    <Compile Include="Actions\Updates\TokenManager.cs" />
     <Compile Include="Actions\Updates\XenServerPatch.cs" />
     <Compile Include="Actions\Updates\XenServerVersion.cs" />
     <Compile Include="Actions\USB\CreateVUSBAction.cs" />

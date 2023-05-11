@@ -32,16 +32,17 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using XenAdmin.Controls;
-using XenAdmin.Wizards.PatchingWizard.PlanActions;
-using XenAPI;
 using System.Linq;
-using XenAdmin.Core;
 using System.Text;
 using System.Windows.Forms;
+using XenAdmin.Actions.Updates;
+using XenAdmin.Controls;
+using XenAdmin.Core;
 using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Dialogs;
+using XenAdmin.Wizards.PatchingWizard.PlanActions;
 using XenAdmin.Wizards.RollingUpgradeWizard.PlanActions;
+using XenAPI;
 
 
 namespace XenAdmin.Wizards.PatchingWizard
@@ -92,7 +93,10 @@ namespace XenAdmin.Wizards.PatchingWizard
         public override void PageCancelled(ref bool cancel)
         {
             if (ThisPageIsCompleted)
+            {
+                TokenManager.InvalidateToken(XenAdminConfigManager.Provider);
                 return;
+            }
 
             using (var dialog = new WarningDialog(ReconsiderCancellationMessage(),
                 ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
@@ -105,6 +109,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
             }
 
+            TokenManager.InvalidateToken(XenAdminConfigManager.Provider);
             Status = Status.Cancelled;
             _backgroundWorkers.ForEach(bgw => bgw.CancelAsync());
         }
@@ -130,6 +135,11 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 Status = Status.Started;
             }
+        }
+
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
+        {
+            TokenManager.InvalidateToken(XenAdminConfigManager.Provider);
         }
 
         #endregion

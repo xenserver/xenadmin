@@ -713,7 +713,10 @@ namespace XenAdmin
             log.Info($"=== RemindChangePassword: {Properties.Settings.Default.RemindChangePassword}");
 
             if (!Helpers.CommonCriteriaCertificationRelease)
+            {
+                //do not log Fileservice settings
                 log.Info($"=== AllowXenCenterUpdates: {Properties.Settings.Default.AllowXenCenterUpdates}");
+            }
 
             log.Info($"=== FillAreaUnderGraphs: {Properties.Settings.Default.FillAreaUnderGraphs}");
             log.Info($"=== RememberLastSelectedTab: {Properties.Settings.Default.RememberLastSelectedTab}");
