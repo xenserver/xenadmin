@@ -64,6 +64,15 @@ namespace CFUValidator.CommandLineOptions
 
             CheckHotfixContents = args.First(c => c.Usage == OptionUsage.CheckZipContents).IsActiveOption;
 
+            CommandLineArgument usernameArg = args.First(c => c.Usage == OptionUsage.Username);
+            CommandLineArgument clientIdArg = args.First(c => c.Usage == OptionUsage.ClientId);
+
+            if (CheckHotfixContents)
+            {
+                Username = usernameArg.Options.First();
+                ClientId = clientIdArg.Options.First();
+            }
+
             var serverArg = args.First(c => c.Usage == OptionUsage.ServerVersion);
             ServerVersion = serverArg.IsActiveOption ? serverArg.Options.First() : AllVersions;
 
@@ -76,6 +85,10 @@ namespace CFUValidator.CommandLineOptions
         public string XmlLocation { get; }
 
         public bool CheckHotfixContents { get; }
+
+        public string Username { get; }
+
+        public string ClientId { get; }
 
         public OptionUsage XmlLocationType { get; }
 

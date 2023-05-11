@@ -59,12 +59,14 @@ namespace XenAdmin.Dialogs.OptionsPages
             checkBoxReminder.Checked = Properties.Settings.Default.RemindChangePassword;
         }
 
-        public bool IsValidToSave()
+        public bool IsValidToSave(out Control control, out string invalidReason)
         {
+            control = null;
+            invalidReason = null;
             return true;
         }
 
-        public void ShowValidationMessages()
+        public void ShowValidationMessages(Control control, string message)
         {
         }
 

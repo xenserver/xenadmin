@@ -29,8 +29,10 @@
  */
 
 using System.Linq;
+using System.Windows.Forms;
 using XenAdmin.Controls;
 using XenAdmin.Core;
+using XenAdmin.Dialogs;
 
 namespace XenAdmin.Wizards.PatchingWizard
 {
@@ -49,5 +51,14 @@ namespace XenAdmin.Wizards.PatchingWizard
         public override string  PageTitle => Messages.BEFORE_YOU_START;
 
         public override string HelpID => "Beforeyoustart";
+
+        private void linkLabelClientId_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            using (var dialog = new OptionsDialog(Program.MainWindow.PluginManager))
+            {
+                dialog.SelectUpdateOptionsPage();
+                dialog.ShowDialog(this);
+            }
+        }
     }
 }

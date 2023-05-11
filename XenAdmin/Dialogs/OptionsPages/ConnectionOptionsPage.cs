@@ -53,8 +53,7 @@ namespace XenAdmin.Dialogs.OptionsPages
             validationToolTip = new ToolTip
             {
                 IsBalloon = true,
-                ToolTipIcon = ToolTipIcon.Warning,
-                ToolTipTitle = Messages.INVALID_PARAMETER
+                ToolTipIcon = ToolTipIcon.Warning
             };
         }
 
@@ -168,49 +167,54 @@ namespace XenAdmin.Dialogs.OptionsPages
 
         #region IOptionsPage Members
 
-        public bool IsValidToSave()
+        public bool IsValidToSave(out Control control, out string invalidReason)
         {
             if (!UseProxyRadioButton.Checked)
             {
-                invalidControl = null;
+                invalidReason = null;
+                control = null;
                 return true;
             }
-            
+
+            invalidReason = Messages.INVALID_PARAMETER;
+
             var uriHostNameType = Uri.CheckHostName(ProxyAddressTextBox.Text);
             if (uriHostNameType == UriHostNameType.Unknown || uriHostNameType == UriHostNameType.IPv6)
             {
-                invalidControl = ProxyAddressTextBox;
+                control = ProxyAddressTextBox;
                 return false;
             }
 
             if (!Util.IsValidPort(ProxyPortTextBox.Text))
             {
-                invalidControl = ProxyPortTextBox;
+                control = ProxyPortTextBox;
                 return false;
             }
 
             if (AuthenticationCheckBox.Checked && string.IsNullOrEmpty(ProxyUsernameTextBox.Text))
             {
-                invalidControl = ProxyUsernameTextBox;
+                control = ProxyUsernameTextBox;
                 return false;
             }
 
-            invalidControl = null;
+            control = null;
             return true;
         }
 
-        public void ShowValidationMessages()
+        public void ShowValidationMessages(Control control, string message)
         {
-            if (invalidControl != null)
-                HelpersGUI.ShowBalloonMessage(invalidControl, validationToolTip);
+            if (control != null && !string.IsNullOrEmpty(message))
+            {
+                invalidControl = control;
+                validationToolTip.ToolTipTitle = message;
+                HelpersGUI.ShowBalloonMessage(control, validationToolTip);
+            }
         }
 
         public void HideValidationMessages()
         {
-            if (this.invalidControl != null)
-            {
-                this.validationToolTip.Hide(this.invalidControl);
-            }
+            if (invalidControl != null)
+                validationToolTip.Hide(invalidControl);
         }
 
         public void Save()

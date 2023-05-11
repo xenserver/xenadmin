@@ -4855,6 +4855,9 @@ Plugging in untrustworthy USB devices to your computer may put your computer at 
   <data name="DOWLOAD_LATEST_XS_TITLE" xml:space="preserve">
     <value>{0} is now available</value>
   </data>
+  <data name="DOWNLOAD_AND_EXTRACT_ACTION_AUTHENTICATING_DESC" xml:space="preserve">
+    <value>Authenticating your {0} account...</value>
+  </data>
   <data name="DOWNLOAD_AND_EXTRACT_ACTION_DOWNLOAD_CANCELLED_DESC" xml:space="preserve">
     <value>Download canceled</value>
   </data>
@@ -6025,6 +6028,39 @@ Would you like to eject these ISOs before continuing?</value>
   </data>
   <data name="FILER_PARAM_INVALID_CHAR" xml:space="preserve">
     <value>You entered an invalid character in one of the filer parameters.</value>
+  </data>
+  <data name="FILESERVICE_AUTHENTICATE_ERROR" xml:space="preserve">
+    <value>Could not authenticate your [Citrix] account.</value>
+  </data>
+  <data name="FILESERVICE_CLIENTID_FILETYPE" xml:space="preserve">
+    <value>Client ID file (*.json)|*.json</value>
+  </data>
+  <data name="FILESERVICE_CLIENTID_FOUND" xml:space="preserve">
+    <value>A Client ID has been specified.</value>
+  </data>
+  <data name="FILESERVICE_CLIENTID_INVALID_FILE" xml:space="preserve">
+    <value>Invalid or corrupt Client ID file.</value>
+  </data>
+  <data name="FILESERVICE_CLIENTID_NOT_FOUND" xml:space="preserve">
+    <value>A Client ID has not been specified.</value>
+  </data>
+  <data name="FILESERVICE_CLIENTID_TITLE" xml:space="preserve">
+    <value>Select Client ID file.</value>
+  </data>
+  <data name="FILESERVICE_ERROR_400" xml:space="preserve">
+    <value>Received a bad request.</value>
+  </data>
+  <data name="FILESERVICE_ERROR_401" xml:space="preserve">
+    <value>Ensure the Client ID you have specified is valid and has not been revoked.</value>
+  </data>
+  <data name="FILESERVICE_ERROR_403" xml:space="preserve">
+    <value>Your current subscription is insufficient for downloading this update.</value>
+  </data>
+  <data name="FILESERVICE_ERROR_404" xml:space="preserve">
+    <value>Could not download the update. The file was not found.</value>
+  </data>
+  <data name="FILESERVICE_ERROR_500" xml:space="preserve">
+    <value>The authentication server has encountered a situation it doesn't know how to handle.</value>
   </data>
   <data name="FILTER_SHOW_ALL" xml:space="preserve">
     <value>Show &amp;All</value>
@@ -10020,13 +10056,6 @@ Size: {3}</value>
   </data>
   <data name="PATCH_NEEDS_NEW_XENCENTER" xml:space="preserve">
     <value>This version requires {0} {1} or newer</value>
-  </data>
-  <data name="PATCH_NOT_FOUND" xml:space="preserve">
-    <value>Not found</value>
-  </data>
-  <data name="PATCH_NOT_FOUND_EXPANDED_DESCRIPTION" xml:space="preserve">
-    <value>{0}
-File not found</value>
   </data>
   <data name="PATCH_UPLOADED" xml:space="preserve">
     <value>Update uploaded to server '{0}' </value>

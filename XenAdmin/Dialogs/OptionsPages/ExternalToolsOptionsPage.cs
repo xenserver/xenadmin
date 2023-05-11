@@ -38,7 +38,7 @@ namespace XenAdmin.Dialogs.OptionsPages
 {
     public partial class ExternalToolsOptionsPage : UserControl, IOptionsPage
     {
-        private TextBox _tooltipControl;
+        private Control _tooltipControl;
         private bool _updating;
 
         public ExternalToolsOptionsPage()
@@ -70,9 +70,10 @@ namespace XenAdmin.Dialogs.OptionsPages
                 radioButtonOpenSsh.Checked = true;
         }
 
-        public bool IsValidToSave()
+        public bool IsValidToSave(out Control control, out string invalidReason)
         {
-            _tooltipControl = null;
+            control = null;
+            invalidReason = string.Empty;
 
             // CA-362355: don't check if paths are valid if they haven't changed.
             // Avoids users not being able to save other options if the selected 
@@ -93,15 +94,15 @@ namespace XenAdmin.Dialogs.OptionsPages
             {
                 if (string.IsNullOrEmpty(textBoxPutty.Text) || !textBoxPutty.Text.ToLower().EndsWith(".exe"))
                 {
-                    _tooltipControl = textBoxPutty;
-                    tooltipValidation.ToolTipTitle = Messages.EXTERNAL_TOOLS_FILE_INVALID;
+                    control = textBoxPutty;
+                    invalidReason = Messages.EXTERNAL_TOOLS_FILE_INVALID;
                     return false;
                 }
 
                 if (!File.Exists(textBoxPutty.Text))
                 {
-                    _tooltipControl = textBoxPutty;
-                    tooltipValidation.ToolTipTitle = Messages.FILE_NOT_FOUND;
+                    control = textBoxPutty;
+                    invalidReason = Messages.FILE_NOT_FOUND;
                     return false;
                 }
             }
@@ -109,15 +110,15 @@ namespace XenAdmin.Dialogs.OptionsPages
             {
                 if (string.IsNullOrEmpty(textBoxOpenSsh.Text) || !textBoxOpenSsh.Text.ToLower().EndsWith(".exe"))
                 {
-                    _tooltipControl = textBoxOpenSsh;
-                    tooltipValidation.ToolTipTitle = Messages.EXTERNAL_TOOLS_FILE_INVALID;
+                    control = textBoxOpenSsh;
+                    invalidReason = Messages.EXTERNAL_TOOLS_FILE_INVALID;
                     return false;
                 }
 
                 if (!File.Exists(textBoxOpenSsh.Text))
                 {
-                    _tooltipControl = textBoxOpenSsh;
-                    tooltipValidation.ToolTipTitle = Messages.FILE_NOT_FOUND;
+                    control = textBoxOpenSsh;
+                    invalidReason = Messages.FILE_NOT_FOUND;
                     return false;
                 }
             }
@@ -125,10 +126,14 @@ namespace XenAdmin.Dialogs.OptionsPages
             return true;
         }
 
-        public void ShowValidationMessages()
+        public void ShowValidationMessages(Control control, string message)
         {
-            if (_tooltipControl != null)
+            if (control != null && !string.IsNullOrEmpty(message))
+            {
+                _tooltipControl = control;
+                tooltipValidation.ToolTipTitle = message;
                 HelpersGUI.ShowBalloonMessage(_tooltipControl, tooltipValidation);
+            }
         }
 
         public void HideValidationMessages()

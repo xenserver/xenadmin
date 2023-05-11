@@ -32,7 +32,10 @@ namespace XenAdmin.Dialogs.OptionsPages
             this.UpdatesTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.UpdatesBlurb = new System.Windows.Forms.Label();
             this.AllowXenCenterUpdatesCheckBox = new System.Windows.Forms.CheckBox();
+            this.groupBoxClientId = new System.Windows.Forms.GroupBox();
+            this.clientIdControl1 = new XenAdmin.Controls.ClientIdControl();
             this.UpdatesTableLayoutPanel.SuspendLayout();
+            this.groupBoxClientId.SuspendLayout();
             this.SuspendLayout();
             // 
             // UpdatesTableLayoutPanel
@@ -41,6 +44,7 @@ namespace XenAdmin.Dialogs.OptionsPages
             this.UpdatesTableLayoutPanel.BackColor = System.Drawing.Color.Transparent;
             this.UpdatesTableLayoutPanel.Controls.Add(this.UpdatesBlurb, 0, 0);
             this.UpdatesTableLayoutPanel.Controls.Add(this.AllowXenCenterUpdatesCheckBox, 0, 1);
+            this.UpdatesTableLayoutPanel.Controls.Add(this.groupBoxClientId, 0, 2);
             this.UpdatesTableLayoutPanel.Name = "UpdatesTableLayoutPanel";
             // 
             // UpdatesBlurb
@@ -54,6 +58,18 @@ namespace XenAdmin.Dialogs.OptionsPages
             this.AllowXenCenterUpdatesCheckBox.Name = "AllowXenCenterUpdatesCheckBox";
             this.AllowXenCenterUpdatesCheckBox.UseVisualStyleBackColor = true;
             // 
+            // groupBoxClientId
+            // 
+            resources.ApplyResources(this.groupBoxClientId, "groupBoxClientId");
+            this.groupBoxClientId.Controls.Add(this.clientIdControl1);
+            this.groupBoxClientId.Name = "groupBoxClientId";
+            this.groupBoxClientId.TabStop = false;
+            // 
+            // clientIdControl1
+            // 
+            resources.ApplyResources(this.clientIdControl1, "clientIdControl1");
+            this.clientIdControl1.Name = "clientIdControl1";
+            // 
             // UpdatesOptionsPage
             // 
             resources.ApplyResources(this, "$this");
@@ -62,6 +78,7 @@ namespace XenAdmin.Dialogs.OptionsPages
             this.Name = "UpdatesOptionsPage";
             this.UpdatesTableLayoutPanel.ResumeLayout(false);
             this.UpdatesTableLayoutPanel.PerformLayout();
+            this.groupBoxClientId.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -72,5 +89,7 @@ namespace XenAdmin.Dialogs.OptionsPages
         private System.Windows.Forms.TableLayoutPanel UpdatesTableLayoutPanel;
         private System.Windows.Forms.Label UpdatesBlurb;
         private System.Windows.Forms.CheckBox AllowXenCenterUpdatesCheckBox;
+        private System.Windows.Forms.GroupBox groupBoxClientId;
+        private Controls.ClientIdControl clientIdControl1;
     }
 }
