@@ -52,6 +52,8 @@ namespace XenAdmin.Core
         public static event Action CheckForServerUpdatesCompleted;
         public static event Action<CollectionChangeEventArgs> UpdateAlertCollectionChanged;
 
+        public static string UserAgent { get; } = $"{BrandManager.BrandConsole}/{Program.Version} ({IntPtr.Size * 8}-bit)";
+
         private static readonly object downloadedUpdatesLock = new object();
         private static List<XenServerVersion> XenServerVersionsForAutoCheck = new List<XenServerVersion>();
         private static List<XenServerPatch> XenServerPatches = new List<XenServerPatch>();
@@ -99,11 +101,9 @@ namespace XenAdmin.Core
 
             if (Properties.Settings.Default.AllowXenCenterUpdates || userRequested)
             {
-                string userAgent = $"{BrandManager.BrandConsole}/{Program.Version} ({IntPtr.Size * 8}-bit)";
-
                 var action = new DownloadXcUpdatesXmlAction(
                     Properties.Settings.Default.AllowXenCenterUpdates || userRequested,
-                    userAgent,
+                    UserAgent,
                     XenAdminConfigManager.Provider.GetCustomXcUpdatesXmlLocation() ?? BrandManager.XcUpdatesUrl,
                     !userRequested);
                 
@@ -126,12 +126,10 @@ namespace XenAdmin.Core
             if (Properties.Settings.Default.AllowPatchesUpdates ||
                 Properties.Settings.Default.AllowXenServerUpdates || userRequested)
             {
-                string userAgent = $"{BrandManager.BrandConsole}/{Program.Version} ({IntPtr.Size * 8}-bit)";
-
                 var action = new DownloadCfuAction(
                     Properties.Settings.Default.AllowXenServerUpdates || userRequested,
                     Properties.Settings.Default.AllowPatchesUpdates || userRequested,
-                    userAgent,
+                    UserAgent,
                     XenAdminConfigManager.Provider.GetCustomCfuLocation() ?? BrandManager.CfuUrl,
                     !userRequested);
 

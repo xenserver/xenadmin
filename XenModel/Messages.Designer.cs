@@ -7477,6 +7477,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ability to download updates.
+        /// </summary>
+        public static string CFU_STATUS_CHECK_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("CFU_STATUS_CHECK_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change....
         /// </summary>
         public static string CHANGE {
