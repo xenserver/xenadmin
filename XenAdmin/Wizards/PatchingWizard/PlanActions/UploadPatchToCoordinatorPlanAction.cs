@@ -44,6 +44,8 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 {
     class UploadPatchToCoordinatorPlanAction : PlanActionWithSession
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private readonly XenServerPatch xenServerPatch;
         private readonly List<HostUpdateMapping> mappings;
         private Dictionary<XenServerPatch, string> AllDownloadedPatches = new Dictionary<XenServerPatch, string>();

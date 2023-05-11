@@ -214,6 +214,8 @@ namespace XenOvf
     /// </summary>
     internal class TarPackage : Package
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private readonly Dictionary<string, byte[]> _DirectoryCache = new Dictionary<string, byte[]>();
         private string _DescriptorFileName;
 
@@ -424,7 +426,7 @@ namespace XenOvf
     /// </summary>
     public abstract class Package
     {
-        protected static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public const string MANIFEST_EXT = ".mf";
         public const string CERTIFICATE_EXT = ".cert";

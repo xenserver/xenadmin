@@ -40,7 +40,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 {
     public abstract class PlanAction : IEquatable<PlanAction>
     {
-        protected static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private int _percentComplete;
         public event Action<PlanAction> OnProgressChange;

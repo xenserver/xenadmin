@@ -56,7 +56,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         private bool _userMovedVerticalScrollbar;
         private bool _cancelEnabled;
 
-        protected static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod()?.DeclaringType);
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod()?.DeclaringType);
         protected List<string> HostsThatWillRequireReboot = new List<string>();
         protected Dictionary<string, List<string>> LivePatchAttempts = new Dictionary<string, List<string>>();
         protected bool ThisPageIsCompleted;
