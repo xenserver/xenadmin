@@ -29,6 +29,7 @@
  */
 
 
+using System;
 using System.Windows.Forms;
 using XenAdmin.Help;
 
@@ -36,6 +37,13 @@ namespace XenAdmin.TabPages
 {
     public class NotificationsBasePage : UserControl, IControlWithHelp
     {
+        public event Action FiltersChanged;
+
+        protected void OnFiltersChanged()
+        {
+            FiltersChanged?.Invoke();
+        }
+
         protected virtual void RefreshPage()
         { }
 
@@ -58,6 +66,10 @@ namespace XenAdmin.TabPages
             DeregisterEventHandlers();
         }
 
+        
+
         public virtual string HelpID => "";
+
+        public virtual bool FilterIsOn => false;
     }
 }

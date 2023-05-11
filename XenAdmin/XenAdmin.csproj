@@ -3208,6 +3208,12 @@
     <Compile Include="TabPages\GpuPage.Designer.cs">
       <DependentUpon>GpuPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="TabPages\ManageUpdatesPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TabPages\ManageUpdatesPage.Designer.cs">
+      <DependentUpon>ManageUpdatesPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\OptionsPages\PluginOptionsPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -5268,6 +5274,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\RestoreSession\LoadSessionDialog.zh-CN.resx">
       <DependentUpon>LoadSessionDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\ManageUpdatesPage.ja.resx">
+      <DependentUpon>ManageUpdatesPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\ManageUpdatesPage.resx">
+      <DependentUpon>ManageUpdatesPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\ManageUpdatesPage.zh-CN.resx">
+      <DependentUpon>ManageUpdatesPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\MoveVirtualDiskDialog.ja.resx">
       <DependentUpon>MoveVirtualDiskDialog.cs</DependentUpon>

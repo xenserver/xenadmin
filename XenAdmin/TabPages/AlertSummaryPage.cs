@@ -74,6 +74,7 @@ namespace XenAdmin.TabPages
         }
 
         #region NotificationPage overrides
+
         protected override void RefreshPage()
         {
             toolStripDropDownButtonServerFilter.InitializeHostList();
@@ -95,22 +96,10 @@ namespace XenAdmin.TabPages
 
         #endregion
 
-        private void SetFilterLabel()
-        {
-            toolStripLabelFiltersOnOff.Text = FilterIsOn
-                                                  ? Messages.FILTERS_ON
-                                                  : Messages.FILTERS_OFF;
-        }
-
-        private bool FilterIsOn
-        {
-            get
-            {
-                return toolStripDropDownButtonDateFilter.FilterIsOn
-                                 || toolStripDropDownButtonServerFilter.FilterIsOn
-                                 || toolStripDropDownSeveritiesFilter.FilterIsOn;
-            }
-        }
+        public override bool FilterIsOn =>
+            toolStripDropDownButtonDateFilter.FilterIsOn
+            || toolStripDropDownButtonServerFilter.FilterIsOn
+            || toolStripDropDownSeveritiesFilter.FilterIsOn;
 
         #region AlertListCode
 
@@ -150,7 +139,7 @@ namespace XenAdmin.TabPages
                 // 4) Take the top n as set by the filters
                 // 5) Add them to the control using the optimized AddRange()
 
-                Program.Invoke(Program.MainWindow, SetFilterLabel);
+                Program.Invoke(Program.MainWindow, OnFiltersChanged);
                 
                 List<Alert> alerts = Alert.NonDismissingAlerts;
                 alerts.RemoveAll(FilterAlert);

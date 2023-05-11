@@ -53,7 +53,6 @@ namespace XenAdmin.TabPages
             this.toolStripSplitButtonDismiss = new System.Windows.Forms.ToolStripSplitButton();
             this.tsmiDismissAll = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDismissSelected = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripLabelFiltersOnOff = new System.Windows.Forms.ToolStripLabel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.GridViewAlerts = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
             this.ColumnExpand = new System.Windows.Forms.DataGridViewImageColumn();
@@ -103,8 +102,7 @@ namespace XenAdmin.TabPages
             this.toolStripButtonRefresh,
             this.toolStripSeparator1,
             this.toolStripButtonExportAll,
-            this.toolStripSplitButtonDismiss,
-            this.toolStripLabelFiltersOnOff});
+            this.toolStripSplitButtonDismiss});
             this.toolStrip1.Name = "toolStrip1";
             // 
             // toolStripDropDownSeveritiesFilter
@@ -176,12 +174,6 @@ namespace XenAdmin.TabPages
             this.tsmiDismissSelected.Name = "tsmiDismissSelected";
             resources.ApplyResources(this.tsmiDismissSelected, "tsmiDismissSelected");
             this.tsmiDismissSelected.Click += new System.EventHandler(this.tsmiDismissSelected_Click);
-            // 
-            // toolStripLabelFiltersOnOff
-            // 
-            this.toolStripLabelFiltersOnOff.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            resources.ApplyResources(this.toolStripLabelFiltersOnOff, "toolStripLabelFiltersOnOff");
-            this.toolStripLabelFiltersOnOff.Name = "toolStripLabelFiltersOnOff";
             // 
             // tableLayoutPanel3
             // 
@@ -318,7 +310,6 @@ namespace XenAdmin.TabPages
         private System.Windows.Forms.ToolStripButton toolStripButtonRefresh;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private XenAdmin.Controls.FilterSeveritiesToolStripDropDownButton toolStripDropDownSeveritiesFilter;
-        private System.Windows.Forms.ToolStripLabel toolStripLabelFiltersOnOff;
         private System.Windows.Forms.ToolStripSplitButton toolStripSplitButtonDismiss;
         private System.Windows.Forms.ToolStripMenuItem tsmiDismissAll;
         private System.Windows.Forms.ToolStripMenuItem tsmiDismissSelected;
