@@ -47,7 +47,7 @@ namespace XenAdmin.Controls
         private VNCView activeVNCView;
         private Dictionary<VM, VNCView> vncViews = new Dictionary<VM, VNCView>();
 
-        protected static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public ConsolePanel()
         {
@@ -287,6 +287,8 @@ namespace XenAdmin.Controls
 
     internal class CvmConsolePanel : ConsolePanel
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         internal override void SetCurrentSource(Host source)
         {
             if (source == null)

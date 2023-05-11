@@ -42,6 +42,8 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
 {
     public abstract class UpgradeHostPlanAction : RebootPlanAction
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         protected bool rebooting;
         private readonly Timer timer;
         protected readonly Control invokingControl;
