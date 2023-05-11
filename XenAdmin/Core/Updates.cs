@@ -46,8 +46,10 @@ namespace XenAdmin.Core
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public static event Action CheckForUpdatesCompleted;
-        public static event Action CheckForUpdatesStarted;
+        public static event Action CheckForClientUpdatesStarted;
+        public static event Action CheckForClientUpdatesCompleted;
+        public static event Action CheckForServerUpdatesStarted;
+        public static event Action CheckForServerUpdatesCompleted;
         public static event Action<CollectionChangeEventArgs> UpdateAlertCollectionChanged;
 
         private static readonly object downloadedUpdatesLock = new object();
@@ -90,7 +92,7 @@ namespace XenAdmin.Core
         /// value of the parameter userRequested. If AutomaticCheck is disabled it checks
         /// for all update types if userRequested is true.
         /// </summary>
-        public static void CheckForUpdates(bool userRequested = false)
+        public static void CheckForClientUpdates(bool userRequested = false)
         {
             if (Helpers.CommonCriteriaCertificationRelease)
                 return;
@@ -99,21 +101,49 @@ namespace XenAdmin.Core
             {
                 string userAgent = $"{BrandManager.BrandConsole}/{Program.Version} ({IntPtr.Size * 8}-bit)";
 
-                var action = new DownloadUpdatesXmlAction(Properties.Settings.Default.AllowXenCenterUpdates || userRequested,
-                    false, false, userAgent, !userRequested);
-                action.Completed += actionCompleted;
-
-                CheckForUpdatesStarted?.Invoke();
-
+                var action = new DownloadXcUpdatesXmlAction(
+                    Properties.Settings.Default.AllowXenCenterUpdates || userRequested,
+                    userAgent,
+                    XenAdminConfigManager.Provider.GetCustomXcUpdatesXmlLocation() ?? BrandManager.XcUpdatesUrl,
+                    !userRequested);
+                
+                action.Completed += DownloadXcUpdatesXmlAction_Completed;
+                CheckForClientUpdatesStarted?.Invoke();
                 action.RunAsync();
             }
         }
 
-        private static void actionCompleted(ActionBase sender)
+        /// <summary>
+        /// If AutomaticCheck is enabled it checks for updates regardless the
+        /// value of the parameter userRequested. If AutomaticCheck is disabled it checks
+        /// for all update types if userRequested is true.
+        /// </summary>
+        public static void CheckForServerUpdates(bool userRequested = false)
         {
-            Program.AssertOffEventThread();
+            if (Helpers.CommonCriteriaCertificationRelease)
+                return;
 
-            if (!(sender is DownloadUpdatesXmlAction action))
+            if (Properties.Settings.Default.AllowPatchesUpdates ||
+                Properties.Settings.Default.AllowXenServerUpdates || userRequested)
+            {
+                string userAgent = $"{BrandManager.BrandConsole}/{Program.Version} ({IntPtr.Size * 8}-bit)";
+
+                var action = new DownloadCfuAction(
+                    Properties.Settings.Default.AllowXenServerUpdates || userRequested,
+                    Properties.Settings.Default.AllowPatchesUpdates || userRequested,
+                    userAgent,
+                    XenAdminConfigManager.Provider.GetCustomCfuLocation() ?? BrandManager.CfuUrl,
+                    !userRequested);
+
+                action.Completed += DownloadCfuAction_Completed;
+                CheckForServerUpdatesStarted?.Invoke();
+                action.RunAsync();
+            }
+        }
+
+        private static void DownloadXcUpdatesXmlAction_Completed(ActionBase sender)
+        {
+            if (!(sender is DownloadXcUpdatesXmlAction action))
                 return;
 
             bool succeeded = action.Succeeded;
@@ -123,9 +153,6 @@ namespace XenAdmin.Core
                 lock (downloadedUpdatesLock)
                 {
                     ClientVersions = action.ClientVersions;
-                    XenServerVersionsForAutoCheck = action.XenServerVersionsForAutoCheck;
-                    XenServerVersions = action.XenServerVersions;
-                    XenServerPatches = action.XenServerPatches;
                 }
             }
 
@@ -137,7 +164,46 @@ namespace XenAdmin.Core
                 {
                     var clientUpdateAlerts = NewClientUpdateAlerts(ClientVersions, Program.Version);
                     updateAlerts.AddRange(clientUpdateAlerts.Where(a => !a.IsDismissed()));
+                }
 
+                var xenServerUpdateAlerts = NewXenServerVersionAlerts(XenServerVersionsForAutoCheck);
+                updateAlerts.AddRange(xenServerUpdateAlerts.Where(a => !a.CanIgnore));
+
+                var xenServerPatchAlerts = NewXenServerPatchAlerts(XenServerVersions, XenServerPatches);
+                updateAlerts.AddRange(xenServerPatchAlerts.Where(a => !a.CanIgnore));
+            }
+
+            UpdateAlertCollectionChanged?.Invoke(new CollectionChangeEventArgs(CollectionChangeAction.Refresh, UpdateAlerts));
+
+            CheckForClientUpdatesCompleted?.Invoke();
+        }
+
+        private static void DownloadCfuAction_Completed(ActionBase sender)
+        {
+            if (!(sender is DownloadCfuAction action))
+                return;
+
+            bool succeeded = action.Succeeded;
+
+            if (succeeded)
+            {
+                lock (downloadedUpdatesLock)
+                {
+                    XenServerVersionsForAutoCheck = action.XenServerVersionsForAutoCheck;
+                    XenServerVersions = action.XenServerVersions;
+                    XenServerPatches = action.XenServerPatches;
+                }
+            }
+
+            lock (updateAlertsLock)
+            {
+                updateAlerts.Clear();
+
+                var clientUpdateAlerts = NewClientUpdateAlerts(ClientVersions, Program.Version);
+                updateAlerts.AddRange(clientUpdateAlerts.Where(a => !a.IsDismissed()));
+
+                if (succeeded)
+                {
                     var xenServerUpdateAlerts = NewXenServerVersionAlerts(XenServerVersionsForAutoCheck);
                     updateAlerts.AddRange(xenServerUpdateAlerts.Where(a => !a.CanIgnore));
 
@@ -148,7 +214,9 @@ namespace XenAdmin.Core
 
             UpdateAlertCollectionChanged?.Invoke(new CollectionChangeEventArgs(CollectionChangeAction.Refresh, UpdateAlerts));
 
-            CheckForUpdatesCompleted?.Invoke();
+            CheckForServerUpdatesCompleted?.Invoke();
+
+            CheckHotfixEligibility();
         }
 
         public static List<ClientUpdateAlert> NewClientUpdateAlerts(List<ClientVersion> clientVersions,
@@ -766,7 +834,7 @@ namespace XenAdmin.Core
                 Alert.RefreshAlertAt(alertIndex);
         }
 
-        public static void CheckHotfixEligibility()
+        private static void CheckHotfixEligibility()
         {
             var alerts = new List<HotfixEligibilityAlert>();
          

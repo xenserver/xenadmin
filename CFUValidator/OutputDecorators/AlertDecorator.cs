@@ -99,34 +99,6 @@ namespace CFUValidator.OutputDecorators
     }
 
 
-    class ClientUpdateDecorator : AlertDecorator
-    {
-        private readonly List<ClientUpdateAlert> _alerts;
-
-        public ClientUpdateDecorator(List<ClientUpdateAlert> alerts)
-        {
-            _alerts = alerts;
-        }
-
-        protected override string GenerateSummaryCore()
-        {
-            if (_alerts.Count == 0)
-                return "None";
-
-            var sb = new StringBuilder();
-
-            foreach (ClientUpdateAlert alert in _alerts)
-                sb.AppendLine(alert == null
-                    ? "Client update could not be found"
-                    : $"{alert.NewVersion.Name} ({alert.NewVersion.VersionAndLang})");
-            
-            return sb.ToString();
-        }
-
-        protected override string SummaryTitle => "Client updates required:";
-    }
-
-
     class PatchAlertDecorator : AlertDecorator
     {
         private readonly List<XenServerPatchAlert> _alerts;

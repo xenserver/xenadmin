@@ -30,7 +30,6 @@
 
 using System.Drawing;
 using System.Windows.Forms;
-using XenAdmin.Controls;
 using XenAdmin.Core;
 using XenCenterLib;
 
@@ -42,16 +41,24 @@ namespace XenAdmin.Dialogs.OptionsPages
         public UpdatesOptionsPage()
         {
             InitializeComponent();
-            UpdatesBlurb.Text = string.Format(UpdatesBlurb.Text, BrandManager.BrandConsole);
-            AllowXenCenterUpdatesCheckBox.Text = string.Format(AllowXenCenterUpdatesCheckBox.Text, BrandManager.BrandConsole);
+            
+            groupBoxClient.Text = string.Format(groupBoxClient.Text, BrandManager.BrandConsole);
+            labelClientUpdates.Text = string.Format(labelClientUpdates.Text, BrandManager.BrandConsole);
+            _checkBoxClientUpdates.Text = string.Format(_checkBoxClientUpdates.Text, BrandManager.BrandConsole);
+
+            groupBoxServer.Text = string.Format(groupBoxServer.Text, BrandManager.ProductVersion821);
+            labelServerUpdates.Text = string.Format(labelServerUpdates.Text, BrandManager.BrandConsole, BrandManager.ProductBrand);
+            _checkBoxServerUpdates.Text = string.Format(_checkBoxServerUpdates.Text, BrandManager.ProductBrand);
+            _checkBoxServerVersions.Text = string.Format(_checkBoxServerVersions.Text, BrandManager.ProductBrand);
         }
 
         #region IOptionsPage Members
 
         public void Build()
         {
-            // XenCenter updates
-            AllowXenCenterUpdatesCheckBox.Checked = Properties.Settings.Default.AllowXenCenterUpdates;
+            _checkBoxServerVersions.Checked = Properties.Settings.Default.AllowXenServerUpdates;
+            _checkBoxServerUpdates.Checked = Properties.Settings.Default.AllowPatchesUpdates;
+            _checkBoxClientUpdates.Checked = Properties.Settings.Default.AllowXenCenterUpdates;
 
             clientIdControl1.Build();
         }
@@ -78,15 +85,22 @@ namespace XenAdmin.Dialogs.OptionsPages
             if (!string.IsNullOrEmpty(clientIdControl1.FileServiceClientId))
                 Properties.Settings.Default.FileServiceClientId = EncryptionUtils.Protect(clientIdControl1.FileServiceClientId);
 
-
-            bool checkXenCenterUpdatesChanged = AllowXenCenterUpdatesCheckBox.Checked != Properties.Settings.Default.AllowXenCenterUpdates;
-
-            if (checkXenCenterUpdatesChanged)
+            if (_checkBoxClientUpdates.Checked != Properties.Settings.Default.AllowXenCenterUpdates)
             {
-                Properties.Settings.Default.AllowXenCenterUpdates = AllowXenCenterUpdatesCheckBox.Checked;
+                Properties.Settings.Default.AllowXenCenterUpdates = _checkBoxClientUpdates.Checked;
 
                 if (Properties.Settings.Default.AllowXenCenterUpdates)
-                    Updates.CheckForUpdates(true);
+                    Updates.CheckForClientUpdates(true);
+            }
+
+            if (_checkBoxServerUpdates.Checked != Properties.Settings.Default.AllowPatchesUpdates ||
+                _checkBoxServerVersions.Checked != Properties.Settings.Default.AllowXenServerUpdates)
+            {
+                Properties.Settings.Default.AllowPatchesUpdates = _checkBoxServerUpdates.Checked;
+                Properties.Settings.Default.AllowXenServerUpdates = _checkBoxServerVersions.Checked;
+
+                if (Properties.Settings.Default.AllowPatchesUpdates || Properties.Settings.Default.AllowXenServerUpdates)
+                    Updates.CheckForServerUpdates(true);
             }
         }
 

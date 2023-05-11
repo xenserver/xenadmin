@@ -68,7 +68,6 @@ namespace XenAdmin.TabPages
             UpdateActionEnablement();
 
             m_alertCollectionChangedWithInvoke = Program.ProgramInvokeHandler(AlertsCollectionChanged);
-            RegisterCheckForUpdatesEvents();
 
             toolStripSplitButtonDismiss.DefaultItem = tsmiDismissAll;
             toolStripSplitButtonDismiss.Text = tsmiDismissAll.Text;
@@ -830,22 +829,5 @@ namespace XenAdmin.TabPages
 
             Clip.SetClipboardText(alert.GetUpdateDetailsCSVQuotes());
         }
-
-        #region CheckForUpdates events
-        private void RegisterCheckForUpdatesEvents()
-        {
-            Updates.CheckForUpdatesCompleted += CheckForUpdatesCompleted;
-        }
-
-        private void DeregisterCheckForUpdatesEvents()
-        {
-            Updates.CheckForUpdatesCompleted -= CheckForUpdatesCompleted;
-        }
-
-        private void CheckForUpdatesCompleted()
-        {
-            Updates.CheckHotfixEligibility();
-        }
-        #endregion
     }
 }

@@ -245,6 +245,7 @@ namespace XenAdmin
             aboutXenSourceAdminToolStripMenuItem.Text = string.Format(aboutXenSourceAdminToolStripMenuItem.Text, BrandManager.BrandConsole);
             templatesToolStripMenuItem1.Text = string.Format(templatesToolStripMenuItem1.Text, BrandManager.ProductBrand);
             updateClientToolStripMenuItem.Text = string.Format(updateClientToolStripMenuItem.Text, BrandManager.BrandConsole);
+            toolStripMenuItemCfu.Text = string.Format(toolStripMenuItemCfu.Text, BrandManager.BrandConsole);
 
             toolStripSeparator7.Visible = xenSourceOnTheWebToolStripMenuItem.Visible = xenCenterPluginsOnlineToolStripMenuItem.Visible = !HiddenFeatures.ToolStripMenuItemHidden;
 
@@ -257,8 +258,8 @@ namespace XenAdmin
             OtherConfigAndTagsWatcher.RegisterEventHandlers();
             Alert.RegisterAlertCollectionChanged(XenCenterAlerts_CollectionChanged);
             Updates.UpdateAlertCollectionChanged += Updates_CollectionChanged;
-            Updates.CheckForUpdatesStarted += UpdatesCheck_Started;
-            Updates.CheckForUpdatesCompleted += UpdatesCheck_Completed;
+            Updates.CheckForClientUpdatesStarted += ClientUpdatesCheck_Started;
+            Updates.CheckForClientUpdatesCompleted += ClientUpdatesCheck_Completed;
             ConnectionsManager.History.CollectionChanged += History_CollectionChanged;
             //ConnectionsManager.XenConnections.CollectionChanged is registered in OnShown
             Properties.Settings.Default.SettingChanging += Default_SettingChanging;
@@ -272,8 +273,8 @@ namespace XenAdmin
             OtherConfigAndTagsWatcher.DeregisterEventHandlers();
             Alert.DeregisterAlertCollectionChanged(XenCenterAlerts_CollectionChanged);
             Updates.UpdateAlertCollectionChanged -= Updates_CollectionChanged;
-            Updates.CheckForUpdatesStarted -= UpdatesCheck_Started;
-            Updates.CheckForUpdatesCompleted -= UpdatesCheck_Completed;
+            Updates.CheckForClientUpdatesStarted -= ClientUpdatesCheck_Started;
+            Updates.CheckForClientUpdatesCompleted -= ClientUpdatesCheck_Completed;
             ConnectionsManager.History.CollectionChanged -= History_CollectionChanged;
             ConnectionsManager.XenConnections.CollectionChanged -= XenConnection_CollectionChanged;
             Properties.Settings.Default.SettingChanging -= Default_SettingChanging;
@@ -604,7 +605,7 @@ namespace XenAdmin
             if (!Program.RunInAutomatedTestMode && !Helpers.CommonCriteriaCertificationRelease)
             {
                 if (!Properties.Settings.Default.SeenAllowUpdatesDialog)
-                    using (var dlg = new NoIconDialog(string.Format(Messages.ALLOWED_UPDATES_DIALOG_MESSAGE, BrandManager.BrandConsole),
+                    using (var dlg = new NoIconDialog(string.Format(Messages.ALLOWED_UPDATES_DIALOG_MESSAGE, BrandManager.BrandConsole, BrandManager.ProductBrand),
                         ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
                     {
                         HelpButton = true,
@@ -616,6 +617,8 @@ namespace XenAdmin
                         var result = dlg.ShowDialog(this) == DialogResult.Yes;
 
                         Properties.Settings.Default.AllowXenCenterUpdates = result;
+                        Properties.Settings.Default.AllowPatchesUpdates = result;
+                        Properties.Settings.Default.AllowXenServerUpdates = result;
                         Properties.Settings.Default.SeenAllowUpdatesDialog = true;
 
                         if (result && dlg.IsCheckBoxChecked)
@@ -634,7 +637,8 @@ namespace XenAdmin
                 CheckForUpdatesTimer.Interval = 1000 * 60 * 60 * 24; // 24 hours
                 CheckForUpdatesTimer.Tick += CheckForUpdatesTimer_Tick;
                 CheckForUpdatesTimer.Start();
-                Updates.CheckForUpdates();
+                Updates.CheckForClientUpdates();
+                Updates.CheckForServerUpdates();
             }
 
             ProcessCommand(_commandLineArgs);
@@ -642,7 +646,8 @@ namespace XenAdmin
 
         private void CheckForUpdatesTimer_Tick(object sender, EventArgs e)
         {
-            Updates.CheckForUpdates();
+            Updates.CheckForClientUpdates();
+            Updates.CheckForServerUpdates();
         }
 
         private void LoadTasksAsMeddlingActions(IXenConnection connection)
@@ -2605,7 +2610,7 @@ namespace XenAdmin
             Program.Invoke(this, SetUpdateAlert);
         }
 
-        private void UpdatesCheck_Completed()
+        private void ClientUpdatesCheck_Completed()
         {
             Program.Invoke(this, () =>
             {
@@ -2622,7 +2627,7 @@ namespace XenAdmin
             updateClientToolStripMenuItem.Visible = updateAlert != null;
         }
 
-        private void UpdatesCheck_Started()
+        private void ClientUpdatesCheck_Started()
         {
             Program.Invoke(this, () =>
             {
@@ -3275,7 +3280,7 @@ namespace XenAdmin
 
         private void toolStripMenuItemCfu_Click(object sender, EventArgs e)
         {
-            Updates.CheckForUpdates(true);
+            Updates.CheckForClientUpdates(true);
         }
     }
 }

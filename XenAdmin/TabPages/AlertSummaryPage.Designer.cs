@@ -16,7 +16,6 @@ namespace XenAdmin.TabPages
             if (disposing)
             {
                 DeregisterEventHandlers();
-                DeregisterCheckForUpdatesEvents();
 
                 if (components != null)
                     components.Dispose();

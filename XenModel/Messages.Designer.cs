@@ -5351,7 +5351,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Would you like {0} to periodically check the internet for new versions of the application?.
+        ///   Looks up a localized string similar to Would you like {0} to periodically check the internet for {1} updates and new versions of the application?.
         /// </summary>
         public static string ALLOWED_UPDATES_DIALOG_MESSAGE {
             get {
