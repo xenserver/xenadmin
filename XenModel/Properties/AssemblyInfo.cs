@@ -59,7 +59,8 @@ using XenAdmin.Properties;
     "[Vendor]",
     "[XenServerProduct]",
     "[XenServer version]",
-    "[Updates url]",
+    "[Xc updates url]",
+    "[Cfu url]",
     "[Guest Tools]",
     "[XenServer host]")]
 
@@ -74,7 +75,8 @@ namespace XenAdmin.Properties
             string companyNameShort,
             string productBrand,
             string productVersionText,
-            string updatesUrl,
+            string xcUpdatesUrl,
+            string cfuUrl,
             string vmTools,
             string xenHost)
         {
@@ -83,7 +85,8 @@ namespace XenAdmin.Properties
             CompanyNameShort = companyNameShort;
             ProductBrand = productBrand;
             ProductVersionText = productVersionText;
-            UpdatesUrl = updatesUrl;
+            XcUpdatesUrl = xcUpdatesUrl;
+            CfuUrl = cfuUrl;
             VmTools = vmTools;
             XenHost = xenHost;
         }
@@ -94,7 +97,8 @@ namespace XenAdmin.Properties
         public string ProductBrand { get; }
         public string ProductVersionText { get; }
         public string VmTools { get; }
-        public string UpdatesUrl { get; }
+        public string XcUpdatesUrl { get; }
+        public string CfuUrl { get; }
         public string XenHost { get; }
     }
 }

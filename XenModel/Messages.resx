@@ -1958,7 +1958,7 @@ Note that if RBAC is enabled, only alerts which you have privileges to dismiss w
     <value>&amp;Show internet proxy settings</value>
   </data>
   <data name="ALLOWED_UPDATES_DIALOG_MESSAGE" xml:space="preserve">
-    <value>Would you like {0} to periodically check the internet for new versions of the application?</value>
+    <value>Would you like {0} to periodically check the internet for {1} updates and new versions of the application?</value>
   </data>
   <data name="ALREADY_ATTACHED_ELSEWHERE" xml:space="preserve">
     <value>The SR '{0}' is currently attached elsewhere. Do you want to attach it to '{1}'? 

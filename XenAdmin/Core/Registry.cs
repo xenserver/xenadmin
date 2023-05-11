@@ -156,9 +156,14 @@ namespace XenAdmin.Core
 
         public static string AdditionalFeatures => ReadInstalledKey(ADDITIONAL_FEATURES, RegistryView.Registry32);
 
-        public static string GetCustomUpdatesXmlLocation()
+        public static string GetCustomXcUpdatesXmlLocation()
         {
-            return ReadInstalledKey(CUSTOM_UPDATES_XML_LOCATION);
+            return ReadInstalledKey(CUSTOM_XC_UPDATES_XML_LOCATION);
+        }
+
+        public static string GetCustomCfuLocation()
+        {
+            return ReadInstalledKey(CUSTOM_CFU_LOCATION);
         }
 
         public static string GetInternalStageAuthToken()
@@ -197,7 +202,8 @@ namespace XenAdmin.Core
         private const string PowerShellStamp = "Install";
         private const string HIDDEN_FEATURES = "HiddenFeatures";
         private const string ADDITIONAL_FEATURES = "AdditionalFeatures";
-        private const string CUSTOM_UPDATES_XML_LOCATION = "CheckForUpdatesXmlLocationOverride";
+        private const string CUSTOM_XC_UPDATES_XML_LOCATION = "XcUpdatesXmlLocationOverride";
+        private const string CUSTOM_CFU_LOCATION = "CfuLocationOverride";
         private const string INTERNAL_STAGE_AUTH_TOKEN = "InternalStageAuthToken";
         private const string CUSTOM_FILESERVICE_PREFIX = "PatchUrlPrefixOverride";
         private const string CUSTOM_CLIENT_ID_URL = "ClientIdUrlOverride";

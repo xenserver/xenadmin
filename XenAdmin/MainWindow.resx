@@ -2716,7 +2716,7 @@
     <value>186, 22</value>
   </data>
   <data name="toolStripMenuItemCfu.Text" xml:space="preserve">
-    <value>Check for &amp;Updates</value>
+    <value>Check for {0} &amp;Updates</value>
   </data>
   <data name="xenSourceOnTheWebToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>186, 22</value>

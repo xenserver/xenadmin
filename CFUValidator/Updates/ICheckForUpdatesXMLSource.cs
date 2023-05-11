@@ -38,7 +38,6 @@ namespace CFUValidator.Updates
     {
         List<XenServerPatch> XenServerPatches { get; }
         List<XenServerVersion> XenServerVersions{ get; }
-        List<ClientVersion> ClientVersions { get; }
         bool IsCompleted { get; }
         void RunAsync();
         int PercentComplete { get; }
