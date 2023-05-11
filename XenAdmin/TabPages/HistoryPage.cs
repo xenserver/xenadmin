@@ -170,22 +170,10 @@ namespace XenAdmin.TabPages
                 });
         }
 
-        private void SetFilterLabel()
-        {
-            toolStripLabelFiltersOnOff.Text = FilterIsOn
-                                                  ? Messages.FILTERS_ON
-                                                  : Messages.FILTERS_OFF;
-        }
-
-        private bool FilterIsOn
-        {
-            get
-            {
-                return toolStripDdbFilterDates.FilterIsOn
-                              || toolStripDdbFilterLocation.FilterIsOn
-                              || toolStripDdbFilterStatus.FilterIsOn;
-            }
-        }
+        public override bool FilterIsOn =>
+            toolStripDdbFilterDates.FilterIsOn
+            || toolStripDdbFilterLocation.FilterIsOn
+            || toolStripDdbFilterStatus.FilterIsOn;
 
         private void BuildRowList()
         {
@@ -209,7 +197,7 @@ namespace XenAdmin.TabPages
                 foreach (var action in ConnectionsManager.History)
                     RegisterActionEvents(action);
 
-                SetFilterLabel();
+                OnFiltersChanged();
             }
             finally
             {

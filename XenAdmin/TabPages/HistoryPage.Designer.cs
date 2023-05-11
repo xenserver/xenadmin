@@ -44,7 +44,6 @@ namespace XenAdmin.TabPages
             this.toolStripSplitButtonDismiss = new System.Windows.Forms.ToolStripSplitButton();
             this.tsmiDismissAll = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDismissSelected = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripLabelFiltersOnOff = new System.Windows.Forms.ToolStripLabel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridView = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
             this.columnExpander = new System.Windows.Forms.DataGridViewImageColumn();
@@ -70,8 +69,7 @@ namespace XenAdmin.TabPages
             this.toolStripDdbFilterStatus,
             this.toolStripDdbFilterLocation,
             this.toolStripDdbFilterDates,
-            this.toolStripSplitButtonDismiss,
-            this.toolStripLabelFiltersOnOff});
+            this.toolStripSplitButtonDismiss});
             this.toolStripTop.Name = "toolStripTop";
             // 
             // toolStripDdbFilterStatus
@@ -120,12 +118,6 @@ namespace XenAdmin.TabPages
             this.tsmiDismissSelected.Name = "tsmiDismissSelected";
             resources.ApplyResources(this.tsmiDismissSelected, "tsmiDismissSelected");
             this.tsmiDismissSelected.Click += new System.EventHandler(this.tsmiDismissSelected_Click);
-            // 
-            // toolStripLabelFiltersOnOff
-            // 
-            this.toolStripLabelFiltersOnOff.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            resources.ApplyResources(this.toolStripLabelFiltersOnOff, "toolStripLabelFiltersOnOff");
-            this.toolStripLabelFiltersOnOff.Name = "toolStripLabelFiltersOnOff";
             // 
             // tableLayoutPanel1
             // 
@@ -243,7 +235,6 @@ namespace XenAdmin.TabPages
         private XenAdmin.Controls.FilterStatusToolStripDropDownButton toolStripDdbFilterStatus;
         private XenAdmin.Controls.FilterLocationToolStripDropDownButton toolStripDdbFilterLocation;
         private XenAdmin.Controls.FilterDatesToolStripDropDownButton toolStripDdbFilterDates;
-        private System.Windows.Forms.ToolStripLabel toolStripLabelFiltersOnOff;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.DataGridViewImageColumn columnExpander;

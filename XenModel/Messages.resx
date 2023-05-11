@@ -2121,6 +2121,12 @@ Warning: you must ensure that the SR is not in use by any server not connected t
   <data name="AVAILABLE_UPDATES_NETWORK_ERROR" xml:space="preserve">
     <value>There was a network error when searching for available updates. Please see the logs for more information.</value>
   </data>
+  <data name="AVAILABLE_UPDATES_NOT_FOUND" xml:space="preserve">
+    <value>No updates found</value>
+  </data>
+  <data name="AVAILABLE_UPDATES_SEARCHING" xml:space="preserve">
+    <value>Searching for updates...</value>
+  </data>
   <data name="BACKINGUP_HOST" xml:space="preserve">
     <value>Backing up server '{0}'</value>
   </data>
@@ -9909,6 +9915,15 @@ Review these settings, then click Previous if you need to change anything. Other
   <data name="NOTIFICATIONS_SUBMODE_EVENTS_UNREAD_ONE" xml:space="preserve">
     <value>Events (1 error)</value>
   </data>
+  <data name="NOTIFICATIONS_SUBMODE_UPDATES_READ" xml:space="preserve">
+    <value>Updates</value>
+  </data>
+  <data name="NOTIFICATIONS_SUBMODE_UPDATES_STATUS" xml:space="preserve">
+    <value>Updates: {0}</value>
+  </data>
+  <data name="NOTIFICATIONS_SUBMODE_UPDATES_UNREAD" xml:space="preserve">
+    <value>Updates ({0})</value>
+  </data>
   <data name="NOTIFICATIONS_TOTAL" xml:space="preserve">
     <value>Notifications ({0})</value>
   </data>
@@ -11309,11 +11324,17 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   <data name="RESOLVED_AS" xml:space="preserve">
     <value>Resolved as {0}</value>
   </data>
+  <data name="RESTORE_DISMISSED_UPDATES" xml:space="preserve">
+    <value>Restore dismissed updates</value>
+  </data>
   <data name="RESTORE_FROM_BACKUP_FINALIZE" xml:space="preserve">
     <value>Backup file loaded to server '{0}'. Refer to the "{1} Administrator's Guide" for instructions on how to complete the restore procedure.</value>
   </data>
   <data name="RESTORE_HOST" xml:space="preserve">
     <value>Restore From Backup...</value>
+  </data>
+  <data name="RESTORING" xml:space="preserve">
+    <value>Restoring...</value>
   </data>
   <data name="RESTORING_HOST" xml:space="preserve">
     <value>Restoring server '{0}'</value>

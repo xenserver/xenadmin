@@ -271,10 +271,10 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonExportAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 22</value>
+    <value>45, 22</value>
   </data>
   <data name="toolStripButtonExportAll.Text" xml:space="preserve">
-    <value>E&amp;xport All</value>
+    <value>E&amp;xport</value>
   </data>
   <data name="tsmiDismissAll.Size" type="System.Drawing.Size, System.Drawing">
     <value>161, 22</value>
@@ -300,15 +300,6 @@
   <data name="toolStripSplitButtonDismiss.Text" xml:space="preserve">
     <value>&amp;Dismiss</value>
   </data>
-  <data name="toolStripLabelFiltersOnOff.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="toolStripLabelFiltersOnOff.Size" type="System.Drawing.Size, System.Drawing">
-    <value>104, 22</value>
-  </data>
-  <data name="toolStripLabelFiltersOnOff.Text" xml:space="preserve">
-    <value>Filters are ON/OFF</value>
-  </data>
   <data name="toolStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>1, 1</value>
   </data>
@@ -328,7 +319,7 @@
     <value>toolStrip1</value>
   </data>
   <data name="&gt;&gt;toolStrip1.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.ToolStripEx, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.ToolStripEx, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;toolStrip1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -388,7 +379,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="tableLayoutPanel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 483</value>
+    <value>12, 483</value>
   </data>
   <data name="tableLayoutPanel3.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
@@ -499,7 +490,7 @@
     <value>GridViewAlerts</value>
   </data>
   <data name="&gt;&gt;GridViewAlerts.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.DataGridViewEx.DataGridViewEx, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.DataGridViewEx.DataGridViewEx, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;GridViewAlerts.Parent" xml:space="preserve">
     <value>$this</value>
@@ -526,19 +517,19 @@
     <value>toolStripDropDownSeveritiesFilter</value>
   </data>
   <data name="&gt;&gt;toolStripDropDownSeveritiesFilter.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.FilterSeveritiesToolStripDropDownButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.FilterSeveritiesToolStripDropDownButton, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;toolStripDropDownButtonServerFilter.Name" xml:space="preserve">
     <value>toolStripDropDownButtonServerFilter</value>
   </data>
   <data name="&gt;&gt;toolStripDropDownButtonServerFilter.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.FilterLocationToolStripDropDownButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.FilterLocationToolStripDropDownButton, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;toolStripDropDownButtonDateFilter.Name" xml:space="preserve">
     <value>toolStripDropDownButtonDateFilter</value>
   </data>
   <data name="&gt;&gt;toolStripDropDownButtonDateFilter.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.FilterDatesToolStripDropDownButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.FilterDatesToolStripDropDownButton, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator3.Name" xml:space="preserve">
     <value>toolStripSeparator3</value>
@@ -582,12 +573,6 @@
   <data name="&gt;&gt;tsmiDismissSelected.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripLabelFiltersOnOff.Name" xml:space="preserve">
-    <value>toolStripLabelFiltersOnOff</value>
-  </data>
-  <data name="&gt;&gt;toolStripLabelFiltersOnOff.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;ColumnExpand.Name" xml:space="preserve">
     <value>ColumnExpand</value>
   </data>
@@ -628,6 +613,6 @@
     <value>AlertSummaryPage</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>XenAdmin.TabPages.NotificationsBasePage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.TabPages.NotificationsBasePage, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

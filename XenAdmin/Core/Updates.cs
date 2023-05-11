@@ -49,8 +49,9 @@ namespace XenAdmin.Core
         public static event Action CheckForClientUpdatesStarted;
         public static event Action CheckForClientUpdatesCompleted;
         public static event Action CheckForServerUpdatesStarted;
-        public static event Action CheckForServerUpdatesCompleted;
+        public static event Action<bool, string> CheckForServerUpdatesCompleted;
         public static event Action<CollectionChangeEventArgs> UpdateAlertCollectionChanged;
+        public static event Action RestoreDismissedUpdatesStarted;
 
         public static string UserAgent { get; } = $"{BrandManager.BrandConsole}/{Program.Version} ({IntPtr.Size * 8}-bit)";
 
@@ -212,7 +213,7 @@ namespace XenAdmin.Core
 
             UpdateAlertCollectionChanged?.Invoke(new CollectionChangeEventArgs(CollectionChangeAction.Refresh, UpdateAlerts));
 
-            CheckForServerUpdatesCompleted?.Invoke();
+            CheckForServerUpdatesCompleted?.Invoke(action.Succeeded, action.Exception.Message);
 
             CheckHotfixEligibility();
         }
@@ -762,6 +763,26 @@ namespace XenAdmin.Core
             {
                 log.Error("Failed to refresh the updates", e);
             }
+        }
+
+        public static void RestoreDismissedUpdates()
+        {
+            var actions = new List<AsyncAction>();
+            foreach (IXenConnection connection in ConnectionsManager.XenConnectionsCopy)
+                actions.Add(new RestoreDismissedUpdatesAction(connection));
+
+            var action = new ParallelAction(Messages.RESTORE_DISMISSED_UPDATES, Messages.RESTORING, Messages.COMPLETED,
+                actions, suppressHistory: true, showSubActionsDetails: false);
+            action.Completed += ParallelAction_Completed;
+
+            RestoreDismissedUpdatesStarted?.Invoke();
+
+            action.RunAsync();
+        }
+
+        private static void ParallelAction_Completed(ActionBase action)
+        {
+            Program.Invoke(Program.MainWindow, () => CheckForServerUpdates(true));
         }
 
         private static XenServerPatchAlert FindPatchAlert(Predicate<XenServerPatch> predicate)
