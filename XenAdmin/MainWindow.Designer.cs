@@ -1942,7 +1942,7 @@ namespace XenAdmin
             this.updateClientToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.downloadInstallToolStripMenuItem,
             this.relNotesToolStripMenuItem});
-            this.updateClientToolStripMenuItem.Image = global::XenAdmin.Properties.Resources._075_WarningRound_h32bit_16;
+            this.updateClientToolStripMenuItem.Image = global::XenAdmin.Properties.Resources._015_Download_h32bit_16;
             this.updateClientToolStripMenuItem.Margin = new System.Windows.Forms.Padding(0, 0, 5, 0);
             this.updateClientToolStripMenuItem.Name = "updateClientToolStripMenuItem";
             resources.ApplyResources(this.updateClientToolStripMenuItem, "updateClientToolStripMenuItem");
