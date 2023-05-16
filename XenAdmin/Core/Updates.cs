@@ -33,9 +33,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Alerts;
 using XenAdmin.Alerts.Types;
+using XenAdmin.Dialogs;
 using XenAdmin.Network;
 using XenAPI;
 
@@ -119,10 +121,10 @@ namespace XenAdmin.Core
         /// value of the parameter userRequested. If AutomaticCheck is disabled it checks
         /// for all update types if userRequested is true.
         /// </summary>
-        public static void CheckForServerUpdates(bool userRequested = false)
+        public static bool CheckForServerUpdates(bool userRequested = false, bool async = true, Control owner = null)
         {
             if (Helpers.CommonCriteriaCertificationRelease)
-                return;
+                return false;
 
             if (Properties.Settings.Default.AllowPatchesUpdates ||
                 Properties.Settings.Default.AllowXenServerUpdates || userRequested)
@@ -136,8 +138,25 @@ namespace XenAdmin.Core
 
                 action.Completed += DownloadCfuAction_Completed;
                 CheckForServerUpdatesStarted?.Invoke();
-                action.RunAsync();
+
+                if (async)
+                {
+                    action.RunAsync();
+                }
+                else if (owner == null)
+                {
+                    action.RunSync(action.Session);
+                }
+                else
+                {
+                    using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
+                        dialog.ShowDialog(owner);
+                }
+
+                return action.Succeeded;
             }
+
+            return false;
         }
 
         private static void DownloadXcUpdatesXmlAction_Completed(ActionBase sender)
@@ -213,7 +232,7 @@ namespace XenAdmin.Core
 
             UpdateAlertCollectionChanged?.Invoke(new CollectionChangeEventArgs(CollectionChangeAction.Refresh, UpdateAlerts));
 
-            CheckForServerUpdatesCompleted?.Invoke(action.Succeeded, action.Exception.Message);
+            CheckForServerUpdatesCompleted?.Invoke(action.Succeeded, action.Exception?.Message);
 
             CheckHotfixEligibility();
         }
@@ -782,7 +801,7 @@ namespace XenAdmin.Core
 
         private static void ParallelAction_Completed(ActionBase action)
         {
-            Program.Invoke(Program.MainWindow, () => CheckForServerUpdates(true));
+            Program.Invoke(Program.MainWindow, () => CheckForServerUpdates(userRequested: true));
         }
 
         private static XenServerPatchAlert FindPatchAlert(Predicate<XenServerPatch> predicate)

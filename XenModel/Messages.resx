@@ -2765,6 +2765,12 @@ Do you want to assign these VMs to the schedule '{0}' instead?</value>
   <data name="CHECKING_CLUSTERING_STATUS" xml:space="preserve">
     <value>Checking clustering status</value>
   </data>
+  <data name="CHECKING_CONTAINER_MANAGEMENT" xml:space="preserve">
+    <value>Docker container management check</value>
+  </data>
+  <data name="CHECKING_CONTAINER_MANAGEMENT_GROUP" xml:space="preserve">
+    <value>Checking for legacy Container Management supplemental pack</value>
+  </data>
   <data name="CHECKING_DEPRECATED_SRS" xml:space="preserve">
     <value>Checking for deprecated storage repositories</value>
   </data>
@@ -7485,10 +7491,6 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   <data name="INSTALL_PENDING_UPDATES" xml:space="preserve">
     <value>Install pending &amp;updates...</value>
   </data>
-  <data name="INSTALL_PENDING_UPDATES_DISABLED_REASON" xml:space="preserve">
-    <value>{0} {1} cannot be used for installing updates on servers running {2}.
-Please use latest available {0} for {2} instead.</value>
-  </data>
   <data name="INSTALL_SERVER_CERTIFICATE_ACTION_LINK" xml:space="preserve">
     <value>Install certificate...</value>
   </data>
@@ -10271,7 +10273,7 @@ This will cancel the update process and may leave your system in an unstable sta
     <value>Select Update</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_TITLE" xml:space="preserve">
-    <value>Choose an update to upload and install</value>
+    <value>Choose an existing update to install or upload a new one</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_UPDATESEXT" xml:space="preserve">
     <value>{0} Updates and Supplemental Packs (*.iso,*.zip)|*.iso;*.zip</value>
@@ -10333,9 +10335,6 @@ Servers where this update cannot be applied appear disabled in this list.</value
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_TITLE" xml:space="preserve">
     <value>Select the servers you want to update</value>
-  </data>
-  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_VERSION_UNSUPPORTED" xml:space="preserve">
-    <value>{0} cannot install updates or supplemental packs on this server.</value>
   </data>
   <data name="PATCHINGWIZARD_SINGLEUPDATE_FAILURE_MANY" xml:space="preserve">
     <value>The installation of update {0} was not completed successfully on all selected servers. The update process has been paused. Press Retry to resume it.</value>
@@ -10769,6 +10768,15 @@ If this value does not correspond to a server within the selected resource pool 
   </data>
   <data name="PROBING_HBA_TITLE" xml:space="preserve">
     <value>Probing for LUNs on {0}</value>
+  </data>
+  <data name="PROBLEM_CONTAINER_MANAGEMENT_DESCRIPTION" xml:space="preserve">
+    <value>{0}: Support for container management has been removed as of {1}.</value>
+  </data>
+  <data name="PROBLEM_CONTAINER_MANAGEMENT_UPDATE" xml:space="preserve">
+    <value>You will no longer be able to use the Container Management supplemental pack for managing Docker containers. The  update will not remove the supplemental pack from your system, but it may not be fully, if at all, functional.</value>
+  </data>
+  <data name="PROBLEM_CONTAINER_MANAGEMENT_UPGRADE" xml:space="preserve">
+    <value>If you are upgrading to {0} or above, you will no longer be able to use the Container Management supplemental pack for managing Docker containers. The upgrade will remove the supplemental pack from your system.</value>
   </data>
   <data name="PROBLEM_COORDINATOR_PENDING_RESTART_HOST" xml:space="preserve">
     <value>{0}: The coordinator needs to be rebooted first</value>
@@ -11408,6 +11416,12 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   <data name="ROLLING_POOL_UPGRADE_ELLIPSIS" xml:space="preserve">
     <value>Rolling Pool &amp;Upgrade...</value>
   </data>
+  <data name="ROLLING_UPGRADE_APPLY_UPDATES" xml:space="preserve">
+    <value>Apply all released &amp;updates on the new version</value>
+  </data>
+  <data name="ROLLING_UPGRADE_APPLY_UPDATES_MIXED" xml:space="preserve">
+    <value>Apply all released &amp;updates on the new version (only on pools licensed for automated updates)</value>
+  </data>
   <data name="ROLLING_UPGRADE_BUTTON_LABEL_STOP" xml:space="preserve">
     <value>S&amp;top</value>
   </data>
@@ -11444,7 +11458,7 @@ This will cancel the rolling pool upgrade process and may leave your system in a
     <value>Upgrade Options</value>
   </data>
   <data name="ROLLING_UPGRADE_EXTRAS_PAGE_TITLE" xml:space="preserve">
-    <value>Optionally, apply supplemental packs</value>
+    <value>Optionally, apply updates or supplemental packs</value>
   </data>
   <data name="ROLLING_UPGRADE_MODE_PAGE" xml:space="preserve">
     <value>Choose the upgrade mode: Automatic or Manual</value>

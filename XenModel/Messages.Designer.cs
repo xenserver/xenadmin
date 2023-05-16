@@ -7647,6 +7647,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Docker container management check.
+        /// </summary>
+        public static string CHECKING_CONTAINER_MANAGEMENT {
+            get {
+                return ResourceManager.GetString("CHECKING_CONTAINER_MANAGEMENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checking for legacy Container Management supplemental pack.
+        /// </summary>
+        public static string CHECKING_CONTAINER_MANAGEMENT_GROUP {
+            get {
+                return ResourceManager.GetString("CHECKING_CONTAINER_MANAGEMENT_GROUP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Checking for deprecated storage repositories.
         /// </summary>
         public static string CHECKING_DEPRECATED_SRS {
@@ -21486,16 +21504,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} {1} cannot be used for installing updates on servers running {2}.
-        ///Please use latest available {0} for {2} instead..
-        /// </summary>
-        public static string INSTALL_PENDING_UPDATES_DISABLED_REASON {
-            get {
-                return ResourceManager.GetString("INSTALL_PENDING_UPDATES_DISABLED_REASON", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Install certificate....
         /// </summary>
         public static string INSTALL_SERVER_CERTIFICATE_ACTION_LINK {
@@ -29563,7 +29571,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Choose an update to upload and install.
+        ///   Looks up a localized string similar to Choose an existing update to install or upload a new one.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTPATCHPAGE_TITLE {
             get {
@@ -29744,15 +29752,6 @@ namespace XenAdmin {
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_TITLE {
             get {
                 return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} cannot install updates or supplemental packs on this server..
-        /// </summary>
-        public static string PATCHINGWIZARD_SELECTSERVERPAGE_VERSION_UNSUPPORTED {
-            get {
-                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_VERSION_UNSUPPORTED", resourceCulture);
             }
         }
         
@@ -31032,6 +31031,33 @@ namespace XenAdmin {
         public static string PROBING_HBA_TITLE {
             get {
                 return ResourceManager.GetString("PROBING_HBA_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: Support for container management has been removed as of {1}..
+        /// </summary>
+        public static string PROBLEM_CONTAINER_MANAGEMENT_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("PROBLEM_CONTAINER_MANAGEMENT_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You will no longer be able to use the Container Management supplemental pack for managing Docker containers. The  update will not remove the supplemental pack from your system, but it may not be fully, if at all, functional..
+        /// </summary>
+        public static string PROBLEM_CONTAINER_MANAGEMENT_UPDATE {
+            get {
+                return ResourceManager.GetString("PROBLEM_CONTAINER_MANAGEMENT_UPDATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you are upgrading to {0} or above, you will no longer be able to use the Container Management supplemental pack for managing Docker containers. The upgrade will remove the supplemental pack from your system..
+        /// </summary>
+        public static string PROBLEM_CONTAINER_MANAGEMENT_UPGRADE {
+            get {
+                return ResourceManager.GetString("PROBLEM_CONTAINER_MANAGEMENT_UPGRADE", resourceCulture);
             }
         }
         
@@ -32892,6 +32918,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Apply all released &amp;updates on the new version.
+        /// </summary>
+        public static string ROLLING_UPGRADE_APPLY_UPDATES {
+            get {
+                return ResourceManager.GetString("ROLLING_UPGRADE_APPLY_UPDATES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Apply all released &amp;updates on the new version (only on pools licensed for automated updates).
+        /// </summary>
+        public static string ROLLING_UPGRADE_APPLY_UPDATES_MIXED {
+            get {
+                return ResourceManager.GetString("ROLLING_UPGRADE_APPLY_UPDATES_MIXED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to S&amp;top.
         /// </summary>
         public static string ROLLING_UPGRADE_BUTTON_LABEL_STOP {
@@ -32993,7 +33037,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Optionally, apply supplemental packs.
+        ///   Looks up a localized string similar to Optionally, apply updates or supplemental packs.
         /// </summary>
         public static string ROLLING_UPGRADE_EXTRAS_PAGE_TITLE {
             get {

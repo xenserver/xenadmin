@@ -100,7 +100,7 @@ namespace XenAdmin.Dialogs.OptionsPages
                 Properties.Settings.Default.AllowXenServerUpdates = _checkBoxServerVersions.Checked;
 
                 if (Properties.Settings.Default.AllowPatchesUpdates || Properties.Settings.Default.AllowXenServerUpdates)
-                    Updates.CheckForServerUpdates(true);
+                    Updates.CheckForServerUpdates(userRequested: true);
             }
         }
 

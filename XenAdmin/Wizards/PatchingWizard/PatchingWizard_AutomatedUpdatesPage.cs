@@ -50,26 +50,13 @@ namespace XenAdmin.Wizards.PatchingWizard
         }
 
         #region XenTabPage overrides
-        public override string Text
-        {
-            get
-            {
-                return Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_TEXT;
-            }
-        }
 
-        public override string PageTitle
-        {
-            get
-            {
-                return Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_TITLE;
-            }
-        }
+        public override string Text => Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_TEXT;
 
-        public override string HelpID
-        {
-            get { return ""; }
-        }
+        public override string PageTitle => Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_TITLE;
+
+        public override string HelpID => string.Empty;
+
         #endregion
 
         #region AutomatedUpdatesBesePage overrides
@@ -125,8 +112,10 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         protected override List<HostPlan> GenerateHostPlans(Pool pool, out List<Host> applicableHosts)
         {
+            bool automatedUpdatesRestricted = pool.Connection.Cache.Hosts.Any(Host.RestrictBatchHotfixApply);
+
             var minimalPatches = WizardMode == WizardMode.NewVersion
-                ? Updates.GetMinimalPatches(UpdateAlert, false)
+                ? Updates.GetMinimalPatches(UpdateAlert, ApplyUpdatesToNewVersion && !automatedUpdatesRestricted)
                 : Updates.GetMinimalPatches(pool.Connection);
 
             if (minimalPatches == null)

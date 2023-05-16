@@ -44,6 +44,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.ColumnVersion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonSelectAll = new System.Windows.Forms.Button();
+            this.applyUpdatesCheckBox = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHosts)).BeginInit();
             this.SuspendLayout();
@@ -55,6 +56,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.tableLayoutPanel1.Controls.Add(this.dataGridViewHosts, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.buttonSelectAll, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.applyUpdatesCheckBox, 0, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // buttonClearAll
@@ -128,6 +130,14 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.buttonSelectAll.UseVisualStyleBackColor = true;
             this.buttonSelectAll.Click += new System.EventHandler(this.buttonSelectAll_Click);
             // 
+            // applyUpdatesCheckBox
+            // 
+            resources.ApplyResources(this.applyUpdatesCheckBox, "applyUpdatesCheckBox");
+            this.tableLayoutPanel1.SetColumnSpan(this.applyUpdatesCheckBox, 2);
+            this.applyUpdatesCheckBox.Name = "applyUpdatesCheckBox";
+            this.applyUpdatesCheckBox.UseVisualStyleBackColor = true;
+            this.applyUpdatesCheckBox.CheckedChanged += new System.EventHandler(this.applyUpdatesCheckBox_CheckedChanged);
+            // 
             // PatchingWizard_SelectServers
             // 
             resources.ApplyResources(this, "$this");
@@ -135,6 +145,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "PatchingWizard_SelectServers";
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHosts)).EndInit();
             this.ResumeLayout(false);
 
@@ -152,5 +163,6 @@ namespace XenAdmin.Wizards.PatchingWizard
         private DataGridViewTextBoxColumn ColumnName;
         private DataGridViewTextBoxColumn ColumnVersion;
         private Label label1;
+        private CheckBox applyUpdatesCheckBox;
     }
 }
