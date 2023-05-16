@@ -33,7 +33,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using XenAdmin.Actions.OvfActions;
-using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAdmin.Wizards.GenericPages;
 using XenAdmin.Wizards.ImportWizard.Filters;

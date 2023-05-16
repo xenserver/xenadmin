@@ -30,9 +30,7 @@
 
 using System.Drawing;
 using System.Linq;
-using XenAdmin.Core;
 using XenAdmin.Wizards.PatchingWizard;
-using XenAPI;
 
 
 namespace XenAdmin.Commands
