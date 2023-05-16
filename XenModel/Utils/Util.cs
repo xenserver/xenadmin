@@ -30,7 +30,6 @@
 
 using System;
 using System.Globalization;
-using System.Xml;
 
 
 namespace XenAdmin

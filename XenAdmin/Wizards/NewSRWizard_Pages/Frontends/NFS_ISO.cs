@@ -30,7 +30,6 @@
 
 using System;
 using System.Collections.Generic;
-using XenAdmin.Core;
 using XenAdmin.Controls;
 using XenAdmin.Network;
 using XenAPI;

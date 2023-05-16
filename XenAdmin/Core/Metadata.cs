@@ -38,7 +38,6 @@ using System.Net.Sockets;
 using System.Reflection;
 using System.Threading;
 using System.Web.Script.Serialization;
-using XenAdmin.Model;
 using XenAdmin.Plugins;
 using XenAPI;
 
