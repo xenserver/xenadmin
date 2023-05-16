@@ -66,6 +66,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         public Dictionary<XenServerPatch, string> AllDownloadedPatches { get; } = new Dictionary<XenServerPatch, string>();
         public List<Problem> PrecheckProblemsActuallyResolved { private get; set; }
         public List<Pool> SelectedPools { private get; set; }
+        public bool ApplyUpdatesToNewVersion { get; set; }
         public Status Status { get; private set; }
 
         protected AutomatedUpdatesBasePage()
@@ -167,6 +168,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         #endregion
 
         #region Backround workers
+
         private bool StartUpgradeWorkers()
         {
             //reset the background workers

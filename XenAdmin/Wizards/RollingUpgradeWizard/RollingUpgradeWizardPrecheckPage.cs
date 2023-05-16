@@ -139,7 +139,9 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             {
                 var poolHostsToUpgrade = pool.HostsToUpgrade();
                 hostsToUpgrade.AddRange(poolHostsToUpgrade);
-                hostsToUpgradeOrUpdate.AddRange(poolHostsToUpgrade);
+                hostsToUpgradeOrUpdate.AddRange(ApplyUpdatesToNewVersion
+                    ? HostsToUpgradeOrUpdate(pool)
+                    : poolHostsToUpgrade);
             }
 
             //XenCenter version check (if any of the selected server version is not the latest)
@@ -230,6 +232,15 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             if (iloChecks.Count > 0)
                 groups.Add(new CheckGroup(Messages.CHECKING_POWER_ON_MODE_GROUP, iloChecks));
 
+            //container management check - for each pool
+            var dockerChecks = (from Host server in SelectedCoordinators
+                                let check = new PoolContainerManagementCheck(server, InstallMethodConfig, ManualUpgrade)
+                where check.CanRun()
+                select check as Check).ToList();
+
+            if (dockerChecks.Count > 0)
+                groups.Add(new CheckGroup(Messages.CHECKING_CONTAINER_MANAGEMENT_GROUP, dockerChecks));
+
             //Checking PV guests - for hosts that have any PV guests and warn the user before the upgrade.
             var pvChecks = (from Host server in SelectedCoordinators
                 let check = new PVGuestsCheck(server, ManualUpgrade, InstallMethodConfig)
@@ -284,6 +295,18 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
             if (deprecatedSRsChecks.Count > 0)
                 groups.Add(new CheckGroup(Messages.CHECKING_DEPRECATED_SRS, deprecatedSRsChecks));
+
+            //Checking automated updates are possible if apply updates checkbox is ticked
+            if (ApplyUpdatesToNewVersion)
+            {
+                var automatedUpdateChecks = (from Host server in SelectedCoordinators
+                    select new AutomatedUpdatesLicenseCheck(server) as Check).ToList();
+
+                automatedUpdateChecks.Add(new CfuAvailabilityCheck());
+
+                groups.Add(new CheckGroup(Messages.CHECKING_AUTOMATED_UPDATES_POSSIBLE,
+                    automatedUpdateChecks));
+            }
 
             return groups;
         }

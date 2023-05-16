@@ -41,9 +41,10 @@ namespace XenAdmin.Wizards.PatchingWizard
         public PatchingWizard_FirstPage()
         {
             InitializeComponent();
-            label5.Text = string.Format(label5.Text, BrandManager.ProductVersion821, BrandManager.BrandConsole);
-            label9.Text = string.Format(label9.Text, BrandManager.BrandConsole);
-            label5.Visible = ConnectionsManager.XenConnectionsCopy.Any(c => c.IsConnected && !Helpers.CloudOrGreater(c));
+            label5.Text = string.Format(label5.Text, BrandManager.BrandConsole);
+            label6.Text = string.Format(label6.Text, BrandManager.BrandConsole, BrandManager.CompanyNameLegacy);
+            label6.Visible = pictureBox4.Visible = linkLabelClientId.Visible =
+                ConnectionsManager.XenConnectionsCopy.Any(c => c.IsConnected && !Helpers.CloudOrGreater(c));
         }
 
         public override string Text => Messages.BEFORE_YOU_START;

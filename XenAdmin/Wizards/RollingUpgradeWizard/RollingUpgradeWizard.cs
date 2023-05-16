@@ -91,6 +91,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             {
                 var selectedCoordinators = RollingUpgradeWizardSelectPool.SelectedCoordinators;
                 RollingUpgradeWizardPrecheckPage.SelectedCoordinators = selectedCoordinators;
+                RollingUpgradeExtrasPage.SelectedCoordinators = selectedCoordinators;
 
                 var selectedPools = new List<Pool>();
                 foreach (var coordinator in selectedCoordinators)
@@ -112,9 +113,15 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                     RollingUpgradeUpgradePage.InstallMethodConfig = RollingUpgradeWizardUpgradeModePage.InstallMethodConfig;
             }
             else if (prevPageType == typeof(RollingUpgradeWizardPrecheckPage))
+            {
                 RollingUpgradeUpgradePage.PrecheckProblemsActuallyResolved = RollingUpgradeWizardPrecheckPage.PrecheckProblemsActuallyResolved;
+            }
             else if (prevPageType == typeof(RollingUpgradeExtrasPage))
             {
+                var applyUpdatesToNewVersion = RollingUpgradeExtrasPage.ApplyUpdatesToNewVersion;
+                RollingUpgradeWizardPrecheckPage.ApplyUpdatesToNewVersion = applyUpdatesToNewVersion;
+                RollingUpgradeUpgradePage.ApplyUpdatesToNewVersion = applyUpdatesToNewVersion;
+
                 RollingUpgradeUpgradePage.ApplySuppPackAfterUpgrade = RollingUpgradeExtrasPage.ApplySuppPackAfterUpgrade;
                 RollingUpgradeUpgradePage.SelectedSuppPackPath = RollingUpgradeExtrasPage.SelectedSuppPack;
             }

@@ -28,45 +28,33 @@
  * SUCH DAMAGE.
  */
 
-using System.Drawing;
-using System.Linq;
 using XenAdmin.Core;
-using XenAdmin.Wizards.PatchingWizard;
+using XenAdmin.Diagnostics.Checks;
 using XenAPI;
 
 
-namespace XenAdmin.Commands
+namespace XenAdmin.Diagnostics.Problems.PoolProblem
 {
-    /// <summary>
-    /// Shows the patching wizard.
-    /// </summary>
-    internal class InstallNewUpdateCommand : Command
+    class ContainerManagementWarning : WarningWithMoreInfo
     {
-        /// <summary>
-        /// Initializes a new instance of this Command. The parameter-less constructor is required if 
-        /// this Command is to be attached to a ToolStrip menu item or button. It should not be used in any other scenario.
-        /// </summary>
-        public InstallNewUpdateCommand()
+        private readonly Pool _pool;
+        private readonly bool _isUpgrade;
+
+        public ContainerManagementWarning(Check check, Pool pool, bool isUpgrade)
+            : base(check)
         {
+            _pool = pool;
+            _isUpgrade = isUpgrade;
         }
 
-        public InstallNewUpdateCommand(IMainWindow mainWindow)
-            : base(mainWindow)
-        {
-        }
+        public override string Title => Check.Description;
 
-        protected override void RunCore(SelectedItemCollection selection)
-        {
-            MainWindowCommandInterface.ShowForm(typeof(PatchingWizard));
-        }
+        public override string Description =>
+            string.Format(Messages.PROBLEM_CONTAINER_MANAGEMENT_DESCRIPTION, _pool, BrandManager.ProductVersion82);
 
-        protected override bool CanRunCore(SelectedItemCollection selection)
-        {
-            return ConnectionsManager.XenConnectionsCopy.Any(c => c.IsConnected);
-        }
-
-        public override Image ContextMenuImage => Images.StaticImages._000_HostUnpatched_h32bit_16;
-
-        public override string ContextMenuText => Messages.INSTALL_PENDING_UPDATES;
+        public override string Message =>
+            _isUpgrade
+                ? string.Format(Messages.PROBLEM_CONTAINER_MANAGEMENT_UPGRADE, BrandManager.ProductVersion82)
+                : Messages.PROBLEM_CONTAINER_MANAGEMENT_UPDATE;
     }
 }

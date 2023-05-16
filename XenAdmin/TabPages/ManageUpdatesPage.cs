@@ -1098,7 +1098,7 @@ namespace XenAdmin.TabPages
         
         private void toolStripButtonRefresh_Click(object sender, EventArgs e)
         {
-            Updates.CheckForServerUpdates(true);
+            Updates.CheckForServerUpdates(userRequested: true);
         }
 
         private void toolStripButtonUpdate_Click(object sender, EventArgs e)
@@ -1254,7 +1254,7 @@ namespace XenAdmin.TabPages
 
         private void checkForUpdatesNowLink_Click(object sender, EventArgs e)
         {
-            Updates.CheckForServerUpdates(true);
+            Updates.CheckForServerUpdates(userRequested: true);
         }
 
         private void ManageUpdatesPage_Resize(object sender, EventArgs e)
