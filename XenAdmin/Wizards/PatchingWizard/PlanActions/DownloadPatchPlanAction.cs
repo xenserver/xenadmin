@@ -45,7 +45,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         private readonly XenServerPatch patch;
         private Dictionary<XenServerPatch, string> AllDownloadedPatches = new Dictionary<XenServerPatch, string>();
         private KeyValuePair<XenServerPatch, string> patchFromDisk;
-        private string tempFileName = null;
 
         public DownloadPatchPlanAction(IXenConnection connection, XenServerPatch patch, Dictionary<XenServerPatch, string> allDownloadedPatches, KeyValuePair<XenServerPatch, string> patchFromDisk)
             : base(connection)
@@ -96,18 +95,17 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 return;
 
             Uri address = new Uri(patchUri);
-            tempFileName = Path.GetTempFileName();
 
             var exts = Helpers.ElyOrGreater(Connection) ? "iso" : BrandManager.ExtensionUpdate;
-            var downloadAction = new DownloadAndUnzipXenServerPatchAction(patch.Name, address, tempFileName, true, exts);
+            var downloadAction = new DownloadAndUnzipUpdateAction(patch.Name, address, exts);
 
-            downloadAction.Changed += downloadAndUnzipXenServerPatchAction_Changed;
-            downloadAction.Completed += downloadAndUnzipXenServerPatchAction_Completed;
+            downloadAction.Changed += DownloadAction_Changed;
+            downloadAction.Completed += DownloadAction_Completed;
 
             downloadAction.RunSync(session);
         }
 
-        private void downloadAndUnzipXenServerPatchAction_Changed(ActionBase action)
+        private void DownloadAction_Changed(ActionBase action)
         {
             if (action == null)
                 return;
@@ -124,17 +122,16 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         }
 
 
-        private void downloadAndUnzipXenServerPatchAction_Completed(ActionBase sender)
+        private void DownloadAction_Completed(ActionBase sender)
         {
-            var action = sender as DownloadAndUnzipXenServerPatchAction;
-            if (action == null)
+            if (!(sender is DownloadAndUnzipUpdateAction action))
                 return;
 
-            action.Changed -= downloadAndUnzipXenServerPatchAction_Changed;
-            action.Completed -= downloadAndUnzipXenServerPatchAction_Completed;
+            action.Changed -= DownloadAction_Changed;
+            action.Completed -= DownloadAction_Completed;
 
             if (action.Succeeded)
-                AllDownloadedPatches[patch] = action.PatchPath;
+                AllDownloadedPatches[patch] = action.UpdatePath;
         }
     }
 }
