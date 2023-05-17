@@ -175,10 +175,10 @@ namespace XenAdmin.Wizards.ImportWizard
                 {
                     warnings.Add(string.Format(Messages.IMPORT_VM_CPUS_COUNT_UNTRUSTED_WARNING, ovfCountsAboveLimit, VM.MAX_VCPUS_FOR_NON_TRUSTED_VMS, BrandManager.ProductBrand));
                 }
-
-                if (!CheckDestinationHasEnoughPhysicalCpus(out var warningMessage))
-                    warnings.Add(warningMessage);
             }
+
+            if (!CheckDestinationHasEnoughPhysicalCpus(out var warningMessage))
+                warnings.Add(warningMessage);
 
             ShowWarning(string.Join("\n\n", warnings));
 
