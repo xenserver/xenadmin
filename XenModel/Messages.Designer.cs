@@ -39287,6 +39287,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The amount of physical memory allocated to this VM is greater than the total memory of its home server..
+        /// </summary>
+        public static string VM_CPUMEMPAGE_INSUFFICIENT_MEMORY_HOST {
+            get {
+                return ResourceManager.GetString("VM_CPUMEMPAGE_INSUFFICIENT_MEMORY_HOST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The amount of physical memory allocated to this VM is greater than the total memory of any server in the pool..
+        /// </summary>
+        public static string VM_CPUMEMPAGE_INSUFFICIENT_MEMORY_POOL {
+            get {
+                return ResourceManager.GetString("VM_CPUMEMPAGE_INSUFFICIENT_MEMORY_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Maximum number of &amp;vCPUs:.
         /// </summary>
         public static string VM_CPUMEMPAGE_MAX_VCPUS_LABEL {

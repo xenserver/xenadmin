@@ -31,7 +31,6 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -41,15 +40,16 @@ using XenAdmin.Core;
 using XenAPI;
 using XenAdmin.Dialogs;
 
-
 namespace XenAdmin.SettingsPanels
 {
     public partial class CpuMemoryEditPage : UserControl, IEditPage
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod()?.DeclaringType);
+
         private VM _vm;
         private bool _showMemory; // If this VM has DMC, we don't show the memory controls on this page.
         private bool _validToSave = true;
-        private decimal _origMemory;
+        private double _origMemory;
         private long _origVCpus;
         private long _origVCpusMax;
         private long _origVCpusAtStartup;
@@ -66,7 +66,7 @@ namespace XenAdmin.SettingsPanels
 
         private ChangeMemorySettingsAction _memoryAction;
 
-        private bool HasMemoryChanged => _origMemory != nudMemory.Value;
+        private bool HasMemoryChanged => _origMemory != memorySpinner.Value;
 
         private bool HasVCpuChanged => _origVCpus != (long)comboBoxVCPUs.SelectedItem;
 
@@ -87,7 +87,7 @@ namespace XenAdmin.SettingsPanels
 
         public string SubText =>
             _showMemory
-                ? string.Format(Messages.CPU_AND_MEMORY_SUB, SelectedVCpusAtStartup, nudMemory.Value)
+                ? string.Format(Messages.CPU_AND_MEMORY_SUB, SelectedVCpusAtStartup, memorySpinner.Value / Util.BINARY_MEGA)
                 : string.Format(Messages.CPU_SUB, SelectedVCpusAtStartup);
 
         public CpuMemoryEditPage()
@@ -97,9 +97,6 @@ namespace XenAdmin.SettingsPanels
             Text = Messages.CPU_AND_MEMORY;
 
             transparentTrackBar1.Scroll += new EventHandler(tbPriority_Scroll);
-
-            nudMemory.TextChanged += new EventHandler(nudMemory_TextChanged);
-            nudMemory.LostFocus += new EventHandler(nudMemory_LostFocus);
         }
 
         private void InitializeVCpuControls()
@@ -143,13 +140,10 @@ namespace XenAdmin.SettingsPanels
 
             Text = _showMemory ? Messages.CPU_AND_MEMORY : Messages.CPU;
             if (!_showMemory)
-                lblMemory.Visible = panel2.Visible = MemWarningLabel.Visible = false;
+                lblMemory.Visible = memorySpinner.Visible = MemWarningLabel.Visible = false;
             else if (vm.power_state != vm_power_state.Halted && vm.power_state != vm_power_state.Running)
             {
-                panel2.Enabled = false;
-                MemWarningLabel.Text = Messages.MEM_NOT_WHEN_SUSPENDED;
-                MemWarningLabel.ForeColor = SystemColors.ControlText;
-                MemWarningLabel.Visible = true;
+                memorySpinner.Enabled = false;
             }
 
             // Since updates come in dribs and drabs, avoid error if new max and min arrive
@@ -157,17 +151,17 @@ namespace XenAdmin.SettingsPanels
             if (vm.memory_dynamic_max >= vm.memory_dynamic_min &&
                 vm.memory_static_max >= vm.memory_static_min)
             {
-                var min = Convert.ToDecimal(vm.memory_static_min / Util.BINARY_MEGA);
-                var max = Convert.ToDecimal(vm.MaxMemAllowed() / Util.BINARY_MEGA);
-                var value = Convert.ToDecimal(vm.memory_static_max / Util.BINARY_MEGA);
+                var min = vm.memory_static_min;
+                var max = vm.MaxMemAllowed();
+                var value = vm.memory_static_max;
                 // Avoid setting the range to exclude the current value: CA-40041
                 if (value > max)
                     max = value;
                 if (value < min)
                     min = value;
-                nudMemory.Minimum = min;
-                nudMemory.Maximum = max;
-                nudMemory.Text = (nudMemory.Value = value).ToString(CultureInfo.InvariantCulture);
+                memorySpinner.Initialize(value, max, Messages.VAL_MEGB);
+                memorySpinner.SetRange(min, max);
+                ValidateMemorySettings();
             }
 
             _isVCpuHotplugSupported = vm.SupportsVcpuHotplug();
@@ -175,7 +169,7 @@ namespace XenAdmin.SettingsPanels
 
             label1.Text = GetRubric();
 
-            _origMemory = nudMemory.Value;
+            _origMemory = memorySpinner.Value;
             _origVCpusMax = vm.VCPUs_max > 0 ? vm.VCPUs_max : 1;
             _origVCpusAtStartup = vm.VCPUs_at_startup > 0 ? vm.VCPUs_at_startup : 1;
             _origVCpuWeight = _currentVCpuWeight;
@@ -245,27 +239,11 @@ namespace XenAdmin.SettingsPanels
             return sb.ToString();
         }
 
-        private void ShowMemError(bool showAlways, bool testValue)
+        private void ShowMemoryWarnings(IReadOnlyCollection<string> warnings)
         {
-            if (_vm == null || !_showMemory)
-                return;
-
-            var selectedAffinity =
-                _vm.Connection.Resolve(_vm.power_state == vm_power_state.Running ? _vm.resident_on : _vm.affinity);
-            if (selectedAffinity != null)
-            {
-                var hostMetrics = _vm.Connection.Resolve(selectedAffinity.metrics);
-                if ((showAlways || (testValue && (hostMetrics != null &&
-                                                  hostMetrics.memory_total <
-                                                  (double)nudMemory.Value * Util.BINARY_MEGA))))
-                {
-                    MemWarningLabel.Visible = true;
-                }
-                else
-                {
-                    MemWarningLabel.Visible = false;
-                }
-            }
+            var show = warnings.Count > 0;
+            memoryWarningLabel.Text = show ? string.Join(Environment.NewLine, warnings) : null;
+            memoryPictureBox.Visible = memoryWarningLabel.Visible = show;
         }
 
         private void ShowCpuWarnings(IReadOnlyCollection<string> warnings)
@@ -335,14 +313,54 @@ namespace XenAdmin.SettingsPanels
             ShowTopologyWarnings(warnings);
         }
 
-        private void ValidateNud(NumericUpDown nud, decimal defaultValue)
+        private void ValidateMemorySettings()
         {
-            if (!string.IsNullOrEmpty(nud.Text.Trim()))
-                return;
+            var warnings = new List<string>();
+            if (_vm != null && _showMemory)
+            {
+                if (_vm.power_state != vm_power_state.Halted && _vm.power_state != vm_power_state.Running)
+                {
+                    warnings.Add(Messages.MEM_NOT_WHEN_SUSPENDED);
+                }
 
-            nud.Value = defaultValue >= nud.Minimum && defaultValue <= nud.Maximum ? defaultValue : nud.Maximum;
+                var selectedAffinity =
+                    _vm.Connection.Resolve(_vm.power_state == vm_power_state.Running ? _vm.resident_on : _vm.affinity);
+                if (selectedAffinity != null)
+                {
+                    var hostMetrics = _vm.Connection.Resolve(selectedAffinity.metrics);
+                    if (hostMetrics != null && hostMetrics.memory_total < memorySpinner.Value)
+                    {
+                        warnings.Add(Messages.VM_CPUMEMPAGE_INSUFFICIENT_MEMORY_HOST);
+                    }
+                }
+                else
+                {
+                    var hosts = _vm.Connection.Cache.Hosts;
+                    var hostHasEnoughMemory = false;
+                    foreach (var host in hosts)
+                    {
+                        if (host == null)
+                        {
+                            log.Warn($"One of the hosts cached for VM {_vm.Name()} is null. Cannot check its metrics.");
+                            continue;
+                        }
 
-            nud.Text = nud.Value.ToString(CultureInfo.InvariantCulture);
+                        var hostMetrics = _vm.Connection.Resolve(host.metrics);
+                        if (hostMetrics.memory_total < memorySpinner.Value)
+                        {
+                            continue;
+                        }
+                        hostHasEnoughMemory = true;
+                        break;
+                    }
+
+                    if (!hostHasEnoughMemory)
+                    {
+                        warnings.Add(Messages.VM_CPUMEMPAGE_INSUFFICIENT_MEMORY_POOL);
+                    }
+                }
+            }
+            ShowMemoryWarnings(warnings);
         }
 
         private void RefreshCurrentVCpus()
@@ -366,14 +384,9 @@ namespace XenAdmin.SettingsPanels
             }
         }
 
-        private ChangeMemorySettingsAction ConfirmAndCalcActions(long mem)
+        private ChangeMemorySettingsAction ConfirmAndCalculateActions(long memoryBytes)
         {
-            if (_vm.memory_static_max / Util.BINARY_MEGA == mem / Util.BINARY_MEGA)
-            {
-                // don't want to show warning dialog just for rounding errors
-                mem = _vm.memory_static_max;
-            }
-            else if (_vm.power_state != vm_power_state.Halted)
+            if (_vm.power_state != vm_power_state.Halted)
             {
                 var msg = _vm.SupportsBallooning() && !Helpers.FeatureForbidden(_vm, Host.RestrictDMC)
                     ? Messages.CONFIRM_CHANGE_MEMORY_MAX_SINGULAR
@@ -388,8 +401,7 @@ namespace XenAdmin.SettingsPanels
             }
 
             return new ChangeMemorySettingsAction(_vm,
-                string.Format(Messages.ACTION_CHANGE_MEMORY_SETTINGS, _vm.Name()),
-                _vm.memory_static_min, mem, mem, mem,
+                string.Format(Messages.ACTION_CHANGE_MEMORY_SETTINGS, _vm.Name()), _vm.memory_static_min, memoryBytes, memoryBytes, memoryBytes,
                 VMOperationCommand.WarningDialogHAInvalidConfig, VMOperationCommand.StartDiagnosisForm, true);
         }
 
@@ -454,8 +466,8 @@ namespace XenAdmin.SettingsPanels
                 // If not, don't close the properties dialog.
                 if (HasMemoryChanged)
                 {
-                    var mem = Convert.ToInt64(nudMemory.Value * Util.BINARY_MEGA);
-                    _memoryAction = ConfirmAndCalcActions(mem);
+                    var mem = Convert.ToInt64(memorySpinner.Value);
+                    _memoryAction = ConfirmAndCalculateActions(mem);
                     if (_memoryAction == null)
                         return false;
                 }
@@ -467,15 +479,18 @@ namespace XenAdmin.SettingsPanels
         /** Show local validation balloon tooltips */
         public void ShowLocalValidationMessages()
         {
+            // not applicable
         }
 
         public void HideLocalValidationMessages()
         {
+            // not applicable
         }
 
         /** Unregister listeners, dispose balloon tooltips, etc. */
         public void Cleanup()
         {
+            // not applicable
         }
 
         public bool HasChanged => HasVCpuChanged || HasMemoryChanged || HasTopologyChanged ||
@@ -503,36 +518,15 @@ namespace XenAdmin.SettingsPanels
             RefreshCurrentVCpus();
         }
 
-        private void nudMemory_ValueChanged(object sender, EventArgs e)
-        {
-            ShowMemError(false, true);
-        }
-
-        private void nudMemory_LostFocus(object sender, EventArgs e)
-        {
-            ValidateNud(nudMemory, (decimal)_vm.memory_static_max / Util.BINARY_MEGA);
-        }
-
-        private void nudMemory_TextChanged(object sender, EventArgs e)
-        {
-            if (decimal.TryParse(nudMemory.Text, out var val))
-            {
-                if (val >= nudMemory.Minimum && val <= nudMemory.Maximum)
-                    nudMemory_ValueChanged(null, null);
-                else if (val > nudMemory.Maximum)
-                    ShowMemError(true, false);
-                else
-                    ShowMemError(false, false);
-            }
-
-            _validToSave = nudMemory.Text != "";
-        }
-
         private void tbPriority_Scroll(object sender, EventArgs e)
         {
             _currentVCpuWeight = Convert.ToDecimal(Math.Pow(4.0d, Convert.ToDouble(transparentTrackBar1.Value)));
             if (transparentTrackBar1.Value == transparentTrackBar1.Max)
                 _currentVCpuWeight--;
+        }
+        private void memorySpinner_SpinnerValueChanged(object sender, EventArgs e)
+        {
+            ValidateMemorySettings();
         }
 
         #endregion

@@ -13351,6 +13351,12 @@ To start a {0} trial, click the button below.</value>
   <data name="VDI" xml:space="preserve">
     <value>VDI</value>
   </data>
+  <data name="VM_CPUMEMPAGE_INSUFFICIENT_MEMORY_HOST" xml:space="preserve">
+    <value>The amount of physical memory allocated to this VM is greater than the total memory of its home server.</value>
+  </data>
+  <data name="VM_CPUMEMPAGE_INSUFFICIENT_MEMORY_POOL" xml:space="preserve">
+    <value>The amount of physical memory allocated to this VM is greater than the total memory of any server in the pool.</value>
+  </data>
   <data name="VDI_COPIED" xml:space="preserve">
     <value>Copied disk '{0}' from SR '{1}' to SR '{2}'</value>
   </data>
