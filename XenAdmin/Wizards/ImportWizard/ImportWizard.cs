@@ -310,7 +310,7 @@ namespace XenAdmin.Wizards.ImportWizard
                 _targetConnection = m_pageHost.SelectedTargetPool?.Connection;
                 var oldHostSelection = m_vmMappings.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.TargetName);
                 m_vmMappings = m_pageHost.VmMappings;
-                m_pageFinish.CanStartVmsAutomatically = m_pageHost.ApplianceCanBeStarted;
+
                 if (oldTargetConnection != _targetConnection)
                 {
                     RemovePage(m_pageRbac);
@@ -329,7 +329,7 @@ namespace XenAdmin.Wizards.ImportWizard
 
                 if (oldTargetConnection != _targetConnection ||
                     oldHostSelection.Any(kvp=> !m_vmMappings.TryGetValue(kvp.Key, out var map) || map == null || map.TargetName != kvp.Value))
-                    NotifyNextPagesOfChange(m_pageStorage, m_pageNetwork, m_pageOptions, m_pageFinish);
+                    NotifyNextPagesOfChange(m_pageStorage, m_pageNetwork, m_pageOptions);
             }
             else if (type == typeof(ImportBootOptionPage))
             {
@@ -372,6 +372,21 @@ namespace XenAdmin.Wizards.ImportWizard
                     && lunPerVdiMappingPage.MapLunsToVdisRequired
                     && m_typeOfImport == ImportType.Ovf)
                     AddAfterPage(m_pageStorage, lunPerVdiMappingPage);
+
+                // If the user has selected shared SRs, we cannot be sure that the VMs can't be started.
+                // m_pageHost.ApplianceCanBeStarted only checks the number of pCPUs on the selected target.
+                // We therefore allow users to selected "Start VMs automatically", as they will be shown
+                // an error message in case their configuration isn't valid.
+                var canStartVMsAutomatically = m_pageHost.ApplianceCanBeStarted ||
+                    m_pageStorage.VmMappings.Values
+                    .SelectMany(mapping => mapping.Storage.Values)
+                    .Any(sr => sr != null && sr.shared);
+
+                if(canStartVMsAutomatically != m_pageFinish.CanStartVmsAutomatically)
+                {
+                    m_pageFinish.CanStartVmsAutomatically = canStartVMsAutomatically;
+                    NotifyNextPagesOfChange(m_pageFinish);
+                }
             }
             else if (type == typeof(LunPerVdiImportPage))
             {

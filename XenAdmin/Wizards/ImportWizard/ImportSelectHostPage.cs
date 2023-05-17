@@ -234,6 +234,10 @@ namespace XenAdmin.Wizards.ImportWizard
             return true;
         }
 
+        /// <summary>
+        /// Check if the appliance can be started on the selected host or pool. Note that if the user selects
+        /// a shared SR in other pages, the VM could still start.
+        /// </summary>
         public bool ApplianceCanBeStarted => _ovfMaxVCpusCount == null ||
                                              GetPhysicalCpus(SelectedTarget ?? SelectedTargetPool) < 0 ||
                                              GetPhysicalCpus(SelectedTarget ?? SelectedTargetPool) >= _ovfMaxVCpusCount;
