@@ -123,15 +123,14 @@ namespace XenAdmin.Wizards
             if (string.IsNullOrEmpty(zippedUpdatePath))
                 return null;
 
-            var unzipAction = new DownloadAndUnzipXenServerPatchAction(Path.GetFileNameWithoutExtension(zippedUpdatePath),
-                null, zippedUpdatePath, true, BrandManager.ExtensionUpdate, "iso");
+            var unzipAction = new UnzipUpdateAction(zippedUpdatePath, BrandManager.ExtensionUpdate, "iso");
 
             using (var dlg = new ActionProgressDialog(unzipAction, ProgressBarStyle.Marquee))
             {
                 dlg.ShowDialog(control);
             }
 
-            return !string.IsNullOrEmpty(unzipAction.PatchPath) ? unzipAction.PatchPath : null;
+            return !string.IsNullOrEmpty(unzipAction.UpdatePath) ? unzipAction.UpdatePath : null;
         }
 
         public static bool IsValidFile(string fileName, out string failureReason)
