@@ -21004,6 +21004,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The imported appliance requires a minimum of {0} {2} of memory, while the available memory on the server is {1} {2}. You will not be able to start the VM on the selected server..
+        /// </summary>
+        public static string IMPORT_WIZARD_INSUFFICIENT_MEMORY_HOST {
+            get {
+                return ResourceManager.GetString("IMPORT_WIZARD_INSUFFICIENT_MEMORY_HOST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The imported appliance requires a minimum of {0} {2} of memory, while the maximum available memory on the pool is {1} {2}. You will not be able to start the VM on the selected pool..
+        /// </summary>
+        public static string IMPORT_WIZARD_INSUFFICIENT_MEMORY_POOL {
+            get {
+                return ResourceManager.GetString("IMPORT_WIZARD_INSUFFICIENT_MEMORY_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Map the virtual network interfaces in the VMs you are importing to networks in the destination pool or standalone server..
         /// </summary>
         public static string IMPORT_WIZARD_NETWORKING_INTRO {
