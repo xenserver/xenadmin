@@ -6105,12 +6105,6 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="FINISH_PAGE_STORAGE_FOR_VM" xml:space="preserve">
     <value>{0} storage:</value>
   </data>
-  <data name="FINISH_PAGE_TARGET" xml:space="preserve">
-    <value>Target:</value>
-  </data>
-  <data name="FINISH_PAGE_TARGET_FOR_VM" xml:space="preserve">
-    <value>{0} target:</value>
-  </data>
   <data name="FINISH_PAGE_TEXT" xml:space="preserve">
     <value>Finish</value>
   </data>

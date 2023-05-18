@@ -647,11 +647,9 @@ namespace XenAdmin.Wizards.ImportWizard
 
             foreach (var mapping in m_vmMappings.Values)
             {
-                var targetLbl = m_vmMappings.Count == 1 ? Messages.FINISH_PAGE_TARGET : string.Format(Messages.FINISH_PAGE_TARGET_FOR_VM, mapping.VmNameLabel);
                 var storageLbl = m_vmMappings.Count == 1 ? Messages.FINISH_PAGE_STORAGE : string.Format(Messages.FINISH_PAGE_STORAGE_FOR_VM, mapping.VmNameLabel);
                 var networkLbl = m_vmMappings.Count == 1 ? Messages.FINISH_PAGE_NETWORK : string.Format(Messages.FINISH_PAGE_NETWORK_FOR_VM, mapping.VmNameLabel);
 
-                temp.Add(new Tuple(targetLbl, mapping.TargetName));
                 bool first = true;
                 foreach (var sr in mapping.Storage)
                 {

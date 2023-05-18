@@ -17431,24 +17431,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Target:.
-        /// </summary>
-        public static string FINISH_PAGE_TARGET {
-            get {
-                return ResourceManager.GetString("FINISH_PAGE_TARGET", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} target:.
-        /// </summary>
-        public static string FINISH_PAGE_TARGET_FOR_VM {
-            get {
-                return ResourceManager.GetString("FINISH_PAGE_TARGET_FOR_VM", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Finish.
         /// </summary>
         public static string FINISH_PAGE_TEXT {
