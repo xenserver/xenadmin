@@ -40,14 +40,26 @@ namespace XenAdmin.Diagnostics.Checks
 {
     internal class UpgradeRequiresEua : UpgradeCheck
     {
+        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod()?.DeclaringType);
+
         private readonly Uri _targetUri;
-        public UpgradeRequiresEua(List<Host> hosts, Uri targetUri)
+        public UpgradeRequiresEua(List<Host> hosts, IReadOnlyDictionary<string, string> installMethodConfig)
             : base(hosts)
         {
-            _targetUri = targetUri;
+            if (installMethodConfig == null || !installMethodConfig.TryGetValue("url", out var uriText))
+                return;
+
+            try
+            {
+                _targetUri = new Uri(uriText);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
         }
 
-        public override bool CanRun() => Hosts.Any(Helpers.Post82X);
+        public override bool CanRun() => _targetUri != null && Hosts.Any(Helpers.Post82X);
 
         protected override Problem RunCheck()
         {
