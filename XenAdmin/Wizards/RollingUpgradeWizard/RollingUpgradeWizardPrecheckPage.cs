@@ -169,6 +169,26 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             if (hotfixChecks.Count > 0)
                 groups.Add(new CheckGroup(Messages.CHECKING_UPGRADE_HOTFIX_STATUS, hotfixChecks));
 
+            // EUA check
+            if (InstallMethodConfig != null && InstallMethodConfig.TryGetValue("url", out var uriText))
+            {
+                Uri targetUri = null;
+                try
+                {
+                    targetUri = new Uri(uriText);
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex);
+                }
+
+                var euaCheck = GetPermanentCheck("EUA", new UpgradeRequiresEua(hostsToUpgrade, targetUri));
+
+                var euaChecks = new List<Check> { euaCheck };
+
+                groups.Add(new CheckGroup(Messages.ACCEPT_EUA_CHECK_GROUP_NAME, euaChecks));
+            }
+
             //SafeToUpgrade- and PrepareToUpgrade- checks - in automatic mode only, for hosts that will be upgraded
             if (!ManualUpgrade)
             {
@@ -287,27 +307,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
             if (deprecatedSRsChecks.Count > 0)
                 groups.Add(new CheckGroup(Messages.CHECKING_DEPRECATED_SRS, deprecatedSRsChecks));
-
-
-            // EUA check
-            if (InstallMethodConfig != null && InstallMethodConfig.TryGetValue("url", out var uriText))
-            {
-                Uri targetUri = null;
-                try
-                {
-                    targetUri = new Uri(uriText);
-                }
-                catch (Exception ex)
-                {
-                    Log.Error(ex);
-                }
-
-                var euaCheck = GetPermanentCheck("EUA", new UpgradeRequiresEua(hostsToUpgrade, targetUri));
-
-                var euaChecks = new List<Check> { euaCheck };
-
-                groups.Add(new CheckGroup(Messages.ACCEPT_EUA_CHECK_GROUP_NAME, euaChecks));
-            }
 
             return groups;
         }
