@@ -104,7 +104,7 @@ namespace XenAdmin.Diagnostics.Problems
                 result = string.Compare(Title, other.Title, StringComparison.InvariantCulture);
 
             if (result == 0 && Check?.XenObjects != null && other.Check?.XenObjects != null)
-                result = Check.XenObjects.Count.CompareTo(other.Check.XenObjects.Count);
+                result = Check.XenObjects.SequenceEqual(other.Check.XenObjects) ? 0 : Check.XenObjects.Count.CompareTo(other.Check.XenObjects.Count);
 
             return result;
         }

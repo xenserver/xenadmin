@@ -230,10 +230,10 @@ namespace XenAdmin.Wizards.PatchingWizard
                 if (problem is HostNotLive)
                 {
                     // this host is no longer live -> remove all previous problems regarding this host
-                    Problem curProblem = problem;
+                    var curProblem = problem;
                     ProblemsResolvedPreCheck.RemoveAll(p =>
-                        p.Check?.XenObjects != null && p.Check.XenObjects.Count > 0 &&
-                        curProblem.Check?.XenObjects != null && curProblem.Check.XenObjects.Count > 0 &&
+                        p.Check?.XenObjects != null &&
+                        curProblem.Check?.XenObjects != null &&
                         p.Check.XenObjects.SequenceEqual(curProblem.Check.XenObjects)
                     );
                 }
