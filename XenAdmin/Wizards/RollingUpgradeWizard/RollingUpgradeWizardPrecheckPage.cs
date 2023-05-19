@@ -45,8 +45,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 {
     public partial class RollingUpgradeWizardPrecheckPage : PatchingWizard_PrecheckPage
     {
-        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod()?.DeclaringType);
-
         public RollingUpgradeWizardPrecheckPage()
         {
             InitializeComponent();
@@ -170,24 +168,9 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 groups.Add(new CheckGroup(Messages.CHECKING_UPGRADE_HOTFIX_STATUS, hotfixChecks));
 
             // EUA check
-            if (InstallMethodConfig != null && InstallMethodConfig.TryGetValue("url", out var uriText))
-            {
-                Uri targetUri = null;
-                try
-                {
-                    targetUri = new Uri(uriText);
-                }
-                catch (Exception ex)
-                {
-                    Log.Error(ex);
-                }
-
-                var euaCheck = GetPermanentCheck("EUA", new UpgradeRequiresEua(hostsToUpgrade, targetUri));
-
-                var euaChecks = new List<Check> { euaCheck };
-
-                groups.Add(new CheckGroup(Messages.ACCEPT_EUA_CHECK_GROUP_NAME, euaChecks));
-            }
+            var euaCheck = GetPermanentCheck("EUA", new UpgradeRequiresEua(hostsToUpgrade, InstallMethodConfig));
+            var euaChecks = new List<Check> { euaCheck };
+            groups.Add(new CheckGroup(Messages.ACCEPT_EUA_CHECK_GROUP_NAME, euaChecks));
 
             //SafeToUpgrade- and PrepareToUpgrade- checks - in automatic mode only, for hosts that will be upgraded
             if (!ManualUpgrade)
