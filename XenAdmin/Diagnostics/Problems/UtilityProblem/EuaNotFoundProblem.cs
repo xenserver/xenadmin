@@ -29,53 +29,56 @@
  */
 
 using System.Collections.Generic;
-using System.Windows.Forms;
-using XenAdmin.Actions;
+using System.Linq;
+using XenAdmin.Core;
 using XenAdmin.Diagnostics.Checks;
 using XenAdmin.Dialogs;
+using XenAPI;
 
 namespace XenAdmin.Diagnostics.Problems.UtilityProblem
 {
-    internal class EuaNotAcceptedProblem : Problem
+    internal class EuaNotFoundProblem : Problem
     {
-        private readonly List<string> _euas;
+        private readonly List<IXenObject> _hosts;
         private readonly Check _check;
-        public EuaNotAcceptedProblem(Check check, List<string> euas)
+        public EuaNotFoundProblem(Check check, List<IXenObject> hosts)
             : base(check)
         {
             _check = check;
-            _euas = euas;
+            _hosts = hosts;
         }
 
-        public override string Description => Messages.ACCEPT_EUA_PROBLEM_DESCRIPTION;
+        public override string Description => string.Format(Messages.EUA_NOT_FOUND_PROBLEM_DESCRIPTION, BrandManager.BrandConsole);
 
-        protected override AsyncAction CreateAction(out bool cancelled)
+        public sealed override string Title => string.Empty;
+
+        public override string HelpMessage => Messages.MORE_INFO;
+
+        protected override Actions.AsyncAction CreateAction(out bool cancelled)
         {
-            using (var d = new AcceptEuaDialog(_euas))
+            Program.Invoke(Program.MainWindow, () =>
             {
-                _check.Completed = d.ShowDialog(Program.MainWindow) == DialogResult.Yes;
-            }
+                using (var dlg = new InformationDialog(Messages.EUA_NOT_FOUND_PROBLEM_MORE_INFO))
+                    dlg.ShowDialog();
+            });
+
             cancelled = true;
             return null;
         }
 
-        public override string HelpMessage => Messages.ACCEPT_EUA_PROBLEM_HELP_MESSAGE;
-
-        public sealed override string Title => string.Empty;
-
         public override bool Equals(object obj)
         {
-            if (!(obj is EuaNotAcceptedProblem item))
+            if (!(obj is EuaNotFoundProblem item))
             {
                 return false;
             }
 
-            return _euas.Equals(item._euas) && base.Equals(obj);
+            return _hosts.SequenceEqual(item._hosts);
         }
 
         public override int GetHashCode()
         {
-            return _euas.GetHashCode() ^ base.GetHashCode();
+            return _hosts.GetHashCode() ^ base.GetHashCode();
         }
     }
 }

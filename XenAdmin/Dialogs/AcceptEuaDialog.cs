@@ -30,97 +30,43 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using XenAdmin.Core;
-using XenAPI;
 
 
 namespace XenAdmin.Dialogs
 {
     public partial class AcceptEuaDialog : XenDialogBase
     {
-        private readonly List<Host> _hosts;
-        private readonly Uri _targetUri;
-        private readonly HashSet<string> _euas;
-        private readonly HashSet<string> _errors;
+        private readonly List<string> _euas;
         private readonly HashSet<string> _warnings;
 
-
-        public AcceptEuaDialog(List<Host> hosts, Uri targetUri)
+        public AcceptEuaDialog(List<string> euas)
         {
             InitializeComponent();
-            _hosts = hosts;
-            _targetUri = targetUri;
-            _euas = new HashSet<string>();
-            _errors = new HashSet<string>();
+            _euas = euas;
             _warnings = new HashSet<string>();
-
-            SetLoading(true);
             warningTableLayoutPanel.Visible = false;
 
-            ThreadPool.QueueUserWorkItem(LoadEuas, null);
+            LoadEuas();
         }
 
-        private void LoadEuas(object _)
+        private void LoadEuas()
         {
-           _hosts.AsParallel().ForAll(FetchHostEua);
-
-            Program.BeginInvoke(this, () =>
+            if (_euas.Count > 1)
             {
-                if (_euas.Count > 1)
-                {
-                    _warnings.Add(Messages.ACCEPT_EUA_MORE_THAN_ONE_FOUND);
-                }
-
-                if (_warnings.Count > 0 || _errors.Count > 0)
-                {
-                    warningTableLayoutPanel.Visible = true;
-                    warningLabel.Text = string.Join(Environment.NewLine, _errors.Concat(_warnings));
-                }
-                else
-                {
-                    warningTableLayoutPanel.Visible = false;
-                }
-
-                euaTextBox.Text = string.Join($"{Environment.NewLine}___________________________{Environment.NewLine}", _euas);
-                SetLoading(false);
-            });
-        }
-
-        private void FetchHostEua(Host host)
-        {
-            if (!Helpers.TryLoadHostEua(host, _targetUri, out var eua) && Helpers.Post82X(host))
-            {
-                _errors.Add(string.Format(Messages.ACCEPT_EUA_CANNOT_FETCH, BrandManager.BrandConsole));
-                return;
+                _warnings.Add(Messages.ACCEPT_EUA_MORE_THAN_ONE_FOUND);
             }
 
-            lock (_euas)
+            if (_warnings.Count > 0)
             {
-                _euas.Add(eua);
-            }
-        }
-        private void SetLoading(bool loading)
-        {
-            if (loading)
-            {
-                spinnerIcon.StartSpinning();
+                warningTableLayoutPanel.Visible = true;
+                warningLabel.Text = string.Join(Environment.NewLine, _warnings);
             }
             else
             {
-                spinnerIcon.StopSpinning();
+                warningTableLayoutPanel.Visible = false;
             }
 
-            lock (_euas)
-            {
-                acceptButton.Enabled = euaTextBox.Visible = !loading && _euas.Count > 0 && _errors.Count == 0;
-            }
-        }
-
-        private void button_click(object sender, EventArgs e)
-        {
-            Close();
+            euaTextBox.Text = string.Join($"{Environment.NewLine}___________________________{Environment.NewLine}", _euas);
         }
     }
 }

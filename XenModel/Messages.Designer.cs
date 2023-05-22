@@ -61,15 +61,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} encountered an issue while trying to fetch the EUA. Ensure that the selected source URI is valid and that all the pool coordinators can access its contents..
-        /// </summary>
-        public static string ACCEPT_EUA_CANNOT_FETCH {
-            get {
-                return ResourceManager.GetString("ACCEPT_EUA_CANNOT_FETCH", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Checking for the presence of an EUA.
         /// </summary>
         public static string ACCEPT_EUA_CHECK_DESCRIPTION {
@@ -16216,6 +16207,24 @@ namespace XenAdmin {
         public static string ERROR_VM_NOT_HALTED {
             get {
                 return ResourceManager.GetString("ERROR_VM_NOT_HALTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} encountered an issue while trying to fetch the EUA..
+        /// </summary>
+        public static string EUA_NOT_FOUND_PROBLEM_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("EUA_NOT_FOUND_PROBLEM_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} could not fetch an End User Agreement (EUA), but expected one. Please ensure that the selected source URI is valid and that all the pool coordinators can access its contents..
+        /// </summary>
+        public static string EUA_NOT_FOUND_PROBLEM_MORE_INFO {
+            get {
+                return ResourceManager.GetString("EUA_NOT_FOUND_PROBLEM_MORE_INFO", resourceCulture);
             }
         }
         

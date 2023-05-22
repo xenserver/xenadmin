@@ -43,6 +43,8 @@ namespace XenAdmin.Diagnostics.Checks
         private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod()?.DeclaringType);
 
         private readonly Uri _targetUri;
+        private readonly HashSet<string> _euas;
+        private readonly HashSet<IXenObject> _hostsFailedToFetchEua;
         public UpgradeRequiresEua(List<Host> hosts, IReadOnlyDictionary<string, string> installMethodConfig)
             : base(hosts)
         {
@@ -57,13 +59,44 @@ namespace XenAdmin.Diagnostics.Checks
             {
                 Log.Error(ex);
             }
+
+            _euas = new HashSet<string>();
+            _hostsFailedToFetchEua = new HashSet<IXenObject>();
         }
 
         public override bool CanRun() => _targetUri != null && Hosts.Any(Helpers.Post82X);
 
+        private void FetchHostEua(Host host)
+        {
+            string eua = null;
+            if (Helpers.Post82X(host) && !Helpers.TryLoadHostEua(host, _targetUri, out eua))
+            {
+                lock (_hostsFailedToFetchEua)
+                {
+                    _hostsFailedToFetchEua.Add(host);
+                }
+                return;
+            }
+
+            lock (_euas)
+            {
+                _euas.Add(eua);
+            }
+        }
         protected override Problem RunCheck()
         {
-            return new EuaNotAcceptedProblem( this, Hosts.Where(Helpers.Post82X).ToList(), _targetUri);
+            Hosts.AsParallel().ForAll(FetchHostEua);
+            lock (_hostsFailedToFetchEua)
+            {
+                if (_hostsFailedToFetchEua.Count > 0)
+                {
+                    return new EuaNotFoundProblem(this, _hostsFailedToFetchEua.ToList());
+                }
+            }
+            lock (_euas)
+            {
+                return new EuaNotAcceptedProblem( this, _euas.ToList());
+            }
         }
 
         public override string Description => Messages.ACCEPT_EUA_CHECK_DESCRIPTION;
@@ -75,6 +108,27 @@ namespace XenAdmin.Diagnostics.Checks
                 return false;
             }
 
+            // if the number of hosts that failed to fetch the EUA is not zero, we 
+            // never consider the Checks equal. This is because this Check is used as a
+            // permanent check
+            lock (_hostsFailedToFetchEua)
+            {
+                if (_hostsFailedToFetchEua != null)
+                {
+                    if (_hostsFailedToFetchEua.Count > 0)
+                    {
+                        return false;
+                    }
+
+                    lock (item._hostsFailedToFetchEua)
+                    {
+                        if (item._hostsFailedToFetchEua != null && item._hostsFailedToFetchEua.Count > 0)
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
 
             return _targetUri.Equals(item._targetUri) && base.Equals(obj);
         }

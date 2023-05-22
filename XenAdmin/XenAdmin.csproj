@@ -270,6 +270,7 @@
     <Compile Include="Diagnostics\Problems\PoolProblem\NotLicensedForAutomatedUpdatesWarning.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\ServerSelectionProblem.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\VSwitchControllerProblem.cs" />
+    <Compile Include="Diagnostics\Problems\UtilityProblem\EuaNotFoundProblem.cs" />
     <Compile Include="Diagnostics\Problems\UtilityProblem\EuaNotAcceptedProblem.cs" />
     <Compile Include="Diagnostics\Problems\UtilityProblem\CfuNotAvailableProblem.cs" />
     <Compile Include="Diagnostics\Problems\VMProblem\InvalidVCPUConfiguration.cs" />
