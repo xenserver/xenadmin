@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ACCEPT_EUA_CANNOT_FETCH" xml:space="preserve">
-    <value>{0} encountered an issue while trying to fetch the EUA. Ensure that the selected source URI is valid and that all the pool coordinators can access its contents.</value>
-  </data>
   <data name="ACCEPT_EUA_CHECK_DESCRIPTION" xml:space="preserve">
     <value>Checking for the presence of an EUA</value>
   </data>
@@ -5728,6 +5725,12 @@ Would you like to eject these ISOs before continuing?</value>
   </data>
   <data name="ERROR_VM_NOT_HALTED" xml:space="preserve">
     <value>Please shut down or suspend VM '{0}' before exporting.</value>
+  </data>
+  <data name="EUA_NOT_FOUND_PROBLEM_DESCRIPTION" xml:space="preserve">
+    <value>{0} encountered an issue while trying to fetch the EUA.</value>
+  </data>
+  <data name="EUA_NOT_FOUND_PROBLEM_MORE_INFO" xml:space="preserve">
+    <value>{0} could not fetch an End User Agreement (EUA), but expected one. Please ensure that the selected source URI is valid and that all the pool coordinators can access its contents.</value>
   </data>
   <data name="EULA" xml:space="preserve">
     <value>EULA</value>

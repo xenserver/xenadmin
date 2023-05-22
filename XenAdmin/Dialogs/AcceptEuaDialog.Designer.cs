@@ -39,13 +39,11 @@ namespace XenAdmin.Dialogs
             this.buttonsFlowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.declineButton = new System.Windows.Forms.Button();
             this.acceptButton = new System.Windows.Forms.Button();
-            this.spinnerIcon = new XenAdmin.Controls.SpinnerIcon();
             this.tableLayoutPanel.SuspendLayout();
             this.warningTableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.warningPictureBox)).BeginInit();
             this.euaPanel.SuspendLayout();
             this.buttonsFlowLayoutPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.spinnerIcon)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel
@@ -86,7 +84,6 @@ namespace XenAdmin.Dialogs
             // 
             // euaPanel
             // 
-            this.euaPanel.Controls.Add(this.spinnerIcon);
             this.euaPanel.Controls.Add(this.euaTextBox);
             resources.ApplyResources(this.euaPanel, "euaPanel");
             this.euaPanel.Name = "euaPanel";
@@ -120,13 +117,6 @@ namespace XenAdmin.Dialogs
             this.acceptButton.Name = "acceptButton";
             this.acceptButton.UseVisualStyleBackColor = true;
             // 
-            // spinnerIcon
-            // 
-            this.spinnerIcon.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            resources.ApplyResources(this.spinnerIcon, "spinnerIcon");
-            this.spinnerIcon.Name = "spinnerIcon";
-            this.spinnerIcon.TabStop = false;
-            // 
             // AcceptEuaDialog
             // 
             resources.ApplyResources(this, "$this");
@@ -142,7 +132,6 @@ namespace XenAdmin.Dialogs
             this.euaPanel.ResumeLayout(false);
             this.buttonsFlowLayoutPanel.ResumeLayout(false);
             this.buttonsFlowLayoutPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.spinnerIcon)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -156,7 +145,6 @@ namespace XenAdmin.Dialogs
         private System.Windows.Forms.PictureBox warningPictureBox;
         private System.Windows.Forms.Label warningLabel;
         private System.Windows.Forms.Panel euaPanel;
-        private Controls.SpinnerIcon spinnerIcon;
         private System.Windows.Forms.RichTextBox euaTextBox;
         private System.Windows.Forms.FlowLayoutPanel buttonsFlowLayoutPanel;
         private System.Windows.Forms.Button declineButton;
