@@ -168,7 +168,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 groups.Add(new CheckGroup(Messages.CHECKING_UPGRADE_HOTFIX_STATUS, hotfixChecks));
 
             // EUA check
-            var euaCheck = GetPermanentCheck("EUA", new UpgradeRequiresEua(hostsToUpgrade, InstallMethodConfig));
+            var euaCheck = GetPermanentCheck("EUA", new UpgradeRequiresEua(this, hostsToUpgrade, InstallMethodConfig));
             var euaChecks = new List<Check> { euaCheck };
             groups.Add(new CheckGroup(Messages.ACCEPT_EUA_CHECK_GROUP_NAME, euaChecks));
 

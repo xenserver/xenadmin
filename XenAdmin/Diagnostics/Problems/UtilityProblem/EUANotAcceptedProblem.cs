@@ -40,9 +40,11 @@ namespace XenAdmin.Diagnostics.Problems.UtilityProblem
     {
         private readonly List<string> _euas;
         private readonly Check _check;
-        public EuaNotAcceptedProblem(Check check, List<string> euas)
+        private readonly Control _control;
+        public EuaNotAcceptedProblem(Control control, Check check, List<string> euas)
             : base(check)
         {
+            _control = control;
             _check = check;
             _euas = euas;
         }
@@ -53,7 +55,7 @@ namespace XenAdmin.Diagnostics.Problems.UtilityProblem
         {
             using (var d = new AcceptEuaDialog(_euas))
             {
-                _check.Completed = d.ShowDialog(Program.MainWindow) == DialogResult.Yes;
+                _check.Completed = d.ShowDialog(_control) == DialogResult.Yes;
             }
             cancelled = true;
             return null;
