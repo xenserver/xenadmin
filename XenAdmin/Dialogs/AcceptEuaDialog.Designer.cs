@@ -125,8 +125,10 @@ namespace XenAdmin.Dialogs
             this.BackColor = System.Drawing.SystemColors.Control;
             this.CancelButton = this.declineButton;
             this.Controls.Add(this.tableLayoutPanel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
             this.HelpButton = false;
             this.Name = "AcceptEuaDialog";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.tableLayoutPanel.ResumeLayout(false);
             this.tableLayoutPanel.PerformLayout();
             this.warningTableLayoutPanel.ResumeLayout(false);
