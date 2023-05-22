@@ -42,6 +42,7 @@ namespace XenAdmin.Dialogs
         public AcceptEuaDialog(List<string> euas)
         {
             InitializeComponent();
+            
             _euas = euas;
             _warnings = new HashSet<string>();
             warningTableLayoutPanel.Visible = false;
