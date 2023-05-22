@@ -75,6 +75,7 @@ namespace XenAdmin.Diagnostics.Checks
             string eua = null;
             if (Helpers.Post82X(host) && !Helpers.TryLoadHostEua(host, _targetUri, out eua))
             {
+                Log.Warn($"Could not fetch EUA file for {host.Name()}");
                 lock (_hostsFailedToFetchEua)
                 {
                     _hostsFailedToFetchEua.Add(host);
