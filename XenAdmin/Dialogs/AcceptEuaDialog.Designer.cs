@@ -121,7 +121,7 @@ namespace XenAdmin.Dialogs
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.Controls.Add(this.tableLayoutPanel);
             this.HelpButton = false;
             this.Name = "AcceptEuaDialog";
