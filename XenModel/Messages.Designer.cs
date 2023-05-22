@@ -16305,15 +16305,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} could not fetch an End User Agreement (EUA), but expected one. Please ensure that the selected source URI is valid and that all the pool coordinators can access its contents..
-        /// </summary>
-        public static string EUA_NOT_FOUND_PROBLEM_MORE_INFO {
-            get {
-                return ResourceManager.GetString("EUA_NOT_FOUND_PROBLEM_MORE_INFO", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to EULA.
         /// </summary>
         public static string EULA {

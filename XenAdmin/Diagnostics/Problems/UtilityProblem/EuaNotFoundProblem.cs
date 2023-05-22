@@ -58,7 +58,7 @@ namespace XenAdmin.Diagnostics.Problems.UtilityProblem
         {
             Program.Invoke(Program.MainWindow, () =>
             {
-                using (var dlg = new InformationDialog(Messages.EUA_NOT_FOUND_PROBLEM_MORE_INFO))
+                using (var dlg = new InformationDialog(Messages.PROBLEM_PREPARE_TO_UPGRADE))
                     dlg.ShowDialog();
             });
 

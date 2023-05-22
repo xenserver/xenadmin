@@ -5729,9 +5729,6 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="EUA_NOT_FOUND_PROBLEM_DESCRIPTION" xml:space="preserve">
     <value>{0} encountered an issue while trying to fetch the EUA.</value>
   </data>
-  <data name="EUA_NOT_FOUND_PROBLEM_MORE_INFO" xml:space="preserve">
-    <value>{0} could not fetch an End User Agreement (EUA), but expected one. Please ensure that the selected source URI is valid and that all the pool coordinators can access its contents.</value>
-  </data>
   <data name="EULA" xml:space="preserve">
     <value>EULA</value>
   </data>
