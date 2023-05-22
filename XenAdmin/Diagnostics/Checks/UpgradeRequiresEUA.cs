@@ -31,6 +31,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 using XenAdmin.Core;
 using XenAPI;
 using XenAdmin.Diagnostics.Problems;
@@ -43,13 +44,16 @@ namespace XenAdmin.Diagnostics.Checks
         private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod()?.DeclaringType);
 
         private readonly Uri _targetUri;
+        private readonly Control _control;
         private readonly HashSet<string> _euas;
         private readonly HashSet<IXenObject> _hostsFailedToFetchEua;
-        public UpgradeRequiresEua(List<Host> hosts, IReadOnlyDictionary<string, string> installMethodConfig)
+        public UpgradeRequiresEua(Control control, List<Host> hosts, IReadOnlyDictionary<string, string> installMethodConfig)
             : base(hosts)
         {
             if (installMethodConfig == null || !installMethodConfig.TryGetValue("url", out var uriText))
                 return;
+
+            _control = control;
 
             try
             {
@@ -95,7 +99,7 @@ namespace XenAdmin.Diagnostics.Checks
             }
             lock (_euas)
             {
-                return new EuaNotAcceptedProblem( this, _euas.ToList());
+                return new EuaNotAcceptedProblem( _control, this, _euas.ToList());
             }
         }
 
