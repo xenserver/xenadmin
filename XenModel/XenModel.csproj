@@ -304,7 +304,6 @@
     <Compile Include="Actions\WLB\SendWlbConfigurationAction.cs" />
     <Compile Include="Actions\WLB\WlbRetrieveRecommendationsAction.cs" />
     <Compile Include="Alerts\PerfmonDefinition.cs" />
-    <Compile Include="Alerts\PerfmonOptionsDefinition.cs" />
     <Compile Include="InvisibleMessages.Designer.cs">
       <DependentUpon>InvisibleMessages.resx</DependentUpon>
       <AutoGen>True</AutoGen>

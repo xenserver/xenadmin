@@ -63,7 +63,6 @@ namespace XenAdmin.SettingsPanels
             resources.ApplyResources(this.EmailNotificationCheckBox, "EmailNotificationCheckBox");
             this.EmailNotificationCheckBox.Name = "EmailNotificationCheckBox";
             this.EmailNotificationCheckBox.UseVisualStyleBackColor = false;
-            this.EmailNotificationCheckBox.CheckedChanged += new System.EventHandler(this.EmailNotificationCheckBox_CheckedChanged);
             // 
             // groupBox1
             // 
@@ -81,9 +80,9 @@ namespace XenAdmin.SettingsPanels
             // 
             // MailLanguageComboBox
             // 
-            resources.ApplyResources(this.MailLanguageComboBox, "MailLanguageComboBox");
             this.MailLanguageComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.MailLanguageComboBox.FormattingEnabled = true;
+            resources.ApplyResources(this.MailLanguageComboBox, "MailLanguageComboBox");
             this.MailLanguageComboBox.Name = "MailLanguageComboBox";
             // 
             // MailLanguageLabel
