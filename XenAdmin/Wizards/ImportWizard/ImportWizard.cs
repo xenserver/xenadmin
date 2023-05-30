@@ -582,7 +582,7 @@ namespace XenAdmin.Wizards.ImportWizard
         {
             var temp = new List<Tuple>();
             temp.Add(new Tuple(Messages.FINISH_PAGE_VMNAME, m_pageXvaStorage.ImportedVm.Name()));
-            temp.Add(new Tuple(Messages.FINISH_PAGE_TARGET, m_pageXvaHost.SelectedHost == null ? m_pageXvaHost.SelectedConnection.Name : m_pageXvaHost.SelectedHost.Name()));
+            temp.Add(new Tuple(Messages.FINISH_PAGE_TARGET_FOR_VM, m_pageXvaHost.SelectedHost == null ? m_pageXvaHost.SelectedConnection.Name : m_pageXvaHost.SelectedHost.Name()));
             temp.Add(new Tuple(Messages.FINISH_PAGE_STORAGE, m_pageXvaStorage.SR.Name()));
 
             var con = m_pageXvaHost.SelectedHost == null ? m_pageXvaHost.SelectedConnection : m_pageXvaHost.SelectedHost.Connection;

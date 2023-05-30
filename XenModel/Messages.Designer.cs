@@ -10608,15 +10608,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Home Server:.
-        /// </summary>
-        public static string CPM_SUMMARY_KEY_HOME_SERVER {
-            get {
-                return ResourceManager.GetString("CPM_SUMMARY_KEY_HOME_SERVER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Template:.
         /// </summary>
         public static string CPM_SUMMARY_KEY_MIGRATE_TEMPLATE {
@@ -10667,15 +10658,6 @@ namespace XenAdmin {
         public static string CPM_SUMMARY_NETWORK_NOT_FOUND {
             get {
                 return ResourceManager.GetString("CPM_SUMMARY_NETWORK_NOT_FOUND", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unset.
-        /// </summary>
-        public static string CPM_SUMMARY_UNSET {
-            get {
-                return ResourceManager.GetString("CPM_SUMMARY_UNSET", resourceCulture);
             }
         }
         
@@ -17427,6 +17409,15 @@ namespace XenAdmin {
         public static string FINISH_PAGE_STORAGE_FOR_VM {
             get {
                 return ResourceManager.GetString("FINISH_PAGE_STORAGE_FOR_VM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Home server:.
+        /// </summary>
+        public static string FINISH_PAGE_TARGET_FOR_VM {
+            get {
+                return ResourceManager.GetString("FINISH_PAGE_TARGET_FOR_VM", resourceCulture);
             }
         }
         
