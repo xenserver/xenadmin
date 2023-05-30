@@ -20905,7 +20905,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The imported appliance requires a minimum of {0} virtual CPUs, while the number of physical CPUs in the selected server is {1}. You will not be able to start the appliance on the selected server..
+        ///   Looks up a localized string similar to The imported appliance requires a minimum of {0} vCPUs, while the number of physical CPUs in the selected server is {1}. You will not be able to start the appliance on the selected server..
         /// </summary>
         public static string IMPORT_WIZARD_CPUS_COUNT_MISMATCH_HOST {
             get {
@@ -20914,7 +20914,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The imported appliance requires a minimum of {0} virtual CPUs, while the maximum number of physical CPUs in the pool is {1}. You will not be able to start the appliance on the selected pool..
+        ///   Looks up a localized string similar to The imported appliance requires a minimum of {0} vCPUs, while the maximum number of physical CPUs in the pool is {1}. You will not be able to start the appliance on the selected pool..
         /// </summary>
         public static string IMPORT_WIZARD_CPUS_COUNT_MISMATCH_POOL {
             get {
@@ -20977,7 +20977,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The imported appliance requires a minimum of {0} {2} of memory, while the available memory on the server is {1} {2}. You will not be able to start the VM on the selected server..
+        ///   Looks up a localized string similar to The imported appliance requires a minimum of {0} of memory, while the available memory on the server is {1}. You will not be able to start the VM on the selected server..
         /// </summary>
         public static string IMPORT_WIZARD_INSUFFICIENT_MEMORY_HOST {
             get {
@@ -20986,7 +20986,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The imported appliance requires a minimum of {0} {2} of memory, while the maximum available memory on the pool is {1} {2}. You will not be able to start the VM on the selected pool..
+        ///   Looks up a localized string similar to The imported appliance requires a minimum of {0} of memory, while the maximum available memory on the pool is {1}. You will not be able to start the VM on the selected pool..
         /// </summary>
         public static string IMPORT_WIZARD_INSUFFICIENT_MEMORY_POOL {
             get {
@@ -26936,7 +26936,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Specify the number of virtual CPUs, their topology, and the amount of memory that will be allocated to the new virtual machine. .
+        ///   Looks up a localized string similar to Specify the number of vCPUs, their topology, and the amount of memory that will be allocated to the new virtual machine. .
         /// </summary>
         public static string NEWVMWIZARD_CPUMEMPAGE_RUBRIC {
             get {

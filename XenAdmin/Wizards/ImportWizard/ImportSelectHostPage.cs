@@ -50,8 +50,8 @@ namespace XenAdmin.Wizards.ImportWizard
         private List<Xen_ConfigurationSettingData_Type> vgpuSettings = new List<Xen_ConfigurationSettingData_Type>();
         private List<Xen_ConfigurationSettingData_Type> hardwarePlatformSettings = new List<Xen_ConfigurationSettingData_Type>();
         private List<Xen_ConfigurationSettingData_Type> vendorDeviceSettings = new List<Xen_ConfigurationSettingData_Type>();
-        private int? _ovfMaxVCpusCount;
-        private long? _ovfMemory;
+        private int _ovfMaxVCpusCount;
+        private long _ovfMemory;
         private readonly List<long> _ovfVCpusCount;
         public event Action<IXenConnection> ConnectionSelectionChanged;
 
@@ -121,7 +121,7 @@ namespace XenAdmin.Wizards.ImportWizard
                             int.TryParse(rasdType.VirtualQuantity.Value.ToString(), out var vCpusCount))
                         {
                             _ovfVCpusCount.Add(vCpusCount);
-                            if (_ovfMaxVCpusCount == null || _ovfMaxVCpusCount < vCpusCount)
+                            if (_ovfMaxVCpusCount < vCpusCount)
                             {
                                 _ovfMaxVCpusCount = vCpusCount;
                             }
@@ -129,10 +129,27 @@ namespace XenAdmin.Wizards.ImportWizard
                         // Memory
                         if (rasdType.ResourceType.Value == 4 && long.TryParse(rasdType.VirtualQuantity.Value.ToString(), out var memory))
                         {
-                            if (_ovfMemory == null || _ovfMemory < memory)
+                            //The default memory unit is MB (2^20), however, the RASD may contain a different
+                            //one with format byte*memoryBase^memoryPower (byte being a literal string)
+
+                            double memoryPower = 20.0;
+                            double memoryBase = 2.0;
+
+                            if (rasdType.AllocationUnits.Value.ToLower().StartsWith("byte"))
                             {
-                                _ovfMemory = memory;
+                                string[] a1 = rasdType.AllocationUnits.Value.Split('*', '^');
+                                if (a1.Length == 3)
+                                {
+                                    memoryBase = Convert.ToDouble(a1[1].Trim());
+                                    memoryPower = Convert.ToDouble(a1[2].Trim());
+                                }
                             }
+
+                            double memoryMultiplier = Math.Pow(memoryBase, memoryPower);
+                            memory *= (long)memoryMultiplier;
+
+                            if (_ovfMemory < memory)
+                                _ovfMemory = memory;
                         }
                     }
 
@@ -155,7 +172,7 @@ namespace XenAdmin.Wizards.ImportWizard
 
         protected override string TargetServerSelectionIntroText => Messages.IMPORT_WIZARD_DESTINATION_TABLE_INTRO;
 
-        protected override void OnChosenItemChanged()
+        protected override void OnSelectedTargetPoolChanged()
         {
             var warnings = new List<string>();
 
@@ -182,20 +199,32 @@ namespace XenAdmin.Wizards.ImportWizard
                 var ovfCountsAboveLimit = _ovfVCpusCount.Count(vCpusCount => vCpusCount > VM.MAX_VCPUS_FOR_NON_TRUSTED_VMS);
                 if (ovfCountsAboveLimit > 0)
                 {
-                    warnings.Add(string.Format(Messages.IMPORT_VM_CPUS_COUNT_UNTRUSTED_WARNING, ovfCountsAboveLimit, VM.MAX_VCPUS_FOR_NON_TRUSTED_VMS, BrandManager.ProductBrand));
+                    warnings.Add(string.Format(Messages.IMPORT_VM_CPUS_COUNT_UNTRUSTED_WARNING, ovfCountsAboveLimit, VM.MAX_VCPUS_FOR_NON_TRUSTED_VMS, BrandManager.BrandConsole));
                 }
             }
 
+            ApplianceCanBeStarted = true;
+
             if (!CheckDestinationHasEnoughPhysicalCpus(out var physicalCpusWarningMessage))
+            {
                 warnings.Add(physicalCpusWarningMessage);
+                ApplianceCanBeStarted = false;
+            }
 
             if (!CheckDestinationHasEnoughMemory(out var memoryWarningMessage))
+            {
                 warnings.Add(memoryWarningMessage);
-            
+                ApplianceCanBeStarted = false;
+            }
 
             ShowWarning(string.Join("\n\n", warnings));
 
             ConnectionSelectionChanged?.Invoke(SelectedTargetPool?.Connection);
+        }
+
+        protected override void OnSelectedTargetChanged()
+        {
+            OnSelectedTargetPoolChanged();
         }
 
         protected override DelayLoadingOptionComboBoxItem CreateDelayLoadingOptionComboBoxItem(IXenObject xenItem)
@@ -252,9 +281,7 @@ namespace XenAdmin.Wizards.ImportWizard
         /// a shared SR in other pages, the VM could still start. The check considers both vCPU count and memory requirements
         /// of the appliance.
         /// </summary>
-        public bool ApplianceCanBeStarted => (_ovfMaxVCpusCount == null && _ovfMemory == null) ||
-                                             (GetPhysicalCpus(SelectedTarget ?? SelectedTargetPool) < 0 && GetFreeMemory(SelectedTarget ?? SelectedTargetPool) < 0) ||
-                                             (GetPhysicalCpus(SelectedTarget ?? SelectedTargetPool) >= _ovfMaxVCpusCount && GetFreeMemory(SelectedTarget ?? SelectedTargetPool) >= _ovfMemory);
+        public bool ApplianceCanBeStarted { get; private set; } = true;
 
         private bool CheckDestinationHasEnoughPhysicalCpus(out string warningMessage)
         {
@@ -283,20 +310,18 @@ namespace XenAdmin.Wizards.ImportWizard
             var selectedTarget = SelectedTarget ?? SelectedTargetPool;
             var memory = GetFreeMemory(selectedTarget);
 
-            if (memory < 0 || memory >= _ovfMemory)
+            if (memory >= _ovfMemory)
                 return true;
 
             if (selectedTarget is Pool)
-                warningMessage = string.Format(Messages.IMPORT_WIZARD_INSUFFICIENT_MEMORY_POOL, _ovfMemory / Util.BINARY_MEGA, memory / Util.BINARY_MEGA, Messages.VAL_MEGB);
+                warningMessage = string.Format(Messages.IMPORT_WIZARD_INSUFFICIENT_MEMORY_POOL, Util.MemorySizeStringSuitableUnits(_ovfMemory, true), Util.MemorySizeStringSuitableUnits(memory, true));
             else if (selectedTarget is Host)
-                warningMessage = string.Format(Messages.IMPORT_WIZARD_INSUFFICIENT_MEMORY_HOST, _ovfMemory / Util.BINARY_MEGA, memory / Util.BINARY_MEGA, Messages.VAL_MEGB);
+                warningMessage = string.Format(Messages.IMPORT_WIZARD_INSUFFICIENT_MEMORY_HOST, Util.MemorySizeStringSuitableUnits(_ovfMemory, true), Util.MemorySizeStringSuitableUnits(memory, true));
             else
                 return true;
 
             return false;
         }
-
-
 
         /// <summary>
         /// Returns the number of physical CPUs on the specified <paramref name="xenObject"/> (<see cref="Host"/> or <see cref="Pool"/>) or -1 if the value cannot be determined.

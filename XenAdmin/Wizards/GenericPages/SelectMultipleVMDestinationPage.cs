@@ -49,7 +49,6 @@ namespace XenAdmin.Wizards.GenericPages
     internal abstract partial class SelectMultipleVMDestinationPage : XenTabPage
     {
         private Dictionary<string, VmMapping> m_vmMappings;
-        public IXenObject SelectedTarget { get; set; }
         private bool updatingDestinationCombobox;
         private bool restoreGridHomeServerSelection;
         private bool updatingHomeServerList;
@@ -58,6 +57,7 @@ namespace XenAdmin.Wizards.GenericPages
         private readonly CollectionChangeEventHandler Host_CollectionChangedWithInvoke;
         private string _preferredHomeRef;
         private IXenObject _selectedTargetPool;
+        private IXenObject _selectedTarget;
 
         #region Nested classes
 
@@ -121,8 +121,24 @@ namespace XenAdmin.Wizards.GenericPages
             get => _selectedTargetPool;
             private set
             {
+                var oldTargetPool = _selectedTargetPool;
                 _selectedTargetPool = value;
-                OnChosenItemChanged();
+
+                if (oldTargetPool?.opaque_ref != _selectedTargetPool?.opaque_ref)
+                    OnSelectedTargetPoolChanged();
+            }
+        }
+
+        public IXenObject SelectedTarget
+        {
+            get => _selectedTarget;
+            set
+            {
+                var oldTarget = _selectedTarget;
+                _selectedTarget = value;
+
+                if (oldTarget?.opaque_ref != SelectedTarget?.opaque_ref)
+                    OnSelectedTargetChanged();
             }
         }
 
@@ -143,8 +159,13 @@ namespace XenAdmin.Wizards.GenericPages
         /// </summary>
         protected abstract string TargetServerSelectionIntroText { get; }
 
-        protected virtual void OnChosenItemChanged()
+        protected virtual void OnSelectedTargetPoolChanged()
         { }
+
+        protected virtual void OnSelectedTargetChanged()
+        {
+
+        }
 
         protected void ShowWarning(string warningText)
         {

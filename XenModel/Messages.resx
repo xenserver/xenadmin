@@ -7295,10 +7295,10 @@ This might result in failure to migrate VMs to this server during the RPU or to 
     <value>Place &amp;all imported virtual disks on this target SR:</value>
   </data>
   <data name="IMPORT_WIZARD_CPUS_COUNT_MISMATCH_HOST" xml:space="preserve">
-    <value>The imported appliance requires a minimum of {0} virtual CPUs, while the number of physical CPUs in the selected server is {1}. You will not be able to start the appliance on the selected server.</value>
+    <value>The imported appliance requires a minimum of {0} vCPUs, while the number of physical CPUs in the selected server is {1}. You will not be able to start the appliance on the selected server.</value>
   </data>
   <data name="IMPORT_WIZARD_CPUS_COUNT_MISMATCH_POOL" xml:space="preserve">
-    <value>The imported appliance requires a minimum of {0} virtual CPUs, while the maximum number of physical CPUs in the pool is {1}. You will not be able to start the appliance on the selected pool.</value>
+    <value>The imported appliance requires a minimum of {0} vCPUs, while the maximum number of physical CPUs in the pool is {1}. You will not be able to start the appliance on the selected pool.</value>
   </data>
   <data name="IMPORT_WIZARD_DESTINATION_DESTINATION" xml:space="preserve">
     <value>&amp;Import to:</value>
@@ -7319,10 +7319,10 @@ This might result in failure to migrate VMs to this server during the RPU or to 
     <value>Failed to uncompress file {0}. Please see the logs for more information.</value>
   </data>
   <data name="IMPORT_WIZARD_INSUFFICIENT_MEMORY_HOST" xml:space="preserve">
-    <value>The imported appliance requires a minimum of {0} {2} of memory, while the available memory on the server is {1} {2}. You will not be able to start the VM on the selected server.</value>
+    <value>The imported appliance requires a minimum of {0} of memory, while the available memory on the server is {1}. You will not be able to start the VM on the selected server.</value>
   </data>
   <data name="IMPORT_WIZARD_INSUFFICIENT_MEMORY_POOL" xml:space="preserve">
-    <value>The imported appliance requires a minimum of {0} {2} of memory, while the maximum available memory on the pool is {1} {2}. You will not be able to start the VM on the selected pool.</value>
+    <value>The imported appliance requires a minimum of {0} of memory, while the maximum available memory on the pool is {1}. You will not be able to start the VM on the selected pool.</value>
   </data>
   <data name="IMPORT_WIZARD_NETWORKING_INTRO" xml:space="preserve">
     <value>Map the virtual network interfaces in the VMs you are importing to networks in the destination pool or standalone server.</value>
@@ -9384,7 +9384,7 @@ When you configure an NFS storage repository, you simply provide the host name o
     <value>CPU &amp;&amp; Memory</value>
   </data>
   <data name="NEWVMWIZARD_CPUMEMPAGE_RUBRIC" xml:space="preserve">
-    <value>Specify the number of virtual CPUs, their topology, and the amount of memory that will be allocated to the new virtual machine. </value>
+    <value>Specify the number of vCPUs, their topology, and the amount of memory that will be allocated to the new virtual machine. </value>
   </data>
   <data name="NEWVMWIZARD_CPUMEMPAGE_TITLE" xml:space="preserve">
     <value>Allocate processor and memory resources</value>
