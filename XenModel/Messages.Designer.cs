@@ -11109,24 +11109,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to CPU and Memory.
-        /// </summary>
-        public static string CPU_AND_MEMORY {
-            get {
-                return ResourceManager.GetString("CPU_AND_MEMORY", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} vCPU(s) &amp; {1} MB RAM.
-        /// </summary>
-        public static string CPU_AND_MEMORY_SUB {
-            get {
-                return ResourceManager.GetString("CPU_AND_MEMORY_SUB", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to {0} vCPU(s).
         /// </summary>
         public static string CPU_SUB {

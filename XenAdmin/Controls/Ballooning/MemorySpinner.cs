@@ -47,20 +47,12 @@ namespace XenAdmin.Controls.Ballooning
             previousUnitsValue = Messages.VAL_GIGB;
         }
 
-        public void Initialize(double amount, double static_max, string units = null)
+        public void Initialize(double amount, double static_max)
         {
             amount = Util.CorrectRoundingErrors(amount);
 
+            Units = static_max <= Util.BINARY_GIGA ? Messages.VAL_MEGB : Messages.VAL_GIGB;
 
-            if (units != Messages.VAL_MEGB && units != Messages.VAL_GIGB)
-            {
-                Units = Units = static_max <= Util.BINARY_GIGA ? Messages.VAL_MEGB : Messages.VAL_GIGB;
-            }
-            else
-            {
-                Units = units;
-            }
-            
             ChangeSpinnerSettings();
             previousUnitsValue = Units;
             Initialize(amount, RoundingBehaviour.None);

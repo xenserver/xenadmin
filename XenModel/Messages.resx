@@ -3971,12 +3971,6 @@ For optimal performance and reliability during VM migration, ensure that the net
   <data name="CPU" xml:space="preserve">
     <value>CPU</value>
   </data>
-  <data name="CPU_AND_MEMORY" xml:space="preserve">
-    <value>CPU and Memory</value>
-  </data>
-  <data name="CPU_AND_MEMORY_SUB" xml:space="preserve">
-    <value>{0} vCPU(s) &amp; {1} MB RAM</value>
-  </data>
   <data name="CPU_SUB" xml:space="preserve">
     <value>{0} vCPU(s)</value>
   </data>
