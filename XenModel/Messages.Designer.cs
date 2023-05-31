@@ -26909,20 +26909,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The amount of memory allocated to the new VM is greater than the amount of physical memory on any server in the pool ({0})..
+        ///   Looks up a localized string similar to The amount of memory allocated to the new VM is greater than the amount of physical memory available on any server in the pool ({0})..
         /// </summary>
-        public static string NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN1 {
+        public static string NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN_FREE {
             get {
-                return ResourceManager.GetString("NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN1", resourceCulture);
+                return ResourceManager.GetString("NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN_FREE", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The amount of memory allocated to the new VM is greater than the amount of physical memory available on any server in the pool ({0})..
+        ///   Looks up a localized string similar to The amount of memory allocated to the new VM is greater than the amount of physical memory on any server in the pool ({0})..
         /// </summary>
-        public static string NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN2 {
+        public static string NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN_TOTAL {
             get {
-                return ResourceManager.GetString("NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN2", resourceCulture);
+                return ResourceManager.GetString("NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN_TOTAL", resourceCulture);
             }
         }
         
@@ -26981,7 +26981,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You have specified {0} vCPUs, but the server you have selected only has {1} physical CPUs. You will not be able to start the VM..
+        ///   Looks up a localized string similar to You have specified {0} vCPUs, but the server has only {1} physical CPUs. You will not be able to start the VM..
         /// </summary>
         public static string NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN_STANDALONE_HOST {
             get {

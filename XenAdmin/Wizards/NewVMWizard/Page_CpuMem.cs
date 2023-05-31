@@ -89,9 +89,18 @@ namespace XenAdmin.Wizards.NewVMWizard
             _memoryMode == MemoryMode.MinimumAndMaximum ? spinnerDynMax.Value :
             spinnerStatMax.Value;
 
-        public long SelectedVCpusMax => (long)comboBoxVCPUs.SelectedItem;
+        public long SelectedVCpusMax => comboBoxVCPUs.SelectedItem == null ? -1 : (long)comboBoxVCPUs.SelectedItem;
 
-        public long SelectedVCpusAtStartup => _isVCpuHotplugSupported ? (long)comboBoxInitialVCPUs.SelectedItem : (long)comboBoxVCPUs.SelectedItem;
+        public long SelectedVCpusAtStartup
+        {
+            get
+            {
+                if (_isVCpuHotplugSupported)
+                    return comboBoxInitialVCPUs.SelectedItem == null ? -1 : (long)comboBoxInitialVCPUs.SelectedItem;
+                
+                return comboBoxVCPUs.SelectedItem == null ? -1 : (long)comboBoxVCPUs.SelectedItem;
+            }
+        }
 
         public long SelectedCoresPerSocket => comboBoxTopology.CoresPerSocket;
 
@@ -140,10 +149,11 @@ namespace XenAdmin.Wizards.NewVMWizard
             label5.Text = GetRubric();
 
             InitialiseVCpuControls();
-
             SetSpinnerLimitsAndIncrement();
-
-            ValuesUpdated();
+            ValidateMemorySettings();
+            ValidateVcpuSettings();
+            ValidateInitialVcpuSettings();
+            OnPageUpdated();
 
             _initializing = false;
         }
@@ -290,37 +300,16 @@ namespace XenAdmin.Wizards.NewVMWizard
             }
         }
 
-        private void ValuesUpdated()
-        {
-            CheckForError();
-            OnPageUpdated();
-        }
-
-        private void CheckForError()
+        private void ValidateMemorySettings()
         {
             Host maxMemTotalHost = null;
             Host maxMemFreeHost = null;
-            Host maxVcpusHost = null;
-            _maxVCpus = 0;
             _maxMemTotal = 0;
             _maxMemFree = 0;
+            
             foreach (var host in Connection.Cache.Hosts)
             {
-                long hostCpus = 0;
-
-                foreach (var cpu in Connection.Cache.Host_cpus)
-                {
-                    if (cpu.host.opaque_ref.Equals(host.opaque_ref))
-                        hostCpus++;
-                }
-
                 var metrics = Connection.Resolve(host.metrics);
-
-                if (hostCpus > _maxVCpus)
-                {
-                    _maxVCpus = hostCpus;
-                    maxVcpusHost = host;
-                }
 
                 if (metrics != null && metrics.memory_total > _maxMemTotal)
                 {
@@ -343,46 +332,104 @@ namespace XenAdmin.Wizards.NewVMWizard
 
             if (maxMemTotalHost != null && SelectedMemoryDynamicMin > _maxMemTotal)
             {
-                ShowMemoryWarning(string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN1, Util.MemorySizeStringSuitableUnits(_maxMemTotal, false)));
+                ShowMemoryWarning(string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN_TOTAL, Util.MemorySizeStringSuitableUnits(_maxMemTotal, false)));
             }
             else if (maxMemFreeHost != null && SelectedMemoryDynamicMin > _maxMemFree)
             {
-                ShowMemoryWarning(string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN2, Util.MemorySizeStringSuitableUnits(_maxMemFree, false)));
+                ShowMemoryWarning(string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN_FREE, Util.MemorySizeStringSuitableUnits(_maxMemFree, false)));
             }
             else
             {
                 ShowMemoryWarning();
             }
-            
+        }
+
+        private void ValidateVcpuSettings()
+        {
+            Host maxVcpusHost = null;
+            _maxVCpus = 0;
+
+            var warnings = new List<string>();
+
+            foreach (var host in Connection.Cache.Hosts)
+            {
+                long hostCpus = 0;
+
+                foreach (var cpu in Connection.Cache.Host_cpus)
+                {
+                    if (cpu.host.opaque_ref.Equals(host.opaque_ref))
+                        hostCpus++;
+                }
+
+                if (hostCpus > _maxVCpus)
+                {
+                    _maxVCpus = hostCpus;
+                    maxVcpusHost = host;
+                }
+            }
+
             if (maxVcpusHost != null && SelectedVCpusMax > _maxVCpus)
             {
                 var isStandAloneHost = Helpers.GetPool(maxVcpusHost.Connection) == null;
                 if (isStandAloneHost)
                 {
-                    ShowCpuWarning(string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN_STANDALONE_HOST, SelectedVCpusMax, _maxVCpus));
+                    warnings.Add(string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN_STANDALONE_HOST, SelectedVCpusMax, _maxVCpus));
                 }
                 else
                 {
-                    ShowCpuWarning(string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN_POOL, SelectedVCpusMax, _maxVCpus));
+                    warnings.Add(string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN_POOL, SelectedVCpusMax, _maxVCpus));
                 }
-                
             }
-            else if (SelectedVCpusMax > VM.MAX_VCPUS_FOR_NON_TRUSTED_VMS)
+            
+            if (SelectedVCpusMax > VM.MAX_VCPUS_FOR_NON_TRUSTED_VMS)
             {
-                ShowCpuWarning(string.Format(Messages.VCPUS_UNTRUSTED_VM_WARNING, VM.MAX_VCPUS_FOR_NON_TRUSTED_VMS, BrandManager.ProductBrand));
+                warnings.Add(string.Format(Messages.VCPUS_UNTRUSTED_VM_WARNING, VM.MAX_VCPUS_FOR_NON_TRUSTED_VMS, BrandManager.BrandConsole));
+            }
+
+            ShowCpuWarning(string.Join("\n\n", warnings));
+
+            if (SelectedVCpusMax < _minVCpus)
+            {
+                vCPUWarningLabel.Text = string.Format(Messages.VM_CPUMEMPAGE_VCPU_MIN_WARNING, _minVCpus);
+                vCPUWarningLabel.Visible = true;
             }
             else
             {
-                ShowCpuWarning();
+                vCPUWarningLabel.Visible = false;
             }
+        }
+
+        private void ValidateInitialVcpuSettings()
+        {
+            if (SelectedVCpusAtStartup < _minVCpus)
+            {
+                initialVCPUWarningLabel.Text = string.Format(Messages.VM_CPUMEMPAGE_VCPU_MIN_WARNING, _minVCpus);
+                initialVCPUWarningLabel.Visible = true;
+            }
+            else
+            {
+                initialVCPUWarningLabel.Visible = false;
+            }
+        }
+
+        private void ValidateTopologySettings()
+        {
+            if (comboBoxVCPUs.SelectedItem != null)
+                ShowTopologyWarning(VM.ValidVCPUConfiguration((long)comboBoxVCPUs.SelectedItem, comboBoxTopology.CoresPerSocket));
         }
 
         private void ShowMemoryWarning(string text = null)
         {
             var show = !string.IsNullOrEmpty(text);
-
             memoryWarningLabel.Text = show ? text : null;
             memoryPictureBox.Visible = memoryWarningLabel.Visible = show;
+        }
+
+        private void ShowTopologyWarning(string text = null)
+        {
+            var show = !string.IsNullOrEmpty(text);
+            labelTopologyWarning.Text = show ? text : null;
+            pictureBoxTopology.Visible = labelTopologyWarning.Visible = show;
         }
 
         private void ShowCpuWarning(string text = null)
@@ -405,12 +452,14 @@ namespace XenAdmin.Wizards.NewVMWizard
             return Util.MemorySizeStringSuitableUnits(numberOfBytes, true);
         }
 
+        #region Control event handlers
+
         private void vCPU_ValueChanged(object sender, EventArgs e)
         {
             comboBoxTopology.Update((long)comboBoxVCPUs.SelectedItem);
-            ValuesUpdated();
-            ValidateVCpuSettings();
+            ValidateVcpuSettings();
             RefreshCurrentVCpus();
+            OnPageUpdated();
         }
 
         private void memory_ValueChanged(object sender, EventArgs e)
@@ -419,36 +468,8 @@ namespace XenAdmin.Wizards.NewVMWizard
                 return;
 
             SetSpinnerLimitsAndIncrement();
-            ValuesUpdated();
-        }
-
-        private void ValidateVCpuSettings()
-        {
-            if (comboBoxVCPUs.SelectedItem != null && SelectedVCpusMax < _minVCpus)
-            {
-                vCPUWarningLabel.Text = string.Format(Messages.VM_CPUMEMPAGE_VCPU_MIN_WARNING, _minVCpus);
-                vCPUWarningLabel.Visible = true;
-            }
-            else
-            {
-                vCPUWarningLabel.Visible = false;
-            }
-
-            if (comboBoxInitialVCPUs.SelectedItem != null && SelectedVCpusAtStartup < _minVCpus)
-            {
-                initialVCPUWarningLabel.Text = string.Format(Messages.VM_CPUMEMPAGE_VCPU_MIN_WARNING, _minVCpus);
-                initialVCPUWarningLabel.Visible = true;
-            }
-            else
-            {
-                initialVCPUWarningLabel.Visible = false;
-            }
-        }
-
-        private void ValidateTopologySettings()
-        {
-            if (comboBoxVCPUs.SelectedItem != null)
-                labelInvalidVCPUWarning.Text = VM.ValidVCPUConfiguration((long)comboBoxVCPUs.SelectedItem, comboBoxTopology.CoresPerSocket);
+            ValidateMemorySettings();
+            OnPageUpdated();
         }
 
         private void RefreshCurrentVCpus()
@@ -479,7 +500,9 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         private void comboBoxInitialVCPUs_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ValidateVCpuSettings();
+           ValidateInitialVcpuSettings();
         }
+
+        #endregion
     }
 }

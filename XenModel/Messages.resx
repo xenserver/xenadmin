@@ -9374,11 +9374,11 @@ When you configure an NFS storage repository, you simply provide the host name o
   <data name="NEWVMWIZARD_CPUMEMPAGE_MEMORYINFO" xml:space="preserve">
     <value>(min = {0}, max = {1})</value>
   </data>
-  <data name="NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN1" xml:space="preserve">
-    <value>The amount of memory allocated to the new VM is greater than the amount of physical memory on any server in the pool ({0}).</value>
-  </data>
-  <data name="NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN2" xml:space="preserve">
+  <data name="NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN_FREE" xml:space="preserve">
     <value>The amount of memory allocated to the new VM is greater than the amount of physical memory available on any server in the pool ({0}).</value>
+  </data>
+  <data name="NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN_TOTAL" xml:space="preserve">
+    <value>The amount of memory allocated to the new VM is greater than the amount of physical memory on any server in the pool ({0}).</value>
   </data>
   <data name="NEWVMWIZARD_CPUMEMPAGE_NAME" xml:space="preserve">
     <value>CPU &amp;&amp; Memory</value>
@@ -9399,7 +9399,7 @@ When you configure an NFS storage repository, you simply provide the host name o
     <value>You have specified {0} vCPUs, but none of the pool servers have more than {1} physical CPUs. You will not be able to start the VM.</value>
   </data>
   <data name="NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN_STANDALONE_HOST" xml:space="preserve">
-    <value>You have specified {0} vCPUs, but the server you have selected only has {1} physical CPUs. You will not be able to start the VM.</value>
+    <value>You have specified {0} vCPUs, but the server has only {1} physical CPUs. You will not be able to start the VM.</value>
   </data>
   <data name="NEWVMWIZARD_FINISHPAGE" xml:space="preserve">
     <value>All the necessary information has been collected and the wizard is ready to provision the new virtual machine using the settings shown below.

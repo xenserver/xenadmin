@@ -48,26 +48,30 @@ namespace XenAdmin.Wizards.NewVMWizard
             this.spinnerStatMax = new XenAdmin.Controls.Ballooning.MemorySpinner();
             this.label5 = new System.Windows.Forms.Label();
             this.comboBoxTopology = new XenAdmin.Controls.CPUTopologyComboBox();
-            this.labelInvalidVCPUWarning = new System.Windows.Forms.Label();
             this.labelInitialVCPUs = new System.Windows.Forms.Label();
             this.comboBoxInitialVCPUs = new System.Windows.Forms.ComboBox();
             this.initialVCPUWarningLabel = new System.Windows.Forms.Label();
             this.vCPUWarningLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.pictureBoxTopology = new System.Windows.Forms.PictureBox();
+            this.labelTopologyWarning = new System.Windows.Forms.Label();
             this.warningsTableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cpuWarningPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.memoryPictureBox)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTopology)).BeginInit();
             this.SuspendLayout();
             // 
             // warningsTableLayoutPanel
             // 
             resources.ApplyResources(this.warningsTableLayoutPanel, "warningsTableLayoutPanel");
             this.tableLayoutPanel1.SetColumnSpan(this.warningsTableLayoutPanel, 4);
+            this.warningsTableLayoutPanel.Controls.Add(this.pictureBoxTopology, 0, 2);
             this.warningsTableLayoutPanel.Controls.Add(this.cpuWarningPictureBox, 0, 0);
             this.warningsTableLayoutPanel.Controls.Add(this.cpuWarningLabel, 1, 0);
-            this.warningsTableLayoutPanel.Controls.Add(this.memoryWarningLabel, 1, 1);
-            this.warningsTableLayoutPanel.Controls.Add(this.memoryPictureBox, 0, 1);
+            this.warningsTableLayoutPanel.Controls.Add(this.memoryWarningLabel, 1, 4);
+            this.warningsTableLayoutPanel.Controls.Add(this.memoryPictureBox, 0, 4);
+            this.warningsTableLayoutPanel.Controls.Add(this.labelTopologyWarning, 1, 2);
             this.warningsTableLayoutPanel.Name = "warningsTableLayoutPanel";
             // 
             // cpuWarningPictureBox
@@ -181,13 +185,6 @@ namespace XenAdmin.Wizards.NewVMWizard
             this.comboBoxTopology.Name = "comboBoxTopology";
             this.comboBoxTopology.SelectedIndexChanged += new System.EventHandler(this.comboBoxTopology_SelectedIndexChanged);
             // 
-            // labelInvalidVCPUWarning
-            // 
-            resources.ApplyResources(this.labelInvalidVCPUWarning, "labelInvalidVCPUWarning");
-            this.tableLayoutPanel1.SetColumnSpan(this.labelInvalidVCPUWarning, 3);
-            this.labelInvalidVCPUWarning.ForeColor = System.Drawing.Color.Red;
-            this.labelInvalidVCPUWarning.Name = "labelInvalidVCPUWarning";
-            // 
             // labelInitialVCPUs
             // 
             resources.ApplyResources(this.labelInitialVCPUs, "labelInitialVCPUs");
@@ -219,26 +216,37 @@ namespace XenAdmin.Wizards.NewVMWizard
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
             this.tableLayoutPanel1.Controls.Add(this.vCPUWarningLabel, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.initialVCPUWarningLabel, 2, 4);
-            this.tableLayoutPanel1.Controls.Add(this.comboBoxInitialVCPUs, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.labelInitialVCPUs, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.labelInvalidVCPUWarning, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.initialVCPUWarningLabel, 2, 3);
+            this.tableLayoutPanel1.Controls.Add(this.comboBoxInitialVCPUs, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.labelInitialVCPUs, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.comboBoxTopology, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.label5, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.spinnerStatMax, 1, 8);
+            this.tableLayoutPanel1.Controls.Add(this.spinnerStatMax, 1, 7);
             this.tableLayoutPanel1.Controls.Add(this.labelVCPUs, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.spinnerDynMax, 1, 7);
+            this.tableLayoutPanel1.Controls.Add(this.spinnerDynMax, 1, 6);
             this.tableLayoutPanel1.Controls.Add(this.labelTopology, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.comboBoxVCPUs, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.spinnerDynMin, 1, 6);
-            this.tableLayoutPanel1.Controls.Add(this.labelDynMin, 0, 6);
-            this.tableLayoutPanel1.Controls.Add(this.labelDynMax, 0, 7);
-            this.tableLayoutPanel1.Controls.Add(this.labelStatMax, 0, 8);
-            this.tableLayoutPanel1.Controls.Add(this.labelDynMinInfo, 3, 6);
-            this.tableLayoutPanel1.Controls.Add(this.labelDynMaxInfo, 3, 7);
-            this.tableLayoutPanel1.Controls.Add(this.labelStatMaxInfo, 3, 8);
-            this.tableLayoutPanel1.Controls.Add(this.warningsTableLayoutPanel, 0, 9);
+            this.tableLayoutPanel1.Controls.Add(this.spinnerDynMin, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.labelDynMin, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.labelDynMax, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.labelStatMax, 0, 7);
+            this.tableLayoutPanel1.Controls.Add(this.labelDynMinInfo, 3, 5);
+            this.tableLayoutPanel1.Controls.Add(this.labelDynMaxInfo, 3, 6);
+            this.tableLayoutPanel1.Controls.Add(this.labelStatMaxInfo, 3, 7);
+            this.tableLayoutPanel1.Controls.Add(this.warningsTableLayoutPanel, 0, 8);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
+            // pictureBoxTopology
+            // 
+            this.pictureBoxTopology.Image = global::XenAdmin.Properties.Resources._000_Alert2_h32bit_16;
+            resources.ApplyResources(this.pictureBoxTopology, "pictureBoxTopology");
+            this.pictureBoxTopology.Name = "pictureBoxTopology";
+            this.pictureBoxTopology.TabStop = false;
+            // 
+            // labelTopologyWarning
+            // 
+            resources.ApplyResources(this.labelTopologyWarning, "labelTopologyWarning");
+            this.labelTopologyWarning.Name = "labelTopologyWarning";
             // 
             // Page_CpuMem
             // 
@@ -252,6 +260,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             ((System.ComponentModel.ISupportInitialize)(this.memoryPictureBox)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTopology)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -264,7 +273,6 @@ namespace XenAdmin.Wizards.NewVMWizard
         private System.Windows.Forms.Label initialVCPUWarningLabel;
         private System.Windows.Forms.ComboBox comboBoxInitialVCPUs;
         private System.Windows.Forms.Label labelInitialVCPUs;
-        private System.Windows.Forms.Label labelInvalidVCPUWarning;
         private Controls.CPUTopologyComboBox comboBoxTopology;
         private System.Windows.Forms.Label label5;
         private Controls.Ballooning.MemorySpinner spinnerStatMax;
@@ -283,5 +291,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         private System.Windows.Forms.Label cpuWarningLabel;
         private System.Windows.Forms.Label memoryWarningLabel;
         private System.Windows.Forms.PictureBox memoryPictureBox;
+        private System.Windows.Forms.PictureBox pictureBoxTopology;
+        private System.Windows.Forms.Label labelTopologyWarning;
     }
 }
