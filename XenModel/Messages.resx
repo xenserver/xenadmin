@@ -9395,11 +9395,6 @@ When you configure an NFS storage repository, you simply provide the host name o
   <data name="NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN_STANDALONE_HOST" xml:space="preserve">
     <value>You have specified {0} vCPUs, but the server has only {1} physical CPUs. You will not be able to start the VM.</value>
   </data>
-  <data name="NEWVMWIZARD_FINISHPAGE" xml:space="preserve">
-    <value>All the necessary information has been collected and the wizard is ready to provision the new virtual machine using the settings shown below.
-
-Review these settings, then click Previous if you need to change anything. Otherwise, click Create Now to create the new VM. It may take several minutes to create the new VM.</value>
-  </data>
   <data name="NEWVMWIZARD_FINISHPAGE_CREATE" xml:space="preserve">
     <value>&amp;Create Now</value>
   </data>

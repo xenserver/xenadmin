@@ -26972,17 +26972,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All the necessary information has been collected and the wizard is ready to provision the new virtual machine using the settings shown below.
-        ///
-        ///Review these settings, then click Previous if you need to change anything. Otherwise, click Create Now to create the new VM. It may take several minutes to create the new VM..
-        /// </summary>
-        public static string NEWVMWIZARD_FINISHPAGE {
-            get {
-                return ResourceManager.GetString("NEWVMWIZARD_FINISHPAGE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to &amp;Create Now.
         /// </summary>
         public static string NEWVMWIZARD_FINISHPAGE_CREATE {

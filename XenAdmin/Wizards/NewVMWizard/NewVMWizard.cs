@@ -62,7 +62,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         private readonly Page_CloudConfigParameters page_CloudConfigParameters;
 
         private Host m_affinity;
-        private bool BlockAffinitySelection = false;
+        private bool BlockAffinitySelection;
         private bool gpuCapability;
 
         public AsyncAction Action;
@@ -185,13 +185,14 @@ namespace XenAdmin.Wizards.NewVMWizard
             base.FinishWizard();
         }
 
-        protected override void OnKeyPress(System.Windows.Forms.KeyPressEventArgs e)
+        protected override void OnKeyPress(KeyPressEventArgs e)
         {
             if (page_CloudConfigParameters != null && page_CloudConfigParameters.ActiveControl is TextBox && e.KeyChar == (char)Keys.Enter)
                 return;
 
             base.OnKeyPress(e);
         }
+
         protected override void UpdateWizardContent(XenTabPage senderPage)
         {
             var prevPageType = senderPage.GetType();
@@ -286,13 +287,29 @@ namespace XenAdmin.Wizards.NewVMWizard
             }
             else if (prevPageType == typeof(Page_CpuMem))
             {
-                page_8_Finish.CanStartImmediately = page_5_CpuMem.CanStartVm;
+                page_8_Finish.CanStartImmediately = CanStartVm();
             }
         }
 
         protected override string WizardPaneHelpID()
         {
             return CurrentStepTabPage is RBACWarningPage ? FormatHelpId("Rbac") : base.WizardPaneHelpID();
+        }
+
+        private bool CanStartVm()
+        {
+            var homeHost = page_6_Storage.FullCopySR?.Home();
+
+            if (homeHost != null)
+            {
+                if (homeHost.CpuCount() < page_5_CpuMem.SelectedVCpusMax)
+                    return false;
+
+                if (homeHost.memory_available_calc() < page_5_CpuMem.SelectedMemoryDynamicMin)
+                    return false;
+            }
+
+            return page_5_CpuMem.CanStartVm;
         }
 
         private void ShowXenAppXenDesktopWarning(IXenConnection connection)

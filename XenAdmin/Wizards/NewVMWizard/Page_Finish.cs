@@ -40,7 +40,6 @@ namespace XenAdmin.Wizards.NewVMWizard
         public Page_Finish()
         {
             InitializeComponent();
-            richTextBox1.Text = Messages.NEWVMWIZARD_FINISHPAGE;
         }
 
         public override string Text => Messages.NEWVMWIZARD_FINISHPAGE_NAME;
