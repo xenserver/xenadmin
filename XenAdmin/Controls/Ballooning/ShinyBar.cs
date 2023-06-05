@@ -222,6 +222,12 @@ namespace XenAdmin.Controls.Ballooning
 
         protected void DrawGrid(Graphics g, Rectangle barArea, double bytesPerPixel, double max)
         {
+            // prevent max overflows from creating an infinite loop
+            if (max <= 0)
+            {
+                return;
+            }
+
             const int min_gap = 40;  // min gap between consecutive labels (which are on alternate ticks)
             const int line_height = 12;
 
@@ -244,7 +250,7 @@ namespace XenAdmin.Controls.Ballooning
             using (Pen pen = new Pen(Grid))
             {
                 bool withLabel = true;
-                for (long x = 0; x <= max; x += incr)
+                for (double x = 0; x <= max; x += incr)
                 {
                     // Tick
                     int pos = barArea.Left + (int)((double)x / bytesPerPixel);
@@ -276,7 +282,7 @@ namespace XenAdmin.Controls.Ballooning
         /// <param name="label"></param>
         /// <param name="x"></param>
         /// <returns></returns>
-        private static bool LabelShouldBeShown(double max, string label, long x)
+        private static bool LabelShouldBeShown(double max, string label, double x)
         {
             return max <= Util.BINARY_GIGA  || (x % (0.5 * Util.BINARY_GIGA)) == 0;
         }
