@@ -41,10 +41,10 @@ namespace XenAdmin.Diagnostics.Hotfixing
             Stockholm
         }
 
-        private static readonly Hotfix stockholmHotfix = new SingleHotfix
+        private static readonly Hotfix StockholmHotfix = new SingleHotfix
         {
             Filename = "RPU005",
-            UUID = "f9f63a51-509f-46fc-8c99-820fcac2228c"
+            UUID = "38a7eeeb-31ec-4de3-934f-13929ad3e339"
         };
 
         public static Hotfix Hotfix(Host host)
@@ -57,7 +57,7 @@ namespace XenAdmin.Diagnostics.Hotfixing
         public static Hotfix Hotfix(HotfixableServerVersion version)
         {
             if (version == HotfixableServerVersion.Stockholm)
-                return stockholmHotfix;
+                return StockholmHotfix;
 
             throw new ArgumentException("A version was provided for which there is no hotfix filename");
         }
