@@ -36,6 +36,8 @@ using XenAdmin.Core;
 using XenAPI;
 using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Diagnostics.Problems.UtilityProblem;
+using XenAdmin.Diagnostics.Hotfixing;
+using XenAdmin.Diagnostics.Problems.HostProblem;
 
 namespace XenAdmin.Diagnostics.Checks
 {
@@ -90,6 +92,13 @@ namespace XenAdmin.Diagnostics.Checks
         }
         protected override Problem RunCheck()
         {
+            foreach (var host in Hosts)
+            {
+                var hotfix = HotfixFactory.Hotfix(host);
+                if (hotfix != null && hotfix.ShouldBeAppliedTo(host))
+                    return new HostDoesNotHaveHotfixWarning(this, host);
+            }
+
             Hosts.AsParallel().ForAll(FetchHostEua);
             lock (_hostsFailedToFetchEua)
             {
@@ -100,7 +109,7 @@ namespace XenAdmin.Diagnostics.Checks
             }
             lock (_euas)
             {
-                return new EuaNotAcceptedProblem( _control, this, _euas.ToList());
+                return new EuaNotAcceptedProblem( _control, this, _euas.Where(eua => eua != null).ToList());
             }
         }
 
