@@ -132,6 +132,8 @@
     <Compile Include="Actions\Updates\ConfigCdnSyncAction.cs" />
     <Compile Include="Actions\Updates\DownloadUnzipUpdateAction.cs" />
     <Compile Include="Actions\Updates\DownloadAndUpdateClientAction.cs" />
+    <Compile Include="Actions\Updates\DownloadFileAction.cs" />
+    <Compile Include="Actions\Updates\DownloadSourceAction.cs" />
     <Compile Include="Actions\Updates\DownloadUpdatesXmlAction.cs" />
     <Compile Include="Actions\Updates\ClientVersion.cs" />
     <Compile Include="Actions\Updates\CheckForCdnUpdatesAction.cs" />

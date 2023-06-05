@@ -67,7 +67,7 @@ namespace XenAdmin.Core
 
         private static List<XenServerVersion> XenServerVersionsForAutoCheck = new List<XenServerVersion>();
         private static List<XenServerPatch> XenServerPatches = new List<XenServerPatch>();
-        private static List<ClientVersion> ClientVersions = new List<ClientVersion>();
+        public static List<ClientVersion> ClientVersions = new List<ClientVersion>();
         public static List<XenServerVersion> XenServerVersions = new List<XenServerVersion>();
 
         private static readonly List<Alert> updateAlerts = new List<Alert>();

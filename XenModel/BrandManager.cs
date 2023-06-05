@@ -31,6 +31,7 @@
 using System.Diagnostics;
 using System.Reflection;
 using System.Resources;
+using System.Web.UI;
 using XenAdmin.Properties;
 
 
@@ -52,6 +53,7 @@ namespace XenAdmin.Core
             ProductVersionPost82 = customBranding.ProductVersionText;
             XcUpdatesUrl = customBranding.XcUpdatesUrl;
             CfuUrl = customBranding.CfuUrl;
+            SourceUrl = customBranding.SourceUrl;
             VmTools = customBranding.VmTools;
             XenHost = customBranding.XenHost;
             YumRepoBaseBin = customBranding.YumRepoBaseBin;

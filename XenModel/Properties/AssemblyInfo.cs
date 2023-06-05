@@ -60,6 +60,7 @@ using XenAdmin.Properties;
     "[XenServer version]",
     "[Xc updates url]",
     "[Cfu url]",
+    "[Source url]",
     "[Guest Tools]",
     "[XenServer host]",
     "[YumRepoBaseBin]",
@@ -81,6 +82,7 @@ namespace XenAdmin.Properties
             string productVersionText,
             string xcUpdatesUrl,
             string cfuUrl,
+            string sourceUrl,
             string vmTools,
             string xenHost,
             string yumRepoBaseBin,
@@ -97,6 +99,7 @@ namespace XenAdmin.Properties
             ProductVersionText = productVersionText;
             XcUpdatesUrl = xcUpdatesUrl;
             CfuUrl = cfuUrl;
+            SourceUrl = sourceUrl;
             VmTools = vmTools;
             XenHost = xenHost;
             YumRepoBaseBin = yumRepoBaseBin;
@@ -114,6 +117,7 @@ namespace XenAdmin.Properties
         public string VmTools { get; }
         public string XcUpdatesUrl { get; }
         public string CfuUrl { get; }
+        public string SourceUrl { get; }
         public string XenHost { get; }
         public string YumRepoBaseBin { get; }
         public string YumRepoBaseSource { get; }

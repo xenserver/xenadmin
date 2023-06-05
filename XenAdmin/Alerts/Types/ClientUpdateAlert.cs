@@ -31,13 +31,14 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Actions.GUIActions;
 using XenAdmin.Actions.Updates;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
-
+using XenCenterLib;
 
 namespace XenAdmin.Alerts
 {
@@ -125,7 +126,7 @@ namespace XenAdmin.Alerts
             {
                 if (new Dialogs.WarningDialogs.CloseXenCenterWarningDialog(true).ShowDialog(parent) != DialogResult.OK)
                 {
-                    downloadAndInstallClientAction.ReleaseInstaller();
+                    downloadAndInstallClientAction.ReleaseDownloadedContent();
                     return;
                 }
             }
@@ -134,16 +135,63 @@ namespace XenAdmin.Alerts
             {
                 Process.Start(outputPathAndFileName);
                 log.DebugFormat("Update {0} found and install started", updateAlert.Name);
-                downloadAndInstallClientAction.ReleaseInstaller();
+                downloadAndInstallClientAction.ReleaseDownloadedContent();
                 Application.Exit();
             }
             catch (Exception e)
             {
                 log.Error("Exception occurred when starting the installation process.", e);
-                downloadAndInstallClientAction.ReleaseInstaller(true);
+                downloadAndInstallClientAction.ReleaseDownloadedContent(true);
 
                 using (var dlg = new ErrorDialog(Messages.UPDATE_CLIENT_FAILED_INSTALLER_LAUNCH))
                     dlg.ShowDialog(parent);
+            }
+        }
+
+        public static void DownloadSource(IWin32Window parent)
+        {
+            string outputPathAndFileName;
+            using (var saveSourceDialog = new SaveFileDialog())
+            {
+                saveSourceDialog.FileName = BrandManager.BrandConsoleNoSpace + "-source.zip";
+                saveSourceDialog.DefaultExt = "zip";
+                saveSourceDialog.Filter = "(*.zip)|*.zip|All files (*.*)|*.*";
+                saveSourceDialog.InitialDirectory = Win32.GetKnownFolderPath(Win32.KnownFolders.Downloads);
+
+                if (saveSourceDialog.ShowDialog() != DialogResult.OK)
+                {
+                    return;
+                }
+                outputPathAndFileName = saveSourceDialog.FileName;
+            }
+
+            var clientVersion = Updates.ClientVersions.FirstOrDefault();
+            if (clientVersion == null) { return; }
+            var sourceUrl = clientVersion.SourceUrl;
+            var downloadSourceAction = new DownloadSourceAction(clientVersion.Name, clientVersion.Version, new Uri(sourceUrl), outputPathAndFileName);
+
+            using (var dlg = new ActionProgressDialog(downloadSourceAction, ProgressBarStyle.Continuous))
+            {
+                dlg.ShowCancel = true;
+                dlg.ShowDialog(parent);
+            }
+
+            if (!downloadSourceAction.Succeeded)
+                return;
+
+            bool currentTasks = false;
+            foreach (ActionBase a in ConnectionsManager.History)
+            {
+                if (a is MeddlingAction || a.IsCompleted)
+                    continue;
+
+                currentTasks = true;
+                break;
+            }
+
+            if (currentTasks && new Dialogs.WarningDialogs.CloseXenCenterWarningDialog(true).ShowDialog(parent) != DialogResult.OK)
+            {
+                downloadSourceAction.ReleaseDownloadedContent();               
             }
         }
     }

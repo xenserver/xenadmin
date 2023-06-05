@@ -62,6 +62,7 @@ using System.Linq;
 using XenAdmin.Controls.GradientPanel;
 using XenAdmin.Dialogs.ServerUpdates;
 using XenAdmin.Help;
+using XenAdmin.Actions.Updates;
 
 namespace XenAdmin
 {
@@ -2715,7 +2716,15 @@ namespace XenAdmin
         {
             updateAlert = Updates.ClientUpdateAlerts.FirstOrDefault();
             if (updateAlert != null)
+            {
                 relNotesToolStripMenuItem.Text = string.Format(Messages.MAINWINDOW_UPDATE_RELEASE, updateAlert.NewVersion.Version);
+                downloadLatestSourceToolStripMenuItem.Text = string.Format(Messages.DOWNLOAD_SOURCE, updateAlert.NewVersion.Version);
+            }
+            var clientVersion = Updates.ClientVersions.FirstOrDefault();
+            downloadSourceToolStripMenuItem.Visible = clientVersion != null;
+            downloadSourceToolStripMenuItem.Text = clientVersion != null
+                ? string.Format(Messages.DOWNLOAD_SOURCE, clientVersion.Version)
+                : string.Empty;
             updateClientToolStripMenuItem.Visible = updateAlert != null;
         }
 
@@ -3390,6 +3399,16 @@ namespace XenAdmin
         {
             using (var dialog = new ConfigUpdatesDialog())
                 dialog.ShowDialog(this);
+        }
+
+        private void downloadSourceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ClientUpdateAlert.DownloadSource(this);
+        }
+
+        private void downloadLatestSourceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ClientUpdateAlert.DownloadSource(this);
         }
     }
 }

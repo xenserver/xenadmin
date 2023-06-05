@@ -1,4 +1,4 @@
-/* Copyright (c) Cloud Software Group, Inc. 
+﻿/* Copyright (c) Cloud Software Group, Inc. 
  * 
  * Redistribution and use in source and binary forms, 
  * with or without modification, are permitted provided 
@@ -29,34 +29,28 @@
  */
 
 using System;
-using NUnit.Framework;
-using XenAdmin.Alerts;
+using System.ComponentModel;
+using System.IO;
+using System.Net;
+using System.Net.Cache;
+using System.Net.NetworkInformation;
+using System.Threading;
 using XenAdmin.Core;
 
-
-namespace XenAdminTests.UnitTests.AlertTests
+namespace XenAdmin.Actions.Updates
 {
-    [TestFixture, Category(TestCategories.Unit)]
-    public class XenCenterUpdateAlertTests
-    {
-        [Test]
-        public void VerifyStoredDataWithDefaultConstructor()
+    public class DownloadSourceAction : DownloadFileAction, IByteProgressAction
+    {        
+        public DownloadSourceAction(string sourceName, Version version, Uri uri, string outputFileName)
+            : base(sourceName + " source", 
+                  uri, 
+                  outputFileName, 
+                  string.Format(Messages.DOWNLOAD_SOURCE_ACTION_TITLE, version.ToString()), 
+                  Messages.DOWNLOAD_SOURCE_ACTION_DESCRIPTION, 
+                  false)
         {
-            var version = new ClientVersion("6.0.2", "xc", true, false, "http://url",
-                new DateTime(2011, 12, 09).ToString(), "abcde", "http://sourceurl");
-            
-            ClassVerifiers.VerifyGetters(new ClientUpdateAlert(version),
-                new UpdateAlertClassUnitTestData
-                {
-                    AppliesTo = BrandManager.BrandConsole,
-                    FixLinkText = "v6.0.2 Release Notes",
-                    HelpID = "XenCenterUpdateAlert",
-                    Description = "xc is now available. Click Download and Install to proceed with the update.",
-                    HelpLinkText = "Help",
-                    Title = "xc is now available",
-                    Priority = "Priority5",
-                    Checksum = "abcde"
-                });
+
         }
     }
 }
+

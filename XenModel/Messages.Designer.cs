@@ -14095,11 +14095,65 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Downloading {0} ({1} of {2})....
+        /// </summary>
+        public static string DOWNLOAD_FILE_ACTION_PROGRESS_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("DOWNLOAD_FILE_ACTION_PROGRESS_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The downloaded file can no longer be found..
+        /// </summary>
+        public static string DOWNLOAD_FILE_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("DOWNLOAD_FILE_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} is now available. Download the latest at the {1} downloads website..
         /// </summary>
         public static string DOWNLOAD_LATEST_XS_BODY {
             get {
                 return ResourceManager.GetString("DOWNLOAD_LATEST_XS_BODY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download v{0} source.
+        /// </summary>
+        public static string DOWNLOAD_SOURCE {
+            get {
+                return ResourceManager.GetString("DOWNLOAD_SOURCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download {0} source.
+        /// </summary>
+        public static string DOWNLOAD_SOURCE_ACTION {
+            get {
+                return ResourceManager.GetString("DOWNLOAD_SOURCE_ACTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Downloading {0} source.
+        /// </summary>
+        public static string DOWNLOAD_SOURCE_ACTION_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("DOWNLOAD_SOURCE_ACTION_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download {0} source.
+        /// </summary>
+        public static string DOWNLOAD_SOURCE_ACTION_TITLE {
+            get {
+                return ResourceManager.GetString("DOWNLOAD_SOURCE_ACTION_TITLE", resourceCulture);
             }
         }
         
