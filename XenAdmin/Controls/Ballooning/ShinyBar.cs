@@ -30,6 +30,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
@@ -222,12 +223,7 @@ namespace XenAdmin.Controls.Ballooning
 
         protected void DrawGrid(Graphics g, Rectangle barArea, double bytesPerPixel, double max)
         {
-            // prevent max overflows from creating an infinite loop
-            if (max <= 0)
-            {
-                return;
-            }
-
+            Debug.Assert(max > 0, "Memory value should be larger than zero");
             const int min_gap = 40;  // min gap between consecutive labels (which are on alternate ticks)
             const int line_height = 12;
 
