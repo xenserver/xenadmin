@@ -263,7 +263,7 @@ namespace XenAdmin.Controls.Ballooning
                         Size size = Drawing.MeasureText(g, label, Program.DefaultFont);
                         Rectangle rect = new Rectangle(new Point(pos - size.Width/2, text_top), size);
 
-                        if (LabelShouldBeShown(max, label, x))
+                        if (LabelShouldBeShown(max, x))
                         {
                             Drawing.DrawText(g, label, Program.DefaultFont, rect, Grid, Color.Transparent);
                         }
@@ -282,7 +282,7 @@ namespace XenAdmin.Controls.Ballooning
         /// <param name="label"></param>
         /// <param name="x"></param>
         /// <returns></returns>
-        private static bool LabelShouldBeShown(double max, string label, double x)
+        private static bool LabelShouldBeShown(double max, double x)
         {
             return max <= Util.BINARY_GIGA  || (x % (0.5 * Util.BINARY_GIGA)) == 0;
         }
