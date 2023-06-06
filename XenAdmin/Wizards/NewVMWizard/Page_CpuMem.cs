@@ -151,8 +151,8 @@ namespace XenAdmin.Wizards.NewVMWizard
             InitialiseVCpuControls();
             SetSpinnerLimitsAndIncrement();
             ValidateMemorySettings();
-            ValidateVcpuSettings();
-            ValidateInitialVcpuSettings();
+            ValidateVCpuSettings();
+            ValidateInitialVCpuSettings();
             OnPageUpdated();
 
             _initializing = false;
@@ -344,9 +344,9 @@ namespace XenAdmin.Wizards.NewVMWizard
             }
         }
 
-        private void ValidateVcpuSettings()
+        private void ValidateVCpuSettings()
         {
-            Host maxVcpusHost = null;
+            Host maxVCpusHost = null;
             _maxVCpus = 0;
 
             var warnings = new List<string>();
@@ -364,13 +364,13 @@ namespace XenAdmin.Wizards.NewVMWizard
                 if (hostCpus > _maxVCpus)
                 {
                     _maxVCpus = hostCpus;
-                    maxVcpusHost = host;
+                    maxVCpusHost = host;
                 }
             }
 
-            if (maxVcpusHost != null && SelectedVCpusMax > _maxVCpus)
+            if (maxVCpusHost != null && SelectedVCpusMax > _maxVCpus)
             {
-                var isStandAloneHost = Helpers.GetPool(maxVcpusHost.Connection) == null;
+                var isStandAloneHost = Helpers.GetPool(maxVCpusHost.Connection) == null;
                 if (isStandAloneHost)
                 {
                     warnings.Add(string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN_STANDALONE_HOST, SelectedVCpusMax, _maxVCpus));
@@ -399,7 +399,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             }
         }
 
-        private void ValidateInitialVcpuSettings()
+        private void ValidateInitialVCpuSettings()
         {
             if (SelectedVCpusAtStartup < _minVCpus)
             {
@@ -457,7 +457,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         private void vCPU_ValueChanged(object sender, EventArgs e)
         {
             comboBoxTopology.Update((long)comboBoxVCPUs.SelectedItem);
-            ValidateVcpuSettings();
+            ValidateVCpuSettings();
             RefreshCurrentVCpus();
             OnPageUpdated();
         }
@@ -500,7 +500,7 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         private void comboBoxInitialVCPUs_SelectedIndexChanged(object sender, EventArgs e)
         {
-           ValidateInitialVcpuSettings();
+            ValidateInitialVCpuSettings();
         }
 
         #endregion

@@ -492,18 +492,21 @@ namespace XenAdmin.Actions.OvfActions
                 //The default memory unit is MB (2^20), however, the RASD may contain a different
                 //one with format byte*memoryBase^memoryPower (byte being a literal string)
 
-                double memoryPower = 20.0;
                 double memoryBase = 2.0;
-               
+                double memoryPower = 20.0;
+
                 foreach (RASD_Type rasd in rasds)
                 {
                     if (rasd.AllocationUnits.Value.ToLower().StartsWith("byte"))
                     {
                         string[] a1 = rasd.AllocationUnits.Value.Split('*', '^');
+
                         if (a1.Length == 3)
                         {
-                            memoryBase = Convert.ToDouble(a1[1].Trim());
-                            memoryPower = Convert.ToDouble(a1[2].Trim());
+                            if (!double.TryParse(a1[1].Trim(), out memoryBase))
+                                memoryBase = 2.0;
+                            if (!double.TryParse(a1[2].Trim(), out memoryPower))
+                                memoryPower = 20.0;
                         }
                     }
 
