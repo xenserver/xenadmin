@@ -104,13 +104,13 @@ namespace XenAdmin.Core
 
             if (Properties.Settings.Default.AllowXenCenterUpdates || userRequested)
             {
-                var action = new DownloadXcUpdatesXmlAction(
+                var action = new DownloadClientUpdatesXmlAction(
                     Properties.Settings.Default.AllowXenCenterUpdates || userRequested,
                     UserAgent,
-                    XenAdminConfigManager.Provider.GetCustomXcUpdatesXmlLocation() ?? BrandManager.XcUpdatesUrl,
+                    XenAdminConfigManager.Provider.GetCustomClientUpdatesXmlLocation() ?? BrandManager.XcUpdatesUrl,
                     !userRequested);
                 
-                action.Completed += DownloadXcUpdatesXmlAction_Completed;
+                action.Completed += DownloadClientUpdatesXmlAction_Completed;
                 CheckForClientUpdatesStarted?.Invoke();
                 action.RunAsync();
             }
@@ -159,9 +159,9 @@ namespace XenAdmin.Core
             return false;
         }
 
-        private static void DownloadXcUpdatesXmlAction_Completed(ActionBase sender)
+        private static void DownloadClientUpdatesXmlAction_Completed(ActionBase sender)
         {
-            if (!(sender is DownloadXcUpdatesXmlAction action))
+            if (!(sender is DownloadClientUpdatesXmlAction action))
                 return;
 
             bool succeeded = action.Succeeded;
