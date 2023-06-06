@@ -60,9 +60,9 @@ namespace XenAdmin
         void SaveSettingsIfRequired();
         bool ShowHiddenVMs { get; }
         string GetXenCenterMetadata();
-        string GetCustomXcUpdatesXmlLocation();
+        string GetCustomClientUpdatesXmlLocation();
         string GetCustomCfuLocation();
-        string GetInternalStageAuthToken();
+        string GetClientUpdatesQueryParam();
         string GetCustomFileServicePrefix();
     }
 

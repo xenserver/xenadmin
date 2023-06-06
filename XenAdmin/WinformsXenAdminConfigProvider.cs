@@ -219,9 +219,9 @@ namespace XenAdmin
             return Metadata.Generate(PluginManager);
         }
 
-        public string GetCustomXcUpdatesXmlLocation()
+        public string GetCustomClientUpdatesXmlLocation()
         {
-            return Registry.GetCustomXcUpdatesXmlLocation();
+            return Registry.GetCustomClientUpdatesXmlLocation();
         }
 
         public string GetCustomCfuLocation()
@@ -229,9 +229,9 @@ namespace XenAdmin
             return Registry.GetCustomCfuLocation();
         }
 
-        public string GetInternalStageAuthToken()
+        public string GetClientUpdatesQueryParam()
         {
-            return Registry.GetInternalStageAuthToken();
+            return Registry.GetClientUpdatesQueryParam();
         }
 
         public string GetCustomFileServicePrefix()

@@ -41,13 +41,13 @@ using System.Net.Cache;
 
 namespace XenAdmin.Actions
 {
-    public class DownloadXcUpdatesXmlAction : DownloadUpdatesXmlAction
+    public class DownloadClientUpdatesXmlAction : DownloadUpdatesXmlAction
     {
         private const string ClientVersionsNode = "versions";
 
         private readonly bool _checkForXenCenter;
 
-        public DownloadXcUpdatesXmlAction(bool checkForXenCenter, string userAgent, string xmlLocationUrl, bool suppressHistory)
+        public DownloadClientUpdatesXmlAction(bool checkForXenCenter, string userAgent, string xmlLocationUrl, bool suppressHistory)
             : base(userAgent, xmlLocationUrl, suppressHistory)
         {
             _checkForXenCenter = checkForXenCenter;
@@ -405,7 +405,7 @@ namespace XenAdmin.Actions
             }
             else
             {
-                var authToken = XenAdminConfigManager.Provider.GetInternalStageAuthToken();
+                var authToken = XenAdminConfigManager.Provider.GetClientUpdatesQueryParam();
                 uriBuilder.Query = Helpers.AddAuthTokenToQueryString(authToken, uriBuilder.Query);
 
                 var proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(Connection, false);
