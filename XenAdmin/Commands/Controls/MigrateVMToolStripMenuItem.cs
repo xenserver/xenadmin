@@ -54,24 +54,15 @@ namespace XenAdmin.Commands
 
         protected override void AddAdditionalMenuItems(SelectedItemCollection selection)
         {
-            if (selection.ToList().All(item => !Helpers.CrossPoolMigrationRestrictedWithWlb(item.Connection)))
-            {
-                VMOperationCommand cmd = new CrossPoolMigrateCommand(Command.MainWindowCommandInterface, selection);
-                DropDownItems.Add(new ToolStripSeparator());
-                VMOperationToolStripMenuSubItem lastItem = new VMOperationToolStripMenuSubItem(cmd);
-                DropDownItems.Add(lastItem); 
-            }            
+            VMOperationCommand cmd = new CrossPoolMigrateCommand(Command.MainWindowCommandInterface, selection);
+            DropDownItems.Add(new ToolStripSeparator());
+            VMOperationToolStripMenuSubItem lastItem = new VMOperationToolStripMenuSubItem(cmd);
+            DropDownItems.Add(lastItem);
         }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new Command Command
-        {
-            get
-            {
-                return base.Command;
-            }
-        }
+        public new Command Command => base.Command;
 
         /// <summary>
         /// This is the command used for enabling the VM's drop-right ToolStripMenuItem "Migrate to Server >"
@@ -125,13 +116,7 @@ namespace XenAdmin.Commands
                 return atLeastOneCanRun;
             }
 
-            public override string MenuText
-            {
-                get
-                {
-                    return Messages.MAINWINDOW_MIGRATE_TO_SERVER;
-                }
-            }
+            public override string MenuText => Messages.MAINWINDOW_MIGRATE_TO_SERVER;
         }
     }
 }

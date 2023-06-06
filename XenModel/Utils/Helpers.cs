@@ -220,12 +220,6 @@ namespace XenAdmin.Core
             return p != null && !string.IsNullOrEmpty(p.wlb_url);
         }
 
-        public static bool CrossPoolMigrationRestrictedWithWlb(IXenConnection conn)
-        {
-            return false;
-        }
-
-
         /// <summary>
         /// Determines whether two lists contain the same elements (but not necessarily in the same order).
         /// Compares list elements using reference equality.

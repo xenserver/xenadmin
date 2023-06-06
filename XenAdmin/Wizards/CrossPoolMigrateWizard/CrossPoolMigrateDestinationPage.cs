@@ -123,7 +123,6 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             var filters = new List<ReasoningFilter>
             {
                 new ResidentHostIsSameAsSelectionFilter(xenItem, selectedVMs),
-                new WlbEnabledFilter(xenItem, selectedVMs),
                 new CrossPoolMigrateCanMigrateFilter(xenItem, selectedVMs, wizardMode, migrateFilterCache)
             };
             return new DelayLoadingOptionComboBoxItem(xenItem, filters);
@@ -140,7 +139,6 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                     vmList.Add(selectedVMs.Find(vm => vm.opaque_ref == opaqueRef));
 
                 filters.Add(new ResidentHostIsSameAsSelectionFilter(xenObject, vmList));
-                filters.Add(new WlbEnabledFilter(xenObject, vmList));
                 filters.Add(new CrossPoolMigrateCanMigrateFilter(xenObject, vmList, wizardMode, migrateFilterCache));
             }
 

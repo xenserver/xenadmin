@@ -3981,12 +3981,6 @@ Please reconnect the host and try again.</value>
   <data name="CPM_WIZARD_VM_SELECTION_INTRODUCTION" xml:space="preserve">
     <value>&amp;Virtual network interfaces:</value>
   </data>
-  <data name="CPM_WLB_ENABLED_ON_HOST_FAILURE_REASON" xml:space="preserve">
-    <value>WLB is enabled on the host</value>
-  </data>
-  <data name="CPM_WLB_ENABLED_ON_VM_FAILURE_REASON" xml:space="preserve">
-    <value>WLB is enabled on the source</value>
-  </data>
   <data name="CPS_WIZARD_MIGRATION_PAGE_TITLE_TEMPLATE" xml:space="preserve">
     <value>Select a storage network on the destination pool or standalone server that will be used for the live migration of the virtual disks. 
 
