@@ -242,15 +242,15 @@ namespace XenAdmin.Controls.Ballooning
             int text_top = text_bottom - labelSize.Height;
 
             // Calculate a suitable increment
-            long incr = Util.BINARY_MEGA / 2;
-            while((double)incr / bytesPerPixel * 2 < min_gap + longest)
+            var incr = Util.BINARY_MEGA / 2.0;
+            while(incr / bytesPerPixel * 2 < min_gap + longest)
                 incr *= 2;
 
             // Draw the grid
             using (Pen pen = new Pen(Grid))
             {
                 bool withLabel = true;
-                for (double x = 0; x <= max; x += incr)
+                for (var x = 0.0; x <= max; x += incr)
                 {
                     // Tick
                     int pos = barArea.Left + (int)((double)x / bytesPerPixel);
@@ -279,7 +279,6 @@ namespace XenAdmin.Controls.Ballooning
         /// 2. If the maximum is greater than 1 GB, then show only the labels that are a multiple of half a GB.
         /// </summary>
         /// <param name="max"></param>
-        /// <param name="label"></param>
         /// <param name="x"></param>
         /// <returns></returns>
         private static bool LabelShouldBeShown(double max, double x)
