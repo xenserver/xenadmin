@@ -11137,24 +11137,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to WLB is enabled on the host.
-        /// </summary>
-        public static string CPM_WLB_ENABLED_ON_HOST_FAILURE_REASON {
-            get {
-                return ResourceManager.GetString("CPM_WLB_ENABLED_ON_HOST_FAILURE_REASON", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to WLB is enabled on the source.
-        /// </summary>
-        public static string CPM_WLB_ENABLED_ON_VM_FAILURE_REASON {
-            get {
-                return ResourceManager.GetString("CPM_WLB_ENABLED_ON_VM_FAILURE_REASON", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Select a storage network on the destination pool or standalone server that will be used for the live migration of the virtual disks. 
         ///
         ///For optimal performance and reliability during template migration, ensure that the network used for the storage migration is not being used for management or virtual machine traffic..
