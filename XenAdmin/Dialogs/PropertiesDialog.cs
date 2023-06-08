@@ -49,7 +49,7 @@ namespace XenAdmin.Dialogs
     public partial class PropertiesDialog : VerticallyTabbedDialog
     {
         #region Tabs
-        private CPUMemoryEditPage VCpuMemoryEditPage;
+        private CpuMemoryEditPage VCpuMemoryEditPage;
         private HostMultipathPage hostMultipathPage1;
         private CustomFieldsDisplayPage CustomFieldsEditPage;
         private LogDestinationEditPage LogDestinationEditPage;
@@ -149,7 +149,7 @@ namespace XenAdmin.Dialogs
 
                 if (is_vm)
                 {
-                    ShowTab(VCpuMemoryEditPage = new CPUMemoryEditPage());
+                    ShowTab(VCpuMemoryEditPage = new CpuMemoryEditPage());
                     ShowTab(StartupOptionsEditPage = new BootOptionsEditPage());
                     VMHAEditPage = new VMHAEditPage();
                     VMHAEditPage.Populated += EditPage_Populated;

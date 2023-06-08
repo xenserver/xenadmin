@@ -166,46 +166,6 @@ namespace XenAdmin.Wizards.GenericPages
         }
     }
 
-    public class TargetServerSummary : MappingSummaryDecorator
-    {
-        private readonly VmMapping mapping;
-        private readonly IXenConnection connection;
-
-        public TargetServerSummary(MappingSummary summary, VmMapping mapping, IXenConnection connection)
-            : base(summary)
-        {
-            this.mapping = mapping;
-            this.connection = connection;
-        }
-
-        public override List<SummaryDetails> Details
-        {
-            get
-            {
-                List<SummaryDetails> decoratedSummary = summary.Details;
-                decoratedSummary.Add(new SummaryDetails(Messages.CPM_SUMMARY_KEY_HOME_SERVER, ResolveLabel()));
-                return decoratedSummary;
-            }
-        }
-
-        private string ResolveLabel()
-        {
-            if (mapping.XenRef is XenRef<Host>)
-            {
-                Host targetHost = connection.Resolve(mapping.XenRef as XenRef<Host>);
-
-                if (targetHost == null)
-                {
-                    return Messages.UNKNOWN;
-                }
-
-                return mapping.TargetName;
-            }
-
-            return Messages.CPM_SUMMARY_UNSET;
-        }
-    }
-
     public class StorageSummary : MappingSummaryDecorator
     {
         private readonly VmMapping mapping;
@@ -355,9 +315,6 @@ namespace XenAdmin.Wizards.GenericPages
             this.summary = summary;
         }
  
-        public override List<SummaryDetails> Details
-        {
-            get { return summary != null ? summary.Details : new List<SummaryDetails>(); }
-        }
+        public override List<SummaryDetails> Details => summary != null ? summary.Details : new List<SummaryDetails>();
     }
 }

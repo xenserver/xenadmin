@@ -3811,9 +3811,6 @@ This action cannot be undone. Are you sure you want to continue?</value>
   <data name="CPM_SUMMARY_KEY_DESTINATION" xml:space="preserve">
     <value>Destination:</value>
   </data>
-  <data name="CPM_SUMMARY_KEY_HOME_SERVER" xml:space="preserve">
-    <value>Home Server:</value>
-  </data>
   <data name="CPM_SUMMARY_KEY_MIGRATE_TEMPLATE" xml:space="preserve">
     <value>Template:</value>
   </data>
@@ -3831,9 +3828,6 @@ This action cannot be undone. Are you sure you want to continue?</value>
   </data>
   <data name="CPM_SUMMARY_NETWORK_NOT_FOUND" xml:space="preserve">
     <value>Network not found</value>
-  </data>
-  <data name="CPM_SUMMARY_UNSET" xml:space="preserve">
-    <value>Unset</value>
   </data>
   <data name="CPM_WIZARD_ALL_ON_SAME_SR_RADIO" xml:space="preserve">
     <value>Pl&amp;ace all virtual disks on the same SR:</value>
@@ -3987,12 +3981,6 @@ For optimal performance and reliability during VM migration, ensure that the net
   </data>
   <data name="CPU" xml:space="preserve">
     <value>CPU</value>
-  </data>
-  <data name="CPU_AND_MEMORY" xml:space="preserve">
-    <value>CPU and Memory</value>
-  </data>
-  <data name="CPU_AND_MEMORY_SUB" xml:space="preserve">
-    <value>{0} vCPU(s) &amp; {1} MB RAM</value>
   </data>
   <data name="CPU_SUB" xml:space="preserve">
     <value>{0} vCPU(s)</value>
@@ -6086,11 +6074,8 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="FINISH_PAGE_STORAGE_FOR_VM" xml:space="preserve">
     <value>{0} storage:</value>
   </data>
-  <data name="FINISH_PAGE_TARGET" xml:space="preserve">
-    <value>Target:</value>
-  </data>
   <data name="FINISH_PAGE_TARGET_FOR_VM" xml:space="preserve">
-    <value>{0} target:</value>
+    <value>Home server:</value>
   </data>
   <data name="FINISH_PAGE_TEXT" xml:space="preserve">
     <value>Finish</value>
@@ -7251,6 +7236,9 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   <data name="IMPORT_VM_CONFIGURE_STORAGE" xml:space="preserve">
     <value>Configure storage for the new VM</value>
   </data>
+  <data name="IMPORT_VM_CPUS_COUNT_UNTRUSTED_WARNING" xml:space="preserve">
+    <value>The appliance contains {0} VM(s) with more than {1} vCPUs. Where a VM may be running actively hostile privileged code {2} recommends that the vCPU limit is set to {1} to prevent impact on system availability.</value>
+  </data>
   <data name="IMPORT_VM_FROM" xml:space="preserve">
     <value>Import VM from...</value>
   </data>
@@ -7281,6 +7269,12 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   <data name="IMPORT_WIZARD_ALL_ON_SAME_SR_RADIO" xml:space="preserve">
     <value>Place &amp;all imported virtual disks on this target SR:</value>
   </data>
+  <data name="IMPORT_WIZARD_CPUS_COUNT_MISMATCH_HOST" xml:space="preserve">
+    <value>The imported appliance requires a minimum of {0} vCPUs, while the number of physical CPUs in the selected server is {1}. You will not be able to start the appliance on the selected server.</value>
+  </data>
+  <data name="IMPORT_WIZARD_CPUS_COUNT_MISMATCH_POOL" xml:space="preserve">
+    <value>The imported appliance requires a minimum of {0} vCPUs, while the maximum number of physical CPUs in the pool is {1}. You will not be able to start the appliance on the selected pool.</value>
+  </data>
   <data name="IMPORT_WIZARD_DESTINATION_DESTINATION" xml:space="preserve">
     <value>&amp;Import to:</value>
   </data>
@@ -7298,6 +7292,12 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   </data>
   <data name="IMPORT_WIZARD_FAILED_UNCOMPRESS" xml:space="preserve">
     <value>Failed to uncompress file {0}. Please see the logs for more information.</value>
+  </data>
+  <data name="IMPORT_WIZARD_INSUFFICIENT_MEMORY_HOST" xml:space="preserve">
+    <value>The imported appliance requires a minimum of {0} of memory, while the available memory on the server is {1}. You will not be able to start the VM on the selected server.</value>
+  </data>
+  <data name="IMPORT_WIZARD_INSUFFICIENT_MEMORY_POOL" xml:space="preserve">
+    <value>The imported appliance requires a minimum of {0} of memory, while the maximum available memory on the pool is {1}. You will not be able to start the VM on the selected pool.</value>
   </data>
   <data name="IMPORT_WIZARD_NETWORKING_INTRO" xml:space="preserve">
     <value>Map the virtual network interfaces in the VMs you are importing to networks in the destination pool or standalone server.</value>
@@ -9349,25 +9349,17 @@ When you configure an NFS storage repository, you simply provide the host name o
   <data name="NEWVMWIZARD_CPUMEMPAGE_MEMORYINFO" xml:space="preserve">
     <value>(min = {0}, max = {1})</value>
   </data>
-  <data name="NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN1" xml:space="preserve">
-    <value>The amount of memory allocated to the new VM is greater than the amount of physical memory on any server in the pool.
-
-Server '{0}' has {1} of physical memory in total.
-
-You will not be able to start this VM without increasing the amount of physical memory on one of the servers in the pool.</value>
+  <data name="NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN_FREE" xml:space="preserve">
+    <value>The amount of memory allocated to the new VM is greater than the amount of physical memory available on any server in the pool ({0}).</value>
   </data>
-  <data name="NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN2" xml:space="preserve">
-    <value>The amount of memory allocated to the new VM is greater than the amount of physical memory available on any server in the pool.
-
-Server '{0}' has {1} of physical memory available.
-
-You will not be able to start this VM without freeing some space on one of the servers.</value>
+  <data name="NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN_TOTAL" xml:space="preserve">
+    <value>The amount of memory allocated to the new VM is greater than the amount of physical memory on any server in the pool ({0}).</value>
   </data>
   <data name="NEWVMWIZARD_CPUMEMPAGE_NAME" xml:space="preserve">
     <value>CPU &amp;&amp; Memory</value>
   </data>
   <data name="NEWVMWIZARD_CPUMEMPAGE_RUBRIC" xml:space="preserve">
-    <value>Specify the number of virtual CPUs, their topology, and the amount of memory that will be allocated to the new virtual machine. </value>
+    <value>Specify the number of vCPUs, their topology, and the amount of memory that will be allocated to the new virtual machine. </value>
   </data>
   <data name="NEWVMWIZARD_CPUMEMPAGE_TITLE" xml:space="preserve">
     <value>Allocate processor and memory resources</value>
@@ -9378,17 +9370,11 @@ You will not be able to start this VM without freeing some space on one of the s
   <data name="NEWVMWIZARD_CPUMEMPAGE_VCPUS" xml:space="preserve">
     <value>vCPUs</value>
   </data>
-  <data name="NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN" xml:space="preserve">
-    <value>The number of vCPUs given to the new VM is greater than the number of physical CPUs on any server in the pool.
-
-Server '{0}' has {1} physical CPUs.
-
-Performance of this VM will be greatly reduced if it is started with this many vCPUs.</value>
+  <data name="NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN_POOL" xml:space="preserve">
+    <value>You have specified {0} vCPUs, but none of the pool servers have more than {1} physical CPUs. You will not be able to start the VM.</value>
   </data>
-  <data name="NEWVMWIZARD_FINISHPAGE" xml:space="preserve">
-    <value>All the necessary information has been collected and the wizard is ready to provision the new virtual machine using the settings shown below.
-
-Review these settings, then click Previous if you need to change anything. Otherwise, click Create Now to create the new VM. It may take several minutes to create the new VM.</value>
+  <data name="NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN_STANDALONE_HOST" xml:space="preserve">
+    <value>You have specified {0} vCPUs, but the server has only {1} physical CPUs. You will not be able to start the VM.</value>
   </data>
   <data name="NEWVMWIZARD_FINISHPAGE_CREATE" xml:space="preserve">
     <value>&amp;Create Now</value>
@@ -13326,10 +13312,8 @@ To start a {0} trial, click the button below.</value>
   <data name="VCPU_ONLY_WHEN_HALTED" xml:space="preserve">
     <value>The vCPUs can only be changed when the VM is shut down.</value>
   </data>
-  <data name="VCPUS_MORE_THAN_PCPUS" xml:space="preserve">
-    <value>The number of VCPUs is greater than the number of physical CPUs on the host server. This will significantly reduce VM performance.
-
-To optimize VM performance, you should reduce the number of VCPUs to less than or equal to the number of physical CPUs.</value>
+  <data name="VCPUS_UNTRUSTED_VM_WARNING" xml:space="preserve">
+    <value>You have selected more than {0} vCPUs for the new VM. Where a VM may be running actively hostile privileged code {1} recommends that the vCPU limit is set to {0} to prevent impact on system availability.</value>
   </data>
   <data name="VDI" xml:space="preserve">
     <value>VDI</value>
@@ -13547,6 +13531,12 @@ To optimize VM performance, you should reduce the number of VCPUs to less than o
   <data name="VM_CPUMEMPAGE_INITIAL_VCPUS_LABEL" xml:space="preserve">
     <value>Initial number of v&amp;CPUs:</value>
   </data>
+  <data name="VM_CPUMEMPAGE_INSUFFICIENT_MEMORY_HOST" xml:space="preserve">
+    <value>The amount of physical memory allocated to this VM is greater than the total memory of its home server.</value>
+  </data>
+  <data name="VM_CPUMEMPAGE_INSUFFICIENT_MEMORY_POOL" xml:space="preserve">
+    <value>The amount of physical memory allocated to this VM is greater than the total memory of any server in the pool.</value>
+  </data>
   <data name="VM_CPUMEMPAGE_MAX_VCPUS_LABEL" xml:space="preserve">
     <value>Maximum number of &amp;vCPUs:</value>
   </data>
@@ -13559,11 +13549,14 @@ To optimize VM performance, you should reduce the number of VCPUs to less than o
   <data name="VM_CPUMEMPAGE_RUBRIC_HOTPLUG" xml:space="preserve">
     <value>If the initial number of vCPUs is set lower than the maximum number, more vCPUs can be added to the virtual machine while it is running. </value>
   </data>
+  <data name="VM_CPUMEMPAGE_VCPU_HOME_HOST_WARNING" xml:space="preserve">
+    <value>The VM's home server does not have enough physical CPUs to start the VM. The VM will start on another server.</value>
+  </data>
   <data name="VM_CPUMEMPAGE_VCPU_MIN_WARNING" xml:space="preserve">
-    <value>It is recommended to allocate at least {0} vCPUs for this VM</value>
+    <value>It is recommended to allocate at least {0} vCPUs for this VM.</value>
   </data>
   <data name="VM_CPUMEMPAGE_VCPU_WARNING" xml:space="preserve">
-    <value>More vCPUs than physical CPUs may lead to reduced VM performance</value>
+    <value>There are no servers with enough physical CPUs to start the VM.</value>
   </data>
   <data name="VM_CPUMEMPAGE_VCPUS_LABEL" xml:space="preserve">
     <value>&amp;Number of vCPUs:</value>

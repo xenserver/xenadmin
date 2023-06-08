@@ -41,21 +41,27 @@ namespace XenAdmin.Wizards.NewVMWizard
 {
     public partial class Page_CpuMem : XenTabPage
     {
-        private VM Template;
+        private VM _template;
 
         // number of spinners to show
-        enum MemoryMode
+        private enum MemoryMode
         {
             JustMemory = 1,
             MinimumAndMaximum = 2,
             MinimumMaximumAndStaticMax = 3
         }
-        MemoryMode memoryMode = MemoryMode.JustMemory;
 
-        double memoryRatio = 0.0;  // the permitted ratio of dynamic_min / static_max
-        bool initialising = true;
-        private bool isVcpuHotplugSupported;
-        private int minVCPUs;
+        private MemoryMode _memoryMode = MemoryMode.JustMemory;
+
+        private double _memoryRatio;  // the permitted ratio of dynamic_min / static_max
+        private bool _initializing = true;
+        private bool _isVCpuHotplugSupported;
+        private int _minVCpus;
+        private long _maxVCpus;
+        private long _maxMemTotal;
+        private long _maxMemFree;
+        private long _prevVCpusMax;
+        public VM SelectedTemplate { private get; set; }
 
         // Please note that the comboBoxVCPUs control can represent two different VM properties, depending whether the VM supports vCPU hotplug or not: 
         // When vCPU hotplug is not supported, comboBoxVCPUs represents the initial number of vCPUs (VCPUs_at_startup). In this case we will also set the VM property VCPUs_max to the same value.
@@ -66,72 +72,90 @@ namespace XenAdmin.Wizards.NewVMWizard
             InitializeComponent();
         }
 
-        public override string Text
+        public override string Text => Messages.NEWVMWIZARD_CPUMEMPAGE_NAME;
+
+        public override string PageTitle => Messages.NEWVMWIZARD_CPUMEMPAGE_TITLE;
+
+        public override string HelpID => "CPU&Memory";
+
+        public double SelectedMemoryDynamicMin => spinnerDynMin.Value;
+
+        public double SelectedMemoryDynamicMax => _memoryMode == MemoryMode.JustMemory ? spinnerDynMin.Value : spinnerDynMax.Value;
+
+        public bool CanStartVm => _maxVCpus > 0 && SelectedVCpusMax <= _maxVCpus && _maxMemFree > 0 && SelectedMemoryDynamicMin <= _maxMemFree && _maxMemTotal > 0 && SelectedMemoryDynamicMin <= _maxMemTotal;
+
+        public double SelectedMemoryStaticMax =>
+            _memoryMode == MemoryMode.JustMemory ? spinnerDynMin.Value :
+            _memoryMode == MemoryMode.MinimumAndMaximum ? spinnerDynMax.Value :
+            spinnerStatMax.Value;
+
+        public long SelectedVCpusMax => comboBoxVCPUs.SelectedItem == null ? -1 : (long)comboBoxVCPUs.SelectedItem;
+
+        public long SelectedVCpusAtStartup
         {
-            get { return Messages.NEWVMWIZARD_CPUMEMPAGE_NAME; }
+            get
+            {
+                if (_isVCpuHotplugSupported)
+                    return comboBoxInitialVCPUs.SelectedItem == null ? -1 : (long)comboBoxInitialVCPUs.SelectedItem;
+                
+                return comboBoxVCPUs.SelectedItem == null ? -1 : (long)comboBoxVCPUs.SelectedItem;
+            }
         }
 
-        public override string PageTitle
-        {
-            get { return Messages.NEWVMWIZARD_CPUMEMPAGE_TITLE; }
-        }
-
-        public override string HelpID
-        {
-            get { return "CPU&Memory"; }
-        }
+        public long SelectedCoresPerSocket => comboBoxTopology.CoresPerSocket;
 
         protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            if (SelectedTemplate ==  Template)
+            if (SelectedTemplate == _template)
                 return;
 
-            initialising = true;
+            _initializing = true;
 
-            Template = SelectedTemplate;
-            if (Template.SupportsBallooning() && !Helpers.FeatureForbidden(Template, Host.RestrictDMC))
-                memoryMode = Template.memory_dynamic_max == Template.memory_static_max ? MemoryMode.MinimumAndMaximum : MemoryMode.MinimumMaximumAndStaticMax;
+            _template = SelectedTemplate;
+            if (_template.SupportsBallooning() && !Helpers.FeatureForbidden(_template, Host.RestrictDMC))
+                _memoryMode = _template.memory_dynamic_max == _template.memory_static_max ? MemoryMode.MinimumAndMaximum : MemoryMode.MinimumMaximumAndStaticMax;
             else
-                memoryMode = MemoryMode.JustMemory;
+                _memoryMode = MemoryMode.JustMemory;
 
-            memoryRatio = VMMemoryControlsEdit.GetMemoryRatio(Template);
+            _memoryRatio = VMMemoryControlsEdit.GetMemoryRatio(_template);
 
             FreeSpinnerLimits();
 
-            if (memoryMode == MemoryMode.JustMemory)
+            if (_memoryMode == MemoryMode.JustMemory)
             {
-                spinnerDynMin.Initialize(Template.memory_static_max, Template.memory_static_max);
+                spinnerDynMin.Initialize(_template.memory_static_max, _template.memory_static_max);
                 labelDynMin.Text = Messages.MEMORY_COLON;
             }
             else
             {
                 labelDynMin.Text = Messages.DYNAMIC_MIN_COLON;
-                spinnerDynMin.Initialize(Template.memory_dynamic_min, Template.memory_static_max);
+                spinnerDynMin.Initialize(_template.memory_dynamic_min, _template.memory_static_max);
                 FreeSpinnerLimits();  // same as CA-33831
-                spinnerDynMax.Initialize(Template.memory_dynamic_max, Template.memory_static_max);
-                if (memoryMode == MemoryMode.MinimumMaximumAndStaticMax)
+                spinnerDynMax.Initialize(_template.memory_dynamic_max, _template.memory_static_max);
+                if (_memoryMode == MemoryMode.MinimumMaximumAndStaticMax)
                 {
                     FreeSpinnerLimits();
-                    spinnerStatMax.Initialize(Template.memory_static_max, Template.memory_static_max);
+                    spinnerStatMax.Initialize(_template.memory_static_max, _template.memory_static_max);
                 }
             }
-            labelDynMaxInfo.Visible = labelDynMax.Visible = spinnerDynMax.Visible = memoryMode == MemoryMode.MinimumAndMaximum || memoryMode == MemoryMode.MinimumMaximumAndStaticMax;
-            labelStatMaxInfo.Visible = labelStatMax.Visible = spinnerStatMax.Visible = memoryMode == MemoryMode.MinimumMaximumAndStaticMax;
+            labelDynMaxInfo.Visible = labelDynMax.Visible = spinnerDynMax.Visible = _memoryMode == MemoryMode.MinimumAndMaximum || _memoryMode == MemoryMode.MinimumMaximumAndStaticMax;
+            labelStatMaxInfo.Visible = labelStatMax.Visible = spinnerStatMax.Visible = _memoryMode == MemoryMode.MinimumMaximumAndStaticMax;
 
-            isVcpuHotplugSupported = Template.SupportsVcpuHotplug();
-            minVCPUs = Template.MinVCPUs();
+            _isVCpuHotplugSupported = _template.SupportsVcpuHotplug();
+            _minVCpus = _template.MinVCPUs();
 
-            _prevVCPUsMax = Template.VCPUs_max;  // we use variable in RefreshCurrentVCPUs for checking if VcpusAtStartup and VcpusMax were equal before VcpusMax changed
+            _prevVCpusMax = _template.VCPUs_max;  // we use variable in RefreshCurrentVCPUs for checking if VcpusAtStartup and VcpusMax were equal before VcpusMax changed
 
             label5.Text = GetRubric();
 
-            InitialiseVcpuControls();
-
+            InitialiseVCpuControls();
             SetSpinnerLimitsAndIncrement();
+            ValidateMemorySettings();
+            ValidateVCpuSettings();
+            ValidateInitialVCpuSettings();
+            OnPageUpdated();
 
-            ValuesUpdated();
-
-            initialising = false;
+            _initializing = false;
         }
 
         public override void SelectDefaultControl()
@@ -139,27 +163,27 @@ namespace XenAdmin.Wizards.NewVMWizard
             comboBoxVCPUs.Select();
         }
 
-        private void InitialiseVcpuControls()
+        private void InitialiseVCpuControls()
         {
-            labelVCPUs.Text = isVcpuHotplugSupported
+            labelVCPUs.Text = _isVCpuHotplugSupported
                 ? Messages.VM_CPUMEMPAGE_MAX_VCPUS_LABEL
                 : Messages.VM_CPUMEMPAGE_VCPUS_LABEL;
 
             labelInitialVCPUs.Text = Messages.VM_CPUMEMPAGE_INITIAL_VCPUS_LABEL;
-            labelInitialVCPUs.Visible = comboBoxInitialVCPUs.Visible = isVcpuHotplugSupported;
+            labelInitialVCPUs.Visible = comboBoxInitialVCPUs.Visible = _isVCpuHotplugSupported;
 
-            comboBoxTopology.Populate(Template.VCPUs_at_startup, Template.VCPUs_max, Template.GetCoresPerSocket(), Template.MaxCoresPerSocket());
-            PopulateVCPUs(Template.MaxVCPUsAllowed(), isVcpuHotplugSupported ? Template.VCPUs_max : Template.VCPUs_at_startup);
+            comboBoxTopology.Populate(_template.VCPUs_at_startup, _template.VCPUs_max, _template.GetCoresPerSocket(), _template.MaxCoresPerSocket());
+            PopulateVCpus(_template.MaxVCPUsAllowed(), _isVCpuHotplugSupported ? _template.VCPUs_max : _template.VCPUs_at_startup);
 
-            if (isVcpuHotplugSupported)
-                PopulateVCPUsAtStartup(Template.VCPUs_max, Template.VCPUs_at_startup);
+            if (_isVCpuHotplugSupported)
+                PopulateVCpusAtStartup(_template.VCPUs_max, _template.VCPUs_at_startup);
         }
 
-        private void PopulateVCPUComboBox(ComboBox comboBox, long min, long max, long currentValue, Predicate<long> isValid)
+        private void PopulateVCpuComboBox(ComboBox comboBox, long min, long max, long currentValue, Predicate<long> isValid)
         {
             comboBox.BeginUpdate();
             comboBox.Items.Clear();
-            for (long i = min; i <= max; ++i)
+            for (var i = min; i <= max; ++i)
             {
                 if (i == currentValue || isValid(i))
                     comboBox.Items.Add(i);
@@ -170,27 +194,25 @@ namespace XenAdmin.Wizards.NewVMWizard
             comboBox.EndUpdate();
         }
 
-        private void PopulateVCPUs(long maxVCPUs, long currentVCPUs)
+        private void PopulateVCpus(long maxVCpus, long currentVCpus)
         {
-            PopulateVCPUComboBox(comboBoxVCPUs, 1, maxVCPUs, currentVCPUs, i => comboBoxTopology.IsValidVCPU(i));
+            PopulateVCpuComboBox(comboBoxVCPUs, 1, maxVCpus, currentVCpus, i => comboBoxTopology.IsValidVCPU(i));
         }
 
-        private void PopulateVCPUsAtStartup(long max, long currentValue)
+        private void PopulateVCpusAtStartup(long max, long currentValue)
         {
-            PopulateVCPUComboBox(comboBoxInitialVCPUs, 1, max, currentValue, i => true);
+            PopulateVCpuComboBox(comboBoxInitialVCPUs, 1, max, currentValue, i => true);
         }
 
         private string GetRubric()
         {
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
             sb.Append(Messages.NEWVMWIZARD_CPUMEMPAGE_RUBRIC);
             // add hotplug text
-            if (isVcpuHotplugSupported)
+            if (_isVCpuHotplugSupported)
                 sb.Append(Messages.VM_CPUMEMPAGE_RUBRIC_HOTPLUG);
             return sb.ToString();
         }
-
-        public VM SelectedTemplate { private get; set; }
 
         // Return the larger of the template's MaxMemAllowed and the template's static max,
         // to avoid crashes in the spinners (CA-40041).
@@ -198,15 +220,15 @@ namespace XenAdmin.Wizards.NewVMWizard
         {
             get
             {
-                long msm = Template.memory_static_max;
-                long mma = Template.MaxMemAllowed();
+                var msm = _template.memory_static_max;
+                var mma = _template.MaxMemAllowed();
                 return (msm > mma ? msm : mma);
             }
         }
 
         private void FreeSpinnerLimits()
         {
-            long maxMemAllowed = MaxMemAllowed;
+            var maxMemAllowed = MaxMemAllowed;
             spinnerDynMin.SetRange(0, maxMemAllowed);
             spinnerDynMax.SetRange(0, maxMemAllowed);
             spinnerStatMax.SetRange(0, maxMemAllowed);
@@ -214,29 +236,29 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         private void SetSpinnerLimitsAndIncrement()
         {
-            spinnerDynMin.Increment = spinnerDynMax.Increment = spinnerStatMax.Increment = VMMemoryControlsEdit.CalcIncrement(Template.memory_static_max, spinnerDynMin.Units);
-            
-            long maxMemAllowed = MaxMemAllowed;
-            double min = Template.memory_static_min;
-            if (memoryMode == MemoryMode.JustMemory)
+            spinnerDynMin.Increment = spinnerDynMax.Increment = spinnerStatMax.Increment = VMMemoryControlsEdit.CalcIncrement(_template.memory_static_max, spinnerDynMin.Units);
+
+            var maxMemAllowed = MaxMemAllowed;
+            double min = _template.memory_static_min;
+            if (_memoryMode == MemoryMode.JustMemory)
             {
                 spinnerDynMin.SetRange(min, maxMemAllowed);
                 ShowMemoryMinMaxInformation(labelDynMinInfo, min, maxMemAllowed);
                 return;
             }
-            long min2 = (long)(SelectedMemoryStaticMax * memoryRatio);
+            var min2 = (long)(SelectedMemoryStaticMax * _memoryRatio);
             if (min < min2)
                 min = min2;
-            double max = SelectedMemoryDynamicMax;
+            var max = SelectedMemoryDynamicMax;
             if (max < min)
                 max = min;
             spinnerDynMin.SetRange(min, max);
             ShowMemoryMinMaxInformation(labelDynMinInfo, min, max);
 
             spinnerDynMax.SetRange(SelectedMemoryDynamicMin,
-                memoryMode == MemoryMode.MinimumAndMaximum ? maxMemAllowed : SelectedMemoryStaticMax);
+                _memoryMode == MemoryMode.MinimumAndMaximum ? maxMemAllowed : SelectedMemoryStaticMax);
             ShowMemoryMinMaxInformation(labelDynMaxInfo, SelectedMemoryDynamicMin,
-                memoryMode == MemoryMode.MinimumAndMaximum ? maxMemAllowed : SelectedMemoryStaticMax);
+                _memoryMode == MemoryMode.MinimumAndMaximum ? maxMemAllowed : SelectedMemoryStaticMax);
 
             spinnerStatMax.SetRange(SelectedMemoryDynamicMax, maxMemAllowed);
             ShowMemoryMinMaxInformation(labelStatMaxInfo, SelectedMemoryDynamicMax, maxMemAllowed);
@@ -249,157 +271,172 @@ namespace XenAdmin.Wizards.NewVMWizard
             spinnerStatMax.Enabled = false;
         }
 
-        public double SelectedMemoryDynamicMin
-        {
-            get
-            {
-                return spinnerDynMin.Value;
-            }
-        }
-
-        public double SelectedMemoryDynamicMax
-        {
-            get
-            {
-                return memoryMode == MemoryMode.JustMemory ? spinnerDynMin.Value : spinnerDynMax.Value;
-            }
-        }
-
-        public double SelectedMemoryStaticMax
-        {
-            get
-            {
-                return
-                    memoryMode == MemoryMode.JustMemory ? spinnerDynMin.Value :
-                    memoryMode == MemoryMode.MinimumAndMaximum ? spinnerDynMax.Value :
-                    spinnerStatMax.Value;
-            }
-        }
-
-        public long SelectedVcpusMax
-        {
-            get
-            {
-                return (long)comboBoxVCPUs.SelectedItem;
-            }
-        }
-
-        public long SelectedVcpusAtStartup
-        {
-            get
-            {
-                return isVcpuHotplugSupported ? (long)comboBoxInitialVCPUs.SelectedItem : (long)comboBoxVCPUs.SelectedItem;
-            }
-        }
-
-        public long SelectedCoresPerSocket
-        {
-            get
-            {
-                return comboBoxTopology.CoresPerSocket;
-            }
-        }
-
         public override List<KeyValuePair<string, string>> PageSummary
         {
             get
             {
-                List<KeyValuePair<string, string>> sum = new List<KeyValuePair<string, string>>();
+                var sum = new List<KeyValuePair<string, string>>();
 
-                if (isVcpuHotplugSupported)
+                if (_isVCpuHotplugSupported)
                 {
-                    sum.Add(new KeyValuePair<string, string>(Messages.NEWVMWIZARD_CPUMEMPAGE_MAX_VCPUS, SelectedVcpusMax.ToString()));
-                    sum.Add(new KeyValuePair<string, string>(Messages.NEWVMWIZARD_CPUMEMPAGE_INITIAL_VCPUS, SelectedVcpusAtStartup.ToString()));
+                    sum.Add(new KeyValuePair<string, string>(Messages.NEWVMWIZARD_CPUMEMPAGE_MAX_VCPUS, SelectedVCpusMax.ToString()));
+                    sum.Add(new KeyValuePair<string, string>(Messages.NEWVMWIZARD_CPUMEMPAGE_INITIAL_VCPUS, SelectedVCpusAtStartup.ToString()));
                 }
                 else
                 {
-                    sum.Add(new KeyValuePair<string, string>(Messages.NEWVMWIZARD_CPUMEMPAGE_VCPUS, SelectedVcpusAtStartup.ToString()));
+                    sum.Add(new KeyValuePair<string, string>(Messages.NEWVMWIZARD_CPUMEMPAGE_VCPUS, SelectedVCpusAtStartup.ToString()));
                 }
                 sum.Add(new KeyValuePair<string, string>(Messages.NEWVMWIZARD_CPUMEMPAGE_TOPOLOGY, comboBoxTopology.Text));
-                if (memoryMode == MemoryMode.JustMemory)
+                if (_memoryMode == MemoryMode.JustMemory)
                     sum.Add(new KeyValuePair<string, string>(Messages.MEMORY, Util.MemorySizeStringSuitableUnits(SelectedMemoryStaticMax, false)));
                 else
                 {
                     sum.Add(new KeyValuePair<string, string>(Messages.DYNAMIC_MIN, Util.MemorySizeStringSuitableUnits(SelectedMemoryDynamicMin, false)));
                     sum.Add(new KeyValuePair<string, string>(Messages.DYNAMIC_MAX, Util.MemorySizeStringSuitableUnits(SelectedMemoryDynamicMax, false)));
-                    if (memoryMode == MemoryMode.MinimumMaximumAndStaticMax)
+                    if (_memoryMode == MemoryMode.MinimumMaximumAndStaticMax)
                         sum.Add(new KeyValuePair<string, string>(Messages.STATIC_MAX, Util.MemorySizeStringSuitableUnits(SelectedMemoryStaticMax, false)));
                 }
                 return sum;
             }
         }
 
-        private void ValuesUpdated()
+        private void ValidateMemorySettings()
         {
-            CheckForError();
-            OnPageUpdated();
-        }
-
-        private void CheckForError()
-        {
-            long max_mem_total = 0;
-            long max_mem_free = 0;
-            long max_vcpus = 0;
-            Host max_mem_total_host = null;
-            Host max_mem_free_host = null;
-            Host max_vcpus_host = null;
-
-            foreach (Host host in Connection.Cache.Hosts)
+            Host maxMemTotalHost = null;
+            Host maxMemFreeHost = null;
+            _maxMemTotal = 0;
+            _maxMemFree = 0;
+            
+            foreach (var host in Connection.Cache.Hosts)
             {
-                long host_cpus = 0;
+                var metrics = Connection.Resolve(host.metrics);
 
-                foreach (Host_cpu cpu in Connection.Cache.Host_cpus)
+                if (metrics != null && metrics.memory_total > _maxMemTotal)
                 {
-                    if (cpu.host.opaque_ref.Equals(host.opaque_ref))
-                        host_cpus++;
-                }
-
-                Host_metrics metrics = Connection.Resolve(host.metrics);
-
-                if (host_cpus > max_vcpus)
-                {
-                    max_vcpus = host_cpus;
-                    max_vcpus_host = host;
-                }
-
-                if (metrics != null && metrics.memory_total > max_mem_total)
-                {
-                    max_mem_total = metrics.memory_total;
-                    max_mem_total_host = host;
+                    _maxMemTotal = metrics.memory_total;
+                    maxMemTotalHost = host;
                 }
 
                 // The available memory of a server is taken to be the current memory_free,
                 // plus however much we can squeeze down the existing VMs. This assumes
                 // that the overhead won't increase when we create the new VM, so it
                 // has false negatives.
-                long memory_free = host.memory_available_calc();
+                var memoryFree = host.memory_available_calc();
 
-                if (metrics != null && memory_free > max_mem_free)
+                if (metrics != null && memoryFree > _maxMemFree)
                 {
-                    max_mem_free = memory_free;
-                    max_mem_free_host = host;
+                    _maxMemFree = memoryFree;
+                    maxMemFreeHost = host;
                 }
             }
 
-            if (max_mem_total_host != null && SelectedMemoryDynamicMin > max_mem_total)
+            if (maxMemTotalHost != null && SelectedMemoryDynamicMin > _maxMemTotal)
             {
-                ErrorPanel.Visible = true;
-                ErrorLabel.Text = string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN1, Helpers.GetName(max_mem_total_host).Ellipsise(50), Util.MemorySizeStringSuitableUnits(max_mem_total, false));
+                ShowMemoryWarning(string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN_TOTAL, Util.MemorySizeStringSuitableUnits(_maxMemTotal, false)));
             }
-            else if (max_mem_free_host != null && SelectedMemoryDynamicMin > max_mem_free)
+            else if (maxMemFreeHost != null && SelectedMemoryDynamicMin > _maxMemFree)
             {
-                ErrorPanel.Visible = true;
-                ErrorLabel.Text = string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN2, Helpers.GetName(max_mem_free_host).Ellipsise(50), Util.MemorySizeStringSuitableUnits(max_mem_free, false));
-            }
-            else if (max_vcpus_host != null && SelectedVcpusMax > max_vcpus)
-            {
-                ErrorPanel.Visible = true;
-                ErrorLabel.Text = string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN, Helpers.GetName(max_vcpus_host).Ellipsise(50), max_vcpus);
+                ShowMemoryWarning(string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN_FREE, Util.MemorySizeStringSuitableUnits(_maxMemFree, false)));
             }
             else
             {
-                ErrorPanel.Visible = false;
+                ShowMemoryWarning();
             }
+        }
+
+        private void ValidateVCpuSettings()
+        {
+            Host maxVCpusHost = null;
+            _maxVCpus = 0;
+
+            var warnings = new List<string>();
+
+            foreach (var host in Connection.Cache.Hosts)
+            {
+                long hostCpus = 0;
+
+                foreach (var cpu in Connection.Cache.Host_cpus)
+                {
+                    if (cpu.host.opaque_ref.Equals(host.opaque_ref))
+                        hostCpus++;
+                }
+
+                if (hostCpus > _maxVCpus)
+                {
+                    _maxVCpus = hostCpus;
+                    maxVCpusHost = host;
+                }
+            }
+
+            if (maxVCpusHost != null && SelectedVCpusMax > _maxVCpus)
+            {
+                var isStandAloneHost = Helpers.GetPool(maxVCpusHost.Connection) == null;
+                if (isStandAloneHost)
+                {
+                    warnings.Add(string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN_STANDALONE_HOST, SelectedVCpusMax, _maxVCpus));
+                }
+                else
+                {
+                    warnings.Add(string.Format(Messages.NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN_POOL, SelectedVCpusMax, _maxVCpus));
+                }
+            }
+            
+            if (SelectedVCpusMax > VM.MAX_VCPUS_FOR_NON_TRUSTED_VMS)
+            {
+                warnings.Add(string.Format(Messages.VCPUS_UNTRUSTED_VM_WARNING, VM.MAX_VCPUS_FOR_NON_TRUSTED_VMS, BrandManager.BrandConsole));
+            }
+
+            ShowCpuWarning(string.Join("\n\n", warnings));
+
+            if (SelectedVCpusMax < _minVCpus)
+            {
+                vCPUWarningLabel.Text = string.Format(Messages.VM_CPUMEMPAGE_VCPU_MIN_WARNING, _minVCpus);
+                vCPUWarningLabel.Visible = true;
+            }
+            else
+            {
+                vCPUWarningLabel.Visible = false;
+            }
+        }
+
+        private void ValidateInitialVCpuSettings()
+        {
+            if (SelectedVCpusAtStartup < _minVCpus)
+            {
+                initialVCPUWarningLabel.Text = string.Format(Messages.VM_CPUMEMPAGE_VCPU_MIN_WARNING, _minVCpus);
+                initialVCPUWarningLabel.Visible = true;
+            }
+            else
+            {
+                initialVCPUWarningLabel.Visible = false;
+            }
+        }
+
+        private void ValidateTopologySettings()
+        {
+            if (comboBoxVCPUs.SelectedItem != null)
+                ShowTopologyWarning(VM.ValidVCPUConfiguration((long)comboBoxVCPUs.SelectedItem, comboBoxTopology.CoresPerSocket));
+        }
+
+        private void ShowMemoryWarning(string text = null)
+        {
+            var show = !string.IsNullOrEmpty(text);
+            memoryWarningLabel.Text = show ? text : null;
+            memoryPictureBox.Visible = memoryWarningLabel.Visible = show;
+        }
+
+        private void ShowTopologyWarning(string text = null)
+        {
+            var show = !string.IsNullOrEmpty(text);
+            labelTopologyWarning.Text = show ? text : null;
+            pictureBoxTopology.Visible = labelTopologyWarning.Visible = show;
+        }
+
+        private void ShowCpuWarning(string text = null)
+        {
+            var show = !string.IsNullOrEmpty(text);
+            cpuWarningLabel.Text = show ? text : null;
+            cpuWarningPictureBox.Visible = cpuWarningLabel.Visible = show;
         }
 
         private void ShowMemoryMinMaxInformation(Label label, double min, double max)
@@ -415,55 +452,27 @@ namespace XenAdmin.Wizards.NewVMWizard
             return Util.MemorySizeStringSuitableUnits(numberOfBytes, true);
         }
 
+        #region Control event handlers
+
         private void vCPU_ValueChanged(object sender, EventArgs e)
         {
             comboBoxTopology.Update((long)comboBoxVCPUs.SelectedItem);
-            ValuesUpdated();
-            ValidateVCPUSettings();
-            RefreshCurrentVCPUs();
+            ValidateVCpuSettings();
+            RefreshCurrentVCpus();
+            OnPageUpdated();
         }
 
         private void memory_ValueChanged(object sender, EventArgs e)
         {
-            if (initialising)
+            if (_initializing)
                 return;
 
             SetSpinnerLimitsAndIncrement();
-            ValuesUpdated();
-        }
-        
-        private void ValidateVCPUSettings()
-        {
-            if (comboBoxVCPUs.SelectedItem != null && SelectedVcpusMax < minVCPUs)
-            {
-                vCPUWarningLabel.Text = string.Format(Messages.VM_CPUMEMPAGE_VCPU_MIN_WARNING, minVCPUs);
-                vCPUWarningLabel.Visible = true;
-            }
-            else
-            {
-                vCPUWarningLabel.Visible = false;
-            }
-
-            if (comboBoxInitialVCPUs.SelectedItem != null && SelectedVcpusAtStartup < minVCPUs)
-            {
-                initialVCPUWarningLabel.Text = string.Format(Messages.VM_CPUMEMPAGE_VCPU_MIN_WARNING, minVCPUs);
-                initialVCPUWarningLabel.Visible = true;
-            }
-            else
-            {
-                initialVCPUWarningLabel.Visible = false;
-            }
+            ValidateMemorySettings();
+            OnPageUpdated();
         }
 
-        private void ValidateTopologySettings()
-        {
-            if (comboBoxVCPUs.SelectedItem != null)
-                labelInvalidVCPUWarning.Text = VM.ValidVCPUConfiguration((long)comboBoxVCPUs.SelectedItem, comboBoxTopology.CoresPerSocket);
-        }
-
-        private long _prevVCPUsMax;
-
-        private void RefreshCurrentVCPUs()
+        private void RefreshCurrentVCpus()
         {
             // refresh comboBoxInitialVCPUs if it's visible and populated
             if (comboBoxInitialVCPUs.Visible && comboBoxInitialVCPUs.Items.Count > 0)
@@ -472,15 +481,15 @@ namespace XenAdmin.Wizards.NewVMWizard
                 // So if VcpusMax is decreased below VcpusAtStartup, then VcpusAtStartup is decreased to that number too
                 // If VcpusAtStartup and VcpusMax are equal, and VcpusMax is changed, then VcpusAtStartup is changed to match
                 // But if the numbers are unequal, and VcpusMax is changed but is still higher than VcpusAtStartup, then VcpusAtStartup is unchanged
-                var newValue = SelectedVcpusAtStartup;
+                var newValue = SelectedVCpusAtStartup;
 
-                if (SelectedVcpusMax < SelectedVcpusAtStartup)
-                    newValue = SelectedVcpusMax;
-                else if (SelectedVcpusAtStartup == _prevVCPUsMax && SelectedVcpusMax != _prevVCPUsMax)
-                    newValue = SelectedVcpusMax;
+                if (SelectedVCpusMax < SelectedVCpusAtStartup)
+                    newValue = SelectedVCpusMax;
+                else if (SelectedVCpusAtStartup == _prevVCpusMax && SelectedVCpusMax != _prevVCpusMax)
+                    newValue = SelectedVCpusMax;
 
-                PopulateVCPUsAtStartup(SelectedVcpusMax, newValue);
-                _prevVCPUsMax = SelectedVcpusMax;
+                PopulateVCpusAtStartup(SelectedVCpusMax, newValue);
+                _prevVCpusMax = SelectedVCpusMax;
             }
         }
 
@@ -491,7 +500,9 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         private void comboBoxInitialVCPUs_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ValidateVCPUSettings();
+            ValidateInitialVCpuSettings();
         }
+
+        #endregion
     }
 }

@@ -62,7 +62,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         private readonly Page_CloudConfigParameters page_CloudConfigParameters;
 
         private Host m_affinity;
-        private bool BlockAffinitySelection = false;
+        private bool BlockAffinitySelection;
         private bool gpuCapability;
 
         public AsyncAction Action;
@@ -131,7 +131,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             }
             #endregion
 
-            page_8_Finish.SummaryRetreiver = GetSummary;
+            page_8_Finish.SummaryRetriever = GetSummary;
 
             AddPages(page_1_Template, page_2_Name, page_3_InstallationMedia, page_4_HomeServer,
                      page_5_CpuMem, page_6_Storage, page_7_Networking, page_8_Finish);
@@ -161,8 +161,8 @@ namespace XenAdmin.Wizards.NewVMWizard
                                         page_3_InstallationMedia.SelectedUrl,
                                         page_3_InstallationMedia.SelectedBootMode,
                                         m_affinity,
-                                        page_5_CpuMem.SelectedVcpusMax,
-                                        page_5_CpuMem.SelectedVcpusAtStartup,
+                                        page_5_CpuMem.SelectedVCpusMax,
+                                        page_5_CpuMem.SelectedVCpusAtStartup,
                                         (long)page_5_CpuMem.SelectedMemoryDynamicMin,
                                         (long)page_5_CpuMem.SelectedMemoryDynamicMax,
                                         (long)page_5_CpuMem.SelectedMemoryStaticMax,
@@ -185,13 +185,14 @@ namespace XenAdmin.Wizards.NewVMWizard
             base.FinishWizard();
         }
 
-        protected override void OnKeyPress(System.Windows.Forms.KeyPressEventArgs e)
+        protected override void OnKeyPress(KeyPressEventArgs e)
         {
             if (page_CloudConfigParameters != null && page_CloudConfigParameters.ActiveControl is TextBox && e.KeyChar == (char)Keys.Enter)
                 return;
 
             base.OnKeyPress(e);
         }
+
         protected override void UpdateWizardContent(XenTabPage senderPage)
         {
             var prevPageType = senderPage.GetType();
@@ -284,11 +285,31 @@ namespace XenAdmin.Wizards.NewVMWizard
                     AddAfterPage(page_6_Storage, page_6b_LunPerVdi);
                 }
             }
+            else if (prevPageType == typeof(Page_CpuMem))
+            {
+                page_8_Finish.CanStartImmediately = CanStartVm();
+            }
         }
 
         protected override string WizardPaneHelpID()
         {
             return CurrentStepTabPage is RBACWarningPage ? FormatHelpId("Rbac") : base.WizardPaneHelpID();
+        }
+
+        private bool CanStartVm()
+        {
+            var homeHost = page_6_Storage.FullCopySR?.Home();
+
+            if (homeHost != null)
+            {
+                if (homeHost.CpuCount() < page_5_CpuMem.SelectedVCpusMax)
+                    return false;
+
+                if (homeHost.memory_available_calc() < page_5_CpuMem.SelectedMemoryDynamicMin)
+                    return false;
+            }
+
+            return page_5_CpuMem.CanStartVm;
         }
 
         private void ShowXenAppXenDesktopWarning(IXenConnection connection)
