@@ -74,27 +74,32 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         {
             var licensedPoolCount = 0;
             var poolCount = 0;
-            foreach (Host master in SelectedCoordinators)
-            {
-                var hosts = master.Connection.Cache.Hosts;
+            var upgradeToVersionWithCdn = false;
 
+            foreach (Host coordinator in SelectedCoordinators)
+            {
+                var hosts = coordinator.Connection.Cache.Hosts;
                 if (hosts.Length == 0)
                     continue;
 
+                //hosts earlier than yangtze can only upgrade to Yangtze
+                if (Helpers.YangtzeOrGreater(coordinator.Connection))
+                    upgradeToVersionWithCdn = true;
+
                 poolCount++;
-                var automatedUpdatesRestricted = hosts.Any(Host.RestrictBatchHotfixApply); //if any host is not licensed for automated updates
+                var automatedUpdatesRestricted = hosts.Any(Host.RestrictBatchHotfixApply);
                 if (!automatedUpdatesRestricted)
                     licensedPoolCount++;
             }
 
-            if (licensedPoolCount > 0) // at least one pool licensed for automated updates 
+            if (!upgradeToVersionWithCdn && licensedPoolCount > 0)
             {
                 applyUpdatesCheckBox.Visible = applyUpdatesLabel.Visible = true;
                 applyUpdatesCheckBox.Text = poolCount == licensedPoolCount
                     ? Messages.ROLLING_UPGRADE_APPLY_UPDATES
                     : Messages.ROLLING_UPGRADE_APPLY_UPDATES_MIXED;
             }
-            else  // all pools unlicensed
+            else
             {
                 applyUpdatesCheckBox.Visible = applyUpdatesLabel.Visible = false;
             }

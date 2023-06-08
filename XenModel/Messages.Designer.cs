@@ -124,6 +124,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Installing updates on {0}....
+        /// </summary>
+        public static string ACTION_APPLY_CDN_UPDATES_TITLE {
+            get {
+                return ResourceManager.GetString("ACTION_APPLY_CDN_UPDATES_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Changing control domain memory settings on &apos;{0}&apos;.
         /// </summary>
         public static string ACTION_CHANGE_CONTROL_DOMAIN_MEMORY {
@@ -7290,6 +7299,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Live patch failed. Reboot this server.
+        /// </summary>
+        public static string CDN_GUIDANCE_REBOOT_HOST_LIVEPATCH_FAILURE {
+            get {
+                return ResourceManager.GetString("CDN_GUIDANCE_REBOOT_HOST_LIVEPATCH_FAILURE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reboot VMs running on this server.
         /// </summary>
         public static string CDN_GUIDANCE_RESTART_DEVICE_MODEL {
@@ -7313,6 +7331,35 @@ namespace XenAdmin {
         public static string CDN_LIVEPATCHES_IN_UPDATE {
             get {
                 return ResourceManager.GetString("CDN_LIVEPATCHES_IN_UPDATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The following tasks will need to be performed manually for the installed updates to take effect:
+        ///{0}.
+        /// </summary>
+        public static string CDN_PENDING_GUIDANCES_FAILURE {
+            get {
+                return ResourceManager.GetString("CDN_PENDING_GUIDANCES_FAILURE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pending tasks on {0}.
+        /// </summary>
+        public static string CDN_PENDING_GUIDANCES_KEY {
+            get {
+                return ResourceManager.GetString("CDN_PENDING_GUIDANCES_KEY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The following tasks need to be performed for the latest installed updates to take effect:
+        ///{0}.
+        /// </summary>
+        public static string CDN_PENDING_GUIDANCES_VALUE {
+            get {
+                return ResourceManager.GetString("CDN_PENDING_GUIDANCES_VALUE", resourceCulture);
             }
         }
         
@@ -7922,6 +7969,24 @@ namespace XenAdmin {
         public static string CHECKING_HOST_MEMORY_POST_UPGRADE_DESCRIPTION {
             get {
                 return ResourceManager.GetString("CHECKING_HOST_MEMORY_POST_UPGRADE_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Has synchronized within the past week.
+        /// </summary>
+        public static string CHECKING_LAST_CDN_SYNC_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("CHECKING_LAST_CDN_SYNC_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checking date of last synchronization with update channel.
+        /// </summary>
+        public static string CHECKING_LAST_CDN_SYNC_TILE {
+            get {
+                return ResourceManager.GetString("CHECKING_LAST_CDN_SYNC_TILE", resourceCulture);
             }
         }
         
@@ -29644,6 +29709,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Install Updates.
+        /// </summary>
+        public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_TEXT_CDN {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_AUTOUPDATINGPAGE_TEXT_CDN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Uploading and installing updates.
         /// </summary>
         public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_TITLE {
@@ -30004,11 +30078,83 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} will download and install all released updates on the current version, usually with only a single reboot at the end..
+        /// </summary>
+        public static string PATCHINGWIZARD_SELECTPATCHPAGE_AUTO_LABEL {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTPATCHPAGE_AUTO_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} will install all released updates on the current version, usually with only a single reboot at the end..
+        /// </summary>
+        public static string PATCHINGWIZARD_SELECTPATCHPAGE_AUTO_LABEL_CDN {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTPATCHPAGE_AUTO_LABEL_CDN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Automated Updates, choose an update to download, or browse your computer for an update or supplemental pack file..
+        /// </summary>
+        public static string PATCHINGWIZARD_SELECTPATCHPAGE_BLURB {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTPATCHPAGE_BLURB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Automated Updates, or browse your computer for a supplemental pack file..
+        /// </summary>
+        public static string PATCHINGWIZARD_SELECTPATCHPAGE_BLURB_CDN {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTPATCHPAGE_BLURB_CDN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Browse your computer for an update or supplemental pack file..
+        /// </summary>
+        public static string PATCHINGWIZARD_SELECTPATCHPAGE_BLURB_CDN_UNLICENSED {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTPATCHPAGE_BLURB_CDN_UNLICENSED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select an update to download, or browse your computer for an update or supplemental pack file..
+        /// </summary>
+        public static string PATCHINGWIZARD_SELECTPATCHPAGE_BLURB_UNLICENSED {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTPATCHPAGE_BLURB_UNLICENSED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Choose Update File.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTPATCHPAGE_CHOOSE {
             get {
                 return ResourceManager.GetString("PATCHINGWIZARD_SELECTPATCHPAGE_CHOOSE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Select an update or supplemental pack from disk.
+        /// </summary>
+        public static string PATCHINGWIZARD_SELECTPATCHPAGE_DISK_RADIO {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTPATCHPAGE_DISK_RADIO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Select a supplemental pack from disk.
+        /// </summary>
+        public static string PATCHINGWIZARD_SELECTPATCHPAGE_DISK_RADIO_CDN {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTPATCHPAGE_DISK_RADIO_CDN", resourceCulture);
             }
         }
         
@@ -30031,7 +30177,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Choose an existing update to install or upload a new one.
+        ///   Looks up a localized string similar to Choose the update you want to install.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTPATCHPAGE_TITLE {
             get {
@@ -37648,7 +37794,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Install Update.
+        ///   Looks up a localized string similar to Install Updates.
         /// </summary>
         public static string UPDATES_WIZARD {
             get {
@@ -37693,6 +37839,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &amp;Install updates.
+        /// </summary>
+        public static string UPDATES_WIZARD_APPLY_UPDATES {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_APPLY_UPDATES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Installing update {0} on {1}... .
         /// </summary>
         public static string UPDATES_WIZARD_APPLYING_UPDATE {
@@ -37707,6 +37862,15 @@ namespace XenAdmin {
         public static string UPDATES_WIZARD_APPLYING_UPDATE_MULTIPLE_HOSTS {
             get {
                 return ResourceManager.GetString("UPDATES_WIZARD_APPLYING_UPDATE_MULTIPLE_HOSTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Installing updates on {0}... .
+        /// </summary>
+        public static string UPDATES_WIZARD_APPLYING_UPDATES_FROM_CDN {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_APPLYING_UPDATES_FROM_CDN", resourceCulture);
             }
         }
         

@@ -75,10 +75,14 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            poolSelectionOnly = WizardMode == WizardMode.AutomatedUpdates || UpdateAlertFromWeb != null || AlertFromFileOnDisk != null;
+            poolSelectionOnly = WizardMode == WizardMode.AutomatedUpdates ||
+                                WizardMode == WizardMode.UpdatesFromCdn ||
+                                UpdateAlertFromWeb != null ||
+                                AlertFromFileOnDisk != null;
 
             switch (WizardMode)
             {
+                case WizardMode.UpdatesFromCdn:
                 case WizardMode.AutomatedUpdates:
                     label1.Text = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_AUTOMATED_MODE;
                     break;
@@ -92,7 +96,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                     break;
             }
 
-            List<IXenConnection> xenConnections = ConnectionsManager.XenConnectionsCopy;
+            var xenConnections = ConnectionsManager.XenConnectionsCopy
+                .Where(c => WizardMode == WizardMode.UpdatesFromCdn ? Helpers.CloudOrGreater(c) : !Helpers.CloudOrGreater(c)).ToList();
             xenConnections.Sort();
 
             int licensedPoolCount = 0;
@@ -182,7 +187,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 return false;
             }
 
-            return WizardMode == WizardMode.AutomatedUpdates
+            return WizardMode == WizardMode.AutomatedUpdates || WizardMode == WizardMode.UpdatesFromCdn
                 ? CanEnableRowAutomatedUpdates(host, out tooltipText)
                 : CanEnableRowNonAutomated(host, out tooltipText);
         }
@@ -205,35 +210,48 @@ namespace XenAdmin.Wizards.PatchingWizard
                 return false;
             }
 
-            //check updgrade sequences
-            var minimalPatches = WizardMode == WizardMode.NewVersion
-                ? Updates.GetMinimalPatches(host)
-                : Updates.GetMinimalPatches(host.Connection);
-            if (minimalPatches == null) //version not supported or too new to have automated updates available
+            if (Helpers.CloudOrGreater(host))
             {
-                tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_UP_TO_DATE;
-                return false;
+                if (!Updates.CdnUpdateInfoPerConnection.TryGetValue(host.Connection, out var updateInfo) ||
+                    updateInfo.HostsWithUpdates.FirstOrDefault(u => u.HostOpaqueRef == host.opaque_ref) == null)
+                {
+                    tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_UP_TO_DATE;
+                    return false;
+                }
             }
-
-            //check all hosts are licensed for automated updates (there may be restrictions on individual hosts)
-            if (host.Connection.Cache.Hosts.Any(Host.RestrictBatchHotfixApply))
+            else
             {
-                tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_AUTOMATED_UPDATES;
-                return false;
-            }
+                //check updgrade sequences
+                var minimalPatches = WizardMode == WizardMode.NewVersion
+                    ? Updates.GetMinimalPatches(host)
+                    : Updates.GetMinimalPatches(host.Connection);
+                
+                if (minimalPatches == null) //version not supported or too new to have automated updates available
+                {
+                    tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_UP_TO_DATE;
+                    return false;
+                }
 
-            var us = Updates.GetPatchSequenceForHost(host, minimalPatches);
-            if (us == null)
-            {
-                tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_NOT_AUTO_UPGRADABLE;
-                return false;
-            }
+                //check all hosts are licensed for automated updates (there may be restrictions on individual hosts)
+                if (host.Connection.Cache.Hosts.Any(Host.RestrictBatchHotfixApply))
+                {
+                    tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_AUTOMATED_UPDATES;
+                    return false;
+                }
 
-            //if host is up to date
-            if (us.Count == 0)
-            {
-                tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_UP_TO_DATE;
-                return false;
+                var us = Updates.GetPatchSequenceForHost(host, minimalPatches);
+                if (us == null)
+                {
+                    tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_NOT_AUTO_UPGRADABLE;
+                    return false;
+                }
+
+                //if host is up to date
+                if (us.Count == 0)
+                {
+                    tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_UP_TO_DATE;
+                    return false;
+                }
             }
 
             tooltipText = null;
@@ -276,8 +294,11 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 case UpdateType.ISO:
                     //from Ely onwards, iso does not mean supplemental pack
-                    
-                    if (WizardMode == WizardMode.AutomatedUpdates || UpdateAlertFromWeb != null || AlertFromFileOnDisk != null)
+
+                    if (WizardMode == WizardMode.AutomatedUpdates ||
+                        WizardMode == WizardMode.UpdatesFromCdn ||
+                        UpdateAlertFromWeb != null ||
+                        AlertFromFileOnDisk != null)
                         return IsHostAmongApplicable(host, out tooltipText);
 
                     // here a file from disk was selected, but it was not an update (FileFromDiskAlert == null)
