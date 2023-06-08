@@ -258,6 +258,7 @@
     <Compile Include="Diagnostics\Checks\PVGuestsCheck.cs" />
     <Compile Include="Diagnostics\Checks\RebootPendingOnMasterCheck.cs" />
     <Compile Include="Diagnostics\Checks\HostNeedsRebootCheck.cs" />
+    <Compile Include="Diagnostics\Checks\OutOfSyncWithCdnCheck.cs" />
     <Compile Include="Diagnostics\Checks\SafeToUpgradeCheck.cs" />
     <Compile Include="Diagnostics\Checks\ServerSelectionCheck.cs" />
     <Compile Include="Diagnostics\Checks\VSwitchControllerCheck.cs" />
@@ -282,6 +283,7 @@
     <Compile Include="Diagnostics\Problems\HostProblem\ConflictingUpdatePresent.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\CPUIncompatibilityProblem.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\NotLicensedForAutomatedUpdatesWarning.cs" />
+    <Compile Include="Diagnostics\Problems\PoolProblem\CdnOutOfSyncProblem.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\ServerSelectionProblem.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\VSwitchControllerProblem.cs" />
     <Compile Include="Diagnostics\Problems\UtilityProblem\EuaNotFoundProblem.cs" />
@@ -901,6 +903,7 @@
     <Compile Include="Wizards\ImportWizard\ImportBootOptionPage.Designer.cs">
       <DependentUpon>ImportBootOptionPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Wizards\PatchingWizard\PlanActions\ApplyCdnUpdatesPlanAction.cs" />
     <Compile Include="Wizards\WizardHelpers.cs" />
     <Compile Include="Wizards\ImportWizard\HardwareCompatibilityFilter.cs" />
     <Compile Include="Wizards\NewSRWizard_Pages\ChooseSrProvisioningPage.cs">

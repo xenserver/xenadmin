@@ -663,6 +663,9 @@
   <data name="spinner.Size" type="System.Drawing.Size, System.Drawing">
     <value>16, 16</value>
   </data>
+  <data name="spinner.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>StretchImage</value>
+  </data>
   <data name="spinner.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>

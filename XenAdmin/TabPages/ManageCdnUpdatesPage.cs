@@ -405,7 +405,8 @@ namespace XenAdmin.TabPages
 
         private void toolStripButtonUpdate_Click(object sender, EventArgs e)
         {
-            Program.MainWindow.ShowForm(typeof(PatchingWizard));
+            var wizard = (PatchingWizard)Program.MainWindow.ShowForm(typeof(PatchingWizard));
+            wizard.PrepareToInstallUpdate(true);
         }
 
         private void toolStripButtonExportAll_Click(object sender, EventArgs e)
@@ -463,7 +464,7 @@ namespace XenAdmin.TabPages
                                 foreach (var hostUpdateInfo in poolUpdateInfo.HostsWithUpdates)
                                 {
                                     stream.WriteLine(connection.Resolve(new XenRef<Host>(hostUpdateInfo.HostOpaqueRef))?.Name());
-                                    stream.WriteLine(string.Join("\n", hostUpdateInfo.RecommendedGuidance.Select(g => g.StringOf())));
+                                    stream.WriteLine(string.Join("\n", hostUpdateInfo.RecommendedGuidance.Select(Cdn.FriendlyInstruction)));
 
                                     var categories = hostUpdateInfo.GetUpdateCategories(poolUpdateInfo);
                                     foreach (var category in categories)

@@ -128,6 +128,7 @@
     <Compile Include="Actions\Pool_Patch\UploadPatchAction.cs" />
     <Compile Include="Actions\ProduceConsumerQueue.cs" />
     <Compile Include="Actions\SR\SrTrimAction.cs" />
+    <Compile Include="Actions\Updates\ApplyUpdatesFromCdnAction.cs" />
     <Compile Include="Actions\Updates\ConfigCdnSyncAction.cs" />
     <Compile Include="Actions\Updates\DownloadUnzipUpdateAction.cs" />
     <Compile Include="Actions\Updates\DownloadAndUpdateClientAction.cs" />

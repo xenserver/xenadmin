@@ -662,6 +662,15 @@ namespace XenAdmin.TabPages
                     syncAction.Completed += a => Updates.CheckForCdnUpdates(a.Connection);
                     syncAction.RunAsync();
                 });
+
+            foreach (var host in pool.Connection.Cache.Hosts)
+            {
+                if (host.pending_guidances.Count > 0)
+                {
+                    pdSectionUpdates.AddEntry(string.Format(Messages.CDN_PENDING_GUIDANCES_KEY, host.Name().Ellipsise(30)),
+                        string.Format(Messages.CDN_PENDING_GUIDANCES_VALUE, string.Join(Environment.NewLine, host.pending_guidances.Select(GetPendingGuidance))));
+                }
+            }
         }
 
         private void GenerateHostUpdatesBox()
@@ -706,6 +715,12 @@ namespace XenAdmin.TabPages
                     GenerateCdnUpdatesBox(pool);
                 }
 
+                if (host.pending_guidances.Count > 0)
+                {
+                    pdSectionUpdates.AddEntry(string.Format(Messages.CDN_PENDING_GUIDANCES_KEY, host.Name().Ellipsise(30)),
+                        string.Format(Messages.CDN_PENDING_GUIDANCES_VALUE, string.Join(Environment.NewLine, host.pending_guidances.Select(GetPendingGuidance))));
+                }
+
                 if (Helpers.XapiEqualOrGreater_22_20_0(host))
                 {
                     var unixMinDateTime = Util.GetUnixMinDateTime();
@@ -726,6 +741,23 @@ namespace XenAdmin.TabPages
 
                     pdSectionUpdates.AddEntry(Messages.SOFTWARE_VERSION_LAST_UPDATED, lastUpdateTime);
                 }
+            }
+        }
+
+        private static string GetPendingGuidance(update_guidances guidance)
+        {
+            switch (guidance)
+            {
+                case update_guidances.reboot_host:
+                    return Messages.CDN_GUIDANCE_REBOOT_HOST;
+                case update_guidances.reboot_host_on_livepatch_failure:
+                    return Messages.CDN_GUIDANCE_REBOOT_HOST_LIVEPATCH_FAILURE;
+                case update_guidances.restart_toolstack:
+                    return Messages.CDN_GUIDANCE_RESTART_TOOLSTACK;
+                case update_guidances.restart_device_model:
+                    return Messages.CDN_GUIDANCE_RESTART_DEVICE_MODEL;
+                default:
+                    return Messages.UNKNOWN;
             }
         }
 

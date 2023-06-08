@@ -28,6 +28,7 @@
  * SUCH DAMAGE.
  */
 
+using System;
 using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Controls;
@@ -41,10 +42,22 @@ namespace XenAdmin.Wizards.PatchingWizard
         public PatchingWizard_FirstPage()
         {
             InitializeComponent();
+            radioButtonCdn.Text = string.Format(Messages.CONFIG_CDN_UPDATES_TAB_TITLE, BrandManager.ProductBrand, BrandManager.ProductVersionPost82);
+            radioButtonLcm.Text = string.Format(Messages.CONFIG_LCM_UPDATES_TAB_TITLE, BrandManager.ProductVersion821);
             label5.Text = string.Format(label5.Text, BrandManager.BrandConsole);
             label6.Text = string.Format(label6.Text, BrandManager.BrandConsole, BrandManager.CompanyNameLegacy);
-            label6.Visible = pictureBox4.Visible = linkLabelClientId.Visible =
-                ConnectionsManager.XenConnectionsCopy.Any(c => c.IsConnected && !Helpers.CloudOrGreater(c));
+        }
+
+        protected override void OnHandleCreated(EventArgs e)
+        {
+            base.OnHandleCreated(e);
+
+            var connections = ConnectionsManager.XenConnectionsCopy;
+
+            if (connections.Count > 0 && connections.All(c => c.IsConnected && !Helpers.CloudOrGreater(c)))
+                radioButtonLcm.Checked = true;
+            else
+                radioButtonCdn.Checked = true;
         }
 
         public override string Text => Messages.BEFORE_YOU_START;
@@ -52,6 +65,33 @@ namespace XenAdmin.Wizards.PatchingWizard
         public override string  PageTitle => Messages.BEFORE_YOU_START;
 
         public override string HelpID => "Beforeyoustart";
+
+        public bool IsUpdatesFromCdn
+        {
+            get => radioButtonCdn.Checked;
+            set
+            {
+                radioButtonCdn.Checked = value;
+                radioButtonLcm.Checked = !value;
+            }
+        }
+
+        private void ToggleClientIdInfo()
+        {
+            pictureBox4.Visible = label6.Visible = linkLabelClientId.Visible = radioButtonLcm.Checked;
+        }
+
+        private void radioButtonCdn_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButtonCdn.Checked)
+                ToggleClientIdInfo();
+        }
+
+        private void radioButtonLcm_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButtonLcm.Checked)
+                ToggleClientIdInfo();
+        }
 
         private void linkLabelClientId_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {

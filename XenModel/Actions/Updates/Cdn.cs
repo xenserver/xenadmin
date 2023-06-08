@@ -254,4 +254,25 @@ namespace XenAdmin.Core
     }
 
     #endregion
+
+    public static class Cdn
+    {
+        public static string FriendlyInstruction(CdnGuidance guidance)
+        {
+            switch (guidance)
+            {
+                case CdnGuidance.RebootHost:
+                    return Messages.CDN_GUIDANCE_REBOOT_HOST;
+                case CdnGuidance.RestartDeviceModel:
+                    return Messages.CDN_GUIDANCE_RESTART_DEVICE_MODEL;
+                case CdnGuidance.EvacuateHost:
+                    return Messages.CDN_GUIDANCE_EVACUATE_HOST;
+                case CdnGuidance.RestartToolstack:
+                    return Messages.CDN_GUIDANCE_RESTART_TOOLSTACK;
+                default:
+                case CdnGuidance.None:
+                    return Messages.NONE;
+            }
+        }
+    }
 }

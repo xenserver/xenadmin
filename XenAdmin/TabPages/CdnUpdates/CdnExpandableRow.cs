@@ -264,7 +264,7 @@ namespace XenAdmin.TabPages.CdnUpdates
         {
             var msg = allLivePatches ? Messages.HOTFIX_POST_UPDATE_LIVEPATCH_ACTIONS : Messages.HOTFIX_POST_UPDATE_ACTIONS;
 
-            var text = string.Format(msg, string.Join("\n", guidance.Select(g => g.StringOf())));
+            var text = string.Format(msg, string.Join("\n", guidance.Select(Cdn.FriendlyInstruction)));
             var img = allLivePatches ? Images.StaticImages.livepatch_16 : Images.StaticImages.rightArrowLong_Blue_16;
 
             SetValues(text, img);

@@ -1104,7 +1104,8 @@ namespace XenAdmin.TabPages
 
         private void toolStripButtonUpdate_Click(object sender, EventArgs e)
         {
-            Program.MainWindow.ShowForm(typeof(PatchingWizard));
+            var wizard = (PatchingWizard)Program.MainWindow.ShowForm(typeof(PatchingWizard));
+            wizard.PrepareToInstallUpdate(false);
         }
 
         private void toolStripButtonRestoreDismissed_Click(object sender, EventArgs e)

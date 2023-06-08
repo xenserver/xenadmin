@@ -138,6 +138,9 @@
   <data name="ACTION_ACTIVATING_MULTIPLE_VDIS_TITLE" xml:space="preserve">
     <value>Activating Multiple Virtual Disks</value>
   </data>
+  <data name="ACTION_APPLY_CDN_UPDATES_TITLE" xml:space="preserve">
+    <value>Installing updates on {0}...</value>
+  </data>
   <data name="ACTION_CHANGE_CONTROL_DOMAIN_MEMORY" xml:space="preserve">
     <value>Changing control domain memory settings on '{0}'</value>
   </data>
@@ -2636,6 +2639,9 @@ This will cancel compilation of the status report.</value>
   <data name="CDN_GUIDANCE_REBOOT_HOST" xml:space="preserve">
     <value>Reboot this server</value>
   </data>
+  <data name="CDN_GUIDANCE_REBOOT_HOST_LIVEPATCH_FAILURE" xml:space="preserve">
+    <value>Live patch failed. Reboot this server</value>
+  </data>
   <data name="CDN_GUIDANCE_RESTART_DEVICE_MODEL" xml:space="preserve">
     <value>Reboot VMs running on this server</value>
   </data>
@@ -2644,6 +2650,17 @@ This will cancel compilation of the status report.</value>
   </data>
   <data name="CDN_LIVEPATCHES_IN_UPDATE" xml:space="preserve">
     <value>This update live patches the following components: {0}</value>
+  </data>
+  <data name="CDN_PENDING_GUIDANCES_FAILURE" xml:space="preserve">
+    <value>The following tasks will need to be performed manually for the installed updates to take effect:
+{0}</value>
+  </data>
+  <data name="CDN_PENDING_GUIDANCES_KEY" xml:space="preserve">
+    <value>Pending tasks on {0}</value>
+  </data>
+  <data name="CDN_PENDING_GUIDANCES_VALUE" xml:space="preserve">
+    <value>The following tasks need to be performed for the latest installed updates to take effect:
+{0}</value>
   </data>
   <data name="CERTIFICATE_CA_ALERT_EXPIRED_DESCIRPTION" xml:space="preserve">
     <value>The trusted CA certificate '{0}' of '{1}' expired on {2}.</value>
@@ -2857,6 +2874,12 @@ Do you want to assign these VMs to the schedule '{0}' instead?</value>
   </data>
   <data name="CHECKING_HOST_MEMORY_POST_UPGRADE_DESCRIPTION" xml:space="preserve">
     <value>Host memory check</value>
+  </data>
+  <data name="CHECKING_LAST_CDN_SYNC_DESCRIPTION" xml:space="preserve">
+    <value>Has synchronized within the past week</value>
+  </data>
+  <data name="CHECKING_LAST_CDN_SYNC_TILE" xml:space="preserve">
+    <value>Checking date of last synchronization with update channel</value>
   </data>
   <data name="CHECKING_POWER_ON_MODE" xml:space="preserve">
     <value>Power On mode check</value>
@@ -10285,6 +10308,9 @@ This will cancel the update process and may leave your system in an unstable sta
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_TEXT" xml:space="preserve">
     <value>Upload and Install</value>
   </data>
+  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_TEXT_CDN" xml:space="preserve">
+    <value>Install Updates</value>
+  </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_TITLE" xml:space="preserve">
     <value>Uploading and installing updates</value>
   </data>
@@ -10405,8 +10431,32 @@ This will cancel the update process and may leave your system in an unstable sta
   <data name="PATCHINGWIZARD_REMOVING_UPDATES" xml:space="preserve">
     <value>Deleting update installation files</value>
   </data>
+  <data name="PATCHINGWIZARD_SELECTPATCHPAGE_AUTO_LABEL" xml:space="preserve">
+    <value>{0} will download and install all released updates on the current version, usually with only a single reboot at the end.</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTPATCHPAGE_AUTO_LABEL_CDN" xml:space="preserve">
+    <value>{0} will install all released updates on the current version, usually with only a single reboot at the end.</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTPATCHPAGE_BLURB" xml:space="preserve">
+    <value>Select Automated Updates, choose an update to download, or browse your computer for an update or supplemental pack file.</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTPATCHPAGE_BLURB_CDN" xml:space="preserve">
+    <value>Select Automated Updates, or browse your computer for a supplemental pack file.</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTPATCHPAGE_BLURB_CDN_UNLICENSED" xml:space="preserve">
+    <value>Browse your computer for an update or supplemental pack file.</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTPATCHPAGE_BLURB_UNLICENSED" xml:space="preserve">
+    <value>Select an update to download, or browse your computer for an update or supplemental pack file.</value>
+  </data>
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_CHOOSE" xml:space="preserve">
     <value>Choose Update File</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTPATCHPAGE_DISK_RADIO" xml:space="preserve">
+    <value>&amp;Select an update or supplemental pack from disk</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTPATCHPAGE_DISK_RADIO_CDN" xml:space="preserve">
+    <value>&amp;Select a supplemental pack from disk</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_ERROR_MAINISO" xml:space="preserve">
     <value>The file you have selected is a Base Installation ISO file and cannot be used to update your system. Please select an Update ISO file, or use the Rolling Pool Upgrade wizard instead to upgrade to a new version.</value>
@@ -10415,7 +10465,7 @@ This will cancel the update process and may leave your system in an unstable sta
     <value>Select Update</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_TITLE" xml:space="preserve">
-    <value>Choose an existing update to install or upload a new one</value>
+    <value>Choose the update you want to install</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_UPDATESEXT" xml:space="preserve">
     <value>{0} Updates and Supplemental Packs (*.iso,*.zip)|*.iso;*.zip</value>
@@ -13006,7 +13056,7 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
     <value>{0} Updates</value>
   </data>
   <data name="UPDATES_WIZARD" xml:space="preserve">
-    <value>Install Update</value>
+    <value>Install Updates</value>
   </data>
   <data name="UPDATES_WIZARD_ACTIONS_FOR_HOST" xml:space="preserve">
     <value>Actions for server '{0}'</value>
@@ -13020,11 +13070,17 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
   <data name="UPDATES_WIZARD_APPLY_UPDATE" xml:space="preserve">
     <value>&amp;Install update</value>
   </data>
+  <data name="UPDATES_WIZARD_APPLY_UPDATES" xml:space="preserve">
+    <value>&amp;Install updates</value>
+  </data>
   <data name="UPDATES_WIZARD_APPLYING_UPDATE" xml:space="preserve">
     <value>Installing update {0} on {1}... </value>
   </data>
   <data name="UPDATES_WIZARD_APPLYING_UPDATE_MULTIPLE_HOSTS" xml:space="preserve">
     <value>Installing update on {0} servers...</value>
+  </data>
+  <data name="UPDATES_WIZARD_APPLYING_UPDATES_FROM_CDN" xml:space="preserve">
+    <value>Installing updates on {0}... </value>
   </data>
   <data name="UPDATES_WIZARD_BROKEN_SR_WARNING" xml:space="preserve">
     <value>{0}: Check skipped because the '{1}' storage repository is broken.</value>
