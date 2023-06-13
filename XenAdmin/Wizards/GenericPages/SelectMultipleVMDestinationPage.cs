@@ -49,7 +49,6 @@ namespace XenAdmin.Wizards.GenericPages
     internal abstract partial class SelectMultipleVMDestinationPage : XenTabPage
     {
         private Dictionary<string, VmMapping> m_vmMappings;
-        public IXenObject SelectedTarget { get; set; }
         private bool updatingDestinationCombobox;
         private bool restoreGridHomeServerSelection;
         private bool updatingHomeServerList;
@@ -58,6 +57,7 @@ namespace XenAdmin.Wizards.GenericPages
         private readonly CollectionChangeEventHandler Host_CollectionChangedWithInvoke;
         private string _preferredHomeRef;
         private IXenObject _selectedTargetPool;
+        private IXenObject _selectedTarget;
 
         #region Nested classes
 
@@ -121,8 +121,24 @@ namespace XenAdmin.Wizards.GenericPages
             get => _selectedTargetPool;
             private set
             {
+                var oldTargetPool = _selectedTargetPool;
                 _selectedTargetPool = value;
-                OnChosenItemChanged();
+
+                if (oldTargetPool?.opaque_ref != _selectedTargetPool?.opaque_ref)
+                    OnSelectedTargetPoolChanged();
+            }
+        }
+
+        public IXenObject SelectedTarget
+        {
+            get => _selectedTarget;
+            set
+            {
+                var oldTarget = _selectedTarget;
+                _selectedTarget = value;
+
+                if (oldTarget?.opaque_ref != SelectedTarget?.opaque_ref)
+                    OnSelectedTargetChanged();
             }
         }
 
@@ -143,8 +159,13 @@ namespace XenAdmin.Wizards.GenericPages
         /// </summary>
         protected abstract string TargetServerSelectionIntroText { get; }
 
-        protected virtual void OnChosenItemChanged()
+        protected virtual void OnSelectedTargetPoolChanged()
         { }
+
+        protected virtual void OnSelectedTargetChanged()
+        {
+
+        }
 
         protected void ShowWarning(string warningText)
         {
@@ -208,15 +229,15 @@ namespace XenAdmin.Wizards.GenericPages
             {
                 foreach (DataGridViewRow row in m_dataGridView.Rows)
                 {
-                    string sysId = (string)row.Cells[0].Tag;
+                    var sysId = (string)row.Cells[0].Tag;
 
                     if (m_vmMappings.ContainsKey(sysId))
                     {
                         var mapping = m_vmMappings[sysId];
-                        DataGridViewEnableableComboBoxCell cbCell = row.Cells[m_colTarget.Index] as DataGridViewEnableableComboBoxCell;
+                        var cbCell = row.Cells[m_colTarget.Index] as DataGridViewEnableableComboBoxCell;
                         System.Diagnostics.Debug.Assert(cbCell != null, "ComboBox cell was not found");
 
-                        IEnableableXenObjectComboBoxItem selectedItem = cbCell.Value as IEnableableXenObjectComboBoxItem;
+                        var selectedItem = cbCell.Value as IEnableableXenObjectComboBoxItem;
                         System.Diagnostics.Debug.Assert(selectedItem != null, "Vm has no target mapped");
                         var type = selectedItem.Item.GetType();
 
@@ -231,7 +252,7 @@ namespace XenAdmin.Wizards.GenericPages
 
                 return m_vmMappings;
             }
-            set { m_vmMappings = value; }
+            set => m_vmMappings = value;
         }
 
         #endregion
@@ -257,8 +278,7 @@ namespace XenAdmin.Wizards.GenericPages
 
             foreach (var item in m_comboBoxConnection.Items)
             {
-                DelayLoadingOptionComboBoxItem tempItem = item as DelayLoadingOptionComboBoxItem;
-                if (tempItem != null)
+                if (item is DelayLoadingOptionComboBoxItem tempItem)
                     tempItem.ReasonUpdated -= DelayLoadedComboBoxItem_ReasonChanged;
             }
             m_comboBoxConnection.Items.Clear();
@@ -290,11 +310,11 @@ namespace XenAdmin.Wizards.GenericPages
             {
                 DelayLoadingOptionComboBoxItem item = null;
 
-                Pool pool = Helpers.GetPool(xenConnection);
+                var pool = Helpers.GetPool(xenConnection);
 
                 if (pool == null)
                 {
-                    Host host = Helpers.GetCoordinator(xenConnection);
+                    var host = Helpers.GetCoordinator(xenConnection);
 
                     if (host != null)
                     {
@@ -345,7 +365,7 @@ namespace XenAdmin.Wizards.GenericPages
         {
             foreach (DataGridViewRow row in m_dataGridView.Rows)
             {
-                string sysId = (string)row.Cells[m_colVmName.Index].Tag;
+                var sysId = (string)row.Cells[m_colVmName.Index].Tag;
 
                 if (m_vmMappings.TryGetValue(sysId, out var mapping) &&
                     row.Cells[m_colTarget.Index] is DataGridViewEnableableComboBoxCell cbCell)
@@ -485,17 +505,16 @@ namespace XenAdmin.Wizards.GenericPages
 
             Program.Invoke(this, () =>
             {
-                int index = m_comboBoxConnection.Items.IndexOf(item);
+                var index = m_comboBoxConnection.Items.IndexOf(item);
                 if (index < 0 || index >= m_comboBoxConnection.Items.Count)
                     return;
 
                 if (updatingDestinationCombobox || updatingHomeServerList)
                     return;
 
-                int selectedIndex = m_comboBoxConnection.SelectedIndex;
+                var selectedIndex = m_comboBoxConnection.SelectedIndex;
 
-                var tempItem = m_comboBoxConnection.Items[index] as DelayLoadingOptionComboBoxItem;
-                if (tempItem == null)
+                if (!(m_comboBoxConnection.Items[index] is DelayLoadingOptionComboBoxItem tempItem))
                     throw new NullReferenceException("Trying to update delay loaded reason but failed to extract reason");
 
                 tempItem.CopyFrom(item);
@@ -527,8 +546,7 @@ namespace XenAdmin.Wizards.GenericPages
             if (item == null)
                 throw new NullReferenceException("Trying to update delay loaded reason but failed to extract reason");
 
-            var cb = item.ParentComboBox as DataGridViewEnableableComboBoxCell;
-            if (cb == null)
+            if (!(item.ParentComboBox is DataGridViewEnableableComboBoxCell cb))
                 return;
 
             Program.Invoke(this, () =>
@@ -595,7 +613,7 @@ namespace XenAdmin.Wizards.GenericPages
 
             //If the item is delay loading and them item is disabled, null the selection made 
             //and clear the table containing server data
-            IEnableableXenObjectComboBoxItem item = m_comboBoxConnection.SelectedItem as IEnableableXenObjectComboBoxItem;
+            var item = m_comboBoxConnection.SelectedItem as IEnableableXenObjectComboBoxItem;
             if (item != null && !item.Enabled)
             {
                 m_comboBoxConnection.SelectedIndex = -1;
@@ -604,8 +622,7 @@ namespace XenAdmin.Wizards.GenericPages
                 return;
             }
 
-            AddHostRunningComboBoxItem exeItem = m_comboBoxConnection.SelectedItem as AddHostRunningComboBoxItem;
-            if (exeItem != null && !updatingDestinationCombobox)
+            if (m_comboBoxConnection.SelectedItem is AddHostRunningComboBoxItem exeItem && !updatingDestinationCombobox)
                 exeItem.RunCommand(this);
 
             else if (!updatingDestinationCombobox)
@@ -643,8 +660,7 @@ namespace XenAdmin.Wizards.GenericPages
 
             m_dataGridView.BeginEdit(false);
 
-            var editingControl = m_dataGridView.EditingControl as ComboBox;
-            if (editingControl != null)
+            if (m_dataGridView.EditingControl is ComboBox editingControl)
                 editingControl.DroppedDown = true;
         }
 
@@ -699,8 +715,7 @@ namespace XenAdmin.Wizards.GenericPages
         {
             foreach (var item in m_comboBoxConnection.Items)
             {
-                DelayLoadingOptionComboBoxItem comboBoxItem = item as DelayLoadingOptionComboBoxItem;
-                if (comboBoxItem != null)
+                if (item is DelayLoadingOptionComboBoxItem comboBoxItem)
                     comboBoxItem.CancelFilters();
             }
         }

@@ -88,7 +88,9 @@ namespace XenAdmin.Commands
             }
 
             foreach (var app in appsToStart)
-                (new StartApplianceAction(app, false)).RunAsync();
+            {
+                new StartApplianceAction(app, false).RunAsync();
+            }
         }
 
         private bool CanStartAppliance(VM_appliance app)

@@ -372,6 +372,21 @@ namespace XenAdmin.Wizards.ImportWizard
                     && lunPerVdiMappingPage.MapLunsToVdisRequired
                     && m_typeOfImport == ImportType.Ovf)
                     AddAfterPage(m_pageStorage, lunPerVdiMappingPage);
+
+                // If the user has selected shared SRs, we cannot be sure that the VMs can't be started.
+                // m_pageHost.ApplianceCanBeStarted only checks the number of pCPUs on the selected target.
+                // We therefore allow users to selected "Start VMs automatically", as they will be shown
+                // an error message in case their configuration isn't valid.
+                var canStartVMsAutomatically = m_pageHost.ApplianceCanBeStarted ||
+                    m_pageStorage.VmMappings.Values
+                    .SelectMany(mapping => mapping.Storage.Values)
+                    .Any(sr => sr != null && sr.shared);
+
+                if(canStartVMsAutomatically != m_pageFinish.CanStartVmsAutomatically)
+                {
+                    m_pageFinish.CanStartVmsAutomatically = canStartVMsAutomatically;
+                    NotifyNextPagesOfChange(m_pageFinish);
+                }
             }
             else if (type == typeof(LunPerVdiImportPage))
             {
@@ -567,7 +582,7 @@ namespace XenAdmin.Wizards.ImportWizard
         {
             var temp = new List<Tuple>();
             temp.Add(new Tuple(Messages.FINISH_PAGE_VMNAME, m_pageXvaStorage.ImportedVm.Name()));
-            temp.Add(new Tuple(Messages.FINISH_PAGE_TARGET, m_pageXvaHost.SelectedHost == null ? m_pageXvaHost.SelectedConnection.Name : m_pageXvaHost.SelectedHost.Name()));
+            temp.Add(new Tuple(Messages.FINISH_PAGE_TARGET_FOR_VM, m_pageXvaHost.SelectedHost == null ? m_pageXvaHost.SelectedConnection.Name : m_pageXvaHost.SelectedHost.Name()));
             temp.Add(new Tuple(Messages.FINISH_PAGE_STORAGE, m_pageXvaStorage.SR.Name()));
 
             var con = m_pageXvaHost.SelectedHost == null ? m_pageXvaHost.SelectedConnection : m_pageXvaHost.SelectedHost.Connection;
@@ -632,11 +647,9 @@ namespace XenAdmin.Wizards.ImportWizard
 
             foreach (var mapping in m_vmMappings.Values)
             {
-                var targetLbl = m_vmMappings.Count == 1 ? Messages.FINISH_PAGE_TARGET : string.Format(Messages.FINISH_PAGE_TARGET_FOR_VM, mapping.VmNameLabel);
                 var storageLbl = m_vmMappings.Count == 1 ? Messages.FINISH_PAGE_STORAGE : string.Format(Messages.FINISH_PAGE_STORAGE_FOR_VM, mapping.VmNameLabel);
                 var networkLbl = m_vmMappings.Count == 1 ? Messages.FINISH_PAGE_NETWORK : string.Format(Messages.FINISH_PAGE_NETWORK_FOR_VM, mapping.VmNameLabel);
 
-                temp.Add(new Tuple(targetLbl, mapping.TargetName));
                 bool first = true;
                 foreach (var sr in mapping.Storage)
                 {

@@ -150,6 +150,7 @@ namespace XenAdmin.Dialogs
             }
 
             SR sr = srPicker.SR;
+            var actions = new List<AsyncAction>();
 
             if (!sr.shared && _vm != null && _vm.HaPriorityIsRestart())
             {
@@ -160,31 +161,25 @@ namespace XenAdmin.Dialogs
                         return;
                 }
 
-                new HAUnprotectVMAction(_vm).RunSync(_vm.Connection.Session);
+                actions.Add(new HAUnprotectVMAction(_vm));
             }
 
             if (_vm != null)
             {
                 //note that this action alters the Device
-                var action = new CreateDiskAction(Disk, Device, _vm);
-                using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Blocks))
-                    dialog.ShowDialog();
-                if (!action.Succeeded)
-                    return;
+                actions.Add(new CreateDiskAction(Disk, Device, _vm));
 
                 // Now try to plug the VBD.
-                var plugAction = new VbdSaveAndPlugAction(_vm, Device, Disk.Name(), _vm.Connection.Session, false);
+                var plugAction = new VbdCreateAndPlugAction(_vm, Device, Disk.Name(), false);
                 plugAction.ShowUserInstruction += PlugAction_ShowUserInstruction;
-                plugAction.RunAsync();
+                actions.Add(plugAction);
             }
             else
             {
-                var action = new CreateDiskAction(Disk);
-                using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
-                    dialog.ShowDialog();
-                if (!action.Succeeded)
-                    return;
+                actions.Add(new CreateDiskAction(Disk));
             }
+
+            new MultipleAction(connection, "", "", "", actions, true, true, true).RunAsync();
 
             DialogResult = DialogResult.OK;
             Close();

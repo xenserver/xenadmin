@@ -31,21 +31,15 @@ namespace XenAdmin.Wizards.NewVMWizard
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Page_Finish));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.AutoStartCheckBox = new System.Windows.Forms.CheckBox();
             this.SummaryGridView = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
             this.PropertyColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ValueColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.SummaryGridView)).BeginInit();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // richTextBox1
-            // 
-            resources.ApplyResources(this.richTextBox1, "richTextBox1");
-            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.TabStop = false;
             // 
             // AutoStartCheckBox
             // 
@@ -57,9 +51,9 @@ namespace XenAdmin.Wizards.NewVMWizard
             // 
             // SummaryGridView
             // 
-            resources.ApplyResources(this.SummaryGridView, "SummaryGridView");
             this.SummaryGridView.BackgroundColor = System.Drawing.SystemColors.Control;
             this.SummaryGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.SummaryGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.SummaryGridView.ColumnHeadersVisible = false;
             this.SummaryGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.PropertyColumn,
@@ -72,6 +66,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.SummaryGridView.DefaultCellStyle = dataGridViewCellStyle1;
+            resources.ApplyResources(this.SummaryGridView, "SummaryGridView");
             this.SummaryGridView.Name = "SummaryGridView";
             this.SummaryGridView.ReadOnly = true;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
@@ -94,26 +89,38 @@ namespace XenAdmin.Wizards.NewVMWizard
             this.ValueColumn.Name = "ValueColumn";
             this.ValueColumn.ReadOnly = true;
             // 
+            // tableLayoutPanel1
+            // 
+            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.AutoStartCheckBox, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.SummaryGridView, 0, 1);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
             // Page_Finish
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.Controls.Add(this.SummaryGridView);
-            this.Controls.Add(this.AutoStartCheckBox);
-            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "Page_Finish";
             ((System.ComponentModel.ISupportInitialize)(this.SummaryGridView)).EndInit();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.CheckBox AutoStartCheckBox;
         private XenAdmin.Controls.DataGridViewEx.DataGridViewEx SummaryGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn PropertyColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ValueColumn;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Label label1;
     }
 }

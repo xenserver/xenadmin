@@ -40,54 +40,47 @@ namespace XenAdmin.Wizards.NewVMWizard
         public Page_Finish()
         {
             InitializeComponent();
-            richTextBox1.Text = Messages.NEWVMWIZARD_FINISHPAGE;
         }
 
-        public override string Text
-        {
-            get { return Messages.NEWVMWIZARD_FINISHPAGE_NAME; }
-        }
+        public override string Text => Messages.NEWVMWIZARD_FINISHPAGE_NAME;
 
-        public override string PageTitle
-        {
-            get { return Messages.NEWVMWIZARD_FINISHPAGE_TITLE; }
-        }
+        public override string PageTitle => Messages.NEWVMWIZARD_FINISHPAGE_TITLE;
 
-        public override string HelpID
-        {
-            get { return "Finish"; }
-        }
+        public override string HelpID => "Finish";
 
         public override string NextText(bool isLastPage)
         {
             return Messages.NEWVMWIZARD_FINISHPAGE_CREATE;
         }
 
-        public bool StartImmediately
+        public bool StartImmediately => AutoStartCheckBox.Checked;
+
+        private bool _canStartImmediately = true;
+
+        public bool CanStartImmediately
         {
-            get
-            {
-                return AutoStartCheckBox.Checked;
-            }
+            get => _canStartImmediately;
+            set => _canStartImmediately = AutoStartCheckBox.Checked = AutoStartCheckBox.Enabled = value;
         }
 
         protected override void PageLoadedCore(PageLoadedDirection direction)
         {
             SummaryGridView.Rows.Clear();
             
-            if (SummaryRetreiver == null)
+            if (SummaryRetriever == null)
                 return;
 
-            var entries = SummaryRetreiver.Invoke();
-            foreach (KeyValuePair<string, string> pair in entries)
+            var entries = SummaryRetriever.Invoke();
+            foreach (var pair in entries)
                 SummaryGridView.Rows.Add(pair.Key, pair.Value);
         }
 
         public override void SelectDefaultControl()
         {
-            AutoStartCheckBox.Select();
+            if(CanStartImmediately)
+                AutoStartCheckBox.Select();
         }
 
-        public Func<IEnumerable<KeyValuePair<string, string>>> SummaryRetreiver { private get; set; }
+        public Func<IEnumerable<KeyValuePair<string, string>>> SummaryRetriever { private get; set; }
     }
 }

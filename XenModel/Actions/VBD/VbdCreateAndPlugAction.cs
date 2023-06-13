@@ -35,9 +35,9 @@ using XenAPI;
 namespace XenAdmin.Actions
 {
     /// <summary>
-    /// Saves changes on a VBD, then tries to plug the VBD into a VM.
+    /// Creates a VBD, then tries to plug it into a VM.
     /// </summary>
-    public class VbdSaveAndPlugAction : AsyncAction
+    public class VbdCreateAndPlugAction : AsyncAction
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -48,24 +48,21 @@ namespace XenAdmin.Actions
         /// </summary>
         public event Action<string> ShowUserInstruction;
 
-        public VbdSaveAndPlugAction(VM vm, VBD vbd, string vdiName, Session session, bool suppress)
+        public VbdCreateAndPlugAction(VM vm, VBD vbd, string vdiName, bool suppress)
             : base(vm.Connection, string.Format(Messages.ATTACHING_VIRTUAL_DISK, vdiName, vm.Name()), "", suppress)
         {
             VM = vm;
             this.vbd = vbd;
-            // Preserve existing session if provided.
-            if (session != null)
-                this.Session = session;
 
-            ApiMethodsToRoleCheck.Add("vbd.async_plug");
-            ApiMethodsToRoleCheck.Add("vbd.set_userdevice");
+            ApiMethodsToRoleCheck.Add("vbd.create");
+
+            if (VM.IsHVM() || !vbd.empty)
+                ApiMethodsToRoleCheck.AddRange("vbd.get_allowed_operations", "vbd.async_plug");
         }
 
         protected override void Run()
         {
-            // First, save changes to the VBD.
-            
-            string vbdServerRef = vbd.SaveChanges(Session, null, null);
+            string vbdServerRef = VBD.create(Session, vbd);
 
             if (!VM.IsHVM() && vbd.empty)
             {
@@ -79,13 +76,13 @@ namespace XenAdmin.Actions
             {
 
                 log.DebugFormat("Attempting to hot plug VBD {0}.", vbd.uuid);
-                this.RelatedTask = XenAPI.VBD.async_plug(Session, vbdServerRef);
+                RelatedTask = VBD.async_plug(Session, vbdServerRef);
                 PollToCompletion();
-                this.Description = Messages.ATTACHDISKWIZARD_ATTACHED;
+                Description = Messages.ATTACHDISKWIZARD_ATTACHED;
             }
             else
             {
-                VM vm = this.Connection.Resolve(vbd.VM);
+                VM vm = Connection.Resolve(vbd.VM);
                 if (vm != null && vm.power_state != vm_power_state.Halted)
                 {
                     if (vbd.type == vbd_type.CD)

@@ -37,6 +37,16 @@ namespace XenAPI
 {
     public partial class Pool : IComparable<Pool>, IEquatable<Pool>
     {
+        private const string ROLLING_UPGRADE_IN_PROGRESS = "rolling_upgrade_in_progress";
+        private const string FORBID_RPU_FOR_HCI = "hci-forbid-rpu";
+        private const string FAULT_TOLERANCE_LIMIT_FOR_HCI = "hci-limit-fault-tolerance";
+        private const string FORBID_UPDATE_AUTO_RESTARTS = "hci-forbid-update-auto-restart";
+        public const string HEALTH_CHECK_ENROLLMENT = "Enrollment";
+
+        public const string MAIL_DESTINATION_KEY_NAME = "mail-destination";
+        public const string SMTP_MAILHUB_KEY_NAME = "ssmtp-mailhub";
+        public const string MAIL_LANGUAGE_KEY_NAME = "mail-language";
+
         public override string ToString()
         {
             return Name();
@@ -105,12 +115,6 @@ namespace XenAPI
         {
             return Connection != null && (name_label != "" || Connection.Cache.HostCount > 1);
         }
-
-        private const string ROLLING_UPGRADE_IN_PROGRESS = "rolling_upgrade_in_progress";
-        private const string FORBID_RPU_FOR_HCI = "hci-forbid-rpu";
-        private const string FAULT_TOLERANCE_LIMIT_FOR_HCI = "hci-limit-fault-tolerance";
-        private const string FORBID_UPDATE_AUTO_RESTARTS = "hci-forbid-update-auto-restart";
-        public const string HEALTH_CHECK_ENROLLMENT = "Enrollment";
 
         public bool RollingUpgrade()
         {
