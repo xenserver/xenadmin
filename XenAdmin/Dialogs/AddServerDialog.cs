@@ -172,7 +172,7 @@ namespace XenAdmin.Dialogs
             {
                 conn.Hostname = server;
                 conn.Port = ConnectionsManager.DEFAULT_XEN_PORT;
-                XenConnectionUI.ConnectToXapiDatabase(conn, this);
+                XenConnectionUI.ConnectToXapiDatabase(conn, Owner);
             }
             else if (!_changedPass)
             {

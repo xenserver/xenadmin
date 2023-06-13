@@ -35,6 +35,7 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
 using System.Text;
@@ -116,7 +117,6 @@ namespace XenAdmin
         private readonly Dictionary<IXenConnection, IList<Form>> activePoolWizards = new Dictionary<IXenConnection, IList<Form>>();
 
         private string[] _commandLineArgs;
-        private bool _launched;
 
         private static readonly System.Windows.Forms.Timer CheckForUpdatesTimer = new System.Windows.Forms.Timer();
 
@@ -738,13 +738,10 @@ namespace XenAdmin
                             Password = args.Length > 3 ? args[3] : ""
                         };
 
-                        if (ConnectionsManager.XenConnectionsContains(connection))
-                            break;
-
-                        lock (ConnectionsManager.ConnectionsLock)
-                            ConnectionsManager.XenConnections.Add(connection);
-
-                        XenConnectionUI.BeginConnect(connection, true, null, false);
+                        if (File.Exists(args[1]))
+                            XenConnectionUI.ConnectToXapiDatabase(connection, this);
+                        else
+                            XenConnectionUI.BeginConnect(connection, true, this, false);
                         break;
                     default:
                         log.Warn("CLI: Wrong syntax or unknown command line options.");
@@ -752,14 +749,7 @@ namespace XenAdmin
                 }
             }
 
-            if (_launched)
-            {
-                // if already running, draw the user's attention
-                HelpersGUI.BringFormToFront(this);
-                Activate();
-            }
-
-            _launched = true;
+            HelpersGUI.BringFormToFront(this);
         }
 
         #endregion

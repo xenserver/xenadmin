@@ -139,7 +139,7 @@
     <Compile Include="Actions\USB\DeleteVUSBAction.cs" />
     <Compile Include="Actions\USB\SetUsbPassthroughAction.cs" />
     <Compile Include="Actions\VBD\VbdEditAction.cs" />
-    <Compile Include="Actions\VBD\VbdSaveAndPlugAction.cs" />
+    <Compile Include="Actions\VBD\VbdCreateAndPlugAction.cs" />
     <Compile Include="Actions\DR\VdiOpenDatabaseAction.cs" />
     <Compile Include="Actions\VDI\CreateDiskAction.cs" />
     <Compile Include="Actions\VDI\MigrateVirtualDiskAction.cs" />
@@ -171,6 +171,11 @@
     <Compile Include="Actions\StatusReport\ZipStatusReportAction.cs" />
     <Compile Include="Alerts\Types\Alert.cs" />
     <Compile Include="BrandManager.cs" />
+    <Compile Include="Messages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.resx</DependentUpon>
+    </Compile>
     <Compile Include="SshConsole.cs" />
     <Compile Include="FriendlyNames.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -203,11 +208,6 @@
     <Compile Include="FriendlyNameManager.cs" />
     <Compile Include="InvokeHelper.cs" />
     <Compile Include="Mappings\VmMapping.cs" />
-    <Compile Include="Messages.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Messages.resx</DependentUpon>
-    </Compile>
     <Compile Include="Network\Cache.cs" />
     <Compile Include="Network\ConnectTask.cs" />
     <Compile Include="Network\Heartbeat.cs" />
@@ -305,7 +305,6 @@
     <Compile Include="Actions\WLB\SendWlbConfigurationAction.cs" />
     <Compile Include="Actions\WLB\WlbRetrieveRecommendationsAction.cs" />
     <Compile Include="Alerts\PerfmonDefinition.cs" />
-    <Compile Include="Alerts\PerfmonOptionsDefinition.cs" />
     <Compile Include="InvisibleMessages.Designer.cs">
       <DependentUpon>InvisibleMessages.resx</DependentUpon>
       <AutoGen>True</AutoGen>

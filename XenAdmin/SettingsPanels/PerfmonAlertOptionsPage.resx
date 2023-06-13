@@ -117,409 +117,394 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="SendEmailNoteLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="SendEmailNoteLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="EmailNotificationCheckBox" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="groupBox1" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Percent,100,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
-  </data>
-  <data name="EmailAddressLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="EmailNotificationCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 17</value>
-  </data>
-  <data name="EmailNotificationCheckBox.Text" xml:space="preserve">
-    <value>Send &amp;email alert notifications</value>
+  <data name="SendEmailNoteLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="SendEmailNoteLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;SmtpPortLabel.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="SendEmailNoteLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
-  <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="SendEmailNoteLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 10</value>
   </data>
-  <data name="groupBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>22, 5, 3, 3</value>
+  <data name="SendEmailNoteLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>485, 26</value>
   </data>
-  <data name="&gt;&gt;MailLanguageComboBox.ZOrder" xml:space="preserve">
+  <data name="SendEmailNoteLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>32</value>
+  </data>
+  <data name="SendEmailNoteLabel.Text" xml:space="preserve">
+    <value>If you want to be notified via email when alerts are generated for your system's resources, enter an address where email notifications will be sent.</value>
+  </data>
+  <data name="&gt;&gt;SendEmailNoteLabel.Name" xml:space="preserve">
+    <value>SendEmailNoteLabel</value>
+  </data>
+  <data name="&gt;&gt;SendEmailNoteLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SendEmailNoteLabel.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;SendEmailNoteLabel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;SmtpServerPortTextBox.Name" xml:space="preserve">
-    <value>SmtpServerPortTextBox</value>
+  <data name="EmailNotificationCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="SmtpServerLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 13</value>
+  <data name="EmailNotificationCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="EmailNotificationCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 39</value>
+  </data>
+  <data name="EmailNotificationCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>160, 17</value>
+  </data>
   <data name="EmailNotificationCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;SmtpServerLabel.Name" xml:space="preserve">
-    <value>SmtpServerLabel</value>
+  <data name="EmailNotificationCheckBox.Text" xml:space="preserve">
+    <value>Send email alert &amp;notifications</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>PerfmonAlertOptionsPage</value>
+  <data name="&gt;&gt;EmailNotificationCheckBox.Name" xml:space="preserve">
+    <value>EmailNotificationCheckBox</value>
   </data>
-  <data name="SmtpServerPortTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>368, 45</value>
+  <data name="&gt;&gt;EmailNotificationCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;EmailNotificationCheckBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;EmailNotificationCheckBox.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="groupBox1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="groupBox1.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="MailLanguageComboBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>100, 71</value>
+  </data>
+  <data name="MailLanguageComboBox.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>No</value>
+  </data>
+  <data name="MailLanguageComboBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>220, 21</value>
+  </data>
+  <data name="MailLanguageComboBox.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
   </data>
   <data name="MailLanguageComboBox.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="SmtpPortLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;SmtpPortLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SmtpServerAddrTextBox.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="SmtpServerPortTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 20</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;EmailAddressTextBox.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="MailLanguageLabel.Text" xml:space="preserve">
-    <value>Mail &amp;language:</value>
-  </data>
   <data name="&gt;&gt;MailLanguageComboBox.Name" xml:space="preserve">
     <value>MailLanguageComboBox</value>
   </data>
-  <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="&gt;&gt;MailLanguageComboBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="SendEmailNoteLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="&gt;&gt;MailLanguageComboBox.Parent" xml:space="preserve">
+    <value>groupBox1</value>
   </data>
-  <data name="&gt;&gt;EmailAddressTextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;MailLanguageComboBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="MailLanguageLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="MailLanguageLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="MailLanguageLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 74</value>
   </data>
   <data name="MailLanguageLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 13</value>
   </data>
-  <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>485, 333</value>
+  <data name="MailLanguageLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
   </data>
-  <data name="&gt;&gt;EmailAddressTextBox.Parent" xml:space="preserve">
+  <data name="MailLanguageLabel.Text" xml:space="preserve">
+    <value>&amp;Mail language:</value>
+  </data>
+  <data name="MailLanguageLabel.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;MailLanguageLabel.Name" xml:space="preserve">
+    <value>MailLanguageLabel</value>
+  </data>
+  <data name="&gt;&gt;MailLanguageLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;MailLanguageLabel.Parent" xml:space="preserve">
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;MailLanguageLabel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="SmtpServerLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+  <data name="SmtpPortLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
-  <data name="MailLanguageLabel.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="groupBox1.Text" xml:space="preserve">
-    <value>Delivery address</value>
-  </data>
-  <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="SmtpServerAddrTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>220, 20</value>
-  </data>
-  <data name="SmtpServerLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;SmtpServerLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="SmtpPortLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 13</value>
-  </data>
-  <data name="SmtpServerPortTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 0</value>
-  </data>
-  <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>31</value>
-  </data>
-  <data name="SmtpServerLabel.AutoSize" type="System.Boolean, mscorlib">
+  <data name="SmtpPortLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="MailLanguageLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="MailLanguageLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;SendEmailNoteLabel.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="EmailAddressLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="EmailAddressLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="groupBox1.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
-  </data>
-  <data name="MailLanguageComboBox.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="EmailNotificationCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;EmailAddressLabel.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;SendEmailNoteLabel.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="SmtpServerPortTextBox.Text" xml:space="preserve">
-    <value>25</value>
-  </data>
-  <data name="SmtpServerAddrTextBox.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;SmtpServerAddrTextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;MailLanguageLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="MailLanguageLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="SmtpPortLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;SmtpServerPortTextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="SmtpPortLabel.Text" xml:space="preserve">
-    <value>&amp;Port:</value>
+  <data name="SmtpPortLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>330, 48</value>
   </data>
   <data name="SmtpPortLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="&gt;&gt;EmailAddressLabel.Name" xml:space="preserve">
-    <value>EmailAddressLabel</value>
+  <data name="SmtpPortLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>29, 13</value>
   </data>
-  <data name="&gt;&gt;MailLanguageComboBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="SmtpPortLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="SmtpPortLabel.Text" xml:space="preserve">
+    <value>&amp;Port:</value>
+  </data>
+  <data name="&gt;&gt;SmtpPortLabel.Name" xml:space="preserve">
+    <value>SmtpPortLabel</value>
+  </data>
+  <data name="&gt;&gt;SmtpPortLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SmtpPortLabel.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;SmtpPortLabel.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="SmtpServerPortTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="SmtpServerPortTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>368, 45</value>
+  </data>
+  <data name="SmtpServerPortTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 0</value>
+  </data>
+  <data name="SmtpServerPortTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>79, 20</value>
+  </data>
+  <data name="SmtpServerPortTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="SmtpServerPortTextBox.Text" xml:space="preserve">
+    <value>25</value>
+  </data>
+  <data name="&gt;&gt;SmtpServerPortTextBox.Name" xml:space="preserve">
+    <value>SmtpServerPortTextBox</value>
+  </data>
+  <data name="&gt;&gt;SmtpServerPortTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;SmtpServerPortTextBox.Parent" xml:space="preserve">
     <value>groupBox1</value>
   </data>
-  <data name="MailLanguageComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>220, 21</value>
+  <data name="&gt;&gt;SmtpServerPortTextBox.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
-  <data name="&gt;&gt;SendEmailNoteLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="SmtpServerLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 48</value>
-  </data>
-  <data name="&gt;&gt;SmtpServerAddrTextBox.Name" xml:space="preserve">
-    <value>SmtpServerAddrTextBox</value>
-  </data>
-  <data name="groupBox1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>5, 9, 5, 0</value>
-  </data>
-  <data name="&gt;&gt;EmailNotificationCheckBox.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;SendEmailNoteLabel.Name" xml:space="preserve">
-    <value>SendEmailNoteLabel</value>
-  </data>
-  <data name="&gt;&gt;EmailAddressLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;MailLanguageLabel.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>22, 77</value>
-  </data>
-  <data name="SmtpServerLabel.Text" xml:space="preserve">
-    <value>&amp;SMTP Server:</value>
-  </data>
-  <data name="&gt;&gt;MailLanguageLabel.Name" xml:space="preserve">
-    <value>MailLanguageLabel</value>
-  </data>
-  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>455, 108</value>
-  </data>
-  <data name="SmtpServerLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="SmtpServerAddrTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="EmailAddressTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
-  </data>
-  <data name="&gt;&gt;SmtpServerLabel.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="SendEmailNoteLabel.Text" xml:space="preserve">
-    <value>The server can update you by email regarding system alerts that are being generated by your managed servers. To enable this feature, enter an address where email notifications will be sent for the servers and VMs in this pool (or for this standalone server).</value>
-  </data>
-  <data name="SendEmailNoteLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 10</value>
   </data>
   <data name="EmailAddressTextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>100, 19</value>
   </data>
-  <data name="MailLanguageComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>100, 71</value>
+  <data name="EmailAddressTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>347, 20</value>
+  </data>
+  <data name="EmailAddressTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;EmailAddressTextBox.Name" xml:space="preserve">
+    <value>EmailAddressTextBox</value>
+  </data>
+  <data name="&gt;&gt;EmailAddressTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;EmailAddressTextBox.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;EmailAddressTextBox.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="EmailAddressLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
+  <data name="EmailAddressLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;MailLanguageComboBox.Parent" xml:space="preserve">
+  <data name="EmailAddressLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 22</value>
+  </data>
+  <data name="EmailAddressLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 13</value>
+  </data>
+  <data name="EmailAddressLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="EmailAddressLabel.Text" xml:space="preserve">
+    <value>&amp;Email address:</value>
+  </data>
+  <data name="&gt;&gt;EmailAddressLabel.Name" xml:space="preserve">
+    <value>EmailAddressLabel</value>
+  </data>
+  <data name="&gt;&gt;EmailAddressLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;EmailAddressLabel.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;EmailAddressLabel.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="SmtpServerAddrTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="SmtpServerAddrTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>100, 45</value>
+  </data>
+  <data name="SmtpServerAddrTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 0</value>
+  </data>
+  <data name="SmtpServerAddrTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>220, 20</value>
+  </data>
+  <data name="SmtpServerAddrTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;SmtpServerAddrTextBox.Name" xml:space="preserve">
+    <value>SmtpServerAddrTextBox</value>
+  </data>
+  <data name="&gt;&gt;SmtpServerAddrTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SmtpServerAddrTextBox.Parent" xml:space="preserve">
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;SmtpServerAddrTextBox.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.DecentGroupBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="SmtpServerLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="&gt;&gt;EmailNotificationCheckBox.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="SmtpServerLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="SmtpServerPortTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="SmtpServerLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 48</value>
   </data>
-  <data name="EmailAddressTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="SmtpServerLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>74, 13</value>
+  </data>
+  <data name="SmtpServerLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="SmtpServerLabel.Text" xml:space="preserve">
+    <value>&amp;SMTP Server:</value>
+  </data>
+  <data name="&gt;&gt;SmtpServerLabel.Name" xml:space="preserve">
+    <value>SmtpServerLabel</value>
+  </data>
+  <data name="&gt;&gt;SmtpServerLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;SmtpServerLabel.Parent" xml:space="preserve">
     <value>groupBox1</value>
   </data>
-  <data name="EmailNotificationCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="&gt;&gt;SmtpPortLabel.Name" xml:space="preserve">
-    <value>SmtpPortLabel</value>
-  </data>
-  <data name="MailLanguageLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 74</value>
-  </data>
-  <data name="SmtpServerPortTextBox.TabIndex" type="System.Int32, mscorlib">
+  <data name="&gt;&gt;SmtpServerLabel.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="EmailAddressLabel.Text" xml:space="preserve">
-    <value>E&amp;mail address:</value>
+  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>22, 64</value>
   </data>
-  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>485, 333</value>
+  <data name="groupBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>22, 5, 3, 3</value>
   </data>
-  <data name="MailLanguageLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+  <data name="groupBox1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 9, 5, 0</value>
   </data>
-  <data name="&gt;&gt;EmailAddressLabel.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>455, 108</value>
   </data>
-  <data name="SmtpPortLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+  <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>31</value>
   </data>
-  <data name="SmtpPortLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>330, 48</value>
-  </data>
-  <data name="EmailAddressTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>347, 20</value>
-  </data>
-  <data name="SmtpServerAddrTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>100, 45</value>
-  </data>
-  <data name="EmailAddressLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 13</value>
-  </data>
-  <data name="SendEmailNoteLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="SendEmailNoteLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>32</value>
-  </data>
-  <data name="EmailAddressTextBox.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="SendEmailNoteLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;SmtpPortLabel.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="groupBox1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;EmailNotificationCheckBox.Name" xml:space="preserve">
-    <value>EmailNotificationCheckBox</value>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>Delivery address</value>
   </data>
   <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
     <value>groupBox1</value>
   </data>
-  <data name="SmtpPortLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.DecentGroupBox, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;EmailNotificationCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="SmtpPortLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;SmtpServerPortTextBox.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="SmtpServerAddrTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 0</value>
+  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
-  <data name="EmailAddressLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 22</value>
+  <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
-  <data name="MailLanguageComboBox.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>No</value>
+  <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
-  <data name="SendEmailNoteLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>485, 39</value>
+  <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>485, 333</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>32</value>
   </data>
-  <data name="EmailNotificationCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 52</value>
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;EmailAddressTextBox.Name" xml:space="preserve">
-    <value>EmailAddressTextBox</value>
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="SmtpPortLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>96, 96</value>
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="SendEmailNoteLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="EmailNotificationCheckBox" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="groupBox1" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Percent,100,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>ja</value>
-  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>96, 96</value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>485, 333</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>PerfmonAlertOptionsPage</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

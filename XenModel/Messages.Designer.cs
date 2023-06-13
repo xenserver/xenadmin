@@ -10703,15 +10703,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Home Server:.
-        /// </summary>
-        public static string CPM_SUMMARY_KEY_HOME_SERVER {
-            get {
-                return ResourceManager.GetString("CPM_SUMMARY_KEY_HOME_SERVER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Template:.
         /// </summary>
         public static string CPM_SUMMARY_KEY_MIGRATE_TEMPLATE {
@@ -10762,15 +10753,6 @@ namespace XenAdmin {
         public static string CPM_SUMMARY_NETWORK_NOT_FOUND {
             get {
                 return ResourceManager.GetString("CPM_SUMMARY_NETWORK_NOT_FOUND", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unset.
-        /// </summary>
-        public static string CPM_SUMMARY_UNSET {
-            get {
-                return ResourceManager.GetString("CPM_SUMMARY_UNSET", resourceCulture);
             }
         }
         
@@ -11200,24 +11182,6 @@ namespace XenAdmin {
         public static string CPU {
             get {
                 return ResourceManager.GetString("CPU", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to CPU and Memory.
-        /// </summary>
-        public static string CPU_AND_MEMORY {
-            get {
-                return ResourceManager.GetString("CPU_AND_MEMORY", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} vCPU(s) &amp; {1} MB RAM.
-        /// </summary>
-        public static string CPU_AND_MEMORY_SUB {
-            get {
-                return ResourceManager.GetString("CPU_AND_MEMORY_SUB", resourceCulture);
             }
         }
         
@@ -17544,16 +17508,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Target:.
-        /// </summary>
-        public static string FINISH_PAGE_TARGET {
-            get {
-                return ResourceManager.GetString("FINISH_PAGE_TARGET", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} target:.
+        ///   Looks up a localized string similar to Home server:.
         /// </summary>
         public static string FINISH_PAGE_TARGET_FOR_VM {
             get {
@@ -20946,6 +20901,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The appliance contains {0} VM(s) with more than {1} vCPUs. Where a VM may be running actively hostile privileged code {2} recommends that the vCPU limit is set to {1} to prevent impact on system availability..
+        /// </summary>
+        public static string IMPORT_VM_CPUS_COUNT_UNTRUSTED_WARNING {
+            get {
+                return ResourceManager.GetString("IMPORT_VM_CPUS_COUNT_UNTRUSTED_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Import VM from....
         /// </summary>
         public static string IMPORT_VM_FROM {
@@ -21036,6 +21000,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The imported appliance requires a minimum of {0} vCPUs, while the number of physical CPUs in the selected server is {1}. You will not be able to start the appliance on the selected server..
+        /// </summary>
+        public static string IMPORT_WIZARD_CPUS_COUNT_MISMATCH_HOST {
+            get {
+                return ResourceManager.GetString("IMPORT_WIZARD_CPUS_COUNT_MISMATCH_HOST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The imported appliance requires a minimum of {0} vCPUs, while the maximum number of physical CPUs in the pool is {1}. You will not be able to start the appliance on the selected pool..
+        /// </summary>
+        public static string IMPORT_WIZARD_CPUS_COUNT_MISMATCH_POOL {
+            get {
+                return ResourceManager.GetString("IMPORT_WIZARD_CPUS_COUNT_MISMATCH_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;Import to:.
         /// </summary>
         public static string IMPORT_WIZARD_DESTINATION_DESTINATION {
@@ -21086,6 +21068,24 @@ namespace XenAdmin {
         public static string IMPORT_WIZARD_FAILED_UNCOMPRESS {
             get {
                 return ResourceManager.GetString("IMPORT_WIZARD_FAILED_UNCOMPRESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The imported appliance requires a minimum of {0} of memory, while the available memory on the server is {1}. You will not be able to start the VM on the selected server..
+        /// </summary>
+        public static string IMPORT_WIZARD_INSUFFICIENT_MEMORY_HOST {
+            get {
+                return ResourceManager.GetString("IMPORT_WIZARD_INSUFFICIENT_MEMORY_HOST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The imported appliance requires a minimum of {0} of memory, while the maximum available memory on the pool is {1}. You will not be able to start the VM on the selected pool..
+        /// </summary>
+        public static string IMPORT_WIZARD_INSUFFICIENT_MEMORY_POOL {
+            get {
+                return ResourceManager.GetString("IMPORT_WIZARD_INSUFFICIENT_MEMORY_POOL", resourceCulture);
             }
         }
         
@@ -26994,28 +26994,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The amount of memory allocated to the new VM is greater than the amount of physical memory on any server in the pool.
-        ///
-        ///Server &apos;{0}&apos; has {1} of physical memory in total.
-        ///
-        ///You will not be able to start this VM without increasing the amount of physical memory on one of the servers in the pool..
+        ///   Looks up a localized string similar to The amount of memory allocated to the new VM is greater than the amount of physical memory available on any server in the pool ({0})..
         /// </summary>
-        public static string NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN1 {
+        public static string NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN_FREE {
             get {
-                return ResourceManager.GetString("NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN1", resourceCulture);
+                return ResourceManager.GetString("NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN_FREE", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The amount of memory allocated to the new VM is greater than the amount of physical memory available on any server in the pool.
-        ///
-        ///Server &apos;{0}&apos; has {1} of physical memory available.
-        ///
-        ///You will not be able to start this VM without freeing some space on one of the servers..
+        ///   Looks up a localized string similar to The amount of memory allocated to the new VM is greater than the amount of physical memory on any server in the pool ({0})..
         /// </summary>
-        public static string NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN2 {
+        public static string NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN_TOTAL {
             get {
-                return ResourceManager.GetString("NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN2", resourceCulture);
+                return ResourceManager.GetString("NEWVMWIZARD_CPUMEMPAGE_MEMORYWARN_TOTAL", resourceCulture);
             }
         }
         
@@ -27029,7 +27021,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Specify the number of virtual CPUs, their topology, and the amount of memory that will be allocated to the new virtual machine. .
+        ///   Looks up a localized string similar to Specify the number of vCPUs, their topology, and the amount of memory that will be allocated to the new virtual machine. .
         /// </summary>
         public static string NEWVMWIZARD_CPUMEMPAGE_RUBRIC {
             get {
@@ -27065,26 +27057,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The number of vCPUs given to the new VM is greater than the number of physical CPUs on any server in the pool.
-        ///
-        ///Server &apos;{0}&apos; has {1} physical CPUs.
-        ///
-        ///Performance of this VM will be greatly reduced if it is started with this many vCPUs..
+        ///   Looks up a localized string similar to You have specified {0} vCPUs, but none of the pool servers have more than {1} physical CPUs. You will not be able to start the VM..
         /// </summary>
-        public static string NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN {
+        public static string NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN_POOL {
             get {
-                return ResourceManager.GetString("NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN", resourceCulture);
+                return ResourceManager.GetString("NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN_POOL", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All the necessary information has been collected and the wizard is ready to provision the new virtual machine using the settings shown below.
-        ///
-        ///Review these settings, then click Previous if you need to change anything. Otherwise, click Create Now to create the new VM. It may take several minutes to create the new VM..
+        ///   Looks up a localized string similar to You have specified {0} vCPUs, but the server has only {1} physical CPUs. You will not be able to start the VM..
         /// </summary>
-        public static string NEWVMWIZARD_FINISHPAGE {
+        public static string NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN_STANDALONE_HOST {
             get {
-                return ResourceManager.GetString("NEWVMWIZARD_FINISHPAGE", resourceCulture);
+                return ResourceManager.GetString("NEWVMWIZARD_CPUMEMPAGE_VCPUSWARN_STANDALONE_HOST", resourceCulture);
             }
         }
         
@@ -38762,13 +38748,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The number of VCPUs is greater than the number of physical CPUs on the host server. This will significantly reduce VM performance.
-        ///
-        ///To optimize VM performance, you should reduce the number of VCPUs to less than or equal to the number of physical CPUs..
+        ///   Looks up a localized string similar to You have selected more than {0} vCPUs for the new VM. Where a VM may be running actively hostile privileged code {1} recommends that the vCPU limit is set to {0} to prevent impact on system availability..
         /// </summary>
-        public static string VCPUS_MORE_THAN_PCPUS {
+        public static string VCPUS_UNTRUSTED_VM_WARNING {
             get {
-                return ResourceManager.GetString("VCPUS_MORE_THAN_PCPUS", resourceCulture);
+                return ResourceManager.GetString("VCPUS_UNTRUSTED_VM_WARNING", resourceCulture);
             }
         }
         
@@ -39421,6 +39405,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The amount of physical memory allocated to this VM is greater than the total memory of its home server..
+        /// </summary>
+        public static string VM_CPUMEMPAGE_INSUFFICIENT_MEMORY_HOST {
+            get {
+                return ResourceManager.GetString("VM_CPUMEMPAGE_INSUFFICIENT_MEMORY_HOST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The amount of physical memory allocated to this VM is greater than the total memory of any server in the pool..
+        /// </summary>
+        public static string VM_CPUMEMPAGE_INSUFFICIENT_MEMORY_POOL {
+            get {
+                return ResourceManager.GetString("VM_CPUMEMPAGE_INSUFFICIENT_MEMORY_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Maximum number of &amp;vCPUs:.
         /// </summary>
         public static string VM_CPUMEMPAGE_MAX_VCPUS_LABEL {
@@ -39457,7 +39459,16 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to It is recommended to allocate at least {0} vCPUs for this VM.
+        ///   Looks up a localized string similar to The VM&apos;s home server does not have enough physical CPUs to start the VM. The VM will start on another server..
+        /// </summary>
+        public static string VM_CPUMEMPAGE_VCPU_HOME_HOST_WARNING {
+            get {
+                return ResourceManager.GetString("VM_CPUMEMPAGE_VCPU_HOME_HOST_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to It is recommended to allocate at least {0} vCPUs for this VM..
         /// </summary>
         public static string VM_CPUMEMPAGE_VCPU_MIN_WARNING {
             get {
@@ -39466,7 +39477,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to More vCPUs than physical CPUs may lead to reduced VM performance.
+        ///   Looks up a localized string similar to There are no servers with enough physical CPUs to start the VM..
         /// </summary>
         public static string VM_CPUMEMPAGE_VCPU_WARNING {
             get {

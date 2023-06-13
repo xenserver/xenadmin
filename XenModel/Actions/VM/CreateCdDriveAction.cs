@@ -49,42 +49,42 @@ namespace XenAdmin.Actions
 
             #region RBAC Dependencies
             ApiMethodsToRoleCheck.Add("vm.assert_agile");
-            ApiMethodsToRoleCheck.AddRange(XenAPI.Role.CommonSessionApiList);
+            ApiMethodsToRoleCheck.AddRange(Role.CommonSessionApiList);
             #endregion
         }
 
         protected override void Run()
         {
             VBD cdrom = VM.FindVMCDROM();
+
             if (cdrom == null)
             {
                 Description = Messages.NEW_DVD_DRIVE_CREATING;
-                // could not find a cd, try and make one
 
                 if (VM.VBDs.Count >= VM.MaxVBDsAllowed())
                 {
                     throw new Exception(Messages.CDDRIVE_MAX_ALLOWED_VBDS);
                 }
 
-                List<String> allowedDevices = new List<String>(XenAPI.VM.get_allowed_VBD_devices(Session, VM.opaque_ref));
+                var allowedDevices = new List<string>(VM.get_allowed_VBD_devices(Session, VM.opaque_ref));
 
                 if (allowedDevices == null || allowedDevices.Count == 0)
                 {
                     throw new Exception(Messages.CDDRIVE_MAX_ALLOWED_VBDS);
                 }
 
-                XenAPI.VBD cdDrive = new XenAPI.VBD
+                VBD cdDrive = new VBD
                 {
-                    VM = new XenAPI.XenRef<XenAPI.VM>(VM.opaque_ref),
+                    VM = new XenRef<VM>(VM.opaque_ref),
                     bootable = false,
                     device = "",
                     userdevice = allowedDevices.Contains("3") ? "3" : allowedDevices[0],
                     empty = true,
-                    type = XenAPI.vbd_type.CD,
-                    mode = XenAPI.vbd_mode.RO
+                    type = vbd_type.CD,
+                    mode = vbd_mode.RO
                 };
 
-                var cdCreate = new VbdSaveAndPlugAction(VM, cdDrive, Messages.DVD_DRIVE, Session, true);
+                var cdCreate = new VbdCreateAndPlugAction(VM, cdDrive, Messages.DVD_DRIVE, true);
                 cdCreate.ShowUserInstruction += msg => ShowUserInstruction?.Invoke(msg);
                 cdCreate.RunSync(Session);
                 Description = Messages.NEW_DVD_DRIVE_DONE;
