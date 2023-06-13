@@ -114,25 +114,15 @@ namespace XenAdmin.Dialogs
         {
             var pool = Helpers.GetPoolOfOne(connection);
 
-            bool is_host = _xenObjectCopy is Host;
-            bool is_vm = _xenObjectCopy is VM && !((VM)_xenObjectCopy).is_a_snapshot;
-            bool is_sr = _xenObjectCopy is SR;
-
-            bool is_pool = _xenObjectCopy is Pool;
-            bool is_vdi = _xenObjectCopy is VDI;
-            bool is_network = _xenObjectCopy is XenAPI.Network;
-
-            bool is_hvm = is_vm && ((VM)_xenObjectCopy).IsHVM();
-            bool is_template = is_vm && ((VM)_xenObjectCopy).is_a_template;
-            bool is_in_pool = Helpers.GetPool(_xenObjectCopy.Connection) != null;
-
-            bool is_pool_or_standalone = is_pool || (is_host && !is_in_pool);
-
-            bool wlb_enabled = (Helpers.WlbEnabledAndConfigured(_xenObjectCopy.Connection));
-
-            bool is_VM_appliance = _xenObjectCopy is VM_appliance;
-
-            bool is_VMSS = _xenObjectCopy is VMSS;
+            bool isHost = _xenObjectCopy is Host;
+            bool isVm = _xenObjectCopy is VM vm && !vm.is_a_snapshot;
+            bool isSr = _xenObjectCopy is SR;
+            bool isPool = _xenObjectCopy is Pool;
+            bool isVdi = _xenObjectCopy is VDI;
+            bool isNetwork = _xenObjectCopy is XenAPI.Network;
+            bool isPoolOrStandalone = isPool || (isHost && Helpers.GetPool(_xenObjectCopy.Connection) == null);
+            bool isVmAppliance = _xenObjectCopy is VM_appliance;
+            bool isVmss = _xenObjectCopy is VMSS;
 
             ContentPanel.SuspendLayout();
             verticalTabs.BeginUpdate();
@@ -143,10 +133,10 @@ namespace XenAdmin.Dialogs
 
                 ShowTab(GeneralEditPage = new GeneralEditPage());
 
-                if (!is_VM_appliance)
+                if (!isVmAppliance)
                     ShowTab(CustomFieldsEditPage = new CustomFieldsDisplayPage {AutoScroll = true});
 
-                if (is_vm)
+                if (isVm)
                 {
                     ShowTab(VCpuMemoryEditPage = new CPUMemoryEditPage());
                     ShowTab(StartupOptionsEditPage = new BootOptionsEditPage());
@@ -155,7 +145,7 @@ namespace XenAdmin.Dialogs
                     ShowTab(VMHAEditPage);
                 }
 
-                if (is_vm || is_host || is_sr)
+                if (isVm || isHost || isSr)
                 {
                     if (Helpers.FeatureForbidden(_xenObjectCopy, Host.RestrictAlerts))
                     {
@@ -174,7 +164,7 @@ namespace XenAdmin.Dialogs
                     }
                 }
 
-                if (is_pool_or_standalone)
+                if (isPoolOrStandalone)
                 {
                     if (Helpers.FeatureForbidden(_xenObjectCopy, Host.RestrictAlerts))
                     {
@@ -192,81 +182,86 @@ namespace XenAdmin.Dialogs
                     }
                 }
 
-                if (is_host)
+                if (isHost)
                 {
                     ShowTab(hostMultipathPage1 = new HostMultipathPage());
                     ShowTab(LogDestinationEditPage = new LogDestinationEditPage());
                 }
-                
-                if (is_host || is_pool)
+
+                if (isHost || isPool)
                     ShowTab(HostPowerONEditPage = new HostPowerONEditPage());
 
-                if ((is_pool_or_standalone && Helpers.VGpuCapability(_xenObjectCopy.Connection))
-                    || (is_host && ((Host)_xenObjectCopy).CanEnableDisableIntegratedGpu()))
+                if ((isPoolOrStandalone && Helpers.VGpuCapability(_xenObjectCopy.Connection))
+                    || (isHost && ((Host)_xenObjectCopy).CanEnableDisableIntegratedGpu()))
                 {
                     ShowTab(PoolGpuEditPage = new PoolGpuEditPage());
                 }
 
-                if (is_pool_or_standalone && !Helpers.FeatureForbidden(_xenObjectCopy.Connection, Host.RestrictSslLegacySwitch) && !Helpers.StockholmOrGreater(connection))
+                if (isPoolOrStandalone && !Helpers.FeatureForbidden(_xenObjectCopy.Connection, Host.RestrictSslLegacySwitch) && !Helpers.StockholmOrGreater(connection))
                     ShowTab(SecurityEditPage = new SecurityEditPage());
 
-                if (is_pool_or_standalone && !Helpers.FeatureForbidden(_xenObjectCopy.Connection, Host.RestrictIGMPSnooping) && Helpers.GetCoordinator(pool).vSwitchNetworkBackend())
+                if (isPoolOrStandalone && !Helpers.FeatureForbidden(_xenObjectCopy.Connection, Host.RestrictIGMPSnooping) && Helpers.GetCoordinator(pool).vSwitchNetworkBackend())
                     ShowTab(NetworkOptionsEditPage = new NetworkOptionsEditPage());
 
-                if (is_pool_or_standalone && !Helpers.FeatureForbidden(_xenObjectCopy.Connection, Host.RestrictCorosync))
+                if (isPoolOrStandalone && !Helpers.FeatureForbidden(_xenObjectCopy.Connection, Host.RestrictCorosync))
                     ShowTab(ClusteringEditPage = new ClusteringEditPage());
 
-                if (is_pool && Helpers.Post82X(_xenObjectCopy.Connection) && Helpers.XapiEqualOrGreater_22_33_0(_xenObjectCopy.Connection))
+                if (isPool && Helpers.Post82X(_xenObjectCopy.Connection) && Helpers.XapiEqualOrGreater_22_33_0(_xenObjectCopy.Connection))
                     ShowTab(_poolAdvancedEditPage = new PoolAdvancedEditPage());
 
-                if (is_network)
+                if (isNetwork)
                     ShowTab(editNetworkPage = new EditNetworkPage());
 
-                if (is_vm && !wlb_enabled)
-                    ShowTab(HomeServerPage = new HomeServerEditPage());
-
-                if (is_vm && ((VM)_xenObjectCopy).CanHaveGpu())
+                if (isVm)
                 {
-                    if (Helpers.FeatureForbidden(_xenObjectCopy, Host.RestrictGpu))
+                    var theVm = (VM)_xenObjectCopy;
+
+                    if (!Helpers.WlbEnabledAndConfigured(_xenObjectCopy.Connection))
+                        ShowTab(HomeServerPage = new HomeServerEditPage());
+
+                    if (theVm.CanHaveGpu())
                     {
-                        GpuUpsellEditPage = new UpsellPage
+                        if (Helpers.FeatureForbidden(_xenObjectCopy, Host.RestrictGpu))
                         {
-                            Image = Images.StaticImages._000_GetMemoryInfo_h32bit_16,
-                            Text = Messages.GPU,
-                            BlurbText = Messages.UPSELL_BLURB_GPU
-                        };
-                        ShowTab(GpuUpsellEditPage);
+                            GpuUpsellEditPage = new UpsellPage
+                            {
+                                Image = Images.StaticImages._000_GetMemoryInfo_h32bit_16,
+                                Text = Messages.GPU,
+                                BlurbText = Messages.UPSELL_BLURB_GPU
+                            };
+                            ShowTab(GpuUpsellEditPage);
+                        }
+                        else
+                        {
+                            if(Helpers.GpusAvailable(connection))
+                                ShowTab(GpuEditPage = new GpuEditPage());
+                        }
                     }
-                    else
+
+                    if (theVm.IsHVM())
                     {
-                        if(Helpers.GpusAvailable(connection))
-                            ShowTab(GpuEditPage = new GpuEditPage());
+                        if (!theVm.is_a_template && !Helpers.FeatureForbidden(_xenObjectCopy, Host.RestrictUsbPassthrough) &&
+                            pool.Connection.Cache.Hosts.Any(host => host.PUSBs.Count > 0))
+                        {
+                            usbEditPage = new USBEditPage();
+                            usbEditPage.Populated += EditPage_Populated;
+                            ShowTab(usbEditPage);
+                        }
+
+                        ShowTab(VMAdvancedEditPage = new VMAdvancedEditPage());
+                    }
+
+                    if (Helpers.ContainerCapability(_xenObjectCopy.Connection))
+                    {
+                        if (theVm.CanBeEnlightened())
+                            ShowTab(VMEnlightenmentEditPage = new VMEnlightenmentEditPage());
+
+                        if (theVm.CanHaveCloudConfigDrive())
+                            ShowTab(CloudConfigParametersPage = new Page_CloudConfigParameters());
                     }
                 }
 
-                if (is_hvm && !is_template && !Helpers.FeatureForbidden(_xenObjectCopy, Host.RestrictUsbPassthrough) &&
-                    pool.Connection.Cache.Hosts.Any(host => host.PUSBs.Count > 0))
-                {
-                    usbEditPage = new USBEditPage();
-                    usbEditPage.Populated += EditPage_Populated;
-                    ShowTab(usbEditPage);
-                }
-
-                if (is_hvm)
-                {
-                    ShowTab(VMAdvancedEditPage = new VMAdvancedEditPage());
-                }
-
-                if (is_vm && Helpers.ContainerCapability(_xenObjectCopy.Connection))
-                {
-                    if (((VM)_xenObjectCopy).CanBeEnlightened())
-                        ShowTab(VMEnlightenmentEditPage = new VMEnlightenmentEditPage());
-
-                    if (((VM)_xenObjectCopy).CanHaveCloudConfigDrive())
-                        ShowTab(CloudConfigParametersPage = new Page_CloudConfigParameters());
-                }
-
-                if (is_VMSS)
+                if (isVmss)
                 {
                     ShowTab(newVMSSVMsPage1 = new NewVMGroupVMsPage<VMSS> {Pool = pool});
                     ShowTab(newPolicyVMSSTypePage1 = new NewPolicySnapshotTypePage());
@@ -275,16 +270,16 @@ namespace XenAdmin.Dialogs
                     ShowTab(newPolicySnapshotFrequencyPage1);
                 }
 
-                if (is_VM_appliance)
+                if (isVmAppliance)
                 {
                     ShowTab(newVMApplianceVMsPage1 = new NewVMGroupVMsPage<VM_appliance> { Pool = pool });
                     ShowTab(newVmApplianceVmOrderAndDelaysPage1 = new NewVMApplianceVMOrderAndDelaysPage { Pool = pool });
                 }
 
-                if (is_sr && ((SR)_xenObjectCopy).SupportsReadCaching() && !Helpers.FeatureForbidden(_xenObjectCopy, Host.RestrictReadCaching))
+                if (isSr && ((SR)_xenObjectCopy).SupportsReadCaching() && !Helpers.FeatureForbidden(_xenObjectCopy, Host.RestrictReadCaching))
                     ShowTab(SrReadCachingEditPage = new SrReadCachingEditPage());
 
-                if (is_vdi)
+                if (isVdi)
                 {
                     ShowTab(vdiSizeLocation = new VDISizeLocationPage());
 
