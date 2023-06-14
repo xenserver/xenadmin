@@ -40,11 +40,9 @@ namespace XenAdmin.Diagnostics.Problems.UtilityProblem
     internal class EuaNotFoundProblem : Problem
     {
         private readonly List<IXenObject> _hosts;
-        private readonly Check _check;
         public EuaNotFoundProblem(Check check, List<IXenObject> hosts)
             : base(check)
         {
-            _check = check;
             _hosts = hosts;
         }
 

@@ -70,12 +70,12 @@ namespace XenAdmin.Diagnostics.Checks
             _hostsFailedToFetchEua = new HashSet<IXenObject>();
         }
 
-        public override bool CanRun() => _targetUri != null && Hosts.Any(Helpers.Post82X);
+        public override bool CanRun() => _targetUri != null && Hosts.Any(Helpers.YangtzeOrGreater);
 
         private void FetchHostEua(Host host)
         {
             string eua = null;
-            if (Helpers.Post82X(host) && !Helpers.TryLoadHostEua(host, _targetUri, out eua))
+            if (Helpers.YangtzeOrGreater(host) && !Helpers.TryLoadHostEua(host, _targetUri, out eua))
             {
                 Log.Warn($"Could not fetch EUA file for {host.Name()}");
                 lock (_hostsFailedToFetchEua)
