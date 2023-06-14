@@ -57,8 +57,10 @@ namespace XenAdmin.Diagnostics.Problems.UtilityProblem
             {
                 _check.Completed = d.ShowDialog(_control) == DialogResult.Yes;
             }
-            cancelled = true;
-            return null;
+            cancelled = false;
+
+            // we use a dummy action to force the Pre-Check page to reload once the dialog is closed
+            return new DelegatedAsyncAction(null, string.Empty, string.Empty, string.Empty, _ => {},true);
         }
 
         public override string HelpMessage => Messages.ACCEPT_EUA_PROBLEM_HELP_MESSAGE;
