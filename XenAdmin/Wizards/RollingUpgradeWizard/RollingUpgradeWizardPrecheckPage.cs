@@ -167,6 +167,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             if (hotfixChecks.Count > 0)
                 groups.Add(new CheckGroup(Messages.CHECKING_UPGRADE_HOTFIX_STATUS, hotfixChecks));
 
+            //Checks used in automatic mode only, for hosts that will be upgraded
             if (!ManualUpgrade)
             {
                 // EUA check
@@ -174,11 +175,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 new UpgradeRequiresEua(this, hostsToUpgrade, InstallMethodConfig));
                 var euaChecks = new List<Check> { euaCheck };
                 groups.Add(new CheckGroup(Messages.ACCEPT_EUA_CHECK_GROUP_NAME, euaChecks));
-            } 
 
-            //SafeToUpgrade- and PrepareToUpgrade- checks - in automatic mode only, for hosts that will be upgraded
-            if (!ManualUpgrade)
-            {
                 var safeToUpgradeChecks = (from Host host in hostsToUpgrade
                     let check = new SafeToUpgradeCheck(host, InstallMethodConfig)
                     where check.CanRun()
