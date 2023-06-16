@@ -107,6 +107,7 @@ namespace XenAdmin.Wizards.ImportWizard
                     return;
 
                 _ovfVCpusCount.Clear();
+                _ovfMaxVCpusCount = 0;
                 foreach (var vsType in vsColl.Content)
                 {
                     var vhs = OVF.FindVirtualHardwareSectionByAffinity(SelectedOvfEnvelope, vsType.id, "xen");
