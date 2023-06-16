@@ -106,6 +106,7 @@ namespace XenAdmin.Wizards.ImportWizard
                 if (vsColl == null)
                     return;
 
+                _ovfVCpusCount.Clear();
                 foreach (var vsType in vsColl.Content)
                 {
                     var vhs = OVF.FindVirtualHardwareSectionByAffinity(SelectedOvfEnvelope, vsType.id, "xen");
@@ -113,7 +114,6 @@ namespace XenAdmin.Wizards.ImportWizard
                     if (data == null)
                         continue;
 
-                    _ovfVCpusCount.Clear();
                     foreach (var rasdType in vhs.Item)
                     {
                         // Processor
