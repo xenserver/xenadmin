@@ -148,7 +148,7 @@
     <value>m_labelIntro</value>
   </data>
   <data name="&gt;&gt;m_labelIntro.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.Common.AutoHeightLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.Common.AutoHeightLabel, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;m_labelIntro.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -364,7 +364,7 @@
     <value>4</value>
   </data>
   <data name="m_checkBoxMac.Text" xml:space="preserve">
-    <value>&amp;Preserve virtual MAC addresses</value>
+    <value>Preserve virtual &amp;MAC addresses</value>
   </data>
   <data name="&gt;&gt;m_checkBoxMac.Name" xml:space="preserve">
     <value>m_checkBoxMac</value>
@@ -442,6 +442,6 @@
     <value>SelectMultipleVMNetworkPage</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.XenTabPage, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

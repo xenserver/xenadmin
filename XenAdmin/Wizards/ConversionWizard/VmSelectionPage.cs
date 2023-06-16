@@ -44,6 +44,8 @@ namespace XenAdmin.Wizards.ConversionWizard
 
         private bool _buttonNextEnabled;
         private bool _updating;
+        private bool _runWorkerAgain;
+        private readonly object _workerRunLock = new object();
 
         public VmSelectionPage()
         {
@@ -68,6 +70,11 @@ namespace XenAdmin.Wizards.ConversionWizard
         {
             if (direction == PageLoadedDirection.Forward)
                 Build();
+        }
+
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
+        {
+            _backgroundWorker.CancelAsync();
         }
 
         public override void PageCancelled(ref bool cancel)
@@ -130,6 +137,7 @@ namespace XenAdmin.Wizards.ConversionWizard
 
         private void UpdateButtons()
         {
+            buttonRefresh.Enabled = !_backgroundWorker.IsBusy;
             _buttonNextEnabled = SelectedVmsExist;
             OnPageUpdated();
         }
@@ -155,15 +163,34 @@ namespace XenAdmin.Wizards.ConversionWizard
         private void _backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             e.Result = ConversionClient.GetSourceVMs(VmwareCredInfo);
+            if (_backgroundWorker.CancellationPending)
+            {
+                e.Cancel = true;
+            }
         }
 
         private void _backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            if (IsDisposed)
+            {
+                return;
+            }
+
+            lock (_workerRunLock)
+            {
+                if (_runWorkerAgain)
+                {
+                    _runWorkerAgain = false;
+                    _backgroundWorker.RunWorkerAsync();
+                    return;
+                }
+            }
+
             if (e.Cancelled)
             {
                 tableLayoutPanelError.Visible = false;
             }
-            if (e.Error != null)
+            else if (e.Error != null)
             {
                 log.Error(e.Error);
                 pictureBoxError.Image = Images.StaticImages._000_error_h32bit_16;
@@ -175,7 +202,7 @@ namespace XenAdmin.Wizards.ConversionWizard
                 tableLayoutPanelError.Visible = false;
                 Build();
             }
-
+   
             UpdateButtons();
         }
 
@@ -186,8 +213,17 @@ namespace XenAdmin.Wizards.ConversionWizard
             labelError.Text = Messages.CONVERSION_CONNECTING_VMWARE;
             tableLayoutPanelError.Visible = true;
             VMwareVMs = null;
-
-            _backgroundWorker.RunWorkerAsync();
+            lock (_workerRunLock)
+            {
+                if (_backgroundWorker.IsBusy)
+                {
+                    _runWorkerAgain = true;
+                }
+                else
+                {
+                    _backgroundWorker.RunWorkerAsync();
+                }
+            }
             UpdateButtons();
         }
 

@@ -44,6 +44,8 @@ namespace XenAdmin.Wizards.ConversionWizard
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private bool _buttonNextEnabled;
+        private bool _runWorkerAgain;
+        private readonly object _workerRunLock = new object();
 
         public CredentialsPage()
         {
@@ -99,29 +101,42 @@ namespace XenAdmin.Wizards.ConversionWizard
         {
             if (direction == PageLoadedDirection.Back)
                 return;
+
+            VmwareCredInfo = new ServerInfo
             {
-                VmwareCredInfo = new ServerInfo
+                ServerType = (int)ServerType.VirtualCenter,
+                Hostname = VmWareServer,
+                Username = Username,
+                Password = Password
+            };
+
+            tableLayoutPanel2.Enabled = false;
+            tableLayoutStatus.Visible = true;
+            pictureBoxStatus.Image = Images.StaticImages.ajax_loader;
+            labelStatus.Text = Messages.CONVERSION_CONNECTING_VMWARE;
+            VMwareVMs = null;
+
+            lock (_workerRunLock)
+            {
+                if (_backgroundWorker.IsBusy)
                 {
-                    ServerType = (int)ServerType.VirtualCenter,
-                    Hostname = VmWareServer,
-                    Username = Username,
-                    Password = Password
-                };
-
-                tableLayoutPanel2.Enabled = false;
-                tableLayoutStatus.Visible = true;
-                pictureBoxStatus.Image = Images.StaticImages.ajax_loader;
-                labelStatus.Text = Messages.CONVERSION_CONNECTING_VMWARE;
-                VMwareVMs = null;
-
-                _backgroundWorker.RunWorkerAsync(VmwareCredInfo);
-                UpdateButtons();
-
-                while(_backgroundWorker.IsBusy)
-                    Application.DoEvents();
-
-                cancel = VMwareVMs == null;
+                    _runWorkerAgain = true;
+                }
+                else
+                {
+                    _backgroundWorker.RunWorkerAsync(VmwareCredInfo);
+                }
             }
+
+            // waiting here for the thread so we can 
+            // move to the next page immediately
+            while (_backgroundWorker.IsBusy)
+            {
+                Application.DoEvents();
+            }
+
+            UpdateButtons();
+            cancel = VMwareVMs == null;
         }
 
         public override void PageCancelled(ref bool cancel)
@@ -155,15 +170,31 @@ namespace XenAdmin.Wizards.ConversionWizard
         private void _backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             e.Result = ConversionClient.GetSourceVMs((ServerInfo)e.Argument);
+            e.Cancel = _backgroundWorker.CancellationPending;
         }
 
         private void _backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            if (IsDisposed)
+            {
+                return;
+            }
+
+            lock (_workerRunLock)
+            {
+                if (_runWorkerAgain)
+                {
+                    _runWorkerAgain = false;
+                    _backgroundWorker.RunWorkerAsync();
+                    return;
+                }
+            }
+
             if (e.Cancelled)
             {
                 tableLayoutStatus.Visible = false;
             }
-            if (e.Error != null)
+            else if (e.Error != null)
             {
                 log.Error(e.Error);
                 pictureBoxStatus.Image = Images.StaticImages._000_error_h32bit_16;

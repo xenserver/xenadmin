@@ -42,6 +42,8 @@ namespace XenAdmin.Wizards.ConversionWizard
 {
     public partial class SrSelectionPage : XenTabPage
     {
+        private bool _runWorkerAgain;
+        private readonly object _workerRunLock = new object();
         private bool _buttonNextEnabled;
         private long _requiredDiskSize;
         public SrSelectionPage()
@@ -61,11 +63,12 @@ namespace XenAdmin.Wizards.ConversionWizard
         {
             return _buttonNextEnabled;
         }
-
         protected override void PageLoadedCore(PageLoadedDirection direction)
         {
             if (direction == PageLoadedDirection.Forward)
+            {
                 RebuildSrList();
+            }
         }
 
         public override void PageCancelled(ref bool cancel)
@@ -100,7 +103,17 @@ namespace XenAdmin.Wizards.ConversionWizard
             UpdatePieChart();
             UpdateButtons();
 
-            backgroundWorker1.RunWorkerAsync();
+            lock (_workerRunLock)
+            {
+                if (backgroundWorker1.IsBusy)
+                {
+                    _runWorkerAgain = true;
+                }
+                else
+                {
+                    backgroundWorker1.RunWorkerAsync();
+                }
+            }
         }
 
         private void UpdatePieChart()
@@ -185,10 +198,26 @@ namespace XenAdmin.Wizards.ConversionWizard
             }
 
             e.Result = spacePerSr;
+            e.Cancel = backgroundWorker1.CancellationPending;
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            if (IsDisposed)
+            {
+                return;
+            }
+
+            lock (_workerRunLock)
+            {
+                if (_runWorkerAgain)
+                {
+                    _runWorkerAgain = false;
+                    backgroundWorker1.RunWorkerAsync();
+                    return;
+                }
+            }
+
             Dictionary<SR, long> spacePerSr;
 
             if (e.Cancelled)

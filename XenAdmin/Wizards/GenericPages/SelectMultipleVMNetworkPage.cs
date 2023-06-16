@@ -52,6 +52,9 @@ namespace XenAdmin.Wizards.GenericPages
         private bool m_buttonPreviousEnabled;
         private Dictionary<string, VmMapping> m_vmMappings;
 
+        private bool _runWorkerAgain;
+        private readonly object _workerRunLock = new object();
+
         private struct NetworkDetail
         {
             public string SysId { get; set; }
@@ -67,7 +70,7 @@ namespace XenAdmin.Wizards.GenericPages
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-        
+
             m_labelIntro.Text = IntroductionText;
             label2.Text = TableIntroductionText;
             m_colVmNetwork.HeaderText = NetworkColumnHeaderText;
@@ -94,6 +97,7 @@ namespace XenAdmin.Wizards.GenericPages
         }
 
         private IXenConnection targetConnection;
+
         /// <summary>
         /// The connection from which the target networks are selected
         /// Defaults to the base class connection if not set
@@ -106,7 +110,7 @@ namespace XenAdmin.Wizards.GenericPages
                     return Connection;
                 return targetConnection;
             }
-            set { targetConnection = value; }
+            set => targetConnection = value;
         }
 
         public bool PreserveMAC => ShowReserveMacAddressesCheckBox && m_checkBoxMac.Checked;
@@ -114,10 +118,12 @@ namespace XenAdmin.Wizards.GenericPages
         protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
             targetConnection = null;
+            backgroundWorker1.CancelAsync();
         }
 
         protected override void PageLoadedCore(PageLoadedDirection direction)
         {
+            Populate();
             SetButtonPreviousEnabled(true);
             SetButtonNextEnabled(true);
         }
@@ -127,7 +133,7 @@ namespace XenAdmin.Wizards.GenericPages
             backgroundWorker1.CancelAsync();
         }
 
-        public override void PopulatePage()
+        private void Populate()
         {
             m_dataGridView.Rows.Clear();
             SetButtonNextEnabled(false);
@@ -138,12 +144,22 @@ namespace XenAdmin.Wizards.GenericPages
                 pictureBoxError.Image = Images.StaticImages.ajax_loader;
                 labelError.Text = Messages.CONVERSION_NETWORK_PAGE_QUERYING_NETWORKS;
                 tableLayoutPanelError.Visible = true;
-                backgroundWorker1.RunWorkerAsync();
+                lock (_workerRunLock)
+                {
+                    if (backgroundWorker1.IsBusy)
+                    {
+                        _runWorkerAgain = true;
+                    }
+                    else
+                    {
+                        backgroundWorker1.RunWorkerAsync();
+                    }
+                }
             }
             else
             {
                 FillTableRows();
-                HelpersGUI.ResizeGridViewColumnToAllCells(m_colTargetNet);//set properly the width of the last column
+                HelpersGUI.ResizeGridViewColumnToAllCells(m_colTargetNet); //set properly the width of the last column
             }
         }
 
@@ -151,7 +167,7 @@ namespace XenAdmin.Wizards.GenericPages
         {
             foreach (var kvp in VmMappings)
             {
-                string sysId = kvp.Key;
+                var sysId = kvp.Key;
                 var vmMapping = kvp.Value;
 
                 FillTableRow(vmMapping.XenRef, sysId, vmMapping.VmNameLabel);
@@ -178,11 +194,14 @@ namespace XenAdmin.Wizards.GenericPages
 
                 var cellSourceNetwork = new DataGridViewTextBoxCell
                 {
-                    Tag = new NetworkDetail {SysId = sysId, NetworkId = networkResource.NetworkID, MACAddress = networkResource.MACAddress},
+                    Tag = new NetworkDetail
+                    {
+                        SysId = sysId, NetworkId = networkResource.NetworkID, MACAddress = networkResource.MACAddress
+                    },
                     Value = val
                 };
 
-                DataGridViewRow row = new DataGridViewRow();
+                var row = new DataGridViewRow();
                 row.Cells.Add(cellSourceNetwork);
 
                 var cbClone = (DataGridViewComboBoxCell)cb.Clone();
@@ -190,7 +209,8 @@ namespace XenAdmin.Wizards.GenericPages
                 if (cbClone.Items.Count > 0)
                 {
                     cbClone.DisplayMember = ToStringWrapper<XenAPI.Network>.DisplayMember; //ToStringProperty
-                    cbClone.ValueMember = ToStringWrapper<XenAPI.Network>.ValueMember; //ToStringWrapper<XenAPI.Network> object itself
+                    cbClone.ValueMember =
+                        ToStringWrapper<XenAPI.Network>.ValueMember; //ToStringWrapper<XenAPI.Network> object itself
                     cbClone.Value = cb.Items[0]; // Default selection of the combobox cell
 
                     //Select the network if the names of the target and source networks match in the combobox cell
@@ -204,7 +224,8 @@ namespace XenAdmin.Wizards.GenericPages
                 }
                 else
                 {
-                    var cellError = new DataGridViewTextBoxCell {Value = Messages.IMPORT_SELECT_NETWORK_PAGE_NO_AVAIL_NETWORKS};
+                    var cellError = new DataGridViewTextBoxCell
+                        { Value = Messages.IMPORT_SELECT_NETWORK_PAGE_NO_AVAIL_NETWORKS };
                     row.Cells.Add(cellError);
                     cellError.ReadOnly = true; //this has to be set after the cell is added to a row
                     SetButtonNextEnabled(false);
@@ -241,16 +262,12 @@ namespace XenAdmin.Wizards.GenericPages
                             mapping.Networks[networkDetail.NetworkId] = selectedItem.item;
                             mapping.VIFs[networkDetail.MACAddress] = selectedItem.item;
                         }
-                            
                     }
                 }
 
                 return m_vmMappings;
             }
-            set
-            {
-                m_vmMappings = value;
-            }
+            set => m_vmMappings = value;
         }
 
         public Dictionary<string, string> RawMappings
@@ -263,7 +280,7 @@ namespace XenAdmin.Wizards.GenericPages
                 {
                     var networkDetail = (NetworkDetail)row.Cells[0].Tag;
                     var selectedItem = row.Cells[1].Value as ToStringWrapper<XenAPI.Network>;
-                    mappings.Add(networkDetail.NetworkId, selectedItem.ToString());
+                    mappings.Add(networkDetail.NetworkId, selectedItem?.ToString());
                 }
 
                 return mappings;
@@ -280,15 +297,15 @@ namespace XenAdmin.Wizards.GenericPages
         {
             m_buttonPreviousEnabled = enabled;
             OnPageUpdated();
-        }   
+        }
 
         private DataGridViewComboBoxCell FillGridComboBox(object targetRef, string vsId)
         {
-            var cb = new DataGridViewComboBoxCell {FlatStyle = FlatStyle.Flat, Sorted = true};
+            var cb = new DataGridViewComboBoxCell { FlatStyle = FlatStyle.Flat, Sorted = true };
 
             var availableNetworks = TargetConnection.Cache.Networks.Where(net => ShowNetwork(targetRef, net, vsId));
 
-            foreach (XenAPI.Network netWork in availableNetworks)
+            foreach (var netWork in availableNetworks)
             {
                 if (!Messages.IMPORT_SELECT_NETWORK_PAGE_NETWORK_FILTER.Contains(netWork.Name()))
                 {
@@ -314,7 +331,7 @@ namespace XenAdmin.Wizards.GenericPages
                 return false;
 
             var targetHostRef = targetRef as XenRef<Host>;
-            Host targetHost = targetHostRef == null ? null : TargetConnection.Resolve(targetHostRef);
+            var targetHost = targetHostRef == null ? null : TargetConnection.Resolve(targetHostRef);
 
             if (targetHost != null && !targetHost.CanSeeNetwork(network))
                 return false;
@@ -332,8 +349,8 @@ namespace XenAdmin.Wizards.GenericPages
 
             m_dataGridView.BeginEdit(false);
 
-            if (m_dataGridView.EditingControl != null && m_dataGridView.EditingControl is ComboBox)
-                (m_dataGridView.EditingControl as ComboBox).DroppedDown = true;
+            if (m_dataGridView.EditingControl is ComboBox box)
+                box.DroppedDown = true;
         }
 
         private void m_dataGridView_CurrentCellDirtyStateChanged(object sender, EventArgs e)
@@ -350,14 +367,32 @@ namespace XenAdmin.Wizards.GenericPages
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             LoadNetworkData();
+            if (backgroundWorker1.CancellationPending)
+            {
+                e.Cancel = true;
+            }
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            if (IsDisposed)
+            {
+                return;
+            }
+
+            lock (_workerRunLock)
+            {
+                if (_runWorkerAgain)
+                {
+                    _runWorkerAgain = false;
+                    backgroundWorker1.RunWorkerAsync();
+                    return;
+                }
+            }
+
             if (e.Cancelled)
             {
                 tableLayoutPanelError.Visible = false;
-                return;
             }
             else if (e.Error != null)
             {
@@ -368,7 +403,7 @@ namespace XenAdmin.Wizards.GenericPages
             {
                 tableLayoutPanelError.Visible = false;
                 FillTableRows();
-                HelpersGUI.ResizeGridViewColumnToAllCells(m_colTargetNet);//set properly the width of the last column
+                HelpersGUI.ResizeGridViewColumnToAllCells(m_colTargetNet); //set properly the width of the last column
             }
 
             m_buttonRefresh.Enabled = true;
