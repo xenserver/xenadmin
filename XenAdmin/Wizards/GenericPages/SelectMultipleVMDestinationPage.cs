@@ -58,6 +58,7 @@ namespace XenAdmin.Wizards.GenericPages
         private string _preferredHomeRef;
         private IXenObject _selectedTargetPool;
         private IXenObject _selectedTarget;
+        private List<IXenObject> _allSelectedTargets = new List<IXenObject>();
 
         #region Nested classes
 
@@ -134,12 +135,15 @@ namespace XenAdmin.Wizards.GenericPages
             get => _selectedTarget;
             set
             {
-                var oldTarget = _selectedTarget;
                 _selectedTarget = value;
-
-                if (oldTarget?.opaque_ref != SelectedTarget?.opaque_ref)
-                    OnSelectedTargetChanged();
+                OnSelectedTargetChanged();
             }
+        }
+
+        public List<IXenObject> AllSelectedTargets
+        {
+            get => _allSelectedTargets;
+            set => _allSelectedTargets = value;
         }
 
         /// <summary>
@@ -608,6 +612,7 @@ namespace XenAdmin.Wizards.GenericPages
             // when selecting a new destination pool, reset the target host selection
             if (SelectedTargetPool != null && !SelectedTargetPool.Equals(m_comboBoxConnection.SelectedItem))
             {
+                AllSelectedTargets.Clear();
                 SelectedTarget = null;
             }
 
@@ -674,16 +679,26 @@ namespace XenAdmin.Wizards.GenericPages
 
         private void m_dataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+            AllSelectedTargets.Clear();
+            IXenObject newTarget = null;
+            for(var rowIndex = 0; rowIndex < m_dataGridView.RowCount; rowIndex++)
             {
-                return;
+                for (var columnIndex = 0; columnIndex < m_dataGridView.ColumnCount; columnIndex++)
+                {
+                    var cell = m_dataGridView.Rows[rowIndex].Cells[columnIndex];
+                    if (cell.Value is IEnableableXenObjectComboBoxItem value)
+                    {
+                        if (rowIndex == e.RowIndex && columnIndex == e.ColumnIndex)
+                        {
+                            newTarget = value.Item;
+                        }
+                        if(value.Item != null)
+                            AllSelectedTargets.Add(value.Item);
+                    }
+                }
             }
 
-            var cell = m_dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex];
-            if (cell.Value is IEnableableXenObjectComboBoxItem value)
-            {
-                SelectedTarget = value.Item;
-            }
+            SelectedTarget = newTarget;
         }
 
         #endregion
