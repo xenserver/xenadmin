@@ -54,6 +54,6 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
 
         public override string HelpMessage => LinkText;
 
-        public override Uri UriToLaunch => new Uri(InvisibleMessages.UPSELL_SA);
+        public override Uri UriToLaunch => new Uri(InvisibleMessages.LICENSE_BUY_URL);
     }
 }

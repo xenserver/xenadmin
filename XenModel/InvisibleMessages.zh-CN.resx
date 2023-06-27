@@ -129,12 +129,6 @@
   <data name="HOMEPAGE" xml:space="preserve">
     <value>https://www.citrix.com.cn/products/citrix-hypervisor/</value>
   </data>
-  <data name="ISL_DEPRECATION_URL" xml:space="preserve">
-    <value>http://support.citrix.com/article/CTX141433</value>
-  </data>
-  <data name="LICENSE_EXPIRY_WEBPAGE" xml:space="preserve">
-    <value>https://store.citrix.com/dr_product/citrix-hypervisor-subscription</value>
-  </data>
   <data name="LICENSE_SERVER_DOWNLOAD_LINK" xml:space="preserve">
     <value>http://www.citrix.com/downloads/licensing/license-server</value>
   </data>
@@ -155,8 +149,5 @@
   </data>
   <data name="UPSELL_LEARNMOREURL_TRIAL" xml:space="preserve">
     <value>https://www.citrix.com/products/citrix-hypervisor/get-started.html</value>
-  </data>
-  <data name="UPSELL_SA" xml:space="preserve">
-    <value>https://store.citrix.com/dr_product/citrix-hypervisor-subscription</value>
   </data>
 </root>
