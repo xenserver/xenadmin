@@ -29,6 +29,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading;
@@ -331,31 +332,48 @@ namespace XenAdmin.Dialogs
         {
             get
             {
+                var hosts = XenObject.Connection.Cache.Hosts;
+                var entitlements = new List<string>();
                 if (CurrentState == HostState.Licensed)
                 {
-                    if (XenObject.Connection.Cache.Hosts.All(h => h.EnterpriseFeaturesEnabled()))
-                        return Messages.LICENSE_SUPPORT_AND_ENTERPRISE_FEATURES_ENABLED;
-                    if (XenObject.Connection.Cache.Hosts.All(h => h.DesktopPlusFeaturesEnabled()))
-                        return string.Format(Messages.LICENSE_SUPPORT_AND_DESKTOP_PLUS_FEATURES_ENABLED, BrandManager.CompanyNameLegacy);
-                    if (XenObject.Connection.Cache.Hosts.All(h => h.DesktopFeaturesEnabled()))
-                        return string.Format(Messages.LICENSE_SUPPORT_AND_DESKTOP_FEATURES_ENABLED, BrandManager.CompanyNameLegacy);
-                    if (XenObject.Connection.Cache.Hosts.All(h => h.DesktopCloudFeaturesEnabled()))
-                        return string.Format(Messages.LICENSE_SUPPORT_AND_DESKTOP_CLOUD_FEATURES_ENABLED, BrandManager.CompanyNameLegacy);
-                    if (XenObject.Connection.Cache.Hosts.All(h => h.PremiumFeaturesEnabled()))
-                        return Messages.LICENSE_SUPPORT_AND_PREMIUM_FEATURES_ENABLED;
-                    if (XenObject.Connection.Cache.Hosts.All(h => h.StandardFeaturesEnabled()))
-                        return Messages.LICENSE_SUPPORT_AND_STANDARD_FEATURES_ENABLED;
-                    if (XenObject.Connection.Cache.Hosts.All(h => h.EligibleForSupport()))
-                        return Messages.LICENSE_SUPPORT_AND_STANDARD_FEATURES_ENABLED;
-                    return Messages.LICENSE_NOT_ELIGIBLE_FOR_SUPPORT;
+                    string supportLevel = null;
+                    if (hosts.All(h => h.EnterpriseFeaturesEnabled()))
+                        supportLevel = Messages.LICENSE_ENTERPRISE_FEATURES_ENABLED;
+                    else if (hosts.All(h => h.DesktopPlusFeaturesEnabled()))
+                        supportLevel = string.Format(Messages.LICENSE_DESKTOP_PLUS_FEATURES_ENABLED, BrandManager.CompanyNameLegacy);
+                    else if (hosts.All(h => h.DesktopFeaturesEnabled()))
+                        supportLevel = string.Format(Messages.LICENSE_DESKTOP_FEATURES_ENABLED, BrandManager.CompanyNameLegacy);
+                    else if (hosts.All(h => h.DesktopCloudFeaturesEnabled()))
+                        supportLevel = string.Format(Messages.LICENSE_DESKTOP_CLOUD_FEATURES_ENABLED, BrandManager.CompanyNameLegacy);
+                    else if (hosts.All(h => h.PremiumFeaturesEnabled()))
+                        supportLevel = Messages.LICENSE_PREMIUM_FEATURES_ENABLED;
+                    else if (hosts.All(h => h.StandardFeaturesEnabled()))
+                        supportLevel = Messages.LICENSE_STANDARD_FEATURES_ENABLED;
+                    else if (hosts.All(h => h.EligibleForSupport()))
+                        supportLevel = Messages.LICENSE_STANDARD_FEATURES_ENABLED;
+
+                    if (supportLevel != null)
+                    {
+                        entitlements.Add(Messages.LICENSE_ELIGIBLE_FOR_SUPPORT);
+                        entitlements.Add(supportLevel);
+                    }
+                    else
+                    {
+                        entitlements.Add(Messages.LICENSE_NOT_ELIGIBLE_FOR_SUPPORT);
+                    }
                 }
 
                 if (CurrentState == HostState.Free)
                 {
-                    return Messages.LICENSE_NOT_ELIGIBLE_FOR_SUPPORT;
+                    entitlements.Add(Messages.LICENSE_NOT_ELIGIBLE_FOR_SUPPORT);
                 }
 
-                return Messages.UNKNOWN;
+                if (hosts.Any(h => h.CanShowTrialEditionUpsell()))
+                    entitlements.Add(Messages.TRIAL_EDITION_UPSELLING_MESSAGE);
+                else if (hosts.Any(h => h.CssLicenseHasExpired()))
+                    entitlements.Add(Messages.EXPIRED_CSS_UPSELLING_MESSAGE_POOL);
+
+                return entitlements.Count == 0 ? Messages.UNKNOWN : string.Join(Environment.NewLine, entitlements);
             }
         }
 

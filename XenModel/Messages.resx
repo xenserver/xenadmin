@@ -5792,6 +5792,12 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="EXPAND_ALL" xml:space="preserve">
     <value>E&amp;xpand All</value>
   </data>
+  <data name="EXPIRED_CSS_UPSELLING_MESSAGE_HOST" xml:space="preserve">
+    <value>Your Customer Success Services (CSS) agreement has expired. This server will not receive any updates, including security updates</value>
+  </data>
+  <data name="EXPIRED_CSS_UPSELLING_MESSAGE_POOL" xml:space="preserve">
+    <value>Your Customer Success Services (CSS) agreement has expired. This pool will not receive any updates, including security updates</value>
+  </data>
   <data name="EXPORT_ALL" xml:space="preserve">
     <value>Export All</value>
   </data>
@@ -7702,6 +7708,15 @@ SR UUID: {1}</value>
   <data name="LICENSE_ACTIVATED" xml:space="preserve">
     <value>Activated</value>
   </data>
+  <data name="LICENSE_DESKTOP_CLOUD_FEATURES_ENABLED" xml:space="preserve">
+    <value>{0} Virtual Apps and Desktops {0} Cloud features enabled</value>
+  </data>
+  <data name="LICENSE_DESKTOP_FEATURES_ENABLED" xml:space="preserve">
+    <value>{0} Virtual Apps and Desktops features enabled</value>
+  </data>
+  <data name="LICENSE_DESKTOP_PLUS_FEATURES_ENABLED" xml:space="preserve">
+    <value>{0} Virtual Apps and Desktops Premium features enabled</value>
+  </data>
   <data name="LICENSE_EDITION_DESKTOP" xml:space="preserve">
     <value>{0} Virtual &amp;Apps and Desktops</value>
   </data>
@@ -7737,6 +7752,12 @@ SR UUID: {1}</value>
   </data>
   <data name="LICENSE_EDITION_STANDARD_PERSOCKET_LEGACY" xml:space="preserve">
     <value>{0} &amp;Standard Per-Socket ({1} required)</value>
+  </data>
+  <data name="LICENSE_ELIGIBLE_FOR_SUPPORT" xml:space="preserve">
+    <value>Eligible for support</value>
+  </data>
+  <data name="LICENSE_ENTERPRISE_FEATURES_ENABLED" xml:space="preserve">
+    <value>Premium features enabled</value>
   </data>
   <data name="LICENSE_ERROR_1" xml:space="preserve">
     <value>The licensing action for {0} failed.</value>
@@ -7813,6 +7834,9 @@ SR UUID: {1}</value>
   <data name="LICENSE_NOT_ELIGIBLE_FOR_SUPPORT" xml:space="preserve">
     <value>Not eligible for support</value>
   </data>
+  <data name="LICENSE_PREMIUM_FEATURES_ENABLED" xml:space="preserve">
+    <value>Premium features enabled</value>
+  </data>
   <data name="LICENSE_REGULAR_GRACE_TOOLTIP" xml:space="preserve">
     <value>The license server {0} could not be reached. You have until {1} to reconnect to the license server.</value>
   </data>
@@ -7834,32 +7858,11 @@ SR UUID: {1}</value>
   <data name="LICENSE_SERVER_WEB_CONSOLE_GOTO" xml:space="preserve">
     <value>Go to...</value>
   </data>
+  <data name="LICENSE_STANDARD_FEATURES_ENABLED" xml:space="preserve">
+    <value>Standard features only</value>
+  </data>
   <data name="LICENSE_STATUS" xml:space="preserve">
     <value>Status</value>
-  </data>
-  <data name="LICENSE_SUPPORT_AND_DESKTOP_CLOUD_FEATURES_ENABLED" xml:space="preserve">
-    <value>Eligible for support 
-{0} Virtual Apps and Desktops {0} Cloud features enabled</value>
-  </data>
-  <data name="LICENSE_SUPPORT_AND_DESKTOP_FEATURES_ENABLED" xml:space="preserve">
-    <value>Eligible for support 
-{0} Virtual Apps and Desktops features enabled</value>
-  </data>
-  <data name="LICENSE_SUPPORT_AND_DESKTOP_PLUS_FEATURES_ENABLED" xml:space="preserve">
-    <value>Eligible for support 
-{0} Virtual Apps and Desktops Premium features enabled</value>
-  </data>
-  <data name="LICENSE_SUPPORT_AND_ENTERPRISE_FEATURES_ENABLED" xml:space="preserve">
-    <value>Eligible for support 
-Premium features enabled</value>
-  </data>
-  <data name="LICENSE_SUPPORT_AND_PREMIUM_FEATURES_ENABLED" xml:space="preserve">
-    <value>Eligible for support 
-Premium features enabled</value>
-  </data>
-  <data name="LICENSE_SUPPORT_AND_STANDARD_FEATURES_ENABLED" xml:space="preserve">
-    <value>Eligible for support 
-Standard features only</value>
   </data>
   <data name="LICENSE_UNLICENSED" xml:space="preserve">
     <value>Unlicensed</value>
@@ -9152,7 +9155,7 @@ It is strongly recommended that you Cancel and apply the latest version of the p
     <value>This server's Linux pack installation state differs from that of the coordinator</value>
   </data>
   <data name="NEWPOOL_MAX_NUMBER_HOST_REACHED" xml:space="preserve">
-    <value>The pool has already reached the maximum number of servers allowed by your license</value>
+    <value>The pool has already reached the maximum number of servers allowed by your license. Go to {0} to purchase licenses</value>
   </data>
   <data name="NEWPOOL_POOLINGRESTRICTED" xml:space="preserve">
     <value>Pooling is restricted with this server's license</value>
@@ -9164,7 +9167,7 @@ It is strongly recommended that you Cancel and apply the latest version of the p
     <value>You cannot add an unlicensed server to a licensed pool</value>
   </data>
   <data name="NEWPOOL_WILL_EXCEED_POOL_MAX_SIZE" xml:space="preserve">
-    <value>The pool will exceed the maximum number of servers allowed by your license</value>
+    <value>The pool will exceed the maximum number of servers allowed by your license. Go to {0} to purchase licenses</value>
   </data>
   <data name="NEWSR_ACTION" xml:space="preserve">
     <value>NFS SR [{0}]</value>
@@ -12632,6 +12635,9 @@ Do you want to connect to the pool coordinator '{1}'?</value>
   </data>
   <data name="TREESEARCHBOX_DROPDOWN_TOOLTIP" xml:space="preserve">
     <value>Views and Saved Searches</value>
+  </data>
+  <data name="TRIAL_EDITION_UPSELLING_MESSAGE" xml:space="preserve">
+    <value>Unlicensed servers will not receive any updates, including security updates</value>
   </data>
   <data name="TRUE" xml:space="preserve">
     <value>True</value>

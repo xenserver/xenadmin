@@ -183,6 +183,9 @@
   <data name="&gt;&gt;information.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="tableLayoutPanel2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="tableLayoutPanel2.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
