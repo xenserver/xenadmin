@@ -40164,7 +40164,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VMs with attached vTPMs can only be exported in XVA format. If you export and re-import these VMs, the vTPM data will not be preserved. Some of the VMs&apos; security features may be deactivated and the VMs may not start..
+        ///   Looks up a localized string similar to The OVF/OVA format does not preserve vTPM data. Some of the VMs&apos; security features may be deactivated and the VMs may not start. Use the XVA format to preserve vTPM data..
         /// </summary>
         public static string VTPM_EXPORT_UNSUPPORTED_FOR_OVF {
             get {
