@@ -978,6 +978,15 @@ namespace XenAdmin.TabPages
 
             PDSection s = pdSectionLicense;
 
+            if (host.CanShowTrialEditionUpsell())
+            {
+                pdSectionLicense.AddEntryLink(Messages.WARNING, Messages.TRIAL_EDITION_UPSELLING_MESSAGE,  () => Program.OpenURL(InvisibleMessages.LICENSE_BUY_URL));
+            }
+            else if (host.CssLicenseHasExpired())
+            {
+                pdSectionLicense.AddEntryLink(Messages.WARNING, Messages.EXPIRED_CSS_UPSELLING_MESSAGE_HOST, () => Program.OpenURL(InvisibleMessages.LICENSE_BUY_URL));
+            }
+
             if (host.license_params == null)
                 return;
 
