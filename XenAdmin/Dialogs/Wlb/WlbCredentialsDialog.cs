@@ -32,6 +32,7 @@ using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Windows.Forms;
+using XenAdmin.Actions;
 using XenAdmin.Actions.Wlb;
 using XenAdmin.Core;
 using XenAdmin.Wlb;
@@ -42,10 +43,10 @@ namespace XenAdmin.Dialogs.Wlb
 {
     public partial class WlbCredentialsDialog : XenDialogBase
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
         private const int DEFAULT_WLB_PORT = 8012;
-        private Pool _pool;
+        private readonly Pool _pool;
+        private readonly WlbServerState.ServerState _wlbServerState;
+        private string _wlbUrl;
 
         public WlbCredentialsDialog(Pool pool)
         {
@@ -54,8 +55,10 @@ namespace XenAdmin.Dialogs.Wlb
             decentGroupBoxXSCredentials.Text = string.Format(decentGroupBoxXSCredentials.Text, BrandManager.ProductBrand);
 
             _pool = pool;
+            _wlbServerState = WlbServerState.GetState(_pool);
+
             PopulateControls();
-            SetControlState();
+            CheckEnabledOkButton();
         }
 
         private void PopulateControls()
@@ -68,29 +71,15 @@ namespace XenAdmin.Dialogs.Wlb
             textboxWlbUrl.Text = hostname;
             textboxWLBPort.Text = port.ToString();
             textboxWlbUserName.Text = _pool.wlb_username;
+            _wlbUrl = GetWlbUrl();
+
+            decentGroupBoxWLBServerAddress.Enabled = _wlbServerState == WlbServerState.ServerState.NotConfigured ||
+                                                     _wlbServerState == WlbServerState.ServerState.ConnectionError;
         }
 
-        private void SetControlState()
+        private void SetXsCredentials()
         {
-            switch (WlbServerState.GetState(_pool))
-            {
-                case WlbServerState.ServerState.NotConfigured:
-                case WlbServerState.ServerState.ConnectionError:
-                    {
-                        decentGroupBoxWLBServerAddress.Enabled = true;
-                        break;
-                    }
-            }
-        }
-
-        private void checkboxUseCurrentXSCredentials_CheckedChanged(object sender, EventArgs e)
-        {
-            SetXSCredentials(checkboxUseCurrentXSCredentials.Checked);
-        }
-
-        private void SetXSCredentials(bool useCurrent)
-        {
-            if (useCurrent)
+            if (checkboxUseCurrentXSCredentials.Checked)
             {
                 textboxXSUserName.Text = _pool.Connection.Username;
                 textboxXSPassword.Text = _pool.Connection.Password;
@@ -99,149 +88,137 @@ namespace XenAdmin.Dialogs.Wlb
             }
             else
             {
-                textboxXSUserName.Text = String.Empty;
-                textboxXSPassword.Text = String.Empty;
+                textboxXSUserName.Text = string.Empty;
+                textboxXSPassword.Text = string.Empty;
                 textboxXSUserName.Enabled = true;
                 textboxXSPassword.Enabled = true;
             }
         }
 
-        private void buttonOK_Click(object sender, EventArgs e)
+        private string GetWlbUrl()
         {
-            if (WlbServerState.GetState(_pool) == WlbServerState.ServerState.ConnectionError || WlbServerState.GetState(_pool) == WlbServerState.ServerState.NotConfigured)
-            {
-                try
-                {
-                    if (InitializeWLB())
-                    {
-                        this.DialogResult = DialogResult.OK;
-                        this.Close();
-                    }
-                }
-                catch
-                {
-                    log.Warn("Error Intializing WLB");
-                }
-            }
-            else 
-            {
-                if (WlbServerState.GetState(_pool) == WlbServerState.ServerState.Disabled)
-                {
-                    if (EnableWlb())
-                    {
-                        this.DialogResult = DialogResult.OK;
-                        this.Close();
-                    }
-                }
-            }
-        }
+            if (string.IsNullOrWhiteSpace(textboxWlbUrl.Text) || string.IsNullOrWhiteSpace(textboxWLBPort.Text))
+                return null;
 
-        private bool EnableWlb()
-        {
+            string wlbHost = textboxWlbUrl.Text.Trim();
+            string wlbPort = textboxWLBPort.Text.Trim();
 
-            // Enable WLB.
-            EnableWLBAction action = new EnableWLBAction(_pool);
-            // We will need to re-enable buttons when the action completes
-            action.Completed += Program.MainWindow.action_Completed;
-            using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Blocks))
-            {
-                dialog.ShowCancel = true;
-                dialog.ShowDialog(this);
-            }
+            if (!int.TryParse(wlbPort, out _))
+                return null;
 
-            return action.Succeeded;
-        }
-
-        private bool InitializeWLB()
-        {
-            //combine url and port 
-            string wlbHost = textboxWlbUrl.Text;
-            string wlbPort = textboxWLBPort.Text;
-            IPAddress address;
-            string wlbUrl = (IPAddress.TryParse(wlbHost, out address) && address.AddressFamily == AddressFamily.InterNetworkV6) ?
-                ("[" + wlbHost + "]:" + wlbPort) : (wlbHost + ":" + wlbPort);
-
-            //handle the wlb creds
-            string wlbUserName = textboxWlbUserName.Text;
-            string wlbPassword = textboxWlbPassword.Text;
-
-            //handle the xenserver creds
-            string xsUserName = textboxXSUserName.Text;
-            string xsPassword = textboxXSPassword.Text;
-
-            InitializeWLBAction action = new InitializeWLBAction(_pool, wlbUrl, wlbUserName, wlbPassword, xsUserName, xsPassword);
-            using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Blocks))
-            {
-                dialog.ShowCancel = true;
-                dialog.ShowDialog(this);
-            }
-
-            Program.MainWindow.UpdateToolbars();
-            return action.Succeeded;
-        }
-
-        private void textboxWlbUrl_TextChanged(object sender, EventArgs e)
-        {
-            buttonOK.Enabled = checkEnabled_OkButton();
-        }
-
-        private bool checkEnabled_OkButton()
-        {
-            return textboxWlbUrl.Text.Length > 0 &&
-                   IsValidServerAddress(textboxWlbUrl.Text) &&
-                   textboxWLBPort.Text.Length > 0 &&
-                   int.TryParse(textboxWLBPort.Text, out _) &&
-                   textboxWlbUserName.Text.Length > 0 &&
-                   textboxWlbPassword.Text.Length > 0 &&
-                   textboxXSUserName.Text.Length > 0 &&
-                   textboxXSPassword.Text.Length > 0;
-        }
-
-        private bool IsValidServerAddress(string addr)
-        {
             // A valid server address should be an IPv4 / IPv6 address or a valid domain name
 
-            if (IPAddress.TryParse(addr, out var address))
+            if (IPAddress.TryParse(wlbHost, out var address))
             {
-                return address.AddressFamily == AddressFamily.InterNetwork || address.AddressFamily == AddressFamily.InterNetworkV6;
+                switch (address.AddressFamily)
+                {
+                    case AddressFamily.InterNetwork:
+                        return $"{wlbHost}:{wlbPort}";
+                    case AddressFamily.InterNetworkV6:
+                        return $"[{wlbHost}]:{wlbPort}";
+                }
             }
 
             try
             {
-                // use UriBuilder as a quick validator
-                var ub = new UriBuilder($"http://{addr}:80/");
-                return ub.Host == addr;
+                var url = $"{wlbHost}:{wlbPort}";
+                var uri = new Uri(url); //used as a quick validator
+                return url;
             }
             catch
             {
-                return false;
+                return null;
             }
+        }
+
+        private void buttonOK_Click(object sender, EventArgs e)
+        {
+            AsyncAction action = null;
+
+            switch (_wlbServerState)
+            {
+                case WlbServerState.ServerState.ConnectionError:
+                case WlbServerState.ServerState.NotConfigured:
+                {
+                    action = new InitializeWLBAction(_pool, _wlbUrl,
+                        textboxWlbUserName.Text.Trim(), textboxWlbPassword.Text.Trim(),
+                        textboxXSUserName.Text.Trim(), textboxXSPassword.Text.Trim());
+                    action.Completed += InitializeWLBAction_Completed;
+                    break;
+                }
+                case WlbServerState.ServerState.Disabled:
+                {
+                    action = new EnableWLBAction(_pool);
+                    action.Completed += Program.MainWindow.action_Completed;
+                    break;
+                }
+            }
+
+            if (action == null)
+                return;
+
+            using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Blocks))
+            {
+                dialog.ShowCancel = true;
+                dialog.ShowDialog(this);
+            }
+
+            if (action.Succeeded)
+            {
+                DialogResult = DialogResult.OK;
+                Close();
+            }
+        }
+
+        private void InitializeWLBAction_Completed(ActionBase obj)
+        {
+            Program.Invoke(Program.MainWindow, Program.MainWindow.UpdateToolbars);
+        }
+
+        private void CheckEnabledOkButton()
+        {
+            buttonOK.Enabled = _wlbUrl != null &&
+                               !string.IsNullOrWhiteSpace(textboxWlbUserName.Text) &&
+                               !string.IsNullOrWhiteSpace(textboxWlbPassword.Text) &&
+                               !string.IsNullOrWhiteSpace(textboxXSUserName.Text) &&
+                               !string.IsNullOrWhiteSpace(textboxXSPassword.Text);
+        }
+
+        private void textboxWlbUrl_TextChanged(object sender, EventArgs e)
+        {
+            _wlbUrl = GetWlbUrl();
+            CheckEnabledOkButton();
         }
 
         private void textboxWLBPort_TextChanged(object sender, EventArgs e)
         {
-            buttonOK.Enabled = checkEnabled_OkButton();
+            _wlbUrl = GetWlbUrl();
+            CheckEnabledOkButton();
         }
 
         private void textboxWlbUserName_TextChanged(object sender, EventArgs e)
         {
-            buttonOK.Enabled = checkEnabled_OkButton();
+            CheckEnabledOkButton();
         }
 
         private void textboxWlbPassword_TextChanged(object sender, EventArgs e)
         {
-            buttonOK.Enabled = checkEnabled_OkButton();
+            CheckEnabledOkButton();
         }
 
         private void textboxXSUserName_TextChanged(object sender, EventArgs e)
         {
-            buttonOK.Enabled = checkEnabled_OkButton();
+            CheckEnabledOkButton();
         }
 
         private void textboxXSPassword_TextChanged(object sender, EventArgs e)
         {
-            buttonOK.Enabled = checkEnabled_OkButton();
+            CheckEnabledOkButton();
+        }
+
+        private void checkboxUseCurrentXSCredentials_CheckedChanged(object sender, EventArgs e)
+        {
+            SetXsCredentials();
         }
     }
 }
-
