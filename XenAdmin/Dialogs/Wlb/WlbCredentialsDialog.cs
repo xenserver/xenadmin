@@ -51,9 +51,6 @@ namespace XenAdmin.Dialogs.Wlb
         {
             InitializeComponent();
             checkboxUseCurrentXSCredentials.Text = string.Format(checkboxUseCurrentXSCredentials.Text, BrandManager.BrandConsole);
-            LabelWLBServerNameBlurb.Text = string.Format(LabelWLBServerNameBlurb.Text, BrandManager.ProductBrand);
-            LabelWLBServerCredsBlurb.Text = string.Format(LabelWLBServerCredsBlurb.Text, BrandManager.ProductBrand);
-            LabelXenServerCredsBlurb.Text = string.Format(LabelXenServerCredsBlurb.Text, BrandManager.ProductBrand);
             decentGroupBoxXSCredentials.Text = string.Format(decentGroupBoxXSCredentials.Text, BrandManager.ProductBrand);
 
             _pool = pool;

@@ -46,26 +46,20 @@ namespace XenAdmin.Dialogs.Wlb
             this.LabelWLBServerName = new System.Windows.Forms.Label();
             this.LabelWLBServerNameBlurb = new System.Windows.Forms.Label();
             this.decentGroupBoxWLBServerAddress = new XenAdmin.Controls.DecentGroupBox();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.labelDefaultPortBlurb = new System.Windows.Forms.Label();
             this.decentGroupBoxWLBCredentials = new XenAdmin.Controls.DecentGroupBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.decentGroupBoxXSCredentials = new XenAdmin.Controls.DecentGroupBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonOK = new System.Windows.Forms.Button();
             this.decentGroupBoxWLBServerAddress.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.decentGroupBoxWLBCredentials.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.tableLayoutPanel2.SuspendLayout();
             this.decentGroupBoxXSCredentials.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // textboxWLBPort
@@ -82,6 +76,7 @@ namespace XenAdmin.Dialogs.Wlb
             // checkboxUseCurrentXSCredentials
             // 
             resources.ApplyResources(this.checkboxUseCurrentXSCredentials, "checkboxUseCurrentXSCredentials");
+            this.tableLayoutPanel3.SetColumnSpan(this.checkboxUseCurrentXSCredentials, 2);
             this.checkboxUseCurrentXSCredentials.Name = "checkboxUseCurrentXSCredentials";
             this.checkboxUseCurrentXSCredentials.UseVisualStyleBackColor = true;
             this.checkboxUseCurrentXSCredentials.CheckedChanged += new System.EventHandler(this.checkboxUseCurrentXSCredentials_CheckedChanged);
@@ -89,6 +84,7 @@ namespace XenAdmin.Dialogs.Wlb
             // textboxWlbUrl
             // 
             resources.ApplyResources(this.textboxWlbUrl, "textboxWlbUrl");
+            this.tableLayoutPanel1.SetColumnSpan(this.textboxWlbUrl, 2);
             this.textboxWlbUrl.Name = "textboxWlbUrl";
             this.textboxWlbUrl.TextChanged += new System.EventHandler(this.textboxWlbUrl_TextChanged);
             // 
@@ -117,6 +113,7 @@ namespace XenAdmin.Dialogs.Wlb
             // LabelXenServerCredsBlurb
             // 
             resources.ApplyResources(this.LabelXenServerCredsBlurb, "LabelXenServerCredsBlurb");
+            this.tableLayoutPanel3.SetColumnSpan(this.LabelXenServerCredsBlurb, 2);
             this.LabelXenServerCredsBlurb.Name = "LabelXenServerCredsBlurb";
             // 
             // textboxWlbPassword
@@ -144,6 +141,7 @@ namespace XenAdmin.Dialogs.Wlb
             // LabelWLBServerCredsBlurb
             // 
             resources.ApplyResources(this.LabelWLBServerCredsBlurb, "LabelWLBServerCredsBlurb");
+            this.tableLayoutPanel2.SetColumnSpan(this.LabelWLBServerCredsBlurb, 2);
             this.LabelWLBServerCredsBlurb.Name = "LabelWLBServerCredsBlurb";
             // 
             // LabelWLBServerName
@@ -154,19 +152,26 @@ namespace XenAdmin.Dialogs.Wlb
             // LabelWLBServerNameBlurb
             // 
             resources.ApplyResources(this.LabelWLBServerNameBlurb, "LabelWLBServerNameBlurb");
+            this.tableLayoutPanel1.SetColumnSpan(this.LabelWLBServerNameBlurb, 3);
             this.LabelWLBServerNameBlurb.Name = "LabelWLBServerNameBlurb";
             // 
             // decentGroupBoxWLBServerAddress
             // 
             resources.ApplyResources(this.decentGroupBoxWLBServerAddress, "decentGroupBoxWLBServerAddress");
-            this.decentGroupBoxWLBServerAddress.Controls.Add(this.labelDefaultPortBlurb);
-            this.decentGroupBoxWLBServerAddress.Controls.Add(this.LabelWLBServerNameBlurb);
-            this.decentGroupBoxWLBServerAddress.Controls.Add(this.textboxWLBPort);
-            this.decentGroupBoxWLBServerAddress.Controls.Add(this.textboxWlbUrl);
-            this.decentGroupBoxWLBServerAddress.Controls.Add(this.LabelWLBServerPort);
-            this.decentGroupBoxWLBServerAddress.Controls.Add(this.LabelWLBServerName);
+            this.decentGroupBoxWLBServerAddress.Controls.Add(this.tableLayoutPanel1);
             this.decentGroupBoxWLBServerAddress.Name = "decentGroupBoxWLBServerAddress";
             this.decentGroupBoxWLBServerAddress.TabStop = false;
+            // 
+            // tableLayoutPanel1
+            // 
+            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.LabelWLBServerNameBlurb, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.LabelWLBServerPort, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.textboxWLBPort, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.labelDefaultPortBlurb, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.textboxWlbUrl, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.LabelWLBServerName, 0, 1);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // labelDefaultPortBlurb
             // 
@@ -176,73 +181,37 @@ namespace XenAdmin.Dialogs.Wlb
             // decentGroupBoxWLBCredentials
             // 
             resources.ApplyResources(this.decentGroupBoxWLBCredentials, "decentGroupBoxWLBCredentials");
-            this.decentGroupBoxWLBCredentials.Controls.Add(this.pictureBox3);
-            this.decentGroupBoxWLBCredentials.Controls.Add(this.pictureBox2);
-            this.decentGroupBoxWLBCredentials.Controls.Add(this.pictureBox1);
-            this.decentGroupBoxWLBCredentials.Controls.Add(this.LabelWLBServerCredsBlurb);
-            this.decentGroupBoxWLBCredentials.Controls.Add(this.LabelWLBUsername);
-            this.decentGroupBoxWLBCredentials.Controls.Add(this.LabelWLBPassword);
-            this.decentGroupBoxWLBCredentials.Controls.Add(this.textboxWlbUserName);
-            this.decentGroupBoxWLBCredentials.Controls.Add(this.textboxWlbPassword);
+            this.decentGroupBoxWLBCredentials.Controls.Add(this.tableLayoutPanel2);
             this.decentGroupBoxWLBCredentials.Name = "decentGroupBoxWLBCredentials";
             this.decentGroupBoxWLBCredentials.TabStop = false;
             // 
-            // pictureBox3
+            // tableLayoutPanel2
             // 
-            resources.ApplyResources(this.pictureBox3, "pictureBox3");
-            this.pictureBox3.Image = global::XenAdmin.Properties.Resources.WLB;
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            resources.ApplyResources(this.pictureBox2, "pictureBox2");
-            this.pictureBox2.Image = global::XenAdmin.Properties.Resources.XS;
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            resources.ApplyResources(this.pictureBox1, "pictureBox1");
-            this.pictureBox1.Image = global::XenAdmin.Properties.Resources.RightArrow;
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.TabStop = false;
+            resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
+            this.tableLayoutPanel2.Controls.Add(this.LabelWLBServerCredsBlurb, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.LabelWLBPassword, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.LabelWLBUsername, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.textboxWlbPassword, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.textboxWlbUserName, 1, 1);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             // 
             // decentGroupBoxXSCredentials
             // 
             resources.ApplyResources(this.decentGroupBoxXSCredentials, "decentGroupBoxXSCredentials");
-            this.decentGroupBoxXSCredentials.Controls.Add(this.pictureBox4);
-            this.decentGroupBoxXSCredentials.Controls.Add(this.pictureBox5);
-            this.decentGroupBoxXSCredentials.Controls.Add(this.pictureBox6);
-            this.decentGroupBoxXSCredentials.Controls.Add(this.LabelXenServerCredsBlurb);
-            this.decentGroupBoxXSCredentials.Controls.Add(this.textboxXSUserName);
-            this.decentGroupBoxXSCredentials.Controls.Add(this.LabelXenServerUsername);
-            this.decentGroupBoxXSCredentials.Controls.Add(this.checkboxUseCurrentXSCredentials);
-            this.decentGroupBoxXSCredentials.Controls.Add(this.LabelXenServerPassword);
-            this.decentGroupBoxXSCredentials.Controls.Add(this.textboxXSPassword);
+            this.decentGroupBoxXSCredentials.Controls.Add(this.tableLayoutPanel3);
             this.decentGroupBoxXSCredentials.Name = "decentGroupBoxXSCredentials";
             this.decentGroupBoxXSCredentials.TabStop = false;
             // 
-            // pictureBox4
+            // tableLayoutPanel3
             // 
-            resources.ApplyResources(this.pictureBox4, "pictureBox4");
-            this.pictureBox4.Image = global::XenAdmin.Properties.Resources.WLB;
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.TabStop = false;
-            // 
-            // pictureBox5
-            // 
-            resources.ApplyResources(this.pictureBox5, "pictureBox5");
-            this.pictureBox5.Image = global::XenAdmin.Properties.Resources.XS;
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.TabStop = false;
-            // 
-            // pictureBox6
-            // 
-            resources.ApplyResources(this.pictureBox6, "pictureBox6");
-            this.pictureBox6.Image = global::XenAdmin.Properties.Resources.LeftArrow;
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.TabStop = false;
+            resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
+            this.tableLayoutPanel3.Controls.Add(this.LabelXenServerCredsBlurb, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.LabelXenServerPassword, 0, 3);
+            this.tableLayoutPanel3.Controls.Add(this.LabelXenServerUsername, 0, 2);
+            this.tableLayoutPanel3.Controls.Add(this.textboxXSUserName, 1, 2);
+            this.tableLayoutPanel3.Controls.Add(this.checkboxUseCurrentXSCredentials, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.textboxXSPassword, 1, 3);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             // 
             // buttonCancel
             // 
@@ -271,16 +240,16 @@ namespace XenAdmin.Dialogs.Wlb
             this.Name = "WlbCredentialsDialog";
             this.decentGroupBoxWLBServerAddress.ResumeLayout(false);
             this.decentGroupBoxWLBServerAddress.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.decentGroupBoxWLBCredentials.ResumeLayout(false);
             this.decentGroupBoxWLBCredentials.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             this.decentGroupBoxXSCredentials.ResumeLayout(false);
             this.decentGroupBoxXSCredentials.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -309,12 +278,8 @@ namespace XenAdmin.Dialogs.Wlb
         private System.Windows.Forms.Label labelDefaultPortBlurb;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button buttonOK;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.PictureBox pictureBox4;
-        private System.Windows.Forms.PictureBox pictureBox5;
-        private System.Windows.Forms.PictureBox pictureBox6;
-
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
     }
 }
