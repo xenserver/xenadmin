@@ -106,6 +106,7 @@
     <Compile Include="Alerts\Types\CertificateAlert.cs" />
     <Compile Include="Alerts\Types\AlarmMessageAlert.cs" />
     <Compile Include="Alerts\Types\HotfixEligibilityAlert.cs" />
+    <Compile Include="Alerts\Types\LeafCoalesceAlert.cs" />
     <Compile Include="Alerts\Types\PolicyAlert.cs" />
     <Compile Include="Alerts\Types\XenServerUpdateAlert.cs" />
     <Compile Include="Alerts\Types\DuplicateIqnAlert.cs" />

@@ -1586,6 +1586,15 @@
   <data name="Message.help-host_sync_data_failed" xml:space="preserve">
     <value>Help on HA</value>
   </data>
+  <data name="Message.help-leaf_coalesce_completed" xml:space="preserve">
+    <value>Leaf coalesce completed</value>
+  </data>
+  <data name="Message.help-leaf_coalesce_failed" xml:space="preserve">
+    <value>Leaf coalesce failed</value>
+  </data>
+  <data name="Message.help-leaf_coalesce_start_message" xml:space="preserve">
+    <value>Leaf coalesce started</value>
+  </data>
   <data name="Message.help-license_does_not_support_pooling" xml:space="preserve">
     <value>Help on Licensing</value>
   </data>

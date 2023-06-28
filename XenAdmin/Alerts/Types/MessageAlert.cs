@@ -505,6 +505,10 @@ namespace XenAdmin.Alerts
 
                 case Message.MessageType.FAILED_LOGIN_ATTEMPTS:
                     return new FailedLoginAttemptAlert(msg);
+                case Message.MessageType.LEAF_COALESCE_START_MESSAGE:
+                case Message.MessageType.LEAF_COALESCE_COMPLETED:
+                case Message.MessageType.LEAF_COALESCE_FAILED:
+                    return new LeafCoalesceAlert(msg);
                 default:
                     // For all other kinds of alert
                     return new MessageAlert(msg);

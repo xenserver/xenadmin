@@ -4464,6 +4464,33 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Leaf coalesce completed.
+        /// </summary>
+        public static string Message_help_leaf_coalesce_completed {
+            get {
+                return ResourceManager.GetString("Message.help-leaf_coalesce_completed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Leaf coalesce failed.
+        /// </summary>
+        public static string Message_help_leaf_coalesce_failed {
+            get {
+                return ResourceManager.GetString("Message.help-leaf_coalesce_failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Leaf coalesce started.
+        /// </summary>
+        public static string Message_help_leaf_coalesce_start_message {
+            get {
+                return ResourceManager.GetString("Message.help-leaf_coalesce_start_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Help on Licensing.
         /// </summary>
         public static string Message_help_license_does_not_support_pooling {

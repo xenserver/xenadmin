@@ -21875,6 +21875,60 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Data merge for VM {0} completed.
+        /// </summary>
+        public static string LEAF_COALESCE_COMPLETED_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("LEAF_COALESCE_COMPLETED_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Leaf coalesce completed.
+        /// </summary>
+        public static string LEAF_COALESCE_COMPLETED_TITLE {
+            get {
+                return ResourceManager.GetString("LEAF_COALESCE_COMPLETED_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data merge for VM {0} failed.
+        /// </summary>
+        public static string LEAF_COALESCE_FAILED_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("LEAF_COALESCE_FAILED_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Leaf coalesce failed.
+        /// </summary>
+        public static string LEAF_COALESCE_FAILED_TITLE {
+            get {
+                return ResourceManager.GetString("LEAF_COALESCE_FAILED_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data is being merged for VM {0}, performance may be reduced.
+        /// </summary>
+        public static string LEAF_COALESCE_START_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("LEAF_COALESCE_START_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Leaf coalesce started.
+        /// </summary>
+        public static string LEAF_COALESCE_START_TITLE {
+            get {
+                return ResourceManager.GetString("LEAF_COALESCE_START_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Learn more....
         /// </summary>
         public static string LEARN_MORE {
