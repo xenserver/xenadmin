@@ -90,6 +90,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
                     }
                 }
 
+                var hostMemoryUnavailableFailures = 0;
                 foreach (Host host in targets)
                 {
                     if (_canceled)
@@ -173,8 +174,9 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
                             failureReason = failure.Message.Split('\n')[0].TrimEnd('\r'); // we want the first line only
                         else if (failure.ErrorDescription.Count > 1 && failure.ErrorDescription[1].Contains(Failure.DYNAMIC_MEMORY_CONTROL_UNAVAILABLE))
                             failureReason = FriendlyErrorNames.DYNAMIC_MEMORY_CONTROL_UNAVAILABLE;
-                        else
-                            failureReason = failure.Message;
+                        // CA-378758: Ensure all hosts in pool hit `HOST_NOT_ENOUGH_FREE_MEMORY` before preventing migration
+                        else if (!failure.ErrorDescription.Contains(Failure.HOST_NOT_ENOUGH_FREE_MEMORY) || ++hostMemoryUnavailableFailures >= targets.Count)
+                          failureReason = failure.Message;
 
                         log.InfoFormat("VM {0} cannot be migrated to {1}. Reason: {2};", vm.Name(), host.Name(), failure.Message);
                     }
