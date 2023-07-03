@@ -58,7 +58,6 @@ namespace XenAdmin.Wizards.GenericPages
         private string _preferredHomeRef;
         private IXenObject _selectedTargetPool;
         private IXenObject _selectedTarget;
-        private List<IXenObject> _allSelectedTargets = new List<IXenObject>();
 
         #region Nested classes
 
@@ -140,11 +139,7 @@ namespace XenAdmin.Wizards.GenericPages
             }
         }
 
-        public List<IXenObject> AllSelectedTargets
-        {
-            get => _allSelectedTargets;
-            set => _allSelectedTargets = value;
-        }
+        public List<IXenObject> AllSelectedTargets { get; } = new List<IXenObject>();
 
         /// <summary>
         /// Text containing instructions for use - at the top of the page
