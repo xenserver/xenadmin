@@ -7270,13 +7270,13 @@ This might result in failure to migrate VMs to this server during the RPU or to 
     <value>Place &amp;all imported virtual disks on this target SR:</value>
   </data>
   <data name="IMPORT_WIZARD_CPUS_COUNT_MISMATCH_HOST" xml:space="preserve">
-    <value>The imported appliance requires a minimum of {0} vCPUs on at least one VM, but there are servers with insufficient physical CPUs ({1}). Ensure that the VMs are mapped correctly or you will not be able to start the appliance on the selected server.</value>
+    <value>At least one VM in the imported appliance requires a minimum of {0} vCPUs, but there are servers with insufficient physical CPUs ({1}). Ensure that the VMs are mapped correctly or you will not be able to start the appliance on the selected server.</value>
   </data>
   <data name="IMPORT_WIZARD_CPUS_COUNT_MISMATCH_HOST_ALL" xml:space="preserve">
-    <value>The imported appliance requires a minimum of {0} vCPUs, while the maximum number of physical CPUs in the selected servers is {1}. You will not be able to start all the VMs in the appliance with the current selection.</value>
+    <value>At least one VM in the imported appliance requires a minimum of {0} vCPUs, while the maximum number of physical CPUs in the selected servers is {1}. You will not be able to start all the VMs in the appliance with the current selection.</value>
   </data>
   <data name="IMPORT_WIZARD_CPUS_COUNT_MISMATCH_POOL" xml:space="preserve">
-    <value>The imported appliance requires a minimum of {0} vCPUs, while the maximum number of physical CPUs in the pool is {1}. You will not be able to start the appliance on the selected pool.</value>
+    <value>At least one VM in the imported appliance requires a minimum of {0} vCPUs, while the maximum number of physical CPUs in the pool is {1}. You will not be able to start the appliance on the selected pool.</value>
   </data>
   <data name="IMPORT_WIZARD_DESTINATION_DESTINATION" xml:space="preserve">
     <value>&amp;Import to:</value>

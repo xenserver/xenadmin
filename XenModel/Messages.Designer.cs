@@ -20838,7 +20838,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The imported appliance requires a minimum of {0} vCPUs on at least one VM, but there are servers with insufficient physical CPUs ({1}). Ensure that the VMs are mapped correctly or you will not be able to start the appliance on the selected server..
+        ///   Looks up a localized string similar to At least one VM in the imported appliance requires a minimum of {0} vCPUs, but there are servers with insufficient physical CPUs ({1}). Ensure that the VMs are mapped correctly or you will not be able to start the appliance on the selected server..
         /// </summary>
         public static string IMPORT_WIZARD_CPUS_COUNT_MISMATCH_HOST {
             get {
@@ -20847,7 +20847,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The imported appliance requires a minimum of {0} vCPUs, while the maximum number of physical CPUs in the selected servers is {1}. You will not be able to start all the VMs in the appliance with the current selection..
+        ///   Looks up a localized string similar to At least one VM in the imported appliance requires a minimum of {0} vCPUs, while the maximum number of physical CPUs in the selected servers is {1}. You will not be able to start all the VMs in the appliance with the current selection..
         /// </summary>
         public static string IMPORT_WIZARD_CPUS_COUNT_MISMATCH_HOST_ALL {
             get {
@@ -20856,7 +20856,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The imported appliance requires a minimum of {0} vCPUs, while the maximum number of physical CPUs in the pool is {1}. You will not be able to start the appliance on the selected pool..
+        ///   Looks up a localized string similar to At least one VM in the imported appliance requires a minimum of {0} vCPUs, while the maximum number of physical CPUs in the pool is {1}. You will not be able to start the appliance on the selected pool..
         /// </summary>
         public static string IMPORT_WIZARD_CPUS_COUNT_MISMATCH_POOL {
             get {
