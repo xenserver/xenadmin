@@ -49,12 +49,15 @@ namespace XenAdmin.Diagnostics.Checks
         private readonly Control _control;
         private readonly HashSet<string> _euas;
         private readonly HashSet<IXenObject> _hostsFailedToFetchEua;
-        public UpgradeRequiresEua(Control control, List<Host> hosts, IReadOnlyDictionary<string, string> installMethodConfig)
+        private readonly Dictionary<string, string> _installMethodConfig;
+
+        public UpgradeRequiresEua(Control control, List<Host> hosts, Dictionary<string, string> installMethodConfig)
             : base(hosts)
         {
             if (installMethodConfig == null || !installMethodConfig.TryGetValue("url", out var uriText))
                 return;
 
+            _installMethodConfig = installMethodConfig;
             _control = control;
 
             try
@@ -70,7 +73,7 @@ namespace XenAdmin.Diagnostics.Checks
             _hostsFailedToFetchEua = new HashSet<IXenObject>();
         }
 
-        public override bool CanRun() => _targetUri != null && Hosts.Any(Helpers.YangtzeOrGreater);
+        public override bool CanRun() => _targetUri != null;
 
         private void FetchHostEua(Host host)
         {
@@ -90,13 +93,29 @@ namespace XenAdmin.Diagnostics.Checks
                 _euas.Add(eua);
             }
         }
+
         protected override Problem RunCheck()
         {
+            if (Hosts.Count == 0)
+            {
+                return null;
+            }
+
             foreach (var host in Hosts)
             {
                 var hotfix = HotfixFactory.Hotfix(host);
                 if (hotfix != null && hotfix.ShouldBeAppliedTo(host))
                     return new HostDoesNotHaveHotfixWarning(this, host);
+            }
+
+            string upgradePlatformVersion = null;
+            if (_installMethodConfig != null)
+                Host.TryGetUpgradeVersion(Hosts.FirstOrDefault(), _installMethodConfig, out upgradePlatformVersion, out _);
+
+            // There's no EUA for Pre-82X versions
+            if (!Helpers.Post82X(upgradePlatformVersion))
+            {
+                return null;
             }
 
             Hosts.AsParallel().ForAll(FetchHostEua);
