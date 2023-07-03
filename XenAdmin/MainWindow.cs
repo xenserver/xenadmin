@@ -259,6 +259,7 @@ namespace XenAdmin
             OtherConfigAndTagsWatcher.RegisterEventHandlers();
             Alert.RegisterAlertCollectionChanged(XenCenterAlerts_CollectionChanged);
             Updates.UpdateAlertCollectionChanged += Updates_CollectionChanged;
+            Updates.CdnUpdateInfoChanged += Cdn_UpdateInfoChanged;
             Updates.CheckForClientUpdatesStarted += ClientUpdatesCheck_Started;
             Updates.CheckForClientUpdatesCompleted += ClientUpdatesCheck_Completed;
             ConnectionsManager.History.CollectionChanged += History_CollectionChanged;
@@ -274,6 +275,7 @@ namespace XenAdmin
             OtherConfigAndTagsWatcher.DeregisterEventHandlers();
             Alert.DeregisterAlertCollectionChanged(XenCenterAlerts_CollectionChanged);
             Updates.UpdateAlertCollectionChanged -= Updates_CollectionChanged;
+            Updates.CdnUpdateInfoChanged -= Cdn_UpdateInfoChanged;
             Updates.CheckForClientUpdatesStarted -= ClientUpdatesCheck_Started;
             Updates.CheckForClientUpdatesCompleted -= ClientUpdatesCheck_Completed;
             ConnectionsManager.History.CollectionChanged -= History_CollectionChanged;
@@ -2650,6 +2652,11 @@ namespace XenAdmin
             navigationPane.SelectObject(obj);
         }
 
+        private void Cdn_UpdateInfoChanged(IXenConnection obj)
+        {
+            RequestRefreshTreeView();
+        }
+
         private void Updates_CollectionChanged(CollectionChangeEventArgs e)
         {
             Program.Invoke(this, () =>
@@ -2668,6 +2675,8 @@ namespace XenAdmin
                         TitleIcon.Image = NotificationsSubModeItem.GetImage(NotificationsSubMode.Updates, updatesCount);
                     }
                 });
+
+            RequestRefreshTreeView();//to update item icons
         }
 
         private void ClientUpdatesCheck_Completed()

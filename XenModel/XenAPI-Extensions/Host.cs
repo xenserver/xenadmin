@@ -35,7 +35,6 @@ using System.Linq;
 using System.Threading;
 using XenAdmin;
 using XenAdmin.Core;
-using XenAdmin.Network;
 using System.Diagnostics;
 using System.Web.Script.Serialization;
 
@@ -698,26 +697,6 @@ namespace XenAPI
         public void SetSysLogDestination(string value)
         {
             logging = SetDictionaryKey(logging, "syslog_destination", value);
-        }
-
-        public static bool IsFullyPatched(Host host,IEnumerable<IXenConnection> connections)
-        {
-            List<Pool_patch> patches = Pool_patch.GetAllThatApply(host,connections);
-
-            List<Pool_patch> appliedPatches
-                = host.AppliedPatches();
-
-            if (appliedPatches.Count == patches.Count)
-                return true;
-
-            foreach (Pool_patch patch in patches)
-            {
-                Pool_patch patch1 = patch;
-                if (!appliedPatches.Exists(otherPatch => string.Equals(patch1.uuid, otherPatch.uuid, StringComparison.OrdinalIgnoreCase)))
-                    return false;
-            }
-
-            return true;
         }
 
         public virtual List<Pool_patch> AppliedPatches()
