@@ -41,6 +41,7 @@ namespace XenAdmin
         HostUnpatched,
         HostOlderThanCoordinator,
         HostHasCrashDumps,
+        ServerUnlicensed,
 
         VmRunning,
         VmRunningDisabled,
@@ -62,9 +63,8 @@ namespace XenAdmin
 
         PoolConnected,
         PoolNotFullyUpgraded,
-
+        PoolUnPatched,
         PoolUnlicensed,
-        ServerUnlicensed,
 
         Storage,
         StorageBroken,
