@@ -173,8 +173,11 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 // EUA check
                 var euaCheck = GetPermanentCheck("EUA",
                 new UpgradeRequiresEua(this, hostsToUpgrade, InstallMethodConfig));
-                var euaChecks = new List<Check> { euaCheck };
-                groups.Add(new CheckGroup(Messages.ACCEPT_EUA_CHECK_GROUP_NAME, euaChecks));
+                if (euaCheck.CanRun())
+                {
+                    var euaChecks = new List<Check> { euaCheck };
+                    groups.Add(new CheckGroup(Messages.ACCEPT_EUA_CHECK_GROUP_NAME, euaChecks));
+                }
 
                 var safeToUpgradeChecks = (from Host host in hostsToUpgrade
                     let check = new SafeToUpgradeCheck(host, InstallMethodConfig)
