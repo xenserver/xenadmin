@@ -170,11 +170,20 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             //Checks used in automatic mode only, for hosts that will be upgraded
             if (!ManualUpgrade)
             {
+                var prepareToUpgradeChecks = (from Host host in hostsToUpgrade
+                    select new PrepareToUpgradeCheck(host, InstallMethodConfig) as Check).ToList();
+
+                if (prepareToUpgradeChecks.Count > 0)
+                    groups.Add(new CheckGroup(Messages.CHECKING_PREPARE_TO_UPGRADE, prepareToUpgradeChecks));
+
                 // EUA check
                 var euaCheck = GetPermanentCheck("EUA",
                 new UpgradeRequiresEua(this, hostsToUpgrade, InstallMethodConfig));
-                var euaChecks = new List<Check> { euaCheck };
-                groups.Add(new CheckGroup(Messages.ACCEPT_EUA_CHECK_GROUP_NAME, euaChecks));
+                if (euaCheck.CanRun())
+                {
+                    var euaChecks = new List<Check> { euaCheck };
+                    groups.Add(new CheckGroup(Messages.ACCEPT_EUA_CHECK_GROUP_NAME, euaChecks));
+                }
 
                 var safeToUpgradeChecks = (from Host host in hostsToUpgrade
                     let check = new SafeToUpgradeCheck(host, InstallMethodConfig)
@@ -183,12 +192,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
                 if (safeToUpgradeChecks.Count > 0)
                     groups.Add(new CheckGroup(Messages.CHECKING_SAFE_TO_UPGRADE, safeToUpgradeChecks));
-
-                var prepareToUpgradeChecks = (from Host host in hostsToUpgrade
-                    select new PrepareToUpgradeCheck(host, InstallMethodConfig) as Check).ToList();
-
-                if (prepareToUpgradeChecks.Count > 0)
-                    groups.Add(new CheckGroup(Messages.CHECKING_PREPARE_TO_UPGRADE, prepareToUpgradeChecks));
             }
 
             //vSwitch controller check - for each pool
