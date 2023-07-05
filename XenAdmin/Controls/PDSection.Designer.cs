@@ -30,10 +30,11 @@ namespace XenAdmin.Controls
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PDSection));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -43,6 +44,7 @@ namespace XenAdmin.Controls
             this.dataGridViewEx1 = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
             this.KeyColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ValueColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnNotes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chevron)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -105,22 +107,23 @@ namespace XenAdmin.Controls
             this.dataGridViewEx1.ColumnHeadersVisible = false;
             this.dataGridViewEx1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.KeyColumn,
-            this.ValueColumn});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewEx1.DefaultCellStyle = dataGridViewCellStyle3;
+            this.ValueColumn,
+            this.ColumnNotes});
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewEx1.DefaultCellStyle = dataGridViewCellStyle4;
             resources.ApplyResources(this.dataGridViewEx1, "dataGridViewEx1");
             this.dataGridViewEx1.GridColor = System.Drawing.SystemColors.Control;
             this.dataGridViewEx1.HideSelection = true;
             this.dataGridViewEx1.Name = "dataGridViewEx1";
             this.dataGridViewEx1.ReadOnly = true;
-            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(5);
-            this.dataGridViewEx1.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(5);
+            this.dataGridViewEx1.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewEx1.ShowCellToolTips = false;
             this.dataGridViewEx1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewEx1_CellContentClick);
             this.dataGridViewEx1.SelectionChanged += new System.EventHandler(this.dataGridViewEx1_SelectionChanged);
@@ -141,7 +144,6 @@ namespace XenAdmin.Controls
             // 
             // ValueColumn
             // 
-            this.ValueColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.ValueColumn.DefaultCellStyle = dataGridViewCellStyle2;
@@ -150,6 +152,17 @@ namespace XenAdmin.Controls
             this.ValueColumn.ReadOnly = true;
             this.ValueColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.ValueColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // ColumnNotes
+            // 
+            this.ColumnNotes.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCellsExceptHeader;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            this.ColumnNotes.DefaultCellStyle = dataGridViewCellStyle3;
+            resources.ApplyResources(this.ColumnNotes, "ColumnNotes");
+            this.ColumnNotes.Name = "ColumnNotes";
+            this.ColumnNotes.ReadOnly = true;
+            this.ColumnNotes.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ColumnNotes.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // PDSection
             // 
@@ -179,5 +192,6 @@ namespace XenAdmin.Controls
         private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn KeyColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ValueColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnNotes;
     }
 }

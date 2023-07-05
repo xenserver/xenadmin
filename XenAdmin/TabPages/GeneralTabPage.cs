@@ -538,9 +538,8 @@ namespace XenAdmin.TabPages
                         }
                     };
 
-                CustomFieldWrapper cfWrapper = new CustomFieldWrapper(xenObject, customField.Definition);
-
-                s.AddEntry(customField.Definition.Name.Ellipsise(30), cfWrapper.ToString(), customField.Definition.Name, editValue);
+                var cfWrapper = new CustomFieldWrapper(xenObject, customField.Definition);
+                s.AddEntry(customField.Definition.Name, cfWrapper.ToString(), editValue);
             }
         }
 
@@ -754,10 +753,10 @@ namespace XenAdmin.TabPages
                         continue;
 
                     if (repairable)
-                        s.AddEntry("  " + Helpers.GetName(host).Ellipsise(30),
+                        s.AddEntry(Helpers.GetName(host).Ellipsise(30),
                             Messages.REPAIR_SR_DIALOG_CONNECTION_MISSING, Color.Red, repairItem);
                     else
-                        s.AddEntry("  " + Helpers.GetName(host).Ellipsise(30),
+                        s.AddEntry(Helpers.GetName(host).Ellipsise(30),
                             Messages.REPAIR_SR_DIALOG_CONNECTION_MISSING, Color.Red);
 
                     continue;
@@ -1017,10 +1016,11 @@ namespace XenAdmin.TabPages
                     var ss = new GeneralTabLicenseStatusStringifier(licenseStatus);
                     s.AddEntry(Messages.LICENSE_STATUS,
                         licenseStatus.Updated ? ss.ExpiryStatus : Messages.GENERAL_LICENSE_QUERYING, editItem);
-                    s.AddEntry(FriendlyName("host.license_params-expiry"),
-                        licenseStatus.Updated ? ss.ExpiryDate : Messages.GENERAL_LICENSE_QUERYING,
-                        ss.ShowExpiryDate,
-                        editItem);
+
+                    if (ss.ShowExpiryDate)
+                        s.AddEntry(FriendlyName("host.license_params-expiry"),
+                            licenseStatus.Updated ? ss.ExpiryDate : Messages.GENERAL_LICENSE_QUERYING,
+                            editItem);
                 }
 
                 info.Remove("expiry");
@@ -2110,7 +2110,7 @@ namespace XenAdmin.TabPages
                         if (expand(s))
                             s.Expand();
                         else
-                            s.Contract();
+                            s.Collapse();
                     }
                     finally
                     {
