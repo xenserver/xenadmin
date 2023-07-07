@@ -1231,7 +1231,9 @@ namespace XenAdmin
 
         private void VM_PropertyChanged(object obj, PropertyChangedEventArgs e)
         {
-            VM vm = (VM)obj;
+            if (!(obj is VM vm))
+                return;
+
             switch (e.PropertyName)
             {
                 case "allowed_operations":
@@ -1241,10 +1243,16 @@ namespace XenAdmin
                     break;
 
                 case "power_state":
-                case "other_config": // other_config may contain HideFromXenCenter
                     UpdateToolbars();
-                    // Make all vms have the correct start times
-                    UpdateBodgedTime(vm, e.PropertyName);
+                    vm.SetBodgeStartupTime(DateTime.UtcNow);
+                    break;
+
+                case "other_config":
+                    UpdateToolbars(); //other_config may contain HideFromXenCenter
+
+                    DateTime newTime = vm.LastShutdownTime();
+                    if (newTime != DateTime.MinValue && newTime.Ticks > vm.GetBodgeStartupTime().Ticks)
+                        vm.SetBodgeStartupTime(newTime);
                     break;
             }
         }
@@ -1257,26 +1265,9 @@ namespace XenAdmin
                 case "power_state":
                 case "is_a_template":
                 case "enabled":
-                case "other_config": // other_config may contain HideFromXenCenter
-                    UpdateToolbars();
-                    break;
-            }
-        }
-
-        // Update bodged startup time if the powerstate goes to running (vm started from halted), otherconfig last shutdown changed (vm rebooted) or start time changed (occurs a few seconds after start)
-        private void UpdateBodgedTime(VM vm, string p)
-        {
-            if (vm == null)
-                return;
-            if (p == "power_state")
-            {
-                vm.SetBodgeStartupTime(DateTime.UtcNow); // always newer than current bodge startup time
-            }
-            else if (p == "other_config" && vm.other_config.ContainsKey("last_shutdown_time"))
-            {
-                DateTime newTime = vm.LastShutdownTime();
-                if (newTime != DateTime.MinValue && newTime.Ticks > vm.GetBodgeStartupTime().Ticks)
-                    vm.SetBodgeStartupTime(newTime); // only update if is newer than current bodge startup time
+                case "other_config":
+                    UpdateToolbars();  //other_config may contain HideFromXenCenter
+                break;
             }
         }
 

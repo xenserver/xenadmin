@@ -57,13 +57,13 @@ namespace XenAdmin.Alerts
 
                 if (distinctHosts != null)
                 {
-                    if (distinctHosts.All(IsHostLicenseRestricted))
+                    if (distinctHosts.All(h => Helpers.FeatureForbidden(h, Host.RestrictHotfixApply)))
                     {
                         CannotApplyReason = Messages.MANUAL_CHECK_FOR_UPDATES_UNLICENSED_INFO;
                         return false;
                     }
 
-                    if (distinctHosts.Any(IsHostLicenseRestricted))
+                    if (distinctHosts.Any(h => Helpers.FeatureForbidden(h, Host.RestrictHotfixApply)))
                     {
                         CannotApplyReason = Messages.MANUAL_CHECK_FOR_UPDATES_PARTIAL_UNLICENSED_INFO;
                         return true;
@@ -76,14 +76,6 @@ namespace XenAdmin.Alerts
         }
 
         public string CannotApplyReason { get; set; }
-
-        private bool IsHostLicenseRestricted(Host host)
-        {
-            if(host == null)
-                return false;
-            
-            return !host.CanApplyHotfixes();
-        }
 
         /// <summary>
         /// Creates a patch alert
