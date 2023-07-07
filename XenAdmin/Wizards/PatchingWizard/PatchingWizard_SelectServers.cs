@@ -244,7 +244,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             tooltipText = null;
 
-            if (!host.CanApplyHotfixes() && (Helpers.ElyOrGreater(host) || SelectedUpdateType != UpdateType.ISO))
+            if (Helpers.FeatureForbidden(host, Host.RestrictHotfixApply) && (Helpers.ElyOrGreater(host) || SelectedUpdateType != UpdateType.ISO))
             {
                 tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED;
                 return false;

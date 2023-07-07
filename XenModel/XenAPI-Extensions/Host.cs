@@ -1406,14 +1406,6 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Is the host allowed to install hotfixes or are they restricted?
-        /// </summary>
-        public virtual bool CanApplyHotfixes()
-        {
-            return !Helpers.FeatureForbidden(Connection, RestrictHotfixApply);
-        }
-
-        /// <summary>
         /// Grace is either upgrade or regular
         /// </summary>
         public virtual bool InGrace()
