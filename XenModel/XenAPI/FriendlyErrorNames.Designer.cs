@@ -5988,6 +5988,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to VGPU type is no longer supported.
+        /// </summary>
+        public static string VGPU_TYPE_NO_LONGER_SUPPORTED {
+            get {
+                return ResourceManager.GetString("VGPU_TYPE_NO_LONGER_SUPPORTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot create a virtual GPU that is incompatible with the existing types on the VM..
         /// </summary>
         public static string VGPU_TYPE_NOT_COMPATIBLE {

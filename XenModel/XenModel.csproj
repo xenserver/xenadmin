@@ -368,6 +368,7 @@
     <Compile Include="XenAPI\network_default_locking_mode.cs" />
     <Compile Include="XenAPI\network_purpose.cs" />
     <Compile Include="XenAPI\Network_sriov.cs" />
+    <Compile Include="XenAPI\Observer.cs" />
     <Compile Include="XenAPI\on_softreboot_behavior.cs" />
     <Compile Include="XenAPI\PCI.cs" />
     <Compile Include="XenAPI\persistence_backend.cs" />
