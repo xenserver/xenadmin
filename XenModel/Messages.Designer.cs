@@ -20856,7 +20856,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to At least one VM in the imported appliance requires a minimum of {0} vCPUs, while the maximum number of physical CPUs in the pool is {1}. You will not be able to start the appliance on the selected pool..
+        ///   Looks up a localized string similar to At least one VM in the imported appliance requires a minimum of {0} vCPUs, but not all servers have sufficient physical CPUs. You will not be able to start a VM if you place its disks in the local storage of a server with insufficient physical CPUs..
         /// </summary>
         public static string IMPORT_WIZARD_CPUS_COUNT_MISMATCH_POOL {
             get {
