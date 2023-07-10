@@ -41,10 +41,11 @@ namespace XenAPI
 
         public bool IsElevatedSession = false;
 
-        public Session(int timeout, IXenConnection connection, string host, int port)
-            : this(timeout, GetUrl(host, port))
+        public Session(IXenConnection connection, string host, int port)
+            : this(GetUrl(host, port))
         {
             Connection = connection;
+            JsonRpcClient.RequestEvent += LogJsonRequest;
         }
 
         /// <summary>
@@ -52,8 +53,8 @@ namespace XenAPI
         /// copied from the given instance, but a new connection will be created.  Use this if you want a duplicate connection to a host,
         /// for example when you need to cancel an operation that is blocking the primary connection.
         /// </summary>
-        public Session(Session session, IXenConnection connection, int timeout)
-            : this(session, timeout)
+        public Session(Session session, IXenConnection connection)
+            : this(session)
         {
             Connection = connection;
             JsonRpcClient.RequestEvent += LogJsonRequest;

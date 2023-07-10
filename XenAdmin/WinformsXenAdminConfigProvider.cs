@@ -57,7 +57,7 @@ namespace XenAdmin
 
         public Session CreateActionSession(Session session, IXenConnection connection)
         {
-            return new Session(session, connection, ConnectionTimeout);
+            return new Session(session, connection) { Timeout = ConnectionTimeout };
         }
 
         public bool Exiting => Program.Exiting;
