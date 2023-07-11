@@ -146,7 +146,6 @@ namespace XenAdmin.ConsoleView
         internal string ElevatedPassword;
 
         internal XSVNCScreen(VM source, EventHandler resizeHandler, VNCTabView parent, string elevatedUsername, string elevatedPassword)
-            : base()
         {
             ResizeHandler = resizeHandler;
             parentVNCTabView = parent;
