@@ -70,7 +70,7 @@ namespace XenAdmin.ConsoleView
 
         private volatile bool _useVNC = true;
 
-        private bool _autoCaptureKeyboardAndMouse = true;
+        private readonly bool _autoCaptureKeyboardAndMouse = true;
 
         private readonly Color _focusColor = SystemColors.MenuHighlight;
 
@@ -173,7 +173,7 @@ namespace XenAdmin.ConsoleView
             guestMetrics.PropertyChanged += guestMetrics_PropertyChanged;
         }
 
-        void Default_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void Default_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "EnableRDPPolling")
                 Program.Invoke(this, StartPolling);
@@ -194,7 +194,7 @@ namespace XenAdmin.ConsoleView
 
         }
 
-        void guestMetrics_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void guestMetrics_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (Source == null)
                 return;
@@ -610,7 +610,7 @@ namespace XenAdmin.ConsoleView
             }
         }
 
-        void ConnectionSuccess(object sender, EventArgs e)
+        private void ConnectionSuccess(object sender, EventArgs e)
         {
             _connectionRetries = 0;
             if (AutoSwitchRDPLater)
