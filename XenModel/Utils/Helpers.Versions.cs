@@ -190,28 +190,6 @@ namespace XenAdmin.Core
         }
 
         /// <summary>
-        /// Havana platform version is 2.1.1 (same as Ely and Honolulu), so use product version here
-        /// </summary>
-        /// <param name="host">May be null, in which case true is returned.</param>
-        public static bool HavanaOrGreater(IXenConnection conn)
-        {
-            return conn == null || HavanaOrGreater(GetCoordinator(conn));
-        }
-
-        /// <summary>
-        /// Havana platform version is 2.1.1 (same as Ely and Honolulu), so use product version here
-        /// </summary>
-        /// <param name="host">May be null, in which case true is returned.</param>
-        public static bool HavanaOrGreater(Host host)
-        {
-            if (host == null)
-                return true;
-
-            return ElyOrGreater(host) &&
-                   ProductVersionCompare(HostProductVersion(host), BrandManager.ProductVersion712Short) >= 0;
-        }
-
-        /// <summary>
         /// Falcon platform version is 2.3.0
         /// </summary>
         /// <param name="conn">May be null, in which case true is returned.</param>
