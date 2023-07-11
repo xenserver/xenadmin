@@ -170,7 +170,7 @@ namespace XenAdmin.ConsoleView
 
             cachedNetworks = guestMetrics.networks;
 
-            guestMetrics.PropertyChanged += new PropertyChangedEventHandler(guestMetrics_PropertyChanged);
+            guestMetrics.PropertyChanged += guestMetrics_PropertyChanged;
         }
 
         void Default_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -184,13 +184,13 @@ namespace XenAdmin.ConsoleView
             if (Source == null)
                 return;
 
-            Source.PropertyChanged -= new PropertyChangedEventHandler(VM_PropertyChanged);
+            Source.PropertyChanged -= VM_PropertyChanged;
 
             var guestMetrics = Source.Connection.Resolve<VM_guest_metrics>(Source.guest_metrics);
             if (guestMetrics == null)
                 return;
 
-            guestMetrics.PropertyChanged -= new PropertyChangedEventHandler(guestMetrics_PropertyChanged);
+            guestMetrics.PropertyChanged -= guestMetrics_PropertyChanged;
 
         }
 
@@ -564,7 +564,7 @@ namespace XenAdmin.ConsoleView
                     AutoScrollMinSize = oldSize;
                     rdpClient = new RdpClient(this, currentConsoleSize, ResizeHandler);
 
-                    rdpClient.OnDisconnected += new EventHandler(parentVNCTabView.RdpDisconnectedHandler);
+                    rdpClient.OnDisconnected += parentVNCTabView.RdpDisconnectedHandler;
                 }
             }
 
@@ -604,7 +604,7 @@ namespace XenAdmin.ConsoleView
         private void ConnectToRemoteConsole()
         {
             if (vncClient != null)
-                ThreadPool.QueueUserWorkItem(new WaitCallback(Connect), new KeyValuePair<VNCGraphicsClient, Exception>(vncClient, null));
+                ThreadPool.QueueUserWorkItem(Connect, new KeyValuePair<VNCGraphicsClient, Exception>(vncClient, null));
             else if (rdpClient != null)
                 rdpClient.Connect(RdpIp);
         }
@@ -690,7 +690,7 @@ namespace XenAdmin.ConsoleView
 
                 if (sourceVM != null)
                 {
-                    sourceVM.PropertyChanged -= new PropertyChangedEventHandler(VM_PropertyChanged);
+                    sourceVM.PropertyChanged -= VM_PropertyChanged;
                     sourceVM = null;
                 }
 
@@ -698,7 +698,7 @@ namespace XenAdmin.ConsoleView
 
                 if (value != null)
                 {
-                    value.PropertyChanged += new PropertyChangedEventHandler(VM_PropertyChanged);
+                    value.PropertyChanged += VM_PropertyChanged;
 
                     sourceIsPV = !value.IsHVM();
                     
@@ -1115,7 +1115,7 @@ namespace XenAdmin.ConsoleView
         {
             if (vncClient == v && !v.Terminated && Source.power_state == vm_power_state.Running)
             {
-                ThreadPool.QueueUserWorkItem(new WaitCallback(Connect), new KeyValuePair<VNCGraphicsClient, Exception>(v, exn));
+                ThreadPool.QueueUserWorkItem(Connect, new KeyValuePair<VNCGraphicsClient, Exception>(v, exn));
             }
         }
 
@@ -1165,7 +1165,7 @@ namespace XenAdmin.ConsoleView
 
         private void SleepAndRetryConnection_(VNCGraphicsClient v)
         {
-            ThreadPool.QueueUserWorkItem(new WaitCallback(SleepAndRetryConnection), v);
+            ThreadPool.QueueUserWorkItem(SleepAndRetryConnection, v);
         }
 
         private void SleepAndRetryConnection(object o)
