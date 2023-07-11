@@ -148,10 +148,10 @@ namespace XenAdmin.ConsoleView
         internal XSVNCScreen(VM source, EventHandler resizeHandler, VNCTabView parent, string elevatedUsername, string elevatedPassword)
             : base()
         {
-            this.ResizeHandler = resizeHandler;
-            this.parentVNCTabView = parent;
-            this.Source = source;
-            this.KeyHandler = parentVNCTabView.KeyHandler;
+            ResizeHandler = resizeHandler;
+            parentVNCTabView = parent;
+            Source = source;
+            KeyHandler = parentVNCTabView.KeyHandler;
             ElevatedUsername = elevatedUsername;
             ElevatedPassword = elevatedPassword;
 
@@ -519,9 +519,9 @@ namespace XenAdmin.ConsoleView
                 return;
 
             bool wasFocused = false;
-            this.Controls.Clear();
+            Controls.Clear();
             //console size with some offset to accomodate focus rectangle
-            Size currentConsoleSize = new Size(this.Size.Width - CONSOLE_SIZE_OFFSET, this.Size.Height - CONSOLE_SIZE_OFFSET);
+            Size currentConsoleSize = new Size(Size.Width - CONSOLE_SIZE_OFFSET, Size.Height - CONSOLE_SIZE_OFFSET);
 
             lock (_rdpConnectionLock)
             {
@@ -539,7 +539,7 @@ namespace XenAdmin.ConsoleView
                         RemoteConsole.DisconnectAndDispose();
                         RemoteConsole = null;
                     }
-                    this.vncPassword = null;
+                    vncPassword = null;
                 }
             }
             
@@ -549,8 +549,8 @@ namespace XenAdmin.ConsoleView
 
             if (UseVNC || String.IsNullOrEmpty(RdpIp))
             {
-                this.AutoScroll = false;
-                this.AutoScrollMinSize = new Size(0, 0);
+                AutoScroll = false;
+                AutoScrollMinSize = new Size(0, 0);
 
                 vncClient = new VNCGraphicsClient(this);
 
@@ -565,10 +565,10 @@ namespace XenAdmin.ConsoleView
             {
                 if (rdpClient == null)
                 {
-                    if (this.ParentForm is FullScreenForm)
+                    if (ParentForm is FullScreenForm)
                         currentConsoleSize = ((FullScreenForm)ParentForm).GetContentSize();
-                    this.AutoScroll = true;
-                    this.AutoScrollMinSize = oldSize;
+                    AutoScroll = true;
+                    AutoScrollMinSize = oldSize;
                     rdpClient = new RdpClient(this, currentConsoleSize, ResizeHandler);
 
                     rdpClient.OnDisconnected += new EventHandler(parentVNCTabView.RdpDisconnectedHandler);
@@ -577,10 +577,10 @@ namespace XenAdmin.ConsoleView
 
             if (RemoteConsole != null && RemoteConsole.ConsoleControl != null)
             {
-                RemoteConsole.KeyHandler = this.KeyHandler;
-                RemoteConsole.SendScanCodes = !this.sourceIsPV;
+                RemoteConsole.KeyHandler = KeyHandler;
+                RemoteConsole.SendScanCodes = !sourceIsPV;
                 RemoteConsole.Scaling = Scaling;
-                RemoteConsole.DisplayBorder = this.displayFocusRectangle;
+                RemoteConsole.DisplayBorder = displayFocusRectangle;
                 SetKeyboardAndMouseCapture(autoCaptureKeyboardAndMouse);
                 if (wasPaused)
                     RemoteConsole.Pause();
@@ -694,7 +694,7 @@ namespace XenAdmin.ConsoleView
         {
             get
             {
-                return this.sourceVM;
+                return sourceVM;
             }
             set
             {
@@ -971,8 +971,8 @@ namespace XenAdmin.ConsoleView
                         OnVncConnectionAttemptCancelled();
                         return;
                     }
-                    this.vncPassword = Settings.GetVNCPassword(sourceVM.uuid);
-                    if (this.vncPassword == null)
+                    vncPassword = Settings.GetVNCPassword(sourceVM.uuid);
+                    if (vncPassword == null)
                     {
                         bool lifecycleOperationInProgress = sourceVM.current_operations.Values.Any(VM.is_lifecycle_operation);
                         if (haveTriedLoginWithoutPassword && !lifecycleOperationInProgress)
@@ -982,7 +982,7 @@ namespace XenAdmin.ConsoleView
                                 promptForPassword(ignoreNextError ? null : error);
                             });
                             ignoreNextError = false;
-                            if (this.vncPassword == null)
+                            if (vncPassword == null)
                             {
                                 Log.Debug("User cancelled VNC password prompt: aborting connection attempt");
                                 OnUserCancelledAuth();
@@ -992,7 +992,7 @@ namespace XenAdmin.ConsoleView
                         else
                         {
                             Log.Debug("Attempting passwordless VNC login");
-                            this.vncPassword = new char[0];
+                            vncPassword = new char[0];
                             ignoreNextError = true;
                             haveTriedLoginWithoutPassword = true;
                         }
@@ -1007,15 +1007,15 @@ namespace XenAdmin.ConsoleView
                     }
                     if (s == null)
                     {
-                        Log.DebugFormat("Connecting to vncIP={0}, port={1}", this.VncIp, VNC_PORT);
-                        s = connectGuest(this.VncIp, VNC_PORT, sourceVM.Connection);
-                        Log.DebugFormat("Connected to vncIP={0}, port={1}", this.VncIp, VNC_PORT);
+                        Log.DebugFormat("Connecting to vncIP={0}, port={1}", VncIp, VNC_PORT);
+                        s = connectGuest(VncIp, VNC_PORT, sourceVM.Connection);
+                        Log.DebugFormat("Connected to vncIP={0}, port={1}", VncIp, VNC_PORT);
                     }
                     InvokeConnection(v, s, null);
 
                     // store the empty vnc password after a successful passwordless login
-                    if (haveTriedLoginWithoutPassword && this.vncPassword.Length == 0)
-                        Program.Invoke(this, () => Settings.SetVNCPassword(sourceVM.uuid, this.vncPassword)); 
+                    if (haveTriedLoginWithoutPassword && vncPassword.Length == 0)
+                        Program.Invoke(this, () => Settings.SetVNCPassword(sourceVM.uuid, vncPassword)); 
                 }
             }
             catch (Exception exn)
@@ -1036,8 +1036,8 @@ namespace XenAdmin.ConsoleView
                 if (f.ShowDialog(this) == DialogResult.OK)
                 {
                     // Store password for next time
-                    this.vncPassword = f.Password;
-                    Settings.SetVNCPassword(sourceVM.uuid, this.vncPassword);
+                    vncPassword = f.Password;
+                    Settings.SetVNCPassword(sourceVM.uuid, vncPassword);
                 }
                 else
                 {
@@ -1118,11 +1118,11 @@ namespace XenAdmin.ConsoleView
                 }
                 else
                 {
-                    v.SendScanCodes = UseSource && !this.sourceIsPV;
+                    v.SendScanCodes = UseSource && !sourceIsPV;
                     v.SourceVM = sourceVM;
                     v.Console = console;
                     v.UseQemuExtKeyEncoding = sourceVM != null && Helpers.InvernessOrGreater(sourceVM.Connection);
-                    v.Connect(stream, this.vncPassword);
+                    v.Connect(stream, vncPassword);
                 }
             });
         }
@@ -1151,7 +1151,7 @@ namespace XenAdmin.ConsoleView
         {
             Program.AssertOffEventThread();
 
-            if (this.Disposing || this.IsDisposed)
+            if (Disposing || IsDisposed)
                 return;
 
             Program.Invoke(this, delegate()
@@ -1174,7 +1174,7 @@ namespace XenAdmin.ConsoleView
                 else
                 {
                     Log.Warn(exn, exn);
-                    this.errorMessage = exn.Message;
+                    errorMessage = exn.Message;
                 }
             });
         }
@@ -1198,21 +1198,21 @@ namespace XenAdmin.ConsoleView
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            if (this.errorMessage != null)
+            if (errorMessage != null)
             {
-                SizeF size = e.Graphics.MeasureString(this.errorMessage, this.Font);
-                e.Graphics.DrawString(this.errorMessage, this.Font, Brushes.Black,
-                    ((this.Width - size.Width) / 2), ((this.Height - size.Height) / 2));
+                SizeF size = e.Graphics.MeasureString(errorMessage, Font);
+                e.Graphics.DrawString(errorMessage, Font, Brushes.Black,
+                    ((Width - size.Width) / 2), ((Height - size.Height) / 2));
             }
 
             // draw focus rectangle
-            if (DisplayFocusRectangle && this.ContainsFocus && RemoteConsole != null)
+            if (DisplayFocusRectangle && ContainsFocus && RemoteConsole != null)
             {
                 Rectangle focusRect = Rectangle.Inflate(RemoteConsole.ConsoleBounds, VNCGraphicsClient.BORDER_PADDING / 2,
                                                     VNCGraphicsClient.BORDER_PADDING / 2);
                 using (Pen pen = new Pen(focusColor, VNCGraphicsClient.BORDER_WIDTH))
                 {
-                    if (this.Focused)
+                    if (Focused)
                         pen.DashStyle = DashStyle.Dash;
                     e.Graphics.DrawRectangle(pen, focusRect);
                 }
@@ -1267,7 +1267,7 @@ namespace XenAdmin.ConsoleView
             Program.AssertOnEventThread();
             base.OnLostFocus(e);
 
-            this.pressedKeys = new Set<Keys>();
+            pressedKeys = new Set<Keys>();
 
             // reset tab stop
             SetKeyboardAndMouseCapture(autoCaptureKeyboardAndMouse);
@@ -1370,7 +1370,7 @@ namespace XenAdmin.ConsoleView
 
             if (KeyHandler.handleExtras<Keys>(pressed, pressedKeys, KeyHandler.ExtraKeys, extendedKey, KeyHandler.ModifierKeys, ref modifierKeyPressedAlone))
             {
-                this.Focus();
+                Focus();
                 return true;
             }
 
@@ -1394,15 +1394,15 @@ namespace XenAdmin.ConsoleView
         private Size oldSize;
         public void UpdateRDPResolution(bool fullscreen = false)
         {
-            if (rdpClient == null || oldSize.Equals(this.Size))
+            if (rdpClient == null || oldSize.Equals(Size))
                 return;
 
             //no offsets in fullscreen mode because there is no need to accomodate focus border 
             if (fullscreen)
-                rdpClient.UpdateDisplay(this.Size.Width, this.Size.Height, new Point(0,0));
+                rdpClient.UpdateDisplay(Size.Width, Size.Height, new Point(0,0));
             else
-                rdpClient.UpdateDisplay(this.Size.Width - CONSOLE_SIZE_OFFSET, this.Size.Height - CONSOLE_SIZE_OFFSET, new Point(3,3));
-            oldSize = new Size(this.Size.Width, this.Size.Height);
+                rdpClient.UpdateDisplay(Size.Width - CONSOLE_SIZE_OFFSET, Size.Height - CONSOLE_SIZE_OFFSET, new Point(3,3));
+            oldSize = new Size(Size.Width, Size.Height);
             Refresh();
         }
     }
