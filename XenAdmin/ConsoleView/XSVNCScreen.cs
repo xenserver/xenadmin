@@ -97,6 +97,7 @@ namespace XenAdmin.ConsoleView
         /// the activeSessionLock.
         /// </summary>
         private Session _activeSession;
+
         private readonly object _activeSessionLock = new object();
 
         /// <summary>
@@ -107,6 +108,7 @@ namespace XenAdmin.ConsoleView
         /// Dispose.
         /// </summary>
         private Stream _pendingVNCConnection;
+
         private readonly object _pendingVNCConnectionLock = new object();
 
         internal EventHandler ResizeHandler;
@@ -120,8 +122,7 @@ namespace XenAdmin.ConsoleView
 
         internal readonly VNCTabView ParentVNCTabView;
 
-        [DefaultValue(false)]
-        public bool UserWantsToSwitchProtocol { get; set; }
+        [DefaultValue(false)] public bool UserWantsToSwitchProtocol { get; set; }
 
         private bool HasRDP => Source != null && Source.HasRDP();
 
@@ -131,6 +132,7 @@ namespace XenAdmin.ConsoleView
         /// login is tried once.
         /// </summary>
         private bool _haveTriedLoginWithoutPassword;
+
         private bool _ignoreNextError;
 
         private Dictionary<string, string> _cachedNetworks;
@@ -145,7 +147,8 @@ namespace XenAdmin.ConsoleView
         internal string ElevatedUsername;
         internal string ElevatedPassword;
 
-        internal XSVNCScreen(VM source, EventHandler resizeHandler, VNCTabView parent, string elevatedUsername, string elevatedPassword)
+        internal XSVNCScreen(VM source, EventHandler resizeHandler, VNCTabView parent, string elevatedUsername,
+            string elevatedPassword)
         {
             ResizeHandler = resizeHandler;
             ParentVNCTabView = parent;
@@ -191,7 +194,6 @@ namespace XenAdmin.ConsoleView
                 return;
 
             guestMetrics.PropertyChanged -= guestMetrics_PropertyChanged;
-
         }
 
         private void guestMetrics_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -213,7 +215,8 @@ namespace XenAdmin.ConsoleView
             }
         }
 
-        private static bool EquateDictionary<T, TS>(Dictionary<T, TS> d1, Dictionary<T, TS> d2) where TS : IEquatable<TS>
+        private static bool EquateDictionary<T, TS>(Dictionary<T, TS> d1, Dictionary<T, TS> d2)
+            where TS : IEquatable<TS>
         {
             if (d1.Count != d2.Count)
                 return false;
@@ -308,7 +311,7 @@ namespace XenAdmin.ConsoleView
             VncIp = null;
             var openIp = PollPort(VNC_PORT, true);
 
-            if (openIp == null) 
+            if (openIp == null)
                 return;
             VncIp = openIp;
 
@@ -371,12 +374,13 @@ namespace XenAdmin.ConsoleView
                         }
                     }
                 }
+
                 ipAddresses = ipAddresses.Distinct().ToList();
 
                 ipAddresses.AddRange(ipv6Addresses); // make sure IPv4 addresses are scanned first (CA-102755)
                 // add IP addresses for networks without PIFs
                 ipAddresses.AddRange(ipAddressesForNetworksWithoutPifs);
-                ipAddresses.AddRange(ipv6AddressesForNetworksWithoutPifs); 
+                ipAddresses.AddRange(ipv6AddressesForNetworksWithoutPifs);
 
 
                 foreach (var ipAddress in ipAddresses)
@@ -394,6 +398,7 @@ namespace XenAdmin.ConsoleView
                         {
                             s.Close();
                         }
+
                         return ipAddress;
                     }
                     catch (Exception exn)
@@ -437,6 +442,7 @@ namespace XenAdmin.ConsoleView
             {
                 Log.Warn("Exception while polling VM for port " + port + ".", e);
             }
+
             return null;
         }
 
@@ -454,6 +460,7 @@ namespace XenAdmin.ConsoleView
                 oldPending = _pendingVNCConnection;
                 _pendingVNCConnection = s;
             }
+
             if (oldPending != null)
             {
                 try
@@ -468,6 +475,7 @@ namespace XenAdmin.ConsoleView
         }
 
         private bool _scaling;
+
         public bool Scaling
         {
             get
@@ -488,11 +496,11 @@ namespace XenAdmin.ConsoleView
         public IRemoteConsole RemoteConsole
         {
             get => _vncClient != null ? (IRemoteConsole)_vncClient : _rdpClient;
-            set 
+            set
             {
-                if (_vncClient != null) 
-                    _vncClient = (VNCGraphicsClient) value ;
-                else if (_rdpClient != null) 
+                if (_vncClient != null)
+                    _vncClient = (VNCGraphicsClient)value;
+                else if (_rdpClient != null)
                     _rdpClient = (RdpClient)value;
             }
         }
@@ -527,15 +535,17 @@ namespace XenAdmin.ConsoleView
                     {
                         preventResetConsole = true;
                     }
-                    if(!preventResetConsole)
+
+                    if (!preventResetConsole)
                     {
                         RemoteConsole.DisconnectAndDispose();
                         RemoteConsole = null;
                     }
+
                     _vncPassword = null;
                 }
             }
-            
+
 
             // Reset
             _haveTriedLoginWithoutPassword = false;
@@ -591,7 +601,7 @@ namespace XenAdmin.ConsoleView
         internal bool MustConnectRemoteDesktop()
         {
             return (UseVNC || string.IsNullOrEmpty(RdpIp)) &&
-                Source.HasGPUPassthrough() && Source.power_state == vm_power_state.Running;
+                   Source.HasGPUPassthrough() && Source.power_state == vm_power_state.Running;
         }
 
         private void SetKeyboardAndMouseCapture(bool value)
@@ -619,15 +629,12 @@ namespace XenAdmin.ConsoleView
                     Program.Invoke(this, OnDetectRDP);
                 AutoSwitchRDPLater = false;
             }
+
             if (ParentVNCTabView.IsRDPControlEnabled())
                 ParentVNCTabView.EnableToggleVNCButton();
         }
 
-        internal bool AutoSwitchRDPLater
-        {
-            get;
-            set; 
-        }
+        internal bool AutoSwitchRDPLater { get; set; }
 
         internal bool UseVNC
         {
@@ -652,15 +659,17 @@ namespace XenAdmin.ConsoleView
                         if (_rdpClient == null && _vncClient != null) // it is actually VNC
                             switched = false;
                     }
-                    if (!switched) 
+
+                    if (!switched)
                     {
                         _useVNC = !_useVNC;
-                    } 
+                    }
                 }
             }
         }
 
         private volatile bool _useSource = true;
+
         /// <summary>
         /// Indicates whether to use the source or the detected vncIP
         /// </summary>
@@ -702,7 +711,7 @@ namespace XenAdmin.ConsoleView
                     value.PropertyChanged += VM_PropertyChanged;
 
                     _sourceIsPv = !value.IsHVM();
-                    
+
                     StartPolling();
 
                     lock (_hostedConsolesLock)
@@ -752,7 +761,7 @@ namespace XenAdmin.ConsoleView
                 ParentVNCTabView.DisableToggleVNCButton();
             }
 
-            if (ParentVNCTabView.IsRDPControlEnabled()) 
+            if (ParentVNCTabView.IsRDPControlEnabled())
                 return;
 
             if (InDefaultConsole())
@@ -760,11 +769,13 @@ namespace XenAdmin.ConsoleView
                 ParentVNCTabView.DisableToggleVNCButton();
             }
 
-            if (Source == null || Source.IsControlDomainZero(out _)) 
+            if (Source == null || Source.IsControlDomainZero(out _))
                 return;
 
             //Start the polling again
-            _connectionPoller = !Source.IsHVM() ? new Timer(PollVNCPort, null, RETRY_SLEEP_TIME, RDP_POLL_INTERVAL) : new Timer(PollRDPPort, null, RETRY_SLEEP_TIME, RDP_POLL_INTERVAL);
+            _connectionPoller = !Source.IsHVM()
+                ? new Timer(PollVNCPort, null, RETRY_SLEEP_TIME, RDP_POLL_INTERVAL)
+                : new Timer(PollRDPPort, null, RETRY_SLEEP_TIME, RDP_POLL_INTERVAL);
         }
 
         private void VM_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -796,7 +807,7 @@ namespace XenAdmin.ConsoleView
                 _connectionPoller?.Change(RETRY_SLEEP_TIME, RDP_POLL_INTERVAL);
             }
             else if (e.PropertyName == "power_state" &&
-                (vm.power_state == vm_power_state.Halted || vm.power_state == vm_power_state.Suspended))
+                     (vm.power_state == vm_power_state.Halted || vm.power_state == vm_power_state.Suspended))
             {
                 ParentVNCTabView.VMPowerOff();
                 _connectionPoller?.Change(Timeout.Infinite, Timeout.Infinite);
@@ -809,10 +820,7 @@ namespace XenAdmin.ConsoleView
 
             if (e.PropertyName == "power_state" || e.PropertyName == "VGPUs")
             {
-                Program.Invoke(this, () =>
-                {
-                    GpuStatusChanged?.Invoke(MustConnectRemoteDesktop());
-                });
+                Program.Invoke(this, () => { GpuStatusChanged?.Invoke(MustConnectRemoteDesktop()); });
             }
 
             if (e.PropertyName == "name_label" && ConnectionNameChanged != null)
@@ -832,6 +840,7 @@ namespace XenAdmin.ConsoleView
             {
                 _hostedConsoles = Source.consoles;
             }
+
             if (UseVNC && _vncClient != null && ConnectionSuperseded())
             {
                 InitSubControl();
@@ -862,6 +871,7 @@ namespace XenAdmin.ConsoleView
             {
                 consoles = Source.Connection.ResolveAll(_hostedConsoles);
             }
+
             var goodConsole = false;
             foreach (var console in consoles)
             {
@@ -871,6 +881,7 @@ namespace XenAdmin.ConsoleView
                 else if (console.protocol == console_protocol.rfb)
                     goodConsole = true;
             }
+
             return goodConsole;
         }
 
@@ -879,6 +890,7 @@ namespace XenAdmin.ConsoleView
         /// appearing more than once.
         /// </summary>
         private bool _suppressHostGoneMessage;
+
         private void Connect(object o)
         {
             if (Program.RunInAutomatedTestMode)
@@ -922,7 +934,8 @@ namespace XenAdmin.ConsoleView
                                 var isHostGoneMessage = failure != null
                                                         && failure.ErrorDescription.Count == 2
                                                         && failure.ErrorDescription[0] == Failure.INTERNAL_ERROR
-                                                        && failure.ErrorDescription[1] == string.Format(Messages.HOST_GONE, BrandManager.BrandConsole);
+                                                        && failure.ErrorDescription[1] ==
+                                                        string.Format(Messages.HOST_GONE, BrandManager.BrandConsole);
 
                                 if (isHostGoneMessage)
                                 {
@@ -952,16 +965,15 @@ namespace XenAdmin.ConsoleView
                         OnVncConnectionAttemptCancelled();
                         return;
                     }
+
                     _vncPassword = Settings.GetVNCPassword(_sourceVm.uuid);
                     if (_vncPassword == null)
                     {
-                        var lifecycleOperationInProgress = _sourceVm.current_operations.Values.Any(VM.is_lifecycle_operation);
+                        var lifecycleOperationInProgress =
+                            _sourceVm.current_operations.Values.Any(VM.is_lifecycle_operation);
                         if (_haveTriedLoginWithoutPassword && !lifecycleOperationInProgress)
                         {
-                            Program.Invoke(this, delegate
-                            {
-                                PromptForPassword(_ignoreNextError ? null : error);
-                            });
+                            Program.Invoke(this, delegate { PromptForPassword(_ignoreNextError ? null : error); });
                             _ignoreNextError = false;
                             if (_vncPassword == null)
                             {
@@ -986,17 +998,19 @@ namespace XenAdmin.ConsoleView
                         Log.DebugFormat("Using pending VNC connection");
                         _pendingVNCConnection = null;
                     }
+
                     if (s == null)
                     {
                         Log.DebugFormat("Connecting to vncIP={0}, port={1}", VncIp, VNC_PORT);
                         s = ConnectGuest(VncIp, VNC_PORT, _sourceVm.Connection);
                         Log.DebugFormat("Connected to vncIP={0}, port={1}", VncIp, VNC_PORT);
                     }
+
                     InvokeConnection(v, s, null);
 
                     // store the empty vnc password after a successful passwordless login
                     if (_haveTriedLoginWithoutPassword && _vncPassword.Length == 0)
-                        Program.Invoke(this, () => Settings.SetVNCPassword(_sourceVm.uuid, _vncPassword)); 
+                        Program.Invoke(this, () => Settings.SetVNCPassword(_sourceVm.uuid, _vncPassword));
                 }
             }
             catch (Exception exn)
@@ -1052,8 +1066,9 @@ namespace XenAdmin.ConsoleView
         private static Stream ConnectGuest(string ipAddress, int port, IXenConnection connection)
         {
             var uriString = $"http://{ipAddress}:{port}/";
-            Log.DebugFormat("Trying to connect to: {0}", uriString);          
-            return HTTP.ConnectStream(new Uri(uriString), XenAdminConfigManager.Provider.GetProxyFromSettings(connection), true, 0);           
+            Log.DebugFormat("Trying to connect to: {0}", uriString);
+            return HTTP.ConnectStream(new Uri(uriString),
+                XenAdminConfigManager.Provider.GetProxyFromSettings(connection), true, 0);
         }
 
         private void ConnectHostedConsole(VNCGraphicsClient v, Console console)
@@ -1072,8 +1087,9 @@ namespace XenAdmin.ConsoleView
             lock (_activeSessionLock)
             {
                 // use the elevated credentials, if provided, for connecting to the console (CA-91132)
-                _activeSession = (string.IsNullOrEmpty(ElevatedUsername) || string.IsNullOrEmpty(ElevatedPassword)) ?
-                    console.Connection.DuplicateSession() : console.Connection.ElevatedSession(ElevatedUsername, ElevatedPassword);
+                _activeSession = (string.IsNullOrEmpty(ElevatedUsername) || string.IsNullOrEmpty(ElevatedPassword))
+                    ? console.Connection.DuplicateSession()
+                    : console.Connection.ElevatedSession(ElevatedUsername, ElevatedPassword);
                 sessionRef = _activeSession.opaque_ref;
             }
 
@@ -1185,7 +1201,7 @@ namespace XenAdmin.ConsoleView
             if (DisplayFocusRectangle && ContainsFocus && RemoteConsole != null)
             {
                 var focusRect = Rectangle.Inflate(RemoteConsole.ConsoleBounds, VNCGraphicsClient.BORDER_PADDING / 2,
-                                                    VNCGraphicsClient.BORDER_PADDING / 2);
+                    VNCGraphicsClient.BORDER_PADDING / 2);
                 using (var pen = new Pen(_focusColor, VNCGraphicsClient.BORDER_WIDTH))
                 {
                     if (Focused)
@@ -1197,6 +1213,7 @@ namespace XenAdmin.ConsoleView
 
         // Save this for when we init a new vncClient.
         private bool _displayFocusRectangle = true;
+
         public bool DisplayFocusRectangle
         {
             get => _displayFocusRectangle;
@@ -1246,7 +1263,7 @@ namespace XenAdmin.ConsoleView
 
         protected override void OnEnter(EventArgs e)
         {
-            Program.AssertOnEventThread(); 
+            Program.AssertOnEventThread();
             base.OnEnter(e);
 
             CaptureKeyboardAndMouse();
@@ -1270,8 +1287,9 @@ namespace XenAdmin.ConsoleView
             {
                 SetKeyboardAndMouseCapture(false);
             }
+
             ActiveControl = null;
-            
+
             EnableMenuShortcuts();
         }
 
@@ -1284,6 +1302,7 @@ namespace XenAdmin.ConsoleView
                 {
                     SetKeyboardAndMouseCapture(true);
                 }
+
                 Unpause();
             }
 
@@ -1302,7 +1321,7 @@ namespace XenAdmin.ConsoleView
 
         private Set<Keys> _pressedKeys = new Set<Keys>();
         private bool _modifierKeyPressedAlone;
-        
+
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             const int WM_KEYDOWN = 0x100;
@@ -1337,7 +1356,8 @@ namespace XenAdmin.ConsoleView
             if (!pressed && _pressedKeys.Count == 0) // we received key-up, but not key-down - ignore
                 return true;
 
-            if (KeyHandler.handleExtras(pressed, _pressedKeys, KeyHandler.ExtraKeys, extendedKey, KeyHandler.ModifierKeys, ref _modifierKeyPressedAlone))
+            if (KeyHandler.handleExtras(pressed, _pressedKeys, KeyHandler.ExtraKeys, extendedKey,
+                    KeyHandler.ModifierKeys, ref _modifierKeyPressedAlone))
             {
                 Focus();
                 return true;
@@ -1355,12 +1375,13 @@ namespace XenAdmin.ConsoleView
             }
 
             if (key == Keys.Tab || (key == (Keys.Tab | Keys.Shift)))
-                return false;           
+                return false;
 
             return false;
         }
 
         private Size _oldSize;
+
         public void UpdateRDPResolution(bool fullscreen = false)
         {
             if (_rdpClient == null || _oldSize.Equals(Size))
@@ -1368,9 +1389,10 @@ namespace XenAdmin.ConsoleView
 
             //no offsets in fullscreen mode because there is no need to accomodate focus border 
             if (fullscreen)
-                _rdpClient.UpdateDisplay(Size.Width, Size.Height, new Point(0,0));
+                _rdpClient.UpdateDisplay(Size.Width, Size.Height, new Point(0, 0));
             else
-                _rdpClient.UpdateDisplay(Size.Width - CONSOLE_SIZE_OFFSET, Size.Height - CONSOLE_SIZE_OFFSET, new Point(3,3));
+                _rdpClient.UpdateDisplay(Size.Width - CONSOLE_SIZE_OFFSET, Size.Height - CONSOLE_SIZE_OFFSET,
+                    new Point(3, 3));
             _oldSize = new Size(Size.Width, Size.Height);
             Refresh();
         }
