@@ -64,7 +64,7 @@ namespace XenAdmin.ConsoleView
         private const int VNC_PORT = 5900;
         private const int CONSOLE_SIZE_OFFSET = 6;
 
-        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod()?.DeclaringType);
 
         private int ConnectionRetries;
 
@@ -568,7 +568,7 @@ namespace XenAdmin.ConsoleView
                 }
             }
 
-            if (RemoteConsole != null && RemoteConsole.ConsoleControl != null)
+            if (RemoteConsole?.ConsoleControl != null)
             {
                 RemoteConsole.KeyHandler = KeyHandler;
                 RemoteConsole.SendScanCodes = !sourceIsPV;
@@ -597,7 +597,7 @@ namespace XenAdmin.ConsoleView
 
         private void SetKeyboardAndMouseCapture(bool value)
         {
-            if (RemoteConsole != null && RemoteConsole.ConsoleControl != null)
+            if (RemoteConsole?.ConsoleControl != null)
                 RemoteConsole.ConsoleControl.TabStop = value;
         }
 
@@ -1229,7 +1229,7 @@ namespace XenAdmin.ConsoleView
         internal void RefreshScreen()
         {
             Program.AssertOnEventThread();
-            if (RemoteConsole != null && RemoteConsole.ConsoleControl != null)
+            if (RemoteConsole?.ConsoleControl != null)
             {
                 RemoteConsole.ConsoleControl.Refresh();
             }
