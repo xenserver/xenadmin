@@ -585,8 +585,7 @@ namespace XenAdmin.ConsoleView
                     RemoteConsole.Activate();
             }
 
-            if (GpuStatusChanged != null)
-                GpuStatusChanged(MustConnectRemoteDesktop());
+            GpuStatusChanged?.Invoke(MustConnectRemoteDesktop());
         }
 
         internal bool MustConnectRemoteDesktop()
@@ -605,8 +604,10 @@ namespace XenAdmin.ConsoleView
         {
             if (_vncClient != null)
                 ThreadPool.QueueUserWorkItem(Connect, new KeyValuePair<VNCGraphicsClient, Exception>(_vncClient, null));
-            else if (_rdpClient != null)
-                _rdpClient.Connect(RdpIp);
+            else
+            {
+                _rdpClient?.Connect(RdpIp);
+            }
         }
 
         void ConnectionSuccess(object sender, EventArgs e)
@@ -792,15 +793,13 @@ namespace XenAdmin.ConsoleView
             {
                 ParentVNCTabView.VMPowerOn();
                 ConnectNewHostedConsole();
-                if (_connectionPoller != null)
-                    _connectionPoller.Change(RETRY_SLEEP_TIME, RDP_POLL_INTERVAL);
+                _connectionPoller?.Change(RETRY_SLEEP_TIME, RDP_POLL_INTERVAL);
             }
             else if (e.PropertyName == "power_state" &&
                 (vm.power_state == vm_power_state.Halted || vm.power_state == vm_power_state.Suspended))
             {
                 ParentVNCTabView.VMPowerOff();
-                if (_connectionPoller != null)
-                    _connectionPoller.Change(Timeout.Infinite, Timeout.Infinite);
+                _connectionPoller?.Change(Timeout.Infinite, Timeout.Infinite);
             }
             else if (e.PropertyName == "domid")
             {
@@ -812,8 +811,7 @@ namespace XenAdmin.ConsoleView
             {
                 Program.Invoke(this, () =>
                 {
-                    if (GpuStatusChanged != null)
-                        GpuStatusChanged(MustConnectRemoteDesktop());
+                    GpuStatusChanged?.Invoke(MustConnectRemoteDesktop());
                 });
             }
 
@@ -823,8 +821,7 @@ namespace XenAdmin.ConsoleView
 
         internal void ImediatelyPollForConsole()
         {
-            if (_connectionPoller != null)
-                _connectionPoller.Change(0, RDP_POLL_INTERVAL);
+            _connectionPoller?.Change(0, RDP_POLL_INTERVAL);
         }
 
         private void ConnectNewHostedConsole()
@@ -1039,8 +1036,7 @@ namespace XenAdmin.ConsoleView
             Program.Invoke(this, delegate
             {
                 Log.Debug("User cancelled during VNC authentication");
-                if (UserCancelledAuth != null)
-                    UserCancelledAuth(this, null);
+                UserCancelledAuth?.Invoke(this, null);
             });
         }
 
@@ -1049,8 +1045,7 @@ namespace XenAdmin.ConsoleView
             Program.Invoke(this, delegate
             {
                 Log.Debug("Cancelled VNC connection attempt");
-                if (VncConnectionAttemptCancelled != null)
-                    VncConnectionAttemptCancelled(this, null);
+                VncConnectionAttemptCancelled?.Invoke(this, null);
             });
         }
 
@@ -1123,10 +1118,7 @@ namespace XenAdmin.ConsoleView
         {
             Program.AssertOnEventThread();
 
-            if (RemoteConsole != null)
-            {
-                RemoteConsole.SendCAD();
-            }
+            RemoteConsole?.SendCAD();
         }
 
         private string _errorMessage;
@@ -1220,19 +1212,13 @@ namespace XenAdmin.ConsoleView
 
         internal Image Snapshot()
         {
-            if (RemoteConsole != null)
-                return RemoteConsole.Snapshot();
-
-            return null;
+            return RemoteConsole?.Snapshot();
         }
 
         internal void RefreshScreen()
         {
             Program.AssertOnEventThread();
-            if (RemoteConsole?.ConsoleControl != null)
-            {
-                RemoteConsole.ConsoleControl.Refresh();
-            }
+            RemoteConsole?.ConsoleControl?.Refresh();
             Invalidate();
             Update();
         }
