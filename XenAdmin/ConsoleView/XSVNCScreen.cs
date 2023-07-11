@@ -164,7 +164,7 @@ namespace XenAdmin.ConsoleView
             if (source == null)
                 return;
             Properties.Settings.Default.PropertyChanged += Default_PropertyChanged;
-            var guestMetrics = Source.Connection.Resolve<VM_guest_metrics>(Source.guest_metrics);
+            var guestMetrics = Source.Connection.Resolve(Source.guest_metrics);
             if (guestMetrics == null)
                 return;
 
@@ -186,7 +186,7 @@ namespace XenAdmin.ConsoleView
 
             Source.PropertyChanged -= VM_PropertyChanged;
 
-            var guestMetrics = Source.Connection.Resolve<VM_guest_metrics>(Source.guest_metrics);
+            var guestMetrics = Source.Connection.Resolve(Source.guest_metrics);
             if (guestMetrics == null)
                 return;
 
@@ -202,7 +202,7 @@ namespace XenAdmin.ConsoleView
             if (e.PropertyName == "networks")
             {
                 var newNetworks = (sender as VM_guest_metrics).networks;
-                if (!equateDictionary<string, string>(newNetworks, cachedNetworks))
+                if (!equateDictionary(newNetworks, cachedNetworks))
                 {
                     Log.InfoFormat("Detected IP address change in vm {0}, repolling for VNC/RDP...", Source.Name());
 
@@ -1352,7 +1352,7 @@ namespace XenAdmin.ConsoleView
             if (!pressed && pressedKeys.Count == 0) // we received key-up, but not key-down - ignore
                 return true;
 
-            if (KeyHandler.handleExtras<Keys>(pressed, pressedKeys, KeyHandler.ExtraKeys, extendedKey, KeyHandler.ModifierKeys, ref modifierKeyPressedAlone))
+            if (KeyHandler.handleExtras(pressed, pressedKeys, KeyHandler.ExtraKeys, extendedKey, KeyHandler.ModifierKeys, ref modifierKeyPressedAlone))
             {
                 Focus();
                 return true;
