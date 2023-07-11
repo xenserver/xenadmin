@@ -915,7 +915,7 @@ namespace XenAdmin
             var supporters = connection.Cache.Hosts.Where(h => h.opaque_ref != coordinator.opaque_ref);
             foreach (var supporter in supporters)
             {
-                if (Helpers.HavanaOrGreater(supporter))
+                if (Helpers.NaplesOrGreater(supporter))
                     continue;
 
                 connection.EndConnect();
@@ -978,10 +978,9 @@ namespace XenAdmin
                     return;
                 }
 
-                // Allow connection only to Havana and Naples or greater versions
+                // Allow connection only to Naples or greater versions
 
-                if (!Helpers.HavanaOrGreater(coordinator) ||
-                    Helpers.FalconOrGreater(coordinator) && !Helpers.NaplesOrGreater(coordinator))
+                if (!Helpers.NaplesOrGreater(coordinator))
                 {
                     connection.EndConnect();
 
