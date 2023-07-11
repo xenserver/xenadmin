@@ -976,7 +976,7 @@ namespace XenAdmin.ConsoleView
                         else
                         {
                             Log.Debug("Attempting passwordless VNC login");
-                            vncPassword = new char[0];
+                            vncPassword = Array.Empty<char>();
                             ignoreNextError = true;
                             haveTriedLoginWithoutPassword = true;
                         }
@@ -1072,17 +1072,17 @@ namespace XenAdmin.ConsoleView
             }
 
             var uri = new Uri(console.location);
-            string sesssionRef;
+            string sessionRef;
 
             lock (activeSessionLock)
             {
                 // use the elevated credentials, if provided, for connecting to the console (CA-91132)
                 activeSession = (string.IsNullOrEmpty(ElevatedUsername) || string.IsNullOrEmpty(ElevatedPassword)) ?
                     console.Connection.DuplicateSession() : console.Connection.ElevatedSession(ElevatedUsername, ElevatedPassword);
-                sesssionRef = activeSession.opaque_ref;
+                sessionRef = activeSession.opaque_ref;
             }
 
-            var stream = HTTPHelper.CONNECT(uri, console.Connection, sesssionRef, false);
+            var stream = HTTPHelper.CONNECT(uri, console.Connection, sessionRef, false);
 
             InvokeConnection(v, stream, console);
         }
