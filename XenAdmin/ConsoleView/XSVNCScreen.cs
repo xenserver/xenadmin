@@ -247,7 +247,7 @@ namespace XenAdmin.ConsoleView
             }
         }
 
-        public Size DesktopSize => RemoteConsole != null ? RemoteConsole.DesktopSize : Size.Empty;
+        public Size DesktopSize => RemoteConsole?.DesktopSize ?? Size.Empty;
 
         /// <summary>
         /// Nothrow guarantee.
