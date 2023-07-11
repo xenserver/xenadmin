@@ -116,14 +116,14 @@ namespace XenAdmin.ConsoleView
         public event Action<bool> GpuStatusChanged;
         public event Action<string> ConnectionNameChanged;
 
-        public bool RdpVersionWarningNeeded { get { return rdpClient != null && rdpClient.needsRdpVersionWarning; }}
+        public bool RdpVersionWarningNeeded => rdpClient != null && rdpClient.needsRdpVersionWarning;
 
         internal readonly VNCTabView parentVNCTabView;
 
         [DefaultValue(false)]
         public bool UserWantsToSwitchProtocol { get; set; }
 
-        private bool hasRDP { get { return Source != null && Source.HasRDP(); } }
+        private bool hasRDP => Source != null && Source.HasRDP();
 
         /// <summary>
         /// Whether we have tried to login without providing a password (covers the case where the user
@@ -248,13 +248,7 @@ namespace XenAdmin.ConsoleView
             }
         }
 
-        public Size DesktopSize
-        {
-            get
-            {
-                return RemoteConsole != null ? RemoteConsole.DesktopSize : Size.Empty;
-            }
-        }
+        public Size DesktopSize => RemoteConsole != null ? RemoteConsole.DesktopSize : Size.Empty;
 
         /// <summary>
         /// Nothrow guarantee.
@@ -494,7 +488,7 @@ namespace XenAdmin.ConsoleView
 
         public IRemoteConsole RemoteConsole
         {
-            get { return vncClient != null ? (IRemoteConsole)vncClient : rdpClient; }
+            get => vncClient != null ? (IRemoteConsole)vncClient : rdpClient;
             set 
             {
                 if (vncClient != null) 
@@ -637,10 +631,7 @@ namespace XenAdmin.ConsoleView
 
         internal bool UseVNC
         {
-            get
-            {
-                return useVNC;
-            }
+            get => useVNC;
             set
             {
                 if (value != useVNC)
@@ -675,10 +666,7 @@ namespace XenAdmin.ConsoleView
         /// </summary>
         public bool UseSource
         {
-            get
-            {
-                return useSource;
-            }
+            get => useSource;
             set
             {
                 if (value != useSource)
@@ -692,10 +680,7 @@ namespace XenAdmin.ConsoleView
 
         private VM Source
         {
-            get
-            {
-                return sourceVM;
-            }
+            get => sourceVM;
             set
             {
                 if (connectionPoller != null)
@@ -1223,7 +1208,7 @@ namespace XenAdmin.ConsoleView
         private bool displayFocusRectangle = true;
         public bool DisplayFocusRectangle
         {
-            get { return displayFocusRectangle; }
+            get => displayFocusRectangle;
             set
             {
                 displayFocusRectangle = value;
