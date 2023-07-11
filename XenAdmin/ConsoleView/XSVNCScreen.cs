@@ -819,7 +819,7 @@ namespace XenAdmin.ConsoleView
                 ConnectionNameChanged(ConnectionName);
         }
 
-        internal void ImediatelyPollForConsole()
+        internal void ImmediatelyPollForConsole()
         {
             _connectionPoller?.Change(0, RDP_POLL_INTERVAL);
         }
@@ -832,14 +832,14 @@ namespace XenAdmin.ConsoleView
             {
                 _hostedConsoles = Source.consoles;
             }
-            if (UseVNC && _vncClient != null && ConnectionSuperceded())
+            if (UseVNC && _vncClient != null && ConnectionSuperseded())
             {
                 InitSubControl();
             }
         }
 
         /// <summary>
-        /// A connection is superceded if it's connected to a console that's no longer being
+        /// A connection is superseded if it's connected to a console that's no longer being
         /// advertised by the server and there's a replacement that _is_ being advertised, or
         /// if its not connected at all.
         /// 
@@ -847,12 +847,12 @@ namespace XenAdmin.ConsoleView
         /// For this reason, we need to close down ourselves when we see that the console has
         /// been replaced by a newer one (i.e. after a reboot).
         /// </summary>
-        private bool ConnectionSuperceded()
+        private bool ConnectionSuperseded()
         {
-            return !_vncClient.Connected || ConsoleSuperceded((Console)_vncClient.Console);
+            return !_vncClient.Connected || ConsoleSuperseded((Console)_vncClient.Console);
         }
 
-        private bool ConsoleSuperceded(Console oldConsole)
+        private bool ConsoleSuperseded(Console oldConsole)
         {
             if (oldConsole == null)
                 return true;
@@ -1049,9 +1049,9 @@ namespace XenAdmin.ConsoleView
             });
         }
 
-        private Stream ConnectGuest(string ipAddress, int port, IXenConnection connection)
+        private static Stream ConnectGuest(string ipAddress, int port, IXenConnection connection)
         {
-            var uriString = string.Format("http://{0}:{1}/", ipAddress, port);
+            var uriString = $"http://{ipAddress}:{port}/";
             Log.DebugFormat("Trying to connect to: {0}", uriString);          
             return HTTP.ConnectStream(new Uri(uriString), XenAdminConfigManager.Provider.GetProxyFromSettings(connection), true, 0);           
         }
@@ -1155,7 +1155,7 @@ namespace XenAdmin.ConsoleView
             });
         }
 
-        private void SleepAndRetryConnection_(VNCGraphicsClient v)
+        private void SleepAndRetryConnection_(IDisposable v)
         {
             ThreadPool.QueueUserWorkItem(SleepAndRetryConnection, v);
         }
@@ -1229,7 +1229,6 @@ namespace XenAdmin.ConsoleView
             base.OnGotFocus(e);
 
             RefreshScreen();
-
         }
 
         protected override void OnLostFocus(EventArgs e)
@@ -1325,15 +1324,15 @@ namespace XenAdmin.ConsoleView
             // use TranslateKeyMessage to identify if Left or Right modifier keys have been pressed/released
             var extKey = ConsoleKeyHandler.TranslateKeyMessage(msg);
 
-            return Keysym(down, key, extKey);
+            return KeySym(down, key, extKey);
         }
 
         protected override void OnKeyUp(KeyEventArgs e)
         {
-            e.Handled = Keysym(false, e.KeyCode, e.KeyCode);
+            e.Handled = KeySym(false, e.KeyCode, e.KeyCode);
         }
 
-        private bool Keysym(bool pressed, Keys key, Keys extendedKey)
+        private bool KeySym(bool pressed, Keys key, Keys extendedKey)
         {
             if (!pressed && _pressedKeys.Count == 0) // we received key-up, but not key-down - ignore
                 return true;

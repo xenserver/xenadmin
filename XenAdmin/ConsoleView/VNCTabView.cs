@@ -1324,7 +1324,7 @@ namespace XenAdmin.ConsoleView
             if (!RDPControlEnabled)
                 toggleConsoleButton.Enabled = false;
 
-            vncScreen.ImediatelyPollForConsole();
+            vncScreen.ImmediatelyPollForConsole();
         }
 
         internal void SwitchIfRequired()
