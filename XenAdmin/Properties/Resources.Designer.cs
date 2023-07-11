@@ -2272,23 +2272,19 @@ namespace XenAdmin.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
-        ///&lt;html&gt;
         ///
-        ///&lt;head&gt;
-        ///  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=ISO-8859-1&quot;&gt;
-        ///  &lt;title&gt;XenServer&lt;/title&gt;
-        ///  &lt;style&gt;
-        ////* -----------------------------------------------------------------------
-        /// File encoded as ISO-8859-1
-        /// Blueprint CSS Framework 1.0.1
-        /// http://blueprintcss.org
+        ///&lt;!-- 
+        ///Copyright (c) Cloud Software Group, Inc. 
         ///
-        /// * Copyright (c) 2007-Present. See src/LICENSE for more info.
+        ///Redistribution and use in source and binary forms,
+        ///with or without modification, are permitted provided
+        ///that the following conditions are met:
         ///
-        /// number of columns:24
-        /// column width:30
-        /// gutter width:10
-        /// total wi [rest of string was truncated]&quot;;.
+        ///*   Redistributions of source code must retain the above
+        ///    copyright notice, this list of conditions and the
+        ///    following disclaimer.
+        ///*   Redistributions in binary form must reproduce the above
+        ///    copyright not [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string HomePage {
             get {
@@ -2308,23 +2304,19 @@ namespace XenAdmin.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
-        ///&lt;html&gt;
         ///
-        ///&lt;head&gt;
-        ///  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;
-        ///  &lt;title&gt;XenServer&lt;/title&gt;
-        ///  &lt;style&gt;
-        ////* -----------------------------------------------------------------------
-        /// File encoded as ISO-8859-1
-        /// Blueprint CSS Framework 1.0.1
-        /// http://blueprintcss.org
+        ///&lt;!-- 
+        ///Copyright (c) Cloud Software Group, Inc. 
         ///
-        /// * Copyright (c) 2007-Present. See src/LICENSE for more info.
+        ///Redistribution and use in source and binary forms,
+        ///with or without modification, are permitted provided
+        ///that the following conditions are met:
         ///
-        /// number of columns:24
-        /// column width:30
-        /// gutter width:10
-        /// total width:9 [rest of string was truncated]&quot;;.
+        ///*   Redistributions of source code must retain the above
+        ///    copyright notice, this list of conditions and the
+        ///    following disclaimer.
+        ///*   Redistributions in binary form must reproduce the above
+        ///    copyright not [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string HomePage_ja {
             get {
@@ -2334,23 +2326,19 @@ namespace XenAdmin.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
-        ///&lt;html&gt;
         ///
-        ///&lt;head&gt;
-        ///  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;
-        ///  &lt;title&gt;XenServer&lt;/title&gt;
-        ///  &lt;style&gt;
-        ////* -----------------------------------------------------------------------
-        /// File encoded as ISO-8859-1
-        /// Blueprint CSS Framework 1.0.1
-        /// http://blueprintcss.org
+        ///&lt;!-- 
+        ///Copyright (c) Cloud Software Group, Inc. 
         ///
-        /// * Copyright (c) 2007-Present. See src/LICENSE for more info.
+        ///Redistribution and use in source and binary forms,
+        ///with or without modification, are permitted provided
+        ///that the following conditions are met:
         ///
-        /// number of columns:24
-        /// column width:30
-        /// gutter width:10
-        /// total width:9 [rest of string was truncated]&quot;;.
+        ///*   Redistributions of source code must retain the above
+        ///    copyright notice, this list of conditions and the
+        ///    following disclaimer.
+        ///*   Redistributions in binary form must reproduce the above
+        ///    copyright not [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string HomePage_zh_CN {
             get {
@@ -2394,16 +2382,6 @@ namespace XenAdmin.Properties {
         internal static System.Drawing.Bitmap infra_view_24 {
             get {
                 object obj = ResourceManager.GetObject("infra_view_24", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap LeftArrow {
-            get {
-                object obj = ResourceManager.GetObject("LeftArrow", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2864,16 +2842,6 @@ namespace XenAdmin.Properties {
         internal static System.Drawing.Bitmap Refresh16 {
             get {
                 object obj = ResourceManager.GetObject("Refresh16", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap RightArrow {
-            get {
-                object obj = ResourceManager.GetObject("RightArrow", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -3511,16 +3479,6 @@ namespace XenAdmin.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap WLB {
-            get {
-                object obj = ResourceManager.GetObject("WLB", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap xcm {
             get {
                 object obj = ResourceManager.GetObject("xcm", resourceCulture);
@@ -3534,16 +3492,6 @@ namespace XenAdmin.Properties {
         internal static System.Drawing.Bitmap xcm_32x32 {
             get {
                 object obj = ResourceManager.GetObject("xcm_32x32", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap XS {
-            get {
-                object obj = ResourceManager.GetObject("XS", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
