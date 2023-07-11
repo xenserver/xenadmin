@@ -28,16 +28,26 @@
  * SUCH DAMAGE.
  */
 
+using AxMSTSCLib;
+using System;
+
 namespace XenAdmin.RDP
 {
-    public class MsRdpClient6 : AxMSTSCLib.AxMsRdpClient6, IRdpClient
+    /// <summary>
+    /// Interface used to address common fields of RPDClients without
+    /// changing AXMSTSCLib.cs
+    /// </summary>
+    internal interface IRdpClient
     {
-        protected override void WndProc(ref System.Windows.Forms.Message m)
-        {
-            //Fix for the missing focus issue on the rdp client component
-            if (m.Msg == 0x0021) //WM_MOUSEACTIVATE ref:http://msdn.microsoft.com/en-us/library/ms645612(VS.85).aspx
-                this.Select();
-            base.WndProc(ref m);
-        }
+        int DesktopWidth { get; set; }
+        string Server { get; set; }
+        int DesktopHeight { get; set; }
+        void Connect();
+
+        event EventHandler OnConnected;
+        event EventHandler OnConnecting;
+        event IMsTscAxEvents_OnDisconnectedEventHandler OnDisconnected;
+        event EventHandler OnAuthenticationWarningDisplayed;
+        event EventHandler OnAuthenticationWarningDismissed;
     }
 }
