@@ -155,7 +155,7 @@ namespace XenAdmin.ConsoleView
             ElevatedPassword = elevatedPassword;
 
 #pragma warning disable 0219
-            IntPtr _ = Handle;
+            var _ = Handle;
 #pragma warning restore 0219
 
             initSubControl();
@@ -164,7 +164,7 @@ namespace XenAdmin.ConsoleView
             if (source == null)
                 return;
             Properties.Settings.Default.PropertyChanged += Default_PropertyChanged;
-            VM_guest_metrics guestMetrics = Source.Connection.Resolve<VM_guest_metrics>(Source.guest_metrics);
+            var guestMetrics = Source.Connection.Resolve<VM_guest_metrics>(Source.guest_metrics);
             if (guestMetrics == null)
                 return;
 
@@ -186,7 +186,7 @@ namespace XenAdmin.ConsoleView
 
             Source.PropertyChanged -= new PropertyChangedEventHandler(VM_PropertyChanged);
 
-            VM_guest_metrics guestMetrics = Source.Connection.Resolve<VM_guest_metrics>(Source.guest_metrics);
+            var guestMetrics = Source.Connection.Resolve<VM_guest_metrics>(Source.guest_metrics);
             if (guestMetrics == null)
                 return;
 
@@ -201,7 +201,7 @@ namespace XenAdmin.ConsoleView
 
             if (e.PropertyName == "networks")
             {
-                Dictionary<string, string> newNetworks = (sender as VM_guest_metrics).networks;
+                var newNetworks = (sender as VM_guest_metrics).networks;
                 if (!equateDictionary<string, string>(newNetworks, cachedNetworks))
                 {
                     Log.InfoFormat("Detected IP address change in vm {0}, repolling for VNC/RDP...", Source.Name());
@@ -218,7 +218,7 @@ namespace XenAdmin.ConsoleView
             if (d1.Count != d2.Count)
                 return false;
 
-            foreach (T key in d1.Keys)
+            foreach (var key in d1.Keys)
             {
                 if (!d2.ContainsKey(key) || !d2[key].Equals(d1[key]))
                     return false;
@@ -511,10 +511,10 @@ namespace XenAdmin.ConsoleView
             if (string.IsNullOrEmpty(RdpIp) && !UseVNC && RemoteConsole != null)
                 return;
 
-            bool wasFocused = false;
+            var wasFocused = false;
             Controls.Clear();
             //console size with some offset to accomodate focus rectangle
-            Size currentConsoleSize = new Size(Size.Width - CONSOLE_SIZE_OFFSET, Size.Height - CONSOLE_SIZE_OFFSET);
+            var currentConsoleSize = new Size(Size.Width - CONSOLE_SIZE_OFFSET, Size.Height - CONSOLE_SIZE_OFFSET);
 
             lock (_rdpConnectionLock)
             {
@@ -640,7 +640,7 @@ namespace XenAdmin.ConsoleView
                     scaling = false;
                     initSubControl();
                     // Check if we have really switched. If not, change useVNC back (CA-102755)
-                    bool switched = true;
+                    var switched = true;
                     if (useVNC) // we wanted VNC
                     {
                         if (vncClient == null && rdpClient != null) // it is actually RDP
@@ -721,10 +721,10 @@ namespace XenAdmin.ConsoleView
                 if (Source == null)
                     return null;
 
-                if (Source.IsControlDomainZero(out Host host))
+                if (Source.IsControlDomainZero(out var host))
                     return string.Format(Messages.CONSOLE_HOST, host.Name());
 
-                if (Source.IsSrDriverDomain(out SR sr))
+                if (Source.IsSrDriverDomain(out var sr))
                     return string.Format(Messages.CONSOLE_SR_DRIVER_DOMAIN, sr.Name());
 
                 return Source.Name();
@@ -768,7 +768,7 @@ namespace XenAdmin.ConsoleView
 
         private void VM_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            VM vm = (VM)sender;
+            var vm = (VM)sender;
 
             if (vm.uuid != Source.uuid)
                 return;
@@ -865,8 +865,8 @@ namespace XenAdmin.ConsoleView
             {
                 consoles = Source.Connection.ResolveAll(hostedConsoles);
             }
-            bool good_console = false;
-            foreach (Console console in consoles)
+            var good_console = false;
+            foreach (var console in consoles)
             {
                 if (console.opaque_ref == old_console.opaque_ref &&
                     console.location == old_console.location)
@@ -889,10 +889,10 @@ namespace XenAdmin.ConsoleView
 
             Program.AssertOffEventThread();
 
-            KeyValuePair<VNCGraphicsClient, Exception> kvp = (KeyValuePair<VNCGraphicsClient, Exception>)o;
+            var kvp = (KeyValuePair<VNCGraphicsClient, Exception>)o;
 
-            VNCGraphicsClient v = kvp.Key;
-            Exception error = kvp.Value;
+            var v = kvp.Key;
+            var error = kvp.Value;
 
             try
             {
@@ -904,7 +904,7 @@ namespace XenAdmin.ConsoleView
                         consoles = sourceVM.Connection.ResolveAll(hostedConsoles);
                     }
 
-                    foreach (Console console in consoles)
+                    foreach (var console in consoles)
                     {
                         if (vncClient != v)
                         {
@@ -921,11 +921,11 @@ namespace XenAdmin.ConsoleView
                             }
                             catch (Exception exn)
                             {
-                                Failure failure = exn as Failure;
-                                bool isHostGoneMessage = failure != null
-                                    && failure.ErrorDescription.Count == 2
-                                    && failure.ErrorDescription[0] == Failure.INTERNAL_ERROR
-                                    && failure.ErrorDescription[1] == string.Format(Messages.HOST_GONE, BrandManager.BrandConsole);
+                                var failure = exn as Failure;
+                                var isHostGoneMessage = failure != null
+                                                        && failure.ErrorDescription.Count == 2
+                                                        && failure.ErrorDescription[0] == Failure.INTERNAL_ERROR
+                                                        && failure.ErrorDescription[1] == string.Format(Messages.HOST_GONE, BrandManager.BrandConsole);
 
                                 if (isHostGoneMessage)
                                 {
@@ -958,7 +958,7 @@ namespace XenAdmin.ConsoleView
                     vncPassword = Settings.GetVNCPassword(sourceVM.uuid);
                     if (vncPassword == null)
                     {
-                        bool lifecycleOperationInProgress = sourceVM.current_operations.Values.Any(VM.is_lifecycle_operation);
+                        var lifecycleOperationInProgress = sourceVM.current_operations.Values.Any(VM.is_lifecycle_operation);
                         if (haveTriedLoginWithoutPassword && !lifecycleOperationInProgress)
                         {
                             Program.Invoke(this, delegate
@@ -1014,7 +1014,7 @@ namespace XenAdmin.ConsoleView
             Program.AssertOnEventThread();
 
             // Prompt for password
-            VNCPasswordDialog f = new VNCPasswordDialog(error, sourceVM);
+            var f = new VNCPasswordDialog(error, sourceVM);
             try
             {
                 if (f.ShowDialog(this) == DialogResult.OK)
@@ -1056,7 +1056,7 @@ namespace XenAdmin.ConsoleView
 
         private Stream connectGuest(string ip_address, int port, IXenConnection connection)
         {
-            string uriString = string.Format("http://{0}:{1}/", ip_address, port);
+            var uriString = string.Format("http://{0}:{1}/", ip_address, port);
             Log.DebugFormat("Trying to connect to: {0}", uriString);          
             return HTTP.ConnectStream(new Uri(uriString), XenAdminConfigManager.Provider.GetProxyFromSettings(connection), true, 0);           
         }
@@ -1065,13 +1065,13 @@ namespace XenAdmin.ConsoleView
         {
             Program.AssertOffEventThread();
 
-            Host host = console.Connection.Resolve(Source.resident_on);
+            var host = console.Connection.Resolve(Source.resident_on);
             if (host == null)
             {
                 throw new Failure(Failure.INTERNAL_ERROR, string.Format(Messages.HOST_GONE, BrandManager.BrandConsole));
             }
 
-            Uri uri = new Uri(console.location);
+            var uri = new Uri(console.location);
             string sesssionRef;
 
             lock (activeSessionLock)
@@ -1082,7 +1082,7 @@ namespace XenAdmin.ConsoleView
                 sesssionRef = activeSession.opaque_ref;
             }
 
-            Stream stream = HTTPHelper.CONNECT(uri, console.Connection, sesssionRef, false);
+            var stream = HTTPHelper.CONNECT(uri, console.Connection, sesssionRef, false);
 
             InvokeConnection(v, stream, console);
         }
@@ -1140,7 +1140,7 @@ namespace XenAdmin.ConsoleView
 
             Program.Invoke(this, delegate()
             {
-                VNCGraphicsClient v = (VNCGraphicsClient)sender;
+                var v = (VNCGraphicsClient)sender;
 
                 if (exn is VNCAuthenticationException || exn is CryptographicException)
                 {
@@ -1170,7 +1170,7 @@ namespace XenAdmin.ConsoleView
 
         private void SleepAndRetryConnection(object o)
         {
-            VNCGraphicsClient v = (VNCGraphicsClient)o;
+            var v = (VNCGraphicsClient)o;
 
             Program.AssertOffEventThread();
 
@@ -1184,7 +1184,7 @@ namespace XenAdmin.ConsoleView
             base.OnPaint(e);
             if (errorMessage != null)
             {
-                SizeF size = e.Graphics.MeasureString(errorMessage, Font);
+                var size = e.Graphics.MeasureString(errorMessage, Font);
                 e.Graphics.DrawString(errorMessage, Font, Brushes.Black,
                     ((Width - size.Width) / 2), ((Height - size.Height) / 2));
             }
@@ -1192,9 +1192,9 @@ namespace XenAdmin.ConsoleView
             // draw focus rectangle
             if (DisplayFocusRectangle && ContainsFocus && RemoteConsole != null)
             {
-                Rectangle focusRect = Rectangle.Inflate(RemoteConsole.ConsoleBounds, VNCGraphicsClient.BORDER_PADDING / 2,
+                var focusRect = Rectangle.Inflate(RemoteConsole.ConsoleBounds, VNCGraphicsClient.BORDER_PADDING / 2,
                                                     VNCGraphicsClient.BORDER_PADDING / 2);
-                using (Pen pen = new Pen(focusColor, VNCGraphicsClient.BORDER_WIDTH))
+                using (var pen = new Pen(focusColor, VNCGraphicsClient.BORDER_WIDTH))
                 {
                     if (Focused)
                         pen.DashStyle = DashStyle.Dash;
@@ -1323,9 +1323,9 @@ namespace XenAdmin.ConsoleView
             const int WM_KEYDOWN = 0x100;
             const int WM_SYSKEYDOWN = 0x104;
 
-            bool down = ((msg.Msg == WM_KEYDOWN) || (msg.Msg == WM_SYSKEYDOWN));
+            var down = ((msg.Msg == WM_KEYDOWN) || (msg.Msg == WM_SYSKEYDOWN));
 
-            Keys key = keyData;
+            var key = keyData;
 
             if ((key & Keys.Control) == Keys.Control)
                 key = key & ~Keys.Control;
@@ -1337,7 +1337,7 @@ namespace XenAdmin.ConsoleView
                 key = key & ~Keys.Shift;
 
             // use TranslateKeyMessage to identify if Left or Right modifier keys have been pressed/released
-            Keys extKey = ConsoleKeyHandler.TranslateKeyMessage(msg);
+            var extKey = ConsoleKeyHandler.TranslateKeyMessage(msg);
 
             return Keysym(down, key, extKey);
         }
@@ -1362,7 +1362,7 @@ namespace XenAdmin.ConsoleView
             // we need to do this here, because we cannot otherwise distinguish between Left and Right modifier keys on KeyUp
             if (!pressed)
             {
-                List<Keys> extendedKeys = ConsoleKeyHandler.GetExtendedKeys(key);
+                var extendedKeys = ConsoleKeyHandler.GetExtendedKeys(key);
                 foreach (var k in extendedKeys)
                 {
                     pressedKeys.Remove(k);
