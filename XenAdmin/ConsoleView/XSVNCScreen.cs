@@ -66,7 +66,7 @@ namespace XenAdmin.ConsoleView
 
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        private int ConnectionRetries = 0;
+        private int ConnectionRetries;
 
         private volatile bool useVNC = true;
 
@@ -78,17 +78,17 @@ namespace XenAdmin.ConsoleView
         /// May only be written on the event thread.  May be read off the event thread, to check whether
         /// the VNC source has been switched during connection.
         /// </summary>
-        private volatile VNCGraphicsClient vncClient = null;
+        private volatile VNCGraphicsClient vncClient;
 
         private RdpClient rdpClient;
 
-        private Timer connectionPoller = null;
+        private Timer connectionPoller;
 
-        private VM sourceVM = null;
-        private bool sourceIsPV = false;
+        private VM sourceVM;
+        private bool sourceIsPV;
 
         private readonly Object hostedConsolesLock = new Object();
-        private List<XenRef<Console>> hostedConsoles = null;
+        private List<XenRef<Console>> hostedConsoles;
 
         /// <summary>
         /// This is assigned when the hosted connection connects up.  It's used by PollPort to check for
@@ -96,7 +96,7 @@ namespace XenAdmin.ConsoleView
         /// poll for the in-guest VNC using the same session.  activeSession must be accessed only under
         /// the activeSessionLock.
         /// </summary>
-        private Session activeSession = null;
+        private Session activeSession;
         private readonly Object activeSessionLock = new Object();
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace XenAdmin.ConsoleView
         /// pendingVNCConnectionLock.  Work under this lock must be non-blocking, because it's used on
         /// Dispose.
         /// </summary>
-        private Stream pendingVNCConnection = null;
+        private Stream pendingVNCConnection;
         private readonly Object pendingVNCConnectionLock = new Object();
 
         internal EventHandler ResizeHandler;
@@ -130,15 +130,15 @@ namespace XenAdmin.ConsoleView
         /// has configured VNC not to require a login password). If no password is saved, passwordless
         /// login is tried once.
         /// </summary>
-        private bool haveTriedLoginWithoutPassword = false;
-        private bool ignoreNextError = false;
+        private bool haveTriedLoginWithoutPassword;
+        private bool ignoreNextError;
 
         private Dictionary<string, string> cachedNetworks;
 
         /// <summary>
         /// The last known VNC password for this VM.
         /// </summary>
-        private char[] vncPassword = null;
+        private char[] vncPassword;
 
         internal ConsoleKeyHandler KeyHandler;
 
@@ -897,7 +897,7 @@ namespace XenAdmin.ConsoleView
         /// CA-11201: GUI logs are being massively spammed. Prevent "INTERNAL_ERROR Host has disappeared"
         /// appearing more than once.
         /// </summary>
-        private bool _suppressHostGoneMessage = false;
+        private bool _suppressHostGoneMessage;
         private void Connect(object o)
         {
             if (Program.RunInAutomatedTestMode)
@@ -1145,7 +1145,7 @@ namespace XenAdmin.ConsoleView
             }
         }
 
-        private String errorMessage = null;
+        private String errorMessage;
 
         private void ErrorHandler(object sender, Exception exn)
         {
@@ -1332,7 +1332,7 @@ namespace XenAdmin.ConsoleView
         }
 
         private Set<Keys> pressedKeys = new Set<Keys>();
-        private bool modifierKeyPressedAlone = false;
+        private bool modifierKeyPressedAlone;
         
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
