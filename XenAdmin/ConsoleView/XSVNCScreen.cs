@@ -87,7 +87,7 @@ namespace XenAdmin.ConsoleView
         private VM sourceVM;
         private bool sourceIsPV;
 
-        private readonly Object hostedConsolesLock = new Object();
+        private readonly object hostedConsolesLock = new object();
         private List<XenRef<Console>> hostedConsoles;
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace XenAdmin.ConsoleView
         /// the activeSessionLock.
         /// </summary>
         private Session activeSession;
-        private readonly Object activeSessionLock = new Object();
+        private readonly object activeSessionLock = new object();
 
         /// <summary>
         /// Xvnc will block us if we're too quick with the disconnect and reconnect that we do
@@ -107,7 +107,7 @@ namespace XenAdmin.ConsoleView
         /// Dispose.
         /// </summary>
         private Stream pendingVNCConnection;
-        private readonly Object pendingVNCConnectionLock = new Object();
+        private readonly object pendingVNCConnectionLock = new object();
 
         internal EventHandler ResizeHandler;
 
@@ -515,7 +515,7 @@ namespace XenAdmin.ConsoleView
             Program.AssertOnEventThread();
 
             //When switch to RDP from VNC, if RDP IP is empty, do not try to switch.
-            if (String.IsNullOrEmpty(RdpIp) && !UseVNC && RemoteConsole != null)
+            if (string.IsNullOrEmpty(RdpIp) && !UseVNC && RemoteConsole != null)
                 return;
 
             bool wasFocused = false;
@@ -547,7 +547,7 @@ namespace XenAdmin.ConsoleView
             // Reset
             haveTriedLoginWithoutPassword = false;
 
-            if (UseVNC || String.IsNullOrEmpty(RdpIp))
+            if (UseVNC || string.IsNullOrEmpty(RdpIp))
             {
                 AutoScroll = false;
                 AutoScrollMinSize = new Size(0, 0);
@@ -1072,7 +1072,7 @@ namespace XenAdmin.ConsoleView
 
         private Stream connectGuest(string ip_address, int port, IXenConnection connection)
         {
-            string uriString = String.Format("http://{0}:{1}/", ip_address, port);
+            string uriString = string.Format("http://{0}:{1}/", ip_address, port);
             Log.DebugFormat("Trying to connect to: {0}", uriString);          
             return HTTP.ConnectStream(new Uri(uriString), XenAdminConfigManager.Provider.GetProxyFromSettings(connection), true, 0);           
         }
@@ -1145,7 +1145,7 @@ namespace XenAdmin.ConsoleView
             }
         }
 
-        private String errorMessage;
+        private string errorMessage;
 
         private void ErrorHandler(object sender, Exception exn)
         {
