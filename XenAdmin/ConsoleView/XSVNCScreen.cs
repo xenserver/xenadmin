@@ -558,8 +558,8 @@ namespace XenAdmin.ConsoleView
             {
                 if (rdpClient == null)
                 {
-                    if (ParentForm is FullScreenForm)
-                        currentConsoleSize = ((FullScreenForm)ParentForm).GetContentSize();
+                    if (ParentForm is FullScreenForm form)
+                        currentConsoleSize = form.GetContentSize();
                     AutoScroll = true;
                     AutoScrollMinSize = oldSize;
                     rdpClient = new RdpClient(this, currentConsoleSize, ResizeHandler);
