@@ -504,6 +504,9 @@ namespace XenAdmin.ConsoleView
             }
         }
 
+        private readonly object _rdpConnectionLock = new object();
+
+
         /// <summary>
         /// Creates the actual VNC or RDP client control.
         /// </summary>
@@ -519,15 +522,27 @@ namespace XenAdmin.ConsoleView
             this.Controls.Clear();
             //console size with some offset to accomodate focus rectangle
             Size currentConsoleSize = new Size(this.Size.Width - CONSOLE_SIZE_OFFSET, this.Size.Height - CONSOLE_SIZE_OFFSET);
-                
-            // Stop the old client.
-            if (RemoteConsole != null)
+
+            lock (_rdpConnectionLock)
             {
-                wasFocused = RemoteConsole.ConsoleControl != null && RemoteConsole.ConsoleControl.Focused;
-                RemoteConsole.DisconnectAndDispose();
-                RemoteConsole = null;
-                this.vncPassword = null;
+                // Stop the old client.
+                if (RemoteConsole != null)
+                {
+                    var preventResetConsole = false;
+                    wasFocused = RemoteConsole.ConsoleControl != null && RemoteConsole.ConsoleControl.Focused;
+                    if (RemoteConsole is RdpClient client && client.IsAttemptingConnection)
+                    {
+                        preventResetConsole = true;
+                    }
+                    if(!preventResetConsole)
+                    {
+                        RemoteConsole.DisconnectAndDispose();
+                        RemoteConsole = null;
+                    }
+                    this.vncPassword = null;
+                }
             }
+            
 
             // Reset
             haveTriedLoginWithoutPassword = false;
