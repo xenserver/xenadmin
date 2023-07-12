@@ -28,6 +28,7 @@
  * SUCH DAMAGE.
  */
 
+using System.Collections.Generic;
 using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAdmin.Diagnostics.Problems;
@@ -59,6 +60,6 @@ namespace XenAdmin.Diagnostics.Checks
 
         public override string Description => Messages.CFU_STATUS_CHECK_DESCRIPTION;
 
-        public override IXenObject XenObject => null;
+        public override IList<IXenObject> XenObjects => null;
     }
 }

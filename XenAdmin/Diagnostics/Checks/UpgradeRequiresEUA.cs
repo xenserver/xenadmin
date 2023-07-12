@@ -113,7 +113,7 @@ namespace XenAdmin.Diagnostics.Checks
                 Host.TryGetUpgradeVersion(Hosts.FirstOrDefault(), _installMethodConfig, out upgradePlatformVersion, out _);
 
             // There's no EUA for Pre-82X versions
-            if (!Helpers.Post82X(upgradePlatformVersion))
+            if (!Helpers.NileOrGreater(upgradePlatformVersion))
             {
                 return null;
             }
