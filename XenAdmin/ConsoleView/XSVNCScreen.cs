@@ -772,6 +772,8 @@ namespace XenAdmin.ConsoleView
             if (Source == null || Source.IsControlDomainZero(out _))
                 return;
 
+            _connectionPoller?.Dispose();
+
             //Start the polling again
             _connectionPoller = !Source.IsHVM()
                 ? new Timer(PollVNCPort, null, RETRY_SLEEP_TIME, RDP_POLL_INTERVAL)
