@@ -203,6 +203,12 @@
         <Property Id="INSTALLSHORTCUT" Value="1"/>
         <CustomAction Id="ClearAllUsers" Property="ALLUSERS" Value="" />
         <CustomAction Id="SetAllUsers" Property="ALLUSERS" Value="1" />
+
+        <!-- Ensure XenCenter 8.2.7 and previous versions are removed on upgrade, too -->
+        <Upgrade Id="{EA0EF50F-5CC6-452B-B09F-3F5EC564899D}">
+            <UpgradeVersion Property="XENCENTER_OLD" Minimum="0.0.0" />
+        </Upgrade>
+        
         <InstallExecuteSequence>
             <AppSearch Sequence="50" />
             <FindRelatedProducts Before="LaunchConditions" />
