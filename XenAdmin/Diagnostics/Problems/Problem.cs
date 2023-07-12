@@ -98,13 +98,13 @@ namespace XenAdmin.Diagnostics.Problems
             if (other == null)
                 return 1;
 
-            var result = string.Compare(Description, other.Description);
+            var result = string.Compare(Description, other.Description, StringComparison.InvariantCulture);
 
             if (result == 0)
-                result = string.Compare(Title, other.Title);
+                result = string.Compare(Title, other.Title, StringComparison.InvariantCulture);
 
-            if (result == 0 && Check != null && Check.XenObject != null && other.Check != null)
-                result = Check.XenObject.CompareTo(other.Check.XenObject);
+            if (result == 0 && Check?.XenObjects != null && other.Check?.XenObjects != null)
+                result = Check.XenObjects.SequenceEqual(other.Check.XenObjects) ? 0 : Check.XenObjects.Count.CompareTo(other.Check.XenObjects.Count);
 
             return result;
         }

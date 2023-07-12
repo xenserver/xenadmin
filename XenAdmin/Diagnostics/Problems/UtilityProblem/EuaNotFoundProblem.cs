@@ -29,34 +29,54 @@
  */
 
 using System.Collections.Generic;
-using XenAdmin.Diagnostics.Problems;
+using System.Linq;
 using XenAdmin.Core;
+using XenAdmin.Diagnostics.Checks;
+using XenAdmin.Dialogs;
 using XenAPI;
 
-namespace XenAdmin.Diagnostics.Checks
+namespace XenAdmin.Diagnostics.Problems.UtilityProblem
 {
-    public class ClientVersionCheck : Check
+    internal class EuaNotFoundProblem : Problem
     {
-        private readonly XenServerVersion _newServerVersion;
-
-        public ClientVersionCheck(XenServerVersion newServerVersion)
+        private readonly List<IXenObject> _hosts;
+        public EuaNotFoundProblem(Check check, List<IXenObject> hosts)
+            : base(check)
         {
-            _newServerVersion = newServerVersion;
-        }
-        
-        protected override Problem RunCheck()
-        {
-            var requiredClientVersion = Updates.GetRequiredClientVersion(_newServerVersion);
-            if (requiredClientVersion == null) 
-                return null;
-            if (_newServerVersion != null) 
-                return new ClientVersionProblem(this, requiredClientVersion);
-            else
-                return new ClientVersionWarning(this, requiredClientVersion);
+            _hosts = hosts;
         }
 
-        public override string Description => string.Format(Messages.XENCENTER_VERSION_CHECK_DESCRIPTION, BrandManager.BrandConsole);
+        public override string Description => string.Format(Messages.EUA_NOT_FOUND_PROBLEM_DESCRIPTION, BrandManager.BrandConsole);
 
-        public override IList<IXenObject> XenObjects => null;
+        public sealed override string Title => string.Empty;
+
+        public override string HelpMessage => Messages.MORE_INFO;
+
+        protected override Actions.AsyncAction CreateAction(out bool cancelled)
+        {
+            Program.Invoke(Program.MainWindow, () =>
+            {
+                using (var dlg = new InformationDialog(Messages.PROBLEM_PREPARE_TO_UPGRADE))
+                    dlg.ShowDialog();
+            });
+
+            cancelled = true;
+            return null;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is EuaNotFoundProblem item))
+            {
+                return false;
+            }
+
+            return _hosts.SequenceEqual(item._hosts);
+        }
+
+        public override int GetHashCode()
+        {
+            return _hosts.GetHashCode() ^ base.GetHashCode();
+        }
     }
 }

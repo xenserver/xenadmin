@@ -28,6 +28,7 @@
  * SUCH DAMAGE.
  */
 
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -1573,6 +1574,34 @@ namespace XenAdmin.Core
             }
 
             return queryString;
+        }
+
+        public static bool TryLoadHostEua(Host host, Uri targetUri, out string eua)
+        {
+            eua = null;
+            if (host == null || targetUri == null)
+            {
+                return false;
+            }
+            var args = new Dictionary<string, string>
+            {
+                { "url", targetUri.ToString()}
+            };
+
+            try
+            {
+                var result = Host.call_plugin(host.Connection.Session, host.opaque_ref, "prepare_host_upgrade.py", "getEUA", args);
+                var jsonPayloadDefinition = new { eua = string.Empty };
+                var parsedPayload = JsonConvert.DeserializeAnonymousType(result, jsonPayloadDefinition);
+
+                eua = parsedPayload.eua;
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+            }
+
+            return eua != null;
         }
     }
 }

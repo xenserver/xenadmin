@@ -31,6 +31,7 @@
 using System;
 using System.Collections.Generic;
 using XenAdmin.Core;
+using XenAdmin.Diagnostics.Hotfixing;
 using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Diagnostics.Problems.HostProblem;
 using XenAPI;
@@ -53,6 +54,10 @@ namespace XenAdmin.Diagnostics.Checks
 
         protected override Problem RunHostCheck()
         {
+            var hotfix = HotfixFactory.Hotfix(Host);
+            if (hotfix != null && hotfix.ShouldBeAppliedTo(Host))
+                return new HostDoesNotHaveHotfixWarning(this, Host);
+
             if (TryGetDom0MemoryPostUpgrade(out var dom0MemoryPostUpgrade))
             {
                 var currentDom0Memory = Host.dom0_memory();

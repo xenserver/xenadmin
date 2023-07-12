@@ -117,6 +117,21 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ACCEPT_EUA_CHECK_DESCRIPTION" xml:space="preserve">
+    <value>Checking for the presence of an EUA</value>
+  </data>
+  <data name="ACCEPT_EUA_CHECK_GROUP_NAME" xml:space="preserve">
+    <value>Looking for an EUA to be accepted</value>
+  </data>
+  <data name="ACCEPT_EUA_MORE_THAN_ONE_FOUND" xml:space="preserve">
+    <value>More than one EUA was fetched. Please ensure you have read all of them before accepting.</value>
+  </data>
+  <data name="ACCEPT_EUA_PROBLEM_DESCRIPTION" xml:space="preserve">
+    <value>You must accept the End User Agreement (EUA)</value>
+  </data>
+  <data name="ACCEPT_EUA_PROBLEM_HELP_MESSAGE" xml:space="preserve">
+    <value>See EUA...</value>
+  </data>
   <data name="ACTION_ACTIVATING_MULTIPLE_VDIS_STATUS" xml:space="preserve">
     <value>Activating virtual disks...</value>
   </data>
@@ -5701,6 +5716,9 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="ERROR_VM_NOT_HALTED" xml:space="preserve">
     <value>Please shut down or suspend VM '{0}' before exporting.</value>
   </data>
+  <data name="EUA_NOT_FOUND_PROBLEM_DESCRIPTION" xml:space="preserve">
+    <value>{0} encountered an issue while trying to fetch the EUA.</value>
+  </data>
   <data name="EULA" xml:space="preserve">
     <value>EULA</value>
   </data>
@@ -7324,10 +7342,13 @@ This might result in failure to migrate VMs to this server during the RPU or to 
     <value>Place &amp;all imported virtual disks on this target SR:</value>
   </data>
   <data name="IMPORT_WIZARD_CPUS_COUNT_MISMATCH_HOST" xml:space="preserve">
-    <value>The imported appliance requires a minimum of {0} vCPUs, while the number of physical CPUs in the selected server is {1}. You will not be able to start the appliance on the selected server.</value>
+    <value>At least one VM in the imported appliance requires a minimum of {0} vCPUs, but there are servers with insufficient physical CPUs ({1}). Ensure that the VMs are mapped correctly or you will not be able to start the appliance on the selected server.</value>
+  </data>
+  <data name="IMPORT_WIZARD_CPUS_COUNT_MISMATCH_HOST_ALL" xml:space="preserve">
+    <value>At least one VM in the imported appliance requires a minimum of {0} vCPUs, while the maximum number of physical CPUs in the selected servers is {1}. You will not be able to start all the VMs in the appliance with the current selection.</value>
   </data>
   <data name="IMPORT_WIZARD_CPUS_COUNT_MISMATCH_POOL" xml:space="preserve">
-    <value>The imported appliance requires a minimum of {0} vCPUs, while the maximum number of physical CPUs in the pool is {1}. You will not be able to start the appliance on the selected pool.</value>
+    <value>At least one VM in the imported appliance requires a minimum of {0} vCPUs, but not all servers have sufficient physical CPUs. You will not be able to start a VM if you place its disks in the local storage of a server with insufficient physical CPUs.</value>
   </data>
   <data name="IMPORT_WIZARD_DESTINATION_DESTINATION" xml:space="preserve">
     <value>&amp;Import to:</value>
@@ -13909,7 +13930,7 @@ Schedule:
     <value>Your selection includes VMs with attached vTPMs. If you export and re-import these VMs, the vTPM data will not be preserved. Some of the VMs' security features may be deactivated and the VMs may not start.</value>
   </data>
   <data name="VTPM_EXPORT_UNSUPPORTED_FOR_OVF" xml:space="preserve">
-    <value>VMs with attached vTPMs can only be exported in XVA format. If you export and re-import these VMs, the vTPM data will not be preserved. Some of the VMs' security features may be deactivated and the VMs may not start.</value>
+    <value>The OVF/OVA format does not preserve vTPM data. Some of the VMs' security features may be deactivated and the VMs may not start. Use the XVA format to preserve vTPM data.</value>
   </data>
   <data name="VTPM_MAX_REACHED" xml:space="preserve">
     <value>The maximum number of vTPMs that can be attached to this VM is {0}.</value>

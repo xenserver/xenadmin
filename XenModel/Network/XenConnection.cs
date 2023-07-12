@@ -334,7 +334,7 @@ namespace XenAdmin.Network
             var db = new Db(document);
             var events = db.Tables.SelectMany(t => t.Rows).Select(r => r.ObjectChange).ToList();
 
-            var session = new Session(Session.STANDARD_TIMEOUT, this, Path.GetFileName(Hostname), Port);
+            var session = new Session(this, Path.GetFileName(Hostname), Port);
             connectTask = new ConnectTask(Hostname, Port) { Connected = true, Session = session };
 
             OnBeforeMajorChange(false);
@@ -402,7 +402,7 @@ namespace XenAdmin.Network
             Session s = Session;
             if (s == null)
                 throw new DisconnectionException();
-            return new Session(s, this, timeout); 
+            return new Session(s, this) { Timeout = timeout };
         }
 
         /// <summary>
@@ -441,9 +441,10 @@ namespace XenAdmin.Network
                 // For elevated session we use the elevated username and password passed into this function, 
                 // as the connection's Username and Password are not updated.
 
-                Session session = new Session(Session.STANDARD_TIMEOUT, this, hostname, port);
+                Session session = new Session(this, hostname, port);
                 if (isElevated)
                     session.IsElevatedSession = true;
+
                 try
                 {
                     session.login_with_password(uname, pwd, Helper.APIVersionString(API_Version.LATEST), Session.UserAgent);

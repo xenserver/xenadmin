@@ -61,6 +61,51 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Checking for the presence of an EUA.
+        /// </summary>
+        public static string ACCEPT_EUA_CHECK_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("ACCEPT_EUA_CHECK_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Looking for an EUA to be accepted.
+        /// </summary>
+        public static string ACCEPT_EUA_CHECK_GROUP_NAME {
+            get {
+                return ResourceManager.GetString("ACCEPT_EUA_CHECK_GROUP_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to More than one EUA was fetched. Please ensure you have read all of them before accepting..
+        /// </summary>
+        public static string ACCEPT_EUA_MORE_THAN_ONE_FOUND {
+            get {
+                return ResourceManager.GetString("ACCEPT_EUA_MORE_THAN_ONE_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must accept the End User Agreement (EUA).
+        /// </summary>
+        public static string ACCEPT_EUA_PROBLEM_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("ACCEPT_EUA_PROBLEM_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to See EUA....
+        /// </summary>
+        public static string ACCEPT_EUA_PROBLEM_HELP_MESSAGE {
+            get {
+                return ResourceManager.GetString("ACCEPT_EUA_PROBLEM_HELP_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Activating virtual disks....
         /// </summary>
         public static string ACTION_ACTIVATING_MULTIPLE_VDIS_STATUS {
@@ -16229,6 +16274,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} encountered an issue while trying to fetch the EUA..
+        /// </summary>
+        public static string EUA_NOT_FOUND_PROBLEM_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("EUA_NOT_FOUND_PROBLEM_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to EULA.
         /// </summary>
         public static string EULA {
@@ -21000,7 +21054,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The imported appliance requires a minimum of {0} vCPUs, while the number of physical CPUs in the selected server is {1}. You will not be able to start the appliance on the selected server..
+        ///   Looks up a localized string similar to At least one VM in the imported appliance requires a minimum of {0} vCPUs, but there are servers with insufficient physical CPUs ({1}). Ensure that the VMs are mapped correctly or you will not be able to start the appliance on the selected server..
         /// </summary>
         public static string IMPORT_WIZARD_CPUS_COUNT_MISMATCH_HOST {
             get {
@@ -21009,7 +21063,16 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The imported appliance requires a minimum of {0} vCPUs, while the maximum number of physical CPUs in the pool is {1}. You will not be able to start the appliance on the selected pool..
+        ///   Looks up a localized string similar to At least one VM in the imported appliance requires a minimum of {0} vCPUs, while the maximum number of physical CPUs in the selected servers is {1}. You will not be able to start all the VMs in the appliance with the current selection..
+        /// </summary>
+        public static string IMPORT_WIZARD_CPUS_COUNT_MISMATCH_HOST_ALL {
+            get {
+                return ResourceManager.GetString("IMPORT_WIZARD_CPUS_COUNT_MISMATCH_HOST_ALL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to At least one VM in the imported appliance requires a minimum of {0} vCPUs, but not all servers have sufficient physical CPUs. You will not be able to start a VM if you place its disks in the local storage of a server with insufficient physical CPUs..
         /// </summary>
         public static string IMPORT_WIZARD_CPUS_COUNT_MISMATCH_POOL {
             get {
@@ -40315,7 +40378,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VMs with attached vTPMs can only be exported in XVA format. If you export and re-import these VMs, the vTPM data will not be preserved. Some of the VMs&apos; security features may be deactivated and the VMs may not start..
+        ///   Looks up a localized string similar to The OVF/OVA format does not preserve vTPM data. Some of the VMs&apos; security features may be deactivated and the VMs may not start. Use the XVA format to preserve vTPM data..
         /// </summary>
         public static string VTPM_EXPORT_UNSUPPORTED_FOR_OVF {
             get {

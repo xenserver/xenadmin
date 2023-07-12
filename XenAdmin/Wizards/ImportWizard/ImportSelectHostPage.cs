@@ -106,6 +106,8 @@ namespace XenAdmin.Wizards.ImportWizard
                 if (vsColl == null)
                     return;
 
+                _ovfVCpusCount.Clear();
+                _ovfMaxVCpusCount = 0;
                 foreach (var vsType in vsColl.Content)
                 {
                     var vhs = OVF.FindVirtualHardwareSectionByAffinity(SelectedOvfEnvelope, vsType.id, "xen");
@@ -113,7 +115,6 @@ namespace XenAdmin.Wizards.ImportWizard
                     if (data == null)
                         continue;
 
-                    _ovfVCpusCount.Clear();
                     foreach (var rasdType in vhs.Item)
                     {
                         // Processor
@@ -211,10 +212,10 @@ namespace XenAdmin.Wizards.ImportWizard
 
             ApplianceCanBeStarted = true;
 
-            if (!CheckDestinationHasEnoughPhysicalCpus(out var physicalCpusWarningMessage))
+            if (!CheckDestinationHasEnoughPhysicalCpus(out var physicalCpusWarningMessage, out var applianceCanBeStarted))
             {
                 warnings.Add(physicalCpusWarningMessage);
-                ApplianceCanBeStarted = false;
+                ApplianceCanBeStarted = applianceCanBeStarted;
             }
 
             if (!CheckDestinationHasEnoughMemory(out var memoryWarningMessage))
@@ -289,26 +290,50 @@ namespace XenAdmin.Wizards.ImportWizard
         /// </summary>
         public bool ApplianceCanBeStarted { get; private set; } = true;
 
-        private bool CheckDestinationHasEnoughPhysicalCpus(out string warningMessage)
+        private bool CheckDestinationHasEnoughPhysicalCpus(out string warningMessage, out bool applianceCanBeStarted)
         {
             warningMessage = string.Empty;
+            applianceCanBeStarted = false;
+            
+            // check if the current host selection
+            // can accomodate the VMs in the appliance
+            if (AllSelectedTargets.Count > 0)
+            {
+                var physicalCpus = AllSelectedTargets.Select(GetPhysicalCpus).ToList();
+                var minPhysicalCpus = physicalCpus.Min();
+                var maxPhysicalCpus = physicalCpus.Max();
+               
+                if (maxPhysicalCpus < _ovfMaxVCpusCount)
+                {
+                    // there are no hosts that can accomodate the VM with the largest amount of vCPUs
+                    warningMessage = string.Format(Messages.IMPORT_WIZARD_CPUS_COUNT_MISMATCH_HOST_ALL, _ovfMaxVCpusCount, maxPhysicalCpus);
+                    return false;
+                }
 
-            var selectedTarget = SelectedTarget ?? SelectedTargetPool;
-            var physicalCpusCount = GetPhysicalCpus(selectedTarget);
+                applianceCanBeStarted = true;
+                if (minPhysicalCpus < _ovfMaxVCpusCount)
+                {
+                    // there is a host that cannot accomodate the VM with the largest amount of vCPUs
+                    // we ask the user to make sure that the mapping they are picking is correct
+                    warningMessage = string.Format(Messages.IMPORT_WIZARD_CPUS_COUNT_MISMATCH_HOST, _ovfMaxVCpusCount, minPhysicalCpus);
+                    return false;
+                }
+            }
 
-            if (physicalCpusCount < 0 || physicalCpusCount >= _ovfMaxVCpusCount)
+            // there is no host selection, check the pool
+            var poolPhysicalCpus = GetPhysicalCpus(SelectedTargetPool);
+
+            if (poolPhysicalCpus < 0 || poolPhysicalCpus >= _ovfMaxVCpusCount)
+            {
+                applianceCanBeStarted = true;
                 return true;
-
-            if (selectedTarget is Pool)
-                warningMessage = string.Format(Messages.IMPORT_WIZARD_CPUS_COUNT_MISMATCH_POOL, _ovfMaxVCpusCount, physicalCpusCount);
-            else if (selectedTarget is Host)
-                warningMessage = string.Format(Messages.IMPORT_WIZARD_CPUS_COUNT_MISMATCH_HOST, _ovfMaxVCpusCount, physicalCpusCount);
-            else
-                return true;
-
+            }
+            
+            warningMessage = string.Format(Messages.IMPORT_WIZARD_CPUS_COUNT_MISMATCH_POOL, _ovfMaxVCpusCount, poolPhysicalCpus);
             return false;
         }
 
+       
         private bool CheckDestinationHasEnoughMemory(out string warningMessage)
         {
             warningMessage = string.Empty;

@@ -2108,6 +2108,9 @@ Authorized Roles: {1}</value>
   <data name="VGPU_TYPE_NOT_SUPPORTED" xml:space="preserve">
     <value>Virtual GPU type is not one of the GPU&apos;s supported types.</value>
   </data>
+  <data name="VGPU_TYPE_NO_LONGER_SUPPORTED" xml:space="preserve">
+    <value>VGPU type is no longer supported</value>
+  </data>
   <data name="VIFS_MAX_ALLOWED" xml:space="preserve">
     <value>You have reached the maximum number of virtual network interfaces allowed for this virtual machine.</value>
   </data>

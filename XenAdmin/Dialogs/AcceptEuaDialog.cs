@@ -28,35 +28,46 @@
  * SUCH DAMAGE.
  */
 
+using System;
 using System.Collections.Generic;
-using XenAdmin.Diagnostics.Problems;
-using XenAdmin.Core;
-using XenAPI;
 
-namespace XenAdmin.Diagnostics.Checks
+
+namespace XenAdmin.Dialogs
 {
-    public class ClientVersionCheck : Check
+    public partial class AcceptEuaDialog : XenDialogBase
     {
-        private readonly XenServerVersion _newServerVersion;
+        private readonly List<string> _euas;
+        private readonly HashSet<string> _warnings;
 
-        public ClientVersionCheck(XenServerVersion newServerVersion)
+        public AcceptEuaDialog(List<string> euas)
         {
-            _newServerVersion = newServerVersion;
+            InitializeComponent();
+            
+            _euas = euas;
+            _warnings = new HashSet<string>();
+            warningTableLayoutPanel.Visible = false;
+
+            LoadEuas();
         }
-        
-        protected override Problem RunCheck()
+
+        private void LoadEuas()
         {
-            var requiredClientVersion = Updates.GetRequiredClientVersion(_newServerVersion);
-            if (requiredClientVersion == null) 
-                return null;
-            if (_newServerVersion != null) 
-                return new ClientVersionProblem(this, requiredClientVersion);
+            if (_euas.Count > 1)
+            {
+                _warnings.Add(Messages.ACCEPT_EUA_MORE_THAN_ONE_FOUND);
+            }
+
+            if (_warnings.Count > 0)
+            {
+                warningTableLayoutPanel.Visible = true;
+                warningLabel.Text = string.Join(Environment.NewLine, _warnings);
+            }
             else
-                return new ClientVersionWarning(this, requiredClientVersion);
+            {
+                warningTableLayoutPanel.Visible = false;
+            }
+
+            euaTextBox.Text = string.Join($"{Environment.NewLine}___________________________{Environment.NewLine}", _euas);
         }
-
-        public override string Description => string.Format(Messages.XENCENTER_VERSION_CHECK_DESCRIPTION, BrandManager.BrandConsole);
-
-        public override IList<IXenObject> XenObjects => null;
     }
 }
