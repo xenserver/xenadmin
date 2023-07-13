@@ -99,7 +99,7 @@ namespace XenAdmin.Alerts
         {
             get
             {
-                return string.Format("{0}UsageMessageAlert", Message.Type);
+                return "LeafCoalesceAlert";
             }
         }
     }
