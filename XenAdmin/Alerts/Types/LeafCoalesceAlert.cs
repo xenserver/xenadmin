@@ -37,27 +37,23 @@ namespace XenAdmin.Alerts
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private string vmID;
+        private readonly VM _vm;
 
         public LeafCoalesceAlert(Message msg)
             : base(msg)
         {
-            MapVdiToVm(msg);
-        }
-
-        private void MapVdiToVm(Message msg)
-        {            
             var obj = msg.GetXenObject();
-            
+
             if (obj is VDI vdi && vdi.Connection != null)
             {
                 foreach (VBD vbd in vdi.Connection.ResolveAll(vdi.VBDs))
-                {                   
+                {
                     VM vm = vbd.Connection.Resolve(vbd.VM);
                     // look for if VBD is attached, only 1 can be attached at a time
-                    if (vbd.currently_attached && vm != null) 
+                    if (vbd.currently_attached && vm != null)
                     {
-                        vmID = vm.uuid;
+                        _vm = vm;
+                        break;
                     }
                 }
             }
@@ -70,11 +66,11 @@ namespace XenAdmin.Alerts
                 switch (Message.Type)
                 {
                     case MessageType.LEAF_COALESCE_START_MESSAGE:
-                        return string.Format(Messages.LEAF_COALESCE_START_DESCRIPTION, vmID);
+                        return string.Format(Messages.LEAF_COALESCE_START_DESCRIPTION, _vm.name_label);
                     case MessageType.LEAF_COALESCE_COMPLETED:
-                        return string.Format(Messages.LEAF_COALESCE_COMPLETED_DESCRIPTION, vmID);
+                        return string.Format(Messages.LEAF_COALESCE_COMPLETED_DESCRIPTION, _vm.name_label);
                     case MessageType.LEAF_COALESCE_FAILED:
-                        return string.Format(Messages.LEAF_COALESCE_FAILED_DESCRIPTION, vmID);
+                        return string.Format(Messages.LEAF_COALESCE_FAILED_DESCRIPTION, _vm.name_label);
                     default:
                         return base.Description;
                 }
