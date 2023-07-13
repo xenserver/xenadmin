@@ -37,13 +37,11 @@ namespace XenAdmin.Alerts
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private MessageType LeafType;
         private string vmID;
 
         public LeafCoalesceAlert(Message msg)
             : base(msg)
         {
-            LeafType = msg.Type;
             MapVdiToVm(msg);
         }
 
@@ -69,7 +67,7 @@ namespace XenAdmin.Alerts
         {
             get
             {
-                switch (LeafType)
+                switch (Message.Type)
                 {
                     case MessageType.LEAF_COALESCE_START_MESSAGE:
                         return string.Format(Messages.LEAF_COALESCE_START_DESCRIPTION, vmID);
@@ -87,7 +85,7 @@ namespace XenAdmin.Alerts
         {
             get
             {
-                switch (LeafType)
+                switch (Message.Type)
                 {
                     case MessageType.LEAF_COALESCE_START_MESSAGE:
                         return Messages.LEAF_COALESCE_START_TITLE;
@@ -105,7 +103,7 @@ namespace XenAdmin.Alerts
         {
             get
             {
-                return string.Format("{0}UsageMessageAlert", LeafType);
+                return string.Format("{0}UsageMessageAlert", Message.Type);
             }
         }
     }
