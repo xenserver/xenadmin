@@ -46,14 +46,19 @@ namespace XenAdmin.Alerts
 
             if (obj is VDI vdi && vdi.Connection != null)
             {
-                foreach (VBD vbd in vdi.Connection.ResolveAll(vdi.VBDs))
+                foreach (var vbdRef in vdi.VBDs)
                 {
-                    VM vm = vbd.Connection.Resolve(vbd.VM);
-                    // look for if VBD is attached, only 1 can be attached at a time
-                    if (vbd.currently_attached && vm != null)
+                    var vbd = vdi.Connection.Resolve(vbdRef);
+
+                    if (vbd != null && vbd.currently_attached)
                     {
-                        _vm = vm;
-                        break;
+                        VM vm = vbd.Connection.Resolve(vbd.VM);
+
+                        if (vm != null)
+                        {
+                            _vm = vm;
+                            break;
+                        }
                     }
                 }
             }
