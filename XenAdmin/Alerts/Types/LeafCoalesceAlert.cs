@@ -66,11 +66,11 @@ namespace XenAdmin.Alerts
                 switch (Message.Type)
                 {
                     case MessageType.LEAF_COALESCE_START_MESSAGE:
-                        return string.Format(Messages.LEAF_COALESCE_START_DESCRIPTION, _vm.name_label);
+                        return string.Format(Messages.LEAF_COALESCE_START_DESCRIPTION, _vm.Name());
                     case MessageType.LEAF_COALESCE_COMPLETED:
-                        return string.Format(Messages.LEAF_COALESCE_COMPLETED_DESCRIPTION, _vm.name_label);
+                        return string.Format(Messages.LEAF_COALESCE_COMPLETED_DESCRIPTION, _vm.Name());
                     case MessageType.LEAF_COALESCE_FAILED:
-                        return string.Format(Messages.LEAF_COALESCE_FAILED_DESCRIPTION, _vm.name_label);
+                        return string.Format(Messages.LEAF_COALESCE_FAILED_DESCRIPTION, _vm.Name());
                     default:
                         return base.Description;
                 }
