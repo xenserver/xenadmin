@@ -224,10 +224,10 @@
     <Compile Include="OtherConfigWatcher.cs" />
     <Compile Include="PoolJoinRules.cs" />
     <Compile Include="Tags.cs" />
-    <Compile Include="WLB\RetrieveWlbConfigurationAction.cs" />
+    <Compile Include="Actions\WLB\RetrieveWlbConfigurationAction.cs" />
     <Compile Include="WLB\WlbHostEvacuationRecommendation.cs" />
     <Compile Include="WLB\WlbOptimizationRecommendation.cs" />
-    <Compile Include="WLB\WlbReportAction.cs" />
+    <Compile Include="Actions\WLB\WlbReportAction.cs" />
     <Compile Include="XenAdminConfigManager.cs" />
     <Compile Include="Actions\AD\AddRemoveRolesAction.cs" />
     <Compile Include="Actions\AD\AddRemoveSubjectsAction.cs" />

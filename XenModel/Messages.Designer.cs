@@ -11890,60 +11890,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dell EqualLogic.
-        /// </summary>
-        public static string CSLG_DELL_DIRECT {
-            get {
-                return ResourceManager.GetString("CSLG_DELL_DIRECT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Direct Connection.
-        /// </summary>
-        public static string CSLG_DIRECT_CONNECTION {
-            get {
-                return ResourceManager.GetString("CSLG_DIRECT_CONNECTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to NetApp.
-        /// </summary>
-        public static string CSLG_NETAPP_DIRECT {
-            get {
-                return ResourceManager.GetString("CSLG_NETAPP_DIRECT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &amp;Storage adapter:.
-        /// </summary>
-        public static string CSLG_STORAGEADAPTER {
-            get {
-                return ResourceManager.GetString("CSLG_STORAGEADAPTER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to StorageLink adapters.
-        /// </summary>
-        public static string CSLG_STORAGELINK_ADAPTERS {
-            get {
-                return ResourceManager.GetString("CSLG_STORAGELINK_ADAPTERS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to StorageLink Server ({0}).
-        /// </summary>
-        public static string CSLG_STORAGELINK_SERVER {
-            get {
-                return ResourceManager.GetString("CSLG_STORAGELINK_SERVER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Comma Separated Value.
         /// </summary>
         public static string CSV_DESCRIPTION {
