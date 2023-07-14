@@ -21875,56 +21875,29 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Data merge for VM {0} completed.
+        ///   Looks up a localized string similar to Data merge for VDI &apos;{0}&apos; of VM &apos;{1}&apos; has completed..
         /// </summary>
-        public static string LEAF_COALESCE_COMPLETED_DESCRIPTION {
+        public static string LEAF_COALESCE_COMPLETED {
             get {
-                return ResourceManager.GetString("LEAF_COALESCE_COMPLETED_DESCRIPTION", resourceCulture);
+                return ResourceManager.GetString("LEAF_COALESCE_COMPLETED", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Leaf coalesce completed.
+        ///   Looks up a localized string similar to Data merge for VDI &apos;{0}&apos; of VM &apos;{1}&apos; has failed..
         /// </summary>
-        public static string LEAF_COALESCE_COMPLETED_TITLE {
+        public static string LEAF_COALESCE_FAILED {
             get {
-                return ResourceManager.GetString("LEAF_COALESCE_COMPLETED_TITLE", resourceCulture);
+                return ResourceManager.GetString("LEAF_COALESCE_FAILED", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Data merge for VM {0} failed.
+        ///   Looks up a localized string similar to Data merge for VDI &apos;{0}&apos; of VM &apos;{1}&apos; has started, performance may be reduced..
         /// </summary>
-        public static string LEAF_COALESCE_FAILED_DESCRIPTION {
+        public static string LEAF_COALESCE_START {
             get {
-                return ResourceManager.GetString("LEAF_COALESCE_FAILED_DESCRIPTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Leaf coalesce failed.
-        /// </summary>
-        public static string LEAF_COALESCE_FAILED_TITLE {
-            get {
-                return ResourceManager.GetString("LEAF_COALESCE_FAILED_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Data is being merged for VM {0}, performance may be reduced.
-        /// </summary>
-        public static string LEAF_COALESCE_START_DESCRIPTION {
-            get {
-                return ResourceManager.GetString("LEAF_COALESCE_START_DESCRIPTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Leaf coalesce started.
-        /// </summary>
-        public static string LEAF_COALESCE_START_TITLE {
-            get {
-                return ResourceManager.GetString("LEAF_COALESCE_START_TITLE", resourceCulture);
+                return ResourceManager.GetString("LEAF_COALESCE_START", resourceCulture);
             }
         }
         
