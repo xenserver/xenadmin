@@ -158,32 +158,35 @@ namespace XenAdmin.Alerts
                 {
                     case Message.MessageType.POOL_CA_CERTIFICATE_EXPIRED:
                         var pool1 = Helpers.GetPoolOfOne(Connection);
-                        return string.Format(Messages.CERTIFICATE_CA_ALERT_EXPIRED_DESCIRPTION, objectName, pool1.Name(), GetExpiryDate());
+                        return string.Format(Messages.CERTIFICATE_CA_ALERT_EXPIRED_DESCIRPTION, objectName, pool1.Name(),
+                            AlertExtensions.GetGuiDate(_certificateExpiryDate));
 
                     case Message.MessageType.POOL_CA_CERTIFICATE_EXPIRING_07:
                     case Message.MessageType.POOL_CA_CERTIFICATE_EXPIRING_14:
                     case Message.MessageType.POOL_CA_CERTIFICATE_EXPIRING_30:
                         var pool2 = Helpers.GetPoolOfOne(Connection);
                         return string.Format(Messages.CERTIFICATE_CA_ALERT_EXPIRING_DESCRIPTION,
-                            objectName, pool2.Name(), GetExpiryDate());
+                            objectName, pool2.Name(), AlertExtensions.GetGuiDate(_certificateExpiryDate));
 
                     case Message.MessageType.HOST_INTERNAL_CERTIFICATE_EXPIRED:
-                        return string.Format(Messages.CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRED_DESCIRPTION, objectName, GetExpiryDate());
+                        return string.Format(Messages.CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRED_DESCIRPTION,
+                            objectName, AlertExtensions.GetGuiDate(_certificateExpiryDate));
 
                     case Message.MessageType.HOST_INTERNAL_CERTIFICATE_EXPIRING_07:
                     case Message.MessageType.HOST_INTERNAL_CERTIFICATE_EXPIRING_14:
                     case Message.MessageType.HOST_INTERNAL_CERTIFICATE_EXPIRING_30:
                         return string.Format(Messages.CERTIFICATE_HOST_INTERNAL_ALERT_EXPIRING_DESCRIPTION,
-                            objectName, GetExpiryDate());
+                            objectName, AlertExtensions.GetGuiDate(_certificateExpiryDate));
 
                     case Message.MessageType.HOST_SERVER_CERTIFICATE_EXPIRED:
-                        return string.Format(Messages.CERTIFICATE_HOST_ALERT_EXPIRED_DESCIRPTION, objectName, GetExpiryDate());
+                        return string.Format(Messages.CERTIFICATE_HOST_ALERT_EXPIRED_DESCIRPTION, objectName,
+                                AlertExtensions.GetGuiDate(_certificateExpiryDate));
 
                     case Message.MessageType.HOST_SERVER_CERTIFICATE_EXPIRING_07:
                     case Message.MessageType.HOST_SERVER_CERTIFICATE_EXPIRING_14:
                     case Message.MessageType.HOST_SERVER_CERTIFICATE_EXPIRING_30:
                         return string.Format(Messages.CERTIFICATE_HOST_ALERT_EXPIRING_DESCRIPTION,
-                            objectName, GetExpiryDate());
+                            objectName, AlertExtensions.GetGuiDate(_certificateExpiryDate));
 
                     default:
                         return base.Title;
@@ -237,19 +240,5 @@ namespace XenAdmin.Alerts
         public override string HelpID => "CertificateAlert";
 
         public override string HelpLinkText => Messages.ALERT_GENERIC_HELP;
-
-        private string GetExpiryDate()
-        {
-            string date = string.Empty;
-
-            Program.Invoke(Program.MainWindow,
-                () =>
-                {
-                    if (_certificateExpiryDate.HasValue)
-                        date = HelpersGUI.DateTimeToString(_certificateExpiryDate.Value.ToLocalTime(), Messages.DATEFORMAT_DMY_HM, true);
-                });
-
-            return date;
-        }
     }
 }

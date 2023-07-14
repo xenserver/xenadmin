@@ -1834,6 +1834,27 @@ This alarm is set to be triggered when the total throughput exceeds {4}.</value>
   <data name="ALERT_CPUS_SUB_TEXT" xml:space="preserve">
     <value>When CPU usage exceeds {0}% for {1} min(s)</value>
   </data>
+  <data name="ALERT_CSS_EXPIRED_DESCIRPTION" xml:space="preserve">
+    <value>Your Customer Success Services (CSS) agreement expired on {0}.</value>
+  </data>
+  <data name="ALERT_CSS_EXPIRED_LINK_TEXT" xml:space="preserve">
+    <value>Renew CSS Agreement</value>
+  </data>
+  <data name="ALERT_CSS_EXPIRED_TITLE" xml:space="preserve">
+    <value>Your CSS agreement has expired</value>
+  </data>
+  <data name="ALERT_CSS_EXPIRING_DESCRIPTION" xml:space="preserve">
+    <value>Your Customer Success Services (CSS) agreement will expire on {0}.</value>
+  </data>
+  <data name="ALERT_CSS_EXPIRING_TITLE_DAYS" xml:space="preserve">
+    <value>Your CSS agreement is expiring in {0} day(s)</value>
+  </data>
+  <data name="ALERT_CSS_EXPIRING_TITLE_HOURS" xml:space="preserve">
+    <value>Your CSS agreement is expiring in {0} hour(s)</value>
+  </data>
+  <data name="ALERT_CSS_EXPIRING_TITLE_MINUTES" xml:space="preserve">
+    <value>Your CSS agreement is expiring in {0} minute(s)</value>
+  </data>
   <data name="ALERT_DISK_SUB_TEXT" xml:space="preserve">
     <value>When disk usage exceeds {0} for {1} min(s)</value>
   </data>

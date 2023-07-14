@@ -4994,6 +4994,69 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your Customer Success Services (CSS) agreement expired on {0}..
+        /// </summary>
+        public static string ALERT_CSS_EXPIRED_DESCIRPTION {
+            get {
+                return ResourceManager.GetString("ALERT_CSS_EXPIRED_DESCIRPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Renew CSS Agreement.
+        /// </summary>
+        public static string ALERT_CSS_EXPIRED_LINK_TEXT {
+            get {
+                return ResourceManager.GetString("ALERT_CSS_EXPIRED_LINK_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your CSS agreement has expired.
+        /// </summary>
+        public static string ALERT_CSS_EXPIRED_TITLE {
+            get {
+                return ResourceManager.GetString("ALERT_CSS_EXPIRED_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your Customer Success Services (CSS) agreement will expire on {0}..
+        /// </summary>
+        public static string ALERT_CSS_EXPIRING_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("ALERT_CSS_EXPIRING_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your CSS agreement is expiring in {0} day(s).
+        /// </summary>
+        public static string ALERT_CSS_EXPIRING_TITLE_DAYS {
+            get {
+                return ResourceManager.GetString("ALERT_CSS_EXPIRING_TITLE_DAYS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your CSS agreement is expiring in {0} hour(s).
+        /// </summary>
+        public static string ALERT_CSS_EXPIRING_TITLE_HOURS {
+            get {
+                return ResourceManager.GetString("ALERT_CSS_EXPIRING_TITLE_HOURS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your CSS agreement is expiring in {0} minute(s).
+        /// </summary>
+        public static string ALERT_CSS_EXPIRING_TITLE_MINUTES {
+            get {
+                return ResourceManager.GetString("ALERT_CSS_EXPIRING_TITLE_MINUTES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to When disk usage exceeds {0} for {1} min(s).
         /// </summary>
         public static string ALERT_DISK_SUB_TEXT {

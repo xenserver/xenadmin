@@ -669,18 +669,18 @@ namespace XenAdmin.TabPages
         {
             var items = new List<ToolStripItem>();
 
-            if (alert.AllowedToDismiss())
-            {
-                var dismiss = new ToolStripMenuItem(Messages.ALERT_DISMISS);
-                dismiss.Click += ToolStripMenuItemDismiss_Click;
-                items.Add(dismiss);
-            }
-
             if (!string.IsNullOrEmpty(alert.FixLinkText) && alert.FixLinkAction != null)
             {
                 var fix = new ToolStripMenuItem(alert.FixLinkText);
                 fix.Click += ToolStripMenuItemFix_Click;
                 items.Add(fix);
+            }
+
+            if (alert.AllowedToDismiss())
+            {
+                var dismiss = new ToolStripMenuItem(Messages.ALERT_DISMISS);
+                dismiss.Click += ToolStripMenuItemDismiss_Click;
+                items.Add(dismiss);
             }
 
             if (!string.IsNullOrEmpty(alert.HelpID))

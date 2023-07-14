@@ -172,20 +172,6 @@ namespace XenAdmin.Alerts
             public string Originator { get; set;}
             public string Username { get; set;}
             public string Useragent { get; set;}
-            
-            private string GetFriendlyDate()
-            {
-                string date = string.Empty;
-
-                Program.Invoke(Program.MainWindow,
-                    () =>
-                    {
-                        if (Date.HasValue)
-                            date = HelpersGUI.DateTimeToString(Date.Value.ToLocalTime(), Messages.DATEFORMAT_DMY_HM, true);
-                    });
-
-                return date;
-            }
 
             public override string ToString()
             {
@@ -197,7 +183,7 @@ namespace XenAdmin.Alerts
                 if (Number > 0)
                     entries.Add(string.Format(Messages.ALERT_FAILED_LOGIN_ATTEMPT_OFFENDER_NUMBER, Number));
 
-                var friendlyDate = GetFriendlyDate();
+                var friendlyDate = AlertExtensions.GetGuiDate(Date);
                 if (!string.IsNullOrEmpty(friendlyDate))
                     entries.Add(string.Format(Messages.ALERT_FAILED_LOGIN_ATTEMPT_OFFENDER_DATE, friendlyDate));
                 
