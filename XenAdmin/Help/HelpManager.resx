@@ -270,6 +270,9 @@
   <data name="CrossPoolMigrateWizard_TransferNetworkPane" xml:space="preserve">
     <value>vms-relocate</value>
   </data>
+  <data name="CssExpiryAlert" xml:space="preserve">
+    <value></value>
+  </data>
   <data name="CustomFieldsDialog" xml:space="preserve">
     <value>resources-customfields</value>
   </data>

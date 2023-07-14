@@ -102,6 +102,7 @@
     <Compile Include="Actions\GUIActions\SaveDataSourceStateAction.cs" />
     <Compile Include="Actions\GUIActions\SearchAction.cs" />
     <Compile Include="Alerts\NewVersionPriorityAlertComparer.cs" />
+    <Compile Include="Alerts\Types\CssExpiryAlert.cs" />
     <Compile Include="Alerts\Types\FailedLoginAttemptAlert.cs" />
     <Compile Include="Alerts\Types\CertificateAlert.cs" />
     <Compile Include="Alerts\Types\AlarmMessageAlert.cs" />

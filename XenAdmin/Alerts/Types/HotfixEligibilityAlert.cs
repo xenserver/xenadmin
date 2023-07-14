@@ -43,7 +43,7 @@ namespace XenAdmin.Alerts.Types
         public HotfixEligibilityAlert(IXenConnection connection, XenServerVersion version)
         {
             Connection = connection;
-            this.Version = version;
+            Version = version;
             pool = Helpers.GetPoolOfOne(connection);
             _timestamp = DateTime.Now;
         }
@@ -67,7 +67,7 @@ namespace XenAdmin.Alerts.Types
                     // all + the EOL date is known -> "Approaching EOL" alert
                     case hotfix_eligibility.all when Version.EolDate != DateTime.MinValue:
                         return string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_TITLE_APPROACHING_EOL,
-                            productVersionText, GetEolDate());
+                            productVersionText, AlertExtensions.GetGuiDate(Version.EolDate));
 
                     // premium + unlicensed host -> "EOL for express customers" alert
                     case hotfix_eligibility.premium when unlicensed:
@@ -76,7 +76,7 @@ namespace XenAdmin.Alerts.Types
                     // premium + licensed host and the EOL date is known -> "Approaching EOL" alert
                     case hotfix_eligibility.premium when Version.EolDate != DateTime.MinValue:
                         return string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_TITLE_APPROACHING_EOL,
-                            productVersionText, GetEolDate());
+                            productVersionText, AlertExtensions.GetGuiDate(Version.EolDate));
 
                     // cu -> "EOL for express customers" / "CU for licensed customers" alert
                     case hotfix_eligibility.cu when pool.IsFreeLicenseOrExpired():
@@ -113,36 +113,36 @@ namespace XenAdmin.Alerts.Types
                     // all + the EOL date is known -> "Approaching EOL" alert
                     case hotfix_eligibility.all when unlicensed && Version.EolDate != DateTime.MinValue:
                         return string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_APPROACHING_EOL_FREE,
-                            productVersionText, GetEolDate(), versionText);
+                            productVersionText, AlertExtensions.GetGuiDate(Version.EolDate), versionText);
                     case hotfix_eligibility.all when Version.EolDate != DateTime.MinValue:
                         return string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_APPROACHING_EOL,
-                            productVersionText, GetEolDate(), versionText);
+                            productVersionText, AlertExtensions.GetGuiDate(Version.EolDate), versionText);
 
                     // premium + unlicensed host -> "EOL for express customers" alert
                     case hotfix_eligibility.premium when unlicensed && Version.HotfixEligibilityPremiumDate != DateTime.MinValue: 
                         return string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_FREE,
-                            productVersionText, GetPremiumDate());
+                            productVersionText, AlertExtensions.GetGuiDate(Version.HotfixEligibilityPremiumDate));
                     
                     // premium + licensed host and the EOL date is known -> "Approaching EOL" alert
                     case hotfix_eligibility.premium when !unlicensed && Version.EolDate != DateTime.MinValue:
                         return string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_APPROACHING_EOL,
-                            productVersionText, GetEolDate(), versionText);
+                            productVersionText, AlertExtensions.GetGuiDate(Version.EolDate), versionText);
 
                     // cu -> "EOL for express customers" / "CU for licensed customers" alert
                     case hotfix_eligibility.cu when unlicensed && Version.HotfixEligibilityPremiumDate != DateTime.MinValue:
                         return string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_FREE,
-                            productVersionText, GetPremiumDate());
+                            productVersionText, AlertExtensions.GetGuiDate(Version.HotfixEligibilityPremiumDate));
                     case hotfix_eligibility.cu when !unlicensed && Version.HotfixEligibilityNoneDate != DateTime.MinValue:
                         return string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_CU, productVersionText,
-                            GetNoneDate(), versionText);
+                            AlertExtensions.GetGuiDate(Version.HotfixEligibilityNoneDate), versionText);
 
                     // none -> EOL alert
                     case hotfix_eligibility.none when unlicensed && Version.EolDate != DateTime.MinValue:
                         return string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_EOL_FREE,
-                            productVersionText, GetEolDate());
+                            productVersionText, AlertExtensions.GetGuiDate(Version.EolDate));
                     case hotfix_eligibility.none when Version.EolDate != DateTime.MinValue:
                         return string.Format(Messages.HOTFIX_ELIGIBILITY_ALERT_DESCRIPTION_EOL,
-                            productVersionText, GetEolDate());
+                            productVersionText, AlertExtensions.GetGuiDate(Version.EolDate));
 
                     // everything else
                     default:
@@ -200,45 +200,6 @@ namespace XenAdmin.Alerts.Types
                 default:
                     return false;
             }
-        }
-
-
-        private string GetEolDate()
-        {
-            string date = string.Empty;
-
-            Program.Invoke(Program.MainWindow, () =>
-            {
-                date = HelpersGUI.DateTimeToString(Version.EolDate.ToLocalTime(), Messages.DATEFORMAT_DMY, true);
-            });
-
-            return date;
-        }
-
-        private string GetPremiumDate()
-        {
-            string date = string.Empty;
-
-            Program.Invoke(Program.MainWindow, () =>
-            {
-                date = HelpersGUI.DateTimeToString(Version.HotfixEligibilityPremiumDate.ToLocalTime(),
-                    Messages.DATEFORMAT_DMY, true);
-            });
-
-            return date;
-        }
-
-        private string GetNoneDate()
-        {
-            string date = string.Empty;
-
-            Program.Invoke(Program.MainWindow, () =>
-            {
-                date = HelpersGUI.DateTimeToString(Version.HotfixEligibilityNoneDate.ToLocalTime(),
-                    Messages.DATEFORMAT_DMY, true);
-            });
-
-            return date;
         }
     }
 }

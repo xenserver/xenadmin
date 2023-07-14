@@ -123,6 +123,9 @@
   <data name="CLIENT_ID_URL" xml:space="preserve">
     <value>https://support.citrix.com/xencenterclientiddownload</value>
   </data>
+  <data name="CSS_URL" xml:space="preserve">
+    <value>https://www.citrix.com/support/programs/</value>
+  </data>
   <data name="DEPRECATION_URL" xml:space="preserve">
     <value>http://docs.citrix.com/en-us/citrix-hypervisor/whats-new/removed-features.html</value>
   </data>

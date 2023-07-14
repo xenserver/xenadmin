@@ -77,5 +77,19 @@ namespace XenAdmin.Alerts
                                  date.EscapeQuotes(),
                                  a.WebPageLabel.EscapeQuotes());
         }
+
+        public static string GetGuiDate(DateTime? dateTime)
+        {
+            string date = string.Empty;
+
+            Program.Invoke(Program.MainWindow,
+                () =>
+                {
+                    if (dateTime.HasValue)
+                        date = HelpersGUI.DateTimeToString(dateTime.Value.ToLocalTime(), Messages.DATEFORMAT_DMY_HM, true);
+                });
+
+            return date;
+        }
     }
 }
