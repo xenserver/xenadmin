@@ -29,6 +29,7 @@
  */
 
 using XenAdmin.Core;
+using XenAdmin.Wlb;
 using XenAPI;
 
 
@@ -42,12 +43,12 @@ namespace XenAdmin.Actions.Wlb
         private readonly string _wlbPassword;
         private readonly string _xenServerUserName;
         private readonly string _xenServerPassword;
-        private static string OPTIMIZINGPOOL = "wlb_optimizing_pool";
+        private const string OPTIMIZING_POOL = "wlb_optimizing_pool";
 
         public InitializeWLBAction(Pool pool, string wlbUrl, string wlbUserName, string wlbPassword, string xenServerUserName, string xenServerPassword)
             : base(pool.Connection, string.Format(Messages.INITIALIZING_WLB_ON, Helpers.GetName(pool).Ellipsise(50)), Messages.INITIALIZING_WLB, false)
         {
-            this.Pool = pool;
+            Pool = pool;
             _wlbUrl = wlbUrl;
             _wlbUserName = wlbUserName;
             _wlbPassword = wlbPassword;
@@ -55,8 +56,8 @@ namespace XenAdmin.Actions.Wlb
             _xenServerPassword = xenServerPassword;
 
             #region RBAC Dependencies
-            ApiMethodsToRoleCheck.Add("vm.assert_agile");
-            ApiMethodsToRoleCheck.Add("pool.initialize_wlb");
+
+            ApiMethodsToRoleCheck.AddRange("vm.assert_agile", "pool.initialize_wlb");
             ApiMethodsToRoleCheck.AddRange(Role.CommonTaskApiList);
             ApiMethodsToRoleCheck.AddRange(Role.CommonSessionApiList);
             #endregion
@@ -68,29 +69,29 @@ namespace XenAdmin.Actions.Wlb
             try
             {
                 log.Debug("Initializing Workload Balancing for pool " + Pool.Name());
-                RelatedTask = XenAPI.Pool.async_initialize_wlb(this.Session, _wlbUrl, _wlbUserName, _wlbPassword, _xenServerUserName, _xenServerPassword);
+                RelatedTask = Pool.async_initialize_wlb(Session, _wlbUrl, _wlbUserName, _wlbPassword, _xenServerUserName, _xenServerPassword);
                 PollToCompletion();
                 log.Debug("Success initializing WLB on pool " + Pool.Name());
-                this.Description = Messages.COMPLETED;
+                Description = Messages.COMPLETED;
 
                 //Clear the Optimizing Pool flag in case it was left behind
-                Helpers.SetOtherConfig(this.Session, this.Pool, OPTIMIZINGPOOL, string.Empty);
+                Helpers.SetOtherConfig(Session, Pool, OPTIMIZING_POOL, string.Empty);
             }
             catch (Failure e)
             {
                 if (e.Message == FriendlyErrorNames.WLB_INTERNAL_ERROR)
                 {
-                    Failure f = new Failure(new string[] { Messages.ResourceManager.GetString("WLB_ERROR_" + e.ErrorDescription[1]) });
-                    throw (f);
+                    var wlbError = WlbServerState.ConvertWlbError(e.ErrorDescription[1]);
+
+                    if (wlbError != null)
+                        throw new Failure(wlbError);
                 }
                 else if (e.ErrorDescription[0] == FriendlyErrorNames.INTERNAL_ERROR)
                 {
-                    Failure f = new Failure(new string[] { Messages.ResourceManager.GetString("WLB_ERROR_SERVER_NOT_FOUND") });
+                    throw new Failure(Messages.WLB_ERROR_SERVER_NOT_FOUND);
                 }
-                else
-                {
-                    throw (e);
-                }
+
+                throw;
             }
         }
 

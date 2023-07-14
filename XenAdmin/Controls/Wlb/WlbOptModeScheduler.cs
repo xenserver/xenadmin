@@ -432,35 +432,27 @@ namespace XenAdmin.Controls.Wlb
         }
 
 
-        private static string GetTaskDayOfWeek(WlbScheduledTask.WlbTaskDaysOfWeek taskDaysOfWeek)
-        {
-            return WlbScheduledTask.DaysOfWeekL10N(taskDaysOfWeek);
-        }
-
         private static string GetTaskDayOfWeek(WlbScheduledTask.WlbTaskDaysOfWeek taskDaysOfWeek,
             WlbScheduledTask.WlbTaskDaysOfWeek taskDaysofWeekSortedList)
         {
-            string returnStr = "";
-            returnStr += WlbScheduledTask.DaysOfWeekL10N(taskDaysOfWeek);
+            string day = WlbScheduledTask.DaysOfWeekL10N(taskDaysOfWeek);
 
             //count the bits set in days of week.
             //this workaround had to be made to determine whether the original task was set for
             //weekends/weekdays/alldays
             uint bitCount = Bitcount((int)taskDaysofWeekSortedList);
-            if (bitCount == 2)
+
+            switch (bitCount)
             {
-                returnStr += " (" + Messages.ResourceManager.GetString("WLB_DAY_WEEKENDS") + ")";
+                case 2:
+                    return $"{day} ({Messages.WLB_DAY_WEEKENDS})";
+                case 5:
+                    return $"{day} ({Messages.WLB_DAY_WEEKDAYS})";
+                case 7:
+                    return $"{day} ({Messages.WLB_DAY_ALL})";
+                default:
+                    return day;
             }
-            else if (bitCount == 5)
-            {
-                returnStr += " (" + Messages.ResourceManager.GetString("WLB_DAY_WEEKDAYS") + ")";
-            }
-            else if (bitCount == 7)
-            {
-                returnStr += " (" + Messages.ResourceManager.GetString("WLB_DAY_ALL") + ")";
-            }
-            
-            return returnStr;
         }
 
         public static string GetTaskRunTime(DateTime time)

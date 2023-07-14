@@ -41771,6 +41771,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to WLB received an argument from the server that is not implemented..
+        /// </summary>
+        public static string WLB_ERROR_4006 {
+            get {
+                return ResourceManager.GetString("WLB_ERROR_4006", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to WLB received an invalid argument from the server..
         /// </summary>
         public static string WLB_ERROR_4007 {

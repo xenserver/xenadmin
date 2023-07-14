@@ -14398,6 +14398,9 @@ A {1} user cannot alter the Workload Balancing settings.</value>
   <data name="WLB_ERROR_4005" xml:space="preserve">
     <value>WLB registry key is missing.</value>
   </data>
+  <data name="WLB_ERROR_4006" xml:space="preserve">
+    <value>WLB received an argument from the server that is not implemented.</value>
+  </data>
   <data name="WLB_ERROR_4007" xml:space="preserve">
     <value>WLB received an invalid argument from the server.</value>
   </data>

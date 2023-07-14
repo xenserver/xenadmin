@@ -78,8 +78,13 @@ namespace XenAdmin.Actions.Wlb
                     WlbServerState.SetState(Pool, WlbServerState.ServerState.ConnectionError, ex);
 
                 if (ex.Message == FriendlyErrorNames.WLB_INTERNAL_ERROR)
-                    throw new Failure(Messages.ResourceManager.GetString("WLB_ERROR_" + ex.ErrorDescription[1]));
-                
+                {
+                    var wlbError = WlbServerState.ConvertWlbError(ex.ErrorDescription[1]);
+
+                    if (wlbError != null)
+                        throw new Failure(wlbError);
+                }
+
                 throw;
             }
         }
