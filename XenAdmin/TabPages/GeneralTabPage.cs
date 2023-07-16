@@ -971,19 +971,20 @@ namespace XenAdmin.TabPages
 
         private void GenerateLicenseBox()
         {
-            Host host = xenObject as Host;
-            if (host == null)
+            if (!(xenObject is Host host))
                 return;
 
             PDSection s = pdSectionLicense;
 
             if (host.CanShowTrialEditionUpsell())
             {
-                pdSectionLicense.AddEntryLink(Messages.WARNING, Messages.TRIAL_EDITION_UPSELLING_MESSAGE,  () => Program.OpenURL(InvisibleMessages.LICENSE_BUY_URL));
+                pdSectionLicense.AddEntryWithNoteLink(Messages.WARNING, Messages.TRIAL_EDITION_UPSELLING_MESSAGE,
+                    Messages.LICENSE_MANAGER_BUY_LICENSE_LINK_TEXT, () => Program.OpenURL(InvisibleMessages.LICENSE_BUY_URL));
             }
             else if (host.CssLicenseHasExpired())
             {
-                pdSectionLicense.AddEntryLink(Messages.WARNING, Messages.EXPIRED_CSS_UPSELLING_MESSAGE_HOST, () => Program.OpenURL(InvisibleMessages.LICENSE_BUY_URL));
+                pdSectionLicense.AddEntryWithNoteLink(Messages.WARNING, Messages.EXPIRED_CSS_UPSELLING_MESSAGE_HOST,
+                    Messages.LICENSE_MANAGER_BUY_LICENSE_LINK_TEXT, () => Program.OpenURL(InvisibleMessages.LICENSE_BUY_URL));
             }
 
             if (host.license_params == null)

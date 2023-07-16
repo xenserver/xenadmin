@@ -5793,7 +5793,7 @@ Would you like to eject these ISOs before continuing?</value>
     <value>E&amp;xpand All</value>
   </data>
   <data name="EXPIRED_CSS_UPSELLING_MESSAGE_HOST" xml:space="preserve">
-    <value>Your Customer Success Services (CSS) agreement has expired. This server will not receive any updates, including security updates</value>
+    <value>Your Customer Success Services (CSS) agreement has expired. This server will not receive any updates, including security updates.</value>
   </data>
   <data name="EXPIRED_CSS_UPSELLING_MESSAGE_POOL" xml:space="preserve">
     <value>Your Customer Success Services (CSS) agreement has expired. This pool will not receive any updates, including security updates</value>
@@ -12637,7 +12637,7 @@ Do you want to connect to the pool coordinator '{1}'?</value>
     <value>Views and Saved Searches</value>
   </data>
   <data name="TRIAL_EDITION_UPSELLING_MESSAGE" xml:space="preserve">
-    <value>Unlicensed servers will not receive any updates, including security updates</value>
+    <value>Unlicensed servers will not receive any updates, including security updates.</value>
   </data>
   <data name="TRUE" xml:space="preserve">
     <value>True</value>
