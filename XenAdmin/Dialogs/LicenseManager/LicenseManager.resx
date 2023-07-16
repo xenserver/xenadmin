@@ -139,9 +139,6 @@
   <data name="poolColumn.MinimumWidth" type="System.Int32, mscorlib">
     <value>30</value>
   </data>
-  <data name="poolColumn.Width" type="System.Int32, mscorlib">
-    <value>250</value>
-  </data>
   <metadata name="productVersionColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -150,9 +147,6 @@
   </data>
   <data name="productVersionColumn.MinimumWidth" type="System.Int32, mscorlib">
     <value>30</value>
-  </data>
-  <data name="productVersionColumn.Width" type="System.Int32, mscorlib">
-    <value>250</value>
   </data>
   <metadata name="statusImageColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -175,6 +169,9 @@
   <data name="statusColumn.MinimumWidth" type="System.Int32, mscorlib">
     <value>30</value>
   </data>
+  <data name="statusColumn.Width" type="System.Int32, mscorlib">
+    <value>64</value>
+  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="checkableDataGridView.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -187,7 +184,7 @@
     <value>3, 3</value>
   </data>
   <data name="checkableDataGridView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>670, 394</value>
+    <value>631, 399</value>
   </data>
   <data name="checkableDataGridView.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -220,7 +217,7 @@
     <value>NoControl</value>
   </data>
   <data name="downloadLicenseServerLink.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 445</value>
+    <value>3, 444</value>
   </data>
   <data name="downloadLicenseServerLink.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
@@ -268,7 +265,7 @@
     <value>3, 3</value>
   </data>
   <data name="assignLicenceButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>162, 25</value>
+    <value>150, 25</value>
   </data>
   <data name="assignLicenceButton.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -295,10 +292,10 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="releaseLicenseButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>171, 3</value>
+    <value>159, 3</value>
   </data>
   <data name="releaseLicenseButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>162, 25</value>
+    <value>150, 25</value>
   </data>
   <data name="releaseLicenseButton.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -325,13 +322,16 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="tableLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 403</value>
+    <value>0, 405</value>
+  </data>
+  <data name="tableLayoutPanel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
   </data>
   <data name="tableLayoutPanel2.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>670, 31</value>
+    <value>637, 31</value>
   </data>
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -358,10 +358,10 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="summaryPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>679, 3</value>
+    <value>640, 3</value>
   </data>
   <data name="summaryPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>234, 394</value>
+    <value>267, 399</value>
   </data>
   <data name="summaryPanel.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -385,10 +385,10 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="cancelButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>822, 440</value>
+    <value>832, 439</value>
   </data>
   <data name="cancelButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 25</value>
+    <value>75, 25</value>
   </data>
   <data name="cancelButton.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -421,7 +421,7 @@
     <value>3</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>916, 468</value>
+    <value>910, 467</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -439,7 +439,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="downloadLicenseServerLink" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="checkableDataGridView" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutPanel2" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="summaryPanel" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="cancelButton" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,73.85621,Percent,26.14379" /&gt;&lt;Rows Styles="Percent,100,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="downloadLicenseServerLink" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="checkableDataGridView" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutPanel2" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="summaryPanel" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="cancelButton" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,70,Percent,30" /&gt;&lt;Rows Styles="Percent,100,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -448,7 +448,7 @@
     <value>96, 96</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>940, 492</value>
+    <value>934, 491</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>

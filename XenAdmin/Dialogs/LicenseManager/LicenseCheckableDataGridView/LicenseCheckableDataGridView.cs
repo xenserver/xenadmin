@@ -29,7 +29,6 @@
  */
 
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using XenAdmin.Dialogs;
@@ -40,22 +39,9 @@ namespace XenAdmin.Controls
     public class LicenseCheckableDataGridView : CheckableDataGridView.CheckableDataGridView, ILicenseCheckableDataGridViewView
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public DataGridViewImageColumn StatusImageColumn
-        {
-            get
-            {
-                Debug.Assert(_statusImageColumn != null);
-                return _statusImageColumn;
-            }
-            set { _statusImageColumn = value; }
-        }
+        public DataGridViewImageColumn StatusImageColumn { get; set; }
 
-        private DataGridViewImageColumn _statusImageColumn;
-
-        private LicenseCheckableDataGridViewController LicenseController
-        {
-            get { return Controller as LicenseCheckableDataGridViewController; }
-        }
+        private LicenseCheckableDataGridViewController LicenseController => Controller as LicenseCheckableDataGridViewController;
 
         public LicenseCheckableDataGridView()
         {

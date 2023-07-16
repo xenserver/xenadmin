@@ -70,14 +70,12 @@
             // 
             // poolColumn
             // 
-            this.poolColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             resources.ApplyResources(this.poolColumn, "poolColumn");
             this.poolColumn.Name = "poolColumn";
             this.poolColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
             // productVersionColumn
             // 
-            this.productVersionColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             resources.ApplyResources(this.productVersionColumn, "productVersionColumn");
             this.productVersionColumn.Name = "productVersionColumn";
             this.productVersionColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
@@ -90,7 +88,7 @@
             // 
             // statusColumn
             // 
-            this.statusColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.statusColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             resources.ApplyResources(this.statusColumn, "statusColumn");
             this.statusColumn.Name = "statusColumn";
             this.statusColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
