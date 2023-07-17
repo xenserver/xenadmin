@@ -361,9 +361,8 @@ namespace XenAdmin.Dialogs
                     {
                         entitlements.Add(Messages.LICENSE_NOT_ELIGIBLE_FOR_SUPPORT);
                     }
-                }
-
-                if (CurrentState == HostState.Free)
+                } 
+                else if (CurrentState == HostState.Free)
                 {
                     entitlements.Add(Messages.LICENSE_NOT_ELIGIBLE_FOR_SUPPORT);
                 }

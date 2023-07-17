@@ -353,10 +353,10 @@ namespace XenAPI
         {
             var cssExpiry = LicenseCssExpiry();
 
-            if (cssExpiry != null)
+            if (cssExpiry.HasValue)
             {
                 // User can circumvent this by changing system date
-                return DateTime.Now > cssExpiry;
+                return DateTime.UtcNow > cssExpiry.Value;
             }
 
             return false;
