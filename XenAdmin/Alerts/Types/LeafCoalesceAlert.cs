@@ -66,27 +66,21 @@ namespace XenAdmin.Alerts
             }
         }
 
-        string LeafMessage()
-        {
-            switch (Message.Type)
-            {
-                case MessageType.LEAF_COALESCE_START_MESSAGE:
-                    return string.Format(Messages.LEAF_COALESCE_START, _vDI.Name(), _vm.Name());
-                case MessageType.LEAF_COALESCE_COMPLETED:
-                    return string.Format(Messages.LEAF_COALESCE_COMPLETED, _vDI.Name(), _vm.Name());
-                case MessageType.LEAF_COALESCE_FAILED:
-                    return string.Format(Messages.LEAF_COALESCE_FAILED, _vDI.Name(), _vm.Name());
-                default:
-                    return null;
-            }
-        }
-
         public override string Description
         {
             get
             {
-                var msg = LeafMessage();
-                return msg != null ? msg : base.Description;                
+                switch (Message.Type)
+                {
+                    case MessageType.LEAF_COALESCE_START_MESSAGE:
+                        return string.Format(Messages.LEAF_COALESCE_START_DESCRIPTION, _vDI.Name(), _vm.Name());
+                    case MessageType.LEAF_COALESCE_COMPLETED:
+                        return string.Format(Messages.LEAF_COALESCE_COMPLETED_DESCRIPTION, _vDI.Name(), _vm.Name());
+                    case MessageType.LEAF_COALESCE_FAILED:
+                        return string.Format(Messages.LEAF_COALESCE_FAILED_DESCRIPTION, _vDI.Name(), _vm.Name());
+                    default:
+                        return base.Description;
+                }
             }
         }
 
@@ -94,8 +88,18 @@ namespace XenAdmin.Alerts
         {
             get
             {
-                var msg = LeafMessage();
-                return msg != null ? msg : base.Title;                
+
+                switch (Message.Type)
+                {
+                    case MessageType.LEAF_COALESCE_START_MESSAGE:
+                        return string.Format(Messages.LEAF_COALESCE_START_TITLE, _vm.Name());
+                    case MessageType.LEAF_COALESCE_COMPLETED:
+                        return string.Format(Messages.LEAF_COALESCE_COMPLETED_TITLE, _vm.Name());
+                    case MessageType.LEAF_COALESCE_FAILED:
+                        return string.Format(Messages.LEAF_COALESCE_FAILED_TITLE, _vm.Name());
+                    default:
+                        return base.Title; ;
+                }
             }
         }
 

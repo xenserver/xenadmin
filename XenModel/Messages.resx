@@ -7617,22 +7617,22 @@ SR UUID: {1}</value>
     <value>License Manager</value>
   </data>
   <data name="LEAF_COALESCE_COMPLETED_DESCRIPTION" xml:space="preserve">
-    <value>Data merge for VM {0} completed</value>
+    <value>Data merge for VDI '{0}' of VM '{1}' has completed.</value>
   </data>
   <data name="LEAF_COALESCE_COMPLETED_TITLE" xml:space="preserve">
-    <value>Leaf coalesce completed</value>
+    <value>Data merge for VM {0} has completed.</value>
   </data>
   <data name="LEAF_COALESCE_FAILED_DESCRIPTION" xml:space="preserve">
-    <value>Data merge for VM {0} failed</value>
+    <value>Data merge for VDI '{0}' of VM '{1}' has failed.</value>
   </data>
   <data name="LEAF_COALESCE_FAILED_TITLE" xml:space="preserve">
-    <value>Leaf coalesce failed</value>
+    <value>Data merge for VM {0} has failed.</value>
   </data>
   <data name="LEAF_COALESCE_START_DESCRIPTION" xml:space="preserve">
-    <value>Data is being merged for VM {0}, performance may be reduced</value>
+    <value>Data merge for VDI '{0}' of VM '{1}' has started, performance may be reduced.</value>
   </data>
   <data name="LEAF_COALESCE_START_TITLE" xml:space="preserve">
-    <value>Leaf coalesce started</value>
+    <value>Data merge for VM {0} has started.</value>
   </data>
   <data name="LEARN_MORE" xml:space="preserve">
     <value>Learn more...</value>
