@@ -350,7 +350,7 @@ namespace XenAdmin
         public const long TicksBefore1970 = 621355968000000000;
 
         public static readonly string[] Iso8601DateFormats = {"yyyyMMddTHH:mm:ssZ", "yyyy-MM-ddTHH:mm:ssZ"};
-        public static readonly string[] NonIso8601DateFormats = { "yyyy-MM-dd", "yyyy.mmdd" };
+        public static readonly string[] NonIso8601DateFormats = { "yyyy-MM-dd", "yyyy.MMdd" };
 
         public static DateTime GetUnixMinDateTime()
         {
