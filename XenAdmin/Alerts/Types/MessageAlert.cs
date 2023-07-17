@@ -44,14 +44,7 @@ namespace XenAdmin.Alerts
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private Message _message;
-        public Message Message
-        {
-            get
-            {
-                return _message;
-            }
-        }
+        public Message Message { get; }
 
         public IXenObject XenObject;
 
@@ -59,7 +52,7 @@ namespace XenAdmin.Alerts
 
         public MessageAlert(XenAPI.Message m)
         {
-            _message = m;
+            Message = m;
             uuid = m.uuid;
             _timestamp = m.timestamp;
             try
