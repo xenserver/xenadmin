@@ -136,7 +136,7 @@ namespace XenAdmin.Dialogs
             }
         }
 
-        public override bool WarningRequired
+        public override bool LicenseWarningRequired
         {
             get
             {
@@ -150,7 +150,7 @@ namespace XenAdmin.Dialogs
             }
         }
 
-        public override string WarningText
+        public override string LicenseWarningText
         {
             get
             {
@@ -190,10 +190,13 @@ namespace XenAdmin.Dialogs
             }
         }
 
-        public bool HelperUrlRequired
-        {
-            get { return XenObject != null; }  
-        }
+        public override bool SupportWarningRequired => XenObjectHost?.CssLicenseHasExpired() ?? false;
+
+        public override string SupportWarningText => "css expired!";
+
+        public bool LicenseHelperUrlRequired => XenObject != null;
+
+        public bool SupportHelperUrlRequired => XenObject != null;
 
         public Status RowStatus
         {

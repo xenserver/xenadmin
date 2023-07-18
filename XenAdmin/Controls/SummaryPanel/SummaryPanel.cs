@@ -41,7 +41,8 @@ namespace XenAdmin.Controls.SummaryPanel
         public SummaryPanel()
         {
             InitializeComponent();
-            helperLink.LinkClicked += helperLink_LinkClicked;
+            licenseHelperLinkLabel.LinkClicked += licenseHelperLink_LinkClicked;
+            supportHelperLinkLabel.LinkClicked += supportHelperLink_LinkClicked;
             information.LinkClicked += information_LinkClicked;
         }
 
@@ -50,19 +51,34 @@ namespace XenAdmin.Controls.SummaryPanel
             set{ Controller.Title = value; }
         }
 
-        public string HelperUrl
+        public string LicenseHelperUrlText
         {
-            set { Controller.HelperUrl = value; }
+            set { Controller.LicenseHelperUrlText = value; }
         }
 
-        public bool HelperUrlVisible
+        public string SupportHelperUrlText
         {
-            set { Controller.HelperUrlVisible = value; }
+            set { Controller.SupportHelperUrlText = value; }
         }
 
-        public bool WarningVisible
+        public bool LicenseHelperUrlVisible
         {
-            set { Controller.DisplayWarning = value; }
+            set { Controller.LicenseHelperUrlVisible = value; }
+        }
+
+        public bool SupportHelperUrlVisible
+        {
+            set { Controller.SupportHelperUrlVisible = value; }
+        }
+
+        public bool LicenseWarningVisible
+        {
+            set { Controller.DisplayLicenseWarning = value; }
+        }
+
+        public bool SupportWarningVisible
+        {
+            set { Controller.DisplaySupportWarning = value; }
         }
 
         public bool InformationVisible
@@ -70,14 +86,24 @@ namespace XenAdmin.Controls.SummaryPanel
             set { Controller.InformationVisible = value; }
         }
 
-        public string WarningText
+        public string LicenseWarningText
         {
-            set { Controller.WarningMessage = value; }
+            set { Controller.LicenseWarningMessage = value; }
         }
 
-        public Action RunOnUrlClick
+        public string SupportWarningText
         {
-            set { Controller.RunOnUrlClick = value; }
+            set { Controller.SupportWarningMessage = value; }
+        }
+
+        public Action RunOnLicenseUrlClick
+        {
+            set { Controller.RunOnLicenseUrlClick = value; }
+        }
+
+        public Action RunOnSupportUrlClick
+        {
+            set { Controller.RunOnSupportUrlClick = value; }
         }
 
         public SummaryTextComponent SummaryText
@@ -90,14 +116,25 @@ namespace XenAdmin.Controls.SummaryPanel
             set { Controller.InformationText = value; }
         }
 
-        public Bitmap WarningIcon
+        public Bitmap LicenseWarningIcon
         {
-            set { Controller.WarningIcon = value; }
+            set { Controller.LicenseWarningIcon = value; }
+
         }
 
-        private void helperLink_LinkClicked(object sender, EventArgs e)
+        public Bitmap SupportWarningIcon
+            {
+                set { Controller.SupportWarningIcon = value; }
+            }
+
+        private void licenseHelperLink_LinkClicked(object sender, EventArgs e)
         {
-            Controller.UrlClicked();
+            Controller.LicenseUrlClicked();
+        }
+
+        private void supportHelperLink_LinkClicked(object sender, EventArgs e)
+        {
+            Controller.SupportUrlClicked();
         }
 
         private string summaryLink;
@@ -116,15 +153,27 @@ namespace XenAdmin.Controls.SummaryPanel
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public string DrawWarningMessage
+        public string DrawLicenseWarningMessage
         {
-            set { warningLabel.Text = value; }
+            set { licenseWarningLabel.Text = value; }
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public Bitmap DrawWarningIcon
+        public string DrawSupportWarningMessage
         {
-            set { warningImage.Image = value;  }
+            set { supportWarningLabel.Text = value; }
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public Bitmap DrawLicenseWarningIcon
+        {
+            set { licenseWarningImage.Image = value;  }
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public Bitmap DrawSupportWarningIcon
+        {
+            set { supportWarningImage.Image = value; }
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -134,21 +183,39 @@ namespace XenAdmin.Controls.SummaryPanel
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public string DrawHelperUrl
+        public string DrawLicenseHelperUrlText
         {
-            set { helperLink.Text = value; }
+            set { licenseHelperLinkLabel.Text = value; }
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool WarningTextVisiblity
+        public string DrawSupportHelperUrlText
         {
-            set { warningLabel.Visible = value; }
+            set { supportHelperLinkLabel.Text = value; }
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool WarningIconVisiblity
+        public bool LicenseWarningTextVisibility
         {
-            set { warningImage.Visible = value; }
+            set { licenseWarningLabel.Visible = value; }
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool SupportWarningTextVisibility
+        {
+            set { supportWarningLabel.Visible = value; }
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool LicenseWarningIconVisibility
+        {
+            set { licenseWarningImage.Visible = value; }
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool SupportWarningIconVisibility
+        {
+            set { supportWarningImage.Visible = value; }
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -174,9 +241,15 @@ namespace XenAdmin.Controls.SummaryPanel
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public bool DrawHelperUrlVisible
+        public bool DrawLicenseUrlVisible
         {
-            set { helperLink.Visible = value; }
+            set { licenseHelperLinkLabel.Visible = value; }
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public bool DrawSupportUrlVisible
+        {
+            set { supportHelperLinkLabel.Visible = value; }
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
