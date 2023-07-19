@@ -333,14 +333,16 @@ namespace XenAPI
         /// </summary>
         public virtual bool CanShowTrialEditionUpsell()
         {
-            if (IsFreeLicense() && 
-                software_version.TryGetValue("is_preview_release", out var isPreviewReleaseString) &&
-                bool.TryParse(isPreviewReleaseString, out var isPreviewRelease) && !isPreviewRelease)
-            {
-                return true;
-            }
+            return Helpers.Post82X(this) && IsFreeLicense() && !IsInPreviewRelease();
+        }
 
-            return false;                                    
+        /// <summary>
+        /// Return true if the is_preview_release value in host.software_version is present and set to true.
+        /// </summary>
+        public virtual bool IsInPreviewRelease()
+        {
+            return software_version.TryGetValue("is_preview_release", out var isPreviewReleaseString) &&
+                   bool.TryParse(isPreviewReleaseString, out var isPreviewRelease) && isPreviewRelease;
         }
 
         /// <summary>
@@ -356,7 +358,7 @@ namespace XenAPI
             if (cssExpiry.HasValue)
             {
                 // User can circumvent this by changing system date
-                return DateTime.UtcNow > cssExpiry.Value;
+                return DateTime.UtcNow < cssExpiry;
             }
 
             return false;
@@ -1516,6 +1518,11 @@ namespace XenAPI
         public bool StandardFeaturesEnabled()
         {
             return GetEdition(edition) == Edition.Standard;
+        }
+
+        public bool FreeFeaturesEnabled()
+        {
+            return GetEdition(edition) == Edition.Free;
         }
 
         public bool EligibleForSupport()

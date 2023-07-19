@@ -22450,11 +22450,65 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Active CSS.
+        /// </summary>
+        public static string LICENSE_MANAGER_ACTIVE_CSS {
+            get {
+                return ResourceManager.GetString("LICENSE_MANAGER_ACTIVE_CSS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Active support agreement.
+        /// </summary>
+        public static string LICENSE_MANAGER_ACTIVE_CSS_LONG {
+            get {
+                return ResourceManager.GetString("LICENSE_MANAGER_ACTIVE_CSS_LONG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Buy Licenses....
         /// </summary>
         public static string LICENSE_MANAGER_BUY_LICENSE_LINK_TEXT {
             get {
                 return ResourceManager.GetString("LICENSE_MANAGER_BUY_LICENSE_LINK_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expired CSS.
+        /// </summary>
+        public static string LICENSE_MANAGER_EXPIRED_CSS {
+            get {
+                return ResourceManager.GetString("LICENSE_MANAGER_EXPIRED_CSS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expired support agreement.
+        /// </summary>
+        public static string LICENSE_MANAGER_EXPIRED_CSS_LONG {
+            get {
+                return ResourceManager.GetString("LICENSE_MANAGER_EXPIRED_CSS_LONG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Licensed.
+        /// </summary>
+        public static string LICENSE_MANAGER_LICENSED {
+            get {
+                return ResourceManager.GetString("LICENSE_MANAGER_LICENSED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Purchase Support....
+        /// </summary>
+        public static string LICENSE_MANAGER_PURCHASE_SUPPORT_LINK_TEXT {
+            get {
+                return ResourceManager.GetString("LICENSE_MANAGER_PURCHASE_SUPPORT_LINK_TEXT", resourceCulture);
             }
         }
         
@@ -22491,6 +22545,24 @@ namespace XenAdmin {
         public static string LICENSE_MANAGER_SUMMARY_LICENSE_TYPE {
             get {
                 return ResourceManager.GetString("LICENSE_MANAGER_SUMMARY_LICENSE_TYPE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trial edition.
+        /// </summary>
+        public static string LICENSE_MANAGER_TRIAL_EDITION {
+            get {
+                return ResourceManager.GetString("LICENSE_MANAGER_TRIAL_EDITION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trial license.
+        /// </summary>
+        public static string LICENSE_MANAGER_TRIAL_LICENSE {
+            get {
+                return ResourceManager.GetString("LICENSE_MANAGER_TRIAL_LICENSE", resourceCulture);
             }
         }
         

@@ -41,8 +41,8 @@
             this.informationLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.informationImage = new System.Windows.Forms.PictureBox();
             this.informationLabel = new System.Windows.Forms.Label();
-            this.licenseHelperLinkLabel = new System.Windows.Forms.LinkLabel();
             this.helperLinksFlowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.licenseHelperLinkLabel = new System.Windows.Forms.LinkLabel();
             this.supportHelperLinkLabel = new System.Windows.Forms.LinkLabel();
             this.tableLayoutPanel1.SuspendLayout();
             this.supportWarningTableLayoutPanel.SuspendLayout();
@@ -59,8 +59,8 @@
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
             this.tableLayoutPanel1.Controls.Add(this.titleLabel, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.information, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.supportWarningTableLayoutPanel, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.licenseWarningTableLayoutPabel, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.supportWarningTableLayoutPanel, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.licenseWarningTableLayoutPabel, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.informationLayoutPanel, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.helperLinksFlowLayoutPanel, 0, 6);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -133,18 +133,18 @@
             this.informationLabel.AutoEllipsis = true;
             this.informationLabel.Name = "informationLabel";
             // 
-            // licenseHelperLinkLabel
-            // 
-            this.licenseHelperLinkLabel.AutoEllipsis = true;
-            resources.ApplyResources(this.licenseHelperLinkLabel, "licenseHelperLinkLabel");
-            this.licenseHelperLinkLabel.Name = "licenseHelperLinkLabel";
-            // 
             // helperLinksFlowLayoutPanel
             // 
             this.helperLinksFlowLayoutPanel.Controls.Add(this.licenseHelperLinkLabel);
             this.helperLinksFlowLayoutPanel.Controls.Add(this.supportHelperLinkLabel);
             resources.ApplyResources(this.helperLinksFlowLayoutPanel, "helperLinksFlowLayoutPanel");
             this.helperLinksFlowLayoutPanel.Name = "helperLinksFlowLayoutPanel";
+            // 
+            // licenseHelperLinkLabel
+            // 
+            this.licenseHelperLinkLabel.AutoEllipsis = true;
+            resources.ApplyResources(this.licenseHelperLinkLabel, "licenseHelperLinkLabel");
+            this.licenseHelperLinkLabel.Name = "licenseHelperLinkLabel";
             // 
             // supportHelperLinkLabel
             // 

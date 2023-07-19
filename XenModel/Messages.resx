@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -7807,8 +7807,26 @@ SR UUID: {1}</value>
   <data name="LICENSE_LICENSED" xml:space="preserve">
     <value>Licensed</value>
   </data>
+  <data name="LICENSE_MANAGER_ACTIVE_CSS" xml:space="preserve">
+    <value>Active CSS</value>
+  </data>
+  <data name="LICENSE_MANAGER_ACTIVE_CSS_LONG" xml:space="preserve">
+    <value>Active support agreement</value>
+  </data>
   <data name="LICENSE_MANAGER_BUY_LICENSE_LINK_TEXT" xml:space="preserve">
     <value>Buy Licenses...</value>
+  </data>
+  <data name="LICENSE_MANAGER_EXPIRED_CSS" xml:space="preserve">
+    <value>Expired CSS</value>
+  </data>
+  <data name="LICENSE_MANAGER_EXPIRED_CSS_LONG" xml:space="preserve">
+    <value>Expired support agreement</value>
+  </data>
+  <data name="LICENSE_MANAGER_LICENSED" xml:space="preserve">
+    <value>Licensed</value>
+  </data>
+  <data name="LICENSE_MANAGER_PURCHASE_SUPPORT_LINK_TEXT" xml:space="preserve">
+    <value>Purchase Support...</value>
   </data>
   <data name="LICENSE_MANAGER_SUMMARY_LICENSE_EXPIRES" xml:space="preserve">
     <value>License Expires:</value>
@@ -7821,6 +7839,12 @@ SR UUID: {1}</value>
   </data>
   <data name="LICENSE_MANAGER_SUMMARY_LICENSE_TYPE" xml:space="preserve">
     <value>License Type:</value>
+  </data>
+  <data name="LICENSE_MANAGER_TRIAL_EDITION" xml:space="preserve">
+    <value>Trial edition</value>
+  </data>
+  <data name="LICENSE_MANAGER_TRIAL_LICENSE" xml:space="preserve">
+    <value>Trial license</value>
   </data>
   <data name="LICENSE_NEVER" xml:space="preserve">
     <value>Never</value>

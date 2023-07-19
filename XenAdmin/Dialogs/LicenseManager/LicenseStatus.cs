@@ -334,9 +334,9 @@ namespace XenAdmin.Dialogs
             {
                 var hosts = XenObject.Connection.Cache.Hosts;
                 var entitlements = new List<string>();
+                string supportLevel = null;
                 if (CurrentState == HostState.Licensed)
                 {
-                    string supportLevel = null;
                     if (hosts.All(h => h.EnterpriseFeaturesEnabled()))
                         supportLevel = Messages.LICENSE_ENTERPRISE_FEATURES_ENABLED;
                     else if (hosts.All(h => h.DesktopPlusFeaturesEnabled()))
@@ -354,23 +354,26 @@ namespace XenAdmin.Dialogs
 
                     if (supportLevel != null)
                     {
-                        entitlements.Add(Messages.LICENSE_ELIGIBLE_FOR_SUPPORT);
+                        entitlements.Add(hosts.Any(Helpers.Post82X) ? Messages.LICENSE_MANAGER_LICENSED : Messages.LICENSE_ELIGIBLE_FOR_SUPPORT);
                         entitlements.Add(supportLevel);
+                    }
+                } 
+                
+                if (CurrentState == HostState.Free || string.IsNullOrEmpty(supportLevel))
+                {
+                    if (hosts.Any(Helpers.Post82X))
+                    {
+                        // CP-43000: for hosts in preview we show "Licensed" even though they're not
+                        entitlements.Add(hosts.Any(a => a.IsInPreviewRelease()) ? $"{Messages.LICENSE_MANAGER_LICENSED}{Environment.NewLine}{Messages.LICENSE_MANAGER_TRIAL_EDITION}" : Messages.LICENSE_MANAGER_TRIAL_LICENSE);
                     }
                     else
                     {
                         entitlements.Add(Messages.LICENSE_NOT_ELIGIBLE_FOR_SUPPORT);
                     }
-                } 
-                else if (CurrentState == HostState.Free)
-                {
-                    entitlements.Add(Messages.LICENSE_NOT_ELIGIBLE_FOR_SUPPORT);
                 }
 
                 if (hosts.Any(h => h.CanShowTrialEditionUpsell()))
                     entitlements.Add(Messages.TRIAL_EDITION_UPSELLING_MESSAGE);
-                else if (hosts.Any(h => h.CssLicenseHasExpired()))
-                    entitlements.Add(Messages.EXPIRED_CSS_UPSELLING_MESSAGE_POOL);
 
                 return entitlements.Count == 0 ? Messages.UNKNOWN : string.Join(Environment.NewLine, entitlements);
             }
