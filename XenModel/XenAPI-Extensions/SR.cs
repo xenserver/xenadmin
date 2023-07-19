@@ -499,9 +499,8 @@ namespace XenAPI
             var sm = GetSM();
 
             var vdiSizeUnlimited = sm != null && Array.IndexOf(sm.capabilities, "LARGE_VDI") != -1;
-            var vdiSize = vdis.Sum(vdi => vdi.virtual_size);
 
-            if (!vdiSizeUnlimited && vdiSize > DISK_MAX_SIZE)
+            if (!vdiSizeUnlimited && vdis.Any(vdi => vdi.virtual_size > DISK_MAX_SIZE))
             {
                 cannotFitReason = string.Format(Messages.SR_DISKSIZE_EXCEEDS_DISK_MAX_SIZE,
                     Util.DiskSizeString(DISK_MAX_SIZE, 0));
@@ -516,6 +515,7 @@ namespace XenAPI
 
             var isThinlyProvisioned = sm != null && Array.IndexOf(sm.capabilities, "THIN_PROVISIONING") != -1;
             var vdiPhysicalUtilization = vdis.Sum(vdi => vdi.physical_utilisation);
+            var vdiSize = vdis.Sum(vdi => vdi.virtual_size);
             var sizeToConsider = isThinlyProvisioned ? vdiPhysicalUtilization : vdiSize;
 
             if (sizeToConsider > physical_size)
