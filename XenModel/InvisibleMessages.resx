@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -119,6 +119,9 @@
   </resheader>
   <data name="CIS_URL" xml:space="preserve">
     <value>https://cis.citrix.com</value>
+  </data>
+  <data name="CSS_URL" xml:space="preserve">
+    <value>https://www.citrix.com/support/programs/</value>
   </data>
   <data name="CLIENT_ID_URL" xml:space="preserve">
     <value>https://support.citrix.com/xencenterclientiddownload</value>

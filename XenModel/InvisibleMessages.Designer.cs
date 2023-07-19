@@ -79,6 +79,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to https://www.citrix.com/support/programs/.
+        /// </summary>
+        public static string CSS_URL {
+            get {
+                return ResourceManager.GetString("CSS_URL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to http://docs.citrix.com/en-us/citrix-hypervisor/whats-new/removed-features.html.
         /// </summary>
         public static string DEPRECATION_URL {

@@ -979,12 +979,13 @@ namespace XenAdmin.TabPages
             if (host.CanShowTrialEditionUpsell())
             {
                 pdSectionLicense.AddEntryWithNoteLink(Messages.WARNING, Messages.TRIAL_EDITION_UPSELLING_MESSAGE,
-                    Messages.LICENSE_MANAGER_BUY_LICENSE_LINK_TEXT, () => Program.OpenURL(InvisibleMessages.LICENSE_BUY_URL));
+                    Messages.LICENSE_MANAGER_BUY_LICENSE_LINK_TEXT, () => Program.OpenURL(InvisibleMessages.LICENSE_BUY_URL), Color.Red);
             }
-            else if (host.CssLicenseHasExpired())
+            
+            if (host.CssLicenseHasExpired() && !host.IsInPreviewRelease())
             {
                 pdSectionLicense.AddEntryWithNoteLink(Messages.WARNING, Messages.EXPIRED_CSS_UPSELLING_MESSAGE_HOST,
-                    Messages.LICENSE_MANAGER_BUY_LICENSE_LINK_TEXT, () => Program.OpenURL(InvisibleMessages.LICENSE_BUY_URL));
+                    Messages.LICENSE_MANAGER_PURCHASE_SUPPORT_LINK_TEXT, () => Program.OpenURL(InvisibleMessages.CSS_URL), Color.Red);
             }
 
             if (host.license_params == null)

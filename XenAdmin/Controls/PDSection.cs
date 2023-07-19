@@ -394,10 +394,12 @@ namespace XenAdmin.Controls
             AddRow(CreateKeyCell(key), valueCell, null, contextMenuItems);
         }
 
-        internal void AddEntryWithNoteLink(string key, string value, string note, Action action, params ToolStripMenuItem[] contextMenuItems)
+        internal void AddEntryWithNoteLink(string key, string value, string note, Action action, Color fontColor, params ToolStripMenuItem[] contextMenuItems)
         {
             var valueCell = new DataGridViewTextBoxCell { Value = value };
             var noteCell = new DataGridViewLinkCell { Value = note, Tag = action };
+            valueCell.Style.ForeColor = fontColor;
+            valueCell.Style.SelectionForeColor = fontColor;
             AddRow(CreateKeyCell(key), valueCell, noteCell, contextMenuItems);
         }
 
