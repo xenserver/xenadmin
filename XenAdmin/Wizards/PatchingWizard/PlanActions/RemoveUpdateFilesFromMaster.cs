@@ -39,6 +39,8 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 {
     class RemoveUpdateFileFromCoordinatorPlanAction : PlanActionWithSession
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private readonly List<HostUpdateMapping> patchMappings = new List<HostUpdateMapping>();
         private readonly XenServerPatch xenServerPatch;
         private readonly Host coordinator;

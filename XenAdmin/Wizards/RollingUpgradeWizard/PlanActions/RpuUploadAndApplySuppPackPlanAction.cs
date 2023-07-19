@@ -46,6 +46,8 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
 {
     class RpuUploadAndApplySuppPackPlanAction : HostPlanAction
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private Host host;
         private List<Host> hosts;
         private string suppPackPath;

@@ -37,12 +37,12 @@ using XenAdmin.Actions;
 
 namespace CFUValidator.Updates
 {
-    class AlternativeUrlDownloadUpdatesXmlSourceAction : DownloadUpdatesXmlAction, ICheckForUpdatesXMLSource
+    class AlternativeUrlDownloadUpdatesXmlSourceAction : DownloadCfuAction, ICheckForUpdatesXMLSource
     {
         private readonly string _url;
 
         public AlternativeUrlDownloadUpdatesXmlSourceAction(string url)
-            : base(true, true, true, "CFU", true)
+            : base(true, true, "CFU", url, true)
         {
             _url = url ?? throw new ArgumentNullException(nameof(url));
         }

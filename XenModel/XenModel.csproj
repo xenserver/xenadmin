@@ -128,10 +128,11 @@
     <Compile Include="Actions\Pool_Patch\UploadPatchAction.cs" />
     <Compile Include="Actions\ProduceConsumerQueue.cs" />
     <Compile Include="Actions\SR\SrTrimAction.cs" />
-    <Compile Include="Actions\Updates\DownloadAndUnzipXenServerPatchAction.cs" />
+    <Compile Include="Actions\Updates\DownloadUnzipUpdateAction.cs" />
     <Compile Include="Actions\Updates\DownloadAndUpdateClientAction.cs" />
     <Compile Include="Actions\Updates\DownloadUpdatesXmlAction.cs" />
     <Compile Include="Actions\Updates\ClientVersion.cs" />
+    <Compile Include="Actions\Updates\TokenManager.cs" />
     <Compile Include="Actions\Updates\XenServerPatch.cs" />
     <Compile Include="Actions\Updates\XenServerVersion.cs" />
     <Compile Include="Actions\USB\CreateVUSBAction.cs" />

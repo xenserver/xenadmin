@@ -865,5 +865,57 @@ namespace XenAdmin.Properties {
                 this["ShowTimestampsInUpdatesLog"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public string FileServiceUsername {
+            get {
+                return ((string)(this["FileServiceUsername"]));
+            }
+            set {
+                this["FileServiceUsername"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public string FileServiceClientId {
+            get {
+                return ((string)(this["FileServiceClientId"]));
+            }
+            set {
+                this["FileServiceClientId"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public bool AllowXenServerUpdates {
+            get {
+                return ((bool)(this["AllowXenServerUpdates"]));
+            }
+            set {
+                this["AllowXenServerUpdates"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public bool AllowPatchesUpdates {
+            get {
+                return ((bool)(this["AllowPatchesUpdates"]));
+            }
+            set {
+                this["AllowPatchesUpdates"] = value;
+            }
+        }
     }
 }

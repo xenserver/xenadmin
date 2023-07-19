@@ -56,6 +56,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private bool poolSelectionOnly;
 
+        public XenServerPatchAlert UpdateAlertFromWeb { private get; set; }
         public XenServerPatchAlert AlertFromFileOnDisk { private get; set; }
         public bool FileFromDiskHasUpdateXml { private get; set; }
         public WizardMode WizardMode { private get; set; }
@@ -74,7 +75,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            poolSelectionOnly = WizardMode == WizardMode.AutomatedUpdates || AlertFromFileOnDisk != null;
+            poolSelectionOnly = WizardMode == WizardMode.AutomatedUpdates || UpdateAlertFromWeb != null || AlertFromFileOnDisk != null;
 
             switch (WizardMode)
             {
@@ -108,6 +109,18 @@ namespace XenAdmin.Wizards.PatchingWizard
                     if (!automatedUpdatesRestricted)
                         licensedPoolCount++;
                 }
+            }
+
+            if (WizardMode == WizardMode.NewVersion && licensedPoolCount > 0)
+            {
+                applyUpdatesCheckBox.Visible = true;
+                applyUpdatesCheckBox.Text = poolCount == licensedPoolCount
+                    ? Messages.PATCHINGWIZARD_SELECTSERVERPAGE_APPLY_UPDATES
+                    : Messages.PATCHINGWIZARD_SELECTSERVERPAGE_APPLY_UPDATES_MIXED;
+            }
+            else
+            {
+                applyUpdatesCheckBox.Visible = false;
             }
 
             dataGridViewHosts.Rows.Clear();
@@ -198,13 +211,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 : Updates.GetMinimalPatches(host.Connection);
             if (minimalPatches == null) //version not supported or too new to have automated updates available
             {
-                var versionSupportsAutomatedUpdates = WizardMode == WizardMode.NewVersion
-                     ? Helpers.DundeeOrGreater(host)
-                     : Helpers.DundeeOrGreater(host.Connection);
-
-                tooltipText = versionSupportsAutomatedUpdates
-                    ? Messages.PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_UP_TO_DATE
-                    : string.Format(Messages.PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_HOST_VERSION, BrandManager.ProductBrand);
+                tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_UP_TO_DATE;
                 return false;
             }
 
@@ -237,12 +244,6 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             tooltipText = null;
 
-            if (!Helpers.Post82X(host))
-            {
-                tooltipText = string.Format(Messages.PATCHINGWIZARD_SELECTSERVERPAGE_VERSION_UNSUPPORTED, BrandManager.BrandConsole);
-                return false;
-            }
-            
             if (!host.CanApplyHotfixes() && (Helpers.ElyOrGreater(host) || SelectedUpdateType != UpdateType.ISO))
             {
                 tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED;
@@ -276,7 +277,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 case UpdateType.ISO:
                     //from Ely onwards, iso does not mean supplemental pack
                     
-                    if (WizardMode == WizardMode.AutomatedUpdates || AlertFromFileOnDisk != null)
+                    if (WizardMode == WizardMode.AutomatedUpdates || UpdateAlertFromWeb != null || AlertFromFileOnDisk != null)
                         return IsHostAmongApplicable(host, out tooltipText);
 
                     // here a file from disk was selected, but it was not an update (FileFromDiskAlert == null)
@@ -303,7 +304,13 @@ namespace XenAdmin.Wizards.PatchingWizard
             string patchUuidFromAlert = null;
             List<Host> applicableHosts = null;
 
-            if (AlertFromFileOnDisk != null)
+            if (UpdateAlertFromWeb != null)
+            {
+                applicableHosts = UpdateAlertFromWeb.DistinctHosts;
+                if (UpdateAlertFromWeb.Patch != null)
+                    patchUuidFromAlert = UpdateAlertFromWeb.Patch.Uuid;
+            }
+            else if (AlertFromFileOnDisk != null)
             {
                 applicableHosts = AlertFromFileOnDisk.DistinctHosts;
                 if (AlertFromFileOnDisk.Patch != null)
@@ -337,6 +344,9 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 if (isPatchApplied(patchUuidFromAlert, host))
                 {
+                    if (ApplyUpdatesToNewVersion)
+                        return CanEnableRowAutomatedUpdates(host, out tooltipText);
+
                     tooltipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_ALREADY_APPLIED;
                     return false;
                 }
@@ -381,6 +391,14 @@ namespace XenAdmin.Wizards.PatchingWizard
                         row.UpdateIcon();
                     dataGridViewHosts.Invalidate();
                     cancel = true;
+                    return;
+                }
+
+                if (ApplyUpdatesToNewVersion && !Updates.CheckCanDownloadUpdates())
+                {
+                    cancel = true;
+                    using (var errDlg = new ClientIdDialog())
+                        errDlg.ShowDialog(ParentForm);
                     return;
                 }
 
@@ -506,7 +524,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 {
                     if (row.IsSelectableHost)
                     {
-                        if ((row.HasPool && ((int)row.Cells[POOL_ICON_HOST_CHECKBOX_COL].Value) == CHECKED) || (!row.HasPool && ((int)row.Cells[POOL_CHECKBOX_COL].Value) == CHECKED))
+                        if ((row.HasPool && (int)row.Cells[POOL_ICON_HOST_CHECKBOX_COL].Value == CHECKED) || (!row.HasPool && (int)row.Cells[POOL_CHECKBOX_COL].Value == CHECKED))
                             hosts.Add((Host)row.Tag);
                     }
                 }
@@ -539,6 +557,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                 return pools;
             }
         }
+
+        public bool ApplyUpdatesToNewVersion => applyUpdatesCheckBox.Visible && applyUpdatesCheckBox.Checked;
 
         public UpdateType SelectedUpdateType { private get; set; }
 
@@ -607,6 +627,43 @@ namespace XenAdmin.Wizards.PatchingWizard
         private void dataGridViewHosts_CheckBoxClicked(object sender, EventArgs e)
         {
             OnPageUpdated();
+        }
+
+        private void applyUpdatesCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            PatchingHostsDataGridViewRow masterRow = null;
+
+            foreach (PatchingHostsDataGridViewRow row in dataGridViewHosts.Rows)
+            {
+                var host = row.Tag as Host;
+                if (host != null)
+                {
+                    string tooltipText;
+                    row.Enabled = CanEnableRow(host, out tooltipText);
+                    row.Cells[3].ToolTipText = tooltipText;
+
+                    if (row.ParentPoolRow != null)
+                    {
+                        if (row.Enabled)
+                        {
+                            row.ParentPoolRow.Enabled = true;
+                            row.ParentPoolRow.Cells[3].ToolTipText = null;
+                        }
+
+                        if (masterRow == null)
+                        {
+                            masterRow = row;
+                            if (!row.Enabled)
+                                row.ParentPoolRow.Cells[3].ToolTipText = row.Cells[3].ToolTipText;
+                        }
+                    }
+                }
+                else
+                {
+                    row.Enabled = false;
+                    masterRow = null;//reset the stored masterRow
+                }
+            }
         }
 
         #region Nested items

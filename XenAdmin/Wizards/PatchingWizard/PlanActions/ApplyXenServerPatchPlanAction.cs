@@ -39,6 +39,8 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 {
     public class ApplyXenServerPatchPlanAction : HostPlanAction
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private readonly XenServerPatch xenServerPatch;
         private readonly List<HostUpdateMapping> mappings;
 

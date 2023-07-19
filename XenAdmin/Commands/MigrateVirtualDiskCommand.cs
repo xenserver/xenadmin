@@ -83,8 +83,6 @@ namespace XenAdmin.Commands
 
             if(vdi.Connection.ResolveAll(vdi.VBDs).Count == 0)
                 return false;
-            if (vdi.GetVMs().Any(vm => !vm.IsRunning()) && !Helpers.DundeeOrGreater(vdi.Connection))
-                return false;
 
             SR sr = vdi.Connection.Resolve(vdi.SR);
             if (sr == null || sr.HBALunPerVDI())
@@ -111,8 +109,6 @@ namespace XenAdmin.Commands
                 return Messages.CANNOT_MOVE_CBT_ENABLED_VDI;
             if (vdi.IsMetadataForDR())
                 return Messages.CANNOT_MOVE_DR_VD;
-            if (vdi.GetVMs().Any(vm => !vm.IsRunning()) && !Helpers.DundeeOrGreater(vdi.Connection))
-                return Messages.CANNOT_MIGRATE_VDI_NON_RUNNING_VM;
 
             SR sr = vdi.Connection.Resolve(vdi.SR);
             if (sr == null)

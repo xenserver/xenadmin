@@ -31,9 +31,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Windows.Forms;
-using XenAdmin.Controls;
 using XenAdmin.Controls.Ballooning;
 using XenAdmin.Core;
 using XenAPI;

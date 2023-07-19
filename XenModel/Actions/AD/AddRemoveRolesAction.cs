@@ -60,7 +60,7 @@ namespace XenAdmin.Actions
             this.subject = subject;
 
             var serverRoles = Connection.Cache.Roles
-                .Where(r => (!Helpers.Post82X(Connection) || !Helpers.XapiEqualOrGreater_22_5_0(Connection) || !r.is_internal) && r.subroles.Count > 0)
+                .Where(r => (!Helpers.CloudOrGreater(Connection) || !Helpers.XapiEqualOrGreater_22_5_0(Connection) || !r.is_internal) && r.subroles.Count > 0)
                 .ToList();
 
             _toAdd = serverRoles.Where(role => newRoles.Contains(role) &&

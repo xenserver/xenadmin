@@ -48,7 +48,8 @@ rebranding_global()
         -e "s#\[XenCenter\]#${BRANDING_BRAND_CONSOLE}#g" \
         -e "s#\[XenCenter_No_Space\]#${BRANDING_BRAND_CONSOLE_NO_SPACE}#g" \
         -e "s#xencenter\/current-release\/#${BRANDING_HELP_PATH}#g" \
-        -e "s#\[Updates url\]#${UPDATES_URL}#g" \
+        -e "s#\[Xc updates url\]#${XC_UPDATES_URL}#g" \
+        -e "s#\[Cfu url\]#${CFU_URL}#g" \
         $1
 }
 

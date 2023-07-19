@@ -32,16 +32,17 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using XenAdmin.Controls;
-using XenAdmin.Wizards.PatchingWizard.PlanActions;
-using XenAPI;
 using System.Linq;
-using XenAdmin.Core;
 using System.Text;
 using System.Windows.Forms;
+using XenAdmin.Actions.Updates;
+using XenAdmin.Controls;
+using XenAdmin.Core;
 using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Dialogs;
+using XenAdmin.Wizards.PatchingWizard.PlanActions;
 using XenAdmin.Wizards.RollingUpgradeWizard.PlanActions;
+using XenAPI;
 
 
 namespace XenAdmin.Wizards.PatchingWizard
@@ -56,7 +57,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         private bool _userMovedVerticalScrollbar;
         private bool _cancelEnabled;
 
-        protected static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod()?.DeclaringType);
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod()?.DeclaringType);
         protected List<string> HostsThatWillRequireReboot = new List<string>();
         protected Dictionary<string, List<string>> LivePatchAttempts = new Dictionary<string, List<string>>();
         protected bool ThisPageIsCompleted;
@@ -65,6 +66,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         public Dictionary<XenServerPatch, string> AllDownloadedPatches { get; } = new Dictionary<XenServerPatch, string>();
         public List<Problem> PrecheckProblemsActuallyResolved { private get; set; }
         public List<Pool> SelectedPools { private get; set; }
+        public bool ApplyUpdatesToNewVersion { get; set; }
         public Status Status { get; private set; }
 
         protected AutomatedUpdatesBasePage()
@@ -92,7 +94,10 @@ namespace XenAdmin.Wizards.PatchingWizard
         public override void PageCancelled(ref bool cancel)
         {
             if (ThisPageIsCompleted)
+            {
+                TokenManager.InvalidateToken(XenAdminConfigManager.Provider);
                 return;
+            }
 
             using (var dialog = new WarningDialog(ReconsiderCancellationMessage(),
                 ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
@@ -105,6 +110,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
             }
 
+            TokenManager.InvalidateToken(XenAdminConfigManager.Provider);
             Status = Status.Cancelled;
             _backgroundWorkers.ForEach(bgw => bgw.CancelAsync());
         }
@@ -132,6 +138,11 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
+        {
+            TokenManager.InvalidateToken(XenAdminConfigManager.Provider);
+        }
+
         #endregion
 
         #region Virtual members
@@ -157,6 +168,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         #endregion
 
         #region Backround workers
+
         private bool StartUpgradeWorkers()
         {
             //reset the background workers

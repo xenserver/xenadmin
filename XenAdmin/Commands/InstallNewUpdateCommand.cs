@@ -30,9 +30,7 @@
 
 using System.Drawing;
 using System.Linq;
-using XenAdmin.Core;
 using XenAdmin.Wizards.PatchingWizard;
-using XenAPI;
 
 
 namespace XenAdmin.Commands
@@ -62,18 +60,7 @@ namespace XenAdmin.Commands
 
         protected override bool CanRunCore(SelectedItemCollection selection)
         {
-            return ConnectionsManager.XenConnectionsCopy.Any(c => c.IsConnected && Helpers.Post82X(c));
-        }
-
-        protected override string GetCantRunReasonCore(IXenObject item)
-        {
-            var connected = ConnectionsManager.XenConnectionsCopy.Where(c => c.IsConnected).ToList();
-
-            if (connected.Count > 0 && connected.All(c => !Helpers.Post82X(c)))
-                return string.Format(Messages.INSTALL_PENDING_UPDATES_DISABLED_REASON,
-                    BrandManager.BrandConsole, Program.VersionText, BrandManager.ProductVersion821);
-
-            return base.GetCantRunReasonCore(item);
+            return ConnectionsManager.XenConnectionsCopy.Any(c => c.IsConnected);
         }
 
         public override Image ContextMenuImage => Images.StaticImages._000_HostUnpatched_h32bit_16;

@@ -34,8 +34,6 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-
-using XenAdmin.Controls;
 using XenAdmin.Core;
 using XenAdmin.Actions;
 

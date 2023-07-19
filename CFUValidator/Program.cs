@@ -29,7 +29,11 @@
  */
 
 using System;
+using System.Net;
 using CFUValidator.CommandLineOptions;
+using XenAdmin;
+using XenAdmin.Core;
+using XenAdmin.Network;
 
 namespace CFUValidator
 {
@@ -46,7 +50,7 @@ namespace CFUValidator
 
                 var cfuValidator = new CFUValidator(manager.XmlLocationType, manager.XmlLocation,
                     manager.ServerVersion, manager.InstalledHotfixes,
-                    manager.CheckHotfixContents);
+                    manager.CheckHotfixContents, new ConfigProvider(manager.Username, manager.ClientId));
 
                 cfuValidator.Validate(Console.WriteLine);
             }
@@ -61,6 +65,33 @@ namespace CFUValidator
             }
 
             Environment.Exit(0);
+        }
+    }
+
+    public class ConfigProvider : IConfigProvider
+    {
+        public ConfigProvider(string username, string clientId)
+        {
+            FileServiceUsername = username;
+            FileServiceClientId = clientId;
+        }
+
+        public string FileServiceUsername { get; }
+        public string FileServiceClientId { get; }
+
+        public string GetCustomTokenUrl()
+        {
+            return Registry.GetCustomTokenUrl() ?? InvisibleMessages.TOKEN_API_URL;
+        }
+
+        public IWebProxy GetProxyFromSettings(IXenConnection connection)
+        {
+            return null;
+        }
+
+        public IWebProxy GetProxyFromSettings(IXenConnection connection, bool isForXenServer)
+        {
+            return null;
         }
     }
 }

@@ -30,7 +30,6 @@
 
 using System;
 using System.Collections.Generic;
-using XenAdmin.Core;
 using XenAdmin.Controls;
 using XenAdmin.Network;
 using XenAPI;
@@ -102,7 +101,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             this.NfsServerPathComboBox.Items.AddRange(add_srs.ToArray());
 
             //Setting up visibility of the NFS Version controls
-            nfsVersionLabel.Visible = nfsVersionTableLayoutPanel.Visible = Helpers.DundeeOrGreater(Connection);
+            nfsVersionLabel.Visible = nfsVersionTableLayoutPanel.Visible = true;
         }
 
         protected override void PageLoadedCore(PageLoadedDirection direction)

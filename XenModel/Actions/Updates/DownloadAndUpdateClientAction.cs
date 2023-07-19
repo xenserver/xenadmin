@@ -74,7 +74,7 @@ namespace XenAdmin.Actions.Updates
             _downloadUpdate = _address != null;
             _outputPathAndFileName = outputFileName;
             _checksum = checksum;
-            _authToken = XenAdminConfigManager.Provider.GetInternalStageAuthToken();
+            _authToken = XenAdminConfigManager.Provider.GetClientUpdatesQueryParam();
         }
 
         private void DownloadFile()

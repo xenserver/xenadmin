@@ -35,12 +35,12 @@ using XenAdmin.Actions;
 
 namespace CFUValidator.Updates
 {
-    class ReadFromFileUpdatesXmlSource : DownloadUpdatesXmlAction, ICheckForUpdatesXMLSource
+    class ReadFromFileUpdatesXmlSource : DownloadCfuAction, ICheckForUpdatesXMLSource
     {
         private readonly string _location;
 
         public ReadFromFileUpdatesXmlSource(string location)
-            : base(true, true, true, "CFU", true)
+            : base(true, true, "CFU", location, true)
         {
             _location = location ?? throw new ArgumentNullException(nameof(location));
         }

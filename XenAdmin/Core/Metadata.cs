@@ -38,7 +38,6 @@ using System.Net.Sockets;
 using System.Reflection;
 using System.Threading;
 using System.Web.Script.Serialization;
-using XenAdmin.Model;
 using XenAdmin.Plugins;
 using XenAPI;
 
@@ -74,6 +73,8 @@ namespace XenAdmin.Core
         internal struct CFU
         {
             public bool AllowXenCenterUpdates;
+            public bool AllowPatchesUpdates;
+            public bool AllowXenServerUpdates;
         }
 
         internal struct Proxy
@@ -128,7 +129,12 @@ namespace XenAdmin.Core
                 },
                 Settings = new XenCenterSettings
                 {
-                    CFU = new CFU {AllowXenCenterUpdates = Properties.Settings.Default.AllowXenCenterUpdates},
+                    CFU = new CFU
+                    {
+                        AllowXenCenterUpdates = Properties.Settings.Default.AllowXenCenterUpdates,
+                        AllowPatchesUpdates = Properties.Settings.Default.AllowPatchesUpdates,
+                        AllowXenServerUpdates = Properties.Settings.Default.AllowXenServerUpdates
+                    },
                     Proxy = new Proxy
                     {
                         UseProxy = (HTTPHelper.ProxyStyle) Properties.Settings.Default.ProxySetting == HTTPHelper.ProxyStyle.SpecifiedProxy,

@@ -72,7 +72,7 @@ namespace XenAdmin.Diagnostics.Checks
             if (string.IsNullOrEmpty(upgradePlatformVersion))
                 return new PoolHasFCoESrWarning(this, Helpers.GetPoolOfOne(Host.Connection), false);
 
-            if (Helpers.Post82X(upgradePlatformVersion))
+            if (Helpers.CloudOrGreater(upgradePlatformVersion))
                 return new PoolHasFCoESrWarning(this, Helpers.GetPoolOfOne(Host.Connection), true);
 
             return null;

@@ -71,7 +71,7 @@ namespace XenAdmin.Commands
             var reasons = new Dictionary<IXenObject, string>();
             foreach (Host host in _hosts)
             {
-                PoolJoinRules.Reason reason = PoolJoinRules.CanJoinPool(host.Connection, _pool.Connection, true, true, true, _hosts.Count);
+                PoolJoinRules.Reason reason = PoolJoinRules.CanJoinPool(host.Connection, _pool.Connection, true, true, _hosts.Count);
                 if (reason != PoolJoinRules.Reason.Allowed)
                     reasons[host] = PoolJoinRules.ReasonMessage(reason);
             }
@@ -135,7 +135,7 @@ namespace XenAdmin.Commands
             // If so, we need to show upsell.
             Host coordinator = Helpers.GetCoordinator(_pool);
             if (null != _hosts.Find(host =>
-                !PoolJoinRules.CompatibleCPUs(host, coordinator, false) &&
+                !PoolJoinRules.CompatibleCPUs(host, coordinator) &&
                 Helpers.FeatureForbidden(host, Host.RestrictCpuMasking) &&
                 !PoolJoinRules.FreeHostPaidCoordinator(host, coordinator, false)))  // in this case we can upgrade the license and then mask the CPU
             {
@@ -168,7 +168,7 @@ namespace XenAdmin.Commands
                     }
                 }
 
-                var hosts2 = _hosts.FindAll(host => !PoolJoinRules.CompatibleCPUs(host, coordinator, false));
+                var hosts2 = _hosts.FindAll(host => !PoolJoinRules.CompatibleCPUs(host, coordinator));
                 if (hosts2.Count > 0)
                 {
                     string msg = string.Format(hosts2.Count == 1
@@ -210,7 +210,7 @@ namespace XenAdmin.Commands
             foreach (Host host in _hosts)
             {
                 string opaque_ref = host.opaque_ref;
-                var action = new AddHostToPoolAction(_pool, host, GetAdPrompt, NtolDialog,
+                var action = new AddHostToPoolAction(_pool, host, GetAdPrompt,
                     (licenseFailures, exceptionMessage) =>
                     {
                         if (licenseFailures.Count > 0)

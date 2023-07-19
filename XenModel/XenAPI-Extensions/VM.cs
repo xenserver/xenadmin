@@ -721,7 +721,7 @@ namespace XenAPI
         /// </summary>
         public bool HasNewVirtualisationStates()
         {
-            return IsWindows() && Helpers.DundeeOrGreater(Connection);
+            return IsWindows();
         }
 
         /// <summary>

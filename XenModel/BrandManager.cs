@@ -51,7 +51,8 @@ namespace XenAdmin.Core
             CompanyNameShort = customBranding.CompanyNameShort;
             ProductBrand = customBranding.ProductBrand;
             ProductVersionPost82 = customBranding.ProductVersionText;
-            UpdatesUrl = customBranding.UpdatesUrl;
+            XcUpdatesUrl = customBranding.XcUpdatesUrl;
+            CfuUrl = customBranding.CfuUrl;
             VmTools = customBranding.VmTools;
             XenHost = customBranding.XenHost;
         }
@@ -83,11 +84,11 @@ namespace XenAdmin.Core
 
         public static readonly string ProductBrand;
 
-        public static readonly string ProductVersion56 = Get("PRODUCT_VERSION_5_6");
-
         public static readonly string ProductVersion70 = Get("PRODUCT_VERSION_7_0");
 
         public static readonly string ProductVersion70Short = Get("PRODUCT_VERSION_7_0_SHORT");
+
+        public static readonly string ProductVersion712 = Get("PRODUCT_VERSION_7_1_2");
 
         public static readonly string ProductVersion712Short = Get("PRODUCT_VERSION_7_1_2_SHORT");
 
@@ -105,7 +106,9 @@ namespace XenAdmin.Core
 
         public static readonly string Trademarks = Get("TRADEMARKS");
 
-        public static readonly string UpdatesUrl;
+        public static readonly string XcUpdatesUrl;
+
+        public static readonly string CfuUrl;
 
         public static readonly string VmTools;
 

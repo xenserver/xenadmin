@@ -144,14 +144,14 @@
   <data name="PERF_ALERT_MAIL_DEFAULT_LANGUAGE" xml:space="preserve">
     <value>en-US</value>
   </data>
-  <data name="PRODUCT_VERSION_5_6" xml:space="preserve">
-    <value>XenServer 5.6</value>
-  </data>
   <data name="PRODUCT_VERSION_7_0" xml:space="preserve">
     <value>XenServer 7.0</value>
   </data>
   <data name="PRODUCT_VERSION_7_0_SHORT" xml:space="preserve">
     <value>7.0</value>
+  </data>
+  <data name="PRODUCT_VERSION_7_1_2" xml:space="preserve">
+    <value>XenServer 7.1 CU2</value>
   </data>
   <data name="PRODUCT_VERSION_7_1_2_SHORT" xml:space="preserve">
     <value>7.1.2</value>
@@ -166,7 +166,7 @@
     <value>Citrix Hypervisor 8.2</value>
   </data>
   <data name="PRODUCT_VERSION_8_2_1" xml:space="preserve">
-    <value>Citrix Hypervisor 8.2.1</value>
+    <value>Citrix Hypervisor 8.2 CU1</value>
   </data>
   <data name="PRODUCT_VERSION_8_2_SHORT" xml:space="preserve">
     <value>8.2</value>

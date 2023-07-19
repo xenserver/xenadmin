@@ -236,7 +236,7 @@ namespace XenAdmin.Actions
         private void Disable(int start, int finish)
         {
             // ask users if they want to decrease ntol, may throw CancelledException if the user says no.
-            MaybeReduceNtolBeforeOp(HostActionKind.Evacuate);
+            MaybeReduceNtolBeforeOp();
 
             RelatedTask = XenAPI.Host.async_disable(Session, Host.opaque_ref);
 

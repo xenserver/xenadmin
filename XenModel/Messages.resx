@@ -321,6 +321,9 @@
   <data name="ACTION_DISABLE_IGMP_SNOOPING" xml:space="preserve">
     <value>Disable IGMP snooping</value>
   </data>
+  <data name="ACTION_DISABLE_LIVE_PATCHING" xml:space="preserve">
+    <value>Disable live patching</value>
+  </data>
   <data name="ACTION_DISABLE_PVS_READ_CACHING" xml:space="preserve">
     <value>Disable PVS-Accelerator</value>
   </data>
@@ -344,6 +347,9 @@
   </data>
   <data name="ACTION_DISABLING_CHANGED_BLOCK_TRACKING" xml:space="preserve">
     <value>Disabling Changed Block Tracking for selected VMs</value>
+  </data>
+  <data name="ACTION_DISABLING_LIVE_PATCHING" xml:space="preserve">
+    <value>Disabling live patching for '{0}'</value>
   </data>
   <data name="ACTION_DISABLING_PVS_READ_CACHING" xml:space="preserve">
     <value>Disabling PVS-Accelerator for selected VMs</value>
@@ -441,6 +447,9 @@
   <data name="ACTION_ENABLE_IGMP_SNOOPING" xml:space="preserve">
     <value>Enable IGMP snooping</value>
   </data>
+  <data name="ACTION_ENABLE_LIVE_PATCHING" xml:space="preserve">
+    <value>Enable live patching</value>
+  </data>
   <data name="ACTION_ENABLE_MIGRATION_COMPRESSION" xml:space="preserve">
     <value>Enabling VM memory and vGPU data compression during VM live migration on '{0}'</value>
   </data>
@@ -469,6 +478,9 @@
     <value>Could not enable metric "{0}".
 
 This could be because the data source is not generating any data. Ensure the prerequisites for collecting this metric are met before attempting to enable it.</value>
+  </data>
+  <data name="ACTION_ENABLING_LIVE_PATCHING" xml:space="preserve">
+    <value>Enabling live patching for '{0}'</value>
   </data>
   <data name="ACTION_ENABLING_PVS_READ_CACHING" xml:space="preserve">
     <value>Enabling PVS-Accelerator for selected VMs</value>
@@ -1961,7 +1973,7 @@ Note that if RBAC is enabled, only alerts which you have privileges to dismiss w
     <value>&amp;Show internet proxy settings</value>
   </data>
   <data name="ALLOWED_UPDATES_DIALOG_MESSAGE" xml:space="preserve">
-    <value>Would you like {0} to periodically check the internet for new versions of the application?</value>
+    <value>Would you like {0} to periodically check the internet for {1} updates and new versions of the application?</value>
   </data>
   <data name="ALREADY_ATTACHED_ELSEWHERE" xml:space="preserve">
     <value>The SR '{0}' is currently attached elsewhere. Do you want to attach it to '{1}'? 
@@ -2123,6 +2135,12 @@ Warning: you must ensure that the SR is not in use by any server not connected t
   </data>
   <data name="AVAILABLE_UPDATES_NETWORK_ERROR" xml:space="preserve">
     <value>There was a network error when searching for available updates. Please see the logs for more information.</value>
+  </data>
+  <data name="AVAILABLE_UPDATES_NOT_FOUND" xml:space="preserve">
+    <value>No updates found</value>
+  </data>
+  <data name="AVAILABLE_UPDATES_SEARCHING" xml:space="preserve">
+    <value>Searching for updates...</value>
   </data>
   <data name="BACKINGUP_HOST" xml:space="preserve">
     <value>Backing up server '{0}'</value>
@@ -2533,9 +2551,6 @@ This will cancel compilation of the status report.</value>
   <data name="CANNOT_FIND_SR_WIZARD_TYPE" xml:space="preserve">
     <value>You cannot configure an SR of type '{0}' using {1}.</value>
   </data>
-  <data name="CANNOT_MIGRATE_VDI_NON_RUNNING_VM" xml:space="preserve">
-    <value>Cannot move this virtual disk because it is attached to a VM that is not running.</value>
-  </data>
   <data name="CANNOT_MOVE_CBT_ENABLED_VDI" xml:space="preserve">
     <value>This virtual disk has CBT enabled. It cannot be moved to another storage repository.</value>
   </data>
@@ -2709,6 +2724,9 @@ If you are upgrading to {0} {1} and above, it is recommended that you first inst
   <data name="CERTIFICATE_VERIFICATION_KEY" xml:space="preserve">
     <value>Certificate Verification</value>
   </data>
+  <data name="CFU_STATUS_CHECK_DESCRIPTION" xml:space="preserve">
+    <value>Ability to download updates</value>
+  </data>
   <data name="CHANGE" xml:space="preserve">
     <value>Change...</value>
   </data>
@@ -2761,6 +2779,12 @@ Do you want to assign these VMs to the schedule '{0}' instead?</value>
   </data>
   <data name="CHECKING_CLUSTERING_STATUS" xml:space="preserve">
     <value>Checking clustering status</value>
+  </data>
+  <data name="CHECKING_CONTAINER_MANAGEMENT" xml:space="preserve">
+    <value>Docker container management check</value>
+  </data>
+  <data name="CHECKING_CONTAINER_MANAGEMENT_GROUP" xml:space="preserve">
+    <value>Checking for legacy Container Management supplemental pack</value>
   </data>
   <data name="CHECKING_DEPRECATED_SRS" xml:space="preserve">
     <value>Checking for deprecated storage repositories</value>
@@ -3966,12 +3990,6 @@ Please reconnect the host and try again.</value>
   <data name="CPM_WIZARD_VM_SELECTION_INTRODUCTION" xml:space="preserve">
     <value>&amp;Virtual network interfaces:</value>
   </data>
-  <data name="CPM_WLB_ENABLED_ON_HOST_FAILURE_REASON" xml:space="preserve">
-    <value>WLB is enabled on the host</value>
-  </data>
-  <data name="CPM_WLB_ENABLED_ON_VM_FAILURE_REASON" xml:space="preserve">
-    <value>WLB is enabled on the source</value>
-  </data>
   <data name="CPS_WIZARD_MIGRATION_PAGE_TITLE_TEMPLATE" xml:space="preserve">
     <value>Select a storage network on the destination pool or standalone server that will be used for the live migration of the virtual disks. 
 
@@ -4848,6 +4866,9 @@ Plugging in untrustworthy USB devices to your computer may put your computer at 
   </data>
   <data name="DOWLOAD_LATEST_XS_TITLE" xml:space="preserve">
     <value>{0} is now available</value>
+  </data>
+  <data name="DOWNLOAD_AND_EXTRACT_ACTION_AUTHENTICATING_DESC" xml:space="preserve">
+    <value>Authenticating your {0} account...</value>
   </data>
   <data name="DOWNLOAD_AND_EXTRACT_ACTION_DOWNLOAD_CANCELLED_DESC" xml:space="preserve">
     <value>Download canceled</value>
@@ -6023,6 +6044,39 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="FILER_PARAM_INVALID_CHAR" xml:space="preserve">
     <value>You entered an invalid character in one of the filer parameters.</value>
   </data>
+  <data name="FILESERVICE_AUTHENTICATE_ERROR" xml:space="preserve">
+    <value>Could not authenticate your [Citrix] account.</value>
+  </data>
+  <data name="FILESERVICE_CLIENTID_FILETYPE" xml:space="preserve">
+    <value>Client ID file (*.json)|*.json</value>
+  </data>
+  <data name="FILESERVICE_CLIENTID_FOUND" xml:space="preserve">
+    <value>A Client ID has been specified.</value>
+  </data>
+  <data name="FILESERVICE_CLIENTID_INVALID_FILE" xml:space="preserve">
+    <value>Invalid or corrupt Client ID file.</value>
+  </data>
+  <data name="FILESERVICE_CLIENTID_NOT_FOUND" xml:space="preserve">
+    <value>A Client ID has not been specified.</value>
+  </data>
+  <data name="FILESERVICE_CLIENTID_TITLE" xml:space="preserve">
+    <value>Select Client ID file.</value>
+  </data>
+  <data name="FILESERVICE_ERROR_400" xml:space="preserve">
+    <value>Received a bad request.</value>
+  </data>
+  <data name="FILESERVICE_ERROR_401" xml:space="preserve">
+    <value>Ensure the Client ID you have specified is valid and has not been revoked.</value>
+  </data>
+  <data name="FILESERVICE_ERROR_403" xml:space="preserve">
+    <value>Your current subscription is insufficient for downloading this update.</value>
+  </data>
+  <data name="FILESERVICE_ERROR_404" xml:space="preserve">
+    <value>Could not download the update. The file was not found.</value>
+  </data>
+  <data name="FILESERVICE_ERROR_500" xml:space="preserve">
+    <value>The authentication server has encountered a situation it doesn't know how to handle.</value>
+  </data>
   <data name="FILTER_SHOW_ALL" xml:space="preserve">
     <value>Show &amp;All</value>
   </data>
@@ -6410,7 +6464,7 @@ Note: Any custom color selections will remain unchanged</value>
     <value>UEFI certificates are missing from your system</value>
   </data>
   <data name="GUI_NOT_COMPATIBLE" xml:space="preserve">
-    <value>This version of {0} can only connect to {1} and greater versions. It cannot connect to {2}.
+    <value>This version of {0} can only connect to {1}, and {2} or greater versions. It cannot connect to {3}.
 
 You can get a compatible version of {0} from the following location:</value>
   </data>
@@ -7452,10 +7506,6 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   <data name="INSTALL_PENDING_UPDATES" xml:space="preserve">
     <value>Install pending &amp;updates...</value>
   </data>
-  <data name="INSTALL_PENDING_UPDATES_DISABLED_REASON" xml:space="preserve">
-    <value>{0} {1} cannot be used for installing updates on servers running {2}.
-Please use latest available {0} for {2} instead.</value>
-  </data>
   <data name="INSTALL_SERVER_CERTIFICATE_ACTION_LINK" xml:space="preserve">
     <value>Install certificate...</value>
   </data>
@@ -7760,9 +7810,6 @@ SR UUID: {1}</value>
   <data name="LICENSE_NO_MULTISELECT_ACTIVATE" xml:space="preserve">
     <value>Servers must be selected one at a time when activating Express {0}.</value>
   </data>
-  <data name="LICENSE_NO_MULTISELECT_LICENSE" xml:space="preserve">
-    <value>When licensing servers earlier than {0}, you must select one server at a time.</value>
-  </data>
   <data name="LICENSE_NOT_ELIGIBLE_FOR_SUPPORT" xml:space="preserve">
     <value>Not eligible for support</value>
   </data>
@@ -7840,6 +7887,9 @@ Standard features only</value>
   </data>
   <data name="LINK_STATUS" xml:space="preserve">
     <value>Link Status</value>
+  </data>
+  <data name="LIVE_PATCHING" xml:space="preserve">
+    <value>Live Patching</value>
   </data>
   <data name="LIVE_PATCHING_FAILED_MULTI_HOST" xml:space="preserve">
     <value>Live patching failed for the following servers:
@@ -9868,6 +9918,15 @@ When you configure an NFS storage repository, you simply provide the host name o
   <data name="NOTIFICATIONS_SUBMODE_EVENTS_UNREAD_ONE" xml:space="preserve">
     <value>Events (1 error)</value>
   </data>
+  <data name="NOTIFICATIONS_SUBMODE_UPDATES_READ" xml:space="preserve">
+    <value>Updates</value>
+  </data>
+  <data name="NOTIFICATIONS_SUBMODE_UPDATES_STATUS" xml:space="preserve">
+    <value>Updates: {0}</value>
+  </data>
+  <data name="NOTIFICATIONS_SUBMODE_UPDATES_UNREAD" xml:space="preserve">
+    <value>Updates ({0})</value>
+  </data>
   <data name="NOTIFICATIONS_TOTAL" xml:space="preserve">
     <value>Notifications ({0})</value>
   </data>
@@ -10018,13 +10077,6 @@ Size: {3}</value>
   </data>
   <data name="PATCH_NEEDS_NEW_XENCENTER" xml:space="preserve">
     <value>This version requires {0} {1} or newer</value>
-  </data>
-  <data name="PATCH_NOT_FOUND" xml:space="preserve">
-    <value>Not found</value>
-  </data>
-  <data name="PATCH_NOT_FOUND_EXPANDED_DESCRIPTION" xml:space="preserve">
-    <value>{0}
-File not found</value>
   </data>
   <data name="PATCH_UPLOADED" xml:space="preserve">
     <value>Update uploaded to server '{0}' </value>
@@ -10222,7 +10274,7 @@ This will cancel the update process and may leave your system in an unstable sta
     <value>Select Update</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_TITLE" xml:space="preserve">
-    <value>Choose an update to upload and install</value>
+    <value>Choose an existing update to install or upload a new one</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_UPDATESEXT" xml:space="preserve">
     <value>{0} Updates and Supplemental Packs (*.iso,*.zip)|*.iso;*.zip</value>
@@ -10232,9 +10284,6 @@ This will cancel the update process and may leave your system in an unstable sta
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_APPLY_UPDATES_MIXED" xml:space="preserve">
     <value>Also apply all released &amp;updates on the new version (only on pools licensed for automated updates)</value>
-  </data>
-  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_HOST_VERSION" xml:space="preserve">
-    <value>Automated updates are not supported on this {0} version</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_PARTIALLY_UPGRADED" xml:space="preserve">
     <value>Automated updates are not supported on partially upgraded {0} pools</value>
@@ -10287,9 +10336,6 @@ Servers where this update cannot be applied appear disabled in this list.</value
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_TITLE" xml:space="preserve">
     <value>Select the servers you want to update</value>
-  </data>
-  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_VERSION_UNSUPPORTED" xml:space="preserve">
-    <value>{0} cannot install updates or supplemental packs on this server.</value>
   </data>
   <data name="PATCHINGWIZARD_SINGLEUPDATE_FAILURE_MANY" xml:space="preserve">
     <value>The installation of update {0} was not completed successfully on all selected servers. The update process has been paused. Press Retry to resume it.</value>
@@ -10723,6 +10769,15 @@ If this value does not correspond to a server within the selected resource pool 
   </data>
   <data name="PROBING_HBA_TITLE" xml:space="preserve">
     <value>Probing for LUNs on {0}</value>
+  </data>
+  <data name="PROBLEM_CONTAINER_MANAGEMENT_DESCRIPTION" xml:space="preserve">
+    <value>{0}: Support for container management has been removed as of {1}.</value>
+  </data>
+  <data name="PROBLEM_CONTAINER_MANAGEMENT_UPDATE" xml:space="preserve">
+    <value>You will no longer be able to use the Container Management supplemental pack for managing Docker containers. The  update will not remove the supplemental pack from your system, but it may not be fully, if at all, functional.</value>
+  </data>
+  <data name="PROBLEM_CONTAINER_MANAGEMENT_UPGRADE" xml:space="preserve">
+    <value>If you are upgrading to {0} or above, you will no longer be able to use the Container Management supplemental pack for managing Docker containers. The upgrade will remove the supplemental pack from your system.</value>
   </data>
   <data name="PROBLEM_COORDINATOR_PENDING_RESTART_HOST" xml:space="preserve">
     <value>{0}: The coordinator needs to be rebooted first</value>
@@ -11278,11 +11333,17 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   <data name="RESOLVED_AS" xml:space="preserve">
     <value>Resolved as {0}</value>
   </data>
+  <data name="RESTORE_DISMISSED_UPDATES" xml:space="preserve">
+    <value>Restore dismissed updates</value>
+  </data>
   <data name="RESTORE_FROM_BACKUP_FINALIZE" xml:space="preserve">
     <value>Backup file loaded to server '{0}'. Refer to the "{1} Administrator's Guide" for instructions on how to complete the restore procedure.</value>
   </data>
   <data name="RESTORE_HOST" xml:space="preserve">
     <value>Restore From Backup...</value>
+  </data>
+  <data name="RESTORING" xml:space="preserve">
+    <value>Restoring...</value>
   </data>
   <data name="RESTORING_HOST" xml:space="preserve">
     <value>Restoring server '{0}'</value>
@@ -11356,6 +11417,12 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   <data name="ROLLING_POOL_UPGRADE_ELLIPSIS" xml:space="preserve">
     <value>Rolling Pool &amp;Upgrade...</value>
   </data>
+  <data name="ROLLING_UPGRADE_APPLY_UPDATES" xml:space="preserve">
+    <value>Apply all released &amp;updates on the new version</value>
+  </data>
+  <data name="ROLLING_UPGRADE_APPLY_UPDATES_MIXED" xml:space="preserve">
+    <value>Apply all released &amp;updates on the new version (only on pools licensed for automated updates)</value>
+  </data>
   <data name="ROLLING_UPGRADE_BUTTON_LABEL_STOP" xml:space="preserve">
     <value>S&amp;top</value>
   </data>
@@ -11392,7 +11459,7 @@ This will cancel the rolling pool upgrade process and may leave your system in a
     <value>Upgrade Options</value>
   </data>
   <data name="ROLLING_UPGRADE_EXTRAS_PAGE_TITLE" xml:space="preserve">
-    <value>Optionally, apply supplemental packs</value>
+    <value>Optionally, apply updates or supplemental packs</value>
   </data>
   <data name="ROLLING_UPGRADE_MODE_PAGE" xml:space="preserve">
     <value>Choose the upgrade mode: Automatic or Manual</value>
@@ -11675,7 +11742,7 @@ The coordinator must be upgraded first, so if you skip the coordinator, the roll
     <value>The current time on the pool coordinator is: {0}</value>
   </data>
   <data name="SERVER_TOO_OLD" xml:space="preserve">
-    <value>This version of {0} supports {1} onwards.</value>
+    <value>This version of {0} can only connect to {1}, and {2} or greater versions.</value>
   </data>
   <data name="SERVER_TOO_OLD_SOLUTION" xml:space="preserve">
     <value>Use an earlier version of {0} to manage this server.</value>
@@ -13939,9 +14006,6 @@ Schedule:
   </data>
   <data name="WARNING_HEALTH_CHECK_SERVICE_INFO" xml:space="preserve">
     <value>Health Check has been removed. You must disable Health Check first.</value>
-  </data>
-  <data name="WARNING_PRE_CLOUD_VERSION_CONNECTION" xml:space="preserve">
-    <value>{0} {1} is not recommended for general management of servers running {2}. Please use latest available {0} for {2} instead.</value>
   </data>
   <data name="WEB_BROWSER_FAILED" xml:space="preserve">
     <value>Cannot find '{0}'.</value>

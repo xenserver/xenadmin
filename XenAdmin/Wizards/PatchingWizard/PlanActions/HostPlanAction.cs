@@ -38,6 +38,8 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 {
     public abstract class HostPlanAction : PlanActionWithSession
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private readonly Host _currentHost;
         protected readonly XenRef<Host> HostXenRef;
 

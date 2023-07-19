@@ -76,6 +76,7 @@ namespace XenAdmin.Dialogs
         private VMEnlightenmentEditPage VMEnlightenmentEditPage;
         private Page_CloudConfigParameters CloudConfigParametersPage;
         private SecurityEditPage SecurityEditPage;
+        private LivePatchingEditPage LivePatchingEditPage;
         private USBEditPage usbEditPage;
         private NetworkOptionsEditPage NetworkOptionsEditPage;
         private ClusteringEditPage ClusteringEditPage;
@@ -200,13 +201,16 @@ namespace XenAdmin.Dialogs
                 if (isPoolOrStandalone && !Helpers.FeatureForbidden(_xenObjectCopy.Connection, Host.RestrictSslLegacySwitch) && !Helpers.StockholmOrGreater(connection))
                     ShowTab(SecurityEditPage = new SecurityEditPage());
 
+                if (isPoolOrStandalone && !Helpers.FeatureForbidden(_xenObjectCopy.Connection, Host.RestrictLivePatching) && !Helpers.CloudOrGreater(connection))
+                    ShowTab(LivePatchingEditPage = new LivePatchingEditPage());
+
                 if (isPoolOrStandalone && !Helpers.FeatureForbidden(_xenObjectCopy.Connection, Host.RestrictIGMPSnooping) && Helpers.GetCoordinator(pool).vSwitchNetworkBackend())
                     ShowTab(NetworkOptionsEditPage = new NetworkOptionsEditPage());
 
                 if (isPoolOrStandalone && !Helpers.FeatureForbidden(_xenObjectCopy.Connection, Host.RestrictCorosync))
                     ShowTab(ClusteringEditPage = new ClusteringEditPage());
 
-                if (isPool && Helpers.Post82X(_xenObjectCopy.Connection) && Helpers.XapiEqualOrGreater_22_33_0(_xenObjectCopy.Connection))
+                if (isPool && Helpers.CloudOrGreater(_xenObjectCopy.Connection) && Helpers.XapiEqualOrGreater_22_33_0(_xenObjectCopy.Connection))
                     ShowTab(_poolAdvancedEditPage = new PoolAdvancedEditPage());
 
                 if (isNetwork)

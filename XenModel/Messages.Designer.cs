@@ -673,6 +673,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disable live patching.
+        /// </summary>
+        public static string ACTION_DISABLE_LIVE_PATCHING {
+            get {
+                return ResourceManager.GetString("ACTION_DISABLE_LIVE_PATCHING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disable PVS-Accelerator.
         /// </summary>
         public static string ACTION_DISABLE_PVS_READ_CACHING {
@@ -741,6 +750,15 @@ namespace XenAdmin {
         public static string ACTION_DISABLING_CHANGED_BLOCK_TRACKING {
             get {
                 return ResourceManager.GetString("ACTION_DISABLING_CHANGED_BLOCK_TRACKING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disabling live patching for &apos;{0}&apos;.
+        /// </summary>
+        public static string ACTION_DISABLING_LIVE_PATCHING {
+            get {
+                return ResourceManager.GetString("ACTION_DISABLING_LIVE_PATCHING", resourceCulture);
             }
         }
         
@@ -1033,6 +1051,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enable live patching.
+        /// </summary>
+        public static string ACTION_ENABLE_LIVE_PATCHING {
+            get {
+                return ResourceManager.GetString("ACTION_ENABLE_LIVE_PATCHING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enabling VM memory and vGPU data compression during VM live migration on &apos;{0}&apos;.
         /// </summary>
         public static string ACTION_ENABLE_MIGRATION_COMPRESSION {
@@ -1112,6 +1139,15 @@ namespace XenAdmin {
         public static string ACTION_ENABLING_DATASOURCE_ERROR {
             get {
                 return ResourceManager.GetString("ACTION_ENABLING_DATASOURCE_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enabling live patching for &apos;{0}&apos;.
+        /// </summary>
+        public static string ACTION_ENABLING_LIVE_PATCHING {
+            get {
+                return ResourceManager.GetString("ACTION_ENABLING_LIVE_PATCHING", resourceCulture);
             }
         }
         
@@ -5360,7 +5396,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Would you like {0} to periodically check the internet for new versions of the application?.
+        ///   Looks up a localized string similar to Would you like {0} to periodically check the internet for {1} updates and new versions of the application?.
         /// </summary>
         public static string ALLOWED_UPDATES_DIALOG_MESSAGE {
             get {
@@ -5832,6 +5868,24 @@ namespace XenAdmin {
         public static string AVAILABLE_UPDATES_NETWORK_ERROR {
             get {
                 return ResourceManager.GetString("AVAILABLE_UPDATES_NETWORK_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No updates found.
+        /// </summary>
+        public static string AVAILABLE_UPDATES_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("AVAILABLE_UPDATES_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Searching for updates....
+        /// </summary>
+        public static string AVAILABLE_UPDATES_SEARCHING {
+            get {
+                return ResourceManager.GetString("AVAILABLE_UPDATES_SEARCHING", resourceCulture);
             }
         }
         
@@ -6989,15 +7043,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot move this virtual disk because it is attached to a VM that is not running..
-        /// </summary>
-        public static string CANNOT_MIGRATE_VDI_NON_RUNNING_VM {
-            get {
-                return ResourceManager.GetString("CANNOT_MIGRATE_VDI_NON_RUNNING_VM", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to This virtual disk has CBT enabled. It cannot be moved to another storage repository..
         /// </summary>
         public static string CANNOT_MOVE_CBT_ENABLED_VDI {
@@ -7495,6 +7540,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ability to download updates.
+        /// </summary>
+        public static string CFU_STATUS_CHECK_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("CFU_STATUS_CHECK_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change....
         /// </summary>
         public static string CHANGE {
@@ -7634,6 +7688,24 @@ namespace XenAdmin {
         public static string CHECKING_CLUSTERING_STATUS {
             get {
                 return ResourceManager.GetString("CHECKING_CLUSTERING_STATUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Docker container management check.
+        /// </summary>
+        public static string CHECKING_CONTAINER_MANAGEMENT {
+            get {
+                return ResourceManager.GetString("CHECKING_CONTAINER_MANAGEMENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checking for legacy Container Management supplemental pack.
+        /// </summary>
+        public static string CHECKING_CONTAINER_MANAGEMENT_GROUP {
+            get {
+                return ResourceManager.GetString("CHECKING_CONTAINER_MANAGEMENT_GROUP", resourceCulture);
             }
         }
         
@@ -11092,24 +11164,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to WLB is enabled on the host.
-        /// </summary>
-        public static string CPM_WLB_ENABLED_ON_HOST_FAILURE_REASON {
-            get {
-                return ResourceManager.GetString("CPM_WLB_ENABLED_ON_HOST_FAILURE_REASON", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to WLB is enabled on the source.
-        /// </summary>
-        public static string CPM_WLB_ENABLED_ON_VM_FAILURE_REASON {
-            get {
-                return ResourceManager.GetString("CPM_WLB_ENABLED_ON_VM_FAILURE_REASON", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Select a storage network on the destination pool or standalone server that will be used for the live migration of the virtual disks. 
         ///
         ///For optimal performance and reliability during template migration, ensure that the network used for the storage migration is not being used for management or virtual machine traffic..
@@ -13711,6 +13765,15 @@ namespace XenAdmin {
         public static string DOWLOAD_LATEST_XS_TITLE {
             get {
                 return ResourceManager.GetString("DOWLOAD_LATEST_XS_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Authenticating your {0} account....
+        /// </summary>
+        public static string DOWNLOAD_AND_EXTRACT_ACTION_AUTHENTICATING_DESC {
+            get {
+                return ResourceManager.GetString("DOWNLOAD_AND_EXTRACT_ACTION_AUTHENTICATING_DESC", resourceCulture);
             }
         }
         
@@ -17193,6 +17256,105 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not authenticate your [Citrix] account..
+        /// </summary>
+        public static string FILESERVICE_AUTHENTICATE_ERROR {
+            get {
+                return ResourceManager.GetString("FILESERVICE_AUTHENTICATE_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Client ID file (*.json)|*.json.
+        /// </summary>
+        public static string FILESERVICE_CLIENTID_FILETYPE {
+            get {
+                return ResourceManager.GetString("FILESERVICE_CLIENTID_FILETYPE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A Client ID has been specified..
+        /// </summary>
+        public static string FILESERVICE_CLIENTID_FOUND {
+            get {
+                return ResourceManager.GetString("FILESERVICE_CLIENTID_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid or corrupt Client ID file..
+        /// </summary>
+        public static string FILESERVICE_CLIENTID_INVALID_FILE {
+            get {
+                return ResourceManager.GetString("FILESERVICE_CLIENTID_INVALID_FILE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A Client ID has not been specified..
+        /// </summary>
+        public static string FILESERVICE_CLIENTID_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("FILESERVICE_CLIENTID_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Client ID file..
+        /// </summary>
+        public static string FILESERVICE_CLIENTID_TITLE {
+            get {
+                return ResourceManager.GetString("FILESERVICE_CLIENTID_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Received a bad request..
+        /// </summary>
+        public static string FILESERVICE_ERROR_400 {
+            get {
+                return ResourceManager.GetString("FILESERVICE_ERROR_400", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ensure the Client ID you have specified is valid and has not been revoked..
+        /// </summary>
+        public static string FILESERVICE_ERROR_401 {
+            get {
+                return ResourceManager.GetString("FILESERVICE_ERROR_401", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your current subscription is insufficient for downloading this update..
+        /// </summary>
+        public static string FILESERVICE_ERROR_403 {
+            get {
+                return ResourceManager.GetString("FILESERVICE_ERROR_403", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not download the update. The file was not found..
+        /// </summary>
+        public static string FILESERVICE_ERROR_404 {
+            get {
+                return ResourceManager.GetString("FILESERVICE_ERROR_404", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The authentication server has encountered a situation it doesn&apos;t know how to handle..
+        /// </summary>
+        public static string FILESERVICE_ERROR_500 {
+            get {
+                return ResourceManager.GetString("FILESERVICE_ERROR_500", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show &amp;All.
         /// </summary>
         public static string FILTER_SHOW_ALL {
@@ -18347,7 +18509,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This version of {0} can only connect to {1} and greater versions. It cannot connect to {2}.
+        ///   Looks up a localized string similar to This version of {0} can only connect to {1}, and {2} or greater versions. It cannot connect to {3}.
         ///
         ///You can get a compatible version of {0} from the following location:.
         /// </summary>
@@ -21387,16 +21549,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} {1} cannot be used for installing updates on servers running {2}.
-        ///Please use latest available {0} for {2} instead..
-        /// </summary>
-        public static string INSTALL_PENDING_UPDATES_DISABLED_REASON {
-            get {
-                return ResourceManager.GetString("INSTALL_PENDING_UPDATES_DISABLED_REASON", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Install certificate....
         /// </summary>
         public static string INSTALL_SERVER_CERTIFICATE_ACTION_LINK {
@@ -22307,15 +22459,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to When licensing servers earlier than {0}, you must select one server at a time..
-        /// </summary>
-        public static string LICENSE_NO_MULTISELECT_LICENSE {
-            get {
-                return ResourceManager.GetString("LICENSE_NO_MULTISELECT_LICENSE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Not eligible for support.
         /// </summary>
         public static string LICENSE_NOT_ELIGIBLE_FOR_SUPPORT {
@@ -22534,6 +22677,15 @@ namespace XenAdmin {
         public static string LINK_STATUS {
             get {
                 return ResourceManager.GetString("LINK_STATUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Live Patching.
+        /// </summary>
+        public static string LIVE_PATCHING {
+            get {
+                return ResourceManager.GetString("LIVE_PATCHING", resourceCulture);
             }
         }
         
@@ -28399,6 +28551,33 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Updates.
+        /// </summary>
+        public static string NOTIFICATIONS_SUBMODE_UPDATES_READ {
+            get {
+                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_UPDATES_READ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Updates: {0}.
+        /// </summary>
+        public static string NOTIFICATIONS_SUBMODE_UPDATES_STATUS {
+            get {
+                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_UPDATES_STATUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Updates ({0}).
+        /// </summary>
+        public static string NOTIFICATIONS_SUBMODE_UPDATES_UNREAD {
+            get {
+                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_UPDATES_UNREAD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Notifications ({0}).
         /// </summary>
         public static string NOTIFICATIONS_TOTAL {
@@ -28840,25 +29019,6 @@ namespace XenAdmin {
         public static string PATCH_NEEDS_NEW_XENCENTER {
             get {
                 return ResourceManager.GetString("PATCH_NEEDS_NEW_XENCENTER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Not found.
-        /// </summary>
-        public static string PATCH_NOT_FOUND {
-            get {
-                return ResourceManager.GetString("PATCH_NOT_FOUND", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0}
-        ///File not found.
-        /// </summary>
-        public static string PATCH_NOT_FOUND_EXPANDED_DESCRIPTION {
-            get {
-                return ResourceManager.GetString("PATCH_NOT_FOUND_EXPANDED_DESCRIPTION", resourceCulture);
             }
         }
         
@@ -29442,7 +29602,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Choose an update to upload and install.
+        ///   Looks up a localized string similar to Choose an existing update to install or upload a new one.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTPATCHPAGE_TITLE {
             get {
@@ -29474,15 +29634,6 @@ namespace XenAdmin {
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_APPLY_UPDATES_MIXED {
             get {
                 return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_APPLY_UPDATES_MIXED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Automated updates are not supported on this {0} version.
-        /// </summary>
-        public static string PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_HOST_VERSION {
-            get {
-                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_HOST_VERSION", resourceCulture);
             }
         }
         
@@ -29632,15 +29783,6 @@ namespace XenAdmin {
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_TITLE {
             get {
                 return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} cannot install updates or supplemental packs on this server..
-        /// </summary>
-        public static string PATCHINGWIZARD_SELECTSERVERPAGE_VERSION_UNSUPPORTED {
-            get {
-                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_VERSION_UNSUPPORTED", resourceCulture);
             }
         }
         
@@ -30920,6 +31062,33 @@ namespace XenAdmin {
         public static string PROBING_HBA_TITLE {
             get {
                 return ResourceManager.GetString("PROBING_HBA_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: Support for container management has been removed as of {1}..
+        /// </summary>
+        public static string PROBLEM_CONTAINER_MANAGEMENT_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("PROBLEM_CONTAINER_MANAGEMENT_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You will no longer be able to use the Container Management supplemental pack for managing Docker containers. The  update will not remove the supplemental pack from your system, but it may not be fully, if at all, functional..
+        /// </summary>
+        public static string PROBLEM_CONTAINER_MANAGEMENT_UPDATE {
+            get {
+                return ResourceManager.GetString("PROBLEM_CONTAINER_MANAGEMENT_UPDATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you are upgrading to {0} or above, you will no longer be able to use the Container Management supplemental pack for managing Docker containers. The upgrade will remove the supplemental pack from your system..
+        /// </summary>
+        public static string PROBLEM_CONTAINER_MANAGEMENT_UPGRADE {
+            get {
+                return ResourceManager.GetString("PROBLEM_CONTAINER_MANAGEMENT_UPGRADE", resourceCulture);
             }
         }
         
@@ -32528,6 +32697,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Restore dismissed updates.
+        /// </summary>
+        public static string RESTORE_DISMISSED_UPDATES {
+            get {
+                return ResourceManager.GetString("RESTORE_DISMISSED_UPDATES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Backup file loaded to server &apos;{0}&apos;. Refer to the &quot;{1} Administrator&apos;s Guide&quot; for instructions on how to complete the restore procedure..
         /// </summary>
         public static string RESTORE_FROM_BACKUP_FINALIZE {
@@ -32542,6 +32720,15 @@ namespace XenAdmin {
         public static string RESTORE_HOST {
             get {
                 return ResourceManager.GetString("RESTORE_HOST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Restoring....
+        /// </summary>
+        public static string RESTORING {
+            get {
+                return ResourceManager.GetString("RESTORING", resourceCulture);
             }
         }
         
@@ -32762,6 +32949,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Apply all released &amp;updates on the new version.
+        /// </summary>
+        public static string ROLLING_UPGRADE_APPLY_UPDATES {
+            get {
+                return ResourceManager.GetString("ROLLING_UPGRADE_APPLY_UPDATES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Apply all released &amp;updates on the new version (only on pools licensed for automated updates).
+        /// </summary>
+        public static string ROLLING_UPGRADE_APPLY_UPDATES_MIXED {
+            get {
+                return ResourceManager.GetString("ROLLING_UPGRADE_APPLY_UPDATES_MIXED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to S&amp;top.
         /// </summary>
         public static string ROLLING_UPGRADE_BUTTON_LABEL_STOP {
@@ -32863,7 +33068,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Optionally, apply supplemental packs.
+        ///   Looks up a localized string similar to Optionally, apply updates or supplemental packs.
         /// </summary>
         public static string ROLLING_UPGRADE_EXTRAS_PAGE_TITLE {
             get {
@@ -33683,7 +33888,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This version of {0} supports {1} onwards..
+        ///   Looks up a localized string similar to This version of {0} can only connect to {1}, and {2} or greater versions..
         /// </summary>
         public static string SERVER_TOO_OLD {
             get {
@@ -40403,15 +40608,6 @@ namespace XenAdmin {
         public static string WARNING_HEALTH_CHECK_SERVICE_INFO {
             get {
                 return ResourceManager.GetString("WARNING_HEALTH_CHECK_SERVICE_INFO", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} {1} is not recommended for general management of servers running {2}. Please use latest available {0} for {2} instead..
-        /// </summary>
-        public static string WARNING_PRE_CLOUD_VERSION_CONNECTION {
-            get {
-                return ResourceManager.GetString("WARNING_PRE_CLOUD_VERSION_CONNECTION", resourceCulture);
             }
         }
         

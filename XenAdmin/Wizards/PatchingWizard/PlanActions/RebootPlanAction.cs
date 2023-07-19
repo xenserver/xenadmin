@@ -37,6 +37,8 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 {
     public abstract class RebootPlanAction : HostPlanAction
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private bool _cancelled;
         private bool _lostConnection;
         private readonly object _lockObj = new object();

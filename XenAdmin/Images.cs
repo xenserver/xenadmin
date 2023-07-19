@@ -763,6 +763,7 @@ namespace XenAdmin
             public static Bitmap _001_WindowView_h32bit_16 = Properties.Resources._001_WindowView_h32bit_16;
             public static Bitmap _002_Configure_h32bit_16 = Properties.Resources._002_Configure_h32bit_16;
             public static Bitmap _015_Download_h32bit_32 = Properties.Resources._015_Download_h32bit_32;
+            public static Bitmap _015_Download_h32bit_16 = Properties.Resources._015_Download_h32bit_16;
             public static Bitmap _075_TickRound_h32bit_16 = Properties.Resources._075_TickRound_h32bit_16;
             public static Bitmap _075_WarningRound_h32bit_16 = Properties.Resources._075_WarningRound_h32bit_16;
             public static Bitmap _112_LeftArrowLong_Blue_24x24_72 = Properties.Resources._112_LeftArrowLong_Blue_24x24_72;

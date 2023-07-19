@@ -120,6 +120,9 @@
   <data name="CIS_URL" xml:space="preserve">
     <value>https://cis.citrix.com</value>
   </data>
+  <data name="CLIENT_ID_URL" xml:space="preserve">
+    <value>https://support.citrix.com/xencenterclientiddownload</value>
+  </data>
   <data name="DEPRECATION_URL" xml:space="preserve">
     <value>http://docs.citrix.com/en-us/citrix-hypervisor/whats-new/removed-features.html</value>
   </data>
@@ -158,6 +161,9 @@
   </data>
   <data name="RELEASE_NOTES_URL" xml:space="preserve">
     <value>https://docs.citrix.com/en-us/citrix-hypervisor/citrix-hypervisor-center/whats-new</value>
+  </data>
+  <data name="TOKEN_API_URL" xml:space="preserve">
+    <value>https://fileservice.citrix.com/api/session/token</value>
   </data>
   <data name="UPSELL_LEARNMOREURL_TRIAL" xml:space="preserve">
     <value>https://www.citrix.com/products/citrix-hypervisor/get-started.html</value>

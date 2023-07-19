@@ -29,42 +29,37 @@
  */
 
 using System.Collections.Generic;
-using System.Linq;
+using XenAdmin.Actions;
 using XenAdmin.Core;
+using XenAdmin.Diagnostics.Problems;
+using XenAdmin.Diagnostics.Problems.UtilityProblem;
+using XenAPI;
 
-namespace XenAdmin.Dialogs.LicenseManagerSelectionVerifiers
+namespace XenAdmin.Diagnostics.Checks
 {
-    public class OlderServerVerifier : LicenseSelectionVerifier
+    class CfuAvailabilityCheck : Check
     {
-        public OlderServerVerifier(List<LicenseDataGridViewRow> rowsToVerify) :base(rowsToVerify){}
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public override string VerificationDetails()
+        protected override Problem RunCheck()
         {
-            return Status == VerificationStatus.Error && RowsToVerify.Count > 1
-                ? string.Format(Messages.LICENSE_NO_MULTISELECT_LICENSE, BrandManager.ProductVersion56)
-                : string.Empty;
-        }
+            var action = new DownloadCfuAction(true, true, Updates.UserAgent,
+                XenAdminConfigManager.Provider.GetCustomCfuLocation() ?? BrandManager.CfuUrl, true);
 
-
-        public override void Verify()
-        {
-            if (RowsToVerify.Count < 1)
+            try
             {
-                Status = VerificationStatus.Error;
-                return;
+                action.RunSync(action.Session);
+            }
+            catch
+            {
+                log.WarnFormat("Could not download check for update file.");
             }
 
-            bool allCanUseServer = RowsToVerify.TrueForAll(r => r.CanUseLicenseServer);
-            int cannotUse = RowsToVerify.Where(r => !r.CanUseLicenseServer).ToList().Count;
-            bool oldSelectionValid = cannotUse < 2 && cannotUse > 0 && cannotUse == RowsToVerify.Count;
-
-            if (allCanUseServer || oldSelectionValid)
-            {
-                Status = VerificationStatus.OK;
-                return;
-            }
-            
-            Status = VerificationStatus.Error;
+            return action.Succeeded ? null : new CfuNotAvailableProblem(this);
         }
+
+        public override string Description => Messages.CFU_STATUS_CHECK_DESCRIPTION;
+
+        public override IList<IXenObject> XenObjects => null;
     }
 }

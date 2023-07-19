@@ -277,12 +277,10 @@ namespace XenAdmin.Network
                 // changes type, for example.
                 AddError(owner, connection, string.Format(Messages.SERVER_API_INCOMPATIBLE, BrandManager.BrandConsole), Messages.SOLUTION_UNKNOWN);
             }
-            else if (error is ServerNotSupported)
+            else if (error is ServerNotSupported ex1)
             {
                 // Server version is too old for this version of XenCenter
-                AddError(owner, connection,
-                    string.Format(Messages.SERVER_TOO_OLD, BrandManager.BrandConsole, BrandManager.ProductVersion70),
-                    string.Format(Messages.SERVER_TOO_OLD_SOLUTION, BrandManager.BrandConsole));
+                AddError(owner, connection, ex1.Message, string.Format(Messages.SERVER_TOO_OLD_SOLUTION, BrandManager.BrandConsole));
             }
             else
             {

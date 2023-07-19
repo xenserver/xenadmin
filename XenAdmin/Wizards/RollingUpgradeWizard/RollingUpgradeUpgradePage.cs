@@ -41,6 +41,8 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 {
     public partial class RollingUpgradeUpgradePage : AutomatedUpdatesBasePage
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public RollingUpgradeUpgradePage()
         {
             InitializeComponent();
@@ -148,7 +150,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
         protected override void DoAfterInitialPlanActions(UpdateProgressBackgroundWorker bgw, Host host, List<Host> hosts)
         {
-            if (!ApplySuppPackAfterUpgrade)
+            if (!ApplyUpdatesToNewVersion && !ApplySuppPackAfterUpgrade)
                 return;
 
             var theHostPlan = bgw.HostPlans.FirstOrDefault(ha => ha.Host.Equals(host));
@@ -159,6 +161,46 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 return;
 
             host = host.Connection.TryResolveWithTimeout(new XenRef<Host>(host.opaque_ref));
+
+            if (ApplyUpdatesToNewVersion)
+            {
+                var automatedUpdatesRestricted = host.Connection.Cache.Hosts.Any(Host.RestrictBatchHotfixApply); //if any host is not licensed for automated updates (only considering DundeeOrGreater hosts)
+
+                if (!automatedUpdatesRestricted)
+                {
+                    if (!MinimalPatches.ContainsKey(bgw))
+                    {
+                        log.InfoFormat("Calculating minimal patches for {0}", host.Name());
+                        Updates.CheckForServerUpdates(userRequested: true, async: false);
+                        var mp = Updates.GetMinimalPatches(host);
+                        log.InfoFormat("Minimal patches for {0}: {1}", host.Name(),
+                            mp == null ? "None" : string.Join(",", mp.Select(p => p.Name)));
+
+                        MinimalPatches.Add(bgw, mp);
+                    }
+
+                    var minimalPatches = MinimalPatches[bgw];
+
+                    if (minimalPatches != null)
+                    {
+                        if (!AllUploadedPatches.ContainsKey(bgw))
+                            AllUploadedPatches.Add(bgw, new List<XenServerPatch>());
+                        var uploadedPatches = AllUploadedPatches[bgw];
+
+                        var hp = GetUpdatePlanActionsForHost(host, hosts, minimalPatches, uploadedPatches,
+                            new KeyValuePair<XenServerPatch, string>(), false);
+                        if (hp.UpdatesPlanActions != null && hp.UpdatesPlanActions.Count > 0)
+                        {
+                            theHostPlan.UpdatesPlanActions.AddRange(hp.UpdatesPlanActions);
+                            theHostPlan.DelayedPlanActions.InsertRange(0, hp.DelayedPlanActions);
+                        }
+                    }
+                }
+                else
+                {
+                    log.InfoFormat("Skipping updates installation on {0} because the batch hotfix application is restricted in the pool", host.Name());
+                }
+            }
 
             if (ApplySuppPackAfterUpgrade && Helpers.ElyOrGreater(host))
             {

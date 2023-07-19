@@ -91,9 +91,8 @@ namespace XenAdmin.Core
         /// <param name="supporterConnection">The connection of the server that wants to join the pool</param>
         /// <param name="coordinatorConnection">The connection of the existing pool or of the proposed coordinator of a new pool</param>
         /// <param name="allowLicenseUpgrade">Whether we can upgrade a free host to a v6 license of the pool it's joining</param>
-        /// <param name="allowCpuLevelling">Whether we can apply CPU levelling to the supporter before it joins the pool</param>
         /// <returns>The reason why the server can't join the pool, or Reason.Allowed if it's OK</returns>
-        public static Reason CanJoinPool(IXenConnection supporterConnection, IXenConnection coordinatorConnection, bool allowLicenseUpgrade, bool allowCpuLevelling, bool allowSupporterAdConfig, int poolSizeIncrement = 1)
+        public static Reason CanJoinPool(IXenConnection supporterConnection, IXenConnection coordinatorConnection, bool allowLicenseUpgrade, bool allowSupporterAdConfig, int poolSizeIncrement = 1)
         {
             if (supporterConnection == null || !supporterConnection.IsConnected)
                 return Reason.NotConnected;
@@ -122,7 +121,7 @@ namespace XenAdmin.Core
             if (!RoleOK(coordinatorConnection))
                 return Reason.WrongRoleOnCoordinator;
 
-            if (!CompatibleCPUs(supporterHost, coordinatorHost, allowCpuLevelling))
+            if (!CompatibleCPUs(supporterHost, coordinatorHost))
                 return Reason.DifferentCPUs;
 
             if (DifferentServerVersion(supporterHost, coordinatorHost))
@@ -310,7 +309,7 @@ namespace XenAdmin.Core
         // If CompatibleCPUs(supporter, coordinator, false) is true, the CPUs can be pooled without masking first.
         // If CompatibleCPUs(supporter, coordinator, true) is true but CompatibleCPUs(supporter, coordinator, false) is false,
         // the CPUs can be pooled but only if they are masked first.
-        public static bool CompatibleCPUs(Host supporter, Host coordinator, bool allowCpuLevelling)
+        public static bool CompatibleCPUs(Host supporter, Host coordinator)
         {
             if (supporter == null || coordinator == null)
                 return true;
@@ -326,23 +325,7 @@ namespace XenAdmin.Core
                     return false;
 
                 // As of Dundee, feature levelling makes all CPUs from the same vendor compatible
-                if (Helpers.DundeeOrGreater(coordinator) || Helpers.DundeeOrGreater(supporter))
-                    return true;
-
-                if (supporter_cpu_info["features"] == coordinator_cpu_info["features"])
-                    return true;
-
-                if (allowCpuLevelling)
-                {
-                    string cpuid_feature_mask = null;
-                    Pool pool = Helpers.GetPoolOfOne(coordinator.Connection);
-                    if (pool != null && pool.other_config.ContainsKey("cpuid_feature_mask"))
-                        cpuid_feature_mask = pool.other_config["cpuid_feature_mask"];
-
-                    return MaskableTo(supporter_cpu_info["maskable"], supporter_cpu_info["physical_features"], coordinator_cpu_info["features"], cpuid_feature_mask);
-                }
-
-                return false;    
+                return true;
             }
 
             // Host.cpu_info not supported: use the old method which compares vendor, family, model and flags

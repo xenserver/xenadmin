@@ -156,14 +156,34 @@ namespace XenAdmin.Core
 
         public static string AdditionalFeatures => ReadInstalledKey(ADDITIONAL_FEATURES, RegistryView.Registry32);
 
-        public static string GetCustomUpdatesXmlLocation()
+        public static string GetCustomClientUpdatesXmlLocation()
         {
-            return ReadInstalledKey(CUSTOM_UPDATES_XML_LOCATION);
+            return ReadInstalledKey(CUSTOM_CLIENT_UPDATES_XML_LOCATION);
         }
 
-        public static string GetInternalStageAuthToken()
+        public static string GetCustomCfuLocation()
         {
-            return ReadInstalledKey(INTERNAL_STAGE_AUTH_TOKEN);
+            return ReadInstalledKey(CUSTOM_CFU_LOCATION);
+        }
+
+        public static string GetClientUpdatesQueryParam()
+        {
+            return ReadInstalledKey(CLIENT_UPDATES_QUERY_PARAM);
+        }
+
+        public static string GetCustomFileServicePrefix()
+        {
+            return ReadInstalledKey(CUSTOM_FILESERVICE_PREFIX);
+        }
+
+        public static string GetCustomClientIdUrl()
+        {
+            return ReadInstalledKey(CUSTOM_CLIENT_ID_URL);
+        }
+
+        public static string GetCustomTokenUrl()
+        {
+            return ReadInstalledKey(CUSTOM_TOKEN_URL);
         }
 
         public static string CustomHelpUrl => ReadString(HELP_URL_OVERRIDE);
@@ -182,8 +202,12 @@ namespace XenAdmin.Core
         private const string PowerShellStamp = "Install";
         private const string HIDDEN_FEATURES = "HiddenFeatures";
         private const string ADDITIONAL_FEATURES = "AdditionalFeatures";
-        private const string CUSTOM_UPDATES_XML_LOCATION = "CheckForUpdatesXmlLocationOverride";
-        private const string INTERNAL_STAGE_AUTH_TOKEN = "InternalStageAuthToken";
+        private const string CUSTOM_CLIENT_UPDATES_XML_LOCATION = "ClientUpdatesXmlLocationOverride";
+        private const string CUSTOM_CFU_LOCATION = "CfuLocationOverride";
+        private const string CLIENT_UPDATES_QUERY_PARAM = "ClientUpdatesQueryParam";
+        private const string CUSTOM_FILESERVICE_PREFIX = "PatchUrlPrefixOverride";
+        private const string CUSTOM_CLIENT_ID_URL = "ClientIdUrlOverride";
+        private const string CUSTOM_TOKEN_URL = "TokenUrlOverride";
         private const string HELP_URL_OVERRIDE = "HelpUrlOverride";
     }
 

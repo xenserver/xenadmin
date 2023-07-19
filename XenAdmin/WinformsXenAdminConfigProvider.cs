@@ -91,7 +91,7 @@ namespace XenAdmin
                         {
                             // checks for empty default username/password which starts out unencrypted
 
-                            string username = "";
+                            string username = string.Empty;
                             try
                             {
                                 string protectedUsername = Properties.Settings.Default.ProxyUsername;
@@ -103,7 +103,7 @@ namespace XenAdmin
                                 Log.Warn("Could not unprotect internet proxy username.", e);
                             }
 
-                            string password = "";
+                            string password = string.Empty;
                             try
                             {
                                 string protectedPassword = Properties.Settings.Default.ProxyPassword;
@@ -219,14 +219,33 @@ namespace XenAdmin
             return Metadata.Generate(PluginManager);
         }
 
-        public string GetCustomUpdatesXmlLocation()
+        public string GetCustomClientUpdatesXmlLocation()
         {
-            return Registry.GetCustomUpdatesXmlLocation();
+            return Registry.GetCustomClientUpdatesXmlLocation();
         }
 
-        public string GetInternalStageAuthToken()
+        public string GetCustomCfuLocation()
         {
-            return Registry.GetInternalStageAuthToken();
+            return Registry.GetCustomCfuLocation();
         }
+
+        public string GetClientUpdatesQueryParam()
+        {
+            return Registry.GetClientUpdatesQueryParam();
+        }
+
+        public string GetCustomFileServicePrefix()
+        {
+            return Registry.GetCustomFileServicePrefix();
+        }
+
+        public string GetCustomTokenUrl()
+        {
+            return Registry.GetCustomTokenUrl();
+        }
+
+        public string FileServiceUsername => EncryptionUtils.Unprotect(Properties.Settings.Default.FileServiceUsername);
+
+        public string FileServiceClientId => EncryptionUtils.Unprotect(Properties.Settings.Default.FileServiceClientId);
     }
 }

@@ -124,13 +124,11 @@ namespace XenAdmin.Commands
             if (preselectedHost != null && new ResidentHostIsSameAsSelectionFilter(preselectedHost, vms).FailureFound(out failureReason))
                 return false;
 
-            if (new WlbEnabledFilter(preselectedHost, vms).FailureFound(out failureReason))
-                return false;
-
             if (preselectedHost != null && new CrossPoolMigrateCanMigrateFilter(preselectedHost, new List<VM> {vm},
                     WizardMode.Migrate, cache).FailureFound(out failureReason))
                 return false;
 
+            failureReason = string.Empty;
             return true;
         }
 

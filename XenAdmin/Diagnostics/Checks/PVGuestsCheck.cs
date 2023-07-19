@@ -28,6 +28,7 @@
  * SUCH DAMAGE.
  */
 
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using XenAdmin.Core;
@@ -43,9 +44,17 @@ namespace XenAdmin.Diagnostics.Checks
     class PVGuestsCheck : HostPostLivenessCheck
     {
         private readonly Pool _pool;
+        private readonly XenServerVersion _newVersion;
         private readonly bool _manualUpgrade;
         private readonly Dictionary<string, string> _installMethodConfig;
         private List<VM> _pvGuests = new List<VM>();
+
+        public PVGuestsCheck(Host host, XenServerVersion newVersion)
+            : base(host)
+        {
+            _newVersion = newVersion;
+            _pool = Helpers.GetPoolOfOne(Host?.Connection);
+        }
 
         public PVGuestsCheck(Host coordinator, bool manualUpgrade = false, Dictionary<string, string> installMethodConfig = null)
             : base(coordinator)
@@ -67,11 +76,25 @@ namespace XenAdmin.Diagnostics.Checks
             if (_pvGuests.Count <= 0)
                 return false;
 
+            if (_newVersion != null && !Helpers.NaplesOrGreater(Host))
+                return false;
+
             return true;
         }
 
         protected override Problem RunHostCheck()
         {
+            //update case
+            if (_newVersion != null)
+            {
+                if (_newVersion.Version.CompareTo(new Version(BrandManager.ProductVersion821)) >= 0)
+                    return new PoolHasPVGuestProblem(this, _pool, _pvGuests);
+                
+                return new PoolHasPVGuestWarningUrl(this, _pool, _pvGuests);
+            }
+
+            //upgrade case
+
             if (!_manualUpgrade)
             {
                 var hotfix = HotfixFactory.Hotfix(Host);

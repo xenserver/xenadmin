@@ -67,7 +67,7 @@ namespace XenAdmin.Actions
             bool wasEnabled = Host.enabled;
             this.Description = string.Format(Messages.ACTION_HOST_REBOOTING, Helpers.GetName(Host));
 
-            MaybeReduceNtolBeforeOp(HostActionKind.Reboot);
+            MaybeReduceNtolBeforeOp();
             ShutdownVMs(true);
 
             try

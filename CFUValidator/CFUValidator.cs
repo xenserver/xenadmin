@@ -60,9 +60,10 @@ namespace CFUValidator
         private readonly OptionUsage UrlOrFile;
         private readonly List<string> _installedHotfixes;
         private readonly bool _checkHotfixContents;
+        private readonly IConfigProvider _configProvider;
 
         public CFUValidator(OptionUsage urlOrFile, string xmlLocation, string serverVersion,
-            List<string> installedHotfixes, bool checkHotfixContents)
+            List<string> installedHotfixes, bool checkHotfixContents, IConfigProvider configProvider)
         {
             if (urlOrFile != OptionUsage.File && urlOrFile != OptionUsage.Url)
                 throw new ArgumentException("urlOrFile option should be either File or Url");
@@ -74,12 +75,13 @@ namespace CFUValidator
             _installedHotfixes = installedHotfixes;
             UrlOrFile = urlOrFile;
             _checkHotfixContents = checkHotfixContents;
+            _configProvider = configProvider;
         }
 
         public void Validate(Action<string> statusReporter)
         {
             statusReporter($"Getting check for updates XML from {_xmlLocation}...");
-            ReadCheckForUpdatesXML(out var xenServerPatches, out var xenServerVersions, out var clientVersions);
+            ReadCheckForUpdatesXML(out var xenServerPatches, out var xenServerVersions);
 
             List<string> versionsToCheck;
             if (_serverVersion == CFUCommandLineOptionManager.AllVersions)
@@ -94,19 +96,16 @@ namespace CFUValidator
 
             var summaryGenerators = new List<ISummaryGenerator>();
             foreach (string ver in versionsToCheck)
-                summaryGenerators.AddRange(RunTestsForGivenServerVersion(ver, xenServerVersions, xenServerPatches, clientVersions, statusReporter));
+                summaryGenerators.AddRange(RunTestsForGivenServerVersion(ver, xenServerVersions, xenServerPatches, statusReporter));
 
             summaryGenerators.ForEach(s => statusReporter(s.GenerateSummary()));
         }
 
         private List<ISummaryGenerator> RunTestsForGivenServerVersion(string serverVersion, List<XenServerVersion> xenServerVersions,
-            List<XenServerPatch> xenServerPatches, List<ClientVersion> clientVersions, Action<string> statusReporter)
+            List<XenServerPatch> xenServerPatches, Action<string> statusReporter)
         {
             statusReporter($"Generating server {serverVersion} mock-ups...");
             SetupMocks(serverVersion, xenServerPatches, xenServerVersions);
-
-            statusReporter("Determining required client update...");
-            var xcupdateAlerts = XenAdmin.Core.Updates.NewClientUpdateAlerts(clientVersions, new Version(serverVersion));
 
             statusReporter("Determining required XenServer update...");
             var updateAlerts = XenAdmin.Core.Updates.NewXenServerVersionAlerts(xenServerVersions).Where(alert => !alert.CanIgnore).ToList();
@@ -124,13 +123,12 @@ namespace CFUValidator
             };
 
             if (_checkHotfixContents)
-                validators.Add(new ZipContentsValidator(patchAlerts));
+                validators.Add(new ZipContentsValidator(patchAlerts, _configProvider));
 
             validators.ForEach(v => v.Validate(statusReporter));
 
             var summaryGenerators = new List<ISummaryGenerator> {new HeaderDecorator(serverVersion, _xmlLocation)};
             summaryGenerators.AddRange(validators);
-            summaryGenerators.Add(new ClientUpdateDecorator(xcupdateAlerts));
             summaryGenerators.Add(new XenServerUpdateDecorator(updateAlerts));
             summaryGenerators.Add(new PatchAlertDecorator(patchAlerts));
             return summaryGenerators;
@@ -148,7 +146,7 @@ namespace CFUValidator
             }
         }
 
-        private void ReadCheckForUpdatesXML(out List<XenServerPatch> patches, out List<XenServerVersion> versions, out List<ClientVersion> xcVersions)
+        private void ReadCheckForUpdatesXML(out List<XenServerPatch> patches, out List<XenServerVersion> versions)
         {
             ICheckForUpdatesXMLSource checkForUpdates = xmlFactory.GetAction(UrlOrFile, _xmlLocation);
             checkForUpdates.RunAsync();
@@ -164,7 +162,6 @@ namespace CFUValidator
 
             patches = checkForUpdates.XenServerPatches;
             versions = checkForUpdates.XenServerVersions;
-            xcVersions = checkForUpdates.ClientVersions;
         }
 
         private void SetupMocks(string versionToCheck, List<XenServerPatch> xenServerPatches, List<XenServerVersion> xenServerVersions)

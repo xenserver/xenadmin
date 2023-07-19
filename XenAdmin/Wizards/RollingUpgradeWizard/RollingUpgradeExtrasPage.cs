@@ -29,8 +29,12 @@
  */
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using XenAdmin.Controls;
 using XenAdmin.Core;
+using XenAdmin.Dialogs;
+using XenAPI;
 
 
 namespace XenAdmin.Wizards.RollingUpgradeWizard
@@ -42,7 +46,8 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         public RollingUpgradeExtrasPage()
         {
             InitializeComponent();
-            label4.Text = string.Format(label4.Text, BrandManager.BrandConsole, BrandManager.ProductBrand);
+            applyUpdatesLabel.Text = string.Format(applyUpdatesLabel.Text, BrandManager.BrandConsole);
+            label2.Text = string.Format(label2.Text, BrandManager.BrandConsole, BrandManager.ProductBrand);
         }
 
         #region XenTabPage overrides
@@ -65,14 +70,55 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             return true;
         }
 
+        protected override void PageLoadedCore(PageLoadedDirection direction)
+        {
+            var licensedPoolCount = 0;
+            var poolCount = 0;
+            foreach (Host master in SelectedCoordinators)
+            {
+                var hosts = master.Connection.Cache.Hosts;
+
+                if (hosts.Length == 0)
+                    continue;
+
+                poolCount++;
+                var automatedUpdatesRestricted = hosts.Any(Host.RestrictBatchHotfixApply); //if any host is not licensed for automated updates
+                if (!automatedUpdatesRestricted)
+                    licensedPoolCount++;
+            }
+
+            if (licensedPoolCount > 0) // at least one pool licensed for automated updates 
+            {
+                applyUpdatesCheckBox.Visible = applyUpdatesLabel.Visible = true;
+                applyUpdatesCheckBox.Text = poolCount == licensedPoolCount
+                    ? Messages.ROLLING_UPGRADE_APPLY_UPDATES
+                    : Messages.ROLLING_UPGRADE_APPLY_UPDATES_MIXED;
+            }
+            else  // all pools unlicensed
+            {
+                applyUpdatesCheckBox.Visible = applyUpdatesLabel.Visible = false;
+            }
+        }
+
         protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
-            if (direction == PageLoadedDirection.Forward && ApplySuppPackAfterUpgrade && !string.IsNullOrEmpty(FilePath))
+            if (direction == PageLoadedDirection.Forward)
             {
-                SelectedSuppPack = WizardHelpers.ParseSuppPackFile(FilePath, this, ref cancel);
+                if (ApplyUpdatesToNewVersion && !Updates.CheckCanDownloadUpdates())
+                {
+                    cancel = true;
+                    using (var errDlg = new ClientIdDialog())
+                        errDlg.ShowDialog(ParentForm);
+                    return;
+                }
+
+                if (ApplySuppPackAfterUpgrade && !string.IsNullOrEmpty(FilePath))
+                    SelectedSuppPack = WizardHelpers.ParseSuppPackFile(FilePath, this, ref cancel);
             }
         }
         #endregion
+
+        public IEnumerable<Host> SelectedCoordinators { private get; set; }
 
         private string FilePath
         {
@@ -81,6 +127,8 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         }
 
         public bool ApplySuppPackAfterUpgrade => checkBoxInstallSuppPack.Checked;
+
+        public bool ApplyUpdatesToNewVersion => applyUpdatesCheckBox.Visible && applyUpdatesCheckBox.Checked;
 
         private void BrowseButton_Click(object sender, EventArgs e)
         {

@@ -28,41 +28,33 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using XenAdmin.Core;
-using XenAdmin.Wizards.GenericPages;
+using XenAdmin.Diagnostics.Checks;
 using XenAPI;
 
-namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
+
+namespace XenAdmin.Diagnostics.Problems.PoolProblem
 {
-    internal class WlbEnabledFilter : ReasoningFilter
+    class ContainerManagementWarning : WarningWithMoreInfo
     {
-        private readonly List<VM> _preSelectedVMs;
+        private readonly Pool _pool;
+        private readonly bool _isUpgrade;
 
-        public WlbEnabledFilter(IXenObject item, List<VM> preSelectedVMs)
-            : base(item)
+        public ContainerManagementWarning(Check check, Pool pool, bool isUpgrade)
+            : base(check)
         {
-            _preSelectedVMs = preSelectedVMs ?? throw new ArgumentNullException(nameof(preSelectedVMs));
+            _pool = pool;
+            _isUpgrade = isUpgrade;
         }
 
-        protected override bool FailureFoundFor(IXenObject itemToFilterOn, out string failureReason)
-        {
-            if (_preSelectedVMs.Any(vm => Helpers.CrossPoolMigrationRestrictedWithWlb(vm.Connection)))
-            {
-                failureReason = Messages.CPM_WLB_ENABLED_ON_VM_FAILURE_REASON;
-                return true;
-            }
+        public override string Title => Check.Description;
 
-            if (itemToFilterOn != null && Helpers.CrossPoolMigrationRestrictedWithWlb(itemToFilterOn.Connection))
-            {
-                failureReason =  Messages.CPM_WLB_ENABLED_ON_HOST_FAILURE_REASON;
-                return true;
-            }
+        public override string Description =>
+            string.Format(Messages.PROBLEM_CONTAINER_MANAGEMENT_DESCRIPTION, _pool, BrandManager.ProductVersion82);
 
-            failureReason = string.Empty;
-            return false;
-        }
+        public override string Message =>
+            _isUpgrade
+                ? string.Format(Messages.PROBLEM_CONTAINER_MANAGEMENT_UPGRADE, BrandManager.ProductVersion82)
+                : Messages.PROBLEM_CONTAINER_MANAGEMENT_UPDATE;
     }
 }
