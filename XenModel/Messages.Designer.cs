@@ -4985,6 +4985,42 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You have not synchronized with the update channel in {0} days..
+        /// </summary>
+        public static string ALERT_CDN_OUT_OF_SYNC_TITLE {
+            get {
+                return ResourceManager.GetString("ALERT_CDN_OUT_OF_SYNC_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Configure Updates.
+        /// </summary>
+        public static string ALERT_CDN_REPO_NOT_CONFIGURED_ACTION_LINK {
+            get {
+                return ResourceManager.GetString("ALERT_CDN_REPO_NOT_CONFIGURED_ACTION_LINK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Configuring an update channel will allow your system to synchronize and retrieve available updates..
+        /// </summary>
+        public static string ALERT_CDN_REPO_NOT_CONFIGURED_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("ALERT_CDN_REPO_NOT_CONFIGURED_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have not configured an update channel on &apos;{0}&apos;.
+        /// </summary>
+        public static string ALERT_CDN_REPO_NOT_CONFIGURED_TITLE {
+            get {
+                return ResourceManager.GetString("ALERT_CDN_REPO_NOT_CONFIGURED_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to When CPU usage exceeds {0}% for {1} min(s).
         /// </summary>
         public static string ALERT_CPUS_SUB_TEXT {
@@ -37420,7 +37456,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Configure updates....
+        ///   Looks up a localized string similar to Configure Updates....
         /// </summary>
         public static string UPDATES_GENERAL_TAB_CONFIG {
             get {

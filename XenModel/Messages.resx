@@ -1831,6 +1831,18 @@ This alarm is set to be triggered when the total throughput exceeds {4}.</value>
   <data name="ALERT_CAP_LABEL" xml:space="preserve">
     <value>(Showing first {0} entries)</value>
   </data>
+  <data name="ALERT_CDN_OUT_OF_SYNC_TITLE" xml:space="preserve">
+    <value>You have not synchronized with the update channel in {0} days.</value>
+  </data>
+  <data name="ALERT_CDN_REPO_NOT_CONFIGURED_ACTION_LINK" xml:space="preserve">
+    <value>Configure Updates</value>
+  </data>
+  <data name="ALERT_CDN_REPO_NOT_CONFIGURED_DESCRIPTION" xml:space="preserve">
+    <value>Configuring an update channel will allow your system to synchronize and retrieve available updates.</value>
+  </data>
+  <data name="ALERT_CDN_REPO_NOT_CONFIGURED_TITLE" xml:space="preserve">
+    <value>You have not configured an update channel on '{0}'</value>
+  </data>
   <data name="ALERT_CPUS_SUB_TEXT" xml:space="preserve">
     <value>When CPU usage exceeds {0}% for {1} min(s)</value>
   </data>
@@ -12928,7 +12940,7 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
     <value>Download {0}</value>
   </data>
   <data name="UPDATES_GENERAL_TAB_CONFIG" xml:space="preserve">
-    <value>Configure updates...</value>
+    <value>Configure Updates...</value>
   </data>
   <data name="UPDATES_GENERAL_TAB_ENFORCE_HOMOGENEITY" xml:space="preserve">
     <value>(full application required)</value>

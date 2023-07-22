@@ -648,11 +648,11 @@ namespace XenAdmin.TabPages
 
         private void DismissAlerts(params Alert[] alerts)
         {
-            var groups = from Alert alert in alerts
-                         where alert != null && alert.AllowedToDismiss()
-                         group alert by alert.Connection
-                         into g
-                         select new { Connection = g.Key, Alerts = g };
+            var groups = (from Alert alert in alerts
+                where alert != null && alert.AllowedToDismiss()
+                group alert by alert.Connection
+                into g
+                select new { Connection = g.Key, Alerts = g }).ToList();
 
             foreach (var g in groups)
             {

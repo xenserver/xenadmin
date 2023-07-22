@@ -1083,6 +1083,9 @@ namespace XenAdmin
 
             if (Helpers.CloudOrGreater(connection))
             {
+                if (YumRepoNotConfiguredAlert.TryCreate(connection, out var alert) || OutOfSyncWithCdnAlert.TryCreate(connection, out alert))
+                    Alert.AddAlert(alert);
+
                 Updates.CheckForCdnUpdates(coordinator.Connection);
             }
             else
