@@ -54,23 +54,21 @@ namespace XenAdmin.Core
         public static event Action<bool, string> CheckForServerUpdatesCompleted;
         public static event Action<CollectionChangeEventArgs> UpdateAlertCollectionChanged;
         public static event Action RestoreDismissedUpdatesStarted;
+        public static event Action<IXenConnection> CdnUpdateInfoChanged;
 
         public static string UserAgent { get; } = $"{BrandManager.BrandConsole}/{Program.Version} ({IntPtr.Size * 8}-bit)";
 
         private static readonly object downloadedUpdatesLock = new object();
+        private static readonly object updateAlertsLock = new object();
+        private static readonly object _cdnUpdatesLock = new object();
+
         private static List<XenServerVersion> XenServerVersionsForAutoCheck = new List<XenServerVersion>();
         private static List<XenServerPatch> XenServerPatches = new List<XenServerPatch>();
         private static List<ClientVersion> ClientVersions = new List<ClientVersion>();
         public static List<XenServerVersion> XenServerVersions = new List<XenServerVersion>();
 
-        private static readonly object updateAlertsLock = new object();
         private static readonly List<Alert> updateAlerts = new List<Alert>();
-
-        public static bool CheckCanDownloadUpdates()
-        {
-            return !string.IsNullOrEmpty(Properties.Settings.Default.FileServiceUsername) &&
-                   !string.IsNullOrEmpty(Properties.Settings.Default.FileServiceClientId);
-        }
+        private static readonly Dictionary<IXenConnection, CdnPoolUpdateInfo> _cdnUpdateInfoPerConnection = new Dictionary<IXenConnection, CdnPoolUpdateInfo>();
 
         /// <summary>
         /// Locks and creates a new list of the update alerts
@@ -82,6 +80,75 @@ namespace XenAdmin.Core
                 lock (updateAlertsLock)
                     return updateAlerts.ToList();
             }
+        }
+
+        /// <summary>
+        /// Locks and creates a new dictionary of the CDN update info per connection
+        /// </summary>
+        public static Dictionary<IXenConnection, CdnPoolUpdateInfo> CdnUpdateInfoPerConnection
+        {
+            get
+            {
+                lock (_cdnUpdatesLock)
+                    return _cdnUpdateInfoPerConnection.ToDictionary(p => p.Key, p => p.Value);
+            }
+        }
+
+        public static void RemoveCdnInfoForConnection(IXenConnection connection)
+        {
+            lock (_cdnUpdatesLock)
+            {
+                _cdnUpdateInfoPerConnection.Remove(connection);
+            }
+
+            CdnUpdateInfoChanged?.Invoke(connection);
+        }
+
+        public static void CheckForCdnUpdates(IXenConnection connection)
+        {
+            var pool = Helpers.GetPoolOfOne(connection);
+            if (pool == null)
+                return;
+
+            if (Helpers.XapiEqualOrGreater_23_18_0(connection))
+            {
+                if (pool.last_update_sync == Util.GetUnixMinDateTime() ||
+                    connection.Cache.Hosts.All(h => h.latest_synced_updates_applied == latest_synced_updates_applied_state.yes))
+                    return;
+            }
+            else
+            {
+                if (pool.repositories.Count == 0)
+                    return;
+            }
+
+            var action = new CheckForCdnUpdatesAction(connection);
+            action.Completed += CheckForCdnUpdatesAction_Completed;
+            action.RunAsync();
+        }
+
+        private static void CheckForCdnUpdatesAction_Completed(ActionBase sender)
+        {
+            if (!(sender is CheckForCdnUpdatesAction action))
+                return;
+
+            bool succeeded = action.Succeeded;
+
+            if (succeeded)
+            {
+                lock (_cdnUpdatesLock)
+                {
+                    _cdnUpdateInfoPerConnection[action.Pool.Connection] = action.Updates;
+                }
+            }
+
+            CdnUpdateInfoChanged?.Invoke(action.Pool.Connection);
+        }
+
+        public static bool CheckCanDownloadUpdates()
+        {
+            return !string.IsNullOrEmpty(Properties.Settings.Default.FileServiceUsername) &&
+                   !string.IsNullOrEmpty(Properties.Settings.Default.FileServiceClientId);
         }
 
         public static void RemoveUpdate(Alert update)
@@ -121,7 +188,7 @@ namespace XenAdmin.Core
         /// value of the parameter userRequested. If AutomaticCheck is disabled it checks
         /// for all update types if userRequested is true.
         /// </summary>
-        public static bool CheckForServerUpdates(bool userRequested = false, bool async = true, Control owner = null)
+        public static bool CheckForServerUpdates(bool userRequested = false, bool asynchronous = true, Control owner = null)
         {
             if (Helpers.CommonCriteriaCertificationRelease)
                 return false;
@@ -139,7 +206,7 @@ namespace XenAdmin.Core
                 action.Completed += DownloadCfuAction_Completed;
                 CheckForServerUpdatesStarted?.Invoke();
 
-                if (async)
+                if (asynchronous)
                 {
                     action.RunAsync();
                 }
@@ -399,7 +466,6 @@ namespace XenAdmin.Core
 
             return true;
         }
-
 
         /// <summary>
         /// If parameter is null, it returns latestcr XenCenter version if it is greater than current XC version,

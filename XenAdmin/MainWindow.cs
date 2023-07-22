@@ -875,7 +875,11 @@ namespace XenAdmin
         {
             CloseActiveWizards(connection);
             Alert.RemoveAlert(alert => alert.Connection != null && alert.Connection.Equals(connection));
-            Updates.RefreshUpdateAlerts(Updates.UpdateType.ServerPatches | Updates.UpdateType.ServerVersion);
+
+            if (Helpers.CloudOrGreater(connection))
+                Updates.RemoveCdnInfoForConnection(connection);
+            else
+                Updates.RefreshUpdateAlerts(Updates.UpdateType.ServerPatches | Updates.UpdateType.ServerVersion);
 
             RequestRefreshTreeView();
         }
@@ -1075,10 +1079,17 @@ namespace XenAdmin
                 });
             }
 
-            Updates.RefreshUpdateAlerts(Updates.UpdateType.ServerPatches | Updates.UpdateType.ServerVersion);
-            Updates.CheckHotfixEligibility(connection);
-            RequestRefreshTreeView();
+            if (Helpers.CloudOrGreater(connection))
+            {
+                Updates.CheckForCdnUpdates(coordinator.Connection);
+            }
+            else
+            {
+                Updates.RefreshUpdateAlerts(Updates.UpdateType.ServerPatches | Updates.UpdateType.ServerVersion);
+                Updates.CheckHotfixEligibility(connection);
+            }
 
+            RequestRefreshTreeView();
             CheckTlsVerification(connection);
         }
 
@@ -1142,7 +1153,7 @@ namespace XenAdmin
             }
         }
 
-        void MessageCollectionChanged(object sender, CollectionChangeEventArgs e)
+        private void MessageCollectionChanged(object sender, CollectionChangeEventArgs e)
         {
             Program.AssertOnEventThread();
 
@@ -1159,7 +1170,7 @@ namespace XenAdmin
             }
         }
 
-        void CollectionChanged<T>(object sender, CollectionChangeEventArgs e) where T : XenObject<T>
+        private void CollectionChanged<T>(object sender, CollectionChangeEventArgs e) where T : XenObject<T>
         {
             Program.AssertOnEventThread();
 
@@ -1290,7 +1301,7 @@ namespace XenAdmin
             }
         }
 
-        void o_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void o_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {
@@ -1330,7 +1341,7 @@ namespace XenAdmin
             GC.Collect();
         }
 
-        void connection_ConnectionReconnecting(IXenConnection conn)
+        private void connection_ConnectionReconnecting(IXenConnection conn)
         {
             if (Program.Exiting)
                 return;
@@ -1341,7 +1352,7 @@ namespace XenAdmin
         private List<Host> hostsInInvalidState = new List<Host>();
 
         // called whenever Xen objects on the server change state
-        void Connection_XenObjectsUpdated(object sender, EventArgs e)
+        private void Connection_XenObjectsUpdated(object sender, EventArgs e)
         {
             if (Program.Exiting)
                 return;
@@ -1366,7 +1377,7 @@ namespace XenAdmin
             Program.Invoke(this, navigationPane.RequestRefreshTreeView);
         }
 
-        void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
         }
@@ -2649,7 +2660,7 @@ namespace XenAdmin
                     statusLabelUpdates.Text = string.Format(Messages.NOTIFICATIONS_SUBMODE_UPDATES_STATUS, updatesCount);
                     statusLabelUpdates.Visible = updatesCount > 0;
 
-                    SetUpdateAlert();
+                    SetClientUpdateAlert();
 
                     if (updatesPage.Visible)
                     {
@@ -2664,11 +2675,11 @@ namespace XenAdmin
             Program.Invoke(this, () =>
             {
                 toolStripMenuItemCfu.Enabled = true;
-                SetUpdateAlert();
+                SetClientUpdateAlert();
             });            
         }
 
-        private void SetUpdateAlert()
+        private void SetClientUpdateAlert()
         {
             updateAlert = Updates.UpdateAlerts.FirstOrDefault(update => update is ClientUpdateAlert) as ClientUpdateAlert;
             if (updateAlert != null)
@@ -2795,7 +2806,7 @@ namespace XenAdmin
             DoSearch(Search.SearchForFolder(path));
         }
 
-        void SearchPanel_SearchChanged()
+        private void SearchPanel_SearchChanged()
         {
             if (SearchMode)
                 History.ReplaceHistoryItem(new SearchHistoryItem(SearchPage.Search));
@@ -2922,7 +2933,7 @@ namespace XenAdmin
             pluginMenuItemStartIndexes[viewToolStripMenuItem] = viewToolStripMenuItem.DropDownItems.IndexOf(toolStripSeparator24) + 1;
         }
 
-        void navigationPane_DragDropCommandActivated(string cmdText)
+        private void navigationPane_DragDropCommandActivated(string cmdText)
         {
             SetStatusBar(null, cmdText);
         }
