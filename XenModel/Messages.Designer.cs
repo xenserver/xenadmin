@@ -5459,11 +5459,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Would you like {0} to periodically check the internet for {1} updates and new versions of the application?.
+        ///   Looks up a localized string similar to Would you like {0} to periodically check the internet for new versions of the application?.
         /// </summary>
         public static string ALLOWED_UPDATES_DIALOG_MESSAGE {
             get {
                 return ResourceManager.GetString("ALLOWED_UPDATES_DIALOG_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can configure {0} to periodically check the internet for updates and new versions for servers running {1} or earlier. Would you like to do so?.
+        /// </summary>
+        public static string ALLOWED_UPDATES_DIALOG_MESSAGE_CFU {
+            get {
+                return ResourceManager.GetString("ALLOWED_UPDATES_DIALOG_MESSAGE_CFU", resourceCulture);
             }
         }
         
@@ -8230,6 +8239,24 @@ namespace XenAdmin {
         public static string COMPRESSING_FILES {
             get {
                 return ResourceManager.GetString("COMPRESSING_FILES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} {1}.
+        /// </summary>
+        public static string CONFIG_CDN_UPDATES_TAB_TITLE {
+            get {
+                return ResourceManager.GetString("CONFIG_CDN_UPDATES_TAB_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} or earlier.
+        /// </summary>
+        public static string CONFIG_LCM_UPDATES_TAB_TITLE {
+            get {
+                return ResourceManager.GetString("CONFIG_LCM_UPDATES_TAB_TITLE", resourceCulture);
             }
         }
         
@@ -37065,15 +37092,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Automatically check for {0} or {1} updates.
-        /// </summary>
-        public static string UPDATES_DESC {
-            get {
-                return ResourceManager.GetString("UPDATES_DESC", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to For the update to take effect after application, the following action is required:
         /// .
         /// </summary>
@@ -37233,6 +37251,24 @@ namespace XenAdmin {
         public static string UPDATES_GENERAL_TAB_ENFORCE_HOMOGENEITY {
             get {
                 return ResourceManager.GetString("UPDATES_GENERAL_TAB_ENFORCE_HOMOGENEITY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Automatically check for {0} updates.
+        /// </summary>
+        public static string UPDATES_OPTIONS_DESC {
+            get {
+                return ResourceManager.GetString("UPDATES_OPTIONS_DESC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} Updates.
+        /// </summary>
+        public static string UPDATES_OPTIONS_TITLE {
+            get {
+                return ResourceManager.GetString("UPDATES_OPTIONS_TITLE", resourceCulture);
             }
         }
         
@@ -42997,6 +43033,152 @@ namespace XenAdmin {
         public static string YOU_ARE_HERE {
             get {
                 return ResourceManager.GetString("YOU_ARE_HERE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disabling repository {0}....
+        /// </summary>
+        public static string YUM_REPO_ACTION_CONFIG_DESCRIPTION_DISABLE {
+            get {
+                return ResourceManager.GetString("YUM_REPO_ACTION_CONFIG_DESCRIPTION_DISABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enabling repository {0}....
+        /// </summary>
+        public static string YUM_REPO_ACTION_CONFIG_DESCRIPTION_ENABLE {
+            get {
+                return ResourceManager.GetString("YUM_REPO_ACTION_CONFIG_DESCRIPTION_ENABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Introducing repository {0}....
+        /// </summary>
+        public static string YUM_REPO_ACTION_CONFIG_DESCRIPTION_INTRODUCE {
+            get {
+                return ResourceManager.GetString("YUM_REPO_ACTION_CONFIG_DESCRIPTION_INTRODUCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Configuring {0} to retrieve updates from the {1} repo....
+        /// </summary>
+        public static string YUM_REPO_ACTION_CONFIG_TITLE {
+            get {
+                return ResourceManager.GetString("YUM_REPO_ACTION_CONFIG_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Configuring proxy for accessing the update channel.
+        /// </summary>
+        public static string YUM_REPO_ACTION_PROXY_CONFIG_TITLE {
+            get {
+                return ResourceManager.GetString("YUM_REPO_ACTION_PROXY_CONFIG_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disabling proxy for accessing the update channel.
+        /// </summary>
+        public static string YUM_REPO_ACTION_PROXY_DISABLE_TITLE {
+            get {
+                return ResourceManager.GetString("YUM_REPO_ACTION_PROXY_DISABLE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Configuring periodic synchronization with the update channel....
+        /// </summary>
+        public static string YUM_REPO_ACTION_SYNC_SCHEDULE_CONFIG_TITLE {
+            get {
+                return ResourceManager.GetString("YUM_REPO_ACTION_SYNC_SCHEDULE_CONFIG_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disabling periodic synchronization with the update channel....
+        /// </summary>
+        public static string YUM_REPO_ACTION_SYNC_SCHEDULE_DISABLE_TITLE {
+            get {
+                return ResourceManager.GetString("YUM_REPO_ACTION_SYNC_SCHEDULE_DISABLE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enabling periodic synchronization with the update channel....
+        /// </summary>
+        public static string YUM_REPO_ACTION_SYNC_SCHEDULE_ENABLE_TITLE {
+            get {
+                return ResourceManager.GetString("YUM_REPO_ACTION_SYNC_SCHEDULE_ENABLE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Synchronizing with update channel....
+        /// </summary>
+        public static string YUM_REPO_ACTION_SYNCING_TITLE {
+            get {
+                return ResourceManager.GetString("YUM_REPO_ACTION_SYNCING_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Base.
+        /// </summary>
+        public static string YUM_REPO_BASE {
+            get {
+                return ResourceManager.GetString("YUM_REPO_BASE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Early Access.
+        /// </summary>
+        public static string YUM_REPO_EARLY_ACCESS {
+            get {
+                return ResourceManager.GetString("YUM_REPO_EARLY_ACCESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Normal.
+        /// </summary>
+        public static string YUM_REPO_NORMAL {
+            get {
+                return ResourceManager.GetString("YUM_REPO_NORMAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string YUM_REPO_PROXY {
+            get {
+                return ResourceManager.GetString("YUM_REPO_PROXY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} recommends that you synchronize the selected pool(s) or standalone host(s) with the specified update channel as soon as possible to retrieve the latest available updates.
+        ///
+        ///Do you want to synchronize immediately?.
+        /// </summary>
+        public static string YUM_REPO_SYNC_AFTER_CONFIG {
+            get {
+                return ResourceManager.GetString("YUM_REPO_SYNC_AFTER_CONFIG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Yes, Synchronize.
+        /// </summary>
+        public static string YUM_REPO_SYNC_YES_BUTTON {
+            get {
+                return ResourceManager.GetString("YUM_REPO_SYNC_YES_BUTTON", resourceCulture);
             }
         }
     }
