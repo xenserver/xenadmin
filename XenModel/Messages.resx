@@ -7491,6 +7491,9 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   <data name="INCORRECT_OLD_PASSWORD" xml:space="preserve">
     <value>Incorrect old password</value>
   </data>
+  <data name="INDETERMINABLE" xml:space="preserve">
+    <value>Indeterminable</value>
+  </data>
   <data name="INFO_DISK_MODE" xml:space="preserve">
     <value>Disk snapshots are not currently available for this VM</value>
   </data>
@@ -9858,6 +9861,9 @@ When you configure an NFS storage repository, you simply provide the host name o
   <data name="NOT_ATTACHED_TO" xml:space="preserve">
     <value>not attached to</value>
   </data>
+  <data name="NOT_CONFIGURED" xml:space="preserve">
+    <value>Not configured</value>
+  </data>
   <data name="NOT_CONTAINED_IN" xml:space="preserve">
     <value>not contained in</value>
   </data>
@@ -10997,9 +11003,6 @@ Click Previous if you need to go back and specify a different network location o
   </data>
   <data name="PVS_CACHE_MEMORY_SR_NAME" xml:space="preserve">
     <value>MemorySR</value>
-  </data>
-  <data name="PVS_CACHE_NOT_CONFIGURED" xml:space="preserve">
-    <value>Not configured</value>
   </data>
   <data name="PVS_CACHE_STORAGE_CANNOT_BE_CHANGED" xml:space="preserve">
     <value>This PVS cache storage cannot be changed because it is in use.</value>
@@ -12924,8 +12927,20 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
   <data name="UPDATES_DOWNLOAD_REQUIRED_XENCENTER" xml:space="preserve">
     <value>Download {0}</value>
   </data>
+  <data name="UPDATES_GENERAL_TAB_CONFIG" xml:space="preserve">
+    <value>Configure updates...</value>
+  </data>
   <data name="UPDATES_GENERAL_TAB_ENFORCE_HOMOGENEITY" xml:space="preserve">
     <value>(full application required)</value>
+  </data>
+  <data name="UPDATES_GENERAL_TAB_LAST_SYNCED" xml:space="preserve">
+    <value>Last synchronized</value>
+  </data>
+  <data name="UPDATES_GENERAL_TAB_REPO" xml:space="preserve">
+    <value>Update channel</value>
+  </data>
+  <data name="UPDATES_GENERAL_TAB_SYNC_NOW" xml:space="preserve">
+    <value>Synchronize Now</value>
   </data>
   <data name="UPDATES_OPTIONS_DESC" xml:space="preserve">
     <value>Automatically check for {0} updates</value>

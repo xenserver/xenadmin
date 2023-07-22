@@ -21504,6 +21504,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Indeterminable.
+        /// </summary>
+        public static string INDETERMINABLE {
+            get {
+                return ResourceManager.GetString("INDETERMINABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disk snapshots are not currently available for this VM.
         /// </summary>
         public static string INFO_DISK_MODE {
@@ -28383,6 +28392,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not configured.
+        /// </summary>
+        public static string NOT_CONFIGURED {
+            get {
+                return ResourceManager.GetString("NOT_CONFIGURED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to not contained in.
         /// </summary>
         public static string NOT_CONTAINED_IN {
@@ -31746,15 +31764,6 @@ namespace XenAdmin {
         public static string PVS_CACHE_MEMORY_SR_NAME {
             get {
                 return ResourceManager.GetString("PVS_CACHE_MEMORY_SR_NAME", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Not configured.
-        /// </summary>
-        public static string PVS_CACHE_NOT_CONFIGURED {
-            get {
-                return ResourceManager.GetString("PVS_CACHE_NOT_CONFIGURED", resourceCulture);
             }
         }
         
@@ -37411,11 +37420,47 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Configure updates....
+        /// </summary>
+        public static string UPDATES_GENERAL_TAB_CONFIG {
+            get {
+                return ResourceManager.GetString("UPDATES_GENERAL_TAB_CONFIG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to (full application required).
         /// </summary>
         public static string UPDATES_GENERAL_TAB_ENFORCE_HOMOGENEITY {
             get {
                 return ResourceManager.GetString("UPDATES_GENERAL_TAB_ENFORCE_HOMOGENEITY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last synchronized.
+        /// </summary>
+        public static string UPDATES_GENERAL_TAB_LAST_SYNCED {
+            get {
+                return ResourceManager.GetString("UPDATES_GENERAL_TAB_LAST_SYNCED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update channel.
+        /// </summary>
+        public static string UPDATES_GENERAL_TAB_REPO {
+            get {
+                return ResourceManager.GetString("UPDATES_GENERAL_TAB_REPO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Synchronize Now.
+        /// </summary>
+        public static string UPDATES_GENERAL_TAB_SYNC_NOW {
+            get {
+                return ResourceManager.GetString("UPDATES_GENERAL_TAB_SYNC_NOW", resourceCulture);
             }
         }
         

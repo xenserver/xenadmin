@@ -394,6 +394,13 @@ namespace XenAdmin.Controls
             AddRow(CreateKeyCell(key), valueCell, null, contextMenuItems);
         }
 
+        internal void AddEntryWithNoteLink(string key, string value, string note, Action action, params ToolStripMenuItem[] contextMenuItems)
+        {
+            var valueCell = new DataGridViewTextBoxCell { Value = value };
+            var noteCell = new DataGridViewLinkCell { Value = note, Tag = action };
+            AddRow(CreateKeyCell(key), valueCell, noteCell, contextMenuItems);
+        }
+
         internal void AddEntryWithNoteLink(string key, string value, string note, Action action, Color fontColor, params ToolStripMenuItem[] contextMenuItems)
         {
             var valueCell = new DataGridViewTextBoxCell { Value = value };
