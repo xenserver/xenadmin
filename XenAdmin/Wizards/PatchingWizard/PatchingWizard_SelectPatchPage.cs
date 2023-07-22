@@ -216,7 +216,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 if (IsInAutomatedUpdatesMode)
                 {
-                    if (!Updates.CheckForServerUpdates(userRequested: true, async: false, this))
+                    if (!Updates.CheckForServerUpdates(userRequested: true, asynchronous: false, this))
                     {
                         cancel = true;
                         return;
