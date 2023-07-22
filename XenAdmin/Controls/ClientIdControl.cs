@@ -40,11 +40,13 @@ namespace XenAdmin.Controls
 {
     public partial class ClientIdControl : UserControl
     {
+        private Control _invalidControl;
+
         public ClientIdControl()
         {
             InitializeComponent();
             label1.Text = string.Format(label1.Text, BrandManager.BrandConsole,
-                BrandManager.CompanyNameLegacy, BrandManager.ProductBrand);
+                BrandManager.CompanyNameLegacy, BrandManager.LegacyProduct);
         }
 
         public string FileServiceUsername { get; private set; }
@@ -72,7 +74,7 @@ namespace XenAdmin.Controls
         {
             FileServiceUsername = null;
             FileServiceClientId = null;
-            control = null;
+            _invalidControl = control = null;
             invalidReason = null;
 
             if (string.IsNullOrWhiteSpace(textBoxClientIdFile.Text))
@@ -80,7 +82,7 @@ namespace XenAdmin.Controls
 
             if (!File.Exists(textBoxClientIdFile.Text))
             {
-                control = textBoxClientIdFile;
+                _invalidControl = control = textBoxClientIdFile;
                 invalidReason = Messages.FILE_NOT_FOUND;
                 return false;
             }
@@ -100,7 +102,7 @@ namespace XenAdmin.Controls
             if (!string.IsNullOrEmpty(FileServiceUsername) && !string.IsNullOrEmpty(FileServiceClientId))
                 return true;
 
-            control = textBoxClientIdFile;
+            _invalidControl = control = textBoxClientIdFile;
             invalidReason = Messages.FILESERVICE_CLIENTID_INVALID_FILE;
             return false;
         }
@@ -114,6 +116,11 @@ namespace XenAdmin.Controls
             }
         }
 
+        public void HideValidationMessages()
+        {
+            if (_invalidControl != null)
+                tooltipValidation.Hide(_invalidControl);
+        }
 
         private void buttonBrowse_Click(object sender, EventArgs e)
         {

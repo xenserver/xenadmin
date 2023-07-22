@@ -60,6 +60,7 @@ using XenAdmin.Plugins;
 using XenCenterLib;
 using System.Linq;
 using XenAdmin.Controls.GradientPanel;
+using XenAdmin.Dialogs.ServerUpdates;
 using XenAdmin.Help;
 
 namespace XenAdmin
@@ -621,8 +622,6 @@ namespace XenAdmin
                         var result = dlg.ShowDialog(this) == DialogResult.Yes;
 
                         Properties.Settings.Default.AllowXenCenterUpdates = result;
-                        Properties.Settings.Default.AllowPatchesUpdates = result;
-                        Properties.Settings.Default.AllowXenServerUpdates = result;
                         Properties.Settings.Default.SeenAllowUpdatesDialog = true;
 
                         if (result && dlg.IsCheckBoxChecked)
@@ -1040,6 +1039,40 @@ namespace XenAdmin
                         }
                     });
                 }
+            }
+
+            if (!Program.RunInAutomatedTestMode && !Helpers.CommonCriteriaCertificationRelease &&
+                !Helpers.CloudOrGreater(coordinator))
+            {
+                Program.BeginInvoke(Program.MainWindow, () =>
+                {
+                    if (Properties.Settings.Default.SeenAllowCfuUpdatesDialog)
+                        return;
+                    
+                    Properties.Settings.Default.SeenAllowCfuUpdatesDialog = true;
+                    Settings.TrySaveSettings();
+
+                    bool launch;
+                    using (var dlg = new NoIconDialog(string.Format(Messages.ALLOWED_UPDATES_DIALOG_MESSAGE_CFU, BrandManager.BrandConsole, BrandManager.ProductVersion821),
+                               ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
+                           {
+                               HelpButton = true,
+                               HelpNameSetter = "AllowUpdatesDialog",
+                               ShowCheckbox = false
+                           })
+                    {
+                        launch = dlg.ShowDialog(this) == DialogResult.Yes;
+                    }
+
+                    if (launch)
+                    {
+                        using (var dialog = new ConfigUpdatesDialog())
+                        {
+                            dialog.SelectLcmTab();
+                            dialog.ShowDialog(this);
+                        }
+                    }
+                });
             }
 
             Updates.RefreshUpdateAlerts(Updates.UpdateType.ServerPatches | Updates.UpdateType.ServerVersion);
@@ -3318,6 +3351,12 @@ namespace XenAdmin
         private void toolStripMenuItemCfu_Click(object sender, EventArgs e)
         {
             Updates.CheckForClientUpdates(true);
+        }
+
+        private void configureUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new ConfigUpdatesDialog())
+                dialog.ShowDialog(this);
         }
     }
 }

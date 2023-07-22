@@ -31,7 +31,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using XenAdmin.Core;
-using XenCenterLib;
+using XenAdmin.Dialogs.ServerUpdates;
 
 
 namespace XenAdmin.Dialogs.OptionsPages
@@ -41,36 +41,28 @@ namespace XenAdmin.Dialogs.OptionsPages
         public UpdatesOptionsPage()
         {
             InitializeComponent();
-            
-            groupBoxClient.Text = string.Format(groupBoxClient.Text, BrandManager.BrandConsole);
+
             labelClientUpdates.Text = string.Format(labelClientUpdates.Text, BrandManager.BrandConsole);
             _checkBoxClientUpdates.Text = string.Format(_checkBoxClientUpdates.Text, BrandManager.BrandConsole);
-
-            groupBoxServer.Text = string.Format(groupBoxServer.Text, BrandManager.ProductVersion821);
-            labelServerUpdates.Text = string.Format(labelServerUpdates.Text, BrandManager.BrandConsole, BrandManager.ProductBrand);
-            _checkBoxServerUpdates.Text = string.Format(_checkBoxServerUpdates.Text, BrandManager.ProductBrand);
-            _checkBoxServerVersions.Text = string.Format(_checkBoxServerVersions.Text, BrandManager.ProductBrand);
+            labelInfoCdn.Text = string.Format(labelInfoCdn.Text, BrandManager.ProductBrand);
         }
 
         #region IOptionsPage Members
 
         public void Build()
         {
-            _checkBoxServerVersions.Checked = Properties.Settings.Default.AllowXenServerUpdates;
-            _checkBoxServerUpdates.Checked = Properties.Settings.Default.AllowPatchesUpdates;
             _checkBoxClientUpdates.Checked = Properties.Settings.Default.AllowXenCenterUpdates;
-
-            clientIdControl1.Build();
         }
 
         public bool IsValidToSave(out Control control, out string invalidReason)
         {
-            return clientIdControl1.IsValidToSave(out control, out invalidReason);
+            control = null;
+            invalidReason = string.Empty;
+            return true;
         }
 
         public void ShowValidationMessages(Control control, string message)
         {
-            clientIdControl1.ShowValidationMessages(control, message);
         }
 
         public void HideValidationMessages()
@@ -79,12 +71,6 @@ namespace XenAdmin.Dialogs.OptionsPages
 
         public void Save()
         {
-            if (!string.IsNullOrEmpty(clientIdControl1.FileServiceUsername))
-                Properties.Settings.Default.FileServiceUsername = EncryptionUtils.Protect(clientIdControl1.FileServiceUsername);
-
-            if (!string.IsNullOrEmpty(clientIdControl1.FileServiceClientId))
-                Properties.Settings.Default.FileServiceClientId = EncryptionUtils.Protect(clientIdControl1.FileServiceClientId);
-
             if (_checkBoxClientUpdates.Checked != Properties.Settings.Default.AllowXenCenterUpdates)
             {
                 Properties.Settings.Default.AllowXenCenterUpdates = _checkBoxClientUpdates.Checked;
@@ -92,28 +78,24 @@ namespace XenAdmin.Dialogs.OptionsPages
                 if (Properties.Settings.Default.AllowXenCenterUpdates)
                     Updates.CheckForClientUpdates(true);
             }
-
-            if (_checkBoxServerUpdates.Checked != Properties.Settings.Default.AllowPatchesUpdates ||
-                _checkBoxServerVersions.Checked != Properties.Settings.Default.AllowXenServerUpdates)
-            {
-                Properties.Settings.Default.AllowPatchesUpdates = _checkBoxServerUpdates.Checked;
-                Properties.Settings.Default.AllowXenServerUpdates = _checkBoxServerVersions.Checked;
-
-                if (Properties.Settings.Default.AllowPatchesUpdates || Properties.Settings.Default.AllowXenServerUpdates)
-                    Updates.CheckForServerUpdates(userRequested: true);
-            }
         }
 
         #endregion
 
         #region IVerticalTab Members
 
-        public override string Text => Messages.UPDATES;
+        public override string Text => string.Format(Messages.UPDATES_OPTIONS_TITLE, BrandManager.BrandConsole);
 
-        public string SubText => string.Format(Messages.UPDATES_DESC, BrandManager.ProductBrand, BrandManager.BrandConsole);
+        public string SubText => string.Format(Messages.UPDATES_OPTIONS_DESC, BrandManager.BrandConsole);
 
         public Image Image => Images.StaticImages._000_Patch_h32bit_16;
 
         #endregion
+
+        private void linkLabelCongifUpdates_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            using (var dialog = new ConfigUpdatesDialog())
+                dialog.ShowDialog(this);
+        }
     }
 }

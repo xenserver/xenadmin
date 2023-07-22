@@ -156,6 +156,15 @@ namespace XenAdmin.Core
 
         public static string AdditionalFeatures => ReadInstalledKey(ADDITIONAL_FEATURES, RegistryView.Registry32);
 
+        internal static bool ShowExtraYumRepos
+        {
+            get
+            {
+                var str = ReadInstalledKey(SHOW_EXTRA_YUM_REPOS);
+                return !string.IsNullOrEmpty(str) && str.Trim() == "1";
+            }
+        }
+
         public static string GetCustomClientUpdatesXmlLocation()
         {
             return ReadInstalledKey(CUSTOM_CLIENT_UPDATES_XML_LOCATION);
@@ -185,6 +194,68 @@ namespace XenAdmin.Core
         {
             return ReadInstalledKey(CUSTOM_TOKEN_URL);
         }
+
+        public static string GetYumRepoBaseBin()
+        {
+            return ReadInstalledKey(YUM_REPO_BASE_BIN);
+        }
+
+        public static string GetYumRepoBaseSource()
+        {
+            return ReadInstalledKey(YUM_REPO_BASE_SRC);
+        }
+
+        public static string GetYumRepoEarlyAccessBin()
+        {
+            return ReadInstalledKey(YUM_REPO_EARLY_ACCESS_BIN);
+        }
+
+        public static string GetYumRepoEarlyAccessSource()
+        {
+            return ReadInstalledKey(YUM_REPO_EARLY_ACCESS_SRC);
+        }
+
+        public static string GetYumRepoNormalBin()
+        {
+            return ReadInstalledKey(YUM_REPO_NORMAL_BIN);
+        }
+
+        public static string GetYumRepoNormalSource()
+        {
+            return ReadInstalledKey(YUM_REPO_NORMAL_SRC);
+        }
+
+        public static string GetYumRepoInternalBin()
+        {
+            return ReadInstalledKey(YUM_REPO_INTERNAL_BIN);
+        }
+
+        public static string GetYumRepoInternalSource()
+        {
+            return ReadInstalledKey(YUM_REPO_INTERNAL_SRC);
+        }
+
+        public static string GetYumRepoDevTeamBin()
+        {
+            return ReadInstalledKey(YUM_REPO_DEV_TEAM_BIN);
+        }
+
+        public static string GetYumRepoDevTeamSource()
+        {
+            return ReadInstalledKey(YUM_REPO_DEV_TEAM_SRC);
+        }
+
+        private const string YUM_REPO_BASE_BIN = "YumRepoBaseBinOverride";
+        private const string YUM_REPO_BASE_SRC = "YumRepoBaseSourceOverride";
+        private const string YUM_REPO_EARLY_ACCESS_BIN = "YumRepoEarlyAccessBinOverride";
+        private const string YUM_REPO_EARLY_ACCESS_SRC = "YumRepoEarlyAccessSourceOverride";
+        private const string YUM_REPO_NORMAL_BIN = "YumRepoNormalBinOverride";
+        private const string YUM_REPO_NORMAL_SRC = "YumRepoNormalSourceOverride";
+        private const string YUM_REPO_DEV_TEAM_BIN = "YumRepoDevTeamBin";
+        private const string YUM_REPO_DEV_TEAM_SRC = "YumRepoDevTeamSource";
+        private const string YUM_REPO_INTERNAL_BIN = "YumRepoInternalBin";
+        private const string YUM_REPO_INTERNAL_SRC = "YumRepoInternalSource";
+        private const string SHOW_EXTRA_YUM_REPOS = "ShowExtraYumRepos";
 
         public static string CustomHelpUrl => ReadString(HELP_URL_OVERRIDE);
 

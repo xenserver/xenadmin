@@ -2664,6 +2664,12 @@
   <data name="toolStripSeparator13.Size" type="System.Drawing.Size, System.Drawing">
     <value>192, 6</value>
   </data>
+  <data name="configureUpdatesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>195, 22</value>
+  </data>
+  <data name="configureUpdatesToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Configure Updates...</value>
+  </data>
   <data name="installNewUpdateToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>195, 22</value>
   </data>
@@ -4148,6 +4154,12 @@
   </data>
   <data name="&gt;&gt;statusLabelAlerts.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;configureUpdatesToolStripMenuItem.Name" xml:space="preserve">
+    <value>configureUpdatesToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;configureUpdatesToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainWindow</value>

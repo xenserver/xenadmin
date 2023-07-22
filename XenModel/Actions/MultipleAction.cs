@@ -45,7 +45,7 @@ namespace XenAdmin.Actions
     {
         private static readonly log4net.ILog _log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private readonly List<AsyncAction> _subActions;
+        public List<AsyncAction> SubActions { get; }
         private readonly string _endDescription;
         private readonly bool _stopOnFirstException;
 
@@ -59,7 +59,7 @@ namespace XenAdmin.Actions
             : base(connection, title, startDescription, suppressHistory)
         {
             _endDescription = endDescription;
-            _subActions = subActions;
+            SubActions = subActions;
             ShowSubActionsDetails = showSubActionsDetails;
             _stopOnFirstException = stopOnFirstException;
             Completed += MultipleAction_Completed;
@@ -74,7 +74,7 @@ namespace XenAdmin.Actions
             get
             {
                 var list = new RbacMethodList();
-                foreach (var subAction in _subActions)
+                foreach (var subAction in SubActions)
                     list.AddRange(subAction.GetApiMethodsToRoleCheck);
                 return list;
             }
@@ -103,12 +103,12 @@ namespace XenAdmin.Actions
 
         public override void RecomputeCanCancel()
         {
-            CanCancel = !IsCompleted && _subActions.Any(a => !a.IsCompleted);
+            CanCancel = !IsCompleted && SubActions.Any(a => !a.IsCompleted);
         }
 
         protected override void CancelRelatedTask()
         {
-            foreach (var subAction in _subActions.Where(a => !a.IsCompleted))
+            foreach (var subAction in SubActions.Where(a => !a.IsCompleted))
             {
                 subAction.Cancel();
             }
@@ -116,13 +116,13 @@ namespace XenAdmin.Actions
 
         private void RegisterEvents()
         {
-            foreach (var subAction in _subActions)
+            foreach (var subAction in SubActions)
                 subAction.Changed += SubActionChanged;
         }
 
         private void DeRegisterEvents()
         {
-            foreach (var subAction in _subActions)
+            foreach (var subAction in SubActions)
                 subAction.Changed -= SubActionChanged;
         }
 
@@ -140,15 +140,15 @@ namespace XenAdmin.Actions
         protected virtual void RecalculatePercentComplete()
         {
             int total = 0;
-            int n = _subActions.Count;
-            foreach (var action in _subActions)
+            int n = SubActions.Count;
+            foreach (var action in SubActions)
                 total += action.PercentComplete;
             PercentComplete = total / n;
         }
 
         protected virtual void RunSubActions(List<Exception> exceptions)
         {
-            foreach (var subAction in _subActions)
+            foreach (var subAction in SubActions)
             {
                 if (Cancelling) // don't start any more actions
                     break;
@@ -178,7 +178,7 @@ namespace XenAdmin.Actions
             // if the sudo dialog is cancelled, of (less likely) if one of the
             // sub-actions throws an exception in its GetApiMethodsToRoleCheck.
             // In this case, we need to cancel this action's sub-actions.
-            foreach (var subAction in _subActions)
+            foreach (var subAction in SubActions)
             {
                 if (!subAction.IsCompleted)
                     subAction.Cancel();

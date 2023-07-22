@@ -292,6 +292,7 @@ namespace XenAdmin
             this.statusLabelErrors = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLabelUpdates = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLabelAlerts = new System.Windows.Forms.ToolStripStatusLabel();
+            this.configureUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -1777,6 +1778,7 @@ namespace XenAdmin
             this.toolStripSeparator14,
             this.LicenseManagerMenuItem,
             this.toolStripSeparator13,
+            this.configureUpdatesToolStripMenuItem,
             this.installNewUpdateToolStripMenuItem,
             this.rollingUpgradeToolStripMenuItem,
             this.toolStripSeparator6,
@@ -2044,6 +2046,12 @@ namespace XenAdmin
             resources.ApplyResources(this.statusLabelAlerts, "statusLabelAlerts");
             this.statusLabelAlerts.VisitedLinkColor = System.Drawing.SystemColors.ControlDarkDark;
             this.statusLabelAlerts.Click += new System.EventHandler(this.statusLabelAlerts_Click);
+            // 
+            // configureUpdatesToolStripMenuItem
+            // 
+            this.configureUpdatesToolStripMenuItem.Name = "configureUpdatesToolStripMenuItem";
+            resources.ApplyResources(this.configureUpdatesToolStripMenuItem, "configureUpdatesToolStripMenuItem");
+            this.configureUpdatesToolStripMenuItem.Click += new System.EventHandler(this.configureUpdatesToolStripMenuItem_Click);
             // 
             // MainWindow
             // 
@@ -2330,6 +2338,7 @@ namespace XenAdmin
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator32;
         private XenAdmin.Commands.CommandToolStripMenuItem toolStripMenuItemVtpm;
         private System.Windows.Forms.Label labelFiltersOnOff;
+        private System.Windows.Forms.ToolStripMenuItem configureUpdatesToolStripMenuItem;
     }
 
 }

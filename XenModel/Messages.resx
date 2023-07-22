@@ -1994,7 +1994,10 @@ Note that if RBAC is enabled, only alerts which you have privileges to dismiss w
     <value>&amp;Show internet proxy settings</value>
   </data>
   <data name="ALLOWED_UPDATES_DIALOG_MESSAGE" xml:space="preserve">
-    <value>Would you like {0} to periodically check the internet for {1} updates and new versions of the application?</value>
+    <value>Would you like {0} to periodically check the internet for new versions of the application?</value>
+  </data>
+  <data name="ALLOWED_UPDATES_DIALOG_MESSAGE_CFU" xml:space="preserve">
+    <value>You can configure {0} to periodically check the internet for updates and new versions for servers running {1} or earlier. Would you like to do so?</value>
   </data>
   <data name="ALREADY_ATTACHED_ELSEWHERE" xml:space="preserve">
     <value>The SR '{0}' is currently attached elsewhere. Do you want to attach it to '{1}'? 
@@ -2961,6 +2964,12 @@ Do you want to assign these VMs to the schedule '{0}' instead?</value>
   </data>
   <data name="COMPRESSING_FILES" xml:space="preserve">
     <value>Compressing appliance files...</value>
+  </data>
+  <data name="CONFIG_CDN_UPDATES_TAB_TITLE" xml:space="preserve">
+    <value>{0} {1}</value>
+  </data>
+  <data name="CONFIG_LCM_UPDATES_TAB_TITLE" xml:space="preserve">
+    <value>{0} or earlier</value>
   </data>
   <data name="CONFIGURE_HA" xml:space="preserve">
     <value>Configure HA</value>
@@ -12812,9 +12821,6 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
   <data name="UPDATES" xml:space="preserve">
     <value>Updates</value>
   </data>
-  <data name="UPDATES_DESC" xml:space="preserve">
-    <value>Automatically check for {0} or {1} updates</value>
-  </data>
   <data name="UPDATES_DIALOG_ACTION_REQUIRED" xml:space="preserve">
     <value>For the update to take effect after application, the following action is required:
  </value>
@@ -12869,6 +12875,12 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
   </data>
   <data name="UPDATES_GENERAL_TAB_ENFORCE_HOMOGENEITY" xml:space="preserve">
     <value>(full application required)</value>
+  </data>
+  <data name="UPDATES_OPTIONS_DESC" xml:space="preserve">
+    <value>Automatically check for {0} updates</value>
+  </data>
+  <data name="UPDATES_OPTIONS_TITLE" xml:space="preserve">
+    <value>{0} Updates</value>
   </data>
   <data name="UPDATES_WIZARD" xml:space="preserve">
     <value>Install Update</value>
@@ -14817,5 +14829,55 @@ Any disk in your VM's DVD drive will be ejected when installing {1}.</value>
   </data>
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>You are here</value>
+  </data>
+  <data name="YUM_REPO_ACTION_CONFIG_DESCRIPTION_DISABLE" xml:space="preserve">
+    <value>Disabling repository {0}...</value>
+  </data>
+  <data name="YUM_REPO_ACTION_CONFIG_DESCRIPTION_ENABLE" xml:space="preserve">
+    <value>Enabling repository {0}...</value>
+  </data>
+  <data name="YUM_REPO_ACTION_CONFIG_DESCRIPTION_INTRODUCE" xml:space="preserve">
+    <value>Introducing repository {0}...</value>
+  </data>
+  <data name="YUM_REPO_ACTION_CONFIG_TITLE" xml:space="preserve">
+    <value>Configuring {0} to retrieve updates from the {1} repo...</value>
+  </data>
+  <data name="YUM_REPO_ACTION_PROXY_CONFIG_TITLE" xml:space="preserve">
+    <value>Configuring proxy for accessing the update channel</value>
+  </data>
+  <data name="YUM_REPO_ACTION_PROXY_DISABLE_TITLE" xml:space="preserve">
+    <value>Disabling proxy for accessing the update channel</value>
+  </data>
+  <data name="YUM_REPO_ACTION_SYNC_SCHEDULE_CONFIG_TITLE" xml:space="preserve">
+    <value>Configuring periodic synchronization with the update channel...</value>
+  </data>
+  <data name="YUM_REPO_ACTION_SYNC_SCHEDULE_DISABLE_TITLE" xml:space="preserve">
+    <value>Disabling periodic synchronization with the update channel...</value>
+  </data>
+  <data name="YUM_REPO_ACTION_SYNC_SCHEDULE_ENABLE_TITLE" xml:space="preserve">
+    <value>Enabling periodic synchronization with the update channel...</value>
+  </data>
+  <data name="YUM_REPO_ACTION_SYNCING_TITLE" xml:space="preserve">
+    <value>Synchronizing with update channel...</value>
+  </data>
+  <data name="YUM_REPO_BASE" xml:space="preserve">
+    <value>Base</value>
+  </data>
+  <data name="YUM_REPO_EARLY_ACCESS" xml:space="preserve">
+    <value>Early Access</value>
+  </data>
+  <data name="YUM_REPO_NORMAL" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="YUM_REPO_PROXY" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="YUM_REPO_SYNC_AFTER_CONFIG" xml:space="preserve">
+    <value>{0} recommends that you synchronize the selected pool(s) or standalone host(s) with the specified update channel as soon as possible to retrieve the latest available updates.
+
+Do you want to synchronize immediately?</value>
+  </data>
+  <data name="YUM_REPO_SYNC_YES_BUTTON" xml:space="preserve">
+    <value>&amp;Yes, Synchronize</value>
   </data>
 </root>
