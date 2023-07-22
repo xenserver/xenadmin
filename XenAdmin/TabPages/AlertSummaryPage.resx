@@ -307,7 +307,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="toolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>731, 25</value>
+    <value>739, 25</value>
   </data>
   <data name="toolStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -334,7 +334,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 12</value>
+    <value>8, 8</value>
   </data>
   <data name="tableLayoutPanel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -343,7 +343,7 @@
     <value>1</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>733, 27</value>
+    <value>741, 27</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -379,7 +379,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="tableLayoutPanel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 483</value>
+    <value>8, 487</value>
   </data>
   <data name="tableLayoutPanel3.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
@@ -475,13 +475,13 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="GridViewAlerts.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 51</value>
+    <value>8, 47</value>
   </data>
   <data name="GridViewAlerts.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 12, 0, 12</value>
   </data>
   <data name="GridViewAlerts.Size" type="System.Drawing.Size, System.Drawing">
-    <value>733, 417</value>
+    <value>741, 425</value>
   </data>
   <data name="GridViewAlerts.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -508,7 +508,7 @@
     <value>Tahoma, 8pt</value>
   </data>
   <data name="$this.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>12, 12, 12, 12</value>
+    <value>8, 8, 8, 8</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>757, 520</value>

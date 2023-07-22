@@ -7272,6 +7272,42 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Migrate VMs off this server.
+        /// </summary>
+        public static string CDN_GUIDANCE_EVACUATE_HOST {
+            get {
+                return ResourceManager.GetString("CDN_GUIDANCE_EVACUATE_HOST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reboot this server.
+        /// </summary>
+        public static string CDN_GUIDANCE_REBOOT_HOST {
+            get {
+                return ResourceManager.GetString("CDN_GUIDANCE_REBOOT_HOST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reboot VMs running on this server.
+        /// </summary>
+        public static string CDN_GUIDANCE_RESTART_DEVICE_MODEL {
+            get {
+                return ResourceManager.GetString("CDN_GUIDANCE_RESTART_DEVICE_MODEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Restart Toolstack.
+        /// </summary>
+        public static string CDN_GUIDANCE_RESTART_TOOLSTACK {
+            get {
+                return ResourceManager.GetString("CDN_GUIDANCE_RESTART_TOOLSTACK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The trusted CA certificate &apos;{0}&apos; of &apos;{1}&apos; expired on {2}..
         /// </summary>
         public static string CERTIFICATE_CA_ALERT_EXPIRED_DESCIRPTION {
@@ -20385,6 +20421,115 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Post-update tasks to be performed:
+        ///{0}.
+        /// </summary>
+        public static string HOTFIX_POST_UPDATE_ACTIONS {
+            get {
+                return ResourceManager.GetString("HOTFIX_POST_UPDATE_ACTIONS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} packages will be updated.
+        /// </summary>
+        public static string HOTFIX_RPMS_TO_INSTALL {
+            get {
+                return ResourceManager.GetString("HOTFIX_RPMS_TO_INSTALL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} bug fixes.
+        /// </summary>
+        public static string HOTFIX_TYPE_BUG_FIX_MANY {
+            get {
+                return ResourceManager.GetString("HOTFIX_TYPE_BUG_FIX_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 bug fix.
+        /// </summary>
+        public static string HOTFIX_TYPE_BUG_FIX_ONE {
+            get {
+                return ResourceManager.GetString("HOTFIX_TYPE_BUG_FIX_ONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} improvements.
+        /// </summary>
+        public static string HOTFIX_TYPE_IMPROVEMENT_MANY {
+            get {
+                return ResourceManager.GetString("HOTFIX_TYPE_IMPROVEMENT_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 improvement.
+        /// </summary>
+        public static string HOTFIX_TYPE_IMPROVEMENT_ONE {
+            get {
+                return ResourceManager.GetString("HOTFIX_TYPE_IMPROVEMENT_ONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} new features.
+        /// </summary>
+        public static string HOTFIX_TYPE_NEW_FEATURE_MANY {
+            get {
+                return ResourceManager.GetString("HOTFIX_TYPE_NEW_FEATURE_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 new feature.
+        /// </summary>
+        public static string HOTFIX_TYPE_NEW_FEATURE_ONE {
+            get {
+                return ResourceManager.GetString("HOTFIX_TYPE_NEW_FEATURE_ONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} feature previews.
+        /// </summary>
+        public static string HOTFIX_TYPE_PREVIEW_FEATURE_MANY {
+            get {
+                return ResourceManager.GetString("HOTFIX_TYPE_PREVIEW_FEATURE_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 new feature preview.
+        /// </summary>
+        public static string HOTFIX_TYPE_PREVIEW_FEATURE_ONE {
+            get {
+                return ResourceManager.GetString("HOTFIX_TYPE_PREVIEW_FEATURE_ONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} security fixes.
+        /// </summary>
+        public static string HOTFIX_TYPE_SECURITY_FIX_MANY {
+            get {
+                return ResourceManager.GetString("HOTFIX_TYPE_SECURITY_FIX_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 security fix.
+        /// </summary>
+        public static string HOTFIX_TYPE_SECURITY_FIX_ONE {
+            get {
+                return ResourceManager.GetString("HOTFIX_TYPE_SECURITY_FIX_ONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hourly; at {0} minutes past each hour.
         /// </summary>
         public static string HOURLY_SCHEDULE_FORMAT {
@@ -28770,15 +28915,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Alerts: {0}.
-        /// </summary>
-        public static string NOTIFICATIONS_SUBMODE_ALERTS_STATUS {
-            get {
-                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_ALERTS_STATUS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Alerts ({0}).
         /// </summary>
         public static string NOTIFICATIONS_SUBMODE_ALERTS_UNREAD {
@@ -28793,42 +28929,6 @@ namespace XenAdmin {
         public static string NOTIFICATIONS_SUBMODE_EVENTS_READ {
             get {
                 return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_EVENTS_READ", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Events: {0}.
-        /// </summary>
-        public static string NOTIFICATIONS_SUBMODE_EVENTS_STATUS {
-            get {
-                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_EVENTS_STATUS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 1 error.
-        /// </summary>
-        public static string NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ERROR {
-            get {
-                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ERROR", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} errors.
-        /// </summary>
-        public static string NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ERRORS {
-            get {
-                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ERRORS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} in progress.
-        /// </summary>
-        public static string NOTIFICATIONS_SUBMODE_EVENTS_STATUS_IN_PROGRESS {
-            get {
-                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_EVENTS_STATUS_IN_PROGRESS", resourceCulture);
             }
         }
         
@@ -28856,15 +28956,6 @@ namespace XenAdmin {
         public static string NOTIFICATIONS_SUBMODE_UPDATES_READ {
             get {
                 return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_UPDATES_READ", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Updates: {0}.
-        /// </summary>
-        public static string NOTIFICATIONS_SUBMODE_UPDATES_STATUS {
-            get {
-                return ResourceManager.GetString("NOTIFICATIONS_SUBMODE_UPDATES_STATUS", resourceCulture);
             }
         }
         

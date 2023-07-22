@@ -2630,6 +2630,18 @@ This will cancel compilation of the status report.</value>
   <data name="CDDRIVE_MAX_ALLOWED_VBDS" xml:space="preserve">
     <value>The DVD drive cannot be created, because you have reached the maximum number of virtual disks allowed for this virtual machine.</value>
   </data>
+  <data name="CDN_GUIDANCE_EVACUATE_HOST" xml:space="preserve">
+    <value>Migrate VMs off this server</value>
+  </data>
+  <data name="CDN_GUIDANCE_REBOOT_HOST" xml:space="preserve">
+    <value>Reboot this server</value>
+  </data>
+  <data name="CDN_GUIDANCE_RESTART_DEVICE_MODEL" xml:space="preserve">
+    <value>Reboot VMs running on this server</value>
+  </data>
+  <data name="CDN_GUIDANCE_RESTART_TOOLSTACK" xml:space="preserve">
+    <value>Restart Toolstack</value>
+  </data>
   <data name="CERTIFICATE_CA_ALERT_EXPIRED_DESCIRPTION" xml:space="preserve">
     <value>The trusted CA certificate '{0}' of '{1}' expired on {2}.</value>
   </data>
@@ -7116,6 +7128,43 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   <data name="HOTFIX_ELIGIBILITY_WARNING_FREE_NO_DATE" xml:space="preserve">
     <value>End of Life for express customers</value>
   </data>
+  <data name="HOTFIX_POST_UPDATE_ACTIONS" xml:space="preserve">
+    <value>Post-update tasks to be performed:
+{0}</value>
+  </data>
+  <data name="HOTFIX_RPMS_TO_INSTALL" xml:space="preserve">
+    <value>{0} packages will be updated</value>
+  </data>
+  <data name="HOTFIX_TYPE_BUG_FIX_MANY" xml:space="preserve">
+    <value>{0} bug fixes</value>
+  </data>
+  <data name="HOTFIX_TYPE_BUG_FIX_ONE" xml:space="preserve">
+    <value>1 bug fix</value>
+  </data>
+  <data name="HOTFIX_TYPE_IMPROVEMENT_MANY" xml:space="preserve">
+    <value>{0} improvements</value>
+  </data>
+  <data name="HOTFIX_TYPE_IMPROVEMENT_ONE" xml:space="preserve">
+    <value>1 improvement</value>
+  </data>
+  <data name="HOTFIX_TYPE_NEW_FEATURE_MANY" xml:space="preserve">
+    <value>{0} new features</value>
+  </data>
+  <data name="HOTFIX_TYPE_NEW_FEATURE_ONE" xml:space="preserve">
+    <value>1 new feature</value>
+  </data>
+  <data name="HOTFIX_TYPE_PREVIEW_FEATURE_MANY" xml:space="preserve">
+    <value>{0} feature previews</value>
+  </data>
+  <data name="HOTFIX_TYPE_PREVIEW_FEATURE_ONE" xml:space="preserve">
+    <value>1 new feature preview</value>
+  </data>
+  <data name="HOTFIX_TYPE_SECURITY_FIX_MANY" xml:space="preserve">
+    <value>{0} security fixes</value>
+  </data>
+  <data name="HOTFIX_TYPE_SECURITY_FIX_ONE" xml:space="preserve">
+    <value>1 security fix</value>
+  </data>
   <data name="HOURLY_SCHEDULE_FORMAT" xml:space="preserve">
     <value>Hourly; at {0} minutes past each hour</value>
   </data>
@@ -9987,26 +10036,11 @@ When you configure an NFS storage repository, you simply provide the host name o
   <data name="NOTIFICATIONS_SUBMODE_ALERTS_READ" xml:space="preserve">
     <value>Alerts</value>
   </data>
-  <data name="NOTIFICATIONS_SUBMODE_ALERTS_STATUS" xml:space="preserve">
-    <value>Alerts: {0}</value>
-  </data>
   <data name="NOTIFICATIONS_SUBMODE_ALERTS_UNREAD" xml:space="preserve">
     <value>Alerts ({0})</value>
   </data>
   <data name="NOTIFICATIONS_SUBMODE_EVENTS_READ" xml:space="preserve">
     <value>Events</value>
-  </data>
-  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS" xml:space="preserve">
-    <value>Events: {0}</value>
-  </data>
-  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ERROR" xml:space="preserve">
-    <value>1 error</value>
-  </data>
-  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ERRORS" xml:space="preserve">
-    <value>{0} errors</value>
-  </data>
-  <data name="NOTIFICATIONS_SUBMODE_EVENTS_STATUS_IN_PROGRESS" xml:space="preserve">
-    <value>{0} in progress</value>
   </data>
   <data name="NOTIFICATIONS_SUBMODE_EVENTS_UNREAD_MANY" xml:space="preserve">
     <value>Events ({0} errors)</value>
@@ -10016,9 +10050,6 @@ When you configure an NFS storage repository, you simply provide the host name o
   </data>
   <data name="NOTIFICATIONS_SUBMODE_UPDATES_READ" xml:space="preserve">
     <value>Updates</value>
-  </data>
-  <data name="NOTIFICATIONS_SUBMODE_UPDATES_STATUS" xml:space="preserve">
-    <value>Updates: {0}</value>
   </data>
   <data name="NOTIFICATIONS_SUBMODE_UPDATES_UNREAD" xml:space="preserve">
     <value>Updates ({0})</value>

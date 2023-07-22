@@ -44,6 +44,7 @@ using XenAdmin.Help;
 using System.Threading;
 using XenAdmin.Actions;
 using System.IO;
+using XenAdmin.Controls.MainWindowControls;
 
 
 namespace XenAdmin.TabPages
@@ -78,7 +79,6 @@ namespace XenAdmin.TabPages
         protected override void RefreshPage()
         {
             toolStripDropDownButtonServerFilter.InitializeHostList();
-            toolStripDropDownButtonServerFilter.BuildFilterList();
             Rebuild();
         }
 
@@ -93,6 +93,8 @@ namespace XenAdmin.TabPages
         }
 
         public override string HelpID => "AlertSummaryDialog";
+
+        public override NotificationsSubMode NotificationsSubMode => NotificationsSubMode.Alerts;
 
         #endregion
 

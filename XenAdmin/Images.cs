@@ -957,6 +957,7 @@ namespace XenAdmin
             public static Bitmap turbo_16x = Properties.Resources.turbo_16x;
             public static Bitmap usb_16 = Properties.Resources.usb_16;
             public static Bitmap yinhekylin_16x = Properties.Resources.yinhekylin_16x;
+            public static Bitmap rightArrowLong_Blue_16 = Properties.Resources.rightArrowLong_Blue_16;
         }
     }
 }

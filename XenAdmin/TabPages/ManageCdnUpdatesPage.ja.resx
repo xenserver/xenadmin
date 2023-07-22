@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -59,46 +59,46 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
+  <xsd:schema id="root" xmlns="" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:element msdata:IsDataSet="true" name="root">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                <xsd:element minOccurs="0" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
+                <xsd:element minOccurs="0" msdata:Ordinal="2" name="comment" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute msdata:Ordinal="1" name="name" type="xsd:string" use="required"/>
+              <xsd:attribute msdata:Ordinal="3" name="type" type="xsd:string"/>
+              <xsd:attribute msdata:Ordinal="4" name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -117,11 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="tableLayoutPanel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="tableLayoutPanel1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -134,7 +134,7 @@
   <data name="informationLabelIcon.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Left</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
   <data name="informationLabelIcon.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
@@ -145,7 +145,7 @@
     <value>3, 3</value>
   </data>
   <data name="informationLabelIcon.Size" type="System.Drawing.Size, System.Drawing">
-    <value>16, 16</value>
+    <value>20, 16</value>
   </data>
   <data name="informationLabelIcon.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -175,13 +175,13 @@
     <value>NoControl</value>
   </data>
   <data name="informationLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 3</value>
+    <value>29, 1</value>
   </data>
   <data name="informationLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 15</value>
+    <value>97, 21</value>
   </data>
   <data name="informationLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>5</value>
   </data>
   <data name="informationLabel.Text" xml:space="preserve">
     <value>informationLabel</value>
@@ -202,10 +202,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 348</value>
-  </data>
-  <data name="tableLayoutPanel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 6, 0, 0</value>
+    <value>15, 382</value>
   </data>
   <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
@@ -223,13 +220,13 @@
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
-    <value>tableLayoutPanel5</value>
+    <value>$this</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>3</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="informationLabelIcon" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="informationLabel" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="Percent,100,Absolute,22" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="informationLabelIcon" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="informationLabel" Row="0" RowSpan="1" Column="1" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,Percent,100" />&lt;Rows Styles="Percent,100,Absolute,22" />&lt;/TableLayoutSettings></value>
   </data>
   <data name="tableLayoutPanel2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -256,21 +253,21 @@
     <value>None</value>
   </data>
   <data name="byUpdateToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="byUpdateToolStripMenuItem.Text" xml:space="preserve">
-    <value>By &amp;Update</value>
+    <value>アップデートごと(&amp;U)</value>
   </data>
   <data name="byHostToolStripMenuItem.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
     <value>None</value>
   </data>
   <data name="byHostToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="byHostToolStripMenuItem.Text" xml:space="preserve">
-    <value>By &amp;Server</value>
+    <value>サーバーごと(&amp;S)</value>
   </data>
-  <data name="toolStripDropDownButtonView.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data mimetype="application/x-microsoft.net.object.bytearray.base64" name="toolStripDropDownButtonView.Image" type="System.Drawing.Bitmap, System.Drawing">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIDSURBVDhPpZLrS5NhGMb3j4SWh0oRQVExD4gonkDpg4hG
@@ -289,13 +286,13 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripDropDownButtonView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 22</value>
+    <value>45, 23</value>
   </data>
   <data name="toolStripDropDownButtonView.Text" xml:space="preserve">
-    <value>V&amp;iew</value>
+    <value>表示(&amp;I)</value>
   </data>
   <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 25</value>
+    <value>6, 26</value>
   </data>
   <data name="toolStripDropDownButtonServerFilter.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -304,10 +301,10 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripDropDownButtonServerFilter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>97, 22</value>
+    <value>111, 23</value>
   </data>
   <data name="toolStripDropDownButtonServerFilter.Text" xml:space="preserve">
-    <value>Filter by S&amp;erver</value>
+    <value>サーバーによるフィルタ(&amp;E)</value>
   </data>
   <data name="toolStripDropDownButtonDateFilter.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -316,13 +313,13 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripDropDownButtonDateFilter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 22</value>
+    <value>89, 23</value>
   </data>
   <data name="toolStripDropDownButtonDateFilter.Text" xml:space="preserve">
-    <value>Filter by &amp;Date</value>
+    <value>日付によるフィルタ(&amp;D)</value>
   </data>
   <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 25</value>
+    <value>6, 26</value>
   </data>
   <data name="toolStripButtonRefresh.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -331,24 +328,48 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonRefresh.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 22</value>
+    <value>50, 23</value>
   </data>
   <data name="toolStripButtonRefresh.Text" xml:space="preserve">
-    <value>&amp;Check for Updates</value>
+    <value>更新(&amp;R)</value>
+  </data>
+  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 26</value>
+  </data>
+  <data name="toolStripButtonExportAll.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="toolStripButtonExportAll.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripButtonExportAll.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 23</value>
+  </data>
+  <data name="toolStripButtonExportAll.Text" xml:space="preserve">
+    <value>すべてエクスポート(&amp;X)</value>
+  </data>
+  <data name="toolStripLabelFiltersOnOff.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="toolStripLabelFiltersOnOff.Size" type="System.Drawing.Size, System.Drawing">
+    <value>104, 23</value>
+  </data>
+  <data name="toolStripLabelFiltersOnOff.Text" xml:space="preserve">
+    <value>フィルタが有効/無効です</value>
   </data>
   <data name="dismissAllToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>161, 22</value>
   </data>
   <data name="dismissAllToolStripMenuItem.Text" xml:space="preserve">
-    <value>Dismiss &amp;All</value>
+    <value>すべてのアラートをクリア(&amp;A)</value>
   </data>
   <data name="dismissSelectedToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>161, 22</value>
   </data>
   <data name="dismissSelectedToolStripMenuItem.Text" xml:space="preserve">
-    <value>Dismiss Sele&amp;cted</value>
+    <value>選択をクリア(&amp;C)</value>
   </data>
-  <data name="toolStripSplitButtonDismiss.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data mimetype="application/x-microsoft.net.object.bytearray.base64" name="toolStripSplitButtonDismiss.Image" type="System.Drawing.Bitmap, System.Drawing">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIDSURBVDhPpZLrS5NhGMb3j4SWh0oRQVExD4gonkDpg4hG
@@ -367,12 +388,12 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripSplitButtonDismiss.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 22</value>
+    <value>63, 23</value>
   </data>
   <data name="toolStripSplitButtonDismiss.Text" xml:space="preserve">
-    <value>&amp;Dismiss</value>
+    <value>クリア(&amp;D)</value>
   </data>
-  <data name="toolStripButtonRestoreDismissed.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data mimetype="application/x-microsoft.net.object.bytearray.base64" name="toolStripButtonRestoreDismissed.Image" type="System.Drawing.Bitmap, System.Drawing">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIDSURBVDhPpZLrS5NhGMb3j4SWh0oRQVExD4gonkDpg4hG
@@ -391,12 +412,12 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonRestoreDismissed.Size" type="System.Drawing.Size, System.Drawing">
-    <value>106, 22</value>
+    <value>152, 23</value>
   </data>
   <data name="toolStripButtonRestoreDismissed.Text" xml:space="preserve">
-    <value>&amp;Restore Dismissed</value>
+    <value>クリアされたアップデートを復元(&amp;U)</value>
   </data>
-  <data name="toolStripButtonUpdate.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data mimetype="application/x-microsoft.net.object.bytearray.base64" name="toolStripButtonUpdate.Image" type="System.Drawing.Bitmap, System.Drawing">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIDSURBVDhPpZLrS5NhGMb3j4SWh0oRQVExD4gonkDpg4hG
@@ -415,34 +436,19 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonUpdate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>97, 22</value>
+    <value>97, 19</value>
   </data>
   <data name="toolStripButtonUpdate.Text" xml:space="preserve">
-    <value>I&amp;nstall Updates...</value>
-  </data>
-  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 25</value>
-  </data>
-  <data name="toolStripButtonExportAll.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="toolStripButtonExportAll.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="toolStripButtonExportAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 22</value>
-  </data>
-  <data name="toolStripButtonExportAll.Text" xml:space="preserve">
-    <value>E&amp;xport All</value>
+    <value>アップデートのインストール(&amp;I)...</value>
   </data>
   <data name="toolStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>1, 1</value>
   </data>
   <data name="toolStrip1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
+    <value>1, 1, 1, 0</value>
   </data>
   <data name="toolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>822, 25</value>
+    <value>774, 26</value>
   </data>
   <data name="toolStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -454,7 +460,7 @@
     <value>toolStrip1</value>
   </data>
   <data name="&gt;&gt;toolStrip1.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.ToolStripEx, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.ToolStripEx, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;toolStrip1.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
@@ -469,7 +475,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="tableLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 8</value>
+    <value>12, 12</value>
   </data>
   <data name="tableLayoutPanel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -478,7 +484,7 @@
     <value>1</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>824, 27</value>
+    <value>776, 27</value>
   </data>
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -496,7 +502,7 @@
     <value>1</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="toolStrip1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Absolute,27,Absolute,27" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="toolStrip1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="Percent,100" />&lt;Rows Styles="Absolute,27,Absolute,27" />&lt;/TableLayoutSettings></value>
   </data>
   <data name="AutoCheckForUpdatesDisabledLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Left</value>
@@ -514,13 +520,13 @@
     <value>25, 3</value>
   </data>
   <data name="AutoCheckForUpdatesDisabledLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>413, 15</value>
+    <value>395, 15</value>
   </data>
   <data name="AutoCheckForUpdatesDisabledLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="AutoCheckForUpdatesDisabledLabel.Text" xml:space="preserve">
-    <value>Automatic checking for updates is disabled for some types of {0} updates.</value>
+    <value>一部の種類のアップデートでは、アップデートの自動チェックが無効です。</value>
   </data>
   <data name="&gt;&gt;AutoCheckForUpdatesDisabledLabel.Name" xml:space="preserve">
     <value>AutoCheckForUpdatesDisabledLabel</value>
@@ -529,10 +535,13 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;AutoCheckForUpdatesDisabledLabel.Parent" xml:space="preserve">
-    <value>tableLayoutPanel6</value>
+    <value>tableLayouPanel5</value>
   </data>
   <data name="&gt;&gt;AutoCheckForUpdatesDisabledLabel.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
+  </data>
+  <data name="pictureBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
   </data>
   <data name="pictureBox1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -556,10 +565,43 @@
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
-    <value>tableLayoutPanel6</value>
+    <value>tableLayouPanel5</value>
   </data>
   <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="checkForUpdatesNowLink.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="checkForUpdatesNowLink.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkForUpdatesNowLink.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="checkForUpdatesNowLink.Location" type="System.Drawing.Point, System.Drawing">
+    <value>426, 3</value>
+  </data>
+  <data name="checkForUpdatesNowLink.Size" type="System.Drawing.Size, System.Drawing">
+    <value>132, 15</value>
+  </data>
+  <data name="checkForUpdatesNowLink.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="checkForUpdatesNowLink.Text" xml:space="preserve">
+    <value>今すぐアップデートを確認(&amp;C)</value>
+  </data>
+  <data name="&gt;&gt;checkForUpdatesNowLink.Name" xml:space="preserve">
+    <value>checkForUpdatesNowLink</value>
+  </data>
+  <data name="&gt;&gt;checkForUpdatesNowLink.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkForUpdatesNowLink.Parent" xml:space="preserve">
+    <value>tableLayouPanel5</value>
+  </data>
+  <data name="&gt;&gt;checkForUpdatesNowLink.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="button2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -574,7 +616,7 @@
     <value>12</value>
   </data>
   <data name="button2.Text" xml:space="preserve">
-    <value>Check for Updates Now</value>
+    <value>今すぐアップデートを確認</value>
   </data>
   <data name="&gt;&gt;button2.Name" xml:space="preserve">
     <value>button2</value>
@@ -595,13 +637,58 @@
     <value>12</value>
   </data>
   <data name="button1.Text" xml:space="preserve">
-    <value>Check for Updates Now</value>
+    <value>今すぐアップデートを確認</value>
   </data>
   <data name="&gt;&gt;button1.Name" xml:space="preserve">
     <value>button1</value>
   </data>
   <data name="&gt;&gt;button1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tableLayoutPanel3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="tableLayoutPanel3.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tableLayoutPanel3.ColumnCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="checkForUpdatesNowButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="checkForUpdatesNowButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkForUpdatesNowButton.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="checkForUpdatesNowButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="checkForUpdatesNowButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>300, 45</value>
+  </data>
+  <data name="checkForUpdatesNowButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 24</value>
+  </data>
+  <data name="checkForUpdatesNowButton.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="checkForUpdatesNowButton.Text" xml:space="preserve">
+    <value>今すぐアップデートを確認(&amp;C)</value>
+  </data>
+  <data name="&gt;&gt;checkForUpdatesNowButton.Name" xml:space="preserve">
+    <value>checkForUpdatesNowButton</value>
+  </data>
+  <data name="&gt;&gt;checkForUpdatesNowButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkForUpdatesNowButton.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;checkForUpdatesNowButton.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="tableLayoutPanel4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>None</value>
@@ -622,22 +709,25 @@
     <value>True</value>
   </data>
   <data name="labelProgress.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
+    <value>Segoe UI, 9.5pt, style=Bold</value>
+  </data>
+  <data name="labelProgress.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
   </data>
   <data name="labelProgress.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="labelProgress.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 3</value>
+    <value>43, 11</value>
   </data>
   <data name="labelProgress.Size" type="System.Drawing.Size, System.Drawing">
-    <value>131, 15</value>
+    <value>142, 21</value>
   </data>
   <data name="labelProgress.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="labelProgress.Text" xml:space="preserve">
-    <value>Searching for updates...</value>
+    <value>アップデートを検索しています...</value>
   </data>
   <data name="labelProgress.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -661,7 +751,10 @@
     <value>3, 3</value>
   </data>
   <data name="spinner.Size" type="System.Drawing.Size, System.Drawing">
-    <value>16, 16</value>
+    <value>32, 32</value>
+  </data>
+  <data name="spinner.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>StretchImage</value>
   </data>
   <data name="spinner.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -670,7 +763,7 @@
     <value>spinner</value>
   </data>
   <data name="&gt;&gt;spinner.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.SpinnerIcon, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.SpinnerIcon, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;spinner.Parent" xml:space="preserve">
     <value>tableLayoutPanel4</value>
@@ -679,16 +772,16 @@
     <value>1</value>
   </data>
   <data name="tableLayoutPanel4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>320, 156</value>
+    <value>260, 3</value>
   </data>
   <data name="tableLayoutPanel4.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>159, 22</value>
+    <value>222, 36</value>
   </data>
   <data name="tableLayoutPanel4.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel4.Name" xml:space="preserve">
     <value>tableLayoutPanel4</value>
@@ -697,25 +790,52 @@
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel4.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel4.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="tableLayoutPanel4.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelProgress" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="spinner" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="labelProgress" Row="0" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="spinner" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,AutoSize,0" />&lt;Rows Styles="AutoSize,0" />&lt;/TableLayoutSettings></value>
   </data>
-  <data name="tableLayoutPanel5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="tableLayoutPanel3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>27, 156</value>
+  </data>
+  <data name="tableLayoutPanel3.RowCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>743, 72</value>
+  </data>
+  <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.Name" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel3.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="checkForUpdatesNowButton" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="tableLayoutPanel4" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="Percent,100" />&lt;Rows Styles="AutoSize,0,Absolute,17" />&lt;/TableLayoutSettings></value>
+  </data>
+  <data name="tableLayouPanel5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="tableLayoutPanel5.ColumnCount" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="tableLayouPanel5.ColumnCount" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
   <metadata name="ColumnExpansion.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="ColumnExpansion.HeaderText" xml:space="preserve">
-    <value />
+    <value/>
   </data>
   <data name="ColumnExpansion.MinimumWidth" type="System.Int32, mscorlib">
     <value>20</value>
@@ -727,7 +847,7 @@
     <value>True</value>
   </metadata>
   <data name="ColumnIcon.HeaderText" xml:space="preserve">
-    <value />
+    <value/>
   </data>
   <data name="ColumnIcon.MinimumWidth" type="System.Int32, mscorlib">
     <value>20</value>
@@ -739,7 +859,7 @@
     <value>True</value>
   </metadata>
   <data name="ColumnName.HeaderText" xml:space="preserve">
-    <value>Name</value>
+    <value>名前</value>
   </data>
   <data name="ColumnName.MinimumWidth" type="System.Int32, mscorlib">
     <value>70</value>
@@ -748,7 +868,7 @@
     <value>True</value>
   </metadata>
   <data name="ColumnVersion.HeaderText" xml:space="preserve">
-    <value>Version</value>
+    <value>バージョン</value>
   </data>
   <data name="ColumnVersion.MinimumWidth" type="System.Int32, mscorlib">
     <value>30</value>
@@ -760,7 +880,7 @@
     <value>True</value>
   </metadata>
   <data name="ColumnPatchingStatus.HeaderText" xml:space="preserve">
-    <value />
+    <value/>
   </data>
   <data name="ColumnPatchingStatus.MinimumWidth" type="System.Int32, mscorlib">
     <value>20</value>
@@ -772,7 +892,7 @@
     <value>True</value>
   </metadata>
   <data name="ColumnStatus.HeaderText" xml:space="preserve">
-    <value>Status</value>
+    <value>状態</value>
   </data>
   <data name="ColumnStatus.MinimumWidth" type="System.Int32, mscorlib">
     <value>60</value>
@@ -784,7 +904,7 @@
     <value>True</value>
   </metadata>
   <data name="ColumnRequiredUpdate.HeaderText" xml:space="preserve">
-    <value>Required Updates</value>
+    <value>必要なアップデート</value>
   </data>
   <data name="ColumnRequiredUpdate.MinimumWidth" type="System.Int32, mscorlib">
     <value>160</value>
@@ -793,7 +913,7 @@
     <value>True</value>
   </metadata>
   <data name="ColumnInstalledUpdate.HeaderText" xml:space="preserve">
-    <value>Installed Updates</value>
+    <value>インストール済みアップデート</value>
   </data>
   <data name="ColumnInstalledUpdate.MinimumWidth" type="System.Int32, mscorlib">
     <value>160</value>
@@ -808,13 +928,13 @@
     <value>0, 0</value>
   </data>
   <data name="dataGridViewHosts.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
+    <value>1, 6, 1, 1</value>
   </data>
   <data name="dataGridViewHosts.Size" type="System.Drawing.Size, System.Drawing">
-    <value>824, 317</value>
+    <value>776, 348</value>
   </data>
   <data name="dataGridViewHosts.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="dataGridViewHosts.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -823,7 +943,7 @@
     <value>dataGridViewHosts</value>
   </data>
   <data name="&gt;&gt;dataGridViewHosts.Type" xml:space="preserve">
-    <value>XenAdmin.TabPages.ManageUpdatesPage+UpdatePageByHostDataGridView, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.TabPages.ManageUpdatesPage+UpdatePageByHostDataGridView, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dataGridViewHosts.Parent" xml:space="preserve">
     <value>panel1</value>
@@ -835,7 +955,7 @@
     <value>True</value>
   </metadata>
   <data name="ColumnExpand.HeaderText" xml:space="preserve">
-    <value />
+    <value/>
   </data>
   <data name="ColumnExpand.MinimumWidth" type="System.Int32, mscorlib">
     <value>20</value>
@@ -847,7 +967,7 @@
     <value>True</value>
   </metadata>
   <data name="ColumnMessage.HeaderText" xml:space="preserve">
-    <value>Message</value>
+    <value>メッセージ</value>
   </data>
   <data name="ColumnMessage.MinimumWidth" type="System.Int32, mscorlib">
     <value>80</value>
@@ -856,7 +976,7 @@
     <value>True</value>
   </metadata>
   <data name="ColumnLocation.HeaderText" xml:space="preserve">
-    <value>Server / Pool</value>
+    <value>サーバー/プール</value>
   </data>
   <data name="ColumnLocation.MinimumWidth" type="System.Int32, mscorlib">
     <value>95</value>
@@ -865,7 +985,7 @@
     <value>True</value>
   </metadata>
   <data name="ColumnDate.HeaderText" xml:space="preserve">
-    <value>Date</value>
+    <value>日付</value>
   </data>
   <data name="ColumnDate.MinimumWidth" type="System.Int32, mscorlib">
     <value>80</value>
@@ -874,7 +994,7 @@
     <value>True</value>
   </metadata>
   <data name="ColumnWebPage.HeaderText" xml:space="preserve">
-    <value>Actions</value>
+    <value>アクション</value>
   </data>
   <data name="ColumnWebPage.MinimumWidth" type="System.Int32, mscorlib">
     <value>30</value>
@@ -895,16 +1015,16 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="dataGridViewUpdates.Size" type="System.Drawing.Size, System.Drawing">
-    <value>824, 317</value>
+    <value>776, 316</value>
   </data>
   <data name="dataGridViewUpdates.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;dataGridViewUpdates.Name" xml:space="preserve">
     <value>dataGridViewUpdates</value>
   </data>
   <data name="&gt;&gt;dataGridViewUpdates.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.DataGridViewEx.DataGridViewEx, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.DataGridViewEx.DataGridViewEx, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dataGridViewUpdates.Parent" xml:space="preserve">
     <value>panel1</value>
@@ -916,16 +1036,16 @@
     <value>Fill</value>
   </data>
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 25</value>
+    <value>0, 22</value>
   </data>
   <data name="panel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>824, 317</value>
+    <value>776, 348</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;panel1.Name" xml:space="preserve">
     <value>panel1</value>
@@ -934,85 +1054,85 @@
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
-    <value>tableLayoutPanel5</value>
+    <value>tableLayouPanel5</value>
   </data>
   <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="tableLayoutPanel6.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="tableLayoutPanel6.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
-  </data>
-  <data name="tableLayoutPanel6.ColumnCount" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="tableLayoutPanel6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="tableLayoutPanel6.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 3</value>
-  </data>
-  <data name="tableLayoutPanel6.RowCount" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="tableLayoutPanel6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>441, 22</value>
-  </data>
-  <data name="tableLayoutPanel6.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel6.Name" xml:space="preserve">
-    <value>tableLayoutPanel6</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel6.Parent" xml:space="preserve">
-    <value>tableLayoutPanel5</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel6.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="tableLayoutPanel6.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="pictureBox1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="AutoCheckForUpdatesDisabledLabel" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
-  </data>
-  <data name="tableLayoutPanel5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 47</value>
-  </data>
-  <data name="tableLayoutPanel5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 12, 0, 0</value>
-  </data>
-  <data name="tableLayoutPanel5.RowCount" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="tableLayoutPanel5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>824, 370</value>
+  <data name="labelLegacyUpdates.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
   </data>
-  <data name="tableLayoutPanel5.TabIndex" type="System.Int32, mscorlib">
+  <data name="labelLegacyUpdates.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelLegacyUpdates.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="labelLegacyUpdates.Location" type="System.Drawing.Point, System.Drawing">
+    <value>126, 0</value>
+  </data>
+  <data name="labelLegacyUpdates.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 0, 10, 10</value>
+  </data>
+  <data name="labelLegacyUpdates.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="labelLegacyUpdates.Size" type="System.Drawing.Size, System.Drawing">
+    <value>524, 27</value>
+  </data>
+  <data name="labelLegacyUpdates.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="labelLegacyUpdates.Text" xml:space="preserve">
+    <value>{0} はこれ以上 {1} アップデートを確認しません。{1} {2} でアップデートをインストールするには、代わりに {3} {2} を使用します。</value>
+  </data>
+  <data name="&gt;&gt;labelLegacyUpdates.Name" xml:space="preserve">
+    <value>labelLegacyUpdates</value>
+  </data>
+  <data name="&gt;&gt;labelLegacyUpdates.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelLegacyUpdates.Parent" xml:space="preserve">
+    <value>tableLayouPanel5</value>
+  </data>
+  <data name="&gt;&gt;labelLegacyUpdates.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="tableLayouPanel5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 45</value>
+  </data>
+  <data name="tableLayouPanel5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 6, 0, 12</value>
+  </data>
+  <data name="tableLayouPanel5.RowCount" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="tableLayouPanel5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>776, 370</value>
+  </data>
+  <data name="tableLayouPanel5.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel5.Name" xml:space="preserve">
-    <value>tableLayoutPanel5</value>
+  <data name="&gt;&gt;tableLayouPanel5.Name" xml:space="preserve">
+    <value>tableLayouPanel5</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel5.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableLayouPanel5.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel5.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayouPanel5.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel5.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayouPanel5.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="tableLayoutPanel5.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="tableLayoutPanel1" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panel1" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutPanel6" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,Percent,100,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  <data name="tableLayouPanel5.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="pictureBox1" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="checkForUpdatesNowLink" Row="1" RowSpan="1" Column="2" ColumnSpan="1" />&lt;Control Name="AutoCheckForUpdatesDisabledLabel" Row="1" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="panel1" Row="2" RowSpan="1" Column="0" ColumnSpan="3" />&lt;Control Name="labelLegacyUpdates" Row="0" RowSpan="1" Column="0" ColumnSpan="3" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,AutoSize,0,Percent,100" />&lt;Rows Styles="AutoSize,0,AutoSize,0,Percent,100" />&lt;/TableLayoutSettings></value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>83</value>
+    <value>129</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>96, 96</value>
@@ -1021,10 +1141,10 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="$this.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>8, 8, 8, 8</value>
+    <value>12, 12, 12, 12</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>840, 425</value>
+    <value>800, 466</value>
   </data>
   <data name="&gt;&gt;toolStripDropDownButtonView.Name" xml:space="preserve">
     <value>toolStripDropDownButtonView</value>
@@ -1054,13 +1174,13 @@
     <value>toolStripDropDownButtonServerFilter</value>
   </data>
   <data name="&gt;&gt;toolStripDropDownButtonServerFilter.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.FilterLocationToolStripDropDownButton, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.FilterLocationToolStripDropDownButton, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;toolStripDropDownButtonDateFilter.Name" xml:space="preserve">
     <value>toolStripDropDownButtonDateFilter</value>
   </data>
   <data name="&gt;&gt;toolStripDropDownButtonDateFilter.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.FilterDatesToolStripDropDownButton, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.FilterDatesToolStripDropDownButton, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator3.Name" xml:space="preserve">
     <value>toolStripSeparator3</value>
@@ -1073,6 +1193,24 @@
   </data>
   <data name="&gt;&gt;toolStripButtonRefresh.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
+    <value>toolStripSeparator1</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripButtonExportAll.Name" xml:space="preserve">
+    <value>toolStripButtonExportAll</value>
+  </data>
+  <data name="&gt;&gt;toolStripButtonExportAll.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripLabelFiltersOnOff.Name" xml:space="preserve">
+    <value>toolStripLabelFiltersOnOff</value>
+  </data>
+  <data name="&gt;&gt;toolStripLabelFiltersOnOff.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSplitButtonDismiss.Name" xml:space="preserve">
     <value>toolStripSplitButtonDismiss</value>
@@ -1102,18 +1240,6 @@
     <value>toolStripButtonUpdate</value>
   </data>
   <data name="&gt;&gt;toolStripButtonUpdate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
-    <value>toolStripSeparator1</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripButtonExportAll.Name" xml:space="preserve">
-    <value>toolStripButtonExportAll</value>
-  </data>
-  <data name="&gt;&gt;toolStripButtonExportAll.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ColumnExpansion.Name" xml:space="preserve">
@@ -1198,6 +1324,6 @@
     <value>ManageUpdatesPage</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>XenAdmin.TabPages.NotificationsBasePage, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.TabPages.NotificationsBasePage, [XenCenter_No_Space]Main, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

@@ -79,6 +79,7 @@ namespace XenAdmin
             this.TabPageUSB = new System.Windows.Forms.TabPage();
             this.alertPage = new XenAdmin.TabPages.AlertSummaryPage();
             this.updatesPage = new XenAdmin.TabPages.ManageUpdatesPage();
+            this.cdnUpdatesPage = new XenAdmin.TabPages.ManageCdnUpdatesPage();
             this.eventsPage = new XenAdmin.TabPages.HistoryPage();
             this.TitleBackPanel = new XenAdmin.Controls.GradientPanel.VerticalGradientPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -261,6 +262,7 @@ namespace XenAdmin
             this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
             this.LicenseManagerMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
+            this.configureUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.installNewUpdateToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.rollingUpgradeToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
@@ -289,10 +291,11 @@ namespace XenAdmin
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
             this.statusProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.statusLabelErrors = new System.Windows.Forms.ToolStripStatusLabel();
-            this.statusLabelUpdates = new System.Windows.Forms.ToolStripStatusLabel();
-            this.statusLabelAlerts = new System.Windows.Forms.ToolStripStatusLabel();
-            this.configureUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusButtonProgress = new System.Windows.Forms.ToolStripSplitButton();
+            this.statusButtonErrors = new System.Windows.Forms.ToolStripSplitButton();
+            this.statusButtonCdnUpdates = new System.Windows.Forms.ToolStripSplitButton();
+            this.statusButtonUpdates = new System.Windows.Forms.ToolStripSplitButton();
+            this.statusButtonAlerts = new System.Windows.Forms.ToolStripSplitButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -327,6 +330,7 @@ namespace XenAdmin
             this.splitContainer1.Panel2.Controls.Add(this.TheTabControl);
             this.splitContainer1.Panel2.Controls.Add(this.alertPage);
             this.splitContainer1.Panel2.Controls.Add(this.updatesPage);
+            this.splitContainer1.Panel2.Controls.Add(this.cdnUpdatesPage);
             this.splitContainer1.Panel2.Controls.Add(this.eventsPage);
             this.splitContainer1.Panel2.Controls.Add(this.TitleBackPanel);
             resources.ApplyResources(this.splitContainer1.Panel2, "splitContainer1.Panel2");
@@ -539,6 +543,12 @@ namespace XenAdmin
             resources.ApplyResources(this.updatesPage, "updatesPage");
             this.updatesPage.BackColor = System.Drawing.SystemColors.Window;
             this.updatesPage.Name = "updatesPage";
+            // 
+            // cdnUpdatesPage
+            // 
+            resources.ApplyResources(this.cdnUpdatesPage, "cdnUpdatesPage");
+            this.cdnUpdatesPage.BackColor = System.Drawing.SystemColors.Window;
+            this.cdnUpdatesPage.Name = "cdnUpdatesPage";
             // 
             // eventsPage
             // 
@@ -1809,6 +1819,12 @@ namespace XenAdmin
             this.toolStripSeparator13.Name = "toolStripSeparator13";
             resources.ApplyResources(this.toolStripSeparator13, "toolStripSeparator13");
             // 
+            // configureUpdatesToolStripMenuItem
+            // 
+            this.configureUpdatesToolStripMenuItem.Name = "configureUpdatesToolStripMenuItem";
+            resources.ApplyResources(this.configureUpdatesToolStripMenuItem, "configureUpdatesToolStripMenuItem");
+            this.configureUpdatesToolStripMenuItem.Click += new System.EventHandler(this.configureUpdatesToolStripMenuItem_Click);
+            // 
             // installNewUpdateToolStripMenuItem
             // 
             this.installNewUpdateToolStripMenuItem.Command = new XenAdmin.Commands.InstallNewUpdateCommand();
@@ -1990,9 +2006,11 @@ namespace XenAdmin
             this.StatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusProgressBar,
             this.statusLabel,
-            this.statusLabelErrors,
-            this.statusLabelUpdates,
-            this.statusLabelAlerts});
+            this.statusButtonProgress,
+            this.statusButtonErrors,
+            this.statusButtonUpdates,
+            this.statusButtonCdnUpdates,
+            this.statusButtonAlerts});
             this.StatusStrip.Name = "StatusStrip";
             this.StatusStrip.ShowItemToolTips = true;
             // 
@@ -2011,47 +2029,51 @@ namespace XenAdmin
             this.statusLabel.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
             this.statusLabel.Spring = true;
             // 
-            // statusLabelErrors
+            // statusButtonProgress
             // 
-            this.statusLabelErrors.ActiveLinkColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.statusLabelErrors.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.statusLabelErrors.IsLink = true;
-            this.statusLabelErrors.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.statusLabelErrors.LinkColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.statusLabelErrors.Name = "statusLabelErrors";
-            resources.ApplyResources(this.statusLabelErrors, "statusLabelErrors");
-            this.statusLabelErrors.VisitedLinkColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.statusLabelErrors.Click += new System.EventHandler(this.statusLabelErrors_Click);
+            this.statusButtonProgress.DropDownButtonWidth = 0;
+            this.statusButtonProgress.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.statusButtonProgress.Image = global::XenAdmin.Properties.Resources.ajax_loader;
+            resources.ApplyResources(this.statusButtonProgress, "statusButtonProgress");
+            this.statusButtonProgress.Name = "statusButtonProgress";
+            this.statusButtonProgress.ButtonClick += new System.EventHandler(this.statusButtonProgress_ButtonClick);
             // 
-            // statusLabelUpdates
+            // statusButtonErrors
             // 
-            this.statusLabelUpdates.ActiveLinkColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.statusLabelUpdates.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.statusLabelUpdates.IsLink = true;
-            this.statusLabelUpdates.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.statusLabelUpdates.LinkColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.statusLabelUpdates.Name = "statusLabelUpdates";
-            resources.ApplyResources(this.statusLabelUpdates, "statusLabelUpdates");
-            this.statusLabelUpdates.VisitedLinkColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.statusLabelUpdates.Click += new System.EventHandler(this.statusLabelUpdates_Click);
+            this.statusButtonErrors.DropDownButtonWidth = 0;
+            this.statusButtonErrors.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.statusButtonErrors.Image = global::XenAdmin.Properties.Resources.notif_events_errors_16;
+            resources.ApplyResources(this.statusButtonErrors, "statusButtonErrors");
+            this.statusButtonErrors.Name = "statusButtonErrors";
+            this.statusButtonErrors.Click += new System.EventHandler(this.statusButtonErrors_Click);
             // 
-            // statusLabelAlerts
+            // statusButtonCdnUpdates
             // 
-            this.statusLabelAlerts.ActiveLinkColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.statusLabelAlerts.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.statusLabelAlerts.IsLink = true;
-            this.statusLabelAlerts.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.statusLabelAlerts.LinkColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.statusLabelAlerts.Name = "statusLabelAlerts";
-            resources.ApplyResources(this.statusLabelAlerts, "statusLabelAlerts");
-            this.statusLabelAlerts.VisitedLinkColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.statusLabelAlerts.Click += new System.EventHandler(this.statusLabelAlerts_Click);
+            this.statusButtonCdnUpdates.DropDownButtonWidth = 0;
+            this.statusButtonCdnUpdates.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.statusButtonCdnUpdates.Image = global::XenAdmin.Properties.Resources.notif_updates_16;
+            resources.ApplyResources(this.statusButtonCdnUpdates, "statusButtonCdnUpdates");
+            this.statusButtonCdnUpdates.Name = "statusButtonCdnUpdates";
+            this.statusButtonCdnUpdates.Click += new System.EventHandler(this.statusButtonCdnUpdates_Click);
             // 
-            // configureUpdatesToolStripMenuItem
+            // statusButtonUpdates
             // 
-            this.configureUpdatesToolStripMenuItem.Name = "configureUpdatesToolStripMenuItem";
-            resources.ApplyResources(this.configureUpdatesToolStripMenuItem, "configureUpdatesToolStripMenuItem");
-            this.configureUpdatesToolStripMenuItem.Click += new System.EventHandler(this.configureUpdatesToolStripMenuItem_Click);
+            this.statusButtonUpdates.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.statusButtonUpdates.DropDownButtonWidth = 0;
+            this.statusButtonUpdates.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.statusButtonUpdates.Image = global::XenAdmin.Properties.Resources._015_Download_h32bit_16;
+            resources.ApplyResources(this.statusButtonUpdates, "statusButtonUpdates");
+            this.statusButtonUpdates.Name = "statusButtonUpdates";
+            this.statusButtonUpdates.Click += new System.EventHandler(this.statusButtonUpdates_Click);
+            // 
+            // statusButtonAlerts
+            // 
+            this.statusButtonAlerts.DropDownButtonWidth = 0;
+            this.statusButtonAlerts.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.statusButtonAlerts.Image = global::XenAdmin.Properties.Resources._000_Alert2_h32bit_16;
+            resources.ApplyResources(this.statusButtonAlerts, "statusButtonAlerts");
+            this.statusButtonAlerts.Name = "statusButtonAlerts";
+            this.statusButtonAlerts.Click += new System.EventHandler(this.statusButtonAlerts_Click);
             // 
             // MainWindow
             // 
@@ -2321,9 +2343,6 @@ namespace XenAdmin
         private XenAdmin.Commands.CommandToolStripMenuItem menuItemRemoveFromPool;
         private XenAdmin.Commands.CommandToolStripMenuItem conversionToolStripMenuItem;
         private XenAdmin.Commands.CommandToolStripMenuItem toolStripMenuItemInstallCertificate;
-        private System.Windows.Forms.ToolStripStatusLabel statusLabelAlerts;
-        private System.Windows.Forms.ToolStripStatusLabel statusLabelUpdates;
-        private System.Windows.Forms.ToolStripStatusLabel statusLabelErrors;
         private XenAdmin.Commands.CommandToolStripMenuItem toolStripMenuItemRotateSecret;
         private XenAdmin.Commands.CommandToolStripMenuItem toolStripMenuItemHaConfigure;
         private XenAdmin.Commands.CommandToolStripMenuItem toolStripMenuItemHaDisable;
@@ -2339,6 +2358,12 @@ namespace XenAdmin
         private XenAdmin.Commands.CommandToolStripMenuItem toolStripMenuItemVtpm;
         private System.Windows.Forms.Label labelFiltersOnOff;
         private System.Windows.Forms.ToolStripMenuItem configureUpdatesToolStripMenuItem;
+        private TabPages.ManageCdnUpdatesPage cdnUpdatesPage;
+        private System.Windows.Forms.ToolStripSplitButton statusButtonErrors;
+        private System.Windows.Forms.ToolStripSplitButton statusButtonCdnUpdates;
+        private System.Windows.Forms.ToolStripSplitButton statusButtonUpdates;
+        private System.Windows.Forms.ToolStripSplitButton statusButtonAlerts;
+        private System.Windows.Forms.ToolStripSplitButton statusButtonProgress;
     }
 
 }

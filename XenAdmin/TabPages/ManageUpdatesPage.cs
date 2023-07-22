@@ -41,6 +41,7 @@ using XenAdmin.Actions;
 using XenAdmin.Alerts;
 using XenAdmin.Controls;
 using XenAdmin.Controls.DataGridViewEx;
+using XenAdmin.Controls.MainWindowControls;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
 using XenAdmin.Network;
@@ -73,13 +74,18 @@ namespace XenAdmin.TabPages
             tableLayoutPanel1.Visible = false;
             toolStripSplitButtonDismiss.DefaultItem = dismissAllToolStripMenuItem;
             toolStripSplitButtonDismiss.Text = dismissAllToolStripMenuItem.Text;
+        }
+
+        protected override void OnHandleCreated(EventArgs e)
+        {
+            base.OnHandleCreated(e);
 
             try
             {
                 //ensure we won't try to rebuild the list while setting the initial view
                 checksQueue++;
-                byHostToolStripMenuItem.Checked = false;
-                byUpdateToolStripMenuItem.Checked = true;
+                byHostToolStripMenuItem.Checked = Properties.Settings.Default.ShowUpdatesByServer;
+                byUpdateToolStripMenuItem.Checked = !Properties.Settings.Default.ShowUpdatesByServer;
                 ToggleView();
             }
             finally
@@ -94,8 +100,7 @@ namespace XenAdmin.TabPages
 
         protected override void RefreshPage()
         {
-            toolStripDropDownButtonServerFilter.InitializeHostList();
-            toolStripDropDownButtonServerFilter.BuildFilterList();
+            toolStripDropDownButtonServerFilter.InitializeHostList(c => !Helpers.CloudOrGreater(c));
             Rebuild(); 
         }
 
@@ -116,6 +121,8 @@ namespace XenAdmin.TabPages
         }
 
         public override string HelpID => "ManageUpdatesDialog";
+
+        public override NotificationsSubMode NotificationsSubMode => NotificationsSubMode.Updates;
 
         #endregion
 
@@ -165,7 +172,6 @@ namespace XenAdmin.TabPages
             dataGridViewHosts.Rows.Clear();
             dataGridViewHosts.Refresh();
 
-            checkForUpdatesNowLink.Enabled = false;
             labelProgress.Text = Messages.AVAILABLE_UPDATES_SEARCHING;
             spinner.StartSpinning();
             tableLayoutPanel4.Visible = true;
@@ -178,7 +184,6 @@ namespace XenAdmin.TabPages
                     checksQueue--;
                     toolStripButtonRefresh.Enabled = true;
                     toolStripButtonRestoreDismissed.Enabled = true;
-                    checkForUpdatesNowLink.Enabled = true;
 
                     //to avoid flickering, make first the panel invisible and then stop the spinner, because
                     //it may be a few fractions of the second until the panel reappears if no updates are found
@@ -314,7 +319,8 @@ namespace XenAdmin.TabPages
 
                 ToggleCentralWarningVisibility();
 
-                List<IXenConnection> xenConnections = ConnectionsManager.XenConnectionsCopy;
+                var xenConnections = ConnectionsManager.XenConnectionsCopy
+                    .Where(c => c.IsConnected && !Helpers.CloudOrGreater(c)).ToList();
                 xenConnections.Sort();
 
                 var rowList = new List<DataGridViewRow>();
@@ -457,6 +463,7 @@ namespace XenAdmin.TabPages
         {
             //store the view
             Properties.Settings.Default.ShowUpdatesByServer = byHostToolStripMenuItem.Checked;
+            Settings.TrySaveSettings();
 
             // buttons
             toolStripDropDownButtonDateFilter.Visible = byUpdateToolStripMenuItem.Checked;
@@ -467,7 +474,7 @@ namespace XenAdmin.TabPages
             dataGridViewUpdates.Visible = byUpdateToolStripMenuItem.Checked;
             dataGridViewHosts.Visible = byHostToolStripMenuItem.Checked;
 
-            // Turn off Date Filter for the updates-by-server view
+            // Turn off other filters for the updates-by-server view
             if (byHostToolStripMenuItem.Checked)
                 toolStripDropDownButtonDateFilter.ResetFilterDates();
 
@@ -483,9 +490,7 @@ namespace XenAdmin.TabPages
             bool visible = !Properties.Settings.Default.AllowPatchesUpdates ||
                            !Properties.Settings.Default.AllowXenServerUpdates;
 
-            pictureBox1.Visible = visible;
-            AutoCheckForUpdatesDisabledLabel.Visible = visible;
-            checkForUpdatesNowLink.Visible = visible;
+            tableLayoutPanel6.Visible = visible;
         }
 
         private void ToggleCentralWarningVisibility()
@@ -535,11 +540,12 @@ namespace XenAdmin.TabPages
             if (alert is XenServerUpdateAlert serverUpdate)
                 hosts = serverUpdate.DistinctHosts.Select(h => h.uuid).ToList();
 
-            bool hide = false; 
+            bool hide = false;
 
             Program.Invoke(Program.MainWindow, () =>
-                                 hide = toolStripDropDownButtonDateFilter.HideByDate(alert.Timestamp.ToLocalTime())
-                                        || toolStripDropDownButtonServerFilter.HideByLocation(hosts) || alert.IsDismissed());
+                hide = toolStripDropDownButtonDateFilter.HideByDate(alert.Timestamp.ToLocalTime()) ||
+                       toolStripDropDownButtonServerFilter.HideByLocation(hosts) ||
+                       alert.IsDismissed());
             return hide;
         }
 
@@ -575,6 +581,8 @@ namespace XenAdmin.TabPages
 
         private void UpdateButtonEnablement()
         {
+            var connectionList = ConnectionsManager.XenConnectionsCopy.Where(c => !Helpers.CloudOrGreater(c)).ToList();
+
             if (byUpdateToolStripMenuItem.Checked)
             {
                 var allAlerts = Updates.UpdateAlerts;
@@ -603,7 +611,6 @@ namespace XenAdmin.TabPages
             }
             else
             {
-                var connectionList = ConnectionsManager.XenConnectionsCopy;
                 toolStripButtonExportAll.Enabled = connectionList.Any(c => c.IsConnected);
             }
         }
@@ -635,6 +642,7 @@ namespace XenAdmin.TabPages
 
             appliesCell.Value = alert.AppliesTo;
             dateCell.Value = HelpersGUI.DateTimeToString(alert.Timestamp.ToLocalTime(), Messages.DATEFORMAT_DMY, true);
+
             newRow.Cells.AddRange(expanderCell, detailCell, appliesCell, dateCell, actionCell);
 
             return newRow;
@@ -652,13 +660,6 @@ namespace XenAdmin.TabPages
         private List<ToolStripItem> GetAlertActionItems(Alert alert)
         {
             var items = new List<ToolStripItem>();
-
-            if (alert.AllowedToDismiss())
-            {
-                var dismiss = new ToolStripMenuItem(Messages.ALERT_DISMISS);
-                dismiss.Click += ToolStripMenuItemDismiss_Click;
-                items.Add(dismiss);
-            }
 
             if (alert is XenServerPatchAlert patchAlert && patchAlert.CanApply &&
                 !string.IsNullOrEmpty(patchAlert.Patch.PatchUrl) && patchAlert.RequiredClientVersion == null)
@@ -680,6 +681,13 @@ namespace XenAdmin.TabPages
                 var download = new ToolStripMenuItem(Messages.UPDATES_DOWNLOAD_AND_INSTALL);
                 download.Click += ToolStripMenuItemDownloadInstall_Click;
                 items.Add(download);
+            }
+
+            if (alert.AllowedToDismiss())
+            {
+                var dismiss = new ToolStripMenuItem(Messages.ALERT_DISMISS);
+                dismiss.Click += ToolStripMenuItemDismiss_Click;
+                items.Add(dismiss);
             }
 
             if (!string.IsNullOrEmpty(alert.WebPageLabel))
@@ -970,12 +978,6 @@ namespace XenAdmin.TabPages
             UpdateButtonEnablement();
         }
 
-        private void dataGridViewUpdates_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            if (dataGridViewUpdates.Columns[e.ColumnIndex].SortMode == DataGridViewColumnSortMode.Automatic)
-                Rebuild();
-        }
-
         /// <summary>
         /// Handles the automatic sorting of the AlertsGridView for the non-string columns
         /// </summary>
@@ -986,8 +988,7 @@ namespace XenAdmin.TabPages
 
             if (e.Column.Index == ColumnDate.Index)
             {
-                int sortResult = DateTime.Compare(alert1.Timestamp, alert2.Timestamp);
-                e.SortResult = (dataGridViewUpdates.SortOrder == SortOrder.Descending) ? sortResult *= -1 : sortResult;
+                e.SortResult = DateTime.Compare(alert1.Timestamp, alert2.Timestamp);
                 e.Handled = true;
             }
         }
@@ -1186,7 +1187,7 @@ namespace XenAdmin.TabPages
 
                             if (exportAll)
                             {
-                                List<IXenConnection> xenConnections = ConnectionsManager.XenConnectionsCopy;
+                                var xenConnections = ConnectionsManager.XenConnectionsCopy.Where(c => !Helpers.CloudOrGreater(c)).ToList();
                                 xenConnections.Sort();
 
                                 foreach (IXenConnection xenConnection in xenConnections)
@@ -1250,11 +1251,6 @@ namespace XenAdmin.TabPages
                     dlg.ShowDialog(this);
                 }
             }
-        }
-
-        private void checkForUpdatesNowLink_Click(object sender, EventArgs e)
-        {
-            Updates.CheckForServerUpdates(userRequested: true);
         }
 
         private void ManageUpdatesPage_Resize(object sender, EventArgs e)
