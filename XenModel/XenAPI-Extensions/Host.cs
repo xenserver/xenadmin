@@ -333,7 +333,7 @@ namespace XenAPI
         /// </summary>
         public virtual bool CanShowTrialEditionUpsell()
         {
-            return Helpers.Post82X(this) && IsFreeLicense() && !IsInPreviewRelease();
+            return Helpers.NileOrGreater(this) && IsFreeLicense() && !IsInPreviewRelease();
         }
 
         /// <summary>

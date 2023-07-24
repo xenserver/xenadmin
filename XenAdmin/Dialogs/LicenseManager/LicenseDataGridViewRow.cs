@@ -163,7 +163,7 @@ namespace XenAdmin.Dialogs
         {
             text = null;
             status = Status.Ok;
-            if (XenObjectHost == null || XenObjectHost.IsInPreviewRelease() || !Helpers.Post82X(XenObjectHost))
+            if (XenObjectHost == null || XenObjectHost.IsInPreviewRelease() || !Helpers.NileOrGreater(XenObjectHost))
             {
                 return false;
             }
@@ -199,7 +199,7 @@ namespace XenAdmin.Dialogs
                     if (Dialogs.LicenseStatus.PoolIsMixedFreeAndExpiring(pool))
                         text = Messages.POOL_IS_PARTIALLY_LICENSED;
                     text = licenseStatus.LicenseEntitlements;
-                    status = Helpers.Post82X(XenObjectHost) && XenObjectHost.IsInPreviewRelease() ? Status.Ok : Status.Warning;
+                    status = Helpers.NileOrGreater(XenObjectHost) && XenObjectHost.IsInPreviewRelease() ? Status.Ok : Status.Warning;
                 }
                     break;
                 case Dialogs.LicenseStatus.HostState.PartiallyLicensed:
