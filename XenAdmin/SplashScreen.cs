@@ -29,6 +29,7 @@
  */
 
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 using XenAdmin.Core;
 
@@ -45,6 +46,11 @@ namespace XenAdmin
             InitializeComponent();
             pictureBox1.Image = Images.StaticImages.splash;
             labelCopyright.Text = BrandManager.Copyright;
+            labelCopyright.ForeColor = Color.FromArgb(39, 52, 64);
+
+            //setting the parent is needed so the transparency can show
+            //the picturebox content instead of the control behind it
+            labelCopyright.Parent = pictureBox1;
         }
 
         protected override void OnShown(EventArgs e)
