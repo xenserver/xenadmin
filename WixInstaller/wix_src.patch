@@ -106,48 +106,51 @@ diff -ru wixlib/CustomizeDlg.wxs wixlib/CustomizeDlg.wxs
              <Dialog Id="CustomizeDlg" Width="370" Height="270" Title="!(loc.CustomizeDlg_Title)" TrackDiskSpace="yes">
 -                <Control Id="Tree" Type="SelectionTree" X="25" Y="85" Width="175" Height="115" Property="_BrowseProperty" Sunken="yes" TabSkip="no" Text="!(loc.CustomizeDlgTree)" />
 -                <Control Id="Browse" Type="PushButton" X="294" Y="210" Width="66" Height="17" Text="!(loc.CustomizeDlgBrowse)">
-+                <Control Id="Tree" Type="SelectionTree" X="20" Y="75" Width="200" Height="89" Property="_BrowseProperty" Sunken="no" TabSkip="no" Text="!(loc.CustomizeDlgTree)" />
-+                <Control Id="Browse" Type="PushButton" X="294" Y="172" Width="66" Height="17" Text="!(loc.CustomizeDlgBrowse)">
++                <Control Id="Tree" Type="SelectionTree" X="20" Y="75" Width="200" Height="79" Property="_BrowseProperty" Sunken="no" TabSkip="no" Text="!(loc.CustomizeDlgTree)" />
++                <Control Id="Browse" Type="PushButton" X="294" Y="162" Width="66" Height="17" Text="!(loc.CustomizeDlgBrowse)">
                      <Publish Event="SelectionBrowse" Value="BrowseDlg">1</Publish>
                      <Condition Action="hide">Installed</Condition>
                      <Condition Action="disable">Installed</Condition>
-@@ -28,27 +28,34 @@
+@@ -28,27 +28,37 @@
                      <Publish Event="SpawnDialog" Value="CancelDlg">1</Publish>
                  </Control>
                  <Control Id="BannerBitmap" Type="Bitmap" X="0" Y="0" Width="370" Height="44" TabSkip="no" Text="!(loc.CustomizeDlgBannerBitmap)" />
 -                <Control Id="Text" Type="Text" X="25" Y="55" Width="320" Height="20" Text="!(loc.CustomizeDlgText)" />
-+                <Control Id="Text" Type="Text" X="20" Y="55" Width="320" Height="20" Text="!(loc.CustomizeDlgText)" />
++                <Control Id="Text" Type="Text" X="20" Y="45" Width="320" Height="20" Text="!(loc.CustomizeDlgText)" />
                  <Control Id="BannerLine" Type="Line" X="0" Y="44" Width="370" Height="0" />
                  <Control Id="BottomLine" Type="Line" X="0" Y="234" Width="370" Height="0" />
                  <Control Id="Description" Type="Text" X="25" Y="23" Width="280" Height="15" Transparent="yes" NoPrefix="yes" Text="!(loc.CustomizeDlgDescription)" />
                  <Control Id="Title" Type="Text" X="15" Y="6" Width="210" Height="15" Transparent="yes" NoPrefix="yes" Text="!(loc.CustomizeDlgTitle)" />
 -                <Control Id="Box" Type="GroupBox" X="210" Y="81" Width="150" Height="118" />
 -                <Control Id="ItemDescription" Type="Text" X="215" Y="90" Width="131" Height="50" Text="!(loc.CustomizeDlgItemDescription)">
-+                <Control Id="Box" Type="GroupBox" X="222" Y="70" Width="138" Height="85" />
-+                <Control Id="ItemDescription" Type="Text" X="228" Y="82" Width="128" Height="20" Text="!(loc.CustomizeDlgItemDescription)">
++                <Control Id="Box" Type="GroupBox" X="222" Y="60" Width="138" Height="85" />
++                <Control Id="ItemDescription" Type="Text" X="228" Y="72" Width="128" Height="20" Text="!(loc.CustomizeDlgItemDescription)">
                      <Subscribe Event="SelectionDescription" Attribute="Text" />
                  </Control>
 -                <Control Id="ItemSize" Type="Text" X="215" Y="140" Width="131" Height="50" Text="!(loc.CustomizeDlgItemSize)">
-+                <Control Id="ItemSize" Type="Text" X="228" Y="105" Width="128" Height="56" Text="!(loc.CustomizeDlgItemSize)">
++                <Control Id="ItemSize" Type="Text" X="228" Y="85" Width="128" Height="56" Text="!(loc.CustomizeDlgItemSize)">
                      <Subscribe Event="SelectionSize" Attribute="Text" />
                  </Control>
 -                <Control Id="Location" Type="Text" X="90" Y="210" Width="200" Height="20" Text="!(loc.CustomizeDlgLocation)">
-+                <Control Id="Location" Type="Text" X="70" Y="175" Width="220" Height="20" Text="!(loc.CustomizeDlgLocation)">
++                <Control Id="Location" Type="Text" X="70" Y="165" Width="220" Height="20" Text="!(loc.CustomizeDlgLocation)">
                      <Subscribe Event="SelectionPath" Attribute="Text" />
                      <Subscribe Event="SelectionPathOn" Attribute="Visible" />
                      <Condition Action="hide">Installed</Condition>
                  </Control>
 -                <Control Id="LocationLabel" Type="Text" X="25" Y="210" Width="65" Height="10" Text="!(loc.CustomizeDlgLocationLabel)">
-+                <Control Id="LocationLabel" Type="Text" X="20" Y="175" Width="50" Height="10" Text="!(loc.CustomizeDlgLocationLabel)">
++                <Control Id="LocationLabel" Type="Text" X="20" Y="165" Width="50" Height="10" Text="!(loc.CustomizeDlgLocationLabel)">
                      <Subscribe Event="SelectionPathOn" Attribute="Visible" />
                      <Condition Action="hide">Installed</Condition>
                  </Control>
-+                <Control Id="UsersLabel" Type="Text" X="20" Y="210" Width="50" Height="20" Text="!(loc.InstallDirDlgUsersLabel)" />
-+                <Control Id="UsersRadioButtonGroupControl" Type="RadioButtonGroup" X="70" Y="205" Width="290" Height="20" Property="Install_All">
++                <Control Id="UsersLabel" Type="Text" X="20" Y="189" Width="50" Height="20" Text="!(loc.InstallDirDlgUsersLabel)" />
++                <Control Id="UsersRadioButtonGroupControl" Type="RadioButtonGroup" X="70" Y="183" Width="290" Height="20" Property="Install_All">
 +                    <RadioButtonGroup Property="Install_All">
 +                        <RadioButton Value="1" X="0" Y="1" Width="60" Height="20" Text="!(loc.InstallDirDlgUsersAllRadioButton)" />
 +                        <RadioButton Value="0" X="60" Y="1" Width="120" Height="20" Text="!(loc.InstallDirDlgUsersOneRadioButton)" />
 +                    </RadioButtonGroup>
++                </Control>
++                <Control Id="InstallShortcutCheckbox" Type="CheckBox" X="20" Y="210" Width="290" Height="10" Property="INSTALLSHORTCUT" CheckBoxValue="0" Text="!(loc.InstallDirDlgShortCut)">
++                   <Condition Action="hide">Installed</Condition>
 +                </Control>
              </Dialog>
          </UI>
@@ -997,11 +1000,10 @@ diff -ru wixlib/WixUI_zh-CN.wxl wixlib/WixUI_zh-CN.wxl
 diff -ru wixlib/ExitDialog.wxl wixlib/ExitDialog.wxl
 --- wixlib/ExitDialog.wxs	2019-09-15 07:13:54.000000000 +0100
 +++ wixlib/ExitDialog.wxs	2022-06-09 15:28:09.123686200 +0100
-@@ -18,4 +18,5 @@
+@@ -18,4 +18,4 @@
                  </Control>
 -                <Control Id="OptionalCheckBox" Type="CheckBox" X="135" Y="190" Width="220" Height="40" Hidden="yes" Property="WIXUI_EXITDIALOGOPTIONALCHECKBOX" CheckBoxValue="1" Text="[WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT]">
 -                    <Condition Action="show">WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT AND NOT Installed</Condition>
-+                <Control Id="InstallShortcutCheckbox" Type="CheckBox" X="135" Y="185" Width="290" Height="10" Property="INSTALLSHORTCUT" CheckBoxValue="1" Text="!(loc.InstallDirDlgShortCut)" />
 +                <Control Id="OptionalCheckBox" Type="CheckBox" X="135" Y="200" Width="220" Height="10" Hidden="yes" Property="WIXUI_EXITDIALOGOPTIONALCHECKBOX" CheckBoxValue="1" Text="[WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT]">
 +                    <Condition Action="show">WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT AND NOT (WixUI_InstallMode="Remove") AND XS_WixUIRMPressedOk="0"</Condition>
                  </Control>

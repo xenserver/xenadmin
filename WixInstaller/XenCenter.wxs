@@ -200,7 +200,7 @@
             <RegistrySearch Id="InstallRegistry" Type="raw" Root="HKLM" Key="Software\$(var.BrandProduct)\$(var.BrandConsoleNoSpace)" Name="InstallDir" />
         </Property>
         <Property Id="REINSTALLMODE" Value="amus" />
-        <Property Id="INSTALLSHORTCUT" Value="1"/>
+        <Property Id="INSTALLSHORTCUT" Value="0"/>
         <CustomAction Id="ClearAllUsers" Property="ALLUSERS" Value="" />
         <CustomAction Id="SetAllUsers" Property="ALLUSERS" Value="1" />
         <InstallExecuteSequence>
