@@ -245,7 +245,7 @@ namespace XenAdmin.Dialogs
 
         public bool LicenseHelperUrlRequired => ShouldShowLicenseWarningText(out _, out var status) && status == Status.Warning;
 
-        public bool SupportHelperUrlRequired => ShouldShowSupportWarningText(out _, out var status) && status == Status.Warning;
+        public bool SupportHelperUrlRequired => ShouldShowSupportWarningText(out _, out var status) && status == Status.Warning && !LicenseHelperUrlRequired;
 
         public Status RowStatus
         {
