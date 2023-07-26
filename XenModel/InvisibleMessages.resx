@@ -165,6 +165,9 @@
   <data name="TOKEN_API_URL" xml:space="preserve">
     <value>https://fileservice.citrix.com/api/session/token</value>
   </data>
+  <data name="UPDATE_URL_PREFIX" xml:space="preserve">
+  <value>https://fileservice.citrix.com/direct/v2/download/</value>
+</data>
   <data name="UPSELL_LEARNMOREURL_TRIAL" xml:space="preserve">
     <value>https://www.citrix.com/products/citrix-hypervisor/get-started.html</value>
   </data>
