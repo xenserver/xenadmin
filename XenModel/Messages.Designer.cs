@@ -22693,6 +22693,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Trial.
+        /// </summary>
+        public static string LICENSE_TRIAL {
+            get {
+                return ResourceManager.GetString("LICENSE_TRIAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unlicensed.
         /// </summary>
         public static string LICENSE_UNLICENSED {

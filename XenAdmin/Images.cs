@@ -712,6 +712,7 @@ namespace XenAdmin
             public static Bitmap _000_TemplateDisabled_h32bit_16 = Properties.Resources._000_TemplateDisabled_h32bit_16;
             public static Bitmap _000_TestFailover_h32bit_32 = Properties.Resources._000_TestFailover_h32bit_32;
             public static Bitmap _000_Tick_h32bit_16 = Properties.Resources._000_Tick_h32bit_16;
+            public static Bitmap _000_Tick_yellow_h32bit_16 = Properties.Resources._000_Tick_yellow_h32bit_16;
             public static Bitmap _000_ToolBar_Pref_Icon_dis = Properties.Resources._000_ToolBar_Pref_Icon_dis;
             public static Bitmap _000_ToolBar_Pref_Icon_ovr = Properties.Resources._000_ToolBar_Pref_Icon_ovr;
             public static Bitmap _000_ToolBar_Pref_Icon_up = Properties.Resources._000_ToolBar_Pref_Icon_up;

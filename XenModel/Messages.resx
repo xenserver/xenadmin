@@ -7888,6 +7888,9 @@ SR UUID: {1}</value>
   <data name="LICENSE_STATUS" xml:space="preserve">
     <value>Status</value>
   </data>
+  <data name="LICENSE_TRIAL" xml:space="preserve">
+    <value>Trial</value>
+  </data>
   <data name="LICENSE_UNLICENSED" xml:space="preserve">
     <value>Unlicensed</value>
   </data>

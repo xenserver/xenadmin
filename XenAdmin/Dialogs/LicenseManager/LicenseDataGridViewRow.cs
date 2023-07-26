@@ -45,7 +45,10 @@ namespace XenAdmin.Dialogs
             Warning,
             Information,
             Ok,
-            Updating
+            Updating,
+            // CP-43000: to be used for hosts using trial edition while
+            // they are in preview post Nile
+            TrialInPreview
         }
 
         private readonly ILicenseStatus licenseStatus;
@@ -199,7 +202,7 @@ namespace XenAdmin.Dialogs
                     if (Dialogs.LicenseStatus.PoolIsMixedFreeAndExpiring(pool))
                         text = Messages.POOL_IS_PARTIALLY_LICENSED;
                     text = licenseStatus.LicenseEntitlements;
-                    status = Helpers.NileOrGreater(XenObjectHost) && XenObjectHost.IsInPreviewRelease() ? Status.Ok : Status.Warning;
+                    status = Helpers.NileOrGreater(XenObjectHost) && XenObjectHost.IsInPreviewRelease() ? Status.TrialInPreview : Status.Warning;
                 }
                     break;
                 case Dialogs.LicenseStatus.HostState.PartiallyLicensed:
@@ -416,7 +419,7 @@ namespace XenAdmin.Dialogs
                     case Dialogs.LicenseStatus.HostState.Expired:
                         return Messages.LICENSE_UNLICENSED;
                     case Dialogs.LicenseStatus.HostState.Free:
-                        return Messages.LICENSE_UNLICENSED;
+                        return XenObjectHost.IsInPreviewRelease() ? Messages.LICENSE_TRIAL : Messages.LICENSE_UNLICENSED;
                     case Dialogs.LicenseStatus.HostState.Licensed:
                         return Messages.LICENSE_LICENSED;
                     case Dialogs.LicenseStatus.HostState.RegularGrace:
