@@ -205,6 +205,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to https://fileservice.citrix.com/direct/v2/download/.
+        /// </summary>
+        public static string UPDATE_URL_PREFIX {
+            get {
+                return ResourceManager.GetString("UPDATE_URL_PREFIX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to https://www.citrix.com/products/citrix-hypervisor/get-started.html.
         /// </summary>
         public static string UPSELL_LEARNMOREURL_TRIAL {
