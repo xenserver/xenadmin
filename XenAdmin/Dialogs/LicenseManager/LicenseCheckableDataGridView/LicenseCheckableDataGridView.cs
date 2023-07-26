@@ -92,7 +92,7 @@ namespace XenAdmin.Controls
                         Value = new Bitmap(1, 1)
                     };
 
-                    if (status == LicenseDataGridViewRow.Status.Information)
+                    if (status == LicenseDataGridViewRow.Status.Information || status == LicenseDataGridViewRow.Status.Mixed)
                         cell.Value = Images.StaticImages._000_Alert2_h32bit_16;
                     if (status == LicenseDataGridViewRow.Status.Warning)
                         cell.Value = Images.StaticImages._000_error_h32bit_16;

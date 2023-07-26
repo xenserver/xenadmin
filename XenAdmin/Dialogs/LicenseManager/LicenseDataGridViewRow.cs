@@ -48,7 +48,10 @@ namespace XenAdmin.Dialogs
             Updating,
             // CP-43000: to be used for hosts using trial edition while
             // they are in preview post Nile
-            TrialInPreview
+            TrialInPreview,
+            // CP-43000: to be used for hosts with mixed license and css
+            // status while they are NOT in preview post Nile
+            Mixed
         }
 
         private readonly ILicenseStatus licenseStatus;
@@ -246,21 +249,31 @@ namespace XenAdmin.Dialogs
             return true;
         }
 
-        public bool LicenseHelperUrlRequired => ShouldShowLicenseWarningText(out _, out var status) && status == Status.Warning;
+        public bool LicenseHelperUrlRequired => ShouldShowLicenseWarningText(out _, out var status) &&
+                                                (status == Status.Warning || status == Status.Mixed);
 
-        public bool SupportHelperUrlRequired => ShouldShowSupportWarningText(out _, out var status) && status == Status.Warning && !LicenseHelperUrlRequired;
+        public bool SupportHelperUrlRequired => ShouldShowSupportWarningText(out _, out var status) &&
+                                                (status == Status.Warning || status == Status.Mixed) &&
+                                                !LicenseHelperUrlRequired;
 
         public Status RowStatus
         {
             get
             {
                 ShouldShowLicenseWarningText(out _, out var licenseWarningStatus);
+                ShouldShowSupportWarningText(out _, out var supportWarningStatus);
+
+                if (!XenObjectHost.IsInPreviewRelease() && licenseWarningStatus != supportWarningStatus)
+                {
+                    // will show a warning icon
+                    return Status.Mixed;
+                }
+
                 if (licenseWarningStatus != Status.Ok)
                 {
                     return licenseWarningStatus;
                 }
 
-                ShouldShowSupportWarningText(out _, out var supportWarningStatus);
                 if (supportWarningStatus != Status.Ok)
                 {
                     return supportWarningStatus;
