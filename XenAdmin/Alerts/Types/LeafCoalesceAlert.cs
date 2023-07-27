@@ -103,12 +103,6 @@ namespace XenAdmin.Alerts
             }
         }
 
-        public override string HelpID
-        {
-            get
-            {
-                return "LeafCoalesceAlert";
-            }
-        }
+        public override string HelpID => "LeafCoalesceAlert";
     }
 }
