@@ -46,9 +46,8 @@ namespace XenAdmin.Dialogs
             Information,
             Ok,
             Updating,
-            // CP-43000: to be used for hosts using trial edition while
-            // they are in preview post Nile
-            TrialInPreview,
+            // CP-43000: to be used for post Nile hosts using trial edition
+            Trial,
             // CP-43000: to be used for hosts with mixed license and css
             // status while they are NOT in preview post Nile
             Mixed
@@ -205,7 +204,7 @@ namespace XenAdmin.Dialogs
                     if (Dialogs.LicenseStatus.PoolIsMixedFreeAndExpiring(pool))
                         text = Messages.POOL_IS_PARTIALLY_LICENSED;
                     text = licenseStatus.LicenseEntitlements;
-                    status = Helpers.NileOrGreater(XenObjectHost) && XenObjectHost.IsInPreviewRelease() ? Status.TrialInPreview : Status.Warning;
+                    status = Helpers.CloudOrGreater(XenObjectHost) ? Status.Trial :Status.Warning;
                 }
                     break;
                 case Dialogs.LicenseStatus.HostState.PartiallyLicensed:
@@ -250,7 +249,7 @@ namespace XenAdmin.Dialogs
         }
 
         public bool LicenseHelperUrlRequired => ShouldShowLicenseWarningText(out _, out var status) &&
-                                                (status == Status.Warning || status == Status.Mixed);
+                                                (status == Status.Warning || status == Status.Mixed || status == Status.Trial);
 
         public bool SupportHelperUrlRequired => ShouldShowSupportWarningText(out _, out var status) &&
                                                 (status == Status.Warning || status == Status.Mixed) &&
@@ -263,7 +262,9 @@ namespace XenAdmin.Dialogs
                 ShouldShowLicenseWarningText(out _, out var licenseWarningStatus);
                 ShouldShowSupportWarningText(out _, out var supportWarningStatus);
 
-                if (!XenObjectHost.IsInPreviewRelease() && licenseWarningStatus != supportWarningStatus)
+                if (!XenObjectHost.IsInPreviewRelease() && 
+                    (licenseWarningStatus != supportWarningStatus || licenseWarningStatus == Status.Trial && supportWarningStatus == Status.Warning)
+                    )
                 {
                     // will show a warning icon
                     return Status.Mixed;

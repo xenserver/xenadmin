@@ -200,7 +200,7 @@ namespace XenAdmin.Dialogs
                                              case LicenseDataGridViewRow.Status.Warning:
                                                  summaryPanel.LicenseWarningIcon = Images.StaticImages._000_error_h32bit_16;
                                                  break;
-                                             case LicenseDataGridViewRow.Status.TrialInPreview:
+                                             case LicenseDataGridViewRow.Status.Trial:
                                                  summaryPanel.LicenseWarningIcon =
                                                      Images.StaticImages._000_Tick_yellow_h32bit_16;
                                                  break;

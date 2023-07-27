@@ -98,7 +98,7 @@ namespace XenAdmin.Controls
                         cell.Value = Images.StaticImages._000_error_h32bit_16;
                     if (status == LicenseDataGridViewRow.Status.Ok)
                         cell.Value = Images.StaticImages._000_Tick_h32bit_16;
-                    if (status == LicenseDataGridViewRow.Status.TrialInPreview)
+                    if (status == LicenseDataGridViewRow.Status.Trial)
                         cell.Value = Images.StaticImages._000_Tick_yellow_h32bit_16;
 
                     if (r.Cells[StatusImageColumn.Index] is DataGridViewImageCell)
