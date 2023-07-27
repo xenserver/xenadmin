@@ -98,7 +98,7 @@ namespace XenAdmin.Alerts
                     case MessageType.LEAF_COALESCE_FAILED:
                         return string.Format(Messages.LEAF_COALESCE_FAILED_TITLE, _vm.Name());
                     default:
-                        return base.Title; ;
+                        return base.Title;
                 }
             }
         }
