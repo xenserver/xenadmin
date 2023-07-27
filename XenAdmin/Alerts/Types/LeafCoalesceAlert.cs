@@ -38,7 +38,7 @@ namespace XenAdmin.Alerts
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private readonly VM _vm;
-        private readonly VDI _vDI;
+        private readonly VDI _vdi;
 
         public LeafCoalesceAlert(Message msg)
             : base(msg)
@@ -58,7 +58,7 @@ namespace XenAdmin.Alerts
                         if (vm != null)
                         {
                             _vm = vm;
-                            _vDI = vdi;
+                            _vdi = vdi;
                             break;
                         }
                     }
@@ -73,11 +73,11 @@ namespace XenAdmin.Alerts
                 switch (Message.Type)
                 {
                     case MessageType.LEAF_COALESCE_START_MESSAGE:
-                        return string.Format(Messages.LEAF_COALESCE_START_DESCRIPTION, _vDI.Name(), _vm.Name());
+                        return string.Format(Messages.LEAF_COALESCE_START_DESCRIPTION, _vdi.Name(), _vm.Name());
                     case MessageType.LEAF_COALESCE_COMPLETED:
-                        return string.Format(Messages.LEAF_COALESCE_COMPLETED_DESCRIPTION, _vDI.Name(), _vm.Name());
+                        return string.Format(Messages.LEAF_COALESCE_COMPLETED_DESCRIPTION, _vdi.Name(), _vm.Name());
                     case MessageType.LEAF_COALESCE_FAILED:
-                        return string.Format(Messages.LEAF_COALESCE_FAILED_DESCRIPTION, _vDI.Name(), _vm.Name());
+                        return string.Format(Messages.LEAF_COALESCE_FAILED_DESCRIPTION, _vdi.Name(), _vm.Name());
                     default:
                         return base.Description;
                 }
