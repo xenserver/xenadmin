@@ -144,11 +144,11 @@ namespace XenAdmin.ConsoleView
                 Program.AssertOnEventThread();
                 OnDisconnected?.Invoke(this, EventArgs.Empty);
             };
-            rdpClient.OnConnected += (_1, _2) => _connecting = false;
-            rdpClient.OnConnecting += (_1, _2) => _connecting = true;
-            rdpClient.OnDisconnected += (_1, _2) => _connecting = _authWarningVisible = false;
-            rdpClient.OnAuthenticationWarningDisplayed += (_1, _2) => _authWarningVisible = true;
-            rdpClient.OnAuthenticationWarningDismissed += (_1, _2) => _authWarningVisible = false;
+            rdpClient.OnConnected += (_, e) => _connecting = false;
+            rdpClient.OnConnecting += (_, e) => _connecting = true;
+            rdpClient.OnDisconnected += (_, e) => _connecting = _authWarningVisible = false;
+            rdpClient.OnAuthenticationWarningDisplayed += (_, e) => _authWarningVisible = true;
+            rdpClient.OnAuthenticationWarningDismissed += (_, e) => _authWarningVisible = false;
 
         }
 
@@ -179,7 +179,7 @@ namespace XenAdmin.ConsoleView
             }
         }
 
-        public void RDPConnect(string rdpIP, int w, int h)
+        public void RDPConnect(string rdpIP, int width, int height)
         {
             if (rdpControl == null)
                 return;
@@ -187,7 +187,7 @@ namespace XenAdmin.ConsoleView
             var rdpClientName = rdpClient9 == null ? "RDPClient6" : "RDPClient9";
             var rdpClient = (IRdpClient) rdpClient9 ?? rdpClient6;
 
-            Log.Debug($"Connecting {rdpClientName} using server '{rdpIP}', width '{w}' and height '{h}'");
+            Log.Debug($"Connecting {rdpClientName} using server '{rdpIP}', width '{width}' and height '{height}'");
 
             if (rdpClient == null)
             {
@@ -196,8 +196,8 @@ namespace XenAdmin.ConsoleView
             }
 
             rdpClient.Server = rdpIP;
-            rdpClient.DesktopWidth = w;
-            rdpClient.DesktopHeight = h;
+            rdpClient.DesktopWidth = width;
+            rdpClient.DesktopHeight = height;
             try
             {
                 rdpClient.Connect();
