@@ -103,6 +103,10 @@ namespace XenAdmin.Alerts
             }
         }
 
+        public override Action FixLinkAction => null;
+
+        public override string HelpLinkText => Messages.ALERT_GENERIC_HELP;
+
         public override string HelpID => "LeafCoalesceAlert";
     }
 }
