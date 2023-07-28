@@ -146,10 +146,13 @@
                 <Directory Id="ApplicationProgramsFolder" Name="$(var.BrandProduct)" />
             </Directory>
             <Directory Id="DesktopFolder" Name="Desktop">
-                <Component Id="ProgramFilesShortcut" Guid="63b44222-b5e8-4ab1-8f68-baed79abbf36">
+                <Component Id="ApplicationDesktopShortcut" Guid="63b44222-b5e8-4ab1-8f68-baed79abbf36">
                     <Condition>INSTALLSHORTCUT</Condition>
-                    <Shortcut Id="ApplicationDesktopShortcut" Name="$(var.BrandConsole)" Target="[INSTALLDIR]$(var.BrandConsoleNoSpace).exe" WorkingDirectory="INSTALLDIR"/>
-                    <RemoveFolder Id="DesktopFolder" On="both"/>
+                    <Shortcut Id="DesktopXenCenter"
+                              Name="$(var.BrandConsole)"
+                              Target="[INSTALLDIR]$(var.BrandConsoleNoSpace).exe"
+                              WorkingDirectory="INSTALLDIR"
+                />
                     <RegistryValue Root="HKCU" Key="Software\$(var.BrandProduct)\$(var.BrandConsoleNoSpace)" Name="installed" Type="integer" Value="1" KeyPath="yes" />
                 </Component>
             </Directory>
@@ -167,9 +170,10 @@
                 </RegistryKey>
             </Component>
         </DirectoryRef>
+        
         <DirectoryRef Id="ApplicationProgramsFolder">
             <Component Id="ApplicationShortcut" Guid="$(var.AppShortcutGuid)">
-                <Shortcut Id="startmenuXenCenter" ShortName="$(var.BrandConsoleShort)" Name="$(var.BrandConsole)" Target="[INSTALLDIR]$(var.BrandConsoleNoSpace).exe" WorkingDirectory="INSTALLDIR" Icon="XenCenterICO" />
+                <Shortcut Id="StartmenuXenCenter" ShortName="$(var.BrandConsoleShort)" Name="$(var.BrandConsole)" Target="[INSTALLDIR]$(var.BrandConsoleNoSpace).exe" WorkingDirectory="INSTALLDIR" Icon="XenCenterICO" />
                 <RemoveFolder Id="ApplicationProgramsFolder" On="both" />
                 <RegistryValue Root="HKCU" Key="Software\$(var.BrandProduct)\$(var.BrandConsoleNoSpace)" Name="installed" Type="integer" Value="1" KeyPath="yes" />
             </Component>
@@ -183,7 +187,7 @@
             <ComponentRef Id="ExternalToolsComponent" />
             <ComponentRef Id="RegistryEntries" />
             <ComponentRef Id="ApplicationShortcut" />
-            <ComponentRef Id="ProgramFilesShortcut" />
+            <ComponentRef Id="ApplicationDesktopShortcut" />
         </Feature>
 
         <UIRef Id="$(var.BrandInstallerUI)" />
@@ -200,7 +204,7 @@
             <RegistrySearch Id="InstallRegistry" Type="raw" Root="HKLM" Key="Software\$(var.BrandProduct)\$(var.BrandConsoleNoSpace)" Name="InstallDir" />
         </Property>
         <Property Id="REINSTALLMODE" Value="amus" />
-        <Property Id="INSTALLSHORTCUT" Value="1"/>
+        <Property Id="INSTALLSHORTCUT" Value="0"/>
         <CustomAction Id="ClearAllUsers" Property="ALLUSERS" Value="" />
         <CustomAction Id="SetAllUsers" Property="ALLUSERS" Value="1" />
         <InstallExecuteSequence>
