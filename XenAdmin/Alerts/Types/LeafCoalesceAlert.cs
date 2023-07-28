@@ -73,11 +73,14 @@ namespace XenAdmin.Alerts
                 switch (Message.Type)
                 {
                     case MessageType.LEAF_COALESCE_START_MESSAGE:
-                        return string.Format(Messages.LEAF_COALESCE_START_DESCRIPTION, _vdi.Name(), _vm.Name());
+                        return string.Format(Messages.LEAF_COALESCE_START_DESCRIPTION,
+                            _vdi?.Name() ?? Message.obj_uuid, _vm?.Name() ?? Messages.UNKNOWN);
                     case MessageType.LEAF_COALESCE_COMPLETED:
-                        return string.Format(Messages.LEAF_COALESCE_COMPLETED_DESCRIPTION, _vdi.Name(), _vm.Name());
+                        return string.Format(Messages.LEAF_COALESCE_COMPLETED_DESCRIPTION,
+                            _vdi?.Name() ?? Message.obj_uuid, _vm?.Name() ?? Messages.UNKNOWN);
                     case MessageType.LEAF_COALESCE_FAILED:
-                        return string.Format(Messages.LEAF_COALESCE_FAILED_DESCRIPTION, _vdi.Name(), _vm.Name());
+                        return string.Format(Messages.LEAF_COALESCE_FAILED_DESCRIPTION,
+                            _vdi?.Name() ?? Message.obj_uuid, _vm?.Name() ?? Messages.UNKNOWN);
                     default:
                         return base.Description;
                 }
@@ -92,11 +95,11 @@ namespace XenAdmin.Alerts
                 switch (Message.Type)
                 {
                     case MessageType.LEAF_COALESCE_START_MESSAGE:
-                        return string.Format(Messages.LEAF_COALESCE_START_TITLE, _vm.Name());
+                        return string.Format(Messages.LEAF_COALESCE_START_TITLE, _vm?.Name() ?? Messages.UNKNOWN);
                     case MessageType.LEAF_COALESCE_COMPLETED:
-                        return string.Format(Messages.LEAF_COALESCE_COMPLETED_TITLE, _vm.Name());
+                        return string.Format(Messages.LEAF_COALESCE_COMPLETED_TITLE, _vm?.Name() ?? Messages.UNKNOWN);
                     case MessageType.LEAF_COALESCE_FAILED:
-                        return string.Format(Messages.LEAF_COALESCE_FAILED_TITLE, _vm.Name());
+                        return string.Format(Messages.LEAF_COALESCE_FAILED_TITLE, _vm?.Name() ?? Messages.UNKNOWN);
                     default:
                         return base.Title;
                 }
