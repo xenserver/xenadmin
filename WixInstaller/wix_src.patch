@@ -106,7 +106,7 @@ diff -ru wixlib/CustomizeDlg.wxs wixlib/CustomizeDlg.wxs
              <Dialog Id="CustomizeDlg" Width="370" Height="270" Title="!(loc.CustomizeDlg_Title)" TrackDiskSpace="yes">
 -                <Control Id="Tree" Type="SelectionTree" X="25" Y="85" Width="175" Height="115" Property="_BrowseProperty" Sunken="yes" TabSkip="no" Text="!(loc.CustomizeDlgTree)" />
 -                <Control Id="Browse" Type="PushButton" X="294" Y="210" Width="66" Height="17" Text="!(loc.CustomizeDlgBrowse)">
-+                <Control Id="Tree" Type="SelectionTree" X="20" Y="75" Width="200" Height="79" Property="_BrowseProperty" Sunken="no" TabSkip="no" Text="!(loc.CustomizeDlgTree)" />
++                <Control Id="Tree" Type="SelectionTree" X="20" Y="70" Width="200" Height="79" Property="_BrowseProperty" Sunken="no" TabSkip="no" Text="!(loc.CustomizeDlgTree)" />
 +                <Control Id="Browse" Type="PushButton" X="294" Y="162" Width="66" Height="17" Text="!(loc.CustomizeDlgBrowse)">
                      <Publish Event="SelectionBrowse" Value="BrowseDlg">1</Publish>
                      <Condition Action="hide">Installed</Condition>
@@ -123,7 +123,7 @@ diff -ru wixlib/CustomizeDlg.wxs wixlib/CustomizeDlg.wxs
                  <Control Id="Title" Type="Text" X="15" Y="6" Width="210" Height="15" Transparent="yes" NoPrefix="yes" Text="!(loc.CustomizeDlgTitle)" />
 -                <Control Id="Box" Type="GroupBox" X="210" Y="81" Width="150" Height="118" />
 -                <Control Id="ItemDescription" Type="Text" X="215" Y="90" Width="131" Height="50" Text="!(loc.CustomizeDlgItemDescription)">
-+                <Control Id="Box" Type="GroupBox" X="222" Y="60" Width="138" Height="85" />
++                <Control Id="Box" Type="GroupBox" X="222" Y="65" Width="138" Height="85" />
 +                <Control Id="ItemDescription" Type="Text" X="228" Y="72" Width="128" Height="20" Text="!(loc.CustomizeDlgItemDescription)">
                      <Subscribe Event="SelectionDescription" Attribute="Text" />
                  </Control>
