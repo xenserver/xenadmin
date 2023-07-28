@@ -37,7 +37,6 @@
             this.toolStrip1 = new XenAdmin.Controls.ToolStripEx();
             this.toolStripDropDownButtonServerFilter = new XenAdmin.Controls.FilterLocationToolStripDropDownButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButtonSync = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonUpdate = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonExportAll = new System.Windows.Forms.ToolStripButton();
@@ -47,6 +46,9 @@
             this._columnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this._columnLastSync = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this._columnLastUpdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tsSplitButtonSynchronize = new System.Windows.Forms.ToolStripSplitButton();
+            this.tsmiSynchronizeSelected = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiSynchronizeAll = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel2.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEx1)).BeginInit();
@@ -69,7 +71,7 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripDropDownButtonServerFilter,
             this.toolStripSeparator3,
-            this.toolStripButtonSync,
+            this.tsSplitButtonSynchronize,
             this.toolStripButtonUpdate,
             this.toolStripSeparator1,
             this.toolStripButtonExportAll});
@@ -88,13 +90,6 @@
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
-            // 
-            // toolStripButtonSync
-            // 
-            this.toolStripButtonSync.AutoToolTip = false;
-            resources.ApplyResources(this.toolStripButtonSync, "toolStripButtonSync");
-            this.toolStripButtonSync.Name = "toolStripButtonSync";
-            this.toolStripButtonSync.Click += new System.EventHandler(this.toolStripButtonSync_Click);
             // 
             // toolStripButtonUpdate
             // 
@@ -169,6 +164,29 @@
             this._columnLastUpdate.Name = "_columnLastUpdate";
             this._columnLastUpdate.ReadOnly = true;
             // 
+            // tsSplitButtonSynchronize
+            // 
+            this.tsSplitButtonSynchronize.AutoToolTip = false;
+            this.tsSplitButtonSynchronize.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsSplitButtonSynchronize.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiSynchronizeSelected,
+            this.tsmiSynchronizeAll});
+            resources.ApplyResources(this.tsSplitButtonSynchronize, "tsSplitButtonSynchronize");
+            this.tsSplitButtonSynchronize.Name = "tsSplitButtonSynchronize";
+            this.tsSplitButtonSynchronize.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.tsSplitButtonSynchronize_DropDownItemClicked);
+            // 
+            // tsmiSynchronizeSelected
+            // 
+            this.tsmiSynchronizeSelected.Name = "tsmiSynchronizeSelected";
+            resources.ApplyResources(this.tsmiSynchronizeSelected, "tsmiSynchronizeSelected");
+            this.tsmiSynchronizeSelected.Click += new System.EventHandler(this.tsmiSynchronizeSelected_Click);
+            // 
+            // tsmiSynchronizeAll
+            // 
+            this.tsmiSynchronizeAll.Name = "tsmiSynchronizeAll";
+            resources.ApplyResources(this.tsmiSynchronizeAll, "tsmiSynchronizeAll");
+            this.tsmiSynchronizeAll.Click += new System.EventHandler(this.tsmiSynchronizeAll_Click);
+            // 
             // ManageCdnUpdatesPage
             // 
             resources.ApplyResources(this, "$this");
@@ -196,10 +214,12 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton toolStripButtonExportAll;
         private System.Windows.Forms.ToolStripButton toolStripButtonUpdate;
-        private System.Windows.Forms.ToolStripButton toolStripButtonSync;
         private Controls.DataGridViewEx.DataGridViewEx dataGridViewEx1;
         private System.Windows.Forms.DataGridViewTextBoxColumn _columnName;
         private System.Windows.Forms.DataGridViewTextBoxColumn _columnLastSync;
         private System.Windows.Forms.DataGridViewTextBoxColumn _columnLastUpdate;
+        private System.Windows.Forms.ToolStripSplitButton tsSplitButtonSynchronize;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSynchronizeSelected;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSynchronizeAll;
     }
 }

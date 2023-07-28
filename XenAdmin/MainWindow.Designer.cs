@@ -18,9 +18,8 @@ namespace XenAdmin
             PluginManager.PluginsChanged -= pluginManager_PluginsChanged;
             UnRegisterEvents();
 
-            alertPage.FiltersChanged -= NotificationsPage_FiltersChanged;
-            updatesPage.FiltersChanged -= NotificationsPage_FiltersChanged;
-            eventsPage.FiltersChanged -= NotificationsPage_FiltersChanged;
+            foreach (var page in _notificationPages)
+                page.FiltersChanged -= NotificationsPage_FiltersChanged;
 
             if (disposing)
             {

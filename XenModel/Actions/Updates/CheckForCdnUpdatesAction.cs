@@ -41,8 +41,9 @@ namespace XenAdmin.Actions
     public class CheckForCdnUpdatesAction : AsyncAction
     {
         public CheckForCdnUpdatesAction(IXenConnection connection)
-            : base(connection, "Checking for updates from CDN")
+            : base(connection, string.Empty)
         {
+            Title = Description = Messages.YUM_REPO_ACTION_CHECK_FOR_UPDATES;
             ApiMethodsToRoleCheck.Add("http/updates");
         }
 

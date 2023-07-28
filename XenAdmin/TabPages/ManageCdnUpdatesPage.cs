@@ -56,6 +56,8 @@ namespace XenAdmin.TabPages
         public ManageCdnUpdatesPage()
         {
             InitializeComponent();
+            tsSplitButtonSynchronize.DefaultItem = tsmiSynchronizeSelected;
+            tsSplitButtonSynchronize.Text = tsmiSynchronizeSelected.Text;
         }
 
         protected override void OnHandleCreated(EventArgs e)
@@ -197,22 +199,61 @@ namespace XenAdmin.TabPages
         {
             toolStripButtonExportAll.Enabled = dataGridViewEx1.RowCount > 0;
 
-            Pool pool = null;
+            Pool selectedPool = null;
 
             if (dataGridViewEx1.SelectedRows.Count > 0)
             {
                 switch (dataGridViewEx1.SelectedRows[0])
                 {
                     case PoolUpdateInfoRow poolRow:
-                        pool = poolRow.Pool;
+                        selectedPool = poolRow.Pool;
                         break;
                     case HostUpdateInfoRow hostRow when Helpers.GetPool(hostRow.Connection) == null:
-                        pool = Helpers.GetPoolOfOne(hostRow.Connection);
+                        selectedPool = Helpers.GetPoolOfOne(hostRow.Connection);
                         break;
                 }
             }
 
-            toolStripButtonSync.Enabled = pool != null && pool.allowed_operations.Contains(pool_allowed_operations.sync_updates);
+            tsmiSynchronizeSelected.Enabled = selectedPool != null && selectedPool.allowed_operations.Contains(pool_allowed_operations.sync_updates);
+
+            var allAllowed = true;
+
+            foreach (DataGridViewRow row in dataGridViewEx1.Rows)
+            {
+                if (row is PoolUpdateInfoRow puiRow &&
+                    !puiRow.Pool.allowed_operations.Contains(pool_allowed_operations.sync_updates))
+                {
+                    allAllowed = false;
+                    break;
+                }
+
+                if (row is HostUpdateInfoRow huiRow && Helpers.GetPool(huiRow.Connection) == null)
+                {
+                    var pool = Helpers.GetPoolOfOne(huiRow.Connection);
+                    if (pool != null && !pool.allowed_operations.Contains(pool_allowed_operations.sync_updates))
+                    {
+                        allAllowed = false;
+                        break;
+                    }
+                }
+            }
+
+            tsmiSynchronizeAll.Enabled = allAllowed;
+
+            tsSplitButtonSynchronize.Enabled = tsmiSynchronizeSelected.Enabled || tsmiSynchronizeAll.Enabled;
+
+            if (tsSplitButtonSynchronize.DefaultItem != null && !tsSplitButtonSynchronize.DefaultItem.Enabled)
+            {
+                foreach (ToolStripItem item in tsSplitButtonSynchronize.DropDownItems)
+                {
+                    if (item.Enabled)
+                    {
+                        tsSplitButtonSynchronize.DefaultItem = item;
+                        tsSplitButtonSynchronize.Text = item.Text;
+                        break;
+                    }
+                }
+            }
         }
 
         private void ToggleRow(CdnExpandableRow row)
@@ -272,7 +313,13 @@ namespace XenAdmin.TabPages
             Rebuild();
         }
 
-        private void toolStripButtonSync_Click(object sender, EventArgs e)
+        private void tsSplitButtonSynchronize_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            tsSplitButtonSynchronize.DefaultItem = e.ClickedItem;
+            tsSplitButtonSynchronize.Text = tsSplitButtonSynchronize.DefaultItem.Text;
+        }
+
+        private void tsmiSynchronizeSelected_Click(object sender, EventArgs e)
         {
             if (dataGridViewEx1.SelectedRows.Count > 0 &&
                 dataGridViewEx1.SelectedRows[0] is PoolUpdateInfoRow row)
@@ -280,6 +327,79 @@ namespace XenAdmin.TabPages
                 var syncAction = new SyncWithCdnAction(row.Pool);
                 syncAction.Completed += a => Updates.CheckForCdnUpdates(a.Connection);
                 syncAction.RunAsync();
+            }
+        }
+
+        private void tsmiSynchronizeAll_Click(object sender, EventArgs e)
+        {
+            DialogResult result;
+
+            if (FilterIsOn)
+            {
+                using (var dlog = new NoIconDialog(Messages.YUM_REPO_SYNC_FILTER_CONFIRMATION,
+                           new ThreeButtonDialog.TBDButton(Messages.YUM_REPO_SYNC_YES_ALL_BUTTON, DialogResult.Yes),
+                           new ThreeButtonDialog.TBDButton(Messages.YUM_REPO_SYNC_YES_VISIBLE_BUTTON, DialogResult.No, ThreeButtonDialog.ButtonType.NONE),
+                           ThreeButtonDialog.ButtonCancel))
+                {
+                    result = dlog.ShowDialog(this);
+                }
+            }
+            else
+            {
+                using (var dlog = new NoIconDialog(Messages.YUM_REPO_SYNC_ALL_CONFIRMATION,
+                           new ThreeButtonDialog.TBDButton(Messages.YUM_REPO_SYNC_YES_ALL_BUTTON, DialogResult.Yes),
+                           ThreeButtonDialog.ButtonCancel))
+                {
+                    result = dlog.ShowDialog(this);
+                    Settings.TrySaveSettings();
+                }
+            }
+
+            switch (result)
+            {
+                case DialogResult.Cancel:
+                    return;
+                case DialogResult.Yes:
+                    var connections = ConnectionsManager.XenConnectionsCopy
+                        .Where(c => c.IsConnected && Helpers.CloudOrGreater(c)).ToList();
+
+                    foreach (var connection in connections)
+                    {
+                        var pool = Helpers.GetPoolOfOne(connection);
+                        if (pool == null)
+                            continue;
+
+                        var syncAction = new SyncWithCdnAction(pool);
+                        syncAction.Completed += a => Updates.CheckForCdnUpdates(a.Connection);
+                        syncAction.RunAsync();
+                    }
+
+                    return;
+                case DialogResult.No:
+                    foreach (DataGridViewRow row in dataGridViewEx1.Rows)
+                    {
+                        if (row is PoolUpdateInfoRow puiRow)
+                        {
+                            var syncAction = new SyncWithCdnAction(puiRow.Pool);
+                            syncAction.Completed += a => Updates.CheckForCdnUpdates(a.Connection);
+                            syncAction.RunAsync();
+                        }
+                        else if (row is HostUpdateInfoRow huiRow)
+                        {
+                            if (Helpers.GetPool(huiRow.Connection) != null)
+                                continue;
+
+                            var pool = Helpers.GetPoolOfOne(huiRow.Connection);
+                            if (pool == null)
+                                continue;
+
+                            var syncAction = new SyncWithCdnAction(pool);
+                            syncAction.Completed += a => Updates.CheckForCdnUpdates(a.Connection);
+                            syncAction.RunAsync();
+                        }
+                    }
+
+                    return;
             }
         }
 

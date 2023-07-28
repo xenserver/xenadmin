@@ -385,11 +385,14 @@ namespace XenAdmin
         {
             base.OnShown(e);
             TheTabControl.Visible = true;
-            alertPage.Visible = updatesPage.Visible = eventsPage.Visible = false;
+
+            foreach (var page in _notificationPages)
+            {
+                page.Visible = false;
+                page.FiltersChanged += NotificationsPage_FiltersChanged;
+            }
+
             SetFiltersLabel();
-            alertPage.FiltersChanged += NotificationsPage_FiltersChanged;
-            updatesPage.FiltersChanged += NotificationsPage_FiltersChanged;
-            eventsPage.FiltersChanged += NotificationsPage_FiltersChanged;
             navigationPane.FocusTreeView();
         }
 
@@ -2548,14 +2551,11 @@ namespace XenAdmin
 
         private string TabHelpID()
         {
-            if (alertPage.Visible)
-                return alertPage.HelpID;
-
-            if (updatesPage.Visible)
-                return updatesPage.HelpID;
-
-            if (eventsPage.Visible)
-                return eventsPage.HelpID;
+            foreach (var page in _notificationPages)
+            {
+                if (page.Visible)
+                    return alertPage.HelpID;
+            }
 
             if (TheTabControl.SelectedTab.Controls.Count > 0 && TheTabControl.SelectedTab.Controls[0] is IControlWithHelp ctrl)
                 return ctrl.HelpID + getSelectedXenModelObjectType();
@@ -2637,11 +2637,11 @@ namespace XenAdmin
 
         private void SetFiltersLabel()
         {
-            labelFiltersOnOff.Visible = alertPage.Visible || updatesPage.Visible || eventsPage.Visible;
-            bool filterIsOn = alertPage.Visible && alertPage.FilterIsOn ||
-                              updatesPage.Visible && updatesPage.FilterIsOn ||
-                              eventsPage.Visible && eventsPage.FilterIsOn;
-            labelFiltersOnOff.Text = filterIsOn ? Messages.FILTERS_ON : Messages.FILTERS_OFF;
+            labelFiltersOnOff.Visible = _notificationPages.Any(p => p.Visible);
+
+            labelFiltersOnOff.Text = _notificationPages.Any(p => p.Visible && p.FilterIsOn)
+                ? Messages.FILTERS_ON
+                : Messages.FILTERS_OFF;
         }
 
         private void eventsPage_GoToXenObjectRequested(IXenObject obj)
@@ -3007,12 +3007,12 @@ namespace XenAdmin
             {
                 bool tabControlWasVisible = TheTabControl.Visible;
                 TheTabControl.Visible = true;
-                if (alertPage.Visible)
-                    alertPage.HidePage();
-                if (updatesPage.Visible)
-                    updatesPage.HidePage();
-                if (eventsPage.Visible)
-                    eventsPage.HidePage();
+
+                foreach (var page in _notificationPages)
+                {
+                    if (page.Visible)
+                        page.HidePage();
+                }
 
                 // force an update of the selected tab when switching back from Notification view, 
                 // as some tabs ignore the update events when not visible (e.g. Snapshots, HA)

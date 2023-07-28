@@ -133,7 +133,25 @@ namespace XenAdmin.TabPages.CdnUpdates
             Connection = connection;
             Host = host;
 
+            string lastSyncTime = null;
             string lastUpdateTime = Messages.NEVER;
+
+            if (Helpers.GetPool(Connection) == null) //standalone host
+            {
+                lastSyncTime = Messages.INDETERMINABLE;
+
+                if (Helpers.XapiEqualOrGreater_23_18_0(Connection))
+                {
+                    lastSyncTime = Messages.NEVER;
+
+                    var pool = Helpers.GetPoolOfOne(Connection);
+                    
+                    if (pool != null && pool.last_update_sync > Util.GetUnixMinDateTime())
+                    {
+                        lastSyncTime = HelpersGUI.DateTimeToString(pool.last_update_sync.ToLocalTime(), Messages.DATEFORMAT_DMY_HMS, true);
+                    }
+                }
+            }
 
             if (Helpers.XapiEqualOrGreater_22_20_0(Host))
             {
@@ -152,7 +170,7 @@ namespace XenAdmin.TabPages.CdnUpdates
                 }
             }
 
-            SetValues(Host.Name(), Images.GetImage16For(Images.GetIconFor(Host)), lastUpdate: lastUpdateTime);
+            SetValues(Host.Name(), Images.GetImage16For(Images.GetIconFor(Host)), lastSyncTime, lastUpdateTime);
 
             if (poolUpdateInfo != null && hostUpdateInfo != null)
             {

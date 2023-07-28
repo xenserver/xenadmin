@@ -14939,6 +14939,9 @@ Any disk in your VM's DVD drive will be ejected when installing {1}.</value>
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>You are here</value>
   </data>
+  <data name="YUM_REPO_ACTION_CHECK_FOR_UPDATES" xml:space="preserve">
+    <value>Checking for available updates...</value>
+  </data>
   <data name="YUM_REPO_ACTION_CONFIG_DESCRIPTION_DISABLE" xml:space="preserve">
     <value>Disabling repository {0}...</value>
   </data>
@@ -14986,7 +14989,19 @@ Any disk in your VM's DVD drive will be ejected when installing {1}.</value>
 
 Do you want to synchronize immediately?</value>
   </data>
+  <data name="YUM_REPO_SYNC_ALL_CONFIRMATION" xml:space="preserve">
+    <value>Are you sure you want to synchronize all connected pools or standalone servers with their respective update channel?</value>
+  </data>
+  <data name="YUM_REPO_SYNC_FILTER_CONFIRMATION" xml:space="preserve">
+    <value>You have applied filters to the list of pools or standalone servers. Do you want to synchronize all connected systems with their respective update channel, or only the systems you have chosen to view?</value>
+  </data>
+  <data name="YUM_REPO_SYNC_YES_ALL_BUTTON" xml:space="preserve">
+    <value>Synchronize &amp;all</value>
+  </data>
   <data name="YUM_REPO_SYNC_YES_BUTTON" xml:space="preserve">
     <value>&amp;Yes, Synchronize</value>
+  </data>
+  <data name="YUM_REPO_SYNC_YES_VISIBLE_BUTTON" xml:space="preserve">
+    <value>Only synchronize &amp;visible</value>
   </data>
 </root>

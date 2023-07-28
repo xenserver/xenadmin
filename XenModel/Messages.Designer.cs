@@ -43374,6 +43374,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Checking for available updates....
+        /// </summary>
+        public static string YUM_REPO_ACTION_CHECK_FOR_UPDATES {
+            get {
+                return ResourceManager.GetString("YUM_REPO_ACTION_CHECK_FOR_UPDATES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disabling repository {0}....
         /// </summary>
         public static string YUM_REPO_ACTION_CONFIG_DESCRIPTION_DISABLE {
@@ -43511,11 +43520,47 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to synchronize all connected pools or standalone servers with their respective update channel?.
+        /// </summary>
+        public static string YUM_REPO_SYNC_ALL_CONFIRMATION {
+            get {
+                return ResourceManager.GetString("YUM_REPO_SYNC_ALL_CONFIRMATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have applied filters to the list of pools or standalone servers. Do you want to synchronize all connected systems with their respective update channel, or only the systems you have chosen to view?.
+        /// </summary>
+        public static string YUM_REPO_SYNC_FILTER_CONFIRMATION {
+            get {
+                return ResourceManager.GetString("YUM_REPO_SYNC_FILTER_CONFIRMATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Synchronize &amp;all.
+        /// </summary>
+        public static string YUM_REPO_SYNC_YES_ALL_BUTTON {
+            get {
+                return ResourceManager.GetString("YUM_REPO_SYNC_YES_ALL_BUTTON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;Yes, Synchronize.
         /// </summary>
         public static string YUM_REPO_SYNC_YES_BUTTON {
             get {
                 return ResourceManager.GetString("YUM_REPO_SYNC_YES_BUTTON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only synchronize &amp;visible.
+        /// </summary>
+        public static string YUM_REPO_SYNC_YES_VISIBLE_BUTTON {
+            get {
+                return ResourceManager.GetString("YUM_REPO_SYNC_YES_VISIBLE_BUTTON", resourceCulture);
             }
         }
     }
