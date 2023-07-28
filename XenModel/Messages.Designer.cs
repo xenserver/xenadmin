@@ -22090,6 +22090,60 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Data merge for VDI &apos;{0}&apos; of VM &apos;{1}&apos; has completed..
+        /// </summary>
+        public static string LEAF_COALESCE_COMPLETED_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("LEAF_COALESCE_COMPLETED_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data merge for VM {0} has completed..
+        /// </summary>
+        public static string LEAF_COALESCE_COMPLETED_TITLE {
+            get {
+                return ResourceManager.GetString("LEAF_COALESCE_COMPLETED_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data merge for VDI &apos;{0}&apos; of VM &apos;{1}&apos; has failed..
+        /// </summary>
+        public static string LEAF_COALESCE_FAILED_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("LEAF_COALESCE_FAILED_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data merge for VM {0} has failed..
+        /// </summary>
+        public static string LEAF_COALESCE_FAILED_TITLE {
+            get {
+                return ResourceManager.GetString("LEAF_COALESCE_FAILED_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data merge for VDI &apos;{0}&apos; of VM &apos;{1}&apos; has started, performance may be reduced..
+        /// </summary>
+        public static string LEAF_COALESCE_START_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("LEAF_COALESCE_START_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data merge for VM {0} has started..
+        /// </summary>
+        public static string LEAF_COALESCE_START_TITLE {
+            get {
+                return ResourceManager.GetString("LEAF_COALESCE_START_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Learn more....
         /// </summary>
         public static string LEARN_MORE {
