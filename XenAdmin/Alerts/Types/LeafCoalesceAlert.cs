@@ -28,6 +28,7 @@
  * SUCH DAMAGE.
  */
 
+using System;
 using XenAPI;
 using static XenAPI.Message;
 
@@ -47,18 +48,19 @@ namespace XenAdmin.Alerts
 
             if (obj is VDI vdi && vdi.Connection != null)
             {
+                _vdi = vdi;
+
                 foreach (var vbdRef in vdi.VBDs)
                 {
                     var vbd = vdi.Connection.Resolve(vbdRef);
 
-                    if (vbd != null && vbd.currently_attached)
+                    if (vbd != null)
                     {
                         VM vm = vbd.Connection.Resolve(vbd.VM);
 
                         if (vm != null)
                         {
                             _vm = vm;
-                            _vdi = vdi;
                             break;
                         }
                     }
