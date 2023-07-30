@@ -175,7 +175,21 @@ namespace XenAdmin.TabPages.CdnUpdates
             if (poolUpdateInfo != null && hostUpdateInfo != null)
             {
                 if (hostUpdateInfo.RecommendedGuidance.Length > 0)
-                    _childRows.Add(new PostUpdateActionRow(hostUpdateInfo.RecommendedGuidance));
+                {
+                    bool allLivePatches = true;
+
+                    foreach (var id in hostUpdateInfo.UpdateIDs)
+                    {
+                        var update = poolUpdateInfo.Updates.FirstOrDefault(u => u.Id == id);
+                        if (update != null && update.LivePatchGuidance == CdnLivePatchGuidance.None)
+                        {
+                            allLivePatches = false;
+                            break;
+                        }
+                    }
+
+                    _childRows.Add(new PostUpdateActionRow(hostUpdateInfo.RecommendedGuidance, allLivePatches));
+                }
 
                 var categories = hostUpdateInfo.GetUpdateCategories(poolUpdateInfo);
 
@@ -246,12 +260,14 @@ namespace XenAdmin.TabPages.CdnUpdates
 
     internal class PostUpdateActionRow : CdnExpandableRow
     {
-        public PostUpdateActionRow(CdnGuidance[] guidance)
+        public PostUpdateActionRow(CdnGuidance[] guidance, bool allLivePatches)
         {
-            var text = string.Format(Messages.HOTFIX_POST_UPDATE_ACTIONS,
-                string.Join("\n", guidance.Select(g => g.StringOf())));
+            var msg = allLivePatches ? Messages.HOTFIX_POST_UPDATE_LIVEPATCH_ACTIONS : Messages.HOTFIX_POST_UPDATE_ACTIONS;
 
-            SetValues(text, Images.StaticImages.rightArrowLong_Blue_16);
+            var text = string.Format(msg, string.Join("\n", guidance.Select(g => g.StringOf())));
+            var img = allLivePatches ? Images.StaticImages.livepatch_16 : Images.StaticImages.rightArrowLong_Blue_16;
+
+            SetValues(text, img);
         }
     }
 

@@ -85,7 +85,7 @@ namespace XenAdmin.Core
         public DateTime IssueDate { get; set; }
 
         [JsonProperty("severity")]
-        public CdnUpdateSeverity Severity { get; set; }
+        public CdnUpdateSeverity Severity { get; set; } = CdnUpdateSeverity.None;
 
         [JsonProperty("summary")]
         public string Summary { get; set; }
@@ -100,16 +100,16 @@ namespace XenAdmin.Core
         public string Url { get; set; }
 
         [JsonProperty("type")]
-        public CdnUpdateType Type { get; set; }
+        public CdnUpdateType Type { get; set; } = CdnUpdateType.Unknown;
 
         [JsonProperty("recommended-guidance")]
-        public CdnGuidance RecommendedGuidance { get; set; }
+        public CdnGuidance RecommendedGuidance { get; set; } = CdnGuidance.None;
 
         [JsonProperty("absolute-guidance")]
-        public CdnGuidance AbsoluteGuidance { get; set; }
+        public CdnGuidance AbsoluteGuidance { get; set; } = CdnGuidance.None;
 
         [JsonProperty("livepatch-guidance")]
-        public CdnLivePatchGuidance LivePatchGuidance { get; set; }
+        public CdnLivePatchGuidance LivePatchGuidance { get; set; } = CdnLivePatchGuidance.None;
 
         [JsonProperty("livepatches")]
         public CdnLivePatch[] LivePatches { get; set; }
@@ -146,7 +146,7 @@ namespace XenAdmin.Core
     #region Serialiazable enums
 
     [Serializable]
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(CdnUpdateTypeConverter))]
     public enum CdnUpdateType
     {
         SecurityFix,
@@ -154,7 +154,8 @@ namespace XenAdmin.Core
         Improvement,
         NewFeature,
         PreviewFeature,
-        Foundational
+        Foundational,
+        Unknown
     }
 
     [Serializable]
@@ -188,6 +189,27 @@ namespace XenAdmin.Core
     #endregion
 
     #region Json.NET extensions
+
+    internal class CdnUpdateTypeConverter : StringEnumConverter
+    {
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            JToken jToken = JToken.Load(reader);
+            var stringToParse = jToken.ToObject<string>();
+
+            if (string.IsNullOrEmpty(stringToParse))
+                return CdnUpdateType.Unknown;
+
+            try
+            {
+                return Enum.Parse(objectType, stringToParse);
+            }
+            catch (ArgumentException)
+            {
+                return CdnUpdateType.Unknown;
+            }
+        }
+    }
 
     internal class CdnGuidanceConverter : StringEnumConverter
     {

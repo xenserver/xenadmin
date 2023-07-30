@@ -113,6 +113,10 @@ namespace XenAdmin.TabPages.CdnUpdates
             if (!string.IsNullOrWhiteSpace(update.Url) && update.Url.ToLower() != "none")
                 sb.AppendLine(update.Url).AppendLine();
 
+            if (update.LivePatches?.Length > 0)
+                sb.AppendLine(string.Format(Messages.CDN_LIVEPATCHES_IN_UPDATE,
+                    string.Join(", ", update.LivePatches.Select(lp => lp.Component).Distinct()))).AppendLine();
+
             return sb.ToString().Trim();
         }
 

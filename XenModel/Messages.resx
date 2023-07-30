@@ -2642,6 +2642,9 @@ This will cancel compilation of the status report.</value>
   <data name="CDN_GUIDANCE_RESTART_TOOLSTACK" xml:space="preserve">
     <value>Restart Toolstack</value>
   </data>
+  <data name="CDN_LIVEPATCHES_IN_UPDATE" xml:space="preserve">
+    <value>This update live patches the following components: {0}</value>
+  </data>
   <data name="CERTIFICATE_CA_ALERT_EXPIRED_DESCIRPTION" xml:space="preserve">
     <value>The trusted CA certificate '{0}' of '{1}' expired on {2}.</value>
   </data>
@@ -7130,6 +7133,11 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   </data>
   <data name="HOTFIX_POST_UPDATE_ACTIONS" xml:space="preserve">
     <value>Post-update tasks to be performed:
+{0}</value>
+  </data>
+  <data name="HOTFIX_POST_UPDATE_LIVEPATCH_ACTIONS" xml:space="preserve">
+    <value>This server will be live patched.
+Post-update tasks to be performed if live patch fails:
 {0}</value>
   </data>
   <data name="HOTFIX_RPMS_TO_INSTALL" xml:space="preserve">

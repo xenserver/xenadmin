@@ -2449,6 +2449,16 @@ namespace XenAdmin.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap livepatch_16 {
+            get {
+                object obj = ResourceManager.GetObject("livepatch_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap log_destination_16 {
             get {
                 object obj = ResourceManager.GetObject("log_destination_16", resourceCulture);
