@@ -844,6 +844,7 @@ namespace XenAdmin
             public static Bitmap licensekey_32 = Properties.Resources.licensekey_32;
             public static Bitmap lifecycle_hot = Properties.Resources.lifecycle_hot;
             public static Bitmap lifecycle_pressed = Properties.Resources.lifecycle_pressed;
+            public static Bitmap livepatch_16 = Properties.Resources.livepatch_16;
             public static Bitmap log_destination_16 = Properties.Resources.log_destination_16;
             public static Bitmap Logo = Properties.Resources.Logo;
             public static Bitmap memory_dynmax_slider = Properties.Resources.memory_dynmax_slider;

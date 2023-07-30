@@ -7308,6 +7308,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This update live patches the following components: {0}.
+        /// </summary>
+        public static string CDN_LIVEPATCHES_IN_UPDATE {
+            get {
+                return ResourceManager.GetString("CDN_LIVEPATCHES_IN_UPDATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The trusted CA certificate &apos;{0}&apos; of &apos;{1}&apos; expired on {2}..
         /// </summary>
         public static string CERTIFICATE_CA_ALERT_EXPIRED_DESCIRPTION {
@@ -20427,6 +20436,17 @@ namespace XenAdmin {
         public static string HOTFIX_POST_UPDATE_ACTIONS {
             get {
                 return ResourceManager.GetString("HOTFIX_POST_UPDATE_ACTIONS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This server will be live patched.
+        ///Post-update tasks to be performed if live patch fails:
+        ///{0}.
+        /// </summary>
+        public static string HOTFIX_POST_UPDATE_LIVEPATCH_ACTIONS {
+            get {
+                return ResourceManager.GetString("HOTFIX_POST_UPDATE_LIVEPATCH_ACTIONS", resourceCulture);
             }
         }
         

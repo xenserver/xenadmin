@@ -4563,6 +4563,7 @@
     <None Include="Images\yinhekylin_16x.png" />
     <None Include="Images\pool_32.png" />
     <None Include="Images\pool_unpatched.png" />
+    <None Include="Images\livepatch_16.png" />
     <Content Include="Images\queued.png" />
     <Content Include="Images\Refresh16.png" />
     <None Include="Images\saved_searches_16.png" />
