@@ -153,7 +153,8 @@ namespace XenAdmin.Core
         Bugfix,
         Improvement,
         NewFeature,
-        PreviewFeature
+        PreviewFeature,
+        Foundational
     }
 
     [Serializable]

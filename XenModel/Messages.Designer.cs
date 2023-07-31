@@ -20458,6 +20458,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} foundational changes.
+        /// </summary>
+        public static string HOTFIX_TYPE_FOUNDATIONAL_MANY {
+            get {
+                return ResourceManager.GetString("HOTFIX_TYPE_FOUNDATIONAL_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 foundational change.
+        /// </summary>
+        public static string HOTFIX_TYPE_FOUNDATIONAL_ONE {
+            get {
+                return ResourceManager.GetString("HOTFIX_TYPE_FOUNDATIONAL_ONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} improvements.
         /// </summary>
         public static string HOTFIX_TYPE_IMPROVEMENT_MANY {

@@ -7141,6 +7141,12 @@ This might result in failure to migrate VMs to this server during the RPU or to 
   <data name="HOTFIX_TYPE_BUG_FIX_ONE" xml:space="preserve">
     <value>1 bug fix</value>
   </data>
+  <data name="HOTFIX_TYPE_FOUNDATIONAL_MANY" xml:space="preserve">
+    <value>{0} foundational changes</value>
+  </data>
+  <data name="HOTFIX_TYPE_FOUNDATIONAL_ONE" xml:space="preserve">
+    <value>1 foundational change</value>
+  </data>
   <data name="HOTFIX_TYPE_IMPROVEMENT_MANY" xml:space="preserve">
     <value>{0} improvements</value>
   </data>

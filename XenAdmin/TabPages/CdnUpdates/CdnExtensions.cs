@@ -72,6 +72,8 @@ namespace XenAdmin.TabPages.CdnUpdates
                     return "N";
                 case CdnUpdateType.PreviewFeature:
                     return "P";
+                case CdnUpdateType.Foundational:
+                    return "F";
                 default:
                     return "?";
             }
@@ -91,6 +93,8 @@ namespace XenAdmin.TabPages.CdnUpdates
                     return Color.Green;
                 case CdnUpdateType.PreviewFeature:
                     return Color.DodgerBlue;
+                case CdnUpdateType.Foundational:
+                    return Color.Tan;
                 default:
                     return Color.DarkGray;
             }
@@ -147,6 +151,10 @@ namespace XenAdmin.TabPages.CdnUpdates
                     return numberOfUpdates == 1
                         ? Messages.HOTFIX_TYPE_IMPROVEMENT_ONE
                         : string.Format(Messages.HOTFIX_TYPE_IMPROVEMENT_MANY, numberOfUpdates);
+                case CdnUpdateType.Foundational:
+                    return numberOfUpdates == 1
+                        ? Messages.HOTFIX_TYPE_IMPROVEMENT_ONE
+                        : string.Format(Messages.HOTFIX_TYPE_IMPROVEMENT_MANY, numberOfUpdates);
                 default:
                     return Messages.UNKNOWN;
             }
@@ -166,6 +174,8 @@ namespace XenAdmin.TabPages.CdnUpdates
                     return CdnStaticImages.PreviewFeature;
                 case CdnUpdateType.Improvement:
                     return CdnStaticImages.Improvement;
+                case CdnUpdateType.Foundational:
+                    return CdnStaticImages.Foundational;
                 default:
                     return CdnStaticImages.Unknown;
 
@@ -180,6 +190,7 @@ namespace XenAdmin.TabPages.CdnUpdates
         public static readonly Image Improvement = GetBitmap(CdnUpdateType.Improvement);
         public static readonly Image NewFeature = GetBitmap(CdnUpdateType.NewFeature);
         public static readonly Image PreviewFeature = GetBitmap(CdnUpdateType.PreviewFeature);
+        public static readonly Image Foundational = GetBitmap(CdnUpdateType.Foundational);
         public static readonly Image Unknown = Images.StaticImages.alert6_16;
 
         private static Bitmap GetBitmap(CdnUpdateType updateType)
