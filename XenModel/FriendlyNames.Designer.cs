@@ -1051,6 +1051,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} Trial Edition.
+        /// </summary>
+        public static string Label_host_edition_trial {
+            get {
+                return ResourceManager.GetString("Label-host.edition-trial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} for Citrix Virtual Desktops.
         /// </summary>
         public static string Label_host_edition_xendesktop {

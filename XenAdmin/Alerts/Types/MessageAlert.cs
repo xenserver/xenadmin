@@ -44,7 +44,8 @@ namespace XenAdmin.Alerts
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public readonly Message Message;
+        public Message Message { get; }
+
         public IXenObject XenObject;
 
         private const int DEFAULT_PRIORITY = 0;
@@ -355,7 +356,7 @@ namespace XenAdmin.Alerts
 
 					case Message.MessageType.LICENSE_EXPIRES_SOON:
 					case Message.MessageType.LICENSE_DOES_NOT_SUPPORT_POOLING:
-                        return () => Program.OpenURL(HiddenFeatures.LinkLabelHidden ? null : InvisibleMessages.LICENSE_EXPIRY_WEBPAGE);
+                        return () => Program.OpenURL(HiddenFeatures.LinkLabelHidden ? null : InvisibleMessages.LICENSE_BUY_URL);
 					case Message.MessageType.VBD_QOS_FAILED:
 					case Message.MessageType.VCPU_QOS_FAILED:
 					case Message.MessageType.VIF_QOS_FAILED:
@@ -511,6 +512,10 @@ namespace XenAdmin.Alerts
 
                 case Message.MessageType.FAILED_LOGIN_ATTEMPTS:
                     return new FailedLoginAttemptAlert(msg);
+                case Message.MessageType.LEAF_COALESCE_START_MESSAGE:
+                case Message.MessageType.LEAF_COALESCE_COMPLETED:
+                case Message.MessageType.LEAF_COALESCE_FAILED:
+                    return new LeafCoalesceAlert(msg);
                 default:
                     // For all other kinds of alert
                     return new MessageAlert(msg);

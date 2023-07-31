@@ -31,6 +31,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using XenAdmin.Controls.CheckableDataGridView;
 using XenAdmin.Core;
 using XenAPI;
@@ -41,10 +42,12 @@ namespace XenAdmin.Dialogs
     {
         public enum Status
         {
+            Error,
             Warning,
-            Information,
             Ok,
-            Updating
+            Updating,
+            // CP-43000: to be used for post Nile hosts using trial edition
+            Passable
         }
 
         private readonly ILicenseStatus licenseStatus;
@@ -80,10 +83,10 @@ namespace XenAdmin.Dialogs
                     Disabled = true;
 
                 Queue<object> cellDetails = new Queue<object>();
-                cellDetails.Enqueue(XenObject.Name());
+                cellDetails.Enqueue(XenObject?.Name());
                 cellDetails.Enqueue(LicenseName);
                 cellDetails.Enqueue(new Bitmap(1,1));
-                cellDetails.Enqueue(LicenseStatus);
+                cellDetails.Enqueue(OverallStatus);
                 return cellDetails;
             }
         }
@@ -136,89 +139,167 @@ namespace XenAdmin.Dialogs
             }
         }
 
-        public override bool WarningRequired
+        public override bool LicenseWarningRequired => ShouldShowLicenseWarningText(out _, out _);
+
+        public override string LicenseWarningText
         {
             get
             {
-                if (!licenseStatus.Updated)
-                    return false;
-
-                if (CurrentLicenseState == Dialogs.LicenseStatus.HostState.Unknown)
-                    return false;
-
-                return true;
+                var _ = ShouldShowLicenseWarningText(out var text, out var _);
+                return text;
             }
         }
 
-        public override string WarningText
+        public override bool SupportWarningRequired => ShouldShowSupportWarningText(out _, out _);
+
+        public override string SupportWarningText
         {
             get
             {
-                switch (CurrentLicenseState)
+                var _ = ShouldShowSupportWarningText(out var text, out var _);
+                return text;
+            }
+        }
+
+        private bool ShouldShowSupportWarningText(out string text, out Status status)
+        {
+            text = null;
+            status = Status.Ok;
+            if (XenObjectHost == null || XenObjectHost.IsInPreviewRelease() || !Helpers.NileOrGreater(XenObjectHost))
+            {
+                return false;
+            }
+
+            if (XenObjectHost.CssLicenseHasExpired())
+            {
+                status = Status.Error;
+                text = $"{Messages.LICENSE_MANAGER_EXPIRED_CSS_LONG}{Environment.NewLine}{Messages.EXPIRED_CSS_UPSELLING_MESSAGE_POOL}";
+            }
+            else
+            {
+                status = Status.Ok;
+                text = Messages.LICENSE_MANAGER_ACTIVE_CSS_LONG;
+            }
+
+            return true;
+        }
+
+        private bool ShouldShowLicenseWarningText(out string text, out Status status)
+        {
+            text = null;
+            status = Status.Ok;
+            if (XenObjectHost == null)
+            {
+                return false;
+            }
+
+            switch (CurrentLicenseState)
+            {
+                case Dialogs.LicenseStatus.HostState.Free:
                 {
-                    case Dialogs.LicenseStatus.HostState.Free:
-                        {
-                            Pool pool = Helpers.GetPool(XenObjectHost.Connection);
-                            if (Dialogs.LicenseStatus.PoolIsMixedFreeAndExpiring(pool))
-                                return Messages.POOL_IS_PARTIALLY_LICENSED;
-                            return licenseStatus.LicenseEntitlements;
-                        }
-                    case Dialogs.LicenseStatus.HostState.PartiallyLicensed:
-                        return Messages.POOL_IS_PARTIALLY_LICENSED;
-                    case Dialogs.LicenseStatus.HostState.Licensed:
-                        {
-                            Pool pool = Helpers.GetPool(XenObjectHost.Connection);
-                            if (Dialogs.LicenseStatus.PoolHasMixedLicenses(pool))
-                                return Messages.POOL_HAS_MIXED_LICENSES;
-
-                            if (Dialogs.LicenseStatus.PoolIsPartiallyLicensed(pool))
-                                return Messages.POOL_IS_PARTIALLY_LICENSED;
-
-                            return licenseStatus.LicenseEntitlements;
-                        }
-                    case Dialogs.LicenseStatus.HostState.Unavailable:
-                        return Messages.LICENSE_EXPIRED_NO_LICENSES_AVAILABLE;
-                    case Dialogs.LicenseStatus.HostState.Expired:
-                        return Messages.LICENSE_YOUR_LICENCE_HAS_EXPIRED;
-                    case Dialogs.LicenseStatus.HostState.RegularGrace:
-                    case Dialogs.LicenseStatus.HostState.UpgradeGrace:
-                    case Dialogs.LicenseStatus.HostState.ExpiresSoon:
-                        return string.Format(Messages.LICENSE_YOUR_LICENCE_EXPIRES_IN, licenseStatus.LicenseExpiresIn.FuzzyTime());
-                    default:
-                        return Messages.UNKNOWN;
+                    var pool = Helpers.GetPool(XenObjectHost.Connection);
+                    text = Dialogs.LicenseStatus.PoolIsMixedFreeAndExpiring(pool) ? Messages.POOL_IS_PARTIALLY_LICENSED : licenseStatus.LicenseEntitlements;
+                    status = Helpers.CloudOrGreater(XenObjectHost) ? Status.Passable :Status.Error;
                 }
+                    break;
+                case Dialogs.LicenseStatus.HostState.PartiallyLicensed:
+                    text = Messages.POOL_IS_PARTIALLY_LICENSED;
+                    status = Status.Warning;
+                    break;
+                case Dialogs.LicenseStatus.HostState.Licensed:
+                {
+                    var pool = Helpers.GetPool(XenObjectHost.Connection);
+                    if (Dialogs.LicenseStatus.PoolHasMixedLicenses(pool))
+                    {
+                        text = Messages.POOL_HAS_MIXED_LICENSES;
+                    }
+                    else if (Dialogs.LicenseStatus.PoolIsPartiallyLicensed(pool))
+                    {
+                        text = Messages.POOL_IS_PARTIALLY_LICENSED;
+                    }
+                    else
+                    {
+                        text = licenseStatus.LicenseEntitlements;
+                    }
+
+                    status = Status.Ok;
+                }
+                    break;
+                case Dialogs.LicenseStatus.HostState.Unavailable:
+                    text = Messages.LICENSE_EXPIRED_NO_LICENSES_AVAILABLE;
+                    status = Status.Error;
+                    break;
+                case Dialogs.LicenseStatus.HostState.Expired:
+                    text = Messages.LICENSE_YOUR_LICENCE_HAS_EXPIRED;
+                    status = Status.Error;
+                    break;
+                case Dialogs.LicenseStatus.HostState.RegularGrace:
+                case Dialogs.LicenseStatus.HostState.UpgradeGrace:
+                case Dialogs.LicenseStatus.HostState.ExpiresSoon:
+                    text = string.Format(Messages.LICENSE_YOUR_LICENCE_EXPIRES_IN, licenseStatus.LicenseExpiresIn.FuzzyTime());
+                    status = Status.Warning;
+                    break;
+                case Dialogs.LicenseStatus.HostState.Unknown:
+                default:
+                    status = licenseStatus.Updated ? Status.Warning : Status.Updating;
+                    text = Messages.UNKNOWN;
+                    return !licenseStatus.Updated;
             }
+
+            return true;
         }
 
-        public bool HelperUrlRequired
-        {
-            get { return XenObject != null; }  
-        }
+        public bool LicenseHelperUrlRequired => ShouldShowLicenseWarningText(out _, out var status) &&
+                                                (status == Status.Error || status == Status.Warning || status == Status.Passable);
+
+        public bool SupportHelperUrlRequired => ShouldShowSupportWarningText(out _, out  var status) &&
+                                                (status == Status.Error || status == Status.Warning) &&
+                                                !LicenseHelperUrlRequired;
 
         public Status RowStatus
         {
             get
             {
-                switch (CurrentLicenseState)
+                ShouldShowLicenseWarningText(out _, out var licenseWarningStatus);
+                ShouldShowSupportWarningText(out _, out var supportWarningStatus);
+
+                if (!XenObjectHost.IsInPreviewRelease() && 
+                    (licenseWarningStatus != supportWarningStatus || licenseWarningStatus == Status.Passable && supportWarningStatus == Status.Error)
+                    )
                 {
-                    case Dialogs.LicenseStatus.HostState.Unavailable:
-                    case Dialogs.LicenseStatus.HostState.Expired:
-                    case Dialogs.LicenseStatus.HostState.Free:
-                        return Status.Warning;
-                    case Dialogs.LicenseStatus.HostState.Licensed:
-                        return Status.Ok;
-                    case Dialogs.LicenseStatus.HostState.PartiallyLicensed:
-                    case Dialogs.LicenseStatus.HostState.RegularGrace:
-                    case Dialogs.LicenseStatus.HostState.UpgradeGrace:
-                    case Dialogs.LicenseStatus.HostState.ExpiresSoon:
-                        return Status.Information;
-                    case Dialogs.LicenseStatus.HostState.Unknown:
-                        if (!licenseStatus.Updated)
-                            return Status.Updating;
-                        return Status.Information;
-                    default:
-                        return Status.Information;
+                    // will show a warning icon
+                    return Status.Warning;
                 }
+
+                if (licenseWarningStatus != Status.Ok)
+                {
+                    return licenseWarningStatus;
+                }
+
+                if (supportWarningStatus != Status.Ok)
+                {
+                    return supportWarningStatus;
+                }
+
+                return Status.Ok;
+            }
+        }
+
+        public Status RowLicenseStatus
+        {
+            get
+            {
+                var _ = ShouldShowLicenseWarningText(out var _, out var status);
+                return status;
+            }
+        }
+
+        public Status RowSupportStatus
+        {
+            get
+            {
+                var _ = ShouldShowSupportWarningText(out var _, out var status);
+                return status;
             }
         }
 
@@ -327,6 +408,20 @@ namespace XenAdmin.Dialogs
             get { return licenseStatus.LicenseEdition; }
         }
 
+        private string OverallStatus
+        {
+            get
+            {
+                var statuses = new[]
+                {
+                    LicenseStatus,
+                    SupportStatus
+                };
+
+                return string.Join("; ", statuses.Where((s) => !string.IsNullOrEmpty(s)));
+            }
+        }
+
         private string LicenseStatus
         {
             get
@@ -339,7 +434,7 @@ namespace XenAdmin.Dialogs
                     case Dialogs.LicenseStatus.HostState.Expired:
                         return Messages.LICENSE_UNLICENSED;
                     case Dialogs.LicenseStatus.HostState.Free:
-                        return Messages.LICENSE_UNLICENSED;
+                        return XenObjectHost.IsInPreviewRelease() ? Messages.LICENSE_TRIAL : Messages.LICENSE_UNLICENSED;
                     case Dialogs.LicenseStatus.HostState.Licensed:
                         return Messages.LICENSE_LICENSED;
                     case Dialogs.LicenseStatus.HostState.RegularGrace:
@@ -353,6 +448,19 @@ namespace XenAdmin.Dialogs
                     default:
                         return Messages.UNKNOWN;
                 }
+            }
+        }
+
+        private string SupportStatus
+        {
+            get
+            {
+                if (!ShouldShowSupportWarningText(out _, out var supportWarningStatus))
+                {
+                    return null;
+                }
+
+                return supportWarningStatus == Status.Ok ? Messages.LICENSE_MANAGER_ACTIVE_CSS : Messages.LICENSE_MANAGER_EXPIRED_CSS;
             }
         }
 

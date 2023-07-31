@@ -447,6 +447,9 @@
   <data name="Label-host.edition-standard-per-socket" xml:space="preserve">
     <value>{0} Standard Per-Socket</value>
   </data>
+  <data name="Label-host.edition-trial" xml:space="preserve">
+    <value>{0} Trial Edition</value>
+  </data>
   <data name="Label-host.edition-xendesktop" xml:space="preserve">
     <value>{0} for Citrix Virtual Desktops</value>
   </data>

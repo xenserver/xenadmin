@@ -37,6 +37,7 @@ using System.Linq;
 using System.Net.NetworkInformation;
 using XenCenterLib.Archive;
 using XenAdmin.Actions.Updates;
+using XenAdmin.Core;
 
 namespace XenAdmin.Actions
 {
@@ -214,13 +215,28 @@ namespace XenAdmin.Actions
             Description = Messages.COMPLETED;
         }
 
+        private static bool IsFileServiceUri(Uri uri)
+        {
+            var updateUriPrefix = new Uri(InvisibleMessages.UPDATE_URL_PREFIX);
+
+            if (uri.Host == updateUriPrefix.Host)
+                return true;
+
+            var customUpdateUriPrefix = XenAdminConfigManager.Provider.GetCustomFileServicePrefix();
+            if (!string.IsNullOrEmpty(customUpdateUriPrefix))
+            {
+                var customUpdateUri = new Uri(customUpdateUriPrefix);
+
+                if (uri.Host == customUpdateUri.Host)
+                    return true;
+            }
+
+            return false;
+        }
+
         private void DownloadFile(out string outputFileName)
         {
             outputFileName = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
-
-            log.InfoFormat("Downloading update '{0}' (from '{1}') to '{2}'", UpdateName, _updateUri, outputFileName);
-            Description = string.Format(Messages.DOWNLOAD_AND_EXTRACT_ACTION_DOWNLOADING_DESC, UpdateName);
-            LogDescriptionChanges = false;
 
             _client = new WebClient();
             _client.DownloadProgressChanged += client_DownloadProgressChanged;
@@ -228,8 +244,19 @@ namespace XenAdmin.Actions
 
             NetworkChange.NetworkAvailabilityChanged += NetworkAvailabilityChanged;
 
-            var credential = TokenManager.GetDownloadCredential(XenAdminConfigManager.Provider);
-            _client.Headers.Add("Authorization", $"Basic {credential}");
+            //useful when the updates use test locations
+            if (IsFileServiceUri(_updateUri))
+            {
+                log.InfoFormat("Authenticating account...");
+                Description = string.Format(Messages.DOWNLOAD_AND_EXTRACT_ACTION_AUTHENTICATING_DESC,
+                    BrandManager.CompanyNameLegacy);
+                var credential = TokenManager.GetDownloadCredential(XenAdminConfigManager.Provider);
+                _client.Headers.Add("Authorization", $"Basic {credential}");
+            }
+
+            log.InfoFormat("Downloading update '{0}' (from '{1}') to '{2}'", UpdateName, _updateUri, outputFileName);
+            Description = string.Format(Messages.DOWNLOAD_AND_EXTRACT_ACTION_DOWNLOADING_DESC, UpdateName);
+            LogDescriptionChanges = false;
 
             int errorCount = 0;
             bool needToRetry = false;
