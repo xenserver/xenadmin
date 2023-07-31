@@ -194,13 +194,13 @@ namespace XenAdmin.Dialogs
                                          summaryPanel.SummaryText = summaryComponent;
                                          switch (lRow.RowLicenseStatus)
                                          {
-                                             case LicenseDataGridViewRow.Status.Information:
+                                             case LicenseDataGridViewRow.Status.Warning:
                                                  summaryPanel.LicenseWarningIcon = Images.StaticImages._000_Alert2_h32bit_16;
                                                  break;
-                                             case LicenseDataGridViewRow.Status.Warning:
+                                             case LicenseDataGridViewRow.Status.Error:
                                                  summaryPanel.LicenseWarningIcon = Images.StaticImages._000_error_h32bit_16;
                                                  break;
-                                             case LicenseDataGridViewRow.Status.Trial:
+                                             case LicenseDataGridViewRow.Status.Passable:
                                                  summaryPanel.LicenseWarningIcon =
                                                      Images.StaticImages._000_Tick_yellow_h32bit_16;
                                                  break;
@@ -214,7 +214,7 @@ namespace XenAdmin.Dialogs
                                              case LicenseDataGridViewRow.Status.Ok:
                                                  summaryPanel.SupportWarningIcon = Images.StaticImages._000_Tick_h32bit_16;
                                                  break;
-                                             case LicenseDataGridViewRow.Status.Warning:
+                                             case LicenseDataGridViewRow.Status.Error:
                                                  summaryPanel.SupportWarningIcon = Images.StaticImages._000_error_h32bit_16;
                                                  break;
                                              default:
