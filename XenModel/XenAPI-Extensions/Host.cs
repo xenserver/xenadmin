@@ -44,7 +44,7 @@ namespace XenAPI
 {
     public partial class Host : IComparable<Host>, IEquatable<Host>
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod()?.DeclaringType);
 
         public enum Edition
         {
@@ -143,6 +143,7 @@ namespace XenAPI
                 case Edition.Standard:
                     return "standard";
                 default:
+                    // CP-43000: For some hosts "trial" works, too. However, "express" is valid from Naples onwards
                     return Helpers.NaplesOrGreater(this) ? "express" : "free";
             }
         }
@@ -187,6 +188,7 @@ namespace XenAPI
 
         /// <summary>
         /// The expiry date of this host's license in UTC.
+        /// Defaults to 2030-01-01 if not found.
         /// </summary>
         public virtual DateTime LicenseExpiryUTC()
         {
@@ -194,6 +196,25 @@ namespace XenAPI
                 Util.TryParseIso8601DateTime(license_params["expiry"], out var result))
                 return result;
             return new DateTime(2030, 1, 1);
+        }
+
+        /// <summary>
+        /// The CSS expiry date of this host's license.
+        /// The time component is always set to midnight.
+        /// Returns null if the value doesn't exist.
+        /// </summary>
+        public virtual DateTime? LicenseCssExpiry()
+        {
+            if(license_params != null &&
+                license_params.TryGetValue("css_expiry", out var cssExpiryValue) && 
+                !string.IsNullOrEmpty(cssExpiryValue) &&
+                Util.TryParseNonIso8601DateTime(cssExpiryValue, out var result))
+            {
+                // css_expiry is not a datetime object
+                return result.Date;
+            }
+
+            return null;
         }
 
         public static bool RestrictRBAC(Host h)
@@ -293,7 +314,7 @@ namespace XenAPI
 
         public virtual bool IsFreeLicense()
         {
-            return edition == "free" || edition == "express";
+            return edition == "free" || edition == "express" || edition == "trial";
         }
 
         public virtual bool IsFreeLicenseOrExpired()
@@ -301,6 +322,46 @@ namespace XenAPI
             if (Connection != null && Connection.CacheIsPopulated)
                 return IsFreeLicense() || LicenseExpiryUTC() < DateTime.UtcNow - Connection.ServerTimeOffset;
             return true;
+        }
+
+        /// <summary>
+        /// True if host qualifies for showing an upselling message based on its license and version.
+        /// <br />
+        /// Used to decide whether or not to show the upselling message from trial or express edition.
+        /// <br />
+        /// See CP-43000 for more info.
+        /// </summary>
+        public virtual bool CanShowTrialEditionUpsell()
+        {
+            return Helpers.NileOrGreater(this) && IsFreeLicense() && !IsInPreviewRelease();
+        }
+
+        /// <summary>
+        /// Return true if the is_preview_release value in host.software_version is present and set to true.
+        /// </summary>
+        public virtual bool IsInPreviewRelease()
+        {
+            return software_version.TryGetValue("is_preview_release", out var isPreviewReleaseString) &&
+                   bool.TryParse(isPreviewReleaseString, out var isPreviewRelease) && isPreviewRelease;
+        }
+
+        /// <summary>
+        /// Returns true if the CSS license has expired, regardless of what edition is shown.
+        /// <br />
+        /// Do not rely on this method for enforcing restrictions as the user can circumvent this method
+        /// by updating the system date.
+        /// </summary>
+        public virtual bool CssLicenseHasExpired()
+        {
+            var cssExpiry = LicenseCssExpiry();
+
+            if (cssExpiry.HasValue)
+            {
+                // User can circumvent this by changing system date
+                return DateTime.UtcNow < cssExpiry;
+            }
+
+            return false;
         }
 
         public static bool RestrictHA(Host h)
@@ -1457,6 +1518,11 @@ namespace XenAPI
         public bool StandardFeaturesEnabled()
         {
             return GetEdition(edition) == Edition.Standard;
+        }
+
+        public bool FreeFeaturesEnabled()
+        {
+            return GetEdition(edition) == Edition.Free;
         }
 
         public bool EligibleForSupport()

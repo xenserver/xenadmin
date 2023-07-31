@@ -356,7 +356,7 @@ namespace XenAdmin.Alerts
 
 					case Message.MessageType.LICENSE_EXPIRES_SOON:
 					case Message.MessageType.LICENSE_DOES_NOT_SUPPORT_POOLING:
-                        return () => Program.OpenURL(HiddenFeatures.LinkLabelHidden ? null : InvisibleMessages.LICENSE_EXPIRY_WEBPAGE);
+                        return () => Program.OpenURL(HiddenFeatures.LinkLabelHidden ? null : InvisibleMessages.LICENSE_BUY_URL);
 					case Message.MessageType.VBD_QOS_FAILED:
 					case Message.MessageType.VCPU_QOS_FAILED:
 					case Message.MessageType.VIF_QOS_FAILED:

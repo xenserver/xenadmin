@@ -224,9 +224,9 @@ namespace XenAdmin.Core
                 case Reason.LicenseMismatch:
                     return Messages.NEWPOOL_LICENSEMISMATCH;
                 case Reason.CoordinatorPoolMaxNumberHostReached:
-                    return Messages.NEWPOOL_MAX_NUMBER_HOST_REACHED;
+                    return string.Format(Messages.NEWPOOL_MAX_NUMBER_HOST_REACHED, InvisibleMessages.LICENSE_BUY_URL);
                 case Reason.WillExceedPoolMaxSize:
-                    return Messages.NEWPOOL_WILL_EXCEED_POOL_MAX_SIZE;
+                    return string.Format(Messages.NEWPOOL_WILL_EXCEED_POOL_MAX_SIZE, InvisibleMessages.LICENSE_BUY_URL);
                 case Reason.DifferentServerVersion:
                     return Messages.NEWPOOL_DIFF_SERVER;
                 case Reason.DifferentHomogeneousUpdatesFromCoordinator:

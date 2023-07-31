@@ -41,7 +41,7 @@ namespace XenAdmin.Dialogs
         LicenseManagerController Controller { set; }
         void DrawRowsInGrid(List<CheckableDataGridViewRow> itemsToShow);
         void DrawSelectedRowsAsChecked(List<CheckableDataGridViewRow> rows);
-        void DrawSummaryForHighlightedRow(CheckableDataGridViewRow row, SummaryTextComponent component, Action runOnUrlClick);
+        void DrawSummaryForHighlightedRow(CheckableDataGridViewRow row, SummaryTextComponent component, Action runOnLicenseUrlClick, Action runOnSupportUrlClick);
         void DrawHighlightedRow(CheckableDataGridViewRow row);
         void DrawRowStatusIcon(int rowIndex, LicenseDataGridViewRow.Status rowStatus);
         void DrawAssignButtonAsDisabled(bool isDisabled);

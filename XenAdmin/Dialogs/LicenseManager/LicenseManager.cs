@@ -173,7 +173,7 @@ namespace XenAdmin.Dialogs
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public void DrawSummaryForHighlightedRow(CheckableDataGridViewRow row, SummaryTextComponent summaryComponent, Action runOnUrlClick)
+        public void DrawSummaryForHighlightedRow(CheckableDataGridViewRow row, SummaryTextComponent summaryComponent, Action runOnLicenseUrlClick, Action runOnSupportUrlClick)
         {
             Program.Invoke(this, delegate
                                      {
@@ -182,25 +182,48 @@ namespace XenAdmin.Dialogs
                                              return;
 
                                          summaryPanel.Title = lRow.XenObject.Name();
-                                         summaryPanel.HelperUrl = Messages.LICENSE_MANAGER_BUY_LICENSE_LINK_TEXT;
-                                         summaryPanel.HelperUrlVisible = lRow.HelperUrlRequired && !Controller.ReadOnlyView;
-                                         summaryPanel.WarningVisible = lRow.WarningRequired;
-                                         summaryPanel.WarningText = lRow.WarningText;
+                                         summaryPanel.LicenseHelperUrlText = Messages.LICENSE_MANAGER_BUY_LICENSE_LINK_TEXT;
+                                         summaryPanel.SupportHelperUrlText = Messages.LICENSE_MANAGER_PURCHASE_SUPPORT_LINK_TEXT;
+                                         summaryPanel.LicenseHelperUrlVisible = lRow.LicenseHelperUrlRequired && !Controller.ReadOnlyView;
+                                         summaryPanel.SupportHelperUrlVisible = lRow.SupportHelperUrlRequired &&
+                                             !Controller.ReadOnlyView;
+                                         summaryPanel.LicenseWarningVisible = lRow.LicenseWarningRequired;
+                                         summaryPanel.SupportWarningVisible = lRow.SupportWarningRequired;
+                                         summaryPanel.LicenseWarningText = lRow.LicenseWarningText;
+                                         summaryPanel.SupportWarningText = lRow.SupportWarningText;
                                          summaryPanel.SummaryText = summaryComponent;
-                                         switch (lRow.RowStatus)
+                                         switch (lRow.RowLicenseStatus)
                                          {
-                                             case LicenseDataGridViewRow.Status.Information:
-                                                 summaryPanel.WarningIcon = Images.StaticImages._000_Alert2_h32bit_16;
-                                                 break;
                                              case LicenseDataGridViewRow.Status.Warning:
-                                                 summaryPanel.WarningIcon = Images.StaticImages._000_error_h32bit_16;
+                                                 summaryPanel.LicenseWarningIcon = Images.StaticImages._000_Alert2_h32bit_16;
+                                                 break;
+                                             case LicenseDataGridViewRow.Status.Error:
+                                                 summaryPanel.LicenseWarningIcon = Images.StaticImages._000_error_h32bit_16;
+                                                 break;
+                                             case LicenseDataGridViewRow.Status.Passable:
+                                                 summaryPanel.LicenseWarningIcon =
+                                                     Images.StaticImages._000_Tick_yellow_h32bit_16;
                                                  break;
                                              default:
-                                                 summaryPanel.WarningIcon = Images.StaticImages._000_Tick_h32bit_16;
+                                                 summaryPanel.LicenseWarningIcon = Images.StaticImages._000_Tick_h32bit_16;
+                                                 break;
+                                         }
+
+                                         switch (lRow.RowSupportStatus)
+                                         {
+                                             case LicenseDataGridViewRow.Status.Ok:
+                                                 summaryPanel.SupportWarningIcon = Images.StaticImages._000_Tick_h32bit_16;
+                                                 break;
+                                             case LicenseDataGridViewRow.Status.Error:
+                                                 summaryPanel.SupportWarningIcon = Images.StaticImages._000_error_h32bit_16;
+                                                 break;
+                                             default:
+                                                 summaryPanel.SupportWarningIcon = Images.StaticImages._000_Tick_h32bit_16;
                                                  break;
                                          }
                                          summaryPanel.InformationVisible = false;
-                                         summaryPanel.RunOnUrlClick = runOnUrlClick;
+                                         summaryPanel.RunOnLicenseUrlClick = runOnLicenseUrlClick;
+                                         summaryPanel.RunOnSupportUrlClick = runOnSupportUrlClick;
                                      });
         }
 

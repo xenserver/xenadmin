@@ -16500,6 +16500,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your Customer Success Services (CSS) agreement has expired. This server will not receive any updates, including security updates..
+        /// </summary>
+        public static string EXPIRED_CSS_UPSELLING_MESSAGE_HOST {
+            get {
+                return ResourceManager.GetString("EXPIRED_CSS_UPSELLING_MESSAGE_HOST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your Customer Success Services (CSS) agreement has expired. This pool will not receive any updates, including security updates.
+        /// </summary>
+        public static string EXPIRED_CSS_UPSELLING_MESSAGE_POOL {
+            get {
+                return ResourceManager.GetString("EXPIRED_CSS_UPSELLING_MESSAGE_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Export All.
         /// </summary>
         public static string EXPORT_ALL {
@@ -22189,6 +22207,33 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} Virtual Apps and Desktops {0} Cloud features enabled.
+        /// </summary>
+        public static string LICENSE_DESKTOP_CLOUD_FEATURES_ENABLED {
+            get {
+                return ResourceManager.GetString("LICENSE_DESKTOP_CLOUD_FEATURES_ENABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} Virtual Apps and Desktops features enabled.
+        /// </summary>
+        public static string LICENSE_DESKTOP_FEATURES_ENABLED {
+            get {
+                return ResourceManager.GetString("LICENSE_DESKTOP_FEATURES_ENABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} Virtual Apps and Desktops Premium features enabled.
+        /// </summary>
+        public static string LICENSE_DESKTOP_PLUS_FEATURES_ENABLED {
+            get {
+                return ResourceManager.GetString("LICENSE_DESKTOP_PLUS_FEATURES_ENABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} Virtual &amp;Apps and Desktops.
         /// </summary>
         public static string LICENSE_EDITION_DESKTOP {
@@ -22293,6 +22338,24 @@ namespace XenAdmin {
         public static string LICENSE_EDITION_STANDARD_PERSOCKET_LEGACY {
             get {
                 return ResourceManager.GetString("LICENSE_EDITION_STANDARD_PERSOCKET_LEGACY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Eligible for support.
+        /// </summary>
+        public static string LICENSE_ELIGIBLE_FOR_SUPPORT {
+            get {
+                return ResourceManager.GetString("LICENSE_ELIGIBLE_FOR_SUPPORT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Premium features enabled.
+        /// </summary>
+        public static string LICENSE_ENTERPRISE_FEATURES_ENABLED {
+            get {
+                return ResourceManager.GetString("LICENSE_ENTERPRISE_FEATURES_ENABLED", resourceCulture);
             }
         }
         
@@ -22441,11 +22504,65 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Active CSS.
+        /// </summary>
+        public static string LICENSE_MANAGER_ACTIVE_CSS {
+            get {
+                return ResourceManager.GetString("LICENSE_MANAGER_ACTIVE_CSS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Active support agreement.
+        /// </summary>
+        public static string LICENSE_MANAGER_ACTIVE_CSS_LONG {
+            get {
+                return ResourceManager.GetString("LICENSE_MANAGER_ACTIVE_CSS_LONG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Buy Licenses....
         /// </summary>
         public static string LICENSE_MANAGER_BUY_LICENSE_LINK_TEXT {
             get {
                 return ResourceManager.GetString("LICENSE_MANAGER_BUY_LICENSE_LINK_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expired CSS.
+        /// </summary>
+        public static string LICENSE_MANAGER_EXPIRED_CSS {
+            get {
+                return ResourceManager.GetString("LICENSE_MANAGER_EXPIRED_CSS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expired support agreement.
+        /// </summary>
+        public static string LICENSE_MANAGER_EXPIRED_CSS_LONG {
+            get {
+                return ResourceManager.GetString("LICENSE_MANAGER_EXPIRED_CSS_LONG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Licensed.
+        /// </summary>
+        public static string LICENSE_MANAGER_LICENSED {
+            get {
+                return ResourceManager.GetString("LICENSE_MANAGER_LICENSED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Purchase Support....
+        /// </summary>
+        public static string LICENSE_MANAGER_PURCHASE_SUPPORT_LINK_TEXT {
+            get {
+                return ResourceManager.GetString("LICENSE_MANAGER_PURCHASE_SUPPORT_LINK_TEXT", resourceCulture);
             }
         }
         
@@ -22486,6 +22603,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Trial edition.
+        /// </summary>
+        public static string LICENSE_MANAGER_TRIAL_EDITION {
+            get {
+                return ResourceManager.GetString("LICENSE_MANAGER_TRIAL_EDITION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trial license.
+        /// </summary>
+        public static string LICENSE_MANAGER_TRIAL_LICENSE {
+            get {
+                return ResourceManager.GetString("LICENSE_MANAGER_TRIAL_LICENSE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Never.
         /// </summary>
         public static string LICENSE_NEVER {
@@ -22518,6 +22653,15 @@ namespace XenAdmin {
         public static string LICENSE_NOT_ELIGIBLE_FOR_SUPPORT {
             get {
                 return ResourceManager.GetString("LICENSE_NOT_ELIGIBLE_FOR_SUPPORT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Premium features enabled.
+        /// </summary>
+        public static string LICENSE_PREMIUM_FEATURES_ENABLED {
+            get {
+                return ResourceManager.GetString("LICENSE_PREMIUM_FEATURES_ENABLED", resourceCulture);
             }
         }
         
@@ -22585,6 +22729,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Standard features only.
+        /// </summary>
+        public static string LICENSE_STANDARD_FEATURES_ENABLED {
+            get {
+                return ResourceManager.GetString("LICENSE_STANDARD_FEATURES_ENABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Status.
         /// </summary>
         public static string LICENSE_STATUS {
@@ -22594,62 +22747,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Eligible for support 
-        ///{0} Virtual Apps and Desktops {0} Cloud features enabled.
+        ///   Looks up a localized string similar to Trial.
         /// </summary>
-        public static string LICENSE_SUPPORT_AND_DESKTOP_CLOUD_FEATURES_ENABLED {
+        public static string LICENSE_TRIAL {
             get {
-                return ResourceManager.GetString("LICENSE_SUPPORT_AND_DESKTOP_CLOUD_FEATURES_ENABLED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Eligible for support 
-        ///{0} Virtual Apps and Desktops features enabled.
-        /// </summary>
-        public static string LICENSE_SUPPORT_AND_DESKTOP_FEATURES_ENABLED {
-            get {
-                return ResourceManager.GetString("LICENSE_SUPPORT_AND_DESKTOP_FEATURES_ENABLED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Eligible for support 
-        ///{0} Virtual Apps and Desktops Premium features enabled.
-        /// </summary>
-        public static string LICENSE_SUPPORT_AND_DESKTOP_PLUS_FEATURES_ENABLED {
-            get {
-                return ResourceManager.GetString("LICENSE_SUPPORT_AND_DESKTOP_PLUS_FEATURES_ENABLED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Eligible for support 
-        ///Premium features enabled.
-        /// </summary>
-        public static string LICENSE_SUPPORT_AND_ENTERPRISE_FEATURES_ENABLED {
-            get {
-                return ResourceManager.GetString("LICENSE_SUPPORT_AND_ENTERPRISE_FEATURES_ENABLED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Eligible for support 
-        ///Premium features enabled.
-        /// </summary>
-        public static string LICENSE_SUPPORT_AND_PREMIUM_FEATURES_ENABLED {
-            get {
-                return ResourceManager.GetString("LICENSE_SUPPORT_AND_PREMIUM_FEATURES_ENABLED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Eligible for support 
-        ///Standard features only.
-        /// </summary>
-        public static string LICENSE_SUPPORT_AND_STANDARD_FEATURES_ENABLED {
-            get {
-                return ResourceManager.GetString("LICENSE_SUPPORT_AND_STANDARD_FEATURES_ENABLED", resourceCulture);
+                return ResourceManager.GetString("LICENSE_TRIAL", resourceCulture);
             }
         }
         
@@ -26344,7 +26446,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The pool has already reached the maximum number of servers allowed by your license.
+        ///   Looks up a localized string similar to The pool has already reached the maximum number of servers allowed by your license. Go to {0} to purchase licenses.
         /// </summary>
         public static string NEWPOOL_MAX_NUMBER_HOST_REACHED {
             get {
@@ -26380,7 +26482,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The pool will exceed the maximum number of servers allowed by your license.
+        ///   Looks up a localized string similar to The pool will exceed the maximum number of servers allowed by your license. Go to {0} to purchase licenses.
         /// </summary>
         public static string NEWPOOL_WILL_EXCEED_POOL_MAX_SIZE {
             get {
@@ -36594,6 +36696,15 @@ namespace XenAdmin {
         public static string TREESEARCHBOX_DROPDOWN_TOOLTIP {
             get {
                 return ResourceManager.GetString("TREESEARCHBOX_DROPDOWN_TOOLTIP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unlicensed servers will not receive any updates, including security updates..
+        /// </summary>
+        public static string TRIAL_EDITION_UPSELLING_MESSAGE {
+            get {
+                return ResourceManager.GetString("TRIAL_EDITION_UPSELLING_MESSAGE", resourceCulture);
             }
         }
         

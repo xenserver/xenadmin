@@ -1241,7 +1241,7 @@ namespace XenAdmin.TabPages
         {
             try
             {
-                Process.Start(InvisibleMessages.UPSELL_SA);
+                Process.Start(InvisibleMessages.LICENSE_BUY_URL);
             }
             catch (Exception)
             {

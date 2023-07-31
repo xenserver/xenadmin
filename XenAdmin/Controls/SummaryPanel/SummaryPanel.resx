@@ -183,101 +183,206 @@
   <data name="&gt;&gt;information.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="tableLayoutPanel2.ColumnCount" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="warningImage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 0</value>
-  </data>
-  <data name="warningImage.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 0, 3, 0</value>
-  </data>
-  <data name="warningImage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>16, 45</value>
-  </data>
-  <data name="warningImage.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>CenterImage</value>
-  </data>
-  <data name="warningImage.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;warningImage.Name" xml:space="preserve">
-    <value>warningImage</value>
-  </data>
-  <data name="&gt;&gt;warningImage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;warningImage.Parent" xml:space="preserve">
-    <value>tableLayoutPanel2</value>
-  </data>
-  <data name="&gt;&gt;warningImage.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="warningLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Left, Right</value>
-  </data>
-  <data name="warningLabel.AutoSize" type="System.Boolean, mscorlib">
+  <data name="supportWarningTableLayoutPanel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="warningLabel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  <data name="supportWarningTableLayoutPanel.ColumnCount" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
-  <data name="warningLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="supportWarningImage.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="warningLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 16</value>
+  <data name="supportWarningImage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
   </data>
-  <data name="warningLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>201, 13</value>
-  </data>
-  <data name="warningLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;warningLabel.Name" xml:space="preserve">
-    <value>warningLabel</value>
-  </data>
-  <data name="&gt;&gt;warningLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;warningLabel.Parent" xml:space="preserve">
-    <value>tableLayoutPanel2</value>
-  </data>
-  <data name="&gt;&gt;warningLabel.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="tableLayoutPanel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="tableLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 55</value>
-  </data>
-  <data name="tableLayoutPanel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="supportWarningImage.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 0, 3, 0</value>
   </data>
-  <data name="tableLayoutPanel2.RowCount" type="System.Int32, mscorlib">
+  <data name="supportWarningImage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 45</value>
+  </data>
+  <data name="supportWarningImage.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>CenterImage</value>
+  </data>
+  <data name="supportWarningImage.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;supportWarningImage.Name" xml:space="preserve">
+    <value>supportWarningImage</value>
+  </data>
+  <data name="&gt;&gt;supportWarningImage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;supportWarningImage.Parent" xml:space="preserve">
+    <value>supportWarningTableLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;supportWarningImage.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="supportWarningLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left, Right</value>
+  </data>
+  <data name="supportWarningLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="supportWarningLabel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="supportWarningLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="supportWarningLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 16</value>
+  </data>
+  <data name="supportWarningLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>201, 13</value>
+  </data>
+  <data name="supportWarningLabel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="&gt;&gt;supportWarningLabel.Name" xml:space="preserve">
+    <value>supportWarningLabel</value>
+  </data>
+  <data name="&gt;&gt;supportWarningLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;supportWarningLabel.Parent" xml:space="preserve">
+    <value>supportWarningTableLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;supportWarningLabel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="supportWarningTableLayoutPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="supportWarningTableLayoutPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 109</value>
+  </data>
+  <data name="supportWarningTableLayoutPanel.RowCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="supportWarningTableLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>229, 45</value>
   </data>
-  <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="supportWarningTableLayoutPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.Name" xml:space="preserve">
-    <value>tableLayoutPanel2</value>
+  <data name="&gt;&gt;supportWarningTableLayoutPanel.Name" xml:space="preserve">
+    <value>supportWarningTableLayoutPanel</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.Type" xml:space="preserve">
+  <data name="&gt;&gt;supportWarningTableLayoutPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;supportWarningTableLayoutPanel.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;supportWarningTableLayoutPanel.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="warningImage" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="warningLabel" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  <data name="supportWarningTableLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="supportWarningImage" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="supportWarningLabel" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="Percent,100,Absolute,45" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="licenseWarningTableLayoutPabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="licenseWarningTableLayoutPabel.ColumnCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="licenseWarningImage.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="licenseWarningImage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="licenseWarningImage.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 0, 3, 0</value>
+  </data>
+  <data name="licenseWarningImage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 45</value>
+  </data>
+  <data name="licenseWarningImage.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>CenterImage</value>
+  </data>
+  <data name="licenseWarningImage.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;licenseWarningImage.Name" xml:space="preserve">
+    <value>licenseWarningImage</value>
+  </data>
+  <data name="&gt;&gt;licenseWarningImage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;licenseWarningImage.Parent" xml:space="preserve">
+    <value>licenseWarningTableLayoutPabel</value>
+  </data>
+  <data name="&gt;&gt;licenseWarningImage.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="licenseWarningLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left, Right</value>
+  </data>
+  <data name="licenseWarningLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="licenseWarningLabel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="licenseWarningLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="licenseWarningLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 16</value>
+  </data>
+  <data name="licenseWarningLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>201, 13</value>
+  </data>
+  <data name="licenseWarningLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;licenseWarningLabel.Name" xml:space="preserve">
+    <value>licenseWarningLabel</value>
+  </data>
+  <data name="&gt;&gt;licenseWarningLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;licenseWarningLabel.Parent" xml:space="preserve">
+    <value>licenseWarningTableLayoutPabel</value>
+  </data>
+  <data name="&gt;&gt;licenseWarningLabel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="licenseWarningTableLayoutPabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="licenseWarningTableLayoutPabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 58</value>
+  </data>
+  <data name="licenseWarningTableLayoutPabel.RowCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="licenseWarningTableLayoutPabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>229, 45</value>
+  </data>
+  <data name="licenseWarningTableLayoutPabel.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;licenseWarningTableLayoutPabel.Name" xml:space="preserve">
+    <value>licenseWarningTableLayoutPabel</value>
+  </data>
+  <data name="&gt;&gt;licenseWarningTableLayoutPabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;licenseWarningTableLayoutPabel.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;licenseWarningTableLayoutPabel.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="licenseWarningTableLayoutPabel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="licenseWarningImage" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="licenseWarningLabel" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="Percent,100,Absolute,45" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="informationLayoutPanel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="informationLayoutPanel.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
@@ -319,7 +424,7 @@
     <value>NoControl</value>
   </data>
   <data name="informationLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 13</value>
+    <value>25, 44</value>
   </data>
   <data name="informationLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>0, 13</value>
@@ -339,14 +444,17 @@
   <data name="&gt;&gt;informationLabel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="informationLayoutPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
   <data name="informationLayoutPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 103</value>
+    <value>3, 160</value>
   </data>
   <data name="informationLayoutPanel.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="informationLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>229, 40</value>
+    <value>229, 102</value>
   </data>
   <data name="informationLayoutPanel.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -361,37 +469,94 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;informationLayoutPanel.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="informationLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="informationImage" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="informationLabel" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
-  <data name="helperLink.AutoSize" type="System.Boolean, mscorlib">
+  <data name="licenseHelperLinkLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="helperLink.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 274</value>
+  <data name="licenseHelperLinkLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="helperLink.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>8, 3, 3, 8</value>
+  <data name="licenseHelperLinkLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
   </data>
-  <data name="helperLink.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="licenseHelperLinkLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="licenseHelperLinkLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>0, 13</value>
   </data>
-  <data name="helperLink.TabIndex" type="System.Int32, mscorlib">
+  <data name="licenseHelperLinkLabel.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;helperLink.Name" xml:space="preserve">
-    <value>helperLink</value>
+  <data name="&gt;&gt;licenseHelperLinkLabel.Name" xml:space="preserve">
+    <value>licenseHelperLinkLabel</value>
   </data>
-  <data name="&gt;&gt;helperLink.Type" xml:space="preserve">
+  <data name="&gt;&gt;licenseHelperLinkLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;helperLink.Parent" xml:space="preserve">
+  <data name="&gt;&gt;licenseHelperLinkLabel.Parent" xml:space="preserve">
+    <value>helperLinksFlowLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;licenseHelperLinkLabel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="supportHelperLinkLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="supportHelperLinkLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="supportHelperLinkLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 3</value>
+  </data>
+  <data name="supportHelperLinkLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="supportHelperLinkLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>0, 13</value>
+  </data>
+  <data name="supportHelperLinkLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;supportHelperLinkLabel.Name" xml:space="preserve">
+    <value>supportHelperLinkLabel</value>
+  </data>
+  <data name="&gt;&gt;supportHelperLinkLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;supportHelperLinkLabel.Parent" xml:space="preserve">
+    <value>helperLinksFlowLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;supportHelperLinkLabel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="helperLinksFlowLayoutPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="helperLinksFlowLayoutPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 268</value>
+  </data>
+  <data name="helperLinksFlowLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>229, 24</value>
+  </data>
+  <data name="helperLinksFlowLayoutPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;helperLinksFlowLayoutPanel.Name" xml:space="preserve">
+    <value>helperLinksFlowLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;helperLinksFlowLayoutPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;helperLinksFlowLayoutPanel.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;helperLink.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="&gt;&gt;helperLinksFlowLayoutPanel.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -400,7 +565,7 @@
     <value>0, 0</value>
   </data>
   <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>235, 295</value>
@@ -421,7 +586,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="titleLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="information" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutPanel2" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="informationLayoutPanel" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="helperLink" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,Percent,100,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="titleLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="information" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="supportWarningTableLayoutPanel" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="licenseWarningTableLayoutPabel" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="informationLayoutPanel" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="helperLinksFlowLayoutPanel" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100,AutoSize,0,Absolute,30" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

@@ -4436,6 +4436,7 @@
     <Content Include="Images\000_Sites_h32bit_16.png" />
     <None Include="Images\000_TCP-IPGroup_h32bit_16.png" />
     <None Include="Images\015_Download_h32bit_16.png" />
+    <None Include="Images\000_Tick_yellow_h32bit_16.png" />
     <Content Include="Images\000_UserAndGroup_h32bit_16.png" />
     <Content Include="Images\000_User_h32bit_32.png" />
     <Content Include="Images\asterisk.png" />

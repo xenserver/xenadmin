@@ -116,13 +116,13 @@ namespace XenAdmin.Dialogs
         {
             if(!dataToSummarise.XenObject.Connection.IsConnected)
             {
-                View.DrawSummaryForHighlightedRow(dataToSummarise, new LicenseManagerSummaryComponent(), LaunchUrl(InvisibleMessages.UPSELL_SA));
+                View.DrawSummaryForHighlightedRow(dataToSummarise, new LicenseManagerSummaryComponent(), LaunchUrl(InvisibleMessages.LICENSE_BUY_URL), LaunchUrl(InvisibleMessages.CSS_URL));
                 SetSummaryInformation(Messages.POOL_OR_HOST_IS_NOT_CONNECTED);
                 return;
             }
 
             SummaryTextComponent component = BuildSummaryComponent(dataToSummarise);
-            View.DrawSummaryForHighlightedRow(dataToSummarise, component, LaunchUrl(InvisibleMessages.UPSELL_SA));
+            View.DrawSummaryForHighlightedRow(dataToSummarise, component, LaunchUrl(InvisibleMessages.LICENSE_BUY_URL), LaunchUrl(InvisibleMessages.CSS_URL));
             if(dataToSummarise.Disabled)
                 SetSummaryInformation(dataToSummarise.DisabledReason);
         }

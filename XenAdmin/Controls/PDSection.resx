@@ -273,6 +273,15 @@
   <data name="ValueColumn.HeaderText" xml:space="preserve">
     <value>Value</value>
   </data>
+  <metadata name="ColumnNotes.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnNotes.HeaderText" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="ColumnNotes.Width" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
   <data name="dataGridViewEx1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -292,7 +301,7 @@
     <value>dataGridViewEx1</value>
   </data>
   <data name="&gt;&gt;dataGridViewEx1.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.DataGridViewEx.DataGridViewEx, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Controls.DataGridViewEx.DataGridViewEx, [XenCenter_No_Space], Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dataGridViewEx1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -328,6 +337,12 @@
     <value>ValueColumn</value>
   </data>
   <data name="&gt;&gt;ValueColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnNotes.Name" xml:space="preserve">
+    <value>ColumnNotes</value>
+  </data>
+  <data name="&gt;&gt;ColumnNotes.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

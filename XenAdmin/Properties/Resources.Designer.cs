@@ -1223,6 +1223,16 @@ namespace XenAdmin.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _000_Tick_yellow_h32bit_16 {
+            get {
+                object obj = ResourceManager.GetObject("_000_Tick_yellow_h32bit_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _000_ToolBar_Pref_Icon_dis {
             get {
                 object obj = ResourceManager.GetObject("_000_ToolBar_Pref_Icon_dis", resourceCulture);

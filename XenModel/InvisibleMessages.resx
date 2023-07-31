@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -123,6 +123,9 @@
   <data name="CLIENT_ID_URL" xml:space="preserve">
     <value>https://support.citrix.com/xencenterclientiddownload</value>
   </data>
+  <data name="CSS_URL" xml:space="preserve">
+    <value>https://www.citrix.com/support/programs/</value>
+  </data>
   <data name="DEPRECATION_URL" xml:space="preserve">
     <value>http://docs.citrix.com/en-us/citrix-hypervisor/whats-new/removed-features.html</value>
   </data>
@@ -138,8 +141,8 @@
   <data name="HOMEPAGE" xml:space="preserve">
     <value>https://www.citrix.com/products/citrix-hypervisor</value>
   </data>
-  <data name="LICENSE_EXPIRY_WEBPAGE" xml:space="preserve">
-    <value>https://store.citrix.com/dr_product/citrix-hypervisor-subscription</value>
+  <data name="LICENSE_BUY_URL" xml:space="preserve">
+    <value>https://xenserver.com/buy</value>
   </data>
   <data name="LICENSE_SERVER_DOWNLOAD_LINK" xml:space="preserve">
     <value>http://www.citrix.com/downloads/licensing/license-server</value>
@@ -170,8 +173,5 @@
 </data>
   <data name="UPSELL_LEARNMOREURL_TRIAL" xml:space="preserve">
     <value>https://www.citrix.com/products/citrix-hypervisor/get-started.html</value>
-  </data>
-  <data name="UPSELL_SA" xml:space="preserve">
-    <value>https://store.citrix.com/dr_product/citrix-hypervisor-subscription</value>
   </data>
 </root>

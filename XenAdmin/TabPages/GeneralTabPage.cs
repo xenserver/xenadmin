@@ -538,9 +538,8 @@ namespace XenAdmin.TabPages
                         }
                     };
 
-                CustomFieldWrapper cfWrapper = new CustomFieldWrapper(xenObject, customField.Definition);
-
-                s.AddEntry(customField.Definition.Name.Ellipsise(30), cfWrapper.ToString(), customField.Definition.Name, editValue);
+                var cfWrapper = new CustomFieldWrapper(xenObject, customField.Definition);
+                s.AddEntry(customField.Definition.Name, cfWrapper.ToString(), editValue);
             }
         }
 
@@ -754,10 +753,10 @@ namespace XenAdmin.TabPages
                         continue;
 
                     if (repairable)
-                        s.AddEntry("  " + Helpers.GetName(host).Ellipsise(30),
+                        s.AddEntry(Helpers.GetName(host).Ellipsise(30),
                             Messages.REPAIR_SR_DIALOG_CONNECTION_MISSING, Color.Red, repairItem);
                     else
-                        s.AddEntry("  " + Helpers.GetName(host).Ellipsise(30),
+                        s.AddEntry(Helpers.GetName(host).Ellipsise(30),
                             Messages.REPAIR_SR_DIALOG_CONNECTION_MISSING, Color.Red);
 
                     continue;
@@ -972,11 +971,22 @@ namespace XenAdmin.TabPages
 
         private void GenerateLicenseBox()
         {
-            Host host = xenObject as Host;
-            if (host == null)
+            if (!(xenObject is Host host))
                 return;
 
             PDSection s = pdSectionLicense;
+
+            if (host.CanShowTrialEditionUpsell())
+            {
+                pdSectionLicense.AddEntryWithNoteLink(Messages.WARNING, Messages.TRIAL_EDITION_UPSELLING_MESSAGE,
+                    Messages.LICENSE_MANAGER_BUY_LICENSE_LINK_TEXT, () => Program.OpenURL(InvisibleMessages.LICENSE_BUY_URL), Color.Red);
+            }
+            
+            if (host.CssLicenseHasExpired() && !host.IsInPreviewRelease())
+            {
+                pdSectionLicense.AddEntryWithNoteLink(Messages.WARNING, Messages.EXPIRED_CSS_UPSELLING_MESSAGE_HOST,
+                    Messages.LICENSE_MANAGER_PURCHASE_SUPPORT_LINK_TEXT, () => Program.OpenURL(InvisibleMessages.CSS_URL), Color.Red);
+            }
 
             if (host.license_params == null)
                 return;
@@ -1008,10 +1018,11 @@ namespace XenAdmin.TabPages
                     var ss = new GeneralTabLicenseStatusStringifier(licenseStatus);
                     s.AddEntry(Messages.LICENSE_STATUS,
                         licenseStatus.Updated ? ss.ExpiryStatus : Messages.GENERAL_LICENSE_QUERYING, editItem);
-                    s.AddEntry(FriendlyName("host.license_params-expiry"),
-                        licenseStatus.Updated ? ss.ExpiryDate : Messages.GENERAL_LICENSE_QUERYING,
-                        ss.ShowExpiryDate,
-                        editItem);
+
+                    if (ss.ShowExpiryDate)
+                        s.AddEntry(FriendlyName("host.license_params-expiry"),
+                            licenseStatus.Updated ? ss.ExpiryDate : Messages.GENERAL_LICENSE_QUERYING,
+                            editItem);
                 }
 
                 info.Remove("expiry");
@@ -2101,7 +2112,7 @@ namespace XenAdmin.TabPages
                         if (expand(s))
                             s.Expand();
                         else
-                            s.Contract();
+                            s.Collapse();
                     }
                     finally
                     {
