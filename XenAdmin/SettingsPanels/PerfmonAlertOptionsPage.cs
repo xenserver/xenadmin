@@ -222,8 +222,8 @@ namespace XenAdmin.SettingsPanels
                 mailDestination = EmailAddressTextBox.Text;
                 mailHub = SmtpServerAddrTextBox.Text + ":" + SmtpServerPortTextBox.Text;
 
-                if (MailLanguageComboBox.Visible && MailLanguageComboBox.SelectedValue != null)
-                    mailLangCode = MailLanguageComboBox.SelectedValue.ToString();
+                if (MailLanguageComboBox.Visible && MailLanguageComboBox.SelectedItem is ToStringWrapper<string> stringWrapper && !string.IsNullOrEmpty(stringWrapper.item))
+                    mailLangCode = stringWrapper.item;
             }
 
             return new PerfmonOptionsDefinitionAction(_XenModelObject.Connection, mailDestination, mailHub, mailLangCode, true);
