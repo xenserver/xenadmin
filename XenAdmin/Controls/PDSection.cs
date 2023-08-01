@@ -78,16 +78,19 @@ namespace XenAdmin.Controls
         public PDSection()
         {
             InitializeComponent();
-            SetDefaultValues();
-            Contract();
+
+            SectionTitle = Messages.PDSECTION_TITLE;
+            IsExpanded = true;
+            Collapse();
             MinimumSize = new Size(0, Height);
+
             dataGridViewEx1.LostFocus += dataGridViewEx1_LostFocus;
             dataGridViewEx1.GotFocus += dataGridViewEx1_GotFocus;
 
             if (!Application.RenderWithVisualStyles)
             {
                 panel1.BackColor = SystemColors.Control;
-                this.BackColor = SystemColors.ControlDark;
+                BackColor = SystemColors.ControlDark;
             }
         }
 
@@ -145,7 +148,7 @@ namespace XenAdmin.Controls
         }
 
         #endregion
-       
+
         protected override void OnGotFocus(EventArgs e)
         {
             base.OnGotFocus(e);
@@ -228,7 +231,7 @@ namespace XenAdmin.Controls
         private void panel1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (IsExpanded)
-                Contract();
+                Collapse();
             else
             {
                 Expand();
@@ -239,7 +242,7 @@ namespace XenAdmin.Controls
         private void chevron_Click(object sender, EventArgs e)
         {
             if (IsExpanded)
-                Contract();
+                Collapse();
             else
             {
                 Expand();
@@ -263,23 +266,14 @@ namespace XenAdmin.Controls
 
         #region Private Methods
 
-        private void SetDefaultValues()
-        {
-            SectionTitle = Messages.PDSECTION_TITLE;
-            IsExpanded = true;
-        }
-
         private void RunCellCommandOrAction(DataGridViewCell cell)
         {
             if (cell == null)
                 return;
 
-            var command = cell.Tag as Command;
-            if (command != null)
+            if (cell.Tag is Command command)
                 command.Run();
-
-            var action = cell.Tag as Action;
-            if (action != null)
+            else if (cell.Tag is Action action)
                 action.Invoke();
         }
 
@@ -289,15 +283,15 @@ namespace XenAdmin.Controls
             {
                 int newHeight = dataGridViewEx1.Rows.GetRowsHeight(DataGridViewElementStates.Visible);
 
-                int valueColWidth = dataGridViewEx1.Width - dataGridViewEx1.Columns[KeyColumn.Index].Width;
-                int preferredValueColWidth =
-                    dataGridViewEx1.Columns[ValueColumn.Index].GetPreferredWidth(
-                        DataGridViewAutoSizeColumnMode.AllCells, true);
+                int actualWidth = dataGridViewEx1.Width - KeyColumn.Width;
 
-                int horizontalScrollBarHeight = preferredValueColWidth - 1 >= valueColWidth
-                                                    ? dataGridViewEx1.HorizontalScrollBarHeight
-                                                    : 0;
-                
+                int preferredWidth = ValueColumn.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true) +
+                                     ColumnNotes.GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
+
+                int horizontalScrollBarHeight = preferredWidth - 2 >= actualWidth
+                    ? dataGridViewEx1.HorizontalScrollBarHeight
+                    : 0;
+
                 // 3px added so we have a border (one at top of control, one between title and grid, one at bottom)
                 Height = panel1.Height + newHeight + horizontalScrollBarHeight + 3;
                 // this correction is needed because the anchor property of the grid drags it to fill the space we want to be a border
@@ -321,13 +315,26 @@ namespace XenAdmin.Controls
             }
         }
 
-        private void AddRow(DataGridViewRow r)
+        private void AddRow(DataGridViewCell keyCell, DataGridViewCell valueCell, DataGridViewCell noteCell, params ToolStripMenuItem[] contextMenuItems)
         {
+            var r = new DataGridViewExRow();
+            r.Cells.AddRange(keyCell, valueCell, noteCell ?? new DataGridViewTextBoxCell());
+            r.Tag = contextMenuItems;
+
             dataGridViewEx1.Rows.Add(r);
+
             if (inLayout)
                 return;
 
             RefreshHeight();
+        }
+
+        private static DataGridViewTextBoxCell CreateKeyCell(string key)
+        {
+            if (!string.IsNullOrEmpty(key))
+                key += Messages.GENERAL_PAGE_KVP_SEPARATOR;
+            var cell = new DataGridViewTextBoxCell { Value = key };
+            return cell;
         }
 
         private void ToggleExpandedState(bool expand)
@@ -346,112 +353,62 @@ namespace XenAdmin.Controls
 
         #endregion
 
-        public void Contract()
+        public void Collapse()
         {
             ToggleExpandedState(false);
         }
 
         public void Expand()
         {
-            ValueColumn.MinimumWidth = 5;
-            HelpersGUI.ResizeGridViewColumnToAllCells(ValueColumn);
             ToggleExpandedState(true);
         }
 
-        private DataGridViewExRow CreateRow(string Key, string Value)
+        public void AddEntry(string key, string value, params ToolStripMenuItem[] contextMenuItems)
         {
-            if (!String.IsNullOrEmpty(Key))
-                Key += Messages.GENERAL_PAGE_KVP_SEPARATOR;
-            DataGridViewExRow r = new DataGridViewExRow();
-            r.CreateCells(dataGridViewEx1);
-            r.Cells[0].Value = Key;
-            r.Cells[1].Value = Value;
-            return r;
+            var valueCell = new DataGridViewTextBoxCell { Value = value };
+            AddRow(CreateKeyCell(key), valueCell, null, contextMenuItems);
         }
 
-
-        public void AddEntry(string Key, string Value, params ToolStripMenuItem[] contextMenuItems)
+        public void AddEntry(string key, string value, Color fontColor, params ToolStripMenuItem[] contextMenuItems)
         {
-            var r = CreateRow(Key, Value);
-            r.Tag = contextMenuItems;
-            AddRow(r);
+            var valueCell = new DataGridViewTextBoxCell { Value = value };
+            AddRow(CreateKeyCell(key), valueCell, null, contextMenuItems);
+            valueCell.Style.ForeColor = fontColor;
         }
 
-        public void AddEntry(string Key, string Value, string toolTipText, params ToolStripMenuItem[] contextMenuItems)
+        public void AddEntry(string key, FolderListItem value, params ToolStripMenuItem[] contextMenuItems)
         {
-            AddEntry(Key, Value, contextMenuItems);
-            if (toolTipText != Key)
-                dataGridViewEx1.Rows[dataGridViewEx1.RowCount - 1].Cells[0].ToolTipText = toolTipText;
+            var valueCell = new FolderCell(value); // CA-33311
+            AddRow(CreateKeyCell(key), valueCell, null, contextMenuItems);
         }
 
-        public void AddEntry(string Key, string Value, Color fontColor)
+        internal void AddEntryLink(string key, string value, Command command, params ToolStripMenuItem[] contextMenuItems)
         {
-            var r = CreateRow(Key, Value);
-            r.Cells[1].Style.ForeColor = fontColor;
-            AddRow(r);
-            dataGridViewEx1.DefaultCellStyle = new DataGridViewCellStyle();
+            var valueCell = new DataGridViewLinkCell { Value = value, Tag = command };
+            AddRow(CreateKeyCell(key), valueCell, null, contextMenuItems);
         }
 
-        public void AddEntry(string Key, string Value, Color fontColor, params ToolStripMenuItem[] contextMenuItems)
+        internal void AddEntryLink(string key, string value, Action action, params ToolStripMenuItem[] contextMenuItems)
         {
-            var r = CreateRow(Key, Value);
-            r.Cells[1].Style.ForeColor = fontColor;
-            r.Tag = contextMenuItems;
-            AddRow(r);
-            dataGridViewEx1.DefaultCellStyle = new DataGridViewCellStyle();
+            var valueCell = new DataGridViewLinkCell { Value = value, Tag = action };
+            AddRow(CreateKeyCell(key), valueCell, null, contextMenuItems);
         }
 
-        public void AddEntry(string Key, FolderListItem Value, params ToolStripMenuItem[] contextMenuItems)
+        internal void AddEntryWithNoteLink(string key, string value, string note, Action action, params ToolStripMenuItem[] contextMenuItems)
         {
-            // Special case for folders: CA-33311
-
-            if (!String.IsNullOrEmpty(Key))
-                Key += Messages.GENERAL_PAGE_KVP_SEPARATOR;
-            DataGridViewExRow r = new DataGridViewExRow();
-            r.Cells.Add(new DataGridViewTextBoxCell());
-            r.Cells[0].Value = Key;
-            r.Cells.Add(new FolderCell(Value));
-            r.Tag = contextMenuItems;
-            AddRow(r);
+            var valueCell = new DataGridViewTextBoxCell { Value = value };
+            var noteCell = new DataGridViewLinkCell { Value = note, Tag = action };
+            AddRow(CreateKeyCell(key), valueCell, noteCell, contextMenuItems);
         }
 
-        public void AddEntry(string Key, string Value, bool visible, params ToolStripMenuItem[] contextMenuItems)
+        internal void AddEntryWithNoteLink(string key, string value, string note, Action action, Color fontColor, params ToolStripMenuItem[] contextMenuItems)
         {
-            var r = CreateRow(Key, Value);
-            r.Tag = contextMenuItems;
-            r.Visible = visible;
-            AddRow(r);
+            var valueCell = new DataGridViewTextBoxCell { Value = value };
+            var noteCell = new DataGridViewLinkCell { Value = note, Tag = action };
+            valueCell.Style.ForeColor = fontColor;
+            valueCell.Style.SelectionForeColor = fontColor;
+            AddRow(CreateKeyCell(key), valueCell, noteCell, contextMenuItems);
         }
-
-
-        internal void AddEntryLink(string Key, string Value, Command command, params ToolStripMenuItem[] contextMenuItems)
-        {
-            if (!String.IsNullOrEmpty(Key))
-                Key += Messages.GENERAL_PAGE_KVP_SEPARATOR;
-            DataGridViewExRow r = new DataGridViewExRow();
-            r.CreateCells(dataGridViewEx1);
-            r.Cells[0].Value = Key;
-            r.Cells[1] = new DataGridViewLinkCell();
-            r.Cells[1].Value = Value;
-            r.Cells[1].Tag = command;
-            r.Tag = contextMenuItems;
-            AddRow(r);
-        }
-
-        internal void AddEntryLink(string Key, string Value, Action action, params ToolStripMenuItem[] contextMenuItems)
-        {
-            if (!String.IsNullOrEmpty(Key))
-                Key += Messages.GENERAL_PAGE_KVP_SEPARATOR;
-            DataGridViewExRow r = new DataGridViewExRow();
-            r.CreateCells(dataGridViewEx1);
-            r.Cells[0].Value = Key;
-            r.Cells[1] = new DataGridViewLinkCell();
-            r.Cells[1].Value = Value;
-            r.Cells[1].Tag = action;
-            r.Tag = contextMenuItems;
-            AddRow(r);
-        }
-
 
         public void UpdateEntryValueWithKey(string Key, string newValue, bool visible)
         {
@@ -471,7 +428,7 @@ namespace XenAdmin.Controls
             }
         }
 
-        internal void fixFirstColumnWidth(int width)
+        internal void FixFirstColumnWidth(int width)
         {
             dataGridViewEx1.Columns[0].Width = width;
         }

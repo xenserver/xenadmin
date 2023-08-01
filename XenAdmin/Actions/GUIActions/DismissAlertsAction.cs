@@ -96,9 +96,12 @@ namespace XenAdmin.Actions
                     if (_alerts.Count > 0)
                         midPoint = 100 * msgAlerts.Count / _alerts.Count;
 
-                    RelatedTask = Message.async_destroy_many(Session, msgRefs);
-                    PollToCompletion(0, midPoint);
-                    Alert.RemoveAlert(a => msgAlerts.Contains(a));
+                    if (msgAlerts.Count > 0)
+                    {
+                        RelatedTask = Message.async_destroy_many(Session, msgRefs);
+                        PollToCompletion(0, midPoint);
+                        Alert.RemoveAlert(a => msgAlerts.Contains(a));
+                    }
 
                     for (var i = 0; i < otherAlerts.Count; i++)
                     {

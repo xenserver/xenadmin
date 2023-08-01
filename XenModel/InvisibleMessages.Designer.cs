@@ -133,11 +133,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://store.citrix.com/dr_product/citrix-hypervisor-subscription.
+        ///   Looks up a localized string similar to https://xenserver.com/buy.
         /// </summary>
-        public static string LICENSE_EXPIRY_WEBPAGE {
+        public static string LICENSE_BUY_URL {
             get {
-                return ResourceManager.GetString("LICENSE_EXPIRY_WEBPAGE", resourceCulture);
+                return ResourceManager.GetString("LICENSE_BUY_URL", resourceCulture);
             }
         }
         
@@ -214,20 +214,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to https://fileservice.citrix.com/direct/v2/download/.
+        /// </summary>
+        public static string UPDATE_URL_PREFIX {
+            get {
+                return ResourceManager.GetString("UPDATE_URL_PREFIX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to https://www.citrix.com/products/citrix-hypervisor/get-started.html.
         /// </summary>
         public static string UPSELL_LEARNMOREURL_TRIAL {
             get {
                 return ResourceManager.GetString("UPSELL_LEARNMOREURL_TRIAL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to https://store.citrix.com/dr_product/citrix-hypervisor-subscription.
-        /// </summary>
-        public static string UPSELL_SA {
-            get {
-                return ResourceManager.GetString("UPSELL_SA", resourceCulture);
             }
         }
     }

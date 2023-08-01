@@ -110,6 +110,8 @@ namespace XenAPI
                     return Connection.Cache.Find_By_Uuid<PVS_proxy>(obj_uuid);
                 case cls.Certificate:
                     return Connection.Cache.Find_By_Uuid<Certificate>(obj_uuid);
+                case cls.VDI:
+                    return Connection.Cache.Find_By_Uuid<VDI>(obj_uuid);
                 default:
                     return null;
             }

@@ -53,7 +53,7 @@ namespace XenAdmin.Dialogs.ServerUpdates
         public ConfigCdnUpdatesPage()
         {
             InitializeComponent();
-            labelNoConnections.Text = string.Format(labelNoConnections.Text, BrandManager.ProductVersionPost82);
+            labelNoConnections.Text = string.Format(labelNoConnections.Text, $"{BrandManager.ProductBrand} {BrandManager.ProductVersionPost82}");
             toolTip1.ToolTipTitle = Messages.INVALID_PARAMETER;
             buttonApply.Enabled = buttonDiscard.Enabled = false;
 

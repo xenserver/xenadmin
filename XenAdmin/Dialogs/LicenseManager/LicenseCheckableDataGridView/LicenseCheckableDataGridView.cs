@@ -29,7 +29,6 @@
  */
 
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using XenAdmin.Dialogs;
@@ -40,22 +39,9 @@ namespace XenAdmin.Controls
     public class LicenseCheckableDataGridView : CheckableDataGridView.CheckableDataGridView, ILicenseCheckableDataGridViewView
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public DataGridViewImageColumn StatusImageColumn
-        {
-            get
-            {
-                Debug.Assert(_statusImageColumn != null);
-                return _statusImageColumn;
-            }
-            set { _statusImageColumn = value; }
-        }
+        public DataGridViewImageColumn StatusImageColumn { get; set; }
 
-        private DataGridViewImageColumn _statusImageColumn;
-
-        private LicenseCheckableDataGridViewController LicenseController
-        {
-            get { return Controller as LicenseCheckableDataGridViewController; }
-        }
+        private LicenseCheckableDataGridViewController LicenseController => Controller as LicenseCheckableDataGridViewController;
 
         public LicenseCheckableDataGridView()
         {
@@ -106,12 +92,14 @@ namespace XenAdmin.Controls
                         Value = new Bitmap(1, 1)
                     };
 
-                    if (status == LicenseDataGridViewRow.Status.Information)
-                        cell.Value = Images.StaticImages._000_Alert2_h32bit_16;
                     if (status == LicenseDataGridViewRow.Status.Warning)
+                        cell.Value = Images.StaticImages._000_Alert2_h32bit_16;
+                    if (status == LicenseDataGridViewRow.Status.Error)
                         cell.Value = Images.StaticImages._000_error_h32bit_16;
                     if (status == LicenseDataGridViewRow.Status.Ok)
                         cell.Value = Images.StaticImages._000_Tick_h32bit_16;
+                    if (status == LicenseDataGridViewRow.Status.Passable)
+                        cell.Value = Images.StaticImages._000_Tick_yellow_h32bit_16;
 
                     if (r.Cells[StatusImageColumn.Index] is DataGridViewImageCell)
                         r.Cells[StatusImageColumn.Index] = cell;

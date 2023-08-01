@@ -47,10 +47,10 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
         public override string Message => string.Format(_upgradingToVersionWithDeprecation
                 ? Messages.POOL_HAS_DEPRECATED_FCOE_WARNING
                 : Messages.POOL_MAY_HAVE_DEPRECATED_FCOE_WARNING,
-            BrandManager.ProductVersionPost82);
+            $"{BrandManager.ProductBrand} {BrandManager.ProductVersionPost82}");
 
         public override string Description => string.Format(Messages.POOL_HAS_DEPRECATED_FCOE_SHORT,
-            _pool, BrandManager.ProductVersionPost82);
+            _pool, $"{BrandManager.ProductBrand} {BrandManager.ProductVersionPost82}");
 
         public PoolHasFCoESrWarning(Check check, Pool pool, bool upgradingToVersionWithDeprecation)
             : base(check)

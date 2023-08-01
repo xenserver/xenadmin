@@ -107,7 +107,9 @@
     <Compile Include="Alerts\Types\FailedLoginAttemptAlert.cs" />
     <Compile Include="Alerts\Types\CertificateAlert.cs" />
     <Compile Include="Alerts\Types\AlarmMessageAlert.cs" />
+    <Compile Include="Alerts\Types\OutOfSyncWithCdnAlert.cs" />
     <Compile Include="Alerts\Types\HotfixEligibilityAlert.cs" />
+    <Compile Include="Alerts\Types\LeafCoalesceAlert.cs" />
     <Compile Include="Alerts\Types\PolicyAlert.cs" />
     <Compile Include="Alerts\Types\XenServerUpdateAlert.cs" />
     <Compile Include="Alerts\Types\DuplicateIqnAlert.cs" />
@@ -545,6 +547,9 @@
     <Compile Include="TabPages\BaseTabPage.Designer.cs">
       <DependentUpon>BaseTabPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="TabPages\CdnUpdates\CdnExpandableRow.cs" />
+    <Compile Include="TabPages\CdnUpdates\CdnExtensions.cs" />
+    <Compile Include="TabPages\CdnUpdates\CdnExpandableTextAndImageCell.cs" />
     <Compile Include="TabPages\DockerDetailsPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -556,6 +561,12 @@
     </Compile>
     <Compile Include="TabPages\HomePage.Designer.cs">
       <DependentUpon>HomePage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TabPages\ManageCdnUpdatesPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TabPages\ManageCdnUpdatesPage.Designer.cs">
+      <DependentUpon>ManageCdnUpdatesPage.cs</DependentUpon>
     </Compile>
     <Compile Include="TabPages\NotificationsBasePage.cs">
       <SubType>UserControl</SubType>
@@ -2288,6 +2299,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\HomePage.zh-CN.resx">
       <DependentUpon>HomePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\ManageCdnUpdatesPage.ja.resx">
+      <DependentUpon>ManageCdnUpdatesPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\ManageCdnUpdatesPage.resx">
+      <DependentUpon>ManageCdnUpdatesPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\ManageCdnUpdatesPage.zh-CN.resx">
+      <DependentUpon>ManageCdnUpdatesPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\PvsPage.ja.resx">
       <DependentUpon>PvsPage.cs</DependentUpon>
@@ -4483,6 +4503,7 @@
     <Content Include="Images\000_Sites_h32bit_16.png" />
     <None Include="Images\000_TCP-IPGroup_h32bit_16.png" />
     <None Include="Images\015_Download_h32bit_16.png" />
+    <None Include="Images\000_Tick_yellow_h32bit_16.png" />
     <Content Include="Images\000_UserAndGroup_h32bit_16.png" />
     <Content Include="Images\000_User_h32bit_32.png" />
     <Content Include="Images\asterisk.png" />
@@ -4548,6 +4569,7 @@
     <None Include="Images\server_up_16.png" />
     <None Include="Images\saved_searches_24.png" />
     <None Include="Images\RunningDC_16.png" />
+    <None Include="Images\rightArrowLong_Blue_16.png" />
     <Content Include="Images\save_to_disk.png" />
     <Content Include="Images\scilinux_16x.png" />
     <None Include="Images\server_32.png" />

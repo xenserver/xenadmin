@@ -48,6 +48,7 @@ namespace XenAdmin.Controls.MainWindowControls
         public NotificationsView()
         {
             Items.Add(new NotificationsSubModeItem(NotificationsSubMode.Alerts));
+            Items.Add(new NotificationsSubModeItem(NotificationsSubMode.UpdatesFromCdn));
             if (!Helpers.CommonCriteriaCertificationRelease)
                 Items.Add(new NotificationsSubModeItem(NotificationsSubMode.Updates));
             Items.Add(new NotificationsSubModeItem(NotificationsSubMode.Events));
@@ -95,6 +96,12 @@ namespace XenAdmin.Controls.MainWindowControls
             }
         }
 
+        protected override void OnHandleCreated(EventArgs e)
+        {
+            base.OnHandleCreated(e);
+            ItemHeight = 40;
+        }
+
         protected override void OnDrawItem(DrawItemEventArgs e)
         {
             base.OnDrawItem(e);
@@ -122,7 +129,11 @@ namespace XenAdmin.Controls.MainWindowControls
                 var textRec = new Rectangle(textLeft, e.Bounds.Top,
                                             e.Bounds.Right - textLeft, itemHeight);
 
-                Drawing.DrawText(e.Graphics, item.Text, font, textRec, e.ForeColor,
+                var txt = item.Text;
+                if (!string.IsNullOrWhiteSpace(item.SubText))
+                    txt = $"{txt}\n{item.SubText}";
+
+                Drawing.DrawText(e.Graphics, txt, font, textRec, e.ForeColor,
                     TextFormatFlags.VerticalCenter | TextFormatFlags.Left | TextFormatFlags.EndEllipsis);
             }
         }
@@ -136,7 +147,7 @@ namespace XenAdmin.Controls.MainWindowControls
         }
     }
 
-    public enum NotificationsSubMode { Alerts, Updates, Events }
+    public enum NotificationsSubMode { Alerts, Updates, UpdatesFromCdn, Events }
 
     public class NotificationsSubModeItem
     {
@@ -157,6 +168,8 @@ namespace XenAdmin.Controls.MainWindowControls
 
         public string Text => GetText(SubMode, UnreadEntries);
 
+        public string SubText => GetSubText(SubMode);
+
         public static Image GetImage(NotificationsSubMode subMode, int unreadEntries)
         {
             switch (subMode)
@@ -164,11 +177,13 @@ namespace XenAdmin.Controls.MainWindowControls
                 case NotificationsSubMode.Alerts:
                     return Images.StaticImages._000_Alert2_h32bit_16;
                 case NotificationsSubMode.Updates:
+                    return Images.StaticImages._015_Download_h32bit_16;
+                case NotificationsSubMode.UpdatesFromCdn:
                     return Images.StaticImages.notif_updates_16;
                 case NotificationsSubMode.Events:
                     return unreadEntries == 0
-                               ? Images.StaticImages.notif_events_16
-                               : Images.StaticImages.notif_events_errors_16;
+                        ? Images.StaticImages.notif_events_16
+                        : Images.StaticImages.notif_events_errors_16;
                 default:
                     return null;
             }
@@ -180,18 +195,32 @@ namespace XenAdmin.Controls.MainWindowControls
             {
                 case NotificationsSubMode.Alerts:
                     return unreadEntries == 0
-                               ? Messages.NOTIFICATIONS_SUBMODE_ALERTS_READ
-                               : string.Format(Messages.NOTIFICATIONS_SUBMODE_ALERTS_UNREAD, unreadEntries);
+                        ? Messages.NOTIFICATIONS_SUBMODE_ALERTS_READ
+                        : string.Format(Messages.NOTIFICATIONS_SUBMODE_ALERTS_UNREAD, unreadEntries);
                 case NotificationsSubMode.Updates:
+                case NotificationsSubMode.UpdatesFromCdn:
                     return unreadEntries == 0
-                               ? Messages.NOTIFICATIONS_SUBMODE_UPDATES_READ
-                               : string.Format(Messages.NOTIFICATIONS_SUBMODE_UPDATES_UNREAD, unreadEntries);
+                        ? Messages.NOTIFICATIONS_SUBMODE_UPDATES_READ
+                        : string.Format(Messages.NOTIFICATIONS_SUBMODE_UPDATES_UNREAD, unreadEntries);
                 case NotificationsSubMode.Events:
                     if (unreadEntries == 0)
                         return Messages.NOTIFICATIONS_SUBMODE_EVENTS_READ;
                     if (unreadEntries == 1)
                         return Messages.NOTIFICATIONS_SUBMODE_EVENTS_UNREAD_ONE;
                     return string.Format(Messages.NOTIFICATIONS_SUBMODE_EVENTS_UNREAD_MANY, unreadEntries);
+                default:
+                    return string.Empty;
+            }
+        }
+
+        public static string GetSubText(NotificationsSubMode subMode)
+        {
+            switch (subMode)
+            {
+                case NotificationsSubMode.Updates:
+                    return string.Format(Messages.CONFIG_LCM_UPDATES_TAB_TITLE, BrandManager.ProductVersion821);
+                case NotificationsSubMode.UpdatesFromCdn:
+                    return string.Format(Messages.CONFIG_CDN_UPDATES_TAB_TITLE, BrandManager.ProductBrand, BrandManager.ProductVersionPost82);
                 default:
                     return string.Empty;
             }

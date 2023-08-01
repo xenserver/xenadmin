@@ -84,7 +84,7 @@ namespace XenAdmin.TabPages
             InitializeComponent();
 
             base.Text = Messages.WORKLOAD_BALANCING;
-            pdSectionConfiguration.fixFirstColumnWidth(200);
+            pdSectionConfiguration.FixFirstColumnWidth(200);
 
             RefreshControls();
         }

@@ -39,18 +39,13 @@ namespace XenAdmin.Alerts
             if (alert1 == null || alert2 == null)
                 return 0;
 
-            int sortResult = 0;
-
             if (IsVersionOrVersionUpdateAlert(alert1) && !IsVersionOrVersionUpdateAlert(alert2))
-                sortResult = 1;
+                return -1;
 
             if (!IsVersionOrVersionUpdateAlert(alert1) && IsVersionOrVersionUpdateAlert(alert2))
-                sortResult = -1;
+                return 1;
 
-            if (sortResult == 0)
-                sortResult = Alert.CompareOnDate(alert1, alert2);
-
-            return -sortResult;
+            return -Alert.CompareOnDate(alert1, alert2); //descending date
         }
 
         private bool IsVersionOrVersionUpdateAlert(Alert alert)

@@ -105,6 +105,8 @@ namespace XenAdmin
         internal readonly DockerDetailsPage DockerDetailsPage = new DockerDetailsPage();
         internal readonly UsbPage UsbPage = new UsbPage();
 
+        private readonly NotificationsBasePage[] _notificationPages;
+
         private ActionBase statusBarAction;
 
         private bool IgnoreTabChanges;
@@ -204,6 +206,8 @@ namespace XenAdmin
 
             #endregion
 
+            _notificationPages = new NotificationsBasePage[] { alertPage, updatesPage, cdnUpdatesPage, eventsPage };
+
             PoolCollectionChangedWithInvoke = Program.ProgramInvokeHandler(CollectionChanged<Pool>);
             MessageCollectionChangedWithInvoke = Program.ProgramInvokeHandler(MessageCollectionChanged);
             HostCollectionChangedWithInvoke = Program.ProgramInvokeHandler(CollectionChanged<Host>);
@@ -250,7 +254,9 @@ namespace XenAdmin
 
             toolStripSeparator7.Visible = xenSourceOnTheWebToolStripMenuItem.Visible = xenCenterPluginsOnlineToolStripMenuItem.Visible = !HiddenFeatures.ToolStripMenuItemHidden;
 
-            statusLabelAlerts.Visible = statusLabelUpdates.Visible = statusLabelErrors.Visible = false;
+            statusButtonAlerts.Visible = statusButtonUpdates.Visible = statusButtonCdnUpdates.Visible = statusButtonProgress.Visible = statusButtonErrors.Visible = false;
+            statusButtonUpdates.ToolTipText = string.Format(statusButtonUpdates.ToolTipText, BrandManager.ProductVersion821);
+            statusButtonCdnUpdates.ToolTipText = string.Format(statusButtonCdnUpdates.ToolTipText, BrandManager.ProductBrand, BrandManager.ProductVersionPost82);
         }
 
         private void RegisterEvents()
@@ -379,11 +385,14 @@ namespace XenAdmin
         {
             base.OnShown(e);
             TheTabControl.Visible = true;
-            alertPage.Visible = updatesPage.Visible = eventsPage.Visible = false;
+
+            foreach (var page in _notificationPages)
+            {
+                page.Visible = false;
+                page.FiltersChanged += NotificationsPage_FiltersChanged;
+            }
+
             SetFiltersLabel();
-            alertPage.FiltersChanged += NotificationsPage_FiltersChanged;
-            updatesPage.FiltersChanged += NotificationsPage_FiltersChanged;
-            eventsPage.FiltersChanged += NotificationsPage_FiltersChanged;
             navigationPane.FocusTreeView();
         }
 
@@ -467,7 +476,7 @@ namespace XenAdmin
                     else
                         return;
 
-                    UpdateErrorStatusLabel();
+                    UpdateErrorStatusButton();
                     break;
             }
         }
@@ -491,7 +500,7 @@ namespace XenAdmin
             Program.Invoke(this, () =>
             {
                 UpdateStatusProgressBar(action);
-                UpdateErrorStatusLabel();
+                UpdateErrorStatusButton();
             });
         }
 
@@ -529,29 +538,18 @@ namespace XenAdmin
             }
         }
 
-        private void UpdateErrorStatusLabel()
+        private void UpdateErrorStatusButton()
         {
+            int progressCount = ConnectionsManager.History.Count(a => !a.IsCompleted);
+            statusButtonProgress.Text = progressCount.ToString();
+            statusButtonProgress.Visible = progressCount > 0;
+
             int errorCount = ConnectionsManager.History.Count(a =>
                 a.IsCompleted && !a.Succeeded && !(a is CancellingAction ca && ca.Cancelled));
 
             navigationPane.UpdateNotificationsButton(NotificationsSubMode.Events, errorCount);
-
-            var errorText = errorCount == 1
-                ? Messages.NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ERROR
-                : string.Format(Messages.NOTIFICATIONS_SUBMODE_EVENTS_STATUS_ERRORS, errorCount);
-
-            int progressCount = ConnectionsManager.History.Count(a => !a.IsCompleted);
-            var progressText = string.Format(Messages.NOTIFICATIONS_SUBMODE_EVENTS_STATUS_IN_PROGRESS, progressCount);
-
-            if (errorCount > 0 && progressCount > 0)
-                statusLabelErrors.Text = string.Format(Messages.NOTIFICATIONS_SUBMODE_EVENTS_STATUS,
-                    string.Format(Messages.STRING_COMMA_SPACE_STRING, errorText, progressText));
-            else if (errorCount > 0)
-                statusLabelErrors.Text = string.Format(Messages.NOTIFICATIONS_SUBMODE_EVENTS_STATUS, errorText);
-            else if (progressCount > 0)
-                statusLabelErrors.Text = string.Format(Messages.NOTIFICATIONS_SUBMODE_EVENTS_STATUS, progressText);
-
-            statusLabelErrors.Visible = errorCount > 0 || progressCount > 0;
+            statusButtonErrors.Text = errorCount.ToString();
+            statusButtonErrors.Visible = errorCount > 0;
 
             if (eventsPage.Visible)
             {
@@ -1083,6 +1081,9 @@ namespace XenAdmin
 
             if (Helpers.CloudOrGreater(connection))
             {
+                if (YumRepoNotConfiguredAlert.TryCreate(connection, out var alert) || OutOfSyncWithCdnAlert.TryCreate(connection, out alert))
+                    Alert.AddAlert(alert);
+
                 Updates.CheckForCdnUpdates(coordinator.Connection);
             }
             else
@@ -2550,14 +2551,11 @@ namespace XenAdmin
 
         private string TabHelpID()
         {
-            if (alertPage.Visible)
-                return alertPage.HelpID;
-
-            if (updatesPage.Visible)
-                return updatesPage.HelpID;
-
-            if (eventsPage.Visible)
-                return eventsPage.HelpID;
+            foreach (var page in _notificationPages)
+            {
+                if (page.Visible)
+                    return alertPage.HelpID;
+            }
 
             if (TheTabControl.SelectedTab.Controls.Count > 0 && TheTabControl.SelectedTab.Controls[0] is IControlWithHelp ctrl)
                 return ctrl.HelpID + getSelectedXenModelObjectType();
@@ -2639,11 +2637,11 @@ namespace XenAdmin
 
         private void SetFiltersLabel()
         {
-            labelFiltersOnOff.Visible = alertPage.Visible || updatesPage.Visible || eventsPage.Visible;
-            bool filterIsOn = alertPage.Visible && alertPage.FilterIsOn ||
-                              updatesPage.Visible && updatesPage.FilterIsOn ||
-                              eventsPage.Visible && eventsPage.FilterIsOn;
-            labelFiltersOnOff.Text = filterIsOn ? Messages.FILTERS_ON : Messages.FILTERS_OFF;
+            labelFiltersOnOff.Visible = _notificationPages.Any(p => p.Visible);
+
+            labelFiltersOnOff.Text = _notificationPages.Any(p => p.Visible && p.FilterIsOn)
+                ? Messages.FILTERS_ON
+                : Messages.FILTERS_OFF;
         }
 
         private void eventsPage_GoToXenObjectRequested(IXenObject obj)
@@ -2654,6 +2652,22 @@ namespace XenAdmin
 
         private void Cdn_UpdateInfoChanged(IXenConnection obj)
         {
+            Program.Invoke(this, () =>
+            {
+                int cdnUpdatesCount = Updates.CdnUpdateInfoPerConnection.Values.SelectMany(info => info.Updates).Distinct().Count();
+
+                navigationPane.UpdateNotificationsButton(NotificationsSubMode.UpdatesFromCdn, cdnUpdatesCount);
+
+                statusButtonCdnUpdates.Text = cdnUpdatesCount.ToString();
+                statusButtonCdnUpdates.Visible = cdnUpdatesCount > 0;
+
+                if (cdnUpdatesPage.Visible)
+                {
+                    TitleLabel.Text = NotificationsSubModeItem.GetText(NotificationsSubMode.UpdatesFromCdn, cdnUpdatesCount);
+                    TitleIcon.Image = NotificationsSubModeItem.GetImage(NotificationsSubMode.UpdatesFromCdn, cdnUpdatesCount);
+                }
+            });
+
             RequestRefreshTreeView();
         }
 
@@ -2664,8 +2678,8 @@ namespace XenAdmin
                     int updatesCount = Updates.UpdateAlerts.Count;
                     navigationPane.UpdateNotificationsButton(NotificationsSubMode.Updates, updatesCount);
 
-                    statusLabelUpdates.Text = string.Format(Messages.NOTIFICATIONS_SUBMODE_UPDATES_STATUS, updatesCount);
-                    statusLabelUpdates.Visible = updatesCount > 0;
+                    statusButtonUpdates.Text = updatesCount.ToString();
+                    statusButtonUpdates.Visible = updatesCount > 0;
 
                     SetClientUpdateAlert();
 
@@ -2965,29 +2979,12 @@ namespace XenAdmin
 
         private void navigationPane_NotificationsSubModeChanged(NotificationsSubModeItem submodeItem)
         {
-            switch (submodeItem.SubMode)
+            foreach (var page in _notificationPages)
             {
-                case NotificationsSubMode.Alerts:
-                    if (updatesPage.Visible)
-                        updatesPage.HidePage();
-                    if (eventsPage.Visible)
-                        eventsPage.HidePage();
-                    alertPage.ShowPage();
-                    break;
-                case NotificationsSubMode.Updates:
-                    if (alertPage.Visible)
-                        alertPage.HidePage();
-                    if (eventsPage.Visible)
-                        eventsPage.HidePage();
-                    updatesPage.ShowPage();
-                break;
-                case NotificationsSubMode.Events:
-                    if (alertPage.Visible)
-                        alertPage.HidePage();
-                    if (updatesPage.Visible)
-                        updatesPage.HidePage();
-                    eventsPage.ShowPage();
-                break;
+                if (page.NotificationsSubMode == submodeItem.SubMode)
+                    page.ShowPage();
+                else if (page.Visible)
+                    page.HidePage();
             }
 
             SetFiltersLabel();
@@ -3010,12 +3007,12 @@ namespace XenAdmin
             {
                 bool tabControlWasVisible = TheTabControl.Visible;
                 TheTabControl.Visible = true;
-                if (alertPage.Visible)
-                    alertPage.HidePage();
-                if (updatesPage.Visible)
-                    updatesPage.HidePage();
-                if (eventsPage.Visible)
-                    eventsPage.HidePage();
+
+                foreach (var page in _notificationPages)
+                {
+                    if (page.Visible)
+                        page.HidePage();
+                }
 
                 // force an update of the selected tab when switching back from Notification view, 
                 // as some tabs ignore the update events when not visible (e.g. Snapshots, HA)
@@ -3068,8 +3065,8 @@ namespace XenAdmin
                 var count = Alert.NonDismissingAlertCount;
                 navigationPane.UpdateNotificationsButton(NotificationsSubMode.Alerts, count);
 
-                statusLabelAlerts.Text = string.Format(Messages.NOTIFICATIONS_SUBMODE_ALERTS_STATUS, count);
-                statusLabelAlerts.Visible = count > 0;
+                statusButtonAlerts.Text = count.ToString();
+                statusButtonAlerts.Visible = count > 0;
 
                 if (alertPage.Visible)
                 {
@@ -3342,17 +3339,27 @@ namespace XenAdmin
             SetTitleLabelMaxWidth();
         }
 
-        private void statusLabelAlerts_Click(object sender, EventArgs e)
+        private void statusButtonAlerts_Click(object sender, EventArgs e)
         {
             navigationPane.SwitchToNotificationsView(NotificationsSubMode.Alerts);
         }
 
-        private void statusLabelUpdates_Click(object sender, EventArgs e)
+        private void statusButtonUpdates_Click(object sender, EventArgs e)
         {
             navigationPane.SwitchToNotificationsView(NotificationsSubMode.Updates);
         }
 
-        private void statusLabelErrors_Click(object sender, EventArgs e)
+        private void statusButtonCdnUpdates_Click(object sender, EventArgs e)
+        {
+            navigationPane.SwitchToNotificationsView(NotificationsSubMode.UpdatesFromCdn);
+        }
+
+        private void statusButtonErrors_Click(object sender, EventArgs e)
+        { 
+            navigationPane.SwitchToNotificationsView(NotificationsSubMode.Events);
+        }
+
+        private void statusButtonProgress_ButtonClick(object sender, EventArgs e)
         {
             navigationPane.SwitchToNotificationsView(NotificationsSubMode.Events);
         }

@@ -36,15 +36,21 @@ namespace XenAdmin.Controls.SummaryPanel
     public interface ISummaryPanelView
     {
         string DrawTitle { set; }
-        string DrawWarningMessage { set; }
-        Bitmap DrawWarningIcon { set; }
-        string DrawHelperUrl { set; }
-        bool WarningTextVisiblity { set; }
-        bool WarningIconVisiblity { set; }
+        string DrawLicenseWarningMessage { set; }
+        string DrawSupportWarningMessage { set; }
+        Bitmap DrawLicenseWarningIcon { set; }
+        Bitmap DrawSupportWarningIcon { set; }
+        string DrawLicenseHelperUrlText { set; }
+        string DrawSupportHelperUrlText { set; }
+        bool LicenseWarningTextVisibility { set; }
+        bool LicenseWarningIconVisibility { set; }
+        bool SupportWarningTextVisibility { set; }
+        bool SupportWarningIconVisibility { set; }
         string DrawSummaryText { set; }
         string DrawSummaryLink { set; }
         LinkArea DrawSummaryLinkArea { set; }
-        bool DrawHelperUrlVisible { set; }
+        bool DrawLicenseUrlVisible { set; }
+        bool DrawSupportUrlVisible { set; }
         bool DrawInformationVisible { set; }
         string DrawInformationText { set; }
         Bitmap DrawInformationIcon { set; }

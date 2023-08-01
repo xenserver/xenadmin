@@ -136,6 +136,9 @@ namespace XenAPI
             HA_STATEFILE_APPROACHING_TIMEOUT,
             HA_HEARTBEAT_APPROACHING_TIMEOUT,
             HA_STATEFILE_LOST,
+            LEAF_COALESCE_START_MESSAGE,
+            LEAF_COALESCE_COMPLETED,
+            LEAF_COALESCE_FAILED,
             unknown
         }
 
@@ -349,6 +352,12 @@ namespace XenAPI
                         return MessageType.HA_HEARTBEAT_APPROACHING_TIMEOUT;
                     case "HA_STATEFILE_LOST":
                         return MessageType.HA_STATEFILE_LOST;
+                    case "LEAF_COALESCE_START_MESSAGE":
+                        return MessageType.LEAF_COALESCE_START_MESSAGE;
+                    case "LEAF_COALESCE_COMPLETED":
+                        return MessageType.LEAF_COALESCE_COMPLETED;
+                    case "LEAF_COALESCE_FAILED":
+                        return MessageType.LEAF_COALESCE_FAILED;
                     default:
                         return MessageType.unknown;
                 }

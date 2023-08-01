@@ -113,6 +113,16 @@ namespace XenAdmin.Core
 
         [JsonProperty("livepatches")]
         public CdnLivePatch[] LivePatches { get; set; }
+
+        public override bool Equals(object other)
+        {
+            return other is CdnUpdate update && Id == update.Id;
+        }
+
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode();
+        }
     }
 
     [Serializable]
@@ -143,7 +153,8 @@ namespace XenAdmin.Core
         Bugfix,
         Improvement,
         NewFeature,
-        PreviewFeature
+        PreviewFeature,
+        Foundational
     }
 
     [Serializable]

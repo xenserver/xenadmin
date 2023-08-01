@@ -125,7 +125,7 @@ namespace XenAdmin.Dialogs
                     break;
                 case InvalidReasons.MAX_POOL_SIZE_EXCEEDED:
                     buttonCreate.Enabled = false;
-                    toolTipContainerCreate.SetToolTip(Messages.NEWPOOL_WILL_EXCEED_POOL_MAX_SIZE);
+                    toolTipContainerCreate.SetToolTip(string.Format(Messages.NEWPOOL_WILL_EXCEED_POOL_MAX_SIZE, InvisibleMessages.LICENSE_BUY_URL));
                     break;
             }
         }

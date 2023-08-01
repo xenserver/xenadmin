@@ -29,29 +29,62 @@
  */
 
 using System;
-using System.Windows.Forms;
 using System.Drawing;
+using System.Windows.Forms;
 
-namespace XenAdmin.Controls
+namespace XenAdmin.TabPages.CdnUpdates
 {
-    public class DataGridViewTextAndImageCell : DataGridViewTextBoxCell
+    internal class CdnExpandableTextAndImageCell : DataGridViewTextBoxCell
     {
+        private const int IMAGE_WIDTH = 22;
+
         public Image Image { get; set; }
+
+        public bool IsPointInExpander(Point p)
+        {
+            if (OwningRow is CdnExpandableRow row && row.ChildRows.Count > 0)
+            {
+                var indent = row.Level * IMAGE_WIDTH;
+                var rect = new Rectangle(ContentBounds.X + indent, ContentBounds.Y, IMAGE_WIDTH, ContentBounds.Height);
+                return rect.Contains(p);
+            }
+
+            return false;
+        }
 
         protected override void Paint(Graphics graphics, Rectangle clipBounds, Rectangle cellBounds, int rowIndex, DataGridViewElementStates cellState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
         {
             var indent = 0;
 
-            if (Image != null)
+            var color = (cellState & DataGridViewElementStates.Selected) != 0
+                ? DataGridView.DefaultCellStyle.SelectionBackColor
+                : DataGridView.DefaultCellStyle.BackColor;
+
+            if (OwningRow is CdnExpandableRow row)
             {
-                var color = (cellState & DataGridViewElementStates.Selected) != 0
-                    ? DataGridView.DefaultCellStyle.SelectionBackColor
-                    : DataGridView.DefaultCellStyle.BackColor;
+                indent = row.Level * IMAGE_WIDTH;
 
                 using (var brush = new SolidBrush(color))
-                    graphics.FillRectangle(brush, cellBounds.X, cellBounds.Y, Image.Width, cellBounds.Height);
+                    graphics.FillRectangle(brush, cellBounds.X, cellBounds.Y, indent + IMAGE_WIDTH, cellBounds.Height);
 
-                graphics.DrawImage(Image, cellBounds.X, cellBounds.Y + 2, Image.Width, Math.Min(Image.Height, cellBounds.Height));
+                if (row.ChildRows.Count > 0)
+                {
+                    //the dimensions of the expander are 9x9, but we want it in the middle of a 18x16 square
+
+                    var expander = row.IsExpanded ? Images.StaticImages.tree_minus : Images.StaticImages.tree_plus;
+                    graphics.DrawImage(expander, cellBounds.X + indent + 5, cellBounds.Y + 5, 9, 9);
+                }
+
+                indent += IMAGE_WIDTH;
+            }
+
+            if (Image != null)
+            {
+                using (var brush = new SolidBrush(color))
+                    graphics.FillRectangle(brush, cellBounds.X + indent, cellBounds.Y, IMAGE_WIDTH, cellBounds.Height);
+
+                graphics.DrawImage(Image, cellBounds.X + indent, cellBounds.Y + 2,
+                    Math.Min(Image.Width, IMAGE_WIDTH), Math.Min(Image.Height, cellBounds.Height));
 
                 indent += Image.Width;
             }
