@@ -78,12 +78,13 @@
             this.ColumnRequiredUpdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnInstalledUpdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewUpdates = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
-            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.ColumnExpand = new System.Windows.Forms.DataGridViewImageColumn();
             this.ColumnMessage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnWebPage = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.linkLabelConfigure = new System.Windows.Forms.LinkLabel();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.informationLabelIcon)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
@@ -427,13 +428,6 @@
             this.dataGridViewUpdates.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.dataGridViewUpdates_SortCompare);
             this.dataGridViewUpdates.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridViewUpdates_KeyDown);
             // 
-            // tableLayoutPanel6
-            // 
-            resources.ApplyResources(this.tableLayoutPanel6, "tableLayoutPanel6");
-            this.tableLayoutPanel6.Controls.Add(this.pictureBox1, 0, 0);
-            this.tableLayoutPanel6.Controls.Add(this.AutoCheckForUpdatesDisabledLabel, 1, 0);
-            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
-            // 
             // ColumnExpand
             // 
             this.ColumnExpand.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
@@ -483,6 +477,21 @@
             this.ColumnWebPage.ReadOnly = true;
             this.ColumnWebPage.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.ColumnWebPage.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // tableLayoutPanel6
+            // 
+            resources.ApplyResources(this.tableLayoutPanel6, "tableLayoutPanel6");
+            this.tableLayoutPanel6.Controls.Add(this.pictureBox1, 0, 0);
+            this.tableLayoutPanel6.Controls.Add(this.AutoCheckForUpdatesDisabledLabel, 1, 0);
+            this.tableLayoutPanel6.Controls.Add(this.linkLabelConfigure, 2, 0);
+            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
+            // 
+            // linkLabelConfigure
+            // 
+            resources.ApplyResources(this.linkLabelConfigure, "linkLabelConfigure");
+            this.linkLabelConfigure.Name = "linkLabelConfigure";
+            this.linkLabelConfigure.TabStop = true;
+            this.linkLabelConfigure.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelConfigure_LinkClicked);
             // 
             // ManageUpdatesPage
             // 
@@ -563,5 +572,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnLocation;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnWebPage;
+        private System.Windows.Forms.LinkLabel linkLabelConfigure;
     }
 }

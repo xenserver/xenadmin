@@ -214,7 +214,7 @@
     <value>126, 22</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -514,13 +514,13 @@
     <value>25, 3</value>
   </data>
   <data name="AutoCheckForUpdatesDisabledLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>413, 15</value>
+    <value>434, 15</value>
   </data>
   <data name="AutoCheckForUpdatesDisabledLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="AutoCheckForUpdatesDisabledLabel.Text" xml:space="preserve">
-    <value>Automatic checking for updates is disabled for some types of {0} updates.</value>
+    <value>Automatic checking for updates is disabled for some types of server updates.</value>
   </data>
   <data name="&gt;&gt;AutoCheckForUpdatesDisabledLabel.Name" xml:space="preserve">
     <value>AutoCheckForUpdatesDisabledLabel</value>
@@ -949,6 +949,36 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="tableLayoutPanel6.ColumnCount" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="linkLabelConfigure.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="linkLabelConfigure.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="linkLabelConfigure.Location" type="System.Drawing.Point, System.Drawing">
+    <value>465, 3</value>
+  </data>
+  <data name="linkLabelConfigure.Size" type="System.Drawing.Size, System.Drawing">
+    <value>69, 15</value>
+  </data>
+  <data name="linkLabelConfigure.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="linkLabelConfigure.Text" xml:space="preserve">
+    <value>Configure...</value>
+  </data>
+  <data name="&gt;&gt;linkLabelConfigure.Name" xml:space="preserve">
+    <value>linkLabelConfigure</value>
+  </data>
+  <data name="&gt;&gt;linkLabelConfigure.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;linkLabelConfigure.Parent" xml:space="preserve">
+    <value>tableLayoutPanel6</value>
+  </data>
+  <data name="&gt;&gt;linkLabelConfigure.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="tableLayoutPanel6.Location" type="System.Drawing.Point, System.Drawing">
@@ -961,10 +991,10 @@
     <value>1</value>
   </data>
   <data name="tableLayoutPanel6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>441, 22</value>
+    <value>537, 22</value>
   </data>
   <data name="tableLayoutPanel6.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel6.Name" xml:space="preserve">
     <value>tableLayoutPanel6</value>
@@ -979,7 +1009,7 @@
     <value>2</value>
   </data>
   <data name="tableLayoutPanel6.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="pictureBox1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="AutoCheckForUpdatesDisabledLabel" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="pictureBox1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="AutoCheckForUpdatesDisabledLabel" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="linkLabelConfigure" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="tableLayoutPanel5.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 47</value>
