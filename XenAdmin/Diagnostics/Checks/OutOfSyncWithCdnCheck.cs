@@ -39,6 +39,8 @@ namespace XenAdmin.Diagnostics.Checks
 {
     public class OutOfSyncWithCdnCheck : PoolCheck
     {
+        private const int DAYS_SINCE_LAST_SYNC = 7;
+
         public OutOfSyncWithCdnCheck(Pool pool)
             : base (pool)
         {
@@ -53,8 +55,8 @@ namespace XenAdmin.Diagnostics.Checks
         {
             if (Helpers.XapiEqualOrGreater_23_18_0(Pool.Connection))
             {
-                if (DateTime.UtcNow - Pool.last_update_sync >= TimeSpan.FromDays(7))
-                    return new CdnOutOfSyncProblem(this, Pool);
+                if (DateTime.UtcNow - Pool.last_update_sync >= TimeSpan.FromDays(DAYS_SINCE_LAST_SYNC))
+                    return new CdnOutOfSyncProblem(this, Pool, DAYS_SINCE_LAST_SYNC);
             }
 
             return null;
