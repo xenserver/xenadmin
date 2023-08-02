@@ -108,7 +108,7 @@ namespace XenAPI
             // Current Role(s)
             failure.ErrorDescription[1] = Session.FriendlyRoleDescription();
             // Authorized roles
-            failure.ErrorDescription[2] = Role.FriendlyCSVRoleList(authRoles);
+            failure.ErrorDescription[2] = Role.FriendlyCsvRoleList(authRoles);
             failure.ParseExceptionMessage();
         }
     }

@@ -110,8 +110,8 @@ namespace XenAdmin.Commands
                 else if (!Role.CanPerform(HA_PERMISSION_CHECKS, pool.Connection, out _))
                 {
                     var msg = string.Format(Messages.RBAC_HA_CONFIGURE_WARNING,
-                        Role.FriendlyCSVRoleList(Role.ValidRoleList(HA_PERMISSION_CHECKS, pool.Connection)),
-                        Role.FriendlyCSVRoleList(pool.Connection.Session.Roles));
+                        Role.FriendlyCsvRoleList(Role.ValidRoleList(HA_PERMISSION_CHECKS, pool.Connection)),
+                        Role.FriendlyCsvRoleList(pool.Connection.Session.Roles));
 
                     using (var dlg = new ErrorDialog(msg))
                         dlg.ShowDialog(Parent);

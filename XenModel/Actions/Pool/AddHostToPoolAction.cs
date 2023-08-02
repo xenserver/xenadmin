@@ -104,7 +104,7 @@ namespace XenAdmin.Actions
                     var output = string.Join(", ", sessions.Select(s => string.Format(Messages.ROLE_ON_CONNECTION,
                         s.FriendlyRoleDescription(), Helpers.GetName(s.Connection).Ellipsise(50))));
 
-                    throw new Failure(Failure.RBAC_PERMISSION_DENIED_FRIENDLY, output, Role.FriendlyCSVRoleList(authRoles));
+                    throw new Failure(Failure.RBAC_PERMISSION_DENIED_FRIENDLY, output, Role.FriendlyCsvRoleList(authRoles));
                 }
 
                 throw;

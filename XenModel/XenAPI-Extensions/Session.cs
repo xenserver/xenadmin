@@ -149,7 +149,7 @@ namespace XenAPI
             if (IsLocalSuperuser || XenAdmin.Core.Helpers.GetCoordinator(Connection).external_auth_type != Auth.AUTH_TYPE_AD)
                 return Messages.AD_LOCAL_ROOT_ACCOUNT;
 
-            return Role.FriendlyCSVRoleList(Roles);
+            return Role.FriendlyCsvRoleList(Roles);
         }
 
         /// <summary>
