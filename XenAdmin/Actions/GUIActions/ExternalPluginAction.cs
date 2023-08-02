@@ -194,8 +194,8 @@ namespace XenAdmin.Actions
             List<Role> rolesAbleToCompleteAction;
             bool ableToCompleteAction = Role.CanPerform(methodsToCheck, xenConnection, out rolesAbleToCompleteAction);
             
-            log.DebugFormat("Roles able to complete action: {0}", Role.FriendlyCSVRoleList(rolesAbleToCompleteAction));
-            log.DebugFormat("Subject {0} has roles: {1}", xenConnection.Session.UserLogName(), Role.FriendlyCSVRoleList(xenConnection.Session.Roles));
+            log.DebugFormat("Roles able to complete action: {0}", Role.FriendlyCsvRoleList(rolesAbleToCompleteAction));
+            log.DebugFormat("Subject {0} has roles: {1}", xenConnection.Session.UserLogName(), Role.FriendlyCsvRoleList(xenConnection.Session.Roles));
 
             if (ableToCompleteAction)
             {
@@ -206,7 +206,7 @@ namespace XenAdmin.Actions
             // Can't run on this connection, bail out
             string desc = string.Format(FriendlyErrorNames.RBAC_PERMISSION_DENIED_FRIENDLY_CONNECTION,
                 xenConnection.Session.FriendlyRoleDescription(),
-                Role.FriendlyCSVRoleList(rolesAbleToCompleteAction),
+                Role.FriendlyCsvRoleList(rolesAbleToCompleteAction),
                 xenConnection.Name);
             throw new Exception(desc);
         }

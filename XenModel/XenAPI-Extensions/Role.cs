@@ -104,7 +104,7 @@ namespace XenAPI
         /// <summary>
         /// Takes a list of role objects and returns as a comma separated friendly string
         /// </summary>
-        public static string FriendlyCSVRoleList(List<Role> roles)
+        public static string FriendlyCsvRoleList(List<Role> roles)
         {
             if (roles == null)
                 return "";

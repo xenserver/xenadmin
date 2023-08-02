@@ -63,9 +63,9 @@ namespace XenAdmin.Dialogs
             InitializeComponent();
             UserDetails ud = session.CurrentUserDetails;
             labelCurrentUserValue.Text = ud?.UserDisplayName ?? ud?.UserName ?? Messages.UNKNOWN_AD_USER;
-            labelCurrentRoleValue.Text = Role.FriendlyCSVRoleList(session.Roles);
+            labelCurrentRoleValue.Text = Role.FriendlyCsvRoleList(session.Roles);
             authorizedRoles.Sort((r1, r2) => r2.CompareTo(r1));
-            labelRequiredRoleValue.Text = Role.FriendlyCSVRoleList(authorizedRoles);
+            labelRequiredRoleValue.Text = Role.FriendlyCsvRoleList(authorizedRoles);
             labelServerValue.Text = Helpers.GetName(connection);
             labelServer.Text = Helpers.IsPool(connection) ? Messages.POOL_COLON : Messages.SERVER_COLON;
 
