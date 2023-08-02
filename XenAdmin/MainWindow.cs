@@ -116,6 +116,7 @@ namespace XenAdmin
         /// Without this Resize_End is triggered even when window is moved around and not resized
         /// </summary>
         private bool mainWindowResized;
+        FormWindowState lastState = FormWindowState.Normal;
 
         private readonly Dictionary<IXenConnection, IList<Form>> activePoolWizards = new Dictionary<IXenConnection, IList<Form>>();
 
@@ -140,6 +141,14 @@ namespace XenAdmin
         static extern uint RegisterApplicationRestart(string pszCommandline, uint dwFlags);
 
         public event Action CloseSplashRequested;
+
+        private readonly CollectionChangeEventHandler PoolCollectionChangedWithInvoke;
+        private readonly CollectionChangeEventHandler MessageCollectionChangedWithInvoke;
+        private readonly CollectionChangeEventHandler HostCollectionChangedWithInvoke;
+        private readonly CollectionChangeEventHandler VMCollectionChangedWithInvoke;
+        private readonly CollectionChangeEventHandler SRCollectionChangedWithInvoke;
+        private readonly CollectionChangeEventHandler FolderCollectionChangedWithInvoke;
+        private readonly CollectionChangeEventHandler TaskCollectionChangedWithInvoke;
 
         public MainWindow(string[] args)
         {
@@ -753,7 +762,6 @@ namespace XenAdmin
 
         #endregion
 
-
         /// <summary>
         /// Manages UI and network updates whenever hosts are added and removed
         /// </summary>
@@ -765,14 +773,6 @@ namespace XenAdmin
             //Program.AssertOnEventThread();
             Program.BeginInvoke(Program.MainWindow, () => XenConnectionCollectionChanged(e));
         }
-        
-        private readonly CollectionChangeEventHandler PoolCollectionChangedWithInvoke = null;
-        private readonly CollectionChangeEventHandler MessageCollectionChangedWithInvoke = null;
-        private readonly CollectionChangeEventHandler HostCollectionChangedWithInvoke = null;
-        private readonly CollectionChangeEventHandler VMCollectionChangedWithInvoke = null;
-        private readonly CollectionChangeEventHandler SRCollectionChangedWithInvoke = null;
-        private readonly CollectionChangeEventHandler FolderCollectionChangedWithInvoke = null;
-        private readonly CollectionChangeEventHandler TaskCollectionChangedWithInvoke = null;
 
         private void XenConnectionCollectionChanged(CollectionChangeEventArgs e)
         {
@@ -1214,9 +1214,16 @@ namespace XenAdmin
 
         private void Pool_PropertyChanged(object obj, PropertyChangedEventArgs e)
         {
-            Pool pool = (Pool)obj;
+            if (!(obj is Pool pool))
+                return;
+
             switch (e.PropertyName)
             {
+                case "allowed_operations":
+                    if (cdnUpdatesPage.Visible && Helpers.CloudOrGreater(pool.Connection))
+                        cdnUpdatesPage.UpdateButtonEnablement();
+                    break;
+
                 case "other_config":
                     // other_config may contain HideFromXenCenter
                     UpdateToolbars();
@@ -3284,7 +3291,6 @@ namespace XenAdmin
             SetSplitterDistance();
         }
 
-        FormWindowState lastState = FormWindowState.Normal;
         private void MainWindow_Resize(object sender, EventArgs e)
         {
             TabPage t = TheTabControl.SelectedTab;
