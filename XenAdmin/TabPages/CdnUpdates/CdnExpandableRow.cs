@@ -28,6 +28,7 @@
  * SUCH DAMAGE.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -264,7 +265,7 @@ namespace XenAdmin.TabPages.CdnUpdates
         {
             var msg = allLivePatches ? Messages.HOTFIX_POST_UPDATE_LIVEPATCH_ACTIONS : Messages.HOTFIX_POST_UPDATE_ACTIONS;
 
-            var text = string.Format(msg, string.Join("\n", guidance.Select(Cdn.FriendlyInstruction)));
+            var text = string.Format(msg, string.Join(Environment.NewLine, guidance.Select(Cdn.FriendlyInstruction)));
             var img = allLivePatches ? Images.StaticImages.livepatch_16 : Images.StaticImages.rightArrowLong_Blue_16;
 
             SetValues(text, img);
@@ -276,7 +277,7 @@ namespace XenAdmin.TabPages.CdnUpdates
     {
         public RpmsRow(string[] rpms)
         {
-            SetValues(string.Join("\n", rpms), null);
+            SetValues(string.Join(Environment.NewLine, rpms), null);
         }
     }
 }

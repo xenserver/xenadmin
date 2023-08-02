@@ -38,12 +38,15 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
 {
     public class CdnOutOfSyncProblem : PoolProblem
     {
-        public CdnOutOfSyncProblem(Check check, Pool pool)
+        private readonly int _days;
+
+        public CdnOutOfSyncProblem(Check check, Pool pool, int days)
             : base(check, pool)
         {
+            _days = days;
         }
 
-        public override string Description => $"{Pool.Connection.Name}:{string.Format(Messages.ALERT_CDN_OUT_OF_SYNC_TITLE, 7)}";
+        public override string Description => $"{Pool.Connection.Name}:{string.Format(Messages.ALERT_CDN_OUT_OF_SYNC_TITLE, _days)}";
 
         public override string HelpMessage => Messages.UPDATES_GENERAL_TAB_SYNC_NOW;
 
