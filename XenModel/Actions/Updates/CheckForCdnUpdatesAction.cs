@@ -44,7 +44,7 @@ namespace XenAdmin.Actions
             : base(connection, string.Empty)
         {
             Title = Description = Messages.YUM_REPO_ACTION_CHECK_FOR_UPDATES;
-            ApiMethodsToRoleCheck.Add("http/updates");
+            ApiMethodsToRoleCheck.Add("http/get_updates");
         }
 
         public CdnPoolUpdateInfo Updates { get; set; }
