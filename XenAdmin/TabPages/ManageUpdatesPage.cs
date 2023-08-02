@@ -44,6 +44,7 @@ using XenAdmin.Controls.DataGridViewEx;
 using XenAdmin.Controls.MainWindowControls;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
+using XenAdmin.Dialogs.ServerUpdates;
 using XenAdmin.Network;
 using XenAdmin.Wizards.PatchingWizard;
 using XenCenterLib;
@@ -68,7 +69,6 @@ namespace XenAdmin.TabPages
         public ManageUpdatesPage()
         {
             InitializeComponent();
-            AutoCheckForUpdatesDisabledLabel.Text = string.Format(AutoCheckForUpdatesDisabledLabel.Text, BrandManager.ProductBrand);
             spinner.SuccessImage = Images.StaticImages._000_Info3_h32bit_16;
             spinner.FailureImage = Images.StaticImages._000_error_h32bit_16;
             tableLayoutPanel1.Visible = false;
@@ -1238,6 +1238,14 @@ namespace XenAdmin.TabPages
 
         #endregion
 
+        private void linkLabelConfigure_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            using (var dialog = new ConfigUpdatesDialog())
+            {
+                dialog.SelectLcmTab();
+                dialog.ShowDialog(this);
+            }
+        }
 
         private void informationLabel_Click(object sender, EventArgs e)
         {
