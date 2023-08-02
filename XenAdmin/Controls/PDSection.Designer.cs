@@ -126,6 +126,7 @@ namespace XenAdmin.Controls
             this.dataGridViewEx1.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewEx1.ShowCellToolTips = false;
             this.dataGridViewEx1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewEx1_CellContentClick);
+            this.dataGridViewEx1.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewEx1_CellMouseMove);
             this.dataGridViewEx1.SelectionChanged += new System.EventHandler(this.dataGridViewEx1_SelectionChanged);
             this.dataGridViewEx1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dataGridViewEx1_KeyPress);
             this.dataGridViewEx1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataGridViewEx1_MouseClick);

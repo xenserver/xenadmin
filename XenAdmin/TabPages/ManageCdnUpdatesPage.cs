@@ -74,8 +74,6 @@ namespace XenAdmin.TabPages
             {
                 checksQueue--;
             }
-
-            UpdateButtonEnablement();
         }
 
         #region NotificationPage overrides
@@ -128,6 +126,7 @@ namespace XenAdmin.TabPages
 
                     OnFiltersChanged();
                     BuildList();
+                    UpdateButtonEnablement();
                 }
                 finally
                 {
@@ -195,12 +194,15 @@ namespace XenAdmin.TabPages
             }
         }
 
-        private void UpdateButtonEnablement()
+        public void UpdateButtonEnablement()
         {
             toolStripButtonExportAll.Enabled = dataGridViewEx1.RowCount > 0;
 
-            Pool selectedPool = null;
+            //need to check this because it takes a while until xapi removes the operation from pool.allowed_operations
+            var syncActions = ConnectionsManager.History.Where(a =>
+                !a.IsCompleted && a is SyncWithCdnAction syncA && !syncA.Cancelled).ToList();
 
+            Pool selectedPool = null;
             if (dataGridViewEx1.SelectedRows.Count > 0)
             {
                 switch (dataGridViewEx1.SelectedRows[0])
@@ -214,26 +216,33 @@ namespace XenAdmin.TabPages
                 }
             }
 
-            tsmiSynchronizeSelected.Enabled = selectedPool != null && selectedPool.allowed_operations.Contains(pool_allowed_operations.sync_updates);
+            tsmiSynchronizeSelected.Enabled = selectedPool != null && selectedPool.repositories.Count > 0 &&
+                                              !syncActions.Select(a => a.Connection).Contains(selectedPool.Connection) &&
+                                              selectedPool.allowed_operations.Contains(pool_allowed_operations.sync_updates);
 
-            var allAllowed = true;
+            var allAllowed = syncActions.Count == 0;
 
-            foreach (DataGridViewRow row in dataGridViewEx1.Rows)
+            if (allAllowed)
             {
-                if (row is PoolUpdateInfoRow puiRow &&
-                    !puiRow.Pool.allowed_operations.Contains(pool_allowed_operations.sync_updates))
+                foreach (DataGridViewRow row in dataGridViewEx1.Rows)
                 {
-                    allAllowed = false;
-                    break;
-                }
-
-                if (row is HostUpdateInfoRow huiRow && Helpers.GetPool(huiRow.Connection) == null)
-                {
-                    var pool = Helpers.GetPoolOfOne(huiRow.Connection);
-                    if (pool != null && !pool.allowed_operations.Contains(pool_allowed_operations.sync_updates))
+                    if (row is PoolUpdateInfoRow puiRow &&
+                        (puiRow.Pool.repositories.Count == 0 ||
+                         !puiRow.Pool.allowed_operations.Contains(pool_allowed_operations.sync_updates)))
                     {
                         allAllowed = false;
                         break;
+                    }
+
+                    if (row is HostUpdateInfoRow huiRow && Helpers.GetPool(huiRow.Connection) == null)
+                    {
+                        var pool = Helpers.GetPoolOfOne(huiRow.Connection);
+                        if (pool != null && (pool.repositories.Count == 0 ||
+                                             !pool.allowed_operations.Contains(pool_allowed_operations.sync_updates)))
+                        {
+                            allAllowed = false;
+                            break;
+                        }
                     }
                 }
             }
@@ -306,6 +315,14 @@ namespace XenAdmin.TabPages
             }
         }
 
+        private void SyncPool(Pool pool)
+        {
+            var syncAction = new SyncWithCdnAction(pool);
+            UpdateButtonEnablement();
+            syncAction.Completed += a => Updates.CheckForCdnUpdates(a.Connection);
+            syncAction.RunAsync();
+        }
+
         #region Toolstrip handlers
 
         private void toolStripDropDownButtonServerFilter_FilterChanged()
@@ -321,13 +338,8 @@ namespace XenAdmin.TabPages
 
         private void tsmiSynchronizeSelected_Click(object sender, EventArgs e)
         {
-            if (dataGridViewEx1.SelectedRows.Count > 0 &&
-                dataGridViewEx1.SelectedRows[0] is PoolUpdateInfoRow row)
-            {
-                var syncAction = new SyncWithCdnAction(row.Pool);
-                syncAction.Completed += a => Updates.CheckForCdnUpdates(a.Connection);
-                syncAction.RunAsync();
-            }
+            if (dataGridViewEx1.SelectedRows.Count > 0 && dataGridViewEx1.SelectedRows[0] is PoolUpdateInfoRow row)
+                SyncPool(row.Pool);
         }
 
         private void tsmiSynchronizeAll_Click(object sender, EventArgs e)
@@ -369,9 +381,7 @@ namespace XenAdmin.TabPages
                         if (pool == null)
                             continue;
 
-                        var syncAction = new SyncWithCdnAction(pool);
-                        syncAction.Completed += a => Updates.CheckForCdnUpdates(a.Connection);
-                        syncAction.RunAsync();
+                        SyncPool(pool);
                     }
 
                     return;
@@ -380,9 +390,7 @@ namespace XenAdmin.TabPages
                     {
                         if (row is PoolUpdateInfoRow puiRow)
                         {
-                            var syncAction = new SyncWithCdnAction(puiRow.Pool);
-                            syncAction.Completed += a => Updates.CheckForCdnUpdates(a.Connection);
-                            syncAction.RunAsync();
+                            SyncPool(puiRow.Pool);
                         }
                         else if (row is HostUpdateInfoRow huiRow)
                         {
@@ -393,9 +401,7 @@ namespace XenAdmin.TabPages
                             if (pool == null)
                                 continue;
 
-                            var syncAction = new SyncWithCdnAction(pool);
-                            syncAction.Completed += a => Updates.CheckForCdnUpdates(a.Connection);
-                            syncAction.RunAsync();
+                            SyncPool(pool);
                         }
                     }
 

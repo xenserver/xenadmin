@@ -203,18 +203,14 @@ namespace XenAdmin.TabPages
             if (xenObject != null)
                 xenObject.PropertyChanged -= PropertyChanged;
 
-            if (xenObject is Host)
+            if (xenObject is Host host)
             {
-                Host host = xenObject as Host;
-
-                Host_metrics metric = xenObject.Connection.Resolve<Host_metrics>(host.metrics);
+                Host_metrics metric = xenObject.Connection.Resolve(host.metrics);
                 if (metric != null)
                     metric.PropertyChanged -= PropertyChanged;
             }
-            else if (xenObject is VM)
+            else if (xenObject is VM vm)
             {
-                VM vm = xenObject as VM;
-
                 VM_metrics metric = vm.Connection.Resolve(vm.metrics);
                 if (metric != null)
                     metric.PropertyChanged -= PropertyChanged;
@@ -225,10 +221,8 @@ namespace XenAdmin.TabPages
 
                 vm.Connection.Cache.DeregisterCollectionChanged<VM_guest_metrics>(VM_guest_metrics_CollectionChangedWithInvoke);
             }
-            else if (xenObject is SR)
+            else if (xenObject is SR sr)
             {
-                SR sr = xenObject as SR;
-
                 foreach (PBD pbd in sr.Connection.ResolveAll(sr.PBDs))
                 {
                     pbd.PropertyChanged -= PropertyChanged;
@@ -253,26 +247,23 @@ namespace XenAdmin.TabPages
         private void RegisterHandlers()
         {
             if (xenObject != null)
-                xenObject.PropertyChanged += new PropertyChangedEventHandler(PropertyChanged);
+                xenObject.PropertyChanged += PropertyChanged;
 
-            if (xenObject is Host)
+            if (xenObject is Host host)
             {
-                Host host = xenObject as Host;
                 Host_metrics metric = xenObject.Connection.Resolve(host.metrics);
                 if (metric != null)
-                    metric.PropertyChanged += new PropertyChangedEventHandler(PropertyChanged);
+                    metric.PropertyChanged += PropertyChanged;
             }
-            else if (xenObject is VM)
+            else if (xenObject is VM vm)
             {
-                VM vm = xenObject as VM;
-
                 VM_metrics metric = vm.Connection.Resolve(vm.metrics);
                 if (metric != null)
-                    metric.PropertyChanged += new PropertyChangedEventHandler(PropertyChanged);
+                    metric.PropertyChanged += PropertyChanged;
 
                 VM_guest_metrics guestmetric = xenObject.Connection.Resolve(vm.guest_metrics);
                 if (guestmetric != null)
-                    guestmetric.PropertyChanged += new PropertyChangedEventHandler(PropertyChanged);
+                    guestmetric.PropertyChanged += PropertyChanged;
 
                 xenObject.Connection.Cache.RegisterCollectionChanged<VM_guest_metrics>(VM_guest_metrics_CollectionChangedWithInvoke);
             }
@@ -640,7 +631,7 @@ namespace XenAdmin.TabPages
                 {
                     using (var dialog = new ConfigUpdatesDialog())
                         dialog.ShowDialog(this);
-                });
+                }, true);
 
             string lastSyncTime = Messages.INDETERMINABLE;
 
@@ -654,14 +645,26 @@ namespace XenAdmin.TabPages
                 }
             }
 
-            pdSectionUpdates.AddEntryWithNoteLink(Messages.UPDATES_GENERAL_TAB_LAST_SYNCED,
-                lastSyncTime, Messages.UPDATES_GENERAL_TAB_SYNC_NOW,
-                () =>
-                {
-                    var syncAction = new SyncWithCdnAction(pool);
-                    syncAction.Completed += a => Updates.CheckForCdnUpdates(a.Connection);
-                    syncAction.RunAsync();
-                });
+            if (pool.repositories.Count > 0)
+            {
+                var enabled = pool.allowed_operations.Contains(pool_allowed_operations.sync_updates) &&
+                              !ConnectionsManager.History.Any(a =>
+                                  !a.IsCompleted && a is SyncWithCdnAction syncA && !syncA.Cancelled && syncA.Connection == pool.Connection);
+
+                pdSectionUpdates.AddEntryWithNoteLink(Messages.UPDATES_GENERAL_TAB_LAST_SYNCED,
+                    lastSyncTime, Messages.UPDATES_GENERAL_TAB_SYNC_NOW,
+                    () =>
+                    {
+                        var syncAction = new SyncWithCdnAction(pool);
+                        BuildList();
+                        syncAction.Completed += a => Updates.CheckForCdnUpdates(a.Connection);
+                        syncAction.RunAsync();
+                    }, enabled);
+            }
+            else
+            {
+                pdSectionUpdates.AddEntry(Messages.UPDATES_GENERAL_TAB_LAST_SYNCED, lastSyncTime);
+            }
 
             foreach (var host in pool.Connection.Cache.Hosts)
             {
