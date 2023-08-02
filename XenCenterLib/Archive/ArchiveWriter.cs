@@ -61,9 +61,9 @@ namespace XenCenterLib.Archive
                 string filePath = files[i];
                 cancellingDelegate?.Invoke();
 
-                using (FileStream fs = File.OpenRead(StringUtility.FormatFilePathForFileStream(filePath)))
+                using (FileStream fs = File.OpenRead(StringUtility.ToLongWindowsPath(filePath)))
                 {
-                    Add(fs, CleanRelativePathName(pathToArchive, filePath), File.GetCreationTime(StringUtility.FormatFilePathForFileStream(filePath)), cancellingDelegate);
+                    Add(fs, CleanRelativePathName(pathToArchive, filePath), File.GetCreationTime(StringUtility.ToLongWindowsPath(filePath)), cancellingDelegate);
                     progressDelegate?.Invoke((int)50.0 * i / files.Length);
                 }
             }

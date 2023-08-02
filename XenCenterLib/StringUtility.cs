@@ -220,19 +220,19 @@ namespace XenCenterLib
         }
 
         /// <summary>
-        /// To be used to format file paths for File streams. <br />
-        /// Prepends \\?\ to path if it is longer than the default MAX_PATH in Windows. <br /><br />
+        /// To be used to format file and directory paths for File streams. <br />
+        /// Prepends \\?\ to path if it is longer than (MAX_PATH - 12) in Windows. This is the legacy directory length limit.<br /><br />
         /// See <see href='https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-createfilea'>CreateFileA</see> and <see href='https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation?tabs=registry'>Maximum Path Length Limitation</see> for more info.
         /// </summary>
         /// <param name="inputPath">The input file path</param>
         /// <returns></returns>
-        public static string FormatFilePathForFileStream(string inputPath)
+        public static string ToLongWindowsPath(string inputPath)
         {
-            if (string.IsNullOrEmpty(inputPath) || inputPath.Length <= 260 || inputPath.StartsWith("\\\\?\\"))
+            if (string.IsNullOrEmpty(inputPath) || inputPath.Length < 248 || inputPath.StartsWith(@"\\?\"))
             {
                 return inputPath;
             }
-            return $"\\\\?\\{inputPath}";
+            return $@"\\?\{inputPath}";
         }
     }
 }
