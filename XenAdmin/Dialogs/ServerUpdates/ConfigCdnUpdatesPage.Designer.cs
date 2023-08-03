@@ -226,6 +226,7 @@
             // 
             // comboBoxRepo
             // 
+            this.comboBoxRepo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             resources.ApplyResources(this.comboBoxRepo, "comboBoxRepo");
             this.comboBoxRepo.FormattingEnabled = true;
             this.comboBoxRepo.Name = "comboBoxRepo";
