@@ -37,6 +37,9 @@
             this.toolStrip1 = new XenAdmin.Controls.ToolStripEx();
             this.toolStripDropDownButtonServerFilter = new XenAdmin.Controls.FilterLocationToolStripDropDownButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsSplitButtonSynchronize = new System.Windows.Forms.ToolStripSplitButton();
+            this.tsmiSynchronizeSelected = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiSynchronizeAll = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripButtonUpdate = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonExportAll = new System.Windows.Forms.ToolStripButton();
@@ -44,11 +47,9 @@
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridViewEx1 = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
             this._columnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this._columnChannel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this._columnLastSync = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this._columnLastUpdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tsSplitButtonSynchronize = new System.Windows.Forms.ToolStripSplitButton();
-            this.tsmiSynchronizeSelected = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiSynchronizeAll = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel2.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEx1)).BeginInit();
@@ -91,6 +92,29 @@
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
             // 
+            // tsSplitButtonSynchronize
+            // 
+            this.tsSplitButtonSynchronize.AutoToolTip = false;
+            this.tsSplitButtonSynchronize.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsSplitButtonSynchronize.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiSynchronizeSelected,
+            this.tsmiSynchronizeAll});
+            resources.ApplyResources(this.tsSplitButtonSynchronize, "tsSplitButtonSynchronize");
+            this.tsSplitButtonSynchronize.Name = "tsSplitButtonSynchronize";
+            this.tsSplitButtonSynchronize.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.tsSplitButtonSynchronize_DropDownItemClicked);
+            // 
+            // tsmiSynchronizeSelected
+            // 
+            this.tsmiSynchronizeSelected.Name = "tsmiSynchronizeSelected";
+            resources.ApplyResources(this.tsmiSynchronizeSelected, "tsmiSynchronizeSelected");
+            this.tsmiSynchronizeSelected.Click += new System.EventHandler(this.tsmiSynchronizeSelected_Click);
+            // 
+            // tsmiSynchronizeAll
+            // 
+            this.tsmiSynchronizeAll.Name = "tsmiSynchronizeAll";
+            resources.ApplyResources(this.tsmiSynchronizeAll, "tsmiSynchronizeAll");
+            this.tsmiSynchronizeAll.Click += new System.EventHandler(this.tsmiSynchronizeAll_Click);
+            // 
             // toolStripButtonUpdate
             // 
             this.toolStripButtonUpdate.AutoToolTip = false;
@@ -132,6 +156,7 @@
             this.dataGridViewEx1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridViewEx1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this._columnName,
+            this._columnChannel,
             this._columnLastSync,
             this._columnLastUpdate});
             this.dataGridViewEx1.Name = "dataGridViewEx1";
@@ -145,47 +170,35 @@
             // 
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this._columnName.DefaultCellStyle = dataGridViewCellStyle1;
-            this._columnName.FillWeight = 60F;
+            this._columnName.FillWeight = 55F;
             resources.ApplyResources(this._columnName, "_columnName");
             this._columnName.Name = "_columnName";
             this._columnName.ReadOnly = true;
+            this._columnName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // _columnChannel
+            // 
+            this._columnChannel.FillWeight = 15F;
+            resources.ApplyResources(this._columnChannel, "_columnChannel");
+            this._columnChannel.Name = "_columnChannel";
+            this._columnChannel.ReadOnly = true;
+            this._columnChannel.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // _columnLastSync
             // 
-            this._columnLastSync.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this._columnLastSync.FillWeight = 15F;
             resources.ApplyResources(this._columnLastSync, "_columnLastSync");
             this._columnLastSync.Name = "_columnLastSync";
             this._columnLastSync.ReadOnly = true;
+            this._columnLastSync.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // _columnLastUpdate
             // 
-            this._columnLastUpdate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this._columnLastUpdate.FillWeight = 15F;
             resources.ApplyResources(this._columnLastUpdate, "_columnLastUpdate");
             this._columnLastUpdate.Name = "_columnLastUpdate";
             this._columnLastUpdate.ReadOnly = true;
-            // 
-            // tsSplitButtonSynchronize
-            // 
-            this.tsSplitButtonSynchronize.AutoToolTip = false;
-            this.tsSplitButtonSynchronize.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsSplitButtonSynchronize.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiSynchronizeSelected,
-            this.tsmiSynchronizeAll});
-            resources.ApplyResources(this.tsSplitButtonSynchronize, "tsSplitButtonSynchronize");
-            this.tsSplitButtonSynchronize.Name = "tsSplitButtonSynchronize";
-            this.tsSplitButtonSynchronize.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.tsSplitButtonSynchronize_DropDownItemClicked);
-            // 
-            // tsmiSynchronizeSelected
-            // 
-            this.tsmiSynchronizeSelected.Name = "tsmiSynchronizeSelected";
-            resources.ApplyResources(this.tsmiSynchronizeSelected, "tsmiSynchronizeSelected");
-            this.tsmiSynchronizeSelected.Click += new System.EventHandler(this.tsmiSynchronizeSelected_Click);
-            // 
-            // tsmiSynchronizeAll
-            // 
-            this.tsmiSynchronizeAll.Name = "tsmiSynchronizeAll";
-            resources.ApplyResources(this.tsmiSynchronizeAll, "tsmiSynchronizeAll");
-            this.tsmiSynchronizeAll.Click += new System.EventHandler(this.tsmiSynchronizeAll_Click);
+            this._columnLastUpdate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // ManageCdnUpdatesPage
             // 
@@ -215,11 +228,12 @@
         private System.Windows.Forms.ToolStripButton toolStripButtonExportAll;
         private System.Windows.Forms.ToolStripButton toolStripButtonUpdate;
         private Controls.DataGridViewEx.DataGridViewEx dataGridViewEx1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn _columnName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn _columnLastSync;
-        private System.Windows.Forms.DataGridViewTextBoxColumn _columnLastUpdate;
         private System.Windows.Forms.ToolStripSplitButton tsSplitButtonSynchronize;
         private System.Windows.Forms.ToolStripMenuItem tsmiSynchronizeSelected;
         private System.Windows.Forms.ToolStripMenuItem tsmiSynchronizeAll;
+        private System.Windows.Forms.DataGridViewTextBoxColumn _columnName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn _columnChannel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn _columnLastSync;
+        private System.Windows.Forms.DataGridViewTextBoxColumn _columnLastUpdate;
     }
 }

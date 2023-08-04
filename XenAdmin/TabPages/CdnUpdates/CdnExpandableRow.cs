@@ -43,19 +43,23 @@ namespace XenAdmin.TabPages.CdnUpdates
     internal abstract class CdnExpandableRow : DataGridViewRow
     {
         private readonly CdnExpandableTextAndImageCell _nameCell = new CdnExpandableTextAndImageCell();
+        private readonly DataGridViewTextBoxCell _channelCell = new DataGridViewTextBoxCell();
         private readonly DataGridViewTextBoxCell _lastSyncCell = new DataGridViewTextBoxCell();
         private readonly DataGridViewTextBoxCell _lastUpdateCell = new DataGridViewTextBoxCell();
 
         protected CdnExpandableRow()
         {
-            Cells.AddRange(_nameCell, _lastSyncCell, _lastUpdateCell);
+            Cells.AddRange(_nameCell, _channelCell, _lastSyncCell, _lastUpdateCell);
             MinimumHeight = 22;
         }
 
-        protected void SetValues(string name, Image image, string lastSync = null, string lastUpdate = null)
+        protected void SetValues(string name, Image image, string channel = null,string lastSync = null, string lastUpdate = null)
         {
             _nameCell.Value = name;
             _nameCell.Image = image;
+
+            if (channel != null)
+                _channelCell.Value = channel;
 
             if (lastSync != null)
                 _lastSyncCell.Value = lastSync;
@@ -91,6 +95,17 @@ namespace XenAdmin.TabPages.CdnUpdates
         {
             Pool = Helpers.GetPoolOfOne(connection);
 
+            var pool = Helpers.GetPoolOfOne(connection);
+
+            var repoNames = (from repoRef in pool.repositories
+                let repo = pool.Connection.Resolve(repoRef)
+                where repo != null
+                let found = RepoDescriptor.AllRepos.FirstOrDefault(rd => rd.MatchesRepository(repo))
+                where found != null
+                select found.FriendlyName).ToList();
+
+            var channel = repoNames.Count == 0 ? Messages.NOT_CONFIGURED : string.Join("\n", repoNames);
+
             var lastSyncTime = Messages.INDETERMINABLE;
 
             if (Helpers.XapiEqualOrGreater_23_18_0(connection))
@@ -103,7 +118,8 @@ namespace XenAdmin.TabPages.CdnUpdates
                 }
             }
 
-            SetValues(Helpers.GetName(connection), Images.GetImage16For(Images.GetIconFor(connection)), lastSyncTime);
+            SetValues(Helpers.GetName(connection), Images.GetImage16For(Images.GetIconFor(connection)),
+                channel:channel, lastSync: lastSyncTime);
 
             if (poolUpdateInfo == null)
             {
@@ -134,19 +150,29 @@ namespace XenAdmin.TabPages.CdnUpdates
             Connection = connection;
             Host = host;
 
+            string channel = null;
             string lastSyncTime = null;
             string lastUpdateTime = Messages.NEVER;
 
             if (Helpers.GetPool(Connection) == null) //standalone host
             {
+                var pool = Helpers.GetPoolOfOne(Connection);
+
+                var repoNames = (from repoRef in pool.repositories
+                    let repo = pool.Connection.Resolve(repoRef)
+                    where repo != null
+                    let found = RepoDescriptor.AllRepos.FirstOrDefault(rd => rd.MatchesRepository(repo))
+                    where found != null
+                    select found.FriendlyName).ToList();
+
+                channel = repoNames.Count == 0 ? Messages.NOT_CONFIGURED : string.Join("\n", repoNames);
+
                 lastSyncTime = Messages.INDETERMINABLE;
 
                 if (Helpers.XapiEqualOrGreater_23_18_0(Connection))
                 {
                     lastSyncTime = Messages.NEVER;
 
-                    var pool = Helpers.GetPoolOfOne(Connection);
-                    
                     if (pool != null && pool.last_update_sync > Util.GetUnixMinDateTime())
                     {
                         lastSyncTime = HelpersGUI.DateTimeToString(pool.last_update_sync.ToLocalTime(), Messages.DATEFORMAT_DMY_HMS, true);
@@ -171,7 +197,8 @@ namespace XenAdmin.TabPages.CdnUpdates
                 }
             }
 
-            SetValues(Host.Name(), Images.GetImage16For(Images.GetIconFor(Host)), lastSyncTime, lastUpdateTime);
+            SetValues(Host.Name(), Images.GetImage16For(Images.GetIconFor(Host)), channel: channel,
+                lastSync: lastSyncTime, lastUpdate: lastUpdateTime);
 
             if (poolUpdateInfo != null && hostUpdateInfo != null)
             {
