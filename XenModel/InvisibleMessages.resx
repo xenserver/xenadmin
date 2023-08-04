@@ -144,8 +144,8 @@
   <data name="LICENSE_BUY_URL" xml:space="preserve">
     <value>https://xenserver.com/buy</value>
   </data>
-  <data name="LICENSE_SERVER_DOWNLOAD_LINK" xml:space="preserve">
-    <value>http://www.citrix.com/downloads/licensing/license-server</value>
+  <data name="LICENSE_SERVER_DOCS_LINK" xml:space="preserve">
+    <value>https://docs.citrix.com/en-us/licensing/current-release/license-server-getting-started.html</value>
   </data>
   <data name="LOCALE" xml:space="preserve">
     <value>en-US</value>
