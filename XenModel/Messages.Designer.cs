@@ -28059,7 +28059,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to GPU configuration and monitoring is disabled, because there are no GPUs available in this pool..
+        ///   Looks up a localized string similar to GPU configuration and monitoring are disabled, because there are no GPUs available in this pool..
         /// </summary>
         public static string NO_GPU_IN_POOL {
             get {
@@ -28068,7 +28068,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to GPU configuration and monitoring is disabled, because there are no GPUs available on this host..
+        ///   Looks up a localized string similar to GPU configuration and monitoring are disabled, because there are no GPUs available on this host..
         /// </summary>
         public static string NO_GPU_ON_HOST {
             get {
