@@ -142,11 +142,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://www.citrix.com/downloads/licensing/license-server.
+        ///   Looks up a localized string similar to https://docs.citrix.com/en-us/licensing/current-release/license-server-getting-started.html.
         /// </summary>
-        public static string LICENSE_SERVER_DOWNLOAD_LINK {
+        public static string LICENSE_SERVER_DOCS_LINK {
             get {
-                return ResourceManager.GetString("LICENSE_SERVER_DOWNLOAD_LINK", resourceCulture);
+                return ResourceManager.GetString("LICENSE_SERVER_DOCS_LINK", resourceCulture);
             }
         }
         

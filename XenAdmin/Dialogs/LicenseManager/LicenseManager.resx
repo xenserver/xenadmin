@@ -223,13 +223,13 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="downloadLicenseServerLink.Size" type="System.Drawing.Size, System.Drawing">
-    <value>254, 15</value>
+    <value>284, 15</value>
   </data>
   <data name="downloadLicenseServerLink.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
   <data name="downloadLicenseServerLink.Text" xml:space="preserve">
-    <value>Download a {0} License Server virtual appliance</value>
+    <value>Learn how to install and configure the License Server</value>
   </data>
   <data name="downloadLicenseServerLink.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>

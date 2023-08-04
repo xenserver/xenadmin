@@ -45,7 +45,6 @@ namespace XenAdmin.Dialogs
         public LicenseManager(LicenseManagerController lmcontroller)
         {
             InitializeComponent();
-            downloadLicenseServerLink.Text = string.Format(downloadLicenseServerLink.Text, BrandManager.CompanyNameLegacy);
             checkableDataGridView.StatusImageColumn = statusImageColumn;
             SetupControllers(lmcontroller);
         }
