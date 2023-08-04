@@ -1084,7 +1084,9 @@ namespace XenAdmin
                 if (YumRepoNotConfiguredAlert.TryCreate(connection, out var alert) || OutOfSyncWithCdnAlert.TryCreate(connection, out alert))
                     Alert.AddAlert(alert);
 
-                Updates.CheckForCdnUpdates(coordinator.Connection);
+                if (connection.Session.IsLocalSuperuser || connection.Session.Roles.Any(r =>
+                        r.name_label == Role.MR_ROLE_POOL_OPERATOR || r.name_label == Role.MR_ROLE_POOL_ADMIN))
+                    Updates.CheckForCdnUpdates(coordinator.Connection);
             }
             else
             {
