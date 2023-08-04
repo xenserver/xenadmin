@@ -945,6 +945,18 @@
   <data name="ColumnCheck.Width" type="System.Int32, mscorlib">
     <value>20</value>
   </data>
+  <metadata name="ColumnImage.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnImage.HeaderText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ColumnImage.MinimumWidth" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="ColumnImage.Width" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
   <metadata name="ColumnName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -1178,6 +1190,12 @@
   </data>
   <data name="&gt;&gt;ColumnCheck.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnImage.Name" xml:space="preserve">
+    <value>ColumnImage</value>
+  </data>
+  <data name="&gt;&gt;ColumnImage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ColumnName.Name" xml:space="preserve">
     <value>ColumnName</value>

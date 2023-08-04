@@ -177,7 +177,7 @@ namespace XenAdmin.Controls.MainWindowControls
                 case NotificationsSubMode.Alerts:
                     return Images.StaticImages._000_Alert2_h32bit_16;
                 case NotificationsSubMode.Updates:
-                    return Images.StaticImages._015_Download_h32bit_16;
+                    return Images.StaticImages._000_Patch_h32bit_16;
                 case NotificationsSubMode.UpdatesFromCdn:
                     return Images.StaticImages.notif_updates_16;
                 case NotificationsSubMode.Events:

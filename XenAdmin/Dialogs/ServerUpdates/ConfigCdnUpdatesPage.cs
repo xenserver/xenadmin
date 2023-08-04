@@ -346,6 +346,7 @@ namespace XenAdmin.Dialogs.ServerUpdates
         private class CheckableConnectionRow : DataGridViewRow
         {
             private readonly DataGridViewCheckBoxCell _checkCell = new DataGridViewCheckBoxCell { ThreeState = false };
+            private readonly DataGridViewImageCell _imageCell = new DataGridViewImageCell();
             private readonly DataGridViewTextBoxCell _nameCell = new DataGridViewTextBoxCell();
 
             public CheckableConnectionRow(IXenConnection connection)
@@ -353,8 +354,10 @@ namespace XenAdmin.Dialogs.ServerUpdates
                 Connection = connection;
 
                 _nameCell.Value = connection.Name;
+                _imageCell.Value = Helpers.GetPool(connection) == null
+                    ? Images.StaticImages._000_Server_h32bit_16 : Images.StaticImages._000_Pool_h32bit_16;
                 _checkCell.Value = false;
-                Cells.AddRange(_checkCell, _nameCell);
+                Cells.AddRange(_checkCell, _imageCell, _nameCell);
             }
 
             public IXenConnection Connection { get; }

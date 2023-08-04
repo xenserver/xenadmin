@@ -88,7 +88,7 @@ namespace XenAdmin.Dialogs.OptionsPages
 
         public string SubText => string.Format(Messages.UPDATES_OPTIONS_DESC, BrandManager.BrandConsole);
 
-        public Image Image => Images.StaticImages._000_Patch_h32bit_16;
+        public Image Image => Images.StaticImages._015_Download_h32bit_16;
 
         #endregion
 

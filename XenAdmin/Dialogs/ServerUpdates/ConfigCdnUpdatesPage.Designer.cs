@@ -55,12 +55,13 @@
             this.labelPool = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.dataGridViewExPools = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonApply = new System.Windows.Forms.Button();
             this.buttonDiscard = new System.Windows.Forms.Button();
             this.labelNoConnections = new System.Windows.Forms.Label();
-            this.dataGridViewExPools = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
             this.ColumnCheck = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.ColumnImage = new System.Windows.Forms.DataGridViewImageColumn();
             this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanelConfig.SuspendLayout();
             this.groupBoxProxy.SuspendLayout();
@@ -70,8 +71,8 @@
             this.groupBoxRepo.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewExPools)).BeginInit();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanelConfig
@@ -249,6 +250,20 @@
             this.tableLayoutPanel5.Controls.Add(this.flowLayoutPanel1, 0, 1);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             // 
+            // dataGridViewExPools
+            // 
+            this.dataGridViewExPools.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dataGridViewExPools.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.dataGridViewExPools.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewExPools.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ColumnCheck,
+            this.ColumnImage,
+            this.ColumnName});
+            resources.ApplyResources(this.dataGridViewExPools, "dataGridViewExPools");
+            this.dataGridViewExPools.Name = "dataGridViewExPools";
+            this.dataGridViewExPools.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewExPools_CellContentClick);
+            this.dataGridViewExPools.SelectionChanged += new System.EventHandler(this.dataGridViewExPools_SelectionChanged);
+            // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Controls.Add(this.buttonApply);
@@ -276,24 +291,18 @@
             resources.ApplyResources(this.labelNoConnections, "labelNoConnections");
             this.labelNoConnections.Name = "labelNoConnections";
             // 
-            // dataGridViewExPools
-            // 
-            this.dataGridViewExPools.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dataGridViewExPools.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.dataGridViewExPools.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewExPools.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ColumnCheck,
-            this.ColumnName});
-            resources.ApplyResources(this.dataGridViewExPools, "dataGridViewExPools");
-            this.dataGridViewExPools.Name = "dataGridViewExPools";
-            this.dataGridViewExPools.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewExPools_CellContentClick);
-            this.dataGridViewExPools.SelectionChanged += new System.EventHandler(this.dataGridViewExPools_SelectionChanged);
-            // 
             // ColumnCheck
             // 
             this.ColumnCheck.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             resources.ApplyResources(this.ColumnCheck, "ColumnCheck");
             this.ColumnCheck.Name = "ColumnCheck";
+            // 
+            // ColumnImage
+            // 
+            this.ColumnImage.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.ColumnImage, "ColumnImage");
+            this.ColumnImage.Name = "ColumnImage";
+            this.ColumnImage.ReadOnly = true;
             // 
             // ColumnName
             // 
@@ -325,8 +334,8 @@
             this.tableLayoutPanel4.PerformLayout();
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel5.PerformLayout();
-            this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewExPools)).EndInit();
+            this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -358,12 +367,13 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         private Controls.DataGridViewEx.DataGridViewEx dataGridViewExPools;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn ColumnCheck;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button buttonApply;
         private System.Windows.Forms.Button buttonDiscard;
         private System.Windows.Forms.Label labelPool;
         private System.Windows.Forms.Label labelNoConnections;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn ColumnCheck;
+        private System.Windows.Forms.DataGridViewImageColumn ColumnImage;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
     }
 }
