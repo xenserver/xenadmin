@@ -2060,7 +2060,7 @@ namespace XenAdmin
             this.statusButtonUpdates.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.statusButtonUpdates.DropDownButtonWidth = 0;
             this.statusButtonUpdates.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.statusButtonUpdates.Image = global::XenAdmin.Properties.Resources._015_Download_h32bit_16;
+            this.statusButtonUpdates.Image = global::XenAdmin.Properties.Resources._000_Patch_h32bit_16;
             resources.ApplyResources(this.statusButtonUpdates, "statusButtonUpdates");
             this.statusButtonUpdates.Name = "statusButtonUpdates";
             this.statusButtonUpdates.Click += new System.EventHandler(this.statusButtonUpdates_Click);

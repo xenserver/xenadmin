@@ -479,18 +479,23 @@ namespace XenAdmin
 
                 if (Helpers.CloudOrGreater(host))
                 {
-                    if (Updates.CdnUpdateInfoPerConnection.TryGetValue(host.Connection, out var updateInfo))
-                    {
-                        var hostUpdateInfo = updateInfo?.HostsWithUpdates.FirstOrDefault(u => u.HostOpaqueRef == host.opaque_ref);
-                        
-                        if (hostUpdateInfo?.UpdateIDs.Length > 0)
-                            return Icons.HostUnpatched;
-                    }
+                    if (host.Connection.Cache.Hosts.Select(h => h.latest_synced_updates_applied).Distinct().Count() > 1 &&
+                        host.latest_synced_updates_applied != latest_synced_updates_applied_state.yes)
+                        return Icons.HostUnpatched;
                 }
                 else
                 {
-                    if (Updates.RecommendedPatchesForHost(host).Count > 0)
-                        return Icons.HostUnpatched;
+                    var cache = host.Connection.Cache;
+                    var allHostCount = host.Connection.Cache.HostCount;
+
+                    foreach (var u in cache.Pool_updates)
+                    {
+                        var appliedHosts = u.AppliedOnHosts();
+
+                        if (appliedHosts.Count > 0 && appliedHosts.Count != allHostCount &&
+                            u.EnforceHomogeneity() && !appliedHosts.Contains(host))
+                            return Icons.HostUnpatched;
+                    }
                 }
 
                 return Icons.HostConnected;
@@ -518,14 +523,21 @@ namespace XenAdmin
 
             if (Helpers.CloudOrGreater(pool.Connection))
             {
-                if (Updates.CdnUpdateInfoPerConnection.TryGetValue(pool.Connection, out var updateInfo) &&
-                    updateInfo?.Updates.Length > 0)
+                if (pool.Connection.Cache.Hosts.Select(h => h.latest_synced_updates_applied).Distinct().Count() > 1)
                     return Icons.PoolUnPatched;
             }
             else
             {
-                if (pool.Connection.Cache.Hosts.Any(h => Updates.RecommendedPatchesForHost(h).Count > 0))
-                    return Icons.PoolUnPatched;
+                var cache = pool.Connection.Cache;
+                var allHostCount = pool.Connection.Cache.HostCount;
+
+                foreach (var u in cache.Pool_updates)
+                {
+                    var appliedHosts = u.AppliedOnHosts();
+
+                    if (appliedHosts.Count > 0 && appliedHosts.Count != allHostCount && u.EnforceHomogeneity())
+                        return Icons.PoolUnPatched;
+                }
             }
 
             return Icons.PoolConnected;

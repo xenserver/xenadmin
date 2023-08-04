@@ -29,6 +29,8 @@
  */
 
 using System;
+using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms;
 using XenAdmin.Dialogs.OptionsPages;
 
@@ -44,8 +46,22 @@ namespace XenAdmin.Dialogs.ServerUpdates
         {
             InitializeComponent();
 
+            components = new Container();
+            var imageList = new ImageList(components)
+            {
+                ColorDepth = ColorDepth.Depth32Bit,
+                TransparentColor = Color.Transparent
+            };
+            imageList.Images.Add(Images.StaticImages.notif_updates_16);
+            imageList.Images.Add(Images.StaticImages._000_Patch_h32bit_16);
+            
+            tabControl1.ImageList = imageList;
+            
             tabControl1.TabPages.Add(_configYumRepoTab);
             tabControl1.TabPages.Add(_configLcmTab);
+
+            _configYumRepoTab.ImageIndex = 0;
+            _configLcmTab.ImageIndex = 1;
         }
 
         protected override void OnShown(EventArgs e)
