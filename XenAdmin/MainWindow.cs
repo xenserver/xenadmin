@@ -1434,7 +1434,7 @@ namespace XenAdmin
             // empty (i.e. at startup).
             bool show_home = SelectionManager.Selection.Count == 1 && SelectionManager.Selection[0].Value == null;
             // The upsell pages use the first selected XenObject: but they're only shown if there is only one selected object (see calls to ShowTab() below).
-            bool ha_upsell = Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictHA) && (selectionPool != null && !selectionPool.ha_enabled);
+            bool ha_upsell = Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictHA) && selectionPool != null && !selectionPool.ha_enabled;
             bool wlb_upsell = Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictWLB);
             bool ad_upsell = Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictAD);
             bool is_connected = selectionConnection != null && selectionConnection.IsConnected;
@@ -1527,7 +1527,7 @@ namespace XenAdmin
             if (!wlb_upsell && !multi && !SearchMode && isPoolSelected)
                 newTabs.Add(TabPageWLB);
 
-            if (!multi && !SearchMode && (isPoolSelected || isHostSelected && isHostLive))
+            if (!multi && !SearchMode && (isPoolSelected || isPoolOrLiveStandaloneHost))
                 newTabs.Add(ad_upsell ? TabPageADUpsell : TabPageAD);
 
             if (!multi && !SearchMode && isPoolOrLiveStandaloneHost && !Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictPvsCache)
