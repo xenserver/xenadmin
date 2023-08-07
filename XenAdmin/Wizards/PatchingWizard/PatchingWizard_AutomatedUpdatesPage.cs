@@ -174,45 +174,24 @@ namespace XenAdmin.Wizards.PatchingWizard
             var planActionsPerHost = new List<PlanAction>();
             var delayedActionsPerHost = new List<PlanAction>();
 
-            if (hostUpdateInfo.RecommendedGuidance.Length > 0)
+            if (hostUpdateInfo.RecommendedGuidance.Length > 0 && PostUpdateTasksAutomatically)
             {
-                bool allLivePatches = true;
-
-                foreach (var id in hostUpdateInfo.UpdateIDs)
-                {
-                    var update = poolUpdateInfo.Updates.FirstOrDefault(u => u.Id == id);
-                    if (update != null && update.LivePatchGuidance == CdnLivePatchGuidance.None)
-                    {
-                        allLivePatches = false;
-                        break;
-                    }
-                }
-
                 if (hostUpdateInfo.RecommendedGuidance.Contains(CdnGuidance.RebootHost))
                 {
-                    if (!allLivePatches)
-                        planActionsPerHost.Add(new EvacuateHostPlanAction(host));
-
-                    if (PostUpdateTasksAutomatically)
-                        delayedActionsPerHost.Add(new RestartHostPlanAction(host, host.GetRunningVMs()));
+                    planActionsPerHost.Add(new EvacuateHostPlanAction(host));
+                    delayedActionsPerHost.Add(new RestartHostPlanAction(host, host.GetRunningVMs()));
                 }
                 else if (hostUpdateInfo.RecommendedGuidance.Contains(CdnGuidance.RestartToolstack))
                 {
-                    if (!allLivePatches)
-                        planActionsPerHost.Add(new EvacuateHostPlanAction(host));
-                    
-                    if (PostUpdateTasksAutomatically)
-                        planActionsPerHost.Add(new RestartAgentPlanAction(host));
+                    delayedActionsPerHost.Add(new RestartAgentPlanAction(host));
                 }
                 else if (hostUpdateInfo.RecommendedGuidance.Contains(CdnGuidance.EvacuateHost))
                 {
-                    if (!allLivePatches)
-                        planActionsPerHost.Add(new EvacuateHostPlanAction(host));
+                    planActionsPerHost.Add(new EvacuateHostPlanAction(host));
                 }
                 else if (hostUpdateInfo.RecommendedGuidance.Contains(CdnGuidance.RestartDeviceModel))
                 {
-                    if (!allLivePatches)
-                        planActionsPerHost.Add(new RebootVMsPlanAction(host, host.GetRunningVMs()));
+                    delayedActionsPerHost.Add(new RebootVMsPlanAction(host, host.GetRunningVMs()));
                 }
             }
 
