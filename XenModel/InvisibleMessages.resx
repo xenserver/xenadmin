@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -127,19 +127,16 @@
     <value>https://www.citrix.com/support/programs/</value>
   </data>
   <data name="DEPRECATION_URL" xml:space="preserve">
-    <value>http://docs.citrix.com/en-us/citrix-hypervisor/whats-new/removed-features.html</value>
+    <value>https://docs.xenserver.com/en-us/xenserver/8/whats-new/removed-features.html</value>
   </data>
   <data name="DOCS_URL" xml:space="preserve">
-    <value>http://docs.citrix.com/en-us/</value>
-  </data>
-  <data name="FCOE_SR_DEPRECATION_URL" xml:space="preserve">
-    <value>https://docs.citrix.com/en-us/citrix-hypervisor/CH-0011.html</value>
+    <value>https://docs.xenserver.com/</value>
   </data>
   <data name="HELP_URL_QUERY" xml:space="preserve">
     <value>?utm_campaign={0}&amp;utm_medium=ui_link&amp;utm_source={1}</value>
   </data>
   <data name="HOMEPAGE" xml:space="preserve">
-    <value>https://www.citrix.com/products/citrix-hypervisor</value>
+    <value>https://www.xenserver.com/</value>
   </data>
   <data name="LICENSE_BUY_URL" xml:space="preserve">
     <value>https://xenserver.com/buy</value>
@@ -151,7 +148,7 @@
     <value>en-US</value>
   </data>
   <data name="OUT_OF_DATE_WEBSITE" xml:space="preserve">
-    <value>https://www.citrix.com/downloads/citrix-hypervisor</value>
+    <value>https://www.xenserver.com/downloads</value>
   </data>
   <data name="PLUGINS_URL" xml:space="preserve">
     <value>https://github.com/xenserver/xencenter-samples</value>
@@ -160,18 +157,18 @@
     <value>http://citrix.com/English/aboutCitrix/legal/privacyStatement.asp?ntref=hp_nav_US</value>
   </data>
   <data name="PV_GUESTS_CHECK_URL" xml:space="preserve">
-    <value>https://docs.citrix.com/en-us/citrix-hypervisor/system-requirements/guest-os-support.html</value>
+    <value>https://docs.xenserver.com/en-us/xenserver/8/system-requirements/guest-os-support.html</value>
   </data>
   <data name="RELEASE_NOTES_URL" xml:space="preserve">
-    <value>https://docs.citrix.com/en-us/citrix-hypervisor/citrix-hypervisor-center/whats-new</value>
+    <value>https://docs.xenserver.com/en-us/xencenter/current-release/whats-new.html</value>
   </data>
   <data name="TOKEN_API_URL" xml:space="preserve">
     <value>https://fileservice.citrix.com/api/session/token</value>
   </data>
   <data name="UPDATE_URL_PREFIX" xml:space="preserve">
-  <value>https://fileservice.citrix.com/direct/v2/download/</value>
-</data>
+    <value>https://fileservice.citrix.com/direct/v2/download/</value>
+  </data>
   <data name="UPSELL_LEARNMOREURL_TRIAL" xml:space="preserve">
-    <value>https://www.citrix.com/products/citrix-hypervisor/get-started.html</value>
+    <value>https://www.xenserver.com/</value>
   </data>
 </root>
