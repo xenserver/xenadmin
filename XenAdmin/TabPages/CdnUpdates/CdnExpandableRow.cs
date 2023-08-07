@@ -124,6 +124,7 @@ namespace XenAdmin.TabPages.CdnUpdates
             if (poolUpdateInfo == null)
             {
                 ChildRows = connection.Cache.Hosts
+                    .OrderBy(h => h)
                     .Select(h => new HostUpdateInfoRow(connection, h, null, null))
                     .Cast<CdnExpandableRow>().ToList();
             }
@@ -131,6 +132,7 @@ namespace XenAdmin.TabPages.CdnUpdates
             {
                 ChildRows = poolUpdateInfo.HostsWithUpdates
                     .Select(h => new HostUpdateInfoRow(connection, connection.Resolve(new XenRef<Host>(h.HostOpaqueRef)), poolUpdateInfo, h))
+                    .OrderBy(h => h.Host)
                     .Cast<CdnExpandableRow>().ToList();
             }
         }
@@ -158,24 +160,27 @@ namespace XenAdmin.TabPages.CdnUpdates
             {
                 var pool = Helpers.GetPoolOfOne(Connection);
 
-                var repoNames = (from repoRef in pool.repositories
-                    let repo = pool.Connection.Resolve(repoRef)
-                    where repo != null
-                    let found = RepoDescriptor.AllRepos.FirstOrDefault(rd => rd.MatchesRepository(repo))
-                    where found != null
-                    select found.FriendlyName).ToList();
-
-                channel = repoNames.Count == 0 ? Messages.NOT_CONFIGURED : string.Join("\n", repoNames);
-
-                lastSyncTime = Messages.INDETERMINABLE;
-
-                if (Helpers.XapiEqualOrGreater_23_18_0(Connection))
+                if (pool != null)
                 {
-                    lastSyncTime = Messages.NEVER;
+                    var repoNames = (from repoRef in pool.repositories
+                        let repo = pool.Connection.Resolve(repoRef)
+                        where repo != null
+                        let found = RepoDescriptor.AllRepos.FirstOrDefault(rd => rd.MatchesRepository(repo))
+                        where found != null
+                        select found.FriendlyName).ToList();
 
-                    if (pool != null && pool.last_update_sync > Util.GetUnixMinDateTime())
+                    channel = repoNames.Count == 0 ? Messages.NOT_CONFIGURED : string.Join("\n", repoNames);
+
+                    lastSyncTime = Messages.INDETERMINABLE;
+
+                    if (Helpers.XapiEqualOrGreater_23_18_0(Connection))
                     {
-                        lastSyncTime = HelpersGUI.DateTimeToString(pool.last_update_sync.ToLocalTime(), Messages.DATEFORMAT_DMY_HMS, true);
+                        lastSyncTime = Messages.NEVER;
+
+                        if (pool.last_update_sync > Util.GetUnixMinDateTime())
+                        {
+                            lastSyncTime = HelpersGUI.DateTimeToString(pool.last_update_sync.ToLocalTime(), Messages.DATEFORMAT_DMY_HMS, true);
+                        }
                     }
                 }
             }

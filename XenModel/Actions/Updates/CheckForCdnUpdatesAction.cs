@@ -43,7 +43,7 @@ namespace XenAdmin.Actions
         public CheckForCdnUpdatesAction(IXenConnection connection)
             : base(connection, string.Empty)
         {
-            Title = Description = Messages.YUM_REPO_ACTION_CHECK_FOR_UPDATES;
+            Title = Description = string.Format(Messages.YUM_REPO_ACTION_CHECK_FOR_UPDATES, connection.Name);
             ApiMethodsToRoleCheck.Add("http/get_updates");
         }
 
