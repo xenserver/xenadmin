@@ -30,8 +30,10 @@
 
 using System;
 using System.IO;
+using System.Linq;
 using System.Text;
 using NUnit.Framework;
+using XenCenterLib;
 using XenCenterLib.Archive;
 
 namespace XenAdminTests.ArchiveTests
@@ -211,5 +213,27 @@ namespace XenAdminTests.ArchiveTests
             Directory.Delete(tempPath, true);
         }
 
+        [Test]
+        public void VerifyADirectoryIsWrittenWhenCallingExtractAllContentsOnLongPath()
+        {
+            string tempPath = Path.Combine(Path.Combine(Path.GetTempPath(), string.Join(@"\", Enumerable.Repeat("folder", 50))), Path.GetRandomFileName());
+            string longTempPath = StringUtility.ToLongWindowsPath(tempPath);
+            fakeIterator.IsDirectoryReturn = true;
+            fakeIterator.CurrentFileNameReturn = "FakePath" + Path.DirectorySeparatorChar;
+            fakeIterator.ExtractAllContents(tempPath);
+
+            //Test file has been created
+            string targetPath = StringUtility.ToLongWindowsPath(Path.Combine(tempPath, fakeIterator.CurrentFileName()));
+            Assert.IsFalse(File.Exists(targetPath), "No files exist");
+            Assert.IsTrue(Directory.Exists(targetPath), "Directories exist");
+
+            //No files - just a directory
+            Assert.IsTrue(Directory.GetFiles(longTempPath).Length < 1, "No file in the directory");
+
+            //Check it's a directory
+            Assert.IsTrue((File.GetAttributes(targetPath) & FileAttributes.Directory) == FileAttributes.Directory, "Has directory attributes");
+
+            Directory.Delete(longTempPath, true);
+        }
     }
 }
