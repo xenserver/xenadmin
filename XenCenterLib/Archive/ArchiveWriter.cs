@@ -59,22 +59,22 @@ namespace XenCenterLib.Archive
             // AllDirectories options because in .NET 4.8 they do not enumerate all elements if they
             // have paths longer than 260 characters (240 for directories).
             // If moving to .NET Core, please consider reverting this .
-            AddFiles(StringUtility.ToLongWindowsPath(pathToArchive), cancellingDelegate);
+            AddFiles(StringUtility.ToLongWindowsPath(pathToArchive), pathToArchive, cancellingDelegate);
             var directories = Directory.GetDirectories(StringUtility.ToLongWindowsPath(pathToArchive));
             for (var j = 0; j < directories.Length; j++)
             {
                 string dirPath = directories[j];
                 cancellingDelegate?.Invoke();
                 AddDirectory(CleanRelativePathName(pathToArchive, dirPath), Directory.GetCreationTime(dirPath));
-                AddFiles(dirPath, cancellingDelegate);
-                TraverseDirectories(dirPath, pathToArchive, cancellingDelegate);
+                AddFiles(pathToArchive, dirPath, cancellingDelegate);
+                TraverseDirectories(pathToArchive, dirPath, cancellingDelegate);
                 progressDelegate?.Invoke( (int)100.0 * j / directories.Length);
             }
         }
 
-        private void AddFiles(string pathToArchive, Action cancellingDelegate)
+        private void AddFiles(string pathToArchive, string currentDirectory, Action cancellingDelegate)
         {
-            var files = Directory.GetFiles(pathToArchive);
+            var files = Directory.GetFiles(StringUtility.ToLongWindowsPath(currentDirectory));
             foreach (var filePath in files)
             {
                 cancellingDelegate?.Invoke();
@@ -86,7 +86,7 @@ namespace XenCenterLib.Archive
             }
         }
 
-        private void TraverseDirectories(string currentDirectory, string pathToArchive, Action cancellingDelegate )
+        private void TraverseDirectories(string pathToArchive, string currentDirectory, Action cancellingDelegate )
         {
             var subdirectories = Directory.GetDirectories(StringUtility.ToLongWindowsPath(currentDirectory));
 
@@ -95,8 +95,8 @@ namespace XenCenterLib.Archive
                 var longPathSubdirectory = StringUtility.ToLongWindowsPath(subdirectory);
                 cancellingDelegate?.Invoke();
                 AddDirectory(CleanRelativePathName(pathToArchive, subdirectory), Directory.GetCreationTime(longPathSubdirectory));
-                AddFiles(longPathSubdirectory, cancellingDelegate);
-                TraverseDirectories(longPathSubdirectory, pathToArchive, cancellingDelegate);
+                AddFiles(pathToArchive, longPathSubdirectory, cancellingDelegate);
+                TraverseDirectories(pathToArchive, longPathSubdirectory, cancellingDelegate);
             }
         }
 
