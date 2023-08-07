@@ -189,6 +189,15 @@ namespace XenAdmin.Commands
             {
                 items.AddIfEnabled(new DisconnectHostsAndPoolsCommand(mainWindow, selection), true);
                 items.AddIfEnabled(new ReconnectHostCommand(mainWindow, selection), true);
+
+                var updatesItem = new CommandToolStripMenuItem(new PoolUpdatesCommand(mainWindow, selection), true);
+                if (updatesItem.Command.CanRun())
+                {
+                    updatesItem.DropDownItems.Add(new CommandToolStripMenuItem(new ConfigUpdatesCommand(mainWindow, selection), true));
+                    updatesItem.DropDownItems.Add(new CommandToolStripMenuItem(new SynchronizeCommand(mainWindow, selection), true));
+                    items.Add(updatesItem);
+                }
+
                 items.AddIfEnabled(new EditTagsCommand(mainWindow, selection));
             }
 
@@ -201,14 +210,11 @@ namespace XenAdmin.Commands
                 {
                     foreach (SelectedItem item in selection)
                     {
-                        Pool pool = item.XenObject as Pool;
-                        Host host = item.XenObject as Host;
-
-                        if (pool != null)
+                        if (item.XenObject is Pool)
                         {
                             containsPool = true;
                         }
-                        else if (host != null && item.PoolAncestor == null)
+                        else if (item.XenObject is Host && item.PoolAncestor == null)
                         {
                             containsHost = true;
                         }
@@ -227,6 +233,15 @@ namespace XenAdmin.Commands
             public override void Build(IMainWindow mainWindow, SelectedItemCollection selection, ContextMenuItemCollection items)
             {
                 items.AddIfEnabled(new DisconnectPoolCommand(mainWindow, selection), true);
+
+                var updatesItem = new CommandToolStripMenuItem(new PoolUpdatesCommand(mainWindow, selection), true);
+                if (updatesItem.Command.CanRun())
+                {
+                    updatesItem.DropDownItems.Add(new CommandToolStripMenuItem(new ConfigUpdatesCommand(mainWindow, selection), true));
+                    updatesItem.DropDownItems.Add(new CommandToolStripMenuItem(new SynchronizeCommand(mainWindow, selection), true));
+                    items.Add(updatesItem);
+                }
+
                 items.AddIfEnabled(new EditTagsCommand(mainWindow, selection));
                 items.AddPluginItems(PluginContextMenu.pool, selection);
             }
@@ -548,6 +563,14 @@ namespace XenAdmin.Commands
                 }
 
                 items.AddIfEnabled(new HostMaintenanceModeCommand(mainWindow, selection));
+
+                var updatesItem = new CommandToolStripMenuItem(new PoolUpdatesCommand(mainWindow, selection), true);
+                if (updatesItem.Command.CanRun())
+                {
+                    updatesItem.DropDownItems.Add(new CommandToolStripMenuItem(new ConfigUpdatesCommand(mainWindow, selection), true));
+                    updatesItem.DropDownItems.Add(new CommandToolStripMenuItem(new SynchronizeCommand(mainWindow, selection), true));
+                    items.Add(updatesItem);
+                }
                 items.AddSeparator();
 
                 items.AddIfEnabled(new RebootHostCommand(mainWindow, selection));
@@ -651,7 +674,7 @@ namespace XenAdmin.Commands
                 items.Add(new NewSRCommand(mainWindow, selection));
 				items.Add(new ImportCommand(mainWindow, selection));
                 items.AddSeparator();
-                
+
                 var haItem = new CommandToolStripMenuItem(new HACommand(mainWindow, selection), true);
                 if (haItem.Command.CanRun())
                 {
@@ -666,17 +689,22 @@ namespace XenAdmin.Commands
                 var drItem = new CommandToolStripMenuItem(new DRCommand(mainWindow, selection), true);
                 if (drItem.Command.CanRun())
                 {
-                    drItem.DropDownItems.Add(new CommandToolStripMenuItem(
-                                                 new DRConfigureCommand(mainWindow, selection), true));
-                    drItem.DropDownItems.Add(new CommandToolStripMenuItem(new DisasterRecoveryCommand(mainWindow, selection),
-                                                                          true));
+                    drItem.DropDownItems.Add(new CommandToolStripMenuItem(new DRConfigureCommand(mainWindow, selection), true));
+                    drItem.DropDownItems.Add(new CommandToolStripMenuItem(new DisasterRecoveryCommand(mainWindow, selection), true));
                     items.Add(drItem);
                 }
 
                 items.AddIfEnabled(new LaunchConversionManagerCommand(mainWindow, selection));
 
-                var pool = selection.FirstAsXenObject as Pool;
-                if (pool != null && !pool.IsPoolFullyUpgraded())
+                var updatesItem = new CommandToolStripMenuItem(new PoolUpdatesCommand(mainWindow, selection), true);
+                if (updatesItem.Command.CanRun())
+                {
+                    updatesItem.DropDownItems.Add(new CommandToolStripMenuItem(new ConfigUpdatesCommand(mainWindow, selection), true));
+                    updatesItem.DropDownItems.Add(new CommandToolStripMenuItem(new SynchronizeCommand(mainWindow, selection), true));
+                    items.Add(updatesItem);
+                }
+
+                if (selection.FirstAsXenObject is Pool pool && !pool.IsPoolFullyUpgraded())
                     items.Add(new RollingUpgradeCommand(mainWindow));
 
                 items.AddSeparator();

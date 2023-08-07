@@ -118,6 +118,7 @@
     <Compile Include="Alerts\Types\MessageAlert.cs" />
     <Compile Include="Alerts\Types\XenServerPatchAlert.cs" />
     <Compile Include="Alerts\Types\XenServerVersionAlert.cs" />
+    <Compile Include="Commands\PoolUpdatesCommand.cs" />
     <Compile Include="Commands\VtpmCommand.cs" />
     <Compile Include="Controls\ClientIdControl.cs">
       <SubType>UserControl</SubType>

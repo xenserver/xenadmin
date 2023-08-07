@@ -8407,6 +8407,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &amp;Configure Updates....
+        /// </summary>
+        public static string CONFIG_UPDATES_MENU_ITEM {
+            get {
+                return ResourceManager.GetString("CONFIG_UPDATES_MENU_ITEM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Configure HA.
         /// </summary>
         public static string CONFIGURE_HA {
@@ -37776,6 +37785,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &amp;Updates.
+        /// </summary>
+        public static string UPDATES_MENU_ITEM {
+            get {
+                return ResourceManager.GetString("UPDATES_MENU_ITEM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Automatically check for {0} updates.
         /// </summary>
         public static string UPDATES_OPTIONS_DESC {
@@ -43736,6 +43754,15 @@ namespace XenAdmin {
         public static string YUM_REPO_SYNC_FILTER_CONFIRMATION {
             get {
                 return ResourceManager.GetString("YUM_REPO_SYNC_FILTER_CONFIRMATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Synchronize with update channel.
+        /// </summary>
+        public static string YUM_REPO_SYNC_MENU_ITEM {
+            get {
+                return ResourceManager.GetString("YUM_REPO_SYNC_MENU_ITEM", resourceCulture);
             }
         }
         
