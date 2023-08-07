@@ -42,7 +42,7 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
 
         public override string Title => Description;
         public override string LinkText => Messages.LEARN_MORE;
-        public override string LinkData => InvisibleMessages.FCOE_SR_DEPRECATION_URL;
+        public override string LinkData => InvisibleMessages.DEPRECATION_URL;
 
         public override string Message => string.Format(_upgradingToVersionWithDeprecation
                 ? Messages.POOL_HAS_DEPRECATED_FCOE_WARNING
