@@ -1576,7 +1576,7 @@ namespace XenAdmin.Core
             return queryString;
         }
 
-        public static bool TryLoadHostEua(Host host, Uri targetUri, out string eua)
+        public static bool TryLoadHostEua(Host host, string targetUri, out string eua)
         {
             eua = null;
             if (host == null || targetUri == null)
@@ -1585,7 +1585,7 @@ namespace XenAdmin.Core
             }
             var args = new Dictionary<string, string>
             {
-                { "url", targetUri.ToString()}
+                { "url", targetUri }
             };
 
             try
