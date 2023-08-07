@@ -338,8 +338,20 @@ namespace XenAdmin.TabPages
 
         private void tsmiSynchronizeSelected_Click(object sender, EventArgs e)
         {
-            if (dataGridViewEx1.SelectedRows.Count > 0 && dataGridViewEx1.SelectedRows[0] is PoolUpdateInfoRow row)
-                SyncPool(row.Pool);
+            if (dataGridViewEx1.SelectedRows.Count > 0)
+            {
+                var row = dataGridViewEx1.SelectedRows[0];
+
+                Pool pool = null;
+
+                if (row is PoolUpdateInfoRow puiRow)
+                    pool = puiRow.Pool;
+                else if (row is HostUpdateInfoRow huiRow && Helpers.GetPool(huiRow.Connection) == null)
+                    pool = Helpers.GetPoolOfOne(huiRow.Connection);
+
+                if (pool != null)
+                    SyncPool(pool);
+            }
         }
 
         private void tsmiSynchronizeAll_Click(object sender, EventArgs e)
@@ -363,7 +375,6 @@ namespace XenAdmin.TabPages
                            ThreeButtonDialog.ButtonCancel))
                 {
                     result = dlog.ShowDialog(this);
-                    Settings.TrySaveSettings();
                 }
             }
 

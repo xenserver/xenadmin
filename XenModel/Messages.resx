@@ -15010,7 +15010,7 @@ Any disk in your VM's DVD drive will be ejected when installing {1}.</value>
     <value>You are here</value>
   </data>
   <data name="YUM_REPO_ACTION_CHECK_FOR_UPDATES" xml:space="preserve">
-    <value>Checking for available updates...</value>
+    <value>Retrieving list of available updates for {0}...</value>
   </data>
   <data name="YUM_REPO_ACTION_CONFIG_DESCRIPTION_DISABLE" xml:space="preserve">
     <value>Disabling repository {0}...</value>
@@ -15040,7 +15040,7 @@ Any disk in your VM's DVD drive will be ejected when installing {1}.</value>
     <value>Enabling periodic synchronization with the update channel...</value>
   </data>
   <data name="YUM_REPO_ACTION_SYNCING_TITLE" xml:space="preserve">
-    <value>Synchronizing with update channel...</value>
+    <value>Synchronizing {0} with update channel...</value>
   </data>
   <data name="YUM_REPO_BASE" xml:space="preserve">
     <value>Base</value>

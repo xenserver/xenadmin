@@ -41,7 +41,7 @@ namespace XenAdmin.Actions
             : base(pool.Connection, string.Empty)
         {
             _pool = pool;
-            Description = Title = Messages.YUM_REPO_ACTION_SYNCING_TITLE;
+            Description = Title = string.Format(Messages.YUM_REPO_ACTION_SYNCING_TITLE, pool.Name());
             ApiMethodsToRoleCheck.Add("pool.sync_updates");
         }
 

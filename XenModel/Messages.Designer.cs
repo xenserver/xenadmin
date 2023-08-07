@@ -43576,7 +43576,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Checking for available updates....
+        ///   Looks up a localized string similar to Retrieving list of available updates for {0}....
         /// </summary>
         public static string YUM_REPO_ACTION_CHECK_FOR_UPDATES {
             get {
@@ -43666,7 +43666,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Synchronizing with update channel....
+        ///   Looks up a localized string similar to Synchronizing {0} with update channel....
         /// </summary>
         public static string YUM_REPO_ACTION_SYNCING_TITLE {
             get {
