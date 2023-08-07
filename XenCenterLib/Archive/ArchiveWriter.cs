@@ -52,29 +52,51 @@ namespace XenCenterLib.Archive
 
         public void CreateArchive(string pathToArchive, Action cancellingDelegate = null, Action<int> progressDelegate = null)
         {
-            if (!Directory.Exists(pathToArchive))
+            if (!Directory.Exists(StringUtility.ToLongWindowsPath(pathToArchive)))
                 throw new FileNotFoundException("The path " + pathToArchive + " does not exist");
 
-            var files = Directory.GetFiles(pathToArchive, "*.*", SearchOption.AllDirectories);
-            for (var i = 0; i < files.Length; i++)
-            {
-                string filePath = files[i];
-                cancellingDelegate?.Invoke();
-
-                using (FileStream fs = File.OpenRead(StringUtility.ToLongWindowsPath(filePath)))
-                {
-                    Add(fs, CleanRelativePathName(pathToArchive, filePath), File.GetCreationTime(StringUtility.ToLongWindowsPath(filePath)), cancellingDelegate);
-                    progressDelegate?.Invoke((int)50.0 * i / files.Length);
-                }
-            }
-
-            var directories = Directory.GetDirectories(pathToArchive, "*.*", SearchOption.AllDirectories);
+            // We look recursively and do not use Directory.GetDirectories and Directory.GetFiles with
+            // AllDirectories options because in .NET 4.8 they do not enumerate all elements if they
+            // have paths longer than 260 characters (240 for directories).
+            // If moving to .NET Core, please consider reverting this .
+            AddFiles(StringUtility.ToLongWindowsPath(pathToArchive), cancellingDelegate);
+            var directories = Directory.GetDirectories(StringUtility.ToLongWindowsPath(pathToArchive));
             for (var j = 0; j < directories.Length; j++)
             {
                 string dirPath = directories[j];
                 cancellingDelegate?.Invoke();
                 AddDirectory(CleanRelativePathName(pathToArchive, dirPath), Directory.GetCreationTime(dirPath));
-                progressDelegate?.Invoke(50 + (int)50.0 * j / directories.Length);
+                AddFiles(dirPath, cancellingDelegate);
+                TraverseDirectories(dirPath, pathToArchive, cancellingDelegate);
+                progressDelegate?.Invoke( (int)100.0 * j / directories.Length);
+            }
+        }
+
+        private void AddFiles(string pathToArchive, Action cancellingDelegate)
+        {
+            var files = Directory.GetFiles(pathToArchive);
+            foreach (var filePath in files)
+            {
+                cancellingDelegate?.Invoke();
+
+                using (var fs = File.OpenRead(StringUtility.ToLongWindowsPath(filePath)))
+                {
+                    Add(fs, CleanRelativePathName(pathToArchive, filePath), File.GetCreationTime(StringUtility.ToLongWindowsPath(filePath)), cancellingDelegate);
+                }
+            }
+        }
+
+        private void TraverseDirectories(string currentDirectory, string pathToArchive, Action cancellingDelegate )
+        {
+            var subdirectories = Directory.GetDirectories(StringUtility.ToLongWindowsPath(currentDirectory));
+
+            foreach (var subdirectory in subdirectories)
+            {
+                var longPathSubdirectory = StringUtility.ToLongWindowsPath(subdirectory);
+                cancellingDelegate?.Invoke();
+                AddDirectory(CleanRelativePathName(pathToArchive, subdirectory), Directory.GetCreationTime(longPathSubdirectory));
+                AddFiles(longPathSubdirectory, cancellingDelegate);
+                TraverseDirectories(longPathSubdirectory, pathToArchive, cancellingDelegate);
             }
         }
 
@@ -86,8 +108,11 @@ namespace XenCenterLib.Archive
 
         private string CleanRelativePathName(string rootPath, string pathName)
         {
-            return pathName.Replace(rootPath, "").Replace('\\', '/').TrimStart('/');
+            return pathName
+                .Replace(@"\\?\", string.Empty)
+                .Replace(rootPath, string.Empty)
+                .Replace('\\', '/')
+                .TrimStart('/');
         }
-
     }
 }
