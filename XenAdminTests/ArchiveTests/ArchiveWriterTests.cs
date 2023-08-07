@@ -68,11 +68,11 @@ namespace XenAdminTests.ArchiveTests
             {
                 if (AddedStreamData != null)
                 {
-                   foreach (Stream stream in AddedStreamData)
+                    foreach (Stream stream in AddedStreamData)
                     {
-                        if( stream != null )
+                        if (stream != null)
                             stream.Dispose();
-                    } 
+                    }
                 }
             }
 
@@ -93,9 +93,9 @@ namespace XenAdminTests.ArchiveTests
             protected override void Dispose(bool disposing)
             {
                 base.Dispose(disposing);
-                if(disposing)
+                if (disposing)
                 {
-                    if( !disposed )
+                    if (!disposed)
                     {
                         DisposeStreamList();
                     }
@@ -184,16 +184,16 @@ namespace XenAdminTests.ArchiveTests
             {
                 string subfolder = Path.Combine(tempPath, Path.GetRandomFileName());
                 Directory.CreateDirectory(subfolder);
-                CreateFiles( subfolder, i);
+                CreateFiles(subfolder, i);
             }
 
             fakeWriter.CreateArchive(tempPath);
 
-            Assert.AreEqual(12, fakeWriter.AddedDates.Count );
+            Assert.AreEqual(12, fakeWriter.AddedDates.Count);
             Assert.AreEqual(12, fakeWriter.AddedFileNameData.Count);
             Assert.AreEqual(8, fakeWriter.AddedStreamData.Count);
-            
-            foreach( DateTime date in fakeWriter.AddedDates )
+
+            foreach (DateTime date in fakeWriter.AddedDates)
                 AssertCurrentDateIsPlausible(date);
 
             foreach (string name in fakeWriter.AddedFileNameData)
@@ -206,7 +206,7 @@ namespace XenAdminTests.ArchiveTests
         {
             for (int i = 0; i < numberOfFiles; i++)
             {
-                using( FileStream fs = File.OpenWrite(Path.Combine(tempPath, Path.GetRandomFileName())))
+                using (FileStream fs = File.OpenWrite(Path.Combine(tempPath, Path.GetRandomFileName())))
                 {
                     fs.Write(Encoding.ASCII.GetBytes("This is a test"), 0, 14);
                     fs.Flush();
