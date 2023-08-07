@@ -34,6 +34,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
+using XenCenterLib;
 using XenCenterLib.Archive;
 
 namespace XenAdminTests.ArchiveTests
@@ -171,6 +172,54 @@ namespace XenAdminTests.ArchiveTests
         public void CreateArchiveThrowsWithBadPath()
         {
             Assert.Throws(typeof(FileNotFoundException), () => fakeWriter.CreateArchive("Yellow brick road - not a path!"));
+        }
+
+        [Test]
+        public void CreateArchiveWithLongPath()
+        {
+            var longFilePath = PopulateLongPathArchive(true);
+            Assert.Contains(longFilePath, fakeWriter.AddedFileNameData);
+            // 50 folders and one file
+            Assert.AreEqual(51, fakeWriter.AddedFileNameData.Count);
+        }
+
+        [Test]
+        public void CreateArchiveWithLongPath_PathTooLong()
+        {
+            //! N.B.: If this test fails it might be because the project has moved to a version of .NET Core
+            //! that does not require calls to `StringUtils.ToLongWindowsPath`. Please review its uses
+            //! and remove it from the codebase if possible.
+            Assert.Throws(typeof(PathTooLongException), () => PopulateLongPathArchive(false));
+        }
+
+        /// <summary>
+        /// Create an archive with 50 nested folders and one file.
+        /// </summary>
+        /// <param name="createValidPaths">set to true to ensure folders and files are prepended with \\?\</param>
+        /// <returns>the path of the one file that has been added</returns>
+        private string PopulateLongPathArchive(bool createValidPaths)
+        {
+            var zipPath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+            Directory.CreateDirectory(zipPath);
+
+            var longFileFolderPath = Path.Combine(zipPath, string.Join(@"\", Enumerable.Repeat("folder", 50)));
+            var longFilePath = longFileFolderPath + @"\file.txt";
+
+            if (createValidPaths)
+            {
+                longFileFolderPath = StringUtility.ToLongWindowsPath(longFileFolderPath);
+                longFilePath = StringUtility.ToLongWindowsPath(longFilePath);
+            }
+
+            Directory.CreateDirectory(longFileFolderPath);
+            File.WriteAllText(longFilePath, "Hello, World!");
+
+            fakeWriter.CreateArchive(zipPath);
+
+            Directory.Delete(longFileFolderPath, true);
+
+            // fakeWriter paths have been "cleaned" using ArchiveWriter.CleanRelativePathName
+            return longFilePath.Replace(@"\\?\", string.Empty).Replace(@"\", "/");
         }
 
         [Test]
