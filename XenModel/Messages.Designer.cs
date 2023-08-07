@@ -20514,9 +20514,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This server will be live patched.
-        ///Post-update tasks to be performed if live patch fails:
-        ///{0}.
+        ///   Looks up a localized string similar to This server will be live patched. If live patch fails, a server reboot will be required..
         /// </summary>
         public static string HOTFIX_POST_UPDATE_LIVEPATCH_ACTIONS {
             get {

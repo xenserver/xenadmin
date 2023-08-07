@@ -297,33 +297,21 @@ namespace XenAdmin.Wizards.PatchingWizard
                 {
                     if (hostUpdateInfo.RecommendedGuidance.Length > 0)
                     {
-                        bool allLivePatches = true;
-
-                        foreach (var id in hostUpdateInfo.UpdateIDs)
+                        var host = pool.Connection.Resolve(new XenRef<Host>(hostUpdateInfo.HostOpaqueRef));
+                        if (host != null)
                         {
-                            var update = poolUpdateInfo.Updates.FirstOrDefault(u => u.Id == id);
-                            if (update != null && update.LivePatchGuidance == CdnLivePatchGuidance.None)
-                            {
-                                allLivePatches = false;
-                                break;
-                            }
-                        }
+                            var hostSb = new StringBuilder();
 
-                        if (!allLivePatches)
-                        {
-                            var host = pool.Connection.Resolve(new XenRef<Host>(hostUpdateInfo.HostOpaqueRef));
-                            if (host != null)
-                            {
-                                var hostSb = new StringBuilder();
+                            var msg = host.IsCoordinator() ? $"{host.Name()} ({Messages.COORDINATOR})" : host.Name();
+                            hostSb.AppendIndented(msg).AppendLine();
 
-                                var msg = host.IsCoordinator() ? $"{host.Name()} ({Messages.COORDINATOR})" : host.Name();
-                                hostSb.AppendIndented(msg).AppendLine();
+                            foreach (var g in hostUpdateInfo.RecommendedGuidance)
+                                hostSb.AppendIndented(Cdn.FriendlyInstruction(g), 4).AppendLine();
 
-                                foreach (var g in hostUpdateInfo.RecommendedGuidance)
-                                    hostSb.AppendIndented(Cdn.FriendlyInstruction(g), 4).AppendLine();
+                            if (hostUpdateInfo.LivePatches.Length > 0 && !hostUpdateInfo.RecommendedGuidance.Contains(CdnGuidance.RebootHost))
+                                hostSb.AppendIndented(Messages.HOTFIX_POST_UPDATE_LIVEPATCH_ACTIONS, 4).AppendLine();
 
-                                hostDict[host] = hostSb;
-                            }
+                            hostDict[host] = hostSb;
                         }
                     }
                 }

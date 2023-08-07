@@ -209,19 +209,10 @@ namespace XenAdmin.TabPages.CdnUpdates
             {
                 if (hostUpdateInfo.RecommendedGuidance.Length > 0)
                 {
-                    bool allLivePatches = true;
+                    _childRows.Add(new PostUpdateActionRow(hostUpdateInfo.RecommendedGuidance));
 
-                    foreach (var id in hostUpdateInfo.UpdateIDs)
-                    {
-                        var update = poolUpdateInfo.Updates.FirstOrDefault(u => u.Id == id);
-                        if (update != null && update.LivePatchGuidance == CdnLivePatchGuidance.None)
-                        {
-                            allLivePatches = false;
-                            break;
-                        }
-                    }
-
-                    _childRows.Add(new PostUpdateActionRow(hostUpdateInfo.RecommendedGuidance, allLivePatches));
+                    if (hostUpdateInfo.LivePatches.Length > 0 && !hostUpdateInfo.RecommendedGuidance.Contains(CdnGuidance.RebootHost))
+                        _childRows.Add(new LivePatchActionRow());
                 }
 
                 var categories = hostUpdateInfo.GetUpdateCategories(poolUpdateInfo);
@@ -293,14 +284,18 @@ namespace XenAdmin.TabPages.CdnUpdates
 
     internal class PostUpdateActionRow : CdnExpandableRow
     {
-        public PostUpdateActionRow(CdnGuidance[] guidance, bool allLivePatches)
+        public PostUpdateActionRow(CdnGuidance[] guidance)
         {
-            var msg = allLivePatches ? Messages.HOTFIX_POST_UPDATE_LIVEPATCH_ACTIONS : Messages.HOTFIX_POST_UPDATE_ACTIONS;
+            var text = string.Format(Messages.HOTFIX_POST_UPDATE_ACTIONS, string.Join(Environment.NewLine, guidance.Select(Cdn.FriendlyInstruction)));
+            SetValues(text, Images.StaticImages.rightArrowLong_Blue_16);
+        }
+    }
 
-            var text = string.Format(msg, string.Join(Environment.NewLine, guidance.Select(Cdn.FriendlyInstruction)));
-            var img = allLivePatches ? Images.StaticImages.livepatch_16 : Images.StaticImages.rightArrowLong_Blue_16;
-
-            SetValues(text, img);
+    internal class LivePatchActionRow : CdnExpandableRow
+    {
+        public LivePatchActionRow()
+        {
+            SetValues(Messages.HOTFIX_POST_UPDATE_LIVEPATCH_ACTIONS, Images.StaticImages.livepatch_16);
         }
     }
 
