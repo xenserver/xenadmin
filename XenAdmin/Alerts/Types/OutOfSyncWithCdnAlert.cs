@@ -66,7 +66,7 @@ namespace XenAdmin.Alerts
             if (Helpers.XapiEqualOrGreater_23_18_0(connection))
             {
                 var pool = Helpers.GetPoolOfOne(connection);
-                var timestamp = DateTime.UtcNow;
+                var timestamp = DateTime.UtcNow - connection.ServerTimeOffset;
 
                 if (timestamp - pool.last_update_sync >= TimeSpan.FromDays(90))
                 {
@@ -120,7 +120,7 @@ namespace XenAdmin.Alerts
         public static bool TryCreate(IXenConnection connection, out Alert alert)
         {
             var pool = Helpers.GetPoolOfOne(connection);
-            var timestamp = DateTime.UtcNow;
+            var timestamp = DateTime.UtcNow - connection.ServerTimeOffset;
 
             if (pool.repositories.Count == 0)
             {
