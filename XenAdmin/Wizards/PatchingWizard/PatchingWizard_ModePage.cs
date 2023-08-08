@@ -316,8 +316,9 @@ namespace XenAdmin.Wizards.PatchingWizard
                     }
                 }
 
-                poolDict[pool] = new StringBuilder(string.Join(Environment.NewLine,
-                    hostDict.OrderBy(k => k.Key).Select(k => k.Value.ToString())));
+                if (hostDict.Count > 0)
+                    poolDict[pool] = new StringBuilder(string.Join(Environment.NewLine,
+                        hostDict.OrderBy(k => k.Key).Select(k => k.Value.ToString())));
             }
 
             return poolDict;

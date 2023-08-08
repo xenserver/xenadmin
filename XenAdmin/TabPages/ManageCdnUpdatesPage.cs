@@ -478,24 +478,39 @@ namespace XenAdmin.TabPages
                                 var connection = kvp.Key;
                                 var poolUpdateInfo = kvp.Value;
 
-                                foreach (var hostUpdateInfo in poolUpdateInfo.HostsWithUpdates)
+                                stream.WriteLine(connection.Name);
+                                stream.WriteLine();
+
+                                var hosts = poolUpdateInfo.HostsWithUpdates
+                                    .Select(hui => connection.Resolve(new XenRef<Host>(hui.HostOpaqueRef)))
+                                    .Where(h => h != null).OrderBy(h => h).ToList();
+
+                                foreach (var host in hosts)
                                 {
-                                    stream.WriteLine(connection.Resolve(new XenRef<Host>(hostUpdateInfo.HostOpaqueRef))?.Name());
+                                    var hostUpdateInfo = poolUpdateInfo.HostsWithUpdates.FirstOrDefault(hui => hui.HostOpaqueRef == host.opaque_ref);
+                                    if (hostUpdateInfo == null)
+                                        continue;
+
+                                    stream.WriteLine(host.Name());
                                     stream.WriteLine(string.Join("\n", hostUpdateInfo.RecommendedGuidance.Select(Cdn.FriendlyInstruction)));
+                                    stream.WriteLine();
 
                                     var categories = hostUpdateInfo.GetUpdateCategories(poolUpdateInfo);
                                     foreach (var category in categories)
                                     {
                                         stream.WriteLine($"{category.Item1.GetCategoryTitle(category.Item2.Count)}");
+                                        stream.WriteLine();
 
                                         foreach (var update in category.Item2)
                                         {
                                             stream.WriteLine(update.Summary);
                                             stream.WriteLine(update.CollateDetails());
+                                            stream.WriteLine();
                                         }
                                     }
 
                                     stream.WriteLine(string.Join(", ", hostUpdateInfo.Rpms));
+                                    stream.WriteLine();
                                 }
                             }
                         }
