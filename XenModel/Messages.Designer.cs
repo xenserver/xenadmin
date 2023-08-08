@@ -43756,6 +43756,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Synchronization with the update channel is in progress. Please try again later..
+        /// </summary>
+        public static string YUM_REPO_SYNC_IN_PROGRESS {
+            get {
+                return ResourceManager.GetString("YUM_REPO_SYNC_IN_PROGRESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;Synchronize with update channel.
         /// </summary>
         public static string YUM_REPO_SYNC_MENU_ITEM {

@@ -29,6 +29,8 @@
  */
 
 using System;
+using System.Linq;
+using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Diagnostics.Problems.PoolProblem;
@@ -53,6 +55,12 @@ namespace XenAdmin.Diagnostics.Checks
 
         protected override Problem RunCheck()
         {
+            var syncCount = ConnectionsManager.History.Count(a =>
+                !a.IsCompleted && a is SyncWithCdnAction syncA && !syncA.Cancelled && syncA.Connection == Pool.Connection);
+
+            if (syncCount > 0 || Pool.current_operations.Values.Contains(pool_allowed_operations.sync_updates))
+                return new SyncInProgressProblem(this, Pool);
+
             if (Helpers.XapiEqualOrGreater_23_18_0(Pool.Connection))
             {
                 if (DateTime.UtcNow - Pool.last_update_sync >= TimeSpan.FromDays(DAYS_SINCE_LAST_SYNC))

@@ -46,7 +46,7 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
             _days = days;
         }
 
-        public override string Description => $"{Pool.Connection.Name}:{string.Format(Messages.ALERT_CDN_OUT_OF_SYNC_TITLE, _days)}";
+        public override string Description => $"{Pool.Connection.Name}: {string.Format(Messages.ALERT_CDN_OUT_OF_SYNC_TITLE, _days)}";
 
         public override string HelpMessage => Messages.UPDATES_GENERAL_TAB_SYNC_NOW;
 
@@ -57,5 +57,17 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
             syncAction.Completed += a => Updates.CheckForCdnUpdates(a.Connection);
             return syncAction;
         }
+    }
+
+    public class SyncInProgressProblem : PoolProblem
+    {
+        public SyncInProgressProblem(Check check, Pool pool)
+            : base(check, pool)
+        {
+        }
+
+        public override string Description => $"{Pool.Connection.Name}: {Messages.YUM_REPO_SYNC_IN_PROGRESS}";
+
+        public override string HelpMessage => null;
     }
 }

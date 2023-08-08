@@ -122,6 +122,9 @@ namespace XenAdmin.Core
                     return;
             }
 
+            if (!pool.allowed_operations.Contains(pool_allowed_operations.get_updates))
+                return;
+
             var action = new CheckForCdnUpdatesAction(connection);
             action.Completed += CheckForCdnUpdatesAction_Completed;
             action.RunAsync();
