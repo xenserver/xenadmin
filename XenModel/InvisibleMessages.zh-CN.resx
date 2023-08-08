@@ -59,46 +59,46 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
-    <xsd:element msdata:IsDataSet="true" name="root">
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element minOccurs="0" name="value" type="xsd:string"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required"/>
-              <xsd:attribute name="type" type="xsd:string"/>
-              <xsd:attribute name="mimetype" type="xsd:string"/>
-              <xsd:attribute ref="xml:space"/>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string"/>
-              <xsd:attribute name="name" type="xsd:string"/>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
-                <xsd:element minOccurs="0" msdata:Ordinal="2" name="comment" type="xsd:string"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute msdata:Ordinal="1" name="name" type="xsd:string" use="required"/>
-              <xsd:attribute msdata:Ordinal="3" name="type" type="xsd:string"/>
-              <xsd:attribute msdata:Ordinal="4" name="mimetype" type="xsd:string"/>
-              <xsd:attribute ref="xml:space"/>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -118,36 +118,15 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DEPRECATION_URL" xml:space="preserve">
-    <value>http://docs.citrix.com/zh-cn/citrix-hypervisor/whats-new/removed-features.html</value>
+    <value>https://docs.xenserver.com/zh-cn/citrix-hypervisor/whats-new/removed-features.html</value>
   </data>
   <data name="DOCS_URL" xml:space="preserve">
-    <value>http://docs.citrix.com/zh-cn/</value>
-  </data>
-  <data name="HELP_URL_QUERY" xml:space="preserve">
-    <value>?utm_campaign={0}&amp;utm_medium=ui_link&amp;utm_source={1}</value>
-  </data>
-  <data name="HOMEPAGE" xml:space="preserve">
-    <value>https://www.citrix.com.cn/products/citrix-hypervisor/</value>
-  </data>
-  <data name="LICENSE_SERVER_DOWNLOAD_LINK" xml:space="preserve">
-    <value>http://www.citrix.com/downloads/licensing/license-server</value>
+    <value>https://docs.xenserver.com/zh-cn/</value>
   </data>
   <data name="LOCALE" xml:space="preserve">
     <value>zh-CN</value>
   </data>
-  <data name="OUT_OF_DATE_WEBSITE" xml:space="preserve">
-    <value>https://www.citrix.com/downloads/citrix-hypervisor</value>
-  </data>
-  <data name="PLUGINS_URL" xml:space="preserve">
-    <value>https://github.com/xenserver/xencenter-samples</value>
-  </data>
-  <data name="PRIVACY" xml:space="preserve">
-    <value>http://citrix.com/English/aboutCitrix/legal/privacyStatement.asp?ntref=hp_nav_US</value>
-  </data>
   <data name="PV_GUESTS_CHECK_URL" xml:space="preserve">
-    <value>https://docs.citrix.com/zh-cn/citrix-hypervisor/system-requirements/guest-os-support.html</value>
-  </data>
-  <data name="UPSELL_LEARNMOREURL_TRIAL" xml:space="preserve">
-    <value>https://www.citrix.com/products/citrix-hypervisor/get-started.html</value>
+    <value>https://docs.xenserver.com/zh-cn/citrix-hypervisor/system-requirements/guest-os-support.html</value>
   </data>
 </root>
