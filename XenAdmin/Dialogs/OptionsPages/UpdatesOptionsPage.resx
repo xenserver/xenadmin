@@ -229,13 +229,13 @@
     <value>3, 0, 0, 0</value>
   </data>
   <data name="labelInfoCdn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>246, 13</value>
+    <value>248, 13</value>
   </data>
   <data name="labelInfoCdn.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="labelInfoCdn.Text" xml:space="preserve">
-    <value>For configuraton of server updates use the dialog</value>
+    <value>For configuration of server updates use the dialog</value>
   </data>
   <data name="&gt;&gt;labelInfoCdn.Name" xml:space="preserve">
     <value>labelInfoCdn</value>
@@ -280,7 +280,7 @@
     <value>True</value>
   </data>
   <data name="linkLabelCongifUpdates.Location" type="System.Drawing.Point, System.Drawing">
-    <value>271, 4</value>
+    <value>273, 4</value>
   </data>
   <data name="linkLabelCongifUpdates.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 3, 0</value>
