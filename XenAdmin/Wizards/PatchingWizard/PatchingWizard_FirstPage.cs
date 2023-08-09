@@ -33,7 +33,7 @@ using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Controls;
 using XenAdmin.Core;
-using XenAdmin.Dialogs;
+using XenAdmin.Dialogs.ServerUpdates;
 
 namespace XenAdmin.Wizards.PatchingWizard
 {
@@ -95,9 +95,9 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void linkLabelClientId_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            using (var dialog = new OptionsDialog(Program.MainWindow.PluginManager))
+            using (var dialog = new ConfigUpdatesDialog())
             {
-                dialog.SelectUpdateOptionsPage();
+                dialog.SelectLcmTab();
                 dialog.ShowDialog(this);
             }
         }
