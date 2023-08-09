@@ -2690,8 +2690,6 @@ namespace XenAdmin
                     statusButtonUpdates.Text = updatesCount.ToString();
                     statusButtonUpdates.Visible = updatesCount > 0;
 
-                    SetClientUpdateAlert();
-
                     if (updatesPage.Visible)
                     {
                         TitleLabel.Text = NotificationsSubModeItem.GetText(NotificationsSubMode.Updates, updatesCount);
@@ -2713,7 +2711,7 @@ namespace XenAdmin
 
         private void SetClientUpdateAlert()
         {
-            updateAlert = Updates.UpdateAlerts.FirstOrDefault(update => update is ClientUpdateAlert) as ClientUpdateAlert;
+            updateAlert = Updates.ClientUpdateAlerts.FirstOrDefault();
             if (updateAlert != null)
                 relNotesToolStripMenuItem.Text = string.Format(Messages.MAINWINDOW_UPDATE_RELEASE, updateAlert.NewVersion.Version);
             updateClientToolStripMenuItem.Visible = updateAlert != null;

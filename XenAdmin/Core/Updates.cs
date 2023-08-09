@@ -58,8 +58,11 @@ namespace XenAdmin.Core
 
         public static string UserAgent { get; } = $"{BrandManager.BrandConsole}/{Program.Version} ({IntPtr.Size * 8}-bit)";
 
-        private static readonly object downloadedUpdatesLock = new object();
+        private static readonly object _cfuDownloadedLock = new object();
+        private static readonly object _clientXmlDownloadedLock = new object();
+
         private static readonly object updateAlertsLock = new object();
+        private static readonly object _clientUpdateAlertsLock = new object();
         private static readonly object _cdnUpdatesLock = new object();
 
         private static List<XenServerVersion> XenServerVersionsForAutoCheck = new List<XenServerVersion>();
@@ -68,6 +71,7 @@ namespace XenAdmin.Core
         public static List<XenServerVersion> XenServerVersions = new List<XenServerVersion>();
 
         private static readonly List<Alert> updateAlerts = new List<Alert>();
+        private static readonly List<ClientUpdateAlert> _clientUpdateAlerts = new List<ClientUpdateAlert>();
         private static readonly Dictionary<IXenConnection, CdnPoolUpdateInfo> _cdnUpdateInfoPerConnection = new Dictionary<IXenConnection, CdnPoolUpdateInfo>();
 
         /// <summary>
@@ -79,6 +83,18 @@ namespace XenAdmin.Core
             {
                 lock (updateAlertsLock)
                     return updateAlerts.ToList();
+            }
+        }
+
+        /// <summary>
+        /// Locks and creates a new list of the client update alerts
+        /// </summary>
+        public static List<ClientUpdateAlert> ClientUpdateAlerts
+        {
+            get
+            {
+                lock (_clientUpdateAlertsLock)
+                    return _clientUpdateAlerts.ToList();
             }
         }
 
@@ -238,30 +254,22 @@ namespace XenAdmin.Core
 
             if (succeeded)
             {
-                lock (downloadedUpdatesLock)
+                lock (_clientXmlDownloadedLock)
                 {
                     ClientVersions = action.ClientVersions;
                 }
             }
 
-            lock (updateAlertsLock)
+            lock (_clientUpdateAlertsLock)
             {
-                updateAlerts.Clear();
+                _clientUpdateAlerts.Clear();
 
                 if (succeeded)
                 {
                     var clientUpdateAlerts = NewClientUpdateAlerts(ClientVersions, Program.Version);
-                    updateAlerts.AddRange(clientUpdateAlerts.Where(a => !a.IsDismissed()));
+                    _clientUpdateAlerts.AddRange(clientUpdateAlerts.Where(a => !a.IsDismissed()));
                 }
-
-                var xenServerUpdateAlerts = NewXenServerVersionAlerts(XenServerVersionsForAutoCheck);
-                updateAlerts.AddRange(xenServerUpdateAlerts.Where(a => !a.CanIgnore));
-
-                var xenServerPatchAlerts = NewXenServerPatchAlerts(XenServerVersions, XenServerPatches);
-                updateAlerts.AddRange(xenServerPatchAlerts.Where(a => !a.CanIgnore));
             }
-
-            UpdateAlertCollectionChanged?.Invoke(new CollectionChangeEventArgs(CollectionChangeAction.Refresh, UpdateAlerts));
 
             CheckForClientUpdatesCompleted?.Invoke();
         }
@@ -275,7 +283,7 @@ namespace XenAdmin.Core
 
             if (succeeded)
             {
-                lock (downloadedUpdatesLock)
+                lock (_cfuDownloadedLock)
                 {
                     XenServerVersionsForAutoCheck = action.XenServerVersionsForAutoCheck;
                     XenServerVersions = action.XenServerVersions;
@@ -286,9 +294,6 @@ namespace XenAdmin.Core
             lock (updateAlertsLock)
             {
                 updateAlerts.Clear();
-
-                var clientUpdateAlerts = NewClientUpdateAlerts(ClientVersions, Program.Version);
-                updateAlerts.AddRange(clientUpdateAlerts.Where(a => !a.IsDismissed()));
 
                 if (succeeded)
                 {
