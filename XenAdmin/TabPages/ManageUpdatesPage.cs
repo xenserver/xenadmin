@@ -1240,7 +1240,7 @@ namespace XenAdmin.TabPages
             }
             catch (Exception)
             {
-                using (var dlg = new ErrorDialog(string.Format(Messages.LICENSE_SERVER_COULD_NOT_OPEN_LINK, InvisibleMessages.LICENSE_SERVER_DOWNLOAD_LINK)))
+                using (var dlg = new ErrorDialog(string.Format(Messages.LICENSE_SERVER_COULD_NOT_OPEN_LINK, InvisibleMessages.LICENSE_BUY_URL)))
                 {
                     dlg.ShowDialog(this);
                 }

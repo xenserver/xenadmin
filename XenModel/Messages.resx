@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -9883,10 +9883,10 @@ When you configure an NFS storage repository, you simply provide the host name o
     <value>There is no server eligible to become the coordinator of your new pool</value>
   </data>
   <data name="NO_GPU_IN_POOL" xml:space="preserve">
-    <value>GPU configuration and monitoring is disabled, because there are no GPUs available in this pool.</value>
+    <value>GPU configuration and monitoring are disabled, because there are no GPUs available in this pool.</value>
   </data>
   <data name="NO_GPU_ON_HOST" xml:space="preserve">
-    <value>GPU configuration and monitoring is disabled, because there are no GPUs available on this host.</value>
+    <value>GPU configuration and monitoring are disabled, because there are no GPUs available on this host.</value>
   </data>
   <data name="NO_HALTED_VMS" xml:space="preserve">
     <value>There are no halted or suspended VMs to export</value>

@@ -201,7 +201,7 @@ namespace XenAdmin.Dialogs
 
         public void DownloadLicenseManager()
         {
-            LaunchUrl(InvisibleMessages.LICENSE_SERVER_DOWNLOAD_LINK).Invoke();
+            LaunchUrl(InvisibleMessages.LICENSE_SERVER_DOCS_LINK).Invoke();
         }
 
         private Action LaunchUrl(string url)

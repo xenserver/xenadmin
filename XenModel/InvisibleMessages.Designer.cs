@@ -88,7 +88,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://docs.citrix.com/en-us/citrix-hypervisor/whats-new/removed-features.html.
+        ///   Looks up a localized string similar to https://docs.xenserver.com/en-us/xenserver/8/whats-new/removed-features.html.
         /// </summary>
         public static string DEPRECATION_URL {
             get {
@@ -97,20 +97,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://docs.citrix.com/en-us/.
+        ///   Looks up a localized string similar to https://docs.xenserver.com/.
         /// </summary>
         public static string DOCS_URL {
             get {
                 return ResourceManager.GetString("DOCS_URL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to https://docs.citrix.com/en-us/citrix-hypervisor/CH-0011.html.
-        /// </summary>
-        public static string FCOE_SR_DEPRECATION_URL {
-            get {
-                return ResourceManager.GetString("FCOE_SR_DEPRECATION_URL", resourceCulture);
             }
         }
         
@@ -124,7 +115,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://www.citrix.com/products/citrix-hypervisor.
+        ///   Looks up a localized string similar to https://www.xenserver.com/.
         /// </summary>
         public static string HOMEPAGE {
             get {
@@ -142,11 +133,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://www.citrix.com/downloads/licensing/license-server.
+        ///   Looks up a localized string similar to https://docs.citrix.com/en-us/licensing/current-release/license-server-getting-started.html.
         /// </summary>
-        public static string LICENSE_SERVER_DOWNLOAD_LINK {
+        public static string LICENSE_SERVER_DOCS_LINK {
             get {
-                return ResourceManager.GetString("LICENSE_SERVER_DOWNLOAD_LINK", resourceCulture);
+                return ResourceManager.GetString("LICENSE_SERVER_DOCS_LINK", resourceCulture);
             }
         }
         
@@ -160,7 +151,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://www.citrix.com/downloads/citrix-hypervisor.
+        ///   Looks up a localized string similar to https://www.xenserver.com/downloads.
         /// </summary>
         public static string OUT_OF_DATE_WEBSITE {
             get {
@@ -187,7 +178,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://docs.citrix.com/en-us/citrix-hypervisor/system-requirements/guest-os-support.html.
+        ///   Looks up a localized string similar to https://docs.xenserver.com/en-us/xenserver/8/system-requirements/guest-os-support.html.
         /// </summary>
         public static string PV_GUESTS_CHECK_URL {
             get {
@@ -196,7 +187,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://docs.citrix.com/en-us/citrix-hypervisor/citrix-hypervisor-center/whats-new.
+        ///   Looks up a localized string similar to https://docs.xenserver.com/en-us/xencenter/current-release/whats-new.html.
         /// </summary>
         public static string RELEASE_NOTES_URL {
             get {
@@ -223,7 +214,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://www.citrix.com/products/citrix-hypervisor/get-started.html.
+        ///   Looks up a localized string similar to https://www.xenserver.com/.
         /// </summary>
         public static string UPSELL_LEARNMOREURL_TRIAL {
             get {
