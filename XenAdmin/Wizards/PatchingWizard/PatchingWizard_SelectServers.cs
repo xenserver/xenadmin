@@ -60,6 +60,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         public XenServerPatchAlert AlertFromFileOnDisk { private get; set; }
         public bool FileFromDiskHasUpdateXml { private get; set; }
         public WizardMode WizardMode { private get; set; }
+        public bool IsNewGeneration { get; set; }
 
         public PatchingWizard_SelectServers()
         {
@@ -76,13 +77,11 @@ namespace XenAdmin.Wizards.PatchingWizard
         protected override void PageLoadedCore(PageLoadedDirection direction)
         {
             poolSelectionOnly = WizardMode == WizardMode.AutomatedUpdates ||
-                                WizardMode == WizardMode.UpdatesFromCdn ||
                                 UpdateAlertFromWeb != null ||
                                 AlertFromFileOnDisk != null;
 
             switch (WizardMode)
             {
-                case WizardMode.UpdatesFromCdn:
                 case WizardMode.AutomatedUpdates:
                     label1.Text = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_AUTOMATED_MODE;
                     break;
@@ -97,7 +96,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
 
             var xenConnections = ConnectionsManager.XenConnectionsCopy
-                .Where(c => WizardMode == WizardMode.UpdatesFromCdn ? Helpers.CloudOrGreater(c) : !Helpers.CloudOrGreater(c)).ToList();
+                .Where(c => IsNewGeneration ? Helpers.CloudOrGreater(c) : !Helpers.CloudOrGreater(c)).ToList();
             xenConnections.Sort();
 
             int licensedPoolCount = 0;
@@ -187,7 +186,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 return false;
             }
 
-            return WizardMode == WizardMode.AutomatedUpdates || WizardMode == WizardMode.UpdatesFromCdn
+            return WizardMode == WizardMode.AutomatedUpdates
                 ? CanEnableRowAutomatedUpdates(host, out tooltipText)
                 : CanEnableRowNonAutomated(host, out tooltipText);
         }
@@ -296,7 +295,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                     //from Ely onwards, iso does not mean supplemental pack
 
                     if (WizardMode == WizardMode.AutomatedUpdates ||
-                        WizardMode == WizardMode.UpdatesFromCdn ||
                         UpdateAlertFromWeb != null ||
                         AlertFromFileOnDisk != null)
                         return IsHostAmongApplicable(host, out tooltipText);

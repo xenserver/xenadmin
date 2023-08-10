@@ -66,7 +66,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public override string HelpID => "Beforeyoustart";
 
-        public bool IsUpdatesFromCdn
+        public bool IsNewGeneration
         {
             get => radioButtonCdn.Checked;
             set

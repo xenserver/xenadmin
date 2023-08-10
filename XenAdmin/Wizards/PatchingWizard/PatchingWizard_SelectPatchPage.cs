@@ -43,6 +43,7 @@ using System.Linq;
 using System.Xml;
 using DiscUtils.Iso9660;
 using XenCenterLib;
+using XenAdmin.Wizards.CrossPoolMigrateWizard;
 
 
 namespace XenAdmin.Wizards.PatchingWizard
@@ -56,7 +57,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         private bool CheckForUpdatesInProgress;
         private bool firstLoad = true;
         private string unzippedUpdateFilePath;
-        private WizardMode _wizardMode;
+        private bool _isNewGeneration;
 
         public PatchingWizard_SelectPatchPage()
         {
@@ -70,7 +71,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             get
             {
                 if (AutomatedUpdatesRadioButton.Visible && AutomatedUpdatesRadioButton.Checked)
-                    return _wizardMode == WizardMode.UpdatesFromCdn ? _wizardMode : WizardMode.AutomatedUpdates;
+                    return WizardMode.AutomatedUpdates;
 
                 var updateAlert = downloadUpdateRadioButton.Visible && downloadUpdateRadioButton.Checked
                     ? UpdateAlertFromWeb
@@ -83,17 +84,22 @@ namespace XenAdmin.Wizards.PatchingWizard
                 
                 return WizardMode.SingleUpdate;
             }
+        }
+
+        public bool IsNewGeneration
+        {
+            get => _isNewGeneration;
             set
             {
-                _wizardMode = value;
+                _isNewGeneration = value;
 
                 downloadUpdateRadioButton.Visible = dataGridViewPatches.Visible
-                    = RefreshListButton.Visible = RestoreDismUpdatesButton.Visible = value != WizardMode.UpdatesFromCdn;
+                    = RefreshListButton.Visible = RestoreDismUpdatesButton.Visible = !_isNewGeneration;
 
                 tableLayoutPanel1.SuspendLayout();
                 try
                 {
-                    if (value == WizardMode.UpdatesFromCdn)
+                    if (_isNewGeneration)
                     {
                         tableLayoutPanel1.RowStyles[4].SizeType = SizeType.AutoSize;
                         tableLayoutPanel1.RowStyles[4].Height = 0;
@@ -113,7 +119,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     tableLayoutPanel1.ResumeLayout();
                 }
             }
-        }
+    }
 
         public XenServerPatchAlert UpdateAlertFromWeb { get; set; }
         
@@ -224,7 +230,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 automatedUpdatesOptionLabel.Visible = AutomatedUpdatesRadioButton.Visible = automatedUpdatesPossible;
 
-                if (_wizardMode == WizardMode.UpdatesFromCdn)
+                if (_isNewGeneration)
                 {
                     labelBlurb.Text = automatedUpdatesPossible
                         ? Messages.PATCHINGWIZARD_SELECTPATCHPAGE_BLURB_CDN
@@ -254,7 +260,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     else
                         downloadUpdateRadioButton.Checked = true;
                 }
-                else if (_wizardMode == WizardMode.UpdatesFromCdn && downloadUpdateRadioButton.Checked)
+                else if (_isNewGeneration && downloadUpdateRadioButton.Checked)
                 {
                     if (automatedUpdatesPossible)
                         AutomatedUpdatesRadioButton.Checked = true;
@@ -266,7 +272,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     downloadUpdateRadioButton.Checked = true;
                 }
 
-                if (_wizardMode != WizardMode.UpdatesFromCdn)
+                if (!IsNewGeneration)
                 {
                     StartCheckForUpdates(); //call this before starting the _backgroundWorker
                     _backgroundWorker.RunWorkerAsync();
@@ -281,7 +287,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (direction == PageLoadedDirection.Forward)
             {
                 if ((AutomatedUpdatesRadioButton.Visible && AutomatedUpdatesRadioButton.Checked || downloadUpdateRadioButton.Checked) &&
-                    !Updates.CheckCanDownloadUpdates() && _wizardMode != WizardMode.UpdatesFromCdn)
+                    !Updates.CheckCanDownloadUpdates() && !IsNewGeneration)
                 {
                     cancel = true;
                     using (var errDlg = new ClientIdDialog())
@@ -291,7 +297,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 if (AutomatedUpdatesRadioButton.Visible && AutomatedUpdatesRadioButton.Checked)
                 {
-                    if (_wizardMode != WizardMode.UpdatesFromCdn && !Updates.CheckForServerUpdates(userRequested: true, asynchronous: false, this))
+                    if (!_isNewGeneration && !Updates.CheckForServerUpdates(userRequested: true, asynchronous: false, this))
                     {
                         cancel = true;
                         return;

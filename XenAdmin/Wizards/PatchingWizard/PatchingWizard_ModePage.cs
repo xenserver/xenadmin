@@ -66,12 +66,12 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public override string NextText(bool isLastPage)
         {
-            return WizardMode == WizardMode.UpdatesFromCdn ? Messages.UPDATES_WIZARD_APPLY_UPDATES : Messages.UPDATES_WIZARD_APPLY_UPDATE;
+            return WizardMode == WizardMode.AutomatedUpdates ? Messages.UPDATES_WIZARD_APPLY_UPDATES : Messages.UPDATES_WIZARD_APPLY_UPDATE;
         }
 
         protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            removeUpdateFileCheckBox.Visible = WizardMode != WizardMode.UpdatesFromCdn;
+            removeUpdateFileCheckBox.Visible = !IsNewGeneration;
 
             var anyPoolForbidsAutostart = SelectedServers.Select(s => Helpers.GetPoolOfOne(s.Connection)).Any(p => p.IsAutoUpdateRestartsForbidden());
 
@@ -79,7 +79,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             bool someHostMayRequireRestart;
             bool automaticDisabled;
 
-            if (WizardMode == WizardMode.UpdatesFromCdn)
+            if (IsNewGeneration)
             {
                 ManualTextInstructions = ModeCdnUpdates();
                 automaticDisabled = anyPoolForbidsAutostart;
@@ -177,6 +177,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         #region Accessors
 
         public WizardMode WizardMode { get; set; }
+        public bool IsNewGeneration { get; set; }
 
         public Dictionary<Pool, StringBuilder> ManualTextInstructions { get; private set; }
 
