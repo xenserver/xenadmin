@@ -44,8 +44,8 @@ using XenAdmin.Alerts;
 
 namespace XenAdmin.Wizards.PatchingWizard
 {
-    public enum WizardMode { SingleUpdate, AutomatedUpdates, NewVersion, UpdatesFromCdn, Unknown }
-    
+    public enum WizardMode { SingleUpdate, AutomatedUpdates, NewVersion }
+
     /// <summary>
     /// Remember that equals for patches don't work across connections because 
     /// we are not allow to override equals. YOU SHOULD NOT USE ANY OPERATION THAT IMPLIES CALL EQUALS OF Pool_patch or Host_patch
@@ -63,6 +63,9 @@ namespace XenAdmin.Wizards.PatchingWizard
         private readonly PatchingWizard_PrecheckPage PatchingWizard_PrecheckPage;
         private readonly PatchingWizard_FirstPage PatchingWizard_FirstPage;
         private readonly PatchingWizard_AutomatedUpdatesPage PatchingWizard_AutomatedUpdatesPage;
+
+        private bool _isNewGeneration;
+        private WizardMode _wizardMode;
 
         public PatchingWizard()
         {
@@ -84,12 +87,12 @@ namespace XenAdmin.Wizards.PatchingWizard
             AddPage(PatchingWizard_PatchingPage);
         }
 
-        public void PrepareToInstallUpdate(bool isUpdatesFromCdn)
+        public void PrepareToInstallUpdate(bool isNewGeneration)
         {
             if (!IsFirstPage())
                 return;
 
-            PatchingWizard_FirstPage.IsUpdatesFromCdn = isUpdatesFromCdn;
+            PatchingWizard_FirstPage.IsNewGeneration = isNewGeneration;
         }
 
         public void PrepareToInstallUpdate(XenServerPatchAlert alert, List<Host> hosts)
@@ -98,7 +101,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 return;
 
             //set the pages before landing on them so they are populated correctly
-            PatchingWizard_FirstPage.IsUpdatesFromCdn = false;
+            PatchingWizard_FirstPage.IsNewGeneration = false;
             PatchingWizard_SelectPatchPage.UpdateAlertFromWeb = alert;
             PatchingWizard_SelectPatchPage.UpdateAlertFromWebSelected += page_UpdateAlertFromWebSelected;
             PatchingWizard_SelectServers.SelectedServers = hosts;
@@ -122,11 +125,13 @@ namespace XenAdmin.Wizards.PatchingWizard
                 RemovePage(PatchingWizard_PatchingPage);
                 RemovePage(PatchingWizard_AutomatedUpdatesPage);
 
-                var mode = PatchingWizard_FirstPage.IsUpdatesFromCdn ? WizardMode.UpdatesFromCdn : WizardMode.Unknown;
-                PatchingWizard_SelectPatchPage.WizardMode = mode;
-                PatchingWizard_AutomatedUpdatesPage.WizardMode = mode;
+                _isNewGeneration = PatchingWizard_FirstPage.IsNewGeneration;
 
-                if (mode == WizardMode.UpdatesFromCdn)
+                PatchingWizard_SelectPatchPage.IsNewGeneration = _isNewGeneration;
+                PatchingWizard_ModePage.IsNewGeneration = _isNewGeneration;
+                PatchingWizard_AutomatedUpdatesPage.IsNewGeneration = _isNewGeneration;
+
+                if (_isNewGeneration)
                 {
                     AddAfterPage(PatchingWizard_PrecheckPage, PatchingWizard_ModePage);
                     AddAfterPage(PatchingWizard_ModePage, PatchingWizard_AutomatedUpdatesPage);
@@ -138,8 +143,8 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
             else if (prevPageType == typeof(PatchingWizard_SelectPatchPage))
             {
-                var wizardMode = PatchingWizard_SelectPatchPage.WizardMode;
-                var wizardIsInAutomatedUpdatesMode = wizardMode == WizardMode.AutomatedUpdates || wizardMode == WizardMode.UpdatesFromCdn;
+                _wizardMode = PatchingWizard_SelectPatchPage.WizardMode;
+                var wizardIsInAutomatedUpdatesMode = _wizardMode == WizardMode.AutomatedUpdates;
 
                 var updateType = wizardIsInAutomatedUpdatesMode ? UpdateType.Legacy : PatchingWizard_SelectPatchPage.SelectedUpdateType;
                 var selectedPatchFilePath = wizardIsInAutomatedUpdatesMode ? null : PatchingWizard_SelectPatchPage.SelectedPatchFilePath;
@@ -147,7 +152,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                 var alertFromFileOnDisk = wizardIsInAutomatedUpdatesMode ? null : PatchingWizard_SelectPatchPage.AlertFromFileOnDisk;
                 var fileFromDiskHasUpdateXml = !wizardIsInAutomatedUpdatesMode && PatchingWizard_SelectPatchPage.FileFromDiskHasUpdateXml;
 
-                PatchingWizard_SelectServers.WizardMode = wizardMode;
+                PatchingWizard_SelectServers.IsNewGeneration = _isNewGeneration;
+                PatchingWizard_SelectServers.WizardMode = _wizardMode;
                 PatchingWizard_SelectServers.SelectedUpdateType = updateType;
                 PatchingWizard_SelectServers.UpdateAlertFromWeb = alertFromWeb;
                 PatchingWizard_SelectServers.AlertFromFileOnDisk = alertFromFileOnDisk;
@@ -158,13 +164,13 @@ namespace XenAdmin.Wizards.PatchingWizard
                 RemovePage(PatchingWizard_PatchingPage);
                 RemovePage(PatchingWizard_AutomatedUpdatesPage);
 
-                if (wizardMode == WizardMode.SingleUpdate)
+                if (_wizardMode == WizardMode.SingleUpdate)
                 {
                     AddAfterPage(PatchingWizard_SelectServers, PatchingWizard_UploadPage);
                     AddAfterPage(PatchingWizard_PrecheckPage, PatchingWizard_ModePage);
                     AddAfterPage(PatchingWizard_ModePage, PatchingWizard_PatchingPage);
                 }
-                else if (wizardMode == WizardMode.UpdatesFromCdn)
+                else if (_isNewGeneration)
                 {
                     AddAfterPage(PatchingWizard_PrecheckPage, PatchingWizard_ModePage);
                     AddAfterPage(PatchingWizard_ModePage, PatchingWizard_AutomatedUpdatesPage);
@@ -180,12 +186,14 @@ namespace XenAdmin.Wizards.PatchingWizard
                 PatchingWizard_UploadPage.PatchFromDisk = PatchingWizard_SelectPatchPage.PatchFromDisk;
 
                 PatchingWizard_ModePage.SelectedUpdateType = updateType;
+                PatchingWizard_ModePage.WizardMode = _wizardMode;
 
-                PatchingWizard_PrecheckPage.WizardMode = wizardMode;
+                PatchingWizard_PrecheckPage.IsNewGeneration = _isNewGeneration;
+                PatchingWizard_PrecheckPage.WizardMode = _wizardMode;
                 PatchingWizard_PrecheckPage.PoolUpdate = null; //reset the PoolUpdate property; it will be updated on leaving the Upload page, if this page is visible
                 PatchingWizard_PrecheckPage.UpdateAlert = alertFromWeb ?? alertFromFileOnDisk;
 
-                PatchingWizard_AutomatedUpdatesPage.WizardMode = wizardMode;
+                PatchingWizard_AutomatedUpdatesPage.WizardMode = _wizardMode;
                 PatchingWizard_AutomatedUpdatesPage.UpdateAlert = alertFromWeb ?? alertFromFileOnDisk;
                 PatchingWizard_AutomatedUpdatesPage.PatchFromDisk = PatchingWizard_SelectPatchPage.PatchFromDisk;
 
@@ -241,7 +249,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
             else if (prevPageType == typeof(PatchingWizard_ModePage))
             {
-                if (PatchingWizard_ModePage.WizardMode == WizardMode.UpdatesFromCdn)
+                if (_isNewGeneration)
                 {
                     PatchingWizard_AutomatedUpdatesPage.PostUpdateTasksAutomatically = PatchingWizard_ModePage.IsAutomaticMode;
                     PatchingWizard_AutomatedUpdatesPage.ManualTextInstructions = PatchingWizard_ModePage.ManualTextInstructions;
@@ -258,7 +266,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                 PatchingWizard_PatchingPage.PrecheckProblemsActuallyResolved = PatchingWizard_PrecheckPage.PrecheckProblemsActuallyResolved;
                 PatchingWizard_PatchingPage.LivePatchCodesByHost = PatchingWizard_PrecheckPage.LivePatchCodesByHost;
                 PatchingWizard_ModePage.LivePatchCodesByHost = PatchingWizard_PrecheckPage.LivePatchCodesByHost;
-                PatchingWizard_ModePage.WizardMode = PatchingWizard_PrecheckPage.WizardMode;
                 PatchingWizard_AutomatedUpdatesPage.PrecheckProblemsActuallyResolved = PatchingWizard_PrecheckPage.PrecheckProblemsActuallyResolved;
             }
         }

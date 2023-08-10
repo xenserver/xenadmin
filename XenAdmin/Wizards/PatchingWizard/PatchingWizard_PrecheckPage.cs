@@ -82,6 +82,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public XenServerPatchAlert UpdateAlert { private get; set; }
         public WizardMode WizardMode { get; set; }
+        public bool IsNewGeneration { get; set; }
         public bool ApplyUpdatesToNewVersion { protected get; set; }
 
         public Pool_patch Patch { private get; set; }
@@ -132,7 +133,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (direction == PageLoadedDirection.Back)
                 return;
 
-            if (WizardMode == WizardMode.AutomatedUpdates || WizardMode == WizardMode.UpdatesFromCdn)
+            if (WizardMode == WizardMode.AutomatedUpdates)
             {
                 labelPrechecksFirstLine.Text = Messages.PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_AUTOMATED_UPDATES_MODE;
             }

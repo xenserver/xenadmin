@@ -43,6 +43,7 @@ namespace XenAdmin.Wizards.PatchingWizard
     {
         public XenServerPatchAlert UpdateAlert { private get; set; }
         public WizardMode WizardMode { private get; set; }
+        public bool IsNewGeneration { get; set; }
         public KeyValuePair<XenServerPatch, string> PatchFromDisk { private get; set; }
         public bool PostUpdateTasksAutomatically { private get; set; }
         public Dictionary<Pool, StringBuilder> ManualTextInstructions { private get; set; }
@@ -54,7 +55,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         #region XenTabPage overrides
 
-        public override string Text => WizardMode == WizardMode.UpdatesFromCdn
+        public override string Text => IsNewGeneration
             ? Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_TEXT_CDN
             : Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_TEXT;
 
@@ -68,9 +69,9 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         protected override string BlurbText()
         {
-            return string.Format(WizardMode == WizardMode.AutomatedUpdates || WizardMode == WizardMode.UpdatesFromCdn
-                    ? Messages.PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_AUTOMATED_MODE
-                    : Messages.PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_NEW_VERSION_AUTOMATED_MODE,
+            return string.Format(WizardMode == WizardMode.NewVersion
+                    ? Messages.PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_NEW_VERSION_AUTOMATED_MODE
+                    : Messages.PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_AUTOMATED_MODE,
                 BrandManager.BrandConsole);
         }
 
@@ -93,7 +94,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             var sb = new StringBuilder(Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_SUCCESS_ONE).AppendLine();
 
-            if (WizardMode == WizardMode.UpdatesFromCdn && !PostUpdateTasksAutomatically && ManualTextInstructions != null && ManualTextInstructions.ContainsKey(pool))
+            if (IsNewGeneration && !PostUpdateTasksAutomatically && ManualTextInstructions != null && ManualTextInstructions.ContainsKey(pool))
             {
                 sb.AppendLine(Messages.PATCHINGWIZARD_SINGLEUPDATE_MANUAL_POST_UPDATE);
                 sb.Append(ManualTextInstructions[pool]).AppendLine();
