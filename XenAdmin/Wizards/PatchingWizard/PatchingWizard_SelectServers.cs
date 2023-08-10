@@ -1006,8 +1006,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             private void UpdateDetails()
             {
-                var pool = Tag as Pool;
-                if (pool != null)
+                if (Tag is Pool pool)
                 {
                     Host coordinator = pool.Connection.Resolve(pool.master);
                     if (_poolCheckBoxCell.Value == null)
@@ -1015,12 +1014,11 @@ namespace XenAdmin.Wizards.PatchingWizard
                     _expansionCell.Value = Images.StaticImages.tree_minus;
                     _poolIconHostCheckCell.Value = Images.GetImage16For(pool);
                     _nameCell.Value = pool;
-                    _versionCell.Value = coordinator.ProductVersionTextShort();
+                    _versionCell.Value = $"{coordinator.ProductBrand()} {coordinator.ProductVersionTextShort()}";
                     return;
                 }
 
-                var host = Tag as Host;
-                if (host != null)
+                if (Tag is Host host)
                 {
                     if (_poolCheckBoxCell.Value == null)
                         _poolCheckBoxCell.Value = CheckState.Unchecked;
@@ -1033,7 +1031,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     else
                         _poolIconHostCheckCell.Value = Images.GetImage16For(host);
                     _nameCell.Value = host;
-                    _versionCell.Value = host.ProductVersionTextShort();
+                    _versionCell.Value = $"{host.ProductBrand()} {host.ProductVersionTextShort()}";
                 }
             }
 
