@@ -40,25 +40,21 @@ namespace XenAdmin.Alerts
 {
     public class OutOfSyncWithCdnAlert : Alert
     {
-        private readonly int _outOfSyncDays;
+        private readonly TimeSpan _outOfSyncSpan;
         private readonly Pool _pool;
- 
+
         private OutOfSyncWithCdnAlert(Pool pool, DateTime timestamp)
         {
             _timestamp = timestamp;
             _pool = pool;
             Connection = _pool.Connection;
 
-            if (_timestamp - _pool.last_update_sync >= TimeSpan.FromDays(180))
-            {
-                _outOfSyncDays = 180;
+            _outOfSyncSpan = _timestamp - _pool.last_update_sync;
+
+            if (_outOfSyncSpan >= TimeSpan.FromDays(180))
                 Priority = AlertPriority.Priority1;
-            }
-            else if (_timestamp - _pool.last_update_sync >= TimeSpan.FromDays(90))
-            {
-                _outOfSyncDays = 180;
+            else if (_outOfSyncSpan >= TimeSpan.FromDays(90))
                 Priority = AlertPriority.Priority2;
-            }
         }
 
         public static bool TryCreate(IXenConnection connection, out Alert alert)
@@ -83,7 +79,8 @@ namespace XenAdmin.Alerts
 
         public override string AppliesTo => Helpers.GetName(_pool);
 
-        public override string Description => Title;
+        public override string Description => string.Format(Messages.ALERT_CDN_OUT_OF_SYNC_DESCRIPTION,
+            AlertExtensions.GetGuiDate(_pool.last_update_sync));
 
         public override Action FixLinkAction
         {
@@ -102,7 +99,7 @@ namespace XenAdmin.Alerts
 
         public override string HelpID => "TODO";
 
-        public override string Title => string.Format(Messages.ALERT_CDN_OUT_OF_SYNC_TITLE, _outOfSyncDays);
+        public override string Title => string.Format(Messages.ALERT_CDN_OUT_OF_SYNC_TITLE, _outOfSyncSpan.Days);
     }
 
  

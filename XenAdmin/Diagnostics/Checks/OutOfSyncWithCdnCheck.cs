@@ -63,8 +63,9 @@ namespace XenAdmin.Diagnostics.Checks
 
             if (Helpers.XapiEqualOrGreater_23_18_0(Pool.Connection))
             {
-                if (DateTime.UtcNow - Pool.last_update_sync >= TimeSpan.FromDays(DAYS_SINCE_LAST_SYNC))
-                    return new CdnOutOfSyncProblem(this, Pool, DAYS_SINCE_LAST_SYNC);
+                var timeSpan = DateTime.UtcNow - Pool.Connection.ServerTimeOffset - Pool.last_update_sync;
+                if (timeSpan >= TimeSpan.FromDays(DAYS_SINCE_LAST_SYNC))
+                    return new CdnOutOfSyncProblem(this, Pool, timeSpan.Days);
             }
 
             return null;
