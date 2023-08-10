@@ -37,6 +37,8 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 {
     public class ApplyCdnUpdatesPlanAction : HostPlanAction
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private readonly CdnPoolUpdateInfo _updateInfo;
 
         public ApplyCdnUpdatesPlanAction(Host host, CdnPoolUpdateInfo updateInfo)
@@ -48,6 +50,13 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         protected override void RunWithSession(ref Session session)
         {
             var host = GetResolvedHost();
+
+            if (host.enabled)
+            {
+                log.DebugFormat("Disabling host {0}", host.Name());
+                AddProgressStep(string.Format(Messages.UPDATES_WIZARD_ENTERING_MAINTENANCE_MODE, host.Name()));
+                Host.disable(session, HostXenRef.opaque_ref);
+            }
 
             AddProgressStep(string.Format(Messages.UPDATES_WIZARD_APPLYING_UPDATES_FROM_CDN, host.Name()));
             new ApplyUpdatesFromCdnAction(host, _updateInfo).RunSync(session);

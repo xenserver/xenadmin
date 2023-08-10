@@ -137,7 +137,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     foreach (var server in allHosts)
                     {
                         var hostUpdateInfo = updateInfo.HostsWithUpdates.FirstOrDefault(c => c.HostOpaqueRef == server.opaque_ref);
-                        if (hostUpdateInfo == null)
+                        if (hostUpdateInfo?.UpdateIDs?.Length == 0)
                             continue;
 
                         hostPlans.Add(GetCdnUpdatePlanActionsForHost(server, updateInfo, hostUpdateInfo));
