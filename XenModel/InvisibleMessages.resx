@@ -130,7 +130,7 @@
     <value>https://docs.xenserver.com/en-us/xenserver/8/whats-new/removed-features.html</value>
   </data>
   <data name="DOCS_URL" xml:space="preserve">
-    <value>https://docs.xenserver.com/</value>
+    <value>https://docs.xenserver.com/en-us/</value>
   </data>
   <data name="HELP_URL_QUERY" xml:space="preserve">
     <value>?utm_campaign={0}&amp;utm_medium=ui_link&amp;utm_source={1}</value>

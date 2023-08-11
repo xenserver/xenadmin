@@ -20622,7 +20622,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 1 new feature preview.
+        ///   Looks up a localized string similar to 1 feature preview.
         /// </summary>
         public static string HOTFIX_TYPE_PREVIEW_FEATURE_ONE {
             get {
